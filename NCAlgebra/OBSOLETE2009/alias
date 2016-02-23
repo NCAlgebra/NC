@@ -1,0 +1,16 @@
+(* NCAliasFunctions.m*)
+
+NCE[x_] := ExpandNonCommutativeMultiply[x];
+SubSym[x___] := SubstituteSymmetric[x];
+Crit[x___]:=CriticalPoint[x];
+Sub[x___] := Substitute[x];
+NCCSym[x___] := NCCollectSymmetric[x];
+NCC[x___] := NCCollect[x];
+Grad[x___] := Gradient[x];
+MM[x___]:= MatMult[x];
+SC[x___]:= SetCommutative[x];
+SNC[x___] := SetNonCommutative[x];
+CE[x___]:=CommuteEverything[x];
+(*
+MA[x___]:=MorasAlgorithm[x,CleanUpBasis->True,5]
+*)

@@ -1,0 +1,11 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:33
+ *)
+
+{-1 + a**Inva, Ajb - c**LossLessM, -1 + Inva**a, 
+ -1 + InvLossLessM**LossLessM, b - LossLessM**Ajc, 
+ -1 + LossLessM**InvLossLessM, Aja - Ajc**c**LossLessM + 
+  InvLossLessM**a**LossLessM, -1 + Ajc**c**LossLessM**InvAja - 
+  InvLossLessM**a**LossLessM**InvAja, -InvLossLessM + InvAja**Ajc**c - 
+  InvAja**InvLossLessM**a}

@@ -1,0 +1,24 @@
+
+Get["GENR.m"];
+ 
+test[GENR,1]  = GENRSimplify[h[x**y]**x]===x**h[y**x];
+test[GENR,2]  = GENRSimplify[k[x**y]**x]===x**k[y**x];
+test[GENR,3]  = GENRSimplify[k[y**x]**y]===y**k[x**y];
+test[GENR,4]  = GENRSimplify[h[x**x]**x]===x**h[x**x];
+test[GENR,5]  = GENRSimplify[h[x**y]**y]===h[x**y]**y;
+
+test[GENR,6]  = GENRSimplify[h[y**x]**Inv[x]]===Inv[x]**h[x**y];
+test[GENR,7]  = GENRSimplify[k[y**x]**Inv[x]]===Inv[x]**k[x**y];
+test[GENR,8]  = GENRSimplify[k[x**y]**Inv[y]]===Inv[y]**k[y**x];
+test[GENR,9]  = GENRSimplify[k[x**x]**Inv[x]]===Inv[x]**k[x**x];
+test[GENR,10] = GENRSimplify[k[x**y]**Inv[x]]===k[x**y]**Inv[x];
+
+test[GENR,11] = 
+           GENRSimplify[x**h[y**x]**Inv[1-x]]=== -h[x**y] + 
+                                   h[x**y]**Inv[1-x];
+
+Print["Results from the file GENR.NCTest"];
+
+For[ i=1, i<=11, i++,
+Print["Test #",i," was ",test[GENR,i]];
+];

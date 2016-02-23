@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>38.4 Changing the default options for NCMakeGB</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 171--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse125.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse125.html#tailNCBIGDOCse125.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse126.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch38.html#NCBIGDOCse126.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">38.4   </span></span> <a 
+ id="x204-43900038.4"></a><span 
+class="cmr-10x-x-109">Changing the default options for NCMakeGB</span></h3>
+<!--l. 191--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">38.4.1   </span></span> <a 
+ id="x204-44000038.4.1"></a><span 
+class="cmr-10x-x-109">ChangeNCMakeGBOptions[option,value] &#8212; need to update description</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: When the C++ version of the code is loaded, the statement Options[NCMakeGB]</span>
+      <span 
+class="cmr-10x-x-109">:=  CleanUp-¿1,ReturnRelations-¿True,SupressCOutput-¿False;  is  found  in  the  code.  The</span>
+      <span 
+class="cmr-10x-x-109">content of this command is that CleanUpBasis in by default on, ReturnRelations is by default</span>
+      <span 
+class="cmr-10x-x-109">true and SupressCOutput is by default false. If one wants to change these defaults, then one</span>
+      <span 
+class="cmr-10x-x-109">can                        use                        the                        </span><span 
+class="cmti-10x-x-109">ChangeNCMakeGBOptions</span>
+      <span 
+class="cmr-10x-x-109">command.  For  example,  </span><span 
+class="cmti-10x-x-109">ChangeNCMakeGBOptions[</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmti-10x-x-109">CleanUp-¿1,ReturnRelations-¿False,</span>
+      <span 
+class="cmti-10x-x-109">SupressCOutput-¿False</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">changes the default behaviour so that ReturnRelations is false by</span>
+      <span 
+class="cmr-10x-x-109">default.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmti-10x-x-109">ThreeRules </span><span 
+class="cmr-10x-x-109">is a list containing three rules. The left hand sides of these rules must be</span>
+      <span 
+class="cmti-10x-x-109">CleanUp</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmti-10x-x-109">ReturnRelations </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmti-10x-x-109">SupressCOutput</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations:  </span></dd></dl>
+<a 
+ id="dx204-440001"></a>
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse125.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse125.html#tailNCBIGDOCse125.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse126.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch38.html#NCBIGDOCse126.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCse126.html"></a>   
+</body></html> 

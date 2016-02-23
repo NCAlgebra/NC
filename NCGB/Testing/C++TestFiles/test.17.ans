@@ -1,0 +1,3 @@
+{-e + a ** b ** c ** d, -f + b ** c ** d ** a, -g + c ** d ** a ** b, 
+  -h + d ** a ** b ** c, -a ** f + e ** a, -d ** e + h ** d, 
+  -b ** g + f ** b, -c ** h + g ** c}

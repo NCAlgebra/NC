@@ -1,0 +1,26 @@
+(* :Title: 	Mono.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	David Hurst (dhurst). *)
+
+(* :Summary:	TEST FILE.  *)
+
+(* :History: 
+   :8/22/91	Created. (dhurst)
+   :8/16/92     New header. (dhurst)
+   :9/6/99      Block->Module  (dell)
+*)
+
+(* THE FOLLOWING MODULE IS COMMENTED OUT 
+Module[ {s,x,i}, *)
+     test[NCMono,1] = NCMonomial[s^2 ] == s**s;
+     test[NCMono,2] = NCMonomial[x^-3 ]==inv[x]**inv[x]**inv[x];
+     test[NCMono,3] = NCMonomial[x^2+x-x^0+x^-1 ]==x**x+x+inv[x]-1;
+     test[NCMono,4] = NCMonomial[ (x^0)**(x^1)**(x^2)**((inv[x])^3) ] == 1;
+     Print["Results from the file Mono.NCTest"];
+     For[ i=1, i<=4, i++,
+          Print["Test #",i," was ",test[NCMono,i]]
+     ];
+(* ]; *)
+
+
+

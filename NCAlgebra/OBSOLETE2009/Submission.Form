@@ -1,0 +1,586 @@
+
+		   ************************************
+
+			MATHSOURCE SUBMISSION FORM
+			
+		       ****************************
+
+INSTRUCTIONS
+============
+
+This file is the MathSource Submission Form.  You may submit new
+material for publication in MathSource by sending it through either
+electronic or postal mail.
+
+In order to provide a correct and complete listing for your material
+in the MathSource directory, please complete the required items in
+this file.  To help you distinguish those sections which require
+you to supply information from those example and instructional
+sections, the character string
+
+	>>>  fill-in  <<<
+
+is provided above those sections which require input on your part.
+Then send all files comprising your submission (including
+this Submission Form) to MathSource as described in the sections
+labeled Email and Postal Mail below
+
+Email
+-----
+
+Electronic mail is the preferred means of submission.  The MathSource
+email address for submissions is
+	
+	ms-submit@wri.com
+
+All files in your submission, including this Notebook, must be sent
+as separate messages to this address.  The subject lines of the
+messages comprising your submission should be identical to the
+filenames you provide on this form.  (See the example below for
+more details.)
+
+	Example:  A submission entitled "Finite Automata Package"
+	might include the files FiniteAutomata.m, FA-Notebook.ma,
+	and Documentation.ps.  When submitting this material to
+	MathSource the subject lines should read:
+
+	contents of message		subject line
+	-------------------		------------
+	Submission Form			submission form
+	FiniteAutomata.m		FiniteAutomata.m
+	FA-Notebook.ma			FA-Notebook.ma
+	Documentation.ps		Documentation.ps
+
+
+When your material is received by MathSource, a message acknowledging
+receipt will be sent to you via email.  Typically, your material will
+be published within 2-3 days after it is received.
+
+
+Postal Mail
+-----------
+
+Due to the electronic nature of MathSource, we encourage all
+submissions be via electronic mail.  However, disks and tapes sent
+by conventional courier are also acceptable.  Load all files
+comprising your submission and the completed Submission Form (this
+file) onto any media on which Mathematica is distributed. Label
+each disk or tape with your name, address, and submission title
+and send all materials to:
+
+		MathSource Submissions
+		Wolfram Research, Inc.
+		100 Trade Centre Drive
+		Champaign, IL  61820-7237  USA
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+TITLE OF YOUR SUBMISSION
+========================
+
+After the colon on the lines below, please type the title for your
+entire submission and the revision date, for example: "Finite
+Automaton Package" and " July 1990".
+
+>>>  fill-in  <<<
+
+Title:  Noncommutative Algebra Package and SYStems
+Date:   Sept 1992
+
+FILES INCLUDED IN YOUR SUBMISSION
+=================================
+
+Complete a filename/description block for each file in your
+submission.  Indicate whether the file is a Mathematica package,
+Notebook, example, documentation, etc.
+
+Please use the following naming conventions:
+
+	.m	Mathematica packages (ascii text files)
+	.ma	Mathematica Notebooks (all systems)
+	.mb	Mathematica Notebooks resource (system-specific)
+	.doc	Documentation, ascii text file
+	.tex	TeX document
+	.ps	PostScript document
+	.txt	Miscellaneous ascii text file
+	.exe	Machine-specific executable
+	.zip	Zip file in PKZIP format
+	.uue	Uuencoded file
+	.Z	Compressed file (Unix)
+	.hqx	Binhexed file (Macintosh)
+	.sit	Stuffit file (Macintosh)
+
+To ensure that all Mathematica users have an equal chance to use your
+material to its full potential, please make sure the first eight characters
+of each file name are unique for every file in your submission.
+
+EXAMPLE:
+--------
+
+	Filename (Description):  FiniteAutomaton.m  (Mathematica Package)
+		Revision Date:  May 1992
+
+	Filename (Description):  Documentation.ps  (Documentation for Finite
+		Automaton Package)
+		Revision Date:  May 1992
+
+	Filename (Description):  SampleNotebooks.tar.Z.uu  (Directory
+		of Sample Notebooks)
+		Revision Date:  June 1992
+
+
+
+>>>  fill-in  <<<
+
+	Filename (Description):  NCAlgebra.m  (Main Mathematica package.
+                This "Gets" all of the other packages.)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCDOCUMENT.doc  (NCAlgebra manual)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCDOC1Appendix.doc  (Appendix to document
+		file)
+		Revision Date:  September 1992
+
+	Filename (Description):  CEEP  (File to save Mathematica session)
+		Revision Date:  September 1992
+
+	Filename (Description):  CONTENTS  (File to load NCAlgebra)
+		Revision Date:  September 1992
+
+	Filename (Description):  COVER.LETTER  (Expalantion of NCAlgebra)
+		Revision Date:  September 1992
+
+	Filename (Description):  Extra.doc  (Documentation for the
+                *.Extra files)
+		Revision Date:  September 1992
+
+	Filename (Description):  FTP.INSTRUCTIONS  (Instructions for 
+		transferring NCAlgebra files)
+		Revision Date:  September 1992
+
+	Filename (Description):  README  (NCAlgebra description text)
+		Revision Date:  September 1992
+
+	Filename (Description):  ROADSHOW  (NCAlgebra presentation)
+		Revision Date:  September 1992
+
+	Filename (Description):  NC1SetCommands.m  (First package of Set 
+		commands)
+		Revision Date:  September 1992
+
+	Filename (Description):  NC2SetCommands.m  (More Set commands)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCSimplifyRational.m  (Main package of
+		simplifying rules. Calls NC1SimplifyRational
+                and NC2SimplifyRational)
+		Revision Date:  September 1992
+
+	Filename (Description):  NC0SimplifyRational.m  (Contains a list
+		of simplifying rules)
+		Revision Date:  September 1992
+
+	Filename (Description):  NC1SimplifyRational.m  (Another
+		package of simplifying rules)
+		Revision Date:  September 1992
+
+	Filename (Description):  NC2SimplifyRational.m  (Third
+		package of simplifying rules)	
+		Revision Date:  September 1992
+
+	Filename (Description):  NCAdjoints.m  (Rules for adjoints)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCAlias.m  (File of aliases)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCBlockPartition.m (Generates 2 by 2
+                block matrices from n by n matrices and vice versa)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCCo.m  (co[x] is defined to be
+                tp[aj[x]] in engineering. tp is the transpose and 
+                aj is the adjoint.)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCCollect.m  (The noncommutative 
+                version of the Mathematica Collect command)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCComplex.m  (Processing complex
+                expressions via z and zbar. Include d/dz and d/d(zbar))
+		Revision Date:  September 1992
+
+	Filename (Description):  NCDiff.m  (Noncommutative differentiation
+		rules)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCEndPackage.m  (Closes the package
+                NonCommutativeMultiply)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCInverses.m  (Inverse manipulation package)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCMatMult.m  (Matrix multiplication
+		package)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCMessyFunction.m  (Sample noncommutative 
+		expressions. These are complicated expression which 
+                come up in Control Theory. See SYSDOCUMENT.)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCMono.m  (Package which collapses 
+                x**x...**x to x^n)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCMultiplication.m  (Bookkeeping for
+		noncommutative multiplication)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCOutput.m  (Allows changing of
+                the Mathematica $PrePrint statement. Allows a choice 
+                of output forms of noncommutative expressions. For
+                example, tp[x] versus x^T)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCRoots.m  (Square root package)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCSave.m  (Saves an expression
+                and all noncommutative algebra settings associated to
+                it)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCSchur.m  (Implements Schur products)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCSolve.m  (Solves noncommutative 
+                linear expressions)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCSubstitute.m	 (In our implementation
+                of NonCommutativeMultiply, the command x**x/.x->a gives
+                x**x (as ** is not "Flat"). The command Transform
+                (e.g., Transform[x**x,x->a]) in this package is used 
+                instead. Other specialized substitution functions
+                are also provided)
+		Revision Date:  September 1992
+
+	Filename (Description):  DoTeX.install (Installation
+                instructions related to the file NCTeX.process)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCDoTeX.m  (Interface between Mma and
+                LaTeX. Extends TeXForm command to noncommutative setting
+                and creates .tex files.)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCTeX.process* (A unix shell to 
+                latex a .tex file) 
+		Revision Date:  September 1992
+  
+	Filename (Description):  NCTeXForm.m  (Extends the TeXForm
+                command to correctly execute transposes,adjoints and
+                NonCommutativeMultiply expressions)
+		Revision Date:  September 1992
+
+	Filename (Description):  TeXForm.Extra  (Adapts the command
+                TeXForm to work with the operations introduced in
+                the *.Extra files)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCTools.m  (Package for Converting
+                algebraic expression to rules and adding underlines to the
+                left hand side of rules)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCTransposes.m  (Rules for transposes)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCUsage.m  (File of usage statements
+                for the NonCommutativeMultiply package)
+		Revision Date:  September 1992
+
+	Filename (Description):  Date.Extra  (Routine to put date and time in 
+		a variable -- not necessary for Mma 2.0)
+		Revision Date:  September 1992
+
+	Filename (Description):  FuncAssign.Extra (A beginning attempt
+                involving simplification routines)
+		Revision Date:  September 1992
+
+	Filename (Description):  Hardy.Extra (Some commands associated
+                with doing Operator Theory on H^2 -- Hardy space)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCDyad.Extra (Some commands for
+                manipulating rank1 operators.)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCHereditary.Extra  (Implements the
+                hereditary polynomial function calculus (Operator
+                Theory) of Jim Agler)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCKernels.Extra  (Reproducing Kernel 
+		package)
+		Revision Date:  September 1992
+
+	Filename (Description):  Operator.Extra (Some code involving
+                Operator Theory)
+		Revision Date:  September 1992
+
+	Filename (Description):  SetNumber.Extra (An alteration of
+                NumberQ and an implementation of RealQ. USE WITH
+                CAUTION!!!)
+		Revision Date:  September 1992
+
+	Filename (Description):  Shift.Extra (Some code related to
+                the shift operator (Operator Theory))
+		Revision Date:  September 1992
+
+	Filename (Description):  more.Extra  (Allows the user to view
+                each element of a list in the style of the "more"
+                command from UNIX)
+		Revision Date:  September 1992
+
+	Filename (Description):  NCTEST  (Main Automatic Test File.
+                This file "Gets" the *.NCTest files.)
+		Revision Date:  September 1992
+
+	Filename (Description):  BlockPartition.NCTest	(Test for 
+		BlockPartition)
+		Revision Date:  September 1992
+
+	Filename (Description):  Collect.NCTest	 (Test for NCCollect)
+		Revision Date:  September 1992
+
+	Filenam  (Description):  Convert.NCTest  (Test for function 
+		Convert in NCTools.m)
+		Revision Date: September 1992
+
+	Filename (Description):  Crit.NCTest (Test for function Crit in
+                NCDiff.m)    
+		Revision Date:  September 1992
+
+	Filename (Description):  Diff.NCTest  (Test for NCDiff)
+		Revision Date:  September 1992
+
+	Filename (Description):  MatMult.NCTest	 (Test for NCMatMult)
+		Revision Date:  September 1992
+
+	Filename (Description):  Mono.NCTest  (Test for NCMono)
+		Revision Date:  September 1992
+
+	Filename (Description):  SimplifyRational.NCTest  (Test for
+		SimplifyRational)
+		Revision Date:  September 1992
+
+	Filename (Description):  Substitute.NCTest  (Test for
+		NCSubstitute)
+		Revision Date:  September 1992
+
+	Filename (Description):  Transposes.NCTest  (Test of NCTransposes)
+		Revision Date:  September 1992
+
+	Filename (Description):  SYSDef1portlin.m  (Loads the definitions 
+                                   of a 1port linear system)
+		Revision Date: November 1992
+
+	Filename (Description):  SYSDefIA.m  (Loads the system definitions 
+                                 and hamiltonian for a non linear system 
+                                 Affine in the input)
+		Revision Date: November 1992
+
+
+	Filename (Description):  SYSDefWIA.m	(Definition of a 
+                                                 W-Input-Affine system)
+		Revision Date: November 1992
+
+	Filename (Description):  SYSDefWAccess.m (Definition of a system
+                                 with disturbance having acces to the 
+                                 compensator)
+		Revision Date: November 1992
+
+	Filename (Description):  SYSDef2&2.m     (Definition of two 
+                                        2 -ports and the hamiltonians)
+		Revision Date: November 1992
+
+	Filename (Description):  SYSSpecialize.m   (Rules for converting 
+                                 systems from nonlinear to linear,
+                                 notation changes)
+		Revision Date: November 1992
+
+	Filename (Description):  SYSLinearize.m	  (Linearize system 
+                                 around 0 or around the diagonal x=z;
+                                 We do not support this one)
+		Revision Date: November 1992
+
+	Filename (Description):  SYSHinfFormulas.m  (Formulas used in 
+                                 study of H-infinity control).
+		Revision Date: November 1992
+
+	Filename (Description):  SYSHinfTAC.m	(An executable paper 
+                                 on nonlinear H-infinity control
+		together with rules to allow conversion to linear case.
+		Primarily for study of IA systems.
+
+		Revision Date: November 1992
+
+
+
+
+
+KEYWORDS
+=========
+
+Please "X" each subject area below that applies to your submission:
+The checked areas will be used as keywords for your submission.
+Note that more than one subject area may be marked.  Use the
+Additional Keyword section to provide more precise indexing
+information for you submission.
+
+>>>  fill-in  <<<
+
+[ ] Announcements			(Engineering continued)
+	[ ] Meetings				[ ] Fluid Mechanics
+	[ ] News				[ ] Industrial
+	[ ] Products				[ ] Mechanical
+	[ ] Publications			[ ] Metallurgy
+	[ ] Sales information			[ ] Nuclear
+	[ ] Services				[X] Systems
+	[ ] Version information	
+					[ ] General Utilities
+[ ] Business / Finance
+	[ ] Actuarial Science		[ ] Graphics
+	[ ] Economics				[ ] Animations
+	[ ] Finance				[ ] Examples
+	[ ] Management Science			[ ] Formats
+						[ ] Presentation
+[ ] Chemistry					[ ] Programming
+
+[ ] Courseware				[ ] Interfacing
+	[ ] Elementary school			[ ] Code generation
+	[ ] High school				[ ] Graphics drivers
+	[ ] College				[ ] Text conversion
+	[X] Graduate
+					[ ] Life sciences
+[ ] Data
+					[X] Pure Mathematics
+[ ] Data analysis
+					[X] Applied Mathematics
+[ ] Documentation
+	[ ] Tutorials			[X] Physics
+	[ ] Technical reports
+					[ ] Programming
+[ ] Engineering					[ ] Debugging tools
+	[X] Aerospace				[ ] Examples
+	[ ] Chemical				[ ] Text manipulation
+	[ ] Civil
+	[ ] Communications		[ ] Sounds
+	[X] Electrical
+
+
+Additional Keywords:
+--------------------
+
+You may provide additional keywords for your material.  These
+keywords are analogous to index entries and will be used by people
+searching the database for applications related to specific topics.
+Keywords should be listed one per line.  Duplicate the line below
+as many times as necessary, once for each keyword.
+
+>>>  fill-in  <<<
+
+Keyword: Engineering Systems
+Keyword: Operator 
+Keyword: Control 
+Keyword: Mathematics
+Keyword: NonCommutative 
+Keyword: Algebra
+
+
+ABSTRACT OF SOFTWARE 
+====================
+
+Provide a brief summary of the purpose and content of your software
+(about 100 words or less, please):
+
+>>>  fill-in  <<<
+
+Although processing of commutative expressions is built 
+into Mathematica, relatively no support is given to 
+noncommutative expression manipulation. These packages
+have been developed to fill this void. 
+Commands for non-commuting algebra which are analogous to 
+Mathematica commands are implemented, as well as others. 
+The  development of these packages has been directed by needs 
+which arose from research in Control Theory Systems Theory and 
+in Operator Theory.   Also attached to the NCAlgebra package
+are files SYS* for doing calculations with engineering systems 
+which are common in Hinfinity control and in differential games.
+
+
+
+AUTHOR INFORMATION
+==================
+
+Copy the template below for each author. Fill in all fields for
+each author in a separate template block.  Only your name, affiliation
+(if any), and email address will be published in MathSource, outside
+of the files you supply.
+
+>>>  fill-in  <<<
+Name:  J. William Helton
+Affiliation:  Math Department, UCSD
+Street address:	
+City:  La Jolla
+State:  California
+ZIP/Postal code:
+Country:  U.S.A.
+Telephone:  (619) 534-3134
+Fax:  (619) 534-5273
+Email:	ncalg@osiris.UCSD.EDU
+
+
+DISTRIBUTION AND COPYRIGHT
+==========================
+
+Please check the appropriate distribution information box below.
+
+>>>  fill-in  <<<
+
+	[X] YES, this package can be distributed freely.
+	[ ] NO, this package is not for free distribution.
+
+All material received will be assumed to be for free distribution
+in the public domain accordance with the MathSource Author Agreement.
+If your package cannot be distributed free of charge, please contact
+the MathSource Administrator at ms-admin@wri.com to discuss
+pay-distribution through MathSource.
+
+	You are fully responsible for the contents of your
+	submission.  It is your responsibility to ensure that
+	the work does not infringe any applicable patent,
+	copyright, trademark, or trade secret agreements.
+
+
+
+
+MISCELLANEOUS QUESTIONS
+=======================
+
+If you are not including any software, how should people obtain a
+copy of the software and when will it be available?
+
+>>>  fill-in  <<<
+
+Additional comments or questions for the MathSource administrator:
+
+>>>  fill-in  <<<
+

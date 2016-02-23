@@ -1,0 +1,50 @@
+This directory contains two test routines for NCGB:
+
+1. NCGBTEST
+2. GBTest
+
+and the many files need to run them. We now describe how to run these
+tests.
+
+------------------------------------------------------------------------
+
+1. NCGBTEST
+
+Run it by loading
+
+ << NCGBTEST
+ 
+NCGBTEST runs your current version of NCMakeGB[ ] and NCProcess[ ] on
+a collection of data files c.# stored in TestProblems and compares to
+answers in the directory TestReference. In directory TestReference
+there are test files containing input and answers from running an old
+reference version of NCMakeGB[ ] on them. Then NCGBTEST runs your
+current version and compares answers to the reference. NCGBTEST is at
+NCGB/Testing and loads problems from NCGB/Testing/TestProblems. It
+stores the computed results in NCGB/Testing/TestResults.
+
+------------------------------------------------------------------------
+
+2. GBTest
+
+Run it by calling the function
+
+ GBTest[First,Last]
+
+where First and Last are numbers of test files.
+
+In directory MmaTestFiles there are 48 test files containing input and
+answers from running an old reference version of NCMakeGB[ ] on
+them. Then GBTest runs your current version and compares answers to
+the reference. GBTest.m is at NCGB/MmaSource but loads problems from
+NCGB/Testing/MmaTestFiles and (probably) NCGB/Testing/C++TestFiles. It
+stores the computed results in NCGB/Testing/C++TestResults.
+
+------------------------------------------------------------------------
+
+If you have any questions, send e-mail to
+
+ncalg@math.ucsd.edu
+
+(* igor and bill 2008 *)
+(* mauricio and bill 2009 *)

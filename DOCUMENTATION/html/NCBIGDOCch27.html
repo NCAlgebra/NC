@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>27 Testing your version of NCGB</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 4--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch28.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch26.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch26.html#tailNCBIGDOCch26.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch27.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa6.html#NCBIGDOCch27.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;27</span></span><br><a 
+ id="x58-35400027"></a><span 
+class="cmr-10x-x-109">Testing your version of NCGB</span></h2>
+<!--l. 7--><p class="noindent"><span 
+class="cmr-10x-x-109">The goal is to test TWO versions of NCGB against each other to see if they produce exactly the same</span>
+<span 
+class="cmr-10x-x-109">answer. Or one can test a version of NCGB against output which has been stored for reference. All files</span>
+<span 
+class="cmr-10x-x-109">involved are in the subdirectory </span><span 
+class="cmti-10x-x-109">Testing </span><span 
+class="cmr-10x-x-109">of NCGB.</span>
+<!--l. 13--><p class="noindent"><span 
+class="cmr-10x-x-109">There are four directories inside </span><span 
+class="cmti-10x-x-109">Testing</span><span 
+class="cmr-10x-x-109">.</span>
+   <div  
+class="centerline">                                                       <span 
+class="cmbx-10x-x-109">TestProblems</span>                                               </div>
+<div  
+class="centerline">                                      <span 
+class="cmbx-10x-x-109">TestReference</span>                                     </div>
+<div  
+class="centerline">                                     <span 
+class="cmbx-10x-x-109">TestReference2</span>                                    </div>
+<div  
+class="centerline">                                       <span 
+class="cmbx-10x-x-109">TestResults</span>                                      </div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">27.1   </span></span> <a 
+ id="x58-35500027.1"></a><span 
+class="cmr-10x-x-109">Beginners</span></h3>
+<!--l. 23--><p class="noindent"><span 
+class="cmr-10x-x-109">We do not trust our testing programs for NCGB much. They need work. The NCAlgebra test program is</span>
+<span 
+class="cmr-10x-x-109">excellent.</span>
+<!--l. 30--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x58-35600027.1"></a><span 
+class="cmr-10x-x-109">Basic Tests</span></h5>
+<!--l. 31--><p class="noindent"><span 
+class="cmr-10x-x-109">There is an old testing program. We do not support or upgrade it but find it quite useful. It is </span><span 
+class="cmbx-10x-x-109">GBTEST</span> <a 
+ id="dx58-356001"></a><a 
+ id="dx58-356002"></a>
+<span 
+class="cmr-10x-x-109">and the use of it is different as that described for </span><span 
+class="cmbx-10x-x-109">NCGBTEST </span><span 
+class="cmr-10x-x-109">above. First you load the file GBTest.m .</span>
+<span 
+class="cmr-10x-x-109">You run it by typing GBTEST[1,48] to run tests 1 thru 48, or for those with less patience GBTEST[12,28]</span>
+<span 
+class="cmr-10x-x-109">to run tests 12 thru 28, etc.</span>
+<!--l. 46--><p class="indent">   <span 
+class="cmr-10x-x-109">Yet another class of specialized tests is run simply by loading the file NCGBXTEST99.</span>
+<span 
+class="cmr-10x-x-109">These tests follow the format of the NCAlgebra tests NCTEST exactly. After you load the</span>
+<span 
+class="cmr-10x-x-109">file</span>
+   <div  
+class="centerline">                                                      <span 
+class="cmtt-10x-x-109">&lt;&lt;NCGBXTEST99</span>                                   </div>
+<!--l. 55--><p class="noindent"><span 
+class="cmr-10x-x-109">you hope to get True, True, printing to the screen. The tests in NCGBXTEST99 test programs</span>
+<span 
+class="cmr-10x-x-109">which run under NCGB and were developed in 1999. They give NCGB a pretty good work</span>
+<span 
+class="cmr-10x-x-109">out.</span>
+<!--l. 62--><p class="indent">   <span 
+class="cmr-10x-x-109">Someday we plan to integrate our testing procedures. As you see we now have a mixed bag of</span>
+<span 
+class="cmr-10x-x-109">tests.</span>
+<!--l. 66--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x58-35700027.1"></a><span 
+class="cmr-10x-x-109">Fancy test program- DOES NOT WORK</span></h5>
+<!--l. 68--><p class="noindent"><span 
+class="cmr-10x-x-109">THE COMPAREING STEP DOES NOT WORK in 2001.</span>
+<!--l. 70--><p class="indent">   <span 
+class="cmr-10x-x-109">When you download NCGB from the net, the directories </span><span 
+class="cmti-10x-x-109">TestProblems </span><span 
+class="cmr-10x-x-109">and  </span><span 
+class="cmti-10x-x-109">TestReference </span><span 
+class="cmr-10x-x-109">contain</span>
+<span 
+class="cmr-10x-x-109">many files. Those in </span><span 
+class="cmti-10x-x-109">TestProblems </span><span 
+class="cmr-10x-x-109">supply mathematical exercises to the testing programs. Those in</span>
+<span 
+class="cmti-10x-x-109">TestReference </span><span 
+class="cmr-10x-x-109">are the result of running NCGB in ideal circumstances.</span>
+<!--l. 78--><p class="indent">   <span 
+class="cmr-10x-x-109">To see if the version of NCGB you downloaded is complete and functioning load </span><span 
+class="cmbx-10x-x-109">NCGBTEST</span><span 
+class="cmr-10x-x-109">, If you</span>
+<span 
+class="cmr-10x-x-109">do not have write access to NC/NCGB/Testing you may have to change the variable </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">$NC$TestResults$</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+<span 
+class="cmr-10x-x-109">TestingEnvironment.m defines the default depository for Test Result files. This is described in greater</span>
+<span 
+class="cmr-10x-x-109">detail in Section </span><a 
+href="#x58-36000027.3.1"><span 
+class="cmr-10x-x-109">27.3.1</span><!--tex4ht:ref: set:test:environment --></a><span 
+class="cmr-10x-x-109">.</span>
+   <div  
+class="centerline">                                                  <span 
+class="cmbx-10x-x-109">Enter Mathematica</span>                                           </div>
+<div  
+class="centerline">                                     <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmbx-10x-x-109">NCGBTEST</span>                                    </div>
+<!--l. 94--><p class="indent">   <span 
+class="cmr-10x-x-109">Go get a cup of coffee or two cups of coffee or a good night&#8217;s sleep. When you come back look at the</span>
+<span 
+class="cmr-10x-x-109">resulting screen output by typing</span>
+   <div  
+class="centerline">                                                            <span 
+class="cmbx-10x-x-109">??test.</span>                                                   </div>
+<!--l. 99--><p class="indent">   <span 
+class="cmr-10x-x-109">You should get</span>
+   <div  
+class="centerline">                                                    <span 
+class="cmbx-10x-x-109">test #00 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                            </div>
+<div  
+class="centerline">                                    <span 
+class="cmbx-10x-x-109">test #01 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                    </div>
+
+<div  
+class="centerline">                                    <span 
+class="cmbx-10x-x-109">test #02 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                    </div>
+<div  
+class="centerline">                                           <span 
+class="cmbx-10x-x-109">etc.</span>                                           </div>
+<!--l. 106--><p class="indent">   <span 
+class="cmr-10x-x-109">This tests your version of NCGB against answers obtained from the version we have. If they do not</span>
+<span 
+class="cmr-10x-x-109">agree there is a problem (possibly minor). One must be very careful with NCGBTEST. If paths are set</span>
+<span 
+class="cmr-10x-x-109">wrong, then it will find no files for either the reference answers or the new code you are testing and since</span>
+<span 
+class="cmr-10x-x-109">these behaviors are identical NCGBTEST will return True, True, etc. which is of course False, False,</span>
+<span 
+class="cmr-10x-x-109">False!</span>
+<!--l. 119--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">27.2   </span></span> <a 
+ id="x58-35800027.2"></a><span 
+class="cmr-10x-x-109">Turning On Screen Output</span></h3>
+<!--l. 120--><p class="noindent"><span 
+class="cmr-10x-x-109">There is a command which acts globally to turn output on and off:</span>
+   <div  
+class="centerline">                                          <span 
+class="cmbx-10x-x-109">NCGBMmaDiagnostics[ True]</span>                                    </div>
+<div  
+class="centerline">                             <span 
+class="cmbx-10x-x-109">NCGBMmaDiagnostics[ False]</span>                             </div>
+<a 
+ id="dx58-358001"></a>
+<!--l. 127--><p class="indent">   <span 
+class="cmr-10x-x-109">also the NCProcess option</span>
+   <div  
+class="centerline">                                             <span 
+class="cmbx-10x-x-109">PrintSreenOutput </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                       </div>
+<div  
+class="centerline">                               <span 
+class="cmbx-10x-x-109">PrintSreenOutput </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">False</span>                               </div>
+<a 
+ id="dx58-358002"></a>
+<!--l. 134--><p class="indent">   <span 
+class="cmr-10x-x-109">turns on (and off) more diagnostics only inside NCProcess. Default on both of these is</span>
+<span 
+class="cmr-10x-x-109">False.</span>
+<!--l. 138--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">27.3   </span></span> <a 
+ id="x58-35900027.3"></a><span 
+class="cmr-10x-x-109">More Testing for Developers - DOES NOT WORK 2001</span></h3>
+<!--l. 140--><p class="noindent"><span 
+class="cmr-10x-x-109">This section is for heavier testing than above, say of a new version of</span>
+<span 
+class="cmr-10x-x-109">NCGB.</span><span class="footnote-mark"><a 
+href="NCBIGDOC59.html#fn1x120"><sup >1</sup></a></span><a 
+ id="x58-359001f1"></a>
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">27.3.1   </span></span> <a 
+ id="x58-36000027.3.1"></a> <span 
+class="cmr-10x-x-109">Setting the Testing Environment</span></h4>
+<!--l. 155--><p class="noindent"><span 
+class="cmr-10x-x-109">The file </span><span 
+class="cmbx-10x-x-109">TestingEnvironment.m </span><span 
+class="cmr-10x-x-109">has four commands that may require editing. This file basically</span>
+<span 
+class="cmr-10x-x-109">defines the directories where the testing is being done, where the sample problems are stored,</span>
+<span 
+class="cmr-10x-x-109">where the results from the test are outputed and where the trusted reference answers are</span>
+<span 
+class="cmr-10x-x-109">kept.</span>
+<!--l. 160--><p class="indent">   <span 
+class="cmr-10x-x-109">The command </span><span 
+class="cmbx-10x-x-109">$NC$TestPrefix$ </span><span 
+class="cmr-10x-x-109">defines where the testing is being done. Its default value is</span>
+<span 
+class="cmbx-10x-x-109">&#x00A0;/NC/NCGB/Testing/</span><span 
+class="cmr-10x-x-109">, and should not be monkeyed with unless you have created your own testing</span>
+<span 
+class="cmr-10x-x-109">directory.</span>
+<!--l. 164--><p class="indent">   <span 
+class="cmbx-10x-x-109">$NC$TestInput$ </span><span 
+class="cmr-10x-x-109">defines where the test problems are kept. If you have some test problems of your</span>
+<span 
+class="cmr-10x-x-109">own, you may test them by giving the path to them as the value. The default is</span>
+   <div  
+class="centerline">             <span 
+class="cmbx-10x-x-109">$NC$TestInput$ = &#8221;StringJoin[$NC$TestPrefix$,&#8221;TestProblems/&#8221;]</span>           </div>
+<!--l. 172--><p class="indent">   <span 
+class="cmr-10x-x-109">If you do several tests, you can keep the results in separate directories by giving</span>
+   <div  
+class="centerline">                                    <span 
+class="cmbx-10x-x-109">$NC$TestResults$ </span><span 
+class="cmr-10x-x-109">the path as its value.</span>                                     </div>
+<!--l. 177--><p class="indent">   <span 
+class="cmr-10x-x-109">The default setting is</span>
+   <div  
+class="centerline">             <span 
+class="cmbx-10x-x-109">$NC$TestResults$ = &#8221;StringJoin[$NC$TestPrefix$,&#8221;TestResults/&#8221;]</span>            </div>
+
+<!--l. 182--><p class="indent">   <span 
+class="cmbx-10x-x-109">$NC$TestReferences$ </span><span 
+class="cmr-10x-x-109">defines the directory in which the trusted answers to the test problems are</span>
+<span 
+class="cmr-10x-x-109">stored. When you run the test, the files in </span><span 
+class="cmti-10x-x-109">TestResults </span><span 
+class="cmr-10x-x-109">will be compared to these reference files. Also if you</span>
+<span 
+class="cmr-10x-x-109">are creating your own reference files, you may want to redefine the path to avoid overwriting the answer</span>
+<span 
+class="cmr-10x-x-109">we so helpfully provide. The default is</span>
+   <div  
+class="centerline">        <span 
+class="cmbx-10x-x-109">$NC$TestReferences$ = &#8221;StringJoin[$NC$TestPrefix$,&#8221;TestReferences/&#8221;]</span>       </div>
+<!--l. 191--><p class="indent">   <span 
+class="cmr-10x-x-109">Remember, before doing anything, make sure the </span><span 
+class="cmbx-10x-x-109">TestingEnvironment.m </span><span 
+class="cmr-10x-x-109">file has the right</span>
+<span 
+class="cmr-10x-x-109">definitions to avoid sending files in all directions.</span>
+<!--l. 198--><p class="noindent"><span 
+class="cmbx-10x-x-109">Creating Test Results</span>
+<!--l. 202--><p class="indent">   <span 
+class="cmr-10x-x-109">To create a set of test outputs stay in the </span><span 
+class="cmti-10x-x-109">Testing </span><span 
+class="cmr-10x-x-109">directory. Make sure you have lots of test problem</span>
+<span 
+class="cmr-10x-x-109">files in the </span><span 
+class="cmti-10x-x-109">TestProblems </span><span 
+class="cmr-10x-x-109">directory; say c01.data.m thru c85.data.m. Make sure the </span><span 
+class="cmti-10x-x-109">TestReference </span><span 
+class="cmr-10x-x-109">directory</span>
+<span 
+class="cmr-10x-x-109">is loaded with files generated by applying a version of NCGB that you trust to the problems in</span>
+<span 
+class="cmti-10x-x-109">TestProblems</span><span 
+class="cmr-10x-x-109">. This should be the case because the package NCGB is shipped with such a collection of</span>
+<span 
+class="cmr-10x-x-109">sample answers.</span>
+<!--l. 213--><p class="indent">   <span 
+class="cmr-10x-x-109">Edit 2 lines in the file</span>
+   <div  
+class="centerline">                                                   <span 
+class="cmbx-10x-x-109">init.TestResults.m</span>                                            </div>
+<!--l. 217--><p class="indent">   <span 
+class="cmr-10x-x-109">to put in the path to the version of NCGB that you want to test.</span>
+<!--l. 220--><p class="indent">   <span 
+class="cmbx-10x-x-109">Copy the file</span>
+   <div  
+class="centerline">                                          <span 
+class="cmbx-10x-x-109">init.TestReferences.m</span>                                         </div> <span 
+class="cmbx-10x-x-109">to</span>
+<span 
+class="cmbx-10x-x-109">the file init.m</span>
+<!--l. 226--><p class="indent">   <span 
+class="cmbx-10x-x-109">Run </span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;Mathematica.</span>
+<!--l. 229--><p class="indent">   <span 
+class="cmbx-10x-x-109">Load </span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;NCGBTestCreate.m</span>
+<!--l. 231--><p class="indent">   <span 
+class="cmbx-10x-x-109">Run</span>
+   <div  
+class="centerline">                                <span 
+class="cmbx-10x-x-109">NCGBTestCreate[Integer1, Integer2]</span>                               </div>
+<!--l. 235--><p class="indent">   <span 
+class="cmbx-10x-x-109">Exit Mma</span>
+<!--l. 238--><p class="noindent"><span 
+class="cmr-10x-x-109">Here the arguments Integer must be a non-negative integer, satisfying Integer1 </span><span 
+class="cmsy-10x-x-109">&#x2264; </span><span 
+class="cmr-10x-x-109">Integer2 </span><span 
+class="cmsy-10x-x-109">&#x2264; </span><span 
+class="cmr-10x-x-109">85 This</span>
+<span 
+class="cmr-10x-x-109">creates a set of files of answers obtained from NCProcess labelled</span>
+   <div  
+class="centerline">                                                         <span 
+class="cmbx-10x-x-109">cN.out.tex</span>                                                 </div>
+<!--l. 245--><p class="noindent"><span 
+class="cmr-10x-x-109">where N is an integer between Integer1 and Integer2. They are stored in the directory </span><span 
+class="cmti-10x-x-109">TestResults</span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 249--><p class="indent">   <span 
+class="cmr-10x-x-109">If you want to test a program besides NCProcess you can use</span>
+   <div  
+class="centerline">                         <span 
+class="cmbx-10x-x-109">NCGBTestCreate[Integer1,Integer2,FunctionName]</span>                      </div>
+<!--l. 253--><p class="noindent"><span 
+class="cmr-10x-x-109">Label whichever program you want to test with FunctionName. For example, the name NCMakeGBFunction</span>
+<span 
+class="cmr-10x-x-109">has already been assigned to NCMakeGB, so running</span>
+   <div  
+class="centerline">                    <span 
+class="cmbx-10x-x-109">NCGBTestCreate[Integer1,Integer2,NCMakeGBFunction ]</span>                 </div>
+<!--l. 260--><p class="noindent"><span 
+class="cmr-10x-x-109">will create files for testing NCMakeGB.</span>
+<!--l. 265--><p class="noindent"><span 
+class="cmbx-10x-x-109">Comparing to Reference Code</span>
+<!--l. 268--><p class="noindent"><span 
+class="cmr-10x-x-109">While in the testing directory</span>
+<!--l. 272--><p class="indent">   <span 
+class="cmbx-10x-x-109">Run</span>
+<!--l. 274--><p class="indent">   <span 
+class="cmbx-10x-x-109">NCGBTestCompare[ Integer, Integer] </span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;(* for *.tex files only *)</span>
+<!--l. 276--><p class="noindent"><span 
+class="cmr-10x-x-109">or to test programs other than NCProcess</span>
+<!--l. 279--><p class="indent">   <span 
+class="cmbx-10x-x-109">NCGBTestCompare[ Integer, Integer, suffix] </span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>
+<!--l. 281--><p class="indent">   <span 
+class="cmr-10x-x-109">(* for example, suffix is &#8221;GB&#8221; only &#8212; remember the quotes *)</span>
+<!--l. 284--><p class="noindent"><span 
+class="cmr-10x-x-109">Go get a cup of coffee. When you come back look at the resulting screen output.</span>
+<!--l. 292--><p class="noindent"><span 
+class="cmr-10x-x-109">You should get</span>
+   <div  
+class="centerline">                                                    <span 
+class="cmbx-10x-x-109">test #01 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                             </div>
+<div  
+class="centerline">                                    <span 
+class="cmbx-10x-x-109">test #02 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                    </div>
+<div  
+class="centerline">                                          <span 
+class="cmbx-10x-x-109">etc.</span>                                           </div>
+<!--l. 299--><p class="noindent"><span 
+class="cmr-10x-x-109">The command </span><span 
+class="cmti-10x-x-109">NCGBTestCompare </span><span 
+class="cmr-10x-x-109">has created answer files and compared them to the old reference</span>
+<span 
+class="cmr-10x-x-109">files.</span>
+<!--l. 305--><p class="noindent"><span 
+class="cmbx-10x-x-109">Creating Reference Answers</span>
+<!--l. 308--><p class="indent">   <span 
+class="cmr-10x-x-109">Maybe you do not like the reference results we provided to you (some people are not very grateful). To</span>
+<span 
+class="cmr-10x-x-109">create a new set of reference outputs stay in the </span><span 
+class="cmti-10x-x-109">Testing </span><span 
+class="cmr-10x-x-109">directory. Make sure you have lots of test problem</span>
+<span 
+class="cmr-10x-x-109">files in the </span><span 
+class="cmti-10x-x-109">TestProblems </span><span 
+class="cmr-10x-x-109">directory; say c01.data.m thru c78.data.m.</span>
+<!--l. 316--><p class="indent">   <span 
+class="cmr-10x-x-109">Edit 2 lines in the file</span>
+
+   <div  
+class="centerline">                                                 <span 
+class="cmbx-10x-x-109">init.TestReference.m</span>                                          </div>
+<!--l. 320--><p class="indent">   <span 
+class="cmr-10x-x-109">to put in the path to the version of NCGB that you want as a reference.</span>
+<!--l. 323--><p class="indent">   <span 
+class="cmr-10x-x-109">Copy the file</span>
+   <div  
+class="centerline">                                    <span 
+class="cmbx-10x-x-109">init.TestReferences.m </span><span 
+class="cmr-10x-x-109">to the file </span><span 
+class="cmbx-10x-x-109">init.m</span>                                </div>
+<!--l. 328--><p class="indent">   <span 
+class="cmbx-10x-x-109">Run </span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;Mathematica</span>
+<!--l. 331--><p class="indent">   <span 
+class="cmbx-10x-x-109">Load </span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">&#x00A0;NCGBTestCreate.m</span>
+<!--l. 333--><p class="indent">   <span 
+class="cmbx-10x-x-109">Run</span>
+   <div  
+class="centerline">                                <span 
+class="cmbx-10x-x-109">NCGBTestCreate[Integer1, Integer2]</span>                                </div>
+<!--l. 338--><p class="indent">   <span 
+class="cmr-10x-x-109">This is beginning to look familiar. From here on proceed as you did in creating test files. This creates a</span>
+<span 
+class="cmr-10x-x-109">collection of files in the directory </span><span 
+class="cmti-10x-x-109">TestReference</span><span 
+class="cmr-10x-x-109">.</span>
+
+   <!--l. 2--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch28.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch26.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch26.html#tailNCBIGDOCch26.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch27.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa6.html#NCBIGDOCch27.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 2--><p class="indent">   <a 
+ id="tailNCBIGDOCch27.html"></a>    
+</body></html> 

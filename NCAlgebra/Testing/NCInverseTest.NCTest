@@ -1,0 +1,54 @@
+(* History:  06/26/01:  NCInverse tests (jeff)   *)
+
+(* Nov 2015 Mauricio : From A,B,C,D to a,b,c,d BEGIN *)
+(*
+SNC[a,b,c,d];
+*)
+
+(*NCInverse uses the formula shown in test 1 to compute the inverse of a 
+  2x2 matrix.  Larger matrices are handled by "divide and conquer" - the matrix
+  is thought of as being block 2x2, and the problem is reduced inductively in 
+  this way until it is truly working at the 2x2 level.  Tests 2 and 3 show that
+  sometimes the program must be specifically told to simplify and expression*)
+  
+  
+mat={{a,b},{c,d}};
+   invmat=NCInverse[mat];
+test[NCInv,1] = invmat == {{inv[a] + inv[a] ** b ** inv[d - c ** inv[a] ** b] 
+                            ** c ** inv[a], -inv[a] ** b **inv[d - c ** inv[a] ** b]},
+                           {-inv[d - c ** inv[a] ** b] ** c ** inv[a], inv[d - c ** inv[a] ** b]}}
+ 
+test[NCInv,2] = NCSimplifyRational[NCInverse[NCInverse[{{a,b},{0,d}}]]] == {{a,b},{0,d}}
+   
+test[NCInv,3] = NCSimplifyRational[MatMult[invmat,mat]] == {{1,0},{0,1}}
+
+
+(*Tests 4, 5 and 6 demonstrate that either NCInverse or NCSimplifyRational 
+  sometimes have difficulty doing their jobs*)
+(*  
+m = {{tp[x], 0, 3}, {y, inv[y], 1}, {2, x ** y, 0}};
+n = NCInverse[m];
+test[NCInv,4] = NCSimplifyRational[MatMult[m, n]] == NCSimplifyRational[MatMult[n, m]]
+test[NCInv,5] = NCSimplifyRational[MatMult[n, m]] == {{1,0,0},{0,1,0},{0,0,1}}
+test[NCInv,6] = NCSimplifyRational[MatMult[m, n]] == {{1,0,0},{0,1,0},{0,0,1}}
+*)
+
+(*Because of its approach at finding inverses, the program will occasionally 
+  fail to find an inverse of even a simple matrix - as demonstrated in tests
+  7 and 8.  This has only seemed to occur when the matrix possesses a number
+  of zeros in "bad" places.  The standard Mathematica command, Inverse, works
+  fine on such examples (but cannot recognize non-commutivity)*)
+(*  
+test[NCInv,7] = NCInverse[{{0,1},{1,0}}] == {{0,1},{1,0}}
+test[NCInv,8] = Inverse[{{0,1},{1,0}}] == {{0,1},{1,0}}
+*)
+
+Print["Results from the file NCInverseTest.NCTest"]
+For[ i=1, i<4, i++,
+     Print["Test #",i," was ",test[NCInv,i]]
+    ];                        
+
+(*
+SetCommutative[a,b,c,d];
+*)
+(* Nov 2015 Mauricio : From A,B,C,D to a,b,c,d END *)

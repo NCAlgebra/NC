@@ -1,0 +1,4 @@
+Print["test.10"];
+SetMonomialOrder[{a,b,c,d,e,f,g,h,i,j,k,l,m,n},1];
+data = {a**a**a - b**b, d**e - 1,e**d - 1 , a**b**e**d**j**k - h**g**d};
+ans = NCMakeGB[data,5];

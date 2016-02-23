@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>16 NCProcess: The Concepts</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch17.html" >next</a>] [<a 
+href="#tailNCBIGDOCch16.html">tail</a>] [<a 
+href="NCBIGDOCpa5.html#NCBIGDOCch16.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;16</span><br><a 
+ id="x37-22700016"></a>NCProcess: The Concepts</h2>
+<!--l. 11--><p class="noindent">We turn to a much more adventurous pursuit which is in a primitive stage. This is a highly
+computer assisted method for discovering certain types of theorems.
+<!--l. 17--><p class="indent">   At the beginning of &#8220;discovering&#8221; a theorem, an engineering or math problem is often
+presented as a large system of matrix or operator equations. The point of the method is to
+isolate and to minimize what the user must do by running algorithms heavily. Often
+when viewing the output of the algorithms, one can see what additional hypothesis
+should be added to produce a useful theorem and what the relevant matrix quantities
+are.
+<!--l. 30--><p class="indent">   Many theorems in engineering systems, matrix and operator theory amount to giving
+hypotheses under which it is possible to solve large collections of equations. (It is <span 
+class="cmti-12">not </span>our goal to
+reprove already proven theorems, but rather to develop technique which will be useful for
+discovering new theorems.)
+<!--l. 40--><p class="indent">   Rather than use the word &#8220;algorithm,&#8221; we call our method a <span 
+class="cmti-12">strategy </span>since it allows for modest
+human intervention. We are under the impression that many theorems might be derivable in this
+way. A detailed description of a strategy is given in <span 
+class="cmbx-12">[HS]</span>. Prestrategies are a particular type
+of strategy which are easier to explain. This chapter will describe the ideas behind a
+prestrategy.
+<!--l. 49--><p class="indent">   In this chapter, unlike Chapter <a 
+href="NCBIGDOCch9.html#x16-1780009">9<!--tex4ht:ref: chapter:simple:demos --></a>, we will not be providing descriptions of how to use
+commands. Our goal is just to mention the main ideas. These ideas are described in detail in <span 
+class="cmbx-12">[HS]</span>.
+The example in Chapter <a 
+href="NCBIGDOCch14.html#x28-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a> is a very good illustration of these ideas. The description of how
+NCProcess is called is given in Chapter <a 
+href="NCBIGDOCch15.html#x33-21000015">15<!--tex4ht:ref: chapter:ncprocess:command --></a>.
+<!--l. 59--><p class="indent">   We use the abbreviations <span 
+class="cmti-12">GB </span>and <span 
+class="cmti-12">GBA </span>to refer to Gröbner Basis and Gröbner Basis Algorithm
+respectively. We begin by describing a facet of noncommutative GB&#8217;s which we have not yet
+described. GB&#8217;s are very effective for eliminating, or solving for, variables.
+   <h3 class="sectionHead"><span class="titlemark">16.1   </span> <a 
+ id="x37-22800016.1"></a>NCProcess: Input and Output</h3>
+
+<!--l. 74--><p class="noindent">The commands which we use to implement a prestrategy are called NCProcess1 and NCProcess2.
+NCProcess1 and NCProcess2 are variants on a more general command called NCProcess. A person
+can make use of NCProcess1 and NCProcess2 without knowing any of the NCProcess
+options.
+<!--l. 80--><p class="indent">   The NCProcess commands are based upon a GBA and will be described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch15.html#x33-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a>. GBA&#8217;s are
+very effective at eliminating or solving for variables. A person can use this practical approach to
+performing computations and proving theorems <span 
+class="cmti-12">without knowing anything about </span>GBA&#8217;s. Indeed,
+this chapter is a self-contained description of our method.
+<!--l. 274--><p class="indent">   The <span 
+class="cmbx-12">input </span>to NCProcess command one needs:
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">I1. A list of knowns.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">I2. A list of unknowns (together with an order which gives you priorities for eliminating
+      them).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">I3. A collection of equations in these knowns and unknowns. <span class="footnote-mark"><a 
+href="NCBIGDOC38.html#fn1x61"><sup >1</sup></a></span><a 
+ id="x37-228001f1"></a>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">I4. A number of iterations.</dd></dl>
+<!--l. 287--><p class="indent">   The knowns (I1) are set using the <span 
+class="cmmi-12">SetKnowns </span>command, The unknowns (I2) are set using the
+<span 
+class="cmmi-12">SetUnknowns </span>command, For example, <span 
+class="cmmi-12">SetKnowns</span>[<span 
+class="cmmi-12">A,B,C</span>] sets <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>known and
+<span 
+class="cmmi-12">SetUnknowns</span>[<span 
+class="cmmi-12">x,y,z</span>] sets <span 
+class="cmmi-12">x</span>, <span 
+class="cmmi-12">y </span>and <span 
+class="cmmi-12">z </span>unknown. Also, in this case, the algorithms sets the highest
+prioirity on eliminating <span 
+class="cmmi-12">z</span>, then <span 
+class="cmmi-12">y </span>and then <span 
+class="cmmi-12">x</span>. Some readers might recall this is exactly the
+information needed as input to NCMakeGB.
+<!--l. 298--><p class="indent">   The <span 
+class="cmbx-12">output </span>of the NCProcess commands is a list of expressions which are <span 
+class="cmbx-12">mathematically</span>
+<span 
+class="cmbx-12">equivalent to the equations which are input </span>(in step I3). That is, the output equations and
+input equations have exactly the same set of solutions as the input equations. When using
+NCProcess1, this equivelent list hopefully has solved for some unknowns. The output is presented
+to the user as
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">O1. Unknowns which have been solved for and equations which yield these unknowns.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O2. Equations involving no unknowns.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O3. Equations selected or created by the user. <span class="footnote-mark"><a 
+href="NCBIGDOC39.html#fn2x61"><sup >2</sup></a></span><a 
+ id="x37-228002f2"></a>
+
+      For example, in the context of S1 below, one would want to select the equation <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">17</span></sub>.
+      There are also times during a strategy when one wants to introduce new variables and
+      equations. This is illustrated in Chapter <a 
+href="NCBIGDOCch14.html#x28-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O4. Equations involving only one unknown.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O5. Equations involving only 2 unknowns. etc. </dd></dl>
+<!--l. 339--><p class="indent">   We say that an equation which is in the output of an NCProcess command is <span 
+class="cmti-12">digested </span>if it
+occurs in items O1, O2 or O3 and is <span 
+class="cmti-12">undigested </span>otherwise. Often, in practice, the digested
+polynomial equations are those which are well understood.
+<!--l. 345--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">16.2   </span> <a 
+ id="x37-22900016.2"></a>Elimination</h3>
+<!--l. 348--><p class="noindent">Since we will not always let the <span 
+class="cmmi-12">GBA </span>algorithm run until it finds a Gröbner Basis, we will often be
+dealing with sets which are not Gröbner Basis, but rather an intermediate result. We call such sets
+of relations <span 
+class="cmti-12">partial GB&#8217;s</span>.
+<!--l. 354--><p class="indent">   Commutative Gröbner Basis Algorithms can be used to systematically eliminate variables from
+a collection (e.g., <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub>(<span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">n</span></sub>) = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">}</span>) of polynomial equations so as to put it
+in triangular form. One specifies an order on the variables (<span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">&lt; x</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">&lt; x</span><sub ><span 
+class="cmr-8">3</span></sub> <span 
+class="cmmi-12">&lt;</span> <span 
+class="cmmi-12">&#x2026;</span> <span 
+class="cmmi-12">&lt; x</span><sub ><span 
+class="cmmi-8">n</span></sub> )
+<span class="footnote-mark"><a 
+href="NCBIGDOC40.html#fn3x61"><sup >3</sup></a></span><a 
+ id="x37-229001f3"></a> which
+corresponds to ones priorities in eliminating them. Here a GBA will try hardest to eliminate <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmmi-8">n</span></sub> and
+try the least to eliminate <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub>. The output from it is a list of equations in a &#8220;canonical form&#8221; which is
+triangular: <span class="footnote-mark"><a 
+href="NCBIGDOC41.html#fn4x61"><sup >4</sup></a></span><a 
+ id="x37-229002f4"></a>
+<div class="eqnarray">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC73x.png" alt="         q1(x1) = 0                                (16.1)
+
+      q2(x1,x2) = 0                                (16.2)
+      q3(x1,x2) = 0                                (16.3)
+
+   q4(x1,x2,x3) = 0                                (16.4)
+                ...                                (16.5)
+
+qk2(x1,...,xn) = 0 .                               (16.6)
+" class="math-display" ></center>
+</div>Here the polynomials <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmmi-8">j</span></sub> : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">} </span>generate the same ideal that the polynomials
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">} </span>do. Therefore, the set of solutions to the collection the polynomial equations
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">} </span>equals the set of solutions to the collection of polynomial equations
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmmi-8">j</span></sub> = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">}</span>. This canonical form greatly simplifies the task of solving the collection of
+polynomial equations by facilitating backsolving for <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmmi-8">j</span></sub> in terms of <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">j</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub>. The effect of the
+ordering is to specify that variables high in the order will be eliminated while variables low in the
+order will not be eliminated.
+<!--l. 395--><p class="indent">   In the noncommutative case, again a GB for a collection of polynomial equations
+is a collection of noncommuting polynomial equations in triangular form (see <span 
+class="cmbx-12">[HS]</span>).
+There are some difficulties which don&#8217;t occur in the commutative case. For example, a
+GB can be infinite in the noncommutative case. However, we present software here
+based on the noncommutative GBA which might prove to be extremely valuable in some
+situations.
+   <h3 class="sectionHead"><span class="titlemark">16.3   </span> <a 
+ id="x37-23000016.3"></a>What is a prestrategy?</h3>
+<!--l. 463--><p class="noindent">We wish to stress that one does not need to <span 
+class="cmti-12">know  </span>a theorem in order to <span 
+class="cmti-12">discover </span>it using the
+techniques in this paper. Any method which assumes that all of the hypotheses can be
+stated algebraically and that all of the hypotheses are known at the beginning of the
+computation will be of limited practical use. For example, since the Gröbner Basis algorithm
+only discovers polynomial equations which are algebraically true and not those which
+require analysis or topology, the use of this algorithm alone has a limited use. Insights
+gained from analysis during a computer session could be added as (algebraic) hypotheses
+while the session is in progress. Decisions can take a variety of forms and can involve
+recognizing a Riccati equation, recognizing that a particular square matrix is onto and so
+invertible, recognizing that a particular theorem now applies to the problem, etc. The user
+would then have to record and justify these decisions independently of the computer run.
+<span class="footnote-mark"><a 
+href="NCBIGDOC42.html#fn5x61"><sup >5</sup></a></span><a 
+ id="x37-230001f5"></a> While
+a strategy allows for human intervention, the intervention must follow certain rigid rules for the
+computer session to be considered a strategy.
+
+   <h4 class="subsectionHead"><span class="titlemark">16.3.1   </span> <a 
+ id="x37-23100016.3.1"></a>Prestrategy</h4>
+<!--l. 557--><p class="noindent">The idea of a <span 
+class="cmti-12">prestrategy </span>is :
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">S0. Set <span 
+class="cmmi-12">C</span><sup ><span 
+class="cmsy-8">&#x2032;</span></sup> = <span 
+class="cmsy-10x-x-120">{} </span>(see footnote in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x37-22800016.1">16.1<!--tex4ht:ref: subsection:ncprocess:input:output --></a> on I3.)
+      </dd><dt class="description">
+ </dt><dd 
+class="description">S1. Run NCProcess1 which creates a display of the output (see O1-O5 in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch15.html#x33-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a>) and look
+      at the list of equations involving only one unknown (say a particular equation <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">17</span></sub>
+      contains only <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">3</span></sub>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">S2. The user must now make a decision about equations in <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">3</span></sub> (e.g., <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">17</span></sub> is a Riccati equation
+      so I shall not try to simplify it, but leave it for Matlab). Now the user declares the
+      unknown <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">3</span></sub> to be known.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">S3. Either do the &#8220;End game&#8221; (see <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x37-23200016.3.2">16.3.2<!--tex4ht:ref: subsection:stopping --></a>) or Go to S1.</dd></dl>
+<!--l. 581--><p class="indent">   The above listing is, in fact, a statement of a <span 
+class="cmti-12">1-prestrategy</span>. Sometimes one needs a <span 
+class="cmti-12">2-prestrategy</span>
+in that the key is equations in 2 unknowns.
+<!--l. 586--><p class="indent">   The point is to isolate and to minimize what the user must do. This is the crux of a
+prestrategy.
+<!--l. 591--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">16.3.2   </span> <a 
+ id="x37-23200016.3.2"></a>When to stop</h4>
+<!--l. 594--><p class="noindent">The prestrategy described above is a loop and we now discuss when to exit the loop.
+<!--l. 597--><p class="indent">   The digested equations (those in items O1, O2 and O3) often contain the necessary conditions
+of the desired theorem and the main flow of the proof of the converse. If the starting
+polynomial equations follow as algebraic consequences of the digested equations, then we
+should exit the above loop. The starting equations, say <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmr-8">1</span></sub> = 0<span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">1</span></sub></sub> = 0<span 
+class="cmsy-10x-x-120">}</span>, follow as
+algebraic consequences of the digested equations, say <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmr-8">1</span></sub> = 0<span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,q</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">2</span></sub></sub> = 0<span 
+class="cmsy-10x-x-120">}</span>, if and only if the
+Gröbner Basis generated by <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,q</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">2</span></sub></sub><span 
+class="cmsy-10x-x-120">} </span>reduces (in a standard way) the polynomial
+<span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> to 0 for 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub>. Checking whether or not this happens is a purely mechanical
+process.
+<!--l. 615--><p class="indent">   When one exits the above loop, one is presented with the question of how to finish off the proof
+of the theorem. We shall call the steps required to go from a final spreadsheet to the actual
+theorem the &#8220;end game.&#8221; We shall describe some &#8220;end game&#8221; technique in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x37-23400016.3.4">16.3.4<!--tex4ht:ref: subsection:summary --></a>. We shall
+illustrate the &#8220;end game&#8221; in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch14.html#x28-20800014.4">14.4<!--tex4ht:ref: section:endgame:concept --></a> and <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch17.html#x44-24600017.4">17.4<!--tex4ht:ref: section:DG:end:game --></a>. As we shall see, typically the first step is to run
+NCProcess2 whose output is a very small set of equations.
+
+<!--l. 638--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">16.3.3   </span> <a 
+ id="x37-23300016.3.3"></a>Redundant Equations</h4>
+<!--l. 641--><p class="noindent">We mentioned earlier that NCProcess uses the Gröbner Basis algorithm. This GBA is implemented
+via the command NCMakeGB. If NCProcess consisted of a call to the GBA and the
+formatted output (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch15.html#x33-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a>) alone, then NCProcess would not be a powerful enough tool to
+generate solutions to engineering or math problems. This is because it would generate
+too many equations. It is our hope that the equations which it generates contain all
+of the equations essential to solution of whatever problem you are treating. For the
+problems we have considered, this has been our experience. On the other hand, it contains
+equations derived from these plus equations derived from those derived from these as well as
+precursor equations which are no longer relevant. That is, a GB contains a few jewels
+and lots of garbage. In technical language a GB is almost never a small basis for an
+ideal and what a human seeks in discovering a theorem is a small basis for an ideal.
+<span class="footnote-mark"><a 
+href="NCBIGDOC43.html#fn6x61"><sup >6</sup></a></span><a 
+ id="x37-233001f6"></a> Thus
+we have algorithms and substantial software for finding small (or smallest) sets of equations
+associated to a problem. The process of running GBA followed by an algorithm for finding small
+sets of equations is what constitutes NCProcess.
+   <h4 class="subsectionHead"><span class="titlemark">16.3.4   </span> <a 
+ id="x37-23400016.3.4"></a>Summary of a Prestrategy</h4>
+<!--l. 690--><p class="noindent">We have just given the basic ideas. As a prestrategy proceeds, more and more equations are
+digested by the user and more and more unknowns become knowns. Thus we ultimately have two
+classes of knowns: original knowns <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmr-8">0</span></sub> and user designated knowns <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmmi-8">U</span></sub>. Often a theorem can be
+produced directly from the output by taking as hypotheses the existence of knowns <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmmi-8">U</span></sub> <span 
+class="cmsy-10x-x-120">&#x222A;<img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmr-8">0</span></sub> which
+are solutions to the equations involving only knowns.
+<!--l. 707--><p class="indent">   Assume that we have found these solutions. To prove the theorem, that is to construct solutions
+to the original equations, we must solve the remaining equations. Fortunately, the digested
+equations often are in a block triangular form which is amenable to backsolving. This is one of the
+benefits of &#8220;digesting&#8221; the equations.
+<!--l. 715--><p class="indent">   An example, makes all of this more clear.
+<!--l. 717--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">16.4   </span> <a 
+ id="x37-23500016.4"></a>A strategy</h3>
+<!--l. 719--><p class="noindent">A strategy is like a prestrategy except in addition the user can make (and the program prompts )
+certain changes of variables. The nature of these changes of variables is explained in [HS99]
+and sketched in Chapter <a 
+href="NCBIGDOCch31.html#x66-38600031">31<!--tex4ht:ref: chapter:change variables --></a>. The NCProcess output prompts for changes of variables if
+<span 
+class="cmtt-12">NCCOV </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">True </span>by placing parentheses in carefully selected places. The experimental
+commands described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch31.html#x66-38600031">31<!--tex4ht:ref: chapter:change variables --></a> actually automate this change of variable business to some
+extent.
+
+
+   <!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch17.html" >next</a>] [<a 
+href="NCBIGDOCch16.html" >front</a>] [<a 
+href="NCBIGDOCpa5.html#NCBIGDOCch16.html" >up</a>] </p></div>
+<!--l. 3--><p class="indent">   <a 
+ id="tailNCBIGDOCch16.html"></a>   
+</body></html> 

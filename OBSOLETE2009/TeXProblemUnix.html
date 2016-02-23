@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.05 [en] (X11; I; SunOS 5.5.1 sun4u) [Netscape]">
+</HEAD>
+<title>Problems with TeX under Unix</title>
+<BODY>
+<font size=+2>
+<h1>
+Problems with LaTeX under Unix
+</h1>
+
+<ol><li>
+LaTeX is not needed to run NCAlgebra and is not needed to run most of NCGB.
+</li><li>
+The problem faced with NCGB using LaTeX is almost always
+with NCGB finding it automatically.
+</li><li>
+If you have LaTeX installed properly on your unix machine, then the command
+<code> which latex</code> and <code>which xdvi</code> should both
+return paths to the place where these commands are stored.
+If either of them does not, ask your system administrator
+to install them. 
+</li><li>
+You might have to
+modify the file <tt>NCGBTeXSetUp.m</tt>
+in the  <tt>NC/NCGB/MmaSource/</tt> director
+if your latex or xdvi program
+has strange names (or if you are using alternative programs).
+Look at the file to see what to do.
+</font>
+</BODY>
+</HTML>

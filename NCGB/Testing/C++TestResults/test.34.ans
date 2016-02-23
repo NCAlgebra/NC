@@ -1,0 +1,6 @@
+{a**Inva -> 1, Ajb -> c**LossLessM, Inva**a -> 1, 
+ InvLossLessM**LossLessM -> 1, b -> LossLessM**Ajc, 
+ LossLessM**InvLossLessM -> 1, 
+ Aja -> Ajc**c**LossLessM - InvLossLessM**a**LossLessM, 
+ Ajc**c**LossLessM**InvAja -> 1 + InvLossLessM**a**LossLessM**InvAja, 
+ InvAja**Ajc**c -> InvLossLessM + InvAja**InvLossLessM**a}

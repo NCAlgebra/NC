@@ -1,0 +1,4 @@
+{x**d -> 1 - a**w, x**z -> -a**c, y**w -> -b**d, b**z -> 1 - y**c, 
+ w**a -> 1 - c**y, w**x -> -c**b, z**y -> -d**a, z**b -> 1 - d**x, 
+ y**c**y -> y + b**d**a, b**d**x -> y**c**b, b**d**a**w -> b**d - y**c**b**d, 
+ y**c**b**d**a -> b**d**a**c**y}

@@ -1,0 +1,210 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      6462,        201]
+NotebookOptionsPosition[      5496,        163]
+NotebookOutlinePosition[      5908,        181]
+CellTagsIndexPosition[      5865,        178]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ClearAll", "@", "clients"}], ";"}]], "Input",
+ CellChangeTimes->{{3.5178603307918253`*^9, 3.5178603358149357`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"clients", "[", 
+   RowBox[{
+    RowBox[{"funs", ":", 
+     RowBox[{"{", "__Symbol", "}"}]}], ",", "pattern_"}], "]"}], ":=", 
+  RowBox[{"Cases", "[", 
+   RowBox[{"funs", ",", 
+    RowBox[{"_", "?", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"!", 
+        RowBox[{"FreeQ", "[", 
+         RowBox[{
+          RowBox[{"DownValues", "[", "#", "]"}], ",", "pattern"}], "]"}]}], 
+       "&"}], ")"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.517859414807342*^9, 3.51785945193925*^9}, {
+   3.517859501635412*^9, 3.5178595915888844`*^9}, {3.517859699391552*^9, 
+   3.5178597422530613`*^9}, {3.517859825013534*^9, 3.5178598584934607`*^9}, 
+   3.517860014080131*^9, {3.5178603144951353`*^9, 3.5178603238010073`*^9}}],
+
+Cell["Connections:", "Text",
+ CellChangeTimes->{{3.517860034051345*^9, 3.517860036802971*^9}}],
+
+Cell[BoxData[
+ RowBox[{"SystemsModelFeedbackConnect", ";"}]], "Input",
+ CellChangeTimes->{{3.517860202694972*^9, 3.517860217894969*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"symbols", "=", 
+   RowBox[{"Cases", "[", 
+    RowBox[{
+     RowBox[{"Symbol", "/@", 
+      RowBox[{"Names", "[", "\"\<Control`ConnectionsDump`*\>\"", "]"}]}], ",",
+      "_Symbol"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5178593876446543`*^9, 3.517859401027438*^9}, {
+  3.51785976542269*^9, 3.5178597859724913`*^9}, {3.5178598732903633`*^9, 
+  3.5178598875749693`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"clients", "[", 
+  RowBox[{"symbols", ",", "Inverse"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5178598979253063`*^9, 3.5178599142757998`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "Control`ConnectionsDump`feedback0", ",", 
+   "Control`ConnectionsDump`feedback10", ",", 
+   "Control`ConnectionsDump`genericconnect0"}], "}"}]], "Output",
+ CellChangeTimes->{3.517859915205221*^9, 3.517860226441586*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"clients", "[", 
+  RowBox[{"symbols", ",", "Dot"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5178598979253063`*^9, 3.517859928835874*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "Control`ConnectionsDump`feedback0", ",", 
+   "Control`ConnectionsDump`feedback10", ",", 
+   "Control`ConnectionsDump`genericconnect0"}], "}"}]], "Output",
+ CellChangeTimes->{3.517859929606889*^9, 3.517860228641921*^9}]
+}, Open  ]],
+
+Cell["Common:", "Text",
+ CellChangeTimes->{{3.517860052450964*^9, 3.517860055314995*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"symbols1", "=", 
+   RowBox[{"Cases", "[", 
+    RowBox[{
+     RowBox[{"Symbol", "/@", 
+      RowBox[{"Names", "[", "\"\<Control`CommonDump`*\>\"", "]"}]}], ",", 
+     "_Symbol"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5178593876446543`*^9, 3.517859401027438*^9}, {
+  3.51785976542269*^9, 3.5178597859724913`*^9}, {3.5178598732903633`*^9, 
+  3.5178598875749693`*^9}, {3.517860066715496*^9, 3.517860080543805*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Quiet", "[", 
+  RowBox[{"clients", "[", 
+   RowBox[{"symbols1", ",", 
+    RowBox[{
+    "Inverse", "|", "Control`CommonDump`inverse", "|", 
+     "Control`CommonDump`tInverse"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5178598979253063`*^9, 3.5178599142757998`*^9}, 
+   3.517860068460994*^9, {3.517860123196982*^9, 3.517860131436727*^9}, {
+   3.517860409328117*^9, 3.517860425062079*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "Control`CommonDump`inverse", ",", "Control`CommonDump`matrixlog", ",", 
+   "Control`CommonDump`similaritytransform", ",", 
+   "Control`CommonDump`tInverse", ",", 
+   "Control`CommonDump`transferfunction"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.517859915205221*^9, 3.517860086410445*^9, 3.517860133813757*^9, 
+   3.517860262815064*^9, {3.517860411981595*^9, 3.5178604258216352`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Quiet", "[", 
+  RowBox[{"clients", "[", 
+   RowBox[{"symbols1", ",", 
+    RowBox[{"Dot", "|", "Control`CommonDump`dot"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5178598979253063`*^9, 3.517859928835874*^9}, 
+   3.517860069916979*^9, {3.517860274639995*^9, 3.517860277029223*^9}, {
+   3.517860774887484*^9, 3.517860775398501*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "Control`CommonDump`Horner", ",", "Control`CommonDump`dot", ",", 
+   "Control`CommonDump`Horner", ",", "Control`CommonDump`makerandomsystem", 
+   ",", "Control`CommonDump`matrixlog", ",", "Control`CommonDump`Parlett", 
+   ",", "Control`CommonDump`resolvent", ",", "Control`CommonDump`serial", ",",
+    "Control`CommonDump`similaritytransform0", ",", 
+   "Control`CommonDump`tfMult", ",", "Control`CommonDump`transferfunction"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.517859929606889*^9, {3.5178602682519712`*^9, 3.5178602774498672`*^9}, 
+   3.517860778011259*^9}]
+}, Open  ]]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{799, 668},
+WindowMargins->{{Automatic, 371}, {123, Automatic}},
+ShowSelection->True,
+FrontEndVersion->"8.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 11, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 150, 3, 27, "Input"],
+Cell[710, 25, 751, 19, 27, "Input"],
+Cell[1464, 46, 94, 1, 26, "Text"],
+Cell[1561, 49, 136, 2, 27, "Input"],
+Cell[1700, 53, 414, 10, 27, "Input"],
+Cell[CellGroupData[{
+Cell[2139, 67, 165, 3, 27, "Input"],
+Cell[2307, 72, 261, 6, 43, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2605, 83, 159, 3, 27, "Input"],
+Cell[2767, 88, 261, 6, 43, "Output"]
+}, Open  ]],
+Cell[3043, 97, 89, 1, 26, "Text"],
+Cell[3135, 100, 456, 10, 27, "Input"],
+Cell[CellGroupData[{
+Cell[3616, 114, 418, 9, 29, "Input"],
+Cell[4037, 125, 430, 9, 58, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4504, 139, 361, 7, 29, "Input"],
+Cell[4868, 148, 612, 12, 88, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

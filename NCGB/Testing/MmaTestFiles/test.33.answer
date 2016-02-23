@@ -1,0 +1,7 @@
+{LossLessM ** InvLossLessM -> 1, InvLossLessM ** LossLessM -> 1, 
+  Aja -> Ajc ** c ** LossLessM - InvLossLessM ** a ** LossLessM, 
+  b -> LossLessM ** Ajc, Ajb -> c ** LossLessM, a ** Inva -> 1, 
+  Inva ** a -> 1, InvAja ** Ajc ** c -> 
+   InvLossLessM + InvAja ** InvLossLessM ** a, 
+  Ajc ** c ** LossLessM ** InvAja -> 
+   1 + InvLossLessM ** a ** LossLessM ** InvAja}

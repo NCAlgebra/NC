@@ -1,0 +1,12 @@
+ClearMonomialOrderAll[];
+
+SetNonCommutative[x,y,invx,invy,inv1xy,inv1yx,inv1x];
+SetMonomialOrder[{x,y,invx,invy,inv1x,inv1xy,inv1yx},1];
+
+rels = 
+{invx ** x -> 1,
+x ** invx -> 1,
+inv1x - x**inv1x - 1,
+inv1x - inv1x**x - 1};
+
+ans = NCMakeGB[rels,5];

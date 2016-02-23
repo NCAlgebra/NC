@@ -1,0 +1,14 @@
+(* igor and bill, nov 2008 *)
+(* mauricio and bill, nov 2009 *)
+(* runs our main test of NCMakeGB and NCProcess *)
+
+(* input data *)
+Clear[low,high];
+low = 0;
+high = 85;   (* 86 is max *)
+
+If[low>high, idt=high; high=low; low=idt;];
+If[low<0, low=0];
+If[high>86, high=86];
+
+<< NCMakeGB.test 

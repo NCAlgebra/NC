@@ -1,0 +1,7 @@
+(* This looks obsolete (July 8, 1999)  Mark Stankus *)
+AppendTo[$Path,"C++TestFiles"];
+AppendTo[$Path,"TESTS"];
+AppendTo[$Path,"/home/osiris/kschneid/AnswerFiles"];
+AppendTo[$Path,"/home/osiris/kschneid/DataFiles"];
+AppendTo[$Path,"/home/osiris/kschneid"];
+Get["nows.m"];

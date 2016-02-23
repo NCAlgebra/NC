@@ -1,0 +1,92 @@
+(* HUGO13
+Reruning stuff with invertible z.
+And the w rule was put into the hugorelations list.
+The answer is at the end of the file
+*)
+
+<<ShrinkBasis.m
+
+SetNonCommutative[a,b,c,d,x,y,z,iz,w,ia,ib,ic,id];
+SetMultiplicityOfGrading[3];
+SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
+SetMonomialOrder[{z,iz},2];
+SetMonomialOrder[{x,y,w},3];
+
+first = {{a,x},{y,b}};
+second = {{w,c},{d,z}};
+
+start = Flatten[{MatMult[first,second] - IdentityMatrix[2],
+                 MatMult[second,first] - IdentityMatrix[2]}];
+
+hugorelations = {
+d ** x -> 1 - z ** b,
+z ** y -> -d ** a,
+x ** z -> -a ** c,
+z ** b ** z -> z + d ** a ** c,
+w -> ia ** id ** z ** b ** d,
+y ** c -> 1 - b ** z
+};
+
+inverserelations = {
+ia**a - 1,
+a**ia - 1,
+ib**b - 1,
+b**ib - 1,
+ic**c - 1,
+c**ic - 1,
+id**d - 1,
+d**id - 1,
+z**iz - 1,
+iz**z - 1
+};
+
+smallerbasis = ShrinkBasis[start,hugorelations,inverserelations];
+Print[smallerbasis];
+Put[smallerbasis, "hugo13.answer"];
+
+
+
+(* The answer: Notice the "w" rule appears in all sets.
+{
+{w -> ia ** id ** z ** b ** d, 
+d ** x -> 1 - z ** b, 
+x ** z -> -a ** c, 
+y ** c -> 1 - b ** z}, 
+
+{w -> ia ** id ** z ** b ** d, 
+d ** x -> 1 - z ** b, 
+x ** z -> -a ** c, 
+z ** y -> -d ** a}, 
+
+{w -> ia ** id ** z ** b ** d, 
+d ** x -> 1 - z ** b, 
+y ** c -> 1 - b ** z, 
+z ** y -> -d ** a}, 
+
+{w -> ia ** id ** z ** b ** d, 
+d ** x -> 1 - z ** b, 
+y ** c -> 1 - b ** z, 
+z ** b ** z -> z + d ** a ** c}, 
+
+{w -> ia ** id ** z ** b ** d, 
+d ** x -> 1 - z ** b, 
+z ** y -> -d ** a, 
+z ** b ** z -> z + d ** a ** c}, 
+
+{w -> ia ** id ** z ** b ** d, 
+x ** z -> -a ** c, 
+y ** c -> 1 - b ** z, 
+z ** y -> -d ** a}, 
+
+{w -> ia ** id ** z ** b ** d, 
+x ** z -> -a ** c, 
+y ** c -> 1 - b ** z, 
+z ** b ** z -> z + d ** a ** c}, 
+
+{w -> ia ** id ** z ** b ** d, 
+x ** z -> -a ** c, 
+z ** y -> -d ** a, 
+z ** b ** z -> z + d ** a ** c}
+};
+
+*)

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.6 Setting symbols to commute or not commute</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1303--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse17.html" >next</a>] [<a 
+href="NCBIGDOCse15.html" >prev</a>] [<a 
+href="NCBIGDOCse15.html#tailNCBIGDOCse15.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse16.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse16.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.6   </span> <a 
+ id="x24-770004.6"></a>Setting symbols to commute or not commute</h3>
+<!--l. 1316--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.6.1   </span> <a 
+ id="x24-780004.6.1"></a>SetNonCommutative[A, B, C, <span 
+class="cmmi-12">&#x2026;</span>]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">SNC, SetNC</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  SetNonCommutative[A,  B,  C,  <span 
+class="cmmi-12">&#x2026;</span>]  sets  all  the  symbols  <span 
+class="cmmi-12">A</span>,  <span 
+class="cmmi-12">B</span>,  <span 
+class="cmmi-12">C</span>,  <span 
+class="cmmi-12">&#x2026;</span> to  be
+      noncommutative. The lower case letters <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">&#x2026;</span> are assumed noncommutative by
+      Mathematica default as are functions of noncommutative variables. The functions <span 
+class="cmmi-12">tp</span>[]
+      and <span 
+class="cmmi-12">aj</span>[] are set noncommutative by NCAlgebra for any argument, commutative or
+      noncommutative. We may change this.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Symbols separated by commas
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx24-78001"></a>
+<!--l. 1328--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.6.2   </span> <a 
+ id="x24-790004.6.2"></a>CommuteEverything[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">CE</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: It changes NonCommutativeMultiply to Times in <span 
+class="cmmi-12">expr</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:   Very useful for getting ideas in the middle of a complicated
+      calcuation. If <span 
+class="cmmi-12">expr </span>has you baffled, type <span 
+class="cmmi-12">exprcom </span>= <span 
+class="cmmi-12">CE</span>[<span 
+class="cmmi-12">expr</span>]. <span 
+class="cmmi-12">exprcom </span>is commutative
+      and therefore is easy to analyze. Now <span 
+class="cmmi-12">expr </span>is uneffected, so you can get back to working
+      on it armed with new ideas. </dd></dl>
+<a 
+ id="dx24-79001"></a>
+<!--l. 1337--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.6.3   </span> <a 
+ id="x24-800004.6.3"></a>SetCommutative[a, b, c, <span 
+class="cmmi-12">&#x2026;</span>]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: SetCommutative[a, b, c, <span 
+class="cmmi-12">&#x2026;</span>] sets all the symbols <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">&#x2026;</span> to be commutative.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Symbols separated by commas
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx24-80001"></a>
+<!--l. 1359--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.6.4   </span> <a 
+ id="x24-810004.6.4"></a>SetCommutingOperators[b,c]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:       SetCommutingOperators       takes       exactly       two       parameters.
+      SetCommutingOperators[b, c] will implement the definitions which follow. They are in
+      pseudo-code so that the meaning will not be obscured b ** c becomes c ** b if LeftQ[b,
+      c]; and c ** b becomes b ** c if LeftQ[b, c]; ). See SetCommutingFunctions and LeftQ.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c </span>are symbols.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  <span 
+class="cmbx-12">NOTE: </span>The above implementation will NOT lead to infinite
+      loops.
+      <br class="newline">
+      <br class="newline">&#x00A0;<span 
+class="cmbx-12">WARNING: </span>If one says SetCommutingOperators[b, c] and then sets only LeftQ[c,b],
+      then neither of the above rules will be executed. Therefore, one must remember the
+      order of the two parameters in the statement. One obvious helpful habit would be to
+      use alphabetical order (i.e., say SetCommutingOperators[a,b] and not the reverse). </dd></dl>
+<a 
+ id="dx24-81001"></a>
+<!--l. 1366--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.6.5   </span> <a 
+ id="x24-820004.6.5"></a>LeftQ[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: See SetCommutingFunctions and SetCommutingOperators.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx24-82001"></a>
+
+<!--l. 1374--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.6.6   </span> <a 
+ id="x24-830004.6.6"></a>CommutativeQ[X]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">CQ</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">CommutativeQ</span>[<span 
+class="cmmi-12">X</span>]  is  True  if  <span 
+class="cmmi-12">X  </span>is  commutative,  and  False  if  <span 
+class="cmmi-12">X  </span>is
+      noncommutative.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">X </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: See the description of SetNonCommutative for the defaults. </dd></dl>
+<a 
+ id="dx24-83001"></a>
+<!--l. 1382--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.6.7   </span> <a 
+ id="x24-840004.6.7"></a>CommutativeAllQ[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: CommutativeAllQ[expr] is True if <span 
+class="cmmi-12">expr </span>does not have any non-commuting
+      sub-expressions, and False otherwise.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx24-84001"></a>
+
+   <!--l. 1384--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse17.html" >next</a>] [<a 
+href="NCBIGDOCse15.html" >prev</a>] [<a 
+href="NCBIGDOCse15.html#tailNCBIGDOCse15.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse16.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse16.html" >up</a>] </p></div>
+<!--l. 1384--><p class="indent">   <a 
+ id="tailNCBIGDOCse16.html"></a>   
+</body></html> 

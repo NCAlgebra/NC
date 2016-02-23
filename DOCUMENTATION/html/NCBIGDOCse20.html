@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.10 Setting Properties of an element in an algebra</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1892--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse21.html" >next</a>] [<a 
+href="NCBIGDOCse19.html" >prev</a>] [<a 
+href="NCBIGDOCse19.html#tailNCBIGDOCse19.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse20.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse20.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.10   </span> <a 
+ id="x28-1050004.10"></a>Setting Properties of an element in an algebra</h3>
+<!--l. 1904--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.1   </span> <a 
+ id="x28-1060004.10.1"></a>SetInv[a, b, c, <span 
+class="cmmi-12">&#x2026;</span>]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetInv</span>[<span 
+class="cmmi-12">a,b,c,</span><span 
+class="cmmi-12">&#x2026;</span>] sets all the symbols <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">&#x2026;</span> to be invertible (i.e. <span 
+class="cmmi-12">invQ</span>[<span 
+class="cmmi-12">a</span>],
+      <span 
+class="cmmi-12">invQ</span>[<span 
+class="cmmi-12">b</span>], <span 
+class="cmmi-12">invQ</span>[<span 
+class="cmmi-12">c</span>], <span 
+class="cmmi-12">&#x2026;</span> are set <span 
+class="cmmi-12">True</span>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Symbols separated by commands
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If one does not set <span 
+class="cmmi-12">x </span>to be invertible before the first use of <span 
+class="cmmi-12">invL</span>[<span 
+class="cmmi-12">x</span>]
+      or <span 
+class="cmmi-12">invR</span>[<span 
+class="cmmi-12">x</span>], then NCAlgebra may not make the substitution from <span 
+class="cmmi-12">invL</span>[<span 
+class="cmmi-12">x</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>to 1 or
+      from <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">invR</span>[<span 
+class="cmmi-12">x</span>] to 1 automatically. </dd></dl>
+<a 
+ id="dx28-106001"></a>
+<!--l. 1916--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.2   </span> <a 
+ id="x28-1070004.10.2"></a>SetSelfAdjoint[Symbols]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: SetSelfAdjoint[a, b, <span 
+class="cmmi-12">&#x2026;</span>] will set a, b, <span 
+class="cmmi-12">&#x2026;</span> to be self-adjoint. The rules tp[a] := a,
+      tp[b] :=b, <span 
+class="cmmi-12">&#x2026;</span> and aj[a] := a, aj[b] := b, <span 
+class="cmmi-12">&#x2026;</span> will be automatically applied. See SelfAdjointQ.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Symbols is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If one does not set <span 
+class="cmmi-12">x </span>to be self adjoint before the first use of
+      <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>], then NCAlgebra may not make the substitution from <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>] to <span 
+class="cmmi-12">x </span>automatically.
+      Similary for <span 
+class="cmmi-12">tp</span>. </dd></dl>
+<a 
+ id="dx28-107001"></a>
+<!--l. 1925--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.3   </span> <a 
+ id="x28-1080004.10.3"></a>SelfAdjointQ[aSymbol]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">SelfAdjointQ</span>[<span 
+class="cmmi-12">x</span>]  will  return  <span 
+class="cmmi-12">True  </span>if  <span 
+class="cmmi-12">SetSelfAdjoint</span>[<span 
+class="cmmi-12">x</span>]  was  executed
+      previously. See <span 
+class="cmmi-12">SetSelfAdjoint</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aSymbol </span>is a symbol
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx28-108001"></a>
+<!--l. 1937--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.4   </span> <a 
+ id="x28-1090004.10.4"></a>SetIsometry[Symbols]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetIsometry</span>[<span 
+class="cmmi-12">a,b,</span><span 
+class="cmmi-12">&#x2026;</span>] will set <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">&#x2026;</span> to be isometries. If set the rules tp[a] ** a
+      := Id, tp[b] ** b :=Id, <span 
+class="cmmi-12">&#x2026;</span> and aj[a] ** a := Id; aj[b] ** b := Id; <span 
+class="cmmi-12">&#x2026;</span> will be automatically
+      applied. See IsometryQ.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Symbols is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If one does not set <span 
+class="cmmi-12">x </span>to be an isometry before the first use of <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>],
+      then NCAlgebra may not make the substitution from <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>to 1 automatically.
+      Similarly for <span 
+class="cmmi-12">tp</span>. </dd></dl>
+<a 
+ id="dx28-109001"></a>
+<!--l. 1946--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.5   </span> <a 
+ id="x28-1100004.10.5"></a>IsometryQ[aSymbol]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">IsometryQ</span>[<span 
+class="cmmi-12">x</span>] will return <span 
+class="cmmi-12">True </span>if <span 
+class="cmmi-12">SetIsometry</span>[<span 
+class="cmmi-12">x</span>] was executed previously. See
+      <span 
+class="cmmi-12">SetIsometry</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aSymbol </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx28-110001"></a>
+<!--l. 1958--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.6   </span> <a 
+ id="x28-1110004.10.6"></a>SetCoIsometry[Symbols]</h4>
+
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetCoIsometry</span>[<span 
+class="cmmi-12">a,b,</span><span 
+class="cmmi-12">&#x2026;</span>] will set <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">&#x2026;</span> to be co-isometries. The rules a ** tp[a]
+      := Id, b ** tp[b] :=Id, <span 
+class="cmmi-12">&#x2026;</span> and a ** aj[a] := Id, b ** aj[b] := Id, <span 
+class="cmmi-12">&#x2026;</span> will be automatically
+      applied. See <span 
+class="cmmi-12">CoIsometryQ</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Symbols </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If one does not set <span 
+class="cmmi-12">x </span>to be a coisometry before the first use of <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>],
+      then NCAlgebra may not make the substitution from <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>] to 1 automatically. </dd></dl>
+<a 
+ id="dx28-111001"></a>
+<!--l. 1967--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.7   </span> <a 
+ id="x28-1120004.10.7"></a>CoIsometryQ[aSymbol]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">CoIsometryQ</span>[<span 
+class="cmmi-12">x</span>]  will  return  <span 
+class="cmmi-12">True  </span>if  <span 
+class="cmmi-12">SetCoIsometry</span>[<span 
+class="cmmi-12">x</span>]  was  executed
+      previously. See <span 
+class="cmmi-12">SetCoIsometry</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aSymbol </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx28-112001"></a>
+
+<!--l. 1978--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.8   </span> <a 
+ id="x28-1130004.10.8"></a>SetUnitary[Symbols]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetUnitary</span>[<span 
+class="cmmi-12">a,b,</span><span 
+class="cmmi-12">&#x2026;</span>] will set <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">&#x2026;</span> to be isometries and co-isometries. Also
+      effects on <span 
+class="cmmi-12">UnitaryQ</span>. See <span 
+class="cmmi-12">SetIsometry </span>and <span 
+class="cmmi-12">SetCoIsometry</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Symbols </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If one does not set <span 
+class="cmmi-12">x </span>to be a unitary before the first use of <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>],
+      then NCAlgebra may not make the substitution from <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>] to 1 or from <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">x</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>
+      to 1 automatically. </dd></dl>
+<a 
+ id="dx28-113001"></a>
+<!--l. 1989--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.9   </span> <a 
+ id="x28-1140004.10.9"></a>UnitaryQ[aSymbol]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">UnitaryQ</span>[<span 
+class="cmmi-12">x</span>]  will  return  <span 
+class="cmmi-12">True  </span>if  <span 
+class="cmmi-12">SetUnitary</span>[<span 
+class="cmmi-12">x</span>]  was  executed  previously.
+      Caution: If one executes <span 
+class="cmmi-12">SetIsometry</span>[<span 
+class="cmmi-12">x</span>]; <span 
+class="cmmi-12">SetCoIsometry</span>[<span 
+class="cmmi-12">x</span>]; then <span 
+class="cmmi-12">x </span>is unitary, but
+      <span 
+class="cmmi-12">UnitaryQ </span>remains uneffected. See <span 
+class="cmmi-12">SetUnitary</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aSymbol </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx28-114001"></a>
+
+<!--l. 2003--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.10   </span> <a 
+ id="x28-1150004.10.10"></a>SetProjection[Symbols]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">SetProjection</span>[<span 
+class="cmmi-12">a,b,</span><span 
+class="cmmi-12">&#x2026;</span>]  will  set  a,  b,  <span 
+class="cmmi-12">&#x2026;</span> to  be  projections.  The  rules  a  **  a
+      := a, b ** b :=b, <span 
+class="cmmi-12">&#x2026;</span> will be automatically applied. Caution: If one wants <span 
+class="cmmi-12">x </span>to be a
+      self-adjoint projection, then one must execute <span 
+class="cmmi-12">SetSelfAdjoint</span>[<span 
+class="cmmi-12">x</span>]; <span 
+class="cmmi-12">SetProjection</span>[<span 
+class="cmmi-12">x</span>].
+      See <span 
+class="cmmi-12">ProjectionQ</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Symbols </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If one does not set <span 
+class="cmmi-12">x </span>to be a projection before the first use of <span 
+class="cmmi-12">x</span>,
+      then NCAlgebra may not make the substitution from <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>to <span 
+class="cmmi-12">x</span>. </dd></dl>
+<a 
+ id="dx28-115001"></a>
+<!--l. 2013--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.11   </span> <a 
+ id="x28-1160004.10.11"></a>ProjectionQ[S]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">ProjectionQ</span>[<span 
+class="cmmi-12">x</span>] will return true if <span 
+class="cmmi-12">SetProjection</span>[<span 
+class="cmmi-12">x</span>] was executed previously.
+      See <span 
+class="cmmi-12">SetProjection</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">S </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx28-116001"></a>
+
+<!--l. 2025--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.12   </span> <a 
+ id="x28-1170004.10.12"></a>SetSignature[Symbols]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: When <span 
+class="cmmi-12">SetSignature</span>[<span 
+class="cmmi-12">a</span>] and <span 
+class="cmmi-12">SetSelfAdjoint</span>[<span 
+class="cmmi-12">a</span>] are executed, the rule a ** a
+      := -1 will be automatically applied. See <span 
+class="cmmi-12">SetSelfAdjoint </span>and <span 
+class="cmmi-12">SignatureQ</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Symbols </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If one does not set <span 
+class="cmmi-12">x </span>to be a signature matrix and self adjoing
+      before the first use of <span 
+class="cmmi-12">x</span>, then NCAlgebra may not make the substitution from <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>
+      to <span 
+class="cmsy-10x-x-120">-</span>1. </dd></dl>
+<a 
+ id="dx28-117001"></a>
+<!--l. 2034--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.10.13   </span> <a 
+ id="x28-1180004.10.13"></a>SignatureQ[Symbol]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SignatureQ</span>[<span 
+class="cmmi-12">x</span>] will return <span 
+class="cmmi-12">True </span>if <span 
+class="cmmi-12">SetSignature</span>[<span 
+class="cmmi-12">x</span>] was executed previously.
+      See <span 
+class="cmmi-12">SetSignature</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Symbol </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx28-118001"></a>
+
+   <!--l. 2036--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse21.html" >next</a>] [<a 
+href="NCBIGDOCse19.html" >prev</a>] [<a 
+href="NCBIGDOCse19.html#tailNCBIGDOCse19.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse20.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse20.html" >up</a>] </p></div>
+<!--l. 2036--><p class="indent">   <a 
+ id="tailNCBIGDOCse20.html"></a>   
+</body></html> 

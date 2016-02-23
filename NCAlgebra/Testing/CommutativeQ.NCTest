@@ -1,0 +1,99 @@
+(* History:  Nov 2015: CommutativeQ test (mauricio) *)
+
+$k = 0;
+
+(* Test SNC *)
+
+Clear[$zzzz,$yyyy];
+SNC[$zzzz];
+
+test[CommutativeQ,++$k] = !CommutativeQ[$zzzz]
+test[CommutativeQ,++$k] = CommutativeQ[$yyyy]
+
+Clear[$zzzz,$yyyy];
+
+test[CommutativeQ,++$k] = CommutativeQ[$zzzz]
+test[CommutativeQ,++$k] = CommutativeQ[$yyyy]
+
+SNC[$zzzz];
+
+test[CommutativeQ,++$k] = !CommutativeQ[$zzzz]
+test[CommutativeQ,++$k] = CommutativeQ[$yyyy]
+
+test[CommutativeQ,++$k] = !CommutativeQ[$zzzz[1]]
+test[CommutativeQ,++$k] = !CommutativeQ[$zzzz[$zzzz]]
+test[CommutativeQ,++$k] = !CommutativeQ[$zzzz[$yyyy]]
+
+test[CommutativeQ,++$k] = CommutativeQ[$yyyy[1]]
+test[CommutativeQ,++$k] = CommutativeQ[$yyyy[$yyyy]]
+test[CommutativeQ,++$k] = !CommutativeQ[$yyyy[$zzzz]]
+
+test[CommutativeQ,++$k] = CommutativeQ[$yyyy[1,$yyyy]]
+test[CommutativeQ,++$k] = !CommutativeQ[$yyyy[1,$zzzz]]
+
+Clear[$zzzz,$yyyy];
+
+(* Test rule *)
+
+Clear[$zzzz];
+SNC[$zzzz];
+
+pattern1=$zzzz_**b_->b**$zzzz;
+exp1=x**y+x**y**y;
+test[CommutativeQ,++$k] = (exp1/.pattern1)===y**x+x**y**y
+
+$zzzz=2;
+exp1=x**y+x**y**y;
+test[CommutativeQ,++$k] = (exp1/.pattern1)===2y+x**y**y
+
+exp2=y**x+x**y**y;
+test[CommutativeQ,++$k] = (exp2/.pattern1)===2x+x**y**y
+
+pattern2=_**b_->b;
+test[CommutativeQ,++$k] = (exp1/.pattern2)===y+x**y**y
+test[CommutativeQ,++$k] = (exp2/.pattern2)===x+x**y**y
+
+pattern3=__**b_->b;
+test[CommutativeQ,++$k] = (exp1/.pattern3)===2y
+test[CommutativeQ,++$k] = (exp2/.pattern3)===x+y
+
+pattern4=__**b_->b;
+test[CommutativeQ,++$k] = (exp1/.pattern4)===2y
+test[CommutativeQ,++$k] = (exp2/.pattern4)===x+y
+
+Clear[$zzzz];
+
+(* Test delayed rule *)
+
+Clear[$zzzz];
+SNC[$zzzz];
+
+pattern1=$zzzz_**b_:>b**$zzzz;
+exp1=x**y+x**y**y;
+test[CommutativeQ,++$k] = (exp1/.pattern1)===y**x+x**y**y
+
+$zzzz=2;
+exp1=x**y+x**y**y;
+test[CommutativeQ,++$k] = (exp1/.pattern1)===y**x+x**y**y
+
+exp2=y**x+x**y**y;
+test[CommutativeQ,++$k] = (exp2/.pattern1)===x**y+x**y**y
+
+pattern2=_**b_:>b;
+test[CommutativeQ,++$k] = (exp1/.pattern2)===y+x**y**y
+test[CommutativeQ,++$k] = (exp2/.pattern2)===x+x**y**y
+
+pattern3=__**b_:>b;
+test[CommutativeQ,++$k] = (exp1/.pattern3)===2y
+test[CommutativeQ,++$k] = (exp2/.pattern3)===x+y
+
+pattern4=__**b_:>b;
+test[CommutativeQ,++$k] = (exp1/.pattern4)===2y
+test[CommutativeQ,++$k] = (exp2/.pattern4)===x+y
+
+Clear[$zzzz];
+
+Print["Results from the file CommutativeQ.NCTest:" ];
+For[ j = 1, j <= $k, j++,
+    Print["Test #",j," was ", test[CommutativeQ,j]];
+];

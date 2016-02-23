@@ -1,0 +1,7 @@
+If you are on a Unix system, read InstallOnUnix.html
+or go to the document online at
+http://www.math.ucsd.edu/~ncalg/InstallOnUnix.html.
+
+If you are on a PC (Windows), read InstallOnPC.html
+or go to the document online at
+http://www.math.ucsd.edu/~ncalg/InstallOnPC.html.

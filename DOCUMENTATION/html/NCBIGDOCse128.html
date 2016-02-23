@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>40.1 Using an input file</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 236--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="#tailNCBIGDOCse128.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch40.html#NCBIGDOCse128.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">40.1   </span></span> <a 
+ id="x208-45300040.1"></a><span 
+class="cmr-10x-x-109">Using an input file</span></h3>
+<!--l. 239--><p class="noindent"><span 
+class="cmr-10x-x-109">Because Mathematica is interpretive, it is tempting to perform computations by starting Mathematica</span>
+<span 
+class="cmr-10x-x-109">and start typing. Often, however, we have found that it is often the case that it is helpful to</span>
+<span 
+class="cmr-10x-x-109">construct an auxilary file and then to load that file. This has the benefit of allowing the user to</span>
+<span 
+class="cmr-10x-x-109">modify the computation slightly and rerun it, as well as the additional benefit of recording the</span>
+<span 
+class="cmr-10x-x-109">computation.</span>
+<!--l. 248--><p class="indent">   <span 
+class="cmr-10x-x-109">A common input file may have the form</span>
+   <div  
+class="centerline">                                                 <span 
+class="cmr-10x-x-109">First version of the file</span>                                                 </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Get["NCGB.m"];
+&#x00A0;<br />start&#x00A0;=&#x00A0;{x**x-a,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[y]**y-1,y**Inv[y]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1-x)**Inv[1-x]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[1-x]**(1-x)-1
+&#x00A0;<br />};
+&#x00A0;<br />start&#x00A0;=&#x00A0;NCExpand[start];&#x00A0;&#x00A0;(*&#x00A0;NCExpand,&#x00A0;alias&#x00A0;NCE&#x00A0;is&#x00A0;explained&#x00A0;in&#x00A0;the&#x00A0;NCAlgebra&#x00A0;document.&#x00A0;*)
+&#x00A0;<br />Print["start:",start];
+</div>
+</td></tr></table>
+<!--l. 264--><p class="nopar">
+<!--l. 268--><p class="indent">   <span 
+class="cmr-10x-x-109">After the file is run, one can see whether or not the file executed correctly. It does not &#8212; we forgot the</span>
+<span 
+class="cmr-10x-x-109">SetNonCommutative command. The new file would look like:</span>
+   <div  
+class="centerline">                                                <span 
+class="cmr-10x-x-109">Second version of the file</span>                                                </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Get["NCGB.m"];
+&#x00A0;<br />SetNonCommutative[a,x,y,Inv[x],Inv[1-y]];
+&#x00A0;<br />start&#x00A0;=&#x00A0;{x**x-a,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[y]**y-1,y**Inv[y]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1-x)**Inv[1-x]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[1-x]**Inv[1-x]-1
+&#x00A0;<br />};
+&#x00A0;<br />start&#x00A0;=&#x00A0;NCExpand[start];
+&#x00A0;<br />Print["start:",start];
+</div>
+</td></tr></table>
+<!--l. 289--><p class="nopar">
+<!--l. 293--><p class="indent">   <span 
+class="cmr-10x-x-109">After restarting Mathematica and running this command, we find that </span><span 
+class="cmmi-10x-x-109">start </span><span 
+class="cmr-10x-x-109">is what we expect it to</span>
+<span 
+class="cmr-10x-x-109">be. We can then remove the </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">Print</span></span></span> <span 
+class="cmr-10x-x-109">statement and add more code.</span>
+
+   <!--l. 299--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse128.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch40.html#NCBIGDOCse128.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 299--><p class="indent">   <a 
+ id="tailNCBIGDOCse128.html"></a>  
+</body></html> 

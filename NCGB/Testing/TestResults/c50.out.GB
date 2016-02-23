@@ -1,0 +1,7 @@
+(*
+ * File produced by NCGBTEST on:
+ * Mon 30 Nov 2015 07:47:01
+ *)
+
+{-1 + a**ia, -1 + ia**a, -1 + b**ib, -1 + ib**b, -1 + c**ic, -1 + ic**c, 
+ -1 + d**id, -1 + id**d}

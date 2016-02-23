@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>18.3 Multigraded lex ordering : A variety of elimination orders</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 157--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse66.html" >next</a>] [<a 
+href="NCBIGDOCse64.html" >prev</a>] [<a 
+href="NCBIGDOCse64.html#tailNCBIGDOCse64.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse65.html">tail</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse65.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">18.3   </span> <a 
+ id="x111-25100018.3"></a>Multigraded lex ordering : A variety of elimination orders</h3>
+<!--l. 160--><p class="noindent">There are other useful monomial orders which one can use other than graded lex and lex. Another
+type of order is what we call multigraded lex and is a mixture of graded lex and lex order. This
+multigraded order is set using <span 
+class="cmti-12">SetMonomialOrder</span>, <span 
+class="cmti-12">SetKnowns </span>and <span 
+class="cmti-12">SetUnknowns </span>which
+are described in Section <a 
+href="NCBIGDOCse66.html#x113-25200018.4">18.4<!--tex4ht:ref: section:list:commands --></a>. As an example, suppose that we execute the following
+commands:
+<a 
+ id="dx111-251001"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SetMonomialOrder[{A,B,C},{a,b,c},{d,e,f}];
+</div>
+</td></tr></table>
+<!--l. 176--><p class="nopar">
+<!--l. 180--><p class="indent">   We use the notation
+   <center class="math-display" >
+<img 
+src="NCBIGDOC86x.png" alt="A  &lt; B  &lt; C &lt; &lt; a &lt;  b &lt; c &lt; &lt; d &lt; e &lt; f ,  " class="math-display" ></center> to
+denote this order.
+<!--l. 186--><p class="indent">   For an intuitive idea of why multigraded lex is helpful, we think of <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>as corresponding to
+variables in some engineering problem which represent quantities which are known and <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">e </span>and <span 
+class="cmmi-12">f</span>
+to be unknown<span class="footnote-mark"><a 
+href="NCBIGDOC112.html#fn1x107"><sup >1</sup></a></span><a 
+ id="x111-251002f1"></a>.
+The fact that <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">e </span>and <span 
+class="cmmi-12">f </span>are in the top level indicates that we are very interested in solving for <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">e</span>
+and <span 
+class="cmmi-12">f </span>in terms of <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B</span>, <span 
+class="cmmi-12">C</span>, <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c</span>, but are not willing to solve for <span 
+class="cmmi-12">b </span>in terms of expressions
+involving either <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">e </span>or <span 
+class="cmmi-12">f</span>.
+<!--l. 201--><p class="indent">   For example,
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">(1) <span 
+class="cmmi-12">d &gt; a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">A </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(2) <span 
+class="cmmi-12">d </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">A </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b &gt; a</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(3) <span 
+class="cmmi-12">e </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">d &gt; d </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">e</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(4) <span 
+class="cmmi-12">b </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">a &gt; a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(5) <span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b &gt; b </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">a</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(6) <span 
+class="cmmi-12">a &gt; A </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">B </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">A </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">B </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">A </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">B</span></dd></dl>
+<!--l. 216--><p class="indent">   This order induces an order on monomials in the following way. One does the following steps
+in determining whether a monomial <span 
+class="cmmi-12">m </span>is greater in the order than a monomial <span 
+class="cmmi-12">n </span>or
+not.
+
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">(1) First, compute the total degree of <span 
+class="cmmi-12">m </span>with respect to only the variables <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">e </span>and <span 
+class="cmmi-12">f</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(2) Second, compute the total degree of <span 
+class="cmmi-12">n </span>with respect to only the variables <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">e </span>and <span 
+class="cmmi-12">f</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(3) If the number from item (2) is smaller than the number from item (1), then <span 
+class="cmmi-12">m </span>is smaller
+      than <span 
+class="cmmi-12">n</span>. If the number from item (2) is bigger than the number from item (1), then <span 
+class="cmmi-12">m</span>
+      is bigger than <span 
+class="cmmi-12">n</span>. If the numbers from items (1) and (2) are equal, then proceed to the
+      next item.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(4) First, compute the total degree of <span 
+class="cmmi-12">m </span>with respect to only the variables <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(5) Second, compute the total degree of <span 
+class="cmmi-12">n </span>with respect to only the variables <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(6) If the number from item (5) is smaller than the number from item (4), then <span 
+class="cmmi-12">m </span>is smaller
+      than <span 
+class="cmmi-12">n</span>. If the number from item (5) is bigger than the number from item (4), then <span 
+class="cmmi-12">m</span>
+      is bigger than <span 
+class="cmmi-12">n</span>. If the numbers from items (4) and (5) are equal, then proceed to the
+      next item.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(7) First, compute the total degree of <span 
+class="cmmi-12">m </span>with respect to only the variables <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(8) Second, compute the total degree of <span 
+class="cmmi-12">n </span>with respect to only the variables <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(9) If the number from item (8) is smaller than the number from item (7), then <span 
+class="cmmi-12">m </span>is smaller
+      than <span 
+class="cmmi-12">n</span>. If the number from item (8) is bigger than the number from item (7), then <span 
+class="cmmi-12">m</span>
+      is bigger than <span 
+class="cmmi-12">n</span>. If the numbers from items (7) and (8) are equal, then proceed to the
+      next item.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(10) At this point, say that <span 
+class="cmmi-12">m </span>is smaller than <span 
+class="cmmi-12">n </span>if and only if <span 
+class="cmmi-12">m </span>is smaller than <span 
+class="cmmi-12">n </span>with
+      respect to the graded lex order <span 
+class="cmmi-12">A &lt; B &lt; C &lt; a &lt; b &lt; c &lt; d &lt; e &lt; f</span></dd></dl>
+<!--l. 258--><p class="indent">   For more information on multigraded lex orders, consult <span 
+class="cmbx-12">[HSStrat]</span>.
+
+   <!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse66.html" >next</a>] [<a 
+href="NCBIGDOCse64.html" >prev</a>] [<a 
+href="NCBIGDOCse64.html#tailNCBIGDOCse64.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse65.html" >front</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse65.html" >up</a>] </p></div>
+<!--l. 3--><p class="indent">   <a 
+ id="tailNCBIGDOCse65.html"></a>  
+</body></html> 

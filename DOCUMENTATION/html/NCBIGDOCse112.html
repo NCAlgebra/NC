@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>31.4 Less Valuable Change of Variables Commands</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 281--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse111.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse111.html#tailNCBIGDOCse111.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse112.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#NCBIGDOCse112.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.4   </span></span> <a 
+ id="x179-40200031.4"></a><span 
+class="cmr-10x-x-109">Less Valuable Change of Variables Commands</span></h3>
+<!--l. 283--><p class="noindent"><span 
+class="cmr-10x-x-109">These commands are used by the above commands. They would not be of use to the average</span>
+<span 
+class="cmr-10x-x-109">user.</span>
+<!--l. 298--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.4.1   </span></span> <a 
+ id="x179-40300031.4.1"></a><span 
+class="cmr-10x-x-109">NCXMultiplyByMonomials[ aVerySpecialList]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: </span><span 
+class="cmtt-10x-x-109">NCXMultiplyByMonomials[ aVerySpecialList] </span><span 
+class="cmr-10x-x-109">takes a list like the one returned</span>
+      <span 
+class="cmr-10x-x-109">by </span><span 
+class="cmtt-10x-x-109">NCXPossibleChangeOfVariables </span><span 
+class="cmr-10x-x-109">and returns the list appended (possibly) with new pairs</span>
+      <span 
+class="cmr-10x-x-109">which are multiplied through by certain monomials (prefixes and suffixes of the candidate</span>
+      <span 
+class="cmr-10x-x-109">for motivated unknown) on the left and/or right.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmtt-10x-x-109">aVerySpecialList </span><span 
+class="cmr-10x-x-109">is list of pairs of polynomials, so it looks like </span><span 
+class="cmsy-10x-x-109">{{</span><span 
+class="cmr-10x-x-109">poly1, poly2</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">,</span>
+      <span 
+class="cmr-10x-x-109">...,</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">poly3,poly4</span><span 
+class="cmsy-10x-x-109">}} </span><span 
+class="cmr-10x-x-109">where poly1,..., poly4 are polynomials.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: A new pair is gotten from an old pair by looking at the candidate for</span>
+      <span 
+class="cmr-10x-x-109">motivated unknown and then multiplying by prefixes and suffixes of the candidate. </span></dd></dl>
+<a 
+ id="dx179-403001"></a>
+<!--l. 314--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.4.2   </span></span> <a 
+ id="x179-40400031.4.2"></a><span 
+class="cmr-10x-x-109">NCXAllPossibleChangeOfVariables[ aListOfPolynomials]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description:   </span><span 
+class="cmtt-10x-x-109">NCXAllPossibleChangeOfVariables[ aListOfPolynomials]  </span><span 
+class="cmr-10x-x-109">takes   a   list   of</span>
+      <span 
+class="cmr-10x-x-109">polynomials  and  returns  a  list  of  pairs  </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">P,  C</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">where  P  is  a  polynomial  from</span>
+      <span 
+class="cmr-10x-x-109">aListOfPolynomials and C is on the left or right side of a product of knowns inside P after</span>
+      <span 
+class="cmr-10x-x-109">P has been collected (with </span><span 
+class="cmtt-10x-x-109">NCCollectOnVariables</span><span 
+class="cmr-10x-x-109">).</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: aListOfPolynomials is a list of polynomial expressions.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments  /  Limitations:  This  procedrue  uses  the  ambient  order,  so  it  must  be  set</span>
+      <span 
+class="cmr-10x-x-109">before  use.  This  procedure  returns  a  dumb  set  of  candidates  for  motivated  unknowns.</span>
+      <span 
+class="cmtt-10x-x-109">NCXPossibleChangeOfVariables </span><span 
+class="cmr-10x-x-109">uses it and returns a more intelligent list of candidates.</span>
+      <span 
+class="cmr-10x-x-109">Thus the average user would not find a need for this procedure. </span></dd></dl>
+<a 
+ id="dx179-404001"></a>
+
+   <!--l. 2--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse111.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse111.html#tailNCBIGDOCse111.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse112.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#NCBIGDOCse112.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 2--><p class="indent">   <a 
+ id="tailNCBIGDOCse112.html"></a>   
+</body></html> 

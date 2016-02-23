@@ -1,0 +1,35 @@
+(*
+   Two parameters. Each one is the result of the
+   Mathematica Date function.
+   ElapsedTime[date1,date2] subtracts the two,
+   and returns the elapsed time as a string in 
+   standard time format.
+   The function is only valid for elapsed
+   time less than 24 hours!
+*)
+ElapsedTime[time1_List,time2_List]:=
+Module[{seconds,minutes,hours,time,string},
+   time=time2-time1;
+   If[time[[6]]<0,
+      time[[6]]=time[[6]]+60;
+      time[[5]]=time[[5]]-1;
+     ];
+   If[time[[5]]<0,
+      time[[5]]=time[[5]]+60;
+      time[[4]]=time[[4]]-1;
+     ];
+   If[time[[4]]<0,
+      time[[4]]=time[[4]]+24;
+     ];
+   string="Elapsed Time -> "<>ToString[time[[4]]];
+   If[time[[5]]<10,
+     string=string<>":0"<>ToString[time[[5]]],
+     string=string<>":"<>ToString[time[[5]]]
+     ];
+   If[time[[6]]<10,
+     string=string<>":0"<>ToString[time[[6]]],
+     string=string<>":"<>ToString[time[[6]]]
+     ];
+   Return[string];
+];
+

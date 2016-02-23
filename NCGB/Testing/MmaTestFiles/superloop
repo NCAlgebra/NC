@@ -1,0 +1,8 @@
+superloop[n_?NumberQ,m_?NumberQ]:=
+Module[{j},
+   Do[
+   Get[StringJoin["test.",ToString[j]]];
+   Put[ans,StringJoin["test.",ToString[j],".answer"]];
+   Clear[ans];
+   ,{j,n,m}];
+];

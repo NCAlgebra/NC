@@ -1,0 +1,9 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:29
+ *)
+
+{-a - b - c + d, -a + a**a, -b + b**b, -c + c**c, -a**b - a**c + b**a + c**a, 
+ a**b - b**a - b**c + c**b, a**b/2 - b**a/2 - a**b**a - a**b**c + b**a**b + 
+  b**a**c, a**b/4 + b**a/4 - a**b**a - a**b**c - b**a**b/2 + a**b**a**b + 
+  b**a**b**c, a**b/4 - b**a/4 - a**b**a**b + b**a**b**a}

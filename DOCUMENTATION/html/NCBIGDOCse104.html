@@ -1,0 +1,600 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>30.2 Discussion of RemoveRedundent command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 223--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse105.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse103.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse103.html#tailNCBIGDOCse103.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse104.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse104.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">30.2   </span></span> <a 
+ id="x168-38200030.2"></a><span 
+class="cmr-10x-x-109">Discussion of RemoveRedundent command</span></h3>
+<!--l. 232--><p class="noindent"><span 
+class="cmti-10x-x-109">RemoveRedundent </span><span 
+class="cmr-10x-x-109">requires a history and a list of polynomials. </span><span 
+class="cmti-10x-x-109">NCMakeGB </span><span 
+class="cmr-10x-x-109">records part of</span>
+<span 
+class="cmr-10x-x-109">what it is doing during its computation and that can be used to determine some facts about</span>
+<span 
+class="cmr-10x-x-109">ideal membership. This history can be though of as a directed acyclic graph (abbreviated as</span>
+<span 
+class="cmr-10x-x-109">dag)</span><span class="footnote-mark"><a 
+href="NCBIGDOC169.html#fn1x123"><sup >1</sup></a></span><a 
+ id="x168-382001f1"></a><span 
+class="cmr-10x-x-109">.</span>
+<span 
+class="cmr-10x-x-109">The the list of polynomials is a subset </span><span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmr-10x-x-109">of all of the nodes and the output of </span><span 
+class="cmti-10x-x-109">RemoveRedundent </span><span 
+class="cmr-10x-x-109">is</span>
+<span 
+class="cmr-10x-x-109">another set </span><span 
+class="cmmi-10x-x-109">R </span><span 
+class="cmr-10x-x-109">of nodes </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmr-10x-x-109">in </span><span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmr-10x-x-109">. Let </span><span 
+class="cmsy-10x-x-109">&#x221A; </span><span 
+class="cmr-10x-x-109">denote a connected path which runs from </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmr-10x-x-109">backward in time</span>
+<span 
+class="cmr-10x-x-109">until it reaches a leaf. Now </span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-50.png" alt="P" class="10-109x-x-50" /> </span><span 
+class="cmr-10x-x-109">ends at </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmr-10x-x-109">in the set </span><span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmr-10x-x-109">and may as we go backwards along it in</span>
+<span 
+class="cmr-10x-x-109">time leave </span><span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmr-10x-x-109">then come back etc. Let </span><span 
+class="cmmi-10x-x-109">v</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-50.png" alt="P" class="10-109x-x-50" /></span><span 
+class="cmr-10x-x-109">) denote the earliest node of </span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-50.png" alt="P" class="10-109x-x-50" /> </span><span 
+class="cmr-10x-x-109">in </span><span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmr-10x-x-109">. It belongs to</span>
+<span 
+class="cmmi-10x-x-109">R</span><span 
+class="cmr-10x-x-109">. Indeed, </span><span 
+class="cmmi-10x-x-109">R </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">v</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-50.png" alt="P" class="10-109x-x-50" /></span><span 
+class="cmr-10x-x-109">) for all maximal connected forward flowing paths ending in </span><span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">. For</span>
+<span 
+class="cmr-10x-x-109">example, if some path </span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-50.png" alt="P" class="10-109x-x-50" /> </span><span 
+class="cmr-10x-x-109">ends in </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmr-10x-x-109">and the node immediately before </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmr-10x-x-109">is not in </span><span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmr-10x-x-109">, then </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmr-10x-x-109">is in</span>
+<span 
+class="cmmi-10x-x-109">R</span><span 
+class="cmr-10x-x-109">. Now we give more formal statements and about how the </span><span 
+class="cmti-10x-x-109">RemoveRedundent </span><span 
+class="cmr-10x-x-109">algorithm</span>
+<span 
+class="cmr-10x-x-109">works.</span>
+<!--l. 256--><p class="indent">   <span 
+class="cmr-10x-x-109">Let </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-32.png" alt="&#x2208;" class="10-109x-x-32" /> </span><span 
+class="cmmi-10x-x-109">K</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,x</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">]. Let </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">be a tree on the nodes </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,n</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">. We say that the tree represents the</span>
+<span 
+class="cmr-10x-x-109">development of </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-10x-x-109">if it is the case that for every </span><span 
+class="cmmi-10x-x-109">j </span><span 
+class="cmr-10x-x-109">= 1</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,n </span><span 
+class="cmr-10x-x-109">either</span>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(1) </span><span 
+class="cmmi-10x-x-109">j </span><span 
+class="cmr-10x-x-109">is a leaf of the tree OR</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(2) there exists a S-polynomial </span><span 
+class="cmmi-10x-x-109">s </span><span 
+class="cmr-10x-x-109">coming from </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">a</span></sub> <span 
+class="cmr-10x-x-109">and </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">b</span></sub> <span 
+class="cmr-10x-x-109">and</span> <span 
+class="cmmi-10x-x-109">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">k</span><sub ><span 
+class="cmmi-8">r</span></sub> <span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-32.png" alt="&#x2208;" class="10-109x-x-32" />{</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,n</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">such that</span>
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(a) </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">a,b,k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,k</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,k</span><sub ><span 
+class="cmmi-8">r</span></sub><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">is the set of children of </span><span 
+class="cmmi-10x-x-109">j </span><span 
+class="cmr-10x-x-109">in the tree </span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">, and</span>
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(b) there exist polynomials </span><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,q</span><sub ><span 
+class="cmmi-8">r</span></sub> <span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">s </span><span 
+class="cmsy-10x-x-109">&#x2192;</span><sup ><span 
+class="cmmi-8">p</span><sub ><span 
+class="cmmi-6">k</span><sub ><span 
+class="cmr-6">1</span></sub></sub></sup><span 
+class="cmmi-10x-x-109">q</span><sub >
+<span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192;</span><sup ><span 
+class="cmmi-8">p</span><sub ><span 
+class="cmmi-6">k</span><sub ><span 
+class="cmr-6">2</span></sub></sub></sup><img 
+src="NCBIGDOC119x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmsy-10x-x-109">&#x2192;</span><sup ><span 
+class="cmmi-8">p</span><sub ><span 
+class="cmmi-6">k</span><sub ><span 
+class="cmmi-6">r</span></sub></sub></sup><span 
+class="cmmi-10x-x-109">q</span><sub >
+<span 
+class="cmmi-8">k</span><sub ><span 
+class="cmmi-6">r</span></sub></sub> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">j</span></sub><span 
+class="cmr-10x-x-109">.</span></dd></dl>
+      <!--l. 274--><p class="noindent"><span 
+class="cmr-10x-x-109">OR</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(3) there exist </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,k</span><sub ><span 
+class="cmmi-8">r</span></sub><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">a,k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,k</span><sub ><span 
+class="cmmi-8">r</span></sub><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">are the children of </span><span 
+class="cmmi-10x-x-109">j </span><span 
+class="cmr-10x-x-109">and there exist</span>
+      <span 
+class="cmr-10x-x-109">polynomials  </span><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,q</span><sub ><span 
+class="cmmi-8">r</span></sub>  <span 
+class="cmr-10x-x-109">such  that  </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">a</span></sub>  <span 
+class="cmr-10x-x-109">reduces  to  </span><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmr-8">1</span></sub>  <span 
+class="cmr-10x-x-109">by  applying  the  rule  associated  to  the</span>
+      <span 
+class="cmr-10x-x-109">polynomial</span> <span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">1</span></sub></sub><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmr-8">1</span></sub>  <span 
+class="cmr-10x-x-109">reduces to </span><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmr-8">2</span></sub>  <span 
+class="cmr-10x-x-109">by applying the rule associated to the polynomial</span> <span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">2</span></sub></sub><span 
+class="cmr-10x-x-109">,</span>
+      <span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmr-10x-x-109">,  </span><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmmi-8">r</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub>  <span 
+class="cmr-10x-x-109">reduces  to  </span><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmmi-8">r</span></sub>  <span 
+class="cmr-10x-x-109">by  applying  the  rule  associated  to  the  polynomial</span>  <span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmmi-6">r</span></sub></sub>  <span 
+class="cmr-10x-x-109">such  that</span>
+      <span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">a</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192;</span><sub ><span 
+class="cmmi-8">p</span><sub ><span 
+class="cmmi-6">k</span><sub >
+<span 
+class="cmr-6">1</span></sub></sub></sub><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192;</span><sup ><span 
+class="cmmi-8">p</span><sub ><span 
+class="cmmi-6">k</span><sub ><span 
+class="cmr-6">2</span></sub></sub></sup><img 
+src="NCBIGDOC120x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmsy-10x-x-109">&#x2192;</span><sub >
+<span 
+class="cmmi-8">p</span><sub ><span 
+class="cmmi-6">k</span><sub ><span 
+class="cmmi-6">r</span></sub></sub></sub><span 
+class="cmmi-10x-x-109">q</span><sub ><span 
+class="cmmi-8">r</span></sub> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">j</span></sub><span 
+class="cmr-10x-x-109">.</span></dd></dl>
+
+<!--l. 293--><p class="indent">   <span 
+class="cmr-10x-x-109">Now suppose that </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">is a tree on </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,n</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">and it represents the development of </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">. If</span>
+<span 
+class="cmmi-10x-x-109">j </span><span 
+class="cmr-10x-x-109">is the root of the tree and </span><span 
+class="cmmi-10x-x-109">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,k</span><sub ><span 
+class="cmmi-8">r</span></sub> <span 
+class="cmr-10x-x-109">are the leafs of </span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">, then </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">j</span></sub> <span 
+class="cmr-10x-x-109">lies in the ideal generated</span>
+<span 
+class="cmr-10x-x-109">by </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">1</span></sub></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmmi-6">r</span></sub></sub><span 
+class="cmr-10x-x-109">. In fact, </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">a</span></sub> <span 
+class="cmr-10x-x-109">lies in the ideal generated by </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">1</span></sub></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmmi-6">r</span></sub></sub> <span 
+class="cmr-10x-x-109">for every </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">such that both</span>
+<span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmsy-10x-x-109">&#x2264; </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x2264; </span><span 
+class="cmmi-10x-x-109">n</span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 304--><p class="indent">   <span 
+class="cmr-10x-x-109">Now, if a tree </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">represents the development of </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-10x-x-109">and one chooses a subset </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,k</span><sub ><span 
+class="cmmi-8">r</span></sub><span 
+class="cmsy-10x-x-109">}<img 
+src="cmsy10-32.png" alt="&#x2208;" class="10-109x-x-32" />{</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,n</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">,</span>
+<span 
+class="cmr-10x-x-109">then one can consider the largest subgraph of </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">for which each node </span><span 
+class="cmmi-10x-x-109">k</span><sub ><span 
+class="cmmi-8">&#x2113;</span></sub> <span 
+class="cmr-10x-x-109">has no edge leading from it. Each</span>
+<span 
+class="cmr-10x-x-109">connected component of this subgraph will be a tree. Let </span><span 
+class="cmmi-10x-x-109">T</span><sub ><span 
+class="cmmi-8">o</span></sub> <span 
+class="cmr-10x-x-109">be such a connected component of </span><span 
+class="cmmi-10x-x-109">T</span>
+<span 
+class="cmr-10x-x-109">and </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">&#x2113;</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,&#x2113;</span><sub ><span 
+class="cmmi-8">w</span></sub><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">be the nodes of </span><span 
+class="cmmi-10x-x-109">T</span><sub ><span 
+class="cmmi-8">o</span></sub><span 
+class="cmr-10x-x-109">. It is clear that the tree </span><span 
+class="cmmi-10x-x-109">T</span><sub ><span 
+class="cmmi-8">o</span></sub> <span 
+class="cmr-10x-x-109">represents the development of</span>
+<span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmmi-8">&#x2113;</span><sub ><span 
+class="cmr-6">1</span></sub></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">&#x2113;</span><sub ><span 
+class="cmmi-6">w</span></sub></sub><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 313--><p class="indent">   <span 
+class="cmr-10x-x-109">This is the key to the function RemoveRedundent. This function takes a tree </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">which</span>
+<span 
+class="cmr-10x-x-109">represents the development of </span><span 
+class="cmmi-10x-x-109">p</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,p</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-10x-x-109">and a list of nodes </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">&#x2113;</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,&#x2113;</span><sub ><span 
+class="cmmi-8">w</span></sub><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">. The algorithm proceeds as</span>
+<span 
+class="cmr-10x-x-109">follows.</span>
+<!--l. 317--><p class="noindent"> <span 
+class="cmr-10x-x-109">Let </span><span 
+class="cmmi-10x-x-109">result </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">&#x2113;</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,&#x2113;</span><sub ><span 
+class="cmmi-8">w</span></sub><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">;</span>
+<!--l. 321--><p class="noindent"> <span 
+class="cmr-10x-x-109">Let </span><span 
+class="cmmi-10x-x-109">unchanged </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmr-10x-x-109">;</span>
+<!--l. 325--><p class="noindent"> <span 
+class="cmr-10x-x-109">while(unchanged)</span>
+<!--l. 329--><p class="noindent"><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;         unchanged = False;</span>
+<!--l. 333--><p class="noindent"><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;         temp = result;</span>
+<!--l. 337--><p class="noindent"><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;         while(</span><span 
+class="cmmi-10x-x-109">unchanged </span><span 
+class="cmr-10x-x-109">is False and </span><span 
+class="cmmi-10x-x-109">temp </span><span 
+class="cmr-10x-x-109">is not the empty set)</span>
+<!--l. 341--><p class="noindent"><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;                 Pick </span><span 
+class="cmmi-10x-x-109">&#x2113; </span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-32.png" alt="&#x2208;" class="10-109x-x-32" /> </span><span 
+class="cmmi-10x-x-109">temp</span><span 
+class="cmr-10x-x-109">;</span>
+<!--l. 345--><p class="noindent"><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;                 Let </span><span 
+class="cmmi-10x-x-109">temp </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">temp</span><span 
+class="cmsy-10x-x-109">\{</span><span 
+class="cmmi-10x-x-109">&#x2113;</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">;</span>
+<!--l. 349--><p class="noindent"><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;                 More here ? MARK whats this mean</span>
+<!--l. 353--><p class="noindent"><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;         end while</span>
+<!--l. 357--><p class="noindent"> <span 
+class="cmr-10x-x-109">end while</span>
+
+   <!--l. 365--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse105.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse103.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse103.html#tailNCBIGDOCse103.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse104.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse104.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 365--><p class="indent">   <a 
+ id="tailNCBIGDOCse104.html"></a>  
+</body></html> 

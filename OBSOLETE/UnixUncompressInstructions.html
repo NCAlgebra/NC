@@ -1,0 +1,47 @@
+
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.05 [en] (X11; I; sunOS 5.5.1 sun4u) [Netscape]">
+</HEAD>
+<title>Uncompressing a file on Unix</title>
+<BODY>
+<font size=+2>
+<h1>
+Uncompressing a file on Unix.
+</h1>
+
+Suppose that you want to uncompress a file in Unix. 
+Based on the suffix of the filename, pick of the following three
+sections and follow its directions
+
+<h2>TGZ:The file has the suffix <b>tgz</b></h2>
+
+If your file is called SomeFile.tgz,then type
+<blockquote>
+gunzip SomeFile.tgz | tar -zxvf
+</blockquote>
+
+<h2>TAR.GZ: The file has the suffix <b>.tar.gz</b></h2>
+
+If your file is called SomeFile.tar.gz,then type
+<blockquote>
+gunzip SomeFile.tar.gz | tar -zxvf
+</blockquote>
+
+<h2>TAR: The file has the suffix <b>.tar</b></h2>
+
+If your file is called SomeFile.tar,then type
+<blockquote>
+tar -xvf SomeFile.tar
+</blockquote>
+
+<h2>ZIP: The file has the suffix <b>.zip</b></h2>
+
+If your file is called SomeFile.zip,then type
+<blockquote>
+unzip SomeFile.zip
+</blockquote>
+
+</body>
+</html>

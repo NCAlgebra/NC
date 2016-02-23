@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>19.4 Output Options</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 363--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse72.html" >next</a>] [<a 
+href="NCBIGDOCse70.html" >prev</a>] [<a 
+href="NCBIGDOCse70.html#tailNCBIGDOCse70.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse71.html">tail</a>] [<a 
+href="NCBIGDOCch19.html#NCBIGDOCse71.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">19.4   </span> <a 
+ id="x119-27400019.4"></a>Output Options</h3>
+<!--l. 365--><p class="noindent">There are several options for NCProcess which determine the appearance of the output. These
+are actually options for the RegularOutput command which is called by NCProcess.
+Additional options for RegularOutput can be handed to RegularOutput with the NCProcess
+option AdditionalRegularOutputOptions <span 
+class="cmsy-10x-x-120">&#x2192; </span>aList, where aList is a list of rules. The
+following options can be used directly as if they were NCProcess options. These three
+options are independent of one another. All three files can be created with one NCProcess
+call.
+<!--l. 382--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">19.4.1   </span> <a 
+ id="x119-27500019.4.1"></a>Turning screen output off: PrintScreenOutput<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False </span></h4>
+<!--l. 384--><p class="noindent">In the notebook environment you will definitely want to turn a lot of NCProcess screen
+output off. Too much output drowns the notebook. Turning it off or on is done with the
+Option
+<a 
+ id="dx119-275001"></a>
+   <div  
+class="centerline">                                       <span 
+class="cmbx-12">PrintScreenOutput </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmbx-12">False</span>                                  </div>
+<div  
+class="centerline">                             <span 
+class="cmbx-12">PrintScreenOutput </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmbx-12">True</span>                             </div>
+<!--l. 395--><p class="noindent">The default is &#x00A0;&#x00A0;PrintScreenOutput <span 
+class="cmsy-10x-x-120">&#x2192; </span>False
+<!--l. 398--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">19.4.2   </span> <a 
+ id="x119-27600019.4.2"></a>TeX<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span></h4>
+<a 
+ id="dx119-276001"></a>
+<!--l. 403--><p class="noindent">This option gives spreadsheets a <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;appearance. The default is <span 
+class="cmmi-12">TeX </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>.
+<!--l. 406--><p class="indent">   There is a bug in the program to create spreadsheets. In the list of variables that have been
+solved for, the letter <span 
+class="cmmi-12">i </span>is sometimes replaced by a number. The <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;file is absolutely correct. The
+bug only appears in a list of variables, never in an equation.
+<!--l. 412--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">19.4.3   </span> <a 
+ id="x119-27700019.4.3"></a>ASCII<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span></h4>
+<a 
+ id="dx119-277001"></a>
+<!--l. 416--><p class="noindent">This option creates the spreadsheet in ascii text form. This is a lot more difficult to read, but it
+can be useful for copying and pasting relations from the spreadsheet into a Mathematica session.
+The default is <span 
+class="cmmi-12">ASCII </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>.
+
+<!--l. 421--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">19.4.4   </span> <a 
+ id="x119-27800019.4.4"></a> NCGBFastRegularOutput<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False </span></h4>
+<a 
+ id="dx119-278001"></a>
+<!--l. 425--><p class="noindent">If <span 
+class="cmmi-12">NCGBFastRegularOutput </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True </span>processing of equations done by NCProcess will be done by
+the C++ kernel rather than Mathematica. This is much faster, but not quite as pretty as with
+Mathematica. The default is <span 
+class="cmmi-12">NCGBFastRegularOutput </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>. We hope this option is
+functional as of August 1999.
+<!--l. 433--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">19.4.5   </span> <a 
+ id="x119-27900019.4.5"></a> NCShortFormulas<span 
+class="cmsy-10x-x-120">&#x2192;-</span>1</h4>
+<!--l. 434--><p class="noindent">See Section <a 
+href="NCBIGDOCse51.html#x86-21900015.3.4">15.3.4<!--tex4ht:ref: sec:NCShort --></a>. <a 
+ id="dx119-279001"></a>
+
+
+   <!--l. 443--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse72.html" >next</a>] [<a 
+href="NCBIGDOCse70.html" >prev</a>] [<a 
+href="NCBIGDOCse70.html#tailNCBIGDOCse70.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse71.html" >front</a>] [<a 
+href="NCBIGDOCch19.html#NCBIGDOCse71.html" >up</a>] </p></div>
+<!--l. 443--><p class="indent">   <a 
+ id="tailNCBIGDOCse71.html"></a>   
+</body></html> 

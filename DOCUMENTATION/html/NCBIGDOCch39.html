@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>39 Generating Universal Grobner Basis- MAY NOT WORK - untested in 1999</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 2--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch40.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch38.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch38.html#tailNCBIGDOCch38.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch39.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa9.html#NCBIGDOCch39.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;39</span></span><br><a 
+ id="x78-44000039"></a><span 
+class="cmr-10x-x-109">Generating Universal Gr</span><span 
+class="cmr-10x-x-109">öbner Basis- MAY NOT WORK - untested in 1999</span></h2>
+<!--l. 4--><p class="noindent"><span 
+class="cmr-10x-x-109">These commands are useful for generating a universal GB. If one starts with a GB with respect to any</span>
+<span 
+class="cmr-10x-x-109">order this can be used to impose equivalence classes on the set of all order s. The commands below</span>
+<span 
+class="cmr-10x-x-109">characterize these equivalence classes and select representatives from each of them. See [HSH]. this</span>
+<span 
+class="cmr-10x-x-109">selects</span>
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">39.0.2   </span></span> <a 
+ id="x78-44100039.0.2"></a><span 
+class="cmr-10x-x-109">AllOrders[aListofPolynomials, aListofIndeterminants]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description:  </span><span 
+class="cmbx-10x-x-109">AllOrders[aListOfPolynomials,  aListOfIndeterminants]  </span><span 
+class="cmr-10x-x-109">returns  A  list  of</span>
+      <span 
+class="cmr-10x-x-109">graded lexicographical orders of the given indeterminants. Each order, represented as a list,</span>
+      <span 
+class="cmr-10x-x-109">is a member of an equivalence class of orders that produce the same leading terms in each of</span>
+      <span 
+class="cmr-10x-x-109">the polynomials in the list.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments:  </span><span 
+class="cmmi-10x-x-109">aListOfPolynomials </span><span 
+class="cmr-10x-x-109">is  a  list  of  polynomials.  aListofIndeterminants  is  a  list  of</span>
+      <span 
+class="cmr-10x-x-109">noncommutative indeterminants.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx78-441001"></a>
+<!--l. 42--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">39.0.3   </span></span> <a 
+ id="x78-44200039.0.3"></a><span 
+class="cmr-10x-x-109">EquivalenceClasses[aListOfPolynomials] or EquivalenceClasses[aListOfPolynomials,</span>
+<span 
+class="cmr-10x-x-109">Simpler]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description:  </span><span 
+class="cmbx-10x-x-109">EquivalenceClasses[aListOfPolynomials]  </span><span 
+class="cmr-10x-x-109">returns  a  logical  expression  that</span>
+      <span 
+class="cmr-10x-x-109">represents the equivalence classes of orders that produce the same leading terms in each of</span>
+      <span 
+class="cmr-10x-x-109">the polynomials in the list. If Simpler is used and it is False, no additional processing is</span>
+      <span 
+class="cmr-10x-x-109">done. If Simpler is used and it is True, the expression will be simplified as much as possible.</span>
+      <span 
+class="cmr-10x-x-109">In this case, the EquivalenceClasses command will take longer than if there were no second</span>
+      <span 
+class="cmr-10x-x-109">argument.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmmi-10x-x-109">aListOfPolynomials </span><span 
+class="cmr-10x-x-109">is a list of polynomials. </span><span 
+class="cmmi-10x-x-109">Simpler </span><span 
+class="cmr-10x-x-109">is either True or False.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx78-442001"></a>
+
+<!--l. 57--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">39.0.4   </span></span> <a 
+ id="x78-44300039.0.4"></a><span 
+class="cmr-10x-x-109">UniversalBasis[aListOfPolynomials, NumberOfIterations]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: </span><span 
+class="cmbx-10x-x-109">UniversalBasis[aListOfPolynomials, NumberOfIterations] </span><span 
+class="cmr-10x-x-109">finds a universal</span>
+      <span 
+class="cmr-10x-x-109">Gr</span><span 
+class="cmr-10x-x-109">öbner  Basis  with  respect  to  the  set  of  all  graded  lexicographical  orders  on  the</span>
+      <span 
+class="cmr-10x-x-109">indeterminants in </span><span 
+class="cmmi-10x-x-109">aListOfPolynomials </span><span 
+class="cmr-10x-x-109">for the ideal generated by </span><span 
+class="cmmi-10x-x-109">aListOfPolynomials</span><span 
+class="cmr-10x-x-109">.</span>
+      <span 
+class="cmmi-10x-x-109">NumberOfIterations </span><span 
+class="cmr-10x-x-109">is passed as the second argument to NCMakeRules.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments:  </span><span 
+class="cmmi-10x-x-109">aListOfPolynomials </span><span 
+class="cmr-10x-x-109">is  a  list  of  polynomials.  </span><span 
+class="cmmi-10x-x-109">numberOfIterations </span><span 
+class="cmr-10x-x-109">is  a  positive</span>
+      <span 
+class="cmr-10x-x-109">integer.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx78-443001"></a>
+<!--l. 202--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">39.1   </span></span> <a 
+ id="x78-44400039.1"></a> <span 
+class="cmr-10x-x-109">Very Technical Commands</span></h3>
+<!--l. 210--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">39.1.1   </span></span> <a 
+ id="x78-44500039.1.1"></a><span 
+class="cmr-10x-x-109">GroebnerCutOffFlag[n</span><span 
+class="cmr-10x-x-109">_Integer]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: Turns the &#8220;cutting off&#8221; operations either on or off.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmr-10x-x-109">is an natural number.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx78-445001"></a>
+<!--l. 218--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">39.1.2   </span></span> <a 
+ id="x78-44600039.1.2"></a><span 
+class="cmr-10x-x-109">GroebnerCutOffMin[n</span><span 
+class="cmr-10x-x-109">_Integer]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: Sets the min for sum on polynomial degree cut offs.</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmr-10x-x-109">is an natural number.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx78-446001"></a>
+<!--l. 226--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">39.1.3   </span></span> <a 
+ id="x78-44700039.1.3"></a><span 
+class="cmr-10x-x-109">GroebnerCutOffSum[n</span><span 
+class="cmr-10x-x-109">_Integer]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: Sets the min for sum on polynomial degree cut offs.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmr-10x-x-109">is an natural number.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx78-447001"></a>
+
+   <!--l. 5--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch40.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch38.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch38.html#tailNCBIGDOCch38.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch39.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa9.html#NCBIGDOCch39.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 5--><p class="indent">   <a 
+ id="tailNCBIGDOCch39.html"></a>    
+</body></html> 

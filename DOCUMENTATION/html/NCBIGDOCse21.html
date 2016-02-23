@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.11 Setting Properties of functions on an algebra</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 2036--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse22.html" >next</a>] [<a 
+href="NCBIGDOCse20.html" >prev</a>] [<a 
+href="NCBIGDOCse20.html#tailNCBIGDOCse20.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse21.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse21.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.11   </span> <a 
+ id="x29-1190004.11"></a>Setting Properties of functions on an algebra</h3>
+<!--l. 2046--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.1   </span> <a 
+ id="x29-1200004.11.1"></a>SetSesquilinear[Functions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">SetSesq</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">SetSesquilinear</span>[<span 
+class="cmmi-12">a,b,c,</span><span 
+class="cmmi-12">&#x2026;</span>]  sets  <span 
+class="cmmi-12">a</span>,  <span 
+class="cmmi-12">b</span>,  <span 
+class="cmmi-12">c</span>,  <span 
+class="cmmi-12">&#x2026;</span> to  be  functions  of  two  variables
+      which are linear in the first variable and conjugate linear in the second variable. See
+      SetBilinear.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Functions </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-120001"></a>
+<!--l. 2055--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.2   </span> <a 
+ id="x29-1210004.11.2"></a>SesquilinearQ[aFunction]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">SesquilinearQ</span>[<span 
+class="cmmi-12">x</span>]  will  return  <span 
+class="cmmi-12">True  </span>if  <span 
+class="cmmi-12">SetSesquilinear</span>[<span 
+class="cmmi-12">x</span>]  was  executed
+      previously. See <span 
+class="cmmi-12">SetSesquilinear</span>.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aFunction </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-121001"></a>
+<!--l. 2065--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.3   </span> <a 
+ id="x29-1220004.11.3"></a>SetBilinear[Functions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetBilinear</span>[<span 
+class="cmmi-12">a,b,c,</span><span 
+class="cmmi-12">&#x2026;</span>] sets <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">&#x2026;</span> to be functions of two variables which is
+      linear in the first variable and linear in the second variable. See SetSesquilinear.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Functions is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-122001"></a>
+<!--l. 2074--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.4   </span> <a 
+ id="x29-1230004.11.4"></a>BilinearQ[aFunction]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">BilinearQ</span>[<span 
+class="cmmi-12">x</span>] will return True if <span 
+class="cmmi-12">SetBilinear</span>[<span 
+class="cmmi-12">x</span>] was executed previously. See
+      <span 
+class="cmmi-12">SetBilinear</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aFunction </span>is a symbol.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-123001"></a>
+<!--l. 2083--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.5   </span> <a 
+ id="x29-1240004.11.5"></a>SetLinear[Functions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetLinear</span>[<span 
+class="cmmi-12">b,c,d,</span><span 
+class="cmmi-12">&#x2026;</span>] sets <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">&#x2026;</span> to be functions of one variable which are
+      linear. See <span 
+class="cmmi-12">LinearQ</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Functions </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-124001"></a>
+<!--l. 2092--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.6   </span> <a 
+ id="x29-1250004.11.6"></a>LinearQ[aFunction]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">LinearQ</span>[<span 
+class="cmmi-12">x</span>] will return <span 
+class="cmmi-12">True </span>if <span 
+class="cmmi-12">SetLinear</span>[<span 
+class="cmmi-12">x</span>] was executed previously. See
+      <span 
+class="cmmi-12">SetLinear</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aFunction </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+
+<a 
+ id="dx29-125001"></a>
+<!--l. 2101--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.7   </span> <a 
+ id="x29-1260004.11.7"></a>SetConjugateLinear[Functions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetConjugateLinear</span>[<span 
+class="cmmi-12">b,c,d,</span><span 
+class="cmmi-12">&#x2026;</span>] sets <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">&#x2026;</span> to be functions of one variable
+      which are conjugate linear. See <span 
+class="cmmi-12">ConjugateLinearQ</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Functions </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-126001"></a>
+<!--l. 2110--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.8   </span> <a 
+ id="x29-1270004.11.8"></a>ConjugateLinearQ[aFunction]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">ConjugateLinearQ</span>[<span 
+class="cmmi-12">x</span>]  will  return  True  if  <span 
+class="cmmi-12">SetConjugateLinear</span>[<span 
+class="cmmi-12">x</span>]  was
+      executed previously. See <span 
+class="cmmi-12">SetConjugateLinear</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: aFunction is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-127001"></a>
+
+<!--l. 2120--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.9   </span> <a 
+ id="x29-1280004.11.9"></a>SetIdempotent[Functions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetIdempotent</span>[<span 
+class="cmmi-12">b,c,d,</span><span 
+class="cmmi-12">&#x2026;</span>] sets <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">d</span>, <span 
+class="cmmi-12">&#x2026;</span> to be functions of one variable such that,
+      for example, <span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">z</span>_]] := <span 
+class="cmmi-12">z</span>; Common examples are inverse, transpose and adjoint. See
+      IdempotentQ.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Functions </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-128001"></a>
+<!--l. 2129--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.10   </span> <a 
+ id="x29-1290004.11.10"></a>IdempotentQ[aFunction]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">IdempotentQ</span>[<span 
+class="cmmi-12">x</span>] will return <span 
+class="cmmi-12">True </span>if <span 
+class="cmmi-12">SetIdempotent</span>[<span 
+class="cmmi-12">x</span>] was executed previously
+      and False otherwise. See <span 
+class="cmmi-12">SetIdempotent</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aFunction </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-129001"></a>
+
+<!--l. 2148--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.11   </span> <a 
+ id="x29-1300004.11.11"></a>SetCommutingFunctions[ aFunction, anotherFunction]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:       SetCommutingFunctions       takes       exactly       two       parameters.
+      SetCommutingFunctions[b, c] will implement the definitions <span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">c</span>[<span 
+class="cmmi-12">z</span>___]]  :=  <span 
+class="cmmi-12">c</span>[<span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">z</span>]] /;
+      <span 
+class="cmmi-12">Not</span>[<span 
+class="cmmi-12">LeftQ</span>[<span 
+class="cmmi-12">b,c</span>]]; and <span 
+class="cmmi-12">c</span>[<span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">z</span>___]] := <span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">c</span>[<span 
+class="cmmi-12">z</span>]] /; LeftQ[b, c]; Common examples are the
+      adjoint commuting with the transpose. Note: The above implementation will NOT lead
+      to infinite loops. WARNING: If one says SetCommutingFunctions[b, c] and then sets
+      only LeftQ[c,b], then neither of the above rules will be executed. Therefore, one must
+      remember the order of the two parameters in the statement. One obvious helpful habit
+      would be to use alphabetical order (i.e. say SetCommutingFunctions[aj, tp] and not
+      the reverse). See <span 
+class="cmmi-12">CommutatingOperators </span>and <span 
+class="cmmi-12">LeftQ</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aFunction </span>and <span 
+class="cmmi-12">anotherFunction </span>are symbols.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-130001"></a>
+<!--l. 2164--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.11.12   </span> <a 
+ id="x29-1310004.11.12"></a>SetNonCommutativeMultiplyAntihomomorphism[ Functions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SetNonCommutativeMultiplyAntihomomorphism</span>[<span 
+class="cmmi-12">b,c,d,</span><span 
+class="cmmi-12">&#x2026;</span>] sets <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">d</span>, ... to
+      be functions of one variable such that, for example, <span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">anything</span>1<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">anything</span>2] becomes
+      <span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">anything</span>2] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>[<span 
+class="cmmi-12">anything</span>1]  if  <span 
+class="cmmi-12">ExpandQ</span>[<span 
+class="cmmi-12">b</span>]  is  True;  b[anything2]  **  b[anything1]
+      becomes b[anything1 ** anything2] if <span 
+class="cmmi-12">ExpandQ</span>[<span 
+class="cmmi-12">b</span>] is False; Common examples are
+      inverse, transpose and adjoint. NOTE: The synonym NCAntihomo is easier to type.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">Functions </span>is one or more symbols separated by commas.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx29-131001"></a>
+
+   <!--l. 2166--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse22.html" >next</a>] [<a 
+href="NCBIGDOCse20.html" >prev</a>] [<a 
+href="NCBIGDOCse20.html#tailNCBIGDOCse20.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse21.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse21.html" >up</a>] </p></div>
+<!--l. 2166--><p class="indent">   <a 
+ id="tailNCBIGDOCse21.html"></a>   
+</body></html> 

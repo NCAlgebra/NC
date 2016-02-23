@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>33.7 Informing TEX about notebook.sty</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 554--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse118.html#tailNCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse119.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch33.html#NCBIGDOCse119.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.7   </span></span> <a 
+ id="x189-41900033.7"></a><span 
+class="cmr-10x-x-109">Informing </span><span class="TEX"><span 
+class="cmr-10x-x-109">T</span><span 
+class="E"><span 
+class="cmr-10x-x-109">E</span></span><span 
+class="cmr-10x-x-109">X</span></span><span 
+class="cmr-10x-x-109">&#x00A0;about notebook.sty</span></h3>
+<!--l. 557--><p class="noindent"><span 
+class="cmr-10x-x-109">Read this only if you have trouble with Mma&#8217;s TeX conversion of notebooks. This has nothing to do with</span>
+<span 
+class="cmr-10x-x-109">NCAlgebra, we just include it as a convenience.</span>
+<!--l. 567--><p class="indent">   <span 
+class="cmr-10x-x-109">Most special NCAlgebra and most special NCGB </span><span class="TEX"><span 
+class="cmr-10x-x-109">T</span><span 
+class="E"><span 
+class="cmr-10x-x-109">E</span></span><span 
+class="cmr-10x-x-109">X</span></span><span 
+class="cmr-10x-x-109">&#x00A0;definitions we use are in the file</span>
+<span 
+class="cmr-10x-x-109">NCTeXForm.m. also TeXUtilities.m; see the section on TeX.</span>
+<!--l. 571--><p class="indent">   <span 
+class="cmr-10x-x-109">There is one place in the Mma&#8217;s TeX setting in which explicit facts about the operating system are</span>
+<span 
+class="cmr-10x-x-109">used. &#8220;Elusive&#8221; file notebook.sty must be in your TeX path. Here is how you find notebook.sty and get it</span>
+<span 
+class="cmr-10x-x-109">in your path.</span>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(1)  Type in math, then type $Path and determine where your system administrator installed your</span>
+      <span 
+class="cmr-10x-x-109">copy of mathematica. When I did this, I got the output as shown below and I determined</span>
+      <span 
+class="cmr-10x-x-109">that mathematica was installed in the directory /opt/mathematica</span></dd></dl>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+{euler&#x00A0;190&#x00A0;:/home/ncalg/NC/NCAlgebra}&#x00A0;math
+&#x00A0;<br />Mathematica&#x00A0;3.0&#x00A0;for&#x00A0;Solaris
+&#x00A0;<br />Copyright&#x00A0;1988-96&#x00A0;Wolfram&#x00A0;Research,&#x00A0;Inc.
+&#x00A0;<br />&#x00A0;--&#x00A0;Terminal&#x00A0;graphics&#x00A0;initialized&#x00A0;--
+&#x00A0;<br />
+&#x00A0;<br />In[1]:=&#x00A0;$Path
+&#x00A0;<br />
+&#x00A0;<br />Out[1]=&#x00A0;{/home/ncalg/.Mathematica/3.0/Kernel,&#x00A0;.,&#x00A0;/home/ncalg,
+&#x00A0;<br />
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/StandardPackages,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/StandardPackages/StartUp,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/Applications,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/ExtraPackages,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/SystemFiles/Graphics/Packages,&#x00A0;/home/osiris/ncalg/NCDir}
+</div>
+</td></tr></table>
+<!--l. 599--><p class="nopar">
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(2) Now move into that directory. I typed </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;/opt/mathematica</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(3) Now find the file notebook.sty. I did this by typing </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">find</span><span 
+class="cmtt-10x-x-109">&#x00A0;.</span><span 
+class="cmtt-10x-x-109">&#x00A0;-name</span><span 
+class="cmtt-10x-x-109">&#x00A0;"notebook.sty"</span><span 
+class="cmtt-10x-x-109">&#x00A0;-print</span></span></span>
+      <span 
+class="cmr-10x-x-109">When I did this I got </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">./SystemFiles/IncludeFiles/notebook.sty</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(4) Now I changed my .cshrc file to add an entry to my TEXINPUTS UNIX environment variable.</span>
+      <span 
+class="cmr-10x-x-109">My .cshrc file has the line</span>
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      &#x00A0;setenv&#x00A0;TEXINPUTS
+</div>
+      </td></tr></table>
+      <!--l. 612--><p class="nopar">
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      &#x00A0;".:/opt/mathematica/SystemFiles/IncludeFiles:/opt/tex/lib/texmf//"
+</div>
+      </td></tr></table>
+      <!--l. 615--><p class="nopar"> <span 
+class="cmr-10x-x-109">in it. You may want to discuss this with your system administrator.</span></dd></dl>
+<!--l. 622--><p class="noindent"><span 
+class="cmbx-10x-x-109">To run DoTeX if you really want to; UNIX only</span>
+<!--l. 626--><p class="indent">   <span 
+class="cmr-10x-x-109">DoTeX is old. We include this instruction for old users who cannot part with it. The file called</span>
+<span 
+class="cmr-10x-x-109">NCTeX.process should be transfered to the bin directory before you use our TeX setting command</span>
+<span 
+class="cmr-10x-x-109">DoTeX.</span>
+
+   <!--l. 2--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse118.html#tailNCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse119.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch33.html#NCBIGDOCse119.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 2--><p class="indent">   <a 
+ id="tailNCBIGDOCse119.html"></a>  
+</body></html> 

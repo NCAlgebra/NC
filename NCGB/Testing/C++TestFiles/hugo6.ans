@@ -1,0 +1,8 @@
+smallset = {w -> ia ** id ** z ** b ** d,
+d ** x -> 1 - z ** b, 
+x ** z -> -a ** c, 
+z ** y -> -d ** a};
+
+
+
+

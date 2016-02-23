@@ -1,0 +1,81 @@
+
+--------------------
+Format[...,TeXForm] 
+    
+Alias:  none    
+
+Description: In the file Extra.TeXForm, a number of commands         
+involving TeX output are written. In particular, outputs for the
+heads
+    
+              Conjugate   dyad  Of InnerProduct OutputAMatrix
+
+are formatted.
+
+Arguments:
+
+Comments/limitations: The heads listed above are defined in the Extra.*
+files. See descriptions for HereditaryMatrixC, HerreditaryMatrixE and 
+ForcedEquations also. 
+
+
+--------------------
+HereditaryMatrixC[polynomial,message,matrix,str]
+HereditaryMatrixC[polynomial,message,matrix]
+    
+Alias:  none    
+
+Description: This allows one to combine the commands for computing
+p(T) for p a polynomial in two variables and T an operator (see
+Hereditary),outputting a comment into the TeX file and then 
+outputting p(T) into the TeX file. (See Format[...,TeXForm])
+
+Arguments: str gives the name of the file which the TeX output
+goes to. If no str is given, then "file.tex" is used.
+
+Comments/limitations: The result of the call to HereditaryMatrixC
+is polynomial(matrix). the phrase " is " is adjoined to the 
+comment ouputted to the TeX file.
+
+--------------------
+HereditaryMatrixE[polynomial,expression,matrix,str]
+HereditaryMatrixE[polynomial,expression,matrix]
+    
+Alias:  none    
+
+Description: Similar to HereditaryMatrixC. This allows one to combine the 
+commands for computing p(T) for p a polynomial in two variables and 
+T an operator (see Hereditary),and an expression then = then  p(T)
+into the TeX file. (See Format[...,TeXForm])
+
+Arguments: str gives the name of the file which the TeX output
+goes to. If no str is given, then "file.tex" is used.
+
+Comments/limitations: The result of the call to HereditaryMatrixE
+is polynomial(matrix). The idea is to allow one to output something
+like $$\delta = {{1,2},{3,4}}$$.
+
+
+--------------------
+ForcedEquations[matrix1,matrix2] 
+ForcedEquations[matrix1,matrix2,text]
+    
+Alias:  none    
+
+Description: Allows one to output a list of expressions to a TeX file
+which represents an equality of matrices. For example,
+    ForcedEquations[{{1,2},{c,d}},{{a,d},{4,3}}]
+
+will put the following equations in the TeX file.
+
+       1 - a = 0;  2 - d = 0  ; c - 4 = 0; d - 3 = 0
+
+Arguments: 
+
+Comments/limitations: If string is included, then an explanatory 
+string is outputted before the list of expressions. If it is not
+included, then a blank line is inserted before the list of equations.
+The comment "The following are forced." is always outputted to the
+TeXFile. This is useful, because large matrices often run off the
+page in TeX.
+

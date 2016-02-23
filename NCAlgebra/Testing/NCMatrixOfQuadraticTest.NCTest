@@ -1,0 +1,132 @@
+(*  History:  08/02:  NCMatrixOfQuadratic Tests (tony s.) *)
+
+<< NCConvexity.m;
+
+Print[ "Running NCMatrixOfQuadratic Test." ];
+
+SNC[x,y,h,k];
+(* Nov 2015 Mauricio : CommutativeQ pattern issue BEGIN *)
+Clear[P]
+(* Nov 2015 Mauricio : CommutativeQ pattern issue END *)
+SetCommutative[A,B,F,G,J,L,P,Q,R];
+
+
+(********************************)
+Print[ "Doing test 1,2" ];
+p = x**x**x; 
+hes = NCHessian[ NCExpand[p], {x, h} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,1] = expr1 === 0;
+test[NCMat,2] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y) === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 3,4" ];
+p = x**x**x**x; 
+hes = NCHessian[ NCExpand[p], {x, h} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,3] = expr1 === 0;
+test[NCMat,4] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+ 
+
+(********************************)
+Print[ "Doing test 5,6" ];
+p = A*x**x**x**x+B*x**x**x+F*x**x+G*x+J; 
+hes = NCHessian[ NCExpand[p], {x, h} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,5] = expr1 === 0;
+test[NCMat,6] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y) === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 7,8" ];
+p = (A + B*x) ** inv[F + G*x] + tp[ (A + B*x) ** inv[F + G*x] ];
+hes = NCHessian[ NCExpand[p], {x, h} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,7] = expr1 === 0;
+test[NCMat,8] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 9,10" ];
+p = (A + B*x + J*x**x) ** inv[F + G*x] + tp[ (A + B*x+J*x**x) ** inv[F + G*x] ];
+hes = NCHessian[ NCExpand[p], {x, h} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,9] = expr1 === 0;
+test[NCMat,10] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 11,12" ];
+p = A+B*x+C*y+D*x**y+D*y**x+x**y**x**y+y**x**y**x+inv[J+F*x+G*y];
+hes = NCHessian[ NCExpand[p], {x, h}, {y,k} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,11] = expr1 === 0;
+test[NCMat,12] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 13,14" ];
+p =  NCExpand[(A/(B**F))**x**y**x**y+2*A**y**y**y+23*F*y**x**y+tp[(A/(B*F))*x**y**x**y+2*A*y**y**y+23*F*y**x**y]];       
+
+hes = NCHessian[ NCExpand[p], {x, h}, {y,k} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,13] = expr1 === 0;
+test[NCMat,14] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 15,16" ];
+p = A*x**x + B*y**y + F*x**x**x + G*y**y**y + H*x**y**x**y + H*y**x**y**x; 
+
+hes = NCHessian[ NCExpand[p], {x, h},{y,k} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,15] = expr1 === 0;
+test[NCMat,16] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 17,18" ];
+p = x**x**x;
+
+hes = NCHessian[ NCExpand[p], {x, h} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,17] = expr1 === 0;
+test[NCMat,18] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+(********************************)
+Print[ "Doing test 19,20" ];
+p = A*x**x**x + y**y**x + x**y**y;
+
+hes = NCHessian[ NCExpand[p], {x, h},{y,k} ];
+{l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+test[NCMat,19] = expr1 === 0;
+test[NCMat,20] = (tpMat[m] - m //. tp[x] -> x //. tp[y] -> y)  === NCZeroMatrix[ Dimensions[m][[1]]];
+
+
+
+Print["Results from the file NCMatrixOfQuadraticTest.NCTest:" ];
+For[ j = 1, j <= 20, j++,
+    Print["Test #",j," was ", test[NCMat,j]];
+];

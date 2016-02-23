@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>44  What SYStems Does </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 208--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch45.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch43.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch43.html#tailNCBIGDOCch43.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch44.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch44.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;44</span></span><br><a 
+ id="x85-45700044"></a> <span 
+class="cmr-10x-x-109">What SYStems Does </span></h2>
+<!--l. 211--><p class="noindent"><span 
+class="cmr-10x-x-109">The tools in the SYSTEMS package are designed to assist in studying various systems using the following</span>
+<span 
+class="cmr-10x-x-109">commonplace idea (see [BHW] for more detail):</span>
+<!--l. 215--><p class="indent">   <span 
+class="cmr-10x-x-109">Define a finite-gain dissipative system to be a system for which</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC124x.png" alt="&#x222B;              &#x222B;
+  t1     2         t1    2
+ t0  &#x2223;out&#x2223; dt &#x2264; K  t0 &#x2223;W &#x2223; dt  " class="math-display" ></center>
+<span 
+class="cmr-10x-x-109">where </span><span 
+class="cmmi-10x-x-109">K </span><span 
+class="cmr-10x-x-109">is a constant, and </span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">t</span><span 
+class="cmr-10x-x-109">0) = 0. (See Figure 1.) If </span><span 
+class="cmmi-10x-x-109">K </span><span 
+class="cmr-10x-x-109">= 1 the system will be called dissipative. In</span>
+<span 
+class="cmr-10x-x-109">circuit theory these would be called passive. This agrees with the notion of dissipative in [W],[HM]</span>
+<span 
+class="cmr-10x-x-109">with respect to the supply rate </span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span 
+class="cmmi-10x-x-109">W</span><span 
+class="cmsy-10x-x-109">&#x2223;</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-109">-&#x2223;</span><span 
+class="cmmi-10x-x-109">out</span><span 
+class="cmsy-10x-x-109">&#x2223;</span><sup ><span 
+class="cmr-8">2</span></sup><span 
+class="cmr-10x-x-109">. Our notation here is like that one puts in the</span>
+<span 
+class="cmr-10x-x-109">computer.</span>
+<!--l. 225--><p class="indent">   <span 
+class="cmr-10x-x-109">Define a storage or energy function on the state space to be a nonnegative function e</span>
+<span 
+class="cmr-10x-x-109">satisfying</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC125x.png" alt="&#x222B; t1
+    (&#x2223;out&#x2223;2 - &#x2223;W &#x2223;2)dt &#x2264; e(x(t0)) - e(x(t1))
+ t0  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">and</span>
+<span 
+class="cmmi-10x-x-109">e</span><span 
+class="cmr-10x-x-109">(0) = 0. Hill-Moylan ([HM]) showed that a system is dissipative iff an energy (storage) function (possibly</span>
+<span 
+class="cmr-10x-x-109">extended real valued) exists. Under controllability assumptions, there exists an energy function with finite</span>
+<span 
+class="cmr-10x-x-109">values.</span>
+<!--l. 233--><p class="indent">   <span 
+class="cmr-10x-x-109">We find it convenient to say that a system of the above form is e-dissipative provided that the energy</span>
+<span 
+class="cmr-10x-x-109">Hamiltonian H defined by</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC126x.png" alt="        T        T                        T  T
+H =  out out - W   W + (p F[x,W ]+ F [x, W ] p )&#x2215;2  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">is</span>
+<span 
+class="cmr-10x-x-109">nonpositive where </span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmsy-10x-x-109">&#x2207;</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">e</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">)). That is, 0 </span><span 
+class="cmsy-10x-x-109">&#x2265; </span><span 
+class="cmmi-10x-x-109">H </span><span 
+class="cmr-10x-x-109">for all </span><span 
+class="cmmi-10x-x-109">W </span><span 
+class="cmr-10x-x-109">and all </span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">in the set of states reachable from 0 by</span>
+<span 
+class="cmr-10x-x-109">the system.</span>
+   <div class="newtheorem">
+
+<!--l. 241--><p class="noindent"><span class="head">
+<span 
+class="cmbx-10x-x-109">Theorem</span><span 
+class="cmbx-10x-x-109">&#x00A0;44.1</span> </span><span 
+class="cmti-10x-x-109">(see  [W],[HM])  Let  e  be  a  given  differentiable  function.  Then  a  system  is</span>
+<span 
+class="cmti-10x-x-109">e-dissipative if and only if e is a storage function for the system. In this case, the system is</span>
+<span 
+class="cmti-10x-x-109">dissipative.</span>
+   </div>
+<!--l. 247--><p class="indent">   <span 
+class="cmr-10x-x-109">Using this background, we may study dissipativeness of systems by examining the non-positiveness of</span>
+<span 
+class="cmr-10x-x-109">Hamiltonians. Replacing the dual variables </span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmr-10x-x-109">by</span>
+<!--l. 251--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC127x.png" alt="p = &#x2207;x e  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">This</span>
+<span 
+class="cmr-10x-x-109">substitution converts </span><span 
+class="cmmi-10x-x-109">H </span><span 
+class="cmr-10x-x-109">to</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC128x.png" alt="sHW  =  outT out - W T W + (&#x2207;x e F[x,W ]+ F [x,W ]T &#x2207;Tx e)&#x2215;2
+" class="math-display" ></center>
+<!--l. 256--><p class="indent">   <span 
+class="cmr-10x-x-109">Often one finds that</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC129x.png" alt="sHW  o := max sHW  (W, x)
+           W  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">(the</span>
+<span 
+class="cmr-10x-x-109">Hamiltonian in state space variables which has been optimized in </span><span 
+class="cmmi-10x-x-109">W</span><span 
+class="cmr-10x-x-109">) is well behaved and is the first max</span>
+<span 
+class="cmr-10x-x-109">taken in many approaches to solving the problem of checking if </span><span 
+class="cmmi-10x-x-109">sHW </span><span 
+class="cmsy-10x-x-109">&#x2264; </span><span 
+class="cmr-10x-x-109">0 for all </span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">. </span><span 
+class="cmmi-10x-x-109">sHWo </span><span 
+class="cmr-10x-x-109">can be</span>
+<span 
+class="cmr-10x-x-109">computed concretely for systems (see e.g. files SYSDefIA.m and SYSDefWIA.m) by taking the gradient of</span>
+<span 
+class="cmr-10x-x-109">sHW in W and setting it to 0 to find the critical point CritW. Substitute this back into sHW to get</span>
+<span 
+class="cmr-10x-x-109">sHWo. In our language CritW can be computed by</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruCritW=Crit[H,W];&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(Calculate&#x00A0;critical&#x00A0;value&#x00A0;for&#x00A0;H&#x00A0;w.r.t.&#x00A0;W)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;HWo=Sub[H,ruCritW];&#x00A0;&#x00A0;&#x00A0;&#x00A0;(Substitute&#x00A0;critical&#x00A0;W&#x00A0;back&#x00A0;in&#x00A0;H)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sHWo=Sub[HWo,ruxz];&#x00A0;&#x00A0;&#x00A0;&#x00A0;(Convert&#x00A0;to&#x00A0;state-space&#x00A0;coordinates)
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 273--><p class="nopar"> <span 
+class="cmr-10x-x-109">since p is independent of W. Some examples are given later to illustrate.</span>
+<!--l. 277--><p class="indent">   <span 
+class="cmr-10x-x-109">What we have done so far is explain the very simplest case. Whenever one has a Hamiltonian which is</span>
+<span 
+class="cmr-10x-x-109">quadratic in a variable our symbol manipulator optimizes the variable automatically. In </span><span 
+class="cmmi-10x-x-109">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> <span 
+class="cmr-10x-x-109">control one</span>
+<span 
+class="cmr-10x-x-109">gets Hamiltonians which are very complicated expressions in many variables (e.g. compensator</span>
+<span 
+class="cmr-10x-x-109">parameters). One must take many maxima and minima in analysing these problems and we have found</span>
+<span 
+class="cmr-10x-x-109">SYStems very effective at such computations.</span>
+<!--l. 285--><p class="indent">   <span 
+class="cmr-10x-x-109">Game theory is another area which produces Hamiltonians and calls for such computations.</span>
+<!--l. 288--><p class="indent">   <span 
+class="cmr-10x-x-109">Rather than try to list complicated classifications of Hamiltonian types that this addresses we proceed</span>
+<span 
+class="cmr-10x-x-109">by presenting some examples. One is the classical bounded real lemma while the other derives the famous</span>
+<span 
+class="cmr-10x-x-109">DGKF two Riccati equation formulas for nonlinear systems (which are affine linear in the input</span>
+<span 
+class="cmr-10x-x-109">variables).</span>
+<!--l. 294--><p class="indent">   <span 
+class="cmr-10x-x-109">Also there is substantial systems capability in a completely different directions. NCAlgebra contains</span>
+<span 
+class="cmr-10x-x-109">commands for manipulating block matricies. Since such computations are the substance of many results in</span>
+<span 
+class="cmr-10x-x-109">systems theory it is already easy to do computations in these areas with NCAlgbra. A few formulas for 2</span>
+<span 
+class="cmsy-10x-x-109">&#x00D7; </span><span 
+class="cmr-10x-x-109">2 block matricies are stored: Schur complements, block LU decomposition, inverses, and Chain to</span>
+<span 
+class="cmr-10x-x-109">scattering formalism conversions.</span>
+<!--l. 305--><p class="indent">
+
+
+   <!--l. 306--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch45.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch43.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch43.html#tailNCBIGDOCch43.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch44.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch44.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 306--><p class="indent">   <a 
+ id="tailNCBIGDOCch44.html"></a>  
+</body></html> 

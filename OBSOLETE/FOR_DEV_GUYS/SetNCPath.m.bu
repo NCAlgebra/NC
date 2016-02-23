@@ -1,0 +1,94 @@
+Clear[NCSearchFile]
+
+NCSearchFile[filename_, path_:$Path, n_:1] := 
+Module[{file, dir,result},
+  Print["[ Looking for '", filename, "' in '", path, "'...]"];
+  file = FileNames[filename, path, n];
+  If[file === {}
+    , result = {};
+    , file = file[[1]];
+      result = {file,DirectoryName[file]};
+  ];
+  Return[result];
+];
+
+Clear[NCFixFileName]
+NCFixFileName[s_String] := StringReplace[s, "\\" -> "\\\\"];
+
+Print["\n* * * \"Enable Use\" of NC Program * * *\n"];
+
+$NC$hint = 
+    InputString[
+      "Welcome to Enable Use of the NC program.\n" <> 
+  "If you know the path where NC directory is located, please type it now.\n" \
+<> "Or hit <ENTER> to use '" <> $InitialDirectory <> "':"];
+
+Print[""];
+
+If[$NC$hint === "", $NC$hint = $InitialDirectory];
+
+(*Try user's guess first*)
+$NC$file=NCSearchFile[ToFileName["NC", "NC_VERSION"], $NC$hint];
+  
+$NC$StandardDirectories = {$HomeDirectory,$InitialDirectory};
+
+If[$NC$file==={},
+  If[$NC$hint=!=$InitialDirectory
+    , Print["\nUnfortunately, you guessed incorrectly."];
+      Print["We will search the directories ",$NC$StandardDirectories];
+  ];
+  $NC$i = 1;
+  While[And[$NC$file==={},$NC$i<=Length[$NC$StandardDirectories]],
+     $NC$file=NCSearchFile[ToFileName["NC", "NC_VERSION"],
+                           $NC$StandardDirectories[[$NC$i]]];
+      ++$NC$i;
+  ];
+];
+  
+If[$NC$file==={}
+  , (*Here we can put anything Mathematica understand or simply $Path*)
+    If[$NC$hint=!=$InitialDirectory
+      , Print["\nUnfortunately, you guessed incorrectly."];
+    ];
+    Print["We will search some standard directories."];
+    Print["This may take time. Have a coffee!"];
+    Print["\n> Please wait..."];
+    $NC$NCSearchPath = {$HomeDirectory, $InstallationDirectory};
+    (*Do the really painfull search*)
+    $NC$file = NCSearchFile["NC_VERSION", $NC$NCSearchPath, Infinity];
+]
+
+If[$NC$file =!= {}
+  , Print["[ FOUND IN '", $NC$file[[2]], "']"];
+    (* Open init.m file *)
+    $NC$initfile = 
+      ToFileName[$PreferencesDirectory, ToFileName["Kernel", "init.m"]];
+    Print["[ Looking for user's init.m file.]"];
+    $NC$info = FileInformation[$NC$initfile];
+    If[$NC$info === {}
+      , Print["[ User does not have an init.m file]"];
+        Print["[ Creating '", $NC$initfile, "']"];
+        $NC$stream = OpenWrite[$NC$initfile]
+      , Print["[ User already has an init file]"];
+        Print["[ Appending to '", $NC$initfile, "']"];
+        $NC$stream = OpenAppend[$NC$initfile]
+    ];
+    $NC$file = NCFixFileName[DirectoryName[$NC$file[[2]]]];
+    (* Add to path *)
+    Print["[ Adding '", $NC$file, "' to $Path]"];
+    WriteString[$NC$stream, "\n(* NCINSTALL - BEGIN *)\n"];
+    WriteString[$NC$stream, "AppendTo[$Path,\"", $NC$file, "\"];\n"];
+    WriteString[$NC$stream, "(* NCINSTALL - END *)\n\n"];
+    
+    (*Close init.m file*)
+    Print["[ Closing init.m file]"];
+    Close[$NC$stream];
+    
+    Print["[ SUCCESS!]"];
+    Print[""];
+    Print["On your next Mathematica session you will be able to"];
+    Print["load NCAlgebra by typing '<< NC`'."];
+  , Print["[ FAILED!]"];
+    Print[""];
+    Print["COULD NOT FIND NC DIRECTORY!"];
+];

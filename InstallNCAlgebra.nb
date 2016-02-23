@@ -1,0 +1,671 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     27258,        662]
+NotebookOptionsPosition[     26296,        626]
+NotebookOutlinePosition[     26883,        648]
+CellTagsIndexPosition[     26840,        645]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NC Installation", "Title"],
+
+Cell["\<\
+This notebook modifies your Mathematica initialization file by adding \
+instructions to set NCAlgebra in your Mathematica path.\
+\>", "Text",
+ FontSize->16],
+
+Cell[TextData[{
+ "Please go to menu ",
+ StyleBox["Evaluation",
+  FontWeight->"Bold"],
+ ", then click ",
+ StyleBox["Evaluate Notebook",
+  FontWeight->"Bold"],
+ " to evaluate all cells in this notebook"
+}], "Text",
+ CellChangeTimes->{{3.517487280873927*^9, 3.517487281543603*^9}},
+ FontSize->16],
+
+Cell["\<\
+Beware that some cells in this notebook are hidden, so you must do the above \
+step instead of simply executing the following command.\
+\>", "Text",
+ FontSize->16],
+
+Cell["You may be asked where you unzipped your file.", "Text",
+ FontSize->16],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "$NC$SearchFileMany", "]"}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"--", 
+      RowBox[{"--", " ", "\[IndentingNewLine]", "$NC$SearchFiles"}]}], " ", 
+     "returns", " ", "a", " ", "list", " ", "of", " ", 
+     RowBox[{"pairs", ".", " ", "Each"}], " ", "pair", " ", "is", " ", "a", 
+     " ", "filename"}], ",", " ", 
+    RowBox[{"directory", " ", 
+     RowBox[{"name", ".", "\[IndentingNewLine]", 
+      RowBox[{"--", "-"}]}]}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"$NC$SearchFileMany", "[", 
+    RowBox[{"filename_", ",", 
+     RowBox[{"path_:", "$Path"}], ",", 
+     RowBox[{"n_:", "1"}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"L", ",", "dir", ",", "result"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{
+       "\"\<[ Looking for '\>\"", ",", "filename", ",", "\"\<' in '\>\"", ",",
+         "path", ",", "\"\<'...]\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"L", "=", 
+       RowBox[{"FileNames", "[", 
+        RowBox[{"filename", ",", "path", ",", "n"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"L", " ", "=", " ", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"#", ",", 
+            RowBox[{"DirectoryName", "[", "#", "]"}]}], "}"}], "&"}], ",", 
+         "L"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "L", "]"}], ";"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "$NC$SearchFileOne", "]"}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"--", 
+      RowBox[{"--", " ", "\[IndentingNewLine]", "$NC$SearchFileOne"}]}], " ", 
+     "returns", " ", "an", " ", "empty", " ", "list", " ", "or", " ", "a", 
+     " ", 
+     RowBox[{"pair", ".", " ", "The"}], " ", "pair", " ", "is", " ", "a", " ",
+      "filename"}], ",", " ", 
+    RowBox[{"directory", " ", 
+     RowBox[{"name", ".", "\[IndentingNewLine]", 
+      RowBox[{"--", "-"}]}]}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"$NC$SearchFileOne", "[", 
+    RowBox[{"filename_", ",", 
+     RowBox[{"path_:", "$Path"}], ",", 
+     RowBox[{"n_:", "1"}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"L", ",", "dir", ",", "result"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{
+       "\"\<[ Looking for '\>\"", ",", "filename", ",", "\"\<' in '\>\"", ",",
+         "path", ",", "\"\<'...]\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"L", "=", 
+       RowBox[{"FileNames", "[", 
+        RowBox[{"filename", ",", "path", ",", "n"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"L", "=!=", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{
+         RowBox[{"L", " ", "=", " ", 
+          RowBox[{"L", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ";", 
+         RowBox[{"L", " ", "=", " ", 
+          RowBox[{"{", 
+           RowBox[{"L", ",", 
+            RowBox[{"DirectoryName", "[", "L", "]"}]}], "}"}]}]}]}], "]"}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "L", "]"}], ";"}]}], "]"}]}], ";"}]}], "Input",
+ CellOpen->False],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Clear", "[", "$NC$VerifyResponse", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"$NC$VerifySearchResponse", "[", "L_List", "]"}], " ", ":=", " ",
+      "\[IndentingNewLine]", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"i", ",", "ans", ",", 
+         RowBox[{"result", " ", "=", " ", 
+          RowBox[{"{", "}"}]}], ",", "more", ",", "name", ",", 
+         RowBox[{"reprimand", "=", "\"\<\>\""}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"L", "=!=", 
+           RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", "  ", 
+          RowBox[{
+           RowBox[{"i", " ", "=", " ", "1"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"While", "[", 
+            RowBox[{
+             RowBox[{"And", "[", 
+              RowBox[{
+               RowBox[{"i", "\[LessEqual]", 
+                RowBox[{"Length", "[", "L", "]"}]}], ",", 
+               RowBox[{"result", "===", 
+                RowBox[{"{", "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+             "  ", 
+             RowBox[{
+              RowBox[{"ans", " ", "=", " ", "\"\<not yes or no\>\""}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"reprimand", "=", "\"\<\>\""}], ";", 
+              "\[IndentingNewLine]", " ", 
+              RowBox[{"more", "=", "5"}], ";", "\[IndentingNewLine]", " ", 
+              RowBox[{"name", " ", "=", " ", 
+               RowBox[{"L", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"StringMatchQ", "[", 
+                 RowBox[{"name", ",", "\"\<*NC_VERSION\>\""}], "]"}], ",", 
+                "\[IndentingNewLine]", " ", 
+                RowBox[{
+                 RowBox[{"name", " ", "=", " ", 
+                  RowBox[{"StringDrop", "[", 
+                   RowBox[{"name", ",", 
+                    RowBox[{
+                    "StringLength", "[", "\"\<NC_VERSION\>\"", "]"}]}], 
+                   "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+              "\[IndentingNewLine]", " ", 
+              RowBox[{"While", "[", 
+               RowBox[{
+                RowBox[{"And", "[", 
+                 RowBox[{
+                  RowBox[{"more", "\[GreaterEqual]", "0"}], ",", 
+                  RowBox[{"Not", "[", 
+                   RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"\"\<yes\>\"", ",", "\"\<no\>\""}], "}"}], ",", 
+                    "ans"}], "]"}], "]"}]}], "]"}], "\[IndentingNewLine]", 
+                "     ", ",", " ", 
+                RowBox[{
+                 RowBox[{"ans", " ", "=", " ", 
+                  RowBox[{"InputString", "[", 
+                   RowBox[{
+                   "reprimand", "<>", 
+                    "\"\<We suspect that the version of NC which you want is \
+related to the file in the directory \>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"$NC$FixFileName", "[", 
+                    RowBox[{"$NC$file", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], "<>", 
+                    "\"\<\\nIs this correct? (yes/no)\>\""}], "]"}]}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"Not", "[", 
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"\"\<yes\>\"", ",", "\"\<no\>\""}], "}"}], ",", 
+                    "ans"}], "]"}], "]"}], ",", 
+                   RowBox[{
+                    RowBox[{"reprimand", " ", "=", " ", 
+                    RowBox[{"\"\<You responded \\\"\>\"", "<>", 
+                    RowBox[{"ToString", "[", "ans", "]"}], "<>", 
+                    "\"\<\\\". Please answer yes or no.\\n\\n\>\""}]}], 
+                    ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"--", "more"}], ";"}]}], "\[IndentingNewLine]", 
+               "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"ans", "===", "\"\<yes\>\""}], ",", " ", 
+                RowBox[{
+                 RowBox[{"AppendTo", "[", 
+                  RowBox[{"result", ",", 
+                   RowBox[{"L", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", 
+                 RowBox[{"AppendTo", "[", 
+                  RowBox[{"result", ",", 
+                   RowBox[{"DirectoryName", "[", 
+                    RowBox[{"L", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}], ";"}]}], 
+               "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"++", "i"}], ";"}]}], "\[IndentingNewLine]", "]"}]}]}], 
+         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "result", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}]}], ";"}]}]}]], "Input",
+ CellOpen->False,
+ CellChangeTimes->{
+  3.517487691233932*^9, {3.517490300861926*^9, 3.517490301367519*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "$NC$FixFileName", "]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"$NC$FixFileName", "[", "s_String", "]"}], ":=", 
+   RowBox[{"StringReplace", "[", 
+    RowBox[{"s", ",", 
+     RowBox[{"\"\<\\\\\>\"", "\[Rule]", "\"\<\\\\\\\\\>\""}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellOpen->False],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "$NC$SetUpPath", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$NC$SetUpPath", "[", "]"}], ":=", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+     "Print", "[", 
+      "\"\<\\n* * * \\\"Enable Use\\\" of NC Program * * *\\n\>\"", "]"}], 
+     ";", "\n", "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", "\"\<\>\"", "]"}], ";", "\n", 
+     "\[IndentingNewLine]", 
+     RowBox[{"$NC$file", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"$NC$StandardDirectories", "=", 
+      RowBox[{"{", 
+       RowBox[{"$HomeDirectory", ",", "$InitialDirectory"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"$NC$i", "=", "1"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{
+      "\"\<Searching the directories \>\"", ",", "$NC$StandardDirectories"}], 
+      "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"And", "[", 
+        RowBox[{
+         RowBox[{"$NC$file", "===", 
+          RowBox[{"{", "}"}]}], ",", 
+         RowBox[{"$NC$i", "\[LessEqual]", 
+          RowBox[{"Length", "[", "$NC$StandardDirectories", "]"}]}]}], "]"}], 
+       ",", 
+       RowBox[{
+        RowBox[{"$NC$file", "=", 
+         RowBox[{"$NC$SearchFileOne", "[", 
+          RowBox[{
+           RowBox[{"ToFileName", "[", 
+            RowBox[{"\"\<NC\>\"", ",", "\"\<NC_VERSION\>\""}], "]"}], ",", 
+           RowBox[{"$NC$StandardDirectories", "[", 
+            RowBox[{"[", "$NC$i", "]"}], "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"++", "$NC$i"}], ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"$NC$file", " ", "=", " ", 
+      RowBox[{"$NC$VerifySearchResponse", "[", "$NC$file", "]"}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"$NC$file", "===", 
+        RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"$NC$hint", "=", 
+         RowBox[{"InputString", "[", "\[IndentingNewLine]", 
+          RowBox[{
+          "\"\<If you know the path where NC directory is located, please \
+type it now.\\n\>\"", "<>", "\[IndentingNewLine]", 
+           "\"\<For example, if you unziped the NC distribution file on your \
+Desktop, then we are asking for the Desktop folder path.\\n\>\"", "<>", 
+           "\[IndentingNewLine]", 
+           "\"\<If you do not know where you unzipped your NC distribution \
+file hit <ENTER> to use '\>\"", "<>", "$InitialDirectory", "<>", 
+           "\"\<':\>\""}], "]"}]}], ";", "\n", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{
+         "\"\<Searching the directories {\>\"", ",", "$NC$hint", ",", 
+          "\"\<,\>\"", ",", 
+          RowBox[{"ToFileName", "[", 
+           RowBox[{"$NC$hint", ",", "\"\<NC\>\""}], "]"}], ",", "\"\<}\>\""}],
+          "]"}], ";", "\n", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"$NC$hint", "===", "\"\<\>\""}], ",", 
+          RowBox[{"$NC$hint", "=", "$InitialDirectory"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"Try", " ", 
+           RowBox[{"user", "'"}], "s", " ", "guess", " ", "first"}], " ", "-",
+           " ", 
+          RowBox[{"OUTSIDE", " ", "NC"}]}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"$NC$file", "=", 
+         RowBox[{"$NC$SearchFileOne", "[", 
+          RowBox[{
+           RowBox[{"ToFileName", "[", 
+            RowBox[{"\"\<NC\>\"", ",", "\"\<NC_VERSION\>\""}], "]"}], ",", 
+           "$NC$hint"}], "]"}]}], ";", "\n", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"Try", " ", 
+           RowBox[{"user", "'"}], "s", " ", "guess", " ", "first"}], " ", "-",
+           " ", 
+          RowBox[{"INSIDE", " ", "NC"}]}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"$NC$file", "===", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"$NC$file", "=", 
+           RowBox[{"$NC$SearchFileOne", "[", 
+            RowBox[{"\"\<NC_VERSION\>\"", ",", "$NC$hint"}], "]"}]}]}], "]"}],
+         ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"$NC$file", "===", 
+        RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Here", " ", "we", " ", "can", " ", "put", " ", "anything", " ", 
+         "Mathematica", " ", "understand", " ", "or", " ", "simply", " ", 
+         "$Path"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"$NC$hint", "=!=", "$InitialDirectory"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+           "Print", "[", 
+            "\"\<\\nUnfortunately we could not find NC in the directories you \
+provided.\>\"", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", " ", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"InputString", "[", 
+            RowBox[{
+            "\"\<We can search some standard directories for you.\\n\>\"", "<>",
+              "\[IndentingNewLine]", "\"\<This may take time though.\\n\>\"", 
+             "<>", "\"\<If you really want to do it type yes, otherwise hit \
+<ENTER> to exit.\>\""}], "]"}], "=!=", "\"\<\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Print", "[", "\"\<Have a coffee!\>\"", "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", "\"\<\\n> Please wait...\>\"", "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"$NC$NCSearchPath", "=", "$Path"}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{
+            "Do", " ", "the", " ", "really", " ", "painfull", " ", "search"}],
+             "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"$NC$file", "=", 
+            RowBox[{"$NC$SearchFileOne", "[", 
+             RowBox[{
+             "\"\<NC_VERSION\>\"", ",", "$NC$NCSearchPath", ",", "Infinity"}],
+              "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"$NC$file", "=!=", 
+        RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\<[ FOUND NC DIRECTORY IN '\>\"", ",", 
+          RowBox[{"$NC$file", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<']\>\""}], "]"}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"Open", " ", 
+          RowBox[{"init", ".", "m"}], " ", "file"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"$NC$initfile", "=", 
+         RowBox[{"ToFileName", "[", 
+          RowBox[{"$PreferencesDirectory", ",", 
+           RowBox[{"ToFileName", "[", 
+            RowBox[{"\"\<Kernel\>\"", ",", "\"\<init.m\>\""}], "]"}]}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+        "Print", "[", "\"\<[ Looking for user's init.m file.]\>\"", "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"$NC$info", "=", 
+         RowBox[{"FileInformation", "[", "$NC$initfile", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"$NC$info", "===", 
+           RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+           "Print", "[", "\"\<[ User does not have an init.m file]\>\"", 
+            "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", 
+            RowBox[{
+            "\"\<[ Creating '\>\"", ",", "$NC$initfile", ",", "\"\<']\>\""}], 
+            "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"$NC$stream", "=", 
+            RowBox[{"OpenWrite", "[", "$NC$initfile", "]"}]}]}], 
+          "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+           "Print", "[", "\"\<[ User already has an init file]\>\"", "]"}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", 
+            RowBox[{
+            "\"\<[ Appending to '\>\"", ",", "$NC$initfile", ",", 
+             "\"\<']\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"$NC$stream", "=", 
+            RowBox[{"OpenAppend", "[", "$NC$initfile", "]"}]}]}]}], 
+         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"Add", " ", "to", " ", "path"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"$NC$file", "=", 
+         RowBox[{"$NC$FixFileName", "[", 
+          RowBox[{"DirectoryName", "[", 
+           RowBox[{"$NC$file", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{
+         "\"\<[ Adding '\>\"", ",", "$NC$file", ",", "\"\<' to $Path]\>\""}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"WriteString", "[", 
+         RowBox[{"$NC$stream", ",", "\"\<\\n(* NCINSTALL - BEGIN *)\\n\>\""}],
+          "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"WriteString", "[", 
+         RowBox[{
+         "$NC$stream", ",", "\"\<AppendTo[$Path,\\\"\>\"", ",", "$NC$file", 
+          ",", "\"\<\\\"];\\n\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"WriteString", "[", 
+         RowBox[{"$NC$stream", ",", "\"\<(* NCINSTALL - END *)\\n\\n\>\""}], 
+         "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"Close", " ", 
+          RowBox[{"init", ".", "m"}], " ", "file"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "\"\<[ Closing init.m file]\>\"", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Close", "[", "$NC$stream", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "\"\<[ SUCCESS!]\>\"", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "\"\<\>\"", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+        "Print", "[", 
+         "\"\<On your next Mathematica session you will be able to\>\"", 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+        "Print", "[", "\"\<load NCAlgebra by typing '<< NC`'.\>\"", "]"}], 
+        ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "True", "]"}], ";"}], "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", "\"\<[ FAILED!]\>\"", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "\"\<\>\"", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "\"\<COULD NOT FIND NC DIRECTORY!\>\"", "]"}], 
+        ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "False", "]"}], ";"}]}], "\[IndentingNewLine]",
+       "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellOpen->False,
+ CellChangeTimes->{{3.5117216398388863`*^9, 3.511721640939385*^9}, {
+   3.511721847898759*^9, 3.511721848234932*^9}, {3.5174873783085327`*^9, 
+   3.517487598637558*^9}, {3.517487641717593*^9, 3.517487642726417*^9}, 
+   3.517487710211404*^9, {3.5174877731709414`*^9, 3.517487788101104*^9}, {
+   3.5174878701602793`*^9, 3.517487900275608*^9}, {3.517491479898274*^9, 
+   3.517491483716063*^9}}],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"$NC$SetUpPath", "[", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", 
+     "\"\<You can test your installation by evaluating the cells in the \
+notebook that has just been created.\>\"", "]"}], ";", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"CreateDocument", "[", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<Test your NC installation\>\"", ",", "\"\<Title\>\""}], 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<WARNING: This notebook quits the Kernel at various points to \
+ensure that the tests are run correctly. Please evaluate each cell \
+individually if you want to complete the entire test.\>\"", ",", 
+         "\"\<Text\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<Test NCAlgebra\>\"", ",", "\"\<Section\>\""}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<Execute the following commands to test NCAlgebra:\>\"", ",", 
+         "\"\<Text\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<<< NC`\\n<< NCAlgebra`\>\"", ",", "\"\<Input\>\""}], 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<<< NCTEST\\nQuit[]\>\"", ",", "\"\<Input\>\""}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<Test NCGB\>\"", ",", "\"\<Section\>\""}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<Execute the following commands to test NCGB:\>\"", ",", 
+         "\"\<Text\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<<< NC`\\n<< NCGB`\>\"", ",", "\"\<Input\>\""}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<<< NCGBTEST\\nQuit[]\>\"", ",", "\"\<Input\>\""}], "]"}],
+        ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<Test NCTeX\>\"", ",", "\"\<Section\>\""}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<You will need to have LaTeX installed in your machine for this \
+to work.\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<If you have LaTeX installed and it still fails it is most likely \
+because of path problems.\>\"", ",", "\"\<Text\>\""}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<Execute the following command to test NCTeX:\>\"", ",", 
+         "\"\<Text\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<<< NC`\\n<< NCTeX`\>\"", ",", "\"\<Input\>\""}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<NCTeX[1+Sin[x+(y-z)/2 Sqrt[2]]]\>\"", ",", "\"\<Input\>\""}], 
+        "]"}]}], "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", "]"}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{"Quit", "[", "]"}], ";"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellOpen->False,
+ CellChangeTimes->{{3.517487906031269*^9, 3.51748793669543*^9}, {
+   3.517488090891885*^9, 3.5174880915382833`*^9}, {3.5174882355544443`*^9, 
+   3.517488242833321*^9}, 3.5174883096175413`*^9, {3.517490115223216*^9, 
+   3.517490123241871*^9}, {3.517490713484054*^9, 3.51749073900843*^9}, {
+   3.517491469830192*^9, 3.517491626827239*^9}, {3.51749167575172*^9, 
+   3.517491707272455*^9}, {3.517491855993052*^9, 3.5174918603865957`*^9}}]
+}, Open  ]]
+},
+CellGrouping->Manual,
+WindowSize->{917, 834},
+WindowMargins->{{Automatic, 99}, {Automatic, 0}},
+DockedCells->(FrontEndExecute[{
+   FrontEnd`NotebookApply[
+    FrontEnd`InputNotebook[], #, Placeholder]}]& ),
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+ShowSelection->True,
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 32, 0, 92, "Title"],
+Cell[602, 24, 166, 4, 55, "Text"],
+Cell[771, 30, 293, 10, 33, "Text"],
+Cell[1067, 42, 173, 4, 55, "Text"],
+Cell[1243, 48, 77, 1, 33, "Text"],
+Cell[1323, 51, 3445, 94, 19, "Input",
+ CellOpen->False],
+Cell[4771, 147, 5360, 118, 19, "Input",
+ CellOpen->False],
+Cell[10134, 267, 321, 9, 19, "Input",
+ CellOpen->False],
+Cell[10458, 278, 11982, 263, 19, "Input",
+ CellOpen->False],
+Cell[22443, 543, 3837, 80, 19, "Input",
+ CellOpen->False]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

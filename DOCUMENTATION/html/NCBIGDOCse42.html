@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>12.1 Making a Groebner basis and NCProcess template</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="#tailNCBIGDOCse42.html">tail</a>] [<a 
+href="NCBIGDOCch12.html#NCBIGDOCse42.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">12.1   </span> <a 
+ id="x66-19900012.1"></a>Making a Groebner basis and NCProcess template</h3>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=&#x00A0;&lt;&lt;&#x00A0;NCGB&#8216;
+&#x00A0;<br />&gt;&#x00A0;You&#x00A0;have&#x00A0;already&#x00A0;loaded&#x00A0;NCGB.m
+&#x00A0;<br />In[2]:=&#x00A0;SetNonCommutative[a,b,c,d,w,x,y,z,Inv[a]];
+&#x00A0;<br />In[3]:=&#x00A0;inputPolys&#x00A0;=&#x00A0;{-1+a**w+x**d,&#x00A0;a**c+x**z,b**d+y**w,-1+b**z+y**c,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+c**y+w**a,c**b+w**x,&#x00A0;d**a+z**y,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+d**x+z**b-1+a**Inv[a]**b,&#x00A0;-1+Inv[a]**a}
+&#x00A0;<br />Out[3]&#x00A0;=&#x00A0;{-1+a**w+x**d,&#x00A0;a**c+x**z,&#x00A0;b**d+y**w,&#x00A0;-1+b**z+y**c,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+c**y+w**a,c**b+w**x,&#x00A0;d**a+z**y,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-2+d**x+z**b+a**Inv[a]**b,-1+&#x00A0;Inv[a]**a}
+&#x00A0;<br />In[4]:=&#x00A0;SetMonomialOrder&#x00A0;[a,&#x00A0;Inv[a],&#x00A0;b,&#x00A0;c,&#x00A0;d,&#x00A0;{z},&#x00A0;{x,&#x00A0;y,&#x00A0;w}]
+</div>
+</td></tr></table>
+<!--l. 14--><p class="nopar">
+<!--l. 16--><p class="indent">   Execute one of the cells below depending on whether you wish the output to be sorted and
+specially formated or not.
+<!--l. 19--><p class="indent">   Now we compute a partial Groebner basis
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;grobnerBasis&#x00A0;=&#x00A0;NCMakeGB[inputPolys,&#x00A0;4]
+&#x00A0;<br />Out[5]&#x00A0;=&#x00A0;{-1+a**w+x**d,&#x00A0;a**c+x**z,&#x00A0;-1+c+x**z,&#x00A0;-1+c**y+w**a,&#x00A0;d**a+z**y,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+Inv[a]**a,&#x00A0;-1+a**Inv[a],&#x00A0;-1+b,&#x00A0;d+y**w,&#x00A0;-1+z+y**c,&#x00A0;c+w**x,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-w-c**d+w**a**w,&#x00A0;-c**z+w**a**c,&#x00A0;-z**d+d**a**w,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-z+z**z-d**a**c,-d**a**c**z+z**d**a**c,-1+z+d**x}
+</div>
+</td></tr></table>
+<!--l. 27--><p class="nopar">
+<!--l. 29--><p class="indent">   Now we compute a Groebner basis, reduce some redundant polynomials, sort the result, and
+display it in TeX. This may take a long time.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+equivalentPolySet&#x00A0;=&#x00A0;NCProcess[inputPolys,&#x00A0;4,&#x00A0;"MyTexFileName"];
+</div>
+</td></tr></table>
+<!--l. 34--><p class="nopar">
+<!--l. 36--><p class="indent">   Usually much faster than this is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+equivalentPolySet&#x00A0;=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;NCProcess[inputPolys,&#x00A0;4,&#x00A0;SBByCat&#x00A0;-&gt;&#x00A0;False,&#x00A0;"MyTexFileName"];
+</div>
+</td></tr></table>
+<!--l. 41--><p class="nopar">
+<!--l. 43--><p class="indent">   Also an unreduced but sorted partial GB is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+equivalentPolySet&#x00A0;=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;NCProcess[inputPolys,&#x00A0;4,&#x00A0;SBByCat&#x00A0;-&gt;&#x00A0;False&#x00A0;RR&#x00A0;-&gt;&#x00A0;False,&#x00A0;"MyTexFileName"];
+</div>
+</td></tr></table>
+<!--l. 48--><p class="nopar">
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse42.html" >front</a>] [<a 
+href="NCBIGDOCch12.html#NCBIGDOCse42.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCse42.html"></a>  
+</body></html> 

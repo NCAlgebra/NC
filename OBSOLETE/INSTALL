@@ -1,0 +1,99 @@
+To get started the average user is best off reading the web
+document:
+
+          www.math.ucsd.edu/~ncalg/DOWNLOAD/Starting.html
+
+What it says is roughly:
+
+To use NCAlgebra or  NCGB, change the file 
+           SetNCDir.m 
+appropriately to lead to your NC directory  (see the file SetNCDir.m) .
+Always load SetNCDir.m before loading NCAlgbera.m or NCGB.m
+Try this and if you have trouble you might have to read some more,
+hopefully trouble will stay away.
+
+The path setting is done automatically if you run the file
+NCInstall.m inside of mathematica.  This automatically 
+creates a correct SetNCDir.m unless you are unlucky in which
+case you have to do by hand.
+
+----------------
+
+Starting.html is more clearly written than this file
+which is primarily for UNIX users.
+However, PC users can learn from this file. 
+In fact a glance at this will explain the directory structure to
+anyone.
+
+
+   (a) (FOR THE SYSTEM ADMINISTRATOR) 
+         Modify the system wide init.m file so that 
+         the value of $NCDir$ in SetNCDir.m is
+         a member of the Mathematica command $Path.
+         This is done by typing 
+
+             AppendTo[$Path,"/home/ncalg/NC"];
+
+         if it turned out that the value of $NCDir$ is
+         "/home/ncalg/NC". The next task is to instruct the
+         users what to do. The users should first create a 
+         directory which they want to work in (using the
+         mkdir command) and move into this directory
+         (using the cd command). The user should then
+         create a file called init.m which contains the 
+         one line of text
+  
+             Get["SetNCDir.m"];
+         
+   (b) (FOR THOSE OTHER THAN THE SYSTEM ADMINISTRATOR)
+         Create the directory which you want to work in
+         (using the mkdir command).  Move into this directory
+         (using the cd command). In this directory,
+         create a file called init.m which contains two lines
+         of text. The first line of text in the init.m file
+         will be based on the value which you assigned to $NCDir$.
+         Suppose that the value of $NCDir$ is "/home/ncalg/NC".
+         The file you create would then be
+
+             AppendTo[$Path,"/home/ncalg/NC"];
+             Get["SetNCDir.m"]; 
+  
+         If, on the other hand, the value of $NCDir$ was
+         "/filesystem/theDirectory/NC", then the init.m file 
+         which you create will contain the two lines
+
+             AppendTo[$Path,"/filesystem/theDirectory/NC"];
+             Get["SetNCDir.m"]; 
+   (c) Move into the DOCUMENTATION directory by typing
+       `cd DOCUMENTATION' and follow the instructions
+       in the README file.
+   (d) (Optional)
+         To see that everything is working well, move into
+         the directory set up in step (b) and start mathematica.
+         You should see In[1] := 
+         First type
+             Get["NCAlgebra.m"]
+         It will take about a minute before you get In[2] :=
+         Now type 
+             Get["NCTEST"]
+
+
+To use NCAlgebra with NCGB, follow directions for (a), (b), (c) 
+and (d) above and 
+
+   (e) (For those other than the system administrator)
+         Read and follow the directions in the file NCGB/README.
+
+   (f) (Optional)
+         To see that everything is working well, move into
+         the directory set up in step (a). 
+         Create a subdirectory called C++TestResults.
+         Start mathematica.
+         You should see In[1] :=
+         First type
+             Get["NCGB.m"]
+         It will take about a minute before you get In[2] :=
+         Now type
+             TimedGBTest[1,20];
+
+

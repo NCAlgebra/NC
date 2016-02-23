@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.2 Simplification</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 310--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse13.html" >next</a>] [<a 
+href="NCBIGDOCse11.html" >prev</a>] [<a 
+href="NCBIGDOCse11.html#tailNCBIGDOCse11.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse12.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse12.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
+ id="x20-420004.2"></a>Simplification</h3>
+<!--l. 312--><p class="noindent">This area is under developement so stronger commands will appear in later versions. What we
+mean by simplify is not in the spirit of Mathematica&#8217;s Simplify. They tend to factor expressions so
+that the expressions become very short. We expand expressions apply rules to the expressions
+which incorporate special relations the entries satisfy. Then we rely on cancelation of terms. The
+theoretical background lies in noncommutative Gröbner basis theory, and the rules we are
+implementing come from papers of Helton, Stankus and Wavrik <span 
+class="cmbx-12">[IEEE TAC March</span>
+<span 
+class="cmbx-12">1998]</span>.
+<!--l. 320--><p class="indent">   The commands in this section are designed to simplify polynomials in <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">S </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>],
+<span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">S </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">a</span>], <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">S </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span>], <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">S </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b</span>] and a few slightly more complicated inverses.
+<!--l. 324--><p class="indent">   The commands in order of strength are NCSR, NCS1R, NCS2R. Of course, for a
+stronger the command, more rules get applied and so the command takes longer to
+run.
+<!--l. 329--><p class="indent">   First, NCS1R normalizes <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">S </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>] to <span 
+class="cmmi-12">S</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">* </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span>(<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>)<span 
+class="cmmi-12">&#x2215;S</span>] provided <span 
+class="cmmi-12">S </span>is a
+commutative expression (only works for numbers <span 
+class="cmmi-12">S </span>in version 0.2 of NCAlgebra). The following list
+of rules are applied.
+<!--l. 336--><p class="noindent">(0) <span 
+class="cmmi-12">inv</span>[<span 
+class="cmsy-10x-x-120">-</span>1 + <span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">&#x2192;-</span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span>]
+<br class="newline">(1) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span>] (<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b</span>) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b</span>]
+<br class="newline">(2) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">b</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ba</span>] <span 
+class="cmmi-12">a </span>+ <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">b</span>]
+<br class="newline">(3) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmmi-12">ab </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">- </span>1
+<br class="newline">(4) <span 
+class="cmmi-12">abinv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">- </span>1
+<br class="newline">(5) <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">c</span>] <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">cb</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">bc</span>] <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">c</span>]
+<br class="newline">(6) <span 
+class="cmmi-12">b inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ba</span>]<span 
+class="cmmi-12">b</span>
+<br class="newline">
+<!--l. 351--><p class="indent">   The command NCS2R increases the range of expressions to include <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">poly</span>], but the
+reductions for each of these inverses is considerably less powerful than for the case of
+<span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>].
+<!--l. 356--><p class="indent">   An example: if <span 
+class="cmmi-12">expr </span>= <span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">a </span>+ <span 
+class="cmmi-12">b</span>] + <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">c</span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">**</span>(<span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">c</span>) + <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">c </span>+ <span 
+class="cmmi-12">d</span>] <span 
+class="cmsy-10x-x-120">**</span>(<span 
+class="cmmi-12">c </span>+ <span 
+class="cmmi-12">d </span>+ <span 
+class="cmmi-12">e</span>), then the first
+reduction using the list of rules in NCSR gives <span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">a </span>+ <span 
+class="cmmi-12">b</span>] + <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">c </span>+ <span 
+class="cmmi-12">d</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">einv</span>[<span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">**</span>(<span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">b</span>) <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">b</span>]
+and the second reduction gives <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">b</span>] <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">a</span>] which is the output from <span 
+class="cmmi-12">NCSR</span>[<span 
+class="cmmi-12">expr</span>].
+
+<!--l. 362--><p class="indent">   NCSimplify0Rational is an old attempt at simplification. We do not use it much.
+<!--l. 381--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.2.1   </span> <a 
+ id="x20-430004.2.1"></a>NCSimplifyRational[ expr ], NCSimplify1Rational[ expr ], and NCSimplify2Rational[
+expr ]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCSR</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   The  objective  is  to  simplify  expressions  which  include  polynomials  and
+      inverses of very simple polynomials. These work by appling a collection of relations
+      implemented as rules to expr. The core of NCSimplifyRational is NCSimplify1Rational
+      and       NCSimplify2Rational;       indeed       roughly       NCSimplifyRational[expr]
+      = NCSimplify1Rational[NCSimplify2Rational[expr]] together with some NCExpand&#8217;s.
+      NCSimplify1Rational[expr] contains one set of rules while NCSimplify2Rational[expr]
+      contains another.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Works only for a specialized class of functions. </dd></dl>
+<a 
+ id="dx20-43001"></a>
+<!--l. 426--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.2.2   </span> <a 
+ id="x20-440004.2.2"></a>NCSimplify1Rational[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCS1R</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: It applies a collection of relations implemented as rules to <span 
+class="cmmi-12">expr</span>. The goal is to
+      simplify <span 
+class="cmmi-12">expr</span>.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments                       /                       Limitations:                       <span 
+class="cmbx-12">WARNING:</span>
+      NCS1R does not first do an ExpandNonCommutativeMultiply. Therefore, it may be
+      the  case  that  one  can  miss  some  simplification  if  <span 
+class="cmmi-12">expr </span>is  not  expanded  out.  The
+      solution, of course, is to call ExpandNonCommutativeMultiply before calling NCS1R.
+      ExpandNonCommutativeMultiply is called from NCSR.
+      <br class="newline">
+      <br class="newline">&#x00A0;First, NCS1R normalizes <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">S </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>] to <span 
+class="cmmi-12">S</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">*</span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span>(<span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>)<span 
+class="cmmi-12">&#x2215;S</span>] provided S is s a
+      commutative expression (only works for numbers S in version 0.2 of NCAlgebra). The
+      the following list of rules are applied.
+      <br class="newline">(0) <span 
+class="cmmi-12">inv</span>[<span 
+class="cmsy-10x-x-120">-</span>1 + <span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">&#x2192;-</span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span>]
+      <br class="newline">(1) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span>] (<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b</span>) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">b</span>]
+      <br class="newline">(2) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">b</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ba</span>] <span 
+class="cmmi-12">a </span>+ <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">b</span>]
+      <br class="newline">(3) <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmmi-12">ab </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">- </span>1
+      <br class="newline">(4) <span 
+class="cmmi-12">abinv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">- </span>1
+      <br class="newline">(5) <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">c</span>] <span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">cb</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">bc</span>] <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">c</span>]
+      <br class="newline">(6) <span 
+class="cmmi-12">b inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ab</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">ba</span>]<span 
+class="cmmi-12">b</span>
+      <br class="newline">
+      <br class="newline">In the notation of papers <span 
+class="cmbx-12">[HW]</span>, <span 
+class="cmbx-12">[HSW]</span>, these rules implement a superset of the union
+      of the Gröbner basis for EB and the Gröbner basis for RESOL.  </dd></dl>
+<a 
+ id="dx20-44001"></a>
+<!--l. 435--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.2.3   </span> <a 
+ id="x20-450004.2.3"></a>NCSimplify2Rational[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCS2R</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  You need this for expressions involving inv[ polynomial ] where the polynomial
+      is not of the form <span 
+class="cmmi-12">SId </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Y</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If the polynomial is too complicated, this may not help very
+      much. </dd></dl>
+<a 
+ id="dx20-45001"></a>
+
+   <!--l. 454--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse13.html" >next</a>] [<a 
+href="NCBIGDOCse11.html" >prev</a>] [<a 
+href="NCBIGDOCse11.html#tailNCBIGDOCse11.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse12.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse12.html" >up</a>] </p></div>
+<!--l. 454--><p class="indent">   <a 
+ id="tailNCBIGDOCse12.html"></a>   
+</body></html> 

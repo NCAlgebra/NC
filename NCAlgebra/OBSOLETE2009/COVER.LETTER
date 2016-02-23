@@ -1,0 +1,20 @@
+Dear users of NCAlgebra,
+
+In the file NCDOCUMENT, we have given a few examples of 
+Mathematica sessions which use the NCAlgebra package.
+We are interested in compiling a number of examples
+of recorded terminal sessions ( <<CEEP ) and compiling
+them into a supplementary book of example terminal sessions. 
+This book is for tutorial purposes. Please send your
+contributions to ncalg@osiris.ucsd.edu
+
+Not all of the Sz.Nagy-Foias model simplification rules 
+mentioned in Bill Helton's talk at GPOTS are 
+installed in the NCSimplify routines. 
+
+We will send you a message whose subject is FTP.INSTRUCTIONS.
+This contains a very short list of instructions necessary 
+to transfer NCAlgebra to your system.
+
+Mark Stankus
+mstankus@osiris.ucsd.edu

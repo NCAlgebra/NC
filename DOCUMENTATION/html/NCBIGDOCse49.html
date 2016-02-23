@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>15.1 SetKnowns and SetUnknowns</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 11--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse50.html" >next</a>] [<a 
+href="#tailNCBIGDOCse49.html">tail</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse49.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">15.1   </span> <a 
+ id="x82-21100015.1"></a>SetKnowns and SetUnknowns</h3>
+<!--l. 14--><p class="noindent">In most mathematics and engineering appications, certain quantities are considered
+known and others are considered unknown. The goal is usually to solve for unknowns in
+terms of the knowns, or to solve for some unknowns in terms of others. In a prestrategy
+session, one must declare which variables are knowns and which ones are unknowns.
+While this declaration evolves through the course of a session, it is, at any moment, a
+part of the computing environment. Indeed, before any of the <span 
+class="cmmi-12">NCProcess </span>commands
+can be called, it is necessary to set all variables to either be known or be unknown.
+Mathematically, the variables which are declared unknown are those which one wants to solve
+for.
+<!--l. 35--><p class="indent">   An example is : <div class="newtheorem">
+<!--l. 36--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Example</span><span 
+class="cmbx-12">&#x00A0;15.1</span> </span><a 
+ id="x82-2110011"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SetNonCommutative[A,B,C,a,b,c];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetKnowns[A,B,C];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetUnknowns[{a,b,c}];
+</div>
+</td></tr></table>
+<!--l. 44--><p class="nopar">
+   </div>
+<!--l. 48--><p class="indent">   After the above three commands have been executed, the user can run any of the <span 
+class="cmbx-12">NCProcess</span>
+commands (<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>, <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess2</span></span></span> or <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess</span></span></span>) on any equations in the variables <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B</span>, <span 
+class="cmmi-12">C</span>, <span 
+class="cmmi-12">a</span>,
+<span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>. Here, <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>are knowns and <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span>are unknowns. In the case of <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess</span></span></span> and
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>, setting the knowns and unknowns as above has the effect that the <span 
+class="cmbx-12">NCProcess</span>
+command will try to solve for <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c </span>and produce equations from which they have been eliminated.
+Also the spreadsheet displayed by the <span 
+class="cmbx-12">NCProcess </span>command does bookkeeping based on what is
+known and unknown.
+<!--l. 62--><p class="indent">   The above three commands have imposed an order on the variables <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B</span>, <span 
+class="cmmi-12">C</span>, <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c </span>which
+expresses our priorities for eliminating them. We use the notation
+   <center class="math-display" >
+<img 
+src="NCBIGDOC67x.png" alt="A &lt; B  &lt; C  &#x226A; a &lt;  b &lt; c  " class="math-display" ></center> to
+denote the order imposed in the example. The <span 
+class="cmbx-12">NCProcess </span>command will try hardest to eliminate
+<span 
+class="cmmi-12">c </span>and the least to solve for <span 
+class="cmmi-12">A</span>.
+<!--l. 74--><p class="indent">   If you are running a prestrategy session and stop making progress one of the first things to try
+is changing the order.
+<!--l. 79--><p class="indent">   The <span 
+class="cmsy-10x-x-120">&#x226A; </span>means that the <span 
+class="cmbx-12">NCProcess </span>commands go to much greater lengths
+<span class="footnote-mark"><a 
+href="NCBIGDOC83.html#fn1x60"><sup >1</sup></a></span><a 
+ id="x82-211002f1"></a>
+towards eliminating <span 
+class="cmmi-12">a,b,c </span>than it does for <span 
+class="cmmi-12">A,B,C</span>.
+
+<!--l. 100--><p class="indent">   A fancier example of such prioritizing is :
+   <div class="newtheorem">
+<!--l. 104--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Example</span><span 
+class="cmbx-12">&#x00A0;15.2</span> </span><a 
+ id="x82-2110032"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SetNonCommutative[A,B,C,a,b,c,e,f,g];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetKnowns[A,B,C];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetUnknowns[{a,b,c},{d,e,f}];
+</div>
+</td></tr></table>
+<!--l. 110--><p class="nopar">
+   </div>
+<!--l. 114--><p class="indent">   This produces the ordering
+   <center class="math-display" >
+<img 
+src="NCBIGDOC68x.png" alt="A &lt; B  &lt; C &#x226A;  a &lt;  b &lt; c &#x226A; d &lt; e &lt; f ,
+" class="math-display" ></center>
+<!--l. 119--><p class="indent">   There is an alternative to <span 
+class="cmmi-12">SetKnowns </span>and <span 
+class="cmmi-12">SetUnknowns</span>. The command
+<br class="newline"><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">SetMonomialOrder[{A,B,C},{a,b,c},{d,e,f}]</span></span></span> has exactly the same effect as the commands in
+Example <a 
+href="#x82-2110032">15.2<!--tex4ht:ref: example:two --></a>.
+<!--l. 125--><p class="indent">   One can proceed with an <span 
+class="cmmi-12">NCProcess </span>command, only after an ordering is set.
+
+   <!--l. 128--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse50.html" >next</a>] [<a 
+href="NCBIGDOCse49.html" >front</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse49.html" >up</a>] </p></div>
+<!--l. 128--><p class="indent">   <a 
+ id="tailNCBIGDOCse49.html"></a>  
+</body></html> 

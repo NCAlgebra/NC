@@ -1,0 +1,1155 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     31729,        954]*)
+(*NotebookOutlinePosition[     32979,        999]*)
+(*  CellTagsIndexPosition[     32935,        995]*)
+(*WindowFrame->Palette*)
+
+
+
+Notebook[{
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox[\(load\ NCAlgebra.m\),
+            ButtonData:>" <<NCAlgebra.m ",
+            ButtonStyle->"EvaluateCell",
+            ButtonSource->ButtonData], 
+          ButtonBox["**"], 
+          ButtonBox["+"], 
+          ButtonBox["-"], 
+          ButtonBox["\[Placeholder]"]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"],
+
+Cell[CellGroupData[{
+
+Cell["Main Commands", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[BoxData[GridBox[{
+        {GridBox[{
+              {
+                ButtonBox["SetOutputPretty",
+                  ButtonData:>" SetOutput[all->True]",
+                  ButtonStyle->"EvaluateCell",
+                  ButtonSource->ButtonData], 
+                ButtonBox[\(Set\ OutputUgly\),
+                  ButtonData:>" SetOutput[all->False] ",
+                  ButtonStyle->"EvaluateCell",
+                  ButtonSource->ButtonData]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]], 
+          
+          ButtonBox[
+            \(DirectionalD[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetNonCommutative[\[SelectionPlaceholder]]\)], 
+          
+          ButtonBox[
+            \(ComplexD[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(NCExpand[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(ComplexCoordinates[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(NCCollect[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)], 
+          
+          ButtonBox[\(NCSimplifyRational[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(NCCollectSymmetric[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox["",
+            ButtonData:>" <<NCSR6 ",
+            ButtonStyle->"EvaluateCell",
+            ButtonSource->ButtonData]},
+        {
+          
+          ButtonBox[
+            \(NCStrongCollect[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(TimesToNCM[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(NCTermsOfDegree[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder], \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(NCMonomial[\[SelectionPlaceholder]\^\[Placeholder]]\)]},
+        
+        {
+          
+          ButtonBox[
+            \(Substitute[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)],
+           
+          
+          ButtonBox[
+            \(NCSolve[\[SelectionPlaceholder] == \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(SubstituteSymmetric[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(NCBackward[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommuteEverything[\[SelectionPlaceholder]]\),
+            ButtonFunction:>(FrontEndExecute[ {
+                FrontEnd`NotebookApply[ 
+                  FrontEnd`InputNotebook[ ], #, Placeholder]}]&),
+            ButtonStyle->"Paste"], 
+          ButtonBox[\(NCForward[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(NCMToMatMult[\[SelectionPlaceholder]]\)], 
+          ButtonBox[""]},
+        {GridBox[{
+              {
+                StyleBox[
+                  ButtonBox[\(\ \ \ tpMat[\[SelectionPlaceholder]]\ \ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(\ \ ajMat[\[SelectionPlaceholder]]\)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(coMat[\[SelectionPlaceholder]]\ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], ""}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]], 
+          
+          ButtonBox[
+            \(Transform[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Operations on Elements in an Algebra", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[BoxData[GridBox[{
+        {GridBox[{
+              {
+                ButtonBox[\(inv[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\[SelectionPlaceholder]\^\(-1\)\),
+                  ButtonData:>" inv[\[Placeholder]]"]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          ButtonBox[\(invL[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(invR[\[SelectionPlaceholder]]\)]},
+        {GridBox[{
+              {
+                ButtonBox[\(tp[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\ \ \ \[SelectionPlaceholder]\^T\ \),
+                  ButtonData:>" tp[\[Placeholder]] "]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {GridBox[{
+              {
+                ButtonBox[\(aj[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\ \ \ \(\[SelectionPlaceholder]\^*\)\ \),
+                  ButtonData:>" aj[\[Placeholder]] "]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {GridBox[{
+              {
+                ButtonBox[\(co[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\ \ \ \(\[SelectionPlaceholder]\&-\)\ \ \ \),
+                  ButtonData:>" co[\[Placeholder]] "]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          ButtonBox[\(invMat2[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(tpMat[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(ajMat[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(coMat[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Vector Differentiation", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[BoxData[GridBox[{
+        {
+          
+          ButtonBox[
+            \(DirectionalD[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(Grad[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(CriticalPoint[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+              \)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Block Matrix Manipulation", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[BoxData[GridBox[{
+        {GridBox[{
+              {
+                ButtonBox[
+                  TagBox[
+                    RowBox[{"(", GridBox[{
+                         
+                           {"\[SelectionPlaceholder]", 
+                            "\[SelectionPlaceholder]"},
+                         
+                           {"\[SelectionPlaceholder]", 
+                            "\[SelectionPlaceholder]"}
+                          }], ")"}],
+                    (MatrixForm[ #]&)]], 
+                ButtonBox[
+                  TagBox[
+                    RowBox[{
+                      RowBox[{"(", GridBox[{
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"}
+                            }], ")"}], " "}],
+                    (MatrixForm[ #]&)]], 
+                ButtonBox[
+                  TagBox[
+                    RowBox[{"(", GridBox[{
+                          {"\[SelectionPlaceholder]"},
+                          {"\[SelectionPlaceholder]"}
+                          }], ")"}],
+                    (MatrixForm[ #]&)]], 
+                ButtonBox[
+                  TagBox[
+                    RowBox[{
+                      RowBox[{"(", GridBox[{
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"},
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"},
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"}
+                            }], ")"}], " "}],
+                    (MatrixForm[ #]&)]]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          
+          ButtonBox[
+            \(MatMult[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {GridBox[{
+              {
+                StyleBox[
+                  ButtonBox[\(\ \ \ tpMat[\[SelectionPlaceholder]]\ \ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(\ \ ajMat[\[SelectionPlaceholder]]\)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(coMat[\[SelectionPlaceholder]]\ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          ButtonBox[\(NCMToMatMult[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(invMat2[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(GaussElimination[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(Cascade[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(Chain[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(Redheffer[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(DilationHalmos[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SchurComplementTop[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SchurComplementBtm[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Setting Properties of an Element", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox[\(SetNonCommutative[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetSelfAdjoint[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetCommutative[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SelfAdjointQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommuteEverything[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetIsometry[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(SetCommutingOperators[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(IsometryQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(LeftQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetCoIsometry[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommutativeQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(CoIsometryQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommutativeAllQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetUnitary[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[""], 
+          ButtonBox[\(UnitaryQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[""], 
+          ButtonBox[\(SetProjection[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[""], 
+          ButtonBox[\(ProjectionQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetInv[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetSignature[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(ExpandQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SignatureQ[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Setting Properties of Functions", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox[\(SetSesquilinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetSesq[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SesquilinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetBilinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(BilinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetLinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(LinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetConjugateLinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(ConjugateLinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetIdempotent[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(IdempotentQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetCommutingFunctions[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(NCAntihomo[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Truly Weird Commands", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell["You will never want to use these commands", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {7, Inherited}},
+  PageBreakAbove->True,
+  LineSpacing->{1, 3},
+  ScriptMinSize->9,
+  CounterIncrements->"Text"],
+
+Cell[BoxData[GridBox[{
+        {
+          
+          ButtonBox[
+            \(NCTermArray[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(CriticalPoint[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+              \)]},
+        {
+          ButtonBox[\(NCReconstructFromTermArray[\[SelectionPlaceholder]]\)]},
+        
+        {
+          ButtonBox[\(NCDecompose[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["NCGrobner Bases", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[TextData[{
+  " You must have loaded C++ files and Compiled\nWe are sure that this work \
+under Solaris 5.??\n\nYou can get the files from the NCAlgebra home page\n",
+  ButtonBox[" http://math.ucsd.edu/~ncalg",
+    ButtonData:>"",
+    ButtonStyle->"Hyperlink"],
+  "\n \n",
+  Cell[BoxData[GridBox[{
+          {
+            ButtonBox[\(SetKnowns[\[SelectionPlaceholder]]\)]},
+          {
+            ButtonBox[\(SetUnknowns[\[SelectionPlaceholder]]\)]},
+          {
+            ButtonBox[\(SetMonomialOrder[\[SelectionPlaceholder]]\)]},
+          {
+            
+            ButtonBox[
+              \(NCMakeGB[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+                \)]},
+          {
+            
+            ButtonBox[
+              \(NCProcess1[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+                \)]},
+          {
+            
+            ButtonBox[
+              \(NCProcess2[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+                \)]},
+          {
+            
+            ButtonBox[
+              \(NCProcess[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+                \[SelectionPlaceholder]]\)]},
+          {
+            
+            ButtonBox[
+              \(NCSimplifyRationalX1[\[SelectionPlaceholder], 
+                \[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+          {
+            
+            ButtonBox[
+              \(NCSimplifyAll[\[SelectionPlaceholder], 
+                \[SelectionPlaceholder], \[SelectionPlaceholder]]\)]}
+          },
+        RowSpacings->0,
+        ColumnSpacings->0,
+        GridFrame->False,
+        GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+    CellDingbat->None]
+}], NotebookDefault,
+  CellMargins->{{Inherited, Inherited}, {7, Inherited}},
+  PageBreakAbove->True,
+  LineSpacing->{1, 3},
+  FormatType->TextForm,
+  ScriptMinSize->9,
+  CounterIncrements->"Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["SYStems", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[TextData[{
+  " \n",
+  Cell[BoxData[GridBox[{
+          {
+            ButtonBox[""], 
+            ButtonBox[""]},
+          {
+            ButtonBox["",
+              ButtonData:>" NotebookOpen[ \"BRLdemo.nb\"] ",
+              ButtonStyle->"Evaluate",
+              ButtonSource->ButtonData], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSSpecialize.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]},
+          {
+            StyleBox[
+              ButtonBox[\(<< SYSDefIA.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSLinearize.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]},
+          {
+            StyleBox[
+              ButtonBox[\(<< SYSDef2x2.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSHinfFormulas.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]},
+          {
+            StyleBox[
+              ButtonBox[""],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSHinfFormulas2x2.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]}
+          },
+        RowSpacings->0,
+        ColumnSpacings->0,
+        GridFrame->False,
+        GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+    CellDingbat->None]
+}], NotebookDefault,
+  CellMargins->{{Inherited, Inherited}, {7, Inherited}},
+  PageBreakAbove->True,
+  LineSpacing->{1, 3},
+  FormatType->TextForm,
+  ScriptMinSize->9,
+  CounterIncrements->"Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Demos", NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {8, Inherited}},
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  ScriptMinSize->9,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+  FontFamily->"Helvetica",
+  FontSize->16,
+  FontWeight->"Bold"],
+
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox["BoundedRealLemma",
+            ButtonData:>" NotebookOpen[\"NCAlgebra/DemoBRL.nb\"] ",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox[\(Simplifying\ an\ Expression\),
+            ButtonData:>" NotebookOpen[\"NCAlgebra/DemoSimplify.nb\"]",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox[""]},
+        {
+          ButtonBox["Starting",
+            ButtonData:>" NotebookOpen[ \"NCAlgebra/DemoGB1.nb\"] ",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox["MatrixInverse",
+            ButtonData:>" NotebookOpen[\"NCAlgebra/DemoGBM.nb\"] ",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox[""]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], NotebookDefault,
+  CellDingbat->None,
+  CellMargins->{{Inherited, Inherited}, {5, Inherited}},
+  Evaluatable->True,
+  CellGroupingRules->"InputGrouping",
+  CellHorizontalScrolling->True,
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  GroupPageBreakWithin->False,
+  CellLabelMargins->{{11, Inherited}, {Inherited, Inherited}},
+  DefaultFormatType->DefaultInputFormatType,
+  LineSpacing->{1.25, 0},
+  AutoItalicWords->{},
+  FormatType->InputForm,
+  ScriptMinSize->9,
+  ShowStringCharacters->True,
+  NumberMarks->True,
+  CounterIncrements->"Input",
+  StyleMenuListing->None,
+  FontFamily->"Courier",
+  FontWeight->"Bold"]
+}, Closed]]
+},
+FrontEndVersion->"X 3.0",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+Editable->False,
+WindowToolbars->{},
+CellGrouping->Manual,
+PageWidth->628,
+WindowSize->{391, 740},
+WindowMargins->{{64, Automatic}, {104, Automatic}},
+WindowFrame->"Palette",
+WindowElements->"VerticalScrollBar",
+WindowFrameElements->"CloseBox",
+WindowClickSelect->False,
+ScrollingOptions->{"PagewiseScrolling"->True},
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PaperSize"->{612, 792},
+"PaperOrientation"->"Portrait",
+"Magnification"->1},
+ShowCellBracket->False,
+ShowGroupOpenCloseIcon->True,
+CellMargins->{{0, 0}, {Inherited, 0}},
+Active->True,
+CellOpen->True,
+ShowCellLabel->False,
+ShowCellTags->False,
+ImageMargins->{{0, Inherited}, {Inherited, 0}},
+Magnification->1
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1710, 49, 1064, 33, 29, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"],
+
+Cell[CellGroupData[{
+Cell[2799, 86, 393, 11, 28, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[3195, 99, 4639, 126, 273, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7871, 230, 416, 11, 28, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[8290, 243, 2756, 77, 233, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[11083, 325, 402, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[11488, 338, 1206, 39, 73, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[12731, 382, 405, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[13139, 395, 4526, 119, 307, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[17702, 519, 412, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[18117, 532, 2409, 64, 271, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[20563, 601, 411, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[20977, 614, 1765, 51, 293, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[22779, 670, 400, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[23182, 683, 240, 6, 25, NotebookDefault,
+  PageBreakAbove->True,
+  CounterIncrements->"Text"],
+Cell[23425, 691, 1261, 40, 95, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[24723, 736, 395, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[25121, 749, 1885, 56, 313, NotebookDefault,
+  PageBreakAbove->True,
+  CounterIncrements->"Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[27043, 810, 387, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[27433, 823, 2210, 61, 135, NotebookDefault,
+  PageBreakAbove->True,
+  CounterIncrements->"Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[29680, 889, 385, 11, 32, NotebookDefault,
+  CellGroupingRules->{"SectionGrouping", 30},
+  PageBreakAbove->True,
+  PageBreakBelow->False,
+  CounterIncrements->"Section",
+  CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}}],
+Cell[30068, 902, 1645, 49, 139, NotebookDefault,
+  CellGroupingRules->"InputGrouping",
+  PageBreakAbove->True,
+  PageBreakWithin->False,
+  CounterIncrements->"Input"]
+}, Closed]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

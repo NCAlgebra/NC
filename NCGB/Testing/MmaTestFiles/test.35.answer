@@ -1,0 +1,3 @@
+{T -> S, x ** Invx -> 1, y ** Invy -> 1, Invx ** x -> 1, Invy ** y -> 1, 
+  S ** x -> x ** S, S ** y -> y ** S, S ** Invx -> Invx ** S, 
+  S ** Invy -> Invy ** S}

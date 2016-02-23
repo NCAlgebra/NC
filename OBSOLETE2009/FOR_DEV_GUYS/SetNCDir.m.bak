@@ -1,0 +1,21 @@
+(*
+  
+  You have to change the following assignment statement 
+  so that the value inside the quotes is the same as the 
+  directory which this file is in.
+
+*)
+
+
+(*
+$NCDir$ = "/home/ncalg/FromYallara/";
+*)
+
+$NCDir$ = "/home/ncalg/NC/";
+
+
+$NC$Loaded$NCLoader$ = "SetNCDir.m";
+AppendTo[$Path,$NCDir$];
+If[Head[$NC$Machine$]===Symbol, $NC$Machine$ = "" ];
+
+Get[StringJoin[$NCDir$,"NCPathCommonFile.m"]];

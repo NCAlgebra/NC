@@ -1,0 +1,41 @@
+(* hugotest.1*)
+
+<<ShrinkBasis.m
+
+SetNonCommutative[a,b,c,d,x,y,z,iz,w,ia,ib,ic,id];
+SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
+SetMonomialOrder[{z,iz},2];
+SetMonomialOrder[{x,y,w},3];
+
+first = {{a,x},{y,b}};
+second = {{w,c},{d,z}};
+
+start = Flatten[{MatMult[first,second] - IdentityMatrix[2],
+                 MatMult[second,first] - IdentityMatrix[2]}];
+
+inverserelations = {
+ia**a - 1,
+a**ia - 1,
+ib**b - 1,
+b**ib - 1,
+ic**c - 1,
+c**ic - 1,
+id**d - 1,
+d**id - 1,
+z**iz - 1,
+iz**z - 1,
+w -> ia ** id ** z ** b ** d
+};
+rels = Join[start,inverserelations];
+SetGlobalPtr[];
+SetCleanUpBasis[1];
+ans = NCMakeRules[start,10];
+Put[ans,"hugotest.1"];
+
+
+(*
+smallerbasis = ShrinkBasis[start,hugorelations,inverserelations];
+Print[smallerbasis];
+
+finalanswer = smallerbasis;
+*)

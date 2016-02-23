@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>16.3 What is a prestrategy?</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 434--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse58.html" >next</a>] [<a 
+href="NCBIGDOCse56.html" >prev</a>] [<a 
+href="NCBIGDOCse56.html#tailNCBIGDOCse56.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse57.html">tail</a>] [<a 
+href="NCBIGDOCch16.html#NCBIGDOCse57.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">16.3   </span> <a 
+ id="x98-23000016.3"></a>What is a prestrategy?</h3>
+<!--l. 463--><p class="noindent">We wish to stress that one does not need to <span 
+class="cmti-12">know  </span>a theorem in order to <span 
+class="cmti-12">discover </span>it using the
+techniques in this paper. Any method which assumes that all of the hypotheses can be
+stated algebraically and that all of the hypotheses are known at the beginning of the
+computation will be of limited practical use. For example, since the Gröbner Basis algorithm
+only discovers polynomial equations which are algebraically true and not those which
+require analysis or topology, the use of this algorithm alone has a limited use. Insights
+gained from analysis during a computer session could be added as (algebraic) hypotheses
+while the session is in progress. Decisions can take a variety of forms and can involve
+recognizing a Riccati equation, recognizing that a particular square matrix is onto and so
+invertible, recognizing that a particular theorem now applies to the problem, etc. The user
+would then have to record and justify these decisions independently of the computer run.
+<span class="footnote-mark"><a 
+href="NCBIGDOC99.html#fn5x61"><sup >5</sup></a></span><a 
+ id="x98-230001f5"></a> While
+a strategy allows for human intervention, the intervention must follow certain rigid rules for the
+computer session to be considered a strategy.
+   <h4 class="subsectionHead"><span class="titlemark">16.3.1   </span> <a 
+ id="x98-23100016.3.1"></a>Prestrategy</h4>
+<!--l. 557--><p class="noindent">The idea of a <span 
+class="cmti-12">prestrategy </span>is :
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">S0. Set <span 
+class="cmmi-12">C</span><sup ><span 
+class="cmsy-8">&#x2032;</span></sup> = <span 
+class="cmsy-10x-x-120">{} </span>(see footnote in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse55.html#x92-22800016.1">16.1<!--tex4ht:ref: subsection:ncprocess:input:output --></a> on I3.)
+      </dd><dt class="description">
+ </dt><dd 
+class="description">S1. Run NCProcess1 which creates a display of the output (see O1-O5 in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse50.html#x84-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a>) and look
+      at the list of equations involving only one unknown (say a particular equation <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">17</span></sub>
+      contains only <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">3</span></sub>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">S2. The user must now make a decision about equations in <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">3</span></sub> (e.g., <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">17</span></sub> is a Riccati equation
+      so I shall not try to simplify it, but leave it for Matlab). Now the user declares the
+      unknown <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">3</span></sub> to be known.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">S3. Either do the &#8220;End game&#8221; (see <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x98-23200016.3.2">16.3.2<!--tex4ht:ref: subsection:stopping --></a>) or Go to S1.</dd></dl>
+
+<!--l. 581--><p class="indent">   The above listing is, in fact, a statement of a <span 
+class="cmti-12">1-prestrategy</span>. Sometimes one needs a <span 
+class="cmti-12">2-prestrategy</span>
+in that the key is equations in 2 unknowns.
+<!--l. 586--><p class="indent">   The point is to isolate and to minimize what the user must do. This is the crux of a
+prestrategy.
+<!--l. 591--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">16.3.2   </span> <a 
+ id="x98-23200016.3.2"></a>When to stop</h4>
+<!--l. 594--><p class="noindent">The prestrategy described above is a loop and we now discuss when to exit the loop.
+<!--l. 597--><p class="indent">   The digested equations (those in items O1, O2 and O3) often contain the necessary conditions
+of the desired theorem and the main flow of the proof of the converse. If the starting
+polynomial equations follow as algebraic consequences of the digested equations, then we
+should exit the above loop. The starting equations, say <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmr-8">1</span></sub> = 0<span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,p</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">1</span></sub></sub> = 0<span 
+class="cmsy-10x-x-120">}</span>, follow as
+algebraic consequences of the digested equations, say <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmr-8">1</span></sub> = 0<span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,q</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">2</span></sub></sub> = 0<span 
+class="cmsy-10x-x-120">}</span>, if and only if the
+Gröbner Basis generated by <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,q</span><sub ><span 
+class="cmmi-8">k</span><sub ><span 
+class="cmr-6">2</span></sub></sub><span 
+class="cmsy-10x-x-120">} </span>reduces (in a standard way) the polynomial
+<span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> to 0 for 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub>. Checking whether or not this happens is a purely mechanical
+process.
+<!--l. 615--><p class="indent">   When one exits the above loop, one is presented with the question of how to finish off the proof
+of the theorem. We shall call the steps required to go from a final spreadsheet to the actual
+theorem the &#8220;end game.&#8221; We shall describe some &#8220;end game&#8221; technique in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x98-23400016.3.4">16.3.4<!--tex4ht:ref: subsection:summary --></a>. We shall
+illustrate the &#8220;end game&#8221; in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse48.html#x79-20800014.4">14.4<!--tex4ht:ref: section:endgame:concept --></a> and <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse62.html#x106-24600017.4">17.4<!--tex4ht:ref: section:DG:end:game --></a>. As we shall see, typically the first step is to run
+NCProcess2 whose output is a very small set of equations.
+<!--l. 638--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">16.3.3   </span> <a 
+ id="x98-23300016.3.3"></a>Redundant Equations</h4>
+<!--l. 641--><p class="noindent">We mentioned earlier that NCProcess uses the Gröbner Basis algorithm. This GBA is implemented
+via the command NCMakeGB. If NCProcess consisted of a call to the GBA and the
+formatted output (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse50.html#x84-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a>) alone, then NCProcess would not be a powerful enough tool to
+generate solutions to engineering or math problems. This is because it would generate
+too many equations. It is our hope that the equations which it generates contain all
+of the equations essential to solution of whatever problem you are treating. For the
+problems we have considered, this has been our experience. On the other hand, it contains
+equations derived from these plus equations derived from those derived from these as well as
+precursor equations which are no longer relevant. That is, a GB contains a few jewels
+and lots of garbage. In technical language a GB is almost never a small basis for an
+ideal and what a human seeks in discovering a theorem is a small basis for an ideal.
+<span class="footnote-mark"><a 
+href="NCBIGDOC100.html#fn6x61"><sup >6</sup></a></span><a 
+ id="x98-233001f6"></a> Thus
+we have algorithms and substantial software for finding small (or smallest) sets of equations
+associated to a problem. The process of running GBA followed by an algorithm for finding small
+
+sets of equations is what constitutes NCProcess.
+   <h4 class="subsectionHead"><span class="titlemark">16.3.4   </span> <a 
+ id="x98-23400016.3.4"></a>Summary of a Prestrategy</h4>
+<!--l. 690--><p class="noindent">We have just given the basic ideas. As a prestrategy proceeds, more and more equations are
+digested by the user and more and more unknowns become knowns. Thus we ultimately have two
+classes of knowns: original knowns <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmr-8">0</span></sub> and user designated knowns <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmmi-8">U</span></sub>. Often a theorem can be
+produced directly from the output by taking as hypotheses the existence of knowns <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmmi-8">U</span></sub> <span 
+class="cmsy-10x-x-120">&#x222A;<img 
+src="cmsy10-c-4b.png" alt="K" class="10-120x-x-4b" /></span><sub ><span 
+class="cmr-8">0</span></sub> which
+are solutions to the equations involving only knowns.
+<!--l. 707--><p class="indent">   Assume that we have found these solutions. To prove the theorem, that is to construct solutions
+to the original equations, we must solve the remaining equations. Fortunately, the digested
+equations often are in a block triangular form which is amenable to backsolving. This is one of the
+benefits of &#8220;digesting&#8221; the equations.
+<!--l. 715--><p class="indent">   An example, makes all of this more clear.
+
+   <!--l. 717--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse58.html" >next</a>] [<a 
+href="NCBIGDOCse56.html" >prev</a>] [<a 
+href="NCBIGDOCse56.html#tailNCBIGDOCse56.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse57.html" >front</a>] [<a 
+href="NCBIGDOCch16.html#NCBIGDOCse57.html" >up</a>] </p></div>
+<!--l. 717--><p class="indent">   <a 
+ id="tailNCBIGDOCse57.html"></a>   
+</body></html> 

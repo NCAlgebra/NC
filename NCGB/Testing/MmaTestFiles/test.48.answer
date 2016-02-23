@@ -1,0 +1,4 @@
+{Inv[m]**m -> 1, m**Inv[m] -> 1, a**m -> m**f + q1**q2, 
+ m**f**Inv[m] -> a - q1**q2**Inv[m], Inv[m]**q1**q2**Inv[m] -> 
+  -f**Inv[m] + Inv[m]**a, a**q1**q2**Inv[m] -> a**a - m**f**f**Inv[m] - 
+   q1**q2**f**Inv[m]}

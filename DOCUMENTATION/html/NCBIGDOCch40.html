@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>40 Commands for Producing HTML Output</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 5--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch39.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch39.html#tailNCBIGDOCch39.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch40.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa9.html#NCBIGDOCch40.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;40</span></span><br><a 
+ id="x79-44800040"></a><span 
+class="cmr-10x-x-109">Commands for Producing HTML Output</span></h2>
+<!--l. 8--><p class="noindent"><span 
+class="cmr-10x-x-109">This section describes commands which can be used to display formulas and expressions in HTML files.</span>
+<span 
+class="cmr-10x-x-109">This is done by creating gif files to display formulas and expressions that can not be displayed in plain</span>
+<span 
+class="cmr-10x-x-109">text.</span>
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">40.0.4   </span></span> <a 
+ id="x79-44900040.0.4"></a><span 
+class="cmr-10x-x-109">ToHTMLString[expression]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">HTML</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: Convert an expression to a Mathematica string which is a series of HTML image</span>
+      <span 
+class="cmr-10x-x-109">tags. These tags call gif images which are made from the latex version of the symbols in</span>
+      <span 
+class="cmr-10x-x-109">expression. If the proper gif does not already exist, then ToHTMLString will try to create it</span>
+      <span 
+class="cmr-10x-x-109">and put it in the directory specified by the Mathematica variable $GifDirectory. If the gif is</span>
+      <span 
+class="cmr-10x-x-109">created, then ToHTMLString will record the HTML tag in a file so that it will not have to</span>
+      <span 
+class="cmr-10x-x-109">be created again. ToHTMLString can be used to create a large assortment of symbols which</span>
+      <span 
+class="cmr-10x-x-109">can be used over and over.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments:  expression can be almost any Mathematica expression, like a symbol, list, rule, or</span>
+      <span 
+class="cmr-10x-x-109">polynomial.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: If the user does not have write access to the $GifDirectory, then the</span>
+      <span 
+class="cmr-10x-x-109">resulting gifs can not be saved. The HTMLHardWired.m file should be in the current working</span>
+      <span 
+class="cmr-10x-x-109">directory in order to save the new HTML tags so that the gifs do not need to be created</span>
+      <span 
+class="cmr-10x-x-109">again. ToHTMLString uses the following external programs to create the gifs. Latex, dvips,</span>
+      <span 
+class="cmr-10x-x-109">pstogif and giftrans. </span></dd></dl>
+<a 
+ id="dx79-449001"></a>
+<!--l. 84--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">40.0.5   </span></span> <a 
+ id="x79-45000040.0.5"></a><span 
+class="cmr-10x-x-109">MakeGif[file,expression]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: Creates a gif image which is the latex version of expression. Unlike ToHTMLString,</span>
+      <span 
+class="cmr-10x-x-109">MakeGif only produces one gif file. No attempt is made to save the HTML tag in a seperate</span>
+      <span 
+class="cmr-10x-x-109">reference file.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: file is a string which will be the name of the gif file. expression can be almost any</span>
+      <span 
+class="cmr-10x-x-109">Mathematica expression, like a symbol, list, rule, or polynomial. If expression is a string,</span>
+      <span 
+class="cmr-10x-x-109">then no attempt is made to convert it to </span><span class="TEX"><span 
+class="cmr-10x-x-109">T</span><span 
+class="E"><span 
+class="cmr-10x-x-109">E</span></span><span 
+class="cmr-10x-x-109">X</span></span><span 
+class="cmr-10x-x-109">form. This is good for complicated expressions</span>
+      <span 
+class="cmr-10x-x-109">if the user is familiar with </span><span class="TEX"><span 
+class="cmr-10x-x-109">T</span><span 
+class="E"><span 
+class="cmr-10x-x-109">E</span></span><span 
+class="cmr-10x-x-109">X</span></span><span 
+class="cmr-10x-x-109">. MakeGif tries to display the result with xv by default.</span>
+      <span 
+class="cmr-10x-x-109">The option DisplayFunction</span><span 
+class="cmsy-10x-x-109">&#x2192;</span><span 
+class="cmr-10x-x-109">string will attempt to view the gif with the command string.</span>
+      <span 
+class="cmr-10x-x-109">DisplayFunction</span><span 
+class="cmsy-10x-x-109">&#x2192;</span><span 
+class="cmr-10x-x-109">Identity will not display the gif.</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: MakeGif uses the following external programs to create the gifs. Latex,</span>
+      <span 
+class="cmr-10x-x-109">dvips, pstogif and giftrans. </span></dd></dl>
+<a 
+ id="dx79-450001"></a>
+<!--l. 89--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">40.0.6   </span></span> <a 
+ id="x79-45100040.0.6"></a><span 
+class="cmr-10x-x-109">HTML</span></h4>
+<!--l. 90--><p class="noindent"><span 
+class="cmr-10x-x-109">HERE IS ANOTHER ACCOUNT OF THIS MATTERIAL</span>
+<!--l. 92--><p class="indent">   <span 
+class="cmr-10x-x-109">THEY SHOULD BE MERGED SOMEDAY</span>
+<!--l. 94--><p class="indent">   <span 
+class="cmr-10x-x-109">This options creates a directory with several files in HTML format. This was constructed before Mma</span>
+<span 
+class="cmr-10x-x-109">3.0 and has not been tested for compatibility with it. The spreadsheet file is called index.html, and there</span>
+<span 
+class="cmr-10x-x-109">is a seperate file for every category. There are several complications which makes this option impractical.</span>
+<span 
+class="cmr-10x-x-109">The indeterminates, which contain subscripts and superscripts, are stored as gif files. These gif files are</span>
+<span 
+class="cmr-10x-x-109">created with latex, dvips, pstogif and giftrans. The command which creates them needs to know what</span>
+<span 
+class="cmr-10x-x-109">directory they are stored in. Also, the HTML text which calls the correct gif file needs to be</span>
+<span 
+class="cmr-10x-x-109">stored in a Mathematica file. When an indeterminate is used for the first time, the HTML</span>
+<span 
+class="cmr-10x-x-109">text needs to be added to this file. This means that the user needs write access to this file.</span>
+<span 
+class="cmr-10x-x-109">Most computer systems can be set up to handle these idiosyncracies, but not without some</span>
+<span 
+class="cmr-10x-x-109">effort.</span>
+<!--l. 110--><p class="indent">   <span 
+class="cmr-10x-x-109">Here is a brief overview of what would need to be done. There are several gifs already created. They</span>
+<span 
+class="cmr-10x-x-109">are in a directory called GifDirectory?? in the directory containing the Mathematica source code for</span>
+<span 
+class="cmr-10x-x-109">NCAlgebra. If you do not have write permission, then copy this directory to someplace where you do have</span>
+<span 
+class="cmr-10x-x-109">write permission. Also, put the file HTMLHardWired.m someplace where you have write permission. It</span>
+<span 
+class="cmr-10x-x-109">would be best to put it in your current working directory. Adjust your Mathematica $Path variable so</span>
+<span 
+class="cmr-10x-x-109">that this copy of HTMLHardWired.m will be loaded. When that doesn&#8217;t work, send us e-mail at</span>
+<span 
+class="cmti-10x-x-109">ncalg@osiris.ucsd.edu</span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 236--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">40.1   </span></span> <a 
+ id="x79-45200040.1"></a><span 
+class="cmr-10x-x-109">Using an input file</span></h3>
+<!--l. 239--><p class="noindent"><span 
+class="cmr-10x-x-109">Because Mathematica is interpretive, it is tempting to perform computations by starting Mathematica</span>
+<span 
+class="cmr-10x-x-109">and start typing. Often, however, we have found that it is often the case that it is helpful to</span>
+<span 
+class="cmr-10x-x-109">construct an auxilary file and then to load that file. This has the benefit of allowing the user to</span>
+<span 
+class="cmr-10x-x-109">modify the computation slightly and rerun it, as well as the additional benefit of recording the</span>
+<span 
+class="cmr-10x-x-109">computation.</span>
+<!--l. 248--><p class="indent">   <span 
+class="cmr-10x-x-109">A common input file may have the form</span>
+   <div  
+class="centerline">                                                 <span 
+class="cmr-10x-x-109">First version of the file</span>                                                 </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Get["NCGB.m"];
+&#x00A0;<br />start&#x00A0;=&#x00A0;{x**x-a,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[y]**y-1,y**Inv[y]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1-x)**Inv[1-x]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[1-x]**(1-x)-1
+&#x00A0;<br />};
+&#x00A0;<br />start&#x00A0;=&#x00A0;NCExpand[start];&#x00A0;&#x00A0;(*&#x00A0;NCExpand,&#x00A0;alias&#x00A0;NCE&#x00A0;is&#x00A0;explained&#x00A0;in&#x00A0;the&#x00A0;NCAlgebra&#x00A0;document.&#x00A0;*)
+&#x00A0;<br />Print["start:",start];
+</div>
+</td></tr></table>
+<!--l. 264--><p class="nopar">
+<!--l. 268--><p class="indent">   <span 
+class="cmr-10x-x-109">After the file is run, one can see whether or not the file executed correctly. It does not &#8212; we forgot the</span>
+<span 
+class="cmr-10x-x-109">SetNonCommutative command. The new file would look like:</span>
+   <div  
+class="centerline">                                                <span 
+class="cmr-10x-x-109">Second version of the file</span>                                                </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Get["NCGB.m"];
+&#x00A0;<br />SetNonCommutative[a,x,y,Inv[x],Inv[1-y]];
+&#x00A0;<br />start&#x00A0;=&#x00A0;{x**x-a,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[y]**y-1,y**Inv[y]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1-x)**Inv[1-x]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[1-x]**Inv[1-x]-1
+&#x00A0;<br />};
+&#x00A0;<br />start&#x00A0;=&#x00A0;NCExpand[start];
+&#x00A0;<br />Print["start:",start];
+</div>
+</td></tr></table>
+<!--l. 289--><p class="nopar">
+<!--l. 293--><p class="indent">   <span 
+class="cmr-10x-x-109">After restarting Mathematica and running this command, we find that </span><span 
+class="cmmi-10x-x-109">start </span><span 
+class="cmr-10x-x-109">is what we expect it to</span>
+<span 
+class="cmr-10x-x-109">be. We can then remove the </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">Print</span></span></span> <span 
+class="cmr-10x-x-109">statement and add more code.</span>
+
+   <!--l. 299--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch39.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch39.html#tailNCBIGDOCch39.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch40.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa9.html#NCBIGDOCch40.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 299--><p class="indent">   <a 
+ id="tailNCBIGDOCch40.html"></a>   
+</body></html> 

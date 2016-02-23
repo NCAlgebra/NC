@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>11 Demo on NCGB - Matrix Computation </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 18--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch12.html" >next</a>] [<a 
+href="NCBIGDOCch10.html" >prev</a>] [<a 
+href="NCBIGDOCch10.html#tailNCBIGDOCch10.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch11.html">tail</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch11.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;11</span><br><a 
+ id="x23-19600011"></a>Demo on NCGB - Matrix Computation </h2>
+<!--l. 2--><p class="noindent">(The functions used in this notebook require the C++ NCGB module.)
+   <h3 class="sectionHead"><span class="titlemark">11.1   </span> <a 
+ id="x23-19700011.1"></a>The Partially Prescribed Inverse Problem</h3>
+<!--l. 7--><p class="noindent">This is a type of problem known as a matrix completion problem. This particular one was
+suggested by Hugo Woerdeman. We are grateful to him for discussions.
+<!--l. 11--><p class="noindent"><span 
+class="cmbx-12">Problem: </span><span 
+class="cmti-12">Given matrices a, b, c, and d, we wish to determine under what conditions there exists</span>
+<span 
+class="cmti-12">matrices x, y, z, and w such that the block matrices</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC58x.png" alt="(       )      (       )
+   a  x          w   c
+   y  b           d  z
+" class="math-display" ></center>
+<span 
+class="cmti-12">are inverses of each other. Also, we wish to find formulas for x, y, z, and w.</span>
+<!--l. 23--><p class="indent">   This problem was solved in a paper by W.W. Barrett, C.R. Johnson, M. E. Lundquist and H.
+Woerderman <span 
+class="cmbx-12">[BJLW] </span>where they showed it splits into several cases depending upon which of a, b,
+c and d are invertible. In our example, <span 
+class="cmbx-12">we assume that a, b, c and d are invertible </span>and
+discover the result which they obtain in this case.
+<!--l. 29--><p class="indent">   First we set all of our variables to be noncommutative and set up the relations which make
+matrices a, b, c, and d invertible. (Inverses in this particular problem are taken to be two sided.)
+Strong invertibility relations help when one is trying to get an idea of the solution of the
+problem.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]&#x00A0;:=&#x00A0;SetNonCommutative[a,b,c,d,w,x,y,z,Inv[a],Inv[b],Inv[c],Inv[d]];
+</div>
+</td></tr></table>
+<!--l. 37--><p class="nopar">
+<!--l. 39--><p class="indent">   Then we define the relations we are interested in. The two relations <span 
+class="cmbx-12">oneway, otherway </span>set our
+block matrices as inverses of each other. The relations <span 
+class="cmbx-12">inverses </span>invoke the assumption that <span 
+class="cmbx-12">a,b,c,</span>
+and <span 
+class="cmbx-12">d </span>are invertible by defining their inverses.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[2]:=&#x00A0;first&#x00A0;&#x00A0;=&#x00A0;{{a,x},&#x00A0;{y,b}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;second&#x00A0;=&#x00A0;{{w,c},{d,z}}&#x00A0;}
+&#x00A0;<br />Out[2]&#x00A0;=&#x00A0;{{a,x},&#x00A0;{y,b}}
+&#x00A0;<br />Out[3]&#x00A0;=&#x00A0;{{w,c},&#x00A0;{d,z}}
+&#x00A0;<br />In[4]:=&#x00A0;oneway&#x00A0;=&#x00A0;MatMult[first,second]&#x00A0;-&#x00A0;IdentityMatrix[2]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;otherway&#x00A0;=&#x00A0;MatMult[second,first]&#x00A0;-&#x00A0;IdentityMatrix[2]
+&#x00A0;<br />Out[4]&#x00A0;=&#x00A0;{{-1+a**w+x**d,a**c+x**z},&#x00A0;{b**d+y**w,-1+b**z+y**c}}
+&#x00A0;<br />Out[5]&#x00A0;=&#x00A0;{{-1+c**y+w**a,c**b+w**x},&#x00A0;{d**a+z**y,-1+d**x+z**b}}
+&#x00A0;<br />In[6]:=&#x00A0;inverses&#x00A0;=&#x00A0;{-1&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;Inv[a],&#x00A0;-1&#x00A0;+&#x00A0;Inv[a]&#x00A0;**&#x00A0;a,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;Inv[b],&#x00A0;-1&#x00A0;+&#x00A0;Inv[b]&#x00A0;**&#x00A0;b,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;+&#x00A0;c&#x00A0;**&#x00A0;Inv[c],&#x00A0;-1&#x00A0;+&#x00A0;Inv[c]&#x00A0;**&#x00A0;c,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;+&#x00A0;d&#x00A0;**&#x00A0;Inv[d],&#x00A0;-1&#x00A0;+&#x00A0;Inv[d]&#x00A0;**&#x00A0;d
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;allRelations&#x00A0;=&#x00A0;Join[&#x00A0;Flatten[{&#x00A0;oneway,&#x00A0;otherway&#x00A0;}],&#x00A0;&#x00A0;inverses]}
+&#x00A0;<br />Out[6]&#x00A0;=&#x00A0;{-1+a**Inv[a],-1+Inv[a]**a,&#x00A0;-1+b**Inv[b],-1+Inv[b]**b,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+c**Inv[c],-1+Inv[c]**c,-1+d**Inv[d],-1+Inv[d]**d}
+&#x00A0;<br />Out[7]&#x00A0;=&#x00A0;{-1+a**w+x**d,a**c+x**z,&#x00A0;b**d+y**w,-1+b**z+y**c,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+c**y+w**a,c**b+w**x,d**a+z**y,-1+d**x+z**b,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+a**Inv[a],-1+Inv[a]**a,&#x00A0;-1+b**Inv[b],-1+Inv[b]**b,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1+c**Inv[c],-1+Inv[c]**c,&#x00A0;-1+d**Inv[d],-1+Inv[d]**d}
+</div>
+</td></tr></table>
+<!--l. 65--><p class="nopar">
+<!--l. 67--><p class="indent">   Specify to NCAlgebra which variables are known and which are unknown. To GB
+fans this sets the monomial order indicated around the middle of the first page of the
+output.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[8]:=&#x00A0;SetKnowns[a,&#x00A0;Inv[a],&#x00A0;b,&#x00A0;Inv[b],&#x00A0;c,&#x00A0;Inv[c],&#x00A0;d,&#x00A0;Inv[d]]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetUnknowns[{z},&#x00A0;{x,&#x00A0;y,&#x00A0;w}]
+</div>
+</td></tr></table>
+<!--l. 74--><p class="nopar">
+<!--l. 76--><p class="indent">   Tell NCAlgebra to solve for our unknown variables
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[10]:=&#x00A0;answer&#x00A0;=&#x00A0;NCProcess[allRelations,&#x00A0;4,&#x00A0;&#8216;&#8216;DemoGBMA"&#x00A0;];
+&#x00A0;<br />&gt;&#x00A0;Outputting&#x00A0;results&#x00A0;to&#x00A0;the&#x00A0;stream
+&#x00A0;<br />&gt;&#x00A0;OutputStream[&#8216;&#8216;DemoGBMA.tex",&#x00A0;11]
+&#x00A0;<br />&gt;&#x00A0;Done&#x00A0;outputting&#x00A0;results&#x00A0;to&#x00A0;the&#x00A0;stream
+&#x00A0;<br />OutputStream[&#8216;&#8216;DemoGBMA.tex",&#x00A0;11]
+</div>
+</td></tr></table>
+<!--l. 84--><p class="nopar">
+<!--l. 86--><p class="noindent">The <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;output which appears shows that, if a, b, c and d are invertible, then one can find x, y, z
+and w such that the matrices above are inverses of each other if and only if z b z = z + d a
+c.
+<!--l. 91--><p class="indent">   The <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;output also gives formulas for x, y and w in terms of z.
+<!--l. 1--><p class="indent">   Input =
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">aw </span>+ <span 
+class="cmmi-12">xd</span>
+<span 
+class="cmmi-12">ac </span>+ <span 
+class="cmmi-12">xz</span>
+<span 
+class="cmmi-12">bd </span>+ <span 
+class="cmmi-12">y w</span>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">bz </span>+ <span 
+class="cmmi-12">y c</span>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">cy </span>+ <span 
+class="cmmi-12">w a</span>
+<span 
+class="cmmi-12">cb </span>+ <span 
+class="cmmi-12">w x</span>
+<span 
+class="cmmi-12">da </span>+ <span 
+class="cmmi-12">z y</span>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">dx </span>+ <span 
+class="cmmi-12">z b</span>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">aa</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">a</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">a</span>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">bb</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">b</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">b</span>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">cc</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">c</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">c</span>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">dd</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+<span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">d</span>
+File Name = DemoGBMA
+<br class="newline">NCMakeGB Iterations = 4
+<br class="newline">NCMakeGB on Digested Iterations = 5
+<br class="newline">SmallBasis Iterations = 5
+
+<br class="newline">SmallBasis on Knowns Iterations = 6
+<br class="newline">Deselect<span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+<br class="newline">UserSelect<span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+<br class="newline">UserUnknowns<span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+<br class="newline">NCShortFormulas<span 
+class="cmsy-10x-x-120">&#x2192;</span>-1
+<br class="newline">RR<span 
+class="cmsy-10x-x-120">&#x2192;</span>True
+<br class="newline">RRByCat<span 
+class="cmsy-10x-x-120">&#x2192;</span>False
+<br class="newline">SB<span 
+class="cmsy-10x-x-120">&#x2192;</span>False
+<br class="newline">SBByCat<span 
+class="cmsy-10x-x-120">&#x2192;</span>True
+<br class="newline">DegreeCap<span 
+class="cmsy-10x-x-120">&#x2192;</span>-1
+<br class="newline">DegreeSumCap<span 
+class="cmsy-10x-x-120">&#x2192;</span>-1
+<br class="newline">DegreeCapSB<span 
+class="cmsy-10x-x-120">&#x2192;</span>-1
+<br class="newline">DegreeSumCapSB<span 
+class="cmsy-10x-x-120">&#x2192;</span>-1
+<br class="newline">NCCV<span 
+class="cmsy-10x-x-120">&#x2192;</span>True
+<br class="newline">THE ORDER IS NOW THE FOLLOWING:
+<span 
+class="cmmi-12">a &lt; a</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">&lt; b &lt; b</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">&lt; c &lt; c</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">&lt; d &lt; d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">&#x226A; </span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">&#x226A; </span><span 
+class="cmmi-12">x &lt; y &lt; w</span>
+__________________________
+__________________________ &#x00A0;YOUR SESSION HAS DIGESTED&#x00A0;___________________________________
+__________________________ &#x00A0;THE FOLLOWING RELATIONS&#x00A0;___________________________________
+___________________________________________________________________________________
+THE FOLLOWING VARIABLES HAVE BEEN SOLVED FOR:
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">w, x, y</span><span 
+class="cmsy-10x-x-120">}</span>
+<br class="newline">The corresponding rules are the following:
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">w </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">a</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">z bd</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">z b</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">y </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">c</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">bz c</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+</td></tr></table>
+<br class="newline">___________________________________________________________________________________
+<br class="newline">The expressions with unknown variables <span 
+class="cmsy-10x-x-120">{}</span>
+<br class="newline">and knowns <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a, b, c, d, a</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">, b</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">, c</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">, d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmsy-10x-x-120">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">aa</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">bb</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">cc</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">dd</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">a</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">b</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">b </span><span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">c</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">c </span><span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">d </span><span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+</td></tr></table>
+<br class="newline">___________________________________________________________________________________
+_______________________ &#x00A0;USER CREATIONS APPEAR BELOW&#x00A0;_______________________________
+___________________________________________________________________________________
+___________________________________________________________________________________
+____________________ &#x00A0;SOME RELATIONS WHICH APPEAR BELOW&#x00A0;___________________________
+______________________________ &#x00A0;MAY BE UNDIGESTED&#x00A0;________________________________________
+___________________________________________________________________________________
+THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a, b, c, d, z, a</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">, b</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">, c</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">, d</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmsy-10x-x-120">}</span>
+<br class="newline">___________________________________________________________________________________
+<br class="newline">1<span 
+class="cmmi-12">.</span>0 The expressions with unknown variables <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">z</span><span 
+class="cmsy-10x-x-120">}</span>
+<br class="newline">and knowns <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a, b, c, d</span><span 
+class="cmsy-10x-x-120">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-12">z bz </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">z </span>+ <span 
+class="cmmi-12">dac</span>
+</td></tr></table>
+<br class="newline">
+<!--l. 224--><p class="noindent">The time for preliminaries was 0:00:06
+<br class="newline">The time for NCMakeGB 1 was 0:00:01
+<br class="newline">The time for Remove Redundant 1 was 0:00:03
+<br class="newline">The time for the main NCMakeGB was 0:00:21
+<br class="newline">The time for Remove Redundant 2 was 0:00:09
+<br class="newline">The time for reducing unknowns was 0:00:03
+
+<br class="newline">The time for clean up basis was 0:00:05
+<br class="newline">The time for SmallBasis was 0:03:44
+<br class="newline">The time for CreateCategories was 0:00:01
+<br class="newline">The time for NCCV was 0:00:19
+<br class="newline">The time for RegularOutput was 0:00:02
+<br class="newline">The time for everything so far was 0:04:57
+<br class="newline">
+<!--l. 25--><p class="indent">
+
+
+   <!--l. 26--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch12.html" >next</a>] [<a 
+href="NCBIGDOCch10.html" >prev</a>] [<a 
+href="NCBIGDOCch10.html#tailNCBIGDOCch10.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch11.html" >front</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch11.html" >up</a>] </p></div>
+<!--l. 26--><p class="indent">   <a 
+ id="tailNCBIGDOCch11.html"></a>   
+</body></html> 

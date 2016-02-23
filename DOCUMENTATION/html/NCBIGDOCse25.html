@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>5.1 Pretty Output</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 22--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse26.html" >next</a>] [<a 
+href="#tailNCBIGDOCse25.html">tail</a>] [<a 
+href="NCBIGDOCch5.html#NCBIGDOCse25.html" >up</a>] </p></div>
+
+   <h3 class="sectionHead"><span class="titlemark">5.1   </span> <a 
+ id="x34-1450005.1"></a>Pretty Output</h3>
+<!--l. 78--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.1.1   </span> <a 
+ id="x34-1460005.1.1"></a>NCSetOutput[ optionlist,<span 
+class="cmmi-12">&#x2026;</span>]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  NCSetOutput displays noncommutative expressions in a special format without
+      affecting the internal representation of the expression. For example, SetOutput[
+      All <span 
+class="cmsy-10x-x-120">&#x2192; </span>True] turns on all display beatifications listed below. Options are set by
+      typing,
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>All <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, to use the new format.
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>opt <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, to return to the default format.
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>Dot <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, &#8217;**&#8217; is displayed as &#8217;.&#8217;(i.e., a dot)
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>Dot <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, &#8217;**&#8217; defaults as &#8217;**&#8217;
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>aj <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, aj[ X ] is displayed as <span 
+class="cmmi-12">X</span><sup ><span 
+class="cmsy-8">*</span></sup>
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>aj <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, aj[ X ] is displayed as aj[ X ]
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>inv <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, inv[ X ] is displayed as <span 
+class="cmmi-12">X</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>inv <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, inv[ X ] is displayed as inv[ X ]
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>tp <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, tp[ X ] is displayed as <span 
+class="cmmi-12">X</span><sup ><span 
+class="cmmi-8">T</span> </sup>
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>tp <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, tp[ X ] is displayed as tp[ X ]</dd></dl>
+
+      <!--l. 78--><p class="noindent">Examples : (Generic) SetOutput[opt<span 
+class="cmsy-10x-x-120">&#x2192;</span>True] turns on all beautifications of the output
+      related  to  the  attribute  opt.  (One  never  types  opt.  The  letters  &#8220;opt&#8221;  here  stand
+      for  any  of  the  listed  attributes.)  So,  for  example,  one  might  try  the  command
+      SetOutput[dot<span 
+class="cmsy-10x-x-120">&#x2192;</span>True, aj<span 
+class="cmsy-10x-x-120">&#x2192;</span>True]; aj[rt[x ** y]]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Options are: all, dot, rt, tp, inv, aj; You may input a comma-separated sequence
+      of options in any order without first forming a Mathematica list.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: WARNING: NCSetOutput was called SetOutput in previous
+      versions.  This  syntax  has  now  been  deprecated.  BEWARE:  do  not  use  with
+      NCSimplifyRational.  Also  working  with  parts  of  a  &#8221;pretty  output&#8221;  may  not  work
+      (since it changes the Head structure of the output). You can turn on or off options
+      individually at any time. The nesting order of the final display is determined first
+      by any NCAlgebra-defined or user-defined functions, and then by any Mathematica
+      specified order. Only after the Out[#] is assigned are the SetOutput options applied to
+      the OutputForm of the expression. So the internal form of the expression is NEVER
+      altered. Nevertheless, the displayed form may be unexpected for several reasons, among
+      them being; 1. f[g[x]] may be defined elsewhere to always display as g[f[x]]. In this case,
+      SetOutput will display the optional forms of g[ f[x] ], not that of the inputed f[ g[x] ]. 2.
+      Mathematica establishes precedences for functions and operations in order to minimize
+      the overall use of parantheses. This can have unusual, but not unmanageable effects
+      on the displayed form of an expression. For example, (<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>)<sup ><span 
+class="cmr-8">2</span></sup> displays as <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span>,but
+      is represented internally as the equivalent of (<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>)<sup ><span 
+class="cmr-8">2</span></sup>.  </dd></dl>
+<a 
+ id="dx34-146001"></a>
+
+   <!--l. 82--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse26.html" >next</a>] [<a 
+href="NCBIGDOCse25.html" >front</a>] [<a 
+href="NCBIGDOCch5.html#NCBIGDOCse25.html" >up</a>] </p></div>
+<!--l. 82--><p class="indent">   <a 
+ id="tailNCBIGDOCse25.html"></a>   
+</body></html> 

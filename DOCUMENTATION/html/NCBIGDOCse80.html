@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>21.5 Smaller Bases and the Spreadsheet command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 354--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse81.html" >next</a>] [<a 
+href="NCBIGDOCse79.html" >prev</a>] [<a 
+href="NCBIGDOCse79.html#tailNCBIGDOCse79.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse80.html">tail</a>] [<a 
+href="NCBIGDOCch21.html#NCBIGDOCse80.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">21.5   </span> <a 
+ id="x131-31500021.5"></a>Smaller Bases and the Spreadsheet command</h3>
+<!--l. 359--><p class="noindent">Here is a session which does roughly what the spreadsheet command does. For more detail see
+Chapter <a 
+href="NCBIGDOCch15.html#x81-21000015">15<!--tex4ht:ref: chapter:ncprocess:command --></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[11]:=NCMakeGB[FAC,2];
+&#x00A0;<br />In[11]:=SmallBasisByCategory[
+&#x00A0;<br />RemoveRedundant[%,&#x00A0;HISTORY&#x00A0;see&#x00A0;Section&#x00A0;\ref{}??]&#x00A0;];
+</div>
+</td></tr></table>
+<!--l. 370--><p class="nopar">
+<!--l. 374--><p class="noindent">The next command tries to see if any of the undigested relations can be made simpler using the
+digested relations
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[12]:=NCSimplifyAll[%11,&#x00A0;&#x00A0;DigestedRelations[%11]&#x00A0;];
+</div>
+</td></tr></table>
+<!--l. 383--><p class="nopar">
+<!--l. 387--><p class="noindent">Finally we output the result to the file &#8220;SecondOutputForDemo&#8221;.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[13]:=RegularOutput[%12,&#x00A0;"SecondOutputForDemo"];
+</div>
+</td></tr></table>
+<!--l. 394--><p class="nopar">
+<!--l. 398--><p class="noindent">Now we return to the strategy demos of Chapter <a 
+href="NCBIGDOCch15.html#x81-21000015">15<!--tex4ht:ref: chapter:ncprocess:command --></a>.
+<!--l. 433--><p class="indent">   Inserting the command <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">RemoveRedundant</span></span></span>, see Section <a 
+href="NCBIGDOCch30.html#x166-37500030">30<!--tex4ht:ref: section:removeRedundant --></a>, inside of small basis may change the
+answer, but it yields the same answer as <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">SmallBasis</span></span></span> would have given with one particular order
+on the set of relations given as input. All this assumes that the number of iterations is large.
+Inserting <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">RemoveRedundant</span></span></span> saves much computer time.
+
+   <!--l. 445--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse81.html" >next</a>] [<a 
+href="NCBIGDOCse79.html" >prev</a>] [<a 
+href="NCBIGDOCse79.html#tailNCBIGDOCse79.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse80.html" >front</a>] [<a 
+href="NCBIGDOCch21.html#NCBIGDOCse80.html" >up</a>] </p></div>
+<!--l. 445--><p class="indent">   <a 
+ id="tailNCBIGDOCse80.html"></a>  
+</body></html> 

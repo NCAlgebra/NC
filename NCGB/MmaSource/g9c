@@ -1,0 +1,20 @@
+#!/bin/csh -f
+# Grabs the current running ./p9c process and runs gdb.
+#
+
+set name = ../Binary/p9c
+set p = `ps -x |grep $name |grep -v grep |cut -c1-5 |line`
+
+if ($p == "") then
+  echo -n No process $name, waiting
+
+  while ($p == "")
+    sleep 1
+    set p = `ps -x |grep $name |grep -v grep |cut -c1-5 |line`
+    echo -n .
+  end
+endif
+
+echo ''
+echo gdb $name $p
+gdb $name $p

@@ -1,0 +1,17 @@
+{d**i + a**b**c, h**g + c**a**b, f**e + b**c**a, i**d + i**a**f, 
+ e**f + e**b**h, g**h + g**c**d, f**i + b**h**i + f**g**c, 
+ d**g + a**f**g + d**e**b, h**e + c**d**e + h**i**a, 
+ -e**f**g + e**b**c**a**b, g**c**a**b - g**c**d**g, i**d**e - i**a**b**c**a, 
+ f**g**c**d + f**g**c**a**f, d**e**f + d**g**c**d + a**f**g**c**d, 
+ e**f**g**c, d**g**c**d**g**c + a**f**g**c**d**g**c, 
+ e**b**c**a - e**f**i**a + e**b**c**d**e, g**c**d**g**c**a, 
+ b**h**e - f**i**a + b**c**d**e - f**g**c**a, 
+ h**e**f - h**i**d - c**d**g**c**d - c**a**f**g**c**d, f**g**c**d**e, 
+ d**g**c**a + a**f**g**c**a + d**g**c**d**e, i**a**b**c**a**b, 
+ g**c**d**g**c**d, b**c**a**f, -a**f**g**c**d + d**g**c**a**f, a**b**c**d, 
+ c**a**b**h, c**a**b**c**a**b, -f**i**d - f**g**c**d + f**i**a**b**h, 
+ c**a**f**i + c**a**f**g**c, -e**f**g + e**b**c**d**g + e**f**i**a**b, 
+ f**i**d**g + f**g**c**d**g, -c**d**g**c**d + h**e**b**c**d - 
+  c**a**f**g**c**d, a**b**c**a**b**c, e**b**c**d**g**c, b**c**a**b**c**a, 
+ b**c**d**g**c**d**g**c, g**c**a**f**g**c**a, h**i**d**g, 
+ g**c**a**f**g**c**d, i**d**g**c**d, e**f**i**d}

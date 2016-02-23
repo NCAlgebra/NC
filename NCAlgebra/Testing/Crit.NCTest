@@ -1,0 +1,67 @@
+(* Crit.NCTest  - modified Helton Jan 24  97              *)
+
+Print[" "];
+Print["-----Loading variables for Crit.NCTest"];
+Print["-----Expect messages ; all that matters is that all 3 tests return True"];
+
+SetNonCommutative[f,g,a,b,c,dd,z]
+SetNonCommutative[W,U,Y,DW,DU,DY]
+SetNonCommutative[A,x,B1,B2,C1,C2,G1,G2] 
+SetNonCommutative[D11,D22,D12,D21]
+
+SetNonCommutative[e1,e2];
+SetNonCommutative[GE,GEx,GEz];
+
+sHWo = 
+(tp[A[x]] ** GEx[x, z] + tp[C1[x]] ** C1[x] + tp[GEx[x, z]] ** A[x] + 
+  tp[GEz[x, z]] ** a[z] + tp[a[z]] ** GEz[x, z] + 
+  tp[C1[x]] ** D12[x] ** c[z] + tp[C2[x]] ** tp[b[z]] ** GEz[x, z] + 
+  tp[GEx[x, z]] ** B2[x] ** c[z] + tp[GEz[x, z]] ** b[z] ** C2[x] + 
+  tp[c[z]] ** tp[B2[x]] ** GEx[x, z] + tp[c[z]] ** tp[D12[x]] ** C1[x] + 
+  tp[GEx[x, z]] ** B1[x] ** tp[B1[x]] ** GEx[x, z] + 
+  tp[c[z]] ** tp[D12[x]] ** D12[x] ** c[z] + 
+  tp[GEx[x, z]] ** B1[x] ** tp[D21[x]] ** tp[b[z]] ** GEz[x, z] + 
+  tp[GEz[x, z]] ** b[z] ** D21[x] ** tp[B1[x]] ** GEx[x, z] + 
+  tp[GEz[x, z]] ** b[z] ** D21[x] ** tp[D21[x]] ** tp[b[z]] ** GEz[x, z])
+
+sHWU = 
+(-tp[W] ** W + (tp[U] ** tp[B2[x]] + tp[W] ** tp[B1[x]] + tp[A[x]]) ** 
+   GEx[x, z] + (tp[U] ** tp[D12[x]] + tp[C1[x]]) ** (C1[x] + D12[x] ** U) + 
+  tp[GEx[x, z]] ** (A[x] + B1[x] ** W + B2[x] ** U) + 
+  tp[GEz[x, z]] ** (b[z] ** (C2[x] + D21[x] ** W) + a[z]) + 
+  ((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[b[z]] + tp[a[z]]) ** GEz[x, z])
+
+sHW = 
+(-tp[W] ** W + (tp[W] ** tp[B1[x]] + tp[c[z]] ** tp[B2[x]] + tp[A[x]]) ** 
+   GEx[x, z] + (tp[c[z]] ** tp[D12[x]] + tp[C1[x]]) ** 
+   (C1[x] + D12[x] ** c[z]) + tp[GEx[x, z]] ** 
+   (A[x] + B1[x] ** W + B2[x] ** c[z]) + 
+  tp[GEz[x, z]] ** (b[z] ** (C2[x] + D21[x] ** W) + a[z]) + 
+  ((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[b[z]] + tp[a[z]]) ** GEz[x, z])
+
+e1[x] = tp[D12[x]]**D12[x];
+
+Print["-----Making first Critical point calculation in Crit.NCTest"];
+CritW=CriticalPoint[sHW,W];
+Print["-----Making second Critical point calculation in Crit.NCTest"];
+CritU=CriticalPoint[sHWU,U];
+Print["-----Done with critical point calculations in Crit.NCTest"];
+test[Crit,1] = ExpandNonCommutativeMultiply[CritW[[1,2]] - 
+(tp[B1[x]] ** GEx[x, z] + tp[D21[x]] ** tp[b[z]] ** GEz[x, z])]==0
+Print["-----Done with first critical point test in Crit.NCTest"];
+
+test[Crit,2] = ExpandNonCommutativeMultiply[CritU[[1,2]] - (-inv[e1[x]] ** tp[B2[x]] ** GEx[x, z] - 
+     inv[e1[x]] ** tp[D12[x]] ** C1[x])]==0
+Print["-----Done with second critical point test in Crit.NCTest"];
+
+test[Crit,3] = ExpandNonCommutativeMultiply[SubstituteSymmetric[sHW,CritW]-sHWo]==0
+Print["-----Done with third critical point test in Crit.NCTest"];
+
+(*test[Crit,4] =SubstituteSymmetric[sHWo,ruc]==?? *)
+(*------------------------------------------------*)
+
+Print["Results from the file Crit.NCTest"];
+
+For[ i=1, i<4, i++,
+Print["Test #",i," was ",test[Crit,i]];
+];

@@ -1,0 +1,320 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6780,        257]*)
+(*NotebookOutlinePosition[      7554,        284]*)
+(*  CellTagsIndexPosition[      7510,        280]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["\<\
+
+(The functions used in this notebook require the C++ NCGB module.)\
+\>", 
+  "Text",
+  Editable->False,
+  FontSize->14],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Getting To Know NCGB
+
+\
+\>", "Subtitle",
+  Editable->False,
+  CellFrame->{{0, 0}, {2, 0}},
+  TextAlignment->Center,
+  FontFamily->"Times",
+  Background->GrayLevel[0.900008]],
+
+Cell[TextData[{
+  "\nHere we present a simple example in the use  of the NCProcess command.   \
+ We look for implications of these equations in ",
+  StyleBox["a",
+    FontWeight->"Bold"],
+  ",",
+  StyleBox["b",
+    FontWeight->"Bold"],
+  ",",
+  StyleBox["c",
+    FontWeight->"Bold"],
+  ", and ",
+  StyleBox["d",
+    FontWeight->"Bold"],
+  " on the unknown variable ",
+  StyleBox["a",
+    FontWeight->"Bold"],
+  ".\n"
+}], "Text",
+  Editable->False],
+
+Cell[TextData[{
+  StyleBox["bcd",
+    FontWeight->"Bold"],
+  " + ",
+  StyleBox["d",
+    FontWeight->"Bold"],
+  " + 2 = 0         (Eqn.1)\n",
+  StyleBox["abc",
+    FontWeight->"Bold"],
+  " +",
+  StyleBox[" b",
+    FontWeight->"Bold"],
+  " = 0                (Eqn.2)\n",
+  StyleBox["ad",
+    FontWeight->"Bold"],
+  " - ",
+  StyleBox["bd",
+    FontWeight->"Bold"],
+  " = -4             (Eqn.3)\n"
+}], "Text",
+  Editable->False,
+  TextAlignment->Center],
+
+Cell[TextData[{
+  "\nFirst let us compute the consequences by hand.   Those not familiar with \
+Mora's algorithm [FMora] \nwill get a peek at the underlying idea of it \
+through our method of attack.\n\nMultiplying equation 1 on the left by ",
+  StyleBox["a",
+    FontWeight->"Bold"],
+  ", equation 2 on the right by ",
+  StyleBox["d",
+    FontWeight->"Bold"],
+  ",  and subtracting the two results \ngives us ",
+  StyleBox[" ad",
+    FontWeight->"Bold"],
+  " - ",
+  StyleBox["bd",
+    FontWeight->"Bold"],
+  " + 2 ",
+  StyleBox["a",
+    FontWeight->"Bold"],
+  " = 0 .      Now  we notice the similarity in leading terms of this \
+equation and \nequation 3 above.     Taking the difference of these gives us \
+the definitive  ",
+  StyleBox["a = 2.",
+    FontWeight->"Bold"],
+  "\n "
+}], "Text",
+  Editable->False,
+  CellFrame->{{0, 0}, {2, 0}}],
+
+Cell["\<\
+Now we do the same problem,  but with the aid of the NCAlgebra \
+computer package.   It is obvious that this problem can easily done by hand,  \
+but it is not hard to imagine a more complicated set of expressions which \
+could perhaps take a lifetime to simplify with a pen and paper.
+\
+\>", "Text",
+  Editable->False],
+
+Cell["\<\
+First we set  the variables we are concerned with to be \
+non-commutative.
+\
+\>", "Text",
+  Editable->False,
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[BoxData[
+    \(\(SetNonCommutative[\ \ a, b, c, d\ ]\n\)\)], "Input"],
+
+Cell["\<\
+Next we must set all of our variables to be either known or unknown \
+which in turn specifies a \"monomial order\" explained in the NCGB \
+documentation.
+\
+\>", "Text",
+  Editable->False,
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[BoxData[{
+    \(SetKnowns[\ {\ b, c, d}]\), 
+    \(SetUnknowns[\ {a}\ ]\)}], "Input"],
+
+Cell[TextData[{
+  "Here  express equations 1,2, and 3 in non-commutative mathematica \
+notation.   Note that this problem could be interpreted as ",
+  StyleBox["a",
+    FontWeight->"Bold"],
+  ", ",
+  StyleBox["b",
+    FontWeight->"Bold"],
+  ", ",
+  StyleBox["c",
+    FontWeight->"Bold"],
+  ", and ",
+  StyleBox["d",
+    FontWeight->"Bold"],
+  " being matrices and the scalar entries are simply the scalar times the \
+appropriately dimensioned identity matrices.    Or are the variables \
+operators on infinite dimensional hilbert spaces ?    You decide.     \n"
+}], "Text",
+  Editable->False,
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[BoxData[
+    \(\(Rels\  = 
+      \ {\ b**c**d\  + \ d\ \  == \ \(-2\), \n\t\t\ \ \ \ \ \ \ \ \ \ \ \ \ 
+        a**b**c\  + \ b\ \  == \ 0, \n\t\t\ \ \ \ \ \ \ \ \ \ \ \ \ 
+        a**d\  - \ b**d\ \  == \ \(-4\)\ }; \)\)], "Input"],
+
+Cell[TextData[{
+  "Finally,  let the NCGB algorithms attack the problem.   Here we specify an \
+iteration count of 2 and name the TeX file which will be created MyFile.   \
+Notice on the dvi file which pops up that",
+  StyleBox[" a",
+    FontWeight->"Bold"],
+  " has been\nsolved for.\n"
+}], "Text",
+  Editable->False,
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[BoxData[
+    \(\(\n\(NCProcess[\ Rels\ , \ 2, "\<DemoGB1A\>"\ ]; \)\n\n\)\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Rules and Polynomials
+\
+\>", "Subtitle",
+  Editable->False,
+  CellFrame->{{0, 0}, {2, 0}},
+  TextAlignment->Center],
+
+Cell["\<\
+Here is an example of how the rules derived from polynomials are \
+dependent on the monomial order chosen.   Notice how these polynomials \
+correspond to Noetherian term re-writing rules when 
+an ordering is chosen.
+\
+\>", "Text",
+  Editable->False,
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell["\<\
+ClearMonomialOrderAll[];
+SetMonomialOrder[ a,b ];
+PolyToRule[ { a**b - b**a + a } ] 
+\
+\>", "Input"],
+
+Cell["\<\
+SetMonomialOrder[ b,a ] ;
+PolyToRule[ { a**b - b**a + a } ] \
+\>", "Input"]
+}, Open  ]]
+},
+FrontEndVersion->"X 3.0",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{815, 686},
+WindowMargins->{{Automatic, 5}, {Automatic, 68}},
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PaperSize"->{612, 792},
+"PaperOrientation"->"Portrait",
+"Magnification"->1}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1709, 49, 129, 6, 43, "Text"],
+
+Cell[CellGroupData[{
+Cell[1863, 59, 184, 10, 111, "Subtitle"],
+Cell[2050, 71, 447, 19, 59, "Text"],
+Cell[2500, 92, 449, 21, 59, "Text"],
+Cell[2952, 115, 844, 26, 117, "Text"],
+Cell[3799, 143, 328, 7, 59, "Text"],
+Cell[4130, 152, 172, 7, 52, "Text"],
+Cell[4305, 161, 74, 1, 28, "Input"],
+Cell[4382, 164, 251, 8, 64, "Text"],
+Cell[4636, 174, 90, 2, 28, "Input"],
+Cell[4729, 178, 646, 20, 76, "Text"],
+Cell[5378, 200, 237, 4, 40, "Input"],
+Cell[5618, 206, 372, 10, 76, "Text"],
+Cell[5993, 218, 91, 1, 45, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6121, 224, 126, 7, 87, "Subtitle"],
+Cell[6250, 233, 313, 9, 76, "Text"],
+Cell[6566, 244, 110, 5, 42, "Input"],
+Cell[6679, 251, 85, 3, 52, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

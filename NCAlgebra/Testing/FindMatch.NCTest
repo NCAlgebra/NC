@@ -1,0 +1,27 @@
+ru1 = x**x->q;
+ru2 = x**x**x->t;
+ru3 = d**x**x**w->s;
+
+ru1 = PolynomialTuple[ru1,{},{}];
+ru2 = PolynomialTuple[ru2,{},{}];
+ru3 = PolynomialTuple[ru3,{},{}];
+
+ClearMatches[];
+FindMatches[ru1,ru2]; 
+test[FindMatch,1] = 
+     WhatAreMatches[] == 
+     {
+          Tuple8[ru1,ru2,1, x**x, x, 1,{True},{}] 
+     }
+
+FindMatches[ru3,ru1]; 
+test[FindMatch,2] = 
+     WhatAreMatches[] == 
+     {
+          Tuple8[ru1,ru2,1, x**x, x, 1,{True},{}], 
+          Tuple8[ru3,ru1, x**x -> q, 1, 1, d, w,{True},{}] 
+     }
+
+Print["Results from the file FindMatch.NCTest"];
+Do[ Print["Test #",i," was ",test[FindMatch,i]]
+,{i,2}];

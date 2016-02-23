@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>9.1 To start a C++ GB session</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 28--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse34.html" >next</a>] [<a 
+href="#tailNCBIGDOCse33.html">tail</a>] [<a 
+href="NCBIGDOCch9.html#NCBIGDOCse33.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">9.1   </span> <a 
+ id="x50-1790009.1"></a>To start a C++ GB session</h3>
+<!--l. 32--><p class="noindent">The first step is to start Mathematica:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />%&#x00A0;math
+&#x00A0;<br />Mathematica&#x00A0;2.2&#x00A0;for&#x00A0;SPARC
+&#x00A0;<br />Copyright&#x00A0;1988-93&#x00A0;Wolfram&#x00A0;Research,&#x00A0;Inc.
+</div>
+</td></tr></table>
+<!--l. 42--><p class="nopar">
+<!--l. 49--><p class="indent">   The next step is to load the appropriate software.
+<span class="footnote-mark"><a 
+href="NCBIGDOC51.html#fn2x9"><sup >2</sup></a></span><a 
+ id="x50-179001f2"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=&#x00A0;&lt;&lt;NCGB.m
+</div>
+</td></tr></table>
+<!--l. 64--><p class="nopar">
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Hi&#x00A0;there&#x00A0;!!!!!!!
+&#x00A0;<br />NCSetRule.m&#x00A0;loaded
+&#x00A0;<br />NCPInverses.m&#x00A0;loaded
+&#x00A0;<br />NCMono.m&#x00A0;loaded
+&#x00A0;<br />NCSolve.m&#x00A0;loaded
+&#x00A0;<br />NCMatMult.m&#x00A0;loaded
+&#x00A0;<br />NCAliasFunctions.m&#x00A0;loaded
+&#x00A0;<br />NCAlias.m&#x00A0;loaded
+&#x00A0;<br />Starting&#x00A0;Main
+&#x00A0;<br />LinkObject[p9c,&#x00A0;1,&#x00A0;1]
+</div>
+</td></tr></table>
+<!--l. 79--><p class="nopar">
+   <h4 class="subsectionHead"><span class="titlemark">9.1.1   </span> <a 
+ id="x50-1800009.1.1"></a> NCGBSetIntegerOverflow[False] </h4>
+<!--l. 87--><p class="noindent">Here is a technical point which has implications. By default, <span 
+class="cmmi-12">C </span>+ + stores only a small number of
+integers and if longer integers occur in a computer run it will make a mistake. NCGB, which you
+are using, does not have this problem because of some potentially time consuming dynamic storage
+allocation. If you are sure your runs have small integers (between <span 
+class="cmsy-10x-x-120">±</span>2 billion on a Sun), then you
+might want to override this NCGB feature to save run time. There are two ways to do this. One is
+type the command <span 
+class="cmmi-12">NCGBSetIntegerOverflow</span>[<span 
+class="cmmi-12">True</span>] before loading NCGB.m. <a 
+ id="dx50-180001"></a><a 
+ id="dx50-180002"></a> The other is to
+edit a line in the file NCGB.m to read <span 
+class="cmbx-12">$NCGB$IntegerOverflow=True</span>. <a 
+ id="dx50-180003"></a>These commands
+actually switch which code you are using. If you are in the middle of a session and wish to switch
+to just type <span 
+class="cmmi-12">NCGBSetIntegerOverflow</span>[<span 
+class="cmmi-12">True</span>] or <span 
+class="cmmi-12">NCGBSetIntegerOverflow</span>[<span 
+class="cmmi-12">True</span>] and reload
+NCGB.m.
+
+   <!--l. 116--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse34.html" >next</a>] [<a 
+href="NCBIGDOCse33.html" >front</a>] [<a 
+href="NCBIGDOCch9.html#NCBIGDOCse33.html" >up</a>] </p></div>
+<!--l. 116--><p class="indent">   <a 
+ id="tailNCBIGDOCse33.html"></a>   
+</body></html> 

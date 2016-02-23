@@ -1,0 +1,5 @@
+{invx**x -> 1, x**invx -> 1, invy**y -> 1, y**invy -> 1, 
+ x**y**inv1xy -> -1 + inv1xy, y**x**inv1yx -> -1 + inv1yx, 
+ inv1yx**invx -> invx + y**inv1xy, inv1xy**invy -> invy + x**inv1yx, 
+ invx**inv1xy -> invx + y**inv1xy, invy**inv1yx -> invy + x**inv1yx, 
+ inv1yx**y -> y**inv1xy, inv1xy**x -> x**inv1yx}

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>10.4 Saving lots of time when typing</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 580--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse39.html" >prev</a>] [<a 
+href="NCBIGDOCse39.html#tailNCBIGDOCse39.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse40.html">tail</a>] [<a 
+href="NCBIGDOCch10.html#NCBIGDOCse40.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">10.4   </span> <a 
+ id="x62-19200010.4"></a>Saving lots of time when typing</h3>
+<!--l. 584--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">10.4.1   </span> <a 
+ id="x62-19300010.4.1"></a>Saving time when typing relations involving inverses:NCMakeRelations</h4>
+<a 
+ id="dx62-193001"></a>
+<!--l. 588--><p class="noindent">One can save time in inputting various types of starting relations easily by using the command
+<span 
+class="cmti-12">NCMakeRelations</span>.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[12]:=&#x00A0;&lt;&lt;NCMakeRelations.m
+&#x00A0;<br />In[13]:=&#x00A0;NCMakeRelations[{Inv,y,1-y}]
+&#x00A0;<br />Out[13]=&#x00A0;{&#x00A0;y&#x00A0;**&#x00A0;Inv[y]&#x00A0;==&#x00A0;1,&#x00A0;Inv[y]&#x00A0;**&#x00A0;y&#x00A0;==&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1&#x00A0;-&#x00A0;y)&#x00A0;**&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;==&#x00A0;1,&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;**&#x00A0;(1&#x00A0;-&#x00A0;y)&#x00A0;==&#x00A0;1}
+</div>
+</td></tr></table>
+<!--l. 599--><p class="nopar">
+<!--l. 603--><p class="noindent"><span 
+class="cmbx-12">WARNING</span>
+<!--l. 608--><p class="indent">   It is traditional in mathematics to use only single characters for indeterminates (e.g., <span 
+class="cmmi-12">x</span>, <span 
+class="cmmi-12">y </span>and
+<span 
+class="cmmi-12">&#x03B1;</span>). However, we allow these indeterminate names as well as more complicated constructs such
+as
+   <center class="math-display" >
+<img 
+src="NCBIGDOC57x.png" alt="Inv[x],Inv[y],Inv[1 - x * *y] and Rt[x].  " class="math-display" ></center> In
+fact, we allow <span 
+class="cmmi-12">f</span>[<span 
+class="cmmi-12">expr</span>] to be an indeterminate if <span 
+class="cmmi-12">expr </span>is an expression and <span 
+class="cmmi-12">f </span>is a Mathematica
+symbol which has no Mathematica code associated to it (e.g., <span 
+class="cmmi-12">f </span>= <span 
+class="cmmi-12">Dummy </span>or <span 
+class="cmmi-12">f </span>= <span 
+class="cmmi-12">Joe</span>, but NOT
+<span 
+class="cmmi-12">f </span>= <span 
+class="cmmi-12">List </span>or <span 
+class="cmmi-12">f </span>= <span 
+class="cmmi-12">Plus</span>). Also one should never use <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">m</span>] to represent <span 
+class="cmmi-12">m</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> in the input of any of
+the commands explained within this document, because NCAlgebra has already assigned a
+meaning to <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">m</span>]. It knows that <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">m</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">m </span>is 1 which will transform your starting set of data
+prematurely.
+<!--l. 628--><p class="indent">   Besides <span 
+class="cmmi-12">Inv </span>many more functions are facilitated by NCMakeRelations, see Section
+<a 
+href="NCBIGDOCch22.html#x133-31800022.0.1">22.0.1<!--tex4ht:ref: command:NCMakeRelations --></a>.
+<!--l. 633--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">10.4.2   </span> <a 
+ id="x62-19400010.4.2"></a>Saving time working in algebras with involution: NCAddTranspose, NCAddAdjoint</h4>
+<a 
+ id="dx62-194001"></a>
+<a 
+ id="dx62-194002"></a>
+
+<!--l. 638--><p class="noindent">One can save time when working in an algebra with transposes or adjoints by using the command
+NCAddTranpose[ ] or NCAddAdjoint[ ]. These commands &#8220;symmetrize&#8221; a set of relations by
+applying tp[ ] or aj[ ] to the relations and returning a list with the new expressions
+appended to the old ones. This saves the user the trouble of typing both <span 
+class="cmmi-12">a </span>= <span 
+class="cmmi-12">b </span>and
+<span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">a</span>] = <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">b</span>].
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;NCAddTranspose[&#x00A0;{&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;,&#x00A0;tp[b]&#x00A0;==&#x00A0;c&#x00A0;+&#x00A0;a&#x00A0;}&#x00A0;]
+</div>
+</td></tr></table>
+<!--l. 649--><p class="nopar">
+<!--l. 651--><p class="noindent">returns
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+{&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;,&#x00A0;tp[b]&#x00A0;==&#x00A0;c&#x00A0;+&#x00A0;a,&#x00A0;b&#x00A0;==&#x00A0;tp[c]&#x00A0;+&#x00A0;tp[a],&#x00A0;tp[a]&#x00A0;+&#x00A0;tp[b]&#x00A0;}
+</div>
+</td></tr></table>
+<!--l. 656--><p class="nopar">
+<!--l. 660--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">10.4.3   </span> <a 
+ id="x62-19500010.4.3"></a>Saving time when setting orders: NCAutomaticOrder</h4>
+<a 
+ id="dx62-195001"></a>
+<!--l. 664--><p class="noindent">One can save time in setting the monomial order by not including all of the indeterminants found in a
+set of relations, only the variables which they are made of. <span 
+class="cmmi-12">NCAutomaticOrder</span>[<span 
+class="cmmi-12">aMonomialOrder,</span>
+<span 
+class="cmmi-12">aListOfPolynomials</span>] inserts all of the indeterminants found in <span 
+class="cmmi-12">aListOfPolynomials </span>into
+<span 
+class="cmmi-12">aMonomialOrder </span>and sets this order. NCAutomaticOrder[ <span 
+class="cmmi-12">aListOfPolynomials</span>] inserts all of the
+indeterminants found in <span 
+class="cmmi-12">aListOfPolynomials </span>into the ambient monomial order. If x is an
+indeterminant found in <span 
+class="cmmi-12">aMonomialOrder </span>then any indeterminant whose symbolic representation
+is a function of x will appear next to x.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;NCAutomaticOrder[{{a},{b}},&#x00A0;&#x00A0;{&#x00A0;a**Inv[a]**tp[a]&#x00A0;+&#x00A0;tp[b]}]
+</div>
+</td></tr></table>
+<!--l. 680--><p class="nopar">
+<!--l. 682--><p class="noindent">would set the order to be <span 
+class="cmmi-12">a &lt; tp</span>[<span 
+class="cmmi-12">a</span>] <span 
+class="cmmi-12">&lt; Inv</span>[<span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">&#x226A; </span><span 
+class="cmmi-12">b &lt; tp</span>[<span 
+class="cmmi-12">b</span>].
+<!--l. 17--><p class="indent">
+
+
+   <!--l. 18--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse39.html" >prev</a>] [<a 
+href="NCBIGDOCse39.html#tailNCBIGDOCse39.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse40.html" >front</a>] [<a 
+href="NCBIGDOCch10.html#NCBIGDOCse40.html" >up</a>] </p></div>
+<!--l. 18--><p class="indent">   <a 
+ id="tailNCBIGDOCse40.html"></a>   
+</body></html> 

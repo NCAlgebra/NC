@@ -1,0 +1,32 @@
+(* History:  07/24/01: NGGuts Test (Tony M.)  *)
+
+NCGuts[NCStrongProduct1 -> True];
+
+test[NCGuts,1] = 
+	{{a, b}, {c, d}} ** {{x}, {y}} == MatMult[{{a, b}, {c, d}}, {{x}, {y}}]
+
+test[NCGuts,2] =
+	tp[{{a, b}, {c, d}}] == tpMat[{{a, b}, {c, d}}]
+
+NCGuts[NCStrongProduct2 -> True];
+
+test[NCGuts,3] =
+	inv[{{a, b}, {0, c}}] == {{inv[a], -inv[a] ** b ** inv[c]}, {0, inv[c]}}
+
+test[NCGuts,4] = 
+	{{a, b}, {c, d}} ** {{x}, {y}} == {{a ** x + b ** y}, {c ** x + d ** y}}
+
+
+NCGuts[NCSetNC -> False];
+
+test[NCGuts,5] = 
+	A ** b  == b ** A 
+
+	
+Print["Results from the file NCGuts.NCTest"]
+For[ i=1, i<6, i++,
+     Print["Test #",i," was ",test[NCGuts,i]]
+   ];
+
+NCGuts[NCStrongProduct1 -> False];
+NCGuts[NCStrongProduct2 -> False];

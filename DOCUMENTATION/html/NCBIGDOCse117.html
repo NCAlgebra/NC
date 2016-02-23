@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>33.5 Environment Settings</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 366--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse116.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse116.html#tailNCBIGDOCse116.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse117.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch33.html#NCBIGDOCse117.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.5   </span></span> <a 
+ id="x187-41300033.5"></a><span 
+class="cmr-10x-x-109">Environment Settings</span></h3>
+<!--l. 368--><p class="noindent"><span 
+class="cmr-10x-x-109">All variables beginning with the four characters $NC$ are reserved for use by the NCAlgebra and NCGB</span>
+<span 
+class="cmr-10x-x-109">development teams.</span>
+<!--l. 371--><p class="indent">   <span 
+class="cmr-10x-x-109">The user may set an $NC$ variable to accomodate his/her needs. If the user does not assign a value to</span>
+<span 
+class="cmr-10x-x-109">a $NC$ variable, then it has no value until that variable is to be actually used. At that time, the code</span>
+<span 
+class="cmr-10x-x-109">changes the value of the variable to a default.</span>
+<!--l. 377--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.5.1   </span></span> <a 
+ id="x187-41400033.5.1"></a><span 
+class="cmr-10x-x-109">NCAlgebra $NC$ Variables</span></h4>
+<!--l. 405--><p class="noindent"><span 
+class="cmr-10x-x-109">$NC$Loaded$NCAlgebra$ is used to ensure that NCAlgebra.m is not loaded twice. Every</span>
+<span 
+class="cmr-10x-x-109">$NC$Loaded$*$ file will be used to avoid duplicate file Get&#8217;s. This is similar to the #ifndef #define</span>
+<span 
+class="cmr-10x-x-109">#endif scheme used in C++.</span>
+<!--l. 411--><p class="indent">   <span 
+class="cmr-10x-x-109">$NC$isCatching$ is reserved to attempt to do Mathematica exception handling via the</span>
+<span 
+class="cmr-10x-x-109">Mathematica commands Catch and Throw. This is not implemented and is held for future</span>
+<span 
+class="cmr-10x-x-109">development.</span>
+<!--l. 416--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.5.2   </span></span> <a 
+ id="x187-41500033.5.2"></a><span 
+class="cmr-10x-x-109">NCGB $NC$ Variables</span></h4>
+<!--l. 418--><p class="noindent"><span 
+class="cmr-10x-x-109">The $NC$ variables which are presently part of NCGB are those that are part of NCAlgebra (see section</span>
+<a 
+href="#x187-41400033.5.1"><span 
+class="cmr-10x-x-109">33.5.1</span><!--tex4ht:ref: secion:NCAlgebra:Dollar --></a><span 
+class="cmr-10x-x-109">) and the following variables.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+$NC$Loaded$NCGB$
+&#x00A0;<br />$NC$LongLoadTime$
+&#x00A0;<br />$NC$Binary$Dir$
+&#x00A0;<br />$NC$Binary$Name$
+</div>
+</td></tr></table>
+<!--l. 427--><p class="nopar">
+<a 
+ id="dx187-415001"></a>
+<a 
+ id="dx187-415002"></a>
+<a 
+ id="dx187-415003"></a>
+<a 
+ id="dx187-415004"></a>
+<!--l. 435--><p class="indent">   <span 
+class="cmr-10x-x-109">$NC$Loaded$NCGB$ is used to ensure that NCGB.m is not loaded twice. Every $NC$Loaded$*$ file</span>
+<span 
+class="cmr-10x-x-109">will be used to avoid duplicate file Get&#8217;s. This is similar to the #ifndef #define #endif scheme used in</span>
+<span 
+class="cmr-10x-x-109">C++.</span>
+<!--l. 441--><p class="indent">   <span 
+class="cmr-10x-x-109">The $NC$LongLoadTime$ variable is True by default which means that all of NCAlgebra.m will be</span>
+<span 
+class="cmr-10x-x-109">read in when NCGB.m is read in. If one sets it to False, </span><span 
+class="cmbx-10x-x-109">before </span><span 
+class="cmr-10x-x-109">loading either NCAlgebra.m or NCGB.m</span>
+<span 
+class="cmr-10x-x-109">then only part of NCAlgebra.m will be read in.</span>
+<!--l. 447--><p class="indent">   <span 
+class="cmr-10x-x-109">The variables $NC$Binary$Dir$ and $NC$Binary$Name$ are used to specify which C++ executable</span>
+<span 
+class="cmr-10x-x-109">file one is using. If one does not assign a value to either variable, then the value will be set in accordance</span>
+<span 
+class="cmr-10x-x-109">with the variable $NCDir$ which is set in the file SetNCPath.m. The file SetNCPath.m was modified</span>
+<span 
+class="cmr-10x-x-109">appropriately during installation.</span>
+
+   <!--l. 456--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse116.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse116.html#tailNCBIGDOCse116.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse117.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch33.html#NCBIGDOCse117.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 456--><p class="indent">   <a 
+ id="tailNCBIGDOCse117.html"></a>   
+</body></html> 

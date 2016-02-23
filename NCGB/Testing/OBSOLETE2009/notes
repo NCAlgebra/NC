@@ -1,0 +1,12 @@
+NCGBTestCreate
+
+  NCGBTestCreate[_Integer,_Integer]
+  NCGBTestCreate[_Integer,_Integer,FunctionName]
+  
+NCGBTestCompare
+  NCGBTestCompare[_Integer,_Integer] (* for *.tex files only *)
+  NCGBTestCompare[_Integer,_Integer,suffix] 
+            (* e.g., suffix is "GB" only  --- remember the quotes *)
+
+NCGBTEST  -- for users -- no options
+

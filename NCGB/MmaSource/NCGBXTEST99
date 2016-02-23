@@ -1,0 +1,42 @@
+(* ------------------------------------------------------------------ *)
+(* This file contains Get statements (i.e., <<) for various test files.*)
+(*                                                                    *)
+(*    All test file names  should end with the suffix .NCTest  and    *)
+(*   the first name should agree with the name of the file containing *)
+(*    the function being tested. Example,                             *)
+            (*    Testing    DirD[ , ]               *)
+            (*    which in the file NCDiff.m         *)
+            (*    is in the file Diff.NCTest         *)
+
+(*         When the test file is executed                             *)
+(*        the user should see only if the tests failed or not,        *)
+(*        (i.e. he should not be overwhelmed with formulas which      *)
+(*        he himself has to check)                                    *)
+(*    DO NOT LOAD THIS FILE IN THE SAME SESSION AS SYSTEMS            *)
+(* ------------------------------------------------------------------ *)
+Print[];
+Print[];
+Print["             Automated Testing System       "];
+Print[];
+Print["    DO NOT LOAD THIS FILE IN THE SAME SESSION AS SYSTEMS    "] ;
+Print[];
+Print[                       x**0                            ];
+
+(* PUT YOUR TEST FILE NAME HERE  *)
+
+Get["NCGB.m"];
+Get["NCChangeOfVariables.NCGBTest"];
+Get["NCCollectOnVariables.NCGBTest"];
+Get["Represent.NCTest"];
+Get["HilbertCoefficient.NCGBTest"];
+Get["NCMatMult.NCTest"];
+
+
+ (*  *)
+Print[];
+Print[];
+Print["             To obtain a summary, type ??test "];
+Print[];
+Print[];
+
+Put[DownValues[test], "test"]

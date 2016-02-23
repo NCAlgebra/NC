@@ -1,0 +1,37 @@
+SetMultiplicityOfGrading[2];
+SetMonomialOrder[{a,b},1];
+SetMonomialOrder[{x,y,z},2];
+
+test[NCGBConvert,1] = 
+MakeGreater[{x^2,y},{a,b,a,b,a,b,a,b,a,b}]==True;
+
+test[NCGBConvert,2] = 
+MakeGreater[{a,b,a,b,a,b,a,b,a,b},{x^2,y}]==False;
+
+test[NCGBConvert,3] = 
+MakeGreater[{a^2},{a^n}]==(2 - n >= 1 && n >= 1 || n == 0);
+
+test[NCGBConvert,4] = 
+MakeGreater[{a^2},{a^n,b}]==(2 - n >= 1 && n >= 1 || n == 0);
+
+test[NCGBConvert,5] = 
+MakeGreater[{a^m},{a^n,b}]==(n == 0 && -1 + m >= 1 && m >= 1 || m >= 1 && m - n >= 1 && n >= 1);
+
+test[NCGBConvert,6] = 
+NCGBConvert[RuleTuple[y^n-a^m,{n>=0,m>=0},{n,m}]]==True;
+
+test[NCGBConvert,7] = 
+NCGBConvert[RuleTuple[y^n-x^m,{n>=0,m>=0},{n,m}]];
+
+SetMultiplicityOfGrading[1];
+SetMonomialOrder[{a,b,c,d,e,f,x,y,z},1];
+
+test[NCGBConvert,8] = NCGBConvert[x**x - a] == {x**x ->a};
+test[NCGBConvert,9] = NCGBConvert[RuleTuple[x^m-x^n,{},{}]];
+
+
+
+Print["Results from the file NCGBConvert.NCTest"];
+For[i=1,i<=9,i++,
+   Print["Test #",i," was ",test[NCGBConvert,i]]
+];

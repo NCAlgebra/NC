@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.7 Operations on elements in an algebra</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1384--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse18.html" >next</a>] [<a 
+href="NCBIGDOCse16.html" >prev</a>] [<a 
+href="NCBIGDOCse16.html#tailNCBIGDOCse16.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse17.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse17.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.7   </span> <a 
+ id="x25-850004.7"></a>Operations on elements in an algebra</h3>
+<!--l. 1393--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.1   </span> <a 
+ id="x25-860004.7.1"></a>inv[x]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Inverse &#8211; a ** inv[a]=inv[a] ** a=Id
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">x </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Warning: NCAlgebra does not check that <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">x</span>] exists or even
+      that it makes sense (e.g. non-square matrices). This is the responsibility of the user. </dd></dl>
+<a 
+ id="dx25-86001"></a>
+<!--l. 1401--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.2   </span> <a 
+ id="x25-870004.7.2"></a>invL[x]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">invL</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Left inverse &#8211; invL[a] ** a=Id
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">x </span>is a symbol
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Warning. NCAlgebra does not check that <span 
+class="cmmi-12">invL</span>[<span 
+class="cmmi-12">x</span>] exists. This is
+      the responsibility of the user. </dd></dl>
+<a 
+ id="dx25-87001"></a>
+<!--l. 1409--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.3   </span> <a 
+ id="x25-880004.7.3"></a>invR[x]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">invR</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: invR[x] is the right inverse &#8211; a ** invR[a]=Id
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">x </span>is a symbol
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Warning. NCAlgebra does not check that <span 
+class="cmmi-12">invR</span>[<span 
+class="cmmi-12">x</span>] exists. This is
+      the responsibility of the user. </dd></dl>
+<a 
+ id="dx25-88001"></a>
+<!--l. 1417--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.4   </span> <a 
+ id="x25-890004.7.4"></a>invQ[x]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: invQ[m] = True forces <span 
+class="cmmi-12">invR</span>[<span 
+class="cmmi-12">m</span>] and <span 
+class="cmmi-12">invL</span>[<span 
+class="cmmi-12">m</span>] to be rewritten as <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">m</span>]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">x </span>is an expression.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: We never use this command. </dd></dl>
+<a 
+ id="dx25-89001"></a>
+<!--l. 1428--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.5   </span> <a 
+ id="x25-900004.7.5"></a>ExpandQ[inv]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: If <span 
+class="cmmi-12">ExpandQ</span>[<span 
+class="cmmi-12">inv</span>] is set to <span 
+class="cmmi-12">True</span>, an inverse of a product will be expanded to
+      a product of inverses. If it is set to <span 
+class="cmmi-12">False</span>, then a product of inverses will be rewritten
+      to be a inverse of a product.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: inv
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx25-90001"></a>
+<!--l. 1439--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.6   </span> <a 
+ id="x25-910004.7.6"></a>ExpandQ[tp]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: If <span 
+class="cmmi-12">ExpandQ</span>[<span 
+class="cmmi-12">tp</span>] is set to <span 
+class="cmmi-12">True</span>, a transpose of a product will be expanded to
+      a product of transposes. If it is set to <span 
+class="cmmi-12">False</span>, then a product of transposes will be
+      rewritten to be a transpose of a product.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: tp
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx25-91001"></a>
+<!--l. 1448--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.7   </span> <a 
+ id="x25-920004.7.7"></a>OverrideInverse</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">OverrideInverse </span>is a variable which is either <span 
+class="cmmi-12">True </span>or <span 
+class="cmmi-12">False</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: If <span 
+class="cmmi-12">OverrideInverse </span>is set to <span 
+class="cmmi-12">True</span>, then the replacement of invL and invR by
+      inv (when <span 
+class="cmmi-12">x </span>is invertible) is suppressed even if invQ is <span 
+class="cmmi-12">True</span>. The default is <span 
+class="cmmi-12">False</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx25-92001"></a>
+<!--l. 1457--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.8   </span> <a 
+ id="x25-930004.7.8"></a>aj[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">expr</span>] takes the adjoint of the expression <span 
+class="cmmi-12">expr</span>. Note that basic laws like
+      <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>] = <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">b</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">a</span>] are automatically executed.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">expr </span>is an algebraic expression
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  None </dd></dl>
+
+<a 
+ id="dx25-93001"></a>
+<!--l. 1466--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.9   </span> <a 
+ id="x25-940004.7.9"></a>tp[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">expr</span>] takes the transpose of expression <span 
+class="cmmi-12">expr</span>. Note that basic laws like
+      <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span>] = <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">b</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">a</span>] are automatically executed.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx25-94001"></a>
+<!--l. 1475--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.7.10   </span> <a 
+ id="x25-950004.7.10"></a>co[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">co</span>[<span 
+class="cmmi-12">expr</span>] takes the complex conjugate of <span 
+class="cmmi-12">expr</span>. Note basic laws like
+      <br class="newline">co[a**b]=co[a]**co[b] and co[a]=aj[tp[a]]=tp[aj[a]]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx25-95001"></a>
+
+   <!--l. 1477--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse18.html" >next</a>] [<a 
+href="NCBIGDOCse16.html" >prev</a>] [<a 
+href="NCBIGDOCse16.html#tailNCBIGDOCse16.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse17.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse17.html" >up</a>] </p></div>
+<!--l. 1477--><p class="indent">   <a 
+ id="tailNCBIGDOCse17.html"></a>   
+</body></html> 

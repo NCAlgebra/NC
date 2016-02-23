@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>30.5 Second Example</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 549--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse108.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse106.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse106.html#tailNCBIGDOCse106.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse107.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">30.5   </span></span> <a 
+ id="x173-38500030.5"></a><span 
+class="cmr-10x-x-109">Second Example</span></h3>
+<!--l. 552--><p class="noindent"><span 
+class="cmr-10x-x-109">As a second example, after loading the files </span><span 
+class="cmmi-10x-x-109">NCGB.m</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmmi-10x-x-109">SmallBasis</span><span 
+class="cmr-10x-x-109">3</span><span 
+class="cmmi-10x-x-109">.m </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmmi-10x-x-109">RemoveRedundent.m</span><span 
+class="cmr-10x-x-109">,</span>
+<span 
+class="cmr-10x-x-109">we can execute the following commands to compute a Gr</span><span 
+class="cmr-10x-x-109">öbner Basis for the set of relations</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">x</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">a,x</span><sup ><span 
+class="cmr-8">3</span></sup> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">b</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[3]:=&#x00A0;SetKnowns[a,b,x]
+&#x00A0;<br />
+&#x00A0;<br />In[4]:=&#x00A0;NCMakeGB[{x**x-a,x**x**x-b},10]
+&#x00A0;<br />Out[4]=&#x00A0;{-a&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;x,&#x00A0;-b&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;x,&#x00A0;-b&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;a,&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;x,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;b&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;a,&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;b,&#x00A0;-b&#x00A0;**&#x00A0;b&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a}
+</div>
+</td></tr></table>
+<!--l. 565--><p class="nopar">
+<!--l. 569--><p class="noindent"><span 
+class="cmr-10x-x-109">Now, one might want to find a smaller generating set for the ideal specified above. The following</span>
+<span 
+class="cmr-10x-x-109">command does that and took 9 seconds using the C++ version of the code.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;SmallBasis[%4,{},3]
+&#x00A0;<br />Out[5]=&#x00A0;{a&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;b,&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;a}
+</div>
+</td></tr></table>
+<!--l. 579--><p class="nopar">
+<!--l. 583--><p class="noindent"><span 
+class="cmr-10x-x-109">Alternatively, one can use the command </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundent</span></span></span> <span 
+class="cmr-10x-x-109">to generate the same result in 2 seconds. There</span>
+<span 
+class="cmr-10x-x-109">are two steps which need to be performed before calling </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundent</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[6]:=&#x00A0;WhatAreNumbers[]
+&#x00A0;<br />Out[6]=&#x00A0;{1,&#x00A0;2,&#x00A0;3,&#x00A0;4,&#x00A0;5,&#x00A0;6,&#x00A0;7}
+&#x00A0;<br />In[7]:=&#x00A0;WhatIsHistory[%]
+</div>
+</td></tr></table>
+<!--l. 596--><p class="nopar">
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[7]=&#x00A0;{{1,&#x00A0;a&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;b,&#x00A0;{0,&#x00A0;0},&#x00A0;{}},&#x00A0;{2,&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;a,&#x00A0;{0,&#x00A0;0},&#x00A0;{}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{3,&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;a,&#x00A0;{1,&#x00A0;2},&#x00A0;{}},&#x00A0;{4,&#x00A0;x&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;b,&#x00A0;{2,&#x00A0;2},&#x00A0;{1}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{5,&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;a,&#x00A0;{4,&#x00A0;1},&#x00A0;{3}},&#x00A0;{6,&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;b,&#x00A0;{3,&#x00A0;2},&#x00A0;{1}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{7,&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;b&#x00A0;**&#x00A0;b,&#x00A0;{3,&#x00A0;4},&#x00A0;{}}}
+</div>
+</td></tr></table>
+<!--l. 603--><p class="nopar">
+<!--l. 608--><p class="noindent"><span 
+class="cmr-10x-x-109">The call to RemoveRedundent is:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[8]:=&#x00A0;RemoveRedundent[%4,Out[12]]
+&#x00A0;<br />Out[8]=&#x00A0;{a&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;b,&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;a}
+</div>
+</td></tr></table>
+<!--l. 616--><p class="nopar">
+
+   <!--l. 621--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse108.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse106.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse106.html#tailNCBIGDOCse106.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 621--><p class="indent">   <a 
+ id="tailNCBIGDOCse107.html"></a>  
+</body></html> 

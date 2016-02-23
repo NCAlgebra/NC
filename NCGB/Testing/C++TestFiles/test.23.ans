@@ -1,0 +1,6 @@
+{-1 + a ** ia, -1 + b ** ib, -1 + c ** ic, -1 + d ** id, -1 + ia ** a, 
+  -1 + ib ** b, -1 + ic ** c, -1 + id ** d, -z - d ** a ** c + z ** b ** z, 
+  -ic + y + b ** z ** ic, -id + x + id ** z ** b, 
+  -a ** c ** b ** z ** ic + id ** z ** b ** d ** a, 
+  -z ** b ** d ** a + d ** a ** c ** b ** z ** ic, 
+  -d ** a ** c ** b ** z + z ** b ** d ** a ** c}

@@ -1,0 +1,15 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:29
+ *)
+
+{A**B + B**c + c**d, -A**B + B**A, -B**c**B + c**B**c, c**c, -A**d + d**A, 
+ d**d**d, B**B, B**c**B**d, B**c**B + c**A**B, A**A**B + B**c**A + c**A**d, 
+ A**B**d**d, c**A**A**B, A**A**A**B + B**c**A**A + c**A**A**d, A**d**B**d**d, 
+ c**A**A**A**B, A**A**A**A**B + B**c**A**A**A + c**A**A**A**d, 
+ A**B**d**B**d**d, A**d**d**B**d**d, c**A**A**A**A**B, 
+ A**A**A**A**A**B + B**c**A**A**A**A + c**A**A**A**A**d, A**d**B**d**B**d**d, 
+ c**A**A**A**A**A**B, A**A**A**A**A**A**B + B**c**A**A**A**A**A + 
+  c**A**A**A**A**A**d, A**B**d**B**d**B**d**d, A**d**d**B**d**B**d**d, 
+ c**A**A**A**A**A**A**B, A**A**A**A**A**A**A**B + B**c**A**A**A**A**A**A + 
+  c**A**A**A**A**A**A**d, A**d**B**d**B**d**B**d**d}

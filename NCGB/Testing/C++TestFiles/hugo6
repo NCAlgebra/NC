@@ -1,0 +1,61 @@
+
+(* HUGO6
+Trying to minimize the generating set obtained in hugo.m
+assuming invertibility of the knowns
+*)
+
+
+
+<<ShrinkBasis.m
+
+SetNonCommutative[a,b,c,d,x,y,z,w,ia,ib,ic,id];
+SetMultiplicityOfGrading[3];
+SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
+SetMonomialOrder[{z},2];
+SetMonomialOrder[{x,y,w},3];
+
+first = {{a,x},{y,b}};
+second = {{w,c},{d,z}};
+
+start = Flatten[{MatMult[first,second] - IdentityMatrix[2],
+                 MatMult[second,first] - IdentityMatrix[2]}];
+
+
+hugorelations = {z ** b ** z -> z + d ** a ** c,
+d ** x -> 1 - z ** b,
+y ** c -> 1 - b ** z,
+z ** y -> -d ** a,
+x ** z -> -a ** c
+};
+
+inverserelations = {
+ia**a - 1,
+a**ia - 1,
+ib**b - 1,
+b**ib - 1,
+ic**c - 1,
+c**ic - 1,
+id**d - 1,
+d**id - 1,
+w -> ia ** id ** z ** b ** d
+};
+
+smallerbasis = ShrinkBasis[start,hugorelations,inverserelations];
+Print[smallerbasis];
+
+finalanswer = Join[inverserelations,smallerbasis];
+Put[finalanswer, "hugo6.answer"];
+
+(*
+smallerbasis = 
+{d ** x -> 1 - z ** b, x ** z -> -a ** c, z ** y -> -d ** a}
+
+So, the result is that the following relations 
+with the condition that the knowns a,b,c,d are invertible
+form a generating set for the starting relations.
+
+d ** x -> 1 - z ** b, 
+x ** z -> -a ** c, 
+z ** y -> -d ** a,
+w -> ia ** id ** z ** b ** d
+*)

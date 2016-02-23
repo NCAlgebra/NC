@@ -1,0 +1,283 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11183,        234]*)
+(*NotebookOutlinePosition[     11870,        258]*)
+(*  CellTagsIndexPosition[     11826,        254]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NC Installation", "Title"],
+
+Cell[BoxData[{
+    \(\(\(Clear[$NC$SearchFileMany];\)\(\[IndentingNewLine]\)
+    \) (*\ \(--\(--\ \[IndentingNewLine]$NC$SearchFiles\)\)\ returns\ a\ list\
+\ of\ pairs . \ Each\ pair\ is\ a\ filename, \ 
+      directory\ name . \[IndentingNewLine]\(---\)\ *) \), "\
+\[IndentingNewLine]", 
+    \(\($NC$SearchFileMany[filename_, path_:  $Path, n_:  1] := 
+        Module[{L, dir, result}, 
+          Print["\<[ Looking for '\>", filename, "\<' in '\>", 
+            path, "\<'...]\>"]; \[IndentingNewLine]L = 
+            FileNames[filename, path, n]; \[IndentingNewLine]L\  = \ 
+            Map[{#, DirectoryName[#]} &, L]; \[IndentingNewLine]Return[
+            L];];\)\), "\[IndentingNewLine]", 
+    \(\(\(Clear[$NC$SearchFileOne];\)\(\[IndentingNewLine]\)
+    \) (*\ \(--\(--\ \[IndentingNewLine]$NC$SearchFileOne\)\)\ returns\ an\ \
+empty\ list\ or\ a\ pair . \ The\ pair\ is\ a\ filename, \ 
+      directory\ name . \[IndentingNewLine]\(---\)\ *) \), "\
+\[IndentingNewLine]", 
+    \(\($NC$SearchFileOne[filename_, path_:  $Path, n_:  1] := 
+        Module[{L, dir, result}, 
+          Print["\<[ Looking for '\>", filename, "\<' in '\>", 
+            path, "\<'...]\>"]; \[IndentingNewLine]L = 
+            FileNames[filename, path, n]; \[IndentingNewLine]If[L =!= {}, \ 
+            L\  = \ L[\([1]\)]; 
+            L\  = \ {L, DirectoryName[L]}]; \[IndentingNewLine]Return[
+            L];];\)\)}], "Input"],
+
+Cell[BoxData[""], "Input"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\(Clear[$NC$VerifyResponse];\)\
+\[IndentingNewLine]\[IndentingNewLine]
+    \($NC$VerifySearchResponse[
+          L_List]\  := \ \[IndentingNewLine]Module[{i, ans, result\  = \ {}, 
+            more, name, reprimand = "\<\>"}, \[IndentingNewLine]If[
+            L =!= {}, \[IndentingNewLine]\ \ i\  = \ 
+              1; \[IndentingNewLine]While[
+              And[i \[LessEqual] Length[L], 
+                result === {}], \[IndentingNewLine]\ \ ans\  = \ "\<not yes \
+or no\>"; \[IndentingNewLine]reprimand = "\<\>"; \[IndentingNewLine]\ 
+              more = 5; \[IndentingNewLine]\ 
+              name\  = \ L[\([i]\)]; \[IndentingNewLine]If[
+                StringMatchQ[
+                  name, "\<*NC_VERSION\>"], \[IndentingNewLine]\ \(name\  = \ 
+                    StringDrop[name, 
+                      StringLength["\<NC_VERSION\>"]];\)\[IndentingNewLine]]; \
+\[IndentingNewLine]\ 
+              While[And[more \[GreaterEqual] 0, 
+                  Not[MemberQ[{"\<yes\>", "\<no\>"}, 
+                      ans]]]\[IndentingNewLine]\ \ \ \ \ , \ 
+                ans\  = \ 
+                  InputString[
+                    reprimand <> "\<We suspect that the version of NC which \
+you want is related to the filein the directory \>" <> 
+                      ToString[$NC$FixFileName[$NC$file[\([i]\)]]] <> "\<Is \
+this correct? (yes/no)\>"]; \[IndentingNewLine]If[
+                  Not[MemberQ[{"\<yes\>", "\<no\>"}, 
+                      ans]], \(reprimand\  = \ "\<You responded \"\>" <> 
+                        ToString[
+                          ans] <> "\<\". Please answer yes or no.\n\n\>";\)\
+\[IndentingNewLine]]; \[IndentingNewLine]\(--more\);\[IndentingNewLine]]; \
+\[IndentingNewLine]If[ans === "\<yes\>", \ AppendTo[result, L[\([i]\)]]; 
+                AppendTo[result, 
+                  DirectoryName[
+                    L[\([i]\)]]];]; \[IndentingNewLine]\(++i\);\
+\[IndentingNewLine]]\[IndentingNewLine]]; \[IndentingNewLine]Return[
+            result];\[IndentingNewLine]];\)\)\)\)], "Input"],
+
+Cell[BoxData[{
+    \(Clear[$NC$FixFileName]\), "\n", 
+    \(\($NC$FixFileName[s_String] := 
+        StringReplace[s, "\<\\\>" \[Rule] "\<\\\\\>"];\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(Clear[$NC$SetUpPath]\), "\[IndentingNewLine]", 
+    \($NC$SetUpPath[] := 
+      Module[{}, \[IndentingNewLine]Print["\<\n* * * \"Enable Use\" of NC \
+Program * * *\n\>"]; \n\[IndentingNewLine]Print["\<\>"]; \n\
+\[IndentingNewLine]$NC$file = {}; \[IndentingNewLine]$NC$StandardDirectories \
+= {$HomeDirectory, $InitialDirectory, "\<D:\\My Documents\\StankusNC\>"}; \
+\[IndentingNewLine]$NC$StandardDirectories = {$HomeDirectory, \
+$InitialDirectory}; \[IndentingNewLine]$NC$i = 
+          1; \[IndentingNewLine]\[IndentingNewLine]Print["\<Searching the \
+directories \>", $NC$StandardDirectories]; \[IndentingNewLine]\
+\[IndentingNewLine]While[
+          And[$NC$file === {}, $NC$i \[LessEqual] 
+              Length[$NC$StandardDirectories]], $NC$file = $NC$SearchFileOne[
+              ToFileName["\<NC\>", "\<NC_VERSION\>"], \
+$NC$StandardDirectories[\([$NC$i]\)]]; \[IndentingNewLine]\(++$NC$i\);]; \
+\[IndentingNewLine]$NC$file\  = \ $NC$VerifySearchResponse[$NC$file]; \
+\[IndentingNewLine]\[IndentingNewLine]If[$NC$file === {}, \
+\[IndentingNewLine]$NC$hint = 
+            InputString["\<If you know the path where NC directory is \
+located, please type it now.\n\>" <> "\<Or hit <ENTER> to use '\>" <> \
+$InitialDirectory <> "\<':\>"]; \n\[IndentingNewLine]Print["\<Searching the \
+directories {\>", $NC$hint, "\<,\>", 
+            ToFileName[$NC$hint, "\<NC\>"], "\<}\>"]; \n\
+\[IndentingNewLine]If[$NC$hint === "\<\>", $NC$hint = $InitialDirectory]; \
+\[IndentingNewLine]\[IndentingNewLine] (*Try\ user' s\ guess\ first\  - \ 
+              OUTSIDE\ NC*) \[IndentingNewLine]$NC$file = $NC$SearchFileOne[
+              ToFileName["\<NC\>", "\<NC_VERSION\>"], $NC$hint]; \n\
+\[IndentingNewLine] (*Try\ user' s\ guess\ first\  - \ 
+              INSIDE\ NC*) \[IndentingNewLine]If[$NC$file === {}, $NC$file = \
+$NC$SearchFileOne["\<NC_VERSION\>", $NC$hint]];\[IndentingNewLine]]; \
+\[IndentingNewLine]\[IndentingNewLine]If[$NC$file === {}, \[IndentingNewLine] \
+(*Here\ we\ can\ put\ anything\ Mathematica\ understand\ or\ simply\ $Path\
+*) \[IndentingNewLine]If[$NC$hint =!= $InitialDirectory, \
+\[IndentingNewLine]\(Print["\<\nUnfortunately, you guessed \
+incorrectly.\>"];\)\[IndentingNewLine]]; \[IndentingNewLine]If\ [\
+\[IndentingNewLine]InputString["\<We can search some standard directories for \
+you.\n\>" <> \[IndentingNewLine]"\<This may take time though.\n\>" <> "\<If \
+you really want to do it type yes, otherwise hit <ENTER> to exit.\>"] =!= "\<\
+\>", \[IndentingNewLine]Print["\<Have a coffee!\>"]; \
+\[IndentingNewLine]Print["\<\n> Please wait...\>"]; \
+\[IndentingNewLine]$NC$NCSearchPath = $Path; \[IndentingNewLine]\
+\[IndentingNewLine] (*Do\ the\ really\ painfull\ \
+search*) \[IndentingNewLine]$NC$file = $NC$SearchFileOne["\<NC_VERSION\>", \
+$NC$NCSearchPath, 
+                Infinity];\[IndentingNewLine]];\[IndentingNewLine]]; \
+\[IndentingNewLine]\[IndentingNewLine]If[$NC$file =!= {}, \[IndentingNewLine]\
+\[IndentingNewLine]Print["\<[ FOUND IN '\>", $NC$file[\([2]\)], "\<']\>"]; \
+\[IndentingNewLine]\[IndentingNewLine] (*Open\ init . 
+                m\ file*) \[IndentingNewLine]$NC$initfile = 
+            ToFileName[$PreferencesDirectory, 
+              ToFileName["\<Kernel\>", "\<init.m\>"]]; \
+\[IndentingNewLine]Print["\<[ Looking for user's init.m file.]\>"]; \
+\[IndentingNewLine]$NC$info = 
+            FileInformation[$NC$initfile]; \[IndentingNewLine]If[$NC$info === \
+{}, \[IndentingNewLine]Print["\<[ User does not have an init.m file]\>"]; \
+\[IndentingNewLine]Print["\<[ Creating '\>", $NC$initfile, "\<']\>"]; \
+\[IndentingNewLine]$NC$stream = 
+              OpenWrite[$NC$initfile]\[IndentingNewLine], \
+\[IndentingNewLine]Print["\<[ User already has an init file]\>"]; \
+\[IndentingNewLine]Print["\<[ Appending to '\>", $NC$initfile, "\<']\>"]; \
+\[IndentingNewLine]$NC$stream = 
+              OpenAppend[$NC$initfile]\[IndentingNewLine]]; \
+\[IndentingNewLine]\[IndentingNewLine] (*Add\ to\ \
+path*) \[IndentingNewLine]$NC$file = $NC$FixFileName[
+              DirectoryName[$NC$file[\([2]\)]]]; \
+\[IndentingNewLine]Print["\<[ Adding '\>", $NC$file, "\<' to $Path]\>"]; \
+\[IndentingNewLine]WriteString[$NC$stream, "\<\n(* NCINSTALL - BEGIN *)\n\
+\>"]; \[IndentingNewLine]WriteString[$NC$stream, "\<AppendTo[$Path,\"\>", \
+$NC$file, "\<\"];\n\>"]; \[IndentingNewLine]WriteString[$NC$stream, "\<(* \
+NCINSTALL - END *)\n\n\>"]; \[IndentingNewLine]\[IndentingNewLine] (*Close\ \
+init . m\ file*) \[IndentingNewLine]Print["\<[ Closing init.m file]\>"]; \
+\[IndentingNewLine]Close[$NC$stream]; \[IndentingNewLine]Print["\<[ SUCCESS!]\
+\>"]; \[IndentingNewLine]Print["\<\>"]; \[IndentingNewLine]Print["\<On your \
+next Mathematica session you will be able to\>"]; \
+\[IndentingNewLine]Print["\<load NCAlgebra by typing '<< NC`'.\>"];\
+\[IndentingNewLine], \[IndentingNewLine]\[IndentingNewLine]Print["\<[ \
+FAILED!]\>"]; \[IndentingNewLine]Print["\<\>"]; \
+\[IndentingNewLine]Print["\<COULD NOT FIND NC DIRECTORY!\>"];];\
+\[IndentingNewLine]]\)}], "Input"]
+}, Closed]],
+
+Cell["\<\
+This notebook modifies your Mathematica initialization file by adding \
+instructions to set NCAlgebra in your Mathematica path.\
+\>", "Text",
+  FontSize->16],
+
+Cell["\<\
+Please go to menu Kernel, click Evaluation, then click Evaluate Notebook to \
+evaluate all cells in this notebook\
+\>", "Text",
+  FontSize->16],
+
+Cell["\<\
+Beware that some cells in this notebook are hidden, so you must do the above \
+step instead of simply executing the following command.\
+\>", "Text",
+  FontSize->16],
+
+Cell["You may be asked where you unzipped your file.", "Text",
+  FontSize->16],
+
+Cell[BoxData[
+    \($NC$SetUpPath[]\)], "Input"]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1600}, {0, 1117}},
+CellGrouping->Manual,
+WindowSize->{915, 740},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 32, 0, 95, "Title"],
+Cell[1811, 55, 1413, 25, 370, "Input"],
+Cell[3227, 82, 26, 0, 30, "Input"],
+Cell[3256, 84, 2078, 37, 630, "Input"],
+Cell[5337, 123, 162, 3, 50, "Input"],
+Cell[5502, 128, 5030, 79, 1790, "Input"]
+}, Closed]],
+Cell[10547, 210, 167, 4, 34, "Text"],
+Cell[10717, 216, 153, 4, 37, "Text"],
+Cell[10873, 222, 174, 4, 37, "Text"],
+Cell[11050, 228, 78, 1, 37, "Text"],
+Cell[11131, 231, 48, 1, 30, "Input"]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,58 @@
+(* ------------------------------------------------------------------ *)
+(* Collect.NCTest      3/28/92    -dhurst                             *)
+(*                      124/97     - Helton                           *)
+(* ------------------------------------------------------------------ *)
+
+Print["Results from the file Collect.NCTest"]
+Print["Expect messages regarding the NCSolve command, and suppression of output"]
+Print["All that matters is that all 6 tests return True"]
+
+
+Clear[ a,b,c,d,f,g,h,i,j ];
+
+SetNonCommutative[ W, x, z, A[x], B1[x], B2[x], C1[x], C2[x], 
+   D12[x], D21[x], GEx[x, z], GEz[x, z],
+   a,b,c,d,g,f,g,h,i,j];
+
+sHW = -tp[W] ** W + (tp[W] ** tp[B1[x]] + 
+      ((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[dd[z]] + tp[c[z]]) ** 
+       tp[B2[x]] + tp[A[x]]) ** GEx[x, z] + 
+   (((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[dd[z]] + tp[c[z]]) ** 
+       tp[D12[x]] + tp[C1[x]]) ** 
+    (C1[x] + D12[x] ** (dd[z] ** (C2[x] + D21[x] ** W) + c[z])) + 
+   tp[GEx[x, z]] ** (A[x] + B1[x] ** W + 
+      B2[x] ** (dd[z] ** (C2[x] + D21[x] ** W) + c[z])) + 
+   tp[GEz[x, z]] ** (b[z] ** (C2[x] + D21[x] ** W) + a[z]) + 
+   ((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[b[z]] + tp[a[z]]) ** GEz[x, z];
+
+ruCritW = {W -> tp[B1[x]] ** GEx[x, z] + tp[D21[x]] ** tp[b[z]] ** GEz[x, z]};
+
+(*
+tt1 = CriticalPoint[sHW,W];
+tt2 = tt1//.dd[x_]->0;
+test[NCCollect,1] = tt2 == ruCritW;
+*)
+
+test[NCCollect,1] = True;
+test[NCCollect,2] = NCCollect[tp[a]**b +tp[a]**c,tp[a]] == NonCommutativeMultiply[tp[a],b+c];
+test[NCCollect,3] = NCCollect[tp[a]**(b +c),tp[a]] == NonCommutativeMultiply[tp[a],b+c];
+test[NCCollect,4] = NCCollect[ a**b-a**c-a**d,a] == NonCommutativeMultiply[a,b-c-d];
+test[NCCollect,5] = NCCollect[ a**b-y**c-a**d,a] == a**(b-d)-y**c;
+test[NCCollect,6] =
+NCStrongCollect[
+-j ** b - c ** d ** inv[a] ** b - j ** inv[tp[a]] ** tp[d] ** c + 
+   inv[e] ** f ** inv[g] ** h + inv[e] ** f ** tp[f] ** c + 
+   tp[h] ** inv[tp[g]] ** inv[g] ** h + tp[h] ** inv[tp[g]] ** tp[f] ** c - 
+   c ** d ** inv[a] ** inv[tp[a]] ** tp[d] ** c,c
+] == 
+-c ** (d ** inv[a] ** b + d ** inv[a] ** inv[tp[a]] ** tp[d] ** c) -
+j ** b - (j ** inv[tp[a]] ** tp[d] - inv[e] ** f ** tp[f] -
+tp[h] ** inv[tp[g]] ** tp[f]) ** c + inv[e] ** f ** inv[g] ** h +
+tp[h] ** inv[tp[g]] ** inv[g] ** h;
+
+(* ------------------------------------------------------------------ *)
+(*                                                                    *)
+(* ------------------------------------------------------------------ *)
+For[ i=1, i<= 6, i++,
+Print["Test #",i," was ",test[NCCollect,i]]
+];

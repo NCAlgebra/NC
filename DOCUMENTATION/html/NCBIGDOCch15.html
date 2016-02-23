@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>15 NCProcess: The Commands</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch14.html" >prev</a>] [<a 
+href="NCBIGDOCch14.html#tailNCBIGDOCch14.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch15.html">tail</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch15.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;15</span><br><a 
+ id="x33-21000015"></a>NCProcess: The Commands</h2>
+<!--l. 5--><p class="noindent">Now that the user has a feel for what we are doing we describe the NCProcess commands one runs
+over and over again to produce the example in Chapter <a 
+href="NCBIGDOCch14.html#x28-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>. We are currently working on this
+command so it is changing with time.
+   <h3 class="sectionHead"><span class="titlemark">15.1   </span> <a 
+ id="x33-21100015.1"></a>SetKnowns and SetUnknowns</h3>
+<!--l. 14--><p class="noindent">In most mathematics and engineering appications, certain quantities are considered
+known and others are considered unknown. The goal is usually to solve for unknowns in
+terms of the knowns, or to solve for some unknowns in terms of others. In a prestrategy
+session, one must declare which variables are knowns and which ones are unknowns.
+While this declaration evolves through the course of a session, it is, at any moment, a
+part of the computing environment. Indeed, before any of the <span 
+class="cmmi-12">NCProcess </span>commands
+can be called, it is necessary to set all variables to either be known or be unknown.
+Mathematically, the variables which are declared unknown are those which one wants to solve
+for.
+<!--l. 35--><p class="indent">   An example is : <div class="newtheorem">
+<!--l. 36--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Example</span><span 
+class="cmbx-12">&#x00A0;15.1</span> </span><a 
+ id="x33-2110011"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SetNonCommutative[A,B,C,a,b,c];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetKnowns[A,B,C];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetUnknowns[{a,b,c}];
+</div>
+</td></tr></table>
+<!--l. 44--><p class="nopar">
+   </div>
+<!--l. 48--><p class="indent">   After the above three commands have been executed, the user can run any of the <span 
+class="cmbx-12">NCProcess</span>
+commands (<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>, <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess2</span></span></span> or <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess</span></span></span>) on any equations in the variables <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B</span>, <span 
+class="cmmi-12">C</span>, <span 
+class="cmmi-12">a</span>,
+<span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>. Here, <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>are knowns and <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span>are unknowns. In the case of <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess</span></span></span> and
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>, setting the knowns and unknowns as above has the effect that the <span 
+class="cmbx-12">NCProcess</span>
+command will try to solve for <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c </span>and produce equations from which they have been eliminated.
+Also the spreadsheet displayed by the <span 
+class="cmbx-12">NCProcess </span>command does bookkeeping based on what is
+known and unknown.
+<!--l. 62--><p class="indent">   The above three commands have imposed an order on the variables <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B</span>, <span 
+class="cmmi-12">C</span>, <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c </span>which
+expresses our priorities for eliminating them. We use the notation
+   <center class="math-display" >
+<img 
+src="NCBIGDOC67x.png" alt="A &lt; B  &lt; C  &#x226A; a &lt;  b &lt; c  " class="math-display" ></center> to
+denote the order imposed in the example. The <span 
+class="cmbx-12">NCProcess </span>command will try hardest to eliminate
+<span 
+class="cmmi-12">c </span>and the least to solve for <span 
+class="cmmi-12">A</span>.
+<!--l. 74--><p class="indent">   If you are running a prestrategy session and stop making progress one of the first things to try
+is changing the order.
+<!--l. 79--><p class="indent">   The <span 
+class="cmsy-10x-x-120">&#x226A; </span>means that the <span 
+class="cmbx-12">NCProcess </span>commands go to much greater lengths
+<span class="footnote-mark"><a 
+href="NCBIGDOC34.html#fn1x60"><sup >1</sup></a></span><a 
+ id="x33-211002f1"></a>
+towards eliminating <span 
+class="cmmi-12">a,b,c </span>than it does for <span 
+class="cmmi-12">A,B,C</span>.
+
+<!--l. 100--><p class="indent">   A fancier example of such prioritizing is :
+   <div class="newtheorem">
+<!--l. 104--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Example</span><span 
+class="cmbx-12">&#x00A0;15.2</span> </span><a 
+ id="x33-2110032"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SetNonCommutative[A,B,C,a,b,c,e,f,g];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetKnowns[A,B,C];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetUnknowns[{a,b,c},{d,e,f}];
+</div>
+</td></tr></table>
+<!--l. 110--><p class="nopar">
+   </div>
+<!--l. 114--><p class="indent">   This produces the ordering
+   <center class="math-display" >
+<img 
+src="NCBIGDOC68x.png" alt="A &lt; B  &lt; C &#x226A;  a &lt;  b &lt; c &#x226A; d &lt; e &lt; f ,
+" class="math-display" ></center>
+<!--l. 119--><p class="indent">   There is an alternative to <span 
+class="cmmi-12">SetKnowns </span>and <span 
+class="cmmi-12">SetUnknowns</span>. The command
+<br class="newline"><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">SetMonomialOrder[{A,B,C},{a,b,c},{d,e,f}]</span></span></span> has exactly the same effect as the commands in
+Example <a 
+href="#x33-2110032">15.2<!--tex4ht:ref: example:two --></a>.
+<!--l. 125--><p class="indent">   One can proceed with an <span 
+class="cmmi-12">NCProcess </span>command, only after an ordering is set.
+   <h3 class="sectionHead"><span class="titlemark">15.2   </span> <a 
+ id="x33-21200015.2"></a>NCProcess</h3>
+<!--l. 131--><p class="noindent">The workhorse commands of a strategy are the NCProcess1 and NCProcess2 commands. These
+two commands fit the general mold of the NCProcess command. In particular, each option of
+NCProcess is also an option of NCProcess1 and NCProcess2. See <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x33-22500015.6">15.6<!--tex4ht:ref: section:ncprocess:explanation --></a>.
+<!--l. 179--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.2.1   </span> <a 
+ id="x33-21300015.2.1"></a>NCProcess[aListOfPolynomials,iterations,fileName, Options ]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">NCProcess[aListOfPolynomials,iterations,fileName] </span>finds a new generating set for the
+      ideal generated by <span 
+class="cmti-12">aListOfPolynomials </span>along the lines of the demo presented in Chapter&#x00A0;<a 
+href="NCBIGDOCch16.html#x37-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a>.
+      The spreadsheets presented in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch16.html#x37-23100016.3.1">16.3.1<!--tex4ht:ref: subsection:strategy --></a> are the contents of the files <span 
+class="cmmi-12">fileName</span>, and are
+      produced by the command <span 
+class="cmmi-12">NCProcess</span>.
+      <br class="newline">In addition to creating the file <span 
+class="cmmi-12">fileName</span>, <span 
+class="cmmi-12">NCProcess </span>returns as Mathematica output a list
+      consisting of three lists.
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(1) A partial GB for the digested relations.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(2) The digested relations in the simplified second partial GB.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(3) The undigested relations in the simplified second partial GB.</dd></dl>
+      <!--l. 179--><p class="noindent">In practice, the user runs <span 
+class="cmmi-12">NCProcess</span>, then looks at the file <span 
+class="cmmi-12">fileName </span>in order to get
+      ideas for the next step. When the user decides on the next step, he can use some of the
+      lists of Mathematica output in addition to some new relations as inputs for the next
+      call to <span 
+class="cmtt-12">NCProcess</span>. There are many options for <span 
+class="cmtt-12">NCProcess</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aListOfPolynomials </span>is a list of polynomials. <span 
+class="cmmi-12">iterations </span>is a natural number.
+      <span class="footnote-mark"><a 
+href="NCBIGDOC35.html#fn2x60"><sup >2</sup></a></span><a 
+ id="x33-213001f2"></a>
+      <span 
+class="cmmi-12">fileName </span>is a character string. If <span 
+class="cmmi-12">fileNames</span>&#8217;s last four characters are not &#8220;.dvi&#8221;,
+      then &#8220;.dvi&#8221; is appended to <span 
+class="cmmi-12">fileName</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  Not  available  before  NCAlgebra  1.2  <span 
+class="cmbx-12">If  you  are  using</span>
+      <span 
+class="cmbx-12">NCProcess  in  the  Windows  environment  you  will  have  to  quit  the  dvi</span>
+      <span 
+class="cmbx-12">previewer to continue your Mathematica session. </span></dd></dl>
+<a 
+ id="dx33-213002"></a>
+<!--l. 183--><p class="noindent">The command <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess</span></span></span> calls <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB[aListOfPolynomials,iters]</span></span></span>. <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> is an algorithm
+for producing a partial Gröbner basis. This produces many new relations whose solution set is the
+same as the solution set for <span 
+class="cmmi-12">aListOfPolynomials</span>. Typically, many of the relations follow from
+other relations within the same output. There are many options for <span 
+class="cmmi-12">NCProcess </span>which remove
+&#8220;mathematically redundant&#8221; relations before generating the spreadsheet in <span 
+class="cmmi-12">fileName </span>and lists (2)
+and (3) of the Mathematica output. The various options as well as the default options for
+<span 
+class="cmmi-12">NCProcess </span>are described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch19.html#x48-26500019">19<!--tex4ht:ref: chapter:ncprocess:options --></a>.
+
+<!--l. 194--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.2.2   </span> <a 
+ id="x33-21400015.2.2"></a>Examples</h4>
+<!--l. 197--><p class="noindent">Here are some examples of how the <span 
+class="cmmi-12">NCProcess </span>commands are called.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+NCProcess1[aListOfPolys,2,"filname"]
+&#x00A0;<br />list1&#x00A0;=&#x00A0;NCProcess1[aListOfPolys,2,"filname",
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DegreeCap-&gt;8,&#x00A0;DegreeSumCap-&gt;12]
+&#x00A0;<br />list2&#x00A0;=&#x00A0;NCProcess2[aListOfPolys,2,"filname",UserSelect-&gt;anotherList,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DegreeCap-&gt;6,&#x00A0;DegreeSumCap-&gt;10]
+</div>
+</td></tr></table>
+<!--l. 207--><p class="nopar">
+<!--l. 211--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">15.3   </span> <a 
+ id="x33-21500015.3"></a>Commonly Used NCProcess Options and Commands</h3>
+<!--l. 215--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.3.1   </span> <a 
+ id="x33-21600015.3.1"></a>UserSelect <span 
+class="cmsy-10x-x-120">&#x2192; </span>aListOfPolynomials</h4>
+<!--l. 217--><p class="noindent">A valuable option for <span 
+class="cmmi-12">NCProcess </span>is <span 
+class="cmti-12">UserSelect</span>. Using the option
+   <center class="math-display" >
+<img 
+src="NCBIGDOC69x.png" alt="UserSelect &#x2192;  aListOf  Polynomials  " class="math-display" ></center>
+forces the elements of the list <span 
+class="cmti-12">aListOfPolynomials </span>to appear in a &#8220;User Selected&#8221; part of the
+spreadsheet generated during this call to <span 
+class="cmmi-12">NCProcess</span>. It also affects the order in which the
+polynomials are used inside <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> as well as reduction algorithms described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch19.html#x48-26600019.1">19.1<!--tex4ht:ref: section:reduction:algorithms --></a>. The user
+selected polynomials are processed early and polynomials processed later tend to be
+eliminated.
+<!--l. 267--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.3.2   </span> <a 
+ id="x33-21700015.3.2"></a>DegreeCap<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">aNumber</span>1 and DegreeSumCap<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">aNumber</span>2</h4>
+<!--l. 269--><p class="noindent">One way to reduce the run time for <span 
+class="cmmi-12">NCProcess </span>is to use the options capping the degree of the
+polynomials that are produced in the course of running <span 
+class="cmmi-12">NCProcess</span>.
+
+<!--l. 274--><p class="indent">   This is valuable since the user will ordinarily know that a polynomial of a very high degree will
+not be useful to him, hence there is no reason to produce it. It is not the time that it takes to
+produce a large polynomial that is the primary factor; rather, it is the reduction algorithms that
+will get bogged down trying to remove it. Degree caps can prevent the algorithm from ever
+producing polynomials over a certain degree, or combining polynomials over a certain
+degree, and the user will still be left with a generating set for the ideal generated by
+the input relations. There are two different options associated with degree caps. For
+instance,
+   <center class="math-display" >
+<img 
+src="NCBIGDOC70x.png" alt="DegreeCap   &#x2192; 8  " class="math-display" ></center>
+would prevent a polynomial of degree 8 or higher from combining with a polynomial of higher
+degree.
+   <center class="math-display" >
+<img 
+src="NCBIGDOC71x.png" alt="DegreeSumCap    &#x2192;  10  " class="math-display" ></center>
+would prevent two polynomials whose degrees add up to 10 or more from combining. Degree
+caps could prevent an important relation from being created, so when there is a lack of
+progress, raising the degree caps as well as the iteration number would be the next
+step.
+<!--l. 297--><p class="indent">   <span 
+class="cmbx-12">WE URGE USE OF DEGREE CAPS. THEY SAVE A LOT OF TIME.</span>
+<!--l. 299--><p class="indent">   In addition, <span 
+class="cmmi-12">DegreeCap </span>and <span 
+class="cmmi-12">DegreeSumCap </span>are options which cap the degree of polynomials
+occurring in <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span>. Indeed, calling DegreeCap in <span 
+class="cmmi-12">NCProcess </span>just sets the DegreeCap for
+running <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> inside of <span 
+class="cmmi-12">NCProcess</span>.
+<!--l. 306--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.3.3   </span> <a 
+ id="x33-21800015.3.3"></a> MainUnknowns<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">aListOfIndeterminates </span></h4>
+<!--l. 308--><p class="noindent">If <span 
+class="cmmi-12">aListOfIndeterminates </span>are given, then the output of <span 
+class="cmtt-12">NCProcess </span>will only include
+equations whose unknowns are all contained in aListOfIndeterminates or are functions of
+
+them.
+<!--l. 315--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.3.4   </span> <a 
+ id="x33-21900015.3.4"></a> NCShortFormula<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">Length </span></h4>
+<!--l. 318--><p class="noindent">If NCShortFormula is set to an integer, <span 
+class="cmmi-12">Length</span>, the output of NCProcess will only contain
+expressions whose Mathematica defined <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">LeafCount[</span><span 
+class="cmtt-12">&#x00A0;]</span></span></span> is less than <span 
+class="cmmi-12">Length</span>. This could be
+useful in producing <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;output when <span 
+class="cmti-12">very </span>long expressions are involved. This option
+also reduces run time significantly since there is much less output to process. We often
+have good luck with NCShortFormulas<span 
+class="cmsy-10x-x-120">&#x2192;</span>300. If set to -1 no length elimination will be
+done.
+<!--l. 329--><p class="noindent"><span 
+class="cmbx-12">WARNING </span>The two options given above, NCShortFormula and MainUnknowns, actually
+eliminate polynomials from the output of NCProcess. If one of these options is set the system of
+equations which is the output of NCProcess is not equivalent to the system of equations which is
+input as is usually the case.
+<!--l. 479--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.3.5   </span> <a 
+ id="x33-22000015.3.5"></a>Getting Categories </h4>
+<!--l. 481--><p class="noindent"><span 
+class="cmmi-12">GetCategory</span>[<span 
+class="cmmi-12">aListOfV ariables,NCPAns</span>] retrieves the polynomials in the category stored in
+<span 
+class="cmmi-12">NCPAns </span>corresponding to the list of variables in the list <span 
+class="cmmi-12">aListOfV ariables</span>. See Chapter <a 
+href="NCBIGDOCch14.html#x28-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a>. To
+be recognized immediately after an NCProcess run <span 
+class="cmmi-12">aListOfV ariables </span>must equal a list of
+unknowns which corresponds to a category in that NCProcess run. The NCProcess stores all
+category information in NCPAns. The next NCProcess starts by clearing NCPAns and writes the
+category information it produces in NCPAns.
+<!--l. 495--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">15.4   </span> <a 
+ id="x33-22100015.4"></a>Typical use of the NCProcess command</h3>
+<!--l. 498--><p class="noindent">Now we demonstrate the <span 
+class="cmmi-12">NCProcess </span>command by &#8220;solving&#8221; <span 
+class="cmmi-12">FAC </span>as already discussed in Chapter
+<a 
+href="NCBIGDOCch14.html#x28-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>. While we show an interactive session the user probably will want to type the commands into a
+file and load them into your session. This is standard practice among Mathematica users and saves
+lots of time.
+<!--l. 506--><p class="indent">   As shown in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch14.html#x28-20600014.2">14.2<!--tex4ht:ref: subsection:problem --></a>, the prestrategy starts as follows.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=Get["NCGB.m"];
+&#x00A0;<br />In[2]:=SetNonCommutative[A,B,C0,m1,m2,n1,n2];
+&#x00A0;<br />In[3]:=SetKnowns[A,B,C];
+&#x00A0;<br />In[4]:=SetUnknowns[m1,m2,n1,n2,a,b,c,e,f,g];
+&#x00A0;<br />In[5]:=FAC&#x00A0;=&#x00A0;{A**m1&#x00A0;-&#x00A0;m1**a&#x00A0;-&#x00A0;m2**f**c,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A**m2&#x00A0;-&#x00A0;m2**e,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;-&#x00A0;m1**b&#x00A0;-&#x00A0;m2**f,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-c&#x00A0;+&#x00A0;C0**m1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-g&#x00A0;+&#x00A0;C0**m2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n1**m1&#x00A0;-&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n1**m2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n2**m1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n2**m2&#x00A0;-&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1**n1&#x00A0;+&#x00A0;m2**n2&#x00A0;-&#x00A0;1};
+&#x00A0;<br />In[6]:=&#x00A0;result&#x00A0;=&#x00A0;NCProcess1[FAC,2,"Spreadsheet1"];
+</div>
+</td></tr></table>
+<!--l. 526--><p class="nopar">
+<!--l. 530--><p class="indent">   The first command simply loads the noncommutative Gröbner basis package into Mathematica.
+Then we set the variables to be noncommutative.
+<!--l. 534--><p class="indent">   The third and fourth commands sets the monomial order that will be used in solving for and
+eliminating variables as explained in Chapter <a 
+href="NCBIGDOCch18.html#x46-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>. The list <span 
+class="cmbx-12">FAC </span>is the set of relations that describe
+the problem as explained in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch14.html#x28-20600014.2">14.2<!--tex4ht:ref: subsection:problem --></a>. The call to <span 
+class="cmmi-12">NCProcess</span>1 will run two iterations on <span 
+class="cmbx-12">FAC </span>before
+creating the file &#8220;Spreadsheet1.dvi&#8221; and returning the final <span 
+class="cmbx-12">result </span>as Mathematica
+output.
+<!--l. 550--><p class="indent">   The file &#8220;Spreadsheet1.dvi&#8221; is the same as the one which was produced in Chapter <a 
+href="NCBIGDOCch16.html#x37-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a>. It exists
+outside of Mathematica and is only for viewing. It cannot be used to create a list of polynomials
+for Mathematica. The strategy that the user follows at this point was described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch14.html#x28-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a>. Recall
+that it led the user to select the relations
+   <center class="math-display" >
+<img 
+src="NCBIGDOC72x.png" alt="m1  n1 - P1, n1m1  - 1, n2 m2 - 1, m2 n2 - 1 + m1  n1   " class="math-display" ></center> and
+to declare the new variable <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> to be known.
+
+<!--l. 561--><p class="indent">   Next we describe how this is input to <span 
+class="cmmi-12">NCProcess</span>1 in order to produce the second spreadsheet
+from <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch14.html#x28-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a>.
+<!--l. 564--><p class="indent">   The Mathematica output of any of the <span 
+class="cmmi-12">NCProcess </span>commands is a list containing three lists. In
+the example above, that list is named <span 
+class="cmbx-12">result</span>. Recall that in Mma the way to get sublist number <span 
+class="cmmi-12">j</span>
+inside <span 
+class="cmbx-12">result </span>is to type <span 
+class="cmmi-12">result</span>[[<span 
+class="cmmi-12">j</span>]].
+<!--l. 569--><p class="indent">   The second round of this strategy session is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[7]:=&#x00A0;SetKnowns[A,B,C,P1];
+&#x00A0;<br />In[8]:=&#x00A0;digested&#x00A0;=&#x00A0;result[[2]]
+&#x00A0;<br />In[9]:=&#x00A0;undigested&#x00A0;=&#x00A0;result[[3]]
+&#x00A0;<br />In[10]:=&#x00A0;interesting&#x00A0;=&#x00A0;{m1**n1-P1,n1**m1-1,n2**m2-1,m2**n2-1+m1**n1};
+&#x00A0;<br />In[11]:=&#x00A0;nextinput&#x00A0;=&#x00A0;Union[digested,interesting,undigested]
+&#x00A0;<br />In[12]:=&#x00A0;NCProcess1[nextinput,2,"Spreadsheet2",
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;UserSelect-&gt;discovered,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DegreeCap-&gt;3,DegreeSumCap-&gt;6];
+</div>
+</td></tr></table>
+<!--l. 582--><p class="nopar">
+<!--l. 586--><p class="indent">   Now we discuss the input to <span 
+class="cmmi-12">NCProcess</span>1 above. The variables <span 
+class="cmbx-12">digested </span>and <span 
+class="cmbx-12">undigested </span>hold
+the the last two lists from the list <span 
+class="cmbx-12">result </span>which the first <span 
+class="cmmi-12">NCProcess</span>1 command returned, and
+<span 
+class="cmbx-12">discovered </span>includes the new definition of <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub>. The union of these three lists is taken as the input
+for the second <span 
+class="cmmi-12">NCProcess</span>1 run. Once again we used two iterations. This is a good number of
+iterations with which to start. More iterations can be used if there is a lack of progress. The
+next argument is a string which refers to a file name which will store the spreadsheet.
+Unlike the first call to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>, this call uses non-default values for the options.
+The <span 
+class="cmmi-12">UserSelect </span>option (as described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x33-21600015.3.1">15.3.1<!--tex4ht:ref: subsection:userselect --></a>) causes the <span 
+class="cmbx-12">discovered </span>relations to
+be given high priority. The DegreeCaps are set in order to save time (as explained in
+<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x33-21700015.3.2">15.3.2<!--tex4ht:ref: subsection:degreecap --></a>).
+<!--l. 611--><p class="indent">   The file &#8220;Spreadsheet2.dvi&#8221; is the same as the second spreadsheet which was produced in
+Chapter <a 
+href="NCBIGDOCch16.html#x37-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a>. As we saw in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch14.html#x28-20800014.4">14.4<!--tex4ht:ref: section:endgame:concept --></a>, this spreadsheet leads directly to the main theorem about
+factoring systems.
+<!--l. 618--><p class="indent">   For another demonstration of strategies using <span 
+class="cmmi-12">NCProcess </span>see Chapter <a 
+href="NCBIGDOCch17.html#x44-23600017">17<!--tex4ht:ref: chapter:doyle:glover --></a>.
+<!--l. 622--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">15.5   </span> <a 
+ id="x33-22200015.5"></a>Details of NCProcess</h3>
+<!--l. 625--><p class="noindent">The following section gives psuedocode for the NCProcess1 and NCProcess2 commands.
+<!--l. 628--><p class="indent">   This psuedocode uses the function <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> which implements a Gröbner Basis Algorithm
+which returns partial GB&#8217;s which are reduced. In particular, running the function <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> for 0
+iterations on a set <span 
+class="cmmi-12">F </span>does not compute any S-polynomials, but does produce a set <span 
+class="cmmi-12">G </span>which is
+reduced. <span 
+class="cmmi-12">G </span>will be called a reduced form of <span 
+class="cmmi-12">F</span>.
+<!--l. 638--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.5.1   </span> <a 
+ id="x33-22300015.5.1"></a>NCProcess1 command</h4>
+
+<!--l. 641--><p class="noindent">The input to NCProcess1 is a set of starting equations <span 
+class="cmmi-12">start</span>, a number of iterations <span 
+class="cmmi-12">n </span>for the GBA
+and a collection of user selects.
+<!--l. 645--><p class="indent">   The steps NCProcess1 takes are:
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">I. Preparation for the main call to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span>
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(1)  Run  the  GBA  on  the  equations  in  <span 
+class="cmmi-12">start </span>which  do  not  involve  any  unknown
+           variables together with the user selects for at most <span 
+class="cmmi-12">n </span>+ 1 iterations. Let <span 
+class="cmmi-12">A </span>denote
+           this partial GB.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(2) Shrink <span 
+class="cmmi-12">A </span>using the RemoveRedundantProtected operation. Call this shrunken set
+           <span 
+class="cmmi-12">B</span>.</dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">II. The main call to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span>
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(3) Run <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> with the input <span 
+class="cmmi-12">B </span>together with <span 
+class="cmmi-12">start </span>for at most <span 
+class="cmmi-12">n </span>iterations. In
+           this <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> run, S-polynomials between two elements of the partial GB of <span 
+class="cmmi-12">A</span>
+           are not computed. Let <span 
+class="cmmi-12">C </span>denote this partial GB. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">III. Shrinking the partial GB
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(4) Shrink <span 
+class="cmmi-12">C </span>using the RemoveRedundantProtected operation. Call this shrunken set
+           <span 
+class="cmmi-12">D</span>.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(5) Let <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> be the set of polynomials in <span 
+class="cmmi-12">D </span>which do not involve any unknowns. Let
+           <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> = <span 
+class="cmmi-12">D</span><span 
+class="cmsy-10x-x-120">\</span><span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub> be a set of the normal forms of the elements of <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> with
+           respect to <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E </span>= <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">&#x222A; </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub>.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(6) Let <span 
+class="cmmi-12">F </span>be the union of <span 
+class="cmmi-12">E </span>and the user selects. Let <span 
+class="cmmi-12">G </span>be a reduced form of <span 
+class="cmmi-12">F </span>(see
+           the beginning of <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x33-22200015.5">15.5<!--tex4ht:ref: section:Details of NCProcess --></a>).
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(7) Shrink <span 
+class="cmmi-12">G </span>by SmallBasisByCategory using iteration parameters <span 
+class="cmmi-12">n </span>+ 1 and <span 
+class="cmmi-12">n </span>+ 2.
+           Call this shrunken set <span 
+class="cmmi-12">H</span>. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">IV. </span>Attempt Decompose
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(8) Construct the collected forms of the polynomials in <span 
+class="cmmi-12">H</span>. </dd></dl>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">V. </span>Displaying the results
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(9) For elements of <span 
+class="cmmi-12">H</span>, if the polynomial&#8217;s only collected form is trivial, then display
+           the rule corresponding to the polynomial, otherwise display the collected form of
+           the polynomial. This is the step in which the &#8220;spreadsheets&#8221; of the results of this
+           paper are constructed. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">V I. </span>Return a three tuple to the user for future use
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(10) Return the triple (<span 
+class="cmmi-12">A,H</span><sub ><span 
+class="cmr-8">0</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">1</span></sub>) to the user where <span 
+class="cmmi-12">A </span>is from item 1 above, <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">0</span></sub>  is
+           the set of polynomials in <span 
+class="cmmi-12">H </span>which are digested and <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub> is the set of polynomials
+           in <span 
+class="cmmi-12">H </span>which are undigested. </dd></dl>
+      </dd></dl>
+<!--l. 730--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.5.2   </span> <a 
+ id="x33-22400015.5.2"></a>NCProcess2 command</h4>
+<!--l. 733--><p class="noindent">The input to NCProcess2 is a set of starting equations <span 
+class="cmmi-12">start</span>, a number of iterations <span 
+class="cmmi-12">n </span>for
+SmallBasis and a collection of user selects.
+<!--l. 737--><p class="indent">   The steps taken by NCProcess2 are:
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">I. Shrinking the input equations
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(1) Shrink <span 
+class="cmmi-12">start </span>using the RemoveRedundantProtected operation. Call this shrunken
+           set <span 
+class="cmmi-12">D</span>.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(2) Let <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> be the set of polynomials in <span 
+class="cmmi-12">D </span>which do not involve any unknowns. Let
+           <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> = <span 
+class="cmmi-12">D</span><span 
+class="cmsy-10x-x-120">\</span><span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub> be a set of the normal forms of the elements of <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> with
+           respect to <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E </span>= <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">&#x222A; </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub>.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(3) Let <span 
+class="cmmi-12">F </span>be the union of <span 
+class="cmmi-12">E </span>and the user selects. Let <span 
+class="cmmi-12">G </span>be a reduced form of <span 
+class="cmmi-12">F</span>. (see
+           the beginning of <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x33-22200015.5">15.5<!--tex4ht:ref: section:Details of NCProcess --></a>).
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(4) Shrink <span 
+class="cmmi-12">G </span>by SmallBasis. Set <span 
+class="cmmi-12">H </span>equal to the result of the shrinking. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">II. </span>The &#8220;Attempt Decompose&#8221; &#8220;Displaying the results&#8221; and &#8220;Return a three tuple to the
+      user for future use&#8221; as in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x33-22300015.5.1">15.5.1<!--tex4ht:ref: subsection:NCProcess1 command --></a>. </dd></dl>
+
+<!--l. 772--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">15.6   </span> <a 
+ id="x33-22500015.6"></a>NCProcess1 and NCProcess2: The technical descriptions</h3>
+<!--l. 775--><p class="noindent">Below, <span 
+class="cmmi-12">aList </span>is a list of polynomials, <span 
+class="cmmi-12">n </span>is a positive integer, <span 
+class="cmmi-12">filename </span>is a character string and
+rules is a sequence of zero or more Mathematica rules which correspond to NCProcess
+options.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+NCProcess1[aList_,n_,filename_,rules___Rule]:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NCProcess[aList,n,filename,SBByCat-&gt;True,RR-&gt;True,rules];
+&#x00A0;<br />NCProcess2[aList_,n_,filename_,rules___Rule]:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NCProcess[aList,n,filename,SB-&gt;True,RR-&gt;True,rules];
+&#x00A0;<br />which&#x00A0;is&#x00A0;the&#x00A0;same&#x00A0;as
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NCProcess[aList,n,n+1,n+1,n+2,filename,SB-&gt;True,RR-&gt;True,rules];
+</div>
+</td></tr></table>
+<!--l. 789--><p class="nopar">
+<!--l. 793--><p class="noindent">For an understanding of &#8220;<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">n,n+1,n+1,n+2</span></span></span>&#8221;, see the footnote in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x33-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a> Arguments.
+
+   <!--l. 41--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch14.html" >prev</a>] [<a 
+href="NCBIGDOCch14.html#tailNCBIGDOCch14.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch15.html" >front</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch15.html" >up</a>] </p></div>
+<!--l. 41--><p class="indent">   <a 
+ id="tailNCBIGDOCch15.html"></a>   
+</body></html> 

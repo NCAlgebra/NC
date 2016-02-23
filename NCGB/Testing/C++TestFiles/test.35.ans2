@@ -1,0 +1,8 @@
+{-1 + Invx ** x, -1 + Invy ** y, -Invx ** S + T ** Invx, 
+  -Invy ** T + T ** Invy, -1 + x ** Invx, S ** x - x ** T, -1 + y ** Invy, 
+  T ** y - y ** T, S ** x ** y - x ** y ** S, -x ** y ** S + x ** y ** T, 
+  -x ** T + x ** y ** S ** Invy, -y ** S + y ** T, -T + y ** S ** Invy, 
+  -x ** y ** Invx ** S + x ** y ** S ** Invx, 
+  -x ** y ** S ** S + x ** y ** S ** T, 
+  -x ** T ** T + x ** y ** S ** S ** Invy, 
+  x ** y ** S ** y - x ** y ** y ** S}

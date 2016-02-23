@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>1.3 A Short Tutorial</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 124--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse5.html" >next</a>] [<a 
+href="NCBIGDOCse3.html" >prev</a>] [<a 
+href="NCBIGDOCse3.html#tailNCBIGDOCse3.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse4.html">tail</a>] [<a 
+href="NCBIGDOCch1.html#NCBIGDOCse4.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x9-110001.3"></a>A Short Tutorial</h3>
+<!--l. 126--><p class="noindent">NCAlgebra is a <span 
+class="cmti-12">Mathematica </span>package which allows one to do noncommutative algebraic
+computations. We will begin by presenting some calculations done with our package which should
+give some idea of what may be accomplished with NCAlgebra. We suggest that the reader later do
+these computations for himself with our package when it has been properly installed since it will
+provide a tutorial as well as an illustration.
+<!--l. 134--><p class="indent">   To begin start Mathematica and load NCAlgebra.m or NCGB.m as shown in Section&#x00A0;<a 
+href="NCBIGDOCse3.html#x8-100001.2">1.2<!--tex4ht:ref: sec:runnc --></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]&#x00A0;&lt;&lt;&#x00A0;NC&#8216;
+&#x00A0;<br />In[2]&#x00A0;&lt;&lt;&#x00A0;NCAlgebra&#8216;
+</div>
+</td></tr></table>
+<!--l. 139--><p class="nopar">
+<!--l. 142--><p class="indent">   The following examples are independent of each other, however they may be executed in one
+continuous session. At present, single-letter lower case variables are noncommutative by default
+and all others are commutative by default. In our package ** denotes noncommutative
+multiply.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[3]:=&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[3]=&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[4]:=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[4]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[5]:=&#x00A0;A&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[5]=&#x00A0;A&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[6]:=&#x00A0;CommuteEverything[a&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a]
+&#x00A0;<br />Out[6]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[7]:=&#x00A0;SetNonCommutative[A,&#x00A0;B]
+&#x00A0;<br />Out[7]=&#x00A0;{False,&#x00A0;False}
+&#x00A0;<br />
+&#x00A0;<br />In[8]:=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[8]=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />
+&#x00A0;<br />In[9]:=&#x00A0;SetNonCommutative[A];
+&#x00A0;<br />In[10]:=&#x00A0;SetCommutative[B];
+&#x00A0;<br />In[11]:=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[11]=&#x00A0;0
+</div>
+</td></tr></table>
+<!--l. 169--><p class="nopar"> SNC is an alias for SetNonCommutative. So, SNC can be typed rather than the longer
+SetNonCommutative.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[12]:=&#x00A0;SNC[A];
+&#x00A0;<br />In[13]:=&#x00A0;A&#x00A0;**&#x00A0;a&#x00A0;-&#x00A0;a&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[13]=&#x00A0;-a&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;A&#x00A0;**&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[14]:=&#x00A0;SetCommutative[v];
+&#x00A0;<br />In[15]:=&#x00A0;v&#x00A0;**&#x00A0;b
+&#x00A0;<br />Out[15]=&#x00A0;b&#x00A0;v
+</div>
+</td></tr></table>
+<!--l. 180--><p class="nopar"> Here is how to use NCAlgebra to manipulate and simplify expressions. tp[x] denotes the transpose
+of an element x, and aj[x] denotes the adjoint of an element x. Note that the properties of
+transposes and adjoints that everyone constantly uses are built-in.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[16]:=&#x00A0;NCCollect[a&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;x,&#x00A0;x]
+&#x00A0;<br />Out[16]=&#x00A0;(a&#x00A0;+&#x00A0;b)&#x00A0;**&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />In[17]:=&#x00A0;NCExpand[(a&#x00A0;+&#x00A0;b)&#x00A0;**&#x00A0;x]
+&#x00A0;<br />Out[17]=&#x00A0;a&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />In[18]:=&#x00A0;NCCollect[tp[x]&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;z,&#x00A0;{x,&#x00A0;tp[x]}]
+&#x00A0;<br />Out[18]=&#x00A0;z&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;(a&#x00A0;+&#x00A0;b)&#x00A0;**&#x00A0;x
+</div>
+</td></tr></table>
+<!--l. 194--><p class="nopar"> You can compute directional derivatives and gradients.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[19]:=&#x00A0;DirectionalD[x&#x00A0;**&#x00A0;x,&#x00A0;x,&#x00A0;h]
+&#x00A0;<br />Out[19]=&#x00A0;h&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;h
+&#x00A0;<br />
+&#x00A0;<br />In[20]:=&#x00A0;DirectionalD[tp[x]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;m&#x00A0;**&#x00A0;x,&#x00A0;x,&#x00A0;h]
+&#x00A0;<br />Out[20]=&#x00A0;m&#x00A0;**&#x00A0;h&#x00A0;+&#x00A0;tp[h]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;h&#x00A0;+&#x00A0;tp[h]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;h
+&#x00A0;<br />
+&#x00A0;<br />In[21]:=&#x00A0;(*&#x00A0;In&#x00A0;the&#x00A0;next&#x00A0;line,&#x00A0;A&#x00A0;is&#x00A0;noncommutative&#x00A0;and&#x00A0;x&#x00A0;represents&#x00A0;a&#x00A0;column&#x00A0;vector*)
+&#x00A0;<br />In[22]:=&#x00A0;Grad[tp[x]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;m&#x00A0;**&#x00A0;x,&#x00A0;x]
+&#x00A0;<br />Grad::limited:&#x00A0;Grad&#x00A0;gives&#x00A0;correct&#x00A0;answers&#x00A0;only&#x00A0;for&#x00A0;a&#x00A0;limited&#x00A0;class&#x00A0;of&#x00A0;functions!
+&#x00A0;<br />Out[22]=&#x00A0;2&#x00A0;x&#x00A0;+&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[A]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[m]
+</div>
+</td></tr></table>
+<!--l. 207--><p class="nopar"> WARNING: Grad is trustworthy only on certain quadratics.
+<!--l. 210--><p class="indent">   Rules can be used to modify expressions:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[23]:=&#x00A0;Substitute[x&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;b,&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;-&gt;&#x00A0;c]
+&#x00A0;<br />Out[23]=&#x00A0;x&#x00A0;**&#x00A0;c
+&#x00A0;<br />
+&#x00A0;<br />In[24]:=&#x00A0;Substitute[&#x00A0;tp[b&#x00A0;**&#x00A0;a]&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;a,&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;p]
+&#x00A0;<br />Out[24]=&#x00A0;p&#x00A0;+&#x00A0;tp[a]&#x00A0;**&#x00A0;tp[b]
+&#x00A0;<br />
+&#x00A0;<br />In[25]:=&#x00A0;SubstituteSymmetric[tp[b]&#x00A0;**&#x00A0;tp[a]&#x00A0;+&#x00A0;w&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;b,&#x00A0;a&#x00A0;**&#x00A0;b-&gt;c]
+&#x00A0;<br />Out[25]=&#x00A0;c&#x00A0;+&#x00A0;w&#x00A0;+&#x00A0;tp[c]
+</div>
+</td></tr></table>
+<!--l. 220--><p class="nopar"> WARNING: The Mathematica substitute commands <span 
+class="cmsy-10x-x-120">\</span><span 
+class="cmmi-12">.</span><span 
+class="cmmi-12">&#x00A0; </span><span 
+class="cmsy-10x-x-120">&#x2192;</span> <span 
+class="cmmi-12">&#x00A0; </span>and <span 
+class="cmsy-10x-x-120">\ </span>:<span 
+class="cmmi-12">&gt; </span>are not reliable in
+NCAlgebra, so you must use our Substitute command.
+<!--l. 226--><p class="indent">   The multiplicative identity is denoted Id in the program. At the present time, Id is set to 1. A
+element A may have an inverse, which will be denoted by inv[A], of it may have a left or right
+inverse, denoted inv[A] and invR[A], respectively.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[26]:=&#x00A0;MatMult[{{a,&#x00A0;b},&#x00A0;{c,&#x00A0;d}},&#x00A0;{{d,&#x00A0;2},&#x00A0;{e,&#x00A0;3}}]
+&#x00A0;<br />Out[26]=&#x00A0;{{a&#x00A0;**&#x00A0;d&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;e,&#x00A0;2&#x00A0;a&#x00A0;+&#x00A0;3&#x00A0;b},&#x00A0;{c&#x00A0;**&#x00A0;d&#x00A0;+&#x00A0;d&#x00A0;**&#x00A0;e,&#x00A0;2&#x00A0;c&#x00A0;+&#x00A0;3&#x00A0;d}}
+&#x00A0;<br />
+&#x00A0;<br />In[27]:=&#x00A0;tp[a&#x00A0;**&#x00A0;b]
+&#x00A0;<br />Out[27]=&#x00A0;tp[b]&#x00A0;**&#x00A0;tp[a]
+&#x00A0;<br />
+&#x00A0;<br />In[28]:=&#x00A0;tp[5]
+&#x00A0;<br />Out[28]=&#x00A0;5
+&#x00A0;<br />
+&#x00A0;<br />In[29]:=&#x00A0;tp[2&#x00A0;+&#x00A0;3&#x00A0;I]
+&#x00A0;<br />Out[29]=&#x00A0;2&#x00A0;+&#x00A0;3&#x00A0;I
+&#x00A0;<br />
+&#x00A0;<br />In[30]:=&#x00A0;tp[a]
+&#x00A0;<br />Out[30]=&#x00A0;tp[a]
+&#x00A0;<br />
+&#x00A0;<br />In[31]:=&#x00A0;tp[a&#x00A0;+&#x00A0;b]
+&#x00A0;<br />Out[31]=&#x00A0;tp[a]&#x00A0;+&#x00A0;tp[b]
+&#x00A0;<br />
+&#x00A0;<br />In[32]:=&#x00A0;tp[6&#x00A0;x]
+&#x00A0;<br />Out[32]=&#x00A0;6&#x00A0;tp[x]
+&#x00A0;<br />
+&#x00A0;<br />In[33]:=&#x00A0;tp[tp[a]]
+&#x00A0;<br />Out[33]=&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[34]:=&#x00A0;aj[5]
+&#x00A0;<br />Out[34]=&#x00A0;5
+&#x00A0;<br />
+&#x00A0;<br />In[35]:=&#x00A0;aj[2&#x00A0;+&#x00A0;3&#x00A0;I]
+&#x00A0;<br />Out[35]=&#x00A0;2&#x00A0;-&#x00A0;3&#x00A0;I
+&#x00A0;<br />
+&#x00A0;<br />In[36]:=&#x00A0;aj[a]
+&#x00A0;<br />Out[36]=&#x00A0;aj[a]
+&#x00A0;<br />
+
+&#x00A0;<br />In[37]:=&#x00A0;aj[a&#x00A0;+&#x00A0;b]
+&#x00A0;<br />Out[37]=&#x00A0;aj[a]&#x00A0;+&#x00A0;aj[b]
+&#x00A0;<br />
+&#x00A0;<br />In[38]:=&#x00A0;aj[6&#x00A0;x]
+&#x00A0;<br />Out[38]=&#x00A0;6&#x00A0;aj[x]
+&#x00A0;<br />
+&#x00A0;<br />In[39]:=&#x00A0;aj[aj[a]]
+&#x00A0;<br />Out[39]=&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[40]:=&#x00A0;Id
+&#x00A0;<br />Out[40]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[41]:=&#x00A0;inv[a&#x00A0;**&#x00A0;b]
+&#x00A0;<br />Out[41]=&#x00A0;inv[b]&#x00A0;**&#x00A0;inv[a]
+&#x00A0;<br />
+&#x00A0;<br />In[42]:=&#x00A0;inv[a]&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[42]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[43]:=&#x00A0;a&#x00A0;**&#x00A0;inv[a]
+&#x00A0;<br />Out[43]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[44]:=&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;inv[b]
+&#x00A0;<br />Out[44]=&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[45]:=&#x00A0;invL[a]&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[45]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[46]:=&#x00A0;a&#x00A0;**&#x00A0;invR[a]
+&#x00A0;<br />Out[46]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[47]:=&#x00A0;a&#x00A0;**&#x00A0;invL[a]
+&#x00A0;<br />Out[47]=&#x00A0;a&#x00A0;**&#x00A0;invL[a]
+&#x00A0;<br />
+&#x00A0;<br />In[48]:=&#x00A0;invR[a]&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[48]=&#x00A0;invR[a]&#x00A0;**&#x00A0;a
+</div>
+</td></tr></table>
+
+<!--l. 299--><p class="nopar"> More extensive simplification can be obtained with NCSimplifyRational:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[49]:=&#x00A0;f1&#x00A0;=&#x00A0;1&#x00A0;+&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;inv[S&#x00A0;-&#x00A0;a]&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[S&#x00A0;-&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;inv[d]&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[S&#x00A0;-&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;inv[d]&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[S&#x00A0;-&#x00A0;a]&#x00A0;**&#x00A0;b;
+&#x00A0;<br />In[50]:=&#x00A0;NCSimplifyRational[f1]
+&#x00A0;<br />Out[50]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[51]:=&#x00A0;f2&#x00A0;=&#x00A0;inv[1&#x00A0;+&#x00A0;2&#x00A0;a]&#x00A0;**&#x00A0;a;
+&#x00A0;<br />In[52]:=&#x00A0;NCSimplifyRational[f2]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;inv[1&#x00A0;+&#x00A0;2&#x00A0;a]
+&#x00A0;<br />Out[52]=&#x00A0;-&#x00A0;-&#x00A0;------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+</td></tr></table>
+<!--l. 314--><p class="nopar"> NCSR is the alias for NCSimplifyRational.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[53]:=&#x00A0;f3&#x00A0;=&#x00A0;a&#x00A0;**&#x00A0;inv[1&#x00A0;-&#x00A0;a];
+&#x00A0;<br />In[54]:=&#x00A0;NCSR[f3]
+&#x00A0;<br />Out[54]=&#x00A0;-1&#x00A0;+&#x00A0;inv[1&#x00A0;-&#x00A0;a]
+&#x00A0;<br />
+&#x00A0;<br />In[55]:=&#x00A0;f4&#x00A0;=&#x00A0;inv[1&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a]&#x00A0;**&#x00A0;inv[a];
+&#x00A0;<br />In[56]:=&#x00A0;NCSR[f4]
+&#x00A0;<br />Out[56]=&#x00A0;inv[a]&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;inv[1&#x00A0;-&#x00A0;a&#x00A0;**&#x00A0;b]
+</div>
+</td></tr></table>
+<!--l. 324--><p class="nopar"> There is also a very limited NCSolve. Please consider using NCGB for serious equation
+solving.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[57]:=&#x00A0;NCSolve[a&#x00A0;**&#x00A0;x&#x00A0;==&#x00A0;b,&#x00A0;x]
+&#x00A0;<br />Out[57]=&#x00A0;{x&#x00A0;-&gt;&#x00A0;inv[a]&#x00A0;**&#x00A0;b}
+</div>
+</td></tr></table>
+<!--l. 330--><p class="nopar"> Note: NCSolve applies to some linear equations in only one unknown.
+
+   <!--l. 333--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse5.html" >next</a>] [<a 
+href="NCBIGDOCse3.html" >prev</a>] [<a 
+href="NCBIGDOCse3.html#tailNCBIGDOCse3.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse4.html" >front</a>] [<a 
+href="NCBIGDOCch1.html#NCBIGDOCse4.html" >up</a>] </p></div>
+<!--l. 333--><p class="indent">   <a 
+ id="tailNCBIGDOCse4.html"></a>  
+</body></html> 

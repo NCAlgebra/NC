@@ -1,0 +1,45 @@
+(* ------------------------------------------------------------ *)
+(*                    CHANGE LOG                                *)
+(* DATE               ------ ---         ACTION           WHO   *)
+(* ----                                  ------           ---   *)
+(* 5/03           Initial coding                          MStan *)
+(* 5/04           Changed to SetSesquilinear format       MStan *)
+(* ------------------------------------------------------------ *)
+
+Clear[dyad,Of];
+SetNonCommutative[dyad,Of,anything1,anything2,anything3];
+
+SetBilinear[Of];
+SetSesquilinear[InnerProduct,dyad];
+SetNumber[InnerProduct];
+
+Unprotect[Conjugate];
+Conjugate[InnerProduct[h_,k_]] := InnerProduct[k,h];
+Protect[Conjugate];
+
+
+Literal[NonCommutativeMultiply[anything1___,dyad[h_,k_],
+                               anything2___]] :=
+        NonCommutativeMultiply[
+            dyad[Of[NonCommutativeMultiply[anything1],h],k],anything2];
+
+Literal[NonCommutativeMultiply[dyad[h_,k_],anything1_,anything2___]] :=
+        NonCommutativeMultiply[dyad[h,Of[aj[anything1],k]],anything2];
+
+aj[dyad[h_,k_]] := dyad[k,h];
+
+Of[dyad[h_,k_],m_] := InnerProduct[m,k] h;
+
+Of[f_,Of[g_,h_]]:=  Of[NonCommutativeMultiply[f,g],h];
+
+AssertOfEquality[operator_,vector_,newvector_] := Block[{},
+       OfEquality[operator,vector] = newvector;
+       OfEqualityQ[operator,vector] = True;
+];
+
+Literal[Of[NonCommutativeMultiply[anything1___,operator_],vector_]] := 
+Of[NonCommutativeMultiply[anything1],OfEquality[operator,vector]] /;
+       OfEqualityQ[operator,vector]
+
+Of[operator_,vector_] := OfEquality[operator,vector] /;
+       OfEqualityQ[operator,vector]

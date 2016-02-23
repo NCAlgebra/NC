@@ -1,0 +1,31 @@
+(* mauricio and bill jan 2010 *)
+
+The results in this directory have been cannonized by running NCGB 4.0.
+    
+Test c80.data.m, c81.data.m, c82.data.m failed according to the old
+Pre2009 references and have been trusted after runnig NCGB 4.0. The
+reason is due to a boggus copy of long rationals which were buggy in
+the old NCGB version.
+
+--------------------------------------------------------------------------------
+
+(* igor and bill nov 2008 *)
+
+This directory contains tex and GB results from the test files c00.data.m 
+through c78.data.m created by Bob, and the files c79.data.m through c85.data.m
+which Eric Rowell created from problems given to us by Ben Keller.
+
+--------------------------------------------------------------------------------
+
+(* mark and bob circa 2000 *)
+
+The results came from running on surya with the path:
+
+home/ncalg/NC/NCGB/MmaSource and ../NC/NCAlgebra
+
+The LinkObject was
+/home/mstankus/CurrentDistribution/Binary/SOLARIS5.5/p9c_non, 1,1.
+
+The result of a test against /home/ncalg/NC/NCGB/Binary/p9c was true
+for all files.  This is the version of the code commonly used.
+

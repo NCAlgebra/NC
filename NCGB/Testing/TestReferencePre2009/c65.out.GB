@@ -1,0 +1,2 @@
+{-1 + Invx**x, -1 + x**Invx, -1 + y**Invy, -1 + Invy**y, -S + T, S**x - x**S, 
+ -Invx**S + S**Invx, -Invy**S + S**Invy, S**y - y**S}

@@ -1,0 +1,584 @@
+(* :Title:	NCChangeOfVariables.NCTest  // Mathematica 3.0 and 4.0,  
+								Probably 2.2*)
+
+(* :Author:	David Glickenstein  *)
+
+(* :Summary:	Test File.  *)
+
+(* :History:	
+   :9/8/99	First Written (Dave) 
+
+*)
+
+<<NCCollectOnVariables.m
+<<NCChangeOfVariables.m
+
+(*******  Test 1-5  ***********) 
+  (*** Easy Stuff ***)
+
+
+Module[{a,b,c,d,x,y,z,w},
+  SetNonCommutative[a,b,c,d,x,y,z,w];
+  ClearMonomialOrderAll[];
+  SetKnowns[a,b,c,d];
+  SetUnknowns[x,y,z,w];
+  
+  test[NCChangeOfVariables, 1] = 
+	(NCXAllPossibleChangeOfVariables[
+	{a ** x - x ** b ** a ** z ** a ** y}] ==
+	{{a ** x - x ** b ** a ** z ** a ** y, 
+    	x}, {a ** x - x ** b ** a ** z ** a ** y, 
+    	y}, {a ** x - x ** b ** a ** z ** a ** y, 
+    	x ** b}, {a ** x - x ** b ** a ** z ** a ** y, z ** a ** y}});
+
+  test[NCChangeOfVariables, 2] = 
+	(NCXAllPossibleChangeOfVariables[NCE[{(x ** y + z) ** 
+	a ** b ** b + a ** b ** z, x + y ** a ** w ** b}]] ==
+	{{a ** b ** z + z ** a ** b ** b + x ** y ** a ** b ** b, 
+    	b}, {a ** b ** z + z ** a ** b ** b + x ** y ** a ** b ** b, 
+    	z}, {a ** b ** z + z ** a ** b ** b + x ** y ** a ** b ** b, 
+    	z + x ** y}, {x + y ** a ** w ** b, y}, {x + y ** a ** w ** b, 
+    	w ** b}, {x + y ** a ** w ** b, y ** a ** w}});
+	  
+  test[NCChangeOfVariables, 3] =
+	(NCXPossibleChangeOfVariables[{a ** x - x ** b ** a ** z ** a ** y}]
+	== {});
+
+  test[NCChangeOfVariables, 4] = 
+	(NCXPossibleChangeOfVariables[{a ** x - x ** b ** a ** 
+	z ** a ** (y + 2z)}, CountVariables -> False] ==
+	{{a ** x - x ** b ** a ** z ** a ** (y + 2 z), 
+    x ** b}, {a ** x - x ** b ** a ** z ** a ** (y + 2 z), 
+    x}, {a ** x - x ** b ** a ** z ** a ** (y + 2 z), 
+    z ** a ** (y + 2 z)}, {a ** x - x ** b ** a ** z ** a ** (y + 2 z), 
+    y + 2 z}});
+
+  test[NCChangeOfVariables, 5] = 
+	(NCXPossibleChangeOfVariables[{(y + x ** z ** y ** w) ** b ** 
+      	a ** (y ** z ** z ** z ** z)}, CountVariables -> False, 
+  	SortByTermLength -> True] ==
+	{{(y + x ** z ** y ** w) ** b ** a ** y ** z ** z ** z ** z, 
+    	y ** z ** z ** z ** z}, {(y + x ** z ** y ** w) ** b ** 
+	a ** y ** z ** z ** z ** z, y + x ** z ** y ** w}});
+];
+
+(******** Test 6-7 ***********)
+    (**  Orbit Problem **)
+Module[
+    {a,b,c,d,(*Tp[a],Tp[b], Tp[c], Tp[d],*) x, y, (*Tp[x], Tp[y] Inv[x], Inv[y], 
+      Tp[Inv[x]], Tp[Inv[y]], Inv[b], Inv[c], Tp[Inv[b]], 
+    Tp[Inv[c]], Tp[Inv[d]], Inv[d], Inv[a], Tp[Inv[a]], Inv[c x + d], 
+    Tp[Inv[c x + d]], *) list},
+
+    ClearMonomialOrderAll[];
+    SetNonCommutative[a, b, c, d, Tp[a], Tp[b], Tp[c], Tp[d], x, y, Tp[x], Tp[y], 
+    Inv[x], Inv[y], Tp[Inv[x]], Tp[Inv[y]], Inv[b], Inv[c], Tp[Inv[b]], 
+    Tp[Inv[c]], Tp[Inv[d]], Inv[d], Inv[a], Tp[Inv[a]], Inv[c x + d], 
+    Tp[Inv[c x + d]]];
+
+SetMonomialOrder[{x, Tp[x], Inv[x], Tp[Inv[x]], y, Tp[y], Inv[y], 
+      Tp[Inv[y]]}, {d, Inv[d], Tp[d], Tp[Inv[d]]}, {b, Tp[b], Tp[Inv[b]], 
+      Inv[b]}, {a, Tp[a], Inv[a], Tp[Inv[a]]}, {c, Tp[c], Tp[Inv[c]], 
+      Inv[c]}, {Inv[c x + d], Tp[Inv[c x + d]]}];
+
+list = {-1 + a ** Inv[a], -1 + b ** Inv[b], -1 + a ** Tp[a] - b ** Tp[b], -1 +
+       d ** Inv[d], -1 + x ** Inv[x], -1 + y ** Inv[y], -1 + Inv[a] ** a, -1 +
+       Inv[b] ** b, -1 + Inv[d] ** d, -1 + Inv[x] ** x, -1 + Inv[y] ** y, -1 +
+       Tp[a] ** Tp[Inv[a]], -1 + Tp[b] ** Tp[Inv[b]], 
+       1 + Tp[b] ** b - Tp[d] ** d, -1 + Tp[d] ** Tp[Inv[d]], -1 + 
+       Tp[x] ** Tp[Inv[x]], -1 + Tp[y] ** Tp[Inv[y]], -1 + 
+       Tp[Inv[a]] ** Tp[a], -1 + Tp[Inv[b]] ** Tp[b], -1 + 
+       Tp[Inv[d]] ** Tp[d], -1 + Tp[Inv[x]] ** Tp[x], -1 + Tp[Inv[y]] ** Tp[y],
+       Inv[c] - Tp[a] ** Tp[Inv[b]] ** Inv[d], 
+       c + d ** Tp[x] - Tp[y] ** a - Tp[y] ** b ** Tp[x], -d ** Inv[x] + 
+       d ** Tp[x] + Inv[y] ** a - Tp[y] ** a + Inv[y] ** b ** Inv[x] - 
+       Tp[y] ** b ** Tp[x], 
+       y - b ** Tp[d] - a ** x ** Tp[d] + b ** Tp[b] ** y + a ** x ** 
+       Tp[b] ** y,Tp[a] ** b + x ** Tp[d] ** d - Tp[a] ** y ** d - x **
+       Tp[b] ** y ** d, x + Inv[a] ** b - Tp[a] ** y ** Tp[Inv[d]] - 
+       x ** Tp[b] ** y ** Tp[Inv[d]], -a - b ** Inv[x] + y ** d ** Inv[x] - 
+       y ** d ** Tp[x] + y ** Tp[y] ** a + y ** Tp[y] ** b ** Tp[x], -x - 
+       Tp[a] ** Tp[Inv[b]] + Tp[a] ** y ** Tp[Inv[d]] + 
+       x ** Tp[b] ** y ** Tp[Inv[d]] + 
+       Tp[a] ** Tp[Inv[b]] ** Inv[d] ** Tp[Inv[d]], 
+       Tp[b] ** a + Tp[d] ** d ** Tp[x] - Tp[d] ** Tp[y] ** a - 
+       Tp[d] ** Tp[y] ** b ** Tp[x], 
+       y - b ** Inv[d] - Tp[Inv[a]] ** x ** Tp[d] + 
+       Tp[Inv[a]] ** x ** Tp[b] ** y, 
+       1 - d ** Tp[d] - Tp[y] ** y + d ** Tp[b] ** y + Tp[y] ** b ** Tp[d] + 
+       d ** Tp[x] ** x ** Tp[d] - Tp[y] ** b ** Tp[b] ** y - 
+       d ** Tp[x] ** x ** Tp[b] ** y - Tp[y] ** b ** Tp[x] ** x ** Tp[d] + 
+       Tp[y] ** b ** Tp[x] ** x ** Tp[b] ** y, -x ** Tp[d] + x ** Tp[b] ** y + 
+       Tp[a] ** Tp[Inv[b]] ** Inv[d] - 
+      x ** Tp[d] ** d ** Inv[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      x ** Tp[b] ** y ** d ** Inv[x] ** Tp[a] ** Tp[Inv[b]] ** 
+        Inv[d], -Tp[Inv[x]] ** Tp[d] + Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] - 
+      Tp[Inv[x]] ** Tp[d] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] **
+      Inv[d] + Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** 
+        Tp[Inv[b]] ** Inv[d], -Tp[Inv[x]] ** Tp[b] - x ** Tp[d] ** Tp[y] + 
+      Tp[a] ** y ** Tp[y] + Tp[Inv[x]] ** Tp[d] ** Tp[y] + 
+      x ** Tp[b] ** y ** Tp[y] - Tp[a], -x ** Inv[b] - x ** Tp[b] + 
+      Tp[a] ** y ** d ** Inv[b] + x ** Tp[b] ** y ** d ** Inv[b] - Tp[a], 
+      x ** Tp[d] - Tp[a] ** y - x ** Tp[b] ** y + Tp[c], 
+      Inv[d + c x] + Tp[b] ** y - Tp[d], 
+      Tp[b] ** Tp[Inv[a]] - Inv[d] ** Tp[y] ** a - 
+      Inv[d] ** Tp[y] ** b ** Tp[x] + Tp[x], -d ** Tp[b] - 
+      d ** Tp[x] ** Tp[a] + Tp[y] ** b ** Tp[b] + 
+      Tp[y] ** b ** Tp[x] ** Tp[a] + Tp[y], -Tp[Inv[b]] ** Tp[x] + 
+      Tp[Inv[b]] ** Inv[d] ** Tp[y] ** a + 
+      Tp[Inv[b]] ** Inv[d] ** Tp[y] ** b ** Tp[x] - Tp[Inv[a]], -d ** Tp[x] + 
+      Tp[y] ** a - d ** Inv[b] ** a + Tp[y] ** b ** Tp[x] + Tp[Inv[c]], -d + 
+      Tp[y] ** b + Tp[Inv[d + c x]], 
+      b ** Inv[d] + Tp[Inv[b]] ** Inv[d] + 
+      b ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] - 
+      Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] - Tp[Inv[y]]};
+ 
+
+   test[NCChangeOfVariables, 6] = 
+     ( NCXFindChangeOfVariables[list, 3, "test", 
+			IncludeTranspose->True, 
+			AllRelations->False, 
+			NCProcessOptions->{SBByCat->False, 
+			  AdditionalRegularOutputOptions->{TeX->False}}]
+     == 
+
+    {1 - d ** Tp[d] - Tp[y] ** y + d ** Tp[b] ** y + Tp[y] ** b ** Tp[d] + 
+    d ** Tp[x] ** x ** Tp[d] - Tp[y] ** b ** Tp[b] ** y - 
+    d ** Tp[x] ** x ** Tp[b] ** y - Tp[y] ** b ** Tp[x] ** x ** Tp[d] + 
+    Tp[y] ** b ** Tp[x] ** x ** Tp[b] ** y, 
+  Tp[b] ** y - Tp[d] -> 
+    motUnknown, {-1 + a ** Inv[a], -1 + d ** Inv[d], -1 + x ** Inv[x], -1 + 
+      y ** Inv[y], -1 + Inv[a] ** a, -1 + Inv[d] ** d, -1 + Inv[x] ** x, -1 + 
+      Inv[y] ** y, -1 + Tp[a] ** Tp[Inv[a]], -1 + Tp[d] ** Tp[Inv[d]], -1 + 
+      Tp[x] ** Tp[Inv[x]], -1 + Tp[y] ** Tp[Inv[y]], -1 + 
+      Tp[Inv[a]] ** Tp[a], -y + Tp[Inv[b]] ** motUnknown + 
+      Tp[Inv[b]] ** Tp[d], -1 + Tp[Inv[d]] ** Tp[d], -1 + Tp[Inv[x]] ** Tp[x],
+     b - Tp[Inv[y]] ** d - Tp[Inv[y]] ** Tp[motUnknown], -1 + 
+      Tp[Inv[y]] ** Tp[y], -1 + Inv[b] ** Tp[Inv[y]] ** d + 
+      Inv[b] ** Tp[Inv[y]] ** Tp[motUnknown], 
+    Inv[c] - Tp[a] ** Tp[Inv[b]] ** Inv[d], -1 + 
+      motUnknown ** Inv[y] ** Tp[Inv[b]] + Tp[d] ** Inv[y] ** Tp[Inv[b]], 
+    1 - Tp[motUnknown] ** motUnknown - Tp[y] ** y + 
+      Tp[motUnknown] ** Tp[x] ** x ** motUnknown, -motUnknown ** Inv[y] - 
+      Tp[d] ** Inv[y] + Tp[b], 
+    d ** Inv[b] + Tp[motUnknown] ** Inv[b] - Tp[y]}});
+
+
+test[NCChangeOfVariables, 7] =
+    (NCXPossibleChangeOfVariables[list, CountVariables -> True] ==
+   {{b ** Inv[d] + Tp[Inv[b]] ** Inv[d] + 
+      b ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] - 
+      Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] - Tp[Inv[y]], 
+    d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d]}, {b ** Inv[d] + 
+      Tp[Inv[b]] ** Inv[d] + b ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] - 
+      Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] - Tp[Inv[y]], 
+    Tp[a] ** Tp[Inv[b]] ** Inv[d]}, {-Tp[Inv[x]] ** Tp[d] + 
+      Tp[a] ** Tp[Inv[b]] ** Inv[d] + Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] - 
+      Tp[Inv[x]] ** Tp[d] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] **
+         Inv[d], 
+    Tp[b] ** Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** 
+      Inv[d]}, {-Tp[Inv[x]] ** Tp[d] + Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] - 
+      Tp[Inv[x]] ** Tp[d] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] **
+         Inv[d], 
+    Tp[d] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** 
+      Inv[d]}, {-Tp[Inv[x]] ** Tp[d] + Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] - 
+      Tp[Inv[x]] ** Tp[d] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] **
+         Inv[d], 
+    d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d]}, {-Tp[Inv[x]] ** Tp[d] + 
+      Tp[a] ** Tp[Inv[b]] ** Inv[d] + Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] - 
+      Tp[Inv[x]] ** Tp[d] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      Tp[Inv[x]] ** Tp[b] ** Tp[Inv[y]] ** d ** Tp[x] ** Tp[a] ** Tp[Inv[b]] **
+         Inv[d], 
+    Tp[a] ** Tp[Inv[b]] ** Inv[d]}, {1 - d ** Tp[d] - Tp[y] ** y + 
+      d ** Tp[b] ** y + Tp[y] ** b ** Tp[d] + d ** Tp[x] ** x ** Tp[d] - 
+      Tp[y] ** b ** Tp[b] ** y - d ** Tp[x] ** x ** Tp[b] ** y - 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[d] + 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[b] ** y, 
+    d ** Tp[b]}, {1 - d ** Tp[d] - Tp[y] ** y + d ** Tp[b] ** y + 
+      Tp[y] ** b ** Tp[d] + d ** Tp[x] ** x ** Tp[d] - 
+      Tp[y] ** b ** Tp[b] ** y - d ** Tp[x] ** x ** Tp[b] ** y - 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[d] + 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[b] ** y, 
+    Tp[b] ** y - Tp[d]}, {1 - d ** Tp[d] - Tp[y] ** y + d ** Tp[b] ** y + 
+      Tp[y] ** b ** Tp[d] + d ** Tp[x] ** x ** Tp[d] - 
+      Tp[y] ** b ** Tp[b] ** y - d ** Tp[x] ** x ** Tp[b] ** y - 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[d] + 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[b] ** y, 
+    d - Tp[y] ** b}, {-Tp[Inv[x]] ** Tp[b] - x ** Tp[d] ** Tp[y] + 
+      Tp[a] ** y ** Tp[y] + Tp[Inv[x]] ** Tp[d] ** Tp[y] + 
+      x ** Tp[b] ** y ** Tp[y] - Tp[a], 
+    x ** Tp[d] - (x ** Tp[b] + Tp[a]) ** y},
+	{-x ** Tp[d] + x ** Tp[b] ** y + Tp[a] ** Tp[Inv[b]] ** Inv[d] - 
+      x ** Tp[d] ** d ** Inv[x] ** Tp[a] ** Tp[Inv[b]] ** Inv[d] + 
+      x ** Tp[b] ** y ** d ** Inv[x] ** Tp[a] ** Tp[Inv[b]] ** 
+        Inv[d], (Tp[d] ** d - Tp[b] ** y ** d) ** Inv[x] ** Tp[a] ** 
+        Tp[Inv[b]] ** Inv[d] + Tp[d]}, {1 - d ** Tp[d] - Tp[y] ** y + 
+      d ** Tp[b] ** y + Tp[y] ** b ** Tp[d] + d ** Tp[x] ** x ** Tp[d] - 
+      Tp[y] ** b ** Tp[b] ** y - d ** Tp[x] ** x ** Tp[b] ** y - 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[d] + 
+      Tp[y] ** b ** Tp[x] ** x ** Tp[b] ** y, 
+    b ** Tp[d] - (1 + b ** Tp[b]) ** y}, {-a - b ** Inv[x] + 
+      y ** d ** Inv[x] - y ** d ** Tp[x] + y ** Tp[y] ** a + 
+      y ** Tp[y] ** b ** Tp[x], d ** Tp[x] - Tp[y] ** (a + b ** Tp[x])}})];
+
+(************ Test 8 **********************)
+       (***Factorization Problem***)
+
+Module[
+{FAC,A,B,C,m1,m2,n1,n2,a,b,c,e,f,g, list},
+
+ClearMonomialOrderAll[];
+SetNonCommutative[A,B,C,m1,m2,n1,n2,a,b,c,e,f,g];
+FAC = {A**m1 - m1**a - m2**f**c,
+       A**m2 - m2**e,
+       B - m1**b - m2**f,
+       -c + C**m1,
+       -g + C**m2,
+       n1**m1 - 1,
+       n1**m2,
+       n2**m1,
+       n2**m2 - 1,
+       m1**n1 + m2**n2 - 1};
+
+SetKnowns[A,B,C];
+SetUnknowns[m1,m2,n1,n2,a,b,c,e,f,g];
+
+list = {c - C ** m1, g - C ** m2, -1 + m1 ** n1 + m2 ** n2, 
+  b - n1 ** B, -1 + n1 ** m1, n1 ** m2, f - n2 ** B, n2 ** m1, -1 + n2 ** m2, 
+  a - n1 ** A ** m1, n1 ** A ** m2, 
+  e - n2 ** A ** m2, -n2 ** A ** m1 + n2 ** B ** C ** m1, 
+  A ** m1 - B ** C ** m1 - m1 ** n1 ** A ** m1 + m1 ** n1 ** B ** C **
+  m1};
+
+
+test[NCChangeOfVariables, 8] = 
+
+(NCXFindChangeOfVariables[list, 3, "FAC", IncludeTranspose -> False, 
+  MultiplyByMonomials -> False, AllRelations -> False, 
+  NCProcessOptions -> {SBByCat -> False, RR->False,
+		       AdditionalRegularOutputOptions->{TeX->False}}]
+
+== 
+{A ** m1 - B ** C ** m1 - m1 ** n1 ** A ** m1 + 
+    m1 ** n1 ** B ** C ** m1, -m1 ** n1 -> motUnknown, {c - C ** m1, 
+    g - C ** m2, motUnknown + m1 ** n1, m1 + motUnknown ** m1, 
+    motUnknown + motUnknown ** motUnknown, b - n1 ** B, -1 + n1 ** m1, 
+    n1 + n1 ** motUnknown, f - n2 ** B, -1 + n2 ** m2, a - n1 ** A ** m1, 
+    e - n2 ** A ** m2, -A ** m1 + B ** C ** m1 - motUnknown ** A ** m1 + 
+      motUnknown ** B ** C ** m1, -A ** motUnknown + B ** C ** motUnknown - 
+      motUnknown ** A ** motUnknown + 
+      motUnknown ** B ** C ** motUnknown, -n2 ** A ** m1 + 
+      n2 ** B ** C ** m1, -n2 ** A ** motUnknown + n2 ** B ** C ** motUnknown,
+     A ** A ** m1 - A ** B ** C ** m1 - B ** C ** A ** m1 + 
+      motUnknown ** A ** A ** m1 + B ** C ** B ** C ** m1 - 
+      motUnknown ** A ** B ** C ** m1 - motUnknown ** B ** C ** A ** m1 + 
+      motUnknown ** B ** C ** B ** C ** m1, 
+    A ** A ** motUnknown - A ** B ** C ** motUnknown - 
+      B ** C ** A ** motUnknown + motUnknown ** A ** A ** motUnknown + 
+      B ** C ** B ** C ** motUnknown - 
+      motUnknown ** A ** B ** C ** motUnknown - 
+      motUnknown ** B ** C ** A ** motUnknown + 
+      motUnknown ** B ** C ** B ** C ** motUnknown, 
+    n2 ** A ** A ** m1 - n2 ** A ** B ** C ** m1 - n2 ** B ** C ** A ** m1 + 
+      n2 ** B ** C ** B ** C ** m1, 
+    n2 ** A ** A ** motUnknown - n2 ** A ** B ** C ** motUnknown - 
+      n2 ** B ** C ** A ** motUnknown + 
+      n2 ** B ** C ** B ** C ** motUnknown, -A ** A ** A ** m1 + 
+      A ** A ** B ** C ** m1 + A ** B ** C ** A ** m1 + 
+      B ** C ** A ** A ** m1 - motUnknown ** A ** A ** A ** m1 - 
+      A ** B ** C ** B ** C ** m1 - B ** C ** A ** B ** C ** m1 - 
+      B ** C ** B ** C ** A ** m1 + motUnknown ** A ** A ** B ** C ** m1 + 
+      motUnknown ** A ** B ** C ** A ** m1 + 
+      motUnknown ** B ** C ** A ** A ** m1 + 
+      B ** C ** B ** C ** B ** C ** m1 - 
+      motUnknown ** A ** B ** C ** B ** C ** m1 - 
+      motUnknown ** B ** C ** A ** B ** C ** m1 - 
+      motUnknown ** B ** C ** B ** C ** A ** m1 + 
+      motUnknown ** B ** C ** B ** C ** B ** C ** 
+        m1, -A ** A ** A ** motUnknown + A ** A ** B ** C ** motUnknown + 
+      A ** B ** C ** A ** motUnknown + B ** C ** A ** A ** motUnknown - 
+      motUnknown ** A ** A ** A ** motUnknown - 
+      A ** B ** C ** B ** C ** motUnknown - 
+      B ** C ** A ** B ** C ** motUnknown - 
+      B ** C ** B ** C ** A ** motUnknown + 
+      motUnknown ** A ** A ** B ** C ** motUnknown + 
+      motUnknown ** A ** B ** C ** A ** motUnknown + 
+      motUnknown ** B ** C ** A ** A ** motUnknown + 
+      B ** C ** B ** C ** B ** C ** motUnknown - 
+      motUnknown ** A ** B ** C ** B ** C ** motUnknown - 
+      motUnknown ** B ** C ** A ** B ** C ** motUnknown - 
+      motUnknown ** B ** C ** B ** C ** A ** motUnknown + 
+      motUnknown ** B ** C ** B ** C ** B ** C ** 
+        motUnknown, -n2 ** A ** A ** A ** m1 + n2 ** A ** A ** B ** C ** m1 + 
+      n2 ** A ** B ** C ** A ** m1 + n2 ** B ** C ** A ** A ** m1 - 
+      n2 ** A ** B ** C ** B ** C ** m1 - n2 ** B ** C ** A ** B ** C ** m1 - 
+      n2 ** B ** C ** B ** C ** A ** m1 + 
+      n2 ** B ** C ** B ** C ** B ** C ** 
+        m1, -n2 ** A ** A ** A ** motUnknown + n2 ** A ** A ** B ** C **
+motUnknown + n2 ** A ** B ** C ** A ** motUnknown + 
+  n2 ** B ** C ** A ** A ** motUnknown - 
+  n2 ** A ** B ** C ** B ** C ** motUnknown - 
+  n2 ** B ** C ** A ** B ** C ** motUnknown - 
+  n2 ** B ** C ** B ** C ** A ** motUnknown + 
+  n2 ** B ** C ** B ** C ** B ** C ** motUnknown, 
+A ** A ** A ** A ** m1 - A ** A ** A ** B ** C ** m1 - 
+  A ** A ** B ** C ** A ** m1 - A ** B ** C ** A ** A ** m1 - 
+  B ** C ** A ** A ** A ** m1 + motUnknown ** A ** A ** A ** A ** m1 + 
+  A ** A ** B ** C ** B ** C ** m1 + A ** B ** C ** A ** B ** C ** m1 + 
+  A ** B ** C ** B ** C ** A ** m1 + B ** C ** A ** A ** B ** C ** m1 + 
+  B ** C ** A ** B ** C ** A ** m1 + B ** C ** B ** C ** A ** A ** m1 - 
+  motUnknown ** A ** A ** A ** B ** C ** m1 - 
+  motUnknown ** A ** A ** B ** C ** A ** m1 - 
+  motUnknown ** A ** B ** C ** A ** A ** m1 - 
+  motUnknown ** B ** C ** A ** A ** A ** m1 - 
+  A ** B ** C ** B ** C ** B ** C ** m1 - 
+  B ** C ** A ** B ** C ** B ** C ** m1 - 
+  B ** C ** B ** C ** A ** B ** C ** m1 - 
+  B ** C ** B ** C ** B ** C ** A ** m1 + 
+  motUnknown ** A ** A ** B ** C ** B ** C ** m1 + 
+  motUnknown ** A ** B ** C ** A ** B ** C ** m1 + 
+  motUnknown ** A ** B ** C ** B ** C ** A ** m1 + 
+  motUnknown ** B ** C ** A ** A ** B ** C ** m1 + 
+  motUnknown ** B ** C ** A ** B ** C ** A ** m1 + 
+  motUnknown ** B ** C ** B ** C ** A ** A ** m1 + 
+  B ** C ** B ** C ** B ** C ** B ** C ** m1 - 
+  motUnknown ** A ** B ** C ** B ** C ** B ** C ** m1 - 
+  motUnknown ** B ** C ** A ** B ** C ** B ** C ** m1 - 
+  motUnknown ** B ** C ** B ** C ** A ** B ** C ** m1 - 
+  motUnknown ** B ** C ** B ** C ** B ** C ** A ** m1 + 
+  motUnknown ** B ** C ** B ** C ** B ** C ** B ** C ** m1, 
+A ** A ** A ** A ** motUnknown - A ** A ** A ** B ** C ** motUnknown - 
+  A ** A ** B ** C ** A ** motUnknown - A ** B ** C ** A ** A ** motUnknown - 
+  B ** C ** A ** A ** A ** motUnknown + 
+  motUnknown ** A ** A ** A ** A ** motUnknown + 
+  A ** A ** B ** C ** B ** C ** motUnknown + 
+  A ** B ** C ** A ** B ** C ** motUnknown + 
+  A ** B ** C ** B ** C ** A ** motUnknown + 
+  B ** C ** A ** A ** B ** C ** motUnknown + 
+  B ** C ** A ** B ** C ** A ** motUnknown + 
+  B ** C ** B ** C ** A ** A ** motUnknown - 
+  motUnknown ** A ** A ** A ** B ** C ** motUnknown - 
+  motUnknown ** A ** A ** B ** C ** A ** motUnknown - 
+  motUnknown ** A ** B ** C ** A ** A ** motUnknown - 
+  motUnknown ** B ** C ** A ** A ** A ** motUnknown - 
+  A ** B ** C ** B ** C ** B ** C ** motUnknown - 
+  B ** C ** A ** B ** C ** B ** C ** motUnknown - 
+  B ** C ** B ** C ** A ** B ** C ** motUnknown - 
+  B ** C ** B ** C ** B ** C ** A ** motUnknown +
+motUnknown ** A ** A ** B ** C ** B ** C ** motUnknown + 
+      motUnknown ** A ** B ** C ** A ** B ** C ** motUnknown + 
+      motUnknown ** A ** B ** C ** B ** C ** A ** motUnknown + 
+      motUnknown ** B ** C ** A ** A ** B ** C ** motUnknown + 
+      motUnknown ** B ** C ** A ** B ** C ** A ** motUnknown + 
+      motUnknown ** B ** C ** B ** C ** A ** A ** motUnknown + 
+      B ** C ** B ** C ** B ** C ** B ** C ** motUnknown - 
+      motUnknown ** A ** B ** C ** B ** C ** B ** C ** motUnknown - 
+      motUnknown ** B ** C ** A ** B ** C ** B ** C ** motUnknown - 
+      motUnknown ** B ** C ** B ** C ** A ** B ** C ** motUnknown - 
+      motUnknown ** B ** C ** B ** C ** B ** C ** A ** motUnknown + 
+      motUnknown ** B ** C ** B ** C ** B ** C ** B ** C ** motUnknown, 
+    n2 ** A ** A ** A ** A ** m1 - n2 ** A ** A ** A ** B ** C ** m1 - 
+      n2 ** A ** A ** B ** C ** A ** m1 - n2 ** A ** B ** C ** A ** A ** m1 - 
+      n2 ** B ** C ** A ** A ** A ** m1 + 
+      n2 ** A ** A ** B ** C ** B ** C ** m1 + 
+      n2 ** A ** B ** C ** A ** B ** C ** m1 + 
+      n2 ** A ** B ** C ** B ** C ** A ** m1 + 
+      n2 ** B ** C ** A ** A ** B ** C ** m1 + 
+      n2 ** B ** C ** A ** B ** C ** A ** m1 + 
+      n2 ** B ** C ** B ** C ** A ** A ** m1 - 
+      n2 ** A ** B ** C ** B ** C ** B ** C ** m1 - 
+      n2 ** B ** C ** A ** B ** C ** B ** C ** m1 - 
+      n2 ** B ** C ** B ** C ** A ** B ** C ** m1 - 
+      n2 ** B ** C ** B ** C ** B ** C ** A ** m1 + 
+      n2 ** B ** C ** B ** C ** B ** C ** B ** C ** m1, 
+    n2 ** A ** A ** A ** A ** motUnknown - 
+      n2 ** A ** A ** A ** B ** C ** motUnknown - 
+      n2 ** A ** A ** B ** C ** A ** motUnknown - 
+      n2 ** A ** B ** C ** A ** A ** motUnknown - 
+      n2 ** B ** C ** A ** A ** A ** motUnknown + 
+      n2 ** A ** A ** B ** C ** B ** C ** motUnknown + 
+      n2 ** A ** B ** C ** A ** B ** C ** motUnknown + 
+      n2 ** A ** B ** C ** B ** C ** A ** motUnknown + 
+      n2 ** B ** C ** A ** A ** B ** C ** motUnknown + 
+      n2 ** B ** C ** A ** B ** C ** A ** motUnknown + 
+      n2 ** B ** C ** B ** C ** A ** A ** motUnknown - 
+      n2 ** A ** B ** C ** B ** C ** B ** C ** motUnknown - 
+      n2 ** B ** C ** A ** B ** C ** B ** C ** motUnknown - 
+      n2 ** B ** C ** B ** C ** A ** B ** C ** motUnknown - 
+      n2 ** B ** C ** B ** C ** B ** C ** A ** motUnknown + 
+      n2 ** B ** C ** B ** C ** B ** C ** B ** C ** motUnknown}})
+];
+
+(********** Test 9 *******************)
+    (*** Glover Problem **)
+
+Module[{E11, E22, E12, E21,(* Inv[E11], Inv[E22], Inv[E12], Inv[E21], 
+    Tp[Inv[E11]], Tp[Inv[E22]], Tp[Inv[E12]], Tp[Inv[E21]], Tp[E11], Tp[E22], 
+    Tp[E12], Tp[E21], *)
+    A, (*Tp[A], *) B1, (*Tp[B1],*) B2, (*Tp[B2],*) C1,(* Tp[C1],*) C2,(* Tp[C2],*) b,
+     (*Tp[b],*) c,(* Tp[c],*) a,(* Tp[a],*) list},
+
+SetNonCommutative[E11, E22, E12, E21, Inv[E11], Inv[E22], Inv[E12], Inv[E21], 
+    Tp[Inv[E11]], Tp[Inv[E22]], Tp[Inv[E12]], Tp[Inv[E21]], Tp[E11], Tp[E22], 
+    Tp[E12], Tp[E21]];
+
+SetNonCommutative[A, Tp[A], B1, Tp[B1], B2, Tp[B2], C1, Tp[C1], C2, Tp[C2], b,
+     Tp[b], c, Tp[c], a, Tp[a]];
+
+ClearMonomialOrderAll[];
+(*Set the knowns and the order of the unknowns*)
+	
+SetKnowns[A, Tp[A], B1, Tp[B1], B2, Tp[B2], C1, Tp[C1], C2, Tp[C2]];
+	SetUnknowns[E12, Tp[E12], E21, Tp[E21], E22, Tp[E22], E11, Tp[E11], Inv[E12],
+     Tp[Inv[E12]], Inv[E21], Tp[Inv[E21]], Inv[E22], Tp[Inv[E22]], Inv[E11], 
+    Tp[Inv[E11]], b, Tp[b], c, Tp[c], a, Tp[a]];
+
+
+
+list = {-1 + E11 ** Inv[E11], -1 + E12 ** Inv[E12], -1 + 
+      E22 ** Inv[E22], -1 + Inv[E11] ** E11, -1 + Inv[E12] ** E12, -1 + 
+      Inv[E22] ** E22, -1 + Tp[E12] ** Tp[Inv[E12]], -1 + 
+      Tp[Inv[E12]] ** Tp[E12], 
+    b + Inv[E12] ** Tp[C2] + Inv[E12] ** E11 ** B1, -E11 ** A - Tp[A] ** E11 -
+       Tp[C1] ** C1 + Tp[C2] ** C2 + E11 ** B1 ** C2 + 
+      Tp[C2] ** Tp[B1] ** E11, 
+    c + Tp[B2] ** E12 - C1 ** Tp[Inv[E12]] ** E22 - 
+      Tp[B2] ** E11 ** Tp[Inv[E12]] ** E22, -A ** Tp[Inv[E12]] + 
+      B1 ** C2 ** Tp[Inv[E12]] - Inv[E11] ** Tp[A] ** E11 ** Tp[Inv[E12]] - 
+      Inv[E11] ** Tp[C1] ** C1 ** Tp[Inv[E12]] + 
+      Inv[E11] ** Tp[C2] ** C2 ** Tp[Inv[E12]] + 
+      Inv[E11] ** Tp[C2] ** Tp[B1] ** E11 ** Tp[Inv[E12]], 
+    a + Inv[E12] ** Tp[A] ** E12 - Inv[E12] ** Tp[C1] ** Tp[B2] ** E12 - 
+      Inv[E12] ** Tp[C2] ** Tp[B1] ** E12 - 
+      Inv[E12] ** E11 ** B2 ** Tp[B2] ** E12 + 
+      Inv[E12] ** Tp[C1] ** C1 ** Tp[Inv[E12]] ** E22 + 
+      Inv[E12] ** E11 ** B2 ** C1 ** Tp[Inv[E12]] ** E22 + 
+      Inv[E12] ** Tp[C1] ** Tp[B2] ** E11 ** Tp[Inv[E12]] ** E22 + 
+      Inv[E12] ** E11 ** B2 ** Tp[B2] ** E11 ** Tp[Inv[E12]] ** E22, 
+    E22 ** Inv[E12] ** Tp[A] ** E12 + Tp[E12] ** A ** Tp[Inv[E12]] ** E22 - 
+      Tp[E12] ** B1 ** Tp[B1] ** E12 + Tp[E12] ** B2 ** Tp[B2] ** E12 - 
+      E22 ** Inv[E12] ** Tp[C1] ** Tp[B2] ** E12 - 
+      Tp[E12] ** B2 ** C1 ** Tp[Inv[E12]] ** E22 - 
+      E22 ** Inv[E12] ** E11 ** A ** Tp[Inv[E12]] ** E22 + 
+      E22 ** Inv[E12] ** E11 ** B1 ** Tp[B1] ** E12 - 
+      E22 ** Inv[E12] ** E11 ** B2 ** Tp[B2] ** E12 - 
+      E22 ** Inv[E12] ** Tp[A] ** E11 ** Tp[Inv[E12]] ** E22 + 
+      Tp[E12] ** B1 ** Tp[B1] ** E11 ** Tp[Inv[E12]] ** E22 - 
+      Tp[E12] ** B2 ** Tp[B2] ** E11 ** Tp[Inv[E12]] ** E22 + 
+      E22 ** Inv[E12] ** E11 ** B2 ** C1 ** Tp[Inv[E12]] ** E22 + 
+      E22 ** Inv[E12] ** Tp[C1] ** Tp[B2] ** E11 ** Tp[Inv[E12]] ** E22 - 
+      E22 ** Inv[E12] ** E11 ** B1 ** Tp[B1] ** E11 ** Tp[Inv[E12]] ** E22 + 
+      E22 ** Inv[E12] ** E11 ** B2 ** Tp[B2] ** E11 ** Tp[Inv[E12]] ** E22, 
+    Tp[E12] ** A ** Tp[Inv[E12]] - Tp[E12] ** B1 ** C2 ** Tp[Inv[E12]] - 
+      Tp[E12] ** B2 ** C1 ** Tp[Inv[E12]] + 
+      E22 ** Inv[E12] ** Tp[C1] ** C1 ** Tp[Inv[E12]] - 
+      Tp[E12] ** B2 ** Tp[B2] ** E11 ** Tp[Inv[E12]] + 
+      E22 ** Inv[E12] ** E11 ** B2 ** C1 ** Tp[Inv[E12]] + 
+      E22 ** Inv[E12] ** Tp[C1] ** Tp[B2] ** E11 ** Tp[Inv[E12]] + 
+      E22 ** Inv[E12] ** E11 ** B2 ** Tp[B2] ** E11 ** Tp[Inv[E12]] + Tp[a], 
+    C2 ** Tp[Inv[E12]] + Tp[B1] ** E11 ** Tp[Inv[E12]] + Tp[b], 
+    Tp[E12] ** B2 - E22 ** Inv[E12] ** Tp[C1] - E22 ** Inv[E12] ** E11 ** B2 +
+       Tp[c], -E11 + Tp[E11], 
+    E21 - Tp[E12], -E12 + Tp[E21], -E22 + Tp[E22], -Inv[E11] + Tp[Inv[E11]], 
+    Inv[E21] - Tp[Inv[E12]], -Inv[E12] + Tp[Inv[E21]], -Inv[E22] + 
+      Tp[Inv[E22]]};
+
+test[NCChangeOfVariables, 9]  = 
+(NCXFindChangeOfVariables[list, 2, "ctr", 
+    MultiplyByMonomials -> False, AllRelations -> False, 
+    NCProcessOptions -> {SBByCat -> False, 
+    AdditionalRegularOutputOptions->{TeX->False}}]
+
+==
+
+{{{}, {E11 -> motUnknown ** Tp[E12], E21 -> Tp[E12], Inv[E21] -> Tp[Inv[E12]],
+       Tp[E11] -> motUnknown ** Tp[E12], Tp[E21] -> E12, Tp[E22] -> E22, 
+      Tp[Inv[E11]] -> Inv[E11], Tp[Inv[E21]] -> Inv[E12], 
+      Tp[Inv[E22]] -> Inv[E22]}, {-1 + E12 ** Inv[E12], -1 + E22 ** Inv[E22], 
+      E11 - motUnknown ** Tp[E12], -1 + Inv[E12] ** E12, -1 + 
+        Inv[E22] ** E22, -1 + Tp[E12] ** Tp[Inv[E12]], -1 + 
+        Tp[Inv[E12]] ** Tp[E12], -1 + 
+        motUnknown ** Tp[E12] ** Inv[E11], -A ** Tp[Inv[E12]] + 
+        B1 ** C2 ** Tp[Inv[E12]] - Inv[E11] ** Tp[A] ** motUnknown - 
+        Inv[E11] ** Tp[C1] ** C1 ** Tp[Inv[E12]] + 
+        Inv[E11] ** Tp[C2] ** C2 ** Tp[Inv[E12]] + 
+        Inv[E11] ** Tp[C2] ** Tp[B1] ** motUnknown, -Tp[C1] ** C1 + 
+        Tp[C2] ** C2 - motUnknown ** Tp[E12] ** A - 
+        Tp[A] ** motUnknown ** Tp[E12] + motUnknown ** Tp[E12] ** B1 ** C2 + 
+        Tp[C2] ** Tp[B1] ** motUnknown ** Tp[E12], 
+      A ** A ** Tp[Inv[E12]] - A ** B1 ** C2 ** Tp[Inv[E12]] - 
+        B1 ** C2 ** A ** Tp[Inv[E12]] - 
+        Inv[E11] ** Tp[A] ** Tp[A] ** motUnknown + 
+        B1 ** C2 ** B1 ** C2 ** Tp[Inv[E12]] - 
+        Inv[E11] ** Tp[A] ** Tp[C1] ** C1 ** Tp[Inv[E12]] + 
+        Inv[E11] ** Tp[A] ** Tp[C2] ** C2 ** Tp[Inv[E12]] + 
+        Inv[E11] ** Tp[A] ** Tp[C2] ** Tp[B1] ** motUnknown + 
+        Inv[E11] ** Tp[C1] ** C1 ** A ** Tp[Inv[E12]] - 
+        Inv[E11] ** Tp[C2] ** C2 ** A ** Tp[Inv[E12]] + 
+        Inv[E11] ** Tp[C2] ** Tp[B1] ** Tp[A] ** motUnknown - 
+        Inv[E11] ** Tp[C1] ** C1 ** B1 ** C2 ** Tp[Inv[E12]] + 
+        Inv[E11] ** Tp[C2] ** C2 ** B1 ** C2 ** Tp[Inv[E12]] + 
+        Inv[E11] ** Tp[C2] ** Tp[B1] ** Tp[C1] ** C1 ** Tp[Inv[E12]] - 
+        Inv[E11] ** Tp[C2] ** Tp[B1] ** Tp[C2] ** C2 ** Tp[Inv[E12]] - 
+        Inv[E11] ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** 
+          motUnknown, -motUnknown ** Tp[E12] + Tp[E11], 
+      E21 - Tp[E12], -E12 + Tp[E21], -E22 + Tp[E22], -Inv[E11] + Tp[Inv[E11]],
+       Inv[E21] - Tp[Inv[E12]], 
+      Inv[E11] ** motUnknown - Tp[Inv[E12]], -Inv[E12] + 
+        Tp[Inv[E21]], -Inv[E22] + Tp[Inv[E22]]}},
+{{}, {E21 -> Tp[E12], Inv[E21] -> Tp[Inv[E12]], Tp[E11] -> E11, 
+    Tp[E21] -> E12, Tp[E22] -> E22, Tp[Inv[E11]] -> Inv[E11], 
+    Tp[Inv[E21]] -> Inv[E12], 
+    Tp[Inv[E22]] -> Inv[E22]}, {-1 + E11 ** Inv[E11], -1 + 
+      E12 ** Inv[E12], -1 + E22 ** Inv[E22], -1 + Inv[E11] ** E11, -1 + 
+      Inv[E12] ** E12, -1 + Inv[E22] ** E22, -1 + 
+      Tp[E12] ** Tp[Inv[E12]], -1 + Tp[Inv[E12]] ** Tp[E12], 
+    E22 ** Inv[E12] ** Tp[A] ** E12 - motUnknown ** A ** Tp[Inv[E12]] ** E22 +
+       motUnknown ** B1 ** Tp[B1] ** E12 - motUnknown ** B2 ** Tp[B2] ** E12 -
+       E22 ** Inv[E12] ** Tp[C1] ** Tp[B2] ** E12 + 
+      motUnknown ** B2 ** C1 ** Tp[Inv[E12]] ** E22 - 
+      E22 ** Inv[E12] ** Tp[A] ** E11 ** Tp[Inv[E12]] ** E22 - 
+      motUnknown ** B1 ** Tp[B1] ** E11 ** Tp[Inv[E12]] ** E22 + 
+      motUnknown ** B2 ** Tp[B2] ** E11 ** Tp[Inv[E12]] ** E22 + 
+      E22 ** Inv[E12] ** Tp[C1] ** Tp[B2] ** E11 ** Tp[Inv[E12]] ** 
+        E22, -E11 + Tp[E11], 
+    E21 - Tp[E12], -motUnknown + E22 ** Inv[E12] ** E11 - Tp[E12], -E12 + 
+      Tp[E21], -E22 + Tp[E22], -Inv[E11] + Tp[Inv[E11]], 
+    Inv[E21] - Tp[Inv[E12]],
+-Inv[E12] + Tp[Inv[E21]], -Inv[E22] + Tp[Inv[E22]]}}, {{}, {E21 -> Tp[E12], 
+      Inv[E21] -> Tp[Inv[E12]], Tp[E11] -> E11, Tp[E21] -> E12, 
+      Tp[E22] -> E22, Tp[Inv[E11]] -> Inv[E11], Tp[Inv[E21]] -> Inv[E12], 
+      Tp[Inv[E22]] -> Inv[E22]}, {-1 + E11 ** Inv[E11], -1 + 
+        E12 ** Inv[E12], -1 + E22 ** Inv[E22], -1 + Inv[E11] ** E11, -1 + 
+        Inv[E12] ** E12, -1 + Inv[E22] ** E22, -1 + 
+        Tp[E12] ** Tp[Inv[E12]], -1 + Tp[Inv[E12]] ** Tp[E12], -E12 + 
+        motUnknown + E11 ** Tp[Inv[E12]] ** E22, 
+      E22 ** Inv[E12] ** Tp[A] ** motUnknown + 
+        Tp[E12] ** A ** Tp[Inv[E12]] ** E22 - 
+        Tp[E12] ** B1 ** Tp[B1] ** motUnknown + 
+        Tp[E12] ** B2 ** Tp[B2] ** motUnknown - 
+        E22 ** Inv[E12] ** Tp[C1] ** Tp[B2] ** motUnknown - 
+        Tp[E12] ** B2 ** C1 ** Tp[Inv[E12]] ** E22 - 
+        E22 ** Inv[E12] ** E11 ** A ** Tp[Inv[E12]] ** E22 + 
+        E22 ** Inv[E12] ** E11 ** B1 ** Tp[B1] ** motUnknown - 
+        E22 ** Inv[E12] ** E11 ** B2 ** Tp[B2] ** motUnknown + 
+        E22 ** Inv[E12] ** E11 ** B2 ** C1 ** Tp[Inv[E12]] ** E22, -E11 + 
+        Tp[E11], 
+      E21 - Tp[E12], -E12 + Tp[E21], -E22 + Tp[E22], -Inv[E11] + Tp[Inv[E11]],
+       Inv[E21] - Tp[Inv[E12]], -Inv[E12] + Tp[Inv[E21]], -Inv[E22] + 
+        Tp[Inv[E22]]}}}
+)];
+
+
+
+(*************************************************************)
+
+Print["Results from the file NCChangeOfVariables.NCGBTest"];
+For[i=1, i<=9, i++,
+  Print["Test #",i," was ",test[NCChangeOfVariables,i]]]

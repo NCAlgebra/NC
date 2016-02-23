@@ -1,0 +1,91 @@
+(* :Title: 	NCCovexityRegionTest.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	tony s. *)
+
+(* :Summary:    TEST FILE.  *)
+
+(* :History: 
+   :8/13/92      
+*)
+
+<<NCConvexity.m;
+
+Block[{x,y,a,b,c,d,i},
+
+   SNC[x,y];
+   Clear[f];
+
+
+   (* test 1 *)
+   f = x**x;
+   ans = NCConvexityRegion[ f, {x} ];
+   hes = NCHessian[ f, {x,h} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCConvTest[NCConvexity, 1] = {diagonal} == ans; 
+
+   (* test 2 *)
+   f = x**x**x;
+   ans = NCConvexityRegion[ f, {x} ];
+   hes = NCHessian[ f, {x,h} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCConvTest[NCConvexity, 2] = {diagonal} == ans;
+
+   (* test 3 *)
+   f = x**x + y**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCConvTest[NCConvexity, 3] = {diagonal} == ans;
+
+   (* test 4 *)
+   f = x**x**x + y**y**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCConvTest[NCConvexity, 4] = {diagonal} == ans;
+   
+
+   (* test 5 *)
+   f = x**y**x+y**x**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCConvTest[NCConvexity, 5] = {diagonal} == ans;
+
+   (* test 6 *)
+   f = 2*x**x**x + 7*x**x + x;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCConvTest[NCConvexity, 6] = {diagonal} == ans;
+
+   (* test 7 *)
+   f = x**x**y+y**x**x+x**x**x+y**y**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCConvTest[NCConvexity, 7] = {diagonal} == ans;
+
+   Print[ "Results from the file NCConvexityTest.NCTest" ];
+   For[ i = 1, i <= 7, i++, 
+
+      Print[ "Test # ", i, " was ", NCConvTest[ NCConvexity, i ] ];
+
+   ];
+
+];
+

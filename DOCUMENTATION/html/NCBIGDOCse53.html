@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>15.5 Details of NCProcess</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 622--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse54.html" >next</a>] [<a 
+href="NCBIGDOCse52.html" >prev</a>] [<a 
+href="NCBIGDOCse52.html#tailNCBIGDOCse52.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse53.html">tail</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse53.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">15.5   </span> <a 
+ id="x88-22200015.5"></a>Details of NCProcess</h3>
+<!--l. 625--><p class="noindent">The following section gives psuedocode for the NCProcess1 and NCProcess2 commands.
+<!--l. 628--><p class="indent">   This psuedocode uses the function <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> which implements a Gröbner Basis Algorithm
+which returns partial GB&#8217;s which are reduced. In particular, running the function <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> for 0
+iterations on a set <span 
+class="cmmi-12">F </span>does not compute any S-polynomials, but does produce a set <span 
+class="cmmi-12">G </span>which is
+reduced. <span 
+class="cmmi-12">G </span>will be called a reduced form of <span 
+class="cmmi-12">F</span>.
+<!--l. 638--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.5.1   </span> <a 
+ id="x88-22300015.5.1"></a>NCProcess1 command</h4>
+<!--l. 641--><p class="noindent">The input to NCProcess1 is a set of starting equations <span 
+class="cmmi-12">start</span>, a number of iterations <span 
+class="cmmi-12">n </span>for the GBA
+and a collection of user selects.
+<!--l. 645--><p class="indent">   The steps NCProcess1 takes are:
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">I. Preparation for the main call to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span>
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(1)  Run  the  GBA  on  the  equations  in  <span 
+class="cmmi-12">start </span>which  do  not  involve  any  unknown
+           variables together with the user selects for at most <span 
+class="cmmi-12">n </span>+ 1 iterations. Let <span 
+class="cmmi-12">A </span>denote
+           this partial GB.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(2) Shrink <span 
+class="cmmi-12">A </span>using the RemoveRedundantProtected operation. Call this shrunken set
+           <span 
+class="cmmi-12">B</span>.</dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">II. The main call to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span>
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(3) Run <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> with the input <span 
+class="cmmi-12">B </span>together with <span 
+class="cmmi-12">start </span>for at most <span 
+class="cmmi-12">n </span>iterations. In
+           this <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCMakeGB</span></span></span> run, S-polynomials between two elements of the partial GB of <span 
+class="cmmi-12">A</span>
+           are not computed. Let <span 
+class="cmmi-12">C </span>denote this partial GB. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">III. Shrinking the partial GB
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(4) Shrink <span 
+class="cmmi-12">C </span>using the RemoveRedundantProtected operation. Call this shrunken set
+           <span 
+class="cmmi-12">D</span>.
+
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(5) Let <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> be the set of polynomials in <span 
+class="cmmi-12">D </span>which do not involve any unknowns. Let
+           <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> = <span 
+class="cmmi-12">D</span><span 
+class="cmsy-10x-x-120">\</span><span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub> be a set of the normal forms of the elements of <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> with
+           respect to <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E </span>= <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">&#x222A; </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub>.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(6) Let <span 
+class="cmmi-12">F </span>be the union of <span 
+class="cmmi-12">E </span>and the user selects. Let <span 
+class="cmmi-12">G </span>be a reduced form of <span 
+class="cmmi-12">F </span>(see
+           the beginning of <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x88-22200015.5">15.5<!--tex4ht:ref: section:Details of NCProcess --></a>).
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(7) Shrink <span 
+class="cmmi-12">G </span>by SmallBasisByCategory using iteration parameters <span 
+class="cmmi-12">n </span>+ 1 and <span 
+class="cmmi-12">n </span>+ 2.
+           Call this shrunken set <span 
+class="cmmi-12">H</span>. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">IV. </span>Attempt Decompose
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(8) Construct the collected forms of the polynomials in <span 
+class="cmmi-12">H</span>. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">V. </span>Displaying the results
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(9) For elements of <span 
+class="cmmi-12">H</span>, if the polynomial&#8217;s only collected form is trivial, then display
+           the rule corresponding to the polynomial, otherwise display the collected form of
+           the polynomial. This is the step in which the &#8220;spreadsheets&#8221; of the results of this
+           paper are constructed. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">V I. </span>Return a three tuple to the user for future use
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(10) Return the triple (<span 
+class="cmmi-12">A,H</span><sub ><span 
+class="cmr-8">0</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">1</span></sub>) to the user where <span 
+class="cmmi-12">A </span>is from item 1 above, <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">0</span></sub>  is
+           the set of polynomials in <span 
+class="cmmi-12">H </span>which are digested and <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub> is the set of polynomials
+           in <span 
+class="cmmi-12">H </span>which are undigested. </dd></dl>
+      </dd></dl>
+<!--l. 730--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">15.5.2   </span> <a 
+ id="x88-22400015.5.2"></a>NCProcess2 command</h4>
+<!--l. 733--><p class="noindent">The input to NCProcess2 is a set of starting equations <span 
+class="cmmi-12">start</span>, a number of iterations <span 
+class="cmmi-12">n </span>for
+SmallBasis and a collection of user selects.
+<!--l. 737--><p class="indent">   The steps taken by NCProcess2 are:
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">I. Shrinking the input equations
+
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(1) Shrink <span 
+class="cmmi-12">start </span>using the RemoveRedundantProtected operation. Call this shrunken
+           set <span 
+class="cmmi-12">D</span>.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(2) Let <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> be the set of polynomials in <span 
+class="cmmi-12">D </span>which do not involve any unknowns. Let
+           <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> = <span 
+class="cmmi-12">D</span><span 
+class="cmsy-10x-x-120">\</span><span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub> be a set of the normal forms of the elements of <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">u</span></sub> with
+           respect to <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub>. Let <span 
+class="cmmi-12">E </span>= <span 
+class="cmmi-12">D</span><sub ><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">&#x222A; </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">u</span></sub>.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(3) Let <span 
+class="cmmi-12">F </span>be the union of <span 
+class="cmmi-12">E </span>and the user selects. Let <span 
+class="cmmi-12">G </span>be a reduced form of <span 
+class="cmmi-12">F</span>. (see
+           the beginning of <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x88-22200015.5">15.5<!--tex4ht:ref: section:Details of NCProcess --></a>).
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(4) Shrink <span 
+class="cmmi-12">G </span>by SmallBasis. Set <span 
+class="cmmi-12">H </span>equal to the result of the shrinking. </dd></dl>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmmi-12">II. </span>The &#8220;Attempt Decompose&#8221; &#8220;Displaying the results&#8221; and &#8220;Return a three tuple to the
+      user for future use&#8221; as in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x88-22300015.5.1">15.5.1<!--tex4ht:ref: subsection:NCProcess1 command --></a>. </dd></dl>
+
+   <!--l. 772--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse54.html" >next</a>] [<a 
+href="NCBIGDOCse52.html" >prev</a>] [<a 
+href="NCBIGDOCse52.html#tailNCBIGDOCse52.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse53.html" >front</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse53.html" >up</a>] </p></div>
+<!--l. 772--><p class="indent">   <a 
+ id="tailNCBIGDOCse53.html"></a>   
+</body></html> 

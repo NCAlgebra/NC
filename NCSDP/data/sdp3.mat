@@ -1,0 +1,14 @@
+(**
+  * Ex 3 (not strictly complementary)
+  * Luo, Sturm and Zhang (2000)
+  **)
+
+A1 = -{{1,0},{0,0}}
+A2 = -{{0,0},{0,1}}
+A = {{A1},{A2}}
+BB = {{{0, -1}}}
+CC = {{{0,1},{1,0}}}
+
+exp = {{x,1},{1,y}}
+{CC, A} = SDPLinearCoefficientArrays[exp, {x, y}];
+BB = {{{0, -1}}}

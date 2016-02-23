@@ -1,0 +1,40 @@
+{"COMPleib/MmaCOMPleib/AC1.m", "Thu 8 Sep 2011 13:44:15", "SUCCESS", 
+ 0.17619600000000005, "e4-ce-8f-1e-2e-b2", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/AC5.m", "Thu 8 Sep 2011 13:45:39", "SUCCESS", 
+ 0.19707899999999998, "e4-ce-8f-1e-2e-b2", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/DIS5.m", "Thu 8 Sep 2011 13:46:48", "SUCCESS", 
+ 0.17920600000000003, "e4-ce-8f-1e-2e-b2", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/HF2D10.m", "Sat 10 Sep 2011 10:16:35", "TIMEOUT", 
+ 1794.6394910000001, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/FS.m", "Mon 19 Sep 2011 23:03:52", "SUCCESS", 
+ 1.1939800000000003, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/FS.m", "Mon 19 Sep 2011 23:05:08", "SUCCESS", 
+ 1.1909830000000001, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC10.m", "Mon 19 Sep 2011 23:09:05", "SUCCESS", 
+ 0.744748, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC6.m", "Mon 19 Sep 2011 23:10:02", "SUCCESS", 
+ 0.9188189999999999, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC5.m", "Mon 19 Sep 2011 23:10:36", "SUCCESS", 
+ 0.927047, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC2.m", "Mon 19 Sep 2011 23:11:15", "SUCCESS", 
+ 1.066132, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/DLR2.m", "Mon 19 Sep 2011 23:14:26", "SUCCESS", 
+ 426.29651599999994, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC1.m", "Mon 19 Sep 2011 23:22:15", "SUCCESS", 
+ 1.1615510000000002, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC10.m", "Mon 19 Sep 2011 23:28:16", "SUCCESS", 
+ 1.2385120000000003, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC10.m", "Mon 19 Sep 2011 23:28:45", "SUCCESS", 
+ 1.4422629999999999, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC10.m", "Mon 19 Sep 2011 23:31:19", "SUCCESS", 
+ 0.784205, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC4.m", "Mon 19 Sep 2011 23:36:31", "SUCCESS", 
+ 2.996973, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC5.m", "Mon 19 Sep 2011 23:36:33", "SUCCESS", 
+ 1.2385099999999998, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC4.m", "Mon 19 Sep 2011 23:36:56", "SUCCESS", 
+ 0.770641, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC5.m", "Mon 19 Sep 2011 23:36:59", "SUCCESS", 
+ 1.3805079999999998, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}
+{"COMPleib/MmaCOMPleib/ROC6.m", "Mon 19 Sep 2011 23:37:01", "SUCCESS", 
+ 0.858857, "Mauricio-de-Oliveiras-MacBook-Pro", "PC", "x86-64"}

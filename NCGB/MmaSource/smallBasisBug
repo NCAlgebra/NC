@@ -1,0 +1,207 @@
+<<NCGB.m;
+
+SNC[a,b,c,d,Tp[a], Tp[b],Tp[c],Tp[d],x,y,Tp[x],Tp[y],
+    Inv[x],Inv[y],Inv[Tp[x]],Inv[Tp[y]], Inv[b],Inv[c],
+    Inv[Tp[b]],Inv[Tp[c]],Inv[Tp[d]],Inv[d],Inv[a],
+    Inv[Tp[a]],Inv[cxplusd],Inv[Tp[cxplusd]]];
+SetMonomialOrder[{x,Tp[x],Inv[x],Inv[Tp[x]],
+                 y,Tp[y],Inv[y],Inv[Tp[y]]},
+                 {d,Inv[d],Tp[d],Inv[Tp[d]]},
+                 {b,Tp[b],Inv[Tp[b]],Inv[b]},
+                 {a,Tp[a],Inv[a],Inv[Tp[a]]},
+                 {c,Tp[c],Inv[Tp[c]],Inv[c]},
+                 {Inv[cxplusd],Inv[Tp[cxplusd]]}];
+
+SNC[f,Tp[f],F,Tp[F]];
+SetMonomialOrder[{f,Tp[f],F,Tp[F]},5];
+
+Fans3 = {{x ** Inv[x] -> 1, y ** Inv[y] -> 1, Inv[x] ** x -> 1, 
+    Inv[y] ** y -> 1, Inv[Tp[x]] ** Tp[x] -> 1, Inv[Tp[y]] ** Tp[y] -> 1, 
+    Tp[x] ** Inv[Tp[x]] -> 1, Tp[y] ** Inv[Tp[y]] -> 1, 
+    Tp[b] -> -F ** Inv[y] + Tp[d] ** Inv[y], 
+    b -> Inv[Tp[y]] ** d - Inv[Tp[y]] ** Tp[F], 
+    Tp[a] -> x ** F ** Inv[y] - x ** Tp[d] ** Inv[y] + Tp[f], 
+    a -> f - Inv[Tp[y]] ** d ** Tp[x] + Inv[Tp[y]] ** Tp[F] ** Tp[x]}, 
+   {x ** Inv[x] -> 1, y ** Inv[y] -> 1, Inv[x] ** x -> 1, Inv[y] ** y -> 1, 
+    Inv[Tp[x]] ** Tp[x] -> 1, Inv[Tp[y]] ** Tp[y] -> 1, 
+    Tp[x] ** Inv[Tp[x]] -> 1, Tp[y] ** Inv[Tp[y]] -> 1, 
+    a -> f - Inv[Tp[y]] ** d ** Tp[x] + Inv[Tp[y]] ** Tp[F] ** Tp[x], 
+    b -> Inv[Tp[y]] ** d - Inv[Tp[y]] ** Tp[F], 
+    c -> -d ** Tp[x] + Tp[y] ** f, 
+    Inv[a] -> Tp[f] ** y ** Inv[Tp[d]] ** F ** Inv[y], 
+    Inv[c] -> Tp[f] ** Inv[Tp[b]] ** F, Inv[cxplusd] -> F, 
+    Inv[Tp[a]] -> Inv[Tp[y]] ** Tp[F] ** Inv[d] ** Tp[y] ** f, 
+    Inv[Tp[c]] -> Tp[F] ** Inv[b] ** f, Inv[Tp[cxplusd]] -> Tp[F], 
+    Tp[a] -> x ** F ** Inv[y] - x ** Tp[d] ** Inv[y] + Tp[f], 
+    Tp[b] -> -F ** Inv[y] + Tp[d] ** Inv[y], 
+    Tp[c] -> -x ** Tp[d] + Tp[f] ** y, Tp[a] -> -x ** Tp[b] + Tp[f], 
+    a -> f - b ** Tp[x], Tp[y] ** b -> d - Tp[F], Tp[b] ** y -> -F + Tp[d], 
+    Tp[a] -> -x ** Tp[b] + Tp[f], a -> f - b ** Tp[x], 
+    Tp[y] ** b -> d - Tp[F], Tp[b] ** y -> -F + Tp[d], 
+    Tp[a] -> -x ** Tp[b] + Tp[f], a -> f - b ** Tp[x], 
+    Tp[y] ** b -> d - Tp[F], Tp[b] ** y -> -F + Tp[d], 
+    Tp[a] -> -x ** Tp[b] + Tp[f], a -> f - b ** Tp[x], 
+    Tp[y] ** b -> d - Tp[F], Tp[b] ** y -> -F + Tp[d]}, 
+   {d ** Inv[b] -> Tp[F] ** Inv[b] + Tp[y], d ** Inv[d] -> 1, 
+    Inv[d] ** d -> 1, Inv[Tp[b]] ** Inv[d] -> 
+     y - Inv[Tp[y]] + Inv[Tp[b]] ** F + Inv[Tp[y]] ** Tp[F] ** Inv[d], 
+    Inv[Tp[b]] ** Tp[d] -> y + Inv[Tp[b]] ** F, 
+    Inv[Tp[d]] ** Inv[b] -> 
+     -Inv[y] + Tp[F] ** Inv[b] + Inv[Tp[d]] ** F ** Inv[y] + Tp[y], 
+    Inv[Tp[d]] ** Tp[d] -> 1, Tp[d] ** Inv[Tp[d]] -> 1, 
+    F ** d ** Inv[x] -> Inv[x] + F ** d ** Tp[x] - F ** Tp[y] ** f, 
+    Inv[b] ** Inv[Tp[y]] ** d -> 1 + Inv[b] ** Inv[Tp[y]] ** Tp[F], 
+    Inv[d] ** Tp[F] ** Inv[b] -> Inv[b] - Inv[d] ** Tp[y], 
+    Inv[Tp[b]] ** F ** d -> 
+     Inv[Tp[b]] - y ** d + Inv[Tp[y]] ** d - Inv[Tp[y]] ** Tp[F], 
+    Inv[Tp[b]] ** F ** Inv[Tp[d]] -> Inv[Tp[b]] - y ** Inv[Tp[d]], 
+    Inv[Tp[x]] ** Tp[d] ** Inv[y] -> 
+     -x ** F ** Inv[y] + x ** Tp[d] ** Inv[y] - x ** Tp[d] ** Tp[y] + 
+      Inv[Tp[x]] ** F ** Inv[y] + Inv[Tp[x]] ** Tp[d] ** Tp[y] + 
+      Tp[f] ** y ** Tp[y] - Tp[f], 
+    Inv[Tp[x]] ** Tp[d] ** Tp[F] -> 
+     Inv[Tp[x]] + x ** Tp[d] ** Tp[F] - Tp[f] ** y ** Tp[F], 
+    Inv[Tp[y]] ** d ** Inv[x] -> 
+     -f + y ** d ** Inv[x] - y ** d ** Tp[x] + y ** Tp[y] ** f + 
+      Inv[Tp[y]] ** d ** Tp[x] + Inv[Tp[y]] ** Tp[F] ** Inv[x] - 
+      Inv[Tp[y]] ** Tp[F] ** Tp[x], 
+    Tp[d] ** Inv[y] ** f -> F ** Inv[y] ** f + Tp[d] ** Tp[y] ** f - Tp[x], 
+    Tp[d] ** Inv[y] ** Inv[Tp[b]] -> 1 + F ** Inv[y] ** Inv[Tp[b]], 
+    Tp[d] ** Tp[F] ** Inv[b] -> 
+     Inv[b] - F ** Inv[y] + Tp[d] ** Inv[y] - Tp[d] ** Tp[y], 
+    Tp[f] ** Inv[Tp[y]] ** d -> 
+     -x + Tp[f] ** y ** d + Tp[f] ** Inv[Tp[y]] ** Tp[F], 
+    d ** Tp[x] ** x ** F -> -1 + d ** F + Tp[y] ** f ** x ** F, 
+    d ** Tp[x] ** x ** Tp[d] -> 
+     -1 + d ** Tp[d] + d ** Tp[x] ** Tp[f] ** y + Tp[y] ** f ** x ** Tp[d] - 
+      Tp[y] ** f ** Tp[f] ** y, 
+    d ** Tp[x] ** Tp[f] ** Inv[Tp[b]] -> 
+     -d + d ** Tp[x] ** x - Tp[y] ** f ** x + 
+      Tp[y] ** f ** Tp[f] ** Inv[Tp[b]], 
+    f ** x ** Tp[d] ** Inv[y] -> 
+     -1 + f ** Tp[f] + f ** x ** F ** Inv[y] + f ** x ** Tp[d] ** Tp[y] - 
+      f ** Tp[f] ** y ** Tp[y], 
+    F ** d ** Tp[x] ** x -> -1 + F ** d + F ** Tp[y] ** f ** x, 
+    Inv[b] ** f ** x ** F -> -F + Inv[b] ** y + Tp[x] ** x ** F, 
+    Inv[b] ** f ** x ** Tp[d] -> 
+     Tp[x] ** x ** Tp[d] - Tp[x] ** Tp[f] ** y + Inv[b] ** f ** Tp[f] ** y - 
+      Tp[d], Inv[b] ** f ** Tp[f] ** Inv[Tp[b]] -> 
+     1 + Inv[b] ** Inv[Tp[b]] - Tp[x] ** x + Inv[b] ** f ** x + 
+      Tp[x] ** Tp[f] ** Inv[Tp[b]], 
+    Inv[b] ** y ** d ** Inv[x] -> 
+     Inv[x] + Inv[b] ** f + Inv[b] ** y ** d ** Tp[x] - 
+      Inv[b] ** y ** Tp[y] ** f - Tp[x], 
+    Inv[b] ** Inv[Tp[y]] ** Tp[F] ** Inv[d] -> 
+     -Inv[d] + Inv[b] ** Inv[Tp[y]], 
+    Inv[Tp[b]] ** F ** Tp[F] ** Inv[b] -> 
+     1 - y ** Tp[y] + Inv[Tp[b]] ** Inv[b] - y ** Tp[F] ** Inv[b] - 
+      Inv[Tp[b]] ** F ** Tp[y], 
+    Inv[Tp[b]] ** F ** Tp[y] ** f -> 
+     f + Inv[Tp[b]] ** Tp[x] - y ** Tp[y] ** f, 
+    Inv[Tp[d]] ** F ** Inv[y] ** f -> 
+     Inv[y] ** f + Inv[Tp[d]] ** Tp[x] - Tp[y] ** f, 
+    Inv[Tp[d]] ** F ** Inv[y] ** Inv[Tp[b]] -> 
+     -Inv[Tp[d]] + Inv[y] ** Inv[Tp[b]], 
+    Inv[Tp[x]] ** Tp[d] ** Tp[y] ** y -> 
+     x ** F - x ** Tp[d] - Inv[Tp[x]] ** F + Inv[Tp[x]] ** Tp[d] + 
+      Tp[f] ** y + x ** Tp[d] ** Tp[y] ** y - Tp[f] ** y ** Tp[y] ** y, 
+    Inv[Tp[x]] ** Tp[d] ** Tp[y] ** Inv[Tp[b]] -> 
+     -x + Inv[Tp[x]] + Tp[f] ** Inv[Tp[b]] + 
+      x ** Tp[d] ** Tp[y] ** Inv[Tp[b]] - Tp[f] ** y ** Tp[y] ** Inv[Tp[b]], 
+    Inv[Tp[y]] ** d ** Tp[x] ** x -> 
+     f ** x - y ** d + Inv[Tp[y]] ** d - Inv[Tp[y]] ** Tp[F] + 
+      y ** d ** Tp[x] ** x - y ** Tp[y] ** f ** x + 
+      Inv[Tp[y]] ** Tp[F] ** Tp[x] ** x, 
+    Inv[Tp[y]] ** d ** Tp[x] ** Tp[f] -> 
+     -1 + f ** Tp[f] + y ** d ** Tp[x] ** Tp[f] - y ** Tp[y] ** f ** Tp[f] + 
+      Inv[Tp[y]] ** Tp[F] ** Tp[x] ** Tp[f], 
+    Tp[d] ** Inv[y] ** Inv[Tp[y]] ** d -> 
+     -1 + Tp[d] ** d + F ** Inv[y] ** Inv[Tp[y]] ** d - 
+      F ** Inv[y] ** Inv[Tp[y]] ** Tp[F] + 
+      Tp[d] ** Inv[y] ** Inv[Tp[y]] ** Tp[F], 
+    Tp[f] ** y ** Tp[F] ** Inv[b] -> 
+     x ** Inv[b] - Tp[f] ** y ** Tp[y] + Tp[f], 
+    Tp[f] ** y ** Tp[y] ** f -> -1 + x ** Tp[x] + Tp[f] ** f, 
+    Tp[f] ** Inv[Tp[y]] ** Tp[F] ** Inv[d] -> 
+     x ** Inv[d] - Tp[f] ** y + Tp[f] ** Inv[Tp[y]], 
+    Tp[F] ** Tp[x] ** x ** F -> -1 + Tp[F] ** F + Tp[y] ** y, 
+    Tp[F] ** Tp[x] ** x ** Tp[d] -> 
+     -1 + Tp[F] ** Tp[d] + Tp[F] ** Tp[x] ** Tp[f] ** y, 
+    Tp[F] ** Tp[x] ** Tp[f] ** Inv[Tp[b]] -> 
+     Tp[y] ** Inv[Tp[b]] + Tp[F] ** Tp[x] ** x - Tp[F], 
+    Tp[x] ** x ** Tp[d] ** Inv[y] -> 
+     -F ** Inv[y] + Tp[d] ** Inv[y] - Tp[d] ** Tp[y] + Tp[x] ** Tp[f] + 
+      Tp[x] ** x ** F ** Inv[y] + Tp[x] ** x ** Tp[d] ** Tp[y] - 
+      Tp[x] ** Tp[f] ** y ** Tp[y], 
+    Tp[x] ** x ** Tp[d] ** Tp[F] -> 
+     -1 + Tp[d] ** Tp[F] + Tp[x] ** Tp[f] ** y ** Tp[F], 
+    Tp[y] ** y ** d ** Inv[x] -> 
+     d ** Inv[x] - d ** Tp[x] - Tp[F] ** Inv[x] + Tp[F] ** Tp[x] + 
+      Tp[y] ** f + Tp[y] ** y ** d ** Tp[x] - Tp[y] ** y ** Tp[y] ** f, 
+    d ** Tp[x] ** Tp[f] ** y ** Inv[Tp[d]] -> 
+     -d + Inv[Tp[d]] + d ** Tp[x] ** x - Tp[y] ** f ** x + 
+      Tp[y] ** f ** Tp[f] ** y ** Inv[Tp[d]], 
+    Inv[b] ** f ** Tp[f] ** y ** Inv[Tp[d]] -> 
+     1 - Tp[x] ** x + Inv[b] ** f ** x + Tp[x] ** Tp[f] ** y ** Inv[Tp[d]], 
+    Inv[b] ** y ** d ** Tp[x] ** x -> 
+     -1 + Tp[x] ** x - Inv[b] ** f ** x + Inv[b] ** y ** d + 
+      Inv[b] ** y ** Tp[y] ** f ** x, 
+    Inv[d] ** Tp[y] ** f ** x ** F -> -F + Inv[d] + Tp[x] ** x ** F, 
+    Inv[d] ** Tp[y] ** f ** x ** Tp[d] -> 
+     Inv[d] + Tp[x] ** x ** Tp[d] - Tp[x] ** Tp[f] ** y + 
+      Inv[d] ** Tp[y] ** f ** Tp[f] ** y - Tp[d], 
+    Inv[d] ** Tp[y] ** f ** Tp[f] ** Inv[Tp[b]] -> 
+     1 - Tp[x] ** x + Tp[x] ** Tp[f] ** Inv[Tp[b]] + 
+      Inv[d] ** Tp[y] ** f ** x, 
+    Inv[Tp[d]] ** F ** Inv[y] ** Inv[Tp[y]] ** d -> 
+     -d + Inv[Tp[d]] + Inv[y] ** Inv[Tp[y]] ** d - 
+      Inv[y] ** Inv[Tp[y]] ** Tp[F] + 
+      Inv[Tp[d]] ** F ** Inv[y] ** Inv[Tp[y]] ** Tp[F], 
+    Tp[d] ** Inv[y] ** Inv[Tp[y]] ** Tp[F] ** Inv[d] -> 
+     Inv[d] - F ** Inv[y] ** Inv[Tp[y]] + Tp[d] ** Inv[y] ** Inv[Tp[y]] + 
+      F ** Inv[y] ** Inv[Tp[y]] ** Tp[F] ** Inv[d] - Tp[d], 
+    Tp[F] ** Tp[x] ** Tp[f] ** y ** Inv[Tp[d]] -> 
+     Inv[Tp[d]] + Tp[F] ** Tp[x] ** x - Tp[F], 
+    Tp[x] ** x ** Tp[d] ** Tp[y] ** y -> 
+     F + Tp[d] ** Tp[y] ** y - Tp[x] ** x ** F + Tp[x] ** x ** Tp[d] - 
+      Tp[x] ** Tp[f] ** y + Tp[x] ** Tp[f] ** y ** Tp[y] ** y - Tp[d], 
+    Tp[x] ** x ** Tp[d] ** Tp[y] ** Inv[Tp[b]] -> 
+     -1 + Tp[x] ** x + Tp[d] ** Tp[y] ** Inv[Tp[b]] - 
+      Tp[x] ** Tp[f] ** Inv[Tp[b]] + 
+      Tp[x] ** Tp[f] ** y ** Tp[y] ** Inv[Tp[b]], 
+    Tp[y] ** y ** d ** Tp[x] ** x -> 
+     -d + d ** Tp[x] ** x - Tp[F] ** Tp[x] ** x - Tp[y] ** f ** x + 
+      Tp[y] ** y ** d + Tp[y] ** y ** Tp[y] ** f ** x + Tp[F], 
+    x ** F ** d ** Tp[x] ** Tp[f] ** y -> 
+     x ** F - x ** Tp[d] + x ** F ** Tp[y] ** f ** Tp[f] ** y, 
+    Inv[Tp[d]] ** F ** Inv[y] ** Inv[Tp[y]] ** Tp[F] ** Inv[d] -> 
+     1 - Inv[y] ** Inv[Tp[y]] - Inv[Tp[d]] ** Inv[d] + 
+      Inv[y] ** Inv[Tp[y]] ** Tp[F] ** Inv[d] + 
+      Inv[Tp[d]] ** F ** Inv[y] ** Inv[Tp[y]], 
+    Inv[d] ** Tp[y] ** f ** Tp[f] ** y ** Inv[Tp[d]] ** F ** Inv[y] -> 
+     Inv[d] ** Inv[y] - Inv[d] ** Inv[Tp[d]] ** F ** Inv[y] + 
+      Tp[x] ** Tp[f] ** y ** Inv[Tp[d]] ** F ** Inv[y], 
+    Inv[Tp[y]] ** Tp[F] ** Inv[d] ** Tp[y] ** f ** Tp[f] ** y ** 
+      Inv[Tp[d]] -> 
+     Inv[Tp[y]] ** Inv[Tp[d]] - Inv[Tp[y]] ** Tp[F] ** Inv[d] ** Inv[Tp[d]] + 
+      Inv[Tp[y]] ** Tp[F] ** Inv[d] ** Tp[y] ** f ** x}}
+selects={Tp[f] ** y ** Tp[y] ** f -> -1 + x ** Tp[x] + Tp[f] ** f,
+         Tp[F] ** Tp[x] ** x ** F -> -1 + Tp[F] ** F + Tp[y] ** y,
+         d ** Inv[d] -> 1,Inv[d] ** d -> 1,
+         Inv[Tp[d]] ** Tp[d] -> 1, Tp[d] ** Inv[Tp[d]] -> 1};
+
+NCMakeGB[selects,0,UserSelect->selects,ReturnRelations->False];
+
+Print["PrintMonomialOrder[]"];
+PrintMonomialOrder[];
+starting = Union[Fans3[[2]],Fans3[[3]]];
+Print["SmallBasis Arguments : ",starting,{},3];
+Fans4=SmallBasis[starting,{},3];
+RegularOutput[Fans4,"Fans4"];
+Put[Definition[Fans4],"Fans4"];
+starting = PolyToRule[starting];
+ending = PolyToRule[Fans4];
+OneDiff = Complement[starting,ending];
+TwoDiff = Complement[ending,starting];
+Print["Number of elements in OneDiff ",Length[OneDiff]];
+Print["Number of elements in TwoDiff ",Length[TwoDiff]];

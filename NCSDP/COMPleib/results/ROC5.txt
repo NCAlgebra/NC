@@ -1,0 +1,271 @@
+Mathematica 8.0 for Mac OS X x86 (64-bit)
+Copyright 1988-2011 Wolfram Research, Inc.
+
+In[1]:= 
+Out[1]= {stdout}
+
+In[2]:= SetOptions[$Output,PageWidth->80];
+
+In[3]:= 
+In[3]:= (* ADJUST YOUR DIRECTORY SETTINGS HERE! *)
+
+In[4]:= SetDirectory[$HomeDirectory <> "/work/projects/ipsolver"]
+
+Out[4]= /Users/mauricio/work/projects/ipsolver
+
+In[5]:= 
+In[5]:= << SDP`
+
+In[6]:= << SDPSylvester`
+
+In[7]:= 
+In[7]:=                         SolveProblem[fileName_, solution_, stream_, results_] := Module[
+  {
+    maxTimeSDP = 1800, (* Seconds allowed to finish SDP *)
+    time1 = 0, time2 = 0, (* Used for timing *)
+    out, (* output from SDPSolve calls *)
+    Id, Ze
+  },
+
+  WriteString[stream, "Running... ", fileName, "\n"];
+  
+  (* Load problem file *)
+  Get[fileName];
+
+  WriteString[stream, \
+              (nx*(nx+1))/2+(nz*(nz+1))/2+nx*nu, " variables. W is ", nz, \
+              "x", nz, ", L is ", nu, "x", nx, ", X is ", nx, "x", nx, "\n"];
+
+  (* Setup Leibfritz H_2 problem *)
+
+  Id[n_] := IdentityMatrix[n] // N;
+  Ze[m_, n_] := ConstantArray[0, {m, n}] // N;
+
+  C1X = ArrayFlatten[{{C1}, {Ze[nx, nx]}}];
+  IdX = ArrayFlatten[{{Ze[nz, nx]}, {Id[nx]}}];
+  D12L = ArrayFlatten[{{D12}, {Ze[nx, nu]}}];
+  IdW = ArrayFlatten[{{Id[nz]}, {Ze[nx, nz]}}];
+
+  AA = {
+     (* A X + B L + 0 W < -B1 B1^T *)
+     {
+       {2 A, Id[nx]}, 
+       {2 B, Id[nx]}, 
+       {Ze[nx, nz], Ze[nz, nx]}
+     },
+     (* -[W, C1 X + L D12; X C1^T + D12^T L^T X] < 0 *)
+     {
+       {ArrayFlatten[{{-IdX, -2 C1X}}],
+        ArrayFlatten[{{Transpose[IdX], Transpose[IdX]}}]},
+       {-2 D12L, Transpose[IdX]}, 
+       {- IdW, Transpose[IdW]}
+     }
+   };
+  CC = {-B1.Transpose[B1], Ze[nx + nz, nx + nz]};
+  BB = {Ze[nx, nx], Ze[nu, nx], -Id[nz]};
+
+  (* Run the algorithm *)
+
+  WriteString[stream, "Starting SDP Solver...\n"];
+
+  time1 = TimeUsed[];
+
+  out = TimeConstrained[
+          SDPSolve[{AA, BB, CC}, 
+                   SymmetricVariables -> {1, 3}, 
+                   DebugLevel -> 0],
+          maxTimeSDP 
+        ];
+
+  time2 = TimeUsed[];
+
+  WriteString[stream, "Done.\n"];
+
+  If [ out === $Aborted, 
+
+     Print["Can't optimize in ", maxTimeSDP, " seconds."];
+     WriteString[stream, "Can't optimize in ", maxTimeSDP, \
+                 " seconds.\n\n\n"];
+
+     status = "TIMEOUT";
+
+    ,
+
+     status = "SUCCESS";
+
+  ];
+
+  (* Write results *)
+  PutAppend[{fileName, DateString[], status, time2-time1,
+             $MachineName, $MachineType, $ProcessorType}, results];
+
+  (* Write solution *)
+  Put[out, solution];
+
+  Return[];
+
+];
+
+In[8]:= 
+In[8]:= (* Extract problem to run from input line *)
+
+In[9]:= 
+In[9]:= problemCode = ToFileName["COMPleib", $CommandLine[[2]]];
+
+In[10]:= solutionFileName = ToFileName["COMPleib", $CommandLine[[3]]];
+
+In[11]:= outputFileName = ToFileName["COMPleib", $CommandLine[[4]]];
+
+In[12]:= resultsFileName = ToFileName["COMPleib", $CommandLine[[5]]];
+
+In[13]:= 
+In[13]:= outputStream = If[ FileExistsQ[outputFileName], 
+                   OpenAppend[outputFileName], 
+                   OpenWrite[outputFileName] ];
+
+In[14]:= SetOptions[outputStream, FormatType -> StandardForm];
+
+In[15]:= 
+In[15]:= SolveProblem[ problemCode <> ".m", solutionFileName, 
+              outputStream, resultsFileName ];
+ -------------------------------------------------------------------
+ Problem data:
+ * Dimensions (total):
+   - Variables             = 74
+   - Inequalities          = 2
+ * Dimensions (detail):
+   - Variables             = {{7, 7}, {3, 7}, {2, 2}}
+   - Inequalities          = {7, 9}
+
+ Method:
+ * Method                  = PredictorCorrector
+ * Search direction        = NT
+
+ Precision:
+ * Gap tolerance           = 1.e-9
+ * Rationalize iterates    = False
+
+ Other options:
+ * Debug level             = 0
+
+  K    <B, Y>           mu    theta/tau        alpha       |X S|2      |X S|oo 
+ 
+>     ~|A X - B|  ~|A* X - C|
+ -----------------------------------------------------
+ 
+>   ------------------------------------------------------
+
+LinearSolve::sing1: 
+   The matrix {{1., 0., 0., 0., -0.471405, 0., 0., 0., 0., 0., 0., 0., 0., 0., 
+      0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., <<11>>, 0., 0., 0., 
+      0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.}, <<51>>} is singular so a
+     factorization will not be saved.
+  1  6.6183 E -2  7.1248 E -2  6.6543 E -2  9.3907 E -1  2.1605 E  0 
+ 
+>    9.9249 E -1  7.6093 E-13  9.1175 E-16          
+
+LinearSolve::luc: 
+   Result for LinearSolve of badly conditioned matrix 
+                               -7             -7                        -7
+    {{1., 0.0712228, 3.54026 10  , -2.67258 10  , -0.970218, -3.61868 10  , 
+                 -15                      -9
+      -2.08265 10   , 0.020191, 7.87926 10  , <<38>>, 0., 0., -0.712367, 
+                 -7             -14
+      -2.83384 10  , -3.05979 10   }, <<50>>, {<<52>>}} may contain significant
+     numerical errors.
+  2  1.1365 E -2  1.3613 E -2  1.1392 E -2  8.1000 E -1  2.5432 E  0 
+ 
+>    9.8562 E -1  7.5852 E-13  8.2776 E-16          
+
+LinearSolve::luc: 
+   Result for LinearSolve of badly conditioned matrix 
+                               -6             -6                        -6
+    {{1., 0.0650472, 1.55527 10  , -2.21472 10  , -0.994192, -1.51532 10  , 
+                 -15                       -7
+      -4.44279 10   , 0.0223891, -4.3745 10  , <<38>>, 0., 0., -0.693247, 
+                 -6            -12
+      -1.65805 10  , -1.3999 10   }, <<50>>, {<<52>>}} may contain significant
+     numerical errors.
+  3  2.5843 E -3  2.5865 E -3  2.4993 E -3  8.1000 E -1  3.0123 E  0 
+ 
+>    9.8229 E -1  7.5939 E-13  8.6637 E-16          
+
+LinearSolve::luc: 
+   Result for LinearSolve of badly conditioned matrix 
+    {{1., 0.237465, 0.0000529593, 0.0000228342, -0.998544, -0.0000528218, 
+                 -14                                     -6
+      -1.14162 10   , 0.0602448, 0.0000309263, 6.62663 10  , <<37>>, 0., 0., 
+                                          -9
+      -0.517195, -0.0000102759, 1.99039 10  }, <<51>>} may contain significant
+     numerical errors.
+
+General::stop: Further output of LinearSolve::luc
+     will be suppressed during this calculation.
+  4  8.8509 E -4  7.0095 E -4  7.4997 E -4  7.2900 E -1  3.2549 E  0 
+ 
+>    9.8179 E -1  8.2468 E-13  1.0195 E-15          
+  5  3.0051 E -4  1.5270 E -4  1.4251 E -4  7.8275 E -1  3.9375 E  0 
+ 
+>    9.8176 E -1  1.1156 E-12  6.2726 E-16          
+  6  1.4568 E -4  5.1038 E -5  5.5917 E -5  6.6577 E -1  4.1295 E  0 
+ 
+>    9.8308 E -1  6.4746 E-12  9.9634 E-16          
+  7  5.0374 E -5  1.9226 E -5  1.9728 E -5  6.2337 E -1  4.0499 E  0 
+ 
+>    9.8349 E -1  1.2657 E-11  9.7247 E-16          
+  8  2.3971 E -5  7.8731 E -6  9.9242 E -6  5.9049 E -1  3.8000 E  0 
+ 
+>    9.8282 E -1  4.8138 E -9  1.9527 E -6          
+  9  7.0685 E -6  2.7377 E -6  2.6902 E -6  6.5610 E -1  3.6566 E  0 
+ 
+>    9.7089 E -1  2.8954 E -8  2.8435 E -6          
+ 10  3.0433 E -6  9.4151 E -7  1.2740 E -6  6.5610 E -1  3.4673 E  0 
+ 
+>    9.6823 E -1  2.8954 E -8  6.8340 E -6          
+ 11  6.6662 E -7  2.2017 E -7  2.3361 E -7  7.6864 E -1  4.0088 E  0 
+ 
+>    9.6701 E -1  8.3712 E -8  6.1896 E -4          
+ 12  4.8532 E -7  1.2688 E -7  1.7677 E -7  4.2371 E -1  3.5780 E  0 
+ 
+>    9.7323 E -1  8.3712 E -8  3.3330 E -4          
+ 13  1.6869 E -7  4.6663 E -8  5.6486 E -8  6.3265 E -1  3.5420 E  0 
+ 
+>    9.6995 E -1  8.3907 E -8  3.9882 E -4          
+ 14  6.2548 E -8  1.6865 E -8  1.8188 E -8  6.3941 E -1  3.4715 E  0 
+ 
+>    9.6778 E -1  8.3913 E -8  4.8950 E -4          
+ 15  5.9069 E -8  1.2175 E -8  1.5632 E -8  2.1074 E -1  3.6731 E  0 
+ 
+>    9.6496 E -1  8.7984 E -8  2.2625 E -4          
+ 16  1.9148 E -7  1.1832 E -8  6.3851 E -8  6.9140 E -1  2.6013 E  0 
+ 
+>    9.2790 E -1  9.1942 E -8  2.1665 E -4          
+ 17  1.7449 E -7  9.9687 E -9  9.3922 E -8  1.4814 E -2  2.4616 E  0 
+ 
+>    9.0938 E -1  1.2429 E -7  4.1976 E -4          
+ 18  2.4807 E -7  4.2859 E -9  1.1695 E -7  8.3003 E -1  3.3530 E  0 
+ 
+>    8.0201 E -1  1.1570 E -7  6.3062 E -4          
+ 19  1.9862 E -7  2.0985 E -9  1.0717 E -7  4.7830 E -1  3.7736 E  0 
+ 
+>    9.3093 E -1  5.1679 E -5  1.0848 E -4          
+ 20  2.7518 E -7  6.7534 E-10  1.3520 E -7  7.2900 E -1  4.4268 E  0 
+ 
+>    8.6025 E -1  5.1684 E -5  4.5154 E -6          
+ -------------------------------------------------------------------
+ 
+>   ---------------------------
+* Primal solution is not strictly feasible
+                               -7
+(max eig(A* X - C) = 1.10647 10   > 0)
+* Dual solution is not within tolerance
+                                    -9
+(|| A X - B || = 0.00061853 >= 1. 10  )
+
+In[16]:= 
+In[16]:= Close[outputStream];
+
+In[17]:= 
+In[17]:= $Echo = DeleteCases[$Echo, "stdout"];
+
+In[18]:= 

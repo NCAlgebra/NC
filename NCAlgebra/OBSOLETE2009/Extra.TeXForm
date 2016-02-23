@@ -1,0 +1,312 @@
+Get["NCTeXForm.m"];
+(* : Title:  Extra.TeXForm // Mathematica 2.0   *)
+
+(* : Author : Mark Stankus (mstankus)   *)
+
+(* : Context: TeXStuff`   *)
+
+(* : Summary :   *)
+
+(* : Warnings :    *)
+
+(* : History  : 
+   : 7/12/93:  Packaged. (yoshinob)
+*)
+
+BeginPackage["TeXStuff`",
+      "HereditaryCalculus`","Errors`",
+      "NonCommutativeMultiply`","Global`","System`"];
+
+Clear[HereditaryMatrixC];
+
+HereditaryMatrixC::usage = "not documented";
+
+Clear[HereditaryMatrixE];
+
+HereditaryMatrixE::usage = "not documented";
+
+Clear[ForcedEquations];
+
+ForcedEquations::usage = "not documented";
+
+Clear[LookAtExpression];
+
+LookAtExpression::usage = "not documented";
+
+Clear[LookAtMatrix];
+
+LookAtMatrix::usage = "not documented";
+
+Clear[LookAtLongExpression];
+
+LookAtLongExpression::usage = "not documented";
+
+Clear[MatrixLongForm];
+
+MatrixLongForm::usage = "not documented";
+
+Clear[ListToTeXFile];
+
+ListToTeXFile::usage = "not documented";
+
+Clear[LookAtMatrixLong];
+
+LookAtMatrixLong::usage = "not documented";
+
+Clear[CalculateHereditary];
+
+CalculateHereditary::usage = "not documented";
+
+Clear[HereditaryManyPolynomials];
+
+HereditaryManyPolynomials::usage = "not documented";
+
+Clear[HereditaryManyPolynomialTeX];
+
+HereditaryManyPolynomialsTeX::usage = "not documented";
+
+Clear[QuickCalculate];
+
+QuickCalculate::usage = "not documented";
+
+Clear[DviPlease];
+
+DviPlease::usage = "DviPlease is a variable. It is  \
+   True by default. If it is true, xdvi is used for
+   commands starting with the work Look.";
+
+Clear[DviIt];
+
+DviIt::usage = "DviIt[\"file.dvi\"];";
+
+Clear[SetDvi];
+
+SetDvi::usage = "SetDvi[callingSequence]";
+
+Begin["`Private`"];
+
+SetDvi[x_] := xdviString = x;
+
+SetDvi["xdvi -keep -topmargin 5cm -geometry 1000x200 "];
+
+DviIt[fileName_] := 
+  Run[xdviString<>" "<>fileName<>" & "];
+
+DviPlease = True;
+
+Unprotect[Conjugate];
+System`Conjugate/:Literal[Format[Conjugate[x_],TeXForm]] :=
+         StringJoin["{ \\overline {",ToString[Format[x,TeXForm]],"} }"];
+Protect[Conjugate];
+
+Of/: Literal[Format[Of[x_,y_],TeXForm]] :=
+      StringJoin[ToString[Format[x,TeXForm]]," ", ToString[Format[y,TeXForm]]];
+
+Kernel/: Literal[Format[Kernel[pt_,operator_],TeXForm]] := 
+      StringJoin["k_{",ToString[Format[pt,TeXForm]]," , ", ToString[Format[operator,TeXForm]],"}"];
+
+dyad/:Literal[Format[dyad[x_,y_],TeXForm]] := 
+         StringJoin[TeXFormAux[x]," \\otimes ",TeXFormAux[y]]; 
+
+Literal[Format[Rank1[x_,y_],TeXForm]] := 
+         StringJoin[TeXFormAux[y]," \\otimes 1"]; 
+
+Tp/:Literal[Format[Tp[x_],TeXForm]]  := StringJoin[TeXFormAux[x],"{}^T"];
+
+Literal[Format[Aj[Rank1[x_,y_]],TeXForm]] := 
+              StringJoin["1 \\ otimes ",
+                         ToString[Format[Rank1[x,y],TeXForm]]
+                        ];
+
+Ajize`Aj/:Literal[Format[Ajize`Aj[x_?((Head[#]=!=Rank1)&)],TeXForm]]  := 
+     StringJoin[TeXFormAux[x],"{}^{*}"];
+
+Literal[Format[Rt[x_],TeXForm]]  := 
+    StringJoin[TeXFormAux[x],"{}^{ 1 \\over 2}"];
+
+Inv/:Literal[Format[Inv[x_],TeXForm]]  := StringJoin[TeXFormAux[x],"{}^{-1}"];
+
+InnerProduct/:Literal[Format[InnerProduct[x_,y_],TeXForm]] :=
+        StringJoin["\\langle ",ToString[Format[x,TeXForm]],",",
+                   ToString[Format[y,TeXForm]]," \\rangle"];
+       
+Literal[Format[InnerProduct[x_,y_,unspecified],TeXForm]] :=
+        StringJoin["\\langle ",ToString[Format[x,TeXForm]],",",
+                   ToString[Format[y,TeXForm]]," \\rangle"];
+
+Literal[Format[InnerProduct[x_,y_,HardySpaceOfDisk],TeXForm]] :=
+        StringJoin[ToString[Format[InnerProduct[x,y,unspecified],TeXForm]],
+                   "_{H^2(\\partial \\Bbb D)}"];
+
+Global`OutputAMatrix/:Literal[Format[Global`OutputAMatrix[x_],TeXForm]] := 
+Block[{begin,rest,dim,dim1,dim2,i,j},
+     begin = "\\pmatrix {";
+     rest = "";
+     dim = Dimensions[x];
+     dim1 = dim[[1]];
+     dim2 = dim[[2]];
+     For[i=1,i<=dim1,i++,
+         For[j=1,j<=dim2-1,j++,
+             rest = StringJoin[rest," ", ToString[Format[x[[i,j]],TeXForm]],
+                               " \NCAmpersand"];
+         ];
+         rest = StringJoin[rest," ", ToString[Format[x[[i,dim2]],TeXForm]],
+                           " \\cr"];
+     ]; 
+     StringJoin[begin,rest," }"]
+];
+
+HereditaryMatrixC[p_,str_,mat_,space___]:= Block[{temp},
+    temp = Hereditary[p,mat,space];
+    CommentToTeXFile[StringJoin[str," is "]];
+    ExpressionToTeXFile[OutputAMatrix[temp]];
+    Return[temp]
+];
+
+HereditaryMatrixC[x___]:= BadCall["HereditaryMatrixC",x];
+
+HereditaryMatrixE[p_,expr_,mat_,space___]:= Block[{temp},
+    temp = Hereditary[p,mat,space];
+    EqualityToTeXFile[expr,OutputAMatrix[temp]];
+    Return[temp]
+];
+
+HereditaryMatrixE[x___]:= BadCall["HereditaryMatrixE",x];
+
+ForcedEquations[expr1_,expr2_]:= ForcedEquations[expr1,expr2," \n \n"];
+
+ForcedEquations[expr1_,expr2_,text_] := Block[{temp,temp1,temp2},
+    If[Not[Dimensions[expr1]==Dimensions[expr2]],
+         Print["Error in ForcedEquations"];
+       ,
+         temp1 = Flatten[expr1];
+         temp2 = Flatten[expr2];
+         CommentToTeXFile[text];
+         CommentToTeXFile["The following equations are forced."];
+         For[j=1,j<=Length[temp1],j++,
+             temp = ExpandNonCommutativeMultiply[temp1[[j]]-temp2[[j]]];
+             If[Not[temp===0],EqualityToTeXFile[temp,0];
+             ];
+         ];
+    ];
+];
+
+ForcedEquations[x___]:= BadCall["ForcedEquations",x];
+
+LookAtExpression[expr_] := Block[{},
+    OpenTeXFile[];
+(* from dell 5/4/99 *)
+    WriteString["file.tex","\\def\\NCAmpersand{&}"];
+(* Old way (Mma 2.2 ???)
+    WriteString["file.tex","\\def\\NCAmpersand\{\&\}"];
+*)
+    ExpressionToTeXFile[expr];
+    CloseTeXFile[];
+    TeXTheFile["file"];
+    DviIt["file"];
+];
+
+LookAtExpression[x___]:= BadCall["LookAtExpression",x];
+
+LookAtMatrix[mat_] := LookAtExpression[OutputAMatrix[mat]];
+
+LookAtLongExpression[expr_] := Block[{},
+    Run["rm file.dvi"];
+    OpenTeXFile[];
+    LongExpressionToTeXFile["file.tex",expr];
+    CloseTeXFile[];
+    TeXTheFile["file"];
+    DviIt["file"];
+];
+
+LookAtMatrix[x___]:=BadCall["LookAtMatrix",x];
+
+MatrixLongForm[mat_] := MatrixLongForm[mat,"file.tex"];
+
+MatrixLongForm[mat_,str_String] := Block[{j,k,dim},
+    ExpressionToTeXFile[str,OutputAMatrix[mat]];
+    dim = Dimensions[mat];
+    For[j=1,j<=dim[[1]],j++,
+        CommentToTeXFile[str,StringJoin["Row ",ToString[j]," is "]];
+        For[k=1,k<=dim[[2]],k++,
+            LongExpressionToTeXFile[str,mat[[j,k]]];
+            CommentToTeXFile["---------------------"];
+        ];
+    ];
+];
+
+MatrixLongForm[x___]:= BadCall["MatrixLongForm",x];
+
+ListToTeXFile[aList_List] := ListToTeXFile[aList,"file.tex"]; 
+
+ListToTeXFile[aList_List,str_String] := 
+Block[{j},
+     OpenTeXFile[str];
+     Do[ LongExpressionToTeXFile[str,aList[[j]]];
+         CommentToTeXFile["---------------------"];
+     ,{j,1,Length[aList]}];
+     CloseTeXFile[str];
+     Return[]
+];
+
+ListToTeXFile[x___]:= BadCall["ListToTeXFile",x];
+
+LookAtMatrixLong[mat_] := Block[{},
+    OpenTeXFile[];
+    MatrixLongForm[mat];
+    CloseTeXFile[];
+    TeXTheFile["file"];
+    DviIt["file"];
+];
+
+LookAtMatrixLong[x___]:= BadCall["LookAtMatrixLong",x];
+     
+CalculateHereditary[{p_,T_,space___List,opts___Rules}] :=
+Block[{temp},
+     temp = Hereditary[p,T,space,opts];
+     CommentToTeXFile[StringJoin["$",ToString[Format[p,TeXForm]],
+                                 "$ of \n $$",
+                                 ToString[Format[OutputAMatrix[T],
+                                                 TeXForm]],
+                                 "\n $$ \n is"]
+     ];
+     MatrixLongForm[temp];
+     Return[temp]
+];
+
+CalculateHereditary[x___]:= BadCall["CalculateHereditary",x];
+
+HereditaryManyPolynomials[Poly_List,other___] :=
+Block[{result,j,temp},
+    result = {};
+    For[j=1,j<=Length[Poly],j++,
+        temp = Hereditary[Poly[[j]],other];
+        AppendTo[result,temp];
+    ];
+    Return[result]
+];
+
+HereditaryManyPolynomialsTeX[Poly_List,mat_,other___] :=
+Block[{result,j,temp},
+    result = {};
+    For[j=1,j<=Length[Poly],j++,
+        temp = CalculateHereditary[{Poly[[j]],mat,other}];
+        AppendTo[result,temp];
+    ];
+    Return[result]
+];
+
+HereditaryManyPolynomialsTeX[x___]:=BadCall["HereditaryManyPolynomialsTeX",x];
+
+QuickCalculate[Poly_List,mat_,other___] := Block[{},
+     OpenTeXFile[];
+     temp = HereditaryManyPolynomialsTeX[Poly,mat,other];
+     CloseTeXFile[];
+     TeXTheFile["file"];
+     Return[temp]
+];
+
+QuickCaculate[x___]:= BadCall["QuickCalculate",x];
+
+End[];
+EndPackage[]

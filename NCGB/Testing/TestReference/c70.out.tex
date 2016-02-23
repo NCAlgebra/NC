@@ -1,0 +1,2405 @@
+\documentstyle[rep10,leqno]{report}
+\voffset = -1in
+\evensidemargin 0.1in
+\oddsidemargin 0.1in
+\textheight 9in
+\textwidth 6in
+\begin{document}
+\normalsize
+\baselineskip=12pt
+\noindent
+Input = 
+$
+\\invx\,
+ x\rightarrow 1\\
+x\,
+ invx\rightarrow 1\\
+invy\,
+ y\rightarrow 1\\
+y\,
+ invy\rightarrow 1\\
+x\,
+ y\,
+ inv1xy\rightarrow -1 + inv1xy\\
+y\,
+ x\,
+ inv1yx\rightarrow -1 + inv1yx\\
+inv1xy\,
+ x\,
+ y\rightarrow -1 + inv1xy\\
+inv1yx\,
+ y\,
+ x\rightarrow -1 + inv1yx\\
+inv1yx\,
+ invx\rightarrow invx + y\,
+ inv1xy\\
+inv1xy\,
+ invy\rightarrow invy + x\,
+ inv1yx\\
+invx\,
+ inv1xy\rightarrow invx + y\,
+ inv1xy\\
+invy\,
+ inv1yx\rightarrow invy + x\,
+ inv1yx\\
+inv1yx\,
+ y\rightarrow y\,
+ inv1xy\\
+inv1xy\,
+ x\rightarrow x\,
+ inv1yx\\
+-1 + inv1x - x\,
+ inv1x\\
+-1 + inv1x - inv1x\,
+ x\\
+-1 + inv1y - y\,
+ inv1y\\
+-1 + inv1y - inv1y\,
+ y\\
+$
+File Name = c70.out\\
+NCMakeGB Iterations = 5\\
+NCMakeGB on Digested Iterations = 0\\
+SmallBasis Iterations = 0\\
+SmallBasis on Knowns Iterations = 0\\
+Deselect$\rightarrow \{\}$\\
+UserSelect$\rightarrow \{\}$\\
+RR$\rightarrow $False\\
+RRByCat$\rightarrow $False\\
+SB$\rightarrow $False\\
+SBByCat$\rightarrow $True\\
+DegreeCap$\rightarrow $-1\\
+DegreeSumCap$\rightarrow $-1\\
+DegreeCapSB$\rightarrow $-1\\
+DegreeSumCapSB$\rightarrow $-1\\
+NCCV$\rightarrow $False\\
+THE ORDER IS NOW THE FOLLOWING:\hfil\break
+$
+x<y<invx<invy<inv1x<inv1y<inv1xy<inv1yx\\
+$
+\rule[2pt]{6in}{4pt}\hfil\break
+\rule[2pt]{1.879in}{4pt}
+\ YOUR SESSION HAS DIGESTED\ 
+\rule[2pt]{1.879in}{4pt}\hfil\break
+\rule[2pt]{1.923in}{4pt}
+\ THE FOLLOWING RELATIONS\ 
+\rule[2pt]{1.923in}{4pt}\hfil\break
+\rule[2pt]{6in}{4pt}\hfil\break
+\rule[3pt]{6in}{.7pt}\\
+The expressions with unknown variables $\{\}$\\
+and knowns $\{inv1x,
+$ $
+inv1xy,
+$ $
+inv1y,
+$ $
+inv1yx,
+$ $
+invx,
+$ $
+invy,
+$ $
+x,
+$ $
+y\}$\smallskip\\
+\begin{minipage}{6in}
+$
+inv1x\,
+ invx\rightarrow inv1x + invx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ x\rightarrow -1 + inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1xy\,
+ invy\rightarrow invy + x\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1xy\,
+ x\rightarrow x\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ invy\rightarrow inv1y + invy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ y\rightarrow -1 + inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1yx\,
+ invx\rightarrow invx + y\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1yx\,
+ y\rightarrow y\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+invx\,
+ inv1x\rightarrow inv1x + invx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+invx\,
+ inv1xy\rightarrow invx + y\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+invx\,
+ x\rightarrow 1
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+invy\,
+ inv1y\rightarrow inv1y + invy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+invy\,
+ inv1yx\rightarrow invy + x\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+invy\,
+ y\rightarrow 1
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1x\rightarrow -1 + inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ invx\rightarrow 1
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1y\rightarrow -1 + inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ invy\rightarrow 1
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy + inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx - inv1x\,
+ inv1y + inv1x\,
+ inv1yx + inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ y\,
+ inv1xy\rightarrow -1\,
+ inv1x + inv1x\,
+ inv1xy + y\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1y\,
+ inv1x - inv1y\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ x\,
+ inv1yx\rightarrow -1\,
+ inv1y + inv1y\,
+ inv1yx + x\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy + inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1y + inv1xy\,
+ inv1y + x\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ y\,
+ inv1xy\rightarrow -1 + inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1x + inv1yx\,
+ inv1x + y\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx + inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ x\,
+ inv1yx\rightarrow -1 + inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy\,
+ inv1xy + inv1yx\,
+ inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx - inv1x\,
+ inv1xy\,
+ inv1y + inv1x\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy + inv1y\,
+ inv1x - inv1y\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1x + inv1y\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx - inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy + inv1y\,
+ inv1x - inv1y\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx - inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy + inv1y\,
+ inv1x - inv1y\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx - inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy + inv1y\,
+ inv1x - inv1y\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx - inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy + inv1y\,
+ inv1x - inv1y\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx - inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy + inv1y\,
+ inv1x - inv1y\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx - inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y + inv1x\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow inv1xy - inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy + inv1y\,
+ inv1x - inv1y\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy - inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x - inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1y\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y\rightarrow -1\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y + x\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1x\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1x + y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+y\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1xy\,
+ inv1y\rightarrow -1\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx + inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1yx\,
+ inv1y
+$
+\end{minipage}\\
+\rule[2pt]{6in}{1pt}\hfil\break
+\rule[2.5pt]{1.701in}{1pt}
+\ USER CREATIONS APPEAR BELOW\ 
+\rule[2.5pt]{1.701in}{1pt}\hfil\break
+\rule[2pt]{6in}{1pt}\hfil\break
+\rule[2pt]{6in}{4pt}\hfil\break
+\rule[2pt]{1.45in}{4pt}
+\ SOME RELATIONS WHICH APPEAR BELOW\ 
+\rule[2pt]{1.45in}{4pt}\hfil\break
+\rule[2pt]{2.18in}{4pt}
+\ MAY BE UNDIGESTED\ 
+\rule[2pt]{2.18in}{4pt}\hfil\break
+\rule[2pt]{6in}{4pt}\hfil\break
+THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:\hfil\break
+$\{inv1x,
+$ $
+inv1xy,
+$ $
+inv1y,
+$ $
+inv1yx,
+$ $
+invx,
+$ $
+invy,
+$ $
+x,
+$ $
+y\}$
+\smallskip\\
+\vspace{10pt}
+
+\noindent
+The time for preliminaries was 0:00:00\\
+The time for NCMakeGB 1 was 0:00:00\\
+The time for Remove Redundant 1 was 0:00:00\\
+The time for the main NCMakeGB was 0:00:30\\
+The time for Remove Redundant 2 was 0:00:01\\
+The time for reducing unknowns was 0:00:04\\
+The time for clean up basis was 0:00:06\\
+The time for SmallBasis was 0:01:09\\
+The time for CreateCategories was 0:13:00\\
+The time for NCCV was 0:00:00\\
+The time for RegularOutput was 0:01:08\\
+The time for everything so far was 0:16:04\\
+\end{document}
+\end

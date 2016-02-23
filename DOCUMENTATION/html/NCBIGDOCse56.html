@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>16.2 Elimination</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 345--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse57.html" >next</a>] [<a 
+href="NCBIGDOCse55.html" >prev</a>] [<a 
+href="NCBIGDOCse55.html#tailNCBIGDOCse55.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse56.html">tail</a>] [<a 
+href="NCBIGDOCch16.html#NCBIGDOCse56.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">16.2   </span> <a 
+ id="x95-22900016.2"></a>Elimination</h3>
+<!--l. 348--><p class="noindent">Since we will not always let the <span 
+class="cmmi-12">GBA </span>algorithm run until it finds a Gröbner Basis, we will often be
+dealing with sets which are not Gröbner Basis, but rather an intermediate result. We call such sets
+of relations <span 
+class="cmti-12">partial GB&#8217;s</span>.
+<!--l. 354--><p class="indent">   Commutative Gröbner Basis Algorithms can be used to systematically eliminate variables from
+a collection (e.g., <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub>(<span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">n</span></sub>) = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">}</span>) of polynomial equations so as to put it
+in triangular form. One specifies an order on the variables (<span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">&lt; x</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">&lt; x</span><sub ><span 
+class="cmr-8">3</span></sub> <span 
+class="cmmi-12">&lt;</span> <span 
+class="cmmi-12">&#x2026;</span> <span 
+class="cmmi-12">&lt; x</span><sub ><span 
+class="cmmi-8">n</span></sub> )
+<span class="footnote-mark"><a 
+href="NCBIGDOC96.html#fn3x61"><sup >3</sup></a></span><a 
+ id="x95-229001f3"></a> which
+corresponds to ones priorities in eliminating them. Here a GBA will try hardest to eliminate <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmmi-8">n</span></sub> and
+try the least to eliminate <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub>. The output from it is a list of equations in a &#8220;canonical form&#8221; which is
+triangular: <span class="footnote-mark"><a 
+href="NCBIGDOC97.html#fn4x61"><sup >4</sup></a></span><a 
+ id="x95-229002f4"></a>
+<div class="eqnarray">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC73x.png" alt="         q1(x1) = 0                                (16.1)
+
+      q2(x1,x2) = 0                                (16.2)
+      q3(x1,x2) = 0                                (16.3)
+
+   q4(x1,x2,x3) = 0                                (16.4)
+                ...                                (16.5)
+
+qk2(x1,...,xn) = 0 .                               (16.6)
+" class="math-display" ></center>
+</div>Here the polynomials <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmmi-8">j</span></sub> : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">} </span>generate the same ideal that the polynomials
+
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">} </span>do. Therefore, the set of solutions to the collection the polynomial equations
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">} </span>equals the set of solutions to the collection of polynomial equations
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmmi-8">j</span></sub> = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">}</span>. This canonical form greatly simplifies the task of solving the collection of
+polynomial equations by facilitating backsolving for <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmmi-8">j</span></sub> in terms of <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">j</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub>. The effect of the
+ordering is to specify that variables high in the order will be eliminated while variables low in the
+order will not be eliminated.
+<!--l. 395--><p class="indent">   In the noncommutative case, again a GB for a collection of polynomial equations
+is a collection of noncommuting polynomial equations in triangular form (see <span 
+class="cmbx-12">[HS]</span>).
+There are some difficulties which don&#8217;t occur in the commutative case. For example, a
+GB can be infinite in the noncommutative case. However, we present software here
+based on the noncommutative GBA which might prove to be extremely valuable in some
+situations.
+
+   <!--l. 434--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse57.html" >next</a>] [<a 
+href="NCBIGDOCse55.html" >prev</a>] [<a 
+href="NCBIGDOCse55.html#tailNCBIGDOCse55.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse56.html" >front</a>] [<a 
+href="NCBIGDOCch16.html#NCBIGDOCse56.html" >up</a>] </p></div>
+<!--l. 434--><p class="indent">   <a 
+ id="tailNCBIGDOCse56.html"></a>  
+</body></html> 

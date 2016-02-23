@@ -1,0 +1,31 @@
+This directory contains two tests of NCGB and the many files need to run
+them. The tests are called by loading
+
+                   NCGBTEST
+or running
+
+                   GBTest[First,Last]
+
+
+GBTest:  In directory MmaTestFiles there are 48 test files containing
+input and answers from running an old reference version of
+NCMakeGB[ ] on them. Then GBTest runs your current version
+and compares answers to the reference.
+
+NCGBTEST:  Runs your current version of NCMakeGB[ ]
+and NCProcess[ ] on a collection of data files c.# stored
+in TestProblems and compares to answers in the directory 
+TestReference.
+
+(*igor and bill 2008*)
+
+----
+
+  This directory contains code for testing the NCGB
+package. 
+
+  If you have any questions, send e-mail to
+ncalg@osiris.ucsd.edu.
+
+Mark Stankus
+

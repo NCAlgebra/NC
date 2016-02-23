@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>18.1 Lex Order: The simplest elimination order</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 26--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse64.html" >next</a>] [<a 
+href="#tailNCBIGDOCse63.html">tail</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse63.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">18.1   </span> <a 
+ id="x109-24900018.1"></a>Lex Order: The simplest elimination order</h3>
+<!--l. 29--><p class="noindent">To impose lexicographic order <span 
+class="cmmi-12">a &lt;&lt; b &lt;&lt; x &lt;&lt; y </span>on <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">x </span>and <span 
+class="cmmi-12">y</span>, one types
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[14]:=SetMonomialOrder[a,b,x,y];
+</div>
+</td></tr></table>
+<!--l. 36--><p class="nopar">
+<!--l. 40--><p class="indent">   This order is useful for attempting to solve for <span 
+class="cmmi-12">y </span>in terms of <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">x</span>, since the highest
+priority of the GB algorithm is to produce polynomials which do not contain <span 
+class="cmmi-12">y</span>. If producing high
+order polynomials is a consequence of this fanaticism so be it. Unlike graded orders, lex orders pay
+little attention to the degree of terms. Likewise its second highest priority is to eliminate
+<span 
+class="cmmi-12">x</span>.
+<!--l. 50--><p class="indent">   Once this order is set, one can use all of the commands in the preceeding section in exactly the
+same form.
+<!--l. 53--><p class="indent">   We now give a simple example how one can solve for <span 
+class="cmmi-12">y </span>given that <span 
+class="cmmi-12">a</span>,<span 
+class="cmmi-12">b</span>,<span 
+class="cmmi-12">x </span>and <span 
+class="cmmi-12">y </span>satisfy the
+equations:
+   <center class="math-display" >
+<img 
+src="NCBIGDOC83x.png" alt="- b x + xy a + xb aa = 0
+" class="math-display" ></center>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC84x.png" alt="x a - 1 = 0
+" class="math-display" ></center>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC85x.png" alt="ax - 1 = 0 .
+" class="math-display" ></center>
+
+<a 
+ id="dx109-249001"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[15]:=&#x00A0;NCMakeGB[{-b&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a,
+&#x00A0;<br />x**a-1,a**x-1},4];
+&#x00A0;<br />Out[15]=&#x00A0;{-1&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;x,&#x00A0;-1&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;a,&#x00A0;y&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x}
+</div>
+</td></tr></table>
+<!--l. 73--><p class="nopar">
+<!--l. 77--><p class="indent">   If the polynomials above are converted to replacement rules, then a simple glance at the results
+allows one to see that <span 
+class="cmmi-12">y </span>has been solved for.
+<a 
+ id="dx109-249002"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[16]:=&#x00A0;PolyToRule[%]
+&#x00A0;<br />Out[16]=&#x00A0;{a&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;1,&#x00A0;x&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;1,&#x00A0;y&#x00A0;-&gt;&#x00A0;-b&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x}
+</div>
+</td></tr></table>
+<!--l. 88--><p class="nopar">
+<!--l. 90--><p class="indent">   Now, we change the order to
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[20]:=SetMonomialOrder[y,x,b,a];
+</div>
+</td></tr></table>
+<!--l. 96--><p class="nopar">
+<!--l. 100--><p class="noindent">and do the same <span 
+class="cmti-12">NCMakeGB </span>as above:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[21]:=&#x00A0;NCMakeGB[{-b&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a,
+&#x00A0;<br />x**a-1,a**x-1},4];
+&#x00A0;<br />In[22]:=&#x00A0;PolyToRule[%];
+&#x00A0;<br />In[23]:=&#x00A0;ColumnForm[%];
+&#x00A0;<br />Out[23]=&#x00A0;a&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;-x&#x00A0;**&#x00A0;y&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;-y&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;y&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;-x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;y&#x00A0;-&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;-y&#x00A0;**&#x00A0;y&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;y&#x00A0;-&#x00A0;y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;-x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;y&#x00A0;-&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;-y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;y&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;y&#x00A0;-&#x00A0;y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x
+</div>
+</td></tr></table>
+<!--l. 128--><p class="nopar">
+<!--l. 132--><p class="indent">   In this case, it turns out that it produced the rule <span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">b</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">y </span>+ <span 
+class="cmmi-12">b</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">a </span>which shows that
+the order is not set up to solve for <span 
+class="cmmi-12">y </span>in terms of the other variables in the sense that <span 
+class="cmmi-12">y </span>is not on the
+left hand side of this rule (but a human could easily solve for <span 
+class="cmmi-12">y </span>using this rule). Also the algorithm
+created a number of other relations which involved <span 
+class="cmmi-12">y</span>. If one uses the lex order <span 
+class="cmmi-12">a &lt;&lt; b &lt;&lt; y &lt;&lt; x</span>,
+the <span 
+class="cmti-12">NCMakeGB </span>call above generates 12 polynomials of high total degree which do not solve for
+<span 
+class="cmmi-12">y</span>.
+<!--l. 145--><p class="indent">   See <span 
+class="cmbx-12">[CoxLittleOShea]</span>.
+
+   <!--l. 149--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse64.html" >next</a>] [<a 
+href="NCBIGDOCse63.html" >front</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse63.html" >up</a>] </p></div>
+<!--l. 149--><p class="indent">   <a 
+ id="tailNCBIGDOCse63.html"></a>  
+</body></html> 

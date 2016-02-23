@@ -1,0 +1,535 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+<div class="center" 
+>
+<!--l. 244--><p class="noindent">
+<div class="fbox"> <span 
+class="cmbx-12x-x-207">THE NCAlgebra SUITE</span>  </div>
+</div>
+<div class="center" 
+>
+<!--l. 252--><p class="noindent">
+<!--l. 254--><p class="noindent"><span 
+class="cmbx-12x-x-144">NCAlgebra 4.0</span></div>
+<div class="center" 
+>
+<!--l. 259--><p class="noindent">
+<!--l. 261--><p class="noindent"><span 
+class="cmbx-12x-x-144">Mathematica&#8217;s Control System Professional</span><br>
+<span 
+class="cmbx-12x-x-144">Noncommutative support 1.0</span></div>
+<div class="center" 
+>
+<!--l. 268--><p class="noindent">
+<!--l. 270--><p class="noindent"><span 
+class="cmbx-12x-x-144">NCGB NonCommutative Groebner Bases 4.0</span></div>
+<div class="center" 
+>
+<!--l. 275--><p class="noindent">
+<!--l. 277--><p class="noindent"><span 
+class="cmbx-12x-x-144">SYStems - ON THE WEB</span></div>
+
+<div class="center" 
+>
+<!--l. 282--><p class="noindent">
+<!--l. 284--><p class="noindent"><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12x-x-144">http://math.ucsd.edu/~ncalg</span></span></span><br>
+<span 
+class="cmbx-12x-x-144">Download the software and</span><br>
+<span 
+class="cmbx-12x-x-144">Register there for updates</span></div>
+<!--l. 302--><p class="noindent">                                                                               January 6,
+2010
+<!--l. 304--><p class="indent">
+
+<a 
+ id="Q1-1-1"></a>
+
+<!--l. 311--><p class="indent">
+
+   <div class="tableofcontents">
+   &#x00A0;<span class="sectionToc"> <a 
+href="#Q1-1-1">Table of Contents</a></span>
+<br>   <span class="likechapterToc"><a 
+href="NCBIGDOCli1.html#x2-1000" id="QQ2-2-2">Contents</a></span>
+<br>   &#x00A0;<span class="sectionToc"> <a 
+href="NCBIGDOCli1.html#Q1-2-3">Preface</a></span>
+<br>   <span class="likechapterToc"><a 
+href="NCBIGDOCli2.html#x3-2000" id="QQ2-3-4">Preface</a></span>
+<br>   <span class="partToc">I&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa1.html#x4-3000I" id="QQ2-4-5">NCAlgebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">0.1 <a 
+href="NCBIGDOCpa1.html#x4-40000.1" id="QQ2-4-6">ReleaseNotes NCAlgebra </a></span>
+<br>   <span class="chapterToc">1 <a 
+href="NCBIGDOCch1.html#x5-50001" id="QQ2-5-7">A Short Tutorial on NCAlgebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">1.1 <a 
+href="NCBIGDOCch1.html#x5-60001.1" id="QQ2-5-8">Installing NCAlgebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">1.2 <a 
+href="NCBIGDOCch1.html#x5-100001.2" id="QQ2-5-12">Running NCAlgebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">1.3 <a 
+href="NCBIGDOCch1.html#x5-110001.3" id="QQ2-5-13">A Short Tutorial</a></span>
+<br>   &#x00A0;<span class="sectionToc">1.4 <a 
+href="NCBIGDOCch1.html#x5-120001.4" id="QQ2-5-14">Where to Find More Examples</a></span>
+<br>   &#x00A0;<span class="sectionToc">1.5 <a 
+href="NCBIGDOCch1.html#x5-130001.5" id="QQ2-5-15">Pretty Output </a></span>
+<br>   <span class="chapterToc">2 <a 
+href="NCBIGDOCch2.html#x6-140002" id="QQ2-6-16">A More Sophisticated Demo</a></span>
+<br>   <span class="chapterToc">3 <a 
+href="NCBIGDOCch3.html#x7-150003" id="QQ2-7-18">Helpful Tricks</a></span>
+<br>   &#x00A0;<span class="sectionToc">3.1 <a 
+href="NCBIGDOCch3.html#x7-160003.1" id="QQ2-7-19">Expanding</a></span>
+<br>   &#x00A0;<span class="sectionToc">3.2 <a 
+href="NCBIGDOCch3.html#x7-170003.2" id="QQ2-7-20">Simplifying Expressions</a></span>
+<br>   &#x00A0;<span class="sectionToc">3.3 <a 
+href="NCBIGDOCch3.html#x7-210003.3" id="QQ2-7-24">Edit - For those without Notebooks</a></span>
+<br>   &#x00A0;<span class="sectionToc">3.4 <a 
+href="NCBIGDOCch3.html#x7-220003.4" id="QQ2-7-25">Conventions</a></span>
+<br>   <span class="chapterToc">4 <a 
+href="NCBIGDOCch4.html#x8-230004" id="QQ2-8-26">NC Commands</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.1 <a 
+href="NCBIGDOCch4.html#x8-240004.1" id="QQ2-8-27">Manipulating an expression</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.2 <a 
+href="NCBIGDOCch4.html#x8-420004.2" id="QQ2-8-45">Simplification</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.3 <a 
+href="NCBIGDOCch4.html#x8-460004.3" id="QQ2-8-49">Vector Differentiation</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.4 <a 
+href="NCBIGDOCch4.html#x8-510004.4" id="QQ2-8-54">Block Matrix Manipulation</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.5 <a 
+href="NCBIGDOCch4.html#x8-720004.5" id="QQ2-8-75">Complex Analysis</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.6 <a 
+href="NCBIGDOCch4.html#x8-770004.6" id="QQ2-8-80">Setting symbols to commute or not commute</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.7 <a 
+href="NCBIGDOCch4.html#x8-850004.7" id="QQ2-8-88">Operations on elements in an algebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.8 <a 
+href="NCBIGDOCch4.html#x8-960004.8" id="QQ2-8-99">Convexity of a NC function</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.9 <a 
+href="NCBIGDOCch4.html#x8-1010004.9" id="QQ2-8-104">NCGuts</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.10 <a 
+href="NCBIGDOCch4.html#x8-1050004.10" id="QQ2-8-108">Setting Properties of an element in an algebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.11 <a 
+href="NCBIGDOCch4.html#x8-1190004.11" id="QQ2-8-122">Setting Properties of functions on an algebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.12 <a 
+href="NCBIGDOCch4.html#x8-1320004.12" id="QQ2-8-135">Manipulating an Expression &#8212; less useful commands</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.13 <a 
+href="NCBIGDOCch4.html#x8-1370004.13" id="QQ2-8-140">Utilities</a></span>
+<br>   &#x00A0;<span class="sectionToc">4.14 <a 
+href="NCBIGDOCch4.html#x8-1410004.14" id="QQ2-8-144">Deprecated Commands</a></span>
+<br>   <span class="chapterToc">5 <a 
+href="NCBIGDOCch5.html#x9-1440005" id="QQ2-9-147">Pretty Output and Tex Commands</a></span>
+<br>   &#x00A0;<span class="sectionToc">5.1 <a 
+href="NCBIGDOCch5.html#x9-1450005.1" id="QQ2-9-148">Pretty Output</a></span>
+
+<br>   &#x00A0;<span class="sectionToc">5.2 <a 
+href="NCBIGDOCch5.html#x9-1470005.2" id="QQ2-9-150">TEX Typesetting with NCTEXForm</a></span>
+<br>   &#x00A0;<span class="sectionToc">5.3 <a 
+href="NCBIGDOCch5.html#x9-1490005.3" id="QQ2-9-152">Simple TEX Commands with NCTEX</a></span>
+<br>   &#x00A0;<span class="sectionToc">5.4 <a 
+href="NCBIGDOCch5.html#x9-1510005.4" id="QQ2-9-154">Deprecated Commands</a></span>
+<br>   <span class="chapterToc">6 <a 
+href="NCBIGDOCch6.html#x10-1600006" id="QQ2-10-163"> Aliases </a></span>
+<br>   <span class="partToc">II&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa2.html#x11-161000II" id="QQ2-11-164"> NONCOMMUTATIVE CONTROL SYSTEM PROFESSIONAL </a></span>
+<br>   <span class="chapterToc">7 <a 
+href="NCBIGDOCch7.html#x12-1620007" id="QQ2-12-165">State Space Systems Constructions </a></span>
+<br>   &#x00A0;<span class="sectionToc">7.1 <a 
+href="NCBIGDOCch7.html#x12-1630007.1" id="QQ2-12-166"> System Interconnections </a></span>
+<br>   &#x00A0;<span class="sectionToc">7.2 <a 
+href="NCBIGDOCch7.html#x12-1670007.2" id="QQ2-12-170"> Continuous vs. Discrete </a></span>
+<br>   &#x00A0;<span class="sectionToc">7.3 <a 
+href="NCBIGDOCch7.html#x12-1700007.3" id="QQ2-12-173"> Transfer Function </a></span>
+<br>   &#x00A0;<span class="sectionToc">7.4 <a 
+href="NCBIGDOCch7.html#x12-1720007.4" id="QQ2-12-175"> Systems from Systems </a></span>
+<br>   <span class="partToc">III&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa3.html#x13-175000III" id="QQ2-13-178">NONCOMMUTATIVE GRÖBNER BASES&#8211;NCGB </a></span>
+<br>   &#x00A0;<span class="sectionToc"> <a 
+href="NCBIGDOCpa3.html#Q1-13-179">ReleaseNotesNCGB </a></span>
+<br>   <span class="partToc">IV&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa4.html#x14-176000IV" id="QQ2-14-180">NCGB: Easy Introduction</a></span>
+<br>   <span class="chapterToc">8 <a 
+href="NCBIGDOCch8.html#x15-1770008" id="QQ2-15-181"> Introduction</a></span>
+<br>   &#x00A0;<span class="sectionToc"> <a 
+href="NCBIGDOCch8.html#Q1-15-182">How to read this document</a></span>
+<br>   <span class="chapterToc">9 <a 
+href="NCBIGDOCch9.html#x16-1780009" id="QQ2-16-183">Simple Demos of Basic Commands</a></span>
+<br>   &#x00A0;<span class="sectionToc">9.1 <a 
+href="NCBIGDOCch9.html#x16-1790009.1" id="QQ2-16-184">To start a C++ GB session</a></span>
+<br>   &#x00A0;<span class="sectionToc">9.2 <a 
+href="NCBIGDOCch9.html#x16-1810009.2" id="QQ2-16-186">Simplifying Expressions</a></span>
+<br>   &#x00A0;<span class="sectionToc">9.3 <a 
+href="NCBIGDOCch9.html#x16-1820009.3" id="QQ2-16-187">Making a Groebner Basis</a></span>
+<br>   &#x00A0;<span class="sectionToc">9.4 <a 
+href="NCBIGDOCch9.html#x16-1830009.4" id="QQ2-16-188"> Reducing a polynomial by a GB</a></span>
+<br>   <span class="chapterToc">10 <a 
+href="NCBIGDOCch10.html#x19-18500010" id="QQ2-19-190">NCGB Facilitates Natural Notation</a></span>
+<br>   &#x00A0;<span class="sectionToc">10.1 <a 
+href="NCBIGDOCch10.html#x19-18600010.1" id="QQ2-19-191">A Simplification example</a></span>
+<br>   &#x00A0;<span class="sectionToc">10.2 <a 
+href="NCBIGDOCch10.html#x19-18700010.2" id="QQ2-19-192">MakingGB&#8217;s and Inv[], Tp[]</a></span>
+<br>   &#x00A0;<span class="sectionToc">10.3 <a 
+href="NCBIGDOCch10.html#x19-18800010.3" id="QQ2-19-193">Simplification and GB&#8217;s revisited</a></span>
+<br>   &#x00A0;<span class="sectionToc">10.4 <a 
+href="NCBIGDOCch10.html#x19-19200010.4" id="QQ2-19-197">Saving lots of time when typing</a></span>
+<br>   <span class="chapterToc">11 <a 
+href="NCBIGDOCch11.html#x23-19600011" id="QQ2-23-201">Demo on NCGB - Matrix Computation </a></span>
+<br>   &#x00A0;<span class="sectionToc">11.1 <a 
+href="NCBIGDOCch11.html#x23-19700011.1" id="QQ2-23-202">The Partially Prescribed Inverse Problem</a></span>
+<br>   <span class="chapterToc">12 <a 
+href="NCBIGDOCch12.html#x24-19800012" id="QQ2-24-203">To Run NCGB - Template.nb</a></span>
+<br>   &#x00A0;<span class="sectionToc">12.1 <a 
+href="NCBIGDOCch12.html#x24-19900012.1" id="QQ2-24-204">Making a Groebner basis and NCProcess template</a></span>
+<br>   <span class="chapterToc">13 <a 
+href="NCBIGDOCch13.html#x25-20000013" id="QQ2-25-205">NCProcess: What It Does</a></span>
+<br>   &#x00A0;<span class="sectionToc">13.1 <a 
+href="NCBIGDOCch13.html#x25-20100013.1" id="QQ2-25-206">NCProcess: Input and Output</a></span>
+<br>   &#x00A0;<span class="sectionToc">13.2 <a 
+href="NCBIGDOCch13.html#x25-20300013.2" id="QQ2-25-208">Changing Variables</a></span>
+<br>   <span class="chapterToc">14 <a 
+href="NCBIGDOCch14.html#x28-20400014" id="QQ2-28-209">NCProcess: An Example</a></span>
+<br>   &#x00A0;<span class="sectionToc">14.1 <a 
+href="NCBIGDOCch14.html#x28-20500014.1" id="QQ2-28-210">Background </a></span>
+<br>   &#x00A0;<span class="sectionToc">14.2 <a 
+href="NCBIGDOCch14.html#x28-20600014.2" id="QQ2-28-211">The Problem</a></span>
+<br>   &#x00A0;<span class="sectionToc">14.3 <a 
+href="NCBIGDOCch14.html#x28-20700014.3" id="QQ2-28-212">Solution via a Prestrategy</a></span>
+<br>   &#x00A0;<span class="sectionToc">14.4 <a 
+href="NCBIGDOCch14.html#x28-20800014.4" id="QQ2-28-213">The end game</a></span>
+<br>   <span class="chapterToc">15 <a 
+href="NCBIGDOCch15.html#x33-21000015" id="QQ2-33-215">NCProcess: The Commands</a></span>
+<br>   &#x00A0;<span class="sectionToc">15.1 <a 
+href="NCBIGDOCch15.html#x33-21100015.1" id="QQ2-33-216">SetKnowns and SetUnknowns</a></span>
+<br>   &#x00A0;<span class="sectionToc">15.2 <a 
+href="NCBIGDOCch15.html#x33-21200015.2" id="QQ2-33-217">NCProcess</a></span>
+<br>   &#x00A0;<span class="sectionToc">15.3 <a 
+href="NCBIGDOCch15.html#x33-21500015.3" id="QQ2-33-220">Commonly Used NCProcess Options and Commands</a></span>
+<br>   &#x00A0;<span class="sectionToc">15.4 <a 
+href="NCBIGDOCch15.html#x33-22100015.4" id="QQ2-33-226">Typical use of the NCProcess command</a></span>
+<br>   &#x00A0;<span class="sectionToc">15.5 <a 
+href="NCBIGDOCch15.html#x33-22200015.5" id="QQ2-33-227">Details of NCProcess</a></span>
+
+<br>   &#x00A0;<span class="sectionToc">15.6 <a 
+href="NCBIGDOCch15.html#x33-22500015.6" id="QQ2-33-230">NCProcess1 and NCProcess2: The technical descriptions</a></span>
+<br>   <span class="partToc">V&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa5.html#x36-226000V" id="QQ2-36-231">NCGB: FOR THE MORE ADVANCED USER</a></span>
+<br>   <span class="chapterToc">16 <a 
+href="NCBIGDOCch16.html#x37-22700016" id="QQ2-37-232">NCProcess: The Concepts</a></span>
+<br>   &#x00A0;<span class="sectionToc">16.1 <a 
+href="NCBIGDOCch16.html#x37-22800016.1" id="QQ2-37-233">NCProcess: Input and Output</a></span>
+<br>   &#x00A0;<span class="sectionToc">16.2 <a 
+href="NCBIGDOCch16.html#x37-22900016.2" id="QQ2-37-234">Elimination</a></span>
+<br>   &#x00A0;<span class="sectionToc">16.3 <a 
+href="NCBIGDOCch16.html#x37-23000016.3" id="QQ2-37-235">What is a prestrategy?</a></span>
+<br>   &#x00A0;<span class="sectionToc">16.4 <a 
+href="NCBIGDOCch16.html#x37-23500016.4" id="QQ2-37-240">A strategy</a></span>
+<br>   <span class="chapterToc">17 <a 
+href="NCBIGDOCch17.html#x44-23600017" id="QQ2-44-241">Another Example: Solving the <span 
+class="cmmi-12">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> Control Problem </a></span>
+<br>   &#x00A0;<span class="sectionToc">17.1 <a 
+href="NCBIGDOCch17.html#x44-23700017.1" id="QQ2-44-242">Problem statement</a></span>
+<br>   &#x00A0;<span class="sectionToc">17.2 <a 
+href="NCBIGDOCch17.html#x44-23800017.2" id="QQ2-44-243">The key relations: executable form</a></span>
+<br>   &#x00A0;<span class="sectionToc">17.3 <a 
+href="NCBIGDOCch17.html#x44-24100017.3" id="QQ2-44-246">Solving (<span 
+class="cmmi-12">HGRAIL</span>) using NCProcess</a></span>
+<br>   &#x00A0;<span class="sectionToc">17.4 <a 
+href="NCBIGDOCch17.html#x44-24600017.4" id="QQ2-44-251">End Game</a></span>
+<br>   <span class="partToc">VI&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa6.html#x45-247000VI" id="QQ2-45-252">NCGB: LISTS OF COMMANDS AND OTHER DETAILS</a></span>
+<br>   <span class="chapterToc">18 <a 
+href="NCBIGDOCch18.html#x46-24800018" id="QQ2-46-253">Ordering on variables and monomials</a></span>
+<br>   &#x00A0;<span class="sectionToc">18.1 <a 
+href="NCBIGDOCch18.html#x46-24900018.1" id="QQ2-46-254">Lex Order: The simplest elimination order</a></span>
+<br>   &#x00A0;<span class="sectionToc">18.2 <a 
+href="NCBIGDOCch18.html#x46-25000018.2" id="QQ2-46-255">Graded lex ordering: A non-elimination order</a></span>
+<br>   &#x00A0;<span class="sectionToc">18.3 <a 
+href="NCBIGDOCch18.html#x46-25100018.3" id="QQ2-46-256">Multigraded lex ordering : A variety of elimination orders</a></span>
+<br>   &#x00A0;<span class="sectionToc">18.4 <a 
+href="NCBIGDOCch18.html#x46-25200018.4" id="QQ2-46-257">The list of commands</a></span>
+<br>   &#x00A0;<span class="sectionToc">18.5 <a 
+href="NCBIGDOCch18.html#x46-25900018.5" id="QQ2-46-264">Fancier Order Setting Commands </a></span>
+<br>   <span class="chapterToc">19 <a 
+href="NCBIGDOCch19.html#x48-26500019" id="QQ2-48-270">More NCProcess Options</a></span>
+<br>   &#x00A0;<span class="sectionToc">19.1 <a 
+href="NCBIGDOCch19.html#x48-26600019.1" id="QQ2-48-271">Creating small generating sets: RR<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>, RRByCat<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>,
+SB<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>, SBByCat<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span></a></span>
+<br>   &#x00A0;<span class="sectionToc">19.2 <a 
+href="NCBIGDOCch19.html#x48-26900019.2" id="QQ2-48-274">NCCollectOnVars</a></span>
+<br>   &#x00A0;<span class="sectionToc">19.3 <a 
+href="NCBIGDOCch19.html#x48-27300019.3" id="QQ2-48-278">Turning screen output off </a></span>
+<br>   &#x00A0;<span class="sectionToc">19.4 <a 
+href="NCBIGDOCch19.html#x48-27400019.4" id="QQ2-48-279">Output Options</a></span>
+<br>   &#x00A0;<span class="sectionToc">19.5 <a 
+href="NCBIGDOCch19.html#x48-28000019.5" id="QQ2-48-285">NCProcess Summary Table</a></span>
+<br>   <span class="chapterToc">20 <a 
+href="NCBIGDOCch20.html#x49-28100020" id="QQ2-49-286">Commands for Making and Using GB&#8217;s</a></span>
+<br>   &#x00A0;<span class="sectionToc">20.1 <a 
+href="NCBIGDOCch20.html#x49-28200020.1" id="QQ2-49-287">Simplification</a></span>
+<br>   &#x00A0;<span class="sectionToc">20.2 <a 
+href="NCBIGDOCch20.html#x49-28500020.2" id="QQ2-49-290">Making a Gröbner Basis and various options (with their defaults)</a></span>
+<br>   &#x00A0;<span class="sectionToc">20.3 <a 
+href="NCBIGDOCch20.html#x49-30200020.3" id="QQ2-49-307">Reduction</a></span>
+<br>   <span class="chapterToc">21 <a 
+href="NCBIGDOCch21.html#x50-30600021" id="QQ2-50-311">Commands for Making Small Bases for Ideals: Small Basis, Shrink Basis </a></span>
+<br>   &#x00A0;<span class="sectionToc">21.1 <a 
+href="NCBIGDOCch21.html#x50-30700021.1" id="QQ2-50-312">Brute Force: Shrinking</a></span>
+<br>   &#x00A0;<span class="sectionToc">21.2 <a 
+href="NCBIGDOCch21.html#x50-31100021.2" id="QQ2-50-316">Brute Force: Many shrinks</a></span>
+<br>   &#x00A0;<span class="sectionToc">21.3 <a 
+href="NCBIGDOCch21.html#x50-31300021.3" id="QQ2-50-318">First Example</a></span>
+<br>   &#x00A0;<span class="sectionToc">21.4 <a 
+href="NCBIGDOCch21.html#x50-31400021.4" id="QQ2-50-319">Second Example</a></span>
+<br>   &#x00A0;<span class="sectionToc">21.5 <a 
+href="NCBIGDOCch21.html#x50-31500021.5" id="QQ2-50-320">Smaller Bases and the Spreadsheet command</a></span>
+<br>   &#x00A0;<span class="sectionToc">21.6 <a 
+href="NCBIGDOCch21.html#x50-31600021.6" id="QQ2-50-321"> How Small Basis commands relate to the similar NCProcess Options </a></span>
+<br>   <span class="chapterToc">22 <a 
+href="NCBIGDOCch22.html#x52-31700022" id="QQ2-52-322">Help in Typing Relations .</a></span>
+<br>   &#x00A0;<span class="sectionToc">22.1 <a 
+href="NCBIGDOCch22.html#x52-31900022.1" id="QQ2-52-324">Output notation for pseudoinverse and perp&#8217;s</a></span>
+<br>   <span class="chapterToc">23 <a 
+href="NCBIGDOCch23.html#x53-32400023" id="QQ2-53-329">Retrieving Categories and Regular Output </a></span>
+<br>   &#x00A0;<span class="sectionToc">23.1 <a 
+href="NCBIGDOCch23.html#x53-32800023.1" id="QQ2-53-333">Example</a></span>
+<br>   &#x00A0;<span class="sectionToc">23.2 <a 
+href="NCBIGDOCch23.html#x53-32900023.2" id="QQ2-53-334">Creating Categories</a></span>
+<br>   &#x00A0;<span class="sectionToc">23.3 <a 
+href="NCBIGDOCch23.html#x53-33100023.3" id="QQ2-53-336">RegularOutput[aListOfPolynomials,&#8220;fileName&#8221;]</a></span>
+
+<br>   &#x00A0;<span class="sectionToc">23.4 <a 
+href="NCBIGDOCch23.html#x53-33300023.4" id="QQ2-53-338">How to Really Change Regular Output</a></span>
+<br>   <span class="chapterToc">24 <a 
+href="NCBIGDOCch24.html#x54-33400024" id="QQ2-54-339">The Dimension of the Solution Set of a Set of Polynomial Equations</a></span>
+<br>   &#x00A0;<span class="sectionToc">24.1 <a 
+href="NCBIGDOCch24.html#x54-33500024.1" id="QQ2-54-340">The Commuting Case</a></span>
+<br>   &#x00A0;<span class="sectionToc">24.2 <a 
+href="NCBIGDOCch24.html#x54-33600024.2" id="QQ2-54-341">Noncommutative Case: Gelfand-Kirillov dimension</a></span>
+<br>   &#x00A0;<span class="sectionToc">24.3 <a 
+href="NCBIGDOCch24.html#x54-33700024.3" id="QQ2-54-342">References</a></span>
+<br>   &#x00A0;<span class="sectionToc">24.4 <a 
+href="NCBIGDOCch24.html#x54-33800024.4" id="QQ2-54-343">Commands</a></span>
+<br>   <span class="chapterToc">25 <a 
+href="NCBIGDOCch25.html#x55-34100025" id="QQ2-55-346">Commands which are not supported </a></span>
+<br>   &#x00A0;<span class="sectionToc">25.1 <a 
+href="NCBIGDOCch25.html#x55-34200025.1" id="QQ2-55-347"> A Mathematica Groebner Basis Package Without C++ </a></span>
+<br>   &#x00A0;<span class="sectionToc">25.2 <a 
+href="NCBIGDOCch25.html#x55-34300025.2" id="QQ2-55-348"> NCXWholeProcess[ polys, orderList, fileName, grobIters] </a></span>
+<br>   <span class="chapterToc">26 <a 
+href="NCBIGDOCch26.html#x56-34400026" id="QQ2-56-349">Getting NCALGEBRA and NCGB </a></span>
+<br>   &#x00A0;<span class="sectionToc">26.1 <a 
+href="NCBIGDOCch26.html#x56-34500026.1" id="QQ2-56-350">Getting NCAlgebra and NCGB off the web</a></span>
+<br>   &#x00A0;<span class="sectionToc">26.2 <a 
+href="NCBIGDOCch26.html#x56-34600026.2" id="QQ2-56-351">Getting NCAlgebra and NCGB through anonymous ftp</a></span>
+<br>   &#x00A0;<span class="sectionToc">26.3 <a 
+href="NCBIGDOCch26.html#x56-35100026.3" id="QQ2-56-356">The last step</a></span>
+<br>   &#x00A0;<span class="sectionToc">26.4 <a 
+href="NCBIGDOCch26.html#x56-35200026.4" id="QQ2-56-357">The NC directory structure</a></span>
+<br>   &#x00A0;<span class="sectionToc">26.5 <a 
+href="NCBIGDOCch26.html#x56-35300026.5" id="QQ2-56-358">Directory structure of NCAlgebra alone</a></span>
+<br>   <span class="chapterToc">27 <a 
+href="NCBIGDOCch27.html#x58-35400027" id="QQ2-58-359">Testing your version of NCGB</a></span>
+<br>   &#x00A0;<span class="sectionToc">27.1 <a 
+href="NCBIGDOCch27.html#x58-35500027.1" id="QQ2-58-360">Beginners</a></span>
+<br>   &#x00A0;<span class="sectionToc">27.2 <a 
+href="NCBIGDOCch27.html#x58-35800027.2" id="QQ2-58-363">Turning On Screen Output</a></span>
+<br>   &#x00A0;<span class="sectionToc">27.3 <a 
+href="NCBIGDOCch27.html#x58-35900027.3" id="QQ2-58-364">More Testing for Developers - DOES NOT WORK 2001</a></span>
+<br>   <span class="chapterToc">28 <a 
+href="NCBIGDOCch28.html#x60-36100028" id="QQ2-60-366">References</a></span>
+<br>   <span class="partToc">VII&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa7.html#x61-362000VII" id="QQ2-61-367">DETAILS AND OLD OR NEW COMMANDS -ONLY
+ON THE WEB</a></span>
+<br>   <span class="chapterToc">29 <a 
+href="NCBIGDOCch29.html#x62-36300029" id="QQ2-62-368">History of the Production of a GB and Playing By Numbers</a></span>
+<br>   &#x00A0;<span class="sectionToc">29.1 <a 
+href="NCBIGDOCch29.html#x62-36400029.1" id="QQ2-62-369">Play By Numbers</a></span>
+<br>   &#x00A0;<span class="sectionToc">29.2 <a 
+href="NCBIGDOCch29.html#x62-36900029.2" id="QQ2-62-374">History of the production of a GB</a></span>
+<br>   <span class="chapterToc">30 <a 
+href="NCBIGDOCch30.html#x63-37400030" id="QQ2-63-379">Commands for Making Small Bases for Ideals: Remove Redundant </a></span>
+<br>   &#x00A0;<span class="sectionToc">30.1 <a 
+href="NCBIGDOCch30.html#x63-37500030.1" id="QQ2-63-380"> Removing excess relations</a></span>
+<br>   &#x00A0;<span class="sectionToc">30.2 <a 
+href="NCBIGDOCch30.html#x63-38100030.2" id="QQ2-63-386">Discussion of RemoveRedundent command</a></span>
+<br>   &#x00A0;<span class="sectionToc">30.3 <a 
+href="NCBIGDOCch30.html#x63-38200030.3" id="QQ2-63-387"> Examples</a></span>
+<br>   &#x00A0;<span class="sectionToc">30.4 <a 
+href="NCBIGDOCch30.html#x63-38300030.4" id="QQ2-63-388">First Example</a></span>
+<br>   &#x00A0;<span class="sectionToc">30.5 <a 
+href="NCBIGDOCch30.html#x63-38400030.5" id="QQ2-63-389">Second Example</a></span>
+<br>   &#x00A0;<span class="sectionToc">30.6 <a 
+href="NCBIGDOCch30.html#x63-38500030.6" id="QQ2-63-390">Smaller Bases and the Spreadsheet command</a></span>
+<br>   <span class="chapterToc">31 <a 
+href="NCBIGDOCch31.html#x66-38600031" id="QQ2-66-391">NCXFindChangeOfVariables: The Long Description</a></span>
+<br>   &#x00A0;<span class="sectionToc">31.1 <a 
+href="NCBIGDOCch31.html#x66-38700031.1" id="QQ2-66-392">Details of the Algorithm</a></span>
+<br>   &#x00A0;<span class="sectionToc">31.2 <a 
+href="NCBIGDOCch31.html#x66-39600031.2" id="QQ2-66-401">Finding Coefficients of Variables in a Polynomial</a></span>
+<br>   &#x00A0;<span class="sectionToc">31.3 <a 
+href="NCBIGDOCch31.html#x66-39800031.3" id="QQ2-66-403">Main Change Of Variables Command</a></span>
+<br>   &#x00A0;<span class="sectionToc">31.4 <a 
+href="NCBIGDOCch31.html#x66-40100031.4" id="QQ2-66-406">Less Valuable Change of Variables Commands</a></span>
+<br>   <span class="chapterToc">32 <a 
+href="NCBIGDOCch32.html#x67-40400032" id="QQ2-67-409">Representing Noncommutative Expressions with Commutative Ones. </a></span>
+<br>   <span class="partToc">VIII&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa8.html#x68-406000VIII" id="QQ2-68-411"> DETAILS ON INSTALLATION AND MAINTENANCE
+- ONLY ON THE WEB </a></span>
+<br>   <span class="chapterToc">33 <a 
+href="NCBIGDOCch33.html#x69-40700033" id="QQ2-69-412">NCAlgebra and NCGB Installation</a></span>
+<br>   &#x00A0;<span class="sectionToc">33.1 <a 
+href="NCBIGDOCch33.html#x69-40800033.1" id="QQ2-69-413">Running NCAlgebra</a></span>
+<br>   &#x00A0;<span class="sectionToc">33.2 <a 
+href="NCBIGDOCch33.html#x69-40900033.2" id="QQ2-69-414">Running NCGB</a></span>
+
+<br>   &#x00A0;<span class="sectionToc">33.3 <a 
+href="NCBIGDOCch33.html#x69-41000033.3" id="QQ2-69-415">Running SYStems </a></span>
+<br>   &#x00A0;<span class="sectionToc">33.4 <a 
+href="NCBIGDOCch33.html#x69-41100033.4" id="QQ2-69-416">Running OldMmaGB (which we do not support) </a></span>
+<br>   &#x00A0;<span class="sectionToc">33.5 <a 
+href="NCBIGDOCch33.html#x69-41200033.5" id="QQ2-69-417">Environment Settings</a></span>
+<br>   &#x00A0;<span class="sectionToc">33.6 <a 
+href="NCBIGDOCch33.html#x69-41500033.6" id="QQ2-69-420">How to set up if someone else compiled the code &#8212; UNIX</a></span>
+<br>   &#x00A0;<span class="sectionToc">33.7 <a 
+href="NCBIGDOCch33.html#x69-41800033.7" id="QQ2-69-423">Informing TEX about notebook.sty</a></span>
+<br>   <span class="chapterToc">34 <a 
+href="NCBIGDOCch34.html#x70-41900034" id="QQ2-70-424">Installing NCGB the Hard Way </a></span>
+<br>   &#x00A0;<span class="sectionToc">34.1 <a 
+href="NCBIGDOCch34.html#x70-42000034.1" id="QQ2-70-425">GNU C++ Version <span 
+class="cmsy-10x-x-120">&#x2265; </span>2.6.3</a></span>
+<br>   &#x00A0;<span class="sectionToc">34.2 <a 
+href="NCBIGDOCch34.html#x70-42200034.2" id="QQ2-70-427">Running NCGB</a></span>
+<br>   <span class="chapterToc">35 <a 
+href="NCBIGDOCch35.html#x72-42400035" id="QQ2-72-429"> For the Home Team </a></span>
+<br>   &#x00A0;<span class="sectionToc">35.1 <a 
+href="NCBIGDOCch35.html#x72-42500035.1" id="QQ2-72-430"> How to make the PC version of NC </a></span>
+<br>   <span class="partToc">IX&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa9.html#x73-426000IX" id="QQ2-73-431"> TRULY OLD MATERIAL - ONLY ON THE WEB </a></span>
+<br>   <span class="chapterToc">36 <a 
+href="NCBIGDOCch36.html#x74-42700036" id="QQ2-74-432">An Old Example of Get Categories- Lots of info</a></span>
+<br>   <span class="chapterToc">37 <a 
+href="NCBIGDOCch37.html#x75-42800037" id="QQ2-75-433">Example of Hypothesis Selection in Discovering</a></span>
+<br>   <span class="chapterToc">38 <a 
+href="NCBIGDOCch38.html#x77-42900038" id="QQ2-77-434">Possibly Obsolete Command Descriptions</a></span>
+<br>   &#x00A0;<span class="sectionToc">38.1 <a 
+href="NCBIGDOCch38.html#x77-43000038.1" id="QQ2-77-435">NCMakeGB Options -maybe obsolete</a></span>
+<br>   &#x00A0;<span class="sectionToc">38.2 <a 
+href="NCBIGDOCch38.html#x77-43400038.2" id="QQ2-77-439"> Special GB related commands- may not work</a></span>
+<br>   &#x00A0;<span class="sectionToc">38.3 <a 
+href="NCBIGDOCch38.html#x77-43500038.3" id="QQ2-77-440">Starting Relations</a></span>
+<br>   &#x00A0;<span class="sectionToc">38.4 <a 
+href="NCBIGDOCch38.html#x77-43800038.4" id="QQ2-77-443">Changing the default options for NCMakeGB</a></span>
+<br>   <span class="chapterToc">39 <a 
+href="NCBIGDOCch39.html#x78-44000039" id="QQ2-78-445">Generating Universal Gröbner Basis- MAY NOT WORK -
+untested in 1999</a></span>
+<br>   &#x00A0;<span class="sectionToc">39.1 <a 
+href="NCBIGDOCch39.html#x78-44400039.1" id="QQ2-78-449"> Very Technical Commands</a></span>
+<br>   <span class="chapterToc">40 <a 
+href="NCBIGDOCch40.html#x79-44800040" id="QQ2-79-453">Commands for Producing HTML Output</a></span>
+<br>   &#x00A0;<span class="sectionToc">40.1 <a 
+href="NCBIGDOCch40.html#x79-45200040.1" id="QQ2-79-457">Using an input file</a></span>
+<br>   <span class="partToc">X&#x00A0;&#x00A0;<a 
+href="NCBIGDOCpa10.html#x80-453000X" id="QQ2-80-458">THE PACKAGE SYStems - ONLY ON THE WEB </a></span>
+<br>   <span class="chapterToc">41 <a 
+href="NCBIGDOCch41.html#x82-45400041" id="QQ2-82-459"> Preface</a></span>
+<br>   <span class="chapterToc">42 <a 
+href="NCBIGDOCch42.html#x83-45500042" id="QQ2-83-460"> How To Run The Systems Package </a></span>
+<br>   <span class="chapterToc">43 <a 
+href="NCBIGDOCch43.html#x84-45600043" id="QQ2-84-461"> How To Contribute</a></span>
+<br>   <span class="chapterToc">44 <a 
+href="NCBIGDOCch44.html#x85-45700044" id="QQ2-85-462"> What SYStems Does </a></span>
+<br>   <span class="chapterToc">45 <a 
+href="NCBIGDOCch45.html#x86-45800045" id="QQ2-86-463"> Sample Applications</a></span>
+<br>   &#x00A0;<span class="sectionToc">45.1 <a 
+href="NCBIGDOCch45.html#x86-45900045.1" id="QQ2-86-464">Bounded Real Lemma</a></span>
+<br>   &#x00A0;<span class="sectionToc">45.2 <a 
+href="NCBIGDOCch45.html#x86-46000045.2" id="QQ2-86-465">Measurement Feedback <span 
+class="cmmi-12">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> Control</a></span>
+<br>   &#x00A0;<span class="sectionToc">45.3 <a 
+href="NCBIGDOCch45.html#x86-46600045.3" id="QQ2-86-471">Specializing to less general systems</a></span>
+<br>   <span class="chapterToc">46 <a 
+href="NCBIGDOCch46.html#x87-47000046" id="QQ2-87-475"><span 
+class="cmbx-12">References </span></a></span>
+<br>   <span class="chapterToc">47 <a 
+href="NCBIGDOCch47.html#x88-47100047" id="QQ2-88-476"><span 
+class="cmbx-12">Glossary For System Hamiltonian Calculations</span></a></span>
+<br>   &#x00A0;<span class="sectionToc"> <a 
+href="NCBIGDOCch47.html#Q1-88-477">Complete Index</a></span>
+<br>   <span class="likechapterToc"><a 
+href="NCBIGDOCli3.html#x89-47200047" id="QQ2-89-478">Index</a></span>
+   </div>
+
+
+
+
+
+<!--l. 336--><p class="indent">
+
+<!--l. 336--><p class="indent">
+
+
+
+<!--l. 358--><p class="indent">
+
+
+
+<!--l. 363--><p class="indent">
+
+<!--l. 363--><p class="indent">
+
+
+
+<!--l. 8--><p class="indent">
+
+
+
+<!--l. 41--><p class="indent">
+
+
+
+<!--l. 53--><p class="indent">
+
+
+
+<!--l. 398--><p class="indent">
+
+<!--l. 398--><p class="indent">
+
+
+
+<!--l. 14--><p class="indent">
+
+<!--l. 14--><p class="indent">
+
+
+
+<!--l. 22--><p class="indent">
+
+<!--l. 22--><p class="indent">
+
+
+
+<!--l. 299--><p class="indent">
+ 
+</body></html> 
+
+
+

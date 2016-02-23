@@ -1,0 +1,4 @@
+{-A**B + B**A, -1 + A**B**C, -1 + D, -B + A**B**B**C, -A**C + C**A, 
+ -B**B + A**B**B**B**C, -B**C + C**B, -B**B**B + A**B**B**B**B**C, 
+ -B**B**B**B + A**B**B**B**B**B**C, -B**B**B**B**B + A**B**B**B**B**B**B**C, 
+ -B**B**B**B**B**B + A**B**B**B**B**B**B**B**C}

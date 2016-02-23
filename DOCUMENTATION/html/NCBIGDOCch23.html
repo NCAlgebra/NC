@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>23 Retrieving Categories and Regular Output </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch24.html" >next</a>] [<a 
+href="NCBIGDOCch22.html" >prev</a>] [<a 
+href="NCBIGDOCch22.html#tailNCBIGDOCch22.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch23.html">tail</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch23.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;23</span><br><a 
+ id="x53-32400023"></a>Retrieving Categories and Regular Output </h2>
+<!--l. 6--><p class="noindent">Crucial to our approach to &#8220;semi-automatic&#8221; discovery of formulas and theorems is the sorting of
+relations according to which unknowns appear in them &#8212; in other words, sorting lists of
+polynomials into categories. <span 
+class="cmti-12">RegularOutput </span>does this sorting and presents categories of relations
+(by storing them in file). Actually the core of <span 
+class="cmti-12">RegularOutput </span>is a command <span 
+class="cmti-12">CreateCategories </span>which
+creates categories and gives them a name. These categories can be summoned into your session
+using the <span 
+class="cmti-12">GetCategory </span>command.
+   <h4 class="subsectionHead"><span class="titlemark">23.0.5   </span> <a 
+ id="x53-32500023.0.5"></a>GetCategory[aListOfVariables, NCPAns]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">GetCategory</span>[<span 
+class="cmmi-12">aListOfV ariables,aName</span>]  retrieves  the  polynomials  in  the
+      category  stored  in  <span 
+class="cmmi-12">aName  </span>corresponding  to  the  list  of  variables  in  the  list
+      <span 
+class="cmmi-12">aListOfV ariables</span>. See Section <a 
+href="NCBIGDOCch14.html#x28-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a> for an example. To be recognized immediately after
+      an NCProcess run <span 
+class="cmmi-12">aListOfV ariables </span>must equal a list of unknowns which corresponds
+      to a category in that NCProcess run. The NCProcess stores all category information
+      in NCPAns. The next NCProcess starts by clearing NCPAns and writes the category
+      information it produces in NCPAns.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aListOfV ariables </span>is a list of variables. <span 
+class="cmmi-12">aName </span>is a symbol which has not been
+      used previously.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. See CreateCategories. </dd></dl>
+<a 
+ id="dx53-325001"></a>
+<!--l. 47--><p class="noindent">Another way to summon categories is by &#8221;name&#8221;.
+   <h4 class="subsectionHead"><span class="titlemark">23.0.6   </span> <a 
+ id="x53-32600023.0.6"></a>GetCategory[aCharString,NCPAns]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:
+
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description">(1) If <span 
+class="cmti-12">aCharString </span>is &#8221;Undigested&#8221;, then all of the undigested relations are returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(2) If <span 
+class="cmti-12">aCharString </span>is &#8221;Digested&#8221;, then all of the digested relations are returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(3) If <span 
+class="cmti-12">aCharString </span>is &#8221;Unknowns&#8221;, then all of the undigested relations are returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(4) If <span 
+class="cmti-12">aCharString </span>is &#8221;Knowns&#8221;, then all of the relations involving just knowns are
+           returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(5) If <span 
+class="cmti-12">aCharString </span>is &#8221;digestedLabels&#8221;, then <span 
+class="cmsy-10x-x-120">{{}} </span>is returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(6) If <span 
+class="cmti-12">aCharString </span>is &#8221;digestedRules&#8221;, then all of the digested relations are returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(7) If <span 
+class="cmti-12">aCharString </span>is &#8221;userSelectsRules&#8221;, then all of the user selected relations are
+           returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(8)  If  <span 
+class="cmti-12">aCharString </span>is  &#8221;userSelectsLabels&#8221;,  then  all  of  the  user  selected  labels  are
+           returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(9) If <span 
+class="cmti-12">aCharString </span>is &#8221;knownsLabels&#8221;, then <span 
+class="cmsy-10x-x-120">{{}} </span>is returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(10) If <span 
+class="cmti-12">aCharString </span>is &#8221;knownsRules&#8221;, then all of the relations involving just knowns
+           are returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(11) If <span 
+class="cmti-12">aCharString </span>is &#8221;singleRules&#8221;, then all of the relations which solve directly for
+           unknowns are returned.
+           </dd><dt class="description">
+       </dt><dd 
+class="description">(12) If <span 
+class="cmti-12">aCharString </span>is &#8221;singleVars&#8221;, then all of the unknowns which have been solved
+           for directly are returned. </dd></dl>
+      <!--l. 88--><p class="noindent">Otherwise, <span 
+class="cmti-12">NCPAns[aCharString] </span>is returned.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aCharString </span>is a character string. <span 
+class="cmti-12">NCPAns </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx53-326001"></a>
+
+<!--l. 97--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">23.0.7   </span> <a 
+ id="x53-32700023.0.7"></a>Clear[NCPAns]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Clear[aName] clears whatever info is stored in aName.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Clear[NCPAns] clears NCPAns which might matter to you if you run shaorty
+      of memory.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx53-327001"></a>
+<!--l. 99--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">23.1   </span> <a 
+ id="x53-32800023.1"></a>Example</h3>
+<!--l. 101--><p class="noindent">Suppose we are in a NCProcess session which produced the output on page&#x00A0;<span class="pageref"><a 
+href="NCBIGDOCch14.html#x28-20700014.3"><span 
+class="cmsy-10x-x-120">&#167;</span></a></span> and we really like
+the category whose unknowns are <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub>. To bring that category into our session so you can
+manipulate these equations with Mathematica use the command
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;In[17]:=&#x00A0;&#x00A0;GetCategories[&#x00A0;{&#x00A0;n1,m1&#x00A0;}&#x00A0;,&#x00A0;NCPAns&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;Out[17]=&#x00A0;&#x00A0;{n1**m1&#x00A0;-&#x00A0;1}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;In[18]:=&#x00A0;&#x00A0;GetCategories[&#x00A0;"singleVars",&#x00A0;NCPAns&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;Out[18]=&#x00A0;&#x00A0;{a,b,c,e,f,g}
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 120--><p class="nopar">
+<!--l. 124--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">23.2   </span> <a 
+ id="x53-32900023.2"></a>Creating Categories</h3>
+<!--l. 126--><p class="noindent">This is the command which is used inside NCProcess to instruct the <span 
+class="cmmi-12">C </span>+ + code to make
+categories. It takes aName to be NCPAns.
+<!--l. 132--><p class="indent">   Before using this commands one must use <span 
+class="cmti-12">SetMonomialOrder</span>.
+<!--l. 151--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">23.2.1   </span> <a 
+ id="x53-33000023.2.1"></a>CreateCategories[aListOfPolynomials, aName]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmti-12">CreateCategories[aListOfPolynomials,aName] </span>sorts  <span 
+class="cmti-12">aListOfPolynomials </span>into
+      categories.  Each  category  and  its  label  is  stored  in  the  array  associated  to  the
+      symbol <span 
+class="cmmi-12">aName </span>and it is accessible by <span 
+class="cmmi-12">aName</span>[<span 
+class="cmmi-12">label</span>] using the <span 
+class="cmti-12">GetCategory </span>command.
+      <span 
+class="cmmi-12">aListOfPolynomials </span>is a list of polynomials. <span 
+class="cmmi-12">aName </span>is a symbol which has not been
+      used previously.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfPolynomials </span>is a list of polynomials. <span 
+class="cmti-12">aName </span>is a Mathematica symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. See GetCategory. </dd></dl>
+
+<a 
+ id="dx53-330001"></a>
+<!--l. 154--><p class="noindent">This is the command which is used inside NCProcess to instruct the <span 
+class="cmmi-12">C </span>+ + code to make
+categories. It takes aName to be NCPAns.
+<!--l. 161--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">23.3   </span> <a 
+ id="x53-33100023.3"></a>RegularOutput[aListOfPolynomials,&#8220;fileName&#8221;]</h3>
+<!--l. 199--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">23.3.1   </span> <a 
+ id="x53-33200023.3.1"></a>RegularOutput[aListOfPolynomials,&#8220;fileName&#8221;]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmti-12">RegularOutput[aListOfPolynomials,&#8220;fileName&#8221;] </span>takes the list of polynomials
+      in  <span 
+class="cmti-12">aListOfPolynomials  </span>and  organizes  this  list  in  a  certain  way,  and  places
+      the  organized  information  in  a  file  called  &#8220;fileName&#8221;.  It  is  the  heart  of  the
+      NCProcess  display.  The  organization  performed  is  based  on  the  monomial  order
+      which  was  specified  using  <span 
+class="cmti-12">SetMonomialOrder</span>.  Think  of  every  variable  in  aList1
+      declared, via <span 
+class="cmti-12">SetMonomialOrder[aList1,1]</span>, to be lowest in the ordering as a known.
+      The  unknowns  are  the  remaining  variables  denoted  <span 
+class="cmti-12">var  </span>which  are  defined,  via
+      <span 
+class="cmti-12">SetMonomialOrder[aList,n] </span>where <span 
+class="cmti-12">aList </span>is a list of variables and <span 
+class="cmti-12">var </span>in a member
+      of this list and <span 
+class="cmmi-12">n </span><span 
+class="cmsy-10x-x-120">&#x2265; </span>2. For <span 
+class="cmti-12">RegularOutput </span>the only thing that counts is unknowns.
+      <span 
+class="cmti-12">RegularOutput </span>sorts polynomials in <span 
+class="cmti-12">aListOfPolynomials </span>into <span 
+class="cmti-12">categories consisting of</span>
+      <span 
+class="cmti-12">polynomials having the same unknowns</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">&#8220;fileName&#8221; </span>is a character string. <span 
+class="cmti-12">aListOfPolynomials </span>is a list of polynomials.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx53-332001"></a>
+<!--l. 205--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">23.4   </span> <a 
+ id="x53-33300023.4"></a>How to Really Change Regular Output</h3>
+<!--l. 207--><p class="noindent">Important to research is how one sorts the output of a GB algorithm. Serious changes might
+prompt you to edit the command itself. We now give a very few tips. The only files we have
+modified in the last few years are
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+OutputArrayForTeX.m
+&#x00A0;<br />OutputSingleCategory.m
+&#x00A0;<br />TypesOfStrategyOutput.m*
+&#x00A0;<br />NCProcess.m
+&#x00A0;<br />NCCollectOnVariables.m
+&#x00A0;<br />NCMakeRelations.m
+&#x00A0;<br />oCategories.m
+</div>
+</td></tr></table>
+<!--l. 220--><p class="nopar">
+<!--l. 222--><p class="noindent">The top three of which could be useful for those who wish to make serious changes to the output of
+the GB algorithm.
+
+   <!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch24.html" >next</a>] [<a 
+href="NCBIGDOCch22.html" >prev</a>] [<a 
+href="NCBIGDOCch22.html#tailNCBIGDOCch22.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch23.html" >front</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch23.html" >up</a>] </p></div>
+<!--l. 3--><p class="indent">   <a 
+ id="tailNCBIGDOCch23.html"></a>   
+</body></html> 

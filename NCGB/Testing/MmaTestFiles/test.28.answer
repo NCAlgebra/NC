@@ -1,0 +1,5 @@
+{y ** c ** b ** d ** a -> b ** d ** a ** c ** y, 
+  y ** c ** y -> y + b ** d ** a, b ** z -> 1 - y ** c, x ** d -> 1 - a ** w, 
+  w ** a -> 1 - c ** y, z ** b -> 1 - d ** x, b ** d ** x -> y ** c ** b, 
+  b ** d ** a ** w -> b ** d - y ** c ** b ** d, y ** w -> -b ** d, 
+  z ** y -> -d ** a, x ** z -> -a ** c, w ** x -> -c ** b}

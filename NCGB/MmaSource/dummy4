@@ -1,0 +1,150 @@
+{Literal[dummy4$125[0]] :> {{}}, 
+  Literal[dummy4$125[2]] :> 
+   {{ia, a}, {iaa, aa}, {iab, ab}, {iad, ad}, {ib, b}, {id, d}}, 
+  Literal[dummy4$125[3]] :> 
+   {{a, b, d}, {aa, ab, ad}, {ab, ad, d}, {b, ad, d}}, 
+  Literal[dummy4$125[4]] :> 
+   {{a, ab, b, ad}, {aa, a, ab, b}, {aa, ab, b, d}, {aa, ib, ab, d}, 
+    {ab, b, ad, d}, {iab, b, ad, d}, {ib, ab, ad, d}}, 
+  Literal[dummy4$125[5]] :> 
+   {{a, ab, b, ad, d}, {aa, ab, b, ad, d}, {ia, aa, ab, b, iad}, 
+    {ia, ab, b, iad, d}, {ia, ab, iad, ad, d}, {iaa, a, ab, b, id}, 
+    {iaa, a, iab, b, id}, {iaa, ab, b, ad, id}}, 
+  Literal[dummy4$125[6]] :> 
+   {{aa, iab, b, ad, id, d}, {ia, aa, ab, iad, ad, d}, 
+    {iaa, a, b, ad, id, d}}, Literal[dummy4$125[7]] :> 
+   {{aa, a, iab, b, ad, id, d}, {iaa, aa, iab, b, ad, id, d}}, 
+  Literal[dummy4$125["AllCategories"]] :> 
+   {{}, {ia, a}, {iaa, aa}, {iab, ab}, {iad, ad}, {ib, b}, {id, d}, 
+    {a, b, d}, {aa, ab, ad}, {ab, ad, d}, {b, ad, d}, {a, ab, b, ad}, 
+    {aa, a, ab, b}, {aa, ab, b, d}, {aa, ib, ab, d}, {ab, b, ad, d}, 
+    {iab, b, ad, d}, {ib, ab, ad, d}, {a, ab, b, ad, d}, {aa, ab, b, ad, d}, 
+    {ia, aa, ab, b, iad}, {ia, ab, b, iad, d}, {ia, ab, iad, ad, d}, 
+    {iaa, a, ab, b, id}, {iaa, a, iab, b, id}, {iaa, ab, b, ad, id}, 
+    {aa, iab, b, ad, id, d}, {ia, aa, ab, iad, ad, d}, 
+    {iaa, a, b, ad, id, d}, {aa, a, iab, b, ad, id, d}, 
+    {iaa, aa, iab, b, ad, id, d}}, 
+  Literal[dummy4$125["nonsingleVars"]] :> 
+   {a, aa, ab, ad, b, d, ia, iaa, iab, iad, ib, id}, 
+  Literal[dummy4$125["numbers"]] :> {0, 2, 3, 4, 5, 6, 7}, 
+  Literal[dummy4$125["singleVars"]] :> {}, 
+  Literal[dummy4$125["storage"]] :> List, 
+  Literal[dummy4$125["userSelects"]] :> {}, 
+  Literal[dummy4$125[{}]] :> 
+   {ax ** iax -> 1, ay ** iay -> 1, iax ** ax -> 1, iay ** ay -> 1, 
+    ix ** x -> 1, iy ** y -> 1, x ** ix -> 1, y ** iy -> 1}, 
+  Literal[dummy4$125[{ia, a}]] :> {a ** ia -> 1, ia ** a -> 1}, 
+  Literal[dummy4$125[{iaa, aa}]] :> {aa ** iaa -> 1, iaa ** aa -> 1}, 
+  Literal[dummy4$125[{iab, ab}]] :> {ab ** iab -> 1, iab ** ab -> 1}, 
+  Literal[dummy4$125[{iad, ad}]] :> {ad ** iad -> 1, iad ** ad -> 1}, 
+  Literal[dummy4$125[{ib, b}]] :> {b ** ib -> 1, ib ** b -> 1}, 
+  Literal[dummy4$125[{id, d}]] :> {d ** id -> 1, id ** d -> 1}, 
+  Literal[dummy4$125[{a, b, d}]] :> 
+   {iy ** a -> ay ** a - d ** ax + d ** ix + ay ** b ** ax - iy ** b ** ix}, 
+  Literal[dummy4$125[{aa, ab, ad}]] :> 
+   {aa ** y ** ay -> 
+     aa + iax ** ab - iax ** ad ** ay + x ** ad ** ay - x ** ab ** y ** ay}, 
+  Literal[dummy4$125[{ab, ad, d}]] :> 
+   {ab ** iay ** d ** ax ** x ** ab ** y -> 
+     -ad + ab ** iay + ad ** d ** ad + ax ** x ** ad - 
+      ab ** iay ** d ** ad - ad ** d ** ab ** y - ax ** x ** ab ** y + 
+      ab ** iay ** d ** ab ** y - ad ** d ** ax ** x ** ad + 
+      ab ** iay ** d ** ax ** x ** ad + ad ** d ** ax ** x ** ab ** y}, 
+  Literal[dummy4$125[{b, ad, d}]] :> 
+   {ay ** b ** ax ** x ** ad ** iy ** b -> 
+     -d + iy ** b + d ** ad ** d + d ** ax ** x - ay ** b ** ad ** d - 
+      ay ** b ** ax ** x - d ** ad ** iy ** b + ay ** b ** ad ** iy ** b - 
+      d ** ax ** x ** ad ** d + ay ** b ** ax ** x ** ad ** d + 
+      d ** ax ** x ** ad ** iy ** b}, 
+  Literal[dummy4$125[{a, ab, b, ad}]] :> 
+   {a ** iax ** ab -> -1 - b ** ab + b ** ad ** ay + a ** iax ** ad ** ay, 
+    a ** x ** ab -> -1 - b ** ab + b ** ad ** iy + a ** x ** ad ** iy}, 
+  Literal[dummy4$125[{aa, a, ab, b}]] :> {a ** aa -> 1 + b ** ab}, 
+  Literal[dummy4$125[{aa, ab, b, d}]] :> 
+   {b ** ax ** aa -> -1 - b ** ab + iay ** d ** ab + iay ** d ** ax ** aa, 
+    b ** ix ** aa -> -1 - b ** ab + y ** d ** ab + y ** d ** ix ** aa}, 
+  Literal[dummy4$125[{aa, ib, ab, d}]] :> 
+   {aa ** y ** d ** ib -> aa + x ** ab + x ** ib - x ** ab ** y ** d ** ib}, 
+  Literal[dummy4$125[{ab, b, ad, d}]] :> 
+   {ab ** b -> -1 + ad ** d, b ** ax ** x ** ab -> 
+     1 + b ** ab - iay ** iy - b ** ad ** iy - iay ** d ** ab + 
+      iay ** d ** ad ** iy + b ** ax ** x ** ad ** iy + 
+      iay ** d ** ax ** x ** ab - iay ** d ** ax ** x ** ad ** iy}, 
+  Literal[dummy4$125[{iab, b, ad, d}]] :> 
+   {ay ** b ** ax ** x ** ad ** iy ** iab -> 
+     d - ay ** b - ay ** iab + iy ** iab - d ** ax ** x + 
+      ay ** b ** ax ** x - d ** ad ** iy ** iab + 
+      ay ** b ** ad ** iy ** iab + d ** ax ** x ** ad ** iy ** iab}, 
+  Literal[dummy4$125[{ib, ab, ad, d}]] :> 
+   {ib ** iay ** d ** ax ** x ** ab ** y -> 
+     ad - ab ** y + ib ** iay - ib ** y - ax ** x ** ad + 
+      ax ** x ** ab ** y - ib ** iay ** d ** ad + 
+      ib ** iay ** d ** ab ** y + ib ** iay ** d ** ax ** x ** ad}, 
+  Literal[dummy4$125[{a, ab, b, ad, d}]] :> 
+   {ab ** a -> ad ** ay ** a - ad ** d ** ax + ad ** ay ** b ** ax}, 
+  Literal[dummy4$125[{aa, ab, b, ad, d}]] :> 
+   {aa ** b -> aa ** y ** d - x ** ad ** d + x ** ab ** y ** d}, 
+  Literal[dummy4$125[{ia, aa, ab, b, iad}]] :> 
+   {ia ** b -> -x + aa ** y ** iad + x ** ab ** y ** iad}, 
+  Literal[dummy4$125[{ia, ab, b, iad, d}]] :> 
+   {b ** ax ** ia -> -1 + iay ** iad ** ab + iay ** d ** ax ** ia}, 
+  Literal[dummy4$125[{ia, ab, iad, ad, d}]] :> 
+   {iax ** ab ** iay ** d ** ax ** ia -> 
+     -ia + iax ** ab - iax ** ab ** iay ** iad ** ab + 
+      iax ** ad ** d ** ax ** ia}, 
+  Literal[dummy4$125[{iaa, a, ab, b, id}]] :> 
+   {ab ** iaa -> -ax + id ** ay ** a + id ** ay ** b ** ax}, 
+  Literal[dummy4$125[{iaa, a, iab, b, id}]] :> 
+   {iab ** id ** ay ** a -> iaa + iab ** ax - iab ** id ** ay ** b ** ax}, 
+  Literal[dummy4$125[{iaa, ab, b, ad, id}]] :> 
+   {iaa ** iax ** ab -> -1 + b ** id ** ay + iaa ** iax ** ad ** ay, 
+    iaa ** x ** ab -> -1 + b ** id ** iy + iaa ** x ** ad ** iy}, 
+  Literal[dummy4$125[{aa, iab, b, ad, id, d}]] :> 
+   {ay ** b ** ax ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id -> 
+     d ** ad + iy ** iay - ay ** b ** ad - ay ** b ** id - ay ** iab ** id - 
+      d ** ad ** iy ** iay - d ** ax ** x ** ad + 
+      ay ** b ** ad ** iy ** iay + ay ** b ** ax ** x ** ad - 
+      d ** ax ** aa ** iab ** id + d ** ax ** x ** ad ** iy ** iay - 
+      ay ** b ** ax ** x ** ad ** iy ** iay + 
+      d ** ad ** d ** ax ** aa ** iab ** id + 
+      d ** ax ** x ** ax ** aa ** iab ** id + 
+      iy ** iay ** d ** ax ** aa ** iab ** id - 
+      ay ** b ** ad ** d ** ax ** aa ** iab ** id - 
+      ay ** b ** ax ** x ** ax ** aa ** iab ** id - 
+      d ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id - 
+      d ** ax ** x ** ad ** d ** ax ** aa ** iab ** id + 
+      ay ** b ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id + 
+      ay ** b ** ax ** x ** ad ** d ** ax ** aa ** iab ** id + 
+      d ** ax ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id}, 
+  Literal[dummy4$125[{ia, aa, ab, iad, ad, d}]] :> 
+   {ia ** iay ** d ** ax ** x ** ab ** y -> 
+     ia ** iay - x ** ad + x ** ab ** y - ia ** iay ** d ** ad + 
+      x ** ax ** x ** ad + ia ** iay ** d ** ab ** y - 
+      x ** ax ** x ** ab ** y - aa ** y ** iad ** ax ** x ** ad + 
+      ia ** iay ** d ** ax ** x ** ad + 
+      aa ** y ** iad ** ax ** x ** ab ** y - 
+      x ** ab ** y ** iad ** ax ** x ** ad + 
+      x ** ab ** y ** iad ** ax ** x ** ab ** y}, 
+  Literal[dummy4$125[{iaa, a, b, ad, id, d}]] :> 
+   {ay ** b ** ax ** x ** ad ** iy ** iaa -> 
+     -d ** ax + iy ** iaa + ay ** b ** ax - d ** ad ** iy ** iaa + 
+      d ** ax ** x ** ax + ay ** b ** ad ** iy ** iaa - 
+      ay ** b ** ax ** x ** ax + d ** ax ** x ** ad ** iy ** iaa - 
+      d ** ax ** x ** id ** ay ** a + ay ** b ** ax ** x ** id ** ay ** a - 
+      d ** ax ** x ** id ** ay ** b ** ax + 
+      ay ** b ** ax ** x ** id ** ay ** b ** ax}, 
+  Literal[dummy4$125[{aa, a, iab, b, ad, id, d}]] :> 
+   {a ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id -> 
+     b ** ad + b ** id + iab ** id + a ** x ** ad - b ** ad ** iy ** iay - 
+      a ** x ** ad ** iy ** iay - a ** x ** ax ** aa ** iab ** id + 
+      b ** ad ** d ** ax ** aa ** iab ** id + 
+      a ** x ** ad ** d ** ax ** aa ** iab ** id - 
+      b ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id}, 
+  Literal[dummy4$125[{iaa, aa, iab, b, ad, id, d}]] :> 
+   {iaa ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id -> 
+     iay + iaa ** x ** ad - b ** id ** iy ** iay - 
+      iaa ** x ** ad ** iy ** iay - iaa ** x ** ax ** aa ** iab ** id + 
+      iay ** d ** ax ** aa ** iab ** id + 
+      iaa ** x ** ad ** d ** ax ** aa ** iab ** id - 
+      b ** id ** iy ** iay ** d ** ax ** aa ** iab ** id}, 
+  Literal[dummy4$125[_]] :> {}}

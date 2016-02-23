@@ -1,0 +1,958 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.4 Block Matrix Manipulation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 544--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse15.html" >next</a>] [<a 
+href="NCBIGDOCse13.html" >prev</a>] [<a 
+href="NCBIGDOCse13.html#tailNCBIGDOCse13.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse14.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse14.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.4   </span> <a 
+ id="x22-510004.4"></a>Block Matrix Manipulation</h3>
+<!--l. 546--><p class="noindent">By block matrices we mean matrices with noncommuting entries.
+<!--l. 549--><p class="indent">   The Mathematica convention for handling vectors is tricky.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;v={{1,2,4}}
+</div>
+</td></tr></table>
+<!--l. 552--><p class="nopar"> is a 1<span 
+class="cmsy-10x-x-120">&#x00D7;</span>3 matrix or a row vector
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;v={{1},{2},{4}}
+</div>
+</td></tr></table>
+<!--l. 556--><p class="nopar"> is a 3<span 
+class="cmsy-10x-x-120">&#x00D7;</span>1 matrix or a column vector
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;v={1,2,4}
+</div>
+</td></tr></table>
+<!--l. 560--><p class="nopar"> is a vector but NOT A MATRIX. Indeed whether it is a row or column vector depends on the
+context. DON&#8217;T USE IT. Always remember to use TWO curly brackets on your vectors or there
+will probably be trouble.
+<!--l. 564--><p class="indent">   As of NCAlgebra version 3.2 one can handle block matrix manipulation two different ways. One
+is the old way as described below where you use the command MatMult[A, B] to multiply block
+matrices A and B and tpMat[A] to take transposes. The other way is much more pleasing though
+still a little risky. First you use the <span 
+class="cmbx-12">NCGuts[] </span>with the Options NCStrongProduct1 <span 
+class="cmsy-10x-x-120">&#x2192;</span>
+True to change <span 
+class="cmsy-10x-x-120">** </span>to make block matrices multiply corectly. Further invoke the Option
+NCStrongProduct2 <span 
+class="cmsy-10x-x-120">&#x2192; </span>True to strengthen the power of <span 
+class="cmsy-10x-x-120">**</span>. Now one does not have to use
+MatMult and tpMat; just use <span 
+class="cmsy-10x-x-120">** </span>and <span 
+class="cmmi-12">tp </span>instead it recognizes matrix sizes and multiplies
+correctly.
+<!--l. 587--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.1   </span> <a 
+ id="x22-520004.4.1"></a>MatMult[x, y, <span 
+class="cmmi-12">&#x2026;</span>]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">MM</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   MatMult   multiplies   matrices.   The   Mathematica   code   executed   for
+      <span 
+class="cmmi-12">MatMult</span>[<span 
+class="cmmi-12">x,y</span>] is Inner[ NonCommutativeMultiply, x, y, Plus];
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">x </span>is a block matrix, and <span 
+class="cmmi-12">y </span>is a block matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  MatMult  can  take  any  number  of  input  parameters.  For
+      example, <span 
+class="cmtt-12">MatMult[a, b, c, d] </span>will give the same result as <span 
+class="cmtt-12">MatMult[a, MatMult[b,</span>
+      <span 
+class="cmtt-12">MatMult[c, d]] ]</span>. </dd></dl>
+<a 
+ id="dx22-52001"></a>
+
+<!--l. 595--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.2   </span> <a 
+ id="x22-530004.4.2"></a>ajMat[u]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">ajMat</span>[<span 
+class="cmmi-12">u</span>] returns the transpose of the block matrix <span 
+class="cmmi-12">u</span>. The Mathematica code
+      is <span 
+class="cmmi-12">Transpose</span>[<span 
+class="cmmi-12">Map</span>[<span 
+class="cmmi-12">aj</span>[#]&amp;<span 
+class="cmmi-12">,u, </span>2]];
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">u </span>is a block <span 
+class="cmmi-12">m </span><span 
+class="cmsy-10x-x-120">&#x00D7; </span><span 
+class="cmmi-12">n </span>matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx22-53001"></a>
+<!--l. 603--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.3   </span> <a 
+ id="x22-540004.4.3"></a>coMat[u]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">coMat</span>[<span 
+class="cmmi-12">u</span>] returns the transpose of the block matrix <span 
+class="cmmi-12">u</span>. The Mathematica code
+      is [<span 
+class="cmmi-12">Map</span>[<span 
+class="cmmi-12">co</span>[#]&amp;<span 
+class="cmmi-12">,u, </span>2]];
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">u </span>is a block <span 
+class="cmmi-12">m </span><span 
+class="cmsy-10x-x-120">&#x00D7; </span><span 
+class="cmmi-12">n </span>matrix
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx22-54001"></a>
+
+<!--l. 611--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.4   </span> <a 
+ id="x22-550004.4.4"></a>tpMat[u]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">tpMat</span>[<span 
+class="cmmi-12">u</span>] returns the transpose of the block matrix <span 
+class="cmmi-12">u</span>. The Mathematica is
+      <span 
+class="cmmi-12">Transpose</span>[<span 
+class="cmmi-12">Map</span>[<span 
+class="cmmi-12">tp</span>[#]&amp;<span 
+class="cmmi-12">,u, </span>2]];
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">u </span>is a block <span 
+class="cmmi-12">m </span><span 
+class="cmsy-10x-x-120">&#x00D7; </span><span 
+class="cmmi-12">n </span>matrix
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx22-55001"></a>
+<!--l. 625--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.5   </span> <a 
+ id="x22-560004.4.5"></a>NCMToMatMult[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Sometimes one develops an expression in which ** occurs between matrices.
+      This command takes all ** and converts them to MatMult. The Mathematica code
+      executed is expr//.NonCommutativeMultiply <span 
+class="cmsy-10x-x-120">&#x2192; </span>MatMult;
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">expr </span>is  an  algebraic  expression.  This  and  its  inverse  (TimesToNCM)  are
+      important in manipulating block matrices. One can use
+      <center class="math-display" >
+
+      <img 
+src="NCBIGDOC19x.png" alt="expr &#x2215;&#x2215;.N onCommutativeM    ultiply &#x2192; M  atM ult
+      " class="math-display" ></center> instead of this command, since that is all that this command amounts to.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx22-56001"></a>
+<!--l. 635--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.6   </span> <a 
+ id="x22-570004.4.6"></a>TimesToNCM[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">TTNCM</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:            The            Mathematica            code            executed            is
+      <span 
+class="cmmi-12">expr&#x2215;.Times </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">NonCommutativeMultiply</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments   /   Limitations:   It   changes   commutative   multiplication   (Times)   to
+      NonCommutative multiplication.  </dd></dl>
+<a 
+ id="dx22-57001"></a>
+<!--l. 727--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.7   </span> <a 
+ id="x22-580004.4.7"></a>Special Operations with Block Matrices</h4>
+<!--l. 729--><p class="noindent">In 1999, we produced commands for LU decomposition and Cholesky decomposition of
+an inversion of matrices with noncommutative entries. These replace older commands
+<span 
+class="cmti-12">GaussElimination[X]  </span>and <span 
+class="cmti-12">invMat2[mat] </span>for 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 block matrices which are no longer documented.
+The next 6 commands do that.
+
+<!--l. 897--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.8   </span> <a 
+ id="x22-590004.4.8"></a>NCLDUDecomposition[aMatrix, Options]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: NCLDUDecomposition[<span 
+class="cmmi-12">X</span>] yields the LDU decomposition for a square matrix
+      <span 
+class="cmmi-12">X</span>. It returns a list of four elements, namely <span 
+class="cmmi-12">L,D,U</span>, and <span 
+class="cmmi-12">P </span>such that <span 
+class="cmmi-12">PXP</span><sup ><span 
+class="cmmi-8">T</span> </sup> = <span 
+class="cmmi-12">LDU</span>.
+      The first element is the lower triangular matrix <span 
+class="cmmi-12">L</span>, the second element is the diagonal
+      matrix <span 
+class="cmmi-12">D</span>, the third element is the upper triangular matrix <span 
+class="cmmi-12">U</span>, and the fourth is the
+      permutation matrix <span 
+class="cmmi-12">P </span>(the identity is returned if no permutation is needed). As an
+      option, it may also return a list of the permutations used at each step of the LDU
+      factorization as a fifth element.
+      <br class="newline">
+      <br class="newline">Suppose X is given by <span 
+class="cmmi-12">X </span>= <span 
+class="cmsy-10x-x-120">{{</span><span 
+class="cmmi-12">a,b, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">,c,d</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a, </span>0<span 
+class="cmmi-12">,d</span><span 
+class="cmsy-10x-x-120">}}</span>. The command
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC20x.png" alt="{lo,di,up, P }=  N CLDU   Decomposition[X]
+      " class="math-display" ></center> returns matrices, which in <span 
+class="cmtt-12">MatrixForm </span>are:
+      <br class="newline">
+      <!--l. 897--><p class="noindent">
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC21x.png" alt="    (                     )                (                           )
+       1        0       0                     a  0          0
+lo = (  0        1       0 )           di = (  0  c          0          )
+       1  - b * *inv[c] 1                     0  0  d + b * *inv[c] * *d
+     (                            )       (           )
+        1  inv[a] * *b     0                 1  0  0
+up = (  0      1       inv[c] * *d )  P = (  0  1  0  )
+        0      0           1                 0  0  1
+      " class="math-display" ></center>
+      <!--l. 897--><p class="noindent">As matrix <span 
+class="cmmi-12">X </span>is 3<span 
+class="cmsy-10x-x-120">&#x00D7;</span>3, one can provide 2 permutation matrices. Let those permutations
+      be given by <span 
+class="cmmi-12">l</span><sub ><span 
+class="cmr-8">1</span></sub> = <span 
+class="cmsy-10x-x-120">{</span>3<span 
+class="cmmi-12">, </span>2<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">} </span>and <span 
+class="cmmi-12">l</span><sub ><span 
+class="cmr-8">2</span></sub> = <span 
+class="cmsy-10x-x-120">{</span>1<span 
+class="cmmi-12">, </span>3<span 
+class="cmmi-12">, </span>2<span 
+class="cmsy-10x-x-120">}</span>, that means:
+      <br class="newline">
+      <!--l. 897--><p class="noindent">
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC22x.png" alt="      (          )         (          )
+         0  0  1              1  0  0
+P 1 = (  0  1  0 )   P 2 = (  0  0  1 )
+         1  0  0              0  1  0
+      " class="math-display" ></center>
+      <!--l. 897--><p class="noindent">just as in <span 
+class="cmtt-12">NCPermutationMatrix</span>. The command
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC23x.png" alt="{lo,di,up, P}=  N CLDU   Decomposition[X,   P ermutation  &#x2192;  {l1, l2}]
+      " class="math-display" ></center> returns matrices, which in <span 
+class="cmtt-12">MatrixForm </span>are:
+      <br class="newline">
+      <!--l. 897--><p class="noindent">
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC24x.png" alt="     (            )                        (              )
+        1   0   0                             d  0    0
+lo = (  0   1   0 )                   di = (  0  a    0   )
+     (  1  - 1  1                 )        (  0  0  b +) c
+        1  inv[d] * *a      0                 0  0  1
+     (  0       1       inv[a] * *b )       (  1  0  0 )
+up =                                  P  =               = P2 P1
+        0       0           1                 0  1  0
+      " class="math-display" ></center>
+      <!--l. 897--><p class="noindent">It can be checked that <span 
+class="cmmi-12">P</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">lo di up P </span>= <span 
+class="cmmi-12">X</span>:
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC25x.png" alt="M atM  ult[T ranspose[P ],lo, di,up, P ] = {{a, b,0},{0,c,d}, {a,0,d}}
+      " class="math-display" ></center>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: X is a square matrix n by n. The default Options are:
+      <br class="newline"><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmtt-12">Permutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>, <span 
+class="cmtt-12">CheckDecomposition  </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>,
+      <br class="newline"><span 
+class="cmtt-12">NCSimplifyPivots </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>, <span 
+class="cmtt-12">StopAutoPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>,
+      <br class="newline"><span 
+class="cmtt-12">ReturnPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>,  <span 
+class="cmtt-12">Stop2by2Pivoting </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmtt-12">. </span>If  permutation
+      matrices are to be given, they should be provided as <span 
+class="cmtt-12">Permutation </span><span 
+class="cmsy-10x-x-120">&#x2192; {</span><span 
+class="cmmi-12">l</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmtt-12">, </span><span 
+class="cmmi-12">l</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmtt-12">,</span> <img 
+src="NCBIGDOC26x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmtt-12">,</span>
+      <span 
+class="cmmi-12">l</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">}</span>, where each <span 
+class="cmmi-12">l</span><sub ><span 
+class="cmmi-8">i</span></sub> is a list of integers (see the command <span 
+class="cmtt-12">NCPermutationMatrix[]</span>). If
+      <span 
+class="cmtt-12">CheckDecomposition </span>is set to <span 
+class="cmtt-12">True</span>, the function checks if <span 
+class="cmmi-12">PXP</span><sup ><span 
+class="cmmi-8">T</span> </sup> is identical to <span 
+class="cmmi-12">LDU</span>.
+      Where <span 
+class="cmmi-12">P </span>= <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">2</span></sub><img 
+src="NCBIGDOC27x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmmi-12">P</span><sub ><span 
+class="cmmi-8">n</span></sub>, and each <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmmi-8">i</span></sub> is the permutation matrix associated with each
+      <span 
+class="cmmi-12">l</span><sub ><span 
+class="cmmi-8">i</span></sub>.
+      <br class="newline">
+      <br class="newline">Often a prospective pivot will appear to be nonzero in Mathematica even though
+      it reduces to zero. To ensure we are not pivoting with a convoluted form of zero,
+
+      we simplify the pivot at each step. By default, <span 
+class="cmtt-12">NCLDUDecomposition </span>converts the
+      pivot from non-commutative to commutative and then simplifies the expression. If
+      the commutative form of the pivot simplifies to zero, Mathematica scrolls down the
+      diagonal looking for a pivot which does not simplify to zero. If all the diagonal entries
+      simplify to zero utilizing the <span 
+class="cmtt-12">CommuteEverything[] </span>command, the process is repeated
+      using <span 
+class="cmtt-12">NCSimplifyRational</span>.
+      <br class="newline">This strategy is incorporated for two main reasons. One is that for large matrices
+      it  is  much  faster.  Secondly,  <span 
+class="cmtt-12">NCSimplifyRational </span>does  not  always  completely
+      simplify  complicated  expressions.  Setting  <span 
+class="cmtt-12">NCSimplifyPivots </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">True </span>bypasses
+      <span 
+class="cmtt-12">CommuteEverything </span>and immediately applies
+      <br class="newline"><span 
+class="cmtt-12">NCSimplifyRational </span>to each pivot. <span 
+class="cmtt-12">NCLDUDecomposition </span>will automatically pivot if
+      the current pivot at a particular iteration is zero. If the user utilized the <span 
+class="cmtt-12">Permutation</span>
+      option, then the permutation designated will be temporarily disregarded. However,
+      <span 
+class="cmtt-12">NCLDUDecomposition </span>will try and use the given permutation list for the next step. In
+      this way,
+      <br class="newline"><span 
+class="cmtt-12">NCLDUDecomposition  </span>follows  the  user  permutation  as  closely  as  possible.   If
+      <span 
+class="cmtt-12">StopAutoPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">True</span>,  then  <span 
+class="cmtt-12">NCLDUDecomposition </span>will  not  automatically
+      pivot and will strictly adhere to the user&#8217;s permutation, attempting to divide by zero
+      if need be. This will allow the user to determine which permutations are not possible.
+      Because <span 
+class="cmtt-12">NCLDUDecomposition </span>will automatically pivot when necessary by default, the
+      <span 
+class="cmtt-12">ReturnPermutation  </span>was created so that the permutation used in the decomposition
+      can be returned to the user for further analysis if set to <span 
+class="cmtt-12">True</span>.
+      <br class="newline">To explain the last option it is somewhat necessary for the user to have an idea of
+      how the pivoting strategy works. The permutations used are always symmetrically
+      applied. Because of this, we can only place other diagonal elements in the (1,1) position.
+      However, it is possible to place any off diagonal element in the (2,1) position. Thus
+      our strategy is to pivot only with diagonal elements if possible. If all the diagonal
+      elements are zero, then a permutation matrix is used to place a nonzero entry in the
+      (2,1) position which will automaticaly place a nonzero entry in the (1,2) position if
+      the matrix is symmetric. Then, instead of using the (1,1) entry as a pivot, the 2<span 
+class="cmsy-10x-x-120">&#x00D7;</span>2
+      submatrix starting in the (1,1) position is used as a block pivot. This has the effect
+      of creating an <span 
+class="cmmi-12">LDU </span>decomposition where <span 
+class="cmmi-12">D </span>is a block diagonal matrix with 1<span 
+class="cmsy-10x-x-120">&#x00D7;</span>1 and
+      2<span 
+class="cmsy-10x-x-120">&#x00D7;</span>2 blocks along the diagonal. (Note: The pivots are precisely the diagonal entries
+      of <span 
+class="cmmi-12">D</span>.) Setting <span 
+class="cmtt-12">Stop2by2Pivoting </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">True  </span>will halt 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 block pivoting, returning
+      instead, the remaining undecomposed block with zeros along the diagonal as a final
+      block diagonal entry.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:   <span 
+class="cmtt-12">NCLDUDecomposition </span>automatically  assumes  invertible  any
+      expressions (pivot) it needs to be invertible. Also, the 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 pivoting strategy assumes
+      that the matrix is symmetric in that it only ensures that the (2,1) entry is nonzero
+      (assuming by symmetry that the (1,2) is also zero). The pivoting strategy chooses
+      its pivots based upon the smallest leaf count invoking the Mathematica command
+      <span 
+class="cmtt-12">LeafCount[]</span>. It will choose the smallest nonzero diagonal element basing size upon
+      the leaf count. This strategy is incorporated in an attempt to find the simplest <span 
+class="cmmi-12">LDU</span>
+      factorization possible. If a 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 pivot is used and <span 
+class="cmtt-12">ReturnPermutation </span>is set to <span 
+class="cmtt-12">True</span>
+      then at the end of the permutation list returned will be the string 2by2 permutation.
+      </dd></dl>
+<a 
+ id="dx22-59001"></a>
+<!--l. 917--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.9   </span> <a 
+ id="x22-600004.4.9"></a>NCAllPermutationLDU[aMatrix]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">NCAllPermutationLDU</span>[<span 
+class="cmmi-12">aMatrix</span>]  returns  the  LDU  decomposition  of  a
+      matrix for all possible permutations. The code cycles through all possible permutations
+      and calls <span 
+class="cmtt-12">NCLDUDecomposition </span>for each one.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aMatrix </span>is a square matrix. The default options for <span 
+class="cmtt-12">NCAllPermutationLDU</span>
+      are:    <span 
+class="cmtt-12">PermutationSelection   </span><span 
+class="cmsy-10x-x-120">&#x2192;  </span><span 
+class="cmtt-12">False</span>,    <span 
+class="cmtt-12">CheckDecomposition   </span><span 
+class="cmsy-10x-x-120">&#x2192;  </span><span 
+class="cmtt-12">False</span>,
+      <span 
+class="cmtt-12">NCSimplifyPivots </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>, <span 
+class="cmtt-12">StopAutoPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>, <span 
+class="cmtt-12">ReturnPermutation</span>
+      <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>, <span 
+class="cmtt-12">Stop2by2Pivoting </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>. All of these options have the same effect
+      as in NCLDUDecomposition, except for PermutationSelection. PermutationSelection
+      should  be  a  list  of  numbers  between  1  and  the  number  of  possible  permutations.
+      NCAllPermutationLDU  will  use  this  list  to  choose  the  permutations  from  its
+      canonical list to decompose the matrix using NCLDUDecomposition. For example,
+      <span 
+class="cmtt-12">PermutationSelection </span>can be <span 
+class="cmsy-10x-x-120">{</span>1<span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,n</span><span 
+class="cmsy-10x-x-120">}</span>.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments   /   Limitations:   The   output   is   a   list   of   all   successful   outputs   from
+      <span 
+class="cmtt-12">NCLDUDecomposition</span>. Note that some permutations may lead to a zero pivot in the
+      process of doing the LDU decomposition. In that case, the LDU decomposition is not
+      well defined, actually in Mathematica one gets a lot of <span 
+class="cmsy-10x-x-120">&#x221E; </span>signs, but this output will
+      not be included in the list of successful outputs.  </dd></dl>
+<a 
+ id="dx22-60001"></a>
+<!--l. 935--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.10   </span> <a 
+ id="x22-610004.4.10"></a>NCInverse[aSquareMatrix]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  NCInverse[<span 
+class="cmmi-12">m</span>]  gives  a  symbolic  inverse  of  a  matrix  with  noncommutative
+      entries.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">m </span>is an <span 
+class="cmmi-12">n </span><span 
+class="cmsy-10x-x-120">&#x00D7; </span><span 
+class="cmmi-12">n </span>matrix with noncommutative entries.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments   /   Limitations:      This   command   is   primarily   used   symbolically   and
+      is  not  guarenteed  to  work  for  any  specific  examples.  Usually  the  elements
+      of   the   inverse   matrix   (<span 
+class="cmmi-12">m</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>)   are   huge   expressions.   We   recommend   using
+      <span 
+class="cmtt-12">NCSimplifyRational[NCInverse[</span><span 
+class="cmmi-12">m</span><span 
+class="cmtt-12">]] </span>to improve the formula you get. In some cases,
+      <span 
+class="cmtt-12">NCSimplifyRational[</span><span 
+class="cmmi-12">m</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">m</span><span 
+class="cmtt-12">] </span>does not provide the identity matrix, even though it
+      does equal the identity matrix. The formula we use for <span 
+class="cmtt-12">NCInverse[] </span>comes from the
+      LDU decomposition. Thus in principle it depends on the order chosen for pivoting even
+      if the inverse of a matrix is unique. </dd></dl>
+<a 
+ id="dx22-61001"></a>
+<!--l. 949--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.11   </span> <a 
+ id="x22-620004.4.11"></a>NCPermutationMatrix[aListOfIntegers]</h4>
+
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">NCPermutationMatrix</span>[<span 
+class="cmmi-12">aListOfIntegers</span>] returns the permutation matrix
+      associated with the list of integers. It is just the identity matrix with its columns
+      re-ordered.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aListOfIntegers </span>is an encoding which specifies where the 1&#8217;s occur in each
+      column. e.g., <span 
+class="cmti-12">aListOfintegers </span>= <span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>4<span 
+class="cmmi-12">, </span>3<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">} </span>represents the permutation matrix
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC28x.png" alt="     &#x230A;             &#x230B;
+       0   0  0  1
+P  = || 1   0  0  0 ||
+     &#x2308; 0   0  1  0 &#x2309;
+       0   1  0  0
+      " class="math-display" ></center>
+      <!--l. 949--><p class="nopar">
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx22-62001"></a>
+<!--l. 964--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.12   </span> <a 
+ id="x22-630004.4.12"></a>NCMatrixToPermutation[aMatrix]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: NCMatrixToPermutation[aMatrix] returns the permutation associated with
+      the <span 
+class="cmti-12">permutation matrix</span>, aMatrix. Basically, it is the inverse of <span 
+class="cmtt-12">NCPermutationMatrix</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: aMatrix must be matrix whose columns (or rows) can be permuted to yield the
+
+      identity matrix. In other words, aMatrix must be a permutation matrix. For example,
+      if m = <span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span>, then <span 
+class="cmtt-12">NCPermutationMatrix</span>[m]
+      gives <span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>4<span 
+class="cmmi-12">, </span>3<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx22-63001"></a>
+<!--l. 977--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.13   </span> <a 
+ id="x22-640004.4.13"></a>NCCheckPermutation[SizeOfMatrix, aListOfPermutations]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: If <span 
+class="cmtt-12">aListOfPermutations </span>is consistent with the matrix size, <span 
+class="cmtt-12">SizeOfMatrix</span>,
+      then  the  output  is  <span 
+class="cmtt-12">valid permutation list</span>.  If  not,  the  output  is  <span 
+class="cmtt-12">not valid</span>
+      <span 
+class="cmtt-12">permutation list</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: The size of a square matrix (an integer) and a list of permutations.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  If  the  <span 
+class="cmtt-12">SizeOfMatrix </span>is  n,  then  <span 
+class="cmtt-12">aListOfPermutations </span>must
+      be a list of <span 
+class="cmmi-12">n </span><span 
+class="cmsy-10x-x-120">- </span>1 permutations of the integers 1 through <span 
+class="cmmi-12">n</span>. Since this command is
+      generally called within the context of <span 
+class="cmtt-12">NCLDUDecomposition </span>the list of permutations
+      must correspond to a list that can be used within the command. </dd></dl>
+<a 
+ id="dx22-64001"></a>
+<!--l. 984--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.14   </span> <a 
+ id="x22-650004.4.14"></a>Diag[aMatrix]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Returns the elements of the diagonal of a matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: The code is Flatten[MapIndexed[Part,m]]. </dd></dl>
+<a 
+ id="dx22-65001"></a>
+<!--l. 1025--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.15   </span> <a 
+ id="x22-660004.4.15"></a>Cascade[P, K]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">Cascade</span>[<span 
+class="cmmi-12">P,K</span>] is the composition of <span 
+class="cmmi-12">P</span>, <span 
+class="cmmi-12">K </span>as is found is systems engineering.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">P </span>is a 2<span 
+class="cmsy-10x-x-120">&#x00D7;</span>2 block matrix. <span 
+class="cmmi-12">K </span>is a symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: frequency response functions grow from this.  </dd></dl>
+<a 
+ id="dx22-66001"></a>
+<!--l. 1033--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.16   </span> <a 
+ id="x22-670004.4.16"></a>Chain[P]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">Chain</span>[<span 
+class="cmmi-12">P</span>] returns the chain matrix arising from <span 
+class="cmmi-12">P  </span>as is found in systems
+      engineering.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">P </span>is a block 2<span 
+class="cmsy-10x-x-120">&#x00D7;</span>2 matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Chain[ ] assumes appropriate matrices are invertible. </dd></dl>
+<a 
+ id="dx22-67001"></a>
+<!--l. 1041--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.17   </span> <a 
+ id="x22-680004.4.17"></a>Redheffer[P]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">Redheffer</span>[<span 
+class="cmmi-12">P</span>] gives the inverse of chain.
+      <br class="newline">Redheffer[<span 
+class="cmmi-12">Chain</span>[<span 
+class="cmmi-12">P</span>]] = <span 
+class="cmmi-12">P </span>= <span 
+class="cmmi-12">Chain</span>[Redheffer[<span 
+class="cmmi-12">P</span>]].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">P </span>is a block 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: <span 
+class="cmmi-12">Redheffer</span>[<span 
+class="cmmi-12">P</span>] assumes the invertiblity of the entries of <span 
+class="cmmi-12">P</span>. </dd></dl>
+<a 
+ id="dx22-68001"></a>
+<!--l. 1051--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.18   </span> <a 
+ id="x22-690004.4.18"></a>DilationHalmos[x]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">DilationHalmos</span>[<span 
+class="cmmi-12">x</span>] gives block 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 matrix which is the Halmos dilation of
+      <span 
+class="cmmi-12">x</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">x </span>is a symbol
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: <span 
+class="cmmi-12">u </span>=  <span 
+class="cmmi-12">DilationHalmos</span>[<span 
+class="cmmi-12">x</span>] has the property <span 
+class="cmmi-12">u </span>is unitary, that
+      is,  <span 
+class="cmmi-12">MatMult</span>[<span 
+class="cmmi-12">u,tpMat</span>[<span 
+class="cmmi-12">u</span>]]  ==  <span 
+class="cmmi-12">IdentityMatrix</span>[2]  and  <span 
+class="cmmi-12">MatMult</span>[<span 
+class="cmmi-12">tpMat</span>[<span 
+class="cmmi-12">u</span>]<span 
+class="cmmi-12">,u</span>]  ==
+      <span 
+class="cmmi-12">IdentityMatrix</span>[2].  </dd></dl>
+<a 
+ id="dx22-69001"></a>
+<!--l. 1061--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.19   </span> <a 
+ id="x22-700004.4.19"></a>SchurComplementTop[M]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">SchurComplementTop</span>[<span 
+class="cmmi-12">M</span>] returns the Shur Complement of the top diagonal
+      entry of a block 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 matrix <span 
+class="cmmi-12">M</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">M </span>is a block 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Assumes invertibility of a diagonal entry. </dd></dl>
+<a 
+ id="dx22-70001"></a>
+<!--l. 1069--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.4.20   </span> <a 
+ id="x22-710004.4.20"></a>SchurComplementBtm[M]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">SchurComplementBtm</span>[<span 
+class="cmmi-12">M</span>]  returns  the  ShurComplement  of  the  bottom
+      diagonal entry of a block 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 matrix <span 
+class="cmmi-12">M</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">M </span>is a block 2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2 matrix.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Assumes invertibility of a diagonal entry. </dd></dl>
+<a 
+ id="dx22-71001"></a>
+
+   <!--l. 1071--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse15.html" >next</a>] [<a 
+href="NCBIGDOCse13.html" >prev</a>] [<a 
+href="NCBIGDOCse13.html#tailNCBIGDOCse13.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse14.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse14.html" >up</a>] </p></div>
+<!--l. 1071--><p class="indent">   <a 
+ id="tailNCBIGDOCse14.html"></a>   
+</body></html> 

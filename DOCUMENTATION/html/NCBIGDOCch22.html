@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>22 Help in Typing Relations .</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 2--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch23.html" >next</a>] [<a 
+href="NCBIGDOCch21.html" >prev</a>] [<a 
+href="NCBIGDOCch21.html#tailNCBIGDOCch21.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch22.html">tail</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch22.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;22</span><br><a 
+ id="x52-31700022"></a>Help in Typing Relations .</h2>
+   <h4 class="subsectionHead"><span class="titlemark">22.0.1   </span> <a 
+ id="x52-31800022.0.1"></a>NCMakeRelations[aSpecialList, aSpecialList, . . . ]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: This command allows the user to easily generate certain lists of polynomials which
+      can be used as input to NCMakeRules. We begin with some examples and then explain the
+      command in the third paragraph of this subsection. Suppose that <span 
+class="cmmi-12">z</span>1, <span 
+class="cmmi-12">z</span>2, <span 
+class="cmmi-12">z</span>3 and <span 
+class="cmmi-12">z</span>4 have
+      been set to be noncommutative (if not, just type <span 
+class="cmti-12">SetNonCommutative[z1,z2,z3,z4]</span>). If one
+      types <div class="eqnarray">
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC97x.png" alt="             &lt; &lt; N CM  akeRelations.m
+
+      N CM   akeRelations[{Inv, a,b,c},
+{SelfAdjoint, x,y,{{z1, z2},{z3, z4}}}]
+      " class="math-display" ></center>
+      </div>then this function returns the list <div class="eqnarray">
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC98x.png" alt="{a * *Inv[a] ==  1,Inv[a] * *a == 1,b * *Inv[b] == 1,Inv[b] * *b == 1,
+  c * *Inv[c] == 1,Inv[c] * *c == 1,- x + aj[x] == 0,- y + aj[y] == 0,
+
+                               - z1 + aj[z1] ==  0,- z2 + aj[z3] == 0,
+                               - z3 + aj[z2] ==  0,- z4 + aj[z4] ==  0}
+
+      " class="math-display" ></center>
+      </div>
+      <br class="newline"><span 
+class="cmti-12">NCMakeRelations </span>takes any number of arguments and each of its arguments is a List. For
+      each list, the first word describes the type of relations and the other elements
+      can be either simple expressions (like <span 
+class="cmmi-12">x</span>, <span 
+class="cmmi-12">y</span>, 1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>, 1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>, etc.) or square
+      matrices with symbolic entries (such as in the example above) or any mixture of
+      these two types of data. We now list the allowed types of relations. Some of the
+      relations are stated in terms of the hereditary functional calculus of Jim Agler (see
+      HereditaryCalculus.m).
+           <ol  class="enumerate1" >
+           <li class="enumerate" value="1" 
+><a 
+ id="x52-318004x1"></a> <span 
+class="cmr-10x-x-109">Isometry (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">T</span><sup ><span 
+class="cmsy-8">*</span></sup><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1 = 0 )</span>
+           </li>
+           <li class="enumerate" value="2" 
+><a 
+ id="x52-318006x2"></a> <span 
+class="cmr-10x-x-109">CoIsometry (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">TT</span><sup ><span 
+class="cmsy-8">*</span></sup><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1 = 0 )</span>
+           </li>
+           <li class="enumerate" value="3" 
+><a 
+ id="x52-318008x3"></a> <span 
+class="cmr-10x-x-109">SelfAdjoint (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">T</span><sup ><span 
+class="cmsy-8">*</span></sup><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">= 0)</span>
+           </li>
+           <li class="enumerate" value="4" 
+><a 
+ id="x52-318010x4"></a> <span 
+class="cmr-10x-x-109">Projection (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">T</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">= 0)</span>
+           </li>
+           <li class="enumerate" value="5" 
+><a 
+ id="x52-318012x5"></a> <span 
+class="cmr-10x-x-109">InvL (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">InvL</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">= 1)</span>
+           </li>
+           <li class="enumerate" value="6" 
+><a 
+ id="x52-318014x6"></a> <span 
+class="cmr-10x-x-109">InvR (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">InvR</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] = 1)</span>
+           </li>
+           <li class="enumerate" value="7" 
+><a 
+ id="x52-318016x7"></a> <span 
+class="cmr-10x-x-109">Inv (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">Inv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">= 1 and </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">Inv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] = 1)</span>
+           </li>
+           <li class="enumerate" value="8" 
+><a 
+ id="x52-318018x8"></a> <span 
+class="cmr-10x-x-109">Rt (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">Rt</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">]</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">)</span>
+           </li>
+           <li class="enumerate" value="9" 
+><a 
+ id="x52-318020x9"></a> <span 
+class="cmr-10x-x-109">Pinv (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] = </span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">],</span>
+           <span 
+class="cmmi-10x-x-109">tp</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">]] = </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">], </span><span 
+class="cmmi-10x-x-109">tp</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] = </span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">)</span>
+           </li>
+           <li class="enumerate" value="10" 
+><a 
+ id="x52-318022x10"></a><span 
+class="cmr-10x-x-109">PerpL (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">PerpL</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">= 0)</span>
+           </li>
+           <li class="enumerate" value="11" 
+><a 
+ id="x52-318024x11"></a><span 
+class="cmr-10x-x-109">PerpR (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">PerpR</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] = 0)</span>
+           </li>
+           <li class="enumerate" value="12" 
+><a 
+ id="x52-318026x12"></a><span 
+class="cmr-10x-x-109">PerpL2 (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that 1</span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] = </span><span 
+class="cmmi-10x-x-109">PerpL</span><span 
+class="cmr-10x-x-109">2[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] and </span><span 
+class="cmmi-10x-x-109">tp</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">PerpL</span><span 
+class="cmr-10x-x-109">2[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">]] = </span><span 
+class="cmmi-10x-x-109">PerpL</span><span 
+class="cmr-10x-x-109">2[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">])</span>
+           </li>
+           <li class="enumerate" value="13" 
+><a 
+ id="x52-318028x13"></a><span 
+class="cmr-10x-x-109">PerpR2  (i.e.,  </span><span 
+class="cmmi-10x-x-109">T  </span><span 
+class="cmr-10x-x-109">such  that  1 </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">Pinv</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">] </span><span 
+class="cmsy-10x-x-109">* *</span><span 
+class="cmmi-10x-x-109">T  </span><span 
+class="cmr-10x-x-109">=  </span><span 
+class="cmmi-10x-x-109">PerpR</span><span 
+class="cmr-10x-x-109">2[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">]  and  </span><span 
+class="cmmi-10x-x-109">tp</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">PerpR</span><span 
+class="cmr-10x-x-109">2[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">]]  =</span>
+           <span 
+class="cmmi-10x-x-109">PerpR</span><span 
+class="cmr-10x-x-109">2[</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">])</span>
+           </li>
+           <li class="enumerate" value="14" 
+><a 
+ id="x52-318030x14"></a>  <span 
+class="cmr-10x-x-109">Isometry[aInteger]  (where  aInteger  is  a  natural  number)  (i.e.,  </span><span 
+class="cmmi-10x-x-109">T  </span><span 
+class="cmr-10x-x-109">such  that  (</span><span 
+class="cmmi-10x-x-109">yx </span><span 
+class="cmsy-10x-x-109">-</span>
+           <span 
+class="cmr-10x-x-109">1)</span><sup ><span 
+class="cmmi-8">aInteger</span></sup><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">) = 0)</span>
+           </li>
+           <li class="enumerate" value="15" 
+><a 
+ id="x52-318032x15"></a>  <span 
+class="cmr-10x-x-109">Symmetry[aInteger]  (where  aInteger  is  a  natural  number)  (i.e.,  </span><span 
+class="cmmi-10x-x-109">T  </span><span 
+class="cmr-10x-x-109">such  that  (</span><span 
+class="cmmi-10x-x-109">y </span><span 
+class="cmsy-10x-x-109">-</span>
+           <span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">)</span><sup ><span 
+class="cmmi-8">aInteger</span></sup><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">) = 0)</span>
+
+           </li>
+           <li class="enumerate" value="16" 
+><a 
+ id="x52-318034x16"></a> <span 
+class="cmr-10x-x-109">Isosymmetry (i.e., </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">such that (</span><span 
+class="cmmi-10x-x-109">yx </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1)(</span><span 
+class="cmmi-10x-x-109">y </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">)(</span><span 
+class="cmmi-10x-x-109">T</span><span 
+class="cmr-10x-x-109">) = 0 or equivalently </span><span 
+class="cmmi-10x-x-109">T</span><sup ><span 
+class="cmsy-8">*</span><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">T</span><sup ><span 
+class="cmsy-8">*</span></sup><span 
+class="cmmi-10x-x-109">T</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-109">-</span>
+           <span 
+class="cmmi-10x-x-109">T</span><sup ><span 
+class="cmsy-8">*</span></sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">T </span><span 
+class="cmr-10x-x-109">= 0). These extremely important operators were the subject of Mark Stankus</span>
+           <span 
+class="cmr-10x-x-109">incredible thesis.</span></li></ol>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: aSpecialList is a list whose first element is one of the allowed types above and
+      the rest of whose elements are either simple expressions or square matrices.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx52-318035"></a>
+<!--l. 76--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">22.1   </span> <a 
+ id="x52-31900022.1"></a>Output notation for pseudoinverse and perp&#8217;s</h3>
+   <center class="par-math-display" >
+<img 
+src="NCBIGDOC99x.png" alt="P inv[x]     -&#x2192;    x+       xx+x =  x,  x+xx+  =  x+,
+                           (x+x)T  =  x+x,   (xx+)T =  xx+
+
+                   &#x230A;        &#x230A;
+P erpL[x]   -&#x2192;    x        x x = 0
+
+P erpR[x]   -&#x2192;    x&#x230B;       xx&#x230B; = 0
+
+                   &#x230A;&#x230A;        &#x230A;&#x230A;         +      &#x230A;&#x230A; T     &#x230A;&#x230A;
+P erpL2[x]  -&#x2192;    x        x  = 1 - xx  ,  (x )  = x
+
+P erpR2[x]  -&#x2192;    x&#x230B;&#x230B;       x&#x230B;&#x230B; = 1 - x+x,   (x&#x230B;&#x230B;)T = x &#x230B;&#x230B;
+" class="par-math-display" ></center>
+<!--l. 92--><p class="nopar">
+<!--l. 109--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.1   </span> <a 
+ id="x52-32000022.1.1"></a>NCAddTranspose[aListOfExpressions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases:
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  One can save time when working in an algebra with transposes or adjoints
+      by using the command NCAddTranspose[ ]. These commands &#8220;symmetrize&#8221; a set of
+      relations by applying tp[ ] to the relations and returning a list with the new expressions
+      appended to the old ones. This saves the user the trouble of typing both <span 
+class="cmmi-12">a </span>= <span 
+class="cmmi-12">b </span>and
+      <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">a</span>] = <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">b</span>].
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfExpressions </span>is a list of expressions
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx52-320001"></a>
+<!--l. 126--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.2   </span> <a 
+ id="x52-32100022.1.2"></a>NCAddAdjoint[aListOfExpressions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases:
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  One can save time when working in an algebra with transposes or adjoints by
+      using the command NCAddAdjoint[ ]. These commands &#8220;symmetrize&#8221; a set of relations
+      by applying aj[ ] to the relations and returning a list with the new expressions appended
+      to the old ones. This saves the user the trouble of typing both <span 
+class="cmmi-12">a </span>= <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">a</span>] = <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">b</span>].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfExpressions </span>is a list of expressions
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx52-321001"></a>
+<!--l. 132--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.3   </span> <a 
+ id="x52-32200022.1.3"></a>Pulling important equations into your session from an <span 
+class="cmti-12">NCProcess </span>output - See
+<span 
+class="cmti-12">GetCategories </span>in <span 
+class="cmsy-10x-x-120">&#167;</span>23.0.5.</h4>
+<!--l. 136--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.4   </span> <a 
+ id="x52-32300022.1.4"></a>Help in typing Monomial Orders - See NCAutomaticOrder Section 18.4.6</h4>
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch23.html" >next</a>] [<a 
+href="NCBIGDOCch21.html" >prev</a>] [<a 
+href="NCBIGDOCch21.html#tailNCBIGDOCch21.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch22.html" >front</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch22.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch22.html"></a>    
+</body></html> 

@@ -1,0 +1,18 @@
+(* mauricio and bill jan 2010 *)
+
+If you're just starting with NCAlgebra, check out the following demos:
+
+1. MostBasicCommands.nb
+2. GoNCGB.nb
+
+------
+
+WHEN DEMOS FAIL:
+  Many demos use our command NCProcess. It is easy to tell
+  because you will see NCProcess directly in the input.
+
+The trickiest software to get working is NCProcess.
+That is because it uses Mma, LaTex, yap or adobe or preview and creates several files, often called Example.tex, etc. 
+
+So if NCProcess doesnt work that is because it is 
+is not finding one of these. It can be fixed by a good path detective.

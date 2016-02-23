@@ -1,0 +1,123 @@
+{a**Inva -> 1, Aja**InvAja -> 1, Ajb**InvLossLessM -> c, Ajb**Ajc -> c**b, 
+ c**LossLessM -> Ajb, Inva**a -> 1, InvAja**Aja -> 1, 
+ Ajc**c -> Aja**InvLossLessM + InvLossLessM**a, InvLossLessM**b -> Ajc, 
+ InvLossLessM**LossLessM -> 1, LossLessM**Aja -> -a**LossLessM + b**Ajb, 
+ LossLessM**Ajc -> b, LossLessM**InvLossLessM -> 1, 
+ InvLossLessM**a**LossLessM -> -Aja + Ajc**Ajb, 
+ c**b**Ajb -> Ajb**Aja + c**a**LossLessM, 
+ b**Ajb**InvAja -> LossLessM + a**LossLessM**InvAja, 
+ Ajb**Aja**InvLossLessM -> -c**a + c**b**c, 
+ c**b**c**b -> Ajb**Aja**Ajc + c**a**b, InvLossLessM**a**b**c**b -> 
+  -Aja**Aja**Ajc + Ajc**Ajb**Aja**Ajc + InvLossLessM**a**a**b, 
+ InvLossLessM**a**b**Ajb -> -Aja**Aja + Ajc**Ajb**Aja + 
+   InvLossLessM**a**a**LossLessM, InvLossLessM**a**b**c**a**LossLessM -> 
+  Aja**Aja**Aja - Aja**Aja**Ajc**Ajb - Ajc**Ajb**Aja**Aja + 
+   Ajc**Ajb**Aja**Ajc**Ajb + InvLossLessM**a**a**a**LossLessM, 
+ InvLossLessM**a**b**c**a**b**Ajb -> Aja**Aja**Aja**Aja - 
+   Aja**Aja**Ajc**Ajb**Aja - Ajc**Ajb**Aja**Aja**Aja + 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja - InvLossLessM**a**a**a**a**LossLessM + 
+   InvLossLessM**a**a**a**b**Ajb + InvLossLessM**a**b**c**a**a**LossLessM, 
+ c**b**c**a**LossLessM -> -Ajb**Aja**Aja + Ajb**Aja**Ajc**Ajb + 
+   c**a**a**LossLessM, c**b**c**a**b**c**b -> -Ajb**Aja**Aja**Aja**Ajc - 
+   c**a**a**a**b + Ajb**Aja**Ajc**Ajb**Aja**Ajc + c**a**a**b**c**b + 
+   c**b**c**a**a**b, c**b**c**a**b**Ajb -> -Ajb**Aja**Aja**Aja + 
+   Ajb**Aja**Ajc**Ajb**Aja - c**a**a**a**LossLessM + c**a**a**b**Ajb + 
+   c**b**c**a**a**LossLessM, c**b**c**a**b**c**a**LossLessM -> 
+  Ajb**Aja**Aja**Aja**Aja - Ajb**Aja**Aja**Aja**Ajc**Ajb - 
+   Ajb**Aja**Ajc**Ajb**Aja**Aja - c**a**a**a**a**LossLessM + 
+   Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb + c**a**a**b**c**a**LossLessM + 
+   c**b**c**a**a**a**LossLessM, InvLossLessM**a**b**c**a**b**c**b -> 
+  Aja**Aja**Aja**Aja**Ajc - Aja**Aja**Ajc**Ajb**Aja**Ajc - 
+   Ajc**Ajb**Aja**Aja**Aja**Ajc - InvLossLessM**a**a**a**a**b + 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc + InvLossLessM**a**a**a**b**c**b + 
+   InvLossLessM**a**b**c**a**a**b, c**b**c**a**b**c**a**b**Ajb -> 
+  Ajb**Aja**Aja**Aja**Aja**Aja - Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja - 
+   Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja + c**a**a**a**a**a**LossLessM - 
+   c**a**a**a**a**b**Ajb + Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja - 
+   c**a**a**b**c**a**a**LossLessM + c**a**a**b**c**a**b**Ajb - 
+   c**b**c**a**a**a**a**LossLessM + c**b**c**a**a**a**b**Ajb + 
+   c**b**c**a**b**c**a**a**LossLessM, 
+ InvLossLessM**a**b**c**a**b**c**a**LossLessM -> 
+  -Aja**Aja**Aja**Aja**Aja + Aja**Aja**Aja**Aja**Ajc**Ajb + 
+   Aja**Aja**Ajc**Ajb**Aja**Aja + Ajc**Ajb**Aja**Aja**Aja**Aja - 
+   Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb - Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb - 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja - InvLossLessM**a**a**a**a**a**
+    LossLessM + Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb + 
+   InvLossLessM**a**a**a**b**c**a**LossLessM + InvLossLessM**a**b**c**a**a**
+    a**LossLessM, c**b**c**a**b**c**a**b**c**b -> 
+  Ajb**Aja**Aja**Aja**Aja**Aja**Ajc + c**a**a**a**a**a**b - 
+   Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Ajc - Ajb**Aja**Ajc**Ajb**Aja**Aja**
+    Aja**Ajc - c**a**a**a**a**b**c**b - c**a**a**b**c**a**a**b - 
+   c**b**c**a**a**a**a**b + Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc + 
+   c**a**a**b**c**a**b**c**b + c**b**c**a**a**a**b**c**b + 
+   c**b**c**a**b**c**a**a**b, InvLossLessM**a**b**c**a**b**c**a**b**Ajb -> 
+  -Aja**Aja**Aja**Aja**Aja**Aja + Aja**Aja**Aja**Aja**Ajc**Ajb**Aja + 
+   Aja**Aja**Ajc**Ajb**Aja**Aja**Aja + Ajc**Ajb**Aja**Aja**Aja**Aja**Aja - 
+   Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja - Ajc**Ajb**Aja**Aja**Aja**Ajc**
+    Ajb**Aja - Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja + 
+   InvLossLessM**a**a**a**a**a**a**LossLessM - InvLossLessM**a**a**a**a**a**
+    b**Ajb + Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja - 
+   InvLossLessM**a**a**a**b**c**a**a**LossLessM + 
+   InvLossLessM**a**a**a**b**c**a**b**Ajb - InvLossLessM**a**b**c**a**a**a**
+    a**LossLessM + InvLossLessM**a**b**c**a**a**a**b**Ajb + 
+   InvLossLessM**a**b**c**a**b**c**a**a**LossLessM, 
+ c**b**c**a**b**c**a**b**c**a**LossLessM -> 
+  -Ajb**Aja**Aja**Aja**Aja**Aja**Aja + Ajb**Aja**Aja**Aja**Aja**Aja**Ajc**
+    Ajb + Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Aja + 
+   Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja**Aja + c**a**a**a**a**a**a**LossLessM - 
+   Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb - 
+   Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb - 
+   Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja - 
+   c**a**a**a**a**b**c**a**LossLessM - c**a**a**b**c**a**a**a**LossLessM - 
+   c**b**c**a**a**a**a**a**LossLessM + Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**
+    Aja**Ajc**Ajb + c**a**a**b**c**a**b**c**a**LossLessM + 
+   c**b**c**a**a**a**b**c**a**LossLessM + c**b**c**a**b**c**a**a**a**
+    LossLessM, InvLossLessM**a**b**c**a**b**c**a**b**c**b -> 
+  -Aja**Aja**Aja**Aja**Aja**Aja**Ajc + Aja**Aja**Aja**Aja**Ajc**Ajb**Aja**
+    Ajc + Aja**Aja**Ajc**Ajb**Aja**Aja**Aja**Ajc + 
+   Ajc**Ajb**Aja**Aja**Aja**Aja**Aja**Ajc + InvLossLessM**a**a**a**a**a**a**
+    b - Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc - 
+   Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Ajc - 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja**Ajc - InvLossLessM**a**a**a**a**a**
+    b**c**b - InvLossLessM**a**a**a**b**c**a**a**b - 
+   InvLossLessM**a**b**c**a**a**a**a**b + Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**
+    Ajb**Aja**Ajc + InvLossLessM**a**a**a**b**c**a**b**c**b + 
+   InvLossLessM**a**b**c**a**a**a**b**c**b + InvLossLessM**a**b**c**a**b**c**
+    a**a**b, c**b**c**a**b**c**a**b**c**a**b**Ajb -> 
+  -Ajb**Aja**Aja**Aja**Aja**Aja**Aja**Aja + Ajb**Aja**Aja**Aja**Aja**Aja**
+    Ajc**Ajb**Aja + Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Aja**Aja + 
+   Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja**Aja**Aja - 
+   c**a**a**a**a**a**a**a**LossLessM + c**a**a**a**a**a**a**b**Ajb - 
+   Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja - 
+   Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja - 
+   Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja + 
+   c**a**a**a**a**b**c**a**a**LossLessM - c**a**a**a**a**b**c**a**b**Ajb + 
+   c**a**a**b**c**a**a**a**a**LossLessM - c**a**a**b**c**a**a**a**b**Ajb + 
+   c**b**c**a**a**a**a**a**a**LossLessM - c**b**c**a**a**a**a**a**b**Ajb + 
+   Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja - 
+   c**a**a**b**c**a**b**c**a**a**LossLessM + c**a**a**b**c**a**b**c**a**b**
+    Ajb - c**b**c**a**a**a**b**c**a**a**LossLessM + 
+   c**b**c**a**a**a**b**c**a**b**Ajb - c**b**c**a**b**c**a**a**a**a**
+    LossLessM + c**b**c**a**b**c**a**a**a**b**Ajb + 
+   c**b**c**a**b**c**a**b**c**a**a**LossLessM, 
+ InvLossLessM**a**b**c**a**b**c**a**b**c**a**LossLessM -> 
+  Aja**Aja**Aja**Aja**Aja**Aja**Aja - Aja**Aja**Aja**Aja**Aja**Aja**Ajc**
+    Ajb - Aja**Aja**Aja**Aja**Ajc**Ajb**Aja**Aja - 
+   Aja**Aja**Ajc**Ajb**Aja**Aja**Aja**Aja - Ajc**Ajb**Aja**Aja**Aja**Aja**
+    Aja**Aja + Aja**Aja**Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb + 
+   Aja**Aja**Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb + 
+   Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja + 
+   Ajc**Ajb**Aja**Aja**Aja**Aja**Aja**Ajc**Ajb + 
+   Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Aja + 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja**Aja + InvLossLessM**a**a**a**a**a**
+    a**a**LossLessM - Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb - 
+   Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb - 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb - 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Aja - 
+   InvLossLessM**a**a**a**a**a**b**c**a**LossLessM - 
+   InvLossLessM**a**a**a**b**c**a**a**a**LossLessM - 
+   InvLossLessM**a**b**c**a**a**a**a**a**LossLessM + 
+   Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb + 
+   InvLossLessM**a**a**a**b**c**a**b**c**a**LossLessM + 
+   InvLossLessM**a**b**c**a**a**a**b**c**a**LossLessM + 
+   InvLossLessM**a**b**c**a**b**c**a**a**a**LossLessM}

@@ -1,0 +1,21 @@
+
+
+
+(* THIS RECORDS YOUR SESSIONS IN TWO FILES ONE FOR READING ONE IS EXECUTABLE MATHEMATICA *)  
+
+filerec=InputString["TYPE FILE NAME WHERE YOU WANT THE SESSION SAVED ?   "]
+
+  AAA=OpenAppend[filerec]
+  filerecex = StringJoin[filerec,".ex"]
+  AAAEX=OpenAppend[filerecex]
+
+(* If you want TeX output (not input) *)
+(*  AAA=OpenAppend[filerec,FormatType->TeXForm] *)
+
+AppendTo[$Echo,AAA]
+AppendTo[$Output,AAA]
+AppendTo[$Echo,AAAEX]
+(*Close[filerec]??*)
+
+
+

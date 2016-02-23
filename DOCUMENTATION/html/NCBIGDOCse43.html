@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>13.1 NCProcess: Input and Output</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 34--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse44.html" >next</a>] [<a 
+href="#tailNCBIGDOCse43.html">tail</a>] [<a 
+href="NCBIGDOCch13.html#NCBIGDOCse43.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">13.1   </span> <a 
+ id="x68-20100013.1"></a>NCProcess: Input and Output</h3>
+<!--l. 38--><p class="noindent">The commands which we use heavily are called NCProcess1 and NCProcess2. NCProcess1
+and NCProcess2 are variants on a more general command called NCProcess. A person
+can make use of NCProcess1 and NCProcess2 without knowing any of the NCProcess
+options.
+<!--l. 46--><p class="indent">   The NCProcess commands are based upon a GBA and will be described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse50.html#x84-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a>. GBA&#8217;s are
+very effective at eliminating or solving for variables. Also we have algorithms for removing
+Redundant equations for the output which can be turned on and off as options. NCProcess2
+removes them much more agressively than NCProcess1, but is much slower and it may remove an
+equation you really like. Also we have algorithms for removing Redundant equations for the output
+which can be turned on and off as options. A person can use this practical approach to
+performing computations and proving theorems <span 
+class="cmti-12">without knowing anything about </span>GBA&#8217;s or the
+options.
+<!--l. 64--><p class="indent">   The <span 
+class="cmbx-12">input </span>to NCProcess command one needs:
+
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">I1. A list of knowns.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">I2. A list of unknowns (together with an order which gives you priorities for eliminating
+      them).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">I3. A collection of equations in these knowns and unknowns. <span class="footnote-mark"><a 
+href="NCBIGDOC69.html#fn1x25"><sup >1</sup></a></span><a 
+ id="x68-201001f1"></a>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">I4. A number of iterations.</dd></dl>
+<!--l. 77--><p class="indent">   The knowns (I1) are set using the <span 
+class="cmmi-12">SetKnowns </span>command, The unknowns (I2) are set using the
+<span 
+class="cmmi-12">SetUnknowns </span>command, For example, <span 
+class="cmmi-12">SetKnowns</span>[<span 
+class="cmmi-12">A,B,C</span>] sets <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>known and
+<span 
+class="cmmi-12">SetUnknowns</span>[<span 
+class="cmmi-12">x,y,z</span>] sets <span 
+class="cmmi-12">x</span>, <span 
+class="cmmi-12">y </span>and <span 
+class="cmmi-12">z </span>unknown. Also, in this case, the algorithms sets the highest
+prioirity on eliminating <span 
+class="cmmi-12">z</span>, then <span 
+class="cmmi-12">y </span>and then <span 
+class="cmmi-12">x</span>. Some readers might recall this is exactly the
+information needed as input to NCMakeGB.
+<!--l. 88--><p class="indent">   The <span 
+class="cmbx-12">output </span>of the NCProcess commands is a list of expressions which are <span 
+class="cmbx-12">mathematically</span>
+<span 
+class="cmbx-12">equivalent to the equations which are input </span>(in step I3). That is, the output equations and
+input equations have exactly the same set of solutions as the input equations. When using
+NCProcess1, this equivelent list hopefully has solved for some unknowns. The output is presented
+to the user as
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">O1. Unknowns which have been solved for and equations which yield these unknowns.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O2. Equations involving no unknowns.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O3. Equations selected or created by the user. <span class="footnote-mark"><a 
+href="NCBIGDOC70.html#fn2x25"><sup >2</sup></a></span><a 
+ id="x68-201002f2"></a>
+      For example, in the context of S1 below, one would want to select the equation <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">17</span></sub>.
+      There are also times during a strategy when one wants to introduce new variables and
+      equations. This is illustrated in Chapter <a 
+href="NCBIGDOCch14.html#x72-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O4. Equations involving only one unknown.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">O5. Equations involving only 2 unknowns. etc. </dd></dl>
+<!--l. 129--><p class="indent">   We say that an equation which is in the output of an NCProcess command is <span 
+class="cmti-12">digested </span>if it
+occurs in items O1, O2 or O3 and is <span 
+class="cmti-12">undigested </span>otherwise. Often, in practice, the digested
+polynomial equations are those which are well understood.
+<!--l. 136--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">13.1.1   </span> <a 
+ id="x68-20200013.1.1"></a>When to stop</h4>
+<!--l. 139--><p class="noindent">Often one makes a run of NCProcess1 gets some likable equations, puts them in to another run of
+NCProcess.
+<!--l. 145--><p class="indent">   The digested equations (those in items O1, O2 and O3) often contain the necessary conditions
+of the desired theorem and the main flow of the proof of the converse. If the starting polynomial
+equations follow as algebraic consequences of the digested equations, then we should stop. One
+might run NCProcess2 at this point inorder to get few equations.
+
+   <!--l. 158--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse44.html" >next</a>] [<a 
+href="NCBIGDOCse43.html" >front</a>] [<a 
+href="NCBIGDOCch13.html#NCBIGDOCse43.html" >up</a>] </p></div>
+<!--l. 158--><p class="indent">   <a 
+ id="tailNCBIGDOCse43.html"></a>   
+</body></html> 

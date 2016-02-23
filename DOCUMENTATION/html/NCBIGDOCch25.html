@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>25 Commands which are not supported </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch26.html" >next</a>] [<a 
+href="NCBIGDOCch24.html" >prev</a>] [<a 
+href="NCBIGDOCch24.html#tailNCBIGDOCch24.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch25.html">tail</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch25.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;25</span><br><a 
+ id="x55-34100025"></a>Commands which are not supported </h2>
+<!--l. 5--><p class="noindent">Here we list commands which we started to develop but did not pursue to the point of thorough
+testing. If we pursue them we may change their calling sequences, etc.
+   <div  
+class="centerline">                                                 <span 
+class="cmbx-12">BlockPartition</span>                                           </div>
+This probably does not work reliably.
+   <div  
+class="centerline">                           <span 
+class="cmbx-12">NCEliminate[ExpressionsList,varsList,opts]</span>                        </div>
+This crudely generalizes the Mma command Eliminate to the noncommuting case. You should have
+set a monomial order before running it. If not, there is an option &#x00A0;&#x00A0; <span 
+class="cmti-12">UseNewOrder </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmti-12">False</span>
+&#x00A0;&#x00A0;which tells NCEliminate to use its (stupid) default ordering.
+   <h3 class="sectionHead"><span class="titlemark">25.1   </span> <a 
+ id="x55-34200025.1"></a> A Mathematica Groebner Basis Package Without C++ </h3>
+<!--l. 22--><p class="noindent">The files containing the word Old in their names, many residing in the directory &#8221;OldMmaGB&#8221;,
+contain a primative version of NCGB but <span 
+class="cmbx-12">all in Mma; no C++. </span>That was our first
+version.
+<!--l. 28--><p class="indent">   Probably it still works but we have not tried it in a long time. It is slow, we remember that
+much. Since there is no document, about the best chance you have at deciphering it is to cruise
+thru the usage statements and function definitions.
+<!--l. 35--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">25.2   </span> <a 
+ id="x55-34300025.2"></a> NCXWholeProcess[ polys, orderList, fileName, grobIters] </h3>
+<!--l. 37--><p class="noindent">This <span 
+class="cmti-12">very </span>experimental function makes repeated calls to NCProcess[ ], changing the order at each
+iteration in an attempt to triangularize the set of relations, <span 
+class="cmmi-12">polys</span>.
+<!--l. 43--><p class="indent">   Let us walk through the first iteration of NCXWholeProcess. It begins with the order,
+<span 
+class="cmmi-12">orderList</span>, and calls NCProcess[ <span 
+class="cmmi-12">polys</span>,<span 
+class="cmmi-12">grobIters</span>,<span 
+class="cmmi-12">fileName</span>-1 ] creating a <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>file,
+<span 
+class="cmmi-12">fileName</span>-1.tex.
+<!--l. 51--><p class="indent">   The output of NCProcess will (hopefully) have polynomials in one unknown. These unknowns
+will then be regarded as &#8220;determined&#8221;. These determined unknowns are moved to the bottom of
+the unknowns in the order.
+<!--l. 57--><p class="indent">   A polynomial of the form
+   <center class="math-display" >
+<img 
+src="NCBIGDOC114x.png" alt="unknownIndeterminate   &#x2192;  polynomialsInKnownIndeterminates  " class="math-display" ></center> is
+known as a singleton. Determined unknowns associated with singletons are moved to the top of the
+
+order and the other determined unknowns are moved to the bottom of the unknowns. That is, the
+new order is of the form
+   <center class="math-display" >
+<img 
+src="NCBIGDOC115x.png" alt="Knowns   &lt; determinedKnowns   &#x226A;  otherUnknowns   &#x226A;  singletonUnknowns.
+" class="math-display" ></center>
+<!--l. 69--><p class="indent">   We have finished the first iteration of NCXWholeProcess. The second iteration goes as
+follows.
+<!--l. 72--><p class="indent">   After clearing the old order and setting the new order, NCProcess[ <span 
+class="cmmi-12">polys</span>,<span 
+class="cmmi-12">grobIters</span>,&#8220;<span 
+class="cmmi-12">fileName</span>-2&#8221;,
+<span 
+class="cmmi-12">UserSelects </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">determinedPolys </span>] is called creating a file, <span 
+class="cmmi-12">fileName</span>-2.tex. Here <span 
+class="cmmi-12">determinedPolys</span>
+are all polynomials in 0 or 1 unknowns and <span 
+class="cmmi-12">polys </span>denotes the same set of polynomials that we
+input in the first iteration. The process is continued, changing the order and calling NCProcess
+repeatedly.
+<!--l. 84--><p class="indent">   If no relations in one unknown are discovered at some iteration the currently unknown
+indeterminates are cyclically permuted. If all cyclic permutations fail to produce any new relations
+in one unknown the function NCXWholeProcess terminates stating that the problem was not
+solved. Alternatively, if all unknown variables become determined the function NCXWholeProcess
+terminates stating that the problem has been solved.
+<!--l. 95--><p class="indent">   This function is in a very primitive stage and the particulars of it will likely change.
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch26.html" >next</a>] [<a 
+href="NCBIGDOCch24.html" >prev</a>] [<a 
+href="NCBIGDOCch24.html#tailNCBIGDOCch24.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch25.html" >front</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch25.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch25.html"></a>   
+</body></html> 

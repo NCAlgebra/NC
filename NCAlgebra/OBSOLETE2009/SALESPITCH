@@ -1,0 +1,73 @@
+
+Contributed by:  J. William Helton  <ncalg@osiris.ucsd.edu>
+
+       A SYMBOL MANIPULATOR FOR DEALING WITH THE ALGEBRA
+                IN LINEAR SYSTEMS THEORY
+
+      
+    To what extent can we make our A, B, C, D linear systems and 
+operator calculations easier with computer assistance?  The standard 
+symbol manipulators Mathematica, Maple, and Macsyma do not do 
+noncommutative algebra intelligently, so it is hard to find out. 
+Our group wrote a package NCAlgebra which runs under Mathematica 
+and which is a reasonable beginning.
+
+     We see this package as a competitor to the yellow pad.  Once you 
+get used to it this might be considerably more effective for hand
+calculations of modest size.  Like Mathematica the emphasis is on
+interaction with the program and flexibility.  
+
+    I now prefer it to a yellow pad and can recommend it to anyone who 
+is good with Mathematica or alternatively is familiar with computers 
+to the extent of doing a substantial amount of word processing.  
+Putting a graduate student with computer talent on NCAlgebra also 
+might work well.  Our experience at UCSD is that students find it 
+easy to learn.  Indeed anyone can play with our package effortlessly, 
+but one would have to be cautious about committing to a long term 
+research project using NCAlgebra without being able to make 
+additional commands on his own.
+
+
+                      NCAlgebra
+                      Version 0 (preliminary)
+
+    J. William Helton              Robert L. Miller
+     Math Dept, UCSD             General Atomic Corp.
+             La  Jolla,  California 92093
+
+
+      NCAlgebra is a collection of "functions" for Mathematica 
+designed to facilitate manipulation and reduction of noncommutative 
+algebraic expressions.  Specifically, it allows computer calculation 
+in an algebra with involution.  Such computations are common in many 
+areas but our background is operator theory and engineering systems 
+so we are aiming at research in these areas rather than at the 
+complete treatments of the basics in these subjects.
+
+      SYSTEMS is a collection of files which runs under NCAlgebra 
+which is being developed by Mike Walker and Bill Helton.  It is in 
+a primitive form with its main contents being a file for doing 
+Hinfinity control for linear and certain nonlinear systems.  This 
+actually amounts to a paper (Aug91; by Ball, Helton and Walker) which 
+solves a collection of nonlinear Hinfinity control problems.  The formulas 
+in the paper are executable inside NCAlgebra which greatly facilitates 
+further research along these lines.
+
+     NCAlgebra uses a slight modification of the Mathematica operation 
+NonCommutativeMultiply (denoted by **).  Many of the NCAlgebra 
+functions are noncommutative versions of Mathematica functions used 
+for manipulation of commutative algebraic expressions.  For example, 
+the functions NCExpand, and NCCollect extend the utility of the usual 
+Mathematica functions Expand and Collect to algebraic expressions 
+including noncommutative multiplications.  NCExpand expands 
+complicated (multi-parentheses) expressions and thus facilitates 
+additive cancellation of terms.  NCCollect does the opposite-- it 
+collects like terms.  In addition, a number of more specialized 
+functions are designed to assist in solving particular types of 
+algebraic problems.  These currently include capabilities for block 
+matrix manipulation and differentiation of expressions with respect to a 
+noncommuting variable. 
+
+   The software is available by anonymous ftp from ncalg@osiris.ucsd.edu
+or from the Mathematica bulletin board MathSource@wri.com (type help intro
+for general help and find 0204-400 for NCAlgebra info). 

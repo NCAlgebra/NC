@@ -1,0 +1,49 @@
+(* :Title: 	Convert.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	David Hurst (dhurst). *)
+
+(* :Summary:	TEST FILE. 
+
+		This file turns on the convertdebugging code, which is a
+		four line display locating the position of the 
+		HighestDegreeTerm, verifying that is has become the 
+		initial monomial, the new left hand side, and the new 
+		right hand side, then file turns off the convertdebugging
+		code.
+*)
+
+(* :History: 
+   :8/27/92	Created. (dhurst)
+   9/6/99   Block->Module   (dell)
+*)
+
+     Print["Results from the file Convert.NCTest"];
+     Print["Expect a message- which is a standard part of convertdebug"];
+
+(* THE FOLLOWING MODULE WAS COMMENTED OUT 
+Module[{a,b,c}, *)
+
+Options[ convert ] := {convertdebug->True };
+
+Print[ "---------------------------" ];
+     test[Convert,1] = 
+Convert[a-b-c]  == (c -> -(-a + b));
+
+Print[ "---------------------------" ];
+
+     For[ i=1, i<=1, i++,
+          Print["Test #",i," was ",test[Convert,i]]
+     ];
+
+Options[ convert ] := {convertdebug->False };
+
+(* ]; *)
+
+
+
+
+
+
+
+
+

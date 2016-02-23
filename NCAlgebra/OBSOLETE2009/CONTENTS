@@ -1,0 +1,22 @@
+(* ------------------------------------------------------------------ *)
+(*                      Change Log                                    *)
+(*   Date               ----------                            WHO     *)
+(*   ----                                                     ---     *)
+(*   6/10        Changed it to Summer code directory          MStan   *)
+(*   6/24        Added NCadjoints to NCM package              MStan   *)
+(*   3/28/92     Turned off Alias::obsfn message in Math2.0   dhurst  *)
+(*   4/28/92     Added Gets to NCMora.m and NCTools.m         mstankus*)
+(*               Also changed the system path to be what it           *)
+(*               would be on oba.                                     *)
+(*   5/19/92     Moved NCMora.m to Extra.Mora                 mstankus*)
+(* ------------------------------------------------------------------ *)
+
+(* ------------------------------------------------------------------ *)
+(*  Do not load either CONTENTS or SYSTEMS more than once per         *)
+(*  Mathematica session.  Do not run NCTEST and SYSTEST during        *)
+(*  the same Mathematica session.                                     *)
+(* ------------------------------------------------------------------ *)
+
+(* Change line to the absolute pathname of your NCAlgebra directory. *)
+System`path = "";
+Get[StringJoin[System`path,"NCAlgebra.m"]];

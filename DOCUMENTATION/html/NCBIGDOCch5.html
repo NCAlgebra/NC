@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>5 Pretty Output and Tex Commands</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch6.html" >next</a>] [<a 
+href="NCBIGDOCch4.html" >prev</a>] [<a 
+href="NCBIGDOCch4.html#tailNCBIGDOCch4.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch5.html">tail</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCch5.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;5</span><br><a 
+ id="x9-1440005"></a>Pretty Output and Tex Commands</h2>
+<!--l. 4--><p class="noindent">There are 2 ways of producing pretty output. The most practical for a small session is described in
+the Pretty Output section below. The fancier way is to produce <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;displays. <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;displays can
+be done in several ways.
+<!--l. 9--><p class="indent">   One is by using the Mathematica <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;setting features. Just follow their directions; we have
+installed a few special NCAlgebra features via the files NCTeX.m and NCTeXForm.m. These
+features are automatically loaded. If you are using a notebook and have trouble it is possibly
+because you do not have mma&#8217;s notebook.sty file in the correct place. That&#8217;s not an
+NCAlgebra problem but is between you and Mma. We did put some suggestions on this in
+Section&#x00A0;<a 
+href="NCBIGDOCch33.html#x69-41800033.7">33.7<!--tex4ht:ref: section:tex:path --></a>.
+<!--l. 18--><p class="indent">   The <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;production has been significantly improved and updated in this version of
+NCAlgebra. Older methods we developed for <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;which we no longer support are in the directory
+OBSOLETE2009.
+   <h3 class="sectionHead"><span class="titlemark">5.1   </span> <a 
+ id="x9-1450005.1"></a>Pretty Output</h3>
+<!--l. 78--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.1.1   </span> <a 
+ id="x9-1460005.1.1"></a>NCSetOutput[ optionlist,<span 
+class="cmmi-12">&#x2026;</span>]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  NCSetOutput displays noncommutative expressions in a special format without
+      affecting the internal representation of the expression. For example, SetOutput[
+      All <span 
+class="cmsy-10x-x-120">&#x2192; </span>True] turns on all display beatifications listed below. Options are set by
+      typing,
+           <dl class="description"><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>All <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, to use the new format.
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>opt <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, to return to the default format.
+
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>Dot <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, &#8217;**&#8217; is displayed as &#8217;.&#8217;(i.e., a dot)
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>Dot <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, &#8217;**&#8217; defaults as &#8217;**&#8217;
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>aj <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, aj[ X ] is displayed as <span 
+class="cmmi-12">X</span><sup ><span 
+class="cmsy-8">*</span></sup>
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>aj <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, aj[ X ] is displayed as aj[ X ]
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>inv <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, inv[ X ] is displayed as <span 
+class="cmmi-12">X</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>inv <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, inv[ X ] is displayed as inv[ X ]
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>tp <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, tp[ X ] is displayed as <span 
+class="cmmi-12">X</span><sup ><span 
+class="cmmi-8">T</span> </sup>
+           </dd><dt class="description">
+       </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>tp <span 
+class="cmsy-10x-x-120">&#x2192; </span>False, tp[ X ] is displayed as tp[ X ]</dd></dl>
+      <!--l. 78--><p class="noindent">Examples : (Generic) SetOutput[opt<span 
+class="cmsy-10x-x-120">&#x2192;</span>True] turns on all beautifications of the output
+      related  to  the  attribute  opt.  (One  never  types  opt.  The  letters  &#8220;opt&#8221;  here  stand
+      for  any  of  the  listed  attributes.)  So,  for  example,  one  might  try  the  command
+      SetOutput[dot<span 
+class="cmsy-10x-x-120">&#x2192;</span>True, aj<span 
+class="cmsy-10x-x-120">&#x2192;</span>True]; aj[rt[x ** y]]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Options are: all, dot, rt, tp, inv, aj; You may input a comma-separated sequence
+      of options in any order without first forming a Mathematica list.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: WARNING: NCSetOutput was called SetOutput in previous
+      versions.  This  syntax  has  now  been  deprecated.  BEWARE:  do  not  use  with
+      NCSimplifyRational.  Also  working  with  parts  of  a  &#8221;pretty  output&#8221;  may  not  work
+      (since it changes the Head structure of the output). You can turn on or off options
+      individually at any time. The nesting order of the final display is determined first
+      by any NCAlgebra-defined or user-defined functions, and then by any Mathematica
+      specified order. Only after the Out[#] is assigned are the SetOutput options applied to
+      the OutputForm of the expression. So the internal form of the expression is NEVER
+      altered. Nevertheless, the displayed form may be unexpected for several reasons, among
+
+      them being; 1. f[g[x]] may be defined elsewhere to always display as g[f[x]]. In this case,
+      SetOutput will display the optional forms of g[ f[x] ], not that of the inputed f[ g[x] ]. 2.
+      Mathematica establishes precedences for functions and operations in order to minimize
+      the overall use of parantheses. This can have unusual, but not unmanageable effects
+      on the displayed form of an expression. For example, (<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>)<sup ><span 
+class="cmr-8">2</span></sup> displays as <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span>,but
+      is represented internally as the equivalent of (<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>)<sup ><span 
+class="cmr-8">2</span></sup>.  </dd></dl>
+<a 
+ id="dx9-146001"></a>
+<!--l. 82--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x9-1470005.2"></a><span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;Typesetting with NC<span class="TEX">T<span 
+class="E">E</span>X</span>Form</h3>
+<!--l. 85--><p class="noindent">The Mathematica program provides a command called TeXForm which can be used to output your
+expression generated by Mathematica into <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;format. We provide an alternative command
+NCTeXForm that performs the same task to basic NC constructs, through the file NCTeXForm.m.
+Examples of what this accomplishes are
+<!--l. 91--><p class="indent">   tp[x] will have the TeX&#8217;ed form <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmmi-8">T</span> </sup>
+<!--l. 93--><p class="indent">   aj[x] will have the TeX&#8217;ed form <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmsy-8">*</span></sup>
+<!--l. 95--><p class="indent">   rt[x] will have the TeX&#8217;ed form <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmr-6">1</span>
+<span 
+class="cmr-6">2</span> </sup>
+<!--l. 97--><p class="indent">   inv[x] will have the TeX&#8217;ed form <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>.
+<!--l. 107--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.2.1   </span> <a 
+ id="x9-1480005.2.1"></a>NCTeXForm[exp]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmti-12">NCTeXForm</span>[<span 
+class="cmti-12">exp</span>]  produces  output  that  can  be  compiled  by  <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>.  It
+      assumes the user has the package amsmath installed.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">exp </span>is any mathematica expression or lists of expressions.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 3.9. </dd></dl>
+
+<a 
+ id="dx9-148001"></a>
+<!--l. 109--><p class="noindent">As you might guess if you want to add more its easy. To use this NCTeXForm.m must be
+loaded; thats all. These are used by NCAlgebra and NCGB. See the demos for more
+information.
+<!--l. 119--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">5.3   </span> <a 
+ id="x9-1490005.3"></a>Simple <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;Commands with NC<span class="TEX">T<span 
+class="E">E</span>X</span></h3>
+<!--l. 122--><p class="noindent">In this section we describe some handy additional <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;display features we have added to
+Mathematica. These act in addition to Mathematica&#8217;s <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;setting with NCAlgebra, like
+TeXForm or Format[ &#x00A0;, TeXForm]. Mathematica&#8217;s <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;conversion however does not need this
+and is fine with NCAlgebra, since we have added special NCAlgebra and NCGB notation to the
+Mathematica-to-<span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;dictionary. If you are content with that, there is no reason to read this part
+of the document. Also the NCProcess <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;spreadsheets are automatic and are not related to this
+section of the document.
+<!--l. 132--><p class="indent">   These are very useful commands and we recommend using them. You <span 
+class="cmti-12">may have must do a little</span>
+<span 
+class="cmti-12">installation work </span>to use our fancier <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;commands depending how <span class="TEX">T<span 
+class="E">E</span>X</span>is installed in your
+system. It should work out-of-the box on most Unix based systems. Beware that some versions of
+Mathematica creates <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;output that uses a specific Mathematica file called a style
+file (called notebook.sty). Some of the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;produced needs to know where this file is
+kept. A description of how to inform <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;where this file is stored is found in Section
+<span 
+class="cmbx-12">??</span>.
+<!--l. 185--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.3.1   </span> <a 
+ id="x9-1500005.3.1"></a>NCTeX[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">NCTeX</span>[<span 
+class="cmti-12">exp</span>] creates a file that contains a <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;version of <span 
+class="cmti-12">exp </span>that gets
+      compiled with <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;and converted into a PDF image file. By default, if you are
+      on a notebook environment, this file will be imported to the current notebook output.
+      Otherwise, if it fails to be imported or if you are in text mode the output will be
+      displayed on a pdf viewer. <span 
+class="cmti-12">NCTeX  </span>has many options that can be set through the
+
+      standard Mathematica <span 
+class="cmti-12">SetOptions </span>command or as rules appended to the <span 
+class="cmti-12">NCTeX</span>. The
+      following are the available options and their default values: <span 
+class="cmti-12">Verbose </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">False</span>, tells
+      <span 
+class="cmti-12">NCTex </span>to display the details of the operations being performed; <span 
+class="cmti-12">DisplayPDF </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">False</span>,
+      controls whether a separated PDF viewer will be spawed to display the <span class="TEX">T<span 
+class="E">E</span>X</span>ed output;
+      <span 
+class="cmti-12">ImportPDF </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">True</span>, controls whether the <span class="TEX">T<span 
+class="E">E</span>X</span>ed output will be imported into a
+      notebook; <span 
+class="cmti-12">BreakEquations </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">True</span>, tells NC<span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;to use the style <span 
+class="cmti-12">breqn </span>to attempt to
+      break long equations or expressions in multiple lines; <span 
+class="cmti-12">TeXProcessor </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">NCTeXForm</span>,
+      tells NC<span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;to use <span 
+class="cmti-12">NCTeXForm </span>as the command to translate <span 
+class="cmti-12">exp </span>into <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>. Other
+      options are <span 
+class="cmti-12">PDFViewer</span>, <span 
+class="cmti-12">LaTeXCommand</span>, <span 
+class="cmti-12">PDFLaTeXCommand</span>, <span 
+class="cmti-12">DVIPSCommand</span>,
+      <span 
+class="cmti-12">PS2PDFCommand </span>which we try to guess correctly depending on your platform. You
+      may have to customize those if your installation of <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;is not standard.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">exp </span>is any mathematica expression or lists of expressions.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 3.9. </dd></dl>
+<a 
+ id="dx9-150001"></a>
+<!--l. 188--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">5.4   </span> <a 
+ id="x9-1510005.4"></a>Deprecated Commands</h3>
+<!--l. 190--><p class="noindent">The following commands are no longer supported in this version of NCAlgebra.
+<!--l. 234--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.1   </span> <a 
+ id="x9-1520005.4.1"></a>SeeTeX[] or SeeTeX[anInteger]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: SeeTeX[] tells Mathematica that you would always like to have your outputs
+      displayed in <span class="TEX">T<span 
+class="E">E</span>X</span>. Inputting SeeTeX[] gives you additional displays which accompany
+      the rest of your Mathematica session unless you turn off SeeTeX using the NoTeX[] (see
+      below). Each output in your session causes a seperate window to open on the screen
+
+      and this window displays the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;version of the output. When too many TeX displays
+      are present, Mathematica automatically makes the oldest display disappear. One can
+      set the maximum number of <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;windows to be <span 
+class="cmmi-12">N </span>which appear using <span 
+class="cmmi-12">SeeTeX</span>[<span 
+class="cmmi-12">N</span>].
+      SeeTeX[] is the same as SeeTeX[5] the first time that it is called. See also NoTeX,
+      KillTeX and Keep.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">anInteger </span>is an integer.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1. At this time, SeeTeX is
+      implemented by creating a directory called TeXSession. The directory TeXSession is
+      filled with files as the session continues. The files corresponding to the <span 
+class="cmmi-12">k</span>-the output
+      are master<span 
+class="cmmi-12">k</span>.tex and out<span 
+class="cmmi-12">k</span>.tex. The file master<span 
+class="cmmi-12">k</span>.tex is boring. The file out<span 
+class="cmmi-12">k</span>.tex contains
+      the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;for the output Out[k]. See also the command SeeTex. These files are kept
+      until the KillTeX[] command (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x9-1540005.4.3">5.4.3<!--tex4ht:ref: command:KillTeX --></a>) is invoked or until you reload NCAlgebra.m.
+      <span 
+class="cmbx-12">BEWARE LOADING NCAlgebra.m AUTOMATICALLY DELETES THE</span>
+      <span 
+class="cmbx-12">DIRECTORY </span>Also,  the  directory  contains  a  few  dvi  files  and  the  windows  are
+      produced  automatically  by  running  xdvi  on  master<span 
+class="cmmi-12">k</span>.dvi.  When  the  TeX  windows
+      are removed automatically, the corresponding dvi file is automatically removed. The
+      function Keep[<span 
+class="cmmi-12">k</span>] (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x9-1560005.4.5">5.4.5<!--tex4ht:ref: command:Keep --></a>) prevents master<span 
+class="cmmi-12">k</span>.dvi and the associated window from being
+      deleted.  </dd></dl>
+<a 
+ id="dx9-152001"></a>
+<!--l. 249--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.2   </span> <a 
+ id="x9-1530005.4.2"></a>NoTeX[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: NoTeX[] tells Mathematica to stop putting windows on the screen.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1. The command NoTeX[] stops
+      TeX files from being added to the directory TeXSession. It does not remove any files
+      from the directory TeXSession. BUG: If one does SeeTeX[4], then puts up 4 windows,
+      then NoTeX[], then SeeTeX[], the program forgets that the 4 windows are there. </dd></dl>
+<a 
+ id="dx9-153001"></a>
+<!--l. 258--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.3   </span> <a 
+ id="x9-1540005.4.3"></a>KillTeX[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  KillTeX[]  removes  all  of  the  files  in  the  directory  TeXSession.  See  also
+      SeeTeX(<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x9-1520005.4.1">5.4.1<!--tex4ht:ref: command:SeeTeX --></a>)
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: No arguments
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1 </dd></dl>
+<a 
+ id="dx9-154001"></a>
+<!--l. 272--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.4   </span> <a 
+ id="x9-1550005.4.4"></a>See[aListOfIntegers]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: See[aListOfIntegers]
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: See[aListOfIntegers] allows one to create a <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;file which displays multiple
+      Out statements. For example, See[<span 
+class="cmsy-10x-x-120">{</span>5,14,9<span 
+class="cmsy-10x-x-120">}</span>] creates a window with <span 
+class="cmtt-12">Out[5]=</span>, followed
+      by the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;form of Out[5],<span 
+class="cmtt-12">Out[14]=</span>, followed by the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;form of Out[14], <span 
+class="cmtt-12">Out[9]=</span>,
+      followed by the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;form of Out[9]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: <span 
+class="cmmi-12">aListOfIntegers </span>is a list of integers </dd></dl>
+<a 
+ id="dx9-155001"></a>
+<!--l. 273--><p class="noindent">Not available before NCAlgebra 2.1 If the See[<span 
+class="cmsy-10x-x-120">{</span>5,14,9<span 
+class="cmsy-10x-x-120">}</span>] command is invoked as the 19th command
+(e.g., In[19] := See[<span 
+class="cmsy-10x-x-120">{</span>5,14,9<span 
+class="cmsy-10x-x-120">}</span>]), then the TeXed formulas Out[5], Out[14] and Out[19] will be in the
+file master19.tex. This might help a user in writing a paper based on the session, since it can be
+used to bring together important formulas. This command requires that the SeeTeX be called
+before the use of See.
+<!--l. 298--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.5   </span> <a 
+ id="x9-1560005.4.5"></a>Keep[anInteger]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">Keep</span>[<span 
+class="cmmi-12">anInteger</span>] tells Mathematica that it should not automatically destroy
+      the window corresponding to the <span 
+class="cmmi-12">anInteger</span>th output.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">anInteger </span>is an integer.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1. The file master<span 
+class="cmmi-12">k</span>.dvi is also
+      kept. The TeX files are always kept whether or not you invoke Keep (WARNING: See
+      KillTeX (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x9-1540005.4.3">5.4.3<!--tex4ht:ref: command:KillTeX --></a>)).. This command requires that the SeeTeX be called before the use of
+      &#8220;See&#8221;. </dd></dl>
+<a 
+ id="dx9-156001"></a>
+
+<!--l. 310--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.6   </span> <a 
+ id="x9-1570005.4.6"></a>Kill[anInteger]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Kill[anInteger]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Kill[k] removes the window and the dvi file corresponding to Out[k].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  Not  available  before  NCAlgebra  2.1.  The  file  master<span 
+class="cmmi-12">k</span>.dvi  is
+      deleted.  This  command  requires  that  the  SeeTeX  be  called  before  the  use  of  the
+      command &#8220;See&#8221;. </dd></dl>
+<a 
+ id="dx9-157001"></a>
+<!--l. 313--><p class="noindent">The following two commmands require the loading of the file <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">Extra.TeXForm</span></span></span>.
+<!--l. 326--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.7   </span> <a 
+ id="x9-1580005.4.7"></a>LookAtMatrix[aMatrix]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: LookAtMatrix[aMatrix] takes the Mathematica matrix <span 
+class="cmti-12">aMatrix</span>, converts it to
+      <span class="TEX">T<span 
+class="E">E</span>X</span>  outputs the string and surrounding <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>to a file, TeXs the file and displays
+      the TeXed output to the screen using the program dvipage (this can be easily changed
+      to other previewers such as xdvi or xpreview).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aMatrix </span>is a matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Must have loaded the file Extra.TeXForm </dd></dl>
+<a 
+ id="dx9-158001"></a>
+
+<!--l. 340--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.8   </span> <a 
+ id="x9-1590005.4.8"></a>LookAtLongExpression[anExpression]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  LookAtLongExpression[anExpression]  takes  the  Mathematica  expression
+      <span 
+class="cmti-12">anExpression</span>, converts it to <span class="TEX">T<span 
+class="E">E</span>X</span> outputs the string and surrounding <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>to a file,
+      TeXs the file and displays the TeXed output to the screen using the program dvipage
+      (this can be easily changed to other previewers such as xdvi or xpreview).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">anExpression </span>is an expression
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Must have loaded the file Extra.TeXForm </dd></dl>
+<a 
+ id="dx9-159001"></a>
+
+<a 
+ id="dx9-159002"></a>
+
+   <!--l. 7--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch6.html" >next</a>] [<a 
+href="NCBIGDOCch4.html" >prev</a>] [<a 
+href="NCBIGDOCch4.html#tailNCBIGDOCch4.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch5.html" >front</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCch5.html" >up</a>] </p></div>
+<!--l. 7--><p class="indent">   <a 
+ id="tailNCBIGDOCch5.html"></a>     
+</body></html> 

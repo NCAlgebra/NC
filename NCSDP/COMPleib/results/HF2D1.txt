@@ -1,0 +1,130 @@
+Mathematica 8.0 for Mac OS X x86 (64-bit)
+Copyright 1988-2011 Wolfram Research, Inc.
+
+In[1]:= 
+Out[1]= {stdout}
+
+In[2]:= SetOptions[$Output,PageWidth->80];
+
+In[3]:= 
+In[3]:= (* ADJUST YOUR DIRECTORY SETTINGS HERE! *)
+
+In[4]:= SetDirectory[$HomeDirectory <> "/work/projects/ipsolver"]
+
+Out[4]= /Users/mauricio/work/projects/ipsolver
+
+In[5]:= 
+In[5]:= << SDP`
+
+In[6]:= << SDPSylvester`
+
+In[7]:= 
+In[7]:=                         SolveProblem[fileName_, solution_, stream_, results_] := Module[
+  {
+    maxTimeSDP = 1800, (* Seconds allowed to finish SDP *)
+    time1 = 0, time2 = 0, (* Used for timing *)
+    out, (* output from SDPSolve calls *)
+    Id, Ze
+  },
+
+  WriteString[stream, "Running... ", fileName, "\n"];
+  
+  (* Load problem file *)
+  Get[fileName];
+
+  WriteString[stream, \
+              (nx*(nx+1))/2+(nz*(nz+1))/2+nx*nu, " variables. W is ", nz, \
+              "x", nz, ", L is ", nu, "x", nx, ", X is ", nx, "x", nx, "\n"];
+
+  (* Setup Leibfritz H_2 problem *)
+
+  Id[n_] := IdentityMatrix[n] // N;
+  Ze[m_, n_] := ConstantArray[0, {m, n}] // N;
+
+  C1X = ArrayFlatten[{{C1}, {Ze[nx, nx]}}];
+  IdX = ArrayFlatten[{{Ze[nz, nx]}, {Id[nx]}}];
+  D12L = ArrayFlatten[{{D12}, {Ze[nx, nu]}}];
+  IdW = ArrayFlatten[{{Id[nz]}, {Ze[nx, nz]}}];
+
+  AA = {
+     (* A X + B L + 0 W < -B1 B1^T *)
+     {
+       {2 A, Id[nx]}, 
+       {2 B, Id[nx]}, 
+       {Ze[nx, nz], Ze[nz, nx]}
+     },
+     (* -[W, C1 X + L D12; X C1^T + D12^T L^T X] < 0 *)
+     {
+       {ArrayFlatten[{{-IdX, -2 C1X}}],
+        ArrayFlatten[{{Transpose[IdX], Transpose[IdX]}}]},
+       {-2 D12L, Transpose[IdX]}, 
+       {- IdW, Transpose[IdW]}
+     }
+   };
+  CC = {-B1.Transpose[B1], Ze[nx + nz, nx + nz]};
+  BB = {Ze[nx, nx], Ze[nu, nx], -Id[nz]};
+
+  (* Run the algorithm *)
+
+  WriteString[stream, "Starting SDP Solver...\n"];
+
+  time1 = TimeUsed[];
+
+  out = TimeConstrained[
+          SDPSolve[{AA, BB, CC}, 
+                   SymmetricVariables -> {1, 3}, 
+                   DebugLevel -> 0],
+          maxTimeSDP 
+        ];
+
+  time2 = TimeUsed[];
+
+  WriteString[stream, "Done.\n"];
+
+  If [ out === $Aborted, 
+
+     Print["Can't optimize in ", maxTimeSDP, " seconds."];
+     WriteString[stream, "Can't optimize in ", maxTimeSDP, \
+                 " seconds.\n\n\n"];
+
+     status = "TIMEOUT";
+
+    ,
+
+     status = "SUCCESS";
+
+  ];
+
+  (* Write results *)
+  PutAppend[{fileName, DateString[], status, time2-time1,
+             $MachineName, $MachineType, $ProcessorType}, results];
+
+  (* Write solution *)
+  Put[out, solution];
+
+  Return[];
+
+];
+
+In[8]:= 
+In[8]:= (* Extract problem to run from input line *)
+
+In[9]:= 
+In[9]:= problemCode = ToFileName["COMPleib", $CommandLine[[2]]];
+
+In[10]:= solutionFileName = ToFileName["COMPleib", $CommandLine[[3]]];
+
+In[11]:= outputFileName = ToFileName["COMPleib", $CommandLine[[4]]];
+
+In[12]:= resultsFileName = ToFileName["COMPleib", $CommandLine[[5]]];
+
+In[13]:= 
+In[13]:= outputStream = If[ FileExistsQ[outputFileName], 
+                   OpenAppend[outputFileName], 
+                   OpenWrite[outputFileName] ];
+
+In[14]:= SetOptions[outputStream, FormatType -> StandardForm];
+
+In[15]:= 
+In[15]:= SolveProblem[ problemCode <> ".m", solutionFileName, 
+              outputStream, resultsFileName ];

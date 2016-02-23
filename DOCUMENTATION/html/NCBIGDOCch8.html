@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>8  Introduction</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 2--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch9.html" >next</a>] [<a 
+href="#tailNCBIGDOCch8.html">tail</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch8.html" >up</a>] </p></div>
+
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;8</span><br><a 
+ id="x15-1770008"></a> Introduction</h2>
+<!--l. 4--><p class="noindent">We think of this package as being useful for at least 4 things:
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">1. Simplifying complicated expressions (Chapter <a 
+href="NCBIGDOCch9.html#x16-1780009">9<!--tex4ht:ref: chapter:simple:demos --></a>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">2. Eliminating unknowns from collections of polynomial equations and sorting the result.
+      Indeed the package is aimed at discovering algebraic theorems and appealing formulas
+      semi-automatically (Chapters <a 
+href="NCBIGDOCch16.html#x37-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a> and <a 
+href="NCBIGDOCch15.html#x33-21000015">15<!--tex4ht:ref: chapter:ncprocess:command --></a> with examples in Chapters <a 
+href="NCBIGDOCch14.html#x28-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a> and <a 
+href="NCBIGDOCch17.html#x44-23600017">17<!--tex4ht:ref: chapter:doyle:glover --></a>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">3. Finding small bases for ideals in a noncommuting algebra (Chapter <a 
+href="NCBIGDOCch21.html#x50-30600021">21<!--tex4ht:ref: chapter:smallbasis --></a>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">4. Producing Groebner Bases in noncommuting situations (Chapter <a 
+href="NCBIGDOCch9.html#x16-1780009">9<!--tex4ht:ref: chapter:simple:demos --></a></dd></dl>
+<!--l. 28--><p class="indent">   This package can be used with the NCAlgebra package to add powerful automatic methods for
+handling collections of equations in noncommuting variables.
+<!--l. 32--><p class="indent">   Most commutative algebra packages contain commands based on Gröbner Bases and uses of
+Gröbner Basis. For example, in Mathematica, the Solve command puts collections of equations in a
+&#8220;canonical&#8221; form which, for simple collections, readily yields a solution. Likewise, the
+Mathematica Eliminate command tries to convert a collection of polynomial equations (e.g.,
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub>(<span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">n</span></sub>) = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">}</span>) in unknowns <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">x</span><sub ><span 
+class="cmmi-8">n</span></sub> to a &#8220;triangular&#8221; form in unknowns, that
+is, a new collection of equations like <div class="eqnarray">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC54x.png" alt="         q1(x1) = 0                                 (8.1)
+      q2(x1,x2) = 0                                 (8.2)
+
+      q3(x1,x2) = 0                                 (8.3)
+
+   q4(x1,x2,x3) = 0                                 (8.4)
+
+                ...                                 (8.5)
+qk2(x1,...,xn) = 0.                                 (8.6)
+" class="math-display" ></center>
+</div>Here the polynomials <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmmi-8">j</span></sub> : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">} </span>generate the same ideal that the polynomials
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">} </span>generate. Therefore, the set of solutions to the collection of polynomial equations
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">p</span><sub ><span 
+class="cmmi-8">j</span></sub> = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">} </span>equals the set of solutions to the collection of polynomial equations
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">q</span><sub ><span 
+class="cmmi-8">j</span></sub> = 0 : 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">k</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">}</span>. This canonical form greatly simplifies the task of solving collections of
+polynomial equations by facilitating backsolving for <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmmi-8">j</span></sub> in terms of <span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">j</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub>.
+<!--l. 81--><p class="indent">   The user who is not acquainted at all with Gröbner Basis should still be able to read and use
+most of the material which is contained within this document.
+<!--l. 86--><p class="indent">   In <span 
+class="cmbx-12">[FMora], c.f. [TMora]</span>, F. Mora described a version of the Gröbner basis algorithm which
+applies to noncommutative free algebras. We refer to this algorithm as Mora&#8217;s algorithm and as
+the Gröbner Basis Algorithm. This strategy also puts collections of equations into a
+&#8220;canonical form&#8221; which we believe has considerable possibilities in the noncommutative
+case.
+<!--l. 149--><p class="noindent"><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;</span><span 
+class="cmbx-12x-x-144">&#x00A0;How to read this document</span> <a 
+ id="Q1-15-182"></a>
+<!--l. 154--><p class="indent">   To learn how to install the program or use someone else&#8217;s installation, read Chapter <span 
+class="cmbx-12">??</span> or
+Chapter <span 
+class="cmbx-12">??</span>.
+<!--l. 160--><p class="indent">   The first thing you should do is read Part 1 to see examples of the basic commands.
+<!--l. 164--><p class="indent">   If you are interested in simplification of expressions, you should read Chapter <a 
+href="NCBIGDOCch9.html#x16-1780009">9<!--tex4ht:ref: chapter:simple:demos --></a>. Simplification
+is discussed in the papers <span 
+class="cmbx-12">[HW] </span>and <span 
+class="cmbx-12">[HSW]</span>.
+<!--l. 169--><p class="indent">   If you are interested in proving theorems and want to understand the ideas, you should read
+Chapter <a 
+href="NCBIGDOCch16.html#x37-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a>.
+<!--l. 175--><p class="indent">   If you are interested in proving theorems and want to see examples, you should read
+Chapter&#x00A0;<a 
+href="NCBIGDOCch14.html#x28-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>. and Chapter&#x00A0;<a 
+href="NCBIGDOCch17.html#x44-23600017">17<!--tex4ht:ref: chapter:doyle:glover --></a> to see examples of the software in action.
+<!--l. 183--><p class="indent">   If you want to understand the commands which were used to do the example in Chapter <a 
+href="NCBIGDOCch14.html#x28-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>,
+then read Chapter <a 
+href="NCBIGDOCch15.html#x33-21000015">15<!--tex4ht:ref: chapter:ncprocess:command --></a>.
+<!--l. 188--><p class="indent">   If you want to compute Gröbner Bases, read Chapter <a 
+href="NCBIGDOCch9.html#x16-1820009.3">9.3<!--tex4ht:ref: chapter:making:basis --></a> or read Chapter <a 
+href="NCBIGDOCch20.html#x49-28100020">20<!--tex4ht:ref: section:complicated:order:maintenance --></a> without first
+reading anything else.
+
+<!--l. 193--><p class="indent">   In addition,
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">(1)  The  computer  commands  given  in  the  text  are  generally  shown  in  verbatim  (e.g.,
+      <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>) or italics.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(2) The Mathematica variables are in bold face (e.g., <span 
+class="cmbx-12">MathVariable</span>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(3) Filenames are in bold face (e.g., <span 
+class="cmbx-12">output.txt</span>). </dd></dl>
+
+   <!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch9.html" >next</a>] [<a 
+href="NCBIGDOCch8.html" >front</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch8.html" >up</a>] </p></div>
+<!--l. 3--><p class="indent">   <a 
+ id="tailNCBIGDOCch8.html"></a>  
+</body></html> 

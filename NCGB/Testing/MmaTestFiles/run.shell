@@ -1,0 +1,2269 @@
+Mathematica 2.0 for SPARC
+Copyright 1988-91 Wolfram Research, Inc.
+NCMultiplication.m loaded
+NC1SetCommands.m loaded
+NCInverses.m loaded
+NCTransposes.m loaded
+NCAdjoints.m loaded
+NCRoots.m loaded
+NCSetRule.m loaded
+NCPInverses.m loaded
+NCCollect.m loaded
+NCComplex.m loaded
+NCCo.m loaded
+NCDoTeX.m loaded
+NCSchur.m loaded
+NCSubstitute.m loaded
+NCMono.m loaded
+NCSolve.m loaded
+NCMatMult.m loaded
+Done setting stubs for NCNagyFoias files.
+
+NC2SimplifyRational.m loaded
+NC1SimplifyRational.m loaded
+NC0SimplifyRational.m loaded
+NCSimplifyRational.m loaded
+NCDiff.m loaded
+NCAliasFunctions.m loaded
+NCAlias.m loaded
+
+Setting stubs for Groebner basis files.
+Setting PROPOGATE REDUCTION to False
+Done setting stubs for Groebner basis files.
+
+ 
+
+                       NCALGEBRA
+                       Version 1.1   
+     J. William Helton              Robert L. Miller
+      Math Dept, UCSD             General Atomic Corp.
+              La  Jolla,  California 92093
+  Copyright Helton and Miller June 1991 all rights reserved.
+ 
+ If you want updates contact ncalg@osiris.ucsd.edu.
+ 
+ The program was written by the authors and by 
+ Mark Stankus, David Hurst, Daniel Lamm, Orlando Merino, Robert Obarr, 
+ Henry Pfister, Mike Walker, John Wavrik, and Lois Yu.
+ The beginnings of the program come from eran@slac.
+ This program was written with support from the AFOSR, the NSF, 
+ the Lab for Math and Statistics at UCSD and the UCSD Faculty
+ Mentor Program and the US Department of Education.
+ 
+
+ If you (1) are a user, (2) want to be a user, (3) refer to NCAlgebra 
+ in a publication, or (4) have had an interesting experience with NCAlgebra 
+ let us know by sending an e-mail message to  
+                 ncalg@osiris.ucsd.edu. 
+ We do not want to restrict access to NCAlgebra, but do want to 
+ keep track of how it is being used. 
+
+ 
+Please use NCMakeRules rather than MorasAlgorithm in the future.
+Setting PROPOGATE REDUCTION to False
+NCSCleanUpRules :-) Entering
+18 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+NCSCleanUpRules :-) Exiting
+MoraMany :-) About to execute the 1th step
+MoraOneStep :-) Starting
+About to compute 16 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+24 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (24 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+y ** inv1y -> -1 + inv1y
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1y -> invy + inv1y
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1y ** y -> -1 + inv1y
+inv1y ** invy -> invy + inv1y
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1y -> -inv1yx + inv1yx ** inv1y
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1y ** x ** inv1yx -> -inv1y + inv1y ** inv1yx + x ** inv1yx
+
+
+
+Polynomials to be matched (8 elements). 
+
+invx ** inv1x -> invx + inv1x
+invy ** inv1y -> invy + inv1y
+inv1x ** invx -> invx + inv1x
+inv1y ** invy -> invy + inv1y
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+y ** inv1xy ** inv1y -> -inv1yx + inv1yx ** inv1y
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1y ** x ** inv1yx -> -inv1y + inv1y ** inv1yx + x ** inv1yx
+
+ 
+
+MoraMany :-) About to execute the 2th step
+MoraOneStep :-) Starting
+About to compute 24 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+32 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (32 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+y ** inv1y -> -1 + inv1y
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1y -> invy + inv1y
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1y ** y -> -1 + inv1y
+inv1y ** invy -> invy + inv1y
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+x ** inv1yx ** inv1y -> -inv1y + inv1xy ** inv1y + x ** inv1yx
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+y ** inv1xy ** inv1y -> -inv1yx + inv1yx ** inv1y
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx - inv1x ** inv1y + inv1x ** inv1yx + inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1y
+inv1y ** x ** inv1yx -> -inv1y + inv1y ** inv1yx + x ** inv1yx
+inv1y ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1y ** inv1x - inv1y ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1y ** inv1yx + inv1y ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y
+
+
+
+Polynomials to be matched (8 elements). 
+
+x ** inv1yx ** inv1y -> -inv1y + inv1xy ** inv1y + x ** inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx - inv1x ** inv1y + inv1x ** inv1yx + inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1y ** inv1x - inv1y ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1y ** inv1yx + inv1y ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y
+
+ 
+
+MoraMany :-) About to execute the 3th step
+MoraOneStep :-) Starting
+About to compute 32 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+42 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (42 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+y ** inv1y -> -1 + inv1y
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1y -> invy + inv1y
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1y ** y -> -1 + inv1y
+inv1y ** invy -> invy + inv1y
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+x ** inv1yx ** inv1y -> -inv1y + inv1xy ** inv1y + x ** inv1yx
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+y ** inv1xy ** inv1y -> -inv1yx + inv1yx ** inv1y
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx - inv1x ** inv1y + inv1x ** inv1yx + inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1y
+inv1y ** x ** inv1yx -> -inv1y + inv1y ** inv1yx + x ** inv1yx
+inv1y ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1y ** inv1x - inv1y ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1y ** inv1yx + inv1y ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1xy ** inv1xy ** inv1y + x ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx - inv1x ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1y ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1y
+
+
+
+Polynomials to be matched (10 elements). 
+
+x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1xy ** inv1xy ** inv1y + x ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+inv1x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx - inv1x ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1y ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1y
+
+ 
+
+MoraMany :-) About to execute the 4th step
+MoraOneStep :-) Starting
+About to compute 42 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+58 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (58 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+y ** inv1y -> -1 + inv1y
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1y -> invy + inv1y
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1y ** y -> -1 + inv1y
+inv1y ** invy -> invy + inv1y
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+x ** inv1yx ** inv1y -> -inv1y + inv1xy ** inv1y + x ** inv1yx
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+y ** inv1xy ** inv1y -> -inv1yx + inv1yx ** inv1y
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx - inv1x ** inv1y + inv1x ** inv1yx + inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1y
+inv1y ** x ** inv1yx -> -inv1y + inv1y ** inv1yx + x ** inv1yx
+inv1y ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1y ** inv1x - inv1y ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1y ** inv1yx + inv1y ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1xy ** inv1xy ** inv1y + x ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx - inv1x ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1y ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx - inv1x ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+
+
+
+Polynomials to be matched (16 elements). 
+
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx - inv1x ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+
+ 
+
+MoraMany :-) About to execute the 5th step
+MoraOneStep :-) Starting
+About to compute 58 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+90 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (90 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+y ** inv1y -> -1 + inv1y
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1y -> invy + inv1y
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1y ** y -> -1 + inv1y
+inv1y ** invy -> invy + inv1y
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+x ** inv1yx ** inv1y -> -inv1y + inv1xy ** inv1y + x ** inv1yx
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+y ** inv1xy ** inv1y -> -inv1yx + inv1yx ** inv1y
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx - inv1x ** inv1y + inv1x ** inv1yx + inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1y
+inv1y ** x ** inv1yx -> -inv1y + inv1y ** inv1yx + x ** inv1yx
+inv1y ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1y ** inv1x - inv1y ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1y ** inv1yx + inv1y ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1y + inv1xy ** inv1xy ** inv1y + x ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx - inv1x ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1y ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1y + inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx - inv1x ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1x -> -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1y -> -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1y + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1y + x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1x -> -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1x + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1x + y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1y -> -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1x + inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1y + inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x + inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x - inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1y + inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx + inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1y + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1x + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx - inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy + inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x - inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1y + inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1y + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+
+
+
+Polynomials to be matched (32 elements). 
+
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1x -> -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1y -> -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1y + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1y + x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1x -> -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1x + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1x + y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1y -> -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1x + inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx - 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1y + inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x + inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x - inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1y + inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx + inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1y + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1x + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1y
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx - inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y + 
+ 
+>    inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1y + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1x -> 
+ 
+>   inv1xy - inv1xy ** inv1x + inv1xy ** inv1xy + inv1y ** inv1x - 
+ 
+>    inv1y ** inv1xy - inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy + inv1y ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy - 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1x + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy + inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x - 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy - inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1x - inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1x
+inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1y + inv1y ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1yx + 
+ 
+>    inv1y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1y
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>    inv1yx ** inv1yx ** inv1y -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>      inv1xy ** inv1y + inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1y + 
+ 
+>    x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>     inv1xy ** inv1xy ** inv1xy
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** 
+ 
+>    inv1xy ** inv1xy ** inv1y -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>      inv1yx ** inv1yx + inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** 
+ 
+>     inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1y
+
+ 
+
+NCSCleanUpRules :-) Entering
+90 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90
+NCSCleanUpRules :-) Exiting
+Please use NCMakeRules rather than MorasAlgorithm in the future.
+Setting PROPOGATE REDUCTION to False
+NCSCleanUpRules :-) Entering
+10 to check :-)
+1,2,3,4,5,6,7,8,9,10
+NCSCleanUpRules :-) Exiting
+MoraMany :-) About to execute the 1th step
+MoraOneStep :-) Starting
+About to compute 10 matches.
+1,2,3,4,5,6,7,8,9,10
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+20 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+18 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (18 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+
+ 
+
+MoraMany :-) About to execute the 2th step
+MoraOneStep :-) Starting
+About to compute 18 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+21 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (21 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+
+
+
+Polynomials to be matched (3 elements). 
+
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+
+ 
+
+MoraMany :-) About to execute the 3th step
+MoraOneStep :-) Starting
+About to compute 21 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+24 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (24 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+inv1x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy
+
+
+
+Polynomials to be matched (3 elements). 
+
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy
+
+ 
+
+MoraMany :-) About to execute the 4th step
+MoraOneStep :-) Starting
+About to compute 24 matches.
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+MoraOneStep :-) Exiting
+NCSCleanUpRules :-) Entering
+30 to check :-)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30
+NCSCleanUpRules :-) Exiting
+
+ 
+
+Basis generated so far (30 elements). 
+
+x ** invx -> 1
+x ** inv1x -> -1 + inv1x
+y ** invy -> 1
+invx ** x -> 1
+invx ** inv1x -> invx + inv1x
+invx ** inv1xy -> invx + y ** inv1xy
+invy ** y -> 1
+invy ** inv1yx -> invy + x ** inv1yx
+inv1x ** x -> -1 + inv1x
+inv1x ** invx -> invx + inv1x
+inv1xy ** x -> x ** inv1yx
+inv1xy ** invy -> invy + x ** inv1yx
+inv1yx ** y -> y ** inv1xy
+inv1yx ** invx -> invx + y ** inv1xy
+x ** y ** inv1xy -> -1 + inv1xy
+x ** inv1yx ** inv1x -> -inv1xy + inv1xy ** inv1x
+y ** x ** inv1yx -> -1 + inv1yx
+y ** inv1xy ** inv1x -> -inv1x + inv1yx ** inv1x + y ** inv1xy
+inv1x ** y ** inv1xy -> -inv1x + inv1x ** inv1xy + y ** inv1xy
+inv1x ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy + inv1yx ** inv1x + inv1x ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1x + inv1yx ** inv1yx ** inv1x + y ** inv1xy ** inv1xy
+inv1x ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy + inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1x + inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+
+
+
+Polynomials to be matched (6 elements). 
+
+x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy + inv1xy ** inv1xy ** inv1xy ** inv1x
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1x
+x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+inv1x ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x -> 
+ 
+>   -inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1x ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x
+y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1x -> 
+ 
+>   -inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1yx ** inv1x + 
+ 
+>    y ** inv1xy ** inv1xy ** inv1xy ** inv1xy ** inv1xy
+
+ 
+
+MoraMany :-) About to execute the 5th step
+MoraOneStep :-) Starting
+About to compute 30 matches.
+1,2,3,4,5,6,7,8,9,

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.9 NCGuts</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1847--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse20.html" >next</a>] [<a 
+href="NCBIGDOCse18.html" >prev</a>] [<a 
+href="NCBIGDOCse18.html#tailNCBIGDOCse18.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse19.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse19.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.9   </span> <a 
+ id="x27-1010004.9"></a>NCGuts</h3>
+<a 
+ id="dx27-101001"></a>
+<!--l. 1851--><p class="noindent">This section details the command NCGuts, which expands the meaning of &#8220;**&#8221;, tp[], and
+inv[].
+<!--l. 1865--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.9.1   </span> <a 
+ id="x27-1020004.9.1"></a>NCStrongProduct1</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: NCStrongProduct1 is an option of NCGuts. When True, ** serves to multiply
+      matrices as well as maintaining its original function with noncommutative entries. This
+      replaces the command MatMult. For example,
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC50x.png" alt="MatMult[{{a,  b},{c, d}},{{x}, {y}}]
+      " class="math-display" ></center> is the same as
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC51x.png" alt="{{a,b}, {c,d}} * *{{x}, {y}}.
+      " class="math-display" ></center> In addition, <span 
+class="cmmi-12">tp </span>and tpMat are the same. NCStrongProduct1 <span 
+class="cmsy-10x-x-120">&#x2192; </span>False is the default.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx27-102001"></a>
+<!--l. 1880--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.9.2   </span> <a 
+ id="x27-1030004.9.2"></a>NCStrongProduct2</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   NCStrongProduct2   is   an   option   of   NCGuts.   When   set   to   true,
+      if   <span 
+class="cmmi-12">m  </span>is   a   matrix   with   noncommutative   entries,   inv[m]   returns   a   formula
+      expression   for   the   inverse   of   <span 
+class="cmmi-12">m</span>.   The   considerable   limitations   of   NCInverse
+      are  still  limitations  in  inv[m].  NCStrongProduct2  forces  NCStrongProduct1.  In
+      other  words,  NCGuts[NCStrongProduct2-¿True]  makes  &#8221;**&#8221;  multiply  matrices
+      with   noncommutative   entries,   just   as   NCGuts[NCStrongProduct1-¿True]   does.
+      NCStrongProduct2 <span 
+class="cmsy-10x-x-120">&#x2192; </span>False is the default.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+
+<a 
+ id="dx27-103001"></a>
+<!--l. 1890--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.9.3   </span> <a 
+ id="x27-1040004.9.3"></a>NCSetNC</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  NCSetNC  is  an  option  of  NCGuts.  When  set  to  false,  all  letters  are
+      automatically  noncommutative  unless  SetCommutative  makes  them  commutative.
+      NCSetNC <span 
+class="cmsy-10x-x-120">&#x2192; </span>False is the default.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx27-104001"></a>
+
+   <!--l. 1892--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse20.html" >next</a>] [<a 
+href="NCBIGDOCse18.html" >prev</a>] [<a 
+href="NCBIGDOCse18.html#tailNCBIGDOCse18.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse19.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse19.html" >up</a>] </p></div>
+<!--l. 1892--><p class="indent">   <a 
+ id="tailNCBIGDOCse19.html"></a>   
+</body></html> 

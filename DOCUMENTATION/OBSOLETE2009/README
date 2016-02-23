@@ -1,0 +1,95 @@
+
+This directory should contain 1 or more "dvi" (device independent) 
+or "ps" (postscript) files
+and some notebooks which can be executed as demos
+or simply read.
+These can be printed out
+on a laser printer. For example, type
+
+lpr NCDOCUMENT.ps
+
+to printout the NCDOCUMENT.ps. 
+
+The "dvi" version and the "ps" versions are the same --
+they are just in different file formats.
+  
+  If you interested in NCAlgebra, but not NCGB, then
+printout  NCDOCUMENT.dvi or NCDOCUMENT.ps,
+but not any part of NCGBDOCUMENT.dvi or NCGBDOCUMENT.ps.
+
+  If you interested in both NCAlgebra and NCGB, then
+printout NCDOCUMENT.dvi or NCDOCUMENT.ps
+and print out NCGBDOCUMENT.dvi or NCGBDOCUMENT.ps.
+
+
+
+WHAT TO DO NEXT:
+   Go up to the NC/ directory by typing
+
+cd ../
+
+form there you can run the package by following the document.
+The basic idea is
+Enter Mma, 
+Load SetNCPath.m, (you have to edit it if you are running outside 
+                   the NC directory)  
+Load NCAlgebra.m,
+open NCPalette.nb, go to the  Demo submenu of the main menu
+which opens up,
+
+
+------------------------------------------------
+
+SOME OF THE DEMOS=  
+
+In this directory they are postscript files.
+These can be read (ghostview)  or printed out, but not executed.
+The executable notebooks are in the NCAlgeba and NCGB directory.
+They can be run from Demo menu in NCPalette.nb.
+
+----------------
+
+NCALGEBRA
+
+
+DemoSimplify.ps - Demonstrates basic NCAlgebra commands
+                  in the context of making a complicated 
+                  expression simpler. More economical
+                  simplification is achieved with NCGB software.
+
+
+DemoBRL.ps    - Demonstrates basic NCAlgebra application to
+             optimizing noncommutative Hamiltonians
+             and there by proves the famous Bounded Real Lemma.
+
+
+
+
+-----------
+
+NCGB  YOU NEED OUR C++ coding to USE THIS --NOT ON MATH SOURCE
+
+
+DemoGB1.ps - Gives a gentle intro example for NCGB.
+DemoGB1A.ps - is the answer ( TeXed) which is generated.
+
+
+
+
+
+DemoGBM.ps - Demonstates eliminating unknowns from systems of equations.
+                via  Groebner basises. This can be used to present
+                NCommutative Groebner Bases. 
+DemoGBMA.ps - is the answer ( TeXed) which is generated.
+
+
+
+DmGBG1.ps - An example in group theory. It shows a particular
+            word in a group is actually the identity.
+            It demonstrates NCSimplifyAll[ , , ].
+
+
+DmGBG2.ps - An example in group theory. It selects two groups
+            and shows they are equal.
+
+DmGBG2A1.ps , DmGBG1A2.ps - are the answers ( TeXed) which are generated.

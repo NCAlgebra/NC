@@ -1,0 +1,20 @@
+test[Lazy,1] = 
+     LazyCollapseLazyPower[LazyPower[x,n]**LazyPower[x,m]]==
+        LazyPower[x,m+n]; 
+test[Lazy,2] = 
+     LazyCollapseLazyPower[w**LazyPower[x,n]**LazyPower[x,m]]==
+        w**LazyPower[x,m+n]; 
+test[Lazy,3] = 
+     LazyCollapseLazyPower[LazyPower[x,w]**LazyPower[x,n]**LazyPower[x,m]]==
+        LazyPower[x,w+m+n]; 
+test[Lazy,4] = 
+     LazyCollapseLazyPower[LazyPower[x,w]->LazyPower[x,t]] ==
+        LazyPower[x,w]->LazyPower[x,t]
+test[Lazy,5] = 
+     LazyCollapseLazyPower[LazyPower[x,beta]**LazyPower[x,w]:>
+                           LazyPower[x,t]
+                          ] == LazyPower[x,w+beta]:>LazyPower[x,t]
+
+Print["Results from the file Lazy.NCTest"];
+Do[ Print["Test #",i," was ",test[Lazy,i]]
+,{i,5}];

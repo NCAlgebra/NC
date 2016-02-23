@@ -1,0 +1,5 @@
+
+SetMonomialOrder[{a,b,c,d,e,f,g,h,i,j,k,l,m,n,ia,inva},1];
+SNC[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,ia,inva,invb,ib,ic,id,ie,if];
+data = {a**ia - 1, ia**a - 1, ia - inva,m** m**m**a - n};
+ans = NCMakeGB[data,10];

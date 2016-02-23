@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>15.4 Typical use of the NCProcess command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 495--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse53.html" >next</a>] [<a 
+href="NCBIGDOCse51.html" >prev</a>] [<a 
+href="NCBIGDOCse51.html#tailNCBIGDOCse51.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse52.html">tail</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse52.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">15.4   </span> <a 
+ id="x87-22100015.4"></a>Typical use of the NCProcess command</h3>
+<!--l. 498--><p class="noindent">Now we demonstrate the <span 
+class="cmmi-12">NCProcess </span>command by &#8220;solving&#8221; <span 
+class="cmmi-12">FAC </span>as already discussed in Chapter
+<a 
+href="NCBIGDOCch14.html#x72-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>. While we show an interactive session the user probably will want to type the commands into a
+file and load them into your session. This is standard practice among Mathematica users and saves
+lots of time.
+<!--l. 506--><p class="indent">   As shown in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse46.html#x74-20600014.2">14.2<!--tex4ht:ref: subsection:problem --></a>, the prestrategy starts as follows.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=Get["NCGB.m"];
+&#x00A0;<br />In[2]:=SetNonCommutative[A,B,C0,m1,m2,n1,n2];
+&#x00A0;<br />In[3]:=SetKnowns[A,B,C];
+&#x00A0;<br />In[4]:=SetUnknowns[m1,m2,n1,n2,a,b,c,e,f,g];
+&#x00A0;<br />In[5]:=FAC&#x00A0;=&#x00A0;{A**m1&#x00A0;-&#x00A0;m1**a&#x00A0;-&#x00A0;m2**f**c,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A**m2&#x00A0;-&#x00A0;m2**e,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;-&#x00A0;m1**b&#x00A0;-&#x00A0;m2**f,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-c&#x00A0;+&#x00A0;C0**m1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-g&#x00A0;+&#x00A0;C0**m2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n1**m1&#x00A0;-&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n1**m2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n2**m1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n2**m2&#x00A0;-&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1**n1&#x00A0;+&#x00A0;m2**n2&#x00A0;-&#x00A0;1};
+&#x00A0;<br />In[6]:=&#x00A0;result&#x00A0;=&#x00A0;NCProcess1[FAC,2,"Spreadsheet1"];
+</div>
+</td></tr></table>
+<!--l. 526--><p class="nopar">
+<!--l. 530--><p class="indent">   The first command simply loads the noncommutative Gröbner basis package into Mathematica.
+Then we set the variables to be noncommutative.
+<!--l. 534--><p class="indent">   The third and fourth commands sets the monomial order that will be used in solving for and
+eliminating variables as explained in Chapter <a 
+href="NCBIGDOCch18.html#x108-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>. The list <span 
+class="cmbx-12">FAC </span>is the set of relations that describe
+the problem as explained in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse46.html#x74-20600014.2">14.2<!--tex4ht:ref: subsection:problem --></a>. The call to <span 
+class="cmmi-12">NCProcess</span>1 will run two iterations on <span 
+class="cmbx-12">FAC </span>before
+creating the file &#8220;Spreadsheet1.dvi&#8221; and returning the final <span 
+class="cmbx-12">result </span>as Mathematica
+output.
+<!--l. 550--><p class="indent">   The file &#8220;Spreadsheet1.dvi&#8221; is the same as the one which was produced in Chapter <a 
+href="NCBIGDOCch16.html#x91-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a>. It exists
+outside of Mathematica and is only for viewing. It cannot be used to create a list of polynomials
+for Mathematica. The strategy that the user follows at this point was described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse47.html#x75-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a>. Recall
+that it led the user to select the relations
+   <center class="math-display" >
+<img 
+src="NCBIGDOC72x.png" alt="m1  n1 - P1, n1m1  - 1, n2 m2 - 1, m2 n2 - 1 + m1  n1   " class="math-display" ></center> and
+to declare the new variable <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> to be known.
+
+<!--l. 561--><p class="indent">   Next we describe how this is input to <span 
+class="cmmi-12">NCProcess</span>1 in order to produce the second spreadsheet
+from <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse47.html#x75-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a>.
+<!--l. 564--><p class="indent">   The Mathematica output of any of the <span 
+class="cmmi-12">NCProcess </span>commands is a list containing three lists. In
+the example above, that list is named <span 
+class="cmbx-12">result</span>. Recall that in Mma the way to get sublist number <span 
+class="cmmi-12">j</span>
+inside <span 
+class="cmbx-12">result </span>is to type <span 
+class="cmmi-12">result</span>[[<span 
+class="cmmi-12">j</span>]].
+<!--l. 569--><p class="indent">   The second round of this strategy session is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[7]:=&#x00A0;SetKnowns[A,B,C,P1];
+&#x00A0;<br />In[8]:=&#x00A0;digested&#x00A0;=&#x00A0;result[[2]]
+&#x00A0;<br />In[9]:=&#x00A0;undigested&#x00A0;=&#x00A0;result[[3]]
+&#x00A0;<br />In[10]:=&#x00A0;interesting&#x00A0;=&#x00A0;{m1**n1-P1,n1**m1-1,n2**m2-1,m2**n2-1+m1**n1};
+&#x00A0;<br />In[11]:=&#x00A0;nextinput&#x00A0;=&#x00A0;Union[digested,interesting,undigested]
+&#x00A0;<br />In[12]:=&#x00A0;NCProcess1[nextinput,2,"Spreadsheet2",
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;UserSelect-&gt;discovered,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DegreeCap-&gt;3,DegreeSumCap-&gt;6];
+</div>
+</td></tr></table>
+<!--l. 582--><p class="nopar">
+<!--l. 586--><p class="indent">   Now we discuss the input to <span 
+class="cmmi-12">NCProcess</span>1 above. The variables <span 
+class="cmbx-12">digested </span>and <span 
+class="cmbx-12">undigested </span>hold
+the the last two lists from the list <span 
+class="cmbx-12">result </span>which the first <span 
+class="cmmi-12">NCProcess</span>1 command returned, and
+<span 
+class="cmbx-12">discovered </span>includes the new definition of <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub>. The union of these three lists is taken as the input
+for the second <span 
+class="cmmi-12">NCProcess</span>1 run. Once again we used two iterations. This is a good number of
+iterations with which to start. More iterations can be used if there is a lack of progress. The
+next argument is a string which refers to a file name which will store the spreadsheet.
+Unlike the first call to <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>, this call uses non-default values for the options.
+The <span 
+class="cmmi-12">UserSelect </span>option (as described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse51.html#x86-21600015.3.1">15.3.1<!--tex4ht:ref: subsection:userselect --></a>) causes the <span 
+class="cmbx-12">discovered </span>relations to
+be given high priority. The DegreeCaps are set in order to save time (as explained in
+<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse51.html#x86-21700015.3.2">15.3.2<!--tex4ht:ref: subsection:degreecap --></a>).
+<!--l. 611--><p class="indent">   The file &#8220;Spreadsheet2.dvi&#8221; is the same as the second spreadsheet which was produced in
+Chapter <a 
+href="NCBIGDOCch16.html#x91-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a>. As we saw in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse48.html#x79-20800014.4">14.4<!--tex4ht:ref: section:endgame:concept --></a>, this spreadsheet leads directly to the main theorem about
+factoring systems.
+<!--l. 618--><p class="indent">   For another demonstration of strategies using <span 
+class="cmmi-12">NCProcess </span>see Chapter <a 
+href="NCBIGDOCch17.html#x102-23600017">17<!--tex4ht:ref: chapter:doyle:glover --></a>.
+
+   <!--l. 622--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse53.html" >next</a>] [<a 
+href="NCBIGDOCse51.html" >prev</a>] [<a 
+href="NCBIGDOCse51.html#tailNCBIGDOCse51.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse52.html" >front</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse52.html" >up</a>] </p></div>
+<!--l. 622--><p class="indent">   <a 
+ id="tailNCBIGDOCse52.html"></a>  
+</body></html> 

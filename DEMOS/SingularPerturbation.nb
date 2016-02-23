@@ -1,0 +1,1122 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     33964,       1113]
+NotebookOptionsPosition[     30299,        989]
+NotebookOutlinePosition[     31017,       1015]
+CellTagsIndexPosition[     30974,       1012]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NCGB does Singular Perturbation", "Title",
+ CellChangeTimes->{{3.454943904542547*^9, 3.45494391911586*^9}}],
+
+Cell["\<\
+Dell and Bill
+CDC 1999\
+\>", "Subsubtitle",
+ CellChangeTimes->{{3.454875856942534*^9, 3.454875866482774*^9}, {
+  3.454943941952223*^9, 3.454943979824917*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Load NCGB", "Subsection",
+ CellChangeTimes->{{3.454944003666856*^9, 3.454944005441684*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCGB`"}]}], "Input",
+ CellChangeTimes->{{3.454205923787541*^9, 3.454205930552*^9}, {
+   3.454208284166891*^9, 3.454208311197043*^9}, {3.454208404110283*^9, 
+   3.4542084099651318`*^9}, {3.454209217798544*^9, 3.4542092180118504`*^9}, {
+   3.454339524294148*^9, 3.4543395244261913`*^9}, {3.454341413655561*^9, 
+   3.454341433284811*^9}, 3.454944201903226*^9, {3.516627925037072*^9, 
+   3.516627925524864*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{{3.516627927537652*^9, 3.5166279342640047`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>", 
+   "\[InvisibleSpace]", "\<\".\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC", "."],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.516627927537652*^9, 3.516627934267816*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"You can now use \\\"<< NCAlgebra`\\\" to load NCAlgebra or \
+\"\>", "\[InvisibleSpace]", "\<\"\\\"<< NCGB`\\\" to load NCGB.\"\>"}],
+  SequenceForm[
+  "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
+   "\"<< NCGB`\" to load NCGB."],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.516627927537652*^9, 3.516627934271653*^9}}],
+
+Cell[BoxData["\<\"You have already loaded NCGB.m\"\>"], "Print",
+ CellChangeTimes->{{3.516627927537652*^9, 3.516627934275374*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The system we study and its control (Sec 2)", "Section"],
+
+Cell[TextData[{
+ "\n\n",
+ Cell[BoxData[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+       {
+        FractionBox["dx", "dt"]},
+       {
+        RowBox[{"\[Epsilon]", 
+         FractionBox["dz", "dt"]}]}
+      }], "\[NegativeThinSpace]", ")"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+         {
+          SubscriptBox["A", "11"], 
+          SubscriptBox["A", "12"]},
+         {
+          SubscriptBox["A", "21"], 
+          SubscriptBox["A", "22"]}
+        }], "\[NegativeThinSpace]", ")"}], 
+      RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+         {"x"},
+         {"z"}
+        }], "\[NegativeThinSpace]", ")"}]}], " ", "+", " ", 
+     RowBox[{
+      RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+         {
+          SubscriptBox["B", "1"]},
+         {
+          SubscriptBox["B", "2"]}
+        }], "\[NegativeThinSpace]", ")"}], " ", "u"}]}]}], "\n"}], "\n", 
+  RowBox[{
+   RowBox[{"y", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+        {
+         SubscriptBox["M", "1"], 
+         SubscriptBox["M", "2"]}
+       }], "\[NegativeThinSpace]", ")"}], 
+     RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+        {"x"},
+        {"z"}
+       }], "\[NegativeThinSpace]", ")"}]}]}], "\n", "\t"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Minimize", "   ", "J"}], " ", "=", "  ", 
+    RowBox[{
+     RowBox[{
+      SubsuperscriptBox["\[Integral]", "0", "\[Infinity]"], "   ", 
+      RowBox[{
+       SuperscriptBox["y", "T"], "  ", "y"}]}], " ", "+", " ", 
+     RowBox[{
+      SuperscriptBox["u", "T"], " ", "R", " ", "u", "     ", "dt"}]}]}], 
+   "\n"}], "\n", 
+  RowBox[{
+  "where", "  ", "R", " ", "is", " ", "a", " ", "positive", " ", "definite", 
+   " ", "weight", " ", 
+   RowBox[{"matrix", ".", "\n", "It"}], " ", "is", " ", "well", " ", "known", 
+   " ", "that", " ", "the", " ", "solution", " ", "to", " ", "this", " ", 
+   "problem"}], "\n", 
+  RowBox[{
+   RowBox[{"is", " ", "of", " ", "the", " ", "form"}], " ", "\n"}], "\n", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox["u", "*"], " ", "=", "  ", 
+    RowBox[{
+     RowBox[{"-", " ", 
+      SuperscriptBox["R", 
+       RowBox[{"-", "1"}]]}], "  ", 
+     SuperscriptBox["B", "T"], "  ", "K", 
+     RowBox[{"(", "\[Epsilon]", ")"}], " ", 
+     RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+        {"x"},
+        {"z"}
+       }], "\[NegativeThinSpace]", ")"}]}]}], "\n"}], "\n", 
+  RowBox[{
+   RowBox[{
+   "where", "  ", "K", " ", "is", " ", "the", " ", "solution", " ", "to", " ",
+     "the", " ", "ARE"}], "\n"}], "\n", 
+  RowBox[{"        ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"K", " ", "A"}], "  ", "+", " ", 
+     RowBox[{
+      SuperscriptBox["A", "T"], "K"}], " ", "-", " ", 
+     RowBox[{"K", " ", "B", "  ", 
+      SuperscriptBox["R", 
+       RowBox[{"-", "1"}]], "   ", 
+      SuperscriptBox["B", "T"], " ", "K"}], "  ", "+", " ", 
+     RowBox[{
+      SuperscriptBox["M", "T"], "  ", "M"}]}], " ", "=", " ", "0"}], 
+   "\n"}], "\n", 
+  RowBox[{"with", " ", "\n"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"A", " ", "=", "    ", 
+     RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+        {
+         SubscriptBox["A", "11"], 
+         SubscriptBox["A", "12"]},
+        {
+         FractionBox[
+          SubscriptBox["A", "21"], "\[Epsilon]"], 
+         FractionBox[
+          SubscriptBox["A", "22"], "\[Epsilon]"]}
+       }], "\[NegativeThinSpace]", ")"}]}], ",", "  ", 
+    RowBox[{"B", " ", "=", "   ", 
+     RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+        {
+         SubscriptBox["B", "1"]},
+        {
+         FractionBox[
+          SubscriptBox["B", "2"], "\[Epsilon]"]}
+       }], "\[NegativeThinSpace]", ")"}]}], ",", "  ", "\n", "           ", 
+    RowBox[{
+     RowBox[{"and", "   ", "M"}], " ", "=", " ", 
+     RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+        {
+         SubscriptBox["M", "1"], 
+         SubscriptBox["M", "2"]}
+       }], "\[NegativeThinSpace]", ")"}]}]}], "\n"}], "\n", 
+  RowBox[{"K", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SubscriptBox["K", "0"], " ", "+", "   ", 
+      RowBox[{"\[Epsilon]", " ", 
+       SubscriptBox["K", "1"]}], "  ", "+", " ", 
+      RowBox[{
+       SuperscriptBox["\[Epsilon]", "2"], "  ", 
+       SubscriptBox["K", "2"]}], " ", "+"}], " ", "..."}], "."}]}], "\n", 
+  RowBox[{"\t\t"}]}]],
+ "\n"
+}], "Text"],
+
+Cell[TextData[{
+ "Format K compatibly with the partitioning of A using the notation\nof \
+[KKO86].\n\t\tK = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "0"}], "\[Infinity]"], 
+    SuperscriptBox["\[Epsilon]", "i"]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       SubscriptBox["k", 
+        RowBox[{"1", "i"}]], 
+       RowBox[{"\[Epsilon]", " ", 
+        SubscriptBox["k", 
+         RowBox[{"2", "i"}]]}]},
+      {
+       RowBox[{"\[Epsilon]", " ", 
+        SubsuperscriptBox["k", 
+         RowBox[{"2", "i"}], "T"]}], 
+       RowBox[{"\[Epsilon]", " ", 
+        SubscriptBox["k", 
+         RowBox[{"3", "i"}]]}]}
+     }], ")"}], TraditionalForm]]],
+ "\n\n"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Computer Algebra vs the problem (Sec3)", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["The ZEROth order term of the Riccati equation (Sec3.1)", "Subsection",
+ CellChangeTimes->{3.4549436486060762`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Computer Algebra Finds the Basic Equation (Sec 3.1.1)", "Subsubsection",
+ CellChangeTimes->{3.45494365004635*^9}],
+
+Cell["\<\
+We begin by  setting the matrices in our problem to 
+be noncommutative.\
+\>", "Text",
+ CellChangeTimes->{3.454943737726103*^9}],
+
+Cell["\<\
+SetNonCommutative[
+\tk10,k20,k30,A11, 
+\tA12,A21,A22,B1,B2,M1,M2,R
+\t];\
+\>", "Input",
+ CellChangeTimes->{3.454944453504891*^9}],
+
+Cell[TextData[{
+ "Next we create the first term of the power series \n      \n         K  =   \
+",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     SubscriptBox["K", "0"], " ", "+", 
+     RowBox[{"\[Epsilon]", " ", 
+      SubscriptBox["K", "1"]}], "+", " ", 
+     RowBox[{
+      SuperscriptBox["\[Epsilon]", "2"], "  ", 
+      SubscriptBox["K", "2"]}], " ", "+"}], " ", "..."}], "."}]],
+  FontFamily->"Bold"],
+ "\n\nIt contains an \[Epsilon]."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+K0 = {{k10, ep**k20},
+     {ep**tp[k20], ep**k30 }};
+     
+K0//MatrixForm     \
+\>", "Input",
+ CellChangeTimes->{3.454944457952423*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"k10", 
+      RowBox[{"ep", " ", "k20"}]},
+     {
+      RowBox[{"ep", " ", 
+       RowBox[{"tp", "[", "k20", "]"}]}], 
+      RowBox[{"ep", " ", "k30"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.516627934479417*^9}]
+}, Open  ]],
+
+Cell["Next we define the block matrices present in our problem.", "Text",
+ CellChangeTimes->{{3.45494375939713*^9, 3.454943761179484*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+A  = {{A11, A12},
+      {(1/ep)**A21,(1/ep)**A22}};
+B  = {{B1},{(1/ep)**B2}};
+Mm = {{M1,M2}}; 
+
+A//MatrixForm 
+B//MatrixForm
+Mm//MatrixForm\
+\>", "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"A11", "A12"},
+     {
+      FractionBox["A21", "ep"], 
+      FractionBox["A22", "ep"]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.5166279345149*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"B1"},
+     {
+      FractionBox["B2", "ep"]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.516627934519594*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"M1", "M2"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.5166279345225058`*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "The following ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " input creates a function which \nmakes Riccatis and sets G to be the \
+optimal control."
+}], "Text",
+ CellChangeTimes->{3.454943765932135*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Riccati[K_] := MatMult[K,A] + 
+\tMatMult[tpMat[A],K ] -
+\tMatMult[K,B,{{Inv[R]}},tpMat[B],K] +
+\tMatMult[tpMat[Mm],Mm]
+
+G = - MatMult[{{Inv[R]}},tpMat[B],K0]\
+\>", "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{
+       RowBox[{"Inv", "[", "R", "]"}], "**", 
+       RowBox[{"tp", "[", "B1", "]"}], "**", "k10"}]}], "-", 
+     RowBox[{
+      RowBox[{"Inv", "[", "R", "]"}], "**", 
+      RowBox[{"tp", "[", "B2", "]"}], "**", 
+      RowBox[{"tp", "[", "k20", "]"}]}]}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "ep"}], " ", 
+      RowBox[{
+       RowBox[{"Inv", "[", "R", "]"}], "**", 
+       RowBox[{"tp", "[", "B1", "]"}], "**", "k20"}]}], "-", 
+     RowBox[{
+      RowBox[{"Inv", "[", "R", "]"}], "**", 
+      RowBox[{"tp", "[", "B2", "]"}], "**", "k30"}]}]}], "}"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.516627934552198*^9}]
+}, Open  ]],
+
+Cell["\<\
+Extract the zero-th order terms in \[Epsilon] 
+from the upper left entry of the perturbed
+Riccati  to create a polynomial. \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Ep10 = NCTermsOfDegree[ 
+\t\t\tRiccati[K0][[1,1]],{ep},{0} ]\
+\>", "Input",
+ CellChangeTimes->{3.454943778595848*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"k10", "**", "A11"}], "+", 
+  RowBox[{"k20", "**", "A21"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "A11", "]"}], "**", "k10"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "A21", "]"}], "**", 
+   RowBox[{"tp", "[", "k20", "]"}]}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "M1", "]"}], "**", "M1"}], "-", 
+  RowBox[{"k10", "**", "B1", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B1", "]"}], "**", "k10"}], "-", 
+  RowBox[{"k10", "**", "B1", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B2", "]"}], "**", 
+   RowBox[{"tp", "[", "k20", "]"}]}], "-", 
+  RowBox[{"k20", "**", "B2", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B1", "]"}], "**", "k10"}], "-", 
+  RowBox[{"k20", "**", "B2", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B2", "]"}], "**", 
+   RowBox[{"tp", "[", "k20", "]"}]}]}]], "Output",
+ CellChangeTimes->{3.516627934598418*^9}]
+}, Open  ]],
+
+Cell["\<\
+Extract the zero-th order terms in \[Epsilon] from the upper right entry of \
+the perturbed Riccati  to create a polynomial. \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Ep20 = NCTermsOfDegree[ 
+\t\t\tRiccati[K0][[1,2]],{ep},{0} ]\
+\>", "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"k10", "**", "A12"}], "+", 
+  RowBox[{"k20", "**", "A22"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "A21", "]"}], "**", "k30"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "M1", "]"}], "**", "M2"}], "-", 
+  RowBox[{"k10", "**", "B1", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B2", "]"}], "**", "k30"}], "-", 
+  RowBox[{"k20", "**", "B2", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B2", "]"}], "**", "k30"}]}]], "Output",
+ CellChangeTimes->{3.516627934634927*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NCCollect[ NCExpand[Ep20], {k20}]", "Input",
+ CellChangeTimes->{{3.454943796099222*^9, 3.454943797675905*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"k10", "**", "A12"}], "+", 
+  RowBox[{"k20", "**", 
+   RowBox[{"(", 
+    RowBox[{"A22", "-", 
+     RowBox[{"B2", "**", 
+      RowBox[{"Inv", "[", "R", "]"}], "**", 
+      RowBox[{"tp", "[", "B2", "]"}], "**", "k30"}]}], ")"}]}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "A21", "]"}], "**", "k30"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "M1", "]"}], "**", "M2"}], "-", 
+  RowBox[{"k10", "**", "B1", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B2", "]"}], "**", "k30"}]}]], "Output",
+ CellChangeTimes->{3.5166279346640997`*^9}]
+}, Open  ]],
+
+Cell["\<\
+Notice that by assuming the invertibility of  
+                               (A22-B2**Inv[R]**tp[B2]**k30)
+ in the above equation we can solve for k20.
+
+         k20 = ( k10**A12  +tp[A21]**k30+
+               tp[M1]**M2-k10**B1**Inv[R]**tp[B2]**k30 ) **   
+               Inv[ A22-B2**Inv[R]**tp[B2]**k30 ]
+
+This observation will be used below.\
+\>", "Text",
+ CellChangeTimes->{3.4549438124442673`*^9}],
+
+Cell["\<\
+Next, extract the zero-th order terms in \[Epsilon]  from the 
+lower right entry of the perturbed Riccati  to create a polynomial. \
+\>", "Text",
+ CellChangeTimes->{3.454943804947749*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Ep30 = NCTermsOfDegree[ 
+\t\t\tRiccati[K0][[2,2]],{ep},{0} ]\
+\>", "Input",
+ CellChangeTimes->{3.4549587176299458`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"k30", "**", "A22"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "A22", "]"}], "**", "k30"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "M2", "]"}], "**", "M2"}], "-", 
+  RowBox[{"k30", "**", "B2", "**", 
+   RowBox[{"Inv", "[", "R", "]"}], "**", 
+   RowBox[{"tp", "[", "B2", "]"}], "**", "k30"}]}]], "Output",
+ CellChangeTimes->{3.5166279346977*^9}]
+}, Open  ]],
+
+Cell["\<\
+Notice that the above equation is a Riccati in k30 and can be used to
+determine this matrix.
+
+The matrix which is still unknown is k10.  Solving for it by hand is a bit \
+tricky, see Section 3.4 [KKO86].
+Solving for k10 by computer is what  we turn to after introducing  other \
+basic though rinky dink algebraic identities.\
+\>", "Text",
+ CellChangeTimes->{3.4549438179366426`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["    Other Algebraic Identities Known to Hold (Sec 3.1.3)    ", \
+"Subsubsection"],
+
+Cell["\<\
+Abbreviations which are standard conventions in the field [KKO86]:\
+\>", "Text",
+ CellChangeTimes->{3.454943828643462*^9}],
+
+Cell["\<\
+SetNonCommutative[G1,G2,N0,M0,A0,B0,R0];
+Abbreviations = {
+\tG1 == G[[1,1]]/.ep->0,
+\tG2 == G[[1,2]]/.ep->0,
+\tN0 == - M2**Inv[A22]**B2,
+\tM0 == M1 - M2**Inv[A22]**A21,
+\tA0 == A11 - A12 ** Inv[A22]**A21,
+\tB0 == B1 - A12**Inv[A22]**B2,
+\tR0 == R + tp[N0]**N0
+\t};\
+\>", "Input",
+ CellChangeTimes->{3.45494383118404*^9}],
+
+Cell["Also some of our matrices are known to be self adjoint.", "Text",
+ CellChangeTimes->{3.454943835058803*^9}],
+
+Cell["\<\
+SelfAdjoint = {
+\tk10 == tp[k10],
+\tk30 == tp[k30],
+\tR == tp[R],
+\tR0 == tp[R0],
+\tInv[R] == tp[Inv[R]],
+\tInv[R0] == tp[Inv[R0]]
+\t};\
+\>", "Input",
+ CellChangeTimes->{3.454943837022526*^9}],
+
+Cell["\<\
+It is standard that A0, A11, and A22 are invertible.
+Also, the fast  sub-system is (assumed ) strictly stable which makes
+                   A22 + B2**G2  invertible.  
+Recall  the 
+              invertibility of    A22 - B2**Inv[R]**tp[B2]**k30 
+ follows from our solution for k20.
+We make the resulting relations with the next command.\
+\>", "Text"],
+
+Cell["\<\
+inverses = NCMakeRelations[{Inv,
+\tR,R0,A0,A11,A22,(A22 + B2**G2), 
+\t(A22 - B2**Inv[R]**tp[B2]**k30) }];\
+\>", "Input",
+ CellChangeTimes->{3.4549438406055326`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Solving for k10 using a  Grobner Basis.", "Subsubsection",
+ CellChangeTimes->{3.454944507887884*^9}],
+
+Cell["\<\
+Next we combine all the relations created above and add in 
+their tranposes. \
+\>", "Text",
+ CellChangeTimes->{3.454943843611549*^9}],
+
+Cell["\<\
+Relations = Union[{Ep10,Ep20,Ep30},
+ \tAbbreviations,
+\tSelfAdjoint, inverses ];
+
+AllRelations = NCAddTranspose[ Relations ];\
+\>", "Input",
+ CellChangeTimes->{{3.4549431987491083`*^9, 3.454943201257971*^9}, {
+   3.454944658115944*^9, 3.4549446606244307`*^9}, 3.454959187229336*^9}],
+
+Cell["\<\
+Now that we have created all equations which need to be solved 
+simultaneously to find k10,  we invoke the NC Groebner Basis
+program NCProccess to solve for  k10. First we set the order reflecting our \
+priorities on which variables should be eliminated.\
+\>", "Text",
+ CellChangeTimes->{3.4549438540205097`*^9}],
+
+Cell["\<\
+NCAutomaticOrder[ {{N0,M0,R0,A0,B0}, 
+\t\t{k10},{B1,B2,M1,M2,R,
+\t\tA11,A12,A21,A22,
+\t\tInv[A22-B2**Inv[R]**tp[B2]**k30],
+\t    tp[Inv[A22-B2**Inv[R]**tp[B2]**k30]]},
+\t    {k30},{k20},{G1,G2}},  AllRelations];\
+\>", "Input",
+ CellChangeTimes->{{3.4549432113235693`*^9, 3.454943215634726*^9}, {
+   3.4549438555334253`*^9, 3.454943860336459*^9}, {3.4549446787046328`*^9, 
+   3.454944689561054*^9}, 3.4549592032993937`*^9}],
+
+Cell[TextData[{
+ "Finally we make the call to NCProcess[ ]  which will \ncreate a sorted \
+Groebner basis from the relations in AllRelations\nand hopefully give us an \
+answer for k10.  The ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " answer\ncan be found below and the TeX answer can be found on the \nmain \
+Singular Perturbation page."
+}], "Text",
+ CellChangeTimes->{{3.454943863884396*^9, 3.4549438662972403`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+answer = NCProcess[ AllRelations, 4, \"FindK10\", 
+                    SBByCat->False, DegreeCap->14, DegreeSumCap->17];\
+\>", "Input",
+ CellChangeTimes->{
+  3.454943868828961*^9, {3.454948160335602*^9, 3.4549482003364487`*^9}, 
+   3.455390032559847*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Outputting results to the stream \"\>", "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<FindK10.tex\>\"", ",", " ", "43"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["FindK10.tex", 43], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Outputting results to the stream ", 
+   Format[
+    OutputStream["FindK10.tex", 43], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.516627990868606*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Done outputting results to the stream \"\>", 
+   "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<FindK10.tex\>\"", ",", " ", "43"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["FindK10.tex", 43], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Done outputting results to the stream ", 
+   Format[
+    OutputStream["FindK10.tex", 43], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.516628003211685*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"pdflatex -output-directory=.  FindK10.tex 1> \
+\\\"/tmp/mNCRun.out\\\" 2> \\\"/tmp/mNCRun.err\\\"\"\>", 
+   "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "pdflatex -output-directory=.  FindK10.tex 1> \"/tmp/mNCRun.out\" 2> \
+\"/tmp/mNCRun.err\"", "'..."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.5166280032153893`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"open  FindK10.pdf 1> \\\"/tmp/mNCRun.out\\\" 2> \
+\\\"/tmp/mNCRun.err\\\"\"\>", "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "open  FindK10.pdf 1> \"/tmp/mNCRun.out\" 2> \"/tmp/mNCRun.err\"", "'..."],
+  
+  Editable->False]], "Print",
+ CellChangeTimes->{3.516628003218912*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Note: Your TeX and Dvi files are located in the directory \
+\"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio\"\>"}],
+  SequenceForm[
+  "Note: Your TeX and Dvi files are located in the directory ", 
+   "/Users/mauricio"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.516628003222335*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["answer", "Input",
+ CellChangeTimes->{3.454943874426814*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   PanelBox[GridBox[{
+      {
+       StyleBox[
+        StyleBox[
+         DynamicBox[ToBoxes[
+           FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+           StandardForm],
+          ImageSizeCache->{349., {3., 10.}}],
+         StripOnInput->False,
+         DynamicUpdating->True], "Panel",
+        StripOnInput->False,
+        Background->None]},
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}], ",", 
+           
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              RowBox[{"A0", "**", 
+               RowBox[{"Inv", "[", "A0", "]"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              RowBox[{"A11", "**", 
+               RowBox[{"Inv", "[", "A11", "]"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              RowBox[{"A22", "**", 
+               RowBox[{"Inv", "[", "A22", "]"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              RowBox[{"R0", "**", 
+               RowBox[{"Inv", "[", "R0", "]"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"-", "1"}], "+", 
+              RowBox[{
+               RowBox[{"Inv", "[", "A0", "]"}], "**", "A0"}]}], ",", 
+             RowBox[{"\[LeftSkeleton]", "75", "\[RightSkeleton]"}], ",", 
+             RowBox[{
+              RowBox[{"-", "R0"}], "+", 
+              RowBox[{
+               RowBox[{"tp", "[", "N0", "]"}], "**", "N0"}], "+", 
+              RowBox[{"tp", "[", "R", "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"-", "R0"}], "+", 
+              RowBox[{"tp", "[", "R0", "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"-", 
+               RowBox[{"Inv", "[", "R", "]"}]}], "+", 
+              RowBox[{"tp", "[", 
+               RowBox[{"Inv", "[", "R", "]"}], "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"-", 
+               RowBox[{"Inv", "[", "R0", "]"}]}], "+", 
+              RowBox[{"tp", "[", 
+               RowBox[{"Inv", "[", "R0", "]"}], "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"tp", "[", 
+               RowBox[{"Inv", "[", 
+                RowBox[{"A22", "+", 
+                 RowBox[{"B2", "**", "G2"}]}], "]"}], "]"}], "-", 
+              RowBox[{"tp", "[", 
+               RowBox[{"Inv", "[", 
+                RowBox[{"A22", "-", 
+                 RowBox[{"B2", "**", 
+                  RowBox[{"Inv", "[", "R", "]"}], "**", 
+                  RowBox[{"tp", "[", "B2", "]"}], "**", "k30"}]}], "]"}], 
+               "]"}]}]}], "}"}]}], "}"}],
+         Short[#, 5]& ],
+        Background->GrayLevel[1],
+        BaseStyle->{Deployed -> False},
+        Frame->True,
+        FrameStyle->GrayLevel[0, 0.2],
+        StripOnInput->False]},
+      {
+       RowBox[{
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+             StandardForm],
+            ImageSizeCache->{62., {1., 10.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 29, 23046407626543904794, 5/2],
+         Enabled->True,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+             StandardForm],
+            ImageSizeCache->{67., {1., 10.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 29, 23046407626543904794, 5 2],
+         Enabled->True,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+             StandardForm],
+            ImageSizeCache->{104., {3., 10.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 29, 23046407626543904794, Infinity],
+         Enabled->True,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+             StandardForm],
+            ImageSizeCache->{92., {1., 10.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>FrontEndExecute[{
+            FrontEnd`SetOptions[
+            FrontEnd`$FrontEnd, 
+             FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+            FrontEnd`FrontEndToken["PreferencesDialog"]}],
+         Evaluator->None,
+         Method->"Preemptive"]}]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[1.2]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    DefaultBaseStyle->{},
+    FrameMargins->5],
+   Deploy,
+   DefaultBaseStyle->{Deployed -> True}],
+  Out[29]]], "Output",
+ CellChangeTimes->{3.516628003690216*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{879, 850},
+WindowMargins->{{Automatic, 60}, {Automatic, 0}},
+DockedCells->(FrontEndExecute[{
+   FrontEnd`NotebookApply[
+    FrontEnd`InputNotebook[], #, Placeholder]}]& ),
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{612, 792}},
+ShowSelection->True,
+Magnification->1.25,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 6, \
+2010)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 113, 1, 74, "Title"],
+Cell[683, 25, 168, 5, 43, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[876, 34, 97, 1, 42, "Subsection"],
+Cell[CellGroupData[{
+Cell[998, 39, 486, 8, 66, "Input"],
+Cell[CellGroupData[{
+Cell[1509, 51, 161, 2, 25, "Print"],
+Cell[1673, 55, 293, 6, 25, "Print"],
+Cell[1969, 63, 389, 8, 25, "Print"],
+Cell[2361, 73, 130, 1, 25, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2552, 81, 62, 0, 89, "Section"],
+Cell[2617, 83, 4399, 135, 653, "Text"],
+Cell[7019, 220, 770, 28, 136, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7826, 253, 57, 0, 89, "Section"],
+Cell[CellGroupData[{
+Cell[7908, 257, 120, 1, 42, "Subsection"],
+Cell[CellGroupData[{
+Cell[8053, 262, 119, 1, 30, "Subsubsection"],
+Cell[8175, 265, 137, 4, 51, "Text"],
+Cell[8315, 271, 138, 6, 95, "Input"],
+Cell[8456, 279, 462, 15, 112, "Text"],
+Cell[CellGroupData[{
+Cell[8943, 298, 145, 6, 95, "Input"],
+Cell[9091, 306, 753, 22, 80, "Output"]
+}, Open  ]],
+Cell[9859, 331, 138, 1, 32, "Text"],
+Cell[CellGroupData[{
+Cell[10022, 336, 164, 9, 160, "Input"],
+Cell[10189, 347, 685, 20, 94, "Output"],
+Cell[10877, 369, 645, 19, 94, "Output"],
+Cell[11525, 390, 614, 17, 60, "Output"]
+}, Open  ]],
+Cell[12154, 410, 229, 7, 51, "Text"],
+Cell[CellGroupData[{
+Cell[12408, 421, 182, 7, 128, "Input"],
+Cell[12593, 430, 733, 23, 66, "Output"]
+}, Open  ]],
+Cell[13341, 456, 147, 4, 70, "Text"],
+Cell[CellGroupData[{
+Cell[13513, 464, 127, 4, 63, "Input"],
+Cell[13643, 470, 976, 25, 85, "Output"]
+}, Open  ]],
+Cell[14634, 498, 149, 3, 33, "Text"],
+Cell[CellGroupData[{
+Cell[14808, 505, 85, 3, 63, "Input"],
+Cell[14896, 510, 550, 14, 66, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15483, 529, 116, 1, 46, "Input"],
+Cell[15602, 532, 587, 16, 66, "Output"]
+}, Open  ]],
+Cell[16204, 551, 414, 11, 182, "Text"],
+Cell[16621, 564, 197, 4, 52, "Text"],
+Cell[CellGroupData[{
+Cell[16843, 572, 129, 4, 63, "Input"],
+Cell[16975, 578, 376, 10, 46, "Output"]
+}, Open  ]],
+Cell[17366, 591, 392, 9, 126, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17795, 605, 87, 1, 30, "Subsubsection"],
+Cell[17885, 608, 132, 3, 32, "Text"],
+Cell[18020, 613, 330, 12, 193, "Input"],
+Cell[18353, 627, 113, 1, 32, "Text"],
+Cell[18469, 630, 202, 10, 160, "Input"],
+Cell[18674, 642, 361, 8, 145, "Text"],
+Cell[19038, 652, 174, 5, 79, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19249, 662, 106, 1, 30, "Subsubsection"],
+Cell[19358, 665, 143, 4, 51, "Text"],
+Cell[19504, 671, 292, 8, 111, "Input"],
+Cell[19799, 681, 322, 6, 89, "Text"],
+Cell[20124, 689, 432, 10, 128, "Input"],
+Cell[20559, 701, 428, 9, 107, "Text"],
+Cell[CellGroupData[{
+Cell[21012, 714, 264, 6, 63, "Input"],
+Cell[CellGroupData[{
+Cell[21301, 724, 594, 17, 25, "Print"],
+Cell[21898, 743, 608, 18, 25, "Print"],
+Cell[22509, 763, 456, 11, 45, "Print"],
+Cell[22968, 776, 403, 10, 25, "Print"],
+Cell[23374, 788, 341, 8, 25, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23764, 802, 65, 1, 46, "Input"],
+Cell[23832, 805, 6403, 177, 199, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

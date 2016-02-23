@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>III NONCOMMUTATIVE GROBNER BASES&#8211;NCGB </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 363--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCpa4.html" >next</a>] [<a 
+href="NCBIGDOCpa2.html" >prev</a>] [<a 
+href="NCBIGDOCpa2.html#tailNCBIGDOCpa2.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCpa3.html">tail</a>] [<a 
+href="NCBIGDOC.html#NCBIGDOCpa3.html" >up</a>] </p></div>
+   <h1 class="partHead"><span class="titlemark">Part&#x00A0;III<br></span><a 
+ id="x13-175000III"></a>NONCOMMUTATIVE GRÖBNER BASES&#8211;NCGB </h1>
+<div class="center" 
+>
+<!--l. 1--><p class="noindent">
+<!--l. 2--><p class="noindent"><span 
+class="cmr-17x-x-143">NONCOMMUTATIVE GR</span><span 
+class="cmr-17x-x-143">ÖBNER BASIS</span>
+<span 
+class="cmr-17x-x-143">PACKAGE</span></div>
+<div class="center" 
+>
+<!--l. 6--><p class="noindent">
+<!--l. 7--><p class="noindent">Version 4.0<br>
+M. Stankus<br>
+Math Dept., UCSD<br>
+&#x00A0;<br>
+J. William Helton<br>
+M. C. de Oliveira<br>
+Math Dept., UCSD<br>
+La Jolla, California 92093<br>
+&#x00A0;<br>
+Copyright by Helton and Stankus on May 1995, Sept. 1997, April 1999, October 1999, and
+October 2001<br>
+Copyright by Helton, Stankus and de Oliveira on January 2010<br>
+all rights reserved.</div>
+<!--l. 22--><p class="noindent">If you would like to try the NonCommutative Gröbner Basis package or want updates look on the
+NCAlgebra homepage
+<!--l. 27--><p class="indent">   <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">http://math.ucsd/~ncalg</span></span></span>
+<!--l. 29--><p class="indent">   The program was written with contributions from Dell Kronewitter, Eric Rowell, Juan
+Camino, Dave Glickenstein, Kurt Schneider, Victor Shih and Mike Moore, and with
+support from the AFOSR, the NSF, the Lab for Mathematics and Statistics at UCSD,
+the Ford Motor Co., the UCSD Faculty Mentor Program and the US Department of
+Education.
+
+   <div  
+class="centerline">                                                   February 1996                                                   </div>
+<div  
+class="centerline">                                     September 1997                                     </div>
+<div  
+class="centerline">                                        April 1999                                        </div>
+<div  
+class="centerline">                                      October 1999                                      </div>
+<div  
+class="centerline">                                      October 2001                                      </div>
+<div  
+class="centerline">                                      January 2010                                      </div>
+<!--l. 4--><p class="indent">
+
+<!--l. 3--><p class="noindent"><span 
+class="cmbx-12">ReleaseNotesNCGB</span>  <a 
+ id="Q1-13-179"></a>
+<!--l. 8--><p class="indent">   <span 
+class="cmbx-12">ReleaseNotes NCGB2.02.1.tex</span>
+<!--l. 10--><p class="indent">   The commands <span 
+class="cmmi-12">CleanUpBasisQ</span>[] and <span 
+class="cmmi-12">Iterations</span>[] were removed since they did not serve any
+real purpose.
+<!--l. 17--><p class="indent">   <span 
+class="cmbx-12">ReleaseNotes NCGB3.0.tex</span>
+<!--l. 19--><p class="indent">   NCGB has been seriously overhauled. The file stucture was made more modular. This
+facilitates mantainance and the forthcoming NCGB stand alone version. The C++ code was
+considerably revised to compile under both UNIX and Visual C++.
+<!--l. 25--><p class="indent">   Added are:
+      <ol  class="enumerate1" >
+      <li class="enumerate" value="1" 
+><a 
+ id="x13-175002x1"></a> Stronger change of variable commands. (Still experimental)
+      </li>
+      <li class="enumerate" value="2" 
+><a 
+ id="x13-175004x2"></a> A command to compute the coefficients of the &#8221;noncommutative&#8221; Hilbert series.
+      </li>
+      <li class="enumerate" value="3" 
+><a 
+ id="x13-175006x3"></a>A facility for handling psuedoinverses; See NCMakeRelations
+      </li>
+      <li class="enumerate" value="4" 
+><a 
+ id="x13-175008x4"></a>Some files are loaded automatically on demand
+      </li>
+      <li class="enumerate" value="5" 
+><a 
+ id="x13-175010x5"></a>Commands which save typing, NCAutomaticOrder and NCAddTranspose
+      </li>
+      <li class="enumerate" value="6" 
+><a 
+ id="x13-175012x6"></a>A  method  for  automatically  changing  elimination  orders  when  solving  algebraic
+      problems, NCXWholeProcess
+      </li></ol>
+
+   <!--l. 8--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCpa4.html" >next</a>] [<a 
+href="NCBIGDOCpa2.html" >prev</a>] [<a 
+href="NCBIGDOCpa2.html#tailNCBIGDOCpa2.html" >prev-tail</a>] [<a 
+href="NCBIGDOCpa3.html" >front</a>] [<a 
+href="NCBIGDOC.html#NCBIGDOCpa3.html" >up</a>] </p></div>
+<!--l. 8--><p class="indent">   <a 
+ id="tailNCBIGDOCpa3.html"></a>  
+</body></html> 

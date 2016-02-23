@@ -1,0 +1,71 @@
+(* This file contains Get statements (i.e., <<) for various test files.*)
+(*                                                                    *)
+(*    All test file names  should end with the suffix .NCTest  and    *)
+(*   the first name should agree with the name of the file containing *)
+(*    the function being tested. Example,                             *)
+            (*    Testing    DirD[ , ]               *)
+            (*    which in the file NCDiff.m         *)
+            (*    is in the file Diff.NCTest         *)
+
+(*         When the test file is executed                             *)
+(*        the user should see only if the tests failed or not,        *)
+(*        (i.e. he should not be overwhelmed with formulas which      *)
+(*        he himself has to check)                                    *)
+(*    DO NOT LOAD THIS FILE IN THE SAME SESSION AS SYSTEMS            *)
+(* ------------------------------------------------------------------ *)
+
+Print[ "Running NCTEST." ];
+Print[];
+Print[];
+Print["             Automated Testing System       "];
+Print[];
+Print["    DO NOT LOAD THIS FILE IN THE SAME SESSION AS SYSTEMS    "] ;
+Print[];
+Print[                       x**0                            ];
+(*   Get["NCAlgebra.m"];
+Get["Diff.NCTest"];
+Get["Crit.NCTest"];
+Get["Substitute.NCTest"];
+Get["Transposes.NCTest"];
+
+
+i*)
+
+Get["Collect.NCTest"];
+
+
+(*
+
+(* Get["MatMult.NCTest"]; *)
+(* NOT SUPPORTED
+Get["BlockPartition.NCTest"];
+*)
+
+Get["SimplifyRational.NCTest"];
+Get["Mono.NCTest"];
+Get["Convert.NCTest"];
+Get["NCSolve.NCTest"];
+Get["NCLDUTest.NCTest"];
+
+Get["NCInverseTest.NCTest"];
+Get["NCConvexityTest.NCTest"];
+Get["NCMatrixOfQuadraticTest.NCTest"];
+
+
+(* LEAVE This at the bottom.  It messes up lots of things if you put
+   it above other tests. *)
+Get["NCGuts.NCTest"];
+(*******************************)
+
+
+Print[ "EVEN IF ALL THE TESTS SUCCEEDED YOU SHOULD QUIT THE KERNEL IN YOUR MATHEMATICA SESSION" ];
+Print[ "AND START OVER." ];
+Print[];
+Print[];
+Print["             To obtain a summary, type ??test "];
+Print[];
+Print[];
+
+Put[DownValues[test], "test"]
+
+*)

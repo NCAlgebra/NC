@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>1.5 Pretty Output </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 353--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse5.html" >prev</a>] [<a 
+href="NCBIGDOCse5.html#tailNCBIGDOCse5.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse6.html">tail</a>] [<a 
+href="NCBIGDOCch1.html#NCBIGDOCse6.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">1.5   </span> <a 
+ id="x11-130001.5"></a>Pretty Output </h3>
+<!--l. 357--><p class="noindent"><span 
+class="cmbx-12">Beautifying NCAlgebra</span>
+<!--l. 360--><p class="noindent">WARNING: The command <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">SetOutput</span></span></span> is now deprecated. Please use <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCSetOutput</span></span></span>
+instead.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[104]:=&#x00A0;NCSetOutput[&#x00A0;All&#x00A0;-&gt;&#x00A0;True&#x00A0;];
+&#x00A0;<br />In[105]:=&#x00A0;inv[&#x00A0;tp[k]&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;-1
+&#x00A0;<br />Out[105]=&#x00A0;(k)
+&#x00A0;<br />
+&#x00A0;<br />In[106]:=&#x00A0;NCSetOutput[&#x00A0;All&#x00A0;-&gt;&#x00A0;True&#x00A0;];
+&#x00A0;<br />In[107]:=&#x00A0;rt[x&#x00A0;-&#x00A0;inv[y&#x00A0;+&#x00A0;aj[z]]]&#x00A0;+&#x00A0;tp[x]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*&#x00A0;-1&#x00A0;1/2
+&#x00A0;<br />Out[107]=&#x00A0;&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;(x&#x00A0;-&#x00A0;(y&#x00A0;+&#x00A0;z&#x00A0;)&#x00A0;&#x00A0;)
+&#x00A0;<br />
+&#x00A0;<br />In[108]:=&#x00A0;NCSetOutput[&#x00A0;All&#x00A0;-&gt;&#x00A0;True,&#x00A0;inv&#x00A0;-&gt;&#x00A0;False&#x00A0;];
+&#x00A0;<br />In[109]:=&#x00A0;inv[1&#x00A0;+&#x00A0;tp[1-x]]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />Out[109]=&#x00A0;inv[2&#x00A0;-&#x00A0;x&#x00A0;]
+</div>
+</td></tr></table>
+<!--l. 380--><p class="nopar">
+<!--l. 384--><p class="noindent"><span class="TEX"><span 
+class="cmbx-12">T</span><span 
+class="E"><span 
+class="cmbx-12">E</span></span><span 
+class="cmbx-12">X</span></span><span 
+class="cmbx-12">Output</span>
+<!--l. 387--><p class="noindent">WARNING: The <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;commands in this version of NCAlgebra have been updated to use the new
+package <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCTeX</span></span></span>. Please see Section&#x00A0;<span 
+class="cmbx-12">??</span> for more details.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[110]:=&#x00A0;mat&#x00A0;=&#x00A0;{{a&#x00A0;+&#x00A0;tp[b],aj[c]},{inv[d],e}}
+&#x00A0;<br />Out[110]=&#x00A0;{{a&#x00A0;+&#x00A0;tp[b],&#x00A0;aj[c]},&#x00A0;{inv[d],&#x00A0;e}}
+&#x00A0;<br />
+&#x00A0;<br />In[111]:=&#x00A0;NCTeX[mat]
+</div>
+</td></tr></table>
+<!--l. 398--><p class="nopar">
+<!--l. 402--><p class="indent">   The above command takes the Mathematica matrix <span 
+class="cmti-12">mat</span>, converts it to <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>,
+outputs the string and surrounding <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;to a file, <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>s the file and displays the
+<span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>ed pdf output to the screen. If you are in a notebook environment, the resulting
+pdf file is imported back to the notebook. Refer to Section&#x00A0;<span 
+class="cmbx-12">??</span> for more details. If you
+are in a text environment then it opens a pdf viewer with the following formula in its
+display.
+   <center class="math-display" >
+<img 
+src="NCBIGDOC3x.png" alt="(           )
+  a + bT  c*
+   d-1    e
+" class="math-display" ></center>
+<!--l. 413--><p class="indent">   The command
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[113]:=&#x00A0;NCTeX[Sum[a[i],{i,1,50}],&#x00A0;ImportPDF&#x00A0;-&gt;&#x00A0;False,&#x00A0;DisplayPDF&#x00A0;-&gt;&#x00A0;True];
+</div>
+</td></tr></table>
+<!--l. 416--><p class="nopar">
+<!--l. 419--><p class="noindent">generates a window which contains the following formula in its display.
+   <center class="math-display" >
+<img 
+src="NCBIGDOC4x.png" alt="a(1)+a(2)+a(3)+a(4)+a(5)+a(6)+a(7)+a(8)+a(9)+a(10)+a(11)+a(12)+a(13)+a(14)+
+
+a(15)+ a(16) + a(17)+ a(18) + a(19)+ a(20) + a(21)+ a(22) + a(23)+ a(24) + a(25)+ a(26)+
+
+a(27)+ a(28) + a(29)+ a(30) + a(31)+ a(32) + a(33)+ a(34) + a(35)+ a(36) + a(37)+ a(38)+
+a(39)+  a(40)+ a(41) + a(42)+  a(43)+ a(44) + a(45)+  a(46)+ a(47) + a(48)+  a(49)+ a(50)
+" class="math-display" ></center>
+<!--l. 430--><p class="indent">   The above examples in this chapter demonstrate the most commonly used features in
+NCAlgebra.
+
+
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse5.html" >prev</a>] [<a 
+href="NCBIGDOCse5.html#tailNCBIGDOCse5.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse6.html" >front</a>] [<a 
+href="NCBIGDOCch1.html#NCBIGDOCse6.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCse6.html"></a>  
+</body></html> 

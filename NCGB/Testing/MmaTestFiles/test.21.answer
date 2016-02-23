@@ -1,0 +1,8 @@
+{a ** ia -> 1, b ** ib -> 1, c ** ic -> 1, d ** id -> 1, ia ** a -> 1, 
+  ib ** b -> 1, ic ** c -> 1, id ** d -> 1, 
+  id ** z ** b ** d ** a -> a ** c ** b ** z ** ic, 
+  z ** b ** d ** a ** c -> d ** a ** c ** b ** z, 
+  d ** a ** c ** b ** z ** ic -> z ** b ** d ** a, 
+  z ** b ** z -> z + d ** a ** c, 
+  c ** b ** z ** ic ** ia ** id ** z -> c + ia ** id ** z, 
+  x -> id - a ** c ** b ** z ** ic ** ia ** id, y -> ic - b ** z ** ic}

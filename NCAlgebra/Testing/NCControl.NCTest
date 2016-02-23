@@ -1,0 +1,91 @@
+(* :Title: 	NCControl.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	Dell - 8-3-99 *)
+
+(* :Summary:    NCControl TEST FILE.  *)
+
+(* :History: 
+   :8/3/99      Created.  -- Dell
+   :6/15/02:    Added system definitions and reads 
+                in necessary package  -- Dell
+   :9/5/02:     Added TransferFunction test -- Brett
+*)
+
+<<ControlSystems`
+<<NCControl.m
+
+(******* Examples of the use the NonCommutative Control Systems package    *)
+SNC[a1, a2,a3,a4,b1,b2,c1,c2,d,u1,u2,u3,u4,v1,v2,w1,w2,z ];
+
+sys1 = StateSpace[ {{a1,a2},{a3,a4}},{{b1},{b2}},{{c1,c2}},{{d}} ];
+sys2 = StateSpace[ {{u1,u2},{u3,u4}},{{v1},{v2}},{{w1,w2}},{{z}} ];
+
+test[ NCConnDiff, 1 ] = 
+SeriesConnect[ sys1, sys2] ==
+StateSpace[{{a1, a2, 0, 0}, {a3, a4, 0, 0},
+     {v1 ** c1, v1 ** c2, u1, u2}, {v2 ** c1, v2 ** c2, u3, u4}},
+    {{b1}, {b2}, {v1 ** d}, {v2 ** d}}, {{z ** c1, z ** c2, w1, w2}},
+    {{z ** d}}];
+
+test[ NCConnDiff, 2 ] = 
+FeedbackConnect[ sys1, sys2 ] ==
+StateSpace[{{a1 - b1 ** z ** inv[1 + d ** z] ** c1,
+      a2 - b1 ** z ** inv[1 + d ** z] ** c2,
+      -b1 ** (1 - z ** inv[1 + d ** z] ** d) ** w1,
+      -b1 ** (1 - z ** inv[1 + d ** z] ** d) ** w2},
+     {a3 - b2 ** z ** inv[1 + d ** z] ** c1,
+      a4 - b2 ** z ** inv[1 + d ** z] ** c2,
+      -b2 ** (1 - z ** inv[1 + d ** z] ** d) ** w1,
+      -b2 ** (1 - z ** inv[1 + d ** z] ** d) ** w2},
+     {v1 ** inv[1 + d ** z] ** c1, v1 ** inv[1 + d ** z] ** c2,
+      u1 - v1 ** inv[1 + d ** z] ** d ** w1,
+      u2 - v1 ** inv[1 + d ** z] ** d ** w2},
+     {v2 ** inv[1 + d ** z] ** c1, v2 ** inv[1 + d ** z] ** c2,
+      u3 - v2 ** inv[1 + d ** z] ** d ** w1,
+      u4 - v2 ** inv[1 + d ** z] ** d ** w2}},
+    {{b1 - b1 ** z ** inv[1 + d ** z] ** d},
+     {b2 - b2 ** z ** inv[1 + d ** z] ** d}, {v1 ** inv[1 + d ** z] ** d},
+     {v2 ** inv[1 + d ** z] ** d}},
+    {{c1 - d ** z ** inv[1 + d ** z] ** c1,
+      c2 - d ** z ** inv[1 + d ** z] ** c2,
+      -d ** (1 - z ** inv[1 + d ** z] ** d) ** w1,
+      -d ** (1 - z ** inv[1 + d ** z] ** d) ** w2}},
+    {{d - d ** z ** inv[1 + d ** z] ** d}}];
+
+
+test[ NCConnDiff, 3 ] = 
+ParallelConnect[ sys1, sys2 ] == 
+   StateSpace[{{a1, a2, 0, 0}, {a3, a4, 0, 0}, {0, 0, u1, u2},
+     {0, 0, u3, u4}}, {{b1}, {b2}, {v1}, {v2}}, {{c1, c2, w1, w2}},
+    {{d + z}}];
+
+test[ NCConnDiff, 4 ] = 
+NCInverseSystem [ sys1 ] ==   
+    StateSpace[{{a1 - b1 ** inv[d] ** c1, a2 - b1 ** inv[d] ** c2},
+     {a3 - b2 ** inv[d] ** c1, a4 - b2 ** inv[d] ** c2}},
+    {{-b1 ** inv[d]}, {-b2 ** inv[d]}}, {{inv[d] ** c1, inv[d] ** c2}},
+    {{inv[d]}}];
+
+
+test[ NCConnDiff, 5 ] = 
+NCConjugateSystem[ sys1  ] ==
+StateSpace[{{-tp[a1], -tp[a3]}, {-tp[a2], -tp[a4]}},
+    {{-tp[c1]}, {-tp[c2]}}, {{tp[b1], tp[b2]}}, {{tp[d]}}];
+
+test[ NCConnDiff, 6] =
+TransferFunction[ sys1 ] ==
+TransferFunction[{{d + (c2 ** inv[-a4 - a3 ** inv[-a1 + #1] ** a2 + #1] + 
+              c1 ** inv[-a1 + #1] ** a2 ** 
+                inv[-a4 - a3 ** inv[-a1 + #1] ** a2 + #1]) ** 
+          b2 + (c1 ** (inv[-a1 + #1] + 
+                    inv[-a1 + #1] ** a2 ** 
+                      inv[-a4 - a3 ** inv[-a1 + #1] ** a2 + #1] ** a3 ** 
+                      inv[-a1 + #1]) + 
+              c2 ** inv[-a4 - a3 ** inv[-a1 + #1] ** a2 + #1] ** a3 ** 
+                inv[-a1 + #1]) ** b1}}];
+Print["\n\n"];
+Print["Results from the file NCConnectionTest"];
+For[ i=1, i<= 6, i++,
+     Print["Test #",i," was ",test[NCConnDiff,i]]
+   ];
+

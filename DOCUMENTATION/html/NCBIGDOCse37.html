@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>10.1 A Simplification example</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 342--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse38.html" >next</a>] [<a 
+href="#tailNCBIGDOCse37.html">tail</a>] [<a 
+href="NCBIGDOCch10.html#NCBIGDOCse37.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">10.1   </span> <a 
+ id="x56-18600010.1"></a>A Simplification example</h3>
+<!--l. 344--><p class="noindent">We want to simplify a polynomial in the variables of (<a 
+href="NCBIGDOCch10.html#x55-185001r1">10.1<!--tex4ht:ref: demoinv --></a>). We begin by setting the variables
+noncommutative with the following command.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;SetNonCommutative[y,&#x00A0;Inv[y],&#x00A0;Inv[1-y],&#x00A0;a,&#x00A0;x]
+</div>
+</td></tr></table>
+<!--l. 353--><p class="nopar">
+<!--l. 355--><p class="indent">   Next we must give the computer a precise idea of what we mean by &#8220;simple&#8221; versus
+&#8220;complicated&#8221;. This formally corresponds to specifying an order on the indeterminates. If <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>]
+and <span 
+class="cmmi-12">Inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">y</span>] are going to stand for the inverses of <span 
+class="cmmi-12">y </span>and 1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">y </span>respectively, as the notation
+suggests, then the order
+   <center class="math-display" >
+<img 
+src="NCBIGDOC56x.png" alt="y &lt; Inv[y] &lt; Inv[1 - y] &lt; a &lt; x
+" class="math-display" ></center> sits well with intuition, since the matrix <span 
+class="cmmi-12">y </span>is &#8220;simpler&#8221; than (1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">y</span>)<sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>.
+<span class="footnote-mark"><a 
+href="NCBIGDOC57.html#fn1x10"><sup >1</sup></a></span><a 
+ id="x56-186001f1"></a> To set this
+order input <span class="footnote-mark"><a 
+href="NCBIGDOC58.html#fn2x10"><sup >2</sup></a></span><a 
+ id="x56-186002f2"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[6]:=&#x00A0;SetMonomialOrder[{&#x00A0;y,&#x00A0;Inv[y],&#x00A0;Inv[1-y],&#x00A0;a,&#x00A0;x}]
+</div>
+</td></tr></table>
+<!--l. 380--><p class="nopar">
+<!--l. 392--><p class="noindent">Suppose that we want to connect the Mathematica variables <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>] with the mathematical idea of
+the inverse of <span 
+class="cmmi-12">y </span>and <span 
+class="cmmi-12">Inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">y</span>] with the mathematical idea of the inverse of 1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">y</span>. Then just type
+<span class="footnote-mark"><a 
+href="NCBIGDOC59.html#fn3x10"><sup >3</sup></a></span><a 
+ id="x56-186003f3"></a> in the
+defining relations for the inverses involved.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[7]:=&#x00A0;resol&#x00A0;=&#x00A0;{y&#x00A0;**&#x00A0;Inv[y]&#x00A0;==&#x00A0;1,&#x00A0;&#x00A0;&#x00A0;Inv[y]&#x00A0;**&#x00A0;y&#x00A0;==&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1&#x00A0;-&#x00A0;y)&#x00A0;**&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;==&#x00A0;1,&#x00A0;&#x00A0;&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;**&#x00A0;(1&#x00A0;-&#x00A0;y)&#x00A0;==&#x00A0;1}
+&#x00A0;<br />Out[7]=&#x00A0;{y&#x00A0;**&#x00A0;Inv[y]&#x00A0;==&#x00A0;1,&#x00A0;Inv[y]&#x00A0;**&#x00A0;y&#x00A0;==&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1&#x00A0;-&#x00A0;y)&#x00A0;**&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;==&#x00A0;1,&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;**&#x00A0;(1&#x00A0;-&#x00A0;y)&#x00A0;==&#x00A0;1}
+</div>
+</td></tr></table>
+<!--l. 408--><p class="nopar">
+<!--l. 411--><p class="noindent">As an example of simplification, we simplify the two expressions <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>and <span 
+class="cmmi-12">x </span>+ <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[1 <span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">y</span>]
+assuming that <span 
+class="cmmi-12">y </span>satisfies <span 
+class="cmmi-12">resol </span>and <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>= <span 
+class="cmmi-12">a</span>. The following command computes a Gröbner
+Basis for the union of <span 
+class="cmmi-12">resol </span>and <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">} </span>and simplifies the expressions <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>and
+<span 
+class="cmmi-12">x </span>+ <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">y</span>] using the Gröbner Basis. Experts will note that since we are using an
+iterative Gröbner Basis algorithm which may not terminate, we must set a limit on how many
+iterations we permit; here we specify <span 
+class="cmti-12">at most </span>3 iterations.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[8]:=&#x00A0;NCSimplifyAll[{x**x,x+Inv[y]**Inv[1-y]},Join[{x**x-a},resol],3]
+&#x00A0;<br />Out[8]=&#x00A0;{a,&#x00A0;x&#x00A0;+&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;+&#x00A0;Inv[y]}
+</div>
+</td></tr></table>
+<!--l. 433--><p class="nopar">
+<!--l. 446--><p class="noindent">We name the variable <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>], because this has more meaning to the user than would using a single
+letter. <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>] has the same status as a single letter with regard to all of the commands which we
+have demonstrated.
+<!--l. 455--><p class="indent">   Next we illustrate an extremely valuable simplification command. The following example
+performs the same computation as the previous command, although one does not have to type in
+<span 
+class="cmmi-12">resol </span>explicitly. More generally one does not have to type in relations involving the definition of
+inverse explicitly. Beware, <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCSimplifyRationalX1</span></span></span> picks its own order on variables and completely
+ignores any order that you might have set.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[9]:=&#x00A0;&lt;&lt;NCSRX1.m
+&#x00A0;<br />In[10]:=&#x00A0;NCSimplifyRationalX1[{x**x**x,x+Inv[z]**Inv[1-z]},{x**x-a},3]
+&#x00A0;<br />Out[11]=&#x00A0;{a&#x00A0;**&#x00A0;x,&#x00A0;x&#x00A0;+&#x00A0;Inv[1&#x00A0;-&#x00A0;z]&#x00A0;+&#x00A0;inv[z]}
+</div>
+</td></tr></table>
+<!--l. 470--><p class="nopar">
+<!--l. 474--><p class="indent">   <span 
+class="cmbx-12">WARNING: Never use inv[ </span><span 
+class="cmbx-12">&#x00A0;] with NCGB since it has special properties given</span>
+<span 
+class="cmbx-12">to it in NCAlgebra and these are not recognized by the C++ code behind</span>
+<span 
+class="cmbx-12">NCGB</span>
+
+   <!--l. 480--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse38.html" >next</a>] [<a 
+href="NCBIGDOCse37.html" >front</a>] [<a 
+href="NCBIGDOCch10.html#NCBIGDOCse37.html" >up</a>] </p></div>
+<!--l. 480--><p class="indent">   <a 
+ id="tailNCBIGDOCse37.html"></a>  
+</body></html> 

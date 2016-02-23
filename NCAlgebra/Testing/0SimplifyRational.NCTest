@@ -1,0 +1,36 @@
+(* :Title: 	0SimplifyRational.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	David Hurst (dhurst). *)
+
+(* :Summary:	TEST FILE.  *)
+
+(* :History: 
+   :8/18/92     Created. (dhurst)
+*)
+
+Block[ {s,i},
+     test[ NCSimplify0Rational,1] = 
+          NCSimplify0Rational[inv[2 - s] ** s] == -1 + 2*inv[2 - s];
+     test[ NCSimplify0Rational,2] = 
+          NCSimplify0Rational[ 
+               -tp[C1] ** C1 - XX ** B2 ** inv[d12] ** C1 - 
+               tp[C1] ** inv[tp[d12]] ** tp[B2] ** XX - 
+               XX ** inv[1 - YY ** XX] ** B1 ** inv[d21] ** C2 - 
+               XX ** inv[1 - YY ** XX] ** B1 ** tp[B1] ** XX + 
+               inv[YY] ** inv[1 - YY ** XX] ** B1 ** inv[d21] ** C2
+          ] ==
+               -(tp[C1] ** C1 + XX ** inv[1 - YY ** XX] ** 
+               (B1 ** inv[d21] ** C2 + B1 ** tp[B1] ** XX) + 
+               XX ** B2 ** inv[d12] ** C1 + 
+	       tp[C1] ** inv[tp[d12]] ** tp[B2] ** XX - 
+	       inv[YY] ** inv[1 - YY ** XX] ** B1 ** inv[d21] ** C2);
+
+     Print["Results from the file 0SimplifyRational.NCTest"];
+     For[ i=1, i<=2, i++,
+          Print["Test #",i," was ",test[NCSimplify0Rational,i]]
+     ];
+];
+
+
+
+

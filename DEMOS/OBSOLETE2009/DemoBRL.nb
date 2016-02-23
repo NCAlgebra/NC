@@ -1,0 +1,1800 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     54296,       1613]*)
+(*NotebookOutlinePosition[     55116,       1642]*)
+(*  CellTagsIndexPosition[     55072,       1638]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["The Bounded Real Lemma", "Title"],
+
+Cell["Introduction", "Subsection"],
+
+Cell["\<\
+This example derives the Bounded Real Lemma for a linear system for \
+a linear system. this is a special case of this lemma for a more general \
+system described in [BHW].
+First we  load the program:\
+\>", "Text"],
+
+Cell[BoxData[
+    \(<< NCAlgebra.m\)], "Input"],
+
+Cell["System Definition", "Subsection",
+  FontFamily->"Helvetica"],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .5 
+MathPictureStart
+/Mabs {
+Mgmatrix idtransform
+Mtmatrix dtransform
+} bind def
+/Mabsadd { Mabs
+3 -1 roll add
+3 1 roll add
+exch } bind def
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.261905 0.47619 0.0119048 0.47619 [
+[ 0 0 0 0 ]
+[ 1 .5 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 0 m
+1 0 L
+1 .5 L
+0 .5 L
+closepath
+clip
+newpath
+0 g
+gsave
+.1 .3 -70 -12.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 25 translate 1 -1 scale
+63.000000 17.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+65.000000 17.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+(W) show
+77.000000 17.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Courier
+grestore
+gsave
+.9 .3 -81 -13.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 27 translate 1 -1 scale
+63.000000 19.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+63.000000 19.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+(out) show
+99.000000 19.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Courier
+grestore
+gsave
+.2619 .25 -61 -11.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 23 translate 1 -1 scale
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(F) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+73.000000 15.000000 moveto
+(H) show
+82.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(x) show
+92.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(,) show
+102.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(W) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+112.000000 15.000000 moveto
+(L) show
+121.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Math2Mono
+%%+ font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Math2Mono
+%%+ Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Math2Mono
+%%+ font Courier
+grestore
+gsave
+.7381 .25 -123 -11.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 23 translate 1 -1 scale
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(G) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+73.000000 15.000000 moveto
+(H) show
+82.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(x) show
+92.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(,) show
+102.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(W) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+112.000000 15.000000 moveto
+(L) show
+121.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Math2Mono
+%%+ font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Math2Mono
+%%+ Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Math2Mono
+%%+ font Courier
+grestore
+.2619 .25 m
+.16667 .27857 L
+.21429 .25 L
+.16667 .22143 L
+F
+.97619 .25 m
+.88095 .27857 L
+.92857 .25 L
+.88095 .22143 L
+F
+.5 Mabswid
+[ ] 0 setdash
+.2619 .0119 m
+.7381 .0119 L
+s
+.2619 .4881 m
+.7381 .4881 L
+s
+.2619 .0119 m
+.2619 .4881 L
+s
+.7381 .0119 m
+.7381 .4881 L
+s
+.02381 .25 m
+.2619 .25 L
+s
+.7381 .25 m
+.97619 .25 L
+s
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Figure-1",
+  ImageSize->{288, 144},
+  ImageMargins->{{43, 0}, {0, 0}},
+  ImageRegion->{{0, 1}, {0, 1}},
+  FontFamily->"Helvetica",
+  ImageCache->GraphicsData["Bitmap", "\<\
+CF5dJ6E]HGAYHf4PAg9QL6QYHg<PAVmbKF5d0`40004P0000T0P10`40000100000?ooog1`L<c<c;34
+gZo^k[Ng]fIVI_Cdm42P`0000000E@00ZP00o`1E001EE@1EZP1Eo`2Z002ZE@2ZZP2Zo`3o003oE@3o
+ZP3ooeD005D0EED0ZUD0oeEE05EEEEEEZUEEoeFZ05FZEEFZZUFZoeGo05GoEEGoZUGoojX00:X0EJX0
+ZZX0ojYE0:YEEJYEZZYEojZZ0:ZZEJZZZZZZoj[o0:[oEJ[oZZ[oool00?l0EOl0Z_l0oomE0?mEEOmE
+Z_mEoonZ0?nZEOnZZ_nZoooo0?ooEOooZ_ooo`0001lO7clo?emOGgmoOinOWkno_moOgoooon?U]knH
+]]cU;LC4a>[ZjWAdM:NWYj0Pl=WIfJj^[WMgM`000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000?m98DT00?m98DT00?m98DT00?m98DT004]9
+R@Y<B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00BdT00`Y9B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9
+B@1:B@00<TT22QM900<:BDT0QDT00`Y9B@0XB@8:84T003A90`XDB@032TU900m900<=BDT084T00`e9
+B@0TB@033DU9021900<=BDT01TT00`Y9B@0ZB@<:7DT003E91PX@B@032TU900i900<=BDT03DT00`e9
+B@0BB@033DU9029900<=BDT03DT00`e9B@0BB@033DU900E900<:BDT0;4T52QU9000gB@L:3DT00`Y9
+B@0>B@033DU900e90PdCB@033DU9029900<=BDT03DT23A=900<=BDT01DT00`Y9B@0]B@L:5TT003U9
+20X:B@032TU900@=2DT00`e9B@02B@<=00A93@d=1TT23@M900<=BDT00TT00`e9B@04B@033DU901A9
+1@d7B@033DU900990`d014T=3@d6B@8=1dT00`e9B@02B@033DU900A900<=BDT014T00`Y9B@0_B@P:
+4dT003Y92`X6B@052TU9B@d02dT00`e9B@03B@053DU9B@d01dT23@M900<=BDT00TT00`e9B@04B@03
+3DU901=900<=BDT00dT00`e9B@04B@033DU900=900D=BDU93@07B@8=1dT00`e9B@02B@033DU900A9
+00<=BDT014T00`Y9B@0aB@X:3dT003a930X3B@052TU9B@d02dT00`e9B@04B@033DT=015900<=BDT0
+0TT00`e9B@04B@033DU9019900<=BDT014T00`e9B@04B@033DU900A900<=B@d04DT00`e9B@02B@03
+3DU900A900<=BDT014T00`Y9B@0cB@/:34T000M9A@X3B@043DU93@Q900<=BDT01DT00`e9B@0?B@03
+3DT=009900<=B@d01DT00`e9B@0BB@033DU9009910d5B@033DU900E900<=BDT03dT00`e93@02B@03
+3DT=00E900<=BDT014U52PQ9000lB@`:0dT010Y9BDT43@Q900<=BDT014T00`e93@0@B@033DT=0099
+00<=B@d01DT00`e9B@0BB@033DU900]900<=BDT014T00`e93@0@B@033DT=009900<=B@d01DT00`e9
+B@04B@032TU903=92`X<B@00>TT;2PI900@:BDU910d8B@033DU900=900D=BDU93@0?B@033DU900A9
+00<=BDT00dT00`e9B@0BB@033DU900]900<=BDT00dT01@e9BDT=00m900<=BDT014T00`e9B@03B@03
+3DU900A900<:BDT0<DT:2Pm9000iB@P:2TT01@Y9BDT=009900<=BDT01dT010e9BDT33@04B@d=3@i9
+00<=BDT00Pd2B@033DU9009900<=BDT04dT00`e9B@0<B@043DU9B@<=00A93@d=3TT00`e9B@023@99
+00<=BDT00TT00`e9B@05B@032TU902m920XCB@00=dT72Pe900D:BDU93@04B@033DU900E900<=BDT0
+5TT00`e9B@04B@033DU9009900<=BDT04dT00`e9B@04B@033DU900E900<=BDT05TT00`e9B@04B@03
+3DU9009900<=BDT01DT00`Y9B@0]B@L:5TT003E91PX@B@052TU9B@d014T00`e9B@06B@033DU901E9
+00<=BDT014T01@e9BDT=01M900<=BDT00TT23@Q900<=BDT05DT00`e9B@04B@053DU9B@d024T00`Y9
+B@0/B@D:6DT003A90`XDB@032TU900L=7dT33@A90`dKB@@=00=93DT07TT33@A90`d;B@032TU902Y9
+0`XMB@00<TT22QM900<:BDT0QDT00`Y9B@0XB@8:84T004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT07DT4>PQ913X2B@8j1TT4>Pm9000JB@8j0TT2>R]9
+00<:BDT0QDT00`Y9B@0MB@@j24T4>P990SX6B@@j3dT001Y90SX2B@8j:dT00`Y9B@25B@032TU901]9
+0SX4B@8j14T2>PA90SX6B@8j14T2>Pe9000JB@8j0TT2>R]900<:BDT0QDT00`Y9B@0KB@8j14T2>PA9
+0SX4B@8j1TT2>PA90SX=B@006TT2>P990SX[B@032TU908E900<:BDT06dT2>PA90SX4B@8j14T2>PI9
+0SXCB@0064T2>P990SX2B@8j:DT00`Y9B@25B@032TU901]90SX4B@8j14T2>PA90SX6B@8j4dT001Q9
+0SX2B@8j0TT2>RU900<:BDT0QDT00`Y9B@0KB@8j14T2>PA90SX4B@8j1TT2>Q=9000HB@8j0TT2>P99
+0SXYB@032TU908E900<:BDT06dT2>PA90SX4B@8j14T2>PI90SXCB@0064T2>P990SX2B@8j:DT00`Y9
+B@25B@032TU901e913X4B@@j0TT4>PA923X?B@0064T2>PI90SXYB@032TU908E900<:BDT07DT4>PA9
+13X2B@@j14T8>Pm9000HB@8j1TT2>RU900<:BDT0QDT00`Y9B@0eB@8j4dT001I91SX2B@Hj9dT00`Y9
+B@25B@032TU903E90SXCB@005TT6>P991SXWB@032TU908E900<:BDT0=DT2>Q=9001;B@032TU908E9
+00<:BDT0=DT2>Q=9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdT00`Y9
+B@25B@032TU904Y9001;B@032TU908E900<:BDT0BTT004]900<:BDT0QDT00`Y9B@1:B@00BdV92Ta9
+003oBB59003oBB59003oBB590000\
+\>"],
+  ImageRangeCache->{{{104, 391}, {438.938, 295.938}} -> {-1.31733, 2.14799, 
+  0.00734274, 0.00734274}}],
+
+Cell[TextData[{
+  StyleBox["\twhere: \t\t "],
+  StyleBox[Cell[BoxData[
+      \(TraditionalForm\`dx\/dt\)]]],
+  StyleBox["= F(x,W)  = Ax+BW ;\n\t\t\tout  = G(x,W) = Cx+DW."]
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Demo Initialisation", "Subsection",
+  FontFamily->"Helvetica"],
+
+Cell["\<\
+1) To set  all matrices  as noncommutative,we use the well known \
+command:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetNonCommutative[F, \ G, \ A, B, C, D, x, \ W]\)], "Input"],
+
+Cell[BoxData[
+    \({False, False, False, False, False, False, False, False}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["2) Next we define F, and G:"]], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(F[x_, W_] := A**x + B**W\), 
+    \(G[x_, W_] := C**x + D**W\), 
+    \(out = \ G[x, W]\)}], "Input"],
+
+Cell[BoxData[
+    \(General::"spell1" \( : \ \) 
+      "Possible spelling error: new symbol name \"\!\(out\)\" is similar to \
+existing symbol \"\!\(Out\)\"."\)], "Message"],
+
+Cell[BoxData[
+    \(C**x + D**W\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox[
+"3) Recall definition of Energy Hamiltonian H"]], "Text"],
+
+Cell[BoxData[
+    \(H = 
+      \(out\^T\) out - \(\[Gamma]\^2\) \(W\^T\) W + 
+        \((p.F + \((p.F)\)\^T)\)\/2\)], "Input",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[TextData[{
+  StyleBox["\twhere\t\t           "],
+  StyleBox[Cell[BoxData[
+      \(TraditionalForm\`e(x) = \(x\^T\) XX\ x\)]]],
+  StyleBox["\n                                               \t\t"],
+  StyleBox[Cell[BoxData[
+      \(TraditionalForm\`p = \(\[Del]\(e(x)\) = 2 \((x.XX)\)\^T\)\)]]]
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetNonCommutative[\ p]\)], "Input"],
+
+Cell[BoxData[
+    \({False}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(H = 
+      tp[out]**out - \((\((\[Gamma]^2)\)*tp[W]**W)\) + 
+        \((p**F[x, W] + tp[F[x, W]]**tp[p])\)/2\)], "Input"],
+
+Cell[BoxData[
+    \(1\/2\ 
+        \((p**\((A**x + B**W)\) + \((tp[W]**tp[B] + tp[x]**tp[A])\)**tp[p])
+          \) + \((tp[W]**tp[D] + tp[x]**tp[C])\)**\((C**x + D**W)\) - 
+      \[Gamma]\^2\ tp[W]**W\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetNonCommutative[e, XX]\)], "Input"],
+
+Cell[BoxData[
+    \({False, False}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(e[x_] := tp[x]**XX**x\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[XX] = XX\)], "Input"],
+
+Cell[BoxData[
+    \(XX\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(p = 2\ tp[XX**x]\)], "Input"],
+
+Cell[BoxData[
+    \(2\ tp[x]**XX\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Lemma"]], "Subsection"],
+
+Cell[TextData[{
+  StyleBox["Assume "],
+  StyleBox[Cell[BoxData[
+      FormBox[
+        SuperscriptBox[
+          RowBox[{
+            RowBox[{
+              FormBox[\((\(-\[Gamma]\^2\) + D\^T\),
+                "TraditionalForm"], "D"}], ")"}], \(-1\)], 
+        TraditionalForm]]]],
+  StyleBox[
+  "Exists.\nThen the linear system described in the introduction above is:\n\t\
+i) finite gain dissipative with gain bounded by "],
+  StyleBox[Cell[BoxData[
+      \(TraditionalForm\`\[Gamma]\^2\)]]],
+  StyleBox[".\n\t"],
+  StyleBox["ii) Energy function "],
+  StyleBox[Cell[BoxData[
+      \(TraditionalForm\`\(x\^\(T\ \)\) XX\ x\)]]],
+  StyleBox["."]
+}], "Text"],
+
+Cell[TextData[StyleBox["if and only if"]], "Text",
+  FontColor->RGBColor[1, 0, 0]],
+
+Cell[TextData[{
+  StyleBox[
+  "XX is a positive semi definite solution to the Riccati inequality:\n\n\
+XXA"],
+  StyleBox[Cell[BoxData[
+      \(TraditionalForm\`\(\(+A\^T\) XX + \ \(C\^T\) C\ \)\)]]],
+  StyleBox["\n                              "],
+  StyleBox[Cell[BoxData[
+      \(TraditionalForm
+      \`\(+\((XX\ B + \ \(C\^T\) D)\)\) 
+          \(\((\(-\[Gamma]\^2\) + \(D\^T\) D)\)\^\(-1\)\) 
+          \((\(-B\^T\) XX - \(D\^T\) C)\)\  \[LessEqual] \ 0\)]]]
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Proof (by computation)"]], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(H\)], "Input"],
+
+Cell[BoxData[
+    \(\((tp[W]**tp[D] + tp[x]**tp[C])\)**\((C**x + D**W)\) - 
+      \[Gamma]\^2\ tp[W]**W + 
+      1\/2\ \((2\ \((tp[W]**tp[B] + tp[x]**tp[A])\)**XX**x + 
+            2\ tp[x]**XX**\((A**x + B**W)\))\)\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox[" SetOutput[all->True]"]], "Input",
+  FontFamily->"Helvetica"],
+
+Cell[TextData[StyleBox[
+"In[13] was obtain by clicking on \"SetOutputPretty\" in the Main Commands \
+section of NCPalette."]], "Text"],
+
+Cell[TextData[StyleBox[
+"The strategy here is to maximize H and see if it is <0"]], "Text",
+  FontSize->16],
+
+Cell[TextData[StyleBox[
+"1) differentiate to find the \"worst\" input W. Use the commmand Grad on the \
+NCPalette or"]], "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Grad[H, W]\)], "Input"],
+
+Cell[BoxData[
+    \("Grad gives correct answers only for a limited class   of \
+polynomials"\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{\(\(-2\)\ W\ \[Gamma]\^2\), "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}], "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "D", ".", "W"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox[
+"2) find the critical W using the command NCSolve or "]], "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSolve[% == 0, W]\)], "Input"],
+
+Cell[BoxData[
+    \(NCSolveLinear1::"diagnostics" \( : \ \) 
+      "\n       Since the following expression is not zero\n                  \
+                               \!\(\(2\\ \(\(tp[B]\) ** XX ** x\)\) + \(2\\ \
+\(\(tp[D]\) ** C ** x\)\) - \(4\\ \\[Gamma]\^2\\ \(\\[LeftSkeleton] 1 \
+\\[RightSkeleton]\)\) - \(\\[LeftSkeleton] 1 \\[RightSkeleton]\) + \(4\\ \
+\(\\[LeftSkeleton] 1 \\[RightSkeleton]\)\) + \(4\\ \(\\[LeftSkeleton] 1 \
+\\[RightSkeleton]\)\)\) \n       you may want to double check the result. \n  \
+     This expression can be retrieved by the command NCSolveCheck[]. \n"\)], 
+  "Message"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{"W", "\[Rule]", 
+        RowBox[{
+          RowBox[{"2", " ", 
+            RowBox[{
+              TagBox[
+                SuperscriptBox[
+                  RowBox[{"(", 
+                    RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                      RowBox[{"2", " ", 
+                        RowBox[{
+                          TagBox[\(D\^"T"\),
+                            HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+                HoldForm], ".", 
+              TagBox[\(B\^"T"\),
+                HoldForm], ".", "XX", ".", "x"}]}], "+", 
+          RowBox[{"2", " ", 
+            RowBox[{
+              TagBox[
+                SuperscriptBox[
+                  RowBox[{"(", 
+                    RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                      RowBox[{"2", " ", 
+                        RowBox[{
+                          TagBox[\(D\^"T"\),
+                            HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+                HoldForm], ".", 
+              TagBox[\(D\^"T"\),
+                HoldForm], ".", "C", ".", "x"}]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["3) plug the critical point back into H "]], "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Substitute[H, %]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(x\^"T"\),
+                        HoldForm], ".", "XX", ".", "B", ".", 
+                      TagBox[
+                        SuperscriptBox[
+                          RowBox[{"(", 
+                            RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                              RowBox[{"2", " ", 
+                                RowBox[{
+                                  TagBox[\(D\^"T"\),
+                                    HoldForm], ".", "D"}]}]}], ")"}], 
+                          \("-1"\)],
+                        HoldForm]}]}], "+", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(x\^"T"\),
+                        HoldForm], ".", 
+                      TagBox[\(C\^"T"\),
+                        HoldForm], ".", "D", ".", 
+                      TagBox[
+                        SuperscriptBox[
+                          RowBox[{"(", 
+                            RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                              RowBox[{"2", " ", 
+                                RowBox[{
+                                  TagBox[\(D\^"T"\),
+                                    HoldForm], ".", "D"}]}]}], ")"}], 
+                          \("-1"\)],
+                        HoldForm]}]}]}], ")"}], ".", 
+              TagBox[\(D\^"T"\),
+                HoldForm]}], "+", 
+            RowBox[{
+              TagBox[\(x\^"T"\),
+                HoldForm], ".", 
+              TagBox[\(C\^"T"\),
+                HoldForm]}]}], ")"}], ".", 
+        RowBox[{"(", 
+          RowBox[{\(C.x\), "+", 
+            RowBox[{"D", ".", 
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[
+                        SuperscriptBox[
+                          RowBox[{"(", 
+                            RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                              RowBox[{"2", " ", 
+                                RowBox[{
+                                  TagBox[\(D\^"T"\),
+                                    HoldForm], ".", "D"}]}]}], ")"}], 
+                          \("-1"\)],
+                        HoldForm], ".", 
+                      TagBox[\(B\^"T"\),
+                        HoldForm], ".", "XX", ".", "x"}]}], "+", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[
+                        SuperscriptBox[
+                          RowBox[{"(", 
+                            RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                              RowBox[{"2", " ", 
+                                RowBox[{
+                                  TagBox[\(D\^"T"\),
+                                    HoldForm], ".", "D"}]}]}], ")"}], 
+                          \("-1"\)],
+                        HoldForm], ".", 
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "C", ".", "x"}]}]}], ")"}]}]}], 
+          ")"}]}], "+", 
+      RowBox[{\(\[Gamma]\^2\), " ", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{"2", " ", 
+                RowBox[{
+                  TagBox[\(x\^"T"\),
+                    HoldForm], ".", "XX", ".", "B", ".", 
+                  TagBox[
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[\(D\^"T"\),
+                                HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+                    HoldForm]}]}], "+", 
+              RowBox[{"2", " ", 
+                RowBox[{
+                  TagBox[\(x\^"T"\),
+                    HoldForm], ".", 
+                  TagBox[\(C\^"T"\),
+                    HoldForm], ".", "D", ".", 
+                  TagBox[
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[\(D\^"T"\),
+                                HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+                    HoldForm]}]}]}], ")"}], ".", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{\(-2\), " ", 
+                RowBox[{
+                  TagBox[
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[\(D\^"T"\),
+                                HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+                    HoldForm], ".", 
+                  TagBox[\(B\^"T"\),
+                    HoldForm], ".", "XX", ".", "x"}]}], "-", 
+              RowBox[{"2", " ", 
+                RowBox[{
+                  TagBox[
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[\(D\^"T"\),
+                                HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+                    HoldForm], ".", 
+                  TagBox[\(D\^"T"\),
+                    HoldForm], ".", "C", ".", "x"}]}]}], ")"}]}]}], "+", 
+      RowBox[{\(1\/2\), " ", 
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{"2", " ", 
+              RowBox[{
+                RowBox[{"(", 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"(", 
+                        RowBox[{
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[\(x\^"T"\),
+                                HoldForm], ".", "XX", ".", "B", ".", 
+                              TagBox[
+                                SuperscriptBox[
+                                  RowBox[{"(", 
+                                    RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                                      RowBox[{"2", " ", 
+                                        RowBox[{
+                                        TagBox[\(D\^"T"\),
+                                        HoldForm], ".", "D"}]}]}], ")"}], 
+                                  \("-1"\)],
+                                HoldForm]}]}], "+", 
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[\(x\^"T"\),
+                                HoldForm], ".", 
+                              TagBox[\(C\^"T"\),
+                                HoldForm], ".", "D", ".", 
+                              TagBox[
+                                SuperscriptBox[
+                                  RowBox[{"(", 
+                                    RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                                      RowBox[{"2", " ", 
+                                        RowBox[{
+                                        TagBox[\(D\^"T"\),
+                                        HoldForm], ".", "D"}]}]}], ")"}], 
+                                  \("-1"\)],
+                                HoldForm]}]}]}], ")"}], ".", 
+                      TagBox[\(B\^"T"\),
+                        HoldForm]}], "+", 
+                    RowBox[{
+                      TagBox[\(x\^"T"\),
+                        HoldForm], ".", 
+                      TagBox[\(A\^"T"\),
+                        HoldForm]}]}], ")"}], ".", "XX", ".", "x"}]}], "+", 
+            RowBox[{"2", " ", 
+              RowBox[{
+                TagBox[\(x\^"T"\),
+                  HoldForm], ".", "XX", ".", 
+                RowBox[{"(", 
+                  RowBox[{\(A.x\), "+", 
+                    RowBox[{"B", ".", 
+                      RowBox[{"(", 
+                        RowBox[{
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[
+                                SuperscriptBox[
+                                  RowBox[{"(", 
+                                    RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                                      RowBox[{"2", " ", 
+                                        RowBox[{
+                                        TagBox[\(D\^"T"\),
+                                        HoldForm], ".", "D"}]}]}], ")"}], 
+                                  \("-1"\)],
+                                HoldForm], ".", 
+                              TagBox[\(B\^"T"\),
+                                HoldForm], ".", "XX", ".", "x"}]}], "+", 
+                          RowBox[{"2", " ", 
+                            RowBox[{
+                              TagBox[
+                                SuperscriptBox[
+                                  RowBox[{"(", 
+                                    RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                                      RowBox[{"2", " ", 
+                                        RowBox[{
+                                        TagBox[\(D\^"T"\),
+                                        HoldForm], ".", "D"}]}]}], ")"}], 
+                                  \("-1"\)],
+                                HoldForm], ".", 
+                              TagBox[\(D\^"T"\),
+                                HoldForm], ".", "C", ".", "x"}]}]}], 
+                        ")"}]}]}], ")"}]}]}]}], ")"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["4) Expand the expression using  NCExpand  "]], "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCExpand[%]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", "XX", ".", "A", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(A\^"T"\),
+          HoldForm], ".", "XX", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C", ".", "x"}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}], "-", 
+      RowBox[{"4", " ", \(\[Gamma]\^2\), " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "-", 
+      RowBox[{"4", " ", \(\[Gamma]\^2\), " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}], "-", 
+      RowBox[{"4", " ", \(\[Gamma]\^2\), " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "-", 
+      RowBox[{"4", " ", \(\[Gamma]\^2\), " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "+", 
+      RowBox[{"4", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox[
+"5) try to simplify the expression using NCSymplifyRational"]], "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSimplifyRational[%]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", "XX", ".", "A", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(A\^"T"\),
+          HoldForm], ".", "XX", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C", ".", "x"}], "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}], "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(B\^"T"\),
+            HoldForm], ".", "XX", ".", "x"}]}], "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          TagBox[\(C\^"T"\),
+            HoldForm], ".", "D", ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          TagBox[\(D\^"T"\),
+            HoldForm], ".", "C", ".", "x"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox[
+"6) Collect common terms and Arrange the expression as much as possible"]], 
+  "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCCollectSymmetric[%, inv[2\ \[Gamma]^2\  - \ 2\ tp[D]**D]]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{
+              TagBox[\(x\^"T"\),
+                HoldForm], ".", "XX", ".", "B"}], "+", 
+            RowBox[{
+              TagBox[\(x\^"T"\),
+                HoldForm], ".", 
+              TagBox[\(C\^"T"\),
+                HoldForm], ".", "D"}]}], ")"}], ".", 
+        TagBox[
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                RowBox[{"2", " ", 
+                  RowBox[{
+                    TagBox[\(D\^"T"\),
+                      HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{"2", " ", 
+              RowBox[{
+                TagBox[\(B\^"T"\),
+                  HoldForm], ".", "XX", ".", "x"}]}], "+", 
+            RowBox[{"2", " ", 
+              RowBox[{
+                TagBox[\(D\^"T"\),
+                  HoldForm], ".", "C", ".", "x"}]}]}], ")"}]}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", "XX", ".", "A", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(A\^"T"\),
+          HoldForm], ".", "XX", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C", ".", "x"}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCCollectSymmetric[%, {x, XX}]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{\(XX.A\), "+", 
+            RowBox[{
+              TagBox[\(A\^"T"\),
+                HoldForm], ".", "XX"}]}], ")"}], ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{\(XX.B\), "+", 
+            RowBox[{
+              TagBox[\(C\^"T"\),
+                HoldForm], ".", "D"}]}], ")"}], ".", 
+        TagBox[
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                RowBox[{"2", " ", 
+                  RowBox[{
+                    TagBox[\(D\^"T"\),
+                      HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{"2", " ", 
+              RowBox[{
+                TagBox[\(B\^"T"\),
+                  HoldForm], ".", "XX"}]}], "+", 
+            RowBox[{"2", " ", 
+              RowBox[{
+                TagBox[\(D\^"T"\),
+                  HoldForm], ".", "C"}]}]}], ")"}], ".", "x"}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCCollect[%, 2]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{\(XX.A\), "+", 
+            RowBox[{
+              TagBox[\(A\^"T"\),
+                HoldForm], ".", "XX"}]}], ")"}], ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C", ".", "x"}], "+", 
+      RowBox[{"2", " ", 
+        RowBox[{
+          TagBox[\(x\^"T"\),
+            HoldForm], ".", 
+          RowBox[{"(", 
+            RowBox[{\(XX.B\), "+", 
+              RowBox[{
+                TagBox[\(C\^"T"\),
+                  HoldForm], ".", "D"}]}], ")"}], ".", 
+          TagBox[
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{\(2\ \[Gamma]\^2\), "-", 
+                  RowBox[{"2", " ", 
+                    RowBox[{
+                      TagBox[\(D\^"T"\),
+                        HoldForm], ".", "D"}]}]}], ")"}], \("-1"\)],
+            HoldForm], ".", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{
+                TagBox[\(B\^"T"\),
+                  HoldForm], ".", "XX"}], "+", 
+              RowBox[{
+                TagBox[\(D\^"T"\),
+                  HoldForm], ".", "C"}]}], ")"}], ".", "x"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox[
+"To pull out the \"2\" from the inv[] expression one needs to be a bit tricky \
+and use:"]], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Substitute[%, 
+      inv[2\ \[Gamma]^2\  - 2\ tp[D]**D] -> 
+        inv[\ \[Gamma]^2\  - \ tp[D]**D]/2]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{\(XX.A\), "+", 
+            RowBox[{
+              TagBox[\(A\^"T"\),
+                HoldForm], ".", "XX"}]}], ")"}], ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C", ".", "x"}], "+", 
+      RowBox[{
+        TagBox[\(x\^"T"\),
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{\(XX.B\), "+", 
+            RowBox[{
+              TagBox[\(C\^"T"\),
+                HoldForm], ".", "D"}]}], ")"}], ".", 
+        TagBox[
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{\(\[Gamma]\^2\), "-", 
+                RowBox[{
+                  TagBox[\(D\^"T"\),
+                    HoldForm], ".", "D"}]}], ")"}], \("-1"\)],
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{
+              TagBox[\(B\^"T"\),
+                HoldForm], ".", "XX"}], "+", 
+            RowBox[{
+              TagBox[\(D\^"T"\),
+                HoldForm], ".", "C"}]}], ")"}], ".", "x"}]}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["7) Let x=1"]], "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Substitute[%, x -> 1]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(XX.A\), "+", 
+      RowBox[{
+        TagBox[\(A\^"T"\),
+          HoldForm], ".", "XX"}], "+", 
+      RowBox[{
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C"}], "+", 
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{\(XX.B\), "+", 
+            RowBox[{
+              TagBox[\(C\^"T"\),
+                HoldForm], ".", "D"}]}], ")"}], ".", 
+        TagBox[
+          SuperscriptBox[
+            RowBox[{"(", 
+              RowBox[{\(\[Gamma]\^2\), "-", 
+                RowBox[{
+                  TagBox[\(D\^"T"\),
+                    HoldForm], ".", "D"}]}], ")"}], \("-1"\)],
+          HoldForm], ".", 
+        RowBox[{"(", 
+          RowBox[{
+            RowBox[{
+              TagBox[\(B\^"T"\),
+                HoldForm], ".", "XX"}], "+", 
+            RowBox[{
+              TagBox[\(D\^"T"\),
+                HoldForm], ".", "C"}]}], ")"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[StyleBox["8) Let D=0 for clarity"]], "Text",
+  CellFrame->True,
+  Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Substitute[%, D -> 0]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(XX.A\), "+", 
+      RowBox[{
+        TagBox[\(A\^"T"\),
+          HoldForm], ".", "XX"}], "+", 
+      RowBox[{
+        TagBox[\(C\^"T"\),
+          HoldForm], ".", "C"}], "+", 
+      RowBox[{"XX", ".", "B", ".", 
+        TagBox[\(\((\[Gamma]\^2)\)\^"-1"\),
+          HoldForm], ".", 
+        TagBox[\(B\^"T"\),
+          HoldForm], ".", "XX"}]}]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+  The last output is the expression of the well known  Riccati \
+equation which prove the Theorem.\
+\>", "Text"]
+}, Open  ]]
+},
+FrontEndVersion->"X 3.0",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+CellGrouping->Manual,
+WindowSize->{775, 797},
+WindowMargins->{{Automatic, 236}, {-36, Automatic}},
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PaperSize"->{612, 792},
+"PaperOrientation"->"Portrait",
+"Magnification"->1},
+Magnification->1.25
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1731, 51, 39, 0, 126, "Title"],
+Cell[1773, 53, 34, 0, 56, "Subsection"],
+Cell[1810, 55, 223, 5, 77, "Text"],
+Cell[2036, 62, 47, 1, 34, "Input"],
+Cell[2086, 65, 66, 1, 58, "Subsection"],
+Cell[2155, 68, 13703, 365, 190, 6677, 273, "GraphicsData", 
+"PostScript", "Figure-1"],
+Cell[15861, 435, 184, 5, 60, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16082, 445, 68, 1, 58, "Subsection"],
+Cell[16153, 448, 99, 3, 37, "Text"],
+
+Cell[CellGroupData[{
+Cell[16277, 455, 80, 1, 34, "Input"],
+Cell[16360, 458, 90, 1, 33, "Output"]
+}, Open  ]],
+Cell[16465, 462, 63, 0, 37, "Text"],
+
+Cell[CellGroupData[{
+Cell[16553, 466, 120, 3, 37, "Input"],
+Cell[16676, 471, 173, 3, 24, "Message"],
+Cell[16852, 476, 45, 1, 22, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16934, 482, 81, 1, 24, "Text"],
+Cell[17018, 485, 180, 5, 50, "Input"],
+Cell[17201, 492, 308, 7, 36, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17546, 504, 55, 1, 22, "Input"],
+Cell[17604, 507, 41, 1, 22, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17682, 513, 141, 3, 22, "Input"],
+Cell[17826, 518, 215, 4, 40, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[18090, 528, 57, 1, 22, "Input"],
+Cell[18150, 531, 48, 1, 22, "Output"]
+}, Open  ]],
+Cell[18213, 535, 54, 1, 22, "Input"],
+
+Cell[CellGroupData[{
+Cell[18292, 540, 44, 1, 22, "Input"],
+Cell[18339, 543, 36, 1, 22, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[18412, 549, 49, 1, 22, "Input"],
+Cell[18464, 552, 46, 1, 22, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[18547, 558, 47, 0, 41, "Subsection"],
+Cell[18597, 560, 657, 20, 62, "Text"],
+Cell[19257, 582, 82, 1, 24, "Text"],
+Cell[19342, 585, 474, 12, 62, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19853, 602, 64, 0, 41, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[19942, 606, 34, 1, 22, "Input"],
+Cell[19979, 609, 229, 4, 40, "Output"]
+}, Open  ]],
+Cell[20223, 616, 85, 1, 22, "Input"],
+Cell[20311, 619, 134, 2, 24, "Text"],
+Cell[20448, 623, 107, 2, 29, "Text"],
+Cell[20558, 627, 182, 4, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[20765, 635, 43, 1, 22, "Input"],
+Cell[20811, 638, 105, 2, 20, "Print"],
+Cell[20919, 642, 439, 13, 22, "Output"]
+}, Open  ]],
+Cell[21373, 658, 143, 3, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[21541, 665, 51, 1, 22, "Input"],
+Cell[21595, 668, 610, 9, 66, "Message"],
+Cell[22208, 679, 1106, 29, 25, "Output"]
+}, Open  ]],
+Cell[23329, 711, 129, 2, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[23483, 717, 49, 1, 22, "Input"],
+Cell[23535, 720, 9691, 223, 111, "Output"]
+}, Open  ]],
+Cell[33241, 946, 132, 2, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[33398, 952, 44, 1, 22, "Input"],
+Cell[33445, 955, 10090, 286, 159, "Output"]
+}, Open  ]],
+Cell[43550, 1244, 149, 3, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[43724, 1251, 54, 1, 22, "Input"],
+Cell[43781, 1254, 2650, 78, 51, "Output"]
+}, Open  ]],
+Cell[46446, 1335, 164, 4, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[46635, 1343, 92, 1, 22, "Input"],
+Cell[46730, 1346, 1426, 44, 33, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[48193, 1395, 63, 1, 22, "Input"],
+Cell[48259, 1398, 1307, 41, 34, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[49603, 1444, 48, 1, 22, "Input"],
+Cell[49654, 1447, 1306, 40, 34, "Output"]
+}, Open  ]],
+Cell[50975, 1490, 124, 2, 24, "Text"],
+
+Cell[CellGroupData[{
+Cell[51124, 1496, 136, 3, 22, "Input"],
+Cell[51263, 1501, 1183, 38, 23, "Output"]
+}, Open  ]],
+Cell[52461, 1542, 100, 2, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[52586, 1548, 54, 1, 22, "Input"],
+Cell[52643, 1551, 906, 29, 23, "Output"]
+}, Open  ]],
+Cell[53564, 1583, 112, 2, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[53701, 1589, 54, 1, 22, "Input"],
+Cell[53758, 1592, 385, 12, 23, "Output"]
+}, Open  ]],
+Cell[54158, 1607, 122, 3, 24, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

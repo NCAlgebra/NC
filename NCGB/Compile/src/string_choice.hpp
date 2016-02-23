@@ -1,0 +1,3 @@
+//#define STRING1ACHOICE
+#define STRING1BCHOICE
+//#define STRING2CHOICE

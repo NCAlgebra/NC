@@ -1,0 +1,23 @@
+#!/bin/csh -f
+
+   alias latex "tex '&lplain' \!*"
+   echo -n "What file name should this be saved in? "
+
+q1:
+
+   set putin = $<
+   if $putin == "" goto q1
+
+q2:
+
+   echo -n "Do you want a hard copy? (y/n) "
+   set choice = $<
+   if $choice == "" goto q2
+
+   latex file
+   mv file.tex $putin.tex
+   mv file.dvi $putin.dvi
+   if $choice == "y" then
+     lpr -d $putin.dvi
+   endif
+rm file.log file.aux

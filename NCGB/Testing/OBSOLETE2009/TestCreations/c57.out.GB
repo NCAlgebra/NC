@@ -1,0 +1,4 @@
+{-1 + a**w + x**d, a**c + x**z, b**d + y**w, -1 + b**z + y**c, 
+ -1 + c**y + w**a, c**b + w**x, d**a + z**y, -1 + d**x + z**b, 
+ -w - c**b**d + w**a**w, c**b**z - w**a**c, -c**b + c**b**d**x + w**a**c**b, 
+ -c**b**d**a**w + w**a**c**b**d}

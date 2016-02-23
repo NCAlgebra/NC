@@ -1,0 +1,80 @@
+{-1 + a ** ia, -1 + aa ** iaa, -1 + ab ** iab, 1 + ab ** b - ad ** d, 
+  -1 + ad ** iad, -1 + ax ** iax, -1 + ay ** iay, -1 + a ** aa - b ** ab, 
+  -1 + b ** ib, -1 + d ** id, -1 + ia ** a, -1 + iaa ** aa, -1 + iab ** ab, 
+  -1 + iad ** ad, -1 + iax ** ax, -1 + iay ** ay, -1 + ib ** b, -1 + id ** d, 
+  -1 + ix ** x, -1 + iy ** y, -1 + x ** ix, -1 + y ** iy, 
+  -ay ** a + d ** ax - d ** ix + iy ** a - ay ** b ** ax + iy ** b ** ix, 
+  1 + b ** ab + a ** iax ** ab - b ** ad ** ay - a ** iax ** ad ** ay, 
+  1 + b ** ab + a ** x ** ab - b ** ad ** iy - a ** x ** ad ** iy, 
+  ab ** a - ad ** ay ** a + ad ** d ** ax - ad ** ay ** b ** ax, 
+  1 - b ** id ** ay + iaa ** iax ** ab - iaa ** iax ** ad ** ay, 
+  1 - b ** id ** iy + iaa ** x ** ab - iaa ** x ** ad ** iy, 
+  1 + b ** ab + b ** ax ** aa - iay ** d ** ab - iay ** d ** ax ** aa, 
+  1 + b ** ax ** ia - iay ** iad ** ab - iay ** d ** ax ** ia, 
+  ax + ab ** iaa - id ** ay ** a - id ** ay ** b ** ax, 
+  -aa - iax ** ab + aa ** y ** ay + iax ** ad ** ay - x ** ad ** ay + 
+   x ** ab ** y ** ay, aa ** b - aa ** y ** d + x ** ad ** d - 
+   x ** ab ** y ** d, x + ia ** b - aa ** y ** iad - x ** ab ** y ** iad, 
+  1 + b ** ab + b ** ix ** aa - y ** d ** ab - y ** d ** ix ** aa, 
+  -iaa - iab ** ax + iab ** id ** ay ** a + iab ** id ** ay ** b ** ax, 
+  -aa - x ** ab - x ** ib + aa ** y ** d ** ib + x ** ab ** y ** d ** ib, 
+  ia - iax ** ab + iax ** ab ** iay ** iad ** ab - 
+   iax ** ad ** d ** ax ** ia + iax ** ab ** iay ** d ** ax ** ia, 
+  -1 - b ** ab + iay ** iy + b ** ad ** iy + iay ** d ** ab + 
+   b ** ax ** x ** ab - iay ** d ** ad ** iy - b ** ax ** x ** ad ** iy - 
+   iay ** d ** ax ** x ** ab + iay ** d ** ax ** x ** ad ** iy, 
+  ad - ab ** iay - ad ** d ** ad - ax ** x ** ad + ab ** iay ** d ** ad + 
+   ad ** d ** ab ** y + ax ** x ** ab ** y - ab ** iay ** d ** ab ** y + 
+   ad ** d ** ax ** x ** ad - ab ** iay ** d ** ax ** x ** ad - 
+   ad ** d ** ax ** x ** ab ** y + ab ** iay ** d ** ax ** x ** ab ** y, 
+  d - iy ** b - d ** ad ** d - d ** ax ** x + ay ** b ** ad ** d + 
+   ay ** b ** ax ** x + d ** ad ** iy ** b - ay ** b ** ad ** iy ** b + 
+   d ** ax ** x ** ad ** d - ay ** b ** ax ** x ** ad ** d - 
+   d ** ax ** x ** ad ** iy ** b + ay ** b ** ax ** x ** ad ** iy ** b, 
+  -d + ay ** b + ay ** iab - iy ** iab + d ** ax ** x - ay ** b ** ax ** x + 
+   d ** ad ** iy ** iab - ay ** b ** ad ** iy ** iab - 
+   d ** ax ** x ** ad ** iy ** iab + ay ** b ** ax ** x ** ad ** iy ** iab, 
+  -ad + ab ** y - ib ** iay + ib ** y + ax ** x ** ad - ax ** x ** ab ** y + 
+   ib ** iay ** d ** ad - ib ** iay ** d ** ab ** y - 
+   ib ** iay ** d ** ax ** x ** ad + ib ** iay ** d ** ax ** x ** ab ** y, 
+  d ** ax - iy ** iaa - ay ** b ** ax + d ** ad ** iy ** iaa - 
+   d ** ax ** x ** ax - ay ** b ** ad ** iy ** iaa + 
+   ay ** b ** ax ** x ** ax - d ** ax ** x ** ad ** iy ** iaa + 
+   d ** ax ** x ** id ** ay ** a + ay ** b ** ax ** x ** ad ** iy ** iaa - 
+   ay ** b ** ax ** x ** id ** ay ** a + 
+   d ** ax ** x ** id ** ay ** b ** ax - 
+   ay ** b ** ax ** x ** id ** ay ** b ** ax, 
+  -ia ** iay + x ** ad - x ** ab ** y + ia ** iay ** d ** ad - 
+   x ** ax ** x ** ad - ia ** iay ** d ** ab ** y + 
+   x ** ax ** x ** ab ** y + aa ** y ** iad ** ax ** x ** ad - 
+   ia ** iay ** d ** ax ** x ** ad - aa ** y ** iad ** ax ** x ** ab ** y + 
+   ia ** iay ** d ** ax ** x ** ab ** y + 
+   x ** ab ** y ** iad ** ax ** x ** ad - 
+   x ** ab ** y ** iad ** ax ** x ** ab ** y, 
+  -b ** ad - b ** id - iab ** id - a ** x ** ad + b ** ad ** iy ** iay + 
+   a ** x ** ad ** iy ** iay + a ** x ** ax ** aa ** iab ** id - 
+   b ** ad ** d ** ax ** aa ** iab ** id - 
+   a ** x ** ad ** d ** ax ** aa ** iab ** id + 
+   b ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id + 
+   a ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id, 
+  -iay - iaa ** x ** ad + b ** id ** iy ** iay + 
+   iaa ** x ** ad ** iy ** iay + iaa ** x ** ax ** aa ** iab ** id - 
+   iay ** d ** ax ** aa ** iab ** id - 
+   iaa ** x ** ad ** d ** ax ** aa ** iab ** id + 
+   b ** id ** iy ** iay ** d ** ax ** aa ** iab ** id + 
+   iaa ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id, 
+  -d ** ad - iy ** iay + ay ** b ** ad + ay ** b ** id + ay ** iab ** id + 
+   d ** ad ** iy ** iay + d ** ax ** x ** ad - ay ** b ** ad ** iy ** iay - 
+   ay ** b ** ax ** x ** ad + d ** ax ** aa ** iab ** id - 
+   d ** ax ** x ** ad ** iy ** iay + ay ** b ** ax ** x ** ad ** iy ** iay - 
+   d ** ad ** d ** ax ** aa ** iab ** id - 
+   d ** ax ** x ** ax ** aa ** iab ** id - 
+   iy ** iay ** d ** ax ** aa ** iab ** id + 
+   ay ** b ** ad ** d ** ax ** aa ** iab ** id + 
+   ay ** b ** ax ** x ** ax ** aa ** iab ** id + 
+   d ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id + 
+   d ** ax ** x ** ad ** d ** ax ** aa ** iab ** id - 
+   ay ** b ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id - 
+   ay ** b ** ax ** x ** ad ** d ** ax ** aa ** iab ** id - 
+   d ** ax ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id + 
+   ay ** b ** ax ** x ** ad ** iy ** iay ** d ** ax ** aa ** iab ** id}

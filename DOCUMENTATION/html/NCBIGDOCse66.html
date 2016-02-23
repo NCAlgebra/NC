@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>18.4 The list of commands</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse67.html" >next</a>] [<a 
+href="NCBIGDOCse65.html" >prev</a>] [<a 
+href="NCBIGDOCse65.html#tailNCBIGDOCse65.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse66.html">tail</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse66.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">18.4   </span> <a 
+ id="x113-25200018.4"></a>The list of commands</h3>
+<!--l. 40--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.4.1   </span> <a 
+ id="x113-25300018.4.1"></a>SetMonomialOrder[aListOfListsOfIndeterminates, . . . ]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">SetMonomialOrder[a,b,c,...] </span>sets the graded lex order <span 
+class="cmmi-12">a &lt; b &lt; c &lt;</span> <span 
+class="cmmi-12">&#x2026;</span> with
+      <span 
+class="cmmi-12">a &lt; b &lt; c &lt;</span> <img 
+src="NCBIGDOC87x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" > . If one uses a list of variables rather than a single variable as
+      one  of  the  arguments,  then  multigraded  lex  order  is  used.  It  is  synonomous  with
+      <span 
+class="cmti-12">SetMonomialOrder[</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmti-12">a,b,c,...</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">]. </span>Pure lex order <span 
+class="cmmi-12">a &lt;&lt; b &lt;&lt; c &lt;&lt;</span> <span 
+class="cmmi-12">&#x2026;</span> on these variables
+      is set by <span 
+class="cmti-12">SetMonomialOrder[</span><span 
+class="cmsy-10x-x-120">{{</span><span 
+class="cmti-12">a</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">, </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmti-12">b</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">, </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmti-12">c </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">,...</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">].</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  A  multigraded  lex  order  <span 
+class="cmmi-12">a  &lt;  b  &lt;&lt;  c  &lt;</span>  <span 
+class="cmmi-12">&#x2026;</span> on  these  variables  is  set  by
+      <span 
+class="cmti-12">SetMonomialOrder[</span><span 
+class="cmsy-10x-x-120">{ {</span><span 
+class="cmti-12">a, b </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">, </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmti-12">c </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">,...</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">]. aListOfListsOfIndeterminates </span>is  a  list  of
+      Mathematica variable or a list of Mathematica variables.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. </dd></dl>
+<a 
+ id="dx113-253001"></a>
+<!--l. 47--><p class="noindent">Equivalent to <span 
+class="cmti-12">SetMonomialOrder[</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmti-12">a,b </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">, </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmti-12">c , A </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">]  </span>is <span 
+class="cmti-12">SetMonomialOrder[</span><span 
+class="cmsy-10x-x-120">{{</span><span 
+class="cmti-12">a,b </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">, </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmti-12">c , A </span><span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmti-12">]</span>. Or
+alternatively this is equivalent the following two commands
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetKnowns[a,b]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetUnKnowns[c,&#x00A0;A]
+</div>
+</td></tr></table>
+<!--l. 56--><p class="nopar"> which we now describe.
+<!--l. 72--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.4.2   </span> <a 
+ id="x113-25400018.4.2"></a>SetUnknowns[aListOfIndeterminates]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">SetUnknowns[aListOfVariables] </span>records the variables in the list of variables
+      <span 
+class="cmti-12">aListOfIndeterminates  </span>to   be   corresponding   to   unknown   quantities.   This   and
+      SetUnknowns prescribe a monomial order with the knowns at the the bottom and the
+      unknowns at the top.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfIndeterminates </span>is a list of Mathematica variables.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  Not  available  before  NCAlgebra  1.2.  This  is  equivalent  to
+      <span 
+class="cmti-12">Do[SetMonomialOrder[aListOfVariables[[i]],i+1], </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">i, </span>1<span 
+class="cmmi-12">,Length</span>[<span 
+class="cmmi-12">aListOfV ariables</span>]<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">]  </span></dd></dl>
+<a 
+ id="dx113-254001"></a>
+<!--l. 90--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.4.3   </span> <a 
+ id="x113-25500018.4.3"></a>SetUnKnowns[aListOfVariables] </h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">SetUnKnowns[aListOfVariables] </span>records the variables in the list of variables
+      <span 
+class="cmti-12">aListOfVariables </span>to be corresponding to unknown quantities. This and SetUnknowns
+      prescribe a monomial order with the knowns at the the bottom and the unknowns at
+      the top.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfVariables </span>is a list of Mathematica variables.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  Not  available  before  NCAlgebra  1.2.  This  is  equivalent  to
+      <span 
+class="cmti-12">Do[SetMonomialOrder[aListOfVariables[[i]],i+1], </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">i, </span>1<span 
+class="cmmi-12">,Length</span>[<span 
+class="cmmi-12">aListOfV ariables</span>]<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmti-12">]  </span></dd></dl>
+<a 
+ id="dx113-255001"></a>
+<!--l. 102--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.4.4   </span> <a 
+ id="x113-25600018.4.4"></a>ClearMonomialOrder[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: After <span 
+class="cmti-12">ClearMonomialOrder[] </span>is called, there are no indeterminates which are
+      considered ordered. The monomial order can be retrieved by using the <span 
+class="cmti-12">ReinstallOrder[]</span>
+      command.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx113-256001"></a>
+<!--l. 111--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.4.5   </span> <a 
+ id="x113-25700018.4.5"></a>PrintMonomialOrder[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">PrintMonomialOrder[] </span>prints the order to the screen.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: See Chapter <a 
+href="NCBIGDOCch18.html#x108-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>. Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx113-257001"></a>
+
+<!--l. 135--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.4.6   </span> <a 
+ id="x113-25800018.4.6"></a>NCAutomaticOrder[ aMonomialOrder, aListOfPolynomials ]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  This  command  assists  the  user  in  specifying  a  monomial  order.  It  inserts
+      all of the indeterminants found in <span 
+class="cmmi-12">aListOfPolynomials </span>into the monomial order.
+      If x is an indeterminant found in <span 
+class="cmmi-12">aMonomialOrder </span>then any indeterminant whose
+      symbolic  representation  is  a  function  of  x  will  appear  next  to  x.  For  example,
+      NCAutomaticOrder[<span 
+class="cmsy-10x-x-120">{{</span>a<span 
+class="cmsy-10x-x-120">}</span>,<span 
+class="cmsy-10x-x-120">{</span>b<span 
+class="cmsy-10x-x-120">}}</span>,<span 
+class="cmsy-10x-x-120">{ </span>a**Inv[a]**tp[a] + tp[b]<span 
+class="cmsy-10x-x-120">}</span>] would set the order to be
+      <span 
+class="cmmi-12">a &lt; tp</span>[<span 
+class="cmmi-12">a</span>] <span 
+class="cmmi-12">&lt; Inv</span>[<span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">&#x226A; </span><span 
+class="cmmi-12">b &lt; tp</span>[<span 
+class="cmmi-12">b</span>].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: A list of indeterminants which specifies the general order. A list of polynomials
+      which will make up the input to the Gröbner basis command.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: If tp[Inv[a]] is found after Inv[a] NCAutomaticOrder[ ] would
+      generate the order <span 
+class="cmmi-12">a &lt; tp</span>[<span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">a</span>]] <span 
+class="cmmi-12">&lt; Inv</span>[<span 
+class="cmmi-12">a</span>]. If the variable is self-adjoint (the input
+      contains the relation <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">a</span>]] == <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">a</span>]) we would have the rule, <span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">a</span>]],
+      when the user would probably prefer <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">a</span>]] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">a</span>]. </dd></dl>
+<a 
+ id="dx113-258001"></a>
+
+   <!--l. 138--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse67.html" >next</a>] [<a 
+href="NCBIGDOCse65.html" >prev</a>] [<a 
+href="NCBIGDOCse65.html#tailNCBIGDOCse65.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse66.html" >front</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse66.html" >up</a>] </p></div>
+<!--l. 138--><p class="indent">   <a 
+ id="tailNCBIGDOCse66.html"></a>   
+</body></html> 

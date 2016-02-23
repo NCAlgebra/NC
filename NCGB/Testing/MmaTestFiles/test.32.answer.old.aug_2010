@@ -1,0 +1,21 @@
+{a ** Inva -> 1, c ** LossLessM -> Ajb, Aja ** InvAja -> 1, 
+  InvAja ** Aja -> 1, Inva ** a -> 1, 
+  LossLessM ** Aja -> -a ** LossLessM + b ** Ajb, 
+  LossLessM ** InvLossLessM -> 1, LossLessM ** Ajc -> b, 
+  InvLossLessM ** b -> Ajc, InvLossLessM ** LossLessM -> 1, 
+  Ajb ** InvLossLessM -> c, Ajb ** Ajc -> c ** b, 
+  Ajc ** c -> Aja ** InvLossLessM + InvLossLessM ** a, 
+  b ** Ajb ** InvAja -> LossLessM + a ** LossLessM ** InvAja, 
+  c ** b ** Ajb -> Ajb ** Aja + c ** a ** LossLessM, 
+  InvLossLessM ** a ** LossLessM -> -Aja + Ajc ** Ajb, 
+  Ajb ** Aja ** InvLossLessM -> -c ** a + c ** b ** c, 
+  c ** b ** c ** b -> Ajb ** Aja ** Ajc + c ** a ** b, 
+  InvLossLessM ** a ** b ** Ajb -> 
+   -Aja ** Aja + Ajc ** Ajb ** Aja + InvLossLessM ** a ** a ** LossLessM, 
+  InvLossLessM ** a ** b ** c ** b -> 
+   -Aja ** Aja ** Ajc + Ajc ** Ajb ** Aja ** Ajc + 
+    InvLossLessM ** a ** a ** b, 
+  InvLossLessM ** a ** b ** c ** a ** LossLessM -> 
+   Aja ** Aja ** Aja - Aja ** Aja ** Ajc ** Ajb - Ajc ** Ajb ** Aja ** Aja + 
+    Ajc ** Ajb ** Aja ** Ajc ** Ajb + InvLossLessM ** a ** a ** a ** LossLessM
+   }

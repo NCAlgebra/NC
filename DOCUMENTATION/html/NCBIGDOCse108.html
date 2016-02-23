@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>30.6 Smaller Bases and the Spreadsheet command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 621--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse107.html#tailNCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse108.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse108.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">30.6   </span></span> <a 
+ id="x174-38600030.6"></a><span 
+class="cmr-10x-x-109">Smaller Bases and the Spreadsheet command</span></h3>
+<!--l. 626--><p class="noindent"><span 
+class="cmr-10x-x-109">Here is a session which does roughly what the spreadsheet command does. For more detail see Chapter</span>
+<a 
+href="NCBIGDOCch15.html#x81-21000015"><span 
+class="cmr-10x-x-109">15</span><!--tex4ht:ref: chapter:ncprocess:command --></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[11]:=NCMakeGB[FAC,2];
+&#x00A0;<br />In[11]:=SmallBasisByCategory[RemoveRedundant[%]&#x00A0;];
+</div>
+</td></tr></table>
+<!--l. 636--><p class="nopar">
+<!--l. 640--><p class="noindent"><span 
+class="cmr-10x-x-109">The next command tries to see if any of the undigested relations can be made simpler using the digested</span>
+<span 
+class="cmr-10x-x-109">relations</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[12]:=NCSimplifyAll[%11,&#x00A0;&#x00A0;DigestedRelations[%11]&#x00A0;];
+</div>
+</td></tr></table>
+<!--l. 649--><p class="nopar">
+<!--l. 653--><p class="noindent"><span 
+class="cmr-10x-x-109">Finally we output the result to the file &#8220;SecondOutputForDemo&#8221;??.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[13]:=RegularOutput[%12,&#x00A0;"SecondOutputForDemo"];
+</div>
+</td></tr></table>
+<!--l. 660--><p class="nopar">
+<!--l. 664--><p class="noindent"><span 
+class="cmr-10x-x-109">Now we return to the strategy demos of Chapter </span><a 
+href="NCBIGDOCch15.html#x81-21000015"><span 
+class="cmr-10x-x-109">15</span><!--tex4ht:ref: chapter:ncprocess:command --></a><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 699--><p class="indent">   <span 
+class="cmr-10x-x-109">Inserting the command </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundant</span></span></span> <span 
+class="cmr-10x-x-109">inside of small basis may change the answer, but it yields</span>
+<span 
+class="cmr-10x-x-109">the same answer as </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SmallBasis</span></span></span> <span 
+class="cmr-10x-x-109">would have given with one particular order on the set of relations given as</span>
+<span 
+class="cmr-10x-x-109">input. All this assumes that the number of iterations is large. Inserting </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundant</span></span></span> <span 
+class="cmr-10x-x-109">saves much</span>
+<span 
+class="cmr-10x-x-109">computer time.</span>
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse107.html#tailNCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse108.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse108.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCse108.html"></a>  
+</body></html> 

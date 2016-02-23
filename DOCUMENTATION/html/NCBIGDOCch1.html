@@ -1,0 +1,516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>1 A Short Tutorial on NCAlgebra</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch2.html" >next</a>] [<a 
+href="#tailNCBIGDOCch1.html">tail</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCch1.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;1</span><br><a 
+ id="x5-50001"></a>A Short Tutorial on NCAlgebra</h2>
+<!--l. 4--><p class="noindent">NCAlgebra is a <span 
+class="cmti-12">Mathematica </span>package which allows one to do noncommutative algebraic
+computations. We will begin by presenting some calculations done with our package which should
+give some idea of what may be accomplished with NCAlgebra. We suggest that the reader later do
+these computations for himself with our package when it has been properly installed since it will
+provide a tutorial as well as an illustration.
+<!--l. 12--><p class="indent">   In our package ** denotes noncommutative multiply, tp[x] denotes the transpose of an element
+x, and aj[x] denotes the adjoint of an element x. Note that the properties of transposes and
+adjoints that everyone constantly uses are built-in. The multiplicative identity is denoted Id in the
+program. At the present time, Id is set to 1. A element A may have an inverse, which will be
+denoted by inv[A], of it may have a left or right inverse, denoted inv[A] and invR[A],
+respectively.
+<!--l. 20--><p class="indent">   The following examples are independent of each other, however they may be executed in one
+continuous session. At present, single-letter lower case variables are noncommutative by default
+and all others are commutative by default.
+<!--l. 25--><p class="indent">   A Mathematica 3.0 user inside a notebook can use our special Palette by opening the file
+NCPalette.nb (see Section <span 
+class="cmbx-12">??</span>).
+   <h3 class="sectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x5-60001.1"></a>Installing NCAlgebra</h3>
+<!--l. 30--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">1.1.1   </span> <a 
+ id="x5-70001.1.1"></a>Downloading</h4>
+<!--l. 32--><p class="noindent">You can download the lastest version of NCAlgebra from <span class="obeylines-h"><a 
+href="www.math.ucsd.edu/~ncalg" class="url" ><span 
+class="cmtt-12">www.math.ucsd.edu/~ncalg</span></a></span>.
+<!--l. 35--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">1.1.2   </span> <a 
+ id="x5-80001.1.2"></a>Unpacking</h4>
+<!--l. 37--><p class="noindent">We provide the files NCAlgebra.zip and a NCAlgebra.tgz, which contain the exact same
+files in different compact formats. PC and Mac people might prefer to download the
+NCAlgebra.zip file, while Unix people may like the NCAlgebra.tgz file better. Unpacking any
+of these files will create a directory &#8217;NC&#8217; which contains all the files necessary to run
+NCAlgebra.
+<!--l. 44--><p class="noindent">If you downloaded the NCAlgebra.zip file:
+
+      <ul class="itemize1">
+      <li class="itemize">Use your favorite zip utility to unpack the file NCAlgebra.zip in your favorite location.</li></ul>
+<!--l. 51--><p class="noindent">If you downloaded the NCAlgebra.tgz file:
+      <ul class="itemize1">
+      <li class="itemize">You can uncompress the file using your favorite zip utility or using the command
+      line:
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      tar&#x00A0;xvzf&#x00A0;NCAlgebra.tgz
+</div>
+      </td></tr></table>
+      <!--l. 59--><p class="nopar">
+      <!--l. 61--><p class="noindent">If your tar version does not support zip files you may have to do it in two steps:
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      gunzip&#x00A0;NCAlgebra.tgz
+      &#x00A0;<br />tar&#x00A0;xvf&#x00A0;NCAlgebra.tar
+</div>
+      </td></tr></table>
+      <!--l. 66--><p class="nopar">
+      </li></ul>
+<!--l. 70--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">1.1.3   </span> <a 
+ id="x5-90001.1.3"></a>Installing</h4>
+<!--l. 72--><p class="noindent">All that is needed for NCAlgebra to run is that its top directory, the &#8217;NC&#8217; directory, be on
+<span 
+class="cmti-12">Mathematica</span>&#8217;s search path. If you are on a unix flavored machine (Solaris, Linux, Mac OSX) then
+unpacking in your home directory (<span 
+class="cmsy-10x-x-120">~</span>) is all you need to do. You may want to try to run
+NCAlgebra as explained in the next section to see if that works.
+<!--l. 78--><p class="indent">   If you want to put the files someplace else, all you need to do is to modify <span 
+class="cmti-12">Mathematica</span>&#8217;s search
+path. You can do this in one of two ways:
+<!--l. 81--><p class="noindent">If you are experienced with <span 
+class="cmti-12">Mathematica</span>
+      <ul class="itemize1">
+      <li class="itemize">Edit your init.m file to add the name of the directory which contains the &#8217;NC&#8217; folder
+      to the <span 
+class="cmti-12">Mathematica </span>variable $Path.</li></ul>
+<!--l. 89--><p class="noindent">Or
+      <ul class="itemize1">
+      <li class="itemize">You  can  use  our  InstallNCAlgebra.nb  notebook  to  automagically  set  up  the
+      <span 
+class="cmti-12">Mathematica</span>&#8217;s $Path variable. Open this notebook and follow the directions which are
+      found there.</li></ul>
+<!--l. 97--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x5-100001.2"></a>Running NCAlgebra</h3>
+<!--l. 100--><p class="noindent">In <span 
+class="cmti-12">Mathematica </span>(notebook or text interface), type
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&lt;&lt;&#x00A0;NC&#8216;
+</div>
+</td></tr></table>
+<!--l. 103--><p class="nopar"> If this fails, your installation has problems (check out previous section). If your installation is
+succesful you will see a message like:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+You&#x00A0;are&#x00A0;using&#x00A0;the&#x00A0;version&#x00A0;of&#x00A0;NCAlgebra&#x00A0;which&#x00A0;is&#x00A0;found&#x00A0;in:
+&#x00A0;<br />&#x00A0;&#x00A0;/your_home_directory/NC.
+&#x00A0;<br />You&#x00A0;can&#x00A0;now&#x00A0;use&#x00A0;"&lt;&lt;&#x00A0;NCAlgebra&#8216;"&#x00A0;to&#x00A0;load&#x00A0;NCAlgebra&#x00A0;or&#x00A0;"&lt;&lt;&#x00A0;NCGB&#8216;"&#x00A0;to&#x00A0;load&#x00A0;NCGB.
+</div>
+</td></tr></table>
+<!--l. 111--><p class="nopar"> Just type
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&lt;&lt;&#x00A0;NCAlgebra&#8216;
+</div>
+</td></tr></table>
+<!--l. 115--><p class="nopar"> to load NCAlgebra, or
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&lt;&lt;&#x00A0;NCGB&#8216;
+</div>
+</td></tr></table>
+<!--l. 119--><p class="nopar"> to load NCAlgebra and NCGB. Your screen will be filled with lots of information as NCAlgerba or
+NCGB loads.
+<!--l. 124--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x5-110001.3"></a>A Short Tutorial</h3>
+<!--l. 126--><p class="noindent">NCAlgebra is a <span 
+class="cmti-12">Mathematica </span>package which allows one to do noncommutative algebraic
+computations. We will begin by presenting some calculations done with our package which should
+give some idea of what may be accomplished with NCAlgebra. We suggest that the reader later do
+these computations for himself with our package when it has been properly installed since it will
+provide a tutorial as well as an illustration.
+<!--l. 134--><p class="indent">   To begin start Mathematica and load NCAlgebra.m or NCGB.m as shown in Section&#x00A0;<a 
+href="#x5-100001.2">1.2<!--tex4ht:ref: sec:runnc --></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]&#x00A0;&lt;&lt;&#x00A0;NC&#8216;
+&#x00A0;<br />In[2]&#x00A0;&lt;&lt;&#x00A0;NCAlgebra&#8216;
+</div>
+</td></tr></table>
+<!--l. 139--><p class="nopar">
+<!--l. 142--><p class="indent">   The following examples are independent of each other, however they may be executed in one
+continuous session. At present, single-letter lower case variables are noncommutative by default
+and all others are commutative by default. In our package ** denotes noncommutative
+multiply.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[3]:=&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[3]=&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[4]:=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[4]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[5]:=&#x00A0;A&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[5]=&#x00A0;A&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[6]:=&#x00A0;CommuteEverything[a&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a]
+&#x00A0;<br />Out[6]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[7]:=&#x00A0;SetNonCommutative[A,&#x00A0;B]
+&#x00A0;<br />Out[7]=&#x00A0;{False,&#x00A0;False}
+&#x00A0;<br />
+&#x00A0;<br />In[8]:=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[8]=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />
+&#x00A0;<br />In[9]:=&#x00A0;SetNonCommutative[A];
+&#x00A0;<br />In[10]:=&#x00A0;SetCommutative[B];
+&#x00A0;<br />In[11]:=&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[11]=&#x00A0;0
+</div>
+</td></tr></table>
+<!--l. 169--><p class="nopar"> SNC is an alias for SetNonCommutative. So, SNC can be typed rather than the longer
+SetNonCommutative.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[12]:=&#x00A0;SNC[A];
+&#x00A0;<br />In[13]:=&#x00A0;A&#x00A0;**&#x00A0;a&#x00A0;-&#x00A0;a&#x00A0;**&#x00A0;A
+&#x00A0;<br />Out[13]=&#x00A0;-a&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;A&#x00A0;**&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[14]:=&#x00A0;SetCommutative[v];
+&#x00A0;<br />In[15]:=&#x00A0;v&#x00A0;**&#x00A0;b
+&#x00A0;<br />Out[15]=&#x00A0;b&#x00A0;v
+</div>
+</td></tr></table>
+<!--l. 180--><p class="nopar"> Here is how to use NCAlgebra to manipulate and simplify expressions. tp[x] denotes the transpose
+of an element x, and aj[x] denotes the adjoint of an element x. Note that the properties of
+transposes and adjoints that everyone constantly uses are built-in.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[16]:=&#x00A0;NCCollect[a&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;x,&#x00A0;x]
+&#x00A0;<br />Out[16]=&#x00A0;(a&#x00A0;+&#x00A0;b)&#x00A0;**&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />In[17]:=&#x00A0;NCExpand[(a&#x00A0;+&#x00A0;b)&#x00A0;**&#x00A0;x]
+&#x00A0;<br />Out[17]=&#x00A0;a&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />In[18]:=&#x00A0;NCCollect[tp[x]&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;z,&#x00A0;{x,&#x00A0;tp[x]}]
+&#x00A0;<br />Out[18]=&#x00A0;z&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;(a&#x00A0;+&#x00A0;b)&#x00A0;**&#x00A0;x
+</div>
+</td></tr></table>
+<!--l. 194--><p class="nopar"> You can compute directional derivatives and gradients.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[19]:=&#x00A0;DirectionalD[x&#x00A0;**&#x00A0;x,&#x00A0;x,&#x00A0;h]
+&#x00A0;<br />Out[19]=&#x00A0;h&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;h
+&#x00A0;<br />
+&#x00A0;<br />In[20]:=&#x00A0;DirectionalD[tp[x]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;m&#x00A0;**&#x00A0;x,&#x00A0;x,&#x00A0;h]
+&#x00A0;<br />Out[20]=&#x00A0;m&#x00A0;**&#x00A0;h&#x00A0;+&#x00A0;tp[h]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;h&#x00A0;+&#x00A0;tp[h]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;h
+&#x00A0;<br />
+&#x00A0;<br />In[21]:=&#x00A0;(*&#x00A0;In&#x00A0;the&#x00A0;next&#x00A0;line,&#x00A0;A&#x00A0;is&#x00A0;noncommutative&#x00A0;and&#x00A0;x&#x00A0;represents&#x00A0;a&#x00A0;column&#x00A0;vector*)
+&#x00A0;<br />In[22]:=&#x00A0;Grad[tp[x]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;m&#x00A0;**&#x00A0;x,&#x00A0;x]
+&#x00A0;<br />Grad::limited:&#x00A0;Grad&#x00A0;gives&#x00A0;correct&#x00A0;answers&#x00A0;only&#x00A0;for&#x00A0;a&#x00A0;limited&#x00A0;class&#x00A0;of&#x00A0;functions!
+&#x00A0;<br />Out[22]=&#x00A0;2&#x00A0;x&#x00A0;+&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[A]&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[m]
+</div>
+</td></tr></table>
+<!--l. 207--><p class="nopar"> WARNING: Grad is trustworthy only on certain quadratics.
+<!--l. 210--><p class="indent">   Rules can be used to modify expressions:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[23]:=&#x00A0;Substitute[x&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;b,&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;-&gt;&#x00A0;c]
+&#x00A0;<br />Out[23]=&#x00A0;x&#x00A0;**&#x00A0;c
+&#x00A0;<br />
+&#x00A0;<br />In[24]:=&#x00A0;Substitute[&#x00A0;tp[b&#x00A0;**&#x00A0;a]&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;a,&#x00A0;b&#x00A0;**&#x00A0;a&#x00A0;-&gt;&#x00A0;p]
+&#x00A0;<br />Out[24]=&#x00A0;p&#x00A0;+&#x00A0;tp[a]&#x00A0;**&#x00A0;tp[b]
+&#x00A0;<br />
+&#x00A0;<br />In[25]:=&#x00A0;SubstituteSymmetric[tp[b]&#x00A0;**&#x00A0;tp[a]&#x00A0;+&#x00A0;w&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;b,&#x00A0;a&#x00A0;**&#x00A0;b-&gt;c]
+&#x00A0;<br />Out[25]=&#x00A0;c&#x00A0;+&#x00A0;w&#x00A0;+&#x00A0;tp[c]
+</div>
+</td></tr></table>
+<!--l. 220--><p class="nopar"> WARNING: The Mathematica substitute commands <span 
+class="cmsy-10x-x-120">\</span><span 
+class="cmmi-12">.</span><span 
+class="cmmi-12">&#x00A0; </span><span 
+class="cmsy-10x-x-120">&#x2192;</span> <span 
+class="cmmi-12">&#x00A0; </span>and <span 
+class="cmsy-10x-x-120">\ </span>:<span 
+class="cmmi-12">&gt; </span>are not reliable in
+NCAlgebra, so you must use our Substitute command.
+<!--l. 226--><p class="indent">   The multiplicative identity is denoted Id in the program. At the present time, Id is set to 1. A
+element A may have an inverse, which will be denoted by inv[A], of it may have a left or right
+inverse, denoted inv[A] and invR[A], respectively.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[26]:=&#x00A0;MatMult[{{a,&#x00A0;b},&#x00A0;{c,&#x00A0;d}},&#x00A0;{{d,&#x00A0;2},&#x00A0;{e,&#x00A0;3}}]
+&#x00A0;<br />Out[26]=&#x00A0;{{a&#x00A0;**&#x00A0;d&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;e,&#x00A0;2&#x00A0;a&#x00A0;+&#x00A0;3&#x00A0;b},&#x00A0;{c&#x00A0;**&#x00A0;d&#x00A0;+&#x00A0;d&#x00A0;**&#x00A0;e,&#x00A0;2&#x00A0;c&#x00A0;+&#x00A0;3&#x00A0;d}}
+&#x00A0;<br />
+&#x00A0;<br />In[27]:=&#x00A0;tp[a&#x00A0;**&#x00A0;b]
+&#x00A0;<br />Out[27]=&#x00A0;tp[b]&#x00A0;**&#x00A0;tp[a]
+&#x00A0;<br />
+&#x00A0;<br />In[28]:=&#x00A0;tp[5]
+&#x00A0;<br />Out[28]=&#x00A0;5
+&#x00A0;<br />
+&#x00A0;<br />In[29]:=&#x00A0;tp[2&#x00A0;+&#x00A0;3&#x00A0;I]
+&#x00A0;<br />Out[29]=&#x00A0;2&#x00A0;+&#x00A0;3&#x00A0;I
+&#x00A0;<br />
+&#x00A0;<br />In[30]:=&#x00A0;tp[a]
+&#x00A0;<br />Out[30]=&#x00A0;tp[a]
+&#x00A0;<br />
+&#x00A0;<br />In[31]:=&#x00A0;tp[a&#x00A0;+&#x00A0;b]
+&#x00A0;<br />Out[31]=&#x00A0;tp[a]&#x00A0;+&#x00A0;tp[b]
+&#x00A0;<br />
+&#x00A0;<br />In[32]:=&#x00A0;tp[6&#x00A0;x]
+&#x00A0;<br />Out[32]=&#x00A0;6&#x00A0;tp[x]
+&#x00A0;<br />
+&#x00A0;<br />In[33]:=&#x00A0;tp[tp[a]]
+&#x00A0;<br />Out[33]=&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[34]:=&#x00A0;aj[5]
+&#x00A0;<br />Out[34]=&#x00A0;5
+&#x00A0;<br />
+&#x00A0;<br />In[35]:=&#x00A0;aj[2&#x00A0;+&#x00A0;3&#x00A0;I]
+&#x00A0;<br />Out[35]=&#x00A0;2&#x00A0;-&#x00A0;3&#x00A0;I
+&#x00A0;<br />
+&#x00A0;<br />In[36]:=&#x00A0;aj[a]
+&#x00A0;<br />Out[36]=&#x00A0;aj[a]
+&#x00A0;<br />
+
+&#x00A0;<br />In[37]:=&#x00A0;aj[a&#x00A0;+&#x00A0;b]
+&#x00A0;<br />Out[37]=&#x00A0;aj[a]&#x00A0;+&#x00A0;aj[b]
+&#x00A0;<br />
+&#x00A0;<br />In[38]:=&#x00A0;aj[6&#x00A0;x]
+&#x00A0;<br />Out[38]=&#x00A0;6&#x00A0;aj[x]
+&#x00A0;<br />
+&#x00A0;<br />In[39]:=&#x00A0;aj[aj[a]]
+&#x00A0;<br />Out[39]=&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[40]:=&#x00A0;Id
+&#x00A0;<br />Out[40]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[41]:=&#x00A0;inv[a&#x00A0;**&#x00A0;b]
+&#x00A0;<br />Out[41]=&#x00A0;inv[b]&#x00A0;**&#x00A0;inv[a]
+&#x00A0;<br />
+&#x00A0;<br />In[42]:=&#x00A0;inv[a]&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[42]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[43]:=&#x00A0;a&#x00A0;**&#x00A0;inv[a]
+&#x00A0;<br />Out[43]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[44]:=&#x00A0;a&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;inv[b]
+&#x00A0;<br />Out[44]=&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />In[45]:=&#x00A0;invL[a]&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[45]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[46]:=&#x00A0;a&#x00A0;**&#x00A0;invR[a]
+&#x00A0;<br />Out[46]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[47]:=&#x00A0;a&#x00A0;**&#x00A0;invL[a]
+&#x00A0;<br />Out[47]=&#x00A0;a&#x00A0;**&#x00A0;invL[a]
+&#x00A0;<br />
+&#x00A0;<br />In[48]:=&#x00A0;invR[a]&#x00A0;**&#x00A0;a
+&#x00A0;<br />Out[48]=&#x00A0;invR[a]&#x00A0;**&#x00A0;a
+</div>
+</td></tr></table>
+
+<!--l. 299--><p class="nopar"> More extensive simplification can be obtained with NCSimplifyRational:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[49]:=&#x00A0;f1&#x00A0;=&#x00A0;1&#x00A0;+&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;inv[S&#x00A0;-&#x00A0;a]&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[S&#x00A0;-&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;inv[d]&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;b&#x00A0;-&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[S&#x00A0;-&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;inv[d]&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;inv[d]&#x00A0;**&#x00A0;c&#x00A0;**&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[S&#x00A0;-&#x00A0;a]&#x00A0;**&#x00A0;b;
+&#x00A0;<br />In[50]:=&#x00A0;NCSimplifyRational[f1]
+&#x00A0;<br />Out[50]=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />In[51]:=&#x00A0;f2&#x00A0;=&#x00A0;inv[1&#x00A0;+&#x00A0;2&#x00A0;a]&#x00A0;**&#x00A0;a;
+&#x00A0;<br />In[52]:=&#x00A0;NCSimplifyRational[f2]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;inv[1&#x00A0;+&#x00A0;2&#x00A0;a]
+&#x00A0;<br />Out[52]=&#x00A0;-&#x00A0;-&#x00A0;------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+</td></tr></table>
+<!--l. 314--><p class="nopar"> NCSR is the alias for NCSimplifyRational.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[53]:=&#x00A0;f3&#x00A0;=&#x00A0;a&#x00A0;**&#x00A0;inv[1&#x00A0;-&#x00A0;a];
+&#x00A0;<br />In[54]:=&#x00A0;NCSR[f3]
+&#x00A0;<br />Out[54]=&#x00A0;-1&#x00A0;+&#x00A0;inv[1&#x00A0;-&#x00A0;a]
+&#x00A0;<br />
+&#x00A0;<br />In[55]:=&#x00A0;f4&#x00A0;=&#x00A0;inv[1&#x00A0;-&#x00A0;b&#x00A0;**&#x00A0;a]&#x00A0;**&#x00A0;inv[a];
+&#x00A0;<br />In[56]:=&#x00A0;NCSR[f4]
+&#x00A0;<br />Out[56]=&#x00A0;inv[a]&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;inv[1&#x00A0;-&#x00A0;a&#x00A0;**&#x00A0;b]
+</div>
+</td></tr></table>
+<!--l. 324--><p class="nopar"> There is also a very limited NCSolve. Please consider using NCGB for serious equation
+solving.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[57]:=&#x00A0;NCSolve[a&#x00A0;**&#x00A0;x&#x00A0;==&#x00A0;b,&#x00A0;x]
+&#x00A0;<br />Out[57]=&#x00A0;{x&#x00A0;-&gt;&#x00A0;inv[a]&#x00A0;**&#x00A0;b}
+</div>
+</td></tr></table>
+<!--l. 330--><p class="nopar"> Note: NCSolve applies to some linear equations in only one unknown.
+<!--l. 333--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">1.4   </span> <a 
+ id="x5-120001.4"></a>Where to Find More Examples</h3>
+<!--l. 335--><p class="noindent">At this point looking at demos is very helpful. We recommend working thru the NCAlgebra demos
+which accompany this document. Some of them are pdf files and can be read (and can be found in
+the directory NC/DOCUMENTATION).
+<!--l. 343--><p class="indent">   All demos can be found in the NC/DEMOS directory. The NCAlgebra website, <span class="obeylines-h"><a 
+href="http://math.ucsd.edu/~ncalg" class="url" ><span 
+class="cmtt-12">http://math.ucsd.edu/~ncalg</span></a></span> also contains some demos. As of August 2009, the following is a
+subset of the demos which are available:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+DemoBRL.nb&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DemoGBM.nb*&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DmGBG1.nb&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;NCPalette.nb
+&#x00A0;<br />DemoGB1.nb&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DemoSimplify.nb&#x00A0;&#x00A0;&#x00A0;DmGBG2.nb&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PaletteSource.nb
+&#x00A0;<br />SingPert.nb
+</div>
+</td></tr></table>
+<!--l. 351--><p class="nopar">
+<!--l. 353--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">1.5   </span> <a 
+ id="x5-130001.5"></a>Pretty Output </h3>
+<!--l. 357--><p class="noindent"><span 
+class="cmbx-12">Beautifying NCAlgebra</span>
+<!--l. 360--><p class="noindent">WARNING: The command <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">SetOutput</span></span></span> is now deprecated. Please use <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCSetOutput</span></span></span>
+instead.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[104]:=&#x00A0;NCSetOutput[&#x00A0;All&#x00A0;-&gt;&#x00A0;True&#x00A0;];
+&#x00A0;<br />In[105]:=&#x00A0;inv[&#x00A0;tp[k]&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;-1
+&#x00A0;<br />Out[105]=&#x00A0;(k)
+&#x00A0;<br />
+&#x00A0;<br />In[106]:=&#x00A0;NCSetOutput[&#x00A0;All&#x00A0;-&gt;&#x00A0;True&#x00A0;];
+&#x00A0;<br />In[107]:=&#x00A0;rt[x&#x00A0;-&#x00A0;inv[y&#x00A0;+&#x00A0;aj[z]]]&#x00A0;+&#x00A0;tp[x]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*&#x00A0;-1&#x00A0;1/2
+&#x00A0;<br />Out[107]=&#x00A0;&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;(x&#x00A0;-&#x00A0;(y&#x00A0;+&#x00A0;z&#x00A0;)&#x00A0;&#x00A0;)
+&#x00A0;<br />
+&#x00A0;<br />In[108]:=&#x00A0;NCSetOutput[&#x00A0;All&#x00A0;-&gt;&#x00A0;True,&#x00A0;inv&#x00A0;-&gt;&#x00A0;False&#x00A0;];
+&#x00A0;<br />In[109]:=&#x00A0;inv[1&#x00A0;+&#x00A0;tp[1-x]]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />Out[109]=&#x00A0;inv[2&#x00A0;-&#x00A0;x&#x00A0;]
+</div>
+</td></tr></table>
+<!--l. 380--><p class="nopar">
+<!--l. 384--><p class="noindent"><span class="TEX"><span 
+class="cmbx-12">T</span><span 
+class="E"><span 
+class="cmbx-12">E</span></span><span 
+class="cmbx-12">X</span></span><span 
+class="cmbx-12">Output</span>
+<!--l. 387--><p class="noindent">WARNING: The <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;commands in this version of NCAlgebra have been updated to use the new
+package <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCTeX</span></span></span>. Please see Section&#x00A0;<span 
+class="cmbx-12">??</span> for more details.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[110]:=&#x00A0;mat&#x00A0;=&#x00A0;{{a&#x00A0;+&#x00A0;tp[b],aj[c]},{inv[d],e}}
+&#x00A0;<br />Out[110]=&#x00A0;{{a&#x00A0;+&#x00A0;tp[b],&#x00A0;aj[c]},&#x00A0;{inv[d],&#x00A0;e}}
+&#x00A0;<br />
+&#x00A0;<br />In[111]:=&#x00A0;NCTeX[mat]
+</div>
+</td></tr></table>
+<!--l. 398--><p class="nopar">
+<!--l. 402--><p class="indent">   The above command takes the Mathematica matrix <span 
+class="cmti-12">mat</span>, converts it to <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>,
+outputs the string and surrounding <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;to a file, <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>s the file and displays the
+<span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>ed pdf output to the screen. If you are in a notebook environment, the resulting
+pdf file is imported back to the notebook. Refer to Section&#x00A0;<span 
+class="cmbx-12">??</span> for more details. If you
+are in a text environment then it opens a pdf viewer with the following formula in its
+display.
+   <center class="math-display" >
+<img 
+src="NCBIGDOC3x.png" alt="(           )
+  a + bT  c*
+   d-1    e
+" class="math-display" ></center>
+<!--l. 413--><p class="indent">   The command
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[113]:=&#x00A0;NCTeX[Sum[a[i],{i,1,50}],&#x00A0;ImportPDF&#x00A0;-&gt;&#x00A0;False,&#x00A0;DisplayPDF&#x00A0;-&gt;&#x00A0;True];
+</div>
+</td></tr></table>
+<!--l. 416--><p class="nopar">
+<!--l. 419--><p class="noindent">generates a window which contains the following formula in its display.
+   <center class="math-display" >
+<img 
+src="NCBIGDOC4x.png" alt="a(1)+a(2)+a(3)+a(4)+a(5)+a(6)+a(7)+a(8)+a(9)+a(10)+a(11)+a(12)+a(13)+a(14)+
+
+a(15)+ a(16) + a(17)+ a(18) + a(19)+ a(20) + a(21)+ a(22) + a(23)+ a(24) + a(25)+ a(26)+
+
+a(27)+ a(28) + a(29)+ a(30) + a(31)+ a(32) + a(33)+ a(34) + a(35)+ a(36) + a(37)+ a(38)+
+a(39)+  a(40)+ a(41) + a(42)+  a(43)+ a(44) + a(45)+  a(46)+ a(47) + a(48)+  a(49)+ a(50)
+" class="math-display" ></center>
+<!--l. 430--><p class="indent">   The above examples in this chapter demonstrate the most commonly used features in
+NCAlgebra.
+
+
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch2.html" >next</a>] [<a 
+href="NCBIGDOCch1.html" >front</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCch1.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch1.html"></a>    
+</body></html> 

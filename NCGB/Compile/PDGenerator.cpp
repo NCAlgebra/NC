@@ -1,0 +1,151 @@
+// PDGenerator.c
+
+#include "PDGenerator.hpp"
+#include "RecordHere.hpp"
+#include "MatcherMonomial.hpp"
+#pragma warning(disable:4786)
+#include <algorithm>
+  
+PDGenerator::~PDGenerator() {};
+
+bool PDGenerator::getNext(Match & match) {
+  while(d_list.empty() && !d_bin_p->iterationEmpty()) {
+    pair<int,int> indices(d_bin_p->nextPair());
+    if(!shouldReject()) {
+      d_first_id= indices.first;
+      d_second_id= indices.second;
+      d_first_or_second_rule_changed = true;
+      d_first_rule_p = &d_fc.fact(indices.first);
+      d_second_rule_p = &d_fc.fact(indices.second);
+      MatcherMonomial matcher;
+      const Monomial & LHS1 = d_first_rule_p->LHS();
+      const Monomial & LHS2 = d_second_rule_p->LHS();
+      if(UserOptions::s_UseSubMatch) {
+        matcher.subMatch(LHS1,indices.first,LHS2,indices.second,d_list);
+      };
+      matcher.overlapMatch(LHS1,indices.first,LHS2,indices.second,d_list);
+    };
+  };
+  bool result = !d_list.empty();
+  if(result) {
+    match = d_list.front();
+    d_list.pop_front();
+  };
+  return result;
+};
+
+// Polynomial Specific
+bool PDGenerator::getNext(Polynomial & poly) {
+  Match match;
+  bool result = getNext(match);
+  if(result) {
+    convert(match,d_fc.fact(d_numbers.first),d_fc.fact(d_numbers.second),poly);
+  };
+  return result;
+};
+
+// Polynomial And GBHistory Specific
+bool PDGenerator::getNext(Polynomial & poly,GBHistory &) {
+  return getNext(poly);
+};
+
+// Match and Polynomial Specific
+bool PDGenerator::getNext(Match & match,Polynomial & poly) {
+  bool result = getNext(match);
+  if(result) {
+    convert(match,d_fc.fact(d_numbers.first),d_fc.fact(d_numbers.second),poly);
+  };
+  return result;
+};
+
+// Match and Polynomial and GBHistory Specific
+bool PDGenerator::getNext(Match & match,Polynomial & poly,GBHistory &) {
+  return getNext(match,poly);
+};
+
+// General 
+void PDGenerator::clear() {
+  DBG();
+};
+
+long PDGenerator::size() const {
+  return d_bin_p->size();
+};
+
+Generator * PDGenerator::clone() const {
+  RECORDHERE(Generator * result = new PDGenerator(*this);)
+  return result; 
+};
+
+bool PDGenerator::empty() const {
+  return d_bin_p->empty();
+};
+
+bool PDGenerator::iterationEmpty() const {
+  return d_bin_p->iterationEmpty();
+};
+
+void PDGenerator::fillForUnknownReason() {
+  d_bin_p->fillForNextIteration();
+};
+
+const GroebnerRule & PDGenerator::retrieve(const SPIID & x) const {
+  return d_fc.fact(x.d_data);
+};
+
+void PDGenerator::insert(const SPIID & x) {
+  set<int,less<int>  >::iterator w = d_toremove.find(x.d_data);
+  if(w!=d_toremove.end()) {
+    d_toremove.erase(w);
+  };
+  d_bin_p->addNewNumber(x.d_data);
+};
+
+void PDGenerator::remove(const SPIID & x) {
+  d_toremove.insert(x.d_data);
+  if(d_numbers.first==x.d_data || d_numbers.second==x.d_data) {
+    d_list.empty();
+  };
+};
+
+void PDGenerator::remove(const SPIID & x,const SPIID & y) {
+  if(x.d_data<=y.d_data) {
+    pair<int,int> pr(x.d_data,y.d_data);
+    d_toremove_pairs.insert(pr);
+    if(d_numbers==pr || (d_numbers.first==y.d_data && d_numbers.second==x.d_data)) {
+      d_list.erase(d_list.begin(),d_list.end());
+    };
+  } else if(x.d_data>y.d_data) {
+    pair<int,int> pr(y.d_data,x.d_data);
+    d_toremove_pairs.insert(pr);
+    if(d_numbers==pr || (d_numbers.first==y.d_data && d_numbers.second==x.d_data)) {
+      d_list.erase(d_list.begin(),d_list.end());
+    };
+  }
+};
+
+bool PDGenerator::shouldReject() const {
+  bool result = false;
+  if(!result) {
+    set<int,less<int> >::const_iterator w(d_toremove.find(d_numbers.first));
+    result = !(w==d_toremove.end()); 
+  };
+  if(!result) {
+    set<int,less<int> >::const_iterator w(d_toremove.find(d_numbers.second));
+    result = !(w==d_toremove.end()); 
+  };
+  if(!result) {
+    int mm = d_numbers.first;
+    if(mm>=d_numbers.second) mm = d_numbers.second;
+    int nn = d_numbers.first;
+    if(nn<=d_numbers.second) nn = d_numbers.second;
+    pair<int,int> pr(mm,nn);
+    PDGenerator * alias = const_cast<PDGenerator *>(this);
+    set<pair<int,int>,less_pair >::iterator w(alias->d_toremove_pairs.find(pr));
+    result = w!=alias->d_toremove_pairs.end(); 
+    if(result) { 
+      alias->d_toremove_pairs.erase(w); 
+    };
+  };
+  return result;
+};

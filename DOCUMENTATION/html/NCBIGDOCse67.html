@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>18.5 Fancier Order Setting Commands </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 138--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse66.html" >prev</a>] [<a 
+href="NCBIGDOCse66.html#tailNCBIGDOCse66.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse67.html">tail</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse67.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">18.5   </span> <a 
+ id="x114-25900018.5"></a>Fancier Order Setting Commands </h3>
+<!--l. 140--><p class="noindent">The following commands were created for a project, long ago and we have not used them
+recently.
+<!--l. 158--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.5.1   </span> <a 
+ id="x114-26000018.5.1"></a>SetMonomialOrder[aListOfIndeterminants, n]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">SetMonomialOrder[aListOfIndeterminates,n] </span>sets the order of monomials (e.g.,
+      if <span 
+class="cmti-12">aListOfIndeterminates </span>is <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a,b,c,d,f,e</span><span 
+class="cmsy-10x-x-120">}</span>, then the order is <span 
+class="cmmi-12">a &lt; b &lt; c &lt; d &lt; f &lt; e</span>)
+      and assigns them grading level <span 
+class="cmmi-12">n</span>. To obtain a graded lexicographic order, one can use
+      <span 
+class="cmmi-12">n </span>= 1.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListofIndeterminants </span>is a list of indeterminates, <span 
+class="cmti-12">n </span>is a natural number
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: See Chapter <a 
+href="NCBIGDOCch18.html#x108-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>. Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx114-260001"></a>
+<!--l. 169--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.5.2   </span> <a 
+ id="x114-26100018.5.2"></a>ClearMonomialOrderN[n]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">ClearMonomialOrderN[n] </span>clears the order having level n. This command is
+      equivalent to clearing <span 
+class="cmmi-12">SetMonomialOrder</span>[<span 
+class="cmsy-10x-x-120">{}</span><span 
+class="cmmi-12">,n</span>]
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">n </span>is an integer or blank
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. </dd></dl>
+<a 
+ id="dx114-261001"></a>
+<!--l. 179--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.5.3   </span> <a 
+ id="x114-26200018.5.3"></a>ClearMonomialOrderAll[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">ClearMonomialOrderAll[] </span>effectively executes <span 
+class="cmti-12">ClearMonomialOrderN[n] </span>for all
+      positive integers <span 
+class="cmti-12">n</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. </dd></dl>
+<a 
+ id="dx114-262001"></a>
+<!--l. 196--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.5.4   </span> <a 
+ id="x114-26300018.5.4"></a>WhatIsMultiplicityOfGrading[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:    <span 
+class="cmti-12">WhatIsMultiplicityOfGrading[]    </span>returns  a  positive  integer  which  is  the
+      multiplicity of the grading. If the value is 1, then one is using graded lexicographical
+      order.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: See Chapter <a 
+href="NCBIGDOCch18.html#x108-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>. Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx114-263001"></a>
+
+<!--l. 209--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">18.5.5   </span> <a 
+ id="x114-26400018.5.5"></a>WhatIsSetOfIndeterminants[n]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  WhatIsSetOfIndeterminants[n] gives the <span 
+class="cmti-12">n</span>-th set of indeterminates.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: See Chapter <a 
+href="NCBIGDOCch18.html#x108-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>. Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx114-264001"></a>
+
+   <!--l. 2--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse66.html" >prev</a>] [<a 
+href="NCBIGDOCse66.html#tailNCBIGDOCse66.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse67.html" >front</a>] [<a 
+href="NCBIGDOCch18.html#NCBIGDOCse67.html" >up</a>] </p></div>
+<!--l. 2--><p class="indent">   <a 
+ id="tailNCBIGDOCse67.html"></a>   
+</body></html> 

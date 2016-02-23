@@ -1,0 +1,898 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     27684,        888]
+NotebookOptionsPosition[     25263,        801]
+NotebookOutlinePosition[     25743,        820]
+CellTagsIndexPosition[     25700,        817]
+WindowFrame->Normal
+ContainsDynamic->False*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+
+Examples of the use of the NonCommutative Control Systems package\
+\>", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+(* :Title: \tNC-CSP-Demo.nb *)
+
+
+<<NC`
+<<NCAlgebra`
+<<ControlSystems`
+<<NCControl.m
+
+
+
+Clear[\.19a1, a2,a3,a4,b1,b2,c1,c2,d,u1,u2,u3,u4,v1,v2,w1,w2,z, 
+\t  B, F, G, H, X, Y, Z, W,  T, U, S];
+
+SetNonCommutative[a1,a2,a3,a4,b1,b2,c1,c2,d,u1,u2,u3,u4,v1,v2,w1,w2,z ];
+
+SetCommutative[B, F, G, H, X, Y, Z, W, S];
+
+sys1 = StateSpace[ {{a1,a2},{a3,a4}},{{b1},{b2}},{{c1,c2}},{{d}} ];
+sys2 = StateSpace[ {{u1,u2},{u3,u4}},{{v1},{v2}},{{w1,w2}},{{z}} ];
+csys1 = StateSpace[{{B, F}, {G, H}}, {{X}, { Y}}, {{Z, W}},  {{S}}]; \
+\>", "Input",
+ PageWidth->Infinity,
+ InitializationCell->True,
+ CellChangeTimes->{{3.473453373364146*^9, 3.4734533802304792`*^9}},
+ ShowSpecialCharacters->False],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"You have already loaded NCAlgebra.m\"\>"], "Print"],
+
+Cell[BoxData["\<\" ******************************************************** \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" * NOTE: In order to ensure that TransferFunction[]     * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       works for systems with potentially non-        * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       commutative arguments, the option              * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *             ReductionMethod->NCInverse               * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       is now the TransferFunction default.           * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       As TransferFunction[] may generate non-        * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       standard (though correct) output for systems   * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       with commutative arguments, you may wish, in   * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       such cases, to replace the call                * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *              TransferFunction[X]                     * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       with                                           * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       TransferFunction[X,                            * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *              ReductionMethod->DeterminantExpansion], * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" *       which is the CSP II default.                   * \
+\"\>"], "Print"],
+
+Cell[BoxData["\<\" ******************************************************** \
+\"\>"], "Print"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["SYSTEM INTERCONNECTIONS", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"SeriesConnect", "[", 
+    RowBox[{"sys1", ",", "sys2"}], "]"}], "//", 
+   "TraditionalForm"}]}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"a1", "a2", "0", "0", "b1"},
+         {"a3", "a4", "0", "0", "b2"},
+         {
+          RowBox[{"v1", "**", "c1"}], 
+          RowBox[{"v1", "**", "c2"}], "u1", "u2", 
+          RowBox[{"v1", "**", "d"}]},
+         {
+          RowBox[{"v2", "**", "c1"}], 
+          RowBox[{"v2", "**", "c2"}], "u3", "u4", 
+          RowBox[{"v2", "**", "d"}]},
+         {
+          RowBox[{"z", "**", "c1"}], 
+          RowBox[{"z", "**", "c2"}], "w1", "w2", 
+          RowBox[{"z", "**", "d"}]}
+        },
+        AllowScriptLevelChange->False,
+        GridBoxDividers->{
+         "Columns" -> {False, False, False, False, True, {False}, False}, 
+          "ColumnsIndexed" -> {}, 
+          "Rows" -> {False, False, False, False, True, {False}, False}, 
+          "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox["\[Bullet]",
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalS]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   StateSpace[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"FeedbackConnect", "[", 
+    RowBox[{"sys1", ",", "sys2"}], "]"}], "//", "TraditionalForm"}], " ", 
+  "\[IndentingNewLine]"}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          RowBox[{"a1", "-", 
+           RowBox[{"b1", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c1"}]}], 
+          RowBox[{"a2", "-", 
+           RowBox[{"b1", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c2"}]}], 
+          RowBox[{"-", 
+           RowBox[{"b1", "**", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"z", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}], 
+             ")"}], "**", "w1"}]}], 
+          RowBox[{"-", 
+           RowBox[{"b1", "**", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"z", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}], 
+             ")"}], "**", "w2"}]}], 
+          RowBox[{"b1", "-", 
+           RowBox[{"b1", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}]},
+         {
+          RowBox[{"a3", "-", 
+           RowBox[{"b2", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c1"}]}], 
+          RowBox[{"a4", "-", 
+           RowBox[{"b2", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c2"}]}], 
+          RowBox[{"-", 
+           RowBox[{"b2", "**", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"z", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}], 
+             ")"}], "**", "w1"}]}], 
+          RowBox[{"-", 
+           RowBox[{"b2", "**", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"z", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}], 
+             ")"}], "**", "w2"}]}], 
+          RowBox[{"b2", "-", 
+           RowBox[{"b2", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}]},
+         {
+          RowBox[{"v1", "**", 
+           RowBox[{"inv", "(", 
+            RowBox[{
+             RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c1"}], 
+          RowBox[{"v1", "**", 
+           RowBox[{"inv", "(", 
+            RowBox[{
+             RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c2"}], 
+          RowBox[{"u1", "-", 
+           RowBox[{"v1", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d", "**", 
+            "w1"}]}], 
+          RowBox[{"u2", "-", 
+           RowBox[{"v1", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d", "**", 
+            "w2"}]}], 
+          RowBox[{"v1", "**", 
+           RowBox[{"inv", "(", 
+            RowBox[{
+             RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]},
+         {
+          RowBox[{"v2", "**", 
+           RowBox[{"inv", "(", 
+            RowBox[{
+             RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c1"}], 
+          RowBox[{"v2", "**", 
+           RowBox[{"inv", "(", 
+            RowBox[{
+             RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c2"}], 
+          RowBox[{"u3", "-", 
+           RowBox[{"v2", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d", "**", 
+            "w1"}]}], 
+          RowBox[{"u4", "-", 
+           RowBox[{"v2", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d", "**", 
+            "w2"}]}], 
+          RowBox[{"v2", "**", 
+           RowBox[{"inv", "(", 
+            RowBox[{
+             RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]},
+         {
+          RowBox[{"c1", "-", 
+           RowBox[{"d", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c1"}]}], 
+          RowBox[{"c2", "-", 
+           RowBox[{"d", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "c2"}]}], 
+          RowBox[{"-", 
+           RowBox[{"d", "**", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"z", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}], 
+             ")"}], "**", "w1"}]}], 
+          RowBox[{"-", 
+           RowBox[{"d", "**", 
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"z", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}], 
+             ")"}], "**", "w2"}]}], 
+          RowBox[{"d", "-", 
+           RowBox[{"d", "**", "z", "**", 
+            RowBox[{"inv", "(", 
+             RowBox[{
+              RowBox[{"d", "**", "z"}], "+", "1"}], ")"}], "**", "d"}]}]}
+        },
+        AllowScriptLevelChange->False,
+        GridBoxDividers->{
+         "Columns" -> {False, False, False, False, True, {False}, False}, 
+          "ColumnsIndexed" -> {}, 
+          "Rows" -> {False, False, False, False, True, {False}, False}, 
+          "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox["\[Bullet]",
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalS]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   StateSpace[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ParallelConnect", "[", 
+    RowBox[{"sys1", ",", "sys2"}], "]"}], "//", "TraditionalForm"}], " ", 
+  "\[IndentingNewLine]"}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"a1", "a2", "0", "0", "b1"},
+         {"a3", "a4", "0", "0", "b2"},
+         {"0", "0", "u1", "u2", "v1"},
+         {"0", "0", "u3", "u4", "v2"},
+         {"c1", "c2", "w1", "w2", 
+          RowBox[{"d", "+", "z"}]}
+        },
+        AllowScriptLevelChange->False,
+        GridBoxDividers->{
+         "Columns" -> {False, False, False, False, True, {False}, False}, 
+          "ColumnsIndexed" -> {}, 
+          "Rows" -> {False, False, False, False, True, {False}, False}, 
+          "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox["\[Bullet]",
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalS]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   StateSpace[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NEW SYSTEMS FROM OLD", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"NCInverseSystem", "[", "sys1", "]"}], "//", "TraditionalForm"}], 
+  " ", "\[IndentingNewLine]"}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          RowBox[{"a1", "-", 
+           RowBox[{"b1", "**", 
+            RowBox[{"inv", "(", "d", ")"}], "**", "c1"}]}], 
+          RowBox[{"a2", "-", 
+           RowBox[{"b1", "**", 
+            RowBox[{"inv", "(", "d", ")"}], "**", "c2"}]}], 
+          RowBox[{"-", 
+           RowBox[{"b1", "**", 
+            RowBox[{"inv", "(", "d", ")"}]}]}]},
+         {
+          RowBox[{"a3", "-", 
+           RowBox[{"b2", "**", 
+            RowBox[{"inv", "(", "d", ")"}], "**", "c1"}]}], 
+          RowBox[{"a4", "-", 
+           RowBox[{"b2", "**", 
+            RowBox[{"inv", "(", "d", ")"}], "**", "c2"}]}], 
+          RowBox[{"-", 
+           RowBox[{"b2", "**", 
+            RowBox[{"inv", "(", "d", ")"}]}]}]},
+         {
+          RowBox[{
+           RowBox[{"inv", "(", "d", ")"}], "**", "c1"}], 
+          RowBox[{
+           RowBox[{"inv", "(", "d", ")"}], "**", "c2"}], 
+          RowBox[{"inv", "(", "d", ")"}]}
+        },
+        AllowScriptLevelChange->False,
+        GridBoxDividers->{
+         "Columns" -> {False, False, True, {False}, False}, 
+          "ColumnsIndexed" -> {}, 
+          "Rows" -> {False, False, True, {False}, False}, 
+          "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox["\[Bullet]",
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalS]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   StateSpace[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NCConjugateSystem", "[", "sys1", "]"}], "//", 
+  "TraditionalForm"}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          RowBox[{"-", 
+           RowBox[{"tp", "(", "a1", ")"}]}], 
+          RowBox[{"-", 
+           RowBox[{"tp", "(", "a3", ")"}]}], 
+          RowBox[{"-", 
+           RowBox[{"tp", "(", "c1", ")"}]}]},
+         {
+          RowBox[{"-", 
+           RowBox[{"tp", "(", "a2", ")"}]}], 
+          RowBox[{"-", 
+           RowBox[{"tp", "(", "a4", ")"}]}], 
+          RowBox[{"-", 
+           RowBox[{"tp", "(", "c2", ")"}]}]},
+         {
+          RowBox[{"tp", "(", "b1", ")"}], 
+          RowBox[{"tp", "(", "b2", ")"}], 
+          RowBox[{"tp", "(", "d", ")"}]}
+        },
+        AllowScriptLevelChange->False,
+        GridBoxDividers->{
+         "Columns" -> {False, False, True, {False}, False}, 
+          "ColumnsIndexed" -> {}, 
+          "Rows" -> {False, False, True, {False}, False}, 
+          "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox["\[Bullet]",
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalS]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   StateSpace[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["TRANSFER FUNCTION", "Subtitle"],
+
+Cell["Non-Commutative System", "Subsubtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TransferFunction", "[", "sys1", "]"}], " ", "//", " ", 
+  "TraditionalForm"}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          RowBox[{"d", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"c2", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"-", "a4"}], "+", "\[ScriptS]", "-", 
+                 RowBox[{"a3", "**", 
+                  RowBox[{"inv", "(", 
+                   RowBox[{"\[ScriptS]", "-", "a1"}], ")"}], "**", "a2"}]}], 
+                ")"}]}], "+", 
+              RowBox[{"c1", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{"\[ScriptS]", "-", "a1"}], ")"}], "**", "a2", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"-", "a4"}], "+", "\[ScriptS]", "-", 
+                 RowBox[{"a3", "**", 
+                  RowBox[{"inv", "(", 
+                   RowBox[{"\[ScriptS]", "-", "a1"}], ")"}], "**", "a2"}]}], 
+                ")"}]}]}], ")"}], "**", "b2"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"c1", "**", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"inv", "(", 
+                  RowBox[{"\[ScriptS]", "-", "a1"}], ")"}], "+", 
+                 RowBox[{
+                  RowBox[{"inv", "(", 
+                   RowBox[{"\[ScriptS]", "-", "a1"}], ")"}], "**", "a2", "**",
+                   
+                  RowBox[{"inv", "(", 
+                   RowBox[{
+                    RowBox[{"-", "a4"}], "+", "\[ScriptS]", "-", 
+                    RowBox[{"a3", "**", 
+                    RowBox[{"inv", "(", 
+                    RowBox[{"\[ScriptS]", "-", "a1"}], ")"}], "**", "a2"}]}], 
+                   ")"}], "**", "a3", "**", 
+                  RowBox[{"inv", "(", 
+                   RowBox[{"\[ScriptS]", "-", "a1"}], ")"}]}]}], ")"}]}], "+",
+               
+              RowBox[{"c2", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{
+                 RowBox[{"-", "a4"}], "+", "\[ScriptS]", "-", 
+                 RowBox[{"a3", "**", 
+                  RowBox[{"inv", "(", 
+                   RowBox[{"\[ScriptS]", "-", "a1"}], ")"}], "**", "a2"}]}], 
+                ")"}], "**", "a3", "**", 
+               RowBox[{"inv", "(", 
+                RowBox[{"\[ScriptS]", "-", "a1"}], ")"}]}]}], ")"}], "**", 
+            "b1"}]}]}
+        },
+        AllowScriptLevelChange->False], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[InvisibleSpace]\"\>",
+       ShowStringCharacters->False],
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalT]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   TransferFunction[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Commutative System", "Subsubtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TransferFunction", "[", "csys1", "]"}], " ", "//", " ", 
+  "TraditionalForm"}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          RowBox[{"S", "+", 
+           RowBox[{"Y", " ", 
+            RowBox[{"(", 
+             RowBox[{
+              FractionBox["W", 
+               RowBox[{
+                RowBox[{"-", 
+                 FractionBox[
+                  RowBox[{"F", " ", "G"}], 
+                  RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                "\[ScriptS]"}]], "+", 
+              FractionBox[
+               RowBox[{"F", " ", "Z"}], 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"\[ScriptS]", "-", "B"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"-", 
+                   FractionBox[
+                    RowBox[{"F", " ", "G"}], 
+                    RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                  "\[ScriptS]"}], ")"}]}]]}], ")"}]}], "+", 
+           RowBox[{"X", " ", 
+            RowBox[{"(", 
+             RowBox[{
+              FractionBox[
+               RowBox[{"G", " ", "W"}], 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"\[ScriptS]", "-", "B"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"-", 
+                   FractionBox[
+                    RowBox[{"F", " ", "G"}], 
+                    RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                  "\[ScriptS]"}], ")"}]}]], "+", 
+              RowBox[{"Z", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 FractionBox[
+                  RowBox[{"F", " ", "G"}], 
+                  RowBox[{
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"\[ScriptS]", "-", "B"}], ")"}], "2"], " ", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", 
+                    FractionBox[
+                    RowBox[{"F", " ", "G"}], 
+                    RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                    "\[ScriptS]"}], ")"}]}]], "+", 
+                 FractionBox["1", 
+                  RowBox[{"\[ScriptS]", "-", "B"}]]}], ")"}]}]}], ")"}]}]}]}
+        },
+        AllowScriptLevelChange->False], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[InvisibleSpace]\"\>",
+       ShowStringCharacters->False],
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalT]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   TransferFunction[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TransferFunction", "[", 
+   RowBox[{"csys1", ",", " ", 
+    RowBox[{"ReductionMethod", "\[Rule]", " ", "DeterminantExpansion"}]}], 
+   "]"}], " ", "//", " ", "TraditionalForm"}]], "Input"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   FormBox[
+    SubsuperscriptBox[
+     FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          RowBox[{"S", "+", 
+           RowBox[{"Y", " ", 
+            RowBox[{"(", 
+             RowBox[{
+              FractionBox["W", 
+               RowBox[{
+                RowBox[{"-", 
+                 FractionBox[
+                  RowBox[{"F", " ", "G"}], 
+                  RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                "\[ScriptS]"}]], "+", 
+              FractionBox[
+               RowBox[{"F", " ", "Z"}], 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"\[ScriptS]", "-", "B"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"-", 
+                   FractionBox[
+                    RowBox[{"F", " ", "G"}], 
+                    RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                  "\[ScriptS]"}], ")"}]}]]}], ")"}]}], "+", 
+           RowBox[{"X", " ", 
+            RowBox[{"(", 
+             RowBox[{
+              FractionBox[
+               RowBox[{"G", " ", "W"}], 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"\[ScriptS]", "-", "B"}], ")"}], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"-", 
+                   FractionBox[
+                    RowBox[{"F", " ", "G"}], 
+                    RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                  "\[ScriptS]"}], ")"}]}]], "+", 
+              RowBox[{"Z", " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 FractionBox[
+                  RowBox[{"F", " ", "G"}], 
+                  RowBox[{
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"\[ScriptS]", "-", "B"}], ")"}], "2"], " ", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", 
+                    FractionBox[
+                    RowBox[{"F", " ", "G"}], 
+                    RowBox[{"\[ScriptS]", "-", "B"}]]}], "-", "H", "+", 
+                    "\[ScriptS]"}], ")"}]}]], "+", 
+                 FractionBox["1", 
+                  RowBox[{"\[ScriptS]", "-", "B"}]]}], ")"}]}]}], ")"}]}]}]}
+        },
+        AllowScriptLevelChange->False], "\[NoBreak]", ")"}],
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[InvisibleSpace]\"\>",
+       ShowStringCharacters->False],
+      TraditionalForm], 
+     FormBox[
+      StyleBox["\<\"\[ScriptCapitalT]\"\>",
+       Editable->False,
+       ShowStringCharacters->False],
+      TraditionalForm],
+     MultilineFunction->None],
+    TraditionalForm],
+   TransferFunction[
+    SlotSequence[1]]& ], TraditionalForm]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{784, 700},
+WindowMargins->{{150, Automatic}, {Automatic, 0}},
+DockedCells->(FrontEndExecute[{
+   FrontEnd`NotebookApply[
+    FrontEnd`InputNotebook[], #, Placeholder]}]& ),
+FrontEndVersion->"6.0 for Mac OS X x86 (32-bit) (June 19, 2007)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 91, 3, 217, "Title"],
+Cell[CellGroupData[{
+Cell[706, 30, 689, 26, 287, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1420, 60, 69, 0, 20, "Print"],
+Cell[1492, 62, 94, 1, 20, "Print"],
+Cell[1589, 65, 94, 1, 20, "Print"],
+Cell[1686, 68, 94, 1, 20, "Print"],
+Cell[1783, 71, 94, 1, 20, "Print"],
+Cell[1880, 74, 94, 1, 20, "Print"],
+Cell[1977, 77, 94, 1, 20, "Print"],
+Cell[2074, 80, 94, 1, 20, "Print"],
+Cell[2171, 83, 94, 1, 20, "Print"],
+Cell[2268, 86, 94, 1, 20, "Print"],
+Cell[2365, 89, 94, 1, 20, "Print"],
+Cell[2462, 92, 94, 1, 20, "Print"],
+Cell[2559, 95, 94, 1, 20, "Print"],
+Cell[2656, 98, 94, 1, 20, "Print"],
+Cell[2753, 101, 94, 1, 20, "Print"],
+Cell[2850, 104, 94, 1, 20, "Print"],
+Cell[2947, 107, 94, 1, 20, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3090, 114, 43, 0, 46, "Subtitle"],
+Cell[CellGroupData[{
+Cell[3158, 118, 199, 5, 58, "Input"],
+Cell[3360, 125, 1271, 39, 101, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4668, 169, 182, 5, 43, "Input"],
+Cell[4853, 176, 6413, 177, 101, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11303, 358, 182, 5, 43, "Input"],
+Cell[11488, 365, 1006, 31, 101, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12543, 402, 40, 0, 46, "Subtitle"],
+Cell[CellGroupData[{
+Cell[12608, 406, 154, 4, 43, "Input"],
+Cell[12765, 412, 1683, 51, 67, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14485, 468, 114, 3, 27, "Input"],
+Cell[14602, 473, 1332, 43, 67, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15983, 522, 37, 0, 46, "Subtitle"],
+Cell[16023, 524, 45, 0, 26, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[16093, 528, 123, 3, 27, "Input"],
+Cell[16219, 533, 2935, 78, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19191, 616, 41, 0, 26, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[19257, 620, 124, 3, 27, "Input"],
+Cell[19384, 625, 2782, 79, 66, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22203, 709, 223, 5, 27, "Input"],
+Cell[22429, 716, 2782, 79, 66, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,2 @@
+{-e + a**b**c**d, -e + b**c**d**a, -e + c**d**a**b, -e + d**a**b**c, 
+ -d**e + e**d, -a**e + e**a, -b**e + e**b, -c**e + e**c}

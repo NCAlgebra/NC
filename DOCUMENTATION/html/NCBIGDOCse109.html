@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>31.1 Details of the Algorithm</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 22--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse110.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse109.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#NCBIGDOCse109.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1   </span></span> <a 
+ id="x176-38800031.1"></a><span 
+class="cmr-10x-x-109">Details of the Algorithm</span></h3>
+
+<!--l. 24--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.1   </span></span> <a 
+ id="x176-38900031.1.1"></a><span 
+class="cmr-10x-x-109">Preparation</span></h4>
+<!--l. 25--><p class="noindent"><span 
+class="cmr-10x-x-109">The first step is to put </span><span 
+class="cmtt-10x-x-109">motUnknown </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmtt-10x-x-109">Tp[motUnknown] </span><span 
+class="cmr-10x-x-109">in the order. If the variable </span><span 
+class="cmtt-10x-x-109">motUnknown </span><span 
+class="cmr-10x-x-109">is</span>
+<span 
+class="cmr-10x-x-109">already in the order, then nothing is done. Otherwise, the two variables are put in the order in a graded</span>
+<span 
+class="cmr-10x-x-109">piece just after the knowns. For example, if the old order is </span><span 
+class="cmmi-10x-x-109">a &lt; b &lt; c </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">x &lt; x</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">y </span><span 
+class="cmr-10x-x-109">then the new order</span>
+<span 
+class="cmr-10x-x-109">would be </span><span 
+class="cmmi-10x-x-109">a &lt; b &lt; c </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">motUnknown &lt; motUnknown</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">x &lt; x</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">y</span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 32--><p class="indent">   <span 
+class="cmr-10x-x-109">The default options are also set at this stage.</span>
+<!--l. 35--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.2   </span></span> <a 
+ id="x176-39000031.1.2"></a><span 
+class="cmr-10x-x-109">Collect and extract</span></h4>
+<!--l. 36--><p class="noindent"><span 
+class="cmr-10x-x-109">The next step is to go through the polynomials and to collect on knowns and on monomials consisting</span>
+<span 
+class="cmr-10x-x-109">only of knowns. The NCAlgebra command </span><span 
+class="cmtt-10x-x-109">NCCollectOnVariables </span><span 
+class="cmr-10x-x-109">looks for knowns and collects</span>
+<span 
+class="cmr-10x-x-109">terms around them. For instance, given </span><span 
+class="cmmi-10x-x-109">xyax </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">zax</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmtt-10x-x-109">NCCollectOnVariables </span><span 
+class="cmr-10x-x-109">would return</span>
+<span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">xy </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">z</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">ax</span><span 
+class="cmr-10x-x-109">. The first set of candidates for motivated unknowns is to extract what is collected</span>
+<span 
+class="cmr-10x-x-109">to either side of the known. The program now keeps a list of pairs </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">P, C</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">where P is the</span>
+<span 
+class="cmr-10x-x-109">polynomial on which </span><span 
+class="cmtt-10x-x-109">NCCollectOnVariables </span><span 
+class="cmr-10x-x-109">was called and C is one of the things collected</span>
+<span 
+class="cmr-10x-x-109">to either side of the knowns. The resulting list has all such pairs related to the given list of</span>
+<span 
+class="cmr-10x-x-109">polynomials.</span>
+<!--l. 48--><p class="indent">   <span 
+class="cmr-10x-x-109">Note that if nothing can be collected, no entries are returned and our algorithm cannot find a</span>
+<span 
+class="cmr-10x-x-109">motivated unknown.</span>
+<!--l. 51--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.3   </span></span> <a 
+ id="x176-39100031.1.3"></a><span 
+class="cmr-10x-x-109">Eliminate candidates which are too small</span></h4>
+<!--l. 52--><p class="noindent"><span 
+class="cmr-10x-x-109">The next step is to look at the number of unknowns in the candidates for motivated unknowns and to try</span>
+<span 
+class="cmr-10x-x-109">to eliminate some without running a Grobner basis algorithm. This step counts the number of unknowns</span>
+<span 
+class="cmr-10x-x-109">in the candidate (C in the pair described above) and compares it to the number of unknowns in the</span>
+<span 
+class="cmr-10x-x-109">polynomial that motivated it (P above). Since the idea is that the candidate C will reduce P to a function</span>
+<span 
+class="cmr-10x-x-109">of one variable, we can eliminate the pair if C has less unknowns than P. This is exactly what this step</span>
+<span 
+class="cmr-10x-x-109">does.</span>
+<!--l. 61--><p class="indent">   <span 
+class="cmr-10x-x-109">It also eliminates pairs where C is just one variable.</span>
+<!--l. 64--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.4   </span></span> <a 
+ id="x176-39200031.1.4"></a><span 
+class="cmr-10x-x-109">Eliminate purely numerical terms from candidates - Default is Off</span></h4>
+<!--l. 65--><p class="noindent"><span 
+class="cmr-10x-x-109">Here we eliminate purely numerical terms from the candidates for motivated unknowns. Thus if our</span>
+<span 
+class="cmr-10x-x-109">candidates starts as </span><span 
+class="cmmi-10x-x-109">xy </span><span 
+class="cmr-10x-x-109">+ 1 we instead take as our candidate </span><span 
+class="cmmi-10x-x-109">xy</span><span 
+class="cmr-10x-x-109">. I&#8217;m not sure if this step is still</span>
+<span 
+class="cmr-10x-x-109">necessary, but in the past there were difficulties matching when the candidate had a numerical</span>
+<span 
+class="cmr-10x-x-109">term.</span>
+<!--l. 71--><p class="indent">   <span 
+class="cmr-10x-x-109">To turn off this step, redefine NCXKillConstantTerms to be the identity function, i.e.</span>
+<span 
+class="cmr-10x-x-109">NCXKillConstantTerms[list</span><span 
+class="cmr-10x-x-109">_] := list.</span>
+
+<!--l. 75--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.5   </span></span> <a 
+ id="x176-39300031.1.5"></a><span 
+class="cmr-10x-x-109">Sort list of candidates by number of terms</span></h4>
+<!--l. 76--><p class="noindent"><span 
+class="cmr-10x-x-109">Now we sort the candidates by their length, where by length we mean the number of terms in the</span>
+<span 
+class="cmr-10x-x-109">polynomial. It generally turns out that the smallest polynomials are more likely to work, so by</span>
+<span 
+class="cmr-10x-x-109">sorting in such a way that the polynomials with the least number of terms come first, we</span>
+<span 
+class="cmr-10x-x-109">will probably find the motivated unknown (if one exists) earlier than if we had a random</span>
+<span 
+class="cmr-10x-x-109">order.</span>
+<!--l. 83--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.6   </span></span> <a 
+ id="x176-39400031.1.6"></a><span 
+class="cmr-10x-x-109">Multiply through by monomials - Default is off</span></h4>
+<!--l. 84--><p class="noindent"><span 
+class="cmr-10x-x-109">Sometimes it turns out that we need to find the motivated unknown, we actually need to multiply the</span>
+<span 
+class="cmr-10x-x-109">polynomial P by some monomial on the left and/or right. Then this new polynomial will admit a</span>
+<span 
+class="cmr-10x-x-109">motivated unknown. This step adds new pairs </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">P&#8217;, C&#8217;</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">where P&#8217; is a LPR where P is from the original list</span>
+<span 
+class="cmr-10x-x-109">and L and R are monomials. L and R are dtermined in the following way. Given a pair </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">P, C</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">from the</span>
+<span 
+class="cmr-10x-x-109">original list we find all prefixes L of the leading term of C and all suffixes R of the leading term of C.</span>
+<span 
+class="cmr-10x-x-109">Prefixes of a monomial M are monomials on the left of M and suffixes are monomials on the right.</span>
+<span 
+class="cmr-10x-x-109">Thus the monomial </span><span 
+class="cmmi-10x-x-109">xyz </span><span 
+class="cmr-10x-x-109">has prefixes </span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmmi-10x-x-109">xy</span><span 
+class="cmr-10x-x-109">, and </span><span 
+class="cmmi-10x-x-109">xyz </span><span 
+class="cmr-10x-x-109">and has suffixes </span><span 
+class="cmmi-10x-x-109">z</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmmi-10x-x-109">yz</span><span 
+class="cmr-10x-x-109">, and </span><span 
+class="cmmi-10x-x-109">xyz</span><span 
+class="cmr-10x-x-109">. We add</span>
+<span 
+class="cmr-10x-x-109">to our list pairs </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">LP, C</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">PR, C</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">, and </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">LPR, C</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">. These candidate pairs are added at the</span>
+<span 
+class="cmr-10x-x-109">end of the list so that they are tried after the candidates without multiplying through by</span>
+<span 
+class="cmr-10x-x-109">monomials.</span>
+<!--l. 101--><p class="indent">   <span 
+class="cmbx-10x-x-109">This option needs to be hcanged so that lists can be multiplied through solely on the left</span>
+<span 
+class="cmbx-10x-x-109">or solely on the right.</span>
+<!--l. 106--><p class="indent">   <span 
+class="cmr-10x-x-109">In order to turn this on, give the option </span><span 
+class="cmtt-10x-x-109">MultiplyByMonomials -&gt; True</span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 108--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.7   </span></span> <a 
+ id="x176-39500031.1.7"></a><span 
+class="cmr-10x-x-109">Run the Grobner basis algorithm</span></h4>
+<!--l. 109--><p class="noindent"><span 
+class="cmr-10x-x-109">We now can step through out list and try each to see if the candidate is, in fact, a good motivated</span>
+<span 
+class="cmr-10x-x-109">unknown. Given a pair </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">P, C</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">we run </span><span 
+class="cmtt-10x-x-109">NCProcess </span><span 
+class="cmr-10x-x-109">on the union of the P, polynomials with 2 terms (these</span>
+<span 
+class="cmr-10x-x-109">we shall think of as important polynomials since they include relations defining inverses and</span>
+<span 
+class="cmr-10x-x-109">symmetry), and the rules </span><span 
+class="cmmi-10x-x-109">C </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">motUnknown </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmmi-10x-x-109">C</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">motUnknown</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">. If it finds a motivated</span>
+<span 
+class="cmr-10x-x-109">unknown that works (i.e. eliminates all other unknowns), then it stops and returns the pair</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">P,C</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 118--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.1.8   </span></span> <a 
+ id="x176-39600031.1.8"></a><span 
+class="cmr-10x-x-109">Options</span></h4>
+<!--l. 119--><p class="noindent"><span 
+class="cmr-10x-x-109">Most of these steps can be eliminated by setting the appropriate option. See manual for details in setting</span>
+<span 
+class="cmr-10x-x-109">options.</span>
+
+
+   <!--l. 129--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse110.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse109.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#NCBIGDOCse109.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 129--><p class="indent">   <a 
+ id="tailNCBIGDOCse109.html"></a>   
+</body></html> 

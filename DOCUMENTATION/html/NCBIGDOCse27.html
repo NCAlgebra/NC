@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>5.3 Simple TEX Commands with NCTEX</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 119--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse28.html" >next</a>] [<a 
+href="NCBIGDOCse26.html" >prev</a>] [<a 
+href="NCBIGDOCse26.html#tailNCBIGDOCse26.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse27.html">tail</a>] [<a 
+href="NCBIGDOCch5.html#NCBIGDOCse27.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">5.3   </span> <a 
+ id="x36-1490005.3"></a>Simple <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;Commands with NC<span class="TEX">T<span 
+class="E">E</span>X</span></h3>
+<!--l. 122--><p class="noindent">In this section we describe some handy additional <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;display features we have added to
+Mathematica. These act in addition to Mathematica&#8217;s <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;setting with NCAlgebra, like
+TeXForm or Format[ &#x00A0;, TeXForm]. Mathematica&#8217;s <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;conversion however does not need this
+and is fine with NCAlgebra, since we have added special NCAlgebra and NCGB notation to the
+Mathematica-to-<span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;dictionary. If you are content with that, there is no reason to read this part
+of the document. Also the NCProcess <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;spreadsheets are automatic and are not related to this
+section of the document.
+<!--l. 132--><p class="indent">   These are very useful commands and we recommend using them. You <span 
+class="cmti-12">may have must do a little</span>
+<span 
+class="cmti-12">installation work </span>to use our fancier <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;commands depending how <span class="TEX">T<span 
+class="E">E</span>X</span>is installed in your
+system. It should work out-of-the box on most Unix based systems. Beware that some versions of
+Mathematica creates <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;output that uses a specific Mathematica file called a style
+file (called notebook.sty). Some of the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;produced needs to know where this file is
+kept. A description of how to inform <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;where this file is stored is found in Section
+<span 
+class="cmbx-12">??</span>.
+<!--l. 185--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.3.1   </span> <a 
+ id="x36-1500005.3.1"></a>NCTeX[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">NCTeX</span>[<span 
+class="cmti-12">exp</span>] creates a file that contains a <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;version of <span 
+class="cmti-12">exp </span>that gets
+      compiled with <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;and converted into a PDF image file. By default, if you are
+      on a notebook environment, this file will be imported to the current notebook output.
+      Otherwise, if it fails to be imported or if you are in text mode the output will be
+      displayed on a pdf viewer. <span 
+class="cmti-12">NCTeX  </span>has many options that can be set through the
+      standard Mathematica <span 
+class="cmti-12">SetOptions </span>command or as rules appended to the <span 
+class="cmti-12">NCTeX</span>. The
+
+      following are the available options and their default values: <span 
+class="cmti-12">Verbose </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">False</span>, tells
+      <span 
+class="cmti-12">NCTex </span>to display the details of the operations being performed; <span 
+class="cmti-12">DisplayPDF </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">False</span>,
+      controls whether a separated PDF viewer will be spawed to display the <span class="TEX">T<span 
+class="E">E</span>X</span>ed output;
+      <span 
+class="cmti-12">ImportPDF </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">True</span>, controls whether the <span class="TEX">T<span 
+class="E">E</span>X</span>ed output will be imported into a
+      notebook; <span 
+class="cmti-12">BreakEquations </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">True</span>, tells NC<span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;to use the style <span 
+class="cmti-12">breqn </span>to attempt to
+      break long equations or expressions in multiple lines; <span 
+class="cmti-12">TeXProcessor </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&gt; </span><span 
+class="cmti-12">NCTeXForm</span>,
+      tells NC<span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;to use <span 
+class="cmti-12">NCTeXForm </span>as the command to translate <span 
+class="cmti-12">exp </span>into <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>. Other
+      options are <span 
+class="cmti-12">PDFViewer</span>, <span 
+class="cmti-12">LaTeXCommand</span>, <span 
+class="cmti-12">PDFLaTeXCommand</span>, <span 
+class="cmti-12">DVIPSCommand</span>,
+      <span 
+class="cmti-12">PS2PDFCommand </span>which we try to guess correctly depending on your platform. You
+      may have to customize those if your installation of <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;is not standard.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">exp </span>is any mathematica expression or lists of expressions.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 3.9. </dd></dl>
+<a 
+ id="dx36-150001"></a>
+
+   <!--l. 188--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse28.html" >next</a>] [<a 
+href="NCBIGDOCse26.html" >prev</a>] [<a 
+href="NCBIGDOCse26.html#tailNCBIGDOCse26.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse27.html" >front</a>] [<a 
+href="NCBIGDOCch5.html#NCBIGDOCse27.html" >up</a>] </p></div>
+<!--l. 188--><p class="indent">   <a 
+ id="tailNCBIGDOCse27.html"></a>   
+</body></html> 

@@ -1,0 +1,12 @@
+(**
+  * Ex 9 
+  * Handbook on Semidefinite Programming p. 218
+  * Same as Ex 9, but this time with block diagonal structure
+  **)
+
+lmi = { {{x - 2}}, {{y, x},{x, 1}}, {{z, y},{y, 1}} }
+
+{CC, A} = SDPLinearCoefficientArrays[lmi, {x, y, z}];
+
+BB = {{{0, 0, -1}}}
+

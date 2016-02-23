@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>19.5 NCProcess Summary Table</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 443--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse71.html" >prev</a>] [<a 
+href="NCBIGDOCse71.html#tailNCBIGDOCse71.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse72.html">tail</a>] [<a 
+href="NCBIGDOCch19.html#NCBIGDOCse72.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">19.5   </span> <a 
+ id="x120-28000019.5"></a>NCProcess Summary Table</h3>
+
+   <div class="fbox"> <table class="minipage"><tr><td>
+               NCProcess[<span 
+class="cmmi-12">aListOfPolynomials</span>, <span 
+class="cmmi-12">iter</span>, &#8220;<span 
+class="cmmi-12">Filename</span>&#8221;, <span 
+class="cmmi-12">Options</span>]____________
+                 UserSelect <span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+         Deselect <span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+<!--l. 562--><p class="noindent">     MainUnknowns<span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+<!--l. 562--><p class="noindent">          RR <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>
+<!--l. 562--><p class="noindent">            RRByCat <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>
+<!--l. 562--><p class="noindent">                    SB <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>
+<!--l. 562--><p class="noindent">             SBByCat <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>
+<!--l. 562--><p class="noindent">         SBFlatOrder <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>
+<!--l. 562--><p class="noindent">              DegreeCap <span 
+class="cmsy-10x-x-120">&#x2192;-</span>1
+<!--l. 562--><p class="noindent">           DegreeSumCap <span 
+class="cmsy-10x-x-120">&#x2192;-</span>1
+<!--l. 562--><p class="noindent">                     NCCV<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>      </td></tr></table> <table class="minipage"><tr><td>
+This  list  of  polynomials  will  appear  in  the
+<span 
+class="cmmi-12">UserSelects </span>category in the file &#8220;<span 
+class="cmmi-12">Filename</span>&#8221;.
+Polynomials in this list will not be used to do
+something or other.
+Indeterminates  in  this  list  will  cause  the
+output of NCProcess to only contain equations
+containing  these  indeterminates  or  functions
+of them.
+Setting RR <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True </span>will cause the algorithm
+to  use  RemoveRedundant  to  reduce  partial
+Gröbner bases. RemoveRedundant is very fast.
+Specifies     whether     or     not     to     use
+RemoveRedundantByCategory. This is slower
+than RemoveRedundant, but it is still fast.
+Specifies  whether  or  not  to  use  SmallBasis.
+This can be very slow.
+Specifies     whether     or     not     to     use
+SmallBasisByCategory, which is a slower but
+more particular form of SmallBasis. This can
+be slow.
+Specifies     whether     or     not     to     use
+NCFlatSmallBasis   which   takes   the   length
+lexicographic  monomial  order  for  the  small
+basis algorithm. This might be faster than the
+above two options.
+Sets  the  DegreeCap  for  NCMakeGB  within
+NCProcess. The DegreeCap for SmallBasis is
+set to one higher. <span 
+class="cmsy-10x-x-120">-</span>1 means there is no cap.
+Sets   the   DegreeSumCap   for   NCMakeGB
+within  NCProcess.  The  DegreeSumCap  for
+SmallBasis is set to one higher.
+Turns    on    NCCollectOnVariables,    which
+collects on the knowns.                               </td></tr></table> </div>
+
+   <div class="fbox"> <table class="minipage"><tr><td>
+                                     NCProcess options continued__________________________________
+<!--l. 696--><p class="noindent">              NCGBNag <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>
+<!--l. 696--><p class="noindent">       NCShortFormulas<span 
+class="cmsy-10x-x-120">&#x2192;-</span>1
+<!--l. 696--><p class="noindent">                        TeX<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>
+<!--l. 696--><p class="noindent">NCGBFastRegularOutput<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>
+<!--l. 696--><p class="noindent"> NCKnownIndeterminant<span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+<!--l. 696--><p class="noindent">     DisplayOptions<span 
+class="cmsy-10x-x-120">&#x2192;{}</span>
+<!--l. 696--><p class="noindent">     NCGBDebug<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>
+<!--l. 696--><p class="noindent">   PrintScreenOutput<span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">False</span>      </td></tr></table> <table class="minipage"><tr><td>
+Setting   NCGBNag   <span 
+class="cmsy-10x-x-120">&#x2192;  </span><span 
+class="cmmi-12">True   </span>will   cause
+the  current  partial  GB  to  be  called  into
+Mathematica, output to the screen and saved
+to a file after each iteration.
+Sets  a  maximum  length  for  the  expressions
+output  by  NCProcess.  Longer  relations  will
+simply  be  eliminated.  Eg.  NCShortFormulas
+<span 
+class="cmsy-10x-x-120">&#x2192; </span>200.  <span 
+class="cmsy-10x-x-120">-</span>1  means  no  expressions  will  be
+eliminated.
+Produces a TeX Spreadsheet, which pops up on
+the screen, if you are setup properly.
+Specifies  whether  or  not  to  do  processing  of
+equations  by  the  C++  kernel  rather  than
+Mathematica.  This  is  much  faster,  but  not
+quite as pretty as with Mathematica.
+An   indeterminant   in   this   list   will   only
+change the NCProcess display of knowns and
+unknowns. Indeterminants lower in the order
+than  the  &#8221;group&#8221;  containing  the  specified
+indeterminant  will  be  regarded  as  known
+for  purposes  of  sorting  by  categories  in  the
+NCProcess  display.  (Not  implemented  as  of
+July 19, 1999)
+False  turns  off  the  beginning  part  of  the
+spreadsheet   which   displays   the   input   to
+NCProcess
+Creates   lots   of   files   that   an   NCProcess
+specialist can use to asses problems with the
+Mma paprts of NCProcess.
+Suppresses some NCProcess diagnostic output.</td></tr></table> </div>
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse71.html" >prev</a>] [<a 
+href="NCBIGDOCse71.html#tailNCBIGDOCse71.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse72.html" >front</a>] [<a 
+href="NCBIGDOCch19.html#NCBIGDOCse72.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCse72.html"></a>  
+</body></html> 

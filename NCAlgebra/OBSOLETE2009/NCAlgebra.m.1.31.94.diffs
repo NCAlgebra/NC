@@ -1,0 +1,340 @@
+7c7
+< (* :Summary:    See below.
+---
+> (* :Summary:
+10c10
+< (* :Warnings:   See below.
+---
+> (* :Warnings: 
+14,26d13
+<    :6/10/92: Changed it to Summer code directory  (mstankus)
+<    :6/24/92: Added NCadjoints to NCM package (mstankus)
+<    :3/28/92: Turned off Alias::obsfn message in Math2.0 (dhurst)  
+<    :4/28/92: Added Gets to NCMora.m and NCTools.m  Also changed 
+<              the system path to be what it would be on oba (mstankus)
+<    :5/19/92: Moved NCMora.m to Extra.Mora  (mstankus)
+<    :7/11/92: Adjusted the position of NCDiff.m in the Get order.
+<              Adjusted for packaging (mstankus)                   
+<    :9/2/92:  Put in "AppendTo" command for $Path and 
+<              removed messy ("StringJoin") part of Get 	      
+<              statements. (mstankus)					      
+<    :6/10/92   Changed it to Summer code directory  (mstankus)
+< 
+40,44c27
+<    :1/31/93:  Incorporated old change log into History.
+<               Isolated Get's associated to Mora into NC1MoraGets.m
+<               and NC2MoraGets.m.
+<               Removed really old and irrelevant comments. 
+<               See NCAlgebra.m.1.31.94.diffs for details. (mstankus)
+---
+> 
+45a29,31
+> (* ------------------------------------------------------------------ *)
+> (*    NCAlgebra.m                                                     *)
+> (* ------------------------------------------------------------------ *)
+46a33,49
+> (* ------------------------------------------------------------------ *)
+> (*                      Change Log                                    *)
+> (*   Date               ----------                            WHO     *)
+> (*   ----                                                     ---     *)
+> (*   6/10        Changed it to Summer code directory          MStan   *)
+> (*   6/24        Added NCadjoints to NCM package              MStan   *)
+> (*   3/28/92     Turned off Alias::obsfn message in Math2.0   dhurst  *)
+> (*   4/28/92     Added Gets to NCMora.m and NCTools.m         mstankus*)
+> (*               Also changed the system path to be what it           *)
+> (*               would be on oba.                                     *)
+> (*   5/19/92     Moved NCMora.m to Extra.Mora                 mstankus*)
+> (*   7/11/92     Adjusted the position of NCDiff.m in the     mstankus*)
+> (*               Get order to adjust for packaging                    *)
+> (*   9/2/92	 Put in "AppendTo" command for $Path and      pherrero*)
+> (*		 removed messy ("StringJoin") part of Get 	      *)
+> (*		 statements.					      *)
+> (* ------------------------------------------------------------------ *)
+72,85c75,78
+< (* 
+<        The right hand sides of the following two assignments can 
+<        be either True or False.
+< *)
+< 
+< askRunning = True;
+< defaultRunning = False;
+< 
+< If[askRunning, Print["Do you want to run the general version of the code?"];
+<                runningGeneral = Input["(True or False)"];
+<                If[runningGeneral,(**),(**), runningGeneral = defaultRunning;];
+<              , runningGeneral = defaultRunning;
+< ];
+< 
+---
+> (*
+> Get["NCUsage.m"];
+> Print["NCUsage.m loaded"];
+> *) 
+100c93,96
+< 
+---
+> (*
+> Get["NCEndPackage.m"];
+> Print["NCEndPackage.m loaded"];
+> *)
+144c140,238
+< Get["NC1MoraGets.m"];
+---
+> If[$VersionNumber >= 2.0, 
+>      Unprotect[ContextToFileName];
+>      Print["\nSetting stubs for NCNagyFoias files."]; 
+>      DeclarePackage["Errors`",{"BadCall",
+>                                "WhatAreBadArgs"
+>                               } 
+>                    ];
+>      DeclarePackage["Verbose`",{"VerboseQ",
+>                                 "SetVerbose",
+>                                 "UnSetVerbose"
+>                                }
+>                    ];
+>      DeclarePackage["Inequalities`",{"SetInequalityFactBase",
+> 	                             "InequalityFactQ",
+>                                      "InequalitySearch",
+>                                      "InequalityToStandardForm",
+>                                      "NumericalLeafs",
+>                                      "BoundedQ",
+>                                      "LowerBound",
+>                                      "UpperBound"
+>                                     }
+>                    ]; 
+>     DeclarePackage["Grabs`",{"GrabInsides",
+>                              "GrabSubExpr",
+>                              "GrabVariable",
+>                              "GrabVariables"
+>                             }
+>                    ];
+>      DeclarePackage["Tuples`",{"ToPolynomialTuple",
+>                                "ToRuleTuple",
+>                                "Tuple8",
+>                                "RuleTuple",
+>                                "CleanUpRuleTuple",
+>                                "PolynomialTuple",
+>                                "CleanUpPolynomialTuple",
+>                                "SmartTupleUnion"
+>                               }
+>                     ];
+>      DeclarePackage["Sets`",{"SubsetQ",
+>                              "CartesianProduct",
+>                              "CartesianTuple"
+>                             }
+>                    ];
+>      DeclarePackage["ArrayManager`",{"AppendToArray",
+>                                      "InitializeArray",
+>                                      "UnionArray",
+>                                      "UnionListToArray",
+>                                      "ListToArray",
+>                                      "List2Array",
+>                                      "ArrayToList",
+>                                      "Array2List",
+>                                      "JoinListToArray",
+>                                      "LengthArray",
+>                                      "PartArray",
+>                                      "PartIndirectArray",
+>                                      "MapToArray",
+>                                      "MapToIndirectArray",
+>                                      "MakeIndexArray"
+>                                     }
+>                    ];
+>      DeclarePackage["Lazy`",{"PowerToLazyPower",
+>                              "LazyPowerToPower",
+>                              "LazyPower",
+>                              "CollapseLazyPower",
+>                              "LazyPowerRuleTuple",
+>                              "FixLazyPowerRuleTuple"
+>                             }
+>                    ];
+>      DeclarePackage["Ajize`",{"Rank1",
+>                               "Aj",
+>                               "Ajize",
+>                               "ToAj"
+>                               }
+>                    ];
+>      DeclarePackage["NCSort`",{"NCSort",
+>                                "NCGreater",
+>                                "NCLength",
+>                                "LeadingCoefficientOne",
+>                                "SetHeadOrder",
+>                                "WhatIsHeadOrder"
+>                               }
+>                    ];
+>      DeclarePackage["Convert2`",{"Convert2",
+>                                  "SetConvert2Memory",
+>                                  "WhatIsConvert2Memory",
+>                                  "Convert2NormalizeSupress"
+>                                 }
+>                    ];
+>      DeclarePackage["NCNagyFoias`",{"NCNagyFoias"
+>                                }
+>                    ];
+>      DeclarePackage["NCNagyFoiasRt`",{"NCNagyFoiasRt"
+>                                  }
+>                    ];
+>      DeclarePackage["NCNagyFoiasRtJ`",{"NCNagyFoiasRtJ"
+>                                   }
+>                    ];
+>      Protect[ContextToFileName];
+>      Print["Done setting stubs for NCNagyFoias files.\n"];
+145a240,249
+> 
+>     ,Print["\nYou are using Mathematica version ",$VersionNumber];
+>      Print["The version of Mathematica required for installation"];
+>      Print["of NCFoias, NCFoiasRt and NCFoiasRtJ is at least 2.0."];
+>      Print["\n"];
+>      Print["This message may be ignored if you do not need to use"];
+>      Print["these functions."];
+>      Print["\n"];
+> ];
+> 
+197c301,445
+< Get["NC2MoraGets.m"];
+---
+> 
+> If[$VersionNumber>=2.0,
+>     Print["\nSetting stubs for Groebner basis files."];
+>     DeclarePackage["NCMSolve`",{"NCMSolve",
+>                                  "NCMSolveAux",
+>                                  "OneElementNCMSolve",
+>                                  "NCMSolveDummy"
+>                                 }
+>                    ];
+> 
+>      DeclarePackage["MoraFree`",{"SetCleanUpBasis",
+>                                  "WhatIsCleanUpBasis",
+>                                  "SetFirstRuleTuple",
+>                                  "SetSecondRuleTuple",
+>                                  "WhatIsFirstRuleTuple",
+>                                  "WhatIsSecondRuleTuple",
+>                                  "ClearMatches",
+>                                  "AddaMatch",
+>                                  "WhatAreMatches",
+>                                  "ClearSPolynomials",
+>                                  "AddaSPolynomial",
+>                                  "WhatAreSPolynomials"
+>                                 }
+>                    ];
+> 
+>      DeclarePackage["MakePackage`",{"OpenActiveFile",
+>                                     "MakeBeginPackage",
+>                                     "MakeUsageStatements",
+>                                     "MakeBeginPrivate",
+>                                     "MakeEndPackage",
+>                                     "SetActiveFile",
+>                                     "WhatIsActiveFile"
+>                                    }
+>                    ];
+> 
+>      DeclarePackage["MakeGBPackage`",{"MakeRuleDelayedBasedPackage",
+>                                       "MakeDelayedRules",
+>                                       "ComplicatedLeftPatternRule",
+>                                       "MakeLiteral",
+>                                       "MakeLiteral2",
+>                                       "SimpleLeftPatternRuleTuple"
+>                                      }
+>                    ];
+> 
+>      DeclarePackage["Match1Implementation`",{"Match1Implementation",
+>                                              "FixPower1",
+>                                              "NonCommutativeProductOfLazyPowerQ"
+>                                             } 
+>                    ];
+> 
+>      DeclarePackage["Match3Implementation`",{"Match3Implementation",
+>                                              "FixPower3"
+>                                             }
+>                    ];
+> 
+>      DeclarePackage["Reduction`",{"PrepareForInternalReduction",
+>                                   "InternalReduction",
+>                                   "PrepareNonSymbolicReduction",
+>                                   "ReductionByRuleTuples",
+>                                   "NewReduction",
+>                                   "Reduction",
+>                                   "SymbolicReduction",
+>                                   "NonSymbolicReduction",
+>                                   "SetReductionType",
+>                                   "SimpleReduce",
+>                                   "ResolveInequalities",
+>                                   "ExtendCases",
+>                                   "PrepareToReduceAgain",
+>                                   "KlugeQ"
+>                                  }
+>                    ]; 
+> 
+>      DeclarePackage["MoraMatch`",{"FindMatches",
+>                                   "AllMatches",
+>                                   "SPolynomial",
+>                                   "ComputeSPolynomialsOfMatches",
+>                                   "MakeDisjoint",
+>                                   "SimpleMakeDisjoint",
+>                                   "AMatchSPolyIndirect"
+>                                  }
+>                    ];
+> 
+>      DeclarePackage["MoraAlg`",{"MorasAlgorithm",
+>                                 "WhatIsPartialBasis",
+>                                 "WhatIsLeftToMatchAgainst",
+>                                 "GroebnerSimplify",
+>                                 "MoraFirstStep",
+>                                 "MoraFirstIndirectStep",
+>                                 "MoraOneStep",
+>                                 "MoraOneIndirectStep",
+>                                 "MoraWithoutReduction",
+>                                 "ComputeNewSPolynomials",
+>                                 "ComputeNewSPolynomialsIndirect",
+>                                 "CleanUpBasis",
+>                                 "Batch",
+>                                 "NumberOfIterations",
+>                                 "FastCleanUp",
+>                                 "MassageData",
+>                                 "SetIndirectQ"
+>                                }
+>                    ];
+> 
+>      Get["MoraTeX.m"];
+> 
+>      DeclarePackage["KlugeIt`",{"KlugeIt",
+>                                 "Kluge"
+>                                }
+>                    ];
+> 
+> 
+>      Get["Extra.more"];
+> 
+>      DeclarePackage["Convert3`",{"Convert3",
+>                                  "SetConvert3Memory",
+>                                  "WhatIsConvert3Memory",
+>                                  "Convert3NormalizeSupress"
+>                                 }
+>                    ];
+> 
+>      DeclarePackage["HereditaryCalculus`",{"Hereditary",
+>                                            "PowerMM",
+>                                            "Zero",
+>                                            "Var1",
+>                                            "Var2"
+>                                           }
+>                    ];
+> 
+>      DeclarePackage["NCSetRelations`",{"NCSetRelations"
+>                                       }
+>                    ];
+>      DeclarePackage["NCNotation`",{"NCNotation"
+>                                   }
+>                    ];
+>      Get["Extra.TeXForm"];
+> 
+>      DeclarePackage["Resol`",{"RESOL"
+>                               }
+>                    ];
+>      Global`SaveMemory:=True;
+>      Protect[ContextToFilename];
+>      Print["Done setting stubs for Groebner basis files."];
+>      Print[""];
+> 
+> ]; (*end If*)
+> 

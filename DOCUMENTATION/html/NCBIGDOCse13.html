@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.3 Vector Differentiation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 454--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse14.html" >next</a>] [<a 
+href="NCBIGDOCse12.html" >prev</a>] [<a 
+href="NCBIGDOCse12.html#tailNCBIGDOCse12.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse13.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse13.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.3   </span> <a 
+ id="x21-460004.3"></a>Vector Differentiation</h3>
+<!--l. 463--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.3.1   </span> <a 
+ id="x21-470004.3.1"></a>DirectionalD[expr, aVariable, h]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">DirD</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Takes the Directional Derivative of expression <span 
+class="cmmi-12">expr </span>with respect to the variable
+      <span 
+class="cmmi-12">aV ariable </span>in direction <span 
+class="cmmi-12">h</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an expression containing var. <span 
+class="cmmi-12">aV ariable </span>is a variable. <span 
+class="cmmi-12">h </span>is the direction
+      which the derivative is taken in.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx21-47001"></a>
+<a 
+ id="dx21-47002"></a>
+<!--l. 480--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.3.2   </span> <a 
+ id="x21-480004.3.2"></a>Grad[expr, aVariable]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">Grad, NEVER USE Gradient</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">Grad</span>[<span 
+class="cmmi-12">expr,aV ariable</span>] takes the gradient of expression <span 
+class="cmmi-12">expr </span>with respect to
+      the variable <span 
+class="cmmi-12">aV ariable</span>. Quite useful for computations with quadratic Hamiltonians in
+      <span 
+class="cmmi-12">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> control. BEWARE Gradient calls the Mma gradient and makes a mess.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">expr </span>is an expression containing <span 
+class="cmmi-12">var</span>. <span 
+class="cmmi-12">aV ariable </span>is a variable.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: This only works reliably for quadratic expressions. It is not even
+      correct on all of these. For example, <span 
+class="cmmi-12">Grad</span>[<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>+ <span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmmi-12">,x</span>] returns 2<span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">a</span>]. The
+      reason is fundamental mathematics, not programming. If <span 
+class="cmmi-12">a </span>is a row vector and <span 
+class="cmmi-12">x </span>is a
+      column vector, then <span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>is a number, but <span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">x</span>] is not. </dd></dl>
+<a 
+ id="dx21-48001"></a>
+<!--l. 490--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.3.3   </span> <a 
+ id="x21-490004.3.3"></a>CriticalPoint[expr, aVariable]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">Crit, Cri</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: It finds the value of <span 
+class="cmmi-12">aV ariable </span>which makes the gradient of the expression <span 
+class="cmmi-12">expr</span>
+      with respect to the variable <span 
+class="cmmi-12">aV ariable </span>equal to 0.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an expression containing <span 
+class="cmmi-12">aV ariable</span>. <span 
+class="cmmi-12">aV ariable </span>is a variable.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Uses the Grad and NCSolve functions. Both Grad and NCSolve
+      are severely limited. Therefore, the CriticalPoint command has a very limited range of
+      applications. </dd></dl>
+<a 
+ id="dx21-49001"></a>
+
+<!--l. 542--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.3.4   </span> <a 
+ id="x21-500004.3.4"></a>NCHessian[afunction, <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">X</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">X</span><sub ><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmmi-8">k</span></sub><span 
+class="cmsy-10x-x-120">} </span>]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmtt-12">NCHessian[afunction,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">X</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">X</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">X</span><sub ><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmmi-8">k</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmtt-12">]</span>
+      <br class="newline">computes the Hessian of a <span 
+class="cmti-12">afunction </span>of noncommutting variables and coefficients. The
+      Hessian recall is the second derivative. Here we are computing the noncommutative
+      directional  derivative  of  a  noncommutative  function.  Using  repeated  calls  to
+      <span 
+class="cmtt-12">DirectionalD</span>, the Hessian of <span 
+class="cmti-12">afunction </span>is computed with respect to the variables
+      <span 
+class="cmmi-12">X</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,X</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,X</span><sub ><span 
+class="cmmi-8">k</span></sub> and the search directions <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub> , <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">2</span></sub> , <span 
+class="cmmi-12">&#x2026;</span> , <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmmi-8">k</span></sub>. The Hessian <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-48.png" alt="H" class="10-120x-x-48" /></span>&#x0393; of a function
+      &#x0393; is defined by
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC16x.png" alt="                2            &#x2223;
+H &#x0393; (&#x20D7;X)[H&#x20D7;] :=  d--&#x0393; (&#x20D7;X + t&#x20D7;H) &#x2223;
+               dt2           t=0
+      " class="math-display" ></center> One can easily show that the second derivative of a hereditary symmetric noncommutative
+      rational function &#x0393; with respect to one variable <span 
+class="cmmi-12">X </span>has the form
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC17x.png" alt="                  [k                ]
+                    &#x2211;       T
+H &#x0393; (X)[H]  =  sym      A &#x2113;H  B &#x2113;HC  &#x2113;  ,
+                    &#x2113;=1
+      " class="math-display" ></center> where <span 
+class="cmmi-12">A</span><sub ><span 
+class="cmmi-8">&#x2113;</span></sub>, <span 
+class="cmmi-12">B</span><sub ><span 
+class="cmmi-8">&#x2113;</span></sub>, and <span 
+class="cmmi-12">C</span><sub ><span 
+class="cmmi-8">&#x2113;</span></sub> are functions of <span 
+class="cmmi-12">X </span>determined by &#x0393;. (An analogous expression
+
+      holds for more variables.) The Hessian will always be <span 
+class="cmti-12">quadratic  </span>with respect to <img 
+src="NCBIGDOC18x.png" alt="&#x20D7;H"  class="vec" >.
+      (A <span 
+class="cmti-12">noncommutative polynomial </span>in variables <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">&#x2026;</span> , <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmmi-8">k</span></sub>, is said to be <span 
+class="cmti-12">quadratic </span>if
+      each monomial in the polynomial expression is of order two in the variables <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">2</span></sub>,
+      <span 
+class="cmmi-12">&#x2026;</span>, <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmmi-8">k</span></sub>.)
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">afunction </span>is a function of the variables <span 
+class="cmmi-12">X</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,X</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,X</span><sub ><span 
+class="cmmi-8">k</span></sub>. The Hessian will be
+      computed with respect to the search directions <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub> , <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">2</span></sub> , <span 
+class="cmmi-12">&#x2026;</span> , <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmmi-8">k</span></sub>.
+      <br class="newline">For example, suppose <span 
+class="cmmi-12">F</span>(<span 
+class="cmmi-12">x,y</span>) = <span 
+class="cmmi-12">x </span>+ <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span>+ <span 
+class="cmmi-12">y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>. Then,
+      <br class="newline"><span 
+class="cmtt-12">NCHessian</span>[<span 
+class="cmmi-12">F,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x,h</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">y,k</span><span 
+class="cmsy-10x-x-120">}</span>] gives 2<span 
+class="cmmi-12">h</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">k </span>+ 2<span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">h </span>As another example, if <span 
+class="cmmi-12">G</span>(<span 
+class="cmmi-12">x,y,z</span>) =
+      <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">y</span>] + <span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>, then <span 
+class="cmtt-12">NCHessian</span>[<span 
+class="cmmi-12">G,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x,h</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">y,k</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">z,i</span><span 
+class="cmsy-10x-x-120">}</span>] gives 2<span 
+class="cmmi-12">i </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">h </span>+ 2<span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">y</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">*</span>
+      <span 
+class="cmsy-10x-x-120">*</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">y</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">y</span>].
+      <br class="newline">The  results  of  <span 
+class="cmtt-12">NCHessian  </span>can  be  factored  into  the  form  <span 
+class="cmmi-12">v</span><sup ><span 
+class="cmmi-8">t</span></sup><span 
+class="cmmi-12">Mv  </span>by  calling
+      <span 
+class="cmtt-12">NCMatrixofQuadratic</span>. (see <span 
+class="cmtt-12">NCMatrixofQuadratic</span>).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx21-50001"></a>
+
+   <!--l. 544--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse14.html" >next</a>] [<a 
+href="NCBIGDOCse12.html" >prev</a>] [<a 
+href="NCBIGDOCse12.html#tailNCBIGDOCse12.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse13.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse13.html" >up</a>] </p></div>
+<!--l. 544--><p class="indent">   <a 
+ id="tailNCBIGDOCse13.html"></a>   
+</body></html> 

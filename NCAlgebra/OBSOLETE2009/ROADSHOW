@@ -1,0 +1,188 @@
+GPOTS-- HANDOUT
+
+  
+                         NCALGEBRA
+                  Version 0.1    (preliminary)   
+
+
+NCAlgebra is package which runs under Mathematica.  It is an 
+algebra program designed to facilitate manipulation and reduction of 
+NONCOMMUTATIVE algebraic expressions.  Specifically, it allows 
+computer calculation in an ALGEBRA WITH INVOLUTION. 
+
+We see this package as a competitor to the yellow pad. Once you get
+used to it this might be considerably more effective for hand
+calculations of modest size. Like Mathematica the emphasis is on
+interaction with the program and flexibility.  
+
+IF YOU WOULD LIKE TO TRY NCAlgebra HERE AT IOWA IT IS AVAILABLE ON THE 
+MATH DEPT COMPUTER IN ROOM 25C. ASK RAUL FOR THE ACCOUNT NAME AND PASSWORD.
+
+TO USE NCAlgebra:
+
+login:
+get a window using the mouse: a left click on the left box in the bottom row.
+% rlogin larch            --- gets you to the right computer
+larch% cd NCAlgebra          --- gets you to the right directory
+larch% math                         --- calls mathematica
+
+
+In[1]:=<<CONTENTS            --- loads our package into Mathematica
+
+
+In[2]:= now you can play
+
+
+We now present a few simple examples. These actually contain 
+more than you need to know to have a good time with NCAlgebra.
+Once you have read about a page you are already WELL INTO NCAlgebra.
+
+
+In[99]:= Exit                --- gets you out of Mathematica
+logout
+logout
+
+MANUAL-- NCAlgebra/NCDOCUMENT  I'll put a copy in the bottom 
+of the bookshelf in the corner of the computer room. Probably
+it will be missing.
+
+If you would like to obtain the NCAlgebra package or want updates contact
+               ncalg@osiris.ucsd.edu
+Say what computers you use and whether you have Mathematica 1.2 or 2.0
+
+
+				       Bill Helton
+
+
+
+             NCAlgebra---   THE MOST BASIC COMMANDS
+
+** denotes noncommutative multiply.
+tp[x] denotes  the transpose of an element x and 
+aj[x] denotes the adjoint of an element x.  
+Note that the properties of transposes and adjoints that everyone uses 
+constantly are built-in. The multiplicative identity is 
+denoted Id in the program. At the present time, Id is set to 1. 
+An element A may have an inverse, which will be denoted by inv[A], 
+or it may have a left or right inverse, denoted invL[A] and invR[A] 
+respectively.
+
+Each example is independent of the rest and assumes that you 
+are executing it as the first command after you load in our packages. 
+
+
+At present, single-letter lower case variables are non-commutative
+by default and all others are commutative by default.
+
+a**b - b**a gives a**b - b**a
+
+A**B - B**A gives 0
+
+A**b - b**a gives A b - b **a
+
+SetNonCommutative[A, B]; A**B - B**A  gives A**B - B**A     
+
+SetNonCommutative[A]; A**B - B**A    gives  0     
+
+SNC gives SetNonCommutative    ---- SNC can be typed rather than the 
+                                    longer SetNonCommutative(alias)
+
+SNC[A];A**a -a**A  gives    A**a - a**A 
+
+SetCommutative[a];a**b gives a b
+
+CommuteEverything[a**b-b**a] gives 0
+
+NCCollect[a**x + b**x, x] gives  (a + b)**x
+
+NCExpand[(a+b)**x] gives a**x + b**x
+
+NCCollect[tp[x]**a**x + tp[x]**b**x + z, {x, tp[x]}] gives
+tp[x]**(a+b)**x + z
+
+DirectionalD[x**x, x, h] gives h**x + x**h
+
+Grad[x**x, x] gives x + tp[x]          -- Grad is trustworthy only 
+                                          on certain quadratics
+
+Substitute[x**a**b, a**b->c] gives x**c
+
+Substitute[ tp[b**a]+b**a, b**a->p] gives tp[a]**tp[b]+p
+
+SubstituteReverse[x ** z, m ** n -> z]  gives  x ** m ** n
+
+SubstituteReverseSymmetric[y ** tp[z] + tp[y] ** z, x -> y] 
+gives       x ** tp[z] + tp[x] ** z
+
+SubstituteAll[ i**tp[j]**rt[k]**inv[l]**aj[m], 
+                    {i->n, j->o, k->p, l->q, m->r} ] 
+	gives   n ** tp[o] ** rt[p] ** inv[q] ** aj[r]
+
+MatMult[{{a,b},{c,d}},{{d,2},{e,3}}] gives the 2x2 matrix
+
+             {{a d + b e, 2 a + 3 b},{c d + d e, 2 c + 3 d}}
+
+
+tp[a**b] gives tp[b]**tp[a]
+
+tp[5] gives 5
+
+tp[2 + 3 I] gives 2 + 3 I
+
+tp[a] gives tp[a]
+
+tp[a+b] gives tp[a] + tp[b]
+
+tp[6 x] gives 6 tp[x]
+
+tp[tp[a]] gives a
+
+aj[5] gives 5
+
+aj[2 + 3 I] gives 2 - 3 I
+
+aj[a] gives aj[a]
+
+aj[a+b] gives aj[a] + aj[b]
+
+aj[6 x] gives 6 aj[x]
+
+aj[aj[a]] gives a
+
+Id gives 1
+
+inv[a**b] gives inv[b]**inv[a]
+
+inv[a]**a gives 1
+
+a**inv[a] gives 1
+
+a**b**inv[b] gives a
+
+invL[a]**a gives 1
+
+a**invR[a] gives 1
+
+a**invL[a] gives a**invL[a]
+
+invR[a]**a gives invR[a]**a 
+
+
+f= 1 + inv[d] ** c ** inv[S - a] ** b - inv[d] ** c ** 
+inv[S - a + b ** inv[d] ** c] ** b - inv[d] ** c ** inv[S - a + 
+b ** inv[d] ** c] ** b ** inv[d] ** c ** inv[S - a] ** b ;
+NCSimplifyRational[f]   gives  1
+
+
+f = inv[1 + 2 a] ** a;  NCSimplifyRational[f]  
+gives     [1 - inv(1 + 2 a)] / 2
+
+NCSR gives   NCSimplifyRational
+
+f = a**inv[1 - a];  NCSR[f] gives   inv[1 - a] - 1
+ 
+f= inv[1 - b**a] ** inv[a] ; NCSR[f]
+gives    inv[a] ** inv[1 - a**b]
+
+NCSolve[a**x==b, x] gives    x = inv[a]**b
+---Note: linear equations in one unknown only

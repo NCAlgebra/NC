@@ -1,0 +1,1448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>17.4 End Game</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 726--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse61.html" >prev</a>] [<a 
+href="NCBIGDOCse61.html#tailNCBIGDOCse61.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse62.html">tail</a>] [<a 
+href="NCBIGDOCch17.html#NCBIGDOCse62.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">17.4   </span> <a 
+ id="x106-24600017.4"></a>End Game</h3>
+<!--l. 729--><p class="noindent">Now let us compare what we have found to the well known solution of (<span 
+class="cmmi-12">HGRAIL</span>). In that theory
+there are two Riccati equations due to Doyle, Glover, Khargonekar and Francis. These are the
+DGKF <span 
+class="cmmi-12">X </span>and <span 
+class="cmmi-12">Y </span>equations. One can read off that the <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> equation which we found is the DGKF
+equation for <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>, while the Riccati equation which we just analyzed is the DGKF <span 
+class="cmmi-12">X</span>
+equation.
+<!--l. 740--><p class="indent">   <span 
+class="cmti-12">Indeed what we have proved is that if </span>(<span 
+class="cmmi-12">HGRAIL</span>) <span 
+class="cmti-12">has a solution with </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub> <span 
+class="cmti-12">invertible and if </span><span 
+class="cmmi-12">b </span><span 
+class="cmti-12">and</span>
+<span 
+class="cmmi-12">c </span><span 
+class="cmti-12">are given by formulas </span><span 
+class="cmbx-12">Out[8] </span><span 
+class="cmti-12">and </span><span 
+class="cmbx-12">Out[9] </span><span 
+class="cmti-12">in </span><span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse61.html#x105-24300017.3.2"><span 
+class="cmti-12">17.3.2</span><!--tex4ht:ref: subsection:step:two --></a><span 
+class="cmti-12">, then</span>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmti-12">(1) the DGKF </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmti-12">equations must have a solution</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmti-12">(2) </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y </span><span 
+class="cmti-12">are self-adjoint</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmti-12">(3) </span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">is invertible</span></dd></dl>
+<!--l. 755--><p class="indent">   Now we turn to the converse. The straightforward converse of the above italicized statement
+would be: If items (1), (2) and (3) above hold, then (<span 
+class="cmmi-12">HGRAIL</span>) has a solution with <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub> invertible
+and <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span>are given by formulas <span 
+class="cmbx-12">Out[8] </span>and <span 
+class="cmbx-12">Out[9] </span>in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse61.html#x105-24300017.3.2">17.3.2<!--tex4ht:ref: subsection:step:two --></a>. There is no reason
+to believe (and it is not the case) that <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span><span 
+class="cmti-12">must </span>be given by the formulas <span 
+class="cmbx-12">Out[8]</span>
+and <span 
+class="cmbx-12">Out[9] </span>in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse61.html#x105-24300017.3.2">17.3.2<!--tex4ht:ref: subsection:step:two --></a>. These two formulas came about in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse61.html#x105-24300017.3.2">17.3.2<!--tex4ht:ref: subsection:step:two --></a> and were motivated
+by &#8220;excess freedom&#8221; in the problem. The converse which we will attempt to prove is:
+<div class="newtheorem">
+<!--l. 773--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Proposed Converse</span><span 
+class="cmbx-12">&#x00A0;17.1</span> </span><a 
+ id="x106-2460011"></a> <span 
+class="cmti-12">If items (1), (2) and (3) above hold, then </span>(<span 
+class="cmmi-12">HGRAIL</span>) <span 
+class="cmti-12">has a</span>
+<span 
+class="cmti-12">solution with </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub> <span 
+class="cmti-12">invertible.</span>
+   </div>
+<!--l. 780--><p class="indent">   To obtain this proposed converse, we need a complete spreadsheet corresponding to the last
+stages of our analysis. The complete spreadsheet is:
+<!--l. 6--><p class="noindent"><span 
+class="cmr-10x-x-109">THE ORDER IS NOW THE FOLLOWING:</span>
+<span 
+class="cmmi-10x-x-109">A &lt; A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">&lt; B</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&lt; B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">&lt; B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">&lt; B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">&lt; C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&lt; C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">&lt; C</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">&lt; C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">&lt; X &lt; X</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">&lt; Y &lt; Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A;</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">b</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">c </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">c</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">a</span><sup ><span 
+class="cmmi-8">T</span> </sup>
+_________________________________________________________________________________
+__________________________ <span 
+class="cmr-10x-x-109">&#x00A0;YOUR SESSION HAS DIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________________
+__________________________ <span 
+class="cmr-10x-x-109">&#x00A0;THE FOLLOWING RELATIONS</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>______________________________________
+
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE BEEN SOLVED FOR:</span>
+<br class="newline"><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">a,b,c,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,a</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,b</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,c</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">The corresponding rules are the following:</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x2192;-</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmr-10x-x-109">+</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmr-10x-x-109">+</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmr-10x-x-109">+</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmsy-10x-x-109">&#x2192;-</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">c </span><span 
+class="cmsy-10x-x-109">&#x2192;-</span><span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">Y</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">a</span><sup ><span 
+class="cmmi-8">T</span> </sup>  <span 
+class="cmsy-10x-x-109">&#x2192; -</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmmi-10x-x-109">AE</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">b</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x2192;-</span><span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">c</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x2192;-</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub>
+</td></tr></table>
+<br class="newline"><img 
+src="NCBIGDOC81x.png" alt="ET  &#x2192; E11           ET  &#x2192; E21           ET  &#x2192; E12           ET  &#x2192; E22
+ 1-11T     -1         1-21T     -1         2-11T     -1         2-21T     -1
+E11  &#x2192;  E 11         E12  &#x2192;  E 21         E21  &#x2192;  E 12         E22  &#x2192;  E 22"  class="left" align="middle">
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,B</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,X,Y,X</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,A</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">X X</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">Y Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">X</span><sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">X </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">Y </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">A </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">X B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">X </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">X A </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">X </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">X B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">X </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">X B</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">X</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+________________________ <span 
+class="cmr-10x-x-109">&#x00A0;USER CREATIONS APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________
+_________________________________________________________________________________
+<table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">Y</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">X</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+____________________ <span 
+class="cmr-10x-x-109">&#x00A0;SOME RELATIONS WHICH APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________
+______________________________ <span 
+class="cmr-10x-x-109">&#x00A0;MAY BE UNDIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________________
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">21</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">21</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">4.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">21</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">X</span><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">&#x21D1;</span> <span 
+class="cmmi-10x-x-109">&#x00A0;E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">21</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">X</span>
+</td></tr></table>
+<br class="newline">
+<!--l. 790--><p class="indent">   In the spreadsheet, we use conventional <span 
+class="cmmi-12">X</span>, <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> notation rather than &#8220;discovered&#8221; notation so
+that our arguments will be familiar to experts in the field of control theory.
+<!--l. 795--><p class="indent">   Now we use the above spreadsheet to verify the proposed converse. To do this, we assume that
+matrices <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">B</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">C</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">C</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">X </span>and <span 
+class="cmmi-12">Y </span>exist, that <span 
+class="cmmi-12">X </span>and <span 
+class="cmmi-12">Y </span>are invertible, that <span 
+class="cmmi-12">X </span>and <span 
+class="cmmi-12">Y </span>are
+self-adjoint, that <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span>is invertible and that the DGKF <span 
+class="cmmi-12">X </span>and <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> equations hold. That is,
+the two following polynomial equations hold.
+<!--l. 804--><p class="noindent"><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">B</span><sub >
+<span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">C</span><sub ><span 
+class="cmr-8">2</span></sub> = <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">A </span>+ <span 
+class="cmmi-12">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> + <span 
+class="cmmi-12">C</span><sub>
+<span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">C</span><sub >
+<span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">C</span><sub >
+<span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">B</span><sub>
+<span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>
+<br class="newline"><span 
+class="cmmi-12">X B</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">X </span>= <span 
+class="cmmi-12">X A </span>+ <span 
+class="cmmi-12">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">X </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X B</span><sub >
+<span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">B</span><sub>
+<span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">X </span>+ <span 
+class="cmmi-12">X B</span><sub >
+<span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-12">X</span>
+<!--l. 812--><p class="indent">   We wish to assign values for the matrices <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub>, <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">21</span></sub>, <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">22</span></sub>, <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub>, <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span>such that each of the
+equations on the above spreadsheet hold. If we can do this, then each of the equations from
+the starting polynomial equations from <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse59.html#x103-23700017.1">17.1<!--tex4ht:ref: subsection:Problem:statement --></a> will hold and the proposed converse will
+follow.
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">(1) Note that all of the equations in the <span 
+class="cmsy-10x-x-120">{}</span>-Category of the above spreadsheet hold since
+      <span 
+class="cmmi-12">X </span>and <span 
+class="cmmi-12">Y </span>solve the <span 
+class="cmmi-12">DGKF </span>equations and are both invertible.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(2) Set <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> equal to the inverse of <span 
+class="cmmi-12">Y </span>. This assignment is dictated by the user selects. Note
+      that <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> = <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> follows since <span 
+class="cmmi-12">Y </span>is self-adjoint.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(3) Let <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub>  and <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">21</span></sub>  be any invertible matrices such that <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> = <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">21</span></sub>. For example, one
+      could choose <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub> and <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">21</span></sub> to both be the identity matrix.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(4) Note that there is there is a user select <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">21</span></sub>  = <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span>and that <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub>, <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">21</span></sub>
+      are invertible. Since <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span>is invertible and <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">11</span></sub>  = <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>, <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span>are invertible.
+      Therefore, we set <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">22</span></sub> = <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>(<span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X</span>)<sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-12">E</span><sub>
+<span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>. Since <span 
+class="cmmi-12">E</span><sub>
+<span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> = <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">21</span></sub>, <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> = <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">11</span></sub> and
+      <span 
+class="cmmi-12">X</span><sup ><span 
+class="cmmi-8">T</span> </sup> = <span 
+class="cmmi-12">X</span>, it follows that <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">22</span></sub> is invertible and self-adjoint.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(5) Since <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub> has been set for <span 
+class="cmmi-12">i,j </span>= 1<span 
+class="cmmi-12">, </span>2, we can set <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span>according to their formulas
+      at the top of the spreadsheet .</dd></dl>
+<!--l. 849--><p class="indent">   With the assignments of <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub>, <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">21</span></sub>, <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">22</span></sub>, <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub>, <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span>as above, it is easy to verify by
+inspection that every polynomial equation on the spreadsheet above holds.
+<!--l. 878--><p class="indent">   We have proven the proposed converse and, therefore, have proven the following approximation
+to the classical <span 
+class="cmbx-12">[DGKF] </span>theorem.
+   <div class="newtheorem">
+<!--l. 883--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Theorem</span><span 
+class="cmbx-12">&#x00A0;17.2</span> </span><a 
+ id="x106-2460022"></a> <span 
+class="cmti-12">If (HGRAIL) has a solution with invertible </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub> <span 
+class="cmti-12">and </span><span 
+class="cmmi-12">b </span><span 
+class="cmti-12">and </span><span 
+class="cmmi-12">c </span><span 
+class="cmti-12">are given by</span>
+<span 
+class="cmti-12">the formulas </span><span 
+class="cmbx-12">Out[8] </span><span 
+class="cmti-12">and </span><span 
+class="cmbx-12">Out[9] </span><span 
+class="cmti-12">in </span><span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse61.html#x105-24300017.3.2"><span 
+class="cmti-12">17.3.2</span><!--tex4ht:ref: subsection:step:two --></a><span 
+class="cmti-12">, then the DGKF </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>  <span 
+class="cmti-12">equations have</span>
+<span 
+class="cmti-12">solutions </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y </span><span 
+class="cmti-12">which are symmetric matrices with </span><span 
+class="cmmi-12">X</span><span 
+class="cmti-12">,</span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">invertible. The</span>
+<span 
+class="cmti-12">DGKF </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>  <span 
+class="cmti-12">equations have solutions </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y  </span><span 
+class="cmti-12">which are symmetric matrices with</span>
+<span 
+class="cmmi-12">X</span><span 
+class="cmti-12">,</span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmti-12">and </span><span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">X </span><span 
+class="cmti-12">invertible, then (HGRAIL) has a solution with invertible </span><span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmmi-8">ij</span></sub><span 
+class="cmti-12">.</span>
+   </div>
+<!--l. 908--><p class="indent">   Note that we obtained this result with an equation in the one unknown <span 
+class="cmmi-12">X </span>and an equation
+with the one unknown <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> = <span 
+class="cmmi-12">Y</span> <sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>. From the strategy point of view, the first spreadsheet featured
+an equation in the single unknown <span 
+class="cmmi-12">b </span>(and its transpose) and an equation in the single unknown <span 
+class="cmmi-12">c</span>
+(and its transpose) and so is the most complicated. For example, the polynomial <span 
+class="cmbx-12">Out[4] </span>in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse61.html#x105-24300017.3.2">17.3.2<!--tex4ht:ref: subsection:step:two --></a>
+decomposes as
+   <table width="100%" 
+class="equation"><tr><td><a 
+ id="x106-246003r3"></a>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC82x.png" alt="p = qT1 q1 + q2
+" class="math-display" ></center></td><td width="5%">(17.3)</td></tr></table>
+<!--l. 925--><p class="nopar">
+where <span 
+class="cmmi-12">q</span><sub ><span 
+class="cmr-8">1</span></sub> = <span 
+class="cmmi-12">b </span>+ <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">C</span><sub>
+<span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> + <span 
+class="cmmi-12">E</span><sub>
+<span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-12">B</span><sub ><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">q</span><sub ><span 
+class="cmr-8">2</span></sub> is a symmetric polynomial which does not involve
+<span 
+class="cmmi-12">b</span>. This forces us to say that the proof of the necessary side of Theorem <a 
+href="#x106-2460022">17.2<!--tex4ht:ref: thm:DGKF:result --></a> was done with a
+2-strategy.
+
+<!--l. 934--><p class="indent">   A more aggressive way of selecting knowns and unknowns allows us to obtain this same result
+with a symmetrized 1-strategy. In particular, one would set <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c </span>to be the only unknowns to
+obtain a first spreadsheet. The first spreadsheet contains key equations like (<a 
+href="#x106-246003r3">17.3<!--tex4ht:ref: symmdecom --></a>), which is a
+symmetric 1-decomposition, because <span 
+class="cmmi-12">q</span><sub ><span 
+class="cmr-8">2</span></sub> does not contain <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>or <span 
+class="cmmi-12">c</span>. Once we have solved for <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b </span>and
+<span 
+class="cmmi-12">c</span>, we turn to the next spreadsheet by declaring the variables involving <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub> (e.g., <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub>, <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>,
+. . . ) to be unknown. At this point, the computer run is the same as Steps 2, 3 and 4
+above.
+
+   <!--l. 53--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse61.html" >prev</a>] [<a 
+href="NCBIGDOCse61.html#tailNCBIGDOCse61.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse62.html" >front</a>] [<a 
+href="NCBIGDOCch17.html#NCBIGDOCse62.html" >up</a>] </p></div>
+<!--l. 53--><p class="indent">   <a 
+ id="tailNCBIGDOCse62.html"></a>  
+</body></html> 

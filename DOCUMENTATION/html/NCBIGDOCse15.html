@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.5 Complex Analysis</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1071--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse16.html" >next</a>] [<a 
+href="NCBIGDOCse14.html" >prev</a>] [<a 
+href="NCBIGDOCse14.html#tailNCBIGDOCse14.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse15.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse15.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.5   </span> <a 
+ id="x23-720004.5"></a>Complex Analysis</h3>
+<!--l. 1073--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.5.1   </span> <a 
+ id="x23-730004.5.1"></a>A tutorial</h4>
+<!--l. 1075--><p class="noindent">The package in the file ComplexRules.m defines three objects:
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>ComplexRules,&#x00A0;&#x00A0;&#x00A0;&#x00A0;transformation rules
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>ComplexCoordinates, &#x00A0;&#x00A0;&#x00A0;&#x00A0;a function that applies rules to an expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmsy-10x-x-120">&#x2219; </span>ComplexD[],&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;takes complex derivatives.</dd></dl>
+<!--l. 1084--><p class="indent">   The ComplexRules package is for handling complex algebra and differentiation. The algebra
+part of ComplexRules has been pretty much superceeded by the standard Mathematica command
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">ComplexExpand[]</span></span></span> so we advise using that. Our complex differentiation is still quite useful.
+ComplexRules.m may not work well with ReIm.m, see the warning at the end of this
+note.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=&#x00A0;&lt;&lt;ComplexRules&#8216;
+&#x00A0;<br />In[2]:=&#x00A0;y&#x00A0;=&#x00A0;Re[(e&#x00A0;+&#x00A0;w&#x00A0;z&#x00A0;)&#x02C6;2]&#x02C6;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;2
+&#x00A0;<br />Out[2]=&#x00A0;Re[(e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;]
+</div>
+</td></tr></table>
+<!--l. 1095--><p class="nopar">
+<!--l. 1097--><p class="indent">   To rewrite this in terms of variables and their conjugates, apply the list of rules <span 
+class="cmmi-12">ComplexRules</span>
+as follows
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[3]:=&#x00A0;y&#x00A0;//.&#x00A0;ComplexRules
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;((e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;&#x00A0;+&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]&#x00A0;Conjugate[z])&#x00A0;)
+&#x00A0;<br />Out[3]=&#x00A0;-----------------------------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+</div>
+</td></tr></table>
+<!--l. 1107--><p class="nopar">
+<!--l. 1109--><p class="indent">   You can get the same result with the function ComplexCoordinates[]:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[4]:=&#x00A0;ComplexCoordinates[y]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;((e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;&#x00A0;+&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]&#x00A0;Conjugate[z])&#x00A0;)
+&#x00A0;<br />Out[4]=&#x00A0;-----------------------------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1119--><p class="nopar">
+<!--l. 1121--><p class="indent">   Suppose that you know that in the expression above, <span 
+class="cmmi-12">e </span>ranges in the unit circle of the complex
+plane, and that <span 
+class="cmmi-12">w </span>is real. To simplify you can do this:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;%&#x00A0;/.&#x00A0;{Conjugate[e]-&gt;1/e,Conjugate[w]-&gt;w}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;((e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;&#x00A0;+&#x00A0;(-&#x00A0;+&#x00A0;w&#x00A0;Conjugate[z])&#x00A0;)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e
+&#x00A0;<br />Out[5]=&#x00A0;-------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+</div>
+</td></tr></table>
+<!--l. 1133--><p class="nopar">
+<!--l. 1135--><p class="indent">   Complex derivatives are easy to produce with ComplexD[]:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[6]:=&#x00A0;ComplexD[&#x00A0;y&#x00A0;,&#x00A0;z]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Out[6]=&#x00A0;w&#x00A0;(e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;((e&#x00A0;+&#x00A0;w&#x00A0;z)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]&#x00A0;Conjugate[z])&#x00A0;)
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1146--><p class="nopar">
+<!--l. 1148--><p class="indent">   Here is a differentiation with respect to Conjugate[w]:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[7]:=&#x00A0;ComplexD[&#x00A0;y&#x00A0;,&#x00A0;Conjugate[w]]
+&#x00A0;<br />
+&#x00A0;<br />Out[7]=&#x00A0;Conjugate[z]&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]&#x00A0;Conjugate[z])
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;((e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;&#x00A0;+&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]&#x00A0;Conjugate[z])&#x00A0;)
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1159--><p class="nopar">
+<!--l. 1161--><p class="indent">   A mixed second order partial derivative is shown below:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[8]:=&#x00A0;ComplexD[&#x00A0;y&#x00A0;,&#x00A0;Conjugate[z]&#x00A0;,&#x00A0;z]
+&#x00A0;<br />
+&#x00A0;<br />Out[8]=&#x00A0;2&#x00A0;w&#x00A0;(e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;Conjugate[w]
+&#x00A0;<br />
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]&#x00A0;Conjugate[z])
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1171--><p class="nopar">
+<!--l. 1173--><p class="indent">   Repeated differentiation is also possible:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[9]:=&#x00A0;ComplexD[&#x00A0;y&#x00A0;,&#x00A0;{Conjugate[z],2}]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Out[9]=&#x00A0;2&#x00A0;Conjugate[w]&#x00A0;&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]&#x00A0;Conjugate[z])&#x00A0;&#x00A0;+
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Conjugate[w]&#x00A0;&#x00A0;((e&#x00A0;+&#x00A0;w&#x00A0;z)&#x00A0;&#x00A0;+&#x00A0;(Conjugate[e]&#x00A0;+&#x00A0;Conjugate[w]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Conjugate[z])&#x00A0;)
+</div>
+</td></tr></table>
+<!--l. 1187--><p class="nopar">
+<!--l. 1189--><p class="indent">   Finally, we point out that it is possible that applying ComplexRules to an expression and
+applying ComplexCoordinates to it may yield different output (the same mathematically of
+course). Reason: ComplexCoordinates applies ComplexRules to the expression, in addition to a
+rule for transforming Abs[z] into Sqrt[ z Conjugate[z]]. Example:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[10]:=&#x00A0;Abs[z&#x02C6;2&#x00A0;+&#x00A0;1]&#x02C6;2&#x00A0;//.&#x00A0;ComplexRules
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;2
+&#x00A0;<br />Out[10]=&#x00A0;Abs[1&#x00A0;+&#x00A0;z&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />In[11]:=&#x00A0;ComplexCoordinates[&#x00A0;%&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Out[11]=&#x00A0;(1&#x00A0;+&#x00A0;z&#x00A0;)&#x00A0;(1&#x00A0;+&#x00A0;Conjugate[z]&#x00A0;)
+</div>
+</td></tr></table>
+<!--l. 1201--><p class="nopar">
+<!--l. 1204--><p class="indent">   ComplexD[] handles <span 
+class="cmmi-12">Abs</span>[]<sup ><span 
+class="cmr-8">2</span></sup> etc.:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[12]:=&#x00A0;ComplexD[&#x00A0;Abs[z&#x02C6;2&#x00A0;+&#x00A0;1]&#x02C6;2,z]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Out[12]=&#x00A0;2&#x00A0;z&#x00A0;(1&#x00A0;+&#x00A0;Conjugate[z]&#x00A0;)
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1213--><p class="nopar">
+<!--l. 1215--><p class="indent">   ComplexD[] also handles <span 
+class="cmmi-12">Abs</span>[]<sup ><span 
+class="cmr-8">1</span></sup> but the answer does not look as pretty:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[13]:=&#x00A0;ComplexD[&#x00A0;Abs[z&#x02C6;2&#x00A0;+&#x00A0;1],z]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z&#x00A0;(1&#x00A0;+&#x00A0;Conjugate[z]&#x00A0;)
+&#x00A0;<br />Out[13]=&#x00A0;----------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Sqrt[(1&#x00A0;+&#x00A0;z&#x00A0;)&#x00A0;(1&#x00A0;+&#x00A0;Conjugate[z]&#x00A0;)]
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1226--><p class="nopar">
+<!--l. 1229--><p class="noindent"><span 
+class="cmbx-12">WARNING: </span>The standard Mathematica package ReIm.m sets things so that expressions of
+complex variables &#8220;z&#8221; are rewritten in terms of Re[z], Im[z] (for example).
+<!--l. 1235--><p class="indent">   Compare this to the output of functions in the package ComplexRules.m, where the expressions
+of complex variables &#8220;z&#8221; are given in terms of z, Conjugate[z].
+<!--l. 1239--><p class="indent">   You may load both ReIm.m and ComplexRules.m, but keep in mind that the objectives of the
+packages conflict. Furthermore, programs that need ComplexRules to run will sometimes not work
+if ReIm.m has been loaded.
+<!--l. 1244--><p class="indent">   Mathematica can manipulate complex analysis via X + I Y where X and Y are
+commutative (e.g., numbers). However, it is often more convenient to calculate in terms of z
+and the conjugate of z. We implement a few commands in the file NCComplex.m. We
+discuss these commands below. One may also look at the file NCComplex.m for further
+documentation.
+<!--l. 1263--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.5.2   </span> <a 
+ id="x23-740004.5.2"></a>ComplexRules</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">ComplexRules </span>is a set of replacement rules for writing expressions in terms
+
+      of  the  variables  and  their  complex  conjugates.  For  example,  use  this  with  input
+      containing numbers and variables, as well as operators/functions such as + <span 
+class="cmsy-10x-x-120">- * </span><span 
+class="cmmi-12">&#x2215;</span>,
+      Re[], Im[], Conjugate[], Exp[], Power[], Sin[], Cos[] and others. Apply the command
+      expr//.ComplexRules. Try the following example:
+      <br class="newline"><span 
+class="cmmi-12">Re</span>[(1 + <span 
+class="cmmi-12">zw</span>)<sup ><span 
+class="cmr-8">2</span></sup>]<sup ><span 
+class="cmr-8">2</span></sup> //.ComplexRules
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: This only works for expressions defined with the commutative
+      multiplication. </dd></dl>
+<a 
+ id="dx23-74001"></a>
+<!--l. 1275--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.5.3   </span> <a 
+ id="x23-750004.5.3"></a>ComplexCoordinates[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">ComplexCoordinates</span>[<span 
+class="cmmi-12">expr</span>]  expands  <span 
+class="cmmi-12">expr  </span>in  terms  of  the  variables  and
+      their  complex  conjugates.  The  difference  between  <span 
+class="cmmi-12">ComplexCoordinates</span>[<span 
+class="cmmi-12">expr</span>]  and
+      <span 
+class="cmmi-12">ComplexRules </span>is in the case <span 
+class="cmmi-12">Abs</span>[<span 
+class="cmmi-12">z</span>]<sup ><span 
+class="cmr-8">2</span></sup>//.ComplexRules. This case returns the same
+      expression instead of z and Conjugate[z]. If you desire to use the latter expression,
+      you  can  use  ComplexCoordinates[expr].  This  function  replaces  Abs[z]  by  Sqrt[z
+      Conjugate[z]], after applying ComplexRules.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is any expression with + <span 
+class="cmsy-10x-x-120">- * </span><span 
+class="cmmi-12">&#x2215;</span>, Re[], Im[], Conjugate[], Exp[], Power[],
+      Sin[], Cos[] and others
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: This only works for expressions defined with the commutative
+      multiplication. </dd></dl>
+<a 
+ id="dx23-75001"></a>
+
+<!--l. 1301--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.5.4   </span> <a 
+ id="x23-760004.5.4"></a>ComplexD[expr, aVariable]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">ComplexD</span>[<span 
+class="cmmi-12">expr,aV ariable</span>] calculates the derivative of the complex expression
+      <span 
+class="cmmi-12">expr </span>with respect to the &#8220;complex&#8221; variable <span 
+class="cmmi-12">aV ariable</span>. You can also calculate the
+      derivative with respect to <span 
+class="cmmi-12">Conjugate</span>[<span 
+class="cmmi-12">aV ariable</span>]. Try these examples:
+      <br class="newline">
+      <br class="newline"><span 
+class="cmmi-12">ComplexD</span>[<span 
+class="cmmi-12">Conjugate</span>[<span 
+class="cmmi-12">Exp</span>[<span 
+class="cmmi-12">z </span>+ 1<span 
+class="cmmi-12">&#x2215;Conjugate</span>[<span 
+class="cmmi-12">z</span>]]<sup ><span 
+class="cmr-8">2</span></sup>]<span 
+class="cmmi-12">,z</span>];
+      <br class="newline"><span 
+class="cmmi-12">ComplexD</span>[<span 
+class="cmmi-12">Re</span>[(1 + <span 
+class="cmmi-12">zw</span>)<sup ><span 
+class="cmr-8">2</span></sup>]<sup ><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-12">,w</span>];
+      <br class="newline"><span 
+class="cmmi-12">ComplexD</span>[<span 
+class="cmmi-12">Abs</span>[1<span 
+class="cmmi-12">&#x2215;</span>(<span 
+class="cmmi-12">e</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">- </span>1) <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">z</span>]<sup ><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-12">,z</span>];
+      <br class="newline"><span 
+class="cmmi-12">ComplexD</span>[<span 
+class="cmmi-12">Conjugate</span>[<span 
+class="cmmi-12">Exp</span>[<span 
+class="cmmi-12">z </span>+ 1<span 
+class="cmmi-12">&#x2215;Conjugate</span>[<span 
+class="cmmi-12">z</span>]]<sup ><span 
+class="cmr-8">2</span></sup>]<span 
+class="cmmi-12">,Conjugate</span>[<span 
+class="cmmi-12">z</span>]];
+      <br class="newline">
+      <br class="newline">Here is a second order derivative:
+      <br class="newline">
+      <br class="newline"><span 
+class="cmmi-12">ComplexD</span>[<span 
+class="cmmi-12">Conjugate</span>[<span 
+class="cmmi-12">Exp</span>[<span 
+class="cmmi-12">z </span>+ 1<span 
+class="cmmi-12">&#x2215;Conjugate</span>[<span 
+class="cmmi-12">z</span>]]<sup ><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">z, </span>2];
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is a complex expression. <span 
+class="cmmi-12">aV ariable </span>is the variable in which to take the
+      derivative with respect to.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: This only works for expressions defined with the commutative
+      multiplication. </dd></dl>
+<a 
+ id="dx23-76001"></a>
+
+   <!--l. 1303--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse16.html" >next</a>] [<a 
+href="NCBIGDOCse14.html" >prev</a>] [<a 
+href="NCBIGDOCse14.html#tailNCBIGDOCse14.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse15.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse15.html" >up</a>] </p></div>
+<!--l. 1303--><p class="indent">   <a 
+ id="tailNCBIGDOCse15.html"></a>   
+</body></html> 

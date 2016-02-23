@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>36 An Old Example of Get Categories- Lots of info</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 25--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch37.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch36.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa9.html#NCBIGDOCch36.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;36</span></span><br><a 
+ id="x74-42700036"></a><span 
+class="cmr-10x-x-109">An Old Example of Get Categories- Lots of info</span></h2>
+<!--l. 8--><p class="noindent"><span 
+class="cmr-10x-x-109">This is a 1996 vintage example and we should have deleted it except that it contains a lot more info on</span>
+<span 
+class="cmr-10x-x-109">how categories are labeled than we put in the official doucument. As an example, consider the following</span>
+<span 
+class="cmr-10x-x-109">set of relations with the multigraded lex order </span><span 
+class="cmmi-10x-x-109">A &lt; B &lt; C</span><span 
+class="cmr-10x-x-109">0 </span><span 
+class="cmmi-10x-x-109">&lt; D &lt; ACROSS &lt; P</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&lt; P</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&lt;&lt; proj</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&lt;</span>
+<span 
+class="cmmi-10x-x-109">proj</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&lt;&lt; m</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&lt; m</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&lt;&lt; leftm</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&lt; leftm</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&lt;&lt; rightm</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&lt; rightm</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&lt;&lt; a &lt; b &lt; c &lt; e &lt; f &lt; g</span><span 
+class="cmr-10x-x-109">. This</span>
+<span 
+class="cmr-10x-x-109">arose in the demo in Subsection </span><a 
+href="NCBIGDOCch14.html#x28-20600014.2"><span 
+class="cmr-10x-x-109">14.2</span><!--tex4ht:ref: subsection:problem --></a><span 
+class="cmr-10x-x-109">. So we proceed assuming we have set the order. Suppose</span>
+<span 
+class="cmmi-10x-x-109">eliminatedOriginal </span><span 
+class="cmr-10x-x-109">has been set so that:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[4]:=&#x00A0;eliminatedOriginal
+&#x00A0;<br />Out[4]=&#x00A0;{c&#x00A0;-&#x00A0;C0&#x00A0;**&#x00A0;m1,&#x00A0;g&#x00A0;-&#x00A0;C0&#x00A0;**&#x00A0;m2,&#x00A0;-1&#x00A0;+&#x00A0;leftm1&#x00A0;**&#x00A0;m1,&#x00A0;leftm1&#x00A0;**&#x00A0;m2,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;leftm2&#x00A0;**&#x00A0;m1,&#x00A0;-1&#x00A0;+&#x00A0;leftm2&#x00A0;**&#x00A0;m2,&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m2,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e&#x00A0;-&#x00A0;leftm2&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m2,&#x00A0;b&#x00A0;-&#x00A0;leftm1&#x00A0;**&#x00A0;B,&#x00A0;f&#x00A0;-&#x00A0;leftm2&#x00A0;**&#x00A0;B,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-leftm1&#x00A0;+&#x00A0;rightm1,&#x00A0;-leftm2&#x00A0;+&#x00A0;rightm2,&#x00A0;a&#x00A0;-&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-leftm2&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;leftm2&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;+&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;+&#x00A0;m2&#x00A0;**&#x00A0;leftm2,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-A&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1}
+</div>
+</td></tr></table>
+<!--l. 42--><p class="nopar">
+<!--l. 46--><p class="indent">   <span 
+class="cmr-10x-x-109">Before demonstrating the Category commands, we apply the </span><span 
+class="cmti-10x-x-109">RegularOutput </span><span 
+class="cmr-10x-x-109">command so the reader</span>
+<span 
+class="cmr-10x-x-109">can see which categories occur. The following command creates a file </span><span 
+class="cmmi-10x-x-109">junk </span><span 
+class="cmr-10x-x-109">which has a nicely formatted</span>
+<span 
+class="cmr-10x-x-109">version of the information stored in </span><span 
+class="cmmi-10x-x-109">dummy </span><span 
+class="cmr-10x-x-109">(see page </span><span class="pageref"><a 
+href="#x74-42700036"><span 
+class="cmsy-10x-x-109">&#167;</span></a></span><span 
+class="cmr-10x-x-109">).</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[6]:=&#x00A0;RegularOutput[%4,"junk"]
+&#x00A0;<br />Outputting&#x00A0;results&#x00A0;to&#x00A0;the&#x00A0;stream&#x00A0;OutputStream["junk",&#x00A0;6]
+&#x00A0;<br />Done&#x00A0;outputting&#x00A0;results&#x00A0;to&#x00A0;the&#x00A0;stream&#x00A0;OutputStream["junk",&#x00A0;6]
+&#x00A0;<br />
+&#x00A0;<br />In[7]:=&#x00A0;!!junk
+&#x00A0;<br />THE&#x00A0;ORDER&#x00A0;IS&#x00A0;NOW&#x00A0;THE&#x00A0;FOLLOWING:
+&#x00A0;<br />A&#x00A0;&lt;&#x00A0;B&#x00A0;&lt;&#x00A0;C0&#x00A0;&lt;&#x00A0;D&#x00A0;&lt;&#x00A0;ACROSS&#x00A0;&lt;&#x00A0;P1&#x00A0;&lt;&#x00A0;P2&#x00A0;&lt;&lt;
+&#x00A0;<br />proj1&#x00A0;&lt;&#x00A0;proj2&#x00A0;&lt;&lt;&#x00A0;m1&#x00A0;&lt;&#x00A0;m2&#x00A0;&lt;&lt;&#x00A0;leftm1&#x00A0;&lt;
+&#x00A0;<br />leftm2&#x00A0;&lt;&lt;&#x00A0;rightm1&#x00A0;&lt;&#x00A0;rightm2&#x00A0;&lt;&lt;&#x00A0;a&#x00A0;&lt;&#x00A0;b&#x00A0;&lt;&#x00A0;c
+&#x00A0;<br />&#x00A0;&lt;&#x00A0;e&#x00A0;&lt;&#x00A0;f&#x00A0;&lt;&#x00A0;g
+&#x00A0;<br />================================================
+&#x00A0;<br />=========&#x00A0;THE&#x00A0;ALGORITHM&#x00A0;HAS&#x00A0;SOLVED&#x00A0;FOR==========
+&#x00A0;<br />================================================
+&#x00A0;<br />THE&#x00A0;FOLLOWING&#x00A0;VARIABLES&#x00A0;HAVE&#x00A0;BEEN&#x00A0;SOLVED&#x00A0;FOR:
+&#x00A0;<br />{c,g,e,b,f,rightm1,rightm2,a}
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;corresponding&#x00A0;rules&#x00A0;are&#x00A0;the&#x00A0;following:
+&#x00A0;<br />c-&gt;C0**m1
+&#x00A0;<br />g-&gt;C0**m2
+&#x00A0;<br />e-&gt;leftm2**A**m2
+&#x00A0;<br />b-&gt;leftm1**B
+&#x00A0;<br />f-&gt;leftm2**B
+&#x00A0;<br />rightm1-&gt;leftm1
+&#x00A0;<br />rightm2-&gt;leftm2
+&#x00A0;<br />a-&gt;leftm1**A**m1
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />================================================
+&#x00A0;<br />=========&#x00A0;USER&#x00A0;CREATIONS&#x00A0;APPEAR&#x00A0;BELOW&#x00A0;==========
+&#x00A0;<br />================================================
+&#x00A0;<br />================================================
+&#x00A0;<br />=========&#x00A0;UNDIGESTED&#x00A0;RELATIONS&#x00A0;APPEAR&#x00A0;BELOW&#x00A0;====
+&#x00A0;<br />================================================
+&#x00A0;<br />THE&#x00A0;FOLLOWING&#x00A0;VARIABLES&#x00A0;HAVE&#x00A0;NOT&#x00A0;BEEN&#x00A0;SOLVED&#x00A0;FOR:
+&#x00A0;<br />{leftm1,leftm2,m1,m2}
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;expressions&#x00A0;with&#x00A0;unknown&#x00A0;variables&#x00A0;{
+&#x00A0;<br />leftm1,m1}
+&#x00A0;<br />and&#x00A0;knowns&#x00A0;{A,B,C0}
+&#x00A0;<br />---------------------------------------
+&#x00A0;<br />leftm1**m1-&gt;1
+&#x00A0;<br />
+&#x00A0;<br />m1**leftm1**B**C0**m1-&gt;&#x00A0;-A**m1&#x00A0;&#x00A0;&#x00A0;+&#x00A0;B**C0
+&#x00A0;<br />**m1&#x00A0;+&#x00A0;m1**leftm1**A**m1
+&#x00A0;<br />
+&#x00A0;<br />m1**leftm1**B**C0**B**C0**m1-&gt;A&#x02C6;2**m1&#x00A0;+
+&#x00A0;<br />&#x00A0;-A**B**C0**m1&#x00A0;&#x00A0;&#x00A0;+&#x00A0;&#x00A0;-B**C0**A**m1&#x00A0;&#x00A0;&#x00A0;+&#x00A0;B
+&#x00A0;<br />**C0**B**C0**m1&#x00A0;+&#x00A0;&#x00A0;-m1**leftm1**A&#x02C6;2**m1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;+&#x00A0;m1**leftm1**A**B**C0**m1&#x00A0;+&#x00A0;m1**
+&#x00A0;<br />leftm1**B**C0**A**m1
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;expressions&#x00A0;with&#x00A0;unknown&#x00A0;variables&#x00A0;{
+&#x00A0;<br />leftm1,m2}
+&#x00A0;<br />and&#x00A0;knowns&#x00A0;{A}
+&#x00A0;<br />---------------------------------------
+&#x00A0;<br />leftm1**m2-&gt;0
+&#x00A0;<br />
+&#x00A0;<br />leftm1**A**m2-&gt;0
+
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;expressions&#x00A0;with&#x00A0;unknown&#x00A0;variables&#x00A0;{
+&#x00A0;<br />leftm2,m1}
+&#x00A0;<br />and&#x00A0;knowns&#x00A0;{A,B,C0}
+&#x00A0;<br />---------------------------------------
+&#x00A0;<br />leftm2**m1-&gt;0
+&#x00A0;<br />
+&#x00A0;<br />leftm2**B**C0**m1-&gt;leftm2**A**m1
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;expressions&#x00A0;with&#x00A0;unknown&#x00A0;variables&#x00A0;{
+&#x00A0;<br />leftm2,m2}
+&#x00A0;<br />and&#x00A0;knowns&#x00A0;{}
+&#x00A0;<br />---------------------------------------
+&#x00A0;<br />leftm2**m2-&gt;1
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;expressions&#x00A0;with&#x00A0;unknown&#x00A0;variables&#x00A0;{
+&#x00A0;<br />leftm1,leftm2,m1,m2}
+&#x00A0;<br />and&#x00A0;knowns&#x00A0;{}
+&#x00A0;<br />---------------------------------------
+&#x00A0;<br />m2**leftm2-&gt;1&#x00A0;+&#x00A0;&#x00A0;-m1**leftm1
+</div>
+</td></tr></table>
+<!--l. 142--><p class="nopar">
+<!--l. 146--><p class="indent">   <span 
+class="cmr-10x-x-109">Now we illustrate the </span><span 
+class="cmmi-10x-x-109">CreateCategories </span><span 
+class="cmr-10x-x-109">command. One calls it on the above set of relations with the</span>
+<span 
+class="cmr-10x-x-109">above order by typing:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;CreateCategories[%,dummy]
+&#x00A0;<br />Out[5]=&#x00A0;dummy
+</div>
+</td></tr></table>
+<!--l. 158--><p class="nopar">
+<!--l. 162--><p class="indent">   <span 
+class="cmr-10x-x-109">The effect of the above command is to associate the following information to the symbol</span>
+<span 
+class="cmmi-10x-x-109">dummy</span><span 
+class="cmr-10x-x-109">.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[6]:=&#x00A0;??dummy
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&lt;===&#x00A0;recall&#x00A0;Mma&#x00A0;does&#x00A0;not&#x00A0;produce&#x00A0;an
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;output&#x00A0;in&#x00A0;response&#x00A0;to&#x00A0;??
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;one&#x00A0;gets&#x00A0;a&#x00A0;screen&#x00A0;display&#x00A0;(as&#x00A0;follows)
+&#x00A0;<br />Global&#8216;dummy
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />dummy[2]&#x00A0;=&#x00A0;{{b,&#x00A0;leftm1},&#x00A0;{c,&#x00A0;m1},&#x00A0;{f,&#x00A0;leftm2},&#x00A0;{g,&#x00A0;m2},&#x00A0;{leftm1,&#x00A0;m1},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{leftm1,&#x00A0;m2},&#x00A0;{leftm1,&#x00A0;rightm1},&#x00A0;{leftm2,&#x00A0;m1},&#x00A0;{leftm2,&#x00A0;m2},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{leftm2,&#x00A0;rightm2}}
+&#x00A0;<br />
+&#x00A0;<br />dummy[3]&#x00A0;=&#x00A0;{{a,&#x00A0;leftm1,&#x00A0;m1},&#x00A0;{e,&#x00A0;leftm2,&#x00A0;m2}}
+&#x00A0;<br />
+&#x00A0;<br />dummy[4]&#x00A0;=&#x00A0;{{leftm1,&#x00A0;leftm2,&#x00A0;m1,&#x00A0;m2}}
+&#x00A0;<br />
+&#x00A0;<br />dummy["AllCategories"]&#x00A0;=
+&#x00A0;<br />&#x00A0;&#x00A0;{{b,&#x00A0;leftm1},&#x00A0;{c,&#x00A0;m1},&#x00A0;{f,&#x00A0;leftm2},&#x00A0;{g,&#x00A0;m2},&#x00A0;{leftm1,&#x00A0;m1},&#x00A0;{leftm1,&#x00A0;m2},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{leftm1,&#x00A0;rightm1},&#x00A0;{leftm2,&#x00A0;m1},&#x00A0;{leftm2,&#x00A0;m2},&#x00A0;{leftm2,&#x00A0;rightm2},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{a,&#x00A0;leftm1,&#x00A0;m1},&#x00A0;{e,&#x00A0;leftm2,&#x00A0;m2},&#x00A0;{leftm1,&#x00A0;leftm2,&#x00A0;m1,&#x00A0;m2}}
+&#x00A0;<br />
+&#x00A0;<br />dummy["nonsingleVars"]&#x00A0;=&#x00A0;{leftm1,&#x00A0;leftm2,&#x00A0;m1,&#x00A0;m2}
+&#x00A0;<br />
+&#x00A0;<br />dummy["numbers"]&#x00A0;=&#x00A0;{2,&#x00A0;3,&#x00A0;4}
+&#x00A0;<br />
+&#x00A0;<br />dummy["singleRules"]&#x00A0;=
+&#x00A0;<br />&#x00A0;&#x00A0;{c&#x00A0;-&gt;&#x00A0;C0&#x00A0;**&#x00A0;m1,&#x00A0;g&#x00A0;-&gt;&#x00A0;C0&#x00A0;**&#x00A0;m2,&#x00A0;e&#x00A0;-&gt;&#x00A0;leftm2&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m2,&#x00A0;b&#x00A0;-&gt;&#x00A0;leftm1&#x00A0;**&#x00A0;B,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;f&#x00A0;-&gt;&#x00A0;leftm2&#x00A0;**&#x00A0;B,&#x00A0;rightm1&#x00A0;-&gt;&#x00A0;leftm1,&#x00A0;rightm2&#x00A0;-&gt;&#x00A0;leftm2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;a&#x00A0;-&gt;&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1}
+&#x00A0;<br />
+&#x00A0;<br />dummy["singleVars"]&#x00A0;=&#x00A0;{c,&#x00A0;g,&#x00A0;e,&#x00A0;b,&#x00A0;f,&#x00A0;rightm1,&#x00A0;rightm2,&#x00A0;a}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{b,&#x00A0;leftm1}]&#x00A0;=&#x00A0;{b&#x00A0;-&gt;&#x00A0;leftm1&#x00A0;**&#x00A0;B}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{c,&#x00A0;m1}]&#x00A0;=&#x00A0;{c&#x00A0;-&gt;&#x00A0;C0&#x00A0;**&#x00A0;m1}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{f,&#x00A0;leftm2}]&#x00A0;=&#x00A0;{f&#x00A0;-&gt;&#x00A0;leftm2&#x00A0;**&#x00A0;B}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{g,&#x00A0;m2}]&#x00A0;=&#x00A0;{g&#x00A0;-&gt;&#x00A0;C0&#x00A0;**&#x00A0;m2}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{leftm1,&#x00A0;m1}]&#x00A0;=
+&#x00A0;<br />&#x00A0;&#x00A0;{leftm1&#x00A0;**&#x00A0;m1&#x00A0;-&gt;&#x00A0;1,&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-A&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;A&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{leftm1,&#x00A0;m2}]&#x00A0;=&#x00A0;{leftm1&#x00A0;**&#x00A0;m2&#x00A0;-&gt;&#x00A0;0,&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m2&#x00A0;-&gt;&#x00A0;0}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{leftm1,&#x00A0;rightm1}]&#x00A0;=&#x00A0;{rightm1&#x00A0;-&gt;&#x00A0;leftm1}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{leftm2,&#x00A0;m1}]&#x00A0;=
+&#x00A0;<br />&#x00A0;&#x00A0;{leftm2&#x00A0;**&#x00A0;m1&#x00A0;-&gt;&#x00A0;0,&#x00A0;leftm2&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&gt;&#x00A0;leftm2&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{leftm2,&#x00A0;m2}]&#x00A0;=&#x00A0;{leftm2&#x00A0;**&#x00A0;m2&#x00A0;-&gt;&#x00A0;1}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{leftm2,&#x00A0;rightm2}]&#x00A0;=&#x00A0;{rightm2&#x00A0;-&gt;&#x00A0;leftm2}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{a,&#x00A0;leftm1,&#x00A0;m1}]&#x00A0;=&#x00A0;{a&#x00A0;-&gt;&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1}
+&#x00A0;<br />
+
+&#x00A0;<br />dummy[{e,&#x00A0;leftm2,&#x00A0;m2}]&#x00A0;=&#x00A0;{e&#x00A0;-&gt;&#x00A0;leftm2&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m2}
+&#x00A0;<br />
+&#x00A0;<br />dummy[{leftm1,&#x00A0;leftm2,&#x00A0;m1,&#x00A0;m2}]&#x00A0;=&#x00A0;{m2&#x00A0;**&#x00A0;leftm2&#x00A0;-&gt;&#x00A0;1&#x00A0;-&#x00A0;m1&#x00A0;**&#x00A0;leftm1}
+&#x00A0;<br />
+&#x00A0;<br />dummy[_]&#x00A0;:=&#x00A0;{}
+</div>
+</td></tr></table>
+<!--l. 233--><p class="nopar">
+<!--l. 237--><p class="indent">   <span 
+class="cmr-10x-x-109">One can pick of categories one by one in Mathematica by using the </span><span 
+class="cmmi-10x-x-109">GetCategories </span><span 
+class="cmr-10x-x-109">command.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;GetCategories[{leftm2,&#x00A0;m1},dummy]
+&#x00A0;<br />Out[5]=&#x00A0;{leftm2&#x00A0;**&#x00A0;m1&#x00A0;-&gt;&#x00A0;0,&#x00A0;leftm2&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&gt;&#x00A0;leftm2&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1}
+&#x00A0;<br />In[6]:=&#x00A0;GetCategories[{},dummy]
+&#x00A0;<br />Out[6]=&#x00A0;{}
+&#x00A0;<br />In[7]:=&#x00A0;GetCategories[{leftm1,m1},dummy]
+&#x00A0;<br />Out[7]=&#x00A0;{leftm1&#x00A0;**&#x00A0;m1&#x00A0;-&gt;&#x00A0;1,&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-A&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;-&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;m1&#x00A0;+&#x00A0;m1&#x00A0;**&#x00A0;leftm1&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;C0&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;m1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+</div>
+</td></tr></table>
+<!--l. 255--><p class="nopar">
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch37.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch36.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa9.html#NCBIGDOCch36.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch36.html"></a>  
+</body></html> 

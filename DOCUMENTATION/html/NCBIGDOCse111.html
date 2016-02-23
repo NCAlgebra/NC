@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>31.3 Main Change Of Variables Command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 144--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse112.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse110.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse110.html#tailNCBIGDOCse110.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse111.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#NCBIGDOCse111.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.3   </span></span> <a 
+ id="x178-39900031.3"></a><span 
+class="cmr-10x-x-109">Main Change Of Variables Command</span></h3>
+<!--l. 146--><p class="noindent"><span 
+class="cmr-10x-x-109">The main command is </span><span 
+class="cmtt-10x-x-109">NCXFindChangeOfVariables</span><span 
+class="cmr-10x-x-109">. The general purpose of these commands is to</span>
+<span 
+class="cmr-10x-x-109">produce 1-strategies from a given list of relations. That is, we would like to find a motivated unknown</span>
+<span 
+class="cmr-10x-x-109">that eliminates all other unknowns from some equation in a nontrivial way. By nontrivial, we mean that</span>
+<span 
+class="cmr-10x-x-109">the motivated unknown is not the entire given expression </span><span 
+class="cmmi-10x-x-109">E </span><span 
+class="cmr-10x-x-109">or </span><span 
+class="cmmi-10x-x-109">aE </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmr-10x-x-109">where </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmr-10x-x-109">are</span>
+<span 
+class="cmr-10x-x-109">numbers.</span>
+<!--l. 231--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.3.1   </span></span> <a 
+ id="x178-40000031.3.1"></a><span 
+class="cmr-10x-x-109">NCXFindChangeOfVariables[ aListofPolynomials, anInteger, aString, Options]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: This command needs the monomial order to already be set. It then uses the ambient</span>
+      <span 
+class="cmr-10x-x-109">order in NCGB. </span><span 
+class="cmtt-10x-x-109">NCXFindChangeOfVariables[ aListOfPolynomials,</span>
+      <br class="newline"><span 
+class="cmtt-10x-x-109">anInteger, aString, Options] </span><span 
+class="cmr-10x-x-109">takes a list of relations </span><span 
+class="cmtt-10x-x-109">aListOfPolynomials</span><span 
+class="cmr-10x-x-109">, finds the</span>
+      <span 
+class="cmr-10x-x-109">candidates for motivated unknowns and then tries each one in NCProcess until it finds that</span>
+      <span 
+class="cmr-10x-x-109">all unknowns except the candidate have been eliminated (and hence would make a good</span>
+      <span 
+class="cmr-10x-x-109">motivated unknown). If it finds a motivated unknown (which absorbs all other unknowns)</span>
+      <span 
+class="cmr-10x-x-109">then it returns a list </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmtt-10x-x-109">E, M</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">where </span><span 
+class="cmtt-10x-x-109">M </span><span 
+class="cmr-10x-x-109">is the motivated unknown and </span><span 
+class="cmtt-10x-x-109">E </span><span 
+class="cmr-10x-x-109">is the expression which</span>
+      <span 
+class="cmr-10x-x-109">motivated it. Otherwise it returns False. It can also be made to return a list of outputs from</span>
+      <span 
+class="cmr-10x-x-109">the calls to </span><span 
+class="cmtt-10x-x-109">NCProcess</span><span 
+class="cmr-10x-x-109">.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: aListofPolynomials is a list of polynomials, aString is a string for the beginning of the tex</span>
+      <span 
+class="cmr-10x-x-109">files produced by </span><span 
+class="cmtt-10x-x-109">NCProcess</span><span 
+class="cmr-10x-x-109">, and anInteger is the number of iterations for </span><span 
+class="cmtt-10x-x-109">NCProcess</span><span 
+class="cmr-10x-x-109">. The options</span>
+      <span 
+class="cmr-10x-x-109">are:</span>
+           <ul class="itemize1">
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">IncludeTranspose </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmr-10x-x-109">: This option adds the transpose of the candidate to the set</span>
+           <span 
+class="cmr-10x-x-109">of relations. The default (False) is not to add the transpose relation, while setting it to</span>
+           <span 
+class="cmr-10x-x-109">True will not add the transpose relation.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">AllRelations </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmr-10x-x-109">: This option determines whether the Grobner Basis is computed</span>
+           <span 
+class="cmr-10x-x-109">using only the relation that motivated the candidate together with the candidate or if</span>
+
+           <span 
+class="cmr-10x-x-109">it uses all of the given relations plus the candidate. The default (False) only uses the</span>
+           <span 
+class="cmr-10x-x-109">polynomial that motivated the unknown plus all relations of length 2 (these we will</span>
+           <span 
+class="cmr-10x-x-109">consider &#8220;important&#8221; relations and include relations defining inverses and symmetry)</span>
+           <span 
+class="cmr-10x-x-109">while setting it to True uses all of the relations.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">CountV ariables </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">True</span><span 
+class="cmr-10x-x-109">: This option determines whether or not</span>
+           <br class="newline"><span 
+class="cmtt-10x-x-109">NCXPossibleChangeOfVariables[ ] </span><span 
+class="cmr-10x-x-109">eliminates the candidates which do not contail all</span>
+           <span 
+class="cmr-10x-x-109">of the unknowns present in the polynomial that motivated it (and thus the candidate</span>
+           <span 
+class="cmr-10x-x-109">cannot reduce that polynomial to a polynomial in one variable). The default (True)</span>
+           <span 
+class="cmr-10x-x-109">does eliminate these possibilities while setting it to False does not do this elimination.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">MultiplyByMonomials </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmr-10x-x-109">: This option determines whether or not</span>
+           <br class="newline"><span 
+class="cmtt-10x-x-109">NCXMultiplyByMonomials </span><span 
+class="cmr-10x-x-109">is called, so that if no candidate works, it tries to multiply</span>
+           <span 
+class="cmr-10x-x-109">though by monomials on the left and/or right. The default (False) does no multiplying,</span>
+           <span 
+class="cmr-10x-x-109">while setting it to True tries multiplying through by monomials.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">SortByTermLength </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">True</span><span 
+class="cmr-10x-x-109">: This option decides whether or not to sort the results</span>
+           <span 
+class="cmr-10x-x-109">of </span><span 
+class="cmtt-10x-x-109">NCXPossibleChangeOfVariables </span><span 
+class="cmr-10x-x-109">by the length (number of terms) in the candidate</span>
+           <span 
+class="cmr-10x-x-109">(shortest  to  longest).  The  default  (True)  does  sort  it  so  that  it  tries  the  shortest</span>
+           <span 
+class="cmr-10x-x-109">candidates first (since in practice the longer ones don&#8217;t tend to work). Setting it to False</span>
+           <span 
+class="cmr-10x-x-109">does not do the sorting step.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">NCProcessOptions </span><span 
+class="cmsy-10x-x-109">&#x2192; {</span><span 
+class="cmmi-10x-x-109">SBByCat </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False,RR </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">: This allows one to set</span>
+           <span 
+class="cmr-10x-x-109">additional options when </span><span 
+class="cmtt-10x-x-109">NCProcess </span><span 
+class="cmr-10x-x-109">is run. The default is </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">SBByCat </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False,RR </span><span 
+class="cmsy-10x-x-109">&#x2192;</span>
+           <span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">.  A  typical  setting  might  be  </span><span 
+class="cmmi-10x-x-109">NCProcessOptions</span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">&gt;   </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">SBByCat   </span><span 
+class="cmsy-10x-x-109">&#x2192;</span>
+           <span 
+class="cmmi-10x-x-109">False,NCCV </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">True</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">. list of the outputs from </span><span 
+class="cmtt-10x-x-109">NCProcess</span><span 
+class="cmr-10x-x-109">.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">StopIfFound  </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">True</span><span 
+class="cmr-10x-x-109">:  This  option  determines  whether  the  program  stops  if  a</span>
+           <span 
+class="cmr-10x-x-109">motivated unknown is found. The default (True) stops if a motivated unknown is found</span>
+           <span 
+class="cmr-10x-x-109">and returns only this pair. Setting this option to False runs all possibilities in </span><span 
+class="cmtt-10x-x-109">NCProcess</span>
+           <span 
+class="cmr-10x-x-109">and returns all of the results (whether a motivated unknown is found or not).</span></li></ul>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments  /  Limitations:  This  procedure  uses  the  ambient  monomial  order  in  NCGB.</span>
+      <span 
+class="cmr-10x-x-109">Furthermore, the monomial order is changed by this program. The variables </span><span 
+class="cmtt-10x-x-109">motUnknown </span><span 
+class="cmr-10x-x-109">and</span>
+      <span 
+class="cmtt-10x-x-109">Tp[motUnknown] </span><span 
+class="cmr-10x-x-109">are inserted in a graded piece between the current knowns and unknowns</span>
+      <span 
+class="cmr-10x-x-109">if these variables are not already present. This function runs </span><span 
+class="cmtt-10x-x-109">NCProcess </span><span 
+class="cmr-10x-x-109">many times and</span>
+      <span 
+class="cmr-10x-x-109">therefore produces a number of tex files (actually, it produces exactly </span><span 
+class="cmtt-10x-x-109">Length[NCXMultiplyBy</span>
+      <br class="newline"><span 
+class="cmtt-10x-x-109">Monomials[NCXPossibleChangeOfVariables[aListOfPolynomials, Options]]]     </span><span 
+class="cmr-10x-x-109">tex</span>
+      <span 
+class="cmr-10x-x-109">files). These files are named nameno# where name is the string given as an argument, no is</span>
+      <span 
+class="cmr-10x-x-109">added and # is a number. This function uses </span><span 
+class="cmtt-10x-x-109">NCProcess,</span>
+      <br class="newline"><span 
+class="cmtt-10x-x-109">NCXPossibleChangeOfVariables, NCXMultiplyByMonomials</span><span 
+class="cmr-10x-x-109">. </span></dd></dl>
+
+<a 
+ id="dx178-400001"></a>
+<!--l. 233--><p class="noindent"><span 
+class="cmr-10x-x-109">The following command may also be useful since it gives a list of expressions, each of which is a possible</span>
+<span 
+class="cmr-10x-x-109">new variable. It runs all steps above except the last two, that is, multiplying through by monomials and</span>
+<span 
+class="cmr-10x-x-109">running the Grobner basis.</span>
+<!--l. 279--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">31.3.2   </span></span> <a 
+ id="x178-40100031.3.2"></a><span 
+class="cmr-10x-x-109">NCXPossibleChangeOfVariables[ aListofPolynomials, Options]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: </span><span 
+class="cmtt-10x-x-109">NCXPossibleChangeOfVariables[ aListOfPolynomials, Options] </span><span 
+class="cmr-10x-x-109">takes a list of</span>
+      <span 
+class="cmr-10x-x-109">relations and looks for a good motivated unknown. It returns a list of pairs </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmtt-10x-x-109">E, M</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">where</span>
+      <span 
+class="cmtt-10x-x-109">E </span><span 
+class="cmr-10x-x-109">is the expression which motivated the candidate </span><span 
+class="cmtt-10x-x-109">M </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmtt-10x-x-109">M </span><span 
+class="cmr-10x-x-109">is the candidate for a motivated</span>
+      <span 
+class="cmr-10x-x-109">unknown.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: aListofPolynomials is a list of relations and options can be any of the following:</span>
+           <ul class="itemize1">
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">CountV ariables </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">True</span><span 
+class="cmr-10x-x-109">: The CountVariables option counts to see if the candidate for</span>
+           <span 
+class="cmr-10x-x-109">motivated unknown has all of the variables in the expression which motivated it, and</span>
+           <span 
+class="cmr-10x-x-109">removes the entry from the list if it does not (and thus could not reduce the expression</span>
+           <span 
+class="cmr-10x-x-109">to one unknown). The default (True) is to eliminate these entries, while False will skip</span>
+           <span 
+class="cmr-10x-x-109">this step entirely.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">RemoveNumbers </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmr-10x-x-109">: The RemoveNumbers option decides whether or not to</span>
+           <span 
+class="cmr-10x-x-109">remove  purely  numerical  terms  from  the  candidates.  If  True,  then  these  terms  are</span>
+           <span 
+class="cmr-10x-x-109">removed. For instance, the candidate </span><span 
+class="cmmi-10x-x-109">xy </span><span 
+class="cmr-10x-x-109">+ 1 becomes </span><span 
+class="cmmi-10x-x-109">xy</span><span 
+class="cmr-10x-x-109">. If set to False, the candidate</span>
+           <span 
+class="cmr-10x-x-109">is not be changed.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">SortByTermLength </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">True</span><span 
+class="cmr-10x-x-109">: The SortByTermLength option decides whether or not</span>
+           <span 
+class="cmr-10x-x-109">to sort the results by the length (number of terms) of the candidate (with the shortest</span>
+           <span 
+class="cmr-10x-x-109">first). The default (True) does the sorting, while setting the option to False does not</span>
+           <span 
+class="cmr-10x-x-109">sort at all.</span></li></ul>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments  /  Limitations:  The  candidate  for  motivated  unknown  is  found  by  first  doing  an</span>
+      <span 
+class="cmtt-10x-x-109">NCCollectOnVariables[ ]</span><span 
+class="cmr-10x-x-109">, which collects around knowns, on each relation and then looking</span>
+      <span 
+class="cmr-10x-x-109">at  what  is  found  on  either  side  of  the  knowns.  These  are  the  candidates  for  motivated</span>
+      <span 
+class="cmr-10x-x-109">unknowns.  The  next  step  is  to  eliminate  candidates  which  do  not  contain  all  of  the</span>
+
+      <span 
+class="cmr-10x-x-109">unknowns present in the expression which motivated them. This option can be turned off by</span>
+      <span 
+class="cmmi-10x-x-109">CountV ariables </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmr-10x-x-109">. The next step is to eliminate purely numerical terms from the</span>
+      <span 
+class="cmr-10x-x-109">candidates (so that you won&#8217;t get an expression like </span><span 
+class="cmmi-10x-x-109">xy </span><span 
+class="cmr-10x-x-109">+ 1 for a candidate, but </span><span 
+class="cmmi-10x-x-109">xy </span><span 
+class="cmr-10x-x-109">instead).</span>
+      <span 
+class="cmr-10x-x-109">The final step is to sort the pairs by length (number of terms) of the motivated unknown,</span>
+      <span 
+class="cmr-10x-x-109">the shortest being first. This is done because long candidates usually do not eliminate all of</span>
+      <span 
+class="cmr-10x-x-109">the variables. This option can be turned off by </span><span 
+class="cmmi-10x-x-109">SortByTermLength </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">False</span><span 
+class="cmr-10x-x-109">. </span></dd></dl>
+<a 
+ id="dx178-401001"></a>
+
+   <!--l. 281--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse112.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse110.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse110.html#tailNCBIGDOCse110.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse111.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#NCBIGDOCse111.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 281--><p class="indent">   <a 
+ id="tailNCBIGDOCse111.html"></a>   
+</body></html> 

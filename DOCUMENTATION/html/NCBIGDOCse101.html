@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>29.1 Play By Numbers</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 8--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse102.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse101.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch29.html#NCBIGDOCse101.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">29.1   </span></span> <a 
+ id="x164-36500029.1"></a><span 
+class="cmr-10x-x-109">Play By Numbers</span></h3>
+<!--l. 11--><p class="noindent"><span 
+class="cmr-10x-x-109">The Mathematica code and the C++ code both attach numbers to the polynomials which occur in the</span>
+<span 
+class="cmr-10x-x-109">running of the GB algorithm. While these numbers are not externally visible at least in the</span>
+<span 
+class="cmr-10x-x-109">commands described so far, they can be accessed by the user and are quite useful. One feature</span>
+<span 
+class="cmr-10x-x-109">is that they can save typing time for the user who chooses to select or deselect relations in</span>
+<span 
+class="cmr-10x-x-109">later runs of </span><span 
+class="cmti-10x-x-109">NCMakeGB</span><span 
+class="cmr-10x-x-109">. Also, if one is running the C++ version of the code, this will save</span>
+<span 
+class="cmr-10x-x-109">considerable computer time because the C++ version of the code only has to send a number</span>
+<span 
+class="cmr-10x-x-109">rather than the full polynomial to the Mathematica session. This time can be very significant</span>
+<span 
+class="cmr-10x-x-109">when the polynomial has a large number of terms. See also section </span><a 
+href="NCBIGDOCse102.html#x165-37000029.2"><span 
+class="cmr-10x-x-109">29.2</span><!--tex4ht:ref: section:history --></a><span 
+class="cmr-10x-x-109">. Recall the Option</span>
+<span 
+class="cmti-10x-x-109">ReturnRelationsToMma </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">False for NCMakeGB stops the partial GB calculated by the C++ program</span>
+<span 
+class="cmr-10x-x-109">from transferring the answer back to Mathematica. This is the typical prelude to a &#8220;play by numbers &#8221;</span>
+<span 
+class="cmr-10x-x-109">session.</span>
+
+<!--l. 34--><p class="indent">   <span 
+class="cmr-10x-x-109">Recall the option </span><span 
+class="cmti-10x-x-109">ReturnRelationsToMma</span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmti-10x-x-109">False </span><span 
+class="cmr-10x-x-109">for </span><span 
+class="cmti-10x-x-109">NCMakeGB </span><span 
+class="cmr-10x-x-109">stops the results from the</span>
+<span 
+class="cmti-10x-x-109">NCMakeGB </span><span 
+class="cmr-10x-x-109">command from being returned to Mathematica. This is typically the first step in &#8220;playing by</span>
+<span 
+class="cmr-10x-x-109">numbers&#8221;.</span>
+<!--l. 49--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">29.1.1   </span></span> <a 
+ id="x164-36600029.1.1"></a><span 
+class="cmr-10x-x-109">WhatAreGBNumbers[]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: </span><span 
+class="cmti-10x-x-109">WhatAreGBNumbers[] </span><span 
+class="cmr-10x-x-109">returns a list of numbers. These numbers correspond to the</span>
+      <span 
+class="cmr-10x-x-109">elements of </span><span 
+class="cmti-10x-x-109">WhatIsHistory </span><span 
+class="cmr-10x-x-109">which determine what the ending relations are. If one computes</span>
+      <span 
+class="cmti-10x-x-109">Map[(#[[2]])&amp;,WhatIsHistory[WhatAreGBNumbers[]]]  </span><span 
+class="cmr-10x-x-109">then  one  gets  the  same  result  as</span>
+      <span 
+class="cmti-10x-x-109">WhatIsPartialGB[]</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx164-366001"></a>
+<!--l. 63--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">29.1.2   </span></span> <a 
+ id="x164-36700029.1.2"></a><span 
+class="cmr-10x-x-109">WhatAreNumbers[]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: </span><span 
+class="cmti-10x-x-109">WhatAreNumbers[] </span><span 
+class="cmr-10x-x-109">returns a list of numbers. These numbers correspond to all of the</span>
+      <span 
+class="cmr-10x-x-109">polynomials which were used and retained inside the C++ code. One needs this command to</span>
+      <span 
+class="cmr-10x-x-109">make sense of the </span><span 
+class="cmti-10x-x-109">WhatIsHistory </span><span 
+class="cmr-10x-x-109">output. No argument is included because it can be applied</span>
+      <span 
+class="cmr-10x-x-109">only to the previous GB run.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2 </span></dd></dl>
+<a 
+ id="dx164-367001"></a>
+<!--l. 89--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">29.1.3   </span></span> <a 
+ id="x164-36800029.1.3"></a><span 
+class="cmr-10x-x-109">WhatIsPartialGB[aListOfIntegers]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description:   </span><span 
+class="cmti-10x-x-109">WhatIsPartialGB[aListOfIntegers]   </span><span 
+class="cmr-10x-x-109">returns   the   polynomials   corresponding   to</span>
+      <span 
+class="cmr-10x-x-109">the   entries   in   </span><span 
+class="cmti-10x-x-109">aListOfIntegers</span><span 
+class="cmr-10x-x-109">.   The   command   </span><span 
+class="cmti-10x-x-109">WhatIsPartialGB[]  </span><span 
+class="cmr-10x-x-109">is   equivalent   to</span>
+      <span 
+class="cmti-10x-x-109">WhatIsPartialGB[WhatAreGBNumbers[]]</span><span 
+class="cmr-10x-x-109">.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmti-10x-x-109">aListOfIntegers </span><span 
+class="cmr-10x-x-109">is a list of natural numbers.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations: Not available before NCAlgebra 1.2. The list of integers does not have</span>
+      <span 
+class="cmr-10x-x-109">to be a subset of the integers in </span><span 
+class="cmti-10x-x-109">WhatAreGBNumbers[]</span><span 
+class="cmr-10x-x-109">, it can also be a subset of the list of</span>
+      <span 
+class="cmr-10x-x-109">integers in </span><span 
+class="cmti-10x-x-109">WhatAreNumbers[]</span><span 
+class="cmr-10x-x-109">. In plain english this says that </span><span 
+class="cmmi-10x-x-109">WhatIsPartialGB </span><span 
+class="cmr-10x-x-109">can retrieve</span>
+      <span 
+class="cmr-10x-x-109">any polynomial which has occurred in the course of running the last call to </span><span 
+class="cmti-10x-x-109">NCMakeGB </span><span 
+class="cmr-10x-x-109">(not</span>
+      <span 
+class="cmr-10x-x-109">just the output of </span><span 
+class="cmti-10x-x-109">NCMakeGB</span><span 
+class="cmr-10x-x-109">). </span></dd></dl>
+<a 
+ id="dx164-368001"></a>
+<!--l. 107--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">29.1.4   </span></span> <a 
+ id="x164-36900029.1.4"></a><span 
+class="cmr-10x-x-109">NumbersFromHistory[aPolynomial,history]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: </span><span 
+class="cmti-10x-x-109">NumbersFromHistory[aPolynomial,history] </span><span 
+class="cmr-10x-x-109">returns all numbers </span><span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmr-10x-x-109">such that one of</span>
+      <span 
+class="cmr-10x-x-109">the elements of the list </span><span 
+class="cmmi-10x-x-109">history </span><span 
+class="cmr-10x-x-109">has the form </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n,aPolynomial,whatever,whatever</span><span 
+class="cmr-10x-x-109">2</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">where</span>
+      <span 
+class="cmr-10x-x-109">we do not care what the value of whatever or whatever2 is. Usually this function will return</span>
+      <span 
+class="cmr-10x-x-109">only a list with one integer in it.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments: </span><span 
+class="cmti-10x-x-109">aPolynomial </span><span 
+class="cmr-10x-x-109">is a polynomial. </span><span 
+class="cmti-10x-x-109">history </span><span 
+class="cmr-10x-x-109">is the output from the command </span><span 
+class="cmti-10x-x-109">WhatIsHistory</span>
+      <span 
+class="cmr-10x-x-109">(subsection </span><a 
+href="NCBIGDOCse102.html#x165-37100029.2.1"><span 
+class="cmr-10x-x-109">29.2.1</span><!--tex4ht:ref: command:WhatIsHistory:aListOfIntegers --></a><span 
+class="cmr-10x-x-109">).</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations:  </span></dd></dl>
+<a 
+ id="dx164-369001"></a>
+
+   <!--l. 110--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse102.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse101.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch29.html#NCBIGDOCse101.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 110--><p class="indent">   <a 
+ id="tailNCBIGDOCse101.html"></a>   
+</body></html> 

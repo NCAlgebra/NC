@@ -1,0 +1,143 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3059,         93]*)
+(*NotebookOutlinePosition[      3718,        117]*)
+(*  CellTagsIndexPosition[      3674,        113]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["\<\
+This is the symmetry group of the icosahedron.  We demonstrate how \
+we can reduce a word in the group using NCSimplifyAll.  The group has 3 \
+nontrivial defining relations, and we reduce the commutator to the fifth \
+power minus one.   NCSimplifyAll is a command that reduces the first \
+arguement using the rules in the second arguement, with the number of \
+iterations specified in the third arguement.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SNC[r, f, Inv[r], Inv[f]]\)], "Input"],
+
+Cell[BoxData[
+    \({False, False, False, False}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(SetMonomialOrder[{r, f, Inv[r], Inv[f]}]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSimplifyAll[{
+        r**f**Inv[r]**Inv[f]**r**f**Inv[r]**Inv[f]**r**f**Inv[r]**Inv[f]**r**
+            f**Inv[r]**Inv[f]**r**f**Inv[r]**Inv[f] - 1}, {
+        r**r**r**r**r -> 1, f**f -> 1, r**f**r**f**r**f -> 1, Inv[f]**f -> 1, 
+        f**Inv[f] -> 1, Inv[r]**r -> 1, r**Inv[r] -> 1}, 4]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \({0}\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+The answer is 0, meaning that the commutator raised to the fifth \
+power is equal to 1 in the group.\
+\>", "Text"]
+},
+FrontEndVersion->"X 3.0",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{520, 600},
+WindowMargins->{{199, Automatic}, {Automatic, 127}},
+Magnification->1.25
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1709, 49, 429, 7, 117, "Text"],
+
+Cell[CellGroupData[{
+Cell[2163, 60, 58, 1, 34, "Input"],
+Cell[2224, 63, 62, 1, 33, "Output"]
+}, Open  ]],
+Cell[2301, 67, 73, 1, 34, "Input"],
+
+Cell[CellGroupData[{
+Cell[2399, 72, 325, 5, 194, "Input"],
+Cell[2727, 79, 149, 3, 29, "Print"],
+Cell[2879, 84, 37, 1, 33, "Output"]
+}, Open  ]],
+Cell[2931, 88, 124, 3, 57, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

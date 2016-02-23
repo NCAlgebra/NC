@@ -1,0 +1,465 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     14560,        456]
+NotebookOptionsPosition[     12645,        387]
+NotebookOutlinePosition[     13211,        408]
+CellTagsIndexPosition[     13168,        405]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["BASIC DEMO OF NC GROEBNER BASIS COMMANDS", "Title"],
+
+Cell["\<\
+Evaluate the cell below at the beginning of every session using NCGB.\
+\>", "Text",
+ CellChangeTimes->{{3.5166265251883087`*^9, 3.51662652593643*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\n", 
+ RowBox[{"<<", "NCGB`", " "}]}], "Input",
+ CellChangeTimes->{{3.471816357441174*^9, 3.471816370117379*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{3.471816372702218*^9, 3.516626528968145*^9, 
+  3.5724005500964746`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.471816372702218*^9, 3.516626528968145*^9, 
+  3.572400550098194*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"You can now use \\\"<< NCAlgebra`\\\" to load NCAlgebra or \
+\"\>", "\[InvisibleSpace]", "\<\"\\\"<< NCGB`\\\" to load NCGB.\"\>"}],
+  SequenceForm[
+  "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
+   "\"<< NCGB`\" to load NCGB."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.471816372702218*^9, 3.516626528968145*^9, 
+  3.572400550100011*^9}],
+
+Cell[BoxData["\<\"You have already loaded NCAlgebra.m\"\>"], "Print",
+ CellChangeTimes->{3.471816372702218*^9, 3.516626528968145*^9, 
+  3.572400550101725*^9}],
+
+Cell[BoxData[
+ RowBox[{"LinkObject", "[", 
+  RowBox[{"\<\"/Users/mauricio/NC/NCGB/Binary/p9c/MacOSX-x86-64/p9c\"\>", ",",
+    "1294", ",", "6"}], "]"}]], "Print",
+ CellChangeTimes->{3.471816372702218*^9, 3.516626528968145*^9, 
+  3.572400550550425*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[TextData[{
+ "The next few cells are a very short demo and are useful in debugging an \
+initial installation of NCGB.   This is described in the NCAlgebra document.  \
+We demonstrate the NCMakeGB and NCProcess versions of NCGB. NCProcess sorts \
+the output; first we set options to make it\nrun fast",
+ StyleBox[".",
+  FontSlant->"Italic"]
+}], "Text",
+ CellChangeTimes->{{3.4718167402526407`*^9, 3.471816764245512*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+The next command is the raw GB producer;   No sorting of the output\
+\>", "Section",
+ CellChangeTimes->{{3.4718166496131487`*^9, 3.47181665090119*^9}, 
+   3.47181676727596*^9}],
+
+Cell[BoxData[{
+ RowBox[{"ClearMonomialOrderAll", "[", "]"}], "\n", 
+ RowBox[{"SetMonomialOrder", "[", " ", 
+  RowBox[{"b", ",", "a"}], " ", "]"}]}], "Input",
+ CellChangeTimes->{3.471816665421422*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCMakeGB", "[", 
+  RowBox[{
+   RowBox[{"{", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"b", "**", "b"}], " ", "-", "  ", 
+      RowBox[{"b", "**", "a"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"b", "**", "a", "**", "b"}], "-", "  ", 
+      RowBox[{"a", "**", "b", "**", "a"}]}]}], "  ", "}"}], ",", "2"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.471816647564184*^9, 3.471816663153556*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"b", "**", "a"}], "-", 
+    RowBox[{"b", "**", "b"}]}], ",", 
+   RowBox[{
+    RowBox[{"a", "**", "b", "**", "b"}], "-", 
+    RowBox[{"b", "**", "b", "**", "b"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.471816668064945*^9, 3.516626533723319*^9, 
+  3.572400550729813*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "NCProcess is a command that sorts the output of NCMakeGB and automatically \
+produces a ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    RowBox[{"L", 
+     StyleBox[
+      AdjustmentBox["A",
+       BoxBaselineShift->-0.4,
+       BoxMargins->{{-0.5, -0.3}, {0, 0}}],
+      FontSize->Smaller], "T", 
+     AdjustmentBox["E",
+      BoxBaselineShift->0.5,
+      BoxMargins->{{-0.3, 0}, {0, 0}}], "X"}],
+    SingleLetterItalics->False], TraditionalForm]]],
+ " created PDF display of the answer. "
+}], "Section",
+ CellChangeTimes->{{3.471816691366097*^9, 3.4718166938466043`*^9}, {
+  3.471816820372781*^9, 3.4718168933429956`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"ClearMonomialOrderAll", "[", "]"}], "\n", 
+ RowBox[{"SetMonomialOrder", "[", " ", 
+  RowBox[{"b", ",", "a"}], " ", "]"}]}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NCProcess", "[", " ", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"b", "**", "b"}], " ", "-", "  ", 
+       RowBox[{"b", "**", "a"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"b", "**", "a", "**", "b"}], "-", "  ", 
+       RowBox[{"a", "**", "b", "**", "a"}]}]}], "  ", "}"}], ",", "2", ",", 
+    "\n", "\t", "\"\<Example\>\"", ",", 
+    RowBox[{"SBByCat", "->", "False"}]}], "  ", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.471816688494472*^9, 3.471816719232152*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Outputting results to the stream \"\>", "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<Example.tex\>\"", ",", " ", "189"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["Example.tex", 189], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Outputting results to the stream ", 
+   Format[
+    OutputStream["Example.tex", 189], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.4718168960031843`*^9, 3.5166265371236362`*^9, 
+  3.572400550896837*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Done outputting results to the stream \"\>", 
+   "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<Example.tex\>\"", ",", " ", "189"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["Example.tex", 189], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Done outputting results to the stream ", 
+   Format[
+    OutputStream["Example.tex", 189], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.4718168960031843`*^9, 3.5166265371236362`*^9, 
+  3.572400550947301*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"eval `/usr/libexec/path_helper`; pdflatex \
+-output-directory=.  Example.tex 1> \\\"/tmp/mNCRun.out\\\" 2> \
+\\\"/tmp/mNCRun.err\\\"\"\>", "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "eval `/usr/libexec/path_helper`; pdflatex -output-directory=.  \
+Example.tex 1> \"/tmp/mNCRun.out\" 2> \"/tmp/mNCRun.err\"", "'..."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.4718168960031843`*^9, 3.5166265371236362`*^9, 
+  3.572400550949162*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"eval `/usr/libexec/path_helper`; open  \
+Example.pdf 1> \\\"/tmp/mNCRun.out\\\" 2> \\\"/tmp/mNCRun.err\\\"\"\>", 
+   "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "eval `/usr/libexec/path_helper`; open  Example.pdf 1> \"/tmp/mNCRun.out\" \
+2> \"/tmp/mNCRun.err\"", "'..."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.4718168960031843`*^9, 3.5166265371236362`*^9, 
+  3.572400551731049*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Note: Your TeX and Dvi files are located in the directory \
+\"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio\"\>"}],
+  SequenceForm[
+  "Note: Your TeX and Dvi files are located in the directory ", 
+   "/Users/mauricio"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.4718168960031843`*^9, 3.5166265371236362`*^9, 
+  3.572400551814589*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Here is a faster setting  of options for NCProcess
+which removes \"redundant \" output polynomials. \
+\>", "Section",
+ CellChangeTimes->{{3.471816691366097*^9, 3.4718166938466043`*^9}, {
+  3.471816787176162*^9, 3.471816787924424*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"ClearMonomialOrderAll", "[", "]"}], "\n", 
+ RowBox[{"SetMonomialOrder", "[", " ", 
+  RowBox[{"b", ",", "a"}], " ", "]"}]}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NCProcess", "[", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"b", "**", "b"}], " ", "-", "  ", 
+       RowBox[{"b", "**", "a"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"b", "**", "a", "**", "b"}], "-", "  ", 
+       RowBox[{"a", "**", "b", "**", "a"}]}]}], "}"}], ",", "2", ",", 
+    "\[IndentingNewLine]", "\"\<Example\>\"", ",", 
+    RowBox[{"SBByCat", "->", "False"}], " ", ",", " ", 
+    RowBox[{"RR", "\[Rule]", "False"}], ",", " ", 
+    RowBox[{"NCCV", "\[Rule]", "False"}]}], " ", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.471816555926425*^9, 3.4718165760087843`*^9}, {
+  3.471816803786468*^9, 3.471816810848085*^9}, {3.4718169214474783`*^9, 
+  3.471816929952773*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Outputting results to the stream \"\>", "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<Example.tex\>\"", ",", " ", "190"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["Example.tex", 190], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Outputting results to the stream ", 
+   Format[
+    OutputStream["Example.tex", 190], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.471816577220649*^9, 3.471816614921907*^9, {3.471816930714663*^9, 
+   3.471816958007321*^9}, 3.516626546737068*^9, 3.572400552023636*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Done outputting results to the stream \"\>", 
+   "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<Example.tex\>\"", ",", " ", "190"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["Example.tex", 190], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Done outputting results to the stream ", 
+   Format[
+    OutputStream["Example.tex", 190], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.471816577220649*^9, 3.471816614921907*^9, {3.471816930714663*^9, 
+   3.471816958007321*^9}, 3.516626546737068*^9, 3.5724005520317907`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"eval `/usr/libexec/path_helper`; pdflatex \
+-output-directory=.  Example.tex 1> \\\"/tmp/mNCRun.out\\\" 2> \
+\\\"/tmp/mNCRun.err\\\"\"\>", "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "eval `/usr/libexec/path_helper`; pdflatex -output-directory=.  \
+Example.tex 1> \"/tmp/mNCRun.out\" 2> \"/tmp/mNCRun.err\"", "'..."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.471816577220649*^9, 3.471816614921907*^9, {3.471816930714663*^9, 
+   3.471816958007321*^9}, 3.516626546737068*^9, 3.572400552046743*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"eval `/usr/libexec/path_helper`; open  \
+Example.pdf 1> \\\"/tmp/mNCRun.out\\\" 2> \\\"/tmp/mNCRun.err\\\"\"\>", 
+   "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "eval `/usr/libexec/path_helper`; open  Example.pdf 1> \"/tmp/mNCRun.out\" \
+2> \"/tmp/mNCRun.err\"", "'..."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.471816577220649*^9, 3.471816614921907*^9, {3.471816930714663*^9, 
+   3.471816958007321*^9}, 3.516626546737068*^9, 3.572400552317666*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Note: Your TeX and Dvi files are located in the directory \
+\"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio\"\>"}],
+  SequenceForm[
+  "Note: Your TeX and Dvi files are located in the directory ", 
+   "/Users/mauricio"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.471816577220649*^9, 3.471816614921907*^9, {3.471816930714663*^9, 
+   3.471816958007321*^9}, 3.516626546737068*^9, 3.572400552353215*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1151, 884},
+WindowMargins->{{Automatic, 40}, {Automatic, 37}},
+DockedCells->(FrontEndExecute[{
+   FrontEnd`NotebookApply[
+    FrontEnd`InputNotebook[], #, Placeholder]}]& ),
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+Magnification->1.5,
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 57, 0, 220, "Title"],
+Cell[627, 24, 160, 3, 46, "Text"],
+Cell[CellGroupData[{
+Cell[812, 31, 153, 3, 69, "Input"],
+Cell[CellGroupData[{
+Cell[990, 38, 184, 3, 30, "Print"],
+Cell[1177, 43, 273, 6, 30, "Print"],
+Cell[1453, 51, 412, 9, 30, "Print"],
+Cell[1868, 62, 158, 2, 30, "Print"],
+Cell[2029, 66, 251, 5, 30, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[2307, 75, 423, 8, 135, "Text"],
+Cell[CellGroupData[{
+Cell[2755, 87, 186, 4, 171, "Section"],
+Cell[2944, 93, 199, 4, 69, "Input"],
+Cell[CellGroupData[{
+Cell[3168, 101, 421, 12, 43, "Input"],
+Cell[3592, 115, 336, 10, 43, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3977, 131, 639, 19, 224, "Section"],
+Cell[4619, 152, 157, 3, 69, "Input"],
+Cell[CellGroupData[{
+Cell[4801, 159, 544, 14, 69, "Input"],
+Cell[CellGroupData[{
+Cell[5370, 177, 648, 18, 30, "Print"],
+Cell[6021, 197, 662, 19, 30, "Print"],
+Cell[6686, 218, 569, 12, 55, "Print"],
+Cell[7258, 232, 523, 12, 55, "Print"],
+Cell[7784, 246, 392, 9, 30, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8237, 262, 244, 5, 171, "Section"],
+Cell[8484, 269, 157, 3, 69, "Input"],
+Cell[CellGroupData[{
+Cell[8666, 276, 754, 18, 69, "Input"],
+Cell[CellGroupData[{
+Cell[9445, 298, 716, 19, 30, "Print"],
+Cell[10164, 319, 732, 20, 30, "Print"],
+Cell[10899, 341, 637, 13, 55, "Print"],
+Cell[11539, 356, 591, 13, 55, "Print"],
+Cell[12133, 371, 460, 10, 30, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

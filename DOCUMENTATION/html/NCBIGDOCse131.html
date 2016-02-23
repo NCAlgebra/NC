@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>45.3 Specializing to less general systems</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1248--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse130.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse130.html#tailNCBIGDOCse130.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse131.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch45.html#NCBIGDOCse131.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3   </span></span> <a 
+ id="x218-46700045.3"></a><span 
+class="cmr-10x-x-109">Specializing to less general systems</span></h3>
+<!--l. 1251--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3.1   </span></span> <a 
+ id="x218-46800045.3.1"></a><span 
+class="cmr-10x-x-109">Specializing to linear systems</span></h4>
+<!--l. 1254--><p class="noindent"><span 
+class="cmr-10x-x-109">To specialize to the linear case, just apply</span>
+<!--l. 1256--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;rulinearsys to make the systems linear</span>
+<!--l. 1258--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;rulinearEB to make the energy function quadratic</span>
+<!--l. 1261--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;ruGE1 then ruGEXY to make the energy function solve the Hinf problem (max entropy</span>
+<span 
+class="cmr-10x-x-109">soln.)</span>
+<!--l. 1264--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">rulinearall </span><span 
+class="cmr-10x-x-109">contains all of the rules above and is what we usually use.</span>
+<!--l. 1267--><p class="indent">   <span 
+class="cmr-10x-x-109">(See Glossary)</span>
+<!--l. 1273--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3.2   </span></span> <a 
+ id="x218-46900045.3.2"></a><span 
+class="cmr-10x-x-109">Specializing Using The Doyle Glover Khargonekar Francis Simplifying Assumptions</span></h4>
+<!--l. 1277--><p class="noindent"><span 
+class="cmr-10x-x-109">A special class of IA systems are those satisfying</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC141x.png" alt="      T                              T
+D12(x) C1(x)  = 0  and  B1(x)D21(x)   =  0  " class="math-display" ></center>
+<span 
+class="cmr-10x-x-109">denoted in this paper as the Doyle-Glover-Kargonekar-Francis (DGKF) simplifying assumptions (see</span>
+<span 
+class="cmr-10x-x-109">[DGKF]). These simplify algebra substantially so are good for tutorial purposes even though they are not</span>
+<span 
+class="cmr-10x-x-109">satisfied in actual control problems. Look for rules ruDGKF*.</span>
+<!--l. 1286--><p class="indent">   <span 
+class="cmr-10x-x-109">(See Glossary)</span>
+<!--l. 1288--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3.3   </span></span> <a 
+ id="x218-47000045.3.3"></a><span 
+class="cmr-10x-x-109">Demo: Linear Doyle Glover Kargonekar Francis Equations</span></h4>
+<!--l. 1292--><p class="noindent"><span 
+class="cmr-10x-x-109">The following demo verifies IAX and IAYI are same as DGX DGYI the Doyle Glover X and inv[Y] Riccati</span>
+<span 
+class="cmr-10x-x-109">equations in the special case of a linear system.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[24]:=&#x00A0;&lt;&lt;SYStems.m
+&#x00A0;<br />
+&#x00A0;<br />In[25]:=&#x00A0;NCE[IAX[x]//.rulinearall]
+&#x00A0;<br />
+&#x00A0;<br />Out[25]=&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[A]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />In[26]:=&#x00A0;Sub[%,x-&gt;1]
+&#x00A0;<br />
+&#x00A0;<br />Out[26]=&#x00A0;XX&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;tp[A]&#x00A0;**&#x00A0;XX&#x00A0;+&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;+&#x00A0;XX&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1
+&#x00A0;<br />
+&#x00A0;<br />In[27]:=&#x00A0;NCE[%-DGX]
+&#x00A0;<br />
+&#x00A0;<br />Out[27]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[28]:=&#x00A0;NCE[IAYI[x]//.rulinearall]
+&#x00A0;<br />
+&#x00A0;<br />Out[28]=&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[A]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x&#x00A0;-&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;**&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[YY]
+&#x00A0;<br />
+&#x00A0;<br />In[29]:=&#x00A0;Sub[%,x-&gt;1]
+&#x00A0;<br />
+&#x00A0;<br />Out[29]=&#x00A0;inv[YY]&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;tp[A]&#x00A0;**&#x00A0;inv[YY]&#x00A0;+&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;+&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;inv[YY]
+&#x00A0;<br />
+&#x00A0;<br />In[30]:=&#x00A0;NCE[YY**%**YY-DGY]
+&#x00A0;<br />
+&#x00A0;<br />Out[32]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[34]:=&#x00A0;Quit
+</div>
+</td></tr></table>
+<!--l. 1343--><p class="nopar">
+<!--l. 1346--><p class="indent">
+
+
+   <!--l. 1347--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse130.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse130.html#tailNCBIGDOCse130.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse131.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch45.html#NCBIGDOCse131.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 1347--><p class="indent">   <a 
+ id="tailNCBIGDOCse131.html"></a>   
+</body></html> 

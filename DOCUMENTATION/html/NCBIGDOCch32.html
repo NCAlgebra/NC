@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>32 Representing Noncommutative Expressions with Commutative Ones. </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 2--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch31.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#tailNCBIGDOCch31.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch32.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa7.html#NCBIGDOCch32.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;32</span></span><br><a 
+ id="x67-40400032"></a><span 
+class="cmr-10x-x-109">Representing Noncommutative Expressions with Commutative Ones. </span></h2>
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">32.0.3   </span></span> <a 
+ id="x67-40500032.0.3"></a><span 
+class="cmr-10x-x-109">NCXRepresent[aListOfExpressions, aListOfVariables, aListOfDims, aListOfFunctions,</span>
+<span 
+class="cmr-10x-x-109">aListOfExtraRules]</span></h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Aliases: </span><span 
+class="cmbx-10x-x-109">none</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Description: NCXRepresent[aListOfExpressions,aListOfVariables, aListOfDims,</span>
+      <span 
+class="cmr-10x-x-109">aListOfFunctions,aListOfExraRules] replaces each occurrence of the variables in the list</span>
+      <span 
+class="cmtt-10x-x-109">aListOfVariables </span><span 
+class="cmr-10x-x-109">with a matrix in commuting symbols of size specified in </span><span 
+class="cmtt-10x-x-109">aListOfDims </span><span 
+class="cmr-10x-x-109">in the set</span>
+      <span 
+class="cmr-10x-x-109">of relations in the first arguement. The argument </span><span 
+class="cmtt-10x-x-109">aListOfDims </span><span 
+class="cmr-10x-x-109">should be a list of pairs</span>
+      <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmtt-10x-x-109">n1,n2</span><span 
+class="cmsy-10x-x-109">} </span><span 
+class="cmr-10x-x-109">specifying the number of rows and columns of the corresponding variable. The</span>
+      <span 
+class="cmr-10x-x-109">fourth arguement is best described by an example. If one has the variable </span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">and also the</span>
+      <span 
+class="cmr-10x-x-109">indeterminate </span><span 
+class="cmmi-10x-x-109">F</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">], then often one wants the </span><span 
+class="cmmi-10x-x-109">F</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">] to be replaced by a symbolic matrix as</span>
+      <span 
+class="cmr-10x-x-109">well as </span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">. If </span><span 
+class="cmmi-10x-x-109">F </span><span 
+class="cmr-10x-x-109">appears in the fourth list, every occurrence of indeterminates </span><span 
+class="cmmi-10x-x-109">F</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmmi-10x-x-109">,F</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">y</span><span 
+class="cmr-10x-x-109">]</span>
+      <span 
+class="cmr-10x-x-109">etc. will be replaced by matrices of the same size as </span><span 
+class="cmmi-10x-x-109">x,y </span><span 
+class="cmr-10x-x-109">etc. with entries that look</span>
+      <span 
+class="cmr-10x-x-109">like </span><span 
+class="cmmi-10x-x-109">Fx</span><span 
+class="cmr-10x-x-109">11</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,Fy</span><span 
+class="cmr-10x-x-109">11</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">. </span><span 
+class="cmr-10x-x-109">This clearly is not appropriate for functions such as </span><span 
+class="cmmi-10x-x-109">Aj </span><span 
+class="cmr-10x-x-109">and </span><span 
+class="cmmi-10x-x-109">Tp</span>
+      <span 
+class="cmr-10x-x-109">denoting the adjoint and transpose of a symbol. But for other functions such as </span><span 
+class="cmmi-10x-x-109">Inv</span>
+      <span 
+class="cmr-10x-x-109">this is quite necessary. The output of NCXRepresent is a matrix for each relation in</span>
+      <span 
+class="cmtt-10x-x-109">aListOfExpressions</span><span 
+class="cmr-10x-x-109">.</span>
+      <br class="newline">
+      <br class="newline"><span 
+class="cmr-10x-x-109">The last (fifth) arguement is a sort of catch-all for unusual rules specific to the problem. The</span>
+      <span 
+class="cmr-10x-x-109">following are some favorites.</span>
+           <ul class="itemize1">
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">z </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">IdentityMatrix</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">n</span><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmmi-10x-x-109">. </span><span 
+class="cmr-10x-x-109">If some variable </span><span 
+class="cmmi-10x-x-109">z </span><span 
+class="cmr-10x-x-109">is to be replaced by an identity matrix</span>
+           <span 
+class="cmr-10x-x-109">of some size then one puts this rule in </span><span 
+class="cmtt-10x-x-109">aListOfExtraRules </span><span 
+class="cmr-10x-x-109">An important point: if</span>
+           <span 
+class="cmr-10x-x-109">constants appear in the list of relations, one MUST replace them with auxiliary variables</span>
+           <span 
+class="cmr-10x-x-109">and then use this last arguement to replace them with the appropriate multiple of the</span>
+           <span 
+class="cmr-10x-x-109">identity matrix.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">PrimeMat</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmmi-10x-x-109">,k</span><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmmi-10x-x-109">. </span><span 
+class="cmr-10x-x-109">This is an auxillary function built in to NCXRepresent</span>
+           <span 
+class="cmr-10x-x-109">that will replace a variables by a matrix consisting of distinct prime entries. To use this,</span>
+           <span 
+class="cmr-10x-x-109">one just puts the rule above in the list </span><span 
+class="cmtt-10x-x-109">aListOfExtraRules</span><span 
+class="cmr-10x-x-109">. This will replace </span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">with</span>
+           <span 
+class="cmr-10x-x-109">an </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x00D7; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmr-10x-x-109">matrix with prime entries beginning at the </span><span 
+class="cmmi-10x-x-109">kth </span><span 
+class="cmr-10x-x-109">prime.</span>
+           </li>
+           <li class="itemize"><span 
+class="cmr-10x-x-109">Any  other  replacement  rules  may  be  listed  in  </span><span 
+class="cmtt-10x-x-109">aListOfExtraRules</span><span 
+class="cmr-10x-x-109">,  such  as  </span><span 
+class="cmmi-10x-x-109">tp  </span><span 
+class="cmsy-10x-x-109">&#x2192;</span>
+           <span 
+class="cmmi-10x-x-109">Transpose </span><span 
+class="cmr-10x-x-109">or other hand-made rules replacing a variable by some specific matrix.</span></li></ul>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Arguments:      aListOfVariables,      aListOfDims,      aListOfExpressions,      aListOfFunctions,</span>
+      <span 
+class="cmr-10x-x-109">aListOfExtraRules</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">Comments / Limitations:  If </span><span 
+class="cmtt-10x-x-109">aListOfExpressions </span><span 
+class="cmr-10x-x-109">includes constant terms, one must first replace</span>
+      <span 
+class="cmr-10x-x-109">them with a variable and then use the optional list of rules to replace them with identity</span>
+      <span 
+class="cmr-10x-x-109">matrices of appropriate size. Mathematica does bad things to expressions that contain both</span>
+      <span 
+class="cmr-10x-x-109">a matrix and a constant, namely it adds the constant to each entry of the matrix. Any of the</span>
+      <span 
+class="cmr-10x-x-109">lists other than </span><span 
+class="cmtt-10x-x-109">aListOfExpressions </span><span 
+class="cmr-10x-x-109">may be left as the empty set. A warning: if a variable</span>
+      <span 
+class="cmr-10x-x-109">appears only as the arguement in a function in </span><span 
+class="cmtt-10x-x-109">aListOfFunctions </span><span 
+class="cmr-10x-x-109">one must still put the</span>
+      <span 
+class="cmr-10x-x-109">variable in the second arguement, and its size in the third. The reason is, its size must be</span>
+      <span 
+class="cmr-10x-x-109">specified somewhere for the function to work. </span><span 
+class="cmtt-10x-x-109">aListOfVariables </span><span 
+class="cmr-10x-x-109">should include only those</span>
+      <span 
+class="cmr-10x-x-109">variables that are to be replaced by purely symbolic matrices, and should not appear in the</span>
+      <span 
+class="cmr-10x-x-109">left-hand side of a rule in </span><span 
+class="cmtt-10x-x-109">aListOfOptionalRules</span><span 
+class="cmr-10x-x-109">.  </span></dd></dl>
+<a 
+ id="dx67-405001"></a>
+<!--l. 77--><p class="noindent"><span 
+class="cmbx-10x-x-109">Examples</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />&#x00A0;&#x00A0;In[99]:=&#x00A0;NCXRepresent[&#x00A0;&#x00A0;{A**B},&#x00A0;{&#x00A0;A,&#x00A0;B},&#x00A0;{&#x00A0;{2,1},&#x00A0;{1,1}&#x00A0;&#x00A0;},{},{}&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;Out[99]:=&#x00A0;{{{A11&#x00A0;B11},{A21&#x00A0;B11}}}
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;In[100]:=&#x00A0;NCXRepresent[&#x00A0;&#x00A0;{A**tp[B]},&#x00A0;{&#x00A0;A,&#x00A0;B},&#x00A0;{&#x00A0;{2,2},&#x00A0;{1,2}&#x00A0;},&#x00A0;{tp},{}&#x00A0;]&#x00A0;=
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;Out[100]:=&#x00A0;{{{A11&#x00A0;B11+A12&#x00A0;B12},{A21&#x00A0;B11+A22&#x00A0;B12}}}
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 91--><p class="nopar">
+
+   <!--l. 14--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch31.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch31.html#tailNCBIGDOCch31.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch32.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa7.html#NCBIGDOCch32.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 14--><p class="indent">   <a 
+ id="tailNCBIGDOCch32.html"></a>   
+</body></html> 

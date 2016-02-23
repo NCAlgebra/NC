@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>30.4 First Example</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 372--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse105.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse105.html#tailNCBIGDOCse105.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse106.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse106.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">30.4   </span></span> <a 
+ id="x171-38400030.4"></a><span 
+class="cmr-10x-x-109">First Example</span></h3>
+<!--l. 375--><p class="noindent"><span 
+class="cmr-10x-x-109">For example, after loading the files </span><span 
+class="cmmi-10x-x-109">NCGB.m</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmti-10x-x-109">SmallBasis3.m </span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109">&#167;</span><a 
+href="NCBIGDOCse76.html#x126-30800021.1.1"><span 
+class="cmr-10x-x-109">21.1.1</span><!--tex4ht:ref: command:SmallBasis:aListOfPolynomials:anotherListOfPolynomials:iter --></a><span 
+class="cmr-10x-x-109">) and </span><span 
+class="cmti-10x-x-109">RemoveRedundent.m</span>
+<span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109">&#167;</span><a 
+href="NCBIGDOCse103.html#x167-37800030.1.2"><span 
+class="cmr-10x-x-109">30.1.2</span><!--tex4ht:ref: command:RemoveRedundent --></a><span 
+class="cmr-10x-x-109">), we can execute the commands to compute a subset of a Gr</span><span 
+class="cmr-10x-x-109">öbner Basis for the set of relations</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">p,p </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">p</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[2]:=&#x00A0;SetKnowns[a,p]
+&#x00A0;<br />In[3]:=&#x00A0;{p**p-p,p**a**p&#x00A0;-&#x00A0;a**p}
+&#x00A0;<br />Out[3]=&#x00A0;{-p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;p,&#x00A0;-a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p}
+&#x00A0;<br />In[4]:=&#x00A0;NCMakeGB[%,4]
+</div>
+</td></tr></table>
+<!--l. 391--><p class="nopar">
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[4]=&#x00A0;{-p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;p,&#x00A0;-a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p\
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;,&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;-a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p}
+</div>
+</td></tr></table>
+<!--l. 422--><p class="nopar">
+<!--l. 427--><p class="indent">   <span 
+class="cmr-10x-x-109">The command </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SmallBasis</span></span></span> <span 
+class="cmr-10x-x-109">takes this (or any) set of relations and shrinks it down to a</span>
+<span 
+class="cmr-10x-x-109">smaller set of relations which generate the same ideal. One must have a monomial order set</span>
+<span 
+class="cmr-10x-x-109">because </span><span 
+class="cmti-10x-x-109">SmallBasis </span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109">&#167;</span><a 
+href="NCBIGDOCse76.html#x126-30800021.1.1"><span 
+class="cmr-10x-x-109">21.1.1</span><!--tex4ht:ref: command:SmallBasis:aListOfPolynomials:anotherListOfPolynomials:iter --></a><span 
+class="cmr-10x-x-109">) calls </span><span 
+class="cmti-10x-x-109">NCMakeGB</span><span 
+class="cmr-10x-x-109">. </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SmallBasis</span></span></span> <span 
+class="cmr-10x-x-109">returns a subset of the original</span>
+<span 
+class="cmr-10x-x-109">set of relations. In the example below the </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SmallBasis</span></span></span> <span 
+class="cmr-10x-x-109">command shows that the ideal</span>
+<span 
+class="cmr-10x-x-109">generated by the set </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">Out[4]</span></span></span> <span 
+class="cmr-10x-x-109">equals the ideal generated by </span><span 
+class="cmsy-10x-x-109">{-</span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">p,</span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">p </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">**</span><span 
+class="cmmi-10x-x-109">p</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">.</span>
+<span class="footnote-mark"><a 
+href="NCBIGDOC172.html#fn2x123"><sup >2</sup></a></span><a 
+ id="x171-384001f2"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;SmallBasis[%4,{},4];
+&#x00A0;<br />Out[5]=&#x00A0;{-p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;p,&#x00A0;-a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p}
+</div>
+</td></tr></table>
+<!--l. 451--><p class="nopar">
+<!--l. 455--><p class="indent">   <span 
+class="cmr-10x-x-109">Unfortunately in larger examples, </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SmallBasis</span></span></span> <span 
+class="cmr-10x-x-109">is very slow which prompts the development of a more</span>
+<span 
+class="cmr-10x-x-109">specialized command </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundant</span></span></span><span 
+class="cmr-10x-x-109">. This can be run only after </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">NCMakeGB</span></span></span> <span 
+class="cmr-10x-x-109">has been run because it</span>
+<span 
+class="cmr-10x-x-109">uses the history of how the GB was produced. This history is equivalent to a tree which tells what relation</span>
+<span 
+class="cmr-10x-x-109">came from what other relations </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundant</span></span></span> <span 
+class="cmr-10x-x-109">uses only tree search methods so it is faster than</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SmallBasis</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 467--><p class="indent">   <span 
+class="cmr-10x-x-109">As one sees below the information required for </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundant</span></span></span> <span 
+class="cmr-10x-x-109">is a subset of the last GB produced</span>
+<span 
+class="cmr-10x-x-109">in your session.</span>
+<!--l. 471--><p class="indent">   <span 
+class="cmr-10x-x-109">Before calling </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundent</span></span></span><span 
+class="cmr-10x-x-109">, one must acquire the history of the last GB produced in your</span>
+<span 
+class="cmr-10x-x-109">section. This takes 2 commands which we now illustrate and which we explain afterward.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;WhatAreNumbers[]
+&#x00A0;<br />Out[5]=&#x00A0;{1,&#x00A0;2,&#x00A0;3,&#x00A0;4,&#x00A0;5,&#x00A0;6,&#x00A0;7,&#x00A0;8,&#x00A0;9,&#x00A0;10,&#x00A0;11,&#x00A0;12,&#x00A0;13,&#x00A0;14,&#x00A0;15,&#x00A0;16,&#x00A0;17}
+&#x00A0;<br />In[6]:=&#x00A0;WhatIsHistory[%]
+</div>
+</td></tr></table>
+<!--l. 484--><p class="nopar">
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[6]=&#x00A0;{{1,&#x00A0;p&#x00A0;**&#x00A0;p&#x00A0;-&gt;&#x00A0;p,&#x00A0;{0,&#x00A0;0},&#x00A0;{}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{2,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{0,&#x00A0;0},&#x00A0;{}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{3,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{2,&#x00A0;2},&#x00A0;{2}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{4,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{3,&#x00A0;2},&#x00A0;{2}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{5,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{3,&#x00A0;3},&#x00A0;{3}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{6,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{5,&#x00A0;2},&#x00A0;{2}},&#x00A0;{7,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{5,&#x00A0;3},&#x00A0;{3}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{8,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{5,&#x00A0;4},&#x00A0;{4}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{9,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{5,&#x00A0;5},&#x00A0;{5}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{10,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{9,&#x00A0;2},&#x00A0;{2}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{11,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{9,&#x00A0;3},&#x00A0;{3}},
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{12,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{9,&#x00A0;4},&#x00A0;{4}}\
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;,&#x00A0;{13,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;-&gt;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{9,&#x00A0;5},&#x00A0;{5}},&#x00A0;{14,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{9,&#x00A0;6},&#x00A0;{6}},&#x00A0;{15,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;,&#x00A0;{9,&#x00A0;7},&#x00A0;{7}},&#x00A0;{16,&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{9,&#x00A0;8},&#x00A0;{8}},&#x00A0;{17,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p&#x00A0;-&gt;
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p,&#x00A0;{9,&#x00A0;9},&#x00A0;{9}}}
+</div>
+</td></tr></table>
+<!--l. 521--><p class="nopar">
+<!--l. 526--><p class="indent">   <span 
+class="cmr-10x-x-109">The call to </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">RemoveRedundent</span></span></span> <span 
+class="cmr-10x-x-109">is:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[7]:=&#x00A0;RemoveRedundent[Out[4],Out[6]];
+&#x00A0;<br />Out[7]=&#x00A0;{-p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;p,&#x00A0;-a&#x00A0;**&#x00A0;p&#x00A0;+&#x00A0;p&#x00A0;**&#x00A0;a&#x00A0;**&#x00A0;p}
+</div>
+</td></tr></table>
+<!--l. 533--><p class="nopar">
+<!--l. 537--><p class="indent">   <span 
+class="cmr-10x-x-109">The first command recalls the number associated to all of the relations which occurred during</span>
+<span 
+class="cmr-10x-x-109">the previous run of Mora&#8217;s algorithm. The second command gives the ancestory and other</span>
+<span 
+class="cmr-10x-x-109">information related to relations 1, 2,</span> <span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmr-10x-x-109">. One could have used any list of numbers (between 1 and 17)</span>
+<span 
+class="cmr-10x-x-109">as the argument to the </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">WhatIsHistory</span></span></span> <span 
+class="cmr-10x-x-109">command and obtained only the history of those</span>
+<span 
+class="cmr-10x-x-109">relations.</span>
+
+   <!--l. 549--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse107.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse105.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse105.html#tailNCBIGDOCse105.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse106.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch30.html#NCBIGDOCse106.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 549--><p class="indent">   <a 
+ id="tailNCBIGDOCse106.html"></a>  
+</body></html> 

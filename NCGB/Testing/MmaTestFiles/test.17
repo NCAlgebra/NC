@@ -1,0 +1,3 @@
+SetMonomialOrder[{a,b,c,d,e,f,g,h,i,j,k,l,m,n},1];
+data = {a**b**c**d - e,b**c**d**a - f,c**d**a**b - g,d**a**b**c - h};
+ans = NCMakeGB[data,5];

@@ -1,0 +1,545 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>24.2 Noncommutative Case: Gelfand-Kirillov dimension</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 27--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse89.html" >next</a>] [<a 
+href="NCBIGDOCse87.html" >prev</a>] [<a 
+href="NCBIGDOCse87.html#tailNCBIGDOCse87.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse88.html">tail</a>] [<a 
+href="NCBIGDOCch24.html#NCBIGDOCse88.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">24.2   </span> <a 
+ id="x142-33600024.2"></a>Noncommutative Case: Gelfand-Kirillov dimension</h3>
+<!--l. 28--><p class="noindent">Let <span 
+class="cmmi-12">R </span>= <span 
+class="cmmi-12">k &lt; x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,...,x</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmmi-12">&gt;</span>, the polynomial ring over <span 
+class="cmmi-12">k </span>in <span 
+class="cmmi-12">n </span>noncommuting variables. The <span 
+class="cmti-12">standard</span>
+<span 
+class="cmti-12">filtration </span>on <span 
+class="cmmi-12">R </span>is the sequence of vector subspaces of <span 
+class="cmmi-12">R</span>, <span 
+class="cmmi-12">R</span><sub ><span 
+class="cmmi-8">t</span></sub><span 
+class="cmmi-12">, </span>consisting of all polynomials of degree <span 
+class="cmmi-12">t</span>
+or less. If <span 
+class="cmmi-12">I </span>is an ideal of <span 
+class="cmmi-12">R</span>, set <span 
+class="cmmi-12">T </span>= <span 
+class="cmmi-12">R&#x2215;I. </span>Then the standard filtration <span 
+class="cmmi-12">T</span><sub ><span 
+class="cmmi-8">t</span></sub> on <span 
+class="cmmi-12">T </span>is the sequence
+<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">R</span><sub ><span 
+class="cmmi-8">t</span></sub><span 
+class="cmmi-12">&#x2215;</span>(<span 
+class="cmmi-12">I </span><span 
+class="cmsy-10x-x-120">&#x2229; </span><span 
+class="cmmi-12">R</span><sub ><span 
+class="cmmi-8">t</span></sub>)<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">. </span>If we define <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmmi-8">T</span> </sub>(<span 
+class="cmmi-12">t</span>) = dim <sub ><span 
+class="cmmi-8">k</span></sub>(<span 
+class="cmmi-12">T</span><sub ><span 
+class="cmmi-8">t</span></sub>)<span 
+class="cmmi-12">, </span>the Hilbert series of <span 
+class="cmmi-12">T </span>corresponding to this
+filtration is
+   <center class="math-display" >
+<img 
+src="NCBIGDOC100x.png" alt="&#x2211;
+    HT (t)zt
+t&#x2265;0  " class="math-display" ></center>
+where z is an indeterminate. The <span 
+class="cmti-12">standard gradation </span>on <span 
+class="cmmi-12">R </span>is the sequence <span 
+class="cmmi-12">R</span><sup ><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">s</span><span 
+class="cmr-8">)</span></sup> of vector subspaces
+of <span 
+class="cmmi-12">R </span>consisting of polynomials that are homogeneous of degree <span 
+class="cmmi-12">s. </span>This has the nice property
+that
+   <center class="math-display" >
+<img 
+src="NCBIGDOC101x.png" alt="     &#x2295;    (s)
+R =      R  .
+     s&#x2265;0  " class="math-display" ></center> Now
+<span 
+class="cmmi-12">T </span>may not have a gradation, but in the case that <span 
+class="cmmi-12">I </span>is a homogeneous ideal then <span 
+class="cmmi-12">T</span><sup ><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">s</span><span 
+class="cmr-8">)</span></sup> is defined
+similarly as in the filtration case. Note that <span 
+class="cmmi-12">T</span><sub ><span 
+class="cmmi-8">t</span></sub> = <span 
+class="cmex-10x-x-120">&#x22C3;</span>
+  <sub ><span 
+class="cmr-8">0</span><span 
+class="cmsy-8">&#x2264;</span><span 
+class="cmmi-8">s</span><span 
+class="cmsy-8">&#x2264;</span><span 
+class="cmmi-8">t</span></sub><span 
+class="cmmi-12">T</span><sup ><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">s</span><span 
+class="cmr-8">)</span></sup><span 
+class="cmmi-12">. </span>Setting <span 
+class="cmmi-12">H</span><sup ><span 
+class="cmmi-8">T</span> </sup>(<span 
+class="cmmi-12">s</span>) = dim <sub >
+<span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">T</span><sup ><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">s</span><span 
+class="cmr-8">)</span></sup><span 
+class="cmmi-12">, </span>the
+Hilbert series corresponding to this gradation is
+
+   <center class="math-display" >
+<img 
+src="NCBIGDOC102x.png" alt="&#x2211;
+    HT (s)zs.
+ s&#x2265;0  " class="math-display" ></center> By
+the note above we have that
+   <center class="math-display" >
+<img 
+src="NCBIGDOC103x.png" alt="          &#x2211;
+HT  (t) =      HT (s).
+         0&#x2264;s&#x2264;t  " class="math-display" ></center>
+Usually when we refer to the Hilbert series of an algebra we must be specific about the gradation
+or filtration we are using as there are many besides the standard ones. However, here we take the
+convention that if an algebra is graded we take the Hilbert series to mean the one with
+respect to the standard gradation, otherwise we are using the standard filtration. This
+should cause no confusion, as we are dealing strictly with finitely generated polynomial
+algebras.
+<!--l. 57--><p class="indent">   The following dimension has been around since the 1960s and has become a main tool in
+noncommutative algebra. It was first introduced by I.M. Gelfand and A.A. Kirillov in a paper in
+1966 describing work on enveloping algebras of Lie algebras. References for background and proofs
+of theorems are at the end of this chapter.
+   <div class="newtheorem">
+<!--l. 63--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Definition</span><span 
+class="cmbx-12">&#x00A0;24.1</span> </span><span 
+class="cmti-12">The Gelfand-Kirillov dimension of </span><span 
+class="cmmi-12">T </span><span 
+class="cmti-12">is defined to be</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC104x.png" alt="        log(HT--(t))-
+limt&#x2192; s&#x221E;up   log(t)  .
+" class="math-display" ></center>
+   </div>
+<!--l. 67--><p class="indent">   We need a little bit more notation. Let <span 
+class="cmmi-12">A </span>be an affine <span 
+class="cmmi-12">k</span>-algebra, that is, an algebra finitely
+generated over a field <span 
+class="cmmi-12">k. </span>Then <span 
+class="cmmi-12">A </span>= <span 
+class="cmmi-12">k</span>[<span 
+class="cmmi-12">V </span>] where <span 
+class="cmmi-12">V </span>= <span 
+class="cmmi-12">Span</span><sub ><span 
+class="cmmi-8">k</span></sub><span 
+class="cmsy-10x-x-120">{</span>1<span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">m</span></sub><span 
+class="cmsy-10x-x-120">} </span>for some <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x</span><sub ><span 
+class="cmmi-8">j</span></sub><span 
+class="cmsy-10x-x-120">}&#x2282; </span><span 
+class="cmmi-12">A.</span>
+Define
+   <center class="math-display" >
+<img 
+src="NCBIGDOC105x.png" alt="                                       &#x2211;
+V n = Spank{xj  xj &#x22C5;&#x22C5;&#x22C5;xj  : 1 &#x2264; ji &#x2264; m,   ji &#x2264; n}
+               1  2     s               i " class="math-display" ></center> so
+that <span 
+class="cmmi-12">k,V,V</span> <sup ><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,V</span> <sup ><span 
+class="cmmi-8">n</span></sup><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span> gives the standard filtration of <span 
+class="cmmi-12">A</span>. Note also that <span 
+class="cmmi-12">H</span><sub >
+<span 
+class="cmmi-8">A</span></sub>(<span 
+class="cmmi-12">t</span>) = dim <sub ><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">t</span></sup><span 
+class="cmmi-12">.</span>
+<!--l. 79--><p class="indent">   A quick fact about GK dimension: It is known that there exist algebras of GK dimension <span 
+class="cmmi-12">r </span>for
+any real number <span 
+class="cmmi-12">r </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-32.png" alt="&#x2208;" class="10-120x-x-32" />{</span>0<span 
+class="cmsy-10x-x-120">}&#x222A;{</span>1<span 
+class="cmsy-10x-x-120">}&#x222A; </span>[2<span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">&#x221E;</span>)<span 
+class="cmmi-12">, </span>and moreover no other number is attained.
+<!--l. 84--><p class="indent">   There are several reasons that the <span 
+class="cmti-12">Gelfand-Kirillov </span>(hereafter abreviated <span 
+class="cmmi-12">GK</span>) dimension is an
+apropriate measure of degrees of freedom. The following four standard theorems tell us that the
+GK dimension behaves much like the transcendance degree from commutative algebra. They follow
+easily from the definition, and a little combinitorics. Proofs can be found in the references at the
+end of the chapter. <div class="newtheorem">
+<!--l. 92--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Theorem</span><span 
+class="cmbx-12">&#x00A0;24.2</span> </span><span 
+class="cmti-12">If </span><span 
+class="cmmi-12">A </span><span 
+class="cmti-12">is a commutative algebra, then</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC106x.png" alt="GK(A)   = Krull(A).
+" class="math-display" ></center>
+   </div>
+<div class="newtheorem">
+<!--l. 95--><p class="noindent"><span class="head">
+
+<span 
+class="cmbx-12">Theorem</span><span 
+class="cmbx-12">&#x00A0;24.3</span> </span><span 
+class="cmti-12">If </span><span 
+class="cmmi-12">B </span><span 
+class="cmsy-10x-x-120">&#x2282; </span><span 
+class="cmmi-12">A </span><span 
+class="cmti-12">is a subalgebra, then</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC107x.png" alt="GK(B)   &#x2264; GK(A).
+" class="math-display" ></center>
+   </div>
+<div class="newtheorem">
+<!--l. 98--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Theorem</span><span 
+class="cmbx-12">&#x00A0;24.4</span> </span><span 
+class="cmti-12">If </span><span 
+class="cmmi-12">C </span><span 
+class="cmti-12">is a homomorphic image of </span><span 
+class="cmmi-12">A</span><span 
+class="cmti-12">, then</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC108x.png" alt="GK(C)   &#x2264; GK(A).
+" class="math-display" ></center>
+   </div>
+<div class="newtheorem">
+<!--l. 101--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Theorem</span><span 
+class="cmbx-12">&#x00A0;24.5</span> </span><span 
+class="cmti-12">Let </span><span 
+class="cmmi-12">A </span><span 
+class="cmti-12">be an affine algebra, with </span><span 
+class="cmmi-12">GK </span><span 
+class="cmti-12">dimension </span><span 
+class="cmmi-12">r</span><span 
+class="cmti-12">. Then </span><span 
+class="cmmi-12">GK</span>(<span 
+class="cmmi-12">A</span>[<span 
+class="cmmi-12">x</span>]) = <span 
+class="cmmi-12">r</span>+1<span 
+class="cmti-12">,</span>
+<span 
+class="cmti-12">where </span><span 
+class="cmmi-12">x </span><span 
+class="cmti-12">is a new central indeterminate.</span>
+   </div>
+<!--l. 105--><p class="noindent">The following theorem shows that the <span 
+class="cmmi-12">GK </span>dimension is well-behaved with respect to quotient
+algebras. <div class="newtheorem">
+<!--l. 107--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Theorem</span><span 
+class="cmbx-12">&#x00A0;24.6</span> </span><span 
+class="cmti-12">Let </span><span 
+class="cmmi-12">A </span><span 
+class="cmti-12">be an affine algebra and </span><span 
+class="cmmi-12">I </span><span 
+class="cmti-12">an ideal of </span><span 
+class="cmmi-12">A </span><span 
+class="cmti-12">that contains a left (or right)</span>
+<span 
+class="cmti-12">non-zero-divisor, </span><span 
+class="cmmi-12">c </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-32.png" alt="&#x2208;" class="10-120x-x-32" /> </span><span 
+class="cmmi-12">A. </span><span 
+class="cmti-12">Then</span>
+
+   <center class="math-display" >
+<img 
+src="NCBIGDOC109x.png" alt="GK(A  &#x2215;I) + 1 &#x2264; GK(A).  " class="math-display" ></center>
+<span 
+class="cmcsc-10x-x-120">P<span 
+class="small-caps">r</span><span 
+class="small-caps">o</span><span 
+class="small-caps">o</span><span 
+class="small-caps">f</span>.  </span><span 
+class="cmti-12">Using the notation above, suppose </span><span 
+class="cmmi-12">c </span><span 
+class="cmti-12">is a degree </span><span 
+class="cmmi-12">l </span><span 
+class="cmti-12">non-zero-divisor. Let </span><span 
+class="cmmi-12">C</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmti-12">be the vector</span>
+<span 
+class="cmti-12">space complement of</span>
+<br class="newline"><span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">n</span></sup> <span 
+class="cmsy-10x-x-120">&#x2229; </span><span 
+class="cmmi-12">I </span><span 
+class="cmti-12">in </span><span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">n</span></sup><span 
+class="cmmi-12">, </span><span 
+class="cmti-12">So </span><span 
+class="cmmi-12">C</span><sub >
+<span 
+class="cmmi-8">n</span></sub> <span 
+class="cmsy-10x-x-120">&#x2243; </span><span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">n</span></sup><span 
+class="cmmi-12">&#x2215;</span>(<span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">n</span></sup> <span 
+class="cmsy-10x-x-120">&#x2229; </span><span 
+class="cmmi-12">I</span>)<span 
+class="cmmi-12">. </span><span 
+class="cmti-12">Note that the sequence </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">n</span></sup><span 
+class="cmmi-12">&#x2215;</span>(<span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">n</span></sup> <span 
+class="cmsy-10x-x-120">&#x2229; </span><span 
+class="cmmi-12">I</span>)<span 
+class="cmsy-10x-x-120">}</span><sub>
+<span 
+class="cmmi-8">n</span><span 
+class="cmr-8">=1</span></sub><sup><span 
+class="cmsy-8">&#x221E;</span></sup> <span 
+class="cmti-12">gives a filtration</span>
+<span 
+class="cmti-12">of </span><span 
+class="cmmi-12">A&#x2215;I. </span><span 
+class="cmti-12">Now </span><span 
+class="cmmi-12">C</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmsy-10x-x-120">&#x2229;&#x2329;</span><span 
+class="cmmi-12">c</span><span 
+class="cmsy-10x-x-120">&#x232A; </span>= <span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">, </span><span 
+class="cmti-12">as </span><span 
+class="cmmi-12">C</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmsy-10x-x-120">&#x2229;</span><span 
+class="cmmi-12">I </span>= <span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">. </span><span 
+class="cmti-12">So </span><span 
+class="cmmi-12">C</span><sub ><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmsy-10x-x-120">&#x2295;</span><span 
+class="cmmi-12">C</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmmi-12">c</span><span 
+class="cmsy-10x-x-120">&#x2295;</span><img 
+src="NCBIGDOC110x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmsy-10x-x-120">&#x2295;</span><span 
+class="cmmi-12">C</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmmi-12">c</span><sup ><span 
+class="cmmi-8">n</span></sup> <span 
+class="cmsy-10x-x-120">&#x2282; </span><span 
+class="cmmi-12">V</span> <sup ><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">l</span><span 
+class="cmr-8">+1)</span></sup> <span 
+class="cmti-12">and the </span><span 
+class="cmsy-10x-x-120">&#x2295; </span><span 
+class="cmti-12">are</span>
+<span 
+class="cmti-12">valid as </span><span 
+class="cmmi-12">ac</span><sup ><span 
+class="cmmi-8">i</span></sup> = <span 
+class="cmmi-12">bc</span><sup ><span 
+class="cmmi-8">j</span></sup><span 
+class="cmmi-12">,i &lt; j </span><span 
+class="cmti-12">implies </span><span 
+class="cmmi-12">c</span><sup ><span 
+class="cmmi-8">i</span></sup>(<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">bc</span><sup ><span 
+class="cmmi-8">j</span><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">i</span></sup>) = 0 <span 
+class="cmti-12">and </span><span 
+class="cmmi-12">c </span><span 
+class="cmti-12">a left non-zero-divisor then gives</span>
+<span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">bc</span><sup ><span 
+class="cmmi-8">j</span><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">i</span></sup> = 0 <span 
+class="cmti-12">so </span><span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-32.png" alt="&#x2208;" class="10-120x-x-32" />&#x2329;</span><span 
+class="cmmi-12">c</span><span 
+class="cmsy-10x-x-120">&#x232A;&#x2229; </span><span 
+class="cmmi-12">C</span><sub >
+<span 
+class="cmmi-8">n</span></sub> <span 
+class="cmti-12">which implies </span><span 
+class="cmmi-12">a </span>= 0<span 
+class="cmmi-12">. </span><span 
+class="cmti-12">So</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC111x.png" alt="dimk(V  n(l+1)) &#x2265; n &#x22C5; dimk(Cn) =  dimk(V n&#x2215;(V n &#x2229; I)).  " class="math-display" ></center>
+<span 
+class="cmti-12">Thus </span><div class="eqnarray">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC112x.png" alt="                 GK(A   &#x2215;I) + 1 = lim sup log(dimk(Cn))- + 1 =
+                                   n&#x2192; &#x221E;      log(n)
+        log(dimk(Cn))    log(n)           log(n &#x22C5; dimk(Cn))
+ lim sup -------------- + ------ = lim sup ----------------- &#x2264;
+  n&#x2192; &#x221E;      log(n)       log(n)     n&#x2192;&#x221E;        log(n)
+        log(dimk(V--n(l+1)))          log(dimk(V-n))
+limn&#x2192;s&#x221E;up       log(n)       &#x2264;  limn&#x2192;su&#x221E;p     log(n)     = GK(A).
+" class="math-display" ></center>
+</div>
+
+   </div>
+<!--l. 142--><p class="indent">   The computation of the <span 
+class="cmmi-12">GK </span>dimension is in general difficult. Since the sequence whose limit
+is the <span 
+class="cmmi-12">GK </span>dimension converges very slowly, the only hope is to compute some of the
+coefficients of the Hilbert series and then guess a generating formula for them. Then the <span 
+class="cmmi-12">GK</span>
+dimension can be computed by taking the limit of this sequence. This may sound a bit <span 
+class="cmti-12">ad</span>
+<span 
+class="cmti-12">hoc</span>, but it has been implemented for several interesting algebras, an example of which
+follows.
+<!--l. 150--><p class="indent">   The algebra we consider is the algebra on two variables generated by the relations that say that
+any two degree 2 monomials commute with each other. The commands used here are explained in
+the section on Commands.
+<!--l. 155--><p class="indent">   We use the input file as follows:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&lt;&lt;NCHilbertCoefficient.m;
+&#x00A0;<br />
+&#x00A0;<br />SNC[x,y];
+&#x00A0;<br />
+&#x00A0;<br />SetMonomialOrder[{x,y}];
+&#x00A0;<br />
+&#x00A0;<br />rels&#x00A0;=&#x00A0;{x**x**y**y&#x00A0;-&#x00A0;y**y**x**x,&#x00A0;x**x**x**y&#x00A0;-&#x00A0;x**y**x**x,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-x**y**y**y&#x00A0;+&#x00A0;y**y**x**y,&#x00A0;x**x**y**x&#x00A0;-&#x00A0;y**x**x**x,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-y**x**y**y&#x00A0;+&#x00A0;y**y**y**x,&#x00A0;x**y**y**x&#x00A0;-&#x00A0;y**x**x**y};
+&#x00A0;<br />
+&#x00A0;<br />NCHilbertCoefficient[18,rels,3,ExpressionForm-&gt;Homogeneous];
+</div>
+</td></tr></table>
+<!--l. 169--><p class="nopar"> The call to <span 
+class="cmtt-12">NCMakeGB </span>finishes after only 2 iterations, so we know that the coefficients are
+being computed using a full Groebner basis, hence they are exact. The output is the
+following:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+{2,&#x00A0;4,&#x00A0;8,&#x00A0;10,&#x00A0;12,&#x00A0;16,&#x00A0;20,&#x00A0;25,&#x00A0;30,&#x00A0;36,&#x00A0;42,&#x00A0;49,&#x00A0;56,&#x00A0;64,&#x00A0;72,
+&#x00A0;<br />81,&#x00A0;90,&#x00A0;100}
+</div>
+</td></tr></table>
+<!--l. 178--><p class="nopar">
+<!--l. 180--><p class="indent">   After staring at this sequence for a while, one sees that every other term is a square and the
+intermediate terms are products of sucessive integers after the 6th term. A formula then is
+[<span 
+class="cmmi-12">n</span>][<span 
+class="cmmi-12">n </span>+ 1] where [<span 
+class="cmmi-12">a</span>] is the greatest integer less than or equal to <span 
+class="cmmi-12">a</span>. This is then clearly
+asymtotic to a quadratic polynomial. This sequence came from a gradation, so to get the
+sequence coming from the filtration we simply take the partial sums. This in turn will be
+asymtotic to a cubic polynomial in <span 
+class="cmmi-12">n</span>, which we will call <span 
+class="cmmi-12">P</span>(<span 
+class="cmmi-12">n</span>). So the <span 
+class="cmmi-12">GK </span>dimension of the
+quotient of the free polynomial algebra on two variables by the ideal generated by <span 
+class="cmtt-12">rels</span>
+is:
+   <center class="math-display" >
+<img 
+src="NCBIGDOC113x.png" alt="       log(P-(n))
+limn&#x2192;su&#x221E;p   log(n)   =  3.  " class="math-display" ></center> For
+further information on the function <span 
+class="cmtt-12">NCHilbertCoefficient </span>used above, see the documentation
+section.
+
+   <!--l. 196--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse89.html" >next</a>] [<a 
+href="NCBIGDOCse87.html" >prev</a>] [<a 
+href="NCBIGDOCse87.html#tailNCBIGDOCse87.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse88.html" >front</a>] [<a 
+href="NCBIGDOCch24.html#NCBIGDOCse88.html" >up</a>] </p></div>
+<!--l. 196--><p class="indent">   <a 
+ id="tailNCBIGDOCse88.html"></a>  
+</body></html> 

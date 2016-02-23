@@ -1,0 +1,9 @@
+more[thelist_List]:= Block[{temp,r},
+     For[r=1,r<=Length[thelist],r++,
+         Print[thelist[[r]]];
+         temp = InputString[
+                  "\n Press the return key or q then the return key"
+                           ];
+         If[temp==="q",r = Length[thelist]+1];
+     ];
+];

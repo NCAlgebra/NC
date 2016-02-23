@@ -1,0 +1,9 @@
+expr = (z**x + x**z)**(x + y)**w;
+
+vars = {x,y};
+
+Clear[fun];
+
+NCTermArray[expr,vars,fun];
+
+Print[Information[fun]];

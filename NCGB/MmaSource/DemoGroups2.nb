@@ -1,0 +1,317 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7353,        225]*)
+(*NotebookOutlinePosition[      8012,        249]*)
+(*  CellTagsIndexPosition[      7968,        245]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["\<\
+    In this example we begin with two groups we wish to show \
+isomorphic: H and G.   We imbed them into a free algebra by writing their \
+relations as generating polynomials for an ideal.  Note we must also include \
+the invertibility relations which always hold in a group. \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SNC[a, b, Inv[a], Inv[b]]\)], "Input"],
+
+Cell[BoxData[
+    \({False, False, False, False}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(GroupHrels = \n
+      \ \ \ \ {\ \(-1\) + a**Inv[a], \n\t\t\(-1\) + Inv[a]**a, \n\ \ \ \ 
+        \(-1\) + Inv[c]**c, \n\t\t\(-1\) + c**Inv[c], \n\ \ \ \ 
+        \(-1\) + a**a**a**c**c**c, \(-1\) + c**c**c**a**a**a, \n\ \ \ \ 
+        \(-1\) + Inv[a]**c**a**Inv[c]**Inv[c]**Inv[c]**Inv[c], \n\ \ \ \ 
+        \(-1\) + Inv[c]**a**c**Inv[a]**Inv[a]**Inv[a]**Inv[a], \n\ \ \ \ 
+        \(-1\) + a**a**a**a**a**a**a**a**a, \n\ \ \ \ 
+        \(-1\) + c**c**c**c**c**c**c**c**c}\n\)\)], "Input"],
+
+Cell[BoxData[
+    \({\(-1\) + a**Inv[a], \(-1\) + Inv[a]**a, \(-1\) + Inv[c]**c, 
+      \(-1\) + c**Inv[c], \(-1\) + a**a**a**c**c**c, 
+      \(-1\) + c**c**c**a**a**a, 
+      \(-1\) + Inv[a]**c**a**Inv[c]**Inv[c]**Inv[c]**Inv[c], 
+      \(-1\) + Inv[c]**a**c**Inv[a]**Inv[a]**Inv[a]**Inv[a], 
+      \(-1\) + a**a**a**a**a**a**a**a**a, \(-1\) + c**c**c**c**c**c**c**c**c}
+      \)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(GroupGrels
+       = {\n\ \ \ \ \(-1\) + a**Inv[a], \n\ \ \ \ \(-1\) + Inv[a]**a, \n
+        \ \ \ \ \(-1\) + b**Inv[b], \n\ \ \ \ \(-1\) + Inv[b]**b, \n\ \ \ \ 
+        \(-1\) + b**b**b, \n\ \ \ \ Inv[b]**a**b - a**a**a**a, \n\ \ \ \ 
+        \(-1\) + a**a**a**a**a**a**a**a**a}\)], "Input"],
+
+Cell[BoxData[
+    \({\(-1\) + a**Inv[a], \(-1\) + Inv[a]**a, \(-1\) + b**Inv[b], 
+      \(-1\) + Inv[b]**b, \(-1\) + b**b**b, Inv[b]**a**b - a**a**a**a, 
+      \(-1\) + a**a**a**a**a**a**a**a**a}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SNC[a, b, Inv[a], Inv[b]]\)], "Input"],
+
+Cell[BoxData[
+    \({False, False, False, False}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(ClearMonomialOrderAll[]; \n\nSetMonomialOrder[{a, b, Inv[a], Inv[b]}]; 
+    \)], "Input"],
+
+Cell["\<\
+     Next we apply NCProcess to the relations corresponding to the \
+group G.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ans1 = NCProcess[GroupGrels, 2, "\<reducedG\>"]\)], "Input"],
+
+Cell[BoxData[
+    \({{}, {a**Inv[a] \[Rule] 1, b**b \[Rule] Inv[b], b**Inv[b] \[Rule] 1, 
+        Inv[a]**a \[Rule] 1, a**a**b \[Rule] b**Inv[a]}, {\(-1\) + a**Inv[a], 
+        \(-Inv[b]\) + b**b, \(-1\) + b**Inv[b], \(-1\) + Inv[a]**a, 
+        \(-b**Inv[a]\) + a**a**b}}\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+This 3-tuple contains the resulting reduced basis for G as rules \
+and as relations.  Also one can view the postscript file DmGBG2A1.ps for the \
+spreadsheet corresponging to this run.
+
+Next we do the same for H.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ClearMonomialOrderAll[]\)], "Input"],
+
+Cell[BoxData[
+    \(SetMonomialOrder[{a, c, Inv[a], Inv[c]}]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ans2 = NCProcess[GroupHrels, 2, "\<reducedH\>"]\)], "Input"],
+
+Cell[BoxData[
+    \({{}, {a**Inv[a] \[Rule] 1, c**Inv[c] \[Rule] 1, Inv[a]**a \[Rule] 1, 
+        Inv[c]**c \[Rule] 1, c**a**Inv[c] \[Rule] Inv[a]**Inv[a], 
+        c**c**a \[Rule] a**Inv[c]}, {\(-1\) + a**Inv[a], \(-1\) + c**Inv[c], 
+        \(-1\) + Inv[a]**a, \(-1\) + Inv[c]**c, 
+        \(-Inv[a]**Inv[a]\) + c**a**Inv[c], \(-a**Inv[c]\) + c**c**a}}\)], 
+  "Output"]
+}, Open  ]],
+
+Cell["\<\
+By looking at the output files DmGBG2A1.ps and DmGBG2A2.ps we \
+notice that the number of nontrivial generating relations for both G and H \
+were reduced to only 2.  G started with 3, and H started with 6, so this is \
+encouraging information.  The simplicity of the relations makes it possible \
+to guess that we should make the substitution c->b**Inv[a]. Upon substitution \
+we want to check  that G and H are isomorphic.  This we do by reducing the \
+relations in H (after the subtitution) with the relations in G, and vice \
+versa.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ans3 = 
+      Substitute[Substitute[ans2, Inv[c] -> a**Inv[b]], c -> b**Inv[a]]\)], 
+  "Input"],
+
+Cell[BoxData[
+    \({{}, {a**Inv[a] \[Rule] 1, b**Inv[a]**a**Inv[b] \[Rule] 1, 
+        Inv[a]**a \[Rule] 1, a**Inv[b]**b**Inv[a] \[Rule] 1, 
+        b**Inv[a]**a**a**Inv[b] \[Rule] Inv[a]**Inv[a], 
+        b**Inv[a]**b**Inv[a]**a \[Rule] a**a**Inv[b]}, {\(-1\) + a**Inv[a], 
+        \(-1\) + b**Inv[a]**a**Inv[b], \(-1\) + Inv[a]**a, 
+        \(-1\) + a**Inv[b]**b**Inv[a], 
+        \(-Inv[a]**Inv[a]\) + b**Inv[a]**a**a**Inv[b], 
+        \(-a**a**Inv[b]\) + b**Inv[a]**b**Inv[a]**a}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(SetMonomialOrder[{a, b, Inv[a], Inv[b]}]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSimplifyAll[ans1[\([3]\)], ans3[\([3]\)], 4]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \({0, 0, 0, 0, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSimplifyAll[ans3[\([3]\)], ans1[\([3]\)], 4]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \({0, 0, 0, 0, 0, 0}\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+  This proves that H and G are isomorphic by double \
+containment.\
+\>", "Text"]
+},
+FrontEndVersion->"X 3.0",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{520, 600},
+WindowMargins->{{177, Automatic}, {Automatic, 102}},
+Magnification->1.25
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1709, 49, 300, 5, 97, "Text"],
+
+Cell[CellGroupData[{
+Cell[2034, 58, 58, 1, 34, "Input"],
+Cell[2095, 61, 62, 1, 33, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2194, 67, 513, 8, 294, "Input"],
+Cell[2710, 77, 392, 7, 185, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3139, 89, 311, 5, 174, "Input"],
+Cell[3453, 96, 209, 3, 90, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3699, 104, 58, 1, 34, "Input"],
+Cell[3760, 107, 62, 1, 33, "Output"]
+}, Open  ]],
+Cell[3837, 111, 109, 2, 74, "Input"],
+Cell[3949, 115, 101, 3, 37, "Text"],
+
+Cell[CellGroupData[{
+Cell[4075, 122, 80, 1, 34, "Input"],
+Cell[4158, 125, 286, 4, 109, "Output"]
+}, Open  ]],
+Cell[4459, 132, 236, 6, 117, "Text"],
+Cell[4698, 140, 56, 1, 34, "Input"],
+Cell[4757, 143, 73, 1, 34, "Input"],
+
+Cell[CellGroupData[{
+Cell[4855, 148, 80, 1, 34, "Input"],
+Cell[4938, 151, 371, 6, 166, "Output"]
+}, Open  ]],
+Cell[5324, 160, 559, 9, 157, "Text"],
+
+Cell[CellGroupData[{
+Cell[5908, 173, 115, 3, 74, "Input"],
+Cell[6026, 178, 499, 8, 242, "Output"]
+}, Open  ]],
+Cell[6540, 189, 73, 1, 34, "Input"],
+
+Cell[CellGroupData[{
+Cell[6638, 194, 79, 1, 34, "Input"],
+Cell[6720, 197, 149, 3, 29, "Print"],
+Cell[6872, 202, 49, 1, 33, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6958, 208, 79, 1, 34, "Input"],
+Cell[7040, 211, 149, 3, 29, "Print"],
+Cell[7192, 216, 52, 1, 33, "Output"]
+}, Open  ]],
+Cell[7259, 220, 90, 3, 37, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

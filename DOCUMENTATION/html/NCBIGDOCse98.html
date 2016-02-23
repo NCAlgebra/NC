@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>27.1 Beginners</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 21--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse99.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse98.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch27.html#NCBIGDOCse98.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">27.1   </span></span> <a 
+ id="x156-35500027.1"></a><span 
+class="cmr-10x-x-109">Beginners</span></h3>
+<!--l. 23--><p class="noindent"><span 
+class="cmr-10x-x-109">We do not trust our testing programs for NCGB much. They need work. The NCAlgebra test program is</span>
+<span 
+class="cmr-10x-x-109">excellent.</span>
+<!--l. 30--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x156-35600027.1"></a><span 
+class="cmr-10x-x-109">Basic Tests</span></h5>
+<!--l. 31--><p class="noindent"><span 
+class="cmr-10x-x-109">There is an old testing program. We do not support or upgrade it but find it quite useful. It is </span><span 
+class="cmbx-10x-x-109">GBTEST</span> <a 
+ id="dx156-356001"></a><a 
+ id="dx156-356002"></a>
+<span 
+class="cmr-10x-x-109">and the use of it is different as that described for </span><span 
+class="cmbx-10x-x-109">NCGBTEST </span><span 
+class="cmr-10x-x-109">above. First you load the file GBTest.m .</span>
+<span 
+class="cmr-10x-x-109">You run it by typing GBTEST[1,48] to run tests 1 thru 48, or for those with less patience GBTEST[12,28]</span>
+<span 
+class="cmr-10x-x-109">to run tests 12 thru 28, etc.</span>
+<!--l. 46--><p class="indent">   <span 
+class="cmr-10x-x-109">Yet another class of specialized tests is run simply by loading the file NCGBXTEST99.</span>
+<span 
+class="cmr-10x-x-109">These tests follow the format of the NCAlgebra tests NCTEST exactly. After you load the</span>
+<span 
+class="cmr-10x-x-109">file</span>
+   <div  
+class="centerline">                                                      <span 
+class="cmtt-10x-x-109">&lt;&lt;NCGBXTEST99</span>                                   </div>
+<!--l. 55--><p class="noindent"><span 
+class="cmr-10x-x-109">you hope to get True, True, printing to the screen. The tests in NCGBXTEST99 test programs</span>
+<span 
+class="cmr-10x-x-109">which run under NCGB and were developed in 1999. They give NCGB a pretty good work</span>
+<span 
+class="cmr-10x-x-109">out.</span>
+<!--l. 62--><p class="indent">   <span 
+class="cmr-10x-x-109">Someday we plan to integrate our testing procedures. As you see we now have a mixed bag of</span>
+<span 
+class="cmr-10x-x-109">tests.</span>
+<!--l. 66--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x156-35700027.1"></a><span 
+class="cmr-10x-x-109">Fancy test program- DOES NOT WORK</span></h5>
+<!--l. 68--><p class="noindent"><span 
+class="cmr-10x-x-109">THE COMPAREING STEP DOES NOT WORK in 2001.</span>
+<!--l. 70--><p class="indent">   <span 
+class="cmr-10x-x-109">When you download NCGB from the net, the directories </span><span 
+class="cmti-10x-x-109">TestProblems </span><span 
+class="cmr-10x-x-109">and  </span><span 
+class="cmti-10x-x-109">TestReference </span><span 
+class="cmr-10x-x-109">contain</span>
+<span 
+class="cmr-10x-x-109">many files. Those in </span><span 
+class="cmti-10x-x-109">TestProblems </span><span 
+class="cmr-10x-x-109">supply mathematical exercises to the testing programs. Those in</span>
+<span 
+class="cmti-10x-x-109">TestReference </span><span 
+class="cmr-10x-x-109">are the result of running NCGB in ideal circumstances.</span>
+<!--l. 78--><p class="indent">   <span 
+class="cmr-10x-x-109">To see if the version of NCGB you downloaded is complete and functioning load </span><span 
+class="cmbx-10x-x-109">NCGBTEST</span><span 
+class="cmr-10x-x-109">, If you</span>
+<span 
+class="cmr-10x-x-109">do not have write access to NC/NCGB/Testing you may have to change the variable </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">$NC$TestResults$</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+<span 
+class="cmr-10x-x-109">TestingEnvironment.m defines the default depository for Test Result files. This is described in greater</span>
+
+<span 
+class="cmr-10x-x-109">detail in Section </span><a 
+href="NCBIGDOCse100.html#x158-36000027.3.1"><span 
+class="cmr-10x-x-109">27.3.1</span><!--tex4ht:ref: set:test:environment --></a><span 
+class="cmr-10x-x-109">.</span>
+   <div  
+class="centerline">                                                  <span 
+class="cmbx-10x-x-109">Enter Mathematica</span>                                           </div>
+<div  
+class="centerline">                                     <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmbx-10x-x-109">NCGBTEST</span>                                    </div>
+<!--l. 94--><p class="indent">   <span 
+class="cmr-10x-x-109">Go get a cup of coffee or two cups of coffee or a good night&#8217;s sleep. When you come back look at the</span>
+<span 
+class="cmr-10x-x-109">resulting screen output by typing</span>
+   <div  
+class="centerline">                                                            <span 
+class="cmbx-10x-x-109">??test.</span>                                                   </div>
+<!--l. 99--><p class="indent">   <span 
+class="cmr-10x-x-109">You should get</span>
+   <div  
+class="centerline">                                                    <span 
+class="cmbx-10x-x-109">test #00 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                            </div>
+<div  
+class="centerline">                                    <span 
+class="cmbx-10x-x-109">test #01 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                    </div>
+<div  
+class="centerline">                                    <span 
+class="cmbx-10x-x-109">test #02 </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmbx-10x-x-109">True</span>                                    </div>
+<div  
+class="centerline">                                           <span 
+class="cmbx-10x-x-109">etc.</span>                                           </div>
+<!--l. 106--><p class="indent">   <span 
+class="cmr-10x-x-109">This tests your version of NCGB against answers obtained from the version we have. If they do not</span>
+<span 
+class="cmr-10x-x-109">agree there is a problem (possibly minor). One must be very careful with NCGBTEST. If paths are set</span>
+<span 
+class="cmr-10x-x-109">wrong, then it will find no files for either the reference answers or the new code you are testing and since</span>
+<span 
+class="cmr-10x-x-109">these behaviors are identical NCGBTEST will return True, True, etc. which is of course False, False,</span>
+<span 
+class="cmr-10x-x-109">False!</span>
+
+   <!--l. 119--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse99.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse98.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch27.html#NCBIGDOCse98.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 119--><p class="indent">   <a 
+ id="tailNCBIGDOCse98.html"></a>   
+</body></html> 

@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>19.2 NCCollectOnVars</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 151--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse70.html" >next</a>] [<a 
+href="NCBIGDOCse68.html" >prev</a>] [<a 
+href="NCBIGDOCse68.html#tailNCBIGDOCse68.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse69.html">tail</a>] [<a 
+href="NCBIGDOCch19.html#NCBIGDOCse69.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">19.2   </span> <a 
+ id="x117-26900019.2"></a>NCCollectOnVars</h3>
+<!--l. 153--><p class="noindent">An extremely important option for NCProcess is NCCollectOnVars. In addition to being an
+option, it can be called as a stand-alone command.
+<!--l. 197--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">19.2.1   </span> <a 
+ id="x117-27000019.2.1"></a>NCCollectOnVars[aListOfExpressions, aListOfVariables]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCCV</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   This is a command which &#8220;collects&#8221; certain products of each variables in
+      aListOfVariables, thus it returns a &#8221;collected polynomial&#8221;. In NCProcess, when this is
+      used via NCCV <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, the variables are typically chosen to be knowns. The command
+      <span 
+class="cmtt-12">NCCollectOnVars </span>itself has the option LeftsAndRights <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, which prints out a list
+      containing two lists
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC91x.png" alt="{{l1,...,lt},{r1,...,rt}} " class="math-display" ></center>
+      Here <span 
+class="cmmi-12">l</span><sub ><span 
+class="cmr-8">1</span></sub> is the left side of term 1 of &#8221;collected polynomial&#8221;, and <span 
+class="cmmi-12">r</span><sub ><span 
+class="cmr-8">1</span></sub> is the right side of term 1
+      of &#8221;collected polynomial&#8221;, etc. An example is <div class="eqnarray">
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC92x.png" alt="N CCollectOnV   ars[X  * *A * *B * *Z + Y * *A * *B * *Z +  A * *X + A  * *Y, {A, B}] =
+
+                                               (X + Y ) * *A * *B * *Z + A * *(X +  Y) .
+      " class="math-display" ></center>
+      </div>with LeftsAndRights <span 
+class="cmsy-10x-x-120">&#x2192; </span>False. When LeftsAndRights <span 
+class="cmsy-10x-x-120">&#x2192; </span>True, the output is
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC93x.png" alt="{{X  + Y,1}, {1,(X +  Y)}}
+      " class="math-display" ></center> More detail is in <a 
+href="#x117-26900019.2">19.2<!--tex4ht:ref: section:nccollectonvars --></a>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: aListOfExpressions is a list of expressions. aListOfVariables is a list of variables.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra1.2 </dd></dl>
+<a 
+ id="dx117-270002"></a>
+<a 
+ id="dx117-270003"></a>
+<!--l. 202--><p class="noindent">In the example <div class="eqnarray">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC94x.png" alt="N CCollectOnV   ars[X * *A * *B * *Z + Y  * *A * *B * *Z + A * *X  + A * *Y,{A, B}] =
+
+                                              (X  + Y ) * *A * *B * *Z + A * *(X + Y ).
+" class="math-display" ></center>
+</div>note that if we are in an environment where <span 
+class="cmmi-12">A </span>and <span 
+class="cmmi-12">B </span>have been set known and <span 
+class="cmmi-12">X</span>,<span 
+class="cmmi-12">Y </span>and <span 
+class="cmmi-12">Z </span>are
+unknowns, then one may omit the list of variables <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">A,B</span><span 
+class="cmsy-10x-x-120">} </span>in the call above. In other
+words,
+<a 
+ id="dx117-270005"></a>
+<a 
+ id="dx117-270006"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[2]:=&#x00A0;SetKnowns[A,B];
+&#x00A0;<br />In[3]:=&#x00A0;SetUnknowns[X,Y,Z];
+&#x00A0;<br />In[4]:=&#x00A0;NCCollectOnVars[X**A**B**Z&#x00A0;+&#x00A0;Y**A**B**Z&#x00A0;+&#x00A0;A**X+A**Y,{A,B}]
+&#x00A0;<br />
+&#x00A0;<br />Out[4]&#x00A0;:=&#x00A0;(X+Y)**A**B**Z&#x00A0;+&#x00A0;A**(X+Y)
+</div>
+</td></tr></table>
+<!--l. 224--><p class="nopar">
+<!--l. 228--><p class="indent">   Another example is if <span 
+class="cmmi-12">A</span>,<span 
+class="cmmi-12">Tp</span>[<span 
+class="cmmi-12">A</span>], <span 
+class="cmmi-12">B</span>1, <span 
+class="cmmi-12">Tp</span>[<span 
+class="cmmi-12">B</span>1] <span 
+class="cmmi-12">B</span>2, <span 
+class="cmmi-12">Tp</span>[<span 
+class="cmmi-12">B</span>2] <span 
+class="cmmi-12">C</span>1, <span 
+class="cmmi-12">Tp</span>[<span 
+class="cmmi-12">C</span>1] <span 
+class="cmmi-12">C</span>2 and <span 
+class="cmmi-12">Tp</span>[<span 
+class="cmmi-12">C</span>2] are knowns
+and all other variables are unknowns, then:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[2]&#x00A0;:=&#x00A0;long&#x00A0;=&#x00A0;E21&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;-&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E12&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;+&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22
+&#x00A0;<br />
+&#x00A0;<br />In[3]&#x00A0;:=&#x00A0;NCCollectOnVariables[long]
+&#x00A0;<br />
+&#x00A0;<br />Out[3]:=&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22)&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11)&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11)&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22)&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11)&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22)&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22)&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11)&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22
+</div>
+</td></tr></table>
+<!--l. 260--><p class="nopar">
+<!--l. 266--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x117-27100019.2.1"></a>The NCCollectOnVars option LeftAndRight <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span></h5>
+<!--l. 268--><p class="noindent">This prints out a list containing two lists
+   <center class="math-display" >
+<img 
+src="NCBIGDOC95x.png" alt="{{l1,...,lt},{r1,...,rt}} " class="math-display" ></center> Here
+<span 
+class="cmmi-12">l</span><sub ><span 
+class="cmr-8">1</span></sub> is the left side of term 1 of &#8221;collected polynomial&#8221;, and <span 
+class="cmmi-12">r</span><sub ><span 
+class="cmr-8">1</span></sub> is the right side of term 1 of &#8221;collected
+polynomial&#8221;, etc. In the example above the list of left sides is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;E22&#x00A0;**&#x00A0;iE12,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11),
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11),
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22),
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11),
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22),
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-E22&#x00A0;**&#x00A0;iE12,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-(E21&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11)
+</div>
+</td></tr></table>
+<!--l. 289--><p class="nopar">
+<!--l. 291--><p class="indent">   and the list of right sides is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+{
+&#x00A0;<br />&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22),&#x00A0;iE21&#x00A0;**&#x00A0;E22,
+&#x00A0;<br />-(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22),&#x00A0;&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22),
+&#x00A0;<br />&#x00A0;-&#x00A0;&#x00A0;(E12&#x00A0;-&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22),&#x00A0;-&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;}
+</div>
+</td></tr></table>
+<!--l. 298--><p class="nopar">
+<!--l. 301--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x117-27200019.2.1"></a>The NCProcess option NCCV <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span></h5>
+<a 
+ id="dx117-272001"></a>
+<!--l. 306--><p class="noindent">If the <span 
+class="cmmi-12">NCProcess </span>option <span 
+class="cmmi-12">NCCV </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True </span>is set <span 
+class="cmmi-12">NCProcess </span>will perform the sort of collection
+described in Section <a 
+href="#x117-26900019.2">19.2<!--tex4ht:ref: section:nccollectonvars --></a>. Specifically, NCCollectOnVars[ <span 
+class="cmmi-12">OutputofGroebnerBasisAlgorithms</span>,
+<span 
+class="cmmi-12">KnownIndeterminates </span>] is called before the result is output to <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>. This has been shown to
+be useful in the discovery of &#8220;motivated unknowns&#8221; as discussed in [HS].
+
+   <!--l. 335--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse70.html" >next</a>] [<a 
+href="NCBIGDOCse68.html" >prev</a>] [<a 
+href="NCBIGDOCse68.html#tailNCBIGDOCse68.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse69.html" >front</a>] [<a 
+href="NCBIGDOCch19.html#NCBIGDOCse69.html" >up</a>] </p></div>
+<!--l. 335--><p class="indent">   <a 
+ id="tailNCBIGDOCse69.html"></a>    
+</body></html> 

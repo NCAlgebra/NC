@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>3.3 Edit -  For those without Notebooks</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 131--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse10.html" >next</a>] [<a 
+href="NCBIGDOCse8.html" >prev</a>] [<a 
+href="NCBIGDOCse8.html#tailNCBIGDOCse8.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse9.html">tail</a>] [<a 
+href="NCBIGDOCch3.html#NCBIGDOCse9.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">3.3   </span> <a 
+ id="x16-210003.3"></a>Edit - &#x00A0;For those without Notebooks</h3>
+<!--l. 134--><p class="noindent">The failsafe command Edit does not get enough emphasis in the Mathematica literature. This
+command guarantees that Mathematica is never worse than a yellow pad. Whenever you have an
+expression &#8217;expr&#8217; and the functions at your disposal are not doing what you want just
+enter
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[102]:=Edit[expr]
+</div>
+</td></tr></table>
+<!--l. 140--><p class="nopar"> Mathematica throws you into a file containing expr. You can edit it with the vi or emacs editor or
+whatever is set up. Then exiting the file throws your edited expression into the Out[102] (see
+above). A truly remarkable feature is that
+<!--l. 146--><p class="noindent">YOU CAN EDIT Mathematica FUNCTIONS (INCLUDING NCAlgebra FUNCTIONS) INTO
+EXPR, APPLYING DIFFERENT FUNCTIONS TO DIFFERENT PARTS OF EXPR, then these
+are automatically executed when you finish editing the file. A tutorial example of this extremely
+powerful feature is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[32]=&#x00A0;x**y&#x00A0;+&#x00A0;x**z&#x00A0;+&#x00A0;x**y**x
+&#x00A0;<br />
+&#x00A0;<br />In[33]:=&#x00A0;Edit[%]
+</div>
+</td></tr></table>
+<!--l. 155--><p class="nopar"> A new screen comes up and you can use your resident editor on it.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+x**y&#x00A0;+&#x00A0;x**z&#x00A0;+&#x00A0;x**y**x
+</div>
+</td></tr></table>
+<!--l. 159--><p class="nopar"> I usually make another copy of the expression for safety sake and make edits on one of them,
+while commenting out the second so it does not get read by Mathematica. This way if I
+make errors, I still have the original expression to fall back on and check with. This is
+especially useful when dealing with complicated expressions. For example, you could
+write
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+NCCollect[x&#x00A0;**&#x00A0;y&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;z,x]&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**x;
+&#x00A0;<br />(*&#x00A0;x**y&#x00A0;+&#x00A0;x**z&#x00A0;+&#x00A0;x**y**x&#x00A0;*)
+</div>
+</td></tr></table>
+<!--l. 164--><p class="nopar"> Now quit editing and close the file, (e.g., :wq for vi).
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[33]:&#x00A0;x&#x00A0;**&#x00A0;(y&#x00A0;+&#x00A0;z)&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;x
+</div>
+</td></tr></table>
+<!--l. 169--><p class="nopar">
+
+   <!--l. 174--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse10.html" >next</a>] [<a 
+href="NCBIGDOCse8.html" >prev</a>] [<a 
+href="NCBIGDOCse8.html#tailNCBIGDOCse8.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse9.html" >front</a>] [<a 
+href="NCBIGDOCch3.html#NCBIGDOCse9.html" >up</a>] </p></div>
+<!--l. 174--><p class="indent">   <a 
+ id="tailNCBIGDOCse9.html"></a>  
+</body></html> 

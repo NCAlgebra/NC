@@ -1,0 +1,5384 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    156754,       5375]
+NotebookOptionsPosition[    150857,       5189]
+NotebookOutlinePosition[    151606,       5216]
+CellTagsIndexPosition[    151563,       5213]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Chapter 8
+The Bounded Real Lemma\
+\>", "Title",
+ CellChangeTimes->{{3.456597750022008*^9, 3.456597754123212*^9}}],
+
+Cell["Introduction", "Subsection"],
+
+Cell["\<\
+This example derives the Bounded Real Lemma for a linear system for a linear \
+system. this is a special case of this lemma for a more general system \
+described in [BHW].
+First we  load the program:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+<<NC`
+<<NCGB`\
+\>", "Input",
+ CellChangeTimes->{{3.456588915973853*^9, 3.456588920187735*^9}, 
+   3.4566889814715557`*^9, {3.456713203481213*^9, 3.4567132056075077`*^9}, {
+   3.516628031494062*^9, 3.516628036058823*^9}}],
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{
+  3.4565977973441963`*^9, 3.456598515707489*^9, 3.456609452591024*^9, {
+   3.456625466486779*^9, 3.456625478992478*^9}, 3.456688985956019*^9, 
+   3.4566891432102757`*^9, 3.456713206273138*^9, 3.4567132910090837`*^9, 
+   3.456714936106186*^9, 3.5166280292099457`*^9, {3.572399872912221*^9, 
+   3.5723998746050873`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.4565977973441963`*^9, 3.456598515707489*^9, 3.456609452591024*^9, {
+   3.456625466486779*^9, 3.456625478992478*^9}, 3.456688985956019*^9, 
+   3.4566891432102757`*^9, 3.456713206273138*^9, 3.4567132910090837`*^9, 
+   3.456714936106186*^9, 3.5166280292099457`*^9, {3.572399872912221*^9, 
+   3.5723998746075487`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"You can now use \\\"<< NCAlgebra`\\\" to load NCAlgebra or \
+\"\>", "\[InvisibleSpace]", "\<\"\\\"<< NCGB`\\\" to load NCGB.\"\>"}],
+  SequenceForm[
+  "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
+   "\"<< NCGB`\" to load NCGB."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.4565977973441963`*^9, 3.456598515707489*^9, 3.456609452591024*^9, {
+   3.456625466486779*^9, 3.456625478992478*^9}, 3.456688985956019*^9, 
+   3.4566891432102757`*^9, 3.456713206273138*^9, 3.4567132910090837`*^9, 
+   3.456714936106186*^9, 3.5166280292099457`*^9, {3.572399872912221*^9, 
+   3.572399874609173*^9}}],
+
+Cell[BoxData["\<\"You have already loaded NCGB.m\"\>"], "Print",
+ CellChangeTimes->{
+  3.4565977973441963`*^9, 3.456598515707489*^9, 3.456609452591024*^9, {
+   3.456625466486779*^9, 3.456625478992478*^9}, 3.456688985956019*^9, 
+   3.4566891432102757`*^9, 3.456713206273138*^9, 3.4567132910090837`*^9, 
+   3.456714936106186*^9, 3.5166280292099457`*^9, {3.572399872912221*^9, 
+   3.572399874610482*^9}}]
+}, Open  ]],
+
+Cell["System Definition", "Subsection",
+ FontFamily->"Helvetica"],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .5 
+MathPictureStart
+/Mabs {
+Mgmatrix idtransform
+Mtmatrix dtransform
+} bind def
+/Mabsadd { Mabs
+3 -1 roll add
+3 1 roll add
+exch } bind def
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.261905 0.47619 0.0119048 0.47619 [
+[ 0 0 0 0 ]
+[ 1 .5 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 0 m
+1 0 L
+1 .5 L
+0 .5 L
+closepath
+clip
+newpath
+0 g
+gsave
+.1 .3 -70 -12.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 25 translate 1 -1 scale
+63.000000 17.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+65.000000 17.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+(W) show
+77.000000 17.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Courier
+grestore
+gsave
+.9 .3 -81 -13.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 27 translate 1 -1 scale
+63.000000 19.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+63.000000 19.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+(out) show
+99.000000 19.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 20.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+1.000000 0.000000 0.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Courier
+grestore
+gsave
+.2619 .25 -61 -11.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 23 translate 1 -1 scale
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(F) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+73.000000 15.000000 moveto
+(H) show
+82.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(x) show
+92.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(,) show
+102.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(W) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+112.000000 15.000000 moveto
+(L) show
+121.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Math2Mono
+%%+ font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Math2Mono
+%%+ Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Math2Mono
+%%+ font Courier
+grestore
+gsave
+.7381 .25 -123 -11.5 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 23 translate 1 -1 scale
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+63.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(G) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+73.000000 15.000000 moveto
+(H) show
+82.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(x) show
+92.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(,) show
+102.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+(W) show
+%%IncludeResource: font Math2Mono
+%%IncludeFont: Math2Mono
+/Math2Mono findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+112.000000 15.000000 moveto
+(L) show
+121.000000 15.000000 moveto
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 15.000000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000000 0.000000 1.000000 setrgbcolor
+0.000000 0.000000 rmoveto
+1.000000 setlinewidth
+%%DocumentNeededResources: font Math2Mono
+%%+ font Courier
+%%DocumentSuppliedResources:
+%%DocumentNeededFonts: Math2Mono
+%%+ Courier
+%%DocumentSuppliedFonts:
+%%DocumentFonts: font Math2Mono
+%%+ font Courier
+grestore
+.2619 .25 m
+.16667 .27857 L
+.21429 .25 L
+.16667 .22143 L
+F
+.97619 .25 m
+.88095 .27857 L
+.92857 .25 L
+.88095 .22143 L
+F
+.5 Mabswid
+[ ] 0 setdash
+.2619 .0119 m
+.7381 .0119 L
+s
+.2619 .4881 m
+.7381 .4881 L
+s
+.2619 .0119 m
+.2619 .4881 L
+s
+.7381 .0119 m
+.7381 .4881 L
+s
+.02381 .25 m
+.2619 .25 L
+s
+.7381 .25 m
+.97619 .25 L
+s
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Figure-1",
+ ImageSize->{288, 144},
+ ImageMargins->{{43, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ FontFamily->"Helvetica",ImageCache->GraphicsData["CompressedBitmap", "\<\
+eJztWttOGzEQdRJnk5KE0pZrEbBFlXpXVVqEQLxCpV4+IkJI8IBaAb/Qh771
+j90d27GDc7wYkqAVDBK2c/bMzNmxd+yN8rN/eXJ81r88PernX8/7v09Ojy7y
+w1/nBdSoCVHLhRD/ckFjVQxto/9eUGM/XDP+Tt1fsv0xBIiGcs6KT38A9o3p
+TGc605nOdKYznelMvyf0LerqdGUp0fC1s8iNiy/Uac48oD92mHJYDrCXibwM
+xHjrFKwZSdvUZQTMAfoscNsD2FOAbY5h2wRa3lPbJGjFSN+hrkVAD9Cj0mlC
+1LObCI5aIJkfnKpFI3OXujYBM4AuyeEj4LtOrYYKjvHk/jOnqhWzDDAJsPlB
+QuNephrfYz4dH12yTL7FHnUdAjKb8iH6QJfoAPcNx1cj/NZEbgAtiUai7fTV
+ofR+onaGIFNsxD51XQK8oLT0hiGJ92QMuagMlN/W9LSg1H2mVi/Ergmh5+bA
+p05emcti3AaemwAL6z6pD5UShmxR1rStVoMsJq1AujSY+x1ZUjJcUjKWHDSN
+cwAbJzmpS3mcuEnLJyxs6WkqKx3oDBEvP7dL17TiJxWscDfFBQs96C0bJKBH
+tjh0fNAlGblGGNocuncrAR1PRjbY8BSFE4rmEC39RYAh29SM3UXcpFNceE5O
+T1MGsIWoXPxYLQG+vpV6rEjcNIL3UXLiLn9/oXSpjQFFSTdapZFe9ea5HwgQ
+64DcAZ5H3lom8C5WjXfLNZMaZXdPPbITq+zOoDFb/Z67S570rnqhVp2FLB1l
+AOs9wPC2FC+DoH70hsNXP7x/yKQb1a9i7aGHzAfNqhxqO0yW3hQzF1GPXlXC
+WWrhvbVhFb+aZDrTmc50pjOd6ROmD/8OTl+95sdzovYfMd/kOw==\
+\>"],ImageRangeCache->{{{104, 391}, {438.938, 295.938}} -> {-1.31733, \
+2.14799, 0.00734274, 0.00734274}}],
+
+Cell[TextData[{
+ "\twhere: \t\t ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["dx", "dt"], TraditionalForm]]],
+ "= F(x,W)  = Ax+BW ;\n\t\t\tout  = G(x,W) = Cx+DW."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Demo Initialisation", "Subsection",
+ FontFamily->"Helvetica"],
+
+Cell["\<\
+1) To set  all matrices  as noncommutative,we use the well known command:\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{
+   "F", ",", " ", "G", ",", " ", "A", ",", "B", ",", "x", ",", " ", "W", ",", 
+    "XX"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetNonCommutative", "[", 
+   RowBox[{
+   "F", ",", " ", "G", ",", " ", "A", ",", "B", ",", "C", ",", "D", ",", "x", 
+    ",", " ", "W", ",", "XX"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.4565978055390387`*^9, {3.456629226135385*^9, 3.4566292265864964`*^9}, {
+   3.456689195471423*^9, 3.4566892133665733`*^9}}],
+
+Cell["2) Next we define e, F, and G:", "Text",
+ CellChangeTimes->{{3.4566290662145844`*^9, 3.456629066445545*^9}, {
+  3.456629256573814*^9, 3.456629257524601*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"e", ",", "F", ",", "G"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"e", "[", "x_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"tp", "[", "x", "]"}], "**", "XX", "**", 
+   "x"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"F", "[", 
+   RowBox[{"x_", ",", "W_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"A", "**", "x"}], "+", 
+   RowBox[{"B", "**", "W"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"G", "[", 
+   RowBox[{"x_", ",", "W_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"C", "**", "x"}], "+", 
+   RowBox[{"D", "**", "W"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"tp", "[", "XX", "]"}], "=", "XX"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.456628903657454*^9, 3.456628903946307*^9}, {
+  3.456629059450326*^9, 3.456629062009542*^9}, {3.456689216359006*^9, 
+  3.456689223494755*^9}, {3.456689356085184*^9, 3.456689364266789*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["3) Recall definition of Energy Hamiltonian H", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"H", "=", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox["G", "T"], "G"}], "-", 
+   RowBox[{
+    SuperscriptBox["\[Gamma]", "2"], 
+    SuperscriptBox["W", "T"], "W"}], "+", 
+   FractionBox[
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"p", ".", "F"}], "+", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"p", ".", "F"}], ")"}], "T"]}], ")"}], "2"]}]}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.456628910873621*^9, 3.456628913009225*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["G", 
+   RowBox[{"1", "+", "T"}]], "-", 
+  RowBox[{
+   SuperscriptBox["W", 
+    RowBox[{"1", "+", "T"}]], " ", 
+   SuperscriptBox["\[Gamma]", "2"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"p", ".", "F"}], "+", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"p", ".", "F"}], ")"}], "T"]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{3.456688986368713*^9, 3.456689143317251*^9, 
+  3.4567149380575457`*^9, 3.5166280293410473`*^9, 3.572399891792618*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "\twhere\t\t           ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"e", "(", "x", ")"}], "=", 
+    RowBox[{
+     SuperscriptBox["x", "T"], "XX", " ", "x"}]}], TraditionalForm]]],
+ "\n                                               \t\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"p", "=", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox["\[Del]", "T"], 
+      RowBox[{"e", "(", "x", ")"}]}], "=", 
+     RowBox[{"2", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"x", ".", "XX"}], ")"}], "T"]}]}]}], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.456629091437866*^9, 3.4566290914382*^9}, {
+  3.4566291286098757`*^9, 3.456629156321241*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "p", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetNonCommutative", "[", " ", "p", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"p", "=", 
+  RowBox[{"tp", "[", 
+   RowBox[{"NCGrad", "[", 
+    RowBox[{
+     RowBox[{"e", "[", "x", "]"}], ",", "x"}], "]"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.456629166403963*^9, 3.456629200086522*^9}, {
+  3.456629249239711*^9, 3.456629253134728*^9}, {3.572399902615584*^9, 
+  3.572399904518471*^9}, {3.5724000906127443`*^9, 3.572400093135676*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCGrad", "::", "limited"}], "MessageName"], ":", 
+  " ", "\<\"NCGrad gives correct answers only for a limited class of \
+functions!\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.516628029420012*^9, 3.572399906265196*^9}],
+
+Cell[BoxData[
+ RowBox[{"2", " ", 
+  RowBox[{
+   RowBox[{"tp", "[", "x", "]"}], "**", "XX"}]}]], "Output",
+ CellChangeTimes->{{3.456629192438273*^9, 3.456629260866068*^9}, 
+   3.456688986523258*^9, 3.4566891433561487`*^9, 3.4566892301118793`*^9, 
+   3.4566893669435387`*^9, 3.456713217366502*^9, 3.456713301022277*^9, 
+   3.456714938165367*^9, 3.516628029423263*^9, 3.572399906266972*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"H", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"tp", "[", 
+     RowBox[{"G", "[", 
+      RowBox[{"x", ",", "W"}], "]"}], "]"}], "**", 
+    RowBox[{"G", "[", 
+     RowBox[{"x", ",", "W"}], "]"}]}], "-", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"\[Gamma]", "^", "2"}], ")"}], "*", 
+     RowBox[{
+      RowBox[{"tp", "[", "W", "]"}], "**", "W"}]}], ")"}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"p", "**", 
+       RowBox[{"F", "[", 
+        RowBox[{"x", ",", "W"}], "]"}]}], "+", 
+      RowBox[{
+       RowBox[{"tp", "[", 
+        RowBox[{"F", "[", 
+         RowBox[{"x", ",", "W"}], "]"}], "]"}], "**", 
+       RowBox[{"tp", "[", "p", "]"}]}]}], ")"}], "/", "2"}]}]}]], "Input",
+ CellChangeTimes->{{3.456628841103127*^9, 3.4566288484902887`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"tp", "[", "W", "]"}], "**", 
+      RowBox[{"tp", "[", "D", "]"}]}], "+", 
+     RowBox[{
+      RowBox[{"tp", "[", "x", "]"}], "**", 
+      RowBox[{"tp", "[", "C", "]"}]}]}], ")"}], "**", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"C", "**", "x"}], "+", 
+     RowBox[{"D", "**", "W"}]}], ")"}]}], "-", 
+  RowBox[{
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   RowBox[{
+    RowBox[{"tp", "[", "W", "]"}], "**", "W"}]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"tp", "[", "W", "]"}], "**", 
+          RowBox[{"tp", "[", "B", "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"tp", "[", "x", "]"}], "**", 
+          RowBox[{"tp", "[", "A", "]"}]}]}], ")"}], "**", "XX", "**", "x"}]}],
+      "+", 
+     RowBox[{"2", " ", 
+      RowBox[{
+       RowBox[{"tp", "[", "x", "]"}], "**", "XX", "**", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"A", "**", "x"}], "+", 
+         RowBox[{"B", "**", "W"}]}], ")"}]}]}]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{
+  3.456597816704867*^9, 3.4565985537786207`*^9, 3.45660946274222*^9, 
+   3.456625402215188*^9, 3.4566254884568977`*^9, {3.456628849390567*^9, 
+   3.456628875721013*^9}, 3.456628925568994*^9, {3.456629206239163*^9, 
+   3.456629231322237*^9}, 3.456629264156156*^9, 3.456688986570959*^9, 
+   3.456689143395276*^9, 3.456689231019266*^9, 3.456689367856278*^9, 
+   3.456713218235413*^9, 3.4567133024664717`*^9, 3.456714938270914*^9, 
+   3.516628029458969*^9, 3.572399912092535*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Lemma", "Subsection"],
+
+Cell[TextData[{
+ "Assume ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{
+     RowBox[{
+      FormBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          SuperscriptBox["\[Gamma]", "2"]}], "+", 
+         SuperscriptBox["D", "T"]}]}],
+       TraditionalForm], "D"}], ")"}], 
+    RowBox[{"-", "1"}]], TraditionalForm]]],
+ "Exists.\nThen the linear system described in the introduction above is:\n\t\
+i) finite gain dissipative with gain bounded by ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[Gamma]", "2"], TraditionalForm]]],
+ ".\n\t",
+ "ii) Energy function ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["x", 
+     RowBox[{"T", " "}]], "XX", " ", "x"}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell["if and only if", "Text",
+ FontColor->RGBColor[1, 0, 0]],
+
+Cell[TextData[{
+ "XX is a positive semi definite solution to the Riccati inequality:\n\nXXA",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"+", 
+      SuperscriptBox["A", "T"]}], "XX"}], "+", " ", 
+    RowBox[{
+     SuperscriptBox["C", "T"], "C", " "}]}], TraditionalForm]]],
+ "\n                              ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"+", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"XX", " ", "B"}], "+", " ", 
+        RowBox[{
+         SuperscriptBox["C", "T"], "D"}]}], ")"}]}], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", 
+         SuperscriptBox["\[Gamma]", "2"]}], "+", 
+        RowBox[{
+         SuperscriptBox["D", "T"], "D"}]}], ")"}], 
+      RowBox[{"-", "1"}]], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", 
+         SuperscriptBox["B", "T"]}], "XX"}], "-", 
+       RowBox[{
+        SuperscriptBox["D", "T"], "C"}]}], ")"}]}], " ", "\[LessEqual]", " ", 
+    "0"}], TraditionalForm]]]
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Proof (by computation)", "Subsection"],
+
+Cell[BoxData[
+ RowBox[{"NCSetOutput", "[", 
+  RowBox[{"All", "->", "True"}], "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["H"], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    SuperscriptBox["\[Gamma]", "2"]}], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["W", "\<\"T\"\>"],
+      HoldForm], ".", "W"}],
+    HoldForm]}], "+", 
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["W", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], ")"}], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"C", ".", "x"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{"D", ".", "W"}],
+       HoldForm]}], ")"}]}],
+   HoldForm], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{"A", ".", "x"}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{"B", ".", "W"}],
+           HoldForm]}], ")"}]}],
+       HoldForm]}], "+", 
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["W", "\<\"T\"\>"],
+             HoldForm], ".", 
+            TagBox[
+             SuperscriptBox["B", "\<\"T\"\>"],
+             HoldForm]}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["x", "\<\"T\"\>"],
+             HoldForm], ".", 
+            TagBox[
+             SuperscriptBox["A", "\<\"T\"\>"],
+             HoldForm]}],
+           HoldForm]}], ")"}], ".", "XX", ".", "x"}],
+       HoldForm]}]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{
+  3.4565978488408937`*^9, 3.45659856495506*^9, 3.456609470893038*^9, 
+   3.456609651880954*^9, {3.456625423855216*^9, 3.456625432271865*^9}, 
+   3.4566255025646276`*^9, 3.456628886813596*^9, 3.4566292829534073`*^9, 
+   3.456688986645455*^9, 3.4566891434564877`*^9, 3.456689235303952*^9, 
+   3.456689372330317*^9, 3.4567132219597282`*^9, 3.456713308004365*^9, 
+   3.456714938374051*^9, 3.5166280295378304`*^9, 3.5723999214750443`*^9}]
+}, Open  ]],
+
+Cell["\<\
+In[13] was obtain by clicking on \"SetOutputPretty\" in the Main Commands \
+section of NCPalette.\
+\>", "Text"],
+
+Cell["The strategy here is to maximize H and see if it is <0", "Text",
+ FontSize->16],
+
+Cell["\<\
+1) differentiate to find the \"worst\" input W. Use the commmand NCGrad on \
+the NCPalette or\
+\>", "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.572400099856887*^9, 3.572400099942848*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"gH", "=", 
+  RowBox[{"NCGrad", "[", 
+   RowBox[{"H", ",", "W"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.456625567384487*^9, 3.4566255682239323`*^9}, {
+  3.572399930645062*^9, 3.5723999310372334`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCGrad", "::", "limited"}], "MessageName"], ":", 
+  " ", "\<\"NCGrad gives correct answers only for a limited class of \
+functions!\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.516628029574379*^9, 3.572399932521329*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", "2"}], " ", "W", " ", 
+   SuperscriptBox["\[Gamma]", "2"]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", "W"}],
+    HoldForm]}]}]], "Output",
+ CellChangeTimes->{3.456597866299947*^9, 3.456597918472702*^9, 
+  3.4565980462331667`*^9, 3.456598152270933*^9, 3.4565985683245277`*^9, 
+  3.456609658809331*^9, 3.4566255290380583`*^9, 3.4566255689486628`*^9, 
+  3.456629291702365*^9, 3.456688986689383*^9, 3.4566891434960403`*^9, 
+  3.456689237742625*^9, 3.4566892992962112`*^9, 3.45668937496738*^9, 
+  3.456713224129016*^9, 3.4567133109728727`*^9, 3.456714938410431*^9, 
+  3.5166280295773582`*^9, 3.572399932543014*^9}]
+}, Open  ]],
+
+Cell["2) find the critical W using the command NCSolve or ", "Text",
+ CellFrame->True,
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"solW", "=", 
+  RowBox[{"NCSolve", "[", 
+   RowBox[{
+    RowBox[{"gH", "==", "0"}], ",", "W"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.456625561096733*^9, 3.456625572808165*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSolveLinear1", "::", "diagnostics"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\\n\\n      Since the following expression is not \
+zero\\n\\n                                                \[NoBreak]\\!\\(\\(\
+\\(2\\\\ \\(\\(\\(\\(tp[B]\\)\\) ** XX ** x\\)\\)\\)\\) + \\(\\(2\\\\ \
+\\(\\(\\(\\(tp[D]\\)\\) ** C ** x\\)\\)\\)\\) - \\(\\(4\\\\ \[Gamma]\\^2\\\\ \
+\\(\\(\\(\\(inv[\\(\\(\\(\\(2\\\\ \[Gamma]\\^2\\)\\) - \\(\\(2\\\\ \
+\\(\\(\\(\\(tp[D]\\)\\) ** D\\)\\)\\)\\)\\)\\)]\\)\\) ** \\(\\(tp[B]\\)\\) ** \
+XX ** x\\)\\)\\)\\) - \\(\\(4\\\\ \[Gamma]\\^2\\\\ \
+\\(\\(\\(\\(inv[\\(\\(\\(\\(2\\\\ \[Gamma]\\^2\\)\\) - \\(\\(2\\\\ \
+\\(\\(\\(\\(tp[D]\\)\\) ** D\\)\\)\\)\\)\\)\\)]\\)\\) ** \\(\\(tp[D]\\)\\) ** \
+C ** x\\)\\)\\)\\) + \\(\\(4\\\\ \\(\\(\\(\\(tp[D]\\)\\) ** D ** \
+\\(\\(inv[\\(\\(\\(\\(2\\\\ \[Gamma]\\^2\\)\\) - \\(\\(2\\\\ \
+\\(\\(\\(\\(tp[D]\\)\\) ** D\\)\\)\\)\\)\\)\\)]\\)\\) ** \\(\\(tp[B]\\)\\) ** \
+XX ** x\\)\\)\\)\\) + \\(\\(4\\\\ \\(\\(\\(\\(tp[D]\\)\\) ** D ** \
+\\(\\(inv[\\(\\(\\(\\(2\\\\ \[Gamma]\\^2\\)\\) - \\(\\(2\\\\ \
+\\(\\(\\(\\(tp[D]\\)\\) ** D\\)\\)\\)\\)\\)\\)]\\)\\) ** \\(\\(tp[D]\\)\\) ** \
+C ** x\\)\\)\\)\\)\\)\[NoBreak] \\n\\n      you may want to double check the \
+result. \\n\\n      This expression can be retrieved by the command \
+NCSolveCheck[]. \\n\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.456597870265209*^9, 3.456597920489512*^9, {3.456598041455988*^9, 
+   3.45659804776833*^9}, 3.456598153421825*^9, 3.4565985705071363`*^9, 
+   3.456609671713758*^9, {3.456625536699954*^9, 3.456625573380349*^9}, 
+   3.4566271260468063`*^9, 3.4566292936539383`*^9, 3.456688987097382*^9, 
+   3.4566891435383043`*^9, 3.4566892392570066`*^9, 3.456689304852168*^9, 
+   3.45668937653331*^9, 3.4567132269488688`*^9, 3.456714938958819*^9, 
+   3.516628029673449*^9, 3.5723999484711437`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"W", "\[Rule]", 
+   RowBox[{
+    RowBox[{"2", " ", 
+     TagBox[
+      RowBox[{
+       TagBox[
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"2", " ", 
+            SuperscriptBox["\[Gamma]", "2"]}], "-", 
+           RowBox[{"2", " ", 
+            TagBox[
+             RowBox[{
+              TagBox[
+               SuperscriptBox["D", "\<\"T\"\>"],
+               HoldForm], ".", "D"}],
+             HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+        HoldForm], ".", 
+       TagBox[
+        SuperscriptBox["B", "\<\"T\"\>"],
+        HoldForm], ".", "XX", ".", "x"}],
+      HoldForm]}], "+", 
+    RowBox[{"2", " ", 
+     TagBox[
+      RowBox[{
+       TagBox[
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"2", " ", 
+            SuperscriptBox["\[Gamma]", "2"]}], "-", 
+           RowBox[{"2", " ", 
+            TagBox[
+             RowBox[{
+              TagBox[
+               SuperscriptBox["D", "\<\"T\"\>"],
+               HoldForm], ".", "D"}],
+             HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+        HoldForm], ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", "C", ".", "x"}],
+      HoldForm]}]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.456597870284581*^9, 3.4565979204946833`*^9, {3.456598041460129*^9, 
+   3.456598047772562*^9}, 3.4565981534251823`*^9, 3.456598570527432*^9, 
+   3.4566096717330713`*^9, {3.4566255367208633`*^9, 3.45662557338391*^9}, 
+   3.456627126064747*^9, 3.4566292936746473`*^9, 3.45668898712501*^9, 
+   3.456689143540947*^9, 3.456689239288879*^9, 3.456689304855607*^9, 
+   3.456689376561252*^9, 3.456713226971518*^9, 3.456714939001548*^9, 
+   3.516628029690209*^9, 3.572399948473888*^9}]
+}, Open  ]],
+
+Cell["3) plug the critical point back into H ", "Text",
+ CellFrame->True,
+ Background->GrayLevel[0.849989]],
+
+Cell[BoxData[
+ RowBox[{"Hw1", "=", 
+  RowBox[{"Substitute", "[", 
+   RowBox[{"H", ",", "solW"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4566255842469893`*^9, 3.456625595608056*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           TagBox[
+            RowBox[{
+             TagBox[
+              SuperscriptBox["x", "\<\"T\"\>"],
+              HoldForm], ".", "XX", ".", "B", ".", 
+             TagBox[
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", " ", 
+                  SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                 RowBox[{"2", " ", 
+                  TagBox[
+                   RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                   HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+              HoldForm]}],
+            HoldForm]}], "+", 
+          RowBox[{"2", " ", 
+           TagBox[
+            RowBox[{
+             TagBox[
+              SuperscriptBox["x", "\<\"T\"\>"],
+              HoldForm], ".", 
+             TagBox[
+              SuperscriptBox["C", "\<\"T\"\>"],
+              HoldForm], ".", "D", ".", 
+             TagBox[
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", " ", 
+                  SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                 RowBox[{"2", " ", 
+                  TagBox[
+                   RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                   HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+              HoldForm]}],
+            HoldForm]}]}], ")"}], ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], ")"}], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"C", ".", "x"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{"D", ".", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", " ", 
+           TagBox[
+            RowBox[{
+             TagBox[
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", " ", 
+                  SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                 RowBox[{"2", " ", 
+                  TagBox[
+                   RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                   HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+              HoldForm], ".", 
+             TagBox[
+              SuperscriptBox["B", "\<\"T\"\>"],
+              HoldForm], ".", "XX", ".", "x"}],
+            HoldForm]}], "+", 
+          RowBox[{"2", " ", 
+           TagBox[
+            RowBox[{
+             TagBox[
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", " ", 
+                  SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                 RowBox[{"2", " ", 
+                  TagBox[
+                   RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                   HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+              HoldForm], ".", 
+             TagBox[
+              SuperscriptBox["D", "\<\"T\"\>"],
+              HoldForm], ".", "C", ".", "x"}],
+            HoldForm]}]}], ")"}]}],
+       HoldForm]}], ")"}]}],
+   HoldForm], "+", 
+  RowBox[{
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"2", " ", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["x", "\<\"T\"\>"],
+           HoldForm], ".", "XX", ".", "B", ".", 
+          TagBox[
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", 
+               SuperscriptBox["\[Gamma]", "2"]}], "-", 
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox["D", "\<\"T\"\>"],
+                  HoldForm], ".", "D"}],
+                HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+           HoldForm]}],
+         HoldForm]}], "+", 
+       RowBox[{"2", " ", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["x", "\<\"T\"\>"],
+           HoldForm], ".", 
+          TagBox[
+           SuperscriptBox["C", "\<\"T\"\>"],
+           HoldForm], ".", "D", ".", 
+          TagBox[
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", 
+               SuperscriptBox["\[Gamma]", "2"]}], "-", 
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox["D", "\<\"T\"\>"],
+                  HoldForm], ".", "D"}],
+                HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+           HoldForm]}],
+         HoldForm]}]}], ")"}], ".", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "2"}], " ", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", 
+               SuperscriptBox["\[Gamma]", "2"]}], "-", 
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox["D", "\<\"T\"\>"],
+                  HoldForm], ".", "D"}],
+                HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+           HoldForm], ".", 
+          TagBox[
+           SuperscriptBox["B", "\<\"T\"\>"],
+           HoldForm], ".", "XX", ".", "x"}],
+         HoldForm]}], "-", 
+       RowBox[{"2", " ", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", 
+               SuperscriptBox["\[Gamma]", "2"]}], "-", 
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox["D", "\<\"T\"\>"],
+                  HoldForm], ".", "D"}],
+                HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+           HoldForm], ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "C", ".", "x"}],
+         HoldForm]}]}], ")"}]}],
+    HoldForm]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{"A", ".", "x"}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{"B", ".", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"2", " ", 
+                    SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                    RowBox[{"2", " ", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+                  HoldForm], ".", 
+                 TagBox[
+                  SuperscriptBox["B", "\<\"T\"\>"],
+                  HoldForm], ".", "XX", ".", "x"}],
+                HoldForm]}], "+", 
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"2", " ", 
+                    SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                    RowBox[{"2", " ", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+                  HoldForm], ".", 
+                 TagBox[
+                  SuperscriptBox["D", "\<\"T\"\>"],
+                  HoldForm], ".", "C", ".", "x"}],
+                HoldForm]}]}], ")"}]}],
+           HoldForm]}], ")"}]}],
+       HoldForm]}], "+", 
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox["x", "\<\"T\"\>"],
+                  HoldForm], ".", "XX", ".", "B", ".", 
+                 TagBox[
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"2", " ", 
+                    SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                    RowBox[{"2", " ", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+                  HoldForm]}],
+                HoldForm]}], "+", 
+              RowBox[{"2", " ", 
+               TagBox[
+                RowBox[{
+                 TagBox[
+                  SuperscriptBox["x", "\<\"T\"\>"],
+                  HoldForm], ".", 
+                 TagBox[
+                  SuperscriptBox["C", "\<\"T\"\>"],
+                  HoldForm], ".", "D", ".", 
+                 TagBox[
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"2", " ", 
+                    SuperscriptBox["\[Gamma]", "2"]}], "-", 
+                    RowBox[{"2", " ", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+                  HoldForm]}],
+                HoldForm]}]}], ")"}], ".", 
+            TagBox[
+             SuperscriptBox["B", "\<\"T\"\>"],
+             HoldForm]}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["x", "\<\"T\"\>"],
+             HoldForm], ".", 
+            TagBox[
+             SuperscriptBox["A", "\<\"T\"\>"],
+             HoldForm]}],
+           HoldForm]}], ")"}], ".", "XX", ".", "x"}],
+       HoldForm]}]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{
+  3.456597879903911*^9, 3.456597924966873*^9, 3.456598049682267*^9, 
+   3.456598154557034*^9, 3.456598572912717*^9, 3.4566096790329123`*^9, {
+   3.4566255859899054`*^9, 3.4566255963408737`*^9}, 3.4566268939039087`*^9, 
+   3.456627081904559*^9, 3.456627150649926*^9, 3.456627439976828*^9, 
+   3.45662784193742*^9, 3.456628410280324*^9, 3.456629297631538*^9, 
+   3.45662943614316*^9, 3.456688987265461*^9, 3.456689143597168*^9, 
+   3.4566892409622593`*^9, 3.456689378108234*^9, 3.456713229505211*^9, 
+   3.456714939198455*^9, 3.516628029748214*^9, 3.5723999538803596`*^9}],
+
+Cell["4) Expand the expression using  NCExpand  ", "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.456629437332923*^9, 3.4566294404191628`*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Hw2", "=", 
+  RowBox[{"NCExpand", "[", "Hw1", "]"}]}]], "Input",
+ CellChangeTimes->{{3.4566255982164993`*^9, 3.456625600671754*^9}, {
+  3.456627451934388*^9, 3.4566275348065567`*^9}, {3.456629459415586*^9, 
+  3.456629465430662*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{"4", " ", 
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{"4", " ", 
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{"4", " ", 
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{"4", " ", 
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"4", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"2", " ", 
+          SuperscriptBox["\[Gamma]", "2"]}], "-", 
+         RowBox[{"2", " ", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}]}]], "Output",
+ CellChangeTimes->{
+  3.4565978824517603`*^9, 3.456597928394315*^9, {3.456598035072098*^9, 
+   3.4565980516483107`*^9}, 3.456598155872065*^9, 3.4565985755443277`*^9, 
+   3.45660968472197*^9, 3.456625601162058*^9, 3.4566265384177923`*^9, 
+   3.456626906212821*^9, 3.4566270869348783`*^9, 3.456627154680254*^9, 
+   3.456627441678607*^9, {3.4566274978141327`*^9, 3.456627535236081*^9}, 
+   3.456627843254809*^9, {3.4566284068912783`*^9, 3.456628411549117*^9}, {
+   3.4566285875631*^9, 3.456628604796248*^9}, 3.45662929956443*^9, {
+   3.4566294414205303`*^9, 3.456629465854162*^9}, 3.456688987336735*^9, 
+   3.456689143646187*^9, 3.456689243933981*^9, 3.456689380295186*^9, 
+   3.456714939282576*^9, 3.51662802981205*^9, 3.572399959574189*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "5) Substitute common term ",
+ Cell[BoxData[
+  TagBox[
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", " ", 
+      SuperscriptBox["\[Gamma]", "2"]}], "-", 
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        TagBox["D",
+         HoldForm], ".", "D"}],
+       HoldForm]}]}], ")"}],
+   HoldForm]],
+  CellChangeTimes->{
+   3.4565978824517603`*^9, 3.456597928394315*^9, {3.456598035072098*^9, 
+    3.4565980516483107`*^9}, 3.456598155872065*^9, 3.4565985755443277`*^9, 
+    3.45660968472197*^9, 3.456625601162058*^9, 3.4566265384177923`*^9, 
+    3.456626906212821*^9, 3.4566270869348783`*^9, 3.456627154680254*^9, 
+    3.456627441678607*^9, {3.4566274978141327`*^9, 3.456627535236081*^9}, 
+    3.456627843254809*^9, {3.4566284068912783`*^9, 3.456628411549117*^9}, {
+    3.4566285875631*^9, 3.456628604796248*^9}, 3.45662929956443*^9, {
+    3.4566294414205303`*^9, 3.456629465854162*^9}}],
+ "for ZZ"
+}], "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.456629437332923*^9, 3.4566294404191628`*^9}, {
+  3.456629502972006*^9, 3.456629534577416*^9}, {3.456629577156377*^9, 
+  3.4566295781476307`*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SNC", "[", "ZZ", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Hw3", "=", 
+  RowBox[{"Substitute", "[", 
+   RowBox[{"Hw2", ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"2", 
+       SuperscriptBox["\[Gamma]", "2"]}], "-", 
+      RowBox[{"2", 
+       RowBox[{
+        RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}]}], "->", 
+     RowBox[{"2", "ZZ"}]}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.456629541910488*^9, 3.4566295477739077`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "-", 
+  RowBox[{
+   SuperscriptBox["\[Gamma]", "2"], " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "B", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["B", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "B", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["B", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{{3.456629548463154*^9, 3.456629551489581*^9}, 
+   3.45668898739999*^9, 3.456689143695622*^9, 3.4566893822805843`*^9, 
+   3.456714939364142*^9, 3.516628029880662*^9, 3.5723999651354218`*^9}]
+}, Open  ]],
+
+Cell["\<\
+6) Collect common terms and Arrange the expression as much as possible\
+\>", "Text",
+ CellFrame->True,
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Hw4", "=", 
+  RowBox[{"NCCollectSymmetric", "[", 
+   RowBox[{"Hw3", ",", 
+    RowBox[{"inv", "[", "ZZ", "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Hw5", "=", 
+  RowBox[{"Substitute", "[", 
+   RowBox[{"Hw4", ",", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox["\[Gamma]", "2"], "-", 
+      RowBox[{
+       RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "->", "ZZ"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Hw6", "=", 
+  RowBox[{"NCCollectSymmetric", "[", 
+   RowBox[{"Hw5", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"inv", "[", "ZZ", "]"}], ",", "XX"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Hw7", "=", 
+  RowBox[{"NCCollectSymmetric", "[", 
+   RowBox[{"Hw6", ",", 
+    RowBox[{"{", "x", "}"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.4566258283076982`*^9, 3.4566258311046667`*^9}, {
+  3.456626659904489*^9, 3.456626664262307*^9}, {3.456626698011833*^9, 
+  3.456626707690181*^9}, {3.456626750273829*^9, 3.45662675074647*^9}, {
+  3.4566269355693073`*^9, 3.456626937959907*^9}, {3.456627549821714*^9, 
+  3.456627558341967*^9}, {3.456627594400989*^9, 3.4566276459873133`*^9}, {
+  3.456627708410451*^9, 3.456627732337953*^9}, {3.456627794786241*^9, 
+  3.456627795369444*^9}, {3.456627906746626*^9, 3.456627909681484*^9}, {
+  3.456628222007893*^9, 3.4566282238525267`*^9}, {3.456628453160719*^9, 
+  3.456628454791956*^9}, {3.456628485910288*^9, 3.456628518221509*^9}, {
+  3.4566294144568768`*^9, 3.456629414696045*^9}, {3.456629556464542*^9, 
+  3.456629556518879*^9}, {3.456629589624807*^9, 3.4566295899115973`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", "B"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", 
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["B", "\<\"T\"\>"],
+          HoldForm], ".", "XX", ".", "x"}],
+        HoldForm]}], "+", 
+      RowBox[{"2", " ", 
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["D", "\<\"T\"\>"],
+          HoldForm], ".", "C", ".", "x"}],
+        HoldForm]}]}], ")"}]}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "-", 
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", "B"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["\[Gamma]", "2"], "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", "x"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "C", ".", "x"}],
+       HoldForm]}], ")"}]}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{
+  3.456627647118801*^9, {3.456627711121208*^9, 3.456627732829356*^9}, 
+   3.456627796931402*^9, 3.4566278501423693`*^9, {3.456627910411462*^9, 
+   3.4566279246867847`*^9}, 3.4566280662172422`*^9, 3.456628224305798*^9, 
+   3.456628414530403*^9, {3.4566284553855677`*^9, 3.45662854874872*^9}, {
+   3.456628592540832*^9, 3.4566286075710087`*^9}, 3.456629302533786*^9, 
+   3.4566293634314213`*^9, 3.456629415307757*^9, {3.456629558210227*^9, 
+   3.45662957036589*^9}, 3.456688987515686*^9, 3.4566891437904243`*^9, 
+   3.456689384178996*^9, 3.4567149395081377`*^9, 3.516628029929419*^9, 
+   3.572399970672502*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["x", "\<\"T\"\>"],
+          HoldForm], ".", "XX", ".", "B"}],
+        HoldForm], "+", 
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["x", "\<\"T\"\>"],
+          HoldForm], ".", 
+         TagBox[
+          SuperscriptBox["C", "\<\"T\"\>"],
+          HoldForm], ".", "D"}],
+        HoldForm]}], ")"}], ".", 
+     TagBox[
+      SuperscriptBox["ZZ", "\<\"-1\"\>"],
+      HoldForm], ".", 
+     RowBox[{"(", 
+      RowBox[{
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["B", "\<\"T\"\>"],
+          HoldForm], ".", "XX", ".", "x"}],
+        HoldForm], "+", 
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["D", "\<\"T\"\>"],
+          HoldForm], ".", "C", ".", "x"}],
+        HoldForm]}], ")"}]}],
+    HoldForm]}], "+", 
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", "B"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", 
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["B", "\<\"T\"\>"],
+          HoldForm], ".", "XX", ".", "x"}],
+        HoldForm]}], "+", 
+      RowBox[{"2", " ", 
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox["D", "\<\"T\"\>"],
+          HoldForm], ".", "C", ".", "x"}],
+        HoldForm]}]}], ")"}]}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{
+  3.456627647118801*^9, {3.456627711121208*^9, 3.456627732829356*^9}, 
+   3.456627796931402*^9, 3.4566278501423693`*^9, {3.456627910411462*^9, 
+   3.4566279246867847`*^9}, 3.4566280662172422`*^9, 3.456628224305798*^9, 
+   3.456628414530403*^9, {3.4566284553855677`*^9, 3.45662854874872*^9}, {
+   3.456628592540832*^9, 3.4566286075710087`*^9}, 3.456629302533786*^9, 
+   3.4566293634314213`*^9, 3.456629415307757*^9, {3.456629558210227*^9, 
+   3.45662957036589*^9}, 3.456688987515686*^9, 3.4566891437904243`*^9, 
+   3.456689384178996*^9, 3.4567149395081377`*^9, 3.516628029929419*^9, 
+   3.572399970675414*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", "B"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", "x"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "C", ".", "x"}],
+       HoldForm]}], ")"}]}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{
+  3.456627647118801*^9, {3.456627711121208*^9, 3.456627732829356*^9}, 
+   3.456627796931402*^9, 3.4566278501423693`*^9, {3.456627910411462*^9, 
+   3.4566279246867847`*^9}, 3.4566280662172422`*^9, 3.456628224305798*^9, 
+   3.456628414530403*^9, {3.4566284553855677`*^9, 3.45662854874872*^9}, {
+   3.456628592540832*^9, 3.4566286075710087`*^9}, 3.456629302533786*^9, 
+   3.4566293634314213`*^9, 3.456629415307757*^9, {3.456629558210227*^9, 
+   3.45662957036589*^9}, 3.456688987515686*^9, 3.4566891437904243`*^9, 
+   3.456689384178996*^9, 3.4567149395081377`*^9, 3.516628029929419*^9, 
+   3.572399970677155*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"XX", ".", "A"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["A", "\<\"T\"\>"],
+         HoldForm], ".", "XX"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "C"}],
+       HoldForm]}], ")"}], ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"XX", ".", "B"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["ZZ", "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B", "\<\"T\"\>"],
+         HoldForm], ".", "XX"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "C"}],
+       HoldForm]}], ")"}], ".", "x"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{
+  3.456627647118801*^9, {3.456627711121208*^9, 3.456627732829356*^9}, 
+   3.456627796931402*^9, 3.4566278501423693`*^9, {3.456627910411462*^9, 
+   3.4566279246867847`*^9}, 3.4566280662172422`*^9, 3.456628224305798*^9, 
+   3.456628414530403*^9, {3.4566284553855677`*^9, 3.45662854874872*^9}, {
+   3.456628592540832*^9, 3.4566286075710087`*^9}, 3.456629302533786*^9, 
+   3.4566293634314213`*^9, 3.456629415307757*^9, {3.456629558210227*^9, 
+   3.45662957036589*^9}, 3.456688987515686*^9, 3.4566891437904243`*^9, 
+   3.456689384178996*^9, 3.4567149395081377`*^9, 3.516628029929419*^9, 
+   3.572399970678907*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "5) Plug",
+ Cell[BoxData[
+  TagBox[
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", " ", 
+      SuperscriptBox["\[Gamma]", "2"]}], "-", 
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        TagBox["D",
+         HoldForm], ".", "D"}],
+       HoldForm]}]}], ")"}],
+   HoldForm]],
+  CellChangeTimes->{
+   3.4565978824517603`*^9, 3.456597928394315*^9, {3.456598035072098*^9, 
+    3.4565980516483107`*^9}, 3.456598155872065*^9, 3.4565985755443277`*^9, 
+    3.45660968472197*^9, 3.456625601162058*^9, 3.4566265384177923`*^9, 
+    3.456626906212821*^9, 3.4566270869348783`*^9, 3.456627154680254*^9, 
+    3.456627441678607*^9, {3.4566274978141327`*^9, 3.456627535236081*^9}, 
+    3.456627843254809*^9, {3.4566284068912783`*^9, 3.456628411549117*^9}, {
+    3.4566285875631*^9, 3.456628604796248*^9}, 3.45662929956443*^9, {
+    3.4566294414205303`*^9, 3.456629465854162*^9}}],
+ "back"
+}], "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.456629437332923*^9, 3.4566294404191628`*^9}, {
+  3.456629502972006*^9, 3.456629534577416*^9}, {3.456629577156377*^9, 
+  3.4566296051681633`*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Hw8", "=", 
+  RowBox[{"Substitute", "[", 
+   RowBox[{"Hw7", ",", 
+    RowBox[{"ZZ", "->", 
+     RowBox[{
+      SuperscriptBox["\[Gamma]", "2"], "-", 
+      RowBox[{
+       RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}]}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"XX", ".", "A"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["A", "\<\"T\"\>"],
+         HoldForm], ".", "XX"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "C"}],
+       HoldForm]}], ")"}], ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"XX", ".", "B"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["\[Gamma]", "2"], "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B", "\<\"T\"\>"],
+         HoldForm], ".", "XX"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "C"}],
+       HoldForm]}], ")"}], ".", "x"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{3.456629608182024*^9, 3.45668898765697*^9, 
+  3.456689143938023*^9, 3.4566893861015472`*^9, 3.4566894294349117`*^9, 
+  3.456714939941442*^9, 3.51662803002439*^9, 3.572399975246863*^9}]
+}, Open  ]],
+
+Cell["\<\
+6) Now try to simplify the expression using NCSymplifyRational\
+\>", "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.456629611283935*^9, 3.456629621322824*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Hw9", "=", 
+  RowBox[{"NCSimplifyRational", "[", "Hw1", "]"}]}]], "Input",
+ CellChangeTimes->{{3.456627996242846*^9, 3.456628049080825*^9}, 
+   3.4566282191478977`*^9, {3.456629318646613*^9, 3.456629348262205*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        FractionBox[
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm], 
+         SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  FractionBox[
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          TagBox[
+           RowBox[{"D", ".", 
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm]}],
+           HoldForm], 
+          SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm], 
+   SuperscriptBox["\[Gamma]", "2"]], "+", 
+  FractionBox[
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm], 
+          SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm], 
+   SuperscriptBox["\[Gamma]", "2"]], "+", 
+  FractionBox[
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["C", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm], 
+          SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm], 
+   SuperscriptBox["\[Gamma]", "2"]]}]], "Output",
+ CellChangeTimes->{{3.456628018255567*^9, 3.456628067320636*^9}, 
+   3.456628225516466*^9, 3.4566285598940897`*^9, 3.4566286143518257`*^9, {
+   3.4566293070622253`*^9, 3.456629364493066*^9}, 3.456629614270711*^9, 
+   3.4566889878167*^9, 3.456689144157599*^9, 3.456689431071817*^9, 
+   3.456714940034417*^9, 3.5166280301387453`*^9, 3.572399981485834*^9}],
+
+Cell[BoxData[
+ RowBox[{"Hw10", "=", 
+  RowBox[{"NCCollectSymmetric", "[", 
+   RowBox[{"Hw9", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "XX"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"XX", ".", 
+        RowBox[{"(", 
+         RowBox[{"A", "+", 
+          FractionBox[
+           TagBox[
+            RowBox[{"B", ".", 
+             TagBox[
+              SuperscriptBox["D", "\<\"T\"\>"],
+              HoldForm], ".", 
+             TagBox[
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"1", "-", 
+                 FractionBox[
+                  TagBox[
+                   RowBox[{"D", ".", 
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm]}],
+                   HoldForm], 
+                  SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+              HoldForm], ".", "C"}],
+            HoldForm], 
+           SuperscriptBox["\[Gamma]", "2"]]}], ")"}]}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          FractionBox[
+           TagBox[
+            RowBox[{
+             TagBox[
+              SuperscriptBox["C", "\<\"T\"\>"],
+              HoldForm], ".", "D", ".", 
+             TagBox[
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{"1", "-", 
+                 FractionBox[
+                  TagBox[
+                   RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                   HoldForm], 
+                  SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+              HoldForm], ".", 
+             TagBox[
+              SuperscriptBox["B", "\<\"T\"\>"],
+              HoldForm]}],
+            HoldForm], 
+           SuperscriptBox["\[Gamma]", "2"]], "+", 
+          TagBox[
+           SuperscriptBox["A", "\<\"T\"\>"],
+           HoldForm]}], ")"}], ".", "XX"}],
+       HoldForm]}], ")"}], ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        FractionBox[
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm], 
+         SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  FractionBox[
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["x", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         FractionBox[
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm], 
+          SuperscriptBox["\[Gamma]", "2"]]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm], 
+   SuperscriptBox["\[Gamma]", "2"]]}]], "Output",
+ CellChangeTimes->{{3.456628018255567*^9, 3.456628067320636*^9}, 
+   3.456628225516466*^9, 3.4566285598940897`*^9, 3.4566286143518257`*^9, {
+   3.4566293070622253`*^9, 3.456629365210225*^9}, 3.45662961502459*^9, 
+   3.456688987902566*^9, 3.456689144228408*^9, 3.4566894318912697`*^9, 
+   3.456714940069956*^9, 3.516628030177897*^9, 3.57239998379615*^9}]
+}, Open  ]],
+
+Cell["\<\
+7) Even though the expressions do not look the same they are mathematically \
+equivalent\
+\>", "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.456629611283935*^9, 3.456629647594915*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCSimplifyRational", "[", 
+  RowBox[{"NCExpand", "[", 
+   RowBox[{"Hw10", "-", "Hw8"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.456628072827278*^9, 3.456628089870775*^9}, 
+   3.4566282833773193`*^9, {3.456629657364922*^9, 3.456629670812295*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Select", "::", "normal"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Nonatomic expression expected at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] in \[NoBreak]\\!\\(Select[\\(\\(Null, \
+\\(\\(\\(\\(! \\(\\(#1 === 0\\)\\)\\)\\) &\\)\\)\\)\\)]\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/normal\\\", \
+ButtonNote -> \\\"Select::normal\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.45662967120173*^9, 3.456629673864593*^9}, 
+   3.456688988101326*^9, 3.456689144366869*^9, 3.4566894332363663`*^9, 
+   3.4567149401903973`*^9, 3.516628030252138*^9, 3.572399990719315*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Last", "::", "nolast"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\[NoBreak]\\!\\({}\\)\[NoBreak] has a length of zero and \
+no last element. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Last/nolast\
+\\\", ButtonNote -> \\\"Last::nolast\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.45662967120173*^9, 3.456629673864593*^9}, 
+   3.456688988101326*^9, 3.456689144366869*^9, 3.4566894332363663`*^9, 
+   3.4567149401903973`*^9, 3.516628030252138*^9, 3.5723999907559223`*^9}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{{3.45662807705413*^9, 3.456628092851112*^9}, 
+   3.4566282285440073`*^9, {3.456628284046699*^9, 3.456628286804105*^9}, 
+   3.456628567739121*^9, 3.456628616058897*^9, 3.456629366254706*^9, {
+   3.456629653393045*^9, 3.456629673907868*^9}, 3.456688988246585*^9, 
+   3.456689144442977*^9, 3.456689433313229*^9, 3.456714940306735*^9, 
+   3.5166280303896637`*^9, 3.5723999907886677`*^9}]
+}, Open  ]],
+
+Cell["8) Let x=1", "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.4566296770991497`*^9, 3.456629677395248*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Substitute", "[", 
+  RowBox[{"Hw8", ",", 
+   RowBox[{"x", "->", "1"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.456626978683078*^9, 3.456626979559285*^9}, {
+  3.456628202149054*^9, 3.4566282087051888`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{"XX", ".", "A"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "C"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"XX", ".", "B"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["\[Gamma]", "2"], "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B", "\<\"T\"\>"],
+         HoldForm], ".", "XX"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "C"}],
+       HoldForm]}], ")"}]}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{
+  3.456597905429749*^9, 3.456598231459817*^9, {3.456626974161522*^9, 
+   3.456626979951746*^9}, 3.456627093339326*^9, {3.456628203400794*^9, 
+   3.456628230628161*^9}, 3.456628618101612*^9, 3.45662937591507*^9, 
+   3.456629679474104*^9, 3.456688988332652*^9, 3.4566891444929523`*^9, 
+   3.456689434621423*^9, 3.456714940475878*^9, 3.516628030557028*^9, 
+   3.572399999054859*^9}]
+}, Open  ]],
+
+Cell["9) Let D=0 for clarity", "Text",
+ CellFrame->True,
+ CellChangeTimes->{{3.4566296830194902`*^9, 3.4566296832769423`*^9}},
+ Background->GrayLevel[0.849989]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Substitute", "[", 
+  RowBox[{"%", ",", 
+   RowBox[{"D", "->", "0"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{"XX", ".", "A"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "C"}],
+   HoldForm], "+", 
+  FractionBox[
+   TagBox[
+    RowBox[{"XX", ".", "B", ".", 
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX"}],
+    HoldForm], 
+   SuperscriptBox["\[Gamma]", "2"]]}]], "Output",
+ CellChangeTimes->{3.456598235850618*^9, 3.456626864846595*^9, 
+  3.45662703793423*^9, 3.4566270950850267`*^9, 3.456628254447592*^9, 
+  3.456628619846601*^9, 3.45662938018983*^9, 3.456629684463585*^9, 
+  3.456688988368491*^9, 3.456689144535833*^9, 3.456689436451565*^9, 
+  3.4567149405633917`*^9, 3.5166280305941772`*^9, 3.572400002775702*^9}]
+}, Open  ]],
+
+Cell["\<\
+  The last output is the expression of the well known  Riccati equation which \
+proves the Theorem :)\
+\>", "Text",
+ CellChangeTimes->{{3.456629694003635*^9, 3.4566296969066687`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NCSetOutput", "[", 
+   RowBox[{"All", "\[Rule]", "True"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.456713828588499*^9, 3.456713835501813*^9}}],
+
+Cell[BoxData[
+ RowBox[{"<<", "NCEliminate`"}]], "Input",
+ CellChangeTimes->{{3.456713269647283*^9, 3.4567132783523483`*^9}, {
+  3.456713318611436*^9, 3.456713334079832*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"exp", "=", 
+  RowBox[{"gH", "/.", 
+   RowBox[{"\[Gamma]", "\[Rule]", "1"}]}]}]], "Input",
+ CellChangeTimes->{{3.456713623671626*^9, 3.4567136405487547`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", "2"}], " ", "W"}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["B", "\<\"T\"\>"],
+      HoldForm], ".", "XX", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "C", ".", "x"}],
+    HoldForm]}], "+", 
+  RowBox[{"2", " ", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["D", "\<\"T\"\>"],
+      HoldForm], ".", "D", ".", "W"}],
+    HoldForm]}]}]], "Output",
+ CellChangeTimes->{{3.456713624288986*^9, 3.456713641054533*^9}, 
+   3.4567138369966908`*^9, {3.4567149153353*^9, 3.456714940787326*^9}, {
+   3.456714984762599*^9, 3.456714997887926*^9}, 3.516628030684062*^9, 
+   3.572400009820629*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"solW", "=", 
+  RowBox[{"NCEliminate", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"exp", "\[Equal]", "0"}], ",", 
+      RowBox[{"NCInvertible", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", "W", "}"}], ",", "3"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4567132389279623`*^9, 3.4567132618084383`*^9}, {
+  3.456713370533121*^9, 3.4567134136692467`*^9}, {3.456713615004834*^9, 
+  3.456713616237624*^9}, {3.456713648019738*^9, 3.456713648917601*^9}, {
+  3.456713681953651*^9, 3.456713682100054*^9}, {3.456713764999711*^9, 
+  3.456713766172385*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"leqns = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "2"}], " ", "W"}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{
+         RowBox[{"tp", "[", "B", "]"}], "**", "XX", "**", "x"}]}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "C", "**", "x"}]}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D", "**", "W"}]}]}], 
+      "\[Equal]", "0"}], ",", 
+     RowBox[{
+      RowBox[{"-", "1"}], "+", 
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "**", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], ")"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"-", "1"}], "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], ")"}], "**", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}]}]}]}], "}"}]}],
+  SequenceForm["leqns = ", {(-2) $CellContext`W + 2 NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[$CellContext`B], $CellContext`XX, \
+$CellContext`x] + 2 NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], C, $CellContext`x] + 
+     2 NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], D, $CellContext`W] == 0, -1 + 
+    NonCommutativeMultiply[
+      $CellContext`Inv[1 - NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], D]], 1 - NonCommutativeMultiply[
+       NonCommutativeMultiply`tp[D], D]], -1 + 
+    NonCommutativeMultiply[1 - NonCommutativeMultiply[
+       NonCommutativeMultiply`tp[D], D], 
+      $CellContext`Inv[1 - NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], D]]]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.456714985695595*^9, 3.456714999150975*^9}, 
+   3.516628030797049*^9, 3.572400015899477*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"knowns = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"B", ",", "C", ",", "D", ",", "x", ",", "XX", ",", 
+     RowBox[{"Inv", "[", 
+      RowBox[{"1", "-", 
+       RowBox[{
+        RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], ",", 
+     RowBox[{"tp", "[", "B", "]"}], ",", 
+     RowBox[{"tp", "[", "D", "]"}]}], "}"}]}],
+  SequenceForm[
+  "knowns = ", {$CellContext`B, C, D, $CellContext`x, $CellContext`XX, 
+    $CellContext`Inv[1 - NonCommutativeMultiply[
+      NonCommutativeMultiply`tp[D], D]], 
+    NonCommutativeMultiply`tp[$CellContext`B], 
+    NonCommutativeMultiply`tp[D]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.456714985695595*^9, 3.456714999150975*^9}, 
+   3.516628030797049*^9, 3.5724000159031754`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"unknowns = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "W", "}"}]}],
+  SequenceForm["unknowns = ", {$CellContext`W}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.456714985695595*^9, 3.456714999150975*^9}, 
+   3.516628030797049*^9, 3.5724000159052*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D"}],
+     HoldForm], "\[Rule]", 
+    RowBox[{
+     RowBox[{"-", "1"}], "+", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], ")"}], "\<\"-1\"\>"],
+      HoldForm]}]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D", ".", 
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm]}],
+     HoldForm], "\[Rule]", 
+    RowBox[{
+     RowBox[{"-", "1"}], "+", 
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], ")"}], "\<\"-1\"\>"],
+      HoldForm]}]}], ",", 
+   RowBox[{"W", "\[Rule]", 
+    RowBox[{
+     TagBox[
+      RowBox[{
+       TagBox[
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"1", "-", 
+           TagBox[
+            RowBox[{
+             TagBox[
+              SuperscriptBox["D", "\<\"T\"\>"],
+              HoldForm], ".", "D"}],
+            HoldForm]}], ")"}], "\<\"-1\"\>"],
+        HoldForm], ".", 
+       TagBox[
+        SuperscriptBox["B", "\<\"T\"\>"],
+        HoldForm], ".", "XX", ".", "x"}],
+      HoldForm], "+", 
+     TagBox[
+      RowBox[{
+       TagBox[
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"1", "-", 
+           TagBox[
+            RowBox[{
+             TagBox[
+              SuperscriptBox["D", "\<\"T\"\>"],
+              HoldForm], ".", "D"}],
+            HoldForm]}], ")"}], "\<\"-1\"\>"],
+        HoldForm], ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", "C", ".", "x"}],
+      HoldForm]}]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.456713262515431*^9, {3.456713376629821*^9, 3.456713415721696*^9}, 
+   3.456713616888219*^9, 3.4567136496236153`*^9, {3.456713684288308*^9, 
+   3.456713693315515*^9}, {3.4567137358520184`*^9, 3.456713766573305*^9}, 
+   3.456713837766724*^9, {3.456714915988737*^9, 3.456714940854425*^9}, {
+   3.4567149857454767`*^9, 3.456714999201612*^9}, 3.516628030804487*^9, 
+   3.5724000159079533`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Hw1", "=", 
+  RowBox[{
+   RowBox[{"Substitute", "[", 
+    RowBox[{"H", ",", "solW"}], "]"}], "/.", 
+   RowBox[{"\[Gamma]", "\[Rule]", "1"}]}]}]], "Input",
+ CellChangeTimes->{{3.4566255842469893`*^9, 3.456625595608056*^9}, {
+  3.456713793388323*^9, 3.456713802140761*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["x", "\<\"T\"\>"],
+             HoldForm], ".", "XX", ".", "B", ".", 
+            TagBox[
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"1", "-", 
+                TagBox[
+                 RowBox[{
+                  TagBox[
+                   SuperscriptBox["D", "\<\"T\"\>"],
+                   HoldForm], ".", "D"}],
+                 HoldForm]}], ")"}], "\<\"-1\"\>"],
+             HoldForm]}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["x", "\<\"T\"\>"],
+             HoldForm], ".", 
+            TagBox[
+             SuperscriptBox["C", "\<\"T\"\>"],
+             HoldForm], ".", "D", ".", 
+            TagBox[
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"1", "-", 
+                TagBox[
+                 RowBox[{
+                  TagBox[
+                   SuperscriptBox["D", "\<\"T\"\>"],
+                   HoldForm], ".", "D"}],
+                 HoldForm]}], ")"}], "\<\"-1\"\>"],
+             HoldForm]}],
+           HoldForm]}], ")"}], ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], ")"}], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{"C", ".", "x"}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{"D", ".", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"1", "-", 
+                TagBox[
+                 RowBox[{
+                  TagBox[
+                   SuperscriptBox["D", "\<\"T\"\>"],
+                   HoldForm], ".", "D"}],
+                 HoldForm]}], ")"}], "\<\"-1\"\>"],
+             HoldForm], ".", 
+            TagBox[
+             SuperscriptBox["B", "\<\"T\"\>"],
+             HoldForm], ".", "XX", ".", "x"}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"1", "-", 
+                TagBox[
+                 RowBox[{
+                  TagBox[
+                   SuperscriptBox["D", "\<\"T\"\>"],
+                   HoldForm], ".", "D"}],
+                 HoldForm]}], ")"}], "\<\"-1\"\>"],
+             HoldForm], ".", 
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "C", ".", "x"}],
+           HoldForm]}], ")"}]}],
+       HoldForm]}], ")"}]}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", "B", ".", 
+        TagBox[
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            TagBox[
+             RowBox[{
+              TagBox[
+               SuperscriptBox["D", "\<\"T\"\>"],
+               HoldForm], ".", "D"}],
+             HoldForm]}], ")"}], "\<\"-1\"\>"],
+         HoldForm]}],
+       HoldForm], "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["C", "\<\"T\"\>"],
+         HoldForm], ".", "D", ".", 
+        TagBox[
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            TagBox[
+             RowBox[{
+              TagBox[
+               SuperscriptBox["D", "\<\"T\"\>"],
+               HoldForm], ".", "D"}],
+             HoldForm]}], ")"}], "\<\"-1\"\>"],
+         HoldForm]}],
+       HoldForm]}], ")"}], ".", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       TagBox[
+        RowBox[{
+         TagBox[
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             TagBox[
+              RowBox[{
+               TagBox[
+                SuperscriptBox["D", "\<\"T\"\>"],
+                HoldForm], ".", "D"}],
+              HoldForm]}], ")"}], "\<\"-1\"\>"],
+          HoldForm], ".", 
+         TagBox[
+          SuperscriptBox["B", "\<\"T\"\>"],
+          HoldForm], ".", "XX", ".", "x"}],
+        HoldForm]}], "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            TagBox[
+             RowBox[{
+              TagBox[
+               SuperscriptBox["D", "\<\"T\"\>"],
+               HoldForm], ".", "D"}],
+             HoldForm]}], ")"}], "\<\"-1\"\>"],
+         HoldForm], ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "C", ".", "x"}],
+       HoldForm]}], ")"}]}],
+   HoldForm], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["x", "\<\"T\"\>"],
+         HoldForm], ".", "XX", ".", 
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{"A", ".", "x"}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{"B", ".", 
+            RowBox[{"(", 
+             RowBox[{
+              TagBox[
+               RowBox[{
+                TagBox[
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                   RowBox[{"1", "-", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}], ")"}], "\<\"-1\"\>"],
+                 HoldForm], ".", 
+                TagBox[
+                 SuperscriptBox["B", "\<\"T\"\>"],
+                 HoldForm], ".", "XX", ".", "x"}],
+               HoldForm], "+", 
+              TagBox[
+               RowBox[{
+                TagBox[
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                   RowBox[{"1", "-", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}], ")"}], "\<\"-1\"\>"],
+                 HoldForm], ".", 
+                TagBox[
+                 SuperscriptBox["D", "\<\"T\"\>"],
+                 HoldForm], ".", "C", ".", "x"}],
+               HoldForm]}], ")"}]}],
+           HoldForm]}], ")"}]}],
+       HoldForm]}], "+", 
+     RowBox[{"2", " ", 
+      TagBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          TagBox[
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              TagBox[
+               RowBox[{
+                TagBox[
+                 SuperscriptBox["x", "\<\"T\"\>"],
+                 HoldForm], ".", "XX", ".", "B", ".", 
+                TagBox[
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                   RowBox[{"1", "-", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}], ")"}], "\<\"-1\"\>"],
+                 HoldForm]}],
+               HoldForm], "+", 
+              TagBox[
+               RowBox[{
+                TagBox[
+                 SuperscriptBox["x", "\<\"T\"\>"],
+                 HoldForm], ".", 
+                TagBox[
+                 SuperscriptBox["C", "\<\"T\"\>"],
+                 HoldForm], ".", "D", ".", 
+                TagBox[
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                   RowBox[{"1", "-", 
+                    TagBox[
+                    RowBox[{
+                    TagBox[
+                    SuperscriptBox["D", "\<\"T\"\>"],
+                    HoldForm], ".", "D"}],
+                    HoldForm]}], ")"}], "\<\"-1\"\>"],
+                 HoldForm]}],
+               HoldForm]}], ")"}], ".", 
+            TagBox[
+             SuperscriptBox["B", "\<\"T\"\>"],
+             HoldForm]}],
+           HoldForm], "+", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["x", "\<\"T\"\>"],
+             HoldForm], ".", 
+            TagBox[
+             SuperscriptBox["A", "\<\"T\"\>"],
+             HoldForm]}],
+           HoldForm]}], ")"}], ".", "XX", ".", "x"}],
+       HoldForm]}]}], ")"}]}]}]], "Output",
+ CellChangeTimes->{
+  3.456713769838285*^9, {3.456713802906548*^9, 3.456713839219129*^9}, 
+   3.456714940924512*^9, 3.4567150015228233`*^9, 3.516628030844983*^9, 
+   3.572400026598159*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Hw2", "=", 
+  RowBox[{"NCSimplifyRational", "[", "Hw1", "]"}]}]], "Input",
+ CellChangeTimes->{{3.456713776409008*^9, 3.456713782515764*^9}, {
+  3.456713892182599*^9, 3.4567138929106283`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{"D", ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm]}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "B", ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{"D", ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm]}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "B", ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["B", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["B", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{{3.45671378302748*^9, 3.456713840492708*^9}, 
+   3.4567138933773813`*^9, 3.456714941002679*^9, 3.456715002616187*^9, 
+   3.456715396422522*^9, 3.516628030936908*^9, 3.572400028802013*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"rels", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"tp", "[", "D", "]"}], "**", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{"D", "**", 
+          RowBox[{"tp", "[", "D", "]"}]}]}], "]"}]}], "-", 
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "**", 
+       RowBox[{"tp", "[", "D", "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "**", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], ")"}]}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], ")"}], "**", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "**", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], ")"}]}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], ")"}], "**", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], "]"}]}]}], "}"}], "//", 
+   "NCExpand"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ClearMonomialOrderAll", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetMonomialOrder", "[", 
+   RowBox[{
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{
+       RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], ",", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"D", "**", 
+       RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], ",", "D", ",", 
+    RowBox[{"tp", "[", "D", "]"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"NCMakeGB", "[", 
+  RowBox[{"rels", ",", "4"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.4567139744454403`*^9, 3.456714101121228*^9}, {
+  3.456714136123703*^9, 3.45671425361427*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{"D", ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm]}],
+         HoldForm]}], "]"}]}],
+     HoldForm], "-", 
+    TagBox[
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], "]"}], ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", "D"}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", "D", ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", "D", ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm]}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{"D", ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{"D", ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{"D", ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], "]"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.4567140202969713`*^9, 3.456714024388143*^9}, {
+   3.456714090704328*^9, 3.456714104161743*^9}, {3.4567141941803017`*^9, 
+   3.45671420991614*^9}, {3.45671425482743*^9, 3.456714259651206*^9}, 
+   3.456714342435034*^9, 3.456714395163986*^9, 3.4567144329041653`*^9, 
+   3.456714516204042*^9, 3.4567146431976624`*^9, 3.456714941050335*^9, 
+   3.456715003724758*^9, 3.516628030993565*^9, 3.572400032125952*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{"D", ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm]}],
+         HoldForm]}], "]"}]}],
+     HoldForm], "-", 
+    TagBox[
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D"}],
+     HoldForm], "-", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}]}],
+     HoldForm], "-", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{"D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm], "-", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{"D", ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    TagBox[
+     RowBox[{"D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{"D", ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    TagBox[
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{"D", ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm]}],
+         HoldForm]}], "]"}], ".", "D"}],
+     HoldForm]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    TagBox[
+     RowBox[{"D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    TagBox[
+     RowBox[{"D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    TagBox[
+     RowBox[{"D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.4567140202969713`*^9, 3.456714024388143*^9}, {
+   3.456714090704328*^9, 3.456714104161743*^9}, {3.4567141941803017`*^9, 
+   3.45671420991614*^9}, {3.45671425482743*^9, 3.456714259651206*^9}, 
+   3.456714342435034*^9, 3.456714395163986*^9, 3.4567144329041653`*^9, 
+   3.456714516204042*^9, 3.4567146431976624`*^9, 3.456714941050335*^9, 
+   3.456715003724758*^9, 3.516628030993565*^9, 3.572400032131488*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"rules", "=", 
+  RowBox[{"NCEliminate", "[", 
+   RowBox[{
+    RowBox[{"{", "rels", "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"Inv", "[", 
+      RowBox[{"1", "-", 
+       RowBox[{"D", "**", 
+        RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "}"}], ",", "5"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.4567142903335457`*^9, 3.45671431423523*^9}, {
+  3.456714349317149*^9, 3.456714352127804*^9}, {3.4567143993497057`*^9, 
+  3.456714408390251*^9}, {3.4567147557986593`*^9, 3.4567147563964643`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"leqns = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{
+         RowBox[{"Inv", "[", 
+          RowBox[{"1", "-", 
+           RowBox[{
+            RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], "+", 
+       RowBox[{
+        RowBox[{"tp", "[", "D", "]"}], "**", 
+        RowBox[{"Inv", "[", 
+         RowBox[{"1", "-", 
+          RowBox[{"D", "**", 
+           RowBox[{"tp", "[", "D", "]"}]}]}], "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "-", 
+       RowBox[{
+        RowBox[{"Inv", "[", 
+         RowBox[{"1", "-", 
+          RowBox[{
+           RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "**", 
+        RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], ",", 
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "-", 
+       RowBox[{
+        RowBox[{"tp", "[", "D", "]"}], "**", "D", "**", 
+        RowBox[{"Inv", "[", 
+         RowBox[{"1", "-", 
+          RowBox[{
+           RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{"D", "**", 
+          RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "-", 
+       RowBox[{
+        RowBox[{"Inv", "[", 
+         RowBox[{"1", "-", 
+          RowBox[{"D", "**", 
+           RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "**", "D", "**", 
+        RowBox[{"tp", "[", "D", "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{"D", "**", 
+          RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "-", 
+       RowBox[{"D", "**", 
+        RowBox[{"tp", "[", "D", "]"}], "**", 
+        RowBox[{"Inv", "[", 
+         RowBox[{"1", "-", 
+          RowBox[{"D", "**", 
+           RowBox[{"tp", "[", "D", "]"}]}]}], "]"}]}]}]}], "}"}], "}"}]}],
+  SequenceForm["leqns = ", {{-NonCommutativeMultiply[
+        $CellContext`Inv[1 - NonCommutativeMultiply[
+          NonCommutativeMultiply`tp[D], D]], 
+        NonCommutativeMultiply`tp[D]] + NonCommutativeMultiply[
+       NonCommutativeMultiply`tp[D], 
+       $CellContext`Inv[1 - NonCommutativeMultiply[D, 
+         NonCommutativeMultiply`tp[D]]]], $CellContext`Inv[
+      1 - NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], D]] - NonCommutativeMultiply[
+      $CellContext`Inv[1 - NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], D]], 
+      NonCommutativeMultiply`tp[D], D], $CellContext`Inv[
+      1 - NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], D]] - NonCommutativeMultiply[
+      NonCommutativeMultiply`tp[D], D, 
+      $CellContext`Inv[1 - NonCommutativeMultiply[
+        NonCommutativeMultiply`tp[D], D]]], $CellContext`Inv[
+      1 - NonCommutativeMultiply[D, 
+        NonCommutativeMultiply`tp[D]]] - NonCommutativeMultiply[
+      $CellContext`Inv[1 - NonCommutativeMultiply[D, 
+        NonCommutativeMultiply`tp[D]]], D, 
+      NonCommutativeMultiply`tp[D]], $CellContext`Inv[
+      1 - NonCommutativeMultiply[D, 
+        NonCommutativeMultiply`tp[D]]] - NonCommutativeMultiply[D, 
+      NonCommutativeMultiply`tp[D], 
+      $CellContext`Inv[1 - NonCommutativeMultiply[D, 
+        NonCommutativeMultiply`tp[D]]]]}}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.456715004971456*^9, 3.516628031073708*^9, 
+  3.572400034644548*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"knowns = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"D", ",", 
+     RowBox[{"Inv", "[", 
+      RowBox[{"1", "-", 
+       RowBox[{
+        RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], ",", 
+     RowBox[{"tp", "[", "D", "]"}]}], "}"}]}],
+  SequenceForm["knowns = ", {D, 
+    $CellContext`Inv[1 - NonCommutativeMultiply[
+      NonCommutativeMultiply`tp[D], D]], 
+    NonCommutativeMultiply`tp[D]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.456715004971456*^9, 3.516628031073708*^9, 
+  3.572400034646145*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"unknowns = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"D", "**", 
+       RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "}"}]}],
+  SequenceForm["unknowns = ", {
+    $CellContext`Inv[1 - NonCommutativeMultiply[D, 
+      NonCommutativeMultiply`tp[D]]]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.456715004971456*^9, 3.516628031073708*^9, 
+  3.572400034647143*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D"}],
+     HoldForm], "\[Rule]", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D", ".", 
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm]}],
+     HoldForm], "\[Rule]", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm]}], ",", 
+   RowBox[{
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{"D", ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm]}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], "\[Rule]", 
+    TagBox[
+     RowBox[{"D", ".", 
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{
+            TagBox[
+             SuperscriptBox["D", "\<\"T\"\>"],
+             HoldForm], ".", "D"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.456714314891202*^9, 3.456714361482936*^9}, {
+   3.456714396262501*^9, 3.4567144338170156`*^9}, 3.456714517385919*^9, {
+   3.4567146153704853`*^9, 3.456714644414864*^9}, 3.4567147573057632`*^9, 
+   3.456714941099895*^9, 3.456715005112208*^9, 3.516628031081444*^9, 
+   3.57240003464826*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Substitute", "[", 
+  RowBox[{"Hw2", ",", "rules"}], "]"}]], "Input",
+ CellChangeTimes->{{3.456713894778316*^9, 3.456713955543378*^9}, {
+  3.4567144142702513`*^9, 3.4567144236621943`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "A", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["A", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "B", ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["B", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "B", ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["B", "\<\"T\"\>"],
+     HoldForm], ".", "XX", ".", "x"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["x", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["C", "\<\"T\"\>"],
+     HoldForm], ".", "D", ".", 
+    TagBox[
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], ")"}], "\<\"-1\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["D", "\<\"T\"\>"],
+     HoldForm], ".", "C", ".", "x"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{{3.456713928999411*^9, 3.4567139560987577`*^9}, {
+   3.456714424338565*^9, 3.456714434501053*^9}, 3.456714518319121*^9, {
+   3.456714637963645*^9, 3.456714646529605*^9}, 3.456714941199294*^9, 
+   3.456715023156725*^9, 3.456715377448461*^9, 3.51662803112249*^9, 
+   3.572400038083971*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"rels", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"tp", "[", "D", "]"}], "**", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{"D", "**", 
+          RowBox[{"tp", "[", "D", "]"}]}]}], "]"}]}], "-", 
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         RowBox[{
+          RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "**", 
+       RowBox[{"tp", "[", "D", "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "**", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], ")"}]}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], ")"}], "**", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{
+         RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "**", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], ")"}]}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], ")"}], "**", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"D", "**", 
+         RowBox[{"tp", "[", "D", "]"}]}]}], "]"}]}]}], "}"}], "//", 
+   "NCExpand"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ClearMonomialOrderAll", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SetKnowns", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"D", ",", 
+     RowBox[{"tp", "[", "D", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{
+       RowBox[{"tp", "[", "D", "]"}], "**", "D"}]}], "]"}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetUnknowns", "[", 
+   RowBox[{"{", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"D", "**", 
+       RowBox[{"tp", "[", "D", "]"}]}]}], "]"}], "}"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"NCMakeGB", "[", 
+  RowBox[{"rels", ",", "4"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"PolyToRule", "[", "%", "]"}]}], "Input",
+ CellChangeTimes->{{3.4567144602465353`*^9, 3.45671448381091*^9}, {
+   3.456714526184063*^9, 3.456714529813632*^9}, {3.456714562913126*^9, 
+   3.4567145966011868`*^9}, {3.456715031362996*^9, 3.456715100026681*^9}, {
+   3.456715180025766*^9, 3.45671518543832*^9}, {3.456715221224704*^9, 
+   3.456715225005784*^9}, {3.456715279281562*^9, 3.456715284703567*^9}, {
+   3.4567153612979727`*^9, 3.4567153652732573`*^9}, 3.456715438921204*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{"D", ".", 
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm]}],
+         HoldForm]}], "]"}]}],
+     HoldForm], "-", 
+    TagBox[
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], "]"}], ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", "D"}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", "D", ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}], ".", "D", ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm]}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{"D", ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{"D", ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm], ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"D", ".", 
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm]}],
+          HoldForm]}], "]"}]}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{"D", ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], "]"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.456714462361866*^9, 3.456714484542337*^9}, 
+   3.4567145303989077`*^9, 3.456714564113852*^9, 3.456714597315527*^9, 
+   3.456714941249908*^9, 3.456715024867231*^9, {3.4567150670057907`*^9, 
+   3.4567151264037867`*^9}, {3.45671518650033*^9, 3.456715242405333*^9}, {
+   3.456715285104615*^9, 3.4567153123648033`*^9}, {3.45671535263518*^9, 
+   3.45671537328721*^9}, 3.456715440127612*^9, 3.516628031172925*^9, 
+   3.572400040856049*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D"}],
+     HoldForm], "-", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}]}],
+     HoldForm], "-", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{"D", ".", 
+       RowBox[{"Inv", "[", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{
+           TagBox[
+            SuperscriptBox["D", "\<\"T\"\>"],
+            HoldForm], ".", "D"}],
+          HoldForm]}], "]"}], ".", 
+       TagBox[
+        SuperscriptBox["D", "\<\"T\"\>"],
+        HoldForm]}],
+      HoldForm]}], "+", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{"D", ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], "]"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.456714462361866*^9, 3.456714484542337*^9}, 
+   3.4567145303989077`*^9, 3.456714564113852*^9, 3.456714597315527*^9, 
+   3.456714941249908*^9, 3.456715024867231*^9, {3.4567150670057907`*^9, 
+   3.4567151264037867`*^9}, {3.45671518650033*^9, 3.456715242405333*^9}, {
+   3.456715285104615*^9, 3.4567153123648033`*^9}, {3.45671535263518*^9, 
+   3.45671537328721*^9}, 3.456715440127612*^9, 3.516628031172925*^9, 
+   3.572400040860024*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D"}],
+     HoldForm], "\[Rule]", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm], ".", "D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}]}],
+     HoldForm], "\[Rule]", 
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm], ".", "D"}],
+       HoldForm]}], "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"Inv", "[", 
+     RowBox[{"1", "-", 
+      TagBox[
+       RowBox[{"D", ".", 
+        TagBox[
+         SuperscriptBox["D", "\<\"T\"\>"],
+         HoldForm]}],
+       HoldForm]}], "]"}], "\[Rule]", 
+    TagBox[
+     RowBox[{"D", ".", 
+      RowBox[{"Inv", "[", 
+       RowBox[{"1", "-", 
+        TagBox[
+         RowBox[{
+          TagBox[
+           SuperscriptBox["D", "\<\"T\"\>"],
+           HoldForm], ".", "D"}],
+         HoldForm]}], "]"}], ".", 
+      TagBox[
+       SuperscriptBox["D", "\<\"T\"\>"],
+       HoldForm]}],
+     HoldForm]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.456714462361866*^9, 3.456714484542337*^9}, 
+   3.4567145303989077`*^9, 3.456714564113852*^9, 3.456714597315527*^9, 
+   3.456714941249908*^9, 3.456715024867231*^9, {3.4567150670057907`*^9, 
+   3.4567151264037867`*^9}, {3.45671518650033*^9, 3.456715242405333*^9}, {
+   3.456715285104615*^9, 3.4567153123648033`*^9}, {3.45671535263518*^9, 
+   3.45671537328721*^9}, 3.456715440127612*^9, 3.516628031172925*^9, 
+   3.572400040862595*^9}]
+}, Open  ]]
+},
+CellGrouping->Manual,
+WindowSize->{1061, 856},
+WindowMargins->{{Automatic, 157}, {Automatic, 0}},
+DockedCells->(FrontEndExecute[{
+   FrontEnd`NotebookApply[
+    FrontEnd`InputNotebook[], #, Placeholder]}]& ),
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{612, 792}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+ShowSelection->True,
+Magnification->1.25,
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 123, 4, 183, "Title"],
+Cell[693, 28, 34, 0, 54, "Subsection"],
+Cell[730, 30, 223, 5, 80, "Text"],
+Cell[CellGroupData[{
+Cell[978, 39, 230, 6, 54, "Input"],
+Cell[1211, 47, 432, 7, 26, "Print"],
+Cell[1646, 56, 523, 10, 26, "Print"],
+Cell[2172, 68, 660, 13, 26, "Print"],
+Cell[2835, 83, 401, 6, 26, "Print"]
+}, Open  ]],
+Cell[3251, 92, 65, 1, 51, "Subsection"],
+Cell[3319, 95, 7857, 294, 189, 6677, 273, "GraphicsData", "PostScript", \
+"Figure-1"],
+Cell[11179, 391, 173, 6, 70, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11389, 402, 67, 1, 51, "Subsection"],
+Cell[11459, 405, 97, 2, 37, "Text"],
+Cell[11559, 409, 532, 13, 57, "Input"],
+Cell[12094, 424, 163, 2, 37, "Text"],
+Cell[12260, 428, 911, 26, 120, "Input"],
+Cell[CellGroupData[{
+Cell[13196, 458, 60, 0, 37, "Text"],
+Cell[CellGroupData[{
+Cell[13281, 462, 513, 17, 85, "Input"],
+Cell[13797, 481, 552, 17, 56, "Output"]
+}, Open  ]],
+Cell[14364, 501, 680, 22, 66, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15081, 528, 538, 12, 78, "Input"],
+Cell[15622, 542, 270, 6, 28, "Message"],
+Cell[15895, 550, 387, 7, 36, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16319, 562, 814, 26, 35, "Input"],
+Cell[17136, 590, 1681, 48, 81, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18866, 644, 27, 0, 54, "Subsection"],
+Cell[18896, 646, 741, 28, 121, "Text"],
+Cell[19640, 676, 61, 1, 37, "Text"],
+Cell[19704, 679, 1039, 37, 118, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20780, 721, 44, 0, 54, "Subsection"],
+Cell[20827, 723, 93, 2, 35, "Input"],
+Cell[CellGroupData[{
+Cell[20945, 729, 27, 0, 35, "Input"],
+Cell[20975, 731, 2513, 91, 56, "Output"]
+}, Open  ]],
+Cell[23503, 825, 121, 3, 37, "Text"],
+Cell[23627, 830, 85, 1, 41, "Text"],
+Cell[23715, 833, 235, 6, 58, "Text"],
+Cell[CellGroupData[{
+Cell[23975, 843, 226, 5, 36, "Input"],
+Cell[24204, 850, 270, 6, 28, "Message"],
+Cell[24477, 858, 1076, 32, 38, "Output"]
+}, Open  ]],
+Cell[25568, 893, 120, 2, 58, "Text"],
+Cell[CellGroupData[{
+Cell[25713, 899, 203, 5, 36, "Input"],
+Cell[25919, 906, 1887, 30, 278, "Message"],
+Cell[27809, 938, 1771, 53, 43, "Output"]
+}, Open  ]],
+Cell[29595, 994, 107, 2, 58, "Text"],
+Cell[29705, 998, 183, 4, 35, "Input"],
+Cell[29891, 1004, 11555, 357, 203, "Output"],
+Cell[41449, 1363, 178, 3, 58, "Text"],
+Cell[CellGroupData[{
+Cell[41652, 1370, 256, 5, 35, "Input"],
+Cell[41911, 1377, 13153, 470, 304, "Output"]
+}, Open  ]],
+Cell[55079, 1850, 1153, 30, 63, "Text"],
+Cell[CellGroupData[{
+Cell[56257, 1884, 478, 14, 63, "Input"],
+Cell[56738, 1900, 6132, 238, 135, "Output"]
+}, Open  ]],
+Cell[62885, 2141, 146, 4, 58, "Text"],
+Cell[CellGroupData[{
+Cell[63056, 2149, 1587, 35, 105, "Input"],
+Cell[64646, 2186, 3366, 123, 70, "Output"],
+Cell[68015, 2311, 3115, 112, 70, "Output"],
+Cell[71133, 2425, 2102, 72, 42, "Output"],
+Cell[73238, 2499, 1968, 68, 42, "Output"]
+}, Open  ]],
+Cell[75221, 2570, 1132, 30, 63, "Text"],
+Cell[CellGroupData[{
+Cell[76378, 2604, 264, 8, 42, "Input"],
+Cell[76645, 2614, 1781, 70, 43, "Output"]
+}, Open  ]],
+Cell[78441, 2687, 204, 5, 58, "Text"],
+Cell[CellGroupData[{
+Cell[78670, 2696, 238, 4, 36, "Input"],
+Cell[78911, 2702, 3290, 118, 150, "Output"],
+Cell[82204, 2822, 175, 5, 36, "Input"],
+Cell[82382, 2829, 3588, 118, 166, "Output"]
+}, Open  ]],
+Cell[85985, 2950, 230, 6, 58, "Text"],
+Cell[CellGroupData[{
+Cell[86240, 2960, 275, 5, 36, "Input"],
+Cell[86518, 2967, 735, 13, 29, "Message"],
+Cell[87256, 2982, 619, 11, 29, "Message"],
+Cell[87878, 2995, 431, 6, 35, "Output"]
+}, Open  ]],
+Cell[88324, 3004, 146, 3, 58, "Text"],
+Cell[CellGroupData[{
+Cell[88495, 3011, 230, 5, 35, "Input"],
+Cell[88728, 3018, 1672, 63, 43, "Output"]
+}, Open  ]],
+Cell[90415, 3084, 160, 3, 58, "Text"],
+Cell[CellGroupData[{
+Cell[90600, 3091, 111, 3, 43, "Input"],
+Cell[90714, 3096, 878, 29, 77, "Output"]
+}, Open  ]],
+Cell[91607, 3128, 193, 4, 46, "Text"]
+}, Open  ]],
+Cell[91815, 3135, 183, 4, 43, "Input"],
+Cell[92001, 3141, 173, 3, 43, "Input"],
+Cell[CellGroupData[{
+Cell[92199, 3148, 181, 4, 45, "Input"],
+Cell[92383, 3154, 799, 28, 46, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[93219, 3187, 687, 16, 43, "Input"],
+Cell[93909, 3205, 2157, 57, 57, "Print"],
+Cell[96069, 3264, 799, 19, 32, "Print"],
+Cell[96871, 3285, 309, 7, 32, "Print"],
+Cell[97183, 3294, 2996, 107, 90, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[100216, 3406, 295, 7, 43, "Input"],
+Cell[100514, 3415, 8958, 302, 217, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[109509, 3722, 215, 4, 45, "Input"],
+Cell[109727, 3728, 2631, 102, 90, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[112395, 3835, 2363, 71, 176, "Input"],
+Cell[114761, 3908, 3591, 133, 118, "Output"],
+Cell[118355, 4043, 10577, 398, 281, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[128969, 4446, 523, 13, 43, "Input"],
+Cell[129495, 4461, 3626, 93, 81, "Print"],
+Cell[133124, 4556, 586, 16, 32, "Print"],
+Cell[133713, 4574, 481, 13, 32, "Print"],
+Cell[134197, 4589, 2545, 94, 53, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[136779, 4688, 211, 4, 43, "Input"],
+Cell[136993, 4694, 2814, 107, 90, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[139844, 4806, 2888, 83, 228, "Input"],
+Cell[142735, 4891, 3618, 134, 118, "Output"],
+Cell[146356, 5027, 2249, 79, 86, "Output"],
+Cell[148608, 5108, 2233, 78, 86, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

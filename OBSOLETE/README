@@ -1,0 +1,30 @@
+
+Hello,
+
+  This directory contains the following directories
+
+DOCUMENTATION/	
+NCAlgebra/	
+NCGB/		
+work/
+FOR_DEV_GUYS
+
+You can do you computing in the work directory and ignore all else,
+except for tutorials.
+
+
+and files 
+
+INSTALL		
+README
+SetNCDir.m
+SetNCPath.m --  irrelevant
+SetPathCommonFile.m
+
+
+
+If for some reason you have
+the  directory only NCAlgebra and you want to compute 
+noncommutative Groebner Basis, then you can get
+the NCGB directory from The NCAlgebra homepage. 
+

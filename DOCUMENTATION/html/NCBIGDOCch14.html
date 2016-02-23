@@ -1,0 +1,1195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>14 NCProcess: An Example</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch15.html" >next</a>] [<a 
+href="NCBIGDOCch13.html" >prev</a>] [<a 
+href="NCBIGDOCch13.html#tailNCBIGDOCch13.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch14.html">tail</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch14.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;14</span><br><a 
+ id="x28-20400014"></a>NCProcess: An Example</h2>
+<!--l. 4--><p class="noindent">The commands <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess2</span></span></span> were briefly described in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch13.html#x25-20000013">13<!--tex4ht:ref: chapter:ncprocess:intro --></a>. In this chapter, we
+derive a theorem due to Bart, Gohberg, Kaashoek and Van Dooren. The reader can skip the
+statement of this theorem (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x28-20500014.1">14.1<!--tex4ht:ref: section:background --></a>) if he wishes and go directly to the algebraic problem statement
+(<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x28-20600014.2">14.2<!--tex4ht:ref: subsection:problem --></a>).
+   <h3 class="sectionHead"><span class="titlemark">14.1   </span> <a 
+ id="x28-20500014.1"></a>Background </h3>
+<!--l. 20--><p class="noindent"><span 
+class="cmbx-12">Theorem([BGKvD]) </span>A minimal factorization
+<!--l. 25--><p class="noindent"><img 
+src="NCBIGDOC59x.png" alt="PICT" >
+<!--l. 29--><p class="noindent">of a system [<span 
+class="cmmi-12">A,B,C, </span>1] corresponds to projections <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">2</span></sub> satisfying <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> + <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">2</span></sub> = 1,
+   <table width="100%" 
+class="equation"><tr><td><a 
+ id="x28-205001r1"></a>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC60x.png" alt="AP2  = P2AP2    (A  - BC)P1  =  P1(A - BC)P1
+" class="math-display" ></center></td><td width="5%">(14.1)</td></tr></table>
+<!--l. 38--><p class="nopar">
+provided the state dimension of the [<span 
+class="cmmi-12">A,B,C, </span>1] system is <span 
+class="cmmi-12">d</span><sub ><span 
+class="cmr-8">1</span></sub> + <span 
+class="cmmi-12">d</span><sub ><span 
+class="cmr-8">2</span></sub>. (which has the geometrical
+interpretation that <span 
+class="cmmi-12">A </span>and <span 
+class="cmmi-12">A </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">BC </span>have complimentary invariant subspaces).
+<!--l. 45--><p class="indent">   We begin by giving the algebraic statement of the problem. Suppose that these factors exist. By
+the Youla-Tissi statespace isomorphism theorem, there is map
+   <table width="100%" 
+class="equation"><tr><td><a 
+ id="x28-205002r2"></a>
+
+   <center class="math-display" >
+<img 
+src="NCBIGDOC61x.png" alt="(m1, m2) :  Statespace of the product  - &#x2192;   Statespace of the original
+" class="math-display" ></center></td><td width="5%">(14.2)</td></tr></table>
+<!--l. 54--><p class="nopar">
+which intertwines the original and the product system. Also minimality of the factoring is
+equivalent to the existence of a two sided inverse (<span 
+class="cmmi-12">n</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">,n</span><sub>
+<span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup>)<sup ><span 
+class="cmmi-8">T</span> </sup> to (<span 
+class="cmmi-12">m</span><sub >
+<span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,m</span><sub ><span 
+class="cmr-8">2</span></sub>). These requirements
+combine to imply that each of the following expressions is zero.
+<!--l. 75--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">14.2   </span> <a 
+ id="x28-20600014.2"></a>The Problem</h3>
+<!--l. 78--><p class="noindent">Minimal factors exist if and only if there exist <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">e</span>, <span 
+class="cmmi-12">f </span>and <span 
+class="cmmi-12">g </span>such that the
+following polynomials is zero.
+   <center class="math-display" >
+<img 
+src="NCBIGDOC62x.png" alt="        Am1  -  m1a - m2f  c    Am2  -  m2e
+          B -  m  b - m f        - c + C m
+                 1     2                  1
+(FAC)        n1m1  - 1           n2m2  - 1
+               n  m                n  m
+                 1  2                2  1
+             - g + C m2      m1n1  + m2n2  - 1  " class="math-display" ></center> Each
+of these expressions must equal 0. Here <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>are known.
+<!--l. 106--><p class="indent">   The problem is to solve these equations. That is, we want a constructive theorem which says
+when and how they can be solved.
+
+<!--l. 110--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">14.3   </span> <a 
+ id="x28-20700014.3"></a>Solution via a Prestrategy</h3>
+<!--l. 113--><p class="noindent">We now apply a strategy to see how one might discover this theorem. The formalities of what a
+strategy is are not important here. This chapter is designed to illustrate <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess</span></span></span> and allied
+commands. For a description of the formalities of a strategy see [HS] or for a sketch see Chapter
+<a 
+href="NCBIGDOCch16.html#x37-22700016">16<!--tex4ht:ref: chapter:ncprocess:concept --></a>.
+<!--l. 121--><p class="indent">   Before running <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>, we must declare <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>to be knowns and the remaining
+variables to be unknowns. The &#8220;**&#8221; below denotes matrix multiplication.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=Get["NCGB.m"];
+&#x00A0;<br />In[2]:=SetNonCommuative[A,B,C0,m1,m2,n1,n2];
+&#x00A0;<br />In[3]:=SetKnowns[A,B,C];
+&#x00A0;<br />In[4]:=SetUnknowns[m1,m2,n1,n2,a,b,c,e,f,g];
+</div>
+</td></tr></table>
+<!--l. 145--><p class="nopar">
+<!--l. 149--><p class="noindent">We now set the variable <span 
+class="cmbx-12">FAC </span>equal to the list of polynomials in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x28-20600014.2">14.2<!--tex4ht:ref: subsection:problem --></a>.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=FAC&#x00A0;=&#x00A0;{A**m1&#x00A0;-&#x00A0;m1**a&#x00A0;-&#x00A0;m2**f**c,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A**m2&#x00A0;-&#x00A0;m2**e,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;-&#x00A0;m1**b&#x00A0;-&#x00A0;m2**f,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-c&#x00A0;+&#x00A0;C0**m1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-g&#x00A0;+&#x00A0;C0**m2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n1**m1&#x00A0;-&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n1**m2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n2**m1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n2**m2&#x00A0;-&#x00A0;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m1**n1&#x00A0;+&#x00A0;m2**n2&#x00A0;-&#x00A0;1};
+</div>
+</td></tr></table>
+<!--l. 166--><p class="nopar">
+<!--l. 170--><p class="indent">   The commands above and below will be explained in Chapter <a 
+href="NCBIGDOCch15.html#x33-21000015">15<!--tex4ht:ref: chapter:ncprocess:command --></a>.
+<!--l. 173--><p class="indent">   The command which produces the output in the file <span 
+class="cmbx-12">Spreadsheet1.dvi </span>is the following.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[6]:=&#x00A0;result&#x00A0;=&#x00A0;NCProcess1[FAC,2,"Spreadsheet1"];
+</div>
+</td></tr></table>
+<!--l. 180--><p class="nopar">
+<!--l. 184--><p class="indent">   Here <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> is being applied to the set of relations <span 
+class="cmbx-12">FAC </span>for 2 iterations. The <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>
+command has two outputs, one will be stored in <span 
+class="cmbx-12">result </span>and the other will be stored in the file
+<span 
+class="cmbx-12">Spreadsheet1.dvi</span>. The <span 
+class="cmbx-12">Spreadsheet1.dvi </span>file appears below and is likely to be more
+interesting and useful than the value of <span 
+class="cmbx-12">result</span>. The file created by <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess</span></span></span> is a list of
+equations whose solution set is the same as the solution set for <span 
+class="cmbx-12">FAC</span>. (We added the <span 
+class="cmmi-12">&lt;</span>===
+appearing below after the spreadsheet was created.) The <span 
+class="cmsy-10x-x-120">&#x2192; </span>below can be read as an equal
+sign.
+<!--l. 12--><p class="noindent"><span 
+class="cmr-10x-x-109">THE ORDER IS NOW THE FOLLOWING:</span>
+<span 
+class="cmmi-10x-x-109">A &lt; B &lt; C </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">c </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">e </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">f </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">g</span>
+______________________
+__________________________ <span 
+class="cmr-10x-x-109">&#x00A0;YOUR SESSION HAS DIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________________
+__________________________ <span 
+class="cmr-10x-x-109">&#x00A0;THE FOLLOWING RELATIONS</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>______________________________________
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE BEEN SOLVED FOR:</span>
+<table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">a,b,c,e,f,g</span><span 
+class="cmsy-10x-x-109">}</span>
+</td></tr></table>
+<br class="newline"><span 
+class="cmr-10x-x-109">The corresponding rules are the following:</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">Am</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">B</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">c </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">C m</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">e </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">Am</span><sub ><span 
+class="cmr-8">2</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">f </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">g </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">C m</span><sub ><span 
+class="cmr-8">2</span></sub>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+________________________
+                         <span 
+class="cmr-10x-x-109">&#x00A0;USER CREATIONS APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________
+_________________________________________________________________________________
+_________________________________________________________________________________
+____________________ <span 
+class="cmr-10x-x-109">&#x00A0;SOME RELATIONS WHICH APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________
+______________________________ <span 
+class="cmr-10x-x-109">&#x00A0;MAY BE UNDIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________________
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">2.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B,C</span><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmr-10x-x-109">(1 </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">Am</span><sub ><span 
+class="cmr-8">1</span></sub>  <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1(1 </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">BC m</span><sub ><span 
+class="cmr-8">1</span></sub>  <span 
+class="cmr-10x-x-109">= 0</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;                             &lt;</span><span 
+class="cmr-10x-x-109">===</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">2.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A</span><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">0</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">Am</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">0</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">2.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B,C</span><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">0</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B C m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">Am</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">2.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">4.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;                                                   &lt;</span><span 
+class="cmr-10x-x-109">===</span>
+</td></tr></table>
+<br class="newline">
+<!--l. 205--><p class="indent">   The above &#8220;spreadsheet&#8221; indicates that the unknowns <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">e</span>, <span 
+class="cmmi-12">f </span>and <span 
+class="cmmi-12">g </span>are solved for and
+states their values. The following are facts about the output: (1) there are no equations
+in 1 unknown, (2) there are 4 categories of equations in 2 unknowns and (3) there is
+one category of equations in 4 unknowns. A user must observe that the first equation
+<span class="footnote-mark"><a 
+href="NCBIGDOC29.html#fn1x26"><sup >1</sup></a></span><a 
+ id="x28-207001f1"></a> which
+we marked with <span 
+class="cmmi-12">&lt;</span>=== becomes an equation in the unknown quantity <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> when
+multiplied on the right by <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub>. This motivates the creation of a new variable <span 
+class="cmmi-12">P </span>defined by
+setting
+<!--l. 225--><p class="noindent">
+   <table width="100%" 
+class="equation"><tr><td><a 
+ id="x28-207002r3"></a>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC63x.png" alt="P1 = m1 n1 .
+" class="math-display" ></center></td><td width="5%">(14.3)</td></tr></table>
+
+<!--l. 229--><p class="nopar">
+The user may notice at this point that the second equation marked with <span 
+class="cmmi-12">&lt;</span>=== is an equation in
+only one unknown quantity <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub> once the above assignment has been made and <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> is considered
+known<span class="footnote-mark"><a 
+href="NCBIGDOC30.html#fn2x26"><sup >2</sup></a></span><a 
+ id="x28-207003f2"></a>.
+These observations lead us to &#8220;select&#8221; (see footnote corresponding to O2 in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch15.html#x33-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a>) the equations
+<span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-120">- </span>1 + <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub>. Since we selected an equation in <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> and an equation in
+<span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub>, it is reasonable to select the the equations <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-120">- </span>1, and <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-120">- </span>1 because they have
+exactly the same unknowns. While useless at this point we illustrate the command <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">GetCategory</span></span></span>
+with the following examples
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[10]:=&#x00A0;GetCategory[{n1,m1},NCPAns&#x00A0;]
+&#x00A0;<br />Out[10]=&#x00A0;{&#x00A0;n1**m1&#x00A0;-&#x00A0;1&#x00A0;}
+&#x00A0;<br />In[11]:=&#x00A0;GetCategory[{n1,m1,n2,m2},NCPAns&#x00A0;]
+&#x00A0;<br />Out[11]=&#x00A0;{m2**n2&#x00A0;+&#x00A0;m1**n1&#x00A0;-&#x00A0;1&#x00A0;}
+</div>
+</td></tr></table>
+<!--l. 255--><p class="nopar">
+<!--l. 257--><p class="indent">   Run <span 
+class="cmtt-12">NCProcess1 </span>again <span class="footnote-mark"><a 
+href="NCBIGDOC31.html#fn3x26"><sup >3</sup></a></span><a 
+ id="x28-207004f3"></a>
+with (<a 
+href="#x28-207002r3">14.3<!--tex4ht:ref: fill --></a>) added and <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> declared known as well as <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">C </span>declared known. See Chapter <a 
+href="NCBIGDOCch15.html#x33-22100015.4">15.4<!--tex4ht:ref: section:typical:ncprocess --></a>
+for the precise call. The output is:
+
+<!--l. 267--><p class="noindent">
+<!--l. 11--><p class="noindent"><span 
+class="cmr-10x-x-109">THE ORDER IS NOW THE FOLLOWING:</span>
+<span 
+class="cmmi-10x-x-109">A &lt; B &lt; C &lt; P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">c </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">e </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">f </span><span 
+class="cmsy-10x-x-109">&#x226A; </span><span 
+class="cmmi-10x-x-109">g</span>
+________________
+__________________________ <span 
+class="cmr-10x-x-109">&#x00A0;YOUR SESSION HAS DIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________________
+__________________________ <span 
+class="cmr-10x-x-109">&#x00A0;THE FOLLOWING RELATIONS</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>______________________________________
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE BEEN SOLVED FOR:</span>
+<table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">a,b,c,e,f,g</span><span 
+class="cmsy-10x-x-109">}</span>
+</td></tr></table>
+<br class="newline"><span 
+class="cmr-10x-x-109">The corresponding rules are the following:</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">Am</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">B</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">c </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">C m</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">e </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">Am</span><sub ><span 
+class="cmr-8">2</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">f </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">B</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">g </span><span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">C m</span><sub ><span 
+class="cmr-8">2</span></sub>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B,C,P</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">A</span><span 
+class="cmr-10x-x-109">(1 + </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">) = 0</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">AP</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">A </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1(1 + </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">BC P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-10x-x-109">= 0</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+________________________ <span 
+class="cmr-10x-x-109">&#x00A0;USER CREATIONS APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________
+_________________________________________________________________________________
+<table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1 + </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+____________________ <span 
+class="cmr-10x-x-109">&#x00A0;SOME RELATIONS WHICH APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________
+______________________________ <span 
+class="cmr-10x-x-109">&#x00A0;MAY BE UNDIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________________
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">2.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">&#x21D1;</span> <span 
+class="cmmi-10x-x-109">&#x00A0;m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">P</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">&#x21D1;</span> <span 
+class="cmmi-10x-x-109">&#x00A0;n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">2.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">&#x21D1;</span> <span 
+class="cmmi-10x-x-109">&#x00A0;n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">4.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmsy-10x-x-109">&#x21D1;</span> <span 
+class="cmmi-10x-x-109">&#x00A0;m</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1 + </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">m</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">n</span><sub ><span 
+class="cmr-8">1</span></sub>
+</td></tr></table>
+<br class="newline">
+<!--l. 273--><p class="indent">   Note that the equations in the above display which are in the undigested section (i.e.,
+below the lowest set of bold lines) are repeats of those which are in the digested section
+(i.e., above the lowest set of bold lines). The symbol <span 
+class="cmsy-10x-x-120">&#x21D1; </span>indicates that the polynomial
+equation also appears as a user select on the spreadsheet. We relist these particular
+equations simply as a convenience for categorizing them. We will see how this helps us in
+<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x28-20800014.4">14.4<!--tex4ht:ref: section:endgame:concept --></a>. Since all equations are digested, we have finished using <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> (see S4).
+As we shall see, this output spreadsheet leads directly to the theorem about factoring
+systems.
+   <h3 class="sectionHead"><span class="titlemark">14.4   </span> <a 
+ id="x28-20800014.4"></a>The end game</h3>
+<!--l. 295--><p class="noindent">The first step of the end game is to run NCProcess2 on the last spreadsheet which was
+produced in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x28-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a>. The aim of this run of NCProcess2 is to shrink the spreadsheet as
+aggressively as possible without destroying important information. The spreadsheet
+produced by NCProcess2 is the same as the last spreadsheet which was produced
+<span class="footnote-mark"><a 
+href="NCBIGDOC32.html#fn4x26"><sup >4</sup></a></span><a 
+ id="x28-208001f4"></a> in
+<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x28-20700014.3">14.3<!--tex4ht:ref: subsection:solution:strategy --></a>.
+<!--l. 311--><p class="indent">   Note that it is necessary that all of the equations in the spreadsheet have solutions, since
+they are implied by the original equations. The equations involving only knowns play a
+key role. In particular, they say precisely that, there must exist a projection <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> such
+that
+   <table width="100%" 
+class="equation"><tr><td><a 
+ id="x28-208002r4"></a>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC64x.png" alt="P1 A P1 = P1 A and  P1B  C P1 = P1 A - A P1 + B  C P1
+" class="math-display" ></center></td><td width="5%">(14.4)</td></tr></table>
+
+<!--l. 322--><p class="nopar">
+are satisfied.
+<!--l. 325--><p class="indent">   The converse is also true and can be verified with the assistance of the above spreadsheet. To
+do this, we assume that the matrices <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">B</span>, <span 
+class="cmmi-12">C </span>and <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> are given and that (<a 
+href="#x28-208002r4">14.4<!--tex4ht:ref: theTwoEquations --></a>) holds, and wish to
+define <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">e</span>, <span 
+class="cmmi-12">f </span>and <span 
+class="cmmi-12">g </span>such that each of the equations in the above spreadsheet
+hold. If we can do this, then each of the equations from the starting polynomial equations (<span 
+class="cmmi-12">FAC</span>)
+given in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x28-20600014.2">14.2<!--tex4ht:ref: subsection:problem --></a> will hold and we will have shown that a minimal factorization of the [<span 
+class="cmmi-12">A,B,C, </span>1]
+system exists.
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">(1) Since <span 
+class="cmmi-12">P</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmr-8">2</span></sup> = <span 
+class="cmmi-12">P</span><sub >
+<span 
+class="cmr-8">1</span></sub>, it is easy to show that there exists (not necessarily square) matrices
+      <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> such that <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub> = 1 and <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> = <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub>. These are exactly the equations in the
+      <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">}</span>-Category of the above spreadsheet.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(2) Since (1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub>)<sup ><span 
+class="cmr-8">2</span></sup> = 1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">P</span><sub >
+<span 
+class="cmr-8">1</span></sub>, it is easy to show that there exists (not necessarily square)
+      matrices <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub>  and <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub>  such that <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub>  =  1 and <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub>  =  1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub>. These are exactly
+      the equations in the <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-120">}</span>-Category of the above spreadsheet together with the
+      equations in the <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,m</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,n</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-120">}</span>-Category of the above spreadsheet.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">(3) Since we have defined <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub>  and <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub>, we can define <span 
+class="cmmi-12">a</span>, <span 
+class="cmmi-12">b</span>, <span 
+class="cmmi-12">c</span>, <span 
+class="cmmi-12">e</span>, <span 
+class="cmmi-12">f </span>and <span 
+class="cmmi-12">g </span>by setting
+      <span 
+class="cmmi-12">a </span>= <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">Am</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">b </span>= <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">B</span>, <span 
+class="cmmi-12">c </span>= <span 
+class="cmmi-12">C m</span><sub ><span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">e </span>= <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">Am</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">f </span>= <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">B </span>and <span 
+class="cmmi-12">g </span>= <span 
+class="cmmi-12">C m</span><sub ><span 
+class="cmr-8">2</span></sub>. These are
+      exactly the equations in the singleton category.</dd></dl>
+<!--l. 368--><p class="noindent">Here we have used the fact that we are working with matrices and not elements of an abstract
+algebra.
+<!--l. 399--><p class="indent">   With the assignments made above, every equation in the spreadsheet above holds. Thus, by
+backsolving through the spreadsheet, we have constructed the factors of the original system
+[<span 
+class="cmmi-12">A,B,C, </span>1]. This proves
+<!--l. 408--><p class="noindent"><span 
+class="cmbx-12">Theorem ([BGKvD]) </span>The system [<span 
+class="cmmi-12">A,B,C, </span>1] can be factored if and only if there exists a
+projection <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> such that <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">AP</span><sub ><span 
+class="cmr-8">1</span></sub> = <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">A </span>and <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">B C P</span><sub ><span 
+class="cmr-8">1</span></sub> = <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">A </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">AP</span><sub ><span 
+class="cmr-8">1</span></sub> + <span 
+class="cmmi-12">B C P</span><sub ><span 
+class="cmr-8">1</span></sub>.
+<!--l. 416--><p class="indent">   Note that the known equations can be neatly expressed in terms of <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">2</span></sub> = 1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">P</span><sub ><span 
+class="cmr-8">1</span></sub>.
+Indeed, it is easy to check with a little algebra that these are equivalent to (<a 
+href="#x28-205001r1">14.1<!--tex4ht:ref: eq:answer --></a>). It is a question
+of taste, not algebra, as to which form one chooses.
+<!--l. 423--><p class="indent">   For a more complicated example of an end game, see <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch17.html#x44-24600017.4">17.4<!--tex4ht:ref: section:DG:end:game --></a>.
+   <h4 class="subsectionHead"><span class="titlemark">14.4.1   </span> <a 
+ id="x28-20900014.4.1"></a>Concluding Remarks</h4>
+<!--l. 428--><p class="noindent">We saw that this factorization problem could be solved with a 2-prestrategy. It was not a
+1-prestrategy because there was at least at one point in the session where the user had to make a
+decision about an equation in two unknowns. On the other hand, the assignment (<a 
+href="#x28-207002r3">14.3<!--tex4ht:ref: fill --></a>) was a
+motivated unknown. We will see in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch16.html#x37-23100016.3.1">16.3.1<!--tex4ht:ref: subsection:strategy --></a> that this is a 1-prestrategy. For example, the
+equation
+
+   <table width="100%" 
+class="equation"><tr><td><a 
+ id="x28-209001r5"></a>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC65x.png" alt="(1 - m1 n1)Am1   - (1 - m1 n1) BC  m1
+" class="math-display" ></center></td><td width="5%">(14.5)</td></tr></table>
+<!--l. 449--><p class="nopar">
+in the two unknowns <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> can be transformed into an equation in the one unknown <span 
+class="cmmi-12">m</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> by
+multiplying by <span 
+class="cmmi-12">n</span><sub ><span 
+class="cmr-8">1</span></sub> on the right:
+   <table width="100%" 
+class="equation"><tr><td><a 
+ id="x28-209002r6"></a>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC66x.png" alt="(1 - m1  n1)Am1n1   - (1 - m1 n1) BC  m1n1
+" class="math-display" ></center></td><td width="5%">(14.6)</td></tr></table>
+<!--l. 461--><p class="nopar">
+If we do not restrict ourselves to the original variables but allow constructions of new
+variables (according to certain very rigid rules), then the factorization problem is solvable
+using a generalization of a 1-prestrategy, called a 1-strategy. Section 5 of <span 
+class="cmbx-12">[HS] </span>describes
+1-strategies.
+<!--l. 482--><p class="indent">   The brevity of this presentation suppresses some of the advantages and some of the difficulties.
+For example, one might not instantly have all of the insight which leads to the second
+spreadsheet. In practice, a session in which someone &#8220;discovers&#8221; this theorem might use many
+spreadsheets.
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch15.html" >next</a>] [<a 
+href="NCBIGDOCch13.html" >prev</a>] [<a 
+href="NCBIGDOCch13.html#tailNCBIGDOCch13.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch14.html" >front</a>] [<a 
+href="NCBIGDOCpa4.html#NCBIGDOCch14.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch14.html"></a>    
+</body></html> 

@@ -1,0 +1,1079 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     39269,       1070]
+NotebookOptionsPosition[     37243,        995]
+NotebookOutlinePosition[     37688,       1013]
+CellTagsIndexPosition[     37645,       1010]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Mathematica\[CloseCurlyQuote] s 8.0 Control Capabilities with NCAlgebra\
+\>", "Title",
+ CellChangeTimes->{3.556912602038011*^9}],
+
+Cell["Load NCAlgebra", "Text",
+ CellChangeTimes->{{3.556912406312834*^9, 3.556912422741027*^9}},
+ FontSize->16],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCAlgebra`"}]}], "Input",
+ CellChangeTimes->{{3.528717055763462*^9, 3.528717060460946*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{
+  3.52871706170586*^9, 3.52871847216156*^9, 3.528718784825704*^9, 
+   3.528718949581244*^9, 3.528719088577683*^9, 3.528719186839396*^9, 
+   3.5287192639657*^9, 3.528719384748114*^9, {3.528719464412074*^9, 
+   3.5287194828927717`*^9}, 3.5287195136774*^9, 3.528719569367661*^9, {
+   3.5287200304444532`*^9, 3.528720059742154*^9}, {3.528720103846471*^9, 
+   3.528720123078122*^9}, {3.5287201928958178`*^9, 3.528720221524364*^9}, 
+   3.5287202875828533`*^9, {3.528720643138105*^9, 3.5287206614160013`*^9}, 
+   3.5287210738966513`*^9, 3.55691186953916*^9, 3.55691254479467*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.52871706170586*^9, 3.52871847216156*^9, 3.528718784825704*^9, 
+   3.528718949581244*^9, 3.528719088577683*^9, 3.528719186839396*^9, 
+   3.5287192639657*^9, 3.528719384748114*^9, {3.528719464412074*^9, 
+   3.5287194828927717`*^9}, 3.5287195136774*^9, 3.528719569367661*^9, {
+   3.5287200304444532`*^9, 3.528720059742154*^9}, {3.528720103846471*^9, 
+   3.528720123078122*^9}, {3.5287201928958178`*^9, 3.528720221524364*^9}, 
+   3.5287202875828533`*^9, {3.528720643138105*^9, 3.5287206614160013`*^9}, 
+   3.5287210738966513`*^9, 3.55691186953916*^9, 3.5569125447979193`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"You can now use \\\"<< NCAlgebra`\\\" to load NCAlgebra or \
+\"\>", "\[InvisibleSpace]", "\<\"\\\"<< NCGB`\\\" to load NCGB.\"\>"}],
+  SequenceForm[
+  "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
+   "\"<< NCGB`\" to load NCGB."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.52871706170586*^9, 3.52871847216156*^9, 3.528718784825704*^9, 
+   3.528718949581244*^9, 3.528719088577683*^9, 3.528719186839396*^9, 
+   3.5287192639657*^9, 3.528719384748114*^9, {3.528719464412074*^9, 
+   3.5287194828927717`*^9}, 3.5287195136774*^9, 3.528719569367661*^9, {
+   3.5287200304444532`*^9, 3.528720059742154*^9}, {3.528720103846471*^9, 
+   3.528720123078122*^9}, {3.5287201928958178`*^9, 3.528720221524364*^9}, 
+   3.5287202875828533`*^9, {3.528720643138105*^9, 3.5287206614160013`*^9}, 
+   3.5287210738966513`*^9, 3.55691186953916*^9, 3.556912544801231*^9}],
+
+Cell[BoxData["\<\"You have already loaded NCAlgebra.m\"\>"], "Print",
+ CellChangeTimes->{
+  3.52871706170586*^9, 3.52871847216156*^9, 3.528718784825704*^9, 
+   3.528718949581244*^9, 3.528719088577683*^9, 3.528719186839396*^9, 
+   3.5287192639657*^9, 3.528719384748114*^9, {3.528719464412074*^9, 
+   3.5287194828927717`*^9}, 3.5287195136774*^9, 3.528719569367661*^9, {
+   3.5287200304444532`*^9, 3.528720059742154*^9}, {3.528720103846471*^9, 
+   3.528720123078122*^9}, {3.5287201928958178`*^9, 3.528720221524364*^9}, 
+   3.5287202875828533`*^9, {3.528720643138105*^9, 3.5287206614160013`*^9}, 
+   3.5287210738966513`*^9, 3.55691186953916*^9, 3.55691254480363*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell["and NCControl", "Text",
+ CellChangeTimes->{{3.5569124140753527`*^9, 3.5569124275892344`*^9}},
+ FontSize->16],
+
+Cell[BoxData[
+ RowBox[{"<<", "NCControl`"}]], "Input",
+ CellChangeTimes->{{3.5287186131434*^9, 3.528718613145269*^9}}],
+
+Cell["SNC[a1, a2,a3,a4,b1,b2,c1,c2,d,u1,u2,u3,u4,v1,v2,w1,w2,z];", "Input",
+ CellChangeTimes->{{3.5287186185773077`*^9, 3.528718619633421*^9}, {
+  3.556912536755103*^9, 3.5569125380734043`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+sys1 = StateSpaceModel[{ {{a1,a2},{a3,a4}}, {{b1},{b2}}, {{c1,c2}}, {{d}}}]\
+\>", "Input",
+ CellChangeTimes->{{3.528718623137466*^9, 3.5287186897917557`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"a1", "a2", "b1"},
+        {"a3", "a4", "b2"},
+        {"c1", "c2", "d"}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, True, {False}, False}, 
+         "Rows" -> {False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {}}]], "Output",
+ CellChangeTimes->{{3.528718670720808*^9, 3.528718674242887*^9}, 
+   3.5287187886495028`*^9, 3.528718970180812*^9, 3.5287191073560133`*^9, 
+   3.5287191876539803`*^9, 3.528719264814996*^9, 3.5287193849462748`*^9, {
+   3.5287194649629927`*^9, 3.528719483111961*^9}, 3.5287195141780577`*^9, {
+   3.52871955447515*^9, 3.528719569802617*^9}, {3.5287200309261627`*^9, 
+   3.52872005997443*^9}, {3.528720104032282*^9, 3.528720123247324*^9}, {
+   3.5287201933438387`*^9, 3.528720221761524*^9}, 3.5287202877669067`*^9, {
+   3.528720643553397*^9, 3.528720661598106*^9}, 3.528721074279848*^9, 
+   3.5569118726421127`*^9, 3.5569125472132387`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Head", "[", "sys1", "]"}]], "Input",
+ CellChangeTimes->{{3.528719356648169*^9, 3.528719358604521*^9}}],
+
+Cell[BoxData["StateSpaceModel"], "Output",
+ CellChangeTimes->{{3.528719359020533*^9, 3.528719384979328*^9}, {
+   3.5287194649940968`*^9, 3.528719483141211*^9}, 3.5287195142088747`*^9, {
+   3.528719555325499*^9, 3.528719569834949*^9}, {3.528720030960619*^9, 
+   3.5287200600083847`*^9}, {3.528720104063656*^9, 3.52872012328006*^9}, {
+   3.5287201933774776`*^9, 3.5287202217906218`*^9}, 3.528720287799672*^9, {
+   3.528720643587741*^9, 3.528720661632979*^9}, 3.528721074311636*^9, 
+   3.5569118732934732`*^9, 3.556912547863264*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sys2", " ", "=", " ", 
+  RowBox[{"StateSpaceModel", "[", 
+   RowBox[{"{", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"u1", ",", "u2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"u3", ",", "u4"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", "v1", "}"}], ",", 
+       RowBox[{"{", "v2", "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"w1", ",", "w2"}], "}"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", "z", "}"}], "}"}]}], " ", "}"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.528718665937714*^9, 3.528718666649914*^9}, {
+  3.528718703250916*^9, 3.5287187084744787`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"u1", "u2", "v1"},
+        {"u3", "u4", "v2"},
+        {"w1", "w2", "z"}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, True, {False}, False}, 
+         "Rows" -> {False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {}}]], "Output",
+ CellChangeTimes->{
+  3.528718675930314*^9, 3.5287187088494787`*^9, 3.528718789349926*^9, 
+   3.528718970915037*^9, 3.528719108593774*^9, 3.528719187688406*^9, 
+   3.52871926488203*^9, 3.5287193849969387`*^9, {3.528719465011389*^9, 
+   3.52871948317457*^9}, 3.528719514226611*^9, {3.5287195559641457`*^9, 
+   3.52871956985044*^9}, {3.5287200309765577`*^9, 3.528720060025558*^9}, {
+   3.528720104081348*^9, 3.528720123312502*^9}, {3.528720193394114*^9, 
+   3.528720221807715*^9}, 3.528720287833991*^9, {3.528720643621559*^9, 
+   3.5287206616656446`*^9}, 3.5287210743291273`*^9, 3.556911874164093*^9, 
+   3.556912548582663*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SystemsModelSeriesConnect", "[", 
+  RowBox[{"sys1", ",", " ", "sys2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5287187137484627`*^9, 3.528718746030984*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"a1", "a2", "0", "0", "b1"},
+        {"a3", "a4", "0", "0", "b2"},
+        {
+         RowBox[{"v1", "**", "c1"}], 
+         RowBox[{"v1", "**", "c2"}], "u1", "u2", 
+         RowBox[{"v1", "**", "d"}]},
+        {
+         RowBox[{"v2", "**", "c1"}], 
+         RowBox[{"v2", "**", "c2"}], "u3", "u4", 
+         RowBox[{"v2", "**", "d"}]},
+        {
+         RowBox[{"z", "**", "c1"}], 
+         RowBox[{"z", "**", "c2"}], "w1", "w2", 
+         RowBox[{"z", "**", "d"}]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, False, False, True, {False}, False}, 
+         "Rows" -> {False, False, False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {SystemsModelLabels -> None}}]], "Output",
+ CellChangeTimes->{{3.528718718352624*^9, 3.528718747149075*^9}, 
+   3.528718791069942*^9, 3.528719109926379*^9, 3.528719187704443*^9, 
+   3.528719264949069*^9, 3.528719385029985*^9, {3.528719465044796*^9, 
+   3.528719483191228*^9}, 3.52871951425939*^9, {3.528719556728711*^9, 
+   3.528719569886018*^9}, {3.528720031010376*^9, 3.528720060058145*^9}, {
+   3.5287201041145067`*^9, 3.528720123346002*^9}, {3.528720193428136*^9, 
+   3.528720221841579*^9}, 3.5287202878665857`*^9, {3.528720643652594*^9, 
+   3.528720661682784*^9}, 3.528721074362351*^9, 3.556911874865205*^9, 
+   3.556912549165279*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SystemsModelSeriesConnect", "[", 
+  RowBox[{"sys2", ",", " ", "sys1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.528718763703532*^9, 3.5287187649264317`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"u1", "u2", "0", "0", "v1"},
+        {"u3", "u4", "0", "0", "v2"},
+        {
+         RowBox[{"b1", "**", "w1"}], 
+         RowBox[{"b1", "**", "w2"}], "a1", "a2", 
+         RowBox[{"b1", "**", "z"}]},
+        {
+         RowBox[{"b2", "**", "w1"}], 
+         RowBox[{"b2", "**", "w2"}], "a3", "a4", 
+         RowBox[{"b2", "**", "z"}]},
+        {
+         RowBox[{"d", "**", "w1"}], 
+         RowBox[{"d", "**", "w2"}], "c1", "c2", 
+         RowBox[{"d", "**", "z"}]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, False, False, True, {False}, False}, 
+         "Rows" -> {False, False, False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {SystemsModelLabels -> None}}]], "Output",
+ CellChangeTimes->{{3.5287187655123663`*^9, 3.528718795075305*^9}, 
+   3.528719111311911*^9, 3.5287191877384253`*^9, 3.528719265019656*^9, 
+   3.528719385063362*^9, {3.528719465062167*^9, 3.528719483225074*^9}, 
+   3.528719514275949*^9, {3.528719557713315*^9, 3.528719569900751*^9}, {
+   3.5287200310269623`*^9, 3.528720060092148*^9}, {3.528720104146912*^9, 
+   3.528720123362298*^9}, {3.5287201934446373`*^9, 3.528720221874281*^9}, 
+   3.528720287883891*^9, {3.528720643686322*^9, 3.528720661715353*^9}, 
+   3.528721074379217*^9, 3.556911875496436*^9, 3.5569125499847813`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SystemsModelFeedbackConnect", "[", " ", 
+  RowBox[{"sys1", ",", " ", "sys2"}], " ", "]"}]], "Input",
+ CellChangeTimes->{{3.52871911659123*^9, 3.528719120172488*^9}, 
+   3.556912553051291*^9}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {
+         RowBox[{"a1", "-", 
+          RowBox[{"b1", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "c1"}]}], 
+         RowBox[{"a2", "-", 
+          RowBox[{"b1", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "c2"}]}], 
+         RowBox[{"-", 
+          RowBox[{"b1", "**", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"z", "**", 
+              RowBox[{"inv", "[", 
+               RowBox[{"1", "+", 
+                RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}], ")"}], "**",
+            "w1"}]}], 
+         RowBox[{"-", 
+          RowBox[{"b1", "**", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"z", "**", 
+              RowBox[{"inv", "[", 
+               RowBox[{"1", "+", 
+                RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}], ")"}], "**",
+            "w2"}]}], 
+         RowBox[{"b1", "-", 
+          RowBox[{"b1", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}]},
+        {
+         RowBox[{"a3", "-", 
+          RowBox[{"b2", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "c1"}]}], 
+         RowBox[{"a4", "-", 
+          RowBox[{"b2", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "c2"}]}], 
+         RowBox[{"-", 
+          RowBox[{"b2", "**", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"z", "**", 
+              RowBox[{"inv", "[", 
+               RowBox[{"1", "+", 
+                RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}], ")"}], "**",
+            "w1"}]}], 
+         RowBox[{"-", 
+          RowBox[{"b2", "**", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"z", "**", 
+              RowBox[{"inv", "[", 
+               RowBox[{"1", "+", 
+                RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}], ")"}], "**",
+            "w2"}]}], 
+         RowBox[{"b2", "-", 
+          RowBox[{"b2", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}]},
+        {
+         RowBox[{"v1", "**", 
+          RowBox[{"inv", "[", 
+           RowBox[{"1", "+", 
+            RowBox[{"d", "**", "z"}]}], "]"}], "**", "c1"}], 
+         RowBox[{"v1", "**", 
+          RowBox[{"inv", "[", 
+           RowBox[{"1", "+", 
+            RowBox[{"d", "**", "z"}]}], "]"}], "**", "c2"}], 
+         RowBox[{"u1", "-", 
+          RowBox[{"v1", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "d", "**", "w1"}]}], 
+         RowBox[{"u2", "-", 
+          RowBox[{"v1", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "d", "**", "w2"}]}], 
+         RowBox[{"v1", "**", 
+          RowBox[{"inv", "[", 
+           RowBox[{"1", "+", 
+            RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]},
+        {
+         RowBox[{"v2", "**", 
+          RowBox[{"inv", "[", 
+           RowBox[{"1", "+", 
+            RowBox[{"d", "**", "z"}]}], "]"}], "**", "c1"}], 
+         RowBox[{"v2", "**", 
+          RowBox[{"inv", "[", 
+           RowBox[{"1", "+", 
+            RowBox[{"d", "**", "z"}]}], "]"}], "**", "c2"}], 
+         RowBox[{"u3", "-", 
+          RowBox[{"v2", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "d", "**", "w1"}]}], 
+         RowBox[{"u4", "-", 
+          RowBox[{"v2", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "d", "**", "w2"}]}], 
+         RowBox[{"v2", "**", 
+          RowBox[{"inv", "[", 
+           RowBox[{"1", "+", 
+            RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]},
+        {
+         RowBox[{"c1", "-", 
+          RowBox[{"d", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "c1"}]}], 
+         RowBox[{"c2", "-", 
+          RowBox[{"d", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "c2"}]}], 
+         RowBox[{"-", 
+          RowBox[{"d", "**", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"z", "**", 
+              RowBox[{"inv", "[", 
+               RowBox[{"1", "+", 
+                RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}], ")"}], "**",
+            "w1"}]}], 
+         RowBox[{"-", 
+          RowBox[{"d", "**", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"z", "**", 
+              RowBox[{"inv", "[", 
+               RowBox[{"1", "+", 
+                RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}], ")"}], "**",
+            "w2"}]}], 
+         RowBox[{"d", "-", 
+          RowBox[{"d", "**", "z", "**", 
+           RowBox[{"inv", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"d", "**", "z"}]}], "]"}], "**", "d"}]}]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, False, False, True, {False}, False}, 
+         "Rows" -> {False, False, False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {SystemsModelLabels -> None}}]], "Output",
+ CellChangeTimes->{
+  3.528719120980648*^9, 3.528719187755691*^9, 3.5287192650824957`*^9, 
+   3.528719385098081*^9, {3.528719465096438*^9, 3.5287194832500067`*^9}, 
+   3.528719514311105*^9, {3.5287195583819647`*^9, 3.528719569935519*^9}, {
+   3.528720031061327*^9, 3.528720060126122*^9}, {3.528720104173376*^9, 
+   3.5287201233963957`*^9}, {3.5287201934791193`*^9, 3.528720221899056*^9}, 
+   3.528720287917809*^9, {3.5287206437122507`*^9, 3.528720661739787*^9}, 
+   3.528721074413623*^9, 3.5569118763856497`*^9, 3.55691255090532*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SystemsModelParallelConnect", "[", " ", 
+  RowBox[{"sys1", ",", " ", "sys2"}], " ", "]"}]], "Input",
+ CellChangeTimes->{{3.5287193129540253`*^9, 3.528719312955728*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"a1", "a2", "0", "0", "b1"},
+        {"a3", "a4", "0", "0", "b2"},
+        {"0", "0", "u1", "u2", "v1"},
+        {"0", "0", "u3", "u4", "v2"},
+        {"c1", "c2", "w1", "w2", 
+         RowBox[{"d", "+", "z"}]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, False, False, True, {False}, False}, 
+         "Rows" -> {False, False, False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {SystemsModelLabels -> None}}]], "Output",
+ CellChangeTimes->{
+  3.52871931379694*^9, 3.528719385130622*^9, {3.5287194651119432`*^9, 
+   3.5287194832769423`*^9}, 3.528719514342931*^9, 3.528719569950683*^9, {
+   3.5287200310940857`*^9, 3.528720060157584*^9}, {3.528720104196968*^9, 
+   3.5287201234316483`*^9}, {3.5287201935136337`*^9, 3.528720221924124*^9}, 
+   3.5287202879512987`*^9, {3.5287206437361803`*^9, 3.528720661764984*^9}, 
+   3.5287210744455433`*^9, 3.556911877266102*^9, 3.5569125549924*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCInverseSystem", " ", "[", " ", "sys1", " ", "]"}]], "Input",
+ CellChangeTimes->{{3.528719323451006*^9, 3.528719323452633*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {
+         RowBox[{"a1", "-", 
+          RowBox[{"b1", "**", 
+           RowBox[{"inv", "[", "d", "]"}], "**", "c1"}]}], 
+         RowBox[{"a2", "-", 
+          RowBox[{"b1", "**", 
+           RowBox[{"inv", "[", "d", "]"}], "**", "c2"}]}], 
+         RowBox[{"-", 
+          RowBox[{"b1", "**", 
+           RowBox[{"inv", "[", "d", "]"}]}]}]},
+        {
+         RowBox[{"a3", "-", 
+          RowBox[{"b2", "**", 
+           RowBox[{"inv", "[", "d", "]"}], "**", "c1"}]}], 
+         RowBox[{"a4", "-", 
+          RowBox[{"b2", "**", 
+           RowBox[{"inv", "[", "d", "]"}], "**", "c2"}]}], 
+         RowBox[{"-", 
+          RowBox[{"b2", "**", 
+           RowBox[{"inv", "[", "d", "]"}]}]}]},
+        {
+         RowBox[{
+          RowBox[{"inv", "[", "d", "]"}], "**", "c1"}], 
+         RowBox[{
+          RowBox[{"inv", "[", "d", "]"}], "**", "c2"}], 
+         RowBox[{"inv", "[", "d", "]"}]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, True, {False}, False}, 
+         "Rows" -> {False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {}}]], "Output",
+ CellChangeTimes->{
+  3.528719324433751*^9, 3.5287193853356743`*^9, {3.528719465471364*^9, 
+   3.528719483333666*^9}, 3.528719514572198*^9, 3.528719570259097*^9, {
+   3.5287200312594633`*^9, 3.528720060178194*^9}, {3.5287201042166843`*^9, 
+   3.5287201234621773`*^9}, {3.528720193544525*^9, 3.5287202219410057`*^9}, 
+   3.528720287983444*^9, {3.528720643752635*^9, 3.528720661781802*^9}, 
+   3.528721074479851*^9, 3.5569118781174717`*^9, 3.556912556479879*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCConjugateSystem", "[", " ", "sys1", "  ", "]"}]], "Input",
+ CellChangeTimes->{{3.528719933418254*^9, 3.528719934682075*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {
+         RowBox[{"-", 
+          RowBox[{"tp", "[", "a1", "]"}]}], 
+         RowBox[{"-", 
+          RowBox[{"tp", "[", "a3", "]"}]}], 
+         RowBox[{"-", 
+          RowBox[{"tp", "[", "c1", "]"}]}]},
+        {
+         RowBox[{"-", 
+          RowBox[{"tp", "[", "a2", "]"}]}], 
+         RowBox[{"-", 
+          RowBox[{"tp", "[", "a4", "]"}]}], 
+         RowBox[{"-", 
+          RowBox[{"tp", "[", "c2", "]"}]}]},
+        {
+         RowBox[{"tp", "[", "b1", "]"}], 
+         RowBox[{"tp", "[", "b2", "]"}], 
+         RowBox[{"tp", "[", "d", "]"}]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, True, {False}, False}, 
+         "Rows" -> {False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {}}]], "Output",
+ CellChangeTimes->{{3.528720031283174*^9, 3.528720060210595*^9}, {
+   3.528720104250205*^9, 3.528720123496079*^9}, {3.528720193579309*^9, 
+   3.528720221975191*^9}, 3.528720288000938*^9, {3.528720643786324*^9, 
+   3.528720661817565*^9}, 3.5287210744962893`*^9, 3.556911878754368*^9, 
+   3.5569125572795467`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TransferFunctionModel", "[", " ", 
+  RowBox[{"sys1", " ", ",", "s"}], "]"}]], "Input",
+ CellChangeTimes->{{3.528719944129239*^9, 3.528719952737528*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {
+         FractionBox[
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "a2"}], " ", "a3"}], "+", 
+           RowBox[{"a1", " ", "a4"}], "-", 
+           RowBox[{"a1", " ", "s"}], "-", 
+           RowBox[{"a4", " ", "s"}], "+", 
+           SuperscriptBox["s", "2"], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "1"}], "+", "d"}], ")"}], " ", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "a2"}], " ", "a3"}], "+", 
+              RowBox[{"a1", " ", "a4"}], "-", 
+              RowBox[{"a1", " ", "s"}], "-", 
+              RowBox[{"a4", " ", "s"}], "+", 
+              SuperscriptBox["s", "2"]}], ")"}]}], "-", 
+           RowBox[{"a4", " ", 
+            RowBox[{"b1", "**", "c1"}]}], "+", 
+           RowBox[{"s", " ", 
+            RowBox[{"b1", "**", "c1"}]}], "+", 
+           RowBox[{"a3", " ", 
+            RowBox[{"b1", "**", "c2"}]}], "+", 
+           RowBox[{"a2", " ", 
+            RowBox[{"b2", "**", "c1"}]}], "-", 
+           RowBox[{
+            RowBox[{"b1", "**", "c2"}], " ", 
+            RowBox[{"b2", "**", "c1"}]}], "-", 
+           RowBox[{"a1", " ", 
+            RowBox[{"b2", "**", "c2"}]}], "+", 
+           RowBox[{"s", " ", 
+            RowBox[{"b2", "**", "c2"}]}], "+", 
+           RowBox[{
+            RowBox[{"b1", "**", "c1"}], " ", 
+            RowBox[{"b2", "**", "c2"}]}]}], 
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "a2"}], " ", "a3"}], "+", 
+           RowBox[{"a1", " ", "a4"}], "-", 
+           RowBox[{"a1", " ", "s"}], "-", 
+           RowBox[{"a4", " ", "s"}], "+", 
+           SuperscriptBox["s", "2"]}]]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalT]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {TransferFunctionModel, {{
+    Control`CommonDump`pVar -> $CellContext`s, Hash -> 81444850}}}]], "Output",\
+
+ CellChangeTimes->{{3.528720031344714*^9, 3.5287200602465353`*^9}, {
+   3.528720104281968*^9, 3.5287201235139647`*^9}, {3.528720193595018*^9, 
+   3.528720222011703*^9}, 3.528720288035467*^9, {3.5287206438032312`*^9, 
+   3.52872066185349*^9}, 3.5287210745297956`*^9, 3.556911879465062*^9, 
+   3.5569125580312023`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DualSystemsModel", "[", " ", "sys1", "]"}]], "Input",
+ CellChangeTimes->{{3.528719982705152*^9, 3.528720015151699*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  SubsuperscriptBox[
+   FormBox[
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {
+         RowBox[{"Conjugate", "[", "a1", "]"}], 
+         RowBox[{"Conjugate", "[", "a3", "]"}], 
+         RowBox[{"Conjugate", "[", "c1", "]"}]},
+        {
+         RowBox[{"Conjugate", "[", "a2", "]"}], 
+         RowBox[{"Conjugate", "[", "a4", "]"}], 
+         RowBox[{"Conjugate", "[", "c2", "]"}]},
+        {
+         RowBox[{"Conjugate", "[", "b1", "]"}], 
+         RowBox[{"Conjugate", "[", "b2", "]"}], 
+         RowBox[{"Conjugate", "[", "d", "]"}]}
+       },
+       AllowScriptLevelChange->False,
+       BaseStyle->{Deployed -> False},
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxDividers->{
+        "Columns" -> {False, False, True, {False}, False}, 
+         "Rows" -> {False, False, True, {False}, False}},
+       GridBoxItemStyle->{
+        "ItemsIndexed" -> {{{1, 1}, {}} -> {
+            Deployed -> True, ShowStringCharacters -> False}, {{}, {1, 
+             1}} -> {Deployed -> True, ShowStringCharacters -> False}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[InvisibleSpace]\"\>",
+     ShowStringCharacters->False],
+    StandardForm], 
+   FormBox[
+    StyleBox["\<\"\[ScriptCapitalS]\"\>",
+     Editable->False,
+     ShowStringCharacters->False],
+    StandardForm],
+   MultilineFunction->None],
+  {StateSpaceModel, {}}]], "Output",
+ CellChangeTimes->{{3.528720016355665*^9, 3.528720060274962*^9}, {
+   3.528720104314149*^9, 3.52872012354672*^9}, {3.5287201936282263`*^9, 
+   3.528720222042144*^9}, 3.528720288067748*^9, {3.5287206438363523`*^9, 
+   3.528720661883016*^9}, 3.528721074545491*^9, 3.556911880135213*^9, 
+   3.556912558749155*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{857, 717},
+WindowMargins->{{Automatic, 1}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 138, 3, 60, "Title"],
+Cell[720, 27, 111, 2, 30, "Text"],
+Cell[CellGroupData[{
+Cell[856, 33, 170, 3, 53, "Input"],
+Cell[CellGroupData[{
+Cell[1051, 40, 686, 10, 20, "Print"],
+Cell[1740, 52, 780, 13, 20, "Print"],
+Cell[2523, 67, 917, 16, 20, "Print"],
+Cell[3443, 85, 662, 9, 20, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[4132, 98, 114, 2, 30, "Text"],
+Cell[4249, 102, 118, 2, 37, "Input"],
+Cell[4370, 106, 194, 2, 37, "Input"],
+Cell[CellGroupData[{
+Cell[4589, 112, 168, 3, 37, "Input"],
+Cell[4760, 117, 2109, 51, 72, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6906, 173, 126, 2, 37, "Input"],
+Cell[7035, 177, 529, 7, 37, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7601, 189, 718, 21, 37, "Input"],
+Cell[8322, 212, 2099, 52, 72, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10458, 269, 180, 3, 37, "Input"],
+Cell[10641, 274, 2519, 62, 104, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13197, 341, 180, 3, 37, "Input"],
+Cell[13380, 346, 2500, 61, 104, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15917, 412, 215, 4, 37, "Input"],
+Cell[16135, 418, 7406, 195, 104, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23578, 618, 192, 3, 37, "Input"],
+Cell[23773, 623, 2127, 52, 104, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25937, 680, 152, 2, 37, "Input"],
+Cell[26092, 684, 2757, 72, 72, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28886, 761, 150, 2, 37, "Input"],
+Cell[29039, 765, 2265, 62, 72, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31341, 832, 176, 3, 37, "Input"],
+Cell[31520, 837, 3341, 89, 64, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34898, 931, 143, 2, 37, "Input"],
+Cell[35044, 935, 2171, 56, 72, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

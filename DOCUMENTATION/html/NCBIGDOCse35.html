@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>9.3 Making a Groebner Basis</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 166--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse36.html" >next</a>] [<a 
+href="NCBIGDOCse34.html" >prev</a>] [<a 
+href="NCBIGDOCse34.html#tailNCBIGDOCse34.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse35.html">tail</a>] [<a 
+href="NCBIGDOCch9.html#NCBIGDOCse35.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">9.3   </span> <a 
+ id="x53-1820009.3"></a>Making a Groebner Basis</h3>
+<!--l. 169--><p class="noindent">A reader who has no explicit interest in Groebner Bases might want to skip this section. Readers
+who lack background in Gröbner Basis may want to read [CLS]. This section does indicate
+what underlies the simlification commands in Chapter <a 
+href="NCBIGDOCch9.html#x48-1780009">9<!--tex4ht:ref: chapter:simple:demos --></a>. For more on the subject see
+<a 
+href="NCBIGDOCse38.html#x60-18700010.2">10.2<!--tex4ht:ref: subsection:makeGB --></a>.
+<!--l. 184--><p class="indent">   Before making a Gröbner Basis, one must declare which variables will be used during the
+computation and must declare a &#8220;monomial order&#8221; which can be done using the commands
+described in Chapter <a 
+href="NCBIGDOCch18.html#x108-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>. A user does not need to know theoretical background related to
+monomials orders. Indeed, as we shall see in Chapter <a 
+href="NCBIGDOCch14.html#x72-20400014">14<!--tex4ht:ref: chapter:ncprocess:example --></a>, for many engineering problems, it
+suffices to know which variables correspond to quantities which are known and which
+variables correspond to quantities which are unknown. If one is solving for a variable
+or desires to prove that a certain quantity is zero, then one would want to view that
+variable as unknown. For simple mathematical problems, one can take all of the variables
+to be known. At this point in the exposition we assume that we have set a monomial
+order.
+<a 
+ id="dx53-182001"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=&#x00A0;&lt;&lt;NCGB.m
+&#x00A0;<br />In[2]:=&#x00A0;SetNonCommutative[a,b,x,y]
+&#x00A0;<br />In[3]:=&#x00A0;SetMonomialOrder[a,b,x,y]
+&#x00A0;<br />In[4]:=&#x00A0;ourGB&#x00A0;=&#x00A0;NCMakeGB[{y**x&#x00A0;-&#x00A0;a,&#x00A0;y**x&#x00A0;-&#x00A0;b,&#x00A0;x**x&#x00A0;-&#x00A0;a,&#x00A0;x**x**x&#x00A0;-&#x00A0;b},&#x00A0;10]
+</div>
+</td></tr></table>
+<!--l. 226--><p class="nopar">
+<!--l. 230--><p class="noindent">The result is:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[5]=&#x00A0;{-a+x**x,-a+b,-a+y**x,-a+a**x,-a+x**a,-a+y**a,-a+a**a}
+</div>
+</td></tr></table>
+<!--l. 237--><p class="nopar">
+<!--l. 241--><p class="indent">   Our favorite format (as can be seen from the output to the screen) for displaying lists of
+relations is ColumnForm.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[5]:=&#x00A0;ColumnForm[%]
+&#x00A0;<br />Out[5]=&#x00A0;-a&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;+&#x00A0;b
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;+&#x00A0;y&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;a
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;+&#x00A0;y&#x00A0;**&#x00A0;a
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-a&#x00A0;+&#x00A0;a&#x00A0;**&#x00A0;a
+</div>
+</td></tr></table>
+<!--l. 257--><p class="nopar">
+<!--l. 260--><p class="indent">   Someone not familiar with GB&#8217;s might find it instructive to note this output GB triangularizes
+the input equations to the extent that we have a compatibility condition on <span 
+class="cmmi-12">a</span>, namely <span 
+class="cmmi-12">a</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">a </span>= 0;
+we can solve for <span 
+class="cmmi-12">b </span>in terms of <span 
+class="cmmi-12">a</span>; there is one equation involving only <span 
+class="cmmi-12">y </span>and <span 
+class="cmmi-12">a</span>; and there are three
+equations involving only <span 
+class="cmmi-12">x </span>and <span 
+class="cmmi-12">a</span>. Thus if we were in a concrete situation with <span 
+class="cmmi-12">a </span>and <span 
+class="cmmi-12">b</span>, given
+matrices, and <span 
+class="cmmi-12">x </span>and <span 
+class="cmmi-12">y</span>, unknown matrices we would expect to be able to solve for large pieces of <span 
+class="cmmi-12">x</span>
+and <span 
+class="cmmi-12">y </span>independently and then plug them into the remaining equation <span 
+class="cmmi-12">yx </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a </span>= 0 to get a
+compatibility condition.
+
+   <!--l. 273--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse36.html" >next</a>] [<a 
+href="NCBIGDOCse34.html" >prev</a>] [<a 
+href="NCBIGDOCse34.html#tailNCBIGDOCse34.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse35.html" >front</a>] [<a 
+href="NCBIGDOCch9.html#NCBIGDOCse35.html" >up</a>] </p></div>
+<!--l. 273--><p class="indent">   <a 
+ id="tailNCBIGDOCse35.html"></a>  
+</body></html> 

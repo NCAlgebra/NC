@@ -1,0 +1,250 @@
+\documentstyle[rep10,leqno]{report}
+\voffset = -1in
+\evensidemargin 0.1in
+\oddsidemargin 0.1in
+\textheight 9in
+\textwidth 6in
+\begin{document}
+\normalsize
+\baselineskip=12pt
+\noindent
+Input = 
+$
+\\-1 + a\,
+ Inva\\
+-1 + Aja\,
+ InvAja\\
+-1\,
+ c + Ajb\,
+ InvLossLessM\\
+-1\,
+ Ajb\,
+ Ajc + c\,
+ b\\
+-1\,
+ Ajb + c\,
+ LossLessM\\
+-1 + Inva\,
+ a\\
+-1 + InvAja\,
+ Aja\\
+-1\,
+ Aja\,
+ InvLossLessM + Ajc\,
+ c - InvLossLessM\,
+ a\\
+-1\,
+ Ajc + InvLossLessM\,
+ b\\
+-1 + InvLossLessM\,
+ LossLessM\\
+-1\,
+ a\,
+ LossLessM + b\,
+ Ajb - LossLessM\,
+ Aja\\
+-1\,
+ b + LossLessM\,
+ Ajc\\
+-1 + LossLessM\,
+ InvLossLessM\\
+Ajb\,
+ Aja - Ajb\,
+ Ajc\,
+ Ajb + c\,
+ a\,
+ LossLessM\\
+-1\,
+ Aja\,
+ Ajc + Ajc\,
+ Ajb\,
+ Ajc - InvLossLessM\,
+ a\,
+ b\\
+Aja - Ajc\,
+ Ajb + InvLossLessM\,
+ a\,
+ LossLessM\\
+a - b\,
+ c + LossLessM\,
+ Aja\,
+ InvLossLessM\\
+-1\,
+ Aja\,
+ Aja\,
+ InvLossLessM + InvLossLessM\,
+ a\,
+ a + Ajc\,
+ Ajb\,
+ Aja\,
+ InvLossLessM - InvLossLessM\,
+ a\,
+ b\,
+ c\\
+$
+File Name = c63.out\\
+NCMakeGB Iterations = 5\\
+NCMakeGB on Digested Iterations = 0\\
+SmallBasis Iterations = 0\\
+SmallBasis on Knowns Iterations = 0\\
+Deselect$\rightarrow \{\}$\\
+UserSelect$\rightarrow \{\}$\\
+RR$\rightarrow $False\\
+RRByCat$\rightarrow $False\\
+SB$\rightarrow $False\\
+SBByCat$\rightarrow $True\\
+DegreeCap$\rightarrow $-1\\
+DegreeSumCap$\rightarrow $-1\\
+DegreeCapSB$\rightarrow $-1\\
+DegreeSumCapSB$\rightarrow $-1\\
+NCCV$\rightarrow $False\\
+THE ORDER IS NOW THE FOLLOWING:\hfil\break
+$
+a<c<LossLessM<InvLossLessM<Ajc\ll
+Aja<Inva<InvAja<b<Ajb\\
+$
+\rule[2pt]{6in}{4pt}\hfil\break
+\rule[2pt]{1.879in}{4pt}
+\ YOUR SESSION HAS DIGESTED\ 
+\rule[2pt]{1.879in}{4pt}\hfil\break
+\rule[2pt]{1.923in}{4pt}
+\ THE FOLLOWING RELATIONS\ 
+\rule[2pt]{1.923in}{4pt}\hfil\break
+\rule[2pt]{6in}{4pt}\hfil\break
+THE FOLLOWING VARIABLES HAVE BEEN SOLVED FOR:\hfil\break
+$\{Aja,
+$ $
+Ajb,
+$ $
+b\}$
+\smallskip\\
+The corresponding rules are the following:\smallskip\\
+\begin{minipage}{6in}
+$
+Aja\rightarrow Ajc\,
+ c\,
+ LossLessM - InvLossLessM\,
+ a\,
+ LossLessM
+$
+\end{minipage}\medskip\\
+\begin{minipage}{6in}
+$
+Ajb\rightarrow c\,
+ LossLessM
+$
+\end{minipage}\medskip\\
+\begin{minipage}{6in}
+$
+b\rightarrow LossLessM\,
+ Ajc
+$
+\end{minipage}\medskip\\
+\rule[3pt]{6in}{.7pt}\\
+The expressions with unknown variables $\{\}$\\
+and knowns $\{InvLossLessM,
+$ $
+LossLessM\}$\smallskip\\
+\begin{minipage}{6in}
+$
+InvLossLessM\,
+ LossLessM\rightarrow 1
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+LossLessM\,
+ InvLossLessM\rightarrow 1
+$
+\end{minipage}\\
+\rule[2pt]{6in}{1pt}\hfil\break
+\rule[2.5pt]{1.701in}{1pt}
+\ USER CREATIONS APPEAR BELOW\ 
+\rule[2.5pt]{1.701in}{1pt}\hfil\break
+\rule[2pt]{6in}{1pt}\hfil\break
+\rule[2pt]{6in}{4pt}\hfil\break
+\rule[2pt]{1.45in}{4pt}
+\ SOME RELATIONS WHICH APPEAR BELOW\ 
+\rule[2pt]{1.45in}{4pt}\hfil\break
+\rule[2pt]{2.18in}{4pt}
+\ MAY BE UNDIGESTED\ 
+\rule[2pt]{2.18in}{4pt}\hfil\break
+\rule[2pt]{6in}{4pt}\hfil\break
+THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:\hfil\break
+$\{a,
+$ $
+Ajc,
+$ $
+c,
+$ $
+Inva,
+$ $
+InvAja,
+$ $
+InvLossLessM,
+$ $
+LossLessM\}$
+\smallskip\\
+\rule[3pt]{6in}{.7pt}\\
+The expressions with unknown variables $\{Inva\}$\\
+and knowns $\{a\}$\smallskip\\
+\begin{minipage}{6in}
+$
+a\,
+ Inva\rightarrow 1
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+Inva\,
+ a\rightarrow 1
+$
+\end{minipage}\\
+\rule[3pt]{6in}{.7pt}\\
+The expressions with unknown variables $\{InvAja\}$\\
+and knowns $\{a,
+$ $
+Ajc,
+$ $
+c,
+$ $
+InvLossLessM,
+$ $
+LossLessM\}$\smallskip\\
+\begin{minipage}{6in}
+$
+InvAja\,
+ Ajc\,
+ c\rightarrow InvLossLessM + InvAja\,
+ InvLossLessM\,
+ a
+$
+\end{minipage}\medskip \\
+\begin{minipage}{6in}
+$
+Ajc\,
+ c\,
+ LossLessM\,
+ InvAja\rightarrow 1 + InvLossLessM\,
+ a\,
+ LossLessM\,
+ InvAja
+$
+\end{minipage}\\
+\vspace{10pt}
+
+\noindent
+The time for preliminaries was 0:00:00\\
+The time for NCMakeGB 1 was 0:00:00\\
+The time for Remove Redundant 1 was 0:00:00\\
+The time for the main NCMakeGB was 0:00:01\\
+The time for Remove Redundant 2 was 0:00:00\\
+The time for reducing unknowns was 0:00:03\\
+The time for clean up basis was 0:00:00\\
+The time for SmallBasis was 0:00:04\\
+The time for CreateCategories was 0:00:01\\
+The time for NCCV was 0:00:00\\
+The time for RegularOutput was 0:00:02\\
+The time for everything so far was 0:00:18\\
+\end{document}
+\end

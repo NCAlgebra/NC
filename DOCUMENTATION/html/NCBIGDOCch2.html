@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>2 A More Sophisticated Demo</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch3.html" >next</a>] [<a 
+href="NCBIGDOCch1.html" >prev</a>] [<a 
+href="NCBIGDOCch1.html#tailNCBIGDOCch1.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch2.html">tail</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCch2.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;2</span><br><a 
+ id="x6-140002"></a>A More Sophisticated Demo</h2>
+<!--l. 4--><p class="noindent">This demo derives the <span 
+class="cmti-12">Bounded Real Lemma </span>for a linear system using NCAlgebra. We will revisit
+this demo when we introduce NCGB. This is a special case of this lemma for a more general
+system described in [BHW].
+<!--l. 9--><p class="indent">   First we load NCAlgebra and do some initialization.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]&#x00A0;&lt;&lt;&#x00A0;NC&#8216;
+&#x00A0;<br />In[2]&#x00A0;&lt;&lt;&#x00A0;NCAlgebra&#8216;
+&#x00A0;<br />In[3]:=&#x00A0;Clear[F,&#x00A0;G,&#x00A0;A,&#x00A0;B,&#x00A0;x,&#x00A0;W,&#x00A0;XX];
+&#x00A0;<br />In[4]:=&#x00A0;SetNonCommutative[F,&#x00A0;G,&#x00A0;A,&#x00A0;B,&#x00A0;C,&#x00A0;D,&#x00A0;x,&#x00A0;W,&#x00A0;XX];
+&#x00A0;<br />In[5]:=&#x00A0;Clear[e,&#x00A0;F,&#x00A0;G,&#x00A0;p];
+&#x00A0;<br />In[6]:=&#x00A0;e[x_]&#x00A0;:=&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;x
+&#x00A0;<br />In[7]:=&#x00A0;F[x_,&#x00A0;W_]&#x00A0;:=&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;B&#x00A0;**&#x00A0;W
+&#x00A0;<br />In[8]:=&#x00A0;G[x_,&#x00A0;W_]&#x00A0;:=&#x00A0;C&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;D&#x00A0;**&#x00A0;W
+&#x00A0;<br />In[9]:=&#x00A0;tp[XX]&#x00A0;=&#x00A0;XX;
+&#x00A0;<br />In[10]:=&#x00A0;p[x_]&#x00A0;=&#x00A0;tp[Grad[e[x],&#x00A0;x]]
+&#x00A0;<br />Grad::limited:&#x00A0;Grad&#x00A0;gives&#x00A0;correct&#x00A0;answers&#x00A0;only&#x00A0;for&#x00A0;a&#x00A0;limited&#x00A0;class&#x00A0;of&#x00A0;functions!
+&#x00A0;<br />Out[10]=&#x00A0;2&#x00A0;tp[x]&#x00A0;**&#x00A0;XX
+</div>
+</td></tr></table>
+<!--l. 23--><p class="nopar">
+<!--l. 25--><p class="indent">   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x6-140011"></a>
+
+<!--l. 26--><p class="center">   <img 
+src="NCBIGDOC5x.png" alt="PICT" >
+<br> <table class="caption" 
+><tr valign="baseline" class="caption"><td class="id">Figure&#x00A0;2.1: </td><td  
+class="content">System Diagram</td></tr></table><!--tex4ht:label?: x6-140011 -->
+
+<!--l. 36--><p class="indent">   </td></tr></table></div><hr class="endfigure">
+<!--l. 37--><p class="indent">   These definitions are associated with the system diagram in Figure&#x00A0;<a 
+href="#x6-140011">2.1<!--tex4ht:ref: fig:demo1 --></a>, where:
+<table 
+class="align-star">
+                               <tr><td 
+class="align-odd"><img 
+src="NCBIGDOC6x.png" alt="dx-
+dt"  class="frac" align="middle"></td>                               <td 
+class="align-even"> = <span 
+class="cmmi-12">F</span>(<span 
+class="cmmi-12">x,W</span>) = <span 
+class="cmmi-12">Ax </span>+ <span 
+class="cmmi-12">BW</span>;</td>                               <td 
+class="align-label"></td>                               <td 
+class="align-label">
+                               </td></tr><tr><td 
+class="align-odd"><span 
+class="cmmi-12">out</span></td>                               <td 
+class="align-even"> = <span 
+class="cmmi-12">G</span>(<span 
+class="cmmi-12">x,W</span>) = <span 
+class="cmmi-12">Cx </span>+ <span 
+class="cmmi-12">DW.</span></td>                               <td 
+class="align-label"></td>                               <td 
+class="align-label"></td></tr></table>
+Now recall definition of Energy Hamiltonian H:
+<table 
+class="align-star">
+                        <tr><td 
+class="align-odd"><span 
+class="cmmi-12">H</span></td>                        <td 
+class="align-even"> = <span 
+class="cmmi-12">out</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">out </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">&#x03B3;</span><sup ><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-12">W</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">W </span>+ <img 
+src="NCBIGDOC7x.png" alt="(p.F + (p.F)T )
+---------------
+       2"  class="frac" align="middle"></td>                        <td 
+class="align-label"></td>                        <td 
+class="align-label"></td></tr></table>
+where
+
+<table 
+class="align-star">
+                 <tr><td 
+class="align-odd"><span 
+class="cmmi-12">e</span>(<span 
+class="cmmi-12">x</span>)</td>                 <td 
+class="align-even"> = <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">Xx,</span></td>                 <td 
+class="align-odd"><span 
+class="cmmi-12">p</span>(<span 
+class="cmmi-12">x</span>)</td>                 <td 
+class="align-even"> = <span 
+class="cmsy-10x-x-120">&#x2207;</span><span 
+class="cmmi-12">e</span>(<span 
+class="cmmi-12">x</span>) = 2(<span 
+class="cmmi-12">x.X</span>)<sup ><span 
+class="cmmi-8">T</span> </sup></td>                 <td 
+class="align-label"></td>                 <td 
+class="align-label"></td>                 <td 
+class="align-label"></td>                 <td 
+class="align-label"></td></tr></table>
+<!--l. 53--><p class="indent">   Our goal is to prove the following Lemma: <div class="newtheorem">
+<!--l. 54--><p class="noindent"><span class="head">
+<span 
+class="cmbx-12">Lemma</span><span 
+class="cmbx-12">&#x00A0;1</span> </span><span 
+class="cmti-12">Assume </span>(<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">&#x03B3;</span><sup ><span 
+class="cmr-8">2</span></sup> + <span 
+class="cmmi-12">D</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">D</span>)<sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>  <span 
+class="cmti-12">exists. Then the linear system described above</span>
+<span 
+class="cmti-12">is:</span>
+    <ol  class="enumerate1" >
+    <li class="enumerate" value="1" 
+><a 
+ id="x6-14004x1"></a><span 
+class="cmti-12">finite gain dissipative with gain bounded by </span><span 
+class="cmmi-12">&#x03B3;</span><sup ><span 
+class="cmr-8">2</span></sup><span 
+class="cmti-12">.</span>
+    </li>
+    <li class="enumerate" value="2" 
+><a 
+ id="x6-14006x2"></a><span 
+class="cmti-12">the energy function is </span><span 
+class="cmmi-12">x</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">Xx</span><span 
+class="cmti-12">.</span></li></ol>
+<!--l. 61--><p class="noindent"><span 
+class="cmti-12">if and only if</span>
+<!--l. 63--><p class="indent">   <span 
+class="cmmi-12">XX </span><span 
+class="cmti-12">is a positive semi definite solution to the Riccati inequality:</span>
+
+<table 
+class="align-star">
+           <tr><td 
+class="align-odd"><span 
+class="cmmi-12">XA </span>+ <span 
+class="cmmi-12">A</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">X </span>+ <span 
+class="cmmi-12">C</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">C </span>+ (<span 
+class="cmmi-12">XB </span>+ <span 
+class="cmmi-12">C</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">D</span>)(<span 
+class="cmmi-12">&#x03B3;</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">D</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">D</span>)<sup ><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>(<span 
+class="cmmi-12">B</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">X </span>+ <span 
+class="cmmi-12">D</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">C</span>) <span 
+class="cmsy-10x-x-120">&#x2264; </span>0</td>           <td 
+class="align-even"></td>           <td 
+class="align-label"></td></tr></table>
+   </div>
+<!--l. 69--><p class="indent">   Here we do a proof <span 
+class="cmti-12">by computation</span>. First compute <span 
+class="cmmi-12">H</span>:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[11]:=&#x00A0;SetCommutative[gamma];
+&#x00A0;<br />In[12]:=&#x00A0;H&#x00A0;=&#x00A0;tp[G[x,&#x00A0;W]]&#x00A0;**&#x00A0;G[x,&#x00A0;W]&#x00A0;-&#x00A0;((gamma&#x02C6;2)*&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[W]&#x00A0;**&#x00A0;W)&#x00A0;+&#x00A0;(p[x]&#x00A0;**&#x00A0;F[x,&#x00A0;W]&#x00A0;+&#x00A0;tp[F[x,&#x00A0;W]]&#x00A0;**&#x00A0;tp[p[x]])/2
+&#x00A0;<br />Out[12]=&#x00A0;(tp[W]&#x00A0;**&#x00A0;tp[D]&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C])&#x00A0;**&#x00A0;(C&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;D&#x00A0;**&#x00A0;W)&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma&#x00A0;&#x00A0;tp[W]&#x00A0;**&#x00A0;W&#x00A0;+&#x00A0;(2&#x00A0;(tp[W]&#x00A0;**&#x00A0;tp[B]&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[A])&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;tp[x]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;(A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;B&#x00A0;**&#x00A0;W))&#x00A0;/&#x00A0;2
+</div>
+</td></tr></table>
+<!--l. 78--><p class="nopar"> We perform some initial simplification on <span 
+class="cmmi-12">H </span>using NCExpand and NCCollect in its symmetric
+version:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[13]:=&#x00A0;H1&#x00A0;=&#x00A0;NCExpand[H]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Out[13]=&#x00A0;-(gamma&#x00A0;&#x00A0;tp[W]&#x00A0;**&#x00A0;W)&#x00A0;+&#x00A0;tp[W]&#x00A0;**&#x00A0;tp[B]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[W]&#x00A0;**&#x00A0;tp[D]&#x00A0;**&#x00A0;C&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[W]&#x00A0;**&#x00A0;tp[D]&#x00A0;**&#x00A0;D&#x00A0;**&#x00A0;W&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;B&#x00A0;**&#x00A0;W&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[A]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C]&#x00A0;**&#x00A0;C&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C]&#x00A0;**&#x00A0;D&#x00A0;**&#x00A0;W
+&#x00A0;<br />In[14]:=&#x00A0;H2&#x00A0;=&#x00A0;NCCollectSymmetric[H1,&#x00A0;{x,&#x00A0;W}]
+&#x00A0;<br />Out[14]=&#x00A0;tp[W]&#x00A0;**&#x00A0;(tp[B]&#x00A0;**&#x00A0;X&#x00A0;+&#x00A0;tp[D]&#x00A0;**&#x00A0;C)&#x00A0;**&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[W]&#x00A0;**&#x00A0;(gamma&#x00A0;&#x00A0;-&#x00A0;tp[D]&#x00A0;**&#x00A0;D)&#x00A0;**&#x00A0;W&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;(X&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;tp[A]&#x00A0;**&#x00A0;X&#x00A0;+&#x00A0;tp[C]&#x00A0;**&#x00A0;C)&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;(X&#x00A0;**&#x00A0;B&#x00A0;+&#x00A0;tp[C]&#x00A0;**&#x00A0;D)&#x00A0;**&#x00A0;W
+</div>
+</td></tr></table>
+<!--l. 94--><p class="nopar">
+<!--l. 96--><p class="indent">   The strategy here is to maximize H and see if it is <span 
+class="cmsy-10x-x-120">&#x2264; </span>0. First differentiate to find the &#8221;worst&#8221;
+input <span 
+class="cmmi-12">W</span>. Here we use our limited commmand Grad. We will do much better when we revisit this
+example using NCGB.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[15]:=&#x00A0;dH&#x00A0;=&#x00A0;Grad[H2,&#x00A0;W]
+&#x00A0;<br />Grad::limited:&#x00A0;Grad&#x00A0;gives&#x00A0;correct&#x00A0;answers&#x00A0;only&#x00A0;for&#x00A0;a&#x00A0;limited&#x00A0;class&#x00A0;of&#x00A0;functions!
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Out[15]=&#x00A0;-2&#x00A0;gamma&#x00A0;&#x00A0;W&#x00A0;+&#x00A0;2&#x00A0;tp[B]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;2&#x00A0;tp[D]&#x00A0;**&#x00A0;C&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;2&#x00A0;tp[D]&#x00A0;**&#x00A0;D&#x00A0;**&#x00A0;W
+</div>
+</td></tr></table>
+<!--l. 105--><p class="nopar"> We then find the critical <span 
+class="cmmi-12">W </span>using the even more limited command NCSolve. Again, check out the
+same problem under NCGB.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[16]:=&#x00A0;Wsol&#x00A0;=&#x00A0;NCSolve[dH&#x00A0;==&#x00A0;0,&#x00A0;W]
+&#x00A0;<br />NCSolveLinear1::diagnostics:
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Since&#x00A0;the&#x00A0;following&#x00A0;expression&#x00A0;is&#x00A0;not&#x00A0;zero
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;tp[B]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;2&#x00A0;&lt;&lt;1&gt;&gt;&#x00A0;+&#x00A0;&lt;&lt;3&gt;&gt;&#x00A0;+&#x00A0;4&#x00A0;tp[D]&#x00A0;**&#x00A0;D&#x00A0;**&#x00A0;&lt;&lt;3&gt;&gt;&#x00A0;**&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;you&#x00A0;may&#x00A0;want&#x00A0;to&#x00A0;double&#x00A0;check&#x00A0;the&#x00A0;result.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;This&#x00A0;expression&#x00A0;can&#x00A0;be&#x00A0;retrieved&#x00A0;by&#x00A0;the&#x00A0;command&#x00A0;NCSolveCheck[].
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Out[16]=&#x00A0;{W&#x00A0;-&gt;&#x00A0;2&#x00A0;inv[2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;tp[D]&#x00A0;**&#x00A0;D]&#x00A0;**&#x00A0;tp[B]&#x00A0;**&#x00A0;X&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;inv[2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;tp[D]&#x00A0;**&#x00A0;D]&#x00A0;**&#x00A0;tp[D]&#x00A0;**&#x00A0;C&#x00A0;**&#x00A0;x}
+</div>
+</td></tr></table>
+<!--l. 119--><p class="nopar"> Now plug the critical point back into <span 
+class="cmmi-12">H </span>using Substitute. Things are getting uglier so we use
+NCSetOutput to &#8220;beautify&#8221; Mathematica&#8217;s output.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[17]:=&#x00A0;NCSetOutput[All-&gt;True]
+&#x00A0;<br />In[18]:=&#x00A0;Hw1&#x00A0;=&#x00A0;Substitute[H2,&#x00A0;Wsol]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />Out[18]=&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;(X&#x00A0;.&#x00A0;A&#x00A0;+&#x00A0;A&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;+&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;C)&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;(X&#x00A0;.&#x00A0;B&#x00A0;+&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;.&#x00A0;(2&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x)&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;)&#x00A0;.&#x00A0;(B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;+&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C)&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;)&#x00A0;.&#x00A0;(gamma&#x00A0;&#x00A0;-&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-2&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x)
+</div>
+</td></tr></table>
+<!--l. 144--><p class="nopar">
+<!--l. 146--><p class="indent">   We now expand the expression using NCExpand
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[19]:=&#x00A0;Hw2&#x00A0;=&#x00A0;NCExpand[Hw1]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />Out[19]=&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;A&#x00A0;.&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;A&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;gamma&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;-&#x00A0;4&#x00A0;gamma&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;gamma&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;-&#x00A0;4&#x00A0;gamma&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.
+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2&#x00A0;gamma&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x
+</div>
+</td></tr></table>
+<!--l. 187--><p class="nopar"> and try to simplify the expression using NCSimplifyRational
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[20]:=&#x00A0;Hw3&#x00A0;=&#x00A0;NCSimplifyRational[Hw2]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;-1
+&#x00A0;<br />Out[20]=&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;A&#x00A0;.&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;A&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;.&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;----------------------------------------&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;----------------------------------------&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;.&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-----------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+</div>
+</td></tr></table>
+<!--l. 220--><p class="nopar"> and NCCollectSymmetric
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[21]:=&#x00A0;Hw4&#x00A0;=&#x00A0;NCCollectSymmetric[Hw3,&#x00A0;{x}]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;-1
+&#x00A0;<br />Out[21]=&#x00A0;x&#x00A0;&#x00A0;.&#x00A0;(X&#x00A0;.&#x00A0;A&#x00A0;+&#x00A0;A&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;+&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;&#x00A0;&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;C
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-------------------------------&#x00A0;+&#x00A0;-------------------------------&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;------)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;--------------------------------)&#x00A0;.&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma
+</div>
+</td></tr></table>
+<!--l. 245--><p class="nopar">
+<!--l. 247--><p class="indent">   The last output is mathematically equivalent to the well known Riccati inequality, which proves
+the Theorem, although this may be hard to see in this form. We will further strengthen this claim
+when we revisit this example using NCGB. Nor for better visualization, we plug in <span 
+class="cmmi-12">x </span>= 1 and
+<span 
+class="cmmi-12">&#x03B3;</span><sup ><span 
+class="cmr-8">2</span></sup> = 1
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[22]:=&#x00A0;Hw5&#x00A0;=&#x00A0;Hw4&#x00A0;/.&#x00A0;gamma&#x00A0;-&gt;&#x00A0;1&#x00A0;/.&#x00A0;x&#x00A0;-&gt;&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;-1
+&#x00A0;<br />Out[22]=&#x00A0;X&#x00A0;.&#x00A0;A&#x00A0;+&#x00A0;A&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;+&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;D&#x00A0;.&#x00A0;D&#x00A0;)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;D&#x00A0;.&#x00A0;D&#x00A0;)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;+&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;D&#x00A0;.&#x00A0;(1&#x00A0;-&#x00A0;D&#x00A0;&#x00A0;.&#x00A0;D)&#x00A0;&#x00A0;&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X
+</div>
+</td></tr></table>
+<!--l. 260--><p class="nopar"> and for extra simplicify set <span 
+class="cmmi-12">D </span>= 0:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[23]:=&#x00A0;Hw6&#x00A0;=&#x00A0;Hw5&#x00A0;/.&#x00A0;D&#x00A0;-&gt;&#x00A0;0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />Out[23]=&#x00A0;X&#x00A0;.&#x00A0;A&#x00A0;+&#x00A0;A&#x00A0;&#x00A0;.&#x00A0;X&#x00A0;+&#x00A0;C&#x00A0;&#x00A0;.&#x00A0;C&#x00A0;+&#x00A0;X&#x00A0;.&#x00A0;B&#x00A0;.&#x00A0;B&#x00A0;&#x00A0;.&#x00A0;X
+</div>
+</td></tr></table>
+<!--l. 266--><p class="nopar">
+
+
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch3.html" >next</a>] [<a 
+href="NCBIGDOCch1.html" >prev</a>] [<a 
+href="NCBIGDOCch1.html#tailNCBIGDOCch1.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch2.html" >front</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCch2.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch2.html"></a>  
+</body></html> 

@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>20.1 Simplification</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 9--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse74.html" >next</a>] [<a 
+href="#tailNCBIGDOCse73.html">tail</a>] [<a 
+href="NCBIGDOCch20.html#NCBIGDOCse73.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">20.1   </span> <a 
+ id="x122-28200020.1"></a>Simplification</h3>
+<!--l. 12--><p class="noindent">Before using these commands, a monomial order must be specified. See the section after this for
+information on how to set the monomial order.
+
+<!--l. 28--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.1.1   </span> <a 
+ id="x122-28300020.1.1"></a>NCSimplifyAll[expressions, startRelations, iterations]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">GroebnerSimplify, NCGroebnerSimplify</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:            <span 
+class="cmti-12">NCSimplifyAll[expressions,     startRelations,     iterations]      </span>calls
+      <span 
+class="cmti-12">NCMakeGB[startRelations, iterations] </span>and uses the result to reduce the expressions in
+      <span 
+class="cmti-12">expressions</span>. This is useful when the form the Gröbner Basis is irrelevant and is only
+      used to simplify some set of predetermined equations.
+      <br class="newline">
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">exprs </span>can be either an expression or a list of expressions. <span 
+class="cmti-12">startRelations </span>is a list
+      of polynomials. <span 
+class="cmti-12">iterations </span>is a positive integer.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx122-283001"></a>
+<!--l. 67--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.1.2   </span> <a 
+ id="x122-28400020.1.2"></a>NCSimplifyRationalX1[expressions, startRelations, iterations]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmti-12">NCSimplifyRationalX1[expressions, startRelations, iterations] </span>is (essentially)
+      equivalent to
+      <br class="newline"><span 
+class="cmti-12">NCSimplifyAll[expressions, Join[startRelations, inverses], iterations]</span>
+      <br class="newline">where   <span 
+class="cmti-12">inverses   </span>is   a   list   of   polynomials.   <span 
+class="cmti-12">inverses   </span>consists   of   the   defining
+      relations  of  all  inverses  (elements  with  <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">...</span>])  in  <span 
+class="cmti-12">expressions  </span>and  <span 
+class="cmti-12">startRelations</span>.
+      <span 
+class="cmti-12">NCSimplifyRationalX1 </span>simplifies <span 
+class="cmti-12">expressions </span>with <span 
+class="cmti-12">startRelations </span>together with some
+      additional innocuous relations.
+      <br class="newline"><span 
+class="cmti-12">NCSimplifyRationalX1 </span>is different from <span 
+class="cmti-12">NCSimplifyAll </span>with the following adjustment:
+      first all instances of <span 
+class="cmti-12">inv </span>are converted to <span 
+class="cmti-12">Inv </span>before calling <span 
+class="cmti-12">NCSimplifyAll</span>, and are
+      converted back afterwards. This overrides NCAlgebra&#8217;s automatic handling of inverses.
+      For example, the command
+      <br class="newline"><span 
+class="cmmi-12">NCSimplifyRationalX</span>1[<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">x</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">x</span>] + <span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">y</span>] <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">, </span>10]
+      <br class="newline">equals
+      <br class="newline"><span 
+class="cmmi-12">NCSimplifyAll</span>[<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>]+<span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">z</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>]<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">a,y</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>]<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">,Inv</span>[<span 
+class="cmmi-12">y</span>]<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">-</span>
+
+      1<span 
+class="cmmi-12">,Inv</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">,x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">, </span>(1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>)<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">,Inv</span>[1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">**</span>(1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>)<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">, </span>10].
+      <br class="newline">This   call   to   <span 
+class="cmti-12">NCSimplifyAll   </span>returns   <span 
+class="cmti-12">Inv[x]   +   Inv[1-x]   +   y</span>.   The   call   to
+      <span 
+class="cmti-12">NCSimplifyRationalX1 </span>returns <span 
+class="cmti-12">inv[x] + inv[1-x] + y</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">expressions </span>is a list of polynomials. <span 
+class="cmti-12">startRelations </span>is a list of polynomials.
+      <span 
+class="cmti-12">iterations </span>is a natural number.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. </dd></dl>
+<a 
+ id="dx122-284001"></a>
+
+   <!--l. 110--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse74.html" >next</a>] [<a 
+href="NCBIGDOCse73.html" >front</a>] [<a 
+href="NCBIGDOCch20.html#NCBIGDOCse73.html" >up</a>] </p></div>
+<!--l. 110--><p class="indent">   <a 
+ id="tailNCBIGDOCse73.html"></a>   
+</body></html> 

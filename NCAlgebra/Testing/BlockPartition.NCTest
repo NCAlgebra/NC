@@ -1,0 +1,51 @@
+(* ------------------------------------------------------------------ *)
+(*                    BlockPartition.NCTest                           *)
+(* ------------------------------------------------------------------ *)
+
+(* History :
+     who knows ???
+
+	:9/6/99:  Block->Module  (dell)
+*)
+
+
+Module[ {XXX,tmp,m1},
+     SetNonCommutative[ XXX ];
+     SetBlock[XXX];
+     m1 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+     tmp=PartitionMatrix[m1,4,2,"a"];
+
+     test[ BlockPartition, 1] = 
+          Map[
+               ValueOf,
+               PartitionMatrix[{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},2,2],
+               -1
+          ] == 
+          {{{{1}}, {{2, 3}}}, {{{4}, {7}}, {{5, 6}, {8, 9}}}};
+
+     test[ BlockPartition, 2] = 
+          FormMatrix[ 
+               PartitionMatrix[{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, 2, 3]
+          ] ==
+          {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+     test[ BlockPartition, 3] = 
+          BlockQ[XXX] == True;
+
+     test[ BlockPartition, 4] = 
+          ValueOf[tmp[[1,1]]]=={{1}, {4}, {7}};
+
+     test[ BlockPartition, 5] =
+          ValueOf[tmp[[1,2]]]== {{2, 3}, {5, 6}, {8, 9}};
+
+     test[ BlockPartition, 6] =
+          ValueOf[tmp[[2,1]]]== {};
+
+     test[ BlockPartition, 7] =
+          ValueOf[tmp[[2,2]]]== {};
+
+     Print["Results from the file BlockPartition.NCTest"];
+     For[ i=1, i<= 7, i++,
+          Print["Test #",i," was ",test[BlockPartition,i]]
+     ];
+]

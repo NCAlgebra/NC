@@ -1,0 +1,5 @@
+Get["GB.indeterminants"];
+
+<<GBRules.m
+
+Id = 1;

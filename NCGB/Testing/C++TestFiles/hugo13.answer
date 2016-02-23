@@ -1,0 +1,18 @@
+{
+{w -> ia ** id ** z ** b ** d, d ** x -> 1 - z ** b, x ** z -> -a ** c, 
+   y ** c -> 1 - b ** z}, 
+{w -> ia ** id ** z ** b ** d, 
+   d ** x -> 1 - z ** b, x ** z -> -a ** c, z ** y -> -d ** a}, 
+{w -> ia ** id ** z ** b ** d, d ** x -> 1 - z ** b, y ** c -> 1 - b ** z, 
+   z ** y -> -d ** a}, 
+{w -> ia ** id ** z ** b ** d, d ** x -> 1 - z ** b, 
+   y ** c -> 1 - b ** z, z ** b ** z -> z + d ** a ** c}, 
+{w -> ia ** id ** z ** b ** d, d ** x -> 1 - z ** b, z ** y -> -d ** a, 
+   z ** b ** z -> z + d ** a ** c}, 
+{w -> ia ** id ** z ** b ** d, x ** z -> -a ** c, y ** c -> 1 - b ** z, 
+   z ** y -> -d ** a}, 
+{w -> ia ** id ** z ** b ** d, x ** z -> -a ** c, 
+   y ** c -> 1 - b ** z, z ** b ** z -> z + d ** a ** c}, 
+{w -> ia ** id ** z ** b ** d, x ** z -> -a ** c, z ** y -> -d ** a, 
+   z ** b ** z -> z + d ** a ** c}
+}

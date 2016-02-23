@@ -1,0 +1,22 @@
+test[NCTransposes,1] = CommutativeQ[tp] == False;
+ExpandQ[tp] = True;
+expr = tp[a**b];
+test[NCTransposes,2] = ToString[expr] == "tp[b] ** tp[a]";
+ExpandQ[tp] = True;
+expr = tp[b]**tp[a];
+test[NCTransposes,3] = ToString[expr] == "tp[b] ** tp[a]";
+ExpandQ[tp] = False;
+expr = tp[a**b];
+test[NCTransposes,4] = ToString[expr] == "tp[a ** b]";
+ExpandQ[tp] = False;
+expr = tp[b]**tp[a];
+test[NCTransposes,5] = ToString[expr] == "tp[a ** b]";
+expr = tp[a+b];
+test[NCTransposes,6] = ToString[expr] == "tp[a] + tp[b]";
+
+ExpandQ[tp] = True;
+
+Print["Results from the file Transposes.NCTest"]
+For[ i=1, i<7, i++,
+Print["Test #",i," was ",test[NCTransposes,i]]
+];

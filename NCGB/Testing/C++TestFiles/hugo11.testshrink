@@ -1,0 +1,47 @@
+(* HUGO11
+Reruning stuff but with invertible z
+*)
+
+<<ShrinkBasis.m
+
+SetNonCommutative[a,b,c,d,x,y,z,iz,w,ia,ib,ic,id];
+SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
+SetMonomialOrder[{z,iz},2];
+SetMonomialOrder[{x,y,w},3];
+
+first = {{a,x},{y,b}};
+second = {{w,c},{d,z}};
+
+start = Flatten[{MatMult[first,second] - IdentityMatrix[2],
+                 MatMult[second,first] - IdentityMatrix[2]}];
+
+hugorelations = {
+x -> id - id ** z ** b,
+y -> - iz ** d ** a,
+x -> - a ** c**iz,
+z ** b ** z -> z + d ** a ** c,
+y -> ic - b ** z **ic
+};
+
+inverserelations = {
+ia**a - 1,
+a**ia - 1,
+ib**b - 1,
+b**ib - 1,
+ic**c - 1,
+c**ic - 1,
+id**d - 1,
+d**id - 1,
+z**iz - 1,
+iz**z - 1,
+w -> ia ** id ** z ** b ** d
+};
+
+smallerbasis = ShrinkBasis[hugorelations,inverserelations,3];
+Print[smallerbasis];
+
+finalanswer = smallerbasis;
+Put[finalanswer, "hugo11.answer"];
+
+(*
+*)

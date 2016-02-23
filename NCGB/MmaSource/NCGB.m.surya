@@ -1,0 +1,53 @@
+If[Not[$p9cLoaded$===True],
+AppendTo[$Path,"/home/osiris/research/helton/mathdir/NCAndMora"];
+AppendTo[$Path,"/home/helton/mathdir/NCAndMora"];
+AppendTo[$Path,"/home/osiris/helton/mathdir/NCAndMora"];
+$p9cLoaded$ = True;
+<<"newerC++MoraAlg.m";
+(*
+<<"SpreadsheetMma.m";
+*)
+Get["NCProcess.m"];
+longLoadTime = True;
+longLoadTime = False;
+If[longLoadTime 
+    , file = "NCAlgebra.m";
+    , file = "shortNCAlgebra.m";
+];
+Get[file];
+<<"newReduction.m";
+OSType = "/home/mstankus/CurrentDistribution/Binary/SOLARIS5.5";
+inst:=(alink = Install[OSType<>"/p9c_new"]);
+uninst:=(Uninstall[alink]);
+Print[inst];
+
+SetGlobalPtr[];
+
+Get["DigestedRelations.m"];
+
+Get["supress.m"];
+Get["Time.m"];
+Get["superloop"];
+
+Get["SmallBasis.m"];
+Get["SmallBasisByCategory.m"];
+Get["SmallBasisRR.m"];
+Get["RemoveRedundent2.m"];
+Get["RemoveRedundentProtect.m"];
+(*
+Get["RR.m"];
+*)
+
+Get["RemoveRedundentByCategory2.m"];
+Get["Categories.m"];
+Get["OutputArray.m"];
+Get["TypesOfStrategyOutput.m"];
+Get["NCCollectOnVariables.m"];
+
+mxson := TurnOnMmaCplusRecord[];
+mxsoff:= TurnOffMmaCplusRecord[];
+Get["Memory.m"];
+, Print["You have already loaded NCGB.m"];
+];
+
+ElapsedTime = Subtract;

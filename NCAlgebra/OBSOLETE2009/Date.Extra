@@ -1,0 +1,15 @@
+
+(* ------------------------------------------------------------------ *)
+(* This file contains the commands for producing a variable containing*)
+(* the current date and time ..                                       *)
+(* ------------------------------------------------------------------ *)
+(* 
+         Good on Sun with Mathematica version 1.??.  
+         This will not be needed with Mathematica2.0  
+         See the users guide for workstations page 38 O.M. July 15, 1991.
+*)
+	$Date := Block[{f,d},
+			f=OpenRead["!date"];
+			d = Read[f,String];
+			Close[f];
+			Return[d]];

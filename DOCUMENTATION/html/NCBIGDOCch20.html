@@ -1,0 +1,721 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>20 Commands for Making and Using GB&#8217;s</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch21.html" >next</a>] [<a 
+href="NCBIGDOCch19.html" >prev</a>] [<a 
+href="NCBIGDOCch19.html#tailNCBIGDOCch19.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCch20.html">tail</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch20.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;20</span><br><a 
+ id="x49-28100020"></a>Commands for Making and Using GB&#8217;s</h2>
+<!--l. 5--><p class="noindent">This section contains a glossary of commands available for generating and using non-commutative
+Gröbner Basis.
+   <h3 class="sectionHead"><span class="titlemark">20.1   </span> <a 
+ id="x49-28200020.1"></a>Simplification</h3>
+<!--l. 12--><p class="noindent">Before using these commands, a monomial order must be specified. See the section after this for
+information on how to set the monomial order.
+<!--l. 28--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.1.1   </span> <a 
+ id="x49-28300020.1.1"></a>NCSimplifyAll[expressions, startRelations, iterations]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">GroebnerSimplify, NCGroebnerSimplify</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:            <span 
+class="cmti-12">NCSimplifyAll[expressions,     startRelations,     iterations]      </span>calls
+      <span 
+class="cmti-12">NCMakeGB[startRelations, iterations] </span>and uses the result to reduce the expressions in
+      <span 
+class="cmti-12">expressions</span>. This is useful when the form the Gröbner Basis is irrelevant and is only
+      used to simplify some set of predetermined equations.
+      <br class="newline">
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">exprs </span>can be either an expression or a list of expressions. <span 
+class="cmti-12">startRelations </span>is a list
+      of polynomials. <span 
+class="cmti-12">iterations </span>is a positive integer.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-283001"></a>
+<!--l. 67--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.1.2   </span> <a 
+ id="x49-28400020.1.2"></a>NCSimplifyRationalX1[expressions, startRelations, iterations]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmti-12">NCSimplifyRationalX1[expressions, startRelations, iterations] </span>is (essentially)
+      equivalent to
+      <br class="newline"><span 
+class="cmti-12">NCSimplifyAll[expressions, Join[startRelations, inverses], iterations]</span>
+      <br class="newline">where   <span 
+class="cmti-12">inverses   </span>is   a   list   of   polynomials.   <span 
+class="cmti-12">inverses   </span>consists   of   the   defining
+      relations  of  all  inverses  (elements  with  <span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">...</span>])  in  <span 
+class="cmti-12">expressions  </span>and  <span 
+class="cmti-12">startRelations</span>.
+      <span 
+class="cmti-12">NCSimplifyRationalX1 </span>simplifies <span 
+class="cmti-12">expressions </span>with <span 
+class="cmti-12">startRelations </span>together with some
+      additional innocuous relations.
+      <br class="newline"><span 
+class="cmti-12">NCSimplifyRationalX1 </span>is different from <span 
+class="cmti-12">NCSimplifyAll </span>with the following adjustment:
+      first all instances of <span 
+class="cmti-12">inv </span>are converted to <span 
+class="cmti-12">Inv </span>before calling <span 
+class="cmti-12">NCSimplifyAll</span>, and are
+      converted back afterwards. This overrides NCAlgebra&#8217;s automatic handling of inverses.
+      For example, the command
+      <br class="newline"><span 
+class="cmmi-12">NCSimplifyRationalX</span>1[<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">x</span>] <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">x</span>] + <span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">inv</span>[<span 
+class="cmmi-12">y</span>] <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">, </span>10]
+      <br class="newline">equals
+      <br class="newline"><span 
+class="cmmi-12">NCSimplifyAll</span>[<span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>]+<span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">z</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>]<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">a,y</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">y</span>]<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">,Inv</span>[<span 
+class="cmmi-12">y</span>]<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">-</span>
+      1<span 
+class="cmmi-12">,Inv</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">,x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">, </span>(1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>)<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Inv</span>[1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmmi-12">,Inv</span>[1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>]<span 
+class="cmsy-10x-x-120">**</span>(1<span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span>)<span 
+class="cmsy-10x-x-120">-</span>1<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">, </span>10].
+      <br class="newline">This   call   to   <span 
+class="cmti-12">NCSimplifyAll   </span>returns   <span 
+class="cmti-12">Inv[x]   +   Inv[1-x]   +   y</span>.   The   call   to
+      <span 
+class="cmti-12">NCSimplifyRationalX1 </span>returns <span 
+class="cmti-12">inv[x] + inv[1-x] + y</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">expressions </span>is a list of polynomials. <span 
+class="cmti-12">startRelations </span>is a list of polynomials.
+      <span 
+class="cmti-12">iterations </span>is a natural number.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. </dd></dl>
+<a 
+ id="dx49-284001"></a>
+<!--l. 110--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">20.2   </span> <a 
+ id="x49-28500020.2"></a>Making a Gröbner Basis and various options (with their defaults)</h3>
+<!--l. 113--><p class="noindent">Before using any of these commands, you must set a monomial order. See Chapter <a 
+href="NCBIGDOCch18.html#x46-24800018">18<!--tex4ht:ref: chapter:ordering:variables --></a>.
+<!--l. 154--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.1   </span> <a 
+ id="x49-28600020.2.1"></a>NCMakeGB[aListOfPolynomials, iterations]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCMakeRules, MorasAlgorithm</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   The GB algorithm proceeds through <span 
+class="cmti-12">at most iterations </span>iterations until a
+
+      Gröbner basis is found for the list of polynomials <span 
+class="cmti-12">aListofPolynomials </span>with respect
+      to the order imposed by <span 
+class="cmti-12">SetMonomialOrder</span>, see <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch18.html#x46-26000018.5.1">18.5.1<!--tex4ht:ref: command:SetMonomialOrder:aListOfIndeterminants:n --></a>. NCMakeGB calls a C++
+      program and while the C++ program is running, it prints intermediate lists of rules to
+      the screen. When the C++ program finishes, it is either because it has run <span 
+class="cmti-12">iterations</span>
+      number of iterations or it has found a Gröbner Basis. If it has found a Gröbner Basis, it
+      prints a message saying so. One may also use the command <span 
+class="cmti-12">FinishedComputingBasisQ[]</span>
+      in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x49-29000020.2.5">20.2.5<!--tex4ht:ref: subsection:finished --></a>. The Mathematica output of NCMakeGB is a list of polynomials.
+      <br class="newline">&#x00A0;
+      <br class="newline">The following computes the Gröbner basis for the ideal generated by <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">a </span>and <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmr-8">3</span></sup> <span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">b</span>.
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC96x.png" alt="                2      3
+N CM  akeGB[{x   -  a,x  - b},20]
+      " class="math-display" ></center> For options which can be used inside <span 
+class="cmti-12">NCMakeGB</span>, see <span 
+class="cmti-12">ReturnRelationsToMma</span>, <span 
+class="cmti-12">SupressCOutput??</span>,
+      <span 
+class="cmti-12">SupressAllCOutput??</span>, <span 
+class="cmti-12">UserSelect </span>and <span 
+class="cmti-12">Deselect -DISABLED</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListofPolynomials </span>is a list of polynomials. <span 
+class="cmti-12">iterations </span>is a natural number.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-286001"></a>
+<!--l. 182--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.2   </span> <a 
+ id="x49-28700020.2.2"></a>UserSelect<span 
+class="cmsy-10x-x-120">&#x2192;{}</span>(Distinguishing important relations)</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   UserSelect   is   an   option   for   <span 
+class="cmti-12">NCMakeGB   </span>and   for   <span 
+class="cmti-12">Spreadsheet</span>.   If
+      <span 
+class="cmti-12">UserSelect</span><span 
+class="cmsy-10x-x-120">&#x2192;</span><span 
+class="cmti-12">aListOfPolynomials </span>is given as an option, then the main effect is on the
+      display produced by RegularOuput throughout the rest of the session. <span 
+class="cmti-12">UserSelect </span>is
+      cumulative  and  more  and  more  polynomials  fall  into  the  selected  category  as  the
+      user  puts  them  in.  The  command  <span 
+class="cmti-12">RegularOutput  </span>automatically  scans  for  selected
+      polynomials to display in the collection of relations labelled USER SELECTS. It finds
+
+      them only after <span 
+class="cmti-12">NCMakeGB </span>has been run with the user selects (since <span 
+class="cmti-12">RegularOutput</span>
+      searches for the selected polynomials by there number. Henceforth, <span 
+class="cmti-12">aListOfPolynomials</span>
+      is displayed as a special category. The default value is <span 
+class="cmsy-10x-x-120">{}</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-287001"></a>
+<!--l. 198--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.3   </span> <a 
+ id="x49-28800020.2.3"></a>ClearUserSelect[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Clears the UserSelected polynomials, that is, it makes the USER SELECTED
+      empty
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-288001"></a>
+<!--l. 216--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.4   </span> <a 
+ id="x49-28900020.2.4"></a>Deselect<span 
+class="cmsy-10x-x-120">&#x2192;{} </span>(DISABLED)</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">Deselect </span>is an option for <span 
+class="cmti-12">NCMakeGB</span>. If <span 
+class="cmti-12">DeSelectPoly</span><span 
+class="cmsy-10x-x-120">&#x2192;</span><span 
+class="cmti-12">aListOfPolynomials </span>is
+      given as an option for <span 
+class="cmti-12">NCMakeGB</span>, then certain S-polynomials will not be computed.
+      Specifically,  no  S-polynomial  will  be  formed  between  two  deselected  polynomials.
+      <span 
+class="cmti-12">Deselect </span>is NOT cumulative. The default value is <span 
+class="cmsy-10x-x-120">{}</span>.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. Bug: Only the deselected
+      polynomials  which  are  also  members  of  the  first  argument  for  <span 
+class="cmti-12">NCMakeGB  </span>are
+      deselected. </dd></dl>
+<a 
+ id="dx49-289001"></a>
+<!--l. 231--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.5   </span> <a 
+ id="x49-29000020.2.5"></a>FinishedComputingBasisQ[] - Untested in 1999</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">FinishedComputingBasisQ[] </span>returns 0 or 1. If it returns 1, then NCMakeRules
+      stopped  because  it  obtained  a  Gröbner  Basis.  If  it  returns  0,  then  <span 
+class="cmti-12">NCMakeRules</span>
+      stopped because it ran the maximal number of iterations and did not find a Gröbner
+      Basis.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-290001"></a>
+<!--l. 232--><p class="noindent">.
+<!--l. 252--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.6   </span> <a 
+ id="x49-29100020.2.6"></a>WhatIsPartialGB[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Since we do not require GB algorithm to run until it obtains a Gröbner Basis,
+      the output of the algorithm need not be a Gröbner Basis. We call the output of the
+      algorithm a <span 
+class="cmti-12">partial basis</span>. <span 
+class="cmti-12">WhatIsPartialGB[] </span>returns a list of all of the elements in the
+      partial groebner basis. See <span 
+class="cmti-12">PartialBasis[n]</span>.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. See also <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch29.html#x62-36700029.1.3">29.1.3<!--tex4ht:ref: command:WhatIsPartialGB:aListOfIntegers --></a> </dd></dl>
+<a 
+ id="dx49-291001"></a>
+<!--l. 271--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.7   </span> <a 
+ id="x49-29200020.2.7"></a>NCGBSetIntegerOverflow[False]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: An MakeNCGB and NCProcess command which if set True permits large
+      integers to be handled carelessly by <span 
+class="cmmi-12">C </span>+ +. This is dangerous since it causes mistakes
+      when you see large integers (at about 2 billion watch out). The code runs faster with
+      this setting, but still for saftey sake the default is <span 
+class="cmti-12">NCGBSetIntegerOverflow[False]</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx49-292001"></a>
+<!--l. 290--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.8   </span> <a 
+ id="x49-29300020.2.8"></a>PartialBasis[aNumber] - Untested in 1999</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmti-12">PartialBasis[aNumber]  </span>(where  <span 
+class="cmti-12">aNumber  </span>is  a  positive  integer)  returns  a
+      character string. If this character string is input to the built-in Mathematica command
+      <span 
+class="cmti-12">ToExpression</span>, then the result is the <span 
+class="cmti-12">aNumber</span>-th element of the partial basis data base.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aNumber </span>is a natural number.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  Not  available  before  NCAlgebra  1.2.  See  also  <a 
+href="NCBIGDOCch29.html#x62-36700029.1.3">29.1.3<!--tex4ht:ref: command:WhatIsPartialGB:aListOfIntegers --></a>.  <span 
+class="cmbx-12">Note:</span>
+      <span 
+class="cmti-12">aNumber </span>does  <span 
+class="cmbx-12">not </span>correspond  to  the  numbers  generated  from  the  <span 
+class="cmti-12">WhatIsHistory</span>
+      command.  </dd></dl>
+<a 
+ id="dx49-293001"></a>
+<!--l. 307--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.9   </span> <a 
+ id="x49-29400020.2.9"></a>IterationNumber[aList] or IterationNumber[ aNumber ] - UNTESTED 1999</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:                   It                   might                   be                   interesting
+      to find out which relations are generated during which iteration of the algorithm. The
+      command <span 
+class="cmmi-12">IterationNumber </span>returns these numbers. The most common applications
+      of  this  command  will  probably  be  <span 
+class="cmmi-12">IterationNumber</span>[<span 
+class="cmmi-12">WhatAreGBNumbers</span>[]]  and
+      <span 
+class="cmmi-12">IterationNumber</span>[<span 
+class="cmmi-12">WhatAreNumbers</span>[]].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aList </span>is a list of integers. <span 
+class="cmmi-12">aNumber </span>is an integer
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. </dd></dl>
+<a 
+ id="dx49-294001"></a>
+<!--l. 327--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.10   </span> <a 
+ id="x49-29500020.2.10"></a>CleanUp</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  CleanUp <span 
+class="cmsy-10x-x-120">&#x2192; </span>1
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: NCProcess and NCMakeGB Option which controls the reduction step <a 
+ id="dx49-295001"></a>inside
+      Mora&#8217;s GB algorithm. When set to 1 the new S- polynomials reduce the current set of
+      relations. When  CleanUp <span 
+class="cmsy-10x-x-120">&#x2192; </span>0 they do not.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx49-295002"></a>
+<!--l. 343--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.11   </span> <a 
+ id="x49-29600020.2.11"></a>SetCleanUpBasis[n] - Untested in 1999</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   If <span 
+class="cmti-12">n </span>is nonzero (best to use n=1), <span 
+class="cmti-12">SetCleanUpBasis [n] </span>indicates that the
+      program used to implement NCCleanUpRules should be applied after each iteration of
+      the GB algorithm. <span 
+class="cmti-12">SetCleanUpBasis[0] </span>indicates that such additional processing should
+      not be done.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">n </span>is an integer
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-296001"></a>
+<!--l. 353--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.12   </span> <a 
+ id="x49-29700020.2.12"></a>CleanUpBasisQ[] - Untested in 1999</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">CleanUpBasisQ[] </span>returns the argument of the SetCleanUpBasis command the
+      last time it was used.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. This allows one to see which
+      &#8220;cleaning&#8221; option is in force. </dd></dl>
+<a 
+ id="dx49-297001"></a>
+
+<!--l. 359--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.13   </span> <a 
+ id="x49-29800020.2.13"></a>History Off </h4>
+<a 
+ id="dx49-298001"></a>
+<!--l. 364--><p class="noindent">NCGB has the ability to track the history of GB production. This is used when the
+RemoveRedundant Options are turned on in NCProcess. Since much storage is consumed by this
+history it is often advantageous to turn it off. If you are just running NCMakeGB and you want to
+turn it off do this.
+<!--l. 372--><p class="indent">   The command
+   <div  
+class="centerline">                                         <span 
+class="cmbx-12">SetRecordHistory[False]</span>                                     </div>
+<a 
+ id="dx49-298002"></a>
+<!--l. 378--><p class="noindent">turns off the history collection, except that it replaces useless rules which the code produced by the
+one dummy rule
+<a 
+ id="dx49-298003"></a>
+   <div  
+class="centerline">                                          <span 
+class="cmbx-12">InvalidHistoryRule </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmbx-12">0</span>                                     </div>
+<!--l. 387--><p class="indent">   The command
+<a 
+ id="dx49-298004"></a>
+   <div  
+class="centerline">                                          <span 
+class="cmbx-12">SetRecordHistory[True]</span>                                     </div>
+<!--l. 393--><p class="noindent">turns on the history collection.
+<!--l. 401--><p class="indent">   If you happen to bring an InvalidHistoryRule <span 
+class="cmsy-10x-x-120">&#x2192; </span>0 back into Mma, either
+<!--l. 405--><p class="indent">   a) InvalidRuleHistory is not a member of the order (as expected) and an error message is
+printed and then is reformatted as 1 <span 
+class="cmsy-10x-x-120">&#x2192; </span>0 OR
+<!--l. 410--><p class="indent">   b) InvalidRuleHistory is (artificially) a member of the order and one gets InvalidHistoryRule <span 
+class="cmsy-10x-x-120">&#x2192;</span>
+0.
+<!--l. 420--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.14   </span> <a 
+ id="x49-29900020.2.14"></a>Correspondence to sections &#8216;Simplification&#8217; and &#8216;Reduction&#8217;</h4>
+<!--l. 423--><p class="noindent">This subsection is a brief note to bring out the conceptual connection between making a Gröbner
+Basis and the <span 
+class="cmti-12">simplification </span>commands and the Reduction commands. Making a Gröbner Basis is
+the first step in the <span 
+class="cmti-12">simplification </span>commands presented above. Making a Gröbner Basis
+is also the main step in the the command <span 
+class="cmti-12">SmallBasis </span>in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch21.html#x50-30800021.1.1">21.1.1<!--tex4ht:ref: command:SmallBasis:aListOfPolynomials:anotherListOfPolynomials:iter --></a> and <span 
+class="cmti-12">Spreadsheet </span>in
+<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCch15.html#x33-21300015.2.1">15.2.1<!--tex4ht:ref: command:NCProcess --></a>.
+<!--l. 439--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.15   </span> <a 
+ id="x49-30000020.2.15"></a> Setting Monomial Orders- See Chapter 18</h4>
+<!--l. 453--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.2.16   </span> <a 
+ id="x49-30100020.2.16"></a>ReinstateOrder[]</h4>
+
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:                      After                      a                      call                      to
+      <span 
+class="cmti-12">SetGlobalPtr[]</span>, <span 
+class="cmti-12">ClearMonomialOrde r[] </span>or <span 
+class="cmti-12">ClearMonomialOrderN[n]</span>, <span 
+class="cmti-12">ReinstateOrder[]</span>
+      is used to restore the previously established order of indeterminates. The exception is
+      <span 
+class="cmti-12">C learOrder[]</span>. After this function is called, the order cannot be restored.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2. </dd></dl>
+<a 
+ id="dx49-301001"></a>
+<!--l. 457--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark">20.3   </span> <a 
+ id="x49-30200020.3"></a>Reduction</h3>
+<!--l. 469--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.3.1   </span> <a 
+ id="x49-30300020.3.1"></a>Reduction[aListOfPolynomials, aListOfRules]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">Reduction[aListOfPolynomials, aListOfRules] </span>computes the Normal Forms of
+      <span 
+class="cmti-12">aListOfPolynomials </span>with respect to the rules aListOfRules.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfPolynomials </span>is a list of polynomials. <span 
+class="cmti-12">aListOfRules </span>is a list of rules.
+      That is the rules are applied repeatedly to the polynomials in the list until no further
+      reduction occurs
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-303001"></a>
+
+<!--l. 478--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.3.2   </span> <a 
+ id="x49-30400020.3.2"></a>PolyToRule[aPolynomial]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">PolToRule,ToGBRule,ToGBRules</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmti-12">PolyToRule[aPolynomial]  </span>returns  the  replacement  rule  corresponding  to
+      <span 
+class="cmti-12">aPolynomial</span>, assuming the order of monomials has been set.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aPolynomial </span>is a polynomial
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-304001"></a>
+<!--l. 488--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">20.3.3   </span> <a 
+ id="x49-30500020.3.3"></a>RuleToPoly[aRule]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmti-12">RuletoPoly[aRule] </span>returns <span 
+class="cmti-12">aPolynomial </span>corresponding to the replacement rule
+      <span 
+class="cmti-12">aRule</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aPolynomial </span>is a polynomial
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.2 </dd></dl>
+<a 
+ id="dx49-305001"></a>
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch21.html" >next</a>] [<a 
+href="NCBIGDOCch19.html" >prev</a>] [<a 
+href="NCBIGDOCch19.html#tailNCBIGDOCch19.html" >prev-tail</a>] [<a 
+href="NCBIGDOCch20.html" >front</a>] [<a 
+href="NCBIGDOCpa6.html#NCBIGDOCch20.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch20.html"></a>    
+</body></html> 

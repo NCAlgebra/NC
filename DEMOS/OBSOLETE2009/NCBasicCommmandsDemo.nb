@@ -1,0 +1,1417 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     17558,        951]*)
+(*NotebookOutlinePosition[     18329,        978]*)
+(*  CellTagsIndexPosition[     18285,        974]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["", "Text",
+  Editable->False,
+  Selectable->False,
+  CellFrame->{{0, 0}, {0, 3}},
+  ShowCellBracket->False,
+  CellMargins->{{0, 0}, {1, 1}},
+  CellElementSpacings->{"CellMinHeight"->1},
+  GeneratedCell->True,
+  CellFrameMargins->False,
+  CellFrameColor->RGBColor[0, 0, 1],
+  CellSize->{Inherited, 5}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        StyleBox["The",
+          FontSize->36], 
+        StyleBox[" ",
+          FontSize->36], 
+        StyleBox["Most",
+          FontSize->36], 
+        StyleBox[" ",
+          FontSize->36], 
+        StyleBox["Basic",
+          FontSize->36], 
+        StyleBox[" ",
+          FontSize->36], 
+        RowBox[{
+          StyleBox["Commands",
+            FontSize->36], 
+          StyleBox[":",
+            FontSize->36], "\n", 
+          StyleBox[\(A\ short\ tutorial\),
+            FontSize->36]}]}], "\n", "\n"}]], "Input"],
+
+Cell[BoxData[
+    \(Basic\ Most\ The\ \((Commands : A\ short\ tutorial)\)\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+\ttp[x] denotes the transpose of an element x,  aj[x] denotes the \
+adjoint of an element x, and ** denotes noncommutative multiply. Note that \
+the properties of transposes and adjoints that everyone uses constantly are \
+built-in. The multiplicative identity is denoted Id in the program. At the \
+present time, Id is set to 1. An element A may have an  inverse, which will \
+be denoted by inv[A], or it may have a left or right inverse, denoted invL[A] \
+and invR[A], respectively. \t\t\t\t\t
+
+\tThe following examples are independent of each other, however they may be \
+executed in one continuous session. \tAt present, single-letter lower case \
+variables are non-commutative by default and all others are commutative by \
+default. We consider non-commutative lower case variables in the following  \
+examples:\t\
+\>", "Text"],
+
+Cell["First you must load in NCAlgebra with the following command ", "Text",
+  FontSlant->"Italic"],
+
+Cell["\<\
+<<NC`;
+<<NCAlgebra.m\
+\>", "Input"],
+
+Cell["\<\
+This may not take into account your path to the NC directory.  \
+\
+\>", "Text",
+  FontSlant->"Italic"],
+
+Cell[CellGroupData[{
+
+Cell["The Basics", "Subtitle",
+  CellFrame->{{0, 0}, {0, 2}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\n\)\(a ** b - b ** a\)\)\)], "Input"],
+
+Cell[BoxData[
+    \(a ** b - b ** a\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A ** B - B ** A\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A ** b - b ** a\)], "Input"],
+
+Cell[BoxData[
+    \(A\ b - b ** a\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CommuteEverything[a ** b - b ** a]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetNonCommutative[A, B]\)], "Input"],
+
+Cell[BoxData[
+    \({False, False}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A ** B - B ** A\)], "Input"],
+
+Cell[BoxData[
+    \(A ** B - B ** A\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetNonCommutative[A]; SetCommutative[B]\)], "Input"],
+
+Cell[BoxData[
+    \({True}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A ** B - B ** A\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+NOTE:  SNC  is an alias for SetNonCommutative.  So, SNC can be \
+typed rather than the longer SetNonCommutative.\
+\>", "Text",
+  Background->GrayLevel[0.666667]],
+
+Cell[BoxData[
+    \(\(SNC[A];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A ** a - a ** A\)], "Input"],
+
+Cell[BoxData[
+    \(\(-a ** A\) + A ** a\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetCommutative[v];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(v ** b\)], "Input"],
+
+Cell[BoxData[
+    \(b\ v\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Simplifying and substitution
+\
+\>", "Subtitle",
+  CellFrame->{{0, 0}, {0, 2}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCCollect[a ** x + b ** x, x]\)], "Input"],
+
+Cell[BoxData[
+    \(\((a + b)\) ** x\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCExpand[\((a + b)\) ** x]\)], "Input"],
+
+Cell[BoxData[
+    \(a ** x + b ** x\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCCollect[tp[x] ** a ** x + tp[x] ** b ** x + z, {x, tp[x]}]\)], "Input"],
+
+Cell[BoxData[
+    \(z + tp[x] ** \((a + b)\) ** x\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DirectionalD[x ** x, x, h]\)], "Input"],
+
+Cell[BoxData[
+    \(h ** x + x ** h\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Grad[tp[x] ** x + tp[x] ** A ** x + m ** x, x]\)], "Input"],
+
+Cell[BoxData[
+    \("Grad gives correct answers only for a limited class   of \
+polynomials"\)], "Print"],
+
+Cell[BoxData[
+    \(2\ x + A ** x + tp[A] ** x + tp[m]\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "IMPORTANT: The ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " substitute commands \\. -> and \\:> are not reliable in NCAlgebra,   so \
+you must use our substitute command."
+}], "Text",
+  Background->GrayLevel[0.666667]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Substitute[x ** a ** b, a ** b -> c]\)], "Input"],
+
+Cell[BoxData[
+    \(x ** c\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Substitute[tp[b ** a] + b ** a, b ** a -> p]\)], "Input"],
+
+Cell[BoxData[
+    \(p + tp[a] ** tp[b]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubstituteSymmetric[tp[b] ** tp[a] + w + a ** b, 
+      a ** b -> c]\)], "Input"],
+
+Cell[BoxData[
+    \(c + w + tp[c]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MatMult[{{a, b}, {c, d}}, {{d, 2}, {e, 3}}]\)], "Input"],
+
+Cell[BoxData[
+    \({{a ** d + b ** e, 2\ a + 3\ b}, {c ** d + d ** e, 
+        2\ c + 3\ d}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[a ** b]\)], "Input"],
+
+Cell[BoxData[
+    \(tp[b] ** tp[a]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[5]\)], "Input"],
+
+Cell[BoxData[
+    \(5\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[2 + 3  I]\)], "Input"],
+
+Cell[BoxData[
+    \(2 + 3\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[a]\)], "Input"],
+
+Cell[BoxData[
+    \(tp[a]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[a + b]\)], "Input"],
+
+Cell[BoxData[
+    \(tp[a] + tp[b]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[6  x]\)], "Input"],
+
+Cell[BoxData[
+    \(6\ tp[x]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[tp[a]]\)], "Input"],
+
+Cell[BoxData[
+    \(a\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[5]\)], "Input"],
+
+Cell[BoxData[
+    \(5\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[2 + 3  I]\)], "Input"],
+
+Cell[BoxData[
+    \(2 - 3\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[a]\)], "Input"],
+
+Cell[BoxData[
+    \(aj[a]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[a + b]\)], "Input"],
+
+Cell[BoxData[
+    \(aj[a] + aj[b]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[6  x]\)], "Input"],
+
+Cell[BoxData[
+    \(6\ aj[x]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[aj[a]]\)], "Input"],
+
+Cell[BoxData[
+    \(a\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Id\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(inv[a ** b]\)], "Input"],
+
+Cell[BoxData[
+    \(inv[b] ** inv[a]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(inv[a] ** a\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(a ** inv[a]\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(a ** b ** inv[b]\)], "Input"],
+
+Cell[BoxData[
+    \(a\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(invL[a] ** a\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(a ** invR[a]\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(a ** invL[a]\)], "Input"],
+
+Cell[BoxData[
+    \(a ** invL[a]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(invR[a] ** a\)], "Input"],
+
+Cell[BoxData[
+    \(invR[a] ** a\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(f1 = 
+        1 + inv[d] ** c ** inv[S - a] ** b - 
+          inv[d] ** c ** inv[S - a + b ** inv[d] ** c] ** b - 
+          inv[d] ** c ** inv[S - a + b ** inv[d] ** c] ** b ** inv[d] ** c ** 
+            inv[S - a] ** b;\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSimplifyRational[f1]\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(f2 = \ inv[1 + 2  a] ** a;\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSimplifyRational[f2]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/2 - 1\/2\ inv[1 + 2\ a]\)], "Output"]
+}, Open  ]],
+
+Cell["NOTE: NCSR is the alias for NCSimplifyRational.", "Text",
+  Background->GrayLevel[0.666667]],
+
+Cell[BoxData[
+    \(\(f3 = a ** inv[1 - a];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSR[f3]\)], "Input"],
+
+Cell[BoxData[
+    \(\(-1\) + inv[1 - a]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(f4 = inv[1 - b ** a] ** inv[a];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSR[f4]\)], "Input"],
+
+Cell[BoxData[
+    \(inv[a] + b ** inv[1 - a ** b]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCSolve[a ** x == b, x]\)], "Input"],
+
+Cell[BoxData[
+    \(NCCollect::"notsum" \(\(:\)\(\ \)\) 
+      "Harmless warning: Expression is not a sum of terms."\)], "Message"],
+
+Cell[BoxData[
+    \({x \[Rule] inv[a] ** b}\)], "Output"]
+}, Open  ]],
+
+Cell["  NOTE: Linear equations in one unknown only.", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Setting properties 
+\
+\>", "Subtitle",
+  CellFrame->{{0, 0}, {0, 2}}],
+
+Cell[BoxData[
+    \(\(SetIsometry[s];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IsometryQ[s]\)], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetIsometry[s];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[s] ** s\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+NOTE: Remember the last SetIsometry[ ] call  is redundant and \
+unnecessary. Nevertheless, it is restated for the sake of clarity.  Normally, \
+  the last SetIsometry[ ] would be left out, because \"s\" is still defined.
+\
+\>", "Text",
+  Background->GrayLevel[0.666667]],
+
+Cell[BoxData[
+    \(\(SetIsometry[s];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[s] ** s\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetSelfAdjoint[t];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(tp[t]\)], "Input"],
+
+Cell[BoxData[
+    \(t\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetSelfAdjoint[t];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(aj[t]\)], "Input"],
+
+Cell[BoxData[
+    \(t\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetProjection[p];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(p ** p\)], "Input"],
+
+Cell[BoxData[
+    \(p\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetCoIsometry[s];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(s ** tp[s]\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetCoIsometry[w];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(w ** aj[w]\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetInv[x];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(invL[x]\)], "Input"],
+
+Cell[BoxData[
+    \(inv[x]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetInv[x];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(invR[x]\)], "Input"],
+
+Cell[BoxData[
+    \(inv[x]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetLinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[x + y]\)], "Input"],
+
+Cell[BoxData[
+    \(f[x] + f[y]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetLinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[\((2 + 3  I)\) x]\)], "Input"],
+
+Cell[BoxData[
+    \(\((2 + 3\ \[ImaginaryI])\)\ f[x]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetConjugateLinear[q];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(q[x + y]\)], "Input"],
+
+Cell[BoxData[
+    \(q[x] + q[y]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetConjugateLinear[g];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(g[\((2 + 3  I)\) x]\)], "Input"],
+
+Cell[BoxData[
+    \(\((2 - 3\ \[ImaginaryI])\)\ g[x]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetBilinear[h];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(h[x + y, w]\)], "Input"],
+
+Cell[BoxData[
+    \(h[x, w] + h[y, w]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetBilinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[w, x + y]\)], "Input"],
+
+Cell[BoxData[
+    \(f[w, x] + f[w, y]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetBilinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[\((2 + 3  I)\) x, w]\)], "Input"],
+
+Cell[BoxData[
+    \(\((2 + 3\ \[ImaginaryI])\)\ f[x, w]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetBilinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[w, \((2 + 3  I)\) x]\)], "Input"],
+
+Cell[BoxData[
+    \(\((2 + 3\ \[ImaginaryI])\)\ f[w, x]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetSesquilinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[x + y, w]\)], "Input"],
+
+Cell[BoxData[
+    \(f[x, w] + f[y, w]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetSesquilinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[w, x + y]\)], "Input"],
+
+Cell[BoxData[
+    \(f[w, x] + f[w, y]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetSesquilinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[\((2 + 3  I)\) x, w]\)], "Input"],
+
+Cell[BoxData[
+    \(\((2 + 3\ \[ImaginaryI])\)\ f[x, w]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetSesquilinear[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[w, \((2 + 3  I)\) x]\)], "Input"],
+
+Cell[BoxData[
+    \(\((2 - 3\ \[ImaginaryI])\)\ f[w, x]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(SetIdempotent[f];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[f[w]]\)], "Input"],
+
+Cell[BoxData[
+    \(w\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(SetCommutingFunctions[f, g]; LeftQ[f, g] = True;\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(g[f[x]]\)], "Input"],
+
+Cell[BoxData[
+    \(f[g[x]]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(SetCommutingFunctions[f, g]; LeftQ[f, g] = True;\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[g[x]]\)], "Input"],
+
+Cell[BoxData[
+    \(f[g[x]]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(SetCommutingFunctions[f, g]; LeftQ[f, g] = False;\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(g[f[x]]\)], "Input"],
+
+Cell[BoxData[
+    \(g[f[x]]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(SetCommutingFunctions[f, g]; LeftQ[f, g] = False;\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[g[x]]\)], "Input"],
+
+Cell[BoxData[
+    \(g[f[x]]\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+
+The above examples demonstrate the most commonly used features in \
+NCAlgebra.\
+\>", "Text",
+  CellFrame->{{0, 0}, {0, 2}}]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{1079, 963},
+WindowMargins->{{Automatic, 73}, {Automatic, 0}},
+PrintingPageRange->{1, 2},
+PrintingOptions->{"PaperSize"->{612, 792},
+"PaperOrientation"->"Portrait",
+"Magnification"->1},
+Magnification->1
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 306, 10, 10, "Text"],
+
+Cell[CellGroupData[{
+Cell[2085, 65, 570, 21, 107, "Input"],
+Cell[2658, 88, 87, 1, 27, "Output"]
+}, Open  ]],
+Cell[2760, 92, 842, 14, 122, "Text"],
+Cell[3605, 108, 99, 1, 32, "Text"],
+Cell[3707, 111, 45, 3, 42, "Input"],
+Cell[3755, 116, 112, 4, 32, "Text"],
+
+Cell[CellGroupData[{
+Cell[3892, 124, 61, 1, 61, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[3978, 129, 62, 1, 43, "Input"],
+Cell[4043, 132, 49, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4129, 138, 48, 1, 27, "Input"],
+Cell[4180, 141, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4252, 147, 48, 1, 27, "Input"],
+Cell[4303, 150, 47, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4387, 156, 67, 1, 27, "Input"],
+Cell[4457, 159, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4529, 165, 56, 1, 27, "Input"],
+Cell[4588, 168, 48, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4673, 174, 48, 1, 27, "Input"],
+Cell[4724, 177, 49, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4810, 183, 72, 1, 27, "Input"],
+Cell[4885, 186, 40, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4962, 192, 48, 1, 27, "Input"],
+Cell[5013, 195, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[5063, 199, 171, 4, 48, "Text"],
+Cell[5237, 205, 44, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[5306, 210, 48, 1, 27, "Input"],
+Cell[5357, 213, 54, 1, 27, "Output"]
+}, Open  ]],
+Cell[5426, 217, 55, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[5506, 222, 39, 1, 27, "Input"],
+Cell[5548, 225, 38, 1, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5635, 232, 88, 4, 90, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[5748, 240, 62, 1, 27, "Input"],
+Cell[5813, 243, 50, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5900, 249, 59, 1, 27, "Input"],
+Cell[5962, 252, 49, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6048, 258, 93, 1, 27, "Input"],
+Cell[6144, 261, 63, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6244, 267, 59, 1, 27, "Input"],
+Cell[6306, 270, 49, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6392, 276, 79, 1, 27, "Input"],
+Cell[6474, 279, 105, 2, 23, "Print"],
+Cell[6582, 283, 68, 1, 27, "Output"]
+}, Open  ]],
+Cell[6665, 287, 251, 7, 48, "Text"],
+
+Cell[CellGroupData[{
+Cell[6941, 298, 69, 1, 27, "Input"],
+Cell[7013, 301, 40, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7090, 307, 77, 1, 27, "Input"],
+Cell[7170, 310, 52, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7259, 316, 101, 2, 27, "Input"],
+Cell[7363, 320, 47, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7447, 326, 76, 1, 27, "Input"],
+Cell[7526, 329, 107, 2, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7670, 336, 43, 1, 27, "Input"],
+Cell[7716, 339, 48, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7801, 345, 38, 1, 27, "Input"],
+Cell[7842, 348, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7914, 354, 45, 1, 27, "Input"],
+Cell[7962, 357, 54, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8053, 363, 38, 1, 27, "Input"],
+Cell[8094, 366, 39, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8170, 372, 42, 1, 27, "Input"],
+Cell[8215, 375, 47, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8299, 381, 41, 1, 27, "Input"],
+Cell[8343, 384, 42, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8422, 390, 42, 1, 27, "Input"],
+Cell[8467, 393, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8539, 399, 38, 1, 27, "Input"],
+Cell[8580, 402, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8652, 408, 45, 1, 27, "Input"],
+Cell[8700, 411, 54, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8791, 417, 38, 1, 27, "Input"],
+Cell[8832, 420, 39, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8908, 426, 42, 1, 27, "Input"],
+Cell[8953, 429, 47, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9037, 435, 41, 1, 27, "Input"],
+Cell[9081, 438, 42, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9160, 444, 42, 1, 27, "Input"],
+Cell[9205, 447, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9277, 453, 35, 1, 27, "Input"],
+Cell[9315, 456, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9387, 462, 44, 1, 27, "Input"],
+Cell[9434, 465, 50, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9521, 471, 44, 1, 27, "Input"],
+Cell[9568, 474, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9640, 480, 44, 1, 27, "Input"],
+Cell[9687, 483, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9759, 489, 49, 1, 27, "Input"],
+Cell[9811, 492, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9883, 498, 45, 1, 27, "Input"],
+Cell[9931, 501, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10003, 507, 45, 1, 27, "Input"],
+Cell[10051, 510, 35, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10123, 516, 45, 1, 27, "Input"],
+Cell[10171, 519, 46, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10254, 525, 45, 1, 27, "Input"],
+Cell[10302, 528, 46, 1, 27, "Output"]
+}, Open  ]],
+Cell[10363, 532, 259, 5, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[10647, 541, 55, 1, 27, "Input"],
+Cell[10705, 544, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[10755, 548, 63, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[10843, 553, 55, 1, 27, "Input"],
+Cell[10901, 556, 60, 1, 44, "Output"]
+}, Open  ]],
+Cell[10976, 560, 98, 1, 48, "Text"],
+Cell[11077, 563, 58, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[11160, 568, 41, 1, 27, "Input"],
+Cell[11204, 571, 53, 1, 27, "Output"]
+}, Open  ]],
+Cell[11272, 575, 68, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[11365, 580, 41, 1, 27, "Input"],
+Cell[11409, 583, 63, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11509, 589, 56, 1, 27, "Input"],
+Cell[11568, 592, 131, 2, 20, "Message"],
+Cell[11702, 596, 57, 1, 27, "Output"]
+}, Open  ]],
+Cell[11774, 600, 61, 0, 32, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11872, 605, 79, 4, 90, "Subtitle"],
+Cell[11954, 611, 52, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[12031, 616, 45, 1, 27, "Input"],
+Cell[12079, 619, 38, 1, 27, "Output"]
+}, Open  ]],
+Cell[12132, 623, 52, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[12209, 628, 43, 1, 27, "Input"],
+Cell[12255, 631, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[12305, 635, 280, 6, 84, "Text"],
+Cell[12588, 643, 52, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[12665, 648, 43, 1, 27, "Input"],
+Cell[12711, 651, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[12761, 655, 55, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[12841, 660, 38, 1, 27, "Input"],
+Cell[12882, 663, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[12932, 667, 55, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[13012, 672, 38, 1, 27, "Input"],
+Cell[13053, 675, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[13103, 679, 54, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[13182, 684, 39, 1, 27, "Input"],
+Cell[13224, 687, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[13274, 691, 54, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[13353, 696, 43, 1, 27, "Input"],
+Cell[13399, 699, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[13449, 703, 54, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[13528, 708, 43, 1, 27, "Input"],
+Cell[13574, 711, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[13624, 715, 47, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[13696, 720, 40, 1, 27, "Input"],
+Cell[13739, 723, 40, 1, 27, "Output"]
+}, Open  ]],
+Cell[13794, 727, 47, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[13866, 732, 40, 1, 27, "Input"],
+Cell[13909, 735, 40, 1, 27, "Output"]
+}, Open  ]],
+Cell[13964, 739, 50, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[14039, 744, 41, 1, 27, "Input"],
+Cell[14083, 747, 45, 1, 27, "Output"]
+}, Open  ]],
+Cell[14143, 751, 50, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[14218, 756, 52, 1, 27, "Input"],
+Cell[14273, 759, 66, 1, 27, "Output"]
+}, Open  ]],
+Cell[14354, 763, 59, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[14438, 768, 41, 1, 27, "Input"],
+Cell[14482, 771, 45, 1, 27, "Output"]
+}, Open  ]],
+Cell[14542, 775, 59, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[14626, 780, 52, 1, 27, "Input"],
+Cell[14681, 783, 66, 1, 27, "Output"]
+}, Open  ]],
+Cell[14762, 787, 52, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[14839, 792, 44, 1, 27, "Input"],
+Cell[14886, 795, 51, 1, 27, "Output"]
+}, Open  ]],
+Cell[14952, 799, 52, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[15029, 804, 44, 1, 27, "Input"],
+Cell[15076, 807, 51, 1, 27, "Output"]
+}, Open  ]],
+Cell[15142, 811, 52, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[15219, 816, 55, 1, 27, "Input"],
+Cell[15277, 819, 69, 1, 27, "Output"]
+}, Open  ]],
+Cell[15361, 823, 52, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[15438, 828, 55, 1, 27, "Input"],
+Cell[15496, 831, 69, 1, 27, "Output"]
+}, Open  ]],
+Cell[15580, 835, 56, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[15661, 840, 44, 1, 27, "Input"],
+Cell[15708, 843, 51, 1, 27, "Output"]
+}, Open  ]],
+Cell[15774, 847, 56, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[15855, 852, 44, 1, 27, "Input"],
+Cell[15902, 855, 51, 1, 27, "Output"]
+}, Open  ]],
+Cell[15968, 859, 56, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[16049, 864, 55, 1, 27, "Input"],
+Cell[16107, 867, 69, 1, 27, "Output"]
+}, Open  ]],
+Cell[16191, 871, 56, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[16272, 876, 55, 1, 27, "Input"],
+Cell[16330, 879, 69, 1, 27, "Output"]
+}, Open  ]],
+Cell[16414, 883, 54, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[16493, 888, 40, 1, 27, "Input"],
+Cell[16536, 891, 35, 1, 27, "Output"]
+}, Open  ]],
+Cell[16586, 895, 81, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[16692, 900, 40, 1, 27, "Input"],
+Cell[16735, 903, 41, 1, 27, "Output"]
+}, Open  ]],
+Cell[16791, 907, 81, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[16897, 912, 40, 1, 27, "Input"],
+Cell[16940, 915, 41, 1, 27, "Output"]
+}, Open  ]],
+Cell[16996, 919, 82, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[17103, 924, 40, 1, 27, "Input"],
+Cell[17146, 927, 41, 1, 27, "Output"]
+}, Open  ]],
+Cell[17202, 931, 82, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[17309, 936, 40, 1, 27, "Input"],
+Cell[17352, 939, 41, 1, 27, "Output"]
+}, Open  ]],
+Cell[17408, 943, 134, 5, 60, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

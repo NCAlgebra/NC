@@ -1,0 +1,47 @@
+9/2
+
+new runs of the test cases with amended C++ code
+
+
+test.10
+
+The answers are different between the C-code and the Mma-code
+
+test.14
+
+The Mma-code when given an empty list
+gives back the answer from the previous run (if there is a previous
+run).  The C-code gave back the empty list as desired.
+
+
+test.16
+
+Mma version and C versions give different answers.
+Also,  When SetCleanUpBasis[1] and SetGlobalPtr[] 
+are executed before MorasAlgorithm, we get an answer.
+If those commands are not envoked, the C code
+runs out of virtual memory.
+
+
+
+
+
+test.21 22
+The answers do not correlate between Mma and C
+and neither answer is a subset of the other.  
+
+test.23
+C++ answwer is a subset of the Mma answer.
+
+test.24
+C++ answer is a subset of the Mma answer
+
+test.35
+the answers have some relations that are not common.
+
+test.39 40
+C ans is a subset of the Mma ansswer.
+
+
+test.31  there is a problem with MultigradedLex.c
+that wasn't a problem on previous runs.

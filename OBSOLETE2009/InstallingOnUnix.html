@@ -1,0 +1,242 @@
+
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.05 [en] (X11; I; SunOS 5.5.1 sun4u) [Netscape]">
+</HEAD>
+<title>How to use NCAlgebra and NCGB on a Unix</title>
+<BODY>
+<font size=+2>
+<h1>
+How to use NCAlgebra and NCGB on a Unix
+</h1>
+
+<b>Note</b>: A current copy of this file can be found 
+on the web 
+<a href="http://www.math.ucsd.edu/~ncalg/InstallingOnUnix.html">  
+http://www.math.ucsd.edu/~ncalg/STANKUS/InstallingOnUnix.html</a>.
+<br> 
+
+<h2>Download and Unzip NCAlgebra and NCGB</h2>
+
+<ol>
+<li> 
+<b>Download</b> a copy of the code from the web site 
+<a href="http://www.math.ucsd.edu/~ncalg">http://www.math.ucsd.edu/~ncalg</a>.
+</li><li> 
+<b>Uncompress</b> this file into the directory in which you want to 
+install NCAlgebra. (If you do not know how to do this,
+click <a href="UnixUncompressInstructions.html">here</a>).
+</li><li>
+<b>You should now have a directory called NC</b>
+which contains files and subdirectories.
+</li>
+</ol>
+
+<a name="configurencalgebra">
+<h2> Set Up Path To NCAlgebra</h2>
+</a>
+
+<ol>
+<li>
+If you have uncompressed a copy of the code into a directory 
+which is in the Mathematica's
+path (type <tt>$Path</tt> in Mathematica to determine this),
+Then you can skip the next steps and move to the section 
+<a href="#runningncalgebra">Starting NCAlgebra</a>.
+</li><li>
+Now you need to set up your path to NCAlgebra so that 
+the NC directory loads automatically. 
+Choose <b>ONE</b> of the following options.
+<ol style="list-style-type: lower-alpha;" start="1"> <li>
+If you are experienced with Mathematica,
+you can edit your <tt>init.m</tt> file to add the name of the directory
+which contains the NC folder to the Mathematica variable $Path.
+</li></ol>
+OR
+<ol style="list-style-type: lower-alpha;" start="2"> <li>
+You can use our <tt>SetUpNCPath.nb</tt>
+notebook to automagically set up the Mathematica's $Path variable.
+Open this notebook and follow the directions which are found there.
+</li></ol>
+</ol>
+
+<a name="runningncalgebra">
+<h2> Starting NCAlgebra (Version 3.8 and higher)</h2>
+</a>
+<ol>
+<li>
+Start Mathematica and type
+<blockquote>
+<code>&lt;&lt;NC`;   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(* This reads paths for NCAlgebra and NCGB *)<br>
+&lt;&lt;NCAlgebra`; 
+(* This loads NCAlgebra 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*)
+</code>
+</blockquote>
+If this does not work, then 
+go back to 
+<a href="#configurencalgebra">set up your path</a> for NCAlgebra. <br>
+<font size=-1>
+(Note: The ` character is a character which is often found
+on the same key as the tilda (that is, ~) and is <b>not</b> the single quote character.)
+</font>
+There should be quite a few
+statements saying that various files have loaded. 
+</li></ol>
+</ol>
+</ol>
+
+<a name="runningoldncalgebra">
+<h2> Starting NCAlgebra (<u>Before</u> Version 3.8)</h2>
+</a>
+<ol>
+<li>One part of the documentation which is online gives additional detail
+about how to install older versions of NCAlgebra.
+Click
+<a href="http://math.ucsd.edu/~ncalg/NCBIGDOC02/node439.html">
+here
+</a> to see that information.
+</li></ol>
+
+<a name="testingncalgebra">
+<h2>Testing NCAlgebra</h2>
+</a>
+<ol>
+<li>
+To test the installation of NCAlgebra,
+<a href="#runningncalgebra">start</a> NCAlgebra
+and then type 
+<blockquote>
+<code>&lt;&lt;NCTEST;</code>
+</blockquote>
+</li>
+</ol>
+
+<a name="runningncgb"></a>
+<h2> Set up Paths and Starting NCGB</h2>
+</a>
+<ol><li>
+You do not need to read this section if you want to use NCAlgebra,
+but do not want to use NCGB.
+</li><li>
+If you have set up the paths for NCAlgebra, then the paths for NCGB should also be set up.
+To run NCGB, first start Mathematica and then type
+<blockquote>
+<code>&lt;&lt;NC`;
+&nbsp;
+(* This reads paths for NCAlgebra and NCGB *)<br>
+&lt;&lt;NCGB`; 
+(* This loads NCGB and NCAlgebra 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*)
+</code>
+</blockquote>
+<br>
+<font size=-1>
+(Note:
+<blockquote>
+<code>&lt;&lt;NC`;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(* This reads paths for NCAlgebra and NCGB 
+*)<br>
+&lt;&lt;NCAlgebra`; 
+(* This loads NCAlgebra 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*)<br>
+&lt;&lt;NCGB`; 
+&nbsp;&nbsp;&nbsp;&nbsp;
+(* This loads NCGB 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+*)
+</code>
+</blockquote>
+also works.)
+</font>
+</li></ol>
+
+<a name="testingncgb">
+<h2>Testing NCGB </h2>
+</a>
+<ol><li>
+To test NCGB, first <a href="#runningncgb">start</a> NCGB and then
+type <code>TimedGBTest[1,5]</code>. 
+You should see quite a bit of stuff pass by on the screen. When
+the TimedGBTest command is finished, you should see 
+something which looks like:
+<pre>
+RESULTS::::
+GBtest[1] = True  (oldtime=?? newtime=0:00:00.191150 mmaM:8412880)
+GBtest[2] = True  (oldtime=?? newtime=0:00:00.097872 mmaM:8415880)
+GBtest[3] = True  (oldtime=?? newtime=0:00:00.095502 mmaM:8418592)
+GBtest[4] = True  (oldtime=?? newtime=0:00:00.094189 mmaM:8424272)
+GBtest[5] = True  (oldtime=?? newtime=0:00:00.117072 mmaM:8425760)
+</pre>
+Typing <code>TimedGBTest[1,20]</code> runs the first 20 tests.
+</li></ol>
+
+<h2>Running existing NCAlgebra and NCGB Demo Notebooks</h2>
+The best demos to try are in the <tt>NC/work</tt> directory.
+There are also many demos in the <tt>NC/NCAlgebra</tt> directory,
+<font size=-1>
+To find these demos:
+<ol>
+<li>
+Find the directory 
+<tt>NC/work</tt>, 
+<tt>NC/NCAlgebra</tt>, 
+<tt>NC/NCGB/MmaSource</tt> 
+either using the <tt>cd</tt> command on the command line
+or through some graphical interface.
+</li><li>
+See what notebooks are provided.
+Determine which files have a suffix of <tt>nb</tt>
+and have <tt>Demo</tt> in their names.
+If you are using the command line, then you may type
+<tt>ls *Demo*.nb</tt> to determine this list of files.
+</li></ol>
+</font>
+
+<h2>Documentation</h2>
+<ol>
+<li>
+If you would like to read some documentation and some more demonstrations, 
+change directories into NC/DOCUMENTATION. 
+This directory is filled with postscript and pdf
+files which could be viewed if you have installed the 
+appropriate software.
+(The program <tt>ghostview</tt> can be used to view postscript files
+and the program <tt>xpdf</tt> can be used to view pdf files. 
+Both of these programs are often installed on Unix systems.)
+</li><li>
+The main document is provided in three different forms.
+DOCUMENT.pdf  and DOCUMENT.ps are in the NC/DOCUMENTATION
+directory and can be printed (Note: It is over 350 pages long). 
+There is also an HTML version of the document which can be obtained by 
+clicking the "THE BIG DOCUMENT" link on the 
+<a href="http://www.math.ucsd.edu/~ncalg/">http://www.math.ucsd.edu/~ncalg/</a> web page or
+via the download page (which can be accessed via the
+<a href="http://www.math.ucsd.edu/~ncalg/">http://www.math.ucsd.edu/~ncalg/</a>
+web page).
+The HTML and PDF versions of the document can be scanned
+just like any other HTML or PDF document.
+</li><li>
+In each version of the document, both the table of contents and the 
+index lists all NCAlgebra commands.
+</li></ol>
+
+<h2> Problem Frequently Asked Questions</h2>
+<ol><li>
+If you are having trouble getting the LaTeX functionality in NCGB to not work,
+<a href="TeXProblemUnix.html">click here</a>.
+</li></ol> 
+</font>
+</BODY>
+</HTML>

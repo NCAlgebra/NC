@@ -1,0 +1,2 @@
+{m ** Inv[m] -> 1, Inv[m] ** m -> 1, a ** m -> m ** f + q1 ** q2, 
+  q1 ** q2 ** Inv[m] -> a - m ** f ** Inv[m]}

@@ -1,0 +1,328 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7209,        239]*)
+(*NotebookOutlinePosition[      7838,        261]*)
+(*  CellTagsIndexPosition[      7794,        257]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(<< RandomMatrix.m\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 2, 0, 1]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"0.32392182329698027`", "0.991127268196369`"},
+            {"0.35602663024130377`", "0.4270639169744314`"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 3, 0, 1]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"0.584760704359041`", "0.3664225121774062`", 
+              "0.9716245765264034`"},
+            {"0.15455706821165444`", "0.5107254092295213`", 
+              "0.8860011640013801`"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 2, 0, 5]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"3.683540539115866`", "0.7438480617584721`"},
+            {"2.021842280337135`", "2.5039634334311947`"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[3, 5, \(-10\), 10]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-6.420204361692183`\), \(-2.4420815532268714`\), 
+              "9.099159314765476`", "9.725775638507034`", 
+              "1.3089564598224435`"},
+            {\(-8.667986681341219`\), "4.95674533183989`", 
+              "2.9586654372358723`", "0.30410646498805427`", 
+              "1.9697282582017444`"},
+            {\(-8.729078192458479`\), "8.86679910178266`", 
+              "6.271196060781371`", \(-7.539458239828103`\), 
+              "4.275739626371045`"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[3, 3, \(-10\), 5]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-9.040277570009295`\), \(-8.70231235486254`\), 
+              "2.0747735068379054`"},
+            {\(-0.6887833619181265`\), \(-0.18379330158442286`\), \
+\(-7.761474004123885`\)},
+            {"2.7875121391772613`", \(-5.400927199709305`\), 
+              "3.6635568411960016`"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 3, \(-4\), 5, \ EntryType \[Rule] \ Real]\  // \ 
+      MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-0.6564910878815682`\), \(-2.9687592975468498`\), 
+              "0.5890414545436577`"},
+            {"3.907837051025286`", 
+              "0.25065299776835026`", \(-1.6321881225286838`\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 3, \(-4\), 5, \ EntryType \[Rule] \ Integer]\  // \ 
+      MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-4\), \(-4\), \(-1\)},
+            {\(-1\), \(-4\), "4"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 3, \(-4\), 5, \ EntryType \[Rule] \ Real, \ 
+        MatrixType \[Rule] \ Diagonal]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"3.367964581654544`", "0"},
+            {"0", \(-3.993009578682811`\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 3, \(-4\), 5, \ EntryType\  \[Rule] \ Integer, \ 
+        MatrixType \[Rule] \ Diagonal]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"2", "0"},
+            {"0", "4"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 3, \(-4\), 5, \ EntryType \[Rule] \ Real, \ 
+        MatrixType\  \[Rule] \ Symmetric]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-0.4571564729041375`\), \(-3.776158147369802`\)},
+            {\(-3.776158147369802`\), \(-3.5534400293874926`\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RandomMatrix[2, 3, \(-4\), 5, \ EntryType \[Rule] \ Integer, \ 
+        MatrixType\  \[Rule] \ Symmetric]\  // \ MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"1", \(-4\)},
+            {\(-4\), "1"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{805, 609},
+WindowMargins->{{Automatic, 33}, {Automatic, 0}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1705, 50, 50, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[1780, 55, 75, 1, 27, "Input"],
+Cell[1858, 58, 300, 7, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2195, 70, 75, 1, 27, "Input"],
+Cell[2273, 73, 375, 9, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2685, 87, 75, 1, 27, "Input"],
+Cell[2763, 90, 297, 7, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3097, 102, 82, 1, 27, "Input"],
+Cell[3182, 105, 660, 14, 76, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3879, 124, 81, 1, 27, "Input"],
+Cell[3963, 127, 474, 11, 76, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4474, 143, 115, 2, 27, "Input"],
+Cell[4592, 147, 384, 9, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5013, 161, 118, 2, 27, "Input"],
+Cell[5134, 165, 252, 7, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5423, 177, 150, 2, 27, "Input"],
+Cell[5576, 181, 264, 7, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5877, 193, 155, 2, 27, "Input"],
+Cell[6035, 197, 227, 7, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6299, 209, 153, 2, 27, "Input"],
+Cell[6455, 213, 309, 7, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6801, 225, 156, 2, 27, "Input"],
+Cell[6960, 229, 233, 7, 58, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

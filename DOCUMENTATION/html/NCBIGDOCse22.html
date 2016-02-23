@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.12 Manipulating an Expression &#8212; less useful commands</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 2166--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse23.html" >next</a>] [<a 
+href="NCBIGDOCse21.html" >prev</a>] [<a 
+href="NCBIGDOCse21.html#tailNCBIGDOCse21.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse22.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse22.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.12   </span> <a 
+ id="x30-1320004.12"></a>Manipulating an Expression &#8212; less useful commands</h3>
+<!--l. 2181--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.12.1   </span> <a 
+ id="x30-1330004.12.1"></a>NCTermArray[expr,aList,anArray]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:        <span 
+class="cmmi-12">NCTermArray</span>[<span 
+class="cmmi-12">expr,aList,anArray</span>]        creates        an        array
+      <span 
+class="cmmi-12">anArray </span>whose contents represent the terms of <span 
+class="cmmi-12">expr </span>sorted by degree. The variables
+      <span 
+class="cmmi-12">anArray</span>[&#8221;<span 
+class="cmmi-12">variables</span>&#8221;], <span 
+class="cmmi-12">anArray</span>[&#8221;<span 
+class="cmmi-12">types</span>&#8221;] and elements such as <span 
+class="cmmi-12">anArray</span>[<span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x,y</span>] and
+      <span 
+class="cmmi-12">anArray</span>[<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x,y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>] to hold the terms with 2 x&#8216;s and 1 y and 3 x&#8217;s and 2 y&#8217;s,
+      respectively (assuming that <span 
+class="cmmi-12">aList </span>= <span 
+class="cmsy-10x-x-120">{</span>x,y<span 
+class="cmsy-10x-x-120">}</span>). You can reconstruct <span 
+class="cmmi-12">expr </span>from <span 
+class="cmmi-12">anArray</span>
+      via ReconstuctTaylor[anArray].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression, <span 
+class="cmmi-12">aList </span>is a list of variables and <span 
+class="cmmi-12">anArray </span>is a
+      symbol.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.0 </dd></dl>
+<a 
+ id="dx30-133001"></a>
+<!--l. 2183--><p class="noindent">The following is an example of the above command.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[22]:=&#x00A0;expr&#x00A0;=&#x00A0;x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />In[23]:=&#x00A0;NCTermArray[expr,{x,y},foo]
+&#x00A0;<br />
+&#x00A0;<br />Out[23]=&#x00A0;foo
+&#x00A0;<br />
+&#x00A0;<br />In[24]:=&#x00A0;??foo
+&#x00A0;<br />Global&#8216;foo
+&#x00A0;<br />
+&#x00A0;<br />foo["types"]&#x00A0;=&#x00A0;{{1,&#x00A0;1},&#x00A0;{2,&#x00A0;0}}
+&#x00A0;<br />
+&#x00A0;<br />foo["variables"]&#x00A0;:=&#x00A0;{x,&#x00A0;y}
+&#x00A0;<br />
+&#x00A0;<br />foo[x,&#x00A0;y]&#x00A0;=&#x00A0;x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w
+&#x00A0;<br />
+&#x00A0;<br />foo[x&#x00A0;**&#x00A0;x,&#x00A0;1]&#x00A0;=&#x00A0;x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w
+&#x00A0;<br />
+&#x00A0;<br />foo[x___]&#x00A0;:=&#x00A0;0
+</div>
+</td></tr></table>
+<!--l. 2206--><p class="nopar">
+<!--l. 2215--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.12.2   </span> <a 
+ id="x30-1340004.12.2"></a>NCReconstructFromTermArray[anArray]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">NCTermArray</span>[<span 
+class="cmmi-12">expr,aList,anArray</span>];
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC52x.png" alt="newexpr   = N CReconstructF   romT ermArray[anArray];
+      " class="math-display" ></center> sets <span 
+class="cmmi-12">newexpr </span>equal to <span 
+class="cmmi-12">expr</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">anArray </span>is a symbol previously filled by NCTermArray
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.0 </dd></dl>
+<a 
+ id="dx30-134001"></a>
+<!--l. 2217--><p class="noindent">If we continue with the example above we have the following
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[24]:=&#x00A0;NCReconstructFromTermArray[foo]
+&#x00A0;<br />
+&#x00A0;<br />Out[24]=&#x00A0;x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w&#x00A0;+
+&#x00A0;<br />
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 2225--><p class="nopar">
+<!--l. 2227--><p class="indent">   However, now one can also do some manipulation before reconstructing as shown
+below.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[25]:=&#x00A0;foo[x,y]&#x00A0;=&#x00A0;NCC[foo[x,y],y**w]
+&#x00A0;<br />Out[25]=&#x00A0;(x&#x00A0;**&#x00A0;z&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x)&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w
+&#x00A0;<br />
+&#x00A0;<br />In[26]:=&#x00A0;foo[x**x,1]&#x00A0;=&#x00A0;NCC[foo[x**x,1],x**w]
+&#x00A0;<br />
+&#x00A0;<br />Out[26]=&#x00A0;(x&#x00A0;**&#x00A0;z&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x)&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w
+&#x00A0;<br />
+&#x00A0;<br />In[27]:=&#x00A0;??foo
+&#x00A0;<br />Global&#8216;foo
+&#x00A0;<br />
+&#x00A0;<br />foo["types"]&#x00A0;=&#x00A0;{{1,&#x00A0;1},&#x00A0;{2,&#x00A0;0}}
+&#x00A0;<br />
+&#x00A0;<br />foo["variables"]&#x00A0;:=&#x00A0;{x,&#x00A0;y}
+&#x00A0;<br />
+&#x00A0;<br />foo[x,&#x00A0;y]&#x00A0;=&#x00A0;NCC[x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w,&#x00A0;y&#x00A0;**&#x00A0;w]
+&#x00A0;<br />
+&#x00A0;<br />foo[x&#x00A0;**&#x00A0;x,&#x00A0;1]&#x00A0;=&#x00A0;NCC[x&#x00A0;**&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w,&#x00A0;x&#x00A0;**&#x00A0;w]
+&#x00A0;<br />
+&#x00A0;<br />foo[x___]&#x00A0;:=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[27]:=&#x00A0;NCReconstructFromTermArray[foo]
+&#x00A0;<br />Out[27]=&#x00A0;(x&#x00A0;**&#x00A0;z&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x)&#x00A0;**&#x00A0;x&#x00A0;**&#x00A0;w&#x00A0;+&#x00A0;(x&#x00A0;**&#x00A0;z&#x00A0;+&#x00A0;z&#x00A0;**&#x00A0;x)&#x00A0;**&#x00A0;y&#x00A0;**&#x00A0;w
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 2254--><p class="nopar">
+<!--l. 2269--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.12.3   </span> <a 
+ id="x30-1350004.12.3"></a>NCCompose[aVerySpecialList]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCCom</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmmi-12">NCCompose</span>[<span 
+class="cmmi-12">NCDecompose</span>[<span 
+class="cmmi-12">poly,a</span>]]  will  reproduce  <span 
+class="cmmi-12">poly</span>.  For  example,
+      <span 
+class="cmmi-12">NCCompose</span>[<span 
+class="cmmi-12">NCDecompose</span>[<span 
+class="cmmi-12">poly,</span><span 
+class="cmmi-12">a,b</span>]<span 
+class="cmmi-12">,</span> 1<span 
+class="cmmi-12">, </span>0]  will  reconstruct  the  elements  of  poly
+      which are of order 1 in <span 
+class="cmmi-12">a </span>and of order 0 in <span 
+class="cmmi-12">b</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Called within NCCollect. <span 
+class="cmbx-12">The average user would never use</span>
+      <span 
+class="cmbx-12">this.  </span></dd></dl>
+<a 
+ id="dx30-135001"></a>
+<!--l. 2279--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.12.4   </span> <a 
+ id="x30-1360004.12.4"></a>NCDecompose[expr, listofsymbols]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCDec</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: NCDecompose[poly, a] or NCDecompose[poly, a, b, c, ...] will produce a list of
+      elements of poly in which elements of the same order of a (or the same order of a, b,
+      c, ... ) are collected together.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Called within NCCollect. <span 
+class="cmbx-12">The average user would never use</span>
+      <span 
+class="cmbx-12">this. </span></dd></dl>
+<a 
+ id="dx30-136001"></a>
+
+   <!--l. 2290--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse23.html" >next</a>] [<a 
+href="NCBIGDOCse21.html" >prev</a>] [<a 
+href="NCBIGDOCse21.html#tailNCBIGDOCse21.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse22.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse22.html" >up</a>] </p></div>
+<!--l. 2290--><p class="indent">   <a 
+ id="tailNCBIGDOCse22.html"></a>   
+</body></html> 

@@ -1,0 +1,7 @@
+
+
+This file facilitates conversion of Mma expression to Tex.
+It does use the built in MMa TexForm and then automatically LaTeXs
+and then pops up a .pdf file, automatically if you set the options that way.
+Inside the NCAlgebra directory is a file creating TeX constructions
+specific to NC expressions.

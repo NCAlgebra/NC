@@ -1,0 +1,308 @@
+rm -f *.o p9c
+g++ -DHAS_INCLUDE_NO_DOTS -I. -I/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/CompilerAdditions -Wno-non-template-friend -Wall -fno-for-scope -m64 -O0 -g -c AdmWithLevels.c
+In file included from AdmWithLevels.hpp:7,
+                 from AdmWithLevels.c:3:
+Choice.hpp:6:23: error: Choice1.hpp: No such file or directory
+In file included from AdmWithLevels.hpp:16,
+                 from AdmWithLevels.c:3:
+Variable.hpp:3:30: error: ChoiceVariable.hpp: No such file or directory
+In file included from AdmWithLevels.hpp:17,
+                 from AdmWithLevels.c:3:
+VariableSet.hpp:15:25: error: MyOstream.hpp: No such file or directory
+In file included from AdmWithLevels.hpp:18,
+                 from AdmWithLevels.c:3:
+GBList.hpp:3:26: error: ListChoice.hpp: No such file or directory
+GBList.hpp:8:23: error: nGBList.hpp: No such file or directory
+In file included from AdmWithLevels.hpp:20,
+                 from AdmWithLevels.c:3:
+AdmissibleOrder.hpp:22:27: error: CreateOrder.hpp: No such file or directory
+AdmWithLevels.c:5:28: error: GroebnerRule.hpp: No such file or directory
+AdmWithLevels.c:6:27: error: PrintVector.hpp: No such file or directory
+AdmWithLevels.c:8:24: error: Monomial.hpp: No such file or directory
+AdmWithLevels.c:210:23: error: idValue.hpp: No such file or directory
+Variable.hpp:16: error: expected ‘,’ or ‘...’ before ‘&’ token
+Variable.hpp:16: error: ISO C++ forbids declaration of ‘Variable’ with no type
+Variable.hpp: In member function ‘bool CompareOnStringNumber::operator()(int) const’:
+Variable.hpp:17: error: ‘v’ was not declared in this scope
+Variable.hpp:17: error: ‘w’ was not declared in this scope
+Variable.hpp: At global scope:
+Variable.hpp:14: error: redefinition of ‘class CompareOnStringNumber’
+Variable.hpp:14: error: previous definition of ‘class CompareOnStringNumber’
+VariableSet.hpp:34: error: expected ‘,’ or ‘...’ before ‘&’ token
+VariableSet.hpp:34: error: ISO C++ forbids declaration of ‘Variable’ with no type
+VariableSet.hpp:35: error: expected ‘,’ or ‘...’ before ‘&’ token
+VariableSet.hpp:35: error: ISO C++ forbids declaration of ‘Variable’ with no type
+VariableSet.hpp:36: error: expected ‘,’ or ‘...’ before ‘&’ token
+VariableSet.hpp:36: error: ISO C++ forbids declaration of ‘Variable’ with no type
+VariableSet.hpp:40: error: ‘Variable’ has not been declared
+VariableSet.hpp:45: error: ‘Variable’ has not been declared
+VariableSet.hpp: In constructor ‘VariableSet::VariableSet()’:
+VariableSet.hpp:24: error: ‘Variable’ has not been declared
+VariableSet.hpp:24: error: ‘s_largestStringNumber’ was not declared in this scope
+VariableSet.hpp: In member function ‘bool VariableSet::present(int) const’:
+VariableSet.hpp:37: error: ‘v’ was not declared in this scope
+VariableSet.hpp: In member function ‘bool VariableSet::firstVariable(int&) const’:
+VariableSet.hpp:42: error: ‘Variable’ has not been declared
+VariableSet.hpp:42: error: ‘s_variableFromNumber’ was not declared in this scope
+VariableSet.hpp: In member function ‘bool VariableSet::nextVariable(int&) const’:
+VariableSet.hpp:47: error: request for member ‘stringNumber’ in ‘x’, which is of non-class type ‘int’
+VariableSet.hpp:52: error: ‘Variable’ has not been declared
+VariableSet.hpp:52: error: ‘s_variableFromNumber’ was not declared in this scope
+VariableSet.hpp: In member function ‘void VariableSet::Union(const VariableSet&)’:
+VariableSet.hpp:64: error: ‘Variable’ was not declared in this scope
+VariableSet.hpp:64: error: expected `;' before ‘var’
+VariableSet.hpp:65: error: ‘var’ was not declared in this scope
+VariableSet.hpp:67: error: no matching function for call to ‘VariableSet::insert(<type error>)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+VariableSet.hpp:68: error: no matching function for call to ‘VariableSet::nextVariable(<type error>) const’
+VariableSet.hpp:45: note: candidates are: bool VariableSet::nextVariable(int&) const
+VariableSet.hpp: In member function ‘void VariableSet::intersection(const VariableSet&)’:
+VariableSet.hpp:74: error: ‘Variable’ was not declared in this scope
+VariableSet.hpp:74: error: expected `;' before ‘var1’
+VariableSet.hpp:75: error: expected `;' before ‘var2’
+VariableSet.hpp:76: error: ‘var1’ was not declared in this scope
+VariableSet.hpp:77: error: ‘var2’ was not declared in this scope
+VariableSet.hpp:80: error: no matching function for call to ‘VariableSet::insert(<type error>)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+VariableSet.hpp:81: error: no matching function for call to ‘VariableSet::nextVariable(<type error>) const’
+VariableSet.hpp:45: note: candidates are: bool VariableSet::nextVariable(int&) const
+VariableSet.hpp:82: error: no matching function for call to ‘VariableSet::nextVariable(<type error>)’
+VariableSet.hpp:45: note: candidates are: bool VariableSet::nextVariable(int&) const
+VariableSet.hpp:85: error: no matching function for call to ‘VariableSet::nextVariable(<type error>) const’
+VariableSet.hpp:45: note: candidates are: bool VariableSet::nextVariable(int&) const
+VariableSet.hpp:87: error: no matching function for call to ‘VariableSet::nextVariable(<type error>)’
+VariableSet.hpp:45: note: candidates are: bool VariableSet::nextVariable(int&) const
+VariableSet.hpp: At global scope:
+VariableSet.hpp:96: error: expected constructor, destructor, or type conversion before ‘&’ token
+AdmissibleOrder.hpp:45: error: ‘MyOstream’ has not been declared
+AdmissibleOrder.hpp: In static member function ‘static AdmissibleOrder& AdmissibleOrder::s_getCurrent()’:
+AdmissibleOrder.hpp:69: error: ‘CreateOrder’ was not declared in this scope
+AdmissibleOrder.hpp: In static member function ‘static const AdmissibleOrder* AdmissibleOrder::s_getCurrentP()’:
+AdmissibleOrder.hpp:76: error: ‘CreateOrder’ was not declared in this scope
+AdmWithLevels.hpp: At global scope:
+AdmWithLevels.hpp:53: error: ‘MyOstream’ has not been declared
+AdmWithLevels.hpp:55: error: ‘MyOstream’ has not been declared
+AdmWithLevels.c: In member function ‘void AdmWithLevels::error1(const Variable&) const’:
+AdmWithLevels.c:30: error: no match for ‘operator<<’ in ‘GBStream << "The variable "’
+AdmWithLevels.c: In member function ‘int AdmWithLevels::level(const Variable&) const’:
+AdmWithLevels.c:37: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+AdmWithLevels.c: In member function ‘virtual void AdmWithLevels::setVariables(const std::vector<std::vector<Variable, std::allocator<Variable> >, std::allocator<std::vector<Variable, std::allocator<Variable> > > >&)’:
+AdmWithLevels.c:60: error: incomplete type ‘Variable’ used in nested name specifier
+AdmWithLevels.c:69: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+AdmWithLevels.c:71: error: no matching function for call to ‘VariableSet::insert(const Variable&)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c:73: error: no matching function for call to ‘VariableSet::insert(const Variable&)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c: In member function ‘virtual void AdmWithLevels::setVariables(const std::vector<Variable, std::allocator<Variable> >&, int)’:
+AdmWithLevels.c:86: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+AdmWithLevels.c:92: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+AdmWithLevels.c:94: error: no matching function for call to ‘VariableSet::insert(const Variable&)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c:96: error: no matching function for call to ‘VariableSet::insert(const Variable&)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c: In member function ‘virtual void AdmWithLevels::addVariable(const Variable&, int)’:
+AdmWithLevels.c:103: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+AdmWithLevels.c:107: error: no match for ‘operator<<’ in ‘GBStream << "It has been requested that "’
+AdmWithLevels.c:120: error: no matching function for call to ‘VariableSet::insert(const Variable&)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c:122: error: no matching function for call to ‘VariableSet::insert(const Variable&)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c: At global scope:
+AdmWithLevels.c:128: error: prototype for ‘void AdmWithLevels::PrintOrderViaString(MyOstream&, const char*) const’ does not match any in class ‘AdmWithLevels’
+AdmWithLevels.hpp:55: error: candidate is: void AdmWithLevels::PrintOrderViaString(int&, const char*) const
+AdmWithLevels.c: In member function ‘void AdmWithLevels::PrintOrderViaString(MyOstream&, const char*) const’:
+AdmWithLevels.c:130: error: no match for ‘operator<<’ in ‘os << "(Empty Order).\012"’
+AdmWithLevels.c:137: error: no match for ‘operator<<’ in ‘os << ' '’
+AdmWithLevels.c:142: error: no match for ‘operator<<’ in ‘os << " (Empty Level) "’
+AdmWithLevels.c:144: error: no match for ‘operator<<’ in ‘os << ' '’
+AdmWithLevels.c:144: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+AdmWithLevels.c:147: error: no match for ‘operator<<’ in ‘os << " < "’
+AdmWithLevels.c:147: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+AdmWithLevels.c:152: error: no match for ‘operator<<’ in ‘os << " |end-of-knowns| "’
+AdmWithLevels.c:157: error: no match for ‘operator<<’ in ‘os << '\012'’
+AdmWithLevels.c: In member function ‘virtual VariableSet AdmWithLevels::variablesInOrder() const’:
+AdmWithLevels.c:169: error: no matching function for call to ‘VariableSet::insert(const Variable&)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c: In member function ‘virtual bool AdmWithLevels::variableLess(const Variable&, const Variable&) const’:
+AdmWithLevels.c:181: error: no match for ‘operator==’ in ‘x == y’
+AdmWithLevels.c:191: error: no match for ‘operator==’ in ‘v == x’
+AdmWithLevels.c:195: error: no match for ‘operator==’ in ‘v == y’
+AdmWithLevels.c: At global scope:
+AdmWithLevels.c:213: error: ‘idValue’ was not declared in this scope
+AdmWithLevels.c: In member function ‘void AdmWithLevels::sortIntoKnownsAndUnknowns(const VariableSet&, VariableSet&, VariableSet&) const’:
+AdmWithLevels.c:223: error: aggregate ‘Variable v’ has incomplete type and cannot be defined
+AdmWithLevels.c:224: error: no matching function for call to ‘VariableSet::firstVariable(<type error>) const’
+VariableSet.hpp:40: note: candidates are: bool VariableSet::firstVariable(int&) const
+AdmWithLevels.c:226: error: no matching function for call to ‘VariableSet::present(<type error>) const’
+VariableSet.hpp:36: note: candidates are: bool VariableSet::present(int) const
+AdmWithLevels.c:227: error: no matching function for call to ‘VariableSet::insert(<type error>)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c:229: error: no matching function for call to ‘VariableSet::insert(<type error>)’
+VariableSet.hpp:34: note: candidates are: void VariableSet::insert(int)
+AdmWithLevels.c:231: error: no matching function for call to ‘VariableSet::nextVariable(<type error>) const’
+VariableSet.hpp:45: note: candidates are: bool VariableSet::nextVariable(int&) const
+/usr/include/c++/4.0.0/bits/stl_iterator.h: In member function ‘__gnu_cxx::__normal_iterator<_Iterator, _Container>& __gnu_cxx::__normal_iterator<_Iterator, _Container>::operator++() [with _Iterator = const Variable*, _Container = std::vector<Variable, std::allocator<Variable> >]’:
+AdmWithLevels.c:75:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_iterator.h:623: error: cannot increment a pointer to incomplete type ‘const Variable’
+/usr/include/c++/4.0.0/bits/vector.tcc: In member function ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’:
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/vector.tcc:144: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/vector.tcc:148: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/vector.tcc:163: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_vector.h: In member function ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’:
+AdmWithLevels.c:117:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_vector.h:607: error: cannot increment a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_construct.h: In function ‘void std::_Destroy(_ForwardIterator, _ForwardIterator, _Allocator) [with _ForwardIterator = Variable*, _Allocator = std::allocator<Variable>]’:
+/usr/include/c++/4.0.0/bits/vector.tcc:142:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_construct.h:173: error: cannot increment a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_iterator.h: In member function ‘__gnu_cxx::__normal_iterator<_Iterator, _Container> __gnu_cxx::__normal_iterator<_Iterator, _Container>::operator+(const typename std::iterator_traits<_Iterator>::difference_type&) const [with _Iterator = const Variable*, _Container = std::vector<Variable, std::allocator<Variable> >]’:
+/usr/include/c++/4.0.0/bits/vector.tcc:157:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_iterator.h:654: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_vector.h: In destructor ‘std::_Vector_base<_Tp, _Alloc>::~_Vector_base() [with _Tp = Variable, _Alloc = std::allocator<Variable>]’:
+/usr/include/c++/4.0.0/bits/stl_vector.h:189:   instantiated from ‘std::vector<_Tp, _Alloc>::vector(const typename std::_Vector_base<_Tp, _Alloc>::allocator_type&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:111:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_vector.h:109: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/ext/new_allocator.h: In member function ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Tp*, const _Tp&) [with _Tp = Variable]’:
+/usr/include/c++/4.0.0/bits/stl_vector.h:606:   instantiated from ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:117:   instantiated from here
+/usr/include/c++/4.0.0/ext/new_allocator.h:104: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/vector.tcc: In member function ‘void std::vector<_Tp, _Alloc>::_M_insert_aux(__gnu_cxx::__normal_iterator<typename _Alloc::pointer, std::vector<_Tp, _Alloc> >, const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’:
+/usr/include/c++/4.0.0/bits/stl_vector.h:610:   instantiated from ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:117:   instantiated from here
+/usr/include/c++/4.0.0/bits/vector.tcc:253: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/vector.tcc:255: error: cannot increment a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/vector.tcc:256: error: ‘__x_copy’ has incomplete type
+/usr/include/c++/4.0.0/bits/vector.tcc:256: error: storage size of ‘__x_copy’ isn't known
+/usr/include/c++/4.0.0/bits/vector.tcc:257: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/vector.tcc:257: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_vector.h:610:   instantiated from ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:117:   instantiated from here
+/usr/include/c++/4.0.0/bits/vector.tcc:260: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_vector.h:610:   instantiated from ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:117:   instantiated from here
+/usr/include/c++/4.0.0/bits/vector.tcc:299: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/vector.tcc:304: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_iterator.h: In function ‘typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&) [with _IteratorL = const Variable*, _IteratorR = const Variable*, _Container = std::vector<Variable, std::allocator<Variable> >]’:
+/usr/include/c++/4.0.0/bits/stl_vector.h:403:   instantiated from ‘size_t std::vector<_Tp, _Alloc>::size() const [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/vector.tcc:137:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_iterator.h:759: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+/usr/include/c++/4.0.0/ext/new_allocator.h: In member function ‘void __gnu_cxx::new_allocator<_Tp>::destroy(_Tp*) [with _Tp = Variable]’:
+/usr/include/c++/4.0.0/bits/stl_construct.h:174:   instantiated from ‘void std::_Destroy(_ForwardIterator, _ForwardIterator, _Allocator) [with _ForwardIterator = Variable*, _Allocator = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/vector.tcc:142:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/ext/new_allocator.h:107: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_iterator.h: In member function ‘__gnu_cxx::__normal_iterator<_Iterator, _Container>& __gnu_cxx::__normal_iterator<_Iterator, _Container>::operator++() [with _Iterator = Variable*, _Container = std::vector<Variable, std::allocator<Variable> >]’:
+/usr/include/c++/4.0.0/bits/stl_construct.h:173:   instantiated from ‘void std::_Destroy(_ForwardIterator, _ForwardIterator, _Allocator) [with _ForwardIterator = __gnu_cxx::__normal_iterator<Variable*, std::vector<Variable, std::allocator<Variable> > >, _Allocator = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/vector.tcc:153:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_iterator.h:623: error: cannot increment a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_vector.h: In member function ‘size_t std::vector<_Tp, _Alloc>::max_size() const [with _Tp = Variable, _Alloc = std::allocator<Variable>]’:
+/usr/include/c++/4.0.0/bits/vector.tcc:265:   instantiated from ‘void std::vector<_Tp, _Alloc>::_M_insert_aux(__gnu_cxx::__normal_iterator<typename _Alloc::pointer, std::vector<_Tp, _Alloc> >, const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/stl_vector.h:610:   instantiated from ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:117:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_vector.h:408: error: invalid application of ‘sizeof’ to incomplete type ‘Variable’ 
+/usr/include/c++/4.0.0/bits/stl_vector.h:408: warning: division by zero in ‘-1u / 0’
+/usr/include/c++/4.0.0/ext/new_allocator.h: In member function ‘_Tp* __gnu_cxx::new_allocator<_Tp>::allocate(size_t, const void*) [with _Tp = Variable]’:
+/usr/include/c++/4.0.0/bits/stl_vector.h:117:   instantiated from ‘_Tp* std::_Vector_base<_Tp, _Alloc>::_M_allocate(size_t) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/stl_vector.h:763:   instantiated from ‘typename _Alloc::pointer std::vector<_Tp, _Alloc>::_M_allocate_and_copy(size_t, _ForwardIterator, _ForwardIterator) [with _ForwardIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/vector.tcc:141:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/ext/new_allocator.h:88: error: invalid application of ‘sizeof’ to incomplete type ‘Variable’ 
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h: In function ‘_ForwardIterator std::__uninitialized_copy_aux(_InputIterator, _InputIterator, _ForwardIterator, __false_type) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’:
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:113:   instantiated from ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:254:   instantiated from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*, _Tp = Variable]’
+/usr/include/c++/4.0.0/bits/vector.tcc:159:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:85: error: cannot increment a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_vector.h: In constructor ‘std::_Vector_base<_Tp, _Alloc>::_Vector_base(size_t, const _Alloc&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’:
+/usr/include/c++/4.0.0/bits/stl_vector.h:234:   instantiated from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/ext/new_allocator.h:104:   instantiated from ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Tp*, const _Tp&) [with _Tp = std::vector<Variable, std::allocator<Variable> >]’
+/usr/include/c++/4.0.0/bits/stl_vector.h:606:   instantiated from ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = std::vector<Variable, std::allocator<Variable> >, _Alloc = std::allocator<std::vector<Variable, std::allocator<Variable> > >]’
+AdmWithLevels.c:114:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_vector.h:105: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/ext/new_allocator.h: In member function ‘size_t __gnu_cxx::new_allocator<_Tp>::max_size() const [with _Tp = Variable]’:
+/usr/include/c++/4.0.0/ext/new_allocator.h:85:   instantiated from ‘_Tp* __gnu_cxx::new_allocator<_Tp>::allocate(size_t, const void*) [with _Tp = Variable]’
+/usr/include/c++/4.0.0/bits/stl_vector.h:117:   instantiated from ‘_Tp* std::_Vector_base<_Tp, _Alloc>::_M_allocate(size_t) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/stl_vector.h:763:   instantiated from ‘typename _Alloc::pointer std::vector<_Tp, _Alloc>::_M_allocate_and_copy(size_t, _ForwardIterator, _ForwardIterator) [with _ForwardIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/vector.tcc:141:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/ext/new_allocator.h:98: error: invalid application of ‘sizeof’ to incomplete type ‘Variable’ 
+/usr/include/c++/4.0.0/ext/new_allocator.h:98: warning: division by zero in ‘-1u / 0’
+/usr/include/c++/4.0.0/bits/stl_algobase.h: In static member function ‘static _OI std::__copy<_BoolType, std::random_access_iterator_tag>::copy(_II, _II, _OI) [with _II = const Variable*, _OI = Variable*, bool _BoolType = false]’:
+/usr/include/c++/4.0.0/bits/stl_algobase.h:317:   instantiated from ‘_OI std::__copy_aux(_II, _II, _OI) [with _II = const Variable*, _OI = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:354:   instantiated from ‘static _OI std::__copy_normal<true, true>::copy_n(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _OI = __gnu_cxx::__normal_iterator<Variable*, std::vector<Variable, std::allocator<Variable> > >]’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:387:   instantiated from ‘_OutputIterator std::copy(_InputIterator, _InputIterator, _OutputIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _OutputIterator = __gnu_cxx::__normal_iterator<Variable*, std::vector<Variable, std::allocator<Variable> > >]’
+/usr/include/c++/4.0.0/bits/vector.tcc:152:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_algobase.h:283: error: invalid use of undefined type ‘const struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘const struct Variable’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:285: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:286: error: cannot increment a pointer to incomplete type ‘const Variable’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:287: error: cannot increment a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_construct.h: In function ‘void std::_Construct(_T1*, const _T2&) [with _T1 = Variable, _T2 = Variable]’:
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:86:   instantiated from ‘_ForwardIterator std::__uninitialized_copy_aux(_InputIterator, _InputIterator, _ForwardIterator, __false_type) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:113:   instantiated from ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:254:   instantiated from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*, _Tp = Variable]’
+/usr/include/c++/4.0.0/bits/vector.tcc:159:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_construct.h:81: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_construct.h: In function ‘void std::__destroy_aux(_ForwardIterator, _ForwardIterator, __false_type) [with _ForwardIterator = Variable*]’:
+/usr/include/c++/4.0.0/bits/stl_construct.h:155:   instantiated from ‘void std::_Destroy(_ForwardIterator, _ForwardIterator) [with _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:91:   instantiated from ‘_ForwardIterator std::__uninitialized_copy_aux(_InputIterator, _InputIterator, _ForwardIterator, __false_type) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:113:   instantiated from ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:254:   instantiated from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*, _Tp = Variable]’
+/usr/include/c++/4.0.0/bits/vector.tcc:159:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_construct.h:121: error: cannot increment a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_algobase.h: In static member function ‘static _BI2 std::__copy_backward<_BoolType, std::random_access_iterator_tag>::copy_b(_BI1, _BI1, _BI2) [with _BI1 = Variable*, _BI2 = Variable*, bool _BoolType = false]’:
+/usr/include/c++/4.0.0/bits/stl_algobase.h:443:   instantiated from ‘_BI2 std::__copy_backward_aux(_BI1, _BI1, _BI2) [with _BI1 = Variable*, _BI2 = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:482:   instantiated from ‘static _BI2 std::__copy_backward_normal<true, true>::copy_b_n(_BI1, _BI1, _BI2) [with _BI1 = __gnu_cxx::__normal_iterator<Variable*, std::vector<Variable, std::allocator<Variable> > >, _BI2 = __gnu_cxx::__normal_iterator<Variable*, std::vector<Variable, std::allocator<Variable> > >]’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:517:   instantiated from ‘_BI2 std::copy_backward(_BI1, _BI1, _BI2) [with _BI1 = __gnu_cxx::__normal_iterator<Variable*, std::vector<Variable, std::allocator<Variable> > >, _BI2 = __gnu_cxx::__normal_iterator<Variable*, std::vector<Variable, std::allocator<Variable> > >]’
+/usr/include/c++/4.0.0/bits/vector.tcc:257:   instantiated from ‘void std::vector<_Tp, _Alloc>::_M_insert_aux(__gnu_cxx::__normal_iterator<typename _Alloc::pointer, std::vector<_Tp, _Alloc> >, const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+/usr/include/c++/4.0.0/bits/stl_vector.h:610:   instantiated from ‘void std::vector<_Tp, _Alloc>::push_back(const _Tp&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:117:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_algobase.h:411: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:412: error: cannot decrement a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:412: error: cannot decrement a pointer to incomplete type ‘Variable’
+/usr/include/c++/4.0.0/bits/stl_algobase.h:412: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+/usr/include/c++/4.0.0/bits/stl_construct.h: In function ‘void std::_Destroy(_Tp*) [with _Tp = Variable]’:
+/usr/include/c++/4.0.0/bits/stl_construct.h:122:   instantiated from ‘void std::__destroy_aux(_ForwardIterator, _ForwardIterator, __false_type) [with _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_construct.h:155:   instantiated from ‘void std::_Destroy(_ForwardIterator, _ForwardIterator) [with _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:91:   instantiated from ‘_ForwardIterator std::__uninitialized_copy_aux(_InputIterator, _InputIterator, _ForwardIterator, __false_type) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:113:   instantiated from ‘_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*]’
+/usr/include/c++/4.0.0/bits/stl_uninitialized.h:254:   instantiated from ‘_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, std::allocator<_Tp>) [with _InputIterator = __gnu_cxx::__normal_iterator<const Variable*, std::vector<Variable, std::allocator<Variable> > >, _ForwardIterator = Variable*, _Tp = Variable]’
+/usr/include/c++/4.0.0/bits/vector.tcc:159:   instantiated from ‘std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = Variable, _Alloc = std::allocator<Variable>]’
+AdmWithLevels.c:89:   instantiated from here
+/usr/include/c++/4.0.0/bits/stl_construct.h:107: error: invalid use of undefined type ‘struct Variable’
+AdmissibleOrder.hpp:9: error: forward declaration of ‘struct Variable’
+make: *** [AdmWithLevels.o] Error 1

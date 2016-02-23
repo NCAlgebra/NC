@@ -1,0 +1,91 @@
+Running... COMPleib/MmaCOMPleib/AC1.m
+33 variables. W is 2x2, L is 3x5, X is 5x5
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/AC5.m
+28 variables. W is 4x4, L is 2x4, X is 4x4
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/DIS5.m
+24 variables. W is 3x3, L is 2x4, X is 4x4
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/HF2D1.m
+14428599 variables. W is 3798x3798, L is 2x3796, X is 3796x3796
+Running... COMPleib/MmaCOMPleib/HF2D10.m
+53 variables. W is 7x7, L is 2x5, X is 5x5
+Starting SDP Solver...
+Done.
+Can't optimize in 1800 seconds.
+
+
+Running... COMPleib/MmaCOMPleib/FS.m
+35 variables. W is 5x5, L is 1x5, X is 5x5
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/DLR2.m
+1803 variables. W is 42x42, L is 2x40, X is 40x40
+Starting SDP Solver...
+Running... COMPleib/MmaCOMPleib/FS.m
+35 variables. W is 5x5, L is 1x5, X is 5x5
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC10.m
+36 variables. W is 2x2, L is 2x6, X is 6x6
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC6.m
+36 variables. W is 3x3, L is 3x5, X is 5x5
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC5.m
+52 variables. W is 2x2, L is 3x7, X is 7x7
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC2.m
+76 variables. W is 1x1, L is 2x10, X is 10x10
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/DLR2.m
+1803 variables. W is 42x42, L is 2x40, X is 40x40
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC1.m
+66 variables. W is 2x2, L is 2x9, X is 9x9
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC10.m
+36 variables. W is 2x2, L is 2x6, X is 6x6
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC10.m
+36 variables. W is 2x2, L is 2x6, X is 6x6
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC10.m
+36 variables. W is 2x2, L is 2x6, X is 6x6
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC4.m
+66 variables. W is 2x2, L is 2x9, X is 9x9
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC5.m
+52 variables. W is 2x2, L is 3x7, X is 7x7
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC6.m
+36 variables. W is 3x3, L is 3x5, X is 5x5
+Starting SDP Solver...
+Running... COMPleib/MmaCOMPleib/ROC4.m
+66 variables. W is 2x2, L is 2x9, X is 9x9
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC5.m
+52 variables. W is 2x2, L is 3x7, X is 7x7
+Starting SDP Solver...
+Done.
+Running... COMPleib/MmaCOMPleib/ROC6.m
+36 variables. W is 3x3, L is 3x5, X is 5x5
+Starting SDP Solver...
+Done.

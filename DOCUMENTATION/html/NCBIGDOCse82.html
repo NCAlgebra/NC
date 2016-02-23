@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>22.1 Output notation for pseudoinverse and perp&#8217;s</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 76--><div class="crosslinks"><p class="noindent">[<a 
+href="#tailNCBIGDOCse82.html">tail</a>] [<a 
+href="NCBIGDOCch22.html#NCBIGDOCse82.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">22.1   </span> <a 
+ id="x134-31900022.1"></a>Output notation for pseudoinverse and perp&#8217;s</h3>
+   <center class="par-math-display" >
+<img 
+src="NCBIGDOC99x.png" alt="P inv[x]     -&#x2192;    x+       xx+x =  x,  x+xx+  =  x+,
+                           (x+x)T  =  x+x,   (xx+)T =  xx+
+
+
+P erpL[x]   -&#x2192;    x&#x230A;       x&#x230A;x = 0
+
+P erpR[x]   -&#x2192;    x&#x230B;       xx&#x230B; = 0
+
+                   &#x230A;&#x230A;        &#x230A;&#x230A;         +      &#x230A;&#x230A; T     &#x230A;&#x230A;
+P erpL2[x]  -&#x2192;    x        x  = 1 - xx  ,  (x )  = x
+
+P erpR2[x]  -&#x2192;    x&#x230B;&#x230B;       x&#x230B;&#x230B; = 1 - x+x,   (x&#x230B;&#x230B;)T = x &#x230B;&#x230B;
+" class="par-math-display" ></center>
+
+<!--l. 92--><p class="nopar">
+<!--l. 109--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.1   </span> <a 
+ id="x134-32000022.1.1"></a>NCAddTranspose[aListOfExpressions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases:
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  One can save time when working in an algebra with transposes or adjoints
+      by using the command NCAddTranspose[ ]. These commands &#8220;symmetrize&#8221; a set of
+      relations by applying tp[ ] to the relations and returning a list with the new expressions
+      appended to the old ones. This saves the user the trouble of typing both <span 
+class="cmmi-12">a </span>= <span 
+class="cmmi-12">b </span>and
+      <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">a</span>] = <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">b</span>].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfExpressions </span>is a list of expressions
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx134-320001"></a>
+<!--l. 126--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.2   </span> <a 
+ id="x134-32100022.1.2"></a>NCAddAdjoint[aListOfExpressions]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases:
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  One can save time when working in an algebra with transposes or adjoints by
+      using the command NCAddAdjoint[ ]. These commands &#8220;symmetrize&#8221; a set of relations
+      by applying aj[ ] to the relations and returning a list with the new expressions appended
+      to the old ones. This saves the user the trouble of typing both <span 
+class="cmmi-12">a </span>= <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">a</span>] = <span 
+class="cmmi-12">aj</span>[<span 
+class="cmmi-12">b</span>].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListOfExpressions </span>is a list of expressions
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:  </dd></dl>
+<a 
+ id="dx134-321001"></a>
+
+<!--l. 132--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.3   </span> <a 
+ id="x134-32200022.1.3"></a>Pulling important equations into your session from an <span 
+class="cmti-12">NCProcess </span>output - See
+<span 
+class="cmti-12">GetCategories </span>in <span 
+class="cmsy-10x-x-120">&#167;</span>23.0.5.</h4>
+<!--l. 136--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">22.1.4   </span> <a 
+ id="x134-32300022.1.4"></a>Help in typing Monomial Orders - See NCAutomaticOrder Section 18.4.6</h4>
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse82.html" >front</a>] [<a 
+href="NCBIGDOCch22.html#NCBIGDOCse82.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCse82.html"></a>     
+</body></html> 

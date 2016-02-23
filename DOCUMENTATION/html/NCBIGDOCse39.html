@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>10.3 Simplification and GB&#8217;s revisited</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 510--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse40.html" >next</a>] [<a 
+href="NCBIGDOCse38.html" >prev</a>] [<a 
+href="NCBIGDOCse38.html#tailNCBIGDOCse38.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse39.html">tail</a>] [<a 
+href="NCBIGDOCch10.html#NCBIGDOCse39.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">10.3   </span> <a 
+ id="x61-18800010.3"></a>Simplification and GB&#8217;s revisited</h3>
+<!--l. 512--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x61-18900010.3"></a>Changing polynomials to rules</h5>
+<!--l. 515--><p class="noindent">The following command converts a list of relations to a list of rules subordinate to the monomial
+order specified above.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[9]:=&#x00A0;PolyToRule[%]
+&#x00A0;<br />Out[9]=&#x00A0;{y&#x00A0;**&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;-&gt;&#x00A0;-1&#x00A0;+&#x00A0;Inv[1&#x00A0;-&#x00A0;y],&#x00A0;y&#x00A0;**&#x00A0;Inv[y]&#x00A0;-&gt;&#x00A0;1,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;**&#x00A0;y&#x00A0;-&gt;&#x00A0;-1&#x00A0;+&#x00A0;Inv[1&#x00A0;-&#x00A0;y],&#x00A0;Inv[y]&#x00A0;**&#x00A0;y&#x00A0;-&gt;&#x00A0;1,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[y]&#x00A0;**&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;-&gt;&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;+&#x00A0;Inv[y],
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;**&#x00A0;Inv[y]&#x00A0;-&gt;&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;+&#x00A0;Inv[y]}
+</div>
+</td></tr></table>
+<!--l. 527--><p class="nopar">
+<!--l. 531--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x61-19000010.3"></a>Changing rules to polynomials</h5>
+<!--l. 534--><p class="noindent">The following command converts a list of rules to a list of relations.
+<a 
+ id="dx61-190001"></a>
+<a 
+ id="dx61-190002"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[10]:=&#x00A0;PolyToRule[%]
+&#x00A0;<br />Out[10]=&#x00A0;{1&#x00A0;-&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;+&#x00A0;y&#x00A0;**&#x00A0;Inv[1&#x00A0;-&#x00A0;y],&#x00A0;-1&#x00A0;+&#x00A0;y&#x00A0;**&#x00A0;Inv[y],
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;-&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;+&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;**&#x00A0;y,&#x00A0;-1&#x00A0;+&#x00A0;Inv[y]&#x00A0;**&#x00A0;y,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-Inv[1&#x00A0;-&#x00A0;y]&#x00A0;-&#x00A0;Inv[y]&#x00A0;+&#x00A0;Inv[y]&#x00A0;**&#x00A0;Inv[1&#x00A0;-&#x00A0;y],
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-Inv[1&#x00A0;-&#x00A0;y]&#x00A0;-&#x00A0;Inv[y]&#x00A0;+&#x00A0;Inv[1&#x00A0;-&#x00A0;y]&#x00A0;**&#x00A0;Inv[y]}
+</div>
+</td></tr></table>
+<!--l. 553--><p class="nopar">
+<!--l. 558--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x61-19100010.3"></a>Simplifying using a GB revisited</h5>
+<!--l. 561--><p class="noindent">We can apply the rules in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x61-18900010.3">10.3<!--tex4ht:ref: section:polynomials:rules --></a> repeatedly to an expression to put it into &#8220;canonical form.&#8221; Often
+the canonical form is simpler than what we started with.
+<a 
+ id="dx61-191001"></a>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[11]:=&#x00A0;Reduction[{Inv[y]**Inv[1-y]&#x00A0;-&#x00A0;Inv[y]},&#x00A0;Out[9]]
+&#x00A0;<br />Out[11]=&#x00A0;{Inv[1&#x00A0;-&#x00A0;y]}
+</div>
+</td></tr></table>
+<!--l. 574--><p class="nopar">
+
+   <!--l. 580--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse40.html" >next</a>] [<a 
+href="NCBIGDOCse38.html" >prev</a>] [<a 
+href="NCBIGDOCse38.html#tailNCBIGDOCse38.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse39.html" >front</a>] [<a 
+href="NCBIGDOCch10.html#NCBIGDOCse39.html" >up</a>] </p></div>
+<!--l. 580--><p class="indent">   <a 
+ id="tailNCBIGDOCse39.html"></a>   
+</body></html> 

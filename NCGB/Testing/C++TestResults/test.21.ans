@@ -1,0 +1,5 @@
+{a**ia -> 1, ia**a -> 1, b**ib -> 1, ib**b -> 1, c**ic -> 1, ic**c -> 1, 
+ d**id -> 1, id**d -> 1, z**b**z -> z + d**a**c, y -> ic - b**z**ic, 
+ z**b**d**a**c -> d**a**c**b**z, d**a**c**b**z**ic -> z**b**d**a, 
+ x -> id - a**c**b**z**ic**ia**id, id**z**b**d**a -> a**c**b**z**ic, 
+ c**b**z**ic**ia**id**z -> c + ia**id**z}

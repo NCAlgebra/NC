@@ -1,0 +1,16 @@
+This directory contains tex and GB results from the test files c00.data.m 
+through c78.data.m created by Bob, and the files c79.data.m through c85.data.m
+which Eric Rowell created from problems given to us by Ben Keller.  
+
+(*igor and bill nov 2008*)
+
+----
+(*mark and bob circa 2000*)
+The results came from running on surya with the path:
+home/ncalg/NC/NCGB/MmaSource and ../NC/NCAlgebra
+The LinkObject was /home/mstankus/CurrentDistribution/Binary/SOLARIS5.5/p9c_non,
+1,1.
+
+  The result of a test against /home/ncalg/NC/NCGB/Binary/p9c was true for 
+all files.  This is the version of the code commonly used.
+

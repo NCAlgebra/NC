@@ -1,0 +1,9 @@
+{A**B**A + B**C**B, C**D**C + D**A**D, C**C**C, D**D**A, A**D**A, 
+ -A**B**A**C**B + B**C**A**B**A, D**C**D**C, A**C**D**C, C**D**C**D**A, 
+ C**D**C**A, C**D**C**C**D**C, A**B**A**C**B**D**A, A**B**A**C**B**C**D**C, 
+ A**B**A**C**B**B**A**C**B**D**A, A**B**A**C**B**B**A**C**B**C**D**C, 
+ A**B**A**C**B**B**A**C**B**B**A**C**B**D**A, A**B**A**C**B**B**A**C**B**B**
+  A**C**B**C**D**C, A**B**A**C**B**B**A**C**B**B**A**C**B**B**A**C**B**D**A, 
+ A**B**A**C**B**B**A**C**B**B**A**C**B**B**A**C**B**C**D**C, 
+ A**B**A**C**B**B**A**C**B**B**A**C**B**B**A**C**B**B**A**C**B**D**A, 
+ A**B**A**C**B**B**A**C**B**B**A**C**B**B**A**C**B**B**A**C**B**C**D**C}

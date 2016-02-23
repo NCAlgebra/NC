@@ -1,0 +1,34 @@
+(* :Title: 	Diff.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	Unknown. Revised by Mark Stankus (mstankus). *)
+
+(* :Summary:    TEST FILE.  *)
+
+(* :History: 
+   :8/1/92		Blocked. (dhurst)
+   :9/6/99      Block->Module  (dell)
+*)
+
+Module[ 
+     {x,y,h,A,GE,B1,C1,C2,W,b,D21,temp},
+     test[NCDiff,1] = DirectionalD[x^9 + 123 x^8,x,h] == 9 x^8 h + 123 8 x^7 h;
+     test[NCDiff,2] = DirectionalD[x**y**x,x,h] == h**y**x + x**y**h;
+     test[NCDiff,3] = DirectionalD[x**y**x,y,h] == x**h**x;
+     test[NCDiff,4] = 
+          ExpandNonCommutativeMultiply[DirectionalD[x**x**Sin[x],x,h]]==
+          h**x**Sin[x] + x**h**Sin[x] + x**x**(h Cos[x]);
+     test[NCDiff,5] = DirectionalD[x,y,h] == 0; 
+     SetNonCommutative[A,GE,B1,C1,C2,D21,W];
+     temp = 
+          2 GE[x] **A[x] - tp[W]**W + tp[C1[x]]**C1[x] +
+          2 GE[x]**b**C2[x] + 2 GE[x]**B1[x]**W + GE[x]**b**D21[x]**W;
+     test[NCDiff,6] = (* was GradPoly *)	
+          NCGrad[temp,W] == tp[2 GE[x]**B1[x] + GE[x]**b**D21[x] - 2tp[W]];
+
+
+     Print["Results from the file Diff.NCTest"];
+     For[ i=1, i<= 6, i++,
+          Print["Test #",i," was ",test[NCDiff,i]]
+     ]
+];
+

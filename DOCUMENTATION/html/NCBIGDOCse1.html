@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>0.1 ReleaseNotes NCAlgebra </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch1.html" >next</a>] [<a 
+href="#tailNCBIGDOCse1.html">tail</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCse1.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">0.1   </span> <a 
+ id="x5-40000.1"></a>ReleaseNotes NCAlgebra </h3>
+<!--l. 3--><p class="noindent"><span 
+class="cmbx-12">ReleaseNotes NCAlgebra 4.0 </span>January 2010
+<!--l. 5--><p class="noindent">Code has been cleaned up and improved. Basic functionality is supported without changes.
+
+<!--l. 11--><p class="noindent"><span 
+class="cmbx-12">ReleaseNotes NCAlgebra 3.7 </span>Sept. 2002
+<!--l. 44--><p class="noindent"><span 
+class="cmbx-12">Convexity   </span>We changed some defaults and fixed some bugs in NCConvexityRegion and
+NCMatrixOfQuadratic. Now it runs quickly on fairly big problems.
+<!--l. 50--><p class="noindent"><span 
+class="cmbx-12">Path Setting   </span>Paths were set to make NCAlgebra more path independent.
+<!--l. 55--><p class="noindent"><span 
+class="cmbx-12">CSP  </span>Our support for Control System Professional was updated to accomodate the second (2002)
+version of CSP.
+<!--l. 61--><p class="noindent"><span 
+class="cmbx-12">ReleaseNotes NCAlgebra 3.5 </span>Sept. 2001
+<!--l. 64--><p class="noindent"><span 
+class="cmbx-12">Basic Changes   </span>You no longer have to set every variable to be noncommutative. We have a
+command NCGuts which has an option called NCSetNC. When set to True, all letters are
+automatically noncommutative unless SetCommutative makes them commutative.
+<!--l. 70--><p class="indent">   A further option of NCGuts allows one to use &#8220;**&#8221; to multiply matrices with noncommutative
+entries &#8211; the more cumbersome MatMult command is no longer needed. While this option seems
+dangerous to Bill, it makes many computations prettier and easier to type. If you don&#8217;t trust the
+answer, then don&#8217;t use the option.
+<!--l. 78--><p class="noindent"><span 
+class="cmbx-12">Commands For Matricies With Noncommuting Entries   </span>We now have an LDU
+decomposition for matricies with noncommuting entries. Also, there is a command for computing
+the inverse of such matrices (however this only works under strong assumptions).
+<!--l. 84--><p class="indent">   NCMatrixOfQuadratic gives a vector matrix factorization of a symmetric quadratic
+noncommutative function.
+<!--l. 89--><p class="noindent"><span 
+class="cmbx-12">A Second Derivative Command   </span>NCHessian computes the Hessian of a function with
+noncommuting variables and coefficents.
+<!--l. 95--><p class="noindent"><span 
+class="cmbx-12">Computing The Region Where A Noncommutative Function is Convex</span>
+NCConvexityRegion is a command used to determine the region of formal noncommutative
+inequalities where a given noncommutative function is convex.
+   <div  
+class="centerline">                                                 <span 
+class="cmbx-12">Basic Changes</span>                                           </div>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCGuts: </span>NCGuts holds set of options geared for simplifying transposing, finding the inverse,
+      and multiplying matrices conaining noncommuting variables.
+      <!--l. 111--><p class="noindent">NCStrongProduct1 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">&gt; </span>False is the first option of NCGuts. When True, ** serves
+      to multiply matrices with noncommutative entries as well as maintaining its original
+      function. In addition, tp[ ] and tpMat are the same. The default setting is True.
+      <!--l. 117--><p class="noindent">NCStrongProduct2 <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">&gt; </span>False is the second option of NCGuts. When set to True, if
+      <span 
+class="cmmi-12">M </span>is a matrix with noncommutative entries, inv[M] returns a formula expression for
+      the inverse of <span 
+class="cmmi-12">M</span>. NCStrongProduct2 forces NCStrongProduct1.
+      <!--l. 123--><p class="noindent">NCSetNC <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">&gt; </span>False is the last option of NCGuts. When set to True, all letters
+      are automatically noncommutative unless SetCommutative makes them commutative.
+      This replaces the need for repeated calls to SetNonCommutative.
+
+      </dd></dl>
+   <div  
+class="centerline">                  <span 
+class="cmbx-12">Commands For Matricies With Noncommuting Entries</span>                </div>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCLDUDecomposition: </span>Given  a  square  matrix  <span 
+class="cmmi-12">M  </span>with  noncommutative  entries,  this
+      command finds the LDU decomposition of <span 
+class="cmmi-12">M</span>. It returns a list of four elements, namely
+      <span 
+class="cmmi-12">L,D,U</span>, and <span 
+class="cmmi-12">P </span>such that <span 
+class="cmmi-12">PXP</span><sup ><span 
+class="cmmi-8">T</span> </sup>  = <span 
+class="cmmi-12">LDU</span>. The first element is the lower triangular
+      matrix <span 
+class="cmmi-12">L</span>, the second element is the diagonal matrix <span 
+class="cmmi-12">D</span>, the third element is the upper
+      triangular  matrix  <span 
+class="cmmi-12">U</span>,  and  the  fourth  is  the  permutation  matrix  <span 
+class="cmmi-12">P  </span>(the  identity  is
+      returned if no permutation is needed). As an option, it may also return a list of the
+      permutations used at each step of the LDU factorization as a fifth element.
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCAllPermutationLDU: </span>NCAllPermutationLDU  returns  the  LDU  decomposition  of  a
+      matrix after all possible column permutations are applied. The code cycles through all
+      possible permutations and calls NCLDUDecomposition for each one. As an option, the
+      permutations used for each LDU decomposition can also be returned.
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCMatrixOfQuadratic: </span>NCMatrixOfQuadratic  gives  a  vector  matrix  factorization  of  a
+      symmetric quadratic noncommutative function. A three element list is the output. The
+      first element is the left border vector, the second element is a symmetric coefficent
+      matrix, and the third is the right border vector. The border vectors contain the variables
+      in the given quadratic function and their transposes.
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCIndependenceCheck:  </span>NCIndependenceCheck  verifies  whether  or  not  a  given  set  of
+      polynomials are independent or not. It analyzes each list of polynomials separately.
+      There are three possible types of outputs for each list. Two of them correspond to
+      NCIndependenceCheck successfully determining whether or not the list of polynomials
+      is independent. The third type of output corresponds to an unsuccessful attempt at
+      determining dependence or independence.
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCBorderVectorGather:  </span>NCBorderVectorGather can be used to gather the polynomial
+      coefficents preceeding the elements given in a list of variables whenever they occur.
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCPermutationMatrix: </span>NCPermutationMatrix returns the permutation matrix associated
+      with  the  list  of  the  first  n  integers.  It  gives  the  identity  matrix  with  its  columns
+      re-ordered.
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCMatrixToPermutation: </span>NCMatrixToPermutation  returns  the  permutation  associated
+      with the permutation matrix, aMatrix. It is the inverse of NCPermutationMatrix.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCInverse: </span>NCInverse gives a symbolic inverse of a matrix with noncommutative entries.
+      </dd></dl>
+   <div  
+class="centerline">                                    <span 
+class="cmbx-12">A Second Derivative Command</span>                               </div>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCHessian: </span>NCHessian computes the Hessian of a function with noncommuting variables
+      and coefficents. This is a second directional derivative which can be thought of as
+      the second order term in the noncommutative Taylor expansion. Output will be a
+      symmetric quadratic function with respect to the directions of differentiation.
+      </dd></dl>
+   <div  
+class="centerline">      <span 
+class="cmbx-12">Computing The Region Where A Noncommutative Function is Convex</span>     </div>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmtt-12">NCConvexityRegion:  </span>This   command   is   used   to   determine   the   region   of   formal
+      noncommutative  inequalities  where  a  given  noncommutative  function  is  convex.
+      NCConvexityRegion  preforms  three  main  operations.  Given  a  noncommutative
+      function   <span 
+class="cmmi-12">F</span>,   the   Hessian   of   <span 
+class="cmmi-12">F   </span>is   computed   with   NCHessian.   Then,   using
+      NCMatrixOfQuadratic, the Hessian is factored into vector matrix vector form. Finally,
+      NCAllPermutationLDU  finds  the  LDU  decomposition  of  the  symmetric  coefficent
+      matrix. The diagonal elements in the diagonal matrix in the LDU decomposition is
+      returned.
+      </dd></dl>
+<!--l. 245--><p class="indent">   <span 
+class="cmbx-12">ReleaseNotes NCAlgebra 3.0</span>
+<!--l. 247--><p class="indent">   NCAlgebra 3.0 has several added functions.
+<!--l. 250--><p class="indent">
+      <ol  class="enumerate1" >
+      <li class="enumerate" value="1" 
+><a 
+ id="x5-4002x1"></a>LDU decomposition for block matices, to include a block Cholesky decompsition.
+      </li>
+      <li class="enumerate" value="2" 
+><a 
+ id="x5-4004x2"></a>Formulas for inverses of block matrices.
+      </li>
+      <li class="enumerate" value="3" 
+><a 
+ id="x5-4006x3"></a>A command which differentiates functions of the form
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC1x.png" alt="trace  P(X, Y, etc)
+      " class="math-display" ></center>
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC2x.png" alt="log det  P (X, Y, etc)
+      " class="math-display" ></center>
+      </li>
+      <li class="enumerate" value="4" 
+><a 
+ id="x5-4008x4"></a>Support for the Mathematica toolbox Control System Professional. It gives CSP the
+      ability to handle non-commuting objects.
+      </li>
+      <li class="enumerate" value="5" 
+><a 
+ id="x5-4010x5"></a>A function which represents elements of an algebra as <span 
+class="cmmi-12">n</span><span 
+class="cmsy-10x-x-120">&#x00D7;</span><span 
+class="cmmi-12">n </span>matrices with commuting
+      symbolic entries, or with inegers.
+      </li>
+      <li class="enumerate" value="6" 
+><a 
+ id="x5-4012x6"></a> Online Help - While we have not set up help browsers at this time in the Mma style, one
+      can get searchable online help by viewing NCBIGDOCUMENT.html with Netscape,
+      etc.  When  you  are  in  an  NCAlgebra  session  just  keep  a  web  browser  open  with
+      NCBIGDOCUMENT.html loaded in. The powerfulsearch features of these browsers
+      allow you to look up things in the document. </li></ol>
+<!--l. 280--><p class="indent">   An X in commands, e.g. NCXetc., always means that this command is experimental and we
+reserve the right to change it.
+<!--l. 284--><p class="indent">
+
+
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCch1.html" >next</a>] [<a 
+href="NCBIGDOCse1.html" >front</a>] [<a 
+href="NCBIGDOCpa1.html#NCBIGDOCse1.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCse1.html"></a>  
+</body></html> 

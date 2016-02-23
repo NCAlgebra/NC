@@ -1,0 +1,826 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     24893,        717]*)
+(*NotebookOutlinePosition[     25534,        740]*)
+(*  CellTagsIndexPosition[     25490,        736]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(<< NCConvexity.m\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(<< NCConvexityTest.NCTest\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Middle matrix is size "\[InvisibleSpace]2\
+\[InvisibleSpace]"X"\[InvisibleSpace]2\),
+      SequenceForm[ "Middle matrix is size ", 2, "X", 2],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("At most "\[InvisibleSpace]2\[InvisibleSpace]" \
+permutations possible."\),
+      SequenceForm[ "At most ", 2, " permutations possible."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \({1, 2}\)], "Print"],
+
+Cell[BoxData[
+    \("Results from the file NCConvexityTest.NCTest"\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]1\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 1, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]2\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 2, " was ", True],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(<< NCInverseTest.NCTest\)], "Input"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"stop" \(\(:\)\(\ \)\) 
+      "Further output of \!\(Power :: \"infy\"\) will be suppressed during \
+this calculation."\)], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(\[Infinity]::"indet"\), \(\(:\)\(\ \)\), "\<\"Indeterminate \
+expression \\!\\(0\\\\ \\*InterpretationBox[\\\"ComplexInfinity\\\", \
+DirectedInfinity[]]\\) encountered.\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(\[Infinity]::"indet"\), \(\(:\)\(\ \)\), "\<\"Indeterminate \
+expression \\!\\(0\\\\ \\*InterpretationBox[\\\"ComplexInfinity\\\", \
+DirectedInfinity[]]\\) encountered.\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \("Results from the file NCInverseTest.NCTest"\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]1\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 1, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]2\[InvisibleSpace]" was "\
+\[InvisibleSpace]\({{\((inv[A] + 
+                      inv[A] ** B ** inv[D - C ** inv[A] ** B] ** C ** 
+                        inv[A])\) ** A - 
+                inv[A] ** B ** inv[D - C ** inv[A] ** B] ** 
+                  C, \((inv[A] + 
+                      inv[A] ** B ** inv[D - C ** inv[A] ** B] ** C ** 
+                        inv[A])\) ** B - 
+                inv[A] ** B ** inv[D - C ** inv[A] ** B] ** D}, {0, 
+              inv[D - C ** inv[A] ** B] ** D - 
+                inv[D - C ** inv[A] ** B] ** C ** inv[A] ** B}} == {{1, 
+              0}, {0, 1}}\)\),
+      SequenceForm[ "Test #", 2, " was ", 
+        Equal[ {{
+          Plus[ 
+            NonCommutativeMultiply[ 
+              Plus[ 
+                inv[ A], 
+                NonCommutativeMultiply[ 
+                  inv[ A], B, 
+                  inv[ 
+                    Plus[ D, 
+                      Times[ -1, 
+                        NonCommutativeMultiply[ C, 
+                          inv[ A], B]]]], C, 
+                  inv[ A]]], A], 
+            Times[ -1, 
+              NonCommutativeMultiply[ 
+                inv[ A], B, 
+                inv[ 
+                  Plus[ D, 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ C, 
+                        inv[ A], B]]]], C]]], 
+          Plus[ 
+            NonCommutativeMultiply[ 
+              Plus[ 
+                inv[ A], 
+                NonCommutativeMultiply[ 
+                  inv[ A], B, 
+                  inv[ 
+                    Plus[ D, 
+                      Times[ -1, 
+                        NonCommutativeMultiply[ C, 
+                          inv[ A], B]]]], C, 
+                  inv[ A]]], B], 
+            Times[ -1, 
+              NonCommutativeMultiply[ 
+                inv[ A], B, 
+                inv[ 
+                  Plus[ D, 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ C, 
+                        inv[ A], B]]]], D]]]}, {0, 
+          Plus[ 
+            NonCommutativeMultiply[ 
+              inv[ 
+                Plus[ D, 
+                  Times[ -1, 
+                    NonCommutativeMultiply[ C, 
+                      inv[ A], B]]]], D], 
+            Times[ -1, 
+              NonCommutativeMultiply[ 
+                inv[ 
+                  Plus[ D, 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ C, 
+                        inv[ A], B]]]], C, 
+                inv[ A], B]]]}}, {{1, 0}, {0, 1}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]3\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 3, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]4\[InvisibleSpace]" was "\
+\[InvisibleSpace]\({{1, 0, 0}, {0, 1, 
+              0}, {\(-2\)\ inv[tp[x]] - x ** y ** y\/3 - 
+                12\ inv[tp[x]] ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** inv[tp[x]] - 
+                2\ x ** y ** y ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** inv[tp[x]] - 
+                2\ inv[tp[x]] ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y - 
+                1\/3\ x ** y ** y ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y + 
+                6\ inv[tp[x]] ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y ** 
+                    y ** inv[tp[x]] + 
+                x ** y ** y ** 
+                  inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                      3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y ** y ** 
+                  inv[tp[x]], 0, 1}} == {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}\)\),
+      
+      SequenceForm[ "Test #", 4, " was ", 
+        Equal[ {{1, 0, 0}, {0, 1, 0}, {
+          Plus[ 
+            Times[ -2, 
+              inv[ 
+                tp[ x]]], 
+            Times[ 
+              Rational[ -1, 3], 
+              NonCommutativeMultiply[ x, y, y]], 
+            Times[ -12, 
+              NonCommutativeMultiply[ 
+                inv[ 
+                  tp[ x]], 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], 
+                inv[ 
+                  tp[ x]]]], 
+            Times[ -2, 
+              NonCommutativeMultiply[ x, y, y, 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], 
+                inv[ 
+                  tp[ x]]]], 
+            Times[ -2, 
+              NonCommutativeMultiply[ 
+                inv[ 
+                  tp[ x]], 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], x, y, y]], 
+            Times[ 
+              Rational[ -1, 3], 
+              NonCommutativeMultiply[ x, y, y, 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], x, y, y]], 
+            Times[ 6, 
+              NonCommutativeMultiply[ 
+                inv[ 
+                  tp[ x]], 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], x, y, y, y, 
+                inv[ 
+                  tp[ x]]]], 
+            NonCommutativeMultiply[ x, y, y, 
+              inv[ 
+                Plus[ 
+                  Times[ -6, 
+                    inv[ 
+                      tp[ x]]], 
+                  Times[ -1, 
+                    NonCommutativeMultiply[ x, y, y]], 
+                  Times[ 3, 
+                    NonCommutativeMultiply[ x, y, y, y, 
+                      inv[ 
+                        tp[ x]]]]]], x, y, y, y, 
+              inv[ 
+                tp[ x]]]], 0, 1}}, {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]5\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 5, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]6\[InvisibleSpace]" was "\
+\[InvisibleSpace]\({{1, 0, 0}, {0, 1, 
+              0}, {\(-2\)\ inv[tp[x]] - x ** y ** y\/3 - 
+                12\ inv[tp[x]] ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** inv[tp[x]] - 
+                2\ x ** y ** y ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** inv[tp[x]] - 
+                2\ inv[tp[x]] ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y - 
+                1\/3\ x ** y ** y ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y + 
+                6\ inv[tp[x]] ** 
+                    inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                        3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y ** 
+                    y ** inv[tp[x]] + 
+                x ** y ** y ** 
+                  inv[\(-6\)\ inv[tp[x]] - x ** y ** y + 
+                      3\ x ** y ** y ** y ** inv[tp[x]]] ** x ** y ** y ** y ** 
+                  inv[tp[x]], 0, 1}} == {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}\)\),
+      
+      SequenceForm[ "Test #", 6, " was ", 
+        Equal[ {{1, 0, 0}, {0, 1, 0}, {
+          Plus[ 
+            Times[ -2, 
+              inv[ 
+                tp[ x]]], 
+            Times[ 
+              Rational[ -1, 3], 
+              NonCommutativeMultiply[ x, y, y]], 
+            Times[ -12, 
+              NonCommutativeMultiply[ 
+                inv[ 
+                  tp[ x]], 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], 
+                inv[ 
+                  tp[ x]]]], 
+            Times[ -2, 
+              NonCommutativeMultiply[ x, y, y, 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], 
+                inv[ 
+                  tp[ x]]]], 
+            Times[ -2, 
+              NonCommutativeMultiply[ 
+                inv[ 
+                  tp[ x]], 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], x, y, y]], 
+            Times[ 
+              Rational[ -1, 3], 
+              NonCommutativeMultiply[ x, y, y, 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], x, y, y]], 
+            Times[ 6, 
+              NonCommutativeMultiply[ 
+                inv[ 
+                  tp[ x]], 
+                inv[ 
+                  Plus[ 
+                    Times[ -6, 
+                      inv[ 
+                        tp[ x]]], 
+                    Times[ -1, 
+                      NonCommutativeMultiply[ x, y, y]], 
+                    Times[ 3, 
+                      NonCommutativeMultiply[ x, y, y, y, 
+                        inv[ 
+                          tp[ x]]]]]], x, y, y, y, 
+                inv[ 
+                  tp[ x]]]], 
+            NonCommutativeMultiply[ x, y, y, 
+              inv[ 
+                Plus[ 
+                  Times[ -6, 
+                    inv[ 
+                      tp[ x]]], 
+                  Times[ -1, 
+                    NonCommutativeMultiply[ x, y, y]], 
+                  Times[ 3, 
+                    NonCommutativeMultiply[ x, y, y, y, 
+                      inv[ 
+                        tp[ x]]]]]], x, y, y, y, 
+              inv[ 
+                tp[ x]]]], 0, 1}}, {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]7\[InvisibleSpace]" was "\
+\[InvisibleSpace]\({{Indeterminate, Indeterminate}, {Indeterminate, 
+              Indeterminate}} == {{0, 1}, {1, 0}}\)\),
+      SequenceForm[ "Test #", 7, " was ", 
+        Equal[ {{Indeterminate, Indeterminate}, {Indeterminate, 
+          Indeterminate}}, {{0, 1}, {1, 0}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]8\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 8, " was ", True],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(<< NCLDUTest.NCTest\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Warning: Tried to set the expression\"\>", 
+        "\[InvisibleSpace]", 
+        InterpretationBox[
+          StyleBox[\(x ** x\  + \ 2*y ** y\),
+            ShowStringCharacters->True,
+            NumberMarks->True],
+          Format[ 
+            Plus[ 
+              NonCommutativeMultiply[ x, x], 
+              Times[ 2, 
+                NonCommutativeMultiply[ y, y]]], InputForm],
+          Editable->True,
+          AutoDelete->True], 
+        "\[InvisibleSpace]", "\<\" to be noncommutative.\"\>"}],
+      SequenceForm[ "Warning: Tried to set the expression", 
+        Format[ 
+          Plus[ 
+            NonCommutativeMultiply[ x, x], 
+            Times[ 2, 
+              NonCommutativeMultiply[ y, y]]], InputForm], 
+        " to be noncommutative."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Warning: Tried to set the expression\"\>", 
+        "\[InvisibleSpace]", 
+        InterpretationBox[
+          StyleBox[\(2*h ** h\  + \ 4*k ** k\),
+            ShowStringCharacters->True,
+            NumberMarks->True],
+          Format[ 
+            Plus[ 
+              Times[ 2, 
+                NonCommutativeMultiply[ h, h]], 
+              Times[ 4, 
+                NonCommutativeMultiply[ k, k]]], InputForm],
+          Editable->True,
+          AutoDelete->True], 
+        "\[InvisibleSpace]", "\<\" to be noncommutative.\"\>"}],
+      SequenceForm[ "Warning: Tried to set the expression", 
+        Format[ 
+          Plus[ 
+            Times[ 2, 
+              NonCommutativeMultiply[ h, h]], 
+            Times[ 4, 
+              NonCommutativeMultiply[ k, k]]], InputForm], 
+        " to be noncommutative."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"stop" \(\(:\)\(\ \)\) 
+      "Further output of \!\(Power :: \"infy\"\) will be suppressed during \
+this calculation."\)], "Message"],
+
+Cell[BoxData[
+    \(Dot::"inf" \(\(:\)\(\ \)\) 
+      "Input matrix contains an infinite entry."\)], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(\[Infinity]::"indet"\), \(\(:\)\(\ \)\), "\<\"Indeterminate \
+expression \\!\\(0\\\\ \\*InterpretationBox[\\\"ComplexInfinity\\\", \
+DirectedInfinity[]]\\) encountered.\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(\[Infinity]::"indet"\), \(\(:\)\(\ \)\), "\<\"Indeterminate \
+expression \\!\\(0\\\\ \\*InterpretationBox[\\\"ComplexInfinity\\\", \
+DirectedInfinity[]]\\) encountered.\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(\[Infinity]::"indet"\), \(\(:\)\(\ \)\), "\<\"Indeterminate \
+expression \\!\\(0\\\\ \\*InterpretationBox[\\\"ComplexInfinity\\\", \
+DirectedInfinity[]]\\) encountered.\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \(General::"stop" \(\(:\)\(\ \)\) 
+      "Further output of \!\(\[Infinity] :: \"indet\"\) will be suppressed \
+during this calculation."\)], "Message"],
+
+Cell[BoxData[
+    \(Dot::"mindet" \(\(:\)\(\ \)\) 
+      "Input matrix contains an indeterminate entry."\)], "Message"],
+
+Cell[BoxData[
+    \(Dot::"inf" \(\(:\)\(\ \)\) 
+      "Input matrix contains an infinite entry."\)], "Message"],
+
+Cell[BoxData[
+    \(Dot::"inf" \(\(:\)\(\ \)\) 
+      "Input matrix contains an infinite entry."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"stop" \(\(:\)\(\ \)\) 
+      "Further output of \!\(Dot :: \"inf\"\) will be suppressed during this \
+calculation."\)], "Message"],
+
+Cell[BoxData[
+    \(Dot::"mindet" \(\(:\)\(\ \)\) 
+      "Input matrix contains an indeterminate entry."\)], "Message"],
+
+Cell[BoxData[
+    \(Dot::"mindet" \(\(:\)\(\ \)\) 
+      "Input matrix contains an indeterminate entry."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"stop" \(\(:\)\(\ \)\) 
+      "Further output of \!\(Dot :: \"mindet\"\) will be suppressed during \
+this calculation."\)], "Message"],
+
+Cell[BoxData[
+    \("Results from the file NCLDUTest.NCTest"\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]1\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 1, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]2\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 2, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]3\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 3, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]4\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 4, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]5\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 5, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]6\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 6, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]7\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 7, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]8\[InvisibleSpace]" was "\
+\[InvisibleSpace]False\),
+      SequenceForm[ "Test #", 8, " was ", False],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(<< NCDiff.m\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(<< NCDiffTEst.NCTest\)], "Input"],
+
+Cell[BoxData[
+    \("Grad gives correct answers only for a limited class   of \
+polynomials"\)], "Print"],
+
+Cell[BoxData[
+    \("Results from the file Diff.NCTest"\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]1\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 1, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]2\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 2, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]3\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 3, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]4\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 4, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]5\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 5, " was ", True],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Test #"\[InvisibleSpace]6\[InvisibleSpace]" was "\
+\[InvisibleSpace]True\),
+      SequenceForm[ "Test #", 6, " was ", True],
+      Editable->False]], "Print"]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{520, 600},
+WindowMargins->{{150, Automatic}, {Automatic, 52}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 49, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[1791, 54, 58, 1, 27, "Input"],
+Cell[1852, 57, 215, 4, 23, "Print"],
+Cell[2070, 63, 210, 4, 23, "Print"],
+Cell[2283, 69, 39, 1, 23, "Print"],
+Cell[2325, 72, 79, 1, 23, "Print"],
+Cell[2407, 75, 197, 4, 23, "Print"],
+Cell[2607, 81, 197, 4, 23, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2841, 90, 56, 1, 27, "Input"],
+Cell[2900, 93, 117, 2, 36, "Message"],
+Cell[3020, 97, 117, 2, 36, "Message"],
+Cell[3140, 101, 117, 2, 36, "Message"],
+Cell[3260, 105, 163, 3, 33, "Message"],
+Cell[3426, 110, 216, 3, 20, "Message"],
+Cell[3645, 115, 216, 3, 20, "Message"],
+Cell[3864, 120, 77, 1, 23, "Print"],
+Cell[3944, 123, 197, 4, 23, "Print"],
+Cell[4144, 129, 2608, 70, 119, "Print"],
+Cell[6755, 201, 197, 4, 23, "Print"],
+Cell[6955, 207, 4832, 126, 309, "Print"],
+Cell[11790, 335, 197, 4, 23, "Print"],
+Cell[11990, 341, 4832, 126, 309, "Print"],
+Cell[16825, 469, 402, 7, 39, "Print"],
+Cell[17230, 478, 197, 4, 23, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17464, 487, 52, 1, 27, "Input"],
+Cell[17519, 490, 856, 23, 39, "Print"],
+Cell[18378, 515, 912, 25, 39, "Print"],
+Cell[19293, 542, 117, 2, 36, "Message"],
+Cell[19413, 546, 117, 2, 36, "Message"],
+Cell[19533, 550, 117, 2, 36, "Message"],
+Cell[19653, 554, 163, 3, 33, "Message"],
+Cell[19819, 559, 111, 2, 20, "Message"],
+Cell[19933, 563, 216, 3, 20, "Message"],
+Cell[20152, 568, 216, 3, 20, "Message"],
+Cell[20371, 573, 216, 3, 20, "Message"],
+Cell[20590, 578, 170, 3, 33, "Message"],
+Cell[20763, 583, 119, 2, 20, "Message"],
+Cell[20885, 587, 111, 2, 20, "Message"],
+Cell[20999, 591, 111, 2, 20, "Message"],
+Cell[21113, 595, 160, 3, 33, "Message"],
+Cell[21276, 600, 119, 2, 20, "Message"],
+Cell[21398, 604, 119, 2, 20, "Message"],
+Cell[21520, 608, 163, 3, 33, "Message"],
+Cell[21686, 613, 73, 1, 23, "Print"],
+Cell[21762, 616, 197, 4, 23, "Print"],
+Cell[21962, 622, 197, 4, 23, "Print"],
+Cell[22162, 628, 197, 4, 23, "Print"],
+Cell[22362, 634, 197, 4, 23, "Print"],
+Cell[22562, 640, 197, 4, 23, "Print"],
+Cell[22762, 646, 197, 4, 23, "Print"],
+Cell[22962, 652, 197, 4, 23, "Print"],
+Cell[23162, 658, 199, 4, 23, "Print"]
+}, Open  ]],
+Cell[23376, 665, 44, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[23445, 670, 53, 1, 27, "Input"],
+Cell[23501, 673, 105, 2, 39, "Print"],
+Cell[23609, 677, 68, 1, 23, "Print"],
+Cell[23680, 680, 197, 4, 23, "Print"],
+Cell[23880, 686, 197, 4, 23, "Print"],
+Cell[24080, 692, 197, 4, 23, "Print"],
+Cell[24280, 698, 197, 4, 23, "Print"],
+Cell[24480, 704, 197, 4, 23, "Print"],
+Cell[24680, 710, 197, 4, 23, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

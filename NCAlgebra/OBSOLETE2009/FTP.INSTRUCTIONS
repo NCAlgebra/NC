@@ -1,0 +1,105 @@
+(****************************************************************************)
+
+
+                               NCALGEBRA
+
+                              Version 1.1
+
+
+
+(****************************************************************************)
+
+     Thanks you for your interest in NCAlgebra.  This message contains the
+     information necessary for you to use anonymous ftp to transfer the 
+     files from our site to yours. The ONLY thing which you have to
+     do to get the NCAlgebra package is to follow the following sample
+     terminal session. 
+
+     NCAlgebra is at osiris.ucsd.edu, in the pub/ncalg directory.  Below 
+     is a record of an actually ftp session. What the user types is 
+     underlined.  Quoted expressions describe what should be typed.
+     (e.g., where you see "Any thing will do,but please type your
+     e-mail address.", you may type anything
+     you want). Ignore all timing data.
+
+     BELOW IS A SAMPLE SESSION. IF YOU FOLLOW IT, THEN YOU WILL BE
+     ABLE TO GET A COPY OF THE NCALGEBRA PACKAGE.
+
+     YOU CAN HAVE YOUR LOCAL COMPUTER "GURU" FOLLOW THE 
+     INSTRUCTIONS BELOW AND INSTALL NCALGEBRA AS AN OFFICIAL MATHEMATICA
+     PACKAGE. ONCE THIS IS DONE, EVERYONE USING THE COMPUTER MAY
+     USE NCALGEBRA.
+
+
+
+          % ftp 132.239.145.6
+            -------------------
+     
+          Connected to 132.239.145.6.
+     
+          220 osiris FTP server (SunOS 4.0) ready.
+     
+     
+          Name (132.239.145.6:mstankus): anonymous
+                                         ---------
+     
+          331 Guest login ok, send ident as password.
+     
+          Password: "Anything will do,but please type your e-mail address." 
+                    -------------------------------------------------------
+     
+          230 Guest login ok, access restrictions apply.
+     
+          ftp> binary
+               ------
+
+          200 Type set to I.
+
+          ftp> prompt
+               ------
+
+          Interactive mode off.
+
+          ftp> cd pub/ncalg 
+               -------------
+                                               
+          250 CWD command successful.          
+     
+          ftp> mget *  
+               ------
+          ftp> 
+     
+          ftp> bye  
+               ---
+          221 Goodbye.
+      
+
+     
+     We have included a file called "ListofFilesAndSizes" in the directory
+     so that you can compare filenames and filesizes by Kilobyte blocks.
+     
+     This can be accomplished by typing the following UNIX commands,
+     
+          ls -s -1 > MyFiles; diff MyFiles ListofFilesAndSizes
+     
+     If what you have is identical to what we have, there should be NO
+     output from the diff command.  If there is a difference, then try
+     ftp again. If the difference is "small", talk to a local expert.
+
+     We are interested in knowing who has NCAlgebra, so that 
+     we are able to inform them that new versions of the code 
+     are available, etc. PLEASE send us a email message so 
+     that we know that you are using the program.
+
+     The documentation for NCAlgebra is contained in the file
+     NCDOCUMENT. Printing out this file to a printer is the best 
+     first step.
+     
+     We can email NCAlgebra, if necessary.
+     
+               Email any questions, comments or requests to 
+       
+     
+                          ncalg@osiris.ucsd.edu
+     
+      

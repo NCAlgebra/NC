@@ -1,0 +1,135 @@
+threetuple5 = {{Inv[Y] ** Y -> 1, Y ** Inv[Y] -> 1, Inv[X] ** X -> 1, 
+    X ** Inv[X] -> 1, X ** B2 ** Tp[B2] ** X -> 
+     X ** A + Tp[A] ** X - X ** B2 ** C1 - Tp[C1] ** Tp[B2] ** X + 
+      X ** B1 ** Tp[B1] ** X, Inv[Y] ** B1 ** C2 -> 
+     Inv[Y] ** A + Tp[A] ** Inv[Y] + Tp[C1] ** C1 - Tp[C2] ** C2 - 
+      Tp[C2] ** Tp[B1] ** Inv[Y], iE11 -> Y, E12 ** iE22 ** E21 -> E11 - X, 
+    X ** B2 ** C1 ** Inv[X] -> 
+     -Tp[C1] ** Tp[B2] + X ** A ** Inv[X] + X ** B1 ** Tp[B1] - 
+      X ** B2 ** Tp[B2] + Tp[A], 
+    X ** B2 ** C1 ** B2 ** Tp[B2] ** X -> 
+     -X ** A ** A + Tp[A] ** Tp[A] ** X + X ** A ** B2 ** C1 + 
+      X ** B2 ** C1 ** A - Tp[A] ** Tp[C1] ** Tp[B2] ** X - 
+      Tp[C1] ** Tp[B2] ** Tp[A] ** X - X ** A ** B1 ** Tp[B1] ** X + 
+      X ** A ** B2 ** Tp[B2] ** X + X ** B1 ** Tp[B1] ** Tp[A] ** X - 
+      X ** B2 ** C1 ** B2 ** C1 - X ** B2 ** Tp[B2] ** Tp[A] ** X + 
+      Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2] ** X - 
+      X ** B1 ** Tp[B1] ** Tp[C1] ** Tp[B2] ** X + 
+      X ** B2 ** C1 ** B1 ** Tp[B1] ** X + 
+      X ** B2 ** Tp[B2] ** Tp[C1] ** Tp[B2] ** X, 
+    Y ** Tp[C2] ** Tp[B1] ** Inv[Y] -> 
+     A - B1 ** C2 + Y ** Tp[A] ** Inv[Y] + Y ** Tp[C1] ** C1 - 
+      Y ** Tp[C2] ** C2, Y ** Tp[C2] ** C2 ** Y -> 
+     A ** Y + Y ** Tp[A] - B1 ** C2 ** Y - Y ** Tp[C2] ** Tp[B1] + 
+      Y ** Tp[C1] ** C1 ** Y, Inv[X] ** Tp[C1] ** Tp[B2] -> 
+     A ** Inv[X] + B1 ** Tp[B1] - B2 ** Tp[B2] + Inv[X] ** Tp[A] - 
+      B2 ** C1 ** Inv[X], X ** B2 ** C1 ** B2 ** C1 ** Inv[X] -> 
+     Tp[A] ** Tp[A] - Tp[A] ** Tp[C1] ** Tp[B2] - 
+      Tp[C1] ** Tp[B2] ** Tp[A] - X ** A ** A ** Inv[X] - 
+      X ** A ** B1 ** Tp[B1] + X ** A ** B2 ** Tp[B2] + 
+      X ** B1 ** Tp[B1] ** Tp[A] - X ** B2 ** Tp[B2] ** Tp[A] + 
+      Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2] + X ** A ** B2 ** C1 ** Inv[X] - 
+      X ** B1 ** Tp[B1] ** Tp[C1] ** Tp[B2] + 
+      X ** B2 ** C1 ** A ** Inv[X] + X ** B2 ** C1 ** B1 ** Tp[B1] - 
+      X ** B2 ** C1 ** B2 ** Tp[B2] + X ** B2 ** Tp[B2] ** Tp[C1] ** Tp[B2], 
+    Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** Inv[Y] -> 
+     A ** A - A ** B1 ** C2 - B1 ** C2 ** A + B1 ** C2 ** B1 ** C2 - 
+      Y ** Tp[A] ** Tp[A] ** Inv[Y] - Y ** Tp[A] ** Tp[C1] ** C1 + 
+      Y ** Tp[A] ** Tp[C2] ** C2 + Y ** Tp[C1] ** C1 ** A - 
+      Y ** Tp[C2] ** C2 ** A + Y ** Tp[A] ** Tp[C2] ** Tp[B1] ** Inv[Y] - 
+      Y ** Tp[C1] ** C1 ** B1 ** C2 + Y ** Tp[C2] ** C2 ** B1 ** C2 + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[A] ** Inv[Y] + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C1] ** C1 - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** C2, 
+    Y ** Tp[C2] ** C2 ** B1 ** C2 ** Y -> 
+     -A ** A ** Y + Y ** Tp[A] ** Tp[A] + A ** B1 ** C2 ** Y + 
+      B1 ** C2 ** A ** Y - Y ** Tp[A] ** Tp[C2] ** Tp[B1] - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[A] - B1 ** C2 ** B1 ** C2 ** Y + 
+      Y ** Tp[A] ** Tp[C1] ** C1 ** Y - Y ** Tp[A] ** Tp[C2] ** C2 ** Y - 
+      Y ** Tp[C1] ** C1 ** A ** Y + Y ** Tp[C2] ** C2 ** A ** Y + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] + 
+      Y ** Tp[C1] ** C1 ** B1 ** C2 ** Y - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C1] ** C1 ** Y + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** C2 ** Y, 
+    Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** 
+      Inv[Y] -> 
+     A ** A ** A - A ** A ** B1 ** C2 - A ** B1 ** C2 ** A - 
+      B1 ** C2 ** A ** A + A ** B1 ** C2 ** B1 ** C2 + 
+      B1 ** C2 ** A ** B1 ** C2 + B1 ** C2 ** B1 ** C2 ** A + 
+      Y ** Tp[A] ** Tp[A] ** Tp[A] ** Inv[Y] + 
+      Y ** Tp[A] ** Tp[A] ** Tp[C1] ** C1 - 
+      Y ** Tp[A] ** Tp[A] ** Tp[C2] ** C2 - 
+      Y ** Tp[A] ** Tp[C1] ** C1 ** A + Y ** Tp[A] ** Tp[C2] ** C2 ** A + 
+      Y ** Tp[C1] ** C1 ** A ** A - Y ** Tp[C2] ** C2 ** A ** A - 
+      B1 ** C2 ** B1 ** C2 ** B1 ** C2 - 
+      Y ** Tp[A] ** Tp[A] ** Tp[C2] ** Tp[B1] ** Inv[Y] + 
+      Y ** Tp[A] ** Tp[C1] ** C1 ** B1 ** C2 - 
+      Y ** Tp[A] ** Tp[C2] ** C2 ** B1 ** C2 - 
+      Y ** Tp[A] ** Tp[C2] ** Tp[B1] ** Tp[A] ** Inv[Y] - 
+      Y ** Tp[A] ** Tp[C2] ** Tp[B1] ** Tp[C1] ** C1 + 
+      Y ** Tp[A] ** Tp[C2] ** Tp[B1] ** Tp[C2] ** C2 - 
+      Y ** Tp[C1] ** C1 ** A ** B1 ** C2 - 
+      Y ** Tp[C1] ** C1 ** B1 ** C2 ** A + 
+      Y ** Tp[C2] ** C2 ** A ** B1 ** C2 + 
+      Y ** Tp[C2] ** C2 ** B1 ** C2 ** A - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[A] ** Tp[A] ** Inv[Y] - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[A] ** Tp[C1] ** C1 + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[A] ** Tp[C2] ** C2 + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C1] ** C1 ** A - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** C2 ** A + 
+      Y ** Tp[A] ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** Inv[Y] + 
+      Y ** Tp[C1] ** C1 ** B1 ** C2 ** B1 ** C2 - 
+      Y ** Tp[C2] ** C2 ** B1 ** C2 ** B1 ** C2 + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[A] ** Tp[C2] ** Tp[B1] ** Inv[Y] - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C1] ** C1 ** B1 ** C2 + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** C2 ** B1 ** C2 + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** Tp[A] ** Inv[Y] + 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** Tp[C1] ** C1 - 
+      Y ** Tp[C2] ** Tp[B1] ** Tp[C2] ** Tp[B1] ** Tp[C2] ** C2, 
+    X ** B2 ** C1 ** B2 ** C1 ** B2 ** C1 ** Inv[X] -> 
+     Tp[A] ** Tp[A] ** Tp[A] - Tp[A] ** Tp[A] ** Tp[C1] ** Tp[B2] - 
+      Tp[A] ** Tp[C1] ** Tp[B2] ** Tp[A] - 
+      Tp[C1] ** Tp[B2] ** Tp[A] ** Tp[A] + X ** A ** A ** A ** Inv[X] + 
+      X ** A ** A ** B1 ** Tp[B1] - X ** A ** A ** B2 ** Tp[B2] - 
+      X ** A ** B1 ** Tp[B1] ** Tp[A] + X ** A ** B2 ** Tp[B2] ** Tp[A] + 
+      X ** B1 ** Tp[B1] ** Tp[A] ** Tp[A] - 
+      X ** B2 ** Tp[B2] ** Tp[A] ** Tp[A] + 
+      Tp[A] ** Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2] + 
+      Tp[C1] ** Tp[B2] ** Tp[A] ** Tp[C1] ** Tp[B2] + 
+      Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2] ** Tp[A] - 
+      X ** A ** A ** B2 ** C1 ** Inv[X] + 
+      X ** A ** B1 ** Tp[B1] ** Tp[C1] ** Tp[B2] - 
+      X ** A ** B2 ** C1 ** A ** Inv[X] - 
+      X ** A ** B2 ** C1 ** B1 ** Tp[B1] + 
+      X ** A ** B2 ** C1 ** B2 ** Tp[B2] - 
+      X ** A ** B2 ** Tp[B2] ** Tp[C1] ** Tp[B2] - 
+      X ** B1 ** Tp[B1] ** Tp[A] ** Tp[C1] ** Tp[B2] - 
+      X ** B1 ** Tp[B1] ** Tp[C1] ** Tp[B2] ** Tp[A] - 
+      X ** B2 ** C1 ** A ** A ** Inv[X] - 
+      X ** B2 ** C1 ** A ** B1 ** Tp[B1] + 
+      X ** B2 ** C1 ** A ** B2 ** Tp[B2] + 
+      X ** B2 ** C1 ** B1 ** Tp[B1] ** Tp[A] - 
+      X ** B2 ** C1 ** B2 ** Tp[B2] ** Tp[A] + 
+      X ** B2 ** Tp[B2] ** Tp[A] ** Tp[C1] ** Tp[B2] + 
+      X ** B2 ** Tp[B2] ** Tp[C1] ** Tp[B2] ** Tp[A] - 
+      Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2] + 
+      X ** A ** B2 ** C1 ** B2 ** C1 ** Inv[X] + 
+      X ** B1 ** Tp[B1] ** Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2] + 
+      X ** B2 ** C1 ** A ** B2 ** C1 ** Inv[X] - 
+      X ** B2 ** C1 ** B1 ** Tp[B1] ** Tp[C1] ** Tp[B2] + 
+      X ** B2 ** C1 ** B2 ** C1 ** A ** Inv[X] + 
+      X ** B2 ** C1 ** B2 ** C1 ** B1 ** Tp[B1] - 
+      X ** B2 ** C1 ** B2 ** C1 ** B2 ** Tp[B2] + 
+      X ** B2 ** C1 ** B2 ** Tp[B2] ** Tp[C1] ** Tp[B2] - 
+      X ** B2 ** Tp[B2] ** Tp[C1] ** Tp[B2] ** Tp[C1] ** Tp[B2]}, 
+   {X ** Inv[X] -> 1, Y ** Inv[Y] -> 1, Inv[X] ** X -> 1, Inv[Y] ** Y -> 1, 
+    Inv[Y] ** B1 ** C2 -> 
+     Inv[Y] ** A + Tp[A] ** Inv[Y] + Tp[C1] ** C1 - Tp[C2] ** C2 - 
+      Tp[C2] ** Tp[B1] ** Inv[Y], 
+    X ** B2 ** Tp[B2] ** X -> 
+     X ** A + Tp[A] ** X - X ** B2 ** C1 - Tp[C1] ** Tp[B2] ** X + 
+      X ** B1 ** Tp[B1] ** X}, {E12 ** iE12 -> 1, 
+    E12 ** iE22 -> -X ** iE21 + Inv[Y] ** iE21, E21 ** iE21 -> 1, 
+    E22 ** iE12 -> E21 ** Inv[X], E22 ** iE22 -> 1, iE12 ** E12 -> 1, 
+    iE21 ** E21 -> 1, iE21 ** E22 -> Inv[X] ** E12, 
+    iE22 ** E21 -> -iE12 ** X + iE12 ** Inv[Y], iE22 ** E22 -> 1}}

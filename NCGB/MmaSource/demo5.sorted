@@ -1,0 +1,101 @@
+THE ORDER IS NOW THE FOLLOWING:
+A < Tp[A] < B1 < Tp[B1] < B2 < Tp[B2] < 
+C1 < Tp[C1] < C2 < Tp[C2] < X < Inv[X]
+ < Y < Inv[Y] << E12 < E21 < E22 < 
+Tp[E12] < Tp[E21] < Tp[E22] < E11 < 
+Tp[E11] < iE11 < Tp[iE11] << iE12 < iE21
+ < iE22 < Tp[iE12] < Tp[iE21] < Tp[iE22]
+ << b < Tp[b] << c < Tp[c] << a < Tp[a]
+================================================
+========= THE ALGORITHM HAS SOLVED FOR==========
+================================================
+The expressions with unknown variables 
+{}
+and knowns {A,B1,B2,C1,C2,X,Y,Inv[X],
+Inv[Y],Tp[A],Tp[B1],Tp[B2],Tp[C1],Tp[C2]
+}
+---------------------------------------
+X**Inv[X]->1
+
+Y**Inv[Y]->1
+
+Inv[X]**X->1
+
+Inv[Y]**Y->1
+
+Inv[Y]**B1**C2->Inv[Y]**A + Tp[A]**
+Inv[Y] + Tp[C1]**C1 +  -Tp[C2]**C2   + 
+ -Tp[C2]**Tp[B1]**Inv[Y]  
+
+X**B2**Tp[B2]**X->X**A + Tp[A]**X +  -X
+**B2**C1   +  -Tp[C1]**Tp[B2]**X   + X**
+B1**Tp[B1]**X
+
+
+
+================================================
+========= USER CREATIONS APPEAR BELOW ==========
+================================================
+================================================
+========= UNDIGESTED RELATIONS APPEAR BELOW ====
+================================================
+THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:
+{E12,E21,E22,iE12,iE21,iE22}
+
+
+The expressions with unknown variables 
+{iE12,E12}
+and knowns {}
+---------------------------------------
+E12**iE12->1
+
+iE12**E12->1
+
+
+The expressions with unknown variables 
+{iE21,E21}
+and knowns {}
+---------------------------------------
+E21**iE21->1
+
+iE21**E21->1
+
+
+The expressions with unknown variables 
+{iE22,E22}
+and knowns {}
+---------------------------------------
+E22**iE22->1
+
+iE22**E22->1
+
+
+The expressions with unknown variables 
+{iE12,E22,E21}
+and knowns {Inv[X]}
+---------------------------------------
+E22**iE12->E21**Inv[X]
+
+
+The expressions with unknown variables 
+{iE21,E22,E12}
+and knowns {Inv[X]}
+---------------------------------------
+iE21**E22->Inv[X]**E12
+
+
+The expressions with unknown variables 
+{iE22,iE12,E21}
+and knowns {X,Inv[Y]}
+---------------------------------------
+iE22**E21-> -iE12**X   + iE12**Inv[Y]
+
+
+The expressions with unknown variables 
+{iE22,iE21,E12}
+and knowns {X,Inv[Y]}
+---------------------------------------
+E12**iE22-> -X**iE21   + Inv[Y]**iE21
+
+
+

@@ -1,0 +1,17 @@
+{-1 + proj1 + proj2, -leftm1 + rightm1, -leftm2 + rightm2, b - leftm1**B, 
+ c - C0**m1, f - leftm2**B, g - C0**m2, a - leftm1**A**m1, e - leftm2**A**m2, 
+ -proj1 + proj1**proj1, -proj1**A + proj1**A**proj1, 
+ -ACROSS**proj1 + proj1**ACROSS**proj1, -1 + leftm1**m1, -1 + leftm2**m2, 
+ proj1**m2, -proj1 + m1**leftm1, -A - ACROSS + B**C0, 
+ -1 + proj1 + m2**leftm2, -proj1**A**A + proj1**A**A**proj1, 
+ -ACROSS**ACROSS**proj1 + proj1**ACROSS**ACROSS**proj1, -m1 + proj1**m1, 
+ proj1**A**m2, -leftm1 + leftm1**proj1, leftm2**proj1, 
+ -proj1**A**A**A + proj1**A**A**A**proj1, -leftm1**A + leftm1**A**proj1, 
+ -ACROSS**ACROSS**ACROSS**proj1 + proj1**ACROSS**ACROSS**ACROSS**proj1, 
+ leftm2**ACROSS**proj1, proj1**A**A**m2, leftm1**m2, 
+ -proj1**A**A**A**A + proj1**A**A**A**A**proj1, 
+ -leftm1**A**A + leftm1**A**A**proj1, 
+ -ACROSS**ACROSS**ACROSS**ACROSS**proj1 + proj1**ACROSS**ACROSS**ACROSS**
+   ACROSS**proj1, leftm2**ACROSS**ACROSS**proj1, 
+ -ACROSS**m1 + proj1**ACROSS**m1, -ACROSS**ACROSS**m1 + 
+  proj1**ACROSS**ACROSS**m1, leftm2**m1, proj1**A**A**A**m2, leftm1**A**m2}

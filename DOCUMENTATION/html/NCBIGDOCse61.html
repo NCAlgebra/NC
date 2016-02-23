@@ -1,0 +1,1413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>17.3 Solving (HGRAIL) using NCProcess</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 399--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse62.html" >next</a>] [<a 
+href="NCBIGDOCse60.html" >prev</a>] [<a 
+href="NCBIGDOCse60.html#tailNCBIGDOCse60.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse61.html">tail</a>] [<a 
+href="NCBIGDOCch17.html#NCBIGDOCse61.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">17.3   </span> <a 
+ id="x105-24100017.3"></a>Solving (<span 
+class="cmmi-12">HGRAIL</span>) using NCProcess</h3>
+<!--l. 401--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">17.3.1   </span> <a 
+ id="x105-24200017.3.1"></a>Step 1</h4>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[1]:=&#x00A0;Get["NCGB.m"];
+&#x00A0;<br />In[2]:=&#x00A0;Get["cntrl"];
+&#x00A0;<br />In[3]:=&#x00A0;result1
+</div>
+</td></tr></table>
+<!--l. 408--><p class="nopar">
+<!--l. 411--><p class="indent">   We can ignore the Mathematica output <span 
+class="cmbx-12">Out[3] </span>of the <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> command for now. What is
+important is that the spreadsheet which <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> produces is in the file <span 
+class="cmbx-12">&#8220;cntrlans1.dvi&#8221;</span>.
+There is no need to record all of it here, since the only work which we must do is on the undigested
+relations.
+<!--l. 418--><p class="indent">   When the file <span 
+class="cmbx-12">&#8220;cntrlans1.dvi&#8217; </span>is displayed, the undigested relations are:
+<!--l. 4--><p class="noindent">_________________________________________________________________________________
+____________________ <span 
+class="cmr-10x-x-109">&#x00A0;SOME RELATIONS WHICH APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________
+______________________________ <span 
+class="cmr-10x-x-109">&#x00A0;MAY BE UNDIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________________
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">b,c,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,b</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,c</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.5 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">3.8 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">b</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,b,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,A</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">bb</span><sup ><span 
+class="cmmi-8">T</span> </sup>  <span 
+class="cmr-10x-x-109">+  </span><span 
+class="cmmi-10x-x-109">bC</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup>  <span 
+class="cmr-10x-x-109">+  </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">b</span><sup ><span 
+class="cmmi-8">T</span> </sup>  <span 
+class="cmr-10x-x-109">+  </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">AE</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup>  <span 
+class="cmr-10x-x-109">+  </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">b</span><sup ><span 
+class="cmmi-8">T</span> </sup>  <span 
+class="cmr-10x-x-109">+</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">+ (</span><span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">= 0</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">4.9 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">c</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,c,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,B</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,A</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">c</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">c                          </span><span 
+class="cmr-10x-x-109">+                              </span><span 
+class="cmmi-10x-x-109">c</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub>                                       <span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">c </span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">) </span><span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">c   </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">)   </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">c</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub>    <span 
+class="cmr-10x-x-109">+   (</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub>    <span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">AE</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub>  <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">) = 0</span>
+</td></tr></table>
+<br class="newline">
+<!--l. 427--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">17.3.2   </span> <a 
+ id="x105-24300017.3.2"></a>Step 2: The user attacks</h4>
+<!--l. 429--><p class="noindent">As we can easily see from the spreadsheet above, there are only two nontrivial relations left
+undigested by the <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> command. The user can ignore the rest of the spreadsheet for now.
+Since the leading terms of the last two polynomials above are <span 
+class="cmmi-12">bb</span><sup ><span 
+class="cmmi-8">T</span> </sup> and <span 
+class="cmmi-12">cc</span><sup ><span 
+class="cmmi-8">T</span> </sup>, and the fact that the
+two equations are decoupled (i.e. the <span 
+class="cmmi-12">bb</span><sup ><span 
+class="cmmi-8">T</span> </sup> equation does not depend on <span 
+class="cmmi-12">c </span>or <span 
+class="cmmi-12">C</span><sup ><span 
+class="cmmi-8">T</span> </sup> and the <span 
+class="cmmi-12">cc</span><sup ><span 
+class="cmmi-8">T</span> </sup>
+equation does not depend on <span 
+class="cmmi-12">b </span>or <span 
+class="cmmi-12">b</span><sup ><span 
+class="cmmi-8">T</span> </sup>) further iterations of an NCProcess command would probably
+not help. At this point, we need to be more clever.
+<!--l. 441--><p class="indent">   We begin by assigning variables to the polynomials that we are interested in. We can see from
+<span 
+class="cmbx-12">Out[3] </span>that the polynomial involving <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">Tp</span>[<span 
+class="cmmi-12">b</span>] is the first element of the third list in the
+<span 
+class="cmbx-12">result1</span>, and the <span 
+class="cmmi-12">c </span>rule is the last element of that list. These relations are in the form
+of rules which need to be converted to polynomials before we can continue. This is
+done with the command <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">RuleToPoly</span></span></span>. The next step is to convert the <span 
+class="cmbx-12">Tp[ ] </span>in these
+rules to <span 
+class="cmbx-12">tp[ ]</span>, which will be recognized as transpose by NCAlgebra. Here is how this is
+done:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[4]:=&#x00A0;bpoly&#x00A0;=&#x00A0;RuleToPoly[result1[[3,1]]]
+&#x00A0;<br />
+&#x00A0;<br />Out[4]:=&#x00A0;b&#x00A0;**&#x00A0;Tp[b]&#x00A0;+&#x00A0;b&#x00A0;**&#x00A0;C2&#x00A0;**&#x00A0;Inv[E21]&#x00A0;+&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[C2]&#x00A0;**&#x00A0;Tp[b]&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Inv[E21]&#x00A0;+&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;Inv[E21]&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[b]&#x00A0;+&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Inv[E21]&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;Inv[E21]&#x00A0;+&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Inv[E21]
+&#x00A0;<br />
+&#x00A0;<br />In[5]:=&#x00A0;cpoly&#x00A0;=&#x00A0;RuleToPoly[result1[[3,-1]]]
+&#x00A0;<br />
+&#x00A0;<br />Out[5]:=&#x00A0;Tp[c]&#x00A0;**&#x00A0;c&#x00A0;+&#x00A0;E21&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;c&#x00A0;+&#x00A0;Tp[c]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22&#x00A0;+&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;E12&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;c&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[c]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22&#x00A0;-&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;c&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[c]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E12&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Inv[E21]&#x00A0;**&#x00A0;E22
+&#x00A0;<br />
+&#x00A0;<br />In[6]:=&#x00A0;bpoly&#x00A0;=&#x00A0;bpoly&#x00A0;/.&#x00A0;Tp-&gt;tp;
+&#x00A0;<br />In[7]:=&#x00A0;cpoly&#x00A0;=&#x00A0;cpoly&#x00A0;/.&#x00A0;Tp-&gt;tp;
+</div>
+</td></tr></table>
+<!--l. 478--><p class="nopar">
+<!--l. 482--><p class="noindent">Observe that the polynomials Out[4] is quadratic in <span 
+class="cmmi-12">b</span>. We could complete the square and get to
+put the polynomial in the form
+   <center class="math-display" >
+<img 
+src="NCBIGDOC79x.png" alt="(b + &#x03BC;)(bT + &#x03BC;T ) + &#x03BD;
+" class="math-display" ></center>
+<!--l. 488--><p class="noindent">where <span 
+class="cmmi-12">&#x03BC; </span>and <span 
+class="cmmi-12">&#x03BD; </span>are expressions involving <span 
+class="cmmi-12">C</span><sub ><span 
+class="cmr-8">2</span></sub>, <span 
+class="cmmi-12">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup>, <span 
+class="cmmi-12">B</span><sub >
+<span 
+class="cmr-8">1</span></sub>, <span 
+class="cmmi-12">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup>, <span 
+class="cmmi-12">A</span>, <span 
+class="cmmi-12">A</span><sup ><span 
+class="cmmi-8">T</span> </sup>, <span 
+class="cmmi-12">E</span><sub>
+<span 
+class="cmr-8">21</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup>, <span 
+class="cmmi-12">E</span><sub>
+<span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> and <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">11</span></sub>. Since
+there are many unknowns in the problem, there is probably excess freedom. Let us investigate
+what happens when we take <span 
+class="cmmi-12">b </span>+ <span 
+class="cmmi-12">&#x03BC; </span>= 0. NCAlgebra is very good with quadratics so this is easy to
+execute, but since this is not a general NCAlgebra tutorial we shall not describe how this is done,
+but just write down the answer.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[8]:=&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-iE12&#x00A0;**&#x00A0;tp[C2]&#x00A0;&#x00A0;&#x00A0;tp[iE21]&#x00A0;**&#x00A0;tp[C2]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;-&gt;&#x00A0;---------------&#x00A0;-&#x00A0;------------------&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;&#x00A0;&#x00A0;tp[iE21]&#x00A0;**&#x00A0;tp[E11]&#x00A0;**&#x00A0;B1
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;-----------------&#x00A0;-&#x00A0;-------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+</td></tr></table>
+<!--l. 513--><p class="nopar">
+<!--l. 517--><p class="indent">   We can also complete the square for the expression in <span 
+class="cmmi-12">c </span>and put that expression in the
+form
+   <center class="math-display" >
+<img 
+src="NCBIGDOC80x.png" alt="         T    T
+(c + &#x03BB;)(c +  &#x03BB; ) + &#x03B3; .  " class="math-display" ></center> We
+also assume that <span 
+class="cmmi-12">c </span>+ <span 
+class="cmmi-12">&#x03BB; </span>= 0.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+Out[9]:=&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;&#x00A0;&#x00A0;tp[B2]&#x00A0;**&#x00A0;tp[E21]&#x00A0;&#x00A0;&#x00A0;C1&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;c&#x00A0;-&gt;&#x00A0;--------------&#x00A0;-&#x00A0;-----------------&#x00A0;+&#x00A0;-----------------&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;C1&#x00A0;**&#x00A0;tp[iE12]&#x00A0;**&#x00A0;tp[E22]&#x00A0;&#x00A0;&#x00A0;tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-------------------------&#x00A0;+&#x00A0;----------------------------&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B2]&#x00A0;**&#x00A0;tp[E11]&#x00A0;**&#x00A0;tp[iE12]&#x00A0;**&#x00A0;tp[E22]
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;----------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+</td></tr></table>
+<!--l. 540--><p class="nopar">
+<!--l. 544--><p class="indent">   Next we do some petty bookkeeping to get transposes of the above two rules. Once we have
+solved for <span 
+class="cmmi-12">b </span>and <span 
+class="cmmi-12">c</span>, we can then take the transpose of each of these rules to solve for <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">b</span>] and <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">c</span>].
+In our strategy session, these are simply two additional unknowns which we can now
+eliminate.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[10]:=&#x00A0;bpoly&#x00A0;=&#x00A0;RuleToPoly[brule];
+&#x00A0;<br />In[11]:=&#x00A0;cpoly&#x00A0;=&#x00A0;RuleToPoly[crule];
+&#x00A0;<br />In[12]:=&#x00A0;newpolys&#x00A0;=&#x00A0;{bpoly,cpoly,tp[bpoly],tp[cpoly]};
+&#x00A0;<br />In[13]:=&#x00A0;newrules&#x00A0;=&#x00A0;PolyToRule[newpolys];
+&#x00A0;<br />In[14]:=&#x00A0;newrules&#x00A0;=&#x00A0;newrules&#x00A0;/.&#x00A0;tp-&gt;Tp;
+&#x00A0;<br />In[15]:=&#x00A0;newrules&#x00A0;=&#x00A0;newrules&#x00A0;/.&#x00A0;PolyToRule[transE]
+&#x00A0;<br />
+&#x00A0;<br />Out[15]:=&#x00A0;{b&#x00A0;-&gt;&#x00A0;-iE12&#x00A0;**&#x00A0;Tp[C2]&#x00A0;+&#x00A0;-iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;Tp[b]&#x00A0;-&gt;&#x00A0;-C2&#x00A0;**&#x00A0;iE21&#x00A0;+&#x00A0;-Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;c&#x00A0;-&gt;&#x00A0;-Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;+&#x00A0;C1&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22&#x00A0;+&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;iE21&#x00A0;**&#x00A0;E22,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;Tp[c]&#x00A0;-&gt;&#x00A0;-E21&#x00A0;**&#x00A0;B2&#x00A0;+&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;Tp[C1]&#x00A0;+&#x00A0;E22&#x00A0;**&#x00A0;iE12&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2}
+</div>
+</td></tr></table>
+<!--l. 564--><p class="nopar">
+<!--l. 568--><p class="indent">   <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">In[14]</span></span></span> takes these four rules and replaces <span 
+class="cmbx-12">tp </span>with <span 
+class="cmbx-12">Tp</span>. <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">In[15]</span></span></span> simplifies these equations by
+making the substitutions for the transposes of <span 
+class="cmmi-12">E </span>which we have been using. Now we
+have four additional polynomials which can be added to the input for the next call to
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span>.
+<!--l. 575--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">17.3.3   </span> <a 
+ id="x105-24400017.3.3"></a>Step 3</h4>
+<!--l. 577--><p class="noindent">The starting relations for this step will be the output from the first <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> call which was
+<span 
+class="cmbx-12">result1</span>, as well as the four new equations that we have just derived. Just as we did in the first
+step, we will create a file to be read in to the Mma session.
+<!--l. 583--><p class="indent">   This is the file <span 
+class="cmbx-12">&#8220;cntrl2&#8221;</span>.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+digested=RuleToPoly[result1[[2]]];
+&#x00A0;<br />undigested=RuleToPoly[result1[[3]]];
+&#x00A0;<br />relations=Join[digested,newpolys,undigested];
+&#x00A0;<br />result2=NCProcess1[relations,2,"cntrlans2",
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DegreeCap-&gt;6,DegreeSumCap-&gt;9];
+</div>
+</td></tr></table>
+<!--l. 592--><p class="nopar">
+<!--l. 595--><p class="indent">   Now, if we do not like the results, we can change the DegreeCap options or the iteration count
+and simply read the file again, without typing the entire sequence of commands again. Then in the
+Mathematica session, we simply type
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[16]:=&#x00A0;Get["cntrl2"];
+</div>
+</td></tr></table>
+<!--l. 601--><p class="nopar">
+<!--l. 603--><p class="indent">   Once again we go directly to the file which <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">NCProcess1</span></span></span> created. There is no need
+to record all of it, since at this stage we shall be concerned only with the undigested
+relations.
+<!--l. 607--><p class="indent">   When the file <span 
+class="cmbx-12">&#8220;cntrlans2.dvi&#8221; </span>is displayed, the undigested relations are:
+<!--l. 4--><p class="noindent">_________________________________________________________________________________
+____________________ <span 
+class="cmr-10x-x-109">&#x00A0;SOME RELATIONS WHICH APPEAR BELOW</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>_____________________________
+______________________________ <span 
+class="cmr-10x-x-109">&#x00A0;MAY BE UNDIGESTED</span><span 
+class="cmr-10x-x-109">&#x00A0;</span>___________________________________________
+_________________________________________________________________________________
+<span 
+class="cmr-10x-x-109">THE FOLLOWING VARIABLES HAVE NOT BEEN SOLVED FOR:</span>
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.0 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,A</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">A </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">2</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">11</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.3 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">1.5 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{}</span>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmsy-10x-x-109">&#x2192; </span><span 
+class="cmr-10x-x-109">1</span>
+</td></tr></table>
+<br class="newline">_________________________________________________________________________________
+<br class="newline"><span 
+class="cmr-10x-x-109">3.8 The expressions with unknown variables </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">11</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmmi-10x-x-109">,E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,E</span><sub ><span 
+class="cmr-8">12</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+<br class="newline"><span 
+class="cmr-10x-x-109">and knowns </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">A,B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,B</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,C</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,A</span><sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">,C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmsy-10x-x-109">}</span>
+
+<br class="newline"><table class="minipage"><tr><td><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">A</span><sup ><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub>   <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">)   </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub>   <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">AE</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub>   <span 
+class="cmr-10x-x-109">+</span>
+<span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub>    <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub>    <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">)   </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub>    <span 
+class="cmsy-10x-x-109">-</span>
+<span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">) </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">B</span><sub><span 
+class="cmr-8">2</span></sub><sup><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub><span 
+class="cmr-10x-x-109">) +</span>
+<span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">B</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">C</span><sub ><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">E</span><sub><span 
+class="cmr-8">12</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-8">T</span> </sup> <span 
+class="cmmi-10x-x-109">E</span><sub ><span 
+class="cmr-8">22</span></sub> <span 
+class="cmr-10x-x-109">= 0</span>
+</td></tr></table>
+<br class="newline">
+<!--l. 616--><p class="indent">   Once again, we have two equations worth looking at.
+<!--l. 618--><p class="indent">   The first polynomial equation is a (Riccati-Lyapunov) equation in <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub>. Numerical methods for
+solving Riccati equations are common. For this reason assuming that a Riccati equation has a
+solution is a socially acceptable necessary condition throughout control engineering. Thus we can
+consider <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> to be known.
+<!--l. 626--><p class="indent">   We notice that the same products of unknowns appear over and over. It is likely that
+we can factor or group this equation in such a way that we can understand it a little
+better.
+<!--l. 630--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">17.3.4   </span> <a 
+ id="x105-24500017.3.4"></a>Step 4</h4>
+<!--l. 632--><p class="noindent">We start by grabbing the relation which we want to explore. Although the spreadsheet above
+shows the equation in factored form, it is returned to Mathematica in expanded form.  In
+this case, the relation we are interested in is the thirteenth element in the third list of
+<span 
+class="cmbx-12">result2</span>.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />In[18]&#x00A0;:=&#x00A0;equ2&#x00A0;=&#x00A0;result2[[3,13]]
+&#x00A0;<br />
+&#x00A0;<br />Out[18]=&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;E12&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[E12]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;-&#x00A0;Tp[E12]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E12&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[E12]&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[E12]&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E12&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[A]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[E12]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[E12]&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;Tp[C1]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;Inv[E12]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;E11&#x00A0;**&#x00A0;Tp[Inv[E12]]&#x00A0;**&#x00A0;E22
+</div>
+</td></tr></table>
+<!--l. 661--><p class="nopar">
+<!--l. 665--><p class="noindent">Now we can see from the factored form in the spreadsheet that this equation is symmetric. It
+would not take an experienced mathematician long to realize that by multiplying this equation on
+the left by <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> and on the right by <span 
+class="cmmi-12">E</span><sub>
+<span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">21</span></sub>, we will have an equation in one
+unknown.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[19]:=&#x00A0;equ3&#x00A0;=&#x00A0;NCExpand[E12**Inv[E22]**equ2**Inv[E22]**E21];
+</div>
+</td></tr></table>
+<!--l. 674--><p class="nopar">
+<!--l. 676--><p class="noindent">Inspection of <span 
+class="cmbx-12">equ3 </span>shows that the following valid substitution would be helpful.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[20]:=&#x00A0;equ4&#x00A0;=&#x00A0;Transform[equ3,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{Inv[E22]**E22-&gt;1,E12**Inv[E12]-&gt;1,E22**Inv[E22]-&gt;1,Inv[E21]**E21-&gt;1}];
+</div>
+</td></tr></table>
+<!--l. 685--><p class="nopar">
+<!--l. 689--><p class="noindent">We now obtain the collected form of <span 
+class="cmbx-12">equ4</span>.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[21]:=&#x00A0;equ5&#x00A0;=&#x00A0;NCCollectOnVariables[equ4]
+&#x00A0;<br />
+&#x00A0;<br />Out[21]:=&#x00A0;-(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)&#x00A0;**&#x00A0;A&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;Tp[A]&#x00A0;**&#x00A0;(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;C1&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;Tp[C1]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[EE22]&#x00A0;**&#x00A0;E21)&#x00A0;+
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)
+</div>
+</td></tr></table>
+<!--l. 703--><p class="nopar"> Now we can replace <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">12</span></sub> <span 
+class="cmmi-12">E</span><sub><span 
+class="cmr-8">22</span></sub><sup><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> <span 
+class="cmmi-12">E</span><sub >
+<span 
+class="cmr-8">21</span></sub> with a new variable <span 
+class="cmmi-12">X</span>.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[22]:=&#x00A0;Transform[equ5,(E11&#x00A0;-&#x00A0;E12&#x00A0;**&#x00A0;Inv[E22]&#x00A0;**&#x00A0;E21)-&gt;X]
+&#x00A0;<br />
+&#x00A0;<br />Out[22]:=&#x00A0;-X&#x00A0;**&#x00A0;A&#x00A0;-&#x00A0;&#x00A0;Tp[A]&#x00A0;**&#x00A0;X&#x00A0;+&#x00A0;&#x00A0;X&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;C1&#x00A0;+&#x00A0;Tp[C1]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;X&#x00A0;-
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;X&#x00A0;+&#x00A0;X&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;X
+</div>
+</td></tr></table>
+<!--l. 714--><p class="nopar">
+<!--l. 717--><p class="indent">   Observe that this is an equation in the one unknown <span 
+class="cmmi-12">X</span>. Of course, the only other undigested
+equation was in the one unknown <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmr-8">11</span></sub> and the previous spreadsheet featured an equation in the
+single unknown <span 
+class="cmmi-12">b </span>(and its transpose) and an equation in the single unknown <span 
+class="cmmi-12">c </span>(and its
+transpose). Thus we have solved (HGRAIL) with a symmetrized liberalized 2-strategy (see
+<span 
+class="cmbx-12">[HS]</span>).
+
+   <!--l. 726--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse62.html" >next</a>] [<a 
+href="NCBIGDOCse60.html" >prev</a>] [<a 
+href="NCBIGDOCse60.html#tailNCBIGDOCse60.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse61.html" >front</a>] [<a 
+href="NCBIGDOCch17.html#NCBIGDOCse61.html" >up</a>] </p></div>
+<!--l. 726--><p class="indent">   <a 
+ id="tailNCBIGDOCse61.html"></a>   
+</body></html> 

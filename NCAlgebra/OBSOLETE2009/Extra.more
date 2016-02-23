@@ -1,0 +1,14 @@
+more[thelist_List]:= 
+Block[{temp,r},
+     str = Unique["more"];
+     InitializeArray[str];
+     List2Array[str,thelist];
+     For[r=1,r<=str[0],r++,
+         Print["The ",r,"th element is\n\n"];
+         Print[str[r]];
+         temp = InputString[
+                  "\n Press the return key or q then the return key"
+                           ];
+         If[temp==="q",r = str[0]+1];
+     ];
+];

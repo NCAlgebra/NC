@@ -1,0 +1,33 @@
+Unprotect[NumberQ];
+NumberQ[a_ + b_] := NumberQ[a]&&NumberQ[b];
+NumberQ[a_ b_] := NumberQ[a]&&NumberQ[b];
+NumberQ[a_/b_] := NumberQ[a]&&NumberQ[b];
+NumberQ[a_^b_] := NumberQ[a]&&NumberQ[b];
+Protect[NumberQ];
+
+Unprotect[Conjugate];
+Conjugate[x_ + y_] := Conjugate[x] + Conjugate[y];
+Conjugate[x_ - y_] := Conjugate[x] - Conjugate[y];
+Conjugate[x_ y_] := Conjugate[x] Conjugate[y];
+Conjugate[x_^n_] := Conjugate[x]^n;
+Conjugate[x_/y_] := Conjugate[x]/Conjugate[y];
+Protect[Conjugate];
+
+SetNumber[a__]:=(Function[x,Unprotect[NumberQ];
+                           NumberQ[x]=True;
+                           NumberQ[x[___]]=True;
+                           Protect[NumberQ];
+                           SetCommutative[x];] /@{a});
+
+SetReal[a__]:=(Function[x,SetNumber[x];  
+                          Unprotect[Conjugate];
+                          Conjugate[x] := x;
+                          Conjugate[x[y___]]=x[y];
+                          Protect[Conjugate];] /@{a});
+
+SetNumber[Conjugate];
+Unprotect[Conjugate];
+SetIdempotent[Conjugate];
+Protect[Conjugate];
+
+SetNumber[InnerProduct];

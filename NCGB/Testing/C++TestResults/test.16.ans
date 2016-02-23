@@ -1,0 +1,8 @@
+{a**a -> b, b**a -> c, b**b -> d, b**c -> e, d**b -> f, d**c -> g, a**b -> c, 
+ c**a -> d, d**a -> e, f**a -> g, b**d -> f, b**e -> g, c**b -> e, e**a -> f, 
+ a**c -> d, a**d -> e, f**e -> d**g, d**e -> b**g, a**e -> f, e**b -> g, 
+ g**b -> b**g, c**e -> a**g, f**c -> b**g, c**c -> f, a**f -> g, 
+ e**d -> b**g, g**d -> d**g, b**f -> a**g, c**f -> b**g, e**f -> d**g, 
+ g**f -> f**g, d**f -> c**g, f**f -> e**g, f**d -> c**g, d**d -> a**g, 
+ c**d -> g, f**b -> a**g, g**a -> a**g, e**c -> a**g, g**c -> c**g, 
+ e**e -> c**g, g**e -> e**g}

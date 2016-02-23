@@ -1,0 +1,14 @@
+Map[AddToMonomialOrder,
+{
+x,
+y,
+Inv[x],
+Inv[y],
+Inv[1-x],
+Inv[1-y],
+Inv[1-x**y],
+Inv[1-y**x],
+Rt[1-x**y],
+Rt[1-y**x],
+n,m
+}];

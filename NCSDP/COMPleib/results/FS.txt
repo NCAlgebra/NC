@@ -1,0 +1,223 @@
+Mathematica 8.0 for Mac OS X x86 (64-bit)
+Copyright 1988-2011 Wolfram Research, Inc.
+
+In[1]:= 
+Out[1]= {stdout}
+
+In[2]:= SetOptions[$Output,PageWidth->80];
+
+In[3]:= 
+In[3]:= (* ADJUST YOUR DIRECTORY SETTINGS HERE! *)
+
+In[4]:= SetDirectory[$HomeDirectory <> "/work/projects/ipsolver"]
+
+Out[4]= /Users/mauricio/work/projects/ipsolver
+
+In[5]:= 
+In[5]:= << SDP`
+
+In[6]:= << SDPSylvester`
+
+In[7]:= 
+In[7]:=                         SolveProblem[fileName_, solution_, stream_, results_] := Module[
+  {
+    maxTimeSDP = 1800, (* Seconds allowed to finish SDP *)
+    time1 = 0, time2 = 0, (* Used for timing *)
+    out, (* output from SDPSolve calls *)
+    Id, Ze
+  },
+
+  WriteString[stream, "Running... ", fileName, "\n"];
+  
+  (* Load problem file *)
+  Get[fileName];
+
+  WriteString[stream, \
+              (nx*(nx+1))/2+(nz*(nz+1))/2+nx*nu, " variables. W is ", nz, \
+              "x", nz, ", L is ", nu, "x", nx, ", X is ", nx, "x", nx, "\n"];
+
+  (* Setup Leibfritz H_2 problem *)
+
+  Id[n_] := IdentityMatrix[n] // N;
+  Ze[m_, n_] := ConstantArray[0, {m, n}] // N;
+
+  C1X = ArrayFlatten[{{C1}, {Ze[nx, nx]}}];
+  IdX = ArrayFlatten[{{Ze[nz, nx]}, {Id[nx]}}];
+  D12L = ArrayFlatten[{{D12}, {Ze[nx, nu]}}];
+  IdW = ArrayFlatten[{{Id[nz]}, {Ze[nx, nz]}}];
+
+  AA = {
+     (* A X + B L + 0 W < -B1 B1^T *)
+     {
+       {2 A, Id[nx]}, 
+       {2 B, Id[nx]}, 
+       {Ze[nx, nz], Ze[nz, nx]}
+     },
+     (* -[W, C1 X + L D12; X C1^T + D12^T L^T X] < 0 *)
+     {
+       {ArrayFlatten[{{-IdX, -2 C1X}}],
+        ArrayFlatten[{{Transpose[IdX], Transpose[IdX]}}]},
+       {-2 D12L, Transpose[IdX]}, 
+       {- IdW, Transpose[IdW]}
+     }
+   };
+  CC = {-B1.Transpose[B1], Ze[nx + nz, nx + nz]};
+  BB = {Ze[nx, nx], Ze[nu, nx], -Id[nz]};
+
+  (* Run the algorithm *)
+
+  WriteString[stream, "Starting SDP Solver...\n"];
+
+  time1 = TimeUsed[];
+
+  out = TimeConstrained[
+          SDPSolve[{AA, BB, CC}, 
+                   SymmetricVariables -> {1, 3}, 
+                   DebugLevel -> 0],
+          maxTimeSDP 
+        ];
+
+  time2 = TimeUsed[];
+
+  WriteString[stream, "Done.\n"];
+
+  If [ out === $Aborted, 
+
+     Print["Can't optimize in ", maxTimeSDP, " seconds."];
+     WriteString[stream, "Can't optimize in ", maxTimeSDP, \
+                 " seconds.\n\n\n"];
+
+     status = "TIMEOUT";
+
+    ,
+
+     status = "SUCCESS";
+
+  ];
+
+  (* Write results *)
+  PutAppend[{fileName, DateString[], status, time2-time1,
+             $MachineName, $MachineType, $ProcessorType}, results];
+
+  (* Write solution *)
+  Put[out, solution];
+
+  Return[];
+
+];
+
+In[8]:= 
+In[8]:= (* Extract problem to run from input line *)
+
+In[9]:= 
+In[9]:= problemCode = ToFileName["COMPleib", $CommandLine[[2]]];
+
+In[10]:= solutionFileName = ToFileName["COMPleib", $CommandLine[[3]]];
+
+In[11]:= outputFileName = ToFileName["COMPleib", $CommandLine[[4]]];
+
+In[12]:= resultsFileName = ToFileName["COMPleib", $CommandLine[[5]]];
+
+In[13]:= 
+In[13]:= outputStream = If[ FileExistsQ[outputFileName], 
+                   OpenAppend[outputFileName], 
+                   OpenWrite[outputFileName] ];
+
+In[14]:= SetOptions[outputStream, FormatType -> StandardForm];
+
+In[15]:= 
+In[15]:= SolveProblem[ problemCode <> ".m", solutionFileName, 
+              outputStream, resultsFileName ];
+ -------------------------------------------------------------------
+ Problem data:
+ * Dimensions (total):
+   - Variables             = 55
+   - Inequalities          = 2
+ * Dimensions (detail):
+   - Variables             = {{5, 5}, {1, 5}, {5, 5}}
+   - Inequalities          = {5, 10}
+
+ Method:
+ * Method                  = PredictorCorrector
+ * Search direction        = NT
+
+ Precision:
+ * Gap tolerance           = 1.e-9
+ * Rationalize iterates    = False
+
+ Other options:
+ * Debug level             = 0
+
+  K    <B, Y>           mu    theta/tau        alpha       |X S|2      |X S|oo 
+ 
+>     ~|A X - B|  ~|A* X - C|
+ -----------------------------------------------------
+ 
+>   ------------------------------------------------------
+  1  1.3537 E  1  1.6476 E -1  6.4078 E -1  8.5100 E -1  1.6593 E  0 
+ 
+>    9.9540 E -1  1.1697 E-15  2.7970 E-16          
+  2  9.3582 E  1  3.1304 E -2  6.2864 E -1  8.1000 E -1  1.8307 E  0 
+ 
+>    9.8397 E -1  5.5490 E-14  3.9330 E-16          
+  3  3.8103 E  2  7.2306 E -3  5.6520 E -1  7.6902 E -1  2.1734 E  0 
+ 
+>    9.8067 E -1  1.0210 E-13  4.3209 E-16          
+  4  2.0416 E  3  1.4767 E -3  6.0625 E -1  7.9577 E -1  2.2747 E  0 
+ 
+>    9.8259 E -1  1.4604 E-13  5.4872 E-16          
+  5  1.0781 E  4  2.8496 E -4  6.1441 E -1  8.0703 E -1  2.8223 E  0 
+ 
+>    9.8258 E -1  1.3749 E-13  6.8673 E-16          
+  6  2.5607 E  4  1.1669 E -4  6.0503 E -1  5.9049 E -1  2.6918 E  0 
+ 
+>    9.8144 E -1  1.3703 E-13  6.8618 E-16          
+  7  1.3946 E  5  2.4447 E -5  6.6569 E -1  7.9053 E -1  3.0074 E  0 
+ 
+>    9.8180 E -1  1.3724 E-13  9.2158 E-16          
+  8  5.1887 E  5  6.6293 E -6  6.6522 E -1  7.2883 E -1  3.3017 E  0 
+ 
+>    9.8528 E -1  1.3734 E-13  1.3178 E-15          
+  9  8.7698 E  5  3.7756 E -6  6.5390 E -1  4.3047 E -1  3.0331 E  0 
+ 
+>    9.9561 E -1  1.3730 E-13  1.5366 E-15          
+ 10  2.6781 E  6  1.3936 E -6  7.0115 E -1  6.3095 E -1  2.9385 E  0 
+ 
+>    9.9343 E -1  1.3699 E-13  1.7923 E-15          
+ 11  7.4107 E  6  4.7925 E -7  6.7511 E -1  6.5610 E -1  2.8211 E  0 
+ 
+>    9.8959 E -1  1.3699 E-13  1.8972 E-15          
+ 12  2.8140 E  7  1.3369 E -7  6.9399 E -1  7.2105 E -1  2.9412 E  0 
+ 
+>    9.9015 E -1  1.3696 E-13  1.7572 E-15          
+ 13  9.5979 E  7  3.6230 E -8  6.3646 E -1  7.2900 E -1  3.0246 E  0 
+ 
+>    9.8886 E -1  1.3693 E-13  1.5348 E-15          
+ 14  2.2746 E  8  1.2459 E -8  5.0076 E -1  6.5610 E -1  3.1334 E  0 
+ 
+>    9.8848 E -1  1.3704 E-13  1.4227 E-15          
+ 15  2.4233 E  8  7.2657 E -9  3.2022 E -1  4.1688 E -1  2.7439 E  0 
+ 
+>    9.8620 E -1  1.3722 E-13  1.3720 E-15          
+ 16  2.7502 E  8  1.3456 E -9  6.2043 E -2  8.1481 E -1  2.6019 E  0 
+ 
+>    9.8166 E -1  1.3708 E-13  1.4492 E-15          
+ 17  2.8115 E  8  1.5767 E-10  7.0806 E -3  8.8282 E -1  3.0878 E  0 
+ 
+>    9.7793 E -1  1.3783 E-13  1.9437 E-15          
+ -------------------------------------------------------------------
+ 
+>   ---------------------------
+* Primal solution is not strictly feasible
+(max eig(A* X - C) = 0.0124245 > 0)
+* Dual solution is not within tolerance
+                                   -9
+(|| A X - B || = 0.0219256 >= 1. 10  )
+
+In[16]:= 
+In[16]:= Close[outputStream];
+
+In[17]:= 
+In[17]:= $Echo = DeleteCases[$Echo, "stdout"];
+
+In[18]:= 

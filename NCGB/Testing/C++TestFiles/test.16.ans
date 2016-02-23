@@ -1,0 +1,10 @@
+{-b + a ** a, -c + b ** a, -d + b ** b, -e + b ** c, -f + d ** b, 
+  -g + d ** c, -c + a ** b, -d + c ** a, -e + d ** a, -g + f ** a, 
+  -f + b ** d, -g + b ** e, -a ** g + f ** b, -b ** g + f ** c, -d + a ** c, 
+  -e + c ** b, -f + e ** a, -a ** g + g ** a, -e + a ** d, -a ** g + d ** d, 
+  -b ** g + d ** e, -c ** g + f ** d, -f + c ** c, -d ** g + f ** e, 
+  -f + a ** e, -g + e ** b, -b ** g + g ** b, -g + c ** d, -a ** g + c ** e, 
+  -g + a ** f, -a ** g + b ** f, -a ** g + e ** c, -c ** g + g ** c, 
+  -b ** g + e ** d, -d ** g + g ** d, -c ** g + e ** e, -e ** g + g ** e, 
+  -b ** g + c ** f, -c ** g + d ** f, -d ** g + e ** f, -e ** g + f ** f, 
+  -f ** g + g ** f}

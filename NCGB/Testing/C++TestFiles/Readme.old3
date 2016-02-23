@@ -1,0 +1,44 @@
+10/5/94
+
+
+
+test.10 didn't get the same answer as Mma code answer.
+test.21-24  same thing.
+
+test.35  Uh-Oh...spagettio
+
+The thing kept on running and running...
+The answer given by the Mma code is very short.
+
+
+MoraMany :-) About to execute the 7th step.
+About to compute 125 matches.
+1,Can't access column of matrix with index > number of columns
+Tried to access element: 1
+In a Matrix of 100 columns.
+***Error in file Matrix.inline.h on line number 35.
+
+LinkObject::linkd: LinkObject[p2c, 1, 1] is closed; the connection is
+dead.
+
+LinkObject::linkx: 
+   Argument LinkObject[p2c, 1, 1] in 
+    LinkWrite[LinkObject[p2c, 1, 1], CallPacket[7, {}]]
+     is not an open LinkObject.
+
+Table::iterb: Iterator {j$481, 1, MoraAlg`Private`n$481}
+     does not have appropriate bounds.
+
+LinkObject::linkx: 
+   Argument LinkObject[p2c, 1, 1] in 
+    LinkWrite[LinkObject[p2c, 1, 1], CallPacket[9, {}]]
+     is not an open LinkObject.
+
+LinkObject::linkx: 
+   Argument LinkObject[p2c, 1, 1] in 
+    LinkWrite[LinkObject[p2c, 1, 1], CallPacket[10, {1}]]
+     is not an open LinkObject.
+
+
+
+

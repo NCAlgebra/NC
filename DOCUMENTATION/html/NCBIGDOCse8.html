@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>3.2 Simplifying Expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 10--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse9.html" >next</a>] [<a 
+href="NCBIGDOCse7.html" >prev</a>] [<a 
+href="NCBIGDOCse7.html#tailNCBIGDOCse7.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse8.html">tail</a>] [<a 
+href="NCBIGDOCch3.html#NCBIGDOCse8.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
+ id="x15-170003.2"></a>Simplifying Expressions</h3>
+<!--l. 12--><p class="noindent">A person experienced in noncommutative calculations simplifies expressions in two ways:
+<!--l. 15--><p class="noindent">1. Write the expression in the shortest possible form with special attention given to subexpressions
+with physical or special mathematical meaning.
+<!--l. 19--><p class="noindent">2. The other is to expand expressions, apply simplifying rules repeatedly to each term, and see
+which terms cancel.
+<!--l. 23--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">3.2.1   </span> <a 
+ id="x15-180003.2.1"></a>Simplifying Rules</h4>
+<!--l. 25--><p class="noindent">The second method is the one which for commuting algebras has been developed to a high
+art in computer calculation. The idea is very simple and intuitive. Simplification is
+done with rules which replace complicated monomials with sums of simpler monomials,
+e.g.,
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[1-x]&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;inv[1-x]-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[a+b&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;c&#x00A0;-&gt;&#x00A0;1-inv[a+b&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;inv[a]
+</div>
+</td></tr></table>
+<!--l. 32--><p class="nopar"> throughout the expression to be simplified. When you use NCAlgebra you will often be making up
+such rules and substituting them in expressions. In a fixed collection of applications you can make
+your life easier if you save the rules and use them over and over again. The best way to do this is
+to put them in a function, say
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;MyRules=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{inv[1-x_]&#x00A0;:&gt;&#x00A0;inv[x]-1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[a+b&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;c&#x00A0;-&gt;&#x00A0;1-inv[a+b&#x00A0;**&#x00A0;c]&#x00A0;**&#x00A0;inv[a]};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;MySimplify[expr_]:=Substitute[expr,&#x00A0;MyRules];
+</div>
+</td></tr></table>
+<!--l. 44--><p class="nopar"> One of the trickier fine points is how to set the blanks in your rules. If you do not use blanks
+that&#8217;s fine provided you always use the same letters and do not replace them with other notation in
+some equation. Clearly using blanks is much more powerful. The trick is how many. For example,
+x_ is ok here. APPENDIX E discusses this.
+<!--l. 53--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">3.2.2   </span> <a 
+ id="x15-190003.2.2"></a>Orders</h4>
+<!--l. 55--><p class="noindent">The next major point is not to go into a loop. To this end one must select an ordering, call it
+COM, on monomials. For mnemonic purposes it is best to select the ordering to reflect your
+intuitive idea of which monomials are more complicated than others. For example if all of your
+formulas involve polynomials in
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x,&#x00A0;inv[x],&#x00A0;inv[1-x&#x00A0;**&#x00A0;y],&#x00A0;inv[1-y&#x00A0;**&#x00A0;x],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y,&#x00A0;&#x00A0;inv[y]
+</div>
+</td></tr></table>
+<!--l. 63--><p class="nopar"> a natural partial ordering is given by low degree <span 
+class="cmmi-12">&lt; </span>high degree
+<!--l. 67--><p class="indent">   We then subdivide equivalence classes of this ordering with
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[x]&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[1-x&#x00A0;**&#x00A0;y]
+&#x00A0;<br />commutative&#x00A0;expr&#x00A0;&#x00A0;&lt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&lt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&lt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[y]&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[1-y&#x00A0;**&#x00A0;x]
+</div>
+</td></tr></table>
+<!--l. 73--><p class="nopar"> then we subdivide equivalence classes of this ordering with lexicographical order, i.e , x <span 
+class="cmmi-12">&lt;</span>
+y.
+<!--l. 77--><p class="indent">   A reasonable convention is that higher order expressions move RIGHT.
+<!--l. 79--><p class="indent">   For example, a basic equality is
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;inv[1-x&#x00A0;**&#x00A0;y]&#x00A0;**&#x00A0;x-&#x00A0;x&#x00A0;**&#x00A0;inv[1&#x00A0;-&#x00A0;y&#x00A0;**&#x00A0;x]==0&#x00A0;.
+</div>
+</td></tr></table>
+<!--l. 83--><p class="nopar"> This translates to the rule
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;inv[1-x&#x00A0;**&#x00A0;y]&#x00A0;**&#x00A0;x&#x00A0;-&gt;&#x00A0;x&#x00A0;**&#x00A0;inv[1-y&#x00A0;**&#x00A0;x]
+</div>
+</td></tr></table>
+<!--l. 88--><p class="nopar"> because inv[1-x ** y] is &#8217;complicated&#8217; and we move it RIGHT. To harp on an earlier point we
+would suggest using the more powerful delayed assignment form of the rule:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;inv[1-x__&#x00A0;**&#x00A0;y_]&#x00A0;**&#x00A0;x__&#x00A0;:&gt;&#x00A0;x&#x00A0;**&#x00A0;inv[1-&#x00A0;y&#x00A0;**&#x00A0;x]
+</div>
+</td></tr></table>
+<!--l. 95--><p class="nopar"> IMPORTANT: these are the ordering conventions we use in NCSR. If you write rules consistent
+with them then you will then you can use them and NCSR without going into a loop. Indeed
+NCSR contains a &#8220;Gröbner basis&#8221; for reducing the set of polynomials in the expressions
+(inv).
+<!--l. 101--><p class="indent">   Here is a summary of the ordering conventions ranked from most complicated to the
+least:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;high&#x00A0;degree&gt;low&#x00A0;degree
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv&#x00A0;of&#x00A0;complicated&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv&#x00A0;of&#x00A0;simple&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;complicated&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;simple&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;commuting&#x00A0;elements&#x00A0;and&#x00A0;expressions&#x00A0;in&#x00A0;them.
+</div>
+</td></tr></table>
+<!--l. 110--><p class="nopar">
+<!--l. 112--><p class="noindent">REMEMBER HIGHER ORDER EXPRESSIONS MOVE RIGHT.
+<!--l. 115--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">3.2.3   </span> <a 
+ id="x15-200003.2.3"></a>Automatic generation of rules</h4>
+<!--l. 117--><p class="noindent">Automatic generation of rules is the subject of the NCGB part of this document. Since running the
+NCGB code requires C++, you may not have it. Here  <span 
+class="cmti-12">NCSimplifyRationalX1[]  </span>does the
+trick.
+<!--l. 122--><p class="indent">   Lying around in the directory NC/NCAlgebra/OldmmaGB/ is a primative  <span 
+class="cmti-12">NCSimplifyRationalX1[]</span>
+which works entirely under Mma. We don&#8217;t support it since our efforts go to Mma C++
+hybrids. We do not even recall its name. Anyone who resurrects it must be an intrepid
+adventurer.
+
+   <!--l. 131--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse9.html" >next</a>] [<a 
+href="NCBIGDOCse7.html" >prev</a>] [<a 
+href="NCBIGDOCse7.html#tailNCBIGDOCse7.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse8.html" >front</a>] [<a 
+href="NCBIGDOCch3.html#NCBIGDOCse8.html" >up</a>] </p></div>
+<!--l. 131--><p class="indent">   <a 
+ id="tailNCBIGDOCse8.html"></a>   
+</body></html> 

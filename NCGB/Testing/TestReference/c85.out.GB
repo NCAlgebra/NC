@@ -1,0 +1,33 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:49
+ *)
+
+{a**c - b**i, c**a - d**e, e**d - f**g, g**f - h**j, i**b - j**h, 
+ a**d**f**h**i**a, d**f**h**i**a**d, f**h**i**a**d**f, h**i**a**d**f**h, 
+ i**a**d**f**h**i, b**j**g**e**c**b, j**g**e**c**b**j, g**e**c**b**j**g, 
+ e**c**b**j**g**e, c**b**j**g**e**c, c**b**i - d**e**c, a**d**f**h**j**h**i, 
+ a**d**e - b**i**a, c**b**j**h**j**g**e, e**c**b**j**h**j**g, 
+ d**f**h**j**h**i**a, f**h**j**h**i**a**d, h**j**h**i**a**d**f, 
+ j**h**j**g**e**c**b, b**j**h**j**g**e**c, d**f**h**j**h**j**h**i, 
+ b**j**h**j**h**j**g**e, -a**d**f**g + b**i**a**d, c**b**j**h**j**h**j**g, 
+ e**c**b**j**h**j**h**j, -c**b**j**h + d**e**c**b, a**d**f**h**j**h**j**h, 
+ j**h**j**h**j**g**e**c, f**h**j**h**j**h**i**a, b**j**h**j**h**j**h**j**g, 
+ d**f**h**j**h**j**h**j**h, h**j**h**j**h**i**a**d, 
+ f**h**j**h**j**h**j**h**i, j**h**j**h**j**h**j**g**e, 
+ c**b**j**h**j**h**j**h**j, b**j**h**j**h**j**h**j**h**j, 
+ -c**b**j**h**i + d**f**g**e**c, a**d**f**g**e - b**j**h**i**a, 
+ h**j**h**j**h**j**h**i**a, i**a**d**f**g - j**h**i**a**d, 
+ j**h**j**h**j**h**j**h**j**g, -e**c**b**j**h + f**g**e**c**b, 
+ f**h**j**h**j**h**j**h**j**h, h**j**h**j**h**j**h**j**h**j**h, 
+ h**j**h**j**h**j**h**j**h**i, c**b**j**h**i**a - d**f**h**j**g**e, 
+ -a**d**f**h**j**g + b**j**h**i**a**d, i**a**d**f**h**j - j**h**i**a**d**f, 
+ j**h**j**h**j**h**j**h**j**h**j, -c**b**j**h**j**h**i + d**f**h**j**g**e**c, 
+ e**c**b**j**h**i - f**h**j**g**e**c, c**b**j**h**j**h**i**a - 
+  d**f**h**j**h**j**g**e, a**d**f**h**j**g**e - b**j**h**j**h**i**a, 
+ c**b**j**h**j**h**j**h**i**a - d**f**h**j**h**j**h**j**g**e, 
+ -a**d**f**h**j**h**j**g + b**j**h**j**h**i**a**d, 
+ g**e**c**b**j**h - h**j**g**e**c**b, -c**b**j**h**j**h**j**h**i + 
+  d**f**h**j**h**j**g**e**c, -e**c**b**j**h**j**h + f**h**j**g**e**c**b, 
+ a**d**f**h**j**h**j**g**e - b**j**h**j**h**j**h**i**a, 
+ e**c**b**j**h**j**h**i - f**h**j**h**j**g**e**c}

@@ -1,0 +1,693 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.1 Manipulating an expression</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 16--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse12.html" >next</a>] [<a 
+href="#tailNCBIGDOCse11.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse11.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.1   </span> <a 
+ id="x19-240004.1"></a>Manipulating an expression</h3>
+<!--l. 26--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.1   </span> <a 
+ id="x19-250004.1.1"></a>ExpandNonCommutativeMultiply[expr]</h4>
+
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCE,NCExpand</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:
+      <span 
+class="cmmi-12">ExpandNonCommutativeMultiply</span>[<span 
+class="cmmi-12">expr</span>] expands out NonCommutativeMultiply&#8217;s in
+      <span 
+class="cmmi-12">expr</span>. It is the noncommutative generalization of the Mma Expand command.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+
+<a 
+ id="dx19-25001"></a>
+<a 
+ id="dx19-25002"></a>
+<!--l. 47--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.2   </span> <a 
+ id="x19-260004.1.2"></a>NCCollect[expr, aListOfVariables]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCC</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   <span 
+class="cmmi-12">NCCollect</span>[<span 
+class="cmmi-12">expr,aListOfV ariables</span>]   collects   terms   of   expression   <span 
+class="cmmi-12">expr</span>
+      according to the elements of <span 
+class="cmmi-12">aListOfV ariables </span>and attempts to combine them using a
+      particular list of rules called <span 
+class="cmmi-12">rulesCollect</span>. NCCollect is weaker than NCStrongCollect
+      in that first-order and second-order terms are not collected together. NCCollect uses
+      NCDecompose, and then NCStrongCollect, and then NCCompose.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">expr </span>is an algebraic expression. <span 
+class="cmmi-12">aListOfV ariables </span>is a list of variables.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: While <span 
+class="cmmi-12">NCCollect</span>[<span 
+class="cmmi-12">expr,x</span>] always returns mathematically correct
+      expressions, it may not collect <span 
+class="cmmi-12">x </span>from as many terms as it should. If <span 
+class="cmmi-12">expr </span>has been
+      expanded in the previous step, the problem does not arise. If not, the pattern match
+      behind NCCollect may not get entirely inside of every factor where <span 
+class="cmmi-12">x </span>appears. </dd></dl>
+
+<a 
+ id="dx19-26001"></a>
+<!--l. 64--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.3   </span> <a 
+ id="x19-270004.1.3"></a>NCStrongCollect[expr, aListOfVariables]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCSC</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   It   collects   terms   of   expression   <span 
+class="cmmi-12">expr  </span>according   to   the   elements   of
+      <span 
+class="cmmi-12">aListOfV ariables </span>and attempts to combine them using the particular list of rules
+      called rulesCollect. In the noncommutative case, the Taylor expansion, and hence the
+      collect function, is not uniquely specified. This collect function often collects too much
+      and while mathematically correct is often stronger than you want. For example, <span 
+class="cmmi-12">x </span>will
+      factor out of terms where it appears both linearly a quadratically thus mixing orders.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression. <span 
+class="cmmi-12">aListOfV ariables </span>is a list of variables.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not well documented. </dd></dl>
+<a 
+ id="dx19-27001"></a>
+<!--l. 71--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.4   </span> <a 
+ id="x19-280004.1.4"></a>NCCollectSymmetric[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCCSym</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx19-28001"></a>
+<!--l. 90--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.5   </span> <a 
+ id="x19-290004.1.5"></a>NCTermsOfDegree[expr,aListOfVariables,indices]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">NCTermsOfDegree</span>[<span 
+class="cmmi-12">expr,aListOfV ariables,indices</span>] returns an expression
+      such that each term is homogeneous of degree given by the <span 
+class="cmmi-12">indices </span>in the variables of
+      <span 
+class="cmmi-12">aListOfV ariables</span>. For example, <span 
+class="cmmi-12">NCTermsOfDegree</span>[<span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>+<span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>+<span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>+
+      <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">w,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x,y</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,indices</span>] returns <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span>+<span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>if <span 
+class="cmmi-12">indices </span>= <span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}</span>, return <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">w</span>
+      if <span 
+class="cmmi-12">indices </span>= <span 
+class="cmsy-10x-x-120">{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span>, return <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>if <span 
+class="cmmi-12">indices </span>= <span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">} </span>and returns 0 otherwise. This is
+      like Mathematica&#8217;s Coefficient command, but for the noncommuting case. However, it
+      actually gives the terms and not the coefficients of the terms.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression, <span 
+class="cmmi-12">aListOfV ariables </span>is a list of variables and
+      indices is a list of positive integers which is the same length as <span 
+class="cmmi-12">aList</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 1.0 </dd></dl>
+<a 
+ id="dx19-29001"></a>
+<!--l. 103--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.6   </span> <a 
+ id="x19-300004.1.6"></a>NCSolve[expr1==expr2,var]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">NCSolve</span>[<span 
+class="cmmi-12">expr</span>1 == <span 
+class="cmmi-12">expr</span>2<span 
+class="cmmi-12">,var</span>] solves some simple equations which are linear
+      in the unknown <span 
+class="cmmi-12">var</span>. Note that in the noncommutative case, many equations such as
+      Lyapunov equations cannot be solved for an unknown. This obviously is a limitation
+      on the NCSolve command.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr</span>1 and <span 
+class="cmmi-12">expr</span>2 are Mathematica expressions. <span 
+class="cmmi-12">var </span>is a single variable.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: See description. </dd></dl>
+<a 
+ id="dx19-30001"></a>
+<!--l. 125--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.7   </span> <a 
+ id="x19-310004.1.7"></a>Substitute[expr,aListOfRules,(Optional On)]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">Sub</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  It  repeatedly  replaces  one  symbol  or  sub-expression  in  the  expression  by
+      another expression as specified by the rule. (See Wolfram&#8217;s Mathematica 2.* book page
+      54.) More recently, we wrote the Transform command (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x19-350004.1.11">4.1.11<!--tex4ht:ref: command:Transform --></a>) which apprears to be
+      better.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression. <span 
+class="cmmi-12">aListOfRules </span>is a single rule or list of rules
+      specifying the substitution to be made. On = save rules to Rules.temp, temporarily
+      over-riding SaveRules[Off]. &#8216;Off&#8217; cannot over-ride SaveRules[On].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:   The  symbols  /.  and  //.  are  often  used  in  Mathematica  as
+      methods for substituting one expression for another. This method of substitution often
+      does  not  work  when  the  expression  to  be  substituted  is  a  subexpression  within  a
+      (noncommutative) product. This Substitute command is the noncommutative analogue
+      to //. </dd></dl>
+
+<a 
+ id="dx19-31001"></a>
+<!--l. 151--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.8   </span> <a 
+ id="x19-320004.1.8"></a>SubstituteSymmetric[expr, aListOfRules, (optional On)]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">SubSym</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: When a rule specifies that <span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">b</span>, then SubSym also makes the replacement
+      <span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">a</span>] <span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">b</span>]<span 
+class="cmmi-12">.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression. <span 
+class="cmmi-12">aListOfRules </span>is a single rule or list of rules
+      specifying the substitution to be made. On = save rules to Rules.temp, temporarily
+      over-rides SaveRules[Off]. &#8217;Off&#8217; can not over-ride SaveRules[On].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx19-32001"></a>
+<!--l. 183--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.9   </span> <a 
+ id="x19-330004.1.9"></a>SubstituteSingleReplace[expr, aListOfRules, (optional On)]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">SubSingleRep</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Replaces one symbol or sub-expression in the expression by another expression
+      as specified by the rule. (See Wolfram&#8217;s Mathematica 2.* page 54.)
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">expr </span>is an algebraic expression. <span 
+class="cmmi-12">aListOfRules </span>is a single rule or list of rules
+      specifying the substitution to be made. On = save rules to Rules.temp, temporarily
+      over-rides SaveRules[Off]. &#8216;Off&#8217; can not over-ride SaveRules[On].
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  The  symbols  /.  and  //.  are  often  used  in  Mathematica  as
+      methods for substituting one expression for another. This method of substitution often
+      does  not  work  when  the  expression  to  be  substituted  is  a  subexpression  within  a
+      (noncommutative) product. This Substitute command is the noncommutative analogue
+      to /. </dd></dl>
+<a 
+ id="dx19-33001"></a>
+<!--l. 196--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.10   </span> <a 
+ id="x19-340004.1.10"></a>SubstituteAll[expr, aListOfRules, (optional On)]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">SubAll</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: For every rule <span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">b</span>, SubAll also replaces,
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC8x.png" alt="tp[a] &#x2192; tp[b]  inv[a] &#x2192;  inv[b]   rt[a] &#x2192; rt[b].
+      " class="math-display" ></center>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">expr </span>is an algebraic expression. <span 
+class="cmmi-12">aListOfRules </span>is a single rule or list of rules
+      specifying the substitution to be made. On = save rules to Rules.temp, temporarily
+      over-riding SaveRules[Off]. &#8217;Off&#8217; can not over-ride SaveRules[On].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx19-34001"></a>
+
+<!--l. 207--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.11   </span> <a 
+ id="x19-350004.1.11"></a>Transform[expr,aListOfRules]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">Transform</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Transform is essentially a more efficient version of Substitute. It has the same
+      functionality as Substitute.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: <span 
+class="cmmi-12">expr </span>is an algebraic expression. <span 
+class="cmmi-12">aListOfRules </span>is a single rule or
+      list of rules specifying the substitution to be made.  </dd></dl>
+<a 
+ id="dx19-35001"></a>
+<!--l. 208--><p class="noindent">Beware: Transform only applies rules once rather than repeatedly.
+<!--l. 227--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.12   </span> <a 
+ id="x19-360004.1.12"></a>GrabIndeterminants[ aListOfPolynomialsOrRules]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">none</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:    <span 
+class="cmtt-12">GrabIndeterminants[L] </span>returns  the  indeterminates  found  in  the  list
+      of  (noncommutative)  expressions  or  rules  <span 
+class="cmmi-12">L</span>.  For  example,  <span 
+class="cmtt-12">GrabIndeterminants[</span>
+      <span 
+class="cmsy-10x-x-120">{ </span><span 
+class="cmtt-12">x**Inv[x]**x + Tp[Inv[x+a]],</span> <span 
+class="cmtt-12">3 + 4 Inv[a]**b**Inv[a] + x </span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmtt-12">]</span> returns
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC9x.png" alt="{ x,  Inv[x],  Tp[Inv[x+a]],    Inv[a],  b  }.
+      " class="math-display" ></center>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: aListOfPolynomialsOrRules is a list of (noncommutative) expressions or rules.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:   </dd></dl>
+<a 
+ id="dx19-36001"></a>
+<!--l. 247--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.13   </span> <a 
+ id="x19-370004.1.13"></a>GrabVariables[ aListOfPolynomialsOrRules ]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">none</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmtt-12">GrabVariables[ aListOfPolynomialsOrRules ] </span>returns the variables found
+      in the list of (noncommutative) expressions or rules aListOfPolynomialsOrRules. It is
+      similar to the Mathematica command <span 
+class="cmtt-12">Variables[] </span>which takes as an argument a list
+      of polynomials in commutative variables or functions of variables. For example,
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC10x.png" alt="GrabVariables[   {  x**Inv[x]**x   + Tp[Inv[x+a]],    3 + 4  Inv[a]**b**Inv[a]    + x  }]
+      " class="math-display" ></center> returns
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC11x.png" alt="{ x,  a, b  }.
+      " class="math-display" ></center>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: aListOfPolynomialsOrRules is a list of (noncommutative) expressions or rules.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations:   </dd></dl>
+<a 
+ id="dx19-37001"></a>
+<!--l. 256--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.14   </span> <a 
+ id="x19-380004.1.14"></a>NCBackward[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCB</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: It applies the rules
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC12x.png" alt="inv[Id - B * *A] * *B &#x2192;  B * *inv[Id - A * *B]
+      " class="math-display" ></center>
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC13x.png" alt="inv[Id -  B * *A] * *inv[A] &#x2192; inv[A] * *inv[Id - A * *B]
+      " class="math-display" ></center>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx19-38001"></a>
+<!--l. 265--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.15   </span> <a 
+ id="x19-390004.1.15"></a>NCForward[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">NCF</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: It applies the rules
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC14x.png" alt="B * *inv[Id - A * *B] &#x2192;  inv[Id - B * *A] * *B
+      " class="math-display" ></center>
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC15x.png" alt="inv[B] * *inv[Id - B * *A] &#x2192;  inv[Id - B * *A] * *inv[A]
+      " class="math-display" ></center>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">expr </span>is an algebraic expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None </dd></dl>
+<a 
+ id="dx19-39001"></a>
+<!--l. 289--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.16   </span> <a 
+ id="x19-400004.1.16"></a>NCMonomial[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  NCMonomail  changes  the  look  of  an  expression  by  replacing  <span 
+class="cmmi-12">n</span>th  integer
+      powers of the NonCommutative variable <span 
+class="cmmi-12">x</span>, with the product of <span 
+class="cmmi-12">n </span>copies of <span 
+class="cmmi-12">x</span>. For
+      example,  <span 
+class="cmmi-12">NCMonomial</span>[2<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">2</span>  + 5<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">4</span>]  evaluates  to  2<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>+ 5<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>and
+      <span 
+class="cmmi-12">NCMonomial</span>[(<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">2</span>) <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>] evaluates to <span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Any noncommutative expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: The program greatly eases the task of typing in polynomials. For
+      example, instead of typing <span 
+class="cmmi-12">x </span>= <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>,
+      one can type <span 
+class="cmmi-12">x </span>= <span 
+class="cmmi-12">NCMono</span>[(<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">12</span>)<span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">**</span>(<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">2</span>)]. NCMono expands only integer exponents.
+      This program will be (or has been, depending on the version of code which you have)
+      superseded by NCMonomial and NCUnMonomial. NCMonomial implements the same
+
+      functionality as NCMonomial and NCUnMonomial reverses the process. <span 
+class="cmbx-12">Caution:</span>
+      Mathematica treats <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span><span 
+class="cmr-8">2</span> as (<span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span>)<span 
+class="cmr-8">2</span> and so to have Mathematica acknowledge <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y</span><span 
+class="cmr-8">2</span>
+      then input <span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">**</span>(<span 
+class="cmmi-12">y</span><span 
+class="cmr-8">2</span>) exactly. This has nothing to do with NCAlgebra or NCMonomial.
+      </dd></dl>
+<a 
+ id="dx19-40001"></a>
+<!--l. 306--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.17   </span> <a 
+ id="x19-410004.1.17"></a>NCUnMonomial[expr]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: NCUnMonomial reverses what NCMonomial does. NCUnMonomial changes
+      the  look  of  an  expression  by  replacing  a  product  of  <span 
+class="cmmi-12">n </span>copies  of  <span 
+class="cmmi-12">x </span>with  <span 
+class="cmmi-12">x</span><sup ><span 
+class="cmmi-8">n</span></sup>.  For
+      example, <span 
+class="cmmi-12">NCUnMonomial</span>[2<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span>+ 5<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>] evaluates to 2<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">2</span> + 5<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">4</span>  and
+      <span 
+class="cmmi-12">NCUnMonomial</span>[<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>] evaluates to (<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">2</span>) <span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Any noncommutative expression.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: See NCMonomial. NCAlgebra does not effectively manipulate
+      expressions involving powers (such as (<span 
+class="cmmi-12">x</span><span 
+class="cmr-8">2</span>)) </dd></dl>
+<a 
+ id="dx19-41001"></a>
+
+   <!--l. 310--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse12.html" >next</a>] [<a 
+href="NCBIGDOCse11.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse11.html" >up</a>] </p></div>
+<!--l. 310--><p class="indent">   <a 
+ id="tailNCBIGDOCse11.html"></a>   
+</body></html> 

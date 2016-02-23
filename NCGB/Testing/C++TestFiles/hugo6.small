@@ -1,0 +1,44 @@
+(*
+This file tries to confirm the results from hugo6.
+The four rules from hugo6 with invertibility of the
+knowns is run again in NCSimplifyAll, without
+calling ShrinkBasis.
+*)
+
+
+SetNonCommutative[a,b,c,d,x,y,z,w,ia,ib,ic,id];
+SetMultiplicityOfGrading[3];
+SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
+SetMonomialOrder[{z},2];
+SetMonomialOrder[{x,y,w},3];
+
+first = {{a,x},{y,b}};
+second = {{w,c},{d,z}};
+
+start = Flatten[{MatMult[first,second] - IdentityMatrix[2],
+                 MatMult[second,first] - IdentityMatrix[2]}];
+
+
+smallset = {w -> ia ** id ** z ** b ** d,
+d ** x -> 1 - z ** b, 
+x ** z -> -a ** c, 
+z ** y -> -d ** a};
+
+invrel = {
+ia**a - 1,
+a**ia - 1,
+ib**b - 1,
+b**ib - 1,
+ic**c - 1,
+c**ic - 1,
+id**d - 1,
+d**id - 1};
+
+allrel = Union[smallset,invrel];
+
+answer = NCSimplifyAll[start,allrel,5];
+Put[answer, "hugo6.small.answer"];
+
+(*
+answer = {}
+*)

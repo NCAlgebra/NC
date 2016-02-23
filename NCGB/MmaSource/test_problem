@@ -1,0 +1,25 @@
+Get["NCGB.m"];
+
+vars = {V,E,F,G,H};
+longer = Join[{Aj},vars];
+
+Apply[SNC,longer];
+
+T = 
+{
+{ V, E, F},
+{ 0, G, H},
+{ 0, 0, Aj[V]}
+};
+
+AjT = Transpose[T];
+Print["AjT:",AjT];
+
+ajvars = Map[Aj,vars];
+
+allvars = Join[ajvars,vars];
+Print["allvars:",allvars];
+
+start = NCSetRelations[Join[{Isometry},vars]];
+Print["start:",start];
+

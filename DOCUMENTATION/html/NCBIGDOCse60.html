@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>17.2 The key relations: executable form</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 274--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse61.html" >next</a>] [<a 
+href="NCBIGDOCse59.html" >prev</a>] [<a 
+href="NCBIGDOCse59.html#tailNCBIGDOCse59.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse60.html">tail</a>] [<a 
+href="NCBIGDOCch17.html#NCBIGDOCse60.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">17.2   </span> <a 
+ id="x104-23800017.2"></a>The key relations: executable form</h3>
+<!--l. 276--><p class="noindent">The first step is to assemble all of the key relations in executable form:
+<!--l. 279--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x104-23900017.2"></a>The properties of <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub></h5>
+<!--l. 281--><p class="noindent">We make the strong assumption that each <span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub> is invertible. While this turns out to be valid,
+making it at this point is cheating. Ironically we recommend strongly that the user make heavy
+invertibility assumptions at the outset of a session. Later after the main ideas have
+been discovered the user can selectively relax them and thereby obtain more general
+results.
+<!--l. 287--><p class="indent">   Also, the 2 x 2 matrix (<span 
+class="cmmi-12">E</span><sub ><span 
+class="cmmi-8">ij</span></sub>) 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">i,j </span><span 
+class="cmsy-10x-x-120">&#x2264; </span>2 is symmetric.
+<!--l. 290--><p class="noindent">
+   <h5 class="subsubsectionHead"><a 
+ id="x104-24000017.2"></a>Creating an input file</h5>
+<!--l. 292--><p class="noindent">It is a good idea to create an input file for the strategy session before starting Mathematica. There
+are several preliminary steps which may have to be done several times before the desired results are
+obtained. Setting the monomial order, setting variables noncommutative and defining the
+starting equations can all be done beforehand. This way, if the user wants to try the same
+run with a slightly different ordering, he only needs to edit the input file and load it
+again.
+<!--l. 301--><p class="indent">   In this case, the input file is called <span 
+class="cmbx-12">cntrl</span>. Notice that we are using <span 
+class="cmbx-12">Tp[ ] </span>to denote transpose
+and <span 
+class="cmbx-12">Inv[] </span>to denote inverse, which is inconsistent with the NCAlgebra package which uses <span 
+class="cmbx-12">tp[ ]</span>
+and <span 
+class="cmbx-12">inv[ ] </span>respectively. This is done intentionally to ensure that actual transposes and inverses are
+not taken within the GBA. The relations can be easily converted later if it is necessary to do
+mathematical operations on them.
+<!--l. 311--><p class="indent">   This is the file <span 
+class="cmbx-12">&#8220;cntrl&#8221;</span>:
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SetNonCommutative[E11,E22,E12,E21,Inv[E11],Inv[E22],Inv[E12],Inv[E21],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[Inv[E11]],Tp[Inv[E22]],Tp[Inv[E12]],Tp[Inv[E21]],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Tp[E11],Tp[E22],Tp[E12],Tp[E21]];
+&#x00A0;<br />
+&#x00A0;<br />(*&#x00A0;These&#x00A0;relations&#x00A0;imply&#x00A0;that&#x00A0;the&#x00A0;Eij&#x00A0;&#x00A0;generate&#x00A0;a&#x00A0;symmetric&#x00A0;quadratic&#x00A0;form.&#x00A0;*)
+&#x00A0;<br />transE&#x00A0;=&#x00A0;{
+&#x00A0;<br />Tp[E21]-E12,
+&#x00A0;<br />Tp[E11]-E11,
+&#x00A0;<br />Tp[E22]-E22,
+&#x00A0;<br />Tp[E12]-E21,
+&#x00A0;<br />Tp[Inv[E21]]-Inv[E12],
+&#x00A0;<br />Tp[Inv[E11]]-Inv[E11],
+&#x00A0;<br />Tp[Inv[E22]]-Inv[E22],
+&#x00A0;<br />Tp[Inv[E12]]-Inv[E21]};
+&#x00A0;<br />
+&#x00A0;<br />(*&#x00A0;These&#x00A0;relations&#x00A0;assume&#x00A0;that&#x00A0;everything&#x00A0;is&#x00A0;invertible&#x00A0;*)
+&#x00A0;<br />inverseE&#x00A0;=&#x00A0;{
+&#x00A0;<br />E11**Inv[E11]&#x00A0;-1,
+&#x00A0;<br />Inv[E11]**E11&#x00A0;-1,
+&#x00A0;<br />E12**Inv[E12]&#x00A0;-1,
+&#x00A0;<br />Inv[E12]**E12&#x00A0;-1,
+&#x00A0;<br />E21**Inv[E21]&#x00A0;-1,
+&#x00A0;<br />Inv[E21]**E21&#x00A0;-1,
+&#x00A0;<br />E22**Inv[E22]&#x00A0;-1,
+&#x00A0;<br />Inv[E22]**E22&#x00A0;-1,
+&#x00A0;<br />Tp[E11]**Tp[Inv[E11]]&#x00A0;-1,
+&#x00A0;<br />Tp[Inv[E11]]**Tp[E11]&#x00A0;-1,
+&#x00A0;<br />Tp[E12]**Tp[Inv[E12]]&#x00A0;-1,
+&#x00A0;<br />Tp[Inv[E12]]**Tp[E12]&#x00A0;-1,
+&#x00A0;<br />Tp[E21]**Tp[Inv[E21]]&#x00A0;-1,
+&#x00A0;<br />Tp[Inv[E21]]**Tp[E21]&#x00A0;-1,
+&#x00A0;<br />Tp[E22]**Tp[Inv[E22]]&#x00A0;-1,
+&#x00A0;<br />Tp[Inv[E22]]**Tp[E22]&#x00A0;-1};
+&#x00A0;<br />
+&#x00A0;<br />SetNonCommutative[A,Tp[A],B1,Tp[B1],B2,Tp[B2],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;C1,Tp[C1],C2,Tp[C2],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b,Tp[b],c,Tp[c],a,Tp[a]];
+&#x00A0;<br />
+&#x00A0;<br />(*&#x00A0;These&#x00A0;are&#x00A0;the&#x00A0;Hamiltonian&#x00A0;equations&#x00A0;*)
+&#x00A0;<br />Hxx=E11&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;Tp[A]&#x00A0;**&#x00A0;Tp[E11]&#x00A0;+&#x00A0;Tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;Tp[C2]&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;(E21&#x00A0;+&#x00A0;Tp[E12])/2&#x00A0;+&#x00A0;(E12&#x00A0;+&#x00A0;Tp[E21])&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;C2/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;(E21&#x00A0;+&#x00A0;Tp[E12])/2&#x00A0;+&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E11]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;(E12&#x00A0;+&#x00A0;Tp[E21])&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;(E21&#x00A0;+&#x00A0;Tp[E12])/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;(E12&#x00A0;+&#x00A0;Tp[E21])&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E11]/2;
+&#x00A0;<br />
+&#x00A0;<br />Hxz=E21&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;Tp[a]&#x00A0;**&#x00A0;(E21&#x00A0;+&#x00A0;Tp[E12])/2&#x00A0;+&#x00A0;Tp[c]&#x00A0;**&#x00A0;C1&#x00A0;+&#x00A0;E22&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;C2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;Tp[c]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;Tp[E11]&#x00A0;+&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[b]**&#x00A0;(E21&#x00A0;+&#x00A0;Tp[E12])/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E11]&#x00A0;+&#x00A0;E22&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;(E21&#x00A0;+&#x00A0;Tp[E12])/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E11];
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />Hzx=Tp[A]&#x00A0;**&#x00A0;Tp[E21]&#x00A0;+&#x00A0;Tp[C1]&#x00A0;**&#x00A0;c&#x00A0;+&#x00A0;(E12&#x00A0;+&#x00A0;Tp[E21])&#x00A0;**&#x00A0;a/2&#x00A0;+&#x00A0;E11&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;c&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;Tp[C2]&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;Tp[E22]&#x00A0;+&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;Tp[E22]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;E11&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E21]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;(E12&#x00A0;+&#x00A0;Tp[E21])&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;Tp[E22]/2&#x00A0;+
+
+&#x00A0;<br />&#x00A0;&#x00A0;(E12&#x00A0;+&#x00A0;Tp[E21])&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E21]/2;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />Hzz=E22&#x00A0;**&#x00A0;a&#x00A0;+&#x00A0;Tp[a]&#x00A0;**&#x00A0;Tp[E22]&#x00A0;+&#x00A0;Tp[c]&#x00A0;**&#x00A0;c&#x00A0;+&#x00A0;E21&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;c&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;Tp[c]&#x00A0;**&#x00A0;Tp[B2]&#x00A0;**&#x00A0;Tp[E21]&#x00A0;+&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;Tp[E22]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;E21&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E21]&#x00A0;+&#x00A0;E22&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[b]&#x00A0;**&#x00A0;Tp[E22]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;E22&#x00A0;**&#x00A0;b&#x00A0;**&#x00A0;Tp[B1]&#x00A0;**&#x00A0;Tp[E21];
+&#x00A0;<br />
+&#x00A0;<br />Hameq&#x00A0;=&#x00A0;{Hxx,Hxz,Hzx,Hzz};
+&#x00A0;<br />
+&#x00A0;<br />(*&#x00A0;Set&#x00A0;the&#x00A0;knowns&#x00A0;and&#x00A0;the&#x00A0;order&#x00A0;of&#x00A0;the&#x00A0;unknowns&#x00A0;*)
+&#x00A0;<br />SetKnowns[A,Tp[A],B1,Tp[B1],B2,Tp[B2],C1,Tp[C1],C2,Tp[C2]];
+&#x00A0;<br />SetUnknowns[E12,Tp[E12],E21,Tp[E21],E22,Tp[E22],E11,Tp[E11],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[E12],Tp[Inv[E12]],Inv[E21],Tp[Inv[E21]],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Inv[E22],Tp[Inv[E22]],Inv[E11],Tp[Inv[E11]],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b,Tp[b],c,Tp[c],a,Tp[a]];
+&#x00A0;<br />
+&#x00A0;<br />startingrels&#x00A0;=&#x00A0;Union[transE,&#x00A0;inverseE,&#x00A0;Hameq];
+&#x00A0;<br />
+&#x00A0;<br />result1&#x00A0;=&#x00A0;NCProcess1[startingrels,2,"cntrlans1"];
+</div>
+</td></tr></table>
+<!--l. 390--><p class="nopar">
+<!--l. 393--><p class="indent">   Now when we load this file, we will be ready to begin the strategy session.
+
+   <!--l. 396--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse61.html" >next</a>] [<a 
+href="NCBIGDOCse59.html" >prev</a>] [<a 
+href="NCBIGDOCse59.html#tailNCBIGDOCse59.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse60.html" >front</a>] [<a 
+href="NCBIGDOCch17.html#NCBIGDOCse60.html" >up</a>] </p></div>
+<!--l. 396--><p class="indent">   <a 
+ id="tailNCBIGDOCse60.html"></a>   
+</body></html> 

@@ -1,0 +1,706 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     22286,        697]
+NotebookOptionsPosition[     19407,        607]
+NotebookOutlinePosition[     20031,        630]
+CellTagsIndexPosition[     19988,        627]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Example of the LDU Decomposition: 
+The Bounded Real Lemma\
+\>", "Title",
+ CellChangeTimes->{{3.516627384084461*^9, 3.516627385540429*^9}},
+ TextAlignment->Center],
+
+Cell[CellGroupData[{
+
+Cell["Bounded Real Lemma", "Section"],
+
+Cell[TextData[{
+ "\nLet the stable system be given by\n\n",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"\t\t", 
+            RowBox[{
+             RowBox[{
+              StyleBox["H",
+               FontSize->16], 
+              StyleBox[" ",
+               FontSize->16], 
+              StyleBox[":",
+               FontSize->16], 
+              RowBox[{
+               RowBox[{
+                StyleBox["(",
+                 FontSize->16], 
+                StyleBox["\[NegativeThinSpace]",
+                 FontSize->16], 
+                RowBox[{
+                 StyleBox[GridBox[{
+                    {
+                    FractionBox["dx", "dt"]},
+                    {"z"}
+                   }],
+                  FontSize->16], 
+                 StyleBox["\[NegativeThinSpace]  \[NegativeThinSpace]",
+                  FontSize->16], 
+                 StyleBox[GridBox[{
+                    {"=", 
+                    RowBox[{
+                    RowBox[{"A", "  ", "x"}], " ", "+", " ", 
+                    RowBox[{"B", " ", "w"}]}]},
+                    {"=", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["C", "1"], " ", "x"}], " ", "+", " ", 
+                    RowBox[{
+                    SubscriptBox["D", "1"], " ", "w"}]}]}
+                   }],
+                  FontSize->16], 
+                 StyleBox["\[NegativeThinSpace]",
+                  FontSize->16], 
+                 StyleBox["\n",
+                  FontSize->16], 
+                 StyleBox["\n",
+                  FontSize->16], 
+                 StyleBox[" ",
+                  FontSize->16], 
+                 StyleBox["The",
+                  FontSize->16], 
+                 StyleBox[" ",
+                  FontSize->16], 
+                 SubscriptBox[
+                  StyleBox["\[ScriptCapitalH]",
+                   FontSize->16], "\[Infinity]"], " ", "norm", " ", "of", " ",
+                  "the", " ", "transfer", " ", "function", "  ", "H", " ", 
+                 "is", " ", "\n", "bounded", " ", "by", "  ", "\[Gamma]", "  ",
+                  "if", " ", "and", " ", "only", " ", "if", " ", "the", " ", 
+                 "following", " ", "statements", " ", 
+                 RowBox[{
+                 "holds", ":", "\n", "\t\t\t\t", "\n", "\t\t\t\t         ", 
+                  "I"}]}], ")"}], "  ", "||", "H", 
+               SubscriptBox["||", "\[Infinity]"], " ", 
+               RowBox[{"<", "  ", "\[Gamma]"}]}]}], "\n", "\n", "\n", 
+             "\t\t\t\t", "II"}], ")"}], "     ", 
+           SuperscriptBox["\[Gamma]", "2"]}], " ", "-", " ", 
+          RowBox[{
+           SubscriptBox["D", "1"], 
+           OverscriptBox[
+            SubscriptBox["D", "1"], 
+            RowBox[{"  ", "T"}]]}]}], "   ", ">", "  ", "0"}], ",", " ", 
+        "and"}], "\n", "                            ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"X", "  ", "A"}], " ", "+", " ", 
+         RowBox[{
+          SuperscriptBox["A", "T"], " ", "X"}], "  ", "+", " ", 
+         RowBox[{"X", " ", "B", " ", 
+          SuperscriptBox["B", "T"], " ", "X"}], " ", "+"}], "..."}], "\n", 
+       "                           ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"X", "   ", "B", "   ", 
+            OverscriptBox[
+             SubscriptBox["D", "1"], 
+             RowBox[{"  ", "T"}]]}], " ", "+", " ", 
+           OverscriptBox[
+            SubscriptBox["C", "1"], 
+            RowBox[{"  ", "T"}]]}], " ", ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", "  ", 
+           RowBox[{
+            SuperscriptBox["\[Gamma]", "2"], " ", "-", " ", 
+            RowBox[{
+             SubscriptBox["D", "1"], 
+             OverscriptBox[
+              SubscriptBox["D", "1"], 
+              RowBox[{"  ", "T"}]]}]}], ")"}], 
+          RowBox[{"-", "1"}]], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"X", "   ", "B", "   ", 
+             OverscriptBox[
+              SubscriptBox["D", "1"], 
+              RowBox[{"  ", "T"}]]}], " ", "+", " ", 
+            OverscriptBox[
+             SubscriptBox["C", "1"], 
+             RowBox[{"  ", "T"}]]}], " ", ")"}], "T"]}], " ", "<", " ", "0"}],
+        "\n", "\t", "\n", "\n", "\t           ", "III"}], ")"}], "   ", 
+     RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+        {
+         RowBox[{
+          RowBox[{"X", "  ", "A"}], "+", 
+          RowBox[{
+           SuperscriptBox["A", "T"], "  ", "X"}]}], 
+         RowBox[{"X", "  ", "B"}], 
+         RowBox[{" ", 
+          OverscriptBox[
+           SubscriptBox["C", "1"], 
+           RowBox[{"  ", "T"}]]}]},
+        {
+         RowBox[{
+          SuperscriptBox["B", "T"], "  ", "X"}], 
+         RowBox[{"-", "I"}], 
+         OverscriptBox[
+          SubscriptBox["D", "1"], 
+          RowBox[{"  ", "T"}]]},
+        {
+         SubscriptBox["C", "1"], 
+         SubscriptBox["D", "1"], 
+         RowBox[{
+          RowBox[{"-", 
+           SuperscriptBox["\[Gamma]", "2"]}], "I"}]}
+       }], "\[NegativeThinSpace]", ")"}]}], "  ", "<", "  ", "0"}], 
+   StyleBox["\n",
+    FontSize->16]}]]]
+}], "Text",
+ FontFamily->"Courier",
+ FontWeight->"Bold"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Proof.", "Section"],
+
+Cell[TextData[{
+ "It",
+ StyleBox[" will ",
+  FontFamily->"Courier"],
+ "be show that statement III) is equivalent to statement II). The equivalence \
+between I) and II)  can be found in [Doyle, J.C. et al, \"State-Space \
+Solution to Standard ",
+ Cell[BoxData[
+  SubscriptBox[
+   StyleBox["\[ScriptCapitalH]",
+    FontSize->16], "2"]]],
+ "and ",
+ Cell[BoxData[
+  SubscriptBox[
+   StyleBox["\[ScriptCapitalH]",
+    FontSize->16], "\[Infinity]"]]],
+ "Control Problems\", IEEE Trans. Aut. Contr., AC-34 (1998), pp 831 - 847; \
+Iwasaki,T. and R. Skelton\", All controllers for the General ",
+ Cell[BoxData[
+  SubscriptBox[
+   StyleBox["\[ScriptCapitalH]",
+    FontSize->16], "\[Infinity]"]]],
+ " Control Problem: LMI Existence Conditions and State-Space Formulas\", \
+Automatica,30 (1994), pp. 1307-1317."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->0,
+ FontFamily->"Courier",
+ FontWeight->"Bold"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCAlgebra`"}]}], "Input",
+ CellChangeTimes->{{3.516627343268141*^9, 3.516627349573555*^9}}],
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693948752*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693950508*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"You can now use \\\"<< NCAlgebra`\\\" to load NCAlgebra or \
+\"\>", "\[InvisibleSpace]", "\<\"\\\"<< NCGB`\\\" to load NCGB.\"\>"}],
+  SequenceForm[
+  "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
+   "\"<< NCGB`\" to load NCGB."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693951798*^9}],
+
+Cell[BoxData["\<\"NCMultiplication.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693953002*^9}],
+
+Cell[BoxData["\<\"NC1SetCommands.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693954237*^9}],
+
+Cell[BoxData["\<\"NCInverses.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693955452*^9}],
+
+Cell[BoxData["\<\"NCTransposes.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693956649*^9}],
+
+Cell[BoxData["\<\"NCAdjoints.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.57240069395787*^9}],
+
+Cell[BoxData["\<\"NCCo.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006939590893`*^9}],
+
+Cell[BoxData["\<\"NCRoots.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006939602947`*^9}],
+
+Cell[BoxData["\<\"NC2SetCommands.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693961484*^9}],
+
+Cell[BoxData["\<\"NCCollect.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693962687*^9}],
+
+Cell[BoxData["\<\"NCSubstitute.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693963896*^9}],
+
+Cell[BoxData["\<\"NCMonomial.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693965312*^9}],
+
+Cell[BoxData["\<\"NCSolve.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693966634*^9}],
+
+Cell[BoxData["\<\"NCTools.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693967928*^9}],
+
+Cell[BoxData["\<\"NC2SimplifyRational.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693969289*^9}],
+
+Cell[BoxData["\<\"NC1SimplifyRational.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006939707527`*^9}],
+
+Cell[BoxData["\<\"NCSimplifyRational.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.57240069397219*^9}],
+
+Cell[BoxData["\<\"NCComplex.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400693973583*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"SetDelayed", "::", "write"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Tag \[NoBreak]\\!\\(Element\\)\[NoBreak] in \
+\[NoBreak]\\!\\(a_List \[Element] \\(\\({index___}\\)\\)\\)\[NoBreak] is \
+Protected. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\
+\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/write\\\", ButtonNote -> \
+\\\"SetDelayed::write\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.572400694432672*^9}],
+
+Cell[BoxData["\<\"NCMatMult.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694482798*^9}],
+
+Cell[BoxData["\<\"NCDiff.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694499523*^9}],
+
+Cell[BoxData["\<\"NCSchur.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006945007067`*^9}],
+
+Cell[BoxData["\<\"NCAlias.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006945018682`*^9}],
+
+Cell[BoxData["\<\"Grabs.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694502988*^9}],
+
+Cell[BoxData["\<\"NCTaylorCoeff.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006945041027`*^9}],
+
+Cell[BoxData["\<\"NCConvexity.m and NCGuts.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694505258*^9}],
+
+Cell[BoxData["\<\"NCRealizationFunctions.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006945064297`*^9}],
+
+Cell[BoxData["\<\"NCTeXForm.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694507647*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"NCTeX::Using '\"\>", "\[InvisibleSpace]", "\<\"open\"\>", 
+   "\[InvisibleSpace]", "\<\"' as PDFViewer.\"\>"}],
+  SequenceForm["NCTeX::Using '", "open", "' as PDFViewer."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694525567*^9}],
+
+Cell[BoxData["\<\"NCTeX.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.5724006945267572`*^9}],
+
+Cell[BoxData["\<\"NCMaster.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694527892*^9}],
+
+Cell[BoxData["\<\"NCOutput.m loaded\"\>"], "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694528968*^9}],
+
+Cell["\<\
+------------------------------------------------------------
+NCAlgebra - Version 4.0.4
+
+Authors:
+  J. William Helton*
+  Mauricio de Oliveira* 
+  Mark Stankus* 
+  Robert L. Miller#
+
+* Math Dept, UCSD                
+# General Atomics Corp
+  La  Jolla, CA 92093
+
+Copyright: 
+  Helton and Miller June 1991
+  Helton 2002
+  All rights reserved.
+
+The program was written by the authors and by:
+  David Hurst, Daniel Lamm, Orlando Merino, Robert Obar,
+  Henry Pfister, Mike Walker, John Wavrik, Lois Yu,
+  J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple. 
+  The beginnings of the program come from eran@slac.
+  Considerable recent help came from Igor Klep.
+
+
+This program was written with support from 
+  AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
+  UCSD Faculty Mentor Program,
+  and US Department of Education.
+  Primary support in 2010 is from the 
+    NSF Division of Mathematical Sciences.
+
+If you 
+  (1) are a user, 
+  (2) want to be a user, 
+  (3) refer to NCAlgebra in a publication, or 
+  (4) have had an interesting experience with NCAlgebra,
+let us know by sending an e-mail message to  
+
+  ncalg@math.ucsd.edu. 
+
+We do not want to restrict access to NCAlgebra, but do 
+  want to keep track of how it is being used.
+
+For NCAlgebra updates see the web page:
+
+  www.math.ucsd.edu/~ncalg 
+------------------------------------------------------------\
+\>", "Print",
+ CellChangeTimes->{3.5166273502882853`*^9, 3.572400694531109*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Applying the LDU decomposition.", "Section"],
+
+Cell["\<\
+
+To proof the equivalence between statements II) and  III), the matrix in \
+statement III) is factored by a LDU decomposition. The resulting diagonal \
+matrix express the conditions in statement II).\
+\>", "Text",
+ CellMargins->{{12, Inherited}, {Inherited, Inherited}},
+ FontFamily->"Courier",
+ FontWeight->"Bold"],
+
+Cell["\<\
+
+Setting the matrices to be noncommutative.\
+\>", "Text"],
+
+Cell["\<\
+SetNonCommutative[
+\tA, B, C1, D1, X,tp[B], tp[C1], tp[D1]
+\t];\
+\>", "Input",
+ CellChangeTimes->{3.516627354220388*^9}],
+
+Cell[TextData[{
+ "Defining the LMI in statement III),  where  nu  = ",
+ Cell[BoxData[
+  RowBox[{" ", 
+   SuperscriptBox["\[Gamma]", "2"]}]]]
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+BigLMI = {{X**A+tp[A]**X, X**B, tp[C1]},
+\t\t\t{Tp[B]**X, - Id, tp[D1]},
+\t\t\t{C1, D1, -nu Id}};
+tp[X]=X;
+MatrixForm[BigLMI] \
+\>", "Input",
+ CellChangeTimes->{3.516627355988481*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{
+       RowBox[{"X", "**", "A"}], "+", 
+       RowBox[{
+        RowBox[{"tp", "[", "A", "]"}], "**", "X"}]}], 
+      RowBox[{"X", "**", "B"}], 
+      RowBox[{"tp", "[", "C1", "]"}]},
+     {
+      RowBox[{
+       RowBox[{"Tp", "[", "B", "]"}], "**", "X"}], 
+      RowBox[{"-", "1"}], 
+      RowBox[{"tp", "[", "D1", "]"}]},
+     {"C1", "D1", 
+      RowBox[{"-", "nu"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.516627356656311*^9, 3.572400694652417*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+
+Applying the LDU decomposition\
+\>", "Text"],
+
+Cell["\<\
+{lower, diagon, upper, P} = NCLDUDecomposition[BigLMI
+\t, Permutation->{{2,1,3},{1,3,2}}];\
+\>", "Input"],
+
+Cell["\<\
+
+Let's examine the diagonal matrix. Those elements should be  less than  zero
+\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Table[Print[diagon[[i,i]] ], {i,3} ];", "Input"],
+
+Cell[BoxData[
+ RowBox[{"-", "1"}]], "Print",
+ CellChangeTimes->{3.516627361999798*^9, 3.5724006947171507`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "nu"}], "+", 
+  RowBox[{"D1", "**", 
+   RowBox[{"tp", "[", "D1", "]"}]}]}]], "Print",
+ CellChangeTimes->{3.516627361999798*^9, 3.572400694718872*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"X", "**", "A"}], "+", 
+  RowBox[{
+   RowBox[{"tp", "[", "A", "]"}], "**", "X"}], "-", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"X", "**", "B", "**", 
+      RowBox[{"tp", "[", "D1", "]"}]}], "+", 
+     RowBox[{"tp", "[", "C1", "]"}]}], ")"}], "**", 
+   RowBox[{"inv", "[", 
+    RowBox[{
+     RowBox[{"-", "nu"}], "+", 
+     RowBox[{"D1", "**", 
+      RowBox[{"tp", "[", "D1", "]"}]}]}], "]"}], "**", 
+   RowBox[{"(", 
+    RowBox[{"C1", "+", 
+     RowBox[{"D1", "**", 
+      RowBox[{"Tp", "[", "B", "]"}], "**", "X"}]}], ")"}]}], "+", 
+  RowBox[{"X", "**", "B", "**", 
+   RowBox[{"Tp", "[", "B", "]"}], "**", "X"}]}]], "Print",
+ CellChangeTimes->{3.516627361999798*^9, 3.5724006947211943`*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "\nThe second line is just \n\t\t",
+ Cell[BoxData[
+  RowBox[{" ", 
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["\[Gamma]", "2"], " ", "-", " ", 
+     RowBox[{
+      SubscriptBox["D", "1"], 
+      OverscriptBox[
+       SubscriptBox["D", "1"], 
+       RowBox[{"  ", "T"}]]}]}], "   ", ">", "  ", "0"}]}]]],
+ "\t\t\t\t\t\t\t\t\t1)\n\t\t\n\tand the third line is \n\t\n\t",
+ Cell[BoxData[
+  RowBox[{"    ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"X", "  ", "A"}], " ", "+", " ", 
+      RowBox[{
+       SuperscriptBox["A", "T"], " ", "X"}], "  ", "+", " ", 
+      RowBox[{"X", " ", "B", " ", 
+       SuperscriptBox["B", "T"], " ", "X"}], " ", "+"}], "..."}], "\n", 
+    "\t\t\t\t\t    ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"X", "   ", "B", "   ", 
+         OverscriptBox[
+          SubscriptBox["D", "1"], 
+          RowBox[{"  ", "T"}]]}], " ", "+", " ", 
+        OverscriptBox[
+         SubscriptBox["C", "1"], 
+         RowBox[{"  ", "T"}]]}], " ", ")"}], " ", 
+      SuperscriptBox[
+       RowBox[{"(", "  ", 
+        RowBox[{
+         SuperscriptBox["\[Gamma]", "2"], " ", "-", " ", 
+         RowBox[{
+          SubscriptBox["D", "1"], 
+          OverscriptBox[
+           SubscriptBox["D", "1"], 
+           RowBox[{"  ", "T"}]]}]}], ")"}], 
+       RowBox[{"-", "1"}]], " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"X", "   ", "B", "   ", 
+          OverscriptBox[
+           SubscriptBox["D", "1"], 
+           RowBox[{"  ", "T"}]]}], " ", "+", " ", 
+         OverscriptBox[
+          SubscriptBox["C", "1"], 
+          RowBox[{"  ", "T"}]]}], " ", ")"}], "T"]}], " ", "<", " ", "0"}], 
+    "\n", "\t"}]}]]],
+ "     \t\t2)\nTherefore, statement III)  is equivalent to statement II). To \
+prove the converse,\nIt suffices to  apply Schur complement in 2) considering \
+that inequality 1) holds."
+}], "Text"]
+}, Open  ]]
+},
+WindowToolbars->"RulerBar",
+CellGrouping->Manual,
+WindowSize->{1141, 852},
+WindowMargins->{{Automatic, 109}, {Automatic, 0}},
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{612, 792}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 172, 5, 148, "Title"],
+Cell[CellGroupData[{
+Cell[776, 31, 37, 0, 80, "Section"],
+Cell[816, 33, 5334, 150, 530, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6187, 188, 25, 0, 80, "Section"],
+Cell[6215, 190, 902, 28, 83, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7154, 223, 170, 3, 46, "Input"],
+Cell[7327, 228, 159, 2, 22, "Print"],
+Cell[7489, 232, 250, 5, 21, "Print"],
+Cell[7742, 239, 389, 8, 22, "Print"],
+Cell[8134, 249, 125, 1, 22, "Print"],
+Cell[8262, 252, 123, 1, 21, "Print"],
+Cell[8388, 255, 119, 1, 21, "Print"],
+Cell[8510, 258, 121, 1, 22, "Print"],
+Cell[8634, 261, 118, 1, 22, "Print"],
+Cell[8755, 264, 115, 1, 21, "Print"],
+Cell[8873, 267, 118, 1, 21, "Print"],
+Cell[8994, 270, 123, 1, 21, "Print"],
+Cell[9120, 273, 118, 1, 21, "Print"],
+Cell[9241, 276, 121, 1, 21, "Print"],
+Cell[9365, 279, 119, 1, 21, "Print"],
+Cell[9487, 282, 116, 1, 21, "Print"],
+Cell[9606, 285, 116, 1, 21, "Print"],
+Cell[9725, 288, 128, 1, 22, "Print"],
+Cell[9856, 291, 130, 1, 22, "Print"],
+Cell[9989, 294, 126, 1, 22, "Print"],
+Cell[10118, 297, 118, 1, 22, "Print"],
+Cell[10239, 300, 520, 11, 24, "Message"],
+Cell[10762, 313, 118, 1, 21, "Print"],
+Cell[10883, 316, 115, 1, 21, "Print"],
+Cell[11001, 319, 118, 1, 21, "Print"],
+Cell[11122, 322, 118, 1, 21, "Print"],
+Cell[11243, 325, 114, 1, 21, "Print"],
+Cell[11360, 328, 124, 1, 22, "Print"],
+Cell[11487, 331, 133, 1, 22, "Print"],
+Cell[11623, 334, 133, 1, 21, "Print"],
+Cell[11759, 337, 118, 1, 21, "Print"],
+Cell[11880, 340, 317, 6, 22, "Print"],
+Cell[12200, 348, 116, 1, 21, "Print"],
+Cell[12319, 351, 117, 1, 21, "Print"],
+Cell[12439, 354, 117, 1, 22, "Print"],
+Cell[12559, 357, 1462, 51, 693, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14058, 413, 50, 0, 80, "Section"],
+Cell[14111, 415, 325, 8, 65, "Text"],
+Cell[14439, 425, 67, 3, 49, "Text"],
+Cell[14509, 430, 130, 5, 59, "Input"],
+Cell[14642, 437, 152, 5, 32, "Text"],
+Cell[CellGroupData[{
+Cell[14819, 446, 193, 7, 89, "Input"],
+Cell[15015, 455, 1006, 30, 74, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[16048, 489, 55, 3, 49, "Text"],
+Cell[16106, 494, 115, 3, 44, "Input"],
+Cell[16224, 499, 102, 4, 68, "Text"],
+Cell[CellGroupData[{
+Cell[16351, 507, 54, 0, 29, "Input"],
+Cell[16408, 509, 110, 2, 21, "Print"],
+Cell[16521, 513, 188, 5, 22, "Print"],
+Cell[16712, 520, 740, 22, 22, "Print"]
+}, Open  ]],
+Cell[17467, 545, 1924, 59, 250, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

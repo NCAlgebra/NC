@@ -1,0 +1,146 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      2470,        103]*)
+(*NotebookOutlinePosition[      3105,        126]*)
+(*  CellTagsIndexPosition[      3061,        122]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+
+AppendTo[$Path,\"/home/ncalg/NC\"];
+
+Get[\"SetNCDir.m\"];
+
+<<NCGB.m
+<<NCMakeRelations.m
+
+AppendTo[ $Path, \"/opt/mathematica/Applications\" ];
+
+<<NCControl.m
+\
+\>", "Input"],
+
+Cell[BoxData[
+    \("You have already loaded NCGB.m"\)], "Print"]
+}, Open  ]],
+
+Cell["\<\
+SNC[
+a1, a2,a3,a4,b1,b2,c1,c2,d,u1,u2,u3,u4,v1,v2,w1,w2,z ];
+
+\
+\>", "Input"],
+
+Cell["\<\
+
+sys1 = StateSpace[ {{a1,a2},{a3,a4}},{{b1},{b2}},{{c1,c2}},{{d}} ];
+
+sys2 = StateSpace[ {{u1,u2},{u3,u4}},{{v1},{v2}},{{w1,w2}},{{z}} ];
+
+\
+\>", "Input"],
+
+Cell["\<\
+
+SeriesConnect[ sys1, sys2]
+
+FeedbackConnect[ sys1, sys2 ]
+
+ParallelConnect[ sys1, sys2 ]
+
+NCInverseSystem [ sys1 ]
+
+NCConjugateSystem[ sys1  ]
+
+TransferFunction[ s, sys1 ]
+
+Dual[ sys1 ]\
+\>", "Input"]
+},
+FrontEndVersion->"X 3.0",
+ScreenRectangle->{{0, 1024}, {0, 768}},
+WindowSize->{520, 600},
+WindowMargins->{{Automatic, 151}, {9, Automatic}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1731, 51, 184, 13, 192, "Input"],
+Cell[1918, 66, 65, 1, 23, "Print"]
+}, Open  ]],
+Cell[1998, 70, 87, 5, 72, "Input"],
+Cell[2088, 77, 164, 7, 132, "Input"],
+Cell[2255, 86, 211, 15, 222, "Input"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

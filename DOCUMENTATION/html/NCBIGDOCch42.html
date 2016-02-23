@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>42  How To Run The Systems Package </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 90--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch43.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch41.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch41.html#tailNCBIGDOCch41.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch42.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch42.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;42</span></span><br><a 
+ id="x83-45500042"></a> <span 
+class="cmr-10x-x-109">How To Run The Systems Package </span></h2>
+<!--l. 93--><p class="noindent"><span 
+class="cmr-10x-x-109">The beginner should first print out the file NCDOCUMENT.doc which explains how to use NCAlgebra. A</span>
+<span 
+class="cmr-10x-x-109">little practice with this would help.</span>
+<!--l. 97--><p class="indent">   <span 
+class="cmr-10x-x-109">To run SYSTEMS, enter</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+math
+</div>
+</td></tr></table>
+<!--l. 100--><p class="nopar"> <span 
+class="cmr-10x-x-109">at the UNIX prompt to execute Mathematica (or whatever command is appropriate for your non-UNIX</span>
+<span 
+class="cmr-10x-x-109">system), followed by</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&lt;&lt;SYStems.m
+</div>
+</td></tr></table>
+<!--l. 106--><p class="nopar"> <span 
+class="cmr-10x-x-109">at the Mathematica</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;In[1]:=
+</div>
+</td></tr></table>
+<!--l. 108--><p class="nopar"> <span 
+class="cmr-10x-x-109">prompt.</span>
+<!--l. 112--><p class="indent">   <span 
+class="cmr-10x-x-109">That is all there is to it. Here SYStems.m loads NCAlgbra.m, one of the SYSTEMS DEFINITION</span>
+<span 
+class="cmr-10x-x-109">files, plus two of the SYSTEMS UTILITY files described below.</span>
+<!--l. 117--><p class="indent">   <span 
+class="cmr-10x-x-109">These files are currently limited primarily to the study of </span><span 
+class="cmmi-10x-x-109">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> <span 
+class="cmr-10x-x-109">control of a certain class of nonlinear</span>
+<span 
+class="cmr-10x-x-109">systems. There are additional files listed within comment delimiters in the SYSTEMS file which can be</span>
+<span 
+class="cmr-10x-x-109">loaded to study slightly (but not much) different problems. This includes the option of studying</span>
+<span 
+class="cmr-10x-x-109">so-called WIA systems in place of IA systems (see SYSHinf1 for definitions) or specializing to</span>
+<span 
+class="cmr-10x-x-109">certain linear problems. A summary of files is given below. See the SYSTEMS file for further</span>
+<span 
+class="cmr-10x-x-109">description.</span>
+<!--l. 126--><p class="indent">   <span 
+class="cmr-10x-x-109">The first time you run SYStem.s you should probably test to see that everything is in order. To do this</span>
+<span 
+class="cmr-10x-x-109">you type:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+math
+&#x00A0;<br />&lt;&lt;SYStems.m
+&#x00A0;<br />&lt;&lt;SYSTEST.m
+</div>
+</td></tr></table>
+<!--l. 132--><p class="nopar"> <span 
+class="cmr-10x-x-109">while ignoreing lots of stuff which scrolls by on the screen. What counts comes at the end. You should see</span>
+<span 
+class="cmr-10x-x-109">a list which says Test1 is True, Test2 is True, etc.</span>
+<!--l. 138--><p class="indent">
+
+   <div  
+class="centerline">                                                   <span 
+class="cmr-10x-x-109">Systems Definitions</span>                                                    </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+File&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Description
+&#x00A0;<br />---------------------------------------------------------------
+&#x00A0;<br />SYSDef1PortLin.m
+&#x00A0;<br />
+&#x00A0;<br />SYSDefIA.m&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Loads&#x00A0;the&#x00A0;system&#x00A0;definitions&#x00A0;and&#x00A0;hamiltonian
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;an&#x00A0;Input-Affine&#x00A0;system&#x00A0;(see&#x00A0;EXAMPLE&#x00A0;5.2)
+&#x00A0;<br />
+&#x00A0;<br />SYSDefWIA.m&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Definition&#x00A0;of&#x00A0;a&#x00A0;WIA&#x00A0;(W-Input-Affine)&#x00A0;system
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SYSTEMS&#x00A0;file&#x00A0;could&#x00A0;be&#x00A0;edited&#x00A0;to&#x00A0;replace&#x00A0;loading&#x00A0;of
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SYSDef&#x00A0;with&#x00A0;loading&#x00A0;of&#x00A0;this&#x00A0;file.
+&#x00A0;<br />
+&#x00A0;<br />SYSDefWAccess.m
+&#x00A0;<br />
+&#x00A0;<br />SYSDef2x2.m&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Definition&#x00A0;of&#x00A0;two&#x00A0;2&#x00A0;ports&#x00A0;and&#x00A0;the&#x00A0;coupling&#x00A0;laws&#x00A0;for
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;coupling&#x00A0;them&#x00A0;as&#x00A0;well&#x00A0;as&#x00A0;hamiltonians.
+</div>
+</td></tr></table>
+<!--l. 158--><p class="nopar">
+   <div  
+class="centerline">                                  <span 
+class="cmr-10x-x-109">UTILITY FILES</span>                                                     </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+File&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Description
+&#x00A0;<br />-----------&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;---------------------------------------------------
+&#x00A0;<br />SYSSpecialize.m&#x00A0;&#x00A0;Rules&#x00A0;for&#x00A0;converting&#x00A0;systems&#x00A0;from&#x00A0;nonlinear&#x00A0;to
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;linear,&#x00A0;notation&#x00A0;changes&#x00A0;,&#x00A0;etc.
+&#x00A0;<br />
+&#x00A0;<br />SYSLinearize.m&#x00A0;&#x00A0;&#x00A0;Linearize&#x00A0;system&#x00A0;around&#x00A0;0&#x00A0;or&#x00A0;around&#x00A0;the
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;diagonal&#x00A0;x=z.&#x00A0;&#x00A0;(We&#x00A0;do&#x00A0;not&#x00A0;support&#x00A0;this&#x00A0;one)
+&#x00A0;<br />
+&#x00A0;<br />SYSHinfFormulas.m&#x00A0;&#x00A0;&#x00A0;Formulas&#x00A0;used&#x00A0;in&#x00A0;study&#x00A0;of&#x00A0;H-infinity&#x00A0;control.
+&#x00A0;<br />
+&#x00A0;<br />SYSHinf2x2Formulas.m&#x00A0;&#x00A0;&#x00A0;Formulas&#x00A0;used&#x00A0;in&#x00A0;study&#x00A0;of&#x00A0;H-infinity&#x00A0;control.
+</div>
+</td></tr></table>
+<!--l. 175--><p class="nopar">
+   <div  
+class="centerline">                 <span 
+class="cmr-10x-x-109">FILES CORRESPONDING TO RESEARCH ARTICLES</span>                          </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+File&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Description
+&#x00A0;<br />-----------------------------------------------------------------
+&#x00A0;<br />SYSHinfTAC.m An&#x00A0;executable&#x00A0;paper&#x00A0;on&#x00A0;nonlinear&#x00A0;H-infinity&#x00A0;control
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;together&#x00A0;with&#x00A0;rules&#x00A0;to&#x00A0;allow&#x00A0;conversion&#x00A0;to&#x00A0;linear&#x00A0;case.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Primarily&#x00A0;for&#x00A0;study&#x00A0;of&#x00A0;IA&#x00A0;systems.
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 187--><p class="nopar">
+<!--l. 190--><p class="indent">
+
+
+   <!--l. 191--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch43.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch41.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch41.html#tailNCBIGDOCch41.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch42.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch42.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 191--><p class="indent">   <a 
+ id="tailNCBIGDOCch42.html"></a>  
+</body></html> 

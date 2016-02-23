@@ -1,0 +1,125 @@
+
+The starting relations are the NagyFoiasBasis 
+
+The "general rules" are
+
+ x ** (Inv[1-y**x]^m) ** Inv[1-x] - (Inv[1-x**y]^m) ** (Inv[1-x] - 1)
+ x ** (Inv[1-y**x]^n) ** Inv[1-y] - (Inv[1-x**y]^n) ** Inv[1-y] - 
+    x ** (Inv[1-y**x]^n) + (Inv[1-x**y]^(n-1)) ** Inv[1-y]
+ x ** (Inv[1-y**x]^m) ** Rt[1-y**x] ** Inv[1-x] - 
+    (Inv[1-x**y]^m) ** Rt[1-x**y] ** (Inv[1-x]-1)
+ x ** (Inv[1-y**x]^n) ** Rt[1-y**x] ** Inv[1-y] -((Inv[1-x**y]^n) -
+     (Inv[1-x**y]^(n-1))) ** Rt[1-x**y] ** Inv[1-y] -
+      x ** (Inv[1-y**x]^n) ** Rt[1-y**x]
+ y ** (Inv[1-x**y]^n) ** Inv[1-x] -((Inv[1-y**x]^n) - 
+      (Inv[1-y**x]^(n-1))) ** Inv[1-x] -y ** (Inv[1-x**y]^n)
+ y ** (Inv[1-x**y]^m) ** Inv[1-y] - (Inv[1-y**x]^m) ** (Inv[1-y] - 1)
+ y ** (Inv[1-x**y]^n) ** Rt[1-x**y] ** Inv[1-x] - 
+     ((Inv[1-y**x]^n) - (Inv[1-y**x]^(n-1))) ** Rt[1-y**x] ** Inv[1-x] -
+     y ** (Inv[1-x**y]^n) ** Rt[1-x**y] 
+ y ** (Inv[1-x**y]^m) ** Rt[1-x**y] ** Inv[1-y]  - 
+      (Inv[1-y**x]^m) ** Rt[1-y**x] ** (Inv[1-y]-1)
+ Inv[1-x] ** (Inv[1-y**x]^m) ** Inv[1-x] - 
+       Inv[1-x] ** (Inv[1-x**y]^m) ** Inv[1-x] -
+       (Inv[1-y**x]^m) ** Inv[1-x] + Inv[1-x] ** (Inv[1-x**y]^m) 
+ Inv[1-x] ** (Inv[1-y**x]^n) ** Inv[1-y] - Inv[1-x] ** ((Inv[1-x**y]^n) -
+     (Inv[1-x**y]^(n-1))) ** Inv[1-y] -
+     (Inv[1-y**x]^n) ** (Inv[1-y]-1) - Inv[1-x] ** (Inv[1-y**x]^n)
+ Inv[1-x] ** (Inv[1-y**x]^m) ** Rt[1-y**x] ** Inv[1-x] - 
+    Inv[1-x] **  (Inv[1-x**y]^m) ** Rt[1-x**y] ** (Inv[1-x]-1) -
+    (Inv[1-y**x]^m) ** Rt[1-y**x] ** Inv[1-x]
+ Inv[1-x] ** (Inv[1-y**x]^n) ** Rt[1-y**x] ** Inv[1-y] - 
+    Inv[1-x] ** ((Inv[1-x**y]^n) - (Inv[1-x**y]^(n-1))) **
+    Rt[1-x**y] ** Inv[1-y]  -
+    (Inv[1-y**x]^n) ** Rt[1-y**x] ** (Inv[1-y] - 1)  -
+    Inv[1-x] ** (Inv[1-y**x]^n) ** Rt[1-y**x]
+ Inv[1-y] ** (Inv[1-y**x]^n) ** Inv[1-x] -
+   Inv[1-y] ** (Inv[1-y**x]^(n-1)) ** Inv[1-x]  + 
+   (Inv[1-x**y]^n) - Inv[1-y]**(Inv[1-x**y]^n) -
+   (Inv[1-x**y]^n)**Inv[1-x] + Inv[1-y]**(Inv[1-x**y]^n)**Inv[1-x];
+ Inv[1-y] ** (Inv[1-y**x]^m) ** Inv[1-y] - 
+    Inv[1-y] ** (Inv[1-x**y]^m) ** Inv[1-y] +
+    (Inv[1-x**y]^m) ** Inv[1-y] - Inv[1-y] ** (Inv[1-y**x]^m)
+ Inv[1-y] ** (Inv[1-y**x]^n) ** Rt[1-y**x]**Inv[1-x] - 
+   Inv[1-y] ** (Inv[1-y**x]^(n-1))**Rt[1-y**x] ** Inv[1-x]  + 
+   (Inv[1-x**y]^n)**Rt[1-x**y] - 
+   Inv[1-y]**(Inv[1-x**y]^n)**Rt[1-x**y] -
+   (Inv[1-x**y]^n)**Rt[1-x**y]**Inv[1-x] + 
+   Inv[1-y]**(Inv[1-x**y]^n)**Rt[1-x**y]**Inv[1-x];
+ Inv[1-y] ** (Inv[1-y**x]^m) ** Rt[1-y**x] ** Inv[1-y] - 
+   Inv[1-y] **(Inv[1-x**y]^m) ** Rt[1-x**y] ** Inv[1-y] +
+   (Inv[1-x**y]^m) ** Rt[1-x**y] ** Inv[1-y] -
+    Inv[1-y] ** (Inv[1-y**x]^m) ** Rt[1-y**x]
+
+The "Particular rules" are
+
+ Inv[1-x] ** y ** Inv[1-x**y] - Inv[1-x] ** Inv[1-x**y] - 
+    y ** Inv[1-x**y] + Inv[1-x]
+ Inv[1-y] ** x ** Inv[1-y**x] - Inv[1-y] ** Inv[1-y**x] - 
+   x ** Inv[1-y**x] + Inv[1-y] 
+ Inv[1-x**y] ** x - x ** Inv[1-y**x];
+ Inv[1-y**x] ** y - y ** Inv[1-x**y];
+ Rt[1-x**y] ** x - x ** Rt[1-y**x];
+ Rt[1-y**x] ** y - y ** Rt[1-x**y];
+ Rt[1 - x**y] ** Inv[y] - Inv[y] ** Rt[1 - y**x];
+ Rt[1 - x**y] ** Inv[1-x**y] - Inv[1-x**y] ** Rt[1 - x**y];
+ Rt[1 - y**x] ** Inv[x] - Inv[x] ** Rt[1 - x**y];
+ Rt[1 - y**x] ** Inv[1-y**x] - Inv[1-y**x] ** Rt[1 - y**x];
+ Inv[x] ** Rt[1 - x**y] ** Inv[1-x] - 
+    Rt[1 - y**x] ** Inv[1-x] - Inv[x] ** Rt[1 - x**y]
+ Inv[y] ** Rt[1 - y**x] ** Inv[1-y] - Rt[1 - x**y] **
+ Inv[1-y] - Inv[y] ** Rt[1 - y**x]
+
+The "EB rules" are
+  
+ Inv[x] ** x - Id
+ x ** Inv[x] - Id
+ Inv[y] ** y - Id
+ y ** Inv[y] - Id
+ x ** y ** Inv[1-x**y] - Inv[1-x**y] + Id
+ y ** x ** Inv[1-y**x] - Inv[1-y**x] + Id
+ Inv[1-x**y] ** x ** y - Inv[1-x**y] + Id
+ Inv[1-y**x] ** y ** x -  Inv[1-y**x] + Id
+ Inv[1-y**x] ** Inv[x] - y ** Inv[1-x**y] - Inv[x]
+ Inv[1-x**y] ** Inv[y] - x ** Inv[1-y**x] - Inv[y]
+ Inv[x] ** Inv[1-x**y] - y ** Inv[1-x**y] - Inv[x]
+ Inv[y] ** Inv[1-y**x] - x ** Inv[1-y**x] - Inv[y]
+ Inv[1-y**x] ** y - y ** Inv[1-x**y]
+ Inv[1-x**y] ** x - x ** Inv[1-y**x]
+
+The "RESOL rules" are
+
+ Inv[x] ** x - Id
+ x ** Inv[x] - Id
+ Inv[1-x] ** x - Inv[1-x] + Id
+ x ** Inv[1-x] - Inv[1-x] + Id
+ Inv[1-x] ** Inv[x] - Inv[1-x] - Inv[x]
+ Inv[x] ** Inv[1-x] - Inv[1-x] - Inv[x]
+ Inv[y] ** y - Id
+ y ** Inv[y] - Id
+ Inv[1-y] ** y - Inv[1-y] + Id
+ y ** Inv[1-y] - Inv[1-y] + Id
+ Inv[1-y] ** Inv[y] - Inv[1-y] - Inv[y]
+ Inv[y] ** Inv[1-y] - Inv[1-y] - Inv[y]
+
+The rules which define root are
+ Rt[1-x**y]^2 - 1 - x**y
+ Rt[1-y**x]^2 - 1 - y**x
+
+and
+
+   OperatorSignature[1-x**y]**  OperatorSignature[1-x**y] - 1
+   OperatorSignature[1-y**x]**  OperatorSignature[1-y**x] - 1
+   x**OperatorSignature[1-x**y] - OperatorSignature[1-y**x]**x
+   OperatorSignature[1-x**y]**y - y**OperatorSignature[1-y**x]
+   (1 - x**y)**OperatorSignature[1-x**y] - OperatorSignature[1-x**y]**(1 - x**y)
+   (1 - y**x)**OperatorSignature[1-y**x] - OperatorSignature[1-y**x]**(1 - y**x)
+
+The order of the symbols is
+
+      x < y < OperatorSignature[1-x**y] < OperatorSignature[1-y**x] <
+         Inv[x] < Inv[1-x] < Inv[y] < Inv[1-y] <
+         Inv[1-x**y] < Inv[1-y**x] < Rt[1-x**y] < 
+         Rt[1-y**x] .
+
+Problem: Find a Groebner Basis.

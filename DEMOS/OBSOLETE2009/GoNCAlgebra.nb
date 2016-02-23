@@ -1,0 +1,281 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7037,        213]*)
+(*NotebookOutlinePosition[      7688,        236]*)
+(*  CellTagsIndexPosition[      7644,        232]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["BASIC DEMO OF NC GROEBNER BASIS COMMANDS", "Title"],
+
+Cell["\<\
+For Windows Version Only
+           (For unix just reset the path or run this in the NC/NCAlgebra \
+directory )
+
+Evaluate the cell below at the beginning of every session using NCGB.\
+\>", \
+"Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\n\)\(\(Get["\<NC`\>"];\)\n
+    \(Get["\<NCGB.m\>"\ ];\)\n
+    \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(\*"\<\"\"\>"\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("You are using the version of NCAlgebra which is \
+found in "\[InvisibleSpace]"/home/ncalg/NC"\[InvisibleSpace]"."\),
+      SequenceForm[ 
+      "You are using the version of NCAlgebra which is found in ", 
+        "/home/ncalg/NC", "."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("You can now use \"<< NCAlgebra`\" to load NCAlgebra or \"<< NCGB`\" to \
+load NCGB."\)], "Print"],
+
+Cell[BoxData[
+    \(\*"\<\"\"\>"\)], "Print"],
+
+Cell[BoxData[
+    \("You have already loaded NCGB.m"\)], "Print"]
+}, Open  ]],
+
+Cell[TextData[{
+  "The next few cells are a very short demo and are useful in debugging an \
+initial installation of NCGB.   This is described in the NCAlgebra document.  \
+We demonstrate the NCProcess\nversion of NCGB which sorts the output; first \
+we set options to make it\nrun fast",
+  StyleBox["  Note:  You will have to exit Yap after a dvi file is displayed \
+on your screen to continue using Mathematica.\n",
+    FontSlant->"Italic"]
+}], "Text"],
+
+Cell[BoxData[{
+    \(ClearMonomialOrderAll[]\), "\n", 
+    \(SetMonomialOrder[\ b, a\ ]\)}], "Input"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(gbFast[{p1_, \ p2_}, \ numbIters_, 
+          Filename_] := \ \ \ \ \ \ \ \ NCProcess[\ {\ p1, p2\ }, 
+          numbIters, \n\ \ \ \ "\<Filename\>", SBByCat -> False\ , \ 
+          RR \[Rule] False, \ NCCV \[Rule] False\ ];\)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\(gbFast[{\ b ** b\  - \ \ b ** a, \ 
+        b ** a ** b - \ \ a ** b ** a}, \ 2, 
+      Example]\)\(\[IndentingNewLine]\)
+    \)\)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Outputting results to the stream \"\>", 
+        "\[InvisibleSpace]", 
+        InterpretationBox[
+          StyleBox[\(OutputStream["\<Filename.tex\>", \ 19]\),
+            ShowStringCharacters->True,
+            NumberMarks->True],
+          Format[ 
+            OutputStream[ "Filename.tex", 19], InputForm],
+          Editable->True,
+          AutoDelete->True]}],
+      SequenceForm[ "Outputting results to the stream ", 
+        Format[ 
+          OutputStream[ "Filename.tex", 19], InputForm]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Done outputting results to the stream \"\>", 
+        "\[InvisibleSpace]", 
+        InterpretationBox[
+          StyleBox[\(OutputStream["\<Filename.tex\>", \ 19]\),
+            ShowStringCharacters->True,
+            NumberMarks->True],
+          Format[ 
+            OutputStream[ "Filename.tex", 19], InputForm],
+          Editable->True,
+          AutoDelete->True]}],
+      SequenceForm[ "Done outputting results to the stream ", 
+        Format[ 
+          OutputStream[ "Filename.tex", 19], InputForm]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    RowBox[{\(DeleteFile::"nffil"\), \(\(:\)\(\ \)\), "\<\"File not found \
+during \\!\\(DeleteFile[\\\"Filename.dvi\\\"]\\). \\!\\(\\*ButtonBox[\\\"More\
+\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::nffil\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \({{}, {}, {b ** a - b ** b, a ** b ** b - b ** b ** b}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\[IndentingNewLine]\)], "Input"],
+
+Cell[TextData[{
+  StyleBox["Important:",
+    FontWeight->"Bold",
+    FontVariations->{"Underline"->True}],
+  "  After you run NCProcess and a .dvi  file is produced ",
+  StyleBox["you must exit Yap",
+    FontWeight->"Bold",
+    FontVariations->{"Underline"->True}],
+  " in order to continue using Mathematica."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+OTHER NCGB COMMANDS\
+\>", "Subtitle"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\ \)\( (*\ 
+      Here\ is\ a\ slower\ setting\ \ of\ options\ for\ NCProcess\
+\[IndentingNewLine]which\ removes\ "\<redundant \>"\ output\ \
+\(\(polynomials\)\(.\)\)\ \[IndentingNewLine]*) \)\(\[IndentingNewLine]\)\( \
+(*\[IndentingNewLine]\ ClearMonomialOrderAll[]\n
+      \ \ SetMonomialOrder[\ b, a\ ]\[IndentingNewLine]
+      \(NCProcess[\ {\ b ** b\  - \ \ b ** a, \ 
+            b ** a ** b - \ \ a ** b ** a\ \ }, 2, \n\t"\<Example\>", 
+          SBByCat -> False\ \ ];\)\[IndentingNewLine]*) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(\[IndentingNewLine]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(\ \ \)\( (*\ 
+      The\ next\ command\ is\ the\ raw\ GB\ producer; \ \ \ No\ sorting\ of\ \
+the\ output\ \[IndentingNewLine]*) \)\(\[IndentingNewLine]\)\(\ \)\( \
+(*\[IndentingNewLine]\ 
+      ClearMonomialOrderAll[]\n\ 
+        SetMonomialOrder[\ b, 
+          a\ ]\[IndentingNewLine]NCMakeGB[{\ b ** b\  - \ \ b ** a, \ 
+            b ** a ** b - \ \ a ** b ** a\ \ }, 
+          2]\[IndentingNewLine]*) \)\(\[IndentingNewLine]\)\)\)], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{1151, 884},
+WindowMargins->{{Automatic, 40}, {Automatic, 37}},
+Magnification->1.5
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 57, 0, 230, "Title"],
+Cell[1836, 55, 208, 7, 121, "Text"],
+
+Cell[CellGroupData[{
+Cell[2069, 66, 104, 3, 108, "Input"],
+Cell[2176, 71, 45, 1, 32, "Print"],
+Cell[2224, 74, 310, 6, 32, "Print"],
+Cell[2537, 82, 118, 2, 32, "Print"],
+Cell[2658, 86, 45, 1, 32, "Print"],
+Cell[2706, 89, 65, 1, 32, "Print"]
+}, Open  ]],
+Cell[2786, 93, 454, 8, 146, "Text"],
+Cell[3243, 103, 101, 2, 62, "Input"],
+Cell[3347, 107, 289, 4, 85, "Input"],
+
+Cell[CellGroupData[{
+Cell[3661, 115, 192, 4, 85, "Input"],
+Cell[3856, 121, 590, 15, 32, "Print"],
+Cell[4449, 138, 600, 15, 32, "Print"],
+Cell[5052, 155, 304, 4, 33, "Message"],
+Cell[5359, 161, 88, 1, 38, "Output"]
+}, Open  ]],
+Cell[5462, 165, 52, 1, 62, "Input"],
+Cell[5517, 168, 322, 9, 46, "Text"],
+
+Cell[CellGroupData[{
+Cell[5864, 181, 48, 3, 125, "Subtitle"],
+Cell[5915, 186, 565, 9, 246, "Input"],
+Cell[6483, 197, 52, 1, 62, "Input"],
+Cell[6538, 200, 471, 9, 200, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

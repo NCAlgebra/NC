@@ -1,0 +1,762 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 3.0,
+MathReader 3.0, or any compatible application. The data for the notebook 
+starts with the line of stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     22516,        668]*)
+(*NotebookOutlinePosition[     23360,        698]*)
+(*  CellTagsIndexPosition[     23316,        694]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox[\(load\ NCAlgebra.m\),
+            ButtonData:>" <<NCAlgebra.m ",
+            ButtonStyle->"EvaluateCell",
+            ButtonSource->ButtonData], 
+          ButtonBox["**"], 
+          ButtonBox["+"], 
+          ButtonBox["-"], 
+          ButtonBox["\[Placeholder]"]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Main Commands", "Section",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {GridBox[{
+              {
+                ButtonBox["SetOutputPretty",
+                  ButtonData:>" SetOutput[all->True]",
+                  ButtonStyle->"EvaluateCell",
+                  ButtonSource->ButtonData], 
+                ButtonBox[\(Set\ OutputUgly\),
+                  ButtonData:>" SetOutput[all->False] ",
+                  ButtonStyle->"EvaluateCell",
+                  ButtonSource->ButtonData]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]], 
+          
+          ButtonBox[
+            \(DirectionalD[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetNonCommutative[\[SelectionPlaceholder]]\)], 
+          
+          ButtonBox[
+            \(ComplexD[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(NCExpand[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(ComplexCoordinates[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(NCCollect[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)], 
+          
+          ButtonBox[\(NCSimplifyRational[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(NCCollectSymmetric[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox["",
+            ButtonData:>" <<NCSR6 ",
+            ButtonStyle->"EvaluateCell",
+            ButtonSource->ButtonData]},
+        {
+          
+          ButtonBox[
+            \(NCStrongCollect[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(TimesToNCM[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(NCTermsOfDegree[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder], \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(NCMonomial[\[SelectionPlaceholder]\^\[Placeholder]]\)]},
+        
+        {
+          
+          ButtonBox[
+            \(Substitute[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)],
+           
+          
+          ButtonBox[
+            \(NCSolve[\[SelectionPlaceholder] == \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(SubstituteSymmetric[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(NCBackward[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommuteEverything[\[SelectionPlaceholder]]\),
+            ButtonFunction:>(FrontEndExecute[ {
+                FrontEnd`NotebookApply[ 
+                  FrontEnd`InputNotebook[ ], #, Placeholder]}]&),
+            ButtonStyle->"Paste"], 
+          ButtonBox[\(NCForward[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(NCMToMatMult[\[SelectionPlaceholder]]\)], 
+          ButtonBox[""]},
+        {GridBox[{
+              {
+                StyleBox[
+                  ButtonBox[\(\ \ \ tpMat[\[SelectionPlaceholder]]\ \ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(\ \ ajMat[\[SelectionPlaceholder]]\)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(coMat[\[SelectionPlaceholder]]\ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], ""}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]], 
+          
+          ButtonBox[
+            \(Transform[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Operations on Elements in an Algebra", "Section",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {GridBox[{
+              {
+                ButtonBox[\(inv[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\[SelectionPlaceholder]\^\(-1\)\),
+                  ButtonData:>" inv[\[Placeholder]]"]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          ButtonBox[\(invL[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(invR[\[SelectionPlaceholder]]\)]},
+        {GridBox[{
+              {
+                ButtonBox[\(tp[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\ \ \ \[SelectionPlaceholder]\^T\ \),
+                  ButtonData:>" tp[\[Placeholder]] "]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {GridBox[{
+              {
+                ButtonBox[\(aj[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\ \ \ \(\[SelectionPlaceholder]\^*\)\ \),
+                  ButtonData:>" aj[\[Placeholder]] "]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {GridBox[{
+              {
+                ButtonBox[\(co[\[SelectionPlaceholder]]\)], 
+                ButtonBox[\(\ \ \ \(\[SelectionPlaceholder]\&-\)\ \ \ \),
+                  ButtonData:>" co[\[Placeholder]] "]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          ButtonBox[\(invMat2[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(tpMat[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(ajMat[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(coMat[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Vector Differentiation"]], "Section",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {
+          
+          ButtonBox[
+            \(DirectionalD[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(Grad[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(CriticalPoint[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+              \)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Block Matrix Manipulation", "Section",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {GridBox[{
+              {
+                ButtonBox[
+                  TagBox[
+                    RowBox[{"(", GridBox[{
+                         
+                           {"\[SelectionPlaceholder]", 
+                            "\[SelectionPlaceholder]"},
+                         
+                           {"\[SelectionPlaceholder]", 
+                            "\[SelectionPlaceholder]"}
+                          }], ")"}],
+                    (MatrixForm[ #]&)]], 
+                ButtonBox[
+                  TagBox[
+                    RowBox[{
+                      RowBox[{"(", GridBox[{
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"}
+                            }], ")"}], " "}],
+                    (MatrixForm[ #]&)]], 
+                ButtonBox[
+                  TagBox[
+                    RowBox[{"(", GridBox[{
+                          {"\[SelectionPlaceholder]"},
+                          {"\[SelectionPlaceholder]"}
+                          }], ")"}],
+                    (MatrixForm[ #]&)]], 
+                ButtonBox[
+                  TagBox[
+                    RowBox[{
+                      RowBox[{"(", GridBox[{
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"},
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"},
+                           
+                             {"\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]", 
+                              "\[SelectionPlaceholder]"}
+                            }], ")"}], " "}],
+                    (MatrixForm[ #]&)]]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridFrame->False,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          
+          ButtonBox[
+            \(MatMult[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {GridBox[{
+              {
+                StyleBox[
+                  ButtonBox[\(\ \ \ tpMat[\[SelectionPlaceholder]]\ \ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(\ \ ajMat[\[SelectionPlaceholder]]\)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}], 
+                StyleBox[
+                  ButtonBox[\(coMat[\[SelectionPlaceholder]]\ \)],
+                  ButtonBoxOptions->{ButtonEvaluator->None,
+                  ButtonSource->Automatic}]}
+              },
+            RowSpacings->0,
+            ColumnSpacings->0,
+            GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]},
+        {
+          ButtonBox[\(NCMToMatMult[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(invMat2[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(GaussElimination[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(Cascade[\[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(Chain[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(Redheffer[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(DilationHalmos[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SchurComplementTop[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SchurComplementBtm[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Setting Properties of an Element", "Section",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox[\(SetNonCommutative[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetSelfAdjoint[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetCommutative[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SelfAdjointQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommuteEverything[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetIsometry[\[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(SetCommutingOperators[\[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)], 
+          ButtonBox[\(IsometryQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(LeftQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetCoIsometry[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommutativeQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(CoIsometryQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(CommutativeAllQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetUnitary[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[""], 
+          ButtonBox[\(UnitaryQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[""], 
+          ButtonBox[\(SetProjection[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[""], 
+          ButtonBox[\(ProjectionQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetInv[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SetSignature[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(ExpandQ[\[SelectionPlaceholder]]\)], 
+          ButtonBox[\(SignatureQ[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Setting Properties of Functions", "Section",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox[\(SetSesquilinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetSesq[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SesquilinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetBilinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(BilinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetLinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(LinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetConjugateLinear[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(ConjugateLinearQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetIdempotent[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(IdempotentQ[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(SetCommutingFunctions[\[SelectionPlaceholder]]\)]},
+        {
+          ButtonBox[\(NCAntihomo[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Truly Weird Commands", "Section",
+  CellDingbat->None],
+
+Cell["You will never want to use these commands", "Text",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {
+          
+          ButtonBox[
+            \(NCTermArray[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+              \[SelectionPlaceholder]]\)]},
+        {
+          
+          ButtonBox[
+            \(CriticalPoint[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+              \)]},
+        {
+          ButtonBox[\(NCReconstructFromTermArray[\[SelectionPlaceholder]]\)]},
+        
+        {
+          ButtonBox[\(NCDecompose[\[SelectionPlaceholder]]\)]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NCGrobner Bases", "Section",
+  CellDingbat->None],
+
+Cell[TextData[{
+  " You must have loaded C++ files and Compiled\nWe are sure that this work \
+under Solaris 5.??\n\nYou can get the files from the NCAlgebra home page\n",
+  ButtonBox[" http://math.ucsd.edu/~ncalg",
+    ButtonData:>"",
+    ButtonStyle->"Hyperlink"],
+  "\n \n",
+  Cell[BoxData[GridBox[{
+          {
+            ButtonBox[\(SetKnowns[\[SelectionPlaceholder]]\)]},
+          {
+            ButtonBox[\(SetUnknowns[\[SelectionPlaceholder]]\)]},
+          {
+            ButtonBox[\(SetMonomialOrder[\[SelectionPlaceholder]]\)]},
+          {
+            
+            ButtonBox[
+              \(NCMakeGB[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+                \)]},
+          {
+            
+            ButtonBox[
+              \(NCProcess1[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+                \)]},
+          {
+            
+            ButtonBox[
+              \(NCProcess2[\[SelectionPlaceholder], \[SelectionPlaceholder]]
+                \)]},
+          {
+            
+            ButtonBox[
+              \(NCProcess[\[SelectionPlaceholder], \[SelectionPlaceholder], 
+                \[SelectionPlaceholder]]\)]},
+          {
+            
+            ButtonBox[
+              \(NCSimplifyRationalX1[\[SelectionPlaceholder], 
+                \[SelectionPlaceholder], \[SelectionPlaceholder]]\)]},
+          {
+            
+            ButtonBox[
+              \(NCSimplifyAll[\[SelectionPlaceholder], 
+                \[SelectionPlaceholder], \[SelectionPlaceholder]]\)]}
+          },
+        RowSpacings->0,
+        ColumnSpacings->0,
+        GridFrame->False,
+        GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+    CellDingbat->None]
+}], "Text",
+  FormatType->TextForm]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["SYStems", "Section",
+  CellDingbat->None],
+
+Cell[TextData[{
+  " \n",
+  Cell[BoxData[GridBox[{
+          {
+            ButtonBox[""], 
+            ButtonBox[""]},
+          {
+            ButtonBox["",
+              ButtonData:>" NotebookOpen[ \"BRLdemo.nb\"] ",
+              ButtonStyle->"Evaluate",
+              ButtonSource->ButtonData], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSSpecialize.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]},
+          {
+            StyleBox[
+              ButtonBox[\(<< SYSDefIA.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSLinearize.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]},
+          {
+            StyleBox[
+              ButtonBox[\(<< SYSDef2x2.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSHinfFormulas.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]},
+          {
+            StyleBox[
+              ButtonBox[""],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}], 
+            StyleBox[
+              ButtonBox[\(<< \ SYSHinfFormulas2x2.m\)],
+              ButtonBoxOptions->{ButtonEvaluator->None,
+              ButtonStyle->"CopyEvaluateCell",
+              ButtonSource->Automatic}]}
+          },
+        RowSpacings->0,
+        ColumnSpacings->0,
+        GridFrame->False,
+        GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+    CellDingbat->None]
+}], "Text",
+  FormatType->TextForm]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Demos", "Section",
+  CellDingbat->None],
+
+Cell[BoxData[GridBox[{
+        {
+          ButtonBox["BoundedRealLemma",
+            ButtonData:>" NotebookOpen[\"NCAlgebra/DemoBRL.nb\"] ",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox[\(Simplifying\ an\ Expression\),
+            ButtonData:>" NotebookOpen[\"NCAlgebra/DemoSimplify.nb\"]",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox[""]},
+        {
+          ButtonBox["Starting",
+            ButtonData:>" NotebookOpen[ \"NCAlgebra/DemoGB1.nb\"] ",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox["MatrixInverse",
+            ButtonData:>" NotebookOpen[\"NCAlgebra/DemoGBM.nb\"] ",
+            ButtonStyle->"Evaluate",
+            ButtonSource->ButtonData]},
+        {
+          ButtonBox[""]}
+        },
+      RowSpacings->0,
+      ColumnSpacings->0,
+      GridFrame->False,
+      GridDefaultElement:>ButtonBox[ "\\[Placeholder]"]]], "Input",
+  CellDingbat->None]
+}, Open  ]]
+},
+FrontEndVersion->"X 3.0",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+CellGrouping->Manual,
+WindowSize->{600, 644},
+WindowMargins->{{Automatic, 9}, {Automatic, 62}},
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PaperSize"->{612, 792},
+"PaperOrientation"->"Portrait",
+"Magnification"->1},
+ShowGroupOpenCloseIcon->True,
+Magnification->1
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1709, 49, 470, 14, 36, "Input"],
+
+Cell[CellGroupData[{
+Cell[2204, 67, 53, 1, 52, "Section"],
+Cell[2260, 70, 4045, 107, 280, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6342, 182, 76, 1, 52, "Section"],
+Cell[6421, 185, 2162, 58, 240, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8620, 248, 82, 1, 52, "Section"],
+Cell[8705, 251, 612, 20, 80, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9354, 276, 65, 1, 52, "Section"],
+Cell[9422, 279, 3932, 100, 314, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13391, 384, 72, 1, 52, "Section"],
+Cell[13466, 387, 1815, 45, 278, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[15318, 437, 71, 1, 52, "Section"],
+Cell[15392, 440, 1171, 32, 300, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16600, 477, 60, 1, 52, "Section"],
+Cell[16663, 480, 78, 1, 32, "Text"],
+Cell[16744, 483, 667, 21, 102, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17448, 509, 55, 1, 52, "Section"],
+Cell[17506, 512, 1723, 51, 320, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19266, 568, 47, 1, 52, "Section"],
+Cell[19316, 571, 2048, 56, 142, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[21401, 632, 45, 1, 52, "Section"],
+Cell[21449, 635, 1051, 30, 146, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

@@ -1,0 +1,28 @@
+
+Noncommutative polynomials are created numbers,indeterminants
+and the operations of addition and multiplication(e.g., $x+2 y +
+z w^2$). Loosely speaking, an indeterminant is just a variable,
+but one does not think of it as a 'real' variable, a 
+'complex' variable or any other 'type' of variable.
+It is traditional in mathematics to use only single characters
+for indeterminants (e.g.,$x$, $y$, and $\alpha$). Others
+would use words for indeterminants (e.g., $height$ rather than
+$h$). In our code, we allow these indeterminant names as well as
+more complicated Mathematica constructs such as
+$$
+Inv[x], Inv[y], Inv[1-x**y], Rt[x] \, .
+$$
+In fact, we allow $f[expr]$ to be an indeterminant if $expr$
+is an expression and $f$ is a Mathematica symbol which has no
+Mathematica code associated to it (e.g., $f= Dummy$ or $f=Joe$
+but NOT $f=List$ or $f=Plus$ or $f=inv$ if you are running
+NCAlgebra).
+
+\noindent
+NOTE: We will be interested in collections of polynomials
+which have relation to real problems. If one uses the
+indeterminant $Inv[x]$, then it is reasonable to assume
+that the indeterminant will correspond to the inverse of
+something and that $x Inv[x] - 1$ and $Inv[x] x - 1$
+are starting relations.
+

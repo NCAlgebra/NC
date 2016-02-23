@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>47 Glossary For System Hamiltonian Calculations</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1411--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCli3.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch46.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch46.html#tailNCBIGDOCch46.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch47.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch47.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;47</span></span><br><a 
+ id="x88-47100047"></a><span 
+class="cmbx-10x-x-109">Glossary For System Hamiltonian Calculations</span></h2>
+<!--l. 1414--><p class="noindent"><span 
+class="cmr-10x-x-109">This glossary contains expressions available for manipulation, functions available for evaluation, and</span>
+<span 
+class="cmr-10x-x-109">substitution rules all prefaced by ru.</span>
+   <div  
+class="centerline">                                                      <span 
+class="cmbx-10x-x-109">Hamiltonians</span>                                               </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+These&#x00A0;formulas&#x00A0;contain&#x00A0;mixed&#x00A0;state&#x00A0;and&#x00A0;dual&#x00A0;variables&#x00A0;(IA&#x00A0;systems,&#x00A0;sec&#x00A0;5.2):
+&#x00A0;<br />HWUY&#x00A0; =&#x00A0;Hamiltonian&#x00A0;for&#x00A0;the&#x00A0;system&#x00A0;in&#x00A0;SYSDefIA.m&#x00A0;.
+&#x00A0;<br />HWU =&#x00A0;HWUY/.Y-&gt;G2[x,W,U];
+&#x00A0;<br />HWY =&#x00A0;HWUY/.U-&gt;g[z,Y];
+&#x00A0;<br />HW =&#x00A0;HWY/.Y-&gt;G2[x,W,U];
+&#x00A0;<br />
+&#x00A0;<br />These&#x00A0;formulas&#x00A0;contain&#x00A0;state&#x00A0;variables&#x00A0;only&#x00A0;(IA&#x00A0;systems):
+&#x00A0;<br />sHWUY =&#x00A0;HWUY/.ruxz;
+&#x00A0;<br />sHWU =&#x00A0;HWU/.ruxz;
+&#x00A0;<br />sHWY =&#x00A0;HWY/.ruxz;
+&#x00A0;<br />sHW =&#x00A0;HW/.ruxz;
+&#x00A0;<br />
+&#x00A0;<br />These&#x00A0;formulas&#x00A0;contain&#x00A0;dual&#x00A0;variables&#x00A0;only&#x00A0;(IA&#x00A0;systems):
+&#x00A0;<br />dHWUY =&#x00A0;HWUY//.rudual;
+&#x00A0;<br />dHWU =&#x00A0;HWU//.rudual;
+&#x00A0;<br />dHWY =&#x00A0;HWY//.rudual;
+&#x00A0;<br />dHW =&#x00A0;HW//.rudual;
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1440--><p class="nopar"> <div  
+class="centerline">                            <span 
+class="cmbx-10x-x-109">Extremizing Hamiltonians</span>                                       </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />ricd =&#x00A0;Riccati&#x00A0;from&#x00A0;bounded&#x00A0;real&#x00A0;lemma&#x00A0;for&#x00A0;SISO&#x00A0;systems&#x00A0;(sec&#x00A0;5.1)
+&#x00A0;<br />
+&#x00A0;<br />CritW[x_,z_,b_]&#x00A0;=&#x00A0;value&#x00A0;of&#x00A0;W&#x00A0;which&#x00A0;makes&#x00A0;Grad[sHW,W]=0(both&#x00A0;IA&#x00A0;and&#x00A0;WIA&#x00A0;systems).
+&#x00A0;<br />
+&#x00A0;<br />sHWo&#x00A0; =&#x00A0;max&#x00A0;sHW&#x00A0;(IA&#x00A0;systems)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0; &#x00A0;&#x00A0;&#x00A0;W
+&#x00A0;<br />
+&#x00A0;<br />sHWoWIA&#x00A0; =&#x00A0;max&#x00A0;sHW&#x00A0;(WIA&#x00A0;systems)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0; &#x00A0;&#x00A0;&#x00A0;W
+&#x00A0;<br />
+&#x00A0;<br />CritU[x_,z_] =&#x00A0;value&#x00A0;of&#x00A0;U&#x00A0;which&#x00A0;makes&#x00A0;Grad[sHWU,U]=0&#x00A0;(IA&#x00A0;systems).
+&#x00A0;<br />
+&#x00A0;<br />RULES&#x00A0;FOR&#x00A0;CRITICAL&#x00A0;VALUES:
+&#x00A0;<br />
+&#x00A0;<br />ruCritW&#x00A0;=&#x00A0;{W&#x00A0;-&gt;&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;tp[GEz[x,&#x00A0;z]]};
+&#x00A0;<br />
+&#x00A0;<br />ruCritU&#x00A0;=&#x00A0;{U&#x00A0;-&gt;&#x00A0;-inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]}
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1466--><p class="nopar"> <div  
+class="centerline">                                <span 
+class="cmbx-10x-x-109">Nonlinear Riccatis</span>                                            </div>
+<!--l. 1469--><p class="indent">   <span 
+class="cmr-10x-x-109">THE DGKF RICCATIS</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+IAX[x_] =&#x00A0;XX[x]&#x00A0;**&#x00A0;(A[x]&#x00A0;-&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x])+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(-tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;+&#x00A0;tp[A[x]])&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[x]]&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0; XX[x]&#x00A0;**&#x00A0;(B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;-&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]])&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[XX[x]]&#x00A0;-&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]
+&#x00A0;<br />
+&#x00A0;<br />IAYI[x_] =&#x00A0;YYI[x]&#x00A0;**&#x00A0;(A[x]&#x00A0;-&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]**C2[x])&#x00A0;+
+&#x00A0;<br />(-tp[C2[x]]**inv[e2[x]]**D21[x]**tp[B1[x]]&#x00A0;+&#x00A0;tp[A[x]])**tp[YYI[x]]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0; &#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;YYI[x]&#x00A0;**
+&#x00A0;<br />&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(B1[x]**&#x00A0;tp[B1[x]]&#x00A0;-&#x00A0;B1[x]**tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**
+&#x00A0;<br />&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B1[x]])&#x00A0;**&#x00A0;tp[YYI[x]]&#x00A0;-&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[x]
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />k[x_,z_]&#x00A0;&#x00A0; =&#x00A0;minimum&#x00A0;in&#x00A0;b&#x00A0;of&#x00A0;sHWo&#x00A0;evaluated&#x00A0;at&#x00A0;a*&#x00A0;and&#x00A0;c*&#x00A0;(see&#x00A0;[BHW])
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;This&#x00A0;is&#x00A0;the&#x00A0;2&#x00A0;variable&#x00A0;generalization&#x00A0;of&#x00A0;DGKF&#x00A0;Riccati.
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />Hopt[x,z,a,b]&#x00A0; =&#x00A0;min&#x00A0;max&#x00A0;sHWU,&#x00A0;where&#x00A0;you&#x00A0;can&#x00A0;specify&#x00A0;functions&#x00A0;a[z],b[z]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;U&#x00A0;&#x00A0;&#x00A0;W
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1491--><p class="nopar"> <div  
+class="centerline">                              <span 
+class="cmbx-10x-x-109">The Central Controller</span>                                         </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruc&#x00A0;=&#x00A0;c[z_]:&gt;&#x00A0;-inv[e1[z]]**(tp[B2[z]]**XX[z]&#x00A0;+&#x00A0;tp[D12[z]]**C1[z]);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;rua&#x00A0;=&#x00A0;a[z_]:&gt;&#x00A0;A[z]&#x00A0;+&#x00A0;B2[z]**c[z]&#x00A0;-&#x00A0;b[z]**C2[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(B1[z]-&#x00A0;b[z]**D21[z])**tp[B1[z]]**XX[z]//.ruc&#x00A0;;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;rublin=&#x00A0;the&#x00A0;rule&#x00A0;in&#x00A0;the&#x00A0;linear&#x00A0;case&#x00A0;for&#x00A0;the&#x00A0;b&#x00A0;in&#x00A0;the&#x00A0;central&#x00A0;soln
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;to&#x00A0;the&#x00A0;H-infinity&#x00A0;control&#x00A0;problem.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruaWIA&#x00A0;=&#x00A0;a[z_]:&gt;&#x00A0;AB[z,c[z]]&#x00A0;-&#x00A0;b[z]**C2[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(B1[z]-&#x00A0;b[z]**D21[z])**tp[B1[z]]**XX[z];
+&#x00A0;<br />
+&#x00A0;<br />Plug&#x00A0;rua&#x00A0;and&#x00A0;ruc&#x00A0;into&#x00A0;the&#x00A0;main&#x00A0;Hamiltonian&#x00A0;sHWo&#x00A0;to&#x00A0;get
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sHWo=&#x00A0;k[x,z]&#x00A0;&#x00A0;+&#x00A0;&#x00A0;tp[bterm]**bterm
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;which&#x00A0;defines&#x00A0;bterm.
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1507--><p class="nopar">
+   <div  
+class="centerline">                                 <span 
+class="cmbx-10x-x-109">Special Systems</span>                                              </div>
+<!--l. 1511--><p class="noindent"><span 
+class="cmr-10x-x-109">Linear Systems</span>
+<!--l. 1514--><p class="indent">   <span 
+class="cmr-10x-x-109">Linear systems satisfying the DGKF simplifying assumption are special cases of an IA system. To take</span>
+<span 
+class="cmr-10x-x-109">an expression in </span><span 
+class="cmmi-10x-x-109">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> <span 
+class="cmr-10x-x-109">control which has been derived for an IA system and specialize it to linear systems</span>
+<span 
+class="cmr-10x-x-109">apply</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSym[expr,rulinearall]
+</div>
+</td></tr></table>
+<!--l. 1521--><p class="nopar"> <span 
+class="cmr-10x-x-109">where rulinearall is a long list of rules for specializing IA systems formulas described below:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />ruGEXY={ruGEXY1,ruGEXY2};
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;ruGEXY1=tp[GEx[x_,0]]:&gt;tp[x]**inv[YY];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruGEXY2=tp[GEx[x_,x_]]:&gt;tp[x]**XX;
+&#x00A0;<br />
+&#x00A0;<br />rulinearall=Union[rulinearsys,ruGE1,&#x00A0;ruGEXY,rulinearXY];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;rulinearsys={A[x_]:&gt;A**x,&#x00A0;B1[x_]:&gt;B1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B2[x_]:&gt;B2,C1[x_]:&gt;C1**x,C2[x_]:&gt;C2**x,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D21[x_]:&gt;D21,D12[x_]:&gt;D12,a[x_]:&gt;a**x,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b[x_]:&gt;b,c[x_]:&gt;c**x,dd[x_]:&gt;dd,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e1[x_]:&gt;e1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e2[x_]:&gt;e2,tp[e1]-&gt;e1,tp[e2]-&gt;e2};
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rulinearXY={XX[x_]:&gt;XX**x,YY[p_]:&gt;p**YY,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;YYI[x_]:&gt;inv[YY]**x};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruinvYY=YYI-&gt;inv[YY];
+&#x00A0;<br />
+&#x00A0;<br />Lin[expr_]:=&#x00A0;SubSym[expr,rulinearall];
+&#x00A0;<br />Energy&#x00A0;Ansatzes&#x00A0;&#x00A0;which&#x00A0;&#x00A0;are&#x00A0;true&#x00A0;for&#x00A0;linear&#x00A0;systems:
+&#x00A0;<br />rulinearEB&#x00A0;=&#x00A0;sets&#x00A0;GEx[x,z],&#x00A0;GEz[x,z]&#x00A0;to&#x00A0;be&#x00A0;linear
+&#x00A0;<br />ruGEz0=GEz[x_,x_]:&gt;0
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;Ansatz&#x00A0;in&#x00A0;[BHW]&#x00A0;%(5.1):
+&#x00A0;<br />
+&#x00A0;<br />ruGE1=Flatten[{ruGEz0,SubSym[{ruGEz0,ruGEx1,ruGEz1},ruXXYYI]}];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;ruGEx1=GEx[x_,z_]:&gt;GEx[x,x]+GEx[x-z,0]-GEx[x-z,x-z];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruGEz1=GEz[x_,z_]:&gt;-GEx[x-z,0]+GEx[x-z,x-z];
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1558--><p class="nopar"> <span 
+class="cmr-10x-x-109">Homogeneous Systems:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />ruhomog&#x00A0;=&#x00A0;{A[0]-&gt;0,&#x00A0;C1[0]-&gt;0,&#x00A0;C2[0]-&gt;0,&#x00A0;a[0]-&gt;0,&#x00A0;c[0]-&gt;0};
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1565--><p class="nopar"> <span 
+class="cmr-10x-x-109">Doyle Glover Khargonekar Francis Simplifying Assumptions:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />ruDGKFNL&#x00A0;=&#x00A0;Apply&#x00A0;DGKF&#x00A0;simplifying&#x00A0;assumptions&#x00A0;for&#x00A0;IA&#x00A0;systems
+&#x00A0;<br />
+&#x00A0;<br />ruDGKFlin&#x00A0;=&#x00A0;Apply&#x00A0;DGKF&#x00A0;simplifying&#x00A0;assumptions&#x00A0;for&#x00A0;linear&#x00A0;systems
+&#x00A0;<br />
+&#x00A0;<br />ruCRcDGKF=c[z_]:&gt;-tp[B2[z]]**tp[XX[z]];
+&#x00A0;<br />ruCRqDGKF=q[x_,z_]:&gt;-tp[C2[x-z]];
+&#x00A0;<br />
+&#x00A0;<br />ruaDGKF&#x00A0;=&#x00A0;a[z_]:&gt;A[z]+B1[z]**tp[B1[z]]**tp[XX[z]]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;B2[z]**tp[B2[z]]**tp[XX[z]]&#x00A0;-&#x00A0;b[z]**C2[z]+cheat[z];
+&#x00A0;<br />
+&#x00A0;<br />ruaDGKF2=a[z_]:&gt;&#x00A0;AA1[z,z]-b[z]**C2[z];
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1583--><p class="nopar">
+   <div  
+class="centerline">                      <span 
+class="cmbx-10x-x-109">More Rules Available For Substitution</span>                               </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;<br />CHANGE&#x00A0;OF&#x00A0;VARIABLES:
+&#x00A0;<br />Convert&#x00A0;energy&#x00A0;Hamiltonians&#x00A0;from&#x00A0;dual&#x00A0;or&#x00A0;mixed&#x00A0;state/dual&#x00A0;to&#x00A0;state
+&#x00A0;<br />variables&#x00A0;only:
+&#x00A0;<br />ruxz={p-&gt;GEx[x,z],&#x00A0;PP-&gt;GEz[x,z]};
+&#x00A0;<br />
+&#x00A0;<br />Convert&#x00A0;energy&#x00A0;Hamiltonian&#x00A0;from&#x00A0;dual&#x00A0;or&#x00A0;mixed&#x00A0;state/dual&#x00A0;to&#x00A0;dual&#x00A0;variables&#x00A0;only:
+&#x00A0;<br />rudual={rudualx,rudualz};
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;rudualx&#x00A0;=&#x00A0;x-&gt;IGE1[p,PP];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rudualy&#x00A0;=&#x00A0;z-&gt;IGE2[p,PP];
+&#x00A0;<br />
+&#x00A0;<br />CHANGE&#x00A0;OF&#x00A0;NOTATION:
+&#x00A0;<br />rue&#x00A0;=&#x00A0;{tp[D12[x_]]&#x00A0;**&#x00A0;D12[x_]:&gt;&#x00A0;e1[x],&#x00A0;D21[x_]&#x00A0;**&#x00A0;tp[D21[x_]]&#x00A0;:&gt;&#x00A0;e2[x]}
+&#x00A0;<br />rubtoq=tp[GEz[x_,z_]]**b[z_]:&gt;q[x,z]
+&#x00A0;<br />
+&#x00A0;<br />ruXXYYI={ruGEz0,ruXX,&#x00A0;ruYYI}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;&#x00A0;&#x00A0;ruXX&#x00A0;=&#x00A0;GEx[x_,x_]:&gt;2*XX[x]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruYYI&#x00A0;=&#x00A0;GEx[x_,0]:&gt;2*YYI[x]
+&#x00A0;<br />
+&#x00A0;<br />ruIAXYI={ruIAX,ruIAYI};
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;ruIAX&#x00A0;=&#x00A0;replace&#x00A0;terms&#x00A0;linear&#x00A0;in&#x00A0;A&#x00A0;or&#x00A0;tp[A]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;using&#x00A0;IAX[x]=0&#x00A0;(see&#x00A0;4.4b).
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ruIAYI=&#x00A0;replace&#x00A0;terms&#x00A0;linear&#x00A0;in&#x00A0;A&#x00A0;or&#x00A0;tp[A]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;using&#x00A0;IAYI[x]=0&#x00A0;(see&#x00A0;4.4c).
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />FOR&#x00A0;ENERGY&#x00A0;ANSATZ&#x00A0;EXPERIMENTATION&#x00A0;AS&#x00A0;IN&#x00A0;[BHW]:
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;EnergyGuess[ruleGE_]&#x00A0;=&#x00A0;generate&#x00A0;sHWo&#x00A0;with&#x00A0;the&#x00A0;Ansatz&#x00A0;on&#x00A0;the&#x00A0;energy&#x00A0;function
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;given&#x00A0;by&#x00A0;ruleGE&#x00A0;and&#x00A0;a,&#x00A0;b,&#x00A0;and&#x00A0;c&#x00A0;are&#x00A0;substituted&#x00A0;out
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;according&#x00A0;to&#x00A0;the&#x00A0;RECIPE.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;EnergyGuess2[ruleGE,rulea]&#x00A0;=&#x00A0;same&#x00A0;but&#x00A0;a&#x00A0;is&#x00A0;substituted&#x00A0;out&#x00A0;by&#x00A0;the
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;user&#x00A0;provided&#x00A0;rulea.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;EnergyGuessDGKF[ruleGE_]&#x00A0;=&#x00A0;same&#x00A0;with&#x00A0;DGKF&#x00A0;simplifying&#x00A0;assumptions
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;EnergyGuess2DGKF[ruleGE,ruaDGKF]&#x00A0;=&#x00A0;same&#x00A0;with&#x00A0;DGKF&#x00A0;simplifying&#x00A0;assumptions
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 1627--><p class="nopar">
+<a 
+ id="Q1-88-477"></a>
+
+   <!--l. 1--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCli3.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch46.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch46.html#tailNCBIGDOCch46.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch47.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch47.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 1--><p class="indent">   <a 
+ id="tailNCBIGDOCch47.html"></a>  
+</body></html> 

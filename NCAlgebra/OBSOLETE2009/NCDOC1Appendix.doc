@@ -1,0 +1,778 @@
+
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  APPENDIX  
+
+------------------------------------------------------------------
+                       APPENDICES
+------------------------------------------------------------------
+
+APPENDIX A.  NCAlgebra INSTALLATION
+
+NCAlgebra was developed on a UNIX system and it is very easy to 
+install on one. Here we tell you how. Installation under DOS or on a 
+MAC is similar and if you are a novice the assistance of system 
+manager could be valuable to you.
+
+(1)  Create an NCAlgebra directory
+
+(2)  Copy NCAlgebra files into directory created in step 1. 
+The files are:
+
+NCAlgebra.m             CEEP   
+Lots of files starting with NC.
+Lots of files ending with Extra.
+A file called NCTeX.process which you should transfer to the bin directory
+before you use our TeX setting command DoTeX.
+
+The most reliable way to find out the names of the NC-files actually 
+used for computation is to consult the file NCAlgebra.m. 
+It automatically loads them.  Here is a list of these files at the 
+present time: 
+
+NCDOCUMENT.doc   ----not loaded
+NCDOC1Appendix.doc ----not loaded
+NCAdjoints.m
+NCAlias.m
+NCBlockPartition.m
+NCCo.m
+NCCollect.m
+NCComplex.m
+NCDiff.m
+NCDoTeX.m
+NCEndPackage.m
+NCInverses.m
+NCMatMult.m
+NCMessyFunction.m
+NCMono.m
+NCMultiplication.m
+NCOutput.m
+NCRoots.m
+NCSave.m
+NCSchur.m
+NC1SetCommands.m
+NC2SetCommands.m
+NC0SimplifyRational.m
+NC1SimplifyRational.m
+NC2SimplifyRational.m
+NCSimplifyRational.m
+NCSolve.m
+NCSubstitute.m
+NCTeXForm.m
+NCToggle.m
+NCTools.m
+NCTransposes.m
+NCUsage.m
+
+The files which have the suffix "Extra." were small programs that are 
+not fully tested and some of which are small specialized functions 
+which may not be (are probably not) valuable to others.  We include 
+them just in case they may be valuable to someone and so that they can 
+give examples of how someone may extend the code for their own purposes.
+
+The files *.NCTest are not automatically loaded. They are explained
+in APPENDIX G.
+
+(3)  Edit the file NCAlgebra.m to replace the System`path =? with 
+     whatever path takes you to the NC* files you just loaded in 
+     your machine. 
+
+(4)  Edit the file NCAlgebra.m to replace filenames there with the 
+     corresponding file names on your system. In UNIX THIS SHOULD 
+     REQUIRE NO CHANGE.
+
+     In DOS filenames have at most 8 characters.3 characters, so
+     some of the files in our UNIX version have their name truncated.
+     When the NC* files are down loaded onto an IBM PC this
+     truncation is done automatically according to DOS conventions. 
+     You just need to edit the filenames in NCAlgebra.m to correspond 
+     to the names DOS gave the files. The only other wrinkle is 
+     you must make sure that each file has a unique name.
+     Peculiar to our package NCAlgebra is one line in NCAlgebra.m
+          $$OperatingSystem="UNIX"
+     You should change it to 
+          $$OperatingSystem="DOS"
+
+(5)  Note: bookkeeping is easier if you create a working subdirectory 
+     of the NCAlgebra directory, say WORKDIR, where you compute and 
+     save your sessions. To make this easy put NCAlgebra.m in WORKDIR 
+     and edit it so that System`path = gets you to NCAlgebra
+
+     For example, we use the path
+            /home/osiris/helton/mathdir/NCAlgebra/
+     because our computer is a SUN called osiris, the account is called 
+     helton, and standard Mathematica packages are stored in mathdir.
+
+(6)  If you want to use DoTeX (which is UNIX dependent) follow the 
+     instructions in the file DoTeX.install.
+
+
+(7)  If you want to run SYSTEMS or NCTEST you possibly must modify 
+     paths since these are files whose only purpose is to call other 
+     files (as does NCAlgebra.m). Do this just like you would in 
+     NCAlgebra.m (see 3. above ). If you did not modify paths in 
+     NCAlgebra.m you probably will not have to here.
+
+
+APPENDIX B.    UNIX DEPENDENCIES   
+
+There are several places in the code in which explicit facts about the 
+UNIX operating system are used. Here is a list of ones which we could 
+think of.
+
+(1) The assignment statement in NCAlgebra.m
+  	     System`path = "/home/osiris/helton/mathdir/NCAlgebra/"
+    needs to be adapted to the specific case.
+
+(1') There is a line in NCAlgebra.m
+          $$OperatingSystem="UNIX"
+     You should change it to 
+          $$OperatingSystem="DOS"
+     if you are going to a PC.
+
+(2) In the file NCSubstitute.m, Date[] uses a pipe to the UNIX date
+    command.
+(4) DoTeX uses UNIX commands and will not run elsewhere.
+
+
+
+APPENDIX C. AN EXTENDED EXPLANATION OF THE 
+            SUBSTITUTE FAMILY OF FUNCTIONS
+
+The commands Substitute, SubstituteSymmetric, SubstituteReverse, ...
+basically serve two purposes, 
+1)  to be noncommutative analogues for ReplaceAll (/.) and
+    ReplaceRepeated (//.) .
+2)  to do 'handy' frequent substitutions.
+
+Because the Flat attribute is not set for NonCommutativeMultiply 
+Mathematica's /. and //. can not properly match expression like:
+
+a ** b ** c /. a ** b -> d     to give      d ** c.
+
+In order to record which Substitute rules are executed (for 
+future use), we have provided a facility to store these rules
+for future use in the file Rules.temp. If you wish to use any 
+of the NCSubstitute commands without recording it in the 
+Rules.temp file, execute the same rule with a 'p' added to the 
+beginning of the name of the command (e.g., pSubstitute).
+
+Substitute is the analogue of //. and SubstituteSingleRep is the 
+analogue of /.
+
+One can think of the Reverse commands as applying a set of
+rules 'backwards', that is, in reverse order and with the left and 
+right hand sides reversed. To use any NCSubstitute commands with 
+Reverse in their names, make sure that there isn't any overlapping of 
+variable names if you wish to restore a previous expression from 
+a later one by reversing a set of rules.  
+
+As a final statement, be aware that patterns may match but not in the 
+same ways as the built-in Mathematica functions.  For example;
+Below  /. is using a single-blank to match the entire expression 
+
+        x ** x/. a_ :> {a}      --gives--   {x ** x}
+
+While SubstituteSingleReplace only matchs the first element 
+
+        SubSingleRep[ x ** x, a_ :> {a} ]    --gives--  {x} ** x
+
+
+
+APPENDIX D.  DEMONSTRATION OF SAVERULES 
+
+
+---Let's see that rules are usually being recorded.                      
+    
+   In[6]:= SaveRulesQ[]
+    
+   SaveRulesQ::On: 
+        The Rules.temp file is recording substitution rules.
+
+   Out[6]= True
+
+
+
+---Here is an expression to work with.                                   
+
+   In[7]= exp = -XX ** inv[1 - YY ** XX] ** YY ** tp[C2] ** 
+       inv[tp[d21]] ** inv[d21] ** C2 - XX ** inv[1 - YY ** XX] ** 
+       YY ** tp[C2] ** inv[tp[d21]] ** tp[B1] ** XX
+
+
+
+---Now, do some substitutions.                                         
+
+   In[8]:= Sub[ %, {XX->x, YY->y} ]
+
+   Out[8]= -x ** inv[1 - y ** x] ** y ** tp[C2] ** inv[tp[d21]] ** 
+	inv[d21] ** C2 - x ** inv[1 - y ** x] ** y ** tp[C2] ** 
+	inv[tp[d21]] ** tp[B1] ** x
+
+
+
+---Let's check the Rules.temp file.                                       
+
+   In[9]:= ShowRules[]
+
+   "Mon Jul 29 15:08:44 PDT 1991""     ""Substitute"
+                                 ----the date may not show up.
+   {XX -> x, YY -> y}
+   "------"
+    
+   Out[9]= 0
+
+
+
+---We can also do substitutions, without changing the Rules.temp file.    
+   The next command turns off the rules recording.                        
+
+   In[11]:= SaveRules[ Off ]
+
+
+---We can ask if it has been 'turned off.'                                
+
+   In[12]:= SaveRulesQ[]
+
+   SaveRulesQ::Off: 
+	The Rules.temp file is not recording substitution rules.
+
+   Out[12]= False
+
+
+
+---But, let's make new substitutions and really check!                    
+
+   In[14]:= Sub[ exp, XX->x ]
+
+   Out[14]= -x ** inv[1 - YY ** x] ** YY ** tp[C2] ** inv[tp[d21]] ** 
+        inv[d21] ** C2 - x ** inv[1 - YY ** x] ** YY ** tp[C2] ** 
+        inv[tp[d21]] ** tp[B1] ** x
+
+   In[15]:= ShowRules[]
+
+   "Mon Jul 29 15:08:44 PDT 1991""     ""Substitute"
+   {XX -> x, YY -> y}
+   "------"
+
+   Out[15]= 0
+
+
+
+---See, nothing new added.  We may also add rules to the Rules.temp 
+   file by the optional argument method.                                       
+
+   In[18]:= Sub[ exp, YY->y, On ]
+
+   Out[18]= -XX ** inv[1 - y ** XX] ** y ** tp[C2] ** inv[tp[d21]] ** 
+        inv[d21] ** C2 - XX ** inv[1 - y ** XX] ** y ** tp[C2] ** 
+        inv[tp[d21]] ** tp[B1] ** XX
+
+
+
+---Let's check.                                                           
+
+   In[19]:= ShowRules[]
+
+   "Mon Jul 29 15:08:44 PDT 1991""     ""Substitute"
+   {XX -> x, YY -> y}
+   "------"
+   "Mon Jul 29 15:09:03 PDT 1991""     ""Substitute"
+   {YY -> y}
+   "------"
+
+   Out[19]= 0
+    
+   In[20]:= SaveRulesQ[]
+
+   SaveRulesQ::Off: 
+	The Rules.temp file is not recording substitution rules.
+
+   Out[20]= False
+
+
+---Note, that you may choose to make 'continuous' records or 
+   'individual' records, but you can not 'block' an individual 
+   record from being recorded when the continuous mode is active.  
+   The above shows that you can make 'individual' records even when 
+   the 'continuous' mode is inactive.                                                              
+   Finally, other things may be sent directly to the Rules.temp file.     
+   This should send 'exp' to the Rules.temp file also.                    
+
+   In[25]:= SaveRules[ exp, tag -> "test expression" ]
+
+   In[27]:= ShowRules[]
+
+   "Mon Jul 29 15:08:44 PDT 1991""     ""Substitute"
+   {XX -> x, YY -> y}
+   "------"
+   "Mon Jul 29 15:09:03 PDT 1991""     ""Substitute"
+   {YY -> y}
+   "------"
+   "Mon Jul 29 15:10:16 PDT 1991""     ""test expression"
+   -XX ** inv[1 - YY ** XX] ** YY ** tp[C2] ** inv[tp[d21]] ** 
+   inv[d21] ** C2 - XX ** inv[1 - YY ** XX] ** YY ** tp[C2] ** 
+   inv[tp[d21]] ** tp[B1] ** XX
+   "------"
+
+   Out[27]= 0
+
+
+
+APPENDIX.E   MORE ABOUT PATTERN MATCHING FOR MAKING RULES
+
+We refer to expressions with variables and their inverses 
+as rational. There are a few rules which are very powerful in 
+simplifying such expressions. In NCSimplify1Rational we implement 
+some of these rules. Below we discuss some of the things which are 
+involved with adding additional rules. The most serious difficulty 
+comes if you need to match patterns.
+
+FLAT
+----
+
+  The NonCommutativeMultiply function (i.e., '**" ) that ordinarily is
+defined in Mathematica has the following Attributes;  Flat, OneIdentity
+and Protected.  The Flat attribute has an influence on pattern-
+matching.  When a symbol has the Flat attribute it indicates that 
+all expressions involving nested functions of that symbol are to be 
+regarded as unnested during pattern-matching.
+
+  NCAlgebra has redefined NonCommutativeMultiply and modified all of 
+its former attributes.  As a consequence of Flatless NonCommutative-
+Multiply, pattern-matching becomes significantly more involved.
+
+  Nevertheless, there are several guidelines we can suggest to the user 
+in the construction of pattern-matching rules and/or functions.  
+
+DOUBLE-BLANK SEQUENCES
+----------------------
+
+  Below we use a function to demonstrate the rationale behind our 
+liberal use of double-blank sequences in NCSimplify1Rational.
+
+  We define a function f that matches the NonCommutativeMultiply
+product of two Double-Blank Sequences and prints each Double-Blank
+Sequence on separate lines.
+
+Example 1:
+
+     In[52]:= f[ (y__) ** (z__) ] := (Print[y]; Print[z])
+ 
+     In[52]:= f[a ** b]
+     a
+     b
+
+     In[53]:= f[a ** b ** c]
+     a
+     bc
+
+     In[54]:= f[a ** b ** c ** d]
+     a
+     bcd
+
+  Thus we see that the effect of the pattern 
+  
+                         y__ ** z__  
+
+  is the same as the pattern
+
+                         y_ ** z__  
+
+  This is consistent with Mathematica's tendency to match the first
+object to the first pattern and the remaining objects to the second
+pattern.  
+
+  The next example defines a function g with a argument structure
+similar to many rules used in NCSimplify1Rational.  It illustrates how
+we can force the first Double-Blank Sequence to match more than a 
+single object.
+
+Example 2:
+
+     In[65]:= g[ (x__) ** inv[1 + (x__) ** (y__)] ] := 
+		  (Print[a]; Print[b])
+ 
+
+     In[65]:= g[ a ** inv[1 + a ** b] ]
+     a
+     b
+
+     In[66]:= g[ a ** b ** inv[1 + a ** b ** c ] ]
+     ab
+     c
+     
+     In[67]:= g[ a ** b ** inv[1 + a ** b ** c ** d ] ]
+     ab
+     cd
+     
+Ordinarily x__ ** y__ in Mathematica, would group the following;
+		
+	a ** b			as	(a) ** (b)
+	a ** b ** c 		as	(a) ** (b ** c)
+	a ** b ** c ... ** k 	as 	(a) ** (b ** c ** ... ** k)
+
+  We can see that in function g, the x__ (Double-Blank Sequence) that
+precedes the inv[ 1 + x__ ** y__ ] forces x__ ** y__ to behave
+in such a way that ANY number of factors can be captured by x__ and
+the remaining factors are captured by y__.  This is due to the fact 
+that the structure of x__ is 'captured' INDEPENDENTLY of it's use in 
+the pattern x__ ** y__ inside of the inv[] function.  This is 
+necessary to make the function g more general, since the way the 
+Mathematica ordinarily matches x__ ** y__ as x_ ** y__ is too 
+restrictive to be useful.
+
+  The interplay between combinations of single, double and triple 
+blank sequences must be thoroughly tested before you can be sure 
+that a pattern is effective.  In other words, it is not enough to 
+know how the individual parts of a pattern work because the 
+combination of pattern units can result in unforeseen consequences.
+
+  Be aware that Mathematica pattern matchs the first (and often
+smallest) expression which satisfies its conditions.  Although, not 
+discussed here, it is possible to use pattern restrictions 
+(e.g. x_Integer), pattern test (e.g.  x_?Positive), and/or 
+conditions to further control the behavior of patterns, See Wolfram's 
+text. 
+
+  Examples 1 and 2 are actual functions that were used to build up the 
+rules in NCSimplify1Rational.  They illustrate the use of the pattern 
+Double-Blank Sequences that were used in that program and 
+the practice of building up from simple patterns to more complex ones. 
+Note the use of Print[]'s to verify the actual behavior of the
+match.  Once you are satisfied that your pattern matches the correct 
+kinds of objects and no more or less, then you can change the 
+Print[]'s to the desired expression. 
+
+LISTS OF RULES
+--------------
+
+(In the following, when we use the term 'rule' we mean all the
+Mathematica Rule[] or RuleDelayed[] commands we used to represent a 
+single mathematical identity.  When we used more than one Rule[] or 
+RuleDelayed[] command we made a list of the those commands.) 
+
+  In NCSimplify1Rational you'll notice that several rules have two 
+parts requiring a list to be made of the RuleDelayed[] expressions. 
+The list is made from the more general double-blank sequence pattern 
+and a single-blank sequence pattern.
+
+  Sometimes one rule will cover all forms that mathematically satisfy
+the pattern, but this is not always so.  For understandability, we 
+made lists of structural different but mathematically equivalent 
+patterns.  This way, one rule represents the list of all equivalent 
+pattern expressions.  Make sure that any special forms of the pattern-
+to-be-matched aren't overlooked by any rules you create yourself.
+
+  In the following example, which happens to be an actual rule from 
+NCSimplify1Rational, it would 'seem' that there is no need for two 
+parts.
+
+     (*-----------------------RULE 3-------------------------------*) 
+     (* Part 1 ----> inv[1 + K a b ] a b -> (1 - inv[1 + K a b])/K *)
+     (* Part 2 ----> inv[1 + K a] a -> (1 - inv[1 + K a])/K        *) 
+     (*------------------------------------------------------------*)
+     rule[3] :=
+     { 
+     (* Part 1 *)
+     (d___) ** inv[Id + (K_.)*(a__) ** (b__)] ** 
+     (a__) ** (b__) ** (e___) :>
+          (d ** e + -1*d ** inv[Id + K*a ** b] ** e)/K 
+     , 
+     (* Part 2 *)
+     (d___) ** inv[Id + (K_.)*(a_)] ** (a_) ** (e___):>
+     (d ** e + -1*d ** inv[Id + K*a] ** e)/K 
+     };
+     
+  It would seem that part 2 is the only necessary rule, but it is not.  
+It turns out that the single blanks in part 2 can't be 'stretched' 
+to cover instances of part 1 and the double-blanks in part 1 require 
+a minimum of two noncommutative factors which rules out the single 
+variable forms of part 2.
+
+  The triple-blank sequences (d___ and e___) that lead and trail the 
+lhs's (left-hand side) of each pattern are there to capture any 
+leading and trailing terms in the expression.  This is the main 
+mechanism used to simulate the Flat attribute.
+
+  The (K_.) sequence captures any Commutative factor, to be called K, 
+and if missing then to be replaced by 1.  (K_.) is equivalent to 
+(K_:1) See Wolfram on globally-defined default values p. 240.
+
+  For the class of expressions that NCSimplify1Rational is designed to
+simplify, the mix of single, double, and triple blanks (other than the
+leading and trail triple-blanks sequences) was not fruitful.
+
+  As a final suggestion concerning constructing patterns, not enough 
+can be said about the frequent use of the Edit[] and EditDef[] 
+commands when experimenting with patterns.  Remember to give the 
+expression a name that is a symbol since EditDef[] works only on 
+symbols.
+
+
+
+APPENDIX F.   WRITING ADDITIONAL PACKAGES
+
+It is very likely that people who work with this program will
+want to add extra packages to the ones which we have included. 
+We would appreciate it if someone has a general tool which
+may be valuable to others, that he/she would send it to us
+at UCSD so that we may incorporate it with the other code  
+which we have. In addition to the actual package, it would
+be very helpful if the following were included:
+
+(1)  Usage notes for each function 
+(2)  Text which could be inserted into this document 
+     explaining what the code does.
+(3)  A TEST file which does rather mundane tests so that
+     if it broken in the future (by someone else), then that
+     could be easily detected in the future. See APPENDIX G.
+
+We have included some files which are in a state of
+development. All of these files start with the suffix
+".Extra". A list of them at the day which this is being
+written is:
+
+Date.Extra
+---the version of Mathematica which we use does not
+   have Date[] built-in. The file is a UNIX hack. 
+FuncAssign.Extra 
+---Some substitution rules hold for any analytic function. This file
+   takes an expression and tries to find that polynomial 
+Hardy.Extra
+---Operator theory. Implements InnerProduct on Hardy space 
+NCDyad.Extra
+---Operator Theory. Implement rank 1 operators. 
+NCHereditary.Extra
+---Operator Theory. Implement hereditary polynomials (See any one of 
+   Jim Agler's paper's)
+NCKernels.Extra
+---Operator Theory. Implement reproducing kernels
+Operator.Extra
+---Operator Theory. Implement A x where A is a matrix and x is a 
+   vector (MatMult won't work due to the implementation of NCDyad 
+   and NCKernels)
+SetNumber.Extra
+---Treat a symbol as a number. Slows down computations.
+ineq.Extra
+---Try to implement a inequality equation manipulator.
+
+
+APPENDIX G.  AUTOMATIC TESTING PROGRAMS                  
+          
+We included our programs which automatically test the functions
+in NCAlgebra.  To run all of the testing programs just load 
+in the file NCTEST
+                     <<NCTEST
+To run only the one which tests the block matrix functions 
+                     <<MatMult.NCTest
+Etc.
+If you are developing functions which run under NCAlgebra
+Then we would like to have a YourFunction.NCTest file along
+with the function. Please stick to the format in the *.NCTest files.
+It is easy to imitate just by modifying a copy of one of our
+*.NCTest files by putting in your tests. (Diff.NCTest is a
+good one to modify.)
+
+
+APPENDIX H.  WARNINGS ABOUT GENERIC Mathematica AND OUR CODE
+
+Mathematica -----------   
+
+We have found that ordinary Mathematica constructs do not always work 
+as we expect with NCAlgebra.  That is to say that at times we needed 
+to tread carefully. If you simplify or add extensively to this coding 
+you must know about these idiosyncrasies.  THEY HAVE NO EFFECT ON THE 
+AVERAGE USER.
+
+For some reason the usual Mathematica  expr /. x->a  substitution
+does not always work so we recommend using our
+                Substitute[expr, x->a]
+ 
+
+1. eran@slacvm found that it is possible to do a legitimate operation with 
+   (the built-in) NonCommutativeMultiply which puts one into an 
+   infinite loop.  Thus our NonCommutativeMultiply (and eran's) are not 
+   the same as Mathematica's. They are missing one rule. This leads 
+   directly to problems 2 and 3 below.
+   --see footnote at end of file for details.
+
+2. a**x**j**y-v**f**u -u**f /. x**j->y
+   does not actually make the substitution.  Thus we wrote a Substitute 
+   function which does.
+
+3. Double blank a__ sometimes causes a to lose its head 
+   NonCommutativeMultiply.  To fix it write out NonCommutativeMultiply 
+   instead of ** on the right hand side of the rule.
+
+
+FOOTNOTE
+Here is part of a letter from eran@slac to helton@osiris
+
+
+ 
+Just try defining NonCommutativeMultiply[] to be something (say
+1) without first removing the Flat Attribute. Mathematica goes
+into an infinite loop when evaluating NonCommutativeMultiply[a,
+b] because the Flat attribute, in addition to telling it that
+NCM[a, NCM[b, c]] -> NCM[a, b, c], also tells it that NCM[a, b]
+should be matched by NCM[NCM[], NCM[a, b]], and, of course, now
+it has a rule for that second expression. On other words, the
+difference between the built-in Flat and my corresponding rules
+is that the built-in Attribute goes both ways.  
+ 
+Eran
+
+OUR STUFF ------------
+
+1.Tricky Pattern Matching
+If you execute the following expression
+
+   DirectionalD[x, tp[x], h]
+
+you get 0. If one executes the following expression
+
+   thing = DirectionalD[tp[y], y, h];
+   Sub[thing, y->tp[x]]
+
+then one gets the correct answer. The problem is that it is not
+obvious to Mathematica that x is a function of tp[x]. Indeed, 
+x = f[tp[x]] where f = tp. One cliche one could use is that 
+Mathematica knows that tp is idempotent, but it doesn't know
+that it knows. When "tp" is defined, code similar to the 
+following is executed.
+
+   tp[tp[x_]] := x;
+   IdempotentQ[x] = True;
+
+So if one types in tp[tp[y]] one gets back y, but if one asks
+"Is x a function of tp[x]?", then the most simple-minded way of 
+writing the code (the way it is now written) gives the answer no
+(since the expression x does not have any subexpressions of the 
+form tp[x]). Of course, one usually takes derivatives with respect to 
+a letter (say x and y), but not always (like taking the derivative 
+with respect to Conjugate[z], which is a whole other ballgame.)  The 
+code above with the intermediate value thing is probably safer.
+
+
+
+APPENDIX I.  DIRECTION WE ARE HEADED WITH RESPECT TO TeX
+
+The following is a explanation for a possible approach to the TeX 
+conversion of an entire file. This is distinct from DoTeX whose goal 
+is to split out TeX expressions interactively. The main objective of 
+this conversion program is to produce text that is easy to edit.
+
+There are two different types of text:
+
+(1)  Comments of three types:
+
+      (a)  text to be left alone no changes - anything not indicated 
+           by a special symbol of the form indicating (b) or (c) 
+           below.
+
+      (b)  text to be put out as conventional mathematics, but not 
+           to be processed by Mathematica - place each line 
+           between dollar signs, e.g.
+                $$ math text here $$
+                $$ math text here $$
+		$$ math text here $$
+		$$ math text here $$
+      Indicate this mode is starting with a (@ and ending with a @).
+
+      (c)  text to be converted to picture 
+           - Mark says this is possible.  
+           Indicate this mode is starting with 
+           a (:  and ending with a :).
+
+	
+(2)  executable Mathematica code - to be processed by TeXForm.
+
+
+Bill wants to be able to "reprocess" a file which is output from 
+this conversion program back through the program again, as revisions 
+are made.  To enable this,
+we need 
+        A.  to keep the (*   *) symbols - do not delete.  This is so 
+            that program can still tell commented text from executable 
+            Mathematica code.  
+
+        B.  Make the logic so that anything contained within 
+            $$ text $$ or $ text $ should be left alone.  (Same 
+            logic as text between (* and *) provided no special 
+            symbols indicating (b) or (c) above are present.)  
+
+
+Embedded symbols of all kinds can be supported, provided Mathematica 
+has the capability to maintain a stack.
+
+
+APPENDIX J. POSSIBLE FUTURE DIRECTIONS
+
+We are adding this section to indicate possible future code development 
+possibilities.  It should not be construed to be a promise or guarantee 
+of what we do next -- rather a collection of hunches of what we might be 
+doing next. Indeed, we may decide to not further develop the code we have 
+here at all.
+
+Having said this, we make the following comments.
+
+0. If you want to actively work on this
+   program, let us know beforehand. We will 
+   let you know of progress on the program 
+   "as it happens" so that we do not reproduce
+   each others work. Send us the result of your 
+   effort so that we may use include it in the 
+   next version.  Any of the below mentioned 
+   items should be easy to develop. See also
+   the appendix on writing your own packages.
+
+1. The files which comprise the
+   NonCommutativeMultiply package will probably
+   not change very much at all. The file NCRoots.m 
+   may be added to reproduce the code in NCInverses.m 
+   for roots (e.g., NCForwardRoots). Also, the file 
+   NC1SetCommands.m may be changed substantially to
+   implement, say, Linear functions in a better
+   way (e.g., so that you can select whether you
+   want to express f[a+b] as f[a+b] or f[a] +
+   f[b]). Also SetMultilinear and other variations
+   can be added.
+
+2. Some of the files in the NCAlgebra package
+   are not packages. We will probably make
+   them packages eventually. Also "Clear"
+   statements should be added in more places than
+   they are already. Eventually this should alleviate
+   the problem on loading NCAlgebra twice.
+
+3. More NCTest files for testing the code 
+   which has already been written.
+
+4. Exploration of the program tex-mma (mathsource
+   0202-239) and its possible interactions with 
+   NCAlgebra.m
+
+5. Converting some or all of the *.Extra files
+   into supportable packages.
+
+6. There is a routine LftPatternRule which 
+   should be merged with LeftPatternRule into
+   the NCTools.m file.
+
+7. The file NCBlockPartition may be rewritten.
+
+8. SetUnitary may be rewritten so that it interact better 
+   with IsometryQ and CoIsometryQ.
+
+9. We plan to add some simplify routines which are substantially
+   better than those in version 0.1.
+

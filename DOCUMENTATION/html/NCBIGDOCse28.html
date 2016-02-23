@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>5.4 Deprecated Commands</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 188--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse27.html" >prev</a>] [<a 
+href="NCBIGDOCse27.html#tailNCBIGDOCse27.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse28.html">tail</a>] [<a 
+href="NCBIGDOCch5.html#NCBIGDOCse28.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">5.4   </span> <a 
+ id="x37-1510005.4"></a>Deprecated Commands</h3>
+<!--l. 190--><p class="noindent">The following commands are no longer supported in this version of NCAlgebra.
+<!--l. 234--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.1   </span> <a 
+ id="x37-1520005.4.1"></a>SeeTeX[] or SeeTeX[anInteger]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: SeeTeX[] tells Mathematica that you would always like to have your outputs
+      displayed in <span class="TEX">T<span 
+class="E">E</span>X</span>. Inputting SeeTeX[] gives you additional displays which accompany
+      the rest of your Mathematica session unless you turn off SeeTeX using the NoTeX[] (see
+      below). Each output in your session causes a seperate window to open on the screen
+      and this window displays the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;version of the output. When too many TeX displays
+      are present, Mathematica automatically makes the oldest display disappear. One can
+      set the maximum number of <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;windows to be <span 
+class="cmmi-12">N </span>which appear using <span 
+class="cmmi-12">SeeTeX</span>[<span 
+class="cmmi-12">N</span>].
+      SeeTeX[] is the same as SeeTeX[5] the first time that it is called. See also NoTeX,
+      KillTeX and Keep.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">anInteger </span>is an integer.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1. At this time, SeeTeX is
+      implemented by creating a directory called TeXSession. The directory TeXSession is
+      filled with files as the session continues. The files corresponding to the <span 
+class="cmmi-12">k</span>-the output
+      are master<span 
+class="cmmi-12">k</span>.tex and out<span 
+class="cmmi-12">k</span>.tex. The file master<span 
+class="cmmi-12">k</span>.tex is boring. The file out<span 
+class="cmmi-12">k</span>.tex contains
+      the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;for the output Out[k]. See also the command SeeTex. These files are kept
+      until the KillTeX[] command (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x37-1540005.4.3">5.4.3<!--tex4ht:ref: command:KillTeX --></a>) is invoked or until you reload NCAlgebra.m.
+
+      <span 
+class="cmbx-12">BEWARE LOADING NCAlgebra.m AUTOMATICALLY DELETES THE</span>
+      <span 
+class="cmbx-12">DIRECTORY </span>Also,  the  directory  contains  a  few  dvi  files  and  the  windows  are
+      produced  automatically  by  running  xdvi  on  master<span 
+class="cmmi-12">k</span>.dvi.  When  the  TeX  windows
+      are removed automatically, the corresponding dvi file is automatically removed. The
+      function Keep[<span 
+class="cmmi-12">k</span>] (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x37-1560005.4.5">5.4.5<!--tex4ht:ref: command:Keep --></a>) prevents master<span 
+class="cmmi-12">k</span>.dvi and the associated window from being
+      deleted.  </dd></dl>
+<a 
+ id="dx37-152001"></a>
+<!--l. 249--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.2   </span> <a 
+ id="x37-1530005.4.2"></a>NoTeX[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: NoTeX[] tells Mathematica to stop putting windows on the screen.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: None
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1. The command NoTeX[] stops
+      TeX files from being added to the directory TeXSession. It does not remove any files
+      from the directory TeXSession. BUG: If one does SeeTeX[4], then puts up 4 windows,
+      then NoTeX[], then SeeTeX[], the program forgets that the 4 windows are there. </dd></dl>
+<a 
+ id="dx37-153001"></a>
+<!--l. 258--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.3   </span> <a 
+ id="x37-1540005.4.3"></a>KillTeX[]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  KillTeX[]  removes  all  of  the  files  in  the  directory  TeXSession.  See  also
+      SeeTeX(<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x37-1520005.4.1">5.4.1<!--tex4ht:ref: command:SeeTeX --></a>)
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: No arguments
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1 </dd></dl>
+<a 
+ id="dx37-154001"></a>
+<!--l. 272--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.4   </span> <a 
+ id="x37-1550005.4.4"></a>See[aListOfIntegers]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: See[aListOfIntegers]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: See[aListOfIntegers] allows one to create a <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;file which displays multiple
+      Out statements. For example, See[<span 
+class="cmsy-10x-x-120">{</span>5,14,9<span 
+class="cmsy-10x-x-120">}</span>] creates a window with <span 
+class="cmtt-12">Out[5]=</span>, followed
+      by the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;form of Out[5],<span 
+class="cmtt-12">Out[14]=</span>, followed by the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;form of Out[14], <span 
+class="cmtt-12">Out[9]=</span>,
+      followed by the <span class="TEX">T<span 
+class="E">E</span>X</span>&#x00A0;form of Out[9]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: <span 
+class="cmmi-12">aListOfIntegers </span>is a list of integers </dd></dl>
+<a 
+ id="dx37-155001"></a>
+<!--l. 273--><p class="noindent">Not available before NCAlgebra 2.1 If the See[<span 
+class="cmsy-10x-x-120">{</span>5,14,9<span 
+class="cmsy-10x-x-120">}</span>] command is invoked as the 19th command
+(e.g., In[19] := See[<span 
+class="cmsy-10x-x-120">{</span>5,14,9<span 
+class="cmsy-10x-x-120">}</span>]), then the TeXed formulas Out[5], Out[14] and Out[19] will be in the
+file master19.tex. This might help a user in writing a paper based on the session, since it can be
+used to bring together important formulas. This command requires that the SeeTeX be called
+before the use of See.
+
+<!--l. 298--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.5   </span> <a 
+ id="x37-1560005.4.5"></a>Keep[anInteger]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: <span 
+class="cmmi-12">Keep</span>[<span 
+class="cmmi-12">anInteger</span>] tells Mathematica that it should not automatically destroy
+      the window corresponding to the <span 
+class="cmmi-12">anInteger</span>th output.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">anInteger </span>is an integer.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Not available before NCAlgebra 2.1. The file master<span 
+class="cmmi-12">k</span>.dvi is also
+      kept. The TeX files are always kept whether or not you invoke Keep (WARNING: See
+      KillTeX (<span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="#x37-1540005.4.3">5.4.3<!--tex4ht:ref: command:KillTeX --></a>)).. This command requires that the SeeTeX be called before the use of
+      &#8220;See&#8221;. </dd></dl>
+<a 
+ id="dx37-156001"></a>
+<!--l. 310--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.6   </span> <a 
+ id="x37-1570005.4.6"></a>Kill[anInteger]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: Kill[anInteger]
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: Kill[k] removes the window and the dvi file corresponding to Out[k].
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments  /  Limitations:  Not  available  before  NCAlgebra  2.1.  The  file  master<span 
+class="cmmi-12">k</span>.dvi  is
+      deleted.  This  command  requires  that  the  SeeTeX  be  called  before  the  use  of  the
+      command &#8220;See&#8221;. </dd></dl>
+
+<a 
+ id="dx37-157001"></a>
+<!--l. 313--><p class="noindent">The following two commmands require the loading of the file <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">Extra.TeXForm</span></span></span>.
+<!--l. 326--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.7   </span> <a 
+ id="x37-1580005.4.7"></a>LookAtMatrix[aMatrix]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description: LookAtMatrix[aMatrix] takes the Mathematica matrix <span 
+class="cmti-12">aMatrix</span>, converts it to
+      <span class="TEX">T<span 
+class="E">E</span>X</span>  outputs the string and surrounding <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>to a file, TeXs the file and displays
+      the TeXed output to the screen using the program dvipage (this can be easily changed
+      to other previewers such as xdvi or xpreview).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">aMatrix </span>is a matrix.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Must have loaded the file Extra.TeXForm </dd></dl>
+<a 
+ id="dx37-158001"></a>
+<!--l. 340--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">5.4.8   </span> <a 
+ id="x37-1590005.4.8"></a>LookAtLongExpression[anExpression]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  LookAtLongExpression[anExpression]  takes  the  Mathematica  expression
+      <span 
+class="cmti-12">anExpression</span>, converts it to <span class="TEX">T<span 
+class="E">E</span>X</span> outputs the string and surrounding <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>to a file,
+      TeXs the file and displays the TeXed output to the screen using the program dvipage
+      (this can be easily changed to other previewers such as xdvi or xpreview).
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmmi-12">anExpression </span>is an expression
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: Must have loaded the file Extra.TeXForm </dd></dl>
+<a 
+ id="dx37-159001"></a>
+
+<a 
+ id="dx37-159002"></a>
+
+   <!--l. 7--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse27.html" >prev</a>] [<a 
+href="NCBIGDOCse27.html#tailNCBIGDOCse27.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse28.html" >front</a>] [<a 
+href="NCBIGDOCch5.html#NCBIGDOCse28.html" >up</a>] </p></div>
+<!--l. 7--><p class="indent">   <a 
+ id="tailNCBIGDOCse28.html"></a>   
+</body></html> 

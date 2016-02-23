@@ -1,0 +1,1043 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>45  Sample Applications</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 306--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch46.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch44.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch44.html#tailNCBIGDOCch44.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch45.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch45.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;45</span></span><br><a 
+ id="x86-45800045"></a> <span 
+class="cmr-10x-x-109">Sample Applications</span></h2>
+<!--l. 309--><p class="noindent"><span 
+class="cmr-10x-x-109">Each of the following examples uses one of the SYSDef files as input. That SYSDef file is reproduced here</span>
+<span 
+class="cmr-10x-x-109">for your reference. Text between comment symbols (* and *) is non-executable. In this document we</span>
+<span 
+class="cmr-10x-x-109">have modified the actual SYSDef files by a few deletions and by transcribing many of the</span>
+<span 
+class="cmr-10x-x-109">comments to TeX. Everything else in the SYSDef file is loaded into your session when you</span>
+<span 
+class="cmr-10x-x-109">type:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&lt;&lt;SYSDef####.m
+</div>
+</td></tr></table>
+<!--l. 319--><p class="nopar">
+<!--l. 321--><p class="noindent"><span 
+class="cmr-10x-x-109">where #### represents the particular SYSDef file chosen.</span>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.1   </span></span> <a 
+ id="x86-45900045.1"></a><span 
+class="cmr-10x-x-109">Bounded Real Lemma</span></h3>
+<!--l. 327--><p class="noindent"><span 
+class="cmr-10x-x-109">This example derives the bounded real lemma for a linear system. You should see the notebook</span>
+<span 
+class="cmbx-10x-x-109">DemoBRL.ps </span><span 
+class="cmr-10x-x-109">and have the joy of executing </span><span 
+class="cmbx-10x-x-109">DemoBRL.nb</span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 544--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.2   </span></span> <a 
+ id="x86-46000045.2"></a><span 
+class="cmr-10x-x-109">Measurement Feedback </span><span 
+class="cmmi-10x-x-109">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> <span 
+class="cmr-10x-x-109">Control</span></h3>
+<!--l. 547--><p class="noindent"><span 
+class="cmr-10x-x-109">We wish to analyse the dissipativity condition on 2 port systems with a one port system in feedback. The</span>
+<span 
+class="cmr-10x-x-109">basic question is when does feedback exist which makes the full system dissipative and internally stable?</span>
+<span 
+class="cmr-10x-x-109">This example is based on the paper [BHW]. Here is a listing of the definitions for a nonlinear system</span>
+<span 
+class="cmr-10x-x-109">which is affine in the input. It is part of our SYS file named SYSDefIA.m - again here are TeX</span>
+<span 
+class="cmr-10x-x-109">transcriptions:</span>
+<!--l. 555--><p class="indent">
+
+   <div  
+class="centerline">                               <span 
+class="cmbx-10x-x-109">INPUT AFFINE SYSTEM DEFINITIONS</span>                            </div>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+(*&#x00A0;file&#x00A0;is&#x00A0;SYSDefIA.m
+&#x00A0;<br />&#x00A0;&#x00A0;This&#x00A0;file&#x00A0;loads&#x00A0;in&#x00A0;basic&#x00A0;definitions&#x00A0;of&#x00A0;two&#x00A0;systems&#x00A0;and&#x00A0;of
+&#x00A0;<br />the&#x00A0;energy&#x00A0;balance&#x00A0;relations&#x00A0;various&#x00A0;connections&#x00A0;of&#x00A0;the
+&#x00A0;<br />systems&#x00A0;satisfy.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;__________________
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;W&#x00A0;&#x00A0;----&gt;--|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;G1&#x00A0;|----&gt;---&#x00A0;out1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;F&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;U&#x00A0;&#x00A0;----&gt;--|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;G2&#x00A0;|----&gt;---&#x00A0;Y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|________________|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;______________
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;U&#x00A0;&#x00A0;----&lt;--|&#x00A0;g&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f&#x00A0;&#x00A0;&#x00A0;|----&lt;---&#x00A0;Y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|____________|
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Figure&#x00A0;2.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dx/dt&#x00A0;&#x00A0;=&#x00A0;&#x00A0;F[x,W,U]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;out1&#x00A0;&#x00A0;=&#x00A0;&#x00A0;G1[x,W,U]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;=&#x00A0;&#x00A0;G2[x,W,U]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dz/dt&#x00A0;&#x00A0;=&#x00A0;&#x00A0;f[z,Y]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;U&#x00A0;&#x00A0;&#x00A0;=&#x00A0;&#x00A0;g[z,Y]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;An&#x00A0;Input&#x00A0;Affine&#x00A0;(IA)&#x00A0;one&#x00A0;port&#x00A0;system&#x00A0;is
+&#x00A0;<br />----------------------------------------&#x00A0;*)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetNonCommutative[f,g,a,b,c,dd,z]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f[z_,Y_]:=a[z]+b[z]**Y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;g[z_,Y_]:=c[z]+dd[z]**Y
+&#x00A0;<br />
+&#x00A0;<br />(*&#x00A0;An&#x00A0;Input&#x00A0;Affine&#x00A0;(IA)&#x00A0;two&#x00A0;port&#x00A0;system&#x00A0;is&#x00A0;*)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetNonCommutative[W,U,Y,DW,DU,DY]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetNonCommutative[A,x,B1,B2,C1,C2,G1,G2]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SetNonCommutative[D11,D22,D12,D21]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D11[x_]:=0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D22[x_]:=0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F[x_,W_,U_]:=A[x]+B1[x]**W+B2[x]**U
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;G1[x_,W_,U_]:=C1[x]+D11[x]**W+D12[x]**U;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;out1=G1[x,W,U];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;G2[x_,W_,U_]:=C2[x]+D21[x]**W+D22[x]**U;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;out2=G2[x,W,U];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;G2I[x_,Y_,U_]:=inv[D21[x]]**Y-inv[D21[x]]**C2[x];
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 607--><p class="nopar"> <div  
+class="centerline">                       <span 
+class="cmbx-10x-x-109">ENERGY BALANCE EQUATIONS</span>                                </div>
+
+<!--l. 610--><p class="indent">   <span 
+class="cmr-10x-x-109">We begin with notation for analyzing the DISSIPATIVITY of the systems obtained by connecting</span>
+<span 
+class="cmr-10x-x-109">f,g to F,G in several different ways. The energy function on the statespace is denoted by e.</span>
+<span 
+class="cmr-10x-x-109">HWUY below is the Hamiltonian of the </span><span 
+class="cmbx-10x-x-109">two decoupled systems </span><span 
+class="cmr-10x-x-109">where inputs are W,U, and</span>
+<span 
+class="cmr-10x-x-109">Y.</span>
+<!--l. 617--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC130x.png" alt="HW  U Y = &#x2223;out&#x2223;2 - &#x2223;W &#x2223;2 + PP  &#x22C5;f(z,Y) + p&#x22C5;F (x,W, U)
+" class="math-display" ></center>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SetNonCommutative[F,G1,G2,f,g,p,PP];
+&#x00A0;<br />HWUY&#x00A0;=&#x00A0;tp[out1]**out1-tp[W]**W+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(p**F[x,W,U]+tp[F[x,W,U]]**tp[p])/2+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(PP**f[z,Y]+tp[f[z,Y]]**tp[PP])/2;
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 625--><p class="nopar">
+   <div  
+class="centerline">                     <span 
+class="cmbx-10x-x-109">CONNECTING INPUT AND OUTPUT</span>                             </div>
+<!--l. 629--><p class="indent">   <span 
+class="cmr-10x-x-109">If we connect the Y output of the 2 port to the f,g input then the resulting system has Hamiltonian</span>
+<span 
+class="cmr-10x-x-109">function HWU.</span>
+<!--l. 632--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC131x.png" alt="HW  U = HW   UY   with the substitution Y  &#x2192; G2(x, W, U)  " class="math-display" ></center>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+HWU=HWUY/.Y-&gt;G2[x,W,U];
+</div>
+</td></tr></table>
+<!--l. 637--><p class="nopar">
+<!--l. 639--><p class="indent">   <span 
+class="cmr-10x-x-109">If we connect the U input of the 2 port to the f,g output then the resulting system has Hamiltonian</span>
+<span 
+class="cmr-10x-x-109">function HWY.</span>
+<!--l. 642--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC132x.png" alt="HW  Y  = HW  U Y  with the substitution   U &#x2192;  g(z,Y )  " class="math-display" ></center>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+HWY=HWUY/.U-&gt;g[z,Y];
+</div>
+</td></tr></table>
+<!--l. 647--><p class="nopar">
+<!--l. 649--><p class="indent">   <span 
+class="cmr-10x-x-109">If we connect the two systems in feedback, that is tie off U and Y, then the resulting Hamiltonian</span>
+<span 
+class="cmr-10x-x-109">function is</span>
+<!--l. 652--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC133x.png" alt="HW  = HW   Y  with the substitution   Y &#x2192;  G2(x,W, U )  " class="math-display" ></center>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+HW=HWY/.Y-&gt;G2[x,W,U];
+</div>
+</td></tr></table>
+<!--l. 657--><p class="nopar">
+<!--l. 659--><p class="indent">   <span 
+class="cmr-10x-x-109">By definition (see Section I) the closed loop system being e-DISSIPATIVE corresponds to the energy</span>
+<span 
+class="cmr-10x-x-109">balance function HW above being negative.</span>
+<!--l. 662--><p class="indent">   <span 
+class="cmr-10x-x-109">Note that the function HWUY contains both state and dual variables. Dual variables are defined by</span>
+<span 
+class="cmr-10x-x-109">the gradient of the energy function, as follows:</span>
+<!--l. 665--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC134x.png" alt="p = &#x2207;x e  and  P P = &#x2207;z e
+" class="math-display" ></center>
+<!--l. 668--><p class="indent">   <span 
+class="cmr-10x-x-109">In the following, when we impose the IA assumptions (see (1.5) and (1.6)), we will often specialize to a</span>
+<span 
+class="cmr-10x-x-109">plant which satisfies</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC135x.png" alt="D11(x)  = D22(x) = 0,
+" class="math-display" ></center>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC136x.png" alt="D12(x)T D12(x) =  e1(x) &gt; 0,
+" class="math-display" ></center>
+   <center class="math-display" >
+
+<img 
+src="NCBIGDOC137x.png" alt="D21(x)D21(x)T  =  e2(x) &gt; 0.  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">and a</span>
+<span 
+class="cmr-10x-x-109">compensator with d(z)=0. We now write out energy balance formulas for the plant and compensator after</span>
+<span 
+class="cmr-10x-x-109">Figure 2 (under these assumptions) purely in terms of state space variables x and z (designated by the</span>
+<span 
+class="cmr-10x-x-109">prefix s for state space).</span>
+   <div  
+class="centerline">                                     <span 
+class="cmbx-10x-x-109">PURE STATESPACE VARIABLES</span>                                </div>
+<!--l. 681--><p class="indent">   <span 
+class="cmr-10x-x-109">STATESPACE -x,z. While the HWUY formulas mix x&#8217;s and p &#8217;s , the next ones are purely on</span>
+<span 
+class="cmr-10x-x-109">statespace variables x and z. Executable formulas for</span>
+<!--l. 685--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC138x.png" alt="p = &#x2207;x e  and  P P = &#x2207;z e  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">are</span>
+<span 
+class="cmr-10x-x-109">inserted by the rule</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+SNC[GEx,GEz];
+&#x00A0;<br />ruxz={p-&gt;tp[GEx[x,z]],&#x00A0;PP-&gt;tp[GEz[x,z]]};
+</div>
+</td></tr></table>
+<!--l. 692--><p class="nopar">
+<!--l. 694--><p class="indent">   <span 
+class="cmr-10x-x-109">Here,</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+GEx[x,z],&#x00A0;GEz[x,z]
+</div>
+</td></tr></table>
+<!--l. 697--><p class="nopar"> <span 
+class="cmr-10x-x-109">stand for column vectors </span><span 
+class="cmsy-10x-x-109">&#x2207;</span><sub><span 
+class="cmmi-8">x</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">e</span><span 
+class="cmr-10x-x-109">, </span><span 
+class="cmsy-10x-x-109">&#x2207;</span><sub><span 
+class="cmmi-8">z</span></sub><sup><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-10x-x-109">e</span><span 
+class="cmr-10x-x-109">, respectively. This unfortunate choice of notation is a holdover from</span>
+<span 
+class="cmr-10x-x-109">earlier versions of the software.</span>
+<!--l. 702--><p class="indent">   <span 
+class="cmr-10x-x-109">The storage function e is homogeneous</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;GEx[0,0]=0;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;GEz[0,0]=0;
+&#x00A0;<br />
+&#x00A0;<br />sHWUY=HWUY/.ruxz;
+&#x00A0;<br />sHWU=HWU/.ruxz;
+&#x00A0;<br />sHWY=HWY/.ruxz;
+&#x00A0;<br />sHW=HW/.ruxz;
+</div>
+</td></tr></table>
+<!--l. 712--><p class="nopar">
+   <div  
+class="centerline">                  <span 
+class="cmbx-10x-x-109">RESULTS STORED FOR FAST EXECUTION</span>                         </div>
+<!--l. 716--><p class="indent">   <span 
+class="cmr-10x-x-109">The following are redundant in that they can be computed from the above expressions.</span>
+<!--l. 719--><p class="indent">   <span 
+class="cmr-10x-x-109">This is the W which maximizes Hamiltonian</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+ruCritW=&#x00A0;{W&#x00A0;-&gt;&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2}
+&#x00A0;<br />
+&#x00A0;<br />CritW[x_,z_,b_]:=&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2;
+&#x00A0;<br />
+&#x00A0;<br />(*&#x00A0;&#x00A0;and&#x00A0;you&#x00A0;get&#x00A0;&#x00A0;*)
+&#x00A0;<br />
+&#x00A0;<br />sHWo&#x00A0;=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;a[z]/2&#x00A0;+&#x00A0;tp[a[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;c[z]&#x00A0;+&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;c[z]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[c[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;c[z]&#x00A0;+&#x00A0;tp[c[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[c[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />(*&#x00A0;This&#x00A0;is&#x00A0;the&#x00A0;U&#x00A0;which&#x00A0;minimizes&#x00A0;Hamiltonian&#x00A0;*)
+&#x00A0;<br />ruCritU&#x00A0;=&#x00A0;{U&#x00A0;-&gt;&#x00A0;-inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]};
+&#x00A0;<br />
+&#x00A0;<br />CritU[x_,z_]:=-inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x];
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />END&#x00A0;OF&#x00A0;FILE&#x00A0;&#x00A0;############################################&#x00A0;END&#x00A0;OF&#x00A0;FILE
+</div>
+</td></tr></table>
+<!--l. 751--><p class="nopar">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.2.1   </span></span> <a 
+ id="x86-46100045.2.1"></a><span 
+class="cmr-10x-x-109">Derivation of CritW and sHWo</span></h4>
+<!--l. 755--><p class="noindent"><span 
+class="cmr-10x-x-109">Now the demo starts by taking the Hamiltonian for the closed loop system sHW and optimizing it in W to</span>
+<span 
+class="cmr-10x-x-109">get what we denote sHWo. Soon the demo requires serious knowledge of [BHW] so if the reader has</span>
+<span 
+class="cmr-10x-x-109">problems he is urged to read SYSHinfTAC.m a file which gives a rather complete account of the terse and</span>
+<span 
+class="cmr-10x-x-109">unmotivated calculations here.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[4]:=&#x00A0;&lt;&lt;SYStems.m
+&#x00A0;<br />
+&#x00A0;<br />NOTE:&#x00A0;SYStems.m&#x00A0;loads&#x00A0;in&#x00A0;the&#x00A0;following&#x00A0;files:
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;NCAlgbra.m,&#x00A0;NCAliasFunctions.m,&#x00A0;SYSDefIA.m,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SYSSpecialize.m,&#x00A0;and&#x00A0;SYSHinfFormulas.m
+&#x00A0;<br />
+&#x00A0;<br />In[5]:=&#x00A0;Substitute[sHW,dd[z]-&gt;0]
+&#x00A0;<br />
+&#x00A0;<br />Out[5]=&#x00A0;-tp[W]&#x00A0;**&#x00A0;W&#x00A0;+&#x00A0;(tp[c[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;+&#x00A0;tp[C1[x]])&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(C1[x]&#x00A0;+&#x00A0;D12[x]&#x00A0;**&#x00A0;c[z])&#x00A0;+&#x00A0;((tp[W]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;+&#x00A0;tp[c[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[A[x]])&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;(A[x]&#x00A0;+&#x00A0;B1[x]&#x00A0;**&#x00A0;W&#x00A0;+&#x00A0;B2[x]&#x00A0;**&#x00A0;c[z]))/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;(b[z]&#x00A0;**&#x00A0;(C2[x]&#x00A0;+&#x00A0;D21[x]&#x00A0;**&#x00A0;W)&#x00A0;+&#x00A0;a[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;((tp[W]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;+&#x00A0;tp[C2[x]])&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;+&#x00A0;tp[a[z]])&#x00A0;**&#x00A0;GEz[x,&#x00A0;z])
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/2
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;critical&#x00A0;W,&#x00A0;found&#x00A0;by&#x00A0;taking&#x00A0;the&#x00A0;gradient&#x00A0;of&#x00A0;%&#x00A0;and&#x00A0;setting&#x00A0;it&#x00A0;to&#x00A0;0,
+&#x00A0;<br />is
+&#x00A0;<br />
+&#x00A0;<br />In[6]:=&#x00A0;CriticalPoint[%,W]
+&#x00A0;<br />
+&#x00A0;<br />Out[6]=&#x00A0;{W&#x00A0;-&gt;&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2}
+&#x00A0;<br />
+&#x00A0;<br />In[7]:=&#x00A0;Substitute[%%,%]
+&#x00A0;<br />
+&#x00A0;<br />Out[7]=&#x00A0;-(tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]/2)&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2)&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[c[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;+&#x00A0;tp[C1[x]])&#x00A0;**&#x00A0;(C1[x]&#x00A0;+&#x00A0;D12[x]&#x00A0;**&#x00A0;c[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(((tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]/2)&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B1[x]]&#x00A0;+&#x00A0;tp[c[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;+&#x00A0;tp[A[x]])&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;(A[x]&#x00A0;+&#x00A0;B1[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2)&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;B2[x]&#x00A0;**&#x00A0;c[z]))/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;(b[z]&#x00A0;**&#x00A0;(C2[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D21[x]&#x00A0;**&#x00A0;(tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2))&#x00A0;+&#x00A0;a[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(((tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]/2)&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x]]&#x00A0;+&#x00A0;tp[C2[x]])&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;+&#x00A0;tp[a[z]])&#x00A0;**&#x00A0;GEz[x,&#x00A0;z])/2
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;------Check&#x00A0;this&#x00A0;against&#x00A0;the&#x00A0;stored&#x00A0;formula&#x00A0;for&#x00A0;sHWo
+&#x00A0;<br />In[8]:=&#x00A0;NCExpand[%-sHWo]
+&#x00A0;<br />
+&#x00A0;<br />Out[8]=&#x00A0;-tp[c[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;c[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[c[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;c[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4
+&#x00A0;<br />
+&#x00A0;<br />In[9]:=&#x00A0;Substitute[%%,rue]
+
+&#x00A0;<br />
+&#x00A0;<br />NOTE:&#x00A0;rue&#x00A0;=&#x00A0;{tp[D12[x_]]&#x00A0;**&#x00A0;D12[x_]&#x00A0;:&gt;&#x00A0;e1[x],&#x00A0;D21[x_]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x_]]&#x00A0;:&gt;&#x00A0;e2[x]}
+&#x00A0;<br />
+&#x00A0;<br />Out[9]=&#x00A0;0
+&#x00A0;<br />
+</div>
+</td></tr></table>
+<!--l. 820--><p class="nopar"> <span 
+class="cmr-10x-x-109">The output sHWo is also recorded in the file SYSDefIA.m above. Note that neither sHWo nor sHWoWIA</span>
+<span 
+class="cmr-10x-x-109">depends on a or c.</span>
+<!--l. 825--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.2.2   </span></span> <a 
+ id="x86-46200045.2.2"></a><span 
+class="cmr-10x-x-109">The MIN/MAX in U</span></h4>
+<!--l. 828--><p class="noindent"><span 
+class="cmr-10x-x-109">Also useful is the optimum CritU for</span>
+<!--l. 830--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC139x.png" alt="Hopt  :=  miUnmaWx  sHW  =  miUnsHW  o = maWx minU sHW.
+" class="math-display" ></center>
+<!--l. 833--><p class="indent">   <span 
+class="cmr-10x-x-109">For WIA systems there is not an elegant formula for CritU and possibly is not unique. For IA systems,</span>
+<span 
+class="cmr-10x-x-109">one gets the concrete formula:</span>
+<!--l. 836--><p class="indent">
+   <center class="math-display" >
+<img 
+src="NCBIGDOC140x.png" alt="CritU (x,z) := - e1(x)- 1B2(x)T&#x2207;xe(x, z)&#x2215;2 - e1(x)- 1D12(x)T C1(x)
+" class="math-display" ></center>
+<!--l. 840--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.2.3   </span></span> <a 
+ id="x86-46300045.2.3"></a><span 
+class="cmr-10x-x-109">Derivations of IAX, Critc, and Hopt</span></h4>
+<!--l. 843--><p class="noindent"><span 
+class="cmr-10x-x-109">Now we optimize sHWo in c[z] variable and restrict to x=z to get the Doyle Glover Kargonekar Francis</span>
+<span 
+class="cmr-10x-x-109">condition for IA systems. Henceforth we abbreviate commands by their aliases.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[4]:=&#x00A0;&lt;&lt;SYStems.m
+&#x00A0;<br />In[5]:=&#x00A0;Crit[sHWo,c[z]]
+&#x00A0;<br />
+&#x00A0;<br />Out[5]=&#x00A0;{c[z]&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]}&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-----------&#x00A0;this&#x00A0;is&#x00A0;ruCritU
+&#x00A0;<br />In[6]:=&#x00A0;Hopt&#x00A0;=&#x00A0;NCE[Sub[sHWo,%5]]
+&#x00A0;<br />
+&#x00A0;<br />Out[6]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;a[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[a[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[x]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4
+&#x00A0;<br />
+&#x00A0;<br />In[7]:=&#x00A0;Sub[Hopt,x-&gt;z]
+&#x00A0;<br />
+&#x00A0;<br />Out[7]=&#x00A0;tp[A[z]]&#x00A0;**&#x00A0;GEx[z,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[z,&#x00A0;z]]&#x00A0;**&#x00A0;A[z]/2&#x00A0;+&#x00A0;tp[GEz[z,&#x00A0;z]]&#x00A0;**&#x00A0;a[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[a[z]]&#x00A0;**&#x00A0;GEz[z,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[z,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[z,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;C2[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[z,&#x00A0;z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;GEx[z,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEx[z,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[z,&#x00A0;z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[z,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[z,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEx[z,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[z,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[z,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;GEx[z,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[z,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;e2[z]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[z,&#x00A0;z]/4
+&#x00A0;<br />
+&#x00A0;<br />In[8]:=&#x00A0;ruXXYYI
+&#x00A0;<br />
+&#x00A0;<br />Out[8]=&#x00A0;{GEz[x_,&#x00A0;x_]&#x00A0;:&gt;&#x00A0;0,&#x00A0;GEx[x_,&#x00A0;x_]&#x00A0;:&gt;&#x00A0;2*XX[x],&#x00A0;GEx[x_,&#x00A0;0]&#x00A0;:&gt;&#x00A0;2*YYI[x]}
+&#x00A0;<br />
+&#x00A0;<br />In[9]:=&#x00A0;Sub[%7,%]
+&#x00A0;<br />
+&#x00A0;<br />Out[9]=&#x00A0;tp[A[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;A[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]
+&#x00A0;<br />
+&#x00A0;<br />In[10]:=&#x00A0;NCE[%-IAX[z]]
+
+&#x00A0;<br />Out[10]=&#x00A0;0
+</div>
+</td></tr></table>
+<!--l. 899--><p class="nopar">
+<!--l. 901--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.2.4   </span></span> <a 
+ id="x86-46400045.2.4"></a><span 
+class="cmr-10x-x-109">Derivation of IAYI </span></h4>
+<!--l. 904--><p class="noindent"><span 
+class="cmr-10x-x-109">This is an advanced exercise in the use of the glossary at the end of this document file. The glossary stores</span>
+<span 
+class="cmr-10x-x-109">the basic formulas for solutions to the IA </span><span 
+class="cmmi-10x-x-109">H</span><sup ><span 
+class="cmsy-8">&#x221E;</span></sup> <span 
+class="cmr-10x-x-109">control problem. We use them here to familiarize the reader</span>
+<span 
+class="cmr-10x-x-109">with the GLOSSARY.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[4]:=&#x00A0;&lt;&lt;SYStems.m
+&#x00A0;<br />
+&#x00A0;<br />In[5]:=&#x00A0;Sub[sHWo,z-&gt;0]
+&#x00A0;<br />
+&#x00A0;<br />Out[5]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;0]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;0]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;a[0]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[a[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;c[0]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/2&#x00A0;+&#x00A0;tp[GEx[x,&#x00A0;0]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;c[0]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+&#x00A0;tp[c[0]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;c[0]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[c[0]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;0]/2&#x00A0;+&#x00A0;tp[c[0]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;0]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;0]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/4
+&#x00A0;<br />
+&#x00A0;<br />In[6]:=&#x00A0;ruhomog
+&#x00A0;<br />
+&#x00A0;<br />Out[6]=&#x00A0;{A[0]&#x00A0;-&gt;&#x00A0;0,&#x00A0;C1[0]&#x00A0;-&gt;&#x00A0;0,&#x00A0;C2[0]&#x00A0;-&gt;&#x00A0;0,&#x00A0;a[0]&#x00A0;-&gt;&#x00A0;0,&#x00A0;c[0]&#x00A0;-&gt;&#x00A0;0}
+&#x00A0;<br />
+&#x00A0;<br />In[7]:=&#x00A0;Sub[%%,ruhomog]
+&#x00A0;<br />
+&#x00A0;<br />Out[7]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;0]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;0]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;0]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;0]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/4
+&#x00A0;<br />
+&#x00A0;<br />In[8]:=&#x00A0;Sub[%,ruXXYYI]
+&#x00A0;<br />
+&#x00A0;<br />NOTE:&#x00A0;ruXXYYI&#x00A0;=&#x00A0;{GEz[x_,&#x00A0;x_]&#x00A0;:&gt;&#x00A0;0,&#x00A0;GEx[x_,&#x00A0;x_]&#x00A0;:&gt;&#x00A0;2&#x00A0;XX[x],
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;GEx[x_,&#x00A0;0]&#x00A0;:&gt;&#x00A0;2&#x00A0;YYI[x]}
+&#x00A0;<br />
+&#x00A0;<br />Out[8]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;A[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;0]]&#x00A0;**&#x00A0;b[0]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[0]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;0]/2
+&#x00A0;<br />
+&#x00A0;<br />In[9]:=&#x00A0;SubSym[%,ruqb]
+&#x00A0;<br />
+&#x00A0;<br />NOTE:&#x00A0;ruqb&#x00A0;=&#x00A0;tp[b[z_]]&#x00A0;**&#x00A0;GEz[x_,&#x00A0;z_]&#x00A0;:&gt;&#x00A0;q[x,&#x00A0;z]
+&#x00A0;<br />
+&#x00A0;<br />Out[9]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;q[x,&#x00A0;0]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;A[x]&#x00A0;+&#x00A0;tp[q[x,&#x00A0;0]]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[q[x,&#x00A0;0]]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;q[x,&#x00A0;0]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;q[x,&#x00A0;0]/2&#x00A0;+
+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[q[x,&#x00A0;0]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]/2
+&#x00A0;<br />
+&#x00A0;<br />In[10]:=&#x00A0;Crit[%,q[x,0]]
+&#x00A0;<br />
+&#x00A0;<br />Out[10]=&#x00A0;{q[x,&#x00A0;0]&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-2*inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;-&#x00A0;2*inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]}
+&#x00A0;<br />
+&#x00A0;<br />In[11]:=&#x00A0;Sub[%%,%]
+&#x00A0;<br />
+&#x00A0;<br />Out[11]=&#x00A0;(-2*tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]])&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;(-2*inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x])/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;A[x]&#x00A0;+&#x00A0;(-2*tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]])&#x00A0;**&#x00A0;e2[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-2*inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;-&#x00A0;2*inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x])/
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;+&#x00A0;(-2*tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]])&#x00A0;**&#x00A0;D21[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]/2&#x00A0;+&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-2*inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;-&#x00A0;2*inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x])/
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />In[12]:=&#x00A0;NCE[%]
+&#x00A0;<br />
+&#x00A0;<br />Out[12]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;A[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;YYI[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[YYI[x]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;YYI[x]
+&#x00A0;<br />
+&#x00A0;<br />In[13]:=&#x00A0;NCE[%-IAYI[x]]
+&#x00A0;<br />
+&#x00A0;<br />Out[13]=&#x00A0;0
+</div>
+</td></tr></table>
+<!--l. 997--><p class="nopar">
+<!--l. 999--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.2.5   </span></span> <a 
+ id="x86-46500045.2.5"></a><span 
+class="cmr-10x-x-109">Derivation of critical q, k, and bterm</span></h4>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[2]:=&#x00A0;&lt;&lt;SYStems.m
+&#x00A0;<br />
+&#x00A0;<br />In[3]:=&#x00A0;SubSym[sHWo,ruc]
+&#x00A0;<br />
+&#x00A0;<br />NOTE:&#x00A0;ruc&#x00A0;=&#x00A0;c[z_]&#x00A0;:&gt;&#x00A0;-inv[e1[z]]&#x00A0;**&#x00A0;(tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z])
+&#x00A0;<br />
+&#x00A0;<br />Out[3]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;a[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[a[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z])&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-&#x00A0;(tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z])&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z])/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z])&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;(tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4
+&#x00A0;<br />
+&#x00A0;<br />In[4]:=&#x00A0;NCE[SubSym[%,rua]]
+&#x00A0;<br />
+&#x00A0;<br />NOTE:&#x00A0;rua&#x00A0;=&#x00A0;a[z_]&#x00A0;:&gt;&#x00A0;A[z]&#x00A0;+&#x00A0;B2[z]&#x00A0;**&#x00A0;(-inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;b[z]&#x00A0;**&#x00A0;C2[z]&#x00A0;+&#x00A0;((B1[z]&#x00A0;-&#x00A0;b[z]&#x00A0;**&#x00A0;D21[z])&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B1[z]])&#x00A0;**&#x00A0;XX[z]
+&#x00A0;<br />
+&#x00A0;<br />Out[4]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[A[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;C2[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;+
+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;b[z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[b[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]
+&#x00A0;<br />
+&#x00A0;<br />In[5]:=&#x00A0;SubSym[%,tp[GEz[x,z]]**b[z]-&gt;q[x,z]]
+&#x00A0;<br />
+&#x00A0;<br />Out[5]=&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;-&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[z]/2&#x00A0;+&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[A[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;-&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]
+&#x00A0;<br />
+&#x00A0;<br />In[6]:=&#x00A0;SubSym[%,rue]
+&#x00A0;<br />
+&#x00A0;<br />NOTE:&#x00A0;rue&#x00A0;=&#x00A0;{tp[D12[x_]]&#x00A0;**&#x00A0;D12[x_]&#x00A0;:&gt;&#x00A0;e1[x],&#x00A0;D21[x_]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D21[x_]]&#x00A0;:&gt;&#x00A0;e2[x]}
+&#x00A0;<br />
+&#x00A0;<br />Out[6]=&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;-&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[z]/2&#x00A0;+&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[A[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;-&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;C1[z]
+&#x00A0;<br />
+&#x00A0;<br />In[7]:=&#x00A0;Crit[%,tp[q[x,z]]]
+&#x00A0;<br />
+&#x00A0;<br />Out[7]=&#x00A0;{tp[q[x,&#x00A0;z]]&#x00A0;-&gt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-2*inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;+&#x00A0;2*inv[e2[x]]&#x00A0;**&#x00A0;C2[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*inv[e2[x]]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]}
+&#x00A0;<br />
+&#x00A0;<br />In[8]:=&#x00A0;K=NCE[SubSym[%19,%20]]
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />Out[8]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[A[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;+&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;-&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[x]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;C2[z]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[B2[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]&#x00A0;-&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[z]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]
+&#x00A0;<br />
+&#x00A0;<br />In[9]:=&#x00A0;K&#x00A0;=&#x00A0;NCC[NCC[K,inv[e2[x]]],inv[e1[z]]]
+&#x00A0;<br />
+&#x00A0;<br />Out[9]=&#x00A0;tp[A[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+&#x00A0;tp[A[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;C1[x]&#x00A0;+&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[x]/2&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;A[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[x]&#x00A0;+&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B2[z])&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-tp[B2[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;-&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z]/2)&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z])&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-tp[B2[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-&#x00A0;tp[B2[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[D12[x]]&#x00A0;**&#x00A0;C1[x])&#x00A0;+&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-C2[x]&#x00A0;+&#x00A0;C2[z]&#x00A0;-&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;+&#x00A0;tp[C2[z]])&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(C2[x]&#x00A0;-&#x00A0;C2[z]&#x00A0;+&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1[x]]&#x00A0;**&#x00A0;D12[x]&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;-&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEz[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;GEz[x,&#x00A0;z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(tp[C1[z]]&#x00A0;**&#x00A0;D12[z]&#x00A0;+&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B2[z])&#x00A0;**&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;e1[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e1[z]]&#x00A0;**&#x00A0;(tp[B2[z]]&#x00A0;**&#x00A0;XX[z]&#x00A0;+&#x00A0;tp[D12[z]]&#x00A0;**&#x00A0;C1[z])&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;inv[e2[x]]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-C2[x]/2&#x00A0;+&#x00A0;C2[z]/2&#x00A0;-&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2)
+&#x00A0;<br />
+&#x00A0;<br />In[10]:=&#x00A0;qpart&#x00A0;=&#x00A0;NCE[%19-(%19//.q[x,z]-&gt;0)]
+&#x00A0;<br />
+&#x00A0;<br />Out[10]=&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;-&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2[x]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;-&#x00A0;tp[C2[z]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;e2[x]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/4&#x00A0;+
+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]&#x00A0;**&#x00A0;tp[q[x,&#x00A0;z]]/2
+&#x00A0;<br />
+&#x00A0;<br />In[11]:=&#x00A0;%//.tp[q[x,z]]-&gt;0
+&#x00A0;<br />
+&#x00A0;<br />Out[11]=&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[x]/2&#x00A0;-&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;C2[z]/2&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;q[x,&#x00A0;z]&#x00A0;**&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2
+&#x00A0;<br />
+&#x00A0;<br />In[12]:=&#x00A0;L&#x00A0;=&#x00A0;%//.q[x,z]-&gt;1
+&#x00A0;<br />
+&#x00A0;<br />Out[12]=&#x00A0;C2[x]/2&#x00A0;-&#x00A0;C2[z]/2&#x00A0;+&#x00A0;D21[x]&#x00A0;**&#x00A0;tp[B1[x]]&#x00A0;**&#x00A0;GEx[x,&#x00A0;z]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;D21[z]&#x00A0;**&#x00A0;tp[B1[z]]&#x00A0;**&#x00A0;XX[z]/2
+&#x00A0;<br />
+&#x00A0;<br />In[13]:=&#x00A0;Q&#x00A0;=&#x00A0;e2[x]/4
+&#x00A0;<br />
+&#x00A0;<br />Out[13]=&#x00A0;e2[x]/4
+&#x00A0;<br />
+&#x00A0;<br />In[14]:=&#x00A0;bterm&#x00A0;=&#x00A0;q[x,z]+tp[L]**inv[Q]
+&#x00A0;<br />
+&#x00A0;<br />Out[14]=&#x00A0;4*(tp[GEx[x,&#x00A0;z]]&#x00A0;**&#x00A0;B1[x]&#x00A0;**&#x00A0;tp[D21[x]]/4&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[XX[z]]&#x00A0;**&#x00A0;B1[z]&#x00A0;**&#x00A0;tp[D21[z]]/2&#x00A0;+&#x00A0;tp[C2[x]]/2&#x00A0;-&#x00A0;tp[C2[z]]/2)&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[e2[x]]&#x00A0;+&#x00A0;q[x,&#x00A0;z]
+&#x00A0;<br />
+&#x00A0;<br />In[15]:=&#x00A0;Sub[NCE[%19-bterm**Q**tp[bterm]-K],rue]
+&#x00A0;<br />
+&#x00A0;<br />Out[15]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[16]:=&#x00A0;Quit
+</div>
+</td></tr></table>
+<!--l. 1246--><p class="nopar">
+<!--l. 1248--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3   </span></span> <a 
+ id="x86-46600045.3"></a><span 
+class="cmr-10x-x-109">Specializing to less general systems</span></h3>
+<!--l. 1251--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3.1   </span></span> <a 
+ id="x86-46700045.3.1"></a><span 
+class="cmr-10x-x-109">Specializing to linear systems</span></h4>
+<!--l. 1254--><p class="noindent"><span 
+class="cmr-10x-x-109">To specialize to the linear case, just apply</span>
+<!--l. 1256--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;rulinearsys to make the systems linear</span>
+<!--l. 1258--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;rulinearEB to make the energy function quadratic</span>
+<!--l. 1261--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;ruGE1 then ruGEXY to make the energy function solve the Hinf problem (max entropy</span>
+<span 
+class="cmr-10x-x-109">soln.)</span>
+<!--l. 1264--><p class="indent">   <span 
+class="cmsy-10x-x-109">&#x2219;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmbx-10x-x-109">rulinearall </span><span 
+class="cmr-10x-x-109">contains all of the rules above and is what we usually use.</span>
+<!--l. 1267--><p class="indent">   <span 
+class="cmr-10x-x-109">(See Glossary)</span>
+
+<!--l. 1273--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3.2   </span></span> <a 
+ id="x86-46800045.3.2"></a><span 
+class="cmr-10x-x-109">Specializing Using The Doyle Glover Khargonekar Francis Simplifying Assumptions</span></h4>
+<!--l. 1277--><p class="noindent"><span 
+class="cmr-10x-x-109">A special class of IA systems are those satisfying</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC141x.png" alt="D12(x)TC1(x)  = 0  and  B1(x)D21(x)T  =  0  " class="math-display" ></center>
+<span 
+class="cmr-10x-x-109">denoted in this paper as the Doyle-Glover-Kargonekar-Francis (DGKF) simplifying assumptions (see</span>
+<span 
+class="cmr-10x-x-109">[DGKF]). These simplify algebra substantially so are good for tutorial purposes even though they are not</span>
+<span 
+class="cmr-10x-x-109">satisfied in actual control problems. Look for rules ruDGKF*.</span>
+<!--l. 1286--><p class="indent">   <span 
+class="cmr-10x-x-109">(See Glossary)</span>
+<!--l. 1288--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">45.3.3   </span></span> <a 
+ id="x86-46900045.3.3"></a><span 
+class="cmr-10x-x-109">Demo: Linear Doyle Glover Kargonekar Francis Equations</span></h4>
+<!--l. 1292--><p class="noindent"><span 
+class="cmr-10x-x-109">The following demo verifies IAX and IAYI are same as DGX DGYI the Doyle Glover X and inv[Y] Riccati</span>
+<span 
+class="cmr-10x-x-109">equations in the special case of a linear system.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+In[24]:=&#x00A0;&lt;&lt;SYStems.m
+&#x00A0;<br />
+&#x00A0;<br />In[25]:=&#x00A0;NCE[IAX[x]//.rulinearall]
+&#x00A0;<br />
+&#x00A0;<br />Out[25]=&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[A]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />In[26]:=&#x00A0;Sub[%,x-&gt;1]
+&#x00A0;<br />
+&#x00A0;<br />Out[26]=&#x00A0;XX&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;tp[A]&#x00A0;**&#x00A0;XX&#x00A0;+&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;+&#x00A0;XX&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX&#x00A0;**&#x00A0;B2&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[B2]&#x00A0;**&#x00A0;XX&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C1]&#x00A0;**&#x00A0;D12&#x00A0;**&#x00A0;inv[e1]&#x00A0;**&#x00A0;tp[D12]&#x00A0;**&#x00A0;C1
+&#x00A0;<br />
+&#x00A0;<br />In[27]:=&#x00A0;NCE[%-DGX]
+&#x00A0;<br />
+&#x00A0;<br />Out[27]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[28]:=&#x00A0;NCE[IAYI[x]//.rulinearall]
+&#x00A0;<br />
+&#x00A0;<br />Out[28]=&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;A&#x00A0;**&#x00A0;x&#x00A0;+&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[A]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;**&#x00A0;x&#x00A0;-&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;**&#x00A0;x&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;**&#x00A0;x&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;tp[x]&#x00A0;**&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;tp[x]&#x00A0;**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;inv[YY]
+&#x00A0;<br />
+&#x00A0;<br />In[29]:=&#x00A0;Sub[%,x-&gt;1]
+&#x00A0;<br />
+&#x00A0;<br />Out[29]=&#x00A0;inv[YY]&#x00A0;**&#x00A0;A&#x00A0;+&#x00A0;tp[A]&#x00A0;**&#x00A0;inv[YY]&#x00A0;+&#x00A0;tp[C1]&#x00A0;**&#x00A0;C1&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;+&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;C2&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;tp[C2]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;inv[YY]&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;inv[YY]&#x00A0;**&#x00A0;B1&#x00A0;**&#x00A0;tp[D21]&#x00A0;**&#x00A0;inv[e2]&#x00A0;**&#x00A0;D21&#x00A0;**&#x00A0;tp[B1]&#x00A0;**&#x00A0;inv[YY]
+&#x00A0;<br />
+&#x00A0;<br />In[30]:=&#x00A0;NCE[YY**%**YY-DGY]
+&#x00A0;<br />
+&#x00A0;<br />Out[32]=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />In[34]:=&#x00A0;Quit
+</div>
+</td></tr></table>
+<!--l. 1343--><p class="nopar">
+<!--l. 1346--><p class="indent">
+
+
+   <!--l. 1347--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch46.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch44.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch44.html#tailNCBIGDOCch44.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch45.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa10.html#NCBIGDOCch45.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 1347--><p class="indent">   <a 
+ id="tailNCBIGDOCch45.html"></a>    
+</body></html> 

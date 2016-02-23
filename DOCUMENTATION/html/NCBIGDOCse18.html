@@ -1,0 +1,1170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4.8 Convexity of a NC function</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1477--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse19.html" >next</a>] [<a 
+href="NCBIGDOCse17.html" >prev</a>] [<a 
+href="NCBIGDOCse17.html#tailNCBIGDOCse17.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse18.html">tail</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse18.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">4.8   </span> <a 
+ id="x26-960004.8"></a>Convexity of a NC function</h3>
+<!--l. 1479--><p class="noindent">This chapter describes commands which do two things. One is compute the &#8221;region&#8221; on which a
+noncommutative function is matrix convex. The other is take a noncommutative quadratic
+function variables <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">, </span>etc and give a Gram representation for it, that is, represent it
+as
+   <center class="math-display" >
+<img 
+src="NCBIGDOC29x.png" alt="     T
+V [H]  M V [H]  " class="math-display" ></center> a
+&#8221;vector&#8221; with the <span 
+class="cmmi-12">H</span><sub ><span 
+class="cmmi-8">j</span></sub> entering linearly and <span 
+class="cmmi-12">M </span>a matrix. Other commands are described here but
+they are subservient to <span 
+class="cmbx-12">NCConvexityRegion[afunction,alist,options] </span>and would not be used
+independently of it. The commands in this chapter are not listed alphabetically but are listed in
+the presumed order of importance.
+<!--l. 1606--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.8.1   </span> <a 
+ id="x26-970004.8.1"></a>NCConvexityRegion[afunction,alistOfVars,opts]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:  <span 
+class="cmtt-12">NCConvexityRegion</span>[afunction,alistOfVars,opts]  computes  the  &#8221;region&#8221;  on
+      which <span 
+class="cmtt-12">afunction </span>is matrix convex with respect to <span 
+class="cmtt-12">alistOfVars</span>. It performs three main
+      operations. First it computes the Hessian with respect to <span 
+class="cmti-12">alistOfVars </span>(see <span 
+class="cmtt-12">NCHessian</span>).
+
+      Then,  using  <span 
+class="cmtt-12">NCMatrixOfQuadratic</span>,  the  Hessian  is  factored  into  the  form  <span 
+class="cmmi-12">v</span><sup ><span 
+class="cmmi-8">t</span></sup><span 
+class="cmmi-12">Mv</span>.
+      Finally,  depending  on  the  option  <span 
+class="cmtt-12">AllPermutation</span>,  either  <span 
+class="cmtt-12">NCAllPermutationLDU</span>
+      or  <span 
+class="cmtt-12">NCLDUDecomposition </span>is  called  to  compute  the  <span 
+class="cmmi-12">LDU  </span>factorization  of  <span 
+class="cmmi-12">M</span>,  the
+      default being <span 
+class="cmtt-12">AllPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">NCLDUDecomposition</span>. If <span 
+class="cmmi-12">D </span>ends up being diagonal,
+      then  a  list  of  the  diagonal  elements  of  <span 
+class="cmmi-12">D  </span>is  returned.  If  <span 
+class="cmmi-12">D  </span>ends  up  being
+      block  diagonal  with  2 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>2  blocks,  then  a  message  is  printed  out  and  the  list:
+      <span 
+class="cmsy-10x-x-120">{{</span><span 
+class="cmmi-12">diagonalentries</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">subdiagonalentries</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{-</span><span 
+class="cmmi-12">subdiagonalentries</span><span 
+class="cmsy-10x-x-120">}} </span>is returned. The
+      region of convexity of <span 
+class="cmtt-12">afunction </span>with respect to <span 
+class="cmtt-12">alistOfVars </span>equals the closure, in
+      a certain sense, of the set of matrices which makes all <span 
+class="cmtt-12">diagonal entries </span>positive.
+      If there are non-zero <span 
+class="cmtt-12">subdiagonal entries</span>, then <span 
+class="cmtt-12">afunction </span>is typically not matrix
+      convex  on  any  open  set.  Options  permit  the  user  to  select  a  range  of  different
+      permutation matrices, thereby producing several possibly distinct diagonal matrices
+      <span 
+class="cmmi-12">D</span>.
+      <br class="newline"><span 
+class="cmbx-12">EXAMPLE: </span><span 
+class="cmtt-12">NCConvexityRegion</span>[<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span>+ <span 
+class="cmmi-12">y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x,y</span><span 
+class="cmsy-10x-x-120">}</span>] gives:
+      <br class="newline">&#x00A0;     L**D**tp[L] gave non-trivial blocks, so the output list is:
+      <br class="newline">&#x00A0;     <span 
+class="cmsy-10x-x-120">{{</span>diagonal<span 
+class="cmsy-10x-x-120">}</span>,<span 
+class="cmsy-10x-x-120">{</span>subdiagonal<span 
+class="cmsy-10x-x-120">}</span>,<span 
+class="cmsy-10x-x-120">{</span>-subdiagonal<span 
+class="cmsy-10x-x-120">}}</span>
+      <br class="newline">&#x00A0;     <span 
+class="cmsy-10x-x-120">{{{</span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{-</span>2<span 
+class="cmsy-10x-x-120">}}}</span>
+      <br class="newline">While, <span 
+class="cmtt-12">NCConvexityRegion</span>[<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span>+ <span 
+class="cmmi-12">y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x,y</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,AllPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">True</span>] gives:
+      <br class="newline">&#x00A0;     Middle matrix is size 2 X 2
+      <br class="newline">&#x00A0;     At most 2 permutations possible.
+      <br class="newline">&#x00A0;     <span 
+class="cmsy-10x-x-120">{</span>1<span 
+class="cmsy-10x-x-120">}</span>
+      <br class="newline">&#x00A0;     L**D**tp[L] gave non-trivial blocks, so the output list is:
+      <br class="newline">&#x00A0;     <span 
+class="cmsy-10x-x-120">{{</span>diagonal<span 
+class="cmsy-10x-x-120">}</span>,<span 
+class="cmsy-10x-x-120">{</span>subdiagonal<span 
+class="cmsy-10x-x-120">}</span>,<span 
+class="cmsy-10x-x-120">{</span>-subdiagonal<span 
+class="cmsy-10x-x-120">}}</span>
+      <br class="newline">&#x00A0;     <span 
+class="cmsy-10x-x-120">{{{</span>0<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{-</span>2<span 
+class="cmsy-10x-x-120">}}}</span>
+      <br class="newline">&#x00A0;     In both cases, <span 
+class="cmtt-12">NCHessian</span>[<span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">y </span>+ <span 
+class="cmmi-12">y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">x,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x,h</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">y,k</span><span 
+class="cmsy-10x-x-120">}</span>] gives
+      <br class="newline">&#x00A0;     2<span 
+class="cmmi-12">h </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">k </span>+ 2<span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">h</span>,
+      <br class="newline"><span 
+class="cmtt-12">NCMatrixOfQuadratic</span>[2<span 
+class="cmmi-12">h </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">k </span>+ 2<span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">h,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">h,k</span><span 
+class="cmsy-10x-x-120">}</span>] gives
+      <br class="newline">&#x00A0;     <span 
+class="cmsy-10x-x-120">{{{</span><span 
+class="cmmi-12">h,k</span><span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span><span 
+class="cmmi-12">h</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">k</span><span 
+class="cmsy-10x-x-120">}}}</span>,
+      <br class="newline">and depending on if <span 
+class="cmtt-12">AllPermutation </span>is set to <span 
+class="cmtt-12">True </span>or <span 
+class="cmtt-12">False </span>you have that either
+      <span 
+class="cmtt-12">NCLDUDecomposition</span>[<span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span>] gives
+      <br class="newline">&#x00A0;    <span 
+class="cmsy-10x-x-120">{{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}}</span>
+      <br class="newline">or <span 
+class="cmtt-12">NCAllPermutationLDU</span>[<span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span>] gives
+      <br class="newline">&#x00A0;    <span 
+class="cmsy-10x-x-120">{{{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}}</span><span 
+class="cmmi-12">,</span>
+      <br class="newline">&#x00A0;    <span 
+class="cmsy-10x-x-120">{{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>2<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>2<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>1<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>0<span 
+class="cmmi-12">, </span>1<span 
+class="cmsy-10x-x-120">}}}}</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments:  <span 
+class="cmmi-12">afunction </span>is  a  function  whose  variables  are  listed  in  <span 
+class="cmmi-12">alistOfV ars</span>,  where
+
+      <span 
+class="cmmi-12">alistOfV ars </span>should be of the form <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">x</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,x</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">.</span>
+      <br class="newline">The default options for <span 
+class="cmtt-12">NCConvexityRegion </span>are:
+      <br class="newline">&#x00A0;    <span 
+class="cmtt-12">NCSimplifyDiagonal </span><span 
+class="cmsy-10x-x-120">&#x2192;</span><span 
+class="cmtt-12">False</span>
+      <br class="newline">&#x00A0;    <span 
+class="cmtt-12">DiagonalSelection </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>
+      <br class="newline">&#x00A0;    <span 
+class="cmtt-12">ReturnPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>
+      <br class="newline">&#x00A0;    <span 
+class="cmtt-12">ReturnBorderVector </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>
+      <br class="newline">&#x00A0;    <span 
+class="cmtt-12">AllPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>
+      <br class="newline">&#x00A0;    <span 
+class="cmtt-12">NCSimplifyDiagonal </span>is an option geared toward a similar option used in
+      <br class="newline"><span 
+class="cmtt-12">NCLDUDecomposition</span>. This will make sure that the pivots (or diagonal entries) are
+      all first simplified with <span 
+class="cmtt-12">NCSimplifyRational </span>before they are used to check that the
+      pivots are all nonzero. Simplifying the pivots using <span 
+class="cmtt-12">NCSimplifyRational </span>can be quite
+      time consuming, so by default we commute everything and then use Mathematica
+      simplification commmands. We do this only to convince ourselves that the pivot is
+      nonzero. If all the pivots are zero using <span 
+class="cmtt-12">CommuteEverything </span>we then revert to using
+      <span 
+class="cmtt-12">NCSimplifyRational </span>to verify our suspicions. Setting <span 
+class="cmtt-12">NCSimplifyDiagonal </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">True</span>
+      will bypass the commute everything step. (Note: Either way, the unsimplified form of
+      the pivot is returned unless it is equal to zero.)
+      <br class="newline">&#x00A0;    The option <span 
+class="cmtt-12">AllPermutation </span>tells <span 
+class="cmtt-12">NCConvexityRegion </span>which of
+      <br class="newline"><span 
+class="cmtt-12">NCLDUDecomposition </span>or <span 
+class="cmtt-12">NCAllPermutationLDU </span>to use. Setting <span 
+class="cmtt-12">AllPermutation </span>to
+      <span 
+class="cmtt-12">True </span>will use
+      <br class="newline"><span 
+class="cmtt-12">NCAllPermutationLDU</span>,while <span 
+class="cmtt-12">False </span>uses <span 
+class="cmtt-12">NCLDUDecomposition</span>. The default value is
+      <span 
+class="cmtt-12">AllPermutation </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmtt-12">False</span>. The following pertains to the case where <span 
+class="cmtt-12">AllPermutation</span>
+      is set to <span 
+class="cmtt-12">True</span>. If you decide to do this, then you should also set <span 
+class="cmtt-12">DiagonalSelection</span>
+      to  the  permutations  you  would  like  <span 
+class="cmtt-12">NCAllPermutationLDU </span>to  use.  Since  different
+      permutations return different diagonals, some diagonals are simpler to work with than
+      others. On the other hand, if <span 
+class="cmtt-12">AllPermutation </span>is set to <span 
+class="cmtt-12">False</span>, which it defaults to,
+      then <span 
+class="cmtt-12">NCConvexityRegion </span>calls <span 
+class="cmtt-12">NCLDUDecomposition </span>and what follows does not apply
+      as no permutations are used. Different permutations return different diagonals. Some
+      diagonals are simpler to work with than others. Because of this, we allow the user to
+      select a sampling of different permutations. The total number of permutations will not
+      be known until <span 
+class="cmmi-12">M </span>is computed. After <span 
+class="cmmi-12">M </span>is computed, the total number of possible
+      permutations will be printed on the screen. <span 
+class="cmtt-12">DiagonalSelection </span><span 
+class="cmsy-10x-x-120">&#x2192; {</span><span 
+class="cmmi-12">n</span><span 
+class="cmsy-10x-x-120">} </span>returns the
+      diagonals resulting from the first <span 
+class="cmmi-12">n </span>permutations. <span 
+class="cmtt-12">DiagonalSelection</span><span 
+class="cmsy-10x-x-120">&#x2192;{</span><span 
+class="cmmi-12">k</span>,<span 
+class="cmmi-12">n</span><span 
+class="cmsy-10x-x-120">} </span>returns
+      the diagonals resulting from the <span 
+class="cmmi-12">k</span><sup ><span 
+class="cmmi-8">th</span></sup> through <span 
+class="cmmi-12">n</span><sup ><span 
+class="cmmi-8">th</span></sup> permutations. Since the total number
+      of permutations is assumed to be unknown by the user, if <span 
+class="cmmi-12">n </span>is too high, then <span 
+class="cmmi-12">n </span>is
+      replaced by the total number of permutations. Also, not all of the permutations are
+
+      permissible. Because of this, <span 
+class="cmtt-12">NCLDUDecomposition </span>automatically pivots if an invalid
+      permutation is used for a particular step. This means it is possible that not all the
+      diagonals returned result from different permutations. For this reason there is the
+      option <span 
+class="cmtt-12">ReturnPermutation </span>which if entered as <span 
+class="cmtt-12">True </span>returns the permutations used
+      for  each  resulting  factorization.  Finally,  the  user  may  wish  to  analyze  the  border
+      vectors  and  may  do  so  by  setting  <span 
+class="cmtt-12">ReturnBorderVector </span>to  <span 
+class="cmtt-12">True</span>.  This  will  cause
+      <span 
+class="cmtt-12">NCConvexityRegion </span>to return the border vectors <span 
+class="cmmi-12">v </span>from the <span 
+class="cmmi-12">v</span><sup ><span 
+class="cmmi-8">t</span></sup><span 
+class="cmmi-12">Mv </span>factorization of the
+      hessian. Now <span 
+class="cmmi-12">v</span><sup ><span 
+class="cmmi-8">t</span></sup> will have the form
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC30x.png" alt="L11H1, L12H1, &#x22C5;&#x22C5;&#x22C5; ,L1k1H1, &#x22C5;&#x22C5;&#x22C5;Ln1Hn, Ln2Hn, &#x22C5;&#x22C5;&#x22C5; ,LnknHn
+      " class="math-display" ></center> So what will actually be returned is a list of the form
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC31x.png" alt="{{L  ,...,L    },...,{L  ,...,L    }}.
+    11      1k1       n1       nkn
+      " class="math-display" ></center> This vector will be formed using a call to <span 
+class="cmtt-12">NCBorderVectorGather</span>. Also, a call will be
+      made to <span 
+class="cmtt-12">NCIndependenceCheck </span>to determine, if possible, whether or not the elements
+      of the above list are independent. The results of this check will be printed to the screen.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx26-97001"></a>
+
+<!--l. 1736--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.8.2   </span> <a 
+ id="x26-980004.8.2"></a>NCMatrixOfQuadratic[ <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-51.png" alt="Q" class="10-120x-x-51" /></span>, <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span>] </h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:                 <span 
+class="cmtt-12">NCMatrixOfQuadratic[ </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-51.png" alt="Q" class="10-120x-x-51" /></span><span 
+class="cmmi-12">, </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmtt-12">]           </span>gives
+      a vector matrix factorization of a symmetric quadratic function <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-51.png" alt="Q" class="10-120x-x-51" /> </span>in noncommutative
+      variables <img 
+src="NCBIGDOC32x.png" alt=" &#x20D7;
+H"  class="vec" > = <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span>and their transposes.
+      <br class="newline"><span 
+class="cmtt-12">NCMatrixOfQuadratic</span>[  <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-51.png" alt="Q" class="10-120x-x-51" /></span>,  <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">H</span><sub ><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,H</span><sub ><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span>],  generates  the  list  <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmtt-12">left border</span>
+      <span 
+class="cmtt-12">vector, coefficient matrix, right border vector</span><span 
+class="cmsy-10x-x-120">}</span>. That is, <span 
+class="cmmi-12">Q </span>is factored into
+      the vector-matrix-vector product <span 
+class="cmmi-12">V </span>[<img 
+src="NCBIGDOC33x.png" alt="H&#x20D7;"  class="vec" >]<sup ><span 
+class="cmmi-8">T</span> </sup><span 
+class="cmmi-12">M</span><sub >
+      <!--l. 1736--><p class="noindent"></sub>Q V[<img 
+src="NCBIGDOC34x.png" alt="H "  class="vec" >]<span 
+class="cmmi-12">.Thevector</span>V[<img 
+src="NCBIGDOC35x.png" alt="H "  class="vec" >]<span 
+class="cmmi-12">islinearin</span><img 
+src="NCBIGDOC36x.png" alt="H "  class="vec" ><span 
+class="cmmi-12">andiscalleda</span><span 
+class="cmmi-12">bordervectorofthequadraticfunction</span>Q<span 
+class="cmmi-12">.Thematrix</span>M&#x02D9;Q<span 
+class="cmmi-12">iscalledthe</span><span 
+class="cmmi-12">coefficientmatrixofthequadraticfunction</span>Q<span 
+class="cmmi-12">.</span><span 
+class="cmmi-12">Arguments </span>:<span 
+class="cmmi-12">Eachtermof</span>Q<span 
+class="cmmi-12">isassumedtobeaquadraticexpressionintermsofthevariables</span>H&#x02D9;1,H&#x02D9;2,. . . ,H&#x02D9;n<span 
+class="cmmi-12">andtheirtransposes</span>(Q<span 
+class="cmmi-12">ishomogeneous</span>)<span 
+class="cmmi-12">.</span>
+      <span 
+class="cmmi-12">Forexample,supposethat</span>Q=3 tp[x]**y+3 tp[y]**x<span 
+class="cmmi-12">andthat</span>
+      <img 
+src="NCBIGDOC37x.png" alt="H "  class="vec" > = <span 
+class="cmsy-10x-x-120">{</span>x,y<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">.Then,</span><span 
+class="cmmi-12">NCMatrixOfQuadratic</span>[Q<span 
+class="cmmi-12">,</span><img 
+src="NCBIGDOC38x.png" alt="H "  class="vec" >]<span 
+class="cmmi-12">gives</span><span 
+class="cmsy-10x-x-120">{{{</span><span 
+class="cmmi-12">tp</span>[<span 
+class="cmmi-12">x</span>]<span 
+class="cmmi-12">,tp</span>[<span 
+class="cmmi-12">y</span>]<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span>0<span 
+class="cmmi-12">, </span>3<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span>3<span 
+class="cmmi-12">, </span>0<span 
+class="cmsy-10x-x-120">}}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{{</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">y</span><span 
+class="cmsy-10x-x-120">}}}</span><span 
+class="cmmi-12">.In</span><span 
+class="cmmi-12">MatrixForm</span><span 
+class="cmmi-12">,thislookslike</span><img 
+src="NCBIGDOC39x.png" alt="                                 (tp[x]  tp[y])"  class="left" align="middle"><span 
+class="cmsy-10x-x-120">*</span>
+      <img 
+src="NCBIGDOC40x.png" alt="(       )
+   0  3
+   3  0"  class="left" align="middle"><span 
+class="cmsy-10x-x-120">*</span><img 
+src="NCBIGDOC41x.png" alt="(    )
+   x
+   y"  class="left" align="middle"><span 
+class="cmmi-12">.</span>
+      <span 
+class="cmmi-12">Ingeneral,suppose</span>Q<span 
+class="cmmi-12">isaquadraticfunctionoftwovariables,</span><img 
+src="NCBIGDOC42x.png" alt="H "  class="vec" > = <span 
+class="cmsy-10x-x-120">{</span>H,K<span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmmi-12">,withalltransposeelements</span>H&#x02C6;T, K&#x02C6;T<span 
+class="cmmi-12">occuringbeforeallnon</span><span 
+class="cmsy-10x-x-120">-</span>
+      <span 
+class="cmmi-12">transposeelements.Then</span><span 
+class="cmmi-12">NCMatrixOfQuadratic</span><span 
+class="cmmi-12">willreturnthe</span><span 
+class="cmmi-12">leftbordervector</span>V[<img 
+src="NCBIGDOC43x.png" alt="H "  class="vec" >]&#x02C6;T<span 
+class="cmmi-12">,thematrix</span>M&#x02D9;Q<span 
+class="cmmi-12">,andthe</span><span 
+class="cmmi-12">rightvector</span>V[<img 
+src="NCBIGDOC44x.png" alt="                              H
+      "  class="vec" >]<span 
+class="cmmi-12">where</span>
+      <span 
+class="cmmi-12">M</span><sub >
+<!--l. 1736--><p class="noindent"></sub>Q                                                                                                                  :=
+<img 
+src="NCBIGDOC45x.png" alt="(                                                         )
+     A11     A12    &#x22C5;&#x22C5;&#x22C5;   A1,&#x2113;1     A1,&#x2113;1+1   &#x22C5;&#x22C5;&#x22C5;    A1,n
+||    AT12     A22    &#x22C5;&#x22C5;&#x22C5;   A2,&#x2113;1     A2,&#x2113;1+1   &#x22C5;&#x22C5;&#x22C5;    A2,n  ||
+|    &#x22C5;&#x22C5;&#x22C5;     &#x22C5;&#x22C5;&#x22C5;    &#x22C5;&#x22C5;&#x22C5;    &#x22C5;&#x22C5;&#x22C5;       &#x22C5;&#x22C5;&#x22C5;     &#x22C5;&#x22C5;&#x22C5;    &#x22C5;&#x22C5;&#x22C5;   |
+||   AT       AT     &#x22C5;&#x22C5;&#x22C5;   A &#x2113;,&#x2113;    A &#x2113;,&#x2113;+1   &#x22C5;&#x22C5;&#x22C5;   A &#x2113;,n  ||
+||    T1,&#x2113;1    T2,&#x2113;1          T1 1       11              1   ||
+|  A 1,&#x2113;1+1  A2,&#x2113;1+1  &#x22C5;&#x22C5;&#x22C5;  A &#x2113;1,&#x2113;1+1  A &#x2113;1+1,&#x2113;1+1  &#x22C5;&#x22C5;&#x22C5;  A &#x2113;1+1,n |
+(    &#x22C5;&#x22C5;&#x22C5;     &#x22C5;&#x22C5;&#x22C5;    &#x22C5;&#x22C5;&#x22C5;    &#x22C5;&#x22C5;&#x22C5;       &#x22C5;&#x22C5;&#x22C5;     &#x22C5;&#x22C5;&#x22C5;    &#x22C5;&#x22C5;&#x22C5;   )
+    AT1,n     AT2,n   &#x22C5;&#x22C5;&#x22C5;   AT&#x2113;1,n    AT&#x2113;1+1,n   &#x22C5;&#x22C5;&#x22C5;    An,n"  class="left" align="middle"> and <span 
+class="cmmi-12">V </span>[ <span 
+class="cmmi-12">&#x20D7;</span><span 
+class="cmmi-12">H</span>] := <span 
+class="cmex-10x-x-120">(</span> 
+<span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span> 
+<span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span> 
+<span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span> 
+<span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span> 
+<span 
+class="cmex-10x-x-120">(</span> <span 
+class="cmmi-12">HL</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmr-8">1</span>
+       <span 
+class="cmmi-12">HL</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmr-8">2</span>
+         <span 
+class="cmsy-10x-x-120">&#x22C5;&#x22C5;&#x22C5;</span>
+  <span 
+class="cmmi-12">HL</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmmi-8">&#x2113;</span><span 
+class="cmr-6">1</span>
+        <span 
+class="cmmi-12">KL</span><span 
+class="cmr-8">2</span>
+<span 
+class="cmr-8">1</span>
+         <span 
+class="cmsy-10x-x-120">&#x22C5;&#x22C5;&#x22C5;</span>
+  <span 
+class="cmmi-12">KL</span><span 
+class="cmr-8">2</span>
+<span 
+class="cmmi-8">&#x2113;</span><span 
+class="cmr-6">2</span>  <span 
+class="cmex-10x-x-120">)</span>
+      <span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span>
+      <span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span>
+      <span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span>
+      <span 
+class="cmex-10x-x-120">|</span> <span 
+class="cmex-10x-x-120">|</span>
+      <span 
+class="cmex-10x-x-120">)</span>
+<span 
+class="cmmi-12">forsome</span>L&#x02D9;i&#x02C6;j  ,  i=1,. . . ,<span 
+class="cmmi-12">&#x2113;</span><span 
+class="cmmi-8">j</span>. The <span 
+class="cmmi-12">L</span><span 
+class="cmmi-8">j</span>
+<span 
+class="cmmi-8">i</span> <span 
+class="cmmi-12">, i </span>= 1<span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">...</span><span 
+class="cmmi-12">,&#x2113;</span><span 
+class="cmmi-8">j</span>  are called the <span 
+class="cmti-12">coefficients of the border</span>
+<span 
+class="cmti-12">vector</span>. The <span 
+class="cmmi-12">L</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmmi-8">i</span>  corresponding to <span 
+class="cmmi-12">H </span>are distinct and only one may be the identity matrix
+(equivalently for the <span 
+class="cmmi-12">L</span><span 
+class="cmr-8">2</span>
+<span 
+class="cmmi-8">i</span>  corresponding to <span 
+class="cmmi-12">K</span>). The border vector <span 
+class="cmmi-12">V </span>is the vector composed
+of <span 
+class="cmmi-12">H</span>, <span 
+class="cmmi-12">K </span>and <span 
+class="cmmi-12">L</span><span 
+class="cmmi-8">j</span>
+<span 
+class="cmmi-8">i</span>. The matrix <span 
+class="cmmi-12">M</span><span 
+class="cmsy-8"><img 
+src="cmsy8-51.png" alt="Q" class="8x-x-51" /></span> is the matrix with <span 
+class="cmmi-12">A</span><span 
+class="cmmi-8">i,j</span> entries.
+Noncommutative quadratics which are <span 
+class="cmti-12">not hereditary </span>have a similar representation (which
+takes more space to write) for such a quadratic in <span 
+class="cmmi-12">H,K</span>. For example, the border vector for
+a quadratic in <span 
+class="cmmi-12">H</span>, <span 
+class="cmmi-12">H</span><span 
+class="cmmi-8">T</span> , <span 
+class="cmmi-12">K</span>, <span 
+class="cmmi-12">K</span><span 
+class="cmmi-8">T</span>  has the form
+                                   <span 
+class="cmmi-10x-x-109">V </span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">H,K</span><span 
+class="cmr-10x-x-109">] =</span> <span 
+class="cmex-10x-x-109">[</span>
+  <span 
+class="cmmi-10x-x-109">V</span><span 
+class="cmr-8">1</span>    <span 
+class="cmmi-10x-x-109">V</span><span 
+class="cmr-8">2</span>  <span 
+class="cmex-10x-x-109">]</span>
+<span 
+class="cmr-10x-x-109">where we have</span>
+
+                  <span 
+class="cmmi-10x-x-109">V</span><span 
+class="cmr-8">1</span> <span 
+class="cmr-10x-x-109">=</span> <span 
+class="cmex-10x-x-109">(</span>
+ <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">L</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmr-8">1</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-8">T</span> <span 
+class="cmmi-10x-x-109">H</span><span 
+class="cmmi-8">T</span> <span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x22C5;&#x22C5;&#x22C5;</span> <span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">L</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmmi-8">&#x2113;</span><span 
+class="cmr-6">1</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-8">T</span> <span 
+class="cmmi-10x-x-109">H</span><span 
+class="cmmi-8">T</span> <span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">L</span><span 
+class="cmr-8">2</span>
+<span 
+class="cmr-8">1</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-8">T</span> <span 
+class="cmmi-10x-x-109">K</span><span 
+class="cmmi-8">T</span> <span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x22C5;&#x22C5;&#x22C5;</span> <span 
+class="cmmi-10x-x-109">,L</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmr-8">2</span>
+<span 
+class="cmmi-8">&#x2113;</span><span 
+class="cmr-6">2</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-8">T</span> <span 
+class="cmmi-10x-x-109">K</span><span 
+class="cmmi-8">T</span> <span 
+class="cmex-10x-x-109">)</span>
+<span 
+class="cmr-10x-x-109">and</span>
+                           <span 
+class="cmmi-10x-x-109">V</span><span 
+class="cmr-8">2</span> <span 
+class="cmr-10x-x-109">=</span> <span 
+class="cmex-10x-x-109">(</span><span 
+class="cmr-10x-x-109">~</span>
+  <span 
+class="cmmi-10x-x-109">L</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmr-8">1</span><span 
+class="cmmi-10x-x-109">H,</span><span 
+class="cmsy-10x-x-109">&#x22C5;&#x22C5;&#x22C5;</span> <span 
+class="cmmi-10x-x-109">,</span> <span 
+class="cmr-10x-x-109">~</span> <span 
+class="cmmi-10x-x-109">L</span><span 
+class="cmr-8">1</span>
+<span 
+class="cmmi-8">&#x2113;</span><span 
+class="cmr-6">1</span><span 
+class="cmmi-10x-x-109">H,</span> <span 
+class="cmr-10x-x-109">~</span> <span 
+class="cmmi-10x-x-109">L</span><span 
+class="cmr-8">2</span>
+<span 
+class="cmr-8">1</span><span 
+class="cmmi-10x-x-109">K,</span><span 
+class="cmsy-10x-x-109">&#x22C5;&#x22C5;&#x22C5;</span> <span 
+class="cmmi-10x-x-109">,</span> <span 
+class="cmr-10x-x-109">~</span> <span 
+class="cmmi-10x-x-109">L</span><span 
+class="cmr-8">2</span>
+<span 
+class="cmmi-8">&#x2113;</span><span 
+class="cmr-6">2</span><span 
+class="cmmi-10x-x-109">K</span><span 
+class="cmex-10x-x-109">)</span>
+ <span 
+class="cmmi-10x-x-109">.</span>
+We should emphasize that the size of the <span 
+class="cmmi-12">M</span><span 
+class="cmsy-8"><img 
+src="cmsy8-51.png" alt="Q" class="8x-x-51" /></span> representation of a noncommutative quadratic
+functions <span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-51.png" alt="Q" class="10-120x-x-51" /></span>[<span 
+class="cmmi-12">H</span><span 
+class="cmr-8">1</span><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">...</span><span 
+class="cmmi-12">,H</span><span 
+class="cmmi-8">k</span>] depends on the particular quadratic and not only on the number of
+arguments of the quadratic. There are noncommutative quadratic functions in one variable
+which have a representation with <span 
+class="cmmi-12">M</span><span 
+class="cmsy-8"><img 
+src="cmsy8-51.png" alt="Q" class="8x-x-51" /></span> a 102 <span 
+class="cmsy-10x-x-120">&#x00D7; </span>102 matrix.
+The basic idea of <span 
+class="cmtt-12">NCMatrixOfQuadratic </span>is that it searches for terms of form
+                           <span 
+class="cmmi-12">Left </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">X </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Middle </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Right</span>
+where <span 
+class="cmmi-12">X </span>= <span 
+class="cmmi-12">H</span><span 
+class="cmmi-8">i</span> or <span 
+class="cmmi-12">H</span><span 
+class="cmmi-8">T</span>
+<span 
+class="cmmi-8">i</span>  and <span 
+class="cmmi-12">Y </span>= <span 
+class="cmmi-12">H</span><span 
+class="cmmi-8">j</span> or <span 
+class="cmmi-12">H</span><span 
+class="cmmi-8">T</span>
+<span 
+class="cmmi-8">j</span>  for 1 <span 
+class="cmsy-10x-x-120">&#x2264; </span>(<span 
+class="cmmi-12">i,j</span>) <span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">n</span>. Terms of the form <span 
+class="cmmi-12">Left</span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">X </span>and
+<span 
+class="cmmi-12">Y </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="cmmi-12">Right </span>are used to form the left and right vectors. Each time the search finds a unique
+<span 
+class="cmmi-12">Right </span>(<span 
+class="cmmi-12">Left</span>) term causes the length of the right (left) border vector to be increased by one.
+The term <span 
+class="cmmi-12">Middle </span>becomes the entries in the matrix <span 
+class="cmmi-12">M</span><span 
+class="cmsy-8"><img 
+src="cmsy8-51.png" alt="Q" class="8x-x-51" /></span>.
+Comments / Limitations:  <span 
+class="cmtt-12">NCMatrixOfQuadratic </span>will try to symmetrize the resulting matrix <span 
+class="cmmi-12">M</span><span 
+class="cmsy-8"><img 
+src="cmsy8-51.png" alt="Q" class="8x-x-51" /></span>.
+If  <span 
+class="cmtt-12">NCMatrixOfQuadratic </span>is  unable  to  do  this,  an  error  message  will  be  printed  and  <span 
+class="cmsy-10x-x-120">{</span>
+<span 
+class="cmtt-12">leftvector, matrix, rightvector </span><span 
+class="cmsy-10x-x-120">} </span>will be returned, where <span 
+class="cmtt-12">matrix </span>is not symmetric
+and <span 
+class="cmtt-12">leftvector </span>is not necessarily the transpose of <span 
+class="cmtt-12">rightvector</span>. The vector-matrix-vector
+product should still be equal to the orginal quadratic expression.
+<a 
+ id="dx26-98001"></a>
+<!--l. 1810--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.8.3   </span> <a 
+ id="x26-990004.8.3"></a>NCIndependenceCheck[aListofLists,variable]</h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   <span 
+class="cmtt-12">NCIndependenceCheck[aListofLists,variable]  </span>is   aimed   at   verifying
+      whether or not a given set of polynomials are independent or not. It analyzes each list
+      of polynomials in <span 
+class="cmti-12">aListofLists </span>separately. There are three possible types of outputs for
+
+      each list in <span 
+class="cmti-12">aListofLists</span>. Two of them correspond to <span 
+class="cmtt-12">NCIndependenceCheck </span>successfully
+      determining whether or not the list of polynomials is independent. The third type
+      of  output  corresponds  to  an  unsuccessful  attempt  at  determining  dependence  or
+      independence.  If  a  particular  list  is  determined  to  be  independent,  <span 
+class="cmti-12">True  </span>will  be
+      returned. If a list is determined to be dependent, a list beginning with <span 
+class="cmti-12">False </span>containing
+      a  set  of  coefficients  which  demonstrate  independence  will  be  returned.  Finally,  if
+      <span 
+class="cmtt-12">NCIndependenceCheck </span>cannot determine dependence or independence, it returns a list
+      beginning with <span 
+class="cmti-12">Undetermined </span>containing other information which is illustrated below
+      and described further in Comments/Limitations.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: <span 
+class="cmti-12">aListofLists </span>is a list containing a list of the polynomials which are suspected of being
+      dependent. The argument <span 
+class="cmti-12">variable </span>will be subscripted and used to return the coefficient
+      dependencies for each list. Below is an example of a list of four lists. The first two are
+      dependent, the third is independent, and the fourth is undetermined.
+      <br class="newline">
+      <br class="newline">Suppose you have four lists: <div class="eqnarray">
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC46x.png" alt="List1   =  {7, 6a,a,abd2,d,b,12a, d,4a2d,a2,5a2, b2,b}
+                        2              2    2    2    2
+List2   =  {50, 8a,a,abd ,d,b,12a, d,4a d,a ,16a  ,40b ,b}
+List3   =  {4a, 5b + c,c}
+
+List4   =  {x * *y,y * *x}
+      " class="math-display" ><a 
+ id="x26-980004.8.2"></a></center>
+      </div>Then <span 
+class="cmtt-12">NCIndependenceCheck[List1,List2,List3,List4,</span><span 
+class="cmmi-12">&#x03BB;</span><span 
+class="cmtt-12">]  </span>returns
+      <br class="newline"><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">NewList</span>1<span 
+class="cmmi-12">,NewList</span>2<span 
+class="cmmi-12">,NewList</span>3<span 
+class="cmmi-12">,NewList</span>4<span 
+class="cmsy-10x-x-120">} </span>where: <div class="eqnarray">
+
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC47x.png" alt="N ewList1   =   {F alse,
+                {0,- &#x03BB;3-- 2&#x03BB;  ,&#x03BB; ,0,- &#x03BB; ,- &#x03BB;  ,&#x03BB; ,&#x03BB; ,- 5&#x03BB;11-,0,&#x03BB;  ,0,&#x03BB;  }}
+                      6      7  3      8    13  7  8     4      11    13
+N ewList2   =   {F alse,
+                     &#x03BB;     3&#x03BB;
+                {0,- -3--  --7,&#x03BB;3,0,- &#x03BB;8,- &#x03BB;13,&#x03BB;7,&#x03BB;8, - 4 &#x03BB;11,0,&#x03BB;11,0,&#x03BB;13}}
+                      8     2
+N ewList3   =   True
+
+N ewList4   =   {U ndetermined, - &#x03BB;2x * *y + &#x03BB;2y * *x, {- &#x03BB;2,&#x03BB;2}}
+      " class="math-display" ></center>
+      </div>In particular, what the above says is that <span 
+class="cmmi-12">List</span>1<span 
+class="cmmi-12">.Newlist</span>1[[2]] = 0,
+      <br class="newline">and <span 
+class="cmmi-12">List</span>2<span 
+class="cmmi-12">.Newlist</span>2[[2]] = 0 (where &#8220;.&#8221; refers to the vector dot product). Therefore,
+      the set of polynomials in <span 
+class="cmmi-12">List</span>1 and <span 
+class="cmmi-12">List</span>2 are dependent. <span 
+class="cmmi-12">List</span>3 is independent. Note
+      that <span 
+class="cmmi-12">List</span>4 is clearly indpendent in the noncommutating case, and dependent in the
+      commuting case. When such phenomena occur, <span 
+class="cmtt-12">NCIndependenceCheck  </span>is unable to
+      determine whether or not the list of polynomials is independent. However, it does
+      return to the user, a set of dependencies for the <span 
+class="cmmi-12">&#x03BB;</span><sub ><span 
+class="cmmi-8">i</span></sub>&#8217;s which must hold in order for the
+      polynomials to sum to zero.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: <span 
+class="cmti-12">IndependenceCheck </span>first uses the <span 
+class="cmti-12">CommuteEverything </span>command
+      to make the problem feasible. Therefore it is possible that polynomials are dependent
+      if  variables  commute,  and  independent  if  not.  So  in  this  case,  or  when  the  the
+      expression does not collapse to zero when using the commuting coefficients with the non
+      commuting polynomials, then the list <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">Undertermined,expression,list</span><span 
+class="cmsy-10x-x-120">} </span>is returned.
+      The list element <span 
+class="cmti-12">expression </span>is the sum of the polynomials with their corresponding <span 
+class="cmmi-12">&#x03BB;</span>&#8217;s.
+      And finally, <span 
+class="cmti-12">list </span>yields a list of the dependencies for the coefficents. </dd></dl>
+<a 
+ id="dx26-99003"></a>
+<!--l. 1843--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark">4.8.4   </span> <a 
+ id="x26-1000004.8.4"></a>NCBorderVectorGather[alist,varlist] </h4>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description">Aliases: <span 
+class="cmbx-12">None.</span>
+
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Description:   <span 
+class="cmtt-12">NCBorderVectorGather[alist,varlist]  </span>can   be   used   to   gather   the
+      polynomial coefficents preceeding the elements given in <span 
+class="cmti-12">varlist </span>whenever they occur
+      in <span 
+class="cmti-12">alist</span>. That is to say, <span 
+class="cmti-12">alist </span>is a vector with variable entries. Each entry should end
+      with some term from <span 
+class="cmti-12">varlist </span>(or the transpose of some term from <span 
+class="cmti-12">varlist</span>). Then for
+      each element of <span 
+class="cmti-12">varlist </span>the coefficients that appear in front of that element in <span 
+class="cmti-12">alist </span>are
+      gathered together and placed inside a list. The list returned will be a list of lists, each
+      entry a list of the coefficients corresponding to the respective entries in <span 
+class="cmti-12">varlist </span>and their
+      transposes if they occur.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Arguments: The first argument <span 
+class="cmti-12">alist </span>is a list of polynomials, all of which end in terms
+      from elements of the second argument, <span 
+class="cmti-12">varlist</span>, or in their transpose. <span 
+class="cmti-12">alist </span>need not be
+      ordered in a particular way with respect to <span 
+class="cmti-12">varlist</span>. The preceeding is best explained in
+      the following example.
+      <br class="newline">Suppose <span 
+class="cmmi-12">List </span>=
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC48x.png" alt="{A  * *B * *k, B * *B * *tp[h],B * *tp[A] * *k,B * *C * *tp[h],A * *tp[h],B * *h, C * *h}
+      " class="math-display" ></center> Then <span 
+class="cmtt-12">NCBorderVectorGather[List,</span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmtt-12">k,h</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="cmtt-12">]  </span>returns the following list
+      <center class="math-display" >
+      <img 
+src="NCBIGDOC49x.png" alt="{{A * *B, B * *tp[A]},{B, C}, {B * *B, B * *C, A}}
+      " class="math-display" ></center> Note that the vectors are gather in the pattern <span 
+class="cmmi-12">k,tp</span>[<span 
+class="cmmi-12">k</span>]<span 
+class="cmmi-12">,h,tp</span>[<span 
+class="cmmi-12">h</span>]<span 
+class="cmmi-12">. </span>This pattern will be
+
+      the same despite the length of <span 
+class="cmti-12">avarlist</span>.
+      </dd><dt class="description">
+ </dt><dd 
+class="description">Comments / Limitations: None. </dd></dl>
+<a 
+ id="dx26-100001"></a>
+
+   <!--l. 1847--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse19.html" >next</a>] [<a 
+href="NCBIGDOCse17.html" >prev</a>] [<a 
+href="NCBIGDOCse17.html#tailNCBIGDOCse17.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse18.html" >front</a>] [<a 
+href="NCBIGDOCch4.html#NCBIGDOCse18.html" >up</a>] </p></div>
+<!--l. 1847--><p class="indent">   <a 
+ id="tailNCBIGDOCse18.html"></a>   
+</body></html> 

@@ -1,0 +1,50 @@
+(* HUGO14
+only a,b,z,w  are invertible
+
+*)
+
+<<ShrinkBasis.m
+
+SetNonCommutative[a,b,c,d,x,y,z,iz,w,iw,ia,ib,ic,id];
+SetMultiplicityOfGrading[3];
+SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
+SetMonomialOrder[{z,iz},2];
+SetMonomialOrder[{x,y,w,iw},3];
+
+first = {{a,x},{y,b}};
+second = {{w,c},{d,z}};
+
+start = Flatten[{MatMult[first,second] - IdentityMatrix[2],
+                 MatMult[second,first] - IdentityMatrix[2]}];
+
+hugorelations = {
+d ** x -> 1 - z ** b,
+z ** y -> -d ** a,
+x ** z -> -a ** c,
+z ** b ** z -> z + d ** a ** c,
+y ** c -> 1 - b ** z
+};
+
+inverserelations = {
+ia**a -> 1,
+a**ia -> 1,
+ib**b -> 1,
+b**ib -> 1,
+z**iz -> 1,
+iz**z -> 1,
+w**iw -> 1,
+iw**w -> 1,
+d**a**w -> z ** b ** d
+};
+
+smallerbasis = ShrinkBasis[start,hugorelations,inverserelations];
+Print[smallerbasis];
+Put[smallerbasis, "hugo14.answer"];
+
+
+(*
+This is the output...No hope here!
+{{d ** x -> 1 - z ** b, z ** y -> -d ** a, x ** z -> -a ** c, 
+z ** b ** z -> z + d ** a ** c, y ** c -> 1 - b ** z}}
+
+*)

@@ -1,0 +1,4 @@
+Get["FindMatch.NCTest"];
+Get["Match3.NCTest"];
+Get["Match1.NCTest"];
+Get["R2RD.NCTest"];

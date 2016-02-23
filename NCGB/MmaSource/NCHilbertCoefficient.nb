@@ -1,0 +1,576 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     13402,        440]*)
+(*NotebookOutlinePosition[     14043,        463]*)
+(*  CellTagsIndexPosition[     13999,        459]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(<< NCHilbertCoefficient.m\)], "Input"],
+
+Cell[BoxData[
+    \(SetMonomialOrder[{x, y}]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ testing\ the\ HomogeneousBinomial\ option\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCHilbertCoefficient[
+      12, {x ** x ** y ** y - y ** y ** x ** x, 
+        x ** x ** x ** y - x ** y ** x ** x, \(-x ** y ** y ** y\) + 
+          y ** y ** x ** y, 
+        x ** x ** y ** x - y ** x ** x ** x, \(-y ** x ** y ** y\) + 
+          y ** y ** y ** x, x ** y ** y ** x - y ** x ** x ** y}, 3, 
+      ExpressionForm -> HomogeneousBinomial]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(8\[InvisibleSpace]" relations to transfer from C++ to \
+Mathematica."\),
+      SequenceForm[ 8, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(3\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(7\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(15\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(25\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(37\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(53\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(73\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(LinkObject::"linkd" \(\(:\)\(\ \)\) 
+      "\!\(\[LeftSkeleton] 1 \[RightSkeleton]\) is closed; the connection is \
+dead."\)], "Message"],
+
+Cell[BoxData[
+    \(LinkObject::"linkn" \(\(:\)\(\ \)\) 
+      "Argument \!\(\[LeftSkeleton] 1 \[RightSkeleton]\) in \
+\!\(LinkWrite[\(\(\(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\), \(\(\
+\[LeftSkeleton] 1 \[RightSkeleton]\)\)\)\)]\) has an invalid LinkObject \
+number; the link may be dead."\)], "Message"],
+
+Cell[BoxData[
+    InterpretationBox[\("Severe error from :-( \
+"\[InvisibleSpace]"RetrieveMarker"\),
+      SequenceForm[ "Severe error from :-( ", "RetrieveMarker"],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"The parameters are (as a list)\"\>", "\[InvisibleSpace]", 
+        TagBox[\({internalReduction[$Failed, $Failed]}\),
+          (Short[ #, 3]&)]}],
+      SequenceForm[ "The parameters are (as a list)", 
+        Short[ {
+          internalReduction[ $Failed, $Failed]}, 3]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Bad argument can be retrieved by a call to WhatAreBadArgs"\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("The call occured while in the context :"\
+\[InvisibleSpace]"Global`"\),
+      SequenceForm[ "The call occured while in the context :", "Global`"],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \($Aborted\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Testing\ the\ Homogeneous\ option\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Timing[
+      NCHilbertCoefficient[6, {x ** y - y ** x - y ** y}, 6, 
+        ExpressionForm -> Homogeneous]]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(64\[InvisibleSpace]" relations to transfer from C++ \
+to Mathematica."\),
+      SequenceForm[ 64, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(3\[InvisibleSpace]" relations to transfer from C++ to \
+Mathematica."\),
+      SequenceForm[ 3, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(4\[InvisibleSpace]" relations to transfer from C++ to \
+Mathematica."\),
+      SequenceForm[ 4, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(5\[InvisibleSpace]" relations to transfer from C++ to \
+Mathematica."\),
+      SequenceForm[ 5, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(6\[InvisibleSpace]" relations to transfer from C++ to \
+Mathematica."\),
+      SequenceForm[ 6, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(7\[InvisibleSpace]" relations to transfer from C++ to \
+Mathematica."\),
+      SequenceForm[ 7, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \({15.170000000000002`\ Second, {2, 3, 4, 5, 6, 7}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetMonomialOrder[{x, y}]; 
+    Timing[NCHilbertCoefficient[
+        7, {x ** x ** y - x ** y ** x + y ** x ** x + x, 
+          x ** y ** y - y ** x ** y + y ** y ** x + y}, 6]]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Deselecting:"\[InvisibleSpace]{}\),
+      SequenceForm[ "Deselecting:", {}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\(2\[InvisibleSpace]" relations to transfer from C++ to \
+Mathematica."\),
+      SequenceForm[ 2, " relations to transfer from C++ to Mathematica."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(3\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(7\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(13\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(22\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(34\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(50\)], "Print"],
+
+Cell[BoxData[
+    \("The order will need to be reset after this function executes."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(70\)], "Print"],
+
+Cell[BoxData[
+    \({70.89`\ Second, {3, 7, 13, 22, 34, 50, 70}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(PrintMonomialOrder[]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(Blah[t_] := 
+        Module[\[IndentingNewLine]\ \ \ \ \ \ \ {x, 
+            y}, \[IndentingNewLine]ClearMonomialOrderAll[]; \
+\[IndentingNewLine]SetMonomialOrder[{x, y}]; \[IndentingNewLine]\ \ \ \ test[
+              NCHilbertCoefficient, 
+              1]\  = \ \[IndentingNewLine]NCHilbertCoefficient[
+                12, {x ** x ** y ** y - y ** y ** x ** x, 
+                  x ** x ** x ** y - 
+                    x ** y ** x ** x, \(-x ** y ** y ** y\) + 
+                    y ** y ** x ** y, 
+                  x ** x ** y ** x - 
+                    y ** x ** x ** x, \(-y ** x ** y ** y\) + 
+                    y ** y ** y ** x, x ** y ** y ** x - y ** x ** x ** y}, 
+                3, ExpressionForm -> HomogeneousBinomial] == {2, 4, 8, 10, 
+                12, 16, 20, 25, 30, 36, 42, 49}; \[IndentingNewLine]test[
+              NCHilbertCoefficient, 
+              2]\  = \[IndentingNewLine]NCHilbertCoefficient[
+                6, {x ** y - y ** x - y ** y}, 6, 
+                ExpressionForm -> Homogeneous] == {2, 3, 4, 5, 6, 
+                7}; \[IndentingNewLine]test[NCHilbertCoefficient, 
+              3]\  = \[IndentingNewLine]NCHilbertCoefficient[
+                5, {x ** y - y ** x}, 1, 
+                ExpressionForm -> partialGBHomogeneous] == {2, 3, 4, 5, 
+                6}; \[IndentingNewLine]test[NCHilbertCoefficient, 
+              4]\  = \[IndentingNewLine]NCHilbertCoefficient[
+                7, {x ** x ** y - x ** y ** x + y ** x ** x + x, 
+                  x ** y ** y - y ** x ** y + y ** y ** x + y}, 2] == {3, 7, 
+                13, 22, 34, 50, 
+                70}; \[IndentingNewLine]ClearMonomialOrderAll[]; \
+\[IndentingNewLine]Print["\<Results from the file NCHilbertCoefficient.NCTest\
+\>"]; \[IndentingNewLine]For[\ i = 1, 
+            i \[LessEqual] 
+              4, \(i++\), \[IndentingNewLine]\ \ \ \ \ Print["\<Test #\>", 
+              i, "\< was \>", 
+              test[NCHilbertCoefficient, 
+                i]]\[IndentingNewLine]\ \ \ \ ]\[IndentingNewLine]];\)\(\
+\[IndentingNewLine]\)\)\)], "Input"],
+
+Cell[BoxData[
+    \(Put[
+      Definition[
+        Blah]\[IndentingNewLine], "\<NCHilbertCoefficient.NCTest\>"]\)], \
+"Input"],
+
+Cell[BoxData[
+    \(ReinstateOrder[]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(?Homogeneous\)\)], "Input"],
+
+Cell[BoxData[
+    \("Global`Homogeneous"\)], "Print"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(<< NCX1Represent.m\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SNC[x, y, F[x], z]\)], "Input"],
+
+Cell[BoxData[
+    \({False, False, False, False}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(NCX1Represent[{x ** y ** F[x] - z}, {x}, {{2, 2}}, {F}, {y \[Rule] 
+          PrimeMat[{2, 2}, 3], z \[Rule] IdentityMatrix[2]}]\)], "Input"],
+
+Cell[BoxData[
+    \({{{{{\(-1\) + 5\ Fx11\ x11, \(-1\) + 5\ Fx12\ x11}, {\(-1\) + 
+                5\ Fx21\ x11, \(-1\) + 5\ Fx22\ x11}}, {{7\ Fx11\ x12, 
+              7\ Fx12\ x12}, {7\ Fx21\ x12, 
+              7\ Fx22\ x12}}}, {{{11\ Fx11\ x21, 
+              11\ Fx12\ x21}, {11\ Fx21\ x21, 
+              11\ Fx22\ x21}}, {{\(-1\) + 13\ Fx11\ x22, \(-1\) + 
+                13\ Fx12\ x22}, {\(-1\) + 13\ Fx21\ x22, \(-1\) + 
+                13\ Fx22\ x22}}}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(Clear[NCX1Represent]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(?? ReInstateOrder\)], "Input"],
+
+Cell[BoxData[
+    \(Information::"notfound" \(\(:\)\(\ \)\) 
+      "Symbol \!\(\"ReInstateOrder\"\) not found."\)], "Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Expand[{{{x11, x12}, {x21, x22}} . {{Fx11, Fx12}, {Fx21, 
+              Fx22}}}]\)], "Input"],
+
+Cell[BoxData[
+    \({{{Fx11\ x11 + Fx21\ x12, 
+          Fx12\ x11 + Fx22\ x12}, {Fx11\ x21 + Fx21\ x22, 
+          Fx12\ x21 + Fx22\ x22}}}\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{520, 600},
+WindowMargins->{{Automatic, 135}, {13, Automatic}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 58, 1, 27, "Input"],
+Cell[1778, 52, 57, 1, 27, "Input"],
+Cell[1838, 55, 84, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[1947, 60, 387, 7, 107, "Input"],
+Cell[2337, 69, 149, 3, 23, "Print"],
+Cell[2489, 74, 219, 4, 23, "Print"],
+Cell[2711, 80, 98, 2, 23, "Print"],
+Cell[2812, 84, 34, 1, 23, "Print"],
+Cell[2849, 87, 98, 2, 23, "Print"],
+Cell[2950, 91, 34, 1, 23, "Print"],
+Cell[2987, 94, 98, 2, 23, "Print"],
+Cell[3088, 98, 35, 1, 23, "Print"],
+Cell[3126, 101, 98, 2, 23, "Print"],
+Cell[3227, 105, 35, 1, 23, "Print"],
+Cell[3265, 108, 98, 2, 23, "Print"],
+Cell[3366, 112, 35, 1, 23, "Print"],
+Cell[3404, 115, 98, 2, 23, "Print"],
+Cell[3505, 119, 35, 1, 23, "Print"],
+Cell[3543, 122, 98, 2, 23, "Print"],
+Cell[3644, 126, 35, 1, 23, "Print"],
+Cell[3682, 129, 98, 2, 23, "Print"],
+Cell[3783, 133, 157, 3, 20, "Message"],
+Cell[3943, 138, 306, 5, 46, "Message"],
+Cell[4252, 145, 199, 4, 23, "Print"],
+Cell[4454, 151, 362, 8, 39, "Print"],
+Cell[4819, 161, 92, 1, 23, "Print"],
+Cell[4914, 164, 219, 4, 23, "Print"],
+Cell[5136, 170, 42, 1, 27, "Output"]
+}, Open  ]],
+Cell[5193, 174, 76, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[5294, 179, 142, 3, 43, "Input"],
+Cell[5439, 184, 149, 3, 23, "Print"],
+Cell[5591, 189, 221, 4, 23, "Print"],
+Cell[5815, 195, 149, 3, 23, "Print"],
+Cell[5967, 200, 219, 4, 23, "Print"],
+Cell[6189, 206, 149, 3, 23, "Print"],
+Cell[6341, 211, 219, 4, 23, "Print"],
+Cell[6563, 217, 149, 3, 23, "Print"],
+Cell[6715, 222, 219, 4, 23, "Print"],
+Cell[6937, 228, 149, 3, 23, "Print"],
+Cell[7089, 233, 219, 4, 23, "Print"],
+Cell[7311, 239, 149, 3, 23, "Print"],
+Cell[7463, 244, 219, 4, 23, "Print"],
+Cell[7685, 250, 83, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7805, 256, 210, 4, 75, "Input"],
+Cell[8018, 262, 149, 3, 23, "Print"],
+Cell[8170, 267, 219, 4, 23, "Print"],
+Cell[8392, 273, 98, 2, 23, "Print"],
+Cell[8493, 277, 34, 1, 23, "Print"],
+Cell[8530, 280, 98, 2, 23, "Print"],
+Cell[8631, 284, 34, 1, 23, "Print"],
+Cell[8668, 287, 98, 2, 23, "Print"],
+Cell[8769, 291, 35, 1, 23, "Print"],
+Cell[8807, 294, 98, 2, 23, "Print"],
+Cell[8908, 298, 35, 1, 23, "Print"],
+Cell[8946, 301, 98, 2, 23, "Print"],
+Cell[9047, 305, 35, 1, 23, "Print"],
+Cell[9085, 308, 98, 2, 23, "Print"],
+Cell[9186, 312, 35, 1, 23, "Print"],
+Cell[9224, 315, 98, 2, 23, "Print"],
+Cell[9325, 319, 35, 1, 23, "Print"],
+Cell[9363, 322, 78, 1, 27, "Output"]
+}, Open  ]],
+Cell[9456, 326, 53, 1, 27, "Input"],
+Cell[9512, 329, 2097, 37, 571, "Input"],
+Cell[11612, 368, 126, 4, 43, "Input"],
+Cell[11741, 374, 49, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[11815, 379, 49, 1, 27, "Input"],
+Cell[11867, 382, 53, 1, 23, "Print"]
+}, Open  ]],
+Cell[11935, 386, 51, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[12011, 391, 51, 1, 27, "Input"],
+Cell[12065, 394, 62, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12164, 400, 161, 2, 43, "Input"],
+Cell[12328, 404, 479, 8, 107, "Output"]
+}, Open  ]],
+Cell[12822, 415, 53, 1, 27, "Input"],
+
+Cell[CellGroupData[{
+Cell[12900, 420, 50, 1, 27, "Input"],
+Cell[12953, 423, 126, 2, 20, "Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13116, 430, 113, 2, 43, "Input"],
+Cell[13232, 434, 154, 3, 43, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

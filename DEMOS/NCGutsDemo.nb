@@ -1,0 +1,494 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     13336,        485]
+NotebookOptionsPosition[     10936,        402]
+NotebookOutlinePosition[     11784,        429]
+CellTagsIndexPosition[     11741,        426]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NCGuts Demo", "Title",
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell["Loading the needed files...", "Section",
+ FontFamily->"Application"],
+
+Cell["\<\
+The following lines may need to be altered depending on where NCAlgebra and \
+NCGuts are located on your system:\
+\>", "Text",
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"<<", "NCAlgebra`"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCGuts`", " "}]}], "Input",
+ CellChangeTimes->{{3.473453411450823*^9, 3.473453421001068*^9}},
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{{3.473453422779462*^9, 3.4734534391012497`*^9}, 
+   3.516627152014715*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>", 
+   "\[InvisibleSpace]", "\<\".\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC", "."],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.473453422779462*^9, 3.4734534391012497`*^9}, 
+   3.516627152018984*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"You can now use \\\"<< NCAlgebra`\\\" to load NCAlgebra or \
+\"\>", "\[InvisibleSpace]", "\<\"\\\"<< NCGB`\\\" to load NCGB.\"\>"}],
+  SequenceForm[
+  "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
+   "\"<< NCGB`\" to load NCGB."],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.473453422779462*^9, 3.4734534391012497`*^9}, 
+   3.516627152027297*^9}],
+
+Cell[BoxData["\<\"You have already loaded NCAlgebra.m\"\>"], "Print",
+ CellChangeTimes->{{3.473453422779462*^9, 3.4734534391012497`*^9}, 
+   3.516627152030908*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Examples depicting the option ",
+ StyleBox["NCStrongProduct1",
+  FontColor->GrayLevel[0.500008]]
+}], "Section",
+ FontFamily->"Application"],
+
+Cell["\<\
+When NCGuts[NCStrongProduct1\[Rule]False], the following attempt to multiply \
+matrices with noncommutative entries using \"**\"fails:\
+\>", "Text",
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"NCGuts", "[", 
+   RowBox[{"NCStrongProduct1", "\[Rule]", "False"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"c", ",", "d"}], "}"}]}], "}"}], "**", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "x", "}"}], ",", 
+     RowBox[{"{", "y", "}"}]}], "}"}]}], "==", 
+  RowBox[{"MatMult", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"a", ",", "b"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"c", ",", "d"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "x", "}"}], ",", 
+      RowBox[{"{", "y", "}"}]}], "}"}]}], "]"}]}]}], "Input",
+ FontFamily->"Application"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"c", ",", "d"}], "}"}]}], "}"}], "**", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "x", "}"}], ",", 
+     RowBox[{"{", "y", "}"}]}], "}"}]}], "\[Equal]", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a", "**", "x"}], "+", 
+      RowBox[{"b", "**", "y"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"c", "**", "x"}], "+", 
+      RowBox[{"d", "**", "y"}]}], "}"}]}], "}"}]}]], "Output",
+ CellChangeTimes->{{3.473453425476137*^9, 3.4734534435234833`*^9}, 
+   3.5166271566721363`*^9}]
+}, Open  ]],
+
+Cell["\<\
+When NCGuts[NCStrongProduct1\[Rule]True],the following attempt to multiply \
+matrices with noncommutative entries using \"**\" is successful:\
+\>", "Text",
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"NCGuts", "[", 
+   RowBox[{"NCStrongProduct1", "\[Rule]", "True"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"c", ",", "d"}], "}"}]}], "}"}], "**", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "x", "}"}], ",", 
+     RowBox[{"{", "y", "}"}]}], "}"}]}], "==", 
+  RowBox[{"MatMult", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"a", ",", "b"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"c", ",", "d"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "x", "}"}], ",", 
+      RowBox[{"{", "y", "}"}]}], "}"}]}], "]"}]}]}], "Input",
+ FontFamily->"Application"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.473453445916699*^9, 3.516627158828637*^9}]
+}, Open  ]],
+
+Cell["In addition,\"tp[ ]\" and \"tpMat[ ]\" are the same:", "Text",
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tp", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"c", ",", "d"}], "}"}]}], "}"}], "]"}], "==", 
+  RowBox[{"tpMat", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"c", ",", "d"}], "}"}]}], "}"}], "]"}]}]], "Input",
+ FontFamily->"Application"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.473453447763214*^9, 3.5166271603880444`*^9}]
+}, Open  ]],
+
+Cell["\<\
+The default is set to True.  After NCGuts is loaded, \"**\" will multiply \
+matrices with noncommutative entries.\
+\>", "Text",
+ FontFamily->"Application"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Examples depicting the option ",
+ StyleBox["NCStrongProduct2",
+  FontColor->GrayLevel[0.500008]]
+}], "Section",
+ FontFamily->"Application"],
+
+Cell[TextData[{
+ StyleBox["NCGuts[NCStrongProduct2\[Rule]True] inverts matrices using the \
+\"inv[ ]\" command.  ",
+  FontWeight->"Plain"],
+ Cell[BoxData[
+  RowBox[{"(", 
+   RowBox[{
+   "The", " ", "limitations", " ", "of", " ", "NCInverse", " ", "remain", " ",
+     "with", " ", 
+    RowBox[{"inv", "[", " ", "]"}]}], ")"}]], "Input",
+  FontFamily->"Application",
+  FontWeight->"Plain"],
+ StyleBox[":",
+  FontWeight->"Plain"]
+}], "Text",
+ FontFamily->"Application",
+ FontWeight->"Bold",
+ FontVariations->{"CompatibilityType"->0}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"NCGuts", "[", 
+   RowBox[{"NCStrongProduct2", "\[Rule]", "True"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"inv", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "c"}], "}"}]}], "}"}], "]"}], "//", 
+  "MatrixForm"}]}], "Input",
+ FontFamily->"Application"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{"inv", "[", "a", "]"}], 
+      RowBox[{"-", 
+       RowBox[{
+        RowBox[{"inv", "[", "a", "]"}], "**", "b", "**", 
+        RowBox[{"inv", "[", "c", "]"}]}]}]},
+     {"0", 
+      RowBox[{"inv", "[", "c", "]"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.473453450536757*^9, 3.516627164727447*^9}]
+}, Open  ]],
+
+Cell["\<\
+NCGuts[NCStrongProduct2->True] forces NCGuts[NCStrongProduct1->True].  In \
+other words, NCGuts[NCStrongProduct2->True] makes \"**\" multiply matrices \
+with noncommutative entries.\
+\>", "Text",
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"NCGuts", "[", 
+   RowBox[{"NCStrongProduct1", "\[Rule]", "False"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NCGuts", "[", 
+   RowBox[{"NCStrongProduct2", "\[Rule]", "True"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", "d"}], "}"}]}], "}"}], "**", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", "x", "}"}], ",", 
+    RowBox[{"{", "y", "}"}]}], "}"}]}]}], "Input",
+ FontFamily->"Application"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"a", "**", "x"}], "+", 
+     RowBox[{"b", "**", "y"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"c", "**", "x"}], "+", 
+     RowBox[{"d", "**", "y"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.473453452254971*^9, 3.516627166841667*^9}]
+}, Open  ]],
+
+Cell["The default for NCStrongProduct2 is False.", "Text",
+ FontFamily->"Application"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Examples depicting the option ",
+ StyleBox["NCSymbols",
+  FontColor->GrayLevel[0.500008]]
+}], "Section",
+ FontFamily->"Application"],
+
+Cell["\<\
+NCGuts[NCSetNC\[Rule]True] makes all symbols --\:f220capital letters or not \
+-- to be noncommutative.  The default option for this is False.\
+\>", "Text",
+ CellChangeTimes->{{3.4734535363379097`*^9, 3.473453537838566*^9}},
+ FontFamily->"Application"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"NCGuts", "[", 
+   RowBox[{"NCSetNC", "\[Rule]", "False"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"A", "**", "b", "**", "A"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NCGuts", "[", 
+   RowBox[{"NCSetNC", "\[Rule]", "True"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"A", "**", "b", "**", "A"}]}], "Input",
+ CellChangeTimes->{{3.473453543615912*^9, 3.473453551319744*^9}},
+ FontFamily->"Application"],
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["A", "2"], " ", "b"}]], "Output",
+ CellChangeTimes->{3.473453455000268*^9, 3.473453554649406*^9, 
+  3.516627170199951*^9}],
+
+Cell[BoxData[
+ RowBox[{"A", "**", "b", "**", "A"}]], "Output",
+ CellChangeTimes->{3.473453455000268*^9, 3.473453554649406*^9, 
+  3.516627170227202*^9}]
+}, Open  ]],
+
+Cell["The default for NCSymbols is False.", "Text",
+ FontFamily->"Application"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{880, 776},
+WindowMargins->{{Automatic, 55}, {Automatic, 47}},
+DockedCells->(FrontEndExecute[{
+   FrontEnd`NotebookApply[
+    FrontEnd`InputNotebook[], #, Placeholder]}]& ),
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{612, 792},
+"PostScriptOutputFile":>FrontEnd`FileName[{$RootDirectory, "home", "toal", 
+   "MAYBE-NC00"}, "NCGutsDemo.nb.ps", CharacterEncoding -> "ISO8859-1"]},
+ShowCellLabel->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 6, \
+2010)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 56, 1, 60, "Title"],
+Cell[CellGroupData[{
+Cell[648, 27, 74, 1, 72, "Section"],
+Cell[725, 30, 164, 4, 41, "Text"],
+Cell[CellGroupData[{
+Cell[914, 38, 273, 6, 68, "Input"],
+Cell[CellGroupData[{
+Cell[1212, 48, 187, 3, 20, "Print"],
+Cell[1402, 53, 321, 7, 20, "Print"],
+Cell[1726, 62, 417, 9, 20, "Print"],
+Cell[2146, 73, 163, 2, 20, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2370, 82, 157, 5, 72, "Section"],
+Cell[2530, 89, 186, 4, 41, "Text"],
+Cell[CellGroupData[{
+Cell[2741, 97, 814, 29, 53, "Input"],
+Cell[3558, 128, 694, 24, 37, "Output"]
+}, Open  ]],
+Cell[4267, 155, 193, 4, 41, "Text"],
+Cell[CellGroupData[{
+Cell[4485, 163, 793, 28, 53, "Input"],
+Cell[5281, 193, 95, 1, 37, "Output"]
+}, Open  ]],
+Cell[5391, 197, 96, 1, 26, "Text"],
+Cell[CellGroupData[{
+Cell[5512, 202, 449, 16, 37, "Input"],
+Cell[5964, 220, 97, 1, 37, "Output"]
+}, Open  ]],
+Cell[6076, 224, 165, 4, 41, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6278, 233, 157, 5, 72, "Section"],
+Cell[6438, 240, 530, 17, 51, "Text"],
+Cell[CellGroupData[{
+Cell[6993, 261, 406, 14, 53, "Input"],
+Cell[7402, 277, 851, 24, 55, "Output"]
+}, Open  ]],
+Cell[8268, 304, 233, 5, 41, "Text"],
+Cell[CellGroupData[{
+Cell[8526, 313, 585, 20, 68, "Input"],
+Cell[9114, 335, 343, 11, 37, "Output"]
+}, Open  ]],
+Cell[9472, 349, 86, 1, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9595, 355, 150, 5, 72, "Section"],
+Cell[9748, 362, 261, 5, 41, "Text"],
+Cell[CellGroupData[{
+Cell[10034, 371, 460, 12, 83, "Input"],
+Cell[10497, 385, 163, 4, 40, "Output"],
+Cell[10663, 391, 151, 3, 37, "Output"]
+}, Open  ]],
+Cell[10829, 397, 79, 1, 26, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

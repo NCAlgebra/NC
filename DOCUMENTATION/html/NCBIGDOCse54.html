@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>15.6 NCProcess1 and NCProcess2: The technical descriptions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 772--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse53.html" >prev</a>] [<a 
+href="NCBIGDOCse53.html#tailNCBIGDOCse53.html" >prev-tail</a>] [<a 
+href="#tailNCBIGDOCse54.html">tail</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse54.html" >up</a>] </p></div>
+   <h3 class="sectionHead"><span class="titlemark">15.6   </span> <a 
+ id="x89-22500015.6"></a>NCProcess1 and NCProcess2: The technical descriptions</h3>
+<!--l. 775--><p class="noindent">Below, <span 
+class="cmmi-12">aList </span>is a list of polynomials, <span 
+class="cmmi-12">n </span>is a positive integer, <span 
+class="cmmi-12">filename </span>is a character string and
+rules is a sequence of zero or more Mathematica rules which correspond to NCProcess
+options.
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+NCProcess1[aList_,n_,filename_,rules___Rule]:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NCProcess[aList,n,filename,SBByCat-&gt;True,RR-&gt;True,rules];
+&#x00A0;<br />NCProcess2[aList_,n_,filename_,rules___Rule]:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NCProcess[aList,n,filename,SB-&gt;True,RR-&gt;True,rules];
+&#x00A0;<br />which&#x00A0;is&#x00A0;the&#x00A0;same&#x00A0;as
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NCProcess[aList,n,n+1,n+1,n+2,filename,SB-&gt;True,RR-&gt;True,rules];
+</div>
+</td></tr></table>
+<!--l. 789--><p class="nopar">
+<!--l. 793--><p class="noindent">For an understanding of &#8220;<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">n,n+1,n+1,n+2</span></span></span>&#8221;, see the footnote in <span 
+class="cmsy-10x-x-120">&#167;</span><a 
+href="NCBIGDOCse50.html#x84-21200015.2">15.2<!--tex4ht:ref: section:ncprocess --></a> Arguments.
+
+   <!--l. 41--><div class="crosslinks"><p class="noindent">[<a 
+href="NCBIGDOCse53.html" >prev</a>] [<a 
+href="NCBIGDOCse53.html#tailNCBIGDOCse53.html" >prev-tail</a>] [<a 
+href="NCBIGDOCse54.html" >front</a>] [<a 
+href="NCBIGDOCch15.html#NCBIGDOCse54.html" >up</a>] </p></div>
+<!--l. 41--><p class="indent">   <a 
+ id="tailNCBIGDOCse54.html"></a>  
+</body></html> 

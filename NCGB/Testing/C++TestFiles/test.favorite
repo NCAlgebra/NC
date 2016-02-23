@@ -1,0 +1,6 @@
+ClearMonomialOrder[];
+SetNonCommutative[a,b,x];
+SetMonomialOrder[{a,b,x},1];
+answer = NCMakeGB[{x**x - a,x**x**x - b},10];
+answer2 = NCMakeGB[{x**x**x**x - b,x**x-b},10];
+

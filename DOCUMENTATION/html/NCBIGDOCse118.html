@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>33.6 How to set up if someone else compiled the code &#8212; UNIX</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,3 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:19:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 457--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse119.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse117.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse117.html#tailNCBIGDOCse117.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCse118.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch33.html#NCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.6   </span></span> <a 
+ id="x188-41600033.6"></a><span 
+class="cmr-10x-x-109">How to set up if someone else compiled the code &#8212; UNIX</span></h3>
+<!--l. 460--><p class="noindent"><span 
+class="cmr-10x-x-109">It is easy to bum off of a friend who is running NC on the same system.</span>
+<!--l. 464--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.6.1   </span></span> <a 
+ id="x188-41700033.6.1"></a><span 
+class="cmr-10x-x-109">When your system administrator installed the code</span></h4>
+<!--l. 467--><p class="noindent"><span 
+class="cmr-10x-x-109">When your system administrator installed the code, he had several choices.</span>
+<!--l. 470--><p class="indent">   <span 
+class="cmr-10x-x-109">The first thing you should try is to start Mathematica by typing </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">math</span></span></span> <span 
+class="cmr-10x-x-109">and then type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">&lt;&lt;SetNCPath.m</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+<span 
+class="cmr-10x-x-109">If there are no error messages, then type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">&lt;&lt;NCAlgebra.m</span></span></span><span 
+class="cmr-10x-x-109">. Mathematica should respond with a sequence of</span>
+<span 
+class="cmr-10x-x-109">statements indicating that various files are being loaded.</span>
+<!--l. 477--><p class="indent">   <span 
+class="cmr-10x-x-109">If Mathematica responds with </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">Get::noopen:</span><span 
+class="cmtt-10x-x-109">&#x00A0;Cannot</span><span 
+class="cmtt-10x-x-109">&#x00A0;open</span><span 
+class="cmtt-10x-x-109">&#x00A0;SetNCPath.m</span></span></span><span 
+class="cmr-10x-x-109">, then additional steps are</span>
+<span 
+class="cmr-10x-x-109">required as described below.</span>
+<!--l. 480--><p class="indent">   <span 
+class="cmr-10x-x-109">You need to determine where your system administrator installed NCAlgebra. The easiest way to do</span>
+<span 
+class="cmr-10x-x-109">this is to ask your system administrator. If that is not easy and/or convenient, then you can</span>
+<span 
+class="cmr-10x-x-109">type</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC122x.png" alt="cd   find / -name  "NCAlgebra.m " -print " class="math-display" ></center> <span 
+class="cmr-10x-x-109">and</span>
+<span 
+class="cmr-10x-x-109">look at the result. Note that this command will take some time and will access the hard drive quite a bit.</span>
+<span 
+class="cmr-10x-x-109">If this is done on our system, then the result is the directory</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC123x.png" alt="/home/ncalg/NC/NCAlgebra/NCAlgebra.m    .  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">The</span>
+<span 
+class="cmr-10x-x-109">location of the installation in this case is </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">/home/ncalg/NC</span></span></span> <span 
+class="cmr-10x-x-109">.</span>
+
+<!--l. 496--><p class="indent">   <span 
+class="cmr-10x-x-109">Let us suppose that you know the location of the installation of NCAlgebra. Let us suppose that it is</span>
+<span 
+class="cmr-10x-x-109">located in the directory </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">/usr/local/NC</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 500--><p class="indent">   <span 
+class="cmr-10x-x-109">Move into the directory where you want to use NCAlgebra (or create such a directory using the</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">mkdir</span></span></span> <span 
+class="cmr-10x-x-109">command). Create an </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">init.m</span></span></span> <span 
+class="cmr-10x-x-109">file with your favorite editor which contains the following</span>
+<span 
+class="cmr-10x-x-109">lines:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+AppendTo[$Path,"/usr/local/NC/"];
+&#x00A0;<br />Get["SetNCPath.m"];
+</div>
+</td></tr></table>
+<!--l. 508--><p class="nopar">
+<!--l. 510--><p class="indent">   <span 
+class="cmr-10x-x-109">Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">math</span></span></span> <span 
+class="cmr-10x-x-109">and then type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">&lt;&lt;NCAlgebra.m</span></span></span><span 
+class="cmr-10x-x-109">. Then Mathematica responds with a sequence of statements</span>
+<span 
+class="cmr-10x-x-109">indicating that files are being loaded.</span>
+<!--l. 514--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.6.2   </span></span> <a 
+ id="x188-41800033.6.2"></a><span 
+class="cmr-10x-x-109">When your friend installed the code</span></h4>
+<!--l. 517--><p class="noindent"><span 
+class="cmr-10x-x-109">Suppose that your friend has installed the code and he is willing to let you use his version of the code (see</span>
+<span 
+class="cmr-10x-x-109">(6)), then you can follow this procedure:</span>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(1) Have your friend log into his account and change directories into the one which contains the</span>
+      <span 
+class="cmr-10x-x-109">NC code. Suppose for definitiveness that it is located in the directory </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">/home/JoeShmo/NC/</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+      <span 
+class="cmr-10x-x-109">In this case, you would type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;/home/JoeShmo/NC</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(2) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">chmod</span><span 
+class="cmtt-10x-x-109">&#x00A0;-R</span><span 
+class="cmtt-10x-x-109">&#x00A0;uog+r</span><span 
+class="cmtt-10x-x-109">&#x00A0;*</span></span></span><span 
+class="cmr-10x-x-109">. This allows all of these files to be read by anyone. (These files are</span>
+      <span 
+class="cmr-10x-x-109">available through the web, so giving permission to read them should be OK with your friend.)</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(3) Edit the file </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SetNCPath.m</span></span></span><span 
+class="cmr-10x-x-109">. Make sure that there is a command</span>
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      $NCDir$&#x00A0;=&#x00A0;"/home/JoeShmo/NC"
+</div>
+      </td></tr></table>
+      <!--l. 536--><p class="nopar">
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(4) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;../</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(5) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">chmod</span><span 
+class="cmtt-10x-x-109">&#x00A0;u+rx</span><span 
+class="cmtt-10x-x-109">&#x00A0;NC</span></span></span><span 
+class="cmr-10x-x-109">. This allows the directory to be readable by anyone. For some reason,</span>
+      <span 
+class="cmr-10x-x-109">some computer systems require that a directory be executable. I don&#8217;t know why.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(6) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;..</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(7) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">chmod</span><span 
+class="cmtt-10x-x-109">&#x00A0;u+rx</span><span 
+class="cmtt-10x-x-109">&#x00A0;JoeShmo</span></span></span><span 
+class="cmr-10x-x-109">. This allows the directory to be readable by anyone. For some</span>
+      <span 
+class="cmr-10x-x-109">reason, some computer systems require that an directory be executable. I don&#8217;t know why.</span>
+      <span 
+class="cmr-10x-x-109">Your friend may or may not be willing to take this step.</span></dd></dl>
+<!--l. 551--><p class="indent">   <span 
+class="cmr-10x-x-109">Now, follow the directions in Section </span><a 
+href="#x188-41700033.6.1"><span 
+class="cmr-10x-x-109">33.6.1</span><!--tex4ht:ref: subsection:system:admin:installed --></a><span 
+class="cmr-10x-x-109">.</span>
+
+   <!--l. 554--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCse119.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse117.html" ><span 
+class="cmr-10x-x-109">prev</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse117.html#tailNCBIGDOCse117.html" ><span 
+class="cmr-10x-x-109">prev-tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch33.html#NCBIGDOCse118.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 554--><p class="indent">   <a 
+ id="tailNCBIGDOCse118.html"></a>   
+</body></html> 

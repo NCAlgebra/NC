@@ -1,0 +1,211 @@
+Mathematica 8.0 for Mac OS X x86 (64-bit)
+Copyright 1988-2011 Wolfram Research, Inc.
+
+In[1]:= 
+Out[1]= {stdout}
+
+In[2]:= SetOptions[$Output,PageWidth->80];
+
+In[3]:= 
+In[3]:= (* ADJUST YOUR DIRECTORY SETTINGS HERE! *)
+
+In[4]:= SetDirectory[$HomeDirectory <> "/work/projects/ipsolver"]
+
+Out[4]= /Users/mauricio/work/projects/ipsolver
+
+In[5]:= 
+In[5]:= << SDP`
+
+In[6]:= << SDPSylvester`
+
+In[7]:= 
+In[7]:=                         SolveProblem[fileName_, solution_, stream_, results_] := Module[
+  {
+    maxTimeSDP = 1800, (* Seconds allowed to finish SDP *)
+    time1 = 0, time2 = 0, (* Used for timing *)
+    out, (* output from SDPSolve calls *)
+    Id, Ze
+  },
+
+  WriteString[stream, "Running... ", fileName, "\n"];
+  
+  (* Load problem file *)
+  Get[fileName];
+
+  WriteString[stream, \
+              (nx*(nx+1))/2+(nz*(nz+1))/2+nx*nu, " variables. W is ", nz, \
+              "x", nz, ", L is ", nu, "x", nx, ", X is ", nx, "x", nx, "\n"];
+
+  (* Setup Leibfritz H_2 problem *)
+
+  Id[n_] := IdentityMatrix[n] // N;
+  Ze[m_, n_] := ConstantArray[0, {m, n}] // N;
+
+  C1X = ArrayFlatten[{{C1}, {Ze[nx, nx]}}];
+  IdX = ArrayFlatten[{{Ze[nz, nx]}, {Id[nx]}}];
+  D12L = ArrayFlatten[{{D12}, {Ze[nx, nu]}}];
+  IdW = ArrayFlatten[{{Id[nz]}, {Ze[nx, nz]}}];
+
+  AA = {
+     (* A X + B L + 0 W < -B1 B1^T *)
+     {
+       {2 A, Id[nx]}, 
+       {2 B, Id[nx]}, 
+       {Ze[nx, nz], Ze[nz, nx]}
+     },
+     (* -[W, C1 X + L D12; X C1^T + D12^T L^T X] < 0 *)
+     {
+       {ArrayFlatten[{{-IdX, -2 C1X}}],
+        ArrayFlatten[{{Transpose[IdX], Transpose[IdX]}}]},
+       {-2 D12L, Transpose[IdX]}, 
+       {- IdW, Transpose[IdW]}
+     }
+   };
+  CC = {-B1.Transpose[B1], Ze[nx + nz, nx + nz]};
+  BB = {Ze[nx, nx], Ze[nu, nx], -Id[nz]};
+
+  (* Run the algorithm *)
+
+  WriteString[stream, "Starting SDP Solver...\n"];
+
+  time1 = TimeUsed[];
+
+  out = TimeConstrained[
+          SDPSolve[{AA, BB, CC}, 
+                   SymmetricVariables -> {1, 3}, 
+                   DebugLevel -> 0],
+          maxTimeSDP 
+        ];
+
+  time2 = TimeUsed[];
+
+  WriteString[stream, "Done.\n"];
+
+  If [ out === $Aborted, 
+
+     Print["Can't optimize in ", maxTimeSDP, " seconds."];
+     WriteString[stream, "Can't optimize in ", maxTimeSDP, \
+                 " seconds.\n\n\n"];
+
+     status = "TIMEOUT";
+
+    ,
+
+     status = "SUCCESS";
+
+  ];
+
+  (* Write results *)
+  PutAppend[{fileName, DateString[], status, time2-time1,
+             $MachineName, $MachineType, $ProcessorType}, results];
+
+  (* Write solution *)
+  Put[out, solution];
+
+  Return[];
+
+];
+
+In[8]:= 
+In[8]:= (* Extract problem to run from input line *)
+
+In[9]:= 
+In[9]:= problemCode = ToFileName["COMPleib", $CommandLine[[2]]];
+
+In[10]:= solutionFileName = ToFileName["COMPleib", $CommandLine[[3]]];
+
+In[11]:= outputFileName = ToFileName["COMPleib", $CommandLine[[4]]];
+
+In[12]:= resultsFileName = ToFileName["COMPleib", $CommandLine[[5]]];
+
+In[13]:= 
+In[13]:= outputStream = If[ FileExistsQ[outputFileName], 
+                   OpenAppend[outputFileName], 
+                   OpenWrite[outputFileName] ];
+
+In[14]:= SetOptions[outputStream, FormatType -> StandardForm];
+
+In[15]:= 
+In[15]:= SolveProblem[ problemCode <> ".m", solutionFileName, 
+              outputStream, resultsFileName ];
+ -------------------------------------------------------------------
+ Problem data:
+ * Dimensions (total):
+   - Variables             = 121
+   - Inequalities          = 2
+ * Dimensions (detail):
+   - Variables             = {{10, 10}, {2, 10}, {1, 1}}
+   - Inequalities          = {10, 11}
+
+ Method:
+ * Method                  = PredictorCorrector
+ * Search direction        = NT
+
+ Precision:
+ * Gap tolerance           = 1.e-9
+ * Rationalize iterates    = False
+
+ Other options:
+ * Debug level             = 0
+
+  K    <B, Y>           mu    theta/tau        alpha       |X S|2      |X S|oo 
+ 
+>     ~|A X - B|  ~|A* X - C|
+ -----------------------------------------------------
+ 
+>   ------------------------------------------------------
+  1  5.1504 E  0  1.8367 E -1  9.9983 E -1  8.4446 E -1  1.3105 E  0 
+ 
+>    9.9566 E -1  1.5310 E-12  1.1823 E-13          
+  2  8.3107 E  1  1.8410 E -2  9.9766 E -1  8.9977 E -1  1.9025 E  0 
+ 
+>    9.7889 E -1  1.3658 E-12  1.9713 E-13          
+  3  8.5599 E  2  1.8410 E -3  9.4309 E -1  9.0000 E -1  1.9576 E  0 
+ 
+>    9.7589 E -1  1.3342 E-12  1.9280 E-13          
+  4  6.7965 E  2  5.5362 E -4  4.2679 E -1  6.9928 E -1  2.2302 E  0 
+ 
+>    9.7514 E -1  1.3362 E-12  1.9611 E-13          
+  5  2.0117 E  2  1.7792 E -4  1.3959 E -1  6.7864 E -1  2.2657 E  0 
+ 
+>    9.6279 E -1  1.3360 E-12  1.9574 E-13          
+  6  6.1984 E  1  5.0697 E -5  4.5300 E -2  7.1506 E -1  1.8273 E  0 
+ 
+>    9.8119 E -1  1.3359 E-12  1.9611 E-13          
+  7  1.5478 E  1  8.8657 E -6  5.9394 E -3  8.2751 E -1  2.5483 E  0 
+ 
+>    9.9582 E -1  1.3359 E-12  1.9497 E-13          
+  8  4.7633 E  0  2.4026 E -6  1.8401 E -3  7.2900 E -1  2.7365 E  0 
+ 
+>    9.9537 E -1  1.3359 E-12  1.9413 E-13          
+  9  1.8985 E  0  8.2626 E -7  7.4083 E -4  6.5610 E -1  2.6492 E  0 
+ 
+>    9.9473 E -1  1.3359 E-12  1.9499 E-13          
+ 10  3.3402 E -1  1.6376 E -7  1.2863 E -4  8.0215 E -1  2.7585 E  0 
+ 
+>    9.9422 E -1  1.3359 E-12  1.9586 E-13          
+ 11  6.5961 E -2  3.3659 E -8  2.5303 E -5  7.9448 E -1  2.9462 E  0 
+ 
+>    9.9440 E -1  1.3359 E-12  1.9580 E-13          
+ 12  1.2093 E -2  6.4368 E -9  4.5954 E -6  8.0884 E -1  3.0192 E  0 
+ 
+>    9.9413 E -1  1.3359 E-12  1.9582 E-13          
+ 13  1.3716 E -3  6.4368 E-10  4.8289 E -7  9.0000 E -1  3.2695 E  0 
+ 
+>    9.9311 E -1  1.3359 E-12  1.9757 E-13          
+ -------------------------------------------------------------------
+ 
+>   ---------------------------
+* Primal solution is feasible 
+(max eig(A* X - C) = -0.000286443 <= 0 )
+* Dual solution is not within tolerance
+                                      -9
+(|| A X - B || = 0.0000479052 >= 1. 10  )
+
+In[16]:= 
+In[16]:= Close[outputStream];
+
+In[17]:= 
+In[17]:= $Echo = DeleteCases[$Echo, "stdout"];
+
+In[18]:= 

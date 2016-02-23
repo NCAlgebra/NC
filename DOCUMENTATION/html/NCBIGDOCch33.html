@@ -1,0 +1,528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>33 NCAlgebra and NCGB Installation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/mn.html)"> 
+<!-- html,index=2,2 --> 
+<meta name="src" content="NCBIGDOC.tex"> 
+<meta name="date" content="2010-01-06 13:44:00"> 
+<link rel="stylesheet" type="text/css" href="NCBIGDOC.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch34.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="#tailNCBIGDOCch33.html"><span 
+class="cmr-10x-x-109">tail</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa8.html#NCBIGDOCch33.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+   <h2 class="chapterHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">Chapter</span><span 
+class="cmr-10x-x-109">&#x00A0;33</span></span><br><a 
+ id="x69-40700033"></a><span 
+class="cmr-10x-x-109">NCAlgebra and NCGB Installation</span></h2>
+<!--l. 4--><p class="noindent"><span 
+class="cmr-10x-x-109">This chapter gives more detail on some aspects of Installation and running NCGB, SYStems, OldMmaGB.</span>
+<span 
+class="cmr-10x-x-109">These are kind of random remarks we wanted to hang onto but which are probably not too</span>
+<span 
+class="cmr-10x-x-109">important.</span>
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.1   </span></span> <a 
+ id="x69-40800033.1"></a><span 
+class="cmr-10x-x-109">Running NCAlgebra</span></h3>
+<!--l. 285--><p class="noindent"><span 
+class="cmr-10x-x-109">See Chapter</span> <span 
+class="cmbx-10x-x-109">??</span> <span 
+class="cmr-10x-x-109">for the basics. We have nothing to add to that here.</span>
+<!--l. 288--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.2   </span></span> <a 
+ id="x69-40900033.2"></a><span 
+class="cmr-10x-x-109">Running NCGB</span></h3>
+<!--l. 292--><p class="noindent"><span 
+class="cmr-10x-x-109">See Chapter</span> <span 
+class="cmbx-10x-x-109">??</span> <span 
+class="cmr-10x-x-109">for the basics. We remind the reader here: </span><span 
+class="cmr-10x-x-109">&#x00A0;A UNIX session begins by</span>
+   <div  
+class="centerline">                 <span 
+class="cmbx-10x-x-109">Getting in the NC directory, entering Mathematica and typing</span>              </div>
+   <div  
+class="centerline">                                         <span 
+class="cmmi-10x-x-109">In</span><span 
+class="cmr-10x-x-109">[1] :=</span><span 
+class="cmmi-10x-x-109">&lt;&lt;</span><span 
+class="cmr-10x-x-109">SetNCPath.m</span>                                                </div>
+<!--l. 305--><p class="indent">   <span 
+class="cmr-10x-x-109">Then the file </span><span 
+class="cmbx-10x-x-109">NCGB.m </span><span 
+class="cmr-10x-x-109">is used to load all necessary files into Mathematica. The command</span>
+<span 
+class="cmr-10x-x-109">is:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;In[2]:=&#x00A0;Get["NCGB.m"]
+</div>
+</td></tr></table>
+<!--l. 309--><p class="nopar"> <span 
+class="cmr-10x-x-109">There are two configurations of this file; it can load either NCAlgebra.m or shortNCAlgebra.m,</span>
+<span 
+class="cmr-10x-x-109">depending on the user&#8217;s needs. The file shortNCAlgebra.m loads a smaller segment of the complete</span>
+<span 
+class="cmr-10x-x-109">package.</span>
+<!--l. 321--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.3   </span></span> <a 
+ id="x69-41000033.3"></a><span 
+class="cmr-10x-x-109">Running SYStems </span></h3>
+<!--l. 324--><p class="noindent"><span 
+class="cmr-10x-x-109">First edit the SYStems.m file, whose function is to load in the raw material for your problem.</span>
+<span 
+class="cmr-10x-x-109">Make sure it loads in what you need. The file SYStems.m is in the NCAlgebra directory. The</span>
+<span 
+class="cmr-10x-x-109">first thing that the SYStems.m file does is to read in the NCAlgebra.m file and NCAlgebra</span>
+<span 
+class="cmr-10x-x-109">should </span><span 
+class="cmbx-10x-x-109">NOT </span><span 
+class="cmr-10x-x-109">be loaded either before or after getting the file SYStems.m. Thus a session begins</span>
+<span 
+class="cmr-10x-x-109">by</span>
+   <div  
+class="centerline">                 <span 
+class="cmbx-10x-x-109">Getting in the NC directory, entering Mathematica and typing</span>               </div>
+   <div  
+class="centerline">                                             <span 
+class="cmmi-10x-x-109">&lt;&lt;</span><span 
+class="cmbx-10x-x-109">SetNCPath.m</span>                                             </div>
+<div  
+class="centerline">                                     <span 
+class="cmmi-10x-x-109">&lt;&lt;</span><span 
+class="cmbx-10x-x-109">SYStems.m</span>                                     </div>
+<!--l. 338--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.4   </span></span> <a 
+ id="x69-41100033.4"></a><span 
+class="cmr-10x-x-109">Running OldMmaGB (which we do not support) </span></h3>
+<!--l. 341--><p class="noindent"><span 
+class="cmr-10x-x-109">The file OldMmaGB.m loads in old commands which we do not actively support as well as new untested</span>
+<span 
+class="cmr-10x-x-109">ventures which may not work reliably and whose documentation, in NCOLDDOC, contains few complete</span>
+<span 
+class="cmr-10x-x-109">english sentences.</span>
+<!--l. 347--><p class="indent">   <span 
+class="cmr-10x-x-109">A session begins by</span>
+   <div  
+class="centerline">                 <span 
+class="cmbx-10x-x-109">Getting in the NC directory, entering Mathematica and typing</span>              </div>
+   <div  
+class="centerline">                                              <span 
+class="cmmi-10x-x-109">&lt;&lt;</span><span 
+class="cmr-10x-x-109">SetNCPath.m</span>                                                     </div>
+<div  
+class="centerline">                                     <span 
+class="cmmi-10x-x-109">&lt;&lt;</span><span 
+class="cmr-10x-x-109">OldMmaGB.m</span>                                    </div>
+<!--l. 354--><p class="indent">   <span 
+class="cmr-10x-x-109">Incidentally </span><span 
+class="cmmi-10x-x-109">OldMmaGB.m </span><span 
+class="cmr-10x-x-109">is a file in the NC/NCAlgebra directory whose function is to load files</span>
+<span 
+class="cmr-10x-x-109">found mostly in the </span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;NC/NCAlgebra/OldMmaGB </span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;</span><span 
+class="cmr-10x-x-109">&#x00A0;directory.</span>
+<!--l. 366--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.5   </span></span> <a 
+ id="x69-41200033.5"></a><span 
+class="cmr-10x-x-109">Environment Settings</span></h3>
+<!--l. 368--><p class="noindent"><span 
+class="cmr-10x-x-109">All variables beginning with the four characters $NC$ are reserved for use by the NCAlgebra and NCGB</span>
+<span 
+class="cmr-10x-x-109">development teams.</span>
+
+<!--l. 371--><p class="indent">   <span 
+class="cmr-10x-x-109">The user may set an $NC$ variable to accomodate his/her needs. If the user does not assign a value to</span>
+<span 
+class="cmr-10x-x-109">a $NC$ variable, then it has no value until that variable is to be actually used. At that time, the code</span>
+<span 
+class="cmr-10x-x-109">changes the value of the variable to a default.</span>
+<!--l. 377--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.5.1   </span></span> <a 
+ id="x69-41300033.5.1"></a><span 
+class="cmr-10x-x-109">NCAlgebra $NC$ Variables</span></h4>
+<!--l. 405--><p class="noindent"><span 
+class="cmr-10x-x-109">$NC$Loaded$NCAlgebra$ is used to ensure that NCAlgebra.m is not loaded twice. Every</span>
+<span 
+class="cmr-10x-x-109">$NC$Loaded$*$ file will be used to avoid duplicate file Get&#8217;s. This is similar to the #ifndef #define</span>
+<span 
+class="cmr-10x-x-109">#endif scheme used in C++.</span>
+<!--l. 411--><p class="indent">   <span 
+class="cmr-10x-x-109">$NC$isCatching$ is reserved to attempt to do Mathematica exception handling via the</span>
+<span 
+class="cmr-10x-x-109">Mathematica commands Catch and Throw. This is not implemented and is held for future</span>
+<span 
+class="cmr-10x-x-109">development.</span>
+<!--l. 416--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.5.2   </span></span> <a 
+ id="x69-41400033.5.2"></a><span 
+class="cmr-10x-x-109">NCGB $NC$ Variables</span></h4>
+<!--l. 418--><p class="noindent"><span 
+class="cmr-10x-x-109">The $NC$ variables which are presently part of NCGB are those that are part of NCAlgebra (see section</span>
+<a 
+href="#x69-41300033.5.1"><span 
+class="cmr-10x-x-109">33.5.1</span><!--tex4ht:ref: secion:NCAlgebra:Dollar --></a><span 
+class="cmr-10x-x-109">) and the following variables.</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+$NC$Loaded$NCGB$
+&#x00A0;<br />$NC$LongLoadTime$
+&#x00A0;<br />$NC$Binary$Dir$
+&#x00A0;<br />$NC$Binary$Name$
+</div>
+</td></tr></table>
+<!--l. 427--><p class="nopar">
+<a 
+ id="dx69-414001"></a>
+<a 
+ id="dx69-414002"></a>
+<a 
+ id="dx69-414003"></a>
+<a 
+ id="dx69-414004"></a>
+<!--l. 435--><p class="indent">   <span 
+class="cmr-10x-x-109">$NC$Loaded$NCGB$ is used to ensure that NCGB.m is not loaded twice. Every $NC$Loaded$*$ file</span>
+<span 
+class="cmr-10x-x-109">will be used to avoid duplicate file Get&#8217;s. This is similar to the #ifndef #define #endif scheme used in</span>
+<span 
+class="cmr-10x-x-109">C++.</span>
+<!--l. 441--><p class="indent">   <span 
+class="cmr-10x-x-109">The $NC$LongLoadTime$ variable is True by default which means that all of NCAlgebra.m will be</span>
+<span 
+class="cmr-10x-x-109">read in when NCGB.m is read in. If one sets it to False, </span><span 
+class="cmbx-10x-x-109">before </span><span 
+class="cmr-10x-x-109">loading either NCAlgebra.m or NCGB.m</span>
+<span 
+class="cmr-10x-x-109">then only part of NCAlgebra.m will be read in.</span>
+<!--l. 447--><p class="indent">   <span 
+class="cmr-10x-x-109">The variables $NC$Binary$Dir$ and $NC$Binary$Name$ are used to specify which C++ executable</span>
+<span 
+class="cmr-10x-x-109">file one is using. If one does not assign a value to either variable, then the value will be set in accordance</span>
+<span 
+class="cmr-10x-x-109">with the variable $NCDir$ which is set in the file SetNCPath.m. The file SetNCPath.m was modified</span>
+<span 
+class="cmr-10x-x-109">appropriately during installation.</span>
+<!--l. 457--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.6   </span></span> <a 
+ id="x69-41500033.6"></a><span 
+class="cmr-10x-x-109">How to set up if someone else compiled the code &#8212; UNIX</span></h3>
+<!--l. 460--><p class="noindent"><span 
+class="cmr-10x-x-109">It is easy to bum off of a friend who is running NC on the same system.</span>
+<!--l. 464--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.6.1   </span></span> <a 
+ id="x69-41600033.6.1"></a><span 
+class="cmr-10x-x-109">When your system administrator installed the code</span></h4>
+<!--l. 467--><p class="noindent"><span 
+class="cmr-10x-x-109">When your system administrator installed the code, he had several choices.</span>
+<!--l. 470--><p class="indent">   <span 
+class="cmr-10x-x-109">The first thing you should try is to start Mathematica by typing </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">math</span></span></span> <span 
+class="cmr-10x-x-109">and then type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">&lt;&lt;SetNCPath.m</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+<span 
+class="cmr-10x-x-109">If there are no error messages, then type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">&lt;&lt;NCAlgebra.m</span></span></span><span 
+class="cmr-10x-x-109">. Mathematica should respond with a sequence of</span>
+<span 
+class="cmr-10x-x-109">statements indicating that various files are being loaded.</span>
+<!--l. 477--><p class="indent">   <span 
+class="cmr-10x-x-109">If Mathematica responds with </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">Get::noopen:</span><span 
+class="cmtt-10x-x-109">&#x00A0;Cannot</span><span 
+class="cmtt-10x-x-109">&#x00A0;open</span><span 
+class="cmtt-10x-x-109">&#x00A0;SetNCPath.m</span></span></span><span 
+class="cmr-10x-x-109">, then additional steps are</span>
+<span 
+class="cmr-10x-x-109">required as described below.</span>
+<!--l. 480--><p class="indent">   <span 
+class="cmr-10x-x-109">You need to determine where your system administrator installed NCAlgebra. The easiest way to do</span>
+<span 
+class="cmr-10x-x-109">this is to ask your system administrator. If that is not easy and/or convenient, then you can</span>
+<span 
+class="cmr-10x-x-109">type</span>
+
+   <center class="math-display" >
+<img 
+src="NCBIGDOC122x.png" alt="cd   find / -name  "NCAlgebra.m " -print " class="math-display" ></center> <span 
+class="cmr-10x-x-109">and</span>
+<span 
+class="cmr-10x-x-109">look at the result. Note that this command will take some time and will access the hard drive quite a bit.</span>
+<span 
+class="cmr-10x-x-109">If this is done on our system, then the result is the directory</span>
+   <center class="math-display" >
+<img 
+src="NCBIGDOC123x.png" alt="/home/ncalg/NC/NCAlgebra/NCAlgebra.m    .  " class="math-display" ></center> <span 
+class="cmr-10x-x-109">The</span>
+<span 
+class="cmr-10x-x-109">location of the installation in this case is </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">/home/ncalg/NC</span></span></span> <span 
+class="cmr-10x-x-109">.</span>
+<!--l. 496--><p class="indent">   <span 
+class="cmr-10x-x-109">Let us suppose that you know the location of the installation of NCAlgebra. Let us suppose that it is</span>
+<span 
+class="cmr-10x-x-109">located in the directory </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">/usr/local/NC</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 500--><p class="indent">   <span 
+class="cmr-10x-x-109">Move into the directory where you want to use NCAlgebra (or create such a directory using the</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">mkdir</span></span></span> <span 
+class="cmr-10x-x-109">command). Create an </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">init.m</span></span></span> <span 
+class="cmr-10x-x-109">file with your favorite editor which contains the following</span>
+<span 
+class="cmr-10x-x-109">lines:</span>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+AppendTo[$Path,"/usr/local/NC/"];
+&#x00A0;<br />Get["SetNCPath.m"];
+</div>
+</td></tr></table>
+<!--l. 508--><p class="nopar">
+<!--l. 510--><p class="indent">   <span 
+class="cmr-10x-x-109">Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">math</span></span></span> <span 
+class="cmr-10x-x-109">and then type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">&lt;&lt;NCAlgebra.m</span></span></span><span 
+class="cmr-10x-x-109">. Then Mathematica responds with a sequence of statements</span>
+<span 
+class="cmr-10x-x-109">indicating that files are being loaded.</span>
+<!--l. 514--><p class="noindent">
+   <h4 class="subsectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.6.2   </span></span> <a 
+ id="x69-41700033.6.2"></a><span 
+class="cmr-10x-x-109">When your friend installed the code</span></h4>
+<!--l. 517--><p class="noindent"><span 
+class="cmr-10x-x-109">Suppose that your friend has installed the code and he is willing to let you use his version of the code (see</span>
+<span 
+class="cmr-10x-x-109">(6)), then you can follow this procedure:</span>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(1) Have your friend log into his account and change directories into the one which contains the</span>
+      <span 
+class="cmr-10x-x-109">NC code. Suppose for definitiveness that it is located in the directory </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">/home/JoeShmo/NC/</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+      <span 
+class="cmr-10x-x-109">In this case, you would type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;/home/JoeShmo/NC</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(2) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">chmod</span><span 
+class="cmtt-10x-x-109">&#x00A0;-R</span><span 
+class="cmtt-10x-x-109">&#x00A0;uog+r</span><span 
+class="cmtt-10x-x-109">&#x00A0;*</span></span></span><span 
+class="cmr-10x-x-109">. This allows all of these files to be read by anyone. (These files are</span>
+      <span 
+class="cmr-10x-x-109">available through the web, so giving permission to read them should be OK with your friend.)</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(3) Edit the file </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">SetNCPath.m</span></span></span><span 
+class="cmr-10x-x-109">. Make sure that there is a command</span>
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      $NCDir$&#x00A0;=&#x00A0;"/home/JoeShmo/NC"
+</div>
+      </td></tr></table>
+      <!--l. 536--><p class="nopar">
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(4) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;../</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(5) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">chmod</span><span 
+class="cmtt-10x-x-109">&#x00A0;u+rx</span><span 
+class="cmtt-10x-x-109">&#x00A0;NC</span></span></span><span 
+class="cmr-10x-x-109">. This allows the directory to be readable by anyone. For some reason,</span>
+      <span 
+class="cmr-10x-x-109">some computer systems require that a directory be executable. I don&#8217;t know why.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(6) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;..</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(7) Type </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">chmod</span><span 
+class="cmtt-10x-x-109">&#x00A0;u+rx</span><span 
+class="cmtt-10x-x-109">&#x00A0;JoeShmo</span></span></span><span 
+class="cmr-10x-x-109">. This allows the directory to be readable by anyone. For some</span>
+      <span 
+class="cmr-10x-x-109">reason, some computer systems require that an directory be executable. I don&#8217;t know why.</span>
+      <span 
+class="cmr-10x-x-109">Your friend may or may not be willing to take this step.</span></dd></dl>
+<!--l. 551--><p class="indent">   <span 
+class="cmr-10x-x-109">Now, follow the directions in Section </span><a 
+href="#x69-41600033.6.1"><span 
+class="cmr-10x-x-109">33.6.1</span><!--tex4ht:ref: subsection:system:admin:installed --></a><span 
+class="cmr-10x-x-109">.</span>
+<!--l. 554--><p class="noindent">
+   <h3 class="sectionHead"><span class="titlemark"><span 
+class="cmr-10x-x-109">33.7   </span></span> <a 
+ id="x69-41800033.7"></a><span 
+class="cmr-10x-x-109">Informing </span><span class="TEX"><span 
+class="cmr-10x-x-109">T</span><span 
+class="E"><span 
+class="cmr-10x-x-109">E</span></span><span 
+class="cmr-10x-x-109">X</span></span><span 
+class="cmr-10x-x-109">&#x00A0;about notebook.sty</span></h3>
+<!--l. 557--><p class="noindent"><span 
+class="cmr-10x-x-109">Read this only if you have trouble with Mma&#8217;s TeX conversion of notebooks. This has nothing to do with</span>
+<span 
+class="cmr-10x-x-109">NCAlgebra, we just include it as a convenience.</span>
+<!--l. 567--><p class="indent">   <span 
+class="cmr-10x-x-109">Most special NCAlgebra and most special NCGB </span><span class="TEX"><span 
+class="cmr-10x-x-109">T</span><span 
+class="E"><span 
+class="cmr-10x-x-109">E</span></span><span 
+class="cmr-10x-x-109">X</span></span><span 
+class="cmr-10x-x-109">&#x00A0;definitions we use are in the file</span>
+<span 
+class="cmr-10x-x-109">NCTeXForm.m. also TeXUtilities.m; see the section on TeX.</span>
+<!--l. 571--><p class="indent">   <span 
+class="cmr-10x-x-109">There is one place in the Mma&#8217;s TeX setting in which explicit facts about the operating system are</span>
+<span 
+class="cmr-10x-x-109">used. &#8220;Elusive&#8221; file notebook.sty must be in your TeX path. Here is how you find notebook.sty and get it</span>
+<span 
+class="cmr-10x-x-109">in your path.</span>
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(1)  Type in math, then type $Path and determine where your system administrator installed your</span>
+      <span 
+class="cmr-10x-x-109">copy of mathematica. When I did this, I got the output as shown below and I determined</span>
+      <span 
+class="cmr-10x-x-109">that mathematica was installed in the directory /opt/mathematica</span></dd></dl>
+
+   <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+{euler&#x00A0;190&#x00A0;:/home/ncalg/NC/NCAlgebra}&#x00A0;math
+&#x00A0;<br />Mathematica&#x00A0;3.0&#x00A0;for&#x00A0;Solaris
+&#x00A0;<br />Copyright&#x00A0;1988-96&#x00A0;Wolfram&#x00A0;Research,&#x00A0;Inc.
+&#x00A0;<br />&#x00A0;--&#x00A0;Terminal&#x00A0;graphics&#x00A0;initialized&#x00A0;--
+&#x00A0;<br />
+&#x00A0;<br />In[1]:=&#x00A0;$Path
+&#x00A0;<br />
+&#x00A0;<br />Out[1]=&#x00A0;{/home/ncalg/.Mathematica/3.0/Kernel,&#x00A0;.,&#x00A0;/home/ncalg,
+&#x00A0;<br />
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/StandardPackages,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/StandardPackages/StartUp,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/Applications,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/AddOns/ExtraPackages,
+&#x00A0;<br />&gt;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/opt/mathematica/SystemFiles/Graphics/Packages,&#x00A0;/home/osiris/ncalg/NCDir}
+</div>
+</td></tr></table>
+<!--l. 599--><p class="nopar">
+      <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(2) Now move into that directory. I typed </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">cd</span><span 
+class="cmtt-10x-x-109">&#x00A0;/opt/mathematica</span></span></span><span 
+class="cmr-10x-x-109">.</span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(3) Now find the file notebook.sty. I did this by typing </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">find</span><span 
+class="cmtt-10x-x-109">&#x00A0;.</span><span 
+class="cmtt-10x-x-109">&#x00A0;-name</span><span 
+class="cmtt-10x-x-109">&#x00A0;"notebook.sty"</span><span 
+class="cmtt-10x-x-109">&#x00A0;-print</span></span></span>
+      <span 
+class="cmr-10x-x-109">When I did this I got </span><span class="obeylines-h"><span class="verb"><span 
+class="cmtt-10x-x-109">./SystemFiles/IncludeFiles/notebook.sty</span></span></span>
+      </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(4) Now I changed my .cshrc file to add an entry to my TEXINPUTS UNIX environment variable.</span>
+      <span 
+class="cmr-10x-x-109">My .cshrc file has the line</span>
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      &#x00A0;setenv&#x00A0;TEXINPUTS
+</div>
+      </td></tr></table>
+      <!--l. 612--><p class="nopar">
+
+      <table width="100%" 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+      &#x00A0;".:/opt/mathematica/SystemFiles/IncludeFiles:/opt/tex/lib/texmf//"
+</div>
+      </td></tr></table>
+      <!--l. 615--><p class="nopar"> <span 
+class="cmr-10x-x-109">in it. You may want to discuss this with your system administrator.</span></dd></dl>
+<!--l. 622--><p class="noindent"><span 
+class="cmbx-10x-x-109">To run DoTeX if you really want to; UNIX only</span>
+<!--l. 626--><p class="indent">   <span 
+class="cmr-10x-x-109">DoTeX is old. We include this instruction for old users who cannot part with it. The file called</span>
+<span 
+class="cmr-10x-x-109">NCTeX.process should be transfered to the bin directory before you use our TeX setting command</span>
+<span 
+class="cmr-10x-x-109">DoTeX.</span>
+
+   <!--l. 2--><div class="crosslinks"><p class="noindent"><span 
+class="cmr-10x-x-109">[</span><a 
+href="NCBIGDOCch34.html" ><span 
+class="cmr-10x-x-109">next</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCch33.html" ><span 
+class="cmr-10x-x-109">front</span></a><span 
+class="cmr-10x-x-109">] [</span><a 
+href="NCBIGDOCpa8.html#NCBIGDOCch33.html" ><span 
+class="cmr-10x-x-109">up</span></a><span 
+class="cmr-10x-x-109">] </span></p></div>
+<!--l. 2--><p class="indent">   <a 
+ id="tailNCBIGDOCch33.html"></a>   
+</body></html> 

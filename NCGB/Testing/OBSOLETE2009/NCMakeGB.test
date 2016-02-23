@@ -1,0 +1,75 @@
+(*
+ * NCMakeGB.test
+ *
+ * Author: Mauricio de Oliveira 
+ *   Date: 12/01/2009
+ *)
+
+Clear[NCMakeGBTest]
+NCMakeGBTest[filename_String, 
+             referenceDirectory_String, 
+             resultDirectory_String:"" ] := Module[
+   {outRels, outRules, outFile, cmpFile, cmpRels, resultFile},
+
+   Print["> Testing file ", filename];
+   Clear[rels];
+
+   (* Set default number of iterations 
+    * User may override by setting Iterations inside test file *)
+   Iterations = 6;
+
+   (* Load test problem *)
+   Get[filename];
+
+   (* Calls NCMakeGB *)
+   outRels = NCMakeGB[rels, Iterations];
+
+   (* Load reference answer *)
+   cmpFile = ToFileName[{"..", referenceDirectory},
+                        StringReplace[filename, ".data.m" -> ".out.GB" ] ];
+   Print["> Comparing result to reference in ", cmpFile];
+   cmpRels = Get[cmpFile];
+
+   (* Compare and write diagnostics if it failed *)
+   Print["> Test ", filename, ": " , 
+    If[outRels =!= cmpRels, "Failed", "Passed"]];
+   If[outRels =!= cmpRels, 
+    Print["> ", outRels]; 
+    Print["> differs from"];
+    Print["> ", cmpRels]; 
+   ];
+
+   (* Generate result *)
+   If[ resultDirectory =!= "",
+     resultFile = ToFileName[{"..", resultDirectory}, 
+     		             StringReplace[filename, ".data.m" -> ".out.GB"]];
+     Print["> Saving result in ", resultFile];
+     Put[outRels, resultFile];
+   ];
+];
+
+(* Perform tests *)
+
+$NCGB$ResultDirectory = "TestResults";
+$NCGB$ReferenceDirectory = "TestReference";
+
+low = 8
+high = 12
+
+$CurrentDirectory = Directory[];
+SetDirectory[ToFileName[{$NCDir$, "NCGB", "Testing"}, "TestProblems"]]
+(* Map[NCMakeGBTest, FileNames["c*.data.m"]]; *)
+
+$NCGB$TestProblems = Map[ \
+  If[# < 10, StringJoin["c0", ToString[#], ".data.m"], 
+             StringJoin["c", ToString[#], ".data.m"]] &, 
+    Select[ToExpression[
+     Flatten[Map[StringCases[#, DigitCharacter ..] &, FileNames[]]]],
+     low <= # <= high &
+    ]
+]
+
+Map[NCMakeGBTest[#,$NCGB$ReferenceDirectory,$NCGB$ResultDirectory]&, \
+    $NCGB$TestProblems];
+
+SetDirectory[$CurrentDirectory];

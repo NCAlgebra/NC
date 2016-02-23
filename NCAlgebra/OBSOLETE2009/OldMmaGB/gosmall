@@ -1,0 +1,115 @@
+debugNC = False;
+System`path  = "/home/osiris/osiris/helton/mathdir/NCAndMora/";
+AppendTo[$Path,System`path]; 
+ 
+Context[ $$OperatingSystem ] = "Global`";
+$$OperatingSystem = "UNIX";
+
+Print["Do you want to run the general version of the code?"];
+runningGeneral = Input["(True or False)"];
+(*
+runningGeneral = True;
+*)
+generalReduction = "smallSymbolicReduction.m";
+expandRuleTuples = True;
+(*  
+runningGeneral=False;
+*)
+
+Print[""];
+Print[""];
+Print["You are running the "];
+Print["***",If[runningGeneral,"general","nongeneral"],"***"];
+Print["version of the code."];
+Print[""];
+Print[""];
+
+If[debugNC,Print["Hi1",$Context,$ContextPath];];
+Get["NCMultiplication.m"];
+If[debugNC,Print["Hi2",$Context,$ContextPath];];
+Get["NCMatMult.m"];
+
+SetNonCommutative[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
+If[debugNC,Print["Hi3",$Context,$ContextPath];];
+
+Get["NCDoTeX.m"];
+Unprotect[ContextToFilename];
+
+If[$VersionNumber >= 2.0, 
+     Unprotect[ContextToFileName];
+     DeclarePackage["Errors`",{"BadCall",
+                               "WhatAreBadArgs"
+                              } 
+                   ];
+If[debugNC,Print["Hi4",$Context,$ContextPath];];
+     DeclarePackage["ArrayManager`",{"AppendToArray",
+                                     "InitializeArray",
+                                     "UnionArray",
+                                     "UnionListToArray",
+                                     "List2Array",
+                                     "Array2List",
+                                     "JoinListToArray",
+                                     "LengthArray",
+                                     "PartArray"
+                                    }
+                   ];
+If[debugNC,Print["Hi5",$Context,$ContextPath];];
+    DeclarePackage["SimpleConvert2`",{"SimpleConvert2",
+                                       "SimpleConvert2NormalizeSupress"
+                                      }
+                   ];
+     Get["Grabs.m"];
+     Get["Inequalities.m"];
+     Get["smallTuples.m"];
+     Get["SimplePower.m"];
+     Get["ManipulatePower.m"];
+     Get["linearConvert.m"];
+     Get["smallConvert.m"];
+     Get["preTransform.m"];
+     Get["preTransform2.m"];
+     Protect[ContextToFileName];
+];
+
+Unprotect[ContextToFilename];
+(*
+Get["NCAlias.m"];
+*)
+
+If[$VersionNumber>=2.0,
+     Print["\nSetting stubs for Groebner basis files."];
+If[debugNC,Print["Hi6",$Context,$ContextPath];];
+     Get["smallMoraData.m"];
+If[debugNC,Print["Hi7",$Context,$ContextPath];];
+     Get["Propogate.m"];
+If[debugNC,Print["Hi8",$Context,$ContextPath];];
+     If[runningGeneral, Get["smallMatchImplementation.m"];
+                      , Get["smallSimpleMatchImplementation.m"];
+     ];
+If[debugNC,Print["Hi9",$Context,$ContextPath];];
+     Get["smallMoraAlg.m"];
+If[debugNC,Print["Hi10",$Context,$ContextPath];];
+     Get["Extra.more"];
+If[debugNC,Print["Hi11",$Context,$ContextPath];];
+     DeclarePackage["HereditaryCalculus`",{"Hereditary",
+                                           "PowerMM",
+                                           "Zero",
+                                           "Var1",
+                                           "Var2"
+                                          }
+                   ];
+If[debugNC,Print["Hi11",$Context,$ContextPath];];
+    DeclarePackage["NCSetRelations`",{"NCSetRelations"
+                                      }
+                   ];
+If[debugNC,Print["Hi12",$Context,$ContextPath];];
+     Get["Extra.TeXForm"];
+If[debugNC,Print["Hi13",$Context,$ContextPath];];
+     Protect[ContextToFilename];
+     Print["Done setting stubs for Groebner basis files."];
+     Print[""];
+
+]; (*end If*)
+Print["(subset of) NCALGEBRA"];
+
+SetMonomialOrder[
+    {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}];

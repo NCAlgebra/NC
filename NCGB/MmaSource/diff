@@ -1,0 +1,116 @@
+68,73d67
+< Clear[NCMakeGBSpread];
+< 
+< NCMakeGBSpread::usage = 
+<    "NCMakeGBSpread[x,y,z,opts] first calls NCMakeGB[x,y,opts] \
+<     and then creates a TeXed display.";
+< 
+336,340d329
+< NCGBCppTeX::usage = 
+<       "NCGBCppTeX is a mathematica variable. If NCGBCppTeX is True,\
+< then the TeX for the variables for SetMonomialOrder are sent \
+< automatically to C++. The default is false.\n";
+< 
+345,346d333
+< NCGBCppTeX = false; (* Should we send the TeX to C++ ? *)
+< 
+371,372c358,366
+< Empty[x:{___GBMarker}]:= (Global`DestroyMarker[x]; Return[{}];);
+< Empty[x___]:= BadCall["Empty",x];
+---
+> Empty[markers_List]:=
+> Module[{i},
+> (*
+>   Print["Empty within MoraAlg` temporarily disabled."];
+> *)
+>    Do[Global`DestroyMarker[markers[[i]]];
+>    ,{i,Length[markers]}];
+>    Return[{}];
+> ];
+380,386d373
+< NCMakeGBSpread[x_,y_,z_String,opts___] := 
+< Module[{ans},
+<   ans = NCMakeGB[x,y,opts];
+<   Global`RegularOutput[Global`unmarker[ans],z,"Mma"];
+<   Return[ans];
+< ];
+< 
+394c381
+<         trash={},markerFlag,degcap,degsumcap,degcapon,newuserselect},
+---
+>         trash,markerFlag,degcap,degsumcap,degcapon,newuserselect},
+395a383
+>    trash = {};
+472d459
+<        Print["ok2 is ",ok2];
+664c651
+< Module[{usemarker,FC,RULES,RULES2,temp,result,trash={}},
+---
+> Module[{usemarker,FC,RULES,RULES2,temp,result},
+673c660
+<       AppendTo[trash,temp];
+---
+>       Global`DestroyMarker[temp];
+675,676c662,664
+<   trash = Join[trash,{RULES2,RULES,FC}];
+<   Global`DestroyMarker[trash];
+---
+>   Global`DestroyMarker[RULES2];
+>   Global`DestroyMarker[RULES];
+>   Global`DestoryMarker[FC];
+681c669
+< Module[{usemarker,result,saveresult,n},
+---
+> Module[{usemarker,temp,n,i,m,k,arr,result,saveresult,j},
+690c678
+<       result = Global`returnGBMarkerContents[saveresult];
+---
+>       result = Global`returnGBMarkerContents[result];
+700c688
+<    temp = Global`registerStartingRelations[numb];
+---
+>    Global`registerStartingRelations[numb];
+769,771c757
+<   If[IntegerQ[Grading]
+<     , temp = Global`ClearMonomialOrderN[Grading];
+<   ];
+---
+>   temp = Global`ClearMonomialOrderN[Grading];
+781,785d766
+<       If[NCGBCppTeX 
+<         , Global`setTeXString[Map[{#,Global`ToStringForTeX[#]}&,Mono]];
+<       ];
+<       (* Perform an optimization for RegularOutput *)
+<       Map[(Global`NCGBTeXedVariables[#]=ToStringForTeX[#])&,Mono];
+814d794
+<   Clear[Global`NCGBTeXedVariables];
+852,863c832
+< ToGBRule[aList_List] := 
+< Module[{temp,temp2,result},
+<   temp = aList/.{Equal->Subtract,Rule->Subtract};
+<   temp2 = Union[Map[Head,temp]];
+<   If[Or[MemberQ[temp2,Integer],
+<         MemberQ[temp2,List]
+<        ]
+<     , result = Map[ToGBRule,temp];
+<     , result = Global`PolynomialsToGBRules[temp];
+<   ];
+<   Return[result];
+< ];
+---
+> ToGBRule[aList_List] := Map[ToGBRule,aList];
+1173,1177c1142,1147
+< Module[{temp},
+<    Global`SetIterations[Iter];
+<    temp = Global`continueRun[];
+< (* temp = Global`continueRun[Iter];  bug *)
+<    If[temp===$Failed,
+---
+> Module[{temp1,temp2},
+>    temp1 = Global`SetIterations[Iter];
+>    temp2 = Global`continueRun[];
+> (*   temp1= Global`continueRun[Iter]; bug 8/3/1997 *)
+>    If[Or[temp1===$Failed,temp2===$Failed]
+>      ,  Print["The call to the C++ code failed somehow."];
+1180d1149
+<         Print["The call to the C++ code failed somehow."];
