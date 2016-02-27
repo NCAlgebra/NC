@@ -76,6 +76,12 @@ NCPolyDegree[p_NCPoly] := Part[Last[Part[p, 2]], 1, 1];
 
 NCPolyGetCoefficients[p_NCPoly] := Part[p, 2, All, 2];
 
+NCPolyCoefficient[p_NCPoly, m_?NCPolyMonomialQ] := Module[
+    {pos},
+    pos = FirstPosition[p[[2]][[All,1]], First[First[m[[2]]]]];
+    If[pos =!= Missing["NotFound"], p[[2, pos[[1]]]][[2]], 0]
+];
+
 NCPolyGetIntegers[p_NCPoly] := Part[p, 2, All, 1];
 
 NCPolyGetDigits[p_NCPoly] := NCIntegerDigits[NCPolyGetIntegers[p], p[[1]]];

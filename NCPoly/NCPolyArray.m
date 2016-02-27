@@ -156,6 +156,9 @@ NCPolyDegree[p_NCPoly] := Part[Dimensions[p[[2]]], 1] - 1;
 NCPolyGetCoefficients[p_NCPoly] := 
   p[[2]] /. (HoldPattern[SparseArray[_, _, _, {_,_,c_}]] :> c);
 
+NCPolyCoefficient[p_NCPoly, m_?NCPolyMonomialQ] := 
+  Part[p[[2]], ##]& @@ First[First[ArrayRules[m[[2]]]]];
+
 NCPolyGetDigits[p_NCPoly] := 
   NCIntegerDigits[NCPolyGetIntegers[p], p[[1]]];
 
