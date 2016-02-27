@@ -1,0 +1,132 @@
+(* Test NCAlgebra interface *)
+
+<< NC`
+<< NCAlgebra`
+<< NCGBX`
+
+Print["* TESTING NCToPoly/PolyToNC -- BEGIN"];
+
+Clear[a,b,c]
+SNC[a,b,c]
+
+vars = {{a},{b,c}}
+NCExp = a
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, NCPolyMonomial[{0}, {1,2}]]
+Test[NCExp, NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = 2 b
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, 2 NCPolyMonomial[{1}, {1,2}]]
+Test[NCExp, NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = - c
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, -NCPolyMonomial[{2},{1,2}]]
+Test[NCExp, NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = b ** a
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, NCPolyMonomial[{1,0}, {1,2}]]
+Test[NCExp, NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = 5 c ** b ** a
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, 5 NCPolyMonomial[{2,1,0},{1,2}]]
+Test[NCExp, NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = - b ** c ** b ** a
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, - NCPolyMonomial[{1,2,1,0}, {1,2}]]
+Test[NCExp, NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = a**a + b**b + c**c
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]]
+Test[NCExp, NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = a**a -> - b**b - c**c
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]]
+Test[(NCExp /. (x_ -> y_) -> x - y), NCExpExp]
+
+vars = {{a},{b,c}}
+NCExp = a**a == - b**b - c**c
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]]
+Test[(NCExp /. (x_ == y_) -> x - y), NCExpExp]
+
+(* List functionality *)
+
+NCExp = { - b ** c ** b ** a, a**a + b**b + c**c };
+PolyExp = NCToPoly[NCExp, vars];
+NCExpExp = PolyToNC[PolyExp, vars];
+
+Test[PolyExp, {NCPoly[{-1}, {{b,c,b,a}}, vars], NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]}]
+Test[NCExp, NCExpExp]
+
+Print["* TESTING NCToPoly/PolyToNC -- END"];
+
+Print["* TESTING SetKnowns/SetUnknowns -- BEGIN"];
+
+Clear[a,b,c,d]
+SNC[a,b,c,d]
+
+SetKnowns[a,b]
+SetUnknowns[c,d]
+Test[GetMonomialOrder[], {{a,b},{c},{d}}]
+
+SetKnowns[b,c]
+Test[GetMonomialOrder[], {{b,c}}]
+
+SetKnowns[{a,b}]
+Test[GetMonomialOrder[], {{a,b}}]
+
+SetKnowns[{{a},{{b}}}]
+Test[GetMonomialOrder[], {{a,b}}]
+
+SetUnknowns[{c,d}]
+Test[GetMonomialOrder[], {{a,b},{c,d}}]
+
+SetUnknowns[d,c]
+Test[GetMonomialOrder[], {{a,b},{d},{c}}]
+
+SetUnknowns[d,{c}]
+Test[GetMonomialOrder[], {{a,b},{d},{c}}]
+
+SetUnknowns[d,{c,b}]
+Test[GetMonomialOrder[], {{a,b},{d},{c,b}}]
+
+Test[NCPolyDisplayOrder[GetMonomialOrder[]], \
+     "a < b \[LessLess] d \[LessLess] c < b"]
+
+SetUnknowns[d,{c,b,e}]
+Test[NCPolyDisplayOrder[GetMonomialOrder[]], \
+     "a < b \[LessLess] d \[LessLess] c < b < e"]
+
+Print["* TESTING SetKnowns/SetUnknowns -- END"];

@@ -98,6 +98,9 @@ NCPolyDegree[p_NCPoly] := Max @@ Map[Plus @@ Drop[#, -1] &, Keys[p[[2]]]];
 
 NCPolyGetCoefficients[p_NCPoly] := Values[p[[2]]];
 
+NCPolyCoefficient[p_NCPoly, m_?NCPolyMonomialQ] :=
+  Part[Lookup[p[[2]], {First[Keys[m[[2]]]]}, 0], 1];
+
 NCPolyGetIntegers[p_NCPoly] := Keys[p[[2]]];
 
 NCPolyGetDigits[p_NCPoly] := 

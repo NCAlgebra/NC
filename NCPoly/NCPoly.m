@@ -44,6 +44,9 @@ NCPolyLeadingMonomial::usage="NCPolyLeadingMonomial[p] returns a NCPoly represen
 Clear[NCPolyGetCoefficients];
 NCPolyGetCoefficients::usage="NCPolyGetCoefficients[p] returns a list with the coefficients of the terms in the NCPoly p.";
 
+Clear[NCPolyCoefficient];
+NCPolyCoefficient::usage="NCPolyCoefficients[p, m] returns the coefficient of the monomial m in the NCPoly p.";
+
 Clear[NCPolyGetDigits];
 NCPolyGetDigits::usage="NCPolyGetIntegers[p] returns a list with the base n digits that encode the degree of the terms in the NCPoly p. See NCIntegerDigits and NCFromDigits.";
 

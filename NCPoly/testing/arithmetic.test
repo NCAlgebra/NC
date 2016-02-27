@@ -1,0 +1,60 @@
+(* Test Arithmetic *)
+
+Print["* TESTING ARITHMETIC -- BEGIN"];
+
+Clear[x, y, z]
+vars={x,y,z}
+
+m1={{},{x},{z},{x,y},{x,y,x}}
+c1={1,0,-1,-2,3}
+p1=NCPoly[c1,m1,vars];
+
+m2=Append[m1,{x,x,z}]
+c2={0,1,-1,0,-2,3}
+p2=NCPoly[c2,m2,vars];
+
+(* Multiplication by scalar *)
+p3 = Pi p1;
+Test[NCPolyGetCoefficients[p3], Pi NCPolyGetCoefficients[p1]];
+
+(* Multiplication by 0 *)
+p3=0*p1
+Test[p3, 0];
+
+(* Multiplication by 1 *)
+p3=1*p1
+Test[p3, p1];
+
+(* Multiplication by -1 *)
+p3=-p1
+Test[NCPolyGetCoefficients[p3], -NCPolyGetCoefficients[p1]];
+
+(* Addition same size *)
+p3=p1+p1
+Test[NCPolyGetCoefficients[p3], 2*NCPolyGetCoefficients[p1]];
+
+(* Subtraction same size *)
+p3=p1-p1
+Test[p3, 0]
+
+(* Addition two different sizes *)
+p3=p1+p2
+Test[Cases[NCPolyGetCoefficients[p3],Except[0]], {1, 1, -2, -2, 3, 1}];
+
+(* Subtraction two different sizes *)
+p3=p1-p2
+Test[Cases[NCPolyGetCoefficients[p3],Except[0]], {1, -1, -2, -3, 5}];
+
+(* Mixed scalar multipilcation and addition *)
+p3=2p1-3p2
+Test[Cases[NCPolyGetCoefficients[p3],Except[0]], {2, -3, 1, -4, -9, 12}];
+
+(* Addition with 0 *)
+p3=0+p1
+Test[p3, p1];
+
+(* Addition with scalar *)
+p3=p1-1
+Test[Cases[NCPolyGetCoefficients[p3],Except[0]], {-1, -2, 3}];
+
+Print["* TESTING ARITHMETIC -- END"];

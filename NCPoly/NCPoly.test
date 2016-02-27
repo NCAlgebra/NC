@@ -1,0 +1,58 @@
+AppendTo[$Echo, "stdout"]
+SetOptions[$Output,PageWidth->120];
+
+Clear[Test];
+Test[result_, answer_] := Module[
+
+  {},
+  If[ result === answer
+     ,
+      Print["> Pass"];
+      Return[True];
+     ,
+      Print["> Fail"];
+      Print["* Result:"];
+      Print["  ", ToString[result] ];
+      Print["  differs from answer:" ];
+      Print["  ", ToString[answer] ];
+
+      Return[False];
+  ];
+];
+
+(* Perform tests *)
+
+<< NCPoly`
+
+Get[ToFileName["testing", "digits.test"]]
+
+test = 4;
+Switch[ test
+       ,1
+       ,Get["NCPolyArray.m"];
+       ,2
+       ,Get["NCPolyList.m"];
+       ,3
+       ,Get["NCPolyListGraded.m"];
+       ,4
+       ,Get["NCPolyAssociationGraded.m"];
+];
+
+isGraded=(NCPolyOrderType[NCPolyMonomial[{1}, 1]]===NCPoly`NCPolyDegLexGraded);
+
+Get[ToFileName["testing", "constructors.test"]];
+If [ isGraded, Get[ToFileName["testing", "constructors.graded.test"]] ]
+
+Get[ToFileName["testing", "arithmetic.test"]]
+
+Get[ToFileName["testing", "product.test"]]
+If [ isGraded, Get[ToFileName["testing", "product.graded.test"]] ]
+
+Get[ToFileName["testing", "reduce.test"]]
+If [ isGraded, Get[ToFileName["testing", "reduce.graded.test"]] ]
+
+Get[ToFileName["testing", "groebner.test"]]
+
+Get[ToFileName["testing", "ncinterface.test"]]
+
+$Echo = DeleteCases[$Echo, "stdout"];

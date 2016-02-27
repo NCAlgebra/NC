@@ -1,0 +1,101 @@
+(*Test Groebner *)
+
+<< NCPolyGroebner`
+
+Print["* TESTING S POLY -- BEGIN"];
+
+Clear[a,b,c,d]
+vars = {{a,b},{c},{d}}
+
+g1 = NCPolyMonomial[{c,d,c}, vars] + NCPolyMonomial[{d,a,d}, vars];
+g2 = NCPolyMonomial[{d,d,a}, vars];
+
+obs1 = NCPolySFactors[g1, g2];
+Test[obs1, { {{NCPolyMonomial[{d},vars], 1}, {1, NCPolyMonomial[{d},vars]}}, {{1, NCPolyMonomial[{d,a},vars]}, {NCPolyMonomial[{d,a},vars], 1}} }];
+(*
+  Print["obs1 = ", obs1];
+  Print["obs1 = ", obs1 /. HoldPattern[NCPoly[x___]] :> NCPolyDisplay[NCPoly[x]] ];
+*)
+
+Clear[a,b,c]
+vars = {{a},{b,c}}
+
+g1 = NCPolyMonomial[{a,a}, vars] + NCPolyMonomial[{b,b}, vars] + NCPolyMonomial[{c,c}, vars];
+g2 = NCPolyMonomial[{c}, vars];
+
+obs1 = NCPolySFactors[g1, g1];
+Test[obs1, {{ {NCPolyMonomial[{c},vars], 1}, {1, NCPolyMonomial[{c},vars]} }}];
+(* 
+  Print["obs1 = ", obs1];
+  Print["obs1 = ", obs1 /. HoldPattern[NCPoly[x___]] :> NCPolyDisplay[NCPoly[x]] ];
+*)
+
+obs2 = NCPolySFactors[g1, g2];
+Test[obs2, { {{1, 1}, {1, NCPolyMonomial[{c},vars]}}, {{1, 1}, {NCPolyMonomial[{c},vars], 1}} }];
+(*
+  Print["obs2 = ", obs2];
+  Print["obs2 = ", obs2 /. HoldPattern[NCPoly[x___]] :> NCPolyDisplay[NCPoly[x]] ];
+*)
+
+Clear[a, b]
+vars = {a, b};
+
+g1 = NCPolyMonomial[{a, b, a}, vars] - NCPolyMonomial[{b}, vars];
+g2 = NCPolyMonomial[{b, a, b}, vars] - NCPolyMonomial[{b}, vars];
+
+obs1 = NCPolySFactors[g1, g1];
+Test[obs1, {{ {NCPolyMonomial[{a,b},vars], 1}, {1, NCPolyMonomial[{b,a},vars]} }}];
+
+obs2 = NCPolySFactors[g1, g2];
+Test[obs2, { {{NCPolyMonomial[{b},vars], 1}, {1, NCPolyMonomial[{a},vars]}}, {{1, NCPolyMonomial[{b},vars]}, {NCPolyMonomial[{a},vars], 1}}}];
+
+exp1 = NCPolySFactorExpand[Part[obs1, 1], NCPolyLeadingMonomial[g1], NCPolyLeadingMonomial[g1]];
+Test[exp1, {NCPolyMonomial[{a,b,a,b,a},vars], NCPolyMonomial[{a,b,a,b,a},vars]} ];
+
+exp21 = NCPolySFactorExpand[Part[obs2, 1], NCPolyLeadingMonomial[g1], NCPolyLeadingMonomial[g2]];
+Test[exp21, {NCPolyMonomial[{b,a,b,a},vars], NCPolyMonomial[{b,a,b,a},vars]}];
+
+exp22 = NCPolySFactorExpand[Part[obs2, 2], NCPolyLeadingMonomial[g1], NCPolyLeadingMonomial[g2]];
+Test[exp22, {NCPolyMonomial[{a,b,a,b},vars], NCPolyMonomial[{a,b,a,b},vars]}];
+
+Print["* TESTING S POLY -- END"];
+
+Print["* TESTING GROEBNER PROBLEM # 1 -- BEGIN"];
+
+g = {g1, g2};
+G = NCPolyGroebner[g, 12];
+
+Test[Map[NCPolyGetCoefficients,G], \
+     {{-1,1},{-1,1},{-1,1}}]
+Test[Map[NCPolyGetIntegers,G], \
+     {{{2, 2}, {2, 3}}, {{2, 1}, {2, 2}}, {{1, 1}, {3, 1}}} ]
+
+G = FixedPoint[NCPolyReduce, G, 10];
+
+Test[Map[NCPolyGetCoefficients,G], \
+     {{-1,1},{-1,1},{-1,1}}]
+Test[Map[NCPolyGetIntegers,G], \
+     {{{2, 2}, {2, 3}}, {{2, 1}, {2, 2}}, {{1, 1}, {3, 1}}} ]
+
+Print["* TESTING GROEBNER PROBLEM # 1 -- END"];
+
+Print["* TESTING GROEBNER PROBLEM # 2 -- BEGIN"];
+
+Clear[m, Invm, q2, q1, m, f, a]
+
+vars = {Invm, q2, q1, m, f, a};
+
+g = { \
+NCPolyMonomial[{Invm, m}, vars] - 1, \
+NCPolyMonomial[{m, Invm}, vars] - 1, \
+NCPolyMonomial[{a, m}, vars] - NCPolyMonomial[{m, f}, vars] \
+  - NCPolyMonomial[{q1, q2}, vars] \
+};
+
+G = NCPolyGroebner[g, 12];
+Test[Map[NCPolyGetCoefficients,G], \
+     {{-1,1},{-1,1},{-1,-1,1},{-1,1,1},{-1,1,1},{-1,1,1,1}}]
+Test[Map[NCPolyGetIntegers,G], \
+     {{{0, 0}, {2, 3}}, {{0, 0}, {2, 18}}, {{2, 13}, {2, 22}, {2, 33}}, {{1, 5}, {3, 78}, {3, 132}}, {{2, 5}, {2, 24}, {4,78}}, {{2, 35}, {4, 492}, {4, 816}, {4, 1158}}} ]
+
+Print["* TESTING GROEBNER PROBLEM # 2 -- END"];
