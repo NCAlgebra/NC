@@ -32,17 +32,10 @@ Begin[ "`Private`" ]
 
 SetNonCommutative[co];
 
-(* 
-Literal[aj[tp[x_]]] := co[x];
-Literal[tp[aj[x_]]] := co[x];
-*)
-
 SetConjugateLinear[co];
 SetIdempotent[co];
-
-Unset[co[0]];
+co[z_?CommutativeAllQ]:= Conjugate[z];
 co[s_Times] := co /@ s;
-co[z_]:= Conjugate[z] /; CommutativeAllQ[z]
 
 (* Relationship with aj and tp *)
 

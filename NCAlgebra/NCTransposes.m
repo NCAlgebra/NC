@@ -44,14 +44,13 @@ SetNonCommutative[tp];
 SetLinear[tp];
 SetIdempotent[tp];
 (* BEGIN MAURICIO MAR 2016 *)
-Unset[tp[0]];
 (* tp[Id] := Id; *)
 (* tp[-1]:=-1; *)
 (* tp[s_ * az_] := s*tp[az] /; CommutativeAllQ[s]; *)
+(* tp[z_?NumberQ] := z; *)
 (* END MAURICIO MAR 2016 *)
-tp[z_?NumberQ] := z;
-tp[z_?CommutativeAllQ] := z;
 tp[s_Times] := tp /@ s;
+tp[z_?CommutativeAllQ] := z;
 
 (* ---------------------------------------------------------------- *)
 (*      The product of transposes is the reverse product of the     *)

@@ -71,14 +71,13 @@ SetNonCommutative[aj];
 SetConjugateLinear[aj];
 SetIdempotent[aj];
 (* BEGIN MAURICIO MAR 2016 *)
-Unset[aj[0]];
 (* aj[] := Id; *)
 (* aj[Id] := Id; *)
 (* aj[s_ * az_] := tp[s]*tp[az]; *)
+(* aj[z_]:= Conjugate[z] /; NumberQ[z] *)
 (* END MAURICIO MAR 2016 *)
 aj[s_Times] := aj /@ s;
-aj[z_]:= Conjugate[z] /; NumberQ[z]
-aj[z_]:= Conjugate[z] /; CommutativeAllQ[z]
+aj[z_?CommutativeAllQ]:= Conjugate[z];
 
 (* ---------------------------------------------------------------- *)
 (*      The product of adjoints is the reverse product of the       *)

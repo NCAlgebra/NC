@@ -216,7 +216,6 @@ Literal[NonCommutativeMultiply[a___, b_, c___]] :=
 
 (* Nov 2015 Mauricio : CommutativeQ pattern issue END *)
 
-
 Literal[NonCommutativeMultiply[a_]] := a;
 NonCommutativeMultiply[] := 1;
 
@@ -253,6 +252,7 @@ CommuteEverything[v_] := v //. {
  NonCommutativeMultiply -> Times,
  HoldPattern[tp[x_]]->x, 
  HoldPattern[aj[x_]]->Conjugate[x], 
+ HoldPattern[co[x_]]->Conjugate[x], 
  HoldPattern[rt[x_]]->x^(1/2),
  HoldPattern[inv[x_]]->x^(-1)
 };

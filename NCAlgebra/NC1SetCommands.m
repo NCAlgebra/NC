@@ -234,12 +234,15 @@ SetBilinear[a__]:=(Function[x,
 LinearQ[___] = False;
 
 SetLinear[a__]:=(Function[x,
-        x[0] := 0;
         x[y_+z_] := x[y] + x[z];
+        (* BEGIN MAURICIO MAR 2016 *)
+        (* x[0] := 0; *)
+        x[c_?NumberQ] := c;
         x[c_?NumberQ y_] := c x[y];
-        (* x[y_/c_] := (1/c) x[y] /; NumberQ[c]; MAURICIO MAR 2016 *)
-        x[c_] := c x[1] /; NumberQ[c] && Not[TrueQ[c==1]];
+        (* x[y_/c_] := (1/c) x[y] /; NumberQ[c];  *)
+        (* x[c_] := c x[1] /; NumberQ[c] && Not[TrueQ[c==1]]; *)
         (* x[-y_] := -x[y]; MAURICIO MAR 2016*)
+        (* END MAURICIO MAR 2016 *)
         LinearQ[x] = True;
         ]
        /@{a});
@@ -249,12 +252,15 @@ SetLinear[a__]:=(Function[x,
 ConjugateLinearQ[___] = False;
 
 SetConjugateLinear[a__]:=(Function[x,
-        x[0] := 0;
         x[y_+z_] := x[y] + x[z];
+        (* BEGIN MAURICIO MAR 2016 *)
+        (* x[0] := 0; *)
+        x[c_?NumberQ] := Conjugate[c];
         x[c_?NumberQ y_] := Conjugate[c] x[y];
         (* x[y_/c_] := (1/Conjugate[c]) x[y] /; NumberQ[c]; MAURICIO MAR 2016 *)
-        x[c_] := Conjugate[c] x[1] /; NumberQ[c] && Not[TrueQ[c==1]];
+        (* x[c_] := Conjugate[c] x[1] /; NumberQ[c] && Not[TrueQ[c==1]]; *)
         (* x[-y_] := -x[y]; MAURICIO MAR 2016 *)
+        (* END MAURICIO MAR 2016 *)
         ConjugateLinearQ[x] = True;
         ]
        /@{a});
@@ -366,9 +372,15 @@ SetNonCommutativeMultiplyAntihomomorhism[ops__] :=
                                op[NonCommutativeMultiply[b, a]],
                                right] /; ExpandQ[op]==False;
 
+      (*
       op[NonCommutativeMultiply[a_, b__]] := 
         NonCommutativeMultiply[op[NonCommutativeMultiply[b]], 
                                op[a]] /; ExpandQ[op]==True;
+      *)
+             
+      HoldPattern[op[NonCommutativeMultiply[a__]]] := 
+        (NonCommutativeMultiply @@ (op /@ Reverse[{a}])) /; ExpandQ[op]==True;
+             
    ] /@{ops} );
 
 SetNonCommutativeMultiplyHomomorhism[ops__] := 
@@ -378,10 +390,17 @@ SetNonCommutativeMultiplyHomomorhism[ops__] :=
                                op[NonCommutativeMultiply[a, b]],
                                right] /; ExpandQ[op]==False;
 
+      (*
       op[NonCommutativeMultiply[a_, b__]] := 
         NonCommutativeMultiply[op[a], 
-                               op[NonCommutativeMultiply[b]]] /; ExpandQ[op]==True;
-   ] /@{ops} );
+                               op[NonCommutativeMultiply[b]]] /; ...
+            ExpandQ[op]==True;
+      *)
+
+      HoldPattern[op[NonCommutativeMultiply[a__]]] := 
+        (NonCommutativeMultiply @@ (op /@ {a})) /; ExpandQ[op]==True;
+            
+    ] /@{ops} );
 
 (* END MAURICIO MAR 2016 *)
 
