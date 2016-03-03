@@ -1,0 +1,40 @@
+k$ = 1;
+test[NCCo,k$++] = CommutativeQ[co] == False;
+
+test[NCCo,k$++] = co[0] === 0;
+test[NCCo,k$++] = co[1] === 1;
+test[NCCo,k$++] = co[Pi] === Pi;
+test[NCCo,k$++] = co[I] === -I;
+test[NCCo,k$++] = co[1 + I] === 1 - I;
+
+saveExpandQ = ExpandQ[co];
+
+ExpandQ[co] = True;
+
+test[NCCo,k$++] = co[2 a] === 2 co[a];
+test[NCCo,k$++] = co[3 a ** b] === 3 co[a] ** co[b];
+test[NCCo,k$++] = co[(3 + I) a ** b] === (3 - I) co[a] ** co[b];
+
+expr = co[a**b];
+test[NCCo,k$++] = expr === co[a] ** co[b];
+
+expr = co[a]**co[b];
+test[NCCo,k$++] = expr === co[a] ** co[b];
+
+ExpandQ[co] = False;
+
+expr = co[a**b];
+test[NCCo,k$++] = expr === co[a ** b];
+
+expr = co[a]**co[b];
+test[NCCo,k$++] = expr === co[a ** b];
+
+expr = co[a+b];
+test[NCCo,k$++] = expr === co[a] + co[b];
+
+ExpandQ[co] ^= saveExpandQ;
+
+Print["Results from the file Co.NCTest"]
+For[ i=1, i<k$, i++,
+Print["Test #",i," was ",test[NCCo,i]]
+];

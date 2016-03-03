@@ -20,6 +20,7 @@
    :5/04/91:    Added references to Sesq. (mstankus) 
    :6/24/91:    General Cleanup. (mstankus)
    :3/07/93:    Added Setajinv and Setinvaj. (mstankus)
+   :2/03/16:    Clean up (mauricio)
 *)
 
 BeginPackage[ "NonCommutativeMultiply`" ]
@@ -53,32 +54,55 @@ Setinvaj::usage =
 
 Begin[ "`Private`" ]
 
-aj[] := Id;
+(* BEGIN MAURICIO MAR 2016 *)
 
-SetNonCommutative[aj,u,s,z,a];
+(* SetNonCommutative[aj,u,s,z,a]; *)
+SetNonCommutative[aj];
 
-aj[u_]:=Transpose[Map[aj[#]&,u,{2}]] /; Length[Dimensions[u]] >=2
+(* This is ajMat *)
+(* aj[u_]:=Transpose[Map[aj[#]&,u,{2}]] /; Length[Dimensions[u]] >=2 *)
+
+(* END MAURICIO MAR 2016 *)
+
 
 (* --------------------------------------------------------------------- *)
 (*   Rules for ADJOINTS                                                  *)    
 (* --------------------------------------------------------------------- *)
 SetConjugateLinear[aj];
 SetIdempotent[aj];
-aj[s_*az_]:=aj[s]*aj[az];
-aj[Id] := Id;
-aj[z_]:= Conjugate[z] /;NumberQ[z]
+(* BEGIN MAURICIO MAR 2016 *)
+Unset[aj[0]];
+(* aj[] := Id; *)
+(* aj[Id] := Id; *)
+(* aj[s_ * az_] := tp[s]*tp[az]; *)
+(* END MAURICIO MAR 2016 *)
+aj[s_Times] := aj /@ s;
+aj[z_]:= Conjugate[z] /; NumberQ[z]
+aj[z_]:= Conjugate[z] /; CommutativeAllQ[z]
 
-ExpandQ[aj] = True;
+(* ---------------------------------------------------------------- *)
+(*      The product of adjoints is the reverse product of the       *)
+(*      adjoints.                                                   *)
+(* ---------------------------------------------------------------- *)
+ExpandQ[aj] ^= True;
 NCAntihomo[aj];
+
 (* --------------------------------------------------------------------- *)
 (*   The adjoint and inverse commute. LeftQ[aj,inv] = False means that   *)    
 (*   aj[inv[x]] will be changed to inv[aj[x]].                           *)    
 (* --------------------------------------------------------------------- *)
 LeftQ[aj,inv] := False;
-SetCommutingFunctions[aj,inv];
+(* BEGIN MAURICIO MAR 2016 *)
 
+(* SetCommutingFunctions[aj,inv]; *)
+SetCommutingFunctions[inv,aj];
+
+(*
 Setajinv[] := LeftQ[aj,inv] := True;
 Setinvaj[] := LeftQ[aj,inv] := False;
+*)
+
+(* END MAURICIO MAR 2016 *)
 
 SetInvRightTp = True;
 aj[invL[a_]] := invR[aj[a]] /; SetInvRightTp== True;

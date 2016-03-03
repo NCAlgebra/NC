@@ -149,10 +149,29 @@ Clear[NCAntihomo];
 NCAntihomo::usage =
      "Synonym for SetNonCommutativeMultiplyAntihomomorhism.";
 
+Clear[NonCommutativeMultiplyHomomorphism];
+
+SetNonCommutativeMultiplyHomomorphism::usage = 
+     "SetNonCommutativeMultiplyHomomorphism[b,c,d,...] \
+      sets b,c,d,... to be functions of one variable \
+      such that,for example, \n \
+      b[anything1**anything2] becomes b[anything1]**b[anything2] \
+                    if ExpandQ[b] is True; \n \
+      b[anything1]**b[anything2] becomes b[anything1**anything2] \
+                    if ExpandQ[b] is False; \
+      Common example is co. \n \n \
+      NOTE: The synonym NCHomo is easier to type.";
+      
+Clear[NCHomo];
+
+NCHomo::usage =
+     "Synonym for SetNonCommutativeMultiplyHomomorhism.";
+         
 Clear[ExpandQ];
 
 ExpandQ::usage =
-     "See SetNonCommutativeMultiplyAntihomomrphism.";
+     "See SetNonCommutativeMultiplyAntihomomrphism and \
+      SetNonCommutativeMultiplyHomomrphism.";
 
 Clear[TurnOffCommutingOperators];
 
@@ -177,10 +196,10 @@ SetSesquilinear[a__]:=(Function[x,
         x[z_,0] := 0;
         x[y_,z_+w_] := x[y,z] + x[y,w];
         x[y_+z_,w_] := x[y,w] + x[z,w];
-        x[c_ y_,z_] := c x[y,z] /; NumberQ[c];
-        x[y_,c_ z_] := Conjugate[c] x[y,z] /; NumberQ[c];
-        x[y_/c_,z_] := (1/c) x[y,z] /; NumberQ[c];
-        x[y_,z_/c_] := (1/Conjugate[c]) x[y,z] /; NumberQ[c];
+        x[c_?NumberQ y_,z_] := c x[y,z];
+        x[y_,c_?NumberQ z_] := Conjugate[c] x[y,z];
+        (* x[y_/c_,z_] := (1/c) x[y,z] /; NumberQ[c]; *)
+        (* x[y_,z_/c_] := (1/Conjugate[c]) x[y,z] /; NumberQ[c]; *)
         x[c_,z_] := c x[1,z] /; NumberQ[c]&& Not[TrueQ[c==1]];
         x[y_,c_] := Conjugate[c] x[y,1] /; NumberQ[c]&& Not[TrueQ[c==1]];
         x[-y_,z_] := -x[y,z];
@@ -198,10 +217,10 @@ SetBilinear[a__]:=(Function[x,
         x[z_,0] := 0;
         x[y_,z_+w_] := x[y,z] + x[y,w];
         x[y_+z_,w_] := x[y,w] + x[z,w];
-        x[c_ y_,z_] := c x[y,z] /; NumberQ[c];
-        x[y_,c_ z_] := c x[y,z] /; NumberQ[c];
-        x[y_/c_,z_] := (1/c) x[y,z] /; NumberQ[c];
-        x[y_,z_/c_] := (1/c) x[y,z] /; NumberQ[c];
+        x[c?NumberQ_ y_,z_] := c x[y,z];
+        x[y_,c_?NumberQ z_] := c x[y,z];
+        (* x[y_/c_,z_] := (1/c) x[y,z] /; NumberQ[c]; *)
+        (* x[y_,z_/c_] := (1/c) x[y,z] /; NumberQ[c]; *)
         x[c_,z_] := c x[1,z] /; NumberQ[c]&& Not[TrueQ[c==1]];
         x[y_,c_] := c x[y,1] /; NumberQ[c]&& Not[TrueQ[c==1]];
         x[-y_,z_] := -x[y,z];
@@ -217,10 +236,10 @@ LinearQ[___] = False;
 SetLinear[a__]:=(Function[x,
         x[0] := 0;
         x[y_+z_] := x[y] + x[z];
-        x[c_ y_] := c x[y] /; NumberQ[c];
-        x[y_/c_] := (1/c) x[y] /; NumberQ[c];
+        x[c_?NumberQ y_] := c x[y];
+        (* x[y_/c_] := (1/c) x[y] /; NumberQ[c]; MAURICIO MAR 2016 *)
         x[c_] := c x[1] /; NumberQ[c] && Not[TrueQ[c==1]];
-        x[-y_] := -x[y];
+        (* x[-y_] := -x[y]; MAURICIO MAR 2016*)
         LinearQ[x] = True;
         ]
        /@{a});
@@ -232,10 +251,10 @@ ConjugateLinearQ[___] = False;
 SetConjugateLinear[a__]:=(Function[x,
         x[0] := 0;
         x[y_+z_] := x[y] + x[z];
-        x[c_ y_] := Conjugate[c] x[y] /; NumberQ[c];
-        x[y_/c_] := (1/Conjugate[c]) x[y] /; NumberQ[c];
-        x[c_] := Conjugate[c] x[1] /; NumberQ[c]&& Not[TrueQ[c==1]];
-        x[-y_] := -x[y];
+        x[c_?NumberQ y_] := Conjugate[c] x[y];
+        (* x[y_/c_] := (1/Conjugate[c]) x[y] /; NumberQ[c]; MAURICIO MAR 2016 *)
+        x[c_] := Conjugate[c] x[1] /; NumberQ[c] && Not[TrueQ[c==1]];
+        (* x[-y_] := -x[y]; MAURICIO MAR 2016 *)
         ConjugateLinearQ[x] = True;
         ]
        /@{a});
@@ -251,11 +270,25 @@ SetIdempotent[a__]:=(Function[x, x[x[z_]]:= z;
 
 (* ------------------------------------------------------------ *)
 
+(* BEGIN MAURICIO MAR 2016 *)
+
+(*
+
 SetCommutingFunctions[x_,y_] :=  
 Function[{b,c},
           Literal[b[c[z___]]] := c[b[z]] /; Not[LeftQ[b,c]];  
           Literal[c[b[z___]]] := b[c[z]] /; LeftQ[b,c];
 ][x,y];
+
+*)
+
+SetCommutingFunctions[x_,y_] :=  
+  Function[{opA,opB},
+            opA[opB[z___]] := opB[opA[z]] /; Not[LeftQ[opA,opB]];
+            opB[opA[z___]] := opA[opB[z]] /; LeftQ[opA,opB];
+  ][x,y];
+
+(* END MAURICIO MAR 2016 *)
 
 (* ------------------------------------------------------------ *)
 
@@ -286,10 +319,15 @@ Function[{b,c},
 
 (* ------------------------------------------------------------ *)
 
-NCAntihomo:=SetNonCommutativeMultiplyAntihomomorhism;
+NCAntihomo = SetNonCommutativeMultiplyAntihomomorhism;
+
+NCHomo = SetNonCommutativeMultiplyHomomorhism;
 
 (* ------------------------------------------------------------ *)
 
+(* BEGIN MAURICIO MAR 2016 *)
+
+(*
 SetNonCommutativeMultiplyAntihomomorhism[a__] := (Function[x,
     
           SetNonCommutative[anything1,anything2,anything3,anything4];
@@ -319,6 +357,33 @@ SetNonCommutativeMultiplyAntihomomorhism[a__] := (Function[x,
                                          x[anything3]] /; ExpandQ[x]==True;
         ]
        /@{a});
+*)
+
+SetNonCommutativeMultiplyAntihomomorhism[ops__] := 
+  ( Function[op,
+      op/:NonCommutativeMultiply[left___, op[a___], op[b___], right___] :=
+        NonCommutativeMultiply[left, 
+                               op[NonCommutativeMultiply[b, a]],
+                               right] /; ExpandQ[op]==False;
+
+      op[NonCommutativeMultiply[a_, b__]] := 
+        NonCommutativeMultiply[op[NonCommutativeMultiply[b]], 
+                               op[a]] /; ExpandQ[op]==True;
+   ] /@{ops} );
+
+SetNonCommutativeMultiplyHomomorhism[ops__] := 
+  ( Function[op,
+      op/:NonCommutativeMultiply[left___, op[a___], op[b___], right___] :=
+        NonCommutativeMultiply[left, 
+                               op[NonCommutativeMultiply[a, b]],
+                               right] /; ExpandQ[op]==False;
+
+      op[NonCommutativeMultiply[a_, b__]] := 
+        NonCommutativeMultiply[op[a], 
+                               op[NonCommutativeMultiply[b]]] /; ExpandQ[op]==True;
+   ] /@{ops} );
+
+(* END MAURICIO MAR 2016 *)
 
 End[]
 

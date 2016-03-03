@@ -31,10 +31,13 @@ Get["NCAlgebra.m"];
 Get["CommutativeQ.NCTest"];
 (* Nov 2015 Mauricio : CommutativeQ pattern issue END *)
 
+Get["Transposes.NCTest"];
+Get["Adjoints.NCTest"];
+Get["Co.NCTest"];
+
 Get["Diff.NCTest"];
 Get["Crit.NCTest"];
 Get["Substitute.NCTest"];
-Get["Transposes.NCTest"];
 Get["Collect.NCTest"];
 (* Get["MatMult.NCTest"]; *)
 (* NOT SUPPORTED

@@ -15,7 +15,6 @@ Block[{x,y,a,b,c,d,i},
    SNC[x,y];
    Clear[f];
 
-
    (* test 1 *)
    f = x**x;
    ans = NCConvexityRegion[ f, {x} ];

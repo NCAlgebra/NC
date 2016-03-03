@@ -14,7 +14,9 @@
 *)
 
 (* :History: 
+   :2/03/16:    Clean up (mauricio)
 *)
+
 BeginPackage[ "NonCommutativeMultiply`" ]
 
 (* MAURICIO: JUNE 2009: MUST BE DONE IN NCMULTIPLICATION FOR CE TO WORK *)
@@ -41,17 +43,21 @@ SetNonCommutative[tp];
 (* ---------------------------------------------------------------- *)
 SetLinear[tp];
 SetIdempotent[tp];
-tp[s_*az_]:=s*tp[az]/;CommutativeAllQ[s];
-tp[Id] := Id;
-tp[-1]:=-1;
-tp[z_]:= z/;NumberQ[z]
-tp[z_]:=z/;CommutativeAllQ[z]
+(* BEGIN MAURICIO MAR 2016 *)
+Unset[tp[0]];
+(* tp[Id] := Id; *)
+(* tp[-1]:=-1; *)
+(* tp[s_ * az_] := s*tp[az] /; CommutativeAllQ[s]; *)
+(* END MAURICIO MAR 2016 *)
+tp[z_?NumberQ] := z;
+tp[z_?CommutativeAllQ] := z;
+tp[s_Times] := tp /@ s;
 
 (* ---------------------------------------------------------------- *)
 (*      The product of transposes is the reverse product of the     *)
 (*      tranposes.                                                  *)
 (* ---------------------------------------------------------------- *)
-ExpandQ[tp] = True;
+ExpandQ[tp] ^= True;
 NCAntihomo[tp];
 
 (* ---------------------------------------------------------------- *)
@@ -66,7 +72,7 @@ LeftQ[inv,tp] := True;
 SetCommutingFunctions[inv,tp];
 
 SetInvRightTp = True;
-tp[invL[a_]] := invR[tp[a]] /; SetInvRightTp== True;
+tp[invL[a_]] := invR[tp[a]] /; SetInvRightTp == True;
 invR[tp[a_]] := tp[invL[a]] /; SetInvRightTp == False;
 
 End[]

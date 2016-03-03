@@ -72,6 +72,7 @@ Clear[aj];
 Clear[tp];
 Clear[rt];
 Clear[inv];
+Clear[co]; (* MAURICIO MAR 2016 *)
 
 Begin[ "`Private`" ]
 
