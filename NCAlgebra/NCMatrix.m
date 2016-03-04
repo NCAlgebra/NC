@@ -34,11 +34,15 @@ MatrixEntryDimensions[(a_:1)*b_NonCommutativeMultiply] :=
 NonCommutativeMultiply`CommutativeAllQ[x_Matrix] ^:= False;
 NonCommutativeMultiply`CommutativeQ[x_Matrix] ^:= False;
 
+ExpandExpression[expr_Matrix] := Map[Expand, expr];
+ExpandExpression[expr_List] := Map[Expand, expr];
+ExpandExpression[expr_] := Expand[expr];
+
 NonCommutativeMultiply`ExpandNonCommutativeMultiply[expr_] := 
-  Expand[ expr //. 
+  ExpandExpression[ expr //. 
 	{
 		HoldPattern[NonCommutativeMultiply[a___, b_Plus, c___]] :>
-		  (NonCommutativeMultiply[a, #, c]& /@ b),
+		  Map[NonCommutativeMultiply[a, #, c]&, b],
 		HoldPattern[NonCommutativeMultiply[a___, b_Matrix, c_Matrix, d___]] :>
 		  NonCommutativeMultiply[a, 
  			Matrix[NCMatMult`MatMult[MatrixToList[b],MatrixToList[c]]], d],
