@@ -56,7 +56,7 @@ tp[z_?CommutativeAllQ] := z;
 (*      The product of transposes is the reverse product of the     *)
 (*      tranposes.                                                  *)
 (* ---------------------------------------------------------------- *)
-ExpandQ[tp] ^= True;
+SetExpandQ[tp, True];
 NCAntihomo[tp];
 
 (* ---------------------------------------------------------------- *)

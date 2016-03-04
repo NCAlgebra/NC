@@ -1,40 +1,63 @@
-k$ = 1;
-test[NCAdjoints,k$++] = CommutativeQ[aj] == False;
+Block[{expr, i, k},
 
-test[NCAdjoints,k$++] = aj[0] === 0;
-test[NCAdjoints,k$++] = aj[1] === 1;
-test[NCAdjoints,k$++] = aj[Pi] === Pi;
-test[NCAdjoints,k$++] = aj[I] === -I;
-test[NCAdjoints,k$++] = aj[1 + I] === 1 - I;
+  k = 1;
+  test[NCAdjoints,k++] = CommutativeQ[aj] == False;
 
-saveExpandQ = ExpandQ[aj];
+  test[NCAdjoints,k++] = aj[0] === 0;
+  test[NCAdjoints,k++] = aj[1] === 1;
+  test[NCAdjoints,k++] = aj[Pi] === Pi;
+  test[NCAdjoints,k++] = aj[I] === -I;
+  test[NCAdjoints,k++] = aj[1 + I] === 1 - I;
 
-ExpandQ[aj] = True;
+  saveExpandQ = ExpandQ[aj];
 
-test[NCAdjoints,k$++] = aj[2 a] === 2 aj[a];
-test[NCAdjoints,k$++] = aj[3 a ** b] === 3 aj[b] ** aj[a];
-test[NCAdjoints,k$++] = aj[(3 + I) a ** b] === (3 - I) aj[b] ** aj[a];
+  SetExpandQ[aj, True];
 
-expr = aj[a**b];
-test[NCAdjoints,k$++] = expr === aj[b] ** aj[a];
+  test[NCAdjoints,k++] = aj[2 a] === 2 aj[a];
+  test[NCAdjoints,k++] = aj[3 a ** b] === Unevaluated[3 aj[b] ** aj[a]];
+  test[NCAdjoints,k++] = aj[(3 + I) a ** b] === Unevaluated[Complex[3,-1] aj[b] ** aj[a]];
 
-expr = aj[b]**aj[a];
-test[NCAdjoints,k$++] = expr === aj[b] ** aj[a];
+  expr = aj[a**b];
+  test[NCAdjoints,k++] = expr === Unevaluated[aj[b] ** aj[a]];
 
-ExpandQ[aj] = False;
+  expr = aj[b]**aj[a];
+  test[NCAdjoints,k++] = expr === Unevaluated[aj[b] ** aj[a]];
 
-expr = aj[a**b];
-test[NCAdjoints,k$++] = expr === aj[a ** b];
+  expr = c**aj[a**b];
+  test[NCAdjoints,k++] = expr === Unevaluated[c ** aj[b] ** aj[a]];
 
-expr = aj[b]**aj[a];
-test[NCAdjoints,k$++] = expr === aj[a ** b];
+  expr = aj[a**b]**d;
+  test[NCAdjoints,k++] = expr === Unevaluated[aj[b] ** aj[a] ** d];
 
-expr = aj[a+b];
-test[NCAdjoints,k$++] = expr === aj[a] + aj[b];
+  expr = c**aj[a**b]**d;
+  test[NCAdjoints,k++] = expr === Unevaluated[c ** aj[b] ** aj[a] ** d];
 
-ExpandQ[aj] ^= saveExpandQ;
+  SetExpandQ[aj, False];
 
-Print["Results from the file Adjoints.NCTest"]
-For[ i=1, i<k$, i++,
-Print["Test #",i," was ",test[NCAdjoints,i]]
+  expr = aj[a**b];
+  test[NCAdjoints,k++] = expr === Unevaluated[aj[a ** b]];
+
+  expr = aj[b]**aj[a];
+  test[NCAdjoints,k++] = expr === Unevaluated[aj[a ** b]];
+
+  expr = c**aj[b]**aj[a];
+  test[NCAdjoints,k++] = expr === Unevaluated[c ** aj[a ** b]];
+
+  expr = aj[b]**aj[a]**d;
+  test[NCAdjoints,k++] = expr === Unevaluated[aj[a ** b] ** d];
+
+  expr = c**aj[b]**aj[a]**d;
+  test[NCAdjoints,k++] = expr === Unevaluated[c ** aj[a ** b] ** d];
+
+  SetExpandQ[aj, saveExpandQ];
+
+  expr = aj[a+b];
+  test[NCAdjoints,k++] = expr === Unevaluated[aj[a] + aj[b]];
+
+
+  Print["Results from the file Adjoints.NCTest"]
+  For[ i=1, i<k, i++,
+  Print["Test #",i," was ",test[NCAdjoints,i]]
+  ];
+
 ];

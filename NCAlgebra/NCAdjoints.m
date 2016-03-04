@@ -83,7 +83,7 @@ aj[z_?CommutativeAllQ]:= Conjugate[z];
 (*      The product of adjoints is the reverse product of the       *)
 (*      adjoints.                                                   *)
 (* ---------------------------------------------------------------- *)
-ExpandQ[aj] ^= True;
+SetExpandQ[aj, True];
 NCAntihomo[aj];
 
 (* --------------------------------------------------------------------- *)

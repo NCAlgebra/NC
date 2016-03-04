@@ -42,7 +42,7 @@ co[s_Times] := co /@ s;
 aj[tp[x_]] := co[x];
 tp[aj[x_]] := co[x];
 
-ExpandQ[co] ^= True;
+SetExpandQ[co, True];
 NCHomo[co];
 
 End[]

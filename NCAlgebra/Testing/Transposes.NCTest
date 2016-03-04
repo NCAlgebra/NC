@@ -1,40 +1,63 @@
-k$ = 1;
-test[NCTransposes,k$++] = CommutativeQ[tp] == False;
+Block[{expr, i, k},
 
-test[NCTransposes,k$++] = tp[0] === 0;
-test[NCTransposes,k$++] = tp[1] === 1;
-test[NCTransposes,k$++] = tp[Pi] === Pi;
-test[NCTransposes,k$++] = tp[I] === I;
-test[NCTransposes,k$++] = tp[1 + I] === 1 + I;
+  k = 1;
+  test[NCTransposes,k++] = CommutativeQ[tp] == False;
 
-saveExpandQ = ExpandQ[tp];
+  test[NCTransposes,k++] = tp[0] === 0;
+  test[NCTransposes,k++] = tp[1] === 1;
+  test[NCTransposes,k++] = tp[Pi] === Pi;
+  test[NCTransposes,k++] = tp[I] === I;
+  test[NCTransposes,k++] = tp[1 + I] === 1 + I;
 
-ExpandQ[tp] = True;
+  saveExpandQ = ExpandQ[tp];
 
-test[NCTransposes,k$++] = tp[2 a] === 2 tp[a];
-test[NCTransposes,k$++] = tp[3 a ** b] === 3 tp[b] ** tp[a];
-test[NCTransposes,k$++] = tp[(3 + I) a ** b] === (3 + I) tp[b] ** tp[a];
+  SetExpandQ[tp, True];
 
-expr = tp[a**b];
-test[NCTransposes,k$++] = expr === tp[b] ** tp[a];
+  test[NCTransposes,k++] = tp[2 a] === 2 tp[a];
+  test[NCTransposes,k++] = tp[3 a ** b] === Unevaluated[3 tp[b] ** tp[a]];
+  test[NCTransposes,k++] = tp[(3 + I) a ** b] === Unevaluated[Complex[3,1] tp[b] ** tp[a]];
 
-expr = tp[b]**tp[a];
-test[NCTransposes,k$++] = expr === tp[b] ** tp[a];
+  expr = tp[a**b];
+  test[NCTransposes,k++] = expr === Unevaluated[tp[b] ** tp[a]];
 
-ExpandQ[tp] = False;
+  expr = tp[b]**tp[a];
+  test[NCTransposes,k++] = expr === Unevaluated[tp[b] ** tp[a]];
 
-expr = tp[a**b];
-test[NCTransposes,k$++] = expr === tp[a ** b];
+  expr = c**tp[a**b];
+  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[b] ** tp[a]];
 
-expr = tp[b]**tp[a];
-test[NCTransposes,k$++] = expr === tp[a ** b];
+  expr = tp[a**b]**d;
+  test[NCTransposes,k++] = expr === Unevaluated[tp[b] ** tp[a] ** d];
 
-expr = tp[a+b];
-test[NCTransposes,k$++] = expr === tp[a] + tp[b];
+  expr = c**tp[a**b]**d;
+  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[b] ** tp[a] ** d];
 
-ExpandQ[tp] ^= saveExpandQ;
+  SetExpandQ[tp, False];
 
-Print["Results from the file Transposes.NCTest"]
-For[ i=1, i<k$, i++,
-Print["Test #",i," was ",test[NCTransposes,i]]
+  expr = tp[a**b];
+  test[NCTransposes,k++] = expr === Unevaluated[tp[a ** b]];
+
+  expr = tp[b]**tp[a];
+  test[NCTransposes,k++] = expr === Unevaluated[tp[a ** b]];
+
+  expr = c**tp[b]**tp[a];
+  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[a ** b]];
+
+  expr = tp[b]**tp[a]**d;
+  test[NCTransposes,k++] = expr === Unevaluated[tp[a ** b] ** d];
+
+  expr = c**tp[b]**tp[a]**d;
+  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[a ** b] ** d];
+
+  SetExpandQ[tp, saveExpandQ];
+
+  expr = tp[a+b];
+  test[NCTransposes,k++] = expr === Unevaluated[tp[a] + tp[b]];
+
+
+  Print["Results from the file Transposes.NCTest"]
+  For[ i=1, i<k, i++,
+  Print["Test #",i," was ",test[NCTransposes,i]]
+  ];
+
 ];

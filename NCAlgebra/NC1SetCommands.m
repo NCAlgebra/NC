@@ -173,6 +173,11 @@ ExpandQ::usage =
      "See SetNonCommutativeMultiplyAntihomomrphism and \
       SetNonCommutativeMultiplyHomomrphism.";
 
+Clear[SetExpandQ];
+
+SetExpandQ::usage =
+     "SetExpandQ[op, value] sets property ExpandQ[op] == value.";
+      
 Clear[TurnOffCommutingOperators];
 
 TurnOffCommutingOperators::usage = 
@@ -184,6 +189,8 @@ TurnOnCommutingOperators::usage =
       "After using TurnOffCommutingOperators[b,c] (see TurnOnCommutingOperators) , you may turn this functionality back on by typing TurnOnCommutingOperators[b,c]; See also TurnOffCommutingOperators";
 
 Begin[ "`Private`" ]
+
+SetExpandQ[op_, value_] := (ExpandQ[op] ^= value);
 
 SetSesq:=SetSesquilinear;
 

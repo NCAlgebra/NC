@@ -1,40 +1,58 @@
-k$ = 1;
-test[NCCo,k$++] = CommutativeQ[co] == False;
+Block[{expr, i, k},
 
-test[NCCo,k$++] = co[0] === 0;
-test[NCCo,k$++] = co[1] === 1;
-test[NCCo,k$++] = co[Pi] === Pi;
-test[NCCo,k$++] = co[I] === -I;
-test[NCCo,k$++] = co[1 + I] === 1 - I;
+  k = 1;
+  test[NCCo,k++] = CommutativeQ[co] == False;
 
-saveExpandQ = ExpandQ[co];
+  test[NCCo,k++] = co[2 a] === 2 co[a];
+  test[NCCo,k++] = co[3 a ** b] === Unevaluated[3 co[a] ** co[b]];
+  test[NCCo,k++] = co[(3 + I) a ** b] === Unevaluated[Complex[3,-1] co[a] ** co[b]];
 
-ExpandQ[co] = True;
+  expr = co[a**b];
+  test[NCCo,k++] = expr === Unevaluated[co[a] ** co[b]];
 
-test[NCCo,k$++] = co[2 a] === 2 co[a];
-test[NCCo,k$++] = co[3 a ** b] === 3 co[a] ** co[b];
-test[NCCo,k$++] = co[(3 + I) a ** b] === (3 - I) co[a] ** co[b];
+  expr = co[a]**co[b];
+  test[NCCo,k++] = expr === Unevaluated[co[a] ** co[b]];
 
-expr = co[a**b];
-test[NCCo,k$++] = expr === co[a] ** co[b];
+  expr = c**co[a**b];
+  test[NCCo,k++] = expr === Unevaluated[c ** co[a] ** co[b]];
 
-expr = co[a]**co[b];
-test[NCCo,k$++] = expr === co[a] ** co[b];
+  expr = co[a**b]**d;
+  test[NCCo,k++] = expr === Unevaluated[co[a] ** co[b] ** d];
 
-ExpandQ[co] = False;
+  expr = c**co[a**b]**d;
+  test[NCCo,k++] = expr === Unevaluated[c ** co[a] ** co[b] ** d];
 
-expr = co[a**b];
-test[NCCo,k$++] = expr === co[a ** b];
+  expr = aj[tp[a]];
+  test[NCCo,k++] = expr === Unevaluated[co[a]];
 
-expr = co[a]**co[b];
-test[NCCo,k$++] = expr === co[a ** b];
+  expr = tp[aj[a]];
+  test[NCCo,k++] = expr === Unevaluated[co[a]];
 
-expr = co[a+b];
-test[NCCo,k$++] = expr === co[a] + co[b];
+  SetExpandQ[co, False];
 
-ExpandQ[co] ^= saveExpandQ;
+  expr = co[a**b];
+  test[NCCo,k++] = expr === Unevaluated[co[a ** b]];
 
-Print["Results from the file Co.NCTest"]
-For[ i=1, i<k$, i++,
-Print["Test #",i," was ",test[NCCo,i]]
+  expr = co[a]**co[b];
+  test[NCCo,k++] = expr === Unevaluated[co[a ** b]];
+
+  expr = c**co[a]**co[b];
+  test[NCCo,k++] = expr === Unevaluated[c ** co[a ** b]];
+
+  expr = co[a]**co[b]**d;
+  test[NCCo,k++] = expr === Unevaluated[co[a ** b] ** d];
+
+  expr = c**co[a]**co[b]**d;
+  test[NCCo,k++] = expr === Unevaluated[c ** co[a ** b] ** d];
+
+  SetExpandQ[co, saveExpandQ];
+
+  expr = co[a+b];
+  test[NCCo,k++] = expr === Unevaluated[co[a] + co[b]];
+
+  Print["Results from the file Co.NCTest"]
+  For[ i=1, i<k, i++,
+  Print["Test #",i," was ",test[NCCo,i]]
+  ];
+
 ];
