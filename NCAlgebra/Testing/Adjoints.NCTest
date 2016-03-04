@@ -54,7 +54,6 @@ Block[{expr, i, k},
   expr = aj[a+b];
   test[NCAdjoints,k++] = expr === Unevaluated[aj[a] + aj[b]];
 
-
   Print["Results from the file Adjoints.NCTest"]
   For[ i=1, i<k, i++,
   Print["Test #",i," was ",test[NCAdjoints,i]]
