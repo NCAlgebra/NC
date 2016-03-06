@@ -1,6 +1,10 @@
-Block[{expr, k},
+Module[
+  {expr, k, saveExpandQ, a, b, c, d},
 
   k = 1;
+
+  SetNonCommutative[a, b, c, d];
+
   NCTest[CommutativeQ[tp], False, "Transposes", k++];
 
   NCTest[tp[0], 0, "Transposes", k++];

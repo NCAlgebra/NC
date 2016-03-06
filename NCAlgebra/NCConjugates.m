@@ -30,20 +30,23 @@ co::usage =
 
 Begin[ "`Private`" ]
 
-SetNonCommutative[co];
+  SetNonCommutative[co];
 
-SetConjugateLinear[co];
-SetIdempotent[co];
-co[z_?CommutativeQ]:= Conjugate[z];
-co[s_Times] := co /@ s;
+  SetConjugateLinear[co];
+  SetIdempotent[co];
+  co[z_?CommutativeQ]:= Conjugate[z];
+  co[s_Times] := co /@ s;
 
-(* Relationship with aj and tp *)
+  (* Relationship with aj and tp *)
 
-aj[tp[x_]] := co[x];
-tp[aj[x_]] := co[x];
+  aj[tp[x_]] := co[x];
+  tp[aj[x_]] := co[x];
 
-SetExpandQ[co, True];
-NCHomo[co];
+  co[tp[x_]] := aj[x];
+  co[aj[x_]] := tp[x];
+
+  SetExpandQ[co, True];
+  NCHomo[co];
 
 End[]
 

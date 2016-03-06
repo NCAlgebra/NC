@@ -60,61 +60,75 @@ NCOutputFunction::usage =
   "NCOutputFunction[x] returns the expression which will be displayed to the screen. \
 See NCSetOutput.";
 
+Options[NCOutput] = {
+  Dot -> False,
+  rt -> False,
+  tp -> False,
+  inv -> False,
+  aj -> False 
+};
+             
 Begin[ "`Private`" ]
 
-Clear[NCOutputRules];
+  Clear[NCOutputRules];
+  NCOutputRules = {};
 
-NCOutputRules = {};
+  (* NCSetOutput[input__] := NCSetOutput[{input}]; *)
 
-(* SetOutput[ input__ ] := NCSetOutput[{input}]; *)
+  NCSetOutput[opts___Rule:{}] := 
+    Module[
+      {options},
 
-NCSetOutput[input__] := NCSetOutput[{input}];
+      (* Process options *)
+      options = Flatten[{opts}];
 
-NCSetOutput[input_List] := 
-Module[{test,check=input},
-  test = All /. check;
-  If[test
-     , check = { Dot -> True, rt -> True, tp -> True, inv -> True, aj -> True };
-     , check = { Dot -> False, rt -> False, tp -> False, inv -> False, aj -> False };
+      (* All *)
+      If[ Length[options] == 1 && options[[1,1]] == All,
+        options = Map[Rule[#, options[[1,2]]]&, Options[NCOutput][[All, 1]]];
+      ];
+
+      (*
+        Print[options];
+        Print[Options[NCOutput]];
+      *)
+
+      SetOptions[NCOutput, Dot -> (Dot /. options /. Options[NCOutput])];
+      If[Dot /. Options[NCOutput]
+        , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply[b__]]:>HoldForm[Dot[b]] }];
+        , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply[b__]]:>HoldForm[Dot[b]] }];
+      ];
+
+      SetOptions[NCOutput, rt -> (rt /. options /. Options[NCOutput])];
+      If[rt /. Options[NCOutput]
+        , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`rt[b_]]:>HoldForm[Power[b,"1/2"]] }];
+        , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`rt[b_]]:>HoldForm[Power[b,"1/2"]] }];
+      ];
+
+      SetOptions[NCOutput, tp -> (tp /. options /. Options[NCOutput])];
+      If[tp /. Options[NCOutput]
+        , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`tp[b_]]:>HoldForm[Power[b,"T"]] }];
+        , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`tp[b_]]:>HoldForm[Power[b,"T"]] }];
+      ];
+
+      SetOptions[NCOutput, inv -> (inv /. options /. Options[NCOutput])];
+      If[inv /. Options[NCOutput]
+        , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`inv[b_ ]]:> HoldForm[Power[b,"-1"]] }];
+        , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`inv[b_ ]]:> HoldForm[Power[b,"-1"]] }];
+      ];
+
+      SetOptions[NCOutput, aj -> (aj /. options /. Options[NCOutput])];
+      If[aj /. Options[NCOutput]
+        , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`aj[b_]]:>HoldForm[Power[b,"*"]] }];
+        , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`aj[b_]]:>HoldForm[Power[b,"*"]] }];
+      ];
+
+      (* Set System`$PrePrint *)
+      System`$PrePrint := NCOutputFunction;
   ];
 
-  test = Dot /. check;
-  If[test
-    , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply[b__]]:>HoldForm[Dot[b]] }];
-    , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply[b__]]:>HoldForm[Dot[b]] }];
-  ];
+  NCOutputFunction[x_] := x //. NCOutputRules;
 
-  test = rt /. check;
-  If[test
-    , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`rt[b_]]:>HoldForm[Power[b,"1/2"]] }];
-    , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`rt[b_]]:>HoldForm[Power[b,"1/2"]] }];
-  ];
-
-  test = tp /. check;
-  If[test
-    , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`tp[b_]]:>HoldForm[Power[b,"T"]] }];
-    , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`tp[b_]]:>HoldForm[Power[b,"T"]] }];
-  ];
-
-  test = inv /. check;
-  If[test
-    , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`inv[b_ ]]:> HoldForm[Power[b,"-1"]] }];
-    , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`inv[b_ ]]:> HoldForm[Power[b,"-1"]] }];
-  ];
-
- test = aj /. check;
- If[test
-   , NCOutputRules = Union[NCOutputRules, { Literal[NonCommutativeMultiply`aj[b_]]:>HoldForm[Power[b,"*"]] }];
-   , NCOutputRules = Complement[NCOutputRules, { Literal[NonCommutativeMultiply`aj[b_]]:>HoldForm[Power[b,"*"]] }];
- ];
-
- (* Set System`$PrePrint *)
- System`$PrePrint := NCOutputFunction;
-];
-
-NCOutputFunction[x_] := x //. NCOutputRules;
-
-NCGetOutput[] := NCOutputRules;
+  NCGetOutput[] := NCOutputRules;
 
 End[];
 EndPackage[]

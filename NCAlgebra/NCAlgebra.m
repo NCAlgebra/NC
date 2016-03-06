@@ -119,8 +119,8 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
    Print["NCTransposes.m loaded"];
    Get["NCAdjoints.m"];
    Print["NCAdjoints.m loaded"];
-   Get["NCCo.m"];
-   Print["NCCo.m loaded"];
+   Get["NCConjugates.m"];
+   Print["NCConjugates.m loaded"];
 
    Get["NCRoots.m"];
    Print["NCRoots.m loaded"];

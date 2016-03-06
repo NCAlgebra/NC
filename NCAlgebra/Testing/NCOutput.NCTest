@@ -1,0 +1,53 @@
+Module[
+  {expr, options, k, x, y},
+
+  k = 1;
+
+  SetNonCommutative[x, y];
+
+  options = Options[NCOutput];
+
+  NCTest[options[[All, 1]], 
+         {Dot, rt, tp, inv, aj}, "NCOutput", k++];
+
+  (* Simple forms *)
+  expr = x ** y;
+  NCSetOutput[Dot -> True];
+  NCTest[NCOutputFunction[expr], HoldForm[x . y], "NCOutput", k++];
+  NCSetOutput[Dot -> False];
+  NCTest[NCOutputFunction[expr], x ** y, "NCOutput", k++];
+
+  expr = rt[x];
+  NCSetOutput[rt -> True];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"1/2"], "NCOutput", k++];
+  NCSetOutput[rt -> False];
+  expr = rt[x];
+  NCTest[NCOutputFunction[expr], rt[x], "NCOutput", k++];
+
+  expr = tp[x];
+  NCSetOutput[tp -> True];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"T"], "NCOutput", k++];
+  NCSetOutput[tp -> False];
+  NCTest[NCOutputFunction[expr], tp[x], "NCOutput", k++];
+
+  expr = aj[x];
+  NCSetOutput[aj -> True];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"*"], "NCOutput", k++];
+  NCSetOutput[aj -> False];
+  NCTest[NCOutputFunction[expr], aj[x], "NCOutput", k++];
+
+  expr = inv[x];
+  NCSetOutput[inv -> True];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"-1"], "NCOutput", k++];
+  NCSetOutput[inv -> False];
+  NCTest[NCOutputFunction[expr], inv[x], "NCOutput", k++];
+
+  (* Complex form *) 
+  NCSetOutput[All -> True];
+  expr = y**inv[x+tp[y]];
+  answer = HoldForm[Dot[y, HoldForm[Power[Plus[x, HoldForm[Power[y, "T"]]],"-1"]]]];
+  NCTest[NCOutputFunction[expr], answer, "NCOutput", k++];
+
+  SetOptions[NCOutput, ##]& @@ options;
+
+];
