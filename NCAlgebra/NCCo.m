@@ -34,7 +34,7 @@ SetNonCommutative[co];
 
 SetConjugateLinear[co];
 SetIdempotent[co];
-co[z_?CommutativeAllQ]:= Conjugate[z];
+co[z_?CommutativeQ]:= Conjugate[z];
 co[s_Times] := co /@ s;
 
 (* Relationship with aj and tp *)

@@ -46,11 +46,11 @@ SetIdempotent[tp];
 (* BEGIN MAURICIO MAR 2016 *)
 (* tp[Id] := Id; *)
 (* tp[-1]:=-1; *)
-(* tp[s_ * az_] := s*tp[az] /; CommutativeAllQ[s]; *)
+(* tp[s_ * az_] := s*tp[az] /; CommutativeQ[s]; *)
 (* tp[z_?NumberQ] := z; *)
 (* END MAURICIO MAR 2016 *)
 tp[s_Times] := tp /@ s;
-tp[z_?CommutativeAllQ] := z;
+tp[z_?CommutativeQ] := z;
 
 (* ---------------------------------------------------------------- *)
 (*      The product of transposes is the reverse product of the     *)

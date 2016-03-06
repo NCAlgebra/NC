@@ -1,0 +1,48 @@
+(* :Title: 	Mono.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	David Hurst (dhurst). *)
+
+(* :Summary:	TEST FILE.  *)
+
+(* :History: 
+   :8/22/91	Created. (dhurst)
+   :8/16/92     New header. (dhurst)
+   :9/6/99      Block->Module  (dell)
+*)
+
+Module[ 
+  {k,x,y,z},
+
+  k = 1;
+
+  SetNonCommutative[x,y];
+  SetCommutative[z];
+
+  (* Test Monomial *)
+
+  NCTest[NCMonomial[x^2], x**x, "Monomial", k++];
+  NCTest[NCMonomial[x^-3], inv[x]**inv[x]**inv[x], "Monomial", k++];
+  NCTest[NCMonomial[x^2+x-x^0+x^-1 ], x**x+x+inv[x]-1, "Monomial", k++];
+  NCTest[NCMonomial[(x^0)**(x^1)**(x^2)**((inv[x])^3)], 1, "Monomial", k++];
+
+  NCTest[NCMonomial[y**x^2], y**x**x, "Monomial", k++];
+  NCTest[NCMonomial[x^2**y], x**x**y, "Monomial", k++];
+  NCTest[NCMonomial[y**x^2**y], y**x**x**y, "Monomial", k++];
+
+  NCTest[NCMonomial[y**x^2**z^3**y], z^3*y**x**x**y, "Monomial", k++];
+  NCTest[NCMonomial[y**x^2**z**z**z**y], z^3*y**x**x**y, "Monomial", k++];
+
+  (* Test UnMonomial *)
+
+  NCTest[NCUnMonomial[x**x], x^2, "Monomial", k++];
+  NCTest[NCUnMonomial[inv[x]**inv[x]**inv[x]], x^-3, "Monomial", k++];
+  NCTest[NCUnMonomial[x**x+x+inv[x]-1], x^2+x-x^0+x^-1, "Monomial", k++];
+
+  NCTest[NCUnMonomial[y**x**x], y**x^2, "Monomial", k++];
+  NCTest[NCUnMonomial[x**x**y], x^2**y, "Monomial", k++];
+  NCTest[NCUnMonomial[y**x**x**y], y**x^2**y, "Monomial", k++];
+
+  NCTest[NCUnMonomial[z^3*y**x**x**y], y**x^2**z^3**y, "Monomial", k++];
+  NCTest[NCUnMonomial[z^3*y**x**x**y], y**x^2**z**z**z**y, "Monomial", k++];
+
+];

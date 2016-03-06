@@ -83,7 +83,7 @@ NCSimplify1RationalSinglePass[expr2_] :=
 
 (* Good[x] is fine as is, Symbolic Commutative elem. should also fail,
 if there is any chance of them becoming zero, *)
-        Good[x__] := CommutativeAllQ[x] && Not[x==1] && Not[x==0];
+        Good[x__] := CommutativeQ[x] && Not[x==1] && Not[x==0];
 
         normrule := 
            { 

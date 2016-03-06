@@ -18,9 +18,17 @@
    :8/8/93:  Made this new package to decouple it from NCTools.
              Also added NCUnMonomial. This should replace
              NCMono.m eventually. (mstankus)
+   :3/3/16:  Remove module
+   :3/3/16:  Fixed rule to leave noncommutative powers intact
 *)
 
-BeginPackage[ "NCMonomial`","NonCommutativeMultiply`"];
+(*
+BeginPackage["NCMonomial`", "NonCommutativeMultiply`"];
+*)
+
+BeginPackage["NonCommutativeMultiply`"];
+
+(*
 
 Clear[NCMonomial];
 
@@ -36,32 +44,38 @@ NCUnMonomial::usage =
       or inv[x] with integer powers of the \
       NonCommutative variable x.";
 
+*)
 
 Begin[ "`Private`" ];
 
-NCMonomial[expr_] :=
-Module[{a,b,exp1,out},
-     exp1 = expr//.{b_^a_Integer?Negative :>
-                    Apply[ NonCommutativeMultiply, 
-                           Table[ NonCommutativeMultiply`inv[b],{-a} ]]};
-     out = exp1//.{b_^a_Integer?Positive :>
-                   Apply[ NonCommutativeMultiply, Table[ b, {a} ]]};
-     Return[out]; 
-];
+  (* Expand monomial rules *)
+  Unprotect[Power];
+  Power[b_, c_Integer?Positive] := 
+    Apply[NonCommutativeMultiply, Table[b, {c}]] /; !CommutativeQ[b];
+  Power[b_, c_Integer?Negative] := 
+    inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]] /; !CommutativeQ[b];
+  Protect[Power];
 
-NCUnMonomial[expr_] :=
-Module[{j,k,m,n,x},
-     Return[expr//.{
-          Literal[NonCommutativeMultiply[front___,x_,x_,back___]] :>
-                   front**(x^2)**back,
-          Literal[NonCommutativeMultiply[front___,x_^j_,x_,back___]] :>
-                   front**(x^(j+1))**back,
-          Literal[NonCommutativeMultiply[front___,x_,x_^k_,back___]] :>
-                   front**(x^(k+1))**back,
-          Literal[NonCommutativeMultiply[front___,x_^m_,x_^n_,back___]] :>
-                   front**(x^(m+n))**back
-                    }];
-];
+(*
+  NCMonomial[expr_] := (
+    expr //. { (Power[b_, a_Integer?Negative] /; !CommutativeQ[b]) :>
+                      Apply[NonCommutativeMultiply, 
+                             Table[NonCommutativeMultiply`inv[b], {-a}]],
+               (Power[b_, a_Integer?Positive] /; !CommutativeQ[b]) :>
+                      Apply[NonCommutativeMultiply, Table[ b, {a}]] } )
+
+  NCUnMonomial[expr_] := (
+    expr//.{
+            Literal[NonCommutativeMultiply[front___,x_,x_,back___]] :>
+                     front**(x^2)**back,
+            Literal[NonCommutativeMultiply[front___,x_^j_,x_,back___]] :>
+                     front**(x^(j+1))**back,
+            Literal[NonCommutativeMultiply[front___,x_,x_^k_,back___]] :>
+                     front**(x^(k+1))**back,
+            Literal[NonCommutativeMultiply[front___,x_^m_,x_^n_,back___]] :>
+                     front**(x^(m+n))**back
+                      } )
+*)
 
 End[];
 EndPackage[]

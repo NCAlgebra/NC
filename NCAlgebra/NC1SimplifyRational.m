@@ -86,7 +86,7 @@ NCSimplify1RationalSinglePass[expr2_] :=
 
 (* Good[x] is fine as is, Symbolic Commutative elem. should also fail,
 if there is any chance of them becoming zero, *)
-        Good[z__] := CommutativeAllQ[z] && Not[z===1] && Not[z===0];
+        Good[z__] := CommutativeQ[z] && Not[z===1] && Not[z===0];
         
         normrule := inv[A_?Good + x_] :> inv[1 + x/A]/A;
 

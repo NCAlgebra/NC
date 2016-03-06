@@ -77,7 +77,7 @@ SetIdempotent[aj];
 (* aj[z_]:= Conjugate[z] /; NumberQ[z] *)
 (* END MAURICIO MAR 2016 *)
 aj[s_Times] := aj /@ s;
-aj[z_?CommutativeAllQ]:= Conjugate[z];
+aj[z_?CommutativeQ]:= Conjugate[z];
 
 (* ---------------------------------------------------------------- *)
 (*      The product of adjoints is the reverse product of the       *)

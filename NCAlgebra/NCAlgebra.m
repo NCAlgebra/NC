@@ -225,8 +225,10 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
 
   (*            DECLARE  PACKAGES HERE                    *)  
 
-  Get["NCMaster.m"]; (* Dells file which declares various packges *)
-  Print["NCMaster.m loaded" ];
+  (*
+    Get["NCMaster.m"]; (* Dells file which declares various packges *)
+    Print["NCMaster.m loaded" ];
+  *)
 
   DeclarePackage["NCSave`",{"NCSave"} ];
 

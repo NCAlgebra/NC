@@ -22,7 +22,7 @@
                 NCMono` to NCTools` context changes. (mstankus)
 *)
 
-BeginPackage[ "NCTools`", "NCMonomial`",
+BeginPackage[ "NCTools`", (* "NCMonomial`", *)
      "NonCommutativeMultiply`", "NCSubstitute`" ]
 
 Options[ NCHighestDegreePosition ] := 
@@ -57,6 +57,10 @@ NCHighestDegree::usage =
      NC-expression.";
 
 Begin["`Private`"]
+
+(* BEGIN MAURICIO MAR 2016 *)
+NCMonomial`NCMonomial = Identity;
+(* END MAURICIO MAR 2016 *)
 
 (* ------------------------------------------------------------------ *)
 (* Convert                                                            *)

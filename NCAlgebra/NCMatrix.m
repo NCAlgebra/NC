@@ -31,7 +31,6 @@ Begin["`Private`"];
 MatrixEntryDimensions[(a_:1)*b_NonCommutativeMultiply] :=
     Apply[MatrixProductDimensions,Map[MatrixEntryDimensions,Apply[List,b]]];
 
-NonCommutativeMultiply`CommutativeAllQ[x_Matrix] ^:= False;
 NonCommutativeMultiply`CommutativeQ[x_Matrix] ^:= False;
 
 ExpandExpression[expr_Matrix] := Map[Expand, expr];

@@ -22,17 +22,17 @@ NCTest[result_, answer_, tag_, number_] := Block[
 
 NCRunTest[file_, tag_] := Block[
   {keys, results, fail}, 
-  WriteString["stdout", "> '" <> file <> "'... "];
+  WriteString["stdout", "> '" <> file <> "'...\t\t"];
   Get[file <> ".NCTest"];
   keys = Select[Keys[NCTestResults], (#[[1]] == tag)&];
   results = Map[NCTestResults[#]&, keys];
   fail = Length[Select[# =!= True &][results]];
-  Print[
+  WriteString["stdout",
     If[fail == 0,
       ToString[Length[keys]] <> " tests successfully completed.",
       ToString[Length[keys]] <> " tests completed. " <> 
         ToString[fail] <> " failed."
-    ]
+    ] <> "\n"
   ];
 ];
    
@@ -45,6 +45,7 @@ Print["> BEGIN NCTEST\n" ];
 
 tests = {
   {"CommutativeQ",     "CommutativeQ"},
+  {"Multiplication", "Multiplication"},
   {"Transposes",       "Transposes"},
   {"Adjoints",         "Adjoints"},
   {"Co",               "Co"},
@@ -52,7 +53,7 @@ tests = {
   {"Crit",             "Crit"},
   {"Collect",          "Collect"},
   {"Substitute",       "Substitute"},
-  {"Mono",             "Mono"},
+(*  {"Monomial",         "Monomial"}, *)
   {"SimplifyRational", "SimplifyRational"},
   {"NCMatMult",        "MatMult"},
   {"NCInverse",        "NCInverse"},

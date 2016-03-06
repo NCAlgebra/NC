@@ -57,10 +57,10 @@ Rank1[h_,k_ + m_] := Rank1[h,k] + Rank1[h,m];
 Literal[Rank1[h_,NonCommutativeMultiply[a__,b_]]] := 
     NonCommutativeMultiply[a]**Rank1[h,b];
 Rank1[h_,0] := 0;
-Rank1[h_,c_?CommutativeAllQ k_] := c Rank1[h,k];
-Rank1[h_,c_] := c Rank1[h,1] /; And[c=!=1,CommutativeAllQ[c]]
+Rank1[h_,c_?CommutativeQ k_] := c Rank1[h,k];
+Rank1[h_,c_] := c Rank1[h,1] /; And[c=!=1,CommutativeQ[c]]
 
-Aj[x_?CommutativeAllQ] := Conjugate[x];
+Aj[x_?CommutativeQ] := Conjugate[x];
 
 (* Nov 2015 Mauricio : CommutativeQ pattern issue BEGIN *)
 (* NonCommutativeMultiply`CommutativeQ[x_Conjugate] := True; *)
@@ -69,7 +69,7 @@ NonCommutativeMultiply`CommutativeQ[_Conjugate] = True;
 
 Aj[Aj[x_]] := x;
 
-Aj[c_?CommutativeAllQ x_.] := Conjugate[c] Aj[x];
+Aj[c_?CommutativeQ x_.] := Conjugate[c] Aj[x];
 Aj[1] := 1;
 
 Aj[x_+y_] := Aj[x] + Aj[y];

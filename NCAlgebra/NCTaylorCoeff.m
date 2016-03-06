@@ -82,6 +82,10 @@ NCTaylorType::usage =
 
 Begin["`Private`"];
 
+(* BEGIN MAURICIO MAR 2016 *)
+NCMonomial`NCMonomial = Identity;
+(* END MAURICIO MAR 2016 *)
+
 debugTaylor = False;
 checkTaylor = True;
 
@@ -154,7 +158,7 @@ Module[{theTypes,theVariables,sum,aType,indices,data,k},
      Do[ aType = theTypes[[k]];
          indices = Table[(theVariables[[k]])^(aType[[k]])
                          ,{k,1,Length[aType]}];
-         indices = NCMonomial[indices];
+         indices = NCMonomial`NCMonomial[indices];
          data = Apply[anArray,indices];
          sum = sum + data;
      ,{k,1,Length[theTypes]}];
@@ -239,7 +243,7 @@ Module[{temp,result},
 ncTaylorTermArray[anArray_,aList_List,indices_List] :=
 Module[{temp,result},
     temp = Table[aList[[j]]^indices[[j]],{j,1,Length[aList]}];
-    temp = NCMonomial[temp];
+    temp = NCMonomial`NCMonomial[temp];
     result = Apply[anArray,temp];
     Return[result];
 ];
