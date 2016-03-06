@@ -1,63 +1,57 @@
-Block[{expr, i, k},
+Block[{expr, k},
 
   k = 1;
-  test[NCTransposes,k++] = CommutativeQ[tp] == False;
+  NCTest[CommutativeQ[tp], False, "Transposes", k++];
 
-  test[NCTransposes,k++] = tp[0] === 0;
-  test[NCTransposes,k++] = tp[1] === 1;
-  test[NCTransposes,k++] = tp[Pi] === Pi;
-  test[NCTransposes,k++] = tp[I] === I;
-  test[NCTransposes,k++] = tp[1 + I] === 1 + I;
+  NCTest[tp[0], 0, "Transposes", k++];
+  NCTest[tp[1], 1, "Transposes", k++];
+  NCTest[tp[Pi], Pi, "Transposes", k++];
+  NCTest[tp[I], I, "Transposes", k++];
+  NCTest[tp[1 + I], 1 + I, "Transposes", k++];
 
   saveExpandQ = ExpandQ[tp];
 
   SetExpandQ[tp, True];
 
-  test[NCTransposes,k++] = tp[2 a] === 2 tp[a];
-  test[NCTransposes,k++] = tp[3 a ** b] === Unevaluated[3 tp[b] ** tp[a]];
-  test[NCTransposes,k++] = tp[(3 + I) a ** b] === Unevaluated[Complex[3,1] tp[b] ** tp[a]];
+  NCTest[tp[2 a], 2 tp[a], "Transposes", k++];
+  NCTest[tp[3 a ** b], Unevaluated[3 tp[b] ** tp[a]], "Transposes", k++];
+  NCTest[tp[(3 + I) a ** b], Unevaluated[Complex[3,1] tp[b] ** tp[a]], "Transposes", k++];
 
   expr = tp[a**b];
-  test[NCTransposes,k++] = expr === Unevaluated[tp[b] ** tp[a]];
+  NCTest[expr, Unevaluated[tp[b] ** tp[a]], "Transposes", k++];
 
   expr = tp[b]**tp[a];
-  test[NCTransposes,k++] = expr === Unevaluated[tp[b] ** tp[a]];
+  NCTest[expr, Unevaluated[tp[b] ** tp[a]], "Transposes", k++];
 
   expr = c**tp[a**b];
-  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[b] ** tp[a]];
+  NCTest[expr, Unevaluated[c ** tp[b] ** tp[a]], "Transposes", k++];
 
   expr = tp[a**b]**d;
-  test[NCTransposes,k++] = expr === Unevaluated[tp[b] ** tp[a] ** d];
+  NCTest[expr, Unevaluated[tp[b] ** tp[a] ** d], "Transposes", k++];
 
   expr = c**tp[a**b]**d;
-  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[b] ** tp[a] ** d];
+  NCTest[expr, Unevaluated[c ** tp[b] ** tp[a] ** d], "Transposes", k++];
 
   SetExpandQ[tp, False];
 
   expr = tp[a**b];
-  test[NCTransposes,k++] = expr === Unevaluated[tp[a ** b]];
+  NCTest[expr, Unevaluated[tp[a ** b]], "Transposes", k++];
 
   expr = tp[b]**tp[a];
-  test[NCTransposes,k++] = expr === Unevaluated[tp[a ** b]];
+  NCTest[expr, Unevaluated[tp[a ** b]], "Transposes", k++];
 
   expr = c**tp[b]**tp[a];
-  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[a ** b]];
+  NCTest[expr, Unevaluated[c ** tp[a ** b]], "Transposes", k++];
 
   expr = tp[b]**tp[a]**d;
-  test[NCTransposes,k++] = expr === Unevaluated[tp[a ** b] ** d];
+  NCTest[expr, Unevaluated[tp[a ** b] ** d], "Transposes", k++];
 
   expr = c**tp[b]**tp[a]**d;
-  test[NCTransposes,k++] = expr === Unevaluated[c ** tp[a ** b] ** d];
+  NCTest[expr, Unevaluated[c ** tp[a ** b] ** d], "Transposes", k++];
 
   SetExpandQ[tp, saveExpandQ];
 
   expr = tp[a+b];
-  test[NCTransposes,k++] = expr === Unevaluated[tp[a] + tp[b]];
-
-
-  Print["Results from the file Transposes.NCTest"]
-  For[ i=1, i<k, i++,
-  Print["Test #",i," was ",test[NCTransposes,i]]
-  ];
+  NCTest[expr, Unevaluated[tp[a] + tp[b]], "Transposes", k++];
 
 ];

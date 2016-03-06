@@ -961,7 +961,7 @@ selection!"];
 	  ];(* end if *)
 	Return[res];
 	Print["I also made it this far\n"];
-]/; MatrixQ[mat]
+] /; MatrixQ[mat]
 
 
 

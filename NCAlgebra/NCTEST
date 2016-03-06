@@ -1,78 +1,85 @@
-(* This file contains Get statements (i.e., <<) for various test files.*)
-(*                                                                    *)
-(*    All test file names  should end with the suffix .NCTest  and    *)
-(*   the first name should agree with the name of the file containing *)
-(*    the function being tested. Example,                             *)
-            (*    Testing    DirD[ , ]               *)
-            (*    which in the file NCDiff.m         *)
-            (*    is in the file Diff.NCTest         *)
-
-(*         When the test file is executed                             *)
-(*        the user should see only if the tests failed or not,        *)
-(*        (i.e. he should not be overwhelmed with formulas which      *)
-(*        he himself has to check)                                    *)
-(*    DO NOT LOAD THIS FILE IN THE SAME SESSION AS SYSTEMS            *)
-(* ------------------------------------------------------------------ *)
-
-(* MAURICIO -- JULY 2009 *)
-(* Created TESTING directory to isolate testing file *)
-(* MAURICIO -- END *)
-
-Print[ "Running NCTEST." ];
-Print[];
-Print[];
-Print["             Automated Testing System       "];
-Print[];
-Print["    DO NOT LOAD THIS FILE IN THE SAME SESSION AS SYSTEMS    "] ;
-Print[];
-Get["NCAlgebra.m"];
-
-(* Nov 2015 Mauricio : CommutativeQ pattern issue BEGIN *)
-Get["CommutativeQ.NCTest"];
-(* Nov 2015 Mauricio : CommutativeQ pattern issue END *)
-
-Get["Transposes.NCTest"];
-Get["Adjoints.NCTest"];
-Get["Co.NCTest"];
-
-Get["Diff.NCTest"];
-Get["Crit.NCTest"];
-Get["Substitute.NCTest"];
-Get["Collect.NCTest"];
-(* Get["MatMult.NCTest"]; *)
-(* NOT SUPPORTED
-Get["BlockPartition.NCTest"];
+(*
+  AppendTo[$Echo, "stdout"]
+  SetOptions[$Output,PageWidth->120];
 *)
 
-Get["SimplifyRational.NCTest"];
-Get["Mono.NCTest"];
-Get["Convert.NCTest"];
-Get["NCSolve.NCTest"];
-Get["NCLDUTest.NCTest"];
+Clear[NCTest, NCTestResults, NCRunTest];
+NCTestResults = Association[];
+(* $AssertFunction = Throw[{###}]&; *)
+NCTest[result_, answer_, tag_, number_] := Block[
+  {pass},
+  pass = (result === answer);
+  NCTestResults = Append[NCTestResults, 
+                         {tag, number} -> pass];
+  If[!pass, 
+    Print["\n* Test '" <> ToString[tag] <> " #" <> ToString[number] <> 
+          "' failed. Result:"];
+    Print["    ", ToString[result] ];
+    Print["  differs from correct answer:" ];
+    Print["    ", ToString[answer] ];
+  ];
+];
 
-Get["NCInverseTest.NCTest"];
-Get["NCConvexityTest.NCTest"];
-Get["NCMatrixOfQuadraticTest.NCTest"];
-Get["NCRealizationFunctions.NCTest"];
+NCRunTest[file_, tag_] := Block[
+  {keys, results, fail}, 
+  WriteString["stdout", "> '" <> file <> "'... "];
+  Get[file <> ".NCTest"];
+  keys = Select[Keys[NCTestResults], (#[[1]] == tag)&];
+  results = Map[NCTestResults[#]&, keys];
+  fail = Length[Select[# =!= True &][results]];
+  Print[
+    If[fail == 0,
+      ToString[Length[keys]] <> " tests successfully completed.",
+      ToString[Length[keys]] <> " tests completed. " <> 
+        ToString[fail] <> " failed."
+    ]
+  ];
+];
+   
+<< NC`
+<< NCAlgebra`
 
-(* LEAVE This at the bottom.  It messes up lots of things if you put
-   it above other tests. *)
+On[Assert];
+
+Print["> BEGIN NCTEST\n" ];
+
+tests = {
+  {"CommutativeQ",     "CommutativeQ"},
+  {"Transposes",       "Transposes"},
+  {"Adjoints",         "Adjoints"},
+  {"Co",               "Co"},
+  {"Diff",             "Diff"},
+  {"Crit",             "Crit"},
+  {"Collect",          "Collect"},
+  {"Substitute",       "Substitute"},
+  {"Mono",             "Mono"},
+  {"SimplifyRational", "SimplifyRational"},
+  {"NCMatMult",        "MatMult"},
+  {"NCInverse",        "NCInverse"},
+  {"NCLDUTest",        "NCLDU"},
+  {"NCConvexity",      "NCConvexity"},
+  {"NCRealization",    "Realization"}
+(*
+  {"NCSolve",               "NCSolve"},
+  {"Convert",          "Convert"}
+*)
+};
+MapThread[NCRunTest, Transpose[tests]];
+
+(*
+
+( * LEAVE This at the bottom.  It messes up lots of things if you put
+   it above other tests. * )
 Get["NCGuts.NCTest"];
-(*******************************)
 
-
-Print[ "EVEN IF ALL THE TESTS SUCCEEDED YOU SHOULD QUIT THE KERNEL IN YOUR MATHEMATICA SESSION" ];
-Print[ "AND START OVER." ];
-Print[];
-Print[];
-Print["             To obtain a summary, type ??test "];
-Print[];
-Print[];
-
-(* Removed this on 9/13/2004 per Helton's request 
-Put[DownValues[test], "test"];
-
-Print["Note: If you got some message above that says you cannot open \"test\","];
-Print["then you can ignore it. The program tries to record the result"];
-Print["of the tests for future reference, but this is really not needed."];
 *)
+
+Print["\n> END NCTEST\n" ];
+
+Print["> EVEN IF ALL THE TESTS SUCCEEDED YOU SHOULD QUIT THE KERNEL"]
+Print["  IN YOUR MATHEMATICA SESSION AND START OVER." ];
+
+$AssertFunction =. ;
+Off[Assert];
+
+(* $Echo = DeleteCases[$Echo, "stdout"]; *)

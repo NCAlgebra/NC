@@ -1,0 +1,194 @@
+(* :Title: 	NCCovexityRegionTest.NCTest // Mathematica 1.2 and 2.0 *)
+
+(* :Author: 	tony s. *)
+
+(* :Summary:    TEST FILE.  *)
+
+(* :History: 
+   :8/13/92      
+*)
+
+<<NCConvexity.m;
+
+Module[
+
+   {j,x,y,h,k,f,a,b,c,d,i, 
+    ans, hes, lt, mq, rt, junk,
+    p, expr1, l, m, r,
+    A,B,F,G,J,L,P,Q,R},
+
+   j = 1;
+    
+   SetNonCommutative[x,y,h,k];
+   SetCommutative[A,B,F,G,J,L,P,Q,R];
+
+   (* test 1 *)
+   f = x**x;
+   ans = NCConvexityRegion[ f, {x} ];
+   hes = NCHessian[ f, {x,h} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCTest[{diagonal}, ans, "NCConvexity", j++]; 
+
+   (* test 2 *)
+   f = x**x**x;
+   ans = NCConvexityRegion[ f, {x} ];
+   hes = NCHessian[ f, {x,h} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCTest[{diagonal}, ans, "NCConvexity", j++];
+
+   (* test 3 *)
+   f = x**x + y**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCTest[{diagonal}, ans, "NCConvexity", j++];
+
+   (* test 4 *)
+   f = x**x**x + y**y**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCTest[{diagonal}, ans, "NCConvexity", j++];
+   
+   (* test 5 *)
+   f = x**y**x+y**x**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCTest[{diagonal}, ans, "NCConvexity", j++];
+
+   (* test 6 *)
+   f = 2*x**x**x + 7*x**x + x;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCTest[{diagonal}, ans, "NCConvexity", j++];
+
+   (* test 7 *)
+   f = x**x**y+y**x**x+x**x**x+y**y**y;
+   ans = NCConvexityRegion[ f, {x,y} ];
+   hes = NCHessian[ f, {x,h},{y,k} ];
+   {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
+   {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+   diagonal = Diag[d];
+   NCTest[{diagonal}, ans, "NCConvexity", j++];
+
+   (* From NCMatrixOfQuadratics.NCTest *)
+
+   (* Print[ "Doing test 1,2" ]; *)
+   p = x**x**x; 
+   hes = NCHessian[ NCExpand[p], {x, h} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+   (* Print[ "Doing test 3,4" ]; *)
+   p = x**x**x**x; 
+   hes = NCHessian[ NCExpand[p], {x, h} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+   (* Print[ "Doing test 5,6" ]; *)
+   p = A*x**x**x**x+B*x**x**x+F*x**x+G*x+J; 
+   hes = NCHessian[ NCExpand[p], {x, h} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+   (* Print[ "Doing test 7,8" ]; *)
+   p = (A + B*x) ** inv[F + G*x] + tp[ (A + B*x) ** inv[F + G*x] ];
+   hes = NCHessian[ NCExpand[p], {x, h} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+   (* Print[ "Doing test 9,10" ]; *)
+   p = (A + B*x + J*x**x) ** inv[F + G*x] + tp[ (A + B*x+J*x**x) ** inv[F + G*x] ];
+   hes = NCHessian[ NCExpand[p], {x, h} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+
+   (* Print[ "Doing test 11,12" ]; *)
+   p = A+B*x+C*y+D*x**y+D*y**x+x**y**x**y+y**x**y**x+inv[J+F*x+G*y];
+   hes = NCHessian[ NCExpand[p], {x, h}, {y,k} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+
+   (* Print[ "Doing test 13,14" ]; *)
+   p =  NCExpand[(A/(B**F))**x**y**x**y+2*A**y**y**y+23*F*y**x**y+tp[(A/(B*F))*x**y**x**y+2*A*y**y**y+23*F*y**x**y]];       
+   hes = NCHessian[ NCExpand[p], {x, h}, {y,k} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+
+   (* Print[ "Doing test 15,16" ]; *)
+   p = A*x**x + B*y**y + F*x**x**x + G*y**y**y + H*x**y**x**y + H*y**x**y**x; 
+   hes = NCHessian[ NCExpand[p], {x, h},{y,k} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+   (* Print[ "Doing test 17,18" ]; *)
+   p = x**x**x;
+   hes = NCHessian[ NCExpand[p], {x, h} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+   (* Print[ "Doing test 19,20" ]; *)
+   p = A*x**x**x + y**y**x + x**y**y;
+   hes = NCHessian[ NCExpand[p], {x, h},{y,k} ];
+   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
+   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+
+   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
+          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+
+];
+

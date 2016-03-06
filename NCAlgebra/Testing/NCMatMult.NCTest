@@ -4,38 +4,32 @@
 	:07/21/99: Added LDU and NCInverse   (Juan)
 *)
 
+Module[
+  {k, a, b, c, d, e, f, g, h, i, K, u, v, w, x},
 
-test[MatMult,1] = 
-          tpMat[{{1,2},{3,4}}] == {{1,3},{2,4}};
-mat = {{a,rt[1 - a ** tp[a]]}, {rt[1-tp[a]**a],-tp[a]}};
-test[MatMult,2] = DilationHalmos[a] == mat;
-test[MatMult,3] = Cascade[{{a,b},{c,d}},k] ==
-      a + b**k**inv[1 - d**k] **c;
-test[MatMult,4] = Redheffer[{{a,b},{c,d}}] ==
+  k = 1;
+
+  NCTest[tpMat[{{1,2},{3,4}}], {{1,3},{2,4}}, "MatMult", k++];
+
+  SetNonCommutative[a, b, c, d, e, f, g, h, i, K, u, v, w, x];
+
+  mat = {{a,rt[1 - a ** tp[a]]}, {rt[1-tp[a]**a],-tp[a]}};
+  NCTest[DilationHalmos[a], mat, "MatMult", k++];
+
+  NCTest[Cascade[{{a,b},{c,d}},K] ==
+      a + b**K**inv[1 - d**K] **c, "MatMult", k++];
+
+  NCTest[Redheffer[{{a,b},{c,d}}] ==
       {{b**inv[c], a - b **inv[c]**inv[d]},
-       {inv[d],-inv[c] ** inv[d]}};
-test[MatMult,5] = MatMult[ {{ a, b },{c,d}}, 
-      {{u,v},{w,x}}] == {{a ** u + b ** w, a ** v + b ** x}, 
-    {c ** u + d ** w, c ** v + d ** x}};
+       {inv[d],-inv[c] ** inv[d]}}, "MatMult", k++];
 
-mat ={{a,b,c},{d,e,f},{g,h,i}};
-	{lower,diag,upper,P} = NCLDUDecomposition[mat, 
-		Permutation -> {{3,1,2},{1,3,2}}];
-test[MatMult, 6] =	 MatMult[lower,diag,upper] == MatMult[P ,mat , tpM[P]]  
-   (*  ]; *)
-mat= {{-(V+tp[V]),  tp[V]**A+X, tp[V]},{tp[A]**V+X,-X,0},{V,0,-X}};
+  NCTest[MatMult[{{a, b},{c,d}}, 
+                 {{u,v},{w,x}}], 
+                {{a**u+b**w, a**v+b**x}, 
+                 {c**u+d**w, c**v+d**x}}, "MatMult", k++];
 
+  mat = {{a,b,0},{tp[b],e,d},{0,tp[d],i}};
+  NCTest[NCSimplifyRational[MatMult[NCInverse[mat], mat]],
+         {{1,0,0},{0,1,0},{0,0,1}}, "MatMult", k++];
 
-	{lower,diag,upper,P} =  NCLDUDecomposition[mat, 
-		Checkit->False, Permutation->{{2,3,1},{1,3,2}}];
-test[MatMult, 7] = 	MatMult[lower,diag,upper] == MatMult[P, mat , tpM[P]] 
-ClearAll[a,b,d,e,i];
-mat={{a,b,0},{tp[b],e,d},{0,tp[d],i}};
-test[MatMult, 8] = NCSimplifyRational[MatMult[NCInverse[mat], 
-		mat]] == {{1,0,0},{0,1,0},{0,0,1}};
- 
-
-Print["Results from the file MatMult.NCTest"]
-For[ i=1, i<9, i++,
-Print["Test #",i," was ",test[MatMult,i]]
 ];

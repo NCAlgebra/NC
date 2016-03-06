@@ -1,0 +1,36 @@
+(* :Title: NCRealizationFunctions.NCTest *)
+
+(* :Author: John Shopple *)
+
+(* :Summary:TEST FILE for NCRealization Functions. *)
+
+(* :History: 
+   :9/9/2004 Created file John Shopple
+   
+*)
+
+Module[
+  {k,x,y},
+
+  k = 1;
+
+  (* Print["Starting NCRealizationFunctions.NCTest"]; *)
+     
+  SetNonCommutative[x,y];
+     
+  (* test 1  *)
+  (* Print["----test 1 "]; *)
+  NCTest[Rationalize[ NCSymmetricDescriptorRealization[inv[1+x**x],{x}][[2]]],
+         {{-1,x},{x,1}}, "Realization", k++];
+
+  (* test 2 *)
+  (* Print["----test 2 "]; *)
+  NCTest[Det[NCDeterminantalRepresentationReciprocal[1+x**y**y**x,{x,y}]],
+         CommuteEverything[1+x**y**y**x], "Realization", k++];
+      
+  (* test 3 *)
+  (* Print["----test 3 "]; *)
+  NCTest[RJRTDecomposition[{{0,2},{2,0}}],
+         {{{-1.,1.},{1.,1.}},{{-1,0},{0,1}}}, "Realization", k++];
+
+];               

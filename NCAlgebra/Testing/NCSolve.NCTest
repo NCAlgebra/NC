@@ -8,38 +8,31 @@
    :8/13/92      Written.(mstankus)
 *)
 
-Block[{x,y,a,b,c,d,i},
+Block[
+  {k,x,y,a,b,c,d,i},
 
-     Print[ "Running NCSolve.NCTest" ];
+  k = 1;
 
-     SetNonCommutative[a,b,c,d,x,y];
-     test[NCSolve,1] = NCSolveLinear1[a**x==b,x] == 
-                                                    {x -> inv[a]**b};
-     test[NCSolve,2] = NCSolveCheck[]==0;
-     test[NCSolve,3] = NCSolveLinear1[a**y+c==b+d,y] == 
-                              {y -> inv[a]**b+ inv[a]**d- inv[a]**c};
-     test[NCSolve,4] = NCSolveCheck[]==0;
-     test[NCSolve,5] = NCSolveLinear1[a**y==b**y,y] == 
-                                              {y -> 0};
-     test[NCSolve,6] = NCSolveCheck[]==0;
+  (* Print[ "Running NCSolve.NCTest" ]; *)
 
-(*
-     test[NCSolve,7] = NCSolveLinear1[a**y+c==b**y,y] == 
-                                           {y -> -inv[a-b]**c};
+  SetNonCommutative[a,b,c,d,x,y];
+  NCTest[NCSolveLinear1[a**x==b, x], {x -> inv[a]**b}, "NCSolve", k++];
+  NCTest[NCSolveCheck[], 0, "NCSolve", k++];
+  NCTest[NCSolveLinear1[a**y+c==b+d,y],  
+         {y -> inv[a]**b+ inv[a]**d- inv[a]**c}, "NCSolve", k++];
+  NCTest[NCSolveCheck[]==0, "NCSolve", k++];
+  NCTest[NCSolveLinear1[a**y==b**y,y], {y -> 0}, "NCSolve", k++];
+  NCTest[NCSolveCheck[]==0, "NCSolve", k++];
 
-     test[NCSolve,8] = NCSolveCheck[]==c-a**inv[a-b]**c+b**inv[a-b]**c;
-*)
-     
-     
-     Print["There should be an error message next..."];
+  NCTest[NCSolveLinear1[a**y+c==b**y,y],  
+         {y -> -inv[a-b]**c}, "NCSolve", k++];
+  NCTest[NCSolveCheck[], c-a**inv[a-b]**c+b**inv[a-b]**c, "NCSolve", k++];
+    
+  Print["There should be an error message next..."];
 
-     test[NCSolve,7] = NCSolveLinear1[a**y==a**y,y] == {{}};
+  NCTest[NCSolveLinear1[a**y==a**y,y], {{}}, "NCSolve", k++];
 
-     Print["There should have been an error message above..."];
+  Print["There should have been an error message above..."];
 
-     Print["Results from the file NCSolve.NCTest"];
-     For[ i=1, i<= 7, i++,
-          Print["Test #",i," was ",test[NCSolve,i]]
-     ]
 ];
 
