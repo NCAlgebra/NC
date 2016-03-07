@@ -125,6 +125,9 @@ Module[
    p = Range[m];
    q = Range[n];
    N = If[n >= m, rank - 1, rank];
+
+   (* Print["N = ", N]; *)
+    
    For [k = 1, k <= N, k++,
 
      (* Find max pivot *)
@@ -166,7 +169,9 @@ Module[
 
   ];
 
-  If[ k > N && zeroTest[A[[k,k]]],
+  (* Print["k = ", ToString[k]]; *)
+    
+  If[ k > N && n >= m && zeroTest[A[[k,k]]],
      rank--;
   ];
 

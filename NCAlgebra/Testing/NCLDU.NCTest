@@ -1,5 +1,7 @@
 (* History:  06/25/01:  NCLDUDecompostion tests (jeff)  *)
 
+<< NCLDUDecomposition`
+
 Module[
   {k, a,b,d,c,e,f,g,h,ii},
 
@@ -18,7 +20,6 @@ Module[
   {lo,di,up,P}=NCLDUDecomposition[mat,Permutation->{{3,1,2},{1,3,2}}];   
   NCTest[MatMult[lo,di,up], MatMult[P,mat,tpM[P]], "NCLDU", k++];
 
-
   mat={{-(V+tp[V]),tp[V]**A**X,tp[V]},{tp[V]**A+X,-X,0},{V,0,-X}};
   {lo,di,up,P}=NCLDUDecomposition[mat,Checkit->False,Permutation->{{2,3,1},{1,3,2}}];   
   NCTest[MatMult[lo,di,up], MatMult[P,mat,tpM[P]], "NCLDU", k++];
@@ -26,18 +27,18 @@ Module[
 
   (*Tests 3 through 6 test commands related to matrix permutations*)
 
-  NCTest[NCMatrixToPermutation[NCPermutationMatrix[{3,1,5,2,4}]],
+  NCTest[NCLDUDecomposition`Private`NCMatrixToPermutation[NCLDUDecomposition`Private`NCPermutationMatrix[{3,1,5,2,4}]],
          {3,1,5,2,4}, "NCLDU", k++];
 
-  NCTest[NCMatrixToPermutation[NCPermutationMatrix[{1,2,1}]],
+  NCTest[NCLDUDecomposition`Private`NCMatrixToPermutation[NCLDUDecomposition`Private`NCPermutationMatrix[{1,2,1}]],
          {1,2,1}, "NCLDU", k++];
 
   (*The permutation matrix commands don't seem to mind that I don't give them a
   truly valid permutation matrix*)
 
-  NCTest[CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,2,4,3}}], False, "NCLDU", k++];
+  NCTest[NCLDUDecomposition`Private`CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,2,4,3}}], False, "NCLDU", k++];
 
-  NCTest[CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,3,4,2}}], True, "NCLDU", k++];
+  NCTest[NCLDUDecomposition`Private`CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,3,4,2}}], True, "NCLDU", k++];
 
   (*Note: Rather counter-intuitively, if the list of permutations in
           CheckPermutation is a valid one in terms of the LDU decomposition, 

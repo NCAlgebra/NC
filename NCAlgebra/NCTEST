@@ -55,10 +55,10 @@ tests = {
   {"Collect",          "Collect"},
   {"Substitute",       "Substitute"},
   {"SimplifyRational", "SimplifyRational"},
+(* {"MatrixDecompositions", "MatrixDecompositions"}, *)
   {"NCMatMult",        "MatMult"},
-  {"MatrixDecompositions", "MatrixDecompositions"},
+  {"NCLDU",            "NCLDU"},
   {"NCInverse",        "NCInverse"},
-  {"NCLDUTest",        "NCLDU"},
   {"NCConvexity",      "NCConvexity"},
   {"NCRealization",    "Realization"}
 (*

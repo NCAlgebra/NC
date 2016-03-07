@@ -10,6 +10,8 @@
 
 <<NCConvexity.m;
 
+MyDiag[x_] := Tr[x, List];
+
 Module[
 
    {j,x,y,h,k,f,a,b,c,d,i, 
@@ -28,7 +30,7 @@ Module[
    hes = NCHessian[ f, {x,h} ];
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
-   diagonal = Diag[d];
+   diagonal = MyDiag[d];
    NCTest[{diagonal}, ans, "NCConvexity", j++]; 
 
    (* test 2 *)
@@ -37,7 +39,7 @@ Module[
    hes = NCHessian[ f, {x,h} ];
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
-   diagonal = Diag[d];
+   diagonal = MyDiag[d];
    NCTest[{diagonal}, ans, "NCConvexity", j++];
 
    (* test 3 *)
@@ -46,7 +48,7 @@ Module[
    hes = NCHessian[ f, {x,h},{y,k} ];
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
-   diagonal = Diag[d];
+   diagonal = MyDiag[d];
    NCTest[{diagonal}, ans, "NCConvexity", j++];
 
    (* test 4 *)
@@ -55,7 +57,7 @@ Module[
    hes = NCHessian[ f, {x,h},{y,k} ];
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
-   diagonal = Diag[d];
+   diagonal = MyDiag[d];
    NCTest[{diagonal}, ans, "NCConvexity", j++];
    
    (* test 5 *)
@@ -64,7 +66,7 @@ Module[
    hes = NCHessian[ f, {x,h},{y,k} ];
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
-   diagonal = Diag[d];
+   diagonal = MyDiag[d];
    NCTest[{diagonal}, ans, "NCConvexity", j++];
 
    (* test 6 *)
@@ -73,7 +75,7 @@ Module[
    hes = NCHessian[ f, {x,h},{y,k} ];
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
-   diagonal = Diag[d];
+   diagonal = MyDiag[d];
    NCTest[{diagonal}, ans, "NCConvexity", j++];
 
    (* test 7 *)
@@ -82,7 +84,7 @@ Module[
    hes = NCHessian[ f, {x,h},{y,k} ];
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
-   diagonal = Diag[d];
+   diagonal = MyDiag[d];
    NCTest[{diagonal}, ans, "NCConvexity", j++];
 
    (* From NCMatrixOfQuadratics.NCTest *)

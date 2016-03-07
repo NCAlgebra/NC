@@ -30,19 +30,16 @@ Module[
   NCTest[rank, 3, "MatrixDecompositions", k++];
 
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A4];
-
-  Print["Hi"];
-
   {l, u} = GetLUMatrices[lu];
   NCTest[Normal[l.u], A4[[p, q]], "MatrixDecompositions", k++];
   NCTest[rank, 2, "MatrixDecompositions", k++];
 
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A5];
   {l, u} = GetLUMatrices[lu];
-  NCTest[l.u, A5[[p, q]], "MatrixDecompositions", k++];
+  NCTest[Normal[l.u], Normal[A5[[p, q]]], "MatrixDecompositions", k++];
   NCTest[rank, 3, "MatrixDecompositions", k++];
-  NCTest[l, l1, "MatrixDecompositions", k++];
-  NCTest[u, u1, "MatrixDecompositions", k++];
+  NCTest[Normal[l], Normal[l1], "MatrixDecompositions", k++];
+  NCTest[Normal[u], Normal[u1], "MatrixDecompositions", k++];
   NCTest[rank, 3, "MatrixDecompositions", k++];
 
   (* Full rank test *)
@@ -57,9 +54,12 @@ Module[
 
           {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
           {l, u} = GetLUMatrices[lu];
-          Print["A(", m, ",", n, "),\trank = ", rank, 
-                "\tres = ", Norm[l.u - A[[p, q]]]
-          ];
+	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
+          (*
+            Print["A(", m, ",", n, "),\trank = ", rank, 
+                  "\tres = ", Norm[l.u - A[[p, q]]]
+            ];
+          *)
       ];
   ];
 
@@ -73,11 +73,16 @@ Module[
 
           range = 10;
           A = SparseArray[RandomInteger[{-range,range}, {m,n}]];
-  
+
+   	  Print["> HERE"];  
+
           {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
+
+   	  Print["< HERE"];  
+
           {l, u} = GetLUMatrices[lu];
-          Print["A(", m, ",", n, "),\trank = ", rank, "\tres = ", Norm[l.u - A[[p, q]]]
-          ];
+	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
+          Print["A(", m, ",", n, "),\trank = ", rank, "\tres = ", Norm[l.u - A[[p, q]]]];
       ];
   ];
 
@@ -97,10 +102,10 @@ Module[
 
     	  {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
     	  {l, u} = GetLUMatrices[lu];
-    	  Print["A(", m, ",", n, "), \trank = ", rank, \
-                "\tres = ", Norm[l.u - A[[p, q]]]
-          ];
-
+	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
+          Print["A(", m, ",", n, "), \trank = ", rank, \
+                   "\tres = ", Norm[l.u - A[[p, q]]]
+             ];
       ];
   ];
 

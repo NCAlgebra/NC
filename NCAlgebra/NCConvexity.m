@@ -57,6 +57,7 @@
 
  
 BeginPackage["NCConvexity`",
+             "NCLDUDecomposition`", 
              "NonCommutativeMultiply`", 
              "NCLinearAlgebra`",
              (* "Grabs`", *)
@@ -111,7 +112,11 @@ Begin["`Private`"];
 
 (* BEGIN MAURICIO MAR 2016 *)
   NCGrabSymbols[exp_] := Union[Cases[exp, _Symbol, Infinity]];
-  NCGrabSymbols[exp_, pattern_] := Union[Cases[exp, (pattern)[_Symbol], Infinity]];
+  NCGrabSymbols[exp_, pattern_] := 
+    Union[Cases[exp, (pattern)[_Symbol], Infinity]];
+  
+  Diag[x_] := Tr[x, List];
+  
 (* END MAURICIO MAR 2016 *)
 
 

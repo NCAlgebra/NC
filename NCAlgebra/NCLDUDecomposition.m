@@ -56,6 +56,8 @@ NCAllPermutationLDU::usage=
 	 {{{{1,0},{b**inv[a],1}},{{a,0},{0,c}},{{1,0},{0,1}},{{1,0},{0,1}}},\n 
 	 {{{1,0},{0,1}},{{c,0},{0,a}},{{1,inv[c]**b},{0,1}},{{0,1},{1,0}}}}.";
 
+Clear[ReturnPermutation];
+
 Options[NCLDUDecomposition] =
         {Permutation -> False, CheckDecomposition -> False,
          NCSimplifyPivots -> False, StopAutoPermutation -> False,
@@ -68,6 +70,100 @@ Options[NCAllPermutationLDU] =
 
 Begin["`Private`"];
 
+  (* Diag[m_?MatrixQ] := Flatten[MapIndexed[Part,m]]; *)
+  Diag[m_?MatrixQ] := Tr[m, List];
+        
+  (* ---------------------------------------------------------------- *)
+  (*  This is the formula for 2 by 2 block gauss elimination          *)
+  (*  It assumes that a the top diagonal entry is invertible. That    *)
+  (*  is the default. Also we make one for the bottom                 *)
+  (* ---------------------------------------------------------------- *)
+
+  GaussElimination[{{a_,b_},{c_,d_}}] := 
+     GaussElimination[{{a,b},{c,d}},top];
+
+  (* ------------------------------------------------------------------ *)
+  (*     left pivot, diag, right pivot                                  *)
+  (* ------------------------------------------------------------------ *)
+  GaussElimination[{{a_,b_},{c_,d_}},top] :=
+                   {{{Id,0},{c**inv[a],Id}},
+                    {{a,0},{0,d-c**inv[a]**b}},
+                    {{Id,inv[a]**b},{0,Id}}};
+
+  GaussElimination[{{a_,b_},{c_,d_}},btm] :=
+                   {{{Id,b**inv[d]},{0,Id}},
+                    {{a-b**inv[d]**c,0},{0,d}},
+                    {{Id,0},{d**c,Id}}};
+
+  (* ---------------------------------------------------------------- *)
+  (*  This is the formula for n by n LDU Decomposition                *)
+  (*  The code for inverse is also given here                         *)
+  (*  Some auxiliary functions are also declared                      *)
+  (* ---------------------------------------------------------------- *)
+
+  NCPermutationMatrix[ list_ ] := 
+    Transpose[IdentityMatrix[Length[list]][[list]]];
+
+  NCMatrixToPermutation[ mat_ ] := 
+    Thread[Position[Transpose[ mat ], 1]][[2]];
+
+  Perm[ nfix_, n_, perm_ ] := Module[
+    {p},
+
+    p = IdentityMatrix[n];
+    If[Not[perm === False]
+       ,
+       {p = NCPermutationMatrix[perm[[nfix-n+1]]];
+        p = NCSubMatrix[p, {nfix-n+1,nfix-n+1},{n,n}];}
+    ];
+    Return[p];
+  ];
+
+  CheckPermutation[ n_, p_] := Module[
+    {i,j,pdim},
+    
+    errorlist = False;
+    pdim = Dimensions[p];
+    If[Not[pdim == {n-1,n}]
+       , errorlist = True;
+    ];
+    m = Range[n];
+    Do[{ If[Not[Intersection[p[[i]],m] == m]
+            ,
+            errorlist = True;
+         ]; }
+       ,{i,1,n-1}
+    ];
+    Do[{ If[Not[p[[i,j]]==j]
+            ,errorlist = True;
+         ]; }
+       ,{i,n-1,2,-1}, {j,1,i-1}
+    ];
+    (* for special 1X1 case *)
+    If[n == 1
+       ,
+       If[Not[p === {{1}}]
+          ,
+          errorlist = True;
+          ,(* else *)
+          errorlist = False;
+       ];(* end if *)
+    ]; (* end if *)
+        
+    Return[errorlist];
+  ];
+
+  NCCheckPermutation[ n_, p_] := Module[
+    {check},
+    check = CheckPermutation[n,p];
+    If[check
+       , 
+       Print["Not valid permutation list!"],
+       Print["Valid permutation list!"] 
+    ];
+    Return[];
+  ];
+
   Simplifypivot[exp1_] := Module[
     {exp = CommuteEverything[exp1]},        
 
@@ -76,7 +172,7 @@ Begin["`Private`"];
     exp = Expand[exp];
     Return[exp];
   ];
-        
+  
   LDUrec[nfix_, mat_, opts___Rule ] := Module[
     {output,n = Length[mat], submata,submatb,submatc,submatd,
      subgauss, dtil, binvsubmata,cinvsubmata,lleft,rright,diagon,
@@ -473,60 +569,9 @@ largest *)
                output = {Transpose[p].lleft, diagon, rright.p, P,newperm};
                Return[output];
          ];   (* End Which *)    
-                
-                
-   ]; (* end if #1 *)
-];
+     ]; (* end if #1 *)
+  ];
  
-NCLDUDecomposition[ mat_, opts___Rule ]:=
-        Module[{l,d,u,P,checkit,perm,output,checkresult,nfix,pivotcheck,
-        stopauto,returnperm,stop2by2},
-        checkit = CheckDecomposition /. {opts} /. \
-Options[NCLDUDecomposition];
-        perm = Permutation /. {opts} /. Options[NCLDUDecomposition];
-        pivotcheck = NCSimplifyPivots /. {opts} /. \
-Options[NCLDUDecomposition];
-        stopauto   = StopAutoPermutation /. {opts} /. \
-Options[NCLDUDecomposition];
-        returnperm = ReturnPermutation /. {opts} /. \
-Options[NCLDUDecomposition];
-        stop2by2  = Stop2by2Pivoting /. {opts} /. \
-Options[NCLDUDecomposition];
-        
-        
-	If[Length[perm]==0,perm=False];
-        If[Not[perm === False],
-                If[ CheckPermutation[Length[mat], perm]
-                        ,{Print["Not valid permutation list!"]; Abort[]}
-                ];
-        ];
-        nfix=Length[mat];
-        output = LDUrec[nfix, mat,
-                        CheckDecomposition -> checkit, Permutation -> perm,
-                        NCSimplifyPivots -> pivotcheck,
-                        StopAutoPermutation -> stopauto ,
-                        ReturnPermutation -> returnperm,
-                        Stop2by2Pivoting -> stop2by2];
-        P = output[[4]];
-        output[[1]]=P.output[[1]];
-        output[[3]]=output[[3]].Transpose[P];        
-        If[checkit,
-                Print["Check..."];
-                checkresult = NCSimplifyRational[MatMult[
-                        output[[1]],output[[2]],output[[3]] ] ];
-                If[Not[checkresult === NCSimplifyRational[P . mat . \
-Transpose[P] ] ]
-                        ,Print[
-                "Warning: The LDU decomposition did not work!"]; ];
-        ];
-        If[returnperm === True,
-           Return[output];
-        ,(*else*)
-           Return[output[[{1,2,3,4}]]];
-        ];
-]/; MatrixQ[mat]
-
-
   NCLDUDecomposition[mat_?MatrixQ, opts___Rule ] := Module[
     {l,d,u,P,checkit,perm,output,checkresult,nfix,pivotcheck,
      stopauto,returnperm,stop2by2},
