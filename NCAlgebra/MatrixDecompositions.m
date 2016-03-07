@@ -126,17 +126,20 @@ Module[
    q = Range[n];
    N = If[n >= m, rank - 1, rank];
 
-   (* Print["N = ", N]; *)
+   (*
+   Print["m = ", m];
+   Print["n = ", n];
+   Print["N = ", N];
+   *)
     
    For [k = 1, k <= N, k++,
 
+     (* Print["k = ", ToString[k]]; *)
+        
      (* Find max pivot *)
      {mu, lambda} = LUCompletePivoting[ A[[k ;; m, k ;; n]] ] + k - 1;
 
-     (*
-       Print["mu = ", mu];
-       Print["lambda = ", lambda];
-     *)
+     (* Print["mu = ", mu, "\nlambda = ", lambda]; *)
 
      (* Interchange rows *)
      A[[{k,mu}, All]] = A[[{mu,k}, All]];
@@ -148,10 +151,7 @@ Module[
      p[[{k,mu}]] = p[[{mu,k}]];
      q[[{k,lambda}]] = q[[{lambda,k}]];
 
-     (*
-       Print["p = ", p];
-       Print["q = ", q];
-     *)
+     (* Print["p = ", p, "\nq = ", q]; *)
 
      (* If zero pivot, terminate *)
      If[ zeroTest[A[[k,k]]],
@@ -159,13 +159,17 @@ Module[
        Break[];
      ];
 
-     (* Print["A- = ", MatrixForm[A]]; *)
+     (* Print["A- = ", Normal[A]]; *)
 
      (* Update matrix *)
      A[[k+1 ;; m, k]] /= A[[k,k]];
-     A[[k+1 ;; m, k+1 ;; n]] -= A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; n]];
+     If [k < n
+         ,
+         A[[k+1 ;; m, k+1 ;; n]] -= 
+            A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; n]];
+     ];
 
-     (* Print["A+ = ", MatrixForm[A]]; *)
+     (* Print["A+ = ", Normal[A]]; *)
 
   ];
 
