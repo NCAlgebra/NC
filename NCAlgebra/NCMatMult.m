@@ -123,19 +123,6 @@ Clear[BlockDiagonal];
 BlockDiagonal::usage = 
      "BlockDiagonal";
 
-Clear[DeepMatMult];
-
-DeepMatMult::usage = 
-     "DeepMatMult[x,y] (where x and y are matrices) gives the matrix \
-      \
-multiplication of x and y using NonCommutativeMultiply \
-      rather than \
-Times as Dot[] does. It attempts to take \
-      the product correctly if the \
-entries are matrices so \
-      that one has a block matrix.";
-
-
 Clear[NCPermutationMatrix];
 NCPermutationMatrix::usage=
         "If L is a list of the first n integers,
@@ -1219,51 +1206,6 @@ b->BlockDecompose[2,2,"b"],
 c->BlockDecompose[2,2,"c"]
 }
 ];
-*)
-
-DeepMatMult[x:{{___}...},y:{{___}...}] :=
-Module[{dim1,dim2,j,w,k,numberSummands,result},
-   dim1 = Dimensions[x];
-   dim1 = Take[dim1,{1,2}];
-   dim2 = Dimensions[y];
-   dim2 = Take[dim2,{1,2}];
-   numberSummands = dim1[[2]];
-   result = Table[Sum[DeepMatMult[x[[j,w]],y[[w,k]]],{w,1,numberSummands}]
-                      ,{j,1,dim1[[1]]},{k,1,dim2[[2]]}];
-   Return[result];
-];
-
-DeepMatMult[x_,y_,z__]:=DeepMatMult[DeepMatMult[x,y],z];
-
-DeepMatMult[x_?NumberQ,y_] := x y;
-
-DeepMatMult[x,y_?NumberQ] := x y;
-
-DeepMatMult[x_,y_] := x**y;
-
-DeepMatMult[x___] := BadCall["DeepMatMult",x];
-
-(* 
-Example
-
-SetNonCommutative[a11,a12,a21,a22];
-mat = {{,},{,}};
-mat[[1,1]] = {{a11,a12},{a21,a22}};
-mat[[1,2]] = {{0},{0}};
-mat[[2,1]] = {{0,0}};
-(* 
-Could type
-mat[[2,2]] = 1; 
-OR
-*)
-mat[[2,2]] = {{1}};
-ans = DeepMatMult[mat,mat];
-
-Print["Type MatrixForm[mat]"];
-Print["Type ans[[1,1]]"];
-Print["Type ans[[1,2]]"];
-Print["Type ans[[2,1]]"];
-Print["Type ans[[2,2]]"];
 *)
 
 End[];

@@ -100,7 +100,7 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
 
    (* LOAD MAIN PACKAGES  *)
 
-   Get["Errors.m"]; (* For error traps *)
+   (* Get["Errors.m"]; ( * For error traps * ) *)
 
    (*#################################################*)
    (* Basic algebra operations like  ** and tp and inv.  Also NCExpand *)
