@@ -183,17 +183,21 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
   Print["NCDiff.m loaded"];
 
 
-  Get["NCSchur.m"];   (* BILL INSERTED Aug 25 97*)
-  Print["NCSchur.m loaded"];
+  (*
+    Get["NCSchur.m"];   (* BILL INSERTED Aug 25 97*)
+    Print["NCSchur.m loaded"];
+  *)
 
   (*#######*)
   Get["NCAlias.m"]; (* bill is scared to move this to a logical place *)
   Print["NCAlias.m loaded"];
 
-  Get["Grabs.m"]; (* added 2002 *)
-  Print["Grabs.m loaded"];
-  Get["NCTaylorCoeff.m"];
-  Print["NCTaylorCoeff.m loaded"];
+  (*
+     Get["Grabs.m"]; ( * added 2002 * )
+     Print["Grabs.m loaded"];
+     Get["NCTaylorCoeff.m"];
+     Print["NCTaylorCoeff.m loaded"]; 
+  *)
 
   Get["NCConvexity.m"]; (* Inserted Aug 16 2001 *)
   Get["NCGuts.m"];      (* Inserted Aug 16 2001 *)
@@ -230,7 +234,7 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
     Print["NCMaster.m loaded" ];
   *)
 
-  DeclarePackage["NCSave`",{"NCSave"} ];
+  (* DeclarePackage["NCSave`",{"NCSave"} ]; *)
 
   (*DeclarePackage["NCOutput`",{"SetOutput"} ]; *)
   Get["NCOutput.m"];

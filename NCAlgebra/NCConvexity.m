@@ -17,6 +17,7 @@
 *)
 
 (* :History:
+    :3/3/16: Remove dependence on Grabs. (mauricio)
     :3/13/13: Deprecated LinearAlgebra`MatrixManipulation`. (mauricio)
     :8/31/04: Fixed string error in usage statement (\it vs. \\it). (mstankus)
     :6/27/02: - (tony s.) Changed NCConvexityRegion.  Set Stop2by2Pivoting
@@ -58,7 +59,7 @@
 BeginPackage["NCConvexity`",
              "NonCommutativeMultiply`", 
              "NCLinearAlgebra`",
-             "Grabs`",
+             (* "Grabs`", *)
 	     "NCSimplifyRational`",
              "NCDiff`",
              "NCMatMult`"];
@@ -107,6 +108,12 @@ Options[NCConvexityRegion] =
        
  
 Begin["`Private`"];
+
+(* BEGIN MAURICIO MAR 2016 *)
+  NCGrabSymbols[exp_] := Union[Cases[exp, _Symbol, Infinity]];
+  NCGrabSymbols[exp_, pattern_] := Union[Cases[exp, (pattern)[_Symbol], Infinity]];
+(* END MAURICIO MAR 2016 *)
+
 
 (* Code for the NCHessian *)
 
@@ -267,29 +274,53 @@ NCMatrixOfQuadratic[exp1_, list1_] :=
           and without and make a list of the ones that are considered selfadjoint by the user *)  
  
 
-       (* first grab the variables and indeterminants *)
+       (* BEGIN MAURICIO MAR 2016 *)
+       (* Symmetric variable withour Grabs *)
+
+       (* BEGIN OLD CODE *)
+       (*
+       ( * first grab the variables and indeterminants * )
 
        vars = Union[ GrabVariables[ splitterm ] ];
        terms = Union[ GrabIndeterminants[ splitterm ] ];
 
-       (* find the selfadjoint vars and add to the rules the rule that takes the 
-          transposes of them out *)
+       ( * find the selfadjoint vars and add to the rules the rule 
+           that takes the 
+          transposes of them out * )
 
        transposeRemovalRules = {};
        
        For[ i = 1, i <= Length[ vars ], i++,
           theVar = vars[[i]];
      
-          (* See if theVar is in any of the indeterminants with a transpose around it *)
+          ( * See if theVar is in any of the indeterminants with a
+              transpose around it * )
           num = Count[ terms, tp[theVar], Infinity ];
     
-          (* if num = 0 then theVar is selfajoint *)
+          ( * if num = 0 then theVar is selfajoint * )
           If[ num === 0,  
-             (* make a rule that replaces all tp[theVar] with theVar *)
+             ( * make a rule that replaces all tp[theVar] 
+                 with theVar * )
              transposeRemovalRules = Insert[ transposeRemovalRules, {tp[theVar] -> theVar }, 1 ]; 
           ];
        ];
- 
+
+       *)
+       (* END OLD CODE *)
+
+       (* BEGIN NEW CODE *)
+               
+       vars = DeleteCases[Union[ NCGrabSymbols[ splitterm ] ], _?CommutativeQ];
+       terms = Union[ NCGrabSymbols[ splitterm, tp|aj ] 
+                      /. tp -> Identity /. aj -> Identity];
+
+       ajvars = Complement[vars, terms];
+       transposeRemovalRules = Map[{tp[#]->#}&, ajvars];
+
+       (* END NEW CODE *)
+               
+       (* END MAURICIO MAR 2016 *)
+
        (* now apply the rules to the tmpLvector and tmpRvector *)
        (* need to make the tmpRvector first *)
        tmpRvector = rightvector;

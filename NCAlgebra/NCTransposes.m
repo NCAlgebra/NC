@@ -36,43 +36,33 @@ SetInvRightTp::usage =
 
 Begin[ "`Private`" ]
 
-SetNonCommutative[tp];
+  SetNonCommutative[tp];
 
-(* ---------------------------------------------------------------- *)
-(*	Rules for transposes                                        *)
-(* ---------------------------------------------------------------- *)
-SetLinear[tp];
-SetIdempotent[tp];
-(* BEGIN MAURICIO MAR 2016 *)
-(* tp[Id] := Id; *)
-(* tp[-1]:=-1; *)
-(* tp[s_ * az_] := s*tp[az] /; CommutativeQ[s]; *)
-(* tp[z_?NumberQ] := z; *)
-(* END MAURICIO MAR 2016 *)
-tp[s_Times] := tp /@ s;
-tp[z_?CommutativeQ] := z;
+  (* ---------------------------------------------------------------- *)
+  (*	Rules for transposes                                        *)
+  (* ---------------------------------------------------------------- *)
+  SetLinear[tp];
+  SetIdempotent[tp];
+  tp[s_Times] := tp /@ s;
+  tp[z_?CommutativeQ] := z;
 
-(* ---------------------------------------------------------------- *)
-(*      The product of transposes is the reverse product of the     *)
-(*      tranposes.                                                  *)
-(* ---------------------------------------------------------------- *)
-SetExpandQ[tp, True];
-NCAntihomo[tp];
+  (* ---------------------------------------------------------------- *)
+  (*      The product of transposes is the reverse product of the     *)
+  (*      tranposes.                                                  *)
+  (* ---------------------------------------------------------------- *)
+  SetExpandQ[tp, True];
+  NCAntihomo[tp];
 
-(* ---------------------------------------------------------------- *)
-(*	Relation between transposes and inverses                    *)
-(* ---------------------------------------------------------------- *)
-(* --- Not necessary. Done in NCInverses.m
-inv[tp[a_]]**tp[a_]:=Id;
-tp[a_]**inv[tp[a_]]:=Id;
-*)
+  (* ---------------------------------------------------------------- *)
+  (*	Relation between transposes and inverses                    *)
+  (* ---------------------------------------------------------------- *)
 
-LeftQ[inv,tp] := True;
-SetCommutingFunctions[inv,tp];
+  LeftQ[inv,tp] := True;
+  SetCommutingFunctions[inv,tp];
 
-SetInvRightTp = True;
-tp[invL[a_]] := invR[tp[a]] /; SetInvRightTp == True;
-invR[tp[a_]] := tp[invL[a]] /; SetInvRightTp == False;
+  SetInvRightTp = True;
+  tp[invL[a_]] := invR[tp[a]] /; SetInvRightTp == True;
+  invR[tp[a_]] := tp[invL[a]] /; SetInvRightTp == False;
 
 End[]
 
