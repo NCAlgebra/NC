@@ -13,6 +13,7 @@ Module[
 
   SetNonCommutative[a, b, c, d, e, f, g, h, i, K, u, v, w, x];
 
+(*
   mat = {{a,rt[1 - a ** tp[a]]}, {rt[1-tp[a]**a],-tp[a]}};
   NCTest[DilationHalmos[a], mat, "MatMult", k++];
 
@@ -22,6 +23,7 @@ Module[
   NCTest[Redheffer[{{a,b},{c,d}}] ==
       {{b**inv[c], a - b **inv[c]**inv[d]},
        {inv[d],-inv[c] ** inv[d]}}, "MatMult", k++];
+*)
 
   NCTest[MatMult[{{a, b},{c,d}}, 
                  {{u,v},{w,x}}], 
