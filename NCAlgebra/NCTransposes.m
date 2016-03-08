@@ -1,6 +1,6 @@
-(* :Title: 	NCTransposes // Mathematica 1.2 and 2.0 *)
+(* :Title: 	NCTransposes *)
 
-(* :Author: 	Unknown. *)
+(* :Author: 	mauricio *)
 
 (* :Context: 	NonCommutativeMultiply` *)
 
@@ -19,51 +19,34 @@
 
 BeginPackage[ "NonCommutativeMultiply`" ]
 
-(* MAURICIO: JUNE 2009: MUST BE DONE IN NCMULTIPLICATION FOR CE TO WORK *)
-(* Clear[tp]; *)
-
 tp::usage =
-     "tp[x] is the tranpose of x. It is a linear involution. \
-      Note that all commutative expressions are assummed self-adjoint. \
-      See also aj,SetSelfAdjoint, SetIsometry,....";
-
-Clear[SetInvRightTp];
-
-SetInvRightTp::usage = 
-     "If set to True,then the rule tp[invL[a_]]:=invR[tp[a]]; will \
-      be executed and if False, then the reverse rule \
-      invR[tp[a_]]:=tp[invL[a]]; will be executed.";
+"tp[x] is the tranpose of x. It is a linear involution. \
+Note that all commutative expressions are assummed self-adjoint. \
+See also aj.";
 
 Begin[ "`Private`" ]
 
+  (* tp is NonCommutative *)
   SetNonCommutative[tp];
 
-  (* ---------------------------------------------------------------- *)
-  (*	Rules for transposes                                        *)
-  (* ---------------------------------------------------------------- *)
-  SetLinear[tp];
-  SetIdempotent[tp];
-  tp[s_Times] := tp /@ s;
-  tp[z_?CommutativeQ] := z;
+  (* tp is Linear *)
+  tp[a_ + b_] := tp[a] + tp[b];
+  tp[c_?NumberQ] := c;
+  tp[a_?CommutativeQ] := a;
 
-  (* ---------------------------------------------------------------- *)
-  (*      The product of transposes is the reverse product of the     *)
-  (*      tranposes.                                                  *)
-  (* ---------------------------------------------------------------- *)
-  SetExpandQ[tp, True];
-  NCAntihomo[tp];
+  (* tp is Idempotent *)
+  tp[tp[a_]] := a;
 
-  (* ---------------------------------------------------------------- *)
-  (*	Relation between transposes and inverses                    *)
-  (* ---------------------------------------------------------------- *)
+  (* tp threads over Times *)
+  tp[a_Times] := tp /@ a;
 
-  LeftQ[inv,tp] := True;
-  SetCommutingFunctions[inv,tp];
+  (* tp reverse threads over NonCommutativeMultiply *)
+  HoldPattern[tp[NonCommutativeMultiply[a__]]] := 
+        (NonCommutativeMultiply @@ (tp /@ Reverse[{a}]));
 
-  SetInvRightTp = True;
-  tp[invL[a_]] := invR[tp[a]] /; SetInvRightTp == True;
-  invR[tp[a_]] := tp[invL[a]] /; SetInvRightTp == False;
-
+  (* tp[inv[]] = inv[tp[]] *)
+  tp[inv[a_]] := inv[tp[a]];
+                
 End[]
 
 EndPackage[]

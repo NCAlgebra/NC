@@ -107,9 +107,9 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
  
    Get["NCMultiplication.m"];
    Print["NCMultiplication.m loaded"];
-   Get["NC1SetCommands.m"];
-   Print["NC1SetCommands.m loaded"];
    (* Undid it!
+     Get["NC1SetCommands.m"];
+     Print["NC1SetCommands.m loaded"];
      Get["NC2SetCommands.m"]; 
      Print["NC2SetCommands.m loaded"];
    *)
@@ -130,8 +130,10 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
 
    NonCommutativeMultiply`SetNonCommutative[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
 
-   Get["NC2SetCommands.m"];
-   Print["NC2SetCommands.m loaded"];
+   (*
+     Get["NC2SetCommands.m"];
+     Print["NC2SetCommands.m loaded"];
+   *)
 
    (*#################################################*)
    (* Functions which MANIPULATE EXPRESSIONS *)

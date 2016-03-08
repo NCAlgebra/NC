@@ -14,6 +14,8 @@ Module[
 
    k = 1;
 
+  SetNonCommutative[x,y,h];
+
    Quiet[
 
      NCTest[DirectionalD[x^9 + 123 x^8,x,h], 9 x^8 h + 123 8 x^7 h, 
@@ -25,6 +27,7 @@ Module[
      NCTest[DirectionalD[x,y,h], 0, "Diff", k++]; 
 
      SetNonCommutative[A,GE,B1,C1,C2,D21,W];
+
      (* was GradPoly *)
      temp = 2 GE[x] **A[x] - tp[W]**W + tp[C1[x]]**C1[x] +
             2 GE[x]**b**C2[x] + 2 GE[x]**B1[x]**W + GE[x]**b**D21[x]**W;

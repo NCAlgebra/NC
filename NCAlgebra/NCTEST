@@ -49,9 +49,8 @@ tests = {
   {"Transposes",       "Transposes"},
   {"Adjoints",         "Adjoints"},
   {"Conjugate",        "Conjugates"},
+  {"Roots",            "Roots"},
   {"NCOutput",         "NCOutput"},
-  {"Diff",             "Diff"},
-  {"Crit",             "Crit"},
   {"Collect",          "Collect"},
   {"Substitute",       "Substitute"},
   {"SimplifyRational", "SimplifyRational"},
@@ -61,6 +60,8 @@ tests = {
   {"NCInverse",        "NCInverse"},
   {"NCConvexity",      "NCConvexity"},
   {"NCRealization",    "Realization"}
+(* {"Diff",             "Diff"}, *)
+(* {"Crit",             "Crit"}, *)
 (*
   {"NCSolve",               "NCSolve"},
   {"Convert",          "Convert"}

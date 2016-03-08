@@ -2,7 +2,7 @@
 
 Module[
   {k,f,g,a,b,c,dd,z,W,U,Y,DW,DU,DY,A,x,B1,B2,C1,C2,G1,G2,D11,D22,D12,D21,
-   e1,e2,GE,GEx,GEz},
+   e1,e2,GE,GEx,GEz,expr},
 
   k = 1;
 
@@ -62,8 +62,8 @@ Module[
 
   (* Print["-----Done with first critical point test in Crit.NCTest"]; *)
 
-  NCTest[ExpandNonCommutativeMultiply[CritU[[1,2]] - (-inv[e1[x]] ** tp[B2[x]] ** GEx[x, z] - 
-         inv[e1[x]] ** tp[D12[x]] ** C1[x])], 0, "Crit", k++];
+  expr = ExpandNonCommutativeMultiply[CritU[[1,2]] - (-inv[e1[x]] ** tp[B2[x]] ** GEx[x, z] - inv[e1[x]] ** tp[D12[x]] ** C1[x])];
+  NCTest[expr, 0, "Crit", k++];
 
   (* Print["-----Done with second critical point test in Crit.NCTest"]; *)
 

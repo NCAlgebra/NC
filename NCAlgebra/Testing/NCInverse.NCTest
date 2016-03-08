@@ -1,22 +1,35 @@
 (* History:  06/26/01:  NCInverse tests (jeff)   *)
 
-(* Nov 2015 Mauricio : From A,B,C,D to a,b,c,d BEGIN *)
-(*
-SNC[a,b,c,d];
-*)
-
-(*NCInverse uses the formula shown in test 1 to compute the inverse of a 
-  2x2 matrix.  Larger matrices are handled by "divide and conquer" - the matrix
-  is thought of as being block 2x2, and the problem is reduced inductively in 
-  this way until it is truly working at the 2x2 level.  Tests 2 and 3 show that
-  sometimes the program must be specifically told to simplify and expression*)
-
 Module[
   {k, a, b, c, d, x, y, mat, invmat, answer}, 
 
   k = 1;
 
   SetNonCommutative[a, b, c, d, x, y];
+
+  NCTest[CommutativeQ[inv], False, "NCInverse", k++];
+
+  NCTest[inv[a ** b], Unevaluated[inv[a ** b]], "NCInverse", k++];
+  NCTest[inv[a] ** inv[b], Unevaluated[inv[a] ** inv[b]], "NCInverse", k++];
+
+  NCTest[inv[a] ** a, 1, "NCInverse", k++];
+  NCTest[b ** inv[a] ** a, b, "NCInverse", k++];
+  NCTest[inv[a] ** a ** c, c, "NCInverse", k++];
+  NCTest[b ** inv[a] ** a ** c, b ** c, "NCInverse", k++];
+
+  NCTest[inv[a ** b] ** a ** b, 1, "NCInverse", k++];
+  NCTest[b ** inv[a ** b] ** a ** b, b, "NCInverse", k++];
+  NCTest[inv[a ** b] ** a ** b ** c, c, "NCInverse", k++];
+  NCTest[b ** inv[a ** b] ** a ** b ** c, b ** c, "NCInverse", k++];
+
+  NCTest[inv[f[a]] ** f[a], 1, "NCInverse", k++];
+  NCTest[b ** inv[f[a]] ** f[a], b, "NCInverse", k++];
+  NCTest[inv[f[a]] ** f[a] ** c, c, "NCInverse", k++];
+  NCTest[b ** inv[f[a]] ** f[a] ** c, b ** c, "NCInverse", k++];
+
+  NCTest[inv[inv[a]], a, "NCInverse", k++];
+
+  NCTest[inv[a * b], inv[a] * inv[b], "NCInverse", k++];
 
   NCTest[NCInverse[{{0,1},{1,0}}], {{0,1},{1,0}}, "NCInverse", k++];
 
@@ -53,6 +66,5 @@ Module[
   NCTest[NCSimplifyRational[MatMult[mat, invmat]], 
          {{1,0,0},{0,1,0},{0,0,1}}, "NCInverse", k++];
   *)
-
 
 ];  

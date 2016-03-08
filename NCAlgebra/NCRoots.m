@@ -1,6 +1,6 @@
 (* :Title: 	NCRoots // Mathematica 1.2 and 2.0 *)
 
-(* :Author: 	Mark Stankus (mstankus). *)
+(* :Author: 	mauricio *)
 
 (* :Context: 	NonCommutativeMultiply` *)
 
@@ -14,28 +14,33 @@
 *)
 
 (* :History: 
-   :4/21/93: Added rt/: to some commands. (mstankus)
-   :4/23/93: Wrapped a few commands with Literal's. (mstankus)
    :2/03/16:    Clean up (mauricio)
 *)
 
-(* ---------------------------------------------------------------- *)
-(*	This defines square roots of elements.                      *)
-(*	They are not neccessarily symmetric; invoke SetSelfAdjoint  *)
-(*      to make them symmetric			                    *)
-(* ---------------------------------------------------------------- *)
-	
 BeginPackage[ "NonCommutativeMultiply`" ]
 
 rt::usage = 
-     "rt[x] is the (not neccessarily self-adjoint) root \
-      of x. ";
+"rt[x] is the root of x. ";
 
 Begin[ "`Private`" ]
 
+  SetNonCommutative[rt];
+
+  (* rt commutative *)
+  rt[c_?NumberQ] := Sqrt[c];
+  rt[a_?CommutativeQ] := Sqrt[a];
+
+  (* rt threads over Times *)
+  rt[a_Times] := rt /@ a;
+
+  (* Simplification *)
   NonCommutativeMultiply[n___,rt[m_],rt[m_],l___] :=
     NonCommutativeMultiply[n,m,l] 
  
+  (* tp[rt[]] = rt[tp[]] *)
+  tp[rt[a_]] := rt[tp[a]];
+
+  (* BEGIN MAURICIO MAR 2016 *)
   (* There are best left for SimplifyRational *)
   (*
     rt/:Literal[NonCommutativeMultiply[n___,rt[Id - x_** m_],x_,l___]] :=
@@ -44,13 +49,6 @@ Begin[ "`Private`" ]
     rt/:Literal[NonCommutativeMultiply[n___,rt[Id - m_**tp[m_]],m_,l___]] :=
       NonCommutativeMultiply[n,m,rt[Id-tp[m]**m],l];
   *)
-
-  LeftQ[inv,rt] := False;
-  SetCommutingFunctions[inv,rt];
-
-  (* ------------------------------------------------------------------- *)
-  (*   Roots and adjoints                                                *)    
-  (* ------------------------------------------------------------------- *)
 
   (*
     NonCommutativeMultiply[n___,rt[m_],aj[rt[m_]],l___] :=
@@ -62,6 +60,7 @@ Begin[ "`Private`" ]
     rt/:Literal[NonCommutativeMultiply[n___,rt[Id - m_**aj[m_]], m_,l___]] :=
       NonCommutativeMultiply[n,m,aj[Id -aj[m]**m],l];
   *)
+  (* END MAURICIO MAR 2016 *)
       
 End[];
 EndPackage[]

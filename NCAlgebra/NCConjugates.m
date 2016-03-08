@@ -1,6 +1,6 @@
-(* :Title: 	NCCo // Mathematica 1.2 and 2.0 *)
+(* :Title: 	NCConjugates *)
 
-(* :Author: 	mauricio . *)
+(* :Author: 	mauricio *)
 
 (* :Context: 	NonCommutativeMultiply` *)
 
@@ -17,11 +17,6 @@
    :2/03/16:    First real implementation (mauricio)
 *)
 
-(* ------------------------------------------------------------------ *)
-(*     Some people like to use the abbreviation co for aj[tp[x]].     *)
-(*     See also complex.m                                             *)
-(* ------------------------------------------------------------------ *)
-
 BeginPackage[ "NonCommutativeMultiply`" ]
 
 co::usage =
@@ -30,23 +25,34 @@ co::usage =
 
 Begin[ "`Private`" ]
 
+  (* co is NonCommutative *)
   SetNonCommutative[co];
 
-  SetConjugateLinear[co];
-  SetIdempotent[co];
-  co[z_?CommutativeQ]:= Conjugate[z];
-  co[s_Times] := co /@ s;
+  (* co is Conjugate Linear *)
+  co[a_ + b_] := co[a] + co[b];
+  co[c_?NumberQ] := Conjugate[c];
+  co[a_?CommutativeQ]:= Conjugate[a];
 
+  (* co is Idempotent *)
+  co[co[a_]] := a;
+
+  (* co threads over Times *)
+  co[a_Times] := co /@ a;
+
+  (* co threads over Times *)
+  co[a_Times] := co /@ a;
+
+  (* co threads over NonCommutativeMultiply *)
+  HoldPattern[co[NonCommutativeMultiply[a__]]] := 
+        (NonCommutativeMultiply @@ (co /@ {a}));
+  
   (* Relationship with aj and tp *)
 
-  aj[tp[x_]] := co[x];
-  tp[aj[x_]] := co[x];
+  aj[tp[a_]] := co[a];
+  tp[aj[a_]] := co[a];
 
-  co[tp[x_]] := aj[x];
-  co[aj[x_]] := tp[x];
-
-  SetExpandQ[co, True];
-  NCHomo[co];
+  co[tp[a_]] := aj[a];
+  co[aj[a_]] := tp[a];
 
 End[]
 
