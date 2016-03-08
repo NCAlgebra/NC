@@ -55,6 +55,7 @@ tests = {
   {"Substitute",       "Substitute"},
   {"SimplifyRational", "SimplifyRational"},
   {"MatrixDecompositions", "MatrixDecompositions"},
+  {"NCMatrixDecompositions", "NCMatrixDecompositions"},
   {"NCMatMult",        "MatMult"},
   {"NCLDU",            "NCLDU"}, 
   {"NCInverse",        "NCInverse"},

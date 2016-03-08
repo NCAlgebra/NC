@@ -170,8 +170,9 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
   (*#################################################*)
   (* Pakages which do fancy things     *)    
 
-  Get["NCComplex.m"];    (*moved 2002 *)    
-  Print["NCComplex.m loaded"];
+  (* Get["NCComplex.m"];    ( *moved 2002 * )    
+    Print["NCComplex.m loaded"];
+  *)
 
   Quiet[
     Get["NCMatMult.m"];    (*moved 2002 *)    

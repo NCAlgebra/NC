@@ -28,7 +28,10 @@ Clear[LDLDecomposition];
 LDLDecomposition::usage="";
 
 Options[LUDecompositionWithCompletePivoting] = {
-  Pivoting -> LUCompletePivoting
+  ZeroTest -> PossibleZeroQ,
+  Pivoting -> LUCompletePivoting,
+  DivideBy -> DivideBy,
+  Dot -> Dot
 };
 
 Begin[ "`Private`" ]
@@ -47,7 +50,6 @@ GetLUMatrices[ldu_, p_, q_, rank_] := Module[
 
   Return[{l,u}];
 ];
-
 
 GetLUMatrices[ldu_] := Module[
   {n,m,mats},
@@ -105,7 +107,7 @@ LUCompletePivoting[A_?MatrixQ] := Module[
 
 LUDecompositionWithCompletePivoting[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
 Module[
-  {options, zeroTest,
+  {options, zeroTest, pivoting, dot,
    A, m, n, rank, p, q, k, N, mu, lambda},
 
    (* process options *)
@@ -114,9 +116,20 @@ Module[
 
    zeroTest = ZeroTest
           /. options
-	  /. Options[MatrixDecompositions, ZeroTest];
+	  /. Options[LUDecompositionWithCompletePivoting, ZeroTest];
 
+   pivoting = Pivoting
+          /. options
+	  /. Options[LUDecompositionWithCompletePivoting, Pivoting];
+    
+   divideBy = DivideBy
+          /. options
+	  /. Options[LUDecompositionWithCompletePivoting, DivideBy];
 
+   dot = Dot
+          /. options
+	  /. Options[LUDecompositionWithCompletePivoting, Dot];
+    
    (* start algorithm *)
 
    A = AA;
@@ -137,7 +150,7 @@ Module[
      (* Print["k = ", ToString[k]]; *)
         
      (* Find max pivot *)
-     {mu, lambda} = LUCompletePivoting[ A[[k ;; m, k ;; n]] ] + k - 1;
+     {mu, lambda} = pivoting[ A[[k ;; m, k ;; n]] ] + k - 1;
 
      (* Print["mu = ", mu, "\nlambda = ", lambda]; *)
 
@@ -162,11 +175,17 @@ Module[
      (* Print["A- = ", Normal[A]]; *)
 
      (* Update matrix *)
-     A[[k+1 ;; m, k]] /= A[[k,k]];
+     If [divideBy === DivideBy
+         ,
+         A[[k+1 ;; m, k]] /= A[[k,k]];
+         ,
+         A[[k+1 ;; m, k]] = divideBy[ A[[k+1 ;; m, k]], A[[k,k]] ];
+     ];
+
      If [k < n
          ,
          A[[k+1 ;; m, k+1 ;; n]] -= 
-            A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; n]];
+            dot[A[[k+1 ;; m, {k}]], A[[{k}, k+1 ;; n]]];
      ];
 
      (* Print["A+ = ", Normal[A]]; *)
