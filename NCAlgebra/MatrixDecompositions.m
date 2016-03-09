@@ -35,6 +35,11 @@ UpperTriangularSolve::usage="";
 Clear[LowerTriangularSolve];
 LowerTriangularSolve::usage="";
 
+Clear[LUInverse];
+LUInverse::usage="";
+
+MatrixDecompositions::WrongDimensions = \
+"Righ and left-hand side dimensions DO NOT MATCH.";
 MatrixDecompositions::NotSquare = "The input matrix is not SQUARE.";
 MatrixDecompositions::Singular = "The input matrix appears to be SINGULAR.";
 
@@ -94,25 +99,49 @@ Begin[ "`Private`" ]
     Flatten[UpperTriangularSolve[u, Transpose[{b}], opts]];
 
   UpperTriangularSolve[u_, b_?MatrixQ, opts:OptionsPattern[{}]] := Module[
-     {options,
+     {options, zeroTest, pivoting, dot,
       U,X,m,n,j},
 
+     (* process options *)
+
+     options = Flatten[{opts}];
+
+     zeroTest = ZeroTest
+	    /. options
+	    /. Options[MatrixDecompositions, ZeroTest];
+
+     divideBy = DivideBy
+	    /. options
+	    /. Options[MatrixDecompositions, DivideBy];
+
+     dot = Dot
+	    /. options
+	    /. Options[MatrixDecompositions, Dot];
+
+     (* Solve *)
+      
      U = u;
      {m,n} = Dimensions[U];
      If[m != n, Message[MatrixDecompositions::NotSquare]; Return[]];
-
+      
      (* Initialize solution *)
      X = b;
+     {n,$trash} = Dimensions[X];
+     If[m != n, Message[MatrixDecompositions::WrongDimensions]; Return[]];
 
      (*
      Print["m = ", m];
      Print["n = ", n];
-     Print["N = ", N];
      *)
 
      For [j = m, j >= 2, j--,
 
        (* Print["j = ", ToString[j]]; *)
+
+       (* If zero diagonal, singular *)
+       If[ zeroTest[U[[j,j]]],
+	 Message[MatrixDecompositions::Singular];
+       ];
 
        (* Print["X- = ", Normal[X]]; *)
 
@@ -122,6 +151,11 @@ Begin[ "`Private`" ]
 
        (* Print["X+ = ", Normal[X]]; *)
 
+    ];
+
+    (* If zero diagonal, singular *)
+    If[ zeroTest[U[[1,1]]],
+      Message[MatrixDecompositions::Singular];
     ];
 
     X[[1]] /= U[[1,1]];
@@ -134,8 +168,26 @@ Begin[ "`Private`" ]
     Flatten[LowerTriangularSolve[l, Transpose[{b}], opts]];
 
   LowerTriangularSolve[l_, b_?MatrixQ, opts:OptionsPattern[{}]] := Module[
-     {options,
+     {options, zeroTest, pivoting, dot,
       L,X,m,n,j},
+
+     (* process options *)
+
+     options = Flatten[{opts}];
+
+     zeroTest = ZeroTest
+	    /. options
+	    /. Options[MatrixDecompositions, ZeroTest];
+
+     divideBy = DivideBy
+	    /. options
+	    /. Options[MatrixDecompositions, DivideBy];
+
+     dot = Dot
+	    /. options
+	    /. Options[MatrixDecompositions, Dot];
+
+     (* Solve *)
 
      L = l;
      {m,n} = Dimensions[L];
@@ -143,16 +195,22 @@ Begin[ "`Private`" ]
 
      (* Initialize solution *)
      X = b;
+     {n,$trash} = Dimensions[X];
+     If[m != n, Message[MatrixDecompositions::WrongDimensions]; Return[]];
 
      (*
      Print["m = ", m];
      Print["n = ", n];
-     Print["N = ", N];
      *)
 
      For [j = 1, j <= m - 1, j++,
 
        (* Print["j = ", ToString[j]]; *)
+
+       (* If zero diagonal, singular *)
+       If[ zeroTest[L[[j,j]]],
+	 Message[MatrixDecompositions::Singular];
+       ];
 
        (* Print["X- = ", Normal[X]]; *)
 
@@ -164,11 +222,51 @@ Begin[ "`Private`" ]
 
     ];
 
+    (* If zero diagonal, singular *)
+    If[ zeroTest[L[[m,m]]],
+      Message[MatrixDecompositions::Singular];
+    ];
+
     X[[m]] /= L[[m,m]];
 
     Return[X];
   ];
 
+  (* LU Inverse *)
+  (* 
+     L U inv[A] = P A inv[A] = P
+     U inv[A] = (L \ P)
+     inv[A] = U \ (L \ P)
+     
+  *)
+  
+  LUInverse[A_?MatrixQ] := Module[
+      {lu,p,l,u,id},
+
+      {m,n} = Dimensions[A];
+      id = IdentityMatrix[m];
+      If[m != n
+         , 
+         Message[MatrixDecompositions::NotSquare]; 
+         Return[id];
+      ];
+      
+      {lu, p} = LUDecompositionWithPartialPivoting[A];
+      {l, u} = GetLUMatrices[lu];
+
+      Return[
+        Check[
+          UpperTriangularSolve[u, LowerTriangularSolve[l, id[[p]]]]
+          ,
+          id
+          ,
+          MatrixDecompositions::Singular
+        ]
+      ];
+
+  ];
+
+  
   (* LU Decomposition with partial pivoting *)
   (* From Golub and Van Loan, p 112 *)
 

@@ -203,6 +203,68 @@ Module[
   x = LowerTriangularSolve[l, B];
   NCTest[Norm[l.x - B], 0, "MatrixDecompositions", k++];
 
+  (* Singular *)
+  A = {{1,1},{2,2}};
+  b = {1,2};
+
+  {lu, p} = LUDecompositionWithPartialPivoting[A];
+  {l1, u1} = GetLUMatrices[lu];
+  NCTest[Norm[l1.u1 - A[[p]]], 0, "MatrixDecompositions", k++];
+
+  (*
+  x = UpperTriangularSolve[u1, b];
+  NCTest[Norm[u1.x - b], 0, "MatrixDecompositions", k++];
+  *)
+
+  A = {{1,2},{2,1}};
+  B = LUInverse[A];
+  NCTest[Norm[A . B - IdentityMatrix[2]], 0, "MatrixDecompositions", k++];
+
+  B = LUInverse[A1];
+  NCTest[Norm[A1 . B - IdentityMatrix[3]], 0, "MatrixDecompositions", k++];
+
+  (* Inverse test *)
+  mMIN = 3;
+  mMAX = 30;
+  mINC = 10;
+
+  For[ m = mMIN, m <= mMAX, m += mINC,
+     range = 10;
+     A = RandomInteger[{-range,range}, {m,m}];
+
+     B = LUInverse[A];
+     NCTest[Norm[A . B - IdentityMatrix[m]], 0, "MatrixDecompositions", k++];
+
+     A = SparseArray[A];
+
+     B = LUInverse[A];
+     NCTest[Norm[A . B - IdentityMatrix[m]], 0, "MatrixDecompositions", k++];
+
+  ];
+
+  (* Inverse test *)
+  mMIN = 3;
+  mMAX = 30;
+  mINC = 10;
+
+  For[ m = mMIN, m <= mMAX, m += mINC,
+     range = 10;
+     A = RandomInteger[{-range,range}, {m,m}];
+
+     (* Reduce rank *)
+     A[[m]] = A[[m-2]] - A[[m-3]];
+
+     Check[B = LUInverse[A];
+           NCTest[NotSingular, True, "MatrixDecompositions", k++];
+           ,
+           NCTest[True, True, "MatrixDecompositions", k++];
+  	   ,
+	   MatrixDecompositions::Singular
+     ];
+
+     A = SparseArray[A];
+
+  ];
 
 ];
 
