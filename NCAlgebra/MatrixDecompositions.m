@@ -29,6 +29,15 @@ LUDecompositionWithPartialPivoting::usage="";
 Clear[LUDecompositionWithCompletePivoting];
 LUDecompositionWithCompletePivoting::usage="";
 
+Clear[UpperTriangularSolve];
+UpperTriangularSolve::usage="";
+
+Clear[LowerTriangularSolve];
+LowerTriangularSolve::usage="";
+
+MatrixDecompositions::NotSquare = "The input matrix is not SQUARE.";
+MatrixDecompositions::Singular = "The input matrix appears to be SINGULAR.";
+
 Clear[LDLDecomposition];
 LDLDecomposition::usage="";
 
@@ -80,6 +89,86 @@ Begin[ "`Private`" ]
 
   ];
 
+  (* Upper triangular solve (Back substitution) *)
+  UpperTriangularSolve[u_, b_?VectorQ, opts:OptionsPattern[{}]] :=
+    Flatten[UpperTriangularSolve[u, Transpose[{b}], opts]];
+
+  UpperTriangularSolve[u_, b_?MatrixQ, opts:OptionsPattern[{}]] := Module[
+     {options,
+      U,X,m,n,j},
+
+     U = u;
+     {m,n} = Dimensions[U];
+     If[m != n, Message[MatrixDecompositions::NotSquare]; Return[]];
+
+     (* Initialize solution *)
+     X = b;
+
+     (*
+     Print["m = ", m];
+     Print["n = ", n];
+     Print["N = ", N];
+     *)
+
+     For [j = m, j >= 2, j--,
+
+       (* Print["j = ", ToString[j]]; *)
+
+       (* Print["X- = ", Normal[X]]; *)
+
+       (* Update matrix *)
+       X[[j]] /= U[[j,j]];
+       X[[1;;j-1]] -= U[[1;;j-1,{j}]] . {X[[j]]};
+
+       (* Print["X+ = ", Normal[X]]; *)
+
+    ];
+
+    X[[1]] /= U[[1,1]];
+
+    Return[X];
+  ];
+
+  (* Lower triangular solve (Back substitution) *)
+  LowerTriangularSolve[l_, b_?VectorQ, opts:OptionsPattern[{}]] :=
+    Flatten[LowerTriangularSolve[l, Transpose[{b}], opts]];
+
+  LowerTriangularSolve[l_, b_?MatrixQ, opts:OptionsPattern[{}]] := Module[
+     {options,
+      L,X,m,n,j},
+
+     L = l;
+     {m,n} = Dimensions[L];
+     If[m != n, Message[MatrixDecompositions::NotSquare]; Return[]];
+
+     (* Initialize solution *)
+     X = b;
+
+     (*
+     Print["m = ", m];
+     Print["n = ", n];
+     Print["N = ", N];
+     *)
+
+     For [j = 1, j <= m - 1, j++,
+
+       (* Print["j = ", ToString[j]]; *)
+
+       (* Print["X- = ", Normal[X]]; *)
+
+       (* Update matrix *)
+       X[[j]] /= L[[j,j]];
+       X[[j+1;;m]] -= L[[j+1;;m,{j}]] . {X[[j]]};
+
+       (* Print["X+ = ", Normal[X]]; *)
+
+    ];
+
+    X[[m]] /= L[[m,m]];
+
+    Return[X];
+  ];
+
   (* LU Decomposition with partial pivoting *)
   (* From Golub and Van Loan, p 112 *)
 
@@ -107,7 +196,8 @@ Begin[ "`Private`" ]
 
   ];
 
-  LUDecompositionWithPartialPivoting[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
+  LUDecompositionWithPartialPivoting[AA_?MatrixQ, 
+                                     opts:OptionsPattern[{}]] := 
   Module[
     {options, zeroTest, pivoting, dot,
      A, m, n, p, k, N, mu, lambda},
