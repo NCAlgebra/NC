@@ -10,11 +10,71 @@ Module[
   (* All answers should be zero or small *)
 
   A1 = {{3, 17, 10}, {2, 4, -2}, {6, 18, -12}};
+  l = {{1, 0, 0}, {1/2, 1, 0}, {1/3, -1/4, 1}};
+  u = {{6, 18, -12}, {0, 8, 16}, {0, 0, 6}};
+
   A2 = A1;
   A2[[3]] = A2[[1]] - A2[[2]];
   A3 = Join[A1, {{1}, {3}, {4}}, 2];
   A4 = A1[[All,{1,2}]];
   A5 = SparseArray[A1];
+
+  (* Partial Pivoting *)
+  NCTest[LUPartialPivoting[A1[[All,1]]], 3, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A1[[All,2]]], 3, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A1[[All,3]]], 3, "MatrixDecompositions", k++];
+
+  NCTest[LUPartialPivoting[A1[[1]]], 2, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A1[[2]]], 2, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A1[[3]]], 2, "MatrixDecompositions", k++];
+
+  NCTest[LUPartialPivoting[A5[[All,1]]], 3, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A5[[All,2]]], 3, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A5[[All,3]]], 3, "MatrixDecompositions", k++];
+
+  NCTest[LUPartialPivoting[A5[[1]]], 2, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A5[[2]]], 2, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A5[[3]]], 2, "MatrixDecompositions", k++];
+
+  NCTest[LUPartialPivoting[A1], 3, "MatrixDecompositions", k++];
+  NCTest[LUPartialPivoting[A5], 3, "MatrixDecompositions", k++];
+
+  (* Complete Pivoting *)
+  NCTest[LUCompletePivoting[A1], {3,2}, "MatrixDecompositions", k++];
+  NCTest[LUCompletePivoting[A1[[1;;2,2;;3]]], {1,1}, "MatrixDecompositions", k++];
+  NCTest[LUCompletePivoting[A1[[2;;3,1;;2]]], {2,2}, "MatrixDecompositions", k++];
+
+  NCTest[LUCompletePivoting[A5], {3,2}, "MatrixDecompositions", k++];
+  NCTest[LUCompletePivoting[A5[[1;;2,2;;3]]], {1,1}, "MatrixDecompositions", k++];
+  NCTest[LUCompletePivoting[A5[[2;;3,1;;2]]], {2,2}, "MatrixDecompositions", k++];
+
+  NCTest[LUCompletePivoting[A1], {3,2}, "MatrixDecompositions", k++];
+  NCTest[LUCompletePivoting[A5], {3,2}, "MatrixDecompositions", k++];
+
+  (* LU with partial pivoting *)
+  {lu, p} = LUDecompositionWithPartialPivoting[A1];
+  {l1, u1} = GetLUMatrices[lu];
+  NCTest[Normal[l1.u1], A1[[p]], "MatrixDecompositions", k++];
+  NCTest[Norm[l1 - l], 0, "MatrixDecompositions", k++];
+  NCTest[Norm[u1 - u], 0, "MatrixDecompositions", k++];
+
+  {lu, p} = LUDecompositionWithPartialPivoting[A2];
+  {l1, u1} = GetLUMatrices[lu];
+  NCTest[Normal[l1.u1], A2[[p]], "MatrixDecompositions", k++];
+
+  {lu, p} = LUDecompositionWithPartialPivoting[A3];
+  {l1, u1} = GetLUMatrices[lu];
+  NCTest[Normal[l1.u1], A3[[p]], "MatrixDecompositions", k++];
+
+  {lu, p} = LUDecompositionWithPartialPivoting[A4];
+  {l1, u1} = GetLUMatrices[lu];
+  NCTest[Normal[l1.u1], A4[[p]], "MatrixDecompositions", k++];
+
+  {lu, p} = LUDecompositionWithPartialPivoting[A5];
+  {l1, u1} = GetLUMatrices[lu];
+  NCTest[Normal[l1.u1], Normal[A5[[p]]], "MatrixDecompositions", k++];
+
+  (* LU with complete pivoting *)
 
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A1];
   {l1, u1} = GetLUMatrices[lu];
@@ -51,89 +111,33 @@ Module[
 
   For[m = mMIN, m <= mMAX, m += mINC,
       For[n = nMIN, n <= mMAX, n += nINC,
+
           range = 10;
           A = RandomInteger[{-range,range}, {m,n}];
+
+          {lu, p} = LUDecompositionWithPartialPivoting[A];
+          {l, u} = GetLUMatrices[lu];
+	  NCTest[Norm[l.u - A[[p]]], 0, "MatrixDecompositions", k++];
 
           {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
           {l, u} = GetLUMatrices[lu];
 	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
-          (*
-            Print["A(", m, ",", n, "),\trank = ", rank, 
-                  "\tres = ", Norm[l.u - A[[p, q]]]
-            ];
-          *)
-      ];
-  ];
 
-  (* Full rank test (sparse) *)
-  mMIN = nMIN = 3;
-  mMAX = nMAX = 30;
-  mINC = nINC = 10;
+          A = SparseArray[A];
 
-  For[ m = mMIN, m <= mMAX, m += mINC,
-      For[ n = nMIN, n <= nMAX, n += nINC,
-
-          range = 10;
-          A = SparseArray[RandomInteger[{-range,range}, {m,n}]];
+          {lu, p} = LUDecompositionWithPartialPivoting[A];
+          {l, u} = GetLUMatrices[lu];
+	  NCTest[Norm[l.u - A[[p]]], 0, "MatrixDecompositions", k++];
 
           {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
           {l, u} = GetLUMatrices[lu];
 	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
 	  NCTest[rank, Min[m,n], "MatrixDecompositions", k++];
-          (* Print["A(", m, ",", n, "),\trank = ", rank, "\tres = ", Norm[l.u - A[[p, q]]]]; *)
-      ];
-  ];
 
-  (* Full rank test (full) *)
-  mMIN = nMIN = 3;
-  mMAX = nMAX = 30;
-  mINC = nINC = 10;
-
-  For[ m = mMIN, m <= mMAX, m += mINC,
-      For[ n = nMIN, n <= nMAX, n += nINC,
-
-          range = 10;
-          A = RandomInteger[{-range,range}, {m,n}];
-
-          {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
-          {l, u} = GetLUMatrices[lu];
-	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
-	  NCTest[rank, Min[m,n], "MatrixDecompositions", k++];
-          (* Print["A(", m, ",", n, "),\trank = ", rank, "\tres = ", Norm[l.u - A[[p, q]]]]; *)
       ];
   ];
 
   (* Low rank test (sparse) *)
-  mMIN = nMIN = 4;
-  mMAX = nMAX = 30;
-  mINC = nINC = 10;
-
-  For[ m = mMIN, m <= mMAX, m += mINC,
-      For[ n = nMIN, n <= nMAX, n += nINC,
- 
-          range = 10;
- 	  A = SparseArray[RandomInteger[{-range,range}, {m,n}]];
-
-          (* Reduce rank *)
-          If [n >= m
-	     , 
-             A[[m]] = A[[m-2]] - A[[m-3]];
-    	     A[[m-1]] = A[[m-2]] + A[[m-3]];
-	     ,
-             A[[All,n]] = A[[All,n-2]] - A[[All,n-3]];
-    	     A[[All,n-1]] = A[[All,n-2]] + A[[All,n-3]];
-          ];
-
-    	  {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
-    	  {l, u} = GetLUMatrices[lu];
-	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
-	  NCTest[rank, Min[m,n] - 2, "MatrixDecompositions", k++];
-          (* Print["A(", m, ",", n, "), \trank = ", rank, \
-                   "\tres = ", Norm[l.u - A[[p, q]]] ]; *)
-      ];
-  ];
-
-  (* Low rank test (full) *)
   mMIN = nMIN = 4;
   mMAX = nMAX = 30;
   mINC = nINC = 10;
@@ -154,12 +158,26 @@ Module[
     	     A[[All,n-1]] = A[[All,n-2]] + A[[All,n-3]];
           ];
 
+          {lu, p} = LUDecompositionWithPartialPivoting[A];
+          {l, u} = GetLUMatrices[lu];
+	  NCTest[Norm[l.u - A[[p]]], 0, "MatrixDecompositions", k++];
+
     	  {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
     	  {l, u} = GetLUMatrices[lu];
 	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
 	  NCTest[rank, Min[m,n] - 2, "MatrixDecompositions", k++];
-          (* Print["A(", m, ",", n, "), \trank = ", rank, \
-                   "\tres = ", Norm[l.u - A[[p, q]]] ]; *)
+
+ 	  A = SparseArray[A];
+
+          {lu, p} = LUDecompositionWithPartialPivoting[A];
+          {l, u} = GetLUMatrices[lu];
+	  NCTest[Norm[l.u - A[[p]]], 0, "MatrixDecompositions", k++];
+
+    	  {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
+    	  {l, u} = GetLUMatrices[lu];
+	  NCTest[Norm[l.u - A[[p, q]]], 0, "MatrixDecompositions", k++];
+	  NCTest[rank, Min[m,n] - 2, "MatrixDecompositions", k++];
+
       ];
   ];
 

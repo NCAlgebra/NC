@@ -77,8 +77,6 @@ Begin[ "`Private`" ]
   (*  Set all varibles to be commutative by default.                  *)
   (* ---------------------------------------------------------------- *)
 
-  Global`$NC$ForceCommutativeAllQ=True; (* Mark Stankus's choice *)
-
   CommutativeQ[_Symbol] = True;
   CommutativeQ[_Integer] = True;
   CommutativeQ[_Real] = True;
@@ -91,12 +89,22 @@ Begin[ "`Private`" ]
   CommutativeQ[BlankSequence] = False;
   CommutativeQ[BlankNullSequence] = False;
 
-  If[Global`$NC$ForceCommutativeAllQ===True
-    , CommutativeQ[f_[x___]] := 
-        If[CommutativeQ[f], Apply[And, Map[CommutativeQ,{x}]]
-                          , False
-        ];
-  ];
+  (* MAURICIO MAR 2016 *)
+  (* This rule assumes functions are noncommutative 
+     which basically makes all patterns work *)
+  (*
+    Global`$NC$ForceCommutativeAllQ=True; (* Mark Stankus's choice *)
+    If[Global`$NC$ForceCommutativeAllQ===True
+      , CommutativeQ[f_[x___]] := 
+          If[CommutativeQ[f], Apply[And, Map[CommutativeQ,{x}]]
+                            , False
+          ];
+    ];
+  *)
+  CommutativeQ[f_?CommutativeQ[x___]] := Apply[And, Map[CommutativeQ,{x}]];
+  CommutativeQ[f_[x___]] := False;
+
+  (* Everything else is commutative *)
   CommutativeQ[_] = True;
 
   (* ---------------------------------------------------------------- *)
@@ -135,17 +143,17 @@ Begin[ "`Private`" ]
   (* -------------------------------------------- *)
                         
   (* Flatten *)
-  HoldPattern[NonCommutativeMultiply[a___, NonCommutativeMultiply[b__], c___]] :=
+  NonCommutativeMultiply[a___, NonCommutativeMultiply[b__], c___] :=
     NonCommutativeMultiply[a, b, c];
 
   (* Pull out commutative factors *)
-  HoldPattern[NonCommutativeMultiply[a___, b_ c_, d___]] :=
-    b NonCommutativeMultiply[a, c, d] /; CommutativeQ[b]
-  HoldPattern[NonCommutativeMultiply[a___, b_, c___]] :=
-    b NonCommutativeMultiply[a, c] /; CommutativeQ[b]
-
+  NonCommutativeMultiply[a___, b_?CommutativeQ c_, d___] :=
+    b NonCommutativeMultiply[a, c, d];
+  NonCommutativeMultiply[a___, b_?CommutativeQ, c___] :=
+    b NonCommutativeMultiply[a, c]; 
+                        
   (* Identity *)
-  HoldPattern[NonCommutativeMultiply[a_]] := a;
+  NonCommutativeMultiply[a_] := a;
   NonCommutativeMultiply[] := 1;
                         
   (* ---------------------------------------------------------------- *)
@@ -189,5 +197,3 @@ Begin[ "`Private`" ]
 End[]
 
 EndPackage[]
-
-

@@ -15,11 +15,16 @@
 BeginPackage[ "MatrixDecompositions`" ];
 
 Options[MatrixDecompositions] = {
-  ZeroTest -> PossibleZeroQ
+  ZeroTest -> PossibleZeroQ,
+  DivideBy -> DivideBy,
+  Dot -> Dot
 };
 
 Clear[GetLUMatrices];
 GetLUMatrices::usage="";
+
+Clear[LUDecompositionWithPartialPivoting];
+LUDecompositionWithPartialPivoting::usage="";
 
 Clear[LUDecompositionWithCompletePivoting];
 LUDecompositionWithCompletePivoting::usage="";
@@ -27,315 +32,437 @@ LUDecompositionWithCompletePivoting::usage="";
 Clear[LDLDecomposition];
 LDLDecomposition::usage="";
 
+Options[LUDecompositionWithPartialPivoting] = {
+  Pivoting -> LUPartialPivoting
+};
+
 Options[LUDecompositionWithCompletePivoting] = {
-  ZeroTest -> PossibleZeroQ,
-  Pivoting -> LUCompletePivoting,
-  DivideBy -> DivideBy,
-  Dot -> Dot
+  Pivoting -> LUCompletePivoting
 };
 
 Begin[ "`Private`" ]
 
-GetLUMatrices[ldu_, p_, q_, rank_] := Module[
-  {l,u},
+  (* Get LU Matrices *)
 
-  (* Extract L and U factor *)
-  {l,u} = GetLUMatrices[ldu];
+  GetLUMatrices[ldu_, p_, q_, rank_] := Module[
+    {l,u},
 
-  (* Perform permutations and truncate to rank *)
-  l = l[[All, 1;;rank]];
-  l[[p,All]] = l;
-  u = u[[1;;rank, All]];
-  u[[All,q]] = u;
+    (* Extract L and U factor *)
+    {l,u} = GetLUMatrices[ldu];
 
-  Return[{l,u}];
-];
+    (* Perform permutations and truncate to rank *)
+    l = l[[All, 1;;rank]];
+    l[[p,All]] = l;
+    u = u[[1;;rank, All]];
+    u[[All,q]] = u;
 
-GetLUMatrices[ldu_] := Module[
-  {n,m,mats},
-  {m,n} = Dimensions[ldu];
-
-  mats = If[n >= m, 
-    {
-      ldu[[1;;m,1;;m]] SparseArray[{i_,j_} /; j < i -> 1, {m,m}] 
-         + SparseArray[{i_,i_} -> 1, {m,m}],
-      ldu SparseArray[{i_,j_} /; j >= i -> 1, {m,n}]
-    },
-    {
-      ldu SparseArray[{i_,j_} /; j < i -> 1, {m,n}]
-         + SparseArray[{i_,i_} -> 1, {m,n}],
-      ldu[[1;;n,1;;n]] SparseArray[{i_,j_} /; j >= i -> 1, {n,n}]
-    }
+    Return[{l,u}];
   ];
 
-  Return[mats];
+  GetLUMatrices[ldu_] := Module[
+    {n,m,mats},
+    {m,n} = Dimensions[ldu];
 
-];
+    mats = If[n >= m, 
+      {
+	ldu[[1;;m,1;;m]] SparseArray[{i_,j_} /; j < i -> 1, {m,m}] 
+	   + SparseArray[{i_,i_} -> 1, {m,m}],
+	ldu SparseArray[{i_,j_} /; j >= i -> 1, {m,n}]
+      },
+      {
+	ldu SparseArray[{i_,j_} /; j < i -> 1, {m,n}]
+	   + SparseArray[{i_,i_} -> 1, {m,n}],
+	ldu[[1;;n,1;;n]] SparseArray[{i_,j_} /; j >= i -> 1, {n,n}]
+      }
+    ];
 
-(* LU Decomposition with complete pivoting *)
-(* From Golub and Van Loan, p 118 *)
-
-Clear[LUCompletePivoting];
-
-LUCompletePivoting[A_SparseArray] := Module[
-  {rules, maxElement},
-
-   (* Get rules *)
-   rules = ArrayRules[A];
-
-   (* Pick largest *)
-   maxElement = Part[Ordering[rules, 1, (Abs[#1[[2]]] > Abs[#2[[2]]]) &], 1];
-
-   (* Return (1,1) element if matrix is zero *)
-   If[ maxElement == Length[rules],
-      Return[{1,1}]
-     ,
-      Return[Part[rules[[maxElement]], 1]]
-   ]
-
-];
-
-LUCompletePivoting[A_?MatrixQ] := Module[
-  {maxCol, maxRow},
-  
-  maxCol = Flatten[Map[Ordering[Abs[#],-1]&, A]];
-  maxRow = Part[Ordering[Abs[Apply[Part[A,##]&, MapIndexed[{Part[#2,1],#1}&, maxCol], 2]],-1],1];
-
-  Return[{maxRow, maxCol[[maxRow]]}];
-
-];
-
-LUDecompositionWithCompletePivoting[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
-Module[
-  {options, zeroTest, pivoting, dot,
-   A, m, n, rank, p, q, k, N, mu, lambda},
-
-   (* process options *)
-
-   options = Flatten[{opts}];
-
-   zeroTest = ZeroTest
-          /. options
-	  /. Options[LUDecompositionWithCompletePivoting, ZeroTest];
-
-   pivoting = Pivoting
-          /. options
-	  /. Options[LUDecompositionWithCompletePivoting, Pivoting];
-    
-   divideBy = DivideBy
-          /. options
-	  /. Options[LUDecompositionWithCompletePivoting, DivideBy];
-
-   dot = Dot
-          /. options
-	  /. Options[LUDecompositionWithCompletePivoting, Dot];
-    
-   (* start algorithm *)
-
-   A = AA;
-   {m,n} = Dimensions[A];
-   rank = Min[n,m];
-   p = Range[m];
-   q = Range[n];
-   N = If[n >= m, rank - 1, rank];
-
-   (*
-   Print["m = ", m];
-   Print["n = ", n];
-   Print["N = ", N];
-   *)
-    
-   For [k = 1, k <= N, k++,
-
-     (* Print["k = ", ToString[k]]; *)
-        
-     (* Find max pivot *)
-     {mu, lambda} = pivoting[ A[[k ;; m, k ;; n]] ] + k - 1;
-
-     (* Print["mu = ", mu, "\nlambda = ", lambda]; *)
-
-     (* Interchange rows *)
-     A[[{k,mu}, All]] = A[[{mu,k}, All]];
-
-     (* Interchange columns *)
-     A[[All, {k,lambda}]] = A[[All, {lambda,k}]];
-
-     (* Store permutations *)
-     p[[{k,mu}]] = p[[{mu,k}]];
-     q[[{k,lambda}]] = q[[{lambda,k}]];
-
-     (* Print["p = ", p, "\nq = ", q]; *)
-
-     (* If zero pivot, terminate *)
-     If[ zeroTest[A[[k,k]]],
-       rank = k - 1;
-       Break[];
-     ];
-
-     (* Print["A- = ", Normal[A]]; *)
-
-     (* Update matrix *)
-     If [divideBy === DivideBy
-         ,
-         A[[k+1 ;; m, k]] /= A[[k,k]];
-         ,
-         A[[k+1 ;; m, k]] = divideBy[ A[[k+1 ;; m, k]], A[[k,k]] ];
-     ];
-
-     If [k < n
-         ,
-         A[[k+1 ;; m, k+1 ;; n]] -= 
-            dot[A[[k+1 ;; m, {k}]], A[[{k}, k+1 ;; n]]];
-     ];
-
-     (* Print["A+ = ", Normal[A]]; *)
+    Return[mats];
 
   ];
 
-  (* Print["k = ", ToString[k]]; *)
-    
-  If[ k > N && n >= m && zeroTest[A[[k,k]]],
-     rank--;
+  (* LU Decomposition with partial pivoting *)
+  (* From Golub and Van Loan, p 112 *)
+
+  Clear[LUPartialPivoting];
+
+  LUPartialPivoting[v_?MatrixQ, f_:Abs] := LUPartialPivoting[v[[All,1]], f];
+
+  LUPartialPivoting[v_List, f_:Abs] := Part[Ordering[f[v],-1], 1];
+
+  LUPartialPivoting[v_SparseArray, f_:Abs] := Module[
+    {rules, maxElement},
+
+     (* Get rules *)
+     rules = ArrayRules[v];
+
+     (* Pick largest *)
+     maxElement = LUPartialPivoting[rules[[All,2]], f];
+
+     (* Return (1,1) element if matrix is zero *)
+     If[ maxElement == Length[rules],
+	1
+       ,
+	Part[rules[[maxElement]], 1, 1]
+     ]
+
   ];
 
-  Return[{A, p, q, rank}];
+  LUDecompositionWithPartialPivoting[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
+  Module[
+    {options, zeroTest, pivoting, dot,
+     A, m, n, p, k, N, mu, lambda},
 
-];
+     (* process options *)
 
-(* LU Decomposition with Bunch-Parlett pivoting *)
-(* From Golub and Van Loan, p 168 *)
+     options = Flatten[{opts}];
 
-LDLDecomposition[AA_?SymmetricMatrixQ, opts:OptionsPattern[{}]] := 
-Module[
-  {options, zeroTest,
-   A, E, m, rank, p, k, s, i, j, l, mu0, mu1, alpha = N[(1+Sqrt[17])/8]},
+     zeroTest = ZeroTest
+	    /. options
+	    /. Options[MatrixDecompositions, ZeroTest];
 
-   (* process options *)
+     pivoting = Pivoting
+	    /. options
+	    /. Options[LUDecompositionWithPartialPivoting, Pivoting];
 
-   options = Flatten[{opts}];
+     divideBy = DivideBy
+	    /. options
+	    /. Options[MatrixDecompositions, DivideBy];
 
-   zeroTest = ZeroTest
-          /. options
-	  /. Options[MatrixDecompositions, ZeroTest];
+     dot = Dot
+	    /. options
+	    /. Options[MatrixDecompositions, Dot];
 
+     (* start algorithm *)
 
-   (* start algorithm *)
+     A = AA;
+     {m,n} = Dimensions[A];
+     rank = Min[n,m];
+     p = Range[m];
+     q = Range[n];
+     N = If[n >= m, rank - 1, rank];
 
-   A = AA;
-   {m,m} = Dimensions[A];
-   rank = m;
-   p = Range[m];
-   s = {};
-   For [k = 1, k <= m - 1, k++,
+     (*
+     Print["m = ", m];
+     Print["n = ", n];
+     Print["N = ", N];
+     *)
 
-     Print["k = ", k];
+     For [k = 1, k <= N, k++,
 
-     (* Bunch-Parlett pivot strategy *)
-     {i, j} = LUCompletePivoting[ A[[k ;; m, k ;; m]] ];
-     l = Max[Map[Abs, Diagonal[  A[[k ;; m, k ;; m]] ]]];
+       (* Print["k = ", ToString[k]]; *)
 
-     mu0 = A[[i + k - 1, j + k - 1]];
-     mu1 = A[[l + k - 1, l + k - 1]];
+       (* Pivot *)
+       mu = pivoting[ A[[k ;; m, k]] ] + k - 1;
 
-     Print["i = ", i];
-     Print["j = ", j];
-     Print["l = ", l];
-     Print["mu0 = ", mu0];
-     Print["mu1 = ", mu1];
-     Print["alpha mu0 = ", alpha mu0];
-
-     If[ mu1 >= alpha mu0,
-
-       (* P1 => s = 1 and |e11| = mu1 *)
-
-       AppendTo[s, 1];
-
-       Print["s = ", s];
+       (* Print["mu = ", mu]; *)
 
        (* Interchange rows *)
-       A[[{k,l}, All]] = A[[{l,k}, All]];
-
-       (* Interchange columns *)
-       A[[All, {k,l}]] = A[[All, {l,k}]];
+       A[[{k,mu}, All]] = A[[{mu,k}, All]];
 
        (* Store permutations *)
-       p[[{k,l}]] = p[[{l,k}]];
+       p[[{k,mu}]] = p[[{mu,k}]];
 
-       Print["p = ", p];
+       (* Print["p = ", p]; *)
+
+       (* If zero pivot, skip *)
+       If[ zeroTest[A[[k,k]]],
+	 Continue[];
+       ];
+
+       (* Print["A- = ", Normal[A]]; *)
+
+       (* Update matrix *)
+       If [divideBy === DivideBy
+	   ,
+	   A[[k+1 ;; m, k]] /= A[[k,k]];
+	   ,
+	   A[[k+1 ;; m, k]] = divideBy[ A[[k+1 ;; m, k]], A[[k,k]] ];
+       ];
+
+       If [k < n
+	   ,
+	   A[[k+1 ;; m, k+1 ;; n]] -= 
+	      dot[A[[k+1 ;; m, {k}]], A[[{k}, k+1 ;; n]]];
+       ];
+
+       (* Print["A+ = ", Normal[A]]; *)
+
+    ];
+
+    (* Print["k = ", ToString[k]]; *)
+
+    Return[{A, p}];
+
+  ];
+
+
+  (* LU Decomposition with complete pivoting *)
+  (* From Golub and Van Loan, p 118 *)
+
+  Clear[LUCompletePivoting];
+
+  LUCompletePivoting[A_?MatrixQ, f_:Abs] := Module[
+    {maxCol, maxRow},
+
+    maxCol = Flatten[Map[LUPartialPivoting[#, f]&, A]];
+    maxRow = LUPartialPivoting[
+                Apply[Part[A,##]&, MapIndexed[{Part[#2,1],#1}&, maxCol], 2]
+                , f];
+
+    Return[{maxRow, maxCol[[maxRow]]}];
+
+  ];
+
+  LUCompletePivoting[A_SparseArray, f_:Abs] := Module[
+    {rules, maxElement},
+
+     (* Get rules *)
+     rules = ArrayRules[A];
+
+     (* Pick largest *)
+     maxElement = LUPartialPivoting[rules[[All,2]], f];
+
+     (* Return (1,1) element if matrix is zero *)
+     If[ maxElement == Length[rules],
+	{1,1}
+       ,
+	Part[rules[[maxElement]], 1]
+     ]
+
+  ];
+
+  LUDecompositionWithCompletePivoting[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
+  Module[
+    {options, zeroTest, pivoting, dot,
+     A, m, n, rank, p, q, k, N, mu, lambda},
+
+     (* process options *)
+
+     options = Flatten[{opts}];
+
+     zeroTest = ZeroTest
+	    /. options
+	    /. Options[MatrixDecompositions, ZeroTest];
+
+     pivoting = Pivoting
+	    /. options
+	    /. Options[LUDecompositionWithCompletePivoting, Pivoting];
+
+     divideBy = DivideBy
+	    /. options
+	    /. Options[MatrixDecompositions, DivideBy];
+
+     dot = Dot
+	    /. options
+	    /. Options[MatrixDecompositions, Dot];
+
+     (* start algorithm *)
+
+     A = AA;
+     {m,n} = Dimensions[A];
+     rank = Min[n,m];
+     p = Range[m];
+     q = Range[n];
+     N = If[n >= m, rank - 1, rank];
+
+     (*
+     Print["m = ", m];
+     Print["n = ", n];
+     Print["N = ", N];
+     *)
+
+     For [k = 1, k <= N, k++,
+
+       (* Print["k = ", ToString[k]]; *)
+
+       (* Pivot *)
+       {mu, lambda} = pivoting[ A[[k ;; m, k ;; n]] ] + k - 1;
+
+       (* Print["mu = ", mu, "\nlambda = ", lambda]; *)
+
+       (* Interchange rows *)
+       A[[{k,mu}, All]] = A[[{mu,k}, All]];
+
+       (* Interchange columns *)
+       A[[All, {k,lambda}]] = A[[All, {lambda,k}]];
+
+       (* Store permutations *)
+       p[[{k,mu}]] = p[[{mu,k}]];
+       q[[{k,lambda}]] = q[[{lambda,k}]];
+
+       (* Print["p = ", p, "\nq = ", q]; *)
 
        (* If zero pivot, terminate *)
        If[ zeroTest[A[[k,k]]],
-         rank = k - 1;
-         Break[];
+	 rank = k - 1;
+	 Break[];
        ];
 
-       (* Print["A- = ", MatrixForm[A]]; *)
+       (* Print["A- = ", Normal[A]]; *)
 
        (* Update matrix *)
-       A[[k+1 ;; m, k]] /= A[[k,k]];
-       A[[k+1 ;; m, k+1 ;; n]] -= A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; n]];
-
-       (* Print["A+ = ", MatrixForm[A]]; *)
-
-       ,
-
-       (* P1 => s = 2 and |e21| = mu0 *)
-
-       AppendTo[s, 2];
-
-       Print["s = ", s];
-
-       (* Interchange rows *)
-       A[[{k,i}, All]] = A[[{i,k}, All]];
-
-       (* Interchange columns *)
-       A[[All, {k,i}]] = A[[All, {i,k}]];
-
-       (* Interchange rows *)
-       A[[{k+1,j}, All]] = A[[{j,k+1}, All]];
-
-       (* Interchange columns *)
-       A[[All, {k+1,j}]] = A[[All, {j,k+1}]];
-
-       (* Store permutations *)
-       p[[{k,i}]] = p[[{i,k}]];
-       p[[{k+1,j}]] = p[[{j,k+1}]];
-
-       Print["p = ", p];
-
-       (* If zero pivot, terminate *)
-       If[ zeroTest[A[[k+1,k]]],
-         rank = k - 1;
-         Break[];
+       If [divideBy === DivideBy
+	   ,
+	   A[[k+1 ;; m, k]] /= A[[k,k]];
+	   ,
+	   A[[k+1 ;; m, k]] = divideBy[ A[[k+1 ;; m, k]], A[[k,k]] ];
        ];
 
-       Print["A- = ", MatrixForm[A]];
+       If [k < n
+	   ,
+	   A[[k+1 ;; m, k+1 ;; n]] -= 
+	      dot[A[[k+1 ;; m, {k}]], A[[{k}, k+1 ;; n]]];
+       ];
 
-       (* Update matrix *)
-       E = A[[ k ;; k + 1, k ;; k + 1]];
+       (* Print["A+ = ", Normal[A]]; *)
 
-       A[[ k + 2 ;; m, k ;; k + 1]] = A[[ k + 2 ;; m, k ;; k + 1 ]] . Inverse[E];
-       A[[ k + 2 ;; m, k + 2 ;; m]] -= A[[ k + 2;; m, k ;; k + 1 ]] . A[[ k ;; k + 1, k + 2 ;; m ]];
+    ];
 
-       A[[ k ;; k + 1, k + 2 ;; m]] = Transpose[A[[ k + 2;; m, k ;; k + 1 ]]];
+    (* Print["k = ", ToString[k]]; *)
 
-       Print["E = ", MatrixForm[E]];
-       Print["A+ = ", MatrixForm[A]];
+    If[ k > N && n >= m && zeroTest[A[[k,k]]],
+       rank--;
+    ];
 
-       (* Increment k *)
-       k++;
-
-     ];
+    Return[{A, p, q, rank}];
 
   ];
 
-  If[ k > m && zeroTest[A[[k,k]]],
-     rank--;
+
+  (* LU Decomposition with Bunch-Parlett pivoting *)
+  (* From Golub and Van Loan, p 168 *)
+
+  LDLDecomposition[AA_?SymmetricMatrixQ, opts:OptionsPattern[{}]] := 
+  Module[
+    {options, zeroTest,
+     A, E, m, rank, p, k, s, i, j, l, mu0, mu1, alpha = N[(1+Sqrt[17])/8]},
+
+     (* process options *)
+
+     options = Flatten[{opts}];
+
+     zeroTest = ZeroTest
+	    /. options
+	    /. Options[MatrixDecompositions, ZeroTest];
+
+
+     (* start algorithm *)
+
+     A = AA;
+     {m,m} = Dimensions[A];
+     rank = m;
+     p = Range[m];
+     s = {};
+     For [k = 1, k <= m - 1, k++,
+
+       Print["k = ", k];
+
+       (* Bunch-Parlett pivot strategy *)
+       {i, j} = LUCompletePivoting[ A[[k ;; m, k ;; m]] ];
+       l = Max[Map[Abs, Diagonal[  A[[k ;; m, k ;; m]] ]]];
+
+       mu0 = A[[i + k - 1, j + k - 1]];
+       mu1 = A[[l + k - 1, l + k - 1]];
+
+       Print["i = ", i];
+       Print["j = ", j];
+       Print["l = ", l];
+       Print["mu0 = ", mu0];
+       Print["mu1 = ", mu1];
+       Print["alpha mu0 = ", alpha mu0];
+
+       If[ mu1 >= alpha mu0,
+
+	 (* P1 => s = 1 and |e11| = mu1 *)
+
+	 AppendTo[s, 1];
+
+	 Print["s = ", s];
+
+	 (* Interchange rows *)
+	 A[[{k,l}, All]] = A[[{l,k}, All]];
+
+	 (* Interchange columns *)
+	 A[[All, {k,l}]] = A[[All, {l,k}]];
+
+	 (* Store permutations *)
+	 p[[{k,l}]] = p[[{l,k}]];
+
+	 Print["p = ", p];
+
+	 (* If zero pivot, terminate *)
+	 If[ zeroTest[A[[k,k]]],
+	   rank = k - 1;
+	   Break[];
+	 ];
+
+	 (* Print["A- = ", MatrixForm[A]]; *)
+
+	 (* Update matrix *)
+	 A[[k+1 ;; m, k]] /= A[[k,k]];
+	 A[[k+1 ;; m, k+1 ;; n]] -= A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; n]];
+
+	 (* Print["A+ = ", MatrixForm[A]]; *)
+
+	 ,
+
+	 (* P1 => s = 2 and |e21| = mu0 *)
+
+	 AppendTo[s, 2];
+
+	 Print["s = ", s];
+
+	 (* Interchange rows *)
+	 A[[{k,i}, All]] = A[[{i,k}, All]];
+
+	 (* Interchange columns *)
+	 A[[All, {k,i}]] = A[[All, {i,k}]];
+
+	 (* Interchange rows *)
+	 A[[{k+1,j}, All]] = A[[{j,k+1}, All]];
+
+	 (* Interchange columns *)
+	 A[[All, {k+1,j}]] = A[[All, {j,k+1}]];
+
+	 (* Store permutations *)
+	 p[[{k,i}]] = p[[{i,k}]];
+	 p[[{k+1,j}]] = p[[{j,k+1}]];
+
+	 Print["p = ", p];
+
+	 (* If zero pivot, terminate *)
+	 If[ zeroTest[A[[k+1,k]]],
+	   rank = k - 1;
+	   Break[];
+	 ];
+
+	 Print["A- = ", MatrixForm[A]];
+
+	 (* Update matrix *)
+	 E = A[[ k ;; k + 1, k ;; k + 1]];
+
+	 A[[ k + 2 ;; m, k ;; k + 1]] = A[[ k + 2 ;; m, k ;; k + 1 ]] . Inverse[E];
+	 A[[ k + 2 ;; m, k + 2 ;; m]] -= A[[ k + 2;; m, k ;; k + 1 ]] . A[[ k ;; k + 1, k + 2 ;; m ]];
+
+	 A[[ k ;; k + 1, k + 2 ;; m]] = Transpose[A[[ k + 2;; m, k ;; k + 1 ]]];
+
+	 Print["E = ", MatrixForm[E]];
+	 Print["A+ = ", MatrixForm[A]];
+
+	 (* Increment k *)
+	 k++;
+
+       ];
+
+    ];
+
+    If[ k > m && zeroTest[A[[k,k]]],
+       rank--;
+    ];
+
+    Return[{A, p, s, rank}];
+
   ];
-
-  Return[{A, p, s, rank}];
-
-];
 
 End[]
 

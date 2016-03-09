@@ -1,6 +1,6 @@
-(* :Title: 	MatrixDecompositions.m *)
+(* :Title: 	NCMatrixDecompositions.m *)
 
-(* :Authors: 	Mauricio C. de Oliveira and Burack Guven *)
+(* :Authors: 	Mauricio C. de Oliveira *)
 
 (* :Context: 	MatrixDecompositions` *)
 
@@ -17,6 +17,12 @@ BeginPackage[ "NCMatrixDecompositions`",
               "NCMatMult`",
               "NonCommutativeMultiply`"];
 
+Options[NCMatrixDecompositions] = {
+  ZeroTest -> PossibleZeroQ,
+  DivideBy -> NCDivideBy,
+  Dot -> MatMult
+};
+
 Clear[NCLUPartialPivoting];
 NCLUPartialPivoting::usage="";
 
@@ -29,40 +35,80 @@ NCDivideBy::usage="";
 Clear[NCLUDecompositionWithCompletePivoting];
 NCLUDecompositionWithCompletePivoting::usage="";
 
+Options[NCLUDecompositionWithPartialPivoting] = {
+  Pivoting -> NCLUPartialPivoting
+};
+
 Options[NCLUDecompositionWithCompletePivoting] = {
-  ZeroTest -> PossibleZeroQ,
-  Pivoting -> NCLUCompletePivoting,
-  DivideBy -> NCDivideBy,
-  Dot -> MatMult
+  Pivoting -> NCLUCompletePivoting
 };
 
 Begin[ "`Private`" ]
 
-  Clear[leafCount];
-  leafCount[0] := -Infinity;
-  leafCount[x_?NumberQ] := Abs[x];
-  leafCount[x_] := -LeafCount[x];
+  (* NC DivideBy *)
+  NCDivideBy[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
 
-  NCLUPartialPivoting[mat_?MatrixQ] := NCPartialPivoting[mat[[All,1]]];
-
-  NCPartialPivoting[vec_List] :=
-    Part[Ordering[Map[leafCount, vec], 1, Greater], 1];
+  (* NC leaf count *)
+  Clear[NCLeafCount];
+  NCLeafCount[x_List] := Map[NCLeafCount, x];
   
-  NCLUCompletePivoting[A_?MatrixQ] := Module[
+  NCLeafCount[0] := -Infinity;
+  NCLeafCount[x_?NumberQ] := Abs[x];
+  NCLeafCount[x_] := -LeafCount[x];
+
+  (* partial pivoting *)
+  NCLUPartialPivoting[mat_?MatrixQ, f_:NCLeafCount] := 
+    NCLUPartialPivoting[mat[[All,1]], f];
+
+  NCLUPartialPivoting[vec_List, f_:NCLeafCount] :=
+    Part[Ordering[f[vec], 1, Greater], 1];
+  
+  (* complete pivoting *)
+  NCLUCompletePivoting[A_?MatrixQ, f_:NCLeafCount] := Module[
     {minCol, minRow},
   
-    minCol = Flatten[Map[NCPartialPivoting, A]];
+    minCol = Flatten[Map[NCLUPartialPivoting[#,f]&, A]];
     (* Print[minCol]; *)
 
-    minRow = NCPartialPivoting[Apply[Part[A,##]&, 
-                                     MapIndexed[{Part[#2,1],#1}&, minCol], 2]];
+    minRow = NCLUPartialPivoting[Apply[Part[A,##]&, 
+                                       MapIndexed[{Part[#2,1],#1}&, minCol]
+                                       , 2], f];
     (* Print[minRow]; *)
 
     Return[{minRow, minCol[[minRow]]}];
 
   ];
   
-  NCDivideBy[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
+  NCLUDecompositionWithPartialPivoting[AA_?MatrixQ, 
+                                       opts:OptionsPattern[{}]] := Module[
+    {options},
+                                            
+    (* process options *)
+    options = Flatten[{opts}];
+
+    zeroTest = ZeroTest
+           /. options 
+           /. Options[NCMatrixDecompositions, ZeroTest];
+
+    pivoting = Pivoting
+           /. options
+ 	   /. Options[NCLUDecompositionWithPartialPivoting, Pivoting];
+    
+    divideBy = DivideBy
+           /. options
+  	   /. Options[NCMatrixDecompositions, DivideBy];
+
+    dot = Dot
+           /. options
+ 	   /. Options[NCMatrixDecompositions, Dot];
+
+    LUDecompositionWithPartialPivoting[AA, 
+                                       ZeroTest -> zeroTest, 
+                                       Pivoting -> pivoting,
+                                       DivideBy -> divideBy,
+                                       Dot -> dot]
+                                            
+ ]; 
 
   NCLUDecompositionWithCompletePivoting[AA_?MatrixQ, 
                                         opts:OptionsPattern[{}]] := Module[
@@ -73,7 +119,7 @@ Begin[ "`Private`" ]
 
     zeroTest = ZeroTest
            /. options 
-           /. Options[NCLUDecompositionWithCompletePivoting, ZeroTest];
+           /. Options[NCMatrixDecompositions, ZeroTest];
 
     pivoting = Pivoting
            /. options
@@ -81,13 +127,14 @@ Begin[ "`Private`" ]
     
     divideBy = DivideBy
            /. options
-  	   /. Options[NCLUDecompositionWithCompletePivoting, DivideBy];
+  	   /. Options[NCMatrixDecompositions, DivideBy];
 
     dot = Dot
            /. options
- 	   /. Options[NCLUDecompositionWithCompletePivoting, Dot];
+ 	   /. Options[NCMatrixDecompositions, Dot];
 
-    LUDecompositionWithCompletePivoting[AA, ZeroTest -> zeroTest, 
+    LUDecompositionWithCompletePivoting[AA, 
+                                        ZeroTest -> zeroTest, 
                                         Pivoting -> pivoting,
                                         DivideBy -> divideBy,
                                         Dot -> dot]
