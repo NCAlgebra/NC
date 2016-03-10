@@ -23,6 +23,9 @@ Options[MatrixDecompositions] = {
 Clear[GetLUMatrices];
 GetLUMatrices::usage="";
 
+Clear[GetLDLMatrices];
+GetLDLMatrices::usage="";
+
 Clear[LUDecompositionWithPartialPivoting];
 LUDecompositionWithPartialPivoting::usage = "\
 LUDecompositionWithPartialPivoting[m] generates a representation \
@@ -138,6 +141,28 @@ Begin[ "`Private`" ]
     ];
 
     Return[mats];
+
+  ];
+
+  
+  (* GetLDLMatrices *)
+  
+  GetLDLMatrices[ldl_, s_] := Module[
+    {n,m,mats,id,lm,dm,S},
+    {m,n} = Dimensions[ldl];
+
+    S = Accumulate[s];
+    S = Delete[S, Position[s, 1]];
+    id = SparseArray[{i_, i_} -> 1, {m, m}];
+    dm = SparseArray[
+           Thread[Transpose[{Join[S, S - 1], Join[S - 1, S]}] -> 1]
+           , 
+           {m, m}
+         ] + id;
+    lm = SparseArray[{i_, j_} /; j <= i -> 1, {m, m}] 
+         (SparseArray[{i_, j_} /; j <= i -> 1, {m, m}] - dm);
+
+    Return[{ldl lm + id, ldl dm}];
 
   ];
 
@@ -610,7 +635,7 @@ Begin[ "`Private`" ]
      (* start algorithm *)
 
      A = AA;
-     {m,m} = Dimensions[A];
+     {m,n} = Dimensions[A];
      rank = m;
      p = Range[m];
      s = {};
@@ -619,11 +644,11 @@ Begin[ "`Private`" ]
        Print["k = ", k];
 
        (* Bunch-Parlett pivot strategy *)
-       {i, j} = LUCompletePivoting[ A[[k ;; m, k ;; m]] ];
-       l = Max[Map[Abs, Diagonal[  A[[k ;; m, k ;; m]] ]]];
+       {i, j} = k - 1 + LUCompletePivoting[ A[[k ;; m, k ;; m]] ];
+       l = k - 1 + Ordering[Map[Abs, Diagonal[ A[[k ;; m, k ;; m]] ]], -1][[1]];
 
-       mu0 = A[[i + k - 1, j + k - 1]];
-       mu1 = A[[l + k - 1, l + k - 1]];
+       mu0 = A[[i, j]];
+       mu1 = A[[l, l]];
 
        Print["i = ", i];
        Print["j = ", j];
@@ -657,13 +682,17 @@ Begin[ "`Private`" ]
 	   Break[];
 	 ];
 
-	 (* Print["A- = ", MatrixForm[A]]; *)
+	 Print["A- = ", MatrixForm[A]];
 
 	 (* Update matrix *)
 	 A[[k+1 ;; m, k]] /= A[[k,k]];
-	 A[[k+1 ;; m, k+1 ;; n]] -= A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; n]];
+         A[[k+1 ;; m, k+1 ;; m]] -= A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; m]];
+	 A[[k, k+1 ;; m]] = A[[k+1 ;; m, k]];
+           
+         (* A[[k+1 ;; m, k+1 ;; m]] -= 
+             A[[k+1 ;; m, {k}]] . (A[[k,k]] * Transpose[A[[k+1 ;; m, {k}]]]); *)
 
-	 (* Print["A+ = ", MatrixForm[A]]; *)
+         Print["A+ = ", MatrixForm[A]];
 
 	 ,
 
@@ -697,10 +726,15 @@ Begin[ "`Private`" ]
 	   Break[];
 	 ];
 
+         (* If k = m - 1, terminate *)
+         If [k == m - 1,
+           Break[];
+         ];
+           
 	 Print["A- = ", MatrixForm[A]];
 
 	 (* Update matrix *)
-	 E = A[[ k ;; k + 1, k ;; k + 1]];
+	 E = A[[k ;; k + 1, k ;; k + 1]];
 
 	 A[[ k + 2 ;; m, k ;; k + 1]] = A[[ k + 2 ;; m, k ;; k + 1 ]] . Inverse[E];
 	 A[[ k + 2 ;; m, k + 2 ;; m]] -= A[[ k + 2;; m, k ;; k + 1 ]] . A[[ k ;; k + 1, k + 2 ;; m ]];
@@ -717,8 +751,13 @@ Begin[ "`Private`" ]
 
     ];
 
-    If[ k > m && zeroTest[A[[k,k]]],
-       rank--;
+    Print[k];
+      
+    If[ k == m,
+       AppendTo[s, 1];
+       If [zeroTest[A[[k,k]]],
+         rank--;
+       ];
     ];
 
     Return[{A, p, s, rank}];

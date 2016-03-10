@@ -280,4 +280,3 @@ Module[
   (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
 ];
-
