@@ -182,7 +182,7 @@ Module[
       ];
   ];
 
-  (* back substitution *)
+  (* back/forward substitution *)
   x = UpperTriangularSolve[u, b];
   NCTest[Norm[u.x - b], 0, "MatrixDecompositions", k++];
 
@@ -243,28 +243,48 @@ Module[
   ];
 
   (* Inverse test *)
-  mMIN = 3;
+  mMIN = 4;
   mMAX = 30;
   mINC = 10;
 
   For[ m = mMIN, m <= mMAX, m += mINC,
+
      range = 10;
      A = RandomInteger[{-range,range}, {m,m}];
 
      (* Reduce rank *)
      A[[m]] = A[[m-2]] - A[[m-3]];
 
-     Check[B = LUInverse[A];
-           NCTest[NotSingular, True, "MatrixDecompositions", k++];
-           ,
-           NCTest[True, True, "MatrixDecompositions", k++];
-  	   ,
-	   MatrixDecompositions::Singular
+     singular = False;
+     Quiet[
+       Check[B = LUInverse[A];
+             ,
+             singular = True;
+    	     ,
+             MatrixDecompositions::Singular
+       ];
+       ,
+       {MatrixDecompositions::Singular,
+        Divide::infy,Divide::indet,Infinity::indet}
      ];
+     NCTest[singular, True, "MatrixDecompositions", k++];
 
      A = SparseArray[A];
+
+     singular = False;
+     Quiet[
+       Check[B = LUInverse[A];
+             ,
+             singular = True;
+    	     ,
+             MatrixDecompositions::Singular
+       ];
+       ,
+       {MatrixDecompositions::Singular,
+        Divide::infy,Divide::indet,Infinity::indet}
+     ];
+     NCTest[singular, True, "MatrixDecompositions", k++];
 
   ];
 
 ];
-

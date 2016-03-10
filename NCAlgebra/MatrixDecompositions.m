@@ -24,10 +24,57 @@ Clear[GetLUMatrices];
 GetLUMatrices::usage="";
 
 Clear[LUDecompositionWithPartialPivoting];
-LUDecompositionWithPartialPivoting::usage="";
+LUDecompositionWithPartialPivoting::usage = "\
+LUDecompositionWithPartialPivoting[m] generates a representation \
+of the LU decomposition of the rectangular matrix m.
+LUDecompositionWithPartialPivoting[m, options] uses options.
 
+LUDecompositionWithPartialPivoting returns a list of two elements:
+\tthe first element is a combination of upper- and lower-triangular \
+matrices;
+\tthe second element is a vector specifying rows used for pivoting.
+
+LUDecompositionWithPartialPivoting is similar in functionality with \
+the built-in LUDecomposition. It implements a partial pivoting \
+strategy in which the sorting can be configured using the options listed \
+below. It also applies to general rectangular matrices as well as \
+square matrices.
+
+The following options can be given:
+\tZeroTest (PossibleZeroQ): function used to decide if a pivot is zero;
+\tDivideBy (DivideBy): function used to divide a vector by an entry;
+\tDot (Dot): function used to multiply vectors and matrices;
+\tPivoting (LUPartialPivoting): function used to sort rows for pivoting;
+    
+See also: LUDecomposition, GetLUMatrices, LUPartialPivoting, \
+LUDecompositionWithCompletePivoting";
+    
 Clear[LUDecompositionWithCompletePivoting];
-LUDecompositionWithCompletePivoting::usage="";
+LUDecompositionWithCompletePivoting::usage = "\
+LUDecompositionWithCompletePivoting[m] generates a representation \
+of the LU decomposition of the rectangular matrix m.
+LUDecompositionWithCompletePivoting[m, options] uses options.
+
+LUDecompositionWithCompletePivoting returns a list of four elements:
+\tthe first element is a combination of upper- and lower-triangular \
+matrices;
+\tthe second element is a vector specifying rows used for pivoting.
+\tthe third element is a vector specifying columns used for pivoting.
+\tthe fourth element is the rank of the matrix.
+
+LUDecompositionWithCompletePivoting implements a complete pivoting \
+strategy in which the sorting can be configured using the options listed \
+below. It also applies to general rectangular matrices as well as \
+square matrices.
+
+The following options can be given:
+\tZeroTest (PossibleZeroQ): function used to decide if a pivot is zero;
+\tDivideBy (DivideBy): function used to divide a vector by an entry;
+\tDot (Dot): function used to multiply vectors and matrices;
+\tPivoting (LUCompletePivoting): function used to sort rows for pivoting;
+    
+See also: LUDecomposition, GetLUMatrices, LUCompletePivoting, \
+LUDecompositionWithPartialPivoting";
 
 Clear[UpperTriangularSolve];
 UpperTriangularSolve::usage="";
@@ -146,8 +193,13 @@ Begin[ "`Private`" ]
        (* Print["X- = ", Normal[X]]; *)
 
        (* Update matrix *)
-       X[[j]] /= U[[j,j]];
-       X[[1;;j-1]] -= U[[1;;j-1,{j}]] . {X[[j]]};
+       If [divideBy === DivideBy
+           ,
+           X[[j]] /= U[[j,j]];
+           ,
+           X[[j]] = divideBy[ X[[j]], U[[j,j]] ];
+       ];
+       X[[1;;j-1]] -= dot[ U[[1;;j-1,{j}]], {X[[j]]} ];
 
        (* Print["X+ = ", Normal[X]]; *)
 
@@ -158,7 +210,12 @@ Begin[ "`Private`" ]
       Message[MatrixDecompositions::Singular];
     ];
 
-    X[[1]] /= U[[1,1]];
+    If [divideBy === DivideBy
+        ,
+        X[[1]] /= U[[1,1]];
+        ,
+        X[[1]] = divideBy[ X[[1]], U[[1,1]] ];
+    ];
 
     Return[X];
   ];
@@ -215,8 +272,13 @@ Begin[ "`Private`" ]
        (* Print["X- = ", Normal[X]]; *)
 
        (* Update matrix *)
-       X[[j]] /= L[[j,j]];
-       X[[j+1;;m]] -= L[[j+1;;m,{j}]] . {X[[j]]};
+       If [divideBy === DivideBy
+           ,
+           X[[j]] /= L[[j,j]];
+           ,
+           X[[j]] = divideBy[ X[[j]], L[[j,j]] ];
+       ];
+       X[[j+1;;m]] -= dot[ L[[j+1;;m,{j}]], {X[[j]]} ];
 
        (* Print["X+ = ", Normal[X]]; *)
 
@@ -227,7 +289,12 @@ Begin[ "`Private`" ]
       Message[MatrixDecompositions::Singular];
     ];
 
-    X[[m]] /= L[[m,m]];
+    If [divideBy === DivideBy
+        ,
+        X[[m]] /= L[[m,m]];
+        ,
+        X[[m]] = divideBy[ X[[m]], L[[m,m]] ];
+    ];
 
     Return[X];
   ];
@@ -235,34 +302,40 @@ Begin[ "`Private`" ]
   (* LU Inverse *)
   (* 
      L U inv[A] = P A inv[A] = P
-     U inv[A] = (L \ P)
      inv[A] = U \ (L \ P)
-     
   *)
   
-  LUInverse[A_?MatrixQ] := Module[
-      {lu,p,l,u,id},
+  LUInverse[A_?MatrixQ, opts:OptionsPattern[{}]] := Module[
+     {lu,p,l,u,id,m,n},
 
-      {m,n} = Dimensions[A];
-      id = IdentityMatrix[m];
-      If[m != n
-         , 
-         Message[MatrixDecompositions::NotSquare]; 
-         Return[id];
-      ];
+     (* Solve *)
+     {m,n} = Dimensions[A];
+     id = IdentityMatrix[m];
+     If[m != n
+        , 
+        Message[MatrixDecompositions::NotSquare]; 
+        Return[id];
+     ];
       
-      {lu, p} = LUDecompositionWithPartialPivoting[A];
-      {l, u} = GetLUMatrices[lu];
+     {lu, p} = LUDecompositionWithPartialPivoting[A, opts];
+     {l, u} = GetLUMatrices[lu];
 
-      Return[
-        Check[
-          UpperTriangularSolve[u, LowerTriangularSolve[l, id[[p]]]]
-          ,
-          id
-          ,
-          MatrixDecompositions::Singular
-        ]
-      ];
+     (*
+        Print["lu = ", Normal[lu]];
+        Print["l = ", Normal[l]];
+        Print["u = ", Normal[u]];
+     *)
+
+     Return[
+       Check[
+         UpperTriangularSolve[u, 
+            LowerTriangularSolve[l, id[[p]], opts], opts]
+         ,
+         id
+         ,
+         MatrixDecompositions::Singular
+       ]
+     ];
 
   ];
 
