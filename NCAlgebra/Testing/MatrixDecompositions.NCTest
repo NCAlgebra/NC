@@ -2,7 +2,7 @@
 
 Module[
   {k,A1,A2,A3,A4,A5,
-   l,d,u,p,q,rank,b,x,B,s,
+   l,d,u,p,q,rank,rA,b,x,B,s,lu,ldl,
    m,n,mMIN,mMAX,mINC,nMIN,nMAX,nINC,range,A},
 
   k = 1;
@@ -80,30 +80,29 @@ Module[
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A1];
   {l1, u1} = GetLUMatrices[lu];
   NCTest[Normal[l1.u1], A1[[p, q]], "MatrixDecompositions", k++];
-  NCTest[rank, 3, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A1], "MatrixDecompositions", k++];
 
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A2];
   {l, u} = GetLUMatrices[lu];
   NCTest[Normal[l.u], A2[[p, q]], "MatrixDecompositions", k++];
-  NCTest[rank, 2, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A2], "MatrixDecompositions", k++];
 
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A3];
   {l, u} = GetLUMatrices[lu];
   NCTest[Normal[l.u], A3[[p, q]], "MatrixDecompositions", k++];
-  NCTest[rank, 3, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A3], "MatrixDecompositions", k++];
 
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A4];
   {l, u} = GetLUMatrices[lu];
   NCTest[Normal[l.u], A4[[p, q]], "MatrixDecompositions", k++];
-  NCTest[rank, 2, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A4], "MatrixDecompositions", k++];
 
   {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A5];
   {l, u} = GetLUMatrices[lu];
   NCTest[Normal[l.u], Normal[A5[[p, q]]], "MatrixDecompositions", k++];
-  NCTest[rank, 3, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A5], "MatrixDecompositions", k++];
   NCTest[Normal[l], Normal[l1], "MatrixDecompositions", k++];
   NCTest[Normal[u], Normal[u1], "MatrixDecompositions", k++];
-  NCTest[rank, 3, "MatrixDecompositions", k++];
 
   (* Full rank test *)
   mMIN = nMIN = 3;
@@ -115,6 +114,7 @@ Module[
 
           range = 10;
           A = RandomInteger[{-range,range}, {m,n}];
+          rA = MatrixRank[A];
 
           {lu, p} = LUDecompositionWithPartialPivoting[A];
           {l1, u1} = GetLUMatrices[lu];
@@ -123,6 +123,7 @@ Module[
           {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
           {l1, u1} = GetLUMatrices[lu];
 	  NCTest[Norm[l1.u1 - A[[p, q]]], 0, "MatrixDecompositions", k++];
+	  NCTest[rank, rA, "MatrixDecompositions", k++];
 
           A = SparseArray[A];
 
@@ -133,7 +134,7 @@ Module[
           {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
           {l1, u1} = GetLUMatrices[lu];
 	  NCTest[Norm[l1.u1 - A[[p, q]]], 0, "MatrixDecompositions", k++];
-	  NCTest[rank, Min[m,n], "MatrixDecompositions", k++];
+	  NCTest[rank, rA, "MatrixDecompositions", k++];
 
       ];
   ];
@@ -158,6 +159,7 @@ Module[
              A[[All,n]] = A[[All,n-2]] - A[[All,n-3]];
     	     A[[All,n-1]] = A[[All,n-2]] + A[[All,n-3]];
           ];
+          rA = MatrixRank[A];
 
           {lu, p} = LUDecompositionWithPartialPivoting[A];
           {l1, u1} = GetLUMatrices[lu];
@@ -166,7 +168,7 @@ Module[
     	  {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
     	  {l1, u1} = GetLUMatrices[lu];
 	  NCTest[Norm[l1.u1 - A[[p, q]]], 0, "MatrixDecompositions", k++];
-	  NCTest[rank, Min[m,n] - 2, "MatrixDecompositions", k++];
+	  NCTest[rank, rA, "MatrixDecompositions", k++];
 
  	  A = SparseArray[A];
 
@@ -177,7 +179,7 @@ Module[
     	  {lu, p, q, rank} = LUDecompositionWithCompletePivoting[A];
     	  {l1, u1} = GetLUMatrices[lu];
 	  NCTest[Norm[l1.u1 - A[[p, q]]], 0, "MatrixDecompositions", k++];
-	  NCTest[rank, Min[m,n] - 2, "MatrixDecompositions", k++];
+	  NCTest[rank, rA, "MatrixDecompositions", k++];
 
       ];
   ];
@@ -294,30 +296,58 @@ Module[
   {ldl, p, s, rank} = LDLDecomposition[A];
   {l,d} = GetLDLMatrices[ldl,s];
   NCTest[Norm[l . d . Transpose[l] - A], 0, "MatrixDecompositions", k++];
-  Print[];
-  Print["ldl = ", ldl];
-  Print["s = ", s];
-  Print["rank = ", rank];
-  Print["l = ", Normal[l]];
-  Print["d = ", Normal[d]];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
 
   A = {{2,100},{100,2}};
 
   {ldl, p, s, rank} = LDLDecomposition[A];
   {l,d} = GetLDLMatrices[ldl,s];
   NCTest[Norm[l . d . Transpose[l] - A], 0, "MatrixDecompositions", k++];
-  Print[];
-  Print["ldl = ", ldl];
-  Print["s = ", s];
-  Print["rank = ", rank];
-  Print["l = ", Normal[l]];
-  Print["d = ", Normal[d]];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
 
   A = {{2,1,3},{1,2,0},{3,0,5}};
 
   {ldl, p, s, rank} = LDLDecomposition[A];
   {l,d} = GetLDLMatrices[ldl,s];
   NCTest[Norm[l . d . Transpose[l] - A[[p,p]]], 0, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
+
+  A = {{0,1},{1,0}};
+
+  {ldl, p, s, rank} = LDLDecomposition[A];
+  {l,d} = GetLDLMatrices[ldl,s];
+  NCTest[Norm[l . d . Transpose[l] - A], 0, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
+
+  A = {{0,0,0},{0,0,1},{0,1,0}};
+
+  {ldl, p, s, rank} = LDLDecomposition[A];
+  {l,d} = GetLDLMatrices[ldl,s];
+  NCTest[Norm[l . d . Transpose[l] - A[[p,p]]], 0, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
+
+  A = {{1,0,0},{0,0,1},{0,1,0}};
+
+  {ldl, p, s, rank} = LDLDecomposition[A];
+  {l,d} = GetLDLMatrices[ldl,s];
+  NCTest[Norm[l . d . Transpose[l] - A[[p,p]]], 0, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
+
+  A = {{0,1,0},{1,0,0},{0,0,1}};
+
+  {ldl, p, s, rank} = LDLDecomposition[A];
+  {l,d} = GetLDLMatrices[ldl,s];
+  NCTest[Norm[l . d . Transpose[l] - A[[p,p]]], 0, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
+
+  A = {{0,1,0},{1,0,0},{0,0,1/2}};
+
+  {ldl, p, s, rank} = LDLDecomposition[A];
+  {l,d} = GetLDLMatrices[ldl,s];
+  NCTest[Norm[l . d . Transpose[l] - A[[p,p]]], 0, "MatrixDecompositions", k++];
+  NCTest[rank, MatrixRank[A], "MatrixDecompositions", k++];
+
+  (*
   Print[];
   Print["ldl = ", ldl];
   Print["s = ", s];
@@ -325,30 +355,6 @@ Module[
   Print["l = ", Normal[l]];
   Print["d = ", Normal[d]];
   Print["ldl = ", Normal[l . d . Transpose[l]]];
-
-  A = {{0,1},{1,0}};
-
-  {ldl, p, s, rank} = LDLDecomposition[A];
-  {l,d} = GetLDLMatrices[ldl,s];
-  NCTest[Norm[l . d . Transpose[l] - A], 0, "MatrixDecompositions", k++];
-  Print[];
-  Print["ldl = ", ldl];
-  Print["s = ", s];
-  Print["rank = ", rank];
-  Print["l = ", Normal[l]];
-  Print["d = ", Normal[d]];
-
-  A = {{0,0,0},{0,0,1},{0,1,0}};
-
-  {ldl, p, s, rank} = LDLDecomposition[A];
-  {l,d} = GetLDLMatrices[ldl,s];
-  NCTest[Norm[l . d . Transpose[l] - A[[p,p]]], 0, "MatrixDecompositions", k++];
-  Print[];
-  Print["ldl = ", ldl];
-  Print["p = ", p];
-  Print["s = ", s];
-  Print["rank = ", rank];
-  Print["l = ", Normal[l]];
-  Print["d = ", Normal[d]];
+  *)
 
 ];

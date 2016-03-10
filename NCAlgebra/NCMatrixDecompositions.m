@@ -17,6 +17,9 @@ BeginPackage[ "NCMatrixDecompositions`",
               "NCMatMult`",
               "NonCommutativeMultiply`"];
 
+Clear[NCLeafCount];
+NCLeafCount::usage="";
+
 Clear[NCLUPartialPivoting];
 NCLUPartialPivoting::usage="";
 
@@ -34,6 +37,9 @@ NCLUDecompositionWithPartialPivoting::usage = "";
 
 Clear[NCLUDecompositionWithCompletePivoting];
 NCLUDecompositionWithCompletePivoting::usage = "";
+
+Clear[NCLDLDecomposition];
+NCLDLDecomposition::usage = "";
 
 Clear[NCUpperTriangularSolve];
 NCUpperTriangularSolve::usage="";
@@ -58,6 +64,13 @@ Options[NCLUDecompositionWithCompletePivoting] = {
   Pivoting -> NCLUCompletePivoting
 };
 
+Options[NCLDLDecomposition] = {
+  PartialPivoting -> NCLUPartialPivoting,
+  CompletePivoting -> NCLUCompletePivoting,
+  Transpose -> (Map[tp, #]&),
+  Inverse -> NCLUInverse
+};
+
 Begin[ "`Private`" ]
 
   (* NC DivideBy *)
@@ -65,7 +78,6 @@ Begin[ "`Private`" ]
   NCLeftDivideBy[x_, y_] := Map[NonCommutativeMultiply[inv[y], #]&, x, {1}];
 
   (* NC leaf count *)
-  Clear[NCLeafCount];
   NCLeafCount[x_List] := Map[NCLeafCount, x];
   
   NCLeafCount[0] := -Infinity;
@@ -76,8 +88,10 @@ Begin[ "`Private`" ]
   NCLUPartialPivoting[mat_?MatrixQ, f_:NCLeafCount] := 
     NCLUPartialPivoting[mat[[All,1]], f];
 
+  (* NOTE: GreaterEqual ensures that the first greatest element is 
+           picked rather than the last *)
   NCLUPartialPivoting[vec_List, f_:NCLeafCount] :=
-    Part[Ordering[f[vec], 1, Greater], 1];
+    Part[Ordering[f[vec], 1, GreaterEqual], 1];
   
   (* complete pivoting *)
   NCLUCompletePivoting[A_?MatrixQ, f_:NCLeafCount] := Module[
@@ -95,7 +109,7 @@ Begin[ "`Private`" ]
 
   ];
   
-  NCLUDecompositionWithPartialPivoting[AA_?MatrixQ, 
+  NCLUDecompositionWithPartialPivoting[mat_?MatrixQ, 
                                        opts:OptionsPattern[{}]] := Module[
     {options},
                                             
@@ -116,7 +130,7 @@ Begin[ "`Private`" ]
     dot = Dot
  	   /. Options[NCMatrixDecompositions, Dot];
 
-    LUDecompositionWithPartialPivoting[AA, 
+    LUDecompositionWithPartialPivoting[mat, 
                                        ZeroTest -> zeroTest, 
                                        Pivoting -> pivoting,
                                        DivideBy -> divideBy,
@@ -124,7 +138,7 @@ Begin[ "`Private`" ]
                                             
   ]; 
 
-  NCLUDecompositionWithCompletePivoting[AA_?MatrixQ, 
+  NCLUDecompositionWithCompletePivoting[mat_?MatrixQ, 
                                         opts:OptionsPattern[{}]] := Module[
     {options},
                                             
@@ -145,11 +159,55 @@ Begin[ "`Private`" ]
     dot = Dot
  	   /. Options[NCMatrixDecompositions, Dot];
 
-    LUDecompositionWithCompletePivoting[AA, 
+    LUDecompositionWithCompletePivoting[mat, 
                                         ZeroTest -> zeroTest, 
                                         Pivoting -> pivoting,
                                         DivideBy -> divideBy,
                                         Dot -> dot]
+                                            
+  ]; 
+
+  NCLDLDecomposition[mat_?MatrixQ, opts:OptionsPattern[{}]] := Module[
+    {options, zeroTest, partialPivoting, completePivoting, 
+     divideBy, dot, transpose, inverse},
+                                            
+    (* process options *)
+    options = Flatten[{opts}];
+
+    zeroTest = ZeroTest
+           /. options 
+           /. Options[NCMatrixDecompositions, ZeroTest];
+
+    partialPivoting = PartialPivoting
+           /. options
+ 	   /. Options[NCLDLDecomposition, PartialPivoting];
+    
+    completePivoting = CompletePivoting
+           /. options
+ 	   /. Options[NCLDLDecomposition, CompletePivoting];
+
+    divideBy = DivideBy
+  	   /. Options[NCMatrixDecompositions, DivideBy];
+
+    dot = Dot
+ 	   /. Options[NCMatrixDecompositions, Dot];
+
+    transpose = Transpose
+           /. options
+ 	   /. Options[NCLDLDecomposition, Transpose];
+
+    inverse = Inverse
+           /. options
+ 	   /. Options[NCLDLDecomposition, Inverse];
+
+    LDLDecomposition[mat, 
+                     ZeroTest -> zeroTest, 
+                     PartialPivoting -> partialPivoting,
+                     CompletePivoting -> completePivoting,
+                     DivideBy -> divideBy,
+                     Dot -> dot,
+                     Inverse -> inverse,
+                     Transpose -> transpose]
                                             
   ]; 
   

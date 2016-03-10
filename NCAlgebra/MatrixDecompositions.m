@@ -14,12 +14,6 @@
 
 BeginPackage[ "MatrixDecompositions`" ];
 
-Options[MatrixDecompositions] = {
-  ZeroTest -> PossibleZeroQ,
-  DivideBy -> DivideBy,
-  Dot -> Dot
-};
-
 Clear[GetLUMatrices];
 GetLUMatrices::usage="";
 
@@ -96,12 +90,25 @@ MatrixDecompositions::Singular = "The input matrix appears to be SINGULAR.";
 Clear[LDLDecomposition];
 LDLDecomposition::usage="";
 
+Options[MatrixDecompositions] = {
+  ZeroTest -> PossibleZeroQ,
+  DivideBy -> DivideBy,
+  Dot -> Dot
+};
+
 Options[LUDecompositionWithPartialPivoting] = {
   Pivoting -> LUPartialPivoting
 };
 
 Options[LUDecompositionWithCompletePivoting] = {
   Pivoting -> LUCompletePivoting
+};
+
+Options[LDLDecomposition] = {
+  PartialPivoting -> LUPartialPivoting,
+  CompletePivoting -> LUCompletePivoting,
+  Transpose -> Identity,
+  Inverse -> Inverse
 };
 
 Begin[ "`Private`" ]
@@ -208,7 +215,7 @@ Begin[ "`Private`" ]
 
      For [j = m, j >= 2, j--,
 
-       (* Print["j = ", ToString[j]]; *)
+       (* Print["j = ", j]; *)
 
        (* If zero diagonal, singular *)
        If[ zeroTest[U[[j,j]]],
@@ -287,7 +294,7 @@ Begin[ "`Private`" ]
 
      For [j = 1, j <= m - 1, j++,
 
-       (* Print["j = ", ToString[j]]; *)
+       (* Print["j = ", j]; *)
 
        (* If zero diagonal, singular *)
        If[ zeroTest[L[[j,j]]],
@@ -435,7 +442,7 @@ Begin[ "`Private`" ]
 
      For [k = 1, k <= N, k++,
 
-       (* Print["k = ", ToString[k]]; *)
+       (* Print["k = ", k]; *)
 
        (* Pivot *)
        mu = pivoting[ A[[k ;; m, k]] ] + k - 1;
@@ -475,7 +482,7 @@ Begin[ "`Private`" ]
 
     ];
 
-    (* Print["k = ", ToString[k]]; *)
+    (* Print["k = ", k]; *)
 
     Return[{A, p}];
 
@@ -559,7 +566,7 @@ Begin[ "`Private`" ]
 
      For [k = 1, k <= N, k++,
 
-       (* Print["k = ", ToString[k]]; *)
+       (* Print["k = ", k]; *)
 
        (* Pivot *)
        {mu, lambda} = pivoting[ A[[k ;; m, k ;; n]] ] + k - 1;
@@ -604,7 +611,7 @@ Begin[ "`Private`" ]
 
     ];
 
-    (* Print["k = ", ToString[k]]; *)
+    (* Print["k = ", k]; *)
 
     If[ k > N && n >= m && zeroTest[A[[k,k]]],
        rank--;
@@ -620,8 +627,10 @@ Begin[ "`Private`" ]
 
   LDLDecomposition[AA_?SymmetricMatrixQ, opts:OptionsPattern[{}]] := 
   Module[
-    {options, zeroTest,
-     A, E, m, rank, p, k, s, i, j, l, mu0, mu1, alpha = N[(1+Sqrt[17])/8]},
+    {options, zeroTest, partialPivoting, completePivoting, 
+     divideBy, dot, transpose, inverse,
+     A, E, m, rank, p, k, s, i, j, l, mu0, mu1, 
+     alpha = N[(1+Sqrt[17])/8]},
 
      (* process options *)
 
@@ -631,7 +640,30 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[MatrixDecompositions, ZeroTest];
 
+     partialPivoting = PartialPivoting
+	    /. options
+	    /. Options[LDLDecomposition, PartialPivoting];
 
+     completePivoting = CompletePivoting
+	    /. options
+	    /. Options[LDLDecomposition, CompletePivoting];
+
+     divideBy = DivideBy
+	    /. options
+	    /. Options[MatrixDecompositions, DivideBy];
+
+     dot = Dot
+	    /. options
+	    /. Options[MatrixDecompositions, Dot];
+
+     transpose = Transpose
+            /. options
+	    /. Options[LDLDecomposition, Transpose];
+
+     inverse = Inverse
+            /. options
+	    /. Options[LDLDecomposition, Inverse];
+      
      (* start algorithm *)
 
      A = AA;
@@ -641,21 +673,38 @@ Begin[ "`Private`" ]
      s = {};
      For [k = 1, k <= m - 1, k++,
 
-       Print["k = ", k];
+       (* Print["k = ", k]; *)
 
        (* Bunch-Parlett pivot strategy *)
-       {i, j} = k - 1 + LUCompletePivoting[ A[[k ;; m, k ;; m]] ];
-       l = k - 1 + Ordering[Map[Abs, Diagonal[ A[[k ;; m, k ;; m]] ]], -1][[1]];
+       {i, j} = k - 1 + completePivoting[ A[[k ;; m, k ;; m]] ];
+       l = k - 1 + partialPivoting[ Diagonal[ A[[k ;; m, k ;; m]] ]];
 
        mu0 = A[[i, j]];
        mu1 = A[[l, l]];
 
-       Print["i = ", i];
-       Print["j = ", j];
-       Print["l = ", l];
-       Print["mu0 = ", mu0];
-       Print["mu1 = ", mu1];
-       Print["alpha mu0 = ", alpha mu0];
+       (*
+         Print["i = ", i];
+         Print["j = ", j];
+         Print["l = ", l];
+       *)
+          
+       If[ Not[NumberQ[mu0] && NumberQ[mu1]],
+           (* If pivots are not numbers *)
+           If[ zeroTest[mu1]
+               ,
+               (* pivot on 2x2 block *)
+               mu1 = 0; mu0 = 1;
+               ,
+               (* pivot on 1x1 block (l,l) *)
+               mu1 = 1; mu0 = 0;
+           ];
+       ];
+
+       (*
+         Print["mu0 = ", mu0];
+         Print["mu1 = ", mu1];
+         Print["alpha mu0 = ", alpha mu0];
+       *)
 
        If[ mu1 >= alpha mu0,
 
@@ -663,7 +712,7 @@ Begin[ "`Private`" ]
 
 	 AppendTo[s, 1];
 
-	 Print["s = ", s];
+	 (* Print["s = ", s]; *)
 
 	 (* Interchange rows *)
 	 A[[{k,l}, All]] = A[[{l,k}, All]];
@@ -674,7 +723,7 @@ Begin[ "`Private`" ]
 	 (* Store permutations *)
 	 p[[{k,l}]] = p[[{l,k}]];
 
-	 Print["p = ", p];
+	 (* Print["p = ", p]; *)
 
 	 (* If zero pivot, terminate *)
 	 If[ zeroTest[A[[k,k]]],
@@ -682,17 +731,20 @@ Begin[ "`Private`" ]
 	   Break[];
 	 ];
 
-	 Print["A- = ", MatrixForm[A]];
+	 (* Print["A- = ", MatrixForm[A]]; *)
 
 	 (* Update matrix *)
-	 A[[k+1 ;; m, k]] /= A[[k,k]];
-         A[[k+1 ;; m, k+1 ;; m]] -= A[[k+1 ;; m, {k}]] . A[[{k}, k+1 ;; m]];
-	 A[[k, k+1 ;; m]] = A[[k+1 ;; m, k]];
+         If [divideBy === DivideBy
+             ,
+             A[[k+1;;m, k]] /= A[[k,k]];
+             ,
+             A[[k+1;;m, k]] = divideBy[ A[[k+1;;m, k]], A[[k,k]] ];
+         ];
+         A[[k+1 ;; m, k+1 ;; m]] -= dot[ A[[k+1 ;; m, {k}]],
+                                         A[[{k}, k+1 ;; m]] ];
+	 A[[k, k+1 ;; m]] = transpose[ A[[k+1 ;; m, k]] ];
            
-         (* A[[k+1 ;; m, k+1 ;; m]] -= 
-             A[[k+1 ;; m, {k}]] . (A[[k,k]] * Transpose[A[[k+1 ;; m, {k}]]]); *)
-
-         Print["A+ = ", MatrixForm[A]];
+         (* Print["A+ = ", MatrixForm[A]]; *)
 
 	 ,
 
@@ -700,7 +752,7 @@ Begin[ "`Private`" ]
 
 	 AppendTo[s, 2];
 
-	 Print["s = ", s];
+	 (* Print["s = ", s]; *)
 
 	 (* Interchange rows *)
 	 A[[{k,i}, All]] = A[[{i,k}, All]];
@@ -718,7 +770,7 @@ Begin[ "`Private`" ]
 	 p[[{k,i}]] = p[[{i,k}]];
 	 p[[{k+1,j}]] = p[[{j,k+1}]];
 
-	 Print["p = ", p];
+	 (* Print["p = ", p]; *)
 
 	 (* If zero pivot, terminate *)
 	 If[ zeroTest[A[[k+1,k]]],
@@ -731,18 +783,21 @@ Begin[ "`Private`" ]
            Break[];
          ];
            
-	 Print["A- = ", MatrixForm[A]];
+	 (* Print["A- = ", MatrixForm[A]]; *)
 
 	 (* Update matrix *)
-	 E = A[[k ;; k + 1, k ;; k + 1]];
+	 E = A[[k;;k+1, k;;k+1]];
+	 A[[k+2;;m, k;;k+1]] = dot[ A[[k+2;;m, k;;k+1 ]],
+                                    inverse[E] ];
+	 A[[k+2;;m, k+2;;m]] -= dot[ A[[k+2;;m, k;;k+1 ]],
+                                     A[[k;;k+1, k+2;;m ]] ];
+	 A[[k, k+2;;m]] = transpose[ A[[k+2;;m, k]] ];
+	 A[[k+1, k+2;;m]] = transpose[ A[[k+2;;m, k+1]] ];
 
-	 A[[ k + 2 ;; m, k ;; k + 1]] = A[[ k + 2 ;; m, k ;; k + 1 ]] . Inverse[E];
-	 A[[ k + 2 ;; m, k + 2 ;; m]] -= A[[ k + 2;; m, k ;; k + 1 ]] . A[[ k ;; k + 1, k + 2 ;; m ]];
-
-	 A[[ k ;; k + 1, k + 2 ;; m]] = Transpose[A[[ k + 2;; m, k ;; k + 1 ]]];
-
-	 Print["E = ", MatrixForm[E]];
+	 (* 
+         Print["E = ", MatrixForm[E]];
 	 Print["A+ = ", MatrixForm[A]];
+         *)
 
 	 (* Increment k *)
 	 k++;
@@ -751,7 +806,7 @@ Begin[ "`Private`" ]
 
     ];
 
-    Print[k];
+    (* Print["k = ", k]; *)
       
     If[ k == m,
        AppendTo[s, 1];
