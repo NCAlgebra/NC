@@ -26,13 +26,35 @@ Note that all commutative expressions are assummed self-adjoint. \
 See also aj.";
 
 Clear[NCSymmetricQ];
-NCSymmetricQ::usage = 
-"NCSymmetricQ[exp] returns true if exp is symmetric, \
-i.e. if tp[exp] == exp.";
+NCSymmetricQ::usage = "\
+NCSymmetricQ[exp] returns true if exp is symmetric, \
+i.e. if tp[exp] == exp.
+NCSymmetricQ[exp, False] attempts to detect symmetric variables \
+using NCMakeSymmetric.
+
+See NCMakeSymmetric";
 
 NCSymmetricQ::SymmetricVariables =
 "The variable(s) `1` was(were) assumed symmetric";
-    
+
+Clear[NCMakeSymmetric];
+NCMakeSymmetric::usage = "\
+NCMakeSymmetricQ[exp] attempts to establish symmetry of exp by \
+assuming symmetry of its variables.
+
+NCMakeSymmetricQ returns a list of two elements:
+\tthe first element is True or False if it succeded to prove exp \
+symmetric.
+\tthe second element is a list of the variables that were made \
+symmetric.
+
+See NCSymmetricQ";
+
+Options[NCMakeSymmetric] = {
+  SymmetricVariables -> {},
+  ExcludeVariables -> {}
+};
+
 Begin[ "`Private`" ]
 
   (* tp is NonCommutative *)
@@ -56,35 +78,72 @@ Begin[ "`Private`" ]
   (* tp[inv[]] = inv[tp[]] *)
   tp[inv[a_]] := inv[tp[a]];
 
-  (* NCSymmetricQ *)
-  
-  Clear[NCSymmetricQAux];
-  NCSymmetricQAux[exp_, diff_, zero_] := Module[
-      {vars, tpVars, tpDiffVars, symVars, symRule},
+  (* NCMakeSymmetric *)
+  Clear[NCMakeSymmetricAux];
+  NCMakeSymmetricAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
+      {vars, tpVars, tpDiffVars, symVars, symRule, 
+       options, symmetricVars, excludeVars},
+      
+      (* process options *)
+
+      options = Flatten[{opts}];
+
+      symmetricVars = SymmetricVariables 
+ 	    /. options
+	    /. Options[NCMakeSymmetric, SymmetricVariables];
+
+      excludeVars = ExcludeVariables 
+ 	    /. options
+	    /. Options[NCMakeSymmetric, ExcludeVariables];
       
       (* easy return *)
-      If[ diff === zero, Return[True] ];
-
+      If[ diff === zero, Return[{True, {}}] ];
+      
       (* check for possible symmetric variables *)
       vars = NCGrabSymbols[exp];
-      tpVars = NCGrabSymbols[exp, tp];
-      tpDiffVars = NCGrabSymbols[diff, tp];
-      symVars = Map[tp,Complement[tpDiffVars, tpVars]];
+
+      (* Print["----"]; *)
+
+      (* exclude all vars? *)
+      excludeVars = If [excludeVars === All
+                        , 
+                        vars
+                        ,
+                        Flatten[List[excludeVars]]
+                       ];
+          
+      (* all variables symmetric? *)
+      (* symmetric vars have priority *)
+      If [symmetricVars === All
+          ,  
+          symmetricVars = vars;
+          excludeVars = {};
+          ,
+          symmetricVars = Flatten[List[symmetricVars]];
+          excludeVars = Complement[excludeVars, symmetricVars];
+      ];
 
       (*
-      Print["----"];
-      Print[exp];
-      Print[diff];
-      Print[vars];
-      Print[tpVars];
-      Print[tpDiffVars];
-      Print[symVars];
+      Print["ExcludeVariables = ", excludeVars];
+      Print["SymmetricVariables = ", symmetricVars];
       *)
 
-      If[symVars === {}, 
-         (* There are no potentially symmetric variables *)
-         Return[False]
-      ];
+      tpVars = Map[tp,NCGrabSymbols[exp, tp]];
+      tpDiffVars = Map[tp,NCGrabSymbols[diff, tp]];
+      symVars = Join[Complement[tpDiffVars, tpVars, excludeVars],
+                     symmetricVars];
+
+      (*
+      Print["exp = ", exp];
+      Print["diff = ", diff];
+      Print["vars = ", vars];
+      Print["tpVars = ", tpVars];
+      Print["tpDiffVars = ", tpDiffVars];
+      Print["symVars = ", symVars];
+      *)
+
+      (* There are no potentially symmetric variables left *)
+      If[symVars === {}, Return[{False, {}}] ];
       
       symRule =  Thread[Map[tp,symVars] -> symVars];
 
@@ -92,7 +151,7 @@ Begin[ "`Private`" ]
       
       If [ (diff /. symRule) =!= zero,
          (* Expression is not symmetric *)
-         Return[False]
+         Return[{False, {}}]
       ];
       
       (* Warm user of symmetric assumptions *)
@@ -100,14 +159,18 @@ Begin[ "`Private`" ]
               ToString[First[symVars]] <>
                 StringJoin @@ Map[(", " <> ToString[#])&, Rest[symVars]]];
       
-      Return[True];
+      Return[{True, symVars}];
   ];
   
-  NCSymmetricQ[exp_] := 
-    (ExpandNonCommutativeMultiply[exp - tp[exp]] === 0);
-
-  NCSymmetricQ[exp_, False] :=
-     NCSymmetricQAux[exp, ExpandNonCommutativeMultiply[exp - tp[exp]], 0];
+  NCMakeSymmetric[exp_, opts:OptionsPattern[{}]] :=
+    NCMakeSymmetricAux[exp, 
+                       ExpandNonCommutativeMultiply[exp - tp[exp]],
+                       0, opts];
+      
+  (* NCSymmetricQ *)
+ 
+  NCSymmetricQ[exp_, opts:OptionsPattern[{}]] := 
+    First[NCMakeSymmetric[exp, opts]];
      
 End[]
 

@@ -42,47 +42,54 @@ Module[
   (* NCSymmetricQ *)
 
   expr = a + tp[a];
-  NCTest[NCSymmetricQ[expr], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = a ** b + tp[a ** b];
-  NCTest[NCSymmetricQ[expr], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
 
+  Print["k = ", k];
   expr = a;
-  NCTest[NCSymmetricQ[expr], False, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False, test, k++];
 
   expr = a - tp[a];
-  NCTest[NCSymmetricQ[expr], False, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False, test, k++];
 
   (* NCSymmetricQ[#, False] *)
 
   Quiet[
 
     expr = a + tp[a];
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = a ** b + tp[a ** b];
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
+
+    expr = a + a ** b + tp[b] ** a;
+    NCTest[NCSymmetricQ[expr], True, test, k++];
+
+    expr = a + tp[a] + a ** b + tp[b] ** a;
+    NCTest[NCSymmetricQ[expr, SymmetricVariables -> {a}], True, test, k++];
 
     expr = a;
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = a + b;
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = a + b ** c;
-    NCTest[NCSymmetricQ[expr, False], False, test, k++];
+    NCTest[NCSymmetricQ[expr], False, test, k++];
 
     expr = a + b ** c + c ** b;
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = a + tp[b] ** c + c ** b;
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = a + b + tp[b] ** c + c ** b;
-    NCTest[NCSymmetricQ[expr, False], False, test, k++];
+    NCTest[NCSymmetricQ[expr], False, test, k++];
 
     expr = a + b ** tp[b] + tp[b] ** c + c ** b;
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     ,
     NCSymmetricQ::SymmetricVariables

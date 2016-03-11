@@ -38,38 +38,38 @@ Module[
   (* NCSymmetricQ *)
 
   expr = {{a + tp[a]}};
-  NCTest[NCSymmetricQ[expr], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{a}};
-  NCTest[NCSymmetricQ[expr], False, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False, test, k++];
 
   expr = {{a+tp[a],b},{tp[b],c+tp[c]}};
-  NCTest[NCSymmetricQ[expr], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{tp[b],c+tp[c]}};
-  NCTest[NCSymmetricQ[expr], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{tp[b],1}};
-  NCTest[NCSymmetricQ[expr], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{b,1}};
-  NCTest[NCSymmetricQ[expr], False, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False, test, k++];
 
   (* NCSymmetricQ[#, False] *)
 
   Quiet[
 
     expr = {{1,b},{b,1}};
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = {{a,b},{b,c}};
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = {{a,b},{tp[b],c}};
-    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True, test, k++];
 
     expr = {{a,b},{tp[b],tp[a]}};
-    NCTest[NCSymmetricQ[expr, False], False, test, k++];
+    NCTest[NCSymmetricQ[expr], False, test, k++];
 
     ,
     NCSymmetricQ::SymmetricVariables
@@ -78,38 +78,38 @@ Module[
   (* NCAdjointQ *)
 
   expr = {{a + aj[a]}};
-  NCTest[NCAdjointQ[expr], True, test, k++];
+  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{a}};
-  NCTest[NCAdjointQ[expr], False, test, k++];
+  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
   expr = {{a+aj[a],b},{aj[b],c+aj[c]}};
-  NCTest[NCAdjointQ[expr], True, test, k++];
+  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{aj[b],c+aj[c]}};
-  NCTest[NCAdjointQ[expr], True, test, k++];
+  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{aj[b],1}};
-  NCTest[NCAdjointQ[expr], True, test, k++];
+  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{b,1}};
-  NCTest[NCAdjointQ[expr], False, test, k++];
+  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
   (* NCAdjointQ[#, False] *)
 
   Quiet[
 
     expr = {{1,b},{b,1}};
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCAdjointQ[expr], True, test, k++];
 
     expr = {{a,b},{b,c}};
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCAdjointQ[expr], True, test, k++];
 
     expr = {{a,b},{aj[b],c}};
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCAdjointQ[expr], True, test, k++];
 
     expr = {{a,b},{aj[b],aj[a]}};
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
+    NCTest[NCAdjointQ[expr], False, test, k++];
 
     ,
     NCAdjointQ::AdjointVariables
