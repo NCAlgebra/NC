@@ -8,6 +8,7 @@ Module[
   {k, test, a, b, c, d, e, f, g, h, i, K, u, v, w, x},
 
   k = 1;
+  test = "MatMult";
 
   NCTest[tpMat[{{1,2},{3,4}}], {{1,3},{2,4}}, test, k++];
 
@@ -72,6 +73,46 @@ Module[
 
     ,
     NCSymmetricQ::SymmetricVariables
+  ];
+
+  (* NCAdjointQ *)
+
+  expr = {{a + aj[a]}};
+  NCTest[NCAdjointQ[expr], True, test, k++];
+
+  expr = {{a}};
+  NCTest[NCAdjointQ[expr], False, test, k++];
+
+  expr = {{a+aj[a],b},{aj[b],c+aj[c]}};
+  NCTest[NCAdjointQ[expr], True, test, k++];
+
+  expr = {{1,b},{aj[b],c+aj[c]}};
+  NCTest[NCAdjointQ[expr], True, test, k++];
+
+  expr = {{1,b},{aj[b],1}};
+  NCTest[NCAdjointQ[expr], True, test, k++];
+
+  expr = {{1,b},{b,1}};
+  NCTest[NCAdjointQ[expr], False, test, k++];
+
+  (* NCAdjointQ[#, False] *)
+
+  Quiet[
+
+    expr = {{1,b},{b,1}};
+    NCTest[NCAdjointQ[expr, False], True, test, k++];
+
+    expr = {{a,b},{b,c}};
+    NCTest[NCAdjointQ[expr, False], True, test, k++];
+
+    expr = {{a,b},{aj[b],c}};
+    NCTest[NCAdjointQ[expr, False], True, test, k++];
+
+    expr = {{a,b},{aj[b],aj[a]}};
+    NCTest[NCAdjointQ[expr, False], False, test, k++];
+
+    ,
+    NCAdjointQ::AdjointVariables
   ];
 
 ];
