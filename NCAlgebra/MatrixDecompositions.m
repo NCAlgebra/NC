@@ -85,6 +85,7 @@ LUInverse::usage="";
 MatrixDecompositions::WrongDimensions = \
 "Righ and left-hand side dimensions DO NOT MATCH.";
 MatrixDecompositions::NotSquare = "The input matrix is not SQUARE.";
+MatrixDecompositions::NotAdjoint = "The input matrix is not SQUARE ADJOINT.";
 MatrixDecompositions::Singular = "The input matrix appears to be SINGULAR.";
 
 Clear[LDLDecomposition];
@@ -94,7 +95,8 @@ Options[MatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,
   LeftDivide -> (Divide[#2,#1]&),
   RightDivide -> Divide,
-  Dot -> Dot
+  Dot -> Dot,
+  AdjointMatrixQ -> HermitianMatrixQ
 };
 
 Options[LUDecompositionWithPartialPivoting] = {
@@ -597,10 +599,10 @@ Begin[ "`Private`" ]
   (* LDL Decomposition with Bunch-Parlett pivoting *)
   (* From Golub and Van Loan, p 168 *)
 
-  LDLDecomposition[AA_?SymmetricMatrixQ, opts:OptionsPattern[{}]] := 
+  LDLDecomposition[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
   Module[
     {options, zeroTest, partialPivoting, completePivoting, 
-     leftDivide, rightDivide, dot, inverse,
+     leftDivide, rightDivide, dot, inverse, adjointQ,
      A, E, m, rank, p, k, s, i, j, l, mu0, mu1, 
      alpha = N[(1+Sqrt[17])/8]},
 
@@ -635,11 +637,22 @@ Begin[ "`Private`" ]
      inverse = Inverse
             /. options
 	    /. Options[LDLDecomposition, Inverse];
+
+     adjointQ = AdjointMatrixQ
+	    /. options
+	    /. Options[MatrixDecompositions, AdjointMatrixQ];
       
      (* start algorithm *)
 
      A = AA;
      {m,n} = Dimensions[A];
+
+     (* tests *)
+     If[ !adjointQ[A],
+         Message[MatrixDecompositions::NotAdjoint];
+         Return[{A,{},{},-1}];
+     ];
+      
      rank = m;
      p = Range[m];
      s = {};
@@ -660,7 +673,7 @@ Begin[ "`Private`" ]
          Print["l = ", l];
        *)
           
-       If[ Not[NumberQ[mu0] && NumberQ[mu1]],
+       If[ Not[NumericQ[mu0] && NumericQ[mu1]],
            (* If pivots are not numbers *)
            If[ zeroTest[mu1]
                ,

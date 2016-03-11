@@ -314,7 +314,16 @@ Module[
   {l,dd,u} = GetLDUMatrices[ldl,s];
   NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
+  Print["---"];
+  mat = {{a,tp[c]},{c,b}};
+  Print["mat = ", mat];
+  {ldl,p,s,rank} = NCLDLDecomposition[mat];
+
 (*
+
+ (* LDL ? *)
+  {l,dd,u} = GetLDUMatrices[ldl,s];
+  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
   Print[];
   Print["mat = ", mat];
   Print["ldl = ", ldl];
@@ -325,5 +334,7 @@ Module[
   Print["u = ", Normal[u]];
   Print["l.d.u = ", NCSimplifyRational[MatMult[l, dd, u]]];
   Print["---"];
+
 *)
+
 ];

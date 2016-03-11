@@ -24,10 +24,15 @@ BeginPackage[ "NonCommutativeMultiply`" ]
 Clear[CommutativeQ];
 
 CommutativeQ::usage = 
-     "CommutativeQ[x] is True if x is commutative (the default), \
-     and False if x is non-commutative.  See SetCommutative and \
-     SetNonCommutative.";
+"CommutativeQ[x] is True if x is commutative (the default), \
+and False if x is non-commutative.  See SetCommutative and \
+SetNonCommutative.";
 
+Clear[NonCommutativeQ];
+
+NonCommutativeQ::usage = 
+"NonCommutativeQ[x] is equal to Not[CommutativeQ[x]]. See CommutativeQ.";
+     
 Clear[SetCommutative];
 
 SetCommutative::usage = 
@@ -72,6 +77,8 @@ Begin[ "`Private`" ]
 
   Unprotect[NonCommutativeMultiply];
   ClearAttributes[NonCommutativeMultiply, {OneIdentity, Flat}]
+
+  NonCommutativeQ[x_] = Not[CommutativeQ[x]];
 
   (* ---------------------------------------------------------------- *)
   (*  Set all varibles to be commutative by default.                  *)
