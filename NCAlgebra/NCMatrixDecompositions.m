@@ -26,11 +26,11 @@ NCLUPartialPivoting::usage="";
 Clear[NCLUCompletePivoting];
 NCLUCompletePivoting::usage="";
 
-Clear[NCRightDivideBy];
-NCRightDivideBy::usage="";
+Clear[NCLeftDivide];
+NCLeftDivide::usage="";
 
-Clear[NCLeftDivideBy];
-NCLeftDivideBy::usage="";
+Clear[NCRightDivide];
+NCRightDivide::usage="";
 
 Clear[NCLUDecompositionWithPartialPivoting];
 NCLUDecompositionWithPartialPivoting::usage = "";
@@ -52,7 +52,8 @@ NCLUInverse::usage = "";
 
 Options[NCMatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,
-  DivideBy -> NCRightDivideBy,
+  LeftDivide -> NCLeftDivide,
+  RightDivide -> NCRightDivide,
   Dot -> MatMult
 };
 
@@ -73,9 +74,9 @@ Options[NCLDLDecomposition] = {
 
 Begin[ "`Private`" ]
 
-  (* NC DivideBy *)
-  NCRightDivideBy[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
-  NCLeftDivideBy[x_, y_] := Map[NonCommutativeMultiply[inv[y], #]&, x, {1}];
+  (* NC Divide *)
+  NCRightDivide[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
+  NCLeftDivide[x_, y_] := Map[NonCommutativeMultiply[inv[x], #]&, y];
 
   (* NC leaf count *)
   NCLeafCount[x_List] := Map[NCLeafCount, x];
@@ -124,16 +125,20 @@ Begin[ "`Private`" ]
            /. options
  	   /. Options[NCLUDecompositionWithPartialPivoting, Pivoting];
     
-    divideBy = DivideBy
-  	   /. Options[NCMatrixDecompositions, DivideBy];
+    leftDivide = LeftDivide
+  	   /. Options[NCMatrixDecompositions, LeftDivide];
 
+    rightDivide = RightDivide
+  	   /. Options[NCMatrixDecompositions, RightDivide];
+                                           
     dot = Dot
  	   /. Options[NCMatrixDecompositions, Dot];
 
     LUDecompositionWithPartialPivoting[mat, 
                                        ZeroTest -> zeroTest, 
                                        Pivoting -> pivoting,
-                                       DivideBy -> divideBy,
+                                       LeftDivide -> leftDivide,
+                                       RightDivide -> rightDivide,
                                        Dot -> dot]
                                             
   ]; 
@@ -153,23 +158,27 @@ Begin[ "`Private`" ]
            /. options
  	   /. Options[NCLUDecompositionWithCompletePivoting, Pivoting];
     
-    divideBy = DivideBy
-  	   /. Options[NCMatrixDecompositions, DivideBy];
+    leftDivide = LeftDivide
+  	   /. Options[NCMatrixDecompositions, LeftDivide];
 
+    rightDivide = RightDivide
+  	   /. Options[NCMatrixDecompositions, RightDivide];
+                                            
     dot = Dot
  	   /. Options[NCMatrixDecompositions, Dot];
 
     LUDecompositionWithCompletePivoting[mat, 
                                         ZeroTest -> zeroTest, 
                                         Pivoting -> pivoting,
-                                        DivideBy -> divideBy,
+                                        LeftDivide -> leftDivide,
+                                        RightDivide -> rightDivide,
                                         Dot -> dot]
                                             
   ]; 
 
   NCLDLDecomposition[mat_?MatrixQ, opts:OptionsPattern[{}]] := Module[
     {options, zeroTest, partialPivoting, completePivoting, 
-     divideBy, dot, transpose, inverse},
+     divide, dot, transpose, inverse},
                                             
     (* process options *)
     options = Flatten[{opts}];
@@ -186,8 +195,11 @@ Begin[ "`Private`" ]
            /. options
  	   /. Options[NCLDLDecomposition, CompletePivoting];
 
-    divideBy = DivideBy
-  	   /. Options[NCMatrixDecompositions, DivideBy];
+    leftDivide = LeftDivide
+  	   /. Options[NCMatrixDecompositions, LeftDivide];
+
+    rightDivide = RightDivide
+  	   /. Options[NCMatrixDecompositions, RightDivide];
 
     dot = Dot
  	   /. Options[NCMatrixDecompositions, Dot];
@@ -204,7 +216,8 @@ Begin[ "`Private`" ]
                      ZeroTest -> zeroTest, 
                      PartialPivoting -> partialPivoting,
                      CompletePivoting -> completePivoting,
-                     DivideBy -> divideBy,
+                     LeftDivide -> leftDivide,
+                     RightDivide -> rightDivide,
                      Dot -> dot,
                      Inverse -> inverse,
                      Transpose -> transpose]
@@ -223,7 +236,7 @@ Begin[ "`Private`" ]
 
     LowerTriangularSolve[l, b,
                          ZeroTest -> zeroTest, 
-                         DivideBy -> NCLeftDivideBy,
+                         LeftDivide -> NCLeftDivide,
                          Dot -> (Dot /. Options[NCMatrixDecompositions, Dot])]
                                             
   ]; 
@@ -240,7 +253,7 @@ Begin[ "`Private`" ]
 
     UpperTriangularSolve[l, b,
                          ZeroTest -> zeroTest, 
-                         DivideBy -> NCLeftDivideBy,
+                         LeftDivide -> NCLeftDivide,
                          Dot -> (Dot /. Options[NCMatrixDecompositions, Dot])]
                                             
   ]; 

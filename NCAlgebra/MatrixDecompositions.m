@@ -17,8 +17,8 @@ BeginPackage[ "MatrixDecompositions`" ];
 Clear[GetLUMatrices];
 GetLUMatrices::usage="";
 
-Clear[GetLDLMatrices];
-GetLDLMatrices::usage="";
+Clear[GetLDUMatrices];
+GetLDUMatrices::usage="";
 
 Clear[LUDecompositionWithPartialPivoting];
 LUDecompositionWithPartialPivoting::usage = "\
@@ -39,7 +39,7 @@ square matrices.
 
 The following options can be given:
 \tZeroTest (PossibleZeroQ): function used to decide if a pivot is zero;
-\tDivideBy (DivideBy): function used to divide a vector by an entry;
+\tDivide (Divide): function used to divide a vector by an entry;
 \tDot (Dot): function used to multiply vectors and matrices;
 \tPivoting (LUPartialPivoting): function used to sort rows for pivoting;
     
@@ -66,7 +66,7 @@ square matrices.
 
 The following options can be given:
 \tZeroTest (PossibleZeroQ): function used to decide if a pivot is zero;
-\tDivideBy (DivideBy): function used to divide a vector by an entry;
+\tDivide (Divide): function used to divide a vector by an entry;
 \tDot (Dot): function used to multiply vectors and matrices;
 \tPivoting (LUCompletePivoting): function used to sort rows for pivoting;
     
@@ -92,7 +92,8 @@ LDLDecomposition::usage="";
 
 Options[MatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,
-  DivideBy -> DivideBy,
+  LeftDivide -> (Divide[#2,#1]&),
+  RightDivide -> Divide,
   Dot -> Dot
 };
 
@@ -152,9 +153,9 @@ Begin[ "`Private`" ]
   ];
 
   
-  (* GetLDLMatrices *)
+  (* GetLDUMatrices *)
   
-  GetLDLMatrices[ldl_, s_] := Module[
+  GetLDUMatrices[ldl_, s_] := Module[
     {n,m,mats,id,lm,dm,S},
     {m,n} = Dimensions[ldl];
 
@@ -169,7 +170,7 @@ Begin[ "`Private`" ]
     lm = SparseArray[{i_, j_} /; j <= i -> 1, {m, m}] 
          (SparseArray[{i_, j_} /; j <= i -> 1, {m, m}] - dm);
 
-    Return[{ldl lm + id, ldl dm}];
+    Return[{ldl lm + id, ldl dm, ldl Transpose[lm] + id}];
 
   ];
 
@@ -189,9 +190,9 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[MatrixDecompositions, ZeroTest];
 
-     divideBy = DivideBy
+     leftDivide = LeftDivide
 	    /. options
-	    /. Options[MatrixDecompositions, DivideBy];
+	    /. Options[MatrixDecompositions, LeftDivide];
 
      dot = Dot
 	    /. options
@@ -225,12 +226,8 @@ Begin[ "`Private`" ]
        (* Print["X- = ", Normal[X]]; *)
 
        (* Update matrix *)
-       If [divideBy === DivideBy
-           ,
-           X[[j]] /= U[[j,j]];
-           ,
-           X[[j]] = divideBy[ X[[j]], U[[j,j]] ];
-       ];
+       X[[j]] = leftDivide[ U[[j,j]], X[[j]] ];
+          
        X[[1;;j-1]] -= dot[ U[[1;;j-1,{j}]], {X[[j]]} ];
 
        (* Print["X+ = ", Normal[X]]; *)
@@ -242,12 +239,7 @@ Begin[ "`Private`" ]
       Message[MatrixDecompositions::Singular];
     ];
 
-    If [divideBy === DivideBy
-        ,
-        X[[1]] /= U[[1,1]];
-        ,
-        X[[1]] = divideBy[ X[[1]], U[[1,1]] ];
-    ];
+    X[[1]] = leftDivide[ U[[1,1]], X[[1]] ];
 
     Return[X];
   ];
@@ -268,9 +260,9 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[MatrixDecompositions, ZeroTest];
 
-     divideBy = DivideBy
+     leftDivide = LeftDivide
 	    /. options
-	    /. Options[MatrixDecompositions, DivideBy];
+	    /. Options[MatrixDecompositions, LeftDivide];
 
      dot = Dot
 	    /. options
@@ -304,12 +296,8 @@ Begin[ "`Private`" ]
        (* Print["X- = ", Normal[X]]; *)
 
        (* Update matrix *)
-       If [divideBy === DivideBy
-           ,
-           X[[j]] /= L[[j,j]];
-           ,
-           X[[j]] = divideBy[ X[[j]], L[[j,j]] ];
-       ];
+       X[[j]] = leftDivide[ L[[j,j]], X[[j]] ];
+          
        X[[j+1;;m]] -= dot[ L[[j+1;;m,{j}]], {X[[j]]} ];
 
        (* Print["X+ = ", Normal[X]]; *)
@@ -321,12 +309,7 @@ Begin[ "`Private`" ]
       Message[MatrixDecompositions::Singular];
     ];
 
-    If [divideBy === DivideBy
-        ,
-        X[[m]] /= L[[m,m]];
-        ,
-        X[[m]] = divideBy[ X[[m]], L[[m,m]] ];
-    ];
+    X[[m]] = leftDivide[ L[[m,m]], X[[m]] ];
 
     Return[X];
   ];
@@ -417,9 +400,9 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[LUDecompositionWithPartialPivoting, Pivoting];
 
-     divideBy = DivideBy
+     rightDivide = RightDivide
 	    /. options
-	    /. Options[MatrixDecompositions, DivideBy];
+	    /. Options[MatrixDecompositions, RightDivide];
 
      dot = Dot
 	    /. options
@@ -465,12 +448,7 @@ Begin[ "`Private`" ]
        (* Print["A- = ", Normal[A]]; *)
 
        (* Update matrix *)
-       If [divideBy === DivideBy
-	   ,
-	   A[[k+1 ;; m, k]] /= A[[k,k]];
-	   ,
-	   A[[k+1 ;; m, k]] = divideBy[ A[[k+1 ;; m, k]], A[[k,k]] ];
-       ];
+       A[[k+1 ;; m, k]] = rightDivide[ A[[k+1 ;; m, k]], A[[k,k]] ];
 
        If [k < n
 	   ,
@@ -541,9 +519,9 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[LUDecompositionWithCompletePivoting, Pivoting];
 
-     divideBy = DivideBy
+     rightDivide = RightDivide
 	    /. options
-	    /. Options[MatrixDecompositions, DivideBy];
+	    /. Options[MatrixDecompositions, RightDivide];
 
      dot = Dot
 	    /. options
@@ -594,12 +572,7 @@ Begin[ "`Private`" ]
        (* Print["A- = ", Normal[A]]; *)
 
        (* Update matrix *)
-       If [divideBy === DivideBy
-	   ,
-	   A[[k+1 ;; m, k]] /= A[[k,k]];
-	   ,
-	   A[[k+1 ;; m, k]] = divideBy[ A[[k+1 ;; m, k]], A[[k,k]] ];
-       ];
+       A[[k+1 ;; m, k]] = rightDivide[ A[[k+1 ;; m, k]], A[[k,k]] ];
 
        If [k < n
 	   ,
@@ -622,13 +595,13 @@ Begin[ "`Private`" ]
   ];
 
 
-  (* LU Decomposition with Bunch-Parlett pivoting *)
+  (* LDL Decomposition with Bunch-Parlett pivoting *)
   (* From Golub and Van Loan, p 168 *)
 
   LDLDecomposition[AA_?SymmetricMatrixQ, opts:OptionsPattern[{}]] := 
   Module[
     {options, zeroTest, partialPivoting, completePivoting, 
-     divideBy, dot, transpose, inverse,
+     divide, dot, transpose, inverse,
      A, E, m, rank, p, k, s, i, j, l, mu0, mu1, 
      alpha = N[(1+Sqrt[17])/8]},
 
@@ -648,11 +621,15 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[LDLDecomposition, CompletePivoting];
 
-     divideBy = DivideBy
+     rightDivide = RightDivide
 	    /. options
-	    /. Options[MatrixDecompositions, DivideBy];
+	    /. Options[MatrixDecompositions, RightDivide];
 
-     dot = Dot
+     leftDivide = LeftDivide
+	    /. options
+	    /. Options[MatrixDecompositions, LeftDivide];
+
+      dot = Dot
 	    /. options
 	    /. Options[MatrixDecompositions, Dot];
 
@@ -734,15 +711,12 @@ Begin[ "`Private`" ]
 	 (* Print["A- = ", MatrixForm[A]]; *)
 
 	 (* Update matrix *)
-         If [divideBy === DivideBy
-             ,
-             A[[k+1;;m, k]] /= A[[k,k]];
-             ,
-             A[[k+1;;m, k]] = divideBy[ A[[k+1;;m, k]], A[[k,k]] ];
-         ];
-         A[[k+1 ;; m, k+1 ;; m]] -= dot[ A[[k+1 ;; m, {k}]],
-                                         A[[{k}, k+1 ;; m]] ];
-	 A[[k, k+1 ;; m]] = transpose[ A[[k+1 ;; m, k]] ];
+         A[[k+1;;m, k]] = rightDivide[ A[[k+1;;m, k]], A[[k,k]] ];
+           
+         A[[k+1;;m, k+1;;m]] -= dot[ A[[k+1;;m, {k}]],
+                                     A[[{k}, k+1;;m]] ];
+
+         A[[k, k+1;;m]] = leftDivide[ A[[k,k]], A[[k, k+1;;m]] ];
            
          (* Print["A+ = ", MatrixForm[A]]; *)
 
@@ -791,8 +765,11 @@ Begin[ "`Private`" ]
                                     inverse[E] ];
 	 A[[k+2;;m, k+2;;m]] -= dot[ A[[k+2;;m, k;;k+1 ]],
                                      A[[k;;k+1, k+2;;m ]] ];
-	 A[[k, k+2;;m]] = transpose[ A[[k+2;;m, k]] ];
-	 A[[k+1, k+2;;m]] = transpose[ A[[k+2;;m, k+1]] ];
+         (*
+  	   A[[k, k+2;;m]] = transpose[ A[[k+2;;m, k]] ];
+	   A[[k+1, k+2;;m]] = transpose[ A[[k+2;;m, k+1]] ];
+         *)
+	 A[[k;;k+1, k+2;;m]] = dot[ inverse[E], A[[k;;k+1 , k+2;;m]] ];
 
 	 (* 
          Print["E = ", MatrixForm[E]];

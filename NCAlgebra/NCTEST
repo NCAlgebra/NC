@@ -61,7 +61,7 @@ tests = {
   {"NCInverse",        "NCInverse"},
   {"NCConvexity",      "NCConvexity"},
   {"NCRealization",    "Realization"}
-(* {"Diff",             "Diff"}, *)
+(*  {"Diff",             "Diff"}, *)
 (* {"Crit",             "Crit"}, *)
 (*
   {"NCSolve",               "NCSolve"},

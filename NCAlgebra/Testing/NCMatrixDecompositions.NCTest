@@ -89,10 +89,10 @@ Module[
   NCTest[NCLUCompletePivoting[mat], {2,1}, "NCMatrixDecompositions", k++];
 
   mat = {{a,b},{c,d}};
-  NCTest[NCRightDivideBy[mat[[All,1]], mat[[1,1]]], 
+  NCTest[NCRightDivide[mat[[All,1]], mat[[1,1]]], 
          {1, c ** inv[a]}, "NCMatrixDecompositions", k++];
 
-  NCTest[NCLeftDivideBy[mat[[All,1]], mat[[1,1]]], 
+  NCTest[NCLeftDivide[mat[[1,1]], mat[[All,1]]], 
          {1, inv[a] ** c}, "NCMatrixDecompositions", k++];
 
   (* LU Decomposition With Partial Pivoting *)
@@ -102,7 +102,6 @@ Module[
   {lu, p} = NCLUDecompositionWithPartialPivoting[mat];
   {l1, u1} = GetLUMatrices[lu];
   NCTest[Normal[MatMult[l1,u1]], mat[[p]], "NCMatrixDecompositions", k++];
-
 
   mat = {{a,b},{c,d}};
   {lu, p} = NCLUDecompositionWithPartialPivoting[mat];
@@ -168,23 +167,23 @@ Module[
   A = l1;
   B = IdentityMatrix[2];  
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
   (* Print[]; Print["A = ", Normal[A]]; Print["B = ", B]; Print["x = ", x]; *)
 
   A = tpMat[l1];
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   B = IdentityMatrix[2][[p]];  
   A = l1;
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   A = u1;
   B = x;
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
-  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[2], "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
 
   mat = {{a,0},{c,d}};
 
@@ -197,23 +196,23 @@ Module[
   A = l1;
   B = IdentityMatrix[2];  
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
   (* Print[]; Print["A = ", Normal[A]]; Print["B = ", B]; Print["x = ", x]; *)
 
   A = tpMat[l1];
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   B = IdentityMatrix[2][[p]];  
   A = l1;
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   A = u1;
   B = x;
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
-  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[2], "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
 
   mat = {{a,b},{c,d}};
 
@@ -226,105 +225,105 @@ Module[
   A = l1;
   B = IdentityMatrix[2];  
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
   (* Print[]; Print["A = ", Normal[A]]; Print["B = ", B]; Print["x = ", x]; *)
 
   A = tpMat[l1];
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   B = IdentityMatrix[2][[p]];  
   A = l1;
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   A = u1;
   B = x;
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
-  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[2], "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
 
   mat = {{a,b,0},{0,c,d},{0,e,f}};
 
   {lu, p} = NCLUDecompositionWithPartialPivoting[mat];
   {l1, u1} = GetLUMatrices[lu];
   NCTest[Normal[MatMult[l1,u1]], mat[[p]], "NCMatrixDecompositions", k++];
-
   (* Print[]; Print["mat = ", Normal[mat]]; Print["l1 = ", Normal[l1]]; Print["u1 = ", Normal[u1]]; Print["p = ", p]; *)
 
   A = l1;
   B = IdentityMatrix[3];  
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
   (* Print[]; Print["A = ", Normal[A]]; Print["B = ", B]; Print["x = ", x]; *)
 
   A = tpMat[l1];
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   B = IdentityMatrix[3][[p]];  
   A = l1;
   x = NCLowerTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
 
   A = u1;
   B = x;
   x = NCUpperTriangularSolve[A, B];
-  NCTest[Normal[MatMult[A,x]], B, "MatrixDecompositions", k++];
-  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[3], "MatrixDecompositions", k++];
+  NCTest[Normal[MatMult[A,x]], B, "NCMatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[x],mat]], IdentityMatrix[3], "NCMatrixDecompositions", k++];
 
   (* LU Inverse *)
 
   mat = {{a,b},{0,d}};
   mati = NCLUInverse[mat];
-  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "MatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
   (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
   mat = {{a,0},{c,d}};
   mati = NCLUInverse[mat];
-  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "MatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
   (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
   mat = {{a,b},{c,d}};
   mati = NCLUInverse[mat];
-  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "MatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
   (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
   mat = {{a,b,0},{0,c,d},{0,e,f}};
   mati = NCLUInverse[mat];
-  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[3], "MatrixDecompositions", k++];
+  NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[3], "NCMatrixDecompositions", k++];
   (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
   (* LDLDecomposition *)
   mat = {{a,0},{0,b}};
   {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd} = GetLDLMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, tpMat[l]]], mat[[p,p]], "MatrixDecompositions", k++];
+  {l,dd,u} = GetLDUMatrices[ldl,s];
+  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
-  rule = {tp[a]->a,tp[b]->b,tp[c]->c};
   mat = {{a,c},{c,b}};
   {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd} = GetLDLMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, tpMat[l]]/.rule], mat[[p,p]], "MatrixDecompositions", k++];
+  {l,dd,u} = GetLDUMatrices[ldl,s];
+  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
   mat = {{0,c},{c,0}};
   {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd} = GetLDLMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, tpMat[l]]], mat[[p,p]], "MatrixDecompositions", k++];
+  {l,dd,u} = GetLDUMatrices[ldl,s];
+  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
-  rule = {tp[a]->a,tp[b]->b,tp[c]->c,tp[d]->d};
   mat = {{a,c,0},{c,b,d},{0,d,a}};
   {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd} = GetLDLMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, tpMat[l]]/.rule], mat[[p,p]], "MatrixDecompositions", k++];
+  {l,dd,u} = GetLDUMatrices[ldl,s];
+  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
-  (*
+(*
+  Print[];
+  Print["mat = ", mat];
   Print["ldl = ", ldl];
   Print["s = ", s];
   Print["rank = ", rank];
   Print["l = ", Normal[l]];
   Print["d = ", Normal[dd]];
-  Print["l.d.l^T = ", NCSimplifyRational[MatMult[l, dd, tpMat[l]]/.rule]];
+  Print["u = ", Normal[u]];
+  Print["l.d.u = ", NCSimplifyRational[MatMult[l, dd, u]]];
   Print["---"];
-  *)
+*)
 ];

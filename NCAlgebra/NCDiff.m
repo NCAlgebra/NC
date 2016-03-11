@@ -53,6 +53,14 @@ Begin["`Private`"];
 SetNonCommutative[var, h, a, b];
 Clear[DirectionalD];
 
+Clear[DD];
+DD[f_, x_, h_] := Module[
+   {t},
+   SetCommutative[t];
+   D[f /. x -> x + t h, t] /. t -> 0
+];
+
+
 (* :The familiar sum and product rules for derivatives.
 *) 
 
