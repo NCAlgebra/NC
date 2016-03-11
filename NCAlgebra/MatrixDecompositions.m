@@ -108,7 +108,6 @@ Options[LUDecompositionWithCompletePivoting] = {
 Options[LDLDecomposition] = {
   PartialPivoting -> LUPartialPivoting,
   CompletePivoting -> LUCompletePivoting,
-  Transpose -> Identity,
   Inverse -> Inverse
 };
 
@@ -179,7 +178,7 @@ Begin[ "`Private`" ]
     Flatten[UpperTriangularSolve[u, Transpose[{b}], opts]];
 
   UpperTriangularSolve[u_, b_?MatrixQ, opts:OptionsPattern[{}]] := Module[
-     {options, zeroTest, pivoting, dot,
+     {options, zeroTest, pivoting, dot, leftDivide,
       U,X,m,n,j},
 
      (* process options *)
@@ -249,7 +248,7 @@ Begin[ "`Private`" ]
     Flatten[LowerTriangularSolve[l, Transpose[{b}], opts]];
 
   LowerTriangularSolve[l_, b_?MatrixQ, opts:OptionsPattern[{}]] := Module[
-     {options, zeroTest, pivoting, dot,
+     {options, zeroTest, pivoting, dot, leftDivide,
       L,X,m,n,j},
 
      (* process options *)
@@ -385,7 +384,7 @@ Begin[ "`Private`" ]
   LUDecompositionWithPartialPivoting[AA_?MatrixQ, 
                                      opts:OptionsPattern[{}]] := 
   Module[
-    {options, zeroTest, pivoting, dot,
+    {options, zeroTest, pivoting, dot, rightDivide,
      A, m, n, p, k, N, mu, lambda},
 
      (* process options *)
@@ -504,7 +503,7 @@ Begin[ "`Private`" ]
 
   LUDecompositionWithCompletePivoting[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
   Module[
-    {options, zeroTest, pivoting, dot,
+    {options, zeroTest, pivoting, dot, rightDivide,
      A, m, n, rank, p, q, k, N, mu, lambda},
 
      (* process options *)
@@ -601,7 +600,7 @@ Begin[ "`Private`" ]
   LDLDecomposition[AA_?SymmetricMatrixQ, opts:OptionsPattern[{}]] := 
   Module[
     {options, zeroTest, partialPivoting, completePivoting, 
-     divide, dot, transpose, inverse,
+     leftDivide, rightDivide, dot, inverse,
      A, E, m, rank, p, k, s, i, j, l, mu0, mu1, 
      alpha = N[(1+Sqrt[17])/8]},
 
@@ -632,10 +631,6 @@ Begin[ "`Private`" ]
       dot = Dot
 	    /. options
 	    /. Options[MatrixDecompositions, Dot];
-
-     transpose = Transpose
-            /. options
-	    /. Options[LDLDecomposition, Transpose];
 
      inverse = Inverse
             /. options
@@ -763,13 +758,11 @@ Begin[ "`Private`" ]
 	 E = A[[k;;k+1, k;;k+1]];
 	 A[[k+2;;m, k;;k+1]] = dot[ A[[k+2;;m, k;;k+1 ]],
                                     inverse[E] ];
-	 A[[k+2;;m, k+2;;m]] -= dot[ A[[k+2;;m, k;;k+1 ]],
+
+         A[[k+2;;m, k+2;;m]] -= dot[ A[[k+2;;m, k;;k+1 ]],
                                      A[[k;;k+1, k+2;;m ]] ];
-         (*
-  	   A[[k, k+2;;m]] = transpose[ A[[k+2;;m, k]] ];
-	   A[[k+1, k+2;;m]] = transpose[ A[[k+2;;m, k+1]] ];
-         *)
-	 A[[k;;k+1, k+2;;m]] = dot[ inverse[E], A[[k;;k+1 , k+2;;m]] ];
+
+         A[[k;;k+1, k+2;;m]] = dot[ inverse[E], A[[k;;k+1 , k+2;;m]] ];
 
 	 (* 
          Print["E = ", MatrixForm[E]];
