@@ -55,7 +55,7 @@ Options[NCMatrixDecompositions] = {
   LeftDivide -> NCLeftDivide,
   RightDivide -> NCRightDivide,
   Dot -> MatMult,
-  AdjointMatrixQ -> SymmetricMatrixQ
+  AdjointMatrixQ -> (NCSymmetricQ[#, False]&)
 };
 
 Options[NCLUDecompositionWithPartialPivoting] = {

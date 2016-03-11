@@ -5,33 +5,73 @@
 *)
 
 Module[
-  {k, a, b, c, d, e, f, g, h, i, K, u, v, w, x},
+  {k, test, a, b, c, d, e, f, g, h, i, K, u, v, w, x},
 
   k = 1;
 
-  NCTest[tpMat[{{1,2},{3,4}}], {{1,3},{2,4}}, "MatMult", k++];
+  NCTest[tpMat[{{1,2},{3,4}}], {{1,3},{2,4}}, test, k++];
 
   SetNonCommutative[a, b, c, d, e, f, g, h, i, K, u, v, w, x];
 
 (*
   mat = {{a,rt[1 - a ** tp[a]]}, {rt[1-tp[a]**a],-tp[a]}};
-  NCTest[DilationHalmos[a], mat, "MatMult", k++];
+  NCTest[DilationHalmos[a], mat, test, k++];
 
   NCTest[Cascade[{{a,b},{c,d}},K] ==
-      a + b**K**inv[1 - d**K] **c, "MatMult", k++];
+      a + b**K**inv[1 - d**K] **c, test, k++];
 
   NCTest[Redheffer[{{a,b},{c,d}}] ==
       {{b**inv[c], a - b **inv[c]**inv[d]},
-       {inv[d],-inv[c] ** inv[d]}}, "MatMult", k++];
+       {inv[d],-inv[c] ** inv[d]}}, test, k++];
 *)
 
   NCTest[MatMult[{{a, b},{c,d}}, 
                  {{u,v},{w,x}}], 
                 {{a**u+b**w, a**v+b**x}, 
-                 {c**u+d**w, c**v+d**x}}, "MatMult", k++];
+                 {c**u+d**w, c**v+d**x}}, test, k++];
 
   mat = {{a,b,0},{tp[b],e,d},{0,tp[d],i}};
   NCTest[NCSimplifyRational[MatMult[NCInverse[mat], mat]],
-         {{1,0,0},{0,1,0},{0,0,1}}, "MatMult", k++];
+         {{1,0,0},{0,1,0},{0,0,1}}, test, k++];
+
+  (* NCSymmetricQ *)
+
+  expr = {{a + tp[a]}};
+  NCTest[NCSymmetricQ[expr], True, test, k++];
+
+  expr = {{a}};
+  NCTest[NCSymmetricQ[expr], False, test, k++];
+
+  expr = {{a+tp[a],b},{tp[b],c+tp[c]}};
+  NCTest[NCSymmetricQ[expr], True, test, k++];
+
+  expr = {{1,b},{tp[b],c+tp[c]}};
+  NCTest[NCSymmetricQ[expr], True, test, k++];
+
+  expr = {{1,b},{tp[b],1}};
+  NCTest[NCSymmetricQ[expr], True, test, k++];
+
+  expr = {{1,b},{b,1}};
+  NCTest[NCSymmetricQ[expr], False, test, k++];
+
+  (* NCSymmetricQ[#, False] *)
+
+  Quiet[
+
+    expr = {{1,b},{b,1}};
+    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+
+    expr = {{a,b},{b,c}};
+    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+
+    expr = {{a,b},{tp[b],c}};
+    NCTest[NCSymmetricQ[expr, False], True, test, k++];
+
+    expr = {{a,b},{tp[b],tp[a]}};
+    NCTest[NCSymmetricQ[expr, False], False, test, k++];
+
+    ,
+    NCSymmetricQ::SymmetricVariables
+  ];
 
 ];

@@ -293,48 +293,56 @@ Module[
   NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[3], "NCMatrixDecompositions", k++];
   (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
-  (* LDLDecomposition *)
-  mat = {{a,0},{0,b}};
-  {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd,u} = GetLDUMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
+  Quiet[
 
-  mat = {{a,c},{c,b}};
-  {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd,u} = GetLDUMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
+    (* LDLDecomposition *)
 
-  mat = {{0,c},{c,0}};
-  {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd,u} = GetLDUMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
+    mat = {{a,0},{0,b}};
+    {ldl,p,s,rank} = NCLDLDecomposition[mat];
+    {l,dd,u} = GetLDUMatrices[ldl,s];
+    NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
-  mat = {{a,c,0},{c,b,d},{0,d,a}};
-  {ldl,p,s,rank} = NCLDLDecomposition[mat];
-  {l,dd,u} = GetLDUMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
+    mat = {{a,c},{c,b}};
+    {ldl,p,s,rank} = NCLDLDecomposition[mat];
+    {l,dd,u} = GetLDUMatrices[ldl,s];
+    NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
-  Print["---"];
-  mat = {{a,tp[c]},{c,b}};
-  Print["mat = ", mat];
-  {ldl,p,s,rank} = NCLDLDecomposition[mat];
+    mat = {{0,c},{c,0}};
+    {ldl,p,s,rank} = NCLDLDecomposition[mat];
+    {l,dd,u} = GetLDUMatrices[ldl,s];
+    NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
-(*
+    mat = {{a,c,0},{c,b,d},{0,d,a}};
+    {ldl,p,s,rank} = NCLDLDecomposition[mat];
+    {l,dd,u} = GetLDUMatrices[ldl,s];
+    NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
- (* LDL ? *)
-  {l,dd,u} = GetLDUMatrices[ldl,s];
-  NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
-  Print[];
-  Print["mat = ", mat];
-  Print["ldl = ", ldl];
-  Print["s = ", s];
-  Print["rank = ", rank];
-  Print["l = ", Normal[l]];
-  Print["d = ", Normal[dd]];
-  Print["u = ", Normal[u]];
-  Print["l.d.u = ", NCSimplifyRational[MatMult[l, dd, u]]];
-  Print["---"];
+    mat = {{a,tp[c]},{c,b}};
+    {ldl,p,s,rank} = NCLDLDecomposition[mat];
+    {l,dd,u} = GetLDUMatrices[ldl,s];
+    NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
-*)
+    mat = {{a+tp[a],tp[c]},{c,b}};
+    {ldl,p,s,rank} = NCLDLDecomposition[mat];
+    {l,dd,u} = GetLDUMatrices[ldl,s];
+    NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
+
+  (*
+    Print[];
+    Print["---"];
+    Print["mat = ", mat];
+    Print["ldl = ", ldl];
+    Print["s = ", s];
+    Print["rank = ", rank];
+    Print["l = ", Normal[l]];
+    Print["d = ", Normal[dd]];
+    Print["u = ", Normal[u]];
+    Print["l.d.u = ", NCSimplifyRational[MatMult[l, dd, u]]];
+    Print["---"];
+  *)
+
+    ,
+    {NCAdjointQ::AdjointVariables, NCSymmetricQ::SymmetricVariables}
+  ];
 
 ];
