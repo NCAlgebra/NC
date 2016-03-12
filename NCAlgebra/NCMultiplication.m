@@ -91,6 +91,8 @@ Begin[ "`Private`" ]
 
   CommutativeQ[_?NumberQ] = True;
 
+  CommutativeQ[Slot] = False;
+  CommutativeQ[SlotSequence] = False;
   CommutativeQ[Pattern] = False;
   CommutativeQ[Blank] = False;
   CommutativeQ[BlankSequence] = False;
@@ -160,7 +162,9 @@ Begin[ "`Private`" ]
     b NonCommutativeMultiply[a, c]; 
                         
   (* Identity *)
-  NonCommutativeMultiply[a_] := a;
+  NonCommutativeMultiply[f_[a_]] := f[a];
+  NonCommutativeMultiply[a_Plus] := a;
+  NonCommutativeMultiply[a_Symbol] := a;
   NonCommutativeMultiply[] := 1;
                         
   (* ---------------------------------------------------------------- *)

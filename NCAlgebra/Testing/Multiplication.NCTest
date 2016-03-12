@@ -8,6 +8,19 @@ Block[
   SetNonCommutative[x,y];
   SetCommutative[z];
 
+  (* Identities *)
+  NCTest[NonCommutativeMultiply[x], Unevaluated[x], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[x + y], Unevaluated[x + y], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[inv[x]], Unevaluated[inv[x]], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[f[x]], Unevaluated[f[x]], "Multiplication", k++];
+
+  NCTest[NonCommutativeMultiply[x_], Unevaluated[NonCommutativeMultiply[x_]], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[x__], Unevaluated[NonCommutativeMultiply[x__]], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[x___], Unevaluated[NonCommutativeMultiply[x___]], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[#], Unevaluated[NonCommutativeMultiply[#]], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[##], Unevaluated[NonCommutativeMultiply[##]], "Multiplication", k++];
+
+
   NCTest[x**x, Unevaluated[x**x], "Multiplication", k++];
   NCTest[x**x**y, Unevaluated[x**x**y], "Multiplication", k++];
   NCTest[x**(x**y), Unevaluated[x**x**y], "Multiplication", k++];

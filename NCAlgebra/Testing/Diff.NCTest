@@ -10,21 +10,134 @@
 *)
 
 Module[ 
-   {k,x,y,h,A,GE,B1,C1,C2,W,b,D21,temp},
+   {k,test,answer,exp,A,B,x,y,h},
 
    k = 1;
+   test = "Diff";
 
+  SetCommutative[A,B];
   SetNonCommutative[x,y,h];
 
-   Quiet[
+  exp = 1;
+  answer = 0;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
 
-     NCTest[DirectionalD[x^9 + 123 x^8,x,h], 9 x^8 h + 123 8 x^7 h, 
-            "Diff", k++];
-     NCTest[DirectionalD[x**y**x,x,h], h**y**x + x**y**h, "Diff", k++];
-     NCTest[DirectionalD[x**y**x,y,h], x**h**x, "Diff", k++];
-     NCTest[ExpandNonCommutativeMultiply[DirectionalD[x**x**Sin[x],x,h]],
-            h**x**Sin[x] + x**h**Sin[x] + x**x**(h Cos[x]), "Diff", k++];
-     NCTest[DirectionalD[x,y,h], 0, "Diff", k++]; 
+  exp = y;
+  answer = 0;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = A + 2 B ** y;
+  answer = 0;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = x;
+  answer = h;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = tp[x];
+  answer = tp[h];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = tp[x**x];
+  answer = tp[h**x+x**h];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = aj[x];
+  answer = aj[h];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = aj[x**x];
+  answer = aj[h**x+x**h];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = x**y**x;
+  answer = h**y**x+x**y**h;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = y**x**y;
+  answer = y**h**y;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = x**y**x+y**x**y;
+  answer = h**y**x+x**y**h+y**h**y;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = A**x**y**x+B**y**x**y;
+  answer = A h**y**x + A x**y**h + B y**h**y;
+  NCTest[NCExpand[DirectionalD[exp, x, h]], answer, test, k++];
+
+  exp = A**tp[x]**y**x+B**y**x**y;
+  answer = A tp[h]**y**x + A tp[x]**y**h + B y**h**y;
+  NCTest[NCExpand[DirectionalD[exp, x, h]], answer, test, k++];
+
+  exp = A**aj[x]**y**x+B**y**x**y;
+  answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**y;
+  NCTest[NCExpand[DirectionalD[exp, x, h]], answer, test, k++];
+
+  exp = inv[x];
+  answer = -inv[x]**h**inv[x];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[x**x];
+  answer = - inv[x**x]**(h**x+x**h)**inv[x**x];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[tp[x]];
+  answer = - inv[tp[x]]**tp[h]**inv[tp[x]];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[1 + tp[x]];
+  answer = - inv[1+tp[x]]**tp[h]**inv[1+tp[x]];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[1+x];
+  answer = -inv[1+x]**h**inv[1+x];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = 1+inv[1+x];
+  answer = -inv[1+x]**h**inv[1+x];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = x**x+inv[1+x**x];
+  answer = (h**x+x**h)-inv[1+x**x]**(h**x+x**h)**inv[1+x**x];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = 1+inv[1+inv[1 + x]];
+  answer = inv[1+inv[1 + x]]**inv[1+x]**h**inv[1+x]**inv[1+inv[1 + x]];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[A x];
+  answer = -inv[x]**h**inv[x]/A;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[A x**x];
+  answer = - inv[x**x]**(h**x+x**h)**inv[x**x]/A;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[tp[A x]];
+  answer = - inv[tp[x]]**tp[h]**inv[tp[x]]/A;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = inv[1 + A x];
+  answer = - inv[1+A x]**h**inv[1+A x]*A;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = 1+inv[1+ A x];
+  answer = -inv[1+A x]**h**inv[1+A x]*A;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = x**x+inv[1+x**x];
+  answer = (h**x+x**h)-inv[1+x**x]**(h**x+x**h)**inv[1+x**x];
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+  exp = 1+inv[1+inv[1 + A x]];
+  answer = inv[1+inv[1 + A x]]**inv[1+A x]**h**inv[1+A x]**inv[1+inv[1 + A x]] * A;
+  NCTest[DirectionalD[exp, x, h], answer, test, k++];
+
+];
+
+aaa := Block[
+  {},
 
      SetNonCommutative[A,GE,B1,C1,C2,D21,W];
 
@@ -33,8 +146,5 @@ Module[
             2 GE[x]**b**C2[x] + 2 GE[x]**B1[x]**W + GE[x]**b**D21[x]**W;
      NCTest[NCGrad[temp,W], 
             tp[2 GE[x]**B1[x] + GE[x]**b**D21[x] - 2tp[W]], "Diff", k++];
-
-     , NCGrad::limited
-  ];
 
 ];

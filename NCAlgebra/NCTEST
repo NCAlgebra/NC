@@ -52,6 +52,7 @@ tests = {
   {"Conjugate",        "Conjugates"},
   {"Roots",            "Roots"},
   {"NCOutput",         "NCOutput"},
+  {"Diff",             "Diff"},
   {"Collect",          "Collect"},
   {"Substitute",       "Substitute"},
   {"SimplifyRational", "SimplifyRational"},
@@ -60,9 +61,8 @@ tests = {
   {"NCMatrixDecompositions", "NCMatrixDecompositions"},
   {"NCLDU",            "NCLDU"}, 
   {"NCInverse",        "NCInverse"},
-  {"NCConvexity",      "NCConvexity"},
+(*  {"NCConvexity",      "NCConvexity"},*)
   {"NCRealization",    "Realization"}
-(*  {"Diff",             "Diff"}, *)
 (* {"Crit",             "Crit"}, *)
 (*
   {"NCSolve",               "NCSolve"},

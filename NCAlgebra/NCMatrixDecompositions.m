@@ -1,6 +1,6 @@
 (* :Title: 	NCMatrixDecompositions.m *)
 
-(* :Authors: 	Mauricio C. de Oliveira *)
+(* :Authors: 	mauricio *)
 
 (* :Context: 	MatrixDecompositions` *)
 
@@ -273,7 +273,7 @@ Begin[ "`Private`" ]
      id = IdentityMatrix[m];
      If[m != n
         , 
-        Message[MatrixDecompositions::NotSquare]; 
+        Message[MatrixDecompositions::Square]; 
         Return[id];
      ];
       

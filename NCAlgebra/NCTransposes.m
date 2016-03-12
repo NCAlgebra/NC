@@ -80,8 +80,8 @@ Begin[ "`Private`" ]
   tp[a_Times] := tp /@ a;
 
   (* tp reverse threads over NonCommutativeMultiply *)
-  HoldPattern[tp[NonCommutativeMultiply[a__]]] := 
-        (NonCommutativeMultiply @@ (tp /@ Reverse[{a}]));
+  tp[NonCommutativeMultiply[a__]] := 
+    (NonCommutativeMultiply @@ (tp /@ Reverse[{a}]));
 
   (* tp[inv[]] = inv[tp[]] *)
   tp[inv[a_]] := inv[tp[a]];

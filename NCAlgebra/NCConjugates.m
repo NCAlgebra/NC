@@ -43,8 +43,8 @@ Begin[ "`Private`" ]
   co[a_Times] := co /@ a;
 
   (* co threads over NonCommutativeMultiply *)
-  HoldPattern[co[NonCommutativeMultiply[a__]]] := 
-        (NonCommutativeMultiply @@ (co /@ {a}));
+  co[NonCommutativeMultiply[a__]] := 
+    (NonCommutativeMultiply @@ (co /@ {a}));
   
   (* Relationship with aj and tp *)
 

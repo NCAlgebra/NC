@@ -38,7 +38,7 @@ Begin[ "`Private`" ]
   (* NonCommutativeMultiply[a___,Id,c___] := NonCommutativeMultiply[a,c]; *)
 
   (* commutative inverse *)
-  inv[a_] := a^(-1) /; CommutativeQ[a];
+  inv[a_?CommutativeQ] := a^(-1);
   inv[a_?NumberQ] := 1/a;
 
   (* inv is idempotent *)

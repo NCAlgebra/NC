@@ -18,7 +18,7 @@
 *)
 
 BeginPackage[ "NonCommutativeMultiply`",
-               "NCUtil`" ]
+              "NCUtil`" ]
 
 aj::usage = 
 "aj[x] is the adjoint of x. aj is a conjugate linear involution. \
@@ -81,8 +81,8 @@ Begin[ "`Private`" ]
   aj[a_Times] := aj /@ a;
 
   (* aj reverse threads over NonCommutativeMultiply *)
-  HoldPattern[aj[NonCommutativeMultiply[a__]]] := 
-        (NonCommutativeMultiply @@ (aj /@ Reverse[{a}]));
+  aj[NonCommutativeMultiply[a__]] := 
+     (NonCommutativeMultiply @@ (aj /@ Reverse[{a}]));
 
   (* aj[inv[]] = inv[aj[]] *)
   aj[inv[a_]] := inv[aj[a]];
