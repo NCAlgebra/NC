@@ -1,6 +1,6 @@
 (* :Title: 	NCAdjoints *)
 
-(* :Author: 	mauricio. *)
+(* :Author: 	mauricio *)
 
 (* :Context: 	NonCommutativeMultiply` *)
 
@@ -32,13 +32,14 @@ i.e. if tp[exp] == exp.";
 NCSelfAdjointQ::SelfAdjointVariables =
 "The variable(s) `1` was(were) assumed adjoint";
 
-Clear[NCMakeSelfAdjoint];
-NCMakeSelfAdjoint::usage = "\
-NCMakeSelfAdjoint[exp] attempts to establish whether exp is \
+Clear[NCSelfAdjointTest];
+NCSelfAdjointTest::usage = "\
+NCSelfAdjointTest[exp] attempts to establish whether exp is \
 self-adjoint by assuming that some of its variables are \
 self-adjoint or symmetric.
+NCSelfAdjointTest[exp, options] uses options.
 
-NCMakeSelfAdjoint returns a list of three elements:
+NCSelfAdjointTest returns a list of three elements:
 \tthe first element is True or False if it succeded to prove exp \
 self-adjoint.
 \tthe second element is a list of the variables that were made \
@@ -46,9 +47,18 @@ self-adjoint.
 \tthe third element is a list of the variables that were made \
 symmetric.
 
+The following options can be given:
+\tSelfAdjointVariables: list of variables that should be \
+considered self-adjoint; use All to make all variables \
+self-adjoint;
+\tSymmetricVariables: list of variables that should be \
+considered symmetric; use All to make all variables symmetric;
+\tExcludeVariables: list of variables that should not be \
+considered symmetric; use All to exclude all variables.
+
 See NCSelfAdjointQ";
 
-Options[NCMakeSelfAdjoint] = {
+Options[NCSelfAdjointTest] = {
   SelfAdjointVariables -> {},
   SymmetricVariables -> {},
   ExcludeVariables -> {}
@@ -79,8 +89,8 @@ Begin[ "`Private`" ]
 
   (* NCSelfAdjointQ *)
   
-  Clear[NCMakeSelfAdjointAux];
-  NCMakeSelfAdjointAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
+  Clear[NCSelfAdjointTestAux];
+  NCSelfAdjointTestAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
       {vars, ajVars, ajDiffVars, selfAdjVars, selfAdjRule, ajCoVars, symVars, 
        options, symmetricVars, excludeVars},
       
@@ -90,15 +100,15 @@ Begin[ "`Private`" ]
 
       selfAdjointVars = SelfAdjointVariables 
  	    /. options
-	    /. Options[NCMakeSelfAdjoint, SelfAdjointVariables];
+	    /. Options[NCSelfAdjointTest, SelfAdjointVariables];
 
       symmetricVars = SymmetricVariables 
  	    /. options
-	    /. Options[NCMakeSelfAdjoint, SymmetricVariables];
+	    /. Options[NCSelfAdjointTest, SymmetricVariables];
 
       excludeVars = ExcludeVariables 
  	    /. options
-	    /. Options[NCMakeSelfAdjoint, ExcludeVariables];
+	    /. Options[NCSelfAdjointTest, ExcludeVariables];
 
       (* Print["-----"]; *)
       
@@ -218,15 +228,15 @@ Begin[ "`Private`" ]
       Return[{True, selfAdjVars, symVars}];
   ];
 
-  NCMakeSelfAdjoint[exp_, opts:OptionsPattern[{}]] :=
-    NCMakeSelfAdjointAux[exp, 
+  NCSelfAdjointTest[exp_, opts:OptionsPattern[{}]] :=
+    NCSelfAdjointTestAux[exp, 
                        ExpandNonCommutativeMultiply[exp - aj[exp]],
                        0, opts];
 
   (* NCSelfAdjointQ *)
  
   NCSelfAdjointQ[exp_, opts:OptionsPattern[{}]] := 
-     First[NCMakeSelfAdjoint[exp, opts]];
+     First[NCSelfAdjointTest[exp, opts]];
   
 End[]
 

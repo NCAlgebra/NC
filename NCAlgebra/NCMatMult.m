@@ -169,18 +169,18 @@ Begin["`Private`"];
   NCInverse[NotMat_] := Message[NCInverse::NotMatrix];
 
 
-  (* NCMakeSymmetric *)
+  (* NCSymmetricTest *)
   
-  NCMakeSymmetric[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
-    NonCommutativeMultiply`Private`NCMakeSymmetricAux[
+  NCSymmetricTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
+    NonCommutativeMultiply`Private`NCSymmetricTestAux[
         mat, 
         ExpandNonCommutativeMultiply[mat - tpMat[mat]], 
         ConstantArray[0, Dimensions[mat]], opts];
 
-  (* NCMakeSelfAdjoint *)
+  (* NCSelfAdjointTest *)
   
-  NCMakeSelfAdjoint[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
-    NonCommutativeMultiply`Private`NCMakeSelfAdjointAux[
+  NCSelfAdjointTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
+    NonCommutativeMultiply`Private`NCSelfAdjointTestAux[
         mat, 
         ExpandNonCommutativeMultiply[mat - ajMat[mat]], 
         ConstantArray[0, Dimensions[mat]], opts];

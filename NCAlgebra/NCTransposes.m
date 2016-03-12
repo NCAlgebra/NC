@@ -31,27 +31,34 @@ NCSymmetricQ[exp] returns true if exp is symmetric, \
 i.e. if tp[exp] == exp.
 
 NCSymmetricQ attempts to detect symmetric variables \
-using NCMakeSymmetric.
+using NCSymmetricTest.
 
-See NCMakeSymmetric";
+See NCSymmetricTest";
 
 NCSymmetricQ::SymmetricVariables =
 "The variable(s) `1` was(were) assumed symmetric";
 
-Clear[NCMakeSymmetric];
-NCMakeSymmetric::usage = "\
-NCMakeSymmetricQ[exp] attempts to establish symmetry of exp by \
+Clear[NCSymmetricTest];
+NCSymmetricTest::usage = "\
+NCSymmetricTest[exp] attempts to establish symmetry of exp by \
 assuming symmetry of its variables.
+NCSymmetricTest[exp, options] uses options.
 
-NCMakeSymmetricQ returns a list of two elements:
+NCSymmetricTest returns a list of two elements:
 \tthe first element is True or False if it succeded to prove exp \
 symmetric.
 \tthe second element is a list of the variables that were made \
 symmetric.
 
-See NCSymmetricQ";
+The following options can be given:
+\tSymmetricVariables: list of variables that should be \
+considered symmetric; use All to make all variables symmetric;
+\tExcludeVariables: list of variables that should not be \
+considered symmetric; use All to exclude all variables.
 
-Options[NCMakeSymmetric] = {
+See also: NCSymmetricQ";
+
+Options[NCSymmetricTest] = {
   SymmetricVariables -> {},
   ExcludeVariables -> {}
 };
@@ -79,10 +86,10 @@ Begin[ "`Private`" ]
   (* tp[inv[]] = inv[tp[]] *)
   tp[inv[a_]] := inv[tp[a]];
 
-  (* NCMakeSymmetric *)
+  (* NCSymmetricTest *)
   
-  Clear[NCMakeSymmetricAux];
-  NCMakeSymmetricAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
+  Clear[NCSymmetricTestAux];
+  NCSymmetricTestAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
       {vars, tpVars, tpDiffVars, symVars, symRule, 
        options, symmetricVars, excludeVars},
       
@@ -92,11 +99,11 @@ Begin[ "`Private`" ]
 
       symmetricVars = SymmetricVariables 
  	    /. options
-	    /. Options[NCMakeSymmetric, SymmetricVariables];
+	    /. Options[NCSymmetricTest, SymmetricVariables];
 
       excludeVars = ExcludeVariables 
  	    /. options
-	    /. Options[NCMakeSymmetric, ExcludeVariables];
+	    /. Options[NCSymmetricTest, ExcludeVariables];
       
       (* easy return *)
       If[ diff === zero, Return[{True, {}}] ];
@@ -164,15 +171,15 @@ Begin[ "`Private`" ]
       Return[{True, symVars}];
   ];
   
-  NCMakeSymmetric[exp_, opts:OptionsPattern[{}]] :=
-    NCMakeSymmetricAux[exp, 
+  NCSymmetricTest[exp_, opts:OptionsPattern[{}]] :=
+    NCSymmetricTestAux[exp, 
                        ExpandNonCommutativeMultiply[exp - tp[exp]],
                        0, opts];
       
   (* NCSymmetricQ *)
  
   NCSymmetricQ[exp_, opts:OptionsPattern[{}]] := 
-    First[NCMakeSymmetric[exp, opts]];
+    First[NCSymmetricTest[exp, opts]];
      
 End[]
 
