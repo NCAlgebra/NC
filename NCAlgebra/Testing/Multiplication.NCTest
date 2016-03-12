@@ -1,73 +1,119 @@
 (* History:  Mar 2016: Multiplication test (mauricio) *)
 
 Block[
-  {k,i,j,x,y,z},
+  {k,test,i,j,x,y,z,exp,answer},
 
   k = 1;
+  test = "Multiplication";
 
   SetNonCommutative[x,y];
   SetCommutative[z];
 
   (* Identities *)
-  NCTest[NonCommutativeMultiply[x], Unevaluated[x], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[x + y], Unevaluated[x + y], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[inv[x]], Unevaluated[inv[x]], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[f[x]], Unevaluated[f[x]], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[x], Unevaluated[x], test, k++];
+  NCTest[NonCommutativeMultiply[x + y], Unevaluated[x + y], test, k++];
+  NCTest[NonCommutativeMultiply[inv[x]], Unevaluated[inv[x]], test, k++];
+  NCTest[NonCommutativeMultiply[f[x]], Unevaluated[f[x]], test, k++];
 
-  NCTest[NonCommutativeMultiply[x_], Unevaluated[NonCommutativeMultiply[x_]], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[x__], Unevaluated[NonCommutativeMultiply[x__]], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[x___], Unevaluated[NonCommutativeMultiply[x___]], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[#], Unevaluated[NonCommutativeMultiply[#]], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[##], Unevaluated[NonCommutativeMultiply[##]], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[x_], Unevaluated[NonCommutativeMultiply[x_]], test, k++];
+  NCTest[NonCommutativeMultiply[x__], Unevaluated[NonCommutativeMultiply[x__]], test, k++];
+  NCTest[NonCommutativeMultiply[x___], Unevaluated[NonCommutativeMultiply[x___]], test, k++];
+  NCTest[NonCommutativeMultiply[#], Unevaluated[NonCommutativeMultiply[#]], test, k++];
+  NCTest[NonCommutativeMultiply[##], Unevaluated[NonCommutativeMultiply[##]], test, k++];
 
+  NCTest[x**x, Unevaluated[x**x], test, k++];
+  NCTest[x**x**y, Unevaluated[x**x**y], test, k++];
+  NCTest[x**(x**y), Unevaluated[x**x**y], test, k++];
+  NCTest[(x**x)**y, Unevaluated[x**x**y], test, k++];
+  NCTest[y**x**x**y, Unevaluated[y**x**x**y], test, k++];
+  NCTest[(y**x)**x**y, Unevaluated[y**x**x**y], test, k++];
+  NCTest[y**(x**x)**y, Unevaluated[y**x**x**y], test, k++];
+  NCTest[y**x**(x**y), Unevaluated[y**x**x**y], test, k++];
 
-  NCTest[x**x, Unevaluated[x**x], "Multiplication", k++];
-  NCTest[x**x**y, Unevaluated[x**x**y], "Multiplication", k++];
-  NCTest[x**(x**y), Unevaluated[x**x**y], "Multiplication", k++];
-  NCTest[(x**x)**y, Unevaluated[x**x**y], "Multiplication", k++];
-  NCTest[y**x**x**y, Unevaluated[y**x**x**y], "Multiplication", k++];
-  NCTest[(y**x)**x**y, Unevaluated[y**x**x**y], "Multiplication", k++];
-  NCTest[y**(x**x)**y, Unevaluated[y**x**x**y], "Multiplication", k++];
-  NCTest[y**x**(x**y), Unevaluated[y**x**x**y], "Multiplication", k++];
+  NCTest[z**y**x**y, Unevaluated[z*y**x**y], test, k++];
+  NCTest[y**z**x**y, Unevaluated[z*y**x**y], test, k++];
+  NCTest[y**x**z**y, Unevaluated[z*y**x**y], test, k++];
+  NCTest[y**x**y**z, Unevaluated[z*y**x**y], test, k++];
 
-  NCTest[z**y**x**y, Unevaluated[z*y**x**y], "Multiplication", k++];
-  NCTest[y**z**x**y, Unevaluated[z*y**x**y], "Multiplication", k++];
-  NCTest[y**x**z**y, Unevaluated[z*y**x**y], "Multiplication", k++];
-  NCTest[y**x**y**z, Unevaluated[z*y**x**y], "Multiplication", k++];
+  NCTest[(z*y)**x**y, Unevaluated[z*y**x**y], test, k++];
+  NCTest[y**(z*x)**y, Unevaluated[z*y**x**y], test, k++];
+  NCTest[y**x**(z*y), Unevaluated[z*y**x**y], test, k++];
 
-  NCTest[(z*y)**x**y, Unevaluated[z*y**x**y], "Multiplication", k++];
-  NCTest[y**(z*x)**y, Unevaluated[z*y**x**y], "Multiplication", k++];
-  NCTest[y**x**(z*y), Unevaluated[z*y**x**y], "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[x], x, test, k++];
+  NCTest[NonCommutativeMultiply[y], y, test, k++];
+  NCTest[NonCommutativeMultiply[z], z, test, k++];
 
-  NCTest[NonCommutativeMultiply[x], x, "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[y], y, "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[z], z, "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[], 1, test, k++];
 
-  NCTest[NonCommutativeMultiply[], 1, "Multiplication", k++];
+  NCTest[x^2, x**x, test, k++];
+  NCTest[NonCommutativeMultiply[x^2], x**x, test, k++];
+  NCTest[NonCommutativeMultiply[x^2**y], x**x**y, test, k++];
+  NCTest[NonCommutativeMultiply[y**x^2], y**x**x, test, k++];
+  NCTest[NonCommutativeMultiply[y**x^2**y], y**x**x**y, test, k++];
 
-  NCTest[x^2, x**x, "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[x^2], x**x, "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[x^2**y], x**x**y, "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[y**x^2], y**x**x, "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[y**x^2**y], y**x**x**y, "Multiplication", k++];
+  NCTest[NonCommutativeMultiply[x^-2], inv[x**x], test, k++];
+  NCTest[NonCommutativeMultiply[(x^-2)**y], inv[x**x]**y, test, k++];
+  NCTest[NonCommutativeMultiply[y**(x^-2)], y**inv[x**x], test, k++];
+  NCTest[NonCommutativeMultiply[y**(x^-2)**y], y**inv[x**x]**y, test, k++];
 
-  NCTest[NonCommutativeMultiply[x^-2], inv[x**x], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[(x^-2)**y], inv[x**x]**y, "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[y**(x^-2)], y**inv[x**x], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[y**(x^-2)**y], y**inv[x**x]**y, "Multiplication", k++];
+  NCTest[x^-1, inv[x], test, k++];
+  NCTest[NonCommutativeMultiply[x^-1], inv[x], test, k++];
 
-  NCTest[x^-1, inv[x], "Multiplication", k++];
-  NCTest[NonCommutativeMultiply[x^-1], inv[x], "Multiplication", k++];
+  NCTest[x^-3, inv[x**x**x], test, k++];
+  NCTest[x^2+x-x^0+x^-1, x**x+x+inv[x]-1, test, k++];
+  NCTest[(x^0)**(x^1)**(x^2)**((inv[x])^3), 1, test, k++];
 
-  NCTest[x^-3, inv[x**x**x], "Multiplication", k++];
-  NCTest[x^2+x-x^0+x^-1, x**x+x+inv[x]-1, "Multiplication", k++];
-  NCTest[(x^0)**(x^1)**(x^2)**((inv[x])^3), 1, "Multiplication", k++];
+  NCTest[y**x^2, y**x**x, test, k++];
+  NCTest[x^2**y, x**x**y, test, k++];
+  NCTest[y**x^2**y, y**x**x**y, test, k++];
 
-  NCTest[y**x^2, y**x**x, "Multiplication", k++];
-  NCTest[x^2**y, x**x**y, "Multiplication", k++];
-  NCTest[y**x^2**y, y**x**x**y, "Multiplication", k++];
+  NCTest[y**x^2**z^3**y, z^3*y**x**x**y, test, k++];
+  NCTest[y**x^2**z**z**z**y, z^3*y**x**x**y, test, k++];
 
-  NCTest[y**x^2**z^3**y, z^3*y**x**x**y, "Multiplication", k++];
-  NCTest[y**x^2**z**z**z**y, z^3*y**x**x**y, "Multiplication", k++];
+  NCTest[x**Sqrt[2]**x, Sqrt[2] x**x, test, k++];
+  NCTest[x**Pi**x, Pi x**x, test, k++];
+
+  (* Expand *)
+  exp = x**(x+y);
+  answer = x**x + x**y;
+  NCTest[NCExpand[exp], answer, test, k++];
+
+  exp = (x+y)**x;
+  answer = x**x + y**x;
+  NCTest[NCExpand[exp], answer, test, k++];
+
+  exp = x**(x+y)**x;
+  answer = x**x**x + x**y**x;
+  NCTest[NCExpand[exp], answer, test, k++];
+
+  exp = x**(x+y**(1+x)**y)**x;
+  answer = x**x**x + x**y**y**x + x**y**x**y**x;
+  NCTest[NCExpand[exp], answer, test, k++];
+
+  exp = x**inv[1 + x**(1 + x)];
+  answer = x**inv[1 + x + x**x];
+  NCTest[NCExpand[exp], answer, test, k++];
+
+  (* CommuteEverything *)
+  exp = x**(x+y);
+  answer = Commutative[x]^2 + Commutative[x] Commutative[y];
+  NCTest[Expand[CommuteEverything[exp]], answer, test, k++];
+
+  exp = (x+y)**x;
+  answer = Commutative[x]^2 + Commutative[x] Commutative[y];
+  NCTest[Expand[CommuteEverything[exp]], answer, test, k++];
+
+  exp = x**(x+y)**x;
+  answer = Commutative[x]^3 + Commutative[x]^2 Commutative[y];
+  NCTest[Expand[CommuteEverything[exp]], answer, test, k++];
+
+  exp = x**(x+y**(1+x)**y)**x;
+  answer = Commutative[x]^3 + Commutative[x]^2 Commutative[y]^2 
+           + Commutative[x]^3 Commutative[y]^2;
+  NCTest[Expand[CommuteEverything[exp]], answer, test, k++];
+
+  exp = x**inv[1 + x**(1 + x)];
+  answer = Commutative[x] / (1 + Commutative[x] + Commutative[x]^2);
+  NCTest[ExpandAll[CommuteEverything[exp]], answer, test, k++];
 
 ];

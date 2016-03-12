@@ -19,52 +19,67 @@
                 NCUsage.m (mstankus)
    :3/3/16:     Deprecated CommutativeAllQ
 *)
+
 BeginPackage[ "NonCommutativeMultiply`" ]
 
 Clear[CommutativeQ];
 
-CommutativeQ::usage = 
-"CommutativeQ[x] is True if x is commutative (the default), \
-and False if x is non-commutative.  See SetCommutative and \
-SetNonCommutative.";
+CommutativeQ::usage = "\
+CommutativeQ[x] is True if x is commutative (the default), \
+and False if x is non-commutative.
+    
+See SetCommutative and SetNonCommutative.";
+CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative";
+CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative";
 
 Clear[NonCommutativeQ];
 
-NonCommutativeQ::usage = 
-"NonCommutativeQ[x] is equal to Not[CommutativeQ[x]]. See CommutativeQ.";
+NonCommutativeQ::usage = "\
+NonCommutativeQ[x] is equal to Not[CommutativeQ[x]]. 
+
+See CommutativeQ.";
      
 Clear[SetCommutative];
 
-SetCommutative::usage = 
-     "SetCommutative[a, b, c, ...] sets all the symbols a, b, c, ... \
-      to be commutative. See SetNonCommutative and CommutativeQ.";
+SetCommutative::usage = "\
+SetCommutative[a, b, c, ...] sets all the symbols a, b, c, ... \
+to be commutative.
+
+See SetNonCommutative and CommutativeQ.";
 
 Clear[SetNonCommutative];
 
-SetNonCommutative::usage = 
-     "SetNonCommutative[a, b, c, ...] sets all the symbols a, b, c, ... \
-      to be non-commutative. See SetCommutative and CommutativeQ.";
+SetNonCommutative::usage = "\
+SetNonCommutative[a, b, c, ...] sets all the symbols a, b, c, ... \
+to be noncommutative.
 
+See SetCommutative and CommutativeQ.";
+                  
 Clear[ExpandNonCommutativeMultiply];
 
-ExpandNonCommutativeMultiply::usage =
-     "ExpandNonCommutativeMultiply[expr] expands out \
-      NonCommutativeMultiply's in expr. It's aliases are \
-      NCE,NCExpand and ExpandNC. For example, NCE[a**(b+c)] \
-      will result in a**b + a**c.";
+ExpandNonCommutativeMultiply::usage = "\
+ExpandNonCommutativeMultiply[expr] expands out NonCommutativeMultiply's \
+in expr. For example, NCE[a**(b+c)] will result in a**b + a**c.
 
-Clear[TimesToNCM];
-
-TimesToNCM::usage =
-     "TimesToNCM[expr] returns expr/.Times->NonCommutativeMultiply.";
+It's aliases are NCE, and NCExpand.";
 
 Clear[CommuteEverything];
 
-CommuteEverything::usage = 
-     "Answers the question \"what does it sound like?\". \
-      CommuteEverything[expr] returns \
-      expr/.NonCommuativeMultiply->Times";
+CommuteEverything::usage = "\
+Answers the question \"what does it sound like?\". \
+CommuteEverything[expr] replaces all noncommutative symbols in  \
+expr by its commutative self using Commutative so that the \
+resulting expression contains no noncommutative products or inverses.
 
+See Commutative.";
+
+Clear[Commutative];                        
+Commutative::usage = "\
+Commutative[x] makes the noncommutative symbol x behave as \
+if it were commutative
+         
+See CommuteEverything, CommutativeQ, SetCommutative, SetNonCommutative.";
+                        
 (* MAURICIO: JUNE 2009: THESE DECLARATIONS BECAUSE SOME RULES ARE DEFINED IN THIS FILE BEFORE LOAD NCTRANSPOSE, ETC *)
 
 Clear[aj];
@@ -75,21 +90,13 @@ Clear[co]; (* MAURICIO MAR 2016 *)
 
 Begin[ "`Private`" ]
 
+  (* Overide Mathematica's existing NonCommutativeMultiply operator *)
+  
   Unprotect[NonCommutativeMultiply];
   ClearAttributes[NonCommutativeMultiply, {OneIdentity, Flat}]
 
-  NonCommutativeQ[x_] = Not[CommutativeQ[x]];
 
-  (* ---------------------------------------------------------------- *)
-  (*  Set all varibles to be commutative by default.                  *)
-  (* ---------------------------------------------------------------- *)
-
-  CommutativeQ[_Symbol] = True;
-  CommutativeQ[_Integer] = True;
-  CommutativeQ[_Real] = True;
-  CommutativeQ[_String] = True;
-
-  CommutativeQ[_?NumberQ] = True;
+  (* CommutativeQ *)
 
   CommutativeQ[Slot] = False;
   CommutativeQ[SlotSequence] = False;
@@ -98,55 +105,51 @@ Begin[ "`Private`" ]
   CommutativeQ[BlankSequence] = False;
   CommutativeQ[BlankNullSequence] = False;
 
-  (* MAURICIO MAR 2016 *)
-  (* This rule assumes functions are noncommutative 
-     which basically makes all patterns work *)
-  (*
-    Global`$NC$ForceCommutativeAllQ=True; (* Mark Stankus's choice *)
-    If[Global`$NC$ForceCommutativeAllQ===True
-      , CommutativeQ[f_[x___]] := 
-          If[CommutativeQ[f], Apply[And, Map[CommutativeQ,{x}]]
-                            , False
-          ];
-    ];
-  *)
-  CommutativeQ[f_?CommutativeQ[x___]] := Apply[And, Map[CommutativeQ,{x}]];
+  (* a commutative functions is commutative if all arguments are 
+     also commutative*)
+  CommutativeQ[f_?CommutativeQ[x___]] := 
+      Apply[And, Map[CommutativeQ,{x}]];
+
+  (* otherwise it is noncommutative *)
   CommutativeQ[f_[x___]] := False;
 
-  (* Everything else is commutative *)
+  (* everything else is commutative *)
   CommutativeQ[_] = True;
+  
+  (* NonCommutativeQ *)
+  
+  NonCommutativeQ[x_] := Not[CommutativeQ[x]];
 
-  (* ---------------------------------------------------------------- *)
-  (*  Set commutative and non-commutative commands.                   *)
-  (* ---------------------------------------------------------------- *)
-  DoSetNonCommutative[x_?NumberQ] := 
-    Print["Warning: Tried to set the number ", Format[x,InputForm],
-          " to be noncommutative."];
 
-  DoSetNonCommutative[x_Plus] := 
-    Print["Warning: Tried to set the expression", Format[x,InputForm],
-          " to be noncommutative."];
+  (*  SetCommutative and SetNonCommutative *)
 
-  DoSetNonCommutative[x_Times] :=
-    Print["Warning: Tried to set the expression", Format[x,InputForm],
-          " to be noncommutative."];
-
-  DoSetNonCommutative[x_NonCommutativeMultiply] :=
-    Print["Warning: Tried to set the expression", Format[x,InputForm],
-          " to be noncommutative."];
-
+  Clear[DoSetNonCommutative];
+  DoSetNonCommutative[x_Symbol] := CommutativeQ[x] ^= False;
   DoSetNonCommutative[x_List] := SetNonCommutative /@ x;
-
-  DoSetNonCommutative[x_] := CommutativeQ[x] ^= False;
+  DoSetNonCommutative[x_?NumberQ] := 
+    Message[CommutativeQ::NonCommutative, "number", x];
+  DoSetNonCommutative[x_] := 
+    Message[CommutativeQ::NonCommutative, "expression", x];
 
   SetNonCommutative[a__] := Scan[DoSetNonCommutative, {a}];
 
-  DoSetCommutative[x_] := CommutativeQ[x] ^= True;
+  Clear[DoSetCommutative];
+  DoSetCommutative[x_Symbol] := CommutativeQ[x] ^= True;
+  DoSetCommutative[x_List] := SetCommutative /@ x;
+  DoSetCommutative[x_?NumberQ] := 
+    Message[CommutativeQ::Commutative, "number", x];
+  DoSetCommutative[x_] := 
+    Message[CommutativeQ::Commutative, "expression", x];
 
   SetCommutative[a__] := Scan[DoSetCommutative, {a}];
 
   SetNonCommutative[NonCommutativeMultiply];
 
+  (* Commutative *)
+  
+  CommutativeQ[x_Commutative] ^= True;
+  Commutative[x_?CommutativeQ] = x;
+  
   (* -------------------------------------------- *)
   (*  NonCommutative Muliplication book-keeping   *)
   (* -------------------------------------------- *)
@@ -173,7 +176,7 @@ Begin[ "`Private`" ]
   (* ---------------------------------------------------------------- *)
 
   ExpandNonCommutativeMultiply[expr_] :=
-     Expand[expr //. HoldPattern[NonCommutativeMultiply[a___, b_Plus, c___]] :>
+    Expand[expr //. NonCommutativeMultiply[a___, b_Plus, c___] :>
        (NonCommutativeMultiply[a, #, c]& /@ b)];
 
   (* 05/14/2012 MAURICIO - BEGIN COMMENT *)
@@ -187,24 +190,20 @@ Begin[ "`Private`" ]
   *)
   (* 05/14/2012 MAURICIO - END *)
 
-  (* ---------------------------------------------------------------- *)
-  (*  This concludes material obtained from ERAN@SLACVM.BITNET at     *)
-  (*  Stanford Linear Accelerator                                     *)
-  (* ---------------------------------------------------------------- *)
-
-  TimesToNCM[expr_] := expr /. Times->NonCommutativeMultiply;
-
-  (* MAURICIO: JUNE 2009: ADDED HOLDPATTERN TO PROTECT CE *)
-
-  CommuteEverything[v_] := v //. {
-    NonCommutativeMultiply -> Times,
-    HoldPattern[tp[x_]]->x, 
-    HoldPattern[aj[x_]]->Conjugate[x], 
-    HoldPattern[co[x_]]->Conjugate[x], 
-    HoldPattern[rt[x_]]->x^(1/2),
-    HoldPattern[inv[x_]]->x^(-1)
+  (*                        
+  CommuteEverything[exp_] := exp //. {
+    tp[x_] -> x, 
+    aj[x_] -> Conjugate[x], 
+    co[x_] -> Conjugate[x], 
+    rt[x_] -> x^(1/2),
+    inv[x_] -> x^(-1),
+    NonCommutativeMultiply -> Times
   };
-
+  *)
+  CommuteEverything[exp_] := 
+       Replace[exp, x_Symbol :> Commutative[x],
+               Infinity];
+       
 End[]
 
 EndPackage[]

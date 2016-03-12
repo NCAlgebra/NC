@@ -16,22 +16,22 @@ Module[
 
    (* Clear[ a,b,c,d,f,g,h,i,j ]; *)
 
-   SetNonCommutative[W, x, z, A[x], B1[x], B2[x], C1[x], C2[x], 
-                     D12[x], D21[x], GEx[x, z], GEz[x, z],
+   SetNonCommutative[W, x, z, A, B1, B2, C1, C2, 
+                     D12, D21, GEx, GEz,
                      a,b,c,d,e,f,g,h,i,j];
 
-   sHW = -tp[W] ** W + (tp[W] ** tp[B1[x]] + 
-         ((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[dd[z]] + tp[c[z]]) ** 
-         tp[B2[x]] + tp[A[x]]) ** GEx[x, z] + 
-         (((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[dd[z]] + tp[c[z]]) ** 
-         tp[D12[x]] + tp[C1[x]]) ** 
-         (C1[x] + D12[x] ** (dd[z] ** (C2[x] + D21[x] ** W) + c[z])) + 
-         tp[GEx[x, z]] ** (A[x] + B1[x] ** W + 
-         B2[x] ** (dd[z] ** (C2[x] + D21[x] ** W) + c[z])) + 
-         tp[GEz[x, z]] ** (b[z] ** (C2[x] + D21[x] ** W) + a[z]) + 
-         ((tp[W] ** tp[D21[x]] + tp[C2[x]]) ** tp[b[z]] + tp[a[z]]) ** GEz[x, z];
+   sHW = -tp[W] ** W + (tp[W] ** tp[B1] + 
+         ((tp[W] ** tp[D21] + tp[C2]) ** tp[dd[z]] + tp[c[z]]) ** 
+         tp[B2] + tp[A]) ** GEx + 
+         (((tp[W] ** tp[D21] + tp[C2]) ** tp[dd[z]] + tp[c[z]]) ** 
+         tp[D12] + tp[C1]) ** 
+         (C1 + D12 ** (dd[z] ** (C2 + D21 ** W) + c[z])) + 
+         tp[GEx] ** (A + B1 ** W + 
+         B2 ** (dd[z] ** (C2 + D21 ** W) + c[z])) + 
+         tp[GEz] ** (b[z] ** (C2 + D21 ** W) + a[z]) + 
+         ((tp[W] ** tp[D21] + tp[C2]) ** tp[b[z]] + tp[a[z]]) ** GEz;
 
-   ruCritW = {W -> tp[B1[x]] ** GEx[x, z] + tp[D21[x]] ** tp[b[z]] ** GEz[x, z]};
+   ruCritW = {W -> tp[B1] ** GEx + tp[D21] ** tp[b[z]] ** GEz};
 
    (*
    tt1 = CriticalPoint[sHW,W];

@@ -45,8 +45,8 @@ Print["> BEGIN NCTEST\n" ];
 
 tests = {
   {"CommutativeQ",     "CommutativeQ"},
-  {"NCUtil",           "NCUtil"},
   {"Multiplication",   "Multiplication"},
+  {"NCUtil",           "NCUtil"},
   {"Transposes",       "Transposes"},
   {"Adjoints",         "Adjoints"},
   {"Conjugate",        "Conjugates"},

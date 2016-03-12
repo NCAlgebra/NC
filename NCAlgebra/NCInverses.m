@@ -52,9 +52,11 @@ Begin[ "`Private`" ]
          NonCommutativeMultiply[b,c];
   inv/:NonCommutativeMultiply[b___,inv[a_],a_,c___] :=
          NonCommutativeMultiply[b,c];
-  inv/:HoldPattern[NonCommutativeMultiply[b___,a__,inv[NonCommutativeMultiply[a__]],c___]] :=
+  inv/:NonCommutativeMultiply[b___,a__,
+                              inv[NonCommutativeMultiply[a__]],c___] :=
          NonCommutativeMultiply[b,c];
-  inv/:HoldPattern[NonCommutativeMultiply[b___,inv[NonCommutativeMultiply[a__]],a__,c___]] :=
+  inv/:NonCommutativeMultiply[b___,
+                              inv[NonCommutativeMultiply[a__]],a__,c___] :=
          NonCommutativeMultiply[b,c];
 
   (* MAURICIO MAR 2016 *)

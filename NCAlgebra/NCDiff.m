@@ -1,6 +1,6 @@
-(* :Title: 	NCDiff // Mathematica 1.2 and 2.0 *)
+(* :Title: 	NCDiff *)
 
-(* :Author: 	Unknown. Revised by Mark Stankus (mstankus). *)
+(* :Author: 	mauricio *)
 
 (* :Context: 	NCDiff` *)
 
@@ -9,49 +9,36 @@
 		and polynomials.
 *)
 
-(* :Alias's:    DirD ::= DirectionalD,
-		DirDP ::= DirectionalDPolynomial,
-		Cri ::= CriticalPoint,
-		Crit ::= CriticalPoint,
-		NCGradPoly ::= NCGrad,
+(*
 *)
 
-(* :Warnings:   DirectionalD[ function[x], x, h] works only for a
-		limited set of functions.
-
-               	NCGrad gives correct answers only for a limited class
-		of polynomials"
+(* :Warnings:
 *)
 
-(* :History: 
-   :3/13/31	Changed Grad to NCGrad to avoid conflict with MMAV9. (mauricio)
-   :9/91	Packaged. (dhurst)
-   :6/25        Rewrote DirectionalD and DirectionalDPolynomial. (mstankus) 
-   :7/01        Added a transpose to Grad and removed it from CriticalPoints.
-		(mstankus)
-   :9/26	Corrected typos, indenting. (dhurst) 
-   :7/2/92	Debugging and Packaging. (dhurst)
-*)
+(* :History: *)
 
 BeginPackage[ "NCDiff`", 
-     "NonCommutativeMultiply`", "NCSolveLinear1`"];
+              "NonCommutativeMultiply`"];
 
 Clear[DirectionalD];
 DirectionalD::usage = "\
-DirectionalD[expr, var, h] takes the Directional Derivative of \n
+DirectionalD[expr, var, h] takes the directional derivative of \n
 expression expr w.r.t. variable var in direction h.
 
-Alias: DirD.";
+See NCDirectionalD.";
 
-NCGrad::usage = "...  Alias: NCGradPoly.";
-NCGrad::limited = "NCGrad gives correct answers only for a limited class of functions!";
+Clear[NCDirectionalD];
+NCDirectionalD::usage = "\
+NCDirectionalD[expr, {var1, h1}, ...] takes the directional \
+derivative of expression expr w.r.t. variables var1, var2, ... \
+successively in the directions h1, h2, ....
 
-CriticalPoint::usage = "...  Alias: Cri, Crit.";
+See DirectionalD.";
 
 Begin["`Private`"];
 
-  SetNonCommutative[var, h, a, b];
-
+  (* DirectionalD *)
+               
   (* Rules for inv *)
   Unprotect[D];
   inv /: D[inv[f_], x_] := -inv[f] ** D[f, x] ** inv[f];
@@ -65,80 +52,16 @@ Begin["`Private`"];
      D[f /. x -> x + t h /. Conjugate[t] -> t, t] /. t -> 0
   ];
 
+  (* NCDirectionalD *)
+               
+  NCDirectionalD[f_, xhs__] := 
+    Plus @@ Map[(DirectionalD @@ Prepend[##, f])&, {xhs}];
 
-  (* :Now we compute a gradient. 
-     :THIS GIVES RIGHT ANSWERS ONLY IN SPECIAL CASES.
-  *)
-
-  SetNonCommutative[func, DV, V]
-  PreGrad[func_, V_, DV_] := DirectionalD[func, V, DV]/.tp[DV]->0;
-
-  (* : Now we compute gradients when the variable commutes or is invertible 
-     :this may well be easy. The Gradient NCGradPoly only works for variables 
-     :VV which occur only on the "ends" of products within an expression.  
-     :Right now NCGradPoly always produces a "row vector" for the Gradient.  
-     :This is easy to change once we decide what convention we want to 
-     :follow regarding results of a Gradient operation.      
-  *)
-
-  SetNonCommutative[p, q, func, hhhh, VV];
-
-  (*
-  SetNonCommutative[p, q, func, hhhh, VV];
-  AuxGradient[p_ + q_ ] := AuxGradient[p] + AuxGradient[q];
-  *)
-  SetNonCommutative[hhhh,b,x];
-  SetLinear[AuxGradient];
-  AuxGradient[tp[hhhh]**b___] := 
-       tp[NonCommutativeMultiply[b]]**hhhh;
-  AuxGradient[hhhh**b___] := 
-       tp[NonCommutativeMultiply[b]]**tp[hhhh];
-  AuxGradient[x_**b___] := 
-       NonCommutativeMultiply[x, NonCommutativeMultiply[b]] /; FreeQ[x, hhhh];
-  AuxGradient[x___] := 
-       NonCommutativeMultiply[x] /; FreeQ[x, hhhh];
-  AuxGradient[x_ y_] := x AuxGradient[y] /; FreeQ[x, hhhh];
-
-  NCGrad[func_, VV_] := Block[
-    {temp},  
-
-     Message[NCGrad::limited];
-     temp = AuxGradient[
-       ExpandNonCommutativeMultiply[
-         DirectionalD[func, VV, hhhh]
-       ]
-     ];
-     temp = temp//.hhhh->Id;
-     Return[tp[temp]];
-  ];
-
-  (* : The GradQuadratic function is a Kluge which works only for polys up 
-     :to 2nd(?) order which are symmetric in the variable of differentiation.  
-     :Use GradPoly for more general polys. 
-  *)
-
-  SetNonCommutative[func, VV, hhhh];
-  NCGradQuadratic[func_, VV_] :=
-       Block[{hhhh, tpg1}, 
-            SetNonCommutative[hhhh];
-            tpg1 = PreGrad[func, VV, hhhh];
-            tpg = tpg1/.hhhh->Id;
-            Print[
-                 "GradQuadratic gives correct answers only for up to \
-                  2nd order polynomials symmetric in variable of \
-                  differentiation."
-            ];
-            Return[2*tpg] 
-       ];
-
-  CriticalPoint[expr_, var_] :=
-       Block[{temp1, temp2},
-  (* was GradPoly *)          temp1 = NCGrad[expr, var];
-            temp2 = ExpandNonCommutativeMultiply[temp1];
-            temp = NCSolveLinear1[temp2 == 0, var];
-            Return[temp]
-       ];
-
+  (* NCHessian *)
+               
+  NCHessian[f_, xhs__] := 
+    NCDirectionalD[NCDirectionalD[f, xhs], xhs];
+               
 End[ ]
 
 EndPackage[ ]
