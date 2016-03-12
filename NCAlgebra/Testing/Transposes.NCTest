@@ -47,7 +47,6 @@ Module[
   expr = a ** b + tp[a ** b];
   NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
 
-  Print["k = ", k];
   expr = a;
   NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False, test, k++];
 

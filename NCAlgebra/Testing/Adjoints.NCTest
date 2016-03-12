@@ -36,89 +36,98 @@ Module[
   expr = c**aj[a**b]**d;
   NCTest[expr, Unevaluated[c ** aj[b] ** aj[a] ** d], test, k++];
 
-  (* NCAdjointQ *)
+  (* NCSelfAdjointQ *)
 
   expr = a + aj[a];
-  NCTest[NCAdjointQ[expr], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = a ** b + aj[a ** b];
-  NCTest[NCAdjointQ[expr], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
-  expr = tp[a] + aj[a];
-  NCTest[NCAdjointQ[expr], False, test, k++];
+  expr = a + aj[a];
+  NCTest[NCSelfAdjointQ[expr], True, test, k++];
+
+  expr = a ** b + aj[a ** b];
+  NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
   expr = a;
-  NCTest[NCAdjointQ[expr], False, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
-  expr = a - aj[a];
-  NCTest[NCAdjointQ[expr], False, test, k++];
+  expr = a + b ** c;
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+
+  expr = a + tp[a];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
   expr = a ** b + tp[a ** b];
-  NCTest[NCAdjointQ[expr], False, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+
+  expr = tp[a] + aj[a];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+
+  expr = a;
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+
+  expr = a - aj[a];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+
+  expr = a ** b + tp[a ** b];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
   expr = a - tp[a];
-  NCTest[NCAdjointQ[expr], False, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
-  (* NCAdjointQ[#, False] *)
+  expr = tp[a] + aj[a];
+  NCTest[NCSelfAdjointQ[expr], False, test, k++];
+
+  expr = a - aj[a];
+  NCTest[NCSelfAdjointQ[expr], False, test, k++];
+
+  expr = a - tp[a];
+  NCTest[NCSelfAdjointQ[expr], False, test, k++];
+
+  (* NCSelfAdjointQ *)
 
   Quiet[
 
-    expr = a + aj[a];
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
-
-    expr = tp[a] + aj[a];
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
-
-    expr = a ** b + aj[a ** b];
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
-
     expr = a;
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
-
-    expr = a + b;
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
-
-    expr = a + tp[a];
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = a ** b + tp[a ** b];
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
-    expr = a - aj[a];
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
+    expr = a + b;
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
-    expr = a - tp[a];
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
-
-    expr = a + b ** c;
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
+    expr = a ** b + tp[a ** b];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = a + b ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = a + aj[b] ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = a + tp[b] ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = a + b + aj[b] ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
+    NCTest[NCSelfAdjointQ[expr], False, test, k++];
 
     expr = a + b + tp[b] ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
+    NCTest[NCSelfAdjointQ[expr], False, test, k++];
 
     expr = a + b ** aj[b] + aj[b] ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = a + b ** tp[b] + tp[b] ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = a + b ** tp[b] + aj[b] ** c + c ** b;
-    NCTest[NCAdjointQ[expr, False], False, test, k++];
+    NCTest[NCSelfAdjointQ[expr], False, test, k++];
 
     ,
-    {NCAdjointQ::AdjointVariables, NCSymmetricQ::SymmetricVariables}
+    {NCSelfAdjointQ::SelfAdjointVariables, NCSymmetricQ::SymmetricVariables}
   ];
 
 ];

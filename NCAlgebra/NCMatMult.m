@@ -177,19 +177,13 @@ Begin["`Private`"];
         ExpandNonCommutativeMultiply[mat - tpMat[mat]], 
         ConstantArray[0, Dimensions[mat]], opts];
 
-  (* NCAdjointQ *)
+  (* NCMakeSelfAdjoint *)
   
-  NCAdjointQ[mat_?MatrixQ] := Module[
-      {diff},
-      diff = ExpandNonCommutativeMultiply[mat - ajMat[mat]];
-      Return[ diff === ConstantArray[0, Dimensions[mat]] ];
-  ];
-
-  NCAdjointQ[mat_?MatrixQ, False] := 
-     NonCommutativeMultiply`Private`NCAdjointQAux[mat, 
-                     ExpandNonCommutativeMultiply[mat - ajMat[mat]], 
-                     ConstantArray[0, Dimensions[mat]]];
-
+  NCMakeSelfAdjoint[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
+    NonCommutativeMultiply`Private`NCMakeSelfAdjointAux[
+        mat, 
+        ExpandNonCommutativeMultiply[mat - ajMat[mat]], 
+        ConstantArray[0, Dimensions[mat]], opts];
 
 End[];
 EndPackage[];

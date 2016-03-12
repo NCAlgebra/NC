@@ -75,44 +75,44 @@ Module[
     NCSymmetricQ::SymmetricVariables
   ];
 
-  (* NCAdjointQ *)
+  (* NCSelfAdjointQ *)
 
   expr = {{a + aj[a]}};
-  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{a}};
-  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
   expr = {{a+aj[a],b},{aj[b],c+aj[c]}};
-  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{aj[b],c+aj[c]}};
-  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{aj[b],1}};
-  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
 
   expr = {{1,b},{b,1}};
-  NCTest[NCAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
 
-  (* NCAdjointQ[#, False] *)
+  (* NCSelfAdjointQ[#, False] *)
 
   Quiet[
 
     expr = {{1,b},{b,1}};
-    NCTest[NCAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = {{a,b},{b,c}};
-    NCTest[NCAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = {{a,b},{aj[b],c}};
-    NCTest[NCAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
 
     expr = {{a,b},{aj[b],aj[a]}};
-    NCTest[NCAdjointQ[expr], False, test, k++];
+    NCTest[NCSelfAdjointQ[expr], False, test, k++];
 
     ,
-    NCAdjointQ::AdjointVariables
+    NCSelfAdjointQ::SelfAdjointVariables
   ];
 
 ];

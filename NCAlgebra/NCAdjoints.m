@@ -24,13 +24,35 @@ aj::usage =
 "aj[x] is the adjoint of x. aj is a conjugate linear involution. \
 See also tp.";
 
-Clear[NCAdjointQ];
-NCAdjointQ::usage = 
-"NCAdjointQ[exp] returns true if exp is adjoint, \
+Clear[NCSelfAdjointQ];
+NCSelfAdjointQ::usage = 
+"NCSelfAdjointQ[exp] returns true if exp is self-adjoint, \
 i.e. if tp[exp] == exp.";
 
-NCAdjointQ::AdjointVariables =
+NCSelfAdjointQ::SelfAdjointVariables =
 "The variable(s) `1` was(were) assumed adjoint";
+
+Clear[NCMakeSelfAdjoint];
+NCMakeSelfAdjoint::usage = "\
+NCMakeSelfAdjoint[exp] attempts to establish whether exp is \
+self-adjoint by assuming that some of its variables are \
+self-adjoint or symmetric.
+
+NCMakeSelfAdjoint returns a list of three elements:
+\tthe first element is True or False if it succeded to prove exp \
+self-adjoint.
+\tthe second element is a list of the variables that were made \
+self-adjoint.
+\tthe third element is a list of the variables that were made \
+symmetric.
+
+See NCSelfAdjointQ";
+
+Options[NCMakeSelfAdjoint] = {
+  SelfAdjointVariables -> {},
+  SymmetricVariables -> {},
+  ExcludeVariables -> {}
+};
 
 Begin[ "`Private`" ]
 
@@ -55,45 +77,103 @@ Begin[ "`Private`" ]
   (* aj[inv[]] = inv[aj[]] *)
   aj[inv[a_]] := inv[aj[a]];
 
-  (* NCAdjointQ *)
+  (* NCSelfAdjointQ *)
   
-  Clear[NCAdjointQAux];
-  NCAdjointQAux[exp_, diff_, zero_] := Module[
-      {vars, ajVars, ajDiffVars, adjVars, adjRule, ajCoVars, symVars},
+  Clear[NCMakeSelfAdjointAux];
+  NCMakeSelfAdjointAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
+      {vars, ajVars, ajDiffVars, selfAdjVars, selfAdjRule, ajCoVars, symVars, 
+       options, symmetricVars, excludeVars},
+      
+      (* process options *)
+
+      options = Flatten[{opts}];
+
+      selfAdjointVars = SelfAdjointVariables 
+ 	    /. options
+	    /. Options[NCMakeSelfAdjoint, SelfAdjointVariables];
+
+      symmetricVars = SymmetricVariables 
+ 	    /. options
+	    /. Options[NCMakeSelfAdjoint, SymmetricVariables];
+
+      excludeVars = ExcludeVariables 
+ 	    /. options
+	    /. Options[NCMakeSelfAdjoint, ExcludeVariables];
+
+      (* Print["-----"]; *)
       
       (* easy return *)
-      If[ diff === zero, Return[True] ];
+      If[ diff === zero, Return[{True, {}, {}}] ];
 
-      (* check for possible adjoint variables *)
+      (* check for possible self-adjoint variables *)
       vars = NCGrabSymbols[exp];
-      ajVars = NCGrabSymbols[exp, aj];
-      ajDiffVars = NCGrabSymbols[diff, aj];
-      adjVars = Map[aj,Complement[ajDiffVars, ajVars]];
+      
+      (* exclude all vars? *)
+      excludeVars = If [excludeVars === All
+                        , 
+                        vars
+                        ,
+                        Flatten[List[excludeVars]]
+                       ];
+          
+      (* all variables SelfAdjoint? *)
+      (* SelfAdjoint vars have priority *)
+      If [selfAdjointVars === All
+          ,  
+          selfAdjointVars = vars;
+          symmetricVars = {};
+          excludeVars = {};
+          ,
+          selfAdjointVars = Flatten[List[selfAdjointVars]];
+          excludeVars = Complement[excludeVars, selfAdjointVars];
+      ];
+
+      (* all variables symmetric? *)
+      (* symmetric vars have priority *)
+      If [symmetricVars === All
+          ,  
+          symmetricVars = Complement[vars, selfAdjointVars];
+          excludeVars = {};
+          ,
+          symmetricVars = Complement[Flatten[List[symmetricVars]], 
+                                     selfAdjointVars];
+          excludeVars = Complement[excludeVars, symmetricVars];
+      ];
 
       (*
-      Print["----"];
+      Print["ExcludeVariables = ", excludeVars];
+      Print["SelfAdjointVariables = ", selfAdjointVars];
+      Print["SymmetricVariables = ", symmetricVars];
+      *)
+
+      ajVars = Map[aj,NCGrabSymbols[exp, aj]];
+      ajDiffVars = Map[aj,NCGrabSymbols[diff, aj]];
+      selfAdjVars = Join[Complement[ajDiffVars, ajVars, excludeVars],
+                     selfAdjointVars];
+
+      (*
       Print["exp = ", exp];
       Print["diff = ", diff];
       Print["vars = ", vars];
       Print["ajVars = ", ajVars];
       Print["ajDiffVars = ", ajDiffVars];
-      Print["adjVars = ", adjVars];
+      Print["selfAdjVars = ", selfAdjVars];
       *)
 
-      If[adjVars === {}, 
-         (* There are no potentially adjoint variables *)
-         Return[False]
-      ];
+      (* There are no potentially self-adjoint variables *)
+      If[selfAdjVars === {}, Return[{False, {}, {}}]];
       
-      adjRule = Thread[Map[aj,adjVars] -> adjVars];
+      selfAdjRule = Thread[Map[aj,selfAdjVars] -> selfAdjVars];
 
-      (* Print[adjRule]; *)
+      (* Print["selfAdjRule = ", selfAdjRule]; *)
       
-      If [ (diff /. adjRule) =!= zero,
+      If [ (diff /. selfAdjRule) =!= zero,
 
         (* Try real assumptions *)
         ajCoVars = Union[NCGrabSymbols[exp, aj|co] /. (aj|co)[x_]->x];
-        symVars = Complement[Map[tp,NCGrabSymbols[exp, tp]], ajCoVars];
+        symVars = Join[Complement[Map[tp,NCGrabSymbols[exp, tp]], 
+                                  ajCoVars, excludeVars], 
+                       symmetricVars];
       
         (*
         Print["ajCoVars = ", ajCoVars];
@@ -102,22 +182,22 @@ Begin[ "`Private`" ]
       
         If[symVars === {},
            (* There are no potentially symmetric variables *)
-           Return[False]
+           Return[{False, {}, {}}]
         ];
       
-        adjVars = Complement[adjVars, symVars];
+        selfAdjVars = Complement[selfAdjVars, symVars];
       
-        (* Print["adjVars = ", adjVars]; *)
+        (* Print["selfAdjVars = ", selfAdjVars]; *)
 
-        adjRule = Join[Thread[Map[aj,adjVars] -> adjVars],
-                       Thread[Map[aj,symVars] -> Map[tp,symVars]],
-                       Thread[Map[co,symVars] -> symVars]];
+        selfAdjRule = Join[Thread[Map[aj,selfAdjVars] -> selfAdjVars],
+                           Thread[Map[aj,symVars] -> Map[tp,symVars]],
+                           Thread[Map[co,symVars] -> symVars]];
       
-        (* Print[adjRule]; *)
+        (* Print[selfAdjRule]; *)
 
-        If [ (diff /. adjRule) =!= zero,
+        If [ (diff /. selfAdjRule) =!= zero,
            (* Expression is not adjoint *)
-           Return[False]
+           Return[{False, {}, {}}]
         ];
 
         (* Warm user of symmetric assumptions *)
@@ -127,24 +207,26 @@ Begin[ "`Private`" ]
 
       ];
 
-      If [adjVars =!= {},
+      If [selfAdjVars =!= {},
 
          (* Warm user of adjoint assumptions *)
-         Message[NCAdjointQ::AdjointVariables, 
-                 ToString[First[adjVars]] <>
-                   StringJoin @@ Map[(", "<>ToString[#])&, Rest[adjVars]]];
+         Message[NCSelfAdjointQ::SelfAdjointVariables, 
+                 ToString[First[selfAdjVars]] <>
+                   StringJoin @@ Map[(", "<>ToString[#])&, Rest[selfAdjVars]]];
       ];
 
-      Return[True];
+      Return[{True, selfAdjVars, symVars}];
   ];
 
-  NCAdjointQ[exp_] := 
-    (ExpandNonCommutativeMultiply[exp - aj[exp]] === 0);
+  NCMakeSelfAdjoint[exp_, opts:OptionsPattern[{}]] :=
+    NCMakeSelfAdjointAux[exp, 
+                       ExpandNonCommutativeMultiply[exp - aj[exp]],
+                       0, opts];
 
-  NCAdjointQ[exp_, False] :=
-     NCAdjointQAux[exp, ExpandNonCommutativeMultiply[exp - aj[exp]], 0];
-
-  
+  (* NCSelfAdjointQ *)
+ 
+  NCSelfAdjointQ[exp_, opts:OptionsPattern[{}]] := 
+     First[NCMakeSelfAdjoint[exp, opts]];
   
 End[]
 

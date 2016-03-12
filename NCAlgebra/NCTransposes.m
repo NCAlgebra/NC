@@ -29,7 +29,8 @@ Clear[NCSymmetricQ];
 NCSymmetricQ::usage = "\
 NCSymmetricQ[exp] returns true if exp is symmetric, \
 i.e. if tp[exp] == exp.
-NCSymmetricQ[exp, False] attempts to detect symmetric variables \
+
+NCSymmetricQ attempts to detect symmetric variables \
 using NCMakeSymmetric.
 
 See NCMakeSymmetric";
@@ -79,6 +80,7 @@ Begin[ "`Private`" ]
   tp[inv[a_]] := inv[tp[a]];
 
   (* NCMakeSymmetric *)
+  
   Clear[NCMakeSymmetricAux];
   NCMakeSymmetricAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
       {vars, tpVars, tpDiffVars, symVars, symRule, 
