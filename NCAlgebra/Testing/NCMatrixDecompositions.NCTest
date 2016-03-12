@@ -342,7 +342,7 @@ Module[
   *)
 
     ,
-    {NCAdjointQ::AdjointVariables, NCSymmetricQ::SymmetricVariables}
+    {NCSelfAdjointQ::SelfAdjointVariables, NCSymmetricQ::SymmetricVariables}
   ];
 
 ];

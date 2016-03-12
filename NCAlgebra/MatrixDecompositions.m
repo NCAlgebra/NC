@@ -84,9 +84,9 @@ LUInverse::usage="";
 
 MatrixDecompositions::WrongDimensions = \
 "Righ and left-hand side dimensions DO NOT MATCH.";
-MatrixDecompositions::NotSquare = "The input matrix is not SQUARE.";
-MatrixDecompositions::NotAdjoint = "The input matrix is not SQUARE ADJOINT.";
-MatrixDecompositions::Singular = "The input matrix appears to be SINGULAR.";
+MatrixDecompositions::Square = "The input matrix is not square.";
+MatrixDecompositions::SelfAdjoint = "The input matrix is not self-adjoint.";
+MatrixDecompositions::Singular = "The input matrix appears to be singular.";
 
 Clear[LDLDecomposition];
 LDLDecomposition::usage="";
@@ -96,7 +96,7 @@ Options[MatrixDecompositions] = {
   LeftDivide -> (Divide[#2,#1]&),
   RightDivide -> Divide,
   Dot -> Dot,
-  AdjointMatrixQ -> HermitianMatrixQ
+  SelfAdjointMatrixQ -> HermitianMatrixQ
 };
 
 Options[LUDecompositionWithPartialPivoting] = {
@@ -203,7 +203,7 @@ Begin[ "`Private`" ]
       
      U = u;
      {m,n} = Dimensions[U];
-     If[m != n, Message[MatrixDecompositions::NotSquare]; Return[]];
+     If[m != n, Message[MatrixDecompositions::Square]; Return[]];
       
      (* Initialize solution *)
      X = b;
@@ -273,7 +273,7 @@ Begin[ "`Private`" ]
 
      L = l;
      {m,n} = Dimensions[L];
-     If[m != n, Message[MatrixDecompositions::NotSquare]; Return[]];
+     If[m != n, Message[MatrixDecompositions::Square]; Return[]];
 
      (* Initialize solution *)
      X = b;
@@ -329,7 +329,7 @@ Begin[ "`Private`" ]
      id = IdentityMatrix[m];
      If[m != n
         , 
-        Message[MatrixDecompositions::NotSquare]; 
+        Message[MatrixDecompositions::Square]; 
         Return[id];
      ];
       
@@ -602,7 +602,7 @@ Begin[ "`Private`" ]
   LDLDecomposition[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
   Module[
     {options, zeroTest, partialPivoting, completePivoting, 
-     leftDivide, rightDivide, dot, inverse, adjointQ,
+     leftDivide, rightDivide, dot, inverse, selfAdjointQ,
      A, E, m, rank, p, k, s, i, j, l, mu0, mu1, 
      alpha = N[(1+Sqrt[17])/8]},
 
@@ -638,9 +638,9 @@ Begin[ "`Private`" ]
             /. options
 	    /. Options[LDLDecomposition, Inverse];
 
-     adjointQ = AdjointMatrixQ
+     selfAdjointQ = SelfAdjointMatrixQ
 	    /. options
-	    /. Options[MatrixDecompositions, AdjointMatrixQ];
+	    /. Options[MatrixDecompositions, SelfAdjointMatrixQ];
       
      (* start algorithm *)
 
@@ -648,8 +648,8 @@ Begin[ "`Private`" ]
      {m,n} = Dimensions[A];
 
      (* tests *)
-     If[ !adjointQ[A],
-         Message[MatrixDecompositions::NotAdjoint];
+     If[ !selfAdjointQ[A],
+         Message[MatrixDecompositions::SelfAdjoint];
          Return[{A,{},{},-1}];
      ];
       

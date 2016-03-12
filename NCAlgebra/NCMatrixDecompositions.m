@@ -55,7 +55,7 @@ Options[NCMatrixDecompositions] = {
   LeftDivide -> NCLeftDivide,
   RightDivide -> NCRightDivide,
   Dot -> MatMult,
-  AdjointMatrixQ -> (NCSymmetricQ[#, False]&)
+  SelfAdjointMatrixQ -> NCSelfAdjointQ
 };
 
 Options[NCLUDecompositionWithPartialPivoting] = {
@@ -178,7 +178,7 @@ Begin[ "`Private`" ]
 
   NCLDLDecomposition[mat_?MatrixQ, opts:OptionsPattern[{}]] := Module[
     {options, zeroTest, partialPivoting, completePivoting, 
-     leftDivide, rightDivide, dot, inverse, adjointQ},
+     leftDivide, rightDivide, dot, inverse, selfAdjointQ},
 
     (* process options *)
     options = Flatten[{opts}];
@@ -208,9 +208,9 @@ Begin[ "`Private`" ]
            /. options
  	   /. Options[NCLDLDecomposition, Inverse];
 
-     adjointQ = AdjointMatrixQ
+     selfAdjointQ = SelfAdjointMatrixQ
 	    /. options
-	    /. Options[NCMatrixDecompositions, AdjointMatrixQ];
+	    /. Options[NCMatrixDecompositions, SelfAdjointMatrixQ];
 
      LDLDecomposition[mat, 
                      ZeroTest -> zeroTest, 
@@ -220,7 +220,7 @@ Begin[ "`Private`" ]
                      RightDivide -> rightDivide,
                      Dot -> dot,
                      Inverse -> inverse,
-                     AdjointMatrixQ -> adjointQ]
+                     SelfAdjointMatrixQ -> selfAdjointQ]
                                             
   ]; 
   

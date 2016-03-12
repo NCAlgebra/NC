@@ -111,8 +111,23 @@ Module[
     expr = {{a,b},{aj[b],aj[a]}};
     NCTest[NCSelfAdjointQ[expr], False, test, k++];
 
+    expr = {{a,b},{tp[b],c}};
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+
+    expr = {{a,b},{tp[b],tp[a]}};
+    NCTest[NCSelfAdjointQ[expr], False, test, k++];
+
+    expr = {{1,b},{tp[b],1}};
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+
+    expr = {{b,b},{tp[b],1}};
+    NCTest[NCSelfAdjointQ[expr], False, test, k++];
+
+    expr = {{b+tp[b],b},{tp[b],1}};
+    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+
     ,
-    NCSelfAdjointQ::SelfAdjointVariables
+    {NCSelfAdjointQ::SelfAdjointVariables, NCSymmetricQ::SymmetricVariables}
   ];
 
 ];
