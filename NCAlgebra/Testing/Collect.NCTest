@@ -4,6 +4,90 @@
 (* ------------------------------------------------------------------ *)
 
 Module[
+   {k, test, exp, answer,
+   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
+
+   k = 1;
+   test = "Collect";
+
+   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
+   SetCommutative[A,B,C];
+
+   exp = x**y + x;
+   answer = x**(1+y);
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = A x**y + B x;
+   answer = x**(B + A y);
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = y**x + x;
+   answer = (1+y)**x;
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = A y**x + B x;
+   answer = (B + A y)**x;
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = x**y + x**y;
+   answer = 2 x**y;
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = A x**y + B x**y;
+   answer = (A + B) x**y;
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = y**x**y + x**y;
+   answer = (1 + y) ** x**y;
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = A y**x**y + B x**y;
+   answer = (B + A y) ** x**y;
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = y**x**y + y**x;
+   answer = y**x**(1 + y);
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = A y**x**y + B y**x;
+   answer = y**x**(B + A y);
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   exp = x**x**y + y**x**x + y**x**y + x**y**x;
+   answer = x**(x**y + y**x) + y**x**(x + y);
+   NCTest[NCCollectNew[exp,x], answer, test, k++];
+
+   (* Original tests *)
+
+   exp = tp[a]**b +tp[a]**c;
+   answer = tp[a]**(b+c);
+   NCTest[NCCollectNew[exp,tp[a]], answer, test, k++];
+
+   exp = tp[a]**(b +c);
+   answer = tp[a]**(b+c);
+   NCTest[NCCollectNew[exp,tp[a]], answer, test, k++];
+
+   exp = a**b-a**c-a**d;
+   answer = a**(b-c-d);
+   NCTest[NCCollectNew[exp,a], answer, test, k++];
+
+   exp = a**b-y**c-a**d;
+   answer = a**(b-d)-y**c;
+   NCTest[NCCollectNew[exp,a], answer, test, k++];
+
+   exp = -j ** b - c ** d ** inv[a] ** b - j ** inv[tp[a]] ** tp[d] ** c + 
+     inv[e] ** f ** inv[g] ** h + inv[e] ** f ** tp[f] ** c + 
+     tp[h] ** inv[tp[g]] ** inv[g] ** h + tp[h] ** inv[tp[g]] ** tp[f] ** c - 
+     c ** d ** inv[a] ** inv[tp[a]] ** tp[d] ** c;
+   answer = c ** (-d ** inv[a] ** b - d ** inv[a] ** inv[tp[a]] ** tp[d] ** c) -
+     j ** b + (-j ** inv[tp[a]] ** tp[d] + inv[e] ** f ** tp[f] +
+     tp[h] ** inv[tp[g]] ** tp[f]) ** c + inv[e] ** f ** inv[g] ** h +
+     tp[h] ** inv[tp[g]] ** inv[g] ** h;
+   NCTest[NCCollectNew[exp,c], answer, test, k++];
+
+];
+
+Module[
   {k, W, x, z, A, B1, B2, C1, C2, 
    D12, D21, GEx, GEz,
    a,b,c,d,e,f,g,h,i,j},
@@ -39,10 +123,10 @@ Module[
    test[NCCollect,1] = tt2 == ruCritW;
    *)
 
-   NCTest[NCCollect[tp[a]**b +tp[a]**c,tp[a]], tp[a]**(b+c), "Collect", k++];
-   NCTest[NCCollect[tp[a]**(b +c),tp[a]], tp[a]**(b+c), "Collect", k++];
-   NCTest[NCCollect[a**b-a**c-a**d,a], a**(b-c-d), "Collect", k++];
-   NCTest[NCCollect[a**b-y**c-a**d,a], a**(b-d)-y**c, "Collect", k++];
+   NCTest[NCCollect[tp[a]**b +tp[a]**c,tp[a]], tp[a]**(b+c), test, k++];
+   NCTest[NCCollect[tp[a]**(b +c),tp[a]], tp[a]**(b+c), test, k++];
+   NCTest[NCCollect[a**b-a**c-a**d,a], a**(b-c-d), test, k++];
+   NCTest[NCCollect[a**b-y**c-a**d,a], a**(b-d)-y**c, test, k++];
    NCTest[
      NCStrongCollect[
      -j ** b - c ** d ** inv[a] ** b - j ** inv[tp[a]] ** tp[d] ** c + 
@@ -53,6 +137,6 @@ Module[
      -c ** (d ** inv[a] ** b + d ** inv[a] ** inv[tp[a]] ** tp[d] ** c) -
      j ** b - (j ** inv[tp[a]] ** tp[d] - inv[e] ** f ** tp[f] -
      tp[h] ** inv[tp[g]] ** tp[f]) ** c + inv[e] ** f ** inv[g] ** h +
-     tp[h] ** inv[tp[g]] ** inv[g] ** h, "Collect", k++];
+     tp[h] ** inv[tp[g]] ** inv[g] ** h, test, k++];
 
 ];
