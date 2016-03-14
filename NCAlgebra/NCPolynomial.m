@@ -29,6 +29,9 @@ Clear[NCConsecutiveTerms];
 Clear[NCPolynomial];
 NCPolynomial::usage = "";
 
+Clear[NCPDegree];
+NCPDegree::usage = "";
+
 Clear[NCPLinearQ];
 NCPLinearQ::usage = "";
 
@@ -131,11 +134,11 @@ Begin[ "`Private`" ]
                       Map[Part[#,1;;;;2]&, p]}],
                       {1}], Join];
 
-          (* Print["p3 = ", p]; *)
-          
       ];
  
-      If[ m0 =!= 0,
+      (* Print["p3 = ", p]; *)
+
+      If[ m0 =!= 0 || p === <||>,
           p = Merge[{p,<|{} -> {{m0}}|>}, Flatten[#,1]&];
       ];
 
@@ -153,20 +156,26 @@ Begin[ "`Private`" ]
     Plus @@ Apply[NonCommutativeMultiply,
                   Flatten[Apply[NCPolynomialToNCAux, 
                                 Normal[p[[1]]], {1}], 1], {1}];
-  
 
+  (* NCPDegree *)
+
+  Clear[NCPDegreeAux];
+  NCPDegreeAux[m_NonCommutativeMultiply] := Length[m];
+  NCPDegreeAux[m_Symbol] := 1;
+  NCPDegreeAux[m_] := 0;
+  
+  NCPDegree[p_NCPolynomial] := 
+    Max[Map[NCPDegreeAux,
+            Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]]];
+    
   (* NCPLinearQ *)
     
-  NCPLinearQ[p_NCPolynomial] := 
-    And @@ Map[FreeQ[#,NonCommutativeMultiply]&,
-               Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]];
+  NCPLinearQ[p_NCPolynomial] := (NCPDegree[p] <= 1);
 
   (* NCPQuadraticQ *)
     
-  NCPQuadraticQ[p_NCPolynomial] := 
-    And @@ Map[(Length[#] <= 2)&,
-               Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]];
-    
+  NCPQuadraticQ[p_NCPolynomial] := (NCPDegree[p] <= 2);
+
   (* Split factors into a list with products *)
 
   Clear[SplitFactors];
