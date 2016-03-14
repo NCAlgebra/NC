@@ -32,6 +32,9 @@ NCPolynomial::usage = "";
 Clear[NCPLinearQ];
 NCPLinearQ::usage = "";
 
+Clear[NCPQuadraticQ];
+NCPQuadraticQ::usage = "";
+
 Begin[ "`Private`" ]
 
   (* NCConsecutiveTerms *)
@@ -156,8 +159,14 @@ Begin[ "`Private`" ]
     
   NCPLinearQ[p_NCPolynomial] := 
     And @@ Map[FreeQ[#,NonCommutativeMultiply]&,
-                     Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]];
-  
+               Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]];
+
+  (* NCPQuadraticQ *)
+    
+  NCPQuadraticQ[p_NCPolynomial] := 
+    And @@ Map[(Length[#] <= 2)&,
+               Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]];
+    
   (* Split factors into a list with products *)
 
   Clear[SplitFactors];
