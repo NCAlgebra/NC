@@ -93,33 +93,50 @@ NCCollectNew::usage = "";
                                         
 Begin["`Private`"];
 
-  Clear[left,right,a,b,A,B];
-  SetNonCommutative[left,right,a,b];
+  Clear[left,right,a,b,x,A,B];
+  SetNonCommutative[left,right,a,b,x];
   SetCommutative[A,B];
-                                        
+                     
+  Clear[IsNegative];
+  IsNegative[a_?NumberQ] = True /; Negative[a];
+  IsNegative[Times[a_?NumberQ, __]] = True; /; Negative[a];
+  IsNegative[_] = False;
+
+  Clear[IsFirstNegative];
+  IsFirstNegative[exp_Plus] := If[IsNegative[exp[[1]]], True, False];
+  IsFirstNegative[exp] = False;
+       
   Clear[collectRules];
-  NCCollectNew[f_, x_] := 
-    f //. {
+  NCCollectNew[f_, x_] :=
+    (f //. {
 
        (A_:1) * left___**x**right___ + (B_:1) * left___**x**right___ :> 
          (A + B)
-         NonCommutativeMultiply[left] ** x ** NonCommutativeMultiply[right],
+         NonCommutativeMultiply[left, x, right],
 
-        (A_:1) * left___**x**a___ + (B_:1) * left___**x**b___ :> 
-         NonCommutativeMultiply[left] ** x **
-         (A*NonCommutativeMultiply[a] + B*NonCommutativeMultiply[b]),
+       (A_:1) * left___**x**a___ + (B_:1) * left___**x**b___ :> 
+         NonCommutativeMultiply[
+           left, 
+           x,
+           A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]
+         ],
 
        (A_:1) * a___**x**right___ + (B_:1) *b___**x**right___ :> 
-         (A*NonCommutativeMultiply[a] + B*NonCommutativeMultiply[b]) ** 
-         x ** NonCommutativeMultiply[right],
+         NonCommutativeMultiply[
+           (A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]),
+           x,
+           right
+         ],
 
        (A_:1) * x + (B_:1) * x**b___ :> 
-         x ** (A + B*NonCommutativeMultiply[b]),
+         NonCommutativeMultiply[x, (A + B*NonCommutativeMultiply[b])],
 
        (A_:1) * x + (B_:1) * b___**x :> 
-         (A + B*NonCommutativeMultiply[b]) ** x
+         NonCommutativeMultiply[(A + B*NonCommutativeMultiply[b]), x]
 
-    };
+      }) //. 
+        left___**(a_Plus?IsFirstNegative)**right___ :> 
+          -NonCommutativeMultiply[left, Expand[-a], right];
                                         
   Clear[firstone];
   firstone[ poly_, b_] := 

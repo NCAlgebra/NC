@@ -1,8 +1,3 @@
-(* ------------------------------------------------------------------ *)
-(* Collect.NCTest      3/28/92    -dhurst                             *)
-(*                      124/97     - Helton                           *)
-(* ------------------------------------------------------------------ *)
-
 Module[
    {k, test, exp, answer,
    a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
@@ -79,8 +74,8 @@ Module[
      inv[e] ** f ** inv[g] ** h + inv[e] ** f ** tp[f] ** c + 
      tp[h] ** inv[tp[g]] ** inv[g] ** h + tp[h] ** inv[tp[g]] ** tp[f] ** c - 
      c ** d ** inv[a] ** inv[tp[a]] ** tp[d] ** c;
-   answer = c ** (-d ** inv[a] ** b - d ** inv[a] ** inv[tp[a]] ** tp[d] ** c) -
-     j ** b + (-j ** inv[tp[a]] ** tp[d] + inv[e] ** f ** tp[f] +
+   answer = -c ** (d ** inv[a] ** b + d ** inv[a] ** inv[tp[a]] ** tp[d] ** c) -
+     j ** b - (j ** inv[tp[a]] ** tp[d] - inv[e] ** f ** tp[f] -
      tp[h] ** inv[tp[g]] ** tp[f]) ** c + inv[e] ** f ** inv[g] ** h +
      tp[h] ** inv[tp[g]] ** inv[g] ** h;
    NCTest[NCCollectNew[exp,c], answer, test, k++];

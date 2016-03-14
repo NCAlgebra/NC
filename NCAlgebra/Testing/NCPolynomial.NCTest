@@ -1,0 +1,269 @@
+<< NCPolynomial`
+
+Module[
+   {k, test, exp, answer, vars, p,
+   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
+
+   k = 1;
+   test = "NCPolynomial";
+
+   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
+   SetCommutative[A,B,C];
+
+   (* NCConsecutiveTerms *)
+   vars = {x,y};
+   NCTest[NCConsecutiveTerms[x,y,vars], True, test, k++];
+   NCTest[NCConsecutiveTerms[a,x,vars], False, test, k++];
+   NCTest[NCConsecutiveTerms[x,b,vars], False, test, k++];
+   NCTest[NCConsecutiveTerms[a,b,vars], True, test, k++];
+
+   NCTest[NCConsecutiveTerms[tp[x],y,vars], True, test, k++];
+   NCTest[NCConsecutiveTerms[x,tp[y],vars], True, test, k++];
+   NCTest[NCConsecutiveTerms[tp[x],y,vars], True, test, k++];
+   NCTest[NCConsecutiveTerms[tp[x],tp[y],vars], True, test, k++];
+
+   (* NCSplitMonomials *)
+   exp = a**x**b;
+   answer = {{a,x,b}};
+   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+
+   exp = a**x**b**c;
+   answer = {{a,x,b**c}};
+   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+
+   exp = a**x**y**b;
+   answer = {{a,x**y,b}};
+   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+
+   exp = a**x**y**b**c;
+   answer = {{a,x**y,b**c}};
+   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+
+   exp = a**tp[x]**b;
+   answer = {{a,tp[x],b}};
+   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+
+   exp = a**tp[x]**y**b;
+   answer = {{a,tp[x]**y,b}};
+   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+
+   exp = x;
+   answer = {{1,x,1}};
+   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+
+   exp = a**x;
+   answer = {{a,x,1}};
+   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+
+   exp = a**x**y**b**c**x**f**y;
+   answer = {{a,x**y,b**c,x,f,y,1}};
+   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+
+   exp = a**x**b+c**x**d;
+   answer = {{a,x,b}, {c,x,d}};
+   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+
+   (* NCPolynomial *)
+
+   vars = {x,y};
+   p = 1;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{}->{{1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = 0;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<||>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = a + B c;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{}->{{a+B c}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{1,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y}->{{1,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = x+a;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{1,1}},{}->{{a}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = x+y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{1,1}},{y}->{{1,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = x+a**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{1,1},{a,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = x**y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x**y}->{{1,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = y**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y**x}->{{1,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = x**y+y**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x**y}->{{1,1}}, {y**x}->{{1,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = y**a**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y,x}->{{1,a,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = x**y**a+a**y**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y**x}->{{a,1}}, {x**y}->{{1,a}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = a**x**b+c+d**x**e+a**x**e**x**b;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{a,b},{d,e}},{x,x}->{{a,e,b}},{}->{{c}}|>, 
+                         vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = a**x**b+c+d**x**e+a**x**e**x**b+a**x**y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{a,b},{d,e}},
+                           {x**y}->{{a,1}},
+                           {x,x}->{{a,e,b}},
+			   {}->{{c}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = A x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{A,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = B y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y}->{{B,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = A x + B a;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{A,1}},{}->{{B a}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = A x + B y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{A,1}},{y}->{{B,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = A x + B a**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{A,1},{B a,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], True, test, k++];
+
+   p = A x**y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x**y}->{{A,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = B y**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y**x}->{{B,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = A x**y + B y**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x**y}->{{A,1}}, {y**x}->{{B,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = A y**a**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y,x}->{{A,a,1}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = A x**y**a + B a**y**x;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{y**x}->{{B a,1}}, {x**y}->{{A,a}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = A a**x**b + B c + C d**x**e + A B a**x**e**x**b;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{A a,b},{C d,e}},
+                           {x,x}->{{A B a,e,b}},
+                           {}->{{B c}}|>, 
+                         vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   p = A a**x**b + B c + C d**x**e + A B a**x**e**x**b + A C a**x**y;
+   exp = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[<|{x}->{{A a,b},{C d,e}},
+                           {x**y}->{{A C a,1}},
+                           {x,x}->{{A B a,e,b}},
+			   {}->{{B c}}|>, vars];
+   NCTest[exp, answer, test, k++];
+   NCTest[NCPolynomialToNC[exp], p, test, k++];
+   NCTest[NCPLinearQ[exp], False, test, k++];
+
+   NCPLinearQ[exp];
+
+
+];
