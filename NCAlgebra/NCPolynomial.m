@@ -32,6 +32,9 @@ NCPolynomial::usage = "";
 Clear[NCPDegree];
 NCPDegree::usage = "";
 
+Clear[NCPMonomialDegree];
+NCPMonomialDegree::usage = "";
+
 Clear[NCPLinearQ];
 NCPLinearQ::usage = "";
 
@@ -164,9 +167,11 @@ Begin[ "`Private`" ]
   NCPDegreeAux[m_Symbol] := 1;
   NCPDegreeAux[m_] := 0;
   
-  NCPDegree[p_NCPolynomial] := 
-    Max[Map[NCPDegreeAux,
-            Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]]];
+  NCPMonomialDegree[p_NCPolynomial] := 
+    Map[NCPDegreeAux,
+        Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]];
+
+  NCPDegree[p_NCPolynomial] := Max[NCPMonomialDegree[p]];
     
   (* NCPLinearQ *)
     

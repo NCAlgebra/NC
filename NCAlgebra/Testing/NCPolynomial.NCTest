@@ -325,5 +325,6 @@ Module[
    NCTest[NCPLinearQ[exp], False, test, k++];
    NCTest[NCPQuadraticQ[exp], True, test, k++];
    NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[NCPMonomialDegree[exp], {1,2,2,0}, test, k++];
 
 ];
