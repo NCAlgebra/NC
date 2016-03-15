@@ -55,7 +55,7 @@ tests = {
   {"Diff",             "Diff"},
   {"Collect",          "Collect"},
   {"NCPolynomial",     "NCPolynomial"},
-(*  {"NCLinear",         "NCLinear"}, *)
+  {"NCSylvester",      "NCSylvester"},
   {"Substitute",       "Substitute"},
   {"SimplifyRational", "SimplifyRational"},
   {"MatrixDecompositions", "MatrixDecompositions"},

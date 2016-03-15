@@ -1,0 +1,45 @@
+<< NCSylvester`
+
+Block[
+   {k, test, exp, answer, vars, p,
+   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
+
+   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
+   SetCommutative[A,B,C];
+
+   test = "NCSylvester";
+   k = 1;
+
+   vars = {x,y};
+
+   p = a**x**b+c**x**d;
+   exp = NCToNCPolynomial[p, vars];
+   answer = {{a,c},{b,d},SparseArray[{{1,0},{0,1}}],x};
+   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
+
+   p = 2 a**x**c + a**x**d + b**x**c - b**x**d;
+   exp = NCToNCPolynomial[p, vars];
+   answer = {{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x};
+   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
+
+   p = 2 a**x**c + a**x**d + b**x**c - b**x**d;
+   exp = NCToNCPolynomial[p, vars];
+   answer = {{},{},SparseArray[{}, {0, 0}],y};
+   NCTest[NCSylvesterRepresentation[exp, y], answer, test, k++];
+
+   p = 2 a**x**c + a**x**d + b**x**c - b**x**d + f**y**h;
+   exp = NCToNCPolynomial[p, vars];
+   answer = {{f},{h},SparseArray[{{1}}],y};
+   NCTest[NCSylvesterRepresentation[exp, y], answer, test, k++];
+
+   p = 0;
+   exp = NCToNCPolynomial[p, vars];
+   answer = {{},{},SparseArray[{}, {0, 0}],x};
+   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
+
+   p = 1;
+   exp = NCToNCPolynomial[p, vars];
+   answer = {{},{},SparseArray[{}, {0, 0}],x};
+   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
+  
+];

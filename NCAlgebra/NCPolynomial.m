@@ -15,28 +15,66 @@
 BeginPackage[ "NCPolynomial`",
 	      "NonCommutativeMultiply`" ];
 
+Clear[NCPolynomial];
+NCPolynomial::usage = "\
+NCPolynomial[rules, vars] is an expanded representation of an \
+nc polynomial which is better suited for computation.
+    
+The Association rules stores monomials in the following format:
+\t{mon1, ..., monN} -> {scalar, term1, ..., termN+1}
+where:
+\tmon1, ..., monN: are nc monomials in vars;
+\tscalar: contains all commutative factors; and 
+\tterm1, ..., termN+1: are nc monomomials on variables other than \
+the ones in vars.
+ 
+For example:
+\ta**x**b - 2 x**y 
+is stored as:
+\tNCPolynomial[<|{x}->{1,a,b},{x**y}->{2,1,1}|>, {x,y}]
+   
+NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
+   
+See NCToNCPolynomial, NCPolynomialToNC.";
 NCPolynomial::NotPolynomial = "Expression is not a polynomial";
 
 Clear[NCToNCPolynomial];
-NCToNCPolynomial::usage = "";
+NCToNCPolynomial::usage = "\
+NCToNCPolynomial[p, vars] generates a representation of the \
+noncommutative polynomial p which is better suited for computation.
+
+See NCPolynomial, NCPolynomialToNC.";
 
 Clear[NCPolynomialToNC];
-NCPolynomialToNC::usage = "";
+NCPolynomialToNC::usage = "\
+NCPolynomialToNC[p] converts the NCPolynomial p back into a regular \
+nc polynomial.
 
-Clear[NCPolynomial];
-NCPolynomial::usage = "";
+See NCPolynomial, NCToNCPolynomial.";
 
 Clear[NCPDegree];
-NCPDegree::usage = "";
+NCPDegree::usage = "\
+NCPDegree[p] gives the degree of the NCPolynomial p.
+
+See NCMonoomialDegree.";
 
 Clear[NCPMonomialDegree];
-NCPMonomialDegree::usage = "";
+NCPMonomialDegree::usage = "\
+NCPDegree[p] gives the degree of all monomials in the NCPolynomial p.
+
+See NCDegree.";
 
 Clear[NCPLinearQ];
-NCPLinearQ::usage = "";
+NCPLinearQ::usage = "\
+NCPLinearQ[p] gives True if the NCPolynomial p is linear.   
+
+See NCPQuadraticQ.";
 
 Clear[NCPQuadraticQ];
-NCPQuadraticQ::usage = "";
+NCPQuadraticQ::usage = "\
+NCPQuadraticQ[p] gives True if the NCPolynomial p is quadratic.
+
+See NCPLinearQ.";
 
 Begin[ "`Private`" ]
 
@@ -55,8 +93,8 @@ Begin[ "`Private`" ]
   (* NCSplitMonomials *)
 
   Clear[NCSplitMonomialAux];
-  NCSplitMonomialAux[m_Symbol, vars_List] := {1,m,1};
-  NCSplitMonomialAux[a_?CommutativeQ m_Symbol, vars_List] := {a,m,1};
+  NCSplitMonomialAux[m_Symbol, vars_List] := {1,1,m,1};
+  NCSplitMonomialAux[a_?CommutativeQ m_Symbol, vars_List] := {a,1,m,1};
   NCSplitMonomialAux[m_NonCommutativeMultiply, vars_List] := Module[
     {tmp},
 
@@ -86,16 +124,11 @@ Begin[ "`Private`" ]
 
     (* Print["tmp = ", tmp]; *)
 
-    Return[tmp];
+    Return[Prepend[tmp, 1]];
       
   ];
-
-  NCSplitMonomialAux[a_?CommutativeQ m_NonCommutativeMultiply,
-                     vars_List] := Module[
-    {tmp = NCSplitMonomialAux[m, vars] },
-    Return[ Prepend[Rest[tmp], a First[tmp]] ];
-  ];
-          
+  NCSplitMonomialAux[a_?CommutativeQ m_NonCommutativeMultiply, vars_List] :=
+    Prepend[Rest[NCSplitMonomialAux[m, vars]], a];
           
   Clear[NCSplitMonomials];
   NCSplitMonomials[m_Plus, vars_List] := 
@@ -143,8 +176,8 @@ Begin[ "`Private`" ]
 
           (* Separate knowns from unknowns *)
           p = Merge[Apply[Rule, 
-                      Transpose[{Map[Part[#,2;;;;2]&, p], 
-                      Map[Part[#,1;;;;2]&, p]}],
+                      Transpose[{Map[Part[#,3;;;;2]&, p], 
+                      Map[Prepend[Part[#,2;;;;2], Part[#,1]]&, p]}],
                       {1}], Join];
 
       ];
@@ -169,7 +202,8 @@ Begin[ "`Private`" ]
 
   (* NCPolynomialToNC *)
 
-  NCPolynomialToNCAux[m_, coeffs_] := Map[Riffle[#1,m]&, coeffs];
+  NCPolynomialToNCAux[m_, coeffs_] := 
+    Map[Prepend[Riffle[Rest[#1],m], First[#1]]&, coeffs];
   
   NCPolynomialToNC[p_NCPolynomial] := 
     Plus @@ Apply[NonCommutativeMultiply,
