@@ -12,56 +12,56 @@ Module[
 
    (* NCConsecutiveTerms *)
    vars = {x,y};
-   NCTest[NCConsecutiveTerms[x,y,vars], True, test, k++];
-   NCTest[NCConsecutiveTerms[a,x,vars], False, test, k++];
-   NCTest[NCConsecutiveTerms[x,b,vars], False, test, k++];
-   NCTest[NCConsecutiveTerms[a,b,vars], True, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[x,y,vars], True, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[a,x,vars], False, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[x,b,vars], False, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[a,b,vars], True, test, k++];
 
-   NCTest[NCConsecutiveTerms[tp[x],y,vars], True, test, k++];
-   NCTest[NCConsecutiveTerms[x,tp[y],vars], True, test, k++];
-   NCTest[NCConsecutiveTerms[tp[x],y,vars], True, test, k++];
-   NCTest[NCConsecutiveTerms[tp[x],tp[y],vars], True, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[tp[x],y,vars], True, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[x,tp[y],vars], True, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[tp[x],y,vars], True, test, k++];
+   NCTest[NCPolynomial`Private`NCConsecutiveTerms[tp[x],tp[y],vars], True, test, k++];
 
    (* NCSplitMonomials *)
    exp = a**x**b;
    answer = {{a,x,b}};
-   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
 
    exp = a**x**b**c;
    answer = {{a,x,b**c}};
-   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
 
    exp = a**x**y**b;
    answer = {{a,x**y,b}};
-   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
 
    exp = a**x**y**b**c;
    answer = {{a,x**y,b**c}};
-   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
 
    exp = a**tp[x]**b;
    answer = {{a,tp[x],b}};
-   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
 
    exp = a**tp[x]**y**b;
    answer = {{a,tp[x]**y,b}};
-   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
 
    exp = x;
    answer = {{1,x,1}};
-   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
 
    exp = a**x;
    answer = {{a,x,1}};
-   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
 
    exp = a**x**y**b**c**x**f**y;
    answer = {{a,x**y,b**c,x,f,y,1}};
-   NCTest[NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
 
    exp = a**x**b+c**x**d;
    answer = {{a,x,b}, {c,x,d}};
-   NCTest[NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
 
    (* NCPolynomial *)
 
@@ -326,5 +326,22 @@ Module[
    NCTest[NCPQuadraticQ[exp], True, test, k++];
    NCTest[NCPDegree[exp], 2, test, k++];
    NCTest[NCPMonomialDegree[exp], {1,2,2,0}, test, k++];
+
+   (* NotLinear *)
+   p = x**inv[y];
+   exp = NCToNCPolynomial[p, vars];
+   NCTest[exp, $Failed, test, k++];
+
+   p = x**inv[y];
+   exp = NCToNCPolynomial[p, vars];
+   NCTest[exp, $Failed, test, k++];
+
+   p = x**inv[1 + y];
+   exp = NCToNCPolynomial[p, vars];
+   NCTest[exp, $Failed, test, k++];
+
+   p = x**inv[z];
+   exp = NCToNCPolynomial[p, vars];
+   NCTest[exp, NCPolynomial[<|{x}->{{1,inv[z]}}|>, vars], test, k++];
 
 ];
