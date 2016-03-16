@@ -62,16 +62,20 @@ nc polynomial.
 See also:
 NCPolynomial, NCToNCPolynomial.";
 
+Clear[NCPTerm];
+NCPTerm::usage = "\
+NCPTerm[p, m] gives all terms of the NCPolynomial in the monomial m.";
+   
 Clear[NCPDegree];
 NCPDegree::usage = "\
-NCPDegree[p] gives the degree of the NCPolynomial p.
+NCPDegree[p] gives the total degree of the NCPolynomial p.
 
 See also:
 NCMonoomialDegree.";
 
 Clear[NCPMonomialDegree];
 NCPMonomialDegree::usage = "\
-NCPDegree[p] gives the degree of all monomials in the NCPolynomial p.
+NCPDegree[p] gives the total degree of all monomials in the NCPolynomial p.
 
 See also:
 NCDegree.";
@@ -269,6 +273,8 @@ Begin[ "`Private`" ]
    
   NCPNormalize[p_NCPolynomial] := 
      NCPolynomial[p[[1]], Map[FactorCommutative, p[[2]], {2}], p[[3]]];
+
+  NCPTerm[p_NCPolynomial, m__] := Lookup[p[[2]], Key[{m}], {}];
    
 End[]
 
