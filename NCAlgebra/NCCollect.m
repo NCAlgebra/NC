@@ -383,6 +383,7 @@ Begin["`Private`"];
                  Message[ NCCollect::notsum ]; 
                  result = expr,
                  dec=NCDecompose[expr, temp]; 
+                 Print["dec = ", dec];
                  aprules=TermApplyRules[dec, temp];
                  result = NCCompose[aprules]
             ];

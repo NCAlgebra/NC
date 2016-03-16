@@ -51,6 +51,7 @@ Module[
    exp = x**x**y + y**x**x + y**x**y + x**y**x;
    answer = x**(x**y + y**x) + y**x**(x + y);
    NCTest[NCCollectNew[exp,x], answer, test, k++];
+   (* Print[NCCollect[exp,x]]; *)
 
    (* Original tests *)
 
@@ -82,7 +83,7 @@ Module[
 
 ];
 
-Module[
+aaaa := Module[
   {k, W, x, z, A, B1, B2, C1, C2, 
    D12, D21, GEx, GEz,
    a,b,c,d,e,f,g,h,i,j},
