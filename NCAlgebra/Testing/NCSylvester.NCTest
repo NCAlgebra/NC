@@ -10,36 +10,115 @@ Block[
    test = "NCSylvester";
    k = 1;
 
+   vars = {x};
+   exp = 2 a**x**b + 3 c**x**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0,{{a,c},{b,d},SparseArray[{{2,0},{0,3}}],x}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[answer]],
+          exp, test, k++];
+
+   vars = {x};
+   exp = 2 a**x**b + 3 a**x**d + c**x**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0,{{a,c},{b,d},SparseArray[{{2,3},{0,1}}],x}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
+
+   exp = 2 a**x**c + a**x**d + b**x**c - b**x**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0,{{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
+
+   vars = {y};
+   exp = 2 a**x**c + a**x**d + b**x**c - b**x**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {exp, {{},{},SparseArray[{}, {0, 0}],y}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
+
+   vars = {y};
+   exp = 2 a**x**c + a**x**d + b**x**c - b**x**d + f**y**h;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {2 a**x**c + a**x**d + b**x**c - b**x**d,
+             {{f},{h},SparseArray[{{1}}],y}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
+
    vars = {x,y};
+   exp = 2 a**x**c + a**x**d + b**x**c - b**x**d + f**y**h;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0, 
+             {{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x},
+             {{f},{h},SparseArray[{{1}}],y}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
 
-   p = a**x**b+c**x**d;
-   exp = NCToNCPolynomial[p, vars];
-   answer = {{a,c},{b,d},SparseArray[{{1,0},{0,1}}],x};
-   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
+   exp = 2 + a**x**b + c**x**d + y;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {2, 
+             {{a,c},{b,d},SparseArray[{{1,0},{0,1}}],x},
+             {{1},{1},SparseArray[{{1}}],y}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
 
-   p = 2 a**x**c + a**x**d + b**x**c - b**x**d;
-   exp = NCToNCPolynomial[p, vars];
-   answer = {{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x};
-   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
+   exp = 0;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0,
+             {{},{},SparseArray[{}, {0, 0}],x}, 
+             {{},{},SparseArray[{}, {0, 0}],y}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
 
-   p = 2 a**x**c + a**x**d + b**x**c - b**x**d;
-   exp = NCToNCPolynomial[p, vars];
-   answer = {{},{},SparseArray[{}, {0, 0}],y};
-   NCTest[NCSylvesterRepresentation[exp, y], answer, test, k++];
+   exp = 1;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {1,
+             {{},{},SparseArray[{}, {0, 0}],x}, 
+             {{},{},SparseArray[{}, {0, 0}],y}};
+   NCTest[NCSylvesterRepresentation[p], answer, test, k++];
+   NCTest[NCExpand[
+            NCPolynomialToNC[ 
+              NCSylvesterRepresentationToNCPolynomial[answer]]],
+          exp, test, k++];
 
-   p = 2 a**x**c + a**x**d + b**x**c - b**x**d + f**y**h;
-   exp = NCToNCPolynomial[p, vars];
-   answer = {{f},{h},SparseArray[{{1}}],y};
-   NCTest[NCSylvesterRepresentation[exp, y], answer, test, k++];
+   Quiet[
 
-   p = 0;
-   exp = NCToNCPolynomial[p, vars];
-   answer = {{},{},SparseArray[{}, {0, 0}],x};
-   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
+     vars = {x};
+     exp = a**x**b+c**x**x**d;
+     p = NCToNCPolynomial[exp, vars];
+     NCTest[
+       Check[NCSylvesterRepresentation[p];
+	     True
+	     ,
+	     False
+	     ,
+	     NCSylvesterRepresentation::NotLinear
+       ], False, test, k++];
 
-   p = 1;
-   exp = NCToNCPolynomial[p, vars];
-   answer = {{},{},SparseArray[{}, {0, 0}],x};
-   NCTest[NCSylvesterRepresentation[exp, x], answer, test, k++];
-  
+     ,
+     NCSylvesterRepresentation::NotLinear
+   ];
+
 ];

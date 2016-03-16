@@ -1,8 +1,8 @@
-(* :Title: 	NCLinearCollect.m *)
+(* :Title: 	NCSylvester.m *)
 
 (* :Authors: 	Mauricio C. de Oliveira *)
 
-(* :Context: 	NCLinearCollect` *)
+(* :Context: 	NCSylvester` *)
 
 (* :Summary: *)
 
@@ -19,7 +19,57 @@ BeginPackage[ "NCSylvester`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCSylvesterRepresentation];
-NCSylvesterRepresentation::usage="NCSylvesterRepresentation[exp, var] provides an expanded representation for the NC polynomial exp which must be linear on the variable var.";
+NCSylvesterRepresentation::usage="\
+NCSylvesterRepresentation[p] gives an expanded representation \
+for the linear NCPolynomial p.
+    
+NCSylvesterRepresentation returns a list with the coefficients \
+of the linear polynomial p where
+\tthe first element is a the independent term,
+and the remaining elements are lists with four elements:
+\tthe first element is a list of right nc symbols;
+\tthe second element is a list of right nc symbols;
+\tthe third element is a numeric array;
+\tthe fourth element is a variable.
+
+Example:
+\tp = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
+\tNCSylvesterRepresentation[exp,x]
+produces
+\t{2, {left1,right1,array1,var1}, {left2,right2,array2,var2}}
+where
+\tleft1 = {a,c}
+\tright1 = {b,d}
+\tarray1 = {{1,0},{0,1}}
+\tvar1 = x
+and
+\tleft1 = {1}
+\tright1 = {1}
+\tarray1 = {{1}}
+\tvar1 = y
+
+See also:
+NCSylvesterRepresentationToNCPolynomial, NCPolynomial.";
+NCSylvesterRepresentation::NotLinear = "Polynomial is not linear.";
+
+Clear[NCSylvesterRepresentationToNCPolynomial];
+NCSylvesterRepresentationToNCPolynomial::usage = "\
+NCSylvesterRepresentationToNCPolynomial[args] takes the list args \
+produced by NCSylvesterRepresentation and converts it back \
+to an NCPolynomial.
+NCSylvesterRepresentationToNCPolynomial[args, options] uses options.
+
+The following options can be given:
+\tCollect (True): controls whether the coefficients of the resulting \
+NCPolynomial are collected to produce the minimal possible number \
+of terms.
+    
+See also:
+NCSylvesterRepresentation, NCPolynomial.";
+
+Options[NCSylvesterRepresentationToNCPolynomial] = {
+  Collect -> True
+};
 
 Clear[RepresentationToPoly];
 RepresentationToPoly::usage="RepresentationToPoly[leftBasis, rightBasis, F, var] computes an NC polynomial given its expanded representation.";
@@ -42,6 +92,160 @@ NCSylvesterDisplay::usage="";
 
 Begin[ "`Private`" ]
 
+  (* NCSylvesterRepresentation *)
+
+  NCSylvesterRepresentationAux;
+  Clear[NCSylvesterRepresentationAux];
+  NCSylvesterRepresentationAux[poly_Association, 
+                               var_Symbol] := Module[
+    {exp, coeff, left, right, leftBasis, rightBasis,
+     i, j, p, q, F},
+
+    (* Easy return if independent of var *)
+    If [!KeyExistsQ[poly, {var}]
+        ,
+        Return[{{},{},SparseArray[{}, {0, 0}],var}];
+    ];
+                           
+    (* This will never fail *)
+    exp = poly[{var}];
+
+    (* Print["exp1 = ", exp]; *)
+
+    {coeff, left, right} = Transpose[exp];
+    leftBasis = Union[left];
+    rightBasis = Union[right];
+
+    p = Length[leftBasis];
+    q = Length[rightBasis];
+
+    i = Flatten[Map[Position[leftBasis, #, 1] &, left]];
+    j = Flatten[Map[Position[rightBasis, #, 1] &, right]];
+
+    F = SparseArray[
+      MapThread[({#2, #3} -> #1) &, {coeff, i, j}], {p, q}];
+
+    Return[{leftBasis, rightBasis, F, var}];
+
+  ];
+
+  NCSylvesterRepresentation[p_NCPolynomial] := (
+    If [!NCPLinearQ[p],
+        Message[NCSylvesterRepresentation::NotLinear];
+        Return[$Failed];
+    ];
+    Prepend[Map[NCSylvesterRepresentationAux[p[[2]], #]&, p[[3]]],
+            p[[1]] ]
+  );
+
+
+  (* NCSylvesterRepresentationToNCPolynomial *)
+
+  Clear[LeftFactorMultiply];
+  LeftFactorMultiply[left_, l_, r_] :=  
+    MatMult[Transpose[KroneckerProduct[left, IdentityMatrix[r]]], l]
+
+  Clear[RightFactorMultiply];
+  RightFactorMultiply[right_, u_, s_] :=
+    MatMult[u, KroneckerProduct[right, IdentityMatrix[s]]];
+
+  Clear[FactorMultiply];
+  FactorMultiply[left_, right_, l_, u_, var_, r_, s_] := { 
+    LeftFactorMultiply[left, l, r],
+    RightFactorMultiply[right, u, s],
+    var 
+  };
+  
+  Clear[NCSylvesterRepresentationToNCPolynomialAux];
+  NCSylvesterRepresentationToNCPolynomialAux[{{},{},F_,var_}, 
+                      collect_] := 
+     Return[{{},{},var}];
+
+  NCSylvesterRepresentationToNCPolynomialAux[{left_,right_,F_,var_},
+                      collect_] := 
+  Module[
+    {l, u, pr, qs, r, s, p, q},
+
+    {pr, qs} = Dimensions[F];
+    p = Length[left];
+    q = Length[right];
+    r = pr/p;
+    s = qs/q;
+
+    {l,u} = If [collect
+        , 
+      
+        (* Factor coefficient matrix F and 
+           compute LU matrices truncated and permuted *)
+        GetLUMatrices @@ LUDecompositionWithCompletePivoting[F]
+
+        ,
+        
+        (* Do not factor coefficient matrix F *)
+        {SparseArray[{{i_, i_} -> 1}, {p, p}], F}
+        
+    ];
+
+    (*
+    Print["l = ", Normal[l]];
+    Print["u = ", Normal[u]];
+    *)
+
+    (* Multiply factors *)
+    l = LeftFactorMultiply[left, l, r];
+    u = RightFactorMultiply[right, u, s];
+     
+    Return[ 
+      If [ r === 1 && s === 1, 
+         {Flatten[l, 1], Flatten[u, 1], var}
+        ,
+         { Flatten[Partition[l, {r, 1}], 1],
+           Map[Flatten[#,1]&, Partition[u, {1, s}]], var }
+      ]
+    ];
+
+  ];
+
+  NCSylvesterRepresentationToNCPolynomial[sylv_, 
+                      opts:OptionsPattern[{}]] := Module[
+    {options, collect, m0, rules, vars},
+
+    (* process options *)
+
+    options = Flatten[{opts}];
+
+    collect = Collect
+	    /. options
+	    /. Options[NCSylvesterRepresentationToNCPolynomial, Collect];
+      
+    m0 = First[sylv];
+    vars = sylv[[2;;,4]];
+                          
+    (* Collect polynomial *)
+
+    rules = Map[NCSylvesterRepresentationToNCPolynomialAux[#,collect]&,
+                Rest[sylv], {1}];
+
+    (* 
+    Print["vars = ", vars];
+    Print["rules = ", rules];
+    *)
+
+    rules = <|Map[{#[[3]]}->Transpose[#[[{1,2}]]]&, rules]|>;
+
+    (* Print["rules = ", rules]; *)
+
+    (* Add scalar *)
+    rules = Map[Prepend[#,1]&, rules, {2}];
+
+    (* Print["rules = ", rules]; *)
+
+    Return[NCPNormalize[NCPolynomial[m0, rules, vars]]];
+      
+  ];
+
+  (* OLDER CODE *)
+    
   (* Blow representation from scalar to matrix representation *)
 
   Clear[BlowRepresentation]
@@ -102,42 +306,7 @@ Begin[ "`Private`" ]
 
   ];
 
-  (* NCSylvesterRepresentation *)
-  
-  NCSylvesterRepresentation[poly_NCPolynomial, 
-                            var_Symbol] := Module[
-    {exp, coeff, left, right, leftBasis, rightBasis,
-     i, j, p, q, F},
-
-    (* Easy return if independent of var *)
-    If [!KeyExistsQ[poly[[1]], {var}]
-        ,
-        Return[{{},{},SparseArray[{}, {0, 0}],var}];
-    ];
-                           
-    (* This will never fail *)
-    exp = poly[[1]][{var}];
-
-    (* Print["exp1 = ", exp]; *)
-
-    {coeff, left, right} = Transpose[exp];
-    leftBasis = Union[left];
-    rightBasis = Union[right];
-
-    p = Length[leftBasis];
-    q = Length[rightBasis];
-
-    i = Flatten[Map[Position[leftBasis, #, 1] &, left]];
-    j = Flatten[Map[Position[rightBasis, #, 1] &, right]];
-
-    F = SparseArray[
-      MapThread[({#2, #3} -> #1) &, {coeff, i, j}], {p, q}];
-
-    Return[{leftBasis, rightBasis, F, var}];
-
-  ];
-
-  NCSylvesterRepresentation[f_?MatrixQ, 
+  NCOldSylvesterRepresentation[f_?MatrixQ, 
                             var_?MatrixQ] := Module[
      {exp, leftBasis, rightBasis,
       p, q, r, s, F},
@@ -145,7 +314,7 @@ Begin[ "`Private`" ]
      exp = ExpandNonCommutativeMultiply[f];
      {r, s} = Dimensions[exp, 2];
 
-     exp = Map[NCSylvesterRepresentation[exp, #] &, var, {2}];
+     exp = Map[NCOldSylvesterRepresentation[exp, #] &, var, {2}];
 
      leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
      rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
@@ -159,14 +328,14 @@ Begin[ "`Private`" ]
 
      ];
 
-  NCSylvesterRepresentation[f_, var_?MatrixQ] :=
-    NCSylvesterRepresentation[{{f}}, var];
+  NCOldSylvesterRepresentation[f_, var_?MatrixQ] :=
+    NCOldSylvesterRepresentation[{{f}}, var];
 
-  NCSylvesterRepresentation[f_?MatrixQ, var_Symbol] := Module[
+  NCOldSylvesterRepresentation[f_?MatrixQ, var_Symbol] := Module[
      {exp, leftBasis, rightBasis,
       p, q, r, s, F},
 
-     exp = Map[NCSylvesterRepresentation[#, var] &, f, {2}];
+     exp = Map[NCOldSylvesterRepresentation[#, var] &, f, {2}];
      leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
      rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
 
@@ -394,7 +563,7 @@ Begin[ "`Private`" ]
 
       (* Does not depend on transposes *)
 
-      {lb, rb, F, var} = NCSylvesterRepresentation[p, v];
+      {lb, rb, F, var} = NCOldSylvesterRepresentation[p, v];
       {l, r, var} = RepresentationToSylvester[lb, rb, F, var];
 
       rem = p /. Map[(# -> 0)&, Flatten[v]];
@@ -426,7 +595,7 @@ Begin[ "`Private`" ]
 
       (* Expression does not depend on transposes *)
 
-      {lb, rb, F, var} = NCSylvesterRepresentation[p, v];
+      {lb, rb, F, var} = NCOldSylvesterRepresentation[p, v];
       {l, r, var} = RepresentationToSylvester[lb, rb, F, var];
 
       (* Calculate remainder *)

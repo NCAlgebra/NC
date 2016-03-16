@@ -17,64 +17,78 @@ BeginPackage[ "NCPolynomial`",
 
 Clear[NCPolynomial];
 NCPolynomial::usage = "\
-NCPolynomial[rules, vars] is an expanded representation of an \
-nc polynomial which is better suited for computation.
+NCPolynomial[rules, vars, properties] is an expanded representation \
+of an nc polynomial which is better suited for certain computations.
     
 The Association rules stores monomials in the following format:
 \t{mon1, ..., monN} -> {scalar, term1, ..., termN+1}
 where:
 \tmon1, ..., monN: are nc monomials in vars;
 \tscalar: contains all commutative factors; and 
-\tterm1, ..., termN+1: are nc monomomials on variables other than \
+\tterm1, ..., termN+1: are nc expressions on variables other than \
 the ones in vars.
  
 For example:
-\ta**x**b - 2 x**y 
+\ta**x**b - 2 x**y**c**x + a**c
 is stored as:
-\tNCPolynomial[<|{x}->{1,a,b},{x**y}->{2,1,1}|>, {x,y}]
-   
+\tNCPolynomial[<|{x}->{1,a,b},{x**y,x}->{2,1,c,1},{}->{{a**c}}|>, {x,y}]
+Note that independent terms are grouped in the empty monomial {}.
+
 NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
    
-See NCToNCPolynomial, NCPolynomialToNC.";
+See also:
+NCToNCPolynomial, NCPolynomialToNC.";
 NCPolynomial::NotPolynomial = "Expression is not a polynomial";
 
+Clear[NCPNormalize];
+NCPNormalize::usage = "\
+NCPNormalizes[p] gives a normalized version of NCPolynomial p \
+where all factors that have free commutative products are \
+collectd in the first scalar.";
+   
 Clear[NCToNCPolynomial];
 NCToNCPolynomial::usage = "\
 NCToNCPolynomial[p, vars] generates a representation of the \
 noncommutative polynomial p which is better suited for computation.
 
-See NCPolynomial, NCPolynomialToNC.";
+See also:
+NCPolynomial, NCPolynomialToNC.";
 
 Clear[NCPolynomialToNC];
 NCPolynomialToNC::usage = "\
 NCPolynomialToNC[p] converts the NCPolynomial p back into a regular \
 nc polynomial.
 
-See NCPolynomial, NCToNCPolynomial.";
+See also:
+NCPolynomial, NCToNCPolynomial.";
 
 Clear[NCPDegree];
 NCPDegree::usage = "\
 NCPDegree[p] gives the degree of the NCPolynomial p.
 
-See NCMonoomialDegree.";
+See also:
+NCMonoomialDegree.";
 
 Clear[NCPMonomialDegree];
 NCPMonomialDegree::usage = "\
 NCPDegree[p] gives the degree of all monomials in the NCPolynomial p.
 
-See NCDegree.";
+See also:
+NCDegree.";
 
 Clear[NCPLinearQ];
 NCPLinearQ::usage = "\
 NCPLinearQ[p] gives True if the NCPolynomial p is linear.   
 
-See NCPQuadraticQ.";
+See also:
+NCPQuadraticQ.";
 
 Clear[NCPQuadraticQ];
 NCPQuadraticQ::usage = "\
 NCPQuadraticQ[p] gives True if the NCPolynomial p is quadratic.
 
-See NCPLinearQ.";
+See also:
+NCPLinearQ.";
 
 Begin[ "`Private`" ]
 
@@ -190,13 +204,7 @@ Begin[ "`Private`" ]
           Return[$Failed];
       ];
       
-      If[ m0 =!= 0 || p === <||>,
-          p = Merge[{p,<|{} -> {{m0}}|>}, Flatten[#,1]&];
-      ];
-
-      (* Print["p4 = ", p]; *)
-
-      Return[NCPolynomial[p, vars]];
+      Return[NCPolynomial[m0, p, vars]];
       
   ];
 
@@ -206,22 +214,21 @@ Begin[ "`Private`" ]
     Map[Prepend[Riffle[Rest[#1],m], First[#1]]&, coeffs];
   
   NCPolynomialToNC[p_NCPolynomial] := 
-    Plus @@ Apply[NonCommutativeMultiply,
+    p[[1]] + Plus @@ Apply[NonCommutativeMultiply,
                   Flatten[Apply[NCPolynomialToNCAux, 
-                                Normal[p[[1]]], {1}], 1], {1}];
+                                Normal[p[[2]]], {1}], 1], {1}];
 
   (* NCPDegree *)
 
   Clear[NCPDegreeAux];
   NCPDegreeAux[m_NonCommutativeMultiply] := Length[m];
   NCPDegreeAux[m_Symbol] := 1;
-  NCPDegreeAux[m_] := 0;
   
   NCPMonomialDegree[p_NCPolynomial] := 
     Map[NCPDegreeAux,
-        Apply[NonCommutativeMultiply, Keys[p[[1]]], {1}]];
+        Apply[NonCommutativeMultiply, Keys[p[[2]]], {1}]];
 
-  NCPDegree[p_NCPolynomial] := Max[NCPMonomialDegree[p]];
+  NCPDegree[p_NCPolynomial] := Max[NCPMonomialDegree[p],0];
     
   (* NCPLinearQ *)
     
@@ -231,6 +238,38 @@ Begin[ "`Private`" ]
     
   NCPQuadraticQ[p_NCPolynomial] := (NCPDegree[p] <= 2);
 
+  (* NCPNormalize *)
+  
+  FactorCommutative[l_] := Module[
+      {list, pos, scalars},
+      
+      pos = Flatten[Position[Rest[l], 
+                             __?CommutativeQ _?NonCommutativeQ, {1}]];
+      scalars = Cases[Rest[l], 
+                      a__?CommutativeQ _?NonCommutativeQ -> a];
+
+      (*
+      Print["pos = ", pos];
+      Print["scalars = ", scalars];
+      *)
+
+      list = l;
+      (* Print["list = ", list]; *)
+      
+      (* divide by scalars *)
+      list[[1 + pos]] /= scalars;
+
+      (* multiply scalar term *)
+      list[[1]] *= Times @@ scalars;
+      
+      (* Print["list = ", list]; *)
+      
+      Return[list];
+  ];
+   
+  NCPNormalize[p_NCPolynomial] := 
+     NCPolynomial[p[[1]], Map[FactorCommutative, p[[2]], {2}], p[[3]]];
+   
 End[]
 
 EndPackage[]
