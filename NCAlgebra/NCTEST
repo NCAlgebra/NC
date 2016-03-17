@@ -31,9 +31,9 @@ NCRunTest[file_, tag_] := Block[
     ToString[Length[keys]] <> 
     " tests completed in " <> 
     ToString[Round[1000*t]/1000.] <> 
-    " seconds. " <>
+    " seconds.\n* " <>
     ToString[Length[keys] - fail] <>
-    " succeeded. " <>
+    " succeeded.\n* " <>
     ToString[fail] <> " failed.\n"
   ];
 ];
@@ -54,10 +54,10 @@ tests = {
   {"Conjugate",        "Conjugates"},
   {"Roots",            "Roots"},
   {"NCOutput",         "NCOutput"},
-  {"Diff",             "Diff"},
-  {"Collect",          "Collect"},
   {"NCPolynomial",     "NCPolynomial"},
   {"NCSylvester",      "NCSylvester"},
+  {"Diff",             "Diff"},
+  {"Collect",          "Collect"},
   {"Substitute",       "Substitute"},
   {"SimplifyRational", "SimplifyRational"},
   {"MatrixDecompositions", "MatrixDecompositions"},
