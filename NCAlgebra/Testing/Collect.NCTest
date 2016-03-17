@@ -11,46 +11,76 @@ Module[
    exp = x**y + x;
    answer = x**(1+y);
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = A x**y + B x;
    answer = x**(B + A y);
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = y**x + x;
    answer = (1+y)**x;
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = A y**x + B x;
    answer = (B + A y)**x;
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = x**y + x**y;
    answer = 2 x**y;
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = A x**y + B x**y;
    answer = (A + B) x**y;
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = y**x**y + x**y;
    answer = (1 + y) ** x**y;
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = A y**x**y + B x**y;
    answer = (B + A y) ** x**y;
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = y**x**y + y**x;
    answer = y**x**(1 + y);
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = A y**x**y + B y**x;
    answer = y**x**(B + A y);
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
 
    exp = x**x**y + y**x**x + y**x**y + x**y**x;
    answer = x**(x**y + y**x) + y**x**(x + y);
    NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
+
+   answer = x**x**y + y**(x**x + x**y) + x**y**x;
+   NCTest[NCStrongCollectNew[exp,y], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{y}], answer, test, k++];
+
+   exp = x**x**y + y**x**x + y**x**y + x**y**y;
+   answer = x**(x**y + y**y) + y**x**(x + y);
+   NCTest[NCStrongCollectNew[exp,x], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{x}], answer, test, k++];
+
+   answer = y**x**(x + y) + x**(x + y)**y;
+   NCTest[NCStrongCollectNew[exp,{x,y}], answer, test, k++];
+
+   answer = y**(x**x + x**y) + (x**x + x**y)**y;
+   NCTest[NCStrongCollectNew[exp,y], answer, test, k++];
+   NCTest[NCStrongCollectNew[exp,{y}], answer, test, k++];
+
+   answer = y**x**(x + y) + x**(x + y)**y;
+   NCTest[NCStrongCollectNew[exp,{y,x}], answer, test, k++];
 
    (* NCDecompose *)
 

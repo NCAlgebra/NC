@@ -113,6 +113,12 @@ Begin["`Private`"];
 
   (* NCStrongCollect *)
 
+  NCStrongCollectNew[exp_, vars_List] := Module[
+    {tmp = exp},
+    Scan[(tmp = NCStrongCollectNew[tmp, #])&, vars];
+    Return[tmp];
+  ];
+                                
   NCStrongCollectNew[f_, x_] :=
     (f //. {
 
@@ -146,7 +152,7 @@ Begin["`Private`"];
 
   (* NCDecompose *)                                       
                                         
-  NCDecomposeNew[exp_, vars_] := NCPDecompose[NCToNCPolynomial[exp, vars]];
+  NCDecomposeNew[exp_, vars_List] := NCPDecompose[NCToNCPolynomial[exp, vars]];
 
   (* NCCompose *)
                                         
@@ -154,15 +160,11 @@ Begin["`Private`"];
   NCComposeNew[exp_, degree_] := exp[degree];
 
   (* NCCollectNew *)
-  NCCollectNew[expr_, vars_]:= Module[
-      {},
+  NCCollectNew[expr_, vars_]:= 
+    Map[NCStrongCollectNew[#, vars]&, 
+        NCDecompose[expr, vars]]; 
 
-      Map[NCStrongCollectNew, 
-          NCDecompose[expr, vars]]; 
-      aprules=TermApplyRules[dec, temp];
-      result = NCCompose[aprules]
-  ];
-
+                                        
   (* ---------------------------------------------------------- *)
   (* OLDER CODE *)                                        
                                         
