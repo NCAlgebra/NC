@@ -39,6 +39,7 @@
 *)
 
 BeginPackage[ "NCCollect`",
+              "NCPolynomial`",
               "NonCommutativeMultiply`" ];
 
 NCDecompose::usage = 
@@ -88,15 +89,19 @@ NCDecompose::notsum =
 NCDecompose::error =
      "MISTAKE.  DO NOT USE ANSWER.";
 
-Clear[NCCollectNew];
-NCCollectNew::usage = "";
+Clear[NCStrongCollectNew];
+NCStrongCollectNew::usage = "";
+
+Clear[NCDecomposeNew];
+NCDecomposeNew::usage = "";
+
+Clear[NCComposeNew];
+NCComposeNew::usage = "";
                                         
 Begin["`Private`"];
 
-  Clear[left,right,a,b,x,A,B];
-  SetNonCommutative[left,right,a,b,x];
-  SetCommutative[A,B];
-                     
+  (* Auxiliary tests *)
+                                        
   Clear[IsNegative];
   IsNegative[a_?NumberQ] = True /; Negative[a];
   IsNegative[Times[a_?NumberQ, __]] = True; /; Negative[a];
@@ -105,9 +110,10 @@ Begin["`Private`"];
   Clear[IsFirstNegative];
   IsFirstNegative[exp_Plus] := If[IsNegative[exp[[1]]], True, False];
   IsFirstNegative[exp] = False;
-       
-  Clear[collectRules];
-  NCCollectNew[f_, x_] :=
+
+  (* NCStrongCollect *)
+
+  NCStrongCollectNew[f_, x_] :=
     (f //. {
 
        (A_:1) * left___**x**right___ + (B_:1) * left___**x**right___ :> 
@@ -137,7 +143,33 @@ Begin["`Private`"];
       }) //. 
         left___**(a_Plus?IsFirstNegative)**right___ :> 
           -NonCommutativeMultiply[left, Expand[-a], right];
+
+  (* NCDecompose *)                                       
                                         
+  NCDecomposeNew[exp_, vars_] := NCPDecompose[NCToNCPolynomial[exp, vars]];
+
+  (* NCCompose *)
+                                        
+  NCComposeNew[exp_] := Total[Values[exp]];
+  NCComposeNew[exp_, degree_] := exp[degree];
+
+  (* NCCollectNew *)
+  NCCollectNew[expr_, vars_]:= Module[
+      {},
+
+      Map[NCStrongCollectNew, 
+          NCDecompose[expr, vars]]; 
+      aprules=TermApplyRules[dec, temp];
+      result = NCCompose[aprules]
+  ];
+
+  (* ---------------------------------------------------------- *)
+  (* OLDER CODE *)                                        
+                                        
+  Clear[left,right,a,b,x,A,B];
+  SetNonCommutative[left,right,a,b,x];
+  SetCommutative[A,B];
+                     
   Clear[firstone];
   firstone[ poly_, b_] := 
        Block[{counts, data, piece, ic },

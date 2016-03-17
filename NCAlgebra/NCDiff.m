@@ -39,7 +39,8 @@ See DirectionalD.";
 Clear[NCGrad];
 NCGrad::usage = "\
 NCGrad[f, var1, ...] gives the nc gradient of the expression f w.r.t. \
-variables var1, ....
+variables var1, .... If there is more than one variable then NCGrad \
+returns the gradient in a list.
 
 The transpose of the gradient of the nc expression f is the derivative \
 w.r.t h of the trace of the directional derivative of f in the direction h.
@@ -50,7 +51,12 @@ then its directional derivative in the direction h is
 \tdf = h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
 and its nc gradient is
 \tgradf = a**x**b + b**x**a + c**x**d + d**x**c
-
+      
+IMPORTANT: The expression returned by NCGrad is the transpose or the \
+adjoint of the standard gradient. This is done so that no assumption \
+on the symbols are needed. The calculated expression is correct even \
+if symbols are self-adjoint or symmetric.
+       
 See also NCDirectionalD.";
                
 Begin["`Private`"];
@@ -80,10 +86,11 @@ Begin["`Private`"];
   NCHessian[f_, xhs__] := 
     NCDirectionalD[NCDirectionalD[f, xhs], xhs];
                
-  (* NCGrad *)
+  (* NCGradAux *)
   Clear[NCGradAux];
   NCGradAux[{scalar_, term1_, term2_}] := scalar * term2 ** term1;
 
+  (* NCGrad *)
   NCGrad[f_, xs__] := Module[
     {n = Length[{xs}], hs, df, grad, tmp},
 
@@ -91,43 +98,38 @@ Begin["`Private`"];
     hs = Table[Unique["$h"], n];
     SetNonCommutative[hs];
 
-    (* Print["hs = ", hs]; *)
-
     (* Calculate directional derivative *)
     df = NCToNCPolynomial[
             NCDirectionalD @@ Prepend[Transpose[{{xs},hs}], f], hs];
 
-    (* Print["df = ", df]; *)
-
+    (* Inititalize gradient *)
     grad = ConstantArray[0, n];
       
     (* Terms in hs *)
-    tmp = Map[NCPTerm[df, #]&, hs];
-                            
-    (* Print["tmp = ", tmp]; *)
-
-    grad += Apply[Plus, Map[NCGradAux, tmp, {2}], {1}];
+    grad += Apply[Plus, 
+                  Map[NCGradAux, 
+                      Map[NCPTerm[df, #]&, hs], {2}], {1}];
       
-    (* Print["grad = ", grad]; *)
-
     (* Terms in tp[hs] *)
-    tmp = Map[NCPTerm[df, #]&, Map[tp,hs]];
-
-    (* Print["tmp = ", tmp]; *)
-      
-    grad += Map[tp, Apply[Plus, Map[NCGradAux, tmp, {2}], {1}]];
+    grad += Map[tp, 
+                Apply[Plus, 
+                      Map[NCGradAux, 
+                          Map[NCPTerm[df, #]&, Map[tp,hs]], {2}], {1}]];
 
     (* Terms in aj[hs] *)
-    tmp = Map[NCPTerm[df, #]&, Map[aj,hs]];
+    grad += Map[aj, 
+                Apply[Plus, 
+                      Map[NCGradAux, 
+                          Map[NCPTerm[df, #]&, Map[aj,hs]], {2}], {1}]];
+      
+    (* Print["hs = ", hs];
+       Print["df = ", df];
+       Print["grad = ", grad]; *)
 
-    (* Print["tmp = ", tmp]; *)
-      
-    grad += Map[aj, Apply[Plus, Map[NCGradAux, tmp, {2}], {1}]];
-      
     Return[If [n > 1, grad, Part[grad, 1]] ];
       
   ];
       
-End[ ]
+End[];
 
-EndPackage[ ]
+EndPackage[];

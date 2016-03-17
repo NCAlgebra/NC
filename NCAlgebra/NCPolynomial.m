@@ -62,20 +62,23 @@ nc polynomial.
 See also:
 NCPolynomial, NCToNCPolynomial.";
 
+Clear[NCPDecompose];
+NCPDecompose::usage = "";
+   
 Clear[NCPTerm];
 NCPTerm::usage = "\
 NCPTerm[p, m] gives all terms of the NCPolynomial in the monomial m.";
    
 Clear[NCPDegree];
 NCPDegree::usage = "\
-NCPDegree[p] gives the total degree of the NCPolynomial p.
+NCPDegree[p] gives the degree of the NCPolynomial p.
 
 See also:
 NCMonoomialDegree.";
 
 Clear[NCPMonomialDegree];
 NCPMonomialDegree::usage = "\
-NCPDegree[p] gives the total degree of all monomials in the NCPolynomial p.
+NCPDegree[p] gives the degree of all monomials in the NCPolynomial p.
 
 See also:
 NCDegree.";
@@ -194,9 +197,9 @@ Begin[ "`Private`" ]
 
           (* Separate knowns from unknowns *)
           p = Merge[Apply[Rule, 
-                      Transpose[{Map[Part[#,3;;;;2]&, p], 
-                      Map[Prepend[Part[#,2;;;;2], Part[#,1]]&, p]}],
-                      {1}], Join];
+                          Transpose[{Map[Part[#,3;;;;2]&, p], 
+                          Map[Prepend[Part[#,2;;;;2], Part[#,1]]&, p]}],
+                              {1}], Join];
 
       ];
  
@@ -218,21 +221,42 @@ Begin[ "`Private`" ]
     Map[Prepend[Riffle[Rest[#1],m], First[#1]]&, coeffs];
   
   NCPolynomialToNC[p_NCPolynomial] := 
-    p[[1]] + Plus @@ Apply[NonCommutativeMultiply,
-                  Flatten[Apply[NCPolynomialToNCAux, 
-                                Normal[p[[2]]], {1}], 1], {1}];
+    p[[1]] + 
+    Total[Apply[NonCommutativeMultiply,
+                Flatten[Apply[NCPolynomialToNCAux, 
+                              Normal[p[[2]]], {1}], 1], {1}]];
 
+  (* NCPDecompose *)
+  Clear[NCPDecomposeAux];
+  NCPDecomposeAux[p_NCPolynomial] := 
+    Merge[
+      Thread[NCPMonomialDegree[p] -> 
+             Apply[Plus, 
+                   Apply[NonCommutativeMultiply,
+                         Apply[NCPolynomialToNCAux, 
+                               Normal[p[[2]]], {1}], {2}], {1}]]
+      , Total];
+
+  NCPDecompose[p_NCPolynomial] := Block[
+     {tmp = NCPDecomposeAux[p]},
+     Return[ If[ p[[1]] === 0, tmp,
+             Append[tmp, 
+                    ConstantArray[0, Length[p[[3]]]] -> p[[1]]]] ];
+  ];
+   
   (* NCPDegree *)
 
   Clear[NCPDegreeAux];
-  NCPDegreeAux[m_NonCommutativeMultiply] := Length[m];
-  NCPDegreeAux[m_Symbol] := 1;
+  NCPDegreeAux[m_NonCommutativeMultiply, vars_] := 
+     Map[Count[m, #]&, vars];
+  NCPDegreeAux[m_Symbol, vars_] := Exponent[vars, m];
   
   NCPMonomialDegree[p_NCPolynomial] := 
-    Map[NCPDegreeAux,
+    Map[NCPDegreeAux[#,p[[3]]]&,
         Apply[NonCommutativeMultiply, Keys[p[[2]]], {1}]];
 
-  NCPDegree[p_NCPolynomial] := Max[NCPMonomialDegree[p],0];
+  NCPDegree[p_NCPolynomial] := 
+     Max[Apply[Plus, NCPMonomialDegree[p], {1}],0];
     
   (* NCPLinearQ *)
     
