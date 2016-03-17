@@ -21,18 +21,20 @@ NCTest[result_, answer_, tag_, number_] := Block[
 ];
 
 NCRunTest[file_, tag_] := Block[
-  {keys, results, fail}, 
-  WriteString["stdout", "> '" <> file <> "'...\t\t"];
-  Get[file <> ".NCTest"];
+  {keys, results, fail, t}, 
+  WriteString["stdout", "> '" <> file <> "'...\n* "];
+  t = Timing[Get[file <> ".NCTest"]][[1]];
   keys = Select[Keys[NCTestResults], (#[[1]] == tag)&];
   results = Map[NCTestResults[#]&, keys];
   fail = Length[Select[# =!= True &][results]];
   WriteString["stdout",
-    If[fail == 0,
-      ToString[Length[keys]] <> " tests successfully completed.",
-      ToString[Length[keys]] <> " tests completed. " <> 
-        ToString[fail] <> " failed."
-    ] <> "\n"
+    ToString[Length[keys]] <> 
+    " tests completed in " <> 
+    ToString[Round[1000*t]/1000.] <> 
+    " seconds. " <>
+    ToString[Length[keys] - fail] <>
+    " succeeded. " <>
+    ToString[fail] <> " failed.\n"
   ];
 ];
    

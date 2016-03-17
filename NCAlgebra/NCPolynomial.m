@@ -63,7 +63,17 @@ See also:
 NCPolynomial, NCToNCPolynomial.";
 
 Clear[NCPDecompose];
-NCPDecompose::usage = "";
+NCPDecompose::usage = "\
+NCPDecompose[p] gives an association of elements of the \
+NCPolynomial p in which elements of the same order are collected \
+together.
+   
+For example
+\tNCPDecompose[NCPolynomial[a**x**b+c+d**x**e+a**x**e**x**b+a**x**y, {x,y}]]
+will produce the Association
+\t<|{1,0}->a**x**b + d**x**e, {1,1}->a**x**y, {2,0}->a**x**e**x**b, {0,0}->c|>
+
+See also NCDecompose, NCCompose.";
    
 Clear[NCPTerm];
 NCPTerm::usage = "\
@@ -227,6 +237,7 @@ Begin[ "`Private`" ]
                               Normal[p[[2]]], {1}], 1], {1}]];
 
   (* NCPDecompose *)
+   
   Clear[NCPDecomposeAux];
   NCPDecomposeAux[p_NCPolynomial] := 
     Merge[
@@ -298,6 +309,8 @@ Begin[ "`Private`" ]
   NCPNormalize[p_NCPolynomial] := 
      NCPolynomial[p[[1]], Map[FactorCommutative, p[[2]], {2}], p[[3]]];
 
+  (* NCPTerm *)
+   
   NCPTerm[p_NCPolynomial, m__] := Lookup[p[[2]], Key[{m}], {}];
    
 End[]
