@@ -4,15 +4,19 @@
 *)
 
 Clear[NCTest, NCTestResults, NCRunTest];
-NCTestResults = Association[];
+$NCTestResults = Association[];
+$NCTestCounter = 0;
 (* $AssertFunction = Throw[{###}]&; *)
-NCTest[result_, answer_, tag_, number_] := Block[
+NCTest[result_, answer_, tag_:"", number_:0] := Block[
   {pass},
+  $NCTestCounter ++;
   pass = (result === answer);
-  NCTestResults = Append[NCTestResults, 
-                         {tag, number} -> pass];
+  (* $NCTestResults = Append[$NCTestResults, 
+                         {tag, number} -> pass]; *)
+  Sow[pass];
   If[!pass, 
-    Print["\n* Test '" <> ToString[tag] <> " #" <> ToString[number] <> 
+    Print["\n* Test '" <> ToString[tag] <> " #" <> 
+          ToString[$NCTestCounter] <> 
           "' failed. Result:"];
     Print["    ", ToString[result] ];
     Print["  differs from correct answer:" ];
@@ -20,12 +24,18 @@ NCTest[result_, answer_, tag_, number_] := Block[
   ];
 ];
 
-NCRunTest[file_, tag_] := Block[
+NCRunTest[file_] := Block[
   {keys, results, fail, t}, 
+  $NCTestCounter = 0;
   WriteString["stdout", "\n> '" <> file <> "'...\n* "];
-  t = Timing[Get[file <> ".NCTest"]][[1]];
-  keys = Select[Keys[NCTestResults], (#[[1]] == tag)&];
-  results = Map[NCTestResults[#]&, keys];
+  {t, results} = Reap[Timing[Get[file <> ".NCTest"]][[1]]];
+  $NCTestResults = 
+    Append[$NCTestResults, 
+           MapThread[({file, #1} -> #2)&, 
+                     {Range[1,Length[results[[1]]]], 
+                      results[[1]]} ]];
+  keys = Select[Keys[$NCTestResults], (#[[1]] == file)&];
+  results = Map[$NCTestResults[#]&, keys];
   fail = Length[Select[# =!= True &][results]];
   WriteString["stdout",
     ToString[Length[keys]] <> 
@@ -46,34 +56,34 @@ On[Assert];
 Print["> BEGIN NCTEST\n" ];
 
 tests = {
-  {"CommutativeQ",     "CommutativeQ"},
-  {"Multiplication",   "Multiplication"},
-  {"NCUtil",           "NCUtil"},
-  {"Transposes",       "Transposes"},
-  {"Adjoints",         "Adjoints"},
-  {"Conjugate",        "Conjugates"},
-  {"Roots",            "Roots"},
-  {"NCOutput",         "NCOutput"},
-  {"NCPolynomial",     "NCPolynomial"},
-  {"NCSylvester",      "NCSylvester"},
-  {"Diff",             "Diff"},
-  {"Collect",          "Collect"},
-  {"Substitute",       "Substitute"},
-  {"SimplifyRational", "SimplifyRational"},
-  {"MatrixDecompositions", "MatrixDecompositions"},
-  {"NCMatMult",        "MatMult"},
-  {"NCMatrixDecompositions", "NCMatrixDecompositions"},
-  {"NCLDU",            "NCLDU"}, 
-  {"NCInverse",        "NCInverse"},
-(*  {"NCConvexity",      "NCConvexity"},*)
-  {"NCRealization",    "Realization"}
+  "CommutativeQ",
+  "NCMultiplication",
+  "NCUtil",
+  "NCTransposes",
+  "NCAdjoints",
+  "NCConjugate",
+  "NCRoots",
+  "NCOutput",
+  "NCPolynomial",
+  "NCSylvester",
+  "NCDiff",
+  "NCCollect",
+  "NCSubstitute",
+  "NCSimplifyRational",
+  "MatrixDecompositions",
+  "NCMatMult",
+  "NCMatrixDecompositions",
+  "NCLDU",
+  "NCInverse",
+(*  "NCConvexity", *)
+  "NCRealization"
 (* {"Crit",             "Crit"}, *)
 (*
-  {"NCSolve",               "NCSolve"},
-  {"Convert",          "Convert"}
+  "NCSolve",
+  "Convert"
 *)
 };
-MapThread[NCRunTest, Transpose[tests]];
+Map[NCRunTest, tests];
 
 (*
 

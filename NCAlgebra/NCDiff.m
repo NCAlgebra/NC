@@ -58,22 +58,43 @@ on the symbols are needed. The calculated expression is correct even \
 if symbols are self-adjoint or symmetric.
        
 See also NCDirectionalD.";
-               
+
+Clear[NCHessian];
+NCHessian::usage = "\
+NCHessian[f, {var1, h1}, ...] takes the second directional \
+derivative of expression f w.r.t. variables var1, var2, ... \
+successively in the directions h1, h2, ....
+
+See also NCDiretionalD, NCGrad."
+
 Begin["`Private`"];
 
   (* DirectionalD *)
                
-  (* Rules for inv *)
-  Unprotect[D];
-  inv /: D[inv[f_], x_] := -inv[f] ** D[f, x] ** inv[f];
-  D[g_ inv[f_], x_] := D[g, x] inv[f] - g inv[f] ** D[f, x] ** inv[f];
-  D[g_ + inv[f_], x_] := D[g, x] - inv[f] ** D[f, x] ** inv[f];
-  Protect[D];
-  
+  Clear[NCDAux];
+  NCDAux[inv[f_], x_] := -inv[f] ** NCDAux[f, x] ** inv[f];
+  NCDAux[f_Plus, x_] := Map[NCDAux[#,x]&, f];
+  NCDAux[f_NonCommutativeMultiply, x_] := 
+    Plus @@ 
+      MapIndexed[NonCommutativeMultiply @@ 
+                 ReplacePart[List @@ f, 
+                             First[#2] -> NCDAux[#1,x]]&, List @@ f];
+  NCDAux[f_Times, x_] :=
+    Plus @@ 
+      MapIndexed[Times @@ 
+                 ReplacePart[List @@ f, 
+                             First[#2] -> NCDAux[#1,x]]&, List @@ f];
+  NCDAux[f_, x_] := D[f, x];
+          
   DirectionalD[f_, x_, h_] := Module[
      {t},
      SetCommutative[t];
-     D[f /. x -> x + t h /. Conjugate[t] -> t, t] /. t -> 0
+     (* Print["f = ", f]; *)
+     tmp = f /. x -> x + t h /. Conjugate[t] -> t;
+     (* Print["tmp1 = ", tmp]; *)
+     tmp = NCDAux[tmp, t] /. t -> 0;
+     (* Print["tmp2 = ", tmp]; *)
+     Return[tmp];
   ];
 
   (* NCDirectionalD *)

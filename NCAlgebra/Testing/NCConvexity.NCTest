@@ -19,8 +19,6 @@ Module[
     p, expr1, l, m, r,
     A,B,F,G,J,L,P,Q,R},
 
-   j = 1;
-    
    SetNonCommutative[x,y,h,k];
    SetCommutative[A,B,F,G,J,L,P,Q,R];
 
@@ -31,7 +29,7 @@ Module[
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
-   NCTest[{diagonal}, ans, "NCConvexity", j++]; 
+   NCTest[{diagonal}, ans]; 
 
    (* test 2 *)
    f = x**x**x;
@@ -40,7 +38,7 @@ Module[
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
-   NCTest[{diagonal}, ans, "NCConvexity", j++];
+   NCTest[{diagonal}, ans];
 
    (* test 3 *)
    f = x**x + y**y;
@@ -49,7 +47,7 @@ Module[
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
-   NCTest[{diagonal}, ans, "NCConvexity", j++];
+   NCTest[{diagonal}, ans];
 
    (* test 4 *)
    f = x**x**x + y**y**y;
@@ -58,7 +56,7 @@ Module[
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
-   NCTest[{diagonal}, ans, "NCConvexity", j++];
+   NCTest[{diagonal}, ans];
    
    (* test 5 *)
    f = x**y**x+y**x**y;
@@ -67,7 +65,7 @@ Module[
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
-   NCTest[{diagonal}, ans, "NCConvexity", j++];
+   NCTest[{diagonal}, ans];
 
    (* test 6 *)
    f = 2*x**x**x + 7*x**x + x;
@@ -76,7 +74,7 @@ Module[
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
-   NCTest[{diagonal}, ans, "NCConvexity", j++];
+   NCTest[{diagonal}, ans];
 
    (* test 7 *)
    f = x**x**y+y**x**x+x**x**x+y**y**y;
@@ -85,7 +83,7 @@ Module[
    {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
-   NCTest[{diagonal}, ans, "NCConvexity", j++];
+   NCTest[{diagonal}, ans];
 
    (* From NCMatrixOfQuadratics.NCTest *)
 
@@ -95,9 +93,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
    (* Print[ "Doing test 3,4" ]; *)
    p = x**x**x**x; 
@@ -105,9 +103,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
    (* Print[ "Doing test 5,6" ]; *)
    p = A*x**x**x**x+B*x**x**x+F*x**x+G*x+J; 
@@ -115,9 +113,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
    (* Print[ "Doing test 7,8" ]; *)
    p = (A + B*x) ** inv[F + G*x] + tp[ (A + B*x) ** inv[F + G*x] ];
@@ -125,9 +123,10 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   Print["k = ", $NCTestCounter + 1];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
    (* Print[ "Doing test 9,10" ]; *)
    p = (A + B*x + J*x**x) ** inv[F + G*x] + tp[ (A + B*x+J*x**x) ** inv[F + G*x] ];
@@ -135,9 +134,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
 
    (* Print[ "Doing test 11,12" ]; *)
@@ -146,9 +145,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
 
    (* Print[ "Doing test 13,14" ]; *)
@@ -157,9 +156,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
 
    (* Print[ "Doing test 15,16" ]; *)
@@ -168,9 +167,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
    (* Print[ "Doing test 17,18" ]; *)
    p = x**x**x;
@@ -178,9 +177,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
    (* Print[ "Doing test 19,20" ]; *)
    p = A*x**x**x + y**y**x + x**y**y;
@@ -188,9 +187,9 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   NCTest[expr1, 0, "NCConvexity", j++];
+   NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]], "NCConvexity", j++];
+          NCZeroMatrix[Dimensions[m][[1]]]];
 
 ];
 

@@ -3,237 +3,277 @@
 (* :Author: 	mauricio *)
 
 Module[ 
-   {k,test,answer,exp,A,B,a,b,c,d,e,f,g,x,y,h,s},
+   {k,test,answer,exp,A,B,F,G,a,b,c,d,e,f,g,x,y,h,s},
 
    k = 1;
    test = "Diff";
 
-   SetCommutative[A,B];
+   SetCommutative[A,B,F,G];
    SetNonCommutative[a,b,c,d,e,f,g,x,y,h,s];
 
    exp = 1;
    answer = 0;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = y;
    answer = 0;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = A + 2 B ** y;
    answer = 0;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = x;
    answer = h;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = tp[x];
    answer = tp[h];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = tp[x**x];
    answer = tp[h**x+x**h];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = aj[x];
    answer = aj[h];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = aj[x**x];
    answer = aj[h**x+x**h];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = x**y**x;
    answer = h**y**x+x**y**h;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = y**x**y;
    answer = y**h**y;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = x**y**x+y**x**y;
    answer = h**y**x+x**y**h+y**h**y;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = A**x**y**x+B**y**x**y;
    answer = A h**y**x + A x**y**h + B y**h**y;
-   NCTest[NCExpand[DirectionalD[exp, x, h]], answer, test, k++];
+   NCTest[NCExpand[DirectionalD[exp, x, h]], answer];
 
    exp = A**tp[x]**y**x+B**y**x**y;
    answer = A tp[h]**y**x + A tp[x]**y**h + B y**h**y;
-   NCTest[NCExpand[DirectionalD[exp, x, h]], answer, test, k++];
+   NCTest[NCExpand[DirectionalD[exp, x, h]], answer];
 
    exp = A**aj[x]**y**x+B**y**x**y;
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**y;
-   NCTest[NCExpand[DirectionalD[exp, x, h]], answer, test, k++];
+   NCTest[NCExpand[DirectionalD[exp, x, h]], answer];
 
    exp = inv[x];
    answer = -inv[x]**h**inv[x];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[x**x];
    answer = - inv[x**x]**(h**x+x**h)**inv[x**x];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[tp[x]];
    answer = - inv[tp[x]]**tp[h]**inv[tp[x]];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[1 + tp[x]];
    answer = - inv[1+tp[x]]**tp[h]**inv[1+tp[x]];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[1+x];
    answer = -inv[1+x]**h**inv[1+x];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = 1+inv[1+x];
    answer = -inv[1+x]**h**inv[1+x];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = x**inv[1+x];
+   answer = h**inv[1+x]-x**inv[1+x]**h**inv[1+x];
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = inv[1+x]**x;
+   answer = inv[1+x]**h-inv[1+x]**h**inv[1+x]**x;
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = x**inv[1+x]**x;
+   answer = x**inv[1+x]**h+h**inv[1+x]**x-x**inv[1+x]**h**inv[1+x]**x;
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = x**x+inv[1+x**x];
    answer = (h**x+x**h)-inv[1+x**x]**(h**x+x**h)**inv[1+x**x];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = 1+inv[1+inv[1 + x]];
    answer = inv[1+inv[1 + x]]**inv[1+x]**h**inv[1+x]**inv[1+inv[1 + x]];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[A x];
    answer = -inv[x]**h**inv[x]/A;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[A x**x];
    answer = - inv[x**x]**(h**x+x**h)**inv[x**x]/A;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[tp[A x]];
    answer = - inv[tp[x]]**tp[h]**inv[tp[x]]/A;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = inv[1 + A x];
    answer = - inv[1+A x]**h**inv[1+A x]*A;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = inv[1 + A tp[x]];
+   answer = - inv[1+A tp[x]]**tp[h]**inv[1+A tp[x]]*A;
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = x**inv[1+ A x];
+   answer = h**inv[1+A x] - A x**inv[1+A x]**h**inv[1+A x];
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = inv[1+A x]**x;
+   answer = inv[1+A x]**h - A inv[1+A x]**h**inv[1+A x]**x;
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = x**inv[1+A x]**x;
+   answer = x**inv[1+A x]**h+h**inv[1+A x]**x-A x**inv[1+A x]**h**inv[1+A x]**x;
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = x**inv[B+ A tp[x]];
+   answer = h**inv[B+A tp[x]] - A x**inv[B+A tp[x]]**tp[h]**inv[B+A tp[x]];
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = inv[B+A x]**x;
+   answer = inv[B+A x]**h - A inv[B+A x]**h**inv[B+A x]**x;
+   NCTest[DirectionalD[exp, x, h], answer];
+
+   exp = x**inv[1+A x]**x;
+   answer = x**inv[1+A x]**h+h**inv[1+A x]**x-A x**inv[1+A x]**h**inv[1+A x]**x;
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = 1+inv[1+ A x];
    answer = -inv[1+A x]**h**inv[1+A x]*A;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = x**x+inv[1+x**x];
    answer = (h**x+x**h)-inv[1+x**x]**(h**x+x**h)**inv[1+x**x];
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    exp = 1+inv[1+inv[1 + A x]];
    answer = inv[1+inv[1 + A x]]**inv[1+A x]**h**inv[1+A x]**inv[1+inv[1 + A x]] * A;
-   NCTest[DirectionalD[exp, x, h], answer, test, k++];
+   NCTest[DirectionalD[exp, x, h], answer];
 
    (* NCDirectionalD *)
 
    exp = A**x**y**x + B**y**x**y;
    answer = A h**y**x + A x**y**h + B y**h**y;
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
    answer = A y**x + A x**y + B y**y;
-   NCTest[NCGrad[exp, x], answer, test, k++];
+   NCTest[NCGrad[exp, x], answer];
 
    exp = A**x**y**x + B**y**x**y;
    answer = A x**s**x + B s**x**y + B y**x**s;
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**x + B x**y + B y**x;
-   NCTest[NCGrad[exp, y], answer, test, k++];
+   NCTest[NCGrad[exp, y], answer];
 
    exp = A**x**y**x + B**y**x**y;
    answer = A h**y**x + A x**y**h + B y**h**y
           + A x**s**x + B s**x**y + B y**x**s;
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {A y**x + A x**y + B y**y, A x**x + B x**y + B y**x};
-   NCTest[NCGrad[exp, x, y], answer, test, k++];
+   NCTest[NCGrad[exp, x, y], answer];
    
    exp = A**x**y**x + B**a**x**y;
    answer = A h**y**x + A x**y**h + B a**h**y;
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
    answer = A y**x + A x**y + B y**a;
-   NCTest[NCGrad[exp, x], answer, test, k++];
+   NCTest[NCGrad[exp, x], answer];
 
    exp = 1+inv[1+inv[1 + A x]];
    answer = inv[1+inv[1 + A x]]**inv[1+A x]**h**inv[1+A x]**inv[1+inv[1 + A x]] * A;
-   NCTest[NCDirectionalD[exp, {x, h}], DirectionalD[exp, x, h], test, k++];
+   NCTest[NCDirectionalD[exp, {x, h}], DirectionalD[exp, x, h]];
    answer = A*inv[1+A x]**inv[1+inv[1 + A x]]**inv[1+inv[1 + A x]]**inv[1+A x];
-   NCTest[NCGrad[exp, x], answer, test, k++];
+   NCTest[NCGrad[exp, x], answer];
 
    exp = A**x**y**x+B**y**x**y;
    answer = A (h**y**x + x**y**h) + B y**h**y + B (s**x**y + y**x**s) 
           + A x**s**x;
-   NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer, test, k++];
+   NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer];
    answer = DirectionalD[exp, x, h] + DirectionalD[exp, y, s];
-   NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer, test, k++];
+   NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer];
    answer = NCExpand[{A (y**x + x**y) + B y**y, B (x**y + y**x) + A x**x}];
-   NCTest[NCGrad[exp, x, y], answer, test, k++];
+   NCTest[NCGrad[exp, x, y], answer];
 
    (* tp *)
 
    exp = A**tp[x]**y**x + B**y**x**tp[y];
    answer = A tp[h]**y**x + A tp[x]**y**h + B y**h**tp[y];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
    answer = A tp[y**x] + A tp[x]**y + B tp[y]**y;
-   NCTest[NCGrad[exp, x], answer, test, k++];
+   NCTest[NCGrad[exp, x], answer];
 
    exp = A**tp[x]**y**x + B**y**x**tp[y];
    answer = A tp[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**tp[x] + B x**tp[y] + B tp[y**x];
-   NCTest[NCGrad[exp, y], answer, test, k++];
+   NCTest[NCGrad[exp, y], answer];
 
    exp = A**tp[x]**y**x + B**y**x**tp[y];
    answer = A tp[h]**y**x + A tp[x]**y**h + B y**h**tp[y]
           + A tp[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {A tp[y**x] + A tp[x]**y + B tp[y]**y,
              A x**tp[x] + B x**tp[y] + B tp[y**x]};
-   NCTest[NCGrad[exp, x, y], answer, test, k++];
+   NCTest[NCGrad[exp, x, y], answer];
 
    (* aj *)
 
    exp = A**aj[x]**y**x + B**y**x**aj[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**aj[y];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
    answer = Conjugate[A] aj[y**x] + A aj[x]**y + B aj[y]**y;
-   NCTest[NCGrad[exp, x], answer, test, k++];
+   NCTest[NCGrad[exp, x], answer];
 
    exp = A**aj[x]**y**x + B**y**x**aj[y];
    answer = A aj[x]**s**x + B s**x**aj[y] + B y**x**aj[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**aj[x] + B x**aj[y] + Conjugate[B] aj[y**x];
-   NCTest[NCGrad[exp, y], answer, test, k++];
+   NCTest[NCGrad[exp, y], answer];
 
    exp = A**aj[x]**y**x + B**y**x**aj[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**aj[y]
           + A aj[x]**s**x + B s**x**aj[y] + B y**x**aj[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {Conjugate[A] aj[y**x] + A aj[x]**y + B aj[y]**y,
              A x**aj[x] + B x**aj[y] + Conjugate[B] aj[y**x]};
-   NCTest[NCGrad[exp, x, y], answer, test, k++];
+   NCTest[NCGrad[exp, x, y], answer];
 
    (* tp and aj *)
 
    exp = A**aj[x]**y**x + B**y**x**tp[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**tp[y];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
    answer = Conjugate[A] aj[y**x] + A aj[x]**y + B tp[y]**y;
-   NCTest[NCGrad[exp, x], answer, test, k++];
+   NCTest[NCGrad[exp, x], answer];
 
    exp = A**aj[x]**y**x + B**y**x**tp[y];
    answer = A aj[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**aj[x] + B x**tp[y] + B tp[y**x];
-   NCTest[NCGrad[exp, y], answer, test, k++];
+   NCTest[NCGrad[exp, y], answer];
 
    exp = A**aj[x]**y**x + B**y**x**tp[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**tp[y]
           + A aj[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {Conjugate[A] aj[y**x] + A aj[x]**y + B tp[y]**y,
              A x**aj[x] + B x**tp[y] + B tp[y**x]};
-   NCTest[NCGrad[exp, x, y], answer, test, k++];
+   NCTest[NCGrad[exp, x, y], answer];
 
    (* old NCGrad test
      temp = 2 GE[x] **A[x] - tp[W]**W + tp[C1[x]]**C1[x] +
@@ -242,7 +282,7 @@ Module[
    exp = 2 g **a - tp[x]**x + tp[c]**c +
          2 g**b**e + 2 g**d**x + g**b**f**x;
    answer = 2 g**d + g**b**f - 2tp[x];
-   NCTest[NCGrad[exp, x], answer , test, k++];
+   NCTest[NCGrad[exp, x], answer ];
 
    (* NCHessian *)
    exp = A**x**y**x + B**y**x**y;
@@ -250,7 +290,14 @@ Module[
           + A h**s**x + A x**s**h + B s**h**y + B y**h**s
           + A h**s**x + A x**s**h + B s**h**y + B y**h**s
           + B s**x**s + B s**x**s;
-   NCTest[NCExpand[NCHessian[exp, {x, h}, {y, s}]], answer, test, k++];
+   NCTest[NCExpand[NCHessian[exp, {x, h}, {y, s}]], answer];
+
+   exp = (A + B*x) ** inv[F + G*x] + tp[ (A + B*x) ** inv[F + G*x] ];
+   answer = B h ** inv[F + G x] 
+   	  - G (A + B x) ** inv[F + G x] ** h ** inv[F + G x] 
+          + B inv[F + G*tp[x]] ** tp[h]
+          - G inv[F + G*tp[x]] ** tp[h] ** inv[F + G*tp[x]] ** (A + B tp[x]);
+   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], NCExpand[answer]];
 
 ];
 
