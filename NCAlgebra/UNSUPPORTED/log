@@ -1,0 +1,44 @@
+0. To be updated
+
+Grabs.m
+NCTaylorCoeff.m
+NCMatMult.old.m
+NCPInverses.m        -> MAYBE
+NCTrace.m            -> MAYBE
+
+1. NCGB (to be reconciled)
+
+NCMtools.m
+Errors.m
+
+2. Mark's functional stuff (permanently ditch)
+
+NC1SetCommands.m
+NC2SetCommands.m
+NCSetRelations.m
+
+3. Obsolete NO MATH utilities (permanently ditch)
+
+ArrayManager.m
+NCBlockPartition.m
+NCSave.m
+NCSetRule.m
+MakeRules.m
+Ajize.m
+
+4. Obsolete math
+
+ComplexRules.m        -> NEEDED FOR ANOPT
+NCComplex.m           -> NEEDED FOR ANOPT
+NCAnalytic.m
+HereditaryCalculus.m
+BackSolve.m
+NCSchur.m
+
+5. Wierd stuff (?? SYSTEMS ??)
+
+NCMaster.m
+NCMessyFunction.m
+NCRepresent.m
+
+

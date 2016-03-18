@@ -65,9 +65,9 @@ BeginPackage["NCConvexity`",
              "NCDiff`",
              "NCMatMult`"];
 
-Clear[NCHessian];
+Clear[NCHessianOld];
 
-NCHessian::usage=
+NCHessianOld::usage=
      "NCHessian[] computes the Hessian
 of a function of noncommutting variables and coefficients.
 The Hessian recall is the second derivative.
@@ -126,7 +126,7 @@ Begin["`Private`"];
 
 (* Juan changed (standard) to  {x1, h1}, {x2, h2}, ..., {xn, hn} *)
 
-NCHessian[f_, listtmp__] :=
+NCHessianOld[f_, listtmp__] :=
     Module[{dimoflist = Dimensions[{listtmp}], n, k, iter, dirder, hessian,list},
       list = {listtmp};
       

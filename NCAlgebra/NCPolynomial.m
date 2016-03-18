@@ -17,22 +17,24 @@ BeginPackage[ "NCPolynomial`",
 
 Clear[NCPolynomial];
 NCPolynomial::usage = "\
-NCPolynomial[rules, vars, properties] is an expanded representation \
-of an nc polynomial which is better suited for certain computations.
+NCPolynomial[rules, vars, properties] is an expanded efficient \
+representation of an nc polynomial in vars which can have \
+commutative or noncommutative coefficients.
     
 The Association rules stores monomials in the following format:
 \t{mon1, ..., monN} -> {scalar, term1, ..., termN+1}
 where:
 \tmon1, ..., monN: are nc monomials in vars;
-\tscalar: contains all commutative factors; and 
-\tterm1, ..., termN+1: are nc expressions on variables other than \
-the ones in vars.
+\tscalar: contains all commutative coefficients; and 
+\tterm1, ..., termN+1: are nc expressions on letters other than \
+the ones in vars which are typically the noncommutative \
+coefficients of the polynomial.
  
 For example:
-\ta**x**b - 2 x**y**c**x + a**c
+\ta**x**b - 2 x**y**c**x + a**c\tin variables x and y
 is stored as:
-\tNCPolynomial[<|{x}->{1,a,b},{x**y,x}->{2,1,c,1},{}->{{a**c}}|>, {x,y}]
-Note that independent terms are grouped in the empty monomial {}.
+\tNCPolynomial[a**c, <|{x}->{1,a,b},{x**y,x}->{2,1,c,1}}|>, {x,y}]
+Note that independent terms come first.
 
 NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
    
@@ -74,11 +76,19 @@ will produce the Association
 \t<|{1,0}->a**x**b + d**x**e, {1,1}->a**x**y, {2,0}->a**x**e**x**b, {0,0}->c|>
 
 See also NCDecompose, NCCompose.";
-   
+
+Clear[NCPTermToNC];
+NCPTermToNC::usage = "\
+";
+
 Clear[NCPTerm];
 NCPTerm::usage = "\
 NCPTerm[p, m] gives all terms of the NCPolynomial in the monomial m.";
    
+Clear[NCPTermOfDegree];
+NCPTermOfDegree::usage = "\
+";
+
 Clear[NCPDegree];
 NCPDegree::usage = "\
 NCPDegree[p] gives the degree of the NCPolynomial p.
@@ -225,16 +235,25 @@ Begin[ "`Private`" ]
       
   ];
 
-  (* NCPolynomialToNC *)
+  (* NCPTerm *)
+   
+  NCPTerm[p_NCPolynomial, m__] := Lookup[p[[2]], Key[{m}], {}];
+   
 
-  NCPolynomialToNCAux[m_, coeffs_] := 
+  (* NCPTermToNC *)
+  
+  Clear[NCPTermToNCAux];
+  NCPTermToNCAux[m_, coeffs_] := 
     Map[Prepend[Riffle[Rest[#1],m], First[#1]]&, coeffs];
   
-  NCPolynomialToNC[p_NCPolynomial] := 
-    p[[1]] + 
+  NCPTermToNC[terms_] := 
     Total[Apply[NonCommutativeMultiply,
-                Flatten[Apply[NCPolynomialToNCAux, 
-                              Normal[p[[2]]], {1}], 1], {1}]];
+                Flatten[Apply[NCPTermToNCAux, 
+                              Normal[terms], {1}], 1], {1}]];
+    
+  (* NCPolynomialToNC *)
+
+  NCPolynomialToNC[p_NCPolynomial] := p[[1]] + NCPTermToNC[p[[2]]];
 
   (* NCPDecompose *)
    
@@ -244,7 +263,7 @@ Begin[ "`Private`" ]
       Thread[NCPMonomialDegree[p] -> 
              Apply[Plus, 
                    Apply[NonCommutativeMultiply,
-                         Apply[NCPolynomialToNCAux, 
+                         Apply[NCPTermToNCAux, 
                                Normal[p[[2]]], {1}], {2}], {1}]]
       , Total];
 
@@ -254,7 +273,8 @@ Begin[ "`Private`" ]
              Append[tmp, 
                     ConstantArray[0, Length[p[[3]]]] -> p[[1]]]] ];
   ];
-   
+  
+
   (* NCPDegree *)
 
   Clear[NCPDegreeAux];
@@ -269,6 +289,16 @@ Begin[ "`Private`" ]
   NCPDegree[p_NCPolynomial] := 
      Max[Apply[Plus, NCPMonomialDegree[p], {1}],0];
     
+  
+  (* NCPTermOfDegree *)
+  
+  NCPTermOfDegreeAux[ms_, vars_, degree_] :=
+    Plus @@ Map[NCPDegreeAux[#, vars]&, ms] === degree;
+    
+  NCPTermOfDegree[p_NCPolynomial, degree_] := 
+    KeySelect[p[[2]], 
+              NCPTermOfDegreeAux[#, p[[3]], degree]&];
+  
   (* NCPLinearQ *)
     
   NCPLinearQ[p_NCPolynomial] := (NCPDegree[p] <= 1);
@@ -279,7 +309,8 @@ Begin[ "`Private`" ]
 
   (* NCPNormalize *)
   
-  FactorCommutative[l_] := Module[
+  Clear[NCPNormalizeAux];
+  NCPNormalizeAux[l_] := Module[
       {list, pos, scalars},
       
       pos = Flatten[Position[Rest[l], 
@@ -307,12 +338,8 @@ Begin[ "`Private`" ]
   ];
    
   NCPNormalize[p_NCPolynomial] := 
-     NCPolynomial[p[[1]], Map[FactorCommutative, p[[2]], {2}], p[[3]]];
+     NCPolynomial[p[[1]], Map[NCPNormalizeAux, p[[2]], {2}], p[[3]]];
 
-  (* NCPTerm *)
-   
-  NCPTerm[p_NCPolynomial, m__] := Lookup[p[[2]], Key[{m}], {}];
-   
 End[]
 
 EndPackage[]

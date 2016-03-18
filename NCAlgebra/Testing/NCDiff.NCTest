@@ -284,6 +284,11 @@ Module[
    answer = 2 g**d + g**b**f - 2tp[x];
    NCTest[NCGrad[exp, x], answer ];
 
+   exp = 2 g **a - x**x + tp[c]**c +
+         2 g**b**e + 2 g**d**x + g**b**f**x;
+   answer = 2 g**d + g**b**f - 2 x;
+   NCTest[NCGrad[exp, x], answer ];
+
    (* NCHessian *)
    exp = A**x**y**x + B**y**x**y;
    answer = A h**y**h + A h**y**h 

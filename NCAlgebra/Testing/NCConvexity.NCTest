@@ -123,7 +123,6 @@ Module[
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
    expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
 
-   Print["k = ", $NCTestCounter + 1];
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
           NCZeroMatrix[Dimensions[m][[1]]]];

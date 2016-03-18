@@ -370,6 +370,10 @@ Module[
    NCTest[NCPMonomialDegree[exp], {{1,0},{1,1},{2,0}}, test, k++];
    NCTest[NCPDegree[exp], 2, test, k++];
 
+   Print[NCPTermOfDegree[exp, {1,0}]];
+   Print[NCPTermToNC[NCPTermOfDegree[exp, {1,0}]]];
+
+
    p = x**inv[z];
    exp = NCToNCPolynomial[p, vars];
    NCTest[exp, NCPolynomial[0,<|{x}->{{1,1,inv[z]}}|>, vars], test, k++];

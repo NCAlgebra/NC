@@ -23,27 +23,28 @@ BeginPackage[ "NCDiff`",
 
 Clear[DirectionalD];
 DirectionalD::usage = "\
-DirectionalD[f, var, h] takes the directional derivative of \n
-expression f w.r.t. variable var in direction h.
+DirectionalD[f, var, h] takes the directional derivative of \
+expression f with respect to variable var in direction h.
 
 See NCDirectionalD.";
 
 Clear[NCDirectionalD];
 NCDirectionalD::usage = "\
 NCDirectionalD[f, {var1, h1}, ...] takes the directional \
-derivative of expression f w.r.t. variables var1, var2, ... \
-successively in the directions h1, h2, ....
+derivative of expression f with respect to variables var1, \
+var2, ... successively in the directions h1, h2, ....
 
 See DirectionalD.";
 
 Clear[NCGrad];
 NCGrad::usage = "\
-NCGrad[f, var1, ...] gives the nc gradient of the expression f w.r.t. \
-variables var1, .... If there is more than one variable then NCGrad \
-returns the gradient in a list.
+NCGrad[f, var1, ...] gives the nc gradient of the expression f with \
+respect to variables var1, .... If there is more than one variable \
+then NCGrad returns the gradient in a list.
 
 The transpose of the gradient of the nc expression f is the derivative \
-w.r.t h of the trace of the directional derivative of f in the direction h.
+with respect to the trace of the directional derivative of f \
+in the direction h.
 
 For example, if
 \tf = x**a**x**b + x**c**x**d
@@ -87,12 +88,12 @@ Begin["`Private`"];
   NCDAux[f_, x_] := D[f, x];
           
   DirectionalD[f_, x_, h_] := Module[
-     {t},
-     SetCommutative[t];
+     {T},
+     SetCommutative[T];
      (* Print["f = ", f]; *)
-     tmp = f /. x -> x + t h /. Conjugate[t] -> t;
+     tmp = f /. x -> x + T h /. Conjugate[T] -> T;
      (* Print["tmp1 = ", tmp]; *)
-     tmp = NCDAux[tmp, t] /. t -> 0;
+     tmp = NCDAux[tmp, T] /. T -> 0;
      (* Print["tmp2 = ", tmp]; *)
      Return[tmp];
   ];

@@ -1,0 +1,16 @@
+<< NCQuadratic`
+
+Block[
+   {exp, answer, vars, p,
+   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
+
+   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
+   SetCommutative[A,B,C];
+
+   vars = {x,y};
+   exp = x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0,{{a,c},{b,d},SparseArray[{{2,0},{0,3}}],x}};
+   NCTest[NCQuadraticRepresentation[p], answer];
+
+];
