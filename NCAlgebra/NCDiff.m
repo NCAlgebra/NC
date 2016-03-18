@@ -130,19 +130,19 @@ Begin["`Private`"];
     (* Terms in hs *)
     grad += Apply[Plus, 
                   Map[NCGradAux, 
-                      Map[NCPTerm[df, #]&, hs], {2}], {1}];
+                      Map[NCPTerms[df, #]&, hs], {2}], {1}];
       
     (* Terms in tp[hs] *)
     grad += Map[tp, 
                 Apply[Plus, 
                       Map[NCGradAux, 
-                          Map[NCPTerm[df, #]&, Map[tp,hs]], {2}], {1}]];
+                          Map[NCPTerms[df, #]&, Map[tp,hs]], {2}], {1}]];
 
     (* Terms in aj[hs] *)
     grad += Map[aj, 
                 Apply[Plus, 
                       Map[NCGradAux, 
-                          Map[NCPTerm[df, #]&, Map[aj,hs]], {2}], {1}]];
+                          Map[NCPTerms[df, #]&, Map[aj,hs]], {2}], {1}]];
       
     (* Print["hs = ", hs];
        Print["df = ", df];

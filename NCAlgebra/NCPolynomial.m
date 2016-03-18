@@ -77,16 +77,20 @@ will produce the Association
 
 See also NCDecompose, NCCompose.";
 
-Clear[NCPTermToNC];
-NCPTermToNC::usage = "\
+Clear[NCPTermsToNC];
+NCPTermsToNC::usage = "\
 ";
 
-Clear[NCPTerm];
-NCPTerm::usage = "\
-NCPTerm[p, m] gives all terms of the NCPolynomial in the monomial m.";
+Clear[NCPTerms];
+NCPTerms::usage = "\
+NCPTerms[p, m] gives all terms of the NCPolynomial in the monomial m.";
    
-Clear[NCPTermOfDegree];
-NCPTermOfDegree::usage = "\
+Clear[NCPTermsOfDegree];
+NCPTermsOfDegree::usage = "\
+";
+
+Clear[NCPTermsOfTotalDegree];
+NCPTermsOfTotalDegree::usage = "\
 ";
 
 Clear[NCPDegree];
@@ -119,7 +123,7 @@ NCPLinearQ.";
 
 Begin[ "`Private`" ]
 
-  (* NCConsecutiveTerms *)
+  (* NCConsecutiveTermss *)
   
   Clear[NCConsecutiveTerms];
   NCConsecutiveTerms[(tp|aj)[x_], (tp|aj)[y_], vars_] := 
@@ -235,25 +239,25 @@ Begin[ "`Private`" ]
       
   ];
 
-  (* NCPTerm *)
+  (* NCPTerms *)
    
-  NCPTerm[p_NCPolynomial, m__] := Lookup[p[[2]], Key[{m}], {}];
+  NCPTerms[p_NCPolynomial, m__] := Lookup[p[[2]], Key[{m}], {}];
    
 
-  (* NCPTermToNC *)
+  (* NCPTermsToNC *)
   
-  Clear[NCPTermToNCAux];
-  NCPTermToNCAux[m_, coeffs_] := 
+  Clear[NCPTermsToNCAux];
+  NCPTermsToNCAux[m_, coeffs_] := 
     Map[Prepend[Riffle[Rest[#1],m], First[#1]]&, coeffs];
   
-  NCPTermToNC[terms_] := 
+  NCPTermsToNC[terms_] := 
     Total[Apply[NonCommutativeMultiply,
-                Flatten[Apply[NCPTermToNCAux, 
+                Flatten[Apply[NCPTermsToNCAux, 
                               Normal[terms], {1}], 1], {1}]];
     
   (* NCPolynomialToNC *)
 
-  NCPolynomialToNC[p_NCPolynomial] := p[[1]] + NCPTermToNC[p[[2]]];
+  NCPolynomialToNC[p_NCPolynomial] := p[[1]] + NCPTermsToNC[p[[2]]];
 
   (* NCPDecompose *)
    
@@ -263,7 +267,7 @@ Begin[ "`Private`" ]
       Thread[NCPMonomialDegree[p] -> 
              Apply[Plus, 
                    Apply[NonCommutativeMultiply,
-                         Apply[NCPTermToNCAux, 
+                         Apply[NCPTermsToNCAux, 
                                Normal[p[[2]]], {1}], {2}], {1}]]
       , Total];
 
@@ -290,15 +294,34 @@ Begin[ "`Private`" ]
      Max[Apply[Plus, NCPMonomialDegree[p], {1}],0];
     
   
-  (* NCPTermOfDegree *)
+  (* NCPTermsOfDegree *)
   
-  NCPTermOfDegreeAux[ms_, vars_, degree_] :=
-    Plus @@ Map[NCPDegreeAux[#, vars]&, ms] === degree;
+  NCPTermsOfDegreeAux[ms_, vars_, degree_] :=
+    (Plus @@ Map[NCPDegreeAux[#, vars]&, ms]) === degree;
     
-  NCPTermOfDegree[p_NCPolynomial, degree_] := 
-    KeySelect[p[[2]], 
-              NCPTermOfDegreeAux[#, p[[3]], degree]&];
+  NCPTermsOfDegree[p_NCPolynomial, degree_] :=
+    If [degree === ConstantArray[0, Length[p[[3]]]]
+        , 
+        Association[{} -> {{p[[1]]}}]
+        ,
+        KeySelect[p[[2]], 
+              NCPTermsOfDegreeAux[#, p[[3]], degree]&]
+    ];
+
+  (* NCPTermsOfTotalDegree *)
   
+  NCPTermsOfTotalDegreeAux[ms_, vars_, degree_] :=
+    Total[Plus @@ Map[NCPDegreeAux[#, vars]&, ms]] === degree;
+    
+  NCPTermsOfTotalDegree[p_NCPolynomial, degree_] :=
+    If [degree === 0
+        , 
+        Association[{} -> {{p[[1]]}}]
+        ,
+        KeySelect[p[[2]], 
+              NCPTermsOfTotalDegreeAux[#, p[[3]], degree]&]
+    ];
+    
   (* NCPLinearQ *)
     
   NCPLinearQ[p_NCPolynomial] := (NCPDegree[p] <= 1);

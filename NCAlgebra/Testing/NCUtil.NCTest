@@ -3,96 +3,99 @@
 Block[
   {k,test,exp,a,b,c,d,x,y,z},
 
-  k = 1;
-  test = "NCUtil";
-
   SetCommutative[a,b,c,d];
   SetNonCommutative[x,y,z];
 
   (* NCConsistentQ *)
 
   exp = 0;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = 1;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = Sqrt[2];
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = a + b c;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = x ** x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = x ** x ** y;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = x ** x ** y + y ** x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = x ** x ** y + y ** x ** inv[z];
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = 2 x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = 2 x ** x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = 2 x ** x ** y;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = 2 x ** x ** y + 3 y ** x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = 2 x ** x ** y + 3 y ** x ** inv[z];
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = a x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = a x ** x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = a x ** x ** y;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = a x ** x ** y + b y ** x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = a x ** x ** y + b y ** x ** inv[z];
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = Sqrt[a] x ** x ** y + b y ** x ** inv[z];
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = x x;
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = x y;
-  NCTest[NCConsistentQ[exp], False, test, k++];
+  NCTest[NCConsistentQ[exp], False];
 
   exp = Sqrt[2] x ** x y + 3 y ** x ** inv[z];
-  NCTest[NCConsistentQ[exp], False, test, k++];
+  NCTest[NCConsistentQ[exp], False];
 
   exp = Sqrt[2] x ** x ** y + 3 y x ** inv[z];
-  NCTest[NCConsistentQ[exp], False, test, k++];
+  NCTest[NCConsistentQ[exp], False];
 
   exp = x / y;
-  NCTest[NCConsistentQ[exp], False, test, k++];
+  NCTest[NCConsistentQ[exp], False];
 
   exp = Sqrt[2] x ** x ** y + 3 y ** x / z;
-  NCTest[NCConsistentQ[exp], False, test, k++];
+  NCTest[NCConsistentQ[exp], False];
 
   exp = Sqrt[2] x ** x ** y + 3 x ** inv[x + z ** y];
-  NCTest[NCConsistentQ[exp], True, test, k++];
+  NCTest[NCConsistentQ[exp], True];
 
   exp = Sqrt[2] x ** x ** y + 3 x ** inv[x + x z ** y];
-  NCTest[NCConsistentQ[exp], False, test, k++];
+  NCTest[NCConsistentQ[exp], False];
+
+  (* NCTermsOfDegree *)
+  exp = x**y**x + x**w;
+  NCTest[NCTermsOfDegree[exp,{x,y},{2,1}], x**y**x];
+  NCTest[NCTermsOfDegree[exp,{x,y},{1,0}], x**w];
+  NCTest[NCTermsOfDegree[exp,{x,y},{2,2}], 0];
 
 ];

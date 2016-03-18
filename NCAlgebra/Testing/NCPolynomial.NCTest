@@ -370,9 +370,23 @@ Module[
    NCTest[NCPMonomialDegree[exp], {{1,0},{1,1},{2,0}}, test, k++];
    NCTest[NCPDegree[exp], 2, test, k++];
 
-   Print[NCPTermOfDegree[exp, {1,0}]];
-   Print[NCPTermToNC[NCPTermOfDegree[exp, {1,0}]]];
+   NCTest[NCPTermsOfDegree[exp, {1,0}], <|{x}->{{A,a,b},{C,d,e}}|>];
+   NCTest[NCPTermsOfDegree[exp, {1,1}], <|{x**y}->{{A C,a,1}}|>];
+   NCTest[NCPTermsOfDegree[exp, {2,0}], <|{x,x}->{{A B,a,e,b}}|>];
+   NCTest[NCPTermsOfDegree[exp, {2,2}], <||>];
+   NCTest[NCPTermsOfDegree[exp, {0,0}], <|{}->{{B c}}|>];
 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {1,0}]], A a**x**b + C d**x**e];
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {1,1}]], A C a**x**y];
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {2,0}]], A B a**x**e**x**b]; 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {2,2}]], 0]; 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {0,0}]], B c]; 
+
+   NCTest[NCPTermsOfTotalDegree[exp, 1], <|{x}->{{A,a,b},{C,d,e}}|>]; 
+   NCTest[NCPTermsOfTotalDegree[exp, 2], <|{x**y}->{{A C,a,1}},
+                                          {x,x}->{{A B,a,e,b}}|>];
+   NCTest[NCPTermsOfTotalDegree[exp, 3], <||>];
+   NCTest[NCPTermsOfTotalDegree[exp, 0], <|{}->{{B c}}|>];
 
    p = x**inv[z];
    exp = NCToNCPolynomial[p, vars];
