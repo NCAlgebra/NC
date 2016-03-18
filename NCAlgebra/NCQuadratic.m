@@ -75,7 +75,6 @@ Begin[ "`Private`" ]
 
   (* NCQuadraticRepresentation *)
 
-  NCQuadraticRepresentationAux;
   Clear[NCQuadraticRepresentationAux];
   NCQuadraticRepresentationAux[m_, terms_] := (
     Map[{#[[2]]**m[[1]], #[[1]]*#[[3]], m[[2]]**#[[4]]}&, terms] 
@@ -85,6 +84,23 @@ Begin[ "`Private`" ]
     Map[{#[[2]]**m[[1,1]], #[[1]], m[[1,2]]**#[[3]]}&, terms] 
     ) /; Length[m] == 1;
 
+  Clear[NCQuadraticRepresentationBasis];
+  NCQuadraticRepresentationBasis[list_] := Module[
+    {basis, coefficient},
+      
+    basis = Merge[Thread[list -> Range[1, Length[list]]],
+                  Identity];
+     
+    coefficient = SparseArray[
+               Thread[Flatten[
+                        Apply[List, 
+                              MapIndexed[Thread[#1 -> First[#2]]&, 
+                                         Values[basis]], {2}], 1] -> 1]];
+
+    Return[{Keys[basis], coefficient}];
+      
+  ];
+  
   NCQuadraticRepresentation[p_NCPolynomial] := Module[
     {terms},
 
@@ -93,57 +109,39 @@ Begin[ "`Private`" ]
         Return[$Failed];
     ];
 
-    terms = Flatten[
-              MapThread[NCQuadraticRepresentationAux, 
-                       {Keys[p[[2]]], Values[p[[2]]]}], 1];
-
-    Print["terms = ", terms];
-
-    left = terms[[All,1]];
-    middle = terms[[All,2]];
-    right = terms[[All,3]];
+    (* select quadratic terms *)
+    {left, middle, right}
+      = Transpose[
+              Flatten[
+                MapThread[NCQuadraticRepresentationAux,
+                          Transpose[
+                             Apply[List, 
+                                   Normal[NCPTermsOfTotalDegree[p, 2]],
+                                   {1}]]], 1]];
 
     Print["left = ", left];
     Print["middle = ", middle];
     Print["right = ", right];
       
-    rightBasis = Merge[Thread[right -> Range[1, Length[right]]],
-                      Identity];
-    rightMatrix = 
-       SparseArray[
-         Thread[
-           Flatten[Apply[List, 
-                         MapIndexed[Thread[#1 -> First[#2]]&, 
-                                    Values[rightBasis]], {2}], 1] -> 1]];
-
-    rightBasis = Keys[rightBasis];
+    {rightBasis, rightMatrix} = NCQuadraticRepresentationBasis[right];
+    {leftBasis, leftMatrix} = NCQuadraticRepresentationBasis[left];
 
     Print["rightBasis = ", rightBasis];
     Print["rightMatrix = ", Normal[rightMatrix]];
-    Print["rightMatrix . basis = ", rightMatrix . Keys[rightBasis]];
+    Print["rightMatrix . basis = ", rightMatrix . rightBasis];
 
-    leftBasis = Merge[Thread[left -> Range[1, Length[left]]],
-                      Identity];
-    leftMatrix = 
-       SparseArray[
-         Thread[
-           Flatten[Apply[List, 
-                         MapIndexed[Thread[#1 -> First[#2]]&, 
-                                    Values[leftBasis]], {2}], 1] -> 1]];
-    leftBasis = Keys[leftBasis];
-      
     Print["leftBasis = ", leftBasis];
     Print["leftMatrix = ", Normal[leftMatrix]];
     Print["leftMatrix . basis = ", leftMatrix . leftBasis];
 
-    middleMatrix = 
-      SparseArray[
-         MapIndexed[({First[#2],First[#2]} -> #1)&, middle]];
+    middleMatrix = MatMult[Transpose[leftMatrix], 
+                           SparseArray[
+                               MapIndexed[({First[#2],First[#2]} -> #1)&, 
+                                          middle]],
+                           rightMatrix];
       
-    Print["middleMatrix = ", Normal[middleMatrix]];
+    Print["middleMatrix = ", middleMatrix];
 
-    middleMatrix = MatMult[Transpose[leftMatrix], middleMatrix, rightMatrix];
-  
     Print[{leftBasis, middleMatrix, rightBasis}];
       
   ];
