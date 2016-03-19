@@ -1,7 +1,6 @@
+SetNonCommutative[q2,q1,m,f,a];
 vars = {Inv[m],q2,q1,m,f,a};
-
-Apply[SetNonCommutative,vars];
- SetMonomialOrder[vars,1];
+SetMonomialOrder[vars,1];
 
 Iterations=2;
 

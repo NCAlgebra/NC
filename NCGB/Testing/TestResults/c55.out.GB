@@ -1,8 +1,0 @@
-(*
- * File produced by NCGBTEST on:
- * Mon 30 Nov 2015 07:47:01
- *)
-
-{-1 + d**x + z**b, d**a + z**y, a**c + x**z, -z - d**a**c + z**b**z, 
- -1 + b**z + y**c, -a**c**y + x**d**a, -d**a + d**a**c**y + z**b**d**a, 
- -d**a**c**b**z + z**b**d**a**c}

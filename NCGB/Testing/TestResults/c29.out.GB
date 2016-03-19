@@ -1,9 +1,0 @@
-(*
- * File produced by NCGBTEST on:
- * Mon 30 Nov 2015 07:47:01
- *)
-
-{-A**B + B**A, -1 + A**B**c, -1 + d, -B + A**B**B**c, -A**c + c**A, 
- -B**B + A**B**B**B**c, -B**c + c**B, -B**B**B + A**B**B**B**B**c, 
- -B**B**B**B + A**B**B**B**B**B**c, -B**B**B**B**B + A**B**B**B**B**B**B**c, 
- -B**B**B**B**B**B + A**B**B**B**B**B**B**B**c}
