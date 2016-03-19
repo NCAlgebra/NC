@@ -2,7 +2,9 @@
 
 ## NCPolynomial.m
 
+<a name="NCPolynomial">
 ### NCPolynomial 
+</a>
 
 `NCPolynomial[indep,rules,vars]` is an expanded efficient representation for an nc polynomial in `vars` which can have commutative or noncommutative coefficients.
 
@@ -33,14 +35,18 @@ NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
 See also:
 `NCToNCPolynomial`, `NCPolynomialToNC`.
 
+<a name="NCToNCPolynomial">
 ### NCToNCPolynomial
+</a>
 
 `NCToNCPolynomial[p, vars]` generates a representation of the noncommutative polynomial `p` in `vars` which can have commutative or noncommutative coefficients.
 
 See also:
-`NCPolynomial`, `NCPolynomialToNC`.
+[`NCPolynomial`](#NCPolynomial), [`NCPolynomialToNC`](#NCPolynomialToNC).
 
+<a name="NCPolynomialToNC">
 ### NCPolynomialToNC
+</a>
 
 `NCPolynomialToNC[p]` converts the NCPolynomial `p` back into a regular nc polynomial.
 
