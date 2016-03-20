@@ -76,23 +76,23 @@ Block[
   (* Expand *)
   exp = x**(x+y);
   answer = x**x + x**y;
-  NCTest[NCExpand[exp], answer, test, k++];
+  NCTest[ExpandNonCommutativeMultiply[exp], answer, test, k++];
 
   exp = (x+y)**x;
   answer = x**x + y**x;
-  NCTest[NCExpand[exp], answer, test, k++];
+  NCTest[ExpandNonCommutativeMultiply[exp], answer, test, k++];
 
   exp = x**(x+y)**x;
   answer = x**x**x + x**y**x;
-  NCTest[NCExpand[exp], answer, test, k++];
+  NCTest[ExpandNonCommutativeMultiply[exp], answer, test, k++];
 
   exp = x**(x+y**(1+x)**y)**x;
   answer = x**x**x + x**y**y**x + x**y**x**y**x;
-  NCTest[NCExpand[exp], answer, test, k++];
+  NCTest[ExpandNonCommutativeMultiply[exp], answer, test, k++];
 
   exp = x**inv[1 + x**(1 + x)];
   answer = x**inv[1 + x + x**x];
-  NCTest[NCExpand[exp], answer, test, k++];
+  NCTest[ExpandNonCommutativeMultiply[exp], answer, test, k++];
 
   (* CommuteEverything *)
   exp = x**(x+y);

@@ -1,120 +1,119 @@
-Module[
-   {k, test, exp, answer, tmp,
-   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
+<< NCCollect`
 
-   k = 1;
-   test = "Collect";
+Module[
+   {exp, answer, tmp,
+   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
 
    SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
    SetCommutative[A,B,C];
 
    exp = x**y + x;
    answer = x**(1+y);
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = A x**y + B x;
    answer = x**(B + A y);
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = y**x + x;
    answer = (1+y)**x;
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = A y**x + B x;
    answer = (B + A y)**x;
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = A x**y + B x**y;
    answer = (A + B) x**y;
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = y**x**y + x**y;
    answer = (1 + y) ** x**y;
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = A y**x**y + B x**y;
    answer = (B + A y) ** x**y;
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = y**x**y + y**x;
    answer = y**x**(1 + y);
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = A y**x**y + B y**x;
    answer = y**x**(B + A y);
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    exp = x**x**y + y**x**x + y**x**y + x**y**x;
    answer = x**(x**y + y**x) + y**x**(x + y);
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
 
    answer = x**(x**y + y**x) + y**x**x + y**x**y;
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    answer = x**x**y + y**(x**x + x**y) + x**y**x;
-   NCTest[NCStrongCollect[exp,y], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{y}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,y], answer];
+   NCTest[NCStrongCollect[exp,{y}], answer];
 
    answer = x**x**y + y**x**x + y**x**y + x**y**x;
-   NCTest[NCCollect[exp,y], answer, test, k++];
-   NCTest[NCCollect[exp,{y}], answer, test, k++];
+   NCTest[NCCollect[exp,y], answer];
+   NCTest[NCCollect[exp,{y}], answer];
 
    exp = x**x**y + y**x**x + y**x**y + x**y**y;
    answer = x**(x**y + y**y) + y**x**(x + y);
-   NCTest[NCStrongCollect[exp,x], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,x], answer];
+   NCTest[NCStrongCollect[exp,{x}], answer];
 
    answer = x**x**y + y**x**x + y**x**y + x**y**y;
-   NCTest[NCCollect[exp,x], answer, test, k++];
-   NCTest[NCCollect[exp,{x}], answer, test, k++];
+   NCTest[NCCollect[exp,x], answer];
+   NCTest[NCCollect[exp,{x}], answer];
 
    answer = x**(x + y)**y + y**x**(x + y);
-   NCTest[NCStrongCollect[exp,{x,y}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,{x,y}], answer];
 
    answer = x**x**y + y**x**x + (y**x + x**y)**y;
-   NCTest[NCCollect[exp,{x,y}], answer, test, k++];
+   NCTest[NCCollect[exp,{x,y}], answer];
 
    answer = y**(x**x + x**y) + (x**x + x**y)**y;
-   NCTest[NCStrongCollect[exp,y], answer, test, k++];
-   NCTest[NCStrongCollect[exp,{y}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,y], answer];
+   NCTest[NCStrongCollect[exp,{y}], answer];
 
    answer = x**x**y + y**x**x + (y**x + x**y)**y;
-   NCTest[NCCollect[exp,{y}], answer, test, k++];
+   NCTest[NCCollect[exp,{y}], answer];
 
    answer = x**(x + y)**y + y**x**(x + y);
-   NCTest[NCStrongCollect[exp,{y,x}], answer, test, k++];
+   NCTest[NCStrongCollect[exp,{y,x}], answer];
 
    answer = x**x**y + y**x**x + (y**x + x**y)**y;
-   NCTest[NCCollect[exp,{y,x}], answer, test, k++];
+   NCTest[NCCollect[exp,{y,x}], answer];
 
 
    (* NCDecompose *)
@@ -123,68 +122,68 @@ Module[
    answer = <|{2}->x**x**y + x**y**x + y**x**x,
               {1}->y**x**y|>;
    tmp = NCDecompose[exp,{x}];
-   NCTest[tmp, answer, test, k++];
-   NCTest[NCCompose[tmp], exp, test, k++];
-   NCTest[NCCompose[tmp, {1}], y**x**y, test, k++];
-   NCTest[NCCompose[tmp, {2}], x**x**y + x**y**x + y**x**x, test, k++];
+   NCTest[tmp, answer];
+   NCTest[NCCompose[tmp], exp];
+   NCTest[NCCompose[tmp, {1}], y**x**y];
+   NCTest[NCCompose[tmp, {2}], x**x**y + x**y**x + y**x**x];
 
    answer = <|{2,1}->x**x**y + x**y**x + y**x**x,
               {1,2}->y**x**y|>;
    tmp = NCDecompose[exp,{x,y}];
-   NCTest[tmp, answer, test, k++];
-   NCTest[NCCompose[tmp], exp, test, k++];
-   NCTest[NCCompose[tmp, {1,2}], y**x**y, test, k++];
-   NCTest[NCCompose[tmp, {2,1}], x**x**y + x**y**x + y**x**x, test, k++];
+   NCTest[tmp, answer];
+   NCTest[NCCompose[tmp], exp];
+   NCTest[NCCompose[tmp, {1,2}], y**x**y];
+   NCTest[NCCompose[tmp, {2,1}], x**x**y + x**y**x + y**x**x];
 
    (* tp *)
 
    exp = tp[a]**b +tp[a]**c;
    answer = tp[a]**(b+c);
-   NCTest[NCStrongCollect[exp,tp[a]], answer, test, k++];
-   NCTest[NCStrongCollectSymmetric[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,tp[a]], answer];
+   NCTest[NCStrongCollectSymmetric[exp,a], answer];
 
-   exp = NCExpand[tp[a]**(b +c)];
+   exp = ExpandNonCommutativeMultiply[tp[a]**(b +c)];
    answer = tp[a]**(b+c);
-   NCTest[NCStrongCollect[exp,tp[a]], answer, test, k++];
-   NCTest[NCStrongCollectSymmetric[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,tp[a]], answer];
+   NCTest[NCStrongCollectSymmetric[exp,a], answer];
 
-   exp = NCExpand[tp[a]**(b +c)];
+   exp = ExpandNonCommutativeMultiply[tp[a]**(b +c)];
    answer = tp[a]**(b+c);
-   NCTest[NCStrongCollect[exp,tp[a]], answer, test, k++];
-   NCTest[NCStrongCollectSymmetric[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,tp[a]], answer];
+   NCTest[NCStrongCollectSymmetric[exp,a], answer];
 
    (* aj *)
 
    exp = aj[a]**b +aj[a]**c;
    answer = aj[a]**(b+c);
-   NCTest[NCStrongCollect[exp,aj[a]], answer, test, k++];
-   NCTest[NCStrongCollectSelfAdjoint[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,aj[a]], answer];
+   NCTest[NCStrongCollectSelfAdjoint[exp,a], answer];
 
-   exp = NCExpand[aj[a]**(b +c)];
+   exp = ExpandNonCommutativeMultiply[aj[a]**(b +c)];
    answer = aj[a]**(b+c);
-   NCTest[NCStrongCollect[exp,aj[a]], answer, test, k++];
-   NCTest[NCStrongCollectSelfAdjoint[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,aj[a]], answer];
+   NCTest[NCStrongCollectSelfAdjoint[exp,a], answer];
 
-   exp = NCExpand[aj[a]**(b +c)];
+   exp = ExpandNonCommutativeMultiply[aj[a]**(b +c)];
    answer = aj[a]**(b+c);
-   NCTest[NCStrongCollect[exp,aj[a]], answer, test, k++];
-   NCTest[NCStrongCollectSelfAdjoint[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,aj[a]], answer];
+   NCTest[NCStrongCollectSelfAdjoint[exp,a], answer];
 
    (* aj and tp *)
 
    exp = aj[a]**b + aj[a]**c + b**tp[d] + d**tp[d];
    answer = aj[a]**(b+c) + (b+d)**tp[d];
-   NCTest[NCStrongCollectSelfAdjoint[exp,{a,d}], answer, test, k++];
+   NCTest[NCStrongCollectSelfAdjoint[exp,{a,d}], answer];
 
    (* Original tests *)
 
    exp = a**b-a**c-a**d;
    answer = a**(b-c-d);
-   NCTest[NCStrongCollect[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,a], answer];
 
    exp = a**b-y**c-a**d;
    answer = a**(b-d)-y**c;
-   NCTest[NCStrongCollect[exp,a], answer, test, k++];
+   NCTest[NCStrongCollect[exp,a], answer];
 
    exp = -j ** b - c ** d ** inv[a] ** b - j ** inv[tp[a]] ** tp[d] ** c + 
      inv[e] ** f ** inv[g] ** h + inv[e] ** f ** tp[f] ** c + 
@@ -194,7 +193,7 @@ Module[
      j ** b - (j ** inv[tp[a]] ** tp[d] - inv[e] ** f ** tp[f] -
      tp[h] ** inv[tp[g]] ** tp[f]) ** c + inv[e] ** f ** inv[g] ** h +
      tp[h] ** inv[tp[g]] ** inv[g] ** h;
-   NCTest[NCStrongCollect[exp,c], answer, test, k++];
+   NCTest[NCStrongCollect[exp,c], answer];
 
 
 ];

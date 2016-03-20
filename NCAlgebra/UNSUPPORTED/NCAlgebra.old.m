@@ -112,10 +112,10 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
      Print["NC1SetCommands.m loaded"];
      Get["NC2SetCommands.m"]; 
      Print["NC2SetCommands.m loaded"];
-   *)
 
-   Get["NCInverses.m"];
-   Print["NCInverses.m loaded"];
+     Get["NCInverses.m"];
+     Print["NCInverses.m loaded"];
+   *)
 
    Get["NCOptions.m"];
    Print["NCOptions.m loaded"];

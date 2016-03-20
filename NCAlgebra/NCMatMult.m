@@ -29,8 +29,8 @@ BeginPackage["NCMatMult`",
 	     "NonCommutativeMultiply`",
              "NCSymmetric`",
              "NCSelfAdjoint`",
-	     "NCLinearAlgebra`",
-	     "NCSimplifyRational`"];
+	     "NCLinearAlgebra`"
+             (* ,"NCSimplifyRational`"*)];
 
 Clear[MatMult];
 

@@ -20,7 +20,7 @@ Block[
    p = NCToNCPolynomial[exp, vars];
    answer = {0,{{a,c},{b,d},SparseArray[{{2,3},{0,1}}],x}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];
@@ -29,7 +29,7 @@ Block[
    p = NCToNCPolynomial[exp, vars];
    answer = {0,{{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];
@@ -39,7 +39,7 @@ Block[
    p = NCToNCPolynomial[exp, vars];
    answer = {exp, {{},{},SparseArray[{}, {0, 0}],y}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];
@@ -50,7 +50,7 @@ Block[
    answer = {2 a**x**c + a**x**d + b**x**c - b**x**d,
              {{f},{h},SparseArray[{{1}}],y}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];
@@ -62,7 +62,7 @@ Block[
              {{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x},
              {{f},{h},SparseArray[{{1}}],y}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];
@@ -73,7 +73,7 @@ Block[
              {{a,c},{b,d},SparseArray[{{1,0},{0,1}}],x},
              {{1},{1},SparseArray[{{1}}],y}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];
@@ -84,7 +84,7 @@ Block[
              {{},{},SparseArray[{}, {0, 0}],x}, 
              {{},{},SparseArray[{}, {0, 0}],y}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];
@@ -95,7 +95,7 @@ Block[
              {{},{},SparseArray[{}, {0, 0}],x}, 
              {{},{},SparseArray[{}, {0, 0}],y}};
    NCTest[NCSylvesterRepresentation[p], answer];
-   NCTest[NCExpand[
+   NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
               NCSylvesterRepresentationToNCPolynomial[answer]]],
           exp];

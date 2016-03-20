@@ -29,6 +29,7 @@ If[ $NC$INITDOTMPATH =!= {}
     Print["  ", StringDrop[$NCDir$,-1]];
 
     (* Setting NCAlgebra Path *)
+    AppendTo[$Path,$NCDir$];
     AppendTo[$Path,ToFileName[{$NCDir$, "NCAlgebra" }]];
     AppendTo[$Path,ToFileName[{$NCDir$, "NCAlgebra", "Testing" }]];
     AppendTo[$Path,ToFileName[{$NCDir$, "NCAlgebra", "Systems" }]];

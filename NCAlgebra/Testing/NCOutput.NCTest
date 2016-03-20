@@ -1,53 +1,53 @@
-Module[
-  {expr, options, k, x, y},
+<< NCOutput`
 
-  k = 1;
+Module[
+  {expr, options, x, y},
 
   SetNonCommutative[x, y];
 
-  options = Options[NCOutput];
+  options = Options[NCSetOutput];
 
   NCTest[options[[All, 1]], 
-         {Dot, rt, tp, inv, aj}, "NCOutput", k++];
+         {Dot, rt, tp, inv, aj}];
 
   (* Simple forms *)
   expr = x ** y;
   NCSetOutput[Dot -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x . y], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], HoldForm[x . y]];
   NCSetOutput[Dot -> False];
-  NCTest[NCOutputFunction[expr], x ** y, "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], x ** y];
 
   expr = rt[x];
   NCSetOutput[rt -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"1/2"], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"1/2"]];
   NCSetOutput[rt -> False];
   expr = rt[x];
-  NCTest[NCOutputFunction[expr], rt[x], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], rt[x]];
 
   expr = tp[x];
   NCSetOutput[tp -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"T"], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"T"]];
   NCSetOutput[tp -> False];
-  NCTest[NCOutputFunction[expr], tp[x], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], tp[x]];
 
   expr = aj[x];
   NCSetOutput[aj -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"*"], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"*"]];
   NCSetOutput[aj -> False];
-  NCTest[NCOutputFunction[expr], aj[x], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], aj[x]];
 
   expr = inv[x];
   NCSetOutput[inv -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"-1"], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], HoldForm[x^"-1"]];
   NCSetOutput[inv -> False];
-  NCTest[NCOutputFunction[expr], inv[x], "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], inv[x]];
 
   (* Complex form *) 
   NCSetOutput[All -> True];
   expr = y**inv[x+tp[y]];
   answer = HoldForm[Dot[y, HoldForm[Power[Plus[x, HoldForm[Power[y, "T"]]],"-1"]]]];
-  NCTest[NCOutputFunction[expr], answer, "NCOutput", k++];
+  NCTest[NCOutputFunction[expr], answer];
 
-  SetOptions[NCOutput, ##]& @@ options;
+  SetOptions[NCSetOutput, ##]& @@ options;
 
 ];

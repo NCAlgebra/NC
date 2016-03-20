@@ -2,6 +2,8 @@
 
 (* :Author: 	mauricio *)
 
+<< NCDiff`
+
 Module[ 
    {k,test,answer,exp,A,B,F,G,a,b,c,d,e,f,g,x,y,h,s},
 
@@ -57,15 +59,15 @@ Module[
 
    exp = A**x**y**x+B**y**x**y;
    answer = A h**y**x + A x**y**h + B y**h**y;
-   NCTest[NCExpand[DirectionalD[exp, x, h]], answer];
+   NCTest[ExpandNonCommutativeMultiply[DirectionalD[exp, x, h]], answer];
 
    exp = A**tp[x]**y**x+B**y**x**y;
    answer = A tp[h]**y**x + A tp[x]**y**h + B y**h**y;
-   NCTest[NCExpand[DirectionalD[exp, x, h]], answer];
+   NCTest[ExpandNonCommutativeMultiply[DirectionalD[exp, x, h]], answer];
 
    exp = A**aj[x]**y**x+B**y**x**y;
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**y;
-   NCTest[NCExpand[DirectionalD[exp, x, h]], answer];
+   NCTest[ExpandNonCommutativeMultiply[DirectionalD[exp, x, h]], answer];
 
    exp = inv[x];
    answer = -inv[x]**h**inv[x];
@@ -171,26 +173,26 @@ Module[
 
    exp = A**x**y**x + B**y**x**y;
    answer = A h**y**x + A x**y**h + B y**h**y;
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}]], answer];
    answer = A y**x + A x**y + B y**y;
    NCTest[NCGrad[exp, x], answer];
 
    exp = A**x**y**x + B**y**x**y;
    answer = A x**s**x + B s**x**y + B y**x**s;
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**x + B x**y + B y**x;
    NCTest[NCGrad[exp, y], answer];
 
    exp = A**x**y**x + B**y**x**y;
    answer = A h**y**x + A x**y**h + B y**h**y
           + A x**s**x + B s**x**y + B y**x**s;
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {A y**x + A x**y + B y**y, A x**x + B x**y + B y**x};
    NCTest[NCGrad[exp, x, y], answer];
    
    exp = A**x**y**x + B**a**x**y;
    answer = A h**y**x + A x**y**h + B a**h**y;
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}]], answer];
    answer = A y**x + A x**y + B y**a;
    NCTest[NCGrad[exp, x], answer];
 
@@ -206,27 +208,27 @@ Module[
    NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer];
    answer = DirectionalD[exp, x, h] + DirectionalD[exp, y, s];
    NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer];
-   answer = NCExpand[{A (y**x + x**y) + B y**y, B (x**y + y**x) + A x**x}];
+   answer = ExpandNonCommutativeMultiply[{A (y**x + x**y) + B y**y, B (x**y + y**x) + A x**x}];
    NCTest[NCGrad[exp, x, y], answer];
 
    (* tp *)
 
    exp = A**tp[x]**y**x + B**y**x**tp[y];
    answer = A tp[h]**y**x + A tp[x]**y**h + B y**h**tp[y];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}]], answer];
    answer = A tp[y**x] + A tp[x]**y + B tp[y]**y;
    NCTest[NCGrad[exp, x], answer];
 
    exp = A**tp[x]**y**x + B**y**x**tp[y];
    answer = A tp[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**tp[x] + B x**tp[y] + B tp[y**x];
    NCTest[NCGrad[exp, y], answer];
 
    exp = A**tp[x]**y**x + B**y**x**tp[y];
    answer = A tp[h]**y**x + A tp[x]**y**h + B y**h**tp[y]
           + A tp[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {A tp[y**x] + A tp[x]**y + B tp[y]**y,
              A x**tp[x] + B x**tp[y] + B tp[y**x]};
    NCTest[NCGrad[exp, x, y], answer];
@@ -235,20 +237,20 @@ Module[
 
    exp = A**aj[x]**y**x + B**y**x**aj[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**aj[y];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}]], answer];
    answer = Conjugate[A] aj[y**x] + A aj[x]**y + B aj[y]**y;
    NCTest[NCGrad[exp, x], answer];
 
    exp = A**aj[x]**y**x + B**y**x**aj[y];
    answer = A aj[x]**s**x + B s**x**aj[y] + B y**x**aj[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**aj[x] + B x**aj[y] + Conjugate[B] aj[y**x];
    NCTest[NCGrad[exp, y], answer];
 
    exp = A**aj[x]**y**x + B**y**x**aj[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**aj[y]
           + A aj[x]**s**x + B s**x**aj[y] + B y**x**aj[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {Conjugate[A] aj[y**x] + A aj[x]**y + B aj[y]**y,
              A x**aj[x] + B x**aj[y] + Conjugate[B] aj[y**x]};
    NCTest[NCGrad[exp, x, y], answer];
@@ -257,20 +259,20 @@ Module[
 
    exp = A**aj[x]**y**x + B**y**x**tp[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**tp[y];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}]], answer];
    answer = Conjugate[A] aj[y**x] + A aj[x]**y + B tp[y]**y;
    NCTest[NCGrad[exp, x], answer];
 
    exp = A**aj[x]**y**x + B**y**x**tp[y];
    answer = A aj[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {y, s}]], answer];
    answer = A x**aj[x] + B x**tp[y] + B tp[y**x];
    NCTest[NCGrad[exp, y], answer];
 
    exp = A**aj[x]**y**x + B**y**x**tp[y];
    answer = A aj[h]**y**x + A aj[x]**y**h + B y**h**tp[y]
           + A aj[x]**s**x + B s**x**tp[y] + B y**x**tp[s];
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}, {y, s}]], answer];
    answer = {Conjugate[A] aj[y**x] + A aj[x]**y + B tp[y]**y,
              A x**aj[x] + B x**tp[y] + B tp[y**x]};
    NCTest[NCGrad[exp, x, y], answer];
@@ -295,14 +297,14 @@ Module[
           + A h**s**x + A x**s**h + B s**h**y + B y**h**s
           + A h**s**x + A x**s**h + B s**h**y + B y**h**s
           + B s**x**s + B s**x**s;
-   NCTest[NCExpand[NCHessian[exp, {x, h}, {y, s}]], answer];
+   NCTest[ExpandNonCommutativeMultiply[NCHessian[exp, {x, h}, {y, s}]], answer];
 
    exp = (A + B*x) ** inv[F + G*x] + tp[ (A + B*x) ** inv[F + G*x] ];
    answer = B h ** inv[F + G x] 
    	  - G (A + B x) ** inv[F + G x] ** h ** inv[F + G x] 
           + B inv[F + G*tp[x]] ** tp[h]
           - G inv[F + G*tp[x]] ** tp[h] ** inv[F + G*tp[x]] ** (A + B tp[x]);
-   NCTest[NCExpand[NCDirectionalD[exp, {x, h}]], NCExpand[answer]];
+   NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}]], ExpandNonCommutativeMultiply[answer]];
 
 ];
 

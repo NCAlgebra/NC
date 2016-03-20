@@ -24,6 +24,8 @@ NCTest[result_, answer_, tag_:"", number_:0] := Block[
   ];
 ];
 
+NCRunTest[Null] := Null;
+
 NCRunTest[file_] := Block[
   {keys, results, fail, t}, 
   $NCTestCounter = 0;
@@ -59,25 +61,26 @@ tests = {
   "CommutativeQ",
   "NCMultiplication",
   "NCUtil",
-  "NCSymmetric",
-  "NCSelfAdjoint",
-  "NCConjugate",
   "NCRoots",
-  "NCOutput",
+  "NCConjugate",
   "NCPolynomial",
-  "NCSylvester",
+  "NCOutput",
   "NCDiff",
   "NCCollect",
-  "NCSubstitute",
-  "NCSimplifyRational",
   "MatrixDecompositions",
+(*
+  "NCSubstitute",
   "NCMatMult",
+  "NCSymmetric",
+  "NCSylvester",
+  "NCSelfAdjoint",
+  "NCSimplifyRational",
   "NCMatrixDecompositions",
-  "NCLDU",
   "NCInverse",
+  "NCLDU",
   "NCConvexity", 
   "NCRealization",
-  "NCQuadratic"
+  "NCQuadratic" *)
 (* {"Crit",             "Crit"}, *)
 (*
   "NCSolve",

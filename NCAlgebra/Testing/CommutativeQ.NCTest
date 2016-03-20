@@ -2,66 +2,64 @@ Block[{k,i,j},
 
   (* History:  Nov 2015: CommutativeQ test (mauricio) *)
 
-  k = 1;
-
   (* Test SNC *)
 
   Clear[$zzzz,$yyyy];
-  SNC[$zzzz];
+  SetNonCommutative[$zzzz];
 
-  NCTest[CommutativeQ[$zzzz], False, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$yyyy], True, "CommutativeQ", k++];
+  NCTest[CommutativeQ[$zzzz], False];
+  NCTest[CommutativeQ[$yyyy], True];
 
   Clear[$zzzz,$yyyy];
 
-  NCTest[CommutativeQ[$zzzz], True, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$yyyy], True, "CommutativeQ", k++];
+  NCTest[CommutativeQ[$zzzz], True];
+  NCTest[CommutativeQ[$yyyy], True];
 
-  SNC[$zzzz];
+  SetNonCommutative[$zzzz];
 
-  NCTest[CommutativeQ[$zzzz], False, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$yyyy], True, "CommutativeQ", k++];
+  NCTest[CommutativeQ[$zzzz], False];
+  NCTest[CommutativeQ[$yyyy], True];
 
-  NCTest[CommutativeQ[$zzzz[1]], False, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$zzzz[$zzzz]], False, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$zzzz[$yyyy]], False, "CommutativeQ", k++];
+  NCTest[CommutativeQ[$zzzz[1]], False];
+  NCTest[CommutativeQ[$zzzz[$zzzz]], False];
+  NCTest[CommutativeQ[$zzzz[$yyyy]], False];
 
-  NCTest[CommutativeQ[$yyyy[1]], True, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$yyyy[$yyyy]], True, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$yyyy[$zzzz]], False, "CommutativeQ", k++];
+  NCTest[CommutativeQ[$yyyy[1]], True];
+  NCTest[CommutativeQ[$yyyy[$yyyy]], True];
+  NCTest[CommutativeQ[$yyyy[$zzzz]], False];
 
-  NCTest[CommutativeQ[$yyyy[1,$yyyy]], True, "CommutativeQ", k++];
-  NCTest[CommutativeQ[$yyyy[1,$zzzz]], False, "CommutativeQ", k++];
+  NCTest[CommutativeQ[$yyyy[1,$yyyy]], True];
+  NCTest[CommutativeQ[$yyyy[1,$zzzz]], False];
 
   Clear[$zzzz,$yyyy];
 
   (* Test rule *)
 
   Clear[$zzzz];
-  SNC[$zzzz];
+  SetNonCommutative[$zzzz];
 
   pattern1=$zzzz_**b_->b**$zzzz;
   exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), y**x+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern1), y**x+x**y**y];
 
   $zzzz=2;
   exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), 2y+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern1), 2y+x**y**y];
 
   exp2=y**x+x**y**y;
-  NCTest[(exp2/.pattern1), 2x+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp2/.pattern1), 2x+x**y**y];
 
   pattern2=_**b_->b;
-  NCTest[(exp1/.pattern2), y+x**y**y, "CommutativeQ", k++];
-  NCTest[(exp2/.pattern2), x+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern2), y+x**y**y];
+  NCTest[(exp2/.pattern2), x+x**y**y];
 
   pattern3=__**b_->b;
-  NCTest[(exp1/.pattern3), 2y, "CommutativeQ", k++];
-  NCTest[(exp2/.pattern3), x+y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern3), 2y];
+  NCTest[(exp2/.pattern3), x+y];
 
   pattern4=__**b_->b;
-  NCTest[(exp1/.pattern4), 2y, "CommutativeQ", k++];
-  NCTest[(exp2/.pattern4), x+y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern4), 2y];
+  NCTest[(exp2/.pattern4), x+y];
 
   Clear[$zzzz];
 
@@ -72,26 +70,26 @@ Block[{k,i,j},
 
   pattern1=$zzzz_**b_:>b**$zzzz;
   exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), y**x+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern1), y**x+x**y**y];
 
   $zzzz=2;
   exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), y**x+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern1), y**x+x**y**y];
 
   exp2=y**x+x**y**y;
-  NCTest[(exp2/.pattern1), x**y+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp2/.pattern1), x**y+x**y**y];
 
   pattern2=_**b_:>b;
-  NCTest[(exp1/.pattern2), y+x**y**y, "CommutativeQ", k++];
-  NCTest[(exp2/.pattern2), x+x**y**y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern2), y+x**y**y];
+  NCTest[(exp2/.pattern2), x+x**y**y];
 
   pattern3=__**b_:>b;
-  NCTest[(exp1/.pattern3), 2y, "CommutativeQ", k++];
-  NCTest[(exp2/.pattern3), x+y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern3), 2y];
+  NCTest[(exp2/.pattern3), x+y];
 
   pattern4=__**b_:>b;
-  NCTest[(exp1/.pattern4), 2y, "CommutativeQ", k++];
-  NCTest[(exp2/.pattern4), x+y, "CommutativeQ", k++];
+  NCTest[(exp1/.pattern4), 2y];
+  NCTest[(exp2/.pattern4), x+y];
 
   Clear[$zzzz];
 

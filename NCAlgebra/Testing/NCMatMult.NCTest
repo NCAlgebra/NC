@@ -1,5 +1,6 @@
 << NCSymmetric`
 << NCSelfAdjoint`
+<< NCSimplifyRational`
 
 Module[
   {k, test, a, b, c, d, e, f, g, h, i, K, u, v, w, x},
