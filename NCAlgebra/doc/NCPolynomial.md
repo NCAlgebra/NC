@@ -1,4 +1,4 @@
-# NCPolynomial
+# NCPolynomial {#PackageNCPolynomial}
 
 This package contains functionality to convert an nc polynomial expression into an expanded efficient representation for an nc polynomial which can have commutative or noncommutative coefficients.
 
@@ -30,9 +30,7 @@ Members are:
 * [NCPQuadraticQ](#NCPQuadraticQ)
 * [NCPNormalize](#NCPNormalize)
       
-<a name="NCPolynomial">
-## NCPolynomial 
-</a>
+## NCPolynomial {#NCPolynomial}
 
 `NCPolynomial[indep,rules,vars]` is an expanded efficient representation for an nc polynomial in `vars` which can have commutative or noncommutative coefficients.
 
@@ -65,9 +63,7 @@ NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
 See also:
 [`NCToNCPolynomial`](#NCToNCPolynomial), [`NCPolynomialToNC`](#NCPolynomialToNC), [`NCTermsToNC`](#NCTermsToNC).
 
-<a name="NCToNCPolynomial">
-## NCToNCPolynomial
-</a>
+## NCToNCPolynomial {#NCToNCPolynomial}
 
 `NCToNCPolynomial[p, vars]` generates a representation of the noncommutative polynomial `p` in `vars` which can have commutative or noncommutative coefficients.
 
@@ -83,18 +79,14 @@ returns
 See also:
 [`NCPolynomial`](#NCPolynomial), [`NCPolynomialToNC`](#NCPolynomialToNC).
 
-<a name="NCPolynomialToNC">
-## NCPolynomialToNC
-</a>
+## NCPolynomialToNC {#NCPolynomialToNC}
 
 `NCPolynomialToNC[p]` converts the NCPolynomial `p` back into a regular nc polynomial.
 
 See also:
 [`NCPolynomial`](#NCPolynomial), [`NCToNCPolynomial`](#NCToNCPolynomial).
 
-<a name="NCPCoefficients">
-## NCPCoefficients
-</a>
+## NCPCoefficients {#NCPCoefficients}
 
 `NCPCoefficients[p, m]` gives all coefficients of the NCPolynomial `p` in the monomial `m`.
 
@@ -119,9 +111,7 @@ returns
 See also:
 [`NCPTermsToNC`](#NCPTermsToNC).
    
-<a name="NCPTermsOfDegree">
-## NCPTermsOfDegree
-</a>
+## NCPTermsOfDegree {#NCPTermsOfDegree}
 
 `NCPTermsOfDegree[p,deg]` gives all terms of the NCPolynomial `p` of degree `deg`.
 
@@ -149,9 +139,7 @@ returns
 See also:
 [`NCPTermsOfTotalDegree`](#NCPTermsOfTotalDegree),[`NCPTermsToNC`](#NCPTermsToNC).
 
-<a name="NCPTermsOfTotalDegree">
-## NCPTermsOfTotalDegree
-</a>
+## NCPTermsOfTotalDegree {#NCPTermsOfTotalDegree}
 
 `NCPTermsOfDegree[p,deg]` gives all terms of the NCPolynomial `p` of total degree `deg`.
 
@@ -171,9 +159,7 @@ returns
 See also:
 [`NCPTermsOfDegree`](#NCPTermsOfDegree),[`NCPTermsToNC`](#NCPTermsToNC).
 
-<a name="NCPTermsToNC">
-## NCPTermsToNC
-</a>
+## NCPTermsToNC {#NCPTermsToNC}
 
 `NCPTermsToNC` gives a nc expression corresponding to terms produced by `NCPTermsOfDegree` or `NCTermsOfTotalDegree`.
 
@@ -189,9 +175,7 @@ returns
 See also:
 [`NCPTermsOfDegree`](#NCPTermsOfDegree),[`NCPTermsOfTotalDegree`](#NCPTermsOfTotalDegree).
 
-<a name="NCPDecompose">
-## NCPDecompose
-</a>
+## NCPDecompose {#NCPDecompose}
 
 `NCPDecompose[p]` gives an association of elements of the
 NCPolynomial `p` in which elements of the same order are collected
@@ -208,45 +192,35 @@ will produce the Association
 See also:
 `NCDecompose`,`NCCompose`.
 
-<a name="NCPDegree">
-## NCPDegree
-</a>
+## NCPDegree {#NCPDegree}
 
 `NCPDegree[p]` gives the degree of the NCPolynomial `p`.
 
 See also:
 [`NCPMonomialDegree`](#NCPMonomialDegree).
 
-<a name="NCPMonomialDegree">
-## NCPMonomialDegree
-</a>
+## NCPMonomialDegree {#NCPMonomialDegree}
 
 `NCPDegree[p]` gives the degree of each monomial in the NCPolynomial `p`.
 
 See also:
 [`NCDegree`](#NCPMonomialDegree).
 
-<a name="NCPLinearQ">
-## NCPLinearQ
-</a>
+## NCPLinearQ {#NCPLinearQ}
 
 `NCPLinearQ[p]` gives True if the NCPolynomial `p` is linear.   
 
 See also:
 [`NCPQuadraticQ`](#NCPQuadraticQ).
 
-<a name="NCPQuadraticQ">
-## NCPQuadraticQ
-</a>
+## NCPQuadraticQ {#NCPQuadraticQ}
 
 `NCPQuadraticQ[p]` gives True if the NCPolynomial `p` is quadratic.
 
 See also:
 [`NCPLinearQ`](#NCPLinearQ).
 
-<a name="NCPNormalize">
-## NCPNormalize
-</a>
+## NCPNormalize {#NCPNormalize}
 
 `NCPNormalizes[p]` gives a normalized version of NCPolynomial p
 where all factors that have free commutative products are 

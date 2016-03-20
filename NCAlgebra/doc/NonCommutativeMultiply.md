@@ -1,4 +1,6 @@
-# NonCommutativeMultiply
+# NonCommutativeMultiply {#PackageNonCommutativeMultiply}
+
+**NonCommutativeMultiply** is the main package that provides noncommutative functionality to Mathematica's native `NonCommutativeMultiply` bound to the operator `**`.
 
 Members are:
 
@@ -16,98 +18,74 @@ Members are:
 * [CommuteEverything](#CommuteEverything)
 * [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
 
-<a name="aj">
-## aj
-</a>
+## aj {#aj}
 
 `aj[x]` is the adjoint of `x`. `aj` is a conjugate linear involution. 
 
 See also:
 [tp](#tp), [co](#co).
 
-<a name="co">
-## co
-</a>
+## co {#co}
 
 `co[x]` is the conjugate of `x`. It is a linear involution.
 
 See also:
 [aj](#aj).
 
-<a name="Id">
-## Id
-</a>
+## Id {#Id}
 
 `Id` is noncommutative multiplicative identity. Actually Id is now set equal `1`.
 
-<a name="inv">
-## inv
-</a>
+## inv {#inv}
 
 `inv[x]` is the 2-sided inverse of `x`.
 
-<a name="rt">
-## rt
-</a>
+## rt {#rt}
 
 `rt[x]` is the root of `x`. 
 
-<a name="tp">
-## tp
-</a>
+## tp {#tp}
 
 `tp[x]` is the tranpose of `x`. It is a linear involution.
 
 See also:
 [aj](#tp), [co](#co).
 
-<a name="Commutative">
-## Commutative
-</a>
+## Commutative {#Commutative}
 
 `Commutative[x]` makes the noncommutative *Symbol* `x` behave as if it were commutative.
          
 See also:
 [CommuteEverything](#CommuteEverything), [CommutativeQ](#CommutativeQ), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
 
-<a name="CommutativeQ">
-## CommutativeQ
-</a>
+## CommutativeQ {#CommutativeQ}
 
 `CommutativeQ[x]` is *True* if `x` is commutative (the default), and *False* if `x` is noncommutative.
     
 See also:
 [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
 
-<a name="NonCommutativeQ">
-## NonCommutativeQ
-</a>
+## NonCommutativeQ {#NonCommutativeQ}
 
 NonCommutativeQ[x] is equal to Not[CommutativeQ[x]]. 
 
 See CommutativeQ.
 
-<a name="SetCommutative">
-## SetCommutative
-</a>
+## SetCommutative {#SetCommutative}
 
 `SetCommutative[a,b,c,...]` sets all the *Symbols* `a`, `b`, `c`, ... to be commutative.
 
 See also:
 [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
 
-<a name="SetNonCommutative">
-## SetNonCommutative
-</a>
+## SetNonCommutative {#SetNonCommutative}
 
 `SetNonCommutative[a,b,c,...]` sets all the *Symbols* `a`, `b`, `c`, ... to be noncommutative.
 
 See also:
 [SetCommutative](#SetCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
 
-<a name="CommuteEverything">
-## CommuteEverything
-</a>
+## CommuteEverything {#CommuteEverything}
 
 `CommuteEverything` answers the question "what does it sound like?".
 
@@ -116,9 +94,7 @@ See also:
 See also:
 [Commutative](#Commutative).
 
-<a name="ExpandNonCommutativeMultiply">
-## ExpandNonCommutativeMultiply
-</a>
+## ExpandNonCommutativeMultiply {#ExpandNonCommutativeMultiply}
 
 `ExpandNonCommutativeMultiply[expr]` expands out `**`s in `expr`.
 

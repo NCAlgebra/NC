@@ -1,13 +1,11 @@
-# NCSymmetric
+# NCSymmetric {#PackageNCSymmetric}
 
 Members are:
 
 * [NCSymmetricQ](#NCSymmetricQ)
 * [NCSymmetricTest](#NCSymmetricTest)
 
-<a name="NCSymmetricQ">
-## NCSymmetricQ
-</a>
+## NCSymmetricQ {#NCSymmetricQ}
 
 `NCSymmetricQ[expr]` returns *True* if `expr` is symmetric, i.e. if `tp[exp] == exp`.
 
@@ -16,9 +14,7 @@ Members are:
 See also:
 [NCSelfAdjointQ](#NCSelfAdjointQ), [NCSymmetricTest](#NCSymmetricTest).
 
-<a name="NCSymmetricTest">
-## NCSymmetricTest
-</a>
+## NCSymmetricTest {#NCSymmetricTest}
 
 `NCSymmetricTest[expr]` attempts to establish symmetry of `expr` by assuming symmetry of its variables.
 `NCSymmetricTest[exp,options]` uses `options`.

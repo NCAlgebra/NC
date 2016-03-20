@@ -1,22 +1,18 @@
-# NCSelfAdjoint
+# NCSelfAdjoint {#PackageNCSelfAdjoint}
 
 Members are:
 
 * [NCSelfAdjointQ](#NCSelfAdjointQ)
 * [NCSelfAdjointTest](#NCSelfAdjointTest)
 
-<a name="NCSelfAdjointQ">
-## NCSelfAdjointQ
-</a>
+## NCSelfAdjointQ {#NCSelfAdjointQ}
 
 `NCSelfAdjointQ[expr]` returns true if `expr` is self-adjoint, i.e. if `aj[exp] == exp`.
 
 See also:
 [NCSymmetricQ](#NCSymmetricQ), [NCSelfAdjointTest](#NCSelfAdjointTest).
 
-<a name="NCSelfAdjointTest">
-## NCSelfAdjointTest
-</a>
+## NCSelfAdjointTest {#NCSelfAdjointTest}
 
 `NCSelfAdjointTest[expr]` attempts to establish whether `expr` is self-adjoint by assuming that some of its variables are self-adjoint or symmetric.
 `NCSelfAdjointTest[expr,options]` uses `options`.

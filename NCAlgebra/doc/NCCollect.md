@@ -1,4 +1,4 @@
-# NCCollect
+# NCCollect {#PackageNCCollect}
 
 Members are:
 
@@ -11,36 +11,28 @@ Members are:
 * [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint)
 * [NCStrongCollectSymmetric](#NCStrongCollectSymmetric)
 
-<a name="NCCollect">
-## NCCollect
-</a>
+## NCCollect {#NCCollect}
 
 `NCCollect[expr,vars]` collects terms of nc expression `expr` according to the elements of `vars` and attempts to combine them. It is weaker than NCStrongCollect in that only same order terms are collected togther. It basically is `NCCompose[NCStrongCollect[NCDecompose]]]`.
 
 See also:
 [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-<a name="NCCollectSelfAdjoint">
-## NCCollectSelfAdjoint
-</a>
+## NCCollectSelfAdjoint {#NCCollectSelfAdjoint}
 
 `NCCollectSelfAdjoint[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their adjoints without writing out the adjoints.
 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-<a name="NCCollectSymmetric">
-## NCCollectSymmetric
-</a>
+## NCCollectSymmetric {#NCCollectSymmetric}
 
 `NCCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-<a name="NCStrongCollect">
-## NCStrongCollect
-</a>
+## NCStrongCollect {#NCStrongCollect}
 
 `NCStrongCollect[expr,vars]` collects terms of expression `expr` according to the elements of `vars` and attempts to combine by association. 
 
@@ -51,27 +43,21 @@ For example, a symbol `x` will factor out of terms where it appears both linearl
 See also:
 [NCCollect](#NCCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-<a name="NCStrongCollectSelfAdjoint">
-## NCStrongCollectSelfAdjoint
-</a>
+## NCStrongCollectSelfAdjoint {#NCStrongCollectSelfAdjoint}
 
 `NCStrongCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric).
 
-<a name="NCStrongCollectSymmetric">
-## NCStrongCollectSymmetric
-</a>
+## NCStrongCollectSymmetric {#NCStrongCollectSymmetric}
 
 `NCStrongCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-<a name="NCCompose">
-## NCCompose
-</a>
+## NCCompose {#NCCompose}
 
 `NCCompose[dec]` will reassemble the terms in `dec` which were decomposed by [`NCDecompose`](#NCDecompose).
 
@@ -84,9 +70,7 @@ See also:
 See also:
 [NCDecompose](#NCDecompose), [NCPDecompose](#NCPDecompose).
 
-<a name="NCDecompose">
-## NCDecompose
-</a>
+## NCDecompose {#NCDecompose}
 
 `NCDecompose[p,vars]` gives an association of elements of the nc polynomial `p` in variables `vars` in which elements of the same order are collected together.
 
