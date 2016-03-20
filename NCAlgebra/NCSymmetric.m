@@ -1,8 +1,8 @@
-(* :Title: 	NCTransposes *)
+(* :Title: 	NCSymmetric *)
 
 (* :Author: 	mauricio *)
 
-(* :Context: 	NonCommutativeMultiply` *)
+(* :Context: 	NCSymmetric` *)
 
 (* :Summary:
 *)
@@ -14,14 +14,18 @@
 *)
 
 (* :History: 
-   :2/03/16:    Clean up (mauricio)
 *)
 
-BeginPackage[ "NonCommutativeMultiply`",
+BeginPackage[ "NCSymmetric`",
+              "NCOptions`",
+              "NonCommutativeMultiply`",
+              "NCMatMult`",
               "NCUtil`" ];
 
-Clear[NCSymmetricQ, NCSymmetricTest]
+Clear[NCSymmetricQ, NCSymmetricTest];
       
+Get["NCSymmetric.usage"];
+
 NCSymmetricQ::SymmetricVariables =
 "The variable(s) `1` was(were) assumed symmetric";
 
@@ -50,14 +54,23 @@ Begin[ "`Private`" ]
       excludeVars = ExcludeVariables 
  	    /. options
 	    /. Options[NCSymmetricTest, ExcludeVariables];
-      
+
+      (*
+      Print["----"];
+      Print["options = ", options];
+      Print["diff = ", diff];
+      Print["zero = ", zero];
+      Print["symmetricVars = ", symmetricVars];
+      Print["excludeVars = ", excludeVars];
+      *)
+
       (* easy return *)
       If[ diff === zero, Return[{True, {}}] ];
       
       (* check for possible symmetric variables *)
       vars = NCGrabSymbols[exp];
 
-      (* Print["----"]; *)
+      (* Print["vars = ", vars]; *)
 
       (* exclude all vars? *)
       excludeVars = If [excludeVars === All
@@ -122,11 +135,17 @@ Begin[ "`Private`" ]
                        ExpandNonCommutativeMultiply[exp - tp[exp]],
                        0, opts];
       
+  NCSymmetricTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
+    NCSymmetricTestAux[
+        mat, 
+        ExpandNonCommutativeMultiply[mat - tpMat[mat]], 
+        ConstantArray[0, Dimensions[mat]], opts];
+
   (* NCSymmetricQ *)
  
   NCSymmetricQ[exp_, opts:OptionsPattern[{}]] := 
     First[NCSymmetricTest[exp, opts]];
-     
+    
 End[]
 
 EndPackage[]

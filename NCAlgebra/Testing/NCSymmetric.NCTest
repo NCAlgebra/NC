@@ -1,3 +1,5 @@
+<< NCSymmetric`
+
 Module[
   {expr, a, b, c, d},
 

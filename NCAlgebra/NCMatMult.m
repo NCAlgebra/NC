@@ -27,6 +27,8 @@
 
 BeginPackage["NCMatMult`",
 	     "NonCommutativeMultiply`",
+             "NCSymmetric`",
+             "NCSelfAdjoint`",
 	     "NCLinearAlgebra`",
 	     "NCSimplifyRational`"];
 
@@ -167,23 +169,6 @@ Begin["`Private`"];
         Return[Mat];
         ];
   NCInverse[NotMat_] := Message[NCInverse::NotMatrix];
-
-
-  (* NCSymmetricTest *)
-  
-  NCSymmetricTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
-    NonCommutativeMultiply`Private`NCSymmetricTestAux[
-        mat, 
-        ExpandNonCommutativeMultiply[mat - tpMat[mat]], 
-        ConstantArray[0, Dimensions[mat]], opts];
-
-  (* NCSelfAdjointTest *)
-  
-  NCSelfAdjointTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
-    NonCommutativeMultiply`Private`NCSelfAdjointTestAux[
-        mat, 
-        ExpandNonCommutativeMultiply[mat - ajMat[mat]], 
-        ConstantArray[0, Dimensions[mat]], opts];
 
 End[];
 EndPackage[];

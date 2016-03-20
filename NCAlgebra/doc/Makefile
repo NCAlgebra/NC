@@ -1,5 +1,7 @@
 PYTHON = python3
-FILES = NonCommutativeMultiply.usage NCCollect.usage NCPolynomial.usage 
+FILES = NonCommutativeMultiply.usage \
+	NCSymmetric.usage NCSelfAdjoint.usage \
+	NCCollect.usage NCPolynomial.usage
 
 all: $(FILES)
 

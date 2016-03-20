@@ -1,75 +1,57 @@
-(* History:
-		who knows ?
-	:07/02/99: Added 3 MatMult Tests (dell)
-	:07/21/99: Added LDU and NCInverse   (Juan)
-*)
+<< NCSymmetric`
+<< NCSelfAdjoint`
 
 Module[
   {k, test, a, b, c, d, e, f, g, h, i, K, u, v, w, x},
 
-  k = 1;
-  test = "MatMult";
-
-  NCTest[tpMat[{{1,2},{3,4}}], {{1,3},{2,4}}, test, k++];
+  NCTest[tpMat[{{1,2},{3,4}}], {{1,3},{2,4}}];
 
   SetNonCommutative[a, b, c, d, e, f, g, h, i, K, u, v, w, x];
-
-(*
-  mat = {{a,rt[1 - a ** tp[a]]}, {rt[1-tp[a]**a],-tp[a]}};
-  NCTest[DilationHalmos[a], mat, test, k++];
-
-  NCTest[Cascade[{{a,b},{c,d}},K] ==
-      a + b**K**inv[1 - d**K] **c, test, k++];
-
-  NCTest[Redheffer[{{a,b},{c,d}}] ==
-      {{b**inv[c], a - b **inv[c]**inv[d]},
-       {inv[d],-inv[c] ** inv[d]}}, test, k++];
-*)
 
   NCTest[MatMult[{{a, b},{c,d}}, 
                  {{u,v},{w,x}}], 
                 {{a**u+b**w, a**v+b**x}, 
-                 {c**u+d**w, c**v+d**x}}, test, k++];
+                 {c**u+d**w, c**v+d**x}}];
 
   mat = {{a,b,0},{tp[b],e,d},{0,tp[d],i}};
   NCTest[NCSimplifyRational[MatMult[NCInverse[mat], mat]],
-         {{1,0,0},{0,1,0},{0,0,1}}, test, k++];
+         {{1,0,0},{0,1,0},{0,0,1}}];
 
   (* NCSymmetricQ *)
 
   expr = {{a + tp[a]}};
-  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True];
 
   expr = {{a}};
-  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False];
 
   expr = {{a+tp[a],b},{tp[b],c+tp[c]}};
-  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True];
 
   expr = {{1,b},{tp[b],c+tp[c]}};
-  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True];
 
   expr = {{1,b},{tp[b],1}};
-  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True];
 
   expr = {{1,b},{b,1}};
-  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False, test, k++];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False];
 
   (* NCSymmetricQ[#, False] *)
 
   Quiet[
 
     expr = {{1,b},{b,1}};
-    NCTest[NCSymmetricQ[expr], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True];
 
     expr = {{a,b},{b,c}};
-    NCTest[NCSymmetricQ[expr], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True];
 
     expr = {{a,b},{tp[b],c}};
-    NCTest[NCSymmetricQ[expr], True, test, k++];
+    NCTest[NCSymmetricQ[expr], True];
 
     expr = {{a,b},{tp[b],tp[a]}};
-    NCTest[NCSymmetricQ[expr], False, test, k++];
+    NCTest[NCSymmetricQ[expr], False];
 
     ,
     NCSymmetricQ::SymmetricVariables
@@ -78,56 +60,69 @@ Module[
   (* NCSelfAdjointQ *)
 
   expr = {{a + aj[a]}};
-  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True];
 
   expr = {{a}};
-  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False];
 
   expr = {{a+aj[a],b},{aj[b],c+aj[c]}};
-  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True];
 
   expr = {{1,b},{aj[b],c+aj[c]}};
-  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True];
 
   expr = {{1,b},{aj[b],1}};
-  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], True];
 
   expr = {{1,b},{b,1}};
-  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False, test, k++];
+  NCTest[NCSelfAdjointQ[expr, ExcludeVariables -> All], False];
 
   (* NCSelfAdjointQ[#, False] *)
 
   Quiet[
 
     expr = {{1,b},{b,1}};
-    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True];
 
     expr = {{a,b},{b,c}};
-    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True];
 
     expr = {{a,b},{aj[b],c}};
-    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True];
 
     expr = {{a,b},{aj[b],aj[a]}};
-    NCTest[NCSelfAdjointQ[expr], False, test, k++];
+    NCTest[NCSelfAdjointQ[expr], False];
 
     expr = {{a,b},{tp[b],c}};
-    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True];
 
     expr = {{a,b},{tp[b],tp[a]}};
-    NCTest[NCSelfAdjointQ[expr], False, test, k++];
+    NCTest[NCSelfAdjointQ[expr], False];
 
     expr = {{1,b},{tp[b],1}};
-    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True];
 
     expr = {{b,b},{tp[b],1}};
-    NCTest[NCSelfAdjointQ[expr], False, test, k++];
+    NCTest[NCSelfAdjointQ[expr], False];
 
     expr = {{b+tp[b],b},{tp[b],1}};
-    NCTest[NCSelfAdjointQ[expr], True, test, k++];
+    NCTest[NCSelfAdjointQ[expr], True];
 
     ,
     {NCSelfAdjointQ::SelfAdjointVariables, NCSymmetricQ::SymmetricVariables}
   ];
 
 ];
+
+(*
+  mat = {{a,rt[1 - a ** tp[a]]}, {rt[1-tp[a]**a],-tp[a]}};
+  NCTest[DilationHalmos[a], mat];
+
+  NCTest[Cascade[{{a,b},{c,d}},K] ==
+      a + b**K**inv[1 - d**K] **c];
+
+  NCTest[Redheffer[{{a,b},{c,d}}] ==
+      {{b**inv[c], a - b **inv[c]**inv[d]},
+       {inv[d],-inv[c] ** inv[d]}}];
+*)
+

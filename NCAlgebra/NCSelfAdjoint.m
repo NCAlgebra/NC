@@ -1,8 +1,8 @@
-(* :Title: 	NCAdjoints *)
+(* :Title: 	NCSelfAdjoint *)
 
 (* :Author: 	mauricio *)
 
-(* :Context: 	NonCommutativeMultiply` *)
+(* :Context: 	NCSelfAdjoint` *)
 
 (* :Summary:
 *)
@@ -14,14 +14,19 @@
 *)
 
 (* :History: 
-   :2/03/16:    Clean up (mauricio)
 *)
 
-BeginPackage[ "NonCommutativeMultiply`",
+BeginPackage[ "NCSelfAdjoint`",
+              "NCOptions`",
+              "NCSymmetric`",
+              "NonCommutativeMultiply`",
+              "NCMatMult`",
               "NCUtil`" ]
 
 Clear[NCSelfAdjointQ, NCSelfAdjointTest];
       
+Get["NCSelfAdjoint.usage"];
+
 NCSelfAdjointQ::SelfAdjointVariables =
 "The variable(s) `1` was(were) assumed adjoint";
 
@@ -56,7 +61,15 @@ Begin[ "`Private`" ]
  	    /. options
 	    /. Options[NCSelfAdjointTest, ExcludeVariables];
 
-      (* Print["-----"]; *)
+      (*
+      Print["-----"];
+      Print["options = ", options];
+      Print["diff = ", diff];
+      Print["zero = ", zero];
+      Print["selfAdjointVars = ", selfAdjointVars];
+      Print["symmetricVars = ", symmetricVars];
+      Print["excludeVars = ", excludeVars];
+      *)
       
       (* easy return *)
       If[ diff === zero, Return[{True, {}, {}}] ];
@@ -176,9 +189,15 @@ Begin[ "`Private`" ]
 
   NCSelfAdjointTest[exp_, opts:OptionsPattern[{}]] :=
     NCSelfAdjointTestAux[exp, 
-                       ExpandNonCommutativeMultiply[exp - aj[exp]],
-                       0, opts];
+                         ExpandNonCommutativeMultiply[exp - aj[exp]],
+                         0, opts];
 
+  NCSelfAdjointTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
+    NCSelfAdjointTestAux[
+        mat, 
+        ExpandNonCommutativeMultiply[mat - ajMat[mat]], 
+        ConstantArray[0, Dimensions[mat]], opts];
+    
   (* NCSelfAdjointQ *)
  
   NCSelfAdjointQ[exp_, opts:OptionsPattern[{}]] := 

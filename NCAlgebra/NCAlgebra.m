@@ -115,12 +115,12 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
    *)
    Get["NCInverses.m"];
    Print["NCInverses.m loaded"];
-   Get["NCTransposes.m"];
-   Print["NCTransposes.m loaded"];
-   Get["NCAdjoints.m"];
-   Print["NCAdjoints.m loaded"];
-   Get["NCConjugates.m"];
-   Print["NCConjugates.m loaded"];
+   Get["NCSymmetric.m"];
+   Print["NCSymmetric.m loaded"];
+   Get["NCSelfAdjoint.m"];
+   Print["NCSelfAdjoint.m loaded"];
+   (* Get["NCConjugates.m"];
+      Print["NCConjugates.m loaded"]; *)
 
    Get["NCRoots.m"];
    Print["NCRoots.m loaded"];

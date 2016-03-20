@@ -15,10 +15,6 @@ Members are:
 * [Commutative](#Commutative)
 * [CommuteEverything](#CommuteEverything)
 * [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
-* [NCSelfAdjointQ](#NCSelfAdjointQ)
-* [NCSelfAdjointTest](#NCSelfAdjointTest)
-* [NCSymmetricQ](#NCSymmetricQ)
-* [NCSymmetricTest](#NCSymmetricTest)
 
 <a name="aj">
 ## aj
@@ -135,64 +131,3 @@ returns
     a**b+a**c.
 
 Its aliases are `NCE`, and `NCExpand`.
-
-<a name="NCSelfAdjointQ">
-## NCSelfAdjointQ
-</a>
-
-`NCSelfAdjointQ[expr]` returns true if `expr` is self-adjoint, i.e. if `aj[exp] == exp`.
-
-See also:
-[NCSymmetricQ](#NCSymmetricQ), [NCSelfAdjointTest](#NCSelfAdjointTest).
-
-<a name="NCSelfAdjointTest">
-## NCSelfAdjointTest
-</a>
-
-`NCSelfAdjointTest[expr]` attempts to establish whether `expr` is self-adjoint by assuming that some of its variables are self-adjoint or symmetric.
-`NCSelfAdjointTest[expr,options]` uses `options`.
-
-`NCSelfAdjointTest` returns a list of three elements:
-
-* the first element is *True* or *False* if it succeded to prove `expr` self-adjoint.
-* the second element is a list of variables that were made self-adjoint.
-* the third element is a list of variables that were made symmetric.
-
-The following options can be given:
-
-* `SelfAdjointVariables`: list of variables that should be considered self-adjoint; use `All` to make all variables self-adjoint;
-* `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
-* `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
-
-See also:
-[NCSelfAdjointQ](#NCSelfAdjointQ).
-
-<a name="NCSymmetricQ">
-## NCSymmetricQ
-</a>
-
-`NCSymmetricQ[expr]` returns *True* if `expr` is symmetric, i.e. if `tp[exp] == exp`.
-
-`NCSymmetricQ` attempts to detect symmetric variables using `NCSymmetricTest`.
-
-See also:
-[NCSelfAdjointQ](#NCSelfAdjointQ), [NCSymmetricTest](#NCSymmetricTest).
-
-<a name="NCSymmetricTest">
-## NCSymmetricTest
-</a>
-
-`NCSymmetricTest[expr]` attempts to establish symmetry of `expr` by assuming symmetry of its variables.
-`NCSymmetricTest[exp,options]` uses `options`.
-
-`NCSymmetricTest` returns a list of two elements:
-* the first element is *True* or *False* if it succeded to prove `expr` symmetric.
-* the second element is a list of the variables that were made symmetric.
-
-The following options can be given:
-
-* `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
-* `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
-
-See also: 
-[NCSymmetricQ](#NCSymmetricQ), [NCNCSelfAdjointTest](#NCSelfAdjointTest).

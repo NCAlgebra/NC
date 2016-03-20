@@ -59,8 +59,8 @@ tests = {
   "CommutativeQ",
   "NCMultiplication",
   "NCUtil",
-  "NCTransposes",
-  "NCAdjoints",
+  "NCSymmetric",
+  "NCSelfAdjoint",
   "NCConjugate",
   "NCRoots",
   "NCOutput",
@@ -84,7 +84,20 @@ tests = {
   "Convert"
 *)
 };
-Map[NCRunTest, tests];
+{t, $trash} = Timing[
+  Map[NCRunTest, tests]
+];
+
+
+nbrOfTests = Length[$NCTestResults];
+fail = Length[Select[# =!= True &][$NCTestResults]];
+
+WriteString["stdout", 
+      "\n\n> SUMMARY OF TESTS\n\n" <>
+      "* " <> ToString[nbrOfTests] <>
+         " tests completed in " <> ToString[t] <> " seconds.\n" <>
+      "* " <> ToString[nbrOfTests - fail] <> " succeeded.\n" <>
+      "* " <> ToString[fail] <> " failed.\n"];
 
 (*
 
