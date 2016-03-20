@@ -225,6 +225,39 @@ Begin[ "`Private`" ]
 
   co[tp[a_]] := aj[a];
   co[aj[a_]] := tp[a];
+
+
+  (* rt *)
+  
+  (* rt is noncommutative *)
+  SetNonCommutative[rt];
+
+  (* rt commutative *)
+  rt[c_?NumberQ] := Sqrt[c];
+  rt[a_?CommutativeQ] := Sqrt[a];
+
+  (* rt threads over Times *)
+  rt[a_Times] := rt /@ a;
+
+  (* Simplification *)
+  NonCommutativeMultiply[n___,rt[m_],rt[m_],l___] :=
+    NonCommutativeMultiply[n,m,l] 
+ 
+  (* tp[rt[]] = rt[tp[]] *)
+  tp[rt[a_]] := rt[tp[a]];
+
+  (* BEGIN MAURICIO MAR 2016 *)
+  (*
+    NonCommutativeMultiply[n___,rt[m_],aj[rt[m_]],l___] :=
+       NonCommutativeMultiply[n,m,l];
+     
+    rt/:Literal[NonCommutativeMultiply[n___,rt[Id - aj[m_]** m_],aj[m_],l___]] :=
+      NonCommutativeMultiply[n,aj[m],rt[Id -m**aj[m]],l];
+
+    rt/:Literal[NonCommutativeMultiply[n___,rt[Id - m_**aj[m_]], m_,l___]] :=
+      NonCommutativeMultiply[n,m,aj[Id -aj[m]**m],l];
+  *)
+  (* END MAURICIO MAR 2016 *)
   
 End[]
 

@@ -113,17 +113,23 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
      Get["NC2SetCommands.m"]; 
      Print["NC2SetCommands.m loaded"];
    *)
+
    Get["NCInverses.m"];
    Print["NCInverses.m loaded"];
+
+   Get["NCOptions.m"];
+   Print["NCOptions.m loaded"];
    Get["NCSymmetric.m"];
    Print["NCSymmetric.m loaded"];
    Get["NCSelfAdjoint.m"];
    Print["NCSelfAdjoint.m loaded"];
-   (* Get["NCConjugates.m"];
-      Print["NCConjugates.m loaded"]; *)
 
-   Get["NCRoots.m"];
-   Print["NCRoots.m loaded"];
+   (* 
+      Get["NCConjugates.m"];
+      Print["NCConjugates.m loaded"];
+      Get["NCRoots.m"];
+      Print["NCRoots.m loaded"];
+    *)
 
    (*#################################################*)
    (* Sets lower case letters to be NonCommutative by default  *)
