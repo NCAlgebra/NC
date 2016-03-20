@@ -16,12 +16,10 @@
 (* :History: 
 *)
 
-BeginPackage[ "NCOptions`" ]
+BeginPackage[ "NCOptions`" ];
 
 Clear[SelfAdjointVariables, 
       SymmetricVariables, 
       ExcludeVariables];
  
-End[]
-
-EndPackage[]
+EndPackage[ ];

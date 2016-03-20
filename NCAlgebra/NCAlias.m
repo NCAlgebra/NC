@@ -31,10 +31,12 @@ NCAliasRule = {
                         
                (* :NCDiff.m *)
                     DirD -> NCDiff`DirectionalD,
+                    NCGradPoly -> NCDiff`NCGrad,
+               (*
                     DirDP -> NCDiff`DirectionalDPolynomial,
                     Cri -> NCDiff`CriticalPoint,
                     Crit -> NCDiff`CriticalPoint,
-                    NCGradPoly -> NCDiff`NCGrad,
+               *)
                     
                (* :NCDoTeX.m: *)
                     ExprToTeXFile -> TeXStuff`ExpressionToTeXFile,

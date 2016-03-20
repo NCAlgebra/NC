@@ -18,7 +18,7 @@
 *)
 
 
-BeginPackage[ "NonCommutativeMultiply`" ]
+BeginPackage[ "NonCommutativeMultiply`" ];
 
 Clear[Id];
 

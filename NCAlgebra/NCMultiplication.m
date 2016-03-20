@@ -20,7 +20,7 @@
    :3/3/16:     Deprecated CommutativeAllQ
 *)
 
-BeginPackage[ "NonCommutativeMultiply`" ]
+BeginPackage[ "NonCommutativeMultiply`" ];
 
 Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 

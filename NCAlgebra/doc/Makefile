@@ -1,10 +1,12 @@
 PYTHON = python3
 FILES = NonCommutativeMultiply.usage \
 	NCSymmetric.usage NCSelfAdjoint.usage \
+	NCDiff.usage \
 	NCCollect.usage NCPolynomial.usage
 
 MANUAL = NonCommutativeMultiply.md \
 	 NCSymmetric.md NCSelfAdjoint.md \
+	 NCDiff.md \
 	 NCCollect.md NCPolynomial.md
 
 all: $(FILES)

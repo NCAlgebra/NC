@@ -21,52 +21,9 @@ BeginPackage[ "NCDiff`",
               "NCPolynomial`",
               "NonCommutativeMultiply`"];
 
-Clear[DirectionalD];
-DirectionalD::usage = "\
-DirectionalD[f, var, h] takes the directional derivative of \
-expression f with respect to variable var in direction h.
+Clear[NCDirectionalD, DirectionalD, NCGrad, NCHessian];
 
-See NCDirectionalD.";
-
-Clear[NCDirectionalD];
-NCDirectionalD::usage = "\
-NCDirectionalD[f, {var1, h1}, ...] takes the directional \
-derivative of expression f with respect to variables var1, \
-var2, ... successively in the directions h1, h2, ....
-
-See DirectionalD.";
-
-Clear[NCGrad];
-NCGrad::usage = "\
-NCGrad[f, var1, ...] gives the nc gradient of the expression f with \
-respect to variables var1, .... If there is more than one variable \
-then NCGrad returns the gradient in a list.
-
-The transpose of the gradient of the nc expression f is the derivative \
-with respect to the trace of the directional derivative of f \
-in the direction h.
-
-For example, if
-\tf = x**a**x**b + x**c**x**d
-then its directional derivative in the direction h is 
-\tdf = h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
-and its nc gradient is
-\tgradf = a**x**b + b**x**a + c**x**d + d**x**c
-      
-IMPORTANT: The expression returned by NCGrad is the transpose or the \
-adjoint of the standard gradient. This is done so that no assumption \
-on the symbols are needed. The calculated expression is correct even \
-if symbols are self-adjoint or symmetric.
-       
-See also NCDirectionalD.";
-
-Clear[NCHessian];
-NCHessian::usage = "\
-NCHessian[f, {var1, h1}, ...] takes the second directional \
-derivative of expression f w.r.t. variables var1, var2, ... \
-successively in the directions h1, h2, ....
-
-See also NCDiretionalD, NCGrad."
+Get["NCDiff.usage"];
 
 Begin["`Private`"];
 
@@ -100,12 +57,12 @@ Begin["`Private`"];
 
   (* NCDirectionalD *)
                
-  NCDirectionalD[f_, xhs__] := 
+  NCDirectionalD[f_, xhs__List] := 
     Plus @@ Map[(DirectionalD @@ Prepend[##, f])&, {xhs}];
 
   (* NCHessian *)
                
-  NCHessian[f_, xhs__] := 
+  NCHessian[f_, xhs__List] := 
     NCDirectionalD[NCDirectionalD[f, xhs], xhs];
                
   (* NCGradAux *)
