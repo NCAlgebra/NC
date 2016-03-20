@@ -46,6 +46,9 @@ If[ $NC$INITDOTMPATH =!= {}
       AppendTo[$Path,ToFileName[{$NCDir$, "NCGB", "Binary", "p9c", "Windows"}]];
     ];
 
+    (* Setting NCExtras Path *)
+    AppendTo[$Path,ToFileName[{$NCDir$, "NCExtras" }]];
+             
     (* Setting NCTeX Path *)
     AppendTo[$Path,ToFileName[{$NCDir$, "NCTeX" }]];
 

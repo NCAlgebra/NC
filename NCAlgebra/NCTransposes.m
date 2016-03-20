@@ -20,43 +20,10 @@
 BeginPackage[ "NonCommutativeMultiply`",
               "NCUtil`" ];
 
-tp::usage =
-"tp[x] is the tranpose of x. It is a linear involution. \
-Note that all commutative expressions are assummed self-adjoint. \
-See also aj.";
-
-Clear[NCSymmetricQ];
-NCSymmetricQ::usage = "\
-NCSymmetricQ[exp] returns true if exp is symmetric, \
-i.e. if tp[exp] == exp.
-
-NCSymmetricQ attempts to detect symmetric variables \
-using NCSymmetricTest.
-
-See NCSymmetricTest";
-
+Clear[NCSymmetricQ, NCSymmetricTest]
+      
 NCSymmetricQ::SymmetricVariables =
 "The variable(s) `1` was(were) assumed symmetric";
-
-Clear[NCSymmetricTest];
-NCSymmetricTest::usage = "\
-NCSymmetricTest[exp] attempts to establish symmetry of exp by \
-assuming symmetry of its variables.
-NCSymmetricTest[exp, options] uses options.
-
-NCSymmetricTest returns a list of two elements:
-\tthe first element is True or False if it succeded to prove exp \
-symmetric.
-\tthe second element is a list of the variables that were made \
-symmetric.
-
-The following options can be given:
-\tSymmetricVariables: list of variables that should be \
-considered symmetric; use All to make all variables symmetric;
-\tExcludeVariables: list of variables that should not be \
-considered symmetric; use All to exclude all variables.
-
-See also: NCSymmetricQ";
 
 Options[NCSymmetricTest] = {
   SymmetricVariables -> {},
@@ -64,27 +31,6 @@ Options[NCSymmetricTest] = {
 };
 
 Begin[ "`Private`" ]
-
-  (* tp is NonCommutative *)
-  SetNonCommutative[tp];
-
-  (* tp is Linear *)
-  tp[a_ + b_] := tp[a] + tp[b];
-  tp[c_?NumberQ] := c;
-  tp[a_?CommutativeQ] := a;
-
-  (* tp is Idempotent *)
-  tp[tp[a_]] := a;
-
-  (* tp threads over Times *)
-  tp[a_Times] := tp /@ a;
-
-  (* tp reverse threads over NonCommutativeMultiply *)
-  tp[NonCommutativeMultiply[a__]] := 
-    (NonCommutativeMultiply @@ (tp /@ Reverse[{a}]));
-
-  (* tp[inv[]] = inv[tp[]] *)
-  tp[inv[a_]] := inv[tp[a]];
 
   (* NCSymmetricTest *)
   

@@ -20,43 +20,10 @@
 BeginPackage[ "NonCommutativeMultiply`",
               "NCUtil`" ]
 
-aj::usage = 
-"aj[x] is the adjoint of x. aj is a conjugate linear involution. \
-See also tp.";
-
-Clear[NCSelfAdjointQ];
-NCSelfAdjointQ::usage = 
-"NCSelfAdjointQ[exp] returns true if exp is self-adjoint, \
-i.e. if tp[exp] == exp.";
-
+Clear[NCSelfAdjointQ, NCSelfAdjointTest];
+      
 NCSelfAdjointQ::SelfAdjointVariables =
 "The variable(s) `1` was(were) assumed adjoint";
-
-Clear[NCSelfAdjointTest];
-NCSelfAdjointTest::usage = "\
-NCSelfAdjointTest[exp] attempts to establish whether exp is \
-self-adjoint by assuming that some of its variables are \
-self-adjoint or symmetric.
-NCSelfAdjointTest[exp, options] uses options.
-
-NCSelfAdjointTest returns a list of three elements:
-\tthe first element is True or False if it succeded to prove exp \
-self-adjoint.
-\tthe second element is a list of the variables that were made \
-self-adjoint.
-\tthe third element is a list of the variables that were made \
-symmetric.
-
-The following options can be given:
-\tSelfAdjointVariables: list of variables that should be \
-considered self-adjoint; use All to make all variables \
-self-adjoint;
-\tSymmetricVariables: list of variables that should be \
-considered symmetric; use All to make all variables symmetric;
-\tExcludeVariables: list of variables that should not be \
-considered symmetric; use All to exclude all variables.
-
-See NCSelfAdjointQ";
 
 Options[NCSelfAdjointTest] = {
   SelfAdjointVariables -> {},
@@ -65,27 +32,6 @@ Options[NCSelfAdjointTest] = {
 };
 
 Begin[ "`Private`" ]
-
-  (* aj is NonCommutative *)
-  SetNonCommutative[aj];
-
-  (* aj is Conjugate Linear *)
-  aj[a_ + b_] := aj[a] + aj[b];
-  aj[c_?NumberQ] := Conjugate[c];
-  aj[a_?CommutativeQ]:= Conjugate[a];
-
-  (* aj is Idempotent *)
-  aj[aj[a_]] := a;
-
-  (* aj threads over Times *)
-  aj[a_Times] := aj /@ a;
-
-  (* aj reverse threads over NonCommutativeMultiply *)
-  aj[NonCommutativeMultiply[a__]] := 
-     (NonCommutativeMultiply @@ (aj /@ Reverse[{a}]));
-
-  (* aj[inv[]] = inv[aj[]] *)
-  aj[inv[a_]] := inv[aj[a]];
 
   (* NCSelfAdjointQ *)
   

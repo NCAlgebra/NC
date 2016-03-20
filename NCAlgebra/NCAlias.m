@@ -29,10 +29,6 @@ NCAliasRule = {
                     NCSC -> NCCollect`NCStrongCollect,
                     NCCSym -> NCCollect`NCCollectSymmetric,
                         
-               (* :NCComplex.m: *)
-                    CAR -> ComplexRules`ComplexAlgebraRules,
-                    RCAR -> ComplexRules`ReverseComplexAlgebraRules,
-
                (* :NCDiff.m *)
                     DirD -> NCDiff`DirectionalD,
                     DirDP -> NCDiff`DirectionalDPolynomial,
@@ -44,28 +40,34 @@ NCAliasRule = {
                     ExprToTeXFile -> TeXStuff`ExpressionToTeXFile,
 
                (* :NCInverse.m *)
+               (*
                     NCForward -> NonCommutativeMultiply`NCInverseForward,
                     NCBackward -> NonCommutativeMultiply`NCInverseBackward,
                     NCF -> NonCommutativeMultiply`NCInverseForward,
                     NCB -> NonCommutativeMultiply`NCInverseBackward,
                     NCEI -> NonCommutativeMultiply`NCExpandInverse,
                     NCETP -> NonCommutativeMultiply`NCExpandTranspose,
+               *)
 
                (* :NCMatMult.m *)
                     MM -> NCMatMult`MatMult,
-                    NCMTMM -> NCMatMult`NCMToMatMult,
                     tpM -> NCMatMult`tpMat,
+               (*
+                    NCMTMM -> NCMatMult`NCMToMatMult,
                     GauE -> NCMatMult`GaussElimination,
 		    LDU -> NCMatMult`NCLDUDecomposition,
+               *)
                     
                (* :NCMultiplication.m  *)
                     NCExpand -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
                     ENCM -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
                     NCE -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
 
-                    TTNCM -> NonCommutativeMultiply`TimesToNCM,
                     CE -> NonCommutativeMultiply`CommuteEverything,
                     CQ -> NonCommutativeMultiply`CommutativeQ,
+               (*
+                    TTNCM -> NonCommutativeMultiply`TimesToNCM,
+               *)
                         
                (* :NC1SetCommands.m *)
                     SNC -> NonCommutativeMultiply`SetNonCommutative,

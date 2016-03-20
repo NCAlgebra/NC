@@ -22,71 +22,13 @@
 
 BeginPackage[ "NonCommutativeMultiply`" ]
 
-Clear[CommutativeQ];
+Clear[aj, tp, rt, inv, co,
+      CommutativeQ, NonCommutativeQ, 
+      SetCommutative, SetNonCommutative,
+      ExpandNonCommutativeMultiply,
+      CommuteEverything, Commutative];
 
-CommutativeQ::usage = "\
-CommutativeQ[x] is True if x is commutative (the default), \
-and False if x is non-commutative.
-    
-See SetCommutative and SetNonCommutative.";
-CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative";
-CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative";
-
-Clear[NonCommutativeQ];
-
-NonCommutativeQ::usage = "\
-NonCommutativeQ[x] is equal to Not[CommutativeQ[x]]. 
-
-See CommutativeQ.";
-     
-Clear[SetCommutative];
-
-SetCommutative::usage = "\
-SetCommutative[a, b, c, ...] sets all the symbols a, b, c, ... \
-to be commutative.
-
-See SetNonCommutative and CommutativeQ.";
-
-Clear[SetNonCommutative];
-
-SetNonCommutative::usage = "\
-SetNonCommutative[a, b, c, ...] sets all the symbols a, b, c, ... \
-to be noncommutative.
-
-See SetCommutative and CommutativeQ.";
-                  
-Clear[ExpandNonCommutativeMultiply];
-
-ExpandNonCommutativeMultiply::usage = "\
-ExpandNonCommutativeMultiply[expr] expands out NonCommutativeMultiply's \
-in expr. For example, NCE[a**(b+c)] will result in a**b + a**c.
-
-It's aliases are NCE, and NCExpand.";
-
-Clear[CommuteEverything];
-
-CommuteEverything::usage = "\
-Answers the question \"what does it sound like?\". \
-CommuteEverything[expr] replaces all noncommutative symbols in  \
-expr by its commutative self using Commutative so that the \
-resulting expression contains no noncommutative products or inverses.
-
-See Commutative.";
-
-Clear[Commutative];                        
-Commutative::usage = "\
-Commutative[x] makes the noncommutative symbol x behave as \
-if it were commutative
-         
-See CommuteEverything, CommutativeQ, SetCommutative, SetNonCommutative.";
-                        
-(* MAURICIO: JUNE 2009: THESE DECLARATIONS BECAUSE SOME RULES ARE DEFINED IN THIS FILE BEFORE LOAD NCTRANSPOSE, ETC *)
-
-Clear[aj];
-Clear[tp];
-Clear[rt];
-Clear[inv];
-Clear[co]; (* MAURICIO MAR 2016 *)
+Get["NonCommutativeMultiply.usage"];
 
 Begin[ "`Private`" ]
 
@@ -203,7 +145,55 @@ Begin[ "`Private`" ]
   CommuteEverything[exp_] := 
        Replace[exp, x_Symbol :> Commutative[x],
                Infinity];
+
+      
+  (* tp *)
        
+  (* tp is NonCommutative *)
+  SetNonCommutative[tp];
+
+  (* tp is Linear *)
+  tp[a_ + b_] := tp[a] + tp[b];
+  tp[c_?NumberQ] := c;
+  tp[a_?CommutativeQ] := a;
+
+  (* tp is Idempotent *)
+  tp[tp[a_]] := a;
+
+  (* tp threads over Times *)
+  tp[a_Times] := tp /@ a;
+
+  (* tp reverse threads over NonCommutativeMultiply *)
+  tp[NonCommutativeMultiply[a__]] := 
+    (NonCommutativeMultiply @@ (tp /@ Reverse[{a}]));
+
+  (* tp[inv[]] = inv[tp[]] *)
+  tp[inv[a_]] := inv[tp[a]];
+
+
+  (* aj *)
+
+  (* aj is NonCommutative *)
+  SetNonCommutative[aj];
+
+  (* aj is Conjugate Linear *)
+  aj[a_ + b_] := aj[a] + aj[b];
+  aj[c_?NumberQ] := Conjugate[c];
+  aj[a_?CommutativeQ]:= Conjugate[a];
+
+  (* aj is Idempotent *)
+  aj[aj[a_]] := a;
+
+  (* aj threads over Times *)
+  aj[a_Times] := aj /@ a;
+
+  (* aj reverse threads over NonCommutativeMultiply *)
+  aj[NonCommutativeMultiply[a__]] := 
+     (NonCommutativeMultiply @@ (aj /@ Reverse[{a}]));
+
+  (* aj[inv[]] = inv[aj[]] *)
+  aj[inv[a_]] := inv[aj[a]];
+
 End[]
 
 EndPackage[]

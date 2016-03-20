@@ -24,83 +24,12 @@ BeginPackage[ "NCCollect`",
               "NCPolynomial`",
               "NonCommutativeMultiply`" ];
 
-Clear[NCDecompose];
-NCDecompose::usage = "\
-NCDecompose[p,vars] gives an association of elements of the \
-nc polynomial p in variables vars which elements of the same order \
-are collected together.
+Clear[NCCollect,NCStrongCollect, 
+      NCCollectSymmetric, NCCollectSelfAdjoint,
+      NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint,
+      NCDecompose, NCCompose];
 
-NCDecompose uses NCPDecompose.
-
-See also NCPDecompose";
-    
-Clear[NCCompose];
-NCCompose::usage = "\
-NCCompose[NCDecompose[p,vars]] will reproduce the nc polynomial p \
-in variables vars.
-NCCompose[NCDecompose[p,vars], d] will reproduce only the \
-terms of degree d.
-
-See also NCDecompose, NCPDecompose.";
-
-Clear[NCStrongCollect];
-NCStrongCollect::usage = "\
-NCStrongCollect[expr,vars] collects terms of expression \
-expr according to the elements of vars and attempts to \
-combine by association. 
-
-In the noncommutative case the Taylor expansion and so the collect \
-function is not uniquely specified. This collect function often \
-collects too much and while correct it may be stronger than you \
-want.
-
-For example, x will factor out of terms where it appears both \
-linearly and quadratically thus mixing orders.
-
-See NCCollect, NCCollectSymmetric, NCCollectSelfAdjoint, NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint.";
-
-Clear[NCCollect];
-NCCollect::usage = "\
-NCCollect[expr,vars] collects terms of expression expr \
-according to the elements of vars and attempts to combine \ 
-them using rulesCollect.  It is weaker than NCStrongCollect \
-in that only same order terms are collected togther. \
-
-It basically is NCCompose[NCStrongCollect[NCDecompose]]].
-
-See also NCStrongCollect, NCCollectSymmetric, NCCollectSelfAdjoint, NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint.";
-
-Clear[NCCollectSymmetric];
-NCCollectSymmetric::usage = "\
-NCCollectSymmetric[expr, vars] allows one to collect on the \
-variables and their transposes without writing out the \
-transposes.
-
-See also NCCollect, NCStrongCollect, NCCollectSelfAdjoint, NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint.";
-
-Clear[NCCollectSelfAdjoint];
-NCCollectSelfAdjoint::usage = "\
-NCCollectSelfAdjoint[expr, vars] allows one to collect on the \
-variables and their adjoints without writing out the \
-adjoints.
-
-See also NCCollect, NCStrongCollect, NCCollectSymmetric, NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint.";
-                             
-Clear[NCStrongCollectSymmetric];
-NCStrongCollectSymmetric::usage = "\
-NCStrongCollectSymmetric[expr, vars] allows one to collect on the \
-variables and their transposes without writing out the \
-transposes.
-
-See also NCCollect, NCStrongCollect, NCCollectSelfAdjoint, NCCollectSymmetric, NCStrongCollectSelfAdjoint.";
-
-Clear[NCStrongCollectSelfAdjoint];
-NCStrongCollectSelfAdjoint::usage = "\
-NCStrongCollectSelfAdjoint[expr, vars] allows one to collect on the \
-variables and their adjoints without writing out the \
-adjoints.
-
-See also NCCollect, NCStrongCollect, NCCollectSymmetric, NCStrongCollectSymmetric, NCCollectSelfAdjoint.";
+Get["NCCollect.usage"];
                                         
 Begin["`Private`"];
 
@@ -197,5 +126,3 @@ Begin["`Private`"];
 End[]
 
 EndPackage[]
-
-
