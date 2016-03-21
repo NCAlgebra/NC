@@ -71,7 +71,14 @@ NCSimplify2Rational[ input_, opts___ ] :=
           tmp2 = Union[ Flatten[ outputlist] ];
           tmp3 = Map[ MakeSimplifyingRule, tmp2 ];
           tmp4 = Union[ Flatten[ tmp3 ] ];
-          newexpression = Substitute[ input2,tmp4];
+          (* BEGIN MAURICIO 2016 *)
+          (* newexpression = Substitute[input2, tmp4]; *)
+          (* END MAURICIO 2016 *)
+          (*
+            Print["input2 = ", input2];
+            Print["tmp4 = ", tmp4];
+          *)
+          newexpression = NCReplaceAll[input2, tmp4];
           Return[ Expand[newexpression]]
      ];
 

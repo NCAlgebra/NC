@@ -67,140 +67,151 @@ NCS1Rrule6:=NCSimplify1Rational`Private`rule[6];
 
 Begin[ "`Private`" ]
 
-NCSimplify1Rational[expr1_] := 
-     FixedPoint[ NCSimplify1RationalSinglePass, expr1 ];
+  NCSimplify1Rational[expr1_] := 
+       FixedPoint[ NCSimplify1RationalSinglePass, expr1 ];
 
-NCSimplify1RationalSinglePass[ input_Symbol ] :=
-     Return[input];
+  NCSimplify1RationalSinglePass[ input_Symbol ] :=
+       Return[input];
 
-NCSimplify1RationalSinglePass[ input_Times ] :=
-     Return[input] /; LeafCount[input]===3;
+  NCSimplify1RationalSinglePass[ input_Times ] :=
+       Return[input] /; LeafCount[input]===3;
 
-NCSimplify1RationalSinglePass[expr2_] :=
-     Block[ { LLLLL, a, b, c, d, e, expr3 },
-	SetCommutative[LLLLL,A,B];
-	SetNonCommutative[a,b,c,d,e];
+  NCSimplify1RationalSinglePass[expr2_] :=
+       Module[ { K, A, B, a, b, c, d, e, expr3 },
+          SetCommutative[K,A,B];
+          SetNonCommutative[a,b,c,d,e,x,y];
 
-(* Good[x] is fine as is, Symbolic Commutative elem. should also fail,
-if there is any chance of them becoming zero, *)
-        Good[x__] := CommutativeQ[x] && Not[x==1] && Not[x==0];
+  (* Good[x] is fine as is, Symbolic Commutative elem. should also fail,
+  if there is any chance of them becoming zero, *)
+          Good[x__] := CommutativeQ[x] && Not[x===1] && Not[x===0];
 
-        normrule := 
-           { 
-              inv[A_?Good + B_ x_ ** y___] -> inv[A]**inv[Id + (B/A)x**y],
-              inv[A_?Good +  x_ ** y___] -> inv[A]**inv[Id + (B/A)x**y],
- 	      inv[A_?Good + B_ x_] -> inv[A]**inv[Id + (B/A)x],
- 	      inv[A_?Good + x_] -> inv[A]**inv[Id + (B/A)x] 
-           };
+          (* BEGIN MAURICIO MAR 2016 *)
+          (* WHATCH OUT FOR THE B's ON THE RHS!
+          Good[x__] := CommutativeQ[x] && Not[x==1] && Not[x==0];
+          normrule := 
+             { 
+                inv[A_?Good + B_ x_ ** y___] -> inv[A]**inv[Id + (B/A)x**y],
+                inv[A_?Good +  x_ ** y___] -> inv[A]**inv[Id + (B/A)x**y],
+                inv[A_?Good + B_ x_] -> inv[A]**inv[Id + (B/A)x],
+                inv[A_?Good + x_] -> inv[A]**inv[Id + (B/A)x] 
+             };
+          *)
+          normrule := 
+             { 
+                inv[A_?Good + B x_?NonCommutativeQ] -> inv[A]**inv[Id + (B/A)x]
+                 ,
+                inv[A_?Good + x_] -> inv[A]**inv[Id + (1/A)x]
+             };
+          (* END MAURICIO MAR 2016 *)
 
-(*---------------------------------RULE 1-------------------------------*) 
-(* rule 1 is as follows:                                                *) 
-(*		inv[a] inv[1 + LLLLL a b] -> inv[a] - LLLLL b inv[1 + LLLLL a b]    *) 
-(*		inv[a] inv[1 + LLLLL a] -> inv[a] - LLLLL inv[1 + LLLLL a]          *)
-(*----------------------------------------------------------------------*)
-rule[1] :=
-{
-(d___) ** inv[a__] ** inv[Id + (LLLLL_.)*(a__) ** (b__)] ** (e___):>
-(*  OutputForm:  d ** inv[a] ** e - LLLLL*d ** b ** inv[Id + LLLLL*a ** b] ** e  *)
-Plus[NonCommutativeMultiply[d, inv[a], e], Times[-1, LLLLL,
-   NonCommutativeMultiply[d, b, inv[Plus[Id, Times[LLLLL,
-   NonCommutativeMultiply[a, b]]]], e]]]
-,
-(d___) ** inv[a_] ** inv[Id + (LLLLL_.)*(a_)] ** (e___):>
-(*  OutputForm:  d ** inv[a] ** e - LLLLL*d ** inv[Id + LLLLL*a] ** e  *)
-Plus[NonCommutativeMultiply[d, inv[a], e], Times[-1, LLLLL,
-NonCommutativeMultiply[d, inv[Plus[1, Times[LLLLL, a]]], e]]]
-};
+  (*---------------------------------RULE 1-------------------------------*) 
+  (* rule 1 is as follows:                                                *) 
+  (*		inv[a] inv[1 + K a b] -> inv[a] - K b inv[1 + K a b]    *) 
+  (*		inv[a] inv[1 + K a] -> inv[a] - K inv[1 + K a]          *)
+  (*----------------------------------------------------------------------*)
+  rule[1] :=
+  {
+  (d___) ** inv[a__] ** inv[Id + (K_.)*(a__) ** (b__)] ** (e___):>
+  (*  OutputForm:  d ** inv[a] ** e - K*d ** b ** inv[Id + K*a ** b] ** e  *)
+  Plus[NonCommutativeMultiply[d, inv[a], e], Times[-1, K,
+     NonCommutativeMultiply[d, b, inv[Plus[Id, Times[K,
+     NonCommutativeMultiply[a, b]]]], e]]]
+  ,
+  (d___) ** inv[a_] ** inv[Id + (K_.)*(a_)] ** (e___):>
+  (*  OutputForm:  d ** inv[a] ** e - K*d ** inv[Id + K*a] ** e  *)
+  Plus[NonCommutativeMultiply[d, inv[a], e], Times[-1, K,
+  NonCommutativeMultiply[d, inv[Plus[1, Times[K, a]]], e]]]
+  };
 
-(*---------------------------------RULE 2-------------------------------*) 
-(* rule 2 is as follows:                                                *) 
-(*		inv[1 + LLLLL a b] inv[b] -> inv[b] - LLLLL inv[1 + LLLLL a b] a    *) 
-(*		inv[1 + LLLLL a] inv[a] -> inv[a] - LLLLL inv[1 + LLLLL a ]         *) 
-(*----------------------------------------------------------------------*)
-rule[2] :=
-{
-(d___) ** inv[Id + (LLLLL_.)*(a__) ** (b__)] ** inv[b__] ** (e___):>
-(*  OutputForm:  d ** inv[b] ** e - LLLLL*d ** inv[Id + LLLLL*a ** b] ** a ** e  *)
-Plus[NonCommutativeMultiply[d, inv[b], e],
-Times[-1, LLLLL, NonCommutativeMultiply[d, inv[Plus[1,
-Times[LLLLL, NonCommutativeMultiply[a, b]]]], a, e]]]
-,
-(d___) ** inv[Id + (LLLLL_.)*a_] ** inv[a_] ** (e___):>
-(*  OutputForm:  d ** inv[a] ** e - LLLLL*d ** inv[Id + LLLLL*a] ** e  *)
-Plus[NonCommutativeMultiply[d, inv[a], e],
-Times[-1, LLLLL, NonCommutativeMultiply[d, inv[Plus[1, Times[LLLLL, a]]], e]]]
-};
+  (*---------------------------------RULE 2-------------------------------*) 
+  (* rule 2 is as follows:                                                *) 
+  (*		inv[1 + K a b] inv[b] -> inv[b] - K inv[1 + K a b] a    *) 
+  (*		inv[1 + K a] inv[a] -> inv[a] - K inv[1 + K a ]         *) 
+  (*----------------------------------------------------------------------*)
+  rule[2] :=
+  {
+  (d___) ** inv[Id + (K_.)*(a__) ** (b__)] ** inv[b__] ** (e___):>
+  (*  OutputForm:  d ** inv[b] ** e - K*d ** inv[Id + K*a ** b] ** a ** e  *)
+  Plus[NonCommutativeMultiply[d, inv[b], e],
+  Times[-1, K, NonCommutativeMultiply[d, inv[Plus[1,
+  Times[K, NonCommutativeMultiply[a, b]]]], a, e]]]
+  ,
+  (d___) ** inv[Id + (K_.)*a_] ** inv[a_] ** (e___):>
+  (*  OutputForm:  d ** inv[a] ** e - K*d ** inv[Id + K*a] ** e  *)
+  Plus[NonCommutativeMultiply[d, inv[a], e],
+  Times[-1, K, NonCommutativeMultiply[d, inv[Plus[1, Times[K, a]]], e]]]
+  };
 
-(*---------------------------------RULE 3-------------------------------*) 
-(* rule 3 is as follows:  inv[1 + LLLLL a b ] a b -> (1 - inv[1 + LLLLL a b])/LLLLL *)
-(*                        inv[1 + LLLLL a] a -> (1 - inv[1 + LLLLL a])/LLLLL        *) 
-(*----------------------------------------------------------------------*)
-rule[3] :=
-{
-(d___) ** inv[Id + (LLLLL_.)*(a__) ** (b__)] ** (a__) ** (b__) ** (e___):>
-(*  OutputForm:  (d ** e + -1*d ** inv[Id + LLLLL*a ** b] ** e)/LLLLL  *)
-Times[Power[LLLLL, -1], Plus[NonCommutativeMultiply[d, e],
-Times[-1, NonCommutativeMultiply[d, inv[Plus[1,
-Times[LLLLL, NonCommutativeMultiply[a, b]]]], e]]]]
-, 
-(d___) ** inv[Id + (LLLLL_.)*(a_)] ** (a_) ** (e___):>
-(*  OutputForm:  (d ** e + -1*d ** inv[Id + LLLLL*a] ** e)/LLLLL  *)
-Times[Power[LLLLL, -1], Plus[NonCommutativeMultiply[d, e],
-Times[-1, NonCommutativeMultiply[d, inv[Plus[1, Times[LLLLL, a]]], e]]]]
-};
- 
-(*---------------------------------RULE 4-------------------------------*) 
-(* rule 4 is as follows:  a b inv[1 + LLLLL a b] -> (inv[1 + LLLLL a b] - 1)/LLLLL  *)
-(*		       	  a inv[1 + LLLLL a] -> (inv[1 + LLLLL a] - 1)/LLLLL        *)
-(*----------------------------------------------------------------------*)
-rule[4] :=
-{
-(d___) ** (a__) ** (b__) ** inv[Id + (LLLLL_.)*(a__) ** (b__)] ** (e___):>
-(*  OutputForm:  (d ** e + -1*d ** inv[Id + LLLLL*a ** b] ** e)/LLLLL  *)
-Times[Power[LLLLL, -1], Plus[NonCommutativeMultiply[d, e],
-Times[-1, NonCommutativeMultiply[d, inv[Plus[1,
-Times[LLLLL, NonCommutativeMultiply[a, b]]]], e]]]]
-,
-(d___) ** (a_) ** inv[Id + (LLLLL_.)*(a_)] ** (e___):>
-(*  OutputForm:  (d ** e + -1*d ** inv[Id + LLLLL*a] ** e)/LLLLL  *)
-Times[Power[LLLLL, -1], Plus[NonCommutativeMultiply[d, e],
-Times[-1, NonCommutativeMultiply[d, inv[Plus[1, Times[LLLLL, a]]], e]]]]
-};
+  (*---------------------------------RULE 3-------------------------------*) 
+  (* rule 3 is as follows:  inv[1 + K a b ] a b -> (1 - inv[1 + K a b])/K *)
+  (*                        inv[1 + K a] a -> (1 - inv[1 + K a])/K        *) 
+  (*----------------------------------------------------------------------*)
+  rule[3] :=
+  {
+  (d___) ** inv[Id + (K_.)*(a__) ** (b__)] ** (a__) ** (b__) ** (e___):>
+  (*  OutputForm:  (d ** e + -1*d ** inv[Id + K*a ** b] ** e)/K  *)
+  Times[Power[K, -1], Plus[NonCommutativeMultiply[d, e],
+  Times[-1, NonCommutativeMultiply[d, inv[Plus[1,
+  Times[K, NonCommutativeMultiply[a, b]]]], e]]]]
+  , 
+  (d___) ** inv[Id + (K_.)*(a_)] ** (a_) ** (e___):>
+  (*  OutputForm:  (d ** e + -1*d ** inv[Id + K*a] ** e)/K  *)
+  Times[Power[K, -1], Plus[NonCommutativeMultiply[d, e],
+  Times[-1, NonCommutativeMultiply[d, inv[Plus[1, Times[K, a]]], e]]]]
+  };
 
-(*---------------------------------RULE 5-------------------------------*) 
-(* rule 5 is as follows:                                                *) 
-(*		 inv[1 + LLLLL a b] inv[a] -> inv[a] inv[1 + LLLLL a b]         *)
-(*		 inv[1 + LLLLL a] inv[a] -> inv[a] inv[1 + LLLLL a]             *)
-(*----------------------------------------------------------------------*)
-rule[5] :=
-{
-(d___) ** inv[Id + (LLLLL_.)*(a__) ** (b__)] ** inv[a__] ** (e___):>
-(*  OutputForm:  d ** inv[a] ** inv[Id + LLLLL*b ** a] ** e  *)
-NonCommutativeMultiply[d, inv[a], inv[Plus[1,
-Times[LLLLL, NonCommutativeMultiply[b, a]]]], e]
-,
-(d___) ** inv[Id + (LLLLL_.)*(a_)] ** inv[a_] ** (e___):>
-(*  OutputForm:  d ** inv[a] ** inv[Id + LLLLL*a] ** e  *)
-NonCommutativeMultiply[d, inv[a], inv[Plus[1, Times[LLLLL, a]]], e]
-};
+  (*---------------------------------RULE 4-------------------------------*) 
+  (* rule 4 is as follows:  a b inv[1 + K a b] -> (inv[1 + K a b] - 1)/K  *)
+  (*		       	  a inv[1 + K a] -> (inv[1 + K a] - 1)/K        *)
+  (*----------------------------------------------------------------------*)
+  rule[4] :=
+  {
+  (d___) ** (a__) ** (b__) ** inv[Id + (K_.)*(a__) ** (b__)] ** (e___):>
+  (*  OutputForm:  (d ** e + -1*d ** inv[Id + K*a ** b] ** e)/K  *)
+  Times[Power[K, -1], Plus[NonCommutativeMultiply[d, e],
+  Times[-1, NonCommutativeMultiply[d, inv[Plus[1,
+  Times[K, NonCommutativeMultiply[a, b]]]], e]]]]
+  ,
+  (d___) ** (a_) ** inv[Id + (K_.)*(a_)] ** (e___):>
+  (*  OutputForm:  (d ** e + -1*d ** inv[Id + K*a] ** e)/K  *)
+  Times[Power[K, -1], Plus[NonCommutativeMultiply[d, e],
+  Times[-1, NonCommutativeMultiply[d, inv[Plus[1, Times[K, a]]], e]]]]
+  };
 
-(*---------------------------------RULE 6-------------------------------*) 
-(* rule 6 is as follows:   inv[1 + LLLLL a b] a  =  a inv[1 + LLLLL b a]        *) 
-(*----------------------------------------------------------------------*)
-rule[6] :=
-{
-(d___) ** inv[Id + (LLLLL_.)*(a__) ** (b__)] ** (a__) ** (e___):>
-(*  OutputForm:  d ** a ** inv[Id + LLLLL*b ** a] ** e  *)
-NonCommutativeMultiply[d, a, inv[Plus[1,
-Times[LLLLL, NonCommutativeMultiply[b, a]]]], e]
-};
+  (*---------------------------------RULE 5-------------------------------*) 
+  (* rule 5 is as follows:                                                *) 
+  (*		 inv[1 + K a b] inv[a] -> inv[a] inv[1 + K a b]         *)
+  (*		 inv[1 + K a] inv[a] -> inv[a] inv[1 + K a]             *)
+  (*----------------------------------------------------------------------*)
+  rule[5] :=
+  {
+  (d___) ** inv[Id + (K_.)*(a__) ** (b__)] ** inv[a__] ** (e___):>
+  (*  OutputForm:  d ** inv[a] ** inv[Id + K*b ** a] ** e  *)
+  NonCommutativeMultiply[d, inv[a], inv[Plus[1,
+  Times[K, NonCommutativeMultiply[b, a]]]], e]
+  ,
+  (d___) ** inv[Id + (K_.)*(a_)] ** inv[a_] ** (e___):>
+  (*  OutputForm:  d ** inv[a] ** inv[Id + K*a] ** e  *)
+  NonCommutativeMultiply[d, inv[a], inv[Plus[1, Times[K, a]]], e]
+  };
 
-	expr3 = expr2 //. normrule ; 
-	For[ n=1, n <= 6, n++,
-             expr3 = Expand[expr3 //. rule[n]];
-        ];
-	Return[ expr3 ]
-]
+  (*---------------------------------RULE 6-------------------------------*) 
+  (* rule 6 is as follows:   inv[1 + K a b] a  =  a inv[1 + K b a]        *) 
+  (*----------------------------------------------------------------------*)
+  rule[6] :=
+  {
+  (d___) ** inv[Id + (K_.)*(a__) ** (b__)] ** (a__) ** (e___):>
+  (*  OutputForm:  d ** a ** inv[Id + K*b ** a] ** e  *)
+  NonCommutativeMultiply[d, a, inv[Plus[1,
+  Times[K, NonCommutativeMultiply[b, a]]]], e]
+  };
+
+          expr3 = expr2 //. normrule;
+          For[ n=1, n <= 6, n++,
+               expr3 = Expand[expr3 //. rule[n]];
+          ];
+          Return[ expr3 ]
+  ];
 
 End[ ]
 
