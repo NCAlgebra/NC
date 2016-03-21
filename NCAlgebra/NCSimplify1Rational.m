@@ -41,7 +41,8 @@
    :8/1/97      Replaced the local variable K with LLLLL.  (rowell)
 *)
 
-BeginPackage[ "NCSimplify1Rational`", "NonCommutativeMultiply`" ]
+BeginPackage[ "NCSimplify1Rational`", 
+              "NonCommutativeMultiply`" ]
 
 NCSimplify1Rational::usage =
      "NCSimplify1Rational[ expr ] simplifies noncommutative expressions in\n
@@ -206,7 +207,12 @@ Begin[ "`Private`" ]
   Times[K, NonCommutativeMultiply[b, a]]]], e]
   };
 
-          expr3 = expr2 //. normrule;
+          (* BEGIN MAURICIO MAR 2016 *)
+          (* expr3 = expr2 //. normrule; *)
+          (* END MAURICIO MAR 2016 *)
+          expr3 = NCSimplifyRational`NCNormalizeInverse[expr2];
+          (* Print["expr3 = ", expr3]; *)
+          
           For[ n=1, n <= 6, n++,
                expr3 = Expand[expr3 //. rule[n]];
           ];

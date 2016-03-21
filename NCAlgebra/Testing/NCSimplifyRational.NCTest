@@ -23,10 +23,59 @@ Module[
      {
      A, B, C, B1, B2, C1, C2, D11, D12, D21, D22, DU, DW, DY, G1, G2, 
      K, KK, S, U, W, XX, Y, YY, a, b, c, coxz, cozz, d, dd, f, 
-     g, h, parta, partb, x, y, z 
+     g, h, parta, partb, x, y, z,
+     expr, answer
      },
 
      SetNonCommutative[h,x,y,a,K,b];
+     SetCommutative[A,B,C];
+
+     (* Normalize inverses *)
+
+     expr = inv[x];
+     answer = expr;
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[A x];
+     answer = inv[x]/A;
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[1 + x];
+     answer = expr;
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[2 + x];
+     answer = inv[1 + x/2]/2;
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[1 + A + x];
+     answer = inv[1 + x/(1+A)]/(1+A);
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[A + B + x];
+     answer = inv[1 + x/(A+B)]/(A+B);
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[2 + A + B + C + x];
+     answer = inv[1 + x/(2+A+B+C)]/(2+A+B+C);
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[1 + inv[1 + x]];
+     answer = expr;
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[1 + inv[1 + inv[x]]];
+     answer = expr;
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[1 + A + inv[1 + inv[x]]];
+     answer = inv[1 + inv[1 + inv[x]]/(1+A)]/(1+A);
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[1 + A + inv[1 + B + inv[x]]];
+     answer = inv[1 + inv[1 + inv[x]/(1+B)]/(1+A)/(1+B)]/(1+A);
+     NCTest[NCNormalizeInverse[expr], answer];
+
 
      (* Print["Starting SimplifyRational.NCTest"]; *)
      (* test 1 tests rule 1 *)

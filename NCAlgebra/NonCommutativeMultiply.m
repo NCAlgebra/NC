@@ -1,4 +1,4 @@
-(* :Title: 	NCMultiplication // Mathematica 1.2 and 2.0 *)
+(* :Title: 	NCMultiplication *)
 
 (* :Author: 	Unknown. *)
 
@@ -14,9 +14,6 @@
 *)
 
 (* :History:
-   :8/30/99:    ForceCommutativeAllQ set true. (mark - per - dell)
-   :9/21/92:    Added two lines of code which used to be in 
-                NCUsage.m (mstankus)
    :3/3/16:     Deprecated CommutativeAllQ
 *)
 
@@ -35,7 +32,7 @@ Begin[ "`Private`" ]
   (* Overide Mathematica's existing NonCommutativeMultiply operator *)
   
   Unprotect[NonCommutativeMultiply];
-  ClearAttributes[NonCommutativeMultiply, {OneIdentity, Flat}]
+  ClearAttributes[NonCommutativeMultiply, {OneIdentity, Flat}];
 
 
   (* CommutativeQ *)
@@ -48,7 +45,7 @@ Begin[ "`Private`" ]
   CommutativeQ[BlankNullSequence] = False;
 
   (* a commutative functions is commutative if all arguments are 
-     also commutative*)
+     also commutative *)
   CommutativeQ[f_?CommutativeQ[x___]] := 
       Apply[And, Map[CommutativeQ,{x}]];
 
