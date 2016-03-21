@@ -1,116 +1,131 @@
-(* :Title: 	Substitute.NCTest // Mathematica 1.2 and 2.0 *)
-
-(* :Author: 	David Hurst (dhurst). *)
-
-(* :Summary:	TEST FILE.  *)
-
-(* :History: 
-   :7/17/91  	Submitted this TESTfile with 14 test. (dhurst)
-   :8/05/91  	Renamed file. (mstankus)	
-   :10/6/91  	Blocked and added new test. (dhurst)
-   :7/31/92  	Added test 17. (dhurst)
-   :9/7/92	Changed coexz to coxz. (dhurst)
-   :9/6/99      Block-> Module  (dell)
-*)
+<< NCSubstitute`
 
 Module[
-     {k, A, B1, B2, C1, C2, D11, D12, D21, D22, DU, DW, DY, G1, G2, KK, L, R,
-     U, W, XX, Y, YY, a, b, c, coKK, coxz, dd, exp, f, g, i, ruledelayedlist,
-     rulelist, singlerule, thing1, thing2, thing3, x, z },
+     {rule, expr, answer, 
+      a,b,c,d},
 
-     k = 1;
+     SetNonCommutative[a,b,c,d];
 
-     (* Print["-----Starting the first test in Substitute.NCTest"]; *)
-     NCTest[Substitute[a,a->b], b, "Substitute", k++];
+     rule = a -> b;
 
-     (* Print["-----Starting the second test in Substitute.NCTest"]; *)
-     NCTest[FunctionOnRules[{a->b},L,R],  {L[a]->R[b]}, "Substitute", k++];
+     expr = a;
 
-     (* Print["-----Starting the third test in Substitute.NCTest"]; *)
-     NCTest[SubstituteSymmetric[a,a->b ], b, "Substitute", k++];
+     answer = b;
+     NCTest[expr /. rule, answer];
+     NCTest[NCReplace[expr,rule], answer];
+     NCTest[NCReplaceAll[expr,rule], answer];
+     NCTest[NCReplaceRepeated[expr,rule], answer];
 
-     (* Print["-----Starting the fourth test in Substitute.NCTest"]; *)
-     NCTest[SubstituteReverse[a,b->a], b, "Substitute", k++];
+     expr = a**b;
 
-     (* Print["-----Starting the fifth test in Substitute.NCTest"]; *)
-     NCTest[SubstituteReverseSymmetric[c, {a->b,b->c}], a, "Substitute", k++];
+     answer = b**b;
+     NCTest[expr /. rule, answer];
+     NCTest[NCReplace[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,rule], answer];
+     NCTest[NCReplaceRepeated[expr,rule], answer];
 
-     rulelist = {a->b,b->c,c->d};
-     singlerule = a->b;
-     ruledelayedlist = {a:>b,b:>c,c:>d};
-     exp = a;
+     expr = a**b + b**inv[1+a] + b**inv[a];
 
-     (* Print["-----Starting the sixth test in Substitute.NCTest"]; *)
-     NCTest[Substitute[exp,singlerule], b, "Substitute", k++];
+     answer = 1 + b**b + b**inv[1+b];
+     NCTest[expr /. rule, answer];
+     NCTest[NCReplace[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,rule], answer];
+     NCTest[NCReplaceRepeated[expr,rule], answer];
 
-     (* Print["-----Starting the seventh test in Substitute.NCTest"]; *)
-     NCTest[Substitute[exp,rulelist], d, "Substitute", k++];
+     rule = a**b -> c;
 
-     (* Print["-----Starting the eigth test in Substitute.NCTest"]; *)
-     NCTest[Substitute[exp,ruledelayedlist], d, "Substitute", k++];
+     expr = a**b**c;
 
-     (* Print["-----Starting the nineth test in Substitute.NCTest"]; *)
-     NCTest[FunctionOnRules[singlerule,L,R], (L[a]->R[b]), "Substitute", k++];
+     answer = expr;
+     NCTest[expr /. rule, answer];
+     NCTest[NCReplace[expr,rule], expr];
 
-     (* Print["-----Starting the tenth test in Substitute.NCTest"]; *)
-     NCTest[FunctionOnRules[rulelist,L,R], 
-               {L[a]->R[b],L[b]->R[c],L[c]->R[d]}, "Substitute", k++];
+     answer = c**c;
+     NCTest[NCReplaceAll[expr,rule], answer];
+     NCTest[NCReplaceRepeated[expr,rule], answer];
 
-     (* Print["-----Starting the eleventh test in Substitute.NCTest"]; *)
-     NCTest[FunctionOnRules[ruledelayedlist,L,R], 
-               {L[a]->R[b],L[b]->R[c],L[c]->R[d]}, "Substitute", k++];
+     expr = a**b + a**b**c + d**a**b + d**a**b**c;
 
-     (* Print["-----Starting the twelth test in Substitute.NCTest"]; *)
-     NCTest[SubstituteSymmetric[a,singlerule], b, "Substitute", k++];
+     answer = c + c**c + d**c + d**c**c;
+     NCTest[NCReplace[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,rule], answer];
+     NCTest[NCReplaceRepeated[expr,rule], answer];
 
-     (* Print["-----Starting the thirteenth test in Substitute.NCTest"]; *)
-     NCTest[SubstituteSymmetric[a,rulelist], d, "Substitute", k++];
+     rule = a**b -> a;
 
-     (* Print["-----Starting the fourteenth test in Substitute.NCTest"]; *)
-     NCTest[SubstituteSymmetric[a,ruledelayedlist], d, "Substitute", k++];
+     expr = a**b**b**c;
 
-     (* Print["-----Starting the fifteenth test in Substitute.NCTest"]; *)
-     SetNonCommutative[f,g,a,b,c,dd,z];
-     SetNonCommutative[W,U,Y,DW,DU,DY];
-     SetNonCommutative[A,x,B1,B2,C1,C2,G1,G2] ;
-     SetNonCommutative[D11,D22,D12,D21];
-     SetNonCommutative[XX,YY];
+     answer = expr;
+     NCTest[expr /. rule, answer];
+     NCTest[NCReplace[expr,rule], expr];
 
-     (* Print["-----Inputting a huge expression"]; *)
-     coxz=-tp[C1] ** C1 - XX ** B2 ** inv[d12] ** C1 - 
-            tp[C1] ** inv[tp[d12]] ** tp[B2] ** XX - 
-            XX ** inv[1 - YY ** XX] ** B1 ** inv[d21] ** C2 - 
-            XX ** inv[1 - YY ** XX] ** B1 ** tp[B1] ** XX + 
-            inv[YY] ** inv[1 - YY ** XX] ** B1 ** inv[d21] ** C2 + 
-            inv[YY] ** inv[1 - YY ** XX] ** B1 ** tp[B1] ** XX - 
-            XX ** B2 ** inv[d12] ** inv[tp[d12]] ** tp[B2] ** XX - 
-            XX ** inv[1 - YY ** XX] ** YY ** tp[C2] ** inv[tp[d21]] ** 
-	    inv[d21] ** C2 - XX ** inv[1 - YY ** XX] ** YY ** tp[C2] ** 
-	    inv[tp[d21]] ** tp[B1] ** XX + inv[YY] ** inv[1 - YY ** XX] ** 
-	    YY ** tp[C2] ** inv[tp[d21]] ** inv[d21] ** C2 + inv[YY] ** 
-	    inv[1 - YY ** XX] ** YY ** tp[C2] ** inv[tp[d21]] ** tp[B1] ** XX;
-     SetCommutative[KK];
+     answer = a**b**c;
+     NCTest[NCReplaceAll[expr,rule], answer];
 
-     (* Print["-----Calling Substitute in Substitute.NCTest"]; *)
-     coKK=Substitute[coxz,XX->KK x];
+     answer = a**c;
+     NCTest[NCReplaceRepeated[expr,rule], answer];
 
-     (* Print["-----Calling NCSimplifyRational in Substitute.NCTest"]; *)
-     thing1 = NCSimplifyRational[coxz];
+     expr = a**b**b + a**b**c + d**a**b + d**a**b**c;
 
-     (* Print["-----Calling Substitute in Substitute.NCTest"]; *)
-     thing2 = Substitute[thing1,XX->KK x];
+     answer = a**b + a**c + d**a + d**a**c;
+     NCTest[NCReplace[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,rule], answer];
 
-     (* Print["-----Calling NCSimplifyRational in Substitute.NCTest"]; *)
-     thing3 = NCSimplifyRational[coKK];
+     answer = a + a**c + d**a + d**a**c;
+     NCTest[NCReplaceRepeated[expr,rule], answer];
 
-     NCTest[ExpandNonCommutativeMultiply[thing3 - thing2], 0, "Substitute", k++];
+     (* NCMakeRuleSymmetric *)
 
-     (* Print["-----Starting the sixteenth test in Substitute.NCTest"]; *)
-     NCTest[RulesComplement[singlerule], {a->b,-a->-b}, "Substitute", k++];
-     
-     (* Print["-----Starting the seventeenth test in Substitute.NCTest"]; *)
-     NCTest[Transform[a**b**c,a**b->c], c**c, "Substitute", k++];
+     rule = a -> b;
+     answer = {a -> b, tp[a] -> tp[b]};
+     NCTest[NCMakeRuleSymmetric[rule], answer];
 
-]
+     rule = a :> b;
+     answer = {a :> b, tp[a] :> tp[b]};
+     NCTest[NCMakeRuleSymmetric[rule], answer];
 
+     rule = {a -> b, c -> d};
+     answer = {a -> b, tp[a] -> tp[b], c -> d, tp[c] -> tp[d]};
+     NCTest[NCMakeRuleSymmetric[rule], answer];
 
+     rule = {a :> b, c :> d};
+     answer = {a :> b, tp[a] :> tp[b], c :> d, tp[c] :> tp[d]};
+     NCTest[NCMakeRuleSymmetric[rule], answer];
+
+     rule = {a -> b, c :> d};
+     answer = {a -> b, tp[a] -> tp[b], c :> d, tp[c] :> tp[d]};
+     NCTest[NCMakeRuleSymmetric[rule], answer];
+
+     rule = {{a -> b, c -> d}, {a -> -b, c -> 2d}};
+     answer = {{a -> b, tp[a] -> tp[b], c -> d, tp[c] -> tp[d]},
+               {a -> -b, tp[a] -> -tp[b], c -> 2d, tp[c] -> 2tp[d]}};
+     NCTest[NCMakeRuleSymmetric[rule], answer];
+
+     (* NCMakeRuleSelfAdjoint *)
+
+     rule = a -> b;
+     answer = {a -> b, aj[a] -> aj[b]};
+     NCTest[NCMakeRuleSelfAdjoint[rule], answer];
+
+     rule = a :> b;
+     answer = {a :> b, aj[a] :> aj[b]};
+     NCTest[NCMakeRuleSelfAdjoint[rule], answer];
+
+     rule = {a -> b, c -> d};
+     answer = {a -> b, aj[a] -> aj[b], c -> d, aj[c] -> aj[d]};
+     NCTest[NCMakeRuleSelfAdjoint[rule], answer];
+
+     rule = {a :> b, c :> d};
+     answer = {a :> b, aj[a] :> aj[b], c :> d, aj[c] :> aj[d]};
+     NCTest[NCMakeRuleSelfAdjoint[rule], answer];
+
+     rule = {a -> b, c :> d};
+     answer = {a -> b, aj[a] -> aj[b], c :> d, aj[c] :> aj[d]};
+     NCTest[NCMakeRuleSelfAdjoint[rule], answer];
+
+     rule = {{a -> b, c -> d}, {a -> -b, c -> 2d}};
+     answer = {{a -> b, aj[a] -> aj[b], c -> d, aj[c] -> aj[d]},
+               {a -> -b, aj[a] -> -aj[b], c -> 2d, aj[c] -> 2aj[d]}};
+     NCTest[NCMakeRuleSelfAdjoint[rule], answer];
+
+];

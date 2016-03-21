@@ -67,9 +67,9 @@ tests = {
   "NCOutput",
   "NCDiff",
   "NCCollect",
-  "MatrixDecompositions",
-(*
   "NCSubstitute",
+(*
+  "MatrixDecompositions",
   "NCMatMult",
   "NCSymmetric",
   "NCSylvester",
