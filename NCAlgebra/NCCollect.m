@@ -51,38 +51,39 @@ Begin["`Private`"];
     Scan[(tmp = NCStrongCollect[tmp, #])&, vars];
     Return[tmp];
   ];
-                                
+  
   NCStrongCollect[f_, x_] :=
-    (f //. {
+    ReplaceRepeated[
+      ReplaceRepeated[f, {
 
-       (A_:1) * left___**x**right___ + (B_:1) * left___**x**right___ :> 
-         (A + B)
-         NonCommutativeMultiply[left, x, right],
+         (A_:1) * left___**x**right___ + (B_:1) * left___**x**right___ :> 
+           (A + B)
+           NonCommutativeMultiply[left, x, right],
 
-       (A_:1) * left___**x**a___ + (B_:1) * left___**x**b___ :> 
-         NonCommutativeMultiply[
-           left, 
-           x,
-           A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]
-         ],
+         (A_:1) * left___**x**a___ + (B_:1) * left___**x**b___ :> 
+           NonCommutativeMultiply[
+             left, 
+             x,
+             A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]
+           ],
 
-       (A_:1) * a___**x**right___ + (B_:1) *b___**x**right___ :> 
-         NonCommutativeMultiply[
-           (A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]),
-           x,
-           right
-         ],
+         (A_:1) * a___**x**right___ + (B_:1) *b___**x**right___ :> 
+           NonCommutativeMultiply[
+             (A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]),
+             x,
+             right
+           ],
 
-       (A_:1) * x + (B_:1) * x**b___ :> 
-         NonCommutativeMultiply[x, (A + B*NonCommutativeMultiply[b])],
+         (A_:1) * x + (B_:1) * x**b___ :> 
+           NonCommutativeMultiply[x, (A + B*NonCommutativeMultiply[b])],
 
-       (A_:1) * x + (B_:1) * b___**x :> 
-         NonCommutativeMultiply[(A + B*NonCommutativeMultiply[b]), x]
+         (A_:1) * x + (B_:1) * b___**x :> 
+           NonCommutativeMultiply[(A + B*NonCommutativeMultiply[b]), x]
 
-      }) //. 
-        left___**(a_Plus?IsFirstNegative)**right___ :> 
-          -NonCommutativeMultiply[left, Expand[-a], right];
+      }], left___**(a_Plus?IsFirstNegative)**right___ :> 
+             -NonCommutativeMultiply[left, Expand[-a], right]];
 
+          
   (* NCDecompose *)                                       
                                         
   NCDecompose[exp_, vars_List] := 

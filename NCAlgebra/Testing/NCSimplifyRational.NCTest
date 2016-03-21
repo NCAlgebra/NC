@@ -28,7 +28,7 @@ Module[
      },
 
      SetNonCommutative[h,x,y,a,K,b];
-     SetCommutative[A,B,C];
+     SetCommutative[A,B,C,S];
 
      (* Normalize inverses *)
 
@@ -38,6 +38,10 @@ Module[
 
      expr = inv[A x];
      answer = inv[x]/A;
+     NCTest[NCNormalizeInverse[expr], answer];
+
+     expr = inv[(A + B) x];
+     answer = inv[x]/(A + B);
      NCTest[NCNormalizeInverse[expr], answer];
 
      expr = inv[1 + x];
@@ -109,7 +113,7 @@ Module[
             -2*b**inv[1 - 2*a ** b]];
 
      SetNonCommutative[
-          f, g, a, b, c, dd, z, W, U, Y, DW, DU, DY,  A, x, B1, B2, 
+          f, g, a, b, c, d, dd, z, W, U, Y, DW, DU, DY,  A, x, B1, B2, 
           C1, C2, G1, G2, D11, D22, D12, D21, XX, YY, KK  
      ];
 
@@ -174,11 +178,14 @@ Module[
 
      (* test 9 tests NCSimplifyRational2 *)
      (* Print["----test 9 "]; *)
-     NCTest[NCSimplifyRational[ 
-               1 + inv[d] ** c ** inv[S - a] ** b - inv[d] ** c ** 
+     expr = 1 + inv[d] ** c ** inv[S - a] ** b - inv[d] ** c ** 
                inv[S - a + b ** inv[d] ** c] ** b - inv[d] ** c ** 
                inv[S - a + b ** inv[d] ** c] ** b ** inv[d] ** c ** 
-               inv[S - a] ** b],  1];
+               inv[S - a] ** b;
+     (* Print["NCSRe = ", NCSimplify1Rational[expr]];
+        Print["NCSRe = ", Simplify[CommuteEverything[expr]]]; *)
+
+     NCTest[NCSimplifyRational[expr], 1];
 
      (* test 10 tests NCSimplifyRational2 *)
      (* Print["----test 10"]; *)
@@ -210,7 +217,7 @@ Module[
      (* test 15 tests NCSimplifyRational2 added 7/03. Tests norm rule 3 in NCS1R *)
      (* Print["----test 15"]; *)
      SetCommutative[B,C];
-     NCTest[NCSimplify1Rational[ inv[B+3*x + C*y + x**y**z] ], inv[ 1 + (3x+C*y+x**y**z)/B ] / B];           
+     NCTest[NCSimplify1Rational[ inv[B+3*x + C*y + x**y**z] ], ExpandAll[inv[ 1 + (3x+C*y+x**y**z)/B ] / B]];           
 
      (* test 16 tests NCSimplifyRational2 added 7/03. Tests norm rule 4 in NCS1R *)
      (* Print["----test 16"]; *)
