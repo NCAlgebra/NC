@@ -22,6 +22,18 @@ NCAlias ::usage =
      "NCAlias[] is the value of $Pre (alias) for NCAlgebra."
 
 NCAliasRule = {
+    
+               (* :NCMultiplication.m  *)
+                    NonCommutativeMultiply`NCExpand -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
+                    NonCommutativeMultiply`NCE -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
+
+               (*
+                    CE -> NonCommutativeMultiply`CommuteEverything,
+                    CQ -> NonCommutativeMultiply`CommutativeQ,
+                    TTNCM -> NonCommutativeMultiply`TimesToNCM,
+                    ENCM -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
+               *)
+    
                (* :NCCollect.m *)
                     NCDec -> NCCollect`NCDecompose,
                     NCCom -> NCCollect`NCCompose,
@@ -60,17 +72,6 @@ NCAliasRule = {
 		    LDU -> NCMatMult`NCLDUDecomposition,
                *)
                     
-               (* :NCMultiplication.m  *)
-                    NCExpand -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
-                    ENCM -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
-                    NCE -> NonCommutativeMultiply`ExpandNonCommutativeMultiply,
-
-                    CE -> NonCommutativeMultiply`CommuteEverything,
-                    CQ -> NonCommutativeMultiply`CommutativeQ,
-               (*
-                    TTNCM -> NonCommutativeMultiply`TimesToNCM,
-               *)
-                        
                (* :NC1SetCommands.m *)
                     SNC -> NonCommutativeMultiply`SetNonCommutative,
                     NCM -> System`NonCommutativeMultiply,

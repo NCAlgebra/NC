@@ -14,7 +14,6 @@
 *)
 
 (* :History:
-   :3/3/16:     Deprecated CommutativeAllQ
 *)
 
 BeginPackage[ "NonCommutativeMultiply`" ];

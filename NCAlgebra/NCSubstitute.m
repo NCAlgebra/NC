@@ -25,7 +25,7 @@ Clear[NCReplace, NCReplaceAll,
 Begin["`Private`"]
 
   Clear[FlatNCMultiply];
-  SetAttributes[FlatNCMultiply, Flat];
+  SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
 
   NCReplace[expr_, rule_] := 
     ((Replace @@ 

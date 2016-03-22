@@ -1,7 +1,7 @@
 (*
-  AppendTo[$Echo, "stdout"]
-  SetOptions[$Output,PageWidth->120];
+  AppendTo[$Echo, "stdout"];
 *)
+SetOptions[$Output,PageWidth->1000];
 
 Clear[NCTest, NCTestResults, NCRunTest];
 $NCTestResults = Association[];
@@ -67,8 +67,6 @@ tests = {
   "NCOutput",
   "NCDiff",
   "NCCollect",
-  "NCSubstitute",
-  "NCSimplifyRational",
   "NCMatMult",
   "NCSymmetric",
   "NCSelfAdjoint",
@@ -79,7 +77,9 @@ tests = {
   "NCLDU",
   "NCRealization",
   "NCConvexity", 
-  "NCQuadratic"
+  "NCQuadratic",
+  "NCSubstitute",
+  "NCSimplifyRational"
 (* {"Crit",             "Crit"}, *)
 (*
   "NCSolve",
