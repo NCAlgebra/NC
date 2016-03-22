@@ -8,7 +8,7 @@
    :8/13/92      
 *)
 
-<<NCConvexity.m;
+<< NCConvexity.m;
 
 MyDiag[x_] := Tr[x, List];
 
@@ -57,6 +57,7 @@ Module[
    {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
    diagonal = MyDiag[d];
    NCTest[{diagonal}, ans];
+
    
    (* test 5 *)
    f = x**y**x+y**x**y;
@@ -89,9 +90,9 @@ Module[
 
    (* Print[ "Doing test 1,2" ]; *)
    p = x**x**x; 
-   hes = NCHessian[ NCExpand[p], {x, h} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -99,9 +100,9 @@ Module[
 
    (* Print[ "Doing test 3,4" ]; *)
    p = x**x**x**x; 
-   hes = NCHessian[ NCExpand[p], {x, h} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -109,9 +110,9 @@ Module[
 
    (* Print[ "Doing test 5,6" ]; *)
    p = A*x**x**x**x+B*x**x**x+F*x**x+G*x+J; 
-   hes = NCHessian[ NCExpand[p], {x, h} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -119,9 +120,9 @@ Module[
 
    (* Print[ "Doing test 7,8" ]; *)
    p = (A + B*x) ** inv[F + G*x] + tp[ (A + B*x) ** inv[F + G*x] ];
-   hes = NCHessian[ NCExpand[p], {x, h} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -129,9 +130,9 @@ Module[
 
    (* Print[ "Doing test 9,10" ]; *)
    p = (A + B*x + J*x**x) ** inv[F + G*x] + tp[ (A + B*x+J*x**x) ** inv[F + G*x] ];
-   hes = NCHessian[ NCExpand[p], {x, h} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -140,9 +141,9 @@ Module[
 
    (* Print[ "Doing test 11,12" ]; *)
    p = A+B*x+C*y+D*x**y+D*y**x+x**y**x**y+y**x**y**x+inv[J+F*x+G*y];
-   hes = NCHessian[ NCExpand[p], {x, h}, {y,k} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h}, {y,k} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -150,10 +151,10 @@ Module[
 
 
    (* Print[ "Doing test 13,14" ]; *)
-   p =  NCExpand[(A/(B**F))**x**y**x**y+2*A**y**y**y+23*F*y**x**y+tp[(A/(B*F))*x**y**x**y+2*A*y**y**y+23*F*y**x**y]];       
-   hes = NCHessian[ NCExpand[p], {x, h}, {y,k} ];
+   p =  ExpandNonCommutativeMultiply[(A/(B**F))**x**y**x**y+2*A**y**y**y+23*F*y**x**y+tp[(A/(B*F))*x**y**x**y+2*A*y**y**y+23*F*y**x**y]];       
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h}, {y,k} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -162,9 +163,9 @@ Module[
 
    (* Print[ "Doing test 15,16" ]; *)
    p = A*x**x + B*y**y + F*x**x**x + G*y**y**y + H*x**y**x**y + H*y**x**y**x; 
-   hes = NCHessian[ NCExpand[p], {x, h},{y,k} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h},{y,k} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -172,9 +173,9 @@ Module[
 
    (* Print[ "Doing test 17,18" ]; *)
    p = x**x**x;
-   hes = NCHessian[ NCExpand[p], {x, h} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
@@ -182,9 +183,9 @@ Module[
 
    (* Print[ "Doing test 19,20" ]; *)
    p = A*x**x**x + y**y**x + x**y**y;
-   hes = NCHessian[ NCExpand[p], {x, h},{y,k} ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h},{y,k} ];
    {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = NCExpand[MatMult[l, m, r][[1]][[1]]] - NCExpand[hes];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
 
    NCTest[expr1, 0];
    NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 

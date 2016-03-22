@@ -18,11 +18,11 @@ Module[
 
   mat={{a,b,c},{d,e,f},{g,h,ii}};
   {lo,di,up,P}=NCLDUDecomposition[mat,Permutation->{{3,1,2},{1,3,2}}];   
-  NCTest[MatMult[lo,di,up], MatMult[P,mat,tpM[P]], "NCLDU", k++];
+  NCTest[MatMult[lo,di,up], MatMult[P,mat,tpMat[P]], "NCLDU", k++];
 
   mat={{-(V+tp[V]),tp[V]**A**X,tp[V]},{tp[V]**A+X,-X,0},{V,0,-X}};
   {lo,di,up,P}=NCLDUDecomposition[mat,Checkit->False,Permutation->{{2,3,1},{1,3,2}}];   
-  NCTest[MatMult[lo,di,up], MatMult[P,mat,tpM[P]], "NCLDU", k++];
+  NCTest[MatMult[lo,di,up], MatMult[P,mat,tpMat[P]], "NCLDU", k++];
 
 
   (*Tests 3 through 6 test commands related to matrix permutations*)
@@ -102,11 +102,11 @@ Module[
   mat ={{a,b,c},{d,e,f},{g,h,i}};
   {lower,diag,upper,P} = NCLDUDecomposition[mat, 
                                             Permutation -> {{3,1,2},{1,3,2}}];
-  NCTest[MatMult[lower,diag,upper], MatMult[P ,mat , tpM[P]], "NCLDU", k++];
+  NCTest[MatMult[lower,diag,upper], MatMult[P ,mat , tpMat[P]], "NCLDU", k++];
 
   mat= {{-(V+tp[V]),  tp[V]**A+X, tp[V]},{tp[A]**V+X,-X,0},{V,0,-X}};
   {lower,diag,upper,P} = NCLDUDecomposition[mat, 
                            Checkit->False, Permutation->{{2,3,1},{1,3,2}}];
-  NCTest[MatMult[lower,diag,upper], MatMult[P, mat , tpM[P]], "NCLDU", k++];
+  NCTest[MatMult[lower,diag,upper], MatMult[P, mat , tpMat[P]], "NCLDU", k++];
 
 ];

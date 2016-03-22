@@ -9,6 +9,8 @@
    
 *)
 
+<< NCRealizationFunctions`
+
 Module[
   {k,x,y},
 

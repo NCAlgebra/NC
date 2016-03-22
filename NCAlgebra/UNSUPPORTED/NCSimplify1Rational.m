@@ -133,20 +133,6 @@ Begin[ "`Private`" ]
                   d ** inv[a] ** e - K d ** inv[1 + K a] ** e
           };
           
-          (*---------------------------RULE 1'------------------------*) 
-          (* inv[a] inv[1 + c + K a b]                                *)
-          (*         -> inv[a] (1 + c) - K b inv[1 + c + K a b]       *)
-          (* inv[a] inv[1 + c + K a]                                  *)
-          (*         -> inv[a] (1 + c) - K inv[1 + c + K a]           *)
-          (*----------------------------------------------------------*) 
-          
-          rule[1] := {
-              d___ ** inv[a__] ** inv[1 + c_. + K_. a__ ** b__] ** e___ :> 
-                  d ** inv[a] ** (1 + c) ** e - K d ** b ** inv[1 + c + K a ** b] ** e,
-              d___ ** inv[a_] ** inv[1 + c_. + K_. a_] ** e___ :> 
-                  d ** inv[a] ** (1 + c) ** e - K d ** inv[1 + c + K a] ** e
-          };
-          
           (*-----------------------RULE 2-------------------------------*) 
           (* rule 2 is as follows:                                      *) 
           (*	inv[1 + K a b] inv[b] -> inv[b] - K inv[1 + K a b] a    *) 
@@ -171,20 +157,6 @@ Begin[ "`Private`" ]
                   d ** inv[b] ** e - K d ** inv[1 + K a ** b] ** a ** e,
               d___ ** inv[1 + K_. a_] ** inv[a_] ** e___ :> 
                   d ** inv[a] ** e - K d ** inv[1 + K a] ** e
-          };
-
-          (*---------------------------RULE 2'------------------------*) 
-          (* inv[1 + c + K a b] inv[b]                                *)
-          (*         -> (1 + c) inv[b] - K inv[1 + c + K a b] a       *)
-          (* inv[1 + c + K a] inv[a]                                  *)
-          (*         -> (1 + c) inv[a] - K inv[1 + c + K a]           *)
-          (*----------------------------------------------------------*)
-              
-          rule[2] := {
-              d___ ** inv[1 + c_. + K_. a__ ** b__] ** inv[b__] ** e___ :> 
-                  d ** (1 + c) ** inv[b] ** e - K d ** inv[1 + c + K a ** b] ** a ** e,
-              d___ ** inv[1 + c_. + K_. a_] ** inv[a_] ** e___ :> 
-                  d ** (1 + c) ** inv[a] ** e - K d ** inv[1 + c + K a] ** e
           };
 
           (*-------------------------------RULE 3------------------*) 
@@ -226,6 +198,13 @@ Begin[ "`Private`" ]
                   (1/K) d ** e - (1/K) d ** inv[1 + c + K a] ** (1 + c) ** e
           };
 
+          rule[3] := {
+              d___ ** inv[c_ + K_. a__ ** b__] ** a__ ** b__ ** e___ :> 
+                  (1/K) d ** e - (1/K) d ** inv[c + K a ** b] ** c ** e,
+              d___ ** inv[c_ + K_. a_] ** a_ ** e___ :> 
+                  (1/K) d ** e - (1/K) d ** inv[c + K a] ** c ** e
+          };
+
           (*----------------------RULE 4---------------------------*) 
           (* rule 4 is as follows:                                 *)
           (*     a b inv[1 + K a b] -> (1 - inv[1 + K a b])/K      *)
@@ -265,6 +244,13 @@ Begin[ "`Private`" ]
                   (1/K) d ** e - (1/K) d ** (1 + c) ** inv[1 + K a] ** e
           };
           
+          rule[4] := {
+              d___ ** a__ ** b__ ** inv[c_ + K_. a__ ** b__] ** e___ :> 
+                  (1/K) d ** e - (1/K) d ** c ** inv[c + K a ** b] ** e,
+              d___ ** a_ ** inv[c_ + K_. a_] ** e___ :> 
+                  (1/K) d ** e - (1/K) d ** c ** inv[1 + K a] ** e
+          };
+
           (*---------------------------------RULE 5---------------------*) 
           (* rule 5 is as follows:                                      *) 
           (*	 inv[1 + K a b] inv[a] -> inv[a] inv[1 + K b a]         *)
@@ -331,7 +317,8 @@ Begin[ "`Private`" ]
           (* Print["expr3 = ", expr3]; *)
           
           For[ n=1, n <= 6, n++,
-               expr3 = ExpandAll[NCReplaceRepeated[expr3, rule[n]]];
+               (* expr3 = Expand[Transform[expr3, rule[n]]]; *)
+               expr3 = ExpandAll[ExpandNonCommutativeMultiply[NCReplaceRepeated[expr3, rule[n]]]];
           ];
           Return[ expr3 ]
   ];
