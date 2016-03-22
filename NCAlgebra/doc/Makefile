@@ -1,17 +1,27 @@
 PYTHON = python3
 FILES = NonCommutativeMultiply.usage \
-	NCSymmetric.usage NCSelfAdjoint.usage \
+	NCCollect.usage \
 	NCSimplifyRational.usage \
-	NCDiff.usage NCSubstitute.usage \
-	NCCollect.usage NCPolynomial.usage \
+	NCDiff.usage \
+	NCSubstitute.usage \
+	NCSymmetric.usage \
+	NCSelfAdjoint.usage \
+	NCOutput.usage \
+	NCPolynomial.usage \
+	NCSylvester.usage \
         MatrixDecompositions.usage
 
 MANUAL = NonCommutativeMultiply.md \
-	 NCSymmetric.md NCSelfAdjoint.md \
-         NCSimplifyRational.md \
-	 NCDiff.md NCSubstitute.md \
-	 NCCollect.md NCPolynomial.md \
-	 MatrixDecompositions.md
+	NCCollect.md \
+	NCSimplifyRational.md \
+	NCDiff.md \
+	NCSubstitute.md \
+	NCSymmetric.md \
+	NCSelfAdjoint.md \
+	NCOutput.md \
+	NCPolynomial.md \
+	NCSylvester.md \
+        MatrixDecompositions.md
 
 all: $(FILES)
 

@@ -18,54 +18,10 @@ BeginPackage[ "NCSylvester`",
 	      "NCMatMult`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCSylvesterRepresentation];
-NCSylvesterRepresentation::usage="\
-NCSylvesterRepresentation[p] gives an expanded representation \
-for the linear NCPolynomial p.
-    
-NCSylvesterRepresentation returns a list with the coefficients \
-of the linear polynomial p where
-\tthe first element is a the independent term,
-and the remaining elements are lists with four elements:
-\tthe first element is a list of right nc symbols;
-\tthe second element is a list of right nc symbols;
-\tthe third element is a numeric array;
-\tthe fourth element is a variable.
+Clear[NCSylvesterRepresentation,
+      NCSylvesterRepresentationToNCPolynomial];
 
-Example:
-\tp = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-\tNCSylvesterRepresentation[exp,x]
-produces
-\t{2, {left1,right1,array1,var1}, {left2,right2,array2,var2}}
-where
-\tleft1 = {a,c}
-\tright1 = {b,d}
-\tarray1 = {{1,0},{0,1}}
-\tvar1 = x
-and
-\tleft1 = {1}
-\tright1 = {1}
-\tarray1 = {{1}}
-\tvar1 = y
-
-See also:
-NCSylvesterRepresentationToNCPolynomial, NCPolynomial.";
-NCSylvesterRepresentation::NotLinear = "Polynomial is not linear.";
-
-Clear[NCSylvesterRepresentationToNCPolynomial];
-NCSylvesterRepresentationToNCPolynomial::usage = "\
-NCSylvesterRepresentationToNCPolynomial[args] takes the list args \
-produced by NCSylvesterRepresentation and converts it back \
-to an NCPolynomial.
-NCSylvesterRepresentationToNCPolynomial[args, options] uses options.
-
-The following options can be given:
-\tCollect (True): controls whether the coefficients of the resulting \
-NCPolynomial are collected to produce the minimal possible number \
-of terms.
-    
-See also:
-NCSylvesterRepresentation, NCPolynomial.";
+Get["NCSylvester.usage"];
 
 Options[NCSylvesterRepresentationToNCPolynomial] = {
   Collect -> True
