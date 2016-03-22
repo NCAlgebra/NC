@@ -14,82 +14,22 @@
 
 BeginPackage[ "MatrixDecompositions`" ];
 
-Clear[GetLUMatrices];
-GetLUMatrices::usage="";
+Clear[LUDecompositionWithPartialPivoting,
+      LUDecompositionWithCompletePivoting,
+      LDLDecomposition,
+      UpperTriangularSolve,
+      LowerTriangularSolve,
+      LUInverse,
+      GetLUMatrices, GetLDUMatrices,
+      LUPartialPivoting, LUCompletePivoting];
 
-Clear[GetLDUMatrices];
-GetLDUMatrices::usage="";
-
-Clear[LUDecompositionWithPartialPivoting];
-LUDecompositionWithPartialPivoting::usage = "\
-LUDecompositionWithPartialPivoting[m] generates a representation \
-of the LU decomposition of the rectangular matrix m.
-LUDecompositionWithPartialPivoting[m, options] uses options.
-
-LUDecompositionWithPartialPivoting returns a list of two elements:
-\tthe first element is a combination of upper- and lower-triangular \
-matrices;
-\tthe second element is a vector specifying rows used for pivoting.
-
-LUDecompositionWithPartialPivoting is similar in functionality with \
-the built-in LUDecomposition. It implements a partial pivoting \
-strategy in which the sorting can be configured using the options listed \
-below. It also applies to general rectangular matrices as well as \
-square matrices.
-
-The following options can be given:
-\tZeroTest (PossibleZeroQ): function used to decide if a pivot is zero;
-\tDivide (Divide): function used to divide a vector by an entry;
-\tDot (Dot): function used to multiply vectors and matrices;
-\tPivoting (LUPartialPivoting): function used to sort rows for pivoting;
-    
-See also: LUDecomposition, GetLUMatrices, LUPartialPivoting, \
-LUDecompositionWithCompletePivoting";
-    
-Clear[LUDecompositionWithCompletePivoting];
-LUDecompositionWithCompletePivoting::usage = "\
-LUDecompositionWithCompletePivoting[m] generates a representation \
-of the LU decomposition of the rectangular matrix m.
-LUDecompositionWithCompletePivoting[m, options] uses options.
-
-LUDecompositionWithCompletePivoting returns a list of four elements:
-\tthe first element is a combination of upper- and lower-triangular \
-matrices;
-\tthe second element is a vector specifying rows used for pivoting.
-\tthe third element is a vector specifying columns used for pivoting.
-\tthe fourth element is the rank of the matrix.
-
-LUDecompositionWithCompletePivoting implements a complete pivoting \
-strategy in which the sorting can be configured using the options listed \
-below. It also applies to general rectangular matrices as well as \
-square matrices.
-
-The following options can be given:
-\tZeroTest (PossibleZeroQ): function used to decide if a pivot is zero;
-\tDivide (Divide): function used to divide a vector by an entry;
-\tDot (Dot): function used to multiply vectors and matrices;
-\tPivoting (LUCompletePivoting): function used to sort rows for pivoting;
-    
-See also: LUDecomposition, GetLUMatrices, LUCompletePivoting, \
-LUDecompositionWithPartialPivoting";
-
-Clear[UpperTriangularSolve];
-UpperTriangularSolve::usage="";
-
-Clear[LowerTriangularSolve];
-LowerTriangularSolve::usage="";
-
-Clear[LUInverse];
-LUInverse::usage="";
-
+Get["MatrixDecompositions.usage"];
+            
 MatrixDecompositions::WrongDimensions = \
 "Righ and left-hand side dimensions DO NOT MATCH.";
 MatrixDecompositions::Square = "The input matrix is not square.";
 MatrixDecompositions::SelfAdjoint = "The input matrix is not self-adjoint.";
 MatrixDecompositions::Singular = "The input matrix appears to be singular.";
-
-Clear[LDLDecomposition];
-LDLDecomposition::usage="";
 
 Options[MatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,

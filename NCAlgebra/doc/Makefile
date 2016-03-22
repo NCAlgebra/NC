@@ -3,13 +3,15 @@ FILES = NonCommutativeMultiply.usage \
 	NCSymmetric.usage NCSelfAdjoint.usage \
 	NCSimplifyRational.usage \
 	NCDiff.usage NCSubstitute.usage \
-	NCCollect.usage NCPolynomial.usage
+	NCCollect.usage NCPolynomial.usage \
+        MatrixDecompositions.usage
 
 MANUAL = NonCommutativeMultiply.md \
 	 NCSymmetric.md NCSelfAdjoint.md \
          NCSimplifyRational.md \
 	 NCDiff.md NCSubstitute.md \
-	 NCCollect.md NCPolynomial.md
+	 NCCollect.md NCPolynomial.md \
+	 MatrixDecompositions.md
 
 all: $(FILES)
 

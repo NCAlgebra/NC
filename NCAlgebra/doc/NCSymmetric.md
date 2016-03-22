@@ -20,7 +20,8 @@ See also:
 `NCSymmetricTest[exp,options]` uses `options`.
 
 `NCSymmetricTest` returns a list of two elements:
-* the first element is *True* or *False* if it succeded to prove `expr` symmetric.
+
+* the first element is *True* or *False* if it succeeded to prove `expr` symmetric.
 * the second element is a list of the variables that were made symmetric.
 
 The following options can be given:
@@ -28,5 +29,5 @@ The following options can be given:
 * `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
 * `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
 
-See also: 
+See also:
 [NCSymmetricQ](#NCSymmetricQ), [NCNCSelfAdjointTest](#NCSelfAdjointTest).

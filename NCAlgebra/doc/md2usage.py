@@ -111,7 +111,7 @@ def main():
         print('\n(* ' + key + ' *)', file=fsock)
 
         # print usage statement
-        print(key + '::usage = "\\\n' + output.strip() + '"', file=fsock)
+        print(key + '::usage = "\\\n' + output.strip() + '";', file=fsock)
 
     if outfile:
         fsock.close()
