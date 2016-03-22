@@ -320,8 +320,8 @@ Begin[ "`Private`" ]
           rule[6] := {
               d___ ** inv[1 + K_. a__ ** b__] ** a__ ** e___ :> 
                   d ** a ** inv[1 + K b ** a] ** e,
-              d___ ** inv[1 + K_. a_] ** inv[a_] ** e___ :> 
-                  d ** inv[a] ** inv[1 + K a] ** e
+              d___ ** inv[1 + K_. a_] ** a_ ** e___ :> 
+                  d ** a ** inv[1 + K a] ** e
           };
 
           (* BEGIN MAURICIO MAR 2016 *)
