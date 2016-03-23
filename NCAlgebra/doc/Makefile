@@ -9,6 +9,7 @@ FILES = NonCommutativeMultiply.usage \
 	NCOutput.usage \
 	NCPolynomial.usage \
 	NCSylvester.usage \
+	NCUtil.usage \
         MatrixDecompositions.usage
 
 MANUAL = NonCommutativeMultiply.md \
@@ -21,6 +22,7 @@ MANUAL = NonCommutativeMultiply.md \
 	NCOutput.md \
 	NCPolynomial.md \
 	NCSylvester.md \
+	NCUtil.md \
         MatrixDecompositions.md
 
 all: $(FILES)

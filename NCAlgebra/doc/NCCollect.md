@@ -5,11 +5,12 @@ Members are:
 * [NCCollect](#NCCollect)
 * [NCCollectSelfAdjoint](#NCCollectSelfAdjoint)
 * [NCCollectSymmetric](#NCCollectSymmetric)
-* [NCCompose](#NCCompose)
-* [NCDecompose](#NCDecompose)
 * [NCStrongCollect](#NCStrongCollect)
 * [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint)
 * [NCStrongCollectSymmetric](#NCStrongCollectSymmetric)
+* [NCCompose](#NCCompose)
+* [NCDecompose](#NCDecompose)
+* [NCTermsOfDegree](#NCTermsOfDegree)
 
 ## NCCollect {#NCCollect}
 
@@ -34,7 +35,7 @@ See also:
 
 ## NCStrongCollect {#NCStrongCollect}
 
-`NCStrongCollect[expr,vars]` collects terms of expression `expr` according to the elements of `vars` and attempts to combine by association. 
+`NCStrongCollect[expr,vars]` collects terms of expression `expr` according to the elements of `vars` and attempts to combine by association.
 
 In the noncommutative case the Taylor expansion and so the collect function is not uniquely specified. The function `NCStrongCollect` often collects too much and while correct it may be stronger than you want.
 
@@ -78,3 +79,20 @@ See also:
 
 See also:
 [NCCompose](#NCCompose), [NCPDecompose](#NCPDecompose).
+
+## NCTermsOfDegree {#NCTermsOfDegree}
+
+`NCTermsOfDegree[expr,vars,indices]` returns an expression such that each term has the right number of factors of the variables in `vars`.
+
+For example,
+
+    NCTermsOfDegree[x**y**x + x**w,{x,y},{2,1}}]
+
+returns `x**y**x` and
+
+    NCTermsOfDegree[x**y**x + x**w,{x,y},{1,0}}]
+
+return `x**w`. It returns 0 otherwise.
+
+See also:
+[NCDecompose](#NCDecompose), [NCPDecompose](#NCPDecompose).

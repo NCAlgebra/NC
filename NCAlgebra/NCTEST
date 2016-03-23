@@ -60,26 +60,28 @@ Print["> BEGIN NCTEST\n" ];
 tests = {
   "CommutativeQ",
   "NCMultiplication",
-  "NCUtil",
   "NCRoots",
   "NCConjugate",
   "NCPolynomial",
   "NCOutput",
   "NCDiff",
   "NCCollect",
-  "NCMatMult",
   "NCSymmetric",
   "NCSelfAdjoint",
   "NCSylvester",
-  "NCMatrixDecompositions",
-  "NCInverse",
-  "MatrixDecompositions",
   "NCLDU",
   "NCRealization",
   "NCConvexity", 
-  "NCQuadratic",
   "NCSubstitute",
+  "NCUtil",
   "NCSimplifyRational"
+(*
+  "NCQuadratic",
+  "NCMatMult",
+  "NCMatrixDecompositions",
+  "MatrixDecompositions",
+  "NCInverse",
+*)
 (* {"Crit",             "Crit"}, *)
 (*
   "NCSolve",

@@ -19,6 +19,7 @@
 BeginPackage[ "NCSimplifyRational`",
               "NCSubstitute`",
               "NCCollect`",
+              "NCUtil`",
               "NonCommutativeMultiply`" ];
 
 Clear[NCNormalizeInverse, 
@@ -150,22 +151,36 @@ Begin["`Private`"]
       Return[expr];
   ];
 
+  (* (1 + x) ** inv[1 + x] = 1
+     Last[x] ** inv[1 + x] = 1 - inv[1 + x] - Drop[x] ** inv[1 + x] *)
+  Clear[NCSimplifyRationalAux];
+(*  NCSimplifyRationalAux[inv[1 + x_]] := (
+     (Last[x] ** inv[1 + x] -> 
+         1 - inv[1 + x] - Drop[x] ** inv[1 + x]) 
+           /; Length[CoefficientRules[expr]] > 1);
+           *)
+  NCSimplifyRationalAux[inv[x_Plus]] :=
+     Last[x] ** inv[x] -> 1 - Drop[x] ** inv[x];
+  NCSimplifyRationalAux[_] := {};
+  
   NCSimplifyRational[expr_] := Module[
-    {tmp},
+    {tmp, invs},
 
+    (* Apply rules *)
+      
     tmp = FixedPoint[
       ExpandAll[
         ExpandNonCommutativeMultiply[
           NCSimplifyRationalSinglePass[#]]]&, expr];
 
-    (*
-    Print["additional = ", NCSimplifyRationalSinglePass[ExpandAll[
-            ExpandNonCommutativeMultiply[
-              NCNormalizeInverse[tmp /. AdditionalRules]]]]];
-    *)
-      
-    (* Collect on inv's *)
-    (* Print["collect = ", NCStrongCollectOnFunction[tmp, inv]]; *)
+    (* Reduce inverses *)
+    invs = NCGrabFunctions[tmp, inv];
+    ruleInvs = NCSimplifyRationalAux[Last[invs]];
+
+    Print["invs = ", invs];
+    Print["rule invs = ", ruleInvs];
+    Print["exp = ", ExpandNonCommutativeMultiply[
+                       NCReplaceAll[tmp, ruleInvs]]];
       
     Return[tmp];
       

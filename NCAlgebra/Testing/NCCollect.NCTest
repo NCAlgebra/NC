@@ -2,9 +2,9 @@
 
 Module[
    {exp, answer, tmp,
-   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
+   a,b,c,d,e,f,g,h,j,x,y,z,w,A,B,C},
 
-   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
+   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z,w];
    SetCommutative[A,B,C];
 
    exp = x**y + x;
@@ -195,5 +195,10 @@ Module[
      tp[h] ** inv[tp[g]] ** inv[g] ** h;
    NCTest[NCStrongCollect[exp,c], answer];
 
+  (* NCTermsOfDegree *)
+  expr = x**y**x + x**w;
+  NCTest[NCTermsOfDegree[expr,{x,y},{2,1}], x**y**x];
+  NCTest[NCTermsOfDegree[expr,{x,y},{1,0}], x**w];
+  NCTest[NCTermsOfDegree[expr,{x,y},{2,2}], 0];
 
 ];

@@ -27,7 +27,8 @@ BeginPackage[ "NCCollect`",
 Clear[NCCollect,NCStrongCollect, 
       NCCollectSymmetric, NCCollectSelfAdjoint,
       NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint,
-      NCDecompose, NCCompose];
+      NCDecompose, NCCompose,
+      NCTermsOfDegree];
 
 Clear[NCStrongCollectOnFunction];
 
@@ -156,7 +157,12 @@ Begin["`Private`"];
     NCStrongCollectSelfAdjoint[expr, {vars}];
   NCStrongCollectSelfAdjoint[expr_, vars_List] :=
     NCStrongCollect[expr, Flatten[Transpose[{vars,Map[aj,vars],Map[tp,vars]}]]];
-                             
+
+  (* NCTermsOfDegree *)
+  
+  NCTermsOfDegree[expr_, vars_, degree_] :=
+    NCPTermsToNC[NCPTermsOfDegree[NCToNCPolynomial[expr, vars], degree]];
+
 End[]
 
 EndPackage[]
