@@ -1,7 +1,7 @@
 << NCPolynomial`
 
 Module[
-   {k, test, exp, answer, vars, p,
+   {k, test, expr, answer, vars, p, rules,
    a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
 
    k = 1;
@@ -23,207 +23,207 @@ Module[
    NCTest[NCPolynomial`Private`NCConsecutiveTerms[tp[x],tp[y],vars], True, test, k++];
 
    (* NCSplitMonomials *)
-   exp = a**x**b;
+   expr = a**x**b;
    answer = {{1,a,x,b}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x}], answer, test, k++];
 
-   exp = a**x**b**c;
+   expr = a**x**b**c;
    answer = {{1,a,x,b**c}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x}], answer, test, k++];
 
-   exp = a**x**y**b;
+   expr = a**x**y**b;
    answer = {{1,a,x**y,b}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x,y}], answer, test, k++];
 
-   exp = a**x**y**b**c;
+   expr = a**x**y**b**c;
    answer = {{1,a,x**y,b**c}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x,y}], answer, test, k++];
 
-   exp = a**tp[x]**b;
+   expr = a**tp[x]**b;
    answer = {{1,a,tp[x],b}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x}], answer, test, k++];
 
-   exp = a**tp[x]**y**b;
+   expr = a**tp[x]**y**b;
    answer = {{1,a,tp[x]**y,b}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x,y}], answer, test, k++];
 
-   exp = x;
+   expr = x;
    answer = {{1,1,x,1}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x,y}], answer, test, k++];
 
-   exp = a**x;
+   expr = a**x;
    answer = {{1,a,x,1}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x,y}], answer, test, k++];
 
-   exp = a**x**y**b**c**x**f**y;
+   expr = a**x**y**b**c**x**f**y;
    answer = {{1,a,x**y,b**c,x,f,y,1}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x,y}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x,y}], answer, test, k++];
 
-   exp = a**x**b+c**x**d;
+   expr = a**x**b+c**x**d;
    answer = {{1,a,x,b}, {1,c,x,d}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x}], answer, test, k++];
 
-   exp = A a**x**b + B c**x**d;
+   expr = A a**x**b + B c**x**d;
    answer = {{A,a,x,b}, {B,c,x,d}};
-   NCTest[NCPolynomial`Private`NCSplitMonomials[exp, {x}], answer, test, k++];
+   NCTest[NCPolynomial`Private`NCSplitMonomials[expr, {x}], answer, test, k++];
 
    (* NCPolynomial *)
 
    vars = {x,y};
    p = 0;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<||>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {}, test, k++];
-   NCTest[NCPDegree[exp], 0, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {}, test, k++];
+   NCTest[NCPDegree[expr], 0, test, k++];
 
    p = 1;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[1,<||>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {}, test, k++];
-   NCTest[NCPDegree[exp], 0, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {}, test, k++];
+   NCTest[NCPDegree[expr], 0, test, k++];
 
    p = a + B c;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[a+B c,<||>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {}, test, k++];
-   NCTest[NCPDegree[exp], 0, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {}, test, k++];
+   NCTest[NCPDegree[expr], 0, test, k++];
 
    p = x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x}->{{1,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y}->{{1,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{0,1}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{0,1}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = x+a;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[a,<|{x}->{{1,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = x+y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x}->{{1,1,1}},{y}->{{1,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0},{0,1}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{0,1}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = x+a**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x}->{{1,1,1},{1,a,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = x**y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x**y}->{{1,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = y**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y**x}->{{1,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = x**y+y**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x**y}->{{1,1,1}}, {y**x}->{{1,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1},{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1},{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = y**a**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y,x}->{{1,1,a,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = x**y**a+a**y**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y**x}->{{1,a,1}}, {x**y}->{{1,1,a}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1},{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1},{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = a**x**b+c+d**x**e+a**x**e**x**b;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[c,
                          <|{x}->{{1,a,b},{1,d,e}},
                            {x,x}->{{1,a,e,b}}|>, 
                          vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0},{2,0}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{2,0}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = a**x**b+c+d**x**e+a**x**e**x**b+a**x**y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[c,
                          <|{x}->{{1,a,b},{1,d,e}},
                            {x**y}->{{1,a,1}},
                            {x,x}->{{1,a,e,b}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0},{1,1},{2,0}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{1,1},{2,0}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
    NCTest[NCPDecompose[answer], 
           <|{1,0}->a**x**b + d**x**e,
 	    {1,1}->a**x**y,
@@ -232,183 +232,256 @@ Module[
           test, k++];
 
    p = A x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x}->{{A,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = B y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y}->{{B,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{0,1}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{0,1}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = A x + B a;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[B a,<|{x}->{{A,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = A x + B y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x}->{{A,1,1}},{y}->{{B,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0},{0,1}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{0,1}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = A x + B a**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x}->{{A,1,1},{B,a,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], True, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0}}, test, k++];
-   NCTest[NCPDegree[exp], 1, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], True, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0}}, test, k++];
+   NCTest[NCPDegree[expr], 1, test, k++];
 
    p = A x**y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x**y}->{{A,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = B y**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y**x}->{{B,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = A x**y + B y**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x**y}->{{A,1,1}}, {y**x}->{{B,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1},{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1},{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = A x**y + B y**x**y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x**y}->{{A,1,1}}, {y**x**y}->{{B,1,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], False, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1},{1,2}}, test, k++];
-   NCTest[NCPDegree[exp], 3, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], False, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1},{1,2}}, test, k++];
+   NCTest[NCPDegree[expr], 3, test, k++];
 
    p = A y**a**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y,x}->{{A,1,a,1}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = A x**y**a + B a**y**x;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y**x}->{{B,a,1}}, {x**y}->{{A,1,a}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,1},{1,1}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,1},{1,1}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
    NCTest[NCPDecompose[answer], 
           <|{1,1}->A x**y**a + B a**y**x|>,
           test, k++];
 
 
    p = A a**x**b + B c + C d**x**e + A B a**x**e**x**b;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[B c,
                          <|{x}->{{A,a,b},{C,d,e}},
                            {x,x}->{{A B,a,e,b}}|>, 
                          vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0},{2,0}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{2,0}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
    p = A a**x**b + B c + C d**x**e + A B a**x**e**x**b + A C a**x**y;
-   exp = NCToNCPolynomial[p, vars];
+   expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[B c,
                          <|{x}->{{A,a,b},{C,d,e}},
                            {x**y}->{{A C,a,1}},
                            {x,x}->{{A B,a,e,b}}|>, vars];
-   NCTest[exp, answer, test, k++];
-   NCTest[NCPolynomialToNC[exp], p, test, k++];
-   NCTest[NCPLinearQ[exp], False, test, k++];
-   NCTest[NCPQuadraticQ[exp], True, test, k++];
-   NCTest[NCPMonomialDegree[exp], {{1,0},{1,1},{2,0}}, test, k++];
-   NCTest[NCPDegree[exp], 2, test, k++];
+   NCTest[expr, answer, test, k++];
+   NCTest[NCPolynomialToNC[expr], p, test, k++];
+   NCTest[NCPLinearQ[expr], False, test, k++];
+   NCTest[NCPQuadraticQ[expr], True, test, k++];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{1,1},{2,0}}, test, k++];
+   NCTest[NCPDegree[expr], 2, test, k++];
 
-   NCTest[NCPTermsOfDegree[exp, {1,0}], <|{x}->{{A,a,b},{C,d,e}}|>];
-   NCTest[NCPTermsOfDegree[exp, {1,1}], <|{x**y}->{{A C,a,1}}|>];
-   NCTest[NCPTermsOfDegree[exp, {2,0}], <|{x,x}->{{A B,a,e,b}}|>];
-   NCTest[NCPTermsOfDegree[exp, {2,2}], <||>];
-   NCTest[NCPTermsOfDegree[exp, {0,0}], <|{}->{{B c}}|>];
+   NCTest[NCPTermsOfDegree[expr, {1,0}], <|{x}->{{A,a,b},{C,d,e}}|>];
+   NCTest[NCPTermsOfDegree[expr, {1,1}], <|{x**y}->{{A C,a,1}}|>];
+   NCTest[NCPTermsOfDegree[expr, {2,0}], <|{x,x}->{{A B,a,e,b}}|>];
+   NCTest[NCPTermsOfDegree[expr, {2,2}], <||>];
+   NCTest[NCPTermsOfDegree[expr, {0,0}], <|{}->{{B c}}|>];
 
-   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {1,0}]], A a**x**b + C d**x**e];
-   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {1,1}]], A C a**x**y];
-   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {2,0}]], A B a**x**e**x**b]; 
-   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {2,2}]], 0]; 
-   NCTest[NCPTermsToNC[NCPTermsOfDegree[exp, {0,0}]], B c]; 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {1,0}]], A a**x**b + C d**x**e];
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {1,1}]], A C a**x**y];
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {2,0}]], A B a**x**e**x**b]; 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {2,2}]], 0]; 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {0,0}]], B c]; 
 
-   NCTest[NCPTermsOfTotalDegree[exp, 1], <|{x}->{{A,a,b},{C,d,e}}|>]; 
-   NCTest[NCPTermsOfTotalDegree[exp, 2], <|{x**y}->{{A C,a,1}},
+   NCTest[NCPTermsOfTotalDegree[expr, 1], <|{x}->{{A,a,b},{C,d,e}}|>]; 
+   NCTest[NCPTermsOfTotalDegree[expr, 2], <|{x**y}->{{A C,a,1}},
                                           {x,x}->{{A B,a,e,b}}|>];
-   NCTest[NCPTermsOfTotalDegree[exp, 3], <||>];
-   NCTest[NCPTermsOfTotalDegree[exp, 0], <|{}->{{B c}}|>];
+   NCTest[NCPTermsOfTotalDegree[expr, 3], <||>];
+   NCTest[NCPTermsOfTotalDegree[expr, 0], <|{}->{{B c}}|>];
 
    p = x**inv[z];
-   exp = NCToNCPolynomial[p, vars];
-   NCTest[exp, NCPolynomial[0,<|{x}->{{1,1,inv[z]}}|>, vars], test, k++];
+   expr = NCToNCPolynomial[p, vars];
+   NCTest[expr, NCPolynomial[0,<|{x}->{{1,1,inv[z]}}|>, vars], test, k++];
 
    Quiet[
 
      (* NotPolynomial *)
      p = x**inv[y];
-     exp = NCToNCPolynomial[p, vars];
-     NCTest[exp, $Failed, test, k++];
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed, test, k++];
 
      p = x**inv[y];
-     exp = NCToNCPolynomial[p, vars];
-     NCTest[exp, $Failed, test, k++];
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed, test, k++];
 
      p = x**inv[1 + y];
-     exp = NCToNCPolynomial[p, vars];
-     NCTest[exp, $Failed, test, k++];
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed, test, k++];
+
+     p = x**inv[1 + y] + inv[1 + x];
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed, test, k++];
 
      ,
      NCPolynomial::NotPolynomial
    ];
+
+   (* NCPSort *)
+   expr = c;
+   p = NCToNCPolynomial[expr, {x,y}];
+   answer = {c};
+   NCTest[NCPSort[p], answer];
+
+   expr = c + x - y;
+   p = NCToNCPolynomial[expr, {x,y}];
+   answer = {c, x, -y};
+   NCTest[NCPSort[p], answer];
+
+   expr = c + x - y;
+   p = NCToNCPolynomial[expr, {y,x}];
+   answer = {c, x, -y};
+   NCTest[NCPSort[p], answer];
+
+   expr = c + x**x - y;
+   p = NCToNCPolynomial[expr, {x,y}];
+   answer = {c, -y, x**x};
+   NCTest[NCPSort[p], answer];
+
+   expr = c + x**x - 2 y;
+   p = NCToNCPolynomial[expr, {x,y}];
+   answer = {c, -2 y, x**x};
+   NCTest[NCPSort[p], answer];
+
+   expr = a**x**b+c+2 d**x**e-a**x**e**x**b+a**x**y;
+   p = NCToNCPolynomial[expr, {x,y}];
+   answer = {c, a**x**b, 2 d**x**e, a**x**y, -a**x**e**x**b};
+   NCTest[NCPSort[p], answer];
+
+   (* NCToNCPolynomial with no variable list *)
+   expr = A B + A a**x**b + B c + C d**x**e + A B a**x**e**x**b + A C a**x**y;
+   p = NCToNCPolynomial[expr];
+   answer = NCPolynomial[A B, 
+                         <|{c} -> {{B, 1, 1}}, 
+                           {a**x**b} -> {{A, 1, 1}}, 
+                           {a**x**y} -> {{A C, 1, 1}}, 
+                           {d**x**e} -> {{C, 1, 1}}, 
+                           {a**x**e**x**b} -> {{A B, 1, 1}}|>, 
+                           {a, b, c, d, e, x, y}];
+   NCTest[p, answer];
+
+   (* NCRationalToNCPolynomial *)
+
+   expr = 1 + inv[d] ** c ** inv[S - a] ** b - inv[d] ** c ** 
+              inv[S - a + b ** inv[d] ** c] ** b - inv[d] ** c ** 
+              inv[S - a + b ** inv[d] ** c] ** b ** inv[d] ** c ** 
+              inv[S - a] ** b;
+   {p, vars, rules} = NCRationalToNCPolynomial[expr, {a,b,c}];
+   answer = 1 + inv[d] ** c ** vars[[1]] ** b - inv[d] ** c ** 
+              vars[[2]] ** b - inv[d] ** c ** 
+              vars[[2]] ** b ** inv[d] ** c ** 
+              vars[[1]] ** b;
+   NCTest[ExpandNonCommutativeMultiply[NCPolynomialToNC[p]], answer];
+   NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
+
+   expr = 1 + inv[d] ** c ** inv[S - a] ** b - inv[d] ** c ** 
+              inv[S - a + b ** inv[d] ** c] ** b - inv[d] ** c ** 
+              inv[S - a + b ** inv[d] ** c] ** b ** inv[d] ** c ** 
+              inv[S - a] ** b;
+   {p, vars, rules} = NCRationalToNCPolynomial[expr];
+   answer = 1 + vars[[1]] ** c ** vars[[2]] ** b - vars[[1]] ** c ** 
+              vars[[3]] ** b - vars[[1]] ** c ** 
+              vars[[3]] ** b ** vars[[1]] ** c ** 
+              vars[[2]] ** b;
+   NCTest[ExpandNonCommutativeMultiply[NCPolynomialToNC[p]], answer];
+   NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
 
 ];

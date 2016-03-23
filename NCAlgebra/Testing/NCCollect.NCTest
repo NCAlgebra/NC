@@ -135,22 +135,65 @@ Module[
    NCTest[NCCompose[tmp, {1,2}], y**x**y];
    NCTest[NCCompose[tmp, {2,1}], x**x**y + x**y**x + y**x**x];
 
+   exp = y**x**inv[1+x] + y**x**x + y**x**y + x**y**inv[1+x];
+   answer = <|{1,1}->y**x**inv[1+x] + x**y**inv[1+x],
+   	      {2,0}->y**x**x,
+              {1,0}->y**x**y|>;
+   tmp = NCDecompose[exp,{x}];
+   NCTest[tmp, answer];
+   NCTest[NCCompose[tmp], exp];
+   NCTest[NCCompose[tmp, {1,0}], y**x**y];
+   NCTest[NCCompose[tmp, {2,0}], y**x**x];
+   NCTest[NCCompose[tmp, {1,1}], y**x**inv[1+x] + x**y**inv[1+x]];
+
+   (* NCCollect with rationals *)
+   exp = y**x**inv[1+x] + y**y**x + y**y**x**y + x**y**inv[1+x];
+   answer = (x**y + y**x)**inv[1 + x] + y**y**x**(1 + y);
+   NCTest[NCCollect[exp, {x}], answer];
+
    (* tp *)
 
    exp = tp[a]**b +tp[a]**c;
    answer = tp[a]**(b+c);
    NCTest[NCStrongCollect[exp,tp[a]], answer];
    NCTest[NCStrongCollectSymmetric[exp,a], answer];
+   NCTest[NCCollect[exp,tp[a]], answer];
+
+   exp = tp[a]**b +tp[a]**c;
+   NCTest[NCStrongCollect[exp,a], exp];
+   NCTest[NCStrongCollectSymmetric[exp,a], answer];
+   NCTest[NCCollect[exp,a], exp];
 
    exp = ExpandNonCommutativeMultiply[tp[a]**(b +c)];
    answer = tp[a]**(b+c);
    NCTest[NCStrongCollect[exp,tp[a]], answer];
    NCTest[NCStrongCollectSymmetric[exp,a], answer];
+   NCTest[NCCollect[exp,tp[a]], answer];
 
    exp = ExpandNonCommutativeMultiply[tp[a]**(b +c)];
    answer = tp[a]**(b+c);
    NCTest[NCStrongCollect[exp,tp[a]], answer];
    NCTest[NCStrongCollectSymmetric[exp,a], answer];
+   NCTest[NCCollect[exp,tp[a]], answer];
+
+   exp = tp[a]**b + tp[a]**c + a**b + a**c;
+   answer = tp[a]**(b+c) + a**b + a**c;
+   NCTest[NCStrongCollect[exp,tp[a]], answer];
+   NCTest[NCCollect[exp,tp[a]], answer];
+
+   exp = tp[a]**b +tp[a]**c+b**tp[a**a]+c**tp[a**a];
+   answer = tp[a]**(b+c) + (b+c)**tp[a**a];
+   NCTest[NCStrongCollect[exp,tp[a]], answer];
+   NCTest[NCStrongCollectSymmetric[exp,a], answer];
+   NCTest[NCCollect[exp,tp[a]], answer];
+
+   exp = tp[a]**b +tp[a]**c+tp[a]**b**tp[a]+c**tp[a**a];
+   answer = tp[a]**(b+c+b**tp[a]) + c**tp[a**a];
+   NCTest[NCStrongCollect[exp,tp[a]], answer];
+   NCTest[NCStrongCollectSymmetric[exp,a], answer];
+
+   answer = tp[a]**(b+c) + (tp[a]**b + c**tp[a])**tp[a];
+   NCTest[NCCollect[exp,tp[a]], answer];
 
    (* aj *)
 

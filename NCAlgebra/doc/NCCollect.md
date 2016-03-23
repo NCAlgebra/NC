@@ -16,8 +16,10 @@ Members are:
 
 `NCCollect[expr,vars]` collects terms of nc expression `expr` according to the elements of `vars` and attempts to combine them. It is weaker than NCStrongCollect in that only same order terms are collected togther. It basically is `NCCompose[NCStrongCollect[NCDecompose]]]`.
 
+If `expr` is a rational nc expression then the degree correspond to the polynomial obtained using [NCRationalToNCPolynomial](#NCRationalToNCPolynomial).
+
 See also:
-[NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
+[NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint), [NCRationalToNCPolynomial](#NCRationalToNCPolynomial).
 
 ## NCCollectSelfAdjoint {#NCCollectSelfAdjoint}
 
@@ -74,6 +76,8 @@ See also:
 ## NCDecompose {#NCDecompose}
 
 `NCDecompose[p,vars]` gives an association of elements of the nc polynomial `p` in variables `vars` in which elements of the same order are collected together.
+
+`NCDecompose[p]` treats all nc letters in `p` as variables.
 
 `NCDecompose` uses [`NCPDecompose`](#NCPDecompose).
 

@@ -44,13 +44,13 @@ Begin["`Private`"];
   IsNegative[_] = False;
 
   Clear[IsFirstNegative];
-  IsFirstNegative[exp_Plus] := If[IsNegative[exp[[1]]], True, False];
-  IsFirstNegative[exp] = False;
+  IsFirstNegative[expr_Plus] := If[IsNegative[expr[[1]]], True, False];
+  IsFirstNegative[expr] = False;
 
   (* NCStrongCollect *)
 
-  NCStrongCollect[exp_, vars_List] := Module[
-    {tmp = exp},
+  NCStrongCollect[expr_, vars_List] := Module[
+    {tmp = expr},
     Scan[(tmp = NCStrongCollect[tmp, #])&, vars];
     Return[tmp];
   ];
@@ -120,21 +120,63 @@ Begin["`Private`"];
           
   (* NCDecompose *)                                       
                                         
-  NCDecompose[exp_, vars_List] := 
-    NCPDecompose[NCToNCPolynomial[exp, vars]];
+  NCDecompose[expr_] := 
+    Quiet[
+       Check[ NCPDecompose[NCToNCPolynomial[expr]]
+             ,
+              Apply[(NCPDecompose[#1] /. #3)&, NCRationalToNCPolynomial[expr]]
+             ,
+              NCPolynomial::NotPolynomial
+       ]
+      ,
+       NCPolynomial::NotPolynomial
+    ];
+
+  NCDecompose[expr_, vars_List] := 
+    Quiet[
+       Check[ NCPDecompose[NCToNCPolynomial[expr, vars]]
+             ,
+              Apply[(NCPDecompose[#1] /. #3)&, NCRationalToNCPolynomial[expr, vars]]
+             ,
+              NCPolynomial::NotPolynomial
+       ]
+      ,
+       NCPolynomial::NotPolynomial
+    ];
 
   (* NCCompose *)
                                         
-  NCCompose[exp_Association] := Total[Values[exp]];
-  NCCompose[exp_Association, degree_List] := exp[degree];
+  NCCompose[expr_Association] := Total[Values[expr]];
+  NCCompose[expr_Association, degree_List] := expr[degree];
 
   (* NCCollect *)
 
   NCCollect[expr_, var_] := NCCollect[expr, {var}];
                              
-  NCCollect[expr_, vars_List] := 
-    NCCompose[Map[NCStrongCollect[#, vars]&, 
-                  NCDecompose[expr, vars] ] ]; 
+  NCCollect[expr_, vars_List] := Module[
+    {dec,rvars,rules},
+      
+    {dec,rvars,rules} = Quiet[
+       Check[ {NCPDecompose[NCToNCPolynomial[expr, vars]], {}, {}}
+             ,
+              Apply[{NCPDecompose[#1], #2, #3}&, NCRationalToNCPolynomial[expr, vars]]
+             ,
+              NCPolynomial::NotPolynomial
+       ]
+      ,
+       NCPolynomial::NotPolynomial
+    ];
+   
+    (*
+    Print["dec = ", dec];
+    Print["rvars = ", rvars];
+    Print["rules = ", rules];
+    *)
+      
+    Return[NCCompose[Map[NCStrongCollect[#, Join[vars, rvars]]&,
+                         dec]] //. rules]
+      
+  ];
       
   (* NCCollectSymmetric *)
                              

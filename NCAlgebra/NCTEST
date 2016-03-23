@@ -62,10 +62,10 @@ tests = {
   "NCMultiplication",
   "NCRoots",
   "NCConjugate",
-  "NCPolynomial",
   "NCOutput",
-  "NCDiff",
+  "NCPolynomial",
   "NCCollect",
+  "NCDiff",
   "NCSymmetric",
   "NCSelfAdjoint",
   "NCSylvester",
@@ -74,14 +74,12 @@ tests = {
   "NCConvexity", 
   "NCSubstitute",
   "NCUtil",
-  "NCSimplifyRational"
-(*
+  "NCSimplifyRational",
   "NCQuadratic",
   "NCMatMult",
   "NCMatrixDecompositions",
   "MatrixDecompositions",
   "NCInverse",
-*)
 (* {"Crit",             "Crit"}, *)
 (*
   "NCSolve",

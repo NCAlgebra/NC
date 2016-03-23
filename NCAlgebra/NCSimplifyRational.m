@@ -19,6 +19,7 @@
 BeginPackage[ "NCSimplifyRational`",
               "NCSubstitute`",
               "NCCollect`",
+              "NCPolynomial`",
               "NCUtil`",
               "NonCommutativeMultiply`" ];
 
@@ -71,17 +72,9 @@ Begin["`Private`"]
       },
 
       (*---------------------------RULE 3'------------------------*) 
-      (* inv[1 + c + K a b] a b -> [1 - inv[1 + c + K a b] (1 + c)]/K           *)
-      (* inv[1 + c + K a] a -> [1 - inv[1 + c + K a] (1 + c)]/K                 *)
+      (* inv[1 + K a b] a b -> [1 - inv[1 + c + K a b] (1 + c)]/K *)
+      (* inv[1 + K a] a -> [1 - inv[1 + c + K a] (1 + c)]/K       *)
       (*----------------------------------------------------------*)
-      (* ?? BILL WAS RIGHT ??
-      {
-          d___ ** inv[1 + c_. + K_. a__ ** b__] ** a__ ** b__ ** e___ :> 
-              (1/K) d ** e - (1/K) d ** inv[1 + c + K a ** b] ** (1 + c ) ** e,
-          d___ ** inv[1 + c_. + K_. a_] ** a_ ** e___ :> 
-              (1/K) d ** e - (1/K) d ** inv[1 + c + K a] ** (1 + c) ** e
-      },
-      *)
       {
           d___ ** inv[1 + K_. a__ ** b__] ** a__ ** b__ ** e___ :> 
               (1/K) d ** e - (1/K) d ** inv[1 + K a ** b] ** e,
@@ -151,36 +144,44 @@ Begin["`Private`"]
       Return[expr];
   ];
 
-  (* (1 + x) ** inv[1 + x] = 1
-     Last[x] ** inv[1 + x] = 1 - inv[1 + x] - Drop[x] ** inv[1 + x] *)
-  Clear[NCSimplifyRationalAux];
-(*  NCSimplifyRationalAux[inv[1 + x_]] := (
-     (Last[x] ** inv[1 + x] -> 
-         1 - inv[1 + x] - Drop[x] ** inv[1 + x]) 
-           /; Length[CoefficientRules[expr]] > 1);
-           *)
-  NCSimplifyRationalAux[inv[x_Plus]] :=
-     Last[x] ** inv[x] -> 1 - Drop[x] ** inv[x];
-  NCSimplifyRationalAux[_] := {};
-  
-  NCSimplifyRational[expr_] := Module[
-    {tmp, invs},
 
+  Clear[NCSimplifyRationalAuxRules];
+  NCSimplifyRationalAuxRules[terms_, rat_] :=
+    { rat ** Last[terms] -> 1 - rat ** (Plus @@ Drop[terms]),
+      Last[terms] ** rat -> 1 - (Plus @@ Drop[terms]) ** rat };
+
+  NCSimplifyRational[expr_] := Module[
+    {poly, rvars, rules, simpRules, tmp, invs},
+
+    (* Convert from rational to polynomial *)
+    {poly,rvars,rules} = NCRationalToNCPolynomial[expr];
+    
+    Print["poly = ", poly];
+    Print["rvars = ", rvars];
+    Print["rules = ", rules];
+      
+    (* Create Rules *)
+    simpRules = Map[NCSimplifyRationalAuxRules[NCPSort[NCToNCPolynomial[#[[2,1]]]], 
+                                               #[[1]]]&, rules];
+
+    Print["simpRules = ", simpRules];
+
+    tmp = NCPolynomialToNC[poly];
+
+    Print["tmp0 = ", tmp];
+      
+    tmp = ExpandAll[ExpandNonCommutativeMultiply[
+              Scan[(tmp = NCReplace[tmp, #])&, simpRules]
+    ]];
+
+    Print["tmp1 = ", tmp];
+       
     (* Apply rules *)
       
     tmp = FixedPoint[
       ExpandAll[
         ExpandNonCommutativeMultiply[
           NCSimplifyRationalSinglePass[#]]]&, expr];
-
-    (* Reduce inverses *)
-    invs = NCGrabFunctions[tmp, inv];
-    ruleInvs = NCSimplifyRationalAux[Last[invs]];
-
-    Print["invs = ", invs];
-    Print["rule invs = ", ruleInvs];
-    Print["exp = ", ExpandNonCommutativeMultiply[
-                       NCReplaceAll[tmp, ruleInvs]]];
       
     Return[tmp];
       

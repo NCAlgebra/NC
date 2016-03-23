@@ -13,15 +13,19 @@
 (* :History: *)
 
 BeginPackage[ "NCPolynomial`",
+              "NCUtil`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCPolynomial, NCToNCPolynomial, NCPolynomialToNC, 
+Clear[NCPolynomial, 
+      NCToNCPolynomial, NCPolynomialToNC, NCRationalToNCPolynomial,
       NCPCoefficients, NCPTermsOfDegree, NCPTermsOfTotalDegree, 
-      NCPTermsToNC, NCPDecompose, 
+      NCPTermsToNC, NCPDecompose, NCPSort,
       NCPDegree, NCPMonomialDegree, NCPLinearQ, NCPQuadraticQ,
       NCPNormalize];
 
 Get["NCPolynomial.usage"];
+
+NCPolynomial::NotPolynomial = "Expression is not a polynomial.";
 
 Begin[ "`Private`" ]
 
@@ -83,7 +87,10 @@ Begin[ "`Private`" ]
   NCSplitMonomials[m_, vars_List] := {NCSplitMonomialAux[m,vars]};
 
   (* NCToNCPolynomial *)
-  
+
+  NCToNCPolynomial[poly_] := 
+      NCToNCPolynomial[poly, Select[NCGrabSymbols[poly], NonCommutativeQ]];
+
   NCToNCPolynomial[poly_, vars_List] := Module[
       {p, m0},
 
@@ -141,6 +148,49 @@ Begin[ "`Private`" ]
       
   ];
 
+  (* NCRationalToNCPolynomial *)
+
+  NCRationalToNCPolynomial[rat_] := 
+      NCRationalToNCPolynomial[rat, Select[NCGrabSymbols[rat], NonCommutativeQ]];
+
+  NCRationalToNCPolynomial[rat_, vars_List] := Module[
+      {invs, ratVars, ruleRat, ruleRatRev, poly},
+    
+      (* Grab inv's *)
+      invs = NCGrabFunctions[rat, inv];
+      
+      (* Print["invs = ", invs]; *)
+      
+      (* Detect inverses which do not depend on the variables and
+         exclude them *)
+      invs = invs[[Flatten[Position[Apply[And, 
+                           Outer[FreeQ[#1, #2]&, invs, vars], {1}], False]]]];
+      
+      (* Print["invs = ", invs]; *)
+
+      (* Create one new variables for each inv *)
+      ratVars = Table[Unique["rat"], Length[invs]];
+      SetNonCommutative[ratVars];
+
+      (* Print["ratVars = ", ratVars]; *)
+      
+      (* Replace inv's with ratVars *)
+      ruleRat = Thread[invs -> ratVars];
+      poly = rat //. ruleRat;
+
+      (* Print["ruleRat = ", ruleRat]; *)
+      (* Print["poly = ", poly]; *)
+
+      ruleRatRev = Map[Map[Function[x,x//.ruleRat],#,{2}]&, Map[Reverse, ruleRat]];
+
+      (* Print["ruleRatRev = ", ruleRatRev]; *)
+
+      Return[{NCToNCPolynomial[poly, Join[vars, ratVars]], 
+              ratVars,
+              ruleRatRev}];
+
+  ];
+      
   (* NCPCoefficients *)
    
   NCPCoefficients[p_NCPolynomial, m_] := Lookup[p[[2]], Key[m], {}];
@@ -180,13 +230,21 @@ Begin[ "`Private`" ]
                     ConstantArray[0, Length[p[[3]]]] -> p[[1]]]] ];
   ];
   
-
+  (* NCPSort *)
+  
+  NCPSort[p_NCPolynomial] := 
+     Prepend[Apply[NonCommutativeMultiply, 
+                   Flatten[Apply[NCPTermsToNCAux, 
+                                 Normal[p[[2]]], {1}]
+                          ,1], {1}], p[[1]]];
+  
   (* NCPDegree *)
 
   Clear[NCPDegreeAux];
   NCPDegreeAux[m_NonCommutativeMultiply, vars_] := 
      Map[Count[m, #]&, vars];
   NCPDegreeAux[m_Symbol, vars_] := Exponent[vars, m];
+  NCPDegreeAux[(tp|aj)[m_Symbol], vars_] := Exponent[vars, m];
   
   NCPMonomialDegree[p_NCPolynomial] := 
     Map[NCPDegreeAux[#,p[[3]]]&,

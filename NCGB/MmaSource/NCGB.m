@@ -59,7 +59,7 @@ END OF BILL's MOVING
    LOAD NCAlgebra type files 
 *)
 
-Get["NCAlgebra.m"];
+Get["NCGBNCAlgebra.m"];
 Get["NCMPolynomialQ.m"];
 
 (*
