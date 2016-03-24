@@ -1,0 +1,152 @@
+<< Matrix`
+
+Module[
+  {mat, answer, a, b, c, d, z},
+
+  (* What is a Matrix? *)
+
+  mat = Matrix[{{1,2},{3,4}}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[1, 2], List[3, 4]]"];
+
+  mat = Matrix[{1,2},{3,4}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[1, 2], List[3, 4]]"];
+
+  mat = Matrix[{{1}}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[1]]"];
+
+  mat = Matrix[{1}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[1]]"];
+
+  (* Submatrices *)
+
+  a = Matrix[{{5/2, 2}, {3, 4}}];
+  b = Matrix[{{5, 6}, {7, 8}}];
+  c = Matrix[{{2, -1}, {2, 1}}];
+
+  mat = Matrix[{{a, b}}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[Matrix[List[Rational[5, 2], 2], List[3, 4]], Matrix[List[5, 6], List[7, 8]]]]"];
+  
+  mat = Matrix[{a, b}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[Matrix[List[Rational[5, 2], 2], List[3, 4]], Matrix[List[5, 6], List[7, 8]]]]"];
+
+  mat = Matrix[{{a, b}, {c, -a}}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[Matrix[List[Rational[5, 2], 2], List[3, 4]], Matrix[List[5, 6], List[7, 8]]], List[Matrix[List[2, -1], List[2, 1]], Matrix[List[Rational[-5, 2], -2], List[-3, -4]]]]"];
+
+  mat = Matrix[{a, b}, {c, -a}];
+  NCTest[ToString[FullForm[mat]], "Matrix[List[Matrix[List[Rational[5, 2], 2], List[3, 4]], Matrix[List[5, 6], List[7, 8]]], List[Matrix[List[2, -1], List[2, 1]], Matrix[List[Rational[-5, 2], -2], List[-3, -4]]]]"];
+
+  (* Not a Matrix *)
+
+  Quiet[
+
+    NCTest[Matrix[{1,2},{3,4,5}], $Failed];
+
+    NCTest[Matrix[1], $Failed];
+
+    NCText[Matrix[], $Failed];
+
+    NCText[Matrix[1], $Failed];
+
+    NCText[Matrix[a + b], $Failed];
+
+    NCText[Matrix[1, 2], $Failed];
+
+    NCText[Matrix[{{{1, 2, 3}}}], $Failed];
+
+    NCText[Matrix[{1, 2}, {3}], $Failed];
+
+    NCTest[Matrix[{{a, b}, {c}}], $Failed];
+
+    NCTest[Matrix[{a, b}, {c}], $Failed];
+
+    ,
+
+    Matrix::NotMatrix
+  ];
+
+  (* Conversions *)
+
+  NCTest[MatrixToList[Matrix[{1, 2, 3}, {4, 5, 6}]], {{1, 2, 3}, {4, 5, 6}}];
+
+  mat = Matrix[{a, b}, {c, -a}];
+  NCTest[MatrixToList[mat], {{a, b}, {c, -a}}];
+
+  NCTest[MatrixToList[mat, Infinity], 
+         {{MatrixToList[a], MatrixToList[b]}, {MatrixToList[c], -MatrixToList[a]}}];
+
+  (* Part *)
+
+  (* return lists *)
+  a = Matrix[{{5/2, 2}, {3, 4}}];
+  NCTest[Part[a, 1], {5/2,2}];
+  NCTest[Part[a, 1, 1], 5/2];
+  NCTest[a[[2]], {3,4}];
+  NCTest[a[[2, 2]], 4];
+  NCTest[a[[2]][[2]], 4];
+  NCTest[Part[a, {1, 2}, 1], {5/2,3}];
+  NCTest[Part[a, All, 1], {5/2,3}];
+  NCTest[Part[a, 1, {1,2}], {5/2,2}];
+  NCTest[Part[a, 1, All], {5/2,2}];
+
+  (* return Matrix *)
+  NCTest[Part[a, {1, 2}], a];
+  NCTest[Part[a, {1, 2}, {1}], Matrix[{5/2},{3}]];
+  NCTest[Part[a, All, {1}], Matrix[{5/2},{3}]];
+  NCTest[Part[a, All, {1, 2}], a];
+  NCTest[Part[a, {1}, All], Matrix[{5/2,2}]];
+
+  (* assignment *)
+  a[[1, 2]] = 3;
+  NCTest[a, Matrix[{5/2,3},{3,4}]];
+
+  (* Arithmetic *)
+
+  NCTest[a + b + c, Matrix[Plus@@Map[MatrixToList, {a,b,c}]]];
+  NCTest[c^2, Matrix[MatrixToList[c]^2]];
+  NCTest[a b, Matrix[MatrixToList[a]*MatrixToList[b]]];
+  NCTest[a/b, Matrix[MatrixToList[a]/MatrixToList[b]]];
+  NCTest[a.b, Matrix[MatrixToList[a].MatrixToList[b]]];
+  NCTest[a+b.c, Matrix[MatrixToList[a]+MatrixToList[b].MatrixToList[c]]];
+
+  (* Preserve when not numeric *)
+  NCTest[Head[a + b + z], Plus];
+  NCTest[Head[a.z.b], Dot];
+
+  (* Array Flatten *)
+
+  a = Matrix[{{5/2, 2}, {3, 4}}];
+  b = Matrix[{{5, 6}, {7, 8}}];
+  c = Matrix[{{2, -1}, {2, 1}}];
+  d = Matrix[{{1, 1}}];
+
+  NCTest[ArrayFlatten[Matrix[{a, b}]], 
+         Matrix[{{5/2, 2, 5, 6},{3, 4, 7, 8}}]]; 
+  NCTest[ArrayFlatten[Matrix[{a, b}, {c, -a}]], 
+         Matrix[{{5/2, 2, 5, 6},{3, 4, 7, 8},{2, -1, -(5/2), -2},{2, 1, -3, -4}}]];
+
+  NCTest[ArrayFlatten[Matrix[{a, Transpose[d]}]], 
+         Matrix[{{5/2, 2, 1},{3, 4, 1}}]]; 
+
+  Quiet[
+     NCTest[ArrayFlatten[Matrix[{a,d}]], $Failed];
+     NCTest[Check[ArrayFlatten[Matrix[{a,d}]], True, ArrayFlatten::match], True];
+     ,
+     {ArrayFlatten::match, Matrix::NotMatrix}
+  ];
+
+  (* NumberQ *)
+  NCTest[NumberQ[Matrix[{a, b}]], False];
+  NCTest[NumberQ[ArrayFlatten[Matrix[{a, b}]]], True];
+
+  NCTest[NumericMatrixQ[Matrix[{a, b}]], False];
+  NCTest[NumericMatrixQ[ArrayFlatten[Matrix[{a, b}]]], True];
+
+  a[[1,1]] = Sqrt[2];
+  NCTest[NumberQ[Matrix[{a, b}]], False];
+  NCTest[NumberQ[ArrayFlatten[Matrix[{a, b}]]], False];
+
+  NCTest[NumericMatrixQ[Matrix[{a, b}]], False];
+  NCTest[NumericMatrixQ[ArrayFlatten[Matrix[{a, b}]]], True];
+
+
+];

@@ -24,6 +24,9 @@ Clear[aj, tp, rt, inv, co,
       ExpandNonCommutativeMultiply,
       CommuteEverything, Commutative];
 
+CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative";
+CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative";
+
 Get["NonCommutativeMultiply.usage"];
 
 Begin[ "`Private`" ]

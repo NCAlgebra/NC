@@ -58,6 +58,8 @@ On[Assert];
 Print["> BEGIN NCTEST\n" ];
 
 tests = {
+  "Matrix",
+(*
   "NCPolynomial",
   "CommutativeQ",
   "NCMultiplication",
@@ -80,7 +82,6 @@ tests = {
   "NCMatrixDecompositions",
   "NCConvexity", 
   "NCQuadratic",
-(*
 *)
 (* {"Crit",             "Crit"}, *)
 (*

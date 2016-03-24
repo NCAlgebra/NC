@@ -69,14 +69,15 @@ MatrixDimensions::usage = "MatrixDimensions[m] provides Dimensions that accounts
 
 Clear[MatrixProductDimensions]
 Clear[MatrixEntryDimensions]
+Clear[MatrixCompatibleDimensionsQ]
 
 
 Begin["`Private`"]; 
 
   (* Messages *)
 
-  Matrix::NotMatrix = "This is not a Matrix.";
-  Matrix::WrongDimensions="Incompatible dimensions."
+  Matrix::notamatrix = "This is not a Matrix.";
+  Matrix::wrongdimensions="Incompatible dimensions."
 
 
   (* Attributes *)
@@ -87,38 +88,134 @@ Begin["`Private`"];
   (* Constructors *)
 
   Matrix[x_?MatrixQ] := Apply[Matrix, x];
-  Matrix[x___] := Matrix[] /; !MatrixQ[{x}];
-  Matrix[] := (Message[Matrix::NotMatrix]; $Failed);
+  Matrix[x___] := Matrix[] /; !MatrixCompatibleDimensionsQ[{x}];
+  Matrix[] := (Message[Matrix::notamatrix]; $Failed);
+
+
+  (* Dimension (for List) *)
+
+  MatrixProductDimensions[a_]:=a
+  MatrixProductDimensions[{a_,b_},{c_,d_}]:=(If[b=!=c, Message[Matrix::wrongdimensions]];{a,d});
+  MatrixProductDimensions[a__,b_,c_]:=MatrixProductDimensions[a,MatrixProductDimensions[b,c]]
+
+  MatrixEntryDimensions[(a_:1)*b_Dot] :=
+      Apply[MatrixProductDimensions,Map[MatrixEntryDimensions,Apply[List,b]]];
+  (* MatrixEntryDimensions[Plus[a_Matrix,b___]]:=MatrixEntryDimensions[a]; *)
+  MatrixEntryDimensions[x_Plus] := Union[Map[MatrixEntryDimensions, Apply[List, x]]][[1]]
+  MatrixEntryDimensions[m_Matrix]:=MatrixDimensions[m];
+  MatrixEntryDimensions[exp_]:={1,1}
+
+  MatrixCompatibleDimensionsQ[m_?MatrixQ]:=
+    Module[
+      {tmp},
+      tmp=Check[Map[MatrixEntryDimensions,m,{2}],Return[False]];
+  (*
+      Print["* ", m, ", ", Apply[Equal,tmp[[All,All,1]],{1}], ", ", Apply[Equal,Transpose[tmp[[All,All,2]]],{1}]];
+   *)
+      Return[ Apply[And, Apply[Equal, tmp[[All,All,1]], {1}]] && 
+              Apply[And, Apply[Equal, Transpose[tmp[[All,All,2]]], {1}]] ]
+    ];
+  MatrixCompatibleDimensionsQ[m___]:=False;
+
+
+  (* Dimensions (for Matrix) *)
+
+  Dimensions[m_Matrix] ^:= Dimensions[MatrixToList[m]]
+
+  MatrixDimensions[m_Matrix] := Module[
+      {col=MatrixToList[m][[All,1]],row=MatrixToList[m][[1,All]]},
+  (*
+      Print["1) col = ", col, ", row = ", row];
+      Print["2) col = ", Map[MatrixEntryDimensions,col], ", row = ", Map[MatrixEntryDimensions,row]];
+      Print["3) col = ", Map[MatrixEntryDimensions,col][[All,1]], ", row = ", Map[MatrixEntryDimensions,row][[All,2]]];
+      Print["4) col = ", Apply[Plus, Map[MatrixEntryDimensions,col][[All,1]]], ", row = ", Apply[Plus, Map[MatrixEntryDimensions,row][[All,2]]]];
+   *)
+      {
+       Apply[Plus, Map[MatrixEntryDimensions,col][[All,1]] ],
+       Apply[Plus, Map[MatrixEntryDimensions,row][[All,2]] ]
+      }
+    ];
+
 
   (* Conversions *)
-  
-  MatrixToList[a_Matrix, Infinity] := ReplaceRepeated[a, x_Matrix->MatrixToList[x]];
+
+  VectorToMatrix[l_?VectorQ] := Matrix[Map[List,l]];
+  VectorToMatrix[l_?MatrixQ] := Matrix[l];
+  VectorToMatrix[l_] := l;
+
+  MatrixToList[a_Matrix, Infinity] := a //. x_Matrix->MatrixToList[x];
   MatrixToList[a_Matrix] := Apply[List,a];
 
-  (* Part *)
+  MatrixToVector[a_Matrix] := Flatten[MatrixToList[a]];
+  SymmetricMatrixToVector[a_Matrix] := Module[
+      {m, n},
 
-  Clear[MatrixPartAux];
-  MatrixPartAux[x_?MatrixQ] := Matrix[x];
-  MatrixPartAux[x_] := x;
-  
-  Part[m_Matrix, i_, j_] ^:= MatrixPartAux[Part[MatrixToList[m], i, j]];
+      {m, n} = Dimensions[a]; 
+      Flatten[Table[a[[i, j]], {i, 1, m}, {j, 1, i}]]
+  ];
 
-  (* Dimensions *)
-
-  Dimensions[m_Matrix] ^:= Dimensions[MatrixToList[m]];
-  
   (* ArrayFlatten *)
 
   ArrayFlatten[a_Matrix] ^:= Matrix[ArrayFlatten[MatrixToList[a,Infinity]]];
-  
+
+  (* MatrixFlatten *)
+
+  MatrixFlatten[a_Matrix] := 
+      Check[Apply[Matrix,Apply[FlatMatrix,a]],a] /; Dimensions[a]=!=MatrixDimensions[a]
+  MatrixFlatten[a_] := Map[MatrixFlatten,a];
+
+
+  (* FlatMatrix *)
+
+  (* 
+   * FlatMatrix is an internal matrix that is completely flat at the level 1.
+   * MatrixFlatten operates by replacing the first level construction of Matrix 
+   * by a FlatMatrix and then reversing it back to Matrix if nothing fails.
+   *)
+
+  Clear[FlatMatrix]
+
+  (* Single Matrix Concatenate *)
+
+  FlatMatrix[{a_Matrix}] := Apply[FlatMatrix,a];
+
+  (* Vertical Concatenate *)
+
+  FlatMatrix[a___,{b_Matrix},{c_Matrix},d___] := 
+          FlatMatrix[a,{Apply[Matrix,NCAppendColumns[MatrixToList[b],MatrixToList[c]]]},d];
+  FlatMatrix[a___,{b_Matrix},c___] :=
+    Apply[FlatMatrix[a,##,c]&,b];
+
+  (* Horizontal Concatenate *)
+
+  FlatMatrix[a___,{b___,c_Matrix,d_Matrix,e___},f___] :=
+          FlatMatrix[a,{b,Apply[Matrix,NCAppendRows[MatrixToList[c],MatrixToList[d]]],e},f];
+  FlatMatrix[a___,{b___,c_Matrix,d___},e___] :=
+          Apply[FlatMatrix[a,{b,##,d},e]&,c[[1]]] /; MatrixDimensions[c][[1]] == 1;
+
+
+  (* Part *)
+
+  Part[m_Matrix, i_, j_] ^:= VectorToMatrix[Part[MatrixToList[m], i, j]]
+
+
   (* Numeric tests *)
+
+  (*
+  NumberQ[a_Matrix] ^:= Apply[And, Flatten[Map[NumberQ, MatrixToList[a], {2}]]]
+
+  NumericMatrixQ[a_Matrix] := Apply[And, Flatten[Map[NumericQ, MatrixToList[a], {2}]]]
+  NumericMatrixQ[a_] := False;
+  *)
 
   NumberQ[a_Matrix] ^:= MatrixQ[MatrixToList[a], NumberQ];
 
-  NumericMatrixQ[a_Matrix] := MatrixQ[MatrixToList[a], NumericQ];
+  NumericMatrixQ[a_Matrix] := MatrixQ[MatrixToList[a], NumberQ];
   NumericMatrixQ[a_] := False;
 
-  ZeroQ[a_Matrix] ^:= Apply[And, Flatten[Map[PossibleZeroQ, MatrixToList[a], {2}]]];
+
+  ZeroQ[a_Matrix] ^:= Apply[And, Flatten[Map[(# === 0) &, MatrixToList[a], {2}]]];
+
 
   (* Ouput *)
 
@@ -126,9 +223,23 @@ Begin["`Private`"];
 
   Format[x_Matrix, StandardForm] ^:= MatrixForm[x]
 
-  
+
   (* Arithmetic Operations *)
 
+
+  (* Plus *)
+
+  (* Prevents addition with different sizes
+
+  Matrix /: 
+    Plus[a_Matrix, (c : 1)*b_NonCommutativeMultiply] := $Failed /; 
+      SameEntries[Map[MatrixDimensions, {a, b}]] == -1
+
+  Plus[a_Matrix, b_Matrix] ^:= $Failed /; 
+      SameEntries[Map[MatrixDimensions, {a, b}]] == -1
+  *)
+
+  (* General rule *)
   Plus[a_Matrix, b_Matrix] ^:= Matrix[Plus[MatrixToList[a], MatrixToList[b]]];
 
   Times[a_Matrix, b_Matrix] ^:= Matrix[Times[MatrixToList[a], MatrixToList[b]]];
@@ -211,10 +322,6 @@ Begin["`Private`"];
   SchurDecomposition[a_Matrix, b_Matrix] ^:= Map[Matrix, SchurDecomposition[{MatrixToList[a], MatrixToList[b]}]];
 
   JordanDecomposition[a_Matrix] ^:= Map[Matrix, JordanDecomposition[MatrixToList[a]]];
-  
-  
-
-
 
 End[];
 
