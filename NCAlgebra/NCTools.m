@@ -23,7 +23,7 @@
 *)
 
 BeginPackage[ "NCTools`", (* "NCMonomial`", *)
-     "NonCommutativeMultiply`", "NCSubstitute`" ]
+     "NonCommutativeMultiply`", "NCReplace`" ]
 
 Options[ NCHighestDegreePosition ] := 
      {NCHDPdebug->False, factorsdebug->False};

@@ -148,12 +148,14 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
    Print["NCCollect.m loaded"];
    Off[NCCollect`NCDecompose::notsum, NCCollect`NCCollect::notsum];
 
-   Get["NCSubstitute.m"];
-   Print["NCSubstitute.m loaded"];
+   Get["NCReplace.m"];
+   Print["NCReplace.m loaded"];
    Get["NCMonomial.m"];
    Print["NCMonomial.m loaded"];
+   (*
    Get["NCSolve.m"];
    Print["NCSolve.m loaded"];
+   *)
 
    (*#####*)
    Get["NCTools.m"];   (* David Hurst Package *)
@@ -164,14 +166,14 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
 
    (*#####*)
    (* SIMPLIFY COMMANDS- USE PRE STORED RULES    *)
-   Get["NC2SimplifyRational.m"];
-   Print["NC2SimplifyRational.m loaded"];
-   Get["NC1SimplifyRational.m"];
-   Print["NC1SimplifyRational.m loaded"];
-   (* NOT SUPPORTED  Get["NC0SimplifyRational.m"];        *)
-   (* Print["NC0SimplifyRational.m loaded"];  *)
    Get["NCSimplifyRational.m"];
    Print["NCSimplifyRational.m loaded"];
+   (*
+   Get["NC1SimplifyRational.m"];
+   Print["NC1SimplifyRational.m loaded"];
+   Get["NCSimplifyRational.m"];
+   Print["NCSimplifyRational.m loaded"];
+   *)
 
   (*#################################################*)
   (* Pakages which do fancy things     *)    
@@ -208,12 +210,13 @@ If[ Not[$NC$Loaded$NCAlgebra$===True],
      Print["NCTaylorCoeff.m loaded"]; 
   *)
 
-  Get["NCConvexity.m"]; (* Inserted Aug 16 2001 *)
-  Get["NCGuts.m"];      (* Inserted Aug 16 2001 *)
-  Print["NCConvexity.m and NCGuts.m loaded"];
+  (* Get["NCConvexity.m"]; ( * Inserted Aug 16 2001 * )
+     Get["NCGuts.m"];      ( * Inserted Aug 16 2001 * )
+     Print["NCConvexity.m and NCGuts.m loaded"];
 
   Get["NCRealizationFunctions.m"];
   Print["NCRealizationFunctions.m loaded"];
+  *)
 
   (*#################################################*)
   (*   TeX production *) 
