@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     51136,       1904]
-NotebookOptionsPosition[     47601,       1783]
-NotebookOutlinePosition[     48303,       1808]
-CellTagsIndexPosition[     48260,       1805]
+NotebookDataLength[     45606,       1784]
+NotebookOptionsPosition[     42105,       1664]
+NotebookOutlinePosition[     42823,       1689]
+CellTagsIndexPosition[     42780,       1686]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -39,20 +39,14 @@ Cell[CellGroupData[{
 
 Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
 \>"], "Print",
- CellChangeTimes->{
-  3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
-   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.6677851310071487`*^9}],
+ CellChangeTimes->{3.667842069632285*^9, 3.667842924317585*^9}],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>"}],
-  SequenceForm["  ", "/Users/mauricio/NC"],
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/home/mauricio/NC\"\>"}],
+  SequenceForm["  ", "/home/mauricio/NC"],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
-   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.667785131010635*^9}],
+ CellChangeTimes->{3.667842069632285*^9, 3.667842924318069*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -62,67 +56,7 @@ Cell[BoxData[
   "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
    "\"<< NCGB`\" to load NCGB."],
   Editable->False]], "Print",
- CellChangeTimes->{
-  3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
-   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.667785131013871*^9}],
-
-Cell["\<\
-------------------------------------------------------------
-NCAlgebra - Version 4.0.7
-Compatible with Mathematica Version 9
-
-Authors:
-  J. William Helton*
-  Mauricio de Oliveira* 
-  Mark Stankus* 
-  Robert L. Miller#
-
-* Math Dept, UCSD                
-# General Atomics Corp
-  La  Jolla, CA 92093
-
-Copyright: 
-  Helton and Miller June 1991
-  Helton 2002
-  All rights reserved.
-
-The program was written by the authors and by:
-  David Hurst, Daniel Lamm, Orlando Merino, Robert Obar,
-  Henry Pfister, Mike Walker, John Wavrik, Lois Yu,
-  J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple. 
-  The beginnings of the program come from eran@slac.
-  Considerable recent help came from Igor Klep.
-
-
-This program was written with support from 
-  AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
-  UCSD Faculty Mentor Program,
-  and US Department of Education.
-  Primary support in 2010 is from the 
-    NSF Division of Mathematical Sciences.
-
-If you 
-  (1) are a user, 
-  (2) want to be a user, 
-  (3) refer to NCAlgebra in a publication, or 
-  (4) have had an interesting experience with NCAlgebra,
-let us know by sending an e-mail message to  
-
-  ncalg@math.ucsd.edu. 
-
-We do not want to restrict access to NCAlgebra, but do 
-  want to keep track of how it is being used.
-
-For NCAlgebra updates see the web page:
-
-  www.math.ucsd.edu/~ncalg 
-------------------------------------------------------------\
-\>", "Print",
- CellChangeTimes->{
-  3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
-   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.667785131017901*^9}]
+ CellChangeTimes->{3.667842069632285*^9, 3.667842924318533*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -376,8 +310,7 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.667778826391745*^9, 3.667778978500182*^9, 
-  3.6677849122430973`*^9, 3.667784991323173*^9, 3.6677851310882893`*^9}]
+ CellChangeTimes->{3.667842074510086*^9, 3.667842924441532*^9}]
 }, Open  ]],
 
 Cell["We first apply the following rules", "Text",
@@ -472,11 +405,7 @@ Cell[BoxData[
        SuperscriptBox["Y", "\<\"-1\"\>"],
        HoldForm]}],
      HoldForm]}]}], "}"}]], "Output",
- CellChangeTimes->{{3.6677788894226093`*^9, 3.6677789268002*^9}, {
-   3.667778965594521*^9, 3.667778979927361*^9}, 3.667779045590357*^9, {
-   3.667779376353683*^9, 3.6677793961411257`*^9}, 3.667780124783319*^9, {
-   3.667780806718728*^9, 3.667780832391281*^9}, 3.667784914313961*^9, 
-   3.667784992516004*^9, 3.667785131121544*^9}]
+ CellChangeTimes->{3.667842083621294*^9, 3.667842924458467*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -639,11 +568,7 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{{3.667778908578855*^9, 3.6677789318534403`*^9}, {
-   3.667778962747386*^9, 3.66777898313643*^9}, 3.6677790466747*^9, {
-   3.667779379432206*^9, 3.6677793978673067`*^9}, 3.667779655348401*^9, 
-   3.6677801264760942`*^9, 3.667780835141878*^9, 3.6677849159865313`*^9, 
-   3.667784993824153*^9, 3.667785131155178*^9}]
+ CellChangeTimes->{3.667842085207254*^9, 3.667842924476286*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -811,12 +736,7 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{{3.667779126456229*^9, 3.667779144184197*^9}, 
-   3.667779403646282*^9, 3.6677794664011917`*^9, {3.6677795146421127`*^9, 
-   3.667779575478354*^9}, 3.667779656770178*^9, 3.66778012995518*^9, {
-   3.667780673215419*^9, 3.667780681464965*^9}, {3.667780787651993*^9, 
-   3.66778079607474*^9}, 3.667780836295616*^9, 3.667784918033352*^9, 
-   3.667784995806465*^9, 3.6677851311869707`*^9}]
+ CellChangeTimes->{3.6678421113282843`*^9, 3.6678429244967327`*^9}]
 }, Open  ]],
 
 Cell["We repeat collecting this time on B1 ** tp[B1]", "Text",
@@ -981,11 +901,7 @@ Cell[BoxData[
      SuperscriptBox["C2", "\<\"T\"\>"],
      HoldForm], ".", "C2"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.66777960848914*^9, {3.6677796586945133`*^9, 3.6677796643876677`*^9}, 
-   3.6677801341668873`*^9, 3.6677806833935423`*^9, {3.667780772799699*^9, 
-   3.667780803342712*^9}, 3.667780837593197*^9, 3.667784929679222*^9, 
-   3.667784997837001*^9, 3.667785131208438*^9}]
+ CellChangeTimes->{3.667842133457876*^9, 3.667842924516409*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1040,14 +956,7 @@ Cell[BoxData[
    TagBox[
     SuperscriptBox["Y", "\<\"-1\"\>"],
     HoldForm]}]}]], "Output",
- CellChangeTimes->{
-  3.4734530907341843`*^9, 3.516626476123714*^9, 3.657808517129106*^9, 
-   3.657808582066615*^9, 3.667779830339714*^9, 3.667779905404694*^9, 
-   3.667779936926009*^9, 3.667779970284046*^9, {3.667780186205102*^9, 
-   3.667780194918648*^9}, {3.667780227439707*^9, 3.667780338377569*^9}, {
-   3.667780465468699*^9, 3.667780496448792*^9}, {3.667780542771467*^9, 
-   3.667780650181858*^9}, 3.6677806891499643`*^9, {3.667780839616827*^9, 
-   3.667780858303988*^9}, 3.667785003632414*^9, 3.6677851312407312`*^9}],
+ CellChangeTimes->{3.667842150223138*^9, 3.667842924533473*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -1149,14 +1058,7 @@ Cell[BoxData[
      SuperscriptBox["C2", "\<\"T\"\>"],
      HoldForm], ".", "C2"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.4734530907341843`*^9, 3.516626476123714*^9, 3.657808517129106*^9, 
-   3.657808582066615*^9, 3.667779830339714*^9, 3.667779905404694*^9, 
-   3.667779936926009*^9, 3.667779970284046*^9, {3.667780186205102*^9, 
-   3.667780194918648*^9}, {3.667780227439707*^9, 3.667780338377569*^9}, {
-   3.667780465468699*^9, 3.667780496448792*^9}, {3.667780542771467*^9, 
-   3.667780650181858*^9}, 3.6677806891499643`*^9, {3.667780839616827*^9, 
-   3.667780858303988*^9}, 3.667785003632414*^9, 3.667785131244273*^9}]
+ CellChangeTimes->{3.667842150223138*^9, 3.667842924534382*^9}]
 }, Open  ]],
 
 Cell["We then collect on B1 and C2", "Text",
@@ -1250,9 +1152,7 @@ Cell[BoxData[
      SuperscriptBox["B2", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{{3.66778070677829*^9, 3.66778072189402*^9}, {
-   3.6677808463879633`*^9, 3.667780863392694*^9}, 3.667785005633545*^9, 
-   3.667785131291198*^9}]
+ CellChangeTimes->{3.667842172785706*^9, 3.667842924555934*^9}]
 }, Open  ]],
 
 Cell["and finally on inv[1 - X ** Y]", "Text",
@@ -1325,8 +1225,7 @@ Cell[BoxData[
      SuperscriptBox["B2", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.667780746853936*^9, 3.667780869509776*^9, 
-  3.667785013312831*^9, 3.667785131323183*^9}]
+ CellChangeTimes->{3.667842187003962*^9, 3.667842924581616*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1498,9 +1397,7 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.473453104149049*^9, 3.516626482648312*^9, 
-  3.6578085358137093`*^9, 3.657808582216795*^9, 3.667780884984418*^9, 
-  3.66778502802024*^9, 3.6677851313567944`*^9}]
+ CellChangeTimes->{3.66784220453965*^9, 3.667842924610012*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1572,9 +1469,7 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.473453106679563*^9, 3.516626484630175*^9, 
-  3.657808538344563*^9, 3.657808582266328*^9, 3.66778095654265*^9, 
-  3.6677850298328657`*^9, 3.667785131389511*^9}]
+ CellChangeTimes->{3.6678422162573338`*^9, 3.667842924657469*^9}]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1660,11 +1555,7 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.4734531089853888`*^9, 3.516626489514041*^9, 3.657808547920472*^9, 
-   3.657808582315248*^9, {3.6677809813186903`*^9, 3.6677811024300833`*^9}, 
-   3.667781142255151*^9, 3.667781230342038*^9, 3.667781294267284*^9, 
-   3.6677813372206383`*^9, 3.667785032203332*^9, 3.667785131406498*^9}]
+ CellChangeTimes->{3.667842924678982*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1685,11 +1576,7 @@ Cell[BoxData[
   TagBox[
    RowBox[{"X", ".", "B2"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.473453113371993*^9, 3.5166264955974627`*^9, {3.657808564482058*^9, 
-   3.657808582516017*^9}, 3.6677811240580273`*^9, {3.667781238016924*^9, 
-   3.667781252631535*^9}, 3.667781299569923*^9, 3.667781338611538*^9, 
-   3.6677851314408417`*^9}]
+ CellChangeTimes->{3.667842924703095*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1713,9 +1600,7 @@ Cell[BoxData[
      SuperscriptBox["Y", "\<\"-1\"\>"],
      HoldForm], ".", "B1"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.667781253281665*^9, {3.6677813007318983`*^9, 3.667781340350264*^9}, 
-   3.667785131473777*^9}]
+ CellChangeTimes->{3.6678429247295637`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1769,11 +1654,7 @@ Cell[BoxData[
          HoldForm], ".", "X"}],
        HoldForm]}], ")"}]}],
    HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.473453115887994*^9, 3.516626496945924*^9, {3.657808566615115*^9, 
-   3.657808582566105*^9}, {3.66778113326445*^9, 3.6677811450691338`*^9}, 
-   3.6677812128351393`*^9, 3.667781267681603*^9, {3.6677813335421886`*^9, 
-   3.667781342011949*^9}, 3.6677851315069036`*^9}]
+ CellChangeTimes->{3.6678429247559357`*^9}]
 }, Open  ]],
 
 Cell["This is about as good as I can do.", "Text",
@@ -1782,8 +1663,8 @@ Cell["This is about as good as I can do.", "Text",
 }, Open  ]]
 },
 AutoGeneratedPackage->None,
-WindowSize->{1229, 696},
-WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+WindowSize->{1590, 1344},
+WindowMargins->{{179, Automatic}, {Automatic, -10}},
 DockedCells->(FrontEndExecute[{
    FrontEnd`NotebookApply[
     FrontEnd`InputNotebook[], #, Placeholder]}]& ),
@@ -1791,8 +1672,8 @@ PrintingPageRange->{Automatic, Automatic},
 PrintingOptions->{"Magnification"->1,
 "PaperOrientation"->"Portrait",
 "PaperSize"->{612, 792}},
-FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
-2015)",
+Magnification:>1.25 Inherited,
+FrontEndVersion->"10.2 for Linux x86 (64-bit) (July 29, 2015)",
 StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
@@ -1808,102 +1689,101 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[567, 22, 53, 0, 90, "Title"],
+Cell[567, 22, 53, 0, 114, "Title"],
 Cell[CellGroupData[{
-Cell[645, 26, 99, 1, 66, "Section"],
+Cell[645, 26, 99, 1, 84, "Section"],
 Cell[CellGroupData[{
-Cell[769, 31, 108, 4, 53, "Input"],
+Cell[769, 31, 108, 4, 72, "Input"],
 Cell[CellGroupData[{
-Cell[902, 39, 336, 5, 22, "Print"],
-Cell[1241, 46, 425, 8, 21, "Print"],
-Cell[1669, 56, 564, 11, 22, "Print"],
-Cell[2236, 69, 1675, 55, 707, "Print"]
+Cell[902, 39, 157, 2, 28, "Print"],
+Cell[1062, 43, 246, 5, 28, "Print"],
+Cell[1311, 50, 387, 8, 28, "Print"]
 }, Open  ]]
 }, Open  ]],
-Cell[3938, 128, 278, 5, 49, "Text"],
-Cell[4219, 135, 131, 2, 38, "Input"]
+Cell[1725, 62, 278, 5, 67, "Text"],
+Cell[2006, 69, 131, 2, 50, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4387, 142, 34, 0, 66, "Section"],
-Cell[4424, 144, 125, 1, 30, "Text"],
-Cell[4552, 147, 573, 14, 72, "Input"],
-Cell[5128, 163, 111, 1, 30, "Text"],
+Cell[2174, 76, 34, 0, 84, "Section"],
+Cell[2211, 78, 125, 1, 40, "Text"],
+Cell[2339, 81, 573, 14, 101, "Input"],
+Cell[2915, 97, 111, 1, 40, "Text"],
 Cell[CellGroupData[{
-Cell[5264, 168, 2112, 57, 89, "Input"],
-Cell[7379, 227, 3683, 152, 61, "Output"]
+Cell[3051, 102, 2112, 57, 126, "Input"],
+Cell[5166, 161, 3610, 151, 80, "Output"]
 }, Open  ]],
-Cell[11077, 382, 215, 3, 30, "Text"],
+Cell[8791, 315, 215, 3, 40, "Text"],
 Cell[CellGroupData[{
-Cell[11317, 389, 1017, 28, 37, "Input"],
-Cell[12337, 419, 1625, 59, 44, "Output"]
+Cell[9031, 322, 1017, 28, 50, "Input"],
+Cell[10051, 352, 1357, 55, 56, "Output"]
 }, Open  ]],
-Cell[13977, 481, 214, 4, 30, "Text"],
+Cell[11423, 410, 214, 4, 40, "Text"],
 Cell[CellGroupData[{
-Cell[14216, 489, 243, 5, 37, "Input"],
-Cell[14462, 496, 3711, 149, 61, "Output"]
+Cell[11662, 418, 243, 5, 50, "Input"],
+Cell[11908, 425, 3442, 145, 80, "Output"]
 }, Open  ]],
-Cell[18188, 648, 264, 5, 30, "Text"],
+Cell[15365, 573, 264, 5, 40, "Text"],
 Cell[CellGroupData[{
-Cell[18477, 657, 425, 8, 37, "Input"],
-Cell[18905, 667, 3882, 151, 66, "Output"]
+Cell[15654, 582, 425, 8, 50, "Input"],
+Cell[16082, 592, 3546, 146, 86, "Output"]
 }, Open  ]],
-Cell[22802, 821, 130, 1, 30, "Text"],
+Cell[19643, 741, 130, 1, 40, "Text"],
 Cell[CellGroupData[{
-Cell[22957, 826, 295, 7, 37, "Input"],
-Cell[23255, 835, 3850, 152, 66, "Output"]
+Cell[19798, 746, 295, 7, 50, "Input"],
+Cell[20096, 755, 3626, 148, 86, "Output"]
 }, Open  ]],
-Cell[27120, 990, 337, 7, 87, "Text"],
+Cell[23737, 906, 337, 7, 121, "Text"],
 Cell[CellGroupData[{
-Cell[27482, 1001, 413, 7, 53, "Input"],
-Cell[27898, 1010, 1238, 39, 41, "Output"],
-Cell[29139, 1051, 2851, 107, 64, "Output"]
+Cell[24099, 917, 413, 7, 72, "Input"],
+Cell[24515, 926, 777, 32, 52, "Output"],
+Cell[25295, 960, 2392, 100, 83, "Output"]
 }, Open  ]],
-Cell[32005, 1161, 182, 2, 30, "Text"],
+Cell[27702, 1063, 182, 2, 40, "Text"],
 Cell[CellGroupData[{
-Cell[32212, 1167, 302, 7, 37, "Input"],
-Cell[32517, 1176, 1930, 78, 44, "Output"]
+Cell[27909, 1069, 302, 7, 50, "Input"],
+Cell[28214, 1078, 1830, 76, 56, "Output"]
 }, Open  ]],
-Cell[34462, 1257, 139, 2, 30, "Text"],
+Cell[30059, 1157, 139, 2, 40, "Text"],
 Cell[CellGroupData[{
-Cell[34626, 1263, 281, 7, 37, "Input"],
-Cell[34910, 1272, 1328, 56, 44, "Output"]
+Cell[30223, 1163, 281, 7, 50, "Input"],
+Cell[30507, 1172, 1281, 55, 56, "Output"]
 }, Open  ]],
-Cell[36253, 1331, 301, 6, 30, "Text"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[36591, 1342, 35, 0, 66, "Section"],
-Cell[CellGroupData[{
-Cell[36651, 1346, 89, 1, 38, "Input"],
-Cell[36743, 1349, 3729, 153, 61, "Output"]
-}, Open  ]],
-Cell[40487, 1505, 255, 5, 30, "Text"],
-Cell[CellGroupData[{
-Cell[40767, 1514, 118, 1, 38, "Input"],
-Cell[40888, 1517, 1427, 59, 41, "Output"]
-}, Open  ]],
-Cell[42330, 1579, 100, 4, 42, "Text"],
-Cell[42433, 1585, 131, 4, 29, "Text"]
+Cell[31803, 1230, 301, 6, 40, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[42601, 1594, 44, 0, 66, "Section"],
+Cell[32141, 1241, 35, 0, 84, "Section"],
 Cell[CellGroupData[{
-Cell[42670, 1598, 240, 3, 38, "Input"],
-Cell[42913, 1603, 1630, 63, 44, "Output"]
+Cell[32201, 1245, 89, 1, 50, "Input"],
+Cell[32293, 1248, 3609, 151, 80, "Output"]
 }, Open  ]],
-Cell[44558, 1669, 90, 2, 30, "Text"],
+Cell[35917, 1402, 255, 5, 40, "Text"],
 Cell[CellGroupData[{
-Cell[44673, 1675, 161, 2, 38, "Input"],
-Cell[44837, 1679, 422, 12, 41, "Output"]
+Cell[36197, 1411, 118, 1, 50, "Input"],
+Cell[36318, 1414, 1312, 57, 52, "Output"]
+}, Open  ]],
+Cell[37645, 1474, 100, 4, 55, "Text"],
+Cell[37748, 1480, 131, 4, 38, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[45296, 1696, 260, 6, 37, "Input"],
-Cell[45559, 1704, 340, 13, 41, "Output"]
+Cell[37916, 1489, 44, 0, 84, "Section"],
+Cell[CellGroupData[{
+Cell[37985, 1493, 240, 3, 50, "Input"],
+Cell[38228, 1498, 1363, 59, 56, "Output"]
+}, Open  ]],
+Cell[39606, 1560, 90, 2, 40, "Text"],
+Cell[CellGroupData[{
+Cell[39721, 1566, 161, 2, 50, "Input"],
+Cell[39885, 1570, 199, 8, 52, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[45936, 1722, 238, 3, 38, "Input"],
-Cell[46177, 1727, 1289, 48, 44, "Output"]
+Cell[40121, 1583, 260, 6, 50, "Input"],
+Cell[40384, 1591, 265, 11, 52, "Output"]
 }, Open  ]],
-Cell[47481, 1778, 92, 1, 30, "Text"]
+Cell[CellGroupData[{
+Cell[40686, 1607, 238, 3, 50, "Input"],
+Cell[40927, 1612, 1043, 44, 56, "Output"]
+}, Open  ]],
+Cell[41985, 1659, 92, 1, 40, "Text"]
 }, Open  ]]
 }, Open  ]]
 }
