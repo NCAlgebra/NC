@@ -24,6 +24,7 @@ BeginPackage[ "NCSimplifyRational`",
               "NonCommutativeMultiply`" ];
 
 Clear[NCNormalizeInverse, 
+      NCSimplifyRationalSinglePass,
       NCSimplifyRational];
 
 Get["NCSimplifyRational.usage"];
@@ -95,14 +96,17 @@ Begin["`Private`"]
       
   ];
 
-  NCSimplifyRational[expr_List] := 
-     Map[NCSimplifyRational, expr];
+  NCSimplifyRationalSinglePass[expr_List] := 
+     Map[NCSimplifyRationalSinglePass, expr];
   
-  NCSimplifyRational[expr_] := Module[
+  NCSimplifyRationalSinglePass[expr_] := Module[
     {poly, rvars, rules, simpRules, tmp},
 
+    (* Normalize inverse *)
+    tmp = NCNormalizeInverse[expr];
+      
     (* Convert from rational to polynomial *)
-    {poly,rvars,rules} = NCRationalToNCPolynomial[NCNormalizeInverse[expr]];
+    {poly,rvars,rules} = NCRationalToNCPolynomial[tmp];
 
     (*
     Print["expr = ", expr];
@@ -115,7 +119,7 @@ Begin["`Private`"]
 
     (* Not rational? return *)
     If [rvars === {},
-        Return[expr];
+        Return[tmp];
     ];
       
     (* Create Rules *)
@@ -130,8 +134,10 @@ Begin["`Private`"]
 
     (* Print["tmp0 = ", tmp]; *)
 
-    (* Apply rules *)
-    Scan[(tmp = ExpandAll[ExpandNonCommutativeMultiply[NCReplaceAll[tmp, #]]])&, simpRules];
+    (* Apply rational rules *)
+      
+    Scan[(tmp = ExpandAll[ExpandNonCommutativeMultiply[
+                            NCReplaceAll[tmp, #]]])&, simpRules];
       
     (* Print["tmp1 = ", tmp]; *)
 
@@ -151,7 +157,10 @@ Begin["`Private`"]
     Return[tmp];
       
   ];
-        
+
+  NCSimplifyRational[expr_] := 
+     FixedPoint[NCSimplifyRationalSinglePass, expr];
+  
 End[];
 
 EndPackage[];

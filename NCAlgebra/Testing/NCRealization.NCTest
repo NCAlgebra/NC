@@ -1,4 +1,4 @@
-(* :Title: NCRealizationFunctions.NCTest *)
+(* :Title: NCRealization.NCTest *)
 
 (* :Author: John Shopple *)
 
@@ -9,14 +9,14 @@
    
 *)
 
-<< NCRealizationFunctions`
+<< NCRealization`
 
 Module[
   {k,x,y},
 
   k = 1;
 
-  (* Print["Starting NCRealizationFunctions.NCTest"]; *)
+  (* Print["Starting NCRealization.NCTest"]; *)
      
   SetNonCommutative[x,y];
      

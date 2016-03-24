@@ -1,4 +1,4 @@
-(* : Name : NCRealizationFunctions *)
+(* : Name : NCRealization *)
 
 (* : Title : Noncommutative Descriptor Realizations *)
 
@@ -17,7 +17,7 @@ It actually computes formulas similar to those used in
       NC (symmetric) rational
       functions, and determinental representations of polynomials. *)
 
-(* : Context : NCRealizationFunctions` *)
+(* : Context : NCRealization` *)
 
 (* : History : Originally written in summer 2003 and summer 2004
     :3/13/13: Deprecated LinearAlgebra`MatrixManipulation`. (mauricio)
@@ -30,7 +30,7 @@ Noncommutative Convexity Arises From Linear Matrix Inequalities
       by J. William Helton, Scott A. McCullough, and Victor Vinnikov *)
 
 
-BeginPackage["NCRealizationFunctions`", 
+BeginPackage["NCRealization`", 
 	     "NonCommutativeMultiply`", 
 	     "NCMatMult`",
 	     "NCLinearAlgebra`"]
@@ -203,7 +203,7 @@ NCSymmetricDeterminantalRepresentationDirect::usage = \
 
 (********** Optional Argument Definitions **********)
 
-Options[NCRealizationFunctions] = {Verbose -> False, 
+Options[NCRealization] = {Verbose -> False, 
       FloatingPointPrecision -> 20};
 Options[NCFormControllabilityColumns] = {ReturnWordList -> False};
 Options[RJRTDecomposition] = {UseFloatingPoint -> True};
@@ -567,7 +567,7 @@ NCMakeMonic[{CC_, Pencil_, BB_}, Unknowns_] := Module[{A, A0inv},
 (********** NCFormLettersFromPencil **********)
 
 NCFormLettersFromPencil[A_List, B_, opts___] := Module[{A0inv},
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions], 
+      If[Verbose /. {opts} /. Options[NCRealization], 
         Print["Finding inverse of monic (affine) term"]];
       A0inv = Inverse[A[[1]]];
       {Map[MatMult[A0inv, #] &, Rest[A]], MatMult[A0inv, B]}];
@@ -598,7 +598,7 @@ NCFormControllabilityColumns[A_List, B_, opts___] := Module[
       NeedToCheck = False;
       WordLength = WordLength + 1;
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+      If[Verbose /. {opts} /. Options[NCRealization],
         Print["While NeedToCheck, WordLength = ", WordLength]];
       
       
@@ -607,7 +607,7 @@ NCFormControllabilityColumns[A_List, B_, opts___] := Module[
             Select[ListOfColumnWords, Length[#] == WordLength - 1 &], 1], 1];
       
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions], 
+      If[Verbose /. {opts} /. Options[NCRealization], 
         Print[CandidateColumnWords]];
       
       For[j = 1, j <= Length[CandidateColumnWords], j = j + 1,
@@ -647,7 +647,7 @@ NCMinimalDescriptorRealization[rat_, unknowns_, opts___] :=
     Module[{C, Pencil, B, ReduceUsingControllability, Gm, Cm, Bm},
       
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+      If[Verbose /. {opts} /. Options[NCRealization],
         Print["Finding some descriptor realization"]];
       {C, Pencil, B} = NCDescriptorRealization[rat, unknowns];
       (* Note : C, B column vectors *)
@@ -675,7 +675,7 @@ NCMinimalDescriptorRealization[rat_, unknowns_, opts___] :=
           A0 = IdentityMatrix[ MinimalSize ];
           
           MultByUnknown[Z_, x_] := Map[# ** x &, Qinv.Z.Q, {2}];
-          If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+          If[Verbose /. {opts} /. Options[NCRealization],
             Print["Reduced to size ", MinimalSize, " by ", MinimalSize]];
           
           
@@ -696,13 +696,13 @@ NCMinimalDescriptorRealization[rat_, unknowns_, opts___] :=
       
       (*** Reduce using Controllability Space ***)
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+      If[Verbose /. {opts} /. Options[NCRealization],
         Print["Reducing using controllability"]];
       {Cm, Gm, Bm} = ReduceUsingControllability[C, Pencil, B];
       
       (*** Reduce using Observability Space ***)
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+      If[Verbose /. {opts} /. Options[NCRealization],
         Print["Reducing using observability"]];
       {Bm, Gm, Cm} = 
         ReduceUsingControllability[Transpose[Bm], Transpose[Gm], 
@@ -731,7 +731,7 @@ default or else the decomposition may not be accurate. ***)
       If[UseFloatingPoint /. {opts} /. Options[RJRTDecomposition],
         UseMat = 
           N[Mat, FloatingPointPrecision /. {opts} /. 
-              Options[NCRealizationFunctions]],
+              Options[NCRealization]],
         UseMat = Mat];
       
       EVecs = Eigenvectors[UseMat];
@@ -752,7 +752,7 @@ NCSymmetrizeMinimalDescriptorRealization[{Cmm_, Gmm_, Bmm_}, unknowns_,
     Module[{A, B, AA, CC, Temp, ListOfColumnWords, AWordsTimesVector, Y, Z, S,
          R, J, Ctilda, Atilda, TransposeInverseR},
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+      If[Verbose /. {opts} /. Options[NCRealization],
         Print["Symmetrizing"]];
       
       AWordsTimesVector[word_List, A_, V_] := 
@@ -775,11 +775,11 @@ NCSymmetrizeMinimalDescriptorRealization[{Cmm_, Gmm_, Bmm_}, unknowns_,
       Z = 
         NCAppendRows @@ Map[AWordsTimesVector[#, AA, CC] &, ListOfColumnWords];
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+      If[Verbose /. {opts} /. Options[NCRealization],
         Print["Taking inverse of size ", Length[Y], " Matrix"]];
       S = Z.Inverse[Y] // Simplify;
       
-      If[Verbose /. {opts} /. Options[NCRealizationFunctions],
+      If[Verbose /. {opts} /. Options[NCRealization],
         Print["Finding RJR^T Decomposition"]];
       
       {R, J} = RJRTDecomposition[S, opts];
@@ -924,4 +924,4 @@ NCSymmetricDeterminantalRepresentationDirect[poly_, unknowns_, opts___] :=
 
 
 End[]
-EndPackage[]  (* NCRealizationFunctions *)
+EndPackage[]  (* NCRealization *)

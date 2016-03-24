@@ -31,6 +31,7 @@ Members are:
 
 * [NCNormalizeInverse](#NCNormalizeInverse)
 * [NCSimplifyRational](#NCSimplifyRational)
+* [NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass)
 
 ## NCNormalizeInverse {#NCNormalizeInverse}
 
@@ -41,7 +42,16 @@ See also:
 
 ## NCSimplifyRational {#NCSimplifyRational}
 
+`NCSimplifyRational[expr]` repeatedly applies `NCSimplifyRationalSinglePass` in an attempt to simplify the rational nc expression `expr`.
+
+See also:
+[NCNormalizeInverse](#NCNormalizeInverse),
+[NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass).
+
+## NCSimplifyRationalSinglePass {#NCSimplifyRationalSinglePass}
+
 `NCSimplifyRational[expr]` applies a series of rules in an attempt to simplify the rational nc expression `expr`.
 
 See also:
-[NCNormalizeInverse](#NCNormalizeInverse).
+[NCNormalizeInverse](#NCNormalizeInverse),
+[NCSimplifyRational](#NCSimplifyRational).
