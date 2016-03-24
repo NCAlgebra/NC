@@ -10,47 +10,22 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     46398,       1927]
-NotebookOptionsPosition[     42329,       1788]
-NotebookOutlinePosition[     43032,       1813]
-CellTagsIndexPosition[     42989,       1810]
+NotebookDataLength[     51136,       1904]
+NotebookOptionsPosition[     47601,       1783]
+NotebookOutlinePosition[     48303,       1808]
+CellTagsIndexPosition[     48260,       1805]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Demo Simplify", "Title",
- CellChangeTimes->{{3.473453169214683*^9, 3.4734531718811283`*^9}}],
-
-Cell["Examples", "Subtitle"],
-
-Cell["\<\
-Now we do a couple of examples.  The first example illustrates basic 
-techniques. The second example is more specialized. Many more examples
-can be found in the file SYSDOC.doc.\
-\>", "Text"],
+Cell["Simplifying a Complicated Expression", "Title"],
 
 Cell[CellGroupData[{
 
-Cell["Simplifying a Complicated Expression", "Section"],
-
-Cell["\<\
-The next example is one most people would be advised to work through.
-Note that the output of In[1] below will change based upon
-which version of NCAlgebra you have. We have not changed this
-output each time we have a new release. If the example
-does not work in any way, let us know.\
-\>", "Text"],
-
-Cell["\<\
-<<NC`
-<<NCAlgebra`\t\t\t\t\tload NCAlgebra package\
-\>", "Text",
- CellFrame->True,
- CellChangeTimes->{{3.4734530045486383`*^9, 3.473453018898425*^9}, {
-  3.51662645560964*^9, 3.516626457379026*^9}},
- Background->GrayLevel[0.849989]],
+Cell["Load NCAlgebra", "Section",
+ CellChangeTimes->{{3.667778606305125*^9, 3.667778612695224*^9}}],
 
 Cell[CellGroupData[{
 
@@ -66,7 +41,8 @@ Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
 \>"], "Print",
  CellChangeTimes->{
   3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.6578085817634163`*^9}],
+   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
+   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.6677851310071487`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -75,7 +51,8 @@ Cell[BoxData[
   Editable->False]], "Print",
  CellChangeTimes->{
   3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.657808581768037*^9}],
+   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
+   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.667785131010635*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -87,46 +64,166 @@ Cell[BoxData[
   Editable->False]], "Print",
  CellChangeTimes->{
   3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.657808581772784*^9}],
+   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
+   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.667785131013871*^9}],
 
-Cell[BoxData["\<\"You have already loaded NCAlgebra.m\"\>"], "Print",
+Cell["\<\
+------------------------------------------------------------
+NCAlgebra - Version 4.0.7
+Compatible with Mathematica Version 9
+
+Authors:
+  J. William Helton*
+  Mauricio de Oliveira* 
+  Mark Stankus* 
+  Robert L. Miller#
+
+* Math Dept, UCSD                
+# General Atomics Corp
+  La  Jolla, CA 92093
+
+Copyright: 
+  Helton and Miller June 1991
+  Helton 2002
+  All rights reserved.
+
+The program was written by the authors and by:
+  David Hurst, Daniel Lamm, Orlando Merino, Robert Obar,
+  Henry Pfister, Mike Walker, John Wavrik, Lois Yu,
+  J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple. 
+  The beginnings of the program come from eran@slac.
+  Considerable recent help came from Igor Klep.
+
+
+This program was written with support from 
+  AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
+  UCSD Faculty Mentor Program,
+  and US Department of Education.
+  Primary support in 2010 is from the 
+    NSF Division of Mathematical Sciences.
+
+If you 
+  (1) are a user, 
+  (2) want to be a user, 
+  (3) refer to NCAlgebra in a publication, or 
+  (4) have had an interesting experience with NCAlgebra,
+let us know by sending an e-mail message to  
+
+  ncalg@math.ucsd.edu. 
+
+We do not want to restrict access to NCAlgebra, but do 
+  want to keep track of how it is being used.
+
+For NCAlgebra updates see the web page:
+
+  www.math.ucsd.edu/~ncalg 
+------------------------------------------------------------\
+\>", "Print",
  CellChangeTimes->{
   3.4734530417314587`*^9, 3.516626460989294*^9, {3.657808448318091*^9, 
-   3.657808471773823*^9}, 3.657808581777134*^9}]
+   3.657808471773823*^9}, 3.6578085817634163`*^9, {3.6677848890506287`*^9, 
+   3.667784904245442*^9}, 3.6677849823635187`*^9, 3.667785131017901*^9}]
 }, Open  ]]
 }, Open  ]],
 
 Cell["\<\
-You see a new window pop out and a long list of files which NCAlgebra.m is \
-loading 
-scroll by on the screen.
-
-There may be a few changes to what is documented above.\
-\>", "Text"],
-
-Cell["\<\
-NCMessyFunction.m \t\t\tcontains several grubby functions. The variable \
-coexz1 was defined in the \t\t\t\t\t\tfile NCMessyFunction.m.
-\t\t\t\t\t\tAlso, a lot of variables are defined to be noncommutative in that \
-file. \
+The next command does nothing but beautify the screen Output.
+Be suspicious when working with parts of the output if you have used this. \
 \>", "Text",
- CellFrame->True,
- Background->GrayLevel[0.849989]],
+ CellChangeTimes->{{3.667778723674258*^9, 3.667778752633788*^9}, {
+  3.667784983492247*^9, 3.6677849844836693`*^9}}],
 
-Cell["\<\
-As an exercise let us simplify the expression named coexz1.  \
-\>", "Text"],
-
-Cell["<<NCMessyFunction.m", "Input"]
+Cell["NCSetOutput[All->True]", "Input",
+ CellChangeTimes->{{3.667778680935001*^9, 3.667778694736932*^9}, 
+   3.667778758006733*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["A first approch", "Section"],
 
+Cell["We first declare some letters noncommutative", "Text",
+ CellChangeTimes->{{3.66777876308731*^9, 3.667778783170301*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetNonCommutative", "[", 
+   RowBox[{
+   "A", ",", "C1", ",", "C2", ",", "B1", ",", "B2", ",", "XX", ",", "YY", ",",
+     "D12", ",", "D21", ",", "d12", ",", "d21", ",", "e1", ",", "e2"}], "]"}],
+   ";"}], "\n", 
+ RowBox[{
+  RowBox[{"SetNonCommutative", "[", 
+   RowBox[{"x", ",", "a", ",", "b"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"SetNonCommutative", "[", 
+   RowBox[{"X", ",", "Y"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.667778675343424*^9, 3.6677786753448973`*^9}, {
+  3.6677787888088093`*^9, 3.667778795540287*^9}}],
+
+Cell["and define a messy expression", "Text",
+ CellChangeTimes->{{3.667778797647647*^9, 3.667778819902257*^9}}],
+
 Cell[CellGroupData[{
 
-Cell["coexz1", "Input"],
+Cell[BoxData[
+ RowBox[{"messy0", "=", 
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{
+     RowBox[{"tp", "[", "C1", "]"}], "**", "C1"}]}], "-", 
+   RowBox[{"X", "**", "B2", "**", "C1"}], "-", 
+   RowBox[{
+    RowBox[{"tp", "[", "C1", "]"}], "**", 
+    RowBox[{"tp", "[", "B2", "]"}], "**", "X"}], "-", 
+   RowBox[{"X", "**", "B2", "**", 
+    RowBox[{"tp", "[", "B2", "]"}], "**", "X"}], "-", 
+   RowBox[{"X", "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "B1", "**", "C2"}], "+", 
+   RowBox[{
+    RowBox[{"inv", "[", "Y", "]"}], "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "B1", "**", "C2"}], "-", 
+   RowBox[{"X", "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "B1", "**", 
+    RowBox[{"tp", "[", "B1", "]"}], "**", "X"}], "-", 
+   RowBox[{"X", "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "Y", "**", 
+    RowBox[{"tp", "[", "C2", "]"}], "**", "C2"}], "+", 
+   RowBox[{
+    RowBox[{"inv", "[", "Y", "]"}], "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "B1", "**", 
+    RowBox[{"tp", "[", "B1", "]"}], "**", "X"}], "+", 
+   RowBox[{
+    RowBox[{"inv", "[", "Y", "]"}], "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "Y", "**", 
+    RowBox[{"tp", "[", "C2", "]"}], "**", "C2"}], "-", 
+   RowBox[{"X", "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "Y", "**", 
+    RowBox[{"tp", "[", "C2", "]"}], "**", 
+    RowBox[{"tp", "[", "B1", "]"}], "**", "X"}], "+", 
+   RowBox[{
+    RowBox[{"inv", "[", "Y", "]"}], "**", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"Y", "**", "X"}]}], "]"}], "**", "Y", "**", 
+    RowBox[{"tp", "[", "C2", "]"}], "**", 
+    RowBox[{"tp", "[", "B1", "]"}], "**", "X"}]}]}]], "Input",
+ CellChangeTimes->{{3.667778813986467*^9, 3.667778825602751*^9}, 
+   3.6677789778361683`*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -279,20 +376,123 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.473453053998631*^9, 3.516626465993039*^9, 
-  3.6578084811355267`*^9, 3.657808581853311*^9}]
+ CellChangeTimes->{3.667778826391745*^9, 3.667778978500182*^9, 
+  3.6677849122430973`*^9, 3.667784991323173*^9, 3.6677851310882893`*^9}]
 }, Open  ]],
 
-Cell["\<\
-NCForward[coexz1]\t\t\t\tApplies the basic rule     X**inv[1-Y**X] -> \
-inv[1-X**Y]**Y\
-\>", "Text",
- CellFrame->True,
- Background->GrayLevel[0.849989]],
+Cell["We first apply the following rules", "Text",
+ CellChangeTimes->{{3.667778860729887*^9, 3.667778866228003*^9}, 
+   3.6677788967556477`*^9, {3.667778948508745*^9, 3.66777894948348*^9}, 
+   3.667779341871244*^9}],
 
 Cell[CellGroupData[{
 
-Cell["NCForward[coexz1]  ", "Input"],
+Cell[BoxData[
+ RowBox[{"forward", " ", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"X", "**", 
+      RowBox[{"inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"Y", "**", "X"}]}], "]"}]}], "->", 
+     RowBox[{
+      RowBox[{"inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"X", "**", "Y"}]}], "]"}], "**", "X"}]}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"inv", "[", "Y", "]"}], "**", 
+      RowBox[{"inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"Y", "**", "X"}]}], "]"}]}], "->", 
+     RowBox[{
+      RowBox[{"inv", "[", 
+       RowBox[{"1", "-", 
+        RowBox[{"X", "**", "Y"}]}], "]"}], "**", 
+      RowBox[{"inv", "[", "Y", "]"}]}]}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.66777885956737*^9, 3.6677788885022907`*^9}, {
+  3.667778922805987*^9, 3.6677789550968037`*^9}, {3.6677790440324287`*^9, 
+  3.6677790447050943`*^9}, {3.667779345859989*^9, 3.667779395220495*^9}, {
+  3.667780084056385*^9, 3.66778008504364*^9}, {3.667780809078148*^9, 
+  3.667780831983444*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    TagBox[
+     RowBox[{"X", ".", 
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"Y", ".", "X"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm]}],
+     HoldForm], "\[Rule]", 
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"X", ".", "Y"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], ".", "X"}],
+     HoldForm]}], ",", 
+   RowBox[{
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox["Y", "\<\"-1\"\>"],
+       HoldForm], ".", 
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"Y", ".", "X"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm]}],
+     HoldForm], "\[Rule]", 
+    TagBox[
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"X", ".", "Y"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], ".", 
+      TagBox[
+       SuperscriptBox["Y", "\<\"-1\"\>"],
+       HoldForm]}],
+     HoldForm]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6677788894226093`*^9, 3.6677789268002*^9}, {
+   3.667778965594521*^9, 3.667778979927361*^9}, 3.667779045590357*^9, {
+   3.667779376353683*^9, 3.6677793961411257`*^9}, 3.667780124783319*^9, {
+   3.667780806718728*^9, 3.667780832391281*^9}, 3.667784914313961*^9, 
+   3.667784992516004*^9, 3.667785131121544*^9}]
+}, Open  ]],
+
+Cell["\<\
+We use NCReplaceAll which is a replacement for Mathematica' s ReplaceAll \
+command that works on noncommutative expresions\
+\>", "Text",
+ CellChangeTimes->{{3.6677796248233423`*^9, 3.667779654471573*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"messy1", "=", 
+  RowBox[{"NCReplaceAll", "[", 
+   RowBox[{"messy0", ",", "forward"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.667778901673251*^9, 3.667778907959701*^9}, {
+  3.667778958185027*^9, 3.667778982778481*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -439,25 +639,31 @@ Cell[BoxData[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.473453058868717*^9, 3.516626467355402*^9, 
-  3.657808487106451*^9, 3.657808581877618*^9}]
+ CellChangeTimes->{{3.667778908578855*^9, 3.6677789318534403`*^9}, {
+   3.667778962747386*^9, 3.66777898313643*^9}, 3.6677790466747*^9, {
+   3.667779379432206*^9, 3.6677793978673067`*^9}, 3.667779655348401*^9, 
+   3.6677801264760942`*^9, 3.667780835141878*^9, 3.6677849159865313`*^9, 
+   3.667784993824153*^9, 3.667785131155178*^9}]
 }, Open  ]],
 
 Cell["\<\
-NCCollect[ %, B1 ** C2 ]\t\t\tCollects the terms B1 ** C2 of the last \
-expression.\
+A glance at the last expression reveals that B1 ** C2 occurs on the outside \
+of several terms. Let us Collect these terms.\
 \>", "Text",
- CellFrame->True,
- Background->GrayLevel[0.849989]],
-
-Cell["\<\
-A glance at the last expression reveals that B1 ** C2 occurs on the outside of 
-several terms. Let us Collect these terms.\
-\>", "Text"],
+ CellChangeTimes->{{3.667779091763688*^9, 3.6677791002950974`*^9}, {
+  3.667779207353813*^9, 3.667779216757125*^9}}],
 
 Cell[CellGroupData[{
 
-Cell["NCCollect[ %, B1 ** C2 ] ", "Input"],
+Cell[BoxData[
+ RowBox[{"messy2", "=", 
+  RowBox[{"NCCollectSymmetric", "[", 
+   RowBox[{"messy1", ",", 
+    RowBox[{"B1", "**", "C2"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6677791083609467`*^9, 3.667779143190506*^9}, {
+  3.6677794646623087`*^9, 3.667779465189736*^9}, {3.6677795122973146`*^9, 
+  3.6677795750329323`*^9}, {3.6677806716964207`*^9, 3.667780672751238*^9}, {
+  3.667780786517743*^9, 3.667780795512815*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -532,14 +738,27 @@ Cell[BoxData[
    HoldForm], "+", 
   TagBox[
    RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"X", ".", "Y"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], "-", 
+      TagBox[
+       RowBox[{
         TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            TagBox[
+             RowBox[{"X", ".", "Y"}],
+             HoldForm]}], ")"}], "\<\"-1\"\>"],
+         HoldForm], ".", "X", ".", "Y"}],
+       HoldForm]}], ")"}], ".", 
     TagBox[
      SuperscriptBox["C2", "\<\"T\"\>"],
      HoldForm], ".", 
@@ -591,46 +810,28 @@ Cell[BoxData[
     TagBox[
      SuperscriptBox["B1", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
-        TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", "X", ".", "Y", ".", 
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.47345306394937*^9, 3.516626469667613*^9, 
-  3.65780850214956*^9, 3.657808581933153*^9}]
+ CellChangeTimes->{{3.667779126456229*^9, 3.667779144184197*^9}, 
+   3.667779403646282*^9, 3.6677794664011917`*^9, {3.6677795146421127`*^9, 
+   3.667779575478354*^9}, 3.667779656770178*^9, 3.66778012995518*^9, {
+   3.667780673215419*^9, 3.667780681464965*^9}, {3.667780787651993*^9, 
+   3.66778079607474*^9}, 3.667780836295616*^9, 3.667784918033352*^9, 
+   3.667784995806465*^9, 3.6677851311869707`*^9}]
 }, Open  ]],
 
-Cell["\<\
-NCSetOutput[All -> True]\t\t\tDoes nothing but beautify the screen Output
-\t\t\t\t\t\t\t\tBe suspicious when working with parts of the \t\t\t\t\t\t\t\t\
-\t\toutput if you have used this. \
-\>", "Text",
- CellFrame->True,
- CellChangeTimes->{{3.473453076584785*^9, 3.47345307915215*^9}},
- FontFamily->"Courier",
- Background->GrayLevel[0.849989]],
-
-Cell["NCSetOutput[All->True]", "Input",
- CellChangeTimes->{{3.473453068640918*^9, 3.473453074903554*^9}}],
-
-Cell["NCC is an alias for NCCollect.", "Text"],
+Cell["We repeat collecting this time on B1 ** tp[B1]", "Text",
+ CellChangeTimes->{{3.6677795900832987`*^9, 3.667779606491146*^9}}],
 
 Cell[CellGroupData[{
 
-Cell["NCC[ %%, B1 ** tp[B1] ** X ]", "Input"],
+Cell[BoxData[
+ RowBox[{"messy3", "=", 
+  RowBox[{"NCCollect", "[", 
+   RowBox[{"messy2", ",", 
+    RowBox[{"B1", "**", 
+     RowBox[{"tp", "[", "B1", "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.667779576865107*^9, 3.6677795885489607`*^9}, {
+  3.66778077175496*^9, 3.667780802864066*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -738,14 +939,27 @@ Cell[BoxData[
    HoldForm], "+", 
   TagBox[
    RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"X", ".", "Y"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], "-", 
+      TagBox[
+       RowBox[{
         TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            TagBox[
+             RowBox[{"X", ".", "Y"}],
+             HoldForm]}], ")"}], "\<\"-1\"\>"],
+         HoldForm], ".", "X", ".", "Y"}],
+       HoldForm]}], ")"}], ".", 
     TagBox[
      SuperscriptBox["C2", "\<\"T\"\>"],
      HoldForm], ".", 
@@ -766,172 +980,74 @@ Cell[BoxData[
     TagBox[
      SuperscriptBox["C2", "\<\"T\"\>"],
      HoldForm], ".", "C2"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
-        TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", "X", ".", "Y", ".", 
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.473453085869998*^9, 3.516626473463423*^9, 
-  3.657808510073395*^9, 3.657808582015122*^9}]
+ CellChangeTimes->{
+  3.66777960848914*^9, {3.6677796586945133`*^9, 3.6677796643876677`*^9}, 
+   3.6677801341668873`*^9, 3.6677806833935423`*^9, {3.667780772799699*^9, 
+   3.667780803342712*^9}, 3.667780837593197*^9, 3.667784929679222*^9, 
+   3.667784997837001*^9, 3.667785131208438*^9}]
 }, Open  ]],
 
 Cell["\<\
-Substitute[expr,rules]\t\t\tReplace one symbol or sub-expression in the \t\t\t\
-\t\t\t\t\t\t\texpression expr as specified by the rule. \
-\>", "Text",
- CellFrame->True,
- Background->GrayLevel[0.849989]],
-
-Cell["\<\
-Here we are using an approach that favors collecting pairs of terms that 
-have similar leftmost inv[1-X**Y]'s and rightmost non-inv[1-X**Y] 
+Here we are using an approach that favors collecting pairs of terms that have \
+similar leftmost inv[1-X**Y]'s and rightmost non-inv[1-X**Y] 
 parts.  And now, we are substituting the identity:
+
       inv[1-a**b]**b - inv[1-a**b]**inv[b] == -inv[b]\
-\>", "Text"],
-
-Cell[CellGroupData[{
-
-Cell["\<\
-Substitute[%, inv[1-X**Y]**X - inv[1-X**Y]**inv[Y] -> -inv[Y]] \
-\>", "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"-", 
-   TagBox[
-    RowBox[{
-     TagBox[
-      SuperscriptBox["C1", "\<\"T\"\>"],
-      HoldForm], ".", "C1"}],
-    HoldForm]}], "-", 
-  TagBox[
-   RowBox[{"X", ".", "B2", ".", "C1"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C1", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", "C2"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
-        TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", "C2"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{"X", ".", "B2", ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
-        TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
-        TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", "X", ".", "Y", ".", 
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", "C2"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
-        TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", "X", ".", "Y", ".", 
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm]}]], "Output",
- CellChangeTimes->{3.4734530907341843`*^9, 3.516626476123714*^9, 
-  3.657808517129106*^9, 3.657808582066615*^9}]
-}, Open  ]],
-
-Cell["\<\
-NCBackward[coexz1]\t\t\tapplies the basic rule        X**inv[1-Y**X] <- \
-inv[1-X**Y]**Y\
 \>", "Text",
- CellFrame->True,
- Background->GrayLevel[0.849989]],
-
-Cell["\<\
-NCBackward will cause the inv[1-X**Y] in the last two terms 
-to hide behind the X**Y, so that when we collect on inv[1-X**Y] 
-we will be extracting inv[1-X**Y] and (1-X**Y) at the same time.\
-\>", "Text"],
+ CellChangeTimes->{{3.667779744482046*^9, 3.667779762629683*^9}}],
 
 Cell[CellGroupData[{
 
-Cell["NCBackward[%]", "Input"],
+Cell["\<\
+ruleBackward = inv[1-X**Y]**X-inv[1-X**Y]**inv[Y]->-inv[Y]
+messy4=NCReplaceAll[messy3,ruleBackward]\
+\>", "Input",
+ CellChangeTimes->{{3.66777976638632*^9, 3.667779879072612*^9}, {
+   3.667779936158803*^9, 3.667779969584591*^9}, {3.667780184656486*^9, 
+   3.6677803072960873`*^9}, 3.6677803376087008`*^9, {3.667780460510928*^9, 
+   3.6677804960902576`*^9}, {3.667780537686062*^9, 3.667780649893989*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"X", ".", "Y"}],
+          HoldForm]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", "X"}],
+    HoldForm], "-", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         TagBox[
+          RowBox[{"X", ".", "Y"}],
+          HoldForm]}], ")"}], "\<\"-1\"\>"],
+      HoldForm], ".", 
+     TagBox[
+      SuperscriptBox["Y", "\<\"-1\"\>"],
+      HoldForm]}],
+    HoldForm]}], "\[Rule]", 
+  RowBox[{"-", 
+   TagBox[
+    SuperscriptBox["Y", "\<\"-1\"\>"],
+    HoldForm]}]}]], "Output",
+ CellChangeTimes->{
+  3.4734530907341843`*^9, 3.516626476123714*^9, 3.657808517129106*^9, 
+   3.657808582066615*^9, 3.667779830339714*^9, 3.667779905404694*^9, 
+   3.667779936926009*^9, 3.667779970284046*^9, {3.667780186205102*^9, 
+   3.667780194918648*^9}, {3.667780227439707*^9, 3.667780338377569*^9}, {
+   3.667780465468699*^9, 3.667780496448792*^9}, {3.667780542771467*^9, 
+   3.667780650181858*^9}, 3.6677806891499643`*^9, {3.667780839616827*^9, 
+   3.667780858303988*^9}, 3.667785003632414*^9, 3.6677851312407312`*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -991,14 +1107,27 @@ Cell[BoxData[
    HoldForm], "+", 
   TagBox[
    RowBox[{
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"X", ".", "Y"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], "-", 
+      TagBox[
+       RowBox[{
         TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            TagBox[
+             RowBox[{"X", ".", "Y"}],
+             HoldForm]}], ")"}], "\<\"-1\"\>"],
+         HoldForm], ".", "X", ".", "Y"}],
+       HoldForm]}], ")"}], ".", 
     TagBox[
      SuperscriptBox["C2", "\<\"T\"\>"],
      HoldForm], ".", 
@@ -1007,7 +1136,7 @@ Cell[BoxData[
      HoldForm], ".", "X"}],
    HoldForm], "-", 
   TagBox[
-   RowBox[{"X", ".", "Y", ".", 
+   RowBox[{
     TagBox[
      SuperscriptBox[
       RowBox[{"(", 
@@ -1015,37 +1144,131 @@ Cell[BoxData[
         TagBox[
          RowBox[{"X", ".", "Y"}],
          HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", 
+     HoldForm], ".", "X", ".", "Y", ".", 
     TagBox[
      SuperscriptBox["C2", "\<\"T\"\>"],
      HoldForm], ".", "C2"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{"X", ".", "Y", ".", 
-    TagBox[
-     SuperscriptBox[
-      RowBox[{"(", 
-       RowBox[{"1", "-", 
-        TagBox[
-         RowBox[{"X", ".", "Y"}],
-         HoldForm]}], ")"}], "\<\"-1\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.473453094536688*^9, 3.5166264780894814`*^9, 
-  3.657808523704709*^9, 3.657808582116445*^9}]
+ CellChangeTimes->{
+  3.4734530907341843`*^9, 3.516626476123714*^9, 3.657808517129106*^9, 
+   3.657808582066615*^9, 3.667779830339714*^9, 3.667779905404694*^9, 
+   3.667779936926009*^9, 3.667779970284046*^9, {3.667780186205102*^9, 
+   3.667780194918648*^9}, {3.667780227439707*^9, 3.667780338377569*^9}, {
+   3.667780465468699*^9, 3.667780496448792*^9}, {3.667780542771467*^9, 
+   3.667780650181858*^9}, 3.6677806891499643`*^9, {3.667780839616827*^9, 
+   3.667780858303988*^9}, 3.667785003632414*^9, 3.667785131244273*^9}]
 }, Open  ]],
 
-Cell["Finaly we collect on inv[1-X**Y]", "Text"],
+Cell["We then collect on B1 and C2", "Text",
+ CellChangeTimes->{{3.667780654793985*^9, 3.667780662395769*^9}, 
+   3.667780698735013*^9, {3.667780861813715*^9, 3.667780862253693*^9}}],
 
 Cell[CellGroupData[{
 
-Cell["NCC[ %, inv[1-X**Y] ]", "Input"],
+Cell[BoxData[
+ RowBox[{"messy5", "=", 
+  RowBox[{"NCStrongCollectSymmetric", "[", 
+   RowBox[{"messy4", ",", 
+    RowBox[{"{", 
+     RowBox[{"B1", ",", "C2"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.667780652170622*^9, 3.667780652171915*^9}, {
+  3.667780701526272*^9, 3.667780721592491*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   TagBox[
+    RowBox[{
+     TagBox[
+      SuperscriptBox["C1", "\<\"T\"\>"],
+      HoldForm], ".", "C1"}],
+    HoldForm]}], "-", 
+  TagBox[
+   RowBox[{"X", ".", "B2", ".", "C1"}],
+   HoldForm], "-", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["C1", "\<\"T\"\>"],
+     HoldForm], ".", 
+    TagBox[
+     SuperscriptBox["B2", "\<\"T\"\>"],
+     HoldForm], ".", "X"}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    TagBox[
+     SuperscriptBox["Y", "\<\"-1\"\>"],
+     HoldForm], ".", "B1", ".", 
+    RowBox[{"(", 
+     RowBox[{"C2", "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B1", "\<\"T\"\>"],
+         HoldForm], ".", "X"}],
+       HoldForm]}], ")"}]}],
+   HoldForm], "+", 
+  TagBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      TagBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          TagBox[
+           RowBox[{"X", ".", "Y"}],
+           HoldForm]}], ")"}], "\<\"-1\"\>"],
+       HoldForm], "-", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1", "-", 
+            TagBox[
+             RowBox[{"X", ".", "Y"}],
+             HoldForm]}], ")"}], "\<\"-1\"\>"],
+         HoldForm], ".", "X", ".", "Y"}],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["C2", "\<\"T\"\>"],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{"C2", "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B1", "\<\"T\"\>"],
+         HoldForm], ".", "X"}],
+       HoldForm]}], ")"}]}],
+   HoldForm], "-", 
+  TagBox[
+   RowBox[{"X", ".", "B2", ".", 
+    TagBox[
+     SuperscriptBox["B2", "\<\"T\"\>"],
+     HoldForm], ".", "X"}],
+   HoldForm]}]], "Output",
+ CellChangeTimes->{{3.66778070677829*^9, 3.66778072189402*^9}, {
+   3.6677808463879633`*^9, 3.667780863392694*^9}, 3.667785005633545*^9, 
+   3.667785131291198*^9}]
+}, Open  ]],
+
+Cell["and finally on inv[1 - X ** Y]", "Text",
+ CellChangeTimes->{{3.6677807248105297`*^9, 3.667780733684861*^9}, 
+   3.66778086690025*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"messy6", "=", 
+  RowBox[{"NCStrongCollect", "[", 
+   RowBox[{"messy5", ",", 
+    RowBox[{"inv", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"X", "**", "Y"}]}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6677807389698553`*^9, 3.6677807463672657`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -1060,7 +1283,15 @@ Cell[BoxData[
    RowBox[{
     TagBox[
      SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", "C2"}],
+     HoldForm], ".", 
+    RowBox[{"(", 
+     RowBox[{"C2", "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B1", "\<\"T\"\>"],
+         HoldForm], ".", "X"}],
+       HoldForm]}], ")"}]}],
    HoldForm], "-", 
   TagBox[
    RowBox[{"X", ".", "B2", ".", "C1"}],
@@ -1077,43 +1308,34 @@ Cell[BoxData[
   TagBox[
    RowBox[{
     TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
      SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", "C2"}],
+     HoldForm], ".", "B1", ".", 
+    RowBox[{"(", 
+     RowBox[{"C2", "+", 
+      TagBox[
+       RowBox[{
+        TagBox[
+         SuperscriptBox["B1", "\<\"T\"\>"],
+         HoldForm], ".", "X"}],
+       HoldForm]}], ")"}]}],
    HoldForm], "-", 
   TagBox[
    RowBox[{"X", ".", "B2", ".", 
     TagBox[
      SuperscriptBox["B2", "\<\"T\"\>"],
      HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
- CellChangeTimes->{3.473453099004868*^9, 3.5166264794147863`*^9, 
-  3.657808529354006*^9, 3.657808582169091*^9}]
+ CellChangeTimes->{3.667780746853936*^9, 3.667780869509776*^9, 
+  3.667785013312831*^9, 3.667785131323183*^9}]
 }, Open  ]],
 
 Cell["\<\
-
-We are FINISHED simplifying according to some tastes,
- because all inv[1-X**Y] terms are gone.
- There is ANOTHER WAY which works on some things but not others. \
-\>", "Text"]
+We are FINISHED simplifying according to some tastes, because all inv[1-X**Y] \
+terms are gone. There is ANOTHER WAY which works on some things but not \
+others. \
+\>", "Text",
+ CellChangeTimes->{{3.667780756363863*^9, 3.667780759140061*^9}, {
+  3.667780871610606*^9, 3.667780873282604*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1122,7 +1344,8 @@ Cell["A second approch", "Section"],
 
 Cell[CellGroupData[{
 
-Cell["coexz1", "Input"],
+Cell["messy0", "Input",
+ CellChangeTimes->{{3.667780881471332*^9, 3.667780884640279*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -1276,23 +1499,21 @@ Cell[BoxData[
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
  CellChangeTimes->{3.473453104149049*^9, 3.516626482648312*^9, 
-  3.6578085358137093`*^9, 3.657808582216795*^9}]
+  3.6578085358137093`*^9, 3.657808582216795*^9, 3.667780884984418*^9, 
+  3.66778502802024*^9, 3.6677851313567944`*^9}]
 }, Open  ]],
 
 Cell["\<\
- NCSimplifyRational[expr]\t\t\tis based on automatically applying a carefully \
-chosen 
-\t\t\t\t\t\tcollection of rules like NCBackward and subtitute repeatedly.
- \t\t\t\t\t\tRules can be added so it should get better and better 
-\t\t\t\t\t\t(that is, work well on many expressions.)  \
+Here we use NCSimplifyRational[expr], which is based on automatically \
+applying a carefully chosen collection of rules like ruleBackward and \
+subtitute repeatedly.\
 \>", "Text",
- CellFrame->True,
- ShowSpecialCharacters->True,
- Background->GrayLevel[0.849989]],
+ CellChangeTimes->{{3.667780891142001*^9, 3.667780941493443*^9}}],
 
 Cell[CellGroupData[{
 
-Cell["result=NCSimplifyRational[coexz1]", "Input"],
+Cell["messy6=NCSimplifyRational[messy0]", "Input",
+ CellChangeTimes->{{3.667780947258678*^9, 3.6677809555828457`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -1352,7 +1573,8 @@ Cell[BoxData[
      HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
  CellChangeTimes->{3.473453106679563*^9, 3.516626484630175*^9, 
-  3.657808538344563*^9, 3.657808582266328*^9}]
+  3.657808538344563*^9, 3.657808582266328*^9, 3.66778095654265*^9, 
+  3.6677850298328657`*^9, 3.667785131389511*^9}]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1374,135 +1596,10 @@ Cell["Condensing the expression", "Section"],
 
 Cell[CellGroupData[{
 
-Cell["NCC[result, tp[C2]] ", "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"-", 
-   TagBox[
-    RowBox[{
-     TagBox[
-      SuperscriptBox["C1", "\<\"T\"\>"],
-      HoldForm], ".", "C1"}],
-    HoldForm]}], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    RowBox[{"(", 
-     RowBox[{"C2", "+", 
-      TagBox[
-       RowBox[{
-        TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{"X", ".", "B2", ".", "C1"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C1", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", "C2"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{"X", ".", "B2", ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", 
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm]}]], "Output",
- CellChangeTimes->{3.4734531089853888`*^9, 3.516626489514041*^9, 
-  3.657808547920472*^9, 3.657808582315248*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["NCC[ %, inv[Y] ** B1 ]", "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"-", 
-   TagBox[
-    RowBox[{
-     TagBox[
-      SuperscriptBox["C1", "\<\"T\"\>"],
-      HoldForm], ".", "C1"}],
-    HoldForm]}], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    RowBox[{"(", 
-     RowBox[{"C2", "+", 
-      TagBox[
-       RowBox[{
-        TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{"X", ".", "B2", ".", "C1"}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C1", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", 
-    RowBox[{"(", 
-     RowBox[{"C2", "+", 
-      TagBox[
-       RowBox[{
-        TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{"X", ".", "B2", ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.47345310988097*^9, 3.516626491490727*^9, {3.657808553193591*^9, 
-   3.657808582362713*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["NCC[ %, C1 ]", "Input"],
+Cell["messy7=NCStrongCollectSymmetric[messy6,{C2,B1,C1,B2}]", "Input",
+ CellChangeTimes->{{3.667780972009224*^9, 3.667781101505363*^9}, {
+  3.667781224274294*^9, 3.6677812297430573`*^9}, {3.6677812926928864`*^9, 
+  3.6677812937485943`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -1520,83 +1617,17 @@ Cell[BoxData[
     HoldForm]}], "+", 
   TagBox[
    RowBox[{
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
     RowBox[{"(", 
-     RowBox[{"C2", "+", 
+     RowBox[{
       TagBox[
        RowBox[{
         TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C1", "\<\"T\"\>"],
-     HoldForm], ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", 
-    RowBox[{"(", 
-     RowBox[{"C2", "+", 
+         SuperscriptBox["Y", "\<\"-1\"\>"],
+         HoldForm], ".", "B1"}],
+       HoldForm], "+", 
       TagBox[
-       RowBox[{
-        TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
-   HoldForm], "-", 
-  TagBox[
-   RowBox[{"X", ".", "B2", ".", 
-    TagBox[
-     SuperscriptBox["B2", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.47345311056502*^9, 3.516626492854418*^9, {3.657808559188925*^9, 
-   3.6578085824153223`*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["NCC[%,tp[B2]**X]", "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"-", 
-   TagBox[
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{
-       TagBox[
-        RowBox[{"X", ".", "B2"}],
-        HoldForm], "+", 
-       TagBox[
-        SuperscriptBox["C1", "\<\"T\"\>"],
-        HoldForm]}], ")"}], ".", "C1"}],
-    HoldForm]}], "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    RowBox[{"(", 
-     RowBox[{"C2", "+", 
-      TagBox[
-       RowBox[{
-        TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
+       SuperscriptBox["C2", "\<\"T\"\>"],
+       HoldForm]}], ")"}], ".", "C2"}],
    HoldForm], "-", 
   TagBox[
    RowBox[{
@@ -1614,21 +1645,26 @@ Cell[BoxData[
    HoldForm], "+", 
   TagBox[
    RowBox[{
-    TagBox[
-     SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", 
     RowBox[{"(", 
-     RowBox[{"C2", "+", 
+     RowBox[{
       TagBox[
        RowBox[{
         TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
+         SuperscriptBox["Y", "\<\"-1\"\>"],
+         HoldForm], ".", "B1"}],
+       HoldForm], "+", 
+      TagBox[
+       SuperscriptBox["C2", "\<\"T\"\>"],
+       HoldForm]}], ")"}], ".", 
+    TagBox[
+     SuperscriptBox["B1", "\<\"T\"\>"],
+     HoldForm], ".", "X"}],
    HoldForm]}]], "Output",
  CellChangeTimes->{
-  3.473453111333788*^9, 3.5166264937035913`*^9, {3.657808560647978*^9, 
-   3.657808582465323*^9}}]
+  3.4734531089853888`*^9, 3.516626489514041*^9, 3.657808547920472*^9, 
+   3.657808582315248*^9, {3.6677809813186903`*^9, 3.6677811024300833`*^9}, 
+   3.667781142255151*^9, 3.667781230342038*^9, 3.667781294267284*^9, 
+   3.6677813372206383`*^9, 3.667785032203332*^9, 3.667785131406498*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1637,7 +1673,9 @@ This is standard Mathematica, picking a \"part\" of an expression.\
 
 Cell[CellGroupData[{
 
-Cell["factor = %[[ 1,2,1 ]]", "Input"],
+Cell["factor1 = messy7[[1,2,1]]", "Input",
+ CellChangeTimes->{{3.6677811217087307`*^9, 3.667781123427073*^9}, {
+  3.6677812206420593`*^9, 3.667781252168954*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -1649,88 +1687,43 @@ Cell[BoxData[
    HoldForm]}]], "Output",
  CellChangeTimes->{
   3.473453113371993*^9, 3.5166264955974627`*^9, {3.657808564482058*^9, 
-   3.657808582516017*^9}}]
+   3.657808582516017*^9}, 3.6677811240580273`*^9, {3.667781238016924*^9, 
+   3.667781252631535*^9}, 3.667781299569923*^9, 3.667781338611538*^9, 
+   3.6677851314408417`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["NCC[ %%, factor ]", "Input"],
+Cell[BoxData[
+ RowBox[{"factor2", " ", "=", 
+  RowBox[{"messy7", "[", 
+   RowBox[{"[", 
+    RowBox[{"2", ",", "1"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.66778124247252*^9, 3.6677812483858747`*^9}, {
+  3.6677813257812767`*^9, 3.667781326677781*^9}}],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"-", 
-   TagBox[
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{
-       TagBox[
-        RowBox[{"X", ".", "B2"}],
-        HoldForm], "+", 
-       TagBox[
-        SuperscriptBox["C1", "\<\"T\"\>"],
-        HoldForm]}], ")"}], ".", 
-     RowBox[{"(", 
-      RowBox[{"C1", "+", 
-       TagBox[
-        RowBox[{
-         TagBox[
-          SuperscriptBox["B2", "\<\"T\"\>"],
-          HoldForm], ".", "X"}],
-        HoldForm]}], ")"}]}],
-    HoldForm]}], "+", 
   TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["C2", "\<\"T\"\>"],
-     HoldForm], ".", 
-    RowBox[{"(", 
-     RowBox[{"C2", "+", 
-      TagBox[
-       RowBox[{
-        TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
+   SuperscriptBox["C2", "\<\"T\"\>"],
    HoldForm], "+", 
   TagBox[
    RowBox[{
     TagBox[
      SuperscriptBox["Y", "\<\"-1\"\>"],
-     HoldForm], ".", "B1", ".", 
-    RowBox[{"(", 
-     RowBox[{"C2", "+", 
-      TagBox[
-       RowBox[{
-        TagBox[
-         SuperscriptBox["B1", "\<\"T\"\>"],
-         HoldForm], ".", "X"}],
-       HoldForm]}], ")"}]}],
+     HoldForm], ".", "B1"}],
    HoldForm]}]], "Output",
  CellChangeTimes->{
-  3.473453115887994*^9, 3.516626496945924*^9, {3.657808566615115*^9, 
-   3.657808582566105*^9}}]
+  3.667781253281665*^9, {3.6677813007318983`*^9, 3.667781340350264*^9}, 
+   3.667785131473777*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["factor = %[[2,2]]", "Input"],
-
-Cell[BoxData[
- RowBox[{"C2", "+", 
-  TagBox[
-   RowBox[{
-    TagBox[
-     SuperscriptBox["B1", "\<\"T\"\>"],
-     HoldForm], ".", "X"}],
-   HoldForm]}]], "Output",
- CellChangeTimes->{
-  3.473453116780053*^9, 3.516626497843732*^9, {3.657808570611966*^9, 
-   3.657808582615843*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["NCC[ %%, factor ]", "Input"],
+Cell["NCStrongCollectSymmetric[messy7, {factor1,factor2}]", "Input",
+ CellChangeTimes->{{3.667781130240129*^9, 3.667781140093165*^9}, {
+  3.6677812048247347`*^9, 3.6677812120930653`*^9}, {3.6677812552273903`*^9, 
+  3.667781267258718*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -1777,8 +1770,10 @@ Cell[BoxData[
        HoldForm]}], ")"}]}],
    HoldForm]}]], "Output",
  CellChangeTimes->{
-  3.473453117617324*^9, 3.5166264984764147`*^9, {3.657808572959132*^9, 
-   3.6578085826647*^9}}]
+  3.473453115887994*^9, 3.516626496945924*^9, {3.657808566615115*^9, 
+   3.657808582566105*^9}, {3.66778113326445*^9, 3.6677811450691338`*^9}, 
+   3.6677812128351393`*^9, 3.667781267681603*^9, {3.6677813335421886`*^9, 
+   3.667781342011949*^9}, 3.6677851315069036`*^9}]
 }, Open  ]],
 
 Cell["This is about as good as I can do.", "Text",
@@ -1787,8 +1782,8 @@ Cell["This is about as good as I can do.", "Text",
 }, Open  ]]
 },
 AutoGeneratedPackage->None,
-WindowSize->{1122, 820},
-WindowMargins->{{77, Automatic}, {Automatic, 0}},
+WindowSize->{1229, 696},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
 DockedCells->(FrontEndExecute[{
    FrontEnd`NotebookApply[
     FrontEnd`InputNotebook[], #, Placeholder]}]& ),
@@ -1798,7 +1793,7 @@ PrintingOptions->{"Magnification"->1,
 "PaperSize"->{612, 792}},
 FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
 2015)",
-StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
 (* End of Notebook Content *)
@@ -1813,120 +1808,102 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[567, 22, 98, 1, 61, "Title"],
-Cell[668, 25, 28, 0, 22, "Subtitle"],
-Cell[699, 27, 201, 4, 65, "Text"],
+Cell[567, 22, 53, 0, 90, "Title"],
 Cell[CellGroupData[{
-Cell[925, 35, 55, 0, 73, "Section"],
-Cell[983, 37, 308, 6, 101, "Text"],
-Cell[1294, 45, 242, 7, 63, "Text"],
+Cell[645, 26, 99, 1, 66, "Section"],
 Cell[CellGroupData[{
-Cell[1561, 56, 108, 4, 54, "Input"],
+Cell[769, 31, 108, 4, 53, "Input"],
 Cell[CellGroupData[{
-Cell[1694, 64, 236, 4, 22, "Print"],
-Cell[1933, 70, 325, 7, 21, "Print"],
-Cell[2261, 79, 464, 10, 22, "Print"],
-Cell[2728, 91, 210, 3, 22, "Print"]
+Cell[902, 39, 336, 5, 22, "Print"],
+Cell[1241, 46, 425, 8, 21, "Print"],
+Cell[1669, 56, 564, 11, 22, "Print"],
+Cell[2236, 69, 1675, 55, 707, "Print"]
 }, Open  ]]
 }, Open  ]],
-Cell[2965, 98, 191, 6, 83, "Text"],
-Cell[3159, 106, 298, 7, 81, "Text"],
-Cell[3460, 115, 85, 2, 29, "Text"],
-Cell[3548, 119, 36, 0, 39, "Input"]
+Cell[3938, 128, 278, 5, 49, "Text"],
+Cell[4219, 135, 131, 2, 38, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3621, 124, 34, 0, 73, "Section"],
+Cell[4387, 142, 34, 0, 66, "Section"],
+Cell[4424, 144, 125, 1, 30, "Text"],
+Cell[4552, 147, 573, 14, 72, "Input"],
+Cell[5128, 163, 111, 1, 30, "Text"],
 Cell[CellGroupData[{
-Cell[3680, 128, 23, 0, 39, "Input"],
-Cell[3706, 130, 3659, 152, 62, "Output"]
+Cell[5264, 168, 2112, 57, 89, "Input"],
+Cell[7379, 227, 3683, 152, 61, "Output"]
 }, Open  ]],
-Cell[7380, 285, 162, 5, 45, "Text"],
+Cell[11077, 382, 215, 3, 30, "Text"],
 Cell[CellGroupData[{
-Cell[7567, 294, 36, 0, 39, "Input"],
-Cell[7606, 296, 3489, 146, 62, "Output"]
+Cell[11317, 389, 1017, 28, 37, "Input"],
+Cell[12337, 419, 1625, 59, 44, "Output"]
 }, Open  ]],
-Cell[11110, 445, 159, 5, 45, "Text"],
-Cell[11272, 452, 146, 3, 47, "Text"],
+Cell[13977, 481, 214, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[11443, 459, 42, 0, 39, "Input"],
-Cell[11488, 461, 3644, 151, 65, "Output"]
+Cell[14216, 489, 243, 5, 37, "Input"],
+Cell[14462, 496, 3711, 149, 61, "Output"]
 }, Open  ]],
-Cell[15147, 615, 352, 8, 81, "Text"],
-Cell[15502, 625, 105, 1, 39, "Input"],
-Cell[15610, 628, 46, 0, 29, "Text"],
+Cell[18188, 648, 264, 5, 30, "Text"],
 Cell[CellGroupData[{
-Cell[15681, 632, 45, 0, 39, "Input"],
-Cell[15729, 634, 3730, 153, 67, "Output"]
+Cell[18477, 657, 425, 8, 37, "Input"],
+Cell[18905, 667, 3882, 151, 66, "Output"]
 }, Open  ]],
-Cell[19474, 790, 212, 5, 63, "Text"],
-Cell[19689, 797, 269, 5, 83, "Text"],
+Cell[22802, 821, 130, 1, 30, "Text"],
 Cell[CellGroupData[{
-Cell[19983, 806, 88, 2, 39, "Input"],
-Cell[20074, 810, 2498, 105, 62, "Output"]
+Cell[22957, 826, 295, 7, 37, "Input"],
+Cell[23255, 835, 3850, 152, 66, "Output"]
 }, Open  ]],
-Cell[22587, 918, 164, 5, 45, "Text"],
-Cell[22754, 925, 214, 4, 65, "Text"],
+Cell[27120, 990, 337, 7, 87, "Text"],
 Cell[CellGroupData[{
-Cell[22993, 933, 30, 0, 39, "Input"],
-Cell[23026, 935, 2498, 105, 62, "Output"]
+Cell[27482, 1001, 413, 7, 53, "Input"],
+Cell[27898, 1010, 1238, 39, 41, "Output"],
+Cell[29139, 1051, 2851, 107, 64, "Output"]
 }, Open  ]],
-Cell[25539, 1043, 48, 0, 29, "Text"],
+Cell[32005, 1161, 182, 2, 30, "Text"],
 Cell[CellGroupData[{
-Cell[25612, 1047, 38, 0, 39, "Input"],
-Cell[25653, 1049, 1359, 58, 42, "Output"]
+Cell[32212, 1167, 302, 7, 37, "Input"],
+Cell[32517, 1176, 1930, 78, 44, "Output"]
 }, Open  ]],
-Cell[27027, 1110, 185, 5, 83, "Text"]
-}, Open  ]],
+Cell[34462, 1257, 139, 2, 30, "Text"],
 Cell[CellGroupData[{
-Cell[27249, 1120, 35, 0, 73, "Section"],
-Cell[CellGroupData[{
-Cell[27309, 1124, 23, 0, 39, "Input"],
-Cell[27335, 1126, 3659, 152, 62, "Output"]
+Cell[34626, 1263, 281, 7, 37, "Input"],
+Cell[34910, 1272, 1328, 56, 44, "Output"]
 }, Open  ]],
-Cell[31009, 1281, 391, 9, 99, "Text"],
-Cell[CellGroupData[{
-Cell[31425, 1294, 50, 0, 39, "Input"],
-Cell[31478, 1296, 1357, 58, 42, "Output"]
-}, Open  ]],
-Cell[32850, 1357, 100, 4, 39, "Text"],
-Cell[32953, 1363, 131, 4, 29, "Text"]
+Cell[36253, 1331, 301, 6, 30, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33121, 1372, 44, 0, 73, "Section"],
+Cell[36591, 1342, 35, 0, 66, "Section"],
 Cell[CellGroupData[{
-Cell[33190, 1376, 37, 0, 39, "Input"],
-Cell[33230, 1378, 1350, 57, 45, "Output"]
+Cell[36651, 1346, 89, 1, 38, "Input"],
+Cell[36743, 1349, 3729, 153, 61, "Output"]
+}, Open  ]],
+Cell[40487, 1505, 255, 5, 30, "Text"],
+Cell[CellGroupData[{
+Cell[40767, 1514, 118, 1, 38, "Input"],
+Cell[40888, 1517, 1427, 59, 41, "Output"]
+}, Open  ]],
+Cell[42330, 1579, 100, 4, 42, "Text"],
+Cell[42433, 1585, 131, 4, 29, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[34617, 1440, 39, 0, 39, "Input"],
-Cell[34659, 1442, 1333, 57, 45, "Output"]
+Cell[42601, 1594, 44, 0, 66, "Section"],
+Cell[CellGroupData[{
+Cell[42670, 1598, 240, 3, 38, "Input"],
+Cell[42913, 1603, 1630, 63, 44, "Output"]
+}, Open  ]],
+Cell[44558, 1669, 90, 2, 30, "Text"],
+Cell[CellGroupData[{
+Cell[44673, 1675, 161, 2, 38, "Input"],
+Cell[44837, 1679, 422, 12, 41, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[36029, 1504, 29, 0, 39, "Input"],
-Cell[36061, 1506, 1388, 59, 45, "Output"]
+Cell[45296, 1696, 260, 6, 37, "Input"],
+Cell[45559, 1704, 340, 13, 41, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[37486, 1570, 33, 0, 39, "Input"],
-Cell[37522, 1572, 1364, 58, 45, "Output"]
+Cell[45936, 1722, 238, 3, 38, "Input"],
+Cell[46177, 1727, 1289, 48, 44, "Output"]
 }, Open  ]],
-Cell[38901, 1633, 90, 2, 29, "Text"],
-Cell[CellGroupData[{
-Cell[39016, 1639, 38, 0, 39, "Input"],
-Cell[39057, 1641, 276, 10, 42, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[39370, 1656, 34, 0, 39, "Input"],
-Cell[39407, 1658, 1243, 52, 45, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[40687, 1715, 34, 0, 39, "Input"],
-Cell[40724, 1717, 280, 10, 42, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[41041, 1732, 34, 0, 39, "Input"],
-Cell[41078, 1734, 1116, 46, 45, "Output"]
-}, Open  ]],
-Cell[42209, 1783, 92, 1, 29, "Text"]
+Cell[47481, 1778, 92, 1, 30, "Text"]
 }, Open  ]]
 }, Open  ]]
 }

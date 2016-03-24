@@ -423,6 +423,21 @@ Module[
      NCPolynomial::NotPolynomial
    ];
 
+   Quiet[
+
+     (* VarNotSymbol *)
+     p = x**tp[y];
+     expr = NCToNCPolynomial[p, {tp[x]}];
+     NCTest[expr, $Failed];
+
+     p = x**tp[y];
+     expr = NCToNCPolynomial[p, {x, tp[x]}];
+     NCTest[expr, $Failed];
+
+     ,
+     NCPolynomial::VarNotSymbol
+   ];
+
    (* NCPSort *)
    expr = c;
    p = NCToNCPolynomial[expr, {x,y}];

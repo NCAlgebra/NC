@@ -218,6 +218,14 @@ Module[
    answer = aj[a]**(b+c) + (b+d)**tp[d];
    NCTest[NCStrongCollectSelfAdjoint[exp,{a,d}], answer];
 
+   (* Collect on expressions *)
+
+   exp = tp[a]**b**c +tp[a]**b**d;
+   answer = tp[a]**b**(c+d);
+   NCTest[NCStrongCollect[exp,tp[a]**b], answer];
+   NCTest[NCStrongCollectSymmetric[exp,tp[b]**a], answer];
+   NCTest[NCCollect[exp,tp[a]**b], answer];
+
    (* Original tests *)
 
    exp = a**b-a**c-a**d;

@@ -26,6 +26,7 @@ Clear[NCPolynomial,
 Get["NCPolynomial.usage"];
 
 NCPolynomial::NotPolynomial = "Expression is not an nc polynomial.";
+NCPolynomial::VarNotSymbol = "All variables must be Symbols.";
 
 Begin[ "`Private`" ]
 
@@ -99,6 +100,12 @@ Begin[ "`Private`" ]
   NCToNCPolynomial[poly_, vars_List] := Module[
       {p, m0},
 
+      (* Make sure vars is a list of Symbols *)
+      If [ Not[MatchQ[vars, {___Symbol}]],
+          Message[NCPolynomial::VarNotSymbol];
+          Return[$Failed];
+      ];
+      
       (* Independent term is easy *)
       Quiet[
         Check[
