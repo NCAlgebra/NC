@@ -327,6 +327,7 @@ Module[
     {l,dd,u} = GetLDUMatrices[ldl,s];
     NCTest[NCSimplifyRational[MatMult[l, dd, u]], mat[[p,p]], "NCMatrixDecompositions", k++];
 
+
   (*
     Print[];
     Print["---"];

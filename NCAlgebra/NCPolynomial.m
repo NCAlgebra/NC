@@ -25,7 +25,7 @@ Clear[NCPolynomial,
 
 Get["NCPolynomial.usage"];
 
-NCPolynomial::NotPolynomial = "Expression is not a polynomial.";
+NCPolynomial::NotPolynomial = "Expression is not an nc polynomial.";
 
 Begin[ "`Private`" ]
 
@@ -46,6 +46,10 @@ Begin[ "`Private`" ]
   Clear[NCSplitMonomialAux];
   NCSplitMonomialAux[m_Symbol, vars_List] := {1,1,m,1};
   NCSplitMonomialAux[a_?CommutativeQ m_Symbol, vars_List] := {a,1,m,1};
+  NCSplitMonomialAux[tp[m_Symbol], vars_List] := {1,1,tp[m],1};
+  NCSplitMonomialAux[a_?CommutativeQ tp[m_Symbol], vars_List] := {a,1,tp[m],1};
+  NCSplitMonomialAux[aj[m_Symbol], vars_List] := {1,1,aj[m],1};
+  NCSplitMonomialAux[a_?CommutativeQ aj[m_Symbol], vars_List] := {a,1,aj[m],1};
   NCSplitMonomialAux[m_NonCommutativeMultiply, vars_List] := Module[
     {tmp},
 
@@ -80,6 +84,7 @@ Begin[ "`Private`" ]
   ];
   NCSplitMonomialAux[a_?CommutativeQ m_NonCommutativeMultiply, vars_List] :=
     Prepend[Rest[NCSplitMonomialAux[m, vars]], a];
+  NCSplitMonomialAux[__] := (Message[NCPolynomial::NotPolynomial]; {$Failed,$Failed,$Failed,$Failed});
           
   Clear[NCSplitMonomials];
   NCSplitMonomials[m_Plus, vars_List] := 
@@ -124,8 +129,14 @@ Begin[ "`Private`" ]
           ,
           
           (* Split monomials *)
-          p = NCSplitMonomials[p, vars];
-
+          Check[ 
+                 p = NCSplitMonomials[p, vars];
+                ,
+                 Return[$Failed];
+                ,
+                 NCPolynomial::NotPolynomial
+          ];
+              
           (* Print["p2 = ", p]; *)
 
           (* Separate knowns from unknowns *)

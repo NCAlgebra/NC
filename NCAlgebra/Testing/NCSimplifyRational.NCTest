@@ -27,8 +27,8 @@ Module[
      expr, answer
      },
 
-     SetNonCommutative[h,x,y,a,K,b];
-     SetCommutative[A,B,C,S];
+     SetNonCommutative[h,x,y,a,b];
+     SetCommutative[A,B,C,K,S];
 
 
      (* Normalize inverses *)
@@ -253,15 +253,9 @@ Module[
 
      (* test 10 tests NCSimplifyRational2 *)
      (* Print["----test 10"]; *)
-     (* ?? THIS WILL NEVER HAPPEN ??
      NCTest[NCSimplifyRational[ c**inv[a-c+b] ],
             -1 + a ** inv[a + b - c] + b ** inv[a + b - c]];
-     *) 
-     NCTest[NCSimplifyRational[ c**inv[a-c+b] ], c**inv[a-c+b] ];
 
-     Print["TEST # ", $NCTestCounter];
-
-               
      (* test 11 tests NCSimplifyRational2 added 7/03 *)
      (* Print["----test 11"]; *)
      
