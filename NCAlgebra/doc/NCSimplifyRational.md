@@ -2,30 +2,35 @@
 
 **NCSimplifyRational** simplifies noncommutative expressions and certain functions of their inverses.
 
-NCSimplifyRational simplifies rational noncommutative expressions in `a` and `b` by repeatedly applying the following set of reduction rules to the expression until it stops changing.
+NCSimplifyRational simplifies rational noncommutative expressions by applying a set of reduction rules to the expression.
 
-The following rules are applied in sequence:
+For each `inv` found in expression, a custom set of rules is constructed based on its associated nc Groebner basis.
 
-| Rule | Original | Transformed |
-| --- | --- | --- |
-|1| inv[a] inv[1 + K a b]  | inv[a] - K b inv[1 + K a b] |
-|1| inv[a] inv[1 + K a]    | inv[a] - K inv[1 + K a]     |
-|2| inv[1 + K a b] inv[b]  | inv[b] - K inv[1 + K a b] a |
-|2| inv[1 + K a] inv[a]    | inv[a] - K inv[1 + K a]     |
-|3| inv[c + K a b] a b     | [1 - inv[c + K a b] c]/K |
-|3| inv[c + K a] a         | [1 - inv[c + K a] c]/K   |
-|4| a b inv[c + K a b]     | [1 - c inv[c + K a b]]/K |
-|4| a inv[c + K a]         | [1 - c inv[c + K a]]/K   |
-|5| inv[1 + K a b] inv[a]  | inv[a] inv[1 + K b a] |
-|5| inv[1 + K a] inv[a]    | inv[a] inv[1 + K a]   |
-|6| inv[1 + K a b] a       | a inv[1 + K b a]      |
-|6| inv[1 + K a] a         | a inv[1 + K a]        |
+For example, if
+
+    inv[mon1 + ... + K lead]
+
+where `lead` is the monomial with the highest degree then the following rules are generated:
+
+| Original | Transformed |
+| --- | --- |
+| inv[mon1 + ... + lead] lead | [1 - inv[mon1 + ... + lead] (mon1 + ...)]/K |
+| lead inv[mon1 + ... + lead] | [1 - (mon1 + ...) inv[mon1 + ... + lead]]/K |
+
+Finally the following rules are applied:
+
+| Original | Transformed |
+| --- | --- |
+| inv[a] inv[1 + K a b]  | inv[a] - K b inv[1 + K a b] |
+| inv[a] inv[1 + K a]    | inv[a] - K inv[1 + K a]     |
+| inv[1 + K a b] inv[b]  | inv[b] - K inv[1 + K a b] a |
+| inv[1 + K a] inv[a]    | inv[a] - K inv[1 + K a]     |
+| inv[1 + K a b] a       | a inv[1 + K b a]      |
 
 Members are:
 
 * [NCNormalizeInverse](#NCNormalizeInverse)
 * [NCSimplifyRational](#NCSimplifyRational)
-* [NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass)
 
 ## NCNormalizeInverse {#NCNormalizeInverse}
 
@@ -36,15 +41,7 @@ See also:
 
 ## NCSimplifyRational {#NCSimplifyRational}
 
-`NCSimplifyRational[expr]` repeatedly applies a series of rules in an attempt to simplify the rational nc expression `expr` until it stops changing.
+`NCSimplifyRational[expr]` applies a series of rules in an attempt to simplify the rational nc expression `expr`.
 
 See also:
-[NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass),
 [NCNormalizeInverse](#NCNormalizeInverse).
-
-## NCSimplifyRationalSinglePass {#NCSimplifyRationalSinglePass}
-
-`NCSimplifyRationalSinglePass[expr]` applies a series of rules in an attempt to simplify the rational nc expression `expr`.
-
-See also:
-[NCNormalizeInverse](#NCNormalizeInverse), [NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass).

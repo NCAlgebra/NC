@@ -32,7 +32,7 @@ def main():
         sys.exit(2)
 
     HEADING = '##'
-    CONVERT = ['pandoc', '-t', 'plain', '--no-wrap']
+    CONVERT = ['pandoc', '-t', 'plain', '--wrap=none']
     outfile = None
 
     for o, a in opts:
