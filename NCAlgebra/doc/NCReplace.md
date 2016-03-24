@@ -1,6 +1,6 @@
-# NCSubstitute {#PackageNCSubstitute}
+# NCReplace {#PackageNCReplace}
 
-**NCSubstitute** is a package containing several functions that are useful in making replacements in noncommutative expressions. It offers a replacement to Mathematica's `Replace`, `ReplaceAll`, `ReplaceRepeated`, and `ReplaceList` functions.
+**NCReplace** is a package containing several functions that are useful in making replacements in noncommutative expressions. It offers replacements to Mathematica's `Replace`, `ReplaceAll`, `ReplaceRepeated`, and `ReplaceList` functions.
 
 Members are:
 
@@ -15,7 +15,7 @@ Members are:
 
 `NCReplace[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform the entire nc expression `expr`.
 
-`NCReplace[expr,rules,levelspec]`	 applies `rules` to parts of `expr` specified by `levelspec`. 
+`NCReplace[expr,rules,levelspec]`	 applies `rules` to parts of `expr` specified by `levelspec`.
 
 See also:
 [NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList), [NCReplaceRepeated](#NCReplaceRepeated).
@@ -31,7 +31,7 @@ See also:
 
 `NCReplace[expr,rules]` attempts to transform the entire nc expression `expr` by applying a rule or list of rules `rules` in all possible ways, and returns a list of the results obtained.
 
-`ReplaceList[expr,rules,n]` gives a list of at most `n` results. 
+`ReplaceList[expr,rules,n]` gives a list of at most `n` results.
 
 See also:
 [NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll), [NCReplaceRepeated](#NCReplaceRepeated).
@@ -56,4 +56,3 @@ See also:
 
 See also:
 [NCMakeRuleSymmetric](#NCMakeRuleSymmetric), [NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList), [NCReplaceRepeated](#NCReplaceRepeated).
-

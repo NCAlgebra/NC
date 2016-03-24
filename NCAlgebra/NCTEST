@@ -72,7 +72,7 @@ tests = {
   "NCSylvester",
   "NCLDU",
   "NCRealization",
-  "NCSubstitute",
+  "NCReplace",
   "NCUtil",
   "MatrixDecompositions",
   "NCMatMult",

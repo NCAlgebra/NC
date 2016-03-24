@@ -88,6 +88,7 @@ NCAliasRule = {
                     NCSolve -> NCSolveLinear1`NCSolveLinear1,
 
                (* :NCSubstitute.m *)
+               (*
                     Sub -> NCSubstitute`Substitute,
                     SubR -> NCSubstitute`SubstituteReverse,
                     SubRev -> NCSubstitute`SubstituteReverse,
@@ -99,6 +100,7 @@ NCAliasRule = {
                     SaveR -> NCSubstitute`SaveRules,
                     SaveRQ -> NCSubstitute`SaveRulesQ,
                     FORules -> NCSubstitute`FunctionOnRules,
+               *)
 
                (* :NCTools.m: *)
                     NCHDP -> NCTools`NCHighestDegreePosition,

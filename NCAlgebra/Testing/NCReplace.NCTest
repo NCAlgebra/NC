@@ -1,4 +1,4 @@
-<< NCSubstitute`
+<< NCReplace`
 
 Module[
      {rule, expr, answer, 

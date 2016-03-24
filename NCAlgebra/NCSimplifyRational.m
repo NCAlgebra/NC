@@ -17,7 +17,7 @@
 *)
 
 BeginPackage[ "NCSimplifyRational`",
-              "NCSubstitute`",
+              "NCReplace`",
               "NCCollect`",
               "NCPolynomial`",
               "NCUtil`",

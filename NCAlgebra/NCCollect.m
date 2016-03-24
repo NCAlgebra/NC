@@ -21,7 +21,7 @@
 *)
 
 BeginPackage[ "NCCollect`",
-              "NCSubstitute`",
+              "NCReplace`",
               "NCPolynomial`",
               "NonCommutativeMultiply`" ];
 

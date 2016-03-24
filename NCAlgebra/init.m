@@ -18,7 +18,7 @@ If [ !ValueQ[$NC$Algebra$Loaded],
 
 << NCCollect`
 << NCDiff`
-<< NCSubstitute`
+<< NCReplace`
 << NCMatMult`
 << NCSimplifyRational`
 

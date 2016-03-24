@@ -3,7 +3,7 @@ FILES = NonCommutativeMultiply.usage \
 	NCCollect.usage \
 	NCSimplifyRational.usage \
 	NCDiff.usage \
-	NCSubstitute.usage \
+	NCReplace.usage \
 	NCSymmetric.usage \
 	NCSelfAdjoint.usage \
 	NCOutput.usage \
@@ -16,7 +16,7 @@ MANUAL = NonCommutativeMultiply.md \
 	NCCollect.md \
 	NCSimplifyRational.md \
 	NCDiff.md \
-	NCSubstitute.md \
+	NCReplace.md \
 	NCSymmetric.md \
 	NCSelfAdjoint.md \
 	NCOutput.md \

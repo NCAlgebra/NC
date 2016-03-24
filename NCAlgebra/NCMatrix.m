@@ -18,7 +18,7 @@ BeginPackage[
 	        "NCMatrix`",
 	        "Matrix`",
 	        "NCMatMult`",
-	        "NCSubstitute`",
+	        "NCReplace`",
 (*              "NCCollectOnVariables`", *)
                 "NCCollect`",
                 "NonCommutativeMultiply`"

@@ -1,11 +1,11 @@
-(* :Title: 	NCSubstitute *)
+(* :Title: 	NCReplace *)
 
 (* :Author: 	mauricio *)
 
-(* :Context: 	NCSubstitute` *)
+(* :Context: 	NCReplace` *)
 
 (* :Summary:
-		NCSubstitute is a package containing several functions that 
+		NCReplace is a package containing several functions that 
 		are useful in making replacements in noncommutative expressions.
 *)
 
@@ -15,7 +15,7 @@
 (* :History: 
 *)
 
-BeginPackage[ "NCSubstitute`", 
+BeginPackage[ "NCReplace`", 
               "NonCommutativeMultiply`" ];
 
 Clear[NCReplace, NCReplaceAll, 
