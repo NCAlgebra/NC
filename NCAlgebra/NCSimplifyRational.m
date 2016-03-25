@@ -43,6 +43,59 @@ Begin["`Private`"]
   SetCommutative[K];
   SetNonCommutative[a,b];
 
+  Clear[NCSimplifyRationalOriginalRules];
+  NCSimplifyRationalOriginalRules =
+  {
+      
+      (*---------------------------RULE 1---------------------------*) 
+      (* rule 1 is as follows:                                      *) 
+      (*    inv[a] inv[1 + K a b] -> inv[a] - K b inv[1 + K a b]    *) 
+      (*    inv[a] inv[1 + K a] -> inv[a] - K inv[1 + K a]          *)
+      (*------------------------------------------------------------*)
+      inv[a_]**inv[1 + K_. a_**b_] :> inv[a] - K b**inv[1 + K a**b],
+      inv[a_]**inv[1 + K_. a_] :> inv[a] - K inv[1 + K a],
+
+      (*-----------------------RULE 2-------------------------------*) 
+      (* rule 2 is as follows:                                      *) 
+      (*    inv[1 + K a b] inv[b] -> inv[b] - K inv[1 + K a b] a    *) 
+      (*                   -> inv[b] - K a inv[1 + K a b] (rule #6) *) 
+      (*    inv[1 + K a] inv[a] -> inv[a] - K inv[1 + K a ]         *) 
+      (*------------------------------------------------------------*)
+      inv[1 + K_. a_**b_]**inv[b_] :> inv[b] - K a**inv[1 + K a**b],
+      inv[1 + K_. a_]**inv[a_] :> inv[a] - K inv[1 + K a],
+      
+      (*-----------------------RULE 3-------------------------------*) 
+      (* rule 3 is as follows:                                      *)
+      (*    inv[1 + K a b ] a b -> (1 - inv[1 + K a b])/K           *)
+      (*    inv[1 + K a] a -> (1 - inv[1 + K a])/K                  *) 
+      (*------------------------------------------------------------*)
+      inv[1 + K_. a_**b_]**a_**b_ :> (1/K) - (1/K) inv[1 + K a**b],
+      inv[1 + K_. a_]**a_ :> (1/K) - (1/K) inv[1 + K a],
+      
+      (*-----------------------RULE 4-------------------------------*) 
+      (* rule 4 is as follows:                                      *)
+      (*    a b inv[1 + K a b ] -> (1 - inv[1 + K a b])/K           *)
+      (*    a inv[1 + K a] -> (1 - inv[1 + K a])/K                  *) 
+      (*------------------------------------------------------------*)
+      a_**b_**inv[1 + K_. a_**b_] :> (1/K) - (1/K) inv[1 + K a**b],
+      a_**inv[1 + K_. a_] :> (1/K) - (1/K) inv[1 + K a],
+
+      (*----------------------RULE 5-------------------------------*) 
+      (* rule 5 is as follows:                                     *) 
+      (*    inv[1 + K a b] inv[a] -> inv[a] inv[1 + K a b]         *)
+      (*    inv[1 + K a] inv[a] -> inv[a] inv[1 + K a]             *)
+      (*-----------------------------------------------------------*)
+      (* RULE 5 IS WRONG! RULE 2 OVERCOMES IT!                     *)
+      (*-----------------------------------------------------------*)
+      
+      (*---------------------------------RULE 6---------------------*) 
+      (* rule 6 is as follows:                                      *)
+      (*      inv[1 + K a b] a  =  a inv[1 + K b a]                 *) 
+      (*------------------------------------------------------------*)
+      inv[1 + K_. a_**b_]**a_ :> a**inv[1 + K b**a]
+      
+  };
+  
   Clear[NCSimplifyRationalABRules];
   NCSimplifyRationalABRules =
   {
@@ -72,6 +125,16 @@ Begin["`Private`"]
       
   };
 
+  Clear[NCPreSimplifyRationalSinglePass];
+  NCPreSimplifyRationalSinglePass[expr_] := 
+    ExpandAll[ExpandNonCommutativeMultiply[
+              NCReplaceRepeated[NCNormalizeInverse[expr], 
+                                NCSimplifyRationalOriginalRules]]];
+
+  Clear[NCPreSimplifyRational];
+  NCPreSimplifyRational[expr_] := 
+    FixedPoint[NCPreSimplifyRationalSinglePass, expr];
+  
   Clear[NCSimplifyRationalAuxRules];
   NCSimplifyRationalAuxRules[terms_, rat_] := Module[
     {last = Last[terms], rest = (Plus @@ Most[terms]), factor},
@@ -102,8 +165,8 @@ Begin["`Private`"]
   NCSimplifyRationalSinglePass[expr_] := Module[
     {poly, rvars, rules, simpRules, tmp},
 
-    (* Normalize inverse *)
-    tmp = NCNormalizeInverse[expr];
+    (* Pre-simplify *)
+    tmp = NCPreSimplifyRationalSinglePass[expr];
       
     (* Convert from rational to polynomial *)
     {poly,rvars,rules} = NCRationalToNCPolynomial[tmp];

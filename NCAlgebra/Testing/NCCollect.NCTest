@@ -271,4 +271,9 @@ Module[
   NCTest[NCTermsOfDegree[expr,{x,y},{1,0}], x**w];
   NCTest[NCTermsOfDegree[expr,{x,y},{2,2}], 0];
 
+  (* Bill's tests *)
+  expr = ExpandNonCommutativeMultiply[tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y)];
+  Print[NCCollect[expr, {k,m}]];
+
+
 ];
