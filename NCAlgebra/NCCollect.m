@@ -40,52 +40,57 @@ Begin["`Private`"];
   (* Auxiliary tests *)
                                         
   Clear[IsNegative];
-  IsNegative[a_?NumberQ] = True /; Negative[a];
-  IsNegative[Times[a_?NumberQ, __]] = True; /; Negative[a];
+  IsNegative[a_?NumberQ] := Negative[a];
+  IsNegative[a_Times] := Negative[a[[1]]];
   IsNegative[_] = False;
 
   Clear[IsFirstNegative];
-  IsFirstNegative[expr_Plus] := If[IsNegative[expr[[1]]], True, False];
-  IsFirstNegative[expr] = False;
+  IsFirstNegative[expr_Plus] := IsNegative[expr[[1]]];
+  (* IsFirstNegative[_] := False; *)
 
   (* NCStrongCollect *)
 
   NCStrongCollect[expr_, vars_List] := Module[
     {tmp = expr},
-    Scan[(tmp = NCStrongCollect[tmp, #])&, vars];
+    (* Print["in = ", tmp]; *)
+    Scan[(tmp = NCStrongCollect[tmp, #]; 
+          (* Print["tmp(" <> ToString[#] <> ") = ", tmp];*) )&, vars];
+    (* Print["out = ", FullForm[tmp]]; *)
     Return[tmp];
   ];
-  
-  NCStrongCollect[f_, x_] :=
-    ReplaceRepeated[
-      ReplaceRepeated[f, {
 
-         (A_:1) * left___**x**right___ + (B_:1) * left___**x**right___ :> 
+  NCStrongCollect[f_, x_] :=
+    ReplaceRepeated[f, {
+
+         A_. * left___**x**right___ + B_. * left___**x**right___ :> 
            (A + B)
            NonCommutativeMultiply[left, x, right],
 
-         (A_:1) * left___**x**a___ + (B_:1) * left___**x**b___ :> 
+         A_. * left___**x**a___ + B_. * left___**x**b___ :> 
            NonCommutativeMultiply[
              left, 
              x,
              A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]
            ],
 
-         (A_:1) * a___**x**right___ + (B_:1) *b___**x**right___ :> 
+         A_. * a___**x**right___ + B_. *b___**x**right___ :> 
            NonCommutativeMultiply[
              (A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]),
              x,
              right
            ],
 
-         (A_:1) * x + (B_:1) * x**b___ :> 
+         A_. * x + B_. * x**b___ :> 
            NonCommutativeMultiply[x, (A + B*NonCommutativeMultiply[b])],
 
-         (A_:1) * x + (B_:1) * b___**x :> 
-           NonCommutativeMultiply[(A + B*NonCommutativeMultiply[b]), x]
+         A_. * x + B_. * b___**x :> 
+           NonCommutativeMultiply[(A + B*NonCommutativeMultiply[b]), x],
 
-      }], left___**(a_Plus?IsFirstNegative)**right___ :> 
-             -NonCommutativeMultiply[left, Expand[-a], right]];
+         left___**(a_Plus?IsFirstNegative)**right___ :> 
+             -NonCommutativeMultiply[left, Expand[-a], right]
+        
+    }
+  ];
 
   (* NCDecompose *)                                       
                                         
@@ -144,7 +149,7 @@ Begin["`Private`"];
          
          (* reverse rule *)
          rules = Map[Reverse, rules];
-         
+
          (*
          Print["expr = ", expr];
          Print["vars = ", vars];
@@ -168,6 +173,8 @@ Begin["`Private`"];
     Print["dec = ", dec];
     Print["rvars = ", rvars];
     Print["rrules = ", rrules];
+    Print["collected = ", 
+          Map[NCStrongCollect[#, Join[vars, rvars]]&, dec]];
     *)
       
     Return[NCCompose[Map[NCStrongCollect[#, Join[vars, rvars]]&,

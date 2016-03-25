@@ -7,6 +7,12 @@ Module[
    SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z,w];
    SetCommutative[A,B,C];
 
+   exp = (a - b);
+   NCTest[NCCollect`Private`IsFirstNegative[exp], False];
+
+   exp = (-a + b);
+   NCTest[NCCollect`Private`IsFirstNegative[exp], True];
+
    exp = x**y + x;
    answer = x**(1+y);
    NCTest[NCStrongCollect[exp,x], answer];
@@ -230,7 +236,11 @@ Module[
 
    exp = a**b-a**c-a**d;
    answer = a**(b-c-d);
-   NCTest[NCStrongCollect[exp,a], answer];
+   NCTest[NCStrongCollect[exp,{a}], answer];
+
+   exp = -(a**b-a**c-a**d);
+   answer = -a**(b-c-d);
+   NCTest[NCStrongCollect[exp,{a}], answer];
 
    exp = a**b-y**c-a**d;
    answer = a**(b-d)-y**c;
@@ -244,7 +254,16 @@ Module[
      j ** b - (j ** inv[tp[a]] ** tp[d] - inv[e] ** f ** tp[f] -
      tp[h] ** inv[tp[g]] ** tp[f]) ** c + inv[e] ** f ** inv[g] ** h +
      tp[h] ** inv[tp[g]] ** inv[g] ** h;
-   NCTest[NCStrongCollect[exp,c], answer];
+   NCTest[NCStrongCollect[exp,{c}], answer];
+
+   expr = -c ** a ** tp[a] ** e + c ** a ** tp[a] ** g ** d ** h + 
+          h ** f ** g ** a ** tp[a] ** e - 
+          h ** f ** g ** a ** tp[a] ** g ** d ** h;
+   answer = -(c - h ** f ** g) ** a ** (tp[a] ** e - tp[a] ** g ** d ** h);
+   NCTest[NCStrongCollect[expr, a], answer];
+
+   answer = -(c - h ** f ** g) ** a ** tp[a] ** (e - g ** d ** h);
+   NCTest[NCStrongCollect[expr, {a,tp[a]}], answer];
 
   (* NCTermsOfDegree *)
   expr = x**y**x + x**w;
