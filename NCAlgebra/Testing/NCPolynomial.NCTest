@@ -1,7 +1,7 @@
 << NCPolynomial`
 
 Module[
-   {expr, answer, vars, p, rules,
+   {expr, answer, vars, p, p1, p2, rules,
    a,b,c,d,e,f,g,h,j,x,y,z,A,B,C,K},
 
    SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
@@ -438,6 +438,57 @@ Module[
      NCPolynomial::VarNotSymbol
    ];
 
+   (* NCPSameVariablesQ *)
+   expr = a**x+b**y;
+   p1 = NCToNCPolynomial[expr, {x}];
+   NCTest[NCPSameVariablesQ[p1,p1], True];
+   NCTest[NCPSameVariablesQ[p1,p1,p1], True];
+
+   expr = a**x+b**y;
+   p1 = NCToNCPolynomial[expr, {x}];
+   expr = x**a+y**b;
+   p2 = NCToNCPolynomial[expr, {x}];
+   NCTest[NCPSameVariablesQ[p1,p2], True];
+   NCTest[NCPSameVariablesQ[p1,p2,p1], True];
+
+   expr = a**x+b**y;
+   p1 = NCToNCPolynomial[expr, {x}];
+   expr = x**a+y**b;
+   p2 = NCToNCPolynomial[expr, {x,y}];
+   NCTest[NCPSameVariablesQ[p1,p2], False];
+   NCTest[NCPSameVariablesQ[p1,p2,p1], False];
+
+   (* NCPPlus *)
+   expr = a**x+b**y;
+   p1 = NCToNCPolynomial[expr, {x}];
+   p2 = NCPPlus[p1,p1];
+   answer = NCPolynomial[2 b ** y, <|{x}->{{1,a,1},{1,a,1}}|>, {x}];
+   NCTest[p2, answer];
+
+   expr = a**x+b**y;
+   p1 = NCToNCPolynomial[expr, {x}];
+   expr = x**a+y**b;
+   p2 = NCToNCPolynomial[expr, {x}];
+   answer = NCPolynomial[y**b+b**y, 
+                         <|{x}->{{1,a,1},{1,1,a}}|>, {x}];
+   NCTest[NCPPlus[p1,p2], answer];
+
+   expr = a**x+b**y;
+   p1 = NCToNCPolynomial[expr, {x,y}];
+   p2 = NCPPlus[p1,p1];
+   answer = NCPolynomial[0, <|{x}->{{1,a,1},{1,a,1}},
+                              {y}->{{1,b,1},{1,b,1}}|>, {x,y}];
+   NCTest[p2, answer];
+   
+   expr = a**x+b**y;
+   p1 = NCToNCPolynomial[expr, {x,y}];
+   expr = x**a+y**b;
+   p2 = NCToNCPolynomial[expr, {x,y}];
+   answer = NCPolynomial[0, 
+                         <|{x}->{{1,a,1},{1,1,a}},
+			   {y}->{{1,b,1},{1,1,b}}|>, {x,y}];
+   NCTest[NCPPlus[p1,p2], answer];
+
    (* NCPSort *)
    expr = c;
    p = NCToNCPolynomial[expr, {x,y}];
@@ -506,5 +557,78 @@ Module[
               vars[[2]] ** b;
    NCTest[ExpandNonCommutativeMultiply[NCPolynomialToNC[p]], answer];
    NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
+
+   (* Matrix NCPolynomial *)
+
+   (* NCPVectorize *)
+
+   p = NCToNCPolynomial[a**x+x**a, {x}];
+   answer = NCPolynomial[{{0, 0}, {0, 0}}, <|{x} -> {{1, {{a}, {0}}, {{1, 0}}}, {1, {{1}, {0}}, {{a, 0}}}}|>, {x}];
+   NCTest[NCPolynomial`Private`NCPVectorize[p, {2,2}, {1,1}],
+          answer];
+
+   answer = NCPolynomial[{{0, 0, 0}, {0, 0, 0}}, <|{x} -> {{1, {{a}, {0}}, {{1, 0, 0}}}, {1, {{1}, {0}}, {{a, 0, 0}}}}|>, {x}];
+   NCTest[NCPolynomial`Private`NCPVectorize[p, {2,3}, {1,1}],
+          answer];
+
+   mat = {{a**x+x**a,b**x},{x**b,1}};
+   p = NCToNCPolynomial[mat, {x}];
+   answer = NCPolynomial[{{0,0},{0,1}}, 
+                    <|{x}->{{1,{{a},{0}},{{1,0}}},
+	                    {1,{{1},{0}},{{a,0}}},
+			    {1,{{b},{0}},{{0,1}}},
+			    {1,{{0},{1}},{{b,0}}}}|>,
+		    {x}];
+   NCTest[p, answer];
+   NCTest[NCPolynomialToNC[answer], mat];
+
+   mat = {{a**x+x**a+c**y+y**c,b**x},{x**b,1}};
+   p = NCToNCPolynomial[mat, {x}];
+   answer = NCPolynomial[{{c**y+y**c,0},{0,1}}, 
+                    <|{x}->{{1,{{a},{0}},{{1,0}}},
+	                    {1,{{1},{0}},{{a,0}}},
+			    {1,{{b},{0}},{{0,1}}},
+			    {1,{{0},{1}},{{b,0}}}}|>,
+		    {x}];
+   NCTest[p, answer];
+   NCTest[NCPolynomialToNC[answer], mat];
+
+   mat = {{a**x+x**a+c**y+y**c,b**x},{x**b,1}};
+   p = NCToNCPolynomial[mat, {x,y}];
+   answer = NCPolynomial[{{0,0},{0,1}}, 
+                    <|{x}->{{1,{{a},{0}},{{1,0}}},
+	                    {1,{{1},{0}},{{a,0}}},
+			    {1,{{b},{0}},{{0,1}}},
+			    {1,{{0},{1}},{{b,0}}}},
+		      {y}->{{1,{{c},{0}},{{1,0}}},
+	                    {1,{{1},{0}},{{c,0}}}}|>,
+		    {x,y}];
+   NCTest[p, answer];
+   NCTest[NCPolynomialToNC[answer], mat];
+
+   mat = {{x**a**x+x**a+a**x,b**x},{x**b,1}};
+   p = NCToNCPolynomial[mat, {x,y}];
+   answer = NCPolynomial[{{0,0},{0,1}}, 
+                    <|{x}->{{1,{{a},{0}},{{1,0}}},
+  	                    {1,{{1},{0}},{{a,0}}},
+			    {1,{{b},{0}},{{0,1}}},
+			    {1,{{0},{1}},{{b,0}}}},
+		      {x,x}->{{1,{{1},{0}},a,{{1,0}}}}|>,
+		    {x,y}];
+   NCTest[p, answer];
+   NCTest[NCPolynomialToNC[answer], mat];
+
+   mat = {{x**a**x+x**a+a**x,b**x},{x**b,1+d**x**x**d}};
+   p = NCToNCPolynomial[mat, {x,y}];
+   answer = NCPolynomial[{{0,0},{0,1}}, 
+                    <|{x}->{{1,{{a},{0}},{{1,0}}},
+  	                    {1,{{1},{0}},{{a,0}}},
+			    {1,{{b},{0}},{{0,1}}},
+			    {1,{{0},{1}},{{b,0}}}},
+		      {x,x}->{{1,{{1},{0}},a,{{1,0}}}},
+		      {x**x}->{{1,{{0},{d}},{{0,d}}}}|>,
+		    {x,y}];
+   NCTest[p, answer];
+   NCTest[NCPolynomialToNC[answer], mat];
 
 ];

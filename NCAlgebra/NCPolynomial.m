@@ -20,7 +20,8 @@ BeginPackage[ "NCPolynomial`",
 Clear[NCPolynomial, 
       NCToNCPolynomial, NCPolynomialToNC, NCRationalToNCPolynomial,
       NCPCoefficients, NCPTermsOfDegree, NCPTermsOfTotalDegree, 
-      NCPTermsToNC, NCPDecompose, NCPSort,
+      NCPTermsToNC, NCPDecompose, NCPSort, NCPSameVariablesQ,
+      NCPPlus,
       NCPDegree, NCPMonomialDegree, NCPLinearQ, NCPQuadraticQ,
       NCPNormalize];
 
@@ -93,8 +94,71 @@ Begin[ "`Private`" ]
     Map[NCSplitMonomialAux[#,vars]&, List@@m];
   NCSplitMonomials[m_, vars_List] := {NCSplitMonomialAux[m,vars]};
 
+  (* NCPPlus *)
+  Clear[NCPSameVariablesQ];
+  NCPSameVariablesQ[pp__NCPolynomial] := Block[
+    {p = {pp}},
+    Return[And @@ Map[(#[[3]] === p[[1,3]])&, Rest[p]]];
+  ];
+
+  (* NCPPlus *)
+  NCPPlus[pp__NCPolynomial?NCPSameVariablesQ] := Block[
+    {p = {pp}},
+    Return[
+      NCPolynomial[Plus @@ p[[All,1]],
+                   Merge[p[[All,2]], Flatten[Join[#], 1]&],
+                   p[[1,3]] ]];
+  ];
+  
+
   (* NCToNCPolynomial *)
 
+  Clear[NCPVectorizeAux];
+  NCPVectorizeAux[x_,left_,right_] := 
+    ReplacePart[x, {2 -> left x[[2]], Length[x] -> right Last[x]}];
+  
+  Clear[NCPVectorize];
+  NCPVectorize[p_NCPolynomial, {m_, n_}, {i_, j_}] := Module[
+    {left, right, tmp},
+
+    (*
+    Print["(m, n) = (", m, ",", n, ")"];
+    Print["p(", i, ",", j, ") = ", p];
+    *)
+      
+    left = Normal[SparseArray[{i,1} -> 1, {m,1}]];
+    right = Normal[SparseArray[{1,j} -> 1, {1,n}]];
+
+    (*
+    Print["left = ", Normal[left]];
+    Print["right = ", Normal[right]];
+    *)
+    
+    Return[NCPolynomial[
+               (left p[[1]]) . right,
+               Map[Map[(NCPVectorizeAux[#, left, right]&), #, {1}]&, p[[2]]],
+               p[[3]] ]];
+
+  ];
+  
+  NCToNCPolynomial[mat_?MatrixQ, vars_List] := Module[
+    {tmp},
+
+    (* Convert entries *)
+    tmp = Map[NCToNCPolynomial[#, vars] &, mat, {2}];
+
+    (* Print["tmp = ", tmp]; *)
+    
+    (* Vectorize polys *)
+    {m,n} = Dimensions[mat];
+    tmp = MapIndexed[NCPVectorize[#1, {m,n}, #2]&, tmp, {2}];
+
+    (* Print["tmp2 = ", tmp]; *)
+      
+    Return[NCPPlus @@ Flatten[tmp]];
+     
+  ];
+  
   NCToNCPolynomial[poly_] := 
       NCToNCPolynomial[poly, Select[NCGrabSymbols[poly], NonCommutativeQ]];
 
