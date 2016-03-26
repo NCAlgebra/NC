@@ -25,6 +25,7 @@ The following `options` can be given:
 * `inv`: If *True* `inv[x]` is displayed as `x` with a superscript '-1';
 * `aj`: If *True* `aj[x]` is displayed as `x` with a superscript '\*';
 * `rt`: If *True* `rt[x]` is displayed as `x` with a superscript '1/2';
+* `Array`: If *True* matrices are displayed using `MatrixForm`;
 * `All`: Set all available options to *True* or *False*.
 
 See also:

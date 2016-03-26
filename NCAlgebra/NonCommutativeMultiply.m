@@ -46,6 +46,9 @@ Begin[ "`Private`" ]
   CommutativeQ[BlankSequence] = False;
   CommutativeQ[BlankNullSequence] = False;
 
+  (* a matrix is noncommutative *)
+  CommutativeQ[_?MatrixQ] := False;
+  
   (* a commutative functions is commutative if all arguments are 
      also commutative *)
   CommutativeQ[f_?CommutativeQ[x___]] := 

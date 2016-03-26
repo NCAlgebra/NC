@@ -273,7 +273,7 @@ Module[
 
   (* Bill's tests *)
   expr = ExpandNonCommutativeMultiply[tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y)];
-  Print[NCCollect[expr, {k,m}]];
-
+  answer = tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y);
+  NCTest[NCCollect[expr, {k,m}], answer];
 
 ];

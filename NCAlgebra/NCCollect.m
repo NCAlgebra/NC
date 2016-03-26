@@ -50,6 +50,9 @@ Begin["`Private`"];
 
   (* NCStrongCollect *)
 
+  NCStrongCollect[expr_List, vars_] := 
+     Map[NCStrongCollect[#, vars]&, expr];
+
   NCStrongCollect[expr_, vars_List] := Module[
     {tmp = expr},
     (* Print["in = ", tmp]; *)
@@ -124,6 +127,9 @@ Begin["`Private`"];
   NCCompose[expr_Association, degree_List] := expr[degree];
 
   (* NCCollect *)
+
+  NCCollect[expr_List, vars_] := 
+     Map[NCCollect[#, vars]&, expr];
 
   NCCollect[expr_, var_] := NCCollect[expr, {var}];
                              

@@ -8,7 +8,7 @@ Module[
   options = Options[NCSetOutput];
 
   NCTest[options[[All, 1]], 
-         {Dot, rt, tp, inv, aj}];
+         {Dot, rt, tp, inv, aj, Array}];
 
   (* Simple forms *)
   expr = x ** y;
