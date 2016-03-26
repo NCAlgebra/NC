@@ -31,8 +31,55 @@ Begin[ "`Private`" ]
 
   (* NCSylvesterRepresentation *)
 
-  NCSylvesterRepresentationAux;
+  
+  (* Blow representation from scalar to matrix representation *)
+
+  Clear[BlowRepresentation]
+  BlowRepresentation[
+    {leftBasis_, rightBasis_},
+    {r_, s_},
+    {left_, right_, F_, var_},
+    {ii_, jj_}
+    ] := Module[
+    {i, j},
+
+    i = r (Flatten[Map[Position[leftBasis, #, 1] &, left]] - 1) + ii;
+    j = s (Flatten[Map[Position[rightBasis, #, 1] &, right]] - 1) + jj;
+
+    MapThread[(#1 -> #2) &, {Flatten[Outer[List, i, j], 1], 
+      Flatten[F]}]
+  ];
+
   Clear[NCSylvesterRepresentationAux];
+  NCSylvesterRepresentationAux[polys_?MatrixQ, 
+                               var_Symbol] := Module[
+     {exp, leftBasis, rightBasis,
+      p, q, r, s, F},
+
+     exp = Map[NCSylvesterRepresentationAux[#[[2]], var] &, polys, {2}];
+     leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
+     rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
+
+     (* Print["exp = ", exp]; *)
+                                   
+     {r, s} = Dimensions[exp, 2];
+     p = Length[leftBasis];
+     q = Length[rightBasis];
+
+     F = If[ p + q == 0,
+
+         {{}}
+         ,
+         SparseArray[
+           Flatten[MapIndexed[
+             BlowRepresentation[
+               {leftBasis, rightBasis}, {r, s}, ##] &, exp, {2}]],
+           {p r, q s}]
+     ];
+
+     Return[{leftBasis, rightBasis, F, var}];
+  ];
+
   NCSylvesterRepresentationAux[poly_Association, 
                                var_Symbol] := Module[
     {exp, coeff, left, right, leftBasis, rightBasis,
@@ -66,6 +113,22 @@ Begin[ "`Private`" ]
 
   ];
 
+  NCSylvesterRepresentation[mat_?MatrixQ] := Module[
+    {vars},
+      
+    (* TODO: Check if p has same variables *)
+    vars = mat[[1,1,3]];
+    If [Not[And @@ Flatten[Map[(#===vars)&, mat[[All,All,3]], {2}]]],
+        Print["VARIABLES ARE INCONSISTENT"];
+    ];
+      
+    (* Print["vars = ", vars]; *)
+      
+    Prepend[Map[NCSylvesterRepresentationAux[mat, #]&, vars],
+            mat[[All,All,1]] ]
+      
+   ] /; And @@ Thread[Flatten[Map[Head, mat, {2}]] == NCPolynomial];
+
   NCSylvesterRepresentation[p_NCPolynomial] := (
     If [!NCPLinearQ[p],
         Message[NCSylvesterRepresentation::NotLinear];
@@ -74,8 +137,8 @@ Begin[ "`Private`" ]
     Prepend[Map[NCSylvesterRepresentationAux[p[[2]], #]&, p[[3]]],
             p[[1]] ]
   );
-
-
+  
+  
   (* NCSylvesterRepresentationToNCPolynomial *)
 
   Clear[LeftFactorMultiply];
@@ -100,48 +163,48 @@ Begin[ "`Private`" ]
 
   NCSylvesterRepresentationToNCPolynomialAux[{left_,right_,F_,var_},
                       collect_] := 
-  Module[
-    {l, u, pr, qs, r, s, p, q},
+    Module[
+      {l, u, pr, qs, r, s, p, q},
 
-    {pr, qs} = Dimensions[F];
-    p = Length[left];
-    q = Length[right];
-    r = pr/p;
-    s = qs/q;
+      {pr, qs} = Dimensions[F];
+      p = Length[left];
+      q = Length[right];
+      r = pr/p;
+      s = qs/q;
 
-    {l,u} = If [collect
-        , 
-      
-        (* Factor coefficient matrix F and 
-           compute LU matrices truncated and permuted *)
-        GetLUMatrices @@ LUDecompositionWithCompletePivoting[F]
+      {l,u} = If [collect
+          , 
 
-        ,
-        
-        (* Do not factor coefficient matrix F *)
-        {SparseArray[{{i_, i_} -> 1}, {p, p}], F}
-        
+          (* Factor coefficient matrix F and 
+             compute LU matrices truncated and permuted *)
+          GetLUMatrices @@ LUDecompositionWithCompletePivoting[F]
+
+          ,
+
+          (* Do not factor coefficient matrix F *)
+          {SparseArray[{{i_, i_} -> 1}, {p, p}], F}
+
+      ];
+
+      (*
+      Print["l = ", Normal[l]];
+      Print["u = ", Normal[u]];
+      *)
+
+      (* Multiply factors *)
+      l = LeftFactorMultiply[left, l, r];
+      u = RightFactorMultiply[right, u, s];
+
+      Return[ 
+        If [ r === 1 && s === 1, 
+           {Flatten[l, 1], Flatten[u, 1], var}
+          ,
+           { Flatten[Partition[l, {r, 1}], 1],
+             Map[Flatten[#,1]&, Partition[u, {1, s}]], var }
+        ]
+      ];
+
     ];
-
-    (*
-    Print["l = ", Normal[l]];
-    Print["u = ", Normal[u]];
-    *)
-
-    (* Multiply factors *)
-    l = LeftFactorMultiply[left, l, r];
-    u = RightFactorMultiply[right, u, s];
-     
-    Return[ 
-      If [ r === 1 && s === 1, 
-         {Flatten[l, 1], Flatten[u, 1], var}
-        ,
-         { Flatten[Partition[l, {r, 1}], 1],
-           Map[Flatten[#,1]&, Partition[u, {1, s}]], var }
-      ]
-    ];
-
-  ];
 
   NCSylvesterRepresentationToNCPolynomial[sylv_, 
                       opts:OptionsPattern[{}]] := Module[
@@ -157,13 +220,14 @@ Begin[ "`Private`" ]
       
     m0 = First[sylv];
     vars = sylv[[2;;,4]];
-                          
+
     (* Collect polynomial *)
 
     rules = Map[NCSylvesterRepresentationToNCPolynomialAux[#,collect]&,
                 Rest[sylv], {1}];
 
-    (* 
+
+    (*
     Print["vars = ", vars];
     Print["rules = ", rules];
     *)
@@ -184,23 +248,6 @@ Begin[ "`Private`" ]
   (* ------------------------------------------------------------ *)
   (* OLDER CODE *)
     
-  (* Blow representation from scalar to matrix representation *)
-
-  Clear[BlowRepresentation]
-  BlowRepresentation[
-    {leftBasis_, rightBasis_},
-    {r_, s_},
-    {left_, right_, F_, var_},
-    {ii_, jj_}
-    ] := Module[
-    {i, j},
-
-    i = r (Flatten[Map[Position[leftBasis, #, 1] &, left]] - 1) + ii;
-    j = s (Flatten[Map[Position[rightBasis, #, 1] &, right]] - 1) + jj;
-
-    MapThread[(#1 -> #2) &, {Flatten[Outer[List, i, j], 1], 
-      Flatten[F]}]
-    ];
 
   (* Grow representation to equalize sizes given common left and right basis *)
 

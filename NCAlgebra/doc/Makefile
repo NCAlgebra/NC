@@ -7,8 +7,10 @@ FILES = NonCommutativeMultiply.usage \
 	NCSymmetric.usage \
 	NCSelfAdjoint.usage \
 	NCOutput.usage \
+	NCMatMult.usage \
 	NCPolynomial.usage \
 	NCSylvester.usage \
+	NCRealization.usage \
 	NCUtil.usage \
         MatrixDecompositions.usage
 
@@ -20,8 +22,10 @@ MANUAL = NonCommutativeMultiply.md \
 	NCSymmetric.md \
 	NCSelfAdjoint.md \
 	NCOutput.md \
+	NCMatMult.md \
 	NCPolynomial.md \
 	NCSylvester.md \
+	NCRealization.md \
 	NCUtil.md \
         MatrixDecompositions.md
 

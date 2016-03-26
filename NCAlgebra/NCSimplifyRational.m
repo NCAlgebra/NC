@@ -24,6 +24,8 @@ BeginPackage[ "NCSimplifyRational`",
               "NonCommutativeMultiply`" ];
 
 Clear[NCNormalizeInverse, 
+      NCPreSimplifyRationalSinglePass,
+      NCPreSimplifyRational,
       NCSimplifyRationalSinglePass,
       NCSimplifyRational];
 

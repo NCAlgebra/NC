@@ -13,6 +13,7 @@
 (* :History: *)
 
 BeginPackage[ "NCPolynomial`",
+              "NCMatMult`",
               "NCUtil`",
 	      "NonCommutativeMultiply`" ];
 
@@ -186,7 +187,7 @@ Begin[ "`Private`" ]
       
       (* Print["invs = ", invs]; *)
 
-      (* Create one new variables for each inv *)
+      (* Create one new variable for each inv *)
       ratVars = Table[Unique["rat"], Length[invs]];
       SetNonCommutative[ratVars];
 
@@ -229,6 +230,9 @@ Begin[ "`Private`" ]
 
   NCPolynomialToNC[p_NCPolynomial] := p[[1]] + NCPTermsToNC[p[[2]]];
 
+  NCPolynomialToNC[p_NCPolynomial] := p[[1]] + 
+      ArrayFlatten[NCMatrixExpand[NCPTermsToNC[p[[2]]]]] /; MatrixQ[p[[1]]];
+  
   (* NCPDecompose *)
    
   Clear[NCPDecomposeAux];

@@ -118,4 +118,56 @@ Block[
      NCSylvesterRepresentation::NotLinear
    ];
 
+   (* Matrix of polynomials *)
+
+   vars = {x};
+   mat = {{a**x+x**a,b**x},{x**b,1}};
+   p = Map[NCToNCPolynomial[#, vars]&, mat, {2}];
+   exp = NCSylvesterRepresentation[p];
+   answer = {{{0, 0}, {0, 1}}, 
+             {{1, a, b}, {1, a, b}, 
+                SparseArray[{{0, 0, 1, 0, 0, 0}, 
+                             {0, 0, 0, 0, 1, 0},  
+		             {1, 0, 0, 0, 0, 0},  
+		             {0, 0, 0, 0, 0, 0}, 
+		             {0, 1, 0, 0, 0, 0}, 
+		             {0, 0, 0, 0, 0, 0}}], x}};
+    NCTest[exp, answer];
+
+    answer = NCPolynomial[{{0,0},{0,1}},
+                          <|{x}->{{1,{{b},{0}},{{0,1}}},
+                                  {1,{{1},{0}},{{a,0}}},
+                                  {1,{{0},{1}},{{b,0}}},
+                                  {1,{{a},{0}},{{1,0}}}}|>,
+		          {x}];
+
+    NCTest[NCSylvesterRepresentationToNCPolynomial[exp], answer];
+    NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
+
+   (* Matrix of polynomials *)
+
+   vars = {x};
+   mat = {{a**x+x**a+c**y+y**c,b**x},{x**b,1}};
+   p = Map[NCToNCPolynomial[#, vars]&, mat, {2}];
+   exp = NCSylvesterRepresentation[p];
+   answer = {{{c**y+y**c, 0}, {0, 1}}, 
+             {{1, a, b}, {1, a, b}, 
+                SparseArray[{{0, 0, 1, 0, 0, 0}, 
+                             {0, 0, 0, 0, 1, 0},  
+		             {1, 0, 0, 0, 0, 0},  
+		             {0, 0, 0, 0, 0, 0}, 
+		             {0, 1, 0, 0, 0, 0}, 
+		             {0, 0, 0, 0, 0, 0}}], x}};
+    NCTest[exp, answer];
+
+    answer = NCPolynomial[{{c**y+y**c, 0}, {0, 1}},
+                          <|{x}->{{1,{{b},{0}},{{0,1}}},
+                                  {1,{{1},{0}},{{a,0}}},
+                                  {1,{{0},{1}},{{b,0}}},
+                                  {1,{{a},{0}},{{1,0}}}}|>,
+		          {x}];
+
+    NCTest[NCSylvesterRepresentationToNCPolynomial[exp], answer];
+    NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
+
 ];

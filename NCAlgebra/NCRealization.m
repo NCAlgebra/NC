@@ -36,11 +36,22 @@ BeginPackage["NCRealization`",
 	     "NCLinearAlgebra`"]
 
 
+Clear[NCDescriptorRealization,
+      NCDeterminantalRepresentationReciprocal,
+      NCMatrixDescriptorRealization,
+      NCMinimalDescriptorRealization,
+      NCSymmetrizeMinimalDescriptorRealization,
+      NCSymmetricDescriptorRealization,
+      NCSymmetricDeterminantalRepresentationDirect,
+      NCSymmetricDeterminantalRepresentationReciprocal];
+
+
+
+
 NCLinearQ::usage = "NCLinearQ[RationalExpression, UnknownVariables] returns True if 
 RationalExpression is linear in (a list of) UnknownVariables, False
 otherwise. NCLinearQ expands expressions using NCExpand first, then
 determines linearity, so (inv[x]+A)**x is actually linear in x.";
-
 
 NCLinearPart::usage = "NCLinearPart[RationalExpression,UnknownVariables] returns the part of
 RationalExpression that is linear in (a list of) UnknownVariables.
@@ -51,7 +62,6 @@ actually linear. But, NCLinearPart[(x + inv[x]) ** x, {x}] returns 0 since (x
 + inv[x]) ** x is not ENTIRELY linear. NCLinearPart + NCNonLinearPart =
 original expression.";
 
-
 NCNonLinearPart::usage = "NCNonLinearPart[RationalExpression,UnknownVariables] returns the part of
 RationalExpression that is not linear in (a list of) UnknownVariables.
 RationalExpression is NOT expanded, SO in effect what gets returned is a sum
@@ -61,75 +71,43 @@ actually linear. NCNonLinearPart[ y + (x + inv[x]) ** x, {x,y}] returns (x +
 inv[x]) ** x since (x + inv[x]) ** x is nonlinear as a whole (but y isn't).
 NCLinearPart + NCNonLinearPart = original expression.";
 
-
 BlockDiagonalMatrix::usage = "BlockDiagonalMatrix[ListOfMatrices] returns the
  block diagonal matrix with the matrices in ListOfMatrix on the diagonal.
  Each matrix in ListOfMatrices can be arbitrary size. i.e. the output matrix
  doesn't have to be square.";
 
-
 MatMultFromRight::usage = "MatMultFromRight[A,B,C,...]   It's often more efficient to perform multiplication
  of several matrices starting from the right. For example, if the last matrix is a vector (n-by-1) and the
   rest are square matrices (n-by-n).";
-
 
 MatMultFromLeft::usage = "MatMultFromLeft[A,B,C,...] is the default of MatMult. If you want the matrix
  multiplications to start on the left. This is most efficient, for example, if the first matrix is a
   vector (1-by-n) and the rest are square matrices (n-by-n).";
 
-
-
-NCDescriptorRealization::usage = "NCDescriptorRealization[RationalExpression,UnknownVariables]
-returns a list of 3 matrices {C, G, B} such that C(G^-1)B is the given
-RationalExpression. i.e. MatMult[C,NCInverse[G],B] === RationalExpression.
-C and B do not contain any UnknownsVariables (list). And G has linear entries
-in the UnknownVariables.";
-
-
-NCMatrixDescriptorRealization::usage = "NCMatrixDescriptorRealization[RationalMatrix,UnknownVariables]
- is similar to NCDescriptorRealization except it takes a MATRIX with rational function entries and
-  returns a matrix of lists of the vectors/matrix {C,G,B}. A different {C,G,B} for each entry.";
-
-
-
 CGBToPencil::usage = "CGBToPencil[CGB] takes the list of 3 matrices returned by NCDescriptorRealization
  and returns a matrix with linear entries which has a Schur Complement equivalent to the rational
   expression that the CGB realization represents.";
-
-
 
 NCFindPencil::usage = "NCFindPencil[Expression,Unknowns] returns a matrix with linear entries in the
  Unknowns (Linear Pencil) such that a Schur Complement of the matrix is the original Expression.
   Expression can be a rational function or a matrix with rational function entries.";
 
-
-
 CGBMatrixToBigCGB::usage = "CGBMatrixToBigCGB[MatrixOfCGB] returns a list of 3 matrices {C, G, B} such
  that CG^(-1)B is the original matrix that the MatrixOfCGB was derived from.";
-
-
 
 NCPencilToList::usage = "NCPencilToList[Pencil,Unknowns] takes a matrix Pencil (linear in the Unknowns)
  and returns a list of matrices {A0,A1,A2,...} such that Pencil = A0 + A1*Unknowns[[1]] + A2*Unkowns[[2]] + ...";
 
-
-
 NCListToPencil::usage = "NCListToPencil[ListOfMatrices,Unknowns] creates a linear pencil.
  For example, NCListToPencil[{A0,A1,A2},{1,x,y}] is A0 + A1**x + A2**y.";
-
-
 
 NCMakeMonic::usage = "NCMakeMonic[{CC_,Pencil_,BB_},Unknowns_] returns a descriptor realization
  {C2,Pencil2,B2} that is monic. For this to be possible, the realization must represent a rational
   function that's not zero at the origin.";
 
-
-
 NCFormLettersFromPencil::usage = "NCFormLettersFromPencil[A_List,B_]. Given a realization C.A^(-1).B,
  where A = A0 + A1*x1 + A2*x2 +...+An*xn, this returns the list { A0^(-1).A1, A0^(-1).A2,...,A0^(-1).An,A0^(-1).B}.
   These are the letters that are used when finding the controllability and observability spaces.";
-
-
 
 NCFormControllabilityColumns::usage = "NCFormControllabilityColumns[A_List,B_,opts___]. Given the realization
  C.(I-A)^(-1).B, this returns a matrix such that the columns of its transpose span the controllability space.\n
@@ -140,32 +118,13 @@ With optional argument ReturnWordList->False, the output is {Matrix,ListOfWords}
 
 Optional argument Verbose->True, prints information as it's working.";
 
-
-NCMinimalDescriptorRealization::usage = "NCMinimalDescriptorRealization[RationalFunction,UnknownVariables_List].
- Returns {C,G,B} where MatMult[C,NCInverse[G],B] == RationalFunction, G is linear in the UnknownVariables, and
-  the realization is minimal (but may be pinned).";
-
-
 RJRTDecomposition::usage = \
 "RJRTDecomposition[SymmetricMatrix_,opts___]. Returns {R,J} such that SymmetricMatrix == R.J.Transpose[R] and J
  is a signature matrix. Returns the answer in floating point unless the optional argument UseFloatingPoint->False is used.
   Floating point is necessary except for small examples because eigenvectors and eigenvalues are calculated in the algorithm.";
 
-
-NCSymmetrizeMinimalDescriptorRealization::usage = \
-"NCSymmetrizeMinimalDescriptorRealization[{C_,G_,B_},unknowns_]. Symmetrizes the minimal realization {C,G,B}
- (such as output from GetFMRealization) and outputs {Ctilda,Gtilda} corresponding to the realization
-  {Ctilda, Gtilda,Transpose[Ctilda]}. Warning: May produces errors if the realization doesn't correspond to a symmetric rational function.";\
-
-
-NCSymmetricDescriptorRealization::usage = \
-"Combines 2 steps: NCSymmetricDescriptorRealization[RationalSymmetricFunction_, Unknowns_] :=
- NCSymmetrizeMinimalDescriptorRealization[NCMinimalDescriptorRealization[RationalSymmetricFunction, Unknowns]]";
-
-
 NonCommutativeLift::usage = \
 "NonCommutativeLift[Rational_] returns a noncommutative symmetric lift of Rational.";
-
 
 PinningSpace::usage = "PinningSpace[Pencil_,Unknowns_] returns a matrix whose columns span the pinning space of Pencil.
  Generally, either an empty matrix or a d-by-1 matrix (vector).";
@@ -180,26 +139,6 @@ TestDescriptorRealization::usage = "TestDescriptorRealization[Rat,{C,G,B},Unknow
 
 SignatureOfAffineTerm::usage = "SignatureOfAffineTerm[Pencil,Unknowns] returns a list of the number of positive,
  negative and zero eigenvalues in the affine part of Pencil.";
-
-
-NCDeterminantalRepresentationReciprocal::usage = \
-"NCDeterminantalRepresentationReciprocal[NCPolynomial,Unknowns] returns a linear pencil matrix whose determinant
- equals Constant * CommuteEverything[NCPolynomial]. This uses the reciprocal algorithm: find a minimal descriptor
-  realization of inv[NCPolynomial], so NCPolynomial must be nonzero at the origin.";
-
-
-NCSymmetricDeterminantalRepresentationReciprocal::usage = \
-"NCSymmetricDeterminantalRepresentationReciprocal[NCSymmetricPolynomial,Unknowns] returns a linear pencil matrix
- whose determinant equals Constant * CommuteEverything[NCSymmetricPolynomial]. This uses the reciprocal algorithm:
- find a symmetric minimal descriptor realization of inv[NCSymmetricPolynomial], so NCSymmetricPolynomial must be
-  nonzero at the origin.";
-
-
-NCSymmetricDeterminantalRepresentationDirect::usage = \
-"NCSymmetricDeterminantalRepresentationDirect[NCSymmetricPolynomial,Unknowns] returns a linear pencil matrix whose
- determinant equals Constant * CommuteEverything[NCSymmetricPolynomial]. This uses the direct algorithm: Find a
-  realization of 1 - NCSymmetricPolynomial,...";
-
 
 (********** Optional Argument Definitions **********)
 

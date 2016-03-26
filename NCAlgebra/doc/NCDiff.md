@@ -19,11 +19,11 @@ Members being deprecated:
 For example, if:
 
     expr = a**inv[1+x]**b + x**c**x
-    
+
 then
 
     NCDirectionalD[expr, {x,h}]
-    
+
 returns
 
     h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b
@@ -41,15 +41,15 @@ The transpose of the gradient of the nc expression `expr` is the derivative with
 For example, if:
 
     expr = x**a**x**b + x**c**x**d
-    
-then its directional derivative in the direction `h` is 
+
+then its directional derivative in the direction `h` is
 
     NCDirectionalD[expr, {x,h}]
-    
+
 which returns
 
     h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
-    
+
 and
 
     NCGrad[expr, x]
@@ -57,7 +57,7 @@ and
 returns the nc gradient
 
     a**x**b + b**x**a + c**x**d + d**x**c
-    
+
 For example, if:
 
     expr = x**a**x**b + x**c**y**d
@@ -69,10 +69,10 @@ is a function on variables `x` and `y` then
 returns the nc gradient list
 
     {a**x**b + b**x**a + c**y**d, d**x**c}
-    
-      
+
+
 **IMPORTANT**: The expression returned by NCGrad is the transpose or the adjoint of the standard gradient. This is done so that no assumption on the symbols are needed. The calculated expression is correct even if symbols are self-adjoint or symmetric.
-       
+
 See also:
 [NCDirectionalD](#NCDirectionalD).
 
@@ -83,14 +83,15 @@ See also:
 For example, if:
 
     expr = y**inv[x]**y + x**a**x
-    
+
 then
 
     NCHessian[expr, {x,h}, {y,s}]
-    
+
 returns
 
-    2 h**a**h + 2 s**inv[x]**s - 2 s**inv[x]**h**inv[x]**y - 2 y**inv[x]**h**inv[x]**s + 2 y**inv[x]**h**inv[x]**h**inv[x]**y
+    2 h**a**h + 2 s**inv[x]**s - 2 s**inv[x]**h**inv[x]**y -
+    2 y**inv[x]**h**inv[x]**s + 2 y**inv[x]**h**inv[x]**h**inv[x]**y
 
 See also:
 [NCDiretionalD](#NCDirectionalD), [NCGrad](#NCGrad).
@@ -103,4 +104,3 @@ See also:
 
 See also:
 [NCDirectionalD](#DirectionalD)
-
