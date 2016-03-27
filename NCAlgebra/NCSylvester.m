@@ -19,7 +19,8 @@ BeginPackage[ "NCSylvester`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCSylvesterRepresentation,
-      NCSylvesterRepresentationToNCPolynomial];
+      NCSylvesterRepresentationToNCPolynomial,
+      NCSylvesterCollectOnVars];
 
 Get["NCSylvester.usage"];
 
@@ -240,102 +241,101 @@ Begin[ "`Private`" ]
       
   ];
 
-  (* ------------------------------------------------------------ *)
-  (* OLDER CODE *)
-    
-
-  (* Grow representation to equalize sizes given common left and right basis *)
-
-  Clear[GrowRepresentation]
-  GrowRepresentation[
+  
+  (* NCSylvesterCollectOnVar *)
+  
+  Clear[NCSylvesterGrowRepresentation];
+  NCSylvesterGrowRepresentation[
     {leftBasis_, rightBasis_},
     {r_, s_},
     {left_, right_, F_, var_}
     ] := Module[
-    {p, q, FF},
+      {p, q, FF},
 
-    p = Length[leftBasis];
-    q = Length[rightBasis];
+      p = Length[leftBasis];
+      q = Length[rightBasis];
 
-    NCDebug[2, p, q];
+      (*
+      Print["r = ", r];
+      Print["s = ", s];
+      Print["p = ", p];
+      Print["q = ", q];
+      Print["leftBasis = ", leftBasis];
+      Print["rightBasis = ", rightBasis];
+      Print["left = ", left];
+      Print["right = ", right];
+      Print["F = ", F];
+      Print["var = ", var];
+      *)
 
-    If[p + q == 0, 
-      Return[{{}}];
-    ]
-
-    FF = If [Length[rightBasis] === Length[right],
-      F
-     ,
-      F.KroneckerProduct[
-        Part[SparseArray[{i_, i_} -> 1, {q, q}], 
-         Flatten[Map[Position[rightBasis, #, 1] &, right]], All],
-        SparseArray[{i_, i_} -> 1, {s, s}]
-        ]
+      If[p + q == 0, 
+        Return[{{}}];
       ];
 
-    If [Length[leftBasis] =!= Length[left],
-     FF =
-       KroneckerProduct[
-         Part[SparseArray[{i_, i_} -> 1, {p, p}], All, 
-          Flatten[Map[Position[leftBasis, #, 1] &, left]]],
-         SparseArray[{i_, i_} -> 1, {r, r}]
-         ].FF;
-     ];
+      FF = If [Length[rightBasis] === Length[right],
+        F
+       ,
+        F.KroneckerProduct[
+          Part[SparseArray[{i_, i_} -> 1, {q, q}], 
+           Flatten[Map[Position[rightBasis, #, 1] &, right]], All],
+          SparseArray[{i_, i_} -> 1, {s, s}]
+          ]
+        ];
 
-    Return[FF];
+      (* Print["FF = ", FF]; *)
+
+      If [Length[leftBasis] =!= Length[left],
+       FF =
+         KroneckerProduct[
+           Part[SparseArray[{i_, i_} -> 1, {p, p}], All, 
+            Flatten[Map[Position[leftBasis, #, 1] &, left]]],
+           SparseArray[{i_, i_} -> 1, {r, r}]
+           ].FF;
+       ];
+
+      (* Print["FF = ", FF]; *)
+
+      Return[FF];
 
   ];
 
-  NCOldSylvesterRepresentation[f_?MatrixQ, 
-                            var_?MatrixQ] := Module[
-     {exp, leftBasis, rightBasis,
-      p, q, r, s, F},
+  Clear[NCSylvesterCollectOnVarsAux];
+  NCSylvesterCollectOnVarsAux[{s0_, slv__}, var_] := 
+    Select[{slv}, (#[[4]] == var)&];
 
-     exp = ExpandNonCommutativeMultiply[f];
-     {r, s} = Dimensions[exp, 2];
+  NCSylvesterCollectOnVarsAux[{s0_, slv__}, var_?MatrixQ] := Module[
+      {sylv = {slv}, pos, leftBasis, rightBasis, exp},
+      
+      {r, s} = Dimensions[s0];
 
-     exp = Map[NCOldSylvesterRepresentation[exp, #] &, var, {2}];
+      (* Retrieve representation *)
+      pos = Map[Flatten, Map[Position[sylv[[All, 4]], #] &, var, {2}]];
+      exp = Map[sylv[[#]]&, pos, {2}];
 
-     leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
-     rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
+      leftBasis = Union[Flatten[sylv[[All, 1]]]];
+      rightBasis = Union[Flatten[sylv[[All, 2]]]];
 
-     NCDebug[2, r, s, exp];
+      (*
+      Print["r = ", r];
+      Print["s = ", s];
+      Print["pos = ", pos];
+      Print["exp = ", exp];
+      Print["leftBasis = ", leftBasis];
+      Print["rightBasis = ", rightBasis];
+      *)
 
-     Return[
-      {leftBasis, rightBasis, Map[GrowRepresentation[
-          {leftBasis, rightBasis}, {r, s}, #] &, exp, {2}], var}
+      Return[
+        {leftBasis, rightBasis, 
+         Map[NCSylvesterGrowRepresentation[
+              {leftBasis, rightBasis}, {r, s}, #] &, exp, {2}],
+         var}
       ];
 
-     ];
-
-  NCOldSylvesterRepresentation[f_, var_?MatrixQ] :=
-    NCOldSylvesterRepresentation[{{f}}, var];
-
-  NCOldSylvesterRepresentation[f_?MatrixQ, var_Symbol] := Module[
-     {exp, leftBasis, rightBasis,
-      p, q, r, s, F},
-
-     exp = Map[NCOldSylvesterRepresentation[#, var] &, f, {2}];
-     leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
-     rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
-
-     {r, s} = Dimensions[exp, 2];
-     p = Length[leftBasis];
-     q = Length[rightBasis];
-
-     F = If[ p + q == 0,
-
-         {{}}
-         ,
-         SparseArray[
-           Flatten[MapIndexed[
-             BlowRepresentation[
-               {leftBasis, rightBasis}, {r, s}, ##] &, exp, {2}]],
-           {p r, q s}]
-     ];
-
-     Return[{leftBasis, rightBasis, F, var}];
   ];
+
+  NCSylvesterCollectOnVars[sylv_, vars_] := 
+      Prepend[Map[NCSylvesterCollectOnVarsAux[sylv,#]&, vars], sylv[[1]]];
+
   
 End[]
 

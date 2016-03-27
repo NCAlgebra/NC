@@ -183,17 +183,45 @@ Block[
     NCTest[exp, answer];
     NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
 
-    vars = {x};
-    mat = NCMatrixExpand[{{a},{b}}**{{x}}**{{c,d}}];
+    vars = {x,y,w,z};
+    mat = NCMatrixExpand[{{a**e+b,c},{-(a**e+b),b}}**{{x,y},{w,z}}**{{2 c-d,-d},{b,c+d}}];
     p = NCToNCPolynomial[mat, vars];
     exp = NCSylvesterRepresentation[p];
     answer = {{{0, 0}, {0, 0}}, 
-              {{a, b}, {c, d}, 
-                 SparseArray[{{1, 0, 0, 1}, 
-                              {0, 0, 0, 0},   
-  		              {0, 0, 0, 0},  
-		              {1, 0, 0, 1}}], x}};
+              {{b, a**e}, {c, d}, 
+                 SparseArray[{{2, 0, -1, -1}, 
+                              {-2, 0, 1, 1},   
+  		              {2, 0, -1, -1},  
+		              {-2, 0, 1, 1}}], x},
+              {{b, a**e}, {c, d}, 
+                 SparseArray[{{0, 1, 0, 1}, 
+                              {0, -1, 0, -1},   
+  		              {0, 1, 0, 1},  
+		              {0, -1, 0, -1}}], y},
+              {{b}, {c, d}, 
+                 SparseArray[{{0, 0, 0, 0}, 
+                              {2, 0, -1, -1}}], w},
+              {{b}, {c, d}, 
+                 SparseArray[{{0, 0, 0, 0}, 
+                              {0, 1, 0, 1}}], z}
+             };
     NCTest[exp, answer];
-    NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
+    NCTest[ExpandNonCommutativeMultiply[
+             NCPolynomialToNC[
+               NCSylvesterRepresentationToNCPolynomial[exp]]-mat], 
+           {{0,0},{0,0}}];
+
+    Print[Normal[NCSylvesterCollectOnVars[exp, {{x,y},{w,z}}]]];
+
+    {s0, {left, right, F, var}} = NCSylvesterCollectOnVars[exp, {{{x,y},{w,z}}}];
+
+    FF = Plus @@ (Plus @@ MapThread[Times, {F, var}, 2]);
+    exp = MatMult[
+      Transpose[KroneckerProduct[left, IdentityMatrix[2]]],
+      MatMult[FF, KroneckerProduct[right, IdentityMatrix[2]]]
+    ];
+    Print["exp = ", NCExpand[exp]];
+
+    Print["diff = ", NCExpand[exp-mat]];
 
 ];

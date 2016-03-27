@@ -21,7 +21,5 @@ If [ !ValueQ[$NC$Algebra$Loaded],
 << NCReplace`
 << NCMatMult`
 << NCSimplifyRational`
-
 << NCOutput`
 << NCAlias`
-

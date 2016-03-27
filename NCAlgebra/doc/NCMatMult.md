@@ -57,7 +57,7 @@ See also:
 
 ## NCMatrixExpand {#NCMatrixExpand}
 
-`NCMatrixExpand[expr]` expand `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitute `inv` for `NCInverse` and `**` by `MatMult`.
+`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `MatMult`.
 
 See also:
 [NCInverse](#NCInverse), [MatMult](#MatMult).
