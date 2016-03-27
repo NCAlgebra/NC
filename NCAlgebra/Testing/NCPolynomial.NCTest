@@ -196,6 +196,11 @@ Module[
    NCTest[NCPMonomialDegree[expr], {{1,1},{1,1}}];
    NCTest[NCPDegree[expr], 2];
 
+   NCTest[Apply[NCPolynomial`Private`NCPTermsToNCProductAux,
+               Flatten[Apply[NCPolynomial`Private`NCPTermsToNCAux,
+                       Normal[answer[[2]]],
+                       {1}],1], {1}], {a**y**x, x**y**a}];
+
    p = a**x**b+c+d**x**e+a**x**e**x**b;
    expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[c,
@@ -443,6 +448,8 @@ Module[
    p1 = NCToNCPolynomial[expr, {x}];
    NCTest[NCPSameVariablesQ[p1,p1], True];
    NCTest[NCPSameVariablesQ[p1,p1,p1], True];
+   NCTest[NCPCompatibleQ[p1,p1], True];
+   NCTest[NCPCompatibleQ[p1,p1,p1], True];
 
    expr = a**x+b**y;
    p1 = NCToNCPolynomial[expr, {x}];
@@ -450,6 +457,8 @@ Module[
    p2 = NCToNCPolynomial[expr, {x}];
    NCTest[NCPSameVariablesQ[p1,p2], True];
    NCTest[NCPSameVariablesQ[p1,p2,p1], True];
+   NCTest[NCPCompatibleQ[p1,p2], True];
+   NCTest[NCPCompatibleQ[p1,p2,p1], True];
 
    expr = a**x+b**y;
    p1 = NCToNCPolynomial[expr, {x}];
@@ -457,6 +466,8 @@ Module[
    p2 = NCToNCPolynomial[expr, {x,y}];
    NCTest[NCPSameVariablesQ[p1,p2], False];
    NCTest[NCPSameVariablesQ[p1,p2,p1], False];
+   NCTest[NCPCompatibleQ[p1,p2], False];
+   NCTest[NCPCompatibleQ[p1,p2,p1], False];
 
    (* NCPPlus *)
    expr = a**x+b**y;
@@ -571,6 +582,8 @@ Module[
    NCTest[NCPolynomial`Private`NCPVectorize[p, {2,3}, {1,1}],
           answer];
 
+
+
    mat = {{a**x+x**a,b**x},{x**b,1}};
    p = NCToNCPolynomial[mat, {x}];
    answer = NCPolynomial[{{0,0},{0,1}}, 
@@ -580,6 +593,15 @@ Module[
 			    {1,{{0},{1}},{{b,0}}}}|>,
 		    {x}];
    NCTest[p, answer];
+
+   NCTest[Apply[NCPolynomial`Private`NCPTermsToNCProductAux,
+               Flatten[Apply[NCPolynomial`Private`NCPTermsToNCAux,
+                       Normal[answer[[2]]],
+                       {1}],1], {1}],
+          {{{a**x,0},{0,0}},{{x**a,0},{0,0}},{{0,b**x},{0,0}},{{0,0},{x**b,0}}}
+   ];
+
+   NCTest[NCPTermsToNC[p[[2]]] + p[[1]], mat];
    NCTest[NCPolynomialToNC[answer], mat];
 
    mat = {{a**x+x**a+c**y+y**c,b**x},{x**b,1}};
@@ -630,5 +652,17 @@ Module[
 		    {x,y}];
    NCTest[p, answer];
    NCTest[NCPolynomialToNC[answer], mat];
+
+   mat = {{a**x+x**a,b**x},{x**b,1}};
+   p1 = NCToNCPolynomial[mat, {x}];
+   mat = {{a**x+x**a,b**x,2},{x**b,1,3}};
+   p2 = NCToNCPolynomial[mat, {x}];
+   NCTest[NCPCompatibleQ[p1,p1], True];
+   NCTest[NCPCompatibleQ[p1,p1,p1], True];
+   NCTest[NCPCompatibleQ[p1,p2], False];
+   NCTest[NCPCompatibleQ[p1,p2,p2], False];
+   NCTest[NCPCompatibleQ[p2,p2], True];
+
+
 
 ];

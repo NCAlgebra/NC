@@ -53,14 +53,23 @@ Begin["`Private`"];
   NCMatrixExpand[expr_] := 
       NCReplaceRepeated[
           (expr //. inv[a_?MatrixQ] :> NCInverse[a])
-         , {
+         , 
+          NonCommutativeMultiply[b_List, c__List] :>
+               MatMult[b, c]
+
+(*
+      {
           NonCommutativeMultiply[b_List, c__List] :>
                MatMult[b, c],
-          NonCommutativeMultiply[b_List, c_] :>
-               Map[NonCommutativeMultiply[#, c]&, b, {2}],
-          NonCommutativeMultiply[b_, c_List] :>
-               Map[NonCommutativeMultiply[b, #]&, c, {2}]
-      }];
+          NonCommutativeMultiply[b_List, c_] /; Head[c] =!= List :>
+               (* Map[NonCommutativeMultiply[#, c]&, b, {2}], *)
+               MatMult[b, {{c}}],
+          NonCommutativeMultiply[b_, c_List] /; Head[b] =!= List :>
+               (* Map[NonCommutativeMultiply[b, #]&, c, {2}] *)
+               MatMult[{{b}}, c]
+      }
+*)
+      ];
 
   (* Automatically expand tp over matrices *)
   

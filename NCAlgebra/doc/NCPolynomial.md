@@ -28,6 +28,9 @@ Members are:
 * [NCPDecompose](#NCPDecompose)
 * [NCPDegree](#NCPDegree)
 * [NCPMonomialDegree](#NCPMonomialDegree)
+* [NCPCompatibleQ](#NCPCompatibleQ)
+* [NCPSameVariablesQ](#NCPSameVariablesQ)
+* [NCPMatrixQ](#NCPMatrixQ)
 * [NCPLinearQ](#NCPLinearQ)
 * [NCPQuadraticQ](#NCPQuadraticQ)
 * [NCPNormalize](#NCPNormalize)
@@ -205,6 +208,10 @@ returns
 See also:
 [`NCPTermsOfDegree`](#NCPTermsOfDegree),[`NCPTermsOfTotalDegree`](#NCPTermsOfTotalDegree).
 
+## NCPPlus {#NCPPlus}
+
+`NCPPlus[p1,p2,...]` gives the sum of the nc polynomials `p1`,`p2`,... .
+
 ## NCPSort {#NCPSort}
 
 `NCPSort[p]` gives a list of elements of the NCPolynomial `p` in which monomials are sorted first according to their degree then by Mathematica's implicit ordering.
@@ -263,6 +270,27 @@ See also:
 
 See also:
 [`NCPLinearQ`](#NCPLinearQ).
+
+## NCPCompatibleQ {#NCPCompatibleQ}
+
+`NCPCompatibleQ[p1,p2,...]` returns *True* if the polynomials `p1`,`p2`,... have the same variables and dimensions.
+
+See also:
+[NCPSameVariablesQ](#NCPSameVariablesQ), [NCPMatrixQ](#NCPMatrixQ).
+
+## NCPSameVariablesQ {#NCPSameVariablesQ}
+
+`NCPSameVariablesQ[p1,p2,...]` returns *True* if the polynomials `p1`,`p2`,... have the same variables.
+
+See also:
+[NCPCompatibleQ](#NCPCompatibleQ), [NCPMatrixQ](#NCPMatrixQ).
+
+## NCPMatrixQ {#NCPMatrixQ}
+
+`NCMatrixQ[p]` returns *True* if the polynomial `p` is a matrix polynomial.
+
+See also:
+[NCPCompatibleQ](#NCPCompatibleQ).
 
 ## NCPNormalize {#NCPNormalize}
 

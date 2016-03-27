@@ -31,103 +31,98 @@ Begin[ "`Private`" ]
 
   (* NCSylvesterRepresentation *)
 
-  
-  (* Blow representation from scalar to matrix representation *)
-
-  Clear[BlowRepresentation]
-  BlowRepresentation[
-    {leftBasis_, rightBasis_},
-    {r_, s_},
-    {left_, right_, F_, var_},
-    {ii_, jj_}
-    ] := Module[
-    {i, j},
-
-    i = r (Flatten[Map[Position[leftBasis, #, 1] &, left]] - 1) + ii;
-    j = s (Flatten[Map[Position[rightBasis, #, 1] &, right]] - 1) + jj;
-
-    MapThread[(#1 -> #2) &, {Flatten[Outer[List, i, j], 1], 
-      Flatten[F]}]
-  ];
-
   Clear[NCSylvesterRepresentationAux];
-  NCSylvesterRepresentationAux[polys_?MatrixQ, 
-                               var_Symbol] := Module[
-     {exp, leftBasis, rightBasis,
-      p, q, r, s, F},
-
-     exp = Map[NCSylvesterRepresentationAux[#[[2]], var] &, polys, {2}];
-     leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
-     rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
-
-     (* Print["exp = ", exp]; *)
-                                   
-     {r, s} = Dimensions[exp, 2];
-     p = Length[leftBasis];
-     q = Length[rightBasis];
-
-     F = If[ p + q == 0,
-
-         {{}}
-         ,
-         SparseArray[
-           Flatten[MapIndexed[
-             BlowRepresentation[
-               {leftBasis, rightBasis}, {r, s}, ##] &, exp, {2}]],
-           {p r, q s}]
-     ];
-
-     Return[{leftBasis, rightBasis, F, var}];
-  ];
-
   NCSylvesterRepresentationAux[poly_Association, 
                                var_Symbol] := Module[
     {exp, coeff, left, right, leftBasis, rightBasis,
      i, j, p, q, F},
 
-    (* Easy return if independent of var *)
-    If [!KeyExistsQ[poly, {var}]
+    (* Quick return if independent of var *)
+    If [!KeyExistsQ[poly, {var}] || (exp = poly[{var}]) === {}
         ,
         Return[{{},{},SparseArray[{}, {0, 0}],var}];
     ];
-                           
-    (* This will never fail *)
-    exp = poly[{var}];
 
-    (* Print["exp1 = ", exp]; *)
+    (* Print["exp = ", exp]; *)
 
     {coeff, left, right} = Transpose[exp];
-    leftBasis = Union[left];
-    rightBasis = Union[right];
+    leftBasis = Union[Flatten[left]];
+    rightBasis = Union[Flatten[right]];
 
-    p = Length[leftBasis];
-    q = Length[rightBasis];
+    (*                                   
+    Print["coeff = ", coeff];
+    Print["leftBasis = ", leftBasis];
+    Print["rightBasis = ", rightBasis];
+                                   
+    Print["left = ", left];
+    Print["right = ", right];
+    *)
 
-    i = Flatten[Map[Position[leftBasis, #, 1] &, left]];
-    j = Flatten[Map[Position[rightBasis, #, 1] &, right]];
+    If [ MatrixQ[left[[1]]] || MatrixQ[right[[1]]]
+        ,
+         
+         (* Matrix Polynomial *)
+         
+         r = Length[left[[1]]];
+         s = Length[right[[1,1]]];
 
+         (*
+         Print["r = ", r];
+         Print["s = ", s];
+         *)
+
+         (* Determine indices *)
+                      
+         i = r*(Map[Flatten[Map[(Position[leftBasis,#,1])&,#]]&,left,{2}]-2);
+         j = s*(Map[Flatten[Map[(Position[rightBasis,#,1])&,#]]&,right,{2}]-2);
+
+         (* 
+         Print["i = ", i];
+         Print["j = ", j];
+         *)
+
+         i = Map[Max, MapIndexed[(#1 + #2[[2]])&, i, {3}], {1}];
+         j = Map[Max, MapIndexed[(#1 + #2[[3]])&, j, {3}], {1}];
+
+         (*
+         Print["i = ", i];
+         Print["j = ", j];
+         *)
+         
+         (* Drop 0 from basis *)
+         leftBasis = Rest[leftBasis];
+         rightBasis = Rest[rightBasis];
+         
+        ,
+         
+         (* Scalar Polynomial *)
+         
+         r = 1;
+         s = 1;
+
+         (* Determine indices *)
+                      
+         i = Flatten[Map[Position[leftBasis, #, 1] &, left]];
+         j = Flatten[Map[Position[rightBasis, #, 1] &, right]];
+
+         (*
+         Print["i = ", i];
+         Print["j = ", j];
+         *)
+         
+    ];
+
+    (* Assemble F *)
     F = SparseArray[
-      MapThread[({#2, #3} -> #1) &, {coeff, i, j}], {p, q}];
+           MapThread[({#2, #3} -> #1) &, 
+                     {coeff, i, j}], 
+             {r*Length[leftBasis], s*Length[rightBasis]}];
 
+    (* Print["F = ", Normal[F]]; *)
+         
     Return[{leftBasis, rightBasis, F, var}];
 
   ];
-
-  NCSylvesterRepresentation[mat_?MatrixQ] := Module[
-    {vars},
-      
-    (* TODO: Check if p has same variables *)
-    vars = mat[[1,1,3]];
-    If [Not[And @@ Flatten[Map[(#===vars)&, mat[[All,All,3]], {2}]]],
-        Print["VARIABLES ARE INCONSISTENT"];
-    ];
-      
-    (* Print["vars = ", vars]; *)
-      
-    Prepend[Map[NCSylvesterRepresentationAux[mat, #]&, vars],
-            mat[[All,All,1]] ]
-      
-   ] /; And @@ Thread[Flatten[Map[Head, mat, {2}]] == NCPolynomial];
 
   NCSylvesterRepresentation[p_NCPolynomial] := (
     If [!NCPLinearQ[p],

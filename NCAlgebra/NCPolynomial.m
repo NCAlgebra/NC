@@ -20,9 +20,11 @@ BeginPackage[ "NCPolynomial`",
 Clear[NCPolynomial, 
       NCToNCPolynomial, NCPolynomialToNC, NCRationalToNCPolynomial,
       NCPCoefficients, NCPTermsOfDegree, NCPTermsOfTotalDegree, 
-      NCPTermsToNC, NCPDecompose, NCPSort, NCPSameVariablesQ,
+      NCPTermsToNC, NCPDecompose, NCPSort, 
+      NCPCompatibleQ, NCPSameVariablesQ, NCPMatrixQ,
       NCPPlus,
-      NCPDegree, NCPMonomialDegree, NCPLinearQ, NCPQuadraticQ,
+      NCPDegree, NCPMonomialDegree, 
+      NCPLinearQ, NCPQuadraticQ,
       NCPNormalize];
 
 Get["NCPolynomial.usage"];
@@ -95,14 +97,8 @@ Begin[ "`Private`" ]
   NCSplitMonomials[m_, vars_List] := {NCSplitMonomialAux[m,vars]};
 
   (* NCPPlus *)
-  Clear[NCPSameVariablesQ];
-  NCPSameVariablesQ[pp__NCPolynomial] := Block[
-    {p = {pp}},
-    Return[And @@ Map[(#[[3]] === p[[1,3]])&, Rest[p]]];
-  ];
-
-  (* NCPPlus *)
-  NCPPlus[pp__NCPolynomial?NCPSameVariablesQ] := Block[
+  
+  NCPPlus[pp__NCPolynomial?NCPCompatibleQ] := Block[
     {p = {pp}},
     Return[
       NCPolynomial[Plus @@ p[[All,1]],
@@ -281,12 +277,19 @@ Begin[ "`Private`" ]
 
   (* NCPTermsToNC *)
   
+  Clear[NCPTermsToNCProductAux];
+  NCPTermsToNCProductAux[scalar_, left_?MatrixQ, middle__, right_] := 
+    scalar * MatMult[left, {{NonCommutativeMultiply[middle]}}, right];
+
+  NCPTermsToNCProductAux[scalar_, terms___] := 
+    scalar * NonCommutativeMultiply[terms];
+    
   Clear[NCPTermsToNCAux];
   NCPTermsToNCAux[m_, coeffs_] := 
     Map[Prepend[Riffle[Rest[#1],m], First[#1]]&, coeffs];
-  
+
   NCPTermsToNC[terms_] := 
-    Total[Apply[NonCommutativeMultiply,
+    Total[Apply[NCPTermsToNCProductAux,
                 Flatten[Apply[NCPTermsToNCAux, 
                               Normal[terms], {1}], 1], {1}]];
     
@@ -376,6 +379,26 @@ Begin[ "`Private`" ]
     
   NCPQuadraticQ[p_NCPolynomial] := (NCPDegree[p] <= 2);
 
+  (* NCPCompatibleQ *)
+  
+  NCPCompatibleQ[pp__NCPolynomial] := Block[
+    {p = {pp}},
+    Return[And @@ 
+           Map[And[#[[3]] === p[[1,3]],
+               Dimensions[#[[1]]] === Dimensions[p[[1,1]]]]&, Rest[p]]];
+  ];
+
+  (* NCPSameVariableQ *)
+  
+  NCPSameVariablesQ[pp__NCPolynomial] := Block[
+    {p = {pp}},
+    Return[And @@ Map[(#[[3]] === p[[1,3]])&, Rest[p]]];
+  ];
+
+  (* NCPMatrixQ *)
+
+  NCPMatrixQ[p_NCPolynomial] := MatrixQ[p[[1]]];
+  
   (* NCPNormalize *)
   
   Clear[NCPNormalizeAux];

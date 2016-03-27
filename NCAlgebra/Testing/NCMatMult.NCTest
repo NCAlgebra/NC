@@ -81,6 +81,19 @@ Module[
                         {{2 a**u-b**w, 2 a**v-b**x}, 
                          {2 c**u-d**w, 2 c**v-d**x}}];
   
+  NCTest[NCMatrixExpand[{{u},{v}}**{{x}}], {{u**x},{v**x}}];
+
+  NCTest[NCMatrixExpand[{{a},{b}}**{{x}}], {{a**x},{b**x}}];
+  NCTest[NCMatrixExpand[{{x}}**{{c,d}}], {{x**c,x**d}}];
+
+  NCTest[NCMatrixExpand[{{a}}**{{x}}**{{c}}], {{a**x**c}}];
+
+  mat = NCMatrixExpand[{{a},{b}}**{{x}}**{{c,d}}];
+
+  answer = {{(a**e+b)**x**(2 c-d), (a**e+b)**x**d},
+            {b**x**(2 c-d), b**x**d}};
+  NCTest[NCMatrixExpand[{{a**e+b},{b}}**{{x}}**{{2 c-d,d}}], answer];
+
   (* NCInverse *)
 
   mat = {{a,b,0},{tp[b],e,d},{0,tp[d],i}};

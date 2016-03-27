@@ -27,43 +27,59 @@ Begin["`Private`"]
   Clear[FlatNCMultiply];
   SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
 
+  Clear[FlatMatMult];
+  FlatMatMult[x_,y_] := Inner[FlatNonCommutativeMultiply,x,y,Plus];
+  FlatMatMult[x_,y_,z__] := FlatMatMult[FlatMatMult[x,y],z];
+ 
+  Clear[NCReplaceFlatRules];
+  NCReplaceFlatRules = {
+      NonCommutativeMultiply -> FlatNCMultiply,
+      MatMult -> FlatMatMult
+  };
+
+  Clear[NCReplaceReverseFlatRules];
+  NCReplaceReverseFlatRules = {
+      FlatNCMultiply -> NonCommutativeMultiply,
+      FlatMatMult -> MatMult
+  };
+
   NCReplace[expr_, rule_] := 
     ((Replace @@ 
         ({expr, rule} 
-           /. NonCommutativeMultiply -> FlatNCMultiply))
-        /. FlatNCMultiply -> NonCommutativeMultiply);
+           /. NCReplaceFlatRules))
+        /. NCReplaceReverseFlatRules);
 
   NCReplace[expr_, rule_, levelspec_] := 
     ((Replace @@ 
         Append[({expr, rule} 
-                  /. NonCommutativeMultiply -> FlatNCMultiply),
+                  /. NCReplaceFlatRules),
                levelspec])
-        /. FlatNCMultiply -> NonCommutativeMultiply);
+        /. NCReplaceReverseFlatRules);
         
   NCReplaceAll[expr_, rule_] := 
     ((ReplaceAll @@ 
         ({expr, rule} 
-           /. NonCommutativeMultiply -> FlatNCMultiply))
-        /. FlatNCMultiply -> NonCommutativeMultiply);
+           /. NCReplaceFlatRules))
+        /. NCReplaceReverseFlatRules);
 
   NCReplaceRepeated[expr_, rule_] := 
     ((ReplaceRepeated @@ 
         ({expr, rule} 
-           /. NonCommutativeMultiply -> FlatNCMultiply))
-        /. FlatNCMultiply -> NonCommutativeMultiply);
+           /. NCReplaceFlatRules))
+        /. NCReplaceReverseFlatRules);
 
   NCReplaceList[expr_, rule_] := 
     ((ReplaceList @@ 
         ({expr, rule} 
-           /. NonCommutativeMultiply -> FlatNCMultiply))
-        /. FlatNCMultiply -> NonCommutativeMultiply);
+           /. NCReplaceFlatRules))
+        /. NCReplaceReverseFlatRules);
 
   NCReplaceList[expr_, rule_, n_] := 
     ((ReplaceList @@ 
         Append[({expr, rule} 
-                  /. NonCommutativeMultiply -> FlatNCMultiply),
+                  /. NCReplaceFlatRules),
                 n])
-        /. FlatNCMultiply -> NonCommutativeMultiply);
+        /. NCReplaceReverseFlatRules);
 
         
   (* NCMakeRuleSymmetric *)
