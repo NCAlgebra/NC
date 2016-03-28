@@ -41,7 +41,7 @@ Begin[ "`Private`" ]
     (* Quick return if independent of var *)
     If [!KeyExistsQ[poly, {var}] || (exp = poly[{var}]) === {}
         ,
-        Return[{{},{},SparseArray[{}, {0, 0}],var}];
+        Return[var -> {{},{},SparseArray[{}, {0, 0}]}];
     ];
 
     (* Print["exp = ", exp]; *)
@@ -121,7 +121,7 @@ Begin[ "`Private`" ]
 
     (* Print["F = ", Normal[F]]; *)
          
-    Return[{leftBasis, rightBasis, F, var}];
+    Return[var -> {leftBasis, rightBasis, F}];
 
   ];
 
@@ -130,8 +130,8 @@ Begin[ "`Private`" ]
         Message[NCSylvesterRepresentation::NotLinear];
         Return[$Failed];
     ];
-    Prepend[Map[NCSylvesterRepresentationAux[p[[2]], #]&, p[[3]]],
-            p[[1]] ]
+    {p[[1]], Association[Map[NCSylvesterRepresentationAux[p[[2]], #]&, 
+                            p[[3]]]]}
   );
   
   
@@ -153,11 +153,61 @@ Begin[ "`Private`" ]
   };
   
   Clear[NCSylvesterRepresentationToNCPolynomialAux];
-  NCSylvesterRepresentationToNCPolynomialAux[{{},{},F_,var_}, 
+  NCSylvesterRepresentationToNCPolynomialAux[var_, {{},{},F_}, 
                       collect_] := 
      Return[{{},{},var}];
 
-  NCSylvesterRepresentationToNCPolynomialAux[{left_,right_,F_,var_},
+  NCSylvesterRepresentationToNCPolynomialAux[var_?MatrixQ, {left_,right_,F_},
+                      collect_] := 
+    Module[
+      {pr, qs, r, s, p, q, m, n, rank, ind},
+  
+      {pr, qs} = Dimensions[F[[1, 1]]];
+      p = Length[left];
+      q = Length[right];
+      r = pr/p;
+      s = qs/q;
+
+      (* NCDebug[2, r, s]; *)
+
+      (* Factor matrix F *)
+      {l,u} = GetLUMatrices @@ LUDecompositionWithCompletePivoting[ArrayFlatten[F]];
+      rank = Part[ Dimensions[l], 2 ];
+
+      (*
+      Print["l = ", Normal[l]];
+      Print["u = ", Normal[u]];
+      *)
+
+      (* Partition factors *)
+      l = Flatten[Partition[l, {pr, rank}], 1];
+      u = Flatten[Partition[u, {rank ,qs}], 1];
+
+      (* Compute left and right terms *)
+
+      l = ArrayFlatten[{Map[LeftFactorMultiply[left, #, r]&, l]}];
+      u = ArrayFlatten[Map[{RightFactorMultiply[right, #, s]}&, u]];
+
+      (* Rearrange terms *)
+      {m, n} = Dimensions[var];
+
+      (* NCDebug[2, m, n]; *)
+
+      ind = Flatten[Transpose[Partition[ Table[i, {i, m rank}], m]]];
+      l = Flatten[ Partition[ l[[All, ind]], {r, m}], 1];
+
+      (* NCDebug[2, ind, l]; *)
+
+      ind = Flatten[Transpose[Partition[ Table[i, {i, n rank}], n]]];
+      u = Flatten[ Partition[ u[[ind, All]], {n, s}], 1];
+
+      (* NCDebug[2, ind, u]; *)
+
+      Return[{l, u, var}];
+                          
+  ];
+     
+  NCSylvesterRepresentationToNCPolynomialAux[var_, {left_,right_,F_},
                       collect_] := 
     Module[
       {l, u, pr, qs, r, s, p, q},
@@ -202,9 +252,9 @@ Begin[ "`Private`" ]
 
     ];
 
-  NCSylvesterRepresentationToNCPolynomial[sylv_, 
+  NCSylvesterRepresentationToNCPolynomial[{m0_, sylv_}, 
                       opts:OptionsPattern[{}]] := Module[
-    {options, collect, m0, rules, vars},
+    {options, collect, rules, vars},
 
     (* process options *)
 
@@ -214,14 +264,13 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[NCSylvesterRepresentationToNCPolynomial, Collect];
       
-    m0 = First[sylv];
-    vars = sylv[[2;;,4]];
+    vars = Keys[sylv];
 
     (* Collect polynomial *)
 
-    rules = Map[NCSylvesterRepresentationToNCPolynomialAux[#,collect]&,
-                Rest[sylv], {1}];
-
+    rules = KeyValueMap[
+              NCSylvesterRepresentationToNCPolynomialAux[##,collect]&,
+              sylv];
 
     (*
     Print["vars = ", vars];
@@ -300,41 +349,42 @@ Begin[ "`Private`" ]
   ];
 
   Clear[NCSylvesterCollectOnVarsAux];
-  NCSylvesterCollectOnVarsAux[{s0_, slv__}, var_] := 
-    Select[{slv}, (#[[4]] == var)&];
+  NCSylvesterCollectOnVarsAux[sylv_, var_, {r_, s_}] := (var -> sylv[var]);
 
-  NCSylvesterCollectOnVarsAux[{s0_, slv__}, var_?MatrixQ] := Module[
-      {sylv = {slv}, pos, leftBasis, rightBasis, exp},
+  NCSylvesterCollectOnVarsAux[sylv_, var_?MatrixQ, {r_, s_}] := Module[
+      {leftBasis, rightBasis, tmp},
       
-      {r, s} = Dimensions[s0];
-
       (* Retrieve representation *)
-      pos = Map[Flatten, Map[Position[sylv[[All, 4]], #] &, var, {2}]];
-      exp = Map[sylv[[#]]&, pos, {2}];
-
-      leftBasis = Union[Flatten[sylv[[All, 1]]]];
-      rightBasis = Union[Flatten[sylv[[All, 2]]]];
+      tmp = Map[Append[sylv[#], #]&, var, {2}];
+      {leftBasis, rightBasis} = Transpose[Values[sylv][[All,1;;2]]];
+      leftBasis = Union[Flatten[leftBasis]];
+      rightBasis = Union[Flatten[rightBasis]];
 
       (*
       Print["r = ", r];
       Print["s = ", s];
-      Print["pos = ", pos];
-      Print["exp = ", exp];
+      Print["tmp = ", tmp];
       Print["leftBasis = ", leftBasis];
       Print["rightBasis = ", rightBasis];
       *)
 
       Return[
-        {leftBasis, rightBasis, 
-         Map[NCSylvesterGrowRepresentation[
-              {leftBasis, rightBasis}, {r, s}, #] &, exp, {2}],
-         var}
+        var -> {leftBasis, rightBasis, 
+                Map[NCSylvesterGrowRepresentation[
+                      {leftBasis, rightBasis}, {r, s}, #] &, tmp, {2}]}
       ];
 
   ];
 
-  NCSylvesterCollectOnVars[sylv_, vars_] := 
-      Prepend[Map[NCSylvesterCollectOnVarsAux[sylv,#]&, vars], sylv[[1]]];
+  NCSylvesterCollectOnVars[{s0_, sylv_}, vars_List] := Module[
+      {dim = Dimensions[s0]},
+      
+      (* Make sure all variables are listed *)
+      Return[{s0, 
+              Association[
+                  Map[NCSylvesterCollectOnVarsAux[sylv,#,dim]&,
+                      vars]]}];
+  ];
 
   
 End[]

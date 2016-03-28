@@ -663,6 +663,7 @@ Module[
    NCTest[NCPCompatibleQ[p1,p2,p2], False];
    NCTest[NCPCompatibleQ[p2,p2], True];
 
-
+   (* TODO: Test NCPolynomials with matrix variables. 
+      See NCSylvester.NCTest *)
 
 ];

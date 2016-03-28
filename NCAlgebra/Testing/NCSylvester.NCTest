@@ -10,7 +10,7 @@ Block[
    vars = {x};
    exp = 2 a**x**b + 3 c**x**d;
    p = NCToNCPolynomial[exp, vars];
-   answer = {0,{{a,c},{b,d},SparseArray[{{2,0},{0,3}}],x}};
+   answer = {0, <|x -> {{a,c},{b,d},SparseArray[{{2,0},{0,3}}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[answer]],
           exp];
@@ -18,7 +18,7 @@ Block[
    vars = {x};
    exp = 2 a**x**b + 3 a**x**d + c**x**d;
    p = NCToNCPolynomial[exp, vars];
-   answer = {0,{{a,c},{b,d},SparseArray[{{2,3},{0,1}}],x}};
+   answer = {0,<|x->{{a,c},{b,d},SparseArray[{{2,3},{0,1}}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -27,7 +27,7 @@ Block[
 
    exp = 2 a**x**c + a**x**d + b**x**c - b**x**d;
    p = NCToNCPolynomial[exp, vars];
-   answer = {0,{{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x}};
+   answer = {0,<|x->{{a,b},{c,d},SparseArray[{{2,1},{1,-1}}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -37,7 +37,7 @@ Block[
    vars = {y};
    exp = 2 a**x**c + a**x**d + b**x**c - b**x**d;
    p = NCToNCPolynomial[exp, vars];
-   answer = {exp, {{},{},SparseArray[{}, {0, 0}],y}};
+   answer = {exp, <|y->{{},{},SparseArray[{}, {0, 0}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -48,7 +48,7 @@ Block[
    exp = 2 a**x**c + a**x**d + b**x**c - b**x**d + f**y**h;
    p = NCToNCPolynomial[exp, vars];
    answer = {2 a**x**c + a**x**d + b**x**c - b**x**d,
-             {{f},{h},SparseArray[{{1}}],y}};
+             <|y->{{f},{h},SparseArray[{{1}}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -59,8 +59,8 @@ Block[
    exp = 2 a**x**c + a**x**d + b**x**c - b**x**d + f**y**h;
    p = NCToNCPolynomial[exp, vars];
    answer = {0, 
-             {{a,b},{c,d},SparseArray[{{2,1},{1,-1}}],x},
-             {{f},{h},SparseArray[{{1}}],y}};
+             <|x->{{a,b},{c,d},SparseArray[{{2,1},{1,-1}}]},
+               y->{{f},{h},SparseArray[{{1}}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -70,8 +70,8 @@ Block[
    exp = 2 + a**x**b + c**x**d + y;
    p = NCToNCPolynomial[exp, vars];
    answer = {2, 
-             {{a,c},{b,d},SparseArray[{{1,0},{0,1}}],x},
-             {{1},{1},SparseArray[{{1}}],y}};
+             <|x->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]},
+               y->{{1},{1},SparseArray[{{1}}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -81,8 +81,8 @@ Block[
    exp = 0;
    p = NCToNCPolynomial[exp, vars];
    answer = {0,
-             {{},{},SparseArray[{}, {0, 0}],x}, 
-             {{},{},SparseArray[{}, {0, 0}],y}};
+             <|x->{{},{},SparseArray[{}, {0, 0}]}, 
+               y->{{},{},SparseArray[{}, {0, 0}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -92,8 +92,8 @@ Block[
    exp = 1;
    p = NCToNCPolynomial[exp, vars];
    answer = {1,
-             {{},{},SparseArray[{}, {0, 0}],x}, 
-             {{},{},SparseArray[{}, {0, 0}],y}};
+             <|x->{{},{},SparseArray[{}, {0, 0}]}, 
+               y->{{},{},SparseArray[{}, {0, 0}]}|>};
    NCTest[NCSylvesterRepresentation[p], answer];
    NCTest[ExpandNonCommutativeMultiply[
             NCPolynomialToNC[ 
@@ -125,13 +125,13 @@ Block[
    p = NCToNCPolynomial[mat, vars];
    exp = NCSylvesterRepresentation[p];
    answer = {{{0, 0}, {0, 1}}, 
-             {{1, a, b}, {1, a, b}, 
-                SparseArray[{{0, 0, 1, 0, 0, 0}, 
-                             {0, 0, 0, 0, 1, 0},  
-		             {1, 0, 0, 0, 0, 0},  
-		             {0, 0, 0, 0, 0, 0}, 
-		             {0, 1, 0, 0, 0, 0}, 
-		             {0, 0, 0, 0, 0, 0}}], x}};
+             <|x->{{1, a, b}, {1, a, b}, 
+                   SparseArray[{{0, 0, 1, 0, 0, 0}, 
+                                {0, 0, 0, 0, 1, 0},  
+    		                {1, 0, 0, 0, 0, 0},  
+		                {0, 0, 0, 0, 0, 0}, 
+		                {0, 1, 0, 0, 0, 0}, 
+		                {0, 0, 0, 0, 0, 0}}]}|>};
     NCTest[exp, answer];
     NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
 
@@ -140,13 +140,13 @@ Block[
     p = NCToNCPolynomial[mat, vars];
     exp = NCSylvesterRepresentation[p];
     answer = {{{c**y+y**c, 0}, {0, 1}}, 
-              {{1, a, b}, {1, a, b}, 
-                 SparseArray[{{0, 0, 1, 0, 0, 0}, 
-                              {0, 0, 0, 0, 1, 0},   
-  		              {1, 0, 0, 0, 0, 0},  
-		              {0, 0, 0, 0, 0, 0}, 
-		              {0, 1, 0, 0, 0, 0}, 
-		              {0, 0, 0, 0, 0, 0}}], x}};
+              <|x->{{1, a, b}, {1, a, b}, 
+                    SparseArray[{{0, 0, 1, 0, 0, 0}, 
+                                 {0, 0, 0, 0, 1, 0},   
+     		                 {1, 0, 0, 0, 0, 0},  
+		                 {0, 0, 0, 0, 0, 0}, 
+		                 {0, 1, 0, 0, 0, 0}, 
+		                 {0, 0, 0, 0, 0, 0}}]}|>};
     NCTest[exp, answer];
     NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
 
@@ -155,18 +155,18 @@ Block[
     p = NCToNCPolynomial[mat, vars];
     exp = NCSylvesterRepresentation[p];
     answer = {{{0, 0}, {0, 1}}, 
-              {{1, a, b}, {1, a, b}, 
-                 SparseArray[{{0, 0, 1, 0, 0, 0}, 
-                              {0, 0, 0, 0, 1, 0},   
-  		              {1, 0, 0, 0, 0, 0},  
-		              {0, 0, 0, 0, 0, 0}, 
-		              {0, 1, 0, 0, 0, 0}, 
-		              {0, 0, 0, 0, 0, 0}}], x},
-              {{1, c}, {1, c}, 
-                 SparseArray[{{0, 0, 1, 0},
-                              {0, 0, 0, 0},  
-  		              {1, 0, 0, 0}, 
-		              {0, 0, 0, 0}}], y}};
+              <|x->{{1, a, b}, {1, a, b}, 
+                    SparseArray[{{0, 0, 1, 0, 0, 0}, 
+                                 {0, 0, 0, 0, 1, 0},   
+  		                 {1, 0, 0, 0, 0, 0},  
+		                 {0, 0, 0, 0, 0, 0}, 
+		                 {0, 1, 0, 0, 0, 0}, 
+		                 {0, 0, 0, 0, 0, 0}}]},
+                y->{{1, c}, {1, c}, 
+                    SparseArray[{{0, 0, 1, 0},
+                                 {0, 0, 0, 0},  
+  		                 {1, 0, 0, 0}, 
+		                 {0, 0, 0, 0}}]}|>};
     NCTest[exp, answer];
     NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
 
@@ -175,11 +175,11 @@ Block[
     p = NCToNCPolynomial[mat, vars];
     exp = NCSylvesterRepresentation[p];
     answer = {{{0, 0}, {0, 0}}, 
-              {{b, a**e}, {c, d}, 
-                 SparseArray[{{2, 0, -1, 1}, 
-                              {2, 0, -1, 1},   
-  		              {2, 0, -1, 1},  
-		              {0, 0, 0, 0}}], x}};
+              <|x->{{b, a**e}, {c, d}, 
+                    SparseArray[{{2, 0, -1, 1}, 
+                                 {2, 0, -1, 1},   
+  		                 {2, 0, -1, 1},  
+		                 {0, 0, 0, 0}}]}|>};
     NCTest[exp, answer];
     NCTest[NCPolynomialToNC[NCSylvesterRepresentationToNCPolynomial[exp]], mat];
 
@@ -188,22 +188,26 @@ Block[
     p = NCToNCPolynomial[mat, vars];
     exp = NCSylvesterRepresentation[p];
     answer = {{{0, 0}, {0, 0}}, 
-              {{b, a**e}, {c, d}, 
-                 SparseArray[{{2, 0, -1, -1}, 
-                              {-2, 0, 1, 1},   
-  		              {2, 0, -1, -1},  
-		              {-2, 0, 1, 1}}], x},
-              {{b, a**e}, {c, d}, 
-                 SparseArray[{{0, 1, 0, 1}, 
-                              {0, -1, 0, -1},   
-  		              {0, 1, 0, 1},  
-		              {0, -1, 0, -1}}], y},
-              {{b}, {c, d}, 
-                 SparseArray[{{0, 0, 0, 0}, 
-                              {2, 0, -1, -1}}], w},
-              {{b}, {c, d}, 
-                 SparseArray[{{0, 0, 0, 0}, 
-                              {0, 1, 0, 1}}], z}
+              <|x->{{b, a**e}, {c, d}, 
+                    SparseArray[{{2, 0, -1, -1}, 
+                                 {-2, 0, 1, 1},   
+  		                 {2, 0, -1, -1},  
+		                 {-2, 0, 1, 1}}]},
+                y->{{b, a**e}, {b, c, d}, 
+                    SparseArray[{{1, 0, 0, 1, 0, 1}, 
+                                 {-1, 0, 0, -1, 0, -1},   
+  		                 {1, 0, 0, 1, 0, 1},  
+		                 {-1, 0, 0, -1, 0, -1}}]},
+                w->{{b, c}, {c, d}, 
+                    SparseArray[{{0, 0, 0, 0}, 
+                                 {2, 0, -1, -1},
+				 {2, 0, -1, -1},
+				 {0, 0, 0, 0}}]},
+                z->{{b, c}, {b, c, d}, 
+                    SparseArray[{{0, 0, 0, 0, 0, 0}, 
+                                 {1, 0, 0, 1, 0, 1},
+				 {1, 0, 0, 1, 0, 1},
+				 {0, 0, 0, 0, 0, 0}}]}|>
              };
     NCTest[exp, answer];
     NCTest[ExpandNonCommutativeMultiply[
@@ -211,17 +215,47 @@ Block[
                NCSylvesterRepresentationToNCPolynomial[exp]]-mat], 
            {{0,0},{0,0}}];
 
-    Print[Normal[NCSylvesterCollectOnVars[exp, {{x,y},{w,z}}]]];
-
-    {s0, {left, right, F, var}} = NCSylvesterCollectOnVars[exp, {{{x,y},{w,z}}}];
-
-    FF = Plus @@ (Plus @@ MapThread[Times, {F, var}, 2]);
-    exp = MatMult[
-      Transpose[KroneckerProduct[left, IdentityMatrix[2]]],
-      MatMult[FF, KroneckerProduct[right, IdentityMatrix[2]]]
-    ];
-    Print["exp = ", NCExpand[exp]];
-
-    Print["diff = ", NCExpand[exp-mat]];
+    answer = {{{0, 0}, {0, 0}}, 
+              <|{{x, y}, {w, z}} -> {{b, c, a ** e}, 
+                                     {b, c, d}, 
+                                     {{SparseArray[{
+                                         {0, 0, 2, 0, -1, -1}, 
+           				 {0, 0, -2, 0, 1, 1}, 
+					 {0, 0, 0, 0, 0, 0}, 
+					 {0, 0, 0, 0, 0, 0}, 
+					 {0, 0, 2, 0, -1, -1}, 
+					 {0, 0, -2, 0, 1, 1}}], 
+					 SparseArray[{
+					    {1, 0, 0, 1, 0, 1}, 
+					    {-1, 0, 0, -1, 0, -1}, 
+					    {0, 0, 0, 0, 0, 0}, 
+					    {0, 0, 0, 0, 0, 0}, 
+					    {1, 0, 0, 1, 0, 1}, 
+					    {-1, 0, 0, -1, 0, -1}}]},
+				      {SparseArray[{
+				         {0, 0, 0, 0, 0, 0}, 
+					 {0, 0, 2, 0, -1, -1}, 
+					 {0, 0, 2, 0, -1, -1},
+					 {0, 0, 0, 0, 0, 0},
+					 {0, 0, 0, 0, 0, 0},
+					 {0, 0, 0, 0, 0, 0}}], 
+					 SparseArray[{
+					    {0, 0, 0, 0, 0, 0},
+					    {1, 0, 0, 1, 0, 1},
+					    {1, 0, 0, 1, 0, 1},
+					    {0, 0, 0, 0, 0, 0},
+					    {0, 0, 0, 0, 0, 0},
+					    {0, 0, 0, 0, 0, 0}}]}}}|>
+             };
+    exp = NCSylvesterCollectOnVars[exp, {{{x,y},{w,z}}}];
+    NCTest[exp, answer];
+    answer = NCPolynomial[{{0, 0}, {0, 0}}, 
+                          <|{{{x, y}, {w, z}}} -> {
+			  	  {1, {{b + a ** e, c}, {-b - a ** e, b}}, 
+				      {{2 c - d, -d}, {b, c + d}}}}|>, 
+			  {{{x, y}, {w, z}}}];
+    p = NCSylvesterRepresentationToNCPolynomial[exp];
+    NCTest[p, answer];
+    NCTest[NCPolynomialToNC[p], mat];
 
 ];

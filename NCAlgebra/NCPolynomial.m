@@ -278,6 +278,9 @@ Begin[ "`Private`" ]
   (* NCPTermsToNC *)
   
   Clear[NCPTermsToNCProductAux];
+  NCPTermsToNCProductAux[scalar_, left_?MatrixQ, middle_?MatrixQ, right__] := 
+    scalar * MatMult[left, middle, right];
+
   NCPTermsToNCProductAux[scalar_, left_?MatrixQ, middle__, right_] := 
     scalar * MatMult[left, {{NonCommutativeMultiply[middle]}}, right];
 
@@ -289,10 +292,9 @@ Begin[ "`Private`" ]
     Map[Prepend[Riffle[Rest[#1],m], First[#1]]&, coeffs];
 
   NCPTermsToNC[terms_] := 
-    Total[Apply[NCPTermsToNCProductAux,
-                Flatten[Apply[NCPTermsToNCAux, 
-                              Normal[terms], {1}], 1], {1}]];
-    
+     Total[Apply[NCPTermsToNCProductAux,
+          Flatten[KeyValueMap[NCPTermsToNCAux, terms], 1], {1}]];
+
   (* NCPolynomialToNC *)
 
   NCPolynomialToNC[p_NCPolynomial] := p[[1]] + NCPTermsToNC[p[[2]]];
@@ -308,8 +310,7 @@ Begin[ "`Private`" ]
       Thread[NCPMonomialDegree[p] -> 
              Apply[Plus, 
                    Apply[NonCommutativeMultiply,
-                         Apply[NCPTermsToNCAux, 
-                               Normal[p[[2]]], {1}], {2}], {1}]]
+                         KeyValueMap[NCPTermsToNCAux, p[[2]]], {2}], {1}]]
       , Total];
 
   NCPDecompose[p_NCPolynomial] := Block[
@@ -323,9 +324,8 @@ Begin[ "`Private`" ]
   
   NCPSort[p_NCPolynomial] := 
      Prepend[Apply[NonCommutativeMultiply, 
-                   Flatten[Apply[NCPTermsToNCAux, 
-                                 Normal[p[[2]]], {1}]
-                          ,1], {1}], p[[1]]];
+                   Flatten[KeyValueMap[NCPTermsToNCAux, p[[2]]], 1],
+                   {1}], p[[1]]];
   
   (* NCPDegree *)
 
