@@ -10,6 +10,7 @@ FILES = NonCommutativeMultiply.usage \
 	NCMatMult.usage \
 	NCPolynomial.usage \
 	NCSylvester.usage \
+	NCQuadratic.usage \
 	NCRealization.usage \
 	NCUtil.usage \
         MatrixDecompositions.usage
@@ -25,6 +26,7 @@ MANUAL = NonCommutativeMultiply.md \
 	NCMatMult.md \
 	NCPolynomial.md \
 	NCSylvester.md \
+	NCQuadratic.md \
 	NCRealization.md \
 	NCUtil.md \
         MatrixDecompositions.md

@@ -45,9 +45,9 @@ See also:
 
 ## NCSylvesterToNCPolynomial {#NCSylvesterToNCPolynomial}
 
-`NCSylvesterToNCPolynomial[args]` takes the list args produced by `NCSylvester` and converts it back to an `NCPolynomial`.
+`NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCSylvester` and converts it back to an `NCPolynomial`.
 
-`NCSylvesterToNCPolynomial[args,options]` uses `options`.
+`NCSylvesterToNCPolynomial[rep,options]` uses `options`.
 
 The following `options` can be given:
 * `Collect` (*True*): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.

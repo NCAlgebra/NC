@@ -18,74 +18,30 @@ BeginPackage[ "NCQuadratic`",
 	      "NCMatMult`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCQuadraticRepresentation];
-NCQuadraticRepresentation::usage="\
-NCQuadraticRepresentation[p] gives an expanded representation \
-for the quadratic NCPolynomial p.
-    
-NCQuadraticRepresentation returns a list with the coefficients \
-of the linear polynomial p where
-\tthe first element is a the independent term,
-and the remaining elements are lists with four elements:
-\tthe first element is a list of right nc symbols;
-\tthe second element is a list of right nc symbols;
-\tthe third element is a numeric array;
-\tthe fourth element is a variable.
+Clear[NCQuadratic,
+      NCQuadraticToNCPolynomial];
 
-Example:
-\tp = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-\tNCQuadraticRepresentation[exp,x]
-produces
-\t{2, {left1,right1,array1,var1}, {left2,right2,array2,var2}}
-where
-\tleft1 = {a,c}
-\tright1 = {b,d}
-\tarray1 = {{1,0},{0,1}}
-\tvar1 = x
-and
-\tleft1 = {1}
-\tright1 = {1}
-\tarray1 = {{1}}
-\tvar1 = y
+Get["NCQuadratic.usage"];
 
-See also:
-NCQuadraticRepresentationToNCPolynomial, NCPolynomial.";
-NCQuadraticRepresentation::NotLinear = "Polynomial is not linear.";
-
-Clear[NCQuadraticRepresentationToNCPolynomial];
-NCQuadraticRepresentationToNCPolynomial::usage = "\
-NCQuadraticRepresentationToNCPolynomial[args] takes the list args \
-produced by NCQuadraticRepresentation and converts it back \
-to an NCPolynomial.
-NCQuadraticRepresentationToNCPolynomial[args, options] uses options.
-
-The following options can be given:
-\tCollect (True): controls whether the coefficients of the resulting \
-NCPolynomial are collected to produce the minimal possible number \
-of terms.
-    
-See also:
-NCQuadraticRepresentation, NCPolynomial.";
-
-Options[NCQuadraticRepresentationToNCPolynomial] = {
+Options[NCQuadraticToNCPolynomial] = {
   Collect -> True
 };
 
 Begin[ "`Private`" ]
 
-  (* NCQuadraticRepresentation *)
+  (* NCQuadratic *)
 
-  Clear[NCQuadraticRepresentationAux];
-  NCQuadraticRepresentationAux[m_, terms_] := (
+  Clear[NCQuadraticAux];
+  NCQuadraticAux[m_, terms_] := (
     Map[{#[[2]]**m[[1]], #[[1]]*#[[3]], m[[2]]**#[[4]]}&, terms] 
     ) /; Length[m] == 2;
 
-  NCQuadraticRepresentationAux[m_, terms_] := (
+  NCQuadraticAux[m_, terms_] := (
     Map[{#[[2]]**m[[1,1]], #[[1]], m[[1,2]]**#[[3]]}&, terms] 
     ) /; Length[m] == 1;
 
-  Clear[NCQuadraticRepresentationBasis];
-  NCQuadraticRepresentationBasis[list_] := Module[
+  Clear[NCQuadraticBasis];
+  NCQuadraticBasis[list_] := Module[
     {basis, coefficient},
       
     basis = Merge[Thread[list -> Range[1, Length[list]]],
@@ -101,11 +57,11 @@ Begin[ "`Private`" ]
       
   ];
   
-  NCQuadraticRepresentation[p_NCPolynomial] := Module[
+  NCQuadratic[p_NCPolynomial] := Module[
     {terms},
 
     If [!NCPQuadraticQ[p],
-        Message[NCQuadraticRepresentation::NotQuadratic];
+        Message[NCQuadratic::NotQuadratic];
         Return[$Failed];
     ];
 
@@ -113,7 +69,7 @@ Begin[ "`Private`" ]
     {left, middle, right}
       = Transpose[
               Flatten[
-                MapThread[NCQuadraticRepresentationAux,
+                MapThread[NCQuadraticAux,
                           Transpose[
                              Apply[List, 
                                    Normal[NCPTermsOfTotalDegree[p, 2]],
@@ -123,8 +79,8 @@ Begin[ "`Private`" ]
     Print["middle = ", middle];
     Print["right = ", right];
       
-    {rightBasis, rightMatrix} = NCQuadraticRepresentationBasis[right];
-    {leftBasis, leftMatrix} = NCQuadraticRepresentationBasis[left];
+    {rightBasis, rightMatrix} = NCQuadraticBasis[right];
+    {leftBasis, leftMatrix} = NCQuadraticBasis[left];
 
     Print["rightBasis = ", rightBasis];
     Print["rightMatrix = ", Normal[rightMatrix]];
@@ -142,12 +98,12 @@ Begin[ "`Private`" ]
       
     Print["middleMatrix = ", middleMatrix];
 
-    Print[{leftBasis, middleMatrix, rightBasis}];
+    Return[{{}, {leftBasis, middleMatrix, rightBasis}}];
       
   ];
 
 
-  (* NCQuadraticRepresentationToNCPolynomial *)
+  (* NCQuadraticToNCPolynomial *)
 
   Clear[LeftFactorMultiply];
   LeftFactorMultiply[left_, l_, r_] :=  
@@ -164,12 +120,12 @@ Begin[ "`Private`" ]
     var 
   };
   
-  Clear[NCQuadraticRepresentationToNCPolynomialAux];
-  NCQuadraticRepresentationToNCPolynomialAux[{{},{},F_,var_}, 
+  Clear[NCQuadraticToNCPolynomialAux];
+  NCQuadraticToNCPolynomialAux[{{},{},F_,var_}, 
                       collect_] := 
      Return[{{},{},var}];
 
-  NCQuadraticRepresentationToNCPolynomialAux[{left_,right_,F_,var_},
+  NCQuadraticToNCPolynomialAux[{left_,right_,F_,var_},
                       collect_] := 
   Module[
     {l, u, pr, qs, r, s, p, q},
@@ -214,7 +170,7 @@ Begin[ "`Private`" ]
 
   ];
 
-  NCQuadraticRepresentationToNCPolynomial[sylv_, 
+  NCQuadraticToNCPolynomial[sylv_, 
                       opts:OptionsPattern[{}]] := Module[
     {options, collect, m0, rules, vars},
 
@@ -224,14 +180,14 @@ Begin[ "`Private`" ]
 
     collect = Collect
 	    /. options
-	    /. Options[NCQuadraticRepresentationToNCPolynomial, Collect];
+	    /. Options[NCQuadraticToNCPolynomial, Collect];
       
     m0 = First[sylv];
     vars = sylv[[2;;,4]];
                           
     (* Collect polynomial *)
 
-    rules = Map[NCQuadraticRepresentationToNCPolynomialAux[#,collect]&,
+    rules = Map[NCQuadraticToNCPolynomialAux[#,collect]&,
                 Rest[sylv], {1}];
 
     (* 
@@ -315,7 +271,7 @@ Begin[ "`Private`" ]
 
   ];
 
-  NCOldQuadraticRepresentation[f_?MatrixQ, 
+  NCOldQuadratic[f_?MatrixQ, 
                             var_?MatrixQ] := Module[
      {exp, leftBasis, rightBasis,
       p, q, r, s, F},
@@ -323,7 +279,7 @@ Begin[ "`Private`" ]
      exp = ExpandNonCommutativeMultiply[f];
      {r, s} = Dimensions[exp, 2];
 
-     exp = Map[NCOldQuadraticRepresentation[exp, #] &, var, {2}];
+     exp = Map[NCOldQuadratic[exp, #] &, var, {2}];
 
      leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
      rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
@@ -337,14 +293,14 @@ Begin[ "`Private`" ]
 
      ];
 
-  NCOldQuadraticRepresentation[f_, var_?MatrixQ] :=
-    NCOldQuadraticRepresentation[{{f}}, var];
+  NCOldQuadratic[f_, var_?MatrixQ] :=
+    NCOldQuadratic[{{f}}, var];
 
-  NCOldQuadraticRepresentation[f_?MatrixQ, var_Symbol] := Module[
+  NCOldQuadratic[f_?MatrixQ, var_Symbol] := Module[
      {exp, leftBasis, rightBasis,
       p, q, r, s, F},
 
-     exp = Map[NCOldQuadraticRepresentation[#, var] &, f, {2}];
+     exp = Map[NCOldQuadratic[#, var] &, f, {2}];
      leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
      rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
 

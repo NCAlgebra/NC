@@ -7,10 +7,22 @@ Block[
    SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
    SetCommutative[A,B,C];
 
-   vars = {x,y};
-   exp = d+x+x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
+   vars = {x};
+   exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
    p = NCToNCPolynomial[exp, vars];
-   answer = {0,{{a,c},{b,d},SparseArray[{{2,0},{0,3}}],x}};
-   NCTest[NCQuadraticRepresentation[p], answer];
+   answer = {0,{{x},{x},SparseArray[{{1+a+e}}],x}};
+   NCTest[NCQuadratic[p], answer];
+
+   vars = {y};
+   exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0,{{d**y},{y**d},SparseArray[{{c}}],y}};
+   NCTest[NCQuadratic[p], answer];
+
+   vars = {x,y};
+   exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0,{{x,d**y},{x,y**d},SparseArray[{{1+a+e,0},{0,c}}],x}};
+   NCTest[NCQuadratic[p], answer];
 
 ];
