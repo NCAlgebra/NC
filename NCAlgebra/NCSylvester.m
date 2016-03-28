@@ -18,22 +18,22 @@ BeginPackage[ "NCSylvester`",
 	      "NCMatMult`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCSylvesterRepresentation,
-      NCSylvesterRepresentationToNCPolynomial,
+Clear[NCSylvester,
+      NCSylvesterToNCPolynomial,
       NCSylvesterCollectOnVars];
 
 Get["NCSylvester.usage"];
 
-Options[NCSylvesterRepresentationToNCPolynomial] = {
+Options[NCSylvesterToNCPolynomial] = {
   Collect -> True
 };
 
 Begin[ "`Private`" ]
 
-  (* NCSylvesterRepresentation *)
+  (* NCSylvester *)
 
-  Clear[NCSylvesterRepresentationAux];
-  NCSylvesterRepresentationAux[poly_Association, 
+  Clear[NCSylvesterAux];
+  NCSylvesterAux[poly_Association, 
                                var_Symbol] := Module[
     {exp, coeff, left, right, leftBasis, rightBasis,
      i, j, p, q, F},
@@ -125,17 +125,17 @@ Begin[ "`Private`" ]
 
   ];
 
-  NCSylvesterRepresentation[p_NCPolynomial] := (
+  NCSylvester[p_NCPolynomial] := (
     If [!NCPLinearQ[p],
-        Message[NCSylvesterRepresentation::NotLinear];
+        Message[NCSylvester::NotLinear];
         Return[$Failed];
     ];
-    {p[[1]], Association[Map[NCSylvesterRepresentationAux[p[[2]], #]&, 
+    {p[[1]], Association[Map[NCSylvesterAux[p[[2]], #]&, 
                             p[[3]]]]}
   );
   
   
-  (* NCSylvesterRepresentationToNCPolynomial *)
+  (* NCSylvesterToNCPolynomial *)
 
   Clear[LeftFactorMultiply];
   LeftFactorMultiply[left_, l_, r_] :=  
@@ -152,12 +152,12 @@ Begin[ "`Private`" ]
     var 
   };
   
-  Clear[NCSylvesterRepresentationToNCPolynomialAux];
-  NCSylvesterRepresentationToNCPolynomialAux[var_, {{},{},F_}, 
+  Clear[NCSylvesterToNCPolynomialAux];
+  NCSylvesterToNCPolynomialAux[var_, {{},{},F_}, 
                       collect_] := 
      Return[{{},{},var}];
 
-  NCSylvesterRepresentationToNCPolynomialAux[var_?MatrixQ, {left_,right_,F_},
+  NCSylvesterToNCPolynomialAux[var_?MatrixQ, {left_,right_,F_},
                       collect_] := 
     Module[
       {pr, qs, r, s, p, q, m, n, rank, ind},
@@ -207,7 +207,7 @@ Begin[ "`Private`" ]
                           
   ];
      
-  NCSylvesterRepresentationToNCPolynomialAux[var_, {left_,right_,F_},
+  NCSylvesterToNCPolynomialAux[var_, {left_,right_,F_},
                       collect_] := 
     Module[
       {l, u, pr, qs, r, s, p, q},
@@ -252,7 +252,7 @@ Begin[ "`Private`" ]
 
     ];
 
-  NCSylvesterRepresentationToNCPolynomial[{m0_, sylv_}, 
+  NCSylvesterToNCPolynomial[{m0_, sylv_}, 
                       opts:OptionsPattern[{}]] := Module[
     {options, collect, rules, vars},
 
@@ -262,14 +262,14 @@ Begin[ "`Private`" ]
 
     collect = Collect
 	    /. options
-	    /. Options[NCSylvesterRepresentationToNCPolynomial, Collect];
+	    /. Options[NCSylvesterToNCPolynomial, Collect];
       
     vars = Keys[sylv];
 
     (* Collect polynomial *)
 
     rules = KeyValueMap[
-              NCSylvesterRepresentationToNCPolynomialAux[##,collect]&,
+              NCSylvesterToNCPolynomialAux[##,collect]&,
               sylv];
 
     (*

@@ -122,8 +122,8 @@ Begin[ "`Private`" ]
     Print["p(", i, ",", j, ") = ", p];
     *)
       
-    left = Normal[SparseArray[{i,1} -> 1, {m,1}]];
-    right = Normal[SparseArray[{1,j} -> 1, {1,n}]];
+    left = SparseArray[{i,1} -> 1, {m,1}];
+    right = SparseArray[{1,j} -> 1, {1,n}];
 
     (*
     Print["left = ", Normal[left]];
@@ -131,7 +131,7 @@ Begin[ "`Private`" ]
     *)
     
     Return[NCPolynomial[
-               (left p[[1]]) . right,
+               SparseArray[(left p[[1]]) . right],
                Map[Map[(NCPVectorizeAux[#, left, right]&), #, {1}]&, p[[2]]],
                p[[3]] ]];
 

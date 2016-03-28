@@ -574,23 +574,21 @@ Module[
    (* NCPVectorize *)
 
    p = NCToNCPolynomial[a**x+x**a, {x}];
-   answer = NCPolynomial[{{0, 0}, {0, 0}}, <|{x} -> {{1, {{a}, {0}}, {{1, 0}}}, {1, {{1}, {0}}, {{a, 0}}}}|>, {x}];
+   answer = NCPolynomial[SparseArray[{{0, 0}, {0, 0}}], <|{x} -> {{1, SparseArray[{{a}, {0}}], SparseArray[{{1, 0}}]}, {1, SparseArray[{{1}, {0}}], SparseArray[{{a, 0}}]}}|>, {x}];
    NCTest[NCPolynomial`Private`NCPVectorize[p, {2,2}, {1,1}],
           answer];
 
-   answer = NCPolynomial[{{0, 0, 0}, {0, 0, 0}}, <|{x} -> {{1, {{a}, {0}}, {{1, 0, 0}}}, {1, {{1}, {0}}, {{a, 0, 0}}}}|>, {x}];
+   answer = NCPolynomial[SparseArray[{{0, 0, 0}, {0, 0, 0}}], <|{x} -> {{1, SparseArray[{{a}, {0}}], SparseArray[{{1, 0, 0}}]}, {1, SparseArray[{{1}, {0}}], SparseArray[{{a, 0, 0}}]}}|>, {x}];
    NCTest[NCPolynomial`Private`NCPVectorize[p, {2,3}, {1,1}],
           answer];
 
-
-
    mat = {{a**x+x**a,b**x},{x**b,1}};
    p = NCToNCPolynomial[mat, {x}];
-   answer = NCPolynomial[{{0,0},{0,1}}, 
-                    <|{x}->{{1,{{a},{0}},{{1,0}}},
-	                    {1,{{1},{0}},{{a,0}}},
-			    {1,{{b},{0}},{{0,1}}},
-			    {1,{{0},{1}},{{b,0}}}}|>,
+   answer = NCPolynomial[SparseArray[{{0,0},{0,1}}], 
+                    <|{x}->{{1,SparseArray[{{a},{0}}],SparseArray[{{1,0}}]},
+	                    {1,SparseArray[{{1},{0}}],SparseArray[{{a,0}}]},
+			    {1,SparseArray[{{b},{0}}],SparseArray[{{0,1}}]},
+			    {1,SparseArray[{{0},{1}}],SparseArray[{{b,0}}]}}|>,
 		    {x}];
    NCTest[p, answer];
 
@@ -606,49 +604,49 @@ Module[
 
    mat = {{a**x+x**a+c**y+y**c,b**x},{x**b,1}};
    p = NCToNCPolynomial[mat, {x}];
-   answer = NCPolynomial[{{c**y+y**c,0},{0,1}}, 
-                    <|{x}->{{1,{{a},{0}},{{1,0}}},
-	                    {1,{{1},{0}},{{a,0}}},
-			    {1,{{b},{0}},{{0,1}}},
-			    {1,{{0},{1}},{{b,0}}}}|>,
+   answer = NCPolynomial[SparseArray[{{c**y+y**c,0},{0,1}}], 
+                    <|{x}->{{1,SparseArray[{{a},{0}}],SparseArray[{{1,0}}]},
+	                    {1,SparseArray[{{1},{0}}],SparseArray[{{a,0}}]},
+			    {1,SparseArray[{{b},{0}}],SparseArray[{{0,1}}]},
+			    {1,SparseArray[{{0},{1}}],SparseArray[{{b,0}}]}}|>,
 		    {x}];
    NCTest[p, answer];
    NCTest[NCPolynomialToNC[answer], mat];
 
    mat = {{a**x+x**a+c**y+y**c,b**x},{x**b,1}};
    p = NCToNCPolynomial[mat, {x,y}];
-   answer = NCPolynomial[{{0,0},{0,1}}, 
-                    <|{x}->{{1,{{a},{0}},{{1,0}}},
-	                    {1,{{1},{0}},{{a,0}}},
-			    {1,{{b},{0}},{{0,1}}},
-			    {1,{{0},{1}},{{b,0}}}},
-		      {y}->{{1,{{c},{0}},{{1,0}}},
-	                    {1,{{1},{0}},{{c,0}}}}|>,
+   answer = NCPolynomial[SparseArray[{{0,0},{0,1}}], 
+                    <|{x}->{{1,SparseArray[{{a},{0}}],SparseArray[{{1,0}}]},
+	                    {1,SparseArray[{{1},{0}}],SparseArray[{{a,0}}]},
+			    {1,SparseArray[{{b},{0}}],SparseArray[{{0,1}}]},
+			    {1,SparseArray[{{0},{1}}],SparseArray[{{b,0}}]}},
+		      {y}->{{1,SparseArray[{{c},{0}}],SparseArray[{{1,0}}]},
+	                    {1,SparseArray[{{1},{0}}],SparseArray[{{c,0}}]}}|>,
 		    {x,y}];
    NCTest[p, answer];
    NCTest[NCPolynomialToNC[answer], mat];
 
    mat = {{x**a**x+x**a+a**x,b**x},{x**b,1}};
    p = NCToNCPolynomial[mat, {x,y}];
-   answer = NCPolynomial[{{0,0},{0,1}}, 
-                    <|{x}->{{1,{{a},{0}},{{1,0}}},
-  	                    {1,{{1},{0}},{{a,0}}},
-			    {1,{{b},{0}},{{0,1}}},
-			    {1,{{0},{1}},{{b,0}}}},
-		      {x,x}->{{1,{{1},{0}},a,{{1,0}}}}|>,
+   answer = NCPolynomial[SparseArray[{{0,0},{0,1}}], 
+                    <|{x}->{{1,SparseArray[{{a},{0}}],SparseArray[{{1,0}}]},
+  	                    {1,SparseArray[{{1},{0}}],SparseArray[{{a,0}}]},
+			    {1,SparseArray[{{b},{0}}],SparseArray[{{0,1}}]},
+			    {1,SparseArray[{{0},{1}}],SparseArray[{{b,0}}]}},
+		      {x,x}->{{1,SparseArray[{{1},{0}}],a,SparseArray[{{1,0}}]}}|>,
 		    {x,y}];
    NCTest[p, answer];
    NCTest[NCPolynomialToNC[answer], mat];
 
    mat = {{x**a**x+x**a+a**x,b**x},{x**b,1+d**x**x**d}};
    p = NCToNCPolynomial[mat, {x,y}];
-   answer = NCPolynomial[{{0,0},{0,1}}, 
-                    <|{x}->{{1,{{a},{0}},{{1,0}}},
-  	                    {1,{{1},{0}},{{a,0}}},
-			    {1,{{b},{0}},{{0,1}}},
-			    {1,{{0},{1}},{{b,0}}}},
-		      {x,x}->{{1,{{1},{0}},a,{{1,0}}}},
-		      {x**x}->{{1,{{0},{d}},{{0,d}}}}|>,
+   answer = NCPolynomial[SparseArray[{{0,0},{0,1}}], 
+                    <|{x}->{{1,SparseArray[{{a},{0}}],SparseArray[{{1,0}}]},
+  	                    {1,SparseArray[{{1},{0}}],SparseArray[{{a,0}}]},
+			    {1,SparseArray[{{b},{0}}],SparseArray[{{0,1}}]},
+			    {1,SparseArray[{{0},{1}}],SparseArray[{{b,0}}]}},
+		      {x,x}->{{1,SparseArray[{{1},{0}}],a,SparseArray[{{1,0}}]}},
+		      {x**x}->{{1,SparseArray[{{0},{d}}],SparseArray[{{0,d}}]}}|>,
 		    {x,y}];
    NCTest[p, answer];
    NCTest[NCPolynomialToNC[answer], mat];

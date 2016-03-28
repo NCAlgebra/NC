@@ -4,14 +4,14 @@
 
 Members are:
 
-* [NCSylvesterRepresentation](#NCSylvesterRepresentation)
-* [NCSylvesterRepresentationToNCPolynomial](#NCSylvesterRepresentationToNCPolynomial)
+* [NCSylvester](#NCSylvester)
+* [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial)
 
-## NCSylvesterRepresentation {#NCSylvesterRepresentation}
+## NCSylvester {#NCSylvester}
 
-`NCSylvesterRepresentation[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
+`NCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
 
-`NCSylvesterRepresentation` returns a list with the coefficients of the linear polynomial `p` where the first element is a the independent term, and the remaining elements are lists with four elements:
+`NCSylvester` returns a list with the coefficients of the linear polynomial `p` where the first element is a the independent term, and the remaining elements are lists with four elements:
 
 * the first element is a list of right nc symbols;
 * the second element is a list of right nc symbols;
@@ -21,7 +21,7 @@ Members are:
 Example:
 
     p = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-    NCSylvesterRepresentation[exp,x]
+    NCSylvester[exp,x]
 
 produces
 
@@ -41,16 +41,16 @@ and
     var2 = y
 
 See also:
-[NCSylvesterRepresentationToNCPolynomial](#NCSylvesterRepresentationToNCPolynomial), [NCPolynomial](#NCPolynomial).
+[NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial), [NCPolynomial](#NCPolynomial).
 
-## NCSylvesterRepresentationToNCPolynomial {#NCSylvesterRepresentationToNCPolynomial}
+## NCSylvesterToNCPolynomial {#NCSylvesterToNCPolynomial}
 
-`NCSylvesterRepresentationToNCPolynomial[args]` takes the list args produced by `NCSylvesterRepresentation` and converts it back to an `NCPolynomial`.
+`NCSylvesterToNCPolynomial[args]` takes the list args produced by `NCSylvester` and converts it back to an `NCPolynomial`.
 
-`NCSylvesterRepresentationToNCPolynomial[args,options]` uses `options`.
+`NCSylvesterToNCPolynomial[args,options]` uses `options`.
 
 The following `options` can be given:
 * `Collect` (*True*): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.
 
 See also:
-[NCSylvesterRepresentation](#NCSylvesterRepresentation), [NCPolynomial](#NCPolynomial).
+[NCSylvester](#NCSylvester), [NCPolynomial](#NCPolynomial).
