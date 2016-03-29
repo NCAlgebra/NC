@@ -3,9 +3,10 @@
 Block[
    {exp, answer, vars, p, hess, lt, rt, mq, m0, sylv,
    a,b,c,d,e,f,g,h,j,x,y,z,A,B,C,
-   l,m,r},
+   l,m,r,k,symrule,
+   expr1},
 
-   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
+   SetNonCommutative[a,b,c,d,e,f,g,h,k,j,x,y,z];
    SetCommutative[A,B,C];
 
    vars = {x};
@@ -13,14 +14,20 @@ Block[
    p = NCToNCPolynomial[exp, vars];
    answer = {0, <|x->{{},{},{}}|>, 
              {x}, SparseArray[{{1+a+e}}], {x}};
-   NCTest[NCQuadratic[p], answer];
+   {m0,sylv,l,m,r} = NCQuadratic[p];
+   NCTest[{m0,sylv,l,m,r}, answer];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
+   NCTest[expr1, 0];
 
    vars = {x};
    exp = x**x + x**a**x + x**e**x + 1 + y;
    p = NCToNCPolynomial[exp, vars];
    answer = {y + 1, <|x->{{},{},{}}|>, 
              {x}, SparseArray[{{1+a+e}}], {x}};
-   NCTest[NCQuadratic[p], answer];
+   {m0,sylv,l,m,r} = NCQuadratic[p];
+   NCTest[{m0,sylv,l,m,r}, answer];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
+   NCTest[1 + y + expr1, 0];
 
    vars = {x};
    exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
@@ -28,7 +35,10 @@ Block[
    answer = {d + d**y**c**y**d, 
              <|x->{{1},{1,b**y**d},SparseArray[{{1,1}}]}|>, 
              {x}, SparseArray[{{1+a+e}}], {x}};
-   NCTest[NCQuadratic[p], answer];
+   {m0,sylv,l,m,r} = NCQuadratic[p];
+   NCTest[{m0,sylv,l,m,r}, answer];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
+   NCTest[d + x + x**b**y**d + d**y**c**y**d + expr1, 0];
 
    vars = {y};
    exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
@@ -36,7 +46,10 @@ Block[
    answer = {d + x + x**x + x**a**x + x**e**x,
              <|y->{{x**b},{d},SparseArray[{{1}}]}|>,
              {d**y},SparseArray[{{c}}],{y**d}};
-   NCTest[NCQuadratic[p], answer];
+   {m0,sylv,l,m,r} = NCQuadratic[p];
+   NCTest[{m0,sylv,l,m,r}, answer];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
+   NCTest[d + x + x**x + x**a**x + x**e**x + x**b**y**d + expr1, 0];
 
    vars = {x,y};
    exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
@@ -45,38 +58,48 @@ Block[
              <|x->{{1},{1},SparseArray[{{1}}]}, 
                y->{{},{},{}}|>,
              {x,d**y},SparseArray[{{1+a+e,b},{0,c}}],{x,y**d}};
-   NCTest[NCQuadratic[p], answer];
+   {m0,sylv,l,m,r} = NCQuadratic[p];
+   NCTest[{m0,sylv,l,m,r}, answer];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
+   NCTest[d + x + expr1, 0];
 
    (* test 1 *)
    f = x**x;
    hes = NCHessian[f,{x,h}];
    p = NCToNCPolynomial[hes,{h}];
-   {trash,trash,lt,mq,rt} = NCQuadratic[p];
-   NCTest[{lt,mq,rt}, {{h},SparseArray[{{2}}],{h}}];
+   {trash,trash,l,m,r} = NCQuadratic[p];
+   NCTest[{l,m,r}, {{h},SparseArray[{{2}}],{h}}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1, 0];
 
    (* test 2 *)
    f = x**x**x;
    hes = NCHessian[f,{x,h}];
    p = NCToNCPolynomial[hes,{h}];
-   {m0,sylv,lt,mq,rt} = NCQuadratic[p];
-   NCTest[{lt,mq,rt}, {{h,x**h},SparseArray[{{2,2 x},{0,2}}],{h**x,h}}];
+   {m0,sylv,l,m,r} = NCQuadratic[p];
+   NCTest[{l,m,r}, {{h,x**h},SparseArray[{{2,2 x},{0,2}}],{h**x,h}}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1, 0];
 
    Quiet[
-     NCTest[Check[NCQuadraticMakeSymmetric[{m0,sylv,lt,mq,rt}], True, 
+     NCTest[Check[NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}], True, 
                   NCQuadraticMakeSymmetric::NotSymmetric], True];
     ,
      NCQuadraticMakeSymmetric::NotSymmetric
    ];
 
-   {m0,sylv,lt,mq,rt} =
-     NCQuadraticMakeSymmetric[{m0,sylv,lt,mq,rt}, 
+   {m0,sylv,l,m,r} =
+     NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
                               SymmetricVariables -> {x, h}];
 
-   NCTest[{lt,mq,rt}, {{x**h,h},SparseArray[{{0,2},{2,2 x}}],{h**x,h}}];
+   NCTest[{l,m,r}, {{x**h,h},SparseArray[{{0,2},{2,2 x}}],{h**x,h}}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1, 0];
 
    (* From NCMatrixOfQuadratics.NCTest *)
 
    (* Print[ "Doing test 1,2" ]; *)
+
    p = x**x**x; 
    hes = NCHessian[ExpandNonCommutativeMultiply[p], {x, h}];
    exp = NCToNCPolynomial[hes,{h}];
@@ -85,10 +108,18 @@ Block[
                          SymmetricVariables -> {x, h}];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
 
-   NCTest[expr1, 0];
-   NCTest[Norm[Normal[tpMat[m] - m] /. tp[x] -> x /. tp[y] -> y], 0];
+   symrule = {tp[x] -> x, tp[h] -> h};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
 
    (* Print[ "Doing test 3,4" ]; *)
+
    p = x**x**x**x; 
    hes = NCHessian[ExpandNonCommutativeMultiply[p], {x, h}];
    exp = NCToNCPolynomial[hes,{h}];
@@ -109,10 +140,18 @@ Block[
                          SymmetricVariables -> {x, h}];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
 
-   NCTest[expr1, 0];
-   NCTest[Norm[Normal[tpMat[m] - m] /. tp[x] -> x /. tp[y] -> y], 0];
+   symrule = {tp[x] -> x, tp[h] -> h};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
 
    (* Print[ "Doing test 7,8" ]; *)
+
    p = (A + B*x) ** inv[F + G*x] + tp[ (A + B*x) ** inv[F + G*x] ];
    hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
    exp = NCToNCPolynomial[hes,{h}];
@@ -121,85 +160,182 @@ Block[
                          SymmetricVariables -> {x, h}];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
 
-   NCTest[expr1  /. tp[x] -> x /. tp[h] -> h, 0];
+   NCTest[expr1 /. tp[x] -> x /. tp[h] -> h, 0];
    NCTest[Norm[Normal[tpMat[m] - m] /. tp[x] -> x /. tp[y] -> y], 0];
 
+   (* Print[ "Doing test 9,10" ]; *)
+   p = (J*x) ** inv[F + G*x] + tp[J*x ** inv[F + G*x] ];
+   hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
+   exp = NCToNCPolynomial[hes,{h}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1, 0];
 
-   Print["l = ", l];
-   Print["m = ", Normal[m]];
-   Print["r = ", r];
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
 
-];
+   symrule = {tp[x] -> x, tp[h] -> h};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
 
-aaaa := Block[{},
-
-   Print["l = ", l];
-   Print["m = ", Normal[m]];
-   Print["r = ", r];
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
 
 
    (* Print[ "Doing test 9,10" ]; *)
+
+   p = (x**x) ** inv[1 + x] + tp[x**x ** inv[1 + x] ];
+   hes = NCHessian[ExpandNonCommutativeMultiply[p], {x, h}];
+   exp = NCToNCPolynomial[hes,{h}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1, 0];
+
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+
+   symrule = {tp[x] -> x, tp[h] -> h};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+
+   (* Print[ "Doing test 9,10" ]; *)
+
    p = (A + B*x + J*x**x) ** inv[F + G*x] + tp[ (A + B*x+J*x**x) ** inv[F + G*x] ];
    hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
-   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
-
+   exp = NCToNCPolynomial[hes,{h}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
    NCTest[expr1, 0];
-   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]]];
 
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+
+   NCTest[expr1 /. tp[x] -> x /. tp[h] -> h, 0];
+   NCTest[Norm[Normal[tpMat[m] - m /. tp[x] -> x /. tp[y] -> y]], 0];
 
    (* Print[ "Doing test 11,12" ]; *)
    p = A+B*x+C*y+D*x**y+D*y**x+x**y**x**y+y**x**y**x+inv[J+F*x+G*y];
    hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h}, {y,k} ];
-   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
-
+   exp = NCToNCPolynomial[hes,{h,k}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
    NCTest[expr1, 0];
-   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]]];
+
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h, y, k}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+
+   symrule = {tp[x] -> x, tp[h] -> h, tp[y] -> y, tp[k] -> k};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h,k}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
 
 
    (* Print[ "Doing test 13,14" ]; *)
+
    p =  ExpandNonCommutativeMultiply[(A/(B**F))**x**y**x**y+2*A**y**y**y+23*F*y**x**y+tp[(A/(B*F))*x**y**x**y+2*A*y**y**y+23*F*y**x**y]];       
    hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h}, {y,k} ];
-   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
-
+   exp = NCToNCPolynomial[hes,{h,k}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
    NCTest[expr1, 0];
-   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]]];
+
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h, y, k}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+
+   symrule = {tp[x] -> x, tp[h] -> h, tp[y] -> y, tp[k] -> k};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h,k}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
 
 
    (* Print[ "Doing test 15,16" ]; *)
+
    p = A*x**x + B*y**y + F*x**x**x + G*y**y**y + H*x**y**x**y + H*y**x**y**x; 
    hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h},{y,k} ];
-   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
-
+   exp = NCToNCPolynomial[hes,{h,k}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
    NCTest[expr1, 0];
-   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]]];
+
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h, y, k}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+
+   symrule = {tp[x] -> x, tp[h] -> h, tp[y] -> y, tp[k] -> k};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h,k}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
 
    (* Print[ "Doing test 17,18" ]; *)
+
    p = x**x**x;
    hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h} ];
-   {l, m, r} = NCMatrixOfQuadratic[ hes, {h} ];
-   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
-
+   exp = NCToNCPolynomial[hes,{h,k}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
    NCTest[expr1, 0];
-   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]]];
+
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h, y, k}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+
+   symrule = {tp[x] -> x, tp[h] -> h, tp[y] -> y, tp[k] -> k};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h,k}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
 
    (* Print[ "Doing test 19,20" ]; *)
+
    p = A*x**x**x + y**y**x + x**y**y;
    hes = NCHessian[ ExpandNonCommutativeMultiply[p], {x, h},{y,k} ];
-   {l, m, r} = NCMatrixOfQuadratic[ hes, {h,k} ];
-   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r][[1]][[1]]] - ExpandNonCommutativeMultiply[hes];
-
+   exp = NCToNCPolynomial[hes,{h,k}];
+   {m0,sylv,l,m,r} = NCQuadratic[exp];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
    NCTest[expr1, 0];
-   NCTest[(tpMat[m] - m //. tp[x] -> x //. tp[y] -> y), 
-          NCZeroMatrix[Dimensions[m][[1]]]];
 
+   {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                         SymmetricVariables -> {x, h, y, k}];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+
+   symrule = {tp[x] -> x, tp[h] -> h, tp[y] -> y, tp[k] -> k};
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
+
+   Quiet[{l,m,r}=NCMatrixOfQuadratic[hes,{h,k}];,NCSymmetricQ::SymmetricVariables];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[hes];
+   NCTest[expr1 /. symrule, 0];
+   NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
 
 ];
+

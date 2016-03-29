@@ -15,7 +15,7 @@
 BeginPackage[ "NCQuadratic`",
 	      "NCSylvester`",
 	      "NCPolynomial`",
-	      "MatrixDecompositions`",
+	      "NCSymmetric`",
 	      "NCMatMult`",
               "NCUtil`",
 	      "NCOptions`",
@@ -23,7 +23,8 @@ BeginPackage[ "NCQuadratic`",
 
 Clear[NCQuadratic,
       NCQuadraticToNCPolynomial,
-      NCQuadraticMakeSymmetric];
+      NCQuadraticMakeSymmetric,
+      NCMatrixOfQuadratic];
 
 Get["NCQuadratic.usage"];
 
@@ -55,16 +56,11 @@ Begin[ "`Private`" ]
   NCQuadraticBasis[list_] := Module[
     {basis, coefficient},
 
-    basis = Merge[Thread[list -> Range[1, Length[list]]],
-                  Identity];
-     
-    coefficient = SparseArray[
-               Thread[Flatten[
-                        Apply[List, 
-                              MapIndexed[Thread[#1 -> First[#2]]&, 
-                                         Values[basis]], {2}], 1] -> 1]];
+    {basis, index} = NCConsolidateList[list];
 
-    Return[{Keys[basis], coefficient}];
+    coefficient = SparseArray[Thread[MapIndexed[{First[#2], #1}&, index] -> 1]];
+      
+    Return[{basis, coefficient}];
       
   ];
   
@@ -76,6 +72,8 @@ Begin[ "`Private`" ]
         Return[$Failed];
     ];
 
+    (* Print["p = ", NCPolynomialToNC[p]]; *)
+      
     (* select quadratic terms *)
     {left, middle, right} = 
       Transpose[Flatten[KeyValueMap[NCQuadraticAux, 
@@ -85,12 +83,15 @@ Begin[ "`Private`" ]
     Print["left = ", left];
     Print["middle = ", middle];
     Print["right = ", right];
+    Print["l.m.r = ", 
+          MatMult[left, 
+                  DiagonalMatrix[middle], right] - NCPolynomialToNC[p]];
     *)
       
     {rightBasis, rightMatrix} = NCQuadraticBasis[right];
     {leftBasis, leftMatrix} = NCQuadraticBasis[left];
 
-    (*
+    (* 
     Print["rightBasis = ", rightBasis];
     Print["rightMatrix = ", Normal[rightMatrix]];
     Print["rightMatrix . basis = ", rightMatrix . rightBasis];
@@ -107,7 +108,7 @@ Begin[ "`Private`" ]
                                           middle]],
                            rightMatrix]];
       
-    (* Print["middleMatrix = ", middleMatrix]; *)
+    (* Print["middleMatrix = ", MatrixForm[middleMatrix]]; *)
 
     Return[Join[NCSylvester[p, False], {leftBasis, middleMatrix, rightBasis}]];
       
@@ -118,7 +119,7 @@ Begin[ "`Private`" ]
   NCQuadraticMakeSymmetric[{s0_,sylv_,left_,middle_,right_},
                            opts:OptionsPattern[{}]] := Module[
     {options, symmetricVars,
-     vars, lt},
+     vars, tpRule, rt, lt, rmat, lmat, mmat, perm},
     
     (* process options *)
 
@@ -132,17 +133,24 @@ Begin[ "`Private`" ]
     vars = Keys[sylv];
     tpRule = Thread[Map[tp,symmetricVars] -> symmetricVars];
 
-    Print["tpRule = ", tpRule];
+    (* Print["tpRule = ", tpRule]; *)
+                               
+    (* Consolidate vectors *)
+    {rt, rmat} = NCQuadraticBasis[right /. tpRule];
+    {lt, lmat} = NCQuadraticBasis[left /. tpRule];
+    mmat = Transpose[lmat] . middle . rmat;
                                
     (* Transpose right vector *)
-    rt = right /. tpRule;
-    lt = left /. tpRule;
-    tpRt = Map[tp, right] /. tpRule;
+    tpRt = Map[tp, rt] /. tpRule;
     
+    (*                               
     Print["lt = ", lt];
     Print["rt = ", rt];
+    Print["mmat = ", MatrixForm[Normal[mmat]]];
     Print["tpRt = ", tpRt];
+    *)
                                
+    (* Is it symmetric? *)
     If[ Complement[lt, tpRt] =!= {},
         Message[NCQuadraticMakeSymmetric::NotSymmetric];
         Return[{s0,sylv,left,middle,right}];
@@ -151,17 +159,43 @@ Begin[ "`Private`" ]
     (* Otherwise find permutation *)
     perm = Lookup[Association[Thread[lt -> Range[1, Length[lt]]]], tpRt];
 
-    Print["perm = ", perm];
-                               
-    perm = Flatten[Map[Position[tpRt, #, {1}]&, lt]];
-                           
-    Print["perm = ", perm];
+    (* Print["perm = ", perm]; *)
                                
     (* and permute representation *)
                                
-    Return[{s0, sylv, lt[[perm]], middle[[perm]], rt}];
+    Return[{s0, sylv, lt[[perm]], mmat[[perm]], rt}];
                             
   ];
+  
+  (* NCMatrixOfQuadratic *)
+  NCMatrixOfQuadratic[p_, vars_] := Module[
+      {sym, symVars, symRule, expr,
+       m0,sylv,l,m,r},
+
+      (* Is p symmetric *)
+      {sym, symVars} = NCSymmetricTest[p];
+      
+      (* Quick return if it failed *)
+      If [ !sym,
+           Return[{{},{},{}}];
+      ];
+
+      (* Symmetrization rule *)
+      symRule = Thread[Map[tp, symVars] -> symVars];
+      
+      (* Convert to NCPolynomial *)
+      expr = NCToNCPolynomial[p /. symRule, vars];
+      
+      (* Compute decomposition *) 
+      {m0,sylv,l,m,r} = NCQuadratic[expr];
+
+      (* Symmetrize decomposition *) 
+      {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 
+                                     SymmetricVariables -> symVars];
+
+      Return[{l,m,r}];
+      
+  ]; 
   
   (* NCQuadraticToNCPolynomial *)
 

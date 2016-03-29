@@ -306,5 +306,26 @@ Module[
           - G inv[F + G*tp[x]] ** tp[h] ** inv[F + G*tp[x]] ** (A + B tp[x]);
    NCTest[ExpandNonCommutativeMultiply[NCDirectionalD[exp, {x, h}]], ExpandNonCommutativeMultiply[answer]];
 
+   exp = (x**x) ** inv[1 + x];
+   answer = h**x**inv[1 + x] + x**h**inv[1 + x] - x**x**inv[1+x]**h**inv[1+x];
+   NCTest[NCDirectionalD[exp, {x, h}], answer];
+   answer = h**h**inv[1 + x] - h**x**inv[1+x]**h**inv[1 + x]
+          + h**h**inv[1 + x] - x**h**inv[1 + x]**h**inv[1 + x]
+          - h**x**inv[1+x]**h**inv[1+x] - x**h**inv[1+x]**h**inv[1+x]
+	  + 2 x**x**inv[1+x]**h**inv[1+x]**h**inv[1+x];
+   NCTest[NCHessian[exp, {x, h}], answer];
+
+   exp = (x**x) ** inv[1 + x] + tp[x**x ** inv[1 + x]];
+   answer = h**x**inv[1 + x] + x**h**inv[1 + x] - x**x**inv[1+x]**h**inv[1+x]
+          + tp[h**x**inv[1 + x] + x**h**inv[1 + x] - x**x**inv[1+x]**h**inv[1+x]];
+   NCTest[NCDirectionalD[exp, {x, h}], answer];
+   answer = h**h**inv[1 + x] - h**x**inv[1+x]**h**inv[1 + x]
+          + h**h**inv[1 + x] - x**h**inv[1 + x]**h**inv[1 + x]
+          - h**x**inv[1+x]**h**inv[1+x] - x**h**inv[1+x]**h**inv[1+x]
+	  + 2 x**x**inv[1+x]**h**inv[1+x]**h**inv[1+x];
+   answer += tp[answer];
+   NCTest[NCHessian[exp, {x, h}], answer];
+
+
 ];
 

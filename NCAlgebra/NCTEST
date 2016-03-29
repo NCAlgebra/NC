@@ -58,17 +58,17 @@ On[Assert];
 Print["> BEGIN NCTEST\n" ];
 
 tests = {
-  "NCSylvester",
-  "NCQuadratic",
-(*
   "NCPolynomial",
+  "NCQuadratic",
+  "NCSylvester",
+  "NCDiff",
+  "NCUtil",
   "NCMatMult",
   "CommutativeQ",
   "NCMultiplication",
   "NCRoots",
   "NCConjugate",
   "NCOutput",
-  "NCDiff",
   "NCCollect",
   "NCSimplifyRational",
   "NCSymmetric",
@@ -76,12 +76,12 @@ tests = {
   "NCLDU",
   "NCRealization",
   "NCReplace",
-  "NCUtil",
   "MatrixDecompositions",
   "NCInverse",
   "NCMatrixDecompositions",
-  "NCConvexity", 
   "Matrix",
+  "NCConvexity", 
+(*
 *)
 (* {"Crit",             "Crit"}, *)
 (*

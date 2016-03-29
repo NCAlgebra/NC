@@ -330,8 +330,10 @@ Begin[ "`Private`" ]
   (* NCPDegree *)
 
   Clear[NCPDegreeAux];
-  NCPDegreeAux[m_NonCommutativeMultiply, vars_] := 
-     Map[Count[m, #]&, vars];
+  NCPDegreeAux[m_NonCommutativeMultiply, vars_] := Block[
+     {tmp = m /. {tp[x_] -> x, aj[x_] -> x}},
+     Map[Count[tmp, #]&, vars]
+  ];
   NCPDegreeAux[m_Symbol, vars_] := Exponent[vars, m];
   NCPDegreeAux[(tp|aj)[m_Symbol], vars_] := Exponent[vars, m];
   

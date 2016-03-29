@@ -1,7 +1,7 @@
 << NCUtil`
 
 Block[
-  {k,test,expr,a,b,c,d,x,y,z},
+  {k,test,expr,a,b,c,d,x,y,z,list,index},
 
   SetCommutative[a,b,c,d];
   SetNonCommutative[x,y,z];
@@ -102,5 +102,14 @@ Block[
   NCTest[NCGrabFunctions[expr, tp|aj], {aj[x],tp[y]}];
   NCTest[NCGrabFunctions[expr, inv], {inv[1+inv[x**tp[y]+b]], 
                                       inv[x**tp[y]+b]}];
+
+  (* NCConsolidateList *)
+  {list,index} = NCConsolidateList[{3,1,2,3}];
+  NCTest[list, {3,1,2}];
+  NCTest[index, {1,2,3,1}];
+
+  {list,index} = NCConsolidateList[{z,t,s,f,d,f,z}];
+  NCTest[list, {z,t,s,f,d}];
+  NCTest[index, {1,2,3,4,5,4,1}];
 
 ];

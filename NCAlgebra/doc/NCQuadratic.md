@@ -4,6 +4,8 @@
 
 Members are:
 
+* [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
+* [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
 * [NCQuadratic](#NCQuadratic)
 * [NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial)
 
@@ -45,6 +47,21 @@ and
 
 See also:
 [NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
+
+## NCQuadraticMakeSymmetric {#NCQuadraticMakeSymmetric}
+
+`NCQuadraticMakeSymmetric[q]`.
+
+## NCMatrixOfQuadratic {#NCMatrixOfQuadratic}
+
+`NCMatrixOfQuadratic[p, vars]` gives a factorization of the symmetric quadratic	function `p` in noncommutative variables `vars` and their transposes.
+
+`NCMatrixOfQuadratic` checks for symmetry and automatically sets variables to be symmetric if possible.
+
+Internally it uses [NCQuadratic](#NCQuadratic) and [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).
+
+See also:
+[NCQuadratic](#NCQuadratic), [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).
 
 ## NCQuadraticToNCPolynomial {#NCQuadraticToNCPolynomial}
 

@@ -21,6 +21,7 @@ BeginPackage["NCUtil`",
 
 Clear[NCGrabSymbols,
       NCGrabFunctions,
+      NCConsolidateList,
       NCConsistentQ];
 
 Get["NCUtil.usage"];
@@ -33,6 +34,13 @@ Begin["`Private`"];
 
   NCGrabFunctions[exp_, f_] :=
     Union[Cases[exp, (f)[_], {0, Infinity}]];
+
+  NCConsolidateList[list_] := Block[
+      {basis, index = Range[1, Length[list]]},
+      basis = Merge[Thread[list -> index], Identity];
+      MapIndexed[(index[[#1]] = #2[[1]])&, Values[basis]];
+      Return[{Keys[basis], index}];
+  ];
     
   NCConsistentQ[exp_] := 
     Length[Cases[exp, 
