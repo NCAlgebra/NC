@@ -33,12 +33,12 @@ Begin[ "`Private`" ]
   (* NCSylvester *)
 
   Clear[NCSylvesterAux];
-  NCSylvesterAux[poly_Association, 
-                               var_Symbol] := Module[
+  NCSylvesterAux[poly_Association, var_Symbol] := Module[
     {exp, coeff, left, right, leftBasis, rightBasis,
      i, j, p, q, F},
 
     (* Quick return if independent of var *)
+    (* This will automatically select linear terms *)
     If [!KeyExistsQ[poly, {var}] || (exp = poly[{var}]) === {}
         ,
         Return[var -> {{},{},SparseArray[{}, {0, 0}]}];
@@ -125,13 +125,15 @@ Begin[ "`Private`" ]
 
   ];
 
-  NCSylvester[p_NCPolynomial] := (
-    If [!NCPLinearQ[p],
+  NCSylvester[p_NCPolynomial, LinearQ_:True] := (
+
+    If [LinearQ && !NCPLinearQ[p],
         Message[NCSylvester::NotLinear];
         Return[$Failed];
     ];
-    {p[[1]], Association[Map[NCSylvesterAux[p[[2]], #]&, 
-                            p[[3]]]]}
+    
+    {p[[1]], Association[Map[NCSylvesterAux[p[[2]], #]&, p[[3]]]]}
+    
   );
   
   

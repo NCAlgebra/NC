@@ -118,6 +118,21 @@ Block[
      NCSylvester::NotLinear
    ];
 
+
+   (* Ignore higher order terms *)
+
+   vars = {x,y};
+   exp = 2 + a**x**b + c**x**d + y + x**x + x**y;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {2, 
+             <|x->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]},
+               y->{{1},{1},SparseArray[{{1}}]}|>};
+   NCTest[NCSylvester[p, False], answer];
+   NCTest[ExpandNonCommutativeMultiply[
+            NCPolynomialToNC[ 
+              NCSylvesterToNCPolynomial[answer]]],
+           2 + a**x**b + c**x**d + y];
+
    (* Matrix of polynomials *)
 
    vars = {x};

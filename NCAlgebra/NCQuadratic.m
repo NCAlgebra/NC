@@ -13,15 +13,26 @@
 (* :History: *)
 
 BeginPackage[ "NCQuadratic`",
+	      "NCSylvester`",
 	      "NCPolynomial`",
 	      "MatrixDecompositions`",
 	      "NCMatMult`",
+              "NCUtil`",
+	      "NCOptions`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCQuadratic,
-      NCQuadraticToNCPolynomial];
+      NCQuadraticToNCPolynomial,
+      NCQuadraticMakeSymmetric];
 
 Get["NCQuadratic.usage"];
+
+NCQuadraticMakeSymmetric::NotSymmetric = "Quadratic form is not \
+symmetric. Use SymmetricVariables to declare variables symmetric.";
+
+Options[NCQuadraticMakeSymmetric] = {
+  SymmetricVariables -> {}
+};
 
 Options[NCQuadraticToNCPolynomial] = {
   Collect -> True
@@ -43,7 +54,7 @@ Begin[ "`Private`" ]
   Clear[NCQuadraticBasis];
   NCQuadraticBasis[list_] := Module[
     {basis, coefficient},
-      
+
     basis = Merge[Thread[list -> Range[1, Length[list]]],
                   Identity];
      
@@ -66,22 +77,20 @@ Begin[ "`Private`" ]
     ];
 
     (* select quadratic terms *)
-    {left, middle, right}
-      = Transpose[
-              Flatten[
-                MapThread[NCQuadraticAux,
-                          Transpose[
-                             Apply[List, 
-                                   Normal[NCPTermsOfTotalDegree[p, 2]],
-                                   {1}]]], 1]];
+    {left, middle, right} = 
+      Transpose[Flatten[KeyValueMap[NCQuadraticAux, 
+                                    NCPTermsOfTotalDegree[p, 2]], 1]];
 
+    (*
     Print["left = ", left];
     Print["middle = ", middle];
     Print["right = ", right];
+    *)
       
     {rightBasis, rightMatrix} = NCQuadraticBasis[right];
     {leftBasis, leftMatrix} = NCQuadraticBasis[left];
 
+    (*
     Print["rightBasis = ", rightBasis];
     Print["rightMatrix = ", Normal[rightMatrix]];
     Print["rightMatrix . basis = ", rightMatrix . rightBasis];
@@ -89,20 +98,71 @@ Begin[ "`Private`" ]
     Print["leftBasis = ", leftBasis];
     Print["leftMatrix = ", Normal[leftMatrix]];
     Print["leftMatrix . basis = ", leftMatrix . leftBasis];
+    *)
 
-    middleMatrix = MatMult[Transpose[leftMatrix], 
+    (* build middle matrix *)
+    middleMatrix = SparseArray[MatMult[Transpose[leftMatrix], 
                            SparseArray[
                                MapIndexed[({First[#2],First[#2]} -> #1)&, 
                                           middle]],
-                           rightMatrix];
+                           rightMatrix]];
       
-    Print["middleMatrix = ", middleMatrix];
+    (* Print["middleMatrix = ", middleMatrix]; *)
 
-    Return[{{}, {leftBasis, middleMatrix, rightBasis}}];
+    Return[Join[NCSylvester[p, False], {leftBasis, middleMatrix, rightBasis}]];
       
   ];
 
+  (* NCQuadraticMakeSymmetric *)
+  
+  NCQuadraticMakeSymmetric[{s0_,sylv_,left_,middle_,right_},
+                           opts:OptionsPattern[{}]] := Module[
+    {options, symmetricVars,
+     vars, lt},
+    
+    (* process options *)
 
+    options = Flatten[{opts}];
+
+    symmetricVars = SymmetricVariables 
+          /. options
+          /. Options[NCQuadraticMakeSymmetric, SymmetricVariables];
+
+    (* Pick variables *)
+    vars = Keys[sylv];
+    tpRule = Thread[Map[tp,symmetricVars] -> symmetricVars];
+
+    Print["tpRule = ", tpRule];
+                               
+    (* Transpose right vector *)
+    rt = right /. tpRule;
+    lt = left /. tpRule;
+    tpRt = Map[tp, right] /. tpRule;
+    
+    Print["lt = ", lt];
+    Print["rt = ", rt];
+    Print["tpRt = ", tpRt];
+                               
+    If[ Complement[lt, tpRt] =!= {},
+        Message[NCQuadraticMakeSymmetric::NotSymmetric];
+        Return[{s0,sylv,left,middle,right}];
+    ];
+   
+    (* Otherwise find permutation *)
+    perm = Lookup[Association[Thread[lt -> Range[1, Length[lt]]]], tpRt];
+
+    Print["perm = ", perm];
+                               
+    perm = Flatten[Map[Position[tpRt, #, {1}]&, lt]];
+                           
+    Print["perm = ", perm];
+                               
+    (* and permute representation *)
+                               
+    Return[{s0, sylv, lt[[perm]], middle[[perm]], rt}];
+                            
+  ];
+  
   (* NCQuadraticToNCPolynomial *)
 
   Clear[LeftFactorMultiply];
@@ -208,119 +268,6 @@ Begin[ "`Private`" ]
       
   ];
 
-  (* ------------------------------------------------------------ *)
-  (* OLDER CODE *)
-    
-  (* Blow representation from scalar to matrix representation *)
-
-  Clear[BlowRepresentation]
-  BlowRepresentation[
-    {leftBasis_, rightBasis_},
-    {r_, s_},
-    {left_, right_, F_, var_},
-    {ii_, jj_}
-    ] := Module[
-    {i, j},
-
-    i = r (Flatten[Map[Position[leftBasis, #, 1] &, left]] - 1) + ii;
-    j = s (Flatten[Map[Position[rightBasis, #, 1] &, right]] - 1) + jj;
-
-    MapThread[(#1 -> #2) &, {Flatten[Outer[List, i, j], 1], 
-      Flatten[F]}]
-    ];
-
-  (* Grow representation to equalize sizes given common left and right basis *)
-
-  Clear[GrowRepresentation]
-  GrowRepresentation[
-    {leftBasis_, rightBasis_},
-    {r_, s_},
-    {left_, right_, F_, var_}
-    ] := Module[
-    {p, q, FF},
-
-    p = Length[leftBasis];
-    q = Length[rightBasis];
-
-    NCDebug[2, p, q];
-
-    If[p + q == 0, 
-      Return[{{}}];
-    ]
-
-    FF = If [Length[rightBasis] === Length[right],
-      F
-     ,
-      F.KroneckerProduct[
-        Part[SparseArray[{i_, i_} -> 1, {q, q}], 
-         Flatten[Map[Position[rightBasis, #, 1] &, right]], All],
-        SparseArray[{i_, i_} -> 1, {s, s}]
-        ]
-      ];
-
-    If [Length[leftBasis] =!= Length[left],
-     FF =
-       KroneckerProduct[
-         Part[SparseArray[{i_, i_} -> 1, {p, p}], All, 
-          Flatten[Map[Position[leftBasis, #, 1] &, left]]],
-         SparseArray[{i_, i_} -> 1, {r, r}]
-         ].FF;
-     ];
-
-    Return[FF];
-
-  ];
-
-  NCOldQuadratic[f_?MatrixQ, 
-                            var_?MatrixQ] := Module[
-     {exp, leftBasis, rightBasis,
-      p, q, r, s, F},
-
-     exp = ExpandNonCommutativeMultiply[f];
-     {r, s} = Dimensions[exp, 2];
-
-     exp = Map[NCOldQuadratic[exp, #] &, var, {2}];
-
-     leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
-     rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
-
-     NCDebug[2, r, s, exp];
-
-     Return[
-      {leftBasis, rightBasis, Map[GrowRepresentation[
-          {leftBasis, rightBasis}, {r, s}, #] &, exp, {2}], var}
-      ];
-
-     ];
-
-  NCOldQuadratic[f_, var_?MatrixQ] :=
-    NCOldQuadratic[{{f}}, var];
-
-  NCOldQuadratic[f_?MatrixQ, var_Symbol] := Module[
-     {exp, leftBasis, rightBasis,
-      p, q, r, s, F},
-
-     exp = Map[NCOldQuadratic[#, var] &, f, {2}];
-     leftBasis = Union[Flatten[Part[exp, All, All, 1]]];
-     rightBasis = Union[Flatten[Part[exp, All, All, 2]]];
-
-     {r, s} = Dimensions[exp, 2];
-     p = Length[leftBasis];
-     q = Length[rightBasis];
-
-     F = If[ p + q == 0,
-
-         {{}}
-         ,
-         SparseArray[
-           Flatten[MapIndexed[
-             BlowRepresentation[
-               {leftBasis, rightBasis}, {r, s}, ##] &, exp, {2}]],
-           {p r, q s}]
-     ];
-
-     Return[{leftBasis, rightBasis, F, var}];
-  ];
   
 End[]
 
