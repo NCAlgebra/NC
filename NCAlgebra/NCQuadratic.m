@@ -31,6 +31,9 @@ Get["NCQuadratic.usage"];
 NCQuadraticMakeSymmetric::NotSymmetric = "Quadratic form is not \
 symmetric. Use SymmetricVariables to declare variables symmetric.";
 
+NCMatrixOfQuadratic::NotSymmetric = "Quadratic form is not \
+symmetric.";
+
 Options[NCQuadraticMakeSymmetric] = {
   SymmetricVariables -> {}
 };
@@ -177,6 +180,7 @@ Begin[ "`Private`" ]
       
       (* Quick return if it failed *)
       If [ !sym,
+           Message[NCMatrixOfQuadratic::NotSymmetric];
            Return[{{},{},{}}];
       ];
 

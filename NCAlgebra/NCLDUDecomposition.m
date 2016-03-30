@@ -20,6 +20,7 @@
 *)
 
 BeginPackage["NCLDUDecomposition`",
+             "Combinatorica`",
 	     "NCMatMult`",
 	     "NonCommutativeMultiply`",
 	     "NCLinearAlgebra`",
@@ -617,6 +618,108 @@ largest *)
     ];
   ];
 
+  NCAllPermutationLDU[ mat_, opts___Rule ]:=
+          Module[{n = Length[mat],allperm,permset,i,f,x,h,res={},permres = {},
+                  permselect,checkit,pivotcheck,stopauto,returnperm},
+          checkit = CheckDecomposition /. {opts} /. Options[NCAllPermutationLDU];      \
+
+          pivotcheck = NCSimplifyPivots /. {opts} /. \
+  Options[NCAllPermutationLDU];  
+          stopauto   = StopAutoPermutation /. {opts} /.  \
+  Options[NCAllPermutationLDU]; 
+          returnperm = ReturnPermutation /. {opts} /.  \
+  Options[NCAllPermutationLDU];
+          stop2by2  = Stop2by2Pivoting /. {opts} /. \
+  Options[NCAllPermutationLDU];         	
+          permselect = PermutationSelection /. {opts} /.  \
+  Options[NCAllPermutationLDU]; 
+          (*NOTE:  To select a range of permutations, say m through n, enter      *)
+          (*PermutationSelection -> {{m},{n}}.  To select specific permutations   *)
+          (*from the list of all permutations constructed by this program         *)
+          (*enter PermutationSelection -> {i1,i2,i3,...,in} .                     *)
+          If[Length[ Dimensions[permselect] ] == 2 ,
+             permselect = Range[ permselect[[1,1]],permselect[[2,1]] ];
+            ]; (* end if *)
+
+
+
+          If[n <= 5,
+             allperm = Sort[MinimumChangePermutations[Range[n]]];
+             permset={allperm};
+             Do[ permset = Append[permset,  Take[allperm, Factorial[i]] ];
+                    , {i, n-1, 2, -1} ];
+             Pull[f_[x__]]:=x;		
+             permset=Flatten[Outer[f,Pull[permset],1],n];
+             permset=permset /. f[x___] -> List[x];
+          ,(* else *)
+            allperm = Sort[MinimumChangePermutations[Range[5]]];
+            permset={allperm};
+            Do[ permset = Append[permset,  Take[allperm, Factorial[i]] ];
+                    , {i, 5-1, 2, -1} ];
+            Pull[f_[x__]]:=x;		
+            permset=Flatten[Outer[f,Pull[permset],1],5];
+            permset=permset /. f[x___] -> List[x];
+
+            Clear[ExpandPermutation];
+            ExpandPermutation[list_] := 
+                   Module[{tmplist, tmplist2, tmpfun},
+                      tmpfun[x_] := Flatten[{x, Range[5 + 1, n]}];
+                      tmplist = Map[tmpfun, list];             
+                       For[i = 1, i < n - 5 + 1, i++,
+                           tmplist = AppendTo[tmplist, tmpfun[Range[5]]  ];     \
+
+                          ];        
+                     Return[tmplist];              
+                         ];
+            permset = Map[ExpandPermutation,permset];
+            ]; (* end if *)
+
+          (* check selection list *)
+          If[Not[permselect === False],
+             permselect = Flatten[permselect]; (* safe guard list *)	    
+             If[Length[permselect] > Length[permset],
+                Print["Improper permutation selection: List too long!"];
+                Print["There are only ",Length[permset]," permutations possible."];
+                Abort[];
+               ]; (*end if*)
+             If[Max[permselect] > Length[permset]  || Min[permselect] < 1,
+                Print["Improper permutation selection: Incorrect range in \
+  selection!"];
+                Print["There are only ",Length[permset]," permutations possible."];
+                Abort[];
+               ]; (*end if*)
+            ]; (*end check selection if*)
+
+          h[x_]:=Block[{st1,output},
+                  st1 = Check[output =
+                          NCLDUDecomposition[mat,Permutation -> x, 
+                          CheckDecomposition -> checkit,
+                          NCSimplifyPivots -> pivotcheck,
+                          StopAutoPermutation -> stopauto,
+                          ReturnPermutation -> returnperm,
+                          Stop2by2Pivoting -> stop2by2  ],False];                         	 
+
+          If[SameQ[st1,False]
+                  ,Null, 
+             AppendTo[res,st1];
+             If[returnperm === True,
+                AppendTo[permres, st1[[5]] ]; 
+               ];(*end if*)
+            ];(*end if*)
+          ];(*end block*)
+          If[permselect === False,
+             Map[(h[#1])&,permset];
+          ,(*else*)
+             Map[(h[#1])&, permset[[permselect]] ];
+          ];
+          If[returnperm === True,
+             permres = Union[permres];
+             res = AppendTo[res,permres];
+            ];(* end if *)
+          Return[res];
+          Print["I also made it this far\n"];
+  ] /; MatrixQ[mat]
+      
 End[];
 EndPackage[];
 

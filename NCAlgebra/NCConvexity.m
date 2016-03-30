@@ -193,48 +193,6 @@ NCConvexityRegion[f_, list_, opts___Rule] :=
                LUdata = { LUdata };
              ];
 
-
-(* OLD CODE...NOT USED NOW...WAS CHANGED ON 6/27/02 ----------------------------
-                 
-            (* Make a list of Diagonals and corresponding permutations *)                       
-            For[i = 1, i <= Length[LUdata] - 1, i++,
-                Tmpdiag = LUdata[[i]][[2]];   
-                         
-                (* Incase LDU decomposition is incomplete *)
-                (* i.e. 2by2 permutation was needed       *)
-                If[Tmpdiag[[n,n]] === 0,
-                   (* find positon of diagonal block with *)
-                   (* zeros along diagonal                *)
-                   Tmplist = Diag[Tmpdiag];
-                   Tmplist1 = Flatten[ Position[Tmplist, 0] ];
-                   Tmplist2 = Tmplist1 - 
-                      Range[Length[Tmplist] - Length[Tmplist1]+1,Length[Tmplist] ];
-                   Tmpvar = Position[Tmplist2,0][[1,1]];
-                   Tmpvar = Tmplist1[[Tmpvar]];
-                  
-                   (* (Tmpvar,Tmpvar) is the position of the top *)
-                   (* left corner of diagonal block.              *)
-                   n = Length[Tmpdiag];
-                   Tmplist = Tmpdiag[[Range[Tmpvar,n], Range[Tmpvar,n] ]]; 
-                   Tmpdiag = Diag[Tmpdiag][[Range[Tmpvar-1] ]]; 
-                   If[Tmplist === NCZeroMatrix[n - Tmpvar + 1],
-                      Tmplist = Diag[Tmplist];
-                      Tmpdiag = AppendTo[Tmpdiag,Tmplist];
-                      Tmpdiag = Flatten[Tmpdiag];
-                   ,(* else *)
-                      Tmpdiag = AppendTo[Tmpdiag,Tmplist[[1]]];
-                     ]; (*end if*)                                      
-                 ,(*else*)
-                   Tmpdiag = Diag[Tmpdiag];
-                  ];(* end if *)
-                
-                diaglist = AppendTo[diaglist, Tmpdiag];
-                permlist = AppendTo[permlist, LUdata[[i]][[5]] ];
-               ]; (* end for *)
-            
-
-END OF OLD CODE ----------------------------------------------------- *)
-
 (* NEW CODE 6/27/02 *)
 
             (* find the simpliest diagonal by seeing which matrix
@@ -291,27 +249,6 @@ END OF OLD CODE ----------------------------------------------------- *)
                   Print["Border vectors may be dependent.  Use NCIndependenceCheck."];
                ];(*end if*)
              ];(*end if*)
-
-
-(* OLD CODE...NOT USED NOW...WAS CHANGED ON 6/27/02 ----------------------------
-            If[returnperm === True,
-               diaglist = Thread[{diaglist,permlist}];
-               diaglist = Sort[diaglist,(LeafCount[#2] > LeafCount[#1])&];
-               If[returnvec == True,                  
-                  Return[{diaglist,  Hdata1} ];
-               ,(*else*)
-                  Return[diaglist];
-               ];(*end if*)
-            ,(*else*)
-               diaglist = Sort[diaglist,(LeafCount[#2] > LeafCount[#1])&];
-               If[returnvec == True,                  
-                  Print[Hdata1];
-                  Return[{diaglist, Hdata1} ];
-               ,(*else*)
-                  Return[diaglist];
-               ];(*end if*)                
-            ]; (*end if *)              
-END OF OLD CODE  --------------------------------------------------------------*)
 
 (* NEW CODE ------------ *)
 
