@@ -20,6 +20,8 @@ If `expr` is a rational nc expression then degree correspond to the degree of th
 
 `NCCollect` also works with nc expressions instead of *Symbols* in vars. In this case nc expressions are replaced by new variables and `NCCollect` is called using the resulting expression and the newly created *Symbols*.
 
+This command internally converts nc expressions into the special `NCPolynomial` format.
+
 See also:
 [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint), [NCRationalToNCPolynomial](#NCRationalToNCPolynomial).
 
@@ -27,12 +29,16 @@ See also:
 
 `NCCollectSelfAdjoint[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their adjoints without writing out the adjoints.
 
+This command internally converts nc expressions into the special `NCPolynomial` format.
+
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
 ## NCCollectSymmetric {#NCCollectSymmetric}
 
 `NCCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
+
+This command internally converts nc expressions into the special `NCPolynomial` format.
 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
@@ -45,6 +51,8 @@ In the noncommutative case the Taylor expansion and so the collect function is n
 
 For example, a symbol `x` will factor out of terms where it appears both linearly and quadratically thus mixing orders.
 
+This command internally converts nc expressions into the special `NCPolynomial` format.
+
 See also:
 [NCCollect](#NCCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
@@ -52,12 +60,16 @@ See also:
 
 `NCStrongCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
+This command internally converts nc expressions into the special `NCPolynomial` format.
+
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric).
 
 ## NCStrongCollectSymmetric {#NCStrongCollectSymmetric}
 
 `NCStrongCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
+
+This command internally converts nc expressions into the special `NCPolynomial` format.
 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
@@ -68,9 +80,11 @@ See also:
 
 `NCCompose[dec, degree]` will reassemble only the terms of degree `degree`.
 
-`NCCompose[NCDecompose[p,vars]]` will reproduce the polynomial `p`.
+The expression `NCCompose[NCDecompose[p,vars]]` will reproduce the polynomial `p`.
 
-`NCCompose[NCDecompose[p,vars], degree]` will reproduce only the terms of degree `degree`.
+The expression `NCCompose[NCDecompose[p,vars], degree]` will reproduce only the terms of degree `degree`.
+
+This command internally converts nc expressions into the special `NCPolynomial` format.
 
 See also:
 [NCDecompose](#NCDecompose), [NCPDecompose](#NCPDecompose).
@@ -81,7 +95,9 @@ See also:
 
 `NCDecompose[p]` treats all nc letters in `p` as variables.
 
-`NCDecompose` uses [`NCPDecompose`](#NCPDecompose).
+This command internally converts nc expressions into the special `NCPolynomial` format.
+
+Internally `NCDecompose` uses [`NCPDecompose`](#NCPDecompose).
 
 See also:
 [NCCompose](#NCCompose), [NCPDecompose](#NCPDecompose).
@@ -99,6 +115,8 @@ returns `x**y**x` and
     NCTermsOfDegree[x**y**x + x**w,{x,y},{1,0}}]
 
 return `x**w`. It returns 0 otherwise.
+
+This command internally converts nc expressions into the special `NCPolynomial` format.
 
 See also:
 [NCDecompose](#NCDecompose), [NCPDecompose](#NCPDecompose).

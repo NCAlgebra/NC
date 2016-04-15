@@ -4,18 +4,28 @@
 
 `NCSimplifyRational` simplifies rational noncommutative expressions by repeatedly applying a set of reduction rules to the expression. `NCSimplifyRationalSinglePass` does only a single pass.
 
+Rational expressions of the form
+
+    inv[A + terms]
+
+are first normalized to
+
+   inv[1 + terms/A]/A
+
+using `NCNormalizeInverse`.
+
 For each `inv` found in expression, a custom set of rules is constructed based on its associated nc Groebner basis.
 
 For example, if
 
     inv[mon1 + ... + K lead]
 
-where `lead` is the monomial with the highest degree then the following rules are generated:
+where `lead` is the leading monomial with the highest degree then the following rules are generated:
 
 | Original | Transformed |
 | --- | --- |
-| inv[mon1 + ... + lead] lead | (1 - inv[mon1 + ... + lead] (mon1 + ...))/K |
-| lead inv[mon1 + ... + lead] | (1 - (mon1 + ...) inv[mon1 + ... + lead])/K |
+| inv[mon1 + ... + K lead] lead | (1 - inv[mon1 + ... + lead] (mon1 + ...))/K |
+| lead inv[mon1 + ... + K lead] | (1 - (mon1 + ...) inv[mon1 + ... + lead])/K |
 
 Finally the following pattern based rules are applied:
 
@@ -27,7 +37,7 @@ Finally the following pattern based rules are applied:
 | inv[1 + K a] inv[a]    | inv[a] - K inv[1 + K a]     |
 | inv[1 + K a b] a       | a inv[1 + K b a]      |
 
-`NCPreSimplifyRational` only applies pattern based rules. In addition to the above rules the following two rules are applied repeatdly:
+`NCPreSimplifyRational` only applies pattern based rules from the second table above. In addition, the following two rules are applied:
 
 | Original | Transformed |
 | --- | --- |
@@ -36,7 +46,11 @@ Finally the following pattern based rules are applied:
 | a b inv[1 + K a b] | (1 - inv[1 + K a b])/K |
 | a inv[1 + K a]     | (1 - inv[1 + K a])/K   |
 
-`NCPreSimplifyRationalSinglePass` does only a single pass.
+Rules in `NCSimplifyRational` and `NCPreSimplifyRational` are applied repeatedly.
+
+Rules in `NCSimplifyRationalSinglePass` and `NCPreSimplifyRationalSinglePass` are applied only once.
+
+The particular ordering of monomials used by `NCSimplifyRational` is the one implied by the `NCPolynomial` format. This ordering is a variant of the deg-lex ordering where the lexical ordering is Mathematica's natural ordering.
 
 Members are:
 
@@ -63,7 +77,7 @@ See also:
 
 ## NCSimplifyRationalSinglePass {#NCSimplifyRationalSinglePass}
 
-`NCSimplifyRationalSinglePass[expr]` applies a series of custom rules in an attempt to simplify the rational nc expression `expr`.
+`NCSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational nc expression `expr`.
 
 See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
@@ -79,7 +93,7 @@ See also:
 
 ## NCPreSimplifyRationalSinglePass {#NCPreSimplifyRationalSinglePass}
 
-`NCPreSimplifyRationalSinglePass[expr]` applies a series of custom rules in an attempt to simplify the rational nc expression `expr`.
+`NCPreSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational nc expression `expr`.
 
 See also:
 [NCNormalizeInverse](#NCNormalizeInverse),

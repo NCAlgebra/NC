@@ -20,14 +20,14 @@ Members are:
 
 ## aj {#aj}
 
-`aj[x]` is the adjoint of `x`. `aj` is a conjugate linear involution. 
+`aj[expr]` is the adjoint of expression `expr`. It is a conjugate linear involution.
 
 See also:
 [tp](#tp), [co](#co).
 
 ## co {#co}
 
-`co[x]` is the conjugate of `x`. It is a linear involution.
+`co[expr]` is the conjugate of expression `expr`. It is a linear involution.
 
 See also:
 [aj](#aj).
@@ -38,38 +38,32 @@ See also:
 
 ## inv {#inv}
 
-`inv[x]` is the 2-sided inverse of `x`.
+`inv[expr]` is the 2-sided inverse of expression `expr`.
 
 ## rt {#rt}
 
-`rt[x]` is the root of `x`. 
+`rt[expr]` is the root of expression `expr`.
 
 ## tp {#tp}
 
-`tp[x]` is the tranpose of `x`. It is a linear involution.
+`tp[expr]` is the tranpose of expression `expr`. It is a linear involution.
 
 See also:
 [aj](#tp), [co](#co).
 
-## Commutative {#Commutative}
-
-`Commutative[x]` makes the noncommutative *Symbol* `x` behave as if it were commutative.
-         
-See also:
-[CommuteEverything](#CommuteEverything), [CommutativeQ](#CommutativeQ), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
-
 ## CommutativeQ {#CommutativeQ}
 
-`CommutativeQ[x]` is *True* if `x` is commutative (the default), and *False* if `x` is noncommutative.
-    
+`CommutativeQ[expr]` is *True* if expression `expr` is commutative (the default), and *False* if `expr` is noncommutative.
+
 See also:
 [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
 
 ## NonCommutativeQ {#NonCommutativeQ}
 
-NonCommutativeQ[x] is equal to Not[CommutativeQ[x]]. 
+`NonCommutativeQ[expr]` is equal to `Not[CommutativeQ[expr]]`.
 
-See CommutativeQ.
+See also:
+[CommutativeQ](#CommutativeQ).
 
 ## SetCommutative {#SetCommutative}
 
@@ -94,6 +88,13 @@ See also:
 See also:
 [Commutative](#Commutative).
 
+## Commutative {#Commutative}
+
+`Commutative[symbol]` is commutative even if `symbol` is noncommutative.
+
+See also:
+[CommuteEverything](#CommuteEverything), [CommutativeQ](#CommutativeQ), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
+
 ## ExpandNonCommutativeMultiply {#ExpandNonCommutativeMultiply}
 
 `ExpandNonCommutativeMultiply[expr]` expands out `**`s in `expr`.
@@ -101,7 +102,7 @@ See also:
 For example
 
     ExpandNonCommutativeMultiply[a**(b+c)]
-    
+
 returns
 
     a**b+a**c.

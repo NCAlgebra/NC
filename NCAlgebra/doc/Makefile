@@ -15,21 +15,22 @@ FILES = NonCommutativeMultiply.usage \
 	NCUtil.usage \
         MatrixDecompositions.usage
 
-MANUAL = NonCommutativeMultiply.md \
-	NCCollect.md \
-	NCSimplifyRational.md \
-	NCDiff.md \
-	NCReplace.md \
-	NCSymmetric.md \
-	NCSelfAdjoint.md \
-	NCOutput.md \
-	NCMatMult.md \
-	NCPolynomial.md \
-	NCSylvester.md \
-	NCQuadratic.md \
-	NCRealization.md \
-	NCUtil.md \
-        MatrixDecompositions.md
+MANUAL = Preamble.md \
+         NonCommutativeMultiply.md \
+	 NCCollect.md \
+	 NCSimplifyRational.md \
+	 NCDiff.md \
+	 NCReplace.md \
+	 NCSymmetric.md \
+	 NCSelfAdjoint.md \
+	 NCOutput.md \
+	 NCMatMult.md \
+	 NCPolynomial.md \
+	 NCSylvester.md \
+	 NCQuadratic.md \
+	 NCRealization.md \
+	 NCUtil.md \
+         MatrixDecompositions.md
 
 all: $(FILES)
 
