@@ -23,6 +23,10 @@ BeginPackage[ "PrimalDual`",
 
 Clear[PrimalDual];
 PrimalDual::usage = "Solve semidefinite program using a primal dual method";
+PrimalDual::HessianNotPositiveDefinite = "Hessian is no longer positive definite";
+PrimalDual::linearDependence = "SDP most likely contain linearly dependent columns or is unbounded. Try adding additional constraints.";
+PrimalDual::lineSearch = "Line search failed";
+PrimalDual::unproductive = "Unproductive iteration. Aborting.";
 
 Clear[
   Direct, CG,
@@ -544,7 +548,7 @@ Begin[ "`Private`" ]
                     HkSqrtDiag = Tr[Hk, List];
 
                     If [ Min[HkSqrtDiag] <= 0, 
-                         NCDebug[ 0, "Hessian is no longer positive definite!" ]; 
+		         Message[PrimalDual::HessianNotPositiveDefinite];
 			 success = False;
                          Break[];
                     ];
@@ -573,9 +577,8 @@ Begin[ "`Private`" ]
 
                ,
 
-                NCDebug[ 0, 
-                         "WARNING: Could not factor Hessian!" ];
- 		success = False;
+	        Message[PrimalDual::HessianNotPositiveDefinite];
+                success = False;
                 Break[];
 
              ];
@@ -590,13 +593,10 @@ Begin[ "`Private`" ]
 
                ,
 
-                NCDebug[ 0, 
-                         "WARNING: Could not factor Hessian!" ];
+	        Message[PrimalDual::HessianNotPositiveDefinite];
 
                 If [ counter == 0,
-                     NCDebug[ 0, 
-                              "SDP most likely contain linearly dependent columns or is unbounded.",
-			      "Try adding additional constraints." ];
+		     Message[PrimalDual::linearDependence];
      		     success = False;
                      Break[];
                 ];
@@ -718,8 +718,7 @@ Begin[ "`Private`" ]
 
 	               ,
 
-                        NCDebug[ 0, 
-                                 "WARNING: Could not factor Hessian!" ];
+		        Message[PrimalDual::HessianNotPositiveDefinite];
 			success = False;
 			Break[];
 
@@ -1315,7 +1314,7 @@ Begin[ "`Private`" ]
 
      	  (* line search failed *)
      	  If[ (k >= kmax),
-       	      Print["Warning:: Line search failed"];
+       	      Message[PrimalDual::lineSearch];
      	  ];
 
       ];
@@ -1378,8 +1377,7 @@ Begin[ "`Private`" ]
 
 	 ,
 
-            Print["WARNING: Unproductive iteration!"];
-            Print["Interrupting algorithm."];
+            Message[PrimalDual::unproductive];
 	    Break[];
 
          ];

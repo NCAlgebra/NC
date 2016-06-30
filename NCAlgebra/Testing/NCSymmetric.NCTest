@@ -1,7 +1,9 @@
 << NCSymmetric`
 
 Module[
-  {expr, a, b, c, d},
+  {expr, a, b, c, d,
+   answer,
+   isSym, symVars},
 
   SetNonCommutative[a, b, c, d];
 
@@ -92,5 +94,9 @@ Module[
     ,
     NCSymmetricQ::SymmetricVariables
   ];
+
+  expr = a ** x + x ** tp[a] + 1;
+  {answer, symVars} = NCSymmetricPart[expr];
+  NCTest[answer, a ** x + 1];
 
 ];

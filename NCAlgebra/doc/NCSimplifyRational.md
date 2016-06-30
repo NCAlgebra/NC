@@ -24,8 +24,8 @@ where `lead` is the leading monomial with the highest degree then the following 
 
 | Original | Transformed |
 | --- | --- |
-| inv[mon1 + ... + K lead] lead | (1 - inv[mon1 + ... + lead] (mon1 + ...))/K |
-| lead inv[mon1 + ... + K lead] | (1 - (mon1 + ...) inv[mon1 + ... + lead])/K |
+| inv[mon1 + ... + K lead] lead | (1 - inv[mon1 + ... + K lead] (mon1 + ...))/K |
+| lead inv[mon1 + ... + K lead] | (1 - (mon1 + ...) inv[mon1 + ... + K lead])/K |
 
 Finally the following pattern based rules are applied:
 

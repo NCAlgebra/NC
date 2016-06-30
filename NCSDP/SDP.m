@@ -36,18 +36,13 @@ SDPSylvesterEval::usage = "";
 Clear[SDPSylvesterDiagonalEval];
 SDPSylvesterDiagonalEval::usage = "";
 
-Clear[SDPFunctions];
-SDPFunctions::usage = "";
+Clear[SDPInner];
 
 Clear[SDPMatrices];
 SDPMatrices::usage = "";
 
-Clear[SDPLinearCoefficientArrays];
-SDPLinearCoefficientArrays::usage = "";
-SDPLinearCoeffificentArrays::notlinear = "Expression is not linear. Coefficients are of the linear part";
-
-Clear[SDPJoinCoefficientArrays];
-SDPJoinCoefficientArrays::usage = "";
+Clear[SDPFunctions];
+SDPFunctions::usage = "";
 
 Clear[SDPSolve];
 SDPSolve::usage = "";
@@ -56,43 +51,9 @@ Clear[SDPCheckDimensions];
 SDPCheckDimensions::usage = "";
 
 SDP::ErrorInDimensions = "Dimension error: `1`";
+SDP::notLinear = "Expression is not linear.";
 
 Begin[ "`Private`" ]
-
-  SDPComputeCoefficients[exp_, var_] := Module[
-    {tmp},
-
-    tmp = CoefficientArrays[exp, var];
-    If[ Length[tmp > 2],
-       Message[SDPLinearCoefficientArrays::notlinear];
-    ];
-    Return[{tmp[[1]], tmp[[2]]}];
-  ];
-
-  SDPLinearCoefficientArrays[exp_?MatrixQ, var_List] := Module[
-    {lin, coeffs, m = Dimensions[exp][[2]]},
-    {lin, coeffs} = SDPComputeCoefficients[Flatten[exp], var];
-    { List[Partition[lin, m]], 
-      Map[List, Map[Partition[#, m]&, Transpose[coeffs]]] }
-  ]
-
-  SDPLinearCoefficientArrays[exp_List, var_List] := \
-    SDPJoinCoefficientArrays @@ \
-      Map[SDPLinearCoefficientArrays[#, var]&, exp];
-
-  SDPLinearCoefficientArrays[exp_, var_List] := Module[
-    {coeffs, lin},
-    {lin, coeffs} = SDPComputeCoefficients[exp, var];
-    Return[{{SparseArray[{{lin}}]}, Map[{SparseArray[{{#}}]}&, coeffs]}];
-  ]
-
-  SDPJoinCoefficientArrays[sdp1_, sdp2_, sdp3__] := \
-    SDPJoinCoefficientArrays[SDPJoinCoefficientArrays[sdp1, sdp2], sdp3];
-
-  SDPJoinCoefficientArrays[sdp1_, sdp2_] := \
-    {Join[sdp1[[1]], sdp2[[1]]], Join[sdp1[[2]], sdp2[[2]], 2]};
-
-  SDPJoinCoefficientArrays[sdp1_] := sdp1;
 
   (* Evaluation and scaling *)
 
@@ -108,6 +69,7 @@ Begin[ "`Private`" ]
   SDPScale[A_List, Wl_List, Wr_List] :=  
     Map[(MapThread[(Dot[#1,#2,#3])&,{Wl,#,Wr}])&, A];
 
+  SDPInner[x_, y_] := Total[MapThread[Total[Flatten[#1*#2]]&, {x, y}]];
 
   (* Sylvester functions *)
 
@@ -152,6 +114,89 @@ Begin[ "`Private`" ]
   ];
 
 
+  (* Coefficients *)
+
+  Clear[SDPCoefficients];
+  SDPCoefficients[exp_, var_] := Module[
+    {tmp},
+
+    Quiet[
+      Check[  tmp = CoefficientArrays[exp, var];
+          ,
+            tmp = If[MatrixQ[exp], {{},{}}, {0,{}}];
+            Message[SDP::notLinear];
+          ,
+            CoefficientArrays::poly
+      ];
+    ,
+      CoefficientArrays::poly
+    ];
+    If[ Length[tmp] > 2,
+       Message[SDP::notLinear];
+    ];
+    Return[{tmp[[1]], tmp[[2]]}];
+  ];
+
+  Clear[SDPLinearCoefficientArrays];
+  SDPLinearCoefficientArrays[exp_?MatrixQ, var_List] := Module[
+    {lin, coeffs, m = Dimensions[exp][[2]]},
+    {lin, coeffs} = SDPCoefficients[Flatten[exp], var];
+    { List[Partition[lin, m]], 
+      Map[List, Map[Partition[#, m]&, Transpose[coeffs]]] }
+  ]
+
+  SDPLinearCoefficientArrays[exp_List, var_List] := \
+    SDPJoinCoefficientArrays @@ \
+      Map[SDPLinearCoefficientArrays[#, var]&, exp];
+
+  SDPLinearCoefficientArrays[exp_, var_List] := Module[
+    {coeffs, lin},
+    {lin, coeffs} = SDPCoefficients[exp, var];
+    Return[{{SparseArray[{{lin}}]}, Map[{SparseArray[{{#}}]}&, coeffs]}];
+  ]
+
+  Clear[SDPJoinCoefficientArrays];
+  SDPJoinCoefficientArrays[sdp1_, sdp2_, sdp3__] := \
+    SDPJoinCoefficientArrays[SDPJoinCoefficientArrays[sdp1, sdp2], sdp3];
+
+  SDPJoinCoefficientArrays[sdp1_, sdp2_] := \
+    {Join[sdp1[[1]], sdp2[[1]]], Join[sdp1[[2]], sdp2[[2]], 2]};
+
+  SDPJoinCoefficientArrays[sdp1_] := sdp1;
+
+  (* SDPMatrices *)
+  
+  SDPMatrices[a_, vars_] := Module[
+    {AA, CC}, 
+
+    (* Extract constraints *)
+    {CC, AA} = SDPLinearCoefficientArrays[a, vars];
+
+    (* Format data as: max <b, x> s.t. a(x) <= c *)
+    AA = - AA;
+
+    Return[{AA, {{0 vars}}, CC}];
+
+  ];
+
+  SDPMatrices[f_, a_, vars_] := Module[
+    {AA, BB, CC, dummy}, 
+
+    (* Problem format is: min f s.t. a >= 0 *)
+
+    (* Extract constraints *)
+    {AA,dummy,CC} = SDPMatrices[a, vars];
+
+    (* Extract objective *)
+    {dummy, BB} = SDPLinearCoefficientArrays[f, vars];
+
+    (* Format data as: max <b, x> s.t. a(x) <= c *)
+    BB = - {{Flatten[BB]}};
+
+    Return[{AA,BB,CC}];
+
+  ];
+
   (* SDPFunctions *)
 
   SDPFunctions[{AA_List,BB_List,CC_List},opts:OptionsPattern[{}]] := Module[ 
@@ -176,36 +221,7 @@ Begin[ "`Private`" ]
 
   ];
 
-  SDPMatrices[a_, vars_] := Module[
-    {AA, CC}, 
-
-    (* Problem format is: min f s.t. a >= 0 *)
-
-    (* Extract constraints *)
-    {CC, AA} = SDPLinearCoefficientArrays[a, vars];
-
-    (* Format data as: max <b, x> s.t. a(x) <= c *)
-    AA = - AA;
-
-    Return[{AA, {{0 vars}}, CC}];
-
-  ];
-
-  SDPMatrices[f_, a_, vars_] := Module[
-    {AA, BB, CC, dummy}, 
-
-    (* Extract constraints *)
-    {AA,dummy,CC} = SDPMatrices[a, vars];
-
-    (* Extract objective *)
-    {dummy, BB} = SDPLinearCoefficientArrays[f, vars];
-
-    (* Format data as: max <b, x> s.t. a(x) <= c *)
-    BB = - {{Flatten[BB]}};
-
-    Return[{AA,BB,CC}];
-
-  ];
+  (* SDPSolve *)
 
   SDPSolve[{AA_,BB_,CC_},opts:OptionsPattern[{}]] := Module[
     {FDualEval, FPrimalEval, 

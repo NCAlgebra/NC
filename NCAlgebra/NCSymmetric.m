@@ -22,7 +22,7 @@ BeginPackage[ "NCSymmetric`",
               "NCMatMult`",
               "NCUtil`" ];
 
-Clear[NCSymmetricQ, NCSymmetricTest];
+Clear[NCSymmetricQ, NCSymmetricTest, NCSymmetricPart];
       
 Get["NCSymmetric.usage"];
 
@@ -145,6 +145,32 @@ Begin[ "`Private`" ]
  
   NCSymmetricQ[exp_, opts:OptionsPattern[{}]] := 
     First[NCSymmetricTest[exp, opts]];
+
+  (* NCSymmetricPart *)
+  NCSymmetricPart[exp_, opts:OptionsPattern[{}]] := Module[
+      {options, 
+       symmetricVars, excludeVars,
+       isSymmetric, symVars},
+      
+      (* process options *)
+
+      options = Flatten[{opts}];
+
+      symmetricVars = SymmetricVariables 
+ 	    /. options
+	    /. Options[NCSymmetricTest, SymmetricVariables];
+
+      excludeVars = ExcludeVariables 
+ 	    /. options
+	    /. Options[NCSymmetricTest, ExcludeVariables];
+      
+      (* is Symmetric *)
+      {isSymmetric, symVars} = NCSymmetricTest[exp, opts];
+      
+      Return[{exp, symVars}];
+      
+  ];
+    
     
 End[]
 

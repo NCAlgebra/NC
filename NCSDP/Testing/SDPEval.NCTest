@@ -1,0 +1,178 @@
+RunTest[kk_:1] := Module[
+  {test, k,
+   m,n,
+   A1,A2,A3,AA,As1,As2,
+   X1,X2,Z1,Z2,Zs1,Zs2,
+   y
+  },
+
+  k = kk;
+  test = "SDPEval";
+
+  TestEval[] := Module[
+    {exp, answer, n, N},
+
+    n = Length[y];
+    N = Length[AA[[1]]];
+    (* Print["n = ", n, ", m = ", m, ", N = ", N]; *)
+
+    (* TEST EVALUATIONS *)
+    exp = SDPPrimalEval[AA, y];
+    answer = y[[1]] AA[[1]];
+    For[ii = 2, ii <= n, ii++, 
+        answer += y[[ii]] AA[[ii]]
+    ];
+    NCTest[Total[Map[Norm, exp-answer]], 0, test, k++];
+  
+    exp = SDPDualEval[AA, X1];
+    answer = {};
+    For[ii = 1, ii <= n, ii++, 
+        answer = Append[answer, Plus@@Map[Tr,MapThread[Dot, {AA[[ii]], X1}]]]
+    ];
+    NCTest[exp, answer, test, k++];
+    
+    (* TEST SCALING *)
+
+    exp = SDPScale[AA, X1];
+    answer = {};
+    For[ii = 1, ii <= n, ii++, 
+        answer = Append[answer, MapThread[Dot, {X1, AA[[ii]], X1}]]
+    ];
+    NCTest[exp, answer, test, k++];
+
+    exp = SDPScale[AA, X1, X2];
+    answer = {};
+    For[ii = 1, ii <= n, ii++, 
+        answer = Append[answer, MapThread[Dot, {X1, AA[[ii]], X2}]]
+    ];
+    NCTest[exp, answer, test, k++];
+
+    (* TEST SYLVESTER *)
+    exp = SDPSylvesterEval[AA, X1];
+    answer = {};
+    For[ii = 1, ii <= n, ii++, 
+      row = {};
+      For[jj = 1, jj <= n, jj++, 
+         row = Append[row, Plus@@Map[Tr, MapThread[Dot, {AA[[ii]], X1, AA[[jj]], X1}]]];
+      ];
+      answer = Append[answer, row];
+    ];
+    NCTest[exp, answer, test, k++];
+
+    answer = Tr[answer, List];
+    exp = SDPSylvesterDiagonalEval[AA, X1];
+    NCTest[exp, answer, test, k++];
+
+    exp = SDPSylvesterEval[AA, X1, X2];
+    answer = {};
+    For[ii = 1, ii <= n, ii++, 
+      row = {};
+      For[jj = 1, jj <= n, jj++, 
+         row = Append[row, Plus@@Map[Tr, MapThread[Dot, {AA[[ii]], X1, AA[[jj]], X2}]]];
+      ];
+      answer = Append[answer, row];
+    ];
+    NCTest[exp, answer, test, k++];
+
+    answer = Tr[answer, List];
+    exp = SDPSylvesterDiagonalEval[AA, X1, X2];
+    NCTest[exp, answer, test, k++];
+
+    (* TEST SDP FUNCTIONS *)
+    {FDualEval, FPrimalEval, 
+     SylvesterVecEval, SylvesterVecDiagonalEval, 
+     FSylvesterSolve, FSylvesterSolveFactored} \
+      = SDPFunctions[{AA, BB, CC}];
+
+    exp = FDualEval @@ X1;
+    answer = {{SDPDualEval[AA, X1]}};
+    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+
+    exp = FPrimalEval @@ {{y}};
+    answer = SDPPrimalEval[AA, y];
+    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+
+    exp = SylvesterVecEval @@ {X1, X1};
+    answer = SDPSylvesterEval[AA, X1];
+    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+
+    exp = SylvesterVecDiagonalEval @@ {X1, X1};
+    answer = SDPSylvesterDiagonalEval[AA, X1];
+    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+
+  ];
+
+  (* Sturm Example *)
+
+  (* Ai's *)
+  A1 = {SparseArray[{{3,1,5}, {1,0,2}, {5,2,8}}]};
+  A2 = {SparseArray[{{1,0,2}, {0,1,2}, {2,2,-1}}]};
+  A3 = {SparseArray[{{0,1,2}, {1,-1,0}, {2,0,1}}]};
+  AA = { A1, A2, A3 };
+
+  (* y *)
+  y = {-1/2, 1, 2};
+
+  (* X *)
+  X1 = {SparseArray[{{4,0,-2}, {0,1,1}, {-2,1,3}}]};
+  X2 = {SparseArray[{{1,0,2}, {0,3,1}, {2,1,4}}]};
+
+  BB = {{y}};
+  CC = AA[[1]];
+
+  TestEval[];
+
+  (* Truncated Sturm Example *)
+
+  (* Ai's *)
+  A1 = {SparseArray[{{3,1,5}, {1,0,2}, {5,2,8}}]};
+  AA = { A1 };
+
+  (* y *)
+  y = {-1/2};
+
+  BB = {{y}};
+  CC = AA[[1]];
+
+  TestEval[];
+
+  (* Block-diagonal example *)
+
+  (* Ai's *)
+  A1 = -{ SparseArray[{{1}}], SparseArray[{{0, 1},{1, 0}}], SparseArray[{{0, 0},{0, 0}}] };
+  A2 = -{ SparseArray[{{0}}], SparseArray[{{1, 0},{0, 0}}], SparseArray[{{0, 1},{1, 0}}] };
+  A3 = -{ SparseArray[{{0}}], SparseArray[{{0, 0},{0, 0}}], SparseArray[{{1, 0},{0, 0}}] };
+  AA = {A1, A2, A3};
+
+  (* y *)
+  y = {1,2,3};
+
+  (* X *)
+  X1 = { SparseArray[{{1}}], SparseArray[{{2,1},{1,2}}], SparseArray[{{3,2},{2,3}}] };
+  X2 = { SparseArray[{{-1}}], SparseArray[{{0,-1},{-1,3}}], SparseArray[{{2,3},{3,-1}}] };
+
+  BB = {{y}};
+  CC = AA[[1]];
+
+  TestEval[];
+
+  Return[k];
+
+];
+
+Module[
+ {k},
+
+  << SDP`;
+  k = RunTest[];
+
+  << SDP`;
+  << SDPFlat`;
+
+  (* Print["k = ", k]; *)
+
+  k = RunTest[k];
+
+];
+
+$Echo = DeleteCases[$Echo, "stdout"];

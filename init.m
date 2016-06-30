@@ -55,6 +55,7 @@ If[ $NC$INITDOTMPATH =!= {}
 
     (* Setting NCSDP Path *)
     AppendTo[$Path,ToFileName[{$NCDir$, "NCSDP" }]];
+    AppendTo[$Path,ToFileName[{$NCDir$, "NCSDP", "Testing" }]];
 
     (* Setting NCPoly Path *)
     AppendTo[$Path,ToFileName[{$NCDir$, "NCPoly" }]];

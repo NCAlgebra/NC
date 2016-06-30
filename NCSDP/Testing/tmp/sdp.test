@@ -1,0 +1,58 @@
+AppendTo[$Echo, "stdout"]
+SetOptions[$Output,PageWidth->180];
+
+<< SDP`
+<< SDPSeDuMi`
+<< cSDP`
+<< PrimalDual`
+
+RunTest[example_String] := Block[{},
+  
+  Print[""];
+  Print["Problem file: ", example];
+  Print[""];
+
+  (* Read problem *)
+  {AA,BB,CC} = SDPImport[example];
+
+  { FPrimalEval, FDualEval, 
+    SylvesterVecEval, SylvesterVecDiagonalEval } = SDPFunctions[{AA,BB,CC}];
+
+  logFile = OpenWrite[example <> ".log"];
+  SetOptions[NCDebug, DebugLevel -> 1];
+  SetOptions[NCDebug, DebugLogfile -> logFile];
+  SetOptions[NCDebug, DebugLogfile -> Append[$Output, logFile]];
+
+  {Yk, Xk, Sk, iters} = 
+    SDPSolve[ {AA,BB,CC}, DebugLevel -> 0 ];
+  
+  Close[logFile];
+
+  Print["* Results: "];
+  Print["  |A(Y) + S - C| = ", Map[MatrixVectorFrobeniusNorm, (FDualEval @@ Yk) + Sk - CC]];
+  Print["  |A*(X) - B| = ", Map[MatrixVectorFrobeniusNorm, (FPrimalEval @@ Xk) - BB]];
+  Print["  l(S) = ", Min[Map[Eigenvalues, Sk]]];
+  Print["  l(C - A(Y)) = ", Min[Map[Eigenvalues, CC - (FDualEval @@ Yk)]]];
+  Print["  l(X) = ", Min[Map[Eigenvalues, Xk]]];
+
+  Print[""];
+  Print["------------------------------------------------------------"];
+
+];
+RunTest[example_List] := Map[RunTest, example];
+
+examples = { 
+  "data/simple",
+  "data/control07",
+  "data/arch0",
+  "data/trto3",
+  "data/OH_2Pi_STO-6GN9r12g1T2"
+};
+
+examples = { 
+  "data/control07"
+};
+
+RunTest[examples];
+
+$Echo = DeleteCases[$Echo, "stdout"];

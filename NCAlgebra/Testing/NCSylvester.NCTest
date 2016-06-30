@@ -1,8 +1,10 @@
 << NCSylvester`
+<< NCSymmetric`
 
 Block[
    {exp, answer, vars, p,
-   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C},
+   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C,
+   isSym, symList},
 
    SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
    SetCommutative[A,B,C];
@@ -272,5 +274,18 @@ Block[
     p = NCSylvesterToNCPolynomial[exp];
     NCTest[p, answer];
     NCTest[NCPolynomialToNC[p], mat];
+
+    (* SDP Tests *)
+    vars = {x};
+    mat = a ** x + x ** tp[a] + 1;
+    {isSym, symList} = NCSymmetricTest[mat];
+    NCTest[isSym, True];
+    NCTest[symList, {x}];
+    
+    (*
+    p = NCToNCPolynomial[mat, vars];
+    exp = NCSylvester[p];
+    Print[NCPolynomialToNC[NCSylvesterToNCPolynomial[exp]]];
+    *)
 
 ];
