@@ -33,7 +33,7 @@ Clear[
   NT, KSH, KSHDual, AHO,
   ShortStep, LongStep, PredictorCorrector, Profiling,
   SparseWeights
-]
+];
 
 Options[PrimalDual] = {
   SearchDirection -> NT,

@@ -174,5 +174,3 @@ Module[
   k = RunTest[k];
 
 ];
-
-$Echo = DeleteCases[$Echo, "stdout"];

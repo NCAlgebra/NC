@@ -10,7 +10,8 @@ Print["> BEGIN NCSDPTEST\n" ];
 tests = {
   "SDPLinearCoefficientArrays",
   "SDPEval",
-  "SDPSolve"
+  "SDPSylvester1"
+(* "SDPSolve", *)
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];

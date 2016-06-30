@@ -41,11 +41,9 @@ Module[
   {Y, X, S, iters} = SDPSolve[{AA, BB, CC}];
   answer = 126.734;
   exp = -SDPInner[BB, Y];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-4), True, test, k++];
+  NCTest[Abs[(exp - answer)/answer] < 10^(-3), True, test, k++];
 
   exp = -SDPInner[CC, X];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-4), True, test, k++];
+  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True, test, k++];
 
 ];
-
-$Echo = DeleteCases[$Echo, "stdout"];
