@@ -491,7 +491,10 @@ Begin[ "`Private`" ]
 
     ];
 
-    Return [ ArrayFlatten[H] ];
+    (* Flatten *)
+    H = ArrayFlatten[H];
+      
+    Return [ H ];
 
   ];
 
