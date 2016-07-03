@@ -1,0 +1,281 @@
+<< Sylvester`
+
+Module[
+  {test, k, exp, answer,
+   A,B,Q,
+   AA,BB,CC,
+   AAv,BBv,CCv, y,
+   Y,syms,tmp,
+   x1,X1,XX1,
+   Y1,Y11,
+   P2,Q2,H2,
+   dims,
+   H11,
+   XX2,XX3,
+   n,m,Id,Ze,Idm,Zemm,Zenm,Idx,IdW,Zenpm,
+   X,L,W
+   },
+
+  k = 1;
+  test = "NCSylvester3";
+
+  NCTest[0, 0, test, k++];
+
+  A={{-1,1},{0,-2}};
+  B={{2,1},{1,2}};
+  Q=IdentityMatrix[2];
+
+  (* Test #1 *)
+
+  AA={
+  {
+  {ArrayFlatten[{{Transpose[A],B}}],ArrayFlatten[{{Transpose[B],A}}]}
+  }
+  };
+  CC={-Q};
+  BB={IdentityMatrix[2]};
+
+  Y={{1,3},{3,2}};
+  syms = {True};
+  dims=Map[Dimensions,{Y}];
+
+  {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
+
+  y = ToVector[Y];
+  answer = SDPPrimalEval[AAv, y];
+  X1=SylvesterPrimalEval[AA,{Y}];
+
+  exp = Abs[Total[X1-answer, Infinity]];
+  NCTest[exp, 0, test, k++];
+
+  {XX1}=X1;
+
+  answer = SDPDualEval[AAv, X1];
+  Y1=SylvesterDualEval[AA,{XX1},syms];
+
+  exp = Abs[Total[ToVector[Y1[[1]]]-answer, Infinity]];
+  NCTest[exp, 0, test, k++];
+
+  X11 = MapThread[Dot, {X1,X1}];
+
+  answer=SDPSylvesterEval[AAv,X11];
+  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  scl = Norm[H1];
+
+  exp = Abs[Total[H1-answer, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  P2 = {{1, 0, 0, 0}, {0, 1/2, 1/2, 0}, {0, 0, 0, 1}};
+  Q2 = Transpose[P2].Inverse[P2.Transpose[P2]];
+
+  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+
+  exp = Abs[Total[Transpose[Q2] . H1 . Q2 - H2, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  (* Test #2 *)
+
+  AA={
+  {
+  {IdentityMatrix[2],IdentityMatrix[2]}
+  }
+  ,
+  {
+  {Transpose[A],Transpose[B]}
+  }
+  };	
+  CC={-Q,-Q};
+  BB={IdentityMatrix[2]};
+
+  Y={{1,3},{3,2}};
+  syms = {True};
+  dims=Map[Dimensions,{Y}];
+
+  {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
+
+  y = ToVector[Y];
+  answer = SDPPrimalEval[AAv, y];
+  X1=SylvesterPrimalEval[AA,{Y}];
+
+  exp = Abs[Total[X1-answer, Infinity]];
+  NCTest[exp, 0, test, k++];
+
+  {XX1, XX2}=X1;
+
+  answer = SDPDualEval[AAv, X1];
+  Y1=SylvesterDualEval[AA,{XX1,XX2},syms];
+
+  exp = Abs[Total[ToVector[Y1[[1]]]-answer, Infinity]];
+  NCTest[exp, 0, test, k++];
+
+  X11 = MapThread[Dot, {X1,X1}];
+
+  answer=SDPSylvesterEval[AAv,X11];
+  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  scl = Norm[H1];
+
+  exp = Abs[Total[H1-answer, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+
+  exp = Abs[Total[Transpose[Q2] . H1 . Q2 - H2, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  (* Test #3 *)
+
+  F={{3},{7}};
+  K={{-1,2}};
+  syms={True,False};
+
+  AA={
+  {
+  {IdentityMatrix[2],IdentityMatrix[2]}
+  ,
+  {ConstantArray[0,{2,1}],ConstantArray[0,{2,2}]}
+  }
+  ,
+  {
+  {Transpose[A],Transpose[B]}
+  ,
+  {F,IdentityMatrix[2]}
+  }
+  ,
+  {
+  {ConstantArray[0,{3,2}],ConstantArray[0,{2,3}]}
+  ,
+  {{{0},{0},{1}},{{1,0,0},{0,1,0}}}
+  }
+  };
+  CC={-Q,-Q};
+  BB={IdentityMatrix[2],0*K};
+
+  syms = {True,False};
+  dims=Map[Dimensions,{Y,K}];
+
+  {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
+
+  y = Join[ToVector[Y],ToVector[K]];
+
+  answer = SDPPrimalEval[AAv, y];
+  X1=SylvesterPrimalEval[AA,{Y,K}];
+
+  exp = Abs[Total[X1-answer, Infinity]];
+  NCTest[exp, 0, True, test, k++];
+
+  {XX1, XX2, XX3}=X1;
+
+  answer = SDPDualEval[AAv, X1];
+  Y1=SylvesterDualEval[AA,{XX1,XX2,XX3},syms];
+
+  exp = Abs[Total[Join[ToVector[Y1[[1]]], ToVector[Y1[[2]]]]-answer, Infinity]];
+  NCTest[exp, 0, test, k++];
+
+  X11 = MapThread[Dot, {X1,X1}];
+
+  answer=SDPSylvesterEval[AAv,X11];
+  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  scl = Norm[H1];
+
+  exp = Abs[Total[H1-answer, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+
+  exp = Abs[Total[Transpose[Q2] . H1[[1;;4,1;;4]] . Q2 - H2[[1;;3,1;;3]], Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  exp = Abs[Total[Transpose[Q2] . H1[[1;;4,5;;6]] - H2[[1;;3,4;;5]], Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  exp = Abs[Total[H1[[5;;6,1;;4]] . Q2 - H2[[4;;5,1;;3]], Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  exp = Abs[Total[H1[[5;;6,5;;6]] - H2[[4;;5,4;;5]], Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  (* Riccati *)
+
+  n=2;
+  m=2;
+
+  Id = IdentityMatrix[n];
+  A = RandomReal[{-10,10},{n,n}];
+  B = RandomReal[{-10,10},{n,m}];
+  Ze = ConstantArray[0,{n,n}];
+
+  Idm = IdentityMatrix[m];
+  Zemm = ConstantArray[0,{m,m}];
+  Zenm = ConstantArray[0,{n,m}];
+  IdX = ArrayFlatten[{{Transpose[Zenm]},{Id}}];
+  IdW = ArrayFlatten[{{Idm},{Zenm}}];
+  Zenpm = ConstantArray[0,{n+m,n+m}];
+
+  syms={True,False,True};
+
+  AA={
+  {{2 A,Id},{2B,Id},{Zenm,Transpose[Zenm]}},(* A X + B L < 0*)
+  {{-2 IdX,Transpose[IdX]},{-2 IdW,Transpose[IdX]},{-2 IdW,Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
+  };
+  CC={-Id,Zenpm};
+  BB={Ze,Transpose[Zenm],-Idm};
+
+  (* Vectorize non symmetric *)
+  {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
+
+  X=RandomReal[{-10,10},{n,n}];
+  X = X + Transpose[X];
+  L=RandomReal[{-10,10},{m,n}];
+  W=RandomReal[{-10,10},{m,m}];
+  W = W + Transpose[W];
+
+  dims=Map[Dimensions,{X,L,W}];
+
+  (* 2 {A.X + B.L, -ArrayFlatten[{{W, L},{0*Transpose[L], X}}]}; *)
+  y = Join[ToVector[X], ToVector[L], ToVector[W]];
+  answer = SDPPrimalEval[AAv, y];
+  X1=SylvesterPrimalEval[AA,{X,L,W}];
+  scl = Max[Map[Norm, X1]];
+
+  exp = Abs[Total[X1-answer, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  {XX1, XX2}=X1;
+
+  (* 2 {Transpose[A].XX1-XX2[[3;;5,3;;5]], Transpose[B].XX1-XX2[[1;;2,3;;5]], -XX2[[1;;2,1;;2]]}; *)
+  answer = SDPDualEval[AAv, X1];
+  Y1=SylvesterDualEval[AA,{XX1,XX2},syms];
+  scl = Max[Map[Norm, Y1]];
+
+  exp = Abs[Total[Join[ToVector[Y1[[1]]], ToVector[Y1[[2]]], ToVector[Y1[[3]]]]-answer, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  X11 = MapThread[Dot, {X1,X1}];
+
+  answer=SDPSylvesterEval[AAv,X11];
+
+  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  scl = Norm[H1];
+
+  exp = Abs[Total[H1-answer, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+
+  exp = Transpose[Q2] . H1[[1;;4,1;;4]] . Q2 - H2[[1;;3,1;;3]];
+  exp = Abs[Total[exp, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  exp = Transpose[Q2] . H1[[1;;4,5;;6]] - H2[[1;;3,4;;5]];
+  exp = Abs[Total[exp, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  exp = H1[[5;;6,1;;4]] . Q2 - H2[[4;;5,1;;3]];
+  exp = Abs[Total[exp, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+  exp = H1[[5;;6,5;;6]] - H2[[4;;5,4;;5]];
+  exp = Abs[Total[exp, Infinity]];
+  NCTest[exp < scl*10^(-9), True, test, k++];
+
+];

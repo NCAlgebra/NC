@@ -1,8 +1,28 @@
 << Sylvester`
 
 Module[
-  {test, k, exp, tmp,
-   A,B,Q,Y},
+  {test, k,
+   A,B,Q,Y,
+   l1,r1,
+   X1,X11,
+   exp,
+   Y1,Y11,
+   l1s,r1s,
+   l11s,r11s,
+   m,n,tmp,
+   K1,K11,
+   A1,A2,A11,A22,
+   l2,r2,
+   X2,X22,
+   Y2,Y22,
+   K2,K22,
+   F,K,
+   l3,r3,
+   X3,X33,
+   Y3,Y33,
+   K3,K33,
+   m1,n1,m2,n2
+   },
 
   k = 1;
   test = "NCSylvester1";
@@ -12,8 +32,6 @@ Module[
   Q=IdentityMatrix[2];
 
   Y={{1,3},{3,2}};
-
-  NCTest[0, 0, test, k++];
 
   (* Test #1: Fully symmetric *)
 

@@ -88,6 +88,8 @@ Begin[ "`Private`" ]
     (* Compute dimensions *)
     dims = Map[Dimensions, BB];
 
+    (* TODO: CHECK DIMMENSIONS *)
+      
     (* Vectorize Sylvester Mapping *)
     AAvec = SylvesterPrimalVectorize[AA, dims, syms, True];
     AAvec = Transpose[ Map[ ToMatrix[#]&, Map[Transpose, AAvec], {2}]];
