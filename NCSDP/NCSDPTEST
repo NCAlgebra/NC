@@ -12,7 +12,7 @@ tests = {
   "SDPEval",
   "SDPSylvester1",
   "SDPSylvester2",
-  "SDPSylvester3" (*,
+  "SDPSylvesterSolve" (*,
   "SDPSolve" *)
 };
 results = NCTestRun[tests];

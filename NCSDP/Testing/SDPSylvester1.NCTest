@@ -25,7 +25,7 @@ Module[
    },
 
   k = 1;
-  test = "NCSylvester1";
+  test = "SDPSylvester1";
 
   A={{-1,1},{0,-2}};
   B={{2,1},{1,2}};
