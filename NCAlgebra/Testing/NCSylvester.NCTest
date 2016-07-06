@@ -69,6 +69,28 @@ Block[
               NCSylvesterToNCPolynomial[answer]]],
           exp];
 
+   (* one of the variables does not appear *)
+   vars = {x,y};
+   exp = 2 a**x**c + a**x**d + b**x**c - b**x**d;
+   p = NCToNCPolynomial[exp, vars];
+   answer = {0, 
+             <|x->{{a,b},{c,d},SparseArray[{{2,1},{1,-1}}]},
+               y->{{},{},SparseArray[{}, {0, 0}]}|>};
+   NCTest[NCSylvester[p], answer];
+   answer = NCPolynomial[0, 
+                         <|{x}->{{1,a+b/2,2c+d},{-3/2,b,d}}|>,
+			 {x,y}];
+   NCTest[NCSylvesterToNCPolynomial[NCSylvester[p]], answer];
+   answer = NCPolynomial[0, 
+                         <|{x}->{{1,a+b/2,2c+d},{-3/2,b,d}},
+                           {y}->{{1,0,0}}|>,
+			 {x,y}];
+   NCTest[NCSylvesterToNCPolynomial[NCSylvester[p], KeepZeros -> True], answer];
+   NCTest[ExpandNonCommutativeMultiply[
+            NCPolynomialToNC[ 
+              NCSylvesterToNCPolynomial[NCSylvester[p]]]],
+          exp];
+
    exp = 2 + a**x**b + c**x**d + y;
    p = NCToNCPolynomial[exp, vars];
    answer = {2, 

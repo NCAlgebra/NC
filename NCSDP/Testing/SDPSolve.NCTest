@@ -26,24 +26,31 @@ Module[
   exp = -SDPInner[CC, X];
   NCTest[Abs[(exp - answer)/answer] < 10^(-5), True, test, k++];
 
-  {AA,BB,CC} = SDPImport["data/arch0"];
+  RunTest[problem_, answer_] := Module[
+    {AA, BB, CC},
 
-  {Y, X, S, iters} = SDPSolve[{AA, BB, CC}];
-  answer = 0.56652;
-  exp = -SDPInner[BB, Y];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True, test, k++];
+    {AA,BB,CC} = SDPImport[problem];
 
-  exp = -SDPInner[CC, X];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True, test, k++];
+    {Y, X, S, iters} = SDPSolve[{AA, BB, CC}];
+    exp = -SDPInner[BB, Y];
+    (* Print["exp = ", exp]; *)
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True, test, k++];
 
-  {AA,BB,CC} = SDPImport["data/control07"];
+    exp = -SDPInner[CC, X];
+    (* Print["exp = ", exp]; *)
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True, test, k++];
 
-  {Y, X, S, iters} = SDPSolve[{AA, BB, CC}];
-  answer = 126.734;
-  exp = -SDPInner[BB, Y];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-3), True, test, k++];
+  ];
 
-  exp = -SDPInner[CC, X];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True, test, k++];
+  problems = { 
+    {"data/arch0", 0.56652},
+    {"data/control07", 126.734}
+    (*,
+    {"data/trto3", 1},
+    {"data/OH_2Pi_STO-6GN9r12g1T2", 1}
+    *)
+  };
+
+  Map[RunTest @@ ##&, problems];
 
 ];

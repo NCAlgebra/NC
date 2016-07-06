@@ -1,96 +1,280 @@
 << NCAlgebra`
+<< NCSDP`
 
-<< SDP`
+Module[
+  {
+    a,x,F,vars,obj,
+    n,data,
+    abc,rules,
+    exp,answer,
+    Id,
+    q,
+    b,b1,c1,c2,d12,y,w,
+    Ze,Zemn,Zexz,
+    Idm,Zemm,Zenm,
+    IdX,IdW,Zenpm
+    (* These must be global for COMPleib
+    A,B1,B,C1,CC,D11,D12,D21,
+    nx,nu,nw,nz,ny
+    *)
+  },
 
-<< NC`NCExtras`
-<< NC`NCExpressionToFunction`
-<< NC`NCSylvester`
+  (* Test #1: Lyapunov inequality *)
 
-(* Block Diagonal Example *)
+  SNC[a, x];
+  F = {a ** x + x ** tp[a] + 1, -x};
+  vars = {x};
+  obj = {-1};
 
-m = 2
-n = 3
+  n = 2;
+  A = {{0, 1}, {-1, -2}};
 
-(* Ai's *)
-A1 = -{ {{1}}, {{0, 1},{1, 0}}, {{0, 0},{0, 0}} }
-A2 = -{ {{0}}, {{1, 0},{0, 0}}, {{0, 1},{1, 0}} }
-A3 = -{ {{0}}, {{0, 0},{0, 0}}, {{1, 0},{0, 0}} }
-A= {A1, A2, A3}
+  data = {a -> A};
 
-(* y *)
-y = {1,2,3};
-Y = {{y[[1]],y[[2]]},{y[[2]],y[[3]]}};
+  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
 
-(* X *)
-X1 = { {{1}}, {{2,1},{1,2}}, {{3,2},{2,3}} };
-X2 = { {{-1}}, {{0,-1},{-1,3}}, {{2,3},{3,-1}} };
+  Id = IdentityMatrix[n];
+  Ze = ConstantArray[0, {n,n}];
+  answer = {
+    {
+      {A, 2 Id}
+    },
+    {
+      {Id, -Id}
+    }
+  };
+  NCTest[abc[[1]], answer];
 
-(* Define matrix problem *)
+  answer = {-Id};
+  NCTest[abc[[2]], answer];
 
-SNC[a,b,c,d,x];
+  answer = {-Id, Ze};
+  NCTest[abc[[3]], answer];
 
-f = -{ a**x**tp[a], \
-       b**x**tp[c]+c**x**tp[b]-b**x**tp[d]-d**x**tp[b], \
-       2 d**x**tp[c]+2 c**x**tp[d]-4 d**x**tp[d] }
-vars = {x}
+  answer = SymmetricVariables->{1};
+  NCTest[rules, answer];
 
-data = {a -> {{1, 0}}, b -> {{1, 0}, {0, 0}}, c -> {{0, 1}, {1, 0}}, \
-        d -> {{0, 1/2}, {0, 0}}} 
+  (* TODO
+  NCSDPDual[F, vars, obj];
+  *)
 
-{FPrimalEval, FDualEval, FSylvesterEval, \
-   FSylvesterDiagEval, FSylvesterSolve} = \
-  SylvesterSDPFunctions[f, vars, data];
 
-(* TEST EVALUATIONS *)
-Z = FDualEval @@ {Y}
-ZZ = FPrimalEval @@ X1
+  (* Test #2: Lyapunov inequality *)
 
-(* THESE SHOULD BE ALL ZEROS *)
-Map[Norm, Z - SDPDualEval[A,y]]
-Norm[ZZ - SDPPrimalEval[A,X1]]
+  SNC[a, q, x];
+  F = {a ** x + x ** tp[a] + q, -x};
+  vars = {x};
+  obj = {-1};
 
-(* TEST SYLVESTER *)
-M1 = FSylvesterEval @@ {X1,X1}
-M2 = FSylvesterEval @@ {X1,X2}
+  Q = {{2, 1}, {1, 2}};
+  data = {a -> A, q -> Q};
 
-(* THESE SHOULD BE ALL ZEROES *)
-Norm[Tr[M1 - SDPSylvesterEval[A, X1], List]]
-Norm[Tr[M2 - SDPSylvesterEval[A, X1, X2], List]]
+  {abc, rules} = NCSDP[F, vars, obj, data, UserRules -> {tp[q] -> q}, DebugLevel -> 0];
 
-(* LYAPUNOV EXAMPLE *)
+  answer = {
+    {
+      {A, 2 Id}
+    },
+    {
+      {Id, -Id}
+    }
+  };
+  NCTest[abc[[1]], answer];
 
-n = 3;
-SeedRandom[1];
+  answer = {-Id};
+  NCTest[abc[[2]], answer];
 
-range = 10;
-AA = RandomInteger[{-range,range}, {n,n}];
+  answer = {-Q, Ze};
+  NCTest[abc[[3]], answer];
 
-{DD,VV} = Eigensystem[N[AA]];
+  answer = SymmetricVariables->{1};
+  NCTest[rules, answer];
 
-Norm[AA - Transpose[VV] . DiagonalMatrix[DD] . Inverse[Transpose[VV]]]
-PosQ[x_] := (Abs[x] > 1);
-DDn = DD /. x_?PosQ -> 1/x;
 
-AA = Re[Transpose[VV] . DiagonalMatrix[DDn] . Inverse[Transpose[VV]]]
+  (* Test #3: Modified Lyapunov inequality *)
 
-Eigenvalues[AA]
+  SNC[a, b, q, x];
+  F = {a ** x + x ** tp[a] + b ** x ** tp[b] + q, -x};
+  vars = {x};
+  obj = {-1};
 
-data = {a -> AA} 
+  Q = {{2, 1}, {1, 2}};
+  B = A . A;
+  data = {a -> A, b -> B, q -> Q};
 
-f = { x - tp[a] ** x ** a, x }
-vars = {x}
+  {abc, rules} = NCSDP[F, vars, obj, data, UserRules -> {tp[q] -> q}, DebugLevel -> 0];
 
-BB = -{ IdentityMatrix[n] }
-CC = { -IdentityMatrix[n], -IdentityMatrix[n] }
+  answer = {
+    {
+      {ArrayFlatten[{{A, B}}], ArrayFlatten[{{2 Id, Transpose[B]}}]}
+    },
+    {
+      {Id, -Id}
+    }
+  };
+  NCTest[abc[[1]], answer];
 
-{FPrimalEval, FDualEval, FSylvesterEval, \
-   FSylvesterDiagEval, FSylvesterSolve} = \
-  SylvesterSDPFunctions[f, vars, data];
+  answer = {-Id};
+  NCTest[abc[[2]], answer];
 
-(* TEST EVALUATIONS *)
+  answer = {-Q, Ze};
+  NCTest[abc[[3]], answer];
 
-Y = Transpose[AA] . AA
+  answer = SymmetricVariables->{1};
+  NCTest[rules, answer];
 
-Z = FDualEval @@ {Y}
-ZZ = FPrimalEval @@ Z
-M1 = ArrayFlatten[FSylvesterEval @@ {Z,Z}]
+
+  (* Test #4: Stabilizability *)
+
+  SNC[a, b, b1, c1, d12, x, y, w];
+  F = {a ** x + b ** y + x ** tp[a] + tp[b ** y], -x + 1};
+  vars = {x, y};
+  obj = {-1, 0};
+
+  << "COMPleib/MmaCOMPleib/AC3.m";
+  data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
+  Id = IdentityMatrix[nx];
+  Ze = ConstantArray[0, {nx,nx}];
+  Zemn = ConstantArray[0, {nu,nx}];
+
+  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+
+  answer = {
+    {
+      {A, 2 Id}, {B, 2 Id}
+    },
+    {
+      {Id, -Id}, {Transpose[Zemn], Ze}
+    }
+  };
+  NCTest[abc[[1]], answer];
+
+  answer = {-Id, Zemn};
+  NCTest[abc[[2]], answer];
+
+  answer = {Ze, -Id};
+  NCTest[abc[[3]], answer];
+
+  answer = SymmetricVariables->{1};
+  NCTest[rules, answer];
+
+
+  (* Test #5: H2 control *)
+
+  SNC[a, b, b1, c1, d12, x, y, w];
+  F = {a ** x + b ** y + x ** tp[a] + tp[b ** y] + 
+       b1 ** tp[b1], -{{w, c1 ** x + d12 ** y}, {tp[c1 ** x + d12 ** y], 
+        x}}} /. tp[x] -> x /. c1 -> 0 /. d12 -> 1;
+  vars = {x, y, w};
+  obj = {0, 0, -1};
+
+  << "COMPleib/MmaCOMPleib/AC3.m";
+  data = {a -> A, b -> B, b1 -> B1};
+  Idm=IdentityMatrix[nu];
+  Zemm=ConstantArray[0,{nu,nu}];
+  Zenm=ConstantArray[0,{nx,nu}];
+  IdX=ArrayFlatten[{{Transpose[Zenm]},{Id}}];
+  IdW=ArrayFlatten[{{Idm},{Zenm}}];
+  Zenpm=ConstantArray[0,{nx+nu,nx+nu}];
+
+  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+
+  answer = {
+    {{A,2 Id},{B,2 Id},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
+    {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
+  };
+  NCTest[abc[[1]], answer];
+
+  answer = {Ze, Zemn,-Idm};
+  NCTest[abc[[2]], answer];
+
+  answer = {-B1.Transpose[B1], Zenpm};
+  NCTest[abc[[3]], answer];
+
+  answer = SymmetricVariables->{1,3};
+  NCTest[rules, answer];
+
+
+  (* Test #6: Hoo control *)
+
+  SNC[a, b, b1, c1, d12, x, y];
+  F = {{{a ** x + b ** y + x ** tp[a] + tp[b ** y] + b1 ** tp[b1], 
+       x ** tp[c1] + tp[y] ** tp[d12]}, {c1 ** x + d12 ** y, -1}}, -x};
+  vars = {x, y};
+  obj = {};
+
+  << "COMPleib/MmaCOMPleib/AC3.m";
+  data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
+
+  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+
+  answer = {
+    {{A,2 Id},{B,2 Id},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
+    {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
+  };
+  NCTest[abc[[1]], answer];
+
+  answer = {Ze, Zemn,-Idm};
+  NCTest[abc[[2]], answer];
+
+  answer = {-B1.Transpose[B1], Zenpm};
+  NCTest[abc[[3]], answer];
+
+  answer = SymmetricVariables->{1};
+  NCTest[rules, answer];
+
+
+  (* Test #7: Mixed H2/Hoo control *)
+
+  SNC[a, b, b1, c1, d12, x, y, w];
+  F = {{{a ** x + b ** y + x ** tp[a] + tp[b ** y] + b1 ** tp[b1], 
+         x ** tp[c1] + tp[y] ** tp[d12]}, {c1 ** x + d12 ** y, -1}}, 
+	 -{{w, y}, {tp[y], x}}};
+  vars = {x, y, w};
+  obj = {0, 0, -1};
+
+  << "COMPleib/MmaCOMPleib/AC3.m";
+  data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
+
+  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+
+];
+
+If[0,
+
+  (* Test #5: H2 control *)
+
+  SNC[a, b, b1, c1, d12, x, y, w];
+  F = {a ** x + b ** y + x ** tp[a] + tp[b ** y] + 
+       b1 ** tp[b1], -{{w, c1 ** x + d12 ** y}, {tp[c1 ** x + d12 ** y], 
+        x}}} /. tp[x] -> x;
+  vars = {x, y, w};
+  obj = {0, 0, -1};
+
+  << "COMPleib/MmaCOMPleib/AC3.m";
+  data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
+  Idm=IdentityMatrix[nu];
+  Zemm=ConstantArray[0,{nu,nu}];
+  Zenm=ConstantArray[0,{nx,nu}];
+  IdX=ArrayFlatten[{{Transpose[Zenm]},{Id}}];
+  IdW=ArrayFlatten[{{Idm},{Zenm}}];
+  Zenpm=ConstantArray[0,{nx+nu,nx+nu}];
+
+  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+
+  answer = {
+    {{A,2 Id},{B,2 Id},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
+    {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
+  };
+  NCTest[abc[[1]], answer];
+
+  answer = {Ze, Zemn,-Idm};
+  NCTest[abc[[2]], answer];
+
+  answer = {-B1.Transpose[B1], Zenpm};
+  NCTest[abc[[3]], answer];
+
+  answer = SymmetricVariables->{1,3};
+  NCTest[rules, answer];
+
+];

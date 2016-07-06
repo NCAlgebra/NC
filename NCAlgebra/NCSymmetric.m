@@ -28,10 +28,12 @@ Get["NCSymmetric.usage"];
 
 NCSymmetricQ::SymmetricVariables =
 "The variable(s) `1` was(were) assumed symmetric";
+NCSymmetricPart::notSymmetric = "Expression is not symmetric";
 
 Options[NCSymmetricTest] = {
   SymmetricVariables -> {},
-  ExcludeVariables -> {}
+  ExcludeVariables -> {},
+  Strict -> True
 };
 
 Begin[ "`Private`" ]
@@ -41,7 +43,7 @@ Begin[ "`Private`" ]
   Clear[NCSymmetricTestAux];
   NCSymmetricTestAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
       {vars, tpVars, tpDiffVars, symVars, symRule, 
-       options, symmetricVars, excludeVars},
+       options, symmetricVars, excludeVars, strict},
       
       (* process options *)
 
@@ -54,6 +56,10 @@ Begin[ "`Private`" ]
       excludeVars = ExcludeVariables 
  	    /. options
 	    /. Options[NCSymmetricTest, ExcludeVariables];
+
+      strict = Strict 
+ 	    /. options
+	    /. Options[NCSymmetricTest, Strict];
 
       (*
       Print["----"];
@@ -98,8 +104,14 @@ Begin[ "`Private`" ]
 
       tpVars = Map[tp,NCGrabSymbols[exp, tp]];
       tpDiffVars = Map[tp,NCGrabSymbols[diff, tp]];
-      symVars = Join[Complement[tpDiffVars, tpVars, excludeVars],
-                     symmetricVars];
+      symVars = Union[
+        If[ strict
+            , 
+            Complement[tpDiffVars, tpVars, excludeVars]
+            ,
+            Complement[tpDiffVars, excludeVars]
+        ],
+        symmetricVars];
 
       (*
       Print["exp = ", exp];
@@ -147,10 +159,43 @@ Begin[ "`Private`" ]
     First[NCSymmetricTest[exp, opts]];
 
   (* NCSymmetricPart *)
+  Clear[CanonizeEntry];
+  CanonizeEntry[exp_, symRule_] := Module[
+    {tmp},
+      
+    tmp = tp[exp] /. symRule;
+    Return[If[OrderedQ[{exp, tmp}], exp, tmp]];
+  ];
+
+  Clear[NCSymmetricPartAux];
+  NCSymmetricPartAux[exp_?MatrixQ, symRule_] := Module[
+     {diag, low},
+      
+     (* Diagonal *)
+     diag = Map[NCSymmetricPartAux[#, symRule]&, Tr[exp, List]];
+
+     (* Lower triangular part *)
+     low = exp SparseArray[{i_,j_} /; j < i -> 1, Dimensions[exp]];
+     
+     Return[DiagonalMatrix[diag] + 2 low];
+  ];
+
+  NCSymmetricPartAux[exp_Plus, symRule_] := Module[
+    {list},
+    
+    (* make into list *)
+    list = Map[CanonizeEntry[#,symRule]&, List @@ exp];
+    (* Print["list = ", list]; *)
+      
+    Return[Plus @@ list];
+  ];
+  NCSymmetricPartAux[exp_, symRule_] := exp;
+  
   NCSymmetricPart[exp_, opts:OptionsPattern[{}]] := Module[
       {options, 
        symmetricVars, excludeVars,
-       isSymmetric, symVars},
+       isSymmetric, symVars,
+       tmp},
       
       (* process options *)
 
@@ -166,11 +211,17 @@ Begin[ "`Private`" ]
       
       (* is Symmetric *)
       {isSymmetric, symVars} = NCSymmetricTest[exp, opts];
+      If[ !isSymmetric, 
+          Message[NCSymmetricPart::notSymmetric];
+          Return[{$Failed, {}}];
+      ];
       
-      Return[{exp, symVars}];
+      (* Auxiliary rules *)
+      symRule = Map[tp[#] -> # &, symVars];
+      
+      Return[{NCSymmetricPartAux[exp, symRule], symVars}];
       
   ];
-    
     
 End[]
 

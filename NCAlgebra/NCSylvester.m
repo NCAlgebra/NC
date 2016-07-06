@@ -25,7 +25,8 @@ Clear[NCSylvester,
 Get["NCSylvester.usage"];
 
 Options[NCSylvesterToNCPolynomial] = {
-  Collect -> True
+  Collect -> True,
+  KeepZeros -> False
 };
 
 Begin[ "`Private`" ]
@@ -256,7 +257,7 @@ Begin[ "`Private`" ]
 
   NCSylvesterToNCPolynomial[{m0_, sylv_}, 
                       opts:OptionsPattern[{}]] := Module[
-    {options, collect, rules, vars},
+    {options, collect, keepZeros, rules, vars, dims, Ze},
 
     (* process options *)
 
@@ -266,6 +267,10 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[NCSylvesterToNCPolynomial, Collect];
       
+    keepZeros = KeepZeros
+	    /. options
+	    /. Options[NCSylvesterToNCPolynomial, KeepZeros];
+                          
     vars = Keys[sylv];
 
     (* Collect polynomial *)
@@ -279,8 +284,33 @@ Begin[ "`Private`" ]
     Print["rules = ", rules];
     *)
 
+    Ze = If[ MatrixQ[m0]
+           , 
+            dims = Dimensions[m0];
+            {ConstantArray[0, {dims[[1]],1}],
+             ConstantArray[0, {1,dims[[2]]}]}
+           , 
+             {0, 0}
+    ];
+    (*
+    Print["m0 = ", m0];
+    Print["dims = ", dims];
+    Print["Ze = ", Ze];
+    *)
+                          
     rules = <|Map[{#[[3]]}->Transpose[#[[{1,2}]]]&, rules]|>;
 
+    (* Print["rules = ", rules]; *)
+
+    If[ keepZeros, 
+        (* Replace empty rules with zeros *)
+        (* rules = rules /. {} -> {{0, 0}}; *)
+        rules = rules /. {} -> {Ze};
+       ,
+        (* Delete empty rules *)
+        rules = DeleteCases[rules, {}];
+    ];
+                          
     (* Print["rules = ", rules]; *)
 
     (* Add scalar *)

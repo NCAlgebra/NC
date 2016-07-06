@@ -1,0 +1,51 @@
+<< SDP`
+<< SDPFlat`
+<< SDPSeDuMi`
+
+Module[
+  {test, k,
+   lmi, vars, sdp,
+   sol,
+   sedumi,
+   sdp2,exp,
+   sedumi2,
+   sol2
+  },
+
+  k = 1;
+  test = "SDPSedumi";
+
+  NCTest[0, 0, test, k++];
+    
+  lmi = {x - 2, {{y, x}, {x, 1}}, {{z, y}, {y, 1}}};
+  vars = {x, y, z};
+
+  sdp = SDPMatrices[z, lmi, vars];
+    
+  sol = SDPSolve[sdp];
+
+  sedumi = SDPToSedumi[sdp];
+
+  sdp2 = SDPFromSedumi[sedumi];
+    
+  exp = Abs[Total[Normal[sdp] - Normal[sdp2], Infinity]];
+  NCTest[exp < 10^(-9), True, test, k++];
+
+  SDPExport[sdp, "Testing/sedumi"];
+
+  sdp2 = SDPImport["Testing/sedumi"];
+    
+  exp = Abs[Total[Normal[sdp] - Normal[sdp2], Infinity]];
+  NCTest[exp < 10^(-9), True, test, k++];
+    
+  sedumi2 = SDPToSedumi[sdp];
+
+  exp = Abs[Total[Normal[sedumi] - Normal[sedumi2], Infinity]];
+  NCTest[exp < 10^(-9), True, test, k++];
+
+  sol2 = SDPSolve[SDPImport["Testing/sedumi"]];
+
+  exp = Abs[Total[Normal[sol] - Normal[sol2], Infinity]];
+  NCTest[exp < 10^(-9), True, test, k++];
+
+];

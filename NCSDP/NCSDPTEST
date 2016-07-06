@@ -11,9 +11,12 @@ tests = {
   "SDPLinearCoefficientArrays",
   "SDPEval",
   "SDPSylvester1",
-  "SDPSylvester2",
-  "SDPSylvesterSolve" (*,
-  "SDPSolve" *)
+  "SDPSylvester2", 
+  "SDPSedumi",
+  "NCSDP"
+  (*,  
+  "SDPSolve",
+  "SDPSylvesterSolve" *)
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];

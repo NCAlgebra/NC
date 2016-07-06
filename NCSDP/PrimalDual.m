@@ -13,6 +13,7 @@
 (* :History: *)
 
 BeginPackage[ "PrimalDual`",
+              "NCOptions`",
  	      "NesterovTodd`",
               "Kronecker`",
               "MatrixVector`",

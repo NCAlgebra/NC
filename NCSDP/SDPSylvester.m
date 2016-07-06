@@ -13,6 +13,7 @@
 (* :History: *)
 
 BeginPackage[ "SDPSylvester`",
+              "NCOptions`",
 	      "SDP`",
 	      "PrimalDual`",
 	      "Sylvester`",

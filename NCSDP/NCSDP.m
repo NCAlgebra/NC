@@ -13,16 +13,14 @@
 (* :History: *)
 
 BeginPackage[ "NCSDP`",
-	      "NCLinearCollect`",
+              "NCOptions`",
+              "NCSymmetric`",
+              "NCPolynomial`",
+              "NCSylvester`",
 	      "PrimalDual`",
 	      "NCDebug`",
 	      "NCMatMult`",
 	      "NonCommutativeMultiply`" ];
-
-Clear[NCSDPSimplifySymmetric]
-NCSDPSimplifySymmetric::notSymmetric = "Expression is not symmetric. NCSDP will automatically identify symmetric unknowns. Symmetric knowns should be declared with the help of the option UserRules, e.g. 'UserRules -> { tp[q] -> q }' will trat the known 'q' as symmetric.";
-NCSDPSimplifySymmetric::setSymmetric = "Warning: variables `1` have been treated as symmetric variables.";
-NCSDPSimplifySymmetric::usage = "Simplifies symemtric NC polynomials by eliminating symmetric terms."
 
 Clear[NCSDP];
 NCSDP::errorInBlock = "Error in block # `1`.";
@@ -35,101 +33,18 @@ NCSDP::usage = "NCSDP[constraint, vars, obj, data] converts list 'constraint' of
 Clear[NCSDPForm];
 NCSDPForm::usage = "";
 
+Clear[NCSDPDual];
+NCSDPDual::usage = "";
+
 Begin[ "`Private`" ]
 
-  (* NCSimplifySymmetric auxiliary routines *)
- 
-  Clear[GroupTerm];
-  GroupTerm[{a___, b_, c___, d_, e___}, rule_] := 
-     GroupTerm[{a, b, c, e}, rule] /; d == (tp[b] /. rule)
-  GroupTerm[a_, rule_] := a;
 
-  Clear[ToList];
-  ToList[x_?AtomQ] := List[x];
-  ToList[x_] := List @@ x;
-
-  Clear[TpRule];
-  TpRule[x_NonCommutativeMultiply] := tp[x] -> x;
-  TpRule[x_] := tp[x] -> 2 x;
+  (* NCSDP auxiliary functions *)
 
   Clear[tpAux];
   tpAux[x_?MatrixQ] := tpMat[x];
   tpAux[x_] := tp[x];
-
-  Clear[FlattenAux]
-  FlattenAux[x_?MatrixQ] := Flatten[DeleteCases[Flatten[x], 0] /. Plus -> List];
-  FlattenAux[x_] := x;
-
-  NCSDPSimplifySymmetric[exp_List, vars_List, 
-    OptionsPattern[{DebugLevel -> 0, UserRules -> {}}]] := Module[
-    {tmp, diff, 
-     symVars, symRule, skewRule, patternRule, 
-     userRules,
-     groups, groupRules, 
-     tpRule, cleanExp},
   
-    SetOptions[NCDebug, DebugLevel -> OptionValue[DebugLevel]];
-    userRules = OptionValue[UserRules];
-
-    (* Expand *)
-    tmp = ExpandNonCommutativeMultiply[exp];
-
-    (* Determine symmetric variable candidates *)
-    diff = Flatten[Map[# - tpAux[#] &, tmp]];
-    symVars = Pick[vars, Map[! FreeQ[diff, #] &, vars]];
-    NCDebug[2, diff, symVars];
-  
-    (* Enforce variable symmetry *)
-    symRule = Map[tp[#] -> # &, symVars];
-    tmp = ReplaceRepeated[tmp, symRule];
-    tmp = ReplaceRepeated[tmp, userRules];
-    NCDebug[2, tmp];
-
-    (* Check symmetry *)
-    diff = ReplaceRepeated[Flatten[Map[# - tpAux[#] &, tmp]], symRule];
-    diff = ReplaceRepeated[diff, userRules];
-    NCDebug[2, diff];
-    If[Union[diff] != {0},
-     Message[NCSDPSimplifySymmetric::notSymmetric];
-     Return[{$Failed, $Failed, $Failed}];
-    ];
-
-    If [ symVars != {},
-
-      (* Warn when setting variables symmetric *)
-      Message[NCSDPSimplifySymmetric::setSymmetric, symVars];
-
-    ];
-  
-    (* Clear map *)
-    skewRule = Map[tp[#] -> -# &, symVars];
-    tpRule = 
-     Flatten[Map[{tp[#] -> 0, # -> 2 #} &, Complement[vars, symVars]]];
-    patternRule = Alternatives @@ Flatten[Map[{# -> 0, # -> 2 #}&, symVars]];
-    NCDebug[2, patternRule];
-  
-    (* Group symmetric terms *)
-    groups = (tmp - Map[tpAux, tmp]) /. userRules /. skewRule /. Times[a_?NumberQ, b_] -> b;
-    NCDebug[2, groups];
-    groups = Map[FlattenAux, groups];
-    NCDebug[2, groups];
-    groups = Map[GroupTerm[ToList[##], symRule] &, groups, {1}];
-    NCDebug[2, groups];
-    groupRules = 
-     Map[Flatten, Map[{tp[#] -> 0, # -> 2 #} &, groups, {2}] /. symRule];
-    NCDebug[2, groupRules];
-    groupRules = Map[DeleteCases[#, patternRule] &, groupRules];
-    NCDebug[2, groupRules];
-  
-    (* Clear groups and transposes *)
-  
-    Return[{ReplaceAll[MapThread[ReplaceAll, {tmp, groupRules}],
-       tpRule], vars, symVars}];
-
-  ];
-
-  (* NCSDP auxiliary functions *)
-
   Clear[ReplaceData];
   ReplaceData[exp_, data_List] :=
     ReplaceRepeated[exp, 
@@ -657,6 +572,34 @@ Begin[ "`Private`" ]
   ArrayFlattenAux[exp_, True] := Map[ArrayFlatten[{#}]&, Map[ArrayFlatten, exp, {3}], {2}];
   ArrayFlattenAux[exp_, False] := Map[ArrayFlatten[{#}]&, exp, {2}];
 
+  Clear[NCSylvesterToSylvesterAux];
+  NCSylvesterToSylvesterAux[{var_} -> terms_] := Module[
+      {tmp},
+      
+      NCDebug[2, terms];
+      
+      tmp = Map[{#[[1]] #[[2]], #[[3]]}&, terms];
+      
+      NCDebug[2, tmp];
+
+      tmp = Append[Transpose[tmp], var];
+      
+      NCDebug[2, tmp];
+
+      Return[tmp];
+  ];
+  
+  Clear[NCSylvesterToSylvester];
+  NCSylvesterToSylvester[exp_] := Module[
+     {rules},
+      
+     rules = Normal[exp[[2]]];
+
+     NCDebug[2, rules];
+      
+     Return[Prepend[Map[NCSylvesterToSylvesterAux, rules], exp[[1]] ]];
+  ];
+  
   NCSDP[exp_List, Vars_List, obj_:{}, data_List, 
         OptionsPattern[{DebugLevel -> 0, UserRules -> {}}]] := Module[
     {tmp, sylv, vars, symVars, 
@@ -677,7 +620,7 @@ Begin[ "`Private`" ]
     If[ Max[tmp] > 2,
 
       tmp = Flatten[Position[tmp, _?(#>2&)]];
-      Message[NCSDP::invalidParameters, "'exp' should be a list of NC polynomials of polynomial matrices. Entries number " <> ToString[tmp] <> " do not seem to be NC polynomials or NC polynomial matrices"];
+      Message[NCSDP::invalidParameters, "'exp' should be a list of NC polynomials or polynomial matrices. Entries number " <> ToString[tmp] <> " do not seem to be NC polynomials or NC polynomial matrices"];
 
       Return[{{$Failed, $Failed, $Failed}, $Failed}];
     ];
@@ -703,42 +646,56 @@ Begin[ "`Private`" ]
 
     (* End check parameters *)
 
-    (* Simplify symmetric terms *)
+    (* Test and simplify symmetric terms *)
     Check[
-      {sylv, tmp, symVars} = 
-         NCSDPSimplifySymmetric[exp, vars, 
-           DebugLevel -> debugLevel,
-	   UserRules -> userRules ];
+
+      tmp = Map[NCSymmetricPart, exp];
+      symVars = Intersection[Union[Flatten[tmp[[All,2]]]], vars];
+      sylv = tmp[[All,1]];
+        
+      (* Ensure no tp[] of vars are present *)
+      tmp = sylv /. Map[(tp[#] -> 0)&, vars];
+      NCDebug[2, tmp];
+      diff = sylv - tmp;
+      NCDebug[2, diff];
+      sylv = tmp + Map[tpAux, diff];
+      NCDebug[2, sylv];
+        
       , 
       Return[{{$Failed, $Failed, $Failed}, $Failed}];
       ,
-      NCSDPSimplifySymmetric::notSymmetric
+      NCSymmetricPart::notSymmetric
     ];
-  
+            
     NCDebug[2, sylv];
     NCDebug[2, symVars];
   
     (* Convert to Sylverster form *)
     Check[
 
-      NCDebug[2, "==="];
-      sylv = NCPolyToSylvester[sylv, vars];
+      sylv = Map[NCToNCPolynomial[#, vars]&, sylv];
       NCDebug[2, sylv];
+      sylv = Map[NCSylvester, sylv];
+      NCDebug[2, sylv];
+      sylv = Map[NCSylvesterToNCPolynomial[#,KeepZeros->True]&, sylv];
+      NCDebug[2, sylv];
+      sylv = Map[NCSylvesterToSylvester, sylv];
       , 
       Return[{{$Failed, $Failed, $Failed}, $Failed}];
       ,
       NCPolyToSylvester::notLinear
     ];
-  
+            
+    NCDebug[2, sylv];
+            
     blockMatrixQ = Map[MatrixQ, Part[sylv, All, 1]];
     blockIndex = Range[Length[sylv]];
     NCDebug[2, blockMatrixQ];
 
     (* Replace data and compute dimension of independent terms *)
-
     Check[
  
-      cc = Map[ReplaceData[#, data] &, -Part[sylv, All, 1]];
+      cc = Map[ReplaceData[#, data] &, -Normal[Part[sylv, All, 1]]];
       NCDebug[2, cc];
 
       ,
@@ -775,7 +732,6 @@ Begin[ "`Private`" ]
     NCDebug[2, bbDims];
 
     (* Replace data and compute dimension of linear terms *)
-  
     Check[
 
       aa = Map[ReplaceData[#, data] &, Part[sylv, All, 2 ;;]];
@@ -827,11 +783,69 @@ Begin[ "`Private`" ]
     bb = MapThread[BlowUpScalarsAux2[#1, #2, False]&, {bb, mn}];
     NCDebug[2, bb];
   
-    Return[{{aa, bb, cc}, PrimalDual`SymmetricVariables -> (symVars/. varIndex)}];
+    Return[{{aa, bb, cc}, SymmetricVariables -> Sort[symVars/. varIndex]}];
 
   ];
 
-NCSDPForm[f_, vars_, obj_:{}] := Module[
+  NCSDPDual[exp_, Vars_, obj_:{}] := Module[
+    {vars, tmp, symVars, sylv},
+
+    (* Check variable list *)
+    vars = Flatten[Vars];
+    If [vars =!= Vars,
+
+      Message[NCSDP::invalidParameters, "'vars' should be a list a list of symbols. It cannot contain sublist or matrices"];
+
+      Return[{$Failed, $Failed, $Failed}];
+
+    ];
+
+    (* Test and simplify symmetric terms *)
+    Check[
+
+      tmp = Map[NCSymmetricPart, exp];
+      symVars = Intersection[Union[Flatten[tmp[[All,2]]]], vars];
+      sylv = tmp[[All,1]];
+        
+      (* Ensure no tp[] of vars are present *)
+      tmp = sylv /. Map[(tp[#] -> 0)&, vars];
+      NCDebug[0, tmp];
+      diff = sylv - tmp;
+      NCDebug[0, diff];
+      sylv = tmp + Map[tpAux, diff];
+      NCDebug[0, sylv];
+        
+      , 
+      Return[{$Failed, $Failed, $Failed}];
+      ,
+      NCSymmetricPart::notSymmetric
+    ];
+            
+    NCDebug[0, sylv];
+    NCDebug[0, symVars];
+  
+    (* Convert to Sylverster form *)
+    Check[
+
+      sylv = Map[NCToNCPolynomial[#, vars]&, sylv];
+      NCDebug[0, sylv];
+      sylv = Map[NCSylvester, sylv];
+      NCDebug[0, sylv];
+      sylv = Map[NCSylvesterToNCPolynomial, sylv];
+      NCDebug[0, sylv];
+      sylv = Map[NCSylvesterToSylvester, sylv];
+      , 
+      Return[{$Failed, $Failed, $Failed}];
+      ,
+      NCPolyToSylvester::notLinear
+    ];
+            
+    NCDebug[0, sylv];
+      
+    Return[{0,0,0}];
+  ];
+  
+  NCSDPForm[f_, vars_, obj_:{}] := Module[
     { objForm, constraintForm, rules, varRules },
 
     rules = {
