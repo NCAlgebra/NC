@@ -54,10 +54,11 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
-  (* TODO
   NCSDPDual[F, vars, obj];
-  *)
 
+];
+
+If[0,
 
   (* Test #2: Lyapunov inequality *)
 

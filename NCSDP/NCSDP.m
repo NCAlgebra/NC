@@ -683,7 +683,7 @@ Begin[ "`Private`" ]
       , 
       Return[{{$Failed, $Failed, $Failed}, $Failed}];
       ,
-      NCPolyToSylvester::notLinear
+      NCSylvester::NotLinear
     ];
             
     NCDebug[2, sylv];
@@ -787,6 +787,12 @@ Begin[ "`Private`" ]
 
   ];
 
+  Clear[NCSDPDualEntryAux];
+  NCSDPDualEntryAux[{scl_, left_, right_}] := {scl, tpAux[right], tpAux[left]};
+    
+  Clear[NCSDPDualAux];
+  NCSDPDualAux[entries_] := Map[NCSDPDualEntryAux, entries];
+  
   NCSDPDual[exp_, Vars_, obj_:{}] := Module[
     {vars, tmp, symVars, sylv},
 
@@ -824,23 +830,17 @@ Begin[ "`Private`" ]
     NCDebug[0, sylv];
     NCDebug[0, symVars];
   
-    (* Convert to Sylverster form *)
-    Check[
-
-      sylv = Map[NCToNCPolynomial[#, vars]&, sylv];
-      NCDebug[0, sylv];
-      sylv = Map[NCSylvester, sylv];
-      NCDebug[0, sylv];
-      sylv = Map[NCSylvesterToNCPolynomial, sylv];
-      NCDebug[0, sylv];
-      sylv = Map[NCSylvesterToSylvester, sylv];
-      , 
-      Return[{$Failed, $Failed, $Failed}];
-      ,
-      NCPolyToSylvester::notLinear
-    ];
-            
+    (* Convert to NCPolynomial *)
+    sylv = Map[NCToNCPolynomial[#, vars]&, sylv];
     NCDebug[0, sylv];
+      
+    (* Non linear? *)
+    If[ Not[And @@ Map[NCPLinearQ, sylv]],
+        Return[{$Failed, $Failed, $Failed}];
+    ];
+      
+    tmp = Map[Map[NCSDPDualAux, #[[2]]]&, sylv];
+    NCDebug[0, tmp];
       
     Return[{0,0,0}];
   ];
