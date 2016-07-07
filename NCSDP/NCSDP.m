@@ -28,6 +28,7 @@ NCSDP::invalidParameters = "Invalid parameter: `1`.";
 NCSDP::invalidData = "Problems substituting problem data `1`. Check expressions and dimension of the matrices.";
 NCSDP::dimensionMismatch = "Dimension mismatch.";
 NCSDP::incompleteDimensions = "Incomplete dimensions.";
+NCSDP::costMismatch = "Dimension mismatch in objective function.";
 NCSDP::usage = "NCSDP[constraint, vars, obj, data] converts list 'constraint' of NC polynomials and NC polynomial matrix inequalities that are linear in the unknowns listed in 'vars' into the semidefinite program with linear objective 'obj':\n\n max  <obj, vars>  s.t.  constraints \[LessEqual] 0.\n\nNCSDP[constraint, vars, data] converts problem into a feasibility semidefinite program.\nNCSDP uses the user supplied 'data' to set up the problem data.";
 
 Clear[NCSDPForm];
@@ -608,6 +609,7 @@ Begin[ "`Private`" ]
      aDims, bbDims, ccDims, rs, mn, 
      varIndex, blockMatrixQ, blockIndex, debugLevel},
   
+    (* Options *)
     debugLevel = OptionValue[DebugLevel];
     userRules = OptionValue[UserRules];
 
@@ -721,13 +723,17 @@ Begin[ "`Private`" ]
 
       ,
 
-      Message[NCSDP::invalidData, "in cost function"];
+      Message[NCSDP::invalidData, "in objective function"];
       Return[{{$Failed, $Failed, $Failed}, $Failed}];
       
     ];
 
-    NCDebug[2, bb];
-
+    (* Check dimensions *)
+    If[ Length[bb] != Length[vars],
+      Message[NCSDP::costMismatch];
+      Return[{{$Failed, $Failed, $Failed}, $Failed}];
+    ];
+            
     bbDims = Map[DimensionsAux[#, False]&, bb] /. -1 -> {-1, -1};
     NCDebug[2, bbDims];
 
@@ -787,11 +793,13 @@ Begin[ "`Private`" ]
 
   ];
 
-  Clear[NCSDPDualEntryAux];
-  NCSDPDualEntryAux[{scl_, left_, right_}] := {scl, tpAux[right], tpAux[left]};
+  (* NCSDPDual auxiliary function *)
+  
+  Clear[NCSDPDualTransposeEntryAux];
+  NCSDPDualTransposeEntryAux[{scl_, left_, right_}] := {scl, tpAux[left], tpAux[right]};
     
-  Clear[NCSDPDualAux];
-  NCSDPDualAux[entries_] := Map[NCSDPDualEntryAux, entries];
+  Clear[NCSDPDualTransposeAux];
+  NCSDPDualTransposeAux[entries_] := Map[NCSDPDualTransposeEntryAux, entries];
 
   Clear[NCSDPDualMatrixAux];
   NCSDPDualMatrixAux[entry_?MatrixQ, {i_}, var_] := 
@@ -800,11 +808,30 @@ Begin[ "`Private`" ]
       Symbol[ToString[var] <> ToString[i]];
 
   Clear[NCSDPDualReplaceAux];
-  NCSDPDualReplaceAux[entry_, dvar_, vars_] := 
-    Map[({dvar} -> Lookup[entry, {{#}}])&, vars];
+  NCSDPDualReplaceAux[entry_, dvar_, vars_] := Block[
+    {dims = Dimensions[dvar]},
+      
+    Return[
+      Map[({dvar} -> Lookup[entry, Key[{#}], 
+                            If[MatrixQ[dvar], 
+                               {{0, ConstantArray[0, {1,dims[[1]]}], 
+                                    ConstantArray[0, {dims[[2]],1}]}}, 
+                               {{0, 0, 0}}]
+                            ])&, vars] ];
+   ];
 
-  NCSDPDual[exp_, Vars_, obj_:{}] := Module[
-    {vars, tmp, symVars, sylv, blockMatrixQ},
+  NCSDPDual[exp_, Vars_, obj_:{},
+           OptionsPattern[{DebugLevel -> 0, DualSymbol -> "w"}]] := Module[
+    {cc, bb, vars, varIndex, 
+     dVars, dVarList, dSymVars,
+     tmp, symVars, sylv, 
+     debugLevel, dualSymbol},
+
+    (* Options *)
+    debugLevel = OptionValue[DebugLevel];
+    dualSymbol = OptionValue[DualSymbol];
+
+    SetOptions[NCDebug, DebugLevel -> debugLevel];
 
     (* Check variable list *)
     vars = Flatten[Vars];
@@ -825,11 +852,11 @@ Begin[ "`Private`" ]
         
       (* Ensure no tp[] of vars are present *)
       tmp = sylv /. Map[(tp[#] -> 0)&, vars];
-      NCDebug[0, tmp];
+      NCDebug[2, tmp];
       diff = sylv - tmp;
-      NCDebug[0, diff];
+      NCDebug[2, diff];
       sylv = tmp + Map[tpAux, diff];
-      NCDebug[0, sylv];
+      NCDebug[2, sylv];
         
       , 
       Return[{$Failed, $Failed, $Failed}];
@@ -837,32 +864,96 @@ Begin[ "`Private`" ]
       NCSymmetricPart::notSymmetric
     ];
             
-    NCDebug[0, sylv];
-    NCDebug[0, symVars];
+    NCDebug[2, sylv];
+    NCDebug[2, symVars];
   
     (* Convert to NCPolynomial *)
     sylv = Map[NCToNCPolynomial[#, vars]&, sylv];
-    NCDebug[0, sylv];
+    NCDebug[2, sylv];
       
     (* Non linear? *)
     If[ Not[And @@ Map[NCPLinearQ, sylv]],
         Return[{$Failed, $Failed, $Failed}];
     ];
-    
+
+    (* Index of variables *)
+    varIndex = MapIndexed[#1 -> #2[[1]] &, vars];
+    NCDebug[2, varIndex];
+
     (* Create dual variables *)
-    blockMatrixQ = Map[MatrixQ, Part[sylv, All, 1]];
-    NCDebug[0, blockMatrixQ];
+    dVars = MapIndexed[NCSDPDualMatrixAux[#1, #2, dualSymbol]&, 
+                       Part[sylv, All, 1]];
+    dVarList = Table[Symbol[ToString[dualSymbol] <> ToString[i]], 
+                     {i, Length[sylv]}];
+    SetNonCommutative[dVarList];
+    NCDebug[2, dVarList];
+
+    (* Make symmetric *) 
+    dVars = dVars /. (x_[k_,l_] /; k < l :> tp[x[l,k]]);
+    NCDebug[2, dVars];
+
+    (* Symmetric dual variables *)
+    dSymVars = Flatten[Map[If[MatrixQ[#], Tr[#, List], #]&, dVars]];
+    NCDebug[2, dSymVars];
+
+    (* Independent terms *)
+    cc = -Normal[Part[sylv, All, 1]];
+    NCDebug[2, cc];
+
+    (* Cost function *)
+    bb = If[ obj != {}, 
+             obj
+            ,
+             0*vars
+    ];
+    NCDebug[2, bb];
       
-    dVar = MapIndexed[NCSDPDualMatrixAux[#1, #2, "w"]&, Part[sylv, All, 1]];
-    NCDebug[0, dVar];
+    (* Check dimensions *)
+    If[ Length[bb] != Length[vars],
+      Message[NCSDP::costMismatch];
+      Return[{{$Failed, $Failed, $Failed}, $Failed}];
+    ];
+
+    (* Transponse mapping *)
+    tmp = Map[Map[NCSDPDualTransposeAux, #[[2]]]&, sylv];
+    NCDebug[2, tmp];
       
-    tmp = Map[Map[NCSDPDualAux, #[[2]]]&, sylv];
-    NCDebug[0, tmp];
+    (* Replace dual variables *)
+    tmp = Transpose[MapThread[NCSDPDualReplaceAux[#1, #2, vars]&, 
+                              {tmp, dVars}]];
+    NCDebug[2, tmp];
       
-    tmp = MapThread[NCSDPDualReplaceAux[#1, #2, vars]&, {tmp, dVar}];
-    NCDebug[0, tmp];
+    (* Transform into association *)
+    tmp = Map[Association, tmp, {2}];
+    NCDebug[2, tmp];
+
+    (* Merge entries *)
+    tmp = Map[Merge[#,(Join[Flatten[#,1]])&]&, tmp, {1}];
+    NCDebug[2, tmp];
+
+    (* Transform to NCPolynomial *)
+    tmp = MapThread[NCPolynomial[#1, #2, dVars]&, {bb, tmp}];
+    NCDebug[2, tmp];
       
-    Return[{0,0,0}];
+    (* Transform back to NC *)
+    tmp = Map[NCPolynomialToNC, tmp];
+    NCDebug[2, tmp];
+    
+    (* Symmetrize entries *)
+    ind = symVars /. varIndex;
+    tmp[[ind]] = (tmp[[ind]] + Map[tpAux, tmp[[ind]]])/2;
+    NCDebug[2, tmp];
+  
+    (* Symmetrize dual variables *)
+    tmp = ExpandNonCommutativeMultiply[tmp /. Map[(tp[#] -> #)&, dSymVars]];
+    NCDebug[2, tmp];
+    
+    (* Flatten *)
+    tmp = Flatten[tmp, 2];
+    NCDebug[2, tmp];
+    
+    Return[{tmp, dVars, -cc}];
+      
   ];
   
   NCSDPForm[f_, vars_, obj_:{}] := Module[

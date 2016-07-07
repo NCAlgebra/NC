@@ -13,10 +13,11 @@ tests = {
   "SDPSylvester1",
   "SDPSylvester2", 
   "SDPSedumi",
-  "NCSDP"
-  (*,  
+  "NCSDP",
+  (* *) ,  
   "SDPSolve",
-  "SDPSylvesterSolve" *)
+  "SDPSylvesterSolve"
+  (* *)
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];

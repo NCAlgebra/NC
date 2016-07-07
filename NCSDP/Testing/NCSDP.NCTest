@@ -12,7 +12,8 @@ Module[
     b,b1,c1,c2,d12,y,w,
     Ze,Zemn,Zexz,
     Idm,Zemm,Zenm,
-    IdX,IdW,Zenpm
+    IdX,IdW,Zenpm,
+    dF, dVars, dObj
     (* These must be global for COMPleib
     A,B1,B,C1,CC,D11,D12,D21,
     nx,nu,nw,nz,ny
@@ -54,6 +55,17 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
+  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+ 
+  answer = {w1,w2};
+  NCTest[dVars, answer];
+
+  answer = {-1 - w2 + tp[a] ** w1 + w1 ** a};
+  NCTest[dF, answer];
+
+  answer = {1, 0};
+  NCTest[dObj, answer];
+
 
   (* Test #2: Lyapunov inequality *)
 
@@ -85,6 +97,17 @@ Module[
 
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
+
+  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+ 
+  answer = {w1,w2};
+  NCTest[dVars, answer];
+
+  answer = {-1 - w2 + tp[a] ** w1 + w1 ** a};
+  NCTest[dF, answer];
+
+  answer = {q, 0};
+  NCTest[dObj, answer];
 
 
   (* Test #3: Modified Lyapunov inequality *)
@@ -118,6 +141,17 @@ Module[
 
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
+
+  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+ 
+  answer = {w1,w2};
+  NCTest[dVars, answer];
+
+  answer = {-1 - w2 + tp[a] ** w1 + w1 ** a + tp[b] ** w1 ** b};
+  NCTest[dF, answer];
+
+  answer = {q, 0};
+  NCTest[dObj, answer];
 
 
   (* Test #4: Stabilizability *)
@@ -154,12 +188,17 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
-  NCSDPDual[F, vars, obj];
+  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+ 
+  answer = {w1,w2};
+  NCTest[dVars, answer];
 
+  answer = {-1 - w2 + tp[a] ** w1 + w1 ** a, 2 tp[b] ** w1};
+  NCTest[dF, answer];
 
-];
+  answer = {0, 1};
+  NCTest[dObj, answer];
 
-If[0,
 
   (* Test #5: H2 control *)
 
@@ -196,6 +235,19 @@ If[0,
   answer = SymmetricVariables->{1,3};
   NCTest[rules, answer];
 
+  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+ 
+  answer = {w1,{{w2[1,1],tp[w2[2,1]]},{w2[2,1],w2[2,2]}}};
+  NCTest[dVars, answer];
+
+  answer = {-w2[2,2] + tp[a] ** w1 + w1 ** a, 
+            2 tp[b] ** w1 - 2 tp[w2[2,1]], 
+            -1 - w2[1,1]};
+  NCTest[dF, answer];
+
+  answer = {b1 ** tp[b1], {{0,0},{0,0}}};
+  NCTest[dObj, answer];
+
 
   (* Test #6: Hoo control *)
 
@@ -225,6 +277,19 @@ If[0,
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
+  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+ 
+  answer = {{{w1[1,1],tp[w1[2,1]]},{w1[2,1],w1[2,2]}}, w2};
+  NCTest[dVars, answer];
+
+  answer = {-w2 + tp[a] ** w1[1,1] + w1[1,1] ** a
+                + tp[c1] ** w1[2,1] + tp[w1[2,1]] ** c1, 
+            2 tp[b] ** w1[1,1] + 2 tp[d12] ** w1[2,1]};
+  NCTest[dF, answer];
+
+  answer = {{{b1 ** tp[b1],0},{0,-1}},0};
+  NCTest[dObj, answer];
+
 
   (* Test #7: Mixed H2/Hoo control *)
 
@@ -239,6 +304,20 @@ If[0,
   data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
 
   {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+
+  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w", DebugLevel -> 0];
+ 
+  answer = {{{w1[1,1],tp[w1[2,1]]},{w1[2,1],w1[2,2]}}, {{w2[1,1],tp[w2[2,1]]},{w2[2,1],w2[2,2]}}};
+  NCTest[dVars, answer];
+
+  answer = {-w2[2,2] + tp[a] ** w1[1,1] + w1[1,1] ** a
+                + tp[c1] ** w1[2,1] + tp[w1[2,1]] ** c1, 
+            2 tp[b] ** w1[1,1] + 2 tp[d12] ** w1[2,1] - 2 tp[w2[2,1]], 
+	    -1 - w2[1,1]};
+  NCTest[dF, answer];
+
+  answer = {{{b1 ** tp[b1],0},{0,-1}},{{0,0},{0,0}}};
+  NCTest[dObj, answer];
 
 ];
 
