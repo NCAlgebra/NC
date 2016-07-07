@@ -36,7 +36,15 @@ Begin[ "`Private`" ]
   Unprotect[NonCommutativeMultiply];
   ClearAttributes[NonCommutativeMultiply, {OneIdentity, Flat}];
 
-
+  Clear[NCPatternQ];
+  NCPatternQ[Slot] = True;
+  NCPatternQ[SlotSequence] = True;
+  NCPatternQ[Pattern] = True;
+  NCPatternQ[Blank] = True;
+  NCPatternQ[BlankSequence] = True;
+  NCPatternQ[BlankNullSequence] = True;
+  NCPatternQ[_] = False;
+  
   (* CommutativeQ *)
 
   CommutativeQ[Slot] = False;
@@ -109,8 +117,15 @@ Begin[ "`Private`" ]
     b NonCommutativeMultiply[a, c]; 
                         
   (* Identity *)
-  NonCommutativeMultiply[f_[a_]] := f[a];
-  NonCommutativeMultiply[a_Plus] := a;
+  (* MAURICIO BUG: 07/07/2016
+     The following can be replaced by f_[a__] which triggers some ...
+     recursive calls.
+  *)
+  (*
+    NonCommutativeMultiply[f_[a_]] := f[a];
+    NonCommutativeMultiply[a_Plus] := a; 
+  *)
+  NonCommutativeMultiply[f_[a__]] /; !NCPatternQ[f] := f[a];
   NonCommutativeMultiply[a_Symbol] := a;
   NonCommutativeMultiply[] := 1;
                         
@@ -166,8 +181,8 @@ Begin[ "`Private`" ]
   tp[a_Times] := tp /@ a;
 
   (* tp reverse threads over NonCommutativeMultiply *)
-  tp[NonCommutativeMultiply[a__]] := 
-    (NonCommutativeMultiply @@ (tp /@ Reverse[{a}]));
+  tp[a_NonCommutativeMultiply] := 
+    (NonCommutativeMultiply @@ (tp /@ Reverse[List @@ a]));
 
   (* tp[inv[]] = inv[tp[]] *)
   tp[inv[a_]] := inv[tp[a]];
@@ -190,8 +205,8 @@ Begin[ "`Private`" ]
   aj[a_Times] := aj /@ a;
 
   (* aj reverse threads over NonCommutativeMultiply *)
-  aj[NonCommutativeMultiply[a__]] := 
-     (NonCommutativeMultiply @@ (aj /@ Reverse[{a}]));
+  aj[a_NonCommutativeMultiply] := 
+     (NonCommutativeMultiply @@ (aj /@ Reverse[List @@ a]));
 
   (* aj[inv[]] = inv[aj[]] *)
   aj[inv[a_]] := inv[aj[a]];
@@ -217,8 +232,7 @@ Begin[ "`Private`" ]
   co[a_Times] := co /@ a;
 
   (* co threads over NonCommutativeMultiply *)
-  co[NonCommutativeMultiply[a__]] := 
-    (NonCommutativeMultiply @@ (co /@ {a}));
+  co[a_NonCommutativeMultiply] := co /@ a;
   
   (* Relationship with aj and tp *)
 
@@ -281,7 +295,7 @@ Begin[ "`Private`" ]
   (* tp threads over Times *)
   inv[a_Times] := inv /@ a;
 
-  (* NC simplifications *)
+  (* inv simplifications *)
   inv/:NonCommutativeMultiply[b___,a_,inv[a_],c___] :=
          NonCommutativeMultiply[b,c];
   inv/:NonCommutativeMultiply[b___,inv[a_],a_,c___] :=

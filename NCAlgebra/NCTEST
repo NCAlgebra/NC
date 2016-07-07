@@ -9,29 +9,29 @@ On[Assert];
 Print["> BEGIN NCTEST\n" ];
 
 tests = {
-  "NCPolynomial",
-  "NCQuadratic",
-  "NCSylvester",
-  "NCSymmetric",
-  "NCDiff",
-  "NCUtil",
-  "NCMatMult",
   "CommutativeQ",
   "NCMultiplication",
+  "NCUtil",
+  "NCSymmetric",
+  "NCSelfAdjoint",
+  "NCReplace",
+  "NCPolynomial",
+  "NCSimplifyRational",
+  "NCSylvester",
+  "NCQuadratic",
+  "MatrixDecompositions",
+  "NCMatrixDecompositions",
+  "NCCollect",
+  "NCInverse",
+  "NCDiff",
+  "NCMatMult",
   "NCRoots",
   "NCConjugate",
   "NCOutput",
-  "NCCollect",
-  "NCSimplifyRational",
-  "NCSelfAdjoint",
   "NCLDU",
   "NCRealization",
-  "NCReplace",
-  "MatrixDecompositions",
-  "NCInverse",
-  "NCMatrixDecompositions",
-  "Matrix",
-  "NCConvexity"
+  "NCConvexity",
+  "Matrix"
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];
