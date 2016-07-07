@@ -792,9 +792,19 @@ Begin[ "`Private`" ]
     
   Clear[NCSDPDualAux];
   NCSDPDualAux[entries_] := Map[NCSDPDualEntryAux, entries];
-  
+
+  Clear[NCSDPDualMatrixAux];
+  NCSDPDualMatrixAux[entry_?MatrixQ, {i_}, var_] := 
+      Array[Symbol[ToString[var] <> ToString[i]], Dimensions[entry]];
+  NCSDPDualMatrixAux[entry_, {i_}, var_] := 
+      Symbol[ToString[var] <> ToString[i]];
+
+  Clear[NCSDPDualReplaceAux];
+  NCSDPDualReplaceAux[entry_, dvar_, vars_] := 
+    Map[({dvar} -> Lookup[entry, {{#}}])&, vars];
+
   NCSDPDual[exp_, Vars_, obj_:{}] := Module[
-    {vars, tmp, symVars, sylv},
+    {vars, tmp, symVars, sylv, blockMatrixQ},
 
     (* Check variable list *)
     vars = Flatten[Vars];
@@ -838,8 +848,18 @@ Begin[ "`Private`" ]
     If[ Not[And @@ Map[NCPLinearQ, sylv]],
         Return[{$Failed, $Failed, $Failed}];
     ];
+    
+    (* Create dual variables *)
+    blockMatrixQ = Map[MatrixQ, Part[sylv, All, 1]];
+    NCDebug[0, blockMatrixQ];
+      
+    dVar = MapIndexed[NCSDPDualMatrixAux[#1, #2, "w"]&, Part[sylv, All, 1]];
+    NCDebug[0, dVar];
       
     tmp = Map[Map[NCSDPDualAux, #[[2]]]&, sylv];
+    NCDebug[0, tmp];
+      
+    tmp = MapThread[NCSDPDualReplaceAux[#1, #2, vars]&, {tmp, dVar}];
     NCDebug[0, tmp];
       
     Return[{0,0,0}];
