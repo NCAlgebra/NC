@@ -33,7 +33,7 @@ Begin["`Private`"];
     Union[Cases[exp, (pattern)[_Symbol], {0, Infinity}]];
 
   NCGrabFunctions[exp_, f_] :=
-    Union[Cases[exp, (f)[_], {0, Infinity}]];
+    Union[Cases[exp, (f)[__], {0, Infinity}]];
 
   NCConsolidateList[list_] := Block[
       {basis, index = Range[1, Length[list]]},

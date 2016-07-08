@@ -181,8 +181,7 @@ Begin[ "`Private`" ]
   tp[a_Times] := tp /@ a;
 
   (* tp reverse threads over NonCommutativeMultiply *)
-  tp[a_NonCommutativeMultiply] := 
-    (NonCommutativeMultiply @@ (tp /@ Reverse[List @@ a]));
+  tp[a_NonCommutativeMultiply] := tp /@ Reverse[a];
 
   (* tp[inv[]] = inv[tp[]] *)
   tp[inv[a_]] := inv[tp[a]];
@@ -205,8 +204,7 @@ Begin[ "`Private`" ]
   aj[a_Times] := aj /@ a;
 
   (* aj reverse threads over NonCommutativeMultiply *)
-  aj[a_NonCommutativeMultiply] := 
-     (NonCommutativeMultiply @@ (aj /@ Reverse[List @@ a]));
+  aj[a_NonCommutativeMultiply] := aj /@ Reverse[a];
 
   (* aj[inv[]] = inv[aj[]] *)
   aj[inv[a_]] := inv[aj[a]];
