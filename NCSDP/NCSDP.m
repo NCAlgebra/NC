@@ -14,6 +14,7 @@
 
 BeginPackage[ "NCSDP`",
               "NCOptions`",
+              "NCUtil`",
               "NCSymmetric`",
               "NCPolynomial`",
               "NCSylvester`",
@@ -31,11 +32,14 @@ NCSDP::incompleteDimensions = "Incomplete dimensions.";
 NCSDP::costMismatch = "Dimension mismatch in objective function.";
 NCSDP::usage = "NCSDP[constraint, vars, obj, data] converts list 'constraint' of NC polynomials and NC polynomial matrix inequalities that are linear in the unknowns listed in 'vars' into the semidefinite program with linear objective 'obj':\n\n max  <obj, vars>  s.t.  constraints \[LessEqual] 0.\n\nNCSDP[constraint, vars, data] converts problem into a feasibility semidefinite program.\nNCSDP uses the user supplied 'data' to set up the problem data.";
 
+Clear[NCSDPDual];
+NCSDPDual::usage = "";
+
 Clear[NCSDPForm];
 NCSDPForm::usage = "";
 
-Clear[NCSDPDual];
-NCSDPDual::usage = "";
+Clear[NCSDPDualForm];
+NCSDPDualForm::usage = "";
 
 Begin[ "`Private`" ]
 
@@ -985,6 +989,75 @@ Begin[ "`Private`" ]
       DisplayForm[
          GridBox[{
            {UnderscriptBox["max", vars /. varRules], objForm},
+           {"s.t.", constraintForm}},
+           ColumnAlignments->{Right,Left}
+         ]
+      ]
+
+     ,
+
+      DisplayForm[
+       GridBox[{
+         {UnderscriptBox["find", vars /. varRules], "s.t.", 
+         constraintForm} },
+         ColumnAlignments->{Right,Right,Left}
+       ]
+      ]
+
+    ]
+
+  ];
+
+  Clear[NCSDPDualFormAux1];
+  NCSDPDualFormAux1[var_?MatrixQ] := 
+    Map[(# -> Style[#, Bold])&, 
+        NCGrabFunctions[var, var[[1,1]] /. f_[__] -> f]];
+  NCSDPDualFormAux1[var_] := var -> Style[var, Bold];
+  
+  NCSDPDualForm[f_, vars_, obj_:{}] := Module[
+    { objForm, constraintForm, rules, varRules },
+
+    rules = {
+       HoldPattern[tp[x_]] -> Superscript[x,"T"], 
+       NonCommutativeMultiply -> Dot
+    };
+    varRules = Flatten[Map[NCSDPDualFormAux1, vars]];
+      
+    (* Print["vars = ", vars];
+       Print["varRules = ", varRules]; *)
+    constraintForm = ColumnForm[
+      Join[
+        Map[If[MatrixQ[#], MatrixForm[#], #] == 0 &, 
+          (f /. rules /. varRules)
+        ],
+        Map[If[MatrixQ[#], MatrixForm[#], #] >= 0 &, 
+          (vars /. rules /. varRules)
+        ]
+      ]
+    ];
+
+    objForm = If [ obj != {},
+      DeleteCases[Transpose[{obj,vars}], {0,_}],
+      obj
+    ];
+
+    (* Print["objForm = ", objForm]; *)
+      
+    objForm = Map[MatrixForm, objForm, {2}];
+      
+    (* Print["objForm = ", objForm]; *)
+      
+    If [ objForm != {},
+
+      objForm = Plus @@ (
+        MapThread[AngleBracket[#1, #2]&, 
+                  Transpose[objForm]]
+      ) /. AngleBracket[x_?Negative,y_] -> -AngleBracket[-x,y] 
+        /. rules /.varRules;
+
+      DisplayForm[
+         GridBox[{
+           {UnderscriptBox["max", Map[MatrixForm,vars] /. rules /. varRules], objForm},
            {"s.t.", constraintForm}},
            ColumnAlignments->{Right,Left}
          ]

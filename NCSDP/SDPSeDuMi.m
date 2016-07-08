@@ -18,16 +18,16 @@ BeginPackage[ "SDPSeDuMi`",
 ]
 
 Clear[SDPToSedumi];
-SDPToSedumi::usase = "";
+SDPToSedumi::usage = "";
 
 Clear[SDPFromSedumi];
-SDPFromSedumi::usase = "";
+SDPFromSedumi::usage = "";
 
 Clear[SDPExport];
-SDPExport::usase = "";
+SDPExport::usage = "";
 
 Clear[SDPImport];
-SDPImport::usase = "";
+SDPImport::usage = "";
 
 Begin[ "`Private`" ]
 
@@ -92,7 +92,7 @@ Begin[ "`Private`" ]
     Print["> Exporting problem to file '" <> filename <> ".mm" <> "'"];
 
     (* Export to file *)
-    Export[filename <> ".mm", tmp, "MatrixMarket"];
+    Export[filename <> ".mm", tmp, "MTX"];
 
     Return[tmp];
   ];

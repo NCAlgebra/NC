@@ -262,6 +262,11 @@ Module[
 
   {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
 
+  tmp = Map[NCSylvesterToNCPolynomial[NCSylvester[NCToNCPolynomial[#, vars]]]&, F];
+  Print["tmp = ", Normal[tmp]];
+
+tmp = {NCPolynomial[{{b1$4542 ** tp[b1$4542], 0}, {0, -1}}, {{x$4542} -> {{1, {{a$4542}, {c1$4542}}, {{1, 0}}}, {1, {{1}, {0}}, {{tp[a$4542], tp[c1$4542]}}}}, {y$4542} -> {{1, {{b$4542}, {d12$4542}}, {{1, 0}}}}}, {x$4542, y$4542}], NCPolynomial[0, {{x$4542} -> {{1, 1, -1}}}, {x$4542, y$4542}]}
+
   answer = {
     {{A,2 Id},{B,2 Id},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
     {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
@@ -271,7 +276,7 @@ Module[
   answer = {Ze, Zemn,-Idm};
   NCTest[abc[[2]], answer];
 
-  answer = {-B1.Transpose[B1], Zenpm};
+  answer = { {{B1 ** Transpose[B1], 0}, {0, -1}} };
   NCTest[abc[[3]], answer];
 
   answer = SymmetricVariables->{1};
@@ -291,6 +296,9 @@ Module[
   NCTest[dObj, answer];
 
 
+];
+
+If[0,
   (* Test #7: Mixed H2/Hoo control *)
 
   SNC[a, b, b1, c1, d12, x, y, w];
