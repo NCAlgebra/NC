@@ -311,7 +311,7 @@ NCIndependenceCheck[list_,y___] :=
                Tmpvar = Map[Tmpfun,Range[Length[Tmplist]] ];                                       
                
                (* create a list of all variables in argument "list" *)
-               Tmpvar2 = Variables[CommuteEverything[Tmplist]  ];                
+               Tmpvar2 = Variables[CommuteEverything[Tmplist]]; 
                
                (*set up sum for independence check *)
                Tmpexp2 = ({Tmpvar}.Transpose[{Tmplist}])[[1,1]];              
@@ -336,6 +336,7 @@ NCIndependenceCheck[list_,y___] :=
                equasolved = Solve[Map[setozero,coeflist] ][[1]];
                On[Solve::svars];
                 
+               EndCommuteEverything[];
                 
                Tmplist2 = Tmpvar //. equasolved;                           
                If[Tmplist2 === NCZeroMatrix[ Length[Tmplist2] ][[1]],

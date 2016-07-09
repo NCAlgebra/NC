@@ -16,16 +16,22 @@
 (* :History:
 *)
 
-BeginPackage[ "NonCommutativeMultiply`" ];
+BeginPackage[ "NonCommutativeMultiply`",
+              "NCUtil`" ];
 
 Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 
       SetCommutative, SetNonCommutative,
       ExpandNonCommutativeMultiply,
+      BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative];
 
 CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative";
 CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative";
+
+CommuteEverything::Warning = "Commute everything set the variable(s) \
+`1` to be commutative. Use EndCommuteEverything[] to set them back as \
+noncommutative.";
 
 Get["NonCommutativeMultiply.usage"];
 
@@ -149,20 +155,32 @@ Begin[ "`Private`" ]
   *)
   (* 05/14/2012 MAURICIO - END *)
 
-  (*                        
-  CommuteEverything[exp_] := exp //. {
-    tp[x_] -> x, 
-    aj[x_] -> Conjugate[x], 
-    co[x_] -> Conjugate[x], 
-    rt[x_] -> x^(1/2),
-    inv[x_] -> x^(-1),
-    NonCommutativeMultiply -> Times
-  };
-  *)
-  CommuteEverything[exp_] := 
-       Replace[exp, x_Symbol :> Commutative[x],
-               Infinity];
-
+  (* CommuteEverything *)
+  Clear[$NCCommuteEverythingSymbols];
+  $NCCommuteEverythingSymbols = {};
+  BeginCommuteEverything[exp_] := Block[
+      {ncvars},
+      ncvars = Cases[NCGrabSymbols[exp], Except[_?CommutativeQ]];
+      If[ncvars != {},
+        Message[CommuteEverything::Warning, 
+                ToString[First[ncvars]] <>
+                StringJoin @@ Map[(", " <> ToString[#])&, Rest[ncvars]]];
+      ];
+      $NCCommuteEverythingSymbols = Join[$NCCommuteEverythingSymbols, ncvars];
+      SetCommutative[ncvars];
+      (* Print["ncvars = ", ncvars]; *)
+      (* Return[Replace[exp, x_Symbol :> Commutative[x], Infinity]]; *)
+      Return[exp];
+  ];
+  
+  EndCommuteEverything[] := Block[
+      {},
+      SetNonCommutative[$NCCommuteEverythingSymbols];
+      (* Print["ECE = ", $NCCommuteEverythingSymbols]; *)
+      $NCCommuteEverythingSymbols = {};
+  ];
+   
+  CommuteEverything[exp_] := BeginCommuteEverything[exp];
       
   (* tp *)
        

@@ -166,11 +166,14 @@ Begin["`Private`"];
   ];
 
   Simplifypivot[exp1_] := Module[
-    {exp = CommuteEverything[exp1]},        
+    {exp},        
 
+    exp = BeginCommuteEverything[exp1];
     exp = Together[exp];
     exp = Numerator[exp];
     exp = Expand[exp];
+    EndCommuteEverything[];
+      
     Return[exp];
   ];
   
