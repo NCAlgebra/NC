@@ -20,3 +20,6 @@ all: $(FILES)
 
 clean:
 	rm -f $(FILES)
+
+install:
+	mv $(FILES) ../../NCAlgebra/.

@@ -4,6 +4,7 @@ DIRS := NCSDP NCAlgebra
 # the sets of directories to do various things in
 BUILDDIRS = $(DIRS:%=build-%)
 CLEANDIRS = $(DIRS:%=clean-%)
+INSTALLDIRS = $(DIRS:%=install-%)
 
 all: $(BUILDDIRS)
 $(DIRS): $(BUILDDIRS)
@@ -15,6 +16,10 @@ clean: $(CLEANDIRS)
 
 $(CLEANDIRS):
 	$(MAKE) -C $(@:clean-%=%) clean
+
+install: $(INSTALLDIRS)
+$(INSTALLDIRS):
+	$(MAKE) -C $(@:install-%=%) install
 
 MANUAL = PREAMBLE/Preamble.md \
          PREAMBLE/Version50.md \
@@ -43,10 +48,6 @@ reference.pdf: $(MANUAL)
 	$(PDFLATEX) reference.tex
 	$(PDFLATEX) reference.tex
 	rm *.aux *.log *.toc *.out
-
-install:
-	mv $(FILES) ..
-
 
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
