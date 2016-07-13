@@ -63,7 +63,7 @@ calculating the numerical solution using [`SDPSolve`](#SDPSolve):
 
     {Y, X, S, flags} = SDPSolve[abc, rules];
 
-The variables `Y` and `S` are the *primal* solutions and `x` is the
+The variables `Y` and `S` are the *primal* solutions and `X` is the
 *dual* solution.
 
 An explicit symbolic dual problem can be calculated easily using [`NCSDPDual`](#NCSDPDual):

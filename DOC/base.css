@@ -18,7 +18,7 @@ hr { height: 1px; color: #aaa; background-color: #aaa; border: 0; margin: .2em 0
 
 h1.title { font-size: 24pt; }
 h2, h3, h4, h5, h6 { font-weight: normal; }
-h1 { font-size: 24pt; font-weight: normal; border-bottom: 1px solid black; }
+h1 { font-size: 24pt; font-weight: normal; border-bottom: 1px solid black; padding-bottom: 4pt }
 h2 { font-size: 18pt; }
 h3 { font-size: 16pt; }
 h4 h5 h6  { font-size: 14pt; }

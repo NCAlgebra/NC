@@ -38,7 +38,8 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCRealization.md \
 	 NCAlgebra/NCUtil.md \
          NCAlgebra/MatrixDecompositions.md \
-	 NCSDP/NCSDP.md
+	 NCSDP/NCSDP.md \
+	 NCSDP/SDP.md
 
 reference.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o reference.html --mathjax
