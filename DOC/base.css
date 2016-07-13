@@ -25,6 +25,7 @@ h4 h5 h6  { font-size: 14pt; }
 
 p { margin-left: 1em }
 /* code { margin-left: 3em } */
+pre { margin-left: 3em }
 
 ul { list-style-type: square; }
 dt { font-weight: bold; margin-bottom: .1em; }

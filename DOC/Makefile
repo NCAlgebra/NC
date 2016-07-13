@@ -41,7 +41,7 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCSDP/NCSDP.md
 
 reference.html: $(MANUAL)
-	pandoc $(MANUAL) -t html -N --toc --standalone --css base.css -o reference.html
+	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o reference.html --mathjax
 
 reference.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --standalone -o reference.tex

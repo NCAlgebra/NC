@@ -23,7 +23,10 @@ BeginPackage[ "NCSDP`",
 	      "NCMatMult`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCSDP];
+Clear[NCSDP,NCSDPDual,NCSDPForm,NCSDPDualForm];
+
+Get["NCSDP.usage"];
+
 NCSDP::errorInBlock = "Error in block # `1`.";
 NCSDP::invalidParameters = "Invalid parameter: `1`.";
 NCSDP::invalidData = "Problems substituting problem data `1`. Check expressions and dimension of the matrices.";
@@ -32,17 +35,7 @@ NCSDP::incompleteDimensions = "Incomplete dimensions.";
 NCSDP::costMismatch = "Dimension mismatch in objective function.";
 NCSDP::usage = "NCSDP[constraint, vars, obj, data] converts list 'constraint' of NC polynomials and NC polynomial matrix inequalities that are linear in the unknowns listed in 'vars' into the semidefinite program with linear objective 'obj':\n\n max  <obj, vars>  s.t.  constraints \[LessEqual] 0.\n\nNCSDP[constraint, vars, data] converts problem into a feasibility semidefinite program.\nNCSDP uses the user supplied 'data' to set up the problem data.";
 
-Clear[NCSDPDual];
-NCSDPDual::usage = "";
-
-Clear[NCSDPForm];
-NCSDPForm::usage = "";
-
-Clear[NCSDPDualForm];
-NCSDPDualForm::usage = "";
-
 Begin[ "`Private`" ]
-
 
   (* NCSDP auxiliary functions *)
 
