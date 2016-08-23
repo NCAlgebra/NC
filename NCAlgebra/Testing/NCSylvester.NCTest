@@ -297,12 +297,20 @@ Block[
     NCTest[p, answer];
     NCTest[NCPolynomialToNC[p], mat];
 
-    (* SDP Tests *)
-    vars = {x};
-    mat = a ** x + x ** tp[a] + 1;
-    {isSym, symList} = NCSymmetricTest[mat];
-    NCTest[isSym, True];
-    NCTest[symList, {x}];
+    Quiet[
+
+      (* SDP Tests *)
+      vars = {x};
+      mat = a ** x + x ** tp[a] + 1;
+      {isSym, symList} = NCSymmetricTest[mat];
+      NCTest[isSym, True];
+      NCTest[symList, {x}];
+
+      ,
+
+      NCSymmetricQ::SymmetricVariables
+
+    ];
     
     (*
     p = NCToNCPolynomial[mat, vars];

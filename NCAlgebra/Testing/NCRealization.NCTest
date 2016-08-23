@@ -27,8 +27,16 @@ Module[
 
   (* test 2 *)
   (* Print["----test 2 "]; *)
-  NCTest[Det[NCDeterminantalRepresentationReciprocal[1+x**y**y**x,{x,y}]],
-         CommuteEverything[1+x**y**y**x] /. Commutative[x_]->x, "Realization", k++];
+  Quiet[
+
+    NCTest[Det[NCDeterminantalRepresentationReciprocal[1+x**y**y**x,{x,y}]],
+	   CommuteEverything[1+x**y**y**x] /. Commutative[x_]->x, "Realization", k++];
+
+    ,
+
+    CommuteEverything::Warning
+
+  ];
       
   (* test 3 *)
   (* Print["----test 3 "]; *)

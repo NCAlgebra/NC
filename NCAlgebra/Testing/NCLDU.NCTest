@@ -9,104 +9,112 @@ Module[
 
   SNC[a,b,d,c,e,f,g,h,ii];
 
-  (*Tests 1 through 4 test the commands NCLDUDecompostion and NCAllPermutationLDU.
-  Test 3 show that it is possible to get a block diagonal matrix as output.
-  Test 4 shows that of the 3!2!=12 possible sequences of permutations that can be 
-  used in the factorization of that matrix, only four yield LDU decompostions.
-  Error messages appear for the eight that do not.*)
-  (* NOTE: TESTS 3 AND 4 ARE REMOVED AND ARE BELOW THE LOOPS AT THE END OF THIS FILE *)
+  Quiet[
 
-  mat={{a,b,c},{d,e,f},{g,h,ii}};
-  {lo,di,up,P}=NCLDUDecomposition[mat,Permutation->{{3,1,2},{1,3,2}}];   
-  NCTest[MatMult[lo,di,up], MatMult[P,mat,tpMat[P]], "NCLDU", k++];
+    (*Tests 1 through 4 test the commands NCLDUDecompostion and NCAllPermutationLDU.
+    Test 3 show that it is possible to get a block diagonal matrix as output.
+    Test 4 shows that of the 3!2!=12 possible sequences of permutations that can be 
+    used in the factorization of that matrix, only four yield LDU decompostions.
+    Error messages appear for the eight that do not.*)
+    (* NOTE: TESTS 3 AND 4 ARE REMOVED AND ARE BELOW THE LOOPS AT THE END OF THIS FILE *)
 
-  mat={{-(V+tp[V]),tp[V]**A**X,tp[V]},{tp[V]**A+X,-X,0},{V,0,-X}};
-  {lo,di,up,P}=NCLDUDecomposition[mat,Checkit->False,Permutation->{{2,3,1},{1,3,2}}];   
-  NCTest[MatMult[lo,di,up], MatMult[P,mat,tpMat[P]], "NCLDU", k++];
+    mat={{a,b,c},{d,e,f},{g,h,ii}};
+    {lo,di,up,P}=NCLDUDecomposition[mat,Permutation->{{3,1,2},{1,3,2}}];   
+    NCTest[MatMult[lo,di,up], MatMult[P,mat,tpMat[P]], "NCLDU", k++];
+
+    mat={{-(V+tp[V]),tp[V]**A**X,tp[V]},{tp[V]**A+X,-X,0},{V,0,-X}};
+    {lo,di,up,P}=NCLDUDecomposition[mat,Checkit->False,Permutation->{{2,3,1},{1,3,2}}];   
+    NCTest[MatMult[lo,di,up], MatMult[P,mat,tpMat[P]], "NCLDU", k++];
 
 
-  (*Tests 3 through 6 test commands related to matrix permutations*)
+    (*Tests 3 through 6 test commands related to matrix permutations*)
 
-  NCTest[NCLDUDecomposition`Private`NCMatrixToPermutation[NCLDUDecomposition`Private`NCPermutationMatrix[{3,1,5,2,4}]],
-         {3,1,5,2,4}, "NCLDU", k++];
+    NCTest[NCLDUDecomposition`Private`NCMatrixToPermutation[NCLDUDecomposition`Private`NCPermutationMatrix[{3,1,5,2,4}]],
+	   {3,1,5,2,4}, "NCLDU", k++];
 
-  NCTest[NCLDUDecomposition`Private`NCMatrixToPermutation[NCLDUDecomposition`Private`NCPermutationMatrix[{1,2,1}]],
-         {1,2,1}, "NCLDU", k++];
+    NCTest[NCLDUDecomposition`Private`NCMatrixToPermutation[NCLDUDecomposition`Private`NCPermutationMatrix[{1,2,1}]],
+	   {1,2,1}, "NCLDU", k++];
 
-  (*The permutation matrix commands don't seem to mind that I don't give them a
-  truly valid permutation matrix*)
+    (*The permutation matrix commands don't seem to mind that I don't give them a
+    truly valid permutation matrix*)
 
-  NCTest[NCLDUDecomposition`Private`CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,2,4,3}}], False, "NCLDU", k++];
+    NCTest[NCLDUDecomposition`Private`CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,2,4,3}}], False, "NCLDU", k++];
 
-  NCTest[NCLDUDecomposition`Private`CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,3,4,2}}], True, "NCLDU", k++];
+    NCTest[NCLDUDecomposition`Private`CheckPermutation[4,{{4,1,3,2},{1,3,2,4},{1,3,4,2}}], True, "NCLDU", k++];
 
-  (*Note: Rather counter-intuitively, if the list of permutations in
-          CheckPermutation is a valid one in terms of the LDU decomposition, 
-          then the command will return False. 
-          It returns True for an invalid list*)
+    (*Note: Rather counter-intuitively, if the list of permutations in
+	    CheckPermutation is a valid one in terms of the LDU decomposition, 
+	    then the command will return False. 
+	    It returns True for an invalid list*)
 
-  (**********************************)
-  (**********************************)
-  (**********************************)
-  (* THESE ARE THE OLD TEST 3 AND 4 *)
-  (**********************************)
-  (**********************************)
-  (**********************************)
-  m = {{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, 0, 1}, {0, 0, 1, 0}};
-  {lo, di, up, P, perms} = NCLDUDecomposition[m, ReturnPermutation -> True];
+    (**********************************)
+    (**********************************)
+    (**********************************)
+    (* THESE ARE THE OLD TEST 3 AND 4 *)
+    (**********************************)
+    (**********************************)
+    (**********************************)
+    m = {{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, 0, 1}, {0, 0, 1, 0}};
+    {lo, di, up, P, perms} = NCLDUDecomposition[m, ReturnPermutation -> True];
 
-  NCTest[{{{1,0,0,0},{c**inv[a],1,0,0},{0,0,1,0},{0,0,0,1}},
-          {{a,0,0,0},{0,d-c**inv[a]**b,0,0},{0,0,0,1},{0,0,1,0}},
-          {{1,inv[a]**b,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}},
-          {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}},
-          {{1,2,3,4},{1,2,3,4},{1,2,3,4}}}, 
-         {lo,di,up,P,perms}, "NCLDU", k++];
-  
-  (* THIS TEST SPITS OUT INF'S
-    
-  m = {{1, 1, 1}, {1, 0, 1}, {1, 1, 0}};
-  {{lo1, di1, up1, P1, perms1}, {lo2, di2, up2, P2, perms2}, 
-  {lo3, di3, up3, P3,perms3}, {lo4, di4, up4, P4, perms4}, allvalidperms} = 
-  NCAllPermutationLDU[m, StopAutoPermutation -> True,ReturnPermutation -> True];
-  NCTest[{{{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}}, 
-          {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}},
-          {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}},
-          {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
-          {{1, 2, 3}, {1, 2, 3}}}, 
-          {{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}}, 
-          {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}}, 
-          {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}}, 
-          {{1, 0, 0}, {0, 0, 1}, {0, 1, 0}}, 
-          {{1, 2, 3}, {1, 3, 2}}}, 
-          {{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}}, 
-          {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}},
-          {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}}, 
-          {{1, 0, 0}, {0, 0, 1}, {0, 1, 0}}, 
-          {{1, 3, 2}, {1, 2, 3}}}, 
-          {{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}},
-          {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}},
-          {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}}, 
-          {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
-          {{1, 3, 2}, {1, 3, 2}}}, 
-          {{{1, 2, 3}, {1, 2, 3}}, 
-          {{1, 2, 3}, {1, 3, 2}}, 
-          {{1, 3, 2}, {1, 2, 3}}, 
-          {{1, 3, 2}, {1, 3, 2}}}}, 
-         {{lo1, di1, up1, P1, perms1}, {lo2, di2, up2, P2, perms2}, 
-          {lo3, di3, up3, P3,perms3}, {lo4, di4, up4, P4, perms4},
-          allvalidperms}, "NCLDU", k++];
+    NCTest[{{{1,0,0,0},{c**inv[a],1,0,0},{0,0,1,0},{0,0,0,1}},
+	    {{a,0,0,0},{0,d-c**inv[a]**b,0,0},{0,0,0,1},{0,0,1,0}},
+	    {{1,inv[a]**b,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}},
+	    {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}},
+	    {{1,2,3,4},{1,2,3,4},{1,2,3,4}}}, 
+	   {lo,di,up,P,perms}, "NCLDU", k++];
 
-  *)
+    (* THIS TEST SPITS OUT INF'S
 
-  (* These tests are from NCMatMult *)
-  mat ={{a,b,c},{d,e,f},{g,h,i}};
-  {lower,diag,upper,P} = NCLDUDecomposition[mat, 
-                                            Permutation -> {{3,1,2},{1,3,2}}];
-  NCTest[MatMult[lower,diag,upper], MatMult[P ,mat , tpMat[P]], "NCLDU", k++];
+    m = {{1, 1, 1}, {1, 0, 1}, {1, 1, 0}};
+    {{lo1, di1, up1, P1, perms1}, {lo2, di2, up2, P2, perms2}, 
+    {lo3, di3, up3, P3,perms3}, {lo4, di4, up4, P4, perms4}, allvalidperms} = 
+    NCAllPermutationLDU[m, StopAutoPermutation -> True,ReturnPermutation -> True];
+    NCTest[{{{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}}, 
+	    {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}},
+	    {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}},
+	    {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+	    {{1, 2, 3}, {1, 2, 3}}}, 
+	    {{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}}, 
+	    {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}}, 
+	    {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}}, 
+	    {{1, 0, 0}, {0, 0, 1}, {0, 1, 0}}, 
+	    {{1, 2, 3}, {1, 3, 2}}}, 
+	    {{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}}, 
+	    {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}},
+	    {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}}, 
+	    {{1, 0, 0}, {0, 0, 1}, {0, 1, 0}}, 
+	    {{1, 3, 2}, {1, 2, 3}}}, 
+	    {{{1, 0, 0}, {1, 1, 0}, {1, 0, 1}},
+	    {{1, 0, 0}, {0, -1, 0}, {0, 0, -1}},
+	    {{1, 1, 1}, {0, 1, 0}, {0, 0, 1}}, 
+	    {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+	    {{1, 3, 2}, {1, 3, 2}}}, 
+	    {{{1, 2, 3}, {1, 2, 3}}, 
+	    {{1, 2, 3}, {1, 3, 2}}, 
+	    {{1, 3, 2}, {1, 2, 3}}, 
+	    {{1, 3, 2}, {1, 3, 2}}}}, 
+	   {{lo1, di1, up1, P1, perms1}, {lo2, di2, up2, P2, perms2}, 
+	    {lo3, di3, up3, P3,perms3}, {lo4, di4, up4, P4, perms4},
+	    allvalidperms}, "NCLDU", k++];
 
-  mat= {{-(V+tp[V]),  tp[V]**A+X, tp[V]},{tp[A]**V+X,-X,0},{V,0,-X}};
-  {lower,diag,upper,P} = NCLDUDecomposition[mat, 
-                           Checkit->False, Permutation->{{2,3,1},{1,3,2}}];
-  NCTest[MatMult[lower,diag,upper], MatMult[P, mat , tpMat[P]], "NCLDU", k++];
+    *)
+
+    (* These tests are from NCMatMult *)
+    mat ={{a,b,c},{d,e,f},{g,h,i}};
+    {lower,diag,upper,P} = NCLDUDecomposition[mat, 
+					      Permutation -> {{3,1,2},{1,3,2}}];
+    NCTest[MatMult[lower,diag,upper], MatMult[P ,mat , tpMat[P]], "NCLDU", k++];
+
+    mat= {{-(V+tp[V]),  tp[V]**A+X, tp[V]},{tp[A]**V+X,-X,0},{V,0,-X}};
+    {lower,diag,upper,P} = NCLDUDecomposition[mat, 
+			     Checkit->False, Permutation->{{2,3,1},{1,3,2}}];
+    NCTest[MatMult[lower,diag,upper], MatMult[P, mat , tpMat[P]], "NCLDU", k++];
+
+    ,
+
+    CommuteEverything::Warning
+
+  ];
 
 ];

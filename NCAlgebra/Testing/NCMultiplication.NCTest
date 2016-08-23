@@ -91,27 +91,34 @@ Block[
   answer = x**inv[1 + x + x**x];
   NCTest[ExpandNonCommutativeMultiply[exp], answer];
 
-  (* CommuteEverything *)
-  exp = x**(x+y);
-  answer = Commutative[x]^2 + Commutative[x] Commutative[y];
-  NCTest[Expand[CommuteEverything[exp]], answer];
+  Quiet[
 
-  exp = (x+y)**x;
-  answer = Commutative[x]^2 + Commutative[x] Commutative[y];
-  NCTest[Expand[CommuteEverything[exp]], answer];
+    (* CommuteEverything *)
+    exp = x**(x+y);
+    answer = Commutative[x]^2 + Commutative[x] Commutative[y];
+    NCTest[Expand[CommuteEverything[exp]], answer];
 
-  exp = x**(x+y)**x;
-  answer = Commutative[x]^3 + Commutative[x]^2 Commutative[y];
-  NCTest[Expand[CommuteEverything[exp]], answer];
+    exp = (x+y)**x;
+    answer = Commutative[x]^2 + Commutative[x] Commutative[y];
+    NCTest[Expand[CommuteEverything[exp]], answer];
 
-  exp = x**(x+y**(1+x)**y)**x;
-  answer = Commutative[x]^3 + Commutative[x]^2 Commutative[y]^2 
-           + Commutative[x]^3 Commutative[y]^2;
-  NCTest[Expand[CommuteEverything[exp]], answer];
+    exp = x**(x+y)**x;
+    answer = Commutative[x]^3 + Commutative[x]^2 Commutative[y];
+    NCTest[Expand[CommuteEverything[exp]], answer];
 
-  exp = x**inv[1 + x**(1 + x)];
-  answer = Commutative[x] / (1 + Commutative[x] + Commutative[x]^2);
-  NCTest[ExpandAll[CommuteEverything[exp]], answer];
+    exp = x**(x+y**(1+x)**y)**x;
+    answer = Commutative[x]^3 + Commutative[x]^2 Commutative[y]^2 
+	     + Commutative[x]^3 Commutative[y]^2;
+    NCTest[Expand[CommuteEverything[exp]], answer];
+
+    exp = x**inv[1 + x**(1 + x)];
+    answer = Commutative[x] / (1 + Commutative[x] + Commutative[x]^2);
+    NCTest[ExpandAll[CommuteEverything[exp]], answer];
+
+    ,
+
+    CommuteEverything::Warning
+  ];
 
   (* x[1] *)
   exp = NonCommutativeMultiply[x[1]];
