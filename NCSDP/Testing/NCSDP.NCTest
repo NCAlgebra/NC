@@ -13,6 +13,7 @@ Module[
     Ze,Zemn,Zexz,
     Idm,Zemm,Zenm,
     IdX,IdW,Zenpm,
+    Zepp, Zenp, Idpp,
     dF, dVars, dObj
     (* These must be global for COMPleib
     A,B1,B,C1,CC,D11,D12,D21,
@@ -209,7 +210,6 @@ Module[
   vars = {x, y, w};
   obj = {0, 0, -1};
 
-  << "COMPleib/MmaCOMPleib/AC3.m";
   data = {a -> A, b -> B, b1 -> B1};
   Idm=IdentityMatrix[nu];
   Zemm=ConstantArray[0,{nu,nu}];
@@ -248,7 +248,6 @@ Module[
   answer = {b1 ** tp[b1], {{0,0},{0,0}}};
   NCTest[dObj, answer];
 
-
   (* Test #6: Hoo control *)
 
   SNC[a, b, b1, c1, d12, x, y];
@@ -257,48 +256,41 @@ Module[
   vars = {x, y};
   obj = {};
 
-  << "COMPleib/MmaCOMPleib/AC3.m";
   data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
-
   {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
 
-  tmp = Map[NCSylvesterToNCPolynomial[NCSylvester[NCToNCPolynomial[#, vars]]]&, F];
-  Print["tmp = ", Normal[tmp]];
-
-tmp = {NCPolynomial[{{b1$4542 ** tp[b1$4542], 0}, {0, -1}}, {{x$4542} -> {{1, {{a$4542}, {c1$4542}}, {{1, 0}}}, {1, {{1}, {0}}, {{tp[a$4542], tp[c1$4542]}}}}, {y$4542} -> {{1, {{b$4542}, {d12$4542}}, {{1, 0}}}}}, {x$4542, y$4542}], NCPolynomial[0, {{x$4542} -> {{1, 1, -1}}}, {x$4542, y$4542}]}
-
+  Zepp=ConstantArray[0,{nz,nz}];
+  Zenp=ConstantArray[0,{nx,nz}];
   answer = {
-    {{A,2 Id},{B,2 Id},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
-    {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
+    {{ArrayFlatten[{{A},{C1}}], 2 ArrayFlatten[{{Id,Zenp}}]},
+     {ArrayFlatten[{{B},{D12}}], 2 ArrayFlatten[{{Id,Zenp}}]}},
+    {{Id,-Id},{Zenm, Ze}}
   };
   NCTest[abc[[1]], answer];
 
-  answer = {Ze, Zemn,-Idm};
+  answer = {Ze, Zemn};
   NCTest[abc[[2]], answer];
 
-  answer = { {{B1 ** Transpose[B1], 0}, {0, -1}} };
+  Idpp=IdentityMatrix[nz];
+  answer = { -ArrayFlatten[{{B1 . Transpose[B1], Zenp}, {Transpose[Zenp], -Idpp}}], Ze };
   NCTest[abc[[3]], answer];
 
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
   {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
- 
-  answer = {{{w1[1,1],tp[w1[2,1]]},{w1[2,1],w1[2,2]}}, w2};
-  NCTest[dVars, answer];
 
   answer = {-w2 + tp[a] ** w1[1,1] + w1[1,1] ** a
                 + tp[c1] ** w1[2,1] + tp[w1[2,1]] ** c1, 
             2 tp[b] ** w1[1,1] + 2 tp[d12] ** w1[2,1]};
   NCTest[dF, answer];
 
+  answer = {{{w1[1,1],tp[w1[2,1]]},{w1[2,1],w1[2,2]}}, w2};
+  NCTest[dVars, answer];
+
   answer = {{{b1 ** tp[b1],0},{0,-1}},0};
   NCTest[dObj, answer];
 
-
-];
-
-If[0,
   (* Test #7: Mixed H2/Hoo control *)
 
   SNC[a, b, b1, c1, d12, x, y, w];
@@ -308,10 +300,21 @@ If[0,
   vars = {x, y, w};
   obj = {0, 0, -1};
 
-  << "COMPleib/MmaCOMPleib/AC3.m";
-  data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
-
   {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+
+  answer = {
+    {{ArrayFlatten[{{A},{C1}}], 2 ArrayFlatten[{{Id,Zenp}}]},
+     {ArrayFlatten[{{B},{D12}}], 2 ArrayFlatten[{{Id,Zenp}}]},
+     {ConstantArray[0,{nx+nz,nu}], ConstantArray[0,{nu, nx+nz}]}},
+    {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}}
+  };
+  NCTest[abc[[1]], answer];
+
+  answer = {Ze, Zemn,-Idm};
+  NCTest[abc[[2]], answer];
+
+  answer = { -ArrayFlatten[{{B1 . Transpose[B1], Zenp}, {Transpose[Zenp], -Idpp}}], Zenpm};
+  NCTest[abc[[3]], answer];
 
   {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w", DebugLevel -> 0];
  
@@ -326,44 +329,5 @@ If[0,
 
   answer = {{{b1 ** tp[b1],0},{0,-1}},{{0,0},{0,0}}};
   NCTest[dObj, answer];
-
-];
-
-If[0,
-
-  (* Test #5: H2 control *)
-
-  SNC[a, b, b1, c1, d12, x, y, w];
-  F = {a ** x + b ** y + x ** tp[a] + tp[b ** y] + 
-       b1 ** tp[b1], -{{w, c1 ** x + d12 ** y}, {tp[c1 ** x + d12 ** y], 
-        x}}} /. tp[x] -> x;
-  vars = {x, y, w};
-  obj = {0, 0, -1};
-
-  << "COMPleib/MmaCOMPleib/AC3.m";
-  data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
-  Idm=IdentityMatrix[nu];
-  Zemm=ConstantArray[0,{nu,nu}];
-  Zenm=ConstantArray[0,{nx,nu}];
-  IdX=ArrayFlatten[{{Transpose[Zenm]},{Id}}];
-  IdW=ArrayFlatten[{{Idm},{Zenm}}];
-  Zenpm=ConstantArray[0,{nx+nu,nx+nu}];
-
-  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
-
-  answer = {
-    {{A,2 Id},{B,2 Id},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
-    {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
-  };
-  NCTest[abc[[1]], answer];
-
-  answer = {Ze, Zemn,-Idm};
-  NCTest[abc[[2]], answer];
-
-  answer = {-B1.Transpose[B1], Zenpm};
-  NCTest[abc[[3]], answer];
-
-  answer = SymmetricVariables->{1,3};
-  NCTest[rules, answer];
 
 ];
