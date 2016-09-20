@@ -20,13 +20,13 @@ Downloading
 
       git clone https://github.com/ncalgebra/NC
 
-This will create a directory NC which contains all files neeeded to
-run NCAlgebra in any platform.
+  This will create a directory NC which contains all files neeeded to
+  run NCAlgebra in any platform.
 
-* If you downloaded the NCAlgebra.zip file:
+* Or if you downloaded the NC.zip file from github:
 
-Use your favorite zip utility to unpack the file NCAlgebra.zip in your
-favorite location.
+  Use your favorite zip utility to unpack the file NCAlgebra.zip in
+  your favorite location.
 
 Installation
 ------------
