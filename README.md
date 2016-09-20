@@ -18,7 +18,9 @@ Downloading
 
 * You can clone the repository using git:
 
-      git clone https://github.com/ncalgebra/NC
+  ```
+  git clone https://github.com/ncalgebra/NC
+  ```
 
   This will create a directory NC which contains all files neeeded to
   run NCAlgebra in any platform.
