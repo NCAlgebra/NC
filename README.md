@@ -43,14 +43,14 @@ modify Mathematica's search path. You can do this in one of two ways:
 
 * If you are experienced with Mathematica: 
 
-Edit your `init.m` file to add the name of the directory which contains
-the `NC` folder to the Mathematica variable `$Path`.
+  Edit your `init.m` file to add the name of the directory which
+  contains the `NC` folder to the Mathematica variable `$Path`.
 
 * Or 
 
-You can use our `InstallNCAlgebra.nb` notebook to automagically set up
-the Mathematica's `$Path` variable. Open this notebook and follow the
-directions which are found there.
+  You can use our `InstallNCAlgebra.nb` notebook to automagically set
+  up the Mathematica's `$Path` variable. Open this notebook and follow
+  the directions which are found there.
 
 Running NCAlgebra
 -----------------
