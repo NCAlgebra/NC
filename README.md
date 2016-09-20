@@ -20,7 +20,7 @@ The latest stable experimental version is on github on the branch devel.
   git clone https://github.com/ncalgebra/NC
   ```
 
-  This will create a directory NC which contains all files neeeded to
+  This will create a directory `NC` which contains all files neeeded to
   run NCAlgebra in any platform.
 
 * Or if you downloaded a zip file from github:
@@ -32,7 +32,7 @@ The latest stable experimental version is on github on the branch devel.
 ## Installation
 
 All that is needed for NCAlgebra to run is that its top directory, the
-'NC' directory, be on Mathematica's search path. If you are on a unix
+`NC` directory, be on Mathematica's search path. If you are on a unix
 flavored machine (Solaris, Linux, Mac OSX) then unpacking or cloning
 in your home directory (`~`) is all you need to do. You may want to try
 to run NCAlgebra as explained in the next section to see if that
