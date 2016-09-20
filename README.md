@@ -1,5 +1,4 @@
-NCAlgebra
------------
+# NCAlgebra
 
 Thanks for your insterest in NCAlgebra.
 
@@ -13,8 +12,7 @@ Earlier versions can be downloaded from:
 
 The latest stable experimental version is on github on the branch devel.
 
-Downloading
------------
+## Downloading
 
 * You can clone the repository using git:
 
@@ -31,8 +29,7 @@ Downloading
   `NC-devel.zip` on your favorite location. Rename the top directory
   `NC`.
 
-Installation
-------------
+## Installation
 
 All that is needed for NCAlgebra to run is that its top directory, the
 'NC' directory, be on Mathematica's search path. If you are on a unix
@@ -55,8 +52,7 @@ modify Mathematica's search path. You can do this in one of two ways:
   up the Mathematica's `$Path` variable. Open this notebook and follow
   the directions which are found there.
 
-Running NCAlgebra
------------------
+## Running NCAlgebra
 
 In Mathematica (notebook or text interface), type
 
@@ -80,19 +76,16 @@ to load NCAlgebra, or
 
 to load NCAlgebra and NCGB.
 
+## Now what?
 
-Now what?
---------
-
-Extensive documentation is found in the directory DOCUMENTATION.
+Extensive documentation is found in the directory `DOCUMENTATION`.
 
 You may want to try some of the several demo files in the directory
 DEMOS after you install NCAlgebra.
 
 You can also run some tests to see if things are working fine.
 
-Testing
--------
+## Testing
 
 Type 
 
@@ -105,8 +98,7 @@ to test NCAlgebra. Type
 to test NCGB. We recommend that you restart the kernel before and
 after running each test set.
 
-Reporting Bugs
---------------
+## Reporting Bugs
 
 Please report any bug or your extraordinarily pleasant experience with
 NCAlgebra by email
