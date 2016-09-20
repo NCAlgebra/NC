@@ -18,7 +18,7 @@ Downloading
 
 * You can clone the repository using git:
 
-    git clone https://github.com/ncalgebra/NC
+      git clone https://github.com/ncalgebra/NC
 
 This will create a directory NC which contains all files neeeded to
 run NCAlgebra in any platform.
@@ -34,7 +34,7 @@ Installation
 All that is needed for NCAlgebra to run is that its top directory, the
 'NC' directory, be on Mathematica's search path. If you are on a unix
 flavored machine (Solaris, Linux, Mac OSX) then unpacking or cloning
-in your home directory (~) is all you need to do. You may want to try
+in your home directory (`~`) is all you need to do. You may want to try
 to run NCAlgebra as explained in the next section to see if that
 works.
 
@@ -53,7 +53,7 @@ the Mathematica's `$Path` variable. Open this notebook and follow the
 directions which are found there.
 
 Running NCAlgebra
-------- ---------
+-----------------
 
 In Mathematica (notebook or text interface), type
 
@@ -69,7 +69,7 @@ like:
 
 Just type 
 
-   << NCAlgebra`
+    << NCAlgebra`
 
 to load NCAlgebra, or
 
@@ -79,7 +79,7 @@ to load NCAlgebra and NCGB.
 
 
 Now what?
---- ----
+--------
 
 Extensive documentation is found in the directory DOCUMENTATION.
 
@@ -103,12 +103,12 @@ to test NCGB. We recommend that you restart the kernel before and
 after running each test set.
 
 Reporting Bugs
---------- ----
+--------------
 
 Please report any bug or your extraordinarily pleasant experience with
 NCAlgebra by email
 
-  ncalg@math.ucsd.edu
+ncalg@math.ucsd.edu
 
 Thanks,
 
