@@ -4,11 +4,11 @@ Thanks for your insterest in NCAlgebra.
 
 The latest release of NCAlgebra can be downloaded from:
 
-    https://github.com/ncalgebra/NC/releases
+https://github.com/ncalgebra/NC/releases
 
 Earlier versions can be downloaded from:
 
-    www.math.ucsd.edu/~ncalg
+www.math.ucsd.edu/~ncalg
 
 The latest stable experimental version is on github on the branch devel.
 
