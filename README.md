@@ -25,10 +25,11 @@ Downloading
   This will create a directory NC which contains all files neeeded to
   run NCAlgebra in any platform.
 
-* Or if you downloaded the NC-master.zip file from github:
+* Or if you downloaded a zip file from github:
 
-  Use your favorite zip utility to unpack the file NC-master.zip in
-  your favorite location. Rename the top directory `NC`.
+  Use your favorite zip utility to unpack the file `NC-master.zip` or
+  `NC-devel.zip` on your favorite location. Rename the top directory
+  `NC`.
 
 Installation
 ------------
