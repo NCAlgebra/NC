@@ -1,4 +1,4 @@
-# NCAlgebra Version 5.0
+# NCAlgebra - Version 5.0
 
 Thanks for your interest in NCAlgebra. The latest version of NCAlgebra
 can be downloaded from:
