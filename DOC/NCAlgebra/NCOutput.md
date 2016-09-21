@@ -1,6 +1,6 @@
 # NCOutput {#PackageNCOutput}
 
-**NCOutput** is a package that can be used to beautify the display of noncommutative expressions. NCOutput does not alter the internal representation of nc expressions, just the way they are displayed on the screen.
+**NCOutput** is a package that can be used to beautify the display of noncommutative expressions. NCOutput does not alter the internal representation of NC expressions, just the way they are displayed on the screen.
 
 Members are:
 

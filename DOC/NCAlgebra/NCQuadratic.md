@@ -12,45 +12,35 @@ Members are:
 ## NCQuadratic {#NCQuadratic}
 `NCQuadratic[p]` gives an expanded representation for the quadratic `NCPolynomial` `p`.
 
-`NCQuadratic` returns a list with the coefficients of the linear polynomial `p` where
+`NCQuadratic` returns a list with four elements:
 
-- the first element is a the independent term,
-- the remaining elements are lists with four elements:
-
-  - the first element is a list of right nc symbols;
-	- the second element is a list of right nc symbols;
-	- the third element is a numeric array;
-	- the fourth element is a variable.
+* the first element is the independent term;
+* the second represents the linear part as in [`NCSylvester`](#NCSylvester);
+* the third element is a list of left NC symbols;
+* the fourth element is a numeric `SparseArray`;
+* the fifth element is a list of right NC symbols.
 
 Example:
 
-    p = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-	  NCQuadratic[exp,x]
+   exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
+   vars = {x,y};
+   p = NCToNCPolynomial[exp, vars];
+   {m0,sylv,l,m,r} = NCQuadratic[p];
 
 produces
 
-    {2, {left1,right1,array1,var1}, {left2,right2,array2,var2}}
-
-where
-
-    left1 = {a,c}
-    right1 = {b,d}
-    array1 = {{1,0},{0,1}}
-    var1 = x
-
-and
-
-    left1 = {1}
-    right1 = {1}
-    array1 = {{1}}
-    var1 = y
+   {d, <|x->{{1},{1},SparseArray[{{1}}]}, y->{{},{},{}}|>,
+       {x,d**y}, SparseArray[{{1+a+e,b},{0,c}}], {x,y**d}}
 
 See also:
-[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
+[NCSylvester](#NCSylvester),[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
 
 ## NCQuadraticMakeSymmetric {#NCQuadraticMakeSymmetric}
 
-`NCQuadraticMakeSymmetric[q]`.
+`NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]` takes the output of [`NCQuadratic`](#NCQuadratic) and produces, if possible, an equivalent symmetric representation in which `Map[tp, left] = right` and `middle` is a symmetric matrix.
+
+See also:
+[NCQuadratic](#NCQuadratic).
 
 ## NCMatrixOfQuadratic {#NCMatrixOfQuadratic}
 

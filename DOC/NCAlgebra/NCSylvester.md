@@ -11,12 +11,14 @@ Members are:
 
 `NCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
 
-`NCSylvester` returns a list with the coefficients of the linear polynomial `p` where the first element is a the independent term, and the remaining elements are lists with four elements:
+`NCSylvester` returns a list with two elements:
 
-* the first element is a list of right nc symbols;
-* the second element is a list of right nc symbols;
-* the third element is a numeric array;
-* the fourth element is a variable.
+* the first is a the independent term;
+* the second is an association where each key is one of the variables and each value is a list with three elements:
+
+  * the first element is a list of left NC symbols;
+  * the second element is a list of right NC symbols;
+  * the third element is a numeric `SparseArray`.
 
 Example:
 
@@ -25,20 +27,8 @@ Example:
 
 produces
 
-    {2, {left1,right1,array1,var1}, {left2,right2,array2,var2}}
-
-where
-
-    left1 = {a,c}
-    right1 = {b,d}
-    array1 = {{1,0},{0,1}}
-    var1 = x
-and
-
-    left2 = {1}
-    right2 = {1}
-    array2 = {{1}}
-    var2 = y
+    {2, <|x->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]}, 
+	      y->{{1},{1},SparseArray[{{1}}]}|>}
 
 See also:
 [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial), [NCPolynomial](#NCPolynomial).
