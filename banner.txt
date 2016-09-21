@@ -1,6 +1,6 @@
 ------------------------------------------------------------
-NCAlgebra - Version 4.0.7
-Compatible with Mathematica Version 9
+NCAlgebra - Version 5.0
+Compatible with Mathematica Version 10
 
 Authors:
   J. William Helton*
@@ -8,13 +8,14 @@ Authors:
   Mark Stankus* 
   Robert L. Miller#
 
-* Math Dept, UCSD                
+* Math Dept, UCSD
 # General Atomics Corp
   La  Jolla, CA 92093
 
 Copyright: 
   Helton and Miller June 1991
   Helton 2002
+  Helton and de Oliveira 2016
   All rights reserved.
 
 The program was written by the authors and by:
@@ -23,7 +24,6 @@ The program was written by the authors and by:
   J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple. 
   The beginnings of the program come from eran@slac.
   Considerable recent help came from Igor Klep.
-
 
 This program was written with support from 
   AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
