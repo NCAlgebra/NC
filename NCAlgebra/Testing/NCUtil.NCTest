@@ -103,6 +103,19 @@ Block[
   NCTest[NCGrabFunctions[expr, inv], {inv[1+inv[x**tp[y]+b]], 
                                       inv[x**tp[y]+b]}];
 
+  NCTest[NCGrabFunctions[expr], {aj[x], inv[1+inv[x**tp[y]+b]],
+                                 inv[x**tp[y]+b], tp[y]}];
+
+  expr = a aj[x]**y-inv[1-inv[x**tp[y]-b]];
+  NCTest[NCGrabFunctions[expr], {aj[x], inv[1-inv[x**tp[y]-b]],
+                                 inv[x**tp[y]-b], tp[y]}];
+
+  expr = { y**inv[x]**y + tp[inv[x+y]], 3 + 4 inv[y]**b**inv[y] + x };
+  NCTest[NCGrabFunctions[expr], {inv[x], inv[y], inv[tp[x]+tp[y]], tp[x], tp[y]}];
+
+  NCTest[NCGrabIndeterminants[expr],
+         {b, x, y, inv[x], inv[y], inv[tp[x]+tp[y]], tp[x], tp[y]}];
+
   (* NCConsolidateList *)
   {list,index} = NCConsolidateList[{3,1,2,3}];
   NCTest[list, {3,1,2}];

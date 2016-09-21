@@ -12,6 +12,7 @@ tests = {
   "CommutativeQ",
   "NCMultiplication",
   "NCUtil",
+  "NCDeprecated",
   "NCSymmetric",
   "NCSelfAdjoint",
   "NCReplace",

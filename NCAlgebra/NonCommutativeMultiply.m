@@ -158,9 +158,9 @@ Begin[ "`Private`" ]
   (* CommuteEverything *)
   Clear[$NCCommuteEverythingSymbols];
   $NCCommuteEverythingSymbols = {};
-  BeginCommuteEverything[exp_] := Block[
+  BeginCommuteEverything[expr_] := Block[
       {ncvars},
-      ncvars = Cases[NCGrabSymbols[exp], Except[_?CommutativeQ]];
+      ncvars = Cases[NCGrabSymbols[expr], Except[_?CommutativeQ]];
       If[ncvars != {},
         Message[CommuteEverything::Warning, 
                 ToString[First[ncvars]] <>
@@ -169,8 +169,8 @@ Begin[ "`Private`" ]
       $NCCommuteEverythingSymbols = Join[$NCCommuteEverythingSymbols, ncvars];
       SetCommutative[ncvars];
       (* Print["ncvars = ", ncvars]; *)
-      (* Return[Replace[exp, x_Symbol :> Commutative[x], Infinity]]; *)
-      Return[exp];
+      (* Return[Replace[expr, x_Symbol :> Commutative[x], Infinity]]; *)
+      Return[expr];
   ];
   
   EndCommuteEverything[] := Block[
@@ -180,7 +180,7 @@ Begin[ "`Private`" ]
       $NCCommuteEverythingSymbols = {};
   ];
    
-  CommuteEverything[exp_] := BeginCommuteEverything[exp];
+  CommuteEverything[expr_] := BeginCommuteEverything[expr];
       
   (* tp *)
        

@@ -23,3 +23,4 @@ If [ !ValueQ[$NC$Algebra$Loaded],
 << NCSimplifyRational`
 << NCOutput`
 << NCAlias`
+<< NCDeprecated`

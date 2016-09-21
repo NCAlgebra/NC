@@ -1,0 +1,85 @@
+<< NCDeprecated`
+
+Block[
+  {k,test,expr,tmp,a,b,c,d,x,y,z,list,index},
+
+  SetCommutative[a,b,c,d];
+  SetNonCommutative[x,y,z];
+
+  rule = a**b -> c;
+  expr = a**b + a**b**c + d**a**b + d**a**b**c;
+  answer = c + c**c + d**c + d**c**c;
+
+  Quiet[
+    Check[
+      tmp = Transform[expr, rule];
+      ,
+      NCTest[tmp, NCReplaceRepeated[expr,rule]];
+      ,
+      NCDeprecated::Going
+    ];
+    ,
+    NCDeprecated::Going
+  ];
+
+  Quiet[
+    Check[
+      tmp = Substitute[expr, rule];
+      ,
+      NCTest[tmp, NCReplaceRepeated[expr,rule]];
+      ,
+      NCDeprecated::Going
+    ];
+    ,
+    NCDeprecated::Going
+  ];
+
+  Quiet[
+    Check[
+      tmp = SubstituteSingleReplace[expr, rule];
+      ,
+      NCTest[tmp, NCReplaceAll[expr,rule]];
+      ,
+      NCDeprecated::Going
+    ];
+    ,
+    NCDeprecated::Going
+  ];
+
+  Quiet[
+    Check[
+      tmp = SubstituteAll[expr, rule];
+      ,
+      NCTest[tmp, $Failed];
+      ,
+      NCDeprecated::Gone
+    ];
+    ,
+    NCDeprecated::Gone
+  ];
+
+  Quiet[
+    Check[
+      tmp = GrabIndeterminants[expr];
+      ,
+      NCTest[tmp, NCGrabIndeterminants[expr]];
+      ,
+      NCDeprecated::Going
+    ];
+    ,
+    NCDeprecated::Going
+  ];
+
+  Quiet[
+    Check[
+      tmp = GrabVariables[expr];
+      ,
+      NCTest[tmp, NCGrabSymbols[expr]];
+      ,
+      NCDeprecated::Going
+    ];
+    ,
+    NCDeprecated::Going
+  ];
+
+];
