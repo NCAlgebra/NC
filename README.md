@@ -4,20 +4,20 @@ Thanks for your insterest in NCAlgebra.
 
 The latest release of NCAlgebra can be downloaded from:
 
-https://github.com/ncalgebra/NC/releases
+https://github.com/NCAlgebra/NC/releases
 
 Earlier versions can be downloaded from:
 
 www.math.ucsd.edu/~ncalg
 
-The latest stable experimental version is on github on the branch devel.
+The latest stable experimental version is on github on the branch *devel*.
 
 ## Downloading
 
 * You can clone the repository using git:
 
   ```
-  git clone https://github.com/ncalgebra/NC
+  git clone https://github.com/NCAlgebra/NC
   ```
 
   This will create a directory `NC` which contains all files neeeded to
