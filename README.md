@@ -1,33 +1,46 @@
 # NCAlgebra
 
-Thanks for your insterest in NCAlgebra.
+Thanks for your interest in NCAlgebra.
 
-The latest release of NCAlgebra can be downloaded from:
+The latest version of NCAlgebra can be downloaded from:
 
-https://github.com/NCAlgebra/NC/releases
-
-Earlier versions can be downloaded from:
-
-www.math.ucsd.edu/~ncalg
-
-The latest stable experimental version is on github on the branch *devel*.
+https://github.com/NCAlgebra/NC
 
 ## Downloading
 
-* You can clone the repository using git:
+You can download NCAlgebra in one of the following ways.
 
-  ```
-  git clone https://github.com/NCAlgebra/NC
-  ```
+### Clone
 
-  This will create a directory `NC` which contains all files neeeded to
-  run NCAlgebra in any platform.
+You can clone the repository using git:
 
-* Or if you downloaded a zip file from github:
+    git clone https://github.com/NCAlgebra/NC
 
-  Use your favorite zip utility to unpack the file `NC-master.zip` or
-  `NC-devel.zip` on your favorite location. Rename the top directory
-  `NC`.
+This will create a directory `NC` which contains all files neeeded to
+run NCAlgebra in any platform.
+
+If you want to try the latest *experimental* version switch to branch
+*devel* using:
+
+    git checkout devel
+
+### Downloading
+
+After you downloaded a zip file from github use your favorite zip
+utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
+favorite location.
+
+**IMPORTANT:** Rename the top directory `NC`!
+
+### Releases
+
+Releases are stable snapshots that you can find at
+
+https://github.com/NCAlgebra/NC/releases
+
+Earlier releases can be downloaded from:
+
+www.math.ucsd.edu/~ncalg
 
 ## Installation
 
