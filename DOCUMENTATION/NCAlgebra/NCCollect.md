@@ -108,11 +108,11 @@ See also:
 
 For example,
 
-    NCTermsOfDegree[x**y**x + x**w,{x,y},{2,1}}]
+    NCTermsOfDegree[x**y**x + x**w,{x,y},{2,1}]
 
 returns `x**y**x` and
 
-    NCTermsOfDegree[x**y**x + x**w,{x,y},{1,0}}]
+    NCTermsOfDegree[x**y**x + x**w,{x,y},{1,0}]
 
 return `x**w`. It returns 0 otherwise.
 

@@ -25,7 +25,11 @@ $(INSTALLDIRS):
 	$(MAKE) -C $(@:install-%=%) install
 
 MANUAL = PREAMBLE/Preamble.md \
-         PREAMBLE/Version50.md \
+	 PREAMBLE/Version50.md \
+         PREAMBLE/Running.md \
+         PREAMBLE/Basic.md \
+         PREAMBLE/Things.md \
+         PREAMBLE/Reference.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \
 	 NCAlgebra/NCSimplifyRational.md \
@@ -49,7 +53,10 @@ NCAlgebra.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCAlgebra.html --mathjax
 
 NCAlgebra.pdf: $(MANUAL)
-	$(PANDOC) $(MANUAL) -t latex -N --toc --standalone -o NCAlgebra.tex
+	$(PANDOC) $(MANUAL) -t latex -N --toc --standalone \
+             --variable=geometry:margin=1in \
+             --variable=documentclass:book \
+	     -o NCAlgebra.tex
 	$(PDFLATEX) NCAlgebra.tex
 	$(PDFLATEX) NCAlgebra.tex
 	$(PDFLATEX) NCAlgebra.tex

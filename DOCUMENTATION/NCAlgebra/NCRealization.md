@@ -116,8 +116,8 @@ With optional argument `ReturnWordList->False`, the output is `{Matrix,ListOfWor
 Optional argument `Verbose->True`, prints information as it's working.
 
 ## NCFormLettersFromPencil {#NCFormLettersFromPencil}
-`NCFormLettersFromPencil[A_List,B_]`. Given a realization `C.A^(-1).B`,
- where `A = A0 + A1*x1 + A2*x2 +...+An*xn`, this returns the list `{ A0^(-1).A1, A0^(-1).A2,...,A0^(-1).An,A0^(-1).B}`. These are the letters that are used when finding the controllability and observability spaces.
+`NCFormLettersFromPencil[A_List,B_]`. Given a realization $C.A^{-1}.B$,
+ where `A = A0 + A1*x1 + A2*x2 +...+An*xn`, this returns the list `{ inv[A0].A1, inv[A0].A2,...,inv[A0].An,inv[A0].B}`. These are the letters that are used when finding the controllability and observability spaces.
 
 ## NCLinearPart {#NCLinearPart}
 `NCLinearPart[RationalExpression,UnknownVariables]` returns the part of `RationalExpression` that is linear in (a list of) `UnknownVariables`.
@@ -176,8 +176,7 @@ For example, `NCListToPencil[{A0,A1,A2},{1,x,y}]` is `A0 + A1**x + A2**y`.
 
 ## TestDescriptorRealization {#TestDescriptorRealization}
 
-`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat == C.G^(-1).B`
- by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
+`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals $C G^{-1} B$ by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
 
 ## UseFloatingPoint {#UseFloatingPoint}
 

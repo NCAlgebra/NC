@@ -1,5 +1,6 @@
-# Introduction {#Introduction}
+% The NCAlgebra Suite
+% John W. Helton
+  Mauricio C. de Oliveira
+% September, 2016
 
-Each section describes a `Package` inside *NCAlgebra*.
-
-Packages are automatically loaded unless otherwise noted.
+\part{User Guide}
