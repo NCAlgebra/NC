@@ -1,2 +1,0 @@
-
-NotebookOpen["NCAlgebra/NCPalette.nb"]
