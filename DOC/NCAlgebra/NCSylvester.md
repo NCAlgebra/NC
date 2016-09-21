@@ -23,12 +23,13 @@ Members are:
 Example:
 
     p = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-    NCSylvester[exp,x]
+    {p0,sylv} = NCSylvester[p,x]
 
 produces
 
-    {2, <|x->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]}, 
-	      y->{{1},{1},SparseArray[{{1}}]}|>}
+    p0 = 2
+	sylv = <|x->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]}, 
+   	         y->{{1},{1},SparseArray[{{1}}]}|>
 
 See also:
 [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial), [NCPolynomial](#NCPolynomial).
