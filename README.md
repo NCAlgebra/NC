@@ -24,6 +24,9 @@ version switch to branch *devel* using:
 
     git checkout devel
 
+If you're happy with the latest stable release you do not need to
+do anything.
+
 ### Download
 
 After you downloaded a zip file from github use your favorite zip
