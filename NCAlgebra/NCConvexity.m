@@ -23,29 +23,19 @@ BeginPackage["NCConvexity`",
              "NCQuadratic`",
 	     "NCSimplifyRational`",
              "NCDiff`",
+             "NCUtil`",
              "NCMatMult`"];
 
-Clear[NCHessianOld];
-
-NCHessianOld::usage=
-     "NCHessian[] computes the Hessian
-of a function of noncommutting variables and coefficients.
-The Hessian recall is the second derivative.
-Here we are computing the noncommutative directional derivative of a 
-noncommutative function."
-
-Clear[NCMatrixOfQuadraticOld];
-
-NCMatrixOfQuadraticOld::usage=
-	"NCMatrixOfQuadraticOld[]
-	gives a vector matrix factorization of a symmetric quadratic
-	function in noncommutative variables and their transposes."
-      
 Clear[NCConvexityRegion];
 
-NCConvexityRegion::usage=
-      "NCConvexityRegion is a function which can be used to determine where
-	a noncommutative function is convex."
+Get["NCConvexity.usage"];
+
+Options[NCConvexityRegion] = 
+       {NCSimplifyDiagonal -> False, DiagonalSelection -> False,
+        ReturnPermutation -> False, ReturnBorderVector -> False,
+        AllPermutation -> False };
+       
+Begin["`Private`"];
 
 Clear[NCIndependenceCheck];
 
@@ -61,22 +51,8 @@ NCBorderVectorGather::usage=
 the polynomial coefficents preceeding the elements given in a 
 variable list whenever they occur in the list."
    
-
-Options[NCConvexityRegion] = 
-       {NCSimplifyDiagonal -> False, DiagonalSelection -> False,
-        ReturnPermutation -> False, ReturnBorderVector -> False,
-        AllPermutation -> False };
-       
- 
-Begin["`Private`"];
-
 (* BEGIN MAURICIO MAR 2016 *)
-  NCGrabSymbols[exp_] := Union[Cases[exp, _Symbol, Infinity]];
-  NCGrabSymbols[exp_, pattern_] := 
-    Union[Cases[exp, (pattern)[_Symbol], Infinity]];
-  
   Diag[x_] := Tr[x, List];
-  
 (* END MAURICIO MAR 2016 *)
 
 (* list should be in form {x1,x2,...,xn}  *)
