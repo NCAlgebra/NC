@@ -12,6 +12,7 @@ FILES = NonCommutativeMultiply.usage \
 	NCPolynomial.usage \
 	NCSylvester.usage \
 	NCQuadratic.usage \
+	NCConvexity.usage \
 	NCRealization.usage \
 	NCUtil.usage \
         MatrixDecompositions.usage

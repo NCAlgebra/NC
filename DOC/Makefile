@@ -35,6 +35,7 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCPolynomial.md \
 	 NCAlgebra/NCSylvester.md \
 	 NCAlgebra/NCQuadratic.md \
+	 NCAlgebra/NCConvexity.md \
 	 NCAlgebra/NCRealization.md \
 	 NCAlgebra/NCUtil.md \
          NCAlgebra/MatrixDecompositions.md \
