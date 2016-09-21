@@ -22,15 +22,15 @@ Members are:
 
 Example:
 
-   exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
-   vars = {x,y};
-   p = NCToNCPolynomial[exp, vars];
-   {m0,sylv,l,m,r} = NCQuadratic[p];
+    exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
+    vars = {x,y};
+    p = NCToNCPolynomial[exp, vars];
+    {m0,sylv,l,m,r} = NCQuadratic[p];
 
 produces
 
-   {d, <|x->{{1},{1},SparseArray[{{1}}]}, y->{{},{},{}}|>,
-       {x,d**y}, SparseArray[{{1+a+e,b},{0,c}}], {x,y**d}}
+    {d, <|x->{{1},{1},SparseArray[{{1}}]}, y->{{},{},{}}|>,
+        {x,d**y}, SparseArray[{{1+a+e,b},{0,c}}], {x,y**d}}
 
 See also:
 [NCSylvester](#NCSylvester),[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
