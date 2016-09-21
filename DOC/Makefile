@@ -12,7 +12,10 @@ $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
 
 clean: $(CLEANDIRS)
-	rm -f reference.tex reference.html reference.pdf
+	rm -f NCAlgebra.tex
+
+wipe: clean
+	rm -f NCAlgebra.html NCAlgebra.pdf
 
 $(CLEANDIRS):
 	$(MAKE) -C $(@:clean-%=%) clean
@@ -42,13 +45,14 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md
 
-reference.html: $(MANUAL)
-	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o reference.html --mathjax
+NCAlgebra.html: $(MANUAL)
+	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCAlgebra.html --mathjax
 
-reference.pdf: $(MANUAL)
-	$(PANDOC) $(MANUAL) -t latex -N --toc --standalone -o reference.tex
-	$(PDFLATEX) reference.tex
-	$(PDFLATEX) reference.tex
+NCAlgebra.pdf: $(MANUAL)
+	$(PANDOC) $(MANUAL) -t latex -N --toc --standalone -o NCAlgebra.tex
+	$(PDFLATEX) NCAlgebra.tex
+	$(PDFLATEX) NCAlgebra.tex
+	$(PDFLATEX) NCAlgebra.tex
 	rm *.aux *.log *.toc *.out
 
 .PHONY: subdirs $(DIRS)
