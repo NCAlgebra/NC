@@ -16,6 +16,8 @@ Members are:
 * [SetNonCommutative](#SetNonCommutative)
 * [Commutative](#Commutative)
 * [CommuteEverything](#CommuteEverything)
+* [BeginCommuteEverything](#BeginCommuteEverything)
+* [EndCommuteEverything](#EndCommuteEverything)
 * [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
 
 ## aj {#aj}
@@ -79,6 +81,13 @@ See also:
 See also:
 [SetCommutative](#SetCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
 
+## Commutative {#Commutative}
+
+`Commutative[symbol]` is commutative even if `symbol` is noncommutative.
+
+See also:
+[CommuteEverything](#CommuteEverything), [CommutativeQ](#CommutativeQ), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
+
 ## CommuteEverything {#CommuteEverything}
 
 `CommuteEverything[expr]` is an alias for [BeginCommuteEverything](#BeginCommuteEverything).
@@ -90,19 +99,19 @@ See also:
 
 `BeginCommuteEverything[expr]` sets all symbols appearing in `expr` as commutative so that the resulting expression contains only commutative products or inverses. It issues messages warning about which symbols have been affected.
 
-`BeginCommuteEverything` answers the question *what does it sound like?*
-
 `EndCommuteEverything[]` restores the symbols noncommutative behaviour.
+
+`BeginCommuteEverything` answers the question *what does it sound like?*
 
 See also:
 [EndCommuteEverything](#EndCommuteEverythning), [Commutative](#Commutative).
 
-## Commutative {#Commutative}
+## EndCommuteEverything {#EndCommuteEverything}
 
-`Commutative[symbol]` is commutative even if `symbol` is noncommutative.
+`EndCommuteEverything[expr]` restores noncommutative behaviour to symbols affected by `BeginCommuteEverything`.
 
 See also:
-[CommuteEverything](#CommuteEverything), [CommutativeQ](#CommutativeQ), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
+[BeginCommuteEverything](#BeginCommuteEverythning), [Commutative](#Commutative).
 
 ## ExpandNonCommutativeMultiply {#ExpandNonCommutativeMultiply}
 
