@@ -81,12 +81,21 @@ See also:
 
 ## CommuteEverything {#CommuteEverything}
 
-`CommuteEverything` answers the question "what does it sound like?".
-
-`CommuteEverything[expr]` replaces all noncommutative symbols in  `expr` by its commutative self using `Commutative` so that the resulting expression contains only commutative products or inverses.
+`CommuteEverything[expr]` is an alias for [BeginCommuteEverything](#BeginCommuteEverything).
 
 See also:
-[Commutative](#Commutative).
+[BeginCommuteEverything](#BeginCommuteEverything), [Commutative](#Commutative).
+
+## BeginCommuteEverything {#BeginCommuteEverything}
+
+`BeginCommuteEverything[expr]` sets all symbols appearing in `expr` as commutative so that the resulting expression contains only commutative products or inverses. It issues messages warning about which symbols have been affected.
+
+`BeginCommuteEverything` answers the question *what does it sound like?*
+
+`EndCommuteEverything[]` restores the symbols noncommutative behaviour.
+
+See also:
+[EndCommuteEverything](#EndCommuteEverythning), [Commutative](#Commutative).
 
 ## Commutative {#Commutative}
 
