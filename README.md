@@ -1,8 +1,7 @@
 # NCAlgebra
 
-Thanks for your interest in NCAlgebra.
-
-The latest version of NCAlgebra can be downloaded from:
+Thanks for your interest in NCAlgebra. The latest version of NCAlgebra
+can be downloaded from:
 
 https://github.com/NCAlgebra/NC
 
@@ -19,12 +18,13 @@ You can clone the repository using git:
 This will create a directory `NC` which contains all files neeeded to
 run NCAlgebra in any platform.
 
-If you want to try the latest *experimental* version switch to branch
-*devel* using:
+Cloning allows you to easily upgrade and switch between the various
+available releases. If you want to try the latest *experimental*
+version switch to branch *devel* using:
 
     git checkout devel
 
-### Downloading
+### Download
 
 After you downloaded a zip file from github use your favorite zip
 utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
@@ -54,16 +54,15 @@ works.
 If you want to put the files someplace else, all you need to do is to
 modify Mathematica's search path. You can do this in one of two ways:
 
-* If you are experienced with Mathematica: 
+* Use our installation notebook: 
 
-  Edit your `init.m` file to add the name of the directory which
-  contains the `NC` folder to the Mathematica variable `$Path`.
+  You can use our `InstallNCAlgebra.nb` notebook to automagically set up the Mathematica's `$Path` variable. Navigate to the directory `DEMOS` inside the `NC` directory, open this notebook and follow the directions which are found there.
 
-* Or 
+* or, if you are experienced with Mathematica: 
 
-  You can use our `InstallNCAlgebra.nb` notebook to automagically set
-  up the Mathematica's `$Path` variable. Open this notebook and follow
-  the directions which are found there.
+  Edit the main *Mathematica* init.m file (not the one inside the `NC` directory) to add the name of the directory which contains the `NC` folder to the Mathematica variable `$Path`, as in:
+
+        AppendTo[$Path,"/Users/YourName/"];
 
 ## Running NCAlgebra
 
@@ -91,10 +90,14 @@ to load NCAlgebra and NCGB.
 
 ## Now what?
 
+Basic documentation is provided on the project Wiki:
+
+https://github.com/NCAlgebra/NC/wiki
+
 Extensive documentation is found in the directory `DOCUMENTATION`.
 
 You may want to try some of the several demo files in the directory
-DEMOS after you install NCAlgebra.
+`DEMOS` after you install NCAlgebra.
 
 You can also run some tests to see if things are working fine.
 
