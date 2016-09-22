@@ -44,8 +44,11 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCQuadratic.md \
 	 NCAlgebra/NCConvexity.md \
 	 NCAlgebra/NCRealization.md \
-	 NCAlgebra/NCUtil.md \
+         NCAlgebra/NCMatrixDecompositions.md \
          NCAlgebra/MatrixDecompositions.md \
+         NCAlgebra/NCSolve.md \
+	 NCAlgebra/NCUtil.md \
+	 NCAlgebra/NCTest.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md
 

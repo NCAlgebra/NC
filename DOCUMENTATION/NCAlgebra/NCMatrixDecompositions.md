@@ -43,7 +43,6 @@ Members are:
 
 
 ## NCMatrixDecompositions {#NCMatrixDecompositions}
-NCMatrixDecompositions::usage
 
 ## NCRightDivide {#NCRightDivide}
 

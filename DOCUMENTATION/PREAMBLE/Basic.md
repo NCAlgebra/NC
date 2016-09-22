@@ -114,14 +114,14 @@ A symbol `a` may have an inverse, which will be denoted by `inv[a]`.
 
 ## Replace
 
-The Mathematica substitute commands \. -> and \:> are not reliable in `NCAlgebra`,  so you must use our `NC` versions of these commands:
+The Mathematica substitute commands, e.g. `Replace`, `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,  so you must use our `NC` versions of these commands:
 
     In[38]:= NCReplace[x**a**b,a**b->c]
     Out[38]= x**a**b
     In[39]:= NCReplaceAll[tp[b**a]+b**a,b**a->p]
     Out[39]= p+tp[a]**tp[b]
 
-USe NCMakeRuleSymmetric and NCMakeRuleSelfAdjoint to automatically create symmetric and self adjoint versions of your rules:
+USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically create symmetric and self adjoint versions of your rules:
 
     In[40]:= NCReplaceAll[tp[a**b]+w+a**b,a**b->c]
     Out[40]= c+w+tp[b]**tp[a]
