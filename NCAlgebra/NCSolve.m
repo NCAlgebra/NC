@@ -32,48 +32,40 @@
    :9/6/92    	-  Changed implementation of NCSolveCheck. (mstankus)
 *)
 
-BeginPackage[ "NCSolveLinear1`",
-     "Global`", "NonCommutativeMultiply`", "NCSubstitute`", "NCCollect`"];
+BeginPackage[ "NCSolve`",
+              "NCReplace`", "NCCollect`",
+              "NonCommutativeMultiply`"];
 
-NCSolveCheck::usage = 
-     "NCSolveCheck[] retrieves that value of the expression being held \
-     by the internal diagnostics for NCSolve.";
-
-NCSolveLinear1::usage = 
-     "NCSolveLinear1[ equation, var ] solves linear equations of the type
-     a**x+b==c and x**a+b==c in noncommutative algebras.  Alias:
-     NCSolve.";
-
-NCSolveLinear1Aux::usage = 
-     "NCSolveLinear1Aux[ LhsOfEquation, RhsOfEquation, var] is an internal
+NCSolveAux::usage = 
+     "NCSolveAux[ LhsOfEquation, RhsOfEquation, var] is an internal
      function that prepares the rhs of the solution.  Alias: none.";
 
-NCSolveLinear1::multivar =
+NCSolve::multivar =
      "Warning: NCSolve can not solve for multi-variables yet.";
 
-NCSolveLinear1::eqf =
+NCSolve::eqf =
      "`` is not a well-formed equation.";
 
-NCSolveLinear1::nonref =
+NCSolve::nonref =
      "Warning:  equation does not contain the variable.";
 
-NCSolveLinear1::tauto =
+NCSolve::tauto =
      "Warning:  equation evaluates to True.";
 
-NCSolveLinear1::contrad =
+NCSolve::contrad =
      "Warning:  equation evaluates to False.";
 
-NCSolveLinear1::notsolve =
+NCSolve::notsolve =
      "Warning:  NCSolve could not solve this equation."
 
-NCSolveLinear1::diagnostics =
+NCSolve::diagnostics =
      "\n
       Since the following expression is not zero\n
                                                 `` \n
       you may want to double check the result. \n
       This expression can be retrieved by the command NCSolveCheck[]. \n";
 
-NCSolveLinear1::ignor =
+NCSolve::ignor =
      "NCCollect is in error! Result from NCCollect disregarded.";
 
 Begin["`Private`"];
@@ -82,52 +74,52 @@ NCSolveCheckVariable = 0;
 
 NCSolveCheck[] := NCSolveCheckVariable;
 
-NCSolveLinear1FreeQ[expr_, var_] := 
+NCSolveFreeQ[expr_, var_] := 
      TrueQ[expr == Transform[expr,var->0]];
  
-NCSolveLinear1[ equation_Equal, {}] :=
+NCSolve[ equation_Equal, {}] :=
      Return[ {{}} ];
 
-NCSolveLinear1[ True, vars_] :=
+NCSolve[ True, vars_] :=
      Block[{},
-          Message[ NCSolveLinear1::tauto ];
+          Message[ NCSolve::tauto ];
           Return[ {{}} ]
      ];
 
-NCSolveLinear1[False, vars_] :=
+NCSolve[False, vars_] :=
      Block[{},
-          Message[ NCSolveLinear1::contrad ];
+          Message[ NCSolve::contrad ];
           Return[ {{}} ]
      ];
 
-NCSolveLinear1[ equation_, {var_}] :=
-     NCSolveLinear1[ equation, var ];
+NCSolve[ equation_, {var_}] :=
+     NCSolve[ equation, var ];
 
-NCSolveLinear1[equation_, vars_] :=
+NCSolve[equation_, vars_] :=
      Block[{},
-          Message[ NCSolveLinear1::eqf, equation ];
+          Message[ NCSolve::eqf, equation ];
 	  Return[ {{}} ]
      ] /; Head[equation] =!= Equal;
 
-NCSolveLinear1[equation_, vars_] :=
+NCSolve[equation_, vars_] :=
      Block[{},
-          Message[ NCSolveLinear1::nonref ];
+          Message[ NCSolve::nonref ];
           Return[ {{}} ]
-     ] /; NCSolveLinear1FreeQ[equation, vars];
+     ] /; NCSolveFreeQ[equation, vars];
 
-NCSolveLinear1[ equation_, vars_List ] :=
+NCSolve[ equation_, vars_List ] :=
      Block[ {},
-          Message[  NCSolveLinear1::multivar ];
+          Message[  NCSolve::multivar ];
           Return[ {{}} ]
      ];
 
-NCSolveLinear1[left_==right_, vars_] :=
+NCSolve[left_==right_, vars_] :=
      Block[ {test, zerofun, stuff, Solution, result, temp },
           zerofun = ExpandNonCommutativeMultiply[left-right];
 
 (* :inert code:	There used to be a never-executed "then" block in an
 		If[test,then,else].  Removed the "then" block, because
-		NCSolveLinear1::nonref takes care of it. 
+		NCSolve::nonref takes care of it. 
 *)         
 
           Solution = -zerofun /. vars->0;
@@ -138,18 +130,18 @@ NCSolveLinear1[left_==right_, vars_] :=
                ExpandNonCommutativeMultiply[temp];
           If[ test=!=0,
                stuff=temp;
-               Message[ NCSolveLinear1::ignor ];
+               Message[ NCSolve::ignor ];
           ];
-          temp = NCSolveLinear1Aux[stuff,Solution,vars];
-          If[ Head[temp] === NCSolveLinear1Aux,
-               Message[ NCSolveLinear1::notsolve ];
+          temp = NCSolveAux[stuff,Solution,vars];
+          If[ Head[temp] === NCSolveAux,
+               Message[ NCSolve::notsolve ];
                Return[ {vars -> temp } ]
           ];
           temp = ExpandNonCommutativeMultiply[temp];
           NCSolveCheckVariable = 
                ExpandNonCommutativeMultiply[ Transform[zerofun, vars->temp]];
           If[ NCSolveCheckVariable=!=0, 
-               Message[ NCSolveLinear1::diagnostics, NCSolveCheckVariable ];
+               Message[ NCSolve::diagnostics, NCSolveCheckVariable ];
           ];
           result = {vars->temp};
           Return[result];
@@ -157,26 +149,26 @@ NCSolveLinear1[left_==right_, vars_] :=
      
 SetNonCommutative[vars];
 
-NCSolveLinear1Aux[a_*left_, right_, vars_] :=
-     NCSolveLinear1Aux[left, right/a, vars] /; FreeQ[a, vars];
+NCSolveAux[a_*left_, right_, vars_] :=
+     NCSolveAux[left, right/a, vars] /; FreeQ[a, vars];
 
-NCSolveLinear1Aux[ NonCommutativeMultiply[a_, left___], right_, vars_]//
+NCSolveAux[ NonCommutativeMultiply[a_, left___], right_, vars_]//
 Literal :=
-     NCSolveLinear1Aux[ NonCommutativeMultiply[left],
+     NCSolveAux[ NonCommutativeMultiply[left],
      NonCommutativeMultiply[ inv[a], right], vars] /; FreeQ[a, vars];
 
-NCSolveLinear1Aux[ NonCommutativeMultiply[left___, a_], right_, vars_]//
+NCSolveAux[ NonCommutativeMultiply[left___, a_], right_, vars_]//
 Literal := 
-     NCSolveLinear1Aux[NonCommutativeMultiply[left],
+     NCSolveAux[NonCommutativeMultiply[left],
      NonCommutativeMultiply[right, inv[a]], vars] /; FreeQ[a, vars];
 
-NCSolveLinear1Aux[vars_, right_, vars_] := right;
+NCSolveAux[vars_, right_, vars_] := right;
 
-NCSolveLinear1Aux[tp[vars_], right_, vars_] := tp[right];
+NCSolveAux[tp[vars_], right_, vars_] := tp[right];
 
-NCSolveLinear1Aux[inv[vars_], right_, vars_] := inv[right];
+NCSolveAux[inv[vars_], right_, vars_] := inv[right];
 
-NCSolveLinear1Aux[rt[vars_], right_, vars_] := right**right;
+NCSolveAux[rt[vars_], right_, vars_] := right**right;
 
 End[]
 
