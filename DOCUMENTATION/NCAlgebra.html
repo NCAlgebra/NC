@@ -1265,7 +1265,7 @@ right = {x,y**d}</code></pre>
 <h2 id="NCRightDivide"><span class="header-section-number">20.11</span> NCRightDivide</h2>
 <h2 id="NCUpperTriangularSolve"><span class="header-section-number">20.12</span> NCUpperTriangularSolve</h2>
 <h1 id="PackageMatrixDecompositions"><span class="header-section-number">21</span> MatrixDecompositions</h1>
-<p><strong>MatrixDecompositions</strong> is a package that implements various linear algebra algorithms, such as <em>LU Decomposition</em> with <em>partial</em> and <em>complete pivoting</em>, and <em>LDL Decomposition</em>. The algorithms have been written with correctness and easy of customization rather efficiency as the main goals. They were originally developed to serve as the noncommutative linear algebra algorithms for <a href="http://math.ucsd.edu/~ncalg">NCAlgebra</a>.</p>
+<p><strong>MatrixDecompositions</strong> is a package that implements various linear algebra algorithms, such as <em>LU Decomposition</em> with <em>partial</em> and <em>complete pivoting</em>, and <em>LDL Decomposition</em>. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for <a href="http://math.ucsd.edu/~ncalg">NCAlgebra</a>. See <a href="#NCMatrixDecompositions">NCMatrixDecompositions</a>.</p>
 <p>Members are:</p>
 <ul>
 <li>Decompositions
@@ -1297,25 +1297,27 @@ right = {x,y**d}</code></pre>
 <li>the second element is a vector specifying rows used for pivoting.</li>
 </ul>
 <p><code>LUDecompositionWithPartialPivoting</code> is similar in functionality with the built-in <code>LUDecomposition</code>. It implements a <em>partial pivoting</em> strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.</p>
+<p>The triangular factors are recovered using <a href="#GetLUMatrices">GetLUMatrices</a>.</p>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
-<li><code>Divide</code> (<code>Divide</code>): function used to divide a vector by an entry;</li>
+<li><code>RightDivide</code> (<code>RightDivide</code>): function used to divide a vector by an entry;</li>
 <li><code>Dot</code> (<code>Dot</code>): function used to multiply vectors and matrices;</li>
 <li><code>Pivoting</code> (<code>LUPartialPivoting</code>): function used to sort rows for pivoting;</li>
 </ul>
-<p>See also: <a href="#LUDecomposition">LUDecomposition</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>.</p>
+<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
 <h2 id="LUDecompositionWithCompletePivoting"><span class="header-section-number">21.2</span> LUDecompositionWithCompletePivoting</h2>
 <p><code>LUDecompositionWithCompletePivoting[m]</code> generates a representation of the LU decomposition of the rectangular matrix <code>m</code>.</p>
 <p><code>LUDecompositionWithCompletePivoting[m, options]</code> uses <code>options</code>.</p>
 <p><code>LUDecompositionWithCompletePivoting</code> returns a list of four elements:</p>
 <ul>
 <li>the first element is a combination of upper- and lower-triangular matrices;</li>
-<li>the second element is a vector specifying rows used for pivoting.</li>
-<li>the third element is a vector specifying columns used for pivoting.</li>
+<li>the second element is a vector specifying rows used for pivoting;</li>
+<li>the third element is a vector specifying columns used for pivoting;</li>
 <li>the fourth element is the rank of the matrix.</li>
 </ul>
 <p><code>LUDecompositionWithCompletePivoting</code> implements a <em>complete pivoting</em> strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.</p>
+<p>The triangular factors are recovered using <a href="#GetLUMatrices">GetLUMatrices</a>.</p>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
@@ -1325,8 +1327,43 @@ right = {x,y**d}</code></pre>
 </ul>
 <p>See also: <a href="#LUDecomposition">LUDecomposition</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>.</p>
 <h2 id="LDLDecomposition"><span class="header-section-number">21.3</span> LDLDecomposition</h2>
+<p><code>LDLDecomposition[m]</code> generates a representation of the LDL decomposition of the symmetric or self-adjoint matrix <code>m</code>.</p>
+<p><code>LDLDecomposition[m, options]</code> uses <code>options</code>.</p>
+<p><code>LDLDecomposition</code> returns a list of four elements:</p>
+<ul>
+<li>the first element is a combination of upper- and lower-triangular matrices;</li>
+<li>the second element is a vector specifying rows and columns used for pivoting;</li>
+<li>the thir element is a vector specifying the size of the diagonal blocks; it can be 1 or 2;</li>
+<li>the fourth element is the rank of the matrix.</li>
+</ul>
+<p><code>LUDecompositionWithCompletePivoting</code> implements a <em>Bunch-Parlett pivoting</em> strategy in which the sorting can be configured using the options listed below. It applies only to square symmetric or self-adjoint matrices.</p>
+<p>The triangular factors are recovered using <a href="#GetLDUMatrices">GetLDUMatrices</a>.</p>
+<p>The following <code>options</code> can be given:</p>
+<ul>
+<li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
+<li><code>RightDivide</code> (<code>RightDivide</code>): function used to divide a vector by an entry on the right;</li>
+<li><code>LeftDivide</code> (<code>LeftDivide</code>): function used to divide a vector by an entry on the left;</li>
+<li><code>Dot</code> (<code>Dot</code>): function used to multiply vectors and matrices;</li>
+<li><code>CompletePivoting</code> (<code>LUCompletePivoting</code>): function used to sort rows for complete pivoting;</li>
+<li><code>PartialPivoting</code> (<code>LUPartialPivoting</code>): function used to sort matrices for complete pivoting;</li>
+<li><code>Inverse</code> (<code>Inverse</code>): function used to invert 2x2 diagonal blocks;</li>
+<li><code>SelfAdjointQ</code> (<code>SelfAdjointMatrixQ</code>): function to test if matrix is self-adjoint.</li>
+</ul>
+<p>See also: <a href="#LUDecomposition">LUDecomposition</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
 <h2 id="GetLUMatrices"><span class="header-section-number">21.4</span> GetLUMatrices</h2>
+<p><code>GetLUMatrices[m]</code> extracts lower- and upper-triangular blocks produced by <code>LDUDecompositionWithPartialPivoting</code> and <code>LDUDecompositionWithCompletePivoting</code>.</p>
+<p>For example:</p>
+<pre><code>{lu, p} = LUDecompositionWithPartialPivoting[A];
+{l, u} = GetLUMatrices[lu];</code></pre>
+<p>results in the lower-triangular factor <code>l</code> and upper-triangular factor <code>u</code>.</p>
+<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>.</p>
 <h2 id="GetLDUMatrices"><span class="header-section-number">21.5</span> GetLDUMatrices</h2>
+<p><code>GetLDUMatrices[m,s]</code> extracts lower-, upper-triangular and diagonal blocks produced by <code>LDLDecomposition</code>.</p>
+<p>For example:</p>
+<pre><code>{ldl, p, s, rank} = LDLDecomposition[A];
+{l,d,u} = GetLDUMatrices[ldl,s];</code></pre>
+<p>results in the lower-triangular factor <code>l</code>, the upper-triangular factor <code>u</code>, and the block-diagonal factor <code>d</code>.</p>
+<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>.</p>
 <h2 id="UpperTriangularSolve"><span class="header-section-number">21.6</span> UpperTriangularSolve</h2>
 <h2 id="LowerTriangularSolve"><span class="header-section-number">21.7</span> LowerTriangularSolve</h2>
 <h2 id="LUInverse"><span class="header-section-number">21.8</span> LUInverse</h2>

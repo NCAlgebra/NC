@@ -24,6 +24,8 @@ Clear[NCPolynomialToNCSylvester,
 
 Get["NCSylvester.usage"];
 
+NCSylvester::NotLinear = "Function is not linear.";
+
 Options[NCSylvesterToNCPolynomial] = {
   Collect -> True,
   KeepZeros -> False
