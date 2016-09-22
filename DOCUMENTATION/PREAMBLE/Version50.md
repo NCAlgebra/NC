@@ -1,9 +1,10 @@
 # Changes in Version 5.0
 
-1. Completely rewritten core handling of noncommutative expressions.
-2. Commands `Substitute`, `SubstituteSymmetric`, etc, have been
-   replaced by the much more reliable commands in the new package
-   [NCReplace](#PackageNCReplace).
+1. Completely rewritten core handling of noncommutative expressions
+   with significant speed gains.
+2. Commands `Transform`, `Substitute`, `SubstituteSymmetric`, etc,
+   have been replaced by the much more reliable commands in the new
+   package [NCReplace](#PackageNCReplace).
 3. Modified behavior of `CommuteEverything` (see important notes in
    [CommuteEverything](#CommuteEverything)).
 4. Improvements and consolidation of NC calculus in the package

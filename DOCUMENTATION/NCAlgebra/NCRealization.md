@@ -61,7 +61,7 @@ in the `UnknownVariables`.
 
 `NCMatrixDescriptorRealization[RationalMatrix,UnknownVariables]` is similar to `NCDescriptorRealization` except it takes a *Matrix* with rational function entries and returns a matrix of lists of the vectors/matrix `{C,G,B}`. A different `{C,G,B}` for each entry.
 
-# NCMinimalDescriptorRealization {#NCMinimalDescriptorRealization}
+## NCMinimalDescriptorRealization {#NCMinimalDescriptorRealization}
 
 `NCMinimalDescriptorRealization[RationalFunction,UnknownVariables]` returns `{C,G,B}` where `MatMult[C,NCInverse[G],B] == RationalFunction`, `G` is linear in the `UnknownVariables`, and the realization is minimal (may be pinned).
 

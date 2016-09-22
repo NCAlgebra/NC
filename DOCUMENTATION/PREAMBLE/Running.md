@@ -51,4 +51,4 @@ to test NCAlgebra. Type
 
     << NCGBTEST
 
-to test NCGB. We recommend that you restart the kernel before and after running each test set.
+to test NCGB. We recommend that you restart the kernel before and after running tests. Each test takes a few minutes to run.

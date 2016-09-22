@@ -1,6 +1,6 @@
 # NCQuadratic {#PackageNCQuadratic}
 
-**NCQuadratic** is a package that provides functionality to handle quadratic polynomials.
+**NCQuadratic** is a package that provides functionality to handle quadratic polynomials in NC variables.
 
 Members are:
 

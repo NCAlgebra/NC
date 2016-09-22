@@ -1,17 +1,17 @@
 # NCSylvester {#PackageNCSylvester}
 
-**NCSylvester** is a package that provides functionality to handle linear polynomials.
+**NCSylvester** is a package that provides functionality to handle linear polynomials in NC variables.
 
 Members are:
 
-* [NCSylvester](#NCSylvester)
+* [NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester)
 * [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial)
 
-## NCSylvester {#NCSylvester}
+## NCPolynomialToNCSylvester {#NCPolynomialToNCSylvester}
 
-`NCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
+`NCPolynomialToNCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
 
-`NCSylvester` returns a list with two elements:
+`NCPolynomialToNCSylvester` returns a list with two elements:
 
 * the first is a the independent term;
 * the second is an association where each key is one of the variables and each value is a list with three elements:
@@ -23,7 +23,7 @@ Members are:
 Example:
 
     p = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-    {p0,sylv} = NCSylvester[p,x]
+    {p0,sylv} = NCPolynomialToNCSylvester[p,x]
 
 produces
 
@@ -36,7 +36,7 @@ See also:
 
 ## NCSylvesterToNCPolynomial {#NCSylvesterToNCPolynomial}
 
-`NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCSylvester` and converts it back to an `NCPolynomial`.
+`NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCPolynomialToNCSylvester` and converts it back to an `NCPolynomial`.
 
 `NCSylvesterToNCPolynomial[rep,options]` uses `options`.
 
@@ -44,4 +44,4 @@ The following `options` can be given:
 * `Collect` (*True*): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.
 
 See also:
-[NCSylvester](#NCSylvester), [NCPolynomial](#NCPolynomial).
+[NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester), [NCPolynomial](#NCPolynomial).

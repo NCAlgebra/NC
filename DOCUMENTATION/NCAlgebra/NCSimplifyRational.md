@@ -14,7 +14,7 @@ are first normalized to
 
 using `NCNormalizeInverse`.
 
-For each `inv` found in expression, a custom set of rules is constructed based on its associated nc Groebner basis.
+For each `inv` found in expression, a custom set of rules is constructed based on its associated NC Groebner basis.
 
 For example, if
 
@@ -62,14 +62,14 @@ Members are:
 
 ## NCNormalizeInverse {#NCNormalizeInverse}
 
-`NCNormalizeInverse[expr]` transforms all rational nc expressions of the form `inv[K + b]` into `inv[1 + (1/K) b]/K` if `A` is commutative.
+`NCNormalizeInverse[expr]` transforms all rational NC expressions of the form `inv[K + b]` into `inv[1 + (1/K) b]/K` if `A` is commutative.
 
 See also:
 [NCSimplifyRational](#NCSimplifyRational), [NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass).
 
 ## NCSimplifyRational {#NCSimplifyRational}
 
-`NCSimplifyRational[expr]` repeatedly applies `NCSimplifyRationalSinglePass` in an attempt to simplify the rational nc expression `expr`.
+`NCSimplifyRational[expr]` repeatedly applies `NCSimplifyRationalSinglePass` in an attempt to simplify the rational NC expression `expr`.
 
 See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
@@ -77,7 +77,7 @@ See also:
 
 ## NCSimplifyRationalSinglePass {#NCSimplifyRationalSinglePass}
 
-`NCSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational nc expression `expr`.
+`NCSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational NC expression `expr`.
 
 See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
@@ -85,7 +85,7 @@ See also:
 
 ## NCPreSimplifyRational {#NCPreSimplifyRational}
 
-`NCPreSimplifyRational[expr]` repeatedly applies `NCPreSimplifyRationalSinglePass` in an attempt to simplify the rational nc expression `expr`.
+`NCPreSimplifyRational[expr]` repeatedly applies `NCPreSimplifyRationalSinglePass` in an attempt to simplify the rational NC expression `expr`.
 
 See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
@@ -93,7 +93,7 @@ See also:
 
 ## NCPreSimplifyRationalSinglePass {#NCPreSimplifyRationalSinglePass}
 
-`NCPreSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational nc expression `expr`.
+`NCPreSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational NC expression `expr`.
 
 See also:
 [NCNormalizeInverse](#NCNormalizeInverse),

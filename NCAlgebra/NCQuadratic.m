@@ -21,7 +21,7 @@ BeginPackage[ "NCQuadratic`",
 	      "NCOptions`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCQuadratic,
+Clear[NCPolynomialToNCQuadratic,
       NCQuadraticToNCPolynomial,
       NCQuadraticMakeSymmetric,
       NCMatrixOfQuadratic];
@@ -44,7 +44,7 @@ Options[NCQuadraticToNCPolynomial] = {
 
 Begin[ "`Private`" ]
 
-  (* NCQuadratic *)
+  (* NCPolynomialToNCQuadratic *)
 
   Clear[NCQuadraticAux];
   NCQuadraticAux[m_, terms_] := (
@@ -67,7 +67,7 @@ Begin[ "`Private`" ]
       
   ];
   
-  NCQuadratic[p_NCPolynomial] := Module[
+  NCPolynomialToNCQuadratic[p_NCPolynomial] := Module[
     {terms},
 
     If [!NCPQuadraticQ[p],
@@ -113,7 +113,7 @@ Begin[ "`Private`" ]
       
     (* Print["middleMatrix = ", MatrixForm[middleMatrix]]; *)
 
-    Return[Join[NCSylvester[p, False], {leftBasis, middleMatrix, rightBasis}]];
+    Return[Join[NCPolynomialToNCSylvester[p, False], {leftBasis, middleMatrix, rightBasis}]];
       
   ];
 
@@ -191,7 +191,7 @@ Begin[ "`Private`" ]
       expr = NCToNCPolynomial[p /. symRule, vars];
       
       (* Compute decomposition *) 
-      {m0,sylv,l,m,r} = NCQuadratic[expr];
+      {m0,sylv,l,m,r} = NCPolynomialToNCQuadratic[expr];
 
       (* Symmetrize decomposition *) 
       {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 

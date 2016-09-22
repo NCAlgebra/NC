@@ -7,6 +7,8 @@ Members are:
 * [NCConsistentQ](#NCConsistentQ)
 * [NCGrabFunctions](#NCGrabFunctions)
 * [NCGrabSymbols](#NCGrabSymbols)
+* [NCGrabIndeterminants](#NCGrabIndeterminants)
+* [NCConsolidateList](#NCConsolidateList)
 
 ## NCConsistentQ {#NCConsistentQ}
 
@@ -14,15 +16,25 @@ Members are:
 
 ## NCGrabFunctions {#NCGrabFunctions}
 
+`NCGragFunctions[expr]` returns a list with all fragments containing function of `expr`.
+
 `NCGragFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
 
 For example:
 
-    NCGrabFunctions[inv[x] + y**inv[1+inv[1+x**y]], inv]
+    NCGrabFunctions[inv[x] + tp[y]**inv[1+inv[1+tp[x]**y]], inv]
 
 returns
 
-    {inv[1+inv[1+x**y]], inv[1+x**y], inv[x]}
+    {inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x]}
+
+and
+
+    NCGrabFunctions[inv[x] + tp[y]**inv[1+inv[1+tp[x]**y]]]
+
+returns
+
+    {inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}
 
 See also:
 [NCGrabSymbols](#NCGragSymbols).
@@ -45,3 +57,39 @@ returns `{inv[x]}`.
 
 See also:
 [NCGrabFunctions](#NCGragFunctions).
+
+## NCGrabIndeterminants {#NCGrabIndeterminants}
+
+`NCGragIndeterminants[expr]` returns a list with all *Symbols* and fragments of functions appearing in `expr`.
+
+It is a combination of `NCGrabSymbols` and `NCGrabFunctions`.
+
+For example:
+
+    NCGrabIndeterminants[inv[x] + tp[y]**inv[1+inv[1+tp[x]**y]]]
+
+returns
+
+    {x, y, inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}
+
+See also:
+[NCGrabFunctions](#NCGragFunctions), [NCGrabSymbols](#NCGragSymbols).
+
+## NCConsolidateList {#NCConsolidateList}
+
+`NCConsolidateList[list]` produces two lists:
+
+- The first list contains a version of `list` where repeated entries have been suppressed;
+- The second list contains the indices of the elements in the first list that recover the original `list`.
+
+For example:
+
+    {list,index} = NCConsolidateList[{z,t,s,f,d,f,z}];
+  
+results in:
+
+    list = {z,t,s,f,d};
+    index = {1,2,3,4,5,4,1};
+
+See also:
+`Union`
