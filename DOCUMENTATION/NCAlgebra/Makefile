@@ -13,9 +13,14 @@ FILES = NonCommutativeMultiply.usage \
 	NCSylvester.usage \
 	NCQuadratic.usage \
 	NCConvexity.usage \
+	NCConvexity.private.usage \
 	NCRealization.usage \
+	NCRealization.private.usage \
+        NCMatrixDecompositions.usage \
+        MatrixDecompositions.usage \
 	NCUtil.usage \
-        MatrixDecompositions.usage
+	NCTest.usage \
+	NCSolve.usage
 
 all: $(FILES)
 

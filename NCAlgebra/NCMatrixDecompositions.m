@@ -17,40 +17,21 @@ BeginPackage[ "NCMatrixDecompositions`",
               "NCSymmetric`",
               "NCSelfAdjoint`",
               "NCMatMult`",
+              "NCUtil`",
               "NonCommutativeMultiply`"];
 
-Clear[NCLeafCount];
-NCLeafCount::usage="";
+Clear[NCLUDecompositionWithPartialPivoting,
+      NCLUDecompositionWithCompletePivoting,
+      NCLDLDecomposition,
+      NCUpperTriangularSolve,
+      NCLowerTriangularSolve,
+      NCLUInverse,
+      NCLUPartialPivoting,
+      NCLUCompletePivoting,
+      NCLeftDivide,
+      NCRightDivide];
 
-Clear[NCLUPartialPivoting];
-NCLUPartialPivoting::usage="";
-
-Clear[NCLUCompletePivoting];
-NCLUCompletePivoting::usage="";
-
-Clear[NCLeftDivide];
-NCLeftDivide::usage="";
-
-Clear[NCRightDivide];
-NCRightDivide::usage="";
-
-Clear[NCLUDecompositionWithPartialPivoting];
-NCLUDecompositionWithPartialPivoting::usage = "";
-
-Clear[NCLUDecompositionWithCompletePivoting];
-NCLUDecompositionWithCompletePivoting::usage = "";
-
-Clear[NCLDLDecomposition];
-NCLDLDecomposition::usage = "";
-
-Clear[NCUpperTriangularSolve];
-NCUpperTriangularSolve::usage="";
-
-Clear[NCLowerTriangularSolve];
-NCLowerTriangularSolve::usage="";
-
-Clear[NCLUInverse];
-NCLUInverse::usage = "";
+Get["NCMatrixDecompositions.usage"];
 
 Options[NCMatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,
@@ -79,13 +60,6 @@ Begin[ "`Private`" ]
   (* NC Divide *)
   NCRightDivide[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
   NCLeftDivide[x_, y_] := Map[NonCommutativeMultiply[inv[x], #]&, y];
-
-  (* NC leaf count *)
-  NCLeafCount[x_List] := Map[NCLeafCount, x];
-  
-  NCLeafCount[0] := -Infinity;
-  NCLeafCount[x_?NumberQ] := Abs[x];
-  NCLeafCount[x_] := -LeafCount[x];
 
   (* partial pivoting *)
   NCLUPartialPivoting[mat_?MatrixQ, f_:NCLeafCount] := 

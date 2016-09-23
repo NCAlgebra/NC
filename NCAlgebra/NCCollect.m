@@ -31,11 +31,9 @@ Clear[NCCollect,NCStrongCollect,
       NCDecompose, NCCompose,
       NCTermsOfDegree];
 
-Clear[NCStrongCollectOnFunction];
-
-Get["NCCollect.usage"];
-                                        
 Begin["`Private`"];
+
+  Get["NCCollect.usage"];
 
   (* Auxiliary tests *)
                                         

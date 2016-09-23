@@ -9,6 +9,9 @@ Members are:
 * [NCGrabSymbols](#NCGrabSymbols)
 * [NCGrabIndeterminants](#NCGrabIndeterminants)
 * [NCConsolidateList](#NCConsolidateList)
+* [NCLeafCount](#NCLeafCount)
+* [NCReplaceData](#NCReplaceData)
+* [NCToExpression](#NCToExpression)
 
 ## NCConsistentQ {#NCConsistentQ}
 
@@ -93,3 +96,34 @@ results in:
 
 See also:
 `Union`
+
+## NCLeafCount {#NCLeafCount}
+
+`NCLeafCount[expr]` returns an number associated with the complexity of an expression:
+
+- If `PossibleZeroQ[expr] == True` then `NCLeafCount[expr]` is `-Infinity`;
+- If `NumberQ[expr]] == True` then `NCLeafCount[expr]` is `Abs[expr]`;
+- Otherwise `NCLeafCount[expr]` is `-LeafCount[expr]`;
+
+`NCLeafCount` is `Listable`.
+
+See also:
+`LeafCount`.
+
+## NCReplaceData {#NCReplaceData}
+
+`NCReplaceData[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica, for example replacing `**` by `.`. 
+
+`NCReplaceData` does not attempt to resize entries in expressions involving matrices. Use `NCToExpression` for that.
+
+See also:
+[NCToExpression](#NCToExpression).
+
+## NCToExpression {#NCToExpression}
+
+`NCToExpression[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica. 
+
+`NCToExpression` attempts to resize entries in expressions involving matrices.
+
+See also:
+[NCReplaceData](#NCReplaceData).

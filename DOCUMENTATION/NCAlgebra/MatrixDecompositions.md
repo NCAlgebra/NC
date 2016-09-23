@@ -99,7 +99,44 @@ The following `options` can be given:
 - `SelfAdjointQ` (`SelfAdjointMatrixQ`): function to test if matrix is self-adjoint.
 
 See also:
-[LUDecomposition](#LUDecomposition), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
+
+## UpperTriangularSolve {#UpperTriangularSolve}
+
+`UpperTriangularSolve[u, b]` solves the upper-triangular system of
+equations $u x = b$ using back-substitution.
+
+For example:
+
+    x = UpperTriangularSolve[u, b];
+
+returns the solution `x`.
+
+See also:
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LDLDecomposition](#LDLDecomposition).
+
+## LowerTriangularSolve {#LowerTriangularSolve}
+
+`LowerTriangularSolve[l, b]` solves the lower-triangular system of
+equations $l x = b$ using forward-substitution.
+
+For example:
+
+    x = LowerTriangularSolve[l, b];
+
+returns the solution `x`.
+
+See also:
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LDLDecomposition](#LDLDecomposition).
+
+## LUInverse {#LUInverse}
+
+`LUInverse[a]` calculates the inverse of matrix `a`.
+
+`LUInverse` uses the [LuDecompositionWithPartialPivoting](#LuDecompositionWithPartialPivoting) and the triangular solvers [LowerTriangularSolve](#LowerTriangularSolve) and [UpperTriangularSolve](#UpperTriangularSolve).
+
+See also:
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
 ## GetLUMatrices {#GetLUMatrices}
 
@@ -110,7 +147,7 @@ For example:
     {lu, p} = LUDecompositionWithPartialPivoting[A];
     {l, u} = GetLUMatrices[lu];
 	
-results in the lower-triangular factor `l` and upper-triangular factor `u`.
+returns the lower-triangular factor `l` and upper-triangular factor `u`.
 
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).
@@ -124,17 +161,25 @@ For example:
     {ldl, p, s, rank} = LDLDecomposition[A];
     {l,d,u} = GetLDUMatrices[ldl,s];
 
-results in the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d`.
+returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d`.
 
 See also:
 [LDLDecomposition](#LDLDecomposition).
 
-## UpperTriangularSolve {#UpperTriangularSolve}
-
-## LowerTriangularSolve {#LowerTriangularSolve}
-
-## LUInverse {#LUInverse}
-
 ## LUPartialPivoting {#LUPartialPivoting}
 
+`LUPartialPivoting[v]` returns the index of the element with largest absolute value in the vector `v`. If `v` is a matrix, it returns the index of the element with largest absolute value in the first column.
+
+`LUPartialPivoting[v, f]` sorts with respect to the function `f` instead of the absolute value.
+
+See also:
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUCompletePivoting](#LUCompletePivoting).
+
 ## LUCompletePivoting {#LUCompletePivoting}
+
+`LUCompletePivoting[m]` returns the row and column index of the element with largest absolute value in the matrix `m`.
+
+`LUCompletePivoting[v, f]` sorts with respect to the function `f` instead of the absolute value.
+
+See also:
+[LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).

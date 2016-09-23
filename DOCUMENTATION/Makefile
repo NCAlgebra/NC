@@ -52,6 +52,8 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md
 
+doc: NCAlgebra.pdf NCAlgebra.html
+
 NCAlgebra.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCAlgebra.html --mathjax
 
@@ -67,4 +69,6 @@ NCAlgebra.pdf: $(MANUAL)
 
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
-.PHONE: all clean
+.PHONE: all clean 
+.PHONE: NCAlgebra.html NCAlgebra.pdf
+

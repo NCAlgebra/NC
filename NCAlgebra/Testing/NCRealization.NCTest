@@ -12,21 +12,99 @@
 << NCRealization`
 
 Module[
-  {k,x,y},
+  {k,answer,answer1,answer2,x,y,X,W,
+   expr,
+   Cv,Pencil,Bv,
+   CSym, PencilSym,
+   det
+  },
 
   k = 1;
 
   (* Print["Starting NCRealization.NCTest"]; *)
+
+  (* Testing from the demo notebook *)
      
   SetNonCommutative[x,y];
-     
+  SetCommutative[X,W];
+
+  expr = inv[3 + x ** y] + inv[3 + y ** x] + x;
+  {Cv, Pencil, Bv} = NCMinimalDescriptorRealization[expr, {x, y}];
+  NCTest[Cv, {{0,1,1,0,1,0}}];
+  NCTest[Pencil, {{1,0,0,0,0,0},
+                  {-x,1,0,0,0,0},
+		  {0,0,1,x/3,0,0},
+                  {0,0,-y,1,0,0},
+		  {0,0,0,0,1,y/3},
+		  {0,0,0,0,-x,1}}];
+  NCTest[Bv, Transpose[{{1,0,1/3,0,1/3,0}}]];
+  answer = MatMult[Cv, NCInverse[Pencil], Bv][[1, 1]];
+  NCTest[NCSimplifyRational[answer-expr], 0];
+
+  {CSym, PencilSym} = 
+  NCSymmetrizeMinimalDescriptorRealization[{Cv, Pencil, Bv}, {x, y}] //
+     Chop // NCSimplifyRational;
+  answer = {{0.8164965809277260327, 0, 0.7071067811865475244, 0, 0.7071067811865475244, 0}};
+  NCTest[Norm[CSym - answer] < 10^(-6), True];
+  answer = {{1, 0, 0, 0.2886751345948128823 x + 0.2886751345948128823 y, 0, -0.2886751345948128823 x + 0.2886751345948128823 y}, {0, -1, 0, -0.2886751345948128823 x + 0.2886751345948128823 y, 0, 0.2886751345948128823 x + 0.2886751345948128823 y}, {0, 0, -1 - 0.5000000000000000000 x, 0, 0.5000000000000000000 x, 0}, {0.2886751345948128823 x + 0.2886751345948128823 y, -0.2886751345948128823 x + 0.2886751345948128823 y, 0, -1, 0, 0}, {0, 0, 0.5000000000000000000 x, 0, 1 - 0.5000000000000000000 x, 0}, {-0.2886751345948128823 x + 0.2886751345948128823 y, 0.2886751345948128823 x + 0.2886751345948128823 y, 0, 0, 0, 1}};
+  NCTest[Norm[(PencilSym - answer) /. {x->3, y->5}] < 10^(-6), True];
+
+  {CSym, PencilSym} = 
+  NCSymmetricDescriptorRealization[expr, {x, y}] // Chop;
+  answer = {{0.8164965809277260327, 0, 0.7071067811865475244, 0, 0.7071067811865475244, 0}};
+  NCTest[Norm[CSym - answer] < 10^(-6), True];
+  answer = {{1, 0, 0, 0.2886751345948128823 x + 0.2886751345948128823 y, 0, -0.2886751345948128823 x + 0.2886751345948128823 y}, {0, -1, 0, -0.2886751345948128823 x + 0.2886751345948128823 y, 0, 0.2886751345948128823 x + 0.2886751345948128823 y}, {0, 0, -1 - 0.5000000000000000000 x, 0, 0.5000000000000000000 x, 0}, {0.2886751345948128823 x + 0.2886751345948128823 y, -0.2886751345948128823 x + 0.2886751345948128823 y, 0, -1, 0, 0}, {0, 0, 0.5000000000000000000 x, 0, 1 - 0.5000000000000000000 x, 0}, {-0.2886751345948128823 x + 0.2886751345948128823 y, 0.2886751345948128823 x + 0.2886751345948128823 y, 0, 0, 0, 1}};
+  NCTest[Norm[(PencilSym - answer) /. {x->3, y->5}] < 10^(-6), True];
+
+  NCTest[PinnedQ[Pencil, {x, y}], True];
+  NCTest[PinningSpace[Pencil, {x, y}], Transpose[{{0,1,0,0,0,0}}]];
+  {CSym, PencilSym} = 
+  NCSymmetrizeMinimalDescriptorRealization[{Cv, Pencil, Bv}, {x, y}, 
+   UseFloatingPoint -> False];
+
+  answer = {{0,-Sqrt[2/3],0,1/Sqrt[2],0,1/Sqrt[2]}};
+  NCTest[CSym, answer];
+  answer = {{-1,0,x/(2 Sqrt[3])-y/(2 Sqrt[3]),0,-(x/(2 Sqrt[3]))-y/(2 Sqrt[3]),0},
+            {0,1,-(x/(2 Sqrt[3]))-y/(2 Sqrt[3]),0,x/(2 Sqrt[3])-y/(2 Sqrt[3]),0},
+	    {x/(2 Sqrt[3])-y/(2 Sqrt[3]),-(x/(2 Sqrt[3]))-y/(2 Sqrt[3]),-1,0,0,0},
+	    {0,0,0,-1-x/2,0,x/2},
+	    {-(x/(2 Sqrt[3]))-y/(2 Sqrt[3]),x/(2 Sqrt[3])-y/(2 Sqrt[3]),0,0,1,0},
+	    {0,0,0,x/2,0,1-x/2}};
+  NCTest[PencilSym, answer, True];
+
+  expr = 2 + x ** x + inv[1 + y ** y]; 
+  {Cv, Pencil, Bv} = NCMinimalDescriptorRealization[expr, {x, y}];
+  answer = MatMult[Cv, NCInverse[Pencil], Bv][[1, 1]];
+  NCTest[NCSimplifyRational[answer-expr], 0];
+
+  NCTest[TestDescriptorRealization[expr, {Cv, Pencil, Bv}, {x, y}], True];
+  NCTest[TestDescriptorRealization[expr, {Cv, Pencil, Bv}, {x, y},25], True];
+
+  expr = 1 + x ** x + y ** y;
+  det = NCDeterminantalRepresentationReciprocal[expr, {x, y}];
+  answer = {{1,x,y},{-x,1,0},{-y,0,1}};
+  NCTest[det, answer];
+
+  NCTest[CommuteEverything[Det[det] - expr], 0];
+
+  det = NCSymmetricDeterminantalRepresentationReciprocal[expr, {x, y}, 
+                UseFloatingPoint -> False];
+  answer = {{-1,0,y},{0,-1,x},{y,x,1}};
+  NCTest[det, answer];
+
+  det = NCSymmetricDeterminantalRepresentationDirect[expr, {x, y}];
+  answer = {{-1, -0.413304238122399259 x, -0.413304238122399259 y, 0}, {-0.413304238122399259 x, -1, 0, -1.082044543098821283 x}, {-0.413304238122399259 y, 0, -1, -1.082044543098821283 y}, {0, -1.082044543098821283 x, -1.082044543098821283 y, 1}};
+  NCTest[Norm[(det - answer) /. {x->3, y->5}] < 10^(-6), True];
+  NCTest[PinnedQ[det, {x,y}], True];
+
+  answer = {1,3,0};
+  NCTest[SignatureOfAffineTerm[det, {x, y}], answer];
+
   (* test 1  *)
-  (* Print["----test 1 "]; *)
   NCTest[Rationalize[ NCSymmetricDescriptorRealization[inv[1+x**x],{x}][[2]]],
          {{-1,x},{x,1}}, "Realization", k++];
 
   (* test 2 *)
-  (* Print["----test 2 "]; *)
   Quiet[
 
     NCTest[Det[NCDeterminantalRepresentationReciprocal[1+x**y**y**x,{x,y}]],
@@ -39,7 +117,6 @@ Module[
   ];
       
   (* test 3 *)
-  (* Print["----test 3 "]; *)
   NCTest[RJRTDecomposition[{{0,2},{2,0}}],
          {{{-1.,1.},{1.,1.}},{{-1,0},{0,1}}}, "Realization", k++];
 

@@ -1,7 +1,7 @@
 << NCUtil`
 
 Block[
-  {k,test,expr,a,b,c,d,x,y,z,list,index},
+  {k,test,expr,a,b,c,d,x,y,z,list,index,X,Y},
 
   SetCommutative[a,b,c,d];
   SetNonCommutative[x,y,z];
@@ -124,5 +124,36 @@ Block[
   {list,index} = NCConsolidateList[{z,t,s,f,d,f,z}];
   NCTest[list, {z,t,s,f,d}];
   NCTest[index, {1,2,3,4,5,4,1}];
+
+  (* NCToExpression *)
+  X = {{1,2},{2,1}}; Y = {{3,5},{5,3}};
+  expr = x ** y;
+  answer = X . Y;
+  NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
+
+  expr = y ** x;
+  answer = Y . X;
+  NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
+
+  expr = x ** y + y ** x;
+  answer = X . Y + Y . X;
+  NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
+
+  expr = 1 + x;
+  answer = IdentityMatrix[2] + X;
+  NCTest[NCToExpression[expr, {x->X}], answer];
+
+  expr = x ** (1 + y);
+  answer = X . (IdentityMatrix[2] + Y);
+  NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
+
+  expr = 2 + inv[1 + y ** y] + x ** x;
+  X = {{1}};  Y = {{1}};
+  answer = 2 IdentityMatrix[1] + Inverse[IdentityMatrix[1] + Y.Y] + X.X;
+  NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
+
+  X = {{1,2},{2,1}}; Y = {{3,5},{5,3}};
+  answer = 2 IdentityMatrix[2] + Inverse[IdentityMatrix[2] + Y.Y] + X.X;
+  NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
 
 ];

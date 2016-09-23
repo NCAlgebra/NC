@@ -18,7 +18,9 @@
 
 BeginPackage[ "NCTest`" ];
 
-Clear[NCTest, NCTestRun, NCTestSummarize];
+Clear[NCTest, 
+      NCTestRun, 
+      NCTestSummarize];
       
 Get["NCTest.usage"];
 

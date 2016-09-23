@@ -43,11 +43,6 @@ Begin[ "`Private`" ]
   tpAux[x_?MatrixQ] := tpMat[x];
   tpAux[x_] := tp[x];
   
-  Clear[ReplaceData];
-  ReplaceData[exp_, data_List] :=
-    ReplaceRepeated[exp, 
-     Join[data, {tp -> Transpose, NonCommutativeMultiply -> Dot}]];
-
   Clear[DimensionsAux];
   DimensionsAux[exp_, False] := Dimensions[exp] /. {} -> -1;
   DimensionsAux[exp_, True] := Module[
@@ -694,7 +689,7 @@ Begin[ "`Private`" ]
     (* Replace data and compute dimension of independent terms *)
     Check[
  
-      cc = Map[ReplaceData[#, data] &, -Normal[Part[sylv, All, 1]]];
+      cc = Map[NCReplaceData[#, data] &, -Normal[Part[sylv, All, 1]]];
       NCDebug[2, cc];
 
       ,
@@ -712,7 +707,7 @@ Begin[ "`Private`" ]
     Check[
  
       bb = If[ obj != {}, 
-               Map[ReplaceData[#, data] &, obj]
+               Map[NCReplaceData[#, data] &, obj]
               ,
                0*vars
       ];
@@ -737,7 +732,7 @@ Begin[ "`Private`" ]
     (* Replace data and compute dimension of linear terms *)
     Check[
 
-      aa = Map[ReplaceData[#, data] &, Part[sylv, All, 2 ;;]];
+      aa = Map[NCReplaceData[#, data] &, Part[sylv, All, 2 ;;]];
       NCDebug[2, aa];
   
       ,

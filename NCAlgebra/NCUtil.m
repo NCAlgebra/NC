@@ -23,12 +23,15 @@ Clear[NCGrabSymbols,
       NCGrabFunctions,
       NCGrabIndeterminants,
       NCConsolidateList,
-      NCConsistentQ];
-
-Get["NCUtil.usage"];
+      NCConsistentQ,
+      NCLeafCount,
+      NCReplaceData,
+      NCToExpression];
 
 Begin["`Private`"];
 
+  Get["NCUtil.usage"];
+  
   NCGrabSymbols[expr_] := Union[Cases[expr, _Symbol, {0, Infinity}]];
   NCGrabSymbols[expr_, pattern_] := 
     Union[Cases[expr, (pattern)[_Symbol], {0, Infinity}]];
@@ -52,5 +55,33 @@ Begin["`Private`"];
     Length[Cases[expr, 
             a_?NonCommutativeQ * b_?NonCommutativeQ, {0, Infinity}]] == 0;
 
+  (* NC leaf count *)
+  NCLeafCount[x_?PossibleZeroQ] := -Infinity;
+  NCLeafCount[x_?NumberQ] := Abs[x];
+  NCLeafCount[x_] := -LeafCount[x];
+  SetAttributes[NCLeafCount, Listable];
+
+  (* NCReplaceData *)
+  NCReplaceData[expr_, data_Rule] := NCReplaceData[expr, {data}];
+  NCReplaceData[expr_, {data__Rule}] := ReplaceRepeated[expr, 
+    Join[{data}, {tp -> Transpose, 
+                  aj -> ConjugateTranspose,
+                  inv -> Inverse,
+                  co -> Conjugate,
+                  NonCommutativeMultiply -> Dot}]
+  ];
+  (* TODO: rt -> *)
+
+  (* NCToExpression *)
+
+  Clear[PlusAux];
+  PlusAux[a_?NumberQ, b_?MatrixQ] := 
+     a IdentityMatrix[Dimensions[b][[1]]] + b;
+  PlusAux[a_?NumberQ, b_?MatrixQ, c__] := 
+     PlusAux[a IdentityMatrix[Dimensions[b][[1]]] + b, c];
+     
+  NCToExpression[expr_, data_] := 
+    NCReplaceData[expr /. Plus -> PlusAux, data] /. PlusAux -> Plus;
+  
 End[];
 EndPackage[];
