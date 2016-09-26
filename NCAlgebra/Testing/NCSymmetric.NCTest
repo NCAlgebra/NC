@@ -1,4 +1,4 @@
-<< NCSymmetric`
+<< NCSelfAdjoint`
 
 Module[
   {expr, a, b, c, d,

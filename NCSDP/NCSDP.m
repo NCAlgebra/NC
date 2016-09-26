@@ -15,7 +15,7 @@
 BeginPackage[ "NCSDP`",
               "NCOptions`",
               "NCUtil`",
-              "NCSymmetric`",
+              "NCSelfAdjoint`",
               "NCPolynomial`",
               "NCSylvester`",
 	      "PrimalDual`",

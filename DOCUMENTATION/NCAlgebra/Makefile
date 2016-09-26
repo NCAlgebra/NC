@@ -5,7 +5,6 @@ FILES = NonCommutativeMultiply.usage \
 	NCSimplifyRational.usage \
 	NCDiff.usage \
 	NCReplace.usage \
-	NCSymmetric.usage \
 	NCSelfAdjoint.usage \
 	NCOutput.usage \
 	NCMatMult.usage \

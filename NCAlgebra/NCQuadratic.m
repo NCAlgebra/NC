@@ -15,7 +15,7 @@
 BeginPackage[ "NCQuadratic`",
 	      "NCSylvester`",
 	      "NCPolynomial`",
-	      "NCSymmetric`",
+	      "NCSelfAdjoint`",
 	      "NCMatMult`",
               "NCUtil`",
 	      "NCOptions`",

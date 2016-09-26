@@ -1,5 +1,5 @@
 << NCSylvester`
-<< NCSymmetric`
+<< NCSelfAdjoint`
 
 Block[
    {exp, answer, vars, p,

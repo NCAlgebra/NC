@@ -35,7 +35,6 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCSimplifyRational.md \
 	 NCAlgebra/NCDiff.md \
 	 NCAlgebra/NCReplace.md \
-	 NCAlgebra/NCSymmetric.md \
 	 NCAlgebra/NCSelfAdjoint.md \
 	 NCAlgebra/NCOutput.md \
 	 NCAlgebra/NCMatMult.md \
