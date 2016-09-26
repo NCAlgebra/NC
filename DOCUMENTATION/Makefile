@@ -37,15 +37,14 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCReplace.md \
 	 NCAlgebra/NCSelfAdjoint.md \
 	 NCAlgebra/NCOutput.md \
-	 NCAlgebra/NCMatMult.md \
 	 NCAlgebra/NCPolynomial.md \
 	 NCAlgebra/NCSylvester.md \
 	 NCAlgebra/NCQuadratic.md \
 	 NCAlgebra/NCConvexity.md \
 	 NCAlgebra/NCRealization.md \
+	 NCAlgebra/NCMatMult.md \
          NCAlgebra/NCMatrixDecompositions.md \
          NCAlgebra/MatrixDecompositions.md \
-         NCAlgebra/NCSolve.md \
 	 NCAlgebra/NCUtil.md \
 	 NCAlgebra/NCTest.md \
 	 NCSDP/NCSDP.md \
