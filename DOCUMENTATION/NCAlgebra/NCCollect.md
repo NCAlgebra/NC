@@ -22,6 +22,12 @@ If `expr` is a rational nc expression then degree correspond to the degree of th
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
+### Notes
+
+While `NCCollect[expr, vars]` always returns mathematically correct
+expressions, it may not collect `vars` from as many terms as one might
+think it should.
+
 See also:
 [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint), [NCRationalToNCPolynomial](#NCRationalToNCPolynomial).
 

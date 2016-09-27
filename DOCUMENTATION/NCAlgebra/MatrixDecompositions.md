@@ -17,6 +17,8 @@ Members are:
     * [GetLDUMatrices](#GetLDUMatrices)
     * [LUPartialPivoting](#LUPartialPivoting)
     * [LUCompletePivoting](#LUCompletePivoting)
+    * [LUNoPartialPivoting](#LUNoPartialPivoting)
+    * [LUNoCompletePivoting](#LUNoCompletePivoting)
 
 ## LUDecompositionWithPartialPivoting {#LUDecompositionWithPartialPivoting}
 
@@ -39,6 +41,7 @@ The following `options` can be given:
 - `RightDivide` (`RightDivide`): function used to divide a vector by an entry;
 - `Dot` (`Dot`): function used to multiply vectors and matrices;
 - `Pivoting` (`LUPartialPivoting`): function used to sort rows for pivoting;
+- `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUPartialPivoting](#LUPartialPivoting).
@@ -96,7 +99,8 @@ The following `options` can be given:
 - `CompletePivoting` (`LUCompletePivoting`): function used to sort rows for complete pivoting;
 - `PartialPivoting` (`LUPartialPivoting`): function used to sort matrices for complete pivoting;
 - `Inverse` (`Inverse`): function used to invert 2x2 diagonal blocks;
-- `SelfAdjointQ` (`SelfAdjointMatrixQ`): function to test if matrix is self-adjoint.
+- `SelfAdjointQ` (`SelfAdjointMatrixQ`): function to test if matrix is self-adjoint;
+- `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
@@ -183,3 +187,4 @@ See also:
 
 See also:
 [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
+

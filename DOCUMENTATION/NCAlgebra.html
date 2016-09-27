@@ -66,7 +66,9 @@
 <li><a href="#ExpandNonCommutativeMultiply"><span class="toc-section-number">6.15</span> ExpandNonCommutativeMultiply</a></li>
 </ul></li>
 <li><a href="#PackageNCCollect"><span class="toc-section-number">7</span> NCCollect</a><ul>
-<li><a href="#NCCollect"><span class="toc-section-number">7.1</span> NCCollect</a></li>
+<li><a href="#NCCollect"><span class="toc-section-number">7.1</span> NCCollect</a><ul>
+<li><a href="#notes"><span class="toc-section-number">7.1.1</span> Notes</a></li>
+</ul></li>
 <li><a href="#NCCollectSelfAdjoint"><span class="toc-section-number">7.2</span> NCCollectSelfAdjoint</a></li>
 <li><a href="#NCCollectSymmetric"><span class="toc-section-number">7.3</span> NCCollectSymmetric</a></li>
 <li><a href="#NCStrongCollect"><span class="toc-section-number">7.4</span> NCStrongCollect</a></li>
@@ -108,64 +110,64 @@
 <li><a href="#NCOutputFunction"><span class="toc-section-number">12.1</span> NCOutputFunction</a></li>
 <li><a href="#NCSetOutput"><span class="toc-section-number">12.2</span> NCSetOutput</a></li>
 </ul></li>
-<li><a href="#PackageNCMatMult"><span class="toc-section-number">13</span> NCMatMult</a><ul>
-<li><a href="#tpMat"><span class="toc-section-number">13.1</span> tpMat</a></li>
-<li><a href="#ajMat"><span class="toc-section-number">13.2</span> ajMat</a></li>
-<li><a href="#coMat"><span class="toc-section-number">13.3</span> coMat</a></li>
-<li><a href="#MatMult"><span class="toc-section-number">13.4</span> MatMult</a><ul>
-<li><a href="#notes"><span class="toc-section-number">13.4.1</span> Notes</a></li>
+<li><a href="#PackageNCPolynomial"><span class="toc-section-number">13</span> NCPolynomial</a><ul>
+<li><a href="#NCPolynomial"><span class="toc-section-number">13.1</span> NCPolynomial</a></li>
+<li><a href="#NCToNCPolynomial"><span class="toc-section-number">13.2</span> NCToNCPolynomial</a></li>
+<li><a href="#NCPolynomialToNC"><span class="toc-section-number">13.3</span> NCPolynomialToNC</a></li>
+<li><a href="#NCRationalToNCPolynomial"><span class="toc-section-number">13.4</span> NCRationalToNCPolynomial</a></li>
+<li><a href="#NCPCoefficients"><span class="toc-section-number">13.5</span> NCPCoefficients</a></li>
+<li><a href="#NCPTermsOfDegree"><span class="toc-section-number">13.6</span> NCPTermsOfDegree</a></li>
+<li><a href="#NCPTermsOfTotalDegree"><span class="toc-section-number">13.7</span> NCPTermsOfTotalDegree</a></li>
+<li><a href="#NCPTermsToNC"><span class="toc-section-number">13.8</span> NCPTermsToNC</a></li>
+<li><a href="#NCPPlus"><span class="toc-section-number">13.9</span> NCPPlus</a></li>
+<li><a href="#NCPSort"><span class="toc-section-number">13.10</span> NCPSort</a></li>
+<li><a href="#NCPDecompose"><span class="toc-section-number">13.11</span> NCPDecompose</a></li>
+<li><a href="#NCPDegree"><span class="toc-section-number">13.12</span> NCPDegree</a></li>
+<li><a href="#NCPMonomialDegree"><span class="toc-section-number">13.13</span> NCPMonomialDegree</a></li>
+<li><a href="#NCPLinearQ"><span class="toc-section-number">13.14</span> NCPLinearQ</a></li>
+<li><a href="#NCPQuadraticQ"><span class="toc-section-number">13.15</span> NCPQuadraticQ</a></li>
+<li><a href="#NCPCompatibleQ"><span class="toc-section-number">13.16</span> NCPCompatibleQ</a></li>
+<li><a href="#NCPSameVariablesQ"><span class="toc-section-number">13.17</span> NCPSameVariablesQ</a></li>
+<li><a href="#NCPMatrixQ"><span class="toc-section-number">13.18</span> NCPMatrixQ</a></li>
+<li><a href="#NCPNormalize"><span class="toc-section-number">13.19</span> NCPNormalize</a></li>
 </ul></li>
-<li><a href="#NCInverse"><span class="toc-section-number">13.5</span> NCInverse</a></li>
-<li><a href="#NCMatrixExpand"><span class="toc-section-number">13.6</span> NCMatrixExpand</a></li>
+<li><a href="#PackageNCSylvester"><span class="toc-section-number">14</span> NCSylvester</a><ul>
+<li><a href="#NCPolynomialToNCSylvester"><span class="toc-section-number">14.1</span> NCPolynomialToNCSylvester</a></li>
+<li><a href="#NCSylvesterToNCPolynomial"><span class="toc-section-number">14.2</span> NCSylvesterToNCPolynomial</a></li>
 </ul></li>
-<li><a href="#PackageNCPolynomial"><span class="toc-section-number">14</span> NCPolynomial</a><ul>
-<li><a href="#NCPolynomial"><span class="toc-section-number">14.1</span> NCPolynomial</a></li>
-<li><a href="#NCToNCPolynomial"><span class="toc-section-number">14.2</span> NCToNCPolynomial</a></li>
-<li><a href="#NCPolynomialToNC"><span class="toc-section-number">14.3</span> NCPolynomialToNC</a></li>
-<li><a href="#NCRationalToNCPolynomial"><span class="toc-section-number">14.4</span> NCRationalToNCPolynomial</a></li>
-<li><a href="#NCPCoefficients"><span class="toc-section-number">14.5</span> NCPCoefficients</a></li>
-<li><a href="#NCPTermsOfDegree"><span class="toc-section-number">14.6</span> NCPTermsOfDegree</a></li>
-<li><a href="#NCPTermsOfTotalDegree"><span class="toc-section-number">14.7</span> NCPTermsOfTotalDegree</a></li>
-<li><a href="#NCPTermsToNC"><span class="toc-section-number">14.8</span> NCPTermsToNC</a></li>
-<li><a href="#NCPPlus"><span class="toc-section-number">14.9</span> NCPPlus</a></li>
-<li><a href="#NCPSort"><span class="toc-section-number">14.10</span> NCPSort</a></li>
-<li><a href="#NCPDecompose"><span class="toc-section-number">14.11</span> NCPDecompose</a></li>
-<li><a href="#NCPDegree"><span class="toc-section-number">14.12</span> NCPDegree</a></li>
-<li><a href="#NCPMonomialDegree"><span class="toc-section-number">14.13</span> NCPMonomialDegree</a></li>
-<li><a href="#NCPLinearQ"><span class="toc-section-number">14.14</span> NCPLinearQ</a></li>
-<li><a href="#NCPQuadraticQ"><span class="toc-section-number">14.15</span> NCPQuadraticQ</a></li>
-<li><a href="#NCPCompatibleQ"><span class="toc-section-number">14.16</span> NCPCompatibleQ</a></li>
-<li><a href="#NCPSameVariablesQ"><span class="toc-section-number">14.17</span> NCPSameVariablesQ</a></li>
-<li><a href="#NCPMatrixQ"><span class="toc-section-number">14.18</span> NCPMatrixQ</a></li>
-<li><a href="#NCPNormalize"><span class="toc-section-number">14.19</span> NCPNormalize</a></li>
+<li><a href="#PackageNCQuadratic"><span class="toc-section-number">15</span> NCQuadratic</a><ul>
+<li><a href="#NCQuadratic"><span class="toc-section-number">15.1</span> NCQuadratic</a></li>
+<li><a href="#NCQuadraticMakeSymmetric"><span class="toc-section-number">15.2</span> NCQuadraticMakeSymmetric</a></li>
+<li><a href="#NCMatrixOfQuadratic"><span class="toc-section-number">15.3</span> NCMatrixOfQuadratic</a></li>
+<li><a href="#NCQuadraticToNCPolynomial"><span class="toc-section-number">15.4</span> NCQuadraticToNCPolynomial</a></li>
 </ul></li>
-<li><a href="#PackageNCSylvester"><span class="toc-section-number">15</span> NCSylvester</a><ul>
-<li><a href="#NCPolynomialToNCSylvester"><span class="toc-section-number">15.1</span> NCPolynomialToNCSylvester</a></li>
-<li><a href="#NCSylvesterToNCPolynomial"><span class="toc-section-number">15.2</span> NCSylvesterToNCPolynomial</a></li>
+<li><a href="#PackageNCConvexity"><span class="toc-section-number">16</span> NCConvexity</a><ul>
+<li><a href="#NCConvexityRegion"><span class="toc-section-number">16.1</span> NCConvexityRegion</a></li>
 </ul></li>
-<li><a href="#PackageNCQuadratic"><span class="toc-section-number">16</span> NCQuadratic</a><ul>
-<li><a href="#NCQuadratic"><span class="toc-section-number">16.1</span> NCQuadratic</a></li>
-<li><a href="#NCQuadraticMakeSymmetric"><span class="toc-section-number">16.2</span> NCQuadraticMakeSymmetric</a></li>
-<li><a href="#NCMatrixOfQuadratic"><span class="toc-section-number">16.3</span> NCMatrixOfQuadratic</a></li>
-<li><a href="#NCQuadraticToNCPolynomial"><span class="toc-section-number">16.4</span> NCQuadraticToNCPolynomial</a></li>
+<li><a href="#PackageNCRealization"><span class="toc-section-number">17</span> NCRealization</a><ul>
+<li><a href="#NCDescriptorRealization"><span class="toc-section-number">17.1</span> NCDescriptorRealization</a></li>
+<li><a href="#NCDeterminantalRepresentationReciprocal"><span class="toc-section-number">17.2</span> NCDeterminantalRepresentationReciprocal</a></li>
+<li><a href="#NCMatrixDescriptorRealization"><span class="toc-section-number">17.3</span> NCMatrixDescriptorRealization</a></li>
+<li><a href="#NCMinimalDescriptorRealization"><span class="toc-section-number">17.4</span> NCMinimalDescriptorRealization</a></li>
+<li><a href="#NCSymmetricDescriptorRealization"><span class="toc-section-number">17.5</span> NCSymmetricDescriptorRealization</a></li>
+<li><a href="#NCSymmetricDeterminantalRepresentationDirect"><span class="toc-section-number">17.6</span> NCSymmetricDeterminantalRepresentationDirect</a></li>
+<li><a href="#NCSymmetricDeterminantalRepresentationReciprocal"><span class="toc-section-number">17.7</span> NCSymmetricDeterminantalRepresentationReciprocal</a></li>
+<li><a href="#NCSymmetrizeMinimalDescriptorRealization"><span class="toc-section-number">17.8</span> NCSymmetrizeMinimalDescriptorRealization</a></li>
+<li><a href="#NonCommutativeLift"><span class="toc-section-number">17.9</span> NonCommutativeLift</a></li>
+<li><a href="#SignatureOfAffineTerm"><span class="toc-section-number">17.10</span> SignatureOfAffineTerm</a></li>
+<li><a href="#TestDescriptorRealization"><span class="toc-section-number">17.11</span> TestDescriptorRealization</a></li>
+<li><a href="#PinnedQ"><span class="toc-section-number">17.12</span> PinnedQ</a></li>
+<li><a href="#PinningSpace"><span class="toc-section-number">17.13</span> PinningSpace</a></li>
 </ul></li>
-<li><a href="#PackageNCConvexity"><span class="toc-section-number">17</span> NCConvexity</a><ul>
-<li><a href="#NCConvexityRegion"><span class="toc-section-number">17.1</span> NCConvexityRegion</a></li>
+<li><a href="#PackageNCMatMult"><span class="toc-section-number">18</span> NCMatMult</a><ul>
+<li><a href="#tpMat"><span class="toc-section-number">18.1</span> tpMat</a></li>
+<li><a href="#ajMat"><span class="toc-section-number">18.2</span> ajMat</a></li>
+<li><a href="#coMat"><span class="toc-section-number">18.3</span> coMat</a></li>
+<li><a href="#MatMult"><span class="toc-section-number">18.4</span> MatMult</a><ul>
+<li><a href="#notes-1"><span class="toc-section-number">18.4.1</span> Notes</a></li>
 </ul></li>
-<li><a href="#PackageNCRealization"><span class="toc-section-number">18</span> NCRealization</a><ul>
-<li><a href="#NCDescriptorRealization"><span class="toc-section-number">18.1</span> NCDescriptorRealization</a></li>
-<li><a href="#NCDeterminantalRepresentationReciprocal"><span class="toc-section-number">18.2</span> NCDeterminantalRepresentationReciprocal</a></li>
-<li><a href="#NCMatrixDescriptorRealization"><span class="toc-section-number">18.3</span> NCMatrixDescriptorRealization</a></li>
-<li><a href="#NCMinimalDescriptorRealization"><span class="toc-section-number">18.4</span> NCMinimalDescriptorRealization</a></li>
-<li><a href="#NCSymmetricDescriptorRealization"><span class="toc-section-number">18.5</span> NCSymmetricDescriptorRealization</a></li>
-<li><a href="#NCSymmetricDeterminantalRepresentationDirect"><span class="toc-section-number">18.6</span> NCSymmetricDeterminantalRepresentationDirect</a></li>
-<li><a href="#NCSymmetricDeterminantalRepresentationReciprocal"><span class="toc-section-number">18.7</span> NCSymmetricDeterminantalRepresentationReciprocal</a></li>
-<li><a href="#NCSymmetrizeMinimalDescriptorRealization"><span class="toc-section-number">18.8</span> NCSymmetrizeMinimalDescriptorRealization</a></li>
-<li><a href="#NonCommutativeLift"><span class="toc-section-number">18.9</span> NonCommutativeLift</a></li>
-<li><a href="#SignatureOfAffineTerm"><span class="toc-section-number">18.10</span> SignatureOfAffineTerm</a></li>
-<li><a href="#TestDescriptorRealization"><span class="toc-section-number">18.11</span> TestDescriptorRealization</a></li>
-<li><a href="#PinnedQ"><span class="toc-section-number">18.12</span> PinnedQ</a></li>
-<li><a href="#PinningSpace"><span class="toc-section-number">18.13</span> PinningSpace</a></li>
+<li><a href="#NCInverse"><span class="toc-section-number">18.5</span> NCInverse</a></li>
+<li><a href="#NCMatrixExpand"><span class="toc-section-number">18.6</span> NCMatrixExpand</a></li>
 </ul></li>
 <li><a href="#PackageNCMatrixDecompositions"><span class="toc-section-number">19</span> NCMatrixDecompositions</a><ul>
 <li><a href="#NCLDLDecomposition"><span class="toc-section-number">19.1</span> NCLDLDecomposition</a></li>
@@ -192,42 +194,39 @@
 <li><a href="#LUPartialPivoting"><span class="toc-section-number">20.9</span> LUPartialPivoting</a></li>
 <li><a href="#LUCompletePivoting"><span class="toc-section-number">20.10</span> LUCompletePivoting</a></li>
 </ul></li>
-<li><a href="#PackageNCSolve"><span class="toc-section-number">21</span> NCSolve</a><ul>
-<li><a href="#NCSolve"><span class="toc-section-number">21.1</span> NCSolve</a></li>
+<li><a href="#PackageNCUtil"><span class="toc-section-number">21</span> NCUtil</a><ul>
+<li><a href="#NCConsistentQ"><span class="toc-section-number">21.1</span> NCConsistentQ</a></li>
+<li><a href="#NCGrabFunctions"><span class="toc-section-number">21.2</span> NCGrabFunctions</a></li>
+<li><a href="#NCGrabSymbols"><span class="toc-section-number">21.3</span> NCGrabSymbols</a></li>
+<li><a href="#NCGrabIndeterminants"><span class="toc-section-number">21.4</span> NCGrabIndeterminants</a></li>
+<li><a href="#NCConsolidateList"><span class="toc-section-number">21.5</span> NCConsolidateList</a></li>
+<li><a href="#NCLeafCount"><span class="toc-section-number">21.6</span> NCLeafCount</a></li>
+<li><a href="#NCReplaceData"><span class="toc-section-number">21.7</span> NCReplaceData</a></li>
+<li><a href="#NCToExpression"><span class="toc-section-number">21.8</span> NCToExpression</a></li>
 </ul></li>
-<li><a href="#PackageNCUtil"><span class="toc-section-number">22</span> NCUtil</a><ul>
-<li><a href="#NCConsistentQ"><span class="toc-section-number">22.1</span> NCConsistentQ</a></li>
-<li><a href="#NCGrabFunctions"><span class="toc-section-number">22.2</span> NCGrabFunctions</a></li>
-<li><a href="#NCGrabSymbols"><span class="toc-section-number">22.3</span> NCGrabSymbols</a></li>
-<li><a href="#NCGrabIndeterminants"><span class="toc-section-number">22.4</span> NCGrabIndeterminants</a></li>
-<li><a href="#NCConsolidateList"><span class="toc-section-number">22.5</span> NCConsolidateList</a></li>
-<li><a href="#NCLeafCount"><span class="toc-section-number">22.6</span> NCLeafCount</a></li>
-<li><a href="#NCReplaceData"><span class="toc-section-number">22.7</span> NCReplaceData</a></li>
-<li><a href="#NCToExpression"><span class="toc-section-number">22.8</span> NCToExpression</a></li>
+<li><a href="#PackageNCTest"><span class="toc-section-number">22</span> NCTest</a><ul>
+<li><a href="#NCTest"><span class="toc-section-number">22.1</span> NCTest</a></li>
+<li><a href="#NCTestRun"><span class="toc-section-number">22.2</span> NCTestRun</a></li>
+<li><a href="#NCTestSummarize"><span class="toc-section-number">22.3</span> NCTestSummarize</a></li>
 </ul></li>
-<li><a href="#PackageNCTest"><span class="toc-section-number">23</span> NCTest</a><ul>
-<li><a href="#NCTest"><span class="toc-section-number">23.1</span> NCTest</a></li>
-<li><a href="#NCTestRun"><span class="toc-section-number">23.2</span> NCTestRun</a></li>
-<li><a href="#NCTestSummarize"><span class="toc-section-number">23.3</span> NCTestSummarize</a></li>
+<li><a href="#PackageNCSDP"><span class="toc-section-number">23</span> NCSDP</a><ul>
+<li><a href="#NCSDP"><span class="toc-section-number">23.1</span> NCSDP</a></li>
+<li><a href="#NCSDPForm"><span class="toc-section-number">23.2</span> NCSDPForm</a></li>
+<li><a href="#NCSDPDual"><span class="toc-section-number">23.3</span> NCSDPDual</a></li>
+<li><a href="#NCSDPDualForm"><span class="toc-section-number">23.4</span> NCSDPDualForm</a></li>
 </ul></li>
-<li><a href="#PackageNCSDP"><span class="toc-section-number">24</span> NCSDP</a><ul>
-<li><a href="#NCSDP"><span class="toc-section-number">24.1</span> NCSDP</a></li>
-<li><a href="#NCSDPForm"><span class="toc-section-number">24.2</span> NCSDPForm</a></li>
-<li><a href="#NCSDPDual"><span class="toc-section-number">24.3</span> NCSDPDual</a></li>
-<li><a href="#NCSDPDualForm"><span class="toc-section-number">24.4</span> NCSDPDualForm</a></li>
-</ul></li>
-<li><a href="#PackageSDP"><span class="toc-section-number">25</span> SDP</a><ul>
-<li><a href="#SDPMatrices"><span class="toc-section-number">25.1</span> SDPMatrices</a></li>
-<li><a href="#SDPSolve"><span class="toc-section-number">25.2</span> SDPSolve</a></li>
-<li><a href="#SDPEval"><span class="toc-section-number">25.3</span> SDPEval</a></li>
-<li><a href="#SDPInner"><span class="toc-section-number">25.4</span> SDPInner</a></li>
-<li><a href="#SDPCheckDimensions"><span class="toc-section-number">25.5</span> SDPCheckDimensions</a></li>
-<li><a href="#SDPDualEval"><span class="toc-section-number">25.6</span> SDPDualEval</a></li>
-<li><a href="#SDPFunctions"><span class="toc-section-number">25.7</span> SDPFunctions</a></li>
-<li><a href="#SDPPrimalEval"><span class="toc-section-number">25.8</span> SDPPrimalEval</a></li>
-<li><a href="#SDPScale"><span class="toc-section-number">25.9</span> SDPScale</a></li>
-<li><a href="#SDPSylvesterDiagonalEval"><span class="toc-section-number">25.10</span> SDPSylvesterDiagonalEval</a></li>
-<li><a href="#SDPSylvesterEval"><span class="toc-section-number">25.11</span> SDPSylvesterEval</a></li>
+<li><a href="#PackageSDP"><span class="toc-section-number">24</span> SDP</a><ul>
+<li><a href="#SDPMatrices"><span class="toc-section-number">24.1</span> SDPMatrices</a></li>
+<li><a href="#SDPSolve"><span class="toc-section-number">24.2</span> SDPSolve</a></li>
+<li><a href="#SDPEval"><span class="toc-section-number">24.3</span> SDPEval</a></li>
+<li><a href="#SDPInner"><span class="toc-section-number">24.4</span> SDPInner</a></li>
+<li><a href="#SDPCheckDimensions"><span class="toc-section-number">24.5</span> SDPCheckDimensions</a></li>
+<li><a href="#SDPDualEval"><span class="toc-section-number">24.6</span> SDPDualEval</a></li>
+<li><a href="#SDPFunctions"><span class="toc-section-number">24.7</span> SDPFunctions</a></li>
+<li><a href="#SDPPrimalEval"><span class="toc-section-number">24.8</span> SDPPrimalEval</a></li>
+<li><a href="#SDPScale"><span class="toc-section-number">24.9</span> SDPScale</a></li>
+<li><a href="#SDPSylvesterDiagonalEval"><span class="toc-section-number">24.10</span> SDPSylvesterDiagonalEval</a></li>
+<li><a href="#SDPSylvesterEval"><span class="toc-section-number">24.11</span> SDPSylvesterEval</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -504,6 +503,8 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <p>If <code>expr</code> is a rational nc expression then degree correspond to the degree of the polynomial obtained using <a href="#NCRationalToNCPolynomial">NCRationalToNCPolynomial</a>.</p>
 <p><code>NCCollect</code> also works with nc expressions instead of <em>Symbols</em> in vars. In this case nc expressions are replaced by new variables and <code>NCCollect</code> is called using the resulting expression and the newly created <em>Symbols</em>.</p>
 <p>This command internally converts nc expressions into the special <code>NCPolynomial</code> format.</p>
+<h3 id="notes"><span class="header-section-number">7.1.1</span> Notes</h3>
+<p>While <code>NCCollect[expr, vars]</code> always returns mathematically correct expressions, it may not collect <code>vars</code> from as many terms as one might think it should.</p>
 <p>See also: <a href="#NCStrongCollect">NCStrongCollect</a>, <a href="#NCCollectSymmetric">NCCollectSymmetric</a>, <a href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>, <a href="#NCRationalToNCPolynomial">NCRationalToNCPolynomial</a>.</p>
 <h2 id="NCCollectSelfAdjoint"><span class="header-section-number">7.2</span> NCCollectSelfAdjoint</h2>
 <p><code>NCCollectSelfAdjoint[expr,vars]</code> allows one to collect terms of nc expression <code>expr</code> on the variables <code>vars</code> and their adjoints without writing out the adjoints.</p>
@@ -843,43 +844,7 @@ symVars = {x}</code></pre>
 <li><code>All</code>: Set all available options to <em>True</em> or <em>False</em>.</li>
 </ul>
 <p>See also: <a href="#NCOutputFunction">NCOutputFunciton</a>.</p>
-<h1 id="PackageNCMatMult"><span class="header-section-number">13</span> NCMatMult</h1>
-<p>Members are:</p>
-<ul>
-<li><a href="#tpMat">tpMat</a></li>
-<li><a href="#ajMat">ajMat</a></li>
-<li><a href="#coMat">coMat</a></li>
-<li><a href="#MatMult">MatMult</a></li>
-<li><a href="#NCInverse">NCInverse</a></li>
-<li><a href="#NCMatrixExpand">NCMatrixExpand</a></li>
-</ul>
-<h2 id="tpMat"><span class="header-section-number">13.1</span> tpMat</h2>
-<p><code>tpMat[mat]</code> gives the transpose of matrix <code>mat</code> using <code>tp</code>.</p>
-<p>See also: <a href="#tpMat">ajMat</a>, <a href="#coMat">coMat</a>, <a href="#MatMult">MatMult</a>.</p>
-<h2 id="ajMat"><span class="header-section-number">13.2</span> ajMat</h2>
-<p><code>ajMat[mat]</code> gives the adjoint transpose of matrix <code>mat</code> using <code>aj</code> instead of <code>ConjugateTranspose</code>.</p>
-<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">coMat</a>, <a href="#MatMult">MatMult</a>.</p>
-<h2 id="coMat"><span class="header-section-number">13.3</span> coMat</h2>
-<p><code>coMat[mat]</code> gives the conjugate of matrix <code>mat</code> using <code>co</code> instead of <code>Conjugate</code>.</p>
-<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a href="#MatMult">MatMult</a>.</p>
-<h2 id="MatMult"><span class="header-section-number">13.4</span> MatMult</h2>
-<p><code>MatMult[mat1, mat2, ...]</code> gives the matrix multiplication of <code>mat1</code>, <code>mat2</code>, ... using <code>NonCommutativeMultiply</code> rather than <code>Times</code>.</p>
-<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a href="#coMat">coMat</a>.</p>
-<h3 id="notes"><span class="header-section-number">13.4.1</span> Notes</h3>
-<p>The experienced matrix analyst should always remember that the Mathematica convention for handling vectors is tricky.</p>
-<ul>
-<li><code>{{1,2,4}}</code> is a 1x3 <em>matrix</em> or a <em>row vector</em>;</li>
-<li><code>{{1},{2},{4}}</code> is a 3x1 <em>matrix</em> or a <em>column vector</em>;</li>
-<li><code>{1,2,4}</code> is a <em>vector</em> but <strong>not</strong> a <em>matrix</em>. Indeed whether it is a row or column vector depends on the context. We advise not to use <em>vectors</em>.</li>
-</ul>
-<h2 id="NCInverse"><span class="header-section-number">13.5</span> NCInverse</h2>
-<p><code>NCInverse[mat]</code> gives the nc inverse of the square matrix <code>mat</code>. <code>NCInverse</code> uses partial pivoting to find a nonzero pivot.</p>
-<p><code>NCInverse</code> is primarily used symbolically. Usually the elements of the inverse matrix are huge expressions. We recommend using <code>NCSimplifyRational</code> to improve the results.</p>
-<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a href="#coMat">coMat</a>.</p>
-<h2 id="NCMatrixExpand"><span class="header-section-number">13.6</span> NCMatrixExpand</h2>
-<p><code>NCMatrixExpand[expr]</code> expands <code>inv</code> and <code>**</code> of matrices appearing in nc expression <code>expr</code>. It effectively substitutes <code>inv</code> for <code>NCInverse</code> and <code>**</code> by <code>MatMult</code>.</p>
-<p>See also: <a href="#NCInverse">NCInverse</a>, <a href="#MatMult">MatMult</a>.</p>
-<h1 id="PackageNCPolynomial"><span class="header-section-number">14</span> NCPolynomial</h1>
+<h1 id="PackageNCPolynomial"><span class="header-section-number">13</span> NCPolynomial</h1>
 <p>This package contains functionality to convert an nc polynomial expression into an expanded efficient representation for an nc polynomial which can have commutative or noncommutative coefficients.</p>
 <p>For example the polynomial</p>
 <pre><code>exp = a**x**b - 2 x**y**c**x + a**c</code></pre>
@@ -908,7 +873,7 @@ symVars = {x}</code></pre>
 <li><a href="#NCPQuadraticQ">NCPQuadraticQ</a></li>
 <li><a href="#NCPNormalize">NCPNormalize</a></li>
 </ul>
-<h2 id="NCPolynomial"><span class="header-section-number">14.1</span> NCPolynomial</h2>
+<h2 id="NCPolynomial"><span class="header-section-number">13.1</span> NCPolynomial</h2>
 <p><code>NCPolynomial[indep,rules,vars]</code> is an expanded efficient representation for an nc polynomial in <code>vars</code> which can have commutative or noncommutative coefficients.</p>
 <p>The nc expression <code>indep</code> collects all terms that are independent of the letters in <code>vars</code>.</p>
 <p>The <em>Association</em> <code>rules</code> stores terms in the following format:</p>
@@ -926,7 +891,7 @@ symVars = {x}</code></pre>
 <pre><code>NCPolynomial[a**c, &lt;|{x}-&gt;{{1,a,b}},{x**y,x}-&gt;{{2,1,c,1}}|&gt;, {x,y}]</code></pre>
 <p>NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.</p>
 <p>See also: <a href="#NCToNCPolynomial"><code>NCToNCPolynomial</code></a>, <a href="#NCPolynomialToNC"><code>NCPolynomialToNC</code></a>, <a href="#NCTermsToNC"><code>NCTermsToNC</code></a>.</p>
-<h2 id="NCToNCPolynomial"><span class="header-section-number">14.2</span> NCToNCPolynomial</h2>
+<h2 id="NCToNCPolynomial"><span class="header-section-number">13.2</span> NCToNCPolynomial</h2>
 <p><code>NCToNCPolynomial[p, vars]</code> generates a representation of the noncommutative polynomial <code>p</code> in <code>vars</code> which can have commutative or noncommutative coefficients.</p>
 <p><code>NCToNCPolynomial[p]</code> generates an <code>NCPolynomial</code> in all nc variables appearing in <code>p</code>.</p>
 <p>Example:</p>
@@ -935,10 +900,10 @@ p = NCToNCPolynomial[exp, {x,y}]</code></pre>
 <p>returns</p>
 <pre><code>NCPolynomial[a**c, &lt;|{x}-&gt;{{1,a,b}},{x**y,x}-&gt;{{2,1,c,1}}|&gt;, {x,y}]</code></pre>
 <p>See also: <a href="#NCPolynomial"><code>NCPolynomial</code></a>, <a href="#NCPolynomialToNC"><code>NCPolynomialToNC</code></a>.</p>
-<h2 id="NCPolynomialToNC"><span class="header-section-number">14.3</span> NCPolynomialToNC</h2>
+<h2 id="NCPolynomialToNC"><span class="header-section-number">13.3</span> NCPolynomialToNC</h2>
 <p><code>NCPolynomialToNC[p]</code> converts the NCPolynomial <code>p</code> back into a regular nc polynomial.</p>
 <p>See also: <a href="#NCPolynomial"><code>NCPolynomial</code></a>, <a href="#NCToNCPolynomial"><code>NCToNCPolynomial</code></a>.</p>
-<h2 id="NCRationalToNCPolynomial"><span class="header-section-number">14.4</span> NCRationalToNCPolynomial</h2>
+<h2 id="NCRationalToNCPolynomial"><span class="header-section-number">13.4</span> NCRationalToNCPolynomial</h2>
 <p><code>NCRationalToNCPolynomial[r, vars]</code> generates a representation of the noncommutative rational expression <code>r</code> in <code>vars</code> which can have commutative or noncommutative coefficients.</p>
 <p><code>NCRationalToNCPolynomial[r]</code> generates an <code>NCPolynomial</code> in all nc variables appearing in <code>r</code>.</p>
 <p><code>NCRationalToNCPolynomial</code> creates one variable for each <code>inv</code> expression in <code>vars</code> appearing in the rational expression <code>r</code>. It returns a list of three elements:</p>
@@ -955,7 +920,7 @@ p = NCToNCPolynomial[exp, {x,y}]</code></pre>
 rvars = {rat1}
 rules = {rat1-&gt;inv[x]}</code></pre>
 <p>See also: <a href="#NCPolynomial"><code>NCToNCPolynomial</code></a>, <a href="#NCPolynomialToNC"><code>NCPolynomialToNC</code></a>.</p>
-<h2 id="NCPCoefficients"><span class="header-section-number">14.5</span> NCPCoefficients</h2>
+<h2 id="NCPCoefficients"><span class="header-section-number">13.5</span> NCPCoefficients</h2>
 <p><code>NCPCoefficients[p, m]</code> gives all coefficients of the NCPolynomial <code>p</code> in the monomial <code>m</code>.</p>
 <p>For example:</p>
 <pre><code>exp = a ** x ** b - 2 x ** y ** c ** x + a ** c + d ** x
@@ -968,7 +933,7 @@ NCPCoefficients[p, {x}]</code></pre>
 <p>returns</p>
 <pre><code>{{-2, 1, c, 1}}</code></pre>
 <p>See also: <a href="#NCPTermsToNC"><code>NCPTermsToNC</code></a>.</p>
-<h2 id="NCPTermsOfDegree"><span class="header-section-number">14.6</span> NCPTermsOfDegree</h2>
+<h2 id="NCPTermsOfDegree"><span class="header-section-number">13.6</span> NCPTermsOfDegree</h2>
 <p><code>NCPTermsOfDegree[p,deg]</code> gives all terms of the NCPolynomial <code>p</code> of degree <code>deg</code>.</p>
 <p>The degree <code>deg</code> is a list with the degree of each symbol.</p>
 <p>For example:</p>
@@ -983,7 +948,7 @@ NCPTermsOfDegree[p, {1,1}]</code></pre>
 <p>returns</p>
 <pre><code>&lt;|{x,x}-&gt;{{1,a,b,c}}, {x**x}-&gt;{{-1,a,b}}|&gt;</code></pre>
 <p>See also: <a href="#NCPTermsOfTotalDegree"><code>NCPTermsOfTotalDegree</code></a>,<a href="#NCPTermsToNC"><code>NCPTermsToNC</code></a>.</p>
-<h2 id="NCPTermsOfTotalDegree"><span class="header-section-number">14.7</span> NCPTermsOfTotalDegree</h2>
+<h2 id="NCPTermsOfTotalDegree"><span class="header-section-number">13.7</span> NCPTermsOfTotalDegree</h2>
 <p><code>NCPTermsOfDegree[p,deg]</code> gives all terms of the NCPolynomial <code>p</code> of total degree <code>deg</code>.</p>
 <p>The degree <code>deg</code> is the total degree.</p>
 <p>For example:</p>
@@ -994,7 +959,7 @@ NCPTermsOfDegree[p, 2]</code></pre>
 <p>returns</p>
 <pre><code>&lt;|{x,y}-&gt;{{2,a,b,c}},{x,x}-&gt;{{1,a,b,c}},{x**x}-&gt;{{-1,a,b}}|&gt;</code></pre>
 <p>See also: <a href="#NCPTermsOfDegree"><code>NCPTermsOfDegree</code></a>,<a href="#NCPTermsToNC"><code>NCPTermsToNC</code></a>.</p>
-<h2 id="NCPTermsToNC"><span class="header-section-number">14.8</span> NCPTermsToNC</h2>
+<h2 id="NCPTermsToNC"><span class="header-section-number">13.8</span> NCPTermsToNC</h2>
 <p><code>NCPTermsToNC</code> gives a nc expression corresponding to terms produced by <code>NCPTermsOfDegree</code> or <code>NCTermsOfTotalDegree</code>.</p>
 <p>For example:</p>
 <pre><code>terms = &lt;|{x,x}-&gt;{{1,a,b,c}}, {x**x}-&gt;{{-1,a,b}}|&gt;
@@ -1002,55 +967,55 @@ NCPTermsToNC[terms]</code></pre>
 <p>returns</p>
 <pre><code>a**x**b**c-a**x**b</code></pre>
 <p>See also: <a href="#NCPTermsOfDegree"><code>NCPTermsOfDegree</code></a>,<a href="#NCPTermsOfTotalDegree"><code>NCPTermsOfTotalDegree</code></a>.</p>
-<h2 id="NCPPlus"><span class="header-section-number">14.9</span> NCPPlus</h2>
+<h2 id="NCPPlus"><span class="header-section-number">13.9</span> NCPPlus</h2>
 <p><code>NCPPlus[p1,p2,...]</code> gives the sum of the nc polynomials <code>p1</code>,<code>p2</code>,... .</p>
-<h2 id="NCPSort"><span class="header-section-number">14.10</span> NCPSort</h2>
+<h2 id="NCPSort"><span class="header-section-number">13.10</span> NCPSort</h2>
 <p><code>NCPSort[p]</code> gives a list of elements of the NCPolynomial <code>p</code> in which monomials are sorted first according to their degree then by Mathematica's implicit ordering.</p>
 <p>For example</p>
 <pre><code>NCPSort[NCPolynomial[c + x**x - 2 y, {x,y}]]</code></pre>
 <p>will produce the list</p>
 <pre><code>{c, -2 y, x**x}</code></pre>
 <p>See also: <a href="#NCPDecompose">NCPDecompose</a>, <a href="#NCDecompose">NCDecompose</a>, <a href="#NCCompose">NCCompose</a>.</p>
-<h2 id="NCPDecompose"><span class="header-section-number">14.11</span> NCPDecompose</h2>
+<h2 id="NCPDecompose"><span class="header-section-number">13.11</span> NCPDecompose</h2>
 <p><code>NCPDecompose[p]</code> gives an association of elements of the NCPolynomial <code>p</code> in which elements of the same order are collected together.</p>
 <p>For example</p>
 <pre><code>NCPDecompose[NCPolynomial[a**x**b+c+d**x**e+a**x**e**x**b+a**x**y, {x,y}]]</code></pre>
 <p>will produce the Association</p>
 <pre><code>&lt;|{1,0}-&gt;a**x**b + d**x**e, {1,1}-&gt;a**x**y, {2,0}-&gt;a**x**e**x**b, {0,0}-&gt;c|&gt;</code></pre>
 <p>See also: <a href="#NCPSort">NCPSort</a>, <a href="#NCDecompose">NCDecompose</a>, <a href="#NCCompose">NCCompose</a>.</p>
-<h2 id="NCPDegree"><span class="header-section-number">14.12</span> NCPDegree</h2>
+<h2 id="NCPDegree"><span class="header-section-number">13.12</span> NCPDegree</h2>
 <p><code>NCPDegree[p]</code> gives the degree of the NCPolynomial <code>p</code>.</p>
 <p>See also: <a href="#NCPMonomialDegree"><code>NCPMonomialDegree</code></a>.</p>
-<h2 id="NCPMonomialDegree"><span class="header-section-number">14.13</span> NCPMonomialDegree</h2>
+<h2 id="NCPMonomialDegree"><span class="header-section-number">13.13</span> NCPMonomialDegree</h2>
 <p><code>NCPDegree[p]</code> gives the degree of each monomial in the NCPolynomial <code>p</code>.</p>
 <p>See also: <a href="#NCPMonomialDegree"><code>NCDegree</code></a>.</p>
-<h2 id="NCPLinearQ"><span class="header-section-number">14.14</span> NCPLinearQ</h2>
+<h2 id="NCPLinearQ"><span class="header-section-number">13.14</span> NCPLinearQ</h2>
 <p><code>NCPLinearQ[p]</code> gives True if the NCPolynomial <code>p</code> is linear.</p>
 <p>See also: <a href="#NCPQuadraticQ"><code>NCPQuadraticQ</code></a>.</p>
-<h2 id="NCPQuadraticQ"><span class="header-section-number">14.15</span> NCPQuadraticQ</h2>
+<h2 id="NCPQuadraticQ"><span class="header-section-number">13.15</span> NCPQuadraticQ</h2>
 <p><code>NCPQuadraticQ[p]</code> gives True if the NCPolynomial <code>p</code> is quadratic.</p>
 <p>See also: <a href="#NCPLinearQ"><code>NCPLinearQ</code></a>.</p>
-<h2 id="NCPCompatibleQ"><span class="header-section-number">14.16</span> NCPCompatibleQ</h2>
+<h2 id="NCPCompatibleQ"><span class="header-section-number">13.16</span> NCPCompatibleQ</h2>
 <p><code>NCPCompatibleQ[p1,p2,...]</code> returns <em>True</em> if the polynomials <code>p1</code>,<code>p2</code>,... have the same variables and dimensions.</p>
 <p>See also: <a href="#NCPSameVariablesQ">NCPSameVariablesQ</a>, <a href="#NCPMatrixQ">NCPMatrixQ</a>.</p>
-<h2 id="NCPSameVariablesQ"><span class="header-section-number">14.17</span> NCPSameVariablesQ</h2>
+<h2 id="NCPSameVariablesQ"><span class="header-section-number">13.17</span> NCPSameVariablesQ</h2>
 <p><code>NCPSameVariablesQ[p1,p2,...]</code> returns <em>True</em> if the polynomials <code>p1</code>,<code>p2</code>,... have the same variables.</p>
 <p>See also: <a href="#NCPCompatibleQ">NCPCompatibleQ</a>, <a href="#NCPMatrixQ">NCPMatrixQ</a>.</p>
-<h2 id="NCPMatrixQ"><span class="header-section-number">14.18</span> NCPMatrixQ</h2>
+<h2 id="NCPMatrixQ"><span class="header-section-number">13.18</span> NCPMatrixQ</h2>
 <p><code>NCMatrixQ[p]</code> returns <em>True</em> if the polynomial <code>p</code> is a matrix polynomial.</p>
 <p>See also: <a href="#NCPCompatibleQ">NCPCompatibleQ</a>.</p>
-<h2 id="NCPNormalize"><span class="header-section-number">14.19</span> NCPNormalize</h2>
+<h2 id="NCPNormalize"><span class="header-section-number">13.19</span> NCPNormalize</h2>
 <p><code>NCPNormalizes[p]</code> gives a normalized version of NCPolynomial p where all factors that have free commutative products are collectd in the scalar.</p>
 <p>This function is intended to be used mostly by developers.</p>
 <p>See also: <a href="#NCPolynomial"><code>NCPolynomial</code></a></p>
-<h1 id="PackageNCSylvester"><span class="header-section-number">15</span> NCSylvester</h1>
+<h1 id="PackageNCSylvester"><span class="header-section-number">14</span> NCSylvester</h1>
 <p><strong>NCSylvester</strong> is a package that provides functionality to handle linear polynomials in NC variables.</p>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCPolynomialToNCSylvester">NCPolynomialToNCSylvester</a></li>
 <li><a href="#NCSylvesterToNCPolynomial">NCSylvesterToNCPolynomial</a></li>
 </ul>
-<h2 id="NCPolynomialToNCSylvester"><span class="header-section-number">15.1</span> NCPolynomialToNCSylvester</h2>
+<h2 id="NCPolynomialToNCSylvester"><span class="header-section-number">14.1</span> NCPolynomialToNCSylvester</h2>
 <p><code>NCPolynomialToNCSylvester[p]</code> gives an expanded representation for the linear <code>NCPolynomial</code> <code>p</code>.</p>
 <p><code>NCPolynomialToNCSylvester</code> returns a list with two elements:</p>
 <ul>
@@ -1068,12 +1033,12 @@ NCPTermsToNC[terms]</code></pre>
 sylv = &lt;|x-&gt;{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]}, 
          y-&gt;{{1},{1},SparseArray[{{1}}]}|&gt;</code></pre>
 <p>See also: <a href="#NCSylvesterToNCPolynomial">NCSylvesterToNCPolynomial</a>, <a href="#NCPolynomial">NCPolynomial</a>.</p>
-<h2 id="NCSylvesterToNCPolynomial"><span class="header-section-number">15.2</span> NCSylvesterToNCPolynomial</h2>
+<h2 id="NCSylvesterToNCPolynomial"><span class="header-section-number">14.2</span> NCSylvesterToNCPolynomial</h2>
 <p><code>NCSylvesterToNCPolynomial[rep]</code> takes the list <code>rep</code> produced by <code>NCPolynomialToNCSylvester</code> and converts it back to an <code>NCPolynomial</code>.</p>
 <p><code>NCSylvesterToNCPolynomial[rep,options]</code> uses <code>options</code>.</p>
 <p>The following <code>options</code> can be given: * <code>Collect</code> (<em>True</em>): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.</p>
 <p>See also: <a href="#NCPolynomialToNCSylvester">NCPolynomialToNCSylvester</a>, <a href="#NCPolynomial">NCPolynomial</a>.</p>
-<h1 id="PackageNCQuadratic"><span class="header-section-number">16</span> NCQuadratic</h1>
+<h1 id="PackageNCQuadratic"><span class="header-section-number">15</span> NCQuadratic</h1>
 <p><strong>NCQuadratic</strong> is a package that provides functionality to handle quadratic polynomials in NC variables.</p>
 <p>Members are:</p>
 <ul>
@@ -1082,7 +1047,7 @@ sylv = &lt;|x-&gt;{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]},
 <li><a href="#NCQuadratic">NCQuadratic</a></li>
 <li><a href="#NCQuadraticToNCPolynomial">NCQuadraticToNCPolynomial</a></li>
 </ul>
-<h2 id="NCQuadratic"><span class="header-section-number">16.1</span> NCQuadratic</h2>
+<h2 id="NCQuadratic"><span class="header-section-number">15.1</span> NCQuadratic</h2>
 <p><code>NCQuadratic[p]</code> gives an expanded representation for the quadratic <code>NCPolynomial</code> <code>p</code>.</p>
 <p><code>NCQuadratic</code> returns a list with four elements:</p>
 <ul>
@@ -1104,15 +1069,15 @@ left =  {x,d**y}
 middle = SparseArray[{{1+a+e,b},{0,c}}]
 right = {x,y**d}</code></pre>
 <p>See also: <a href="#NCSylvester">NCSylvester</a>,<a href="#NCQuadraticToNCPolynomial">NCQuadraticToNCPolynomial</a>,<a href="#NCPolynomial">NCPolynomial</a>.</p>
-<h2 id="NCQuadraticMakeSymmetric"><span class="header-section-number">16.2</span> NCQuadraticMakeSymmetric</h2>
+<h2 id="NCQuadraticMakeSymmetric"><span class="header-section-number">15.2</span> NCQuadraticMakeSymmetric</h2>
 <p><code>NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]</code> takes the output of <a href="#NCQuadratic"><code>NCQuadratic</code></a> and produces, if possible, an equivalent symmetric representation in which <code>Map[tp, left] = right</code> and <code>middle</code> is a symmetric matrix.</p>
 <p>See also: <a href="#NCQuadratic">NCQuadratic</a>.</p>
-<h2 id="NCMatrixOfQuadratic"><span class="header-section-number">16.3</span> NCMatrixOfQuadratic</h2>
+<h2 id="NCMatrixOfQuadratic"><span class="header-section-number">15.3</span> NCMatrixOfQuadratic</h2>
 <p><code>NCMatrixOfQuadratic[p, vars]</code> gives a factorization of the symmetric quadratic function <code>p</code> in noncommutative variables <code>vars</code> and their transposes.</p>
 <p><code>NCMatrixOfQuadratic</code> checks for symmetry and automatically sets variables to be symmetric if possible.</p>
 <p>Internally it uses <a href="#NCQuadratic">NCQuadratic</a> and <a href="#NCQuadraticMakeSymmetric">NCQuadraticMakeSymmetric</a>.</p>
 <p>See also: <a href="#NCQuadratic">NCQuadratic</a>, <a href="#NCQuadraticMakeSymmetric">NCQuadraticMakeSymmetric</a>.</p>
-<h2 id="NCQuadraticToNCPolynomial"><span class="header-section-number">16.4</span> NCQuadraticToNCPolynomial</h2>
+<h2 id="NCQuadraticToNCPolynomial"><span class="header-section-number">15.4</span> NCQuadraticToNCPolynomial</h2>
 <p><code>NCQuadraticToNCPolynomial[rep]</code> takes the list <code>rep</code> produced by <code>NCQuadratic</code> and converts it back to an <code>NCPolynomial</code>.</p>
 <p><code>NCQuadraticToNCPolynomial[rep,options]</code> uses options.</p>
 <p>The following options can be given:</p>
@@ -1120,16 +1085,16 @@ right = {x,y**d}</code></pre>
 <li><code>Collect</code> (<em>True</em>): controls whether the coefficients of the resulting <code>NCPolynomial</code> are collected to produce the minimal possible number of terms.</li>
 </ul>
 <p>See also: <a href="#NCQuadratic">NCQuadratic</a>, <a href="#NCPolynomial">NCPolynomial</a>.</p>
-<h1 id="PackageNCConvexity"><span class="header-section-number">17</span> NCConvexity</h1>
+<h1 id="PackageNCConvexity"><span class="header-section-number">16</span> NCConvexity</h1>
 <p><strong>NCConvexity</strong> is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.</p>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCConvexityRegion">NCConvexityRegion</a></li>
 </ul>
-<h2 id="NCConvexityRegion"><span class="header-section-number">17.1</span> NCConvexityRegion</h2>
+<h2 id="NCConvexityRegion"><span class="header-section-number">16.1</span> NCConvexityRegion</h2>
 <p><code>NCConvexityRegion</code> is a function which can be used to determine whether a noncommutative function is convex or not.</p>
 <p>See also: <a href="#NCMatrixOfQuadratics">NCMatrixOfQuadratics</a>.</p>
-<h1 id="PackageNCRealization"><span class="header-section-number">18</span> NCRealization</h1>
+<h1 id="PackageNCRealization"><span class="header-section-number">17</span> NCRealization</h1>
 <p>The package <strong>NCRealization</strong> implements an algorithm due to N. Slinglend for producing minimal realizations of nc rational functions in many nc variables. See &quot;Toward Making LMIs Automatically&quot;.</p>
 <p>It actually computes formulas similar to those used in the paper &quot;Noncommutative Convexity Arises From Linear Matrix Inequalities&quot; by J William Helton, Scott A. McCullough, and Victor Vinnikov. In particular, there are functions for calculating (symmetric) minimal descriptor realizations of nc (symmetric) rational functions, and determinantal representations of polynomials.</p>
 <p>Members are:</p>
@@ -1154,34 +1119,70 @@ right = {x,y**d}</code></pre>
 <li><a href="#SignatureOfAffineTerm">SignatureOfAffineTerm</a></li>
 </ul></li>
 </ul>
-<h2 id="NCDescriptorRealization"><span class="header-section-number">18.1</span> NCDescriptorRealization</h2>
+<h2 id="NCDescriptorRealization"><span class="header-section-number">17.1</span> NCDescriptorRealization</h2>
 <p><code>NCDescriptorRealization[RationalExpression,UnknownVariables]</code> returns a list of 3 matrices <code>{C,G,B}</code> such that <span class="math inline">\(C G^{-1} B\)</span> is the given <code>RationalExpression</code>. i.e. <code>MatMult[C,NCInverse[G],B] === RationalExpression</code>.</p>
 <p><code>C</code> and <code>B</code> do not contain any <code>UnknownsVariables</code> and <code>G</code> has linear entries in the <code>UnknownVariables</code>.</p>
-<h2 id="NCDeterminantalRepresentationReciprocal"><span class="header-section-number">18.2</span> NCDeterminantalRepresentationReciprocal</h2>
+<h2 id="NCDeterminantalRepresentationReciprocal"><span class="header-section-number">17.2</span> NCDeterminantalRepresentationReciprocal</h2>
 <p><code>NCDeterminantalRepresentationReciprocal[Polynomial,Unknowns]</code> returns a linear pencil matrix whose determinant equals <code>Constant * CommuteEverything[Polynomial]</code>. This uses the reciprocal algorithm: find a minimal descriptor realization of <code>inv[Polynomial]</code>, so <code>Polynomial</code> must be nonzero at the origin.</p>
-<h2 id="NCMatrixDescriptorRealization"><span class="header-section-number">18.3</span> NCMatrixDescriptorRealization</h2>
+<h2 id="NCMatrixDescriptorRealization"><span class="header-section-number">17.3</span> NCMatrixDescriptorRealization</h2>
 <p><code>NCMatrixDescriptorRealization[RationalMatrix,UnknownVariables]</code> is similar to <code>NCDescriptorRealization</code> except it takes a <em>Matrix</em> with rational function entries and returns a matrix of lists of the vectors/matrix <code>{C,G,B}</code>. A different <code>{C,G,B}</code> for each entry.</p>
-<h2 id="NCMinimalDescriptorRealization"><span class="header-section-number">18.4</span> NCMinimalDescriptorRealization</h2>
+<h2 id="NCMinimalDescriptorRealization"><span class="header-section-number">17.4</span> NCMinimalDescriptorRealization</h2>
 <p><code>NCMinimalDescriptorRealization[RationalFunction,UnknownVariables]</code> returns <code>{C,G,B}</code> where <code>MatMult[C,NCInverse[G],B] == RationalFunction</code>, <code>G</code> is linear in the <code>UnknownVariables</code>, and the realization is minimal (may be pinned).</p>
-<h2 id="NCSymmetricDescriptorRealization"><span class="header-section-number">18.5</span> NCSymmetricDescriptorRealization</h2>
+<h2 id="NCSymmetricDescriptorRealization"><span class="header-section-number">17.5</span> NCSymmetricDescriptorRealization</h2>
 <p><code>NCSymmetricDescriptorRealization[RationalSymmetricFunction, Unknowns]</code> combines two steps: <code>NCSymmetrizeMinimalDescriptorRealization[NCMinimalDescriptorRealization[RationalSymmetricFunction, Unknowns]]</code>.</p>
-<h2 id="NCSymmetricDeterminantalRepresentationDirect"><span class="header-section-number">18.6</span> NCSymmetricDeterminantalRepresentationDirect</h2>
+<h2 id="NCSymmetricDeterminantalRepresentationDirect"><span class="header-section-number">17.6</span> NCSymmetricDeterminantalRepresentationDirect</h2>
 <p><code>NCSymmetricDeterminantalRepresentationDirect[SymmetricPolynomial,Unknowns]</code> returns a linear pencil matrix whose determinant equals <code>Constant * CommuteEverything[SymmetricPolynomial]</code>. This uses the direct algorithm: Find a realization of 1 - NCSymmetricPolynomial,...</p>
-<h2 id="NCSymmetricDeterminantalRepresentationReciprocal"><span class="header-section-number">18.7</span> NCSymmetricDeterminantalRepresentationReciprocal</h2>
+<h2 id="NCSymmetricDeterminantalRepresentationReciprocal"><span class="header-section-number">17.7</span> NCSymmetricDeterminantalRepresentationReciprocal</h2>
 <p><code>NCSymmetricDeterminantalRepresentationReciprocal[SymmetricPolynomial,Unknowns]</code> returns a linear pencil matrix whose determinant equals <code>Constant * CommuteEverything[NCSymmetricPolynomial]</code>. This uses the reciprocal algorithm: find a symmetric minimal descriptor realization of <code>inv[NCSymmetricPolynomial]</code>, so NCSymmetricPolynomial must be nonzero at the origin.</p>
-<h2 id="NCSymmetrizeMinimalDescriptorRealization"><span class="header-section-number">18.8</span> NCSymmetrizeMinimalDescriptorRealization</h2>
+<h2 id="NCSymmetrizeMinimalDescriptorRealization"><span class="header-section-number">17.8</span> NCSymmetrizeMinimalDescriptorRealization</h2>
 <p><code>NCSymmetrizeMinimalDescriptorRealization[{C,G,B},Unknowns]</code> symmetrizes the minimal realization <code>{C,G,B}</code> (such as output from <code>NCMinimalRealization</code>) and outputs <code>{Ctilda,Gtilda}</code> corresponding to the realization <code>{Ctilda, Gtilda,Transpose[Ctilda]}</code>.</p>
 <p><strong>WARNING:</strong> May produces errors if the realization doesn't correspond to a symmetric rational function.</p>
-<h2 id="NonCommutativeLift"><span class="header-section-number">18.9</span> NonCommutativeLift</h2>
+<h2 id="NonCommutativeLift"><span class="header-section-number">17.9</span> NonCommutativeLift</h2>
 <p><code>NonCommutativeLift[Rational]</code> returns a noncommutative symmetric lift of <code>Rational</code>.</p>
-<h2 id="SignatureOfAffineTerm"><span class="header-section-number">18.10</span> SignatureOfAffineTerm</h2>
+<h2 id="SignatureOfAffineTerm"><span class="header-section-number">17.10</span> SignatureOfAffineTerm</h2>
 <p><code>SignatureOfAffineTerm[Pencil,Unknowns]</code> returns a list of the number of positive, negative and zero eigenvalues in the affine part of <code>Pencil</code>.</p>
-<h2 id="TestDescriptorRealization"><span class="header-section-number">18.11</span> TestDescriptorRealization</h2>
+<h2 id="TestDescriptorRealization"><span class="header-section-number">17.11</span> TestDescriptorRealization</h2>
 <p><code>TestDescriptorRealization[Rat,{C,G,B},Unknowns]</code> checks if <code>Rat</code> equals <span class="math inline">\(C G^{-1} B\)</span> by substituting random 2-by-2 matrices in for the unknowns. <code>TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]</code> can be used to specify the <code>NumberOfTests</code>, the default being 5.</p>
-<h2 id="PinnedQ"><span class="header-section-number">18.12</span> PinnedQ</h2>
+<h2 id="PinnedQ"><span class="header-section-number">17.12</span> PinnedQ</h2>
 <p><code>PinnedQ[Pencil_,Unknowns_]</code> is True or False.</p>
-<h2 id="PinningSpace"><span class="header-section-number">18.13</span> PinningSpace</h2>
+<h2 id="PinningSpace"><span class="header-section-number">17.13</span> PinningSpace</h2>
 <p><code>PinningSpace[Pencil_,Unknowns_]</code> returns a matrix whose columns span the pinning space of <code>Pencil</code>. Generally, either an empty matrix or a d-by-1 matrix (vector).</p>
+<h1 id="PackageNCMatMult"><span class="header-section-number">18</span> NCMatMult</h1>
+<p>Members are:</p>
+<ul>
+<li><a href="#tpMat">tpMat</a></li>
+<li><a href="#ajMat">ajMat</a></li>
+<li><a href="#coMat">coMat</a></li>
+<li><a href="#MatMult">MatMult</a></li>
+<li><a href="#NCInverse">NCInverse</a></li>
+<li><a href="#NCMatrixExpand">NCMatrixExpand</a></li>
+</ul>
+<h2 id="tpMat"><span class="header-section-number">18.1</span> tpMat</h2>
+<p><code>tpMat[mat]</code> gives the transpose of matrix <code>mat</code> using <code>tp</code>.</p>
+<p>See also: <a href="#tpMat">ajMat</a>, <a href="#coMat">coMat</a>, <a href="#MatMult">MatMult</a>.</p>
+<h2 id="ajMat"><span class="header-section-number">18.2</span> ajMat</h2>
+<p><code>ajMat[mat]</code> gives the adjoint transpose of matrix <code>mat</code> using <code>aj</code> instead of <code>ConjugateTranspose</code>.</p>
+<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">coMat</a>, <a href="#MatMult">MatMult</a>.</p>
+<h2 id="coMat"><span class="header-section-number">18.3</span> coMat</h2>
+<p><code>coMat[mat]</code> gives the conjugate of matrix <code>mat</code> using <code>co</code> instead of <code>Conjugate</code>.</p>
+<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a href="#MatMult">MatMult</a>.</p>
+<h2 id="MatMult"><span class="header-section-number">18.4</span> MatMult</h2>
+<p><code>MatMult[mat1, mat2, ...]</code> gives the matrix multiplication of <code>mat1</code>, <code>mat2</code>, ... using <code>NonCommutativeMultiply</code> rather than <code>Times</code>.</p>
+<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a href="#coMat">coMat</a>.</p>
+<h3 id="notes-1"><span class="header-section-number">18.4.1</span> Notes</h3>
+<p>The experienced matrix analyst should always remember that the Mathematica convention for handling vectors is tricky.</p>
+<ul>
+<li><code>{{1,2,4}}</code> is a 1x3 <em>matrix</em> or a <em>row vector</em>;</li>
+<li><code>{{1},{2},{4}}</code> is a 3x1 <em>matrix</em> or a <em>column vector</em>;</li>
+<li><code>{1,2,4}</code> is a <em>vector</em> but <strong>not</strong> a <em>matrix</em>. Indeed whether it is a row or column vector depends on the context. We advise not to use <em>vectors</em>.</li>
+</ul>
+<h2 id="NCInverse"><span class="header-section-number">18.5</span> NCInverse</h2>
+<p><code>NCInverse[mat]</code> gives the nc inverse of the square matrix <code>mat</code>. <code>NCInverse</code> uses partial pivoting to find a nonzero pivot.</p>
+<p><code>NCInverse</code> is primarily used symbolically. Usually the elements of the inverse matrix are huge expressions. We recommend using <code>NCSimplifyRational</code> to improve the results.</p>
+<p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a href="#coMat">coMat</a>.</p>
+<h2 id="NCMatrixExpand"><span class="header-section-number">18.6</span> NCMatrixExpand</h2>
+<p><code>NCMatrixExpand[expr]</code> expands <code>inv</code> and <code>**</code> of matrices appearing in nc expression <code>expr</code>. It effectively substitutes <code>inv</code> for <code>NCInverse</code> and <code>**</code> by <code>MatMult</code>.</p>
+<p>See also: <a href="#NCInverse">NCInverse</a>, <a href="#MatMult">MatMult</a>.</p>
 <h1 id="PackageNCMatrixDecompositions"><span class="header-section-number">19</span> NCMatrixDecompositions</h1>
 <p>Members are:</p>
 <ul>
@@ -1238,6 +1239,8 @@ right = {x,y**d}</code></pre>
 <li><a href="#GetLDUMatrices">GetLDUMatrices</a></li>
 <li><a href="#LUPartialPivoting">LUPartialPivoting</a></li>
 <li><a href="#LUCompletePivoting">LUCompletePivoting</a></li>
+<li><a href="#LUNoPartialPivoting">LUNoPartialPivoting</a></li>
+<li><a href="#LUNoCompletePivoting">LUNoCompletePivoting</a></li>
 </ul></li>
 </ul>
 <h2 id="LUDecompositionWithPartialPivoting"><span class="header-section-number">20.1</span> LUDecompositionWithPartialPivoting</h2>
@@ -1256,6 +1259,7 @@ right = {x,y**d}</code></pre>
 <li><code>RightDivide</code> (<code>RightDivide</code>): function used to divide a vector by an entry;</li>
 <li><code>Dot</code> (<code>Dot</code>): function used to multiply vectors and matrices;</li>
 <li><code>Pivoting</code> (<code>LUPartialPivoting</code>): function used to sort rows for pivoting;</li>
+<li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
 </ul>
 <p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
 <h2 id="LUDecompositionWithCompletePivoting"><span class="header-section-number">20.2</span> LUDecompositionWithCompletePivoting</h2>
@@ -1299,7 +1303,8 @@ right = {x,y**d}</code></pre>
 <li><code>CompletePivoting</code> (<code>LUCompletePivoting</code>): function used to sort rows for complete pivoting;</li>
 <li><code>PartialPivoting</code> (<code>LUPartialPivoting</code>): function used to sort matrices for complete pivoting;</li>
 <li><code>Inverse</code> (<code>Inverse</code>): function used to invert 2x2 diagonal blocks;</li>
-<li><code>SelfAdjointQ</code> (<code>SelfAdjointMatrixQ</code>): function to test if matrix is self-adjoint.</li>
+<li><code>SelfAdjointQ</code> (<code>SelfAdjointMatrixQ</code>): function to test if matrix is self-adjoint;</li>
+<li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
 </ul>
 <p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
 <h2 id="UpperTriangularSolve"><span class="header-section-number">20.4</span> UpperTriangularSolve</h2>
@@ -1340,14 +1345,7 @@ right = {x,y**d}</code></pre>
 <p><code>LUCompletePivoting[m]</code> returns the row and column index of the element with largest absolute value in the matrix <code>m</code>.</p>
 <p><code>LUCompletePivoting[v, f]</code> sorts with respect to the function <code>f</code> instead of the absolute value.</p>
 <p>See also: <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
-<h1 id="PackageNCSolve"><span class="header-section-number">21</span> NCSolve</h1>
-<p>Members are:</p>
-<ul>
-<li><a href="#NCSolve">NCSolve</a></li>
-</ul>
-<h2 id="NCSolve"><span class="header-section-number">21.1</span> NCSolve</h2>
-<p>NCSolve[equation, var] solves linear equations of the type <code>a**x+b==c and x**a+b==c</code> in noncommutative algebras.</p>
-<h1 id="PackageNCUtil"><span class="header-section-number">22</span> NCUtil</h1>
+<h1 id="PackageNCUtil"><span class="header-section-number">21</span> NCUtil</h1>
 <p><strong>NCUtil</strong> is a package with a collection of utilities used throughout NCAlgebra.</p>
 <p>Members are:</p>
 <ul>
@@ -1360,9 +1358,9 @@ right = {x,y**d}</code></pre>
 <li><a href="#NCReplaceData">NCReplaceData</a></li>
 <li><a href="#NCToExpression">NCToExpression</a></li>
 </ul>
-<h2 id="NCConsistentQ"><span class="header-section-number">22.1</span> NCConsistentQ</h2>
+<h2 id="NCConsistentQ"><span class="header-section-number">21.1</span> NCConsistentQ</h2>
 <p><code>NCConsistentQ[expr]</code> returns <em>True</em> is <code>expr</code> contains no commutative products or inverses involving noncommutative variables.</p>
-<h2 id="NCGrabFunctions"><span class="header-section-number">22.2</span> NCGrabFunctions</h2>
+<h2 id="NCGrabFunctions"><span class="header-section-number">21.2</span> NCGrabFunctions</h2>
 <p><code>NCGragFunctions[expr]</code> returns a list with all fragments containing function of <code>expr</code>.</p>
 <p><code>NCGragFunctions[expr,f]</code> returns a list with all fragments of <code>expr</code> containing the function <code>f</code>.</p>
 <p>For example:</p>
@@ -1374,7 +1372,7 @@ right = {x,y**d}</code></pre>
 <p>returns</p>
 <pre><code>{inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}</code></pre>
 <p>See also: <a href="#NCGragSymbols">NCGrabSymbols</a>.</p>
-<h2 id="NCGrabSymbols"><span class="header-section-number">22.3</span> NCGrabSymbols</h2>
+<h2 id="NCGrabSymbols"><span class="header-section-number">21.3</span> NCGrabSymbols</h2>
 <p><code>NCGragSymbols[expr]</code> returns a list with all <em>Symbols</em> appearing in <code>expr</code>.</p>
 <p><code>NCGragSymbols[expr,f]</code> returns a list with all <em>Symbols</em> appearing in <code>expr</code> as the single argument of function <code>f</code>.</p>
 <p>For example:</p>
@@ -1383,7 +1381,7 @@ right = {x,y**d}</code></pre>
 <pre><code>NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]], inv]</code></pre>
 <p>returns <code>{inv[x]}</code>.</p>
 <p>See also: <a href="#NCGragFunctions">NCGrabFunctions</a>.</p>
-<h2 id="NCGrabIndeterminants"><span class="header-section-number">22.4</span> NCGrabIndeterminants</h2>
+<h2 id="NCGrabIndeterminants"><span class="header-section-number">21.4</span> NCGrabIndeterminants</h2>
 <p><code>NCGragIndeterminants[expr]</code> returns a list with all <em>Symbols</em> and fragments of functions appearing in <code>expr</code>.</p>
 <p>It is a combination of <code>NCGrabSymbols</code> and <code>NCGrabFunctions</code>.</p>
 <p>For example:</p>
@@ -1391,7 +1389,7 @@ right = {x,y**d}</code></pre>
 <p>returns</p>
 <pre><code>{x, y, inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}</code></pre>
 <p>See also: <a href="#NCGragFunctions">NCGrabFunctions</a>, <a href="#NCGragSymbols">NCGrabSymbols</a>.</p>
-<h2 id="NCConsolidateList"><span class="header-section-number">22.5</span> NCConsolidateList</h2>
+<h2 id="NCConsolidateList"><span class="header-section-number">21.5</span> NCConsolidateList</h2>
 <p><code>NCConsolidateList[list]</code> produces two lists:</p>
 <ul>
 <li>The first list contains a version of <code>list</code> where repeated entries have been suppressed;</li>
@@ -1403,7 +1401,7 @@ right = {x,y**d}</code></pre>
 <pre><code>list = {z,t,s,f,d};
 index = {1,2,3,4,5,4,1};</code></pre>
 <p>See also: <code>Union</code></p>
-<h2 id="NCLeafCount"><span class="header-section-number">22.6</span> NCLeafCount</h2>
+<h2 id="NCLeafCount"><span class="header-section-number">21.6</span> NCLeafCount</h2>
 <p><code>NCLeafCount[expr]</code> returns an number associated with the complexity of an expression:</p>
 <ul>
 <li>If <code>PossibleZeroQ[expr] == True</code> then <code>NCLeafCount[expr]</code> is <code>-Infinity</code>;</li>
@@ -1412,34 +1410,34 @@ index = {1,2,3,4,5,4,1};</code></pre>
 </ul>
 <p><code>NCLeafCount</code> is <code>Listable</code>.</p>
 <p>See also: <code>LeafCount</code>.</p>
-<h2 id="NCReplaceData"><span class="header-section-number">22.7</span> NCReplaceData</h2>
+<h2 id="NCReplaceData"><span class="header-section-number">21.7</span> NCReplaceData</h2>
 <p><code>NCReplaceData[expr, rules]</code> applies <code>rules</code> to <code>expr</code> and convert resulting expression to standard Mathematica, for example replacing <code>**</code> by <code>.</code>.</p>
 <p><code>NCReplaceData</code> does not attempt to resize entries in expressions involving matrices. Use <code>NCToExpression</code> for that.</p>
 <p>See also: <a href="#NCToExpression">NCToExpression</a>.</p>
-<h2 id="NCToExpression"><span class="header-section-number">22.8</span> NCToExpression</h2>
+<h2 id="NCToExpression"><span class="header-section-number">21.8</span> NCToExpression</h2>
 <p><code>NCToExpression[expr, rules]</code> applies <code>rules</code> to <code>expr</code> and convert resulting expression to standard Mathematica.</p>
 <p><code>NCToExpression</code> attempts to resize entries in expressions involving matrices.</p>
 <p>See also: <a href="#NCReplaceData">NCReplaceData</a>.</p>
-<h1 id="PackageNCTest"><span class="header-section-number">23</span> NCTest</h1>
+<h1 id="PackageNCTest"><span class="header-section-number">22</span> NCTest</h1>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCTest">NCTest</a></li>
 <li><a href="#NCTestRun">NCTestRun</a></li>
 <li><a href="#NCTestSummarize">NCTestSummarize</a></li>
 </ul>
-<h2 id="NCTest"><span class="header-section-number">23.1</span> NCTest</h2>
+<h2 id="NCTest"><span class="header-section-number">22.1</span> NCTest</h2>
 <p><code>NCTest[expr,answer]</code> asserts whether <code>expr</code> is equal to <code>answer</code>. The result of the test is collected when <code>NCTest</code> is run from <code>NCTestRun</code>.</p>
 <p>See also: <a href="#NCTestRun" class="uri">#NCTestRun</a>, <a href="#NCTestSummarize" class="uri">#NCTestSummarize</a></p>
-<h2 id="NCTestRun"><span class="header-section-number">23.2</span> NCTestRun</h2>
+<h2 id="NCTestRun"><span class="header-section-number">22.2</span> NCTestRun</h2>
 <p><code>NCTest[list]</code> runs the test files listed in <code>list</code> after appending the '.NCTest' suffix and return the results.</p>
 <p>For example:</p>
 <pre><code>results = NCTestRun[{&quot;NCCollect&quot;, &quot;NCSylvester&quot;}]</code></pre>
 <p>will run the test files &quot;NCCollec.NCTest&quot; and &quot;NCSylvester.NCTest&quot; and return the results in <code>results</code>.</p>
 <p>See also: <a href="#NCTest" class="uri">#NCTest</a>, <a href="#NCTestSummarize" class="uri">#NCTestSummarize</a></p>
-<h2 id="NCTestSummarize"><span class="header-section-number">23.3</span> NCTestSummarize</h2>
+<h2 id="NCTestSummarize"><span class="header-section-number">22.3</span> NCTestSummarize</h2>
 <p><code>NCTestSummarize[results]</code> will print a summary of the results in <code>results</code> as produced by <code>NCTestRun</code>.</p>
 <p>See also: <a href="#NCTestRun" class="uri">#NCTestRun</a></p>
-<h1 id="PackageNCSDP"><span class="header-section-number">24</span> NCSDP</h1>
+<h1 id="PackageNCSDP"><span class="header-section-number">23</span> NCSDP</h1>
 <p><strong>NCSDP</strong> is a package that allows the symbolic manipulation and numeric solution of semidefinite programs.</p>
 <p>Problems consist of symbolic noncommutative expressions representing inequalities and a list of rules for data replacement. For example the semidefinite program: <span class="math display">\[
 \begin{aligned}
@@ -1498,23 +1496,23 @@ data = {a -&gt; A};</code></pre>
 <li><a href="#NCSDPDual">NCSDPDual</a></li>
 <li><a href="#NCSDPDualForm">NCSDPDualForm</a></li>
 </ul>
-<h2 id="NCSDP"><span class="header-section-number">24.1</span> NCSDP</h2>
+<h2 id="NCSDP"><span class="header-section-number">23.1</span> NCSDP</h2>
 <p><code>NCSDP[inequalities,vars,obj,data]</code> converts the list of NC polynomials and NC matrices of polynomials <code>inequalities</code> that are linear in the unknowns listed in <code>vars</code> into the semidefinite program with linear objective <code>obj</code>. The semidefinite program (SDP) should be given in the following canonical form:</p>
 <pre><code>max  &lt;obj, vars&gt;  s.t.  inequalities &lt;= 0.</code></pre>
 <p><code>NCSDP</code> uses the user supplied rules in <code>data</code> to set up the problem data.</p>
 <p><code>NCSDP[constraints,vars,data]</code> converts problem into a feasibility semidefinite program.</p>
 <p>See also: <a href="#NCSDPForm">NCSDPForm</a>, <a href="#NCSDPDual">NCSDPDual</a>.</p>
-<h2 id="NCSDPForm"><span class="header-section-number">24.2</span> NCSDPForm</h2>
+<h2 id="NCSDPForm"><span class="header-section-number">23.2</span> NCSDPForm</h2>
 <p><code>NCSDPForm[[inequalities,vars,obj]</code> prints out a pretty formatted version of the SDP expressed by the list of NC polynomials and NC matrices of polynomials <code>inequalities</code> that are linear in the unknowns listed in <code>vars</code>.</p>
 <p>See also: <a href="#NCSDP">NCSDP</a>, <a href="#NCSDPDualForm">NCSDPDualForm</a>.</p>
-<h2 id="NCSDPDual"><span class="header-section-number">24.3</span> NCSDPDual</h2>
+<h2 id="NCSDPDual"><span class="header-section-number">23.3</span> NCSDPDual</h2>
 <p><code>{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj]</code> calculates the symbolic dual of the SDP expressed by the list of NC polynomials and NC matrices of polynomials <code>inequalities</code> that are linear in the unknowns listed in <code>vars</code> with linear objective <code>obj</code> into a dual semidefinite in the following canonical form:</p>
 <pre><code>max &lt;dObj, dVars&gt;  s.t.  dInequalities == 0,   dVars &gt;= 0.</code></pre>
 <p>See also: <a href="#NCSDPDualForm">NCSDPDualForm</a>, <a href="#NCSDP">NCSDP</a>.</p>
-<h2 id="NCSDPDualForm"><span class="header-section-number">24.4</span> NCSDPDualForm</h2>
+<h2 id="NCSDPDualForm"><span class="header-section-number">23.4</span> NCSDPDualForm</h2>
 <p><code>NCSDPForm[[dInequalities,dVars,dObj]</code> prints out a pretty formatted version of the dual SDP expressed by the list of NC polynomials and NC matrices of polynomials <code>dInequalities</code> that are linear in the unknowns listed in <code>dVars</code> with linear objective <code>dObj</code>.</p>
 <p>See also: <a href="#NCSDPDual">NCSDPDual</a>, <a href="#NCSDPForm">NCSDPForm</a>.</p>
-<h1 id="PackageSDP"><span class="header-section-number">25</span> SDP</h1>
+<h1 id="PackageSDP"><span class="header-section-number">24</span> SDP</h1>
 <p>The package <strong>SDP</strong> provides a crude and highly inefficient way to define and solve semidefinite programs in standard form, that is vectorized. You do not need to load <code>NCAlgebra</code> if you just want to use the semidefinite program solver. But you still need to load <code>NC</code> as in:</p>
 <pre><code>&lt;&lt; NC`
 &lt;&lt; SDP`</code></pre>
@@ -1566,16 +1564,16 @@ y = {y0, y1, y2};</code></pre>
 <li><a href="#SDPSylvesterEval">SDPSylvesterEval</a></li>
 <li><a href="#SDPSylvesterDiagonalEval">SDPSylvesterDiagonalEval</a></li>
 </ul>
-<h2 id="SDPMatrices"><span class="header-section-number">25.1</span> SDPMatrices</h2>
-<h2 id="SDPSolve"><span class="header-section-number">25.2</span> SDPSolve</h2>
-<h2 id="SDPEval"><span class="header-section-number">25.3</span> SDPEval</h2>
-<h2 id="SDPInner"><span class="header-section-number">25.4</span> SDPInner</h2>
-<h2 id="SDPCheckDimensions"><span class="header-section-number">25.5</span> SDPCheckDimensions</h2>
-<h2 id="SDPDualEval"><span class="header-section-number">25.6</span> SDPDualEval</h2>
-<h2 id="SDPFunctions"><span class="header-section-number">25.7</span> SDPFunctions</h2>
-<h2 id="SDPPrimalEval"><span class="header-section-number">25.8</span> SDPPrimalEval</h2>
-<h2 id="SDPScale"><span class="header-section-number">25.9</span> SDPScale</h2>
-<h2 id="SDPSylvesterDiagonalEval"><span class="header-section-number">25.10</span> SDPSylvesterDiagonalEval</h2>
-<h2 id="SDPSylvesterEval"><span class="header-section-number">25.11</span> SDPSylvesterEval</h2>
+<h2 id="SDPMatrices"><span class="header-section-number">24.1</span> SDPMatrices</h2>
+<h2 id="SDPSolve"><span class="header-section-number">24.2</span> SDPSolve</h2>
+<h2 id="SDPEval"><span class="header-section-number">24.3</span> SDPEval</h2>
+<h2 id="SDPInner"><span class="header-section-number">24.4</span> SDPInner</h2>
+<h2 id="SDPCheckDimensions"><span class="header-section-number">24.5</span> SDPCheckDimensions</h2>
+<h2 id="SDPDualEval"><span class="header-section-number">24.6</span> SDPDualEval</h2>
+<h2 id="SDPFunctions"><span class="header-section-number">24.7</span> SDPFunctions</h2>
+<h2 id="SDPPrimalEval"><span class="header-section-number">24.8</span> SDPPrimalEval</h2>
+<h2 id="SDPScale"><span class="header-section-number">24.9</span> SDPScale</h2>
+<h2 id="SDPSylvesterDiagonalEval"><span class="header-section-number">24.10</span> SDPSylvesterDiagonalEval</h2>
+<h2 id="SDPSylvesterEval"><span class="header-section-number">24.11</span> SDPSylvesterEval</h2>
 </body>
 </html>

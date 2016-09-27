@@ -30,12 +30,19 @@ MatrixDecompositions::WrongDimensions = \
 MatrixDecompositions::Square = "The input matrix is not square.";
 MatrixDecompositions::SelfAdjoint = "The input matrix is not self-adjoint.";
 MatrixDecompositions::Singular = "The input matrix appears to be singular.";
+MatrixDecompositions::Incomplete = \
+"The factorization failed. Return factors are incomplete";
+
+LUDecompositionWithCompletePivoting::SuppressPivoting = \
+"LUDecompositionWithCompletePivoting does not support SuppressPivoting. \
+Use LUDecompositionWithPartialPivoting instead.";
 
 Options[MatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,
   LeftDivide -> (Divide[#2,#1]&),
   RightDivide -> Divide,
   Dot -> Dot,
+  SuppressPivoting -> False,
   SelfAdjointMatrixQ -> HermitianMatrixQ
 };
 
@@ -299,8 +306,6 @@ Begin[ "`Private`" ]
   (* LU Decomposition with partial pivoting *)
   (* From Golub and Van Loan, p 112 *)
 
-  Clear[LUPartialPivoting];
-
   LUPartialPivoting[v_?MatrixQ, f_:Abs] := LUPartialPivoting[v[[All,1]], f];
 
   LUPartialPivoting[v_List, f_:Abs] := Part[Ordering[f[v],-1], 1];
@@ -327,6 +332,7 @@ Begin[ "`Private`" ]
                                      opts:OptionsPattern[{}]] := 
   Module[
     {options, zeroTest, pivoting, dot, rightDivide,
+     suppressPivoting,
      A, m, n, p, k, N, mu, lambda},
 
      (* process options *)
@@ -349,6 +355,10 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[MatrixDecompositions, Dot];
 
+     suppressPivoting = SuppressPivoting
+	    /. options
+	    /. Options[MatrixDecompositions, SuppressPivoting];
+      
      (* start algorithm *)
 
      A = AA;
@@ -368,9 +378,26 @@ Begin[ "`Private`" ]
 
        (* Print["k = ", k]; *)
 
-       (* Pivot *)
-       mu = pivoting[ A[[k ;; m, k]] ] + k - 1;
-
+       (* Pivoting *)
+       If[ suppressPivoting,
+           (* SuppressPivoting *)
+           If[ zeroTest[A[[k,k]]],
+               mu = pivoting[ A[[k ;; m, k]] ] + k - 1;
+               If [ zeroTest[A[[mu,k]]],
+                    (* fine to proceed *)
+                    mu = 1
+                   ,
+                    (* incomplete factorization *)
+                    Message[MatrixDecompositions::Incomplete];
+                    Break[];
+               ];
+              ,
+               mu = k;
+           ]
+          ,
+           (* Regular Pivoting *)
+           mu = pivoting[ A[[k ;; m, k]] ] + k - 1;
+       ];
        (* Print["mu = ", mu]; *)
 
        (* Interchange rows *)
@@ -411,8 +438,6 @@ Begin[ "`Private`" ]
   (* LU Decomposition with complete pivoting *)
   (* From Golub and Van Loan, p 118 *)
 
-  Clear[LUCompletePivoting];
-
   LUCompletePivoting[A_?MatrixQ, f_:Abs] := Module[
     {maxCol, maxRow},
 
@@ -446,6 +471,7 @@ Begin[ "`Private`" ]
   LUDecompositionWithCompletePivoting[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
   Module[
     {options, zeroTest, pivoting, dot, rightDivide,
+     suppressPivoting,
      A, m, n, rank, p, q, k, N, mu, lambda},
 
      (* process options *)
@@ -468,6 +494,16 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[MatrixDecompositions, Dot];
 
+     suppressPivoting = SuppressPivoting
+	    /. options
+	    /. Options[MatrixDecompositions, SuppressPivoting];
+
+     (* Abort if SuppressPivoting is called *)
+     If[ suppressPivoting,
+         Message[LUDecompositionWithCompletePivoting::SuppressPivoting];
+         Return[{$Failed,$Failed,$Failed,$Failed}];
+     ];
+      
      (* start algorithm *)
 
      A = AA;
@@ -543,6 +579,7 @@ Begin[ "`Private`" ]
   Module[
     {options, zeroTest, partialPivoting, completePivoting, 
      leftDivide, rightDivide, dot, inverse, selfAdjointQ,
+     suppressPivoting,
      A, E, m, rank, p, k, s, i, j, l, mu0, mu1, 
      alpha = N[(1+Sqrt[17])/8]},
 
@@ -582,6 +619,10 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[MatrixDecompositions, SelfAdjointMatrixQ];
       
+     suppressPivoting = SuppressPivoting
+	    /. options
+	    /. Options[MatrixDecompositions, SuppressPivoting];
+      
      (* start algorithm *)
 
      A = AA;
@@ -600,32 +641,64 @@ Begin[ "`Private`" ]
 
        (* Print["k = ", k]; *)
 
-       (* Bunch-Parlett pivot strategy *)
-       {i, j} = k - 1 + completePivoting[ A[[k ;; m, k ;; m]] ];
-       l = k - 1 + partialPivoting[ Diagonal[ A[[k ;; m, k ;; m]] ]];
+       (* Pivoting *)
+       If[ suppressPivoting,
+           
+           (* SuppressPivoting *)
+           
+           {i, j, l} = {k, k+1, k};
+           mu1 = A[[l, l]];
+           If[ zeroTest[mu1] && 
+               zeroTest[A[[k+1, k]]] && 
+               zeroTest[A[[k+1, k+1]]]
+              ,
+               (* incomplete factorization *)
+               Print[A[[k;;k+1,k;;k+1]]];
+               Message[MatrixDecompositions::Incomplete];
+               Break[];
+           ];
+           (* otherwise *)
+           If[ zeroTest[mu1]
+              ,
+               (* pivot on 2x2 block *)
+               mu1 = 0; mu0 = 1;
+              ,
+               (* pivot on 1x1 block (l,l) *)
+               mu1 = 1; mu0 = 0;
+           ];
+           
+          ,
+           
+           (* Bunch-Parlett pivot strategy *)
+           
+           {i, j} = k - 1 + completePivoting[ A[[k ;; m, k ;; m]] ];
+           l = k - 1 + partialPivoting[ Diagonal[ A[[k ;; m, k ;; m]] ]];
 
-       mu0 = A[[i, j]];
-       mu1 = A[[l, l]];
+           mu0 = A[[i, j]];
+           mu1 = A[[l, l]];
+           
+           If[ NumericQ[mu0] && NumericQ[mu1]
+              ,
+               (* If pivots are numbers *)
+               {mu0, mu1} = Abs[{mu0, mu1}];
+              ,
+               (* If pivots are not numbers *)
+               If[ zeroTest[mu1]
+                  ,
+                   (* pivot on 2x2 block *)
+                   mu1 = 0; mu0 = 1;
+                  ,
+                   (* pivot on 1x1 block (l,l) *)
+                   mu1 = 1; mu0 = 0;
+               ];
+           ];
+
+       ];
 
        (*
          Print["i = ", i];
          Print["j = ", j];
          Print["l = ", l];
-       *)
-          
-       If[ Not[NumericQ[mu0] && NumericQ[mu1]],
-           (* If pivots are not numbers *)
-           If[ zeroTest[mu1]
-               ,
-               (* pivot on 2x2 block *)
-               mu1 = 0; mu0 = 1;
-               ,
-               (* pivot on 1x1 block (l,l) *)
-               mu1 = 1; mu0 = 0;
-           ];
-       ];
-
-       (*
          Print["mu0 = ", mu0];
          Print["mu1 = ", mu1];
          Print["alpha mu0 = ", alpha mu0];
