@@ -18,3 +18,5 @@
    ([NCSylvester](#PackageNCSylvester)).
 7. General improvements on the Semidefinite Programming package
    [NCSDP](#PackageNCSDP).
+8. New algorithms for simplification of noncommutative rationals
+   ([NCSimplifyRational](#PackageNCSylvester)).

@@ -9,9 +9,11 @@ First you must load in NCAlgebra with the following command
 
 In `NCAlgebra`, the operator `**` denotes *noncommutative multiplication*.
 
-At present, single-letter lower case variables are non-commutative by default and all others are commutative by default.
+At present, single-letter lower case variables are non-commutative by
+default and all others are commutative by default.
 
-We consider non-commutative lower case variables in the following examples:
+We consider non-commutative lower case variables in the following
+examples:
 
     In[3]:= a**b-b**a
     Out[3]= a**b-b**a
@@ -53,11 +55,12 @@ We consider non-commutative lower case variables in the following examples:
 
 ## Transposes and Adjoints
 
-`tp[x]` denotes the transpose of an element `x`
+`tp[x]` denotes the transpose of symbol `x`
 
-`aj[x]` denotes the adjoint of an element `x`
+`aj[x]` denotes the adjoint of symbol `x`
    
-The properties of transposes and adjoints that everyone uses constantly are built-in: 
+The properties of transposes and adjoints that everyone uses
+constantly are built-in:
 
     In[17]:= tp[a**b]
     Out[17]= tp[b]**tp[a]
@@ -105,6 +108,9 @@ A symbol `a` may have an inverse, which will be denoted by `inv[a]`.
 
 ## Expand and Collect
 
+One can collect noncommutative terms involving same powers of a symbol
+using `NCCollect`. `NCExpand` expand noncommutative products.
+
     In[35]:= NCExpand[(a+b)**x]
     Out[35]= a**x+b**x
     In[36]:= NCCollect[a**x+b**x,x]
@@ -114,14 +120,18 @@ A symbol `a` may have an inverse, which will be denoted by `inv[a]`.
 
 ## Replace
 
-The Mathematica substitute commands, e.g. `Replace`, `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,  so you must use our `NC` versions of these commands:
+The Mathematica substitute commands, e.g. `Replace`, `ReplaceAll`
+(`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,
+so you must use our `NC` versions of these commands:
 
     In[38]:= NCReplace[x**a**b,a**b->c]
     Out[38]= x**a**b
     In[39]:= NCReplaceAll[tp[b**a]+b**a,b**a->p]
     Out[39]= p+tp[a]**tp[b]
 
-USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically create symmetric and self adjoint versions of your rules:
+USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
+[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically
+create symmetric and self adjoint versions of your rules:
 
     In[40]:= NCReplaceAll[tp[a**b]+w+a**b,a**b->c]
     Out[40]= c+w+tp[b]**tp[a]
@@ -130,15 +140,19 @@ USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and [NCMakeRuleSelfAdjoint](#NCM
 
 ## Rationals and Simplification
 
-    In[42]:= f1=1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
-    Out[42]= 1+inv[d]**c**inv[-a+S]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b**inv[d]**c**inv[-a+S]**b
+`NCSimplifyRational` attempts to simplify noncommutative rationals.
+
+    In[42]:= f1=1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b\
+             -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
+    Out[42]= 1+inv[d]**c**inv[-a+S]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b\
+             -inv[d]**c**inv[-a+S+b**inv[d]**c]**b**inv[d]**c**inv[-a+S]**b
     In[43]:= NCSimplifyRational[f1]
     Out[43]= 1
-    In[44]:= f2= 2inv[1+2a]**a;
+    In[44]:= f2=2inv[1+2a]**a;
     In[45]:= NCSimplifyRational[f2]
     Out[45]= 1-inv[1+2 a]
 
-**NOTE:** `NCSR` is the alias for `NCSimplifyRational`.
+`NCSR` is the alias for `NCSimplifyRational`.
 
     In[46]:= f3=a**inv[1-a];
     In[47]:= NCSR[f3]
@@ -149,12 +163,18 @@ USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and [NCMakeRuleSelfAdjoint](#NCM
 
 ## Calculus
 
+One can calculate directional derivatives with `DirectionalD` and
+noncommutative gradients with `NCGrad`.
+
     In[50]:= DirectionalD[x**x,x,h]
     Out[50]= h**x+x**h
     In[51]:= NCGrad[tp[x]**x+tp[x]**A**x+m**x,x]
     Out[51]= m+tp[x]**A+tp[x]**tp[A]+2 tp[x]
 
 ## Matrices
+
+`NCAlgebra` has many algorithms that handle matrices with
+noncommutative entries.
 
     In[52]:= m1={{a,b},{c,d}}
     Out[52]= {{a,b},{c,d}}

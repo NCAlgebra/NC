@@ -240,6 +240,7 @@
 <li>Added a complete set of linear algebra solvers in the new package <a href="#PackageMatrixDecomposition">MatrixDecomposition</a> and their noncommutative versions in the new package <a href="#PackageNCMatrixDecomposition">NCMatrixDecomposition</a>.</li>
 <li>New algorithms for representing and operating with NC polynomials (<a href="#PackageNCPolynomial">NCPolynomial</a>) and NC linear polynomials (<a href="#PackageNCSylvester">NCSylvester</a>).</li>
 <li>General improvements on the Semidefinite Programming package <a href="#PackageNCSDP">NCSDP</a>.</li>
+<li>New algorithms for simplification of noncommutative rationals (<a href="#PackageNCSylvester">NCSimplifyRational</a>).</li>
 </ol>
 <h1 id="UserGuideIntroduction"><span class="header-section-number">2</span> Introduction</h1>
 <p>This <em>User Guide</em> attempts to document the many improvements introduced in <code>NCAlgebra</code> Version 5.0. Please be patient, as we move to incorporate the many recent changes into this document.</p>
@@ -267,7 +268,8 @@ You can now use &quot;&lt;&lt; NCAlgebra`&quot; to load NCAlgebra or &quot;&lt;&
 <pre><code>&lt;&lt; NCTEST</code></pre>
 <p>to test NCAlgebra. Type</p>
 <pre><code>&lt;&lt; NCGBTEST</code></pre>
-<p>to test NCGB. We recommend that you restart the kernel before and after running tests. Each test takes a few minutes to run.</p>
+<p>to test NCGB.</p>
+<p>We recommend that you restart the kernel before and after running tests. Each test takes a few minutes to run.</p>
 <h1 id="MostBasicCommands"><span class="header-section-number">3</span> Most Basic Commands</h1>
 <p>First you must load in NCAlgebra with the following command</p>
 <pre><code>In[1]:= &lt;&lt;NC`
@@ -305,8 +307,8 @@ Out[14]= -a**A+A**a</code></pre>
 In[16]:= v**b
 Out[16]= b v</code></pre>
 <h2 id="transposes-and-adjoints"><span class="header-section-number">3.2</span> Transposes and Adjoints</h2>
-<p><code>tp[x]</code> denotes the transpose of an element <code>x</code></p>
-<p><code>aj[x]</code> denotes the adjoint of an element <code>x</code></p>
+<p><code>tp[x]</code> denotes the transpose of symbol <code>x</code></p>
+<p><code>aj[x]</code> denotes the adjoint of symbol <code>x</code></p>
 <p>The properties of transposes and adjoints that everyone uses constantly are built-in:</p>
 <pre><code>In[17]:= tp[a**b]
 Out[17]= tp[b]**tp[a]
@@ -348,6 +350,7 @@ Out[33]= 1
 In[34]:= a**b**inv[b]
 Out[34]= a</code></pre>
 <h2 id="expand-and-collect"><span class="header-section-number">3.4</span> Expand and Collect</h2>
+<p>One can collect noncommutative terms involving same powers of a symbol using <code>NCCollect</code>. <code>NCExpand</code> expand noncommutative products.</p>
 <pre><code>In[35]:= NCExpand[(a+b)**x]
 Out[35]= a**x+b**x
 In[36]:= NCCollect[a**x+b**x,x]
@@ -366,14 +369,17 @@ Out[40]= c+w+tp[b]**tp[a]
 In[41]:= NCReplaceAll[tp[a**b]+w+a**b,NCMakeRuleSymmetric[a**b-&gt;c]]
 Out[41]= c+w+tp[c]</code></pre>
 <h2 id="rationals-and-simplification"><span class="header-section-number">3.6</span> Rationals and Simplification</h2>
-<pre><code>In[42]:= f1=1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
-Out[42]= 1+inv[d]**c**inv[-a+S]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b**inv[d]**c**inv[-a+S]**b
+<p><code>NCSimplifyRational</code> attempts to simplify noncommutative rationals.</p>
+<pre><code>In[42]:= f1=1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b\
+         -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
+Out[42]= 1+inv[d]**c**inv[-a+S]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b\
+         -inv[d]**c**inv[-a+S+b**inv[d]**c]**b**inv[d]**c**inv[-a+S]**b
 In[43]:= NCSimplifyRational[f1]
 Out[43]= 1
-In[44]:= f2= 2inv[1+2a]**a;
+In[44]:= f2=2inv[1+2a]**a;
 In[45]:= NCSimplifyRational[f2]
 Out[45]= 1-inv[1+2 a]</code></pre>
-<p><strong>NOTE:</strong> <code>NCSR</code> is the alias for <code>NCSimplifyRational</code>.</p>
+<p><code>NCSR</code> is the alias for <code>NCSimplifyRational</code>.</p>
 <pre><code>In[46]:= f3=a**inv[1-a];
 In[47]:= NCSR[f3]
 Out[47]= -1+inv[1-a]
@@ -381,11 +387,13 @@ In[48]:= f4=inv[1-b**a]**inv[a];
 In[49]:= NCSR[f4]
 Out[49]= inv[a]+b**inv[1-b**a]</code></pre>
 <h2 id="calculus"><span class="header-section-number">3.7</span> Calculus</h2>
+<p>One can calculate directional derivatives with <code>DirectionalD</code> and noncommutative gradients with <code>NCGrad</code>.</p>
 <pre><code>In[50]:= DirectionalD[x**x,x,h]
 Out[50]= h**x+x**h
 In[51]:= NCGrad[tp[x]**x+tp[x]**A**x+m**x,x]
 Out[51]= m+tp[x]**A+tp[x]**tp[A]+2 tp[x]</code></pre>
 <h2 id="matrices"><span class="header-section-number">3.8</span> Matrices</h2>
+<p><code>NCAlgebra</code> has many algorithms that handle matrices with noncommutative entries.</p>
 <pre><code>In[52]:= m1={{a,b},{c,d}}
 Out[52]= {{a,b},{c,d}}
 In[53]:= m2={{d,2},{e,3}}
