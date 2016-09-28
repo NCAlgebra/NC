@@ -17,26 +17,27 @@
 *)
 
 BeginPackage["NCConvexity`",
-             "NonCommutativeMultiply`", 
-(*             "NCLDUDecomposition`",  *)
+             "NCSelfAdjoint`",
+             "NCQuadratic`",
              "NCMatrixDecompositions`",
              "MatrixDecompositions`",
-             "NCSelfAdjoint`",
              "NCLinearAlgebra`",
-             "NCQuadratic`",
 	     "NCSimplifyRational`",
              "NCDiff`",
-             "NCUtil`",
              "NCMatMult`",
-             "NCDeprecated`"];
+             "NCUtil`",
+             "NCDeprecated`",
+             "NonCommutativeMultiply`"];
 
 Clear[NCConvexityRegion];
 
-Options[NCConvexityRegion] = 
-       {NCSimplifyDiagonal -> False, DiagonalSelection -> False,
-        ReturnPermutation -> False, ReturnBorderVector -> False,
-        AllPermutation -> False };
-
+Options[NCConvexityRegion] = {
+    NCSimplifyDiagonal -> False, 
+    DiagonalSelection -> False,
+    ReturnPermutation -> False, 
+    ReturnBorderVector -> False,
+    AllPermutation -> False 
+};
         
 Begin["`Private`"];
 
@@ -55,49 +56,54 @@ Begin["`Private`"];
 
     NCConvexityRegion[f_, list_, opts___Rule] :=
         Module[{dimoflist = Dimensions[{list}],Tmphes,LUdata,Hdata,Hdata1,
-                simpiv,diagsel,returnperm,allperm,numofperm,n,k,diaglist ={},
+                simplifyDiagonal,diagonalSelection,returnPermutation,allperm,numofperm,n,k,diaglist ={},
                 permlist ={},Tmpdiag,Tmplist,Tmplist1,Tmplist2,
-                Tmpvar,Tmplist3,h,returnvec,lowestLeafCount,index,offDiagonal={},
+                Tmpvar,Tmplist3,h,returnBorderVec,lowestLeafCount,index,offDiagonal={},
                 theDiagonal,dMatrix,dPerm,checker,Hdata1check,\[Lambda],Pull},
 
 
-                simpiv      = NCSimplifyDiagonal /. {opts} /. Options[NCConvexityRegion]; 
-                diagsel     = DiagonalSelection /. {opts} /. Options[NCConvexityRegion];
-                returnperm  = ReturnPermutation /. {opts} /. Options[NCConvexityRegion];            
-                returnvec   = ReturnBorderVector /. {opts} /. Options[NCConvexityRegion];
-                allperm     = AllPermutation /. {opts} /. Options[NCConvexityRegion];       
+                simplifyDiagonal      = NCSimplifyDiagonal /. {opts} /. Options[NCConvexityRegion]; 
+                diagonalSelection     = DiagonalSelection /. {opts} /. Options[NCConvexityRegion];
+                returnPermutation  = ReturnPermutation /. {opts} /. Options[NCConvexityRegion];            
+                returnBorderVec   = ReturnBorderVector /. {opts} /. Options[NCConvexityRegion];
+                allPermutation     = AllPermutation /. {opts} /. Options[NCConvexityRegion];       
 
-                (* Deprecate allperm *)
-                If[allperm,
-                   Message[NCDeprecated, "AllPermutation"];
+                (* Deprecate AllPermutation and DiagonalSelection *)
+                If[allPermutation,
+                   Message[NCDeprecated::OptionGone, "AllPermutation"];
                 ];
-               
-                Pull[g_[x___]] := x;  
+                If[diagonalSelection,
+                   Message[NCDeprecated::OptionGone, "DiagonalSelection"];
+                ];
+
                 (* Create temporary list of h's, {h1,h2,...hn} *)
+                Pull[g_[x___]] := x;  
                 Tmplist3 = ToString[ Array[h,{Length[list]}] ];
                 Tmplist3 = StringReplace[Tmplist3, {"[" -> "", "]" -> ""}];
                 Tmplist3 = ToExpression[Tmplist3]; 
                 SetNonCommutative[Pull[Tmplist3] ];         
-                (* Get Hessian *)                     
 
+                        
+                (* Calculate Hessian *)
 
-                Tmphes = NCHessian[f, Pull[Thread[{list,Tmplist3}]]  ];
-
-
-                (* In case they feed a linear function or something where the hessian
-                   is zero.  NCMatrixOfQuadratic will bomb on that input.  So just
-                   return 0 which is the correct output *)
-
+                Tmphes = NCHessian[f, Pull[Thread[{list, Tmplist3}]]];
                 If[ Tmphes === 0, 
                    Return[ {{0}} ];
                 ];
 
+                        
+                (* Factor Hessian *)
+                        
+                Check[
+                   Hdata = NCMatrixOfQuadratic[Tmphes, Tmplist3];
+                  ,
+                   Return[{}];
+                  ,
+                   NCMatrixOfQuadratic::NotSymmetric
+                ];
 
-                (* Factor Hessian *)          
-                Hdata =  NCMatrixOfQuadratic[Tmphes, Tmplist3];
-
-                (*******************************************************)
-                (* Determine which permutations to return for NCAll... *)            
+                (******************************************)
+                (* Determine which permutations to return for NCAll... *)   
 
                 (* Find the maximum number of permutations for matrix  *)
                 {n,k} = Dimensions[ Hdata[[2]] ];
@@ -110,103 +116,22 @@ Begin["`Private`"];
                     numofperm = 5!*4!*3!*2;
                 ];
 
-                (* DEPRECATED AllPermutations 
-                If[ allperm === True,
-
-                   Print["Middle matrix is size ", n,"X",n ];
-                   Print["At most ", numofperm, " permutations possible."];
-
-                ];
-                *)
-
-
                 (* Set up permutation list *)
-                (* diagsel is the value of the option DiagonalSelection.
-                   diagsel is the list of permutations to give to 
-                   NCAllPermutationLDU.  It is given to NCConvexityRegion in the 
-                   form {n} or {n,k}.  Below {n} is changed to {1,....,n} and
-                   {n,k} is changed to {n,...k}.  These are then fed to 
-                   NCAllPermutationLDU.  If nothing is passed to NCConvexityRegion
-                   under DiagonalSelection, then the default is to use the permutation
-                   list {1}. *)
-                If[diagsel === False,
-                   diagsel = {1};
-                ,(*else*) 
-                   If[Length[diagsel] == 2,                   
-                      diagsel = Range[diagsel[[1]],Min[diagsel[[2]],numofperm] ];
-                   ,(*else*)
-                      diagsel = Range[Min[diagsel[[1]],numofperm] ];
-                   ];(*end if*)
-                ];(*end if*)
-                (* Now diagsel has the correct permutation selection    *)
-                (********************************************************)
-
-                (* DEPRECATED AllPermutations       
-                If[ allperm === True,
-
-                   Print[diagsel];
-
-                ];
-                *)
+                diagonalSelection = {1};
 
 
-                (* DEPRECATED AllPermutations 
-                (* based on the AllPermutation option we decide what LDU decomposition
-                   to call.  There are two choices, based on whether AllPermutation is 
-                   True or False.  True means to run NCAllPermutationLDU and False
-                   means to run NCLDUDecomposition.  False is the default.  If it was 
-                   true then we also feed the Permutations to look at.  That was
-                   computed above. *)
-                If[ allperm === True,
-
-                   (* Find LDU decompositon for diagsel permutations  *)
-                   LUdata = NCAllPermutationLDU[ Hdata[[2]], 
-                                Stop2by2Pivoting -> False,
-                                NCSimplifyPivots -> simpiv,
-                                PermutationSelection -> diagsel,
-                                ReturnPermutation -> True]; 
-
-                 ,
-                *)
-
-                   LUdata = NCLDLDecomposition[
+                (* Calculate LDLDecomposition *)
+                
+                LUdata = NCLDLDecomposition[
                        Hdata[[2]], 
                        SelfAdjointMatrixQ -> (True&)];
-                   LUdata = Append[
+                LUdata = Append[
                        GetLDUMatrices[LUdata[[1]], LUdata[[3]]], 
                        LUdata[[2]]];
 
-                   (* 
-                   LUdata = NCLDUDecomposition[ Hdata[[2]], 
-                                Stop2by2Pivoting -> False,
-                                NCSimplifyPivots -> simpiv,
-                                ReturnPermutation -> True]; 
-
-                   Print["LUdata2 = ", LUdata];
-                   *)
-                    
-                   LUdata = { LUdata };
-                (* DEPRECATED AllPermutations 
-                 ];
-                *)
-
-    (* NEW CODE 6/27/02 *)
-
-                (* find the simpliest diagonal by seeing which matrix
-                   has the lowest leafcount *)
-
-                lowestLeafCount = LeafCount[ LUdata[[1]][[2]] ];
-                index = 1;
-                For[i = 1, i <= Length[LUdata] - 1, i++,               
-                  If[ LeafCount[ LUdata[[i]][[2]] ] < lowestLeafCount,                  
-                      index = i;
-                  ];    
-                ];
-
                 (* index should be the diagonal that we want to use *)
-                dMatrix = LUdata[[index]][[2]];
-                (* dPerm = LUdata[[index]][[5]]; *)
-
+                dMatrix = LUdata[[2]];
+                
                 (* get the diagonal *)
                 theDiagonal = Diag[ dMatrix ];
 
@@ -219,7 +144,6 @@ Begin["`Private`"];
                    offDiagonal = Append[ offDiagonal, dMatrix[[i]][[i + 1]] ];
                 ];
 
-
                 (* If there were off-diagonal elements then.... *)
                 If[ checker === True,
 
@@ -227,54 +151,28 @@ Begin["`Private`"];
                   theDiagonal = { theDiagonal, offDiagonal, -offDiagonal };
                 ];
 
-
-    (* END NEW CODE *)
-
-
-
-                (* Tmplist = Union[permlist][[1]];
-                   Print[Length[Tmplist], " permutations return"];  *)
-
                 (* Pertains to independence of the border vectors *)   
-                If[returnvec == True,
+                If[returnBorderVec == True,
                    Hdata1 = Flatten[Hdata[[1]] ];
                    Hdata1 = NCBorderVectorGather[Hdata1,Tmplist3];
                    Hdata1check = NCIndependenceCheck[Hdata1,\[Lambda] ];
                    If[Hdata1check === Table[True,{Length[Hdata1check]}],
-                      Print["Border vectors are independent."];                  
+                      Print["Border vectors are independent."];          
                    ,(*else*)
                       Print["Border vectors may be dependent.  Use NCIndependenceCheck."];
                    ];(*end if*)
                  ];(*end if*)
 
-    (* NEW CODE ------------ *)
-
-                (* now we want to return our answer.  I just copied the old code from above and
-                   took some stuff out...since we are only returning one answer now instead
-                   of all the answers. *)
+                (* now we want to return our answer. *)
 
                 (* check if we should return the permutations *)
-                If[returnperm === True,
-                   If[returnvec == True,              
-                      (* return the vector too. *)    
-                      Return[ { theDiagonal ,  Hdata1} ];
-                   ,(*else*)
-                      Return[ { theDiagonal } ];
-                   ];(*end if*)
-                ,(*else*)
-                   If[returnvec == True,                  
-                      Print[Hdata1];
-                      Return[{ theDiagonal, Hdata1} ];
-                   ,(*else*)
-                      Return[ { theDiagonal } ];
-                   ];(*end if*)                
-                ]; (*end if *)              
-
-    (* END OF NEW CODE -----*)
-
-
-
-    ];(*end NCConvexityRegion Module*)
+                If[returnBorderVec == True,              
+                   (* return the vector too. *)    
+                   Return[ { theDiagonal ,  Hdata1} ];
+                 ,(*else*)
+                   Return[ { theDiagonal } ];
+                ];
+    ];
 
 
 

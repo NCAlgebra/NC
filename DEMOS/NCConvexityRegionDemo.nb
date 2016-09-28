@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     46491,       1516]
-NotebookOptionsPosition[     39626,       1307]
-NotebookOutlinePosition[     40421,       1331]
-CellTagsIndexPosition[     40378,       1328]
+NotebookDataLength[     64631,       1826]
+NotebookOptionsPosition[     58937,       1654]
+NotebookOutlinePosition[     59730,       1678]
+CellTagsIndexPosition[     59687,       1675]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -32,10 +32,11 @@ Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
- RowBox[{"<<", " ", "NCGB`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", " ", "NCAlgebra`"}], "\[IndentingNewLine]", 
  RowBox[{"<<", " ", "NCConvexity`"}]}], "Input",
  CellChangeTimes->{{3.5166269207530003`*^9, 3.516626927007236*^9}, {
-  3.516626995092029*^9, 3.516626996571578*^9}}],
+  3.516626995092029*^9, 3.516626996571578*^9}, {3.684024763041646*^9, 
+  3.684024765010337*^9}}],
 
 Cell[CellGroupData[{
 
@@ -43,7 +44,9 @@ Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
 \>"], "Print",
  CellChangeTimes->{
   3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610539997*^9}],
+   3.572400610539997*^9, 3.6840247876683483`*^9, {3.684025354781372*^9, 
+   3.684025383032116*^9}, 3.68402577527229*^9, 3.684026019965735*^9, 
+   3.6840260997527027`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -52,7 +55,9 @@ Cell[BoxData[
   Editable->False]], "Print",
  CellChangeTimes->{
   3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610541904*^9}],
+   3.572400610539997*^9, 3.6840247876683483`*^9, {3.684025354781372*^9, 
+   3.684025383032116*^9}, 3.68402577527229*^9, 3.684026019965735*^9, 
+   3.6840260997633457`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -64,225 +69,9 @@ Cell[BoxData[
   Editable->False]], "Print",
  CellChangeTimes->{
   3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006105438337`*^9}],
-
-Cell[BoxData["\<\"NCMultiplication.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610586443*^9}],
-
-Cell[BoxData["\<\"NC1SetCommands.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610588801*^9}],
-
-Cell[BoxData["\<\"NCInverses.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.57240061059114*^9}],
-
-Cell[BoxData["\<\"NCTransposes.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610593504*^9}],
-
-Cell[BoxData["\<\"NCAdjoints.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006105959263`*^9}],
-
-Cell[BoxData["\<\"NCCo.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610598345*^9}],
-
-Cell[BoxData["\<\"NCRoots.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.57240061060079*^9}],
-
-Cell[BoxData["\<\"NC2SetCommands.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006106032467`*^9}],
-
-Cell[BoxData["\<\"NCCollect.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610605774*^9}],
-
-Cell[BoxData["\<\"NCSubstitute.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610608282*^9}],
-
-Cell[BoxData["\<\"NCMonomial.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610610733*^9}],
-
-Cell[BoxData["\<\"NCSolve.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006106132193`*^9}],
-
-Cell[BoxData["\<\"NCTools.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610615698*^9}],
-
-Cell[BoxData["\<\"NC2SimplifyRational.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610618217*^9}],
-
-Cell[BoxData["\<\"NC1SimplifyRational.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610620729*^9}],
-
-Cell[BoxData["\<\"NCSimplifyRational.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610623292*^9}],
-
-Cell[BoxData["\<\"NCComplex.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610625926*^9}],
-
-Cell[BoxData["\<\"NCMatMult.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610789179*^9}],
-
-Cell[BoxData["\<\"NCDiff.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610791782*^9}],
-
-Cell[BoxData["\<\"NCSchur.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610794334*^9}],
-
-Cell[BoxData["\<\"NCAlias.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006107969017`*^9}],
-
-Cell[BoxData["\<\"Grabs.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610799492*^9}],
-
-Cell[BoxData["\<\"NCTaylorCoeff.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006108020763`*^9}],
-
-Cell[BoxData["\<\"NCConvexity.m and NCGuts.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610804719*^9}],
-
-Cell[BoxData["\<\"NCRealizationFunctions.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006108074408`*^9}],
-
-Cell[BoxData["\<\"NCTeXForm.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610810154*^9}],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"NCTeX::Using '\"\>", "\[InvisibleSpace]", "\<\"open\"\>", 
-   "\[InvisibleSpace]", "\<\"' as PDFViewer.\"\>"}],
-  SequenceForm["NCTeX::Using '", "open", "' as PDFViewer."],
-  Editable->False]], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610812948*^9}],
-
-Cell[BoxData["\<\"NCTeX.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006108157053`*^9}],
-
-Cell[BoxData["\<\"NCMaster.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610818552*^9}],
-
-Cell[BoxData["\<\"NCOutput.m loaded\"\>"], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.572400610821179*^9}],
-
-Cell["\<\
-------------------------------------------------------------
-NCAlgebra - Version 4.0.4
-
-Authors:
-  J. William Helton*
-  Mauricio de Oliveira* 
-  Mark Stankus* 
-  Robert L. Miller#
-
-* Math Dept, UCSD                
-# General Atomics Corp
-  La  Jolla, CA 92093
-
-Copyright: 
-  Helton and Miller June 1991
-  Helton 2002
-  All rights reserved.
-
-The program was written by the authors and by:
-  David Hurst, Daniel Lamm, Orlando Merino, Robert Obar,
-  Henry Pfister, Mike Walker, John Wavrik, Lois Yu,
-  J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple. 
-  The beginnings of the program come from eran@slac.
-  Considerable recent help came from Igor Klep.
-
-
-This program was written with support from 
-  AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
-  UCSD Faculty Mentor Program,
-  and US Department of Education.
-  Primary support in 2010 is from the 
-    NSF Division of Mathematical Sciences.
-
-If you 
-  (1) are a user, 
-  (2) want to be a user, 
-  (3) refer to NCAlgebra in a publication, or 
-  (4) have had an interesting experience with NCAlgebra,
-let us know by sending an e-mail message to  
-
-  ncalg@math.ucsd.edu. 
-
-We do not want to restrict access to NCAlgebra, but do 
-  want to keep track of how it is being used.
-
-For NCAlgebra updates see the web page:
-
-  www.math.ucsd.edu/~ncalg 
-------------------------------------------------------------\
-\>", "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006108251534`*^9}],
-
-Cell[BoxData[
- RowBox[{"LinkObject", "[", 
-  RowBox[{"\<\"/Users/mauricio/NC/NCGB/Binary/p9c/MacOSX-x86-64/p9c\"\>", ",",
-    "128", ",", "4"}], "]"}]], "Print",
- CellChangeTimes->{
-  3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
-   3.5724006108807583`*^9}]
+   3.572400610539997*^9, 3.6840247876683483`*^9, {3.684025354781372*^9, 
+   3.684025383032116*^9}, 3.68402577527229*^9, 3.684026019965735*^9, 
+   3.684026099772942*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -304,10 +93,24 @@ Cell[BoxData[
  FontSize->14],
 
 Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$710751\\\\\\\"\\\
+\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.684024797042529*^9, {3.6840253565004053`*^9, 3.684025384480678*^9}, 
+   3.684025776622464*^9, 3.684026021223007*^9}],
+
+Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"{", "2", "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626930874363*^9, 3.516626979245829*^9, 
-  3.5724006110952597`*^9}]
+ CellChangeTimes->{
+  3.516626930874363*^9, 3.516626979245829*^9, 3.5724006110952597`*^9, 
+   3.6840247971159887`*^9, {3.6840253565150223`*^9, 3.684025384490719*^9}, 
+   3.684025776632704*^9, 3.684026021233066*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -333,6 +136,18 @@ Cell[BoxData[
  FontSize->14],
 
 Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$729811, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.684025400278158*^9, 3.684025778184143*^9, 
+  3.6840260227402887`*^9}],
+
+Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"{", 
    RowBox[{
@@ -341,7 +156,8 @@ Cell[BoxData[
      RowBox[{"-", "2"}], " ", 
      RowBox[{"inv", "[", "x", "]"}]}]}], "}"}], "}"}]], "Output",
  CellChangeTimes->{3.5166269325840273`*^9, 3.5166269794724827`*^9, 
-  3.572400611146427*^9}]
+  3.572400611146427*^9, 3.6840254003271427`*^9, 3.684025778194172*^9, 
+  3.684026022750173*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -370,10 +186,23 @@ Cell[BoxData[
  FontSize->14],
 
 Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$748901, \
+NCConvexity`Private`h$748902\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed \
+symmetric\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.684025456803241*^9, 3.684025779944982*^9, 
+  3.684026024779256*^9}],
+
+Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"{", 
    RowBox[{"2", ",", "2"}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269795884857`*^9, 3.572400611196829*^9}]
+ CellChangeTimes->{3.5166269795884857`*^9, 3.572400611196829*^9, 
+  3.684025456810898*^9, 3.684025779954974*^9, 3.684026024789657*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -398,9 +227,22 @@ Cell[BoxData[
    RowBox[{"{", "x", "}"}]}], " ", "]"}]], "Input",
  FontSize->14],
 
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$768011, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.6840254725944443`*^9, 3.6840257820626583`*^9, 
+  3.6840260264397173`*^9}],
+
 Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
 { {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626980440782*^9, 3.572400611246738*^9}],
+ CellChangeTimes->{3.516626980440782*^9, 3.572400611246738*^9, 
+  3.684025472605394*^9, 3.684025782072933*^9, 3.6840260264516487`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -413,7 +255,8 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"0", ",", 
       RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626980447814*^9, 3.572400611248341*^9}]
+ CellChangeTimes->{3.516626980447814*^9, 3.572400611248341*^9, 
+  3.684025472612762*^9, 3.6840257820803003`*^9, 3.6840260264590597`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -443,9 +286,22 @@ Cell[BoxData[
     RowBox[{"x", ",", "y"}], "}"}]}], " ", "]"}]], "Input",
  FontSize->14],
 
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$787141, \
+NCConvexity`Private`h$787142, x, y\\\\\\\"\\\"}]\\)\[NoBreak] was(were) \
+assumed symmetric\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.684025536583488*^9, 3.6840257850272827`*^9, 
+  3.6840260293768272`*^9}],
+
 Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
 { {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.5166269814414988`*^9, 3.572400611356009*^9}],
+ CellChangeTimes->{3.5166269814414988`*^9, 3.572400611356009*^9, 
+  3.684025536616218*^9, 3.684025785068048*^9, 3.684026029413184*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -460,7 +316,8 @@ Cell[BoxData[
      RowBox[{"0", ",", "0", ",", 
       RowBox[{"-", "2"}], ",", "0", ",", 
       RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626981449554*^9, 3.572400611357563*^9}]
+ CellChangeTimes->{3.516626981449554*^9, 3.572400611357563*^9, 
+  3.684025536623757*^9, 3.6840257850762777`*^9, 3.684026029422127*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -508,10 +365,17 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"lf", ",", "d", ",", "rt", ",", "junk"}], "}"}], "=", 
-   RowBox[{"NCLDUDecomposition", "[", "mq", "]"}]}], 
+    RowBox[{"ldl", ",", "p", ",", "s", ",", "rank"}], "}"}], "=", 
+   RowBox[{"NCLDLDecomposition", "[", "mq", "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"lf", ",", "d", ",", "rt"}], "}"}], "=", 
+   RowBox[{"GetLDUMatrices", "[", 
+    RowBox[{"ldl", ",", "s"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{"MatrixForm", "[", "d", "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.68402555422227*^9, 3.68402559685565*^9}},
  FontSize->14],
 
 Cell[BoxData[
@@ -522,35 +386,217 @@ Cell[BoxData[
    RowBox[{"h", "**", "x", "**", "h"}]}], "+", 
   RowBox[{"2", " ", 
    RowBox[{"x", "**", "h", "**", "h"}]}]}]], "Output",
- CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9}],
+ CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
+  3.684025601798276*^9, 3.684025788347808*^9, 3.6840260326543417`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.684025601953388*^9, 3.6840257885299883`*^9, 
+  3.684026032850609*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"{", 
-     RowBox[{"h", ",", 
-      RowBox[{"x", "**", "h"}]}], "}"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"x", "**", "h"}], ",", "h"}], "}"}], ",", 
+   TagBox[
+    TemplateBox[{RowBox[{
+        StyleBox[
+         TagBox["SparseArray", "SummaryHead"], "NonInterpretableSummary"], 
+        StyleBox["[", "NonInterpretableSummary"], 
+        DynamicModuleBox[{Typeset`open$$ = False}, 
+         PanelBox[
+          PaneSelectorBox[{False -> GridBox[{{
+                PaneBox[
+                 ButtonBox[
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEBitmaps", "SquarePlusIconMedium"]], 
+                  ButtonFunction :> (Typeset`open$$ = True), Appearance -> 
+                  None, Evaluator -> Automatic, Method -> "Preemptive"], 
+                 Alignment -> {Center, Center}, ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                GraphicsBox[
+                 
+                 RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}}, {{
+                  0.235431, 0.32765, 0.833291}, {0.772061, 0.92462, 
+                  0.998703}}}, {{0, 0}, {2, 2}}, {0, 1}], AspectRatio -> 1, 
+                 Axes -> False, Frame -> False, FrameLabel -> {None, None}, 
+                 FrameStyle -> Directive[
+                   Opacity[0.5], 
+                   Thickness[Tiny], 
+                   RGBColor[0.368417, 0.506779, 0.709798]], 
+                 FrameTicks -> {{None, None}, {None, None}}, GridLinesStyle -> 
+                 Directive[
+                   GrayLevel[0.5, 0.4]], ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}], 
+                 Method -> {
+                  "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                   Automatic, "DefaultPlotStyle" -> Automatic, 
+                   "DomainPadding" -> Scaled[0.02], "RangePadding" -> 
+                   Scaled[0.05]}], 
+                GridBox[{{
+                   RowBox[{
+                    TagBox[
+                    "\"Specified elements: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["3", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Dimensions: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox[
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "2"}], "}"}], "SummaryItem"]}]}}, 
+                 GridBoxAlignment -> {
+                  "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+                 False, GridBoxItemSize -> {
+                  "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                 GridBoxSpacings -> {
+                  "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+                 BaseStyle -> {
+                  ShowStringCharacters -> False, NumberMarks -> False, 
+                   PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+              GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+              GridBoxItemSize -> {
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+              BaselinePosition -> {1, 1}], True -> GridBox[{{
+                PaneBox[
+                 ButtonBox[
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEBitmaps", "SquareMinusIconMedium"]], 
+                  ButtonFunction :> (Typeset`open$$ = False), Appearance -> 
+                  None, Evaluator -> Automatic, Method -> "Preemptive"], 
+                 Alignment -> {Center, Center}, ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                GraphicsBox[
+                 
+                 RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}}, {{
+                  0.235431, 0.32765, 0.833291}, {0.772061, 0.92462, 
+                  0.998703}}}, {{0, 0}, {2, 2}}, {0, 1}], AspectRatio -> 1, 
+                 Axes -> False, Frame -> False, FrameLabel -> {None, None}, 
+                 FrameStyle -> Directive[
+                   Opacity[0.5], 
+                   Thickness[Tiny], 
+                   RGBColor[0.368417, 0.506779, 0.709798]], 
+                 FrameTicks -> {{None, None}, {None, None}}, GridLinesStyle -> 
+                 Directive[
+                   GrayLevel[0.5, 0.4]], ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}], 
+                 Method -> {
+                  "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                   Automatic, "DefaultPlotStyle" -> Automatic, 
+                   "DomainPadding" -> Scaled[0.02], "RangePadding" -> 
+                   Scaled[0.05]}], 
+                GridBox[{{
+                   RowBox[{
+                    TagBox[
+                    "\"Specified elements: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["3", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Dimensions: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox[
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "2"}], "}"}], "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Default: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["0", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Density: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["0.75`", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Elements:\"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["\"\"", "SummaryItem"]}]}, {
+                   TagBox[
+                    TagBox[
+                    GridBox[{{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "2"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "2", ContentPadding -> False, FrameMargins -> 0, 
+                    StripOnInput -> True, BaselinePosition -> Baseline, 
+                    ImageSize -> {{1, 300}, Automatic}], LineBreakWithin -> 
+                    False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "1"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "2", ContentPadding -> False, FrameMargins -> 0, 
+                    StripOnInput -> True, BaselinePosition -> Baseline, 
+                    ImageSize -> {{1, 300}, Automatic}], LineBreakWithin -> 
+                    False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "2"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    RowBox[{"2", " ", "x"}], ContentPadding -> False, 
+                    FrameMargins -> 0, StripOnInput -> True, BaselinePosition -> 
+                    Baseline, ImageSize -> {{1, 300}, Automatic}], 
+                    LineBreakWithin -> False]}]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"], "SummaryItem"]}}, 
+                 GridBoxAlignment -> {
+                  "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+                 False, GridBoxItemSize -> {
+                  "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                 GridBoxSpacings -> {
+                  "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+                 BaseStyle -> {
+                  ShowStringCharacters -> False, NumberMarks -> False, 
+                   PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+              GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+              GridBoxItemSize -> {
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+              BaselinePosition -> {1, 1}]}, 
+           Dynamic[Typeset`open$$], ImageSize -> Automatic], BaselinePosition -> 
+          Baseline], DynamicModuleValues :> {}], 
+        StyleBox["]", "NonInterpretableSummary"]}]},
+     "CopyTag",
+     DisplayFunction->(#& ),
+     InterpretationFunction->("SparseArray[<3>, {2, 2}]"& )],
+    False,
+    Editable->False,
+    SelectWithContents->True,
+    Selectable->False], ",", 
    RowBox[{"{", 
     RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"2", " ", "x"}], ",", "2"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"2", ",", "0"}], "}"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", "h", "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"h", "**", "x"}], "}"}]}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.516626981524157*^9, 3.5724006113978367`*^9}],
+     RowBox[{"h", "**", "x"}], ",", "h"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
+  3.684025601798276*^9, 3.684025788347808*^9, 3.6840260328822803`*^9}],
 
 Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", GridBox[{
-     {
-      RowBox[{"2", " ", "x"}], "2"},
-     {"2", "0"}
+     {"0", "2"},
+     {"2", 
+      RowBox[{"2", " ", "x"}]}
     },
     GridBoxAlignment->{
      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
@@ -563,8 +609,24 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.516626981524157*^9, 3.57240061139918*^9}],
+   MatrixForm[
+   SparseArray[
+    Automatic, {2, 2}, 0, {
+     1, {{0, 1, 3}, {{2}, {1}, {2}}}, {2, 2, 2 $CellContext`x}}]]]]], "Output",\
+
+ CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
+  3.684025601798276*^9, 3.684025788347808*^9, 3.6840260328923597`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSelfAdjointQ", "::", "SelfAdjointVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
+\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed adjoint\"\>"}]], "Message", "MSG",
+ 
+ CellChangeTimes->{3.684025601953388*^9, 3.6840257885299883`*^9, 
+  3.684026033061401*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -587,8 +649,14 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.516626981524157*^9, 3.57240061140093*^9}]
+   MatrixForm[
+   SparseArray[
+    Automatic, {2, 2}, 0, {
+     1, {{0, 1, 2}, {{1}, {2}}}, {
+      2 $CellContext`x, (-2) 
+       NonCommutativeMultiply`inv[$CellContext`x]}}]]]]], "Output",
+ CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
+  3.684025601798276*^9, 3.684025788347808*^9, 3.684026033069645*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -623,10 +691,17 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"lf", ",", "d", ",", "rt", ",", "junk"}], "}"}], "=", 
-   RowBox[{"NCLDUDecomposition", "[", "mq", "]"}]}], 
+    RowBox[{"ldl", ",", "p", ",", "s", ",", "rank"}], "}"}], "=", 
+   RowBox[{"NCLDLDecomposition", "[", "mq", "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"lf", ",", "d", ",", "rt"}], "}"}], "=", 
+   RowBox[{"GetLDUMatrices", "[", 
+    RowBox[{"ldl", ",", "s"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{"MatrixForm", "[", "d", "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.684025637502473*^9, 3.684025638581376*^9}},
  FontSize->14],
 
 Cell[BoxData[
@@ -643,48 +718,239 @@ Cell[BoxData[
    RowBox[{"x", "**", "h", "**", "x", "**", "h"}]}], "+", 
   RowBox[{"2", " ", 
    RowBox[{"x", "**", "x", "**", "h", "**", "h"}]}]}]], "Output",
- CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9}],
+ CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
+  3.684025639808674*^9, 3.684025791320828*^9, 3.684026034597912*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.6840256399856043`*^9, 3.684025791507361*^9, 
+  3.684026034782724*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"{", 
-     RowBox[{"h", ",", 
-      RowBox[{"x", "**", "h"}], ",", 
-      RowBox[{"x", "**", "x", "**", "h"}]}], "}"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"x", "**", "x", "**", "h"}], ",", 
+     RowBox[{"x", "**", "h"}], ",", "h"}], "}"}], ",", 
+   TagBox[
+    TemplateBox[{RowBox[{
+        StyleBox[
+         TagBox["SparseArray", "SummaryHead"], "NonInterpretableSummary"], 
+        StyleBox["[", "NonInterpretableSummary"], 
+        DynamicModuleBox[{Typeset`open$$ = False}, 
+         PanelBox[
+          PaneSelectorBox[{False -> GridBox[{{
+                PaneBox[
+                 ButtonBox[
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEBitmaps", "SquarePlusIconMedium"]], 
+                  ButtonFunction :> (Typeset`open$$ = True), Appearance -> 
+                  None, Evaluator -> Automatic, Method -> "Preemptive"], 
+                 Alignment -> {Center, Center}, ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                GraphicsBox[
+                 
+                 RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}, {
+                  0.5, 0., 0.}}, {{0.235431, 0.32765, 0.833291}, {0.772061, 
+                  0.92462, 0.998703}, {0.5, 0., 0.}}, {{0.235431, 0.32765, 
+                  0.833291}, {0.235431, 0.32765, 0.833291}, {0.772061, 
+                  0.92462, 0.998703}}}, {{0, 0}, {3, 3}}, {0, 1}], 
+                 AspectRatio -> 1, Axes -> False, Frame -> False, 
+                 FrameLabel -> {None, None}, FrameStyle -> Directive[
+                   Opacity[0.5], 
+                   Thickness[Tiny], 
+                   RGBColor[0.368417, 0.506779, 0.709798]], 
+                 FrameTicks -> {{None, None}, {None, None}}, GridLinesStyle -> 
+                 Directive[
+                   GrayLevel[0.5, 0.4]], ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}], 
+                 Method -> {
+                  "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                   Automatic, "DefaultPlotStyle" -> Automatic, 
+                   "DomainPadding" -> Scaled[0.02], "RangePadding" -> 
+                   Scaled[0.05]}], 
+                GridBox[{{
+                   RowBox[{
+                    TagBox[
+                    "\"Specified elements: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["6", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Dimensions: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox[
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "3"}], "}"}], "SummaryItem"]}]}}, 
+                 GridBoxAlignment -> {
+                  "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+                 False, GridBoxItemSize -> {
+                  "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                 GridBoxSpacings -> {
+                  "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+                 BaseStyle -> {
+                  ShowStringCharacters -> False, NumberMarks -> False, 
+                   PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+              GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+              GridBoxItemSize -> {
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+              BaselinePosition -> {1, 1}], True -> GridBox[{{
+                PaneBox[
+                 ButtonBox[
+                  DynamicBox[
+                   FEPrivate`FrontEndResource[
+                   "FEBitmaps", "SquareMinusIconMedium"]], 
+                  ButtonFunction :> (Typeset`open$$ = False), Appearance -> 
+                  None, Evaluator -> Automatic, Method -> "Preemptive"], 
+                 Alignment -> {Center, Center}, ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}]], 
+                GraphicsBox[
+                 
+                 RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}, {
+                  0.5, 0., 0.}}, {{0.235431, 0.32765, 0.833291}, {0.772061, 
+                  0.92462, 0.998703}, {0.5, 0., 0.}}, {{0.235431, 0.32765, 
+                  0.833291}, {0.235431, 0.32765, 0.833291}, {0.772061, 
+                  0.92462, 0.998703}}}, {{0, 0}, {3, 3}}, {0, 1}], 
+                 AspectRatio -> 1, Axes -> False, Frame -> False, 
+                 FrameLabel -> {None, None}, FrameStyle -> Directive[
+                   Opacity[0.5], 
+                   Thickness[Tiny], 
+                   RGBColor[0.368417, 0.506779, 0.709798]], 
+                 FrameTicks -> {{None, None}, {None, None}}, GridLinesStyle -> 
+                 Directive[
+                   GrayLevel[0.5, 0.4]], ImageSize -> 
+                 Dynamic[{
+                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                    AbsoluteCurrentValue[Magnification]}], 
+                 Method -> {
+                  "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                   Automatic, "DefaultPlotStyle" -> Automatic, 
+                   "DomainPadding" -> Scaled[0.02], "RangePadding" -> 
+                   Scaled[0.05]}], 
+                GridBox[{{
+                   RowBox[{
+                    TagBox[
+                    "\"Specified elements: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["6", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Dimensions: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox[
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "3"}], "}"}], "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Default: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["0", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Density: \"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["0.6666666666666666`", "SummaryItem"]}]}, {
+                   RowBox[{
+                    TagBox["\"Elements:\"", "SummaryItemAnnotation"], 
+                    "\[InvisibleSpace]", 
+                    TagBox["\"\"", "SummaryItem"]}]}, {
+                   TagBox[
+                    TagBox[
+                    GridBox[{{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "3"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "2", ContentPadding -> False, FrameMargins -> 0, 
+                    StripOnInput -> True, BaselinePosition -> Baseline, 
+                    ImageSize -> {{1, 300}, Automatic}], LineBreakWithin -> 
+                    False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "2"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "2", ContentPadding -> False, FrameMargins -> 0, 
+                    StripOnInput -> True, BaselinePosition -> Baseline, 
+                    ImageSize -> {{1, 300}, Automatic}], LineBreakWithin -> 
+                    False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"2", ",", "3"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    RowBox[{"2", " ", "x"}], ContentPadding -> False, 
+                    FrameMargins -> 0, StripOnInput -> True, BaselinePosition -> 
+                    Baseline, ImageSize -> {{1, 300}, Automatic}], 
+                    LineBreakWithin -> False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "1"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "2", ContentPadding -> False, FrameMargins -> 0, 
+                    StripOnInput -> True, BaselinePosition -> Baseline, 
+                    ImageSize -> {{1, 300}, Automatic}], LineBreakWithin -> 
+                    False]}]}, {
+                    ItemBox[
+                    "\"\[VerticalEllipsis]\"", Alignment -> Center, 
+                    StripOnInput -> False]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"], "SummaryItem"]}}, 
+                 GridBoxAlignment -> {
+                  "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+                 False, GridBoxItemSize -> {
+                  "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                 GridBoxSpacings -> {
+                  "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+                 BaseStyle -> {
+                  ShowStringCharacters -> False, NumberMarks -> False, 
+                   PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+              GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+              GridBoxItemSize -> {
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+              BaselinePosition -> {1, 1}]}, 
+           Dynamic[Typeset`open$$], ImageSize -> Automatic], BaselinePosition -> 
+          Baseline], DynamicModuleValues :> {}], 
+        StyleBox["]", "NonInterpretableSummary"]}]},
+     "CopyTag",
+     DisplayFunction->(#& ),
+     InterpretationFunction->("SparseArray[<6>, {3, 3}]"& )],
+    False,
+    Editable->False,
+    SelectWithContents->True,
+    Selectable->False], ",", 
    RowBox[{"{", 
     RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"2", " ", 
-        RowBox[{"x", "**", "x"}]}], ",", 
-       RowBox[{"2", " ", "x"}], ",", "2"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"2", " ", "x"}], ",", "2", ",", "0"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"2", ",", "0", ",", "0"}], "}"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", "h", "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"h", "**", "x"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"h", "**", "x", "**", "x"}], "}"}]}], "}"}]}], "}"}]], "Output",\
-
- CellChangeTimes->{3.516626981798771*^9, 3.572400611450101*^9}],
+     RowBox[{"h", "**", "x", "**", "x"}], ",", 
+     RowBox[{"h", "**", "x"}], ",", "h"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
+  3.684025639808674*^9, 3.684025791320828*^9, 3.6840260349301157`*^9}],
 
 Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", GridBox[{
-     {
+     {"0", "0", "2"},
+     {"0", "2", 
+      RowBox[{"2", " ", "x"}]},
+     {"2", 
+      RowBox[{"2", " ", "x"}], 
       RowBox[{"2", " ", 
-       RowBox[{"x", "**", "x"}]}], 
-      RowBox[{"2", " ", "x"}], "2"},
-     {
-      RowBox[{"2", " ", "x"}], "2", "0"},
-     {"2", "0", "0"}
+       RowBox[{"x", "**", "x"}]}]}
     },
     GridBoxAlignment->{
      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
@@ -697,8 +963,26 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.516626981798771*^9, 3.572400611451488*^9}],
+   MatrixForm[
+   SparseArray[
+    Automatic, {3, 3}, 0, {
+     1, {{0, 1, 3, 6}, {{3}, {2}, {3}, {1}, {2}, {3}}}, {
+      2, 2, 2 $CellContext`x, 2, 2 $CellContext`x, 2 
+       NonCommutativeMultiply[$CellContext`x, $CellContext`x]}}]]]]], "Output",\
+
+ CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
+  3.684025639808674*^9, 3.684025791320828*^9, 3.6840260349388657`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSelfAdjointQ", "::", "SelfAdjointVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
+\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed adjoint\"\>"}]], "Message", "MSG",
+ 
+ CellChangeTimes->{3.6840256399856043`*^9, 3.684025791507361*^9, 
+  3.684026035071823*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -718,8 +1002,12 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.516626981798771*^9, 3.57240061145303*^9}]
+   MatrixForm[
+   SparseArray[
+    Automatic, {3, 3}, 0, {
+     1, {{0, 1, 2, 3}, {{1}, {3}, {2}}}, {2, 2, 2}}]]]]], "Output",
+ CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
+  3.684025639808674*^9, 3.684025791320828*^9, 3.684026035082995*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -776,14 +1064,26 @@ Cell[BoxData[{
     RowBox[{"hes", ",", 
      RowBox[{"{", "h", "}"}]}], " ", "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{"MatrixForm", "[", "mq", "]"}]}], "Input",
+ CellChangeTimes->{3.684025708141283*^9},
  FontSize->14],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.684025721290753*^9, 3.684025799093669*^9, 
+  3.684026039108038*^9}],
 
 Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", GridBox[{
-     {
-      RowBox[{"2", " ", "x"}], "2"},
-     {"2", "0"}
+     {"0", "2"},
+     {"2", 
+      RowBox[{"2", " ", "x"}]}
     },
     GridBoxAlignment->{
      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
@@ -796,8 +1096,13 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.516626981964835*^9, 3.572400611497478*^9}]
+   MatrixForm[
+   SparseArray[
+    Automatic, {2, 2}, 0, {
+     1, {{0, 1, 3}, {{2}, {1}, {2}}}, {2, 2, 2 $CellContext`x}}]]]]], "Output",\
+
+ CellChangeTimes->{3.516626981964835*^9, 3.572400611497478*^9, 
+  3.6840257212990627`*^9, 3.684025799101709*^9, 3.6840260391171207`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -817,28 +1122,29 @@ Cell[BoxData[
     RowBox[{"{", "1", "}"}]}]}], " ", "]"}]], "Input",
  FontSize->14],
 
-Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Option \
+\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
+\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
+"Message", "MSG",
+ CellChangeTimes->{3.684025737876587*^9, 3.684025801933894*^9, 
+  3.684026040764632*^9}],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Middle matrix is size \"\>", "\[InvisibleSpace]", "2", 
-   "\[InvisibleSpace]", "\<\"X\"\>", "\[InvisibleSpace]", "2"}],
-  SequenceForm["Middle matrix is size ", 2, "X", 2],
-  Editable->False]], "Print",
- CellChangeTimes->{3.516626982081801*^9, 3.5724006115481653`*^9}],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"At most \"\>", "\[InvisibleSpace]", "2", 
-   "\[InvisibleSpace]", "\<\" permutations possible.\"\>"}],
-  SequenceForm["At most ", 2, " permutations possible."],
-  Editable->False]], "Print",
- CellChangeTimes->{3.516626982081801*^9, 3.5724006115497017`*^9}],
-
-Cell[BoxData[
- RowBox[{"{", "1", "}"}]], "Print",
- CellChangeTimes->{3.516626982081801*^9, 3.572400611552545*^9}]
-}, Open  ]],
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$902861, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.684025737876587*^9, 3.684025801933894*^9, 
+  3.684026040943646*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -848,7 +1154,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"-", "2"}], " ", 
      RowBox[{"inv", "[", "x", "]"}]}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626982095601*^9, 3.572400611555241*^9}]
+ CellChangeTimes->{3.516626982095601*^9, 3.572400611555241*^9, 
+  3.684025738065024*^9, 3.684025802120943*^9, 3.684026040952526*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -864,31 +1171,27 @@ Cell[BoxData[
      RowBox[{"2", ",", "2"}], "}"}]}]}], " ", "]"}]], "Input",
  FontSize->14],
 
-Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Option \
+\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
+\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
+"Message", "MSG",
+ CellChangeTimes->{3.6840258156022778`*^9, 3.6840260429423227`*^9}],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Middle matrix is size \"\>", "\[InvisibleSpace]", "2", 
-   "\[InvisibleSpace]", "\<\"X\"\>", "\[InvisibleSpace]", "2"}],
-  SequenceForm["Middle matrix is size ", 2, "X", 2],
-  Editable->False]], "Print",
- CellChangeTimes->{3.516626982215252*^9, 3.572400611598049*^9}],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"At most \"\>", "\[InvisibleSpace]", "2", 
-   "\[InvisibleSpace]", "\<\" permutations possible.\"\>"}],
-  SequenceForm["At most ", 2, " permutations possible."],
-  Editable->False]], "Print",
- CellChangeTimes->{3.516626982215252*^9, 3.572400611599441*^9}],
-
-Cell[BoxData[
- RowBox[{"{", "2", "}"}]], "Print",
- CellChangeTimes->{3.516626982215252*^9, 3.572400611602059*^9}],
-
-Cell[BoxData["\<\"Permutation Disregarded 1\"\>"], "Print",
- CellChangeTimes->{3.516626982215252*^9, 3.572400611604596*^9}]
-}, Open  ]],
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$940811, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.6840258156022778`*^9, 3.684026043112907*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -898,7 +1201,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"-", "2"}], " ", 
      RowBox[{"inv", "[", "x", "]"}]}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626982232624*^9, 3.572400611607533*^9}]
+ CellChangeTimes->{3.516626982232624*^9, 3.572400611607533*^9, 
+  3.684025815787154*^9, 3.6840260431209717`*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -936,15 +1240,25 @@ Cell[BoxData[{
  FontSize->14],
 
 Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.684025827473044*^9, 3.684026045091165*^9}],
+
+Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", GridBox[{
-     {
+     {"0", "0", "2"},
+     {"0", "2", 
+      RowBox[{"2", " ", "x"}]},
+     {"2", 
+      RowBox[{"2", " ", "x"}], 
       RowBox[{"2", " ", 
-       RowBox[{"x", "**", "x"}]}], 
-      RowBox[{"2", " ", "x"}], "2"},
-     {
-      RowBox[{"2", " ", "x"}], "2", "0"},
-     {"2", "0", "0"}
+       RowBox[{"x", "**", "x"}]}]}
     },
     GridBoxAlignment->{
      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
@@ -957,8 +1271,15 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.516626982348835*^9, 3.5724006116481028`*^9}]
+   MatrixForm[
+   SparseArray[
+    Automatic, {3, 3}, 0, {
+     1, {{0, 1, 3, 6}, {{3}, {2}, {3}, {1}, {2}, {3}}}, {
+      2, 2, 2 $CellContext`x, 2, 2 $CellContext`x, 2 
+       NonCommutativeMultiply[$CellContext`x, $CellContext`x]}}]]]]], "Output",\
+
+ CellChangeTimes->{3.516626982348835*^9, 3.5724006116481028`*^9, 
+  3.684025827481328*^9, 3.684026045100157*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -979,46 +1300,46 @@ Cell[BoxData[
      RowBox[{"1", ",", "2"}], "}"}]}]}], " ", "]"}]], "Input",
  FontSize->14],
 
-Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Option \
+\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
+\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
+"Message", "MSG",
+ CellChangeTimes->{3.6840258356202297`*^9, 3.684026046777274*^9}],
 
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Middle matrix is size \"\>", "\[InvisibleSpace]", "3", 
-   "\[InvisibleSpace]", "\<\"X\"\>", "\[InvisibleSpace]", "3"}],
-  SequenceForm["Middle matrix is size ", 3, "X", 3],
-  Editable->False]], "Print",
- CellChangeTimes->{3.5166269824912033`*^9, 3.572400611715292*^9}],
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$997851, \
+x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.6840258356202297`*^9, 3.684026046968606*^9}],
 
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"At most \"\>", "\[InvisibleSpace]", "12", 
-   "\[InvisibleSpace]", "\<\" permutations possible.\"\>"}],
-  SequenceForm["At most ", 12, " permutations possible."],
-  Editable->False]], "Print",
- CellChangeTimes->{3.5166269824912033`*^9, 3.572400611716627*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"1", ",", "2"}], "}"}]], "Print",
- CellChangeTimes->{3.5166269824912033`*^9, 3.5724006117195377`*^9}],
-
-Cell[BoxData["\<\"Permutation Disregarded 1\"\>"], "Print",
- CellChangeTimes->{3.5166269824912033`*^9, 3.5724006117221127`*^9}]
-}, Open  ]],
+Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
+{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
+ CellChangeTimes->{3.5166269824912033`*^9, 3.572400611715292*^9, 
+  3.6840258358036137`*^9, 3.684026047008065*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"{", 
    RowBox[{
-    RowBox[{"2", " ", 
-     RowBox[{"x", "**", "x"}]}], ",", 
-    RowBox[{
-     RowBox[{"-", "2"}], " ", 
-     RowBox[{
-      RowBox[{"inv", "[", "x", "]"}], "**", 
-      RowBox[{"inv", "[", "x", "]"}]}]}], ",", "2"}], "}"}], "}"}]], "Output",\
-
- CellChangeTimes->{3.5166269825956583`*^9, 3.572400611724807*^9}]
+    RowBox[{"{", 
+     RowBox[{"2", ",", "0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.5166269825956583`*^9, 3.572400611724807*^9, 
+  3.684025835810842*^9, 3.684026047015711*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1034,53 +1355,31 @@ Cell[BoxData[
      RowBox[{"1", ",", "12"}], "}"}]}]}], " ", "]"}]], "Input",
  FontSize->14],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Middle matrix is size \"\>", "\[InvisibleSpace]", "3", 
-   "\[InvisibleSpace]", "\<\"X\"\>", "\[InvisibleSpace]", "3"}],
-  SequenceForm["Middle matrix is size ", 3, "X", 3],
-  Editable->False]], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611782757*^9}],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"At most \"\>", "\[InvisibleSpace]", "12", 
-   "\[InvisibleSpace]", "\<\" permutations possible.\"\>"}],
-  SequenceForm["At most ", 12, " permutations possible."],
-  Editable->False]], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.57240061178413*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
   RowBox[{
-  "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", ",", "8", 
-   ",", "9", ",", "10", ",", "11", ",", "12"}], "}"}]], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611786852*^9}],
+  ":", " "}], "\<\"Option \
+\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
+\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
+"Message", "MSG",
+ CellChangeTimes->{3.684025842633638*^9, 3.6840260487704983`*^9}],
 
-Cell[BoxData["\<\"Permutation Disregarded 1\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611789472*^9}],
-
-Cell[BoxData["\<\"Permutation Disregarded 1\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.57240061184698*^9}],
-
-Cell[BoxData["\<\"Permutation Disregarded 7\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611849663*^9}],
-
-Cell[BoxData["\<\"Permutation Disregarded 7\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611852129*^9}],
-
-Cell[BoxData["\<\"Permutation Disregarded 7\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611913884*^9}],
-
-Cell[BoxData["\<\"Permutation Disregarded 7\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.5724006119161997`*^9}],
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$1035841, x\\\\\\\
+\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.684025842633638*^9, 3.684026048943589*^9}],
 
 Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
 { {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611980768*^9}]
-}, Open  ]],
+ CellChangeTimes->{3.516626982777557*^9, 3.572400611782757*^9, 
+  3.684025842848754*^9, 3.684026048966607*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1093,7 +1392,8 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"0", ",", 
       RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269839666767`*^9, 3.572400611983241*^9}]
+ CellChangeTimes->{3.5166269839666767`*^9, 3.572400611983241*^9, 
+  3.684025842856196*^9, 3.684026048973959*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1129,9 +1429,21 @@ Cell[BoxData[
  FontSize->14],
 
 Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", "2", "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626984292391*^9, 3.57240061216508*^9}]
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCMatrixOfQuadratic", "::", "NotSymmetric"}], "MessageName"], 
+  RowBox[{":", " "}], "\<\"Quadratic form is not symmetric.\"\>"}]], "Message",\
+ "MSG",
+ CellChangeTimes->{
+  3.684025849163599*^9, 3.684026052774056*^9, 3.6840261052288857`*^9, {
+   3.6840261474346867`*^9, 3.6840261626432457`*^9}, 3.684026912789365*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{
+  3.516626984292391*^9, 3.57240061216508*^9, 3.6840258499370823`*^9, 
+   3.684026053354601*^9, 3.684026106049961*^9, {3.6840261481928*^9, 
+   3.684026162651144*^9}, 3.684026912799038*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1153,9 +1465,21 @@ Cell[BoxData[
     RowBox[{"x", ",", "y"}], "}"}]}], "]"}]], "Input",
  FontSize->14],
 
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$1334951, \
+NCConvexity`Private`h$1334952\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed \
+symmetric\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6840269343900337`*^9}],
+
 Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
 { {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626984359239*^9, 3.57240061219839*^9}],
+ CellChangeTimes->{3.516626984359239*^9, 3.57240061219839*^9, 
+  3.684026934401552*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1166,7 +1490,8 @@ Cell[BoxData[
     RowBox[{"{", "2", "}"}], ",", 
     RowBox[{"{", 
      RowBox[{"-", "2"}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626984362145*^9, 3.572400612199959*^9}]
+ CellChangeTimes->{3.516626984362145*^9, 3.572400612199959*^9, 
+  3.684026934409196*^9}]
 }, Open  ]],
 
 Cell["This is correct.  1+xy+yx is not matrix convex anywhere.", "Text",
@@ -1210,7 +1535,8 @@ Cell[BoxData[{
 
 Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
 { {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626985075303*^9, 3.572400612479084*^9}],
+ CellChangeTimes->{3.516626985075303*^9, 3.572400612479084*^9, 
+  3.684026986369651*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1224,15 +1550,19 @@ Cell[BoxData[
        RowBox[{"-", "2"}], " ", "B", " ", "G", " ", 
        RowBox[{"inv", "[", 
         RowBox[{"F", "+", 
-         RowBox[{"G", " ", "x"}]}], "]"}]}], ",", "0", ",", "0"}], "}"}], ",", 
+         RowBox[{"G", " ", 
+          RowBox[{"tp", "[", "x", "]"}]}]}], "]"}]}], ",", "0", ",", "0"}], 
+     "}"}], ",", 
     RowBox[{"{", 
      RowBox[{
       RowBox[{"2", " ", "B", " ", "G", " ", 
        RowBox[{"inv", "[", 
         RowBox[{"F", "+", 
-         RowBox[{"G", " ", "x"}]}], "]"}]}], ",", "0", ",", "0"}], "}"}]}], 
-   "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269850781813`*^9, 3.572400612480719*^9}]
+         RowBox[{"G", " ", 
+          RowBox[{"tp", "[", "x", "]"}]}]}], "]"}]}], ",", "0", ",", "0"}], 
+     "}"}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.5166269850781813`*^9, 3.572400612480719*^9, 
+  3.684026986380623*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1240,14 +1570,28 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"NCConvexityRegion", "[", 
   RowBox[{
-   RowBox[{"A", "*", 
+   RowBox[{"A", " ", 
     RowBox[{"x", "**", "x", "**", "x", "**", "x", "**", "x"}]}], ",", " ", 
    RowBox[{"{", "x", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.684028388547579*^9, 3.684028394138566*^9}},
  FontSize->14],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$1393451, x\\\\\\\
+\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6840269905522547`*^9, {3.68402838959735*^9, 3.684028396478743*^9}}],
 
 Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
 { {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.5724006125262003`*^9}],
+ CellChangeTimes->{
+  3.5724006125262003`*^9, 3.684026990571336*^9, {3.684028389632834*^9, 
+   3.684028396519801*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1266,7 +1610,9 @@ Cell[BoxData[
      RowBox[{"0", ",", "0", ",", 
       RowBox[{
        RowBox[{"-", "2"}], " ", "A"}]}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626985394373*^9, 3.572400612527623*^9}]
+ CellChangeTimes->{
+  3.516626985394373*^9, 3.572400612527623*^9, 3.6840269905787573`*^9, {
+   3.6840283896410503`*^9, 3.6840283965282393`*^9}}]
 }, Open  ]],
 
 Cell["\<\
@@ -1295,7 +1641,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"{", "0", "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269854396753`*^9, 3.572400612548253*^9}]
+ CellChangeTimes->{3.5166269854396753`*^9, 3.572400612548253*^9, 
+  3.684027202858448*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -1305,8 +1652,8 @@ reflected in the output 0.\
  FontSize->24]
 }, Open  ]]
 },
-WindowSize->{1186, 875},
-WindowMargins->{{Automatic, 24}, {Automatic, 2}},
+WindowSize->{1034, 748},
+WindowMargins->{{1, Automatic}, {Automatic, 0}},
 PrintingPageRange->{Automatic, Automatic},
 PrintingOptions->{"Magnification"->1,
 "PaperOrientation"->"Portrait",
@@ -1315,8 +1662,8 @@ PrintingOptions->{"Magnification"->1,
    "SHAHEEN", "Summer02", "Convexity", "NewStuff", "NEWNCCONVEXITYWITHDOC"}, 
   "NCConvexityRegionDemo.nb.ps", CharacterEncoding -> "ISO8859-1"]},
 PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
-FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
-2013)",
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1333,193 +1680,155 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 175, 6, 130, "Title"],
 Cell[CellGroupData[{
-Cell[779, 32, 283, 5, 63, "Input"],
+Cell[779, 32, 337, 6, 63, "Input"],
 Cell[CellGroupData[{
-Cell[1087, 41, 209, 4, 22, "Print"],
-Cell[1299, 47, 300, 7, 21, "Print"],
-Cell[1602, 56, 441, 10, 22, "Print"],
-Cell[2046, 68, 175, 3, 22, "Print"],
-Cell[2224, 73, 173, 3, 21, "Print"],
-Cell[2400, 78, 168, 3, 21, "Print"],
-Cell[2571, 83, 171, 3, 22, "Print"],
-Cell[2745, 88, 171, 3, 22, "Print"],
-Cell[2919, 93, 163, 3, 21, "Print"],
-Cell[3085, 98, 165, 3, 21, "Print"],
-Cell[3253, 103, 175, 3, 21, "Print"],
-Cell[3431, 108, 168, 3, 21, "Print"],
-Cell[3602, 113, 171, 3, 21, "Print"],
-Cell[3776, 118, 169, 3, 21, "Print"],
-Cell[3948, 123, 168, 3, 21, "Print"],
-Cell[4119, 128, 166, 3, 21, "Print"],
-Cell[4288, 133, 178, 3, 22, "Print"],
-Cell[4469, 138, 178, 3, 22, "Print"],
-Cell[4650, 143, 177, 3, 22, "Print"],
-Cell[4830, 148, 168, 3, 22, "Print"],
-Cell[5001, 153, 168, 3, 21, "Print"],
-Cell[5172, 158, 165, 3, 21, "Print"],
-Cell[5340, 163, 166, 3, 21, "Print"],
-Cell[5509, 168, 168, 3, 21, "Print"],
-Cell[5680, 173, 164, 3, 21, "Print"],
-Cell[5847, 178, 174, 3, 22, "Print"],
-Cell[6024, 183, 183, 3, 22, "Print"],
-Cell[6210, 188, 183, 3, 21, "Print"],
-Cell[6396, 193, 168, 3, 21, "Print"],
-Cell[6567, 198, 367, 8, 22, "Print"],
-Cell[6937, 208, 166, 3, 21, "Print"],
-Cell[7106, 213, 167, 3, 21, "Print"],
-Cell[7276, 218, 167, 3, 22, "Print"],
-Cell[7446, 223, 1514, 53, 693, "Print"],
-Cell[8963, 278, 279, 6, 22, "Print"]
+Cell[1141, 42, 354, 6, 22, "Print"],
+Cell[1498, 50, 445, 9, 21, "Print"],
+Cell[1946, 61, 582, 12, 22, "Print"]
 }, Open  ]]
 }, Open  ]],
-Cell[9269, 288, 176, 6, 42, "Text"],
+Cell[2555, 77, 176, 6, 42, "Text"],
 Cell[CellGroupData[{
-Cell[9470, 298, 172, 5, 29, "Input"],
-Cell[9645, 305, 164, 4, 28, "Output"]
+Cell[2756, 87, 172, 5, 29, "Input"],
+Cell[2931, 94, 450, 10, 21, "Message"],
+Cell[3384, 106, 288, 6, 28, "Output"]
 }, Open  ]],
-Cell[9824, 312, 160, 4, 73, "Text"],
-Cell[9987, 318, 139, 5, 42, "Text"],
+Cell[3687, 115, 160, 4, 73, "Text"],
+Cell[3850, 121, 139, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[10151, 327, 183, 5, 29, "Input"],
-Cell[10337, 334, 294, 9, 28, "Output"]
+Cell[4014, 130, 183, 5, 29, "Input"],
+Cell[4200, 137, 405, 10, 21, "Message"],
+Cell[4608, 149, 365, 10, 28, "Output"]
 }, Open  ]],
-Cell[10646, 346, 187, 4, 73, "Text"],
-Cell[10836, 352, 121, 5, 42, "Text"],
+Cell[4988, 162, 187, 4, 73, "Text"],
+Cell[5178, 168, 121, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[10982, 361, 248, 8, 29, "Input"],
-Cell[11233, 371, 163, 4, 28, "Output"]
+Cell[5324, 177, 248, 8, 29, "Input"],
+Cell[5575, 187, 430, 10, 21, "Message"],
+Cell[6008, 199, 232, 5, 28, "Output"]
 }, Open  ]],
-Cell[11411, 378, 172, 4, 73, "Text"],
-Cell[11586, 384, 117, 5, 42, "Text"],
+Cell[6255, 207, 172, 4, 73, "Text"],
+Cell[6430, 213, 117, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[11728, 393, 194, 5, 29, "Input"],
-Cell[11925, 400, 203, 2, 22, "Print"],
-Cell[12131, 404, 356, 11, 28, "Output"]
+Cell[6572, 222, 194, 5, 29, "Input"],
+Cell[6769, 229, 409, 10, 21, "Message"],
+Cell[7181, 241, 274, 3, 22, "Print"],
+Cell[7458, 246, 429, 12, 28, "Output"]
 }, Open  ]],
-Cell[12502, 418, 351, 6, 135, "Text"],
-Cell[12856, 426, 121, 5, 42, "Text"],
+Cell[7902, 261, 351, 6, 135, "Text"],
+Cell[8256, 269, 121, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[13002, 435, 292, 8, 29, "Input"],
-Cell[13297, 445, 205, 2, 22, "Print"],
-Cell[13505, 449, 473, 13, 28, "Output"]
+Cell[8402, 278, 292, 8, 29, "Input"],
+Cell[8697, 288, 440, 10, 21, "Message"],
+Cell[9140, 300, 274, 3, 22, "Print"],
+Cell[9417, 305, 544, 14, 28, "Output"]
 }, Open  ]],
-Cell[13993, 465, 370, 7, 135, "Text"],
-Cell[14366, 474, 114, 2, 55, "Text"],
-Cell[14483, 478, 165, 4, 73, "Text"],
-Cell[14651, 484, 122, 5, 42, "Text"],
+Cell[9976, 322, 370, 7, 135, "Text"],
+Cell[10349, 331, 114, 2, 55, "Text"],
+Cell[10466, 335, 165, 4, 73, "Text"],
+Cell[10634, 341, 122, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[14798, 493, 792, 21, 120, "Input"],
-Cell[15593, 516, 301, 8, 28, "Output"],
-Cell[15897, 526, 564, 19, 28, "Output"],
-Cell[16464, 547, 675, 19, 58, "Output"],
-Cell[17142, 568, 760, 22, 58, "Output"]
+Cell[10781, 350, 1054, 28, 138, "Input"],
+Cell[11838, 380, 372, 9, 28, "Output"],
+Cell[12213, 391, 376, 9, 21, "Message"],
+Cell[12592, 402, 9249, 189, 61, "Output"],
+Cell[21844, 593, 848, 24, 58, "Output"],
+Cell[22695, 619, 375, 9, 21, "Message"],
+Cell[23073, 630, 982, 28, 58, "Output"]
 }, Open  ]],
-Cell[17917, 593, 120, 4, 42, "Text"],
-Cell[18040, 599, 122, 5, 42, "Text"],
+Cell[24070, 661, 120, 4, 42, "Text"],
+Cell[24193, 667, 122, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[18187, 608, 803, 21, 120, "Input"],
-Cell[18993, 631, 574, 14, 28, "Output"],
-Cell[19570, 647, 867, 28, 28, "Output"],
-Cell[20440, 677, 791, 23, 74, "Output"],
-Cell[21234, 702, 680, 19, 74, "Output"]
+Cell[24340, 676, 1067, 28, 138, "Input"],
+Cell[25410, 706, 643, 15, 28, "Output"],
+Cell[26056, 723, 376, 9, 21, "Message"],
+Cell[26435, 734, 10269, 207, 61, "Output"],
+Cell[36707, 943, 1075, 30, 74, "Output"],
+Cell[37785, 975, 375, 9, 21, "Message"],
+Cell[38163, 986, 837, 23, 74, "Output"]
 }, Open  ]],
-Cell[21929, 724, 191, 5, 73, "Text"],
-Cell[22123, 731, 114, 2, 55, "Text"],
-Cell[22240, 735, 955, 15, 321, "Text"],
-Cell[23198, 752, 112, 5, 42, "Text"],
+Cell[39015, 1012, 191, 5, 73, "Text"],
+Cell[39209, 1019, 114, 2, 55, "Text"],
+Cell[39326, 1023, 955, 15, 352, "Text"],
+Cell[40284, 1040, 112, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[23335, 761, 577, 17, 66, "Input"],
-Cell[23915, 780, 676, 19, 58, "Output"]
+Cell[40421, 1049, 619, 18, 66, "Input"],
+Cell[41043, 1069, 374, 9, 21, "Message"],
+Cell[41420, 1080, 850, 24, 58, "Output"]
 }, Open  ]],
-Cell[24606, 802, 102, 3, 42, "Text"],
+Cell[42285, 1107, 102, 3, 42, "Text"],
 Cell[CellGroupData[{
-Cell[24733, 809, 320, 8, 29, "Input"],
-Cell[CellGroupData[{
-Cell[25078, 821, 318, 6, 21, "Print"],
-Cell[25399, 829, 305, 6, 22, "Print"],
-Cell[25707, 837, 113, 2, 21, "Print"]
-}, Open  ]],
-Cell[25835, 842, 265, 8, 28, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[26137, 855, 346, 9, 29, "Input"],
-Cell[CellGroupData[{
-Cell[26508, 868, 316, 6, 21, "Print"],
-Cell[26827, 876, 303, 6, 22, "Print"],
-Cell[27133, 884, 113, 2, 21, "Print"],
-Cell[27249, 888, 123, 1, 22, "Print"]
-}, Open  ]],
-Cell[27387, 892, 265, 8, 28, "Output"]
-}, Open  ]],
-Cell[27667, 903, 134, 4, 42, "Text"],
-Cell[27804, 909, 112, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[27941, 918, 588, 17, 66, "Input"],
-Cell[28532, 937, 793, 23, 74, "Output"]
-}, Open  ]],
-Cell[29340, 963, 103, 3, 42, "Text"],
-Cell[CellGroupData[{
-Cell[29468, 970, 357, 9, 29, "Input"],
-Cell[CellGroupData[{
-Cell[29850, 983, 318, 6, 21, "Print"],
-Cell[30171, 991, 307, 6, 22, "Print"],
-Cell[30481, 999, 140, 3, 21, "Print"],
-Cell[30624, 1004, 127, 1, 22, "Print"]
-}, Open  ]],
-Cell[30766, 1008, 368, 12, 28, "Output"]
+Cell[42412, 1114, 320, 8, 29, "Input"],
+Cell[42735, 1124, 397, 10, 24, "Message"],
+Cell[43135, 1136, 403, 10, 21, "Message"],
+Cell[43541, 1148, 334, 9, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[31171, 1025, 358, 9, 29, "Input"],
-Cell[CellGroupData[{
-Cell[31554, 1038, 316, 6, 21, "Print"],
-Cell[31873, 1046, 304, 6, 22, "Print"],
-Cell[32180, 1054, 246, 5, 21, "Print"],
-Cell[32429, 1061, 123, 1, 22, "Print"],
-Cell[32555, 1064, 122, 1, 22, "Print"],
-Cell[32680, 1067, 123, 1, 22, "Print"],
-Cell[32806, 1070, 123, 1, 22, "Print"],
-Cell[32932, 1073, 123, 1, 22, "Print"],
-Cell[33058, 1076, 125, 1, 22, "Print"],
-Cell[33186, 1079, 203, 2, 22, "Print"]
+Cell[43912, 1162, 346, 9, 29, "Input"],
+Cell[44261, 1173, 376, 9, 24, "Message"],
+Cell[44640, 1184, 380, 9, 21, "Message"],
+Cell[45023, 1195, 314, 9, 28, "Output"]
 }, Open  ]],
-Cell[33404, 1084, 358, 11, 28, "Output"]
-}, Open  ]],
-Cell[33777, 1098, 247, 5, 104, "Text"],
-Cell[34027, 1105, 70, 2, 96, "Text"],
-Cell[34100, 1109, 84, 1, 42, "Text"],
-Cell[34187, 1112, 151, 5, 42, "Text"],
+Cell[45352, 1207, 134, 4, 73, "Text"],
+Cell[45489, 1213, 112, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[34363, 1121, 207, 7, 29, "Input"],
-Cell[34573, 1130, 136, 3, 28, "Output"]
+Cell[45626, 1222, 588, 17, 66, "Input"],
+Cell[46217, 1241, 349, 8, 21, "Message"],
+Cell[46569, 1251, 1053, 30, 74, "Output"]
 }, Open  ]],
-Cell[34724, 1136, 254, 5, 104, "Text"],
+Cell[47637, 1284, 103, 3, 42, "Text"],
 Cell[CellGroupData[{
-Cell[35003, 1145, 243, 8, 29, "Input"],
-Cell[35249, 1155, 202, 2, 22, "Print"],
-Cell[35454, 1159, 293, 9, 28, "Output"]
-}, Open  ]],
-Cell[35762, 1171, 87, 1, 42, "Text"],
-Cell[35852, 1174, 154, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[36031, 1183, 754, 25, 48, "Input"],
-Cell[36788, 1210, 203, 2, 22, "Print"],
-Cell[36994, 1214, 675, 20, 28, "Output"]
+Cell[47765, 1291, 357, 9, 29, "Input"],
+Cell[48125, 1302, 374, 9, 24, "Message"],
+Cell[48502, 1313, 380, 9, 21, "Message"],
+Cell[48885, 1324, 254, 3, 22, "Print"],
+Cell[49142, 1329, 405, 12, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[37706, 1239, 220, 6, 29, "Input"],
-Cell[37929, 1247, 183, 2, 22, "Print"],
-Cell[38115, 1251, 573, 17, 28, "Output"]
+Cell[49584, 1346, 358, 9, 29, "Input"],
+Cell[49945, 1357, 374, 9, 24, "Message"],
+Cell[50322, 1368, 377, 8, 21, "Message"],
+Cell[50702, 1378, 250, 3, 22, "Print"],
+Cell[50955, 1383, 405, 12, 28, "Output"]
 }, Open  ]],
-Cell[38703, 1271, 268, 5, 104, "Text"],
-Cell[38974, 1278, 148, 5, 42, "Text"],
+Cell[51375, 1398, 247, 5, 104, "Text"],
+Cell[51625, 1405, 70, 2, 96, "Text"],
+Cell[51698, 1409, 84, 1, 42, "Text"],
+Cell[51785, 1412, 151, 5, 42, "Text"],
 Cell[CellGroupData[{
-Cell[39147, 1287, 161, 5, 29, "Input"],
-Cell[39311, 1294, 139, 3, 28, "Output"]
+Cell[51961, 1421, 207, 7, 29, "Input"],
+Cell[52171, 1430, 366, 8, 21, "Message"],
+Cell[52540, 1440, 253, 5, 28, "Output"]
 }, Open  ]],
-Cell[39465, 1300, 145, 4, 42, "Text"]
+Cell[52808, 1448, 254, 5, 104, "Text"],
+Cell[CellGroupData[{
+Cell[53087, 1457, 243, 8, 29, "Input"],
+Cell[53333, 1467, 387, 9, 21, "Message"],
+Cell[53723, 1478, 227, 3, 22, "Print"],
+Cell[53953, 1483, 318, 10, 28, "Output"]
+}, Open  ]],
+Cell[54286, 1496, 87, 1, 42, "Text"],
+Cell[54376, 1499, 154, 5, 42, "Text"],
+Cell[CellGroupData[{
+Cell[54555, 1508, 754, 25, 48, "Input"],
+Cell[55312, 1535, 228, 3, 22, "Print"],
+Cell[55543, 1540, 782, 24, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56362, 1569, 286, 7, 29, "Input"],
+Cell[56651, 1578, 405, 9, 21, "Message"],
+Cell[57059, 1589, 258, 4, 22, "Print"],
+Cell[57320, 1595, 654, 19, 28, "Output"]
+}, Open  ]],
+Cell[57989, 1617, 268, 5, 104, "Text"],
+Cell[58260, 1624, 148, 5, 42, "Text"],
+Cell[CellGroupData[{
+Cell[58433, 1633, 161, 5, 29, "Input"],
+Cell[58597, 1640, 164, 4, 28, "Output"]
+}, Open  ]],
+Cell[58776, 1647, 145, 4, 73, "Text"]
 }, Open  ]]
 }
 ]
 *)
 
-(* End of internal cache information *)
