@@ -780,7 +780,8 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <p>The following options can be given:</p>
 <ul>
 <li><code>SymmetricVariables</code>: list of variables that should be considered symmetric; use <code>All</code> to make all variables symmetric;</li>
-<li><code>ExcludeVariables</code>: list of variables that should not be considered symmetric; use <code>All</code> to exclude all variables.</li>
+<li><code>ExcludeVariables</code>: list of variables that should not be considered symmetric; use <code>All</code> to exclude all variables;</li>
+<li><code>Strict</code>: treats as non-symmetric any variable that appears inside <code>tp</code>.</li>
 </ul>
 <p>See also: <a href="#NCSymmetricQ">NCSymmetricQ</a>, <a href="#NCSelfAdjointTest">NCNCSelfAdjointTest</a>.</p>
 <h2 id="NCSymmetricPart"><span class="header-section-number">11.3</span> NCSymmetricPart</h2>
@@ -801,6 +802,7 @@ symVars = {x}</code></pre>
 <ul>
 <li><code>SymmetricVariables</code>: list of variables that should be considered symmetric; use <code>All</code> to make all variables symmetric;</li>
 <li><code>ExcludeVariables</code>: list of variables that should not be considered symmetric; use <code>All</code> to exclude all variables.</li>
+<li><code>Strict</code>: treats as non-symmetric any variable that appears inside <code>tp</code>.</li>
 </ul>
 <p>See also: <a href="#NCSymmetricTest">NCSymmetricTest</a>.</p>
 <h2 id="NCSelfAdjointQ"><span class="header-section-number">11.4</span> NCSelfAdjointQ</h2>
@@ -819,6 +821,7 @@ symVars = {x}</code></pre>
 <li><code>SelfAdjointVariables</code>: list of variables that should be considered self-adjoint; use <code>All</code> to make all variables self-adjoint;</li>
 <li><code>SymmetricVariables</code>: list of variables that should be considered symmetric; use <code>All</code> to make all variables symmetric;</li>
 <li><code>ExcludeVariables</code>: list of variables that should not be considered symmetric; use <code>All</code> to exclude all variables.</li>
+<li><code>Strict</code>: treats as non-self-adjoint any variable that appears inside <code>aj</code>.</li>
 </ul>
 <p>See also: <a href="#NCSelfAdjointQ">NCSelfAdjointQ</a>.</p>
 <h1 id="PackageNCOutput"><span class="header-section-number">12</span> NCOutput</h1>
