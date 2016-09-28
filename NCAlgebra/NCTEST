@@ -11,8 +11,8 @@ Print["> BEGIN NCTEST\n" ];
 tests = {
   "CommutativeQ",
   "NCMultiplication",
-  "NCUtil",
   "NCDeprecated",
+  "NCUtil",
   "NCSymmetric",
   "NCSelfAdjoint",
   "NCReplace",
@@ -29,7 +29,6 @@ tests = {
   "NCRoots",
   "NCConjugate",
   "NCOutput",
-  "NCLDU",
   "NCRealization",
   "NCConvexity",
   "Matrix"

@@ -64,6 +64,9 @@ Begin[ "`Private`" ]
   NCLUPartialPivoting[mat_?MatrixQ, f_:NCLeafCount] := 
     NCLUPartialPivoting[mat[[All,1]], f];
 
+  NCLUPartialPivoting[vec_SparseArray, f_:NCLeafCount] :=
+    NCLUPartialPivoting[Normal[vec], f];
+   
   (* NOTE: GreaterEqual ensures that the first greatest element is 
            picked rather than the last *)
   NCLUPartialPivoting[vec_List, f_:NCLeafCount] :=
@@ -183,11 +186,11 @@ Begin[ "`Private`" ]
            /. options
  	   /. Options[NCLDLDecomposition, Inverse];
 
-     selfAdjointQ = SelfAdjointMatrixQ
+    selfAdjointQ = SelfAdjointMatrixQ
 	    /. options
 	    /. Options[NCMatrixDecompositions, SelfAdjointMatrixQ];
 
-     LDLDecomposition[mat, 
+    LDLDecomposition[mat, 
                      ZeroTest -> zeroTest, 
                      PartialPivoting -> partialPivoting,
                      CompletePivoting -> completePivoting,

@@ -43,7 +43,8 @@ Options[NCSymmetricTest] = {
 Options[NCSelfAdjointTest] = {
   SelfAdjointVariables -> {},
   SymmetricVariables -> {},
-  ExcludeVariables -> {}
+  ExcludeVariables -> {},
+  Strict -> True
 };
 
 Begin[ "`Private`" ]
@@ -74,7 +75,7 @@ Begin[ "`Private`" ]
       (*
       Print["----"];
       Print["options = ", options];
-      Print["diff = ", diff];
+      Print["diff = ", Normal[diff]];
       Print["zero = ", zero];
       Print["symmetricVars = ", symmetricVars];
       Print["excludeVars = ", excludeVars];
@@ -125,7 +126,7 @@ Begin[ "`Private`" ]
 
       (*
       Print["exp = ", exp];
-      Print["diff = ", diff];
+      Print["diff = ", Normal[diff]];
       Print["vars = ", vars];
       Print["tpVars = ", tpVars];
       Print["tpDiffVars = ", tpDiffVars];
@@ -144,7 +145,7 @@ Begin[ "`Private`" ]
          Return[{False, {}}]
       ];
       
-      (* Warm user of symmetric assumptions *)
+      (* Warn user of symmetric assumptions *)
       Message[NCSymmetricQ::SymmetricVariables, 
               ToString[First[symVars]] <>
                 StringJoin @@ Map[(", " <> ToString[#])&, Rest[symVars]]];
@@ -157,6 +158,9 @@ Begin[ "`Private`" ]
                        ExpandNonCommutativeMultiply[exp - tp[exp]],
                        0, opts];
       
+  NCSymmetricTest[mat_SparseArray, opts:OptionsPattern[{}]] := 
+    NCSymmetricTest[Normal[mat], opts];
+
   NCSymmetricTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
     NCSymmetricTestAux[
         mat, 
@@ -238,7 +242,7 @@ Begin[ "`Private`" ]
   Clear[NCSelfAdjointTestAux];
   NCSelfAdjointTestAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
       {vars, ajVars, ajDiffVars, selfAdjVars, selfAdjRule, ajCoVars, symVars, 
-       options, symmetricVars, excludeVars},
+       options, symmetricVars, excludeVars, strict},
       
       (* process options *)
 
@@ -255,6 +259,10 @@ Begin[ "`Private`" ]
       excludeVars = ExcludeVariables 
  	    /. options
 	    /. Options[NCSelfAdjointTest, ExcludeVariables];
+
+      strict = Strict 
+ 	    /. options
+	    /. Options[NCSelfAdjointTest, Strict];
 
       (*
       Print["-----"];
@@ -312,8 +320,14 @@ Begin[ "`Private`" ]
 
       ajVars = Map[aj,NCGrabSymbols[exp, aj]];
       ajDiffVars = Map[aj,NCGrabSymbols[diff, aj]];
-      selfAdjVars = Join[Complement[ajDiffVars, ajVars, excludeVars],
-                     selfAdjointVars];
+      selfAdjVars = Union[
+        If[ strict
+            , 
+            Complement[ajDiffVars, ajVars, excludeVars]
+            ,
+            Complement[ajDiffVars, excludeVars]
+        ],
+        selfAdjointVars];
 
       (*
       Print["exp = ", exp];
@@ -364,7 +378,7 @@ Begin[ "`Private`" ]
            Return[{False, {}, {}}]
         ];
 
-        (* Warm user of symmetric assumptions *)
+        (* Warn user of symmetric assumptions *)
         Message[NCSymmetricQ::SymmetricVariables, 
                 ToString[First[symVars]] <>
                   StringJoin @@ Map[(", " <> ToString[#])&, Rest[symVars]]];
@@ -373,7 +387,7 @@ Begin[ "`Private`" ]
 
       If [selfAdjVars =!= {},
 
-         (* Warm user of adjoint assumptions *)
+         (* Warn user of adjoint assumptions *)
          Message[NCSelfAdjointQ::SelfAdjointVariables, 
                  ToString[First[selfAdjVars]] <>
                    StringJoin @@ Map[(", "<>ToString[#])&, Rest[selfAdjVars]]];
@@ -386,6 +400,9 @@ Begin[ "`Private`" ]
     NCSelfAdjointTestAux[exp, 
                          ExpandNonCommutativeMultiply[exp - aj[exp]],
                          0, opts];
+
+  NCSelfAdjointTest[mat_SparseArray, opts:OptionsPattern[{}]] := 
+    NCSelfAdjointTest[Normal[mat], opts];
 
   NCSelfAdjointTest[mat_?MatrixQ, opts:OptionsPattern[{}]] := 
     NCSelfAdjointTestAux[

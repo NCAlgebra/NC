@@ -98,6 +98,14 @@ Block[
   NCTest[NCGrabSymbols[expr, tp], {tp[y]}];
   NCTest[NCGrabSymbols[expr, tp|aj], {aj[x],tp[y]}];
 
+  expr = {{a**x, b**tp[y]},{1,y**tp[x]}};
+  NCTest[NCGrabSymbols[expr], {a,b,x,y}];
+
+  expr = SparseArray[{{a**x, b**tp[y]},{1,y**tp[x]}}];
+  NCTest[NCGrabSymbols[expr], {a,b,x,y}];
+  NCTest[NCGrabSymbols[expr, tp], {tp[x],tp[y]}];
+
+  expr = a aj[x]**y+inv[1+inv[x**tp[y]+b]];
   NCTest[NCGrabFunctions[expr, tp], {tp[y]}];
   NCTest[NCGrabFunctions[expr, tp|aj], {aj[x],tp[y]}];
   NCTest[NCGrabFunctions[expr, inv], {inv[1+inv[x**tp[y]+b]], 
@@ -105,6 +113,13 @@ Block[
 
   NCTest[NCGrabFunctions[expr], {aj[x], inv[1+inv[x**tp[y]+b]],
                                  inv[x**tp[y]+b], tp[y]}];
+
+  expr = {{a**x, b**tp[y]},{1,y**tp[x]}};
+  NCTest[NCGrabFunctions[expr], {tp[x],tp[y]}];
+
+  expr = SparseArray[{{a**x, inv[x]**tp[y]},{1,y**tp[x]}}];
+  NCTest[NCGrabFunctions[expr], {inv[x],tp[x],tp[y]}];
+  NCTest[NCGrabFunctions[expr, tp], {tp[x],tp[y]}];
 
   expr = a aj[x]**y-inv[1-inv[x**tp[y]-b]];
   NCTest[NCGrabFunctions[expr], {aj[x], inv[1-inv[x**tp[y]-b]],
@@ -115,6 +130,9 @@ Block[
 
   NCTest[NCGrabIndeterminants[expr],
          {b, x, y, inv[x], inv[y], inv[tp[x]+tp[y]], tp[x], tp[y]}];
+
+  expr = SparseArray[{{a**x, inv[inv[x]**tp[y]]},{1,y**tp[x]}}];
+  NCTest[NCGrabIndeterminants[expr], {a,x,y,inv[x],inv[inv[x]**tp[y]],tp[x],tp[y]}];
 
   (* NCConsolidateList *)
   {list,index} = NCConsolidateList[{3,1,2,3}];
@@ -155,5 +173,13 @@ Block[
   X = {{1,2},{2,1}}; Y = {{3,5},{5,3}};
   answer = 2 IdentityMatrix[2] + Inverse[IdentityMatrix[2] + Y.Y] + X.X;
   NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
+
+  (* NCLeafCount *)
+  NCTest[NCLeafCount[0], -Infinity];
+  NCTest[NCLeafCount[2], 2];
+  NCTest[NCLeafCount[-2], 2];
+  NCTest[NCLeafCount[2+a], -LeafCount[2+a]];
+  NCTest[NCLeafCount[{0,-2,2+a}], {-Infinity,2,-LeafCount[2+a]}];
+  NCTest[Normal[NCLeafCount[SparseArray[{0,-2,2+a}]]], {-Infinity,2,-LeafCount[2+a]}];
 
 ];

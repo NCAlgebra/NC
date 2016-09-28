@@ -31,7 +31,9 @@ Clear[Transform,
 
 NCDeprecated::Going = "Command \"`1`\" is in the process of being deprecated. It has been made obsolete by \"`2`\" instead.";
 
-NCDeprecated::Gone = "Command \"`1`\" has being deprecated and is no longer suppoerted. From now on use \"`2`\" instead.";
+NCDeprecated::Gone = "Command \"`1`\" has been deprecated and is no longer supported. From now on use \"`2`\" instead.";
+
+NCDeprecated::OptionGone = "Option \"`1`\" has been deprecated and is no longer supported.";
 
 Begin["`Private`"];
 

@@ -633,7 +633,7 @@ Begin[ "`Private`" ]
          Message[MatrixDecompositions::SelfAdjoint];
          Return[{A,{},{},-1}];
      ];
-      
+     
      rank = m;
      p = Range[m];
      s = {};
@@ -653,7 +653,7 @@ Begin[ "`Private`" ]
                zeroTest[A[[k+1, k+1]]]
               ,
                (* incomplete factorization *)
-               Print[A[[k;;k+1,k;;k+1]]];
+               (* Print[Normal[A[[k;;k+1,k;;k+1]]]]; *)
                Message[MatrixDecompositions::Incomplete];
                Break[];
            ];

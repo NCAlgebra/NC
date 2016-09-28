@@ -117,6 +117,30 @@ Module[
     expr = {{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}};
     NCTest[NCSymmetricQ[expr, Strict -> False], True];
 
+    expr = SparseArray[{{x,x},{x,x}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{x,y},{y,x}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{x,y},{tp[y],x}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{x+tp[x],y},{tp[y],w}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{a**x+tp[x],y},{tp[y],w}}];
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}}];
+    NCTest[NCSymmetricQ[expr, Strict -> True], False];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}}];
+    NCTest[NCSymmetricQ[expr, Strict -> True, SymmetricVariables -> {x}], True];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}}];
+    NCTest[NCSymmetricQ[expr, Strict -> False], True];
+
     ,
     NCSymmetricQ::SymmetricVariables
   ];

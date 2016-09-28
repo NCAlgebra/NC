@@ -1,9 +1,13 @@
 << NCSelfAdjoint`
 
 Module[
-  {expr, a, b, c, d},
+  {expr, a, b, c, d,
+   x,y,w,
+   answer,
+   isSym, symVars},
 
   SetNonCommutative[a, b, c, d];
+  SetNonCommutative[x,y,w];
 
   NCTest[CommutativeQ[aj], False];
 
@@ -125,7 +129,67 @@ Module[
     expr = a + b ** tp[b] + aj[b] ** c + c ** b;
     NCTest[NCSelfAdjointQ[expr], False];
 
-    ,
+    expr = {{x,x},{x,x}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = {{x,y},{y,x}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = {{x,y},{tp[y],x}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = {{x,y},{aj[y],x}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = {{x+tp[x],y},{tp[y],w}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = {{x+aj[x],y},{tp[y],w}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = {{a**x+tp[x],y},{tp[y],w}};
+    NCTest[NCSelfAdjointQ[expr], False];
+
+    expr = {{w, c ** x + d ** y}, {aj[c ** x + d ** y], x}};
+    NCTest[NCSelfAdjointQ[expr, Strict -> True], False];
+
+    expr = {{w, c ** x + d ** y}, {aj[c ** x + d ** y], x}};
+    NCTest[NCSelfAdjointQ[expr, Strict -> True, SelfAdjointVariables -> {x}], True];
+
+    expr = {{w, c ** x + d ** y}, {aj[c ** x + d ** y], x}};
+    NCTest[NCSelfAdjointQ[expr, Strict -> False], True];
+
+    expr = SparseArray[{{x,x},{x,x}}];
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = SparseArray[{{x,y},{y,x}}];
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = SparseArray[{{x,y},{tp[y],x}}];
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = SparseArray[{{x,y},{aj[y],x}}];
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = SparseArray[{{x+tp[x],y},{tp[y],w}}];
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = SparseArray[{{x+aj[x],y},{tp[y],w}}];
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = SparseArray[{{a**x+tp[x],y},{tp[y],w}}];
+    NCTest[NCSelfAdjointQ[expr], False];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {aj[c ** x + d ** y], x}}];
+    NCTest[NCSelfAdjointQ[expr, Strict -> True], False];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {aj[c ** x + d ** y], x}}];
+    NCTest[NCSelfAdjointQ[expr, Strict -> True, SelfAdjointVariables -> {x}], True];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {aj[c ** x + d ** y], x}}];
+    NCTest[NCSelfAdjointQ[expr, Strict -> False], True];
+
+   ,
     {NCSelfAdjointQ::SelfAdjointVariables, NCSymmetricQ::SymmetricVariables}
   ];
 

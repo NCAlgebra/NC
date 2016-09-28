@@ -8,14 +8,16 @@
    :8/13/92      
 *)
 
-<< NCConvexity.m;
+<< NCConvexity`;
+<< NCMatrixDecompositions`;
+<< MatrixDecompositions`;
 
 MyDiag[x_] := Tr[x, List];
 
 Module[
 
    {j,x,y,h,k,f,a,b,c,d,i, 
-    ans, hes, lt, mq, rt, junk,
+    ans, hes, lt, mq, rt, junk, ldl, s,rank,
     p, expr1, l, m, r,
     A,B,F,G,J,L,P,Q,R},
 
@@ -29,7 +31,8 @@ Module[
      ans = NCConvexityRegion[ f, {x} ];
      hes = NCHessian[ f, {x,h} ];
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
-     {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+     {ldl,p,s,rank} = NCLDLDecomposition[mq];
+     {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = MyDiag[d];
      NCTest[{diagonal}, ans]; 
 
@@ -38,7 +41,8 @@ Module[
      ans = NCConvexityRegion[ f, {x} ];
      hes = NCHessian[ f, {x,h} ];
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
-     {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+     {ldl,p,s,rank} = NCLDLDecomposition[mq];
+     {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = MyDiag[d];
      NCTest[{diagonal}, ans];
 
@@ -47,7 +51,8 @@ Module[
      ans = NCConvexityRegion[ f, {x,y} ];
      hes = NCHessian[ f, {x,h},{y,k} ];
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
-     {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+     {ldl,p,s,rank} = NCLDLDecomposition[mq];
+     {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = MyDiag[d];
      NCTest[{diagonal}, ans];
 
@@ -56,7 +61,8 @@ Module[
      ans = NCConvexityRegion[ f, {x,y} ];
      hes = NCHessian[ f, {x,h},{y,k} ];
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
-     {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+     {ldl,p,s,rank} = NCLDLDecomposition[mq];
+     {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = MyDiag[d];
      NCTest[{diagonal}, ans];
 
@@ -66,7 +72,8 @@ Module[
      ans = NCConvexityRegion[ f, {x,y} ];
      hes = NCHessian[ f, {x,h},{y,k} ];
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
-     {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+     {ldl,p,s,rank} = NCLDLDecomposition[mq];
+     {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = MyDiag[d];
      NCTest[{diagonal}, ans];
 
@@ -75,7 +82,8 @@ Module[
      ans = NCConvexityRegion[ f, {x,y} ];
      hes = NCHessian[ f, {x,h},{y,k} ];
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
-     {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+     {ldl,p,s,rank} = NCLDLDecomposition[mq];
+     {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = MyDiag[d];
      NCTest[{diagonal}, ans];
 
@@ -84,7 +92,8 @@ Module[
      ans = NCConvexityRegion[ f, {x,y} ];
      hes = NCHessian[ f, {x,h},{y,k} ];
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
-     {lt, d, rt, junk } = NCLDUDecomposition[ mq ];
+     {ldl,p,s,rank} = NCLDLDecomposition[mq];
+     {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = MyDiag[d];
      NCTest[{diagonal}, ans];
 
@@ -196,6 +205,7 @@ Module[
      ,
 
      {NCSymmetricQ::SymmetricVariables,
+      NCSelfAdjointQ::SelfAdjointVariables,
       CommuteEverything::Warning}
   ];
 

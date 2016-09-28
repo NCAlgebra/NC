@@ -18,13 +18,17 @@
 
 BeginPackage["NCConvexity`",
              "NonCommutativeMultiply`", 
-             "NCLDUDecomposition`", 
+(*             "NCLDUDecomposition`",  *)
+             "NCMatrixDecompositions`",
+             "MatrixDecompositions`",
+             "NCSelfAdjoint`",
              "NCLinearAlgebra`",
              "NCQuadratic`",
 	     "NCSimplifyRational`",
              "NCDiff`",
              "NCUtil`",
-             "NCMatMult`"];
+             "NCMatMult`",
+             "NCDeprecated`"];
 
 Clear[NCConvexityRegion];
 
@@ -32,7 +36,8 @@ Options[NCConvexityRegion] =
        {NCSimplifyDiagonal -> False, DiagonalSelection -> False,
         ReturnPermutation -> False, ReturnBorderVector -> False,
         AllPermutation -> False };
-       
+
+        
 Begin["`Private`"];
 
     Get["NCConvexity.usage"];
@@ -62,6 +67,11 @@ Begin["`Private`"];
                 returnvec   = ReturnBorderVector /. {opts} /. Options[NCConvexityRegion];
                 allperm     = AllPermutation /. {opts} /. Options[NCConvexityRegion];       
 
+                (* Deprecate allperm *)
+                If[allperm,
+                   Message[NCDeprecated, "AllPermutation"];
+                ];
+               
                 Pull[g_[x___]] := x;  
                 (* Create temporary list of h's, {h1,h2,...hn} *)
                 Tmplist3 = ToString[ Array[h,{Length[list]}] ];
@@ -84,7 +94,7 @@ Begin["`Private`"];
 
 
                 (* Factor Hessian *)          
-                Hdata =  NCMatrixOfQuadratic[   Tmphes, Tmplist3  ];
+                Hdata =  NCMatrixOfQuadratic[Tmphes, Tmplist3];
 
                 (*******************************************************)
                 (* Determine which permutations to return for NCAll... *)            
@@ -100,12 +110,14 @@ Begin["`Private`"];
                     numofperm = 5!*4!*3!*2;
                 ];
 
+                (* DEPRECATED AllPermutations 
                 If[ allperm === True,
 
                    Print["Middle matrix is size ", n,"X",n ];
                    Print["At most ", numofperm, " permutations possible."];
 
                 ];
+                *)
 
 
                 (* Set up permutation list *)
@@ -129,13 +141,16 @@ Begin["`Private`"];
                 (* Now diagsel has the correct permutation selection    *)
                 (********************************************************)
 
+                (* DEPRECATED AllPermutations       
                 If[ allperm === True,
 
                    Print[diagsel];
 
                 ];
+                *)
 
 
+                (* DEPRECATED AllPermutations 
                 (* based on the AllPermutation option we decide what LDU decomposition
                    to call.  There are two choices, based on whether AllPermutation is 
                    True or False.  True means to run NCAllPermutationLDU and False
@@ -152,13 +167,28 @@ Begin["`Private`"];
                                 ReturnPermutation -> True]; 
 
                  ,
+                *)
+
+                   LUdata = NCLDLDecomposition[
+                       Hdata[[2]], 
+                       SelfAdjointMatrixQ -> (True&)];
+                   LUdata = Append[
+                       GetLDUMatrices[LUdata[[1]], LUdata[[3]]], 
+                       LUdata[[2]]];
+
+                   (* 
                    LUdata = NCLDUDecomposition[ Hdata[[2]], 
                                 Stop2by2Pivoting -> False,
                                 NCSimplifyPivots -> simpiv,
                                 ReturnPermutation -> True]; 
 
+                   Print["LUdata2 = ", LUdata];
+                   *)
+                    
                    LUdata = { LUdata };
+                (* DEPRECATED AllPermutations 
                  ];
+                *)
 
     (* NEW CODE 6/27/02 *)
 
@@ -175,7 +205,7 @@ Begin["`Private`"];
 
                 (* index should be the diagonal that we want to use *)
                 dMatrix = LUdata[[index]][[2]];
-                dPerm = LUdata[[index]][[5]];
+                (* dPerm = LUdata[[index]][[5]]; *)
 
                 (* get the diagonal *)
                 theDiagonal = Diag[ dMatrix ];

@@ -31,7 +31,8 @@ See also:
 The following options can be given:
 
 * `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
-* `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
+* `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables;
+* `Strict`: treats as non-symmetric any variable that appears inside `tp`.
 
 See also:
 [NCSymmetricQ](#NCSymmetricQ), [NCNCSelfAdjointTest](#NCSelfAdjointTest).
@@ -62,6 +63,7 @@ The following options can be given:
 
 * `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
 * `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
+* `Strict`: treats as non-symmetric any variable that appears inside `tp`.
 
 See also:
 [NCSymmetricTest](#NCSymmetricTest).
@@ -90,6 +92,7 @@ The following options can be given:
 * `SelfAdjointVariables`: list of variables that should be considered self-adjoint; use `All` to make all variables self-adjoint;
 * `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
 * `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
+* `Strict`: treats as non-self-adjoint any variable that appears inside `aj`.
 
 See also:
 [NCSelfAdjointQ](#NCSelfAdjointQ).

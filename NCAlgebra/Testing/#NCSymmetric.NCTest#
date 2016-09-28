@@ -1,0 +1,196 @@
+<< NCSelfAdjoint`
+
+Module[
+  {expr, a, b, c, d,
+   x,y,w,
+   answer,
+   isSym, symVars},
+
+  SetNonCommutative[a, b, c, d];
+  SetNonCommutative[x,y,w];
+
+  NCTest[CommutativeQ[tp], False];
+
+  NCTest[tp[0], 0];
+  NCTest[tp[1], 1];
+  NCTest[tp[Pi], Pi];
+  NCTest[tp[I], I];
+  NCTest[tp[1 + I], 1 + I];
+
+  NCTest[tp[2 a], 2 tp[a]];
+  NCTest[tp[3 a ** b], Unevaluated[3 tp[b] ** tp[a]]];
+  NCTest[tp[(3 + I) a ** b], Unevaluated[Complex[3,1] tp[b] ** tp[a]]];
+
+  expr = tp[a+b];
+  NCTest[expr, Unevaluated[tp[a] + tp[b]]];
+
+  expr = tp[2 a + 3 b];
+  NCTest[expr, Unevaluated[2 tp[a] + 3 tp[b]]];
+
+  expr = tp[a**b];
+  NCTest[expr, Unevaluated[tp[b] ** tp[a]]];
+
+  expr = tp[b]**tp[a];
+  NCTest[expr, Unevaluated[tp[b] ** tp[a]]];
+
+  expr = c**tp[a**b];
+  NCTest[expr, Unevaluated[c ** tp[b] ** tp[a]]];
+
+  expr = tp[a**b]**d;
+  NCTest[expr, Unevaluated[tp[b] ** tp[a] ** d]];
+
+  expr = c**tp[a**b]**d;
+  NCTest[expr, Unevaluated[c ** tp[b] ** tp[a] ** d]];
+
+  (* NCSymmetricQ *)
+
+  expr = a + tp[a];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True];
+
+  expr = a ** b + tp[a ** b];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], True];
+
+  expr = a;
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False];
+
+  expr = a - tp[a];
+  NCTest[NCSymmetricQ[expr, ExcludeVariables -> All], False];
+
+  (* NCSymmetricQ[#, False] *)
+
+  Quiet[
+
+    expr = a + tp[a];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = a ** b + tp[a ** b];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = a + a ** b + tp[b] ** a;
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = a + tp[a] + a ** b + tp[b] ** a;
+    NCTest[NCSymmetricQ[expr, SymmetricVariables -> {a}], True];
+
+    expr = a;
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = a + b;
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = a + b ** c;
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = a + b ** c + c ** b;
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = a + tp[b] ** c + c ** b;
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = a + b + tp[b] ** c + c ** b;
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = a + b ** tp[b] + tp[b] ** c + c ** b;
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = {{x,x},{x,x}};
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = {{x,y},{y,x}};
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = {{x,y},{tp[y],x}};
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = {{x+tp[x],y},{tp[y],w}};
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = {{a**x+tp[x],y},{tp[y],w}};
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = {{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}};
+    NCTest[NCSymmetricQ[expr, Strict -> True], False];
+
+    expr = {{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}};
+    NCTest[NCSymmetricQ[expr, Strict -> True, SymmetricVariables -> {x}], True];
+
+    expr = {{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}};
+    NCTest[NCSymmetricQ[expr, Strict -> False], True];
+
+    expr = SparseArray[{{x,x},{x,x}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{x,y},{y,x}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{x,y},{tp[y],x}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{x+tp[x],y},{tp[y],w}}];
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = SparseArray[{{a**x+tp[x],y},{tp[y],w}}];
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}}];
+    NCTest[NCSymmetricQ[expr, Strict -> True], False];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}}];
+    NCTest[NCSymmetricQ[expr, Strict -> True, SymmetricVariables -> {x}], True];
+
+    expr = SparseArray[{{w, c ** x + d ** y}, {tp[c ** x + d ** y], x}}];
+    NCTest[NCSymmetricQ[expr, Strict -> False], True];
+
+    ,
+    NCSymmetricQ::SymmetricVariables
+  ];
+
+  (* Symmetric part *)
+
+  Quiet[
+
+    expr = a ** x + x ** tp[a] + 1;
+    {answer, symVars} = NCSymmetricPart[expr];
+    NCTest[answer, 2 a ** x + 1];
+
+    expr = a ** x + x ** tp[a] + 1 + b ** y + tp[b ** y];
+    {answer, symVars} = NCSymmetricPart[expr];
+    NCTest[answer, 2 a ** x + 2 b ** y + 1];
+
+    Quiet[
+      NCTest[
+        Check[
+	  expr = a ** x + 1;
+	  {answer, symVars} = NCSymmetricPart[expr];
+	  ,
+	  True
+	  ,
+	  NCSymmetricPart::notSymmetric
+
+	], True];
+      ,
+      NCSymmetricPart::notSymmetric
+    ];
+
+    NCTest[answer, $Failed];
+    NCTest[symVars, {}];
+
+    expr = {{x,y},{tp[y],x}}																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																			;
+    {answer, symVars} = NCSymmetricPart[expr];
+    NCTest[answer, {{x,0},{2 tp[y],x}} ];
+    NCTest[symVars, {x}];
+
+    expr = {{x,y},{y,x}};
+    {answer, symVars} = NCSymmetricPart[expr];
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																			    NCTest[answer, {{x,0},{2 y,x}} ];
+    NCTest[symVars, {x,y}];
+
+    expr = {{a**x+x**tp[a],y},{tp[y],x}};
+    {answer, symVars} = NCSymmetricPart[expr];
+    NCTest[answer, {{2 a**x,0},{2 tp[y],x}} ];
+    NCTest[symVars, {x}];
+    ,
+    NCSymmetricQ::SymmetricVariables
+  ];
+
+];

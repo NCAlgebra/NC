@@ -32,15 +32,26 @@ Begin["`Private`"];
 
   Get["NCUtil.usage"];
   
+  NCGrabSymbols[expr_SparseArray] := NCGrabSymbols[expr["NonzeroValues"]];
+  NCGrabSymbols[expr_SparseArray, pattern_] := 
+      NCGrabSymbols[expr["NonzeroValues"], pattern];
+  
   NCGrabSymbols[expr_] := Union[Cases[expr, _Symbol, {0, Infinity}]];
   NCGrabSymbols[expr_, pattern_] := 
     Union[Cases[expr, (pattern)[_Symbol], {0, Infinity}]];
 
+  NCGrabFunctions[expr_SparseArray] := NCGrabFunctions[expr["NonzeroValues"]];
+  NCGrabFunctions[expr_SparseArray, f_] := 
+      NCGrabFunctions[expr["NonzeroValues"], f];
+    
   NCGrabFunctions[expr_] :=
     Union[Cases[expr, (Except[Plus|Times|NonCommutativeMultiply|List])[__], {0, Infinity}]];
   NCGrabFunctions[expr_, f_] :=
     Union[Cases[expr, (f)[__], {0, Infinity}]];
 
+  NCGrabIndeterminants[expr_SparseArray] := 
+      NCGrabIndeterminants[expr["NonzeroValues"]];
+  
   NCGrabIndeterminants[expr_] := Union[NCGrabSymbols[expr], 
                                        NCGrabFunctions[expr]];
     
