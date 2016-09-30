@@ -63,17 +63,15 @@ See also:
 
 ## NCGrabIndeterminants {#NCGrabIndeterminants}
 
-`NCGragIndeterminants[expr]` returns a list with all *Symbols* and fragments of functions appearing in `expr`.
-
-It is a combination of `NCGrabSymbols` and `NCGrabFunctions`.
+`NCGragIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
 
 For example:
 
-    NCGrabIndeterminants[inv[x] + tp[y]**inv[1+inv[1+tp[x]**y]]]
+    NCGrabIndeterminants[y - inv[x] + tp[y]**inv[1+inv[1+tp[x]**y]]]
 
 returns
 
-    {x, y, inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}
+    {y, inv[x], inv[1 + inv[1 + tp[x] ** y]], tp[y]}
 
 See also:
 [NCGrabFunctions](#NCGragFunctions), [NCGrabSymbols](#NCGragSymbols).

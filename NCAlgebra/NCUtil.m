@@ -49,12 +49,43 @@ Begin["`Private`"];
   NCGrabFunctions[expr_, f_] :=
     Union[Cases[expr, (f)[__], {0, Infinity}]];
 
+  (*
+  NCGrabIndeterminants[expr_] := Union[NCGrabSymbols[expr], 
+                                       NCGrabFunctions[expr]];
+ 
+  *)
+  
   NCGrabIndeterminants[expr_SparseArray] := 
       NCGrabIndeterminants[expr["NonzeroValues"]];
   
-  NCGrabIndeterminants[expr_] := Union[NCGrabSymbols[expr], 
-                                       NCGrabFunctions[expr]];
-    
+  NCGrabIndeterminants[x_Rule] := 
+    NCGrabIndeterminants[Apply[List,x]];
+
+  NCGrabIndeterminants[x_Power] := NCGrabIndeterminants[x[[1]]];
+
+  NCGrabIndeterminants[x_Equal] := 
+    NCGrabIndeterminants[Apply[List,x]];
+
+  NCGrabIndeterminants[x_Plus] := 
+    NCGrabIndeterminants[Apply[List,x]];
+
+  NCGrabIndeterminants[x_NonCommutativeMultiply] := 
+    NCGrabIndeterminants[Apply[List,x]];
+
+  NCGrabIndeterminants[x_Times] := NCGrabIndeterminants[Apply[List,x]];
+
+  NCGrabIndeterminants[x_List] := Module[
+    {asaList},
+    asaList = Apply[List,x];
+    Return[Apply[Union,Map[NCGrabIndeterminants,asaList]]];
+  ];
+
+  NCGrabIndeterminants[c_?NumberQ] := {};
+
+  NCGrabIndeterminants[x_] := {x};
+
+  (* NCConsolidateList *)
+  
   NCConsolidateList[list_] := Block[
       {basis, index = Range[1, Length[list]]},
       basis = Merge[Thread[list -> index], Identity];

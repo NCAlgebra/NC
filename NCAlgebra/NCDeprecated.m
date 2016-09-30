@@ -50,7 +50,7 @@ Begin["`Private`"];
     (Message[NCDeprecated::Gone, SubstituteAll, NCReplaceAll]; $Failed);
 
   GrabIndeterminants[expr_] :=
-    (Message[NCDeprecated::Going, GrabIndeterminats, NCGrabIndeterminants]; NCGrabIndeterminants[expr]);
+    (Message[NCDeprecated::Going, GrabIndeterminants, NCGrabIndeterminants]; NCGrabIndeterminants[expr]);
 
   GrabVariables[expr_] :=
     (Message[NCDeprecated::Going, GrabVariables, NCGrabSymbols]; NCGrabSymbols[expr]);

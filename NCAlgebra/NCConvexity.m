@@ -30,13 +30,17 @@ BeginPackage["NCConvexity`",
              "NonCommutativeMultiply`"];
 
 Clear[NCConvexityRegion];
+Clear[NCIndependent];
+
+NCIndependent::Inconclusive = "Linear dependence analysis was inconclusive. Further investigation recommended.";
+
 
 NCConvexity::DependentBorder = "Border vector may be linearly dependent";
 NCConvexity::NotSymmetric = "Expression is not symmetric.";
 
 Options[NCConvexityRegion] = {
     SimplifyDiagonal -> False,
-    CheckBorderIndependence -> False,
+    CheckBorderIndependence -> True,
     DiagonalSelection -> False,
     AllPermutation -> False 
 };
@@ -45,8 +49,7 @@ Begin["`Private`"];
 
     Get["NCConvexity.usage"];
 
-    Clear[NCIndependenceCheck,
-          NCBorderVectorGather];
+    Clear[NCBorderVectorGather];
 
     Get["NCConvexity.private.usage"];
 
@@ -123,143 +126,110 @@ Begin["`Private`"];
 
        (* Pertains to independence of the border vectors *)
        If[ checkBorderIndependence, 
-	   tmp = NCBorderVectorGather[left, hs];
-	   independent = NCIndependenceCheck[tmp, \[Lambda] ];
-
-	   (*
-	   Print["left = ", left];
-	   Print["tmp = ", tmp];
-	   Print["independent = ", independent];
-	   *)
-
-	   If[ Not[And @@ independent],
+	   If[ Not[NCIndependent[left]],
 	       Message[NCConvexity::DependentBorder];
 	   ];
        ];
 
        Return[ Map[Normal, GetDiagonal[d, s]] ];
     ];
+    
+    NCIndependent[list_] := Module[
+        {y,vars,
+         symbols,sum,
+         commsum,coeffs,eqn,eqnsol},
 
-    NCIndependenceCheck[list_,y___] := 
-         Module[{Tmpvar,Tmpvar2,Tmpexp,Tmpexp2,coeflist,equasolved,setozero,
-                 n = Length[list],Tmplist,Tmplist2,dirs,Finlist = {},
-                 Tmpfun,\[Lambda]},
+        (* Print["*** NCIndependent ***"]; *)
+        
+        (* if zero is an element than already dependent *)
+        If[ Length[Cases[list, 0]] > 0,
+            Return[False];
+        ];
 
-                (* check for proper input of list *)
-                If[Not[Head[list[[1]] ] === List],
-                   Print["Error in input list"];
-                   Abort[];
-                  ];(*endif*)            
-                (* end check of list *)
+        (* if list is a single non-zero entry, then independent *) 
+        If[ Length[list] <= 1,
+            Return[True];
+        ];
+        
+        (* create list of scalars using argument "y" *) 
+        vars = Table[Unique[Global`y], Length[list]];
+        
+        (* grab list of symbols in list *)
+        symbols = DeleteCases[NCGrabSymbols[list], _?CommutativeQ]; 
 
-                For[i = 1, i <= n, i++,
-                    Tmplist = list[[i]];
-                    (* if Tmplist is a number, then obviously independent *) 
+        (* set up sum for independence check *)
+        sum = vars. list;
 
-                    (* if zero is an element than already dependent *)
-                    If[Not[Length[Tmplist] == Length[DeleteCases[Tmplist,0]] ],
-                       Finlist = AppendTo[Finlist,False];
-                    ,(*else*)
+        (* 
+        Print["vars = ", vars];
+        Print["symbols = ", symbols];
+        Print["sum = ", sum];
+        *)
+        
+        Quiet[
 
-                   (* create list of scalars using argument "y" *) 
-                   If[Length[{y}] > 0,
-                      Tmpfun[x_] := Subscript[y,x];
-                   ,(*else*)
-                      Tmpfun[x_] := Subscript[\[Lambda],x];
-                   ];(*endif*)
-                   Tmpvar = Map[Tmpfun,Range[Length[Tmplist]] ];                                       
-		   Quiet[
+          (* turn rational independence check into *)
+          (* polynomial independence check *)
+          commsum = CommuteEverything[sum];
+          commsum = Expand[Numerator[Together[commsum]]];
 
-                   (* create a list of all variables in argument "list" *)
-                   Tmpvar2 = Variables[CommuteEverything[Tmplist]]; 
+          (* gather coefficent infront of unique monomials *) 
+          coeffs = Flatten[CoefficientList[commsum,symbols]];
+          coeffs = DeleteCases[coeffs,0];
 
-                   (*set up sum for independence check *)
-                   Tmpexp2 = ({Tmpvar}.Transpose[{Tmplist}])[[1,1]];              
+          EndCommuteEverything[];
+         ,
+          CommuteEverything::Warning
+        ];
 
-                   (* turn rational independence check into *)
-                   (* polynomial independence check *)
-                   Tmpexp = CommuteEverything[Tmpexp2];
-                   Tmpexp = Together[Tmpexp];
-                   Tmpexp = Numerator[Tmpexp];
-                   Tmpexp = Expand[Tmpexp];
+        (* set all entries of coeffs == 0 and then solve *)
+        (* linear system of equations.                   *)
+        eqn = Thread[coeffs == 0];
+            
+        Quiet[ eqnsol = Solve[eqn][[1]];
+              ,
+               Solve::svars
+        ];
 
-                   (* gather coefficent infront of unique monomials *) 
-                   coeflist = Flatten[{CoefficientList[Tmpexp,Tmpvar2]}];
-                   coeflist = DeleteCases[coeflist,0];
+        (* apply solution to vars *)
+        vars = vars //. eqnsol;
 
-                   (* set all entries of coeflist == 0 and then solve *)
-                   (* linear system of equations.  This returns       *)
-                   (* solutions in form of rules.  Next we apply      *)
-                   (* rules to Tmpexp2 (the noncommuting one)         *)
-                   setozero[x_] := x == 0;               
-                   Off[Solve::svars];
-                   equasolved = Solve[Map[setozero,coeflist] ][[1]];
-                   On[Solve::svars];
+        (*
+        Print["commsum = ", commsum];
+        Print["coeffs = ", coeffs];
+        Print["eqn = ", eqn];
+        Print["eqnsol = ", eqnsol];
+        Print["vars = ", vars];
+        *)
+                       
+        If[ And @@ Map[(#===0)&, vars],
+            (* all variables are zero *)
+            Return[True];
+        ];
 
-                   EndCommuteEverything[];
+        (*else not all variables are zero *)
+        (* apply solution to original expression *)
+        sum = sum //. eqnsol;
 
-		   ,
-		   CommuteEverything::Warning
-		   ];
+        (*
+        Print["sum = ", sum]; 
+        *)
 
-                   Tmplist2 = Tmpvar //. equasolved;                           
-                   If[Tmplist2 === NCZeroMatrix[ Length[Tmplist2] ][[1]],
-                      (* all variables must be zero, implying *)
-                      (* independence                         *)
-                       Finlist = AppendTo[Finlist,True];
+        sum = NCSimplifyRational[sum];
+        
+        (*
+        Print["sum = ", sum];
+        *)
+        
+        If[ sum === 0,
+            Return[False];
+        ];
 
-                   ,(*else not all lambda's are set to zero  *)
-
-                      Tmpexp2 = Tmpexp2 //. equasolved;
-                      Tmpexp2 = NCSimplifyRational[Tmpexp2];
-                      If[Tmpexp2 === 0,                     
-                         Finlist = AppendTo[Finlist,{False,Tmplist2}];
-                      ,(*else undetermined, further analysis needed *)
-                         Finlist = AppendTo[Finlist,{"Undetermined",Tmpexp2,Tmplist2}];
-                        ];(*endif*)
-                     ];(* end all var zero if*)                 
-                  ];(*end zero is an element if*)  
-                ];(*endfor*) 
-                Return[Finlist];                 
-    ];(*end module*) 
-
-
-    NCBorderVectorGather[list_, var_] :=
-         Module[{Tmpvar,Tmplist1,Tmplist2,firstelm,Finlist = {}},
-
-                For[i=1, i<= Length[var], i++,
-
-                    Tmpvar = var[[i]];
-                    firstelm[xlist_] := {xlist[[1]]};
-                    Tmplist1 = Position[list,Tmpvar];
-
-                    Tmplist1 = Map[firstelm, Tmplist1];
-
-                    Tmplist2 = Position[list,tp[Tmpvar]];
-                    Tmplist2 = Map[firstelm,Tmplist2];
-
-                    Tmplist1 = Complement[Tmplist1,Tmplist2];
-
-
-                    Tmplist1 = Extract[list,Tmplist1];
-
-                    Tmplist2 = Extract[list,Tmplist2];
-
-                    Tmplist1 = Tmplist1 //.{Tmpvar -> 1};
-                    Tmplist2 = Tmplist2 //.{tp[Tmpvar] -> 1};
-
-
-                    If[Length[Tmplist1] > 0,
-                       Finlist = AppendTo[Finlist,Tmplist1];
-                      ];(*endif*)
-                    If[Length[Tmplist2] > 0,
-                       Finlist = AppendTo[Finlist,Tmplist2];
-                      ];(*endif*)
-
-                   ];(*end for*) 
-                 Return[Finlist];
-
-    ];(*end module*)
+        (* undetermined, further analysis needed *)
+        Message[NCIndependent::Inconclusive];
+        Return[True];
+        
+    ];
      
 End[];
 EndPackage[];

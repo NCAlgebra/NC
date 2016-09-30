@@ -129,10 +129,10 @@ Block[
   NCTest[NCGrabFunctions[expr], {inv[x], inv[y], inv[tp[x]+tp[y]], tp[x], tp[y]}];
 
   NCTest[NCGrabIndeterminants[expr],
-         {b, x, y, inv[x], inv[y], inv[tp[x]+tp[y]], tp[x], tp[y]}];
+         {b, x, y, inv[x], inv[y], inv[tp[x]+tp[y]]}];
 
   expr = SparseArray[{{a**x, inv[inv[x]**tp[y]]},{1,y**tp[x]}}];
-  NCTest[NCGrabIndeterminants[expr], {a,x,y,inv[x],inv[inv[x]**tp[y]],tp[x],tp[y]}];
+  NCTest[NCGrabIndeterminants[expr], {a,x,y,inv[inv[x]**tp[y]],tp[x]}];
 
   (* NCConsolidateList *)
   {list,index} = NCConsolidateList[{3,1,2,3}];

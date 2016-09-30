@@ -142,7 +142,8 @@
 <li><a href="#NCQuadraticToNCPolynomial"><span class="toc-section-number">15.4</span> NCQuadraticToNCPolynomial</a></li>
 </ul></li>
 <li><a href="#PackageNCConvexity"><span class="toc-section-number">16</span> NCConvexity</a><ul>
-<li><a href="#NCConvexityRegion"><span class="toc-section-number">16.1</span> NCConvexityRegion</a></li>
+<li><a href="#NCIndependent"><span class="toc-section-number">16.1</span> NCIndependent</a></li>
+<li><a href="#NCConvexityRegion"><span class="toc-section-number">16.2</span> NCConvexityRegion</a></li>
 </ul></li>
 <li><a href="#PackageNCRealization"><span class="toc-section-number">17</span> NCRealization</a><ul>
 <li><a href="#NCDescriptorRealization"><span class="toc-section-number">17.1</span> NCDescriptorRealization</a></li>
@@ -1117,11 +1118,38 @@ right={x,x**z}</code></pre>
 <p><strong>NCConvexity</strong> is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.</p>
 <p>Members are:</p>
 <ul>
+<li><a href="#NCIndependent">NCIndependent</a></li>
 <li><a href="#NCConvexityRegion">NCConvexityRegion</a></li>
 </ul>
-<h2 id="NCConvexityRegion"><span class="header-section-number">16.1</span> NCConvexityRegion</h2>
-<p><code>NCConvexityRegion</code> is a function which can be used to determine whether a noncommutative function is convex or not.</p>
-<p>See also: <a href="#NCMatrixOfQuadratics">NCMatrixOfQuadratics</a>.</p>
+<h2 id="NCIndependent"><span class="header-section-number">16.1</span> NCIndependent</h2>
+<p><code>NCIndependent[list]</code> attempts to determine whether the nc entries of <code>list</code> are independent.</p>
+<p>Entries of <code>NCIndependent</code> can be nc polynomials or nc rationals.</p>
+<p>For example:</p>
+<pre><code>NCIndependent[{x,y,z}]</code></pre>
+<p>return <em>True</em> while</p>
+<pre><code>NCIndependent[{x,0,z}]
+NCIndependent[{x,y,x}]
+NCIndependent[{x,y,x+y}]
+NCIndependent[{x,y,A x + B y}]
+NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
+<p>all return <em>False</em>.</p>
+<p>See also: <a href="#NCConvexity">NCConvexity</a>.</p>
+<h2 id="NCConvexityRegion"><span class="header-section-number">16.2</span> NCConvexityRegion</h2>
+<p><code>NCConvexityRegion[expr,vars]</code> is a function which can be used to determine whether the nc rational <code>expr</code> is convex in <code>vars</code> or not.</p>
+<p>For example:</p>
+<pre><code>d = NCConvexityRegion[x**x**x, {x}];</code></pre>
+<p>returns</p>
+<pre><code>d = {2 x, -2 inv[x]}</code></pre>
+<p>from which we conclude that <code>x**x**x</code> is not convex in <code>x</code> because <span class="math inline">\(x \succ 0\)</span> and <span class="math inline">\(-{x}^{-1} \succ 0\)</span> cannot simultaneously hold.</p>
+<p><code>NCConvexityRegion</code> works by factoring the <code>NCHessian</code>, essentially calling:</p>
+<pre><code>hes = NCHessian[expr, {x, h}];</code></pre>
+<p>then</p>
+<pre><code>{lt, mq, rt} = NCMatrixOfQuadratic[hes, {h}]</code></pre>
+<p>to decompose the Hessian into a product of a left row vector, <code>lt</code>, times a middle matrix, <code>mq</code>, times a right column vector, <code>rt</code>. The middle matrix, <code>mq</code>, is factored using the <code>NCLDLDecomposition</code>:</p>
+<pre><code>{ldl, p, s, rank} = NCLDLDecomposition[mq];
+{lf, d, rt} = GetLDUMatrices[ldl, s];</code></pre>
+<p>from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix <code>d</code>.</p>
+<p>See also: <a href="#NCHessian">NCHessian</a>, <a href="#NCMatrixOfQuadratic">NCMatrixOfQuadratic</a>, <a href="#NCLDLDecomposition">NCLDLDecomposition</a>.</p>
 <h1 id="PackageNCRealization"><span class="header-section-number">17</span> NCRealization</h1>
 <p>The package <strong>NCRealization</strong> implements an algorithm due to N. Slinglend for producing minimal realizations of nc rational functions in many nc variables. See &quot;Toward Making LMIs Automatically&quot;.</p>
 <p>It actually computes formulas similar to those used in the paper &quot;Noncommutative Convexity Arises From Linear Matrix Inequalities&quot; by J William Helton, Scott A. McCullough, and Victor Vinnikov. In particular, there are functions for calculating (symmetric) minimal descriptor realizations of nc (symmetric) rational functions, and determinantal representations of polynomials.</p>
@@ -1423,12 +1451,11 @@ right={x,x**z}</code></pre>
 <p>returns <code>{inv[x]}</code>.</p>
 <p>See also: <a href="#NCGragFunctions">NCGrabFunctions</a>.</p>
 <h2 id="NCGrabIndeterminants"><span class="header-section-number">21.4</span> NCGrabIndeterminants</h2>
-<p><code>NCGragIndeterminants[expr]</code> returns a list with all <em>Symbols</em> and fragments of functions appearing in <code>expr</code>.</p>
-<p>It is a combination of <code>NCGrabSymbols</code> and <code>NCGrabFunctions</code>.</p>
+<p><code>NCGragIndeterminants[expr]</code> returns a list with first level symbols and nc expressions involved in sums and nc products in <code>expr</code>.</p>
 <p>For example:</p>
-<pre><code>NCGrabIndeterminants[inv[x] + tp[y]**inv[1+inv[1+tp[x]**y]]]</code></pre>
+<pre><code>NCGrabIndeterminants[y - inv[x] + tp[y]**inv[1+inv[1+tp[x]**y]]]</code></pre>
 <p>returns</p>
-<pre><code>{x, y, inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}</code></pre>
+<pre><code>{y, inv[x], inv[1 + inv[1 + tp[x] ** y]], tp[y]}</code></pre>
 <p>See also: <a href="#NCGragFunctions">NCGrabFunctions</a>, <a href="#NCGragSymbols">NCGrabSymbols</a>.</p>
 <h2 id="NCConsolidateList"><span class="header-section-number">21.5</span> NCConsolidateList</h2>
 <p><code>NCConsolidateList[list]</code> produces two lists:</p>
