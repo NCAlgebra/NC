@@ -52,6 +52,9 @@ MANUAL = PREAMBLE/Preamble.md \
 
 doc: NCAlgebra.pdf NCAlgebra.html
 
+NCAlgebra.md: $(MANUAL)
+	pandoc $(MANUAL) -t markdown_github -N --toc --standalone -o NCAlgebra.md
+
 NCAlgebra.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCAlgebra.html --mathjax
 

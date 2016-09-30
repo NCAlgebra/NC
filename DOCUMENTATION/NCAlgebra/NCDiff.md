@@ -28,6 +28,11 @@ returns
 
     h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b
 
+In the case of more than one variables
+`NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative
+of `expr` with respect to `x` in the direction `h` and with respect to
+`y` in the direction `k`.
+
 See also:
 [NCGrad](#NCGrad),
 [NCHessian](#NCHessian).
@@ -92,6 +97,10 @@ returns
 
     2 h**a**h + 2 s**inv[x]**s - 2 s**inv[x]**h**inv[x]**y -
     2 y**inv[x]**h**inv[x]**s + 2 y**inv[x]**h**inv[x]**h**inv[x]**y
+
+In the case of more than one variables `NCHessian[expr, {x,h}, {y,k}]`
+takes the second directional derivative of `expr` with respect to `x`
+in the direction `h` and with respect to `y` in the direction `k`.
 
 See also:
 [NCDiretionalD](#NCDirectionalD), [NCGrad](#NCGrad).

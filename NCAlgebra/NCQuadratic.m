@@ -171,12 +171,22 @@ Begin[ "`Private`" ]
   ];
   
   (* NCMatrixOfQuadratic *)
-  NCMatrixOfQuadratic[p_, vars_] := Module[
-      {sym, symVars, symRule, expr,
+  NCMatrixOfQuadratic[p_, vars_, opts:OptionsPattern[{}]] := Module[
+      {options, symmetricVars,
+       sym, symVars, symRule, expr,
        m0,sylv,l,m,r},
 
+      (* process options *)
+
+      options = Flatten[{opts}];
+
+      symmetricVars = SymmetricVariables 
+            /. options
+            /. Options[NCQuadraticMakeSymmetric, SymmetricVariables];
+
       (* Is p symmetric *)
-      {sym, symVars} = NCSymmetricTest[p];
+      {sym, symVars} = NCSymmetricTest[p, 
+                              SymmetricVariables -> symmetricVars];
       
       (* Quick return if it failed *)
       If [ !sym,

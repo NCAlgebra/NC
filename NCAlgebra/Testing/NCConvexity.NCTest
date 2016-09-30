@@ -12,8 +12,6 @@
 << NCMatrixDecompositions`;
 << MatrixDecompositions`;
 
-MyDiag[x_] := Tr[x, List];
-
 Module[
 
    {j,x,y,h,k,f,a,b,c,d,i, 
@@ -33,8 +31,8 @@ Module[
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
-     diagonal = MyDiag[d];
-     NCTest[{diagonal}, ans]; 
+     diagonal = Map[Normal,GetDiagonal[d,s]];
+     NCTest[diagonal, ans]; 
 
      (* test 2 *)
      f = x**x**x;
@@ -43,8 +41,8 @@ Module[
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h} ];
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
-     diagonal = MyDiag[d];
-     NCTest[{diagonal}, ans];
+     diagonal = Map[Normal,GetDiagonal[d,s]];
+     NCTest[diagonal, ans];
 
      (* test 3 *)
      f = x**x + y**y;
@@ -53,8 +51,8 @@ Module[
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
-     diagonal = MyDiag[d];
-     NCTest[{diagonal}, ans];
+     diagonal = Map[Normal,GetDiagonal[d,s]];
+     NCTest[diagonal, ans];
 
      (* test 4 *)
      f = x**x**x + y**y**y;
@@ -63,8 +61,8 @@ Module[
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
-     diagonal = MyDiag[d];
-     NCTest[{diagonal}, ans];
+     diagonal = Map[Normal,GetDiagonal[d,s]];
+     NCTest[diagonal, ans];
 
 
      (* test 5 *)
@@ -74,8 +72,8 @@ Module[
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
-     diagonal = MyDiag[d];
-     NCTest[{diagonal}, ans];
+     diagonal = Map[Normal,GetDiagonal[d,s]];
+     NCTest[diagonal, ans];
 
      (* test 6 *)
      f = 2*x**x**x + 7*x**x + x;
@@ -84,8 +82,8 @@ Module[
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
-     diagonal = MyDiag[d];
-     NCTest[{diagonal}, ans];
+     diagonal = Map[Normal,GetDiagonal[d,s]];
+     NCTest[diagonal, ans];
 
      (* test 7 *)
      f = x**x**y+y**x**x+x**x**x+y**y**y;
@@ -94,8 +92,8 @@ Module[
      {lt, mq, rt } = NCMatrixOfQuadratic[ hes, {h,k} ];
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
-     diagonal = MyDiag[d];
-     NCTest[{diagonal}, ans];
+     diagonal = Map[Normal,GetDiagonal[d,s]];
+     NCTest[diagonal, ans];
 
      (* From NCMatrixOfQuadratics.NCTest *)
 

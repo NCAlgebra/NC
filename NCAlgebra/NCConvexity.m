@@ -31,14 +31,16 @@ BeginPackage["NCConvexity`",
 
 Clear[NCConvexityRegion];
 
+NCConvexity::DependentBorder = "Border vector may be linearly dependent";
+NCConvexity::NotSymmetric = "Expression is not symmetric.";
+
 Options[NCConvexityRegion] = {
-    NCSimplifyDiagonal -> False, 
+    SimplifyDiagonal -> False,
+    CheckBorderIndependence -> False,
     DiagonalSelection -> False,
-    ReturnPermutation -> False, 
-    ReturnBorderVector -> False,
     AllPermutation -> False 
 };
-        
+
 Begin["`Private`"];
 
     Get["NCConvexity.usage"];
@@ -54,131 +56,93 @@ Begin["`Private`"];
 
     (* list should be in form {x1,x2,...,xn}  *)
 
-    NCConvexityRegion[f_, list_, opts___Rule] :=
-        Module[{dimoflist = Dimensions[{list}],Tmphes,LUdata,Hdata,Hdata1,
-                simplifyDiagonal,diagonalSelection,returnPermutation,allperm,numofperm,n,k,diaglist ={},
-                permlist ={},Tmpdiag,Tmplist,Tmplist1,Tmplist2,
-                Tmpvar,Tmplist3,h,returnBorderVec,lowestLeafCount,index,offDiagonal={},
-                theDiagonal,dMatrix,dPerm,checker,Hdata1check,\[Lambda],Pull},
+    NCConvexityRegion[expr_, vars_, opts___Rule] := Module[
+      {simplifyDiagonal,checkBorderIndependence,
+       isSymmmetric,symVars,pos,
+       h,hs,xhs,hessian,
+       ldl,p,s,rank,l,d,u,
+       left,middle,right,tmp,independent},
 
+       simplifyDiagonal = SimplifyDiagonal 
+                                 /. {opts} /. Options[NCConvexityRegion];
+       checkBorderIndependence = CheckBorderIndependence
+                                 /. {opts} /. Options[NCConvexityRegion];
+       
+       (* Deprecate AllPermutation and DiagonalSelection *)
+       If[AllPermutation /. {opts},
+          Message[NCDeprecated::OptionGone, "AllPermutation"];
+       ];
+       If[DiagonalSelection /. {opts},
+          Message[NCDeprecated::OptionGone, "DiagonalSelection"];
+       ];
 
-                simplifyDiagonal      = NCSimplifyDiagonal /. {opts} /. Options[NCConvexityRegion]; 
-                diagonalSelection     = DiagonalSelection /. {opts} /. Options[NCConvexityRegion];
-                returnPermutation  = ReturnPermutation /. {opts} /. Options[NCConvexityRegion];            
-                returnBorderVec   = ReturnBorderVector /. {opts} /. Options[NCConvexityRegion];
-                allPermutation     = AllPermutation /. {opts} /. Options[NCConvexityRegion];       
+       (* Test symmetry *)
+       {isSymmmetric, symVars} = NCSymmetricTest[expr];
+       If[ isSymmetric, 
+          Message[NCMatrixOfQuadratic::NotSymmetric];
+ 	  Return[{$Failed}];
+       ];
 
-                (* Deprecate AllPermutation and DiagonalSelection *)
-                If[allPermutation,
-                   Message[NCDeprecated::OptionGone, "AllPermutation"];
-                ];
-                If[diagonalSelection,
-                   Message[NCDeprecated::OptionGone, "DiagonalSelection"];
-                ];
+       (* Create directions {h1,h2,...hn} *)
+       hs = Table[Unique[h], Length[vars]];
+       SetNonCommutative[hs];
 
-                (* Create temporary list of h's, {h1,h2,...hn} *)
-                Pull[g_[x___]] := x;  
-                Tmplist3 = ToString[ Array[h,{Length[list]}] ];
-                Tmplist3 = StringReplace[Tmplist3, {"[" -> "", "]" -> ""}];
-                Tmplist3 = ToExpression[Tmplist3]; 
-                SetNonCommutative[Pull[Tmplist3] ];         
+       (* Determined symmetric variables *)
+       pos = Flatten[Position[vars /. Thread[symVars -> True], True]];
+       symVars = Join[symVars, hs[[pos]]];
 
+       (* Create sequence of vars and directions {x1,h1}, {x2, h2}, ... *)
+       xhs = Sequence @@ Transpose[{vars, hs}];
+
+       (* Calculate Hessian *)
+       hessian = NCHessian[expr, xhs];
+       If[ hessian === 0, 
+           Return[ {0} ];
+       ];
                         
-                (* Calculate Hessian *)
+       (* Factor Hessian *)
+       Quiet[
+          Check[
+             {left,middle,right} = NCMatrixOfQuadratic[hessian, hs,
+  	                            SymmetricVariables -> symVars];
+            ,
+             Return[{$Failed}];
+            ,
+             NCMatrixOfQuadratic::NotSymmetric
+          ];
+         ,
+           NCSymmetricQ::SymmetricVariables
+       ];
 
-                Tmphes = NCHessian[f, Pull[Thread[{list, Tmplist3}]]];
-                If[ Tmphes === 0, 
-                   Return[ {{0}} ];
-                ];
+       (* LDLDecomposition *)
+       (* SelfAdjointMatrixQ -> (True&)] dispense with symmetry tests 
+          already performed by NCMatrixOfQuadratic *)
+       {ldl,p,s,rank} = NCLDLDecomposition[middle, 
+                             SelfAdjointMatrixQ -> (True&)];
+       {l,d,u} = GetLDUMatrices[ldl, s];
 
-                        
-                (* Factor Hessian *)
-                        
-                Check[
-                   Hdata = NCMatrixOfQuadratic[Tmphes, Tmplist3];
-                  ,
-                   Return[{}];
-                  ,
-                   NCMatrixOfQuadratic::NotSymmetric
-                ];
+       (* Pertains to independence of the border vectors *)
+       If[ checkBorderIndependence, 
+	   tmp = NCBorderVectorGather[left, hs];
+	   independent = NCIndependenceCheck[tmp, \[Lambda] ];
 
-                (******************************************)
-                (* Determine which permutations to return for NCAll... *)   
+	   (*
+	   Print["left = ", left];
+	   Print["tmp = ", tmp];
+	   Print["independent = ", independent];
+	   *)
 
-                (* Find the maximum number of permutations for matrix  *)
-                {n,k} = Dimensions[ Hdata[[2]] ];
-                numofperm = 1;
-                If[n <= 5,
-                For[i = 1, i <= n, i++,
-                    numofperm = numofperm*(i!);
-                   ];
-                ,(* else *)
-                    numofperm = 5!*4!*3!*2;
-                ];
+	   If[ Not[And @@ independent],
+	       Message[NCConvexity::DependentBorder];
+	   ];
+       ];
 
-                (* Set up permutation list *)
-                diagonalSelection = {1};
-
-
-                (* Calculate LDLDecomposition *)
-                
-                LUdata = NCLDLDecomposition[
-                       Hdata[[2]], 
-                       SelfAdjointMatrixQ -> (True&)];
-                LUdata = Append[
-                       GetLDUMatrices[LUdata[[1]], LUdata[[3]]], 
-                       LUdata[[2]]];
-
-                (* index should be the diagonal that we want to use *)
-                dMatrix = LUdata[[2]];
-                
-                (* get the diagonal *)
-                theDiagonal = Diag[ dMatrix ];
-
-                (* get the offdiagonal and at the same time check for nonzero 
-                   off-diagonal entries. *)
-
-                checker = False;                 
-                For[ i = 1, i + 1 <= n, i++,
-                   If[ dMatrix[[i]][[i+1]] === 0, null;  , checker = True; ];
-                   offDiagonal = Append[ offDiagonal, dMatrix[[i]][[i + 1]] ];
-                ];
-
-                (* If there were off-diagonal elements then.... *)
-                If[ checker === True,
-
-                  Print["L**D**tp[L] gave non-trivial blocks, so the output list is: { {diagonal},{subdiagonal},{-subdiagonal} }"];
-                  theDiagonal = { theDiagonal, offDiagonal, -offDiagonal };
-                ];
-
-                (* Pertains to independence of the border vectors *)   
-                If[returnBorderVec == True,
-                   Hdata1 = Flatten[Hdata[[1]] ];
-                   Hdata1 = NCBorderVectorGather[Hdata1,Tmplist3];
-                   Hdata1check = NCIndependenceCheck[Hdata1,\[Lambda] ];
-                   If[Hdata1check === Table[True,{Length[Hdata1check]}],
-                      Print["Border vectors are independent."];          
-                   ,(*else*)
-                      Print["Border vectors may be dependent.  Use NCIndependenceCheck."];
-                   ];(*end if*)
-                 ];(*end if*)
-
-                (* now we want to return our answer. *)
-
-                (* check if we should return the permutations *)
-                If[returnBorderVec == True,              
-                   (* return the vector too. *)    
-                   Return[ { theDiagonal ,  Hdata1} ];
-                 ,(*else*)
-                   Return[ { theDiagonal } ];
-                ];
+       Return[ Map[Normal, GetDiagonal[d, s]] ];
     ];
-
-
 
     NCIndependenceCheck[list_,y___] := 
          Module[{Tmpvar,Tmpvar2,Tmpexp,Tmpexp2,coeflist,equasolved,setozero,
-                 n = Length[list],Tmplist,Tmplist2,Tmplist3,Finlist = {},
+                 n = Length[list],Tmplist,Tmplist2,dirs,Finlist = {},
                  Tmpfun,\[Lambda]},
 
                 (* check for proper input of list *)
@@ -204,6 +168,7 @@ Begin["`Private`"];
                       Tmpfun[x_] := Subscript[\[Lambda],x];
                    ];(*endif*)
                    Tmpvar = Map[Tmpfun,Range[Length[Tmplist]] ];                                       
+		   Quiet[
 
                    (* create a list of all variables in argument "list" *)
                    Tmpvar2 = Variables[CommuteEverything[Tmplist]]; 
@@ -233,6 +198,10 @@ Begin["`Private`"];
 
                    EndCommuteEverything[];
 
+		   ,
+		   CommuteEverything::Warning
+		   ];
+
                    Tmplist2 = Tmpvar //. equasolved;                           
                    If[Tmplist2 === NCZeroMatrix[ Length[Tmplist2] ][[1]],
                       (* all variables must be zero, implying *)
@@ -255,7 +224,7 @@ Begin["`Private`"];
     ];(*end module*) 
 
 
-    NCBorderVectorGather[list_,var_] :=
+    NCBorderVectorGather[list_, var_] :=
          Module[{Tmpvar,Tmplist1,Tmplist2,firstelm,Finlist = {}},
 
                 For[i=1, i<= Length[var], i++,

@@ -191,8 +191,9 @@
 <li><a href="#LUInverse"><span class="toc-section-number">20.6</span> LUInverse</a></li>
 <li><a href="#GetLUMatrices"><span class="toc-section-number">20.7</span> GetLUMatrices</a></li>
 <li><a href="#GetLDUMatrices"><span class="toc-section-number">20.8</span> GetLDUMatrices</a></li>
-<li><a href="#LUPartialPivoting"><span class="toc-section-number">20.9</span> LUPartialPivoting</a></li>
-<li><a href="#LUCompletePivoting"><span class="toc-section-number">20.10</span> LUCompletePivoting</a></li>
+<li><a href="#GetDiagonal"><span class="toc-section-number">20.9</span> GetDiagonal</a></li>
+<li><a href="#LUPartialPivoting"><span class="toc-section-number">20.10</span> LUPartialPivoting</a></li>
+<li><a href="#LUCompletePivoting"><span class="toc-section-number">20.11</span> LUCompletePivoting</a></li>
 </ul></li>
 <li><a href="#PackageNCUtil"><span class="toc-section-number">21</span> NCUtil</a><ul>
 <li><a href="#NCConsistentQ"><span class="toc-section-number">21.1</span> NCConsistentQ</a></li>
@@ -696,6 +697,7 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <pre><code>NCDirectionalD[expr, {x,h}]</code></pre>
 <p>returns</p>
 <pre><code>h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b</code></pre>
+<p>In the case of more than one variables <code>NCDirectionalD[expr, {x,h}, {y,k}]</code> takes the directional derivative of <code>expr</code> with respect to <code>x</code> in the direction <code>h</code> and with respect to <code>y</code> in the direction <code>k</code>.</p>
 <p>See also: <a href="#NCGrad">NCGrad</a>, <a href="#NCHessian">NCHessian</a>.</p>
 <h2 id="NCGrad"><span class="header-section-number">9.2</span> NCGrad</h2>
 <p><code>NCGrad[expr, var1, ...]</code> gives the nc gradient of the expression <code>expr</code> with respect to variables <code>var1</code>, <code>var2</code>, .... If there is more than one variable then <code>NCGrad</code> returns the gradient in a list.</p>
@@ -727,6 +729,7 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <p>returns</p>
 <pre><code>2 h**a**h + 2 s**inv[x]**s - 2 s**inv[x]**h**inv[x]**y -
 2 y**inv[x]**h**inv[x]**s + 2 y**inv[x]**h**inv[x]**h**inv[x]**y</code></pre>
+<p>In the case of more than one variables <code>NCHessian[expr, {x,h}, {y,k}]</code> takes the second directional derivative of <code>expr</code> with respect to <code>x</code> in the direction <code>h</code> and with respect to <code>y</code> in the direction <code>k</code>.</p>
 <p>See also: <a href="#NCDirectionalD">NCDiretionalD</a>, <a href="#NCGrad">NCGrad</a>.</p>
 <h2 id="DirectionalD"><span class="header-section-number">9.4</span> DirectionalD</h2>
 <p><code>DirectionalD[expr,var,h]</code> takes the directional derivative of nc expression <code>expr</code> with respect to the single variable <code>var</code> in direction <code>h</code>.</p>
@@ -1087,6 +1090,20 @@ right = {x,y**d}</code></pre>
 <p><code>NCMatrixOfQuadratic[p, vars]</code> gives a factorization of the symmetric quadratic function <code>p</code> in noncommutative variables <code>vars</code> and their transposes.</p>
 <p><code>NCMatrixOfQuadratic</code> checks for symmetry and automatically sets variables to be symmetric if possible.</p>
 <p>Internally it uses <a href="#NCQuadratic">NCQuadratic</a> and <a href="#NCQuadraticMakeSymmetric">NCQuadraticMakeSymmetric</a>.</p>
+<p>It returns a list of three elements:</p>
+<ul>
+<li>the first is the left border row vector;</li>
+<li>the second is the middle matrix;</li>
+<li>the third is the right border column vector.</li>
+</ul>
+<p>For example:</p>
+<pre><code>expr = x**y**x + z**x**x**z;
+{left,middle,right}=NCMatrixOfQuadratics[expr, {x}];</code></pre>
+<p>returns:</p>
+<pre><code>left={x, z**x}
+middle=SparseArray[{{y,0},{0,1}}]
+right={x,x**z}</code></pre>
+<p>The answer from <code>NCMatrixOfQuadratics</code> always satisfies <code>p = MatMult[left,middle,right]</code>.</p>
 <p>See also: <a href="#NCQuadratic">NCQuadratic</a>, <a href="#NCQuadraticMakeSymmetric">NCQuadraticMakeSymmetric</a>.</p>
 <h2 id="NCQuadraticToNCPolynomial"><span class="header-section-number">15.4</span> NCQuadraticToNCPolynomial</h2>
 <p><code>NCQuadraticToNCPolynomial[rep]</code> takes the list <code>rep</code> produced by <code>NCQuadratic</code> and converts it back to an <code>NCPolynomial</code>.</p>
@@ -1248,6 +1265,7 @@ right = {x,y**d}</code></pre>
 <ul>
 <li><a href="#GetLUMatrices">GetLUMatrices</a></li>
 <li><a href="#GetLDUMatrices">GetLDUMatrices</a></li>
+<li><a href="#GetDiagonal">GetDiagonal</a></li>
 <li><a href="#LUPartialPivoting">LUPartialPivoting</a></li>
 <li><a href="#LUCompletePivoting">LUCompletePivoting</a></li>
 <li><a href="#LUNoPartialPivoting">LUNoPartialPivoting</a></li>
@@ -1348,11 +1366,23 @@ right = {x,y**d}</code></pre>
 {l,d,u} = GetLDUMatrices[ldl,s];</code></pre>
 <p>returns the lower-triangular factor <code>l</code>, the upper-triangular factor <code>u</code>, and the block-diagonal factor <code>d</code>.</p>
 <p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>.</p>
-<h2 id="LUPartialPivoting"><span class="header-section-number">20.9</span> LUPartialPivoting</h2>
+<h2 id="GetDiagonal"><span class="header-section-number">20.9</span> GetDiagonal</h2>
+<p><code>GetDiagonal[m]</code> extracts the diagonal entries of matrix <code>m</code>.</p>
+<p><code>GetDiagonal[m, s]</code> extracts the block-diagonal entries of matrix <code>m</code> with block size <code>s</code>.</p>
+<p>For example:</p>
+<pre><code>d = GetDiagonal[{{1,-1,0},{-1,2,0},{0,0,3}}];</code></pre>
+<p>returns</p>
+<pre><code>d = {1,2,3}</code></pre>
+<p>and</p>
+<pre><code>d = GetDiagonal[{{1,-1,0},{-1,2,0},{0,0,3}}, {2,1}];</code></pre>
+<p>returns</p>
+<pre><code>d = {{{1,-1},{-1,2}},3}</code></pre>
+<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>.</p>
+<h2 id="LUPartialPivoting"><span class="header-section-number">20.10</span> LUPartialPivoting</h2>
 <p><code>LUPartialPivoting[v]</code> returns the index of the element with largest absolute value in the vector <code>v</code>. If <code>v</code> is a matrix, it returns the index of the element with largest absolute value in the first column.</p>
 <p><code>LUPartialPivoting[v, f]</code> sorts with respect to the function <code>f</code> instead of the absolute value.</p>
 <p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>.</p>
-<h2 id="LUCompletePivoting"><span class="header-section-number">20.10</span> LUCompletePivoting</h2>
+<h2 id="LUCompletePivoting"><span class="header-section-number">20.11</span> LUCompletePivoting</h2>
 <p><code>LUCompletePivoting[m]</code> returns the row and column index of the element with largest absolute value in the matrix <code>m</code>.</p>
 <p><code>LUCompletePivoting[v, f]</code> sorts with respect to the function <code>f</code> instead of the absolute value.</p>
 <p>See also: <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>

@@ -21,6 +21,7 @@ Clear[LUDecompositionWithPartialPivoting,
       LowerTriangularSolve,
       LUInverse,
       GetLUMatrices, GetLDUMatrices,
+      GetDiagonal,
       LUPartialPivoting, LUCompletePivoting];
 
 Get["MatrixDecompositions.usage"];
@@ -122,6 +123,20 @@ Begin[ "`Private`" ]
 
   ];
 
+  
+  (* GetDiagonal *)
+  
+  GetDiagonal[m_?SquareMatrixQ] := Tr[m, List];
+  GetDiagonal[m_?SquareMatrixQ, s_] := Module[
+      {i,index,tmp},
+      
+      i = Prepend[Drop[Accumulate[s], -1], 0] + 1;
+      index = Transpose[{i, i + s - 1}];
+      
+      tmp = Map[Part[m, #[[1]];;#[[2]], #[[1]];;#[[2]]]&, index];
+      Return[Map[If[Dimensions[#]=={1,1},#[[1,1]],#]&, tmp]];
+  ];
+  
   (* Upper triangular solve (Back substitution) *)
   UpperTriangularSolve[u_, b_?VectorQ, opts:OptionsPattern[{}]] :=
     Flatten[UpperTriangularSolve[u, Transpose[{b}], opts]];

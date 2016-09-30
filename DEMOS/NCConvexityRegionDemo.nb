@@ -10,23 +10,18 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     64631,       1826]
-NotebookOptionsPosition[     58937,       1654]
-NotebookOutlinePosition[     59730,       1678]
-CellTagsIndexPosition[     59687,       1675]
+NotebookDataLength[     63284,       1707]
+NotebookOptionsPosition[     58148,       1541]
+NotebookOutlinePosition[     58941,       1565]
+CellTagsIndexPosition[     58898,       1562]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell[TextData[{
- "This is a demo file for \nNCConvexityRegion[p,{x,y}]. ",
- StyleBox[" ",
-  FontColor->RGBColor[1, 0, 1]]
-}], "Title",
- FontSize->36,
- FontColor->GrayLevel[0]],
+Cell["NCConvexity Package", "Title",
+ CellChangeTimes->{{3.684184817846608*^9, 3.684184837620771*^9}}],
 
 Cell[CellGroupData[{
 
@@ -36,7 +31,7 @@ Cell[BoxData[{
  RowBox[{"<<", " ", "NCConvexity`"}]}], "Input",
  CellChangeTimes->{{3.5166269207530003`*^9, 3.516626927007236*^9}, {
   3.516626995092029*^9, 3.516626996571578*^9}, {3.684024763041646*^9, 
-  3.684024765010337*^9}}],
+  3.684024765010337*^9}, {3.684199623718852*^9, 3.684199624548519*^9}}],
 
 Cell[CellGroupData[{
 
@@ -46,7 +41,11 @@ Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
   3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
    3.572400610539997*^9, 3.6840247876683483`*^9, {3.684025354781372*^9, 
    3.684025383032116*^9}, 3.68402577527229*^9, 3.684026019965735*^9, 
-   3.6840260997527027`*^9}],
+   3.6840260997527027`*^9, 3.684185463137561*^9, 3.6841972568357773`*^9, 
+   3.6841973068856277`*^9, {3.68419744479678*^9, 3.684197466106689*^9}, 
+   3.68419847347624*^9, 3.6841986171837463`*^9, 3.68419938973302*^9, 
+   3.6841995083646507`*^9, 3.684199624901904*^9, {3.6841996560056562`*^9, 
+   3.6841996827113523`*^9}, 3.684199848910677*^9, 3.6841999263496513`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -57,7 +56,11 @@ Cell[BoxData[
   3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
    3.572400610539997*^9, 3.6840247876683483`*^9, {3.684025354781372*^9, 
    3.684025383032116*^9}, 3.68402577527229*^9, 3.684026019965735*^9, 
-   3.6840260997633457`*^9}],
+   3.6840260997527027`*^9, 3.684185463137561*^9, 3.6841972568357773`*^9, 
+   3.6841973068856277`*^9, {3.68419744479678*^9, 3.684197466106689*^9}, 
+   3.68419847347624*^9, 3.6841986171837463`*^9, 3.68419938973302*^9, 
+   3.6841995083646507`*^9, 3.684199624901904*^9, {3.6841996560056562`*^9, 
+   3.6841996827113523`*^9}, 3.684199848910677*^9, 3.684199926360332*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -71,17 +74,35 @@ Cell[BoxData[
   3.516626928879483*^9, {3.516626976585766*^9, 3.51662699714361*^9}, 
    3.572400610539997*^9, 3.6840247876683483`*^9, {3.684025354781372*^9, 
    3.684025383032116*^9}, 3.68402577527229*^9, 3.684026019965735*^9, 
-   3.684026099772942*^9}]
+   3.6840260997527027`*^9, 3.684185463137561*^9, 3.6841972568357773`*^9, 
+   3.6841973068856277`*^9, {3.68419744479678*^9, 3.684197466106689*^9}, 
+   3.68419847347624*^9, 3.6841986171837463`*^9, 3.68419938973302*^9, 
+   3.6841995083646507`*^9, 3.684199624901904*^9, {3.6841996560056562`*^9, 
+   3.6841996827113523`*^9}, 3.684199848910677*^9, 3.6841999263719254`*^9}]
 }, Open  ]]
 }, Open  ]],
 
+Cell[CellGroupData[{
+
+Cell["Examples", "Chapter",
+ CellChangeTimes->{{3.684197735820601*^9, 3.684197736729377*^9}, 
+   3.684198335189703*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ SuperscriptBox["x", "2"]], "Subchapter",
+ CellChangeTimes->{{3.684197502655561*^9, 3.68419751827872*^9}}],
+
 Cell[TextData[{
- StyleBox["(1)",
-  FontColor->RGBColor[1, 0, 0]],
- " Let's start with a simple example first.  Lets test the convexity of p = \
-x^2."
+ "Let's start with a simple example first.  Lets test the convexity of p = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "2"], TraditionalForm]]],
+ "."
 }], "Text",
- FontSize->24],
+ CellChangeTimes->{
+  3.6841972362420187`*^9, {3.6841974951860437`*^9, 3.684197528984665*^9}}],
 
 Cell[CellGroupData[{
 
@@ -89,42 +110,56 @@ Cell[BoxData[
  RowBox[{"NCConvexityRegion", "[", " ", 
   RowBox[{
    RowBox[{"x", "**", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}]}], " ", "]"}]], "Input",
- FontSize->14],
+   RowBox[{"{", "x", "}"}]}], " ", "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
    RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
   RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$710751\\\\\\\"\\\
-\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", "MSG",
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
+\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
  CellChangeTimes->{
   3.684024797042529*^9, {3.6840253565004053`*^9, 3.684025384480678*^9}, 
-   3.684025776622464*^9, 3.684026021223007*^9}],
+   3.684025776622464*^9, 3.684026021223007*^9, {3.684197245477963*^9, 
+   3.684197258529814*^9}, 3.684197308794736*^9, {3.684197447121942*^9, 
+   3.6841974672512712`*^9}, 3.6841975335948973`*^9, 3.684198473737254*^9, 
+   3.684198619510929*^9, 3.6841993925024776`*^9, 3.684199510393799*^9, 
+   3.68419962775782*^9, {3.68419965818291*^9, 3.6841996847651033`*^9}, 
+   3.684199849155648*^9, 3.684199926589519*^9}],
 
 Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", "2", "}"}], "}"}]], "Output",
+ RowBox[{"{", "2", "}"}]], "Output",
  CellChangeTimes->{
-  3.516626930874363*^9, 3.516626979245829*^9, 3.5724006110952597`*^9, 
-   3.6840247971159887`*^9, {3.6840253565150223`*^9, 3.684025384490719*^9}, 
-   3.684025776632704*^9, 3.684026021233066*^9}]
+  3.684197258539871*^9, 3.684197308859251*^9, {3.6841974471892843`*^9, 
+   3.684197467329183*^9}, 3.684197533604632*^9, 3.684198473748124*^9, 
+   3.684198619687295*^9, 3.6841993927383337`*^9, 3.684199510569394*^9, 
+   3.684199627946501*^9, {3.6841996582022247`*^9, 3.6841996847762003`*^9}, 
+   3.684199849167036*^9, 3.684199926601034*^9}]
 }, Open  ]],
 
 Cell["\<\
 Conclusions: We see that x^2 is matrix convex for all symmetric x, since the \
 output diagonal elements {2} are positive.\
-\>", "Text",
- FontSize->24],
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ SuperscriptBox["x", "3"]], "Subchapter",
+ CellChangeTimes->{{3.684197502655561*^9, 3.684197544267288*^9}}],
 
 Cell[TextData[{
- StyleBox["(2)",
-  FontColor->RGBColor[1, 0, 0]],
- " Now we will test the convexity of p = x^3."
+ "Now we will test the convexity of p = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "3"], TraditionalForm]]],
+ "."
 }], "Text",
- FontSize->24],
+ CellChangeTimes->{
+  3.68419731483631*^9, {3.6841975535960007`*^9, 3.684197555226901*^9}}],
 
 Cell[CellGroupData[{
 
@@ -132,46 +167,64 @@ Cell[BoxData[
  RowBox[{"NCConvexityRegion", "[", " ", 
   RowBox[{
    RowBox[{"x", "**", "x", "**", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}]}], " ", "]"}]], "Input",
- FontSize->14],
+   RowBox[{"{", "x", "}"}]}], " ", "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
    RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
   RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$729811, \
-x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
+\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
 "MSG",
  CellChangeTimes->{3.684025400278158*^9, 3.684025778184143*^9, 
-  3.6840260227402887`*^9}],
+  3.6840260227402887`*^9, 3.6841973177782383`*^9, 3.684197470992269*^9, 
+  3.6841975475665827`*^9, 3.684198473946892*^9, 3.68419968741856*^9, 
+  3.684199849364538*^9, 3.684199926792823*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"{", 
+  RowBox[{
+   RowBox[{"2", " ", "x"}], ",", 
    RowBox[{
-    RowBox[{"2", " ", "x"}], ",", 
-    RowBox[{
-     RowBox[{"-", "2"}], " ", 
-     RowBox[{"inv", "[", "x", "]"}]}]}], "}"}], "}"}]], "Output",
+    RowBox[{"-", "2"}], " ", 
+    RowBox[{"inv", "[", "x", "]"}]}]}], "}"}]], "Output",
  CellChangeTimes->{3.5166269325840273`*^9, 3.5166269794724827`*^9, 
   3.572400611146427*^9, 3.6840254003271427`*^9, 3.684025778194172*^9, 
-  3.684026022750173*^9}]
+  3.684026022750173*^9, 3.684197317967848*^9, 3.6841974711866207`*^9, 
+  3.684197547750782*^9, 3.684198474142981*^9, 3.684199687607258*^9, 
+  3.684199849375719*^9, 3.684199926803892*^9}]
 }, Open  ]],
 
-Cell["\<\
-Conclusions: We see that x^3 is not matrix convex for any symmetric x, since \
-the output diagonal elements {2x, -2 inv[x]} cannot both be positive.\
-\>", "Text",
- FontSize->24],
+Cell[TextData[{
+ "Conclusions: We see that x",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["", "3"], TraditionalForm]]],
+ " is not matrix convex for any symmetric x, since the output diagonal \
+elements {2x, -2 inv[x]} cannot both be positive."
+}], "Text",
+ CellChangeTimes->{{3.684197560290976*^9, 3.6841975647005*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["x", "2"], "+", 
+  SuperscriptBox["y", "2"]}]], "Subchapter",
+ CellChangeTimes->{{3.684197502655561*^9, 3.684197544267288*^9}, {
+  3.6841975748374233`*^9, 3.684197577708856*^9}}],
 
 Cell[TextData[{
- StyleBox["(3)",
-  FontColor->RGBColor[1, 0, 0]],
- " What about p = x^2+y^2 ?"
+ "What about p = ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox["x", "2"], "+", 
+   SuperscriptBox["y", "2"]}]]],
+ " ?"
 }], "Text",
- FontSize->24],
+ CellChangeTimes->{3.684197480281443*^9, 3.684197587433572*^9}],
 
 Cell[CellGroupData[{
 
@@ -182,41 +235,56 @@ Cell[BoxData[
     RowBox[{"x", "**", "x"}], "+", 
     RowBox[{"y", "**", "y"}]}], ",", " ", 
    RowBox[{"{", 
-    RowBox[{"x", ",", "y"}], "}"}]}], " ", "]"}]], "Input",
- FontSize->14],
+    RowBox[{"x", ",", "y"}], "}"}]}], " ", "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
    RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
   RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$748901, \
-NCConvexity`Private`h$748902\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed \
-symmetric\"\>"}]], "Message", "MSG",
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x, \
+y\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
  CellChangeTimes->{3.684025456803241*^9, 3.684025779944982*^9, 
-  3.684026024779256*^9}],
+  3.684026024779256*^9, 3.6841974826908207`*^9, 3.684197580058508*^9, 
+  3.684198474325774*^9, 3.6841997307530317`*^9, 3.684199849561946*^9, 
+  3.684199926994062*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{"2", ",", "2"}], "}"}], "}"}]], "Output",
+  RowBox[{"2", ",", "2"}], "}"}]], "Output",
  CellChangeTimes->{3.5166269795884857`*^9, 3.572400611196829*^9, 
-  3.684025456810898*^9, 3.684025779954974*^9, 3.684026024789657*^9}]
+  3.684025456810898*^9, 3.684025779954974*^9, 3.684026024789657*^9, 
+  3.684197482702115*^9, 3.684197580069343*^9, 3.6841984743340273`*^9, 
+  3.684199730764081*^9, 3.68419984957777*^9, 3.6841999270023937`*^9}]
 }, Open  ]],
 
-Cell["\<\
-Conclusions: We see that x^2+y^2 is matrix convex for any symmetric x and y, \
-since the output diagonal elements {2,2} are positive.\
-\>", "Text",
- FontSize->24],
+Cell[TextData[{
+ "Conclusions: We see that ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox["x", "2"], "+", 
+   SuperscriptBox["y", "2"]}]]],
+ " is matrix convex for any symmetric x and y, since the output diagonal \
+elements {2,2} are positive."
+}], "Text",
+ CellChangeTimes->{3.684197590022994*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ SuperscriptBox["x", "4"]], "Subchapter",
+ CellChangeTimes->{{3.684197502655561*^9, 3.684197544267288*^9}, {
+  3.6841975748374233`*^9, 3.6841976051017313`*^9}}],
 
 Cell[TextData[{
- StyleBox["(4)",
-  FontColor->RGBColor[1, 0, 0]],
- " What about p = x^4 ?"
+ "What about p = ",
+ Cell[BoxData[
+  SuperscriptBox["x", "4"]]],
+ " ?"
 }], "Text",
- FontSize->24],
+ CellChangeTimes->{3.684197487921887*^9, 3.684197610233697*^9}],
 
 Cell[CellGroupData[{
 
@@ -224,55 +292,66 @@ Cell[BoxData[
  RowBox[{"NCConvexityRegion", "[", " ", 
   RowBox[{
    RowBox[{"x", "**", "x", "**", "x", "**", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}]}], " ", "]"}]], "Input",
- FontSize->14],
+   RowBox[{"{", "x", "}"}]}], " ", "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
    RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
   RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$768011, \
-x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
+\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
 "MSG",
  CellChangeTimes->{3.6840254725944443`*^9, 3.6840257820626583`*^9, 
-  3.6840260264397173`*^9}],
-
-Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
-{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626980440782*^9, 3.572400611246738*^9, 
-  3.684025472605394*^9, 3.684025782072933*^9, 3.6840260264516487`*^9}],
+  3.6840260264397173`*^9, 3.6841976122742167`*^9, 3.68419847452559*^9, 
+  3.684199734963208*^9, 3.684199849773538*^9, 3.684199927201827*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"2", ",", "0", ",", "0"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "2"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
+  RowBox[{"2", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "0"}], "}"}]}], "}"}]}], "}"}]], "Output",
  CellChangeTimes->{3.516626980447814*^9, 3.572400611248341*^9, 
-  3.684025472612762*^9, 3.6840257820803003`*^9, 3.6840260264590597`*^9}]
+  3.684025472612762*^9, 3.6840257820803003`*^9, 3.6840260264590597`*^9, 
+  3.6841976124689627`*^9, 3.6841984747232447`*^9, 3.684199735158064*^9, 
+  3.6841998498076553`*^9, 3.684199927227572*^9}]
 }, Open  ]],
 
-Cell["\<\
-Conclusions: We see that x^4 is not matrix convex for any symmetric x, since \
-the eigenvalues of the D matrix include 2 and -2.  Note the different message \
-and output here.  This is because D was not diagonal, but block diagonal. So, \
-NCConvexityRegion gave back the diagonal, subdiagonal, and -subdiagonal. \
-\>", "Text",
- FontSize->24],
+Cell[TextData[{
+ "Conclusions: We see that ",
+ Cell[BoxData[
+  SuperscriptBox["x", "4"]]],
+ " is not matrix convex for any symmetric x, since the eigenvalues of the \
+second block of the diagonal matrix D include 2 and -2.  Note the different \
+message and output here.  This is because D was not diagonal, but block \
+diagonal. So, NCConvexityRegion gave back the block diagonal."
+}], "Text",
+ CellChangeTimes->{{3.68419762267227*^9, 3.6841976728953114`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["x", "4"], "+", 
+  SuperscriptBox["y", "4"]}]], "Subchapter",
+ CellChangeTimes->{{3.684197502655561*^9, 3.684197544267288*^9}, {
+  3.6841975748374233`*^9, 3.6841976051017313`*^9}, {3.684197688081765*^9, 
+  3.68419768985639*^9}}],
 
 Cell[TextData[{
- StyleBox["(5)",
-  FontColor->RGBColor[1, 0, 0]],
- " What about p = x^4+y^4 ?"
+ "What about p = ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox["x", "4"], "+", 
+   SuperscriptBox["y", "4"]}]]],
+ "?"
 }], "Text",
- FontSize->24],
+ CellChangeTimes->{{3.684197676143833*^9, 3.684197696648424*^9}}],
 
 Cell[CellGroupData[{
 
@@ -283,100 +362,168 @@ Cell[BoxData[
     RowBox[{"x", "**", "x", "**", "x", "**", "x"}], "+", 
     RowBox[{"y", "**", "y", "**", "y", "**", "y"}]}], ",", " ", 
    RowBox[{"{", 
-    RowBox[{"x", ",", "y"}], "}"}]}], " ", "]"}]], "Input",
- FontSize->14],
+    RowBox[{"x", ",", "y"}], "}"}]}], " ", "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
   StyleBox[
    RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
   RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$787141, \
-NCConvexity`Private`h$787142, x, y\\\\\\\"\\\"}]\\)\[NoBreak] was(were) \
-assumed symmetric\"\>"}]], "Message", "MSG",
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x, \
+y\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
  CellChangeTimes->{3.684025536583488*^9, 3.6840257850272827`*^9, 
-  3.6840260293768272`*^9}],
-
-Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
-{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.5166269814414988`*^9, 3.572400611356009*^9, 
-  3.684025536616218*^9, 3.684025785068048*^9, 3.684026029413184*^9}],
+  3.6840260293768272`*^9, 3.684197698147422*^9, 3.684198474953328*^9, 
+  3.684199739632057*^9, 3.68419985003985*^9, 3.684199927419896*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"2", ",", "2", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], 
-    ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "0", ",", "2", ",", "0", ",", "2"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "0", ",", 
-      RowBox[{"-", "2"}], ",", "0", ",", 
-      RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
+  RowBox[{"2", ",", "2", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "0"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "0"}], "}"}]}], "}"}]}], "}"}]], "Output",
  CellChangeTimes->{3.516626981449554*^9, 3.572400611357563*^9, 
-  3.684025536623757*^9, 3.6840257850762777`*^9, 3.684026029422127*^9}]
+  3.684025536623757*^9, 3.6840257850762777`*^9, 3.684026029422127*^9, 
+  3.6841976985580473`*^9, 3.684198475403194*^9, 3.684199740036817*^9, 
+  3.6841998500909243`*^9, 3.684199927465719*^9}]
 }, Open  ]],
 
-Cell["\<\
-Conclusions: We see that x^4+y^4 is not matrix convex for any symmetric x and \
-y, since the eigenvalues of the D matrix include 2 and -2.  Note again the \
-different message and output here.  This is because D was not diagonal, but \
-block diagonal.  So, NCConvexityRegion gave back the diagonal, subdiagonal, \
-and -subdiagonal. \
-\>", "Text",
- FontSize->24],
-
-Cell[TextData[StyleBox["What is NCConvexityRegion doing?",
- FontColor->RGBColor[0, 0, 1]]], "Text",
- FontSize->36],
-
-Cell["\<\
-Let's step through a couple of the above examples and do what \
-NCConvexityRegion does to get a feeling for what is happening.\
-\>", "Text",
- FontSize->24],
-
 Cell[TextData[{
- StyleBox["(6)",
-  FontColor->RGBColor[1, 0, 0]],
- " Let's go through p = x^3."
+ "Conclusions: We see that ",
+ Cell[BoxData[
+  RowBox[{
+   SuperscriptBox["x", "4"], "+", 
+   SuperscriptBox["y", "4"]}]]],
+ " is not matrix convex for any symmetric x and y, since the eigenvalues of \
+the D matrix include 2 and -2.  Note again the different message and output \
+here.  This is because D was not diagonal, but block diagonal.  "
 }], "Text",
- FontSize->24],
+ CellChangeTimes->{{3.684197706402285*^9, 3.6841977176579933`*^9}}]
+}, Open  ]]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
+Cell["Important", "Chapter",
+ CellChangeTimes->{{3.6841981993579597`*^9, 3.684198205955122*^9}}],
+
+Cell["NCConvexityRegion can only be used on symmetric forms :", "Text",
+ CellChangeTimes->{{3.6841983648652077`*^9, 3.6841983786299458`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCConvexityRegion", "[", 
+  RowBox[{
+   RowBox[{"1", "+", 
+    RowBox[{"x", "**", "y"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCMatrixOfQuadratic", "::", "NotSymmetric"}], "MessageName"], 
+  RowBox[{":", " "}], "\<\"Quadratic form is not symmetric.\"\>"}]], "Message",\
+ "MSG",
+ CellChangeTimes->{
+  3.684025849163599*^9, 3.684026052774056*^9, 3.6840261052288857`*^9, {
+   3.6840261474346867`*^9, 3.6840261626432457`*^9}, 3.684026912789365*^9, 
+   3.684198230920586*^9, 3.684198475643653*^9, 3.6841997434255943`*^9, 
+   3.684199850445056*^9, 3.684199927708478*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", "$Failed", "}"}]], "Output",
+ CellChangeTimes->{
+  3.516626984292391*^9, 3.57240061216508*^9, 3.6840258499370823`*^9, 
+   3.684026053354601*^9, 3.684026106049961*^9, {3.6840261481928*^9, 
+   3.684026162651144*^9}, 3.684026912799038*^9, 3.684198230931724*^9, 
+   3.6841984756529007`*^9, 3.684199743436337*^9, 3.684199850453308*^9, 
+   3.68419992771771*^9}]
+}, Open  ]],
+
+Cell["will issue a warning and return nothing.", "Text",
+ CellChangeTimes->{{3.6841982327685223`*^9, 3.6841982480193043`*^9}}],
+
+Cell["Of course, testing linear functions with NCConvexityRegion:", "Text",
+ CellChangeTimes->{{3.684198294532752*^9, 3.684198297611215*^9}, {
+  3.684198385141013*^9, 3.684198386277482*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCConvexityRegion", "[", 
+  RowBox[{
+   RowBox[{"1", "+", "x"}], ",", " ", 
+   RowBox[{"{", "x", "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
+\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{{3.684199747283856*^9, 3.6841997553682632`*^9}, 
+   3.684199850650998*^9, 3.684199927995264*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", "0", "}"}]], "Output",
+ CellChangeTimes->{
+  3.684198475694564*^9, {3.684199747292088*^9, 3.684199755378929*^9}, 
+   3.684199850659371*^9, 3.684199928004549*^9}]
+}, Open  ]],
+
+Cell["\<\
+returns {0} since a linear function is convex everywhere, but strictly convex \
+nowhere.\
+\>", "Text",
+ CellChangeTimes->{{3.684198389141509*^9, 3.6841984317267647`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["What is NCConvexityRegion doing?", "Chapter",
+ CellChangeTimes->{{3.684197735820601*^9, 3.684197754330592*^9}, 
+   3.684198435433117*^9}],
+
+Cell[TextData[{
+ "Let's step through a couple of the above examples and do what \
+NCConvexityRegion does to get a feeling for what is happening.\nLet\
+\[CloseCurlyQuote]s go through p = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "3"], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.684197783196515*^9, 3.684197786108786*^9}, {
+  3.6841984422633047`*^9, 3.684198442567349*^9}}],
+
+Cell["\<\
+NCConvexityRegion first calculates the nc directional Hessian:\
+\>", "Text",
+ CellChangeTimes->{{3.684197762426545*^9, 3.684197798451734*^9}, {
+  3.684197853558036*^9, 3.68419785364566*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
  RowBox[{"hes", " ", "=", " ", 
   RowBox[{"NCHessian", "[", " ", 
    RowBox[{
     RowBox[{"x", "**", "x", "**", "x"}], ",", " ", 
     RowBox[{"{", 
-     RowBox[{"x", ",", "h"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"{", 
-   RowBox[{"lt", ",", "mq", ",", "rt"}], "}"}], "=", " ", 
-  RowBox[{"NCMatrixOfQuadratic", "[", 
-   RowBox[{"hes", ",", 
-    RowBox[{"{", "h", "}"}]}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "mq", "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"ldl", ",", "p", ",", "s", ",", "rank"}], "}"}], "=", 
-   RowBox[{"NCLDLDecomposition", "[", "mq", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"lf", ",", "d", ",", "rt"}], "}"}], "=", 
-   RowBox[{"GetLDUMatrices", "[", 
-    RowBox[{"ldl", ",", "s"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "d", "]"}], "\[IndentingNewLine]"}], "Input",
- CellChangeTimes->{{3.68402555422227*^9, 3.68402559685565*^9}},
- FontSize->14],
+     RowBox[{"x", ",", "h"}], "}"}]}], "]"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -386,8 +533,28 @@ Cell[BoxData[
    RowBox[{"h", "**", "x", "**", "h"}]}], "+", 
   RowBox[{"2", " ", 
    RowBox[{"x", "**", "h", "**", "h"}]}]}]], "Output",
- CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
-  3.684025601798276*^9, 3.684025788347808*^9, 3.6840260326543417`*^9}],
+ CellChangeTimes->{
+  3.684197805819762*^9, {3.684198111280397*^9, 3.684198117747439*^9}, 
+   3.684198475827385*^9, 3.684199760024044*^9, 3.684199850709392*^9, 
+   3.684199928095121*^9}]
+}, Open  ]],
+
+Cell["\<\
+The nc directional Hessian decomposed into a product of a left row vector \
+times a middle matrix times a right column vector using NCMatrixOfQuadratic:\
+\>", "Text",
+ CellChangeTimes->{{3.6841978122574463`*^9, 3.684197869527375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"lt", ",", "mq", ",", "rt"}], "}"}], "=", " ", 
+  RowBox[{"NCMatrixOfQuadratic", "[", 
+   RowBox[{"hes", ",", 
+    RowBox[{"{", "h", "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.684197876070504*^9, 3.6841978979595613`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -397,8 +564,9 @@ Cell[BoxData[
   ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
 x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
 "MSG",
- CellChangeTimes->{3.684025601953388*^9, 3.6840257885299883`*^9, 
-  3.684026032850609*^9}],
+ CellChangeTimes->{{3.6841978787176933`*^9, 3.684197898722618*^9}, 
+   3.6841981194304533`*^9, 3.684198476019899*^9, 3.684199762659005*^9, 
+   3.684199850958332*^9, 3.684199928344047*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -588,8 +756,34 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
      RowBox[{"h", "**", "x"}], ",", "h"}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
-  3.684025601798276*^9, 3.684025788347808*^9, 3.6840260328822803`*^9}],
+ CellChangeTimes->{{3.6841978788747587`*^9, 3.684197898753325*^9}, 
+   3.684198119461029*^9, 3.684198476060755*^9, 3.6841997627971287`*^9, 
+   3.684199850968371*^9, 3.684199928353491*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"ColumnForm", "[", "lt", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "mq", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ColumnForm", "[", "rt", "]"}]}], "Input"],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {
+     RowBox[{"x", "**", "h"}]},
+    {"h"}
+   },
+   BaselinePosition->{Baseline, {1, 1}},
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}}],
+  ColumnForm[{
+    NonCommutativeMultiply[$CellContext`x, $CellContext`h], $CellContext`h}],
+  Editable->False]], "Output",
+ CellChangeTimes->{3.684197899981908*^9, 3.684198120113133*^9, 
+  3.684198476112619*^9, 3.684199765142967*^9, 3.684199851057431*^9, 
+  3.68419992844503*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -614,8 +808,55 @@ Cell[BoxData[
     Automatic, {2, 2}, 0, {
      1, {{0, 1, 3}, {{2}, {1}, {2}}}, {2, 2, 2 $CellContext`x}}]]]]], "Output",\
 
- CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
-  3.684025601798276*^9, 3.684025788347808*^9, 3.6840260328923597`*^9}],
+ CellChangeTimes->{3.684197899981908*^9, 3.684198120113133*^9, 
+  3.684198476112619*^9, 3.684199765142967*^9, 3.684199851057431*^9, 
+  3.684199928454772*^9}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {
+     RowBox[{"h", "**", "x"}]},
+    {"h"}
+   },
+   BaselinePosition->{Baseline, {1, 1}},
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}}],
+  ColumnForm[{
+    NonCommutativeMultiply[$CellContext`h, $CellContext`x], $CellContext`h}],
+  Editable->False]], "Output",
+ CellChangeTimes->{3.684197899981908*^9, 3.684198120113133*^9, 
+  3.684198476112619*^9, 3.684199765142967*^9, 3.684199851057431*^9, 
+  3.684199928464979*^9}]
+}, Open  ]],
+
+Cell["\<\
+The nc LDL factors of the middle matrix is then calculated using \
+NCLDLDecomposition :\
+\>", "Text",
+ CellChangeTimes->{{3.684197906685491*^9, 3.684197948594006*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"ldl", ",", "p", ",", "s", ",", "rank"}], "}"}], "=", 
+   RowBox[{"NCLDLDecomposition", "[", "mq", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"lf", ",", "d", ",", "rt"}], "}"}], "=", 
+   RowBox[{"GetLDUMatrices", "[", 
+    RowBox[{"ldl", ",", "s"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "lf", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "d", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "rt", "]"}]}], "Input",
+ CellChangeTimes->{{3.68402555422227*^9, 3.68402559685565*^9}, {
+   3.684197804188644*^9, 3.6841978108285723`*^9}, 3.684197874120789*^9, {
+   3.684197957705213*^9, 3.684197984273871*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -625,8 +866,40 @@ Cell[BoxData[
   ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
 \\\\\"\\\"}]\\)\[NoBreak] was(were) assumed adjoint\"\>"}]], "Message", "MSG",
  
- CellChangeTimes->{3.684025601953388*^9, 3.6840257885299883`*^9, 
-  3.684026033061401*^9}],
+ CellChangeTimes->{
+  3.684025601953388*^9, 3.6840257885299883`*^9, 3.684026032850609*^9, {
+   3.6841979560227118`*^9, 3.6841979873558292`*^9}, 3.684198121397477*^9, 
+   3.6841984764129457`*^9, 3.68419976715722*^9, 3.68419985128509*^9, 
+   3.684199928745014*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"},
+     {
+      RowBox[{"inv", "[", "x", "]"}], "1"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[
+   SparseArray[
+    Automatic, {2, 2}, 0, {
+     1, {{0, 1, 3}, {{1}, {2}, {1}}}, {
+      1, 1, NonCommutativeMultiply`inv[$CellContext`x]}}]]]]], "Output",
+ CellChangeTimes->{
+  3.516626981524157*^9, 3.572400611396208*^9, 3.684025601798276*^9, 
+   3.684025788347808*^9, 3.6840260326543417`*^9, {3.684197956032555*^9, 
+   3.684197987367464*^9}, 3.684198121406417*^9, 3.684198476422529*^9, 
+   3.684199767165888*^9, 3.684199851293556*^9, 3.684199928753956*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -655,54 +928,95 @@ Cell[BoxData[
      1, {{0, 1, 2}, {{1}, {2}}}, {
       2 $CellContext`x, (-2) 
        NonCommutativeMultiply`inv[$CellContext`x]}}]]]]], "Output",
- CellChangeTimes->{3.516626981524157*^9, 3.572400611396208*^9, 
-  3.684025601798276*^9, 3.684025788347808*^9, 3.684026033069645*^9}]
+ CellChangeTimes->{
+  3.516626981524157*^9, 3.572400611396208*^9, 3.684025601798276*^9, 
+   3.684025788347808*^9, 3.6840260326543417`*^9, {3.684197956032555*^9, 
+   3.684197987367464*^9}, 3.684198121406417*^9, 3.684198476422529*^9, 
+   3.684199767165888*^9, 3.684199851293556*^9, 3.684199928763998*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", 
+      RowBox[{"inv", "[", "x", "]"}]},
+     {"0", "1"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[
+   SparseArray[
+    Automatic, {2, 2}, 0, {
+     1, {{0, 2, 3}, {{1}, {2}, {2}}}, {
+      1, NonCommutativeMultiply`inv[$CellContext`x], 1}}]]]]], "Output",
+ CellChangeTimes->{
+  3.516626981524157*^9, 3.572400611396208*^9, 3.684025601798276*^9, 
+   3.684025788347808*^9, 3.6840260326543417`*^9, {3.684197956032555*^9, 
+   3.684197987367464*^9}, 3.684198121406417*^9, 3.684198476422529*^9, 
+   3.684199767165888*^9, 3.684199851293556*^9, 3.684199928773732*^9}]
 }, Open  ]],
 
 Cell["\<\
-Conclusions: NCConvexityRegion returns the diagonal of d.  Look at example \
-(2).\
+The output of NCConvexityRegion is the bloc diagonal of the matrix d:\
 \>", "Text",
- FontSize->24],
-
-Cell[TextData[{
- StyleBox["(7)",
-  FontColor->RGBColor[1, 0, 0]],
- " Let's go through p = x^4."
-}], "Text",
- FontSize->24],
+ CellChangeTimes->{{3.684197988754758*^9, 3.684198017218667*^9}}],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"MatrixForm", ",", 
+   RowBox[{"GetDiagonal", "[", 
+    RowBox[{"d", ",", "s"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.684198019439942*^9, 3.684198021428578*^9}, 
+   3.684198106921139*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TagBox[
+    RowBox[{"2", " ", "x"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], ",", 
+   TagBox[
+    RowBox[{
+     RowBox[{"-", "2"}], " ", 
+     RowBox[{"inv", "[", "x", "]"}]}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.684198021796739*^9, {3.6841981073440847`*^9, 3.684198122836838*^9}, 
+   3.684198476530405*^9, 3.684199768743021*^9, 3.684199851392819*^9, 
+   3.684199928944311*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Let's go through p = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "4"], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.68419803720352*^9, 3.684198066271015*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
  RowBox[{"hes", " ", "=", " ", 
   RowBox[{"NCHessian", "[", " ", 
    RowBox[{
     RowBox[{"x", "**", "x", "**", "x", "**", "x"}], ",", " ", 
     RowBox[{"{", 
-     RowBox[{"x", ",", "h"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"{", 
-   RowBox[{"lt", ",", "mq", ",", "rt"}], "}"}], "=", " ", 
-  RowBox[{"NCMatrixOfQuadratic", "[", 
-   RowBox[{"hes", ",", 
-    RowBox[{"{", "h", "}"}]}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "mq", "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"ldl", ",", "p", ",", "s", ",", "rank"}], "}"}], "=", 
-   RowBox[{"NCLDLDecomposition", "[", "mq", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"lf", ",", "d", ",", "rt"}], "}"}], "=", 
-   RowBox[{"GetLDUMatrices", "[", 
-    RowBox[{"ldl", ",", "s"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "d", "]"}], "\[IndentingNewLine]"}], "Input",
- CellChangeTimes->{{3.684025637502473*^9, 3.684025638581376*^9}},
- FontSize->14],
+     RowBox[{"x", ",", "h"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.684198069781047*^9, 3.684198070732782*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -718,8 +1032,27 @@ Cell[BoxData[
    RowBox[{"x", "**", "h", "**", "x", "**", "h"}]}], "+", 
   RowBox[{"2", " ", 
    RowBox[{"x", "**", "x", "**", "h", "**", "h"}]}]}]], "Output",
- CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
-  3.684025639808674*^9, 3.684025791320828*^9, 3.684026034597912*^9}],
+ CellChangeTimes->{3.684197805819762*^9, 3.6841980711211777`*^9, 
+  3.6841981247089577`*^9, 3.684198476660603*^9, 3.684199769976074*^9, 
+  3.684199851444375*^9, 3.684199928981995*^9}]
+}, Open  ]],
+
+Cell["\<\
+The nc directional Hessian decomposed into a product of a left row vector \
+times a middle matrix times a right column vector using NCMatrixOfQuadratic:\
+\>", "Text",
+ CellChangeTimes->{{3.6841978122574463`*^9, 3.684197869527375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"lt", ",", "mq", ",", "rt"}], "}"}], "=", " ", 
+  RowBox[{"NCMatrixOfQuadratic", "[", 
+   RowBox[{"hes", ",", 
+    RowBox[{"{", "h", "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.684197876070504*^9, 3.6841978979595613`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -729,8 +1062,9 @@ Cell[BoxData[
   ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
 x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
 "MSG",
- CellChangeTimes->{3.6840256399856043`*^9, 3.684025791507361*^9, 
-  3.684026034782724*^9}],
+ CellChangeTimes->{{3.6841978787176933`*^9, 3.684197898722618*^9}, 
+   3.684198073122416*^9, 3.684198126493833*^9, 3.6841984769293127`*^9, 
+   3.684199771760957*^9, 3.6841998516421833`*^9, 3.684199929186482*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -938,8 +1272,37 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"h", "**", "x", "**", "x"}], ",", 
      RowBox[{"h", "**", "x"}], ",", "h"}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
-  3.684025639808674*^9, 3.684025791320828*^9, 3.6840260349301157`*^9}],
+ CellChangeTimes->{{3.6841978788747587`*^9, 3.684197898753325*^9}, 
+   3.684198073149404*^9, 3.684198126527067*^9, 3.6841984769389963`*^9, 
+   3.6841997717899027`*^9, 3.6841998516632032`*^9, 3.684199929262906*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"ColumnForm", "[", "lt", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "mq", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ColumnForm", "[", "rt", "]"}]}], "Input"],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {
+     RowBox[{"x", "**", "x", "**", "h"}]},
+    {
+     RowBox[{"x", "**", "h"}]},
+    {"h"}
+   },
+   BaselinePosition->{Baseline, {1, 1}},
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}}],
+  ColumnForm[{
+    NonCommutativeMultiply[$CellContext`x, $CellContext`x, $CellContext`h], 
+    NonCommutativeMultiply[$CellContext`x, $CellContext`h], $CellContext`h}],
+  Editable->False]], "Output",
+ CellChangeTimes->{3.684197899981908*^9, 3.6841980745692463`*^9, 
+  3.684198127465849*^9, 3.684198477196331*^9, 3.684199773388811*^9, 
+  3.6841998517081614`*^9, 3.6841999293128633`*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -970,8 +1333,58 @@ Cell[BoxData[
       2, 2, 2 $CellContext`x, 2, 2 $CellContext`x, 2 
        NonCommutativeMultiply[$CellContext`x, $CellContext`x]}}]]]]], "Output",\
 
- CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
-  3.684025639808674*^9, 3.684025791320828*^9, 3.6840260349388657`*^9}],
+ CellChangeTimes->{3.684197899981908*^9, 3.6841980745692463`*^9, 
+  3.684198127465849*^9, 3.684198477196331*^9, 3.684199773388811*^9, 
+  3.6841998517081614`*^9, 3.684199929322977*^9}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {
+     RowBox[{"h", "**", "x", "**", "x"}]},
+    {
+     RowBox[{"h", "**", "x"}]},
+    {"h"}
+   },
+   BaselinePosition->{Baseline, {1, 1}},
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}}],
+  ColumnForm[{
+    NonCommutativeMultiply[$CellContext`h, $CellContext`x, $CellContext`x], 
+    NonCommutativeMultiply[$CellContext`h, $CellContext`x], $CellContext`h}],
+  Editable->False]], "Output",
+ CellChangeTimes->{3.684197899981908*^9, 3.6841980745692463`*^9, 
+  3.684198127465849*^9, 3.684198477196331*^9, 3.684199773388811*^9, 
+  3.6841998517081614`*^9, 3.684199929332429*^9}]
+}, Open  ]],
+
+Cell["\<\
+The nc LDL factors of the middle matrix is then calculated using \
+NCLDLDecomposition :\
+\>", "Text",
+ CellChangeTimes->{{3.684197906685491*^9, 3.684197948594006*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"ldl", ",", "p", ",", "s", ",", "rank"}], "}"}], "=", 
+   RowBox[{"NCLDLDecomposition", "[", "mq", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"lf", ",", "d", ",", "rt"}], "}"}], "=", 
+   RowBox[{"GetLDUMatrices", "[", 
+    RowBox[{"ldl", ",", "s"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "lf", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "d", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "rt", "]"}]}], "Input",
+ CellChangeTimes->{{3.68402555422227*^9, 3.68402559685565*^9}, {
+   3.684197804188644*^9, 3.6841978108285723`*^9}, 3.684197874120789*^9, {
+   3.684197957705213*^9, 3.684197984273871*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -981,8 +1394,41 @@ Cell[BoxData[
   ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"x\\\
 \\\\\"\\\"}]\\)\[NoBreak] was(were) assumed adjoint\"\>"}]], "Message", "MSG",
  
- CellChangeTimes->{3.6840256399856043`*^9, 3.684025791507361*^9, 
-  3.684026035071823*^9}],
+ CellChangeTimes->{
+  3.684025601953388*^9, 3.6840257885299883`*^9, 3.684026032850609*^9, {
+   3.6841979560227118`*^9, 3.6841979873558292`*^9}, 3.684198078197873*^9, 
+   3.684198128914855*^9, 3.6841984774502172`*^9, 3.6841997751307287`*^9, 
+   3.684199851925879*^9, 3.684199929592458*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0", "0"},
+     {"0", "1", "0"},
+     {"x", "0", "1"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[
+   SparseArray[
+    Automatic, {3, 3}, 0, {
+     1, {{0, 1, 2, 5}, {{1}, {2}, {2}, {1}, {3}}}, {
+      1, 1, 0, $CellContext`x, 1}}]]]]], "Output",
+ CellChangeTimes->{
+  3.516626981524157*^9, 3.572400611396208*^9, 3.684025601798276*^9, 
+   3.684025788347808*^9, 3.6840260326543417`*^9, {3.684197956032555*^9, 
+   3.684197987367464*^9}, 3.6841980782065477`*^9, 3.684198128923354*^9, 
+   3.684198477458983*^9, 3.6841997751391783`*^9, 3.6841998519348783`*^9, 
+   3.684199929601318*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -1006,259 +1452,19 @@ Cell[BoxData[
    SparseArray[
     Automatic, {3, 3}, 0, {
      1, {{0, 1, 2, 3}, {{1}, {3}, {2}}}, {2, 2, 2}}]]]]], "Output",
- CellChangeTimes->{3.516626981798771*^9, 3.572400611448463*^9, 
-  3.684025639808674*^9, 3.684025791320828*^9, 3.684026035082995*^9}]
-}, Open  ]],
-
-Cell["\<\
-Conclusions: NCConvexityRegion returns the diagonal,offdiagonal, and \
--offdiagonal of d.  Note that this answer is consistent with example (4) \
-above.\
-\>", "Text",
- FontSize->24],
-
-Cell[TextData[StyleBox["What kind of options can we use?",
- FontColor->RGBColor[0, 0, 1]]], "Text",
- FontSize->36],
-
-Cell["\<\
-We can run NCConvexityRegion with AllPermutation -> True.  The default is \
-false.  This will make NCConvexityRegion run NCAllPermutationLDU instead of \
-NCLDUDecomposition.   When you do this you also want to set DiagonalSelection \
-to the permutations you want to use.  The possible settings for \
-DiagonalSelection are {n} or {k,n}.  {n} makes NCAllPermutationLDU use \
-permutations 1 through n, while {k,n} makes NCAllPermutationLDU use \
-permutations k through n.   Note that setting AllPermutation to True and \
-selecting different permutations will give different answers.  But, they will \
-all be consistent with regards to the matrix convexity of p.  When \
-AllPermutation is set to true NCConvexityRegion only returns the shortest \
-answer.  So although there are multiple answers depending on what \
-permutations are selected, NCConvexityRegion looks through them and selects \
-the shortest one to return.\
-\>", "Text",
- FontSize->24],
-
-Cell[TextData[{
- StyleBox["(8)",
-  FontColor->RGBColor[1, 0, 0]],
- " Lets run x^3.  "
-}], "Text",
- FontSize->24],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"hes", " ", "=", " ", 
-   RowBox[{"NCHessian", "[", " ", 
-    RowBox[{
-     RowBox[{"x", "**", "x", "**", "x"}], ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"x", ",", "h"}], "}"}]}], " ", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"lt", ",", "mq", ",", "rt"}], "}"}], "=", " ", 
-   RowBox[{"NCMatrixOfQuadratic", "[", " ", 
-    RowBox[{"hes", ",", 
-     RowBox[{"{", "h", "}"}]}], " ", "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "mq", "]"}]}], "Input",
- CellChangeTimes->{3.684025708141283*^9},
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
-x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.684025721290753*^9, 3.684025799093669*^9, 
-  3.684026039108038*^9}],
+ CellChangeTimes->{
+  3.516626981524157*^9, 3.572400611396208*^9, 3.684025601798276*^9, 
+   3.684025788347808*^9, 3.6840260326543417`*^9, {3.684197956032555*^9, 
+   3.684197987367464*^9}, 3.6841980782065477`*^9, 3.684198128923354*^9, 
+   3.684198477458983*^9, 3.6841997751391783`*^9, 3.6841998519348783`*^9, 
+   3.684199929610931*^9}],
 
 Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", GridBox[{
-     {"0", "2"},
-     {"2", 
-      RowBox[{"2", " ", "x"}]}
-    },
-    GridBoxAlignment->{
-     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-      "RowsIndexed" -> {}},
-    GridBoxSpacings->{"Columns" -> {
-        Offset[0.27999999999999997`], {
-         Offset[0.7]}, 
-        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-        Offset[0.2], {
-         Offset[0.4]}, 
-        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
-  Function[BoxForm`e$, 
-   MatrixForm[
-   SparseArray[
-    Automatic, {2, 2}, 0, {
-     1, {{0, 1, 3}, {{2}, {1}, {2}}}, {2, 2, 2 $CellContext`x}}]]]]], "Output",\
-
- CellChangeTimes->{3.516626981964835*^9, 3.572400611497478*^9, 
-  3.6840257212990627`*^9, 3.684025799101709*^9, 3.6840260391171207`*^9}]
-}, Open  ]],
-
-Cell["\<\
-We have a 2x2 matrix.  So the number of permutations is only 2.\
-\>", "Text",
- FontSize->24],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", " ", 
-  RowBox[{
-   RowBox[{"x", "**", "x", "**", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}], ",", 
-   RowBox[{"AllPermutation", "\[Rule]", "True"}], ",", 
-   RowBox[{"DiagonalSelection", "\[Rule]", 
-    RowBox[{"{", "1", "}"}]}]}], " ", "]"}]], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Option \
-\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
-\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
-"Message", "MSG",
- CellChangeTimes->{3.684025737876587*^9, 3.684025801933894*^9, 
-  3.684026040764632*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$902861, \
-x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.684025737876587*^9, 3.684025801933894*^9, 
-  3.684026040943646*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"2", " ", "x"}], ",", 
-    RowBox[{
-     RowBox[{"-", "2"}], " ", 
-     RowBox[{"inv", "[", "x", "]"}]}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626982095601*^9, 3.572400611555241*^9, 
-  3.684025738065024*^9, 3.684025802120943*^9, 3.684026040952526*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", " ", 
-  RowBox[{
-   RowBox[{"x", "**", "x", "**", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}], ",", 
-   RowBox[{"AllPermutation", "\[Rule]", "True"}], ",", 
-   RowBox[{"DiagonalSelection", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"2", ",", "2"}], "}"}]}]}], " ", "]"}]], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Option \
-\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
-\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
-"Message", "MSG",
- CellChangeTimes->{3.6840258156022778`*^9, 3.6840260429423227`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$940811, \
-x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.6840258156022778`*^9, 3.684026043112907*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"2", " ", "x"}], ",", 
-    RowBox[{
-     RowBox[{"-", "2"}], " ", 
-     RowBox[{"inv", "[", "x", "]"}]}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626982232624*^9, 3.572400611607533*^9, 
-  3.684025815787154*^9, 3.6840260431209717`*^9}]
-}, Open  ]],
-
-Cell["\<\
-Conclusions: In this case we get the same answer even though we used \
-different permutations. \
-\>", "Text",
- FontSize->24],
-
-Cell[TextData[{
- StyleBox["(9)",
-  FontColor->RGBColor[1, 0, 0]],
- " Lets run x^4.  "
-}], "Text",
- FontSize->24],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"hes", " ", "=", " ", 
-   RowBox[{"NCHessian", "[", " ", 
-    RowBox[{
-     RowBox[{"x", "**", "x", "**", "x", "**", "x"}], ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"x", ",", "h"}], "}"}]}], " ", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"lt", ",", "mq", ",", "rt"}], "}"}], "=", " ", 
-   RowBox[{"NCMatrixOfQuadratic", "[", " ", 
-    RowBox[{"hes", ",", 
-     RowBox[{"{", "h", "}"}]}], " ", "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "mq", "]"}]}], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"h, \
-x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.684025827473044*^9, 3.684026045091165*^9}],
-
-Cell[BoxData[
- TagBox[
-  RowBox[{"(", "\[NoBreak]", GridBox[{
-     {"0", "0", "2"},
-     {"0", "2", 
-      RowBox[{"2", " ", "x"}]},
-     {"2", 
-      RowBox[{"2", " ", "x"}], 
-      RowBox[{"2", " ", 
-       RowBox[{"x", "**", "x"}]}]}
+     {"1", "0", "x"},
+     {"0", "1", "0"},
+     {"0", "0", "1"}
     },
     GridBoxAlignment->{
      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
@@ -1274,382 +1480,63 @@ Cell[BoxData[
    MatrixForm[
    SparseArray[
     Automatic, {3, 3}, 0, {
-     1, {{0, 1, 3, 6}, {{3}, {2}, {3}, {1}, {2}, {3}}}, {
-      2, 2, 2 $CellContext`x, 2, 2 $CellContext`x, 2 
-       NonCommutativeMultiply[$CellContext`x, $CellContext`x]}}]]]]], "Output",\
-
- CellChangeTimes->{3.516626982348835*^9, 3.5724006116481028`*^9, 
-  3.684025827481328*^9, 3.684026045100157*^9}]
+     1, {{0, 2, 4, 5}, {{1}, {3}, {2}, {3}, {3}}}, {
+      1, $CellContext`x, 1, 0, 1}}]]]]], "Output",
+ CellChangeTimes->{
+  3.516626981524157*^9, 3.572400611396208*^9, 3.684025601798276*^9, 
+   3.684025788347808*^9, 3.6840260326543417`*^9, {3.684197956032555*^9, 
+   3.684197987367464*^9}, 3.6841980782065477`*^9, 3.684198128923354*^9, 
+   3.684198477458983*^9, 3.6841997751391783`*^9, 3.6841998519348783`*^9, 
+   3.684199929620638*^9}]
 }, Open  ]],
 
 Cell["\<\
-We have a 3x3 matrix.  So the number of permutations is only 12.\
+The output of NCConvexityRegion is the bloc diagonal of the matrix d:\
 \>", "Text",
- FontSize->24],
+ CellChangeTimes->{{3.684197988754758*^9, 3.684198017218667*^9}}],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", " ", 
-  RowBox[{
-   RowBox[{"x", "**", "x", "**", "x", "**", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}], ",", 
-   RowBox[{"AllPermutation", "\[Rule]", "True"}], ",", 
-   RowBox[{"DiagonalSelection", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"1", ",", "2"}], "}"}]}]}], " ", "]"}]], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Option \
-\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
-\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
-"Message", "MSG",
- CellChangeTimes->{3.6840258356202297`*^9, 3.684026046777274*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$997851, \
-x\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.6840258356202297`*^9, 3.684026046968606*^9}],
-
-Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
-{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.5166269824912033`*^9, 3.572400611715292*^9, 
-  3.6840258358036137`*^9, 3.684026047008065*^9}],
+ RowBox[{"Map", "[", 
+  RowBox[{"MatrixForm", ",", 
+   RowBox[{"GetDiagonal", "[", 
+    RowBox[{"d", ",", "s"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.684198019439942*^9, 3.684198021428578*^9}, {
+  3.684198087341763*^9, 3.684198099125662*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"2", ",", "0", ",", "0"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "2"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269825956583`*^9, 3.572400611724807*^9, 
-  3.684025835810842*^9, 3.684026047015711*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", " ", 
   RowBox[{
-   RowBox[{"x", "**", "x", "**", "x", "**", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}], ",", 
-   RowBox[{"AllPermutation", "\[Rule]", "True"}], ",", 
-   RowBox[{"DiagonalSelection", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"1", ",", "12"}], "}"}]}]}], " ", "]"}]], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCDeprecated", "::", "OptionGone"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Option \
-\\\"\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"AllPermutation\\\\\\\"\\\"}]\\)\
-\[NoBreak]\\\" has been deprecated and is no longer supported.\"\>"}]], \
-"Message", "MSG",
- CellChangeTimes->{3.684025842633638*^9, 3.6840260487704983`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$1035841, x\\\\\\\
-\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.684025842633638*^9, 3.684026048943589*^9}],
-
-Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
-{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626982777557*^9, 3.572400611782757*^9, 
-  3.684025842848754*^9, 3.684026048966607*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"2", ",", "0", ",", "0"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "2"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{"-", "2"}]}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269839666767`*^9, 3.572400611983241*^9, 
-  3.684025842856196*^9, 3.684026048973959*^9}]
-}, Open  ]],
-
-Cell["\<\
-Conclusions: When we tried using permutations 1 through 2 we got a different \
-answer than when we used all the permutations.  But the answers in terms of \
-convexity are the same.  x^4 is not matrix convex. \
-\>", "Text",
- FontSize->24],
-
-Cell["WARNINGS", "Text",
- FontSize->72,
- FontColor->RGBColor[1, 0, 0]],
-
-Cell["The following example appears to give misinformation.", "Text",
- FontSize->24],
-
-Cell[TextData[{
- StyleBox["(10)",
-  FontColor->RGBColor[1, 0, 0]],
- " Giving NCConvexityRegion polys that aren't symmetric."
-}], "Text",
- FontSize->24],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", 
-  RowBox[{
-   RowBox[{"1", "+", 
-    RowBox[{"x", "**", "y"}]}], ",", 
-   RowBox[{"{", 
-    RowBox[{"x", ",", "y"}], "}"}]}], "]"}]], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCMatrixOfQuadratic", "::", "NotSymmetric"}], "MessageName"], 
-  RowBox[{":", " "}], "\<\"Quadratic form is not symmetric.\"\>"}]], "Message",\
- "MSG",
+   TagBox["2",
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], ",", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", "2"},
+       {"2", "0"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[
+     SparseArray[
+      Automatic, {2, 2}, 0, {1, {{0, 1, 2}, {{2}, {1}}}, {2, 2}}]]]]}], 
+  "}"}]], "Output",
  CellChangeTimes->{
-  3.684025849163599*^9, 3.684026052774056*^9, 3.6840261052288857`*^9, {
-   3.6840261474346867`*^9, 3.6840261626432457`*^9}, 3.684026912789365*^9}],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Output",
- CellChangeTimes->{
-  3.516626984292391*^9, 3.57240061216508*^9, 3.6840258499370823`*^9, 
-   3.684026053354601*^9, 3.684026106049961*^9, {3.6840261481928*^9, 
-   3.684026162651144*^9}, 3.684026912799038*^9}]
-}, Open  ]],
-
-Cell["\<\
-1+xy is not matrix convex everywhere.  What happened here?  We gave \
-NCConvexityRegion a poly that isn't symmetric.  NCConvexityRegion only works \
-with symmetric polys.  If we give it the symmetric version we get:\
-\>", "Text",
- FontSize->24],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", 
-  RowBox[{
-   RowBox[{"1", "+", 
-    RowBox[{"x", "**", "y"}], "+", 
-    RowBox[{"y", "**", "x"}]}], ",", 
-   RowBox[{"{", 
-    RowBox[{"x", ",", "y"}], "}"}]}], "]"}]], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$1334951, \
-NCConvexity`Private`h$1334952\\\\\\\"\\\"}]\\)\[NoBreak] was(were) assumed \
-symmetric\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.6840269343900337`*^9}],
-
-Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
-{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626984359239*^9, 3.57240061219839*^9, 
-  3.684026934401552*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"0", ",", "0"}], "}"}], ",", 
-    RowBox[{"{", "2", "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"-", "2"}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.516626984362145*^9, 3.572400612199959*^9, 
-  3.684026934409196*^9}]
-}, Open  ]],
-
-Cell["This is correct.  1+xy+yx is not matrix convex anywhere.", "Text",
- FontSize->24],
-
-Cell[TextData[{
- StyleBox["(11)",
-  FontColor->RGBColor[1, 0, 0]],
- " NCConvexityRegion cannot handle commutative variables.  "
-}], "Text",
- FontSize->24],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"SetCommutative", "[", 
-   RowBox[{"A", ",", "B", ",", "F", ",", "G"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"NCConvexityRegion", "[", 
-  RowBox[{
-   RowBox[{
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{"A", "+", 
-       RowBox[{"B", "*", "x"}]}], ")"}], "**", 
-     RowBox[{"inv", "[", 
-      RowBox[{"F", "+", 
-       RowBox[{"G", "*", "x"}]}], "]"}]}], "+", 
-    RowBox[{"tp", "[", " ", 
-     RowBox[{
-      RowBox[{"(", 
-       RowBox[{"A", "+", 
-        RowBox[{"B", "*", "x"}]}], ")"}], "**", 
-      RowBox[{"inv", "[", 
-       RowBox[{"F", "+", 
-        RowBox[{"G", "*", "x"}]}], "]"}]}], " ", "]"}]}], ",", 
-   RowBox[{"{", 
-    RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], "Input",
- FontSize->14],
-
-Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
-{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{3.516626985075303*^9, 3.572400612479084*^9, 
-  3.684026986369651*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"-", "2"}], " ", "B", " ", "G", " ", 
-       RowBox[{"inv", "[", 
-        RowBox[{"F", "+", 
-         RowBox[{"G", " ", 
-          RowBox[{"tp", "[", "x", "]"}]}]}], "]"}]}], ",", "0", ",", "0"}], 
-     "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"2", " ", "B", " ", "G", " ", 
-       RowBox[{"inv", "[", 
-        RowBox[{"F", "+", 
-         RowBox[{"G", " ", 
-          RowBox[{"tp", "[", "x", "]"}]}]}], "]"}]}], ",", "0", ",", "0"}], 
-     "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269850781813`*^9, 3.572400612480719*^9, 
-  3.684026986380623*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", 
-  RowBox[{
-   RowBox[{"A", " ", 
-    RowBox[{"x", "**", "x", "**", "x", "**", "x", "**", "x"}]}], ",", " ", 
-   RowBox[{"{", "x", "}"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.684028388547579*^9, 3.684028394138566*^9}},
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"NCSymmetricQ", "::", "SymmetricVariables"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The variable(s) \
-\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCConvexity`Private`h$1393451, x\\\\\\\
-\"\\\"}]\\)\[NoBreak] was(were) assumed symmetric\"\>"}]], "Message", "MSG",
- CellChangeTimes->{
-  3.6840269905522547`*^9, {3.68402838959735*^9, 3.684028396478743*^9}}],
-
-Cell[BoxData["\<\"L**D**tp[L] gave non-trivial blocks, so the output list is: \
-{ {diagonal},{subdiagonal},{-subdiagonal} }\"\>"], "Print",
- CellChangeTimes->{
-  3.5724006125262003`*^9, 3.684026990571336*^9, {3.684028389632834*^9, 
-   3.684028396519801*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"2", " ", "A", " ", "x"}], ",", 
-      RowBox[{
-       RowBox[{"-", "2"}], " ", "A", " ", 
-       RowBox[{"inv", "[", "x", "]"}]}], ",", "0", ",", "0"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "0", ",", 
-      RowBox[{"2", " ", "A"}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "0", ",", 
-      RowBox[{
-       RowBox[{"-", "2"}], " ", "A"}]}], "}"}]}], "}"}], "}"}]], "Output",
- CellChangeTimes->{
-  3.516626985394373*^9, 3.572400612527623*^9, 3.6840269905787573`*^9, {
-   3.6840283896410503`*^9, 3.6840283965282393`*^9}}]
-}, Open  ]],
-
-Cell["\<\
-In both of the above examples NCConvexityRegion had problems.  In the first \
-we get symmetry errors, although the poly is symmetric.  In the second we get \
-weird inverses.  So don't feed NCConvexityRegion commutative variables.\
-\>", "Text",
- FontSize->24],
-
-Cell[TextData[{
- StyleBox["(12)",
-  FontColor->RGBColor[1, 0, 0]],
- " Testing linear functions with NCConvexityRegion.  "
-}], "Text",
- FontSize->24],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"NCConvexityRegion", "[", 
-  RowBox[{
-   RowBox[{"1", "+", "x"}], ",", " ", 
-   RowBox[{"{", "x", "}"}]}], "]"}]], "Input",
- FontSize->14],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", "0", "}"}], "}"}]], "Output",
- CellChangeTimes->{3.5166269854396753`*^9, 3.572400612548253*^9, 
-  3.684027202858448*^9}]
-}, Open  ]],
-
-Cell["\<\
-A linear function is convex everywhere, but strictly convex nowhere.  This is \
-reflected in the output 0.\
-\>", "Text",
- FontSize->24]
+  3.684198021796739*^9, {3.684198080668374*^9, 3.68419809949259*^9}, 
+   3.6841981300796213`*^9, 3.684198477530156*^9, 3.6841997763917017`*^9, 
+   3.684199852009672*^9, 3.684199929676178*^9}]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1034, 748},
@@ -1678,155 +1565,149 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 175, 6, 130, "Title"],
+Cell[579, 22, 102, 1, 92, "Title"],
 Cell[CellGroupData[{
-Cell[779, 32, 337, 6, 63, "Input"],
+Cell[706, 27, 383, 6, 63, "Input"],
 Cell[CellGroupData[{
-Cell[1141, 42, 354, 6, 22, "Print"],
-Cell[1498, 50, 445, 9, 21, "Print"],
-Cell[1946, 61, 582, 12, 22, "Print"]
+Cell[1114, 37, 693, 10, 22, "Print"],
+Cell[1810, 49, 782, 13, 21, "Print"],
+Cell[2595, 64, 923, 16, 22, "Print"]
 }, Open  ]]
 }, Open  ]],
-Cell[2555, 77, 176, 6, 42, "Text"],
 Cell[CellGroupData[{
-Cell[2756, 87, 172, 5, 29, "Input"],
-Cell[2931, 94, 450, 10, 21, "Message"],
-Cell[3384, 106, 288, 6, 28, "Output"]
+Cell[3567, 86, 119, 2, 65, "Chapter"],
+Cell[CellGroupData[{
+Cell[3711, 92, 120, 2, 63, "Subchapter"],
+Cell[3834, 96, 280, 8, 31, "Text"],
+Cell[CellGroupData[{
+Cell[4139, 108, 157, 4, 28, "Input"],
+Cell[4299, 114, 785, 15, 21, "Message"],
+Cell[5087, 131, 409, 7, 28, "Output"]
 }, Open  ]],
-Cell[3687, 115, 160, 4, 73, "Text"],
-Cell[3850, 121, 139, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[4014, 130, 183, 5, 29, "Input"],
-Cell[4200, 137, 405, 10, 21, "Message"],
-Cell[4608, 149, 365, 10, 28, "Output"]
-}, Open  ]],
-Cell[4988, 162, 187, 4, 73, "Text"],
-Cell[5178, 168, 121, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[5324, 177, 248, 8, 29, "Input"],
-Cell[5575, 187, 430, 10, 21, "Message"],
-Cell[6008, 199, 232, 5, 28, "Output"]
-}, Open  ]],
-Cell[6255, 207, 172, 4, 73, "Text"],
-Cell[6430, 213, 117, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[6572, 222, 194, 5, 29, "Input"],
-Cell[6769, 229, 409, 10, 21, "Message"],
-Cell[7181, 241, 274, 3, 22, "Print"],
-Cell[7458, 246, 429, 12, 28, "Output"]
-}, Open  ]],
-Cell[7902, 261, 351, 6, 135, "Text"],
-Cell[8256, 269, 121, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[8402, 278, 292, 8, 29, "Input"],
-Cell[8697, 288, 440, 10, 21, "Message"],
-Cell[9140, 300, 274, 3, 22, "Print"],
-Cell[9417, 305, 544, 14, 28, "Output"]
-}, Open  ]],
-Cell[9976, 322, 370, 7, 135, "Text"],
-Cell[10349, 331, 114, 2, 55, "Text"],
-Cell[10466, 335, 165, 4, 73, "Text"],
-Cell[10634, 341, 122, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[10781, 350, 1054, 28, 138, "Input"],
-Cell[11838, 380, 372, 9, 28, "Output"],
-Cell[12213, 391, 376, 9, 21, "Message"],
-Cell[12592, 402, 9249, 189, 61, "Output"],
-Cell[21844, 593, 848, 24, 58, "Output"],
-Cell[22695, 619, 375, 9, 21, "Message"],
-Cell[23073, 630, 982, 28, 58, "Output"]
-}, Open  ]],
-Cell[24070, 661, 120, 4, 42, "Text"],
-Cell[24193, 667, 122, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[24340, 676, 1067, 28, 138, "Input"],
-Cell[25410, 706, 643, 15, 28, "Output"],
-Cell[26056, 723, 376, 9, 21, "Message"],
-Cell[26435, 734, 10269, 207, 61, "Output"],
-Cell[36707, 943, 1075, 30, 74, "Output"],
-Cell[37785, 975, 375, 9, 21, "Message"],
-Cell[38163, 986, 837, 23, 74, "Output"]
-}, Open  ]],
-Cell[39015, 1012, 191, 5, 73, "Text"],
-Cell[39209, 1019, 114, 2, 55, "Text"],
-Cell[39326, 1023, 955, 15, 352, "Text"],
-Cell[40284, 1040, 112, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[40421, 1049, 619, 18, 66, "Input"],
-Cell[41043, 1069, 374, 9, 21, "Message"],
-Cell[41420, 1080, 850, 24, 58, "Output"]
-}, Open  ]],
-Cell[42285, 1107, 102, 3, 42, "Text"],
-Cell[CellGroupData[{
-Cell[42412, 1114, 320, 8, 29, "Input"],
-Cell[42735, 1124, 397, 10, 24, "Message"],
-Cell[43135, 1136, 403, 10, 21, "Message"],
-Cell[43541, 1148, 334, 9, 28, "Output"]
+Cell[5511, 141, 145, 3, 30, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43912, 1162, 346, 9, 29, "Input"],
-Cell[44261, 1173, 376, 9, 24, "Message"],
-Cell[44640, 1184, 380, 9, 21, "Message"],
-Cell[45023, 1195, 314, 9, 28, "Output"]
-}, Open  ]],
-Cell[45352, 1207, 134, 4, 73, "Text"],
-Cell[45489, 1213, 112, 5, 42, "Text"],
+Cell[5693, 149, 121, 2, 63, "Subchapter"],
+Cell[5817, 153, 242, 8, 31, "Text"],
 Cell[CellGroupData[{
-Cell[45626, 1222, 588, 17, 66, "Input"],
-Cell[46217, 1241, 349, 8, 21, "Message"],
-Cell[46569, 1251, 1053, 30, 74, "Output"]
+Cell[6084, 165, 168, 4, 28, "Input"],
+Cell[6255, 171, 536, 11, 21, "Message"],
+Cell[6794, 184, 499, 11, 28, "Output"]
 }, Open  ]],
-Cell[47637, 1284, 103, 3, 42, "Text"],
-Cell[CellGroupData[{
-Cell[47765, 1291, 357, 9, 29, "Input"],
-Cell[48125, 1302, 374, 9, 24, "Message"],
-Cell[48502, 1313, 380, 9, 21, "Message"],
-Cell[48885, 1324, 254, 3, 22, "Print"],
-Cell[49142, 1329, 405, 12, 28, "Output"]
+Cell[7308, 198, 320, 8, 31, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[49584, 1346, 358, 9, 29, "Input"],
-Cell[49945, 1357, 374, 9, 24, "Message"],
-Cell[50322, 1368, 377, 8, 21, "Message"],
-Cell[50702, 1378, 250, 3, 22, "Print"],
-Cell[50955, 1383, 405, 12, 28, "Output"]
-}, Open  ]],
-Cell[51375, 1398, 247, 5, 104, "Text"],
-Cell[51625, 1405, 70, 2, 96, "Text"],
-Cell[51698, 1409, 84, 1, 42, "Text"],
-Cell[51785, 1412, 151, 5, 42, "Text"],
+Cell[7665, 211, 219, 5, 63, "Subchapter"],
+Cell[7887, 218, 211, 8, 32, "Text"],
 Cell[CellGroupData[{
-Cell[51961, 1421, 207, 7, 29, "Input"],
-Cell[52171, 1430, 366, 8, 21, "Message"],
-Cell[52540, 1440, 253, 5, 28, "Output"]
+Cell[8123, 230, 233, 7, 28, "Input"],
+Cell[8359, 239, 516, 11, 21, "Message"],
+Cell[8878, 252, 349, 6, 28, "Output"]
 }, Open  ]],
-Cell[52808, 1448, 254, 5, 104, "Text"],
-Cell[CellGroupData[{
-Cell[53087, 1457, 243, 8, 29, "Input"],
-Cell[53333, 1467, 387, 9, 21, "Message"],
-Cell[53723, 1478, 227, 3, 22, "Print"],
-Cell[53953, 1483, 318, 10, 28, "Output"]
-}, Open  ]],
-Cell[54286, 1496, 87, 1, 42, "Text"],
-Cell[54376, 1499, 154, 5, 42, "Text"],
-Cell[CellGroupData[{
-Cell[54555, 1508, 754, 25, 48, "Input"],
-Cell[55312, 1535, 228, 3, 22, "Print"],
-Cell[55543, 1540, 782, 24, 28, "Output"]
+Cell[9242, 261, 298, 9, 32, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[56362, 1569, 286, 7, 29, "Input"],
-Cell[56651, 1578, 405, 9, 21, "Message"],
-Cell[57059, 1589, 258, 4, 22, "Print"],
-Cell[57320, 1595, 654, 19, 28, "Output"]
-}, Open  ]],
-Cell[57989, 1617, 268, 5, 104, "Text"],
-Cell[58260, 1624, 148, 5, 42, "Text"],
+Cell[9577, 275, 174, 3, 63, "Subchapter"],
+Cell[9754, 280, 162, 6, 32, "Text"],
 Cell[CellGroupData[{
-Cell[58433, 1633, 161, 5, 29, "Input"],
-Cell[58597, 1640, 164, 4, 28, "Output"]
+Cell[9941, 290, 179, 4, 28, "Input"],
+Cell[10123, 296, 491, 10, 21, "Message"],
+Cell[10617, 308, 487, 12, 28, "Output"]
 }, Open  ]],
-Cell[58776, 1647, 145, 4, 73, "Text"]
+Cell[11119, 323, 460, 9, 70, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11616, 337, 269, 6, 63, "Subchapter"],
+Cell[11888, 345, 212, 8, 32, "Text"],
+Cell[CellGroupData[{
+Cell[12125, 357, 277, 7, 28, "Input"],
+Cell[12405, 366, 490, 10, 21, "Message"],
+Cell[12898, 378, 658, 18, 28, "Output"]
+}, Open  ]],
+Cell[13571, 399, 441, 10, 51, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14061, 415, 96, 1, 65, "Chapter"],
+Cell[14160, 418, 141, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[14326, 423, 192, 6, 28, "Input"],
+Cell[14521, 431, 486, 10, 21, "Message"],
+Cell[15010, 443, 383, 7, 28, "Output"]
+}, Open  ]],
+Cell[15408, 453, 126, 1, 30, "Text"],
+Cell[15537, 456, 190, 2, 30, "Text"],
+Cell[CellGroupData[{
+Cell[15752, 462, 146, 4, 28, "Input"],
+Cell[15901, 468, 398, 9, 21, "Message"],
+Cell[16302, 479, 189, 4, 28, "Output"]
+}, Open  ]],
+Cell[16506, 486, 180, 4, 30, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16723, 495, 143, 2, 65, "Chapter"],
+Cell[16869, 499, 397, 10, 50, "Text"],
+Cell[17269, 511, 200, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[17494, 519, 219, 6, 28, "Input"],
+Cell[17716, 527, 424, 11, 28, "Output"]
+}, Open  ]],
+Cell[18155, 541, 244, 4, 49, "Text"],
+Cell[CellGroupData[{
+Cell[18424, 549, 279, 7, 28, "Input"],
+Cell[18706, 558, 473, 10, 21, "Message"],
+Cell[19182, 570, 9302, 190, 61, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28521, 765, 196, 3, 63, "Input"],
+Cell[28720, 770, 545, 15, 47, "Output"],
+Cell[29268, 787, 871, 25, 58, "Output"],
+Cell[30142, 814, 546, 15, 47, "Output"]
+}, Open  ]],
+Cell[30703, 832, 177, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[30905, 840, 773, 18, 97, "Input"],
+Cell[31681, 860, 547, 12, 21, "Message"],
+Cell[32231, 874, 1054, 27, 58, "Output"],
+Cell[33288, 903, 1152, 31, 58, "Output"],
+Cell[34443, 936, 1054, 27, 58, "Output"]
+}, Open  ]],
+Cell[35512, 966, 159, 3, 30, "Text"],
+Cell[CellGroupData[{
+Cell[35696, 973, 244, 6, 28, "Input"],
+Cell[35943, 981, 502, 16, 28, "Output"]
+}, Open  ]],
+Cell[36460, 1000, 198, 7, 31, "Text"],
+Cell[CellGroupData[{
+Cell[36683, 1011, 296, 7, 28, "Input"],
+Cell[36982, 1020, 694, 16, 28, "Output"]
+}, Open  ]],
+Cell[37691, 1039, 244, 4, 49, "Text"],
+Cell[CellGroupData[{
+Cell[37960, 1047, 279, 7, 28, "Input"],
+Cell[38242, 1056, 497, 10, 21, "Message"],
+Cell[38742, 1068, 10348, 208, 61, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49127, 1281, 196, 3, 63, "Input"],
+Cell[49326, 1286, 700, 18, 64, "Output"],
+Cell[50029, 1306, 1124, 31, 74, "Output"],
+Cell[51156, 1339, 698, 18, 64, "Output"]
+}, Open  ]],
+Cell[51869, 1360, 177, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[52071, 1368, 773, 18, 97, "Input"],
+Cell[52847, 1388, 573, 12, 21, "Message"],
+Cell[53423, 1402, 1075, 28, 74, "Output"],
+Cell[54501, 1432, 1039, 27, 74, "Output"],
+Cell[55543, 1461, 1075, 28, 74, "Output"]
+}, Open  ]],
+Cell[56633, 1492, 159, 3, 30, "Text"],
+Cell[CellGroupData[{
+Cell[56817, 1499, 267, 6, 28, "Input"],
+Cell[57087, 1507, 1021, 29, 47, "Output"]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]]
 }
 ]

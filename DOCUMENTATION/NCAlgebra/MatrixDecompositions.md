@@ -15,6 +15,7 @@ Members are:
 * Utilities
     * [GetLUMatrices](#GetLUMatrices)
     * [GetLDUMatrices](#GetLDUMatrices)
+    * [GetDiagonal](#GetDiagonal)
     * [LUPartialPivoting](#LUPartialPivoting)
     * [LUCompletePivoting](#LUCompletePivoting)
     * [LUNoPartialPivoting](#LUNoPartialPivoting)
@@ -166,6 +167,31 @@ For example:
     {l,d,u} = GetLDUMatrices[ldl,s];
 
 returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d`.
+
+See also:
+[LDLDecomposition](#LDLDecomposition).
+
+## GetDiagonal {#GetDiagonal}
+
+`GetDiagonal[m]` extracts the diagonal entries of matrix `m`.
+
+`GetDiagonal[m, s]` extracts the block-diagonal entries of matrix `m` with block size `s`.
+
+For example:
+
+    d = GetDiagonal[{{1,-1,0},{-1,2,0},{0,0,3}}];
+
+returns
+
+    d = {1,2,3}
+
+and
+	
+    d = GetDiagonal[{{1,-1,0},{-1,2,0},{0,0,3}}, {2,1}];
+
+returns
+
+    d = {{{1,-1},{-1,2}},3}
 
 See also:
 [LDLDecomposition](#LDLDecomposition).

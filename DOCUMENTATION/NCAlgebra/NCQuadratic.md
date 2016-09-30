@@ -53,6 +53,26 @@ See also:
 
 Internally it uses [NCQuadratic](#NCQuadratic) and [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).
 
+It returns a list of three elements:
+
+- the first is the left border row vector;
+- the second is the middle matrix;
+- the third is the right border column vector.
+
+For example:
+
+	expr = x**y**x + z**x**x**z;
+    {left,middle,right}=NCMatrixOfQuadratics[expr, {x}];
+	
+returns:
+
+    left={x, z**x}
+	middle=SparseArray[{{y,0},{0,1}}]
+	right={x,x**z}
+
+The answer from `NCMatrixOfQuadratics` always satisfies `p =
+MatMult[left,middle,right]`.
+
 See also:
 [NCQuadratic](#NCQuadratic), [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).
 
