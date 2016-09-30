@@ -7,6 +7,7 @@ Members are:
 * [NCDirectionalD](#NCDirectionalD)
 * [NCGrad](#NCGrad)
 * [NCHessian](#NCHessian)
+* [NCIntegrate](#NCIntegrate)
 
 Members being deprecated:
 
@@ -112,4 +113,19 @@ See also:
 **DEPRECATION NOTICE**: This syntax is limited to one variable and is being deprecated in favor of the more general syntax in [NCDirectionalD](#NCDirectionalD).
 
 See also:
-[NCDirectionalD](#DirectionalD)
+[NCDirectionalD](#DirectionalD).
+
+## NCIntegrate {#NCIntegrate}
+
+`NCIntegrate[expr,{var1,h1},...]` attempts to calculate the nc antiderivative of nc expression `expr` with respect to the single variable `var` in direction `h`.
+
+For example:
+
+    NCIntegrate[x**h+h**x, {x,h}]
+
+returns
+
+    x**x
+
+See also:
+[NCDirectionalD](#DirectionalD).

@@ -19,9 +19,12 @@
 
 BeginPackage[ "NCDiff`", 
               "NCPolynomial`",
+	      "NCUtil`",
               "NonCommutativeMultiply`"];
 
-Clear[NCDirectionalD, DirectionalD, NCGrad, NCHessian];
+Clear[NCDirectionalD, DirectionalD, NCGrad, NCHessian, NCIntegrate];
+
+NCIntegrate::NotIntegrable = "Expression `1` is not integrable";
 
 Get["NCDiff.usage"];
 
@@ -108,7 +111,132 @@ Begin["`Private`"];
     Return[If [n > 1, grad, Part[grad, 1]] ];
       
   ];
-      
+
+  (* NCIntegrate *)
+  
+  NCIntegrate[poly_, xhs__] := Module[
+     {vars, directions, polyRule,
+      antiderivative, remainder, rule,
+      monomials, firstmon, symbols, dir,
+      isRat, intMon, intMonD,
+      nbrOfTerms, nbrOfDTerms,
+      ratRule,ratPattern,x,h,
+      a,b,c,A,B},
+
+     vars = {xhs};
+     directions = vars[[All, 2]];
+     vars = vars[[All, 1]];
+
+     polyRule = Thread[directions -> vars];
+   
+     (* Rational rules *)
+     SetNonCommutative[a,b,c,x];
+     SetCommutative[A,B];
+     ratPattern[h_] := (A_:1) * left___ ** inv[a_] ** b___ ** (h|tp[h]) ** c___ ** inv[a_] ** right___;
+     ratRule[x_, h_] := {
+         (A_:1) * left___ ** inv[(a_:0) + (B_:1) x] ** h ** inv[(a_:0) + (B_:1) x] ** right___ :> -A/B left ** inv[a + B x] ** right,
+         (A_:1) * left___ ** inv[(a_:0) + (B_:1) tp[x]] ** tp[h] ** inv[(a_:0) + (B_:1) tp[x]] ** right___ :> -A/B left ** inv[a + B tp[x]] ** right,
+         (A_:1) * left___ ** inv[(a_:0) + (B_:1) b___ ** x ** c___] ** b___ ** h ** c___ ** inv[(a_:0) + (B_:1) b___ ** x ** c___] ** right___ :> -A/B left ** inv[a + B b ** x ** c] ** right,
+         (A_:1) * left___ ** inv[(a_:0) + (B_:1) b___ ** tp[x] ** c___] ** b___ ** tp[h] ** c___ ** inv[(a_:0) + (B_:1) b___ ** tp[x] ** c___] ** right___ :> -A/B left ** inv[a + B b ** tp[x] ** c] ** right
+     };
+  
+     (* TODO: CHECK LINEARITY OF poly *)
+   
+     remainder = NCExpand[poly];
+     monomials = MonomialList[remainder];
+     antiderivative = 0;
+
+     (*
+     Print["*** NCIntegrate ***"];
+     Print["poly = ", poly];
+     Print["vars = ", vars];
+     Print["directions = ",directions];
+     Print["remainder = ", remainder]; 
+     Print["monomials = ", monomials];
+     Print["antiderivative = ", antiderivative]; 
+     Print["polyRule = ", polyRule];
+     *)
+   
+     While[ !PossibleZeroQ[remainder],
+
+	 (* Current number of terms *)    
+	 nbrOfTerms = Length[monomials];
+
+         (* Get first monomial *)
+	 firstmon = First[monomials];
+
+         (* Grab symbols in the first monomial *)
+         symbols = NCGrabSymbols[firstmon];
+
+	 (* Picks out the direction variable in the first monomial *)
+         dir = Intersection[symbols, directions];
+	 If[ Length[dir] != 1, 
+             Message[NCIntegrate::NotIntegrable, poly];
+             Return[$Failed];
+	 ];
+	 dir = First[dir];
+
+	 (* Is rational *)
+	 isRat = False;
+	 rule = If[ MatchQ[firstmon, ratPattern[dir]],
+	     (* rational *)
+	     (* Print["### Possibly rational derivative ###"]; *)
+	     isRat = True;
+	     dirVar = vars[[First[Flatten[Position[directions, dir]]]]];
+             ratRule[dirVar, dir]
+	    ,
+	     (* polynomial *)
+             polyRule
+	 ];
+
+	 (* Integrate (polynomial) *)
+	 intmon = firstmon /. rule;
+
+	 (* Calculate the derivative *)
+         intmonD = NCExpand[NCDirectionalD[intmon, xhs]];
+	 nbrOfDTerms = Length[MonomialList[intmonD]];
+
+	 (* update the polynomial by subtracting off the directional
+            derivative of the integrated monomial *)
+
+	 remainder = NCExpand[remainder - intmonD];
+	 monomials = MonomialList[remainder];
+
+         (*
+	 Print["rule = ", rule];
+         Print["nbrOfTerms = ", nbrOfTerms]; 
+         Print["firstmon = ", firstmon]; 
+         Print["symbols = ", symbols]; 
+         Print["dir = ", dir];
+         Print["intmon = ", intmon]; 
+         Print["intmonD = ", intmonD]; 
+         Print["nbrOfDTerms = ", nbrOfDTerms]; 
+         Print["remainder = ", remainder]; 
+         Print["monomials = ", monomials]; 
+         *)
+    
+	 (* Checks to see if the number of terms decreases by the
+            "right amount" upon subtracting the derivative *)
+	 If[ !PossibleZeroQ[remainder] &&
+             Length[monomials] != nbrOfTerms - nbrOfDTerms
+            ,
+             Message[NCIntegrate::NotIntegrable, poly];
+             Return[$Failed];
+	  ];
+
+	  antiderivative += intmon;
+
+    ];
+
+    (*
+    Print["antiderivative = ", antiderivative];
+    Print["remainder = ", remainder];
+    *)
+
+    Return[antiderivative];
+   
+];
+  
 End[];
 
 EndPackage[];

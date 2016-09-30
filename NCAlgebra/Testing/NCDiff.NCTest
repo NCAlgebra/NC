@@ -5,13 +5,11 @@
 << NCDiff`
 
 Module[ 
-   {k,test,answer,exp,A,B,F,G,a,b,c,d,e,f,g,x,y,h,s},
-
-   k = 1;
-   test = "Diff";
+   {test,answer,exp,result,vars,A,B,F,G,a,b,c,d,e,f,g,
+    x,w,y,h,s,k,z},
 
    SetCommutative[A,B,F,G];
-   SetNonCommutative[a,b,c,d,e,f,g,x,y,h,s];
+   SetNonCommutative[a,b,c,d,e,f,g,x,w,y,h,s,k,z];
 
    exp = 1;
    answer = 0;
@@ -326,6 +324,284 @@ Module[
    answer += tp[answer];
    NCTest[NCHessian[exp, {x, h}], answer];
 
+   (* NCIntegrate *)
+
+   expr = tp[x] ** tp[h] + tp[h] ** tp[x];
+   vars = {x, h};
+   answer = tp[x] ** tp[x];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = tp[h] ** tp[x] + tp[x] ** tp[h];
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = tp[x] ** tp[x];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = h ** k;
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = x ** y + y ** x ** z;
+   vars = {x, w};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = -tp[y] ** tp[h] - tp[k] ** tp[x];
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = -tp[y] ** tp[x];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = h ** y + x ** k;
+   vars = {x, h};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = h ** x ** y + x ** h ** y;
+   vars = {x, h};
+   answer = x ** x ** y;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = h ** y + x ** k;
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = x ** y;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = h ** x ** y + x ** h ** y;
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = y ** h + 3 k ** x;
+   vars = Sequence @@ {{x, h}, {y, k}, {z, w}};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = 1/3 x ** h + 1/3 h ** x;
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = x ** x/3;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = 0.22 x ** h + 0.22 h ** x;
+   vars = {x, h};
+   answer = 0.22 x ** x;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = 2 y ** h + k ** x;
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = 2 x ** h +  h ** x;
+   vars = Sequence @@ {{x, h}};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = h ** y ** x ** y + x ** k ** x ** y + x ** y ** h ** y + x ** y ** x ** k;
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = x ** y ** x ** y;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = A h ** x + A x ** h;
+   vars = {x, h};
+   answer = A x ** x;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = a ** h ** x + a ** x ** h;
+   vars = {x, h};
+   answer = a ** x ** x;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   expr = x ** h ** y;
+   vars = {x, h};
+   answer = $Failed;
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   (* rationals *)
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[x];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[2 x];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + 2 x];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + A x];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[x ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + x + x ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + 2 x + x ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + x + 2 x ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + y ** x + x ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + A y ** x + B x ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   (* tp's *)
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[tp[x]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[2 tp[x]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + 2 tp[x]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + A tp[x]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[tp[x] ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + tp[x] + tp[x] ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + 2 tp[x] + tp[x] ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + tp[x] + 2 tp[x] ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + tp[y] ** tp[x] + tp[x] ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + A tp[y ** x] + B tp[x ** y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   (* mixed tp's *)
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[tp[x] ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + tp[x] + x ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + 2 x + tp[x] ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + tp[x] + 2 tp[x] ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + y ** tp[x] + x ** tp[y]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + A tp[y ** x] + B x ** y];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
+
+   (* inv of inv *)
+
+   vars = Sequence @@ {{x, h}, {y, k}};
+   answer = inv[1 + inv[1 + x]];
+   expr = NCDirectionalD[answer, vars];
+   result = NCIntegrate[expr, vars];
+   NCTest[result, answer];
 
 ];
-

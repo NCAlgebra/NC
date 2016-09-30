@@ -90,6 +90,7 @@
 <li><a href="#NCGrad"><span class="toc-section-number">9.2</span> NCGrad</a></li>
 <li><a href="#NCHessian"><span class="toc-section-number">9.3</span> NCHessian</a></li>
 <li><a href="#DirectionalD"><span class="toc-section-number">9.4</span> DirectionalD</a></li>
+<li><a href="#NCIntegrate"><span class="toc-section-number">9.5</span> NCIntegrate</a></li>
 </ul></li>
 <li><a href="#PackageNCReplace"><span class="toc-section-number">10</span> NCReplace</a><ul>
 <li><a href="#NCReplace"><span class="toc-section-number">10.1</span> NCReplace</a></li>
@@ -685,6 +686,7 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <li><a href="#NCDirectionalD">NCDirectionalD</a></li>
 <li><a href="#NCGrad">NCGrad</a></li>
 <li><a href="#NCHessian">NCHessian</a></li>
+<li><a href="#NCIntegrate">NCIntegrate</a></li>
 </ul>
 <p>Members being deprecated:</p>
 <ul>
@@ -735,7 +737,14 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <h2 id="DirectionalD"><span class="header-section-number">9.4</span> DirectionalD</h2>
 <p><code>DirectionalD[expr,var,h]</code> takes the directional derivative of nc expression <code>expr</code> with respect to the single variable <code>var</code> in direction <code>h</code>.</p>
 <p><strong>DEPRECATION NOTICE</strong>: This syntax is limited to one variable and is being deprecated in favor of the more general syntax in <a href="#NCDirectionalD">NCDirectionalD</a>.</p>
-<p>See also: <a href="#DirectionalD">NCDirectionalD</a></p>
+<p>See also: <a href="#DirectionalD">NCDirectionalD</a>.</p>
+<h2 id="NCIntegrate"><span class="header-section-number">9.5</span> NCIntegrate</h2>
+<p><code>NCIntegrate[expr,{var1,h1},...]</code> attempts to calculate the nc antiderivative of nc expression <code>expr</code> with respect to the single variable <code>var</code> in direction <code>h</code>.</p>
+<p>For example:</p>
+<pre><code>NCIntegrate[x**h+h**x, {x,h}]</code></pre>
+<p>returns</p>
+<pre><code>x**x</code></pre>
+<p>See also: <a href="#DirectionalD">NCDirectionalD</a>.</p>
 <h1 id="PackageNCReplace"><span class="header-section-number">10</span> NCReplace</h1>
 <p><strong>NCReplace</strong> is a package containing several functions that are useful in making replacements in noncommutative expressions. It offers replacements to Mathematica's <code>Replace</code>, <code>ReplaceAll</code>, <code>ReplaceRepeated</code>, and <code>ReplaceList</code> functions.</p>
 <p>Commands in this package replace the old <code>Substitute</code> and <code>Transform</code> family of command which are been deprecated. The new commands are much more reliable and work faster than the old commands. From the beginning, substitution was always problematic and certain patterns would be missed. We reassure that the call expression that are returned are mathematically correct but some opportunities for substitution may have been missed.</p>
