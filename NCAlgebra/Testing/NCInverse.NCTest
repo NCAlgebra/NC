@@ -1,70 +1,57 @@
-(* History:  06/26/01:  NCInverse tests (jeff)   *)
-
 Module[
-  {k, a, b, c, d, x, y, mat, invmat, answer}, 
-
-  k = 1;
+  {a, b, c, d, x, y, mat, invmat, answer}, 
 
   SetNonCommutative[a, b, c, d, x, y];
 
-  NCTest[CommutativeQ[inv], False, "NCInverse", k++];
+  NCTest[CommutativeQ[inv], False];
 
-  NCTest[inv[a ** b], Unevaluated[inv[a ** b]], "NCInverse", k++];
-  NCTest[inv[a] ** inv[b], Unevaluated[inv[a] ** inv[b]], "NCInverse", k++];
+  NCTest[inv[a ** b], Unevaluated[inv[a ** b]]];
+  NCTest[inv[a] ** inv[b], Unevaluated[inv[a] ** inv[b]]];
 
-  NCTest[inv[a] ** a, 1, "NCInverse", k++];
-  NCTest[b ** inv[a] ** a, b, "NCInverse", k++];
-  NCTest[inv[a] ** a ** c, c, "NCInverse", k++];
-  NCTest[b ** inv[a] ** a ** c, b ** c, "NCInverse", k++];
+  NCTest[inv[a] ** a, 1];
+  NCTest[b ** inv[a] ** a, b];
+  NCTest[inv[a] ** a ** c, c];
+  NCTest[b ** inv[a] ** a ** c, b ** c];
 
-  NCTest[inv[a ** b] ** a ** b, 1, "NCInverse", k++];
-  NCTest[b ** inv[a ** b] ** a ** b, b, "NCInverse", k++];
-  NCTest[inv[a ** b] ** a ** b ** c, c, "NCInverse", k++];
-  NCTest[b ** inv[a ** b] ** a ** b ** c, b ** c, "NCInverse", k++];
+  NCTest[inv[a ** b] ** a ** b, 1];
+  NCTest[b ** inv[a ** b] ** a ** b, b];
+  NCTest[inv[a ** b] ** a ** b ** c, c];
+  NCTest[b ** inv[a ** b] ** a ** b ** c, b ** c];
 
-  NCTest[inv[f[a]] ** f[a], 1, "NCInverse", k++];
-  NCTest[b ** inv[f[a]] ** f[a], b, "NCInverse", k++];
-  NCTest[inv[f[a]] ** f[a] ** c, c, "NCInverse", k++];
-  NCTest[b ** inv[f[a]] ** f[a] ** c, b ** c, "NCInverse", k++];
+  NCTest[inv[f[a]] ** f[a], 1];
+  NCTest[b ** inv[f[a]] ** f[a], b];
+  NCTest[inv[f[a]] ** f[a] ** c, c];
+  NCTest[b ** inv[f[a]] ** f[a] ** c, b ** c];
 
-  NCTest[inv[inv[a]], a, "NCInverse", k++];
+  NCTest[inv[inv[a]], a];
 
-  NCTest[inv[a * b], inv[a] * inv[b], "NCInverse", k++];
+  NCTest[inv[a * b], inv[a] * inv[b]];
 
-  NCTest[NCInverse[{{0,1},{1,0}}], {{0,1},{1,0}}, "NCInverse", k++];
+  NCTest[NCInverse[{{0,1},{1,0}}], {{0,1},{1,0}}];
 
   mat = {{a,b},{c,d}};
   invmat = NCInverse[mat];
-  answer = {{inv[a]+inv[a]**b**inv[d-c**inv[a]**b]**c**inv[a], 
+  answer = {{inv[a]**(1+b**inv[d-c**inv[a]**b]**c**inv[a]), 
               -inv[a]**b **inv[d-c**inv[a]**b]},
             {-inv[d-c**inv[a]**b]**c**inv[a], inv[d-c**inv[a]**b]}};
-  NCTest[invmat, answer, "NCInverse", k++];
+  NCTest[invmat, answer];
 
   NCTest[NCSimplifyRational[NCInverse[NCInverse[{{a,b},{0,d}}]]],
-         {{a,b},{0,d}}, "NCInverse", k++];
+         {{a,b},{0,d}}];
 
   NCTest[NCSimplifyRational[MatMult[invmat,mat]],
-         {{1,0},{0,1}}, "NCInverse", k++];
+         {{1,0},{0,1}}];
 
   mat = {{a,0},{c,d}};
   invmat = NCInverse[mat];
   answer = {{inv[a], 0},
             {-inv[d]**c**inv[a], inv[d]}};
-  NCTest[invmat, answer, "NCInverse", k++];
+  NCTest[invmat, answer];
 
-  (* Tests 4, 5 and 6 demonstrate that either NCInverse or NCSimplifyRational 
-     sometimes have difficulty doing their jobs*)
-  (*
   mat = {{tp[x], 0, 3}, {y, inv[y], 1}, {2, x ** y, 0}};
   invmat = NCInverse[mat];
 
-  Print[mat];
-  Print[invmat];
-
   NCTest[NCSimplifyRational[MatMult[mat, invmat]], 
-         {{1,0,0},{0,1,0},{0,0,1}}, "NCInverse", k++];
-  NCTest[NCSimplifyRational[MatMult[mat, invmat]], 
-         {{1,0,0},{0,1,0},{0,0,1}}, "NCInverse", k++];
-  *)
+         {{1,0,0},{0,1,0},{0,0,1}}];
 
 ];  

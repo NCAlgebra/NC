@@ -1,7 +1,7 @@
 << NCMatrixDecompositions`
 
 Module[
-  {k,a,b,c,d,e,f,lu,p,q,rank,l1,u1,mat,mati,x,y,A,B,rule,dd},
+  {k,a,b,c,d,e,f,lu,p,q,rank,l1,u1,mat,mati,x,y,A,B,rule,dd,test},
 
   k = 1;
 
@@ -276,22 +276,57 @@ Module[
   mat = {{a,b},{0,d}};
   mati = NCLUInverse[mat];
   NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
-  (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
   mat = {{a,0},{c,d}};
   mati = NCLUInverse[mat];
   NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
-  (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
   mat = {{a,b},{c,d}};
   mati = NCLUInverse[mat];
   NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[2], "NCMatrixDecompositions", k++];
-  (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
 
   mat = {{a,b,0},{0,c,d},{0,e,f}};
   mati = NCLUInverse[mat];
   NCTest[NCSimplifyRational[MatMult[Normal[mati],mat]], IdentityMatrix[3], "NCMatrixDecompositions", k++];
-  (* Print["mat ** inv[mat] = ", NCSimplifyRational[MatMult[Normal[mati], mat]]]; *)
+
+  Quiet [
+
+    mat = {{0}};
+    test = False;
+    Check [
+      NCLUInverse[mat];
+     ,
+      test = True;
+     ,
+      MatrixDecompositions::Singular
+    ];
+    NCTest[test, True];
+
+    mat = {{0,1},{0,0}};
+    test = False;
+    Check [
+      NCLUInverse[mat];
+     ,
+      test = True;
+     ,
+      MatrixDecompositions::Singular
+    ];
+    NCTest[test, True];
+
+    mat = {{1,1}};
+    test = False;
+    Check [
+      NCLUInverse[mat];
+     ,
+      test = True;
+     ,
+      MatrixDecompositions::Square
+    ];
+    NCTest[test, True];
+
+   ,
+    {MatrixDecompositions::Singular, MatrixDecompositions::Square}
+  ];
 
   Quiet[
 

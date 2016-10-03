@@ -25,6 +25,7 @@ Clear[NCLUDecompositionWithPartialPivoting,
       NCUpperTriangularSolve,
       NCLowerTriangularSolve,
       NCLUInverse,
+      NCInverse,
       NCLUPartialPivoting,
       NCLUCompletePivoting,
       NCLeftDivide,
@@ -55,6 +56,9 @@ Options[NCLDLDecomposition] = {
 };
 
 Begin[ "`Private`" ]
+
+  (* NCInverse *)
+  NCInverse = NCLUInverse;
 
   (* NC Divide *)
   NCRightDivide[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];

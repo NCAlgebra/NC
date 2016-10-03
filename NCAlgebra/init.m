@@ -20,6 +20,7 @@ If [ !ValueQ[$NC$Algebra$Loaded],
 << NCDiff`
 << NCReplace`
 << NCMatMult`
+<< NCMatrixDecompositions`
 << NCSimplifyRational`
 << NCOutput`
 << NCAlias`

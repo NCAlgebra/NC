@@ -165,7 +165,10 @@ Begin[ "`Private`" ]
       
      U = u;
      {m,n} = Dimensions[U];
-     If[m != n, Message[MatrixDecompositions::Square]; Return[]];
+     If[m != n, 
+        Message[MatrixDecompositions::Square]; 
+        Return[X];
+     ];
       
      (* Initialize solution *)
      X = b;
@@ -184,6 +187,7 @@ Begin[ "`Private`" ]
        (* If zero diagonal, singular *)
        If[ zeroTest[U[[j,j]]],
 	 Message[MatrixDecompositions::Singular];
+         Return[X];
        ];
 
        (* Print["X- = ", Normal[X]]; *)
@@ -200,6 +204,7 @@ Begin[ "`Private`" ]
     (* If zero diagonal, singular *)
     If[ zeroTest[U[[1,1]]],
       Message[MatrixDecompositions::Singular];
+      Return[X];
     ];
 
     X[[1]] = leftDivide[ U[[1,1]], X[[1]] ];
@@ -235,7 +240,10 @@ Begin[ "`Private`" ]
 
      L = l;
      {m,n} = Dimensions[L];
-     If[m != n, Message[MatrixDecompositions::Square]; Return[]];
+     If[m != n, 
+        Message[MatrixDecompositions::Square]; 
+        Return[X];
+     ];
 
      (* Initialize solution *)
      X = b;
@@ -254,6 +262,7 @@ Begin[ "`Private`" ]
        (* If zero diagonal, singular *)
        If[ zeroTest[L[[j,j]]],
 	 Message[MatrixDecompositions::Singular];
+         Return[X];
        ];
 
        (* Print["X- = ", Normal[X]]; *)
@@ -270,6 +279,7 @@ Begin[ "`Private`" ]
     (* If zero diagonal, singular *)
     If[ zeroTest[L[[m,m]]],
       Message[MatrixDecompositions::Singular];
+      Return[X];
     ];
 
     X[[m]] = leftDivide[ L[[m,m]], X[[m]] ];
