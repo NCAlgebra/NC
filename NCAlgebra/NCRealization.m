@@ -146,7 +146,6 @@ Begin["`Private`"]
     MatMultFromLeft = MatMult;
 
 
-
     (********** NCDescriptorRealization **********)
 
     NCDescriptorRealization[expression_, unknowns_] := 
@@ -479,7 +478,6 @@ Begin["`Private`"]
           If[Verbose /. {opts} /. Options[NCRealization],
             Print["While NeedToCheck, WordLength = ", WordLength]];
 
-
           CandidateColumnWords = 
             Flatten[Outer[Prepend[#2, #1] &, Letters, 
                 Select[ListOfColumnWords, Length[#] == WordLength - 1 &], 1], 1];
@@ -511,7 +509,7 @@ Begin["`Private`"]
             ];(* For *)
           ];(* While *)
 
-        If[ReturnWordList /. {opts} /. Options[NCFormControllabilityColumns],
+       If[ReturnWordList /. {opts} /. Options[NCFormControllabilityColumns],
           {RowReducedTransposeOfControllabilityMatrix, ListOfColumnWords}, 
           RowReducedTransposeOfControllabilityMatrix]
 
@@ -524,30 +522,39 @@ Begin["`Private`"]
     NCMinimalDescriptorRealization[rat_, unknowns_, opts___] := 
         Module[{C, Pencil, B, ReduceUsingControllability, Gm, Cm, Bm},
 
-
           If[Verbose /. {opts} /. Options[NCRealization],
             Print["Finding some descriptor realization"]];
+
           {C, Pencil, B} = NCDescriptorRealization[rat, unknowns];
+
           (* Note : C, B column vectors *)
 
           ReduceUsingControllability[C_, G_, B_] := 
             Module[{A2, B2, ControllabilityColumns, MinimalSize, Q, Qinv, A0, 
                 MultByUnknown, ListOfColumnWords},
 
+              Print["G = ", G // MatrixForm];
+              Print["B = ", B // MatrixForm];
+
               {A2, B2} = 
                 NCFormLettersFromPencil[NCPencilToList[G, unknowns], B, opts];
 
-
+              Print["A2 = ", A2 // MatrixForm];
+              Print["B2 = ", B2 // MatrixForm];
+                   
               ControllabilityColumns = 
                 NCFormControllabilityColumns[A2, B2, opts];
               MinimalSize = Length[ControllabilityColumns];
 
-              (*Print[ControllabilityColumns // MatrixForm];*)
-
+              Print["ControllabilityColumns = ", 
+                     ControllabilityColumns // MatrixForm];
 
               Q = Transpose[
                   Join[ControllabilityColumns, 
                     NullSpace[ControllabilityColumns]]];
+                   
+              Print["Q = ", Q];
+                   
               Qinv = Inverse[Q];
 
               A0 = IdentityMatrix[ MinimalSize ];

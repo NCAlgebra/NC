@@ -1,0 +1,80 @@
+(* :Title: 	Diff.NCTest *)
+
+(* :Author: 	mauricio *)
+
+<< NCSystem`
+
+Module[ 
+   {answer,expr,
+    sys,sys1,sys2,
+    a,b,c,d,
+    a1,b1,c1,d1,
+    a2,b2,c2,d2,
+    AA,BB,CC,DD,S},
+
+   SetCommutative[AA,BB,CC,DD,S];
+   SetNonCommutative[a,b,c,d];
+   SetNonCommutative[a1,b1,c1,d1];
+   SetNonCommutative[a2,b2,c2,d2];
+
+   expr = System[{{AA}},{{BB}},{{CC}},{{DD}}];
+   answer = NCSystem[{{AA}},{{BB}},{{CC}},{{DD}}];
+   NCTest[expr, answer];
+   NCTest[NCSystemQ[expr], True];
+   NCTest[expr[[1]], {{AA}}];
+   NCTest[expr[[2]], {{BB}}];
+   NCTest[expr[[3]], {{CC}}];
+   NCTest[expr[[4]], {{DD}}];
+   NCTest[NCSystemToTransferFunction[expr,S], {{CC inv[S - AA] BB + DD}}];
+
+   answer = NCSystem[{{AA}},{{CC}},{{BB}},{{DD}}];
+   NCTest[tp[expr], answer];
+
+   sys = System[{{a}},{{b}},{{c}},{{d}}];
+
+   expr = sys;
+   answer = NCSystem[{{a}},{{b}},{{c}},{{d}}];
+   NCTest[expr, answer];
+   NCTest[NCSystemQ[expr], True];
+   NCTest[expr[[1]], {{a}}];
+   NCTest[expr[[2]], {{b}}];
+   NCTest[expr[[3]], {{c}}];
+   NCTest[expr[[4]], {{d}}];
+
+   answer = NCSystem[{{tp[a]}},{{tp[c]}},{{tp[b]}},{{tp[d]}}];
+   NCTest[tp[expr], answer];
+
+   sys1 = System[{{a1}},{{b1}},{{c1}},{{d1}}];
+   sys2 = System[{{a2}},{{b2}},{{c2}},{{d2}}];
+
+   expr = NCSConnectParallel[sys1,sys2];
+   answer = NCSystem[{{a1,0},{0,a2}},{{b1,0},{0,b2}},{{c1,0},{0,c2}},{{d1,0},{0,d2}}];
+   NCTest[expr, answer];
+
+   expr = NCSConnectPlus[sys1,sys2];
+   answer = NCSystem[{{a1,0},{0,a2}},{{b1},{b2}},{{c1,c2}},{{d1+d2}}];
+   NCTest[expr, answer];
+
+   expr = NCSConnectSeries[sys1,sys2];
+   answer = NCSystem[{{a1,0},{b2**c1,a2}},{{b1},{b2**d1}},{{d2**c1,c2}},{{d2**d1}}];
+   NCTest[expr, answer];
+
+   expr = NCSInverse[sys];
+   answer = NCSystem[{{a-b**inv[d]**c}},
+                     {{b**inv[d]}},
+                     {{-inv[d]**c}},
+		     {{inv[d]}}];
+   NCTest[expr, answer];
+
+   (* TODO: REVERSE PRODUCT STILL FAILS! *)
+   expr = NCSystemToTransferFunction[
+             NCSConnectSeries[sys, 
+                              NCSInverse[sys]],1][[1,1]];
+   NCTest[NCSimplifyRational[expr], 1];
+
+   sys = System[{{a}},{{b}},{{c}},{{0}}];
+   expr = NCSInverse[sys];
+   answer = $Failed;
+   NCTest[expr, answer];
+
+];
