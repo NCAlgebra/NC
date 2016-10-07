@@ -20,6 +20,7 @@
 
 BeginPackage[ "NCSystem`",
 	      "NCMatMult`",
+	      "NCMatrixDecompositions`",
 	      "MatrixDecompositions`",
 	      "NCUtil`",
 	      "NonCommutativeMultiply`"
@@ -33,7 +34,14 @@ Clear[NCSystem,
       NCSConnectSeries,
       NCSConnectPlus,
       NCSConnectFeeback,
-      NCSystemToTransferFunction
+      NCSystemToTransferFunction,
+      NCSControllabilityMatrix,
+      NCSObservabilityMatrix,
+      NCSControllableRealization,
+      NCSControllableSubspace,
+      NCSObservableRealization,
+      NCSObservableSubspace,
+      NCSMinimalRealization
      ];
 
 NCSystem::WrongDimensions = "Matrices `1` and `2` must have same `3` size.";
@@ -86,7 +94,7 @@ Begin["`Private`"];
   tp[s_NCSystem] := System @@ Map[tpMat, s][[{1,3,2,4}]];
 
   (* TransferFunction *)
-  NCSystemToTransferFunction[s_NCSystem, var_:S] :=
+  NCSystemToTransferFunction[s_NCSystem, var_Symbol:S] :=
    MatMult[s[[3]], 
            NCInverse[var IdentityMatrix[Dimensions[s][[3]]] - s[[1]]], 
            s[[2]]] + s[[4]];
@@ -171,6 +179,104 @@ Begin["`Private`"];
       ]];
   ];
 
+  (* Controllability & Observability *)
+
+  NCSControllabilityMatrix[sys_NCSystem, opts___] := 
+      NCSControllabilityMatrix[sys[[1]], sys[[2]], opts];
+
+  NCSObservabilityMatrix[sys_NCSystem, opts___] := 
+      NCSObservabilityMatrix[sys[[1]], sys[[3]], opts];
+      
+  NCSControllabilityMatrix[a_?MatrixQ, b_?MatrixQ] := 
+      NCSControllabilityMatrix[a, b, Length[a]];
+
+  NCSControllabilityMatrix[a_?MatrixQ, b_?MatrixQ, q_Integer] := Module[
+      {i, n = Length[a], m = Dimensions[b][[2]], mat},
+      
+      mat = ConstantArray[0, {n, q*m}];
+      mat[[All,1;;m]] = b;
+      For[ i = 1, i < q, i++,
+           mat[[All,m*i+1;;m*(i+1)]] = MatMult[a, mat[[All,m*(i-1)+1;;m*i]]];
+      ];
+      Return[mat];
+      
+  ];
+
+  NCSObservabilityMatrix[a_?MatrixQ, c_?MatrixQ, opts___] := 
+    tpMat[NCSControllabilityMatrix[tpMat[a], tpMat[c], opts]];
+
+  (* Controllable realization *)
+  NCSControllableRealization[sys_NCSystem] := Module[
+      {L, rank, R},
+      
+      (* Calculate controllable subspace *)
+      {L, rank} = NCSControllableSubspace[sys[[1]],sys[[2]]];
+
+      (* Calculate projection *)
+      R = NCInverse[L][[All,1;;rank]];
+      L = L[[1;;rank]];
+      
+      Return[
+          NCSystem[MatMult[L, sys[[1]], R],
+                   MatMult[L, sys[[2]]],
+                   MatMult[sys[[3]], R],
+                   sys[[4]]]
+      ];
+  ];
+
+  NCSControllableSubspace[a_?MatrixQ, b_?MatrixQ, opts___] := Module[
+      {ctrb = NCSControllabilityMatrix[a,b,opts], L},
+      
+      (* Determine Rank *)
+      {lu,p,q,rank} = NCLUDecompositionWithCompletePivoting[ctrb];
+      {l,u} = GetLUMatrices[lu];
+
+      (* P ctrb Q = L U *)
+      (* R ctrb = U Q^T, L = L \ P *)
+      L = NCLowerTriangularSolve[l, IdentityMatrix[Length[ctrb]][[p]]];
+
+      (*
+      Print["ctrb = ", ctrb];
+      Print["l = ", Normal[l]];
+      Print["u = ", Normal[u]];
+      Print["rank = ", rank];
+      Print["L = ", L];
+      Print["L ctrb = ", MatMult[L, ctrb]];
+      *)
+      
+      Return[{L, rank}];
+      
+  ];
+
+  (* Observable realization *)
+  
+  NCSObservableSubspace[a_?MatrixQ, c_?MatrixQ, opts___] := Module[
+      {L, rank},
+      {L, rank} = NCSControllableSubspace[tpMat[a], tpMat[c], opts];
+      Return[{tpMat[L], rank}];
+  ];
+
+  NCSObservableRealization[sys_NCSystem] := Module[
+      {L, rank, R},
+      
+      (* Calculate observable subspace *)
+      {R, rank} = NCSObservableSubspace[sys[[1]],sys[[3]]];
+
+      (* Calculate projection *)
+      L = NCInverse[R][[1;;rank]];
+      R = R[[All,1;;rank]];
+      
+      Return[
+          NCSystem[MatMult[L, sys[[1]], R],
+                   MatMult[L, sys[[2]]],
+                   MatMult[sys[[3]], R],
+                   sys[[4]]]
+      ];
+  ];
+
+  NCSMinimalRealization[sys_NCSystem] :=
+      NCSObservableRealization[NCSControllableRealization[sys]];
+  
 End[];
 
 EndPackage[];
