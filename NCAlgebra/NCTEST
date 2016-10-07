@@ -21,14 +21,10 @@ tests = {
   "NCSimplifyRational",
   "NCSylvester",
   "NCQuadratic",
-*)
   "MatrixDecompositions",
   "NCMatrixDecompositions",
-(*
   "NCCollect",
-*)
   "NCInverse",
-(*
   "NCDiff",
   "NCMatMult",
   "NCRoots",
@@ -36,8 +32,8 @@ tests = {
   "NCOutput",
 *)
   "NCSystem",
-(*
   "NCRealization",
+(*
   "NCConvexity",
 *)
   "Matrix"

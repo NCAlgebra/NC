@@ -163,7 +163,7 @@ Module[
                 {{1},{2}},
 		{{1,1}},
 		{{0}}];
-   expr = NCSControllableSubspace[sys[[1]],sys[[2]]];
+   expr = NCSControllableSubspace[NCSControllabilityMatrix[sys[[1]],sys[[2]]]];
    answer = {{{0, 1}, {1, -1/2}}, 1};
    NCTest[expr, answer];
 
@@ -175,7 +175,7 @@ Module[
    answer = {{3/(S - 1)}};
    NCTest[expr, answer];
 
-   expr = NCSObservableSubspace[sys[[1]],sys[[3]]];
+   expr = NCSObservableSubspace[NCSObservabilityMatrix[sys[[1]],sys[[3]]]];
    answer = {{{1, -1}, {0, 1}}, 1};
    NCTest[expr, answer];
 

@@ -187,16 +187,20 @@ Begin["`Private`"];
   NCSObservabilityMatrix[sys_NCSystem, opts___] := 
       NCSObservabilityMatrix[sys[[1]], sys[[3]], opts];
       
-  NCSControllabilityMatrix[a_?MatrixQ, b_?MatrixQ] := 
-      NCSControllabilityMatrix[a, b, Length[a]];
-
-  NCSControllabilityMatrix[a_?MatrixQ, b_?MatrixQ, q_Integer] := Module[
-      {i, n = Length[a], m = Dimensions[b][[2]], mat},
+  NCSControllabilityMatrix[a_?MatrixQ, b_?MatrixQ, 
+                           qq_Integer:-1, 
+                           opts:OptionsPattern[{
+                               Dot -> MatMult
+                           }]] := Module[
+      {i, q = If[qq == -1, Length[a], qq], n = Length[a], 
+       m = Dimensions[b][[2]], 
+       mat, 
+       dot = OptionValue[Dot]},
       
       mat = ConstantArray[0, {n, q*m}];
       mat[[All,1;;m]] = b;
       For[ i = 1, i < q, i++,
-           mat[[All,m*i+1;;m*(i+1)]] = MatMult[a, mat[[All,m*(i-1)+1;;m*i]]];
+           mat[[All,m*i+1;;m*(i+1)]] = dot[a, mat[[All,m*(i-1)+1;;m*i]]];
       ];
       Return[mat];
       
@@ -206,34 +210,49 @@ Begin["`Private`"];
     tpMat[NCSControllabilityMatrix[tpMat[a], tpMat[c], opts]];
 
   (* Controllable realization *)
-  NCSControllableRealization[sys_NCSystem] := Module[
-      {L, rank, R},
-      
+  NCSControllableRealization[sys_NCSystem,
+                             opts:OptionsPattern[{
+                               Dot -> MatMult,
+                               Inverse -> NCInverse
+                             }]] := Module[
+      {ctrb, L, rank, R,
+       dot = OptionValue[Dot],
+       inverse = OptionValue[Inverse]},
+
+      (* Calculate controllability matrix *)
+      ctrb = NCSControllabilityMatrix[sys[[1]], sys[[2]], opts];
+
       (* Calculate controllable subspace *)
-      {L, rank} = NCSControllableSubspace[sys[[1]],sys[[2]]];
+      {L, rank} = NCSControllableSubspace[ctrb, opts];
 
       (* Calculate projection *)
-      R = NCInverse[L][[All,1;;rank]];
+      R = inverse[L][[All,1;;rank]];
       L = L[[1;;rank]];
       
       Return[
-          NCSystem[MatMult[L, sys[[1]], R],
-                   MatMult[L, sys[[2]]],
-                   MatMult[sys[[3]], R],
+          NCSystem[dot[L, sys[[1]], R],
+                   dot[L, sys[[2]]],
+                   dot[sys[[3]], R],
                    sys[[4]]]
       ];
   ];
 
-  NCSControllableSubspace[a_?MatrixQ, b_?MatrixQ, opts___] := Module[
-      {ctrb = NCSControllabilityMatrix[a,b,opts], L},
+  NCSControllableSubspace[ctrb_?MatrixQ,
+                          opts:OptionsPattern[{
+                            LUDecomposition -> NCLUDecompositionWithCompletePivoting,
+                            Solve -> NCLowerTriangularSolve
+                          }]] := Module[
+      {L,
+       decomposition = OptionValue[LUDecomposition],
+       solve = OptionValue[Solve]},
       
       (* Determine Rank *)
-      {lu,p,q,rank} = NCLUDecompositionWithCompletePivoting[ctrb];
+      {lu,p,q,rank} = decomposition[ctrb];
       {l,u} = GetLUMatrices[lu];
 
       (* P ctrb Q = L U *)
       (* R ctrb = U Q^T, L = L \ P *)
-      L = NCLowerTriangularSolve[l, IdentityMatrix[Length[ctrb]][[p]]];
+      L = solve[l, IdentityMatrix[Length[ctrb]][[p]]];
 
       (*
       Print["ctrb = ", ctrb];
@@ -250,32 +269,42 @@ Begin["`Private`"];
 
   (* Observable realization *)
   
-  NCSObservableSubspace[a_?MatrixQ, c_?MatrixQ, opts___] := Module[
+  NCSObservableSubspace[obsv_?MatrixQ, opts___] := Module[
       {L, rank},
-      {L, rank} = NCSControllableSubspace[tpMat[a], tpMat[c], opts];
+      {L, rank} = NCSControllableSubspace[Transpose[obsv], opts];
       Return[{tpMat[L], rank}];
   ];
 
-  NCSObservableRealization[sys_NCSystem] := Module[
-      {L, rank, R},
+  NCSObservableRealization[sys_NCSystem,
+                           opts:OptionsPattern[{
+                             Dot -> MatMult,
+                             Inverse -> NCInverse
+                           }]] := Module[
+      {obsv, L, rank, R,
+       dot = OptionValue[Dot],
+       inverse = OptionValue[Inverse]},
       
+      (* Calculate observability matrix *)
+      obsv = NCSObservabilityMatrix[sys[[1]], sys[[3]], opts];
+
       (* Calculate observable subspace *)
-      {R, rank} = NCSObservableSubspace[sys[[1]],sys[[3]]];
+      {R, rank} = NCSObservableSubspace[obsv,opts];
 
       (* Calculate projection *)
-      L = NCInverse[R][[1;;rank]];
+      L = inverse[R][[1;;rank]];
       R = R[[All,1;;rank]];
       
       Return[
-          NCSystem[MatMult[L, sys[[1]], R],
-                   MatMult[L, sys[[2]]],
-                   MatMult[sys[[3]], R],
+          NCSystem[dot[L, sys[[1]], R],
+                   dot[L, sys[[2]]],
+                   dot[sys[[3]], R],
                    sys[[4]]]
       ];
   ];
 
-  NCSMinimalRealization[sys_NCSystem] :=
-      NCSObservableRealization[NCSControllableRealization[sys]];
+  NCSMinimalRealization[sys_NCSystem, opts___] :=
+      NCSObservableRealization[
+          NCSControllableRealization[sys, opts], opts];
   
 End[];
 

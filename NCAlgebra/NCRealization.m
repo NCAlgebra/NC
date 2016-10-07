@@ -31,6 +31,8 @@ Noncommutative Convexity Arises From Linear Matrix Inequalities
 
 
 BeginPackage["NCRealization`", 
+             "NCSystem`",
+	     "MatrixDecompositions`",
 	     "NCMatMult`",
              "NCUtil`",
 	     "NCLinearAlgebra`",
@@ -45,6 +47,8 @@ Clear[NCDescriptorRealization,
       NCSymmetricDeterminantalRepresentationDirect,
       NCSymmetricDeterminantalRepresentationReciprocal,
       NonCommutativeLift,
+
+      NCMinimalRealization,
       
       PinnedQ,
       PinningSpace,
@@ -482,9 +486,8 @@ Begin["`Private`"]
             Flatten[Outer[Prepend[#2, #1] &, Letters, 
                 Select[ListOfColumnWords, Length[#] == WordLength - 1 &], 1], 1];
 
-
           If[Verbose /. {opts} /. Options[NCRealization], 
-            Print[CandidateColumnWords]];
+            Print["CandidateColumnWords = ", CandidateColumnWords]];
 
           For[j = 1, j <= Length[CandidateColumnWords], j = j + 1,
 
@@ -516,6 +519,168 @@ Begin["`Private`"]
         ](* NCFormControllabilityColumns *)
 
 
+    (********** NCMinimalRealization **********)
+
+    NCControllableSubspace[A_List, B_, opts___] := Module[
+        {letters = Range[Length[A]],
+         previousWords = {{}}, 
+         currentWords,
+         wordLength = 0,
+         controllabilityMatrix = RowReduce[Transpose[B]],
+         rank = Length[Transpose[B]],
+         tmp,
+         newColumns,
+         AB,
+         needToCheck = True,
+         j,
+         candidateWords,
+         candidateColumns,
+         ZeroRowVector = Table[0, {Length[B]}],
+         candidateControllabilityMatrix},
+
+         (* Store products for faster evaluation *)
+         AB[{}] = B;
+         AB[word_List] := (AB[word] = A[[First[word]]] . AB[Rest[word]]);
+
+         (* previousWords = {{}}; *)
+         (* wordLength = 0 *)
+         While[needToCheck,
+
+               needToCheck = False;
+               wordLength = wordLength + 1;
+               currentWords = {};
+
+               If[Verbose /. {opts} /. Options[NCRealization],
+                   Print["While needToCheck, wordLength = ", wordLength]];
+
+               (* assemble candidate words *)
+               candidateWords = 
+                  Flatten[Outer[Prepend[#2, #1]&, 
+                                letters, 
+                                previousWords, 1], 1];
+               
+               If[ Verbose /. {opts} /. Options[NCRealization], 
+                   Print["candidateWords = ", candidateWords]];
+
+               candidateColumns = ArrayFlatten[{Map[AB, candidateWords]}];
+               If[ Verbose /. {opts} /. Options[NCRealization], 
+                   Print["candidateColumns = ", candidateColumns]
+               ];
+
+               {lu,p,q,newRank} = LUDecompositionWithCompletePivoting[
+                                      Join[controllabilityMatrix,
+                                           Transpose[candidateColumns]]];
+               {l,u} = GetLUMatrices[lu];
+               Print["l = ", Normal[l]];
+               Print["u = ", Normal[u]];
+               Print["p = ", p];
+               Print["q = ", q];
+               Print["newRank = ", newRank];
+               
+               (*
+               newColumns = Flatten[
+                   Position[
+                     Map[PossibleZeroQ, Total[Abs[tmp[[rank+1;;]]],{2}]],
+                     False]
+               ];
+               Print["newColumns = ", newColumns];
+               
+               If[ newColumns === {}
+                  ,
+                   (* there are no more linearly independent columns *)
+                   Print["DONE!"];
+                  , 
+                   rank ++;
+                   (*
+                   controllabilityMatrix = Take[tmp, rank];
+                   currentWords = candidateWords[[newColumns]];
+                   *)
+               ];
+               *)
+               
+               For[j = 1, j <= Length[candidateWords], j = j + 1,
+
+                   
+                   candidateControllabilityMatrix = 
+                     RowReduce[  Append[
+                          controllabilityMatrix,
+                          Flatten[
+                           Transpose[AB[candidateWords[[j]] ] ] 
+                         ] ] ];
+
+                   If[
+                       Last[candidateControllabilityMatrix] != ZeroRowVector,
+
+                      controllabilityMatrix = 
+                        candidateControllabilityMatrix;
+
+                      AppendTo[currentWords, candidateWords[[j]]];
+
+                      Print["currentWords = ", currentWords];
+
+                      needToCheck = True;
+                   ];(* If *)
+                   
+               ];(* For *)
+               
+               previousWords = currentWords;
+               
+          ];(* While *)
+
+       If[ReturnWordList /. {opts} /. Options[NCFormControllabilityColumns],
+          {controllabilityMatrix, ListOfColumnWords}, 
+          controllabilityMatrix]
+
+        ](* NCFormControllabilityColumns *)
+                        
+    NCMinimalRealization[{C_,G_,B_}, unknowns_, opts___] := Module[
+        {A0,A1,A2,B2,
+         tmp1,tmp2,
+         ctrb},
+        
+        (*
+        tmp0 = NCPencilToList[G, unknowns];
+        
+        {A0,A1} = CoefficientArrays[G, unknowns];
+        A1 = Prepend[Transpose[A1,{3,2,1}],A0];
+        Print["A1 = ", A1];
+        Print["NCPencilToList = ", Total[tmp0 - A1, Infinity]];
+               
+        {A2, B2} = 
+           NCFormLettersFromPencil[Normal[A1], B, opts];
+        Print["A2 = ", A2];
+        Print["B2 = ", B2];
+        *)
+
+        (* Form list of pencil coefficients *) 
+        {A0,A1} = CoefficientArrays[G, unknowns];
+        A1 = Transpose[A1,{3,2,1}];
+        
+        (* Scale by inv[A0] *)
+        A0inv = LinearSolve[A0];
+        {A2, B2} = {Map[A0inv, A1], A0inv[B]};
+        Print["A2 = ", A2];
+        Print["B2 = ", B2];
+        
+        (* Calculate controllability subspace *)
+        ctrb = NCControllableSubspace[A2, B2, Verbose -> True];
+        rank = Length[ctrb];
+        Print["ctrb = ", ctrb];
+        Print["rank = ", rank];
+
+        (* Calculate projection *)
+        R = Transpose[Join[ctrb, 
+                           NullSpace[ctrb]]];
+        L = Inverse[R][[1;;rank]];
+        R = R[[All,1;;rank]];
+        Print["L = ", L];
+        Print["R = ", R];
+
+        (* Calculate reduced realization *)
+        GG = IdentityMatrix[rank] + Plus @@ (Map[MatMult[L, #, R]&, A2] * unknowns);
+        Return[{MatMult[C, R], GG, MatMult[L, B2]}];
+        
+    ];
 
     (********** NCMinimalDescriptorRealization **********)
 

@@ -86,6 +86,7 @@ Module[
   NCTest[det, answer];
 
   NCTest[CommuteEverything[Det[det] - expr], 0];
+  EndCommuteEverything[];
 
   det = NCSymmetricDeterminantalRepresentationReciprocal[expr, {x, y}, 
                 UseFloatingPoint -> False];
@@ -109,6 +110,7 @@ Module[
 
     NCTest[Det[NCDeterminantalRepresentationReciprocal[1+x**y**y**x,{x,y}]],
 	   CommuteEverything[1+x**y**y**x] /. Commutative[x_]->x, "Realization", k++];
+    EndCommuteEverything[];
 
     ,
 
@@ -119,5 +121,17 @@ Module[
   (* test 3 *)
   NCTest[RJRTDecomposition[{{0,2},{2,0}}],
          {{{-1.,1.},{1.,1.}},{{-1,0},{0,1}}}, "Realization", k++];
+
+  {Cv,Pencil,Bv} = NCDescriptorRealization[x**y, {x,y}];
+  Print["Cv = ", Cv];
+  Print["Pencil = ", Pencil];
+  Print["Bv = ", Bv];
+
+  {Cv,Pencil,Bv} = NCMinimalRealization[{Cv,Pencil,Bv}, {x,y}];
+  Print["Cv = ", Cv];
+  Print["Pencil = ", Pencil];
+  Print["Bv = ", Bv];
+
+  Print["poly = ", MatMult[Cv, NCInverse[Pencil], Bv]];
 
 ];               
