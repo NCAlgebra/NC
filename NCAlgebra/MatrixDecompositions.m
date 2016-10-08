@@ -22,7 +22,9 @@ Clear[LUDecompositionWithPartialPivoting,
       LUInverse,
       GetLUMatrices, GetLDUMatrices,
       GetDiagonal,
-      LUPartialPivoting, LUCompletePivoting];
+      LUPartialPivoting, LUCompletePivoting,
+      LURowReduce,
+      LURowReduceIncremental];
 
 Get["MatrixDecompositions.usage"];
             
@@ -497,7 +499,7 @@ Begin[ "`Private`" ]
   Module[
     {options, zeroTest, pivoting, dot, rightDivide,
      suppressPivoting,
-     A, m, n, rank, p, q, k, N, mu, lambda},
+     A, m, n, rank, p, q, k, mu, lambda},
 
      (* process options *)
 
@@ -536,17 +538,18 @@ Begin[ "`Private`" ]
      rank = Min[n,m];
      p = Range[m];
      q = Range[n];
-     N = If[n >= m, rank - 1, rank];
 
      (*
      Print["m = ", m];
      Print["n = ", n];
-     Print["N = ", N];
+     Print["rank = ", rank];
      *)
 
-     For [k = 1, k <= N, k++,
+     For [k = 1, k <= rank, k++,
 
-       (* Print["k = ", k]; *)
+       (*
+       Print["k = ", k]; 
+       *)
 
        (* Pivot *)
        {mu, lambda} = pivoting[ A[[k ;; m, k ;; n]] ] + k - 1;
@@ -573,23 +576,17 @@ Begin[ "`Private`" ]
 
        (* Print["A- = ", Normal[A]]; *)
 
-       (* Update matrix *)
-       A[[k+1 ;; m, k]] = rightDivide[ A[[k+1 ;; m, k]], A[[k,k]] ];
-
-       If [k < n
-	   ,
-	   A[[k+1 ;; m, k+1 ;; n]] -= 
-	      dot[A[[k+1 ;; m, {k}]], A[[{k}, k+1 ;; n]]];
+       If[ k < m,
+           (* Update matrix *)
+           A[[k+1 ;; m, k]] = rightDivide[A[[k+1 ;; m, k]], A[[k,k]]];
+           If[ k < n,
+               A[[k+1 ;; m, k+1 ;; n]] -= 
+	            dot[A[[k+1 ;; m, {k}]], A[[{k}, k+1 ;; n]]];
+           ];
        ];
 
        (* Print["A+ = ", Normal[A]]; *)
 
-    ];
-
-    (* Print["k = ", k]; *)
-
-    If[ k > N && n >= m && zeroTest[A[[k,k]]],
-       rank--;
     ];
 
     Return[{A, p, q, rank}];
@@ -840,6 +837,121 @@ Begin[ "`Private`" ]
 
   ];
 
+  (* LURowReduce *)
+  LURowReduce[A_?MatrixQ, opts:OptionsPattern[{}]] := Module[
+    {lu, p, q, rank,
+     r,s},
+    
+    (* Dimensions *)
+    {r,s} = Dimensions[A];
+      
+    (* Calculate LU Decomposition *)
+    {lu,p,q,rank} = LUDecompositionWithCompletePivoting[A];
+    {l,u} = GetLUMatrices[lu];
+
+    (* *)
+    Print["LURowReduce"];
+    Print["r = ", r];
+    Print["s = ", s];
+    Print["l = ", Normal[l]];
+    Print["u = ", Normal[u]];
+    Print["p = ", p];
+    Print["q = ", q];
+    Print["rank = ", rank];
+    (* *)
+      
+    (* Reduce *)
+    If[ s > rank,
+        Print["u1 = ", u[[1;;rank,1;;rank]]];
+        Print["u2 = ", u[[All,rank+1;;]]];
+        u[[All,rank+1;;]] = UpperTriangularSolve[
+             u[[1;;rank,1;;rank]],
+             u[[All,rank+1;;]]
+        ];
+    ];
+    u[[1;;rank,1;;rank]] = IdentityMatrix[rank];
+      
+    Return[{u, p, q, rank}];
+  ];
+                        
+  LURowReduceIncremental[A_?MatrixQ, B_?MatrixQ] := Module[
+    {A2,B1,B2,D,
+     lu,p,q,rank,l,u,
+     m,n,r,s
+     },
+
+    (* Get blocks *)
+    (* A = [I A2], B = [B1 B2] *)
+    {m,n} = Dimensions[A];
+    {r,s} = Dimensions[B];
+    
+    If[ n != s,
+        Message[];
+    ];
+    A2 = A[[All,m+1;;n]];
+    B1 = B[[All,1;;m]];
+    B2 = B[[All,m+1;;s]];
+      
+    Print["m = ", m];
+    Print["n = ", n];
+    Print["A2 = ", Normal[A2]];
+    Print["B1 = ", Normal[B1]];
+    Print["B2 = ", Normal[B2]];
+
+    (* [I 0; -B1 I].[I A2; B1 B2] = [I B2; 0 D], D = B2-B1.A2 *)
+    D = B2-B1.A2;
+    Print["D = ", D];
+
+    (* L \ D = [U1 U2; 0 0] *)
+    (* [I A21 A22; 0 U1 U2; 0 0 0] *)
+    {lu,p,q,rank} = LUDecompositionWithCompletePivoting[D];
+    {l,u} = GetLUMatrices[lu];
+
+    (* adjust permutations *)
+    p = Join[Range[m], m+p];
+    q = Join[Range[m], m+q];
+      
+    Print["l = ", Normal[l]];
+    Print["u = ", Normal[u]];
+    Print["rank = ", rank];
+    Print["n - m - rank = ", n - m - rank];
+    Print["p = ", p];
+    Print["q = ", q];
+          
+    (* row reduce *)
+    (*
+       [I -A21.inv[U1] 0; 0 inv[U1] 0; 0 0 I]
+         .[I A21 A22; 0 U1 U2; 0,0,0] 
+           = [I 0 E1; 0 I E2; 0 0 0],
+       E2 = inv[U1].U2,
+       E1 = A22-A21.inv[U1].U2 = A22-A21.E2,
+    *)
+    If[ n - m - rank > 0,
+        E2 = UpperTriangularSolver[u[[1;;rank,1;;rank]], 
+                                   u[[1;;rank,rank+1;;]]];
+        E1 = A2[[All,m+rank+1;;]]-A2[[All,m+1;;m+rank]].E2;
+
+        Return[
+            {ArrayFlatten[{{IdentityMatrix[m+rank], {{E1},{E2}}},
+                           {ConstantArray[0, {r - rank, s}]}}],
+             p, q, m + rank}
+        ];
+       ,
+        If [ r - rank > 0,
+             Return[
+                 {ArrayFlatten[{{IdentityMatrix[m+rank]},
+                                {ConstantArray[0, {r - rank, s}]}}],
+                 p, q, m + rank}
+             ];
+            ,
+             Return[{IdentityMatrix[m+rank], p, q, m + rank}];
+        ];
+    ];
+
+        
+  ];
+
+  
 End[]
 
 EndPackage[]

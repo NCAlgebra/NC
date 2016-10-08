@@ -523,16 +523,14 @@ Begin["`Private`"]
 
     NCControllableSubspace[A_List, B_, opts___] := Module[
         {letters = Range[Length[A]],
+         wordLength = 0,
          previousWords = {{}}, 
          currentWords,
-         wordLength = 0,
-         controllabilityMatrix = RowReduce[Transpose[B]],
-         rank = Length[Transpose[B]],
+         controllabilityMatrix,
          tmp,
          newColumns,
          AB,
-         needToCheck = True,
-         j,
+         p,q,rank,
          candidateWords,
          candidateColumns,
          ZeroRowVector = Table[0, {Length[B]}],
@@ -542,10 +540,17 @@ Begin["`Private`"]
          AB[{}] = B;
          AB[word_List] := (AB[word] = A[[First[word]]] . AB[Rest[word]]);
 
+         Print["HERE 0"];
          (* previousWords = {{}}; *)
          (* wordLength = 0 *)
+         Print["Transpose[B] = ", Transpose[B]];
+         {controllabilityMatrix,p,q,rank} = LURowReduce[Transpose[B]];
+         Print["controllabilityMatrix = ", Normal[controllabilityMatrix]];
+         needToCheck = True;
          While[needToCheck,
 
+               Print["HERE 1"];
+        
                needToCheck = False;
                wordLength = wordLength + 1;
                currentWords = {};

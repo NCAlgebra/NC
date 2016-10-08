@@ -21,7 +21,9 @@ tests = {
   "NCSimplifyRational",
   "NCSylvester",
   "NCQuadratic",
+*)
   "MatrixDecompositions",
+(*
   "NCMatrixDecompositions",
   "NCCollect",
   "NCInverse",
@@ -30,9 +32,9 @@ tests = {
   "NCRoots",
   "NCConjugate",
   "NCOutput",
-*)
   "NCSystem",
   "NCRealization",
+*)
 (*
   "NCConvexity",
 *)
