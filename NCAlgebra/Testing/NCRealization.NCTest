@@ -134,4 +134,11 @@ Module[
 
   Print["poly = ", MatMult[Cv, NCInverse[Pencil], Bv]];
 
+  {Cv,Pencil,Bv} = NCMinimalDescriptorRealization[x**y, {x,y}];
+  Print["Cv = ", Cv];
+  Print["Pencil = ", Pencil];
+  Print["Bv = ", Bv];
+
+  Print["poly = ", MatMult[Cv, NCInverse[Pencil], Bv]];
+
 ];               

@@ -537,7 +537,7 @@ Module[
   NCTest[rank, 3];
 
   {u,p,q,rank} = LURowReduce[A2];
-  NCTest[u[[;;rank,;;rank]], SparseArray[IdentityMatrix[2]]];
+  NCTest[u[[1;;rank,1;;rank]], SparseArray[IdentityMatrix[2]]];
   NCTest[p, {1,3,2}];
   NCTest[q, {2,3,1}];
   NCTest[rank, 2];
@@ -558,15 +558,17 @@ Module[
   NCTest[rank, 3];
 
   {u,p,q,rank} = LURowReduce[A1[[{1},All]]];
-  answer = SparseArray[A1[[{1},All]] / A1[[1,1]]];
+  answer = SparseArray[A1[[{1},q]] / A1[[1,q[[1]]]]];
   NCTest[u, answer];
   NCTest[p, {1}];
-  NCTest[q, {1,2,3}];
+  NCTest[q, {2,1,3}];
   NCTest[rank, 1];
 
+  (*
   Print["p = ", p];
   Print["q = ", q];
   Print["u = ", Normal[u]];
   Print["rank = ", rank];
+  *)
 
 ];
