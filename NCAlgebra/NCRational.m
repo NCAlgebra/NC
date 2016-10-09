@@ -13,19 +13,26 @@
 (* :History: *)
 
 BeginPackage[ "NCRational`",
-	      "MatrixMultiplications`",
+              "NCPolynomial`",
+	      "MatrixDecompositions`",
 	      "NCMatMult`",
               "NCUtil`",
 	      "NCOptions`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCToNCRational,
+      NCRationalToNC,
+      NCRationalToCanonical,
+      CanonicalToNCRational,
+      NCRPlus,
       NCRControllableSubspace,
       NCRControllableRealization,
       NCRObservableRealization,
       NCRMinimalRealization];
 
+(*
 Get["NCRational.usage"];
+*)
 
 NCRational::NotRational = "Expression is not an nc rational.";
 NCRational::VarNotSymbol = "All variables must be Symbols.";
@@ -34,19 +41,96 @@ Begin[ "`Private`" ]
 
   (* NCToNCRational *)
 
+  Clear[NCToNCRationalAuxRule];
+  NCToNCRationalAuxRule[var_, positions_] := 
+      Map[{var+1, #, #+1}->-1&, positions];
+
+  Clear[NCToNCRationalAux];
+  NCToNCRationalAux[{monomial_}, {coefficients_}, vars_] := Module[
+    {n = Length[monomial]+1, m = Length[vars]},
+    
+    Return[
+      NCRational[
+        SparseArray[
+            Prepend[Flatten[
+              Apply[NCToNCRationalAuxRule,
+                MapIndexed[{#2[[1]],Flatten[Position[monomial,#1]]}&, 
+                           vars], 1], 1], {1,i_,i_}->1], {m+1,n,n}],
+        SparseArray[{n,1}->1,{n,1}],  
+        SparseArray[{1,1}->1,{1,n}], 
+        SparseArray[{},{1,1}],
+        vars]
+    ];
+  ] /; Length[coefficients] == 3;
+  
   NCToNCRational[expr_, vars_List] := Module[
-    {},
+    {poly, ratVars, ruleRatRev,
+     terms},
 
-     (* Make sure vars is a list of Symbols *)
-     If [ Not[MatchQ[vars, {___Symbol}]],
-          Message[NCRational::VarNotSymbol];
-          Return[$Failed];
-     ];
+    {poly, ratVars, ruleRatRev} = NCRationalToNCPolynomial[expr, vars];
 
-     Return[NCRational[{{{}}},{{}},{{}},{{}}, vars];
+    (*
+    Print["poly = ", poly];
+    Print["ratVars = ", ratVars];
+    Print["ruleRatRev = ", ruleRatRev];
+    *)
+
+    Return[NCRPlus @@ KeyValueMap[NCToNCRationalAux[##,vars]&, poly[[2]]]];
+
   ];
 
+  NCRationalToNC[rat_NCRational] := Module[
+    {A,B,C,D},
 
+    (* Grab matrices *)
+    {A,B,C,D} = Normal[rat];
+
+    Return[
+      MatMult[C, 
+              NCInverse[First[A] + Plus @@ (Rest[A] * rat[[5]])],
+              B] + D
+    ];
+  ];
+
+  NCRationalToCanonical[rat_NCRational] := Module[
+    {A,B,C,D},
+
+    (* Grab matrices *)
+    {A,B,C,D} = Normal[rat];
+
+    Return[{{C, First[A] + Plus @@ (Rest[A] * rat[[5]]), B, D}, rat[[5]]}];
+  ];
+
+  CanonicalToNCRational[{C_,G_,B_,D_}, vars_] := Module[
+    {},
+
+    (* Form list of pencil coefficients *) 
+    {A0,A1} = CoefficientArrays[G, vars];
+    A1 = Transpose[A1,{3,2,1}];
+      
+    Return[NCRational[Prepend[A1,A0], B, C, D, vars]];
+  ];
+
+  Normal[rat_NCRational] ^:= (List @@ rat)[[1;;4]];
+  
+  (* NCRational Plus *)
+  NCRPlus[term_NCRational] := Return[term];
+  
+  NCRPlus[tterms__NCRational] := Module[
+      {terms},
+      terms = {tterms};
+      
+      Return[
+        NCRational[ 
+          Apply[SparseArray[Band[{1, 1}] -> {##}]&,
+                Transpose[terms[[All,1]],{2,1,3,4}], {1}],
+          Join @@ terms[[All,2]], 
+          Join[##,2]& @@ terms[[All,3]],
+          Plus @@ terms[[All,4]],
+          terms[[1,5]]]
+     ];
+  ];
+  
   (* NCRControllableSubspace *)
 
   NCRControllableSubspace[A_, B_, opts:OptionsPattern[{}]] := Module[
@@ -143,7 +227,7 @@ Begin[ "`Private`" ]
      n,ctrb,q,rank,R,L},
     
     (* Grab matrices *)
-    {A,B,C,D} = rat[[1;;4]];
+    {A,B,C,D} = Normal[rat];
     n = Length[B];
                                  
     (* Scale by inv[A0] *)
@@ -152,7 +236,7 @@ Begin[ "`Private`" ]
     C2 = C;
 
     (* Calculate row-reduced controllability subspace *)
-    {ctrb, q} = NCControllableSubspace[A2, B2];
+    {ctrb, q} = NCRControllableSubspace[A2, B2];
     rank = Length[ctrb];
 
     (*
@@ -188,9 +272,9 @@ Begin[ "`Private`" ]
         (* Calculate reduced realization *)
         Return[
           NCRational[
-            {IdentityMatrix[rank], Map[MatMult[L, #, R]&, A2]}, 
+            Prepend[Map[MatMult[L, #, R]&, A2], IdentityMatrix[rank]], 
             MatMult[L, B2], MatMult[C2, R], D, 
-            vars
+            rat[[5]]
           ]
         ];
             
@@ -212,7 +296,7 @@ Begin[ "`Private`" ]
      n,ctrb,q,rank,R,L},
     
     (* Grab matrices *)
-    {A,B,C,D} = rat[[1;;4]];
+    {A,B,C,D} = Normal[rat];
     n = Length[B];
                                  
     (* Scale by inv[A0] *)
@@ -221,7 +305,7 @@ Begin[ "`Private`" ]
     C2 = C;
 
     (* Calculate row-reduced observability subspace *)
-    {ctrb, q} = NCControllableSubspace[Map[Transpose, A2], Transpose[C2]];
+    {ctrb, q} = NCRControllableSubspace[Map[Transpose, A2], Transpose[C2]];
     rank = Length[ctrb];
 
     (*
@@ -255,9 +339,9 @@ Begin[ "`Private`" ]
         (* Calculate reduced realization *)
         Return[
           NCRational[
-            {IdentityMatrix[rank], Map[MatMult[L, #, R]&, A2]}, 
+            Prepend[Map[MatMult[L, #, R]&, A2], IdentityMatrix[rank]], 
             MatMult[L, B2], MatMult[C2, R], D, 
-            vars
+            rat[[5]]
           ]
         ];
             

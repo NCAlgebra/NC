@@ -33,8 +33,9 @@ tests = {
   "NCConjugate",
   "NCOutput",
   "NCSystem",
-*)
   "NCRealization",
+*)
+  "NCRational",
 (*
   "NCConvexity",
 *)

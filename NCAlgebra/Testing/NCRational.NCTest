@@ -1,0 +1,146 @@
+<< NCRealization`
+<< NCRational`
+
+Module[
+  {k,answer,answer1,answer2,x,y,X,W,
+   expr,rat,vars,poly,
+   Cv,Pencil,Bv,
+   CSym, PencilSym,
+   det
+  },
+
+  SetNonCommutative[x,y];
+  SetCommutative[A,B];
+
+  (* Monomials *)
+
+  poly = x**y;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+               {{0, -1, 0}, {0, 0, 0}, {0, 0, 0}}, 
+               {{0, 0, 0}, {0, 0, -1}, {0, 0, 0}}}],
+             SparseArray[{{0}, {0}, {1}}], 
+             SparseArray[{{1, 0, 0}}], 
+	     SparseArray[{{0}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+
+  poly = y**x;
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+               {{0, 0, 0}, {0, 0, -1}, {0, 0, 0}}, 
+               {{0, -1, 0}, {0, 0, 0}, {0, 0, 0}}}],
+             SparseArray[{{0}, {0}, {1}}], 
+             SparseArray[{{1, 0, 0}}], 
+	     SparseArray[{{0}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+
+  poly = x**x;
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+               {{0, -1, 0}, {0, 0, -1}, {0, 0, 0}}, 
+               {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}],
+             SparseArray[{{0}, {0}, {1}}], 
+             SparseArray[{{1, 0, 0}}], 
+	     SparseArray[{{0}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+
+  poly = x**y**x;
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1,0,0,0}, {0,1,0,0}, {0,0,1,0}, {0,0,0,1}}, 
+               {{0,-1,0,0}, {0,0,0,0}, {0,0,0,-1},{0,0,0,0}}, 
+               {{0,0,0,0}, {0,0,-1,0}, {0,0,0,0}, {0,0,0,0}}}],
+             SparseArray[{{0}, {0}, {0}, {1}}], 
+             SparseArray[{{1, 0, 0, 0}}], 
+	     SparseArray[{{0}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+
+
+  (* Polynomials *)
+
+  poly = x**y+y**x;
+  rat = NCToNCRational[poly, {x,y}];
+  NCTest[NCRationalToNC[rat],{{poly}}];
+
+  expr = NCRControllableRealization[rat];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+
+  expr = NCRObservableRealization[rat];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+
+  expr = NCRMinimalRealization[rat];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+
+  poly = x**y+x**x;
+  rat = NCToNCRational[poly, {x,y}];
+  NCTest[NCRationalToNC[rat],{{poly}}];
+
+  expr = NCRControllableRealization[rat];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+
+  expr = NCRObservableRealization[rat];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+
+  expr = NCRMinimalRealization[rat];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+
+  (* Nonmiminal monomial *)
+
+  rat = NCRational[
+          {{{0, -1, 0, 0}, {-1, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 1, 0}}, 
+           {{1, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, 
+           {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, -1, 0}, {0, 0, 0, 0}}}, 
+          {{0}, {0}, {0}, {1}}, 
+          {{0, 1, 0, 0}}, {{0}}, vars];
+  expr = NCRationalToNC[rat];
+  answer = {{x**y}};
+  NCTest[expr,answer];
+
+  expr = NCRControllableRealization[rat];
+  NCTest[NCRationalToNC[expr],NCRationalToNC[rat]];
+  answer = NCRational[{
+             {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+             {{0, 0, 0}, {0, 0, 0}, {0, -1, 0}}, 
+             {{0, 0, 0}, {-1, 0, 0}, {0, 0, 0}}}, 
+            {{1}, {0}, {0}}, {{0, 0, 1}}, {{0}}, vars];
+  NCTest[expr,answer];
+  answer = {{{{0, 0, 1}},
+             {{1, 0, 0}, {-y, 1, 0}, {0, -x, 1}}, 
+             {{1}, {0}, {0}}, {{0}}}, vars};
+  NCTest[NCRationalToCanonical[expr],answer];
+
+  expr = NCRObservableRealization[rat];
+  NCTest[NCRationalToNC[expr],NCRationalToNC[rat]];
+  answer = NCRational[{
+             {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+             {{0, -1, 0}, {0, 0, 0}, {0, 0, 0}}, 
+             {{0, 0, 0}, {0, 0, -1}, {0, 0, 0}}}, 
+             {{0}, {0}, {1}}, {{1, 0, 0}}, {{0}}, vars];
+  NCTest[expr,answer];
+  answer = {{{{1, 0, 0}},
+             {{1, -x, 0}, {0, 1, -y}, {0, 0, 1}}, 
+             {{0}, {0}, {1}}, {{0}}}, vars};
+  NCTest[NCRationalToCanonical[expr],answer];
+
+  expr = NCRMinimalRealization[rat];
+  NCTest[NCRationalToNC[expr],NCRationalToNC[rat]];
+  answer = NCRational[{
+             {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, 
+             {{0, 0, 0}, {0, 0, 0}, {0, -1, 0}}, 
+             {{0, 0, 0}, {-1, 0, 0}, {0, 0, 0}}}, 
+            {{1}, {0}, {0}}, {{0, 0, 1}}, {{0}}, vars];
+  NCTest[expr,answer];
+
+];               

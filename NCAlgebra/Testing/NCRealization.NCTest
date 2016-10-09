@@ -122,23 +122,4 @@ Module[
   NCTest[RJRTDecomposition[{{0,2},{2,0}}],
          {{{-1.,1.},{1.,1.}},{{-1,0},{0,1}}}, "Realization", k++];
 
-  {Cv,Pencil,Bv} = NCDescriptorRealization[x**y, {x,y}];
-  Print["Cv = ", Cv];
-  Print["Pencil = ", Pencil];
-  Print["Bv = ", Bv];
-
-  {Cv,Pencil,Bv} = NCMinimalRealization[{Cv,Pencil,Bv}, {x,y}];
-  Print["Cv = ", Cv];
-  Print["Pencil = ", Pencil];
-  Print["Bv = ", Bv];
-
-  Print["poly = ", MatMult[Cv, NCInverse[Pencil], Bv]];
-
-  {Cv,Pencil,Bv} = NCMinimalDescriptorRealization[x**y, {x,y}];
-  Print["Cv = ", Cv];
-  Print["Pencil = ", Pencil];
-  Print["Bv = ", Bv];
-
-  Print["poly = ", MatMult[Cv, NCInverse[Pencil], Bv]];
-
 ];               
