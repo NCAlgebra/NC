@@ -24,7 +24,11 @@ Clear[NCToNCRational,
       NCRationalToNC,
       NCRationalToCanonical,
       CanonicalToNCRational,
+      NCROrder,
       NCRPlus,
+      NCRInverse,
+      NCRTranspose,
+      NCRStrictlyProperQ,
       NCRControllableSubspace,
       NCRControllableRealization,
       NCRObservableRealization,
@@ -37,8 +41,21 @@ Get["NCRational.usage"];
 NCRational::NotRational = "Expression is not an nc rational.";
 NCRational::VarNotSymbol = "All variables must be Symbols.";
 
+NCRControllableRealization::Reduction = "Representation has been reduced from order `1` to order `2`.";
+
+NCToNCRational::Failed = "Cannot convert to NCRational.";
+
 Begin[ "`Private`" ]
 
+  (* NCROrder *)
+  
+  NCROrder[rat_NCRational] := Dimensions[rat[[3]]][[2]];
+
+  (* NCRStrictlyProperQ *)
+  
+  NCRStrictlyProperQ[rat_NCRational] := 
+    PossibleZeroQ[Total[Abs[rat[[4]]],2]];
+  
   (* NCToNCRational *)
 
   Clear[NCToNCRationalAuxRule];
@@ -56,17 +73,93 @@ Begin[ "`Private`" ]
               Apply[NCToNCRationalAuxRule,
                 MapIndexed[{#2[[1]],Flatten[Position[monomial,#1]]}&, 
                            vars], 1], 1], {1,i_,i_}->1], {m+1,n,n}],
-        SparseArray[{n,1}->1,{n,1}],  
+        SparseArray[{n,1}->(Times @@ coefficients),{n,1}],
         SparseArray[{1,1}->1,{1,n}], 
         SparseArray[{},{1,1}],
         vars]
     ];
   ] /; Length[coefficients] == 3;
+
+  NCToNCRationalAux[___] := 
+    (Message[NCToNCRational::Failed]; $Failed)
+
+  (* scalars *)
   
+  NCToNCRational[expr_?CommutativeQ, vars_List] := Module[
+    {n = 0, m = Length[vars]},
+    Return[
+      NCRational[SparseArray[{},{m+1,n,n}],
+                 SparseArray[{},{n,1}],
+                 SparseArray[{},{1,n}],
+                 SparseArray[{{expr}}],
+                 vars]
+    ];
+  ];
+
+  (* A + B inv[] *)
+  
+  NCToNCRational[(aa_:0) + (B_:1) inv[bb_],
+                 vars_List] := Module[
+    {n = 1, m = Length[vars],
+     a, b, poly,
+     A,tmp},
+    
+    (* convert first term *)
+    a = NCToNCRational[aa, vars];
+    
+    (* convert inverse to NCPolynomial *)
+    Quiet[
+       Check[ (* linear polynomial *)
+              poly = NCToNCPolynomial[bb, vars];
+              If[ (poly =!= $Failed) && NCPLinearQ[poly],
+                  (* linear: already in canonical form *)
+
+                  (*
+                  Print[">> linear"];
+                  Print["poly = ", poly];
+                  Print["bb = ", bb];
+                  *)
+                  
+                  b = NCRational[SparseArray[
+                                   Map[{{#}}&,
+                                       Flatten[CoefficientArrays[bb, vars]]]
+                                 ], 
+                                 SparseArray[{{B}}], 
+                                 SparseArray[{{1}}], 
+                                 SparseArray[{{0}}], 
+                                 vars];
+                 ,
+                  (* force nonlinear *)
+                  Message[NCPolynomial::NotPolynomial];
+              ]
+             ,
+              (* nonlinear: convert first then invert *)
+              (* Print["> Nonlinear"]; *)
+              b = NCRInverse[NCToNCRational[(1/B) bb, vars]];
+             ,
+              NCPolynomial::NotPolynomial
+        ]
+      ,
+       NCPolynomial::NotPolynomial
+    ];
+
+    (*
+    Print["a = ", Map[Normal,a]];
+    Print["b = ", Map[Normal,b]];
+    *)
+                  
+    Return[NCRPlus[a, b]];
+                     
+  ];
+  
+  
+  (* polynomials *)
+
   NCToNCRational[expr_, vars_List] := Module[
     {poly, ratVars, ruleRatRev,
-     terms},
+     tmp},
 
+    (* convert to NCPolynomial *)
     {poly, ratVars, ruleRatRev} = NCRationalToNCPolynomial[expr, vars];
 
     (*
@@ -75,7 +168,13 @@ Begin[ "`Private`" ]
     Print["ruleRatRev = ", ruleRatRev];
     *)
 
-    Return[NCRPlus @@ KeyValueMap[NCToNCRationalAux[##,vars]&, poly[[2]]]];
+    (* convert to NCRational *)
+    tmp = NCRPlus @@ KeyValueMap[NCToNCRationalAux[##,vars]&, poly[[2]]];
+
+    (* add constant term *)
+    tmp[[4]] = If[ MatrixQ[poly[[1]]], poly[[1]], {{poly[[1]]}} ];
+      
+    Return[tmp];
 
   ];
 
@@ -86,10 +185,15 @@ Begin[ "`Private`" ]
     {A,B,C,D} = Normal[rat];
 
     Return[
-      MatMult[C, 
-              NCInverse[First[A] + Plus @@ (Rest[A] * rat[[5]])],
-              B] + D
+      If[ NCROrder[rat] > 0,
+          MatMult[C, 
+                  NCInverse[First[A] + Plus @@ (Rest[A] * rat[[5]])],
+                  B] + D
+         ,
+          D
+      ]
     ];
+      
   ];
 
   NCRationalToCanonical[rat_NCRational] := Module[
@@ -113,19 +217,53 @@ Begin[ "`Private`" ]
 
   Normal[rat_NCRational] ^:= (List @@ rat)[[1;;4]];
   
+  (* NCRational Inverse *)
+  NCRInverse[rrat_NCRational] := Module[
+    {n = NCROrder[rat], d, rat = rrat},
+
+    If[ NCRStrictlyProperQ[rat],
+
+        (* strictly proper inverse embedding *)
+        (* grow all coefficients *)
+        rat[[1]] = PadLeft[rat[[1]], {m+1,r+1,r+1}];
+        (* add c and b to the first coefficient *)
+        rat[[1,1,1,2;;]] = rat[[3]]; (* c *)
+        rat[[1,1,2;;,1]] = rat[[2]]; (* d *)
+
+       ,
+
+        (* proper inverse embedding (scalar) *)
+        d = rat[[4,1,1]];
+        rat[[1,1]] +=  rat[[2]] . rat[[3]] / d;
+        rat[[2]] = -rat[[2]] / d;
+        rat[[3]] = rat[[3]] / d;
+        rat[[4]] = SparseArray[{{1/d}}];
+
+    ];
+      
+    Return[rat];
+      
+  ];
+
+  
   (* NCRational Plus *)
+  
   NCRPlus[term_NCRational] := Return[term];
   
   NCRPlus[tterms__NCRational] := Module[
-      {terms},
+      {terms,nonzero},
       terms = {tterms};
+      
+      (* Exclude zero-order terms *)
+      nonzero = Flatten[Position[Map[NCROrder[#] > 0&, terms], 
+                                 True]];
       
       Return[
         NCRational[ 
           Apply[SparseArray[Band[{1, 1}] -> {##}]&,
-                Transpose[terms[[All,1]],{2,1,3,4}], {1}],
-          Join @@ terms[[All,2]], 
-          Join[##,2]& @@ terms[[All,3]],
+                Transpose[terms[[nonzero,1]],{2,1,3,4}], {1}],
+          Join @@ terms[[nonzero,2]], 
+          Join[##,2]& @@ terms[[nonzero,3]],
           Plus @@ terms[[All,4]],
           terms[[1,5]]]
      ];
@@ -249,7 +387,7 @@ Begin[ "`Private`" ]
     If[ rank < n,
 
         (* Realization is not controllable *)
-        Print["Realization is not controllable."];
+        Message[NCRControllableRealization::Reduction, n, rank];
 
         (* Calculate nullspace *)
         (* [I X] [-X; I] = 0 *)
@@ -287,72 +425,30 @@ Begin[ "`Private`" ]
            
   ];
       
-  (* NCR Controllable Realization *)
-      
-  NCRObservableRealization[rat_NCRational, 
-                           opts:OptionsPattern[{}]] := Module[
-    {A,B,C,D,
-     A2,B2,C2,
-     n,ctrb,q,rank,R,L},
-    
+  (* NCRTranspose *)
+  NCRTranspose[rat_NCRational] := Module[
+    {A,B,C,D},
+
     (* Grab matrices *)
     {A,B,C,D} = Normal[rat];
-    n = Length[B];
-                                 
-    (* Scale by inv[A0] *)
-    A0inv = LinearSolve[A[[1]]];
-    {A2, B2} = {Map[A0inv, Rest[A]], A0inv[B]};
-    C2 = C;
 
-    (* Calculate row-reduced observability subspace *)
-    {ctrb, q} = NCRControllableSubspace[Map[Transpose, A2], Transpose[C2]];
-    rank = Length[ctrb];
-
-    (*
-    Print["ctrb = ", ctrb];
-    Print["rank = ", rank];
-    *)
-
-    If[ rank < n,
-
-        (* Realization is not observable *)
-        Print["Realization is not observable."];
-
-        (* Calculate nullspace *)
-        (* [I X] [-X; I] = 0 *)
-        nullSpace = Join[-ctrb[[1;;rank,q[[rank+1;;]]]], 
-                         IdentityMatrix[n-rank]];
-        nullSpace[[q]] = nullSpace;
-
-        (* Calculate projection *)
-        L = Transpose[Join[ctrb, Transpose[nullSpace]]];
-        R = Inverse[L][[All,1;;rank]];
-        L = L[[1;;rank]];
-
-        (*
-        Print["NullSpace = ", nullSpace];
-        Print["ctrb . NullSpace = ", ctrb . nullSpace];
-        Print["L = ", L];
-        Print["R = ", R];
-        *)
-
-        (* Calculate reduced realization *)
-        Return[
-          NCRational[
-            Prepend[Map[MatMult[L, #, R]&, A2], IdentityMatrix[rank]], 
-            MatMult[L, B2], MatMult[C2, R], D, 
-            rat[[5]]
-          ]
-        ];
-            
-       ,
-        
-        (* Realization is already observable *)
-        Return[rat];
-        
+    Return[
+      NCRational[
+        Transpose[A,{1,3,2}],
+        Transpose[C],
+        Transpose[B],
+        Transpose[D],
+        rat[[5]]
+      ]
     ];
-
+      
   ];
+      
+  (* NCR Observable Realization *)
+
+  NCRObservableRealization[rat_NCRational, 
+                           opts:OptionsPattern[{}]] := 
+    NCRTranspose[NCRControllableRealization[NCRTranspose[rat], opts]];
 
   (* NCR Minimial Realization *)
       
