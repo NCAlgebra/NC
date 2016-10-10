@@ -25,6 +25,7 @@ Clear[NCToNCRational,
       NCRationalToCanonical,
       CanonicalToNCRational,
       NCROrder,
+      NCRLinearQ,
       NCRPlus,
       NCRTimes,
       NCRInverse,
@@ -45,6 +46,10 @@ NCRational::NotSimple = "Expression is not a simple nc rational. Results cannot 
 
 NCRControllableRealization::Reduction = "Representation has been reduced from order `1` to order `2`.";
 
+Options[NCRational] = {
+  Linear -> False
+};
+
 NCToNCRational::Failed = "Cannot convert to NCRational.";
 
 Begin[ "`Private`" ]
@@ -58,6 +63,10 @@ Begin[ "`Private`" ]
   NCRStrictlyProperQ[rat_NCRational] := 
     PossibleZeroQ[Total[Abs[rat[[4]]],2]];
   
+  (* NCRLinearQ *)
+  NCRLinearQ[rat_NCRational] :=
+    Linear /. rat[[6]] /. Options[NCRational];
+
   (* NCToNCRational *)
 
   (* commutative scalars *)
@@ -69,7 +78,8 @@ Begin[ "`Private`" ]
                  SparseArray[{},{n,1}],
                  SparseArray[{},{1,n}],
                  SparseArray[{{expr}}],
-                 vars]
+                 vars,
+                 {Linear -> True}]
     ];
   ];
 
@@ -79,227 +89,45 @@ Begin[ "`Private`" ]
     {b},
 
     b = NCToNCRational[bb, vars];
-    If[ B != 1,
+    If[ B =!= 1,
 
         (* Multiply B and D by scalar *)
         b[[2]] *= B;
         b[[4]] *= B;
         
     ];
-      
+
     Return[b];
   ];
 
-  (* commutative scalars *)
+  (* symbols *)
   
   NCToNCRational[expr_Symbol, vars_List] := Module[
-    {n = 2, m = Length[vars], r = Flatten[Position[vars,expr]][[1]]},
+    {n = 2, m = Length[vars], 
+     r = Flatten[Position[vars,expr]][[1]]},
+      
+    (* TODO: WARN ABOUT NOT SIMPLE *)
+      
     Return[
       NCRational[SparseArray[{{r+1,1,2}->-1,{1,i_,i_}->1},{m+1,n,n}],
                  SparseArray[{n,1}->1,{n,1}],
                  SparseArray[{1,1}->1,{1,n}], 
                  SparseArray[{},{1,1}],
-                 vars]
+                 vars,
+                 {Linear -> True}]
     ];
   ];
 
-  (* a + B inv[b] *)
+  (* sums *)
   
-  NCToNCRational[(aa_:0) + (B_:1) inv[bb_],
-                 vars_List] := Module[
-    {a, b, poly},
-    
-    (*
-    Print["> a + B inv[b]"];
-    Print["B = ", B];
-    *)
-                     
-    (* convert inverse to NCPolynomial *)
-    Quiet[
-       Check[ (* linear polynomial *)
-              poly = NCToNCPolynomial[bb, vars];
-              If[ (poly =!= $Failed) && NCPLinearQ[poly],
-                  (* linear: already in canonical form *)
+  NCToNCRational[expr_Plus, vars_List] := 
+    NCRPlus @@ Map[NCToNCRational[#, vars]&, List @@ expr];
 
-                  (*
-                  Print[">> linear"];
-                  Print["poly = ", poly];
-                  Print["bb = ", bb];
-                  *)
-                  
-                  b = NCRational[SparseArray[
-                                   Map[{{#}}&,
-                                       Flatten[CoefficientArrays[bb, vars]]]
-                                 ], 
-                                 SparseArray[{{B}}], 
-                                 SparseArray[{{1}}], 
-                                 SparseArray[{{0}}], 
-                                 vars];
-                 ,
-                  (* force nonlinear *)
-                  Message[NCPolynomial::NotPolynomial];
-              ]
-             ,
-              (* nonlinear: convert first then invert *)
-              
-              (* Print["> Nonlinear"]; *)
-              b = NCRInverse[NCToNCRational[(1/B) bb, vars]];
-             ,
-              NCPolynomial::NotPolynomial
-        ]
-      ,
-       NCPolynomial::NotPolynomial
-    ];
-
-    (*
-    Print["b = ", Map[Normal,b]];
-    *)
-                     
-    If[ aa === 0,
-        Return[b];
-    ];
-                    
-    (* convert first term *)
-    a = NCToNCRational[aa, vars];
-    
-    (*
-    Print["a = ", Map[Normal,a]];
-    *)
-                  
-    Return[NCRPlus[a, b]];
-                     
-  ];
+  (* products *)
   
-  (* monomial *)
-  
-  Clear[NCToNCRationalAuxRule];
-  NCToNCRationalAuxRule[var_, positions_] := 
-      Map[{var+1, #, #+1}->-1&, positions];
-
-  Clear[NCToNCRationalAux];
-  NCToRationalAux[{mmonomial__Symbol}, vars_] := Module[
-    {monomial = {mmonomial}, 
-     n, m = Length[vars], poly},
-
-    n = Length[monomial]+1;
-      
-    (*
-    Print["> monomial"];
-    Print["monomial = ", monomial];
-    Print["n = ", n];
-    Print["m = ", m];
-    *)
-      
-    (* convert to NCPolynomial for verification *)
-    poly = NCToNCPolynomial[NonCommutativeMultiply[mmonomial], vars];
-    If[ Rest[Values[poly[[2]]][[1,1]]] =!= {1,1},
-        Message[NCRational::NotSimple];
-    ];
-      
-    Return[
-      NCRational[
-        SparseArray[
-            Prepend[Flatten[
-              Apply[NCToNCRationalAuxRule,
-                MapIndexed[{#2[[1]],Flatten[Position[monomial,#1]]}&, 
-                           vars], 1], 1], {1,i_,i_}->1], {m+1,n,n}],
-        SparseArray[{n,1}->1,{n,1}],
-        SparseArray[{1,1}->1,{1,n}], 
-        SparseArray[{},{1,1}],
-        vars]
-    ];
-      
-  ];
-
-  (* other types of monomials *)
-  
-  NCToRationalAux[{expr_}, vars_] := NCToNCRational[expr, vars];
-
-  (* a + B NonCommutativeMultiply[b] *)
-  
-  NCToNCRational[(aa_:0) + (B_:1) NonCommutativeMultiply[bb__],
-                 vars_List] := Module[
-    {a, b, monomials},
+  NCToNCRational[expr_NonCommutativeMultiply, vars_List] := 
+    NCRTimes @@ Map[NCToNCRational[#, vars]&, List @@ expr];
     
-    (*
-    Print["> a + B NonCommutativeMultiply[b]"];
-    *)
-  
-    (* convert ** to NCPolynomial *)
-    monomials = Split[{bb}, (Head[#1] == Head[#2] == Symbol) &];
-
-    (*
-    Print["monomials = ", monomials];
-    *)
-
-    b = NCRTimes @@ Map[NCToRationalAux[#1, vars]&, monomials];
-    
-    If[ B != 1,
-
-        (* Multiply B and D by scalar *)
-        b[[2]] *= B;
-        b[[4]] *= B;
-        
-    ];
-
-    (*
-    Print["b = ", Map[Normal,b]];
-    *)
-                     
-    If[ aa === 0,
-        Return[b];
-    ];
-        
-    (* convert first term *)
-    a = NCToNCRational[aa, vars];
-    
-    (*
-    Print["a = ", Map[Normal,a]];
-    *)
-
-    Return[NCRPlus[a, b]];
-    
-  ];
-  
-  (* a + B NonCommutativeMultiply[b] *)
-  
-  NCToNCRational[(aa_:0) + (B_:1) bb_Symbol,
-                 vars_List] := Module[
-    {a, b, monomials},
-    
-    (*
-    Print["> a + B b_Symbol"];
-    *)
-  
-    b = NCToNCRational[bb, vars];
-    
-    If[ B != 1,
-
-        (* Multiply B and D by scalar *)
-        b[[2]] *= B;
-        b[[4]] *= B;
-        
-    ];
-
-    (*
-    Print["b = ", Map[Normal,b]];
-    *)
-                     
-    If[ aa === 0,
-        Return[b];
-    ];
-        
-    (* convert first term *)
-    a = NCToNCRational[aa, vars];
-    
-    (*
-    Print["a = ", Map[Normal,a]];
-    *)
-
-    Return[NCRPlus[a, b]];
-    
-  ];
-
   (* NCRational to NC *)
 
   NCRationalToNC[rat_NCRational] := Module[
@@ -343,16 +171,20 @@ Begin[ "`Private`" ]
   
   (* NCRational Inverse *)
   NCRInverse[rrat_NCRational] := Module[
-    {n = NCROrder[rat], d, rat = rrat},
+    {rat = rrat, n, m, d},
 
     If[ NCRStrictlyProperQ[rat],
 
         (* strictly proper inverse embedding *)
+        n = NCROrder[rat];
+        m = Length[rat[[5]]] + 1;
         (* grow all coefficients *)
-        rat[[1]] = PadLeft[rat[[1]], {m+1,r+1,r+1}];
+        rat[[1]] = PadLeft[rat[[1]], {m+1,n+1,n+1}];
         (* add c and b to the first coefficient *)
         rat[[1,1,1,2;;]] = rat[[3]]; (* c *)
         rat[[1,1,2;;,1]] = rat[[2]]; (* b *)
+        
+        (* TODO: FIX B AND C *)
 
        ,
 
@@ -368,16 +200,58 @@ Begin[ "`Private`" ]
     Return[rat];
       
   ];
-
   
   (* NCRational Times *)
   
   NCRTimes[term_NCRational] := Return[term];
 
   NCRTimes[a_NCRational, b_NCRational] := Module[
-    {orderA,orderB,m,
-     terms,A},
+    {n,m,vars,tmp,coeffs,degree,
+     orderA,orderB,
+     terms,A,B,C,D},
+
+    (* Evaluate a ** b *)
       
+    Print["> NCRTimes"];
+      
+    (* Multiplication by constants should never happen! *)
+      
+    If[ NCRLinearQ[b], 
+        
+        (* Multiplication on the right by a linear term *)
+       
+        vars = b[[5]];
+        tmp = NCRationalToNC[b][[1,1]];
+        coeffs = CoefficientArrays[tmp, vars];
+        degree = Length[coeffs] - 1;
+          
+        Print["tmp = ", tmp];
+        Print["coeffs = ", Normal[coeffs]];
+        Print["degree = ", degree];
+        
+        n = NCROrder[b];
+        m = Length[b[[5]]] + 1;
+ 
+        A = PadRight[b[[1]], {m,n+1,n+1}];
+        A[[2;;,1;;n,{n+1}]] = Outer[Times, -coeffs[[2]], b[[2]]];
+        B = Prepend[b[[2]], {0}];
+        
+        If[ PossibleZeroQ[b[[4,1,1]]],
+            (* strictly proper *)
+            A[[1,n+1,n+1]] = 1;
+            C = PadRight[b[[3]], {1,n+1}, 0];
+           ,
+            (* proper *)
+            A[[1,n+1,n+1]] = 1/b[[4,1,1]];
+            C = PadRight[b[[3]], {1,n+1}, 1];
+        ];
+        
+        Print["A = ", Map[Normal, A]];
+        Print["B = ", Map[Normal, B]];
+        Print["C = ", Map[Normal, C]];
+        
+    ];
+    
     orderA = NCROrder[a];
     orderB = NCROrder[b];
       
@@ -421,15 +295,69 @@ Begin[ "`Private`" ]
   NCRPlus[term_NCRational] := Return[term];
   
   NCRPlus[tterms__NCRational] := Module[
-      {terms,nonzero,m},
+      {terms,m,vars,
+       linear,tmp,coeffs,degree,
+       nonlinear,nonzero},
       terms = {tterms};
       
-      (* Exclude zero-order terms *)
-      nonzero = Flatten[Position[Map[NCROrder[#] > 0&, terms], 
-                                 True]];
-
       (* Number of variables + 1 *)
-      m = Length[terms[[1,5]]] + 1;
+      vars = terms[[1,5]];
+      m = Length[vars] + 1;
+
+      (* linear and nonlinear *)
+      tmp = Map[NCRLinearQ, terms];
+      linear = Flatten[Position[tmp, True]];
+      nonlinear = Flatten[Position[tmp, False]];
+      Print["linear = ", linear];
+      Print["nonlinear = ", nonlinear];
+      
+      (* add linear terms *)
+      If[ Length[linear] > 0,
+          tmp = (Plus @@ Map[NCRationalToNC, terms[[linear]]])[[1,1]];
+          coeffs = CoefficientArrays[tmp, vars];
+          degree = Length[coeffs] - 1;
+          
+          Print["linear terms = ", Map[Normal,terms[[linear]],{2}]];
+          Print["tmp = ", tmp];
+          Print["coeffs = ", Normal[coeffs]];
+          Print["degree = ", degree];
+
+          tmp = If[ degree > 0,
+                    (* linear *)
+                    NCRational[
+                      SparseArray[
+                        Append[
+                          MapIndexed[({#2[[1]]+1,1,2}->-#1)&,coeffs[[2]]],
+                          {1,i_,i_}->1
+                        ],{m,2,2}
+                      ],
+                      SparseArray[{2,1}->1,{2,1}],
+                      SparseArray[{1,1}->1,{1,2}], 
+                      SparseArray[{{coeffs[[1]]}}], 
+                      vars, {Linear -> True}]
+                   ,
+                    (* constant *)
+                    NCRationalToNC[coeffs[[1]], vars]
+                ];
+
+          Print["tmp = ", Map[Normal,tmp]];
+
+          If[ Length[nonlinear] == 0,
+              Return[tmp];
+          ];
+         
+          (* select linear and nonlinear terms *)
+          terms = Append[terms[[nonlinear]], tmp];
+          nonzero = Range[Length[terms]-1];
+          
+         ,
+          
+          (* select nonlinear terms *)
+          terms = terms[[nonlinear]];
+          nonzero = All;
+      ];
+          
+      (* add linear and nonlinear terms *)
       
       Return[
         NCRational[ 
@@ -445,6 +373,7 @@ Begin[ "`Private`" ]
           Plus @@ terms[[All,4]],
           terms[[1,5]]]
      ];
+      
   ];
 
   (* NCRControllableSubspace *)

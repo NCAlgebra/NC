@@ -20,7 +20,7 @@ Module[
              SparseArray[{},{3,0,0}],
              SparseArray[{},{0,1}], 
              SparseArray[{},{1,0}], 
-	     SparseArray[{{poly}}], vars];
+	     SparseArray[{{poly}}], vars, {Linear->True}];
   NCTest[expr, answer];
   NCTest[NCROrder[expr], 0];
   NCTest[NCRationalToNC[expr], SparseArray[{{poly}}]];
@@ -31,7 +31,7 @@ Module[
              SparseArray[{},{3,0,0}],
              SparseArray[{},{0,1}], 
              SparseArray[{},{1,0}], 
-	     SparseArray[{{poly}}], vars];
+	     SparseArray[{{poly}}], vars, {Linear->True}];
   NCTest[expr, answer];
   NCTest[NCROrder[expr], 0];
   NCTest[NCRationalToNC[expr], SparseArray[{{poly}}]];
@@ -48,7 +48,7 @@ Module[
                {{0, 0}, {0, 0}}}],
              SparseArray[{{0}, {1}}], 
              SparseArray[{{1,0}}], 
-	     SparseArray[{{0}}], vars];
+	     SparseArray[{{0}}], vars, {Linear->True}];
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 2];
@@ -63,7 +63,52 @@ Module[
                {{0, -1}, {0, 0}}}],
              SparseArray[{{0}, {1}}], 
              SparseArray[{{1,0}}], 
-	     SparseArray[{{0}}], vars];
+	     SparseArray[{{0}}], vars, {Linear->True}];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
+  poly = A x;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, -1}, {0, 0}}, 
+               {{0, 0}, {0, 0}}}],
+             SparseArray[{{0}, {A}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{0}}], vars, {Linear->True}];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
+  poly = B + A x;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, -A}, {0, 0}}, 
+               {{0, 0}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{B}}], vars, {Linear->True}];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+  
+  poly = A x + B y;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, -A}, {0, 0}}, 
+               {{0, -B}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{0}}], vars, {Linear->True}];
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 2];
@@ -82,6 +127,10 @@ Module[
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 3];
+
+];
+
+If[ 0,
 
   expr = NCRMinimalRealization[expr];
   NCTest[NCRationalToNC[expr],{{poly}}];
