@@ -35,8 +35,38 @@ Module[
   NCTest[expr, answer];
   NCTest[NCROrder[expr], 0];
   NCTest[NCRationalToNC[expr], SparseArray[{{poly}}]];
- 
+
   (* Monomials *)
+
+  poly = x;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, -1}, {0, 0}}, 
+               {{0, 0}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{0}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
+  poly = y;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, 0}, {0, 0}}, 
+               {{0, -1}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{0}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
 
   poly = x**y;
   vars = {x,y};
@@ -172,6 +202,42 @@ Module[
 
   (* Polynomials *)
 
+  poly = 1 + x;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, -1}, {0, 0}}, 
+               {{0, 0}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{1}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
+  poly = 1 + y;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, 0}, {0, 0}}, 
+               {{0, -1}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{1}}], vars];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
+  poly = 2 + 3 x;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
   poly = 1 + x**y;
   rat = NCToNCRational[poly, {x,y}];
   NCTest[NCRationalToNC[rat],{{poly}}];
@@ -274,6 +340,23 @@ Module[
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
   NCTest[NCROrder[expr], 4];
 
+  poly = (1+x)**(1+y)**(1+x);
+  rat = NCToNCRational[poly, {x,y}];
+  NCTest[NCExpand[NCRationalToNC[rat]],{{NCExpand[poly]}}];
+  NCTest[NCROrder[rat], 6];
+
+  expr = NCRControllableRealization[rat];
+  NCTest[NCExpand[NCRationalToNC[expr]],{{NCExpand[poly]}}];
+  NCTest[NCROrder[rat], 6];
+
+  expr = NCRObservableRealization[rat];
+  NCTest[NCExpand[NCRationalToNC[expr]],{{NCExpand[poly]}}];
+  NCTest[NCROrder[rat], 6];
+
+  expr = NCRMinimalRealization[rat];
+  NCTest[NCExpand[NCRationalToNC[expr]],{{NCExpand[poly]}}];
+  NCTest[NCROrder[rat], 6];
+
   (* rational *)
 
   poly = inv[x];
@@ -318,8 +401,50 @@ Module[
 
   expr = NCRMinimalRealization[expr];
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],5];
 
+  (* products with inverses *)
+
+  poly = inv[x]**y;
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],3];
+
+  poly = x**inv[y];
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],3];
+
+  poly = x**x**inv[y]**x;
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],6];
+
+  poly = x**x**inv[y]**x**y**inv[x];
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],3+1+3+1];
+
+  poly = inv[1 + x]**y;
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],3];
+
+  poly = inv[1 + x]**(1+y);
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
+  NCTest[NCROrder[expr],3];
+
+  poly = inv[1 + 3 x]**(1 + 2 y);
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
+  NCTest[NCROrder[expr],3];
+
+  (*
   Print["expr = ", Map[Normal,expr]];
   Print["expr = ", NCSimplifyRational[NCRationalToNC[expr]]];
+  *)
 
-];               
+  (* TODO: FAIL WHEN IT IS NOT RATIONAL *)
+
+];
