@@ -446,13 +446,11 @@ Module[
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
   NCTest[NCROrder[expr],6];
 
-  (* TODO: NCSimplifyRational fails *)
-
   expr = NCRMinimalRealization[expr];
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
   NCTest[NCROrder[expr],5];
 
-  (* TODO: Minimal Realization singulat *)
+  (* TODO: Minimal Realization singular *)
 
   poly = 1 + 2 inv[x ** y];
   expr = NCToNCRational[poly, {x,y}];

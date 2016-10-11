@@ -11,6 +11,7 @@ FILES = NonCommutativeMultiply.usage \
 	NCPolynomial.usage \
 	NCSylvester.usage \
 	NCQuadratic.usage \
+	NCRational.usage \
 	NCConvexity.usage \
 	NCConvexity.private.usage \
 	NCRealization.usage \

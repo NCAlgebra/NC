@@ -40,6 +40,7 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCPolynomial.md \
 	 NCAlgebra/NCSylvester.md \
 	 NCAlgebra/NCQuadratic.md \
+	 NCAlgebra/NCRational.md \
 	 NCAlgebra/NCConvexity.md \
 	 NCAlgebra/NCRealization.md \
 	 NCAlgebra/NCMatMult.md \

@@ -36,9 +36,7 @@ Clear[NCToNCRational,
       NCRObservableRealization,
       NCRMinimalRealization];
 
-(*
 Get["NCRational.usage"];
-*)
 
 NCRational::NotRational = "Expression is not an nc rational.";
 NCRational::VarNotSymbol = "All variables must be Symbols.";

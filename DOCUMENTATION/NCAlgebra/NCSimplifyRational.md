@@ -31,11 +31,13 @@ Finally the following pattern based rules are applied:
 
 | Original | Transformed |
 | --- | --- |
-| inv[a] inv[1 + K a b]  | inv[a] - K b inv[1 + K a b] |
-| inv[a] inv[1 + K a]    | inv[a] - K inv[1 + K a]     |
-| inv[1 + K a b] inv[b]  | inv[b] - K inv[1 + K a b] a |
-| inv[1 + K a] inv[a]    | inv[a] - K inv[1 + K a]     |
-| inv[1 + K a b] a       | a inv[1 + K b a]      |
+| inv[a] inv[1 + K a b]      | inv[a] - K b inv[1 + K a b] |
+| inv[a] inv[1 + K a]        | inv[a] - K inv[1 + K a]     |
+| inv[1 + K a b] inv[b]      | inv[b] - K inv[1 + K a b] a |
+| inv[1 + K a] inv[a]        | inv[a] - K inv[1 + K a]     |
+| inv[1 + K a b] a           | a inv[1 + K b a]            |
+| inv[A inv[a] + B b] inv[a] | (1/A) inv[1 + (B/A) a b]    | 
+| inv[a] inv[A inv[a] + K b] | (1/A) inv[1 + (B/A) b a]    | 
 
 `NCPreSimplifyRational` only applies pattern based rules from the second table above. In addition, the following two rules are applied:
 
