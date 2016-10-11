@@ -207,12 +207,13 @@ Begin[ "`Private`" ]
         n = NCROrder[rat];
         m = Length[rat[[5]]] + 1;
         (* grow all coefficients *)
-        rat[[1]] = PadLeft[rat[[1]], {m+1,n+1,n+1}];
+        rat[[1]] = PadLeft[rat[[1]], {m,n+1,n+1}];
         (* add c and b to the first coefficient *)
-        rat[[1,1,1,2;;]] = rat[[3]]; (* c *)
-        rat[[1,1,2;;,1]] = rat[[2]]; (* b *)
-        
-        (* TODO: FIX B AND C *)
+        rat[[1,1,{1},2;;]] = -rat[[3]]; (* c *)
+        rat[[1,1,2;;,{1}]] = rat[[2]]; (* b *)
+
+        rat[[2]] = SparseArray[{1,1}->1,{n+1,1}];
+        rat[[3]] = SparseArray[{1,1}->1,{1,n+1}]; 
 
        ,
 

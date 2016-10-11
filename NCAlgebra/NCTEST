@@ -9,7 +9,6 @@ On[Assert];
 Print["> BEGIN NCTEST\n" ];
 
 tests = {
-(*
   "CommutativeQ",
   "NCMultiplication",
   "NCDeprecated",
@@ -21,9 +20,7 @@ tests = {
   "NCSimplifyRational",
   "NCSylvester",
   "NCQuadratic",
-*)
   "MatrixDecompositions",
-(*
   "NCMatrixDecompositions",
   "NCCollect",
   "NCInverse",
@@ -34,11 +31,8 @@ tests = {
   "NCOutput",
   "NCSystem",
   "NCRealization",
-*)
   "NCRational",
-(*
   "NCConvexity",
-*)
   "Matrix"
 };
 results = NCTestRun[tests];

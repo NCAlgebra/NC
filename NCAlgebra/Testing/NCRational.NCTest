@@ -452,6 +452,13 @@ Module[
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
   NCTest[NCROrder[expr],5];
 
+  (* TODO: Minimal Realization singulat *)
+
+  poly = 1 + 2 inv[x ** y];
+  expr = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
+  NCTest[NCROrder[expr],4];
+
   (* products with inverses *)
 
   poly = inv[x]**y;
@@ -497,6 +504,9 @@ Module[
   Print["expr = ", NCSimplifyRational[NCRationalToNC[expr]]];
   *)
 
+
   (* TODO: FAIL WHEN IT IS NOT RATIONAL *)
+
+  (* TODO: NCSimplifyRational fails *)
 
 ];

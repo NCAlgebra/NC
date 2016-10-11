@@ -123,7 +123,15 @@ Begin["`Private`"]
       (* rule 6 is as follows:                                      *)
       (*      inv[1 + K a b] a  =  a inv[1 + K b a]                 *) 
       (*------------------------------------------------------------*)
-      inv[1 + K_. a_**b_]**a_ :> a**inv[1 + K b**a]
+      inv[1 + K_. a_**b_]**a_ :> a**inv[1 + K b**a],
+      
+      (*---------------------------------RULE 7---------------------*) 
+      (* rule 6 is as follows:                                      *)
+      (*   inv[A inv[a] + B b] inv[a]  =  (1/A) inv[1 + (B/A) a b]  *) 
+      (*   inv[a] inv[A inv[a] + K b]  =  (1/A) inv[1 + (B/A) b a]  *) 
+      (*------------------------------------------------------------*)
+      inv[A_. inv[a_] + B_. b_]**inv[a_] :> (1/A)inv[1 + (B/A) a ** b],
+      inv[a_]**inv[A_. inv[a_] + B_. b_] :> (1/A)inv[1 + (B/A) b ** a]
       
   };
 
