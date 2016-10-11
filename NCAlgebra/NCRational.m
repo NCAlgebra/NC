@@ -127,6 +127,34 @@ Begin[ "`Private`" ]
   
   NCToNCRational[expr_NonCommutativeMultiply, vars_List] := 
     NCRTimes @@ Map[NCToNCRational[#, vars]&, List @@ expr];
+
+  (* inverses *)
+  
+  NCToNCRational[inv[expr_], vars_List] := Module[
+    {b,coeffs},
+      
+    (* convert expr *)
+    b = NCToNCRational[expr, vars];
+    
+    (* simplify if linear *)
+    If[ NCRLinearQ[b],
+      
+        coeffs = Flatten[CoefficientArrays[expr, vars]];
+        
+        Return[
+          NCRational[
+            SparseArray[Map[{{#}}&,coeffs]],
+            SparseArray[{{1}}],
+            SparseArray[{{1}}],
+            SparseArray[{{0}}],
+            vars, {}
+          ]
+        ];
+       , 
+        Return[NCRInverse[b]];
+    ];
+      
+  ];
     
   (* NCRational to NC *)
 
@@ -164,7 +192,7 @@ Begin[ "`Private`" ]
     {A0,A1} = CoefficientArrays[G, vars];
     A1 = Transpose[A1,{3,2,1}];
       
-    Return[NCRational[Prepend[A1,A0], B, C, D, vars]];
+    Return[NCRational[Prepend[A1,A0], B, C, D, vars, {}]];
   ];
 
   Normal[rat_NCRational] ^:= (List @@ rat)[[1;;4]];
@@ -212,57 +240,91 @@ Begin[ "`Private`" ]
 
     (* Evaluate a ** b *)
       
-    Print["> NCRTimes"];
-      
-    (* Multiplication by constants should never happen! *)
-      
-    If[ NCRLinearQ[b], 
+    (* Print["> NCRTimes"]; *)
+
+    If[ NCRLinearQ[b] && NCRStrictlyProperQ[a], 
         
         (* Multiplication on the right by a linear term *)
        
         vars = b[[5]];
         tmp = NCRationalToNC[b][[1,1]];
-        coeffs = CoefficientArrays[tmp, vars];
+        coeffs = Flatten[CoefficientArrays[tmp, vars]];
         degree = Length[coeffs] - 1;
-          
+        
+        (*
         Print["tmp = ", tmp];
         Print["coeffs = ", Normal[coeffs]];
         Print["degree = ", degree];
+        *)
+        
+        n = NCROrder[a];
+        m = Length[a[[5]]] + 1;
+ 
+        A = PadRight[a[[1]], {m,n+1,n+1}];
+        A[[All,1;;n,{n+1}]] = Outer[Times, -coeffs, a[[2]]];
+        A[[1,n+1,n+1]] = 1;
+        B = SparseArray[{n+1,1}->1,{n+1,1}];
+        C = PadRight[a[[3]], {1,n+1}, 0];
+        D = a[[4]];
+       
+        (*
+        Print["A = ", Map[Normal, A]];
+        Print["B = ", Map[Normal, B]];
+        Print["C = ", Map[Normal, C]];
+        Print["D = ", Map[Normal, D]];
+        *)
+        
+        Return[NCRational[A, B, C, D, a[[5]], {}]];
+        
+    ];
+
+    If[ NCRLinearQ[a] && NCRStrictlyProperQ[b], 
+        
+        (* Multiplication on the left by a linear term *)
+       
+        vars = a[[5]];
+        tmp = NCRationalToNC[a][[1,1]];
+        coeffs = Flatten[CoefficientArrays[tmp, vars]];
+        degree = Length[coeffs] - 1;
+          
+        (*
+        Print["tmp = ", tmp];
+        Print["coeffs = ", Normal[coeffs]];
+        Print["degree = ", degree];
+        *)
         
         n = NCROrder[b];
         m = Length[b[[5]]] + 1;
  
         A = PadRight[b[[1]], {m,n+1,n+1}];
-        A[[2;;,1;;n,{n+1}]] = Outer[Times, -coeffs[[2]], b[[2]]];
-        B = Prepend[b[[2]], {0}];
-        
-        If[ PossibleZeroQ[b[[4,1,1]]],
-            (* strictly proper *)
-            A[[1,n+1,n+1]] = 1;
-            C = PadRight[b[[3]], {1,n+1}, 0];
-           ,
-            (* proper *)
-            A[[1,n+1,n+1]] = 1/b[[4,1,1]];
-            C = PadRight[b[[3]], {1,n+1}, 1];
-        ];
-        
+        A[[All,{n+1},1;;n]] = Outer[Times, -coeffs, b[[3]]];
+        A[[1,n+1,n+1]] = 1;
+        B = PadRight[b[[2]], {n+1,1}, 0];
+        C = SparseArray[{1,n+1}->1,{1,n+1}];
+        D = b[[4]];
+       
+        (*
         Print["A = ", Map[Normal, A]];
         Print["B = ", Map[Normal, B]];
         Print["C = ", Map[Normal, C]];
+        Print["D = ", Map[Normal, D]];
+        *)
+        
+        Return[NCRational[A, B, C, D, b[[5]], {}]];
         
     ];
-    
+      
     orderA = NCROrder[a];
     orderB = NCROrder[b];
       
     If[ orderA == 0,
         Return[NCRational[b[[1]],a[[4,1,1]]*b[[2]],
-                          b[[3]],a[[4,1,1]]*b[[4]],b[[5]]]];
+                          b[[3]],a[[4,1,1]]*b[[4]],b[[5]]],b[[6]]];
     ];
 
     If[ orderB == 0,
         Return[NCRational[a[[1]],b[[4,1,1]]*a[[2]],
-                          a[[3]],b[[4,1,1]]*a[[4]],a[[5]]]];
+                          a[[3]],b[[4,1,1]]*a[[4]],a[[5]]],a[[6]]];
     ];
 
     (* Number of variables + 1 *)
@@ -281,7 +343,7 @@ Begin[ "`Private`" ]
     Return[
       NCRational[A, Join[b[[2]], a[[2]] . b[[4]]],
                  Join[a[[4]] . b[[3]], a[[3]], 2], a[[4]] . b[[4]],
-                 a[[5]]
+                 a[[5]],{}
       ]
     ];
       
@@ -308,39 +370,46 @@ Begin[ "`Private`" ]
       tmp = Map[NCRLinearQ, terms];
       linear = Flatten[Position[tmp, True]];
       nonlinear = Flatten[Position[tmp, False]];
+      
+      (*
       Print["linear = ", linear];
       Print["nonlinear = ", nonlinear];
+      *)
       
       (* add linear terms *)
       If[ Length[linear] > 0,
           tmp = (Plus @@ Map[NCRationalToNC, terms[[linear]]])[[1,1]];
-          coeffs = CoefficientArrays[tmp, vars];
+          coeffs = Flatten[CoefficientArrays[tmp, vars]];
           degree = Length[coeffs] - 1;
           
+          (*
           Print["linear terms = ", Map[Normal,terms[[linear]],{2}]];
           Print["tmp = ", tmp];
           Print["coeffs = ", Normal[coeffs]];
           Print["degree = ", degree];
+          *)
 
           tmp = If[ degree > 0,
                     (* linear *)
                     NCRational[
                       SparseArray[
                         Append[
-                          MapIndexed[({#2[[1]]+1,1,2}->-#1)&,coeffs[[2]]],
+                          MapIndexed[({#2[[1]],1,2}->-#1)&,coeffs],
                           {1,i_,i_}->1
                         ],{m,2,2}
                       ],
                       SparseArray[{2,1}->1,{2,1}],
                       SparseArray[{1,1}->1,{1,2}], 
-                      SparseArray[{{coeffs[[1]]}}], 
+                      SparseArray[{},{1,1}], 
                       vars, {Linear -> True}]
                    ,
                     (* constant *)
-                    NCRationalToNC[coeffs[[1]], vars]
+                    NCToNCRational[coeffs[[1]], vars]
                 ];
 
+          (*
           Print["tmp = ", Map[Normal,tmp]];
+          *)
 
           If[ Length[nonlinear] == 0,
               Return[tmp];
@@ -371,7 +440,7 @@ Begin[ "`Private`" ]
           Join @@ terms[[nonzero,2]], 
           Join[##,2]& @@ terms[[nonzero,3]],
           Plus @@ terms[[All,4]],
-          terms[[1,5]]]
+          terms[[1,5]],{}]
      ];
       
   ];
@@ -519,7 +588,7 @@ Begin[ "`Private`" ]
           NCRational[
             Prepend[Map[MatMult[L, #, R]&, A2], IdentityMatrix[rank]], 
             MatMult[L, B2], MatMult[C2, R], D, 
-            rat[[5]]
+            rat[[5]], {}
           ]
         ];
             
@@ -545,7 +614,7 @@ Begin[ "`Private`" ]
         Transpose[C],
         Transpose[B],
         Transpose[D],
-        rat[[5]]
+        rat[[5]], rat[[6]]
       ]
     ];
       
