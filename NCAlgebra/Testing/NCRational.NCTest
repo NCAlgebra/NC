@@ -278,6 +278,21 @@ Module[
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 2];
 
+  poly = x + y;
+  vars = {x,y};
+  expr = NCToNCRational[poly, {x,y}];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, -1}, {0, 0}}, 
+               {{0, -1}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
+	     SparseArray[{{0}}], vars, {Linear->True}];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
   poly = 2 + 3 x;
   vars = {x,y};
   expr = NCToNCRational[poly, {x,y}];

@@ -295,11 +295,11 @@ Begin[ "`Private`" ]
         n = NCROrder[b];
         m = Length[b[[5]]] + 1;
  
-        A = PadRight[b[[1]], {m,n+1,n+1}];
-        A[[All,{n+1},1;;n]] = Outer[Times, -coeffs, b[[3]]];
-        A[[1,n+1,n+1]] = 1;
-        B = PadRight[b[[2]], {n+1,1}, 0];
-        C = SparseArray[{1,n+1}->1,{1,n+1}];
+        A = PadLeft[b[[1]], {m,n+1,n+1}];
+        A[[All,{1},2;;n+1]] = Outer[Times, -coeffs, b[[3]]];
+        A[[1,1,1]] = 1;
+        B = PadLeft[b[[2]], {n+1,1}, 0];
+        C = SparseArray[{1,1}->1,{1,n+1}];
         D = b[[4]];
        
         (*
@@ -329,7 +329,7 @@ Begin[ "`Private`" ]
     (* Number of variables + 1 *)
     m = Length[a[[5]]] + 1;
 
-    terms = {b,a};
+    terms = {a,b};
     A = SparseArray[
           Apply[
             SparseArray[Band[{1, 1}] -> {##}]&,
@@ -337,11 +337,11 @@ Begin[ "`Private`" ]
             {1}
           ]
         ];
-    A[[1,orderB+1;;orderA+orderB,1;;orderB]] = - a[[2]] . b[[3]];
+    A[[1,1;;orderA,orderA+1;;orderA+orderB]] = - a[[2]] . b[[3]];
       
     Return[
-      NCRational[A, Join[b[[2]], a[[2]] . b[[4]]],
-                 Join[a[[4]] . b[[3]], a[[3]], 2], a[[4]] . b[[4]],
+      NCRational[A, Join[a[[2]] . b[[4]], b[[2]]],
+                 Join[a[[3]], a[[4]] . b[[3]], 2], a[[4]] . b[[4]],
                  a[[5]],{}
       ]
     ];

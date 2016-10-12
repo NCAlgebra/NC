@@ -1,6 +1,6 @@
 # NCPolynomial {#PackageNCPolynomial}
 
-This package contains functionality to convert an nc polynomial expression into an expanded efficient representation for an nc polynomial which can have commutative or noncommutative coefficients.
+This package contains functionality to convert an nc polynomial expression into an expanded efficient representation that can have commutative or noncommutative coefficients.
 
 For example the polynomial
 
