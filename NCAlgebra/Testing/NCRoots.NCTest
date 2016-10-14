@@ -5,21 +5,21 @@ Module[
 
   SetNonCommutative[a, b, c, d];
 
-  NCTest[CommutativeQ[rt], False, "Roots", k++];
+  NCTest[CommutativeQ[rt], False];
 
-  NCTest[rt[0], 0, "Roots", k++];
-  NCTest[rt[1], 1, "Roots", k++];
-  NCTest[rt[Pi], Sqrt[Pi], "Roots", k++];
-  NCTest[rt[-1], I, "Roots", k++];
-  NCTest[rt[1 + I], Sqrt[1 + I], "Roots", k++];
+  NCTest[rt[0], 0];
+  NCTest[rt[1], 1];
+  NCTest[rt[Pi], Sqrt[Pi]];
+  NCTest[rt[-1], I];
+  NCTest[rt[1 + I], Sqrt[1 + I]];
 
-  NCTest[rt[2 a], Sqrt[2] rt[a], "Roots", k++];
-  NCTest[rt[3 a ** b], Unevaluated[Sqrt[3] rt[a ** b]], "Roots", k++];
-  NCTest[rt[(3 + I) a ** b], Unevaluated[Sqrt[Complex[3,1]] rt[a ** b]], "Roots", k++];
+  NCTest[rt[2 a], Sqrt[2] rt[a]];
+  NCTest[rt[3 a ** b], Unevaluated[Sqrt[3] rt[a ** b]]];
+  NCTest[rt[(3 + I) a ** b], Unevaluated[Sqrt[Complex[3,1]] rt[a ** b]]];
 
-  NCTest[rt[a]**rt[a], a, "Roots", k++];
+  NCTest[rt[a]**rt[a], a];
 
-  NCTest[tp[rt[a]], rt[tp[a]], "Roots", k++];
-  NCTest[tp[rt[a ** b]], rt[tp[b]**tp[a]], "Roots", k++];
+  NCTest[tp[rt[a]], rt[tp[a]]];
+  NCTest[tp[rt[a ** b]], rt[tp[b]**tp[a]]];
 
 ];

@@ -19,6 +19,7 @@
 BeginPackage[ "NCTest`" ];
 
 Clear[NCTest, 
+      NCTestCheck,
       NCTestRun, 
       NCTestSummarize];
       
@@ -29,15 +30,33 @@ Begin[ "`Private`" ]
   NCTestResults = Association[];
   NCTestCounter = 0;
 
-  NCTest[result_, answer_, tag_:"", number_:0] := Block[
+  NCTestCheck[expr_, answer_, messages_] := Block[
+    {result,pass},
+    pass = False;
+    Quiet[
+      Check[ result = Evaluate[expr];
+            ,
+             pass = True;
+            ,
+             messages
+      ];
+     ,
+      messages
+    ];
+    NCTest[pass, True];
+    NCTest[result, answer];
+  ];
+  SetAttributes[NCTestCheck, HoldAll];
+
+  NCTest[result_, answer_] := Block[
     {pass},
     NCTestCounter ++;
     pass = (result === answer);
     Sow[pass];
     If[!pass, 
-      Print["\n* Test '" <> ToString[tag] <> " #" <> 
+      Print["\n* Test #" <> 
             ToString[NCTestCounter] <> 
-            "' failed. Result:"];
+            " failed. Result:"];
       Print["    ", ToString[result] ];
       Print["  differs from correct answer:" ];
       Print["    ", ToString[answer] ];

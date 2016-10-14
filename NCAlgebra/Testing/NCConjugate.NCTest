@@ -1,59 +1,57 @@
 Module[
   {k, expr, a, b, c, d},
 
-  k = 1;
-
   SetNonCommutative[a, b, c, d];
 
-  NCTest[CommutativeQ[co], False, "Conjugates", k++];
+  NCTest[CommutativeQ[co], False];
 
-  NCTest[co[2 a], 2 co[a], "Conjugates", k++];
-  NCTest[co[3 a ** b], Unevaluated[3 co[a] ** co[b]], "Conjugates", k++];
-  NCTest[co[(3 + I) a ** b], Unevaluated[Complex[3,-1] co[a] ** co[b]], "Conjugates", k++];
+  NCTest[co[2 a], 2 co[a]];
+  NCTest[co[3 a ** b], Unevaluated[3 co[a] ** co[b]]];
+  NCTest[co[(3 + I) a ** b], Unevaluated[Complex[3,-1] co[a] ** co[b]]];
 
   expr = co[a+b];
-  NCTest[expr, Unevaluated[co[a] + co[b]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[co[a] + co[b]]];
 
   expr = co[2 a + 3 b];
-  NCTest[expr, Unevaluated[2 co[a] + 3 co[b]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[2 co[a] + 3 co[b]]];
 
   expr = co[a**b];
-  NCTest[expr, Unevaluated[co[a] ** co[b]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[co[a] ** co[b]]];
 
   expr = co[a]**co[b];
-  NCTest[expr, Unevaluated[co[a] ** co[b]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[co[a] ** co[b]]];
 
   expr = c**co[a**b];
-  NCTest[expr, Unevaluated[c ** co[a] ** co[b]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[c ** co[a] ** co[b]]];
 
   expr = co[a**b]**d;
-  NCTest[expr, Unevaluated[co[a] ** co[b] ** d], "Conjugates", k++];
+  NCTest[expr, Unevaluated[co[a] ** co[b] ** d]];
 
   expr = c**co[a**b]**d;
-  NCTest[expr, Unevaluated[c ** co[a] ** co[b] ** d], "Conjugates", k++];
+  NCTest[expr, Unevaluated[c ** co[a] ** co[b] ** d]];
 
   expr = aj[tp[a]];
-  NCTest[expr, Unevaluated[co[a]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[co[a]]];
 
   expr = tp[aj[a]];
-  NCTest[expr, Unevaluated[co[a]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[co[a]]];
 
   expr = co[tp[a]];
-  NCTest[expr, Unevaluated[aj[a]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[aj[a]]];
 
   expr = co[aj[a]];
-  NCTest[expr, Unevaluated[tp[a]], "Conjugates", k++];
+  NCTest[expr, Unevaluated[tp[a]]];
 
   expr = aj[tp[a ** b]];
-  NCTest[expr, co[a] ** co[b], "Conjugates", k++];
+  NCTest[expr, co[a] ** co[b]];
 
   expr = tp[aj[a ** b]];
-  NCTest[expr, co[a] ** co[b], "Conjugates", k++];
+  NCTest[expr, co[a] ** co[b]];
 
   expr = co[tp[a ** b]];
-  NCTest[expr, aj[b] ** aj[a], "Conjugates", k++];
+  NCTest[expr, aj[b] ** aj[a]];
 
   expr = co[aj[a ** b]];
-  NCTest[expr, tp[b] ** tp[a], "Conjugates", k++];
+  NCTest[expr, tp[b] ** tp[a]];
 
 ];
