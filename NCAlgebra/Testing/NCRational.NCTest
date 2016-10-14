@@ -539,6 +539,7 @@ Module[
 
   expr = NCRMinimalRealization[expr];
   NCTest[NCROrder[expr],4];
+
   Print["expr = ", NCSimplifyRational[NCRationalToNC[expr]]];
   Print[Map[MatrixForm,NCRationalToCanonical[expr][[1]]]];
 
