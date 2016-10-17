@@ -46,6 +46,7 @@ NCRational::NotSimple = "Expression is not a simple nc rational. Results cannot 
 NCRControllableRealization::Reduction = "Representation has been reduced from order `1` to order `2`.";
 
 NCRational::NotAnalytic = "Expression is not analytic at 0.";
+NCRational::Singular = "Singular pencils are not supported yet.";
 
 Options[NCRational] = {
   Linear -> False,
@@ -159,21 +160,21 @@ Begin[ "`Private`" ]
   NCToNCRationalAux[inv[expr_], vars_List] := Module[
     {b,coeffs},
 
-    Print["> NCToNCRational[inv[", expr, "]]"];
+    (* Print["> NCToNCRational[inv[", expr, "]]"]; *)
       
     (* convert expr *)
     b = NCToNCRationalAux[expr, vars];
     
-    Print["b = ", b];
+    (* Print["b = ", b]; *)
       
     (* simplify if linear *)
     If[ NCRLinearQ[b],
       
-        Print["> Linear"];
+        (* Print["> Linear"]; *)
         
         coeffs = Flatten[CoefficientArrays[expr, vars]];
 
-        Print["coeffs = ", coeffs];
+        (* Print["coeffs = ", coeffs]; *)
         
         Return[
           NCRational[
@@ -185,7 +186,7 @@ Begin[ "`Private`" ]
           ]
         ];
        , 
-        Print["> Nonlinear"];
+        (* Print["> Nonlinear"]; *)
         Return[NCRInverse[b]];
     ];
       
@@ -241,13 +242,10 @@ Begin[ "`Private`" ]
   NCRInverse[rrat_NCRational] := Module[
     {rat = rrat, n, m, d},
 
-    Print["> HERE"];
-      
     If[ NCRStrictlyProperQ[rat],
 
         (* strictly proper inverse embedding *)
         n = NCROrder[rat];
-        Print["order = ", n];
         
         m = Length[rat[[5]]] + 1;
         (* grow all coefficients *)
@@ -285,7 +283,7 @@ Begin[ "`Private`" ]
 
     (* Evaluate a ** b *)
       
-    Print["> NCRTimes"];
+    (* Print["> NCRTimes"]; *)
 
     (* Number of variables + 1 *)
     m = Length[a[[5]]] + 1;
@@ -418,7 +416,7 @@ Begin[ "`Private`" ]
        nonlinear,nonzero,polynomial},
       terms = {tterms};
 
-      Print["> NCRPlus"];
+      (* Print["> NCRPlus"]; *)
       
       (* Number of variables + 1 *)
       vars = terms[[1,5]];
@@ -613,9 +611,11 @@ Begin[ "`Private`" ]
       C (A0 + Ai x)^-1 B ~ C (I + A0^-1 Ai x)^-1 A0^-1 B
     *)
 
+    (*
     Print["A = ", A];
     Print["B = ", B];
     Print["C = ", C];
+    *)
       
     (* Scale by inv[A0] *)
     Quiet[                             
@@ -666,34 +666,12 @@ Begin[ "`Private`" ]
            x0 = Table[RandomInteger[{1,10}],{i,m-1}];
            A0 = A[[1]] + Plus @@ (x0 * Rest[A]);
 
-           Print["x0 = ", x0];
+           (* Print["x0 = ", x0]; *)
            
            Check[ {A2,B2,C2} = NCRScale[Prepend[Rest[A], A0],B,C];
                  ,
-                  (* pinned *)
-                  Print["> PINNED"];
-                  {lu,p,q,rank} = 
-                    LUDecompositionWithCompletePivoting[A[[1]]];
-                  {l,u} = GetLUMatrices[lu];
-                  
-                  Print["l = ", MatrixForm[l]];
-                  Print["u = ", MatrixForm[u]];
-                  Print["p = ", p];
-                  Print["q = ", q];
-                      
-                  vv = Table[Unique["t"],{m-1}];
-                  car = Det[A[[1]] + Plus @@ (Rest[A] * vv)];
-                  Print["car = ", car];
-                  
-                  A0 = Join @@ A;
-                  Print["A0 = ", A0];
-                  Print["NS = ", NullSpace[A0]];
-
-                  A0 = ArrayFlatten[{A}];
-                  Print["A0 = ", A0];
-                  Print["NS = ", NullSpace[Transpose[A0]]];
-                  
-                  Abort[];
+                  Message[NCRational::Singular];
+                  Return[rat];
                  ,
                   NCRational::NotAnalytic
            ];
@@ -755,7 +733,7 @@ Begin[ "`Private`" ]
         A0 = IdentityMatrix[rank];
         If[ singular,
             A0 -= Plus @@ (x0 * A2);
-            Print["A0 = ", A0];
+            (* Print["A0 = ", A0]; *)
         ];
         
         (* Calculate reduced realization *)
