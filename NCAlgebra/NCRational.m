@@ -527,6 +527,10 @@ Begin[ "`Private`" ]
     (* words = {{}}; *)
     (* wordLength = 0 *)
     {controllabilityMatrix,p,q,rank} = LURowReduce[Transpose[B]];
+    controllabilityMatrix = If[rank > 0, 
+                               Take[controllabilityMatrix,rank],
+                               {}
+                            ];
 
     (*
     Print["Transpose[B] = ", Transpose[B]];
@@ -553,15 +557,18 @@ Begin[ "`Private`" ]
        {u,p,newQ,newRank} = LURowReduceIncremental[
                               controllabilityMatrix,
                               Transpose[candidateColumns]
-                         ];
-       controllabilityMatrix = Take[u,newRank];
+                             ];
+       controllabilityMatrix = If[rank > 0, 
+                                  Take[u,newRank],
+                                  {}
+                               ];
 
        (* adjust permutations *)
        q = q[[newQ]];
 
-       (*   
+       (*
        Print["wordLength = ", wordLength];
-       Print["candidateColumns = ", Transpose[candidateColumns];
+       Print["candidateColumns = ", Transpose[candidateColumns]];
        Print["candidateWords = ", candidateWords];
        Print["u = ", Normal[u]];
        Print["controllabilityMatrix = ", Normal[controllabilityMatrix]];
@@ -706,14 +713,19 @@ Begin[ "`Private`" ]
     {ctrb, q} = NCRControllableSubspace[A2, B2];
     rank = Length[ctrb];
 
-    (* *)
+    (*
     Print["A2 = ", A2];
     Print["B2 = ", B2];
     Print["C2 = ", C2];
     Print["ctrb = ", ctrb];
     Print["rank = ", rank];
-    (* *)
+    *)
 
+    If[ rank == 0,
+        (* return constant term *)
+        Return[NCToNCRational[rat[[4]][[1,1]], rat[[5]]]];
+    ];
+                                 
     If[ rank < n,
 
         (* Realization is not controllable *)
@@ -766,6 +778,8 @@ Begin[ "`Private`" ]
   ];
       
   (* NCRTranspose *)
+  NCRTranspose[rat_NCRational] := rat /; NCROrder[rat] == 0;
+  
   NCRTranspose[rat_NCRational] := Module[
     {A,B,C,D},
 

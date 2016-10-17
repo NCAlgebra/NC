@@ -40,6 +40,9 @@ LUDecompositionWithCompletePivoting::SuppressPivoting = \
 "LUDecompositionWithCompletePivoting does not support SuppressPivoting. \
 Use LUDecompositionWithPartialPivoting instead.";
 
+LURowReduceIncremental::DimensionsMismatch = \
+"Matrices must have same number of columns."
+
 Options[MatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,
   LeftDivide -> (Divide[#2,#1]&),
@@ -860,18 +863,26 @@ Begin[ "`Private`" ]
     Print["rank = ", rank];
     *)
       
-    (* Reduce *)
-    If[ s > rank,
-        u[[1;;rank,rank+1;;]] = UpperTriangularSolve[
-             u[[1;;rank,1;;rank]],
-             u[[1;;rank,rank+1;;]]
+    If[ rank > 0,
+        (* Reduce *)
+        If[ s > rank,
+            u[[1;;rank,rank+1;;]] = UpperTriangularSolve[
+                 u[[1;;rank,1;;rank]],
+                 u[[1;;rank,rank+1;;]]
+            ];
         ];
+        u[[1;;rank,1;;rank]] = IdentityMatrix[rank];
     ];
-    u[[1;;rank,1;;rank]] = IdentityMatrix[rank];
       
     Return[{u, p, q, rank}];
   ];
-                        
+
+  LURowReduceIncremental[{{}}, B_?MatrixQ] := 
+    LURowReduce[B];
+
+  LURowReduceIncremental[{}, B_?MatrixQ] := 
+    LURowReduce[B];
+  
   LURowReduceIncremental[A_?MatrixQ, B_?MatrixQ] := Module[
     {A2,B1,B2,D,
      lu,p,q,rank,l,u,
@@ -884,7 +895,7 @@ Begin[ "`Private`" ]
     {r,s} = Dimensions[B];
     
     If[ n != s,
-        Message[];
+        Message[LURowReduceIncremental::DimensionsMismatch];
     ];
     A2 = A[[All,m+1;;n]];
     B1 = B[[All,1;;m]];
