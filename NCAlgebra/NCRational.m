@@ -509,7 +509,20 @@ Begin[ "`Private`" ]
 
   (* NCRControllableSubspace *)
 
-  NCRControllableSubspace[A_, B_, opts:OptionsPattern[{}]] := Module[
+  Clear[CommuteWords];
+  CommuteWords[words_, commutativeVars_] := Module[
+    {commutativeQ,x,tmp},
+      
+    commutativeQ[x_] := MemberQ[commutativeVars, x];
+    
+    Return[Join[Map[Sort[Select[#, commutativeQ]]&, words],
+               Map[Select[#, (Not[commutativeQ[#]]&)]&, words], 2]];
+      
+  ]
+  
+  NCRControllableSubspace[A_, B_, 
+                          commutativeVars_:{}, 
+                          opts:OptionsPattern[{}]] := Module[
     {letters = Range[Length[A]],
      wordLength = 0,
      words = {{}},
@@ -518,7 +531,8 @@ Begin[ "`Private`" ]
      AB,
      p,q,rank,newRank,newQ,
      candidateWords,
-     candidateColumns},
+     candidateColumns,
+     commutativeWords},
 
     (* Store products for faster evaluation *)
     AB[{}] = B;
@@ -532,13 +546,13 @@ Begin[ "`Private`" ]
                                {}
                             ];
 
-    (*
-    Print["Transpose[B] = ", Transpose[B]];
+    (* *)
+    Print["commutativeVars = ", commutativeVars];
     Print["controllabilityMatrix = ", Normal[controllabilityMatrix]];
     Print["p = ", p];
     Print["q = ", q];
     Print["rank = ", rank];
-    *)
+    (* *)
 
     While[True,
 
@@ -553,6 +567,16 @@ Begin[ "`Private`" ]
        (* assemble candidate columns *)
        candidateColumns = ArrayFlatten[{Map[AB, candidateWords]}][[q]];
 
+       If[ Length[commutativeVars] > 0,
+
+           (* Commute words *)
+           commutativeWords = CommuteWords[candidateWords, commutativeVars];
+           
+           Print["commutativeWords = ", commutativeWords];
+           Print["AB = ", DownValues[AB][[All,1,1,1]]];
+           
+       ];
+          
        (* row reduce to find range *)
        {u,p,newQ,newRank} = LURowReduceIncremental[
                               controllabilityMatrix,
@@ -566,17 +590,17 @@ Begin[ "`Private`" ]
        (* adjust permutations *)
        q = q[[newQ]];
 
-       (*
+       (* *)
        Print["wordLength = ", wordLength];
-       Print["candidateColumns = ", Transpose[candidateColumns]];
        Print["candidateWords = ", candidateWords];
-       Print["u = ", Normal[u]];
+       Print["candidateColumns = ", Transpose[candidateColumns]];
        Print["controllabilityMatrix = ", Normal[controllabilityMatrix]];
+       Print["u = ", Normal[u]];
        Print["p = ", p];
        Print["newQ = ", newQ];
        Print["q = ", q];
        Print["newRank = ", newRank];
-       *)
+       (* *)
 
        If[ newRank === rank
           ,
@@ -587,9 +611,9 @@ Begin[ "`Private`" ]
        words = candidateWords[[p[[rank+1;;newRank]]-rank]];
        rank = newRank;
 
-       (*
+       (* *)
        Print["words = ", words];
-       *)
+       (* *)
 
     ];
 
@@ -657,6 +681,11 @@ Begin[ "`Private`" ]
     n = Length[B];
     m = Length[A];                             
 
+    A2 = A;
+    A2[[1]] = A2[[1]] - IdentityMatrix[n];
+    {ctrb, q} = NCRControllableSubspace[A2, B, {1,3}];
+    rank = Length[ctrb];
+                                 
     (* Scale by inv[A0] *)
     Check[ {A2,B2,C2} = NCRScale[A,B,C];
           ,
