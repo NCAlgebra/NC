@@ -413,7 +413,7 @@ Begin[ "`Private`" ]
   NCRPlus[tterms__NCRational] := Module[
       {terms,m,vars,
        linear,tmp,coeffs,degree,
-       nonlinear,nonzero,polynomial},
+       nonlinear,nonZeroOrder,polynomial},
       terms = {tterms};
 
       (* Print["> NCRPlus"]; *)
@@ -473,17 +473,19 @@ Begin[ "`Private`" ]
          
           (* select linear and nonlinear terms *)
           terms = Append[terms[[nonlinear]], tmp];
-          nonzero = Range[Length[terms]-1];
+          nonZeroOrder = Range[
+              If[ degree > 0, Length[terms], Length[terms] - 1]
+          ];
           
          ,
           
           (* select nonlinear terms *)
           terms = terms[[nonlinear]];
-          nonzero = All;
+          nonZeroOrder = All;
       ];
 
       (* polynomial? *)
-      polynomial = And @@ Map[NCRPolynomialQ, terms[[nonzero]]];
+      polynomial = And @@ Map[NCRPolynomialQ, terms[[nonZeroOrder]]];
       
       (* add linear and nonlinear terms *)
       Return[
@@ -491,12 +493,12 @@ Begin[ "`Private`" ]
           SparseArray[
             Apply[
               SparseArray[Band[{1, 1}] -> {##}]&,
-                          Map[terms[[nonzero,1,#1]]&, Range[m]],
+                          Map[terms[[nonZeroOrder,1,#1]]&, Range[m]],
               {1}
             ]
           ],
-          Join @@ terms[[nonzero,2]], 
-          Join[##,2]& @@ terms[[nonzero,3]],
+          Join @@ terms[[nonZeroOrder,2]], 
+          Join[##,2]& @@ terms[[nonZeroOrder,3]],
           Plus @@ terms[[All,4]],
           terms[[1,5]],
           If[polynomial, {Polynomial -> True}, {}]
