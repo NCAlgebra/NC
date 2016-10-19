@@ -509,16 +509,33 @@ Begin[ "`Private`" ]
 
   (* NCRControllableSubspace *)
 
+  Clear[AllPerms];
+  AllPerms[cWords_, ncWords_] := Block[
+    {pattern},
+    pattern = Flatten[Join[Map[{___,#}&, ncWords], {___}]];
+
+    (*
+    Print["word = ", Join[cWords, ncWords]];
+    Print["pattern = ", pattern];
+    *)
+        
+    Return[DeleteCases[Permutations[Join[cWords, ncWords]], 
+                       Except[pattern]]];
+  ];
+  
   Clear[CommuteWords];
   CommuteWords[words_, commutativeVars_] := Module[
-    {commutativeQ,x,tmp},
+    {commutativeQ,x,
+     CWords,NCWords},
       
     commutativeQ[x_] := MemberQ[commutativeVars, x];
     
-    Return[Join[Map[Sort[Select[#, commutativeQ]]&, words],
-               Map[Select[#, (Not[commutativeQ[#]]&)]&, words], 2]];
+    CWords = Map[Sort[Select[#, commutativeQ]]&, words];
+    NCWords = Map[Select[#, (Not[commutativeQ[#]]&)]&, words];
       
-  ]
+    Return[{Join[CWords, NCWords, 2],
+            MapThread[AllPerms, {CWords, NCWords}]}];
+  ];
   
   NCRControllableSubspace[A_, B_, 
                           commutativeVars_:{}, 
@@ -528,15 +545,19 @@ Begin[ "`Private`" ]
      words = {{}},
      controllabilityMatrix,
      newColumns,
-     AB,
+     AB,ABStore,
      p,q,rank,newRank,newQ,
      candidateWords,
      candidateColumns,
      commutativeWords},
 
     (* Store products for faster evaluation *)
-    AB[{}] = B;
-    AB[word_List] := (AB[word] = A[[First[word]]] . AB[Rest[word]]);
+    ABStore = <|{} -> B|>;
+    AB[word_List] := 
+       AppendTo[ABStore, 
+         word -> A[[First[word]]] . Lookup[ABStore, 
+                                           Key[Rest[word]],
+                                           AB[Rest[word]]]][word];
 
     (* words = {{}}; *)
     (* wordLength = 0 *)
@@ -546,13 +567,13 @@ Begin[ "`Private`" ]
                                {}
                             ];
 
-    (* *)
+    (*
     Print["commutativeVars = ", commutativeVars];
     Print["controllabilityMatrix = ", Normal[controllabilityMatrix]];
     Print["p = ", p];
     Print["q = ", q];
     Print["rank = ", rank];
-    (* *)
+    *)
 
     While[True,
 
@@ -564,17 +585,26 @@ Begin[ "`Private`" ]
                         letters, 
                         words, 1], 1];
 
-       (* assemble candidate columns *)
-       candidateColumns = ArrayFlatten[{Map[AB, candidateWords]}][[q]];
-
        If[ Length[commutativeVars] > 0,
 
            (* Commute words *)
-           commutativeWords = CommuteWords[candidateWords, commutativeVars];
+           {candidateWords,commutativeWords} = 
+             CommuteWords[candidateWords, commutativeVars];
            
-           Print["commutativeWords = ", commutativeWords];
-           Print["AB = ", DownValues[AB][[All,1,1,1]]];
+           (*
+           Print["commutativeWords = ", commutativeWords]; 
+           *)
            
+           candidateColumns = ArrayFlatten[
+                                {Apply[Plus, 
+                                       Map[AB, commutativeWords, {2}],
+                                       {1}]}][[q]];
+
+          ,
+
+           (* assemble candidate columns *)
+           candidateColumns = ArrayFlatten[{Map[AB, candidateWords]}][[q]];
+
        ];
           
        (* row reduce to find range *)
@@ -590,17 +620,17 @@ Begin[ "`Private`" ]
        (* adjust permutations *)
        q = q[[newQ]];
 
-       (* *)
+       (*
        Print["wordLength = ", wordLength];
        Print["candidateWords = ", candidateWords];
-       Print["candidateColumns = ", Transpose[candidateColumns]];
+       Print["candidateColumns = ", Normal[Transpose[candidateColumns]]];
        Print["controllabilityMatrix = ", Normal[controllabilityMatrix]];
        Print["u = ", Normal[u]];
        Print["p = ", p];
        Print["newQ = ", newQ];
        Print["q = ", q];
        Print["newRank = ", newRank];
-       (* *)
+       *)
 
        If[ newRank === rank
           ,
@@ -611,9 +641,9 @@ Begin[ "`Private`" ]
        words = candidateWords[[p[[rank+1;;newRank]]-rank]];
        rank = newRank;
 
-       (* *)
+       (*
        Print["words = ", words];
-       (* *)
+       *)
 
     ];
 
@@ -667,60 +697,87 @@ Begin[ "`Private`" ]
     Return[{A2,B2,C2}];
   ];
       
-  NCRControllableRealization[rat_NCRational, 
-                             opts:OptionsPattern[{}]] := Module[
+  NCRControllableRealization[
+      rat_NCRational, 
+      OptionsPattern[{Method -> "Analytic",
+                      CommutativeVariables -> {}}]] := Module[
     {A,B,C,D,
      A2,B2,C2,
      n,m,
      x0,A0,A0inv,
      singular = False,
-     ctrb,q,rank,R,L},
-    
+     ctrb,q,rank,R,L,
+     method,
+     commutativeVariables},
+
+    (* Process Options *)
+    method = OptionValue[Method];
+    commutativeVariables = OptionValue[CommutativeVariables];
+                                 
     (* Grab matrices *)
     {A,B,C,D} = Normal[rat];
     n = Length[B];
     m = Length[A];                             
 
-    A2 = A;
-    A2[[1]] = A2[[1]] - IdentityMatrix[n];
-    {ctrb, q} = NCRControllableSubspace[A2, B, {1,3}];
-    rank = Length[ctrb];
-                                 
-    (* Scale by inv[A0] *)
-    Check[ {A2,B2,C2} = NCRScale[A,B,C];
-          ,
-           (* singular realization *)
-           singular = True;
-           
-           (* shift realization *)
-           (* A0 + Ai x = (A0 + Ai x0) + Ai (x - x0) *)
-           x0 = Table[RandomInteger[{1,10}],{i,m-1}];
-           A0 = A[[1]] + Plus @@ (x0 * Rest[A]);
-
-           (* Print["x0 = ", x0]; *)
-           
-           Check[ {A2,B2,C2} = NCRScale[Prepend[Rest[A], A0],B,C];
-                 ,
-                  Message[NCRational::Singular];
-                  Return[rat];
-                 ,
-                  NCRational::NotAnalytic
-           ];
-          ,
-           NCRational::NotAnalytic
-    ];
+    Switch[ method
+           ,
+            "Analytic"
+           , 
         
-    (*
-      A0~ = A0 + Ai x0
-      C [A0~ + Ai (x-x0)]^-1 B 
-               ~ C (I + A0~^-1 Ai (x - x0))^-1 A0~^-1 B
-               = C ([I - A0~^-1 Ai x0] + A0~^-1 Ai x)^-1 A0~^-1 B
-               = C ([I - A2 x0] + A2 x) B2
-    *)
+            (* Print["> ANALYTIC SHIFT"]; *)
+            
+            (*
+              A0~ = A0 + Ai x0
+              C [A0~ + Ai (x-x0)]^-1 B 
+                       ~ C (I + A0~^-1 Ai (x - x0))^-1 A0~^-1 B
+                       = C ([I - A0~^-1 Ai x0] + A0~^-1 Ai x)^-1 A0~^-1 B
+                       = C ([I - A2 x0] + A2 x) B2
+            *)
 
-    (* Calculate row-reduced controllability subspace *)
-    {ctrb, q} = NCRControllableSubspace[A2, B2];
-    rank = Length[ctrb];
+            (* Scale by inv[A0] *)
+            Check[ {A2,B2,C2} = NCRScale[A,B,C];
+                  ,
+                   (* singular realization *)
+                   singular = True;
+
+                   (* shift realization *)
+                   (* A0 + Ai x = (A0 + Ai x0) + Ai (x - x0) *)
+                   x0 = Table[RandomInteger[{1,10}],{i,m-1}];
+                   A0 = A[[1]] + Plus @@ (x0 * Rest[A]);
+
+                   (* Print["x0 = ", x0]; *)
+
+                   Check[ {A2,B2,C2} = NCRScale[Prepend[Rest[A], A0],B,C];
+                         ,
+                          Message[NCRational::Singular];
+                          Return[rat];
+                         ,
+                          NCRational::NotAnalytic
+                   ];
+                  ,
+                   NCRational::NotAnalytic
+            ];
+
+            (* Calculate row-reduced controllability subspace *)
+            {ctrb, q} = NCRControllableSubspace[A2, B2, 
+                                                commutativeVariables];
+            rank = Length[ctrb];
+            
+           ,
+            "CommutativeScaling"
+           ,
+            
+            (* Print["> COMMUTATIVE SCALING SHIFT"]; *)
+            
+            {A2,B2,C2} = {A,B,C};
+            A2[[1]] = A2[[1]] - IdentityMatrix[n];
+            
+            {ctrb, q} = NCRControllableSubspace[A2, B2, 
+                           Join[{1}, commutativeVariables+1]];
+            rank = Length[ctrb];
+
+    ];
+                                 
 
     (*
     Print["A2 = ", A2];
@@ -758,13 +815,29 @@ Begin[ "`Private`" ]
         Print["R = ", R];
         *)
 
-        A2 = Map[MatMult[L, #, R]&, A2];
-        B2 = MatMult[L, B2];
-        C2 = MatMult[C2, R];
-        A0 = IdentityMatrix[rank];
-        If[ singular,
-            A0 -= Plus @@ (x0 * A2);
-            (* Print["A0 = ", A0]; *)
+        Switch[ method
+               ,
+                "Analytic"
+               ,
+                
+                A2 = Map[MatMult[L, #, R]&, A2];
+                B2 = MatMult[L, B2];
+                C2 = MatMult[C2, R];
+                A0 = IdentityMatrix[rank];
+                If[ singular,
+                    A0 -= Plus @@ (x0 * A2);
+                    (* Print["A0 = ", A0]; *)
+                  ];
+                
+               ,
+                "CommutativeScaling"
+               ,
+
+                A0 = MatMult[L, First[A], R];
+                A2 = Map[MatMult[L, #, R]&, Rest[A]];
+                B2 = MatMult[L, B2];
+                C2 = MatMult[C2, R];
+
         ];
         
         (* Calculate reduced realization *)
@@ -818,7 +891,7 @@ Begin[ "`Private`" ]
       
   NCRMinimalRealization[rat_NCRational, opts:OptionsPattern[{}]] := 
     NCRObservableRealization[
-      NCRControllableRealization[rat]
+      NCRControllableRealization[rat, opts], opts
     ];
 
 End[]

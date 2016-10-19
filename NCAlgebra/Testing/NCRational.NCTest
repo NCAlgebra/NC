@@ -133,6 +133,10 @@ Module[
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 3];
 
+  expr = NCRControllableRealization[expr];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 3];
+
   expr = NCRMinimalRealization[expr];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 3];
@@ -425,6 +429,24 @@ Module[
   NCTest[NCExpand[NCRationalToNC[expr]],{{NCExpand[poly]}}];
   NCTest[NCROrder[expr], 4];
 
+  (* Commutative realizations *)
+  
+  poly = x**y-y**x;
+  rat = NCToNCRational[poly, {x,y}];
+  expr = NCRControllableRealization[rat];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr], 5];
+
+  expr = NCRControllableRealization[rat, CommutativeVariables -> {1,2}];
+  NCTest[NCROrder[expr], 4];
+
+  expr = NCRObservableRealization[rat, CommutativeVariables -> {1,2}];
+  NCTest[NCROrder[expr], 4];
+
+  expr = NCRMinimalRealization[rat, CommutativeVariables -> {1,2}];
+  NCTest[NCRationalToNC[expr],SparseArray[{{0}}]];
+  NCTest[NCROrder[expr], 0];
+
   (* rational *)
 
   poly = inv[x];
@@ -532,30 +554,36 @@ Module[
   Print["expr = ", NCSimplifyRational[NCRationalToNC[expr]]];
   Print[Map[Normal,NCRationalToCanonical[expr][[1]]]];
 
+  (* Commutative Scaling *)
+
   poly = x**y - y**x;
-  expr = NCToNCRational[poly, {x,y}];
-  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
-  NCTest[NCROrder[expr],6];
+  rat = NCToNCRational[poly, {x,y}];
+  NCTest[NCROrder[rat],6];
 
-  expr = NCRMinimalRealization[expr];
-  NCTest[NCROrder[expr],4];
+  expr = NCRControllableRealization[rat, Method->"CommutativeScaling"];
+  NCTest[NCROrder[expr], 5];
 
-  Print["expr = ", NCSimplifyRational[NCRationalToNC[expr]]];
-  Print[Map[MatrixForm,NCRationalToCanonical[expr][[1]]]];
+  expr = NCRMinimalRealization[rat, Method->"CommutativeScaling"];
+  NCTest[NCROrder[expr], 4];
 
   poly = inv[x**y - y**x];
-  expr = NCToNCRational[poly, {x,y}];
-  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
-  NCTest[NCROrder[expr],7];
+  rat = NCToNCRational[poly, {x,y}];
+  NCTest[NCSimplifyRational[NCRationalToNC[rat]],{{NCSimplifyRational[poly]}}];
+  NCTest[NCROrder[rat],7];
 
-  expr = NCRMinimalRealization[expr];
+  expr = NCRMinimalRealization[rat];
+
+  expr = NCRMinimalRealization[rat, Method->"CommutativeScaling"];
+  NCTest[NCROrder[expr], 5];
+
+  Print["expr = ", Map[Normal,expr]];
+  Print["expr = ", Map[MatrixForm,NCRationalToCanonical[expr][[1]]]];
+
+
+]; If[0,
+
   Print["expr = ", NCSimplifyRational[NCRationalToNC[expr]]];
   Print[Map[MatrixForm,NCRationalToCanonical[expr][[1]]]];
-
-
-];
-
-If[0,
 
 
   expr = NCRMinimalRealization[expr];
