@@ -19,7 +19,8 @@ BeginPackage[ "NCPolynomial`",
 
 Clear[NCPolynomial, 
       NCToNCPolynomial, NCPolynomialToNC, NCRationalToNCPolynomial,
-      NCPCoefficients, NCPTermsOfDegree, NCPTermsOfTotalDegree, 
+      NCPCoefficients,
+      NCPTermsOfDegree, NCPTermsOfTotalDegree, 
       NCPTermsToNC, NCPDecompose, NCPSort, 
       NCPCompatibleQ, NCPSameVariablesQ, NCPMatrixQ,
       NCPPlus,
@@ -273,7 +274,6 @@ Begin[ "`Private`" ]
   (* NCPCoefficients *)
    
   NCPCoefficients[p_NCPolynomial, m_] := Lookup[p[[2]], Key[m], {}];
-   
 
   (* NCPTermsToNC *)
   
