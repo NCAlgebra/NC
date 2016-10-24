@@ -31,7 +31,6 @@ If[ $NC$INITDOTMPATH =!= {}
     (* Setting NCAlgebra Path *)
     AppendTo[$Path,$NCDir$];
     AppendTo[$Path,ToFileName[{$NCDir$, "NCAlgebra" }]];
-    AppendTo[$Path,ToFileName[{$NCDir$, "NCAlgebra", "Testing" }]];
     AppendTo[$Path,ToFileName[{$NCDir$, "NCAlgebra", "Systems" }]];
 
     (* Setting NCGB Path *)
@@ -55,12 +54,17 @@ If[ $NC$INITDOTMPATH =!= {}
 
     (* Setting NCSDP Path *)
     AppendTo[$Path,ToFileName[{$NCDir$, "NCSDP" }]];
-    AppendTo[$Path,ToFileName[{$NCDir$, "NCSDP", "Testing" }]];
 
     (* Setting NCPoly Path *)
     AppendTo[$Path,ToFileName[{$NCDir$, "NCPoly" }]];
-    AppendTo[$Path,ToFileName[{$NCDir$, "NCPoly", "Testing" }]];
 
+    (* Setting TESTING Path *)
+    AppendTo[$Path,ToFileName[{$NCDir$, "TESTING"}]];
+    AppendTo[$Path,ToFileName[{$NCDir$, "TESTING", "NCAlgebra"}]];
+    AppendTo[$Path,ToFileName[{$NCDir$, "TESTING", "NCSDP"}]];
+    AppendTo[$Path,ToFileName[{$NCDir$, "TESTING", "NCPoly"}]];
+             
+             
     Print["You can now use \"<< NCAlgebra`\" to load NCAlgebra or ",
           "\"<< NCGB`\" to load NCGB."];
 
