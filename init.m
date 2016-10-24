@@ -59,6 +59,7 @@ If[ $NC$INITDOTMPATH =!= {}
 
     (* Setting NCPoly Path *)
     AppendTo[$Path,ToFileName[{$NCDir$, "NCPoly" }]];
+    AppendTo[$Path,ToFileName[{$NCDir$, "NCPoly", "Testing" }]];
 
     Print["You can now use \"<< NCAlgebra`\" to load NCAlgebra or ",
           "\"<< NCGB`\" to load NCGB."];

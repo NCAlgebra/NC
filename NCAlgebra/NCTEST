@@ -4,8 +4,6 @@ SetOptions[$Output,PageWidth->1000];
 << NCAlgebra`
 << NCTest`
 
-On[Assert];
-
 Print["> BEGIN NCTEST\n" ];
 
 tests = {
@@ -46,6 +44,3 @@ Print["\n> END NCTEST\n" ];
 
 Print["> EVEN IF ALL THE TESTS SUCCEEDED YOU SHOULD QUIT THE KERNEL"]
 Print["  IN YOUR MATHEMATICA SESSION AND START OVER." ];
-
-$AssertFunction =. ;
-Off[Assert];

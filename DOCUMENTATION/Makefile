@@ -1,6 +1,6 @@
 include make.inc
 
-DIRS := NCSDP NCAlgebra
+DIRS := NCSDP NCAlgebra NCPoly
 # the sets of directories to do various things in
 BUILDDIRS = $(DIRS:%=build-%)
 CLEANDIRS = $(DIRS:%=clean-%)
@@ -49,7 +49,8 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCUtil.md \
 	 NCAlgebra/NCTest.md \
 	 NCSDP/NCSDP.md \
-	 NCSDP/SDP.md
+	 NCSDP/SDP.md \
+	 NCPoly/NCPoly.md
 
 doc: NCAlgebra.pdf NCAlgebra.html
 

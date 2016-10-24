@@ -562,10 +562,14 @@ Begin[ "`Private`" ]
     (* words = {{}}; *)
     (* wordLength = 0 *)
     {controllabilityMatrix,p,q,rank} = LURowReduce[Transpose[B]];
-    controllabilityMatrix = If[rank > 0, 
-                               Take[controllabilityMatrix,rank],
-                               {}
-                            ];
+
+    If[ rank == 0,
+        (* trivially uncontrollable *)
+        Return[{{}, q}];
+    ];
+                              
+    (* otherwise iniatialize subspace *)
+    controllabilityMatrix = Take[controllabilityMatrix,rank];
 
     (*
     Print["commutativeVars = ", commutativeVars];

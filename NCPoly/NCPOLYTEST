@@ -15,9 +15,7 @@ tests = {
   "Product",
   "Reduce",
   "Groebner",
-(*
   "NCInterface"
-*)
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];

@@ -44,7 +44,9 @@ let us know by sending an e-mail message to
 We do not want to restrict access to NCAlgebra, but do 
   want to keep track of how it is being used.
 
-For NCAlgebra updates see the web page:
+For NCAlgebra updates see:
 
-  www.math.ucsd.edu/~ncalg 
+  www.math.ucsd.edu/~ncalg
+  www.github.com/NCAlgebra/NC
+
 ------------------------------------------------------------
