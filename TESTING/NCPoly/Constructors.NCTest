@@ -38,6 +38,7 @@ Block[
   (* Monomial Constructos *)
 
   m0 = NCPolyConstant[3, 3];
+  NCTest[NCPolyGetCoefficients[m0], {3}];
   NCTest[NCPolyGetDigits[m0], {{}}];
 
   m1 = NCPolyMonomial[{}, 3];

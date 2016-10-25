@@ -4,7 +4,13 @@ Block[
 
   (* TESTING DIGITS *)
 
+  (* deg-lex *)
   NCTest[NCFromDigits[{}, 2], {0,0}];
+
+  NCTest[NCFromDigits[{0,0,0,1}, 2], {4,1}];
+  NCTest[NCFromDigits[{0,0,1,1}, 2], {4,3}];
+  NCTest[NCFromDigits[{0,1,1,1}, 2], {4,7}];
+  NCTest[NCFromDigits[{1,1,1,1}, 2], {4,15}];
 
   NCTest[NCFromDigits[{0,0,0,1}, 2], {4,1}];
   NCTest[NCFromDigits[{0,0,1,1}, 2], {4,3}];
@@ -16,6 +22,8 @@ Block[
 
   NCTest[ NCFromDigits[{{0,0,0,2},{0,0,2,1},{0,2,1,1},{2,1,1,1}}, 3], \
 	{{4,2},{4,7},{4,22},{4,67}} ];
+
+  (* graded-deg-lex *)
 
   NCTest[NCFromDigits[{}, {3}], {0,0}];
 
@@ -32,6 +40,8 @@ Block[
 
   NCTest[NCFromDigits[{{0,0,0,2},{0,0,2,1},{0,2,1,1},{2,1,1,1}}, {1,1,1}], \
        {{1, 0, 3, 2}, {1, 1, 2, 7}, {1, 2, 1, 22}, {1, 3, 0, 67}} ];
+
+  (* integer digits *)
 
   NCTest[NCIntegerDigits[{4,1}, 2], {0,0,0,1}];
   NCTest[NCIntegerDigits[{4,3}, 2], {0,0,1,1}];

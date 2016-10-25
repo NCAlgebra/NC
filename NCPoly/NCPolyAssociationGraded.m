@@ -10,9 +10,6 @@ BeginPackage[ "NCPolyAssociationGraded`",
 
 Begin["`Private`"];
 
-  (* NCPoly Order *)
-  NCPolyOrderType[p_NCPoly] = NCPolyDegLexGraded;
-
   (* NCPoly Constructor *)
 
   (* NULL MONOMIAL constructor *)

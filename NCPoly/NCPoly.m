@@ -11,12 +11,11 @@ BeginPackage[ "NCPoly`" ];
 *)
 
 Clear[NCPoly,
-      NCPolyOrderType,
+      NCPolyMonomial,
+      NCPolyMonomialQ,
       NCPolyLexDeg,NCPolyDegLex,NCPolyDegLexGraded,
       NCPolyDisplayOrder,
       NCPolyConstant,
-      NCPolyMonomial,
-      NCPolyMonomialQ,
       NCPolyDegree,
       NCPolyLeadingTerm,
       NCPolyLeadingMonomial,
@@ -40,7 +39,8 @@ Clear[NCFromDigits,
       NCPadAndMatch,
       NCPolyDivideDigits,
       NCPolyDivideLeading,
-      NCPolyDisplay];
+      NCPolyDisplay,
+      NCPolyOrderType];
 
 Get["NCPoly.usage"];
 
@@ -49,6 +49,14 @@ Begin["`Private`"];
   (* Some facilities are implemented here. 
      ATTENTION: the main driver function are not implemented. *)
 
+  (* NCPoly Order type *)
+  NCPolyOrderType[p_NCPoly] := 
+    If[ Head[p[[1]]] === List
+       ,
+        NCPolyDegLexGraded
+       ,
+        NCPolyDegLex ];
+     
   (* Constant Constructor *)
 
   NCPolyConstant[value_, n_] := 
@@ -232,35 +240,35 @@ Begin["`Private`"];
     Append[ Reverse[ BinCounts[p, {Prepend[Accumulate[{base}], 0]}] ], FromDigits[p, Plus @@ {base}] ];
 
   (* DEG Ordered *)
-  NCFromDigits[p_List, base_Integer:10] := 
+  NCFromDigits[p_List, base_Integer] := 
     {Length[p], FromDigits[p, base]};
 
   (* IntegerDigits *)
 
   (* DEG Ordered *)
-  NCIntegerDigits[{d_Integer, n_Integer}, base_Integer:10] := 
+  NCIntegerDigits[{d_Integer, n_Integer}, base_Integer] := 
     IntegerDigits[n, base, d];
-
-  NCIntegerDigits[{d_Integer, n_Integer}, base_Integer:10, len_Integer] := 
-    IntegerDigits[n, base, len];
 
   NCIntegerDigits[{d__Integer, n_Integer}, {base__Integer}] := 
     IntegerDigits[n, Plus @@ {base}, Plus @@ {d}];
 
-  NCIntegerDigits[{d__Integer, n_Integer}, {base__Integer}, len_Integer] := 
-    IntegerDigits[n, Plus @@ {base}, len];
-
   NCIntegerDigits[dn_List, base_Integer] :=
     Map[NCIntegerDigits[#, base]&, dn] /; Depth[dn] === 3;
-
-  NCIntegerDigits[dn_List, base_Integer, len_Integer] :=
-    Map[NCIntegerDigits[#, base, len]&, dn] /; Depth[dn] === 3;
 
   NCIntegerDigits[dn_List, {base__Integer}] :=
     Map[NCIntegerDigits[#, {base}]&, dn] /; Depth[dn] === 3;
 
+  (* OCTOBER 2016: These were never used *)
+  (*
+  NCIntegerDigits[{d_Integer, n_Integer}, base_Integer, len_Integer] := 
+    IntegerDigits[n, base, len];
+  NCIntegerDigits[{d__Integer, n_Integer}, {base__Integer}, len_Integer] := 
+    IntegerDigits[n, Plus @@ {base}, len];
+  NCIntegerDigits[dn_List, base_Integer, len_Integer] :=
+    Map[NCIntegerDigits[#, base, len]&, dn] /; Depth[dn] === 3;
   NCIntegerDigits[dn_List, {base__Integer}, len_Integer] :=
     Map[NCIntegerDigits[#, {base}, len]&, dn] /; Depth[dn] === 3;
+  *)
 
   (* Auxiliary routines for pattern matching of monomials *)
 
@@ -395,4 +403,8 @@ Begin["`Private`"];
   NCPolyDisplay[p___] := $Failed;
       
 End[]
+      
+(* Load NCPolyAssociationGraded *)
+Get["NCPolyAssociationGraded`"];
+      
 EndPackage[]

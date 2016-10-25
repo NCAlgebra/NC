@@ -4,8 +4,6 @@ SetOptions[$Output,PageWidth->1000];
 << NCTest`
 << NCPoly`
 
-<< NCPolyAssociationGraded`
-
 Print["> BEGIN NCPOLYTEST\n" ];
 
 tests = {
