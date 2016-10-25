@@ -13,7 +13,6 @@ BeginPackage[ "NCPoly`" ];
 Clear[NCPoly,
       NCPolyOrderType,
       NCPolyLexDeg,NCPolyDegLex,NCPolyDegLexGraded,
-      NCPolyDisplay,
       NCPolyDisplayOrder,
       NCPolyConstant,
       NCPolyMonomial,
@@ -40,7 +39,8 @@ Clear[NCFromDigits,
       NCIntegerDigits,
       NCPadAndMatch,
       NCPolyDivideDigits,
-      NCPolyDivideLeading];
+      NCPolyDivideLeading,
+      NCPolyDisplay];
 
 Get["NCPoly.usage"];
 
@@ -370,5 +370,29 @@ Begin["`Private`"];
   NCPolyToRule[{p___NCPoly}] := 
     Map[NCPolyToRule, {p}];
 
+  (* Display *)
+
+  NCPolyVariables[p_NCPoly] := 
+    Table[Symbol[FromCharacterCode[ToCharacterCode["@"]+i]], 
+          {i, NCPolyNumberOfVariables[p]}];    
+  
+  NCPolyDisplay[{p__NCPoly}] := Map[NCPolyDisplay, {p}];
+
+  NCPolyDisplay[p_NCPoly] := NCPolyDisplay[p, NCPolyVariables[p]];
+
+  NCPolyDisplay[p_NCPoly, vars_List, 
+                plus_:List, style_:(Style[#,Bold]&)] := 
+    plus @@ 
+      MapThread[
+        Times, 
+        { NCPolyGetCoefficients[p],
+          Apply[style[Dot[##]]&, Map[Part[Flatten[vars],#]&, 
+                                     NCPolyGetDigits[p] + 1] /. {} -> 1, 1] }
+      ];
+
+  NCPolyDisplay[p_, vars_List:{}, ___] := p;
+
+  NCPolyDisplay[p___] := $Failed;
+      
 End[]
 EndPackage[]

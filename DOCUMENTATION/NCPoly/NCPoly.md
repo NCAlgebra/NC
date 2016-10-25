@@ -2,10 +2,10 @@
 
 Members are:
 
+* [NCPoly](#NCPoly)
 * [NCFromDigits](#NCFromDigits)
 * [NCIntegerDigits](#NCIntegerDigits)
 * [NCPadAndMatch](#NCPadAndMatch)
-* [NCPoly](#NCPoly)
 * [NCPolyCoefficient](#NCPolyCoefficient)
 * [NCPolyConstant](#NCPolyConstant)
 * [NCPolyDegLex](#NCPolyDegLex)

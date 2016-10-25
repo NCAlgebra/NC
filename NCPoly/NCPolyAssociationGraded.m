@@ -155,37 +155,6 @@ Begin["`Private`"];
     (NCPolyDisplayOrderAux[##, "\[LessLess]"]&) @@
     Apply[NCPolyDisplayOrderAux[##,"<"]&,  vars, 1];
 
-  (* Display *)
-
-  NCPolyDisplay[{p__NCPoly}] := 
-    Map[NCPolyDisplay, {p}];
-
-  NCPolyDisplay[p_NCPoly] := 
-  (*  NCPolyDisplay[p, {Table[Symbol["x" <> ToString[i]], {i, Plus @@ p[[1]]}]}]; *)
-    NCPolyDisplay[p, {Table[Symbol[FromCharacterCode[ToCharacterCode["@"]+i]], {i, Plus @@ p[[1]]}]}];
-
-  NCPolyDisplay[{p__NCPoly}, {vars_List}, plus_:List] := 
-    Map[NCPolyDisplay[#, {vars}, plus]&, {p}];
-
-  NCPolyDisplay[{p__NCPoly}, vars_List, plus_:List] := 
-    NCPolyDisplay[{p}, {vars}, plus];
-
-  NCPolyDisplay[p_NCPoly, {vars__List}, plus_:List, style_:(Style[#,Bold]&)] := 
-    plus @@ 
-      MapThread[
-        Times, 
-        { NCPolyGetCoefficients[p],
-          Apply[style[Dot[##]]&, Map[Part[Flatten[{vars}],#]&, NCPolyGetDigits[p] + 1] /. {} -> 1, 1] }
-      ];
-
-  NCPolyDisplay[p_NCPoly, vars_List, plus_:List, style_:(Style[#,Bold]&)] := 
-    NCPolyDisplay[p, {vars}, plus, style];
-
-  NCPolyDisplay[p_, vars_List:{}, plus_:List, style_:(Style[#,Bold]&)] := p;
-
-  NCPolyDisplay[p___] := $Failed;
-
-
   (* NCPoly Operators *)
 
   (* Times *)
