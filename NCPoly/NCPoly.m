@@ -386,6 +386,9 @@ Begin["`Private`"];
   
   NCPolyDisplay[{p__NCPoly}] := Map[NCPolyDisplay, {p}];
 
+  NCPolyDisplay[{p__NCPoly}, vars_List] := 
+      Map[NCPolyDisplay[#,vars]&, {p}];
+      
   NCPolyDisplay[p_NCPoly] := NCPolyDisplay[p, NCPolyVariables[p]];
 
   NCPolyDisplay[p_NCPoly, vars_List, 
