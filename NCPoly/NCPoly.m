@@ -386,20 +386,21 @@ Begin["`Private`"];
   
   NCPolyDisplay[{p__NCPoly}] := Map[NCPolyDisplay, {p}];
 
-  NCPolyDisplay[{p__NCPoly}, vars_List] := 
-      Map[NCPolyDisplay[#,vars]&, {p}];
+  NCPolyDisplay[{p__NCPoly}, args__] := 
+      Map[NCPolyDisplay[#,args]&, {p}];
       
   NCPolyDisplay[p_NCPoly] := NCPolyDisplay[p, NCPolyVariables[p]];
 
   NCPolyDisplay[p_NCPoly, vars_List, 
                 plus_:List, style_:(Style[#,Bold]&)] := 
     plus @@ 
-      MapThread[
-        Times, 
-        { NCPolyGetCoefficients[p],
-          Apply[style[Dot[##]]&, Map[Part[Flatten[vars],#]&, 
-                                     NCPolyGetDigits[p] + 1] /. {} -> 1, 1] }
-      ];
+      Reverse[
+        MapThread[
+          Times, 
+          { NCPolyGetCoefficients[p],
+            Apply[style[Dot[##]]&, Map[Part[Flatten[vars],#]&, 
+                                       NCPolyGetDigits[p] + 1] /. {} -> 1, 1] }
+        ]];
 
   NCPolyDisplay[p_, vars_List:{}, ___] := p;
 

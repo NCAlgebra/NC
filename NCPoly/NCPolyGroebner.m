@@ -208,11 +208,6 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
   labels = MapThread[Take[labels,{#1,#2}]&, {start, end}];
 
-  If[ printBasis,
-      Print["* Initial basis:"];
-      Print["> G(0) = ", ColumnForm[NCPolyDisplay[G, labels]]];
-  ];
-
   If[ verboseLevel >= 1,
     (* Print order *)
     Print["* Monomial order : ", NCPolyDisplayOrder[labels]];
@@ -227,7 +222,9 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   G = NCPolyNormalize[NCPolyFullReduce[G]];
   If[ Length[G] < m, 
       Print[ "> Initial basis reduced to '", ToString[Length[G]],
-             "' out of '", ToString[m], "' initial relations." ] 
+             "' out of '", ToString[m], "' initial relations." ];
+     ,
+      Print[ "> Initial basis could not be reduced" ];
   ];
 
   (* Sort basis *)
@@ -238,11 +235,18 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
       G = Sort[G];
   ];
 
+  If[ printBasis,
+      Print["> G(0) = ", ColumnForm[NCPolyDisplay[G, labels]]];
+  ];
+      
   If[ verboseLevel >= 2,
       Print["* Extracting leading monomials"];
   ];
   TG = Map[NCPolyLeadingMonomial, G];
-  (* Print["> TG(0) = ", Map[NCPolyDisplay,TG]]; *)
+
+  If[ verboseLevel >= 3,
+      Print["> TG(0) = ", NCPolyDisplay[TG, labels]];
+  ];
 
   (* Compute OBS *)
   If[ verboseLevel >= 1,
@@ -270,7 +274,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   (* Iterate *)
   k = 0;
   kk = 0;
-  While[ And[OBS =!= {}, kk < iterations],
+  While[ OBS =!= {},
 
     k++;
     If[ verboseLevel >= 2,
@@ -305,7 +309,10 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
       kk ++;
       mm = Part[OBS, -1, 1, 2];
       If[ verboseLevel >= 1,
-        Print["> Major Iteration ", kk, ", ", Length[G], " polys in the basis, ", Length[OBS], " obstructions"];
+        Print["> MAJOR Iteration ", kk, ", ", Length[G], " polys in the basis, ", Length[OBS], " obstructions"];
+      ];
+      If[ kk >= iterations,
+          Break[];
       ];
     ];
 

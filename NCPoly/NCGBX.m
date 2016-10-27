@@ -102,26 +102,13 @@ Begin["`Private`"];
   NCMakeGB[p_List, iter_Integer, opts___Rule] := Module[
     {polys, basis, rules, labels},
 
-    (* Process Options *)
-    { verboseLevel, printBasis, printObstructions, printSPolynomials,
-      simplifyObstructions, sortObstructions, sortBasis } =
-      { VerboseLevel,
-        PrintBasis,
-        PrintObstructions,
-        PrintSPolynomials,
-        SimplifyObstructions,
-        SortObstructions,
-        SortBasis } 
-          /. Flatten[{opts}] /. Options[NCPolyGroebner];
-
     polys = NCToPoly[p, $NCPolyInterfaceMonomialOrder];
-    basis = Sort[ NCPolyReduce[ NCPolyGroebner[polys, iter, 
-            VerboseLevel -> verboseLevel, PrintBasis -> printBasis, 
-            PrintObstructions -> printObstructions, 
-            SortObstructions -> sortObstructions,
-            SortBasis -> sortBasis, 
-            SimplifyObstructions -> simplifyObstructions,
-            Labels -> $NCPolyInterfaceMonomialOrder], True] ];
+    basis = Sort[ 
+              NCPolyReduce[ 
+                NCPolyGroebner[polys, iter, opts,
+                               Labels -> $NCPolyInterfaceMonomialOrder],
+                True]
+            ];
     rules = NCPolyToRule[basis];
 
     Return[Map[PolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
