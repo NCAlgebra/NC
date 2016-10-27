@@ -3,8 +3,7 @@
 << SDPSeDuMi`
 
 Module[
-  {test, k,
-   lmi, vars, sdp,
+  {lmi, vars, sdp,
    sol,
    sedumi,
    sdp2,exp,
@@ -12,10 +11,7 @@ Module[
    sol2
   },
 
-  k = 1;
-  test = "SDPSedumi";
-
-  NCTest[0, 0, test, k++];
+  NCTest[0, 0];
     
   lmi = {x - 2, {{y, x}, {x, 1}}, {{z, y}, {y, 1}}};
   vars = {x, y, z};
@@ -29,23 +25,23 @@ Module[
   sdp2 = SDPFromSedumi[sedumi];
     
   exp = Abs[Total[Normal[sdp] - Normal[sdp2], Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
   SDPExport[sdp, "Testing/sedumi"];
 
   sdp2 = SDPImport["Testing/sedumi"];
     
   exp = Abs[Total[Normal[sdp] - Normal[sdp2], Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
     
   sedumi2 = SDPToSedumi[sdp];
 
   exp = Abs[Total[Normal[sedumi] - Normal[sedumi2], Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
   sol2 = SDPSolve[SDPImport["Testing/sedumi"]];
 
   exp = Abs[Total[Normal[sol] - Normal[sol2], Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
 ];
