@@ -1,4 +1,5 @@
 SetNonCommutative[T,S,Invx,Invy,x,y];
+ClearMonomialOrder[];
 SetMonomialOrder[{x,y,Invx,Invy,S,T},1];
 Iterations=10;
 

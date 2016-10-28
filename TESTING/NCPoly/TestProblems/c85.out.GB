@@ -1,0 +1,38 @@
+(*
+ * File produced by NCGBTEST on:
+ * Fri 28 Oct 2016 13:45:31
+ *)
+
+{i**b -> j**h, g**f -> h**j, e**d -> f**g, c**a -> d**e, a**c -> b**i, 
+ c**b**i -> d**e**c, a**d**e -> b**i**a, d**e**c**b -> c**b**j**h, 
+ b**i**a**d -> a**d**f**g, i**a**d**f**g -> j**h**i**a**d, 
+ f**g**e**c**b -> e**c**b**j**h, d**f**g**e**c -> c**b**j**h**i, 
+ a**d**f**g**e -> b**j**h**i**a, j**g**e**c**b**j -> 0, 
+ i**a**d**f**h**j -> j**h**i**a**d**f, i**a**d**f**h**i -> 0, 
+ h**i**a**d**f**h -> 0, g**e**c**b**j**h -> h**j**g**e**c**b, 
+ g**e**c**b**j**g -> 0, f**h**i**a**d**f -> 0, 
+ e**c**b**j**h**i -> f**h**j**g**e**c, e**c**b**j**g**e -> 0, 
+ d**f**h**i**a**d -> 0, c**b**j**h**i**a -> d**f**h**j**g**e, 
+ c**b**j**g**e**c -> 0, b**j**h**i**a**d -> a**d**f**h**j**g, 
+ b**j**g**e**c**b -> 0, a**d**f**h**i**a -> 0, j**h**j**g**e**c**b -> 0, 
+ h**j**h**i**a**d**f -> 0, f**h**j**h**i**a**d -> 0, 
+ f**h**j**g**e**c**b -> e**c**b**j**h**j**h, e**c**b**j**h**j**g -> 0, 
+ d**f**h**j**h**i**a -> 0, d**f**h**j**g**e**c -> c**b**j**h**j**h**i, 
+ c**b**j**h**j**g**e -> 0, b**j**h**j**g**e**c -> 0, 
+ a**d**f**h**j**h**i -> 0, a**d**f**h**j**g**e -> b**j**h**j**h**i**a, 
+ j**h**j**h**j**g**e**c -> 0, h**j**h**j**h**i**a**d -> 0, 
+ f**h**j**h**j**h**i**a -> 0, e**c**b**j**h**j**h**j -> 0, 
+ e**c**b**j**h**j**h**i -> f**h**j**h**j**g**e**c, 
+ d**f**h**j**h**j**h**i -> 0, c**b**j**h**j**h**j**g -> 0, 
+ c**b**j**h**j**h**i**a -> d**f**h**j**h**j**g**e, 
+ b**j**h**j**h**j**g**e -> 0, b**j**h**j**h**i**a**d -> 
+  a**d**f**h**j**h**j**g, a**d**f**h**j**h**j**h -> 0, 
+ j**h**j**h**j**h**j**g**e -> 0, h**j**h**j**h**j**h**i**a -> 0, 
+ f**h**j**h**j**h**j**h**i -> 0, d**f**h**j**h**j**h**j**h -> 0, 
+ d**f**h**j**h**j**g**e**c -> c**b**j**h**j**h**j**h**i, 
+ c**b**j**h**j**h**j**h**j -> 0, b**j**h**j**h**j**h**j**g -> 0, 
+ a**d**f**h**j**h**j**g**e -> b**j**h**j**h**j**h**i**a, 
+ j**h**j**h**j**h**j**h**j**g -> 0, h**j**h**j**h**j**h**j**h**i -> 0, 
+ f**h**j**h**j**h**j**h**j**h -> 0, c**b**j**h**j**h**j**h**i**a -> 
+  d**f**h**j**h**j**h**j**g**e, b**j**h**j**h**j**h**j**h**j -> 0, 
+ j**h**j**h**j**h**j**h**j**h**j -> 0, h**j**h**j**h**j**h**j**h**j**h -> 0}

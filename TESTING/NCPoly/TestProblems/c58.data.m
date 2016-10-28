@@ -1,4 +1,5 @@
 SNC[a,b,c,d,x,y,z,w,ia,ib,ic,id,ix,iy,iz,iw];
+ClearMonomialOrder[];
 SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
 SetMonomialOrder[{y},2];
 SetMonomialOrder[{x,w,z},3];

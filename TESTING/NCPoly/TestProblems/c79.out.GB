@@ -1,0 +1,23 @@
+(*
+ * File produced by NCGBTEST on:
+ * Fri 28 Oct 2016 13:43:57
+ *)
+
+{d**i -> -a**b**c, f**e -> -b**c**a, g**h -> -g**c**d, h**g -> -c**a**b, 
+ d**e**f -> -d**g**c**d - a**f**g**c**d, d**e**b -> -d**g - a**f**g, 
+ b**h**i -> -f**i - f**g**c, b**h**e -> f**i**a - b**c**d**e + f**g**c**a, 
+ h**i**a -> -h**e - c**d**e, h**e**f -> h**i**d + c**d**g**c**d + 
+   c**a**f**g**c**d, i**a**f -> -i**d, i**d**e -> i**a**b**c**a, 
+ e**b**h -> -e**f, a**b**c**d -> 0, f**i**d**g -> -f**g**c**d**g, 
+ c**a**f**i -> -c**a**f**g**c, c**a**b**h -> 0, g**c**a**b -> g**c**d**g, 
+ b**c**a**f -> 0, h**i**d**g -> 0, e**f**g**c -> 0, e**f**i**d -> 0, 
+ d**g**c**a**f -> a**f**g**c**d, d**g**c**d**e -> 
+  -d**g**c**a - a**f**g**c**a, f**g**c**a**f -> -f**g**c**d, 
+ f**g**c**d**e -> 0, f**i**a**b**h -> f**i**d + f**g**c**d, 
+ h**e**b**c**d -> c**d**g**c**d + c**a**f**g**c**d, i**d**g**c**d -> 0, 
+ e**f**i**a**b -> e**f**g - e**b**c**d**g, e**b**c**a**b -> e**f**g, 
+ e**b**c**d**e -> -e**b**c**a + e**f**i**a, a**b**c**a**b**c -> 0, 
+ c**a**b**c**a**b -> 0, g**c**d**g**c**a -> 0, g**c**d**g**c**d -> 0, 
+ b**c**a**b**c**a -> 0, i**a**b**c**a**b -> 0, e**b**c**d**g**c -> 0, 
+ a**f**g**c**d**g**c -> -d**g**c**d**g**c, g**c**a**f**g**c**a -> 0, 
+ g**c**a**f**g**c**d -> 0, b**c**d**g**c**d**g**c -> 0}

@@ -127,11 +127,11 @@ Block[
   NCTest[GetMonomialOrder[], {{a,b},{d},{c,b}}];
 
   NCTest[NCPolyDisplayOrder[GetMonomialOrder[]], 
-       "a < b \[LessLess] d \[LessLess] c < b"];
+       "a < b \[LessLess]  d \[LessLess]  c < b"];
 
   SetUnknowns[d,{c,b,e}];
   NCTest[NCPolyDisplayOrder[GetMonomialOrder[]], 
-       "a < b \[LessLess] d \[LessLess] c < b < e"];
+       "a < b \[LessLess]  d \[LessLess]  c < b < e"];
 
   (* TESTING SetKnowns/SetUnknowns -- END *);
 

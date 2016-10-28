@@ -1,8 +1,9 @@
 SNC[a,b,c,d,x,y,z,w,ia,ib,ic,id];
+ClearMonomialOrder[];
 SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
 SetMonomialOrder[{z},2];
 SetMonomialOrder[{x,y,w},3];
-Iterations=4;
+Iterations=10;
 
 rels={
 	y ** c -> 1 - b ** z,

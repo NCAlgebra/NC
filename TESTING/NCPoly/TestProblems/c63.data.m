@@ -32,6 +32,7 @@ LossLessList = Table[Rel[j],{j,0,22}];
 
 rels=Complement[Union[LossLessList],{0}];
 
+ClearMonomialOrder[];
 SetMonomialOrder[{a,c,LossLessM,InvLossLessM,Ajc},1];
 SetMonomialOrder[{Aja,Inva,InvAja,b,Ajb},2];
 Iterations=5;

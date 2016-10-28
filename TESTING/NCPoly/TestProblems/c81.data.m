@@ -2,8 +2,7 @@
 us by Ben Keller.
 *)
 
-ClearMonomialOrderAll[];
-
+ClearMonomialOrder[];
 SetMonomialOrder[{b,a},{c}];
 rels=
          {a**a + 5*a**b + 7*a**c + 11*b**a + 2*b**b + 31*b**c + 19*c**a + 

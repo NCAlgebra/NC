@@ -21,7 +21,7 @@ NCMakeGBTest[filename_String,
    (* Load test problem *)
    Get[filename];
 
-   Print["rels = ", rels];
+   (* Print["rels = ", rels]; *)
 
    (* Calls NCMakeGB *)
    outRels = NCMakeGB[rels, Iterations];
@@ -42,7 +42,7 @@ NCMakeGBTest[filename_String,
     Print["> ", cmpRels]; 
    ];
    *)
-   If[ False
+   If[ True
       ,
        NCTest[outRels, cmpRels];
       ,
@@ -72,18 +72,21 @@ $NCGB$ReferenceDirectory = "TestReference";
 $CurrentDirectory = Directory[];
 SetDirectory[ToFileName[{$NCDir$, "TESTING", "NCPoly"}, "TestProblems"]];
 
-{low, high} = {50, 59};
+testset = {52, 62, 70}; (* Different than NCGB *)
+testset = Range[0,86];
 
-$NCGB$TestProblems = Map[ \
+$NCGB$TestProblems = Map[ 
   If[# < 10, StringJoin["c0", ToString[#], ".data.m"], 
              StringJoin["c", ToString[#], ".data.m"]] &, 
-    Select[ToExpression[
-     Flatten[Map[StringCases[#, DigitCharacter ..] &, FileNames[]]]],
-     low <= # <= high &
-    ]
+  Intersection[
+    ToExpression[
+      Flatten[Map[StringCases[#, DigitCharacter ..] &, FileNames[]]]
+    ],
+    testset
+  ]
 ]
 
-Map[NCMakeGBTest[#,$NCGB$ReferenceDirectory,$NCGB$ResultDirectory]&, \
+Map[NCMakeGBTest[#,$NCGB$ReferenceDirectory,$NCGB$ResultDirectory]&, 
     $NCGB$TestProblems];
 
 SetDirectory[$CurrentDirectory];

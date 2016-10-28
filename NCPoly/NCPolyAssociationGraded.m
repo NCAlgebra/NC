@@ -149,7 +149,7 @@ Begin["`Private`"];
   NCPolyDisplayOrderAux[a_, symbol_String] := ToString[a];
 
   NCPolyDisplayOrder[vars_List] := 
-    (NCPolyDisplayOrderAux[##, "\[LessLess]"]&) @@
+    (NCPolyDisplayOrderAux[##, "\[LessLess] "]&) @@
     Apply[NCPolyDisplayOrderAux[##,"<"]&,  vars, 1];
 
   (* NCPoly Operators *)

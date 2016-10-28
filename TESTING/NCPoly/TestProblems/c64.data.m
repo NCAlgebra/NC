@@ -31,6 +31,7 @@ SNC[a,b,c,Aja,InvAja,Inva,LossLessM,InvLossLessM,Ajb,Ajc];
 LossLessList=Table[Rel[j],{j,0,22}];
 rels=Complement[Union[LossLessList],{0}];
 
+ClearMonomialOrder[];
 SetMonomialOrder[{a,c,LossLessM,InvLossLessM,Ajc},1];
 SetMonomialOrder[{Aja,Inva,InvAja},2];
 SetMonomialOrder[{b,Ajb},3];

@@ -1,0 +1,24 @@
+(*
+ * File produced by NCGBTEST on:
+ * Fri 28 Oct 2016 14:02:26
+ *)
+
+{tppinvA -> pinvtpA, tppinvB -> pinvtpB, rat3 -> rat1, rat5 -> tprat1, 
+ rat6 -> tprat3, B**rat1 -> 0, B**tprat1 -> 0, 
+ tpB**pinvtpB -> -rat1 + A**pinvA, pinvA**A -> tpA**pinvtpA, 
+ pinvA**tprat1 -> pinvA**rat1, pinvB**B -> -rat1 + A**pinvA, 
+ pinvtpA**tpA -> A**pinvA, pinvtpB**tpB -> B**pinvB, rat1**pinvB -> 0, 
+ rat1**rat1 -> rat1, rat1**tprat1 -> rat1, rat1**tprat3 -> rat1, 
+ tprat1**A -> rat1**A, tprat1**pinvB -> 0, tprat1**rat1 -> rat1, 
+ tprat3**rat1 -> rat1, A**tpA**pinvtpA -> A, A**tpA**tprat1 -> A**tpA**rat1, 
+ A**pinvA**pinvB -> pinvB, A**pinvA**rat1 -> rat1, B**A**pinvA -> B, 
+ tpA**pinvtpA**pinvA -> pinvA, tpB**B**pinvB -> -rat1**tpB + A**pinvA**tpB, 
+ pinvB**pinvtpB**rat1 -> 0, pinvB**pinvtpB**tprat1 -> 0, 
+ pinvtpB**A**pinvA -> pinvtpB**rat1 + B**pinvB**pinvtpB, 
+ rat1**A**pinvA -> rat1, rat1**tpB**B -> 0, tprat1**pinvtpA**pinvA -> 
+  rat1**pinvtpA**pinvA, A**tpA**A**pinvA -> A**tpA, 
+ A**pinvA**tpB**B -> tpB**B - (15*tprat1**tpB**B)/41, 
+ A**pinvA**pinvtpA**pinvA -> pinvtpA**pinvA, B**pinvB**pinvtpB**A -> 
+  pinvtpB**A - pinvtpB**rat1**A, B**pinvB**pinvtpB**pinvB -> pinvtpB**pinvB, 
+ tpA**A**pinvA**pinvtpA -> tpA**pinvtpA, B**pinvB**pinvtpB**pinvtpA**pinvA -> 
+  pinvtpB**pinvtpA**pinvA - pinvtpB**rat1**pinvtpA**pinvA}

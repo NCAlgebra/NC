@@ -1,0 +1,9 @@
+(*
+ * File produced by NCGBTEST on:
+ * Fri 28 Oct 2016 11:14:36
+ *)
+
+{z**b -> 1 - d**x, d**a -> -z**y, a**w -> 1 - x**d, a**c -> -x**z, 
+ b**z -> 1 - y**c, b**d -> -y**w, c**y -> 1 - w**a, c**b -> -w**x, 
+ z**y**c -> d**x**z, d**x**d -> d + z**y**w, z**y**w**a -> z**y - d**x**z**y, 
+ d**x**z**y**w -> z**y**w**x**d}

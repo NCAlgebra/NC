@@ -1,6 +1,7 @@
 SetNonCommutative[x,y,invx,invy,inv1xy,inv1yx,inv1x,inv1y];
+ClearMonomialOrder[];
 SetMonomialOrder[{x,y,invx,invy,inv1x,inv1y,inv1xy,inv1yx},1];
-Iterations=5;
+Iterations=3;
 
 rels={
 	invx ** x -> 1,

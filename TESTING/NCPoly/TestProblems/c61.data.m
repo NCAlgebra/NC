@@ -33,6 +33,7 @@ setFive={rightm1,rightm2};
 setSix={a,b,c,e,f,g};
 setThree={m1,m2};
 
+ClearMonomialOrder[];
 SetMonomialOrder[setOne,1];
 SetMonomialOrder[setTwo,2];
 SetMonomialOrder[setThree,3];

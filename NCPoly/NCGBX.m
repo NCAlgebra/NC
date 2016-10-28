@@ -14,6 +14,12 @@ NCToPoly::usage="NCToPoly[exp, var] constructs a noncommutative polynomial objec
 Clear[PolyToNC];
 PolyToNC::usage="PolyToNC[exp, vars] constructs an NC expression from the noncommutative polynomial object exp in variables var. Monomials are specified in terms of the symbols in the list var.\nIMPORTANT: This command requirest that both NCAlgebra and some implementation of NCPoly be loaded.";
 
+Clear[ClearMonomialOrder];
+ClearMonomialOrder::usage="";
+
+Clear[SetMonomialOrder];
+SetMonomialOrder::usage="";
+
 Clear[SetMonomialOrder];
 SetMonomialOrder::usage="";
 
@@ -95,10 +101,23 @@ Begin["`Private`"];
       = Map[Flatten, Join[$NCPolyInterfaceMonomialOrder, Map[List, {m}]]];
   ];
 
+  
+  Clear[AddElementToList];
+  AddElementToList[list_List, position_Integer, element_] := Module[
+    {tmp = Join[list, ConstantArray[0, position - Length@list]]}, 
+    tmp[[position]] = element; 
+    Return[tmp];
+  ];
+ 
+  SetMonomialOrder[m_List, level_Integer] := 
+    $NCPolyInterfaceMonomialOrder = AddElementToList[$NCPolyInterfaceMonomialOrder, level, Flatten[m]];
+
   SetMonomialOrder[m___] := ($NCPolyInterfaceMonomialOrder = Map[Flatten, Map[List, {m}]]);
 
   GetMonomialOrder[] := $NCPolyInterfaceMonomialOrder;
 
+  ClearMonomialOrder[] := $NCPolyInterfaceMonomialOrder = {};
+  
   NCMakeGB[p_List, iter_Integer, opts___Rule] := Module[
     {polys, basis, rules, labels},
 

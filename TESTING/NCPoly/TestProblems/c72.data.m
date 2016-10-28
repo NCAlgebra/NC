@@ -1,5 +1,6 @@
 (* Has a `contradition' *)
 SetNonCommutative[x,y,invx,invy,inv1x,inv1y,inv1xy,inv1yx];
+ClearMonomialOrder[];
 SetMonomialOrder[{x,y,invx,invy,inv1x,inv1y,inv1xy,inv1yx},1];
 Iterations=5;
 
