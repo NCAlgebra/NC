@@ -18,8 +18,8 @@ Block[
   PolyExp = NCToPoly[NCExp, vars];
   NCExpExp = PolyToNC[PolyExp, vars];
 
-  NCTest[PolyExp, NCPolyMonomial[{0}, {1,2}]]
-  NCTest[NCExp, NCExpExp]
+  NCTest[PolyExp, NCPolyMonomial[{0}, {1,2}]];
+  NCTest[NCExp, NCExpExp];
 
   vars = {{a},{b,c}};
   NCExp = 2 b;

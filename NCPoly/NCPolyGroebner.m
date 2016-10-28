@@ -6,12 +6,6 @@
 BeginPackage[ "NCPolyGroebner`",
               "NCPoly`"  ];
 
-Clear[NCPolyGroebner];
-NCPolyGroebner::usage="NCPolyGroebner[G] computes the noncommutative Groebner basis of the list of polynomials G. See Options[NCPolyGroebner] for many options. The algorithm is based on T. Mora, An introduction to commuative and noncommutative Groebner Bases, Theoretical Computer Science, v. 134, pp. 131-173, 2000.";
-
-Clear[NCPolySFactors];
-
-Clear[NCPolySFactorExpand];
 Clear[PrintBasis, PrintObstructions, PrintSPolynomials, 
       SimplifyObstructions, VerboseLevel];
 Options[NCPolyGroebner] = {
@@ -25,14 +19,17 @@ Options[NCPolyGroebner] = {
   Labels -> {}
 };
 
+Get["NCPolyGroebner.usage"];
+
 Begin["`Private`"];
 
 (* Other operations *)
-
+Clear[NCPolySFactorExpand];
 NCPolySFactorExpand[s_List, p1_NCPoly, p2_NCPoly] := 
   MapThread[NCPolyQuotientExpand[{#1},#2]&, {s, {p1, p2}}];
 
 (* S-Polynomial matches *)
+Clear[NCPolySFactors];
 NCPolySFactors[r_NCPoly, s_NCPoly] := Block[
   { n = r[[1]] },
 
@@ -398,7 +395,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
         ,
 
          If[ verboseLevel >= 3,
-             Print["* S-Polynomial can be completely reduced and has been removed from the set of obstructions."];
+             Print["* S-Polynomial was completely reduced and has been removed from the set of obstructions."];
          ];
 
     ];

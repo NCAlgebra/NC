@@ -1,6 +1,6 @@
 include ../make.inc
 
-FILES = NCPoly.usage
+FILES = NCPoly.usage NCPolyGroebner.usage
 
 all: $(FILES)
 

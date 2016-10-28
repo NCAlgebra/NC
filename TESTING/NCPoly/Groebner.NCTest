@@ -6,8 +6,13 @@ Block[
   f,g,G,g1,g2,
   obs1,obs2,
   exp1,exp21,exp22,
-  m,Invm,q2,q1
+  m,Invm,q2,q1,
+  NCPolySFactors,
+  NCPolySFactorExpand
   },
+
+  NCPolySFactors = NCPolyGroebner`Private`NCPolySFactors;
+  NCPolySFactorExpand = NCPolyGroebner`Private`NCPolySFactorExpand;
   
   (*Test Groebner *)
 

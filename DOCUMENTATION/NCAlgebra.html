@@ -273,10 +273,13 @@
 <li><a href="#NCIntegerDigits"><span class="toc-section-number">25.26</span> NCIntegerDigits</a></li>
 <li><a href="#NCPadAndMatch"><span class="toc-section-number">25.27</span> NCPadAndMatch</a></li>
 </ul></li>
-<li><a href="#PackageNCTest"><span class="toc-section-number">26</span> NCTest</a><ul>
-<li><a href="#NCTest"><span class="toc-section-number">26.1</span> NCTest</a></li>
-<li><a href="#NCTestRun"><span class="toc-section-number">26.2</span> NCTestRun</a></li>
-<li><a href="#NCTestSummarize"><span class="toc-section-number">26.3</span> NCTestSummarize</a></li>
+<li><a href="#PackageNCPolyGroebner"><span class="toc-section-number">26</span> NCPolyGroebner</a><ul>
+<li><a href="#NCPolyGroebner"><span class="toc-section-number">26.1</span> NCPolyGroebner</a></li>
+</ul></li>
+<li><a href="#PackageNCTest"><span class="toc-section-number">27</span> NCTest</a><ul>
+<li><a href="#NCTest"><span class="toc-section-number">27.1</span> NCTest</a></li>
+<li><a href="#NCTestRun"><span class="toc-section-number">27.2</span> NCTestRun</a></li>
+<li><a href="#NCTestSummarize"><span class="toc-section-number">27.3</span> NCTestSummarize</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -627,18 +630,18 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[mon1 + ... + K lead] lead</td>
-<td style="text-align: left;">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
+<td>inv[mon1 + ... + K lead] lead</td>
+<td>(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">lead inv[mon1 + ... + K lead]</td>
-<td style="text-align: left;">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
+<td>lead inv[mon1 + ... + K lead]</td>
+<td>(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>
@@ -646,38 +649,38 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[1 + K a b]</td>
-<td style="text-align: left;">inv[a] - K b inv[1 + K a b]</td>
+<td>inv[a] inv[1 + K a b]</td>
+<td>inv[a] - K b inv[1 + K a b]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[a] inv[1 + K a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[a] inv[1 + K a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] inv[b]</td>
-<td style="text-align: left;">inv[b] - K inv[1 + K a b] a</td>
+<td>inv[1 + K a b] inv[b]</td>
+<td>inv[b] - K inv[1 + K a b] a</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] inv[a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[1 + K a] inv[a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a</td>
-<td style="text-align: left;">a inv[1 + K b a]</td>
+<td>inv[1 + K a b] a</td>
+<td>a inv[1 + K b a]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[A inv[a] + B b] inv[a]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) a b]</td>
+<td>inv[A inv[a] + B b] inv[a]</td>
+<td>(1/A) inv[1 + (B/A) a b]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[A inv[a] + K b]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) b a]</td>
+<td>inv[a] inv[A inv[a] + K b]</td>
+<td>(1/A) inv[1 + (B/A) b a]</td>
 </tr>
 </tbody>
 </table>
@@ -685,26 +688,26 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a b</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>inv[1 + K a b] a b</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] a</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>inv[1 + K a] a</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">a b inv[1 + K a b]</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>a b inv[1 + K a b]</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">a inv[1 + K a]</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>a inv[1 + K a]</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 </tbody>
 </table>
@@ -1970,23 +1973,44 @@ rule = NCPolyToRule[poly]</code></pre>
 <h2 id="NCPadAndMatch"><span class="header-section-number">25.27</span> NCPadAndMatch</h2>
 <p>When list <code>a</code> is longer than list <code>b</code>, <code>NCPadAndMatch[a,b]</code> returns the minimum number of elements from list a that should be added to the left and right of list <code>b</code> so that <code>a = l b r</code>. When list <code>b</code> is longer than list <code>a</code>, return the opposite match.</p>
 <p><code>NCPadAndMatch</code> returns all possible matches with the minimum number of elements.</p>
-<h1 id="PackageNCTest"><span class="header-section-number">26</span> NCTest</h1>
+<h1 id="PackageNCPolyGroebner"><span class="header-section-number">26</span> NCPolyGroebner</h1>
+<p>Members are:</p>
+<ul>
+<li><a href="#NCPolyGroebner">NCPolyGroebner</a></li>
+</ul>
+<h2 id="NCPolyGroebner"><span class="header-section-number">26.1</span> NCPolyGroebner</h2>
+<p><code>NCPolyGroebner[G]</code> computes the noncommutative Groebner basis of the list of polynomials <code>G</code>.</p>
+<p><code>NCPolyGroebner[G, options]</code> uses <code>options</code>.</p>
+<p>The following <code>options</code> can be given:</p>
+<ul>
+<li><code>SimplifyObstructions</code> (<code>True</code>);</li>
+<li><code>SortObstructions</code> (<code>False</code>);</li>
+<li><code>SortBasis</code> (<code>False</code>);</li>
+<li><code>Labels</code> (<code>{}</code>);</li>
+<li><code>VerboseLevel</code> (<code>1</code>): function used to decide if a pivot is zero;</li>
+<li><code>PrintBasis</code> (<code>False</code>): function used to divide a vector by an entry;</li>
+<li><code>PrintObstructions</code> (<code>False</code>);</li>
+<li><code>PrintSPolynomials</code> (<code>False</code>);</li>
+</ul>
+<p>The algorithm is based on T. Mora, &quot;An introduction to commuative and noncommutative Groebner Bases,&quot; <em>Theoretical Computer Science</em>, v. 134, pp. 131-173, 2000.</p>
+<p>See also: <a href="#NCPoly">NCPoly</a>.</p>
+<h1 id="PackageNCTest"><span class="header-section-number">27</span> NCTest</h1>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCTest">NCTest</a></li>
 <li><a href="#NCTestRun">NCTestRun</a></li>
 <li><a href="#NCTestSummarize">NCTestSummarize</a></li>
 </ul>
-<h2 id="NCTest"><span class="header-section-number">26.1</span> NCTest</h2>
+<h2 id="NCTest"><span class="header-section-number">27.1</span> NCTest</h2>
 <p><code>NCTest[expr,answer]</code> asserts whether <code>expr</code> is equal to <code>answer</code>. The result of the test is collected when <code>NCTest</code> is run from <code>NCTestRun</code>.</p>
 <p>See also: <a href="#NCTestRun" class="uri">#NCTestRun</a>, <a href="#NCTestSummarize" class="uri">#NCTestSummarize</a></p>
-<h2 id="NCTestRun"><span class="header-section-number">26.2</span> NCTestRun</h2>
+<h2 id="NCTestRun"><span class="header-section-number">27.2</span> NCTestRun</h2>
 <p><code>NCTest[list]</code> runs the test files listed in <code>list</code> after appending the '.NCTest' suffix and return the results.</p>
 <p>For example:</p>
 <pre><code>results = NCTestRun[{&quot;NCCollect&quot;, &quot;NCSylvester&quot;}]</code></pre>
 <p>will run the test files &quot;NCCollec.NCTest&quot; and &quot;NCSylvester.NCTest&quot; and return the results in <code>results</code>.</p>
 <p>See also: <a href="#NCTest" class="uri">#NCTest</a>, <a href="#NCTestSummarize" class="uri">#NCTestSummarize</a></p>
-<h2 id="NCTestSummarize"><span class="header-section-number">26.3</span> NCTestSummarize</h2>
+<h2 id="NCTestSummarize"><span class="header-section-number">27.3</span> NCTestSummarize</h2>
 <p><code>NCTestSummarize[results]</code> will print a summary of the results in <code>results</code> as produced by <code>NCTestRun</code>.</p>
 <p>See also: <a href="#NCTestRun" class="uri">#NCTestRun</a></p>
 </body>

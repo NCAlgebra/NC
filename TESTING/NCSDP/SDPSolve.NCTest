@@ -2,15 +2,13 @@
 << SDPFlat`
 << SDPSeDuMi`
 
+Begin["NCTest`Local`"];
+
 Module[
-  {test, k,
-   A, b, y, sdp,
+  {A, b, y, sdp,
    X, Y, S, iters,
    AA, BB, CC
   },
-
-  k = 1;
-  test = "SDPSolve";
 
   A = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
   b = y2;
@@ -21,10 +19,10 @@ Module[
   {Y, X, S, iters} = SDPSolve[{AA, BB, CC}];
   answer = 16;
   exp = -SDPInner[BB, Y];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True, test, k++];
+  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True];
 
   exp = -SDPInner[CC, X];
-  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True, test, k++];
+  NCTest[Abs[(exp - answer)/answer] < 10^(-5), True];
 
   RunTest[problem_, answer_] := Module[
     {AA, BB, CC},
@@ -34,11 +32,11 @@ Module[
     {Y, X, S, iters} = SDPSolve[{AA, BB, CC}];
     exp = -SDPInner[BB, Y];
     (* Print["exp = ", exp]; *)
-    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True, test, k++];
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True];
 
     exp = -SDPInner[CC, X];
     (* Print["exp = ", exp]; *)
-    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True, test, k++];
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True];
 
   ];
 
@@ -46,11 +44,11 @@ Module[
     {"data/arch0", 0.56652},
     {"data/trto3", 1},
     {"data/OH_2Pi_STO-6GN9r12g1T2", 1},
-    (*,
-    *)
     {"data/control07", 126.734}
   };
 
   Map[RunTest @@ ##&, problems];
 
 ];
+
+End[];

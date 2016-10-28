@@ -50,6 +50,7 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
 	 NCPoly/NCPoly.md \
+	 NCPoly/NCPolyGroebner.md \
 	 TESTING/NCTest.md
 
 doc: NCAlgebra.pdf NCAlgebra.html
