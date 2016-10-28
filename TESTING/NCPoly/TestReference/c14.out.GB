@@ -1,0 +1,8 @@
+(*
+ * File produced by NCGBTEST on:
+ * Fri 28 Oct 2016 09:25:50
+ *)
+
+{A**A -> A, A**d -> -A**B - A**c, B**A -> A**B, B**B -> A, c**A -> A**c, 
+ c**B -> B**c, c**c -> 0, A**B**d -> -A - A**B**c, A**c**d -> -A**B**c, 
+ A**B**c**d -> -A**c}

@@ -1,0 +1,9 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:45
+ *)
+
+{-1 + Inv[m]**m, -1 + m**Inv[m], a**m - m**f - q1**q2, 
+ -a + m**f**Inv[m] + q1**q2**Inv[m], f**Inv[m] - Inv[m]**a + 
+  Inv[m]**q1**q2**Inv[m], -a**a + a**q1**q2**Inv[m] + m**f**f**Inv[m] + 
+  q1**q2**f**Inv[m]}

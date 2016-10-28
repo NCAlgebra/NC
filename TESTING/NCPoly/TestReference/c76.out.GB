@@ -1,0 +1,7 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:45
+ *)
+
+{-1 + invx**x, -1 + x**invx, 1 - inv1x + x**inv1x, 1 - inv1x + inv1x**x, 
+ -inv1x - invx + inv1x**invx, -inv1x - invx + invx**inv1x}

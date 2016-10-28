@@ -1,0 +1,7 @@
+(*
+ * File produced by NCGBTEST on:
+ * Fri 28 Oct 2016 09:27:51
+ *)
+
+{e**a -> a**e, e**b -> b**e, e**c -> c**e, e**d -> d**e, a**b**c**d -> e, 
+ b**c**d**a -> e, c**d**a**b -> e, d**a**b**c -> e}

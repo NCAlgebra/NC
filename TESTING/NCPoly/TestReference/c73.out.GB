@@ -1,0 +1,328 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:45
+ *)
+
+{-1 + a**Inva, -1 + Aja**InvAja, -c + Ajb**InvLossLessM, Ajb**Ajc - c**b, 
+ -Ajb + c**LossLessM, -1 + Inva**a, -1 + InvAja**Aja, 
+ Aja**InvLossLessM - Ajc**c + InvLossLessM**a, -Ajc + InvLossLessM**b, 
+ -1 + InvLossLessM**LossLessM, -a**LossLessM + b**Ajb - LossLessM**Aja, 
+ -b + LossLessM**Ajc, -1 + LossLessM**InvLossLessM, 
+ Aja - Ajc**Ajb + InvLossLessM**a**LossLessM, -1 + b**invb, -1 + invb**b, 
+ 1 - inv1b + b**inv1b, 1 - inv1b + inv1b**b, 1 - inv1a + a**inv1a, 
+ 1 - inv1a + inv1a**a, 1 - inv1ba + b**a**inv1ba, 
+ -Aja**Ajc + Ajc**c**b - InvLossLessM**a**b, inva - Inva, 
+ -inv1a - Inva + inv1a**Inva, -a**b + b**c**b - LossLessM**Aja**Ajc, 
+ -InvLossLessM + InvAja**Ajc**c - InvAja**InvLossLessM**a, 
+ -Ajb + invb**a**LossLessM + invb**LossLessM**Aja, 
+ Ajb - inv1b**Ajb + inv1b**a**LossLessM + inv1b**LossLessM**Aja, 
+ Aja**Aja - Aja**Ajc**Ajb + Ajc**c**a**LossLessM - 
+  InvLossLessM**a**a**LossLessM, -InvLossLessM + Ajc**invb, 
+ -inv1b - invb + inv1b**invb, InvLossLessM + Ajc**inv1b - 
+  InvLossLessM**inv1b, -inv1b - invb + invb**inv1b, 
+ -inv1a - Inva + Inva**inv1a, Inva + b**inv1ab - Inva**inv1ab, 
+ inv1ba**Inva - Inva**inv1ab, InvLossLessM - InvLossLessM**inv1ba + 
+  Ajc**a**inv1ba, -invb - a**inv1ba + invb**inv1ba, 
+ inv1b - a**inv1ba - inv1b**inv1ba + inv1b**a**inv1ba, 
+ -a**inv1ba + inv1ab**a, Inva + inv1ba**b - Inva**inv1ab, 
+ -invb - a**inv1ba + inv1ab**invb, inv1b - a**inv1ba - inv1ab**inv1b + 
+  a**inv1ba**inv1b, -Ajb**InvAja + invb**LossLessM + 
+  invb**a**LossLessM**InvAja, Ajb**InvAja + inv1b**LossLessM - 
+  inv1b**Ajb**InvAja + inv1b**a**LossLessM**InvAja, 
+ -a**a**LossLessM + LossLessM**Aja**Aja + b**c**a**LossLessM - 
+  LossLessM**Aja**Ajc**Ajb, Inva**Ajb + inv1ba**a**LossLessM + 
+  inv1ba**LossLessM**Aja - Inva**inv1ab**Ajb, 
+ inv1ba - inv1ba**inv1b - Inva**inv1b + Inva**inv1ab**inv1b, 
+ inv1ab - inv1ab**inv1a + a**inv1ba**inv1a, -inv1ba**inv1a - Inva**inv1ab + 
+  Inva**inv1ab**inv1a, -Ajc**inv1ab - InvLossLessM**Inva + 
+  InvLossLessM**Inva**inv1ab, -inv1ab - invb**Inva + invb**Inva**inv1ab, 
+ inv1ab - inv1b**inv1ab - inv1b**Inva + inv1b**Inva**inv1ab, 
+ InvLossLessM - InvLossLessM**inv1ab - Aja**Ajc**inv1ab - Ajc**c**Inva + 
+  Ajc**c**Inva**inv1ab, 1 - inv1ab - b**c**Inva + b**c**Inva**inv1ab - 
+  LossLessM**Aja**Ajc**inv1ab, inv1ba + inv1a**inv1b - inv1a**inv1ba - 
+  inv1ba**inv1b - inv1a**inv1ab**inv1b + inv1a**inv1ba**inv1b, 
+ InvLossLessM**inv1ba + Ajc**inv1ab**inv1b - InvLossLessM**inv1ba**inv1b, 
+ inv1ab**inv1b - inv1b**inv1ba - inv1b**inv1ab**inv1b + inv1b**inv1ba**inv1b, 
+ inv1ab**inv1b - a**inv1ba**inv1ba - inv1ab**inv1ab**inv1b + 
+  a**inv1ba**inv1ba**inv1b, inv1ba**LossLessM + Inva**Ajb**InvAja + 
+  inv1ba**a**LossLessM**InvAja - Inva**inv1ab**Ajb**InvAja, 
+ inv1ba - inv1ba**inv1b + inv1ba**inv1ba - Inva**inv1b - 
+  inv1ba**inv1ba**inv1b + Inva**inv1ab**inv1ab**inv1b, 
+ inv1a**inv1ab - inv1ba**inv1a - inv1a**inv1ab**inv1a + inv1a**inv1ba**inv1a, 
+ -Ajc**inv1ab + InvLossLessM**inv1a + Ajc**inv1ab**inv1a - 
+  InvLossLessM**inv1ba**inv1a, -inv1ab + inv1ab**inv1a - inv1b**inv1a + 
+  inv1b**inv1ab - inv1b**inv1ab**inv1a + inv1b**inv1ba**inv1a, 
+ inv1ab**inv1ab - inv1ab**inv1ab**inv1a + a**inv1ba**inv1ba**inv1a, 
+ -inv1ba**inv1ba**inv1a - Inva**inv1ab**inv1ab + Inva**inv1ab**inv1ab**inv1a, 
+ inv1ba**inv1ba + inv1a**inv1ab**inv1b - inv1a**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1b - inv1a**inv1ab**inv1ab**inv1b + 
+  inv1a**inv1ba**inv1ba**inv1b, InvLossLessM**inv1ba**inv1ba + 
+  Ajc**inv1ab**inv1ab**inv1b - InvLossLessM**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1b - inv1b**inv1ba**inv1ba - 
+  inv1b**inv1ab**inv1ab**inv1b + inv1b**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1b - a**inv1ba**inv1ba**inv1ba - 
+  inv1ab**inv1ab**inv1ab**inv1b + a**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ba - inv1ba**inv1b + inv1ba**inv1ba - Inva**inv1b - 
+  inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1b + Inva**inv1ab**inv1ab**inv1ab**inv1b, 
+ inv1ba**inv1ba**inv1ba + inv1a**inv1ab**inv1ab**inv1b - 
+  inv1a**inv1ba**inv1ba**inv1ba - inv1ba**inv1ba**inv1ba**inv1b - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1b + inv1a**inv1ba**inv1ba**inv1ba**
+   inv1b, InvLossLessM**inv1ba**inv1ba**inv1ba + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1b - InvLossLessM**inv1ba**inv1ba**inv1ba**
+   inv1b, inv1ab**inv1ab**inv1ab**inv1b - inv1b**inv1ba**inv1ba**inv1ba - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1b + inv1b**inv1ba**inv1ba**inv1ba**
+   inv1b, inv1ab**inv1ab**inv1ab**inv1b - a**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1b + a**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1b, inv1a**inv1ab**inv1ab - inv1ba**inv1ba**inv1a - 
+  inv1a**inv1ab**inv1ab**inv1a + inv1a**inv1ba**inv1ba**inv1a, 
+ -Ajc**inv1ab**inv1ab + InvLossLessM**inv1ba**inv1a + 
+  Ajc**inv1ab**inv1ab**inv1a - InvLossLessM**inv1ba**inv1ba**inv1a, 
+ -inv1ab + inv1ab**inv1a - inv1ab**inv1ab - inv1b**inv1a + inv1b**inv1ab + 
+  inv1ab**inv1ab**inv1a - inv1b**inv1ab**inv1a + inv1b**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1a + inv1b**inv1ba**inv1ba**inv1a, 
+ inv1ab**inv1ab**inv1ab - inv1ab**inv1ab**inv1ab**inv1a + 
+  a**inv1ba**inv1ba**inv1ba**inv1a, -inv1ba**inv1ba**inv1ba**inv1a - 
+  Inva**inv1ab**inv1ab**inv1ab + Inva**inv1ab**inv1ab**inv1ab**inv1a, 
+ inv1a**inv1ab**inv1ab**inv1ab - inv1ba**inv1ba**inv1ba**inv1a - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1a + inv1a**inv1ba**inv1ba**inv1ba**
+   inv1a, -Ajc**inv1ab**inv1ab**inv1ab + InvLossLessM**inv1ba**inv1ba**
+   inv1a + Ajc**inv1ab**inv1ab**inv1ab**inv1a - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1a, 
+ -inv1ab + inv1ab**inv1a - inv1ab**inv1ab - inv1b**inv1a + inv1b**inv1ab + 
+  inv1ab**inv1ab**inv1a - inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1b**inv1ab**inv1ab**inv1a + inv1b**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1a + inv1b**inv1ba**inv1ba**inv1ba**
+   inv1a, inv1ab**inv1ab**inv1ab**inv1ab - inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1a + a**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ inv1ba - inv1ba**inv1b + inv1ba**inv1ba - Inva**inv1b - 
+  inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1b + Inva**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1b, inv1ba**inv1ba**inv1ba**inv1ba + 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1b - inv1a**inv1ba**inv1ba**inv1ba**
+   inv1ba - inv1ba**inv1ba**inv1ba**inv1ba**inv1b - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - InvLossLessM**inv1ba**inv1ba**
+   inv1ba**inv1ba**inv1b, inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba - inv1b**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1b + inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1b - a**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba - inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ba - inv1ba**inv1b + inv1ba**inv1ba - Inva**inv1b - 
+  inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba - inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b, 
+ inv1ba**inv1ba**inv1ba**inv1ba**inv1ba + inv1a**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1b - inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ -inv1ba**inv1ba**inv1ba**inv1ba**inv1a - Inva**inv1ab**inv1ab**inv1ab**
+   inv1ab + Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1a, 
+ inv1a**inv1ab**inv1ab**inv1ab**inv1ab - inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1a - inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -Ajc**inv1ab**inv1ab**inv1ab**inv1ab + InvLossLessM**inv1ba**inv1ba**inv1ba**
+   inv1a + Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -inv1ab + inv1ab**inv1a - inv1ab**inv1ab - inv1b**inv1a + inv1b**inv1ab + 
+  inv1ab**inv1ab**inv1a - inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1ab**inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1a + inv1b**inv1ab**inv1ab**inv1ab**
+   inv1ab - inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1a + a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a - 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a, 
+ inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1a + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -inv1ab + inv1ab**inv1a - inv1ab**inv1ab - inv1b**inv1a + inv1b**inv1ab + 
+  inv1ab**inv1ab**inv1a - inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1ab**inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1ab**inv1ab**
+   inv1a + inv1b**inv1ab**inv1ab**inv1ab**inv1ab + 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ inv1ba - inv1ba**inv1b + inv1ba**inv1ba - Inva**inv1b - 
+  inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba - inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b, 
+ inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba + 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ba - inv1ba**inv1b + inv1ba**inv1ba - Inva**inv1b - 
+  inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba - inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b, 
+ inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba + 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1b, inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b + 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ -inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a - 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a, 
+ inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -inv1ab + inv1ab**inv1a - inv1ab**inv1ab - inv1b**inv1a + inv1b**inv1ab + 
+  inv1ab**inv1ab**inv1a - inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1ab**inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - inv1b**inv1ab**inv1ab**inv1ab**
+   inv1a + inv1b**inv1ab**inv1ab**inv1ab**inv1ab + 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a - 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a, 
+ inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ -Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a + 
+  Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1a, -inv1ab + inv1ab**inv1a - inv1ab**inv1ab - inv1b**inv1a + 
+  inv1b**inv1ab + inv1ab**inv1ab**inv1a - inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1a + inv1b**inv1ab**inv1ab + 
+  inv1ab**inv1ab**inv1ab**inv1a - inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1a + inv1b**inv1ab**inv1ab**inv1ab + 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1a - inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1ab - inv1b**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1a - inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab - 
+  inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a + 
+  a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a, 
+ inv1ba - inv1ba**inv1b + inv1ba**inv1ba - Inva**inv1b - 
+  inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1b + inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba - inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b + 
+  Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1b, inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba + 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b - 
+  inv1a**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1b + inv1a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba**inv1b, InvLossLessM**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba**inv1ba**inv1ba + Ajc**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1ab**inv1ab**inv1b - InvLossLessM**inv1ba**inv1ba**inv1ba**
+   inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b, 
+ inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b - 
+  inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba - 
+  inv1b**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1b + inv1b**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba**inv1b, inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1b - a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba**inv1ba - inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**
+   inv1ab**inv1ab**inv1b + a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**
+   inv1ba**inv1ba**inv1ba**inv1b}

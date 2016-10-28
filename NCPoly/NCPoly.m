@@ -141,6 +141,10 @@ Begin["`Private`"];
 
   ];
 
+  NCPolyReduce[{f_NCPoly}, {}, args__] := {f};
+
+  NCPolyReduce[{}, args__] := {};
+
   NCPolyReduce[{f__NCPoly}, {g__NCPoly}, complete_:False, debugLevel_:0] := 
   Block[{ gs = {g}, fs = {f}, m, qi, ri, i },
 

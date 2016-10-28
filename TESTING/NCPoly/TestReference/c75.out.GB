@@ -1,0 +1,6 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 6 Jan 2010 16:29:45
+ *)
+
+{-1 + a**ia, -1 + ia**a, -ia + inva, -n**ia + m**m**m, -m**n**ia + n**ia**m}
