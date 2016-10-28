@@ -1,8 +1,9 @@
 << Sylvester`
 
+Begin["NCTest`Local`"];
+
 Module[
-  {test, k,
-   A,B,Q,Y,
+  {A,B,Q,Y,
    l1,r1,
    X1,X11,
    exp,
@@ -24,9 +25,6 @@ Module[
    m1,n1,m2,n2
    },
 
-  k = 1;
-  test = "SDPSylvester1";
-
   A={{-1,1},{0,-2}};
   B={{2,1},{1,2}};
   Q=IdentityMatrix[2];
@@ -44,23 +42,23 @@ Module[
   X11=SylvesterEntryPrimalMultiply[{l1,r1},Y];
 
   exp = Norm[ X1 - X11 ];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   Y1=Transpose[B].X1.Transpose[A]+A.X1.B;
   Y11=SylvesterEntryDualMultiply[{l1,r1},X1];
 
   exp = Norm[ Y1 - Y11 ];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {l1s,r1s} = {ArrayFlatten[{{X11.Transpose[A],X11.B}}], 
                ArrayFlatten[{{Transpose[B].X11,A.X11}}]};
   {l11s,r11s} = SylvesterEntryScale[{l1,r1},X11];
 
   exp = Norm[ l1s - l11s ];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Norm[ r1s - r11s ];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {m,n}=Dimensions[Y];
   tmp = KroneckerProduct[B,Transpose[A]]+KroneckerProduct[Transpose[A],B];
@@ -68,7 +66,7 @@ Module[
   K11=SylvesterEntryPrimalVectorize[{l1,r1},Dimensions[Y]];
 
   exp = Norm[K1-K11];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   A1=KroneckerProduct[Transpose[B].B,A.Transpose[A]]+
     KroneckerProduct[Transpose[B].Transpose[A],A.B]+
@@ -81,10 +79,10 @@ Module[
   {A11,A22}=SylvesterEntrySylvesterVectorize[{l1,r1},{l1,r1},{m,n},{m,n}];
 
   exp = Norm[A1-A11];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Norm[A2-A22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   (* Test #2: Not symmetric mapping, symmetric variable *)
 
@@ -97,7 +95,7 @@ Module[
   X22=SylvesterEntryPrimalMultiply[{l2,r2},Y];
 
   exp = Norm[X2-X22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   tmp = Transpose[A].Y.Transpose[B];
   X2=(tmp+Transpose[tmp])/2;
@@ -105,13 +103,13 @@ Module[
   X22=(tmp+Transpose[tmp])/2;
 
   exp = Norm[X2-X22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   Y2=A.X2.B;
   Y22=SylvesterEntryDualMultiply[{l2,r2},X2];
   
   exp = Norm[Y2-Y22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {m,n}=Dimensions[Y];
   tmp = KroneckerProduct[B,Transpose[A]];
@@ -119,17 +117,17 @@ Module[
   K22=SylvesterEntryPrimalVectorize[{l2,r2},{m,n},True];
   
   exp = Norm[K2-K22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   A1=KroneckerProduct[Transpose[B].B,A.Transpose[A]];
   A2=KroneckerProduct[Transpose[B].Transpose[A],A.B];
   {A11,A22}=SylvesterEntrySylvesterVectorize[{l2,r2},{l2,r2},{m,n},{m,n}];
   
   exp = Norm[A1-A11];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Norm[A2-A22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   (* Test #3: Not symmetric mapping, not symmetric variable *)
 
@@ -145,7 +143,7 @@ Module[
   X33=SylvesterEntryPrimalMultiply[{l3,r3},K];
 
   exp = Norm[X3-X33];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   tmp=F.K;
   X3=(tmp+Transpose[tmp])/2;
@@ -153,13 +151,13 @@ Module[
   X33=(tmp+Transpose[tmp])/2;
 
   exp = Norm[X3-X33];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   Y3=Transpose[F].X3;
   Y33=SylvesterEntryDualMultiply[{l3,r3},X3];
 
   exp = Norm[Y3-Y33];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {m,n}=Dimensions[K];
   tmp=KroneckerProduct[F,r3];
@@ -167,17 +165,17 @@ Module[
   K33=SylvesterEntryPrimalVectorize[{l3,r3},{m,n},True];
 
   exp = Norm[K3-K33];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   A1=KroneckerProduct[r3.Transpose[r3],Transpose[l3].l3];
   A2=KroneckerProduct[r3.l3,Transpose[l3].Transpose[r3]];
   {A11,A22}=SylvesterEntrySylvesterVectorize[{l3,r3},{l3,r3},{m,n},{m,n}];
 
   exp = Norm[A1-A11];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Norm[A2-A22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {m1,n1}=Dimensions[K];
   {m2,n2}=Dimensions[Y];
@@ -186,10 +184,10 @@ Module[
   {A11,A22}=SylvesterEntrySylvesterVectorize[{l3,r3},{l2,r2},{m1,n1},{m2,n2}];
 
   exp = Norm[A1-A11];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Norm[A2-A22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {m2,n2}=Dimensions[K];
   {m1,n1}=Dimensions[Y];
@@ -198,19 +196,21 @@ Module[
   {A11,A22}=SylvesterEntrySylvesterVectorize[{l2,r2},{l3,r3},{m1,n1},{m2,n2}];
 
   exp = Norm[A1-A11];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Norm[A2-A22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   A1=KroneckerProduct[r2.Transpose[r3],Transpose[l2].l3];
   A2=KroneckerProduct[r2.l3,Transpose[l2].Transpose[r3]];
   {A11,A22}=SylvesterEntrySylvesterVectorize[{l2,r2},{l3,r3},{m1,n1},{m2,n2}];
 
   exp = Norm[A1-A11];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Norm[A2-A22];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
 ];
+
+End[];

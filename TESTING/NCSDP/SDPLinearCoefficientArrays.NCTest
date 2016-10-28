@@ -1,8 +1,9 @@
 << SDP`
 
+Begin["NCTest`Local`"];
+
 Module[
-  {test, k, 
-   p, exp, answer, p1, p2, exp1, exp2, answer1, answer2,
+  {p, exp, answer, p1, p2, exp1, exp2, answer1, answer2,
    a,b,c,d,e,f,g,h,
    x,y,z,
    w,w1,w2,w3, 
@@ -11,9 +12,6 @@ Module[
    SDPLinearCoefficientArrays,
    SDPJoinCoefficientArrays},
 
-   k = 1;
-   test = "SDPLinearCoefficientArrays";
-
    SDPLinearCoefficientArrays = SDP`Private`SDPLinearCoefficientArrays;
    SDPJoinCoefficientArrays = SDP`Private`SDPJoinCoefficientArrays;
 
@@ -21,44 +19,44 @@ Module[
    p = a + b x - c y;
    {CC, AA} = SDPLinearCoefficientArrays[p, {x, y}];
    answer = { SparseArray[{{a}}] };
-   NCTest[CC, answer, test, k++];
+   NCTest[CC, answer];
    answer = {{SparseArray[{{b}}]}, 
              {SparseArray[{{-c}}]}};
-   NCTest[AA, answer, test, k++];
+   NCTest[AA, answer];
 
    p = a + b x - c y + d x;
    {CC, AA} = SDPLinearCoefficientArrays[p, {x, y}];
    answer = { SparseArray[{{a}}] };
-   NCTest[CC, answer, test, k++];
+   NCTest[CC, answer];
    answer = {{SparseArray[{{b+d}}]}, 
 	     {SparseArray[{{-c}}]}};
-   NCTest[AA, answer, test, k++];
+   NCTest[AA, answer];
 
    p = 3 a + 2 b x - 4 c y + 7 d x;
    {CC, AA} = SDPLinearCoefficientArrays[p, {x, y}];
    answer = { SparseArray[{{3 a}}] };
-   NCTest[CC, answer, test, k++];
+   NCTest[CC, answer];
    answer = { {SparseArray[{{2 b + 7 d}}]}, 
 	      {SparseArray[{{-4 c}}]} };
-   NCTest[AA, answer, test, k++];
+   NCTest[AA, answer];
 
    (* matrix expression *)
 
    p = {{a,b},{c,d}} + {{b,1},{0,-a}} x - {{c,d},{-e,c-d}} y;
    {CC, AA} = SDPLinearCoefficientArrays[p, {x, y}];
    answer = { SparseArray[{{a,b},{c,d}}] };
-   NCTest[CC, answer, test, k++];
+   NCTest[CC, answer];
    answer = { {SparseArray[{{b,1},{0,-a}}]}, 
               {SparseArray[{{-c,-d},{e,-c+d}}]} };
-   NCTest[AA, answer, test, k++];
+   NCTest[AA, answer];
 
    p = {{x,1},{1,y}};
    {CC, AA} = SDPLinearCoefficientArrays[p, {x, y}];
    answer = { SparseArray[{{0,1},{1,0}}] };
-   NCTest[CC, answer, test, k++];
+   NCTest[CC, answer];
    answer = { {SparseArray[{{1,0},{0,0}}]}, 
               {SparseArray[{{0,0},{0,1}}]} };
-   NCTest[AA, answer, test, k++];
+   NCTest[AA, answer];
 
    (* SDPJoinCoefficientArrays *)
 
@@ -67,50 +65,50 @@ Module[
 
    {CC, AA} = SDPJoinCoefficientArrays[exp1, exp1];
    answer1 = { SparseArray[{{0,1},{1,0}}], SparseArray[{{0,1},{1,0}}] };
-   NCTest[CC, answer1, test, k++];
+   NCTest[CC, answer1];
    answer2 = { {SparseArray[{{1,0},{0,0}}], SparseArray[{{1,0},{0,0}}]}, 
               {SparseArray[{{0,0},{0,1}}], SparseArray[{{0,0},{0,1}}]} };
-   NCTest[AA, answer2, test, k++];
+   NCTest[AA, answer2];
 
    {CC, AA} = SDPLinearCoefficientArrays[{p1, p1}, {x, y}];
-   NCTest[CC, answer1, test, k++];
-   NCTest[AA, answer2, test, k++];
+   NCTest[CC, answer1];
+   NCTest[AA, answer2];
 
    p2 = a + b x - c y;
    exp2 = SDPLinearCoefficientArrays[p2, {x, y}];
 
    {CC, AA} = SDPJoinCoefficientArrays[exp2, exp2];
    answer1 = { SparseArray[{{a}}], SparseArray[{{a}}] };
-   NCTest[CC, answer1, test, k++];
+   NCTest[CC, answer1];
    answer2 = {{SparseArray[{{b}}],SparseArray[{{b}}]}, 
               {SparseArray[{{-c}}],SparseArray[{{-c}}]}};
-   NCTest[AA, answer2, test, k++];
+   NCTest[AA, answer2];
 
    {CC, AA} = SDPLinearCoefficientArrays[{p2, p2}, {x, y}];
-   NCTest[CC, answer1, test, k++];
-   NCTest[AA, answer2, test, k++];
+   NCTest[CC, answer1];
+   NCTest[AA, answer2];
 
    answer1 = { SparseArray[{{a}}], SparseArray[{{0,1},{1,0}}] };
    answer2 = { {SparseArray[{{b}}], SparseArray[{{1,0},{0,0}}]}, 
                {SparseArray[{{-c}}], SparseArray[{{0,0},{0,1}}]} };
    {CC, AA} = SDPJoinCoefficientArrays[exp2, exp1];
-   NCTest[CC, answer1, test, k++];
-   NCTest[AA, answer2, test, k++];
+   NCTest[CC, answer1];
+   NCTest[AA, answer2];
 
    {CC, AA} = SDPLinearCoefficientArrays[{p2, p1}, {x, y}];
-   NCTest[CC, answer1, test, k++];
-   NCTest[AA, answer2, test, k++];
+   NCTest[CC, answer1];
+   NCTest[AA, answer2];
 
    answer1 = { SparseArray[{{0,1},{1,0}}], SparseArray[{{a}}] };
    answer2 = { {SparseArray[{{1,0},{0,0}}], SparseArray[{{b}}]}, 
                {SparseArray[{{0,0},{0,1}}], SparseArray[{{-c}}]} };
    {CC, AA} = SDPJoinCoefficientArrays[exp1, exp2];
-   NCTest[CC, answer1, test, k++];
-   NCTest[AA, answer2, test, k++];
+   NCTest[CC, answer1];
+   NCTest[AA, answer2];
 
    {CC, AA} = SDPLinearCoefficientArrays[{p1, p2}, {x, y}];
-   NCTest[CC, answer1, test, k++];
-   NCTest[AA, answer2, test, k++];
+   NCTest[CC, answer1];
+   NCTest[AA, answer2];
 
    answer1 = { SparseArray[{{-2}}], SparseArray[{{0, 0}, {0, 1}}], SparseArray[{{0, 0}, {0, 1}}] };
    answer2 = {
@@ -121,8 +119,8 @@ Module[
   
    p = { {{x-2}}, {{y,x},{x,1}}, {{z,y},{y,1}} };
    {CC, AA} = SDPLinearCoefficientArrays[p, {x, y, z}];
-   NCTest[CC, answer1, test, k++];
-   NCTest[AA, answer2, test, k++];
+   NCTest[CC, answer1];
+   NCTest[AA, answer2];
 
    (* SDPMatrices *)
    A = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
@@ -139,15 +137,15 @@ Module[
 	 { SparseArray[{{0}}], 
 	   SparseArray[{{0, 0}, {0, 0}}], 
 	   SparseArray[{{-1, 0}, {0, 0}}] } };
-   NCTest[AA, answer, test, k++];
+   NCTest[AA, answer];
    
    answer = {{{0, 0, 0}}};
-   NCTest[BB, answer, test, k++];
+   NCTest[BB, answer];
 
    answer = { SparseArray[{{-2}}], 
               SparseArray[{{0, 0}, {0, 1}}], 
               SparseArray[{{0, 0}, {0, 1}}] };
-   NCTest[CC, answer, test, k++];
+   NCTest[CC, answer];
 
    {AA,BB,CC} = SDPMatrices[b, A, y];
 
@@ -160,15 +158,15 @@ Module[
 	 { SparseArray[{{0}}], 
 	   SparseArray[{{0, 0}, {0, 0}}], 
 	   SparseArray[{{-1, 0}, {0, 0}}] } };
-   NCTest[AA, answer, test, k++];
+   NCTest[AA, answer];
    
    answer = {{{0, 0, -1}}};
-   NCTest[BB, answer, test, k++];
+   NCTest[BB, answer];
 
    answer = { SparseArray[{{-2}}], 
               SparseArray[{{0, 0}, {0, 1}}], 
               SparseArray[{{0, 0}, {0, 1}}] };
-   NCTest[CC, answer, test, k++];
+   NCTest[CC, answer];
 
    Quiet[
 
@@ -176,13 +174,13 @@ Module[
      y = {y0, y1, y2};
 
      exp = Check[ {AA,BB,CC} = SDPMatrices[A, y], True, SDP::notLinear ];
-     NCTest[exp, True, test, k++];
+     NCTest[exp, True];
    
      A = {y0-y1+Exp[y2]};
      y = {y0, y1, y2};
 
      exp = Check[ {AA,BB,CC} = SDPMatrices[b, A, y], True, SDP::notLinear ];
-     NCTest[exp, True, test, k++];
+     NCTest[exp, True];
 
      ,
 
@@ -191,3 +189,4 @@ Module[
 
 ];
 
+End[];

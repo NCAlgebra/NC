@@ -1,8 +1,10 @@
 << Sylvester`
 << SDPSylvester`
 
+Begin["NCTest`Local`"];
+
 Module[
-  {test, k, exp, answer,
+  {exp, answer,
    A,B,Q,
    AA,BB,CC,
    AAv,BBv,CCv, y,
@@ -13,7 +15,7 @@ Module[
    dims,
    H11,
    XX2,XX3,
-   n,m,Id,Ze,Idm,Zemm,Zenm,Idx,IdW,Zenpm,
+   n,m,Idn,Ze,Idm,Zemm,Zenm,Idx,IdW,Zenpm,
    X,L,W,
    FvDualEval, FvPrimalEval, 
    FvSylvesterEval, FvSylvesterDiagonalEval,	
@@ -22,9 +24,6 @@ Module[
    FSylvesterEval, FSylvesterDiagonalEval, 
    FSylvesterSolve, FSylvesterSolveFactored
   },
-
-  k = 1;
-  test = "SDPSylvester2";
 
   A={{-1,1},{0,-2}};
   B={{2,1},{1,2}};
@@ -48,39 +47,39 @@ Module[
 
   answer = {{{{-4, 1}, {1, 2}}}, {{{-2, -5}, {-5, 0}}}, {{{0, -2}, {-2, -8}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   answer = {{{1, 0, 1}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   answer = CC;
   exp = Abs[Total[CCv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   y = SymmetricToVector[Y];
   answer = SDPPrimalEval[AAv, y];
   X1=SylvesterPrimalEval[AA,{Y}];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
 
   answer = {{{{-4, 1}, {1, 2}}}, {{{-1, -5/2}, {-5/2, 0}}}, {{{-1, -5/2}, {-5/2, 0}}}, {{{0, -2}, {-2, -8}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   answer = {{{1, 0, 0, 1}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   y = ToVector[Y];
   answer = SDPPrimalEval[AAv, y];
   X1=SylvesterPrimalEval[AA,{Y}];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {XX1}=X1;
 
@@ -88,7 +87,7 @@ Module[
   Y1=SylvesterDualEval[AA,{XX1},syms];
 
   exp = Abs[Total[ToVector[Y1[[1]]]-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   X11 = MapThread[Dot, {X1,X1}];
 
@@ -97,7 +96,7 @@ Module[
   scl = Norm[H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   P2 = {{1, 0, 0, 0}, {0, 1/2, 1/2, 0}, {0, 0, 0, 1}};
   Q2 = Transpose[P2].Inverse[P2.Transpose[P2]];
@@ -105,7 +104,7 @@ Module[
   H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
 
   exp = Abs[Total[Transpose[Q2] . H1 . Q2 - H2, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   << SDP`;
 
@@ -123,22 +122,22 @@ Module[
   FF = FPrimalEval @@ {Y};
 
   exp = Abs[Total[Fv - FF, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {{Fv}} = FvDualEval @@ X1;
   {FF} = FDualEval @@ X1;
 
   exp = Abs[Total[Fv - ToVector[FF], Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   Fv = FvSylvesterEval @@ {X11, X11};
   FF = FSylvesterEval @@ {X11, X11};
 
   exp = Abs[Total[Fv - H1, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Abs[Total[FF - H2, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   (* Test #2 *)
 
@@ -162,35 +161,35 @@ Module[
 
   answer = {{{{1, 0}, {0, 0}}, {{-2, 1/2}, {1/2, 1}}}, {{{0, 1}, {1, 0}}, {{-1, -5/2}, {-5/2, 0}}}, {{{0, 0}, {0, 1}}, {{0, -1}, {-1, -4}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   answer = {{{1, 0, 1}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   y = SymmetricToVector[Y];
   answer = SDPPrimalEval[AAv, y];
   X1=SylvesterPrimalEval[AA,{Y}];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
 
   answer = {{{{1, 0}, {0, 0}}, {{-2, 1/2}, {1/2, 1}}}, {{{0, 1/2}, {1/2, 0}}, {{0, -2}, {-2, -2}}}, {{{0, 1/2}, {1/2, 0}}, {{-1, -1/2}, {-1/2, 2}}}, {{{0, 0}, {0, 1}}, {{0, -1}, {-1, -4}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   answer = {{{1, 0, 0, 1}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   y = ToVector[Y];
   answer = SDPPrimalEval[AAv, y];
   X1=SylvesterPrimalEval[AA,{Y}];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {XX1, XX2}=X1;
 
@@ -198,7 +197,7 @@ Module[
   Y1=SylvesterDualEval[AA,{XX1,XX2},syms];
 
   exp = Abs[Total[ToVector[Y1[[1]]]-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   X11 = MapThread[Dot, {X1,X1}];
 
@@ -207,12 +206,12 @@ Module[
   scl = Norm[H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
 
   exp = Abs[Total[Transpose[Q2] . H1 . Q2 - H2, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   << SDP`;
 
@@ -230,22 +229,22 @@ Module[
   FF = FPrimalEval @@ {Y};
 
   exp = Abs[Total[Fv - FF, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {{Fv}} = FvDualEval @@ X1;
   {FF} = FDualEval @@ X1;
 
   exp = Abs[Total[Fv - ToVector[FF], Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   Fv = FvSylvesterEval @@ {X11, X11};
   FF = FSylvesterEval @@ {X11, X11};
 
   exp = Abs[Total[Fv - H1, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Abs[Total[FF - H2, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   (* Test #3 *)
 
@@ -282,28 +281,28 @@ Module[
 
   answer = {{{{1, 0}, {0, 0}}, {{-2, 1/2}, {1/2, 1}}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}, {{{0, 1}, {1, 0}}, {{-1, -5/2}, {-5/2, 0}}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}, {{{0, 0}, {0, 1}}, {{0, -1}, {-1, -4}}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}, {{{0, 0}, {0, 0}}, {{3, 7/2}, {7/2, 0}}, {{0, 0, 1/2}, {0, 0, 0}, {1/2, 0, 0}}}, {{{0, 0}, {0, 0}}, {{0, 3/2}, {3/2, 7}}, {{0, 0, 0}, {0, 0, 1/2}, {0, 1/2, 0}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   answer = {{{1, 0, 1, 0, 0}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   y = Join[SymmetricToVector[Y],ToVector[K]];
   answer = SDPPrimalEval[AAv, y];
   X1=SylvesterPrimalEval[AA,{Y,K}];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
 
   answer = {{{{1, 0}, {0, 0}}, {{-2, 1/2}, {1/2, 1}}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}, {{{0, 1/2}, {1/2, 0}}, {{0, -2}, {-2, -2}}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}, {{{0, 1/2}, {1/2, 0}}, {{-1, -1/2}, {-1/2, 2}}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}, {{{0, 0}, {0, 1}}, {{0, -1}, {-1, -4}}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}, {{{0, 0}, {0, 0}}, {{3, 7/2}, {7/2, 0}}, {{0, 0, 1/2}, {0, 0, 0}, {1/2, 0, 0}}}, {{{0, 0}, {0, 0}}, {{0, 3/2}, {3/2, 7}}, {{0, 0, 0}, {0, 0, 1/2}, {0, 1/2, 0}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   answer = {{{1, 0, 0, 1, 0, 0}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   y = Join[ToVector[Y],ToVector[K]];
 
@@ -311,7 +310,7 @@ Module[
   X1=SylvesterPrimalEval[AA,{Y,K}];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {XX1, XX2, XX3}=X1;
 
@@ -319,7 +318,7 @@ Module[
   Y1=SylvesterDualEval[AA,{XX1,XX2,XX3},syms];
 
   exp = Abs[Total[Join[ToVector[Y1[[1]]], ToVector[Y1[[2]]]]-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   X11 = MapThread[Dot, {X1,X1}];
 
@@ -328,21 +327,21 @@ Module[
   scl = Norm[H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
 
   exp = Abs[Total[Transpose[Q2] . H1[[1;;4,1;;4]] . Q2 - H2[[1;;3,1;;3]], Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   exp = Abs[Total[Transpose[Q2] . H1[[1;;4,5;;6]] - H2[[1;;3,4;;5]], Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   exp = Abs[Total[H1[[5;;6,1;;4]] . Q2 - H2[[4;;5,1;;3]], Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   exp = Abs[Total[H1[[5;;6,5;;6]] - H2[[4;;5,4;;5]], Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   << SDP`;
 
@@ -360,22 +359,22 @@ Module[
   FF = FPrimalEval @@ {Y,K};
 
   exp = Abs[Total[Fv - FF, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   {{Fv}} = FvDualEval @@ X1;
   FF = FDualEval @@ X1;
 
   exp = Abs[Total[Fv - Flatten[Map[ToVector,FF]], Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   Fv = FvSylvesterEval @@ {X11, X11};
   FF = FSylvesterEval @@ {X11, X11};
 
   exp = Abs[Total[Fv - H1, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   exp = Abs[Total[FF - H2, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   (* Riccati *)
 
@@ -383,7 +382,7 @@ Module[
   n=2;
   m=2;
 
-  Id = IdentityMatrix[n];
+  Idn = IdentityMatrix[n];
   A = RandomReal[{-10,10},{n,n}];
   B = RandomReal[{-10,10},{n,m}];
   Ze = ConstantArray[0,{n,n}];
@@ -391,17 +390,17 @@ Module[
   Idm = IdentityMatrix[m];
   Zemm = ConstantArray[0,{m,m}];
   Zenm = ConstantArray[0,{n,m}];
-  IdX = ArrayFlatten[{{Transpose[Zenm]},{Id}}];
+  IdX = ArrayFlatten[{{Transpose[Zenm]},{Idn}}];
   IdW = ArrayFlatten[{{Idm},{Zenm}}];
   Zenpm = ConstantArray[0,{n+m,n+m}];
 
   syms={True,False,True};
 
   AA={
-  {{2 A,Id},{2B,Id},{Zenm,Transpose[Zenm]}},(* A X + B L < 0*)
+  {{2 A,Idn},{2B,Idn},{Zenm,Transpose[Zenm]}},(* A X + B L < 0*)
   {{-2 IdX,Transpose[IdX]},{-2 IdW,Transpose[IdX]},{-2 IdW,Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
   };
-  CC={-Id,Zenpm};
+  CC={-Idn,Zenpm};
   BB={Ze,Transpose[Zenm],-Idm};
 
   X=RandomReal[{-10,10},{n,n}];
@@ -416,11 +415,11 @@ Module[
 
   answer = {{{{15.064339702967715, -8.27553146091735}, {-8.27553146091735, 0.}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, -2, 0}, {0, 0, 0, 0}}}, {{{0.8785700080750871, 5.090428937581574}, {5.090428937581574, -16.5510629218347}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, -2}, {0, 0, -2, 0}}}, {{{0., 0.43928500403754356}, {0.43928500403754356, -4.883481827804566}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, -2}}}, {{{-19.534217081230132, 0.8751353390213623}, {0.8751353390213623, 0.}}, {{0, 0, -1, 0}, {0, 0, 0, 0}, {-1, 0, 0, 0}, {0, 0, 0, 0}}}, {{{17.09064653368648, -0.41336659055150804}, {-0.41336659055150804, 0.}}, {{0, 0, 0, 0}, {0, 0, -1, 0}, {0, -1, 0, 0}, {0, 0, 0, 0}}}, {{{0., -9.767108540615066}, {-9.767108540615066, 1.7502706780427246}}, {{0, 0, 0, -1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {-1, 0, 0, 0}}}, {{{0., 8.54532326684324}, {8.54532326684324, -0.8267331811030161}}, {{0, 0, 0, 0}, {0, 0, 0, -1}, {0, 0, 0, 0}, {0, -1, 0, 0}}}, {{{0, 0}, {0, 0}}, {{-2, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}, {{{0, 0}, {0, 0}}, {{0, -2, 0, 0}, {-2, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}, {{{0, 0}, {0, 0}}, {{0, 0, 0, 0}, {0, -2, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
   answer = {{{0, 0, 0, 0, 0, 0, 0, -1, 0, -1}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   y = Join[SymmetricToVector[X],ToVector[L],SymmetricToVector[W]];
   answer = SDPPrimalEval[AAv, y];
@@ -428,17 +427,17 @@ Module[
   scl = Max[Map[Norm, X1]];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   {AAv,BBv,CCv} = SylvesterToVectorizedSDP[{AA,BB,CC}];
 
   answer = {{{{15.064339702967715, -8.27553146091735}, {-8.27553146091735, 0.}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, -2, 0}, {0, 0, 0, 0}}}, {{{0.8785700080750871, -2.441740913902283}, {-2.441740913902283, 0.}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, -1}, {0, 0, -1, 0}}}, {{{0., 7.532169851483857}, {7.532169851483857, -16.5510629218347}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, -1}, {0, 0, -1, 0}}}, {{{0., 0.43928500403754356}, {0.43928500403754356, -4.883481827804566}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, -2}}}, {{{-19.534217081230132, 0.8751353390213623}, {0.8751353390213623, 0.}}, {{0, 0, -1, 0}, {0, 0, 0, 0}, {-1, 0, 0, 0}, {0, 0, 0, 0}}}, {{{17.09064653368648, -0.41336659055150804}, {-0.41336659055150804, 0.}}, {{0, 0, 0, 0}, {0, 0, -1, 0}, {0, -1, 0, 0}, {0, 0, 0, 0}}}, {{{0., -9.767108540615066}, {-9.767108540615066, 1.7502706780427246}}, {{0, 0, 0, -1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {-1, 0, 0, 0}}}, {{{0., 8.54532326684324}, {8.54532326684324, -0.8267331811030161}}, {{0, 0, 0, 0}, {0, 0, 0, -1}, {0, 0, 0, 0}, {0, -1, 0, 0}}}, {{{0, 0}, {0, 0}}, {{-2, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}, {{{0, 0}, {0, 0}}, {{0, -1, 0, 0}, {-1, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}, {{{0, 0}, {0, 0}}, {{0, -1, 0, 0}, {-1, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}, {{{0, 0}, {0, 0}}, {{0, 0, 0, 0}, {0, -2, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}};
   exp = Abs[Total[AAv-answer, Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
   answer = {{{0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, -1}}};
   exp = Abs[Total[BBv-answer, Infinity]];
-  NCTest[exp, 0, test, k++];
+  NCTest[exp, 0];
 
   (* 2 {A.X + B.L, -ArrayFlatten[{{W, L},{0*Transpose[L], X}}]}; *)
   y = Join[ToVector[X], ToVector[L], ToVector[W]];
@@ -447,7 +446,7 @@ Module[
   scl = Max[Map[Norm, X1]];
 
   exp = Abs[Total[X1-answer, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   {XX1, XX2}=X1;
 
@@ -457,7 +456,7 @@ Module[
   scl = Max[Map[Norm, Y1]];
 
   exp = Abs[Total[Join[ToVector[Y1[[1]]], ToVector[Y1[[2]]], ToVector[Y1[[3]]]]-answer, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   X11 = MapThread[Dot, {X1,X1}];
 
@@ -467,25 +466,25 @@ Module[
   scl = Norm[H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
 
   exp = Transpose[Q2] . H1[[1;;4,1;;4]] . Q2 - H2[[1;;3,1;;3]];
   exp = Abs[Total[exp, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   exp = Transpose[Q2] . H1[[1;;4,5;;6]] - H2[[1;;3,4;;5]];
   exp = Abs[Total[exp, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   exp = H1[[5;;6,1;;4]] . Q2 - H2[[4;;5,1;;3]];
   exp = Abs[Total[exp, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   exp = H1[[5;;6,5;;6]] - H2[[4;;5,4;;5]];
   exp = Abs[Total[exp, Infinity]];
-  NCTest[exp < scl*10^(-9), True, test, k++];
+  NCTest[exp < scl*10^(-9), True];
 
   << SDP`;
 
@@ -503,22 +502,23 @@ Module[
   FF = FPrimalEval @@ {X,L,W};
 
   exp = Abs[Total[Fv - FF, Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
   {{Fv}} = FvDualEval @@ X1;
   FF = FDualEval @@ X1;
 
   exp = Abs[Total[Fv - Flatten[Map[ToVector,FF]], Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
   Fv = FvSylvesterEval @@ {X11, X11};
   FF = FSylvesterEval @@ {X11, X11};
 
   exp = Abs[Total[Fv - answer, Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
+  NCTest[exp < 10^(-9), True];
 
   exp = Abs[Total[FF - H2, Infinity]];
-  NCTest[exp < 10^(-9), True, test, k++];
-  
+  NCTest[exp < 10^(-9), True];
 
 ];
+
+End[];

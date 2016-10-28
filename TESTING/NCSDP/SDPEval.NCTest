@@ -1,6 +1,7 @@
+Begin["NCTest`Local`"];
+
 RunTest[kk_:1] := Module[
-  {test, k,
-   m,n,
+  {m,n,
    A1,A2,A3,AA,As1,As2,
    X1,X2,Z1,Z2,Zs1,Zs2,
    y
@@ -22,14 +23,14 @@ RunTest[kk_:1] := Module[
     For[ii = 2, ii <= n, ii++, 
         answer += y[[ii]] AA[[ii]]
     ];
-    NCTest[Total[Map[Norm, exp-answer]], 0, test, k++];
+    NCTest[Total[Map[Norm, exp-answer]], 0];
   
     exp = SDPDualEval[AA, X1];
     answer = {};
     For[ii = 1, ii <= n, ii++, 
         answer = Append[answer, Plus@@Map[Tr,MapThread[Dot, {AA[[ii]], X1}]]]
     ];
-    NCTest[exp, answer, test, k++];
+    NCTest[exp, answer];
     
     (* TEST SCALING *)
 
@@ -38,14 +39,14 @@ RunTest[kk_:1] := Module[
     For[ii = 1, ii <= n, ii++, 
         answer = Append[answer, MapThread[Dot, {X1, AA[[ii]], X1}]]
     ];
-    NCTest[exp, answer, test, k++];
+    NCTest[exp, answer];
 
     exp = SDPScale[AA, X1, X2];
     answer = {};
     For[ii = 1, ii <= n, ii++, 
         answer = Append[answer, MapThread[Dot, {X1, AA[[ii]], X2}]]
     ];
-    NCTest[exp, answer, test, k++];
+    NCTest[exp, answer];
 
     (* TEST SYLVESTER *)
     exp = SDPSylvesterEval[AA, X1];
@@ -57,11 +58,11 @@ RunTest[kk_:1] := Module[
       ];
       answer = Append[answer, row];
     ];
-    NCTest[exp, answer, test, k++];
+    NCTest[exp, answer];
 
     answer = Tr[answer, List];
     exp = SDPSylvesterDiagonalEval[AA, X1];
-    NCTest[exp, answer, test, k++];
+    NCTest[exp, answer];
 
     exp = SDPSylvesterEval[AA, X1, X2];
     answer = {};
@@ -72,11 +73,11 @@ RunTest[kk_:1] := Module[
       ];
       answer = Append[answer, row];
     ];
-    NCTest[exp, answer, test, k++];
+    NCTest[exp, answer];
 
     answer = Tr[answer, List];
     exp = SDPSylvesterDiagonalEval[AA, X1, X2];
-    NCTest[exp, answer, test, k++];
+    NCTest[exp, answer];
 
     (* TEST SDP FUNCTIONS *)
     {FDualEval, FPrimalEval, 
@@ -86,19 +87,19 @@ RunTest[kk_:1] := Module[
 
     exp = FDualEval @@ X1;
     answer = {{SDPDualEval[AA, X1]}};
-    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+    NCTest[Total[exp-answer,Infinity], 0];
 
     exp = FPrimalEval @@ {{y}};
     answer = SDPPrimalEval[AA, y];
-    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+    NCTest[Total[exp-answer,Infinity], 0];
 
     exp = SylvesterVecEval @@ {X1, X1};
     answer = SDPSylvesterEval[AA, X1];
-    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+    NCTest[Total[exp-answer,Infinity], 0];
 
     exp = SylvesterVecDiagonalEval @@ {X1, X1};
     answer = SDPSylvesterDiagonalEval[AA, X1];
-    NCTest[Total[exp-answer,Infinity], 0, test, k++];
+    NCTest[Total[exp-answer,Infinity], 0];
 
   ];
 
@@ -174,3 +175,5 @@ Module[
   k = RunTest[k];
 
 ];
+
+End[];

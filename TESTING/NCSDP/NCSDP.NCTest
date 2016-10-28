@@ -1,13 +1,15 @@
 << NCAlgebra`
 << NCSDP`
 
+Begin["NCTest`Local`"];
+
 Module[
   {
     a,x,F,vars,obj,
     n,data,
     abc,rules,
     exp,answer,
-    Id,
+    Idn,
     q,
     b,b1,c1,c2,d12,y,w,
     Ze,Zemn,Zexz,
@@ -35,22 +37,22 @@ Module[
 
   {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
 
-  Id = IdentityMatrix[n];
+  Idn = IdentityMatrix[n];
   Ze = ConstantArray[0, {n,n}];
   answer = {
     {
-      {A, 2 Id}
+      {A, 2 Idn}
     },
     {
-      {Id, -Id}
+      {Idn, -Idn}
     }
   };
   NCTest[abc[[1]], answer];
 
-  answer = {-Id};
+  answer = {-Idn};
   NCTest[abc[[2]], answer];
 
-  answer = {-Id, Ze};
+  answer = {-Idn, Ze};
   NCTest[abc[[3]], answer];
 
   answer = SymmetricVariables->{1};
@@ -82,15 +84,15 @@ Module[
 
   answer = {
     {
-      {A, 2 Id}
+      {A, 2 Idn}
     },
     {
-      {Id, -Id}
+      {Idn, -Idn}
     }
   };
   NCTest[abc[[1]], answer];
 
-  answer = {-Id};
+  answer = {-Idn};
   NCTest[abc[[2]], answer];
 
   answer = {-Q, Ze};
@@ -126,15 +128,15 @@ Module[
 
   answer = {
     {
-      {ArrayFlatten[{{A, B}}], ArrayFlatten[{{2 Id, Transpose[B]}}]}
+      {ArrayFlatten[{{A, B}}], ArrayFlatten[{{2 Idn, Transpose[B]}}]}
     },
     {
-      {Id, -Id}
+      {Idn, -Idn}
     }
   };
   NCTest[abc[[1]], answer];
 
-  answer = {-Id};
+  answer = {-Idn};
   NCTest[abc[[2]], answer];
 
   answer = {-Q, Ze};
@@ -164,7 +166,7 @@ Module[
 
   << "COMPleib/MmaCOMPleib/AC3.m";
   data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
-  Id = IdentityMatrix[nx];
+  Idn = IdentityMatrix[nx];
   Ze = ConstantArray[0, {nx,nx}];
   Zemn = ConstantArray[0, {nu,nx}];
 
@@ -172,18 +174,18 @@ Module[
 
   answer = {
     {
-      {A, 2 Id}, {B, 2 Id}
+      {A, 2 Idn}, {B, 2 Idn}
     },
     {
-      {Id, -Id}, {Transpose[Zemn], Ze}
+      {Idn, -Idn}, {Transpose[Zemn], Ze}
     }
   };
   NCTest[abc[[1]], answer];
 
-  answer = {-Id, Zemn};
+  answer = {-Idn, Zemn};
   NCTest[abc[[2]], answer];
 
-  answer = {Ze, -Id};
+  answer = {Ze, -Idn};
   NCTest[abc[[3]], answer];
 
   answer = SymmetricVariables->{1};
@@ -214,14 +216,14 @@ Module[
   Idm=IdentityMatrix[nu];
   Zemm=ConstantArray[0,{nu,nu}];
   Zenm=ConstantArray[0,{nx,nu}];
-  IdX=ArrayFlatten[{{Transpose[Zenm]},{Id}}];
+  IdX=ArrayFlatten[{{Transpose[Zenm]},{Idn}}];
   IdW=ArrayFlatten[{{Idm},{Zenm}}];
   Zenpm=ConstantArray[0,{nx+nu,nx+nu}];
 
   {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
 
   answer = {
-    {{A,2 Id},{B,2 Id},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
+    {{A,2 Idn},{B,2 Idn},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
     {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}} (* -[W, L; L^T X] < 0 *)
   };
   NCTest[abc[[1]], answer];
@@ -262,9 +264,9 @@ Module[
   Zepp=ConstantArray[0,{nz,nz}];
   Zenp=ConstantArray[0,{nx,nz}];
   answer = {
-    {{ArrayFlatten[{{A},{C1}}], 2 ArrayFlatten[{{Id,Zenp}}]},
-     {ArrayFlatten[{{B},{D12}}], 2 ArrayFlatten[{{Id,Zenp}}]}},
-    {{Id,-Id},{Zenm, Ze}}
+    {{ArrayFlatten[{{A},{C1}}], 2 ArrayFlatten[{{Idn,Zenp}}]},
+     {ArrayFlatten[{{B},{D12}}], 2 ArrayFlatten[{{Idn,Zenp}}]}},
+    {{Idn,-Idn},{Zenm, Ze}}
   };
   NCTest[abc[[1]], answer];
 
@@ -303,8 +305,8 @@ Module[
   {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
 
   answer = {
-    {{ArrayFlatten[{{A},{C1}}], 2 ArrayFlatten[{{Id,Zenp}}]},
-     {ArrayFlatten[{{B},{D12}}], 2 ArrayFlatten[{{Id,Zenp}}]},
+    {{ArrayFlatten[{{A},{C1}}], 2 ArrayFlatten[{{Idn,Zenp}}]},
+     {ArrayFlatten[{{B},{D12}}], 2 ArrayFlatten[{{Idn,Zenp}}]},
      {ConstantArray[0,{nx+nz,nu}], ConstantArray[0,{nu, nx+nz}]}},
     {{IdX,-Transpose[IdX]},{IdW,-2 Transpose[IdX]},{IdW,-Transpose[IdW]}}
   };
@@ -331,3 +333,5 @@ Module[
   NCTest[dObj, answer];
 
 ];
+
+End[];

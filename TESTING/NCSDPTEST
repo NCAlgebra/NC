@@ -3,8 +3,6 @@ SetOptions[$Output,PageWidth->1000];
 << NC`
 << NCTest`
 
-On[Assert];
-
 Print["> BEGIN NCSDPTEST\n" ];
 
 tests = {
@@ -26,8 +24,3 @@ Print["\n> END NCSDPTEST\n" ];
 
 Print["> EVEN IF ALL THE TESTS SUCCEEDED YOU SHOULD QUIT THE KERNEL"]
 Print["  IN YOUR MATHEMATICA SESSION AND START OVER." ];
-
-$AssertFunction =. ;
-Off[Assert];
-
-(* $Echo = DeleteCases[$Echo, "stdout"]; *)

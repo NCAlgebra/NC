@@ -2,6 +2,8 @@
 << SDPFlat`
 << SDPSeDuMi`
 
+Begin["NCTest`Local`"];
+
 Module[
   {lmi, vars, sdp,
    sol,
@@ -27,9 +29,9 @@ Module[
   exp = Abs[Total[Normal[sdp] - Normal[sdp2], Infinity]];
   NCTest[exp < 10^(-9), True];
 
-  SDPExport[sdp, "Testing/sedumi"];
+  SDPExport[sdp, "sedumi"];
 
-  sdp2 = SDPImport["Testing/sedumi"];
+  sdp2 = SDPImport["sedumi"];
     
   exp = Abs[Total[Normal[sdp] - Normal[sdp2], Infinity]];
   NCTest[exp < 10^(-9), True];
@@ -39,9 +41,13 @@ Module[
   exp = Abs[Total[Normal[sedumi] - Normal[sedumi2], Infinity]];
   NCTest[exp < 10^(-9), True];
 
-  sol2 = SDPSolve[SDPImport["Testing/sedumi"]];
+  sol2 = SDPSolve[SDPImport["sedumi"]];
 
   exp = Abs[Total[Normal[sol] - Normal[sol2], Infinity]];
   NCTest[exp < 10^(-9), True];
 
+  DeleteFile["sedumi.mm"];
+
 ];
+
+End[];
