@@ -67,7 +67,7 @@ NCMakeGBTest[filename_String,
 (* Perform tests *)
 
 $NCGB$ResultDirectory = "TestResults";
-$NCGB$ReferenceDirectory = "TestReference";
+$NCGB$ReferenceDirectory = "TestProblems";
 
 $CurrentDirectory = Directory[];
 SetDirectory[ToFileName[{$NCDir$, "TESTING", "NCPoly"}, "TestProblems"]];
