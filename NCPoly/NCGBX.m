@@ -8,49 +8,36 @@ BeginPackage[ "NCGBX`",
 	      "NCPoly`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCToPoly];
-NCToPoly::usage="NCToPoly[exp, var] constructs a noncommutative polynomial object in variables var from the NC expression exp. For example, NCToPoly[x**y - 2 y**z, {x, y, z}] constructs an object associated with the noncommutative polynomial x y - 2 y z in variables x, y and z. The internal representation is so that the terms are sorted according to a degree-lexicographic order in vars. In the above example, x < y < z.\nIMPORTANT: This command requirest that both NCAlgebra and some implementation of NCPoly be loaded.";
+Clear[NCToNCPoly,
+      NCPolyToNC,
+      ClearMonomialOrder,
+      SetMonomialOrder,
+      SetMonomialOrder,
+      GetMonomialOrder,
+      PrintMonomialOrder,
+      SetKnowns,
+      SetUnknowns,
+      NCMakeGB,
+      NCReduce,
+      NCRuleToPoly];
 
-Clear[PolyToNC];
-PolyToNC::usage="PolyToNC[exp, vars] constructs an NC expression from the noncommutative polynomial object exp in variables var. Monomials are specified in terms of the symbols in the list var.\nIMPORTANT: This command requirest that both NCAlgebra and some implementation of NCPoly be loaded.";
+Get["NCGBX.usage"];
 
-Clear[ClearMonomialOrder];
-ClearMonomialOrder::usage="";
-
-Clear[SetMonomialOrder];
-SetMonomialOrder::usage="";
-
-Clear[SetMonomialOrder];
-SetMonomialOrder::usage="";
-
-Clear[GetMonomialOrder];
-GetMonomialOrder::usage="";
-
-Clear[SetKnowns];
-SetKnowns::usage="";
-
-Clear[SetUnknowns];
-SetUnknowns::usage="";
-
-Clear[NCMakeGB];
-NCMakeGB::usage="";
-
-Clear[NCReduce];
-NCReduce::usage="";
-
-Clear[NCRuleToPoly];
-NCRuleToPoly::usage="";
+SetMonomialOrder::InvalidOrder = "Order `1` is invalid."
 
 Begin["`Private`"];
 
   Clear[$NCPolyInterfaceMonomialOrder];
   $NCPolyInterfaceMonomialOrder = {};
 
+  Clear[$NCPolyInterfaceSetKnowns];
+  $NCPolyInterfaceSetKnowns = False;
+  
   (* NCRuleToPoly *)
   NCRuleToPoly[exp_Rule] := exp[[1]] - exp[[2]];
   NCRuleToPoly[exp_List] := Map[NCRuleToPoly, exp];
 
-  (* NCToPoly *)
+  (* NCToNCPoly *)
 
   Clear[GrabFactors];
   GrabFactors[Times[a_, exp_NonCommutativeMultiply]] := {a, List @@ exp};
@@ -63,44 +50,50 @@ Begin["`Private`"];
   GrabTerms[x_Plus] := List @@ x;
   GrabTerms[x_] := {x};
 
-  NCToPoly[exp_List, vars_] := 
-    Map[NCToPoly[#, vars]&, exp];
+  NCToNCPoly[exp_List, vars_] := 
+    Map[NCToNCPoly[#, vars]&, exp];
 
-  NCToPoly[exp_Rule, vars_] := 
-    NCToPoly[exp[[1]] - exp[[2]], vars];
+  NCToNCPoly[exp_Rule, vars_] := 
+    NCToNCPoly[exp[[1]] - exp[[2]], vars];
 
-  NCToPoly[exp_Equal, vars_] := 
-    NCToPoly[exp[[1]] - exp[[2]], vars];
+  NCToNCPoly[exp_Equal, vars_] := 
+    NCToNCPoly[exp[[1]] - exp[[2]], vars];
 
-  NCToPoly[exp_, vars_] := 
+  NCToNCPoly[exp_, vars_] := 
     NCPoly @@ Append[Transpose[Map[GrabFactors, GrabTerms[ExpandNonCommutativeMultiply[exp]]]], vars];
 
 
-  (* PolyToNC *)
+  (* NCPolyToNC *)
 
-  PolyToNC[exp_?NumericQ, vars_] := exp;
+  NCPolyToNC[exp_?NumericQ, vars_] := exp;
 
-  PolyToNC[exp_NCPoly, vars_] := 
+  NCPolyToNC[exp_NCPoly, vars_] := 
     NCPolyDisplay[exp, vars, Plus, Identity] /. Dot -> NonCommutativeMultiply;
 
-  PolyToNC[exp_List, vars_] := 
-    Map[PolyToNC[#, vars]&, exp];
+  NCPolyToNC[exp_List, vars_] := 
+    Map[NCPolyToNC[#, vars]&, exp];
 
   (* NCGB Interface *)
 
   (* This function erases all elements on current monomial order list *)
-  SetKnowns[m___] := $NCPolyInterfaceMonomialOrder = {Flatten[{m}]};
+  SetKnowns[m___] := (
+    $NCPolyInterfaceSetKnowns = True;
+    $NCPolyInterfaceMonomialOrder = {Flatten[{m}]}
+  );
 
   SetUnknowns[m___] := Module[{},
     (* Erase all elements but first *)
-    If [Length[$NCPolyInterfaceMonomialOrder] > 0,
-       $NCPolyInterfaceMonomialOrder = {First[$NCPolyInterfaceMonomialOrder]};
-    ];
+    $NCPolyInterfaceMonomialOrder = 
+      If[ $NCPolyInterfaceSetKnowns
+         ,
+          {First[$NCPolyInterfaceMonomialOrder]}
+         ,
+          {}
+      ];
     (* Install unknowns *)
     $NCPolyInterfaceMonomialOrder 
       = Map[Flatten, Join[$NCPolyInterfaceMonomialOrder, Map[List, {m}]]];
   ];
-
   
   Clear[AddElementToList];
   AddElementToList[list_List, position_Integer, element_] := Module[
@@ -109,19 +102,34 @@ Begin["`Private`"];
     Return[tmp];
   ];
  
-  SetMonomialOrder[m_List, level_Integer] := 
-    $NCPolyInterfaceMonomialOrder = AddElementToList[$NCPolyInterfaceMonomialOrder, level, Flatten[m]];
+  SetMonomialOrder[m_List, level_Integer] := (
+    $NCPolyInterfaceSetKnowns = False;
+    $NCPolyInterfaceMonomialOrder = 
+      AddElementToList[$NCPolyInterfaceMonomialOrder, level, Flatten[m]]
+  );
 
-  SetMonomialOrder[m___] := ($NCPolyInterfaceMonomialOrder = Map[Flatten, Map[List, {m}]]);
-
+  SetMonomialOrder[m___] := (
+    ( $NCPolyInterfaceSetKnowns = False;
+      $NCPolyInterfaceMonomialOrder = Map[Flatten, Map[List, {m}]] )
+    /; Depth[{m}] <= 3
+  );
+        
+  SetMonomialOrder[m___] := 
+    (Message[SetMonomialOrder::InvalidOrder,{m}]; $Failed);
+  
   GetMonomialOrder[] := $NCPolyInterfaceMonomialOrder;
 
-  ClearMonomialOrder[] := $NCPolyInterfaceMonomialOrder = {};
+  PrintMonomialOrder[] := NCPolyDisplayOrder[$NCPolyInterfaceMonomialOrder];
+
+  ClearMonomialOrder[] := (
+    $NCPolyInterfaceSetKnowns = False;
+    $NCPolyInterfaceMonomialOrder = {};
+  );
   
   NCMakeGB[p_List, iter_Integer, opts___Rule] := Module[
     {polys, basis, rules, labels},
 
-    polys = NCToPoly[p, $NCPolyInterfaceMonomialOrder];
+    polys = NCToNCPoly[p, $NCPolyInterfaceMonomialOrder];
     basis = Sort[ 
               NCPolyReduce[ 
                 NCPolyGroebner[polys, iter, opts,
@@ -130,29 +138,29 @@ Begin["`Private`"];
             ];
     rules = NCPolyToRule[basis];
 
-    Return[Map[PolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
+    Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
   ];
 
   NCReduce[f_List, g_List, complete_:False] := Module[
     {fpolys, gpolys},
 
-    fpolys = NCToPoly[f, $NCPolyInterfaceMonomialOrder];
-    gpolys = NCToPoly[g, $NCPolyInterfaceMonomialOrder];
+    fpolys = NCToNCPoly[f, $NCPolyInterfaceMonomialOrder];
+    gpolys = NCToNCPoly[g, $NCPolyInterfaceMonomialOrder];
 
     rules = NCPolyToRule[NCPolyReduce[fpolys, gpolys, complete]];
 
-    Return[Map[PolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
+    Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
 
   ];
 
   NCReduce[g_List, complete_:False] := Module[
     {gpolys},
 
-    gpolys = NCToPoly[g, $NCPolyInterfaceMonomialOrder];
+    gpolys = NCToNCPoly[g, $NCPolyInterfaceMonomialOrder];
 
     rules = NCPolyToRule[NCPolyReduce[gpolys, complete]];
 
-    Return[Map[PolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
+    Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
 
   ];
 

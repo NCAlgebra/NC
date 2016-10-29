@@ -29,6 +29,7 @@ MANUAL = PREAMBLE/Preamble.md \
          PREAMBLE/Running.md \
          PREAMBLE/Basic.md \
          PREAMBLE/Things.md \
+         PREAMBLE/NCGB.md \
          PREAMBLE/Reference.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \
@@ -49,6 +50,7 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCUtil.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
+	 NCPoly/NCGBX.md \
 	 NCPoly/NCPoly.md \
 	 NCPoly/NCPolyGroebner.md \
 	 TESTING/NCTest.md

@@ -330,8 +330,9 @@ variables `vars`.
 ## NCPolyDisplay {#NCPolyDisplay}
 
 `NCPolyDisplay[p]` prints the noncommutative polynomial p using
-symbols x1,...,xn. NCPolyDisplay[p, vars] uses the symbols in the list
-vars.
+symbols x1,...,xn. 
+
+`NCPolyDisplay[p, vars]` uses the symbols in the list vars.
 
 ## NCPolyDivideDigits {#NCPolyDivideDigits}
 
