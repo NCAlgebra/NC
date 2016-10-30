@@ -76,6 +76,9 @@
 <li><a href="#Using_NCTeX"><span class="toc-section-number">6.2</span> Using NCTeX</a><ul>
 <li><a href="#NCTeX_Options"><span class="toc-section-number">6.2.1</span> NCTeX Options</a></li>
 </ul></li>
+<li><a href="#Using_NCTeXForm"><span class="toc-section-number">6.3</span> Using NCTeXForm</a><ul>
+<li><a href="#notes-on-nctexform-implementation"><span class="toc-section-number">6.3.1</span> Notes on NCTeXForm Implementation</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#ReferenceIntroduction"><span class="toc-section-number">7</span> Introduction</a></li>
 <li><a href="#PackageNonCommutativeMultiply"><span class="toc-section-number">8</span> NonCommutativeMultiply</a><ul>
@@ -816,13 +819,77 @@ NCTeX[exp, Verbose -&gt; True]</code></pre>
 <li>DVIPSCommand -&gt; &quot;dvips&quot;</li>
 <li>PS2PDFCommand -&gt; &quot;epstopdf&quot;</li>
 </ol>
-<p>let you specify the names and, when appropriate, the path, of the corresponding programs to be used by <code>NCTeX</code>. Alternatively, you can also directly implement custom version of</p>
+<p>let you specify the names and, when appropriate, the path, of the corresponding programs to be used by <code>NCTeX</code>. Alternatively, you can also directly implement custom versions of</p>
 <pre><code>NCRunDVIPS
 NCRunLaTeX
 NCRunPDFLaTeX
 NCRunPDFViewer
 NCRunPS2PDF</code></pre>
 <p>Those commands are invoked using <code>NCRun</code>. Look at the documentation for the package <a href="#NCRun">NCRun</a> for more details.</p>
+<h2 id="Using_NCTeXForm"><span class="header-section-number">6.3</span> Using NCTeXForm</h2>
+<p><code>NCTeXForm</code> is a replacement for Mathematica's <code>TeXForm</code> that can handle noncommutative expressions. It works just as <code>TeXForm</code>. <code>NCTeXForm</code> is automatically loaded with <code>NCAlgebra</code> and becomes the default processor for <code>NCTeX</code>.</p>
+<p>Here is an example:</p>
+<pre><code>SetNonCommutative[a, b, c, x, y];
+exp = a ** x ** tp[b] - inv[c ** inv[a + b ** c] ** tp[y] + d]
+NCTeXForm[exp]</code></pre>
+<p>produces</p>
+<pre><code>a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left(a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right)}^{-1}</code></pre>
+<p>Note that the LaTeX output contains special code so that the expression looks neat on the screen. You can see the result using <code>NCTeX</code> to convert the expression to PDF. Try</p>
+<pre><code>SetOptions[NCTeX, TeXProcessor -&gt; NCTeXForm];
+NCTeX[exp]</code></pre>
+<p>to produce</p>
+<p><span class="math inline">\(a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left (a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right )}^{-1}\)</span></p>
+<p><code>NCTeX</code> also handles standard functions just as <code>TeXForm</code>:</p>
+<pre><code>exp = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
+NCTeX[exp]</code></pre>
+<p>produces</p>
+<p><span class="math inline">\(\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}}*\left (y-z\right )\right )} &amp; x*{y}^{-1} \\ z &amp; \sqrt{5}*n \end{bmatrix}\)</span></p>
+<p><code>NCTeX</code> represents commutative products with a single <code>*</code> in order to distinguish it from its noncommutative cousin <code>**</code>. We can see the difference in an expression that has both commutative and noncommutative products:</p>
+<pre><code>exp = 2 ** a ** b - 3 c ** d
+NCTeX[exp]</code></pre>
+<p>produces</p>
+<p><span class="math inline">\(-3*c*d+2*\left(a*\!\!*b\right)\)</span></p>
+<p>NCTeXForm handles lists and matrices as well. Here is a list:</p>
+<pre><code>exp = {x, tp[x], x + y, x + tp[y], x + inv[y], x ** x}
+NCTeX[exp]</code></pre>
+<p>and its output:</p>
+<p><span class="math inline">\(\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x*\!\!*x \}\)</span></p>
+<p>and here is a matrix example:</p>
+<pre><code>exp = {{x, y}, {y, z}}
+NCTeX[exp]</code></pre>
+<p>and its output:</p>
+<p><span class="math inline">\(\begin{bmatrix} x &amp; y \\ y &amp; z \end{bmatrix}\)</span></p>
+<p>Here are some more examples:</p>
+<pre><code>exp = {inv[x + y], inv[x + inv[y]]}
+NCTeX[exp]</code></pre>
+<p>produces:</p>
+<p><span class="math inline">\(\{ {\left (x+y\right )}^{-1}, {\left (x+{y}^{-1}\right )}^{-1} \}\)</span></p>
+<pre><code>exp = {Sin[x], x y, Sin[x] y, Sin[x + y], Cos[gamma], 
+       Sin[alpha] tp[x] ** (y - tp[y]), (x + tp[x]) (y ** z), -tp[y], 1/2, 
+       Sqrt[2] x ** y}
+NCTeX[exp]</code></pre>
+<p>produces:</p>
+<p><span class="math inline">\(\{ \operatorname{sin}{x}, x*y, y*\operatorname{sin}{x}, \operatorname{sin}{\left (x+y\right )}, \operatorname{cos}{\gamma}, \left({x}^T*\!\!*\left (y-{y}^T\right )\right )*\operatorname{sin}{\alpha}, y*z*\left (x+{x}^T\right ), -{y}^T, \frac{1}{2}, \sqrt{2}*\left(x*\!\!*y\right ) \}\)</span></p>
+<pre><code>exp = inv[x + tp[inv[y]]]
+NCTeX[exp]</code></pre>
+<p>produces:</p>
+<p><span class="math inline">\({\left (x+{{y}^T}^{-1}\right )}^{-1}\)</span></p>
+<h3 id="notes-on-nctexform-implementation"><span class="header-section-number">6.3.1</span> Notes on NCTeXForm Implementation</h3>
+<p><code>NCTeXForm</code> does not know as many functions as <code>TeXForm</code>. In some cases <code>TeXForm</code> will produce better results. Compare:</p>
+<pre><code>exp = BesselJ[2, x]
+NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
+<p>output:</p>
+<p><span class="math inline">\(\operatorname{BesselJ}\left (2, x\right )\)</span></p>
+<p>with</p>
+<pre><code>NCTeX[exp, TeXProcessor -&gt; TeXForm]</code></pre>
+<p>output:</p>
+<p><span class="math inline">\(J_2(x)\)</span></p>
+<p>It should be easy to customize <code>NCTeXForm</code> though. Just overload <code>NCTeXForm</code>. In this example:</p>
+<pre><code>NCTeXForm[BesselJ[x_, y_]] := Format[BesselJ[x, y], TeXForm]</code></pre>
+<p>makes</p>
+<pre><code>NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
+<p>produce</p>
+<p><span class="math inline">\(J_2(x)\)</span></p>
 <p></p>
 <h1 id="ReferenceIntroduction"><span class="header-section-number">7</span> Introduction</h1>
 <p>Each following chapter describes a <code>Package</code> inside <em>NCAlgebra</em>.</p>

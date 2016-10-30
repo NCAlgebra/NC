@@ -5,7 +5,6 @@ of expression in notebooks or using LaTeX.
 
 ## Pretty Output {#Pretty_Output}
 
-
 ## Using NCTeX {#Using_NCTeX}
 
 You can load NCTeX using the following command
@@ -145,3 +144,132 @@ also directly implement custom versions of
 
 Those commands are invoked using `NCRun`. Look at the documentation
 for the package [NCRun](#NCRun) for more details.
+
+## Using NCTeXForm {#Using_NCTeXForm}
+
+`NCTeXForm` is a replacement for Mathematica's `TeXForm` that can
+handle noncommutative expressions. It works just as
+`TeXForm`. `NCTeXForm` is automatically loaded with `NCAlgebra` and
+becomes the default processor for `NCTeX`.
+
+Here is an example:
+
+	SetNonCommutative[a, b, c, x, y];
+	exp = a ** x ** tp[b] - inv[c ** inv[a + b ** c] ** tp[y] + d]
+	NCTeXForm[exp]
+
+produces
+	
+	a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left(a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right)}^{-1}
+
+Note that the LaTeX output contains special code so that the
+expression looks neat on the screen. You can see the result using
+`NCTeX` to convert the expression to PDF. Try
+
+	SetOptions[NCTeX, TeXProcessor -> NCTeXForm];
+	NCTeX[exp]
+
+to produce
+
+$a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left (a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right )}^{-1}$
+
+`NCTeX` also handles standard functions just as `TeXForm`:
+
+	exp = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
+	NCTeX[exp]
+
+produces
+
+$\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}}*\left (y-z\right )\right )} & x*{y}^{-1} \\ z & \sqrt{5}*n \end{bmatrix}$
+
+`NCTeX` represents commutative products with a single `*` in order to
+distinguish it from its noncommutative cousin `**`. We can see the
+difference in an expression that has both commutative and
+noncommutative products:
+
+	exp = 2 ** a ** b - 3 c ** d
+	NCTeX[exp]
+
+produces
+
+$-3*c*d+2*\left(a*\!\!*b\right)$
+
+NCTeXForm handles lists and matrices as well. Here is a list:
+
+	exp = {x, tp[x], x + y, x + tp[y], x + inv[y], x ** x}
+	NCTeX[exp]
+
+and its output:
+
+$\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x*\!\!*x \}$
+
+and here is a matrix example:
+
+	exp = {{x, y}, {y, z}}
+	NCTeX[exp]
+
+and its output:
+
+$\begin{bmatrix} x & y \\ y & z \end{bmatrix}$
+
+Here are some more examples:
+
+	exp = {inv[x + y], inv[x + inv[y]]}
+	NCTeX[exp]
+
+produces:
+
+$\{ {\left (x+y\right )}^{-1}, {\left (x+{y}^{-1}\right )}^{-1} \}$
+
+	exp = {Sin[x], x y, Sin[x] y, Sin[x + y], Cos[gamma], 
+	       Sin[alpha] tp[x] ** (y - tp[y]), (x + tp[x]) (y ** z), -tp[y], 1/2, 
+	       Sqrt[2] x ** y}
+	NCTeX[exp]
+
+produces:
+
+$\{ \operatorname{sin}{x}, x*y, y*\operatorname{sin}{x}, 
+\operatorname{sin}{\left (x+y\right )}, \operatorname{cos}{\gamma}, 
+\left({x}^T*\!\!*\left (y-{y}^T\right )\right 
+)*\operatorname{sin}{\alpha}, y*z*\left (x+{x}^T\right ), -{y}^T, 
+\frac{1}{2}, \sqrt{2}*\left(x*\!\!*y\right ) \}$
+
+	exp = inv[x + tp[inv[y]]]
+	NCTeX[exp]
+
+produces:
+
+${\left (x+{{y}^T}^{-1}\right )}^{-1}$
+
+### Notes on NCTeXForm Implementation
+
+`NCTeXForm` does not know as many functions as `TeXForm`. In some
+cases `TeXForm` will produce better results. Compare:
+
+	exp = BesselJ[2, x]
+	NCTeX[exp, TeXProcessor -> NCTeXForm]
+
+output:
+
+$\operatorname{BesselJ}\left (2, x\right )$
+
+with
+
+	NCTeX[exp, TeXProcessor -> TeXForm]
+
+output:
+
+$J_2(x)$
+
+It should be easy to customize `NCTeXForm` though. Just overload
+`NCTeXForm`. In this example:
+
+	NCTeXForm[BesselJ[x_, y_]] := Format[BesselJ[x, y], TeXForm]
+
+makes
+
+	NCTeX[exp, TeXProcessor -> NCTeXForm]
+
+produce
+
+$J_2(x)$
