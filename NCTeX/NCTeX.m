@@ -6,33 +6,17 @@
 BeginPackage[ "NCTeX`",
 	      "NCRun`" ];
 
-Clear[NCRunLaTeX];
-NCRunLaTeX::usage="NCRunLaTeX[file] typesets the LaTeX file with latex. \
-Produces a dvi output."
-
-Clear[NCRunPDFLaTeX];
-NCRunPDFLaTeX::usage="NCRunLaTeX[file] typesets the LaTeX file with pdflatex. \
-Produces a pdf output."
-
-Clear[NCRunDVIPS];
-NCRunDVIPS::usage="NCRunDVIPS[file] run dvips on file. \
-Produces a ps output."
-
-Clear[NCRunPS2PDF];
-NCRunPS2PDF::usage="NCRunPS2PDF[file] run pd2pdf on file. \
-Produces a pdf output."
-
-Clear[NCRunPDFViewer];
-NCRunPDFViewer::usage="NCRunPDFViewer[file] display pdf file."
-
-Clear[NCTeX];
-NCTeX::usage="NCTeX[exp] typesets the LaTeX version of expr produced \
-with TeXForm or NCTeXForm using LaTeX."
-NCTeX::failedImport="Failed importing pdf file. Viewer application will be started.";
+Clear[NCRunLaTeX,
+      NCRunPDFLaTeX,
+      NCRunDVIPS,
+      NCRunPS2PDF,
+      NCRunPDFViewer,
+      NCTeX];
 
 Clear[DisplayPDF, ImportPDF, PDFViewer,
       LaTeXCommand, PDFLaTeXCommand, DVIPSCommand, PS2PDFCommand,
       BreakEquations];
+
 Options[NCTeX] = {
   Verbose -> False,
   DisplayPDF -> False,
@@ -45,6 +29,8 @@ Options[NCTeX] = {
   DVIPSCommand -> "dvips",
   PS2PDFCommand -> "epstopdf"
 };
+
+Get["NCTeX.usage"];
 
 Begin["`Private`"];
 

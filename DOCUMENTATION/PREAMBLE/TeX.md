@@ -135,7 +135,7 @@ The remaining options:
 
 let you specify the names and, when appropriate, the path, of the
 corresponding programs to be used by `NCTeX`. Alternatively, you can
-also directly implement custom version of
+also directly implement custom versions of
 
 	NCRunDVIPS
 	NCRunLaTeX
