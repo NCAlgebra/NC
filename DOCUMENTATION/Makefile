@@ -1,6 +1,6 @@
 include make.inc
 
-DIRS := NCSDP NCAlgebra NCPoly TESTING
+DIRS := NCSDP NCAlgebra NCPoly NCTeX TESTING
 # the sets of directories to do various things in
 BUILDDIRS = $(DIRS:%=build-%)
 CLEANDIRS = $(DIRS:%=clean-%)
@@ -30,6 +30,7 @@ MANUAL = PREAMBLE/Preamble.md \
          PREAMBLE/Basic.md \
          PREAMBLE/Things.md \
          PREAMBLE/NCGB.md \
+         PREAMBLE/TeX.md \
          PREAMBLE/Reference.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \
@@ -53,6 +54,9 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCPoly/NCGBX.md \
 	 NCPoly/NCPoly.md \
 	 NCPoly/NCPolyGroebner.md \
+	 NCTeX/NCTeX.md \
+	 NCAlgebra/NCTeXForm.md \
+	 NCTeX/NCRun.md \
 	 TESTING/NCTest.md
 
 doc: NCAlgebra.pdf NCAlgebra.html
