@@ -122,8 +122,8 @@ Begin["`Private`"];
   (*
   NCTeXForm[HoldPattern[Plus[y__,-x_Times]]] := 
       StringJoin[NCTeXForm[Plus[y]], "-", NCTeXForm[x]];
-  NCTeXForm[HoldPattern[Plus[y__,-x_NonCommutativeMultiply]]] := 
-      StringJoin[NCTeXForm[Plus[y]], "-", NCTeXForm[x]];
+  NCTeXForm[HoldPattern[Plus[y__,-a_. x_NonCommutativeMultiply]]] := 
+      StringJoin[NCTeXForm[Plus[y]], "-", NCTeXForm[a x]];
   NCTeXForm[HoldPattern[Plus[y__,-x_]]] := 
       StringJoin[NCTeXForm[Plus[y]], "-", NCTeXParenthesize[x]];
 
@@ -144,11 +144,17 @@ Begin["`Private`"];
   (* TIMES *)
   NCTeXForm[HoldPattern[Times[y__,Power[x_,-1]]]] := 
       StringJoin["\\frac{", NCTeXForm[y], "}{", NCTeXForm[x], "}"];
+
   NCTeXSetInfix[Times, "*"];
+  NCTeXSetInfix[Times, " "];
+  NCTeXFormSetStar[str_String] := 
+    NCTeXSetInfix[Times, str];
 
   (* NONCOMMUTATIVEMULTIPLY *)
   NCTeXSetInfix[NonCommutativeMultiply, "*\!\!*"];
-  NCTeXFormSetStarStar[str_String] := NCTeXSetInfix[NonCommutativeMultiply, str];
+  NCTeXSetInfix[NonCommutativeMultiply, "."];
+  NCTeXFormSetStarStar[str_String] := 
+    NCTeXSetInfix[NonCommutativeMultiply, str];
 
   (* EQUAL *)
   NCTeXForm[HoldPattern[Equal[x_,z_]]] := 

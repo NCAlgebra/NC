@@ -78,20 +78,20 @@ viewer without trying to import the PDF into Mathematica. The default
 values for these options when using the Mathematica notebook interface
 are:
 
-1. DisplayPDF -> False
-2. ImportPDF -> True 
+1. `DisplayPDF` (`False`)
+2. `ImportPDF` (`True`)
 
 When `NCTeX` is invoked using the command line interpreter version of
 Mathematica the defaults are:
 
-1. DisplayPDF -> False
-2. ImportPDF -> True 
+1. `DisplayPDF` (`False`)
+2. `ImportPDF` (`True`)
 
 Other useful options and their default options are:
 
-1. Verbose -> False, 
-2. BreakEquations -> True
-3. TeXProcessor -> NCTeXForm
+1. `Verbose` (`False`), 
+2. `BreakEquations` (`True`)
+3. `TeXProcessor` (`NCTeXForm`)
 
 Set `BreakEquations -> True` to use the LaTeX package `beqn` to
 produce nice displays of long equations. Try the following
@@ -126,11 +126,11 @@ of NCTeX to diagnose errors.
 
 The remaining options:
 
-1. PDFViewer -> "open", 
-2. LaTeXCommand -> "latex" 
-3. PDFLaTeXCommand -> "pdflatex"
-4. DVIPSCommand -> "dvips" 
-5. PS2PDFCommand -> "epstopdf"
+1. `PDFViewer` (`"open"`), 
+2. `LaTeXCommand` (`"latex"`)
+3. `PDFLaTeXCommand` (`Null`)
+4. `DVIPSCommand` (`"dvips"`)
+5. `PS2PDFCommand` (`"epstopdf"`)
 
 let you specify the names and, when appropriate, the path, of the
 corresponding programs to be used by `NCTeX`. Alternatively, you can
@@ -160,7 +160,7 @@ Here is an example:
 
 produces
 	
-	a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left(a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right)}^{-1}
+	a.x.{b}^T-{\left(d+c.{\left(a+b.c\right)}^{-1}.{y}^T\right)}^{-1}
 
 Note that the LaTeX output contains special code so that the
 expression looks neat on the screen. You can see the result using
@@ -171,7 +171,7 @@ expression looks neat on the screen. You can see the result using
 
 to produce
 
-$a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left (a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right )}^{-1}$
+$a.x.{b}^T-{\left(d+c.{\left (a+b.c\right)}^{-1}.{y}^T\right )}^{-1}$
 
 `NCTeX` also handles standard functions just as `TeXForm`:
 
@@ -180,19 +180,19 @@ $a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left (a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\
 
 produces
 
-$\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}}*\left (y-z\right )\right )} & x*{y}^{-1} \\ z & \sqrt{5}*n \end{bmatrix}$
+$\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} & x {y}^{-1} \\ z & \sqrt{5} n \end{bmatrix}$
 
-`NCTeX` represents commutative products with a single `*` in order to
-distinguish it from its noncommutative cousin `**`. We can see the
+`NCTeX` represents noncommutative products with a dot (`.`) in order
+to distinguish it from its commutative cousin. We can see the
 difference in an expression that has both commutative and
 noncommutative products:
 
-	exp = 2 ** a ** b - 3 c ** d
+	exp = 2 a ** b - 3 c ** d
 	NCTeX[exp]
 
 produces
 
-$-3*c*d+2*\left(a*\!\!*b\right)$
+$2 \left(a.b\right) - 3 (c.d)$
 
 NCTeXForm handles lists and matrices as well. Here is a list:
 
@@ -201,7 +201,7 @@ NCTeXForm handles lists and matrices as well. Here is a list:
 
 and its output:
 
-$\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x*\!\!*x \}$
+$\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \}$
 
 and here is a matrix example:
 
@@ -228,11 +228,11 @@ $\{ {\left (x+y\right )}^{-1}, {\left (x+{y}^{-1}\right )}^{-1} \}$
 
 produces:
 
-$\{ \operatorname{sin}{x}, x*y, y*\operatorname{sin}{x}, 
+$\{ \operatorname{sin}{x}, x y, y \operatorname{sin}{x}, 
 \operatorname{sin}{\left (x+y\right )}, \operatorname{cos}{\gamma}, 
-\left({x}^T*\!\!*\left (y-{y}^T\right )\right 
-)*\operatorname{sin}{\alpha}, y*z*\left (x+{x}^T\right ), -{y}^T, 
-\frac{1}{2}, \sqrt{2}*\left(x*\!\!*y\right ) \}$
+\left({x}^T.\left (y-{y}^T\right )\right 
+) \operatorname{sin}{\alpha}, y z \left (x+{x}^T\right ), -{y}^T, 
+\frac{1}{2}, \sqrt{2} \left(x.y\right ) \}$
 
 	exp = inv[x + tp[inv[y]]]
 	NCTeX[exp]

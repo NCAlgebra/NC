@@ -781,19 +781,19 @@ NCTeX[expr, DisplayPDF -&gt; True]</code></pre>
 NCTeX[exp, DisplayPDF -&gt; True, ImportPDF -&gt; False]</code></pre>
 <p>uses <code>DisplayPDF -&gt; True</code> to ensure that the PDF viewer is called and <code>ImportPDF -&gt; False</code> to prevent Mathematica from displaying the formula inline. In other words, it displays the formula in the PDF viewer without trying to import the PDF into Mathematica. The default values for these options when using the Mathematica notebook interface are:</p>
 <ol type="1">
-<li>DisplayPDF -&gt; False</li>
-<li>ImportPDF -&gt; True</li>
+<li><code>DisplayPDF</code> (<code>False</code>)</li>
+<li><code>ImportPDF</code> (<code>True</code>)</li>
 </ol>
 <p>When <code>NCTeX</code> is invoked using the command line interpreter version of Mathematica the defaults are:</p>
 <ol type="1">
-<li>DisplayPDF -&gt; False</li>
-<li>ImportPDF -&gt; True</li>
+<li><code>DisplayPDF</code> (<code>False</code>)</li>
+<li><code>ImportPDF</code> (<code>True</code>)</li>
 </ol>
 <p>Other useful options and their default options are:</p>
 <ol type="1">
-<li>Verbose -&gt; False,</li>
-<li>BreakEquations -&gt; True</li>
-<li>TeXProcessor -&gt; NCTeXForm</li>
+<li><code>Verbose</code> (<code>False</code>),</li>
+<li><code>BreakEquations</code> (<code>True</code>)</li>
+<li><code>TeXProcessor</code> (<code>NCTeXForm</code>)</li>
 </ol>
 <p>Set <code>BreakEquations -&gt; True</code> to use the LaTeX package <code>beqn</code> to produce nice displays of long equations. Try the following example:</p>
 <pre><code>expr = Series[Exp[x], {x, 0, 20}]
@@ -813,11 +813,11 @@ NCTeX[exp, Verbose -&gt; True]</code></pre>
 <p>Locate the files with extension .err as indicated by the verbose run of NCTeX to diagnose errors.</p>
 <p>The remaining options:</p>
 <ol type="1">
-<li>PDFViewer -&gt; &quot;open&quot;,</li>
-<li>LaTeXCommand -&gt; &quot;latex&quot;</li>
-<li>PDFLaTeXCommand -&gt; &quot;pdflatex&quot;</li>
-<li>DVIPSCommand -&gt; &quot;dvips&quot;</li>
-<li>PS2PDFCommand -&gt; &quot;epstopdf&quot;</li>
+<li><code>PDFViewer</code> (<code>&quot;open&quot;</code>),</li>
+<li><code>LaTeXCommand</code> (<code>&quot;latex&quot;</code>)</li>
+<li><code>PDFLaTeXCommand</code> (<code>Null</code>)</li>
+<li><code>DVIPSCommand</code> (<code>&quot;dvips&quot;</code>)</li>
+<li><code>PS2PDFCommand</code> (<code>&quot;epstopdf&quot;</code>)</li>
 </ol>
 <p>let you specify the names and, when appropriate, the path, of the corresponding programs to be used by <code>NCTeX</code>. Alternatively, you can also directly implement custom versions of</p>
 <pre><code>NCRunDVIPS
@@ -833,27 +833,27 @@ NCRunPS2PDF</code></pre>
 exp = a ** x ** tp[b] - inv[c ** inv[a + b ** c] ** tp[y] + d]
 NCTeXForm[exp]</code></pre>
 <p>produces</p>
-<pre><code>a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left(a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right)}^{-1}</code></pre>
+<pre><code>a.x.{b}^T-{\left(d+c.{\left(a+b.c\right)}^{-1}.{y}^T\right)}^{-1}</code></pre>
 <p>Note that the LaTeX output contains special code so that the expression looks neat on the screen. You can see the result using <code>NCTeX</code> to convert the expression to PDF. Try</p>
 <pre><code>SetOptions[NCTeX, TeXProcessor -&gt; NCTeXForm];
 NCTeX[exp]</code></pre>
 <p>to produce</p>
-<p><span class="math inline">\(a*\!\!*x*\!\!*{b}^T-{\left(d+c*\!\!*{\left (a+b*\!\!*c\right)}^{-1}*\!\!*{y}^T\right )}^{-1}\)</span></p>
+<p><span class="math inline">\(a.x.{b}^T-{\left(d+c.{\left (a+b.c\right)}^{-1}.{y}^T\right )}^{-1}\)</span></p>
 <p><code>NCTeX</code> also handles standard functions just as <code>TeXForm</code>:</p>
 <pre><code>exp = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
 NCTeX[exp]</code></pre>
 <p>produces</p>
-<p><span class="math inline">\(\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}}*\left (y-z\right )\right )} &amp; x*{y}^{-1} \\ z &amp; \sqrt{5}*n \end{bmatrix}\)</span></p>
-<p><code>NCTeX</code> represents commutative products with a single <code>*</code> in order to distinguish it from its noncommutative cousin <code>**</code>. We can see the difference in an expression that has both commutative and noncommutative products:</p>
-<pre><code>exp = 2 ** a ** b - 3 c ** d
+<p><span class="math inline">\(\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} &amp; x {y}^{-1} \\ z &amp; \sqrt{5} n \end{bmatrix}\)</span></p>
+<p><code>NCTeX</code> represents noncommutative products with a dot (<code>.</code>) in order to distinguish it from its commutative cousin. We can see the difference in an expression that has both commutative and noncommutative products:</p>
+<pre><code>exp = 2 a ** b - 3 c ** d
 NCTeX[exp]</code></pre>
 <p>produces</p>
-<p><span class="math inline">\(-3*c*d+2*\left(a*\!\!*b\right)\)</span></p>
+<p><span class="math inline">\(2 \left(a.b\right) - 3 (c.d)\)</span></p>
 <p>NCTeXForm handles lists and matrices as well. Here is a list:</p>
 <pre><code>exp = {x, tp[x], x + y, x + tp[y], x + inv[y], x ** x}
 NCTeX[exp]</code></pre>
 <p>and its output:</p>
-<p><span class="math inline">\(\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x*\!\!*x \}\)</span></p>
+<p><span class="math inline">\(\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \}\)</span></p>
 <p>and here is a matrix example:</p>
 <pre><code>exp = {{x, y}, {y, z}}
 NCTeX[exp]</code></pre>
@@ -869,7 +869,7 @@ NCTeX[exp]</code></pre>
        Sqrt[2] x ** y}
 NCTeX[exp]</code></pre>
 <p>produces:</p>
-<p><span class="math inline">\(\{ \operatorname{sin}{x}, x*y, y*\operatorname{sin}{x}, \operatorname{sin}{\left (x+y\right )}, \operatorname{cos}{\gamma}, \left({x}^T*\!\!*\left (y-{y}^T\right )\right )*\operatorname{sin}{\alpha}, y*z*\left (x+{x}^T\right ), -{y}^T, \frac{1}{2}, \sqrt{2}*\left(x*\!\!*y\right ) \}\)</span></p>
+<p><span class="math inline">\(\{ \operatorname{sin}{x}, x y, y \operatorname{sin}{x}, \operatorname{sin}{\left (x+y\right )}, \operatorname{cos}{\gamma}, \left({x}^T.\left (y-{y}^T\right )\right ) \operatorname{sin}{\alpha}, y z \left (x+{x}^T\right ), -{y}^T, \frac{1}{2}, \sqrt{2} \left(x.y\right ) \}\)</span></p>
 <pre><code>exp = inv[x + tp[inv[y]]]
 NCTeX[exp]</code></pre>
 <p>produces:</p>

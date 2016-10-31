@@ -25,10 +25,11 @@ Options[NCTeX] = {
   TeXProcessor -> TeXForm,
   PDFViewer -> "",
   LaTeXCommand -> "latex",
-  PDFLaTeXCommand -> "pdflatex",
+  PDFLaTeXCommand -> Null,
   DVIPSCommand -> "dvips",
   PS2PDFCommand -> "epstopdf"
 };
+NCTeX::FailedImport = "Failed to import pdf.";
 
 Get["NCTeX.usage"];
 
@@ -87,16 +88,22 @@ NCTeX[exp_, opts___Rule:{}] :=
 
 NCTeX[exp_, fileName_String, opts___Rule:{}] := Module[
   { file, command, packages, environment, pdfImage, importFailed, options, 
-    verbose, displayPDF, importPDF, breakEquations, texProcessor, pdfViewer },
+    verbose, displayPDF, importPDF, breakEquations, pdfLaTeXCommand,
+    texProcessor, pdfViewer },
 
   (* Process options *)
-  {verbose, displayPDF, importPDF, breakEquations, texProcessor, pdfViewer} 
-    = { Verbose, DisplayPDF, ImportPDF, BreakEquations, TeXProcessor, PDFViewer }
+  {verbose, displayPDF, importPDF, breakEquations, pdfLaTeXCommand,
+   texProcessor, pdfViewer} 
+    = { Verbose, DisplayPDF, ImportPDF, BreakEquations, PDFLaTeXCommand,
+        TeXProcessor, PDFViewer }
     /. Flatten[{opts}]
     /. Options[NCTeX];
 
   (* set packages and environment *)  
-  packages = If[ breakEquations, "amsmath,amsfonts,breqn", "amsmath,amsfonts" ];
+  packages = "amsmath,amsfonts";
+  If[ breakEquations,
+      packages = packages <> ",breqn";
+  ];
   environment = If[ breakEquations, "dmath", "gather" ];
 
   If[ verbose, Print["* NCTeX - LaTeX processor for NCAlgebra - Version 0.1"]];
@@ -108,8 +115,9 @@ NCTeX[exp_, fileName_String, opts___Rule:{}] := Module[
          PageWidth -> Infinity];
   Write[file, "% Document created automatically be NCTeX" ];
   Write[file, "\\documentclass{article}" ];
+  (* Write[file, "\\documentclass[preview]{standalone}" ]; *)
+  (* Write[file, "\\usepackage[margin=1in]{geometry}" ]; *)
   Write[file, "\\usepackage{", packages, "}" ];
-  Write[file, "\\usepackage[margin=1in]{geometry}" ];
   Write[file, "\\begin{document}" ];
   Write[file, "\\pagestyle{empty}" ];
   Write[file, "\\begin{", environment, "*}" ];
@@ -119,11 +127,19 @@ NCTeX[exp_, fileName_String, opts___Rule:{}] := Module[
   Close[file];
   (* Create LaTeX File - END *)
 
-  (* Run LaTeX/DVIPS/EPSTOPDF *)
   If[ verbose, Print["> Processing '", fileName <> ".tex'..."]];
-  NCRunLaTeX[fileName, Verbose -> verbose];
-  NCRunDVIPS[fileName, "-E", Verbose -> verbose];
-  NCRunPS2PDF[fileName <> ".ps", Verbose -> verbose];
+
+  If[ pdfLaTeXCommand =!= Null
+      ,
+      (* Run PDFLaTeX *)
+      Print["PDFLaTeX"];
+      NCRunPDFLaTeX[fileName, Verbose -> verbose];
+     ,
+      (* Run LaTeX/DVIPS/EPSTOPDF *)
+      NCRunLaTeX[fileName, Verbose -> verbose];
+      NCRunDVIPS[fileName, "-E", Verbose -> verbose];
+      NCRunPS2PDF[fileName <> ".ps", Verbose -> verbose];
+  ];
 
   pdfImage = Null;
   If[ And[importPDF, $Notebooks], 
@@ -138,7 +154,7 @@ NCTeX[exp_, fileName_String, opts___Rule:{}] := Module[
       ];
     ];
     If[ importFailed, 
-        Message[NCTeX::failedImport];
+        Message[NCTeX::FailedImport];
     ];
   ];
 
