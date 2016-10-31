@@ -7,6 +7,7 @@ BeginPackage["NCTeXForm`",
              "NonCommutativeMultiply`"];
 
 Clear[NCTeXForm,
+      NCTeXFormSetStar,
       NCTeXFormSetStarStar];
 
 Get["NCTeXForm.usage"];
@@ -144,14 +145,13 @@ Begin["`Private`"];
   (* TIMES *)
   NCTeXForm[HoldPattern[Times[y__,Power[x_,-1]]]] := 
       StringJoin["\\frac{", NCTeXForm[y], "}{", NCTeXForm[x], "}"];
-
-  NCTeXSetInfix[Times, "*"];
+  (* NCTeXSetInfix[Times, "*"]; *)
   NCTeXSetInfix[Times, " "];
   NCTeXFormSetStar[str_String] := 
     NCTeXSetInfix[Times, str];
 
   (* NONCOMMUTATIVEMULTIPLY *)
-  NCTeXSetInfix[NonCommutativeMultiply, "*\!\!*"];
+  (* NCTeXSetInfix[NonCommutativeMultiply, "*\!\!*"]; *)
   NCTeXSetInfix[NonCommutativeMultiply, "."];
   NCTeXFormSetStarStar[str_String] := 
     NCTeXSetInfix[NonCommutativeMultiply, str];

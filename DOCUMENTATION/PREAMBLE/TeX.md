@@ -173,15 +173,6 @@ to produce
 
 $a.x.{b}^T-{\left(d+c.{\left (a+b.c\right)}^{-1}.{y}^T\right )}^{-1}$
 
-`NCTeX` also handles standard functions just as `TeXForm`:
-
-	exp = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
-	NCTeX[exp]
-
-produces
-
-$\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} & x {y}^{-1} \\ z & \sqrt{5} n \end{bmatrix}$
-
 `NCTeX` represents noncommutative products with a dot (`.`) in order
 to distinguish it from its commutative cousin. We can see the
 difference in an expression that has both commutative and
@@ -214,6 +205,13 @@ $\begin{bmatrix} x & y \\ y & z \end{bmatrix}$
 
 Here are some more examples:
 
+	exp = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
+	NCTeX[exp]
+
+produces
+
+$\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} & x {y}^{-1} \\ z & \sqrt{5} n \end{bmatrix}$
+
 	exp = {inv[x + y], inv[x + inv[y]]}
 	NCTeX[exp]
 
@@ -240,8 +238,6 @@ $\{ \operatorname{sin}{x}, x y, y \operatorname{sin}{x},
 produces:
 
 ${\left (x+{{y}^T}^{-1}\right )}^{-1}$
-
-### Notes on NCTeXForm Implementation
 
 `NCTeXForm` does not know as many functions as `TeXForm`. In some
 cases `TeXForm` will produce better results. Compare:

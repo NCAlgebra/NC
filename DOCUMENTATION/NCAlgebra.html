@@ -76,9 +76,7 @@
 <li><a href="#Using_NCTeX"><span class="toc-section-number">6.2</span> Using NCTeX</a><ul>
 <li><a href="#NCTeX_Options"><span class="toc-section-number">6.2.1</span> NCTeX Options</a></li>
 </ul></li>
-<li><a href="#Using_NCTeXForm"><span class="toc-section-number">6.3</span> Using NCTeXForm</a><ul>
-<li><a href="#notes-on-nctexform-implementation"><span class="toc-section-number">6.3.1</span> Notes on NCTeXForm Implementation</a></li>
-</ul></li>
+<li><a href="#Using_NCTeXForm"><span class="toc-section-number">6.3</span> Using NCTeXForm</a></li>
 </ul></li>
 <li><a href="#ReferenceIntroduction"><span class="toc-section-number">7</span> Introduction</a></li>
 <li><a href="#PackageNonCommutativeMultiply"><span class="toc-section-number">8</span> NonCommutativeMultiply</a><ul>
@@ -333,6 +331,7 @@
 <li><a href="#PackageNCTeXForm"><span class="toc-section-number">31</span> NCTeXForm</a><ul>
 <li><a href="#NCTeXForm"><span class="toc-section-number">31.1</span> NCTeXForm</a></li>
 <li><a href="#NCTeXFormSetStarStar"><span class="toc-section-number">31.2</span> NCTeXFormSetStarStar</a></li>
+<li><a href="#NCTeXFormSetStar"><span class="toc-section-number">31.3</span> NCTeXFormSetStar</a></li>
 </ul></li>
 <li><a href="#PackageNCRun"><span class="toc-section-number">32</span> NCRun</a><ul>
 <li><a href="#NCRun"><span class="toc-section-number">32.1</span> NCRun</a></li>
@@ -839,11 +838,6 @@ NCTeXForm[exp]</code></pre>
 NCTeX[exp]</code></pre>
 <p>to produce</p>
 <p><span class="math inline">\(a.x.{b}^T-{\left(d+c.{\left (a+b.c\right)}^{-1}.{y}^T\right )}^{-1}\)</span></p>
-<p><code>NCTeX</code> also handles standard functions just as <code>TeXForm</code>:</p>
-<pre><code>exp = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
-NCTeX[exp]</code></pre>
-<p>produces</p>
-<p><span class="math inline">\(\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} &amp; x {y}^{-1} \\ z &amp; \sqrt{5} n \end{bmatrix}\)</span></p>
 <p><code>NCTeX</code> represents noncommutative products with a dot (<code>.</code>) in order to distinguish it from its commutative cousin. We can see the difference in an expression that has both commutative and noncommutative products:</p>
 <pre><code>exp = 2 a ** b - 3 c ** d
 NCTeX[exp]</code></pre>
@@ -860,6 +854,10 @@ NCTeX[exp]</code></pre>
 <p>and its output:</p>
 <p><span class="math inline">\(\begin{bmatrix} x &amp; y \\ y &amp; z \end{bmatrix}\)</span></p>
 <p>Here are some more examples:</p>
+<pre><code>exp = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
+NCTeX[exp]</code></pre>
+<p>produces</p>
+<p><span class="math inline">\(\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} &amp; x {y}^{-1} \\ z &amp; \sqrt{5} n \end{bmatrix}\)</span></p>
 <pre><code>exp = {inv[x + y], inv[x + inv[y]]}
 NCTeX[exp]</code></pre>
 <p>produces:</p>
@@ -874,7 +872,6 @@ NCTeX[exp]</code></pre>
 NCTeX[exp]</code></pre>
 <p>produces:</p>
 <p><span class="math inline">\({\left (x+{{y}^T}^{-1}\right )}^{-1}\)</span></p>
-<h3 id="notes-on-nctexform-implementation"><span class="header-section-number">6.3.1</span> Notes on NCTeXForm Implementation</h3>
 <p><code>NCTeXForm</code> does not know as many functions as <code>TeXForm</code>. In some cases <code>TeXForm</code> will produce better results. Compare:</p>
 <pre><code>exp = BesselJ[2, x]
 NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
@@ -2596,7 +2593,17 @@ rule = NCPolyToRule[poly]</code></pre>
 <p>The format is compatible with AMS-LaTeX.</p>
 <p>Should work better then the Mathematica <code>TeXForm</code> :)</p>
 <h2 id="NCTeXFormSetStarStar"><span class="header-section-number">31.2</span> NCTeXFormSetStarStar</h2>
-<p><code>NCTeXFormSetStarStar[string]</code> replaces the standard '**' for <code>strings</code> in noncommutative multiplications.</p>
+<p><code>NCTeXFormSetStarStar[string]</code> replaces the standard '**' for <code>string</code> in noncommutative multiplications.</p>
+<p>For example:</p>
+<pre><code>NCTeXFormSetStarStar[&quot;.&quot;]</code></pre>
+<p>uses a dot (<code>.</code>) to replace <code>NonCommutativeMultiply</code>(<code>**</code>).</p>
+<p>See also: <a href="#NCTeXFormSetStar">NCTeXFormSetStar</a>.</p>
+<h2 id="NCTeXFormSetStar"><span class="header-section-number">31.3</span> NCTeXFormSetStar</h2>
+<p><code>NCTeXFormSetStar[string]</code> replaces the standard '*' for <code>string</code> in noncommutative multiplications.</p>
+<p>For example:</p>
+<pre><code>NCTeXFormSetStar[&quot; &quot;]</code></pre>
+<p>uses a space (<code>`) to replace</code>Times<code>(</code>*`).</p>
+<p><a href="#NCTeXFormSetStarStar">NCTeXFormSetStarStar</a>.</p>
 <h1 id="PackageNCRun"><span class="header-section-number">32</span> NCRun</h1>
 <p>Members are:</p>
 <ul>
