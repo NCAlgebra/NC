@@ -1,4 +1,4 @@
-# Pretty Output with TeX {#TeX}
+# Pretty Output with Mathematica and TeX {#TeX}
 
 `NCAlgebra` comes with several utilities for facilitating formatting
 of expression in notebooks or using LaTeX.

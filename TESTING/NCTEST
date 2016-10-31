@@ -7,7 +7,6 @@ SetOptions[$Output,PageWidth->1000];
 Print["> BEGIN NCTEST\n" ];
 
 tests = {
-(*
   "CommutativeQ",
   "NCMultiplication",
   "NCDeprecated",
@@ -15,9 +14,7 @@ tests = {
   "NCSymmetric",
   "NCSelfAdjoint",
   "NCReplace",
-*)
   "NCPolynomial",
-(*
   "NCSimplifyRational",
   "NCSylvester",
   "NCQuadratic",
@@ -30,11 +27,12 @@ tests = {
   "NCRoots",
   "NCConjugate",
   "NCOutput",
+  (*
   "NCSystem",
+  *)
   "NCRealization",
   "NCRational",
   "NCConvexity",
-*)
   "Matrix"
 };
 results = NCTestRun[tests];

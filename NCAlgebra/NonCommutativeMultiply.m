@@ -204,7 +204,6 @@ Begin[ "`Private`" ]
   (* tp[inv[]] = inv[tp[]] *)
   tp[inv[a_]] := inv[tp[a]];
 
-
   (* aj *)
 
   (* aj is NonCommutative *)
@@ -226,7 +225,6 @@ Begin[ "`Private`" ]
 
   (* aj[inv[]] = inv[aj[]] *)
   aj[inv[a_]] := inv[aj[a]];
-
 
   (* co *)
   
@@ -258,6 +256,8 @@ Begin[ "`Private`" ]
   co[tp[a_]] := aj[a];
   co[aj[a_]] := tp[a];
 
+  aj[co[a_]] := tp[a];
+  aj[tp[a_]] := co[a];
 
   (* rt *)
   
@@ -368,12 +368,29 @@ Begin[ "`Private`" ]
   
   (* Expand monomial rules *)
   Unprotect[Power];
+  
+  Power[b_, 1/2] := rt[b];
+
   Power[b_, c_Integer?Positive] := 
     Apply[NonCommutativeMultiply, Table[b, {c}]] /; !CommutativeQ[b];
+
   Power[b_, c_Integer?Negative] := 
     inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]] /; !CommutativeQ[b];
+
+  (* pretty tp *)
+  Power[a_, Global`T] := tp[a];
+
   Protect[Power];
-  
+
+  (* pretty aj *)
+  SuperStar[a_] := aj[a];
+
+  (* pretty inv *)
+  Superscript[a_, -1] := inv[a];
+
+  (* pretty co *)
+  OverBar[a_] := co[a];
+
 End[]
 
 EndPackage[]

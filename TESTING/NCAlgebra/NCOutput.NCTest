@@ -8,7 +8,7 @@ Module[
   options = Options[NCSetOutput];
 
   NCTest[options[[All, 1]], 
-         {Dot, rt, tp, inv, aj, Array}];
+         {Dot, rt, tp, inv, aj, co, Array}];
 
   (* Simple forms *)
   expr = x ** y;
@@ -26,26 +26,26 @@ Module[
 
   expr = tp[x];
   NCSetOutput[tp -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"T"]];
+  NCTest[NCOutputFunction[expr], Defer[Power[x, T]]];
   NCSetOutput[tp -> False];
   NCTest[NCOutputFunction[expr], tp[x]];
 
   expr = aj[x];
   NCSetOutput[aj -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"*"]];
+  NCTest[NCOutputFunction[expr], Defer[SuperStar[x]]];
   NCSetOutput[aj -> False];
   NCTest[NCOutputFunction[expr], aj[x]];
 
   expr = inv[x];
   NCSetOutput[inv -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"-1"]];
+  NCTest[NCOutputFunction[expr], Defer[Superscript[x,-1]]];
   NCSetOutput[inv -> False];
   NCTest[NCOutputFunction[expr], inv[x]];
 
   (* Complex form *) 
   NCSetOutput[All -> True];
   expr = y**inv[x+tp[y]];
-  answer = HoldForm[Dot[y, HoldForm[Power[Plus[x, HoldForm[Power[y, "T"]]],"-1"]]]];
+  answer = HoldForm[Dot[y, Defer[Superscript[Plus[x, Defer[Power[y, T]]],-1]]]];
   NCTest[NCOutputFunction[expr], answer];
 
   SetOptions[NCSetOutput, ##]& @@ options;

@@ -42,7 +42,13 @@ Module[
   expr = co[aj[a]];
   NCTest[expr, Unevaluated[tp[a]]];
 
-  expr = aj[tp[a ** b]];
+  expr = aj[co[a]];
+  NCTest[expr, Unevaluated[tp[a]]];
+
+  expr = aj[tp[a]];
+  NCTest[expr, Unevaluated[co[a]]];
+
+expr = aj[tp[a ** b]];
   NCTest[expr, co[a] ** co[b]];
 
   expr = tp[aj[a ** b]];
