@@ -1,18 +1,13 @@
 # NCOutput {#PackageNCOutput}
 
-**NCOutput** is a package that can be used to beautify the display of noncommutative expressions. NCOutput does not alter the internal representation of NC expressions, just the way they are displayed on the screen.
+**NCOutput** is a package that can be used to beautify the display of
+noncommutative expressions. NCOutput does not alter the internal
+representation of nc expressions, just the way they are displayed on
+the screen.
 
 Members are:
 
 * [NCSetOutput](#NCSetOutput)
-* [NCOutputFunction](#NCOutputFunction)
-
-## NCOutputFunction {#NCOutputFunction}
-
-`NCOutputFunction[exp]` returns a formatted version of the expression `expr` which will be displayed to the screen.
-
-See also:
-[NCSetOutput](#NCSetOutput).
 
 ## NCSetOutput {#NCSetOutput}
 
@@ -20,13 +15,14 @@ See also:
 
 The following `options` can be given:
 
-* `Dot`: If *True* `x**y` is displayed as `x.y`;
-* `tp`: If *True* `tp[x]` is displayed as `x` with a superscript 'T';
-* `inv`: If *True* `inv[x]` is displayed as `x` with a superscript '-1';
-* `aj`: If *True* `aj[x]` is displayed as `x` with a superscript '\*';
-* `rt`: If *True* `rt[x]` is displayed as `x` with a superscript '1/2';
-* `Array`: If *True* matrices are displayed using `MatrixForm`;
-* `All`: Set all available options to *True* or *False*.
+* `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` $\bullet$ `y`';
+* `tp` (`True`): If `True` `tp[x]` is displayed as '`x`$^\mathtt{T}$';
+* `inv` (`True`): If `True` `inv[x]` is displayed as '`x`$^{-1}$';
+* `aj` (`True`): If `True` `aj[x]` is displayed as '`x`$^*$';
+* `co` (`True`): If `True` `co[x]` is displayed as '$\bar{\mathtt{x}}$';
+* `rt` (`True`): If `True` `rt[x]` is displayed as '`x`$^{1/2}$';
+* `All`: Set all available options to `True` or `False`.
 
 See also:
-[NCOutputFunciton](#NCOutputFunction).
+[NCTex](#NCTeX),
+[NCTexForm](#NCTeXForm).

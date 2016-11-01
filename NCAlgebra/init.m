@@ -22,6 +22,9 @@ If [ !ValueQ[$NC$Algebra$Loaded],
 << NCMatMult`
 << NCMatrixDecompositions`
 << NCSimplifyRational`
-(* << NCOutput` *)
 << NCAlias`
 << NCDeprecated`
+
+(* Configure output *)
+<< NCOutput`
+NCSetOutput[]

@@ -6,88 +6,142 @@ $A$ and $B$, then he might say that $A$ and $B$ satisfy the polynomial
 equation $x\, y - 1 = 0$. An algebraist would say that $x\, y-1$ is a
 relation.
 
-## Simplifying Expressions
+In order to load `NCGB` one types:
 
-Suppose we want to simplify the expression $a^3 b^3 -c $ assuming that
-we know $a b =1$ and $b a = b$.
+	<< NC`
+	<< NCGBX`
 
-First NCAlgebra requires us to declare the variables to be noncommutative.
+or simply
 
-	SetNonCommutative[a,b,c]
+	<< NCGBX`
 
-Now we must set an order on the variables $a$, $b$ and $c$.
-
-	SetMonomialOrder[{a,b,c}]
-
-Later we explain what this does, in the context of a more complicated
-example where the command really matters. Here any order will do. We
-now simplify the expression $a^3 b^3 -c$ by typing
-
-	NCSimplifyAll[{a**a**a**b**b**b -c}, {a**b-1,b**a- b}, 3]
-
-you get the answer as the following Mathematica output
-
-	{1 - c} 
-
-The number 3 indicates how hard you want to try (how long you can
-stand to wait) to simplify your expression. 
+if `NC` and `NCAlgebra` have already been loaded.
 
 ## Gröbner Basis
+
+?? ADD A BRIEF INTRO TO GBs ??
 
 A reader who has no explicit interest in Gröbner Bases might want to
 skip this section. Readers who lack background in Gröbner Basis may
 want to read [CLS].
 
-Before making a Gröbner Basis, one must declare which variables will
-be used during the computation and must declare a *monomial order*
-which can be done using the commands described in Chapter.
+Before calculating a Gröbner Basis, one must declare which variables
+will be used during the computation and must declare a *monomial
+order* which can be done using `SetNonCommutative` and
+`SetMonomialOrder` as in:
+
+	SetNonCommutative[a, b, c, x];
+	SetMonomialOrder[{a, b, c}, x];
+
+The monomial ordering imposes a relationship between the variables
+which are used to *sort* the monomials in a polynomial. The ordering
+implied by the above command can be visualized using
+
+	PrintMonomialOrder[];
+	
+which in this case produces the ordering
+
+$a < b < c \ll x$.
 
 A user does not need to know theoretical background related to
-monomials orders. Indeed, as we shall see in Chapter
-\ref{chapter:ncprocess:example}, for many engineering problems, it
-suffices to know which variables correspond to quantities which are
-*known* and which variables correspond to quantities which are
-*unknown*.
+monomials orders. Indeed, as we shall see in ??, for many engineering
+problems, it suffices to know which variables correspond to quantities
+which are *known* and which variables correspond to quantities which
+are *unknown*. If one is solving for a variable or desires to prove
+that a certain quantity is zero, then one would want to view that
+variable as *unknown*.  For simple mathematical problems, one can take
+all of the variables to be *known*.
 
-If one is solving for a variable or desires to prove that a certain
-quantity is zero, then one would want to view that variable as
-unknown.  For simple mathematical problems, one can take all of the
-variables to be known. At this point in the exposition we assume that
-we have set a monomial order.
+In order to calculate a Gröbner basis one issues the command:
+	
+	gb = NCMakeGB[{b ** a - 1, a ** b - 1, a ** x ** a - c}, 10]
 
-	<< NCGBX`
-	SetNonCommutative[a,b,x,y]
-	SetMonomialOrder[a,b,x,y]
-	gb = NCMakeGB[{y**x - a, y**x - b, x**x - a, x**x**x - b}, 10]
+which should produces an output similar to:
 
-The result is:
+	* * * * * * * * * * * * * * * *
+	* * *   NCPolyGroebner    * * *
+	* * * * * * * * * * * * * * * *
+	* Monomial order : a < b < c << x
+	* Reduce and normalize initial basis
+	> Initial basis could not be reduced
+	* Computing initial set of obstructions
+	> MAJOR Iteration 1, 4 polys in the basis, 2 obstructions
+	> MAJOR Iteration 2, 5 polys in the basis, 2 obstructions
+	* Cleaning up basis.
+	* Found Groebner basis with 3 relations
+	* * * * * * * * * * * * * * * *
+
+The result of the calculation is:
            
-	{-a+x**x,-a+b,-a+y**x,-a+a**x,-a+x**a,-a+y**a,-a+a**a}
-           
+	gb = {x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
+
 Our favorite format for displaying lists of relations is `ColumnForm`.
            
 	ColumnForm[gb]
 	
 which results in 
 
-	-a + x ** x
-	-a + b
-	-a + y ** x
-	-a + a ** x
-	-a + x ** a
-	-a + y ** a
-	-a + a ** a
-           
+	x -> b ** c ** b
+	a ** b -> 1
+	b ** a -> 1
+
 Someone not familiar with GB's might find it instructive to note this
-output GB triangularizes the input equations to the extent that we
-have a compatibility condition on $a$, namely $a^2 - a = 0$; we can
-solve for $b$ in terms of $a$; there is one equation involving only
-$y$ and $a$; and there are three equations involving only $x$ and $a$.
-Thus if we were in a concrete situation with $a$ and $b$, given
-matrices, and $x$ and $y$, unknown matrices we would expect to be able
-to solve for large pieces of $x$ and $y$ independently and then plug
-them into the remaining equation $y x - a = 0$ to get a compatibility
-condition.
+output GB effectively *solves* the input equation
+$$
+	a \, x \, a - c = 0
+$$
+under the assumptions that 
+$$
+\begin{aligned}
+	b a - 1 &= 0, &
+	a b - 1 & =0,
+\end{aligned}
+$$
+that is $a = b^{-1}$ and produces the expected result in the form of
+the relation:
+$$
+	x = b \, c \, b.
+$$
+
+For a slightly more challenging example consider the monomial order
+
+	SetNonCommutative[a, b, c, x]
+	SetMonomialOrder[{a, b, c}, x];
+
+that is
+
+$a < b < c \ll x$
+
+and the relations:
+
+$$
+\begin{aligned}
+  a \, x - c &= 0, \\
+  a \, b \, a - a &= 0, \\
+  b \, a \, b - b &= 0,
+\end{aligned}
+$$
+from which one can recognize the problem of solving the linear
+equation $a \, x = c$ in terms of the *pseudo-inverse* $b =
+a^\dag$. The
+calculation:
+
+	gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
+
+finds the Gröbner basis:
+
+	a ** x -> c
+	a ** b ** c -> c
+	a ** b ** a -> a 
+	b ** a ** b -> b
+
+In this case the Gröbner basis cannot quite *solve* the problem but it
+remarkably produces the necessary condition for existence of
+solutions: 
+$$ 
+	0 = a \, b \, c - c = a \, a^\dag c - c 
+$$ 
+that can be interpreted as $c$ being in the range-space of $a$.
 
 ## Reducing a polynomial by a GB
 
@@ -116,7 +170,31 @@ in our session type
 
 	Reduction[ { poly }, ListOfRules2 ]
 
-## Simplification via GB's
+## Simplifying Expressions
+
+Suppose we want to simplify the expression $a^3 b^3 -c $ assuming that
+we know $a b =1$ and $b a = b$.
+
+First NCAlgebra requires us to declare the variables to be noncommutative.
+
+	SetNonCommutative[a,b,c]
+
+Now we must set an order on the variables $a$, $b$ and $c$.
+
+	SetMonomialOrder[{a,b,c}]
+
+Later we explain what this does, in the context of a more complicated
+example where the command really matters. Here any order will do. We
+now simplify the expression $a^3 b^3 -c$ by typing
+
+	NCSimplifyAll[{a**a**a**b**b**b -c}, {a**b-1,b**a- b}, 3]
+
+you get the answer as the following Mathematica output
+
+	{1 - c} 
+
+The number 3 indicates how hard you want to try (how long you can
+stand to wait) to simplify your expression. 
 
 The way the previously described command `NCSimplifyAll` works is
 

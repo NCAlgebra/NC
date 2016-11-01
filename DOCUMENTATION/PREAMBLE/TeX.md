@@ -1,9 +1,57 @@
-# Pretty Output with Mathematica and TeX {#TeX}
+# Pretty Output with Mathematica Notebooks and TeX {#TeX}
 
 `NCAlgebra` comes with several utilities for facilitating formatting
 of expression in notebooks or using LaTeX.
 
 ## Pretty Output {#Pretty_Output}
+
+On a Mathematica notebook session the package [NCOutput](#NCOutput)
+can be used to control how nc expressions are displayed. `NCOutput`
+does not alter the internal representation of nc expressions, just the
+way they are displayed on the screen.
+
+The function [NCSetOutput](#NCSetOutput) can be used to set the
+display options. For example:
+
+    NCSetOutput[tp -> False, inv -> True];
+
+makes the expression
+
+	expr = inv[tp[a] + b]
+
+be displayed as
+
+`(tp[a] + b)`$^{-1}$
+
+Conversely
+
+    NCSetOutput[tp -> True, inv -> False];
+
+makes `expr` be displayed as
+
+`inv[a`$^\mathtt{T}$ ` + b]`
+
+The default settings are 
+
+    NCSetOutput[tp -> True, inv -> True];
+
+which makes `expr` be displayed as
+
+`(a`$^\mathtt{T}$ ` + b)`$^{-1}$
+
+The complete set of options and their default values are:
+
+* `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` $\bullet$ `y`';
+* `tp` (`True`): If `True` `tp[x]` is displayed as '`x`$^\mathtt{T}$';
+* `inv` (`True`): If `True` `inv[x]` is displayed as '`x`$^{-1}$';
+* `aj` (`True`): If `True` `aj[x]` is displayed as '`x`$^*$';
+* `co` (`True`): If `True` `co[x]` is displayed as '$\bar{\mathtt{x}}$';
+* `rt` (`True`): If `True` `rt[x]` is displayed as '`x`$^{1/2}$'.
+
+The special symbol `All` can be used to set all options to `True` or
+`False`, as in
+
+	NCSetOutput[All -> True];
 
 ## Using NCTeX {#Using_NCTeX}
 
@@ -16,10 +64,18 @@ You can load NCTeX using the following command
 when not using NCAlgebra. It uses `NCRun`, which is a replacement for
 Mathematica's Run command to run `pdflatex`, `latex`, `divps`, etc.
 
-With `NCTeX` loaded you simply type `NCTeX[expr]` and your expression
-will be converted to a PDF image after being processed by `LaTeX`:
+**WARNING:** Mathematica does not come with LaTeX, dvips, etc. The
+package `NCTeX` does not install these programs but rather assumes
+that they have been previously installed and are available at the
+user's standard shell. Use the `Verbose` options to troubleshoot
+installation problems.
 
-	expr = 1 + Sin[x + (y - z)/Sqrt[2]]
+With `NCTeX` loaded you simply type `NCTeX[expr]` and your expression
+will be converted to a PDF image after being processed by `LaTeX`.
+
+For example:
+
+	expr = 1 + Sin[x + (y - z)/Sqrt[2]];
 	NCTeX[expr]
 
 produces
@@ -32,10 +88,10 @@ If `NCAlgebra` is not loaded then `NCTeX` uses the built in
 
 Here is another example:
 
-	expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
+	expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}};
 	NCTeX[expr]
 
-produces 
+that produces 
 
 $\left(
 \begin{array}{cc}
@@ -51,7 +107,7 @@ can look at the formula. If your PDF viewer does not pop up
 automatically you can force it by passing the following option to
 `NCTeX`:
 
-	expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
+	expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}};
 	NCTeX[exp, DisplayPDF -> True]
 
 Here is another example were the current version of Mathematica fails
@@ -68,7 +124,7 @@ section.
 
 The following command:
 
-	expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}}
+	expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}};
 	NCTeX[exp, DisplayPDF -> True, ImportPDF -> False]
 
 uses `DisplayPDF -> True` to ensure that the PDF viewer is called and

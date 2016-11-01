@@ -7,46 +7,50 @@ Module[
 
   options = Options[NCSetOutput];
 
-  NCTest[options[[All, 1]], 
-         {Dot, rt, tp, inv, aj, co, Array}];
+  NCTest[Sort[options[[All, 1]]], 
+         Sort[{NonCommutativeMultiply, rt, tp, inv, aj, co}]];
 
-  (* Simple forms *)
-  expr = x ** y;
-  NCSetOutput[Dot -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x . y]];
-  NCSetOutput[Dot -> False];
-  NCTest[NCOutputFunction[expr], x ** y];
+  If[ False,
+  
+      (* Simple forms *)
+      expr = x ** y;
+      NCSetOutput[Dot -> True];
+      NCTest[NCOutputFunction[expr], HoldForm[x . y]];
+      NCSetOutput[Dot -> False];
+      NCTest[NCOutputFunction[expr], x ** y];
 
-  expr = rt[x];
-  NCSetOutput[rt -> True];
-  NCTest[NCOutputFunction[expr], HoldForm[x^"1/2"]];
-  NCSetOutput[rt -> False];
-  expr = rt[x];
-  NCTest[NCOutputFunction[expr], rt[x]];
+      expr = rt[x];
+      NCSetOutput[rt -> True];
+      NCTest[NCOutputFunction[expr], HoldForm[x^"1/2"]];
+      NCSetOutput[rt -> False];
+      expr = rt[x];
+      NCTest[NCOutputFunction[expr], rt[x]];
 
-  expr = tp[x];
-  NCSetOutput[tp -> True];
-  NCTest[NCOutputFunction[expr], Defer[Power[x, T]]];
-  NCSetOutput[tp -> False];
-  NCTest[NCOutputFunction[expr], tp[x]];
+      expr = tp[x];
+      NCSetOutput[tp -> True];
+      NCTest[NCOutputFunction[expr], Defer[Power[x, T]]];
+      NCSetOutput[tp -> False];
+      NCTest[NCOutputFunction[expr], tp[x]];
 
-  expr = aj[x];
-  NCSetOutput[aj -> True];
-  NCTest[NCOutputFunction[expr], Defer[SuperStar[x]]];
-  NCSetOutput[aj -> False];
-  NCTest[NCOutputFunction[expr], aj[x]];
+      expr = aj[x];
+      NCSetOutput[aj -> True];
+      NCTest[NCOutputFunction[expr], Defer[SuperStar[x]]];
+      NCSetOutput[aj -> False];
+      NCTest[NCOutputFunction[expr], aj[x]];
 
-  expr = inv[x];
-  NCSetOutput[inv -> True];
-  NCTest[NCOutputFunction[expr], Defer[Superscript[x,-1]]];
-  NCSetOutput[inv -> False];
-  NCTest[NCOutputFunction[expr], inv[x]];
+      expr = inv[x];
+      NCSetOutput[inv -> True];
+      NCTest[NCOutputFunction[expr], Defer[Superscript[x,-1]]];
+      NCSetOutput[inv -> False];
+      NCTest[NCOutputFunction[expr], inv[x]];
 
-  (* Complex form *) 
-  NCSetOutput[All -> True];
-  expr = y**inv[x+tp[y]];
-  answer = HoldForm[Dot[y, Defer[Superscript[Plus[x, Defer[Power[y, T]]],-1]]]];
-  NCTest[NCOutputFunction[expr], answer];
+      (* Complex form *) 
+      NCSetOutput[All -> True];
+      expr = y**inv[x+tp[y]];
+      answer = HoldForm[Dot[y, Defer[Superscript[Plus[x, Defer[Power[y, T]]],-1]]]];
+      NCTest[NCOutputFunction[expr], answer];
+
+  ];
 
   SetOptions[NCSetOutput, ##]& @@ options;
 

@@ -369,13 +369,13 @@ Begin[ "`Private`" ]
   (* Expand monomial rules *)
   Unprotect[Power];
   
-  Power[b_, 1/2] := rt[b];
+  Power[b_?NonCommutativeQ, 1/2] := rt[b];
 
-  Power[b_, c_Integer?Positive] := 
-    Apply[NonCommutativeMultiply, Table[b, {c}]] /; !CommutativeQ[b];
+  Power[b_?NonCommutativeQ, c_Integer?Positive] := 
+    Apply[NonCommutativeMultiply, Table[b, {c}]];
 
-  Power[b_, c_Integer?Negative] := 
-    inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]] /; !CommutativeQ[b];
+  Power[b_?NonCommutativeQ, c_Integer?Negative] := 
+    inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]];
 
   (* pretty tp *)
   Power[a_, Global`T] := tp[a];
