@@ -18,8 +18,7 @@ FILES = NonCommutativeMultiply.usage \
 	NCRealization.private.usage \
         NCMatrixDecompositions.usage \
         MatrixDecompositions.usage \
-	NCUtil.usage \
-	NCTeXForm.usage
+	NCUtil.usage
 
 all: $(FILES)
 

@@ -55,7 +55,7 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCPoly/NCPoly.md \
 	 NCPoly/NCPolyGroebner.md \
 	 NCTeX/NCTeX.md \
-	 NCAlgebra/NCTeXForm.md \
+	 NCTeX/NCTeXForm.md \
 	 NCTeX/NCRun.md \
 	 TESTING/NCTest.md
 

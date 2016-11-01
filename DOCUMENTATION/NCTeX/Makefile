@@ -1,6 +1,6 @@
 include ../make.inc
 
-FILES = NCTeX.usage NCRun.usage
+FILES = NCTeX.usage NCTeXForm.usage NCRun.usage
 
 all: $(FILES)
 
