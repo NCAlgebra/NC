@@ -1,10 +1,12 @@
-# NonCommutative Gröebner Basis {#NCGB}
+# NonCommutative Gröbner Basis {#NCGB}
 
-We shall use the word *relation* to mean a polynomial in noncommuting
-indeterminates. If an analyst saw the equation $AB = 1$ for matrices
-$A$ and $B$, then he might say that $A$ and $B$ satisfy the polynomial
-equation $x\, y - 1 = 0$. An algebraist would say that $x\, y-1$ is a
-relation.
+The package `NCGBX` provides an implementation of a noncommutative
+Gröbner Basis algorithm. Gröbner Basis are useful in the study of
+algebraic relations. We shall use the word *relation* to mean a
+polynomial in noncommuting indeterminates. For example, if an analyst
+saw the equation $AB = 1$ for matrices $A$ and $B$, then he might say
+that $A$ and $B$ satisfy the polynomial equation $x\, y - 1 = 0$. An
+algebraist would say that $x\, y-1$ is a relation.
 
 In order to load `NCGB` one types:
 
@@ -35,11 +37,11 @@ order* which can be done using `SetNonCommutative` and
 
 The monomial ordering imposes a relationship between the variables
 which are used to *sort* the monomials in a polynomial. The ordering
-implied by the above command can be visualized using
+implied by the above command can be visualized using:
 
 	PrintMonomialOrder[];
 	
-which in this case produces the ordering
+which in this case produces the ordering:
 
 $a < b < c \ll x$.
 
@@ -49,10 +51,11 @@ problems, it suffices to know which variables correspond to quantities
 which are *known* and which variables correspond to quantities which
 are *unknown*. If one is solving for a variable or desires to prove
 that a certain quantity is zero, then one would want to view that
-variable as *unknown*.  For simple mathematical problems, one can take
-all of the variables to be *known*.
+variable as *unknown*. In the above examples, the symbol $\ll$
+separate the *knowns*, $a, b, c$, from the *unknown*, $x$. For more
+details on orderings see ??.
 
-In order to calculate a Gröbner basis one issues the command:
+To calculate a Gröbner basis one issues the command:
 	
 	gb = NCMakeGB[{b ** a - 1, a ** b - 1, a ** x ** a - c}, 10]
 
@@ -73,7 +76,7 @@ which should produces an output similar to:
 
 The result of the calculation is:
            
-	gb = {x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
+	{x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
 
 Our favorite format for displaying lists of relations is `ColumnForm`.
            

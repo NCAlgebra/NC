@@ -47,7 +47,7 @@
 <li><a href="#groups"><span class="toc-section-number">4.5</span> Groups</a></li>
 <li><a href="#ncgbx"><span class="toc-section-number">4.6</span> NCGBX</a></li>
 </ul></li>
-<li><a href="#NCGB"><span class="toc-section-number">5</span> NonCommutative Gröebner Basis</a><ul>
+<li><a href="#NCGB"><span class="toc-section-number">5</span> NonCommutative Gröbner Basis</a><ul>
 <li><a href="#gröbner-basis"><span class="toc-section-number">5.1</span> Gröbner Basis</a></li>
 <li><a href="#reducing-a-polynomial-by-a-gb"><span class="toc-section-number">5.2</span> Reducing a polynomial by a GB</a></li>
 <li><a href="#simplifying-expressions"><span class="toc-section-number">5.3</span> Simplifying Expressions</a></li>
@@ -532,8 +532,8 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <p><code>NCGBX</code> is a 100% Mathematica version of our NC Groebner Basis Algorithm and does not require C/C++ code compilation.</p>
 <p>Look for demos in the <code>NC/NCPoly/DEMOS</code> subdirectory of the most current distributions.</p>
 <p><strong>IMPORTANT:</strong> Do not load NCGB and NCGBX simultaneously.</p>
-<h1 id="NCGB"><span class="header-section-number">5</span> NonCommutative Gröebner Basis</h1>
-<p>We shall use the word <em>relation</em> to mean a polynomial in noncommuting indeterminates. If an analyst saw the equation <span class="math inline">\(AB = 1\)</span> for matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then he might say that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> satisfy the polynomial equation <span class="math inline">\(x\, y - 1 = 0\)</span>. An algebraist would say that <span class="math inline">\(x\, y-1\)</span> is a relation.</p>
+<h1 id="NCGB"><span class="header-section-number">5</span> NonCommutative Gröbner Basis</h1>
+<p>The package <code>NCGBX</code> provides an implementation of a noncommutative Gröbner Basis algorithm. Gröbner Basis are useful in the study of algebraic relations. We shall use the word <em>relation</em> to mean a polynomial in noncommuting indeterminates. For example, if an analyst saw the equation <span class="math inline">\(AB = 1\)</span> for matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then he might say that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> satisfy the polynomial equation <span class="math inline">\(x\, y - 1 = 0\)</span>. An algebraist would say that <span class="math inline">\(x\, y-1\)</span> is a relation.</p>
 <p>In order to load <code>NCGB</code> one types:</p>
 <pre><code>&lt;&lt; NC`
 &lt;&lt; NCGBX`</code></pre>
@@ -546,11 +546,11 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <p>Before calculating a Gröbner Basis, one must declare which variables will be used during the computation and must declare a <em>monomial order</em> which can be done using <code>SetNonCommutative</code> and <code>SetMonomialOrder</code> as in:</p>
 <pre><code>SetNonCommutative[a, b, c, x];
 SetMonomialOrder[{a, b, c}, x];</code></pre>
-<p>The monomial ordering imposes a relationship between the variables which are used to <em>sort</em> the monomials in a polynomial. The ordering implied by the above command can be visualized using</p>
+<p>The monomial ordering imposes a relationship between the variables which are used to <em>sort</em> the monomials in a polynomial. The ordering implied by the above command can be visualized using:</p>
 <pre><code>PrintMonomialOrder[];</code></pre>
-<p>which in this case produces the ordering</p>
+<p>which in this case produces the ordering:</p>
 <p><span class="math inline">\(a &lt; b &lt; c \ll x\)</span>.</p>
-<p>A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see in ??, for many engineering problems, it suffices to know which variables correspond to quantities which are <em>known</em> and which variables correspond to quantities which are <em>unknown</em>. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as <em>unknown</em>. For simple mathematical problems, one can take all of the variables to be <em>known</em>.</p>
+<p>A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see in ??, for many engineering problems, it suffices to know which variables correspond to quantities which are <em>known</em> and which variables correspond to quantities which are <em>unknown</em>. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as <em>unknown</em>. In the above examples, the symbol <span class="math inline">\(\ll\)</span> separate the <em>knowns</em>, <span class="math inline">\(a, b, c\)</span>, from the <em>unknown</em>, <span class="math inline">\(x\)</span>. For more details on ordering see ??.</p>
 <p>In order to calculate a Gröbner basis one issues the command:</p>
 <pre><code>gb = NCMakeGB[{b ** a - 1, a ** b - 1, a ** x ** a - c}, 10]</code></pre>
 <p>which should produces an output similar to:</p>
@@ -567,7 +567,7 @@ SetMonomialOrder[{a, b, c}, x];</code></pre>
 * Found Groebner basis with 3 relations
 * * * * * * * * * * * * * * * *</code></pre>
 <p>The result of the calculation is:</p>
-<pre><code>gb = {x -&gt; b ** c ** b, a ** b -&gt; 1, b ** a -&gt; 1}</code></pre>
+<pre><code>{x -&gt; b ** c ** b, a ** b -&gt; 1, b ** a -&gt; 1}</code></pre>
 <p>Our favorite format for displaying lists of relations is <code>ColumnForm</code>.</p>
 <pre><code>ColumnForm[gb]</code></pre>
 <p>which results in</p>
