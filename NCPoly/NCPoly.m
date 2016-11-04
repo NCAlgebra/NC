@@ -32,6 +32,8 @@ Clear[NCPoly,
       NCPolyQuotientExpand,
       NCPolyNormalize];
 
+Clear[NCPolyHankelMatrix];
+
 (* The following generic functions are implemented here *)
 
 Clear[NCFromDigits,
@@ -409,6 +411,23 @@ Begin["`Private`"];
   NCPolyDisplay[p_, vars_List:{}, ___] := p;
 
   NCPolyDisplay[p___] := $Failed;
+
+  (* Hankel *)
+  NCPolyIntegersToIndexAux[{degrees__, i_}, n_Integer] := 
+    (1 - n^Total[{degrees}])/(1-n) + i + 1;
+
+  NCPolyIntegersToIndex[integers_List, n_Integer] := 
+    Map[NCPolyIntegersToIndexAux[##, n]&, integers];
+    
+  NCPolyHankelMatrix[p_NCPoly] := Module[
+    {index},
+    
+    index = NCPolyIntegersToIndex[NCPolyGetIntegers[p], 
+                                  NCPolyNumberOfVariables[p]];
+      
+    Return[index];
+      
+  ];
       
 End[]
       
