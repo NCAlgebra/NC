@@ -412,20 +412,50 @@ Begin["`Private`"];
 
   NCPolyDisplay[p___] := $Failed;
 
-  (* Hankel *)
+
+  (* NCPolyIntegersToIndex *)
+      
+  NCPolyIntegersToIndexAux[{degree_, i_}, n_Integer] := 
+    (1 - n^degree)/(1-n) + i + 1;
+
   NCPolyIntegersToIndexAux[{degrees__, i_}, n_Integer] := 
     (1 - n^Total[{degrees}])/(1-n) + i + 1;
 
   NCPolyIntegersToIndex[integers_List, n_Integer] := 
     Map[NCPolyIntegersToIndexAux[##, n]&, integers];
-    
-  NCPolyHankelMatrix[p_NCPoly] := Module[
-    {index},
-    
-    index = NCPolyIntegersToIndex[NCPolyGetIntegers[p], 
-                                  NCPolyNumberOfVariables[p]];
+
+  NCPolySplitDigits[digits_List] :=
+      Table[{digits[[;;k]], digits[[k+1;;]]}, {k, 0, Length[digits]}];
+
+  NCPolyDigitsToIndex[digits_List, base_] := Module[
+    {i = NCFromDigits[digits, base]},
+    NCPolyIntegersToIndexAux[i, Total[base]]
+ ];
       
-    Return[index];
+  (* Hankel *)
+      
+  NCPolyHankelMatrix[p_NCPoly] := Module[
+    {integers,digits,index},
+    
+    integers = NCPolyGetIntegers[p];
+
+    Print["integers = ", integers];
+      
+    digits = NCPolyGetDigits[p];
+      
+    Print["digits = ", digits];
+
+    index = Map[NCPolyDigitsToIndex[#,p[[1]]]&, 
+                 Map[NCPolySplitDigits, digits], {3}];
+      
+    Print["index = ", index];
+
+    index = Flatten[MapThread[Thread[#1 -> #2]&, 
+                              {index, NCPolyGetCoefficients[p]}]];
+      
+    Print["index = ", index];
+      
+    Return[SparseArray[index]];
       
   ];
       
