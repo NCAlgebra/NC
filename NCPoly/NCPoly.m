@@ -430,32 +430,34 @@ Begin["`Private`"];
   NCPolyDigitsToIndex[digits_List, base_] := Module[
     {i = NCFromDigits[digits, base]},
     NCPolyIntegersToIndexAux[i, Total[base]]
- ];
+  ];
       
   (* Hankel *)
       
   NCPolyHankelMatrix[p_NCPoly] := Module[
-    {integers,digits,index},
+    {digits,index,redIndex},
     
-    integers = NCPolyGetIntegers[p];
-
-    Print["integers = ", integers];
-      
-    digits = NCPolyGetDigits[p];
+    digits = Map[NCPolySplitDigits, 
+                 NCPolyGetDigits[p]];
       
     Print["digits = ", digits];
 
     index = Map[NCPolyDigitsToIndex[#,p[[1]]]&, 
-                 Map[NCPolySplitDigits, digits], {3}];
+                digits, {3}];
+      
+    Print["index = ", index];
+      
+    rules = Flatten[MapThread[Thread[#1 -> #2]&, 
+                              {index, NCPolyGetCoefficients[p]}]];
+      
+    Print["rules = ", rules];
+    
+    (* Reduce basis *)
+    index = Union[Flatten[index]];
       
     Print["index = ", index];
 
-    index = Flatten[MapThread[Thread[#1 -> #2]&, 
-                              {index, NCPolyGetCoefficients[p]}]];
-      
-    Print["index = ", index];
-      
-    Return[SparseArray[index]];
+    Return[SparseArray[rules][[index, index]]];
       
   ];
       
