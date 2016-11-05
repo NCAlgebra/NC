@@ -434,30 +434,94 @@ Begin["`Private`"];
       
   (* Hankel *)
       
-  NCPolyHankelMatrix[p_NCPoly] := Module[
-    {digits,index,redIndex},
-    
-    digits = Map[NCPolySplitDigits, 
-                 NCPolyGetDigits[p]];
-      
-    Print["digits = ", digits];
+  NCPolyHankelMatrixAux1[digits_, coeffs_, base_] := Module[
+    {index, deg, rules},
 
-    index = Map[NCPolyDigitsToIndex[#,p[[1]]]&, 
+    (* construct Hankel matrix *)
+      
+    index = Map[NCPolyDigitsToIndex[#, base]&, 
                 digits, {3}];
       
-    Print["index = ", index];
-      
     rules = Flatten[MapThread[Thread[#1 -> #2]&, 
-                              {index, NCPolyGetCoefficients[p]}]];
+                              {index, coeffs}]];
       
-    Print["rules = ", rules];
+    Return[{index, rules}];
+      
+  ];
+      
+  NCPolyHankelMatrixAux2[H_, mons_, cols_, base_, i_] := Module[
+    {index, ncols, Hi = SparseArray[{},Dimensions[H]]},
+      
+    index = Flatten[Position[mons, {i,___}]];
+    ncols = Map[NCPolyDigitsToIndex[#, base]&, 
+                Map[Rest, mons[[index]]]];
+      
+    (*
+    Print["index = ", index];
+    Print["cols[[index]] = ", cols[[index]]];
+    Print["ncols = ", ncols];
+    *)
+      
+    Hi[[All,ncols]] = H[[All,cols[[index]]]];
+    Return[Hi];
+      
+  ];
+      
+  NCPolyHankelMatrix[p_NCPoly] := Module[
+    {digits,sdigits,coeffs,base,
+     left,right,index,redIndex},
     
-    (* Reduce basis *)
+    (* build Hankel matrix *)
+
+    digits = NCPolyGetDigits[p];
+    sdigits = Map[NCPolySplitDigits, digits];
+      
+    base = p[[1]];
+    coeffs = NCPolyGetCoefficients[p];
+    sign = Map[If[OddQ[Length[#]], -1, 1]&, digits];
+      
+    {index, rules} = NCPolyHankelMatrixAux1[sdigits, 
+                                            coeffs,
+                                            base];
+
+    H = SparseArray[rules];
+      
+    Print["digits = ", digits];
+    Print["sdigits = ", sdigits];
+    Print["sign = ", sign];
+    Print["index = ", index];
+    Print["rules = ", rules];
+
+    (* Shift by vars *)
+
+    (* determine unique column monomials *)
+      
+    {cols,mons} = Transpose[
+                    Union[
+                      Transpose[{Flatten[index[[All,All,2]],1], 
+                                 Flatten[sdigits[[All,All,2]],1]}
+                      ]
+                    ]
+                  ];
+      
+    Print["mons = ", mons];
+    Print["cols = ", cols];
+    
+    (* select var *)
+
+    H = Prepend[
+          Map[NCPolyHankelMatrixAux2[H, mons, cols, base, #]&, 
+              Range[0,NCPolyNumberOfVariables[p]-1]], H];
+      
+    Print["H = ", H];
+      
+    (* reduced basis index *)
+
     index = Union[Flatten[index]];
       
     Print["index = ", index];
 
-    Return[SparseArray[rules][[index, index]]];
+    Return[Map[#[[index, index]]&, H]];
       
   ];
       
