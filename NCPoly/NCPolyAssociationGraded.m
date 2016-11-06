@@ -51,25 +51,48 @@ Begin["`Private`"];
   NCPolyMonomial[monomials_List, var_List] := 
     NCPolyMonomial[monomials, {var}];
 
+  Clear[NCPolyAux];
+  NCPolyAux2[vars__Symbol] := Length[{vars}];
+  NCPolyAux2[var___] := (Message[NCPoly::InvalidList]; $Failed);
+  
   (* NCPoly Constructor *)
   
-  NCPoly[coeff_List, monomials_List, {var__List}] := Module[
-    {tmp},
+  NCPoly[{}, {}, var_List] := 0;
+
+  NCPoly[coeff_List, monomials_List, {Vars__}] := Module[
+    {vars, varnames},
 
     If[ Length[coeff] =!= Length[monomials],
         Message[NCPoly::SizeMismatch];
         Return[$Failed];
     ];
+
+    (* list of variables *)
+
+    If[ Depth[{Vars}] > 3,
+        Message[NCPoly::InvalidList];
+        Return[$Failed];
+    ];
+      
+    (* normalize *)
+      
+    Check[ vars = Apply[NCPolyAux2, Map[Flatten, Map[List, {Vars}]], 1]
+          ,
+           Return[$Failed]
+          ,
+           NCPoly::InvalidList
+    ];
+    varnames = Flatten[{Vars}];
       
     Check[
       NCPolyPack[
-        NCPoly[ Map[Length, {var}]
+        NCPoly[ vars
            ,
             KeySort[
               AssociationThread[ 
                 NCFromDigits[
-                    Map[ NCMonomialToDigits[#, Flatten[{var}]]&, monomials]
-                   ,Map[Length, {var}]
+                    Map[ NCMonomialToDigits[#, varnames]&, monomials]
+                   ,vars
                   ],
                   coeff
               ]
@@ -83,15 +106,16 @@ Begin["`Private`"];
     ]
   ];
 
-  NCPoly[coeff_List, monomials_List, var_List] := 
-    NCPoly[coeff, monomials, {var}];
-
   NCPoly[r_,Association[]] := 0;
-  NCPoly[r_,s_] := 
-    $Failed /; Or[ Head[r] =!= List, Depth[r] =!= 2,
+  
+  (* errors *)
+  
+  NCPoly[r_,s_] := (Message[NCPoly::NotPolynomial]; 
+    $Failed) /; Or[ Head[r] =!= List, Depth[r] =!= 2,
                    Head[s] =!= Association ];
 
-  NCPoly[r___] := (Message[NCPoly::NotPolynomial]; $Failed) /; Length[{r}] =!= 2;
+  NCPoly[r___] := (Message[NCPoly::NotPolynomial]; 
+    $Failed) /; Length[{r}] =!= 2;
 
   (* NCPoly Utilities *)
 

@@ -11,7 +11,7 @@ Block[
 
   (* Standard Constructor *)
   Clear[x, y, z];
-  vars = {x, y, z};
+  vars = {{x, y, z}};
 
   coeff1 = {1, 2, 3, -1, -2, -3, 1/2};
   mon1 = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
@@ -35,15 +35,33 @@ Block[
   NCTest[NCPolyGetDigits[p2], \
        {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
 
-  (* variables not on list *)
+  (* zero *)
+  NCTest[NCPoly[{},{},{x,y}], 0];
+
+  (* variable not on list *)
   NCTestCheck[NCPoly[{1,2},{{x},{z}},{x,y}],
               $Failed,
 	      NCMonomialToDigits::InvalidSymbol];
 
-  (* coeffs and monomials dont match *)
+  (* length of coeffs and monomials dont match *)
   NCTestCheck[NCPoly[{1,2,3},{{x},{y}},{x,y}],
               $Failed,
 	      NCPoly::SizeMismatch];
+
+  (* wrong depth *)
+  NCTestCheck[NCPoly[{1,2},{{x},{y}},{{x},{{y}}}],
+              $Failed,
+	      NCPoly::InvalidList];
+
+  (* something other than symbol *)
+  NCTestCheck[NCPoly[{1,2},{{x},{y}},{{x,x+y}}],
+              $Failed,
+	      NCPoly::InvalidList];
+
+  (* empty list *)
+  NCTestCheck[NCPoly[{1,2},{{x},{y}},{x,y,{}}],
+              $Failed,
+	      NCPoly::InvalidList];
 
   (* Monomial Constructos *)
 
@@ -162,6 +180,16 @@ Block[
   coeff3 = {1, 2, 3, -1, -2, -3, 1/2};
   mon3 = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
   p3 = NCPoly[coeff3, mon3, Flatten[vars]];
+
+  (* Lex variation *)
+  
+  vars = {{x, y}, z};
+  p1 = NCPoly[coeff1, mon1, vars];
+
+  NCTest[NCPolyGetCoefficients[p1], {1, 2, -1, -2, 3, -3, 1/2}];
+  NCTest[NCPolyDegree[p1], 4];
+  NCTest[NCPolyGetDigits[p1], \
+       {{}, {0}, {0, 1}, {0, 1, 0, 0}, {2}, {2, 0}, {2, 2, 2, 2}}];
 
   (* Monomial Constructos *)
 

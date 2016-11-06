@@ -13,7 +13,7 @@ Block[
   (* Test Product *)
 
   Clear[x, y];
-  vars={x,y};
+  vars={{x,y}};
 
   (* p1 = x + x y + y x *)
   c1={1,1,1};

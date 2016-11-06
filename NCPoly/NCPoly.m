@@ -52,6 +52,7 @@ Get["NCPoly.usage"];
 
 NCPoly::NotPolynomial = "Expression is not a simple nc polynomial.";
 NCPoly::SizeMismatch = "Number of monomials and coefficients do not match.";
+NCPoly::InvalidList = "Invalid list of variables.";
 NCMonomialToDigits::InvalidSymbol = "Monomial contain symbol not present in variable list";
 
 Begin["`Private`"];

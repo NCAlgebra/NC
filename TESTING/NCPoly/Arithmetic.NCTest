@@ -8,7 +8,7 @@ Block[
   (* Test Arithmetic *)
 
   Clear[x, y, z];
-  vars={x,y,z};
+  vars={{x,y,z}};
 
   m1={{},{x},{z},{x,y},{x,y,x}};
   c1={1,0,-1,-2,3};
