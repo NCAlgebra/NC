@@ -52,8 +52,8 @@ Begin["`Private`"];
     NCPolyMonomial[monomials, {var}];
 
   Clear[NCPolyAux];
-  NCPolyAux2[vars__Symbol] := Length[{vars}];
-  NCPolyAux2[var___] := (Message[NCPoly::InvalidList]; $Failed);
+  NCPolyAux[vars__Symbol] := Length[{vars}];
+  NCPolyAux[var___] := (Message[NCPoly::InvalidList]; $Failed);
   
   (* NCPoly Constructor *)
   
@@ -74,9 +74,9 @@ Begin["`Private`"];
         Return[$Failed];
     ];
       
-    (* normalize *)
+    (* normalize list of variables *)
       
-    Check[ vars = Apply[NCPolyAux2, Map[Flatten, Map[List, {Vars}]], 1]
+    Check[ vars = Apply[NCPolyAux, Map[Flatten, Map[List, {Vars}]], 1]
           ,
            Return[$Failed]
           ,
