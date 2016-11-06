@@ -30,9 +30,12 @@ Members are:
     * [NCPolyQuotientExpand](#NCPolyQuotientExpand)
     * [NCPolyReduce](#NCPolyReduce)
     * [NCPolySum](#NCPolySum)
+* Other
+    * [NCPolyHankelMatrix](#NCPolyHankelMatrix)
 * Auxiliary
     * [NCFromDigits](#NCFromDigits)
     * [NCIntegerDigits](#NCIntegerDigits)
+    * [NCDigitsToIndex](#NCDigitsToIndex)
     * [NCPadAndMatch](#NCPadAndMatch)
 
 ## NCPoly {#NCPoly}
@@ -140,7 +143,7 @@ See also:
 
 ## NCPolyMonomialQ {#NCPolyMonomialQ}
 
-`NCPolyMonomialQ[p]` returns `True` if `p` is a `NCPoly` monomial.
+`NCPolyMonomialQ[poly]` returns `True` if `poly` is a `NCPoly` monomial.
 
 See also:
 [NCPoly](#NCPoly),
@@ -329,10 +332,9 @@ variables `vars`.
 
 ## NCPolyDisplay {#NCPolyDisplay}
 
-`NCPolyDisplay[p]` prints the noncommutative polynomial p using
-symbols x1,...,xn. 
+`NCPolyDisplay[poly]` prints the noncommutative polynomial `poly`. 
 
-`NCPolyDisplay[p, vars]` uses the symbols in the list vars.
+`NCPolyDisplay[poly, vars]` uses the symbols in the list `vars`.
 
 ## NCPolyDivideDigits {#NCPolyDivideDigits}
 
@@ -352,9 +354,8 @@ NCPolyQuotientExpand.
 
 ## NCPolyNormalize {#NCPolyNormalize}
 
-`NCPolyNormalize[p]` makes the coefficient of the leading term of p to
-unit. It also works when p is a list.
-
+`NCPolyNormalize[poly]` makes the coefficient of the leading term of
+`p` to unit. It also works when `poly` is a list.
 
 ## NCPolyProduct {#NCPolyProduct}
 
@@ -373,6 +374,63 @@ g. It also works when g is a list.
 
 `NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f
 and g.
+
+## NCPolyHankelMatrix {#NCPolyHankelMatrix}
+
+`NCPolyHankelMatrix[poly]` produces the nc *Hankel matrix* associated
+with the polynomial `poly` and also their shifts per variable.
+
+For example:
+
+	vars = {{x, y}};
+	poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
+	{H, Hx, Hy} = NCPolyHankelMatrix[poly]
+
+results in the matrices
+
+	H =  {{  0,  0,  0,  1, -1 },
+          {  0,  0,  1,  0,  0 },
+	      {  0, -1,  0,  0,  0 },
+	      {  1,  0,  0,  0,  0 },
+	      { -1,  0,  0,  0,  0 }}
+    Hx = {{  0,  0,  1,  0,  0 },
+		  {  0,  0,  0,  0,  0 },
+		  { -1,  0,  0,  0,  0 },
+		  {  0,  0,  0,  0,  0 },
+		  {  0,  0,  0,  0,  0 }}
+    Hy = {{  0, -1,  0,  0,  0 },
+	      {  1,  0,  0,  0,  0 },
+		  {  0,  0,  0,  0,  0 },
+		  {  0,  0,  0,  0,  0 },
+		  {  0,  0,  0,  0,  0 }}
+
+which are the Hankel matrices associated with the commutator $x y - y x$.
+
+See also:
+[NCPolyRealization](#NCPolyRealization),
+[NCIntegerToIndex](#NCIntegerToIndex).
+
+## NCPolyRealization {#NCPolyRealization}
+
+`NCPolyRealization[poly]` calculate a minimal descriptor realization
+for the polynomial `poly`.
+
+`NCPolyRealization` uses `NCPolyHankelMatrix` and the resulting
+realization is compatible with the format used by `NCRational`.
+
+For example:
+
+	vars = {{x, y}};
+	poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
+	{{a0,ax,ay},b,c,d} = NCPolyRealization[poly]
+	
+produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a
+row vector `c`, and a scalar `d` such that $c . inv[a0 + ax \, x + ay
+\, y] . b + d = x y - y x$.
+
+See also:
+[NCPolyHankelMatrix](#NCPolyHankelMatrix),
+[NCRational](#NCRational).
 
 ## NCFromDigits {#NCFromDigits}
 
@@ -467,6 +525,42 @@ to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 
 See also:
 [NCFromDigits](#NCFromDigits).
+
+## NCDigitsToIndex {#NCDigitsToIndex}
+
+`NCDigitsToIndex[digits, b]` returns the index that the monomial
+represented by `digits` in the base `b` would occupy in the standard
+monomial basis.
+
+`NCDigitsToIndex[{digit1,digits2}, b]` applies `NCDigitsToIndex` to each
+`digit1`, `digit2`, ....
+
+`NCDigitsToIndex` returns the same index for graded or simple basis. 
+
+For example:
+
+    digits = {0, 1};
+	NCDigitsToIndex[digits, 2]
+	NCDigitsToIndex[digits, {2}]
+	NCDigitsToIndex[digits, {1, 1}]
+
+all return
+
+	5
+
+which is the index of the monomial $x y$ in the standard monomial
+basis of polynomials in $x$ and $y$. Likewise
+
+	digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
+	NCDigitsToIndex[digits, 2]
+
+returns
+
+	{1,3, 5,27}
+
+See also:
+[NCFromDigits](#NCFromDigits),
+[NCIntergerDigits](#NCIntergerDigits).
 
 
 ## NCPadAndMatch {#NCPadAndMatch}

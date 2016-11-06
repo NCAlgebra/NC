@@ -4,7 +4,7 @@ Block[
    coeff2,mon2,p2,
    m0,m1,m2,m3,m4,m5,
    mSorted,zM,mUnsorted,
-   isGraded
+   isGraded,tmp
    },
   
   (* Test constructors *)
@@ -34,6 +34,16 @@ Block[
        {{0, 0}, {1, 0}, {1, 2}, {2, 1}, {2, 6}, {4, 9}, {4, 80}}];
   NCTest[NCPolyGetDigits[p2], \
        {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
+
+  (* variables not on list *)
+  NCTestCheck[NCPoly[{1,2},{{x},{z}},{x,y}],
+              $Failed,
+	      NCMonomialToDigits::InvalidSymbol];
+
+  (* coeffs and monomials dont match *)
+  NCTestCheck[NCPoly[{1,2,3},{{x},{y}},{x,y}],
+              $Failed,
+	      NCPoly::SizeMismatch];
 
   (* Monomial Constructos *)
 

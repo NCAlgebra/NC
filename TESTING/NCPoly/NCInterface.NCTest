@@ -10,9 +10,11 @@ Block[
 
   (* TESTING NCToNCPoly/NCPolyToNC -- BEGIN *)
 
-  Clear[a,b,c];
-  SNC[a,b,c];
+  Clear[a,b,c,d];
+  SNC[a,b,c,d];
 
+  (* NCToNCPoly *)
+  
   vars = {{a},{b,c}};
   NCExp = a;
   PolyExp = NCToNCPoly[NCExp, vars];
@@ -84,6 +86,13 @@ Block[
 
   NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]];
   NCTest[(NCExp /. (x_ == y_) -> x - y), NCExpExp];
+
+  vars = {{a},{b,c}};
+  NCExp = a**a + b**b + c**c + d**d;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  Print[PolyExp];
 
   (* List functionality *)
 

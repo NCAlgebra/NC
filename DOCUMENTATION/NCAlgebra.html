@@ -311,9 +311,12 @@
 <li><a href="#NCPolyQuotientExpand"><span class="toc-section-number">28.22</span> NCPolyQuotientExpand</a></li>
 <li><a href="#NCPolyReduce"><span class="toc-section-number">28.23</span> NCPolyReduce</a></li>
 <li><a href="#NCPolySum"><span class="toc-section-number">28.24</span> NCPolySum</a></li>
-<li><a href="#NCFromDigits"><span class="toc-section-number">28.25</span> NCFromDigits</a></li>
-<li><a href="#NCIntegerDigits"><span class="toc-section-number">28.26</span> NCIntegerDigits</a></li>
-<li><a href="#NCPadAndMatch"><span class="toc-section-number">28.27</span> NCPadAndMatch</a></li>
+<li><a href="#NCPolyHankelMatrix"><span class="toc-section-number">28.25</span> NCPolyHankelMatrix</a></li>
+<li><a href="#NCPolyRealization"><span class="toc-section-number">28.26</span> NCPolyRealization</a></li>
+<li><a href="#NCFromDigits"><span class="toc-section-number">28.27</span> NCFromDigits</a></li>
+<li><a href="#NCIntegerDigits"><span class="toc-section-number">28.28</span> NCIntegerDigits</a></li>
+<li><a href="#NCDigitsToIndex"><span class="toc-section-number">28.29</span> NCDigitsToIndex</a></li>
+<li><a href="#NCPadAndMatch"><span class="toc-section-number">28.30</span> NCPadAndMatch</a></li>
 </ul></li>
 <li><a href="#PackageNCPolyGroebner"><span class="toc-section-number">29</span> NCPolyGroebner</a><ul>
 <li><a href="#NCPolyGroebner"><span class="toc-section-number">29.1</span> NCPolyGroebner</a></li>
@@ -550,8 +553,8 @@ SetMonomialOrder[{a, b, c}, x];</code></pre>
 <pre><code>PrintMonomialOrder[];</code></pre>
 <p>which in this case produces the ordering:</p>
 <p><span class="math inline">\(a &lt; b &lt; c \ll x\)</span>.</p>
-<p>A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see in ??, for many engineering problems, it suffices to know which variables correspond to quantities which are <em>known</em> and which variables correspond to quantities which are <em>unknown</em>. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as <em>unknown</em>. In the above examples, the symbol <span class="math inline">\(\ll\)</span> separate the <em>knowns</em>, <span class="math inline">\(a, b, c\)</span>, from the <em>unknown</em>, <span class="math inline">\(x\)</span>. For more details on ordering see ??.</p>
-<p>In order to calculate a Gröbner basis one issues the command:</p>
+<p>A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see in ??, for many engineering problems, it suffices to know which variables correspond to quantities which are <em>known</em> and which variables correspond to quantities which are <em>unknown</em>. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as <em>unknown</em>. In the above examples, the symbol <span class="math inline">\(\ll\)</span> separate the <em>knowns</em>, <span class="math inline">\(a, b, c\)</span>, from the <em>unknown</em>, <span class="math inline">\(x\)</span>. For more details on orderings see ??.</p>
+<p>To calculate a Gröbner basis one issues the command:</p>
 <pre><code>gb = NCMakeGB[{b ** a - 1, a ** b - 1, a ** x ** a - c}, 10]</code></pre>
 <p>which should produces an output similar to:</p>
 <pre><code>* * * * * * * * * * * * * * * *
@@ -2423,10 +2426,15 @@ gb = NCMakeGB[{x^2 - 1, x^3 - 1}, 20]</code></pre>
 <li><a href="#NCPolyReduce">NCPolyReduce</a></li>
 <li><a href="#NCPolySum">NCPolySum</a></li>
 </ul></li>
+<li>Other
+<ul>
+<li><a href="#NCPolyHankelMatrix">NCPolyHankelMatrix</a></li>
+</ul></li>
 <li>Auxiliary
 <ul>
 <li><a href="#NCFromDigits">NCFromDigits</a></li>
 <li><a href="#NCIntegerDigits">NCIntegerDigits</a></li>
+<li><a href="#NCDigitsToIndex">NCDigitsToIndex</a></li>
 <li><a href="#NCPadAndMatch">NCPadAndMatch</a></li>
 </ul></li>
 </ul>
@@ -2471,7 +2479,7 @@ mon = NCPolyMonomial[{x,y,x},vars];</code></pre>
 <p>constructs an object associated with the constant <code>3</code> in variables <code>x</code>, <code>y</code> and <code>z</code>.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
 <h2 id="NCPolyMonomialQ"><span class="header-section-number">28.4</span> NCPolyMonomialQ</h2>
-<p><code>NCPolyMonomialQ[p]</code> returns <code>True</code> if <code>p</code> is a <code>NCPoly</code> monomial.</p>
+<p><code>NCPolyMonomialQ[poly]</code> returns <code>True</code> if <code>poly</code> is a <code>NCPoly</code> monomial.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
 <h2 id="NCPolyDegree"><span class="header-section-number">28.5</span> NCPolyDegree</h2>
 <p><code>NCPolyDegree[poly]</code> returns the degree of the nc polynomial <code>poly</code>.</p>
@@ -2551,8 +2559,8 @@ rule = NCPolyToRule[poly]</code></pre>
 <h2 id="NCPolyDisplayOrder"><span class="header-section-number">28.15</span> NCPolyDisplayOrder</h2>
 <p><code>NCPolyDisplayOrder[vars]</code> prints the order implied by the list of variables <code>vars</code>.</p>
 <h2 id="NCPolyDisplay"><span class="header-section-number">28.16</span> NCPolyDisplay</h2>
-<p><code>NCPolyDisplay[p]</code> prints the noncommutative polynomial p using symbols x1,...,xn.</p>
-<p><code>NCPolyDisplay[p, vars]</code> uses the symbols in the list vars.</p>
+<p><code>NCPolyDisplay[poly]</code> prints the noncommutative polynomial <code>poly</code>.</p>
+<p><code>NCPolyDisplay[poly, vars]</code> uses the symbols in the list <code>vars</code>.</p>
 <h2 id="NCPolyDivideDigits"><span class="header-section-number">28.17</span> NCPolyDivideDigits</h2>
 <p><code>NCPolyDivideDigits[F,G]</code> returns the result of the division of the leading digits lf and lg.</p>
 <h2 id="NCPolyDivideLeading"><span class="header-section-number">28.18</span> NCPolyDivideLeading</h2>
@@ -2560,7 +2568,7 @@ rule = NCPolyToRule[poly]</code></pre>
 <h2 id="NCPolyFullReduce"><span class="header-section-number">28.19</span> NCPolyFullReduce</h2>
 <p><code>NCPolyFullReduce[f,g]</code> applies NCPolyReduce successively until the remainder does not change. See also NCPolyReduce and NCPolyQuotientExpand.</p>
 <h2 id="NCPolyNormalize"><span class="header-section-number">28.20</span> NCPolyNormalize</h2>
-<p><code>NCPolyNormalize[p]</code> makes the coefficient of the leading term of p to unit. It also works when p is a list.</p>
+<p><code>NCPolyNormalize[poly]</code> makes the coefficient of the leading term of <code>p</code> to unit. It also works when <code>poly</code> is a list.</p>
 <h2 id="NCPolyProduct"><span class="header-section-number">28.21</span> NCPolyProduct</h2>
 <p><code>NCPolyProduct[f,g]</code> returns a NCPoly that is the product of the NCPoly's f and g.</p>
 <h2 id="NCPolyQuotientExpand"><span class="header-section-number">28.22</span> NCPolyQuotientExpand</h2>
@@ -2568,7 +2576,40 @@ rule = NCPolyToRule[poly]</code></pre>
 <h2 id="NCPolyReduce"><span class="header-section-number">28.23</span> NCPolyReduce</h2>
 <h2 id="NCPolySum"><span class="header-section-number">28.24</span> NCPolySum</h2>
 <p><code>NCPolySum[f,g]</code> returns a NCPoly that is the sum of the NCPoly's f and g.</p>
-<h2 id="NCFromDigits"><span class="header-section-number">28.25</span> NCFromDigits</h2>
+<h2 id="NCPolyHankelMatrix"><span class="header-section-number">28.25</span> NCPolyHankelMatrix</h2>
+<p><code>NCPolyHankelMatrix[poly]</code> produces the nc <em>Hankel matrix</em> associated with the polynomial <code>poly</code> and also their shifts per variable.</p>
+<p>For example:</p>
+<pre><code>vars = {{x, y}};
+poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
+{H, Hx, Hy} = NCPolyHankelMatrix[poly]</code></pre>
+<p>results in the matrices</p>
+<pre><code>H =  {{  0,  0,  0,  1, -1 },
+      {  0,  0,  1,  0,  0 },
+      {  0, -1,  0,  0,  0 },
+      {  1,  0,  0,  0,  0 },
+      { -1,  0,  0,  0,  0 }}
+Hx = {{  0,  0,  1,  0,  0 },
+      {  0,  0,  0,  0,  0 },
+      { -1,  0,  0,  0,  0 },
+      {  0,  0,  0,  0,  0 },
+      {  0,  0,  0,  0,  0 }}
+Hy = {{  0, -1,  0,  0,  0 },
+      {  1,  0,  0,  0,  0 },
+      {  0,  0,  0,  0,  0 },
+      {  0,  0,  0,  0,  0 },
+      {  0,  0,  0,  0,  0 }}</code></pre>
+<p>which are the Hankel matrices associated with the commutator <span class="math inline">\(x y - y x\)</span>.</p>
+<p>See also: <a href="#NCPolyRealization">NCPolyRealization</a>, <a href="#NCIntegerToIndex">NCIntegerToIndex</a>.</p>
+<h2 id="NCPolyRealization"><span class="header-section-number">28.26</span> NCPolyRealization</h2>
+<p><code>NCPolyRealization[poly]</code> calculate a minimal descriptor realization for the polynomial <code>poly</code>.</p>
+<p><code>NCPolyRealization</code> uses <code>NCPolyHankelMatrix</code> and the resulting realization is compatible with the format used by <code>NCRational</code>.</p>
+<p>For example:</p>
+<pre><code>vars = {{x, y}};
+poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
+{{a0,ax,ay},b,c,d} = NCPolyRealization[poly]</code></pre>
+<p>produces a list of matrices <code>{a0,ax,ay}</code>, a column vector <code>b</code> and a row vector <code>c</code>, and a scalar <code>d</code> such that <span class="math inline">\(c . inv[a0 + ax \, x + ay \, y] . b + d = x y - y x\)</span>.</p>
+<p>See also: <a href="#NCPolyHankelMatrix">NCPolyHankelMatrix</a>, <a href="#NCRational">NCRational</a>.</p>
+<h2 id="NCFromDigits"><span class="header-section-number">28.27</span> NCFromDigits</h2>
 <p><code>NCFromDigits[list, b]</code> constructs a representation of a monomial in <code>b</code> encoded by the elements of <code>list</code> where the digits are in base <code>b</code>.</p>
 <p><code>NCFromDigits[{list1,list2}, b]</code> applies <code>NCFromDigits</code> to each <code>list1</code>, <code>list2</code>, ....</p>
 <p>List of integers are used to codify monomials. For example the list <code>{0,1}</code> represents a monomial <span class="math inline">\(xy\)</span> and the list <code>{1,0}</code> represents the monomial <span class="math inline">\(yx\)</span>. The call</p>
@@ -2587,7 +2628,7 @@ rule = NCPolyToRule[poly]</code></pre>
 <p>in which <code>3</code> is the partial degree of the monomial <span class="math inline">\(xzyy\)</span> with respect to letters <code>y</code> and <code>z</code>, <code>1</code> is the partial degree with respect to letter <code>x</code> and <code>22</code> is <code>0211</code> in base <code>3 = 1 + 2</code>.</p>
 <p>This construction is used to represent graded degree-lexicographic orderings.</p>
 <p>See also: <a href="#NCIntergerDigits">NCIntergerDigits</a>.</p>
-<h2 id="NCIntegerDigits"><span class="header-section-number">28.26</span> NCIntegerDigits</h2>
+<h2 id="NCIntegerDigits"><span class="header-section-number">28.28</span> NCIntegerDigits</h2>
 <p><code>NCIntegerDigits[n,b]</code> is the inverse of the <code>NCFromDigits</code>.</p>
 <p><code>NCIntegerDigits[{list1,list2}, b]</code> applies <code>NCIntegerDigits</code> to each <code>list1</code>, <code>list2</code>, ....</p>
 <p>For example:</p>
@@ -2605,7 +2646,24 @@ rule = NCPolyToRule[poly]</code></pre>
 <pre><code>{0,2,1,1}</code></pre>
 <p>in which <code>3</code> is the partial degree of the monomial <code>x**z**y**y</code> with respect to letters <code>y</code> and <code>z</code>, <code>1</code> is the partial degree with respect to letter <code>x</code> and <code>22</code> is <code>0211</code> in base <code>3 = 1 + 2</code>.</p>
 <p>See also: <a href="#NCFromDigits">NCFromDigits</a>.</p>
-<h2 id="NCPadAndMatch"><span class="header-section-number">28.27</span> NCPadAndMatch</h2>
+<h2 id="NCDigitsToIndex"><span class="header-section-number">28.29</span> NCDigitsToIndex</h2>
+<p><code>NCDigitsToIndex[digits, b]</code> returns the index that the monomial represented by <code>digits</code> in the base <code>b</code> would occupy in the standard monomial basis.</p>
+<p><code>NCDigitsToIndex[{digit1,digits2}, b]</code> applies <code>NCDigitsToIndex</code> to each <code>digit1</code>, <code>digit2</code>, ....</p>
+<p><code>NCDigitsToIndex</code> returns the same index for graded or simple basis.</p>
+<p>For example:</p>
+<pre><code>digits = {0, 1};
+NCDigitsToIndex[digits, 2]
+NCDigitsToIndex[digits, {2}]
+NCDigitsToIndex[digits, {1, 1}]</code></pre>
+<p>all return</p>
+<pre><code>5</code></pre>
+<p>which is the index of the monomial <span class="math inline">\(x y\)</span> in the standard monomial basis of polynomials in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Likewise</p>
+<pre><code>digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
+NCDigitsToIndex[digits, 2]</code></pre>
+<p>returns</p>
+<pre><code>{1,3, 5,27}</code></pre>
+<p>See also: <a href="#NCFromDigits">NCFromDigits</a>, <a href="#NCIntergerDigits">NCIntergerDigits</a>.</p>
+<h2 id="NCPadAndMatch"><span class="header-section-number">28.30</span> NCPadAndMatch</h2>
 <p>When list <code>a</code> is longer than list <code>b</code>, <code>NCPadAndMatch[a,b]</code> returns the minimum number of elements from list a that should be added to the left and right of list <code>b</code> so that <code>a = l b r</code>. When list <code>b</code> is longer than list <code>a</code>, return the opposite match.</p>
 <p><code>NCPadAndMatch</code> returns all possible matches with the minimum number of elements.</p>
 <h1 id="PackageNCPolyGroebner"><span class="header-section-number">29</span> NCPolyGroebner</h1>
@@ -2688,15 +2746,15 @@ rule = NCPolyToRule[poly]</code></pre>
 </ul>
 <h2 id="NCTest"><span class="header-section-number">33.1</span> NCTest</h2>
 <p><code>NCTest[expr,answer]</code> asserts whether <code>expr</code> is equal to <code>answer</code>. The result of the test is collected when <code>NCTest</code> is run from <code>NCTestRun</code>.</p>
-<p>See also: <a href="#NCTestRun" class="uri">#NCTestRun</a>, <a href="#NCTestSummarize" class="uri">#NCTestSummarize</a></p>
+<p>See also: <a href="#NCTestRun">NCTestRun</a>, <a href="#NCTestSummarize">NCTestSummarize</a></p>
 <h2 id="NCTestRun"><span class="header-section-number">33.2</span> NCTestRun</h2>
 <p><code>NCTest[list]</code> runs the test files listed in <code>list</code> after appending the '.NCTest' suffix and return the results.</p>
 <p>For example:</p>
 <pre><code>results = NCTestRun[{&quot;NCCollect&quot;, &quot;NCSylvester&quot;}]</code></pre>
 <p>will run the test files &quot;NCCollec.NCTest&quot; and &quot;NCSylvester.NCTest&quot; and return the results in <code>results</code>.</p>
-<p>See also: <a href="#NCTest" class="uri">#NCTest</a>, <a href="#NCTestSummarize" class="uri">#NCTestSummarize</a></p>
+<p>See also: <a href="#NCTest">NCTest</a>, <a href="#NCTestSummarize">NCTestSummarize</a></p>
 <h2 id="NCTestSummarize"><span class="header-section-number">33.3</span> NCTestSummarize</h2>
 <p><code>NCTestSummarize[results]</code> will print a summary of the results in <code>results</code> as produced by <code>NCTestRun</code>.</p>
-<p>See also: <a href="#NCTestRun" class="uri">#NCTestRun</a></p>
+<p>See also: <a href="#NCTestRun">NCTestRun</a></p>
 </body>
 </html>

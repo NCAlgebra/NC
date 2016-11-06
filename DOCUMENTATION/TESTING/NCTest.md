@@ -11,7 +11,7 @@ Members are:
 `NCTest[expr,answer]` asserts whether `expr` is equal to `answer`. The result of the test is collected when `NCTest` is run from `NCTestRun`.
 
 See also:
-[#NCTestRun](#NCTestRun), [#NCTestSummarize](#NCTestSummarize)
+[NCTestRun](#NCTestRun), [NCTestSummarize](#NCTestSummarize)
 
 
 ## NCTestRun {#NCTestRun}
@@ -26,7 +26,7 @@ For example:
 will run the test files "NCCollec.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
 
 See also:
-[#NCTest](#NCTest), [#NCTestSummarize](#NCTestSummarize)
+[NCTest](#NCTest), [NCTestSummarize](#NCTestSummarize)
 
 
 ## NCTestSummarize {#NCTestSummarize}
@@ -34,4 +34,4 @@ See also:
 `NCTestSummarize[results]` will print a summary of the results in `results` as produced by `NCTestRun`.
 
 See also:
-[#NCTestRun](#NCTestRun)
+[NCTestRun](#NCTestRun)

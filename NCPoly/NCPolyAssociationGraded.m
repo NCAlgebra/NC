@@ -51,23 +51,35 @@ Begin["`Private`"];
   NCPolyMonomial[monomials_List, var_List] := 
     NCPolyMonomial[monomials, {var}];
 
-  NCPoly[coeff_List, monomials_List, {var__List}] := NCPolyPack[
-    NCPoly[ Map[Length, {var}]
+  (* NCPoly Constructor *)
+  
+  NCPoly[coeff_List, monomials_List, {var__List}] := Module[
+    {tmp},
+
+    If[ Length[coeff] =!= Length[monomials],
+        Message[NCPoly::SizeMismatch];
+        Return[$Failed];
+    ];
+      
+    Check[
+      NCPolyPack[
+        NCPoly[ Map[Length, {var}]
            ,
             KeySort[
               AssociationThread[ 
                 NCFromDigits[
-                    Flatten[
-                      Map[ Flatten[Position[Flatten[{var}], #]-1]&
-                          ,monomials
-                          ,{2} ]
-                     ,{3,1}
-                    ]
+                    Map[ NCMonomialToDigits[#, Flatten[{var}]]&, monomials]
                    ,Map[Length, {var}]
                   ],
                   coeff
               ]
             ]
+        ]
+      ]
+     ,
+      $Failed
+     ,
+      NCMonomialToDigits::InvalidSymbol
     ]
   ];
 
@@ -79,7 +91,7 @@ Begin["`Private`"];
     $Failed /; Or[ Head[r] =!= List, Depth[r] =!= 2,
                    Head[s] =!= Association ];
 
-  NCPoly[r___] := $Failed /; Length[{r}] =!= 2;
+  NCPoly[r___] := (Message[NCPoly::NotPolynomial]; $Failed) /; Length[{r}] =!= 2;
 
   (* NCPoly Utilities *)
 

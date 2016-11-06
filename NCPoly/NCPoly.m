@@ -3,7 +3,8 @@
 (*    Date: July 2009                                                      *)
 (* Version: 0.1 ( initial implementation )                                 *)
 
-BeginPackage[ "NCPoly`" ];
+BeginPackage[ "NCPoly`",
+              "MatrixDecompositions`"];
 
 (* 
    These functions are not implemented here. 
@@ -32,12 +33,15 @@ Clear[NCPoly,
       NCPolyQuotientExpand,
       NCPolyNormalize];
 
-Clear[NCPolyHankelMatrix];
+Clear[NCPolyHankelMatrix,
+      NCPolyRealization];
 
 (* The following generic functions are implemented here *)
 
 Clear[NCFromDigits,
       NCIntegerDigits,
+      NCDigitsToIndex,
+      NCMonomialToDigits,
       NCPadAndMatch,
       NCPolyDivideDigits,
       NCPolyDivideLeading,
@@ -45,6 +49,10 @@ Clear[NCFromDigits,
       NCPolyOrderType];
 
 Get["NCPoly.usage"];
+
+NCPoly::NotPolynomial = "Expression is not a simple nc polynomial.";
+NCPoly::SizeMismatch = "Number of monomials and coefficients do not match.";
+NCMonomialToDigits::InvalidSymbol = "Monomial contain symbol not present in variable list";
 
 Begin["`Private`"];
 
@@ -276,6 +284,46 @@ Begin["`Private`"];
     Map[NCIntegerDigits[#, {base}, len]&, dn] /; Depth[dn] === 3;
   *)
 
+  (* NCDigitsToIndex *)
+    
+  NCPolyIntegersToIndexAux[{degree_Integer, i_Integer}, n_Integer] := 
+    (1 - n^degree)/(1-n) + i + 1;
+
+  NCPolyIntegersToIndexAux[{degrees__Integer, i_Integer}, n_Integer] := 
+    (1 - n^Total[{degrees}])/(1-n) + i + 1;
+              
+  NCDigitsToIndex[{digits__List}, base_Integer] := 
+    Map[NCDigitsToIndex[#, base]&, {digits}];
+
+  NCDigitsToIndex[{digits__List}, base_List] := 
+    Map[NCDigitsToIndex[#, base]&, {digits}];
+      
+  NCDigitsToIndex[digits_List, base_Integer] := Module[
+    {i = NCFromDigits[digits, base]},
+    NCPolyIntegersToIndexAux[i, base]
+  ];
+
+  NCDigitsToIndex[digits_List, base_List] := Module[
+    {i = NCFromDigits[digits, base]},
+    NCPolyIntegersToIndexAux[i, Total[base]]
+  ];
+
+  (* NCMonomialToDigits *)
+              
+  Clear[NCMonomialToDigitsAux];
+  NCMonomialToDigitsAux[digits_] := 
+    Flatten[digits] /; FreeQ[digits, {}];
+
+  NCMonomialToDigitsAux[digits_] := 
+    (Message[NCMonomialToDigits::InvalidSymbol]; {$Failed});
+    
+  NCMonomialToDigits[{}, var_List] := {};
+
+  NCMonomialToDigits[monomial_List, var_List] :=
+    NCMonomialToDigitsAux[ 
+      Map[Flatten[Position[var, #]-1]&, monomial]
+    ];
+    
   (* Auxiliary routines for pattern matching of monomials *)
 
   Clear[ShiftPattern];
@@ -415,23 +463,9 @@ Begin["`Private`"];
 
   (* NCPolyIntegersToIndex *)
       
-  NCPolyIntegersToIndexAux[{degree_, i_}, n_Integer] := 
-    (1 - n^degree)/(1-n) + i + 1;
-
-  NCPolyIntegersToIndexAux[{degrees__, i_}, n_Integer] := 
-    (1 - n^Total[{degrees}])/(1-n) + i + 1;
-
-  NCPolyIntegersToIndex[integers_List, n_Integer] := 
-    Map[NCPolyIntegersToIndexAux[##, n]&, integers];
-
   NCPolySplitDigits[digits_List] :=
       Table[{digits[[;;k]], digits[[k+1;;]]}, {k, 0, Length[digits]}];
 
-  NCPolyDigitsToIndex[digits_List, base_] := Module[
-    {i = NCFromDigits[digits, base]},
-    NCPolyIntegersToIndexAux[i, Total[base]]
-  ];
-      
   (* Hankel *)
       
   NCPolyHankelMatrixAux1[digits_, coeffs_, base_] := Module[
@@ -439,8 +473,7 @@ Begin["`Private`"];
 
     (* construct Hankel matrix *)
       
-    index = Map[NCPolyDigitsToIndex[#, base]&, 
-                digits, {3}];
+    index = Map[NCDigitsToIndex[#, base]&, digits, {3}];
       
     rules = Flatten[MapThread[Thread[#1 -> #2]&, 
                               {index, coeffs}]];
@@ -453,8 +486,7 @@ Begin["`Private`"];
     {index, ncols, Hi = SparseArray[{},Dimensions[H]]},
       
     index = Flatten[Position[mons, {i,___}]];
-    ncols = Map[NCPolyDigitsToIndex[#, base]&, 
-                Map[Rest, mons[[index]]]];
+    ncols = NCDigitsToIndex[Map[Rest, mons[[index]]], base];
       
     (*
     Print["index = ", index];
@@ -486,14 +518,6 @@ Begin["`Private`"];
 
     H = SparseArray[rules];
       
-    Print["digits = ", digits];
-    Print["sdigits = ", sdigits];
-    Print["sign = ", sign];
-    Print["index = ", index];
-    Print["rules = ", rules];
-
-    (* Shift by vars *)
-
     (* determine unique column monomials *)
       
     {cols,mons} = Transpose[
@@ -504,24 +528,83 @@ Begin["`Private`"];
                     ]
                   ];
       
+    (*
+    Print["digits = ", digits];
+    Print["sdigits = ", sdigits];
+    Print["sign = ", sign];
+    Print["index = ", index];
+    Print["rules = ", rules];
     Print["mons = ", mons];
     Print["cols = ", cols];
+    *)
     
-    (* select var *)
+    (* shift by var *)
 
     H = Prepend[
           Map[NCPolyHankelMatrixAux2[H, mons, cols, base, #]&, 
               Range[0,NCPolyNumberOfVariables[p]-1]], H];
       
-    Print["H = ", H];
-      
     (* reduced basis index *)
 
     index = Union[Flatten[index]];
       
+    (* 
+    Print["H = ", H];
     Print["index = ", index];
+    *)
 
     Return[Map[#[[index, index]]&, H]];
+      
+  ];
+
+  (* NCPolyRealization *)
+
+  NCPolyRealization[poly_NCPoly] := Module[
+    {H, 
+     lu,p,q,rank,l,u,
+     A,b,c,d},
+
+    (* calculate Hankel matrices *)
+    H = NCPolyHankelMatrix[poly];
+      
+    (* remove constant *)
+    d = H[[1,1,1]];
+    H[[1,1,1]] = 0;
+      
+    (* decompose Hankel matrix in full rank factors *)
+    {lu, p, q, rank} = LUDecompositionWithCompletePivoting[H[[1]]];
+    {l, u} = GetLUMatrices[lu];
+    
+    (* permute rows and columns of l and u *)
+    l[[p]] = l;
+    u[[All, q]] = u;
+
+    (* reduce dimensions to match rank *)
+    l = l[[All, 1 ;; rank]];
+    u = u[[1 ;; rank, All]];
+
+    (*
+    Print["lu = ", lu];
+    Print["l = ", l];
+    Print["u = ", u];
+    *)
+      
+    (* calculate b and c *)
+    b = u[[All, {1}]];
+    c = l[[{1}, All]];
+
+    (* calculate ai's *)
+    linv = SparseArray[LinearSolve[Transpose[l].l, Transpose[l]]];
+    uinv = SparseArray[Transpose[LinearSolve[u.Transpose[u],u]]];
+    A = Prepend[Map[-Dot[linv, #, uinv]&, Rest[H]], 
+                SparseArray[{{i_,i_}->1}, {rank,rank}]];
+
+    (*
+    Print["linv = ", linv];
+    Print["uinv = ", uinv];
+    *)
+      
+    Return[{A,b,c,d}];
       
   ];
       

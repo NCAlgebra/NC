@@ -40,11 +40,11 @@ Begin["`Private`"];
   (* NCToNCPoly *)
 
   Clear[GrabFactors];
-  GrabFactors[Times[a_, exp_NonCommutativeMultiply]] := {a, List @@ exp};
-  GrabFactors[exp_NonCommutativeMultiply] := {1, List @@ exp};
-  GrabFactors[Times[a_, exp_]] := {a, {exp}};
-  GrabFactors[exp_?NumberQ] := {exp, {}};
-  GrabFactors[exp_] := {1, {exp}};
+  GrabFactors[a_. exp_NonCommutativeMultiply] := {a, List @@ exp};
+  GrabFactors[a_. exp_Symbol] := {a, {exp}};
+  GrabFactors[exp_?CommutativeQ] := {exp, {}};
+  GrabFactors[exp_Symbol] := {1, {exp}};
+  GrabFactors[_] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
 
   Clear[GrabTerms];
   GrabTerms[x_Plus] := List @@ x;
@@ -60,7 +60,10 @@ Begin["`Private`"];
     NCToNCPoly[exp[[1]] - exp[[2]], vars];
 
   NCToNCPoly[exp_, vars_] := 
-    NCPoly @@ Append[Transpose[Map[GrabFactors, GrabTerms[ExpandNonCommutativeMultiply[exp]]]], vars];
+    NCPoly @@ Append[Transpose[
+                Map[GrabFactors, 
+                    GrabTerms[ExpandNonCommutativeMultiply[exp]]
+                ]], vars];
 
 
   (* NCPolyToNC *)
