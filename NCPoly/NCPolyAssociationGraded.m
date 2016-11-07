@@ -191,8 +191,7 @@ Begin["`Private`"];
   (* NCPoly Operators *)
 
   (* Times *)
-  NCPoly /: Times[r_, s_NCPoly] := 
-    NCPoly[s[[1]], r s[[2]]];
+  NCPoly /: Times[r_, s_NCPoly] := NCPoly[s[[1]], r s[[2]]];
 
   (* Plus *)
   NCPolySum[r_NCPoly, s_NCPoly] := NCPoly[

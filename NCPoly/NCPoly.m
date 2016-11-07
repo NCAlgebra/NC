@@ -14,6 +14,7 @@ BeginPackage[ "NCPoly`",
 Clear[NCPoly,
       NCPolyMonomial,
       NCPolyMonomialQ,
+      NCPolyLinearQ,
       NCPolyLexDeg,NCPolyDegLex,NCPolyDegLexGraded,
       NCPolyDisplayOrder,
       NCPolyConstant,
@@ -74,6 +75,8 @@ Begin["`Private`"];
     NCPolyMonomial[Rule[{0,0}, value], n];
 
   (* Operators *)
+
+  NCPolyLinearQ[p_NCPoly] := (NCPolyDegree[p] <= 1);
 
   NCPolyDegree[x_] := 0;
 
@@ -494,8 +497,11 @@ Begin["`Private`"];
     Print["cols[[index]] = ", cols[[index]]];
     Print["ncols = ", ncols];
     *)
+    
+    If[ index =!= {},
+        Hi[[All,ncols]] = H[[All,cols[[index]]]];
+    ];
       
-    Hi[[All,ncols]] = H[[All,cols[[index]]]];
     Return[Hi];
       
   ];
@@ -511,7 +517,6 @@ Begin["`Private`"];
       
     base = p[[1]];
     coeffs = NCPolyGetCoefficients[p];
-    sign = Map[If[OddQ[Length[#]], -1, 1]&, digits];
       
     {index, rules} = NCPolyHankelMatrixAux1[sdigits, 
                                             coeffs,
@@ -530,9 +535,9 @@ Begin["`Private`"];
                   ];
       
     (*
+    Print["H = ", Normal[H]];
     Print["digits = ", digits];
     Print["sdigits = ", sdigits];
-    Print["sign = ", sign];
     Print["index = ", index];
     Print["rules = ", rules];
     Print["mons = ", mons];
@@ -549,12 +554,12 @@ Begin["`Private`"];
 
     index = Union[Flatten[index]];
       
-    (* 
-    Print["H = ", H];
+    (*
+    Print["H = ", Normal /@ H];
     Print["index = ", index];
     *)
 
-    Return[Map[#[[index, index]]&, H]];
+    Return[SparseArray[Map[#[[index, index]]&, H]]];
       
   ];
 
@@ -569,13 +574,20 @@ Begin["`Private`"];
     H = NCPolyHankelMatrix[poly];
       
     (* remove constant *)
-    d = H[[1,1,1]];
+    d = SparseArray[{{H[[1,1,1]]}}];
     H[[1,1,1]] = 0;
-      
+    
     (* decompose Hankel matrix in full rank factors *)
     {lu, p, q, rank} = LUDecompositionWithCompletePivoting[H[[1]]];
     {l, u} = GetLUMatrices[lu];
     
+    If [rank == 0,
+        Return[{SparseArray[{},{Length[H],0,0}],
+                SparseArray[{},{0,0}],
+                SparseArray[{},{0,0}],
+                d}];
+    ];
+      
     (* permute rows and columns of l and u *)
     l[[p]] = l;
     u[[All, q]] = u;
@@ -585,6 +597,7 @@ Begin["`Private`"];
     u = u[[1 ;; rank, All]];
 
     (*
+    Print["H = ", Normal /@ H];
     Print["lu = ", lu];
     Print["l = ", l];
     Print["u = ", u];
@@ -597,8 +610,9 @@ Begin["`Private`"];
     (* calculate ai's *)
     linv = SparseArray[LinearSolve[Transpose[l].l, Transpose[l]]];
     uinv = SparseArray[Transpose[LinearSolve[u.Transpose[u],u]]];
-    A = Prepend[Map[-Dot[linv, #, uinv]&, Rest[H]], 
-                SparseArray[{{i_,i_}->1}, {rank,rank}]];
+    A = SparseArray[
+          Prepend[Map[-Dot[linv, #, uinv]&, Rest[H]], 
+                  SparseArray[{{i_,i_}->1}, {rank,rank}]]];
 
     (*
     Print["linv = ", linv];

@@ -89,10 +89,26 @@ Block[
 
   vars = {{a},{b,c}};
   NCExp = a**a + b**b + c**c + d**d;
-  PolyExp = NCToNCPoly[NCExp, vars];
-  NCExpExp = NCPolyToNC[PolyExp, vars];
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCMonomialToDigits::InvalidSymbol];
 
-  Print[PolyExp];
+  vars = {{a},{b,{c}}};
+  NCExp = a**a + b**b + c**c;
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCPoly::InvalidList];
+
+  vars = {{a},{b,c}};
+  NCExp = a**a + b**b + c**c +inv[a];
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCPoly::NotPolynomial];
+
+  NCExp = inv[a**a + b**b + c**c];
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCPoly::NotPolynomial];
 
   (* List functionality *)
 

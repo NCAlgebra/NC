@@ -14,6 +14,8 @@
 
 BeginPackage[ "NCRational`",
               "NCPolynomial`",
+              "NCPoly`",
+              "NCGBX`",
 	      "MatrixDecompositions`",
 	      "NCMatMult`",
               "NCUtil`",
@@ -100,7 +102,7 @@ Begin[ "`Private`" ]
                  SparseArray[{},{1,n}],
                  SparseArray[{{expr}}],
                  vars,
-                 {Linear -> True, Polynomial->True}]
+                 {Linear -> True, Polynomial -> True}]
     ];
   ];
 
@@ -147,6 +149,36 @@ Begin[ "`Private`" ]
 
   (* sums *)
   
+  NCToNCRationalPlusAux[a_ + b:(_. _inv)..., vars_List] := Module[
+    {poly,
+     A,B,C,D,
+     opts = {}},
+                        
+    Print["polynomial part = ", a];
+    Print["rational part = ", {b}];
+
+    (* convert polynomial part to NCPoly *)
+    poly = NCToNCPoly[a, {Flatten[vars]}];
+                        
+    Print["poly = ", poly];
+
+    (* calculate minimal realization *)
+    {A,B,C,D} = NCPolyRealization[poly];
+
+    Print["a = ", Normal[A]];
+    Print["b = ", Normal[B]];
+    Print["c = ", Normal[C]];
+    Print["d = ", Normal[D]];
+
+    If[ NCPolyLinearQ[poly],
+        AppendTo[opts, Linear -> True];
+    ];
+    AppendTo[opts, Polynomial -> True];
+                        
+    Return[ NCRational[A, B, C, D, vars, opts] ];
+                        
+  ];
+      
   NCToNCRationalAux[expr_Plus, vars_List] := 
     NCRPlus @@ Map[NCToNCRationalAux[#, vars]&, List @@ expr];
 

@@ -1,6 +1,6 @@
 << NCPolyGroebner`
 
-Block[
+Module[
   {a,b,c,d,
   vars,
   f,g,G,g1,g2,

@@ -59,11 +59,24 @@ Begin["`Private`"];
   NCToNCPoly[exp_Equal, vars_] := 
     NCToNCPoly[exp[[1]] - exp[[2]], vars];
 
-  NCToNCPoly[exp_, vars_] := 
-    NCPoly @@ Append[Transpose[
-                Map[GrabFactors, 
-                    GrabTerms[ExpandNonCommutativeMultiply[exp]]
-                ]], vars];
+  NCToNCPoly[exp_, vars_] := Module[
+    {factors},
+      
+    Check[
+      factors = Map[GrabFactors, 
+                    GrabTerms[ExpandNonCommutativeMultiply[exp]]];
+     ,
+      Return[$Failed]
+     ,
+      {NCPoly::NotPolynomial,
+       NCPoly::InvalidList,
+       NCPoly::SizeMismatch,
+       NCMonomialToDigits::InvalidSymbol}
+    ];
+    
+    Return[NCPoly @@ Append[Transpose[factors], vars]];
+      
+  ];
 
 
   (* NCPolyToNC *)

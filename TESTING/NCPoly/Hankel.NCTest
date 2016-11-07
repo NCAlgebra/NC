@@ -1,0 +1,101 @@
+<< NCPoly`
+
+Module[
+  {vars,poly,
+   H,Hx,Hy,
+   answer,
+   a,b,c,d},
+
+  vars = {{x, y}};
+  poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
+
+  {H, Hx, Hy} = NCPolyHankelMatrix[poly];
+  answer = SparseArray[
+           {{0, 0, 0, 1, -1},
+  	    {0, 0, 1, 0, 0},
+            {0, -1, 0, 0, 0},
+	    {1, 0, 0, 0, 0},
+	    {-1, 0, 0, 0, 0}}];
+  NCTest[H, answer];
+  answer = SparseArray[
+           {{0, 0, 1, 0, 0},
+  	    {0, 0, 0, 0, 0},
+	    {-1, 0, 0, 0, 0},
+	    {0, 0, 0, 0, 0},
+	    {0, 0, 0, 0, 0}}];
+  NCTest[Hx, answer];
+  answer = SparseArray[
+           {{0, -1, 0, 0, 0},
+  	    {1, 0, 0, 0, 0},
+	    {0, 0, 0, 0, 0},
+	    {0, 0, 0, 0, 0},
+	    {0, 0, 0, 0, 0}}];
+  NCTest[Hy, answer];
+
+  {a, b, c, d} = NCPolyRealization[poly];
+  answer = SparseArray[{
+    {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}},
+    {{0, 0, 0, 0}, {0, 0, -1, 0}, {0, 0, 0, 0}, {-1, 0, 0, 0}},
+    {{0, 0, 0, 0}, {0, 0, 0, -1}, {1, 0, 0, 0}, {0, 0, 0, 0}}
+    }];
+  NCTest[a, answer];
+  answer = SparseArray[{{-1}, {0}, {0}, {0}}];
+  NCTest[b, answer];
+  answer = SparseArray[{{0, 1, 0, 0}}];
+  NCTest[c, answer];
+  answer = SparseArray[{{0}}];
+  NCTest[d, answer];
+
+  vars = {{x,y}};
+  poly = NCPoly[{1, 1}, {{}, {x}}, vars];
+
+  {H, Hx, Hy} = NCPolyHankelMatrix[poly];
+  answer = SparseArray[
+           {{1, 1},
+  	    {1, 0}}];
+  NCTest[H, answer];
+  answer = SparseArray[
+           {{1, 0},
+  	    {0, 0}}];
+  NCTest[Hx, answer];
+  answer = SparseArray[
+           {{0, 0},
+  	    {0, 0}}];
+  NCTest[Hy, answer];
+
+  {a, b, c, d} = NCPolyRealization[poly];
+  answer = SparseArray[{
+    {{1, 0}, {0, 1}},
+    {{0, 0}, {-1, 0}},
+    {{0, 0}, {0, 0}}
+    }];
+  NCTest[a, answer];
+  answer = SparseArray[{{1}, {0}}];
+  NCTest[b, answer];
+  answer = SparseArray[{{0, 1}}];
+  NCTest[c, answer];
+  answer = SparseArray[{{1}}];
+  NCTest[d, answer];
+
+  vars = {{x,y}};
+  poly = NCPoly[{1}, {{}}, vars];
+
+  {H, Hx, Hy} = NCPolyHankelMatrix[poly];
+  answer = SparseArray[{{1}}];
+  NCTest[H, answer];
+  answer = SparseArray[{{0}}];
+  NCTest[Hx, answer];
+  answer = SparseArray[{{0}}];
+  NCTest[Hy, answer];
+
+  {a, b, c, d} = NCPolyRealization[poly];
+  answer = SparseArray[{},{3,0,0}];
+  NCTest[a, answer];
+  answer = SparseArray[{},{0,0}];
+  NCTest[b, answer];
+  answer = SparseArray[{},{0,0}];
+  NCTest[c, answer];
+  answer = SparseArray[{{1}}];
+  NCTest[d, answer];
+
+];
