@@ -149,10 +149,10 @@ Begin[ "`Private`" ]
 
   (* sums *)
   
-  NCToNCRationalPlusAux[a_ + b:(_. _inv)..., vars_List] := Module[
+  NCToNCRationalAux[a_ + b:(_. _inv)..., vars_List] := Module[
     {poly,
      A,B,C,D,
-     opts = {}},
+     rat, opts = {}},
                         
     Print["polynomial part = ", a];
     Print["rational part = ", {b}];
@@ -174,13 +174,22 @@ Begin[ "`Private`" ]
         AppendTo[opts, Linear -> True];
     ];
     AppendTo[opts, Polynomial -> True];
+
+    rat = NCRational[A, B, C, D, vars, opts];                  
+        
+    (* add rational part *)
+    If[ Length[{b}] > 0,
+        rat = NCRPlus @@ Prepend[Map[NCToNCRationalAux[#, vars]&, {b}], rat];
+    ];
                         
-    Return[ NCRational[A, B, C, D, vars, opts] ];
+    Return[rat];
                         
   ];
-      
+
+  (*
   NCToNCRationalAux[expr_Plus, vars_List] := 
     NCRPlus @@ Map[NCToNCRationalAux[#, vars]&, List @@ expr];
+  *)
 
   (* products *)
   

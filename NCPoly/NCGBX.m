@@ -40,10 +40,9 @@ Begin["`Private`"];
   (* NCToNCPoly *)
 
   Clear[GrabFactors];
+  GrabFactors[exp_?CommutativeQ] := {exp, {}};
   GrabFactors[a_. exp_NonCommutativeMultiply] := {a, List @@ exp};
   GrabFactors[a_. exp_Symbol] := {a, {exp}};
-  GrabFactors[exp_?CommutativeQ] := {exp, {}};
-  GrabFactors[exp_Symbol] := {1, {exp}};
   GrabFactors[_] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
 
   Clear[GrabTerms];
@@ -73,7 +72,8 @@ Begin["`Private`"];
        NCPoly::SizeMismatch,
        NCMonomialToDigits::InvalidSymbol}
     ];
-    
+
+    Print["factors = ", factors];
     Return[NCPoly @@ Append[Transpose[factors], vars]];
       
   ];

@@ -89,12 +89,15 @@ Begin["`Private`"];
         NCPoly[ vars
            ,
             KeySort[
-              AssociationThread[ 
-                NCFromDigits[
+              Merge[
+                Thread[ 
+                  NCFromDigits[
                     Map[ NCMonomialToDigits[#, varnames]&, monomials]
                    ,vars
-                  ],
-                  coeff
+                  ] ->  coeff
+                ]
+               ,
+                Total
               ]
             ]
         ]

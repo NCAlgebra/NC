@@ -91,9 +91,9 @@ Module[
   {a, b, c, d} = NCPolyRealization[poly];
   answer = SparseArray[{},{3,0,0}];
   NCTest[a, answer];
-  answer = SparseArray[{},{0,0}];
+  answer = SparseArray[{},{0,1}];
   NCTest[b, answer];
-  answer = SparseArray[{},{0,0}];
+  answer = SparseArray[{},{1,0}];
   NCTest[c, answer];
   answer = SparseArray[{{1}}];
   NCTest[d, answer];

@@ -583,8 +583,8 @@ Begin["`Private`"];
     
     If [rank == 0,
         Return[{SparseArray[{},{Length[H],0,0}],
-                SparseArray[{},{0,0}],
-                SparseArray[{},{0,0}],
+                SparseArray[{},{0,1}],
+                SparseArray[{},{1,0}],
                 d}];
     ];
       
