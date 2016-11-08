@@ -153,22 +153,22 @@ Begin[ "`Private`" ]
     {poly,
      A,B,C,D,
      rat, opts = {}},
-                        
-    Print["polynomial part = ", a];
-    Print["rational part = ", {b}];
-
+    
     (* convert polynomial part to NCPoly *)
     poly = NCToNCPoly[a, {Flatten[vars]}];
                         
-    Print["poly = ", poly];
-
     (* calculate minimal realization *)
     {A,B,C,D} = NCPolyRealization[poly];
 
+    (*
+    Print["polynomial term = ", a];
+    Print["rational terms = ", {b}];
+    Print["poly = ", poly];
     Print["a = ", Normal[A]];
     Print["b = ", Normal[B]];
     Print["c = ", Normal[C]];
     Print["d = ", Normal[D]];
+    *)
 
     If[ NCPolyLinearQ[poly],
         AppendTo[opts, Linear -> True];
@@ -318,8 +318,8 @@ Begin[ "`Private`" ]
   NCRTimes[term_NCRational] := Return[term];
 
   NCRTimes[a_NCRational, b_NCRational] := Module[
-    {n,m,vars,tmp,coeffs,degree,
-     orderA,orderB,
+    {m,vars,tmp,coeffs,
+     nA,nB,
      terms,A,B,C,D,polynomial},
 
     (* Evaluate a ** b *)
@@ -334,46 +334,72 @@ Begin[ "`Private`" ]
     (* polynomial? *)
     polynomial = And @@ Map[NCRPolynomialQ, terms];
 
+    (*
+    Print["a = ", a];
+    Print["b = ", b];
+    *)
+      
     (* multiplication by constant *)
       
-    orderA = NCROrder[a];
-    orderB = NCROrder[b];
+    nA = NCROrder[a];
+    nB = NCROrder[b];
 
-    If[ orderA == 0,
+    If[ nA == 0,
         Return[NCRational[b[[1]],a[[4,1,1]]*b[[2]],
                           b[[3]],a[[4,1,1]]*b[[4]],b[[5]]],
                           b[[6]],b[[7]]];
     ];
 
-    If[ orderB == 0,
+    If[ nB == 0,
         Return[NCRational[a[[1]],b[[4,1,1]]*a[[2]],
                           a[[3]],b[[4,1,1]]*a[[4]],a[[5]]],
                           a[[6]],a[[7]]];
     ];
 
-    (* multiplication by linear term *)
-      
-    If[ NCRLinearQ[b] && NCRStrictlyProperQ[a], 
+    If[ NCRLinearQ[b] && NCRLinearQ[a], 
+        
+        (* Multiplication of linear terms *)
+       
+        A = SparseArray[{1,i_,i_} -> 1,{m,3,3}];
+        
+        A[[All,1,2]] = Flatten[
+            CoefficientArrays[-NCRationalToNC[a][[1,1]], vars]
+        ];
+        A[[All,2,3]] = Flatten[
+            CoefficientArrays[-NCRationalToNC[b][[1,1]], vars]
+        ];
+        B = SparseArray[{3,1}->1,{3,1}];
+        C = SparseArray[{1,1}->1,{1,3}];
+        D = SparseArray[{},{1,1}];
+        
+        (*
+        Print["A = ", Map[Normal, A]];
+        Print["B = ", Map[Normal, B]];
+        Print["C = ", Map[Normal, C]];
+        Print["D = ", Map[Normal, D]];
+        *)
+        
+        Return[NCRational[A, B, C, D, a[[5]], {Polynomial -> True}]];
+        
+    ];
+
+    If [ NCRLinearQ[b] && NCRStrictlyProperQ[a], 
         
         (* Multiplication on the right by a linear term *)
        
         tmp = NCRationalToNC[b][[1,1]];
         coeffs = Flatten[CoefficientArrays[tmp, vars]];
-        degree = Length[coeffs] - 1;
         
         (*
         Print["tmp = ", tmp];
         Print["coeffs = ", Normal[coeffs]];
-        Print["degree = ", degree];
         *)
         
-        n = NCROrder[a];
- 
-        A = PadRight[a[[1]], {m,n+1,n+1}];
-        A[[All,1;;n,{n+1}]] = Outer[Times, -coeffs, a[[2]]];
-        A[[1,n+1,n+1]] = 1;
-        B = SparseArray[{n+1,1}->1,{n+1,1}];
-        C = PadRight[a[[3]], {1,n+1}, 0];
+        A = PadRight[a[[1]], {m,nA+1,nA+1}];
+        A[[All,1;;nA,{nA+1}]] = Outer[Times, -coeffs, a[[2]]];
+        A[[1,nA+1,nA+1]] = 1;
+        B = SparseArray[{nA+1,1}->1,{nA+1,1}];
+        C = PadRight[a[[3]], {1,nA+1}, 0];
         D = a[[4]];
        
         (*
@@ -394,21 +420,17 @@ Begin[ "`Private`" ]
        
         tmp = NCRationalToNC[a][[1,1]];
         coeffs = Flatten[CoefficientArrays[tmp, vars]];
-        degree = Length[coeffs] - 1;
           
         (*
         Print["tmp = ", tmp];
         Print["coeffs = ", Normal[coeffs]];
-        Print["degree = ", degree];
         *)
         
-        n = NCROrder[b];
- 
-        A = PadLeft[b[[1]], {m,n+1,n+1}];
-        A[[All,{1},2;;n+1]] = Outer[Times, -coeffs, b[[3]]];
+        A = PadLeft[b[[1]], {m,nB+1,nB+1}];
+        A[[All,{1},2;;nB+1]] = Outer[Times, -coeffs, b[[3]]];
         A[[1,1,1]] = 1;
-        B = PadLeft[b[[2]], {n+1,1}, 0];
-        C = SparseArray[{1,1}->1,{1,n+1}];
+        B = PadLeft[b[[2]], {nB+1,1}, 0];
+        C = SparseArray[{1,1}->1,{1,nB+1}];
         D = b[[4]];
        
         (*
@@ -432,7 +454,7 @@ Begin[ "`Private`" ]
             {1}
           ]
         ];
-    A[[1,1;;orderA,orderA+1;;orderA+orderB]] = - a[[2]] . b[[3]];
+    A[[1,1;;nA,nA+1;;nA+nB]] = - a[[2]] . b[[3]];
       
     Return[
       NCRational[A, Join[a[[2]] . b[[4]], b[[2]]],

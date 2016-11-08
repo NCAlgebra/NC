@@ -264,6 +264,12 @@ Begin["`Private`"];
   (* IntegerDigits *)
 
   (* DEG Ordered *)
+  NCIntegerDigits[{d_Integer, n_Integer}, 1] := 
+    Table[0, d];
+
+  NCIntegerDigits[{d_Integer, n__Integer}, {1}] := 
+    Table[0, d];
+              
   NCIntegerDigits[{d_Integer, n_Integer}, base_Integer] := 
     IntegerDigits[n, base, d];
 
@@ -290,6 +296,9 @@ Begin["`Private`"];
 
   (* NCDigitsToIndex *)
     
+  NCPolyIntegersToIndexAux[{degree_Integer, i_Integer}, 1] := 
+    degree + 1;
+
   NCPolyIntegersToIndexAux[{degree_Integer, i_Integer}, n_Integer] := 
     (1 - n^degree)/(1-n) + i + 1;
 
@@ -538,6 +547,7 @@ Begin["`Private`"];
     Print["H = ", Normal[H]];
     Print["digits = ", digits];
     Print["sdigits = ", sdigits];
+    Print["base = ", base];
     Print["index = ", index];
     Print["rules = ", rules];
     Print["mons = ", mons];

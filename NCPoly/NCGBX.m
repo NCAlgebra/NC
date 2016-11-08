@@ -73,7 +73,8 @@ Begin["`Private`"];
        NCMonomialToDigits::InvalidSymbol}
     ];
 
-    Print["factors = ", factors];
+    (* Print["factors = ", factors]; *)
+      
     Return[NCPoly @@ Append[Transpose[factors], vars]];
       
   ];
