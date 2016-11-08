@@ -208,7 +208,6 @@ Module[
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 4];
 
-
   (* Nonmiminal monomial *)
 
   rat = NCRational[
@@ -301,6 +300,20 @@ Module[
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 2];
 
+  poly = 1 + x + y;
+  expr = NCToNCRational[poly, vars];
+  answer = NCRational[
+             SparseArray[{
+               {{1, 0}, {0, 1}}, 
+               {{0, 0}, {-1, 0}}, 
+               {{0, 0}, {-1, 0}}}],
+             SparseArray[{{1}, {0}}], 
+             SparseArray[{{0,1}}], 
+	     SparseArray[{{1}}], vars, {Linear->True,Polynomial->True}];
+  NCTest[expr == answer, True];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 2];
+
   poly = 2 + 3 x;
   expr = NCToNCRational[poly, vars];
   NCTest[NCRationalToNC[expr],{{poly}}];
@@ -315,6 +328,11 @@ Module[
   expr = NCToNCRational[poly, vars];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 3];
+
+  poly = 1 + x + x**y + y**x;
+  expr = NCToNCRational[poly, vars];
+  NCTest[NCRationalToNC[expr],{{poly}}];
+  NCTest[NCROrder[expr], 4];
 
   poly = x**y+y**x;
   expr = NCToNCRational[poly, vars];
@@ -352,6 +370,11 @@ Module[
   expr = NCToNCRational[poly, vars];
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
   NCTest[NCROrder[expr],1];
+
+  poly = inv[x] + inv[y];
+  expr = NCToNCRational[poly, vars];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],2];
 
   poly = 1 + inv[x];
   expr = NCToNCRational[poly, vars];
@@ -397,7 +420,47 @@ Module[
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
   NCTest[NCROrder[expr],2];
 
-  
+  poly = 1 + 2 y**inv[x] + 3 inv[y]**x;
+  expr = NCToNCRational[poly, vars];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],4];
+
+  Print["**********"];
+
+  poly = y**inv[1 - x**y];
+  expr = NCToNCRational[poly, vars];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],2];
+
+];
+
+If[0,
+
+  poly = inv[1 - y**x]**y;
+  expr = NCToNCRational[poly, vars];
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
+  NCTest[NCROrder[expr],2];
+
+  (* rational cancellation *)
+  poly = y**inv[1 - x**y] + inv[1 - y**x]**y;
+  expr = NCToNCRational[poly, vars];
+   
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
+  NCTest[NCROrder[expr],10];
+
+  rat = NCRMinimalRealization[expr];
+  NCTest[NCSimplifyRational[NCRationalToNC[rat]],{{NCSimplifyRational[poly]}}];
+  NCTest[NCROrder[rat],2];
+
+  poly = y**inv[1 - x**y] - inv[1 - y**x]**y;
+  expr = NCToNCRational[poly, vars];
+   
+  NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{NCSimplifyRational[poly]}}];
+  NCTest[NCROrder[expr],10];
+
+  rat = NCRMinimalRealization[expr];
+  (* NCTest[NCSimplifyRational[NCRationalToNC[rat]],{{NCSimplifyRational[poly]}}]; *)
+  NCTest[NCROrder[rat],0];
 
 ];
 

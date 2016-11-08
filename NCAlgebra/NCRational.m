@@ -147,50 +147,6 @@ Begin[ "`Private`" ]
     ];
   ];
 
-  (* sums *)
-  
-  NCToNCRationalAux[a_ + b:(_. _inv)..., vars_List] := Module[
-    {poly,
-     A,B,C,D,
-     rat, opts = {}},
-    
-    (* convert polynomial part to NCPoly *)
-    poly = NCToNCPoly[a, {Flatten[vars]}];
-                        
-    (* calculate minimal realization *)
-    {A,B,C,D} = NCPolyRealization[poly];
-
-    (*
-    Print["polynomial term = ", a];
-    Print["rational terms = ", {b}];
-    Print["poly = ", poly];
-    Print["a = ", Normal[A]];
-    Print["b = ", Normal[B]];
-    Print["c = ", Normal[C]];
-    Print["d = ", Normal[D]];
-    *)
-
-    If[ NCPolyLinearQ[poly],
-        AppendTo[opts, Linear -> True];
-    ];
-    AppendTo[opts, Polynomial -> True];
-
-    rat = NCRational[A, B, C, D, vars, opts];                  
-        
-    (* add rational part *)
-    If[ Length[{b}] > 0,
-        rat = NCRPlus @@ Prepend[Map[NCToNCRationalAux[#, vars]&, {b}], rat];
-    ];
-                        
-    Return[rat];
-                        
-  ];
-
-  (*
-  NCToNCRationalAux[expr_Plus, vars_List] := 
-    NCRPlus @@ Map[NCToNCRationalAux[#, vars]&, List @@ expr];
-  *)
-
   (* products *)
   
   NCToNCRationalAux[expr_NonCommutativeMultiply, vars_List] := 
@@ -232,6 +188,71 @@ Begin[ "`Private`" ]
     ];
       
   ];
+
+  (* sums *)
+  
+  (* NCToNCRationalAux[a_ + b:(_. _inv)..., vars_List] := Module[ *)
+  Clear[NCToNCRationalPlusAux];
+  NCToNCRationalPlusAux[a_, b_List, vars_List] := Module[
+    {poly,
+     A,B,C,D,
+     rat, opts = {}},
+
+    Print["a = ", a];
+    Print["b = ", b];
+
+    (* polynomial part *)
+    rat = If[ a =!= 0,
+        
+        (* convert polynomial part to NCPoly *)
+        poly = NCToNCPoly[a, {Flatten[vars]}];
+
+        (* calculate minimal realization *)
+        {A,B,C,D} = NCPolyRealization[poly];
+
+        (* *)
+        Print["polynomial term = ", a];
+        Print["rational terms = ", b];
+        Print["poly = ", poly];
+        Print["a = ", Normal[A]];
+        Print["b = ", Normal[B]];
+        Print["c = ", Normal[C]];
+        Print["d = ", Normal[D]];
+        (* *)
+
+        If[ NCPolyLinearQ[poly],
+            AppendTo[opts, Linear -> True];
+        ];
+        AppendTo[opts, Polynomial -> True];
+
+        {NCRational[A, B, C, D, vars, opts]}
+       ,
+        (* If a === 0, *) 
+        {}
+    ];
+        
+    (* add rational part *)
+    If[ Length[b] > 0,
+        rat = Join[rat, Map[NCToNCRationalAux[#, vars]&, b]];
+    ];
+
+    Print["rat = ", rat];
+      
+    Return[NCRPlus @@ rat];
+                        
+  ];
+
+  NCToNCRationalAux[Plus[a__?(FreeQ[inv])], vars_List] := 
+    NCToNCRationalPlusAux[Plus[a], {}, vars];
+  NCToNCRationalAux[a__?(FreeQ[inv]) + b__, vars_List] :=
+    NCToNCRationalPlusAux[Plus[a], {b}, vars];
+  NCToNCRationalAux[Plus[b__], vars_List] :=
+    NCToNCRationalPlusAux[0, List @@ b, vars];
+                       
+  (*
+  NCToNCRationalAux[expr_Plus, vars_List] := 
+    NCRPlus @@ Map[NCToNCRationalAux[#, vars]&, List @@ expr];
+  *)
 
   NCToNCRationalAux[expr_, vars_] :=
     (Message[NCToNCRational::Failed, "'" <> ToString[expr] 
@@ -324,7 +345,7 @@ Begin[ "`Private`" ]
 
     (* Evaluate a ** b *)
       
-    (* Print["> NCRTimes"]; *)
+    Print["> NCRTimes"];
 
     (* Number of variables + 1 *)
     m = Length[a[[5]]] + 1;
@@ -334,10 +355,10 @@ Begin[ "`Private`" ]
     (* polynomial? *)
     polynomial = And @@ Map[NCRPolynomialQ, terms];
 
-    (*
+    (* *)
     Print["a = ", a];
     Print["b = ", b];
-    *)
+    (* *)
       
     (* multiplication by constant *)
       
