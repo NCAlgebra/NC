@@ -198,8 +198,10 @@ Begin[ "`Private`" ]
      A,B,C,D,
      rat, opts = {}},
 
+    (*
     Print["a = ", a];
     Print["b = ", b];
+    *)
 
     (* polynomial part *)
     rat = If[ a =!= 0,
@@ -210,7 +212,7 @@ Begin[ "`Private`" ]
         (* calculate minimal realization *)
         {A,B,C,D} = NCPolyRealization[poly];
 
-        (* *)
+        (*
         Print["polynomial term = ", a];
         Print["rational terms = ", b];
         Print["poly = ", poly];
@@ -218,7 +220,7 @@ Begin[ "`Private`" ]
         Print["b = ", Normal[B]];
         Print["c = ", Normal[C]];
         Print["d = ", Normal[D]];
-        (* *)
+        *)
 
         If[ NCPolyLinearQ[poly],
             AppendTo[opts, Linear -> True];
@@ -236,7 +238,7 @@ Begin[ "`Private`" ]
         rat = Join[rat, Map[NCToNCRationalAux[#, vars]&, b]];
     ];
 
-    Print["rat = ", rat];
+    (* Print["rat = ", rat]; *)
       
     Return[NCRPlus @@ rat];
                         
@@ -345,7 +347,7 @@ Begin[ "`Private`" ]
 
     (* Evaluate a ** b *)
       
-    Print["> NCRTimes"];
+    (* Print["> NCRTimes"]; *)
 
     (* Number of variables + 1 *)
     m = Length[a[[5]]] + 1;
@@ -355,10 +357,10 @@ Begin[ "`Private`" ]
     (* polynomial? *)
     polynomial = And @@ Map[NCRPolynomialQ, terms];
 
-    (* *)
-    Print["a = ", a];
-    Print["b = ", b];
-    (* *)
+    (*
+    Print["a = ", Map[Normal,a]];
+    Print["b = ", Map[Normal,b]];
+    *)
       
     (* multiplication by constant *)
       

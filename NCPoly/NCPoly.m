@@ -578,7 +578,8 @@ Begin["`Private`"];
   NCPolyRealization[poly_NCPoly] := Module[
     {H, 
      lu,p,q,rank,l,u,
-     A,b,c,d},
+     A,b,c,d,
+     T},
 
     (* calculate Hankel matrices *)
     H = NCPolyHankelMatrix[poly];
@@ -608,9 +609,9 @@ Begin["`Private`"];
 
     (*
     Print["H = ", Normal /@ H];
-    Print["lu = ", lu];
-    Print["l = ", l];
-    Print["u = ", u];
+    Print["lu = ", Normal[lu]];
+    Print["l = ", Normal[l]];
+    Print["u = ", Normal[u]];
     *)
       
     (* calculate b and c *)
@@ -628,7 +629,83 @@ Begin["`Private`"];
     Print["linv = ", linv];
     Print["uinv = ", uinv];
     *)
-      
+    
+    (* Permute *)
+    If[ rank > 1,
+
+        (* Permute B *)
+        p = {LUPartialPivoting[b]};
+        p = Join[Complement[Range[rank], p], p];
+
+        A[[2;;,All,All]] = A[[2;;,p,p]];
+        b = b[[p]];
+        c = c[[All,p]];
+
+        (*
+        Print["A = ", Normal[A]];
+        Print["b = ", Normal[b]];
+        Print["c = ", Normal[c]];
+        *)
+
+        If[ c[[1,-1]] =!= 0,
+            Print["*** WARNING NCPolyRealization Permutation is not enough! ***"];
+        ];
+        
+        If [ rank > 2,
+             (* Permute C *)
+
+             p = {LUPartialPivoting[c[[All, 1;;rank-1]]]};
+             p = Join[p, Complement[Range[rank-1], p], {rank}];
+
+             A[[2;;,All,All]] = A[[2;;,p,p]];
+             b = b[[p]];
+             c = c[[All,p]];
+
+             (*
+             Print["A = ", Normal[A]];
+             Print["b = ", Normal[b]];
+             Print["c = ", Normal[c]];
+             *)
+        ];
+        
+    ];
+
+    (* Full blown orthogonalization *)
+    If[ False,
+        
+        (* Normalize B *)
+        T = Orthogonalize[Join[NullSpace[Transpose[b]], Transpose[b]]];
+        A[[2;;,All,All]] = Map[T.#.Transpose[T]&, A[[2;;,All,All]]];
+        b = T.b;
+        c = c.Transpose[T];
+
+        (*
+        Print["T = ", T];
+        Print["A = ", Normal[A]];
+        Print["b = ", Normal[b]];
+        Print["c = ", Normal[c]];
+        *)
+
+        Print["C OK = ", c[[1,-1]] == 0];
+        
+        (* Normalize C *)
+        cred = c[[All,1;;-2]];
+        T = Transpose[Orthogonalize[Join[cred,NullSpace[cred]]]];
+        T = PadRight[T, {rank, rank}];
+        T[[rank,rank]] = 1;
+        A[[2;;,All,All]] = Map[T.#.Transpose[T]&, A[[2;;,All,All]]];
+        b = T.b;
+        c = c.Transpose[T];
+
+        (*
+        Print["T = ", T];
+        Print["A = ", Normal[A]];
+        Print["b = ", Normal[b]];
+        Print["c = ", Normal[c]];
+        *)
+        
+    ];
+            
     Return[{A,b,c,d}];
       
   ];

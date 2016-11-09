@@ -94,25 +94,25 @@ Module[
   answer = NCRational[
              SparseArray[{
                {{1, 0}, {0, 1}}, 
-               {{0, 0}, {-1, 0}}, 
+               {{0, -1}, {0, 0}}, 
                {{0, 0}, {0, 0}}}],
-             SparseArray[{{A}, {0}}], 
-             SparseArray[{{0,1}}], 
+             SparseArray[{{0}, {A}}], 
+             SparseArray[{{1,0}}], 
 	     SparseArray[{{B}}], vars, {Linear->True,Polynomial->True}];
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 2];
-  
+
   poly = A x + B y;
   vars = {x,y};
   expr = NCToNCRational[poly, {x,y}];
   answer = NCRational[
              SparseArray[{
                {{1, 0}, {0, 1}}, 
-               {{0, 0}, {-A/B, 0}}, 
-               {{0, 0}, {-1, 0}}}],
-             SparseArray[{{B}, {0}}], 
-             SparseArray[{{0,1}}], 
+               {{0, -A/B}, {0, 0}}, 
+               {{0, -1}, {0, 0}}}],
+             SparseArray[{{0}, {B}}], 
+             SparseArray[{{1,0}}], 
 	     SparseArray[{{0}}], vars, {Linear->True,Polynomial->True}];
   NCTest[expr == answer, True];
   NCTest[NCExpand[NCRationalToNC[expr]],{{poly}}];
@@ -263,10 +263,10 @@ Module[
   answer = NCRational[
              SparseArray[{
                {{1, 0}, {0, 1}}, 
-               {{0, 0}, {-1, 0}}, 
+               {{0, -1}, {0, 0}}, 
                {{0, 0}, {0, 0}}}],
-             SparseArray[{{1}, {0}}], 
-             SparseArray[{{0,1}}], 
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
 	     SparseArray[{{1}}], vars, {Linear->True,Polynomial->True}];
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
@@ -278,9 +278,9 @@ Module[
              SparseArray[{
                {{1, 0}, {0, 1}}, 
                {{0, 0}, {0, 0}}, 
-               {{0, 0}, {-1, 0}}}],
-             SparseArray[{{1}, {0}}], 
-             SparseArray[{{0,1}}], 
+               {{0, -1}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
 	     SparseArray[{{1}}], vars, {Linear->True,Polynomial->True}];
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
@@ -291,10 +291,10 @@ Module[
   answer = NCRational[
              SparseArray[{
                {{1, 0}, {0, 1}}, 
-               {{0, 0}, {-1, 0}}, 
-               {{0, 0}, {-1, 0}}}],
-             SparseArray[{{1}, {0}}], 
-             SparseArray[{{0,1}}], 
+               {{0, -1}, {0, 0}}, 
+               {{0, -1}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
 	     SparseArray[{{0}}], vars, {Linear->True,Polynomial->True}];
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
@@ -305,10 +305,10 @@ Module[
   answer = NCRational[
              SparseArray[{
                {{1, 0}, {0, 1}}, 
-               {{0, 0}, {-1, 0}}, 
-               {{0, 0}, {-1, 0}}}],
-             SparseArray[{{1}, {0}}], 
-             SparseArray[{{0,1}}], 
+               {{0, -1}, {0, 0}}, 
+               {{0, -1}, {0, 0}}}],
+             SparseArray[{{0}, {1}}], 
+             SparseArray[{{1,0}}], 
 	     SparseArray[{{1}}], vars, {Linear->True,Polynomial->True}];
   NCTest[expr == answer, True];
   NCTest[NCRationalToNC[expr],{{poly}}];
@@ -333,7 +333,7 @@ Module[
   expr = NCToNCRational[poly, vars];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 4];
-
+  
   poly = x**y+y**x;
   expr = NCToNCRational[poly, vars];
   NCTest[NCRationalToNC[expr],{{poly}}];
@@ -363,6 +363,11 @@ Module[
   expr = NCToNCRational[poly, vars];
   NCTest[NCRationalToNC[expr],{{poly}}];
   NCTest[NCROrder[expr], 4];
+
+  poly = NCExpand[(1+x+y)**(1+x-y)**(1+2 x+3 y)**(1 + 4 x + 7 y)**(1+x-3 y)**(1-y)**(1-y+9 x)];
+  expr = NCToNCRational[poly, vars];
+  tmp = NCRationalToNC[expr];
+  NCTest[NCROrder[expr], 8];
 
   (* rational *)
 
@@ -424,8 +429,6 @@ Module[
   expr = NCToNCRational[poly, vars];
   NCTest[NCSimplifyRational[NCRationalToNC[expr]],{{poly}}];
   NCTest[NCROrder[expr],4];
-
-  Print["**********"];
 
   poly = y**inv[1 - x**y];
   expr = NCToNCRational[poly, vars];
