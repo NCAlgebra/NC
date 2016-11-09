@@ -207,7 +207,15 @@ Begin[ "`Private`" ]
     rat = If[ a =!= 0,
         
         (* convert polynomial part to NCPoly *)
-        poly = NCToNCPoly[a, {Flatten[vars]}];
+        poly = Check[ NCToNCPoly[a, {Flatten[vars]}]
+                      ,
+                      Message[NCToNCRational::Failed, 
+                              "Expression '" <> ToString[a] <> 
+                              "' is not a simple polynomial"];
+                      Return[$Failed]
+                     ,
+                      NCPoly::NotPolynomial
+               ];
 
         (* calculate minimal realization *)
         {A,B,C,D} = NCPolyRealization[poly];
@@ -303,35 +311,78 @@ Begin[ "`Private`" ]
   Normal[rat_NCRational] ^:= (List @@ rat)[[1;;4]];
   
   (* NCRational Inverse *)
-  NCRInverse[rrat_NCRational] := Module[
-    {rat = rrat, n, m, d},
+  NCRInverse[rat_NCRational] := Module[
+    {n, b1, c1, 
+     BB, CC, DDi, AA},
 
-    If[ NCRStrictlyProperQ[rat],
-
-        (* strictly proper inverse embedding *)
-        n = NCROrder[rat];
-        
-        m = Length[rat[[5]]] + 1;
-        (* grow all coefficients *)
-        rat[[1]] = PadLeft[rat[[1]], {m,n+1,n+1}];
-        (* add c and b to the first coefficient *)
-        rat[[1,1,{1},2;;]] = -rat[[3]]; (* c *)
-        rat[[1,1,2;;,{1}]] = rat[[2]]; (* b *)
-
-        rat[[2]] = SparseArray[{1,1}->1,{n+1,1}];
-        rat[[3]] = SparseArray[{1,1}->1,{1,n+1}]; 
-
-       ,
-
-        (* proper inverse embedding (scalar) *)
-        d = rat[[4,1,1]];
-        rat[[1,1]] +=  rat[[2]] . rat[[3]] / d;
-        rat[[2]] = -rat[[2]] / d;
-        rat[[3]] = rat[[3]] / d;
-        rat[[4]] = SparseArray[{{1/d}}];
-
+    (* Is upper triangular? *)
+    If[ Map[UpperTriangularize, A] != A,
+       Print["NOT UpperTriangular"];
+       Print[Map[Total[Abs[#]]&, A[[2;;]], {2}]];
     ];
+       
+    n = NCROrder[rat];
+    b1 = rat[[2, n, 1]];
+    c1 = rat[[3, 1, 1]];
+    BB = Join[rat[[2, 1;;n-1, {1}]], rat[[1,1,1;;n-1,{1}]], 2];
+    CC = Join[rat[[1,1,{n},2;;n]], rat[[3, {1}, 2;;n]]];
+    DDi = {{1/b1, 0},{rat[[4,1,1]]/b1/c1, -1/c1}};
+    AA = rat[[1, All, 1;;n-1, 2;;n]];
+
+    (*
+    Print["b1 = ", b1];
+    Print["c1 = ", c1];
+    Print["BB = ", Normal[BB]];
+    Print["CC = ", Normal[CC]];
+    Print["DDi = ", DDi];
+    Print["AA = ", Normal[AA]];
+    *)
+
+    AA[[1]] -= BB . DDi . CC;
+    BB = BB . DDi[[All, {2}]];
+    CC = DDi[[{1}, All]]. CC;
+
+    (*
+    Print["AA = ", Normal[AA]];
+    Print["BB = ", Normal[BB]];
+    Print["CC = ", Normal[CC]];
+    *)
+
+    Return[NCRational[AA, BB, CC, {{0}}, rat[[5]], {}]];
       
+  ] /; NCRPolynomialQ[rat];
+  
+  NCRInverse[Rat_NCRational] := Module[
+    {rat = Rat, n, m},
+
+    (* strictly proper inverse embedding *)
+    n = NCROrder[rat];
+    m = Length[rat[[5]]] + 1;
+      
+    (* grow all coefficients *)
+    rat[[1]] = PadLeft[rat[[1]], {m,n+1,n+1}];
+
+    (* add c and b to the first coefficient *)
+    rat[[1,1,{1},2;;]] = -rat[[3]]; (* c *)
+    rat[[1,1,2;;,{1}]] = rat[[2]]; (* b *)
+
+    (* create new b's and c's *)
+    rat[[2]] = SparseArray[{1,1}->1,{n+1,1}];
+    rat[[3]] = SparseArray[{1,1}->1,{1,n+1}]; 
+
+    Return[rat];
+      
+  ] /; NCRStrictlyProperQ[Rat];
+
+  NCRInverse[Rat_NCRational] := Module[
+    {rat = Rat, d},
+
+    (* proper inverse embedding (scalar) *)
+    rat[[1,1]] +=  rat[[2]] . rat[[3]] / rat[[4,1,1]];
+    rat[[2]] = -rat[[2]] / rat[[4,1,1]];
+    rat[[3]] = rat[[3]] / rat[[4,1,1]];
+    rat[[4]] = SparseArray[{{1/rat[[4,1,1]]}}];
+
     Return[rat];
       
   ];

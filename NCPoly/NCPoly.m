@@ -574,7 +574,6 @@ Begin["`Private`"];
   ];
 
   (* NCPolyRealization *)
-
   NCPolyRealization[poly_NCPoly] := Module[
     {H, 
      lu,p,q,rank,l,u,
