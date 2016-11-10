@@ -11,7 +11,7 @@ Members are:
 
 The format is compatible with AMS-LaTeX.
 
-Should work better then the Mathematica `TeXForm` :)
+Should work better than the Mathematica `TeXForm` :)
 
 ## NCTeXFormSetStarStar {#NCTeXFormSetStarStar}
 

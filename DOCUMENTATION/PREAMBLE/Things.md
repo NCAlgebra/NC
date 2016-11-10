@@ -33,11 +33,6 @@ expect).
 
 `NCGB` runs in conjunction with `NCAlgebra`.
 
-## Groups
-
-You can compute a complete list of rewrite rules for Groups using
-`NCGB`. See demos at http://math.ucsd.edu/~ncalg.
-
 ## NCGBX
 
 `NCGBX` is a 100% Mathematica version of our NC Groebner Basis

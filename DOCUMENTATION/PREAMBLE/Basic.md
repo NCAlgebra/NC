@@ -1,15 +1,18 @@
 # Most Basic Commands {#MostBasicCommands}
 
-First you must load in NCAlgebra with the following command 
+This chapter provides a gentle introduction to some of the commands
+available in `NCAlgebra`. Before you can use `NCAlgebra` you first
+load it with the following commands:
 
-    In[1]:= <<NC`
-    In[2]:= <<NCAlgebra`
+    In[1]:= << NC`
+    In[2]:= << NCAlgebra`
 
 ## To Commute Or Not To Commute?
 
-In `NCAlgebra`, the operator `**` denotes *noncommutative multiplication*.
+In `NCAlgebra`, the operator `**` denotes *noncommutative
+multiplication*.
 
-At present, single-letter lower case variables are non-commutative by
+At present, single-letter lower case variables are noncommutative by
 default and all others are commutative by default.
 
 We consider non-commutative lower case variables in the following
@@ -22,7 +25,10 @@ examples:
     In[5]:= A**b-b**A
     Out[5]= 0
 
-`CommuteEverything` temporarily makes all noncommutative symbols appearing in a given expression to behave as if they were commutative and returns the resulting commutative expression:
+One of Bill's favorite commands is `CommuteEverything`, which
+temporarily makes all noncommutative symbols appearing in a given
+expression to behave as if they were commutative and returns the
+resulting commutative expression:
 
     In[6]:= CommuteEverything[a**b-b**a]
     Out[6]= 0
@@ -32,7 +38,7 @@ examples:
 
 `EndCommuteEverything` restores the original noncommutative behavior.
 
-`SetNonCommutative` makes symbols behave permanently as noncommutative:
+`SetNonCommutative` can make any symbol behave as noncommutative:
 
     In[9]:= SetNonCommutative[A,B]
     In[10]:= A**B-B**A
@@ -47,11 +53,30 @@ examples:
     In[14]:= A**a-a**A
     Out[14]= -a**A+A**a
 
-`SetCommutative` makes symbols permanently behave as commutative:
+`SetCommutative` makes symbols behave as commutative:
 
     In[15]:= SetCommutative[v];
     In[16]:= v**b
     Out[16]= b v
+
+## Inverses
+
+The multiplicative identity is denoted `Id` in the program. At the
+present time, `Id` is set to 1.
+
+A symbol `a` may have an inverse, which will be denoted by
+`inv[a]`. For example:
+
+    In[17]:= Id
+    Out[17]= 1
+    In[18]:= inv[a**b]
+    Out[18]= inv[a**b]
+    In[19]:= inv[a]**a
+    Out[19]= 1
+    In[20]:= a**inv[a]
+    Out[20]= 1
+    In[21]:= a**b**inv[b]
+    Out[21]= a
 
 ## Transposes and Adjoints
 
@@ -60,56 +85,52 @@ examples:
 `aj[x]` denotes the adjoint of symbol `x`
    
 The properties of transposes and adjoints that everyone uses
-constantly are built-in:
+constantly are built-in. For example:
 
-    In[17]:= tp[a**b]
-    Out[17]= tp[b]**tp[a]
-    In[18]:= tp[5]
-    Out[18]= 5
-    In[19]:= tp[2+3I]   (* I is the imaginary unit *)
-    Out[19]= 2+3 I
-    In[20]:= tp[a]
-    Out[20]= tp[a]
-    In[21]:= tp[a+b]
-    Out[21]= tp[a]+tp[b]
-    In[22]:= tp[6x]
-    Out[22]= 6 tp[x]
-    In[23]:= tp[tp[a]]
-    Out[23]= a
-    In[24]:= aj[5]
-    Out[24]= 5
-    In[25]:= aj[2+3I]
-    Out[25]= 2-3 I
-    In[26]:= aj[a]
-    Out[26]= aj[a]
-    In[27]:= aj[a+b]
-    Out[27]= aj[a]+aj[b]
-    In[28]:= aj[6x]
-    Out[28]= 6 aj[x]
-    In[29]:= aj[aj[a]]
-    Out[29]= a
+    In[22]:= tp[a**b]
+    Out[22]= tp[b]**tp[a]
+    In[23]:= tp[5]
+    Out[23]= 5
+    In[24]:= tp[2+3I]   (* I is the imaginary unit *)
+    Out[24]= 2+3 I
+    In[25]:= tp[a]
+    Out[25]= tp[a]
+    In[26]:= tp[a+b]
+    Out[26]= tp[a]+tp[b]
+    In[27]:= tp[6x]
+    Out[27]= 6 tp[x]
+    In[28]:= tp[tp[a]]
+    Out[28]= a
+	
+For `aj`:
 
-## Inverses
-
-The multiplicative identity is denoted `Id` in the program. At the present time, `Id` is set to 1.
-
-A symbol `a` may have an inverse, which will be denoted by `inv[a]`.
-
-    In[30]:= Id
-    Out[30]= 1
-    In[31]:= inv[a**b]
-    Out[31]= inv[a**b]
-    In[32]:= inv[a]**a
-    Out[32]= 1
-    In[33]:= a**inv[a]
-    Out[33]= 1
-    In[34]:= a**b**inv[b]
+    In[29]:= aj[5]
+    Out[29]= 5
+    In[30]:= aj[2+3I]
+    Out[30]= 2-3 I
+    In[31]:= aj[a]
+    Out[31]= aj[a]
+    In[32]:= aj[a+b]
+    Out[32]= aj[a]+aj[b]
+    In[33]:= aj[6x]
+    Out[33]= 6 aj[x]
+    In[34]:= aj[aj[a]]
     Out[34]= a
+
+Since v.5.0 transposes and adjoints in a notebook environment render
+as $x^T$ and $x^*$.
 
 ## Expand and Collect
 
 One can collect noncommutative terms involving same powers of a symbol
-using `NCCollect`. `NCExpand` expand noncommutative products.
+using `NCCollect`. There is also a stronger version of collect called
+`NCStrongCollect`. `NCCollect` groups terms by degree before
+collecting and `NCStrongCollect` does not. As a result,
+`NCStrongCollect` often collects more than one would normally expect.
+
+`NCExpand` expands noncommutative products.
+
+For example:
 
     In[35]:= NCExpand[(a+b)**x]
     Out[35]= a**x+b**x
@@ -117,16 +138,16 @@ using `NCCollect`. `NCExpand` expand noncommutative products.
     Out[36]= (a+b)**x
     In[37]:= NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]
     Out[37]= z+tp[x]**(a+b)**x
-
+	
 ## Replace
 
-The Mathematica substitute commands, e.g. `Replace`, `ReplaceAll`
-(`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,
-so you must use our `NC` versions of these commands:
+The Mathematica substitute commands, e.g. `ReplaceAll` (`/.`) and
+`ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`, so you
+must use our `NC` versions of these commands:
 
-    In[38]:= NCReplace[x**a**b,a**b->c]
+    In[38]:= NCReplaceAll[x**a**b,a**b->c]
     Out[38]= x**a**b
-    In[39]:= NCReplaceAll[tp[b**a]+b**a,b**a->p]
+    In[39]:= NCReplaceAll[tp[a]**tp[b]+b**a,b**a->p]
     Out[39]= p+tp[a]**tp[b]
 
 USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
@@ -171,6 +192,8 @@ noncommutative gradients with `NCGrad`.
     In[51]:= NCGrad[tp[x]**x+tp[x]**A**x+m**x,x]
     Out[51]= m+tp[x]**A+tp[x]**tp[A]+2 tp[x]
 
+?? ADD INTEGRATE AND HESSIAN ??
+
 ## Matrices
 
 `NCAlgebra` has many algorithms that handle matrices with
@@ -182,3 +205,5 @@ noncommutative entries.
     Out[53]= {{d,2},{e,3}}
     In[54]:= MatMult[m1,m2]
     Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}
+
+?? ADD NCInverse, and much more ??

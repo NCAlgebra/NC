@@ -31,6 +31,7 @@ MANUAL = PREAMBLE/Preamble.md \
          PREAMBLE/Things.md \
          PREAMBLE/NCGB.md \
          PREAMBLE/TeX.md \
+         PREAMBLE/SDP.md \
          PREAMBLE/Reference.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \
@@ -43,11 +44,11 @@ MANUAL = PREAMBLE/Preamble.md \
 	 NCAlgebra/NCSylvester.md \
 	 NCAlgebra/NCQuadratic.md \
 	 NCAlgebra/NCRational.md \
-	 NCAlgebra/NCConvexity.md \
-	 NCAlgebra/NCRealization.md \
 	 NCAlgebra/NCMatMult.md \
          NCAlgebra/NCMatrixDecompositions.md \
          NCAlgebra/MatrixDecompositions.md \
+	 NCAlgebra/NCConvexity.md \
+	 NCAlgebra/NCRealization.md \
 	 NCAlgebra/NCUtil.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
