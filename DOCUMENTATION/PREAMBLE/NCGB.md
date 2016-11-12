@@ -146,6 +146,167 @@ $$
 $$ 
 that can be interpreted as $c$ being in the range-space of $a$.
 
+## Interlude: ordering on variables and monomials
+
+As seen above, one needs to declare a *monomial order* before making a
+Gröbner Basis.  There are various monomial orders which can be used
+when computing Gröbner Basis. The most common are *lexicographic* and
+*graded lexicographic* orders. We consider also *multi-graded
+lexicographic* orders. 
+
+Lexicographic and multi-graded lexicographic orders are examples of
+elimination orderings. An elimination ordering is an ordering which is
+used for solving for some of the variables in terms of others.
+
+We now discuss each of these types of orders.
+
+### Lex Order: the simplest elimination order
+
+To impose lexicographic order, say $a\ll b\ll x\ll y$ on $a$, $b$, $x$
+and $y$, one types
+
+	SetMonomialOrder[a,b,x,y];
+
+This order is useful for attempting to solve for $y$ in terms of $a$,
+$b$ and $x$, since the highest priority of the GB algorithm is to
+produce polynomials which do not contain $y$. If producing high order
+polynomials is a consequence of this fanaticism so be it. Unlike
+graded orders, lex orders pay little attention to the degree of terms.
+Likewise its second highest priority is to eliminate $x$.
+
+Once this order is set, one can use all of the commands in the
+preceeding section in exactly the same form.
+
+We now give a simple example how one can solve for 
+$y$ given that $a$,$b$,$x$ and $y$
+satisfy the equations:
+$$
+\begin{aligned}
+-b\, x + x\, y  \, a + x\, b \, a \,  a &= 0 \\
+x \, a-1&=0 \\
+a\, x-1&=0
+\end{aligned}
+$$
+
+The command
+
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
+
+produces the Gröbner basis:
+
+	{y -> -b**a+a**b**x**x, a**x -> 1, x**a -> 1}
+
+after two iterations.
+
+Now, we change the order to 
+
+	SetMonomialOrder[y,x,b,a];
+
+and do the same `NCMakeGB` as above:
+
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
+	ColumnForm[%]
+	
+which, this time, results in
+	
+	x**a -> 1
+	a**x -> 1
+	x**b**a -> -x**y+b**x**x
+	b**a**a -> -y**a+a**b**x
+	x**b**b**a -> -x**b**y-x**y**b**x**x+b**x**x**b**x**x
+	b**x**x**x -> x**b+x**y**x
+	b**a**b**a -> -y**y-b**a**y-y**b**a+a**b**x**b**x**x
+	a**b**x**x -> y+b**a
+	b**a**b**b**a -> -y**b**y-b**a**b**y-y**b**b**a-y**y**b**x**x-
+	    > b**a**y**b**x**x+a**b**x**b**x**x**b**x**x
+
+which is not a Gröbner basis since the algorithm was interrupted at 4
+iterations. Note the presence of the rule
+
+	a**b**x**x -> y + b**a
+	
+which shows that the order is not set up to solve for $y$ in terms of
+the other variables in the sense that $y$ is not on the left hand side
+of this rule (but a human could easily solve for $y$ using this rule).
+Also the algorithm created a number of other relations which involved
+$y$. See [CoxLittleOShea].
+ 
+### Graded lex ordering: A non-elimination order 
+
+To impose graded lexicographic order, say $a< b< x< y$ on $a$,
+$b$, $x$ and $y$, one types
+
+	SetMonomialOrder[{a,b,x,y}];
+
+This ordering puts high degree monomials high in the order. Thus it
+tries to decrease the total degree of expressions. A call to 
+
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
+	ColumnForm[%]
+
+now produces
+
+	a**x -> 1
+	x**a -> 1
+	b**a**a -> -y**a+a**b**x
+	x**b**a -> -x**y+b**x**x
+	a**b**x**x -> y+b**a
+	b**x**x**x -> x**b+x**y**x
+	a**b**x**b**x**x -> y**y+b**a**y+y**b**a+b**a**b**a
+	b**x**x**b**x**x -> x**b**y+x**b**b**a+x**y**b**x**x
+	a**b**x**b**x**b**x**x -> y**y**y+b**a**y**y+y**b**a**y+y**y**b**a+
+	    > b**a**b**a**y+b**a**y**b**a+y**b**a**b**a+b**a**b**a**b**a
+	b**x**x**b**x**b**x**x -> x**b**y**y+x**b**b**a**y+x**b**y**b**a
+	    > +x**b**b**a**b**a+x**y**b**x**b**x**x
+	a**b**x**b**x**b**x**b**x**x -> y**y**y**y+b**a**y**y**y+
+	    > y**b**a**y**y+y**y**b**a**y+y**y**y**b**a+b**a**b**a**y**y+
+		> b**a**y**b**a**y+b**a**y**y**b**a+y**b**a**b**a**y+
+		> y**b**a**y**b**a+y**y**b**a**b**a+b**a**b**a**b**a**y+
+		> b**a**b**a**y**b**a+b**a**y**b**a**b**a+y**b**a**b**a**b**a+
+		> b**a**b**a**b**a**b**a
+
+which again fails to be a Gröbner basis and does not eliminate
+$y$. Instead, it tries to decrease the total degree of expressions
+involving $a$, $b$, $x$, and $y$.
+
+### Multigraded lex ordering : a variety of elimination orders 
+
+There are other useful monomial orders which one can use other than
+graded lex and lex.  Another type of order is what we call multigraded
+lex and is a mixture of graded lex and lex order. To impose
+multi-graded lexicographic order, say $a< b< x\ll y$ on $a$, $b$, $x$
+and $y$, one types
+
+	SetMonomialOrder[{a,b,x},y];
+
+which separates $y$ from the remaining variables. This time, a call to
+
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
+	ColumnForm[%]
+
+yields
+
+	y -> -b**a+a**b**x**x
+	a**x -> 1
+	x**a -> 1
+
+which not only eliminates $y$ but is also Gröbner basis, calculated
+after 2 iterations. 
+
+For an intuitive idea of why multigraded lex is helpful, we think of
+$a$, $b$, and $x$ as corresponding to variables in some engineering
+problem which represent quantities which are known and $y$ to be
+unknown.  The fact that $a$, $b$ and $x$ are in the top level
+indicates that we are very interested in solving for $y$ in terms of
+$a$, $b$, and $x$, but are not willing to solve for, say $x$, in terms
+of expressions involving $y$.
+
+This situation is so common that we provide the commands `SetKnowns`
+and `SetUnknowns`. The above ordering would be obtained after setting
+
+	SetKnowns[a,b,x];
+	SetUnknowns[y];
+
 ## Reducing a polynomial by a GB
 
 Now we  reduce a polynomial or ListOfPolynomials  by a GB or by any
@@ -417,177 +578,6 @@ appear next to x.
 would set the order to be $a < tp[a] < Inv[a] \ll b < tp[b]$.
 
 
-## Ordering on variables and monomials
-
-One needs to declare a monomial order before making a Grobner Basis.
-There are various monomial orders which can be used when computing
-Gröbner Basis. The most common are called lexicographic and graded
-lexicographic orders. In the previous section, we used only graded
-lexicographic orders. See Section ?? for a discussion of
-lexicographic orders.
-
-We will be considering *lexicographic*, *graded lexicographic* and
-*multi-graded lexicographic* orders. Lexicographic and multi-graded
-lexicographic orders are examples of elimination orderings. An
-elimination ordering is an ordering which is used for solving for some
-of the variables in terms of others.
-
-We now discuss each of these types of orders.
-
-### Lex Order: The simplest elimination order
-
-To impose lexicographic order $a<<b<<x<<y$ on $a$, $b$, $x$ and $y$,
-one types
-
-	SetMonomialOrder[a,b,x,y];
-
-This order is useful for attempting to solve for $y$ in terms of $a$,
-$b$ and $x$, since the highest priority of the GB algorithm is to
-produce polynomials which do not contain $y$. If producing high order
-polynomials is a consequence of this fanaticism so be it. Unlike
-graded orders, lex orders pay little attention to the degree of terms.
-Likewise its second highest priority is to eliminate $x$.
-
-Once this order is set, one can use all of the commands in the
-preceeding section in exactly the same form.
-
-We now give a simple example how one can solve for 
-$y$ given that $a$,$b$,$x$ and $y$
-satisfy the equations:
-$$
--b\, x + x\, y  \, a + x\, b \, a \,  a = 0
-$$
-$$
-x \, a-1=0
-$$
-$$
-a\, x-1=0 \, .
-$$
-
-	NCMakeGB[{-b ** x + x ** y ** a + x ** b ** a ** a,x**a-1,a**x-1},4];
-	{-1 + a ** x, -1 + x ** a, y + b ** a - a ** b ** x ** x}
-
-If the polynomials above are converted to replacement rules, then a
-simple glance at the results allows one to see that $y$ has been
-solved for.
-
-	PolyToRule[%]
-	{a ** x -> 1, x ** a -> 1, y -> -b ** a + a ** b ** x ** x}
-
-Now, we change the order to 
-
-	SetMonomialOrder[y,x,b,a];
-
-and do the same `NCMakeGB` as above:
-
-	NCMakeGB[{-b ** x + x ** y ** a + x ** b ** a ** a,x**a-1,a**x-1},4];	
-	ColumnForm[%];
-	a ** x -> 1
-	x ** a -> 1
-	x ** b ** a -> -x ** y + b ** x ** x
-    b ** a ** a -> -y ** a + a ** b ** x
-	b ** x ** x ** x -> x ** b + x ** y ** x
-	a ** b ** x ** x -> y + b ** a
-	x ** b ** b ** a -> 
-	    >   -x ** b ** y - x ** y ** b ** x ** x + b ** x ** x ** b ** x ** x
-	b ** a ** b ** a -> 
-	    >   -y ** y - b ** a ** y - y ** b ** a + a ** b ** x ** b ** x ** x
-    x ** b ** b ** b ** a -> 
-        >   -x ** b ** b ** y - x ** b ** y ** b ** x ** x - 
-        >    x ** y ** b ** x ** x ** b ** x ** x + 
-        >    b ** x ** x ** b ** x ** x ** b ** x ** x
-	b ** a ** b ** b ** a -> 
-        >   -y ** b ** y - b ** a ** b ** y - y ** b ** b ** a - 
-        >    y ** y ** b ** x ** x - b ** a ** y ** b ** x ** x + 
-        >    a ** b ** x ** b ** x ** x ** b ** x ** x
-
-In this case, it turns out that it produced the rule $a ** b ** x ** x
-\rightarrow y + b ** a$ which shows that the order is not set up to
-solve for $y$ in terms of the other variables in the sense that $y$ is
-not on the left hand side of this rule (but a human could easily solve
-for $y$ using this rule).  Also the algorithm created a number of
-other relations which involved $y$.  If one uses the lex order
-$a<<b<<y<<x$, the `NCMakeGB` call above generates 12 polynomials of
-high total degree which do not solve for $y$.
-
-See [CoxLittleOShea].
- 
-### Graded lex ordering: A non-elimination order 
-
-This is the ordering which was used in all demos appearing before this
-section. It puts high degree monomials high in the order. Thus it
-tries to decrease the total degree of expressions.
-
-### Multigraded lex ordering : A variety of elimination orders 
-
-There are other useful monomial orders which one can use other than
-graded lex and lex.  Another type of order is what we call multigraded
-lex and is a mixture of graded lex and lex order. This multigraded
-order is set using `SetMonomialOrder`, `SetKnowns` and `SetUnknowns`
-which are described in Section.  As an example, suppose that we
-execute the following commands:
-
-	SetMonomialOrder[{A,B,C},{a,b,c},{d,e,f}];
-
-We use the notation 
-$$
-A < B < C << a < b < c << d < e < f \, ,
-$$
-to denote this order. 
-
-For an intuitive idea of why multigraded lex is helpful, we think of
-$A$, $B$ and $C$ as corresponding to variables in some engineering
-problem which represent quantities which are known and $a$, $b$, $c$,
-$d$, $e$ and $f$ to be unknown.  If one wants to speak *very*
-loosely, then we would say that $a$, $b$ and $c$ are unknown and $d$,
-$e$ and $f$ are ``very unknown.".  The fact that $d$, $e$ and $f$ are
-in the top level indicates that we are very interested in solving for
-$d$, $e$ and $f$ in terms of $A$, $B$, $C$, $a$, $b$ and $c$, but are
-not willing to solve for $b$ in terms of expressions involving either
-$d$, $e$ or $f$.
- 
-For example,
-
-1. $d > a ** a ** A ** b$
-2. $d ** a ** A ** b > a$
-3. $e ** d > d ** e$
-4. $b ** a > a ** b$
-5. $a ** b ** b > b ** a$
-6. $a > A ** B ** A ** B ** A ** B$
-
-This order induces an order on monomials in the following way.  One
-does the following steps in determining whether a monomial $m$ is
-greater in the order than a monomial $n$ or not.
-
-1. First, compute the total degree of $m$ with respect to only the
-variables $d$, $e$ and $f$.
-2. Second, compute the total degree of $n$ with respect to 
-only the variables $d$, $e$ and $f$.
-3. If the number from item (2) is smaller than the number from item
-(1), then $m$ is smaller than $n$. If the number from item (2) is
-bigger than the number from item (1), then $m$ is bigger than $n$. If
-the numbers from items (1) and (2) are equal, then proceed to the next item.
-4. First, compute the total degree of $m$ with respect to only the
-variables $a$, $b$ and $c$. 
-5. Second, compute the total degree of $n$ with respect to only the
-variables $a$, $b$ and $c$.
-6. If the number from item (5) is smaller than the number from item
-(4), then $m$ is smaller than $n$. If the number from item (5) is
-bigger than the number from item (4), then $m$ is bigger than $n$. If
-the numbers from items (4) and (5) are equal, then proceed to the next item.
-7. First, compute the total degree of $m$ with respect to only the
-variables $A$, $B$ and $C$. 
-8. Second, compute the total degree of $n$ with respect to only the
-variables $A$, $B$ and $C$. 
-9. If the number from item (8) is smaller than the number from item
-(7), then $m$ is smaller than $n$. If the number from item (8) is
-bigger than the number from item (7), then $m$ is bigger than $n$. If
-the numbers from items (7) and (8) are equal, then proceed to the next
-item.
-10. At this point, say that $m$ is smaller than $n$ if and only if $m$
-is smaller than $n$ with respect to the graded lex order $A<B<C<a<b<c<d<e<f$
-
-For more information on multigraded lex orders, consult [HSStrat].
 
 
 

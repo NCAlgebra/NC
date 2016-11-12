@@ -1,5 +1,7 @@
 # Semidefinite Programming {#SemidefiniteProgramming}
 
+## Semidefinite Programs in Matrix Variables
+
 The package [NCSDP](#PackageNCSDP) allows the symbolic manipulation
 and numeric solution of semidefinite programs.
 
@@ -64,7 +66,7 @@ one can load [`SDPSylvester`](#SDPSylvester) and use `NCSDP` to create
 a problem instance as follows:
 
     << SDPSylvester`
-    {abc, rules} = NCSDP[F, vars, obj, data];
+    {abc, rules} = NCSDP[ineqs, vars, obj, data];
 
 The resulting `abc` and `rules` objects are used for calculating the
 numerical solution using [`SDPSolve`](#SDPSolve). The command:
@@ -73,17 +75,47 @@ numerical solution using [`SDPSolve`](#SDPSolve). The command:
 	
 produces an output like the folowing:
 
-?? ADD OUTPUT OF SDPSolve ??
+	Problem data:
+	* Dimensions (total):
+      - Variables             = 4
+	  - Inequalities          = 2
+	* Dimensions (detail):
+	  - Variables             = {{2,2}}
+	  - Inequalities          = {2,2}
+	Method:
+	* Method                  = PredictorCorrector
+	* Search direction        = NT
+	Precision:
+	* Gap tolerance           = 1.*10^(-9)
+	* Feasibility tolerance   = 1.*10^(-6)
+	* Rationalize iterates    = False
+	Other options:
+	* Debug level             = 0
+	
+	 K     <B, Y>         mu  theta/tau      alpha     |X S|2    |X S|oo  |A* X-B|   |A Y+S-C|
+	-------------------------------------------------------------------------------------------
+	 1  1.638e+00  1.846e-01  2.371e-01  8.299e-01  1.135e+00  9.968e-01  9.868e-16  2.662e-16
+	 2  1.950e+00  1.971e-02  2.014e-02  8.990e-01  1.512e+00  9.138e-01  2.218e-15  2.937e-16
+	 3  1.995e+00  1.976e-03  1.980e-03  8.998e-01  1.487e+00  9.091e-01  1.926e-15  3.119e-16
+	 4  2.000e+00  9.826e-07  9.826e-07  9.995e-01  1.485e+00  9.047e-01  8.581e-15  2.312e-16
+	 5  2.000e+00  4.913e-10  4.913e-10  9.995e-01  1.485e+00  9.047e-01  1.174e-14  4.786e-16
+	-------------------------------------------------------------------------------------------
+	* Primal solution is not strictly feasible but is within tolerance
+	(0 <= max eig(A* Y - C) = 8.06666*10^-10 < 1.*10^-6 )
+	* Dual solution is within tolerance
+	(|| A X - B || = 1.96528*10^-9 < 1.*10^-6)
+	* Feasibility radius = 0.999998
+	(should be less than 1 when feasible)
+  
+The output variables `Y` and `S` are the *primal* solutions and `X` is
+the *dual* solution.
 
-The variables `Y` and `S` are the *primal* solutions and `X` is the
-*dual* solution.
-
-An explicit symbolic dual problem can be calculated easily using
+A symbolic dual problem can be calculated easily using
 [`NCSDPDual`](#NCSDPDual):
 	
     {dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];
 
-The corresponding dual program is expressed in the *canonical form*:
+The dual program for the example problem above is:
 $$
 \begin{aligned} 
   \max_x \quad & <c,x> \\ 
@@ -99,6 +131,78 @@ $$
 	    & X_2 \succeq 0
 \end{aligned}
 $$
-Dual semidefinite programs can be visualized using [`NCSDPDualForm`](#NCSDPDualForm) as in:
+which can be visualized using [`NCSDPDualForm`](#NCSDPDualForm) using:
 
     NCSDPDualForm[dIneqs, dVars, dObj]
+
+## Semidefinite Programs in Vector Variables
+
+The package [SDP](#SDP) provides a crude and not very efficient way to
+define and solve semidefinite programs in standard form, that is
+vectorized. You do not need to load `NCAlgebra` if you just want to
+use the semidefinite program solver. But you still need to load `NC`
+as in:
+
+    << NC`
+    << SDP`
+
+Semidefinite programs are optimization problems of the form:
+$$
+\begin{aligned}
+  \min_{y, S} \quad & b^T y \\
+  \text{s.t.} \quad & A y + c = S \\
+                    & S \succeq 0
+\end{aligned}
+$$
+where $S$ is a symmetric positive semidefinite matrix and $y$ is a
+vector of decision variables.
+
+A user can input the problem data, the triplet $(A, b, c)$, or use the
+following convenient methods for producing data in the proper format. 
+
+For example, problems can be stated as:
+$$
+\begin{aligned} 
+  \min_y \quad & f(y), \\
+  \text{s.t.} \quad & G(y) >= 0
+\end{aligned}
+$$
+where $f(y)$ and $G(y)$ are affine functions of the vector
+of variables $y$.
+
+Here is a simple example:
+
+    y = {y0, y1, y2};
+    f = y2;
+    G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
+
+The list of constraints in `G` is to be interpreted as:
+$$
+\begin{aligned} 
+  y_0 - 2 \geq 0, \\
+  \begin{bmatrix} y_1 & y_0 \\ y_0 & 1 \end{bmatrix} \succeq 0, \\
+  \begin{bmatrix} y_2 & y_1 \\ y_1 & 1 \end{bmatrix} \succeq 0.
+\end{aligned}
+$$
+The function [`SDPMatrices`](#SDPMatrices) convert the above symbolic
+problem into numerical data that can be used to solve an SDP.
+
+    abc = SDPMatrices[f, G, y]
+
+All required data, that is $A$, $b$, and $c$, is stored in the
+variable `abc` as Mathematica's sparse matrices. Their contents can be
+revealed using the Mathematica command `Normal`.
+
+    Normal[abc]
+
+The resulting SDP is solved using [`SDPSolve`](#SDPSolve):
+
+    {Y, X, S, flags} = SDPSolve[abc];
+
+The variables `Y` and `S` are the *primal* solutions and `X` is the
+*dual* solution. Detailed information on the computed solution is
+found in the variable `flags`.
+
+The package `SDP` is built so as to be easily overloaded with more
+efficient or more structure functions. See for example
+[SDPFlat](#SDPFlat) and [SDPSylvester](#SDPSylvester).

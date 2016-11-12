@@ -10,177 +10,283 @@ load it with the following commands:
 ## To Commute Or Not To Commute?
 
 In `NCAlgebra`, the operator `**` denotes *noncommutative
-multiplication*.
+multiplication*. At present, single-letter lower case variables are
+noncommutative by default and all others are commutative by
+default. For example:
 
-At present, single-letter lower case variables are noncommutative by
-default and all others are commutative by default.
+    a**b-b**a
+	
+results in
 
-We consider non-commutative lower case variables in the following
-examples:
+    a**b-b**a
 
-    In[3]:= a**b-b**a
-    Out[3]= a**b-b**a
-    In[4]:= A**B-B**A
-    Out[4]= 0
-    In[5]:= A**b-b**A
-    Out[5]= 0
+while 
+
+	A**B-B**A
+    A**b-b**A
+
+both result in `0`.
 
 One of Bill's favorite commands is `CommuteEverything`, which
 temporarily makes all noncommutative symbols appearing in a given
 expression to behave as if they were commutative and returns the
-resulting commutative expression:
+resulting commutative expression. For example:
 
-    In[6]:= CommuteEverything[a**b-b**a]
-    Out[6]= 0
-    In[7]:= EndCommuteEverything[]
-    In[8]:= a**b-b**a
-    Out[8]= a**b-b**a
+    CommuteEverything[a**b-b**a]
+	
+results in `0`. The command
 
-`EndCommuteEverything` restores the original noncommutative behavior.
+	EndCommuteEverything[]
+	
+restores the original noncommutative behavior.
 
-`SetNonCommutative` can make any symbol behave as noncommutative:
+One can make any symbol behave as noncommutative
+using `SetNonCommutative`. For example:
 
-    In[9]:= SetNonCommutative[A,B]
-    In[10]:= A**B-B**A
-    Out[10]= A**B-B**A
-    In[11]:= SetNonCommutative[A]; SetCommutative[B];
-    In[12]:= A**B-B**A
-    Out[12]= 0
-    
-`SNC` is an alias for `SetNonCommutative`. So, `SNC` can be typed rather than the longer `SetNonCommutative`.
+    SetNonCommutative[A,B]
+    A**B-B**A
+	
+results in:
+	
+    A**B-B**A
+	
+Likewise, symbols can be made commutative using `SetCommutative`. For example:
 
-    In[13]:= SNC[A];
-    In[14]:= A**a-a**A
-    Out[14]= -a**A+A**a
+	SetNonCommutative[A] 
+	SetCommutative[B]
+    A**B-B**A
 
-`SetCommutative` makes symbols behave as commutative:
+results in `0`. `SNC` is an alias for `SetNonCommutative`. So, `SNC`
+can be typed rather than the longer `SetNonCommutative`:
 
-    In[15]:= SetCommutative[v];
-    In[16]:= v**b
-    Out[16]= b v
+    SNC[A];
+    A**a-a**A
 
-## Inverses
+results in:
+
+    -a**A+A**a
+
+One can check whether a given symbol is commutative or not using
+`CommutativeQ` or `NonCommutativeQ`. For example:
+
+	CommutativeQ[B]
+	NonCommutativeQ[a]
+	
+both return `True`.
+
+## Inverses, Transposes and Adjoints
 
 The multiplicative identity is denoted `Id` in the program. At the
 present time, `Id` is set to 1.
 
 A symbol `a` may have an inverse, which will be denoted by
-`inv[a]`. For example:
-
-    In[17]:= Id
-    Out[17]= 1
-    In[18]:= inv[a**b]
-    Out[18]= inv[a**b]
-    In[19]:= inv[a]**a
-    Out[19]= 1
-    In[20]:= a**inv[a]
-    Out[20]= 1
-    In[21]:= a**b**inv[b]
-    Out[21]= a
-
-## Transposes and Adjoints
-
-`tp[x]` denotes the transpose of symbol `x`
-
-`aj[x]` denotes the adjoint of symbol `x`
-   
-The properties of transposes and adjoints that everyone uses
-constantly are built-in. For example:
-
-    In[22]:= tp[a**b]
-    Out[22]= tp[b]**tp[a]
-    In[23]:= tp[5]
-    Out[23]= 5
-    In[24]:= tp[2+3I]   (* I is the imaginary unit *)
-    Out[24]= 2+3 I
-    In[25]:= tp[a]
-    Out[25]= tp[a]
-    In[26]:= tp[a+b]
-    Out[26]= tp[a]+tp[b]
-    In[27]:= tp[6x]
-    Out[27]= 6 tp[x]
-    In[28]:= tp[tp[a]]
-    Out[28]= a
-	
-For `aj`:
-
-    In[29]:= aj[5]
-    Out[29]= 5
-    In[30]:= aj[2+3I]
-    Out[30]= 2-3 I
-    In[31]:= aj[a]
-    Out[31]= aj[a]
-    In[32]:= aj[a+b]
-    Out[32]= aj[a]+aj[b]
-    In[33]:= aj[6x]
-    Out[33]= 6 aj[x]
-    In[34]:= aj[aj[a]]
-    Out[34]= a
-
-Since v.5.0 transposes and adjoints in a notebook environment render
-as $x^T$ and $x^*$.
-
-## Expand and Collect
-
-One can collect noncommutative terms involving same powers of a symbol
-using `NCCollect`. There is also a stronger version of collect called
-`NCStrongCollect`. `NCCollect` groups terms by degree before
-collecting and `NCStrongCollect` does not. As a result,
-`NCStrongCollect` often collects more than one would normally expect.
-
-`NCExpand` expands noncommutative products.
+`inv[a]`. `inv` operates as expected in most cases.
 
 For example:
 
-    In[35]:= NCExpand[(a+b)**x]
-    Out[35]= a**x+b**x
-    In[36]:= NCCollect[a**x+b**x,x]
-    Out[36]= (a+b)**x
-    In[37]:= NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]
-    Out[37]= z+tp[x]**(a+b)**x
+    inv[a]**a
+    inv[a**b]**a**b
 	
+both lead to `Id = 1` and
+	
+	a**b**inv[b]
+	
+results in `a`.
+
+`tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
+adjoint of symbol `x`. Like `inv`, the properties of transposes and
+adjoints that everyone uses constantly are built-in. For example:
+
+    tp[a**b]
+	
+leads to 
+
+    tp[b]**tp[a]
+	
+and
+
+    tp[a+b]
+
+returns
+
+	tp[a]+tp[b]
+
+Likewise `tp[tp[a]] == a` and `tp` for anything for which
+`CommutativeQ` returns `True` is simply the identity. For example
+`tp[5] == 5`, `tp[2 + 3I] == 2 + 3 I`, and `tp[B] == B`.
+
+Similar properties hold to `aj`. Moreover
+
+	aj[tp[a]]
+	tp[aj[a]]
+	
+return `co[a]` where `co` stands for complex-conjugate. 
+
+**Version 5.0:** transposes (`tp`), adjoints (`aj`) and complex
+conjugates (`co`) in a notebook environment render as $x^T$, $x^*$,
+and $\bar{x}$.
+
+## Expand and Collect
+
+The command `NCExpand` expands noncommutative products. For example:
+
+    NCExpand[(a+b)**x]
+
+returns
+
+    a**x+b**x
+
+Conversely, one can collect noncommutative terms involving same powers
+of a symbol using `NCCollect`. For example:
+
+    NCCollect[a**x+b**x,x]
+	
+recovers
+
+    (a+b)**x
+
+`NCCollect` groups terms by degree before collecting and accepts more
+than one variable. For example:
+
+	expr = a**x+b**x+y**c+y**d+a**x**y+b**x**y
+	NCCollect[expr, {x}]
+	
+returns
+
+	y**c+y**d+(a+b)**x**(1+y)
+
+and 
+
+	NCCollect[expr, {x, y}]
+	
+returns
+
+	(a+b)**x+y**(c+d)+(a+b)**x**y
+
+Note that the last term has degree 2 in `x` and `y` and therefore does
+not get collected with the first order terms.
+
+The list of variables accepts `tp`, `aj` and
+`inv`, and
+
+	NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]
+	
+returns
+	
+    z+tp[x]**(a+b)**x
+
+Alternatively one could use
+
+	NCCollectSymmetric[tp[x]**a**x+tp[x]**b**x+z,{x}]
+	
+to obtain the same result. A similar command,
+[NCCollectSelfAdjoint](#NCCollectSelfAdjoint), works with self-adjoint
+variables.
+
+There is also a stronger version of collect called `NCStrongCollect`.
+`NCStrongCollect` does not group terms by degree. For instance:
+
+	NCStrongCollect[expr, {x, y}]
+	
+produces
+
+	y**(c+d)+(a+b)**x**(1+y)
+
+Keep in mind that `NCStrongCollect` often collects *more* than one
+would normally expect.
+
 ## Replace
 
-The Mathematica substitute commands, e.g. `ReplaceAll` (`/.`) and
-`ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`, so you
-must use our `NC` versions of these commands:
+A key feature of symbolic computation is the ability to perform
+substitutions. The Mathematica substitute commands, e.g. `ReplaceAll`
+(`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,
+so you must use our `NC` versions of these commands. For example:
 
-    In[38]:= NCReplaceAll[x**a**b,a**b->c]
-    Out[38]= x**a**b
-    In[39]:= NCReplaceAll[tp[a]**tp[b]+b**a,b**a->p]
-    Out[39]= p+tp[a]**tp[b]
+    NCReplaceAll[x**a**b,a**b->c]
+	
+results in
+
+    x**c
+	
+and
+
+    NCReplaceAll[tp[b**a]+b**a,b**a->c]
+
+results in
+
+    c+tp[a]**tp[b]
 
 USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
 [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically
 create symmetric and self adjoint versions of your rules:
 
-    In[40]:= NCReplaceAll[tp[a**b]+w+a**b,a**b->c]
-    Out[40]= c+w+tp[b]**tp[a]
-    In[41]:= NCReplaceAll[tp[a**b]+w+a**b,NCMakeRuleSymmetric[a**b->c]]
-    Out[41]= c+w+tp[c]
+	NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b ** a -> c]]
+
+returns
+
+	c + tp[c]
+
+The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
+understood in the example:
+
+	NCReplaceAll[a ** b ** b, a ** b -> a]
+
+that results in
+
+	a ** b
+
+and
+
+	NCReplaceRepeated[a ** b ** b, a ** b -> a]
+
+that results in
+
+	a
+	
+Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
+`NCReplaceList`, which are analogous to the standard `ReplaceAll`
+(`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
+that one rarely uses `NCReplace` and `NCReplaceList`. 	
+
+**Version 5.0:** the commands `Substitute` and `Transform` have been
+deprecated in favor of the above nc versions of `Replace`.
+
+## Polynomials
 
 ## Rationals and Simplification
 
-`NCSimplifyRational` attempts to simplify noncommutative rationals.
+One of the great challenges of noncommutative symbolic algebra is the
+simplification of rational nc expressions. `NCAlgebra` provides
+various algorithms that can be used for simplification and general
+manipulation of nc rationals.
 
-    In[42]:= f1=1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b\
-             -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
-    Out[42]= 1+inv[d]**c**inv[-a+S]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b\
-             -inv[d]**c**inv[-a+S+b**inv[d]**c]**b**inv[d]**c**inv[-a+S]**b
-    In[43]:= NCSimplifyRational[f1]
-    Out[43]= 1
-    In[44]:= f2=2inv[1+2a]**a;
-    In[45]:= NCSimplifyRational[f2]
-    Out[45]= 1-inv[1+2 a]
+One such function is `NCSimplifyRational`, which attempts to simplify
+noncommutative rationals using a predefined set of rules. For example:
 
-`NCSR` is the alias for `NCSimplifyRational`.
+    expr = 1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b \
+           -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
+	NCSimplifyRational[expr]
+	
+leads to `1`. Of course the great challenge here is to reveal well
+known identities that can lead to simplification. For example, the two
+expressions:
 
-    In[46]:= f3=a**inv[1-a];
-    In[47]:= NCSR[f3]
-    Out[47]= -1+inv[1-a]
-    In[48]:= f4=inv[1-b**a]**inv[a];
-    In[49]:= NCSR[f4]
-    Out[49]= inv[a]+b**inv[1-b**a]
+	expr1 = a**inv[1+b**a]
+	expr2 = inv[1+a**b]**a
+	
+and one can use `NCSimplifyRational` to test such equivalence by
+evaluating
+
+	NCSimplifyRational[expr1 - expr2]
+
+which results in `0` or 
+
+	NCSimplifyRational[expr1**inv[expr2]]
+	
+which results in `1`. `NCSimplifyRational` works by transforming nc
+rationals. For example, one can verify that
+
+	NCSimplifyRational[expr2] == expr1
 
 ## Calculus
 

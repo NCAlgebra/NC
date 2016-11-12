@@ -125,7 +125,7 @@ See also:
 
 For example:
 
-    exp = a ** x ** b - 2 x ** y ** c ** x + a ** c + d ** x
+    exp = a**x**b - 2 x**y**c**x + a**c + d**x
     p = NCToNCPolynomial[exp, {x, y}]
     NCPCoefficients[p, {x}]
 
@@ -135,7 +135,7 @@ returns
 
 and
 
-    NCPCoefficients[p, {x ** y, x}]
+    NCPCoefficients[p, {x**y, x}]
 
 returns
 

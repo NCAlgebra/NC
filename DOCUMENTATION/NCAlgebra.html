@@ -31,10 +31,10 @@
 </ul></li>
 <li><a href="#MostBasicCommands"><span class="toc-section-number">3</span> Most Basic Commands</a><ul>
 <li><a href="#to-commute-or-not-to-commute"><span class="toc-section-number">3.1</span> To Commute Or Not To Commute?</a></li>
-<li><a href="#inverses"><span class="toc-section-number">3.2</span> Inverses</a></li>
-<li><a href="#transposes-and-adjoints"><span class="toc-section-number">3.3</span> Transposes and Adjoints</a></li>
-<li><a href="#expand-and-collect"><span class="toc-section-number">3.4</span> Expand and Collect</a></li>
-<li><a href="#replace"><span class="toc-section-number">3.5</span> Replace</a></li>
+<li><a href="#inverses-transposes-and-adjoints"><span class="toc-section-number">3.2</span> Inverses, Transposes and Adjoints</a></li>
+<li><a href="#expand-and-collect"><span class="toc-section-number">3.3</span> Expand and Collect</a></li>
+<li><a href="#replace"><span class="toc-section-number">3.4</span> Replace</a></li>
+<li><a href="#polynomials"><span class="toc-section-number">3.5</span> Polynomials</a></li>
 <li><a href="#rationals-and-simplification"><span class="toc-section-number">3.6</span> Rationals and Simplification</a></li>
 <li><a href="#calculus"><span class="toc-section-number">3.7</span> Calculus</a></li>
 <li><a href="#matrices"><span class="toc-section-number">3.8</span> Matrices</a></li>
@@ -48,25 +48,25 @@
 </ul></li>
 <li><a href="#NCGB"><span class="toc-section-number">5</span> NonCommutative Gröbner Basis</a><ul>
 <li><a href="#gröbner-basis"><span class="toc-section-number">5.1</span> Gröbner Basis</a></li>
-<li><a href="#reducing-a-polynomial-by-a-gb"><span class="toc-section-number">5.2</span> Reducing a polynomial by a GB</a></li>
-<li><a href="#simplifying-expressions"><span class="toc-section-number">5.3</span> Simplifying Expressions</a></li>
-<li><a href="#ncgb-facilitates-natural-notation"><span class="toc-section-number">5.4</span> NCGB Facilitates Natural Notation</a><ul>
-<li><a href="#a-simplification-example"><span class="toc-section-number">5.4.1</span> A Simplification example</a></li>
+<li><a href="#interlude-ordering-on-variables-and-monomials"><span class="toc-section-number">5.2</span> Interlude: ordering on variables and monomials</a><ul>
+<li><a href="#lex-order-the-simplest-elimination-order"><span class="toc-section-number">5.2.1</span> Lex Order: the simplest elimination order</a></li>
+<li><a href="#graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">5.2.2</span> Graded lex ordering: A non-elimination order</a></li>
+<li><a href="#multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">5.2.3</span> Multigraded lex ordering : a variety of elimination orders</a></li>
 </ul></li>
-<li><a href="#makinggbs-and-inv-tp"><span class="toc-section-number">5.5</span> MakingGB's and Inv[], Tp[]</a></li>
-<li><a href="#simplification-and-gbs-revisited"><span class="toc-section-number">5.6</span> Simplification and GB's revisited</a><ul>
-<li><a href="#changing-polynomials-to-rules"><span class="toc-section-number">5.6.1</span> Changing polynomials to rules</a></li>
-<li><a href="#changing-rules-to-polynomials"><span class="toc-section-number">5.6.2</span> Changing rules to polynomials</a></li>
-<li><a href="#simplifying-using-a-gb-revisited"><span class="toc-section-number">5.6.3</span> Simplifying using a GB revisited</a></li>
+<li><a href="#reducing-a-polynomial-by-a-gb"><span class="toc-section-number">5.3</span> Reducing a polynomial by a GB</a></li>
+<li><a href="#simplifying-expressions"><span class="toc-section-number">5.4</span> Simplifying Expressions</a></li>
+<li><a href="#ncgb-facilitates-natural-notation"><span class="toc-section-number">5.5</span> NCGB Facilitates Natural Notation</a><ul>
+<li><a href="#a-simplification-example"><span class="toc-section-number">5.5.1</span> A Simplification example</a></li>
 </ul></li>
-<li><a href="#saving-lots-of-time-when-typing"><span class="toc-section-number">5.7</span> Saving lots of time when typing</a><ul>
-<li><a href="#saving-time-working-in-algebras-with-involution-ncaddtranspose-ncaddadjoint"><span class="toc-section-number">5.7.1</span> Saving time working in algebras with involution: NCAddTranspose, NCAddAdjoint</a></li>
-<li><a href="#saving-time-when-setting-orders-ncautomaticorder"><span class="toc-section-number">5.7.2</span> Saving time when setting orders: NCAutomaticOrder</a></li>
+<li><a href="#makinggbs-and-inv-tp"><span class="toc-section-number">5.6</span> MakingGB's and Inv[], Tp[]</a></li>
+<li><a href="#simplification-and-gbs-revisited"><span class="toc-section-number">5.7</span> Simplification and GB's revisited</a><ul>
+<li><a href="#changing-polynomials-to-rules"><span class="toc-section-number">5.7.1</span> Changing polynomials to rules</a></li>
+<li><a href="#changing-rules-to-polynomials"><span class="toc-section-number">5.7.2</span> Changing rules to polynomials</a></li>
+<li><a href="#simplifying-using-a-gb-revisited"><span class="toc-section-number">5.7.3</span> Simplifying using a GB revisited</a></li>
 </ul></li>
-<li><a href="#ordering-on-variables-and-monomials"><span class="toc-section-number">5.8</span> Ordering on variables and monomials</a><ul>
-<li><a href="#lex-order-the-simplest-elimination-order"><span class="toc-section-number">5.8.1</span> Lex Order: The simplest elimination order</a></li>
-<li><a href="#graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">5.8.2</span> Graded lex ordering: A non-elimination order</a></li>
-<li><a href="#multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">5.8.3</span> Multigraded lex ordering : A variety of elimination orders</a></li>
+<li><a href="#saving-lots-of-time-when-typing"><span class="toc-section-number">5.8</span> Saving lots of time when typing</a><ul>
+<li><a href="#saving-time-working-in-algebras-with-involution-ncaddtranspose-ncaddadjoint"><span class="toc-section-number">5.8.1</span> Saving time working in algebras with involution: NCAddTranspose, NCAddAdjoint</a></li>
+<li><a href="#saving-time-when-setting-orders-ncautomaticorder"><span class="toc-section-number">5.8.2</span> Saving time when setting orders: NCAutomaticOrder</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#TeX"><span class="toc-section-number">6</span> Pretty Output with Mathematica Notebooks and TeX</a><ul>
@@ -76,7 +76,10 @@
 </ul></li>
 <li><a href="#Using_NCTeXForm"><span class="toc-section-number">6.3</span> Using NCTeXForm</a></li>
 </ul></li>
-<li><a href="#SemidefiniteProgramming"><span class="toc-section-number">7</span> Semidefinite Programming</a></li>
+<li><a href="#SemidefiniteProgramming"><span class="toc-section-number">7</span> Semidefinite Programming</a><ul>
+<li><a href="#semidefinite-programs-in-matrix-variables"><span class="toc-section-number">7.1</span> Semidefinite Programs in Matrix Variables</a></li>
+<li><a href="#semidefinite-programs-in-vector-variables"><span class="toc-section-number">7.2</span> Semidefinite Programs in Vector Variables</a></li>
+</ul></li>
 <li><a href="#ReferenceIntroduction"><span class="toc-section-number">8</span> Introduction</a></li>
 <li><a href="#PackageNonCommutativeMultiply"><span class="toc-section-number">9</span> NonCommutativeMultiply</a><ul>
 <li><a href="#aj"><span class="toc-section-number">9.1</span> aj</a></li>
@@ -391,121 +394,130 @@ You can now use &quot;&lt;&lt; NCAlgebra`&quot; to load NCAlgebra or &quot;&lt;&
 <pre><code>In[1]:= &lt;&lt; NC`
 In[2]:= &lt;&lt; NCAlgebra`</code></pre>
 <h2 id="to-commute-or-not-to-commute"><span class="header-section-number">3.1</span> To Commute Or Not To Commute?</h2>
-<p>In <code>NCAlgebra</code>, the operator <code>**</code> denotes <em>noncommutative multiplication</em>.</p>
-<p>At present, single-letter lower case variables are noncommutative by default and all others are commutative by default.</p>
-<p>We consider non-commutative lower case variables in the following examples:</p>
-<pre><code>In[3]:= a**b-b**a
-Out[3]= a**b-b**a
-In[4]:= A**B-B**A
-Out[4]= 0
-In[5]:= A**b-b**A
-Out[5]= 0</code></pre>
-<p>One of Bill's favorite commands is <code>CommuteEverything</code>, which temporarily makes all noncommutative symbols appearing in a given expression to behave as if they were commutative and returns the resulting commutative expression:</p>
-<pre><code>In[6]:= CommuteEverything[a**b-b**a]
-Out[6]= 0
-In[7]:= EndCommuteEverything[]
-In[8]:= a**b-b**a
-Out[8]= a**b-b**a</code></pre>
-<p><code>EndCommuteEverything</code> restores the original noncommutative behavior.</p>
-<p><code>SetNonCommutative</code> can make any symbol behave as noncommutative:</p>
-<pre><code>In[9]:= SetNonCommutative[A,B]
-In[10]:= A**B-B**A
-Out[10]= A**B-B**A
-In[11]:= SetNonCommutative[A]; SetCommutative[B];
-In[12]:= A**B-B**A
-Out[12]= 0</code></pre>
-<p><code>SNC</code> is an alias for <code>SetNonCommutative</code>. So, <code>SNC</code> can be typed rather than the longer <code>SetNonCommutative</code>.</p>
-<pre><code>In[13]:= SNC[A];
-In[14]:= A**a-a**A
-Out[14]= -a**A+A**a</code></pre>
-<p><code>SetCommutative</code> makes symbols behave as commutative:</p>
-<pre><code>In[15]:= SetCommutative[v];
-In[16]:= v**b
-Out[16]= b v</code></pre>
-<h2 id="inverses"><span class="header-section-number">3.2</span> Inverses</h2>
+<p>In <code>NCAlgebra</code>, the operator <code>**</code> denotes <em>noncommutative multiplication</em>. At present, single-letter lower case variables are noncommutative by default and all others are commutative by default. For example:</p>
+<pre><code>a**b-b**a</code></pre>
+<p>results in</p>
+<pre><code>a**b-b**a</code></pre>
+<p>while</p>
+<pre><code>A**B-B**A
+A**b-b**A</code></pre>
+<p>both result in <code>0</code>.</p>
+<p>One of Bill's favorite commands is <code>CommuteEverything</code>, which temporarily makes all noncommutative symbols appearing in a given expression to behave as if they were commutative and returns the resulting commutative expression. For example:</p>
+<pre><code>CommuteEverything[a**b-b**a]</code></pre>
+<p>results in <code>0</code>. The command</p>
+<pre><code>EndCommuteEverything[]</code></pre>
+<p>restores the original noncommutative behavior.</p>
+<p>One can make any symbol behave as noncommutative using <code>SetNonCommutative</code>. For example:</p>
+<pre><code>SetNonCommutative[A,B]
+A**B-B**A</code></pre>
+<p>results in:</p>
+<pre><code>A**B-B**A</code></pre>
+<p>Likewise, symbols can be made commutative using <code>SetCommutative</code>. For example:</p>
+<pre><code>SetNonCommutative[A] 
+SetCommutative[B]
+A**B-B**A</code></pre>
+<p>results in <code>0</code>. <code>SNC</code> is an alias for <code>SetNonCommutative</code>. So, <code>SNC</code> can be typed rather than the longer <code>SetNonCommutative</code>:</p>
+<pre><code>SNC[A];
+A**a-a**A</code></pre>
+<p>results in:</p>
+<pre><code>-a**A+A**a</code></pre>
+<p>One can check whether a given symbol is commutative or not using <code>CommutativeQ</code> or <code>NonCommutativeQ</code>. For example:</p>
+<pre><code>CommutativeQ[B]
+NonCommutativeQ[a]</code></pre>
+<p>both return <code>True</code>.</p>
+<h2 id="inverses-transposes-and-adjoints"><span class="header-section-number">3.2</span> Inverses, Transposes and Adjoints</h2>
 <p>The multiplicative identity is denoted <code>Id</code> in the program. At the present time, <code>Id</code> is set to 1.</p>
-<p>A symbol <code>a</code> may have an inverse, which will be denoted by <code>inv[a]</code>. For example:</p>
-<pre><code>In[17]:= Id
-Out[17]= 1
-In[18]:= inv[a**b]
-Out[18]= inv[a**b]
-In[19]:= inv[a]**a
-Out[19]= 1
-In[20]:= a**inv[a]
-Out[20]= 1
-In[21]:= a**b**inv[b]
-Out[21]= a</code></pre>
-<h2 id="transposes-and-adjoints"><span class="header-section-number">3.3</span> Transposes and Adjoints</h2>
-<p><code>tp[x]</code> denotes the transpose of symbol <code>x</code></p>
-<p><code>aj[x]</code> denotes the adjoint of symbol <code>x</code></p>
-<p>The properties of transposes and adjoints that everyone uses constantly are built-in. For example:</p>
-<pre><code>In[22]:= tp[a**b]
-Out[22]= tp[b]**tp[a]
-In[23]:= tp[5]
-Out[23]= 5
-In[24]:= tp[2+3I]   (* I is the imaginary unit *)
-Out[24]= 2+3 I
-In[25]:= tp[a]
-Out[25]= tp[a]
-In[26]:= tp[a+b]
-Out[26]= tp[a]+tp[b]
-In[27]:= tp[6x]
-Out[27]= 6 tp[x]
-In[28]:= tp[tp[a]]
-Out[28]= a</code></pre>
-<p>For <code>aj</code>:</p>
-<pre><code>In[29]:= aj[5]
-Out[29]= 5
-In[30]:= aj[2+3I]
-Out[30]= 2-3 I
-In[31]:= aj[a]
-Out[31]= aj[a]
-In[32]:= aj[a+b]
-Out[32]= aj[a]+aj[b]
-In[33]:= aj[6x]
-Out[33]= 6 aj[x]
-In[34]:= aj[aj[a]]
-Out[34]= a</code></pre>
-<p>Since v.5.0 transposes and adjoints in a notebook environment render as <span class="math inline">\(x^T\)</span> and <span class="math inline">\(x^*\)</span>.</p>
-<h2 id="expand-and-collect"><span class="header-section-number">3.4</span> Expand and Collect</h2>
-<p>One can collect noncommutative terms involving same powers of a symbol using <code>NCCollect</code>. There is also a stronger version of collect called <code>NCStrongCollect</code>. <code>NCCollect</code> groups terms by degree before collecting and <code>NCStrongCollect</code> does not. As a result, <code>NCStrongCollect</code> often collects more than one would normally expect.</p>
-<p><code>NCExpand</code> expands noncommutative products.</p>
+<p>A symbol <code>a</code> may have an inverse, which will be denoted by <code>inv[a]</code>. <code>inv</code> operates as expected in most cases.</p>
 <p>For example:</p>
-<pre><code>In[35]:= NCExpand[(a+b)**x]
-Out[35]= a**x+b**x
-In[36]:= NCCollect[a**x+b**x,x]
-Out[36]= (a+b)**x
-In[37]:= NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]
-Out[37]= z+tp[x]**(a+b)**x</code></pre>
-<h2 id="replace"><span class="header-section-number">3.5</span> Replace</h2>
-<p>The Mathematica substitute commands, e.g. <code>ReplaceAll</code> (<code>/.</code>) and <code>ReplaceRepeated</code> (<code>//.</code>), are not reliable in <code>NCAlgebra</code>, so you must use our <code>NC</code> versions of these commands:</p>
-<pre><code>In[38]:= NCReplaceAll[x**a**b,a**b-&gt;c]
-Out[38]= x**a**b
-In[39]:= NCReplaceAll[tp[a]**tp[b]+b**a,b**a-&gt;p]
-Out[39]= p+tp[a]**tp[b]</code></pre>
+<pre><code>inv[a]**a
+inv[a**b]**a**b</code></pre>
+<p>both lead to <code>Id = 1</code> and</p>
+<pre><code>a**b**inv[b]</code></pre>
+<p>results in <code>a</code>.</p>
+<p><code>tp[x]</code> denotes the transpose of symbol <code>x</code> and <code>aj[x]</code> denotes the adjoint of symbol <code>x</code>. Like <code>inv</code>, the properties of transposes and adjoints that everyone uses constantly are built-in. For example:</p>
+<pre><code>tp[a**b]</code></pre>
+<p>leads to</p>
+<pre><code>tp[b]**tp[a]</code></pre>
+<p>and</p>
+<pre><code>tp[a+b]</code></pre>
+<p>returns</p>
+<pre><code>tp[a]+tp[b]</code></pre>
+<p>Likewise <code>tp[tp[a]] == a</code> and <code>tp</code> for anything for which <code>CommutativeQ</code> returns <code>True</code> is simply the identity. For example <code>tp[5] == 5</code>, <code>tp[2 + 3I] == 2 + 3 I</code>, and <code>tp[B] == B</code>.</p>
+<p>Similar properties hold to <code>aj</code>. Moreover</p>
+<pre><code>aj[tp[a]]
+tp[aj[a]]</code></pre>
+<p>return <code>co[a]</code> where <code>co</code> stands for complex-conjugate.</p>
+<p><strong>Version 5.0:</strong> transposes (<code>tp</code>), adjoints (<code>aj</code>) and complex conjugates (<code>co</code>) in a notebook environment render as <span class="math inline">\(x^T\)</span>, <span class="math inline">\(x^*\)</span>, and <span class="math inline">\(\bar{x}\)</span>.</p>
+<h2 id="expand-and-collect"><span class="header-section-number">3.3</span> Expand and Collect</h2>
+<p>The command <code>NCExpand</code> expands noncommutative products. For example:</p>
+<pre><code>NCExpand[(a+b)**x]</code></pre>
+<p>returns</p>
+<pre><code>a**x+b**x</code></pre>
+<p>Conversely, one can collect noncommutative terms involving same powers of a symbol using <code>NCCollect</code>. For example:</p>
+<pre><code>NCCollect[a**x+b**x,x]</code></pre>
+<p>recovers</p>
+<pre><code>(a+b)**x</code></pre>
+<p><code>NCCollect</code> groups terms by degree before collecting and accepts more than one variable. For example:</p>
+<pre><code>expr = a**x+b**x+y**c+y**d+a**x**y+b**x**y
+NCCollect[expr, {x}]</code></pre>
+<p>returns</p>
+<pre><code>y**c+y**d+(a+b)**x**(1+y)</code></pre>
+<p>and</p>
+<pre><code>NCCollect[expr, {x, y}]</code></pre>
+<p>returns</p>
+<pre><code>(a+b)**x+y**(c+d)+(a+b)**x**y</code></pre>
+<p>Note that the last term has degree 2 in <code>x</code> and <code>y</code> and therefore does not get collected with the first order terms.</p>
+<p>The list of variables accepts <code>tp</code>, <code>aj</code> and <code>inv</code>, and</p>
+<pre><code>NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]</code></pre>
+<p>returns</p>
+<pre><code>z+tp[x]**(a+b)**x</code></pre>
+<p>Alternatively one could use</p>
+<pre><code>NCCollectSymmetric[tp[x]**a**x+tp[x]**b**x+z,{x}]</code></pre>
+<p>to obtain the same result. A similar command, <a href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, works with self-adjoint variables.</p>
+<p>There is also a stronger version of collect called <code>NCStrongCollect</code>. <code>NCStrongCollect</code> does not group terms by degree. For instance:</p>
+<pre><code>NCStrongCollect[expr, {x, y}]</code></pre>
+<p>produces</p>
+<pre><code>y**(c+d)+(a+b)**x**(1+y)</code></pre>
+<p>Keep in mind that <code>NCStrongCollect</code> often collects <em>more</em> than one would normally expect.</p>
+<h2 id="replace"><span class="header-section-number">3.4</span> Replace</h2>
+<p>A key feature of symbolic computation is the ability to perform substitutions. The Mathematica substitute commands, e.g. <code>ReplaceAll</code> (<code>/.</code>) and <code>ReplaceRepeated</code> (<code>//.</code>), are not reliable in <code>NCAlgebra</code>, so you must use our <code>NC</code> versions of these commands. For example:</p>
+<pre><code>NCReplaceAll[x**a**b,a**b-&gt;c]</code></pre>
+<p>results in</p>
+<pre><code>x**c</code></pre>
+<p>and</p>
+<pre><code>NCReplaceAll[tp[b**a]+b**a,b**a-&gt;c]</code></pre>
+<p>results in</p>
+<pre><code>c+tp[a]**tp[b]</code></pre>
 <p>USe <a href="#NCMakeRuleSymmetric">NCMakeRuleSymmetric</a> and <a href="#NCMakeRuleSelfAdjoint">NCMakeRuleSelfAdjoint</a> to automatically create symmetric and self adjoint versions of your rules:</p>
-<pre><code>In[40]:= NCReplaceAll[tp[a**b]+w+a**b,a**b-&gt;c]
-Out[40]= c+w+tp[b]**tp[a]
-In[41]:= NCReplaceAll[tp[a**b]+w+a**b,NCMakeRuleSymmetric[a**b-&gt;c]]
-Out[41]= c+w+tp[c]</code></pre>
+<pre><code>NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b ** a -&gt; c]]</code></pre>
+<p>returns</p>
+<pre><code>c + tp[c]</code></pre>
+<p>The difference between <code>NCReplaceAll</code> and <code>NCReplaceRepeated</code> can be understood in the example:</p>
+<pre><code>NCReplaceAll[a ** b ** b, a ** b -&gt; a]</code></pre>
+<p>that results in</p>
+<pre><code>a ** b</code></pre>
+<p>and</p>
+<pre><code>NCReplaceRepeated[a ** b ** b, a ** b -&gt; a]</code></pre>
+<p>that results in</p>
+<pre><code>a</code></pre>
+<p>Beside <code>NCReplaceAll</code> and <code>NCReplaceRepeated</code> we offer <code>NCReplace</code> and <code>NCReplaceList</code>, which are analogous to the standard <code>ReplaceAll</code> (<code>/.</code>), <code>ReplaceRepeated</code> (<code>//.</code>), <code>Replace</code> and <code>ReplaceList</code>. Note that one rarely uses <code>NCReplace</code> and <code>NCReplaceList</code>.</p>
+<p><strong>Version 5.0:</strong> the commands <code>Substitute</code> and <code>Transform</code> have been deprecated in favor of the above nc versions of <code>Replace</code>.</p>
+<h2 id="polynomials"><span class="header-section-number">3.5</span> Polynomials</h2>
 <h2 id="rationals-and-simplification"><span class="header-section-number">3.6</span> Rationals and Simplification</h2>
-<p><code>NCSimplifyRational</code> attempts to simplify noncommutative rationals.</p>
-<pre><code>In[42]:= f1=1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b\
-         -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
-Out[42]= 1+inv[d]**c**inv[-a+S]**b-inv[d]**c**inv[-a+S+b**inv[d]**c]**b\
-         -inv[d]**c**inv[-a+S+b**inv[d]**c]**b**inv[d]**c**inv[-a+S]**b
-In[43]:= NCSimplifyRational[f1]
-Out[43]= 1
-In[44]:= f2=2inv[1+2a]**a;
-In[45]:= NCSimplifyRational[f2]
-Out[45]= 1-inv[1+2 a]</code></pre>
-<p><code>NCSR</code> is the alias for <code>NCSimplifyRational</code>.</p>
-<pre><code>In[46]:= f3=a**inv[1-a];
-In[47]:= NCSR[f3]
-Out[47]= -1+inv[1-a]
-In[48]:= f4=inv[1-b**a]**inv[a];
-In[49]:= NCSR[f4]
-Out[49]= inv[a]+b**inv[1-b**a]</code></pre>
+<p>One of the great challenges of noncommutative symbolic algebra is the simplification of rational nc expressions. <code>NCAlgebra</code> provides various algorithms that can be used for simplification and general manipulation of nc rationals.</p>
+<p>One such function is <code>NCSimplifyRational</code>, which attempts to simplify noncommutative rationals using a predefined set of rules. For example:</p>
+<pre><code>expr = 1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b \
+       -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
+NCSimplifyRational[expr]</code></pre>
+<p>leads to <code>1</code>. Of course the great challenge here is to reveal well known identities that can lead to simplification. For example, the two expressions:</p>
+<pre><code>expr1 = a**inv[1+b**a]
+expr2 = inv[1+a**b]**a</code></pre>
+<p>and one can use <code>NCSimplifyRational</code> to test such equivalence by evaluating</p>
+<pre><code>NCSimplifyRational[expr1 - expr2]</code></pre>
+<p>which results in <code>0</code> or</p>
+<pre><code>NCSimplifyRational[expr1**inv[expr2]]</code></pre>
+<p>which results in <code>1</code>. <code>NCSimplifyRational</code> works by transforming nc rationals. For example, one can verify that</p>
+<pre><code>NCSimplifyRational[expr2] == expr1</code></pre>
 <h2 id="calculus"><span class="header-section-number">3.7</span> Calculus</h2>
 <p>One can calculate directional derivatives with <code>DirectionalD</code> and noncommutative gradients with <code>NCGrad</code>.</p>
 <pre><code>In[50]:= DirectionalD[x**x,x,h]
@@ -615,7 +627,88 @@ b ** a ** b -&gt; b</code></pre>
 <p>In this case the Gröbner basis cannot quite <em>solve</em> the problem but it remarkably produces the necessary condition for existence of solutions: <span class="math display">\[ 
     0 = a \, b \, c - c = a \, a^\dag c - c 
 \]</span> that can be interpreted as <span class="math inline">\(c\)</span> being in the range-space of <span class="math inline">\(a\)</span>.</p>
-<h2 id="reducing-a-polynomial-by-a-gb"><span class="header-section-number">5.2</span> Reducing a polynomial by a GB</h2>
+<h2 id="interlude-ordering-on-variables-and-monomials"><span class="header-section-number">5.2</span> Interlude: ordering on variables and monomials</h2>
+<p>As seen above, one needs to declare a <em>monomial order</em> before making a Gröbner Basis. There are various monomial orders which can be used when computing Gröbner Basis. The most common are <em>lexicographic</em> and <em>graded lexicographic</em> orders. We consider also <em>multi-graded lexicographic</em> orders.</p>
+<p>Lexicographic and multi-graded lexicographic orders are examples of elimination orderings. An elimination ordering is an ordering which is used for solving for some of the variables in terms of others.</p>
+<p>We now discuss each of these types of orders.</p>
+<h3 id="lex-order-the-simplest-elimination-order"><span class="header-section-number">5.2.1</span> Lex Order: the simplest elimination order</h3>
+<p>To impose lexicographic order, say <span class="math inline">\(a\ll b\ll x\ll y\)</span> on <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, one types</p>
+<pre><code>SetMonomialOrder[a,b,x,y];</code></pre>
+<p>This order is useful for attempting to solve for <span class="math inline">\(y\)</span> in terms of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(x\)</span>, since the highest priority of the GB algorithm is to produce polynomials which do not contain <span class="math inline">\(y\)</span>. If producing high order polynomials is a consequence of this fanaticism so be it. Unlike graded orders, lex orders pay little attention to the degree of terms. Likewise its second highest priority is to eliminate <span class="math inline">\(x\)</span>.</p>
+<p>Once this order is set, one can use all of the commands in the preceeding section in exactly the same form.</p>
+<p>We now give a simple example how one can solve for <span class="math inline">\(y\)</span> given that <span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span>,<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> satisfy the equations: <span class="math display">\[
+\begin{aligned}
+-b\, x + x\, y  \, a + x\, b \, a \,  a &amp;= 0 \\
+x \, a-1&amp;=0 \\
+a\, x-1&amp;=0
+\end{aligned}
+\]</span></p>
+<p>The command</p>
+<pre><code>NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]</code></pre>
+<p>produces the Gröbner basis:</p>
+<pre><code>{y -&gt; -b**a+a**b**x**x, a**x -&gt; 1, x**a -&gt; 1}</code></pre>
+<p>after two iterations.</p>
+<p>Now, we change the order to</p>
+<pre><code>SetMonomialOrder[y,x,b,a];</code></pre>
+<p>and do the same <code>NCMakeGB</code> as above:</p>
+<pre><code>NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
+ColumnForm[%]</code></pre>
+<p>which, this time, results in</p>
+<pre><code>x**a -&gt; 1
+a**x -&gt; 1
+x**b**a -&gt; -x**y+b**x**x
+b**a**a -&gt; -y**a+a**b**x
+x**b**b**a -&gt; -x**b**y-x**y**b**x**x+b**x**x**b**x**x
+b**x**x**x -&gt; x**b+x**y**x
+b**a**b**a -&gt; -y**y-b**a**y-y**b**a+a**b**x**b**x**x
+a**b**x**x -&gt; y+b**a
+b**a**b**b**a -&gt; -y**b**y-b**a**b**y-y**b**b**a-y**y**b**x**x-
+    &gt; b**a**y**b**x**x+a**b**x**b**x**x**b**x**x</code></pre>
+<p>which is not a Gröbner basis since the algorithm was interrupted at 4 iterations. Note the presence of the rule</p>
+<pre><code>a**b**x**x -&gt; y + b**a</code></pre>
+<p>which shows that the order is not set up to solve for <span class="math inline">\(y\)</span> in terms of the other variables in the sense that <span class="math inline">\(y\)</span> is not on the left hand side of this rule (but a human could easily solve for <span class="math inline">\(y\)</span> using this rule). Also the algorithm created a number of other relations which involved <span class="math inline">\(y\)</span>. See [CoxLittleOShea].</p>
+<h3 id="graded-lex-ordering-a-non-elimination-order"><span class="header-section-number">5.2.2</span> Graded lex ordering: A non-elimination order</h3>
+<p>To impose graded lexicographic order, say <span class="math inline">\(a&lt; b&lt; x&lt; y\)</span> on <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, one types</p>
+<pre><code>SetMonomialOrder[{a,b,x,y}];</code></pre>
+<p>This ordering puts high degree monomials high in the order. Thus it tries to decrease the total degree of expressions. A call to</p>
+<pre><code>NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
+ColumnForm[%]</code></pre>
+<p>now produces</p>
+<pre><code>a**x -&gt; 1
+x**a -&gt; 1
+b**a**a -&gt; -y**a+a**b**x
+x**b**a -&gt; -x**y+b**x**x
+a**b**x**x -&gt; y+b**a
+b**x**x**x -&gt; x**b+x**y**x
+a**b**x**b**x**x -&gt; y**y+b**a**y+y**b**a+b**a**b**a
+b**x**x**b**x**x -&gt; x**b**y+x**b**b**a+x**y**b**x**x
+a**b**x**b**x**b**x**x -&gt; y**y**y+b**a**y**y+y**b**a**y+y**y**b**a+
+    &gt; b**a**b**a**y+b**a**y**b**a+y**b**a**b**a+b**a**b**a**b**a
+b**x**x**b**x**b**x**x -&gt; x**b**y**y+x**b**b**a**y+x**b**y**b**a
+    &gt; +x**b**b**a**b**a+x**y**b**x**b**x**x
+a**b**x**b**x**b**x**b**x**x -&gt; y**y**y**y+b**a**y**y**y+
+    &gt; y**b**a**y**y+y**y**b**a**y+y**y**y**b**a+b**a**b**a**y**y+
+    &gt; b**a**y**b**a**y+b**a**y**y**b**a+y**b**a**b**a**y+
+    &gt; y**b**a**y**b**a+y**y**b**a**b**a+b**a**b**a**b**a**y+
+    &gt; b**a**b**a**y**b**a+b**a**y**b**a**b**a+y**b**a**b**a**b**a+
+    &gt; b**a**b**a**b**a**b**a</code></pre>
+<p>which again fails to be a Gröbner basis and does not eliminate <span class="math inline">\(y\)</span>. Instead, it tries to decrease the total degree of expressions involving <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(y\)</span>.</p>
+<h3 id="multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="header-section-number">5.2.3</span> Multigraded lex ordering : a variety of elimination orders</h3>
+<p>There are other useful monomial orders which one can use other than graded lex and lex. Another type of order is what we call multigraded lex and is a mixture of graded lex and lex order. To impose multi-graded lexicographic order, say <span class="math inline">\(a&lt; b&lt; x\ll y\)</span> on <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, one types</p>
+<pre><code>SetMonomialOrder[{a,b,x},y];</code></pre>
+<p>which separates <span class="math inline">\(y\)</span> from the remaining variables. This time, a call to</p>
+<pre><code>NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
+ColumnForm[%]</code></pre>
+<p>yields</p>
+<pre><code>y -&gt; -b**a+a**b**x**x
+a**x -&gt; 1
+x**a -&gt; 1</code></pre>
+<p>which not only eliminates <span class="math inline">\(y\)</span> but is also Gröbner basis, calculated after 2 iterations.</p>
+<p>For an intuitive idea of why multigraded lex is helpful, we think of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(x\)</span> as corresponding to variables in some engineering problem which represent quantities which are known and <span class="math inline">\(y\)</span> to be unknown. The fact that <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(x\)</span> are in the top level indicates that we are very interested in solving for <span class="math inline">\(y\)</span> in terms of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(x\)</span>, but are not willing to solve for, say <span class="math inline">\(x\)</span>, in terms of expressions involving <span class="math inline">\(y\)</span>.</p>
+<p>This situation is so common that we provide the commands <code>SetKnowns</code> and <code>SetUnknowns</code>. The above ordering would be obtained after setting</p>
+<pre><code>SetKnowns[a,b,x];
+SetUnknowns[y];</code></pre>
+<h2 id="reducing-a-polynomial-by-a-gb"><span class="header-section-number">5.3</span> Reducing a polynomial by a GB</h2>
 <p>Now we reduce a polynomial or ListOfPolynomials by a GB or by any ListofPolynomials2. First we convert ListOfPolynomials2 to rules subordinate to the monomial order which is currently in force in our session.</p>
 <p>For example, let us continue the session above with</p>
 <pre><code>ListOfRules2 = PolyToRule[ourGB]</code></pre>
@@ -628,7 +721,7 @@ b ** a ** b -&gt; b</code></pre>
 <pre><code>poly = a**x**y**x**x + x**a**x**y + x**x**y**y</code></pre>
 <p>in our session type</p>
 <pre><code>Reduction[ { poly }, ListOfRules2 ]</code></pre>
-<h2 id="simplifying-expressions"><span class="header-section-number">5.3</span> Simplifying Expressions</h2>
+<h2 id="simplifying-expressions"><span class="header-section-number">5.4</span> Simplifying Expressions</h2>
 <p>Suppose we want to simplify the expression $a^3 b^3 -c $ assuming that we know <span class="math inline">\(a b =1\)</span> and <span class="math inline">\(b a = b\)</span>.</p>
 <p>First NCAlgebra requires us to declare the variables to be noncommutative.</p>
 <pre><code>SetNonCommutative[a,b,c]</code></pre>
@@ -643,12 +736,12 @@ b ** a ** b -&gt; b</code></pre>
 <pre><code>NCSimplifyAll[ ListofPolynomials, ListofPolynomials2] =
              Reduction[ ListofPolynomials, 
                       PolyToRule[NCMakeGB[ListofPolynomials2,10]]]</code></pre>
-<h2 id="ncgb-facilitates-natural-notation"><span class="header-section-number">5.4</span> NCGB Facilitates Natural Notation</h2>
+<h2 id="ncgb-facilitates-natural-notation"><span class="header-section-number">5.5</span> NCGB Facilitates Natural Notation</h2>
 <p>Now we turn to a more complicated (though mathematically intuitive) notation. Also we give some more examples of Simplification and GB manufacture. We shall use the variables</p>
 <pre><code>y, Inv[y], Inv[1-y], a {\rm\ and\ } x.</code></pre>
 <p>In NCAlgebra, lower case letters are noncommutative by default, and functions of noncommutative variables are noncommutative, so the <code>SetNonCommutative</code> command, while harmless, is not necessary.</p>
 <p>Using <span class="math inline">\(Inv[]\)</span> has the advantage that our TeX display commands recognize it and treat it wisely. Also later we see that the command <code>NCMakeRelations</code> generates defining relations for <span class="math inline">\(Inv[]\)</span> automatically.</p>
-<h3 id="a-simplification-example"><span class="header-section-number">5.4.1</span> A Simplification example</h3>
+<h3 id="a-simplification-example"><span class="header-section-number">5.5.1</span> A Simplification example</h3>
 <p>We want to simplify a polynomial in the variables of</p>
 <p>We begin by setting the variables noncommutative with the following command.</p>
 <pre><code>SetNonCommutative[y, Inv[y], Inv[1-y], a, x]</code></pre>
@@ -671,7 +764,7 @@ b ** a ** b -&gt; b</code></pre>
 NCSimplifyRationalX1[{x**x**x,x+Inv[z]**Inv[1-z]},{x**x-a},3]
 {a ** x, x + Inv[1 - z] + inv[z]}</code></pre>
 <p>WARNING: Never use inv[  ] with NCGB since it has special properties given to it in NCAlgebra and these are not recognized by the C++ code behind NCGB</p>
-<h2 id="makinggbs-and-inv-tp"><span class="header-section-number">5.5</span> MakingGB's and Inv[], Tp[]</h2>
+<h2 id="makinggbs-and-inv-tp"><span class="header-section-number">5.6</span> MakingGB's and Inv[], Tp[]</h2>
 <p>Here is another GB example. This time we use the fancy <code>Inv[]</code> notation.</p>
 <pre><code>&lt;&lt; NCGB.m
 SetNonCommutative[y, Inv[y], Inv[1-y], a, x]
@@ -685,26 +778,26 @@ resol = {y ** Inv[y] == 1,   Inv[y] ** y == 1,
 &gt;    1 - Inv[1 - y] + Inv[1 - y] ** y, -1 + Inv[y] ** y,
 &gt;    -Inv[1 - y] - Inv[y] + Inv[y] ** Inv[1 - y],
 &gt;    -Inv[1 - y] - Inv[y] + Inv[1 - y] ** Inv[y]}</code></pre>
-<h2 id="simplification-and-gbs-revisited"><span class="header-section-number">5.6</span> Simplification and GB's revisited</h2>
-<h3 id="changing-polynomials-to-rules"><span class="header-section-number">5.6.1</span> Changing polynomials to rules</h3>
+<h2 id="simplification-and-gbs-revisited"><span class="header-section-number">5.7</span> Simplification and GB's revisited</h2>
+<h3 id="changing-polynomials-to-rules"><span class="header-section-number">5.7.1</span> Changing polynomials to rules</h3>
 <p>The following command converts a list of relations to a list of rules subordinate to the monomial order specified above.</p>
 <pre><code>PolyToRule[%]
 {y ** Inv[1 - y] -&gt; -1 + Inv[1 - y], y ** Inv[y] -&gt; 1,
 &gt;    Inv[1 - y] ** y -&gt; -1 + Inv[1 - y], Inv[y] ** y -&gt; 1,
 &gt;    Inv[y] ** Inv[1 - y] -&gt; Inv[1 - y] + Inv[y],
 &gt;    Inv[1 - y] ** Inv[y] -&gt; Inv[1 - y] + Inv[y]}</code></pre>
-<h3 id="changing-rules-to-polynomials"><span class="header-section-number">5.6.2</span> Changing rules to polynomials</h3>
+<h3 id="changing-rules-to-polynomials"><span class="header-section-number">5.7.2</span> Changing rules to polynomials</h3>
 <p>The following command converts a list of rules to a list of relations.</p>
 <pre><code>PolyToRule[%]
 {1 - Inv[1 - y] + y ** Inv[1 - y], -1 + y ** Inv[y],
 &gt;    1 - Inv[1 - y] + Inv[1 - y] ** y, -1 + Inv[y] ** y,
 &gt;    -Inv[1 - y] - Inv[y] + Inv[y] ** Inv[1 - y],
 &gt;    -Inv[1 - y] - Inv[y] + Inv[1 - y] ** Inv[y]}</code></pre>
-<h3 id="simplifying-using-a-gb-revisited"><span class="header-section-number">5.6.3</span> Simplifying using a GB revisited</h3>
+<h3 id="simplifying-using-a-gb-revisited"><span class="header-section-number">5.7.3</span> Simplifying using a GB revisited</h3>
 <p>We can apply the rules in  repeatedly to an expression to put it into ``canonical form.&quot; Often the canonical form is simpler than what we started with.</p>
 <pre><code>Reduction[{Inv[y]**Inv[1-y] - Inv[y]}, Out[9]]
 {Inv[1 - y]}</code></pre>
-<h2 id="saving-lots-of-time-when-typing"><span class="header-section-number">5.7</span> Saving lots of time when typing</h2>
+<h2 id="saving-lots-of-time-when-typing"><span class="header-section-number">5.8</span> Saving lots of time when typing</h2>
 <p>One can save time in inputting various types of starting relations easily by using the command <code>NCMakeRelations</code>.</p>
 <pre><code>&lt;&lt; NCMakeRelations.m             
 NCMakeRelations[{Inv,y,1-y}]
@@ -714,94 +807,16 @@ Inv[1 - y] ** (1 - y) == 1}</code></pre>
 Inv[x], Inv[y], Inv[1-x**y] \mbox{\rm\ and\ } Rt[x] \, .
 \]</span> In fact, we allow <span class="math inline">\(f[expr]\)</span> to be an indeterminate if <span class="math inline">\(expr\)</span> is an expression and <span class="math inline">\(f\)</span> is a Mathematica symbol which has no Mathematica code associated to it (e.g., <span class="math inline">\(f= Dummy\)</span> or <span class="math inline">\(f=Joe\)</span>, but NOT <span class="math inline">\(f=List\)</span> or <span class="math inline">\(f=Plus\)</span>). Also one should never use <span class="math inline">\(inv[m]\)</span> to represent <span class="math inline">\(m^{-1}\)</span> in the input of any of the commands explained within this document, because NCAlgebra has already assigned a meaning to <span class="math inline">\(inv[m]\)</span>. It knows that <span class="math inline">\(inv[m]**m\)</span> is <span class="math inline">\(1\)</span> which will transform your starting set of data prematurely.</p>
 <p>Besides <span class="math inline">\(Inv\)</span> many more functions are facilitated by NCMakeRelations, see Section .</p>
-<h3 id="saving-time-working-in-algebras-with-involution-ncaddtranspose-ncaddadjoint"><span class="header-section-number">5.7.1</span> Saving time working in algebras with involution: NCAddTranspose, NCAddAdjoint</h3>
+<h3 id="saving-time-working-in-algebras-with-involution-ncaddtranspose-ncaddadjoint"><span class="header-section-number">5.8.1</span> Saving time working in algebras with involution: NCAddTranspose, NCAddAdjoint</h3>
 <p>One can save time when working in an algebra with transposes or adjoints by using the command NCAddTranpose[ ] or NCAddAdjoint[ ]. These commands ``symmetrize&quot; a set of relations by applying tp[ ] or aj[ ] to the relations and returning a list with the new expressions appended to the old ones. This saves the user the trouble of typing both <span class="math inline">\(a = b\)</span> and <span class="math inline">\(tp[a] = tp[b]\)</span>.</p>
 <pre><code>NCAddTranspose[ { a + b , tp[b] == c + a } ]</code></pre>
 <p>returns</p>
 <pre><code>{ a + b , tp[b] == c + a, b == tp[c] + tp[a], tp[a] + tp[b] }</code></pre>
-<h3 id="saving-time-when-setting-orders-ncautomaticorder"><span class="header-section-number">5.7.2</span> Saving time when setting orders: NCAutomaticOrder</h3>
+<h3 id="saving-time-when-setting-orders-ncautomaticorder"><span class="header-section-number">5.8.2</span> Saving time when setting orders: NCAutomaticOrder</h3>
 <p>One can save time in setting the monomial order by not including all of the indeterminants found in a set of relations, only the variables which they are made of. <span class="math inline">\(NCAutomaticOrder[ aMonomialOrder,\)</span> $ aListOfPolynomials ]$ inserts all of the indeterminants found in <span class="math inline">\(aListOfPolynomials\)</span> into <span class="math inline">\(aMonomialOrder\)</span> and sets this order.<br />
 NCAutomaticOrder[ $aListOfPolynomials ]$ inserts all of the indeterminants found in <span class="math inline">\(aListOfPolynomials\)</span> into the ambient monomial order. If x is an indeterminant found in <span class="math inline">\(aMonomialOrder\)</span> then any indeterminant whose symbolic representation is a function of x will appear next to x.</p>
 <pre><code>NCAutomaticOrder[{{a},{b}},  { a**Inv[a]**tp[a] + tp[b]}]</code></pre>
 <p>would set the order to be <span class="math inline">\(a &lt; tp[a] &lt; Inv[a] \ll b &lt; tp[b]\)</span>.</p>
-<h2 id="ordering-on-variables-and-monomials"><span class="header-section-number">5.8</span> Ordering on variables and monomials</h2>
-<p>One needs to declare a monomial order before making a Grobner Basis. There are various monomial orders which can be used when computing Gröbner Basis. The most common are called lexicographic and graded lexicographic orders. In the previous section, we used only graded lexicographic orders. See Section ?? for a discussion of lexicographic orders.</p>
-<p>We will be considering <em>lexicographic</em>, <em>graded lexicographic</em> and <em>multi-graded lexicographic</em> orders. Lexicographic and multi-graded lexicographic orders are examples of elimination orderings. An elimination ordering is an ordering which is used for solving for some of the variables in terms of others.</p>
-<p>We now discuss each of these types of orders.</p>
-<h3 id="lex-order-the-simplest-elimination-order"><span class="header-section-number">5.8.1</span> Lex Order: The simplest elimination order</h3>
-<p>To impose lexicographic order <span class="math inline">\(a&lt;&lt;b&lt;&lt;x&lt;&lt;y\)</span> on <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, one types</p>
-<pre><code>SetMonomialOrder[a,b,x,y];</code></pre>
-<p>This order is useful for attempting to solve for <span class="math inline">\(y\)</span> in terms of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(x\)</span>, since the highest priority of the GB algorithm is to produce polynomials which do not contain <span class="math inline">\(y\)</span>. If producing high order polynomials is a consequence of this fanaticism so be it. Unlike graded orders, lex orders pay little attention to the degree of terms. Likewise its second highest priority is to eliminate <span class="math inline">\(x\)</span>.</p>
-<p>Once this order is set, one can use all of the commands in the preceeding section in exactly the same form.</p>
-<p>We now give a simple example how one can solve for <span class="math inline">\(y\)</span> given that <span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span>,<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> satisfy the equations: <span class="math display">\[
--b\, x + x\, y  \, a + x\, b \, a \,  a = 0
-\]</span> <span class="math display">\[
-x \, a-1=0
-\]</span> <span class="math display">\[
-a\, x-1=0 \, .
-\]</span></p>
-<pre><code>NCMakeGB[{-b ** x + x ** y ** a + x ** b ** a ** a,x**a-1,a**x-1},4];
-{-1 + a ** x, -1 + x ** a, y + b ** a - a ** b ** x ** x}</code></pre>
-<p>If the polynomials above are converted to replacement rules, then a simple glance at the results allows one to see that <span class="math inline">\(y\)</span> has been solved for.</p>
-<pre><code>PolyToRule[%]
-{a ** x -&gt; 1, x ** a -&gt; 1, y -&gt; -b ** a + a ** b ** x ** x}</code></pre>
-<p>Now, we change the order to</p>
-<pre><code>SetMonomialOrder[y,x,b,a];</code></pre>
-<p>and do the same <code>NCMakeGB</code> as above:</p>
-<pre><code>NCMakeGB[{-b ** x + x ** y ** a + x ** b ** a ** a,x**a-1,a**x-1},4];   
-ColumnForm[%];
-a ** x -&gt; 1
-x ** a -&gt; 1
-x ** b ** a -&gt; -x ** y + b ** x ** x
-b ** a ** a -&gt; -y ** a + a ** b ** x
-b ** x ** x ** x -&gt; x ** b + x ** y ** x
-a ** b ** x ** x -&gt; y + b ** a
-x ** b ** b ** a -&gt; 
-    &gt;   -x ** b ** y - x ** y ** b ** x ** x + b ** x ** x ** b ** x ** x
-b ** a ** b ** a -&gt; 
-    &gt;   -y ** y - b ** a ** y - y ** b ** a + a ** b ** x ** b ** x ** x
-x ** b ** b ** b ** a -&gt; 
-    &gt;   -x ** b ** b ** y - x ** b ** y ** b ** x ** x - 
-    &gt;    x ** y ** b ** x ** x ** b ** x ** x + 
-    &gt;    b ** x ** x ** b ** x ** x ** b ** x ** x
-b ** a ** b ** b ** a -&gt; 
-    &gt;   -y ** b ** y - b ** a ** b ** y - y ** b ** b ** a - 
-    &gt;    y ** y ** b ** x ** x - b ** a ** y ** b ** x ** x + 
-    &gt;    a ** b ** x ** b ** x ** x ** b ** x ** x</code></pre>
-<p>In this case, it turns out that it produced the rule <span class="math inline">\(a ** b ** x ** x \rightarrow y + b ** a\)</span> which shows that the order is not set up to solve for <span class="math inline">\(y\)</span> in terms of the other variables in the sense that <span class="math inline">\(y\)</span> is not on the left hand side of this rule (but a human could easily solve for <span class="math inline">\(y\)</span> using this rule). Also the algorithm created a number of other relations which involved <span class="math inline">\(y\)</span>. If one uses the lex order <span class="math inline">\(a&lt;&lt;b&lt;&lt;y&lt;&lt;x\)</span>, the <code>NCMakeGB</code> call above generates 12 polynomials of high total degree which do not solve for <span class="math inline">\(y\)</span>.</p>
-<p>See [CoxLittleOShea].</p>
-<h3 id="graded-lex-ordering-a-non-elimination-order"><span class="header-section-number">5.8.2</span> Graded lex ordering: A non-elimination order</h3>
-<p>This is the ordering which was used in all demos appearing before this section. It puts high degree monomials high in the order. Thus it tries to decrease the total degree of expressions.</p>
-<h3 id="multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="header-section-number">5.8.3</span> Multigraded lex ordering : A variety of elimination orders</h3>
-<p>There are other useful monomial orders which one can use other than graded lex and lex. Another type of order is what we call multigraded lex and is a mixture of graded lex and lex order. This multigraded order is set using <code>SetMonomialOrder</code>, <code>SetKnowns</code> and <code>SetUnknowns</code> which are described in Section. As an example, suppose that we execute the following commands:</p>
-<pre><code>SetMonomialOrder[{A,B,C},{a,b,c},{d,e,f}];</code></pre>
-<p>We use the notation <span class="math display">\[
-A &lt; B &lt; C &lt;&lt; a &lt; b &lt; c &lt;&lt; d &lt; e &lt; f \, ,
-\]</span> to denote this order.</p>
-<p>For an intuitive idea of why multigraded lex is helpful, we think of <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> as corresponding to variables in some engineering problem which represent quantities which are known and <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> and <span class="math inline">\(f\)</span> to be unknown. If one wants to speak <em>very</em> loosely, then we would say that <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> are unknown and <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> and <span class="math inline">\(f\)</span> are ``very unknown.&quot;. The fact that <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> and <span class="math inline">\(f\)</span> are in the top level indicates that we are very interested in solving for <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> and <span class="math inline">\(f\)</span> in terms of <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span>, but are not willing to solve for <span class="math inline">\(b\)</span> in terms of expressions involving either <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> or <span class="math inline">\(f\)</span>.</p>
-<p>For example,</p>
-<ol type="1">
-<li><span class="math inline">\(d &gt; a ** a ** A ** b\)</span></li>
-<li><span class="math inline">\(d ** a ** A ** b &gt; a\)</span></li>
-<li><span class="math inline">\(e ** d &gt; d ** e\)</span></li>
-<li><span class="math inline">\(b ** a &gt; a ** b\)</span></li>
-<li><span class="math inline">\(a ** b ** b &gt; b ** a\)</span></li>
-<li><span class="math inline">\(a &gt; A ** B ** A ** B ** A ** B\)</span></li>
-</ol>
-<p>This order induces an order on monomials in the following way. One does the following steps in determining whether a monomial <span class="math inline">\(m\)</span> is greater in the order than a monomial <span class="math inline">\(n\)</span> or not.</p>
-<ol type="1">
-<li>First, compute the total degree of <span class="math inline">\(m\)</span> with respect to only the variables <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> and <span class="math inline">\(f\)</span>.</li>
-<li>Second, compute the total degree of <span class="math inline">\(n\)</span> with respect to only the variables <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> and <span class="math inline">\(f\)</span>.</li>
-<li>If the number from item (2) is smaller than the number from item (1), then <span class="math inline">\(m\)</span> is smaller than <span class="math inline">\(n\)</span>. If the number from item (2) is bigger than the number from item (1), then <span class="math inline">\(m\)</span> is bigger than <span class="math inline">\(n\)</span>. If the numbers from items (1) and (2) are equal, then proceed to the next item.</li>
-<li>First, compute the total degree of <span class="math inline">\(m\)</span> with respect to only the variables <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span>.</li>
-<li>Second, compute the total degree of <span class="math inline">\(n\)</span> with respect to only the variables <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span>.</li>
-<li>If the number from item (5) is smaller than the number from item (4), then <span class="math inline">\(m\)</span> is smaller than <span class="math inline">\(n\)</span>. If the number from item (5) is bigger than the number from item (4), then <span class="math inline">\(m\)</span> is bigger than <span class="math inline">\(n\)</span>. If the numbers from items (4) and (5) are equal, then proceed to the next item.</li>
-<li>First, compute the total degree of <span class="math inline">\(m\)</span> with respect to only the variables <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span>.</li>
-<li>Second, compute the total degree of <span class="math inline">\(n\)</span> with respect to only the variables <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span>.</li>
-<li>If the number from item (8) is smaller than the number from item (7), then <span class="math inline">\(m\)</span> is smaller than <span class="math inline">\(n\)</span>. If the number from item (8) is bigger than the number from item (7), then <span class="math inline">\(m\)</span> is bigger than <span class="math inline">\(n\)</span>. If the numbers from items (7) and (8) are equal, then proceed to the next item.</li>
-<li>At this point, say that <span class="math inline">\(m\)</span> is smaller than <span class="math inline">\(n\)</span> if and only if <span class="math inline">\(m\)</span> is smaller than <span class="math inline">\(n\)</span> with respect to the graded lex order <span class="math inline">\(A&lt;B&lt;C&lt;a&lt;b&lt;c&lt;d&lt;e&lt;f\)</span></li>
-</ol>
-<p>For more information on multigraded lex orders, consult [HSStrat].</p>
 <h1 id="TeX"><span class="header-section-number">6</span> Pretty Output with Mathematica Notebooks and TeX</h1>
 <p><code>NCAlgebra</code> comes with several utilities for facilitating formatting of expression in notebooks or using LaTeX.</p>
 <h2 id="Pretty_Output"><span class="header-section-number">6.1</span> Pretty Output</h2>
@@ -970,6 +985,7 @@ NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
 <p>produce</p>
 <p><span class="math inline">\(J_2(x)\)</span></p>
 <h1 id="SemidefiniteProgramming"><span class="header-section-number">7</span> Semidefinite Programming</h1>
+<h2 id="semidefinite-programs-in-matrix-variables"><span class="header-section-number">7.1</span> Semidefinite Programs in Matrix Variables</h2>
 <p>The package <a href="#PackageNCSDP">NCSDP</a> allows the symbolic manipulation and numeric solution of semidefinite programs.</p>
 <p>The package must be loaded using:</p>
 <pre><code>&lt;&lt; NCSDP`</code></pre>
@@ -1003,15 +1019,45 @@ NCSDPForm[ineqs, vars, obj]</code></pre>
 data = {a -&gt; A};</code></pre>
 <p>Equipped with the above list of rules representing a problem instance one can load <a href="#SDPSylvester"><code>SDPSylvester</code></a> and use <code>NCSDP</code> to create a problem instance as follows:</p>
 <pre><code>&lt;&lt; SDPSylvester`
-{abc, rules} = NCSDP[F, vars, obj, data];</code></pre>
+{abc, rules} = NCSDP[ineqs, vars, obj, data];</code></pre>
 <p>The resulting <code>abc</code> and <code>rules</code> objects are used for calculating the numerical solution using <a href="#SDPSolve"><code>SDPSolve</code></a>. The command:</p>
 <pre><code>{Y, X, S, flags} = SDPSolve[abc, rules];</code></pre>
 <p>produces an output like the folowing:</p>
-<p>?? ADD OUTPUT OF SDPSolve ??</p>
-<p>The variables <code>Y</code> and <code>S</code> are the <em>primal</em> solutions and <code>X</code> is the <em>dual</em> solution.</p>
-<p>An explicit symbolic dual problem can be calculated easily using <a href="#NCSDPDual"><code>NCSDPDual</code></a>:</p>
+<pre><code>Problem data:
+* Dimensions (total):
+  - Variables             = 4
+  - Inequalities          = 2
+* Dimensions (detail):
+  - Variables             = {{2,2}}
+  - Inequalities          = {2,2}
+Method:
+* Method                  = PredictorCorrector
+* Search direction        = NT
+Precision:
+* Gap tolerance           = 1.*10^(-9)
+* Feasibility tolerance   = 1.*10^(-6)
+* Rationalize iterates    = False
+Other options:
+* Debug level             = 0
+
+ K     &lt;B, Y&gt;         mu  theta/tau      alpha     |X S|2    |X S|oo  |A* X-B|   |A Y+S-C|
+-------------------------------------------------------------------------------------------
+ 1  1.638e+00  1.846e-01  2.371e-01  8.299e-01  1.135e+00  9.968e-01  9.868e-16  2.662e-16
+ 2  1.950e+00  1.971e-02  2.014e-02  8.990e-01  1.512e+00  9.138e-01  2.218e-15  2.937e-16
+ 3  1.995e+00  1.976e-03  1.980e-03  8.998e-01  1.487e+00  9.091e-01  1.926e-15  3.119e-16
+ 4  2.000e+00  9.826e-07  9.826e-07  9.995e-01  1.485e+00  9.047e-01  8.581e-15  2.312e-16
+ 5  2.000e+00  4.913e-10  4.913e-10  9.995e-01  1.485e+00  9.047e-01  1.174e-14  4.786e-16
+-------------------------------------------------------------------------------------------
+* Primal solution is not strictly feasible but is within tolerance
+(0 &lt;= max eig(A* Y - C) = 8.06666*10^-10 &lt; 1.*10^-6 )
+* Dual solution is within tolerance
+(|| A X - B || = 1.96528*10^-9 &lt; 1.*10^-6)
+* Feasibility radius = 0.999998
+(should be less than 1 when feasible)</code></pre>
+<p>The output variables <code>Y</code> and <code>S</code> are the <em>primal</em> solutions and <code>X</code> is the <em>dual</em> solution.</p>
+<p>A symbolic dual problem can be calculated easily using <a href="#NCSDPDual"><code>NCSDPDual</code></a>:</p>
 <pre><code>{dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];</code></pre>
-<p>The corresponding dual program is expressed in the <em>canonical form</em>: <span class="math display">\[
+<p>The dual program for the example problem above is: <span class="math display">\[
 \begin{aligned} 
   \max_x \quad &amp; &lt;c,x&gt; \\ 
   \text{s.t.} \quad &amp; f^*(x) + b = 0, \quad x \succeq 0
@@ -1023,8 +1069,44 @@ data = {a -&gt; A};</code></pre>
             &amp; X_1 \succeq 0, \\
         &amp; X_2 \succeq 0
 \end{aligned}
-\]</span> Dual semidefinite programs can be visualized using <a href="#NCSDPDualForm"><code>NCSDPDualForm</code></a> as in:</p>
+\]</span> which can be visualized using <a href="#NCSDPDualForm"><code>NCSDPDualForm</code></a> using:</p>
 <pre><code>NCSDPDualForm[dIneqs, dVars, dObj]</code></pre>
+<h2 id="semidefinite-programs-in-vector-variables"><span class="header-section-number">7.2</span> Semidefinite Programs in Vector Variables</h2>
+<p>The package <a href="#SDP">SDP</a> provides a crude and not very efficient way to define and solve semidefinite programs in standard form, that is vectorized. You do not need to load <code>NCAlgebra</code> if you just want to use the semidefinite program solver. But you still need to load <code>NC</code> as in:</p>
+<pre><code>&lt;&lt; NC`
+&lt;&lt; SDP`</code></pre>
+<p>Semidefinite programs are optimization problems of the form: <span class="math display">\[
+\begin{aligned}
+  \min_{y, S} \quad &amp; b^T y \\
+  \text{s.t.} \quad &amp; A y + c = S \\
+                    &amp; S \succeq 0
+\end{aligned}
+\]</span> where <span class="math inline">\(S\)</span> is a symmetric positive semidefinite matrix and <span class="math inline">\(y\)</span> is a vector of decision variables.</p>
+<p>A user can input the problem data, the triplet <span class="math inline">\((A, b, c)\)</span>, or use the following convenient methods for producing data in the proper format.</p>
+<p>For example, problems can be stated as: <span class="math display">\[
+\begin{aligned} 
+  \min_y \quad &amp; f(y), \\
+  \text{s.t.} \quad &amp; G(y) &gt;= 0
+\end{aligned}
+\]</span> where <span class="math inline">\(f(y)\)</span> and <span class="math inline">\(G(y)\)</span> are affine functions of the vector of variables <span class="math inline">\(y\)</span>.</p>
+<p>Here is a simple example:</p>
+<pre><code>y = {y0, y1, y2};
+f = y2;
+G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};</code></pre>
+<p>The list of constraints in <code>G</code> is to be interpreted as: <span class="math display">\[
+\begin{aligned} 
+  y_0 - 2 \geq 0, \\
+  \begin{bmatrix} y_1 &amp; y_0 \\ y_0 &amp; 1 \end{bmatrix} \succeq 0, \\
+  \begin{bmatrix} y_2 &amp; y_1 \\ y_1 &amp; 1 \end{bmatrix} \succeq 0.
+\end{aligned}
+\]</span> The function <a href="#SDPMatrices"><code>SDPMatrices</code></a> convert the above symbolic problem into numerical data that can be used to solve an SDP.</p>
+<pre><code>abc = SDPMatrices[f, G, y]</code></pre>
+<p>All required data, that is <span class="math inline">\(A\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span>, is stored in the variable <code>abc</code> as Mathematica's sparse matrices. Their contents can be revealed using the Mathematica command <code>Normal</code>.</p>
+<pre><code>Normal[abc]</code></pre>
+<p>The resulting SDP is solved using <a href="#SDPSolve"><code>SDPSolve</code></a>:</p>
+<pre><code>{Y, X, S, flags} = SDPSolve[abc];</code></pre>
+<p>The variables <code>Y</code> and <code>S</code> are the <em>primal</em> solutions and <code>X</code> is the <em>dual</em> solution. Detailed information on the computed solution is found in the variable <code>flags</code>.</p>
+<p>The package <code>SDP</code> is built so as to be easily overloaded with more efficient or more structure functions. See for example <a href="#SDPFlat">SDPFlat</a> and <a href="#SDPSylvester">SDPSylvester</a>.</p>
 <p></p>
 <h1 id="ReferenceIntroduction"><span class="header-section-number">8</span> Introduction</h1>
 <p>Each following chapter describes a <code>Package</code> inside <em>NCAlgebra</em>.</p>
@@ -1552,13 +1634,13 @@ rules = {rat1-&gt;inv[x]}</code></pre>
 <h2 id="NCPCoefficients"><span class="header-section-number">16.5</span> NCPCoefficients</h2>
 <p><code>NCPCoefficients[p, m]</code> gives all coefficients of the NCPolynomial <code>p</code> in the monomial <code>m</code>.</p>
 <p>For example:</p>
-<pre><code>exp = a ** x ** b - 2 x ** y ** c ** x + a ** c + d ** x
+<pre><code>exp = a**x**b - 2 x**y**c**x + a**c + d**x
 p = NCToNCPolynomial[exp, {x, y}]
 NCPCoefficients[p, {x}]</code></pre>
 <p>returns</p>
 <pre><code>{{1, d, 1}, {1, a, b}}</code></pre>
 <p>and</p>
-<pre><code>NCPCoefficients[p, {x ** y, x}]</code></pre>
+<pre><code>NCPCoefficients[p, {x**y, x}]</code></pre>
 <p>returns</p>
 <pre><code>{{-2, 1, c, 1}}</code></pre>
 <p>See also: <a href="#NCPTermsToNC"><code>NCPTermsToNC</code></a>.</p>
@@ -2161,56 +2243,6 @@ index = {1,2,3,4,5,4,1};</code></pre>
 <p>See also: <a href="#NCReplaceData">NCReplaceData</a>.</p>
 <h1 id="PackageNCSDP"><span class="header-section-number">26</span> NCSDP</h1>
 <p><strong>NCSDP</strong> is a package that allows the symbolic manipulation and numeric solution of semidefinite programs.</p>
-<p>Problems consist of symbolic noncommutative expressions representing inequalities and a list of rules for data replacement. For example the semidefinite program: <span class="math display">\[
-\begin{aligned}
-\min_Y \quad &amp; &lt;I,Y&gt; \\
-\text{s.t.} \quad &amp; A Y + Y A^T + I \preceq 0 \\
-            &amp; Y \succeq 0
-\end{aligned}
-\]</span> can be solved by defining the noncommutative expressions</p>
-<pre><code>&lt;&lt; NCSDP`
-SNC[a, y];
-obj = {-1};
-ineqs = {a ** y + y ** tp[a] + 1, -y};</code></pre>
-<p>The inequalities are stored in the list <code>ineqs</code> in the form of noncommutative linear polyonomials in the variable <code>y</code> and the objective function constains the symbolic coefficients of the inner product, in this case <code>-1</code>. The reason for the negative signs in the objective as well as in the second inequality is that semidefinite programs are expected to be cast in the following <em>canonical form</em>: <span class="math display">\[
-\begin{aligned} 
-  \max_y \quad &amp; &lt;b,y&gt; \\ 
-  \text{s.t.} \quad &amp; f(y) \preceq 0 
-\end{aligned}
-\]</span> or, equivalently: <span class="math display">\[
-\begin{aligned} 
-  \max_y \quad &amp; &lt;b,y&gt; \\ 
-  \text{s.t.} \quad &amp; f(y) + s = 0, \quad s \succeq 0
-\end{aligned}
-\]</span></p>
-<p>Semidefinite programs can be visualized using <a href="#NCSDPForm"><code>NCSDPForm</code></a> as in:</p>
-<pre><code>vars = {y};
-NCSDPForm[ineqs, vars, obj]</code></pre>
-<p>In order to obtaining a numerical solution to an instance of the above semidefinite program one must provide a list of rules for data substitution. For example:</p>
-<pre><code>A = {{0, 1}, {-1, -2}};
-data = {a -&gt; A};</code></pre>
-<p>Equipped with a list of rules one can invoke <a href="#NCSDP"><code>NCSDP</code></a> to produce an instance of <a href="#SDPSylvester"><code>SDPSylvester</code></a>:</p>
-<pre><code>&lt;&lt; SDPSylvester`
-{abc, rules} = NCSDP[F, vars, obj, data];</code></pre>
-<p>It is the resulting <code>abc</code> and <code>rules</code> objects that are used for calculating the numerical solution using <a href="#SDPSolve"><code>SDPSolve</code></a>:</p>
-<pre><code>{Y, X, S, flags} = SDPSolve[abc, rules];</code></pre>
-<p>The variables <code>Y</code> and <code>S</code> are the <em>primal</em> solutions and <code>X</code> is the <em>dual</em> solution.</p>
-<p>An explicit symbolic dual problem can be calculated easily using <a href="#NCSDPDual"><code>NCSDPDual</code></a>:</p>
-<pre><code>{dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];</code></pre>
-<p>The corresponding dual program is expressed in the <em>canonical form</em>: <span class="math display">\[
-\begin{aligned} 
-  \max_x \quad &amp; &lt;c,x&gt; \\ 
-  \text{s.t.} \quad &amp; f^*(x) + b = 0, \quad x \succeq 0
-\end{aligned}
-\]</span> In the case of the above problem the dual program is <span class="math display">\[
-\begin{aligned}
-\max_{X_1, X_2} \quad &amp; &lt;I,X_1&gt; \\
-\text{s.t.} \quad &amp; A^T X_1 + X_1 A -X_2 - I = 0 \\
-            &amp; X_1 \succeq 0, \\
-        &amp; X_2 \succeq 0
-\end{aligned}
-\]</span> Dual semidefinite programs can be visualized using <a href="#NCSDPDualForm"><code>NCSDPDualForm</code></a> as in:</p>
-<pre><code>NCSDPDualForm[dIneqs, dVars, dObj]</code></pre>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCSDP">NCSDP</a></li>
@@ -2235,40 +2267,7 @@ data = {a -&gt; A};</code></pre>
 <p><code>NCSDPForm[[dInequalities,dVars,dObj]</code> prints out a pretty formatted version of the dual SDP expressed by the list of NC polynomials and NC matrices of polynomials <code>dInequalities</code> that are linear in the unknowns listed in <code>dVars</code> with linear objective <code>dObj</code>.</p>
 <p>See also: <a href="#NCSDPDual">NCSDPDual</a>, <a href="#NCSDPForm">NCSDPForm</a>.</p>
 <h1 id="PackageSDP"><span class="header-section-number">27</span> SDP</h1>
-<p>The package <strong>SDP</strong> provides a crude and highly inefficient way to define and solve semidefinite programs in standard form, that is vectorized. You do not need to load <code>NCAlgebra</code> if you just want to use the semidefinite program solver. But you still need to load <code>NC</code> as in:</p>
-<pre><code>&lt;&lt; NC`
-&lt;&lt; SDP`</code></pre>
-<p>Semidefinite programs are optimization problems of the form: <span class="math display">\[
-\begin{aligned}
-  \min_{y, S} \quad &amp; b^T y \\
-  \text{s.t.} \quad &amp; A y + c = S \\
-                    &amp; S \succeq 0
-\end{aligned}
-\]</span> where <span class="math inline">\(S\)</span> is a symmetric positive semidefinite matrix.</p>
-<p>For convenience, problems can be stated as: <span class="math display">\[
-\begin{aligned} 
-  \min_y \quad &amp; \operatorname{obj}(y), \\
-  \text{s.t.} \quad &amp; \operatorname{ineqs}(y) &gt;= 0
-\end{aligned}
-\]</span> where <span class="math inline">\(obj(y)\)</span> and <span class="math inline">\(ineqs(y)\)</span> are affine functions of the vector variable <span class="math inline">\(y\)</span>.</p>
-<p>Here is a simple example:</p>
-<pre><code>ineqs = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
-obj = y2;
-y = {y0, y1, y2};</code></pre>
-<p>The list of constraints in <code>ineqs</code> are to be interpreted as: <span class="math display">\[
-\begin{aligned} 
-  y_0 - 2 \geq 0, \\
-  \begin{bmatrix} y_1 &amp; y_0 \\ y_0 &amp; 1 \end{bmatrix} \succeq 0, \\
-  \begin{bmatrix} y_2 &amp; y_1 \\ y_1 &amp; 1 \end{bmatrix} \succeq 0.
-\end{aligned}
-\]</span> The function <a href="#SDPMatrices"><code>SDPMatrices</code></a> convert the above symbolic problem into numerical data that can be used to solve an SDP.</p>
-<pre><code>abc = SDPMatrices[by, ineqs, y]</code></pre>
-<p>All required data, that is <span class="math inline">\(A\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span>, is stored in the variable <code>abc</code> as Mathematica's sparse matrices. Their contents can be revealed using the Mathematica command <code>Normal</code>.</p>
-<pre><code>Normal[abc]</code></pre>
-<p>The resulting SDP is solved using <a href="#SDPSolve"><code>SDPSolve</code></a>:</p>
-<pre><code>{Y, X, S, flags} = SDPSolve[abc];</code></pre>
-<p>The variables <code>Y</code> and <code>S</code> are the <em>primal</em> solutions and <code>X</code> is the <em>dual</em> solution. Detailed information on the computed solution is found in the variable <code>flags</code>.</p>
-<p>The package <strong>SDP</strong> is built so as to be easily overloaded with more efficient or more structure functions. See for example <a href="#SDPFlat">SDPFlat</a> and <a href="#SDPSylvester">SDPSylvester</a>.</p>
+<p><strong>SDP</strong> is a package that provides algorithms for the numeric solution of semidefinite programs.</p>
 <p>Members are:</p>
 <ul>
 <li><a href="#SDPMatrices">SDPMatrices</a></li>
