@@ -19,7 +19,7 @@ Members are:
 
 ## NCGrabFunctions {#NCGrabFunctions}
 
-`NCGragFunctions[expr]` returns a list with all fragments containing function of `expr`.
+`NCGragFunctions[expr]` returns a list with all fragments of `expr` containing functions.
 
 `NCGragFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
 

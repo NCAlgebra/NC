@@ -6,6 +6,7 @@
 BeginPackage[ "NCGBX`",
 	      "NCPolyGroebner`",
 	      "NCPoly`",
+              "NCUtil`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCToNCPoly,
@@ -119,21 +120,32 @@ Begin["`Private`"];
     Return[tmp];
   ];
  
+  Clear[CheckOrderAux];
+  CheckOrderAux[(_Symbol|_inv)..] := True;
+  CheckOrderAux[___] := False;
+
+  Clear[CheckOrder];
+  CheckOrder[order___] := And @@ Apply[CheckOrderAux, order, {1}];
+  
   SetMonomialOrder[m_List, level_Integer] := (
     $NCPolyInterfaceSetKnowns = False;
     $NCPolyInterfaceMonomialOrder = 
       AddElementToList[$NCPolyInterfaceMonomialOrder, level, Flatten[m]]
   );
 
-  SetMonomialOrder[m___] := (
-    ( $NCPolyInterfaceSetKnowns = False;
-      $NCPolyInterfaceMonomialOrder = Map[Flatten, Map[List, {m}]] )
-    /; Depth[{m}] <= 3
-  );
+  SetMonomialOrder[m___] := Module[
+    {order},
+    $NCPolyInterfaceSetKnowns = False;
+    order = Map[If[Head[#] === List, #, {#}]&, {m}];
+    Return[
+      If[ CheckOrder[order],
+          $NCPolyInterfaceMonomialOrder = order,
+          Message[SetMonomialOrder::InvalidOrder,order];
+          $Failed
+      ]
+    ];
+  ];
         
-  SetMonomialOrder[m___] := 
-    (Message[SetMonomialOrder::InvalidOrder,{m}]; $Failed);
-  
   GetMonomialOrder[] := $NCPolyInterfaceMonomialOrder;
 
   PrintMonomialOrder[] := NCPolyDisplayOrder[$NCPolyInterfaceMonomialOrder];
@@ -142,20 +154,127 @@ Begin["`Private`"];
     $NCPolyInterfaceSetKnowns = False;
     $NCPolyInterfaceMonomialOrder = {};
   );
+
+  Clear[NCMakeGBAux];
+  NCMakeGBAux[invs_] := Module[
+    {ratVars, newRels, ruleRat, ruleRatRev},
+  
+    (* Create one new variable for each inv *)
+    ratVars = Table[Unique["rat"], Length[invs]];
+    SetNonCommutative[ratVars];
+
+    (* Create invertibility relations *)
+    newRels = Flatten[Join[
+                MapThread[{#1 ** inv[#2] - 1, inv[#2] ** #1 - 1}&, 
+                          {ratVars, invs}]]];
+
+    (* Forward and reverse rules *)
+    ruleRat = Thread[invs -> ratVars];
+    ruleRatRev = Map[Map[Function[x,x//.ruleRat],#,{2}]&, 
+                 Map[Reverse, ruleRat]];
+        
+    Return[{ratVars, newRels, ruleRat, ruleRatRev}];
+    
+  ];
   
   NCMakeGB[p_List, iter_Integer, opts___Rule] := Module[
-    {polys, basis, rules, labels},
+    {polys, vars, basis, rules, labels,
+     invs, 
+     ratVars, ruleRat, newRels, ruleRatRev,
+     relinvs,
+     relRatVars, relNewRels, relRuleRat, relRuleRatRev},
 
-    polys = NCToNCPoly[p, $NCPolyInterfaceMonomialOrder];
+    (* setup labels *)
+    labels = $NCPolyInterfaceMonomialOrder;
+
+    (* Process monomial order for rationals *)
+    invs = NCGrabFunctions[$NCPolyInterfaceMonomialOrder, inv];
+      
+    If[ invs =!= {},
+      
+        (* Process invs *)
+        {ratVars, newRels, ruleRat, ruleRatRev} = NCMakeGBAux[invs];
+        
+        (* Replace inv's with ratVars *)
+        polys = Join[p //. ruleRat, newRels];
+        vars = $NCPolyInterfaceMonomialOrder //. ruleRat;
+
+        (*
+        Print["invs = ", invs];
+        Print["ratVars = ", ratVars];
+        Print["ruleRat = ", ruleRat];
+        Print["newRels = ", newRels];
+        Print["polys = ", polys];
+        Print["vars = ", vars];
+        Print["ruleRatRev = ", ruleRatRev];
+        *)
+        
+       ,
+        
+        polys = p;
+        vars = $NCPolyInterfaceMonomialOrder;
+        
+    ];
+
+    (* Process relations for rationals *)
+    relInvs = NCGrabFunctions[polys, inv];
+      
+    If[ relInvs =!= {},
+      
+        (* Process invs *)
+        {relRatVars, relNewRels, 
+         relRuleRat, relRuleRatRev} = NCMakeGBAux[relInvs];
+
+        (* Replace inv's with ratVars *)
+        polys = Join[polys //. relRuleRat, relNewRels];
+        vars = Join[{relRatVars}, vars];
+        labels = Join[relInvs, labels];
+        
+        (* Append to rules *)
+        ruleRat = Join[ruleRat, relRuleRat];
+        ruleRatRev = Join[ruleRatRev, relRuleRatRev];
+
+        (* *)
+        Print["relInvs = ", relInvs];
+        Print["relRatVars = ", relRatVars];
+        Print["relRuleRat = ", relRuleRat];
+        Print["relNewRels = ", relNewRels];
+        Print["relRuleRatRev = ", relRuleRatRev];
+        (* *)
+        
+    ];
+
+    Print["polys = ", polys];
+    Print["vars = ", vars];
+
+    (* Convert to NCPoly *)
+    polys = NCToNCPoly[polys, vars];
+      
+    (* Calculate GB *)
     basis = Sort[ 
               NCPolyReduce[ 
                 NCPolyGroebner[polys, iter, opts,
-                               Labels -> $NCPolyInterfaceMonomialOrder],
+                               Labels -> labels],
                 True]
             ];
+
+    (* Convert to rules *)
     rules = NCPolyToRule[basis];
 
-    Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
+    (* Convert to NC *)
+    polys = Map[NCPolyToNC[#, vars]&, rules, {2}];
+      
+    If[ invs =!= {} || relInvs =!= {},
+      
+        (* Substitute variables *)
+        polys = polys /. ruleRatRev;
+        
+        (* Delete 1 -> 1 *)
+        polys = DeleteCases[polys, 1 -> 1];
+        
+    ];
+
+    Return[polys];
   ];
 
   NCReduce[f_List, g_List, complete_:False] := Module[

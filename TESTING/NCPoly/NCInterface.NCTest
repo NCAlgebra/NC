@@ -198,6 +198,28 @@ Block[
   SetMonomialOrder[{a,b},c];
   NCTest[GetMonomialOrder[], {{a,b},{c}}];
 
+  NCTestCheck[SetMonomialOrder[{a,{b}},c],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
+  NCTestCheck[SetMonomialOrder[{a,b},{{c}}],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
+  (* Monomial Order with inv's *)
+  
+  SetMonomialOrder[{a,b},inv[c]];
+  NCTest[GetMonomialOrder[], {{a,b},{inv[c]}}];
+
+  SetMonomialOrder[{a,b},{inv[c]}];
+  NCTest[GetMonomialOrder[], {{a,b},{inv[c]}}];
+
+  SetMonomialOrder[{a,b},inv[1+c]];
+  NCTest[GetMonomialOrder[], {{a,b},{inv[1+c]}}];
+
+  SetMonomialOrder[{a,b},inv[1+inv[1+c]]];
+  NCTest[GetMonomialOrder[], {{a,b},{inv[1+inv[1+c]]}}];
+
   (* TESTING SetMonomialOrder -- END *)
 
   SetMonomialOrder[{a,b},{d},{c,b}];

@@ -2,11 +2,7 @@
 
 The package `NCGBX` provides an implementation of a noncommutative
 Gröbner Basis algorithm. Gröbner Basis are useful in the study of
-algebraic relations. We shall use the word *relation* to mean a
-polynomial in noncommuting indeterminates. For example, if an analyst
-saw the equation $AB = 1$ for matrices $A$ and $B$, then he might say
-that $A$ and $B$ satisfy the polynomial equation $x\, y - 1 = 0$. An
-algebraist would say that $x\, y-1$ is a relation.
+algebraic relations. 
 
 In order to load `NCGB` one types:
 
@@ -19,13 +15,16 @@ or simply
 
 if `NC` and `NCAlgebra` have already been loaded.
 
-## Gröbner Basis
-
-?? ADD A BRIEF INTRO TO GBs ??
+?? REVISE ??
 
 A reader who has no explicit interest in Gröbner Bases might want to
 skip this section. Readers who lack background in Gröbner Basis may
 want to read [CLS].
+
+?? ADD A BRIEF INTRO TO GBs ??
+
+
+## Gröbner Basis
 
 Before calculating a Gröbner Basis, one must declare which variables
 will be used during the computation and must declare a *monomial
@@ -41,23 +40,42 @@ implied by the above command can be visualized using:
 
 	PrintMonomialOrder[];
 	
-which in this case produces the ordering:
+which in this case prints:
 
 $a < b < c \ll x$.
 
 A user does not need to know theoretical background related to
-monomials orders. Indeed, as we shall see in ??, for many engineering
+monomials orders. Indeed, as we shall see soon, in many engineering
 problems, it suffices to know which variables correspond to quantities
 which are *known* and which variables correspond to quantities which
 are *unknown*. If one is solving for a variable or desires to prove
 that a certain quantity is zero, then one would want to view that
-variable as *unknown*. In the above examples, the symbol $\ll$
+variable as *unknown*. In the above example, the symbol '$\ll$'
 separate the *knowns*, $a, b, c$, from the *unknown*, $x$. For more
-details on orderings see ??.
+details on orderings see Section [Orderings](#Ordering).
 
-To calculate a Gröbner basis one issues the command:
+Our goal is to calculate the Gröbner basis associated with the
+following relations:
+$$
+\begin{aligned}
+	a \, x \, a &= c, &
+	a \, b &= 1, &
+	b \, a &= 1.
+\end{aligned}
+$$
+We shall use the word *relation* to mean a polynomial in noncommuting
+indeterminates. For example, if an analyst saw the equation $A B = 1$
+for matrices $A$ and $B$, then he might say that $A$ and $B$ satisfy
+the polynomial equation $a\, b - 1 = 0$. An algebraist would say that
+$a\, b - 1$ is a relation.
+
+To calculate a Gröbner basis one defines a list of relations
+
+	rels = {a ** x ** a - c, a ** b - 1, b ** a - 1}
+
+and issues the command:
 	
-	gb = NCMakeGB[{b ** a - 1, a ** b - 1, a ** x ** a - c}, 10]
+	gb = NCMakeGB[rels, 10]
 
 which should produces an output similar to:
 
@@ -74,7 +92,11 @@ which should produces an output similar to:
 	* Found Groebner basis with 3 relations
 	* * * * * * * * * * * * * * * *
 
-The result of the calculation is:
+The number `10` in the call to `NCMakeGB` is very important because a
+finite GB may not exist. It instructs `NCMakeGB` to abort after `10`
+iterations if a GB has not been found at that point.
+
+The result of the above calculation is the list of relations:
            
 	{x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
 
@@ -96,8 +118,8 @@ $$
 under the assumptions that 
 $$
 \begin{aligned}
-	b a - 1 &= 0, &
-	a b - 1 & =0,
+	b \, a - 1 &= 0, &
+	a \, b - 1 & =0,
 \end{aligned}
 $$
 that is $a = b^{-1}$ and produces the expected result in the form of
@@ -146,7 +168,97 @@ $$
 $$ 
 that can be interpreted as $c$ being in the range-space of $a$.
 
-## Interlude: ordering on variables and monomials
+## Facilitating Natural Notation
+
+Now we turn to a more complicated (though mathematically intuitive)
+notation. In our first example above, the letter $b$ was essentially
+introduced to represent the inverse of letter $a$. It is possible to
+have `NCMakeGB` handle all of that automatically by simply adding
+`inv[a]` as a member of the ordering:
+
+	SetMonomialOrder[a,inv[a],c,x];
+	
+and calling `NCMakeGB` with only one relation:
+
+    gb = NCMakeGB[{a**x**a-c},10]
+	
+The result is:
+
+	gb = {x -> inv[a]**c**inv[a]}
+
+which is what one would expect. Internally, an extra variable has been
+created and extra relations encoding that $a$ were invertible were
+appended to the list of relations before running `NCMakeGB`.
+
+?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??
+
+### A simplification example
+
+One can use Gröbner basis to *simplify* polynomial or rational
+expressions. 
+
+Consider for instance the order 
+
+$$ y \ll y^{-1} \ll (1-y)^{-1} $$
+
+implied by the following command:
+
+	SetMonomialOrder[y, inv[y], inv[1-y]]
+
+The above ordering encodes the following precise idea of what we mean
+by *simple* versus *complicated*: it formally corresponds to
+specifying that $y$ is simpler than $y^{-1}$ that is simpler than
+$(1-y)^{-1}$, which might sits well with ones intuition.
+
+
+Of course, there may be many other orders that are mathematically
+correct but might not serve well if simplification is the main
+goal. For example, perhaps the order
+
+$$y^{-1} \ll y \ll (1-y)^{-1}$$
+
+does not simplify as much as the previous one, since, if possible, it
+would be preferable to express an answer in terms of $y$, rather than
+$y^{-1}$.
+
+
+As an example of simplification, we simplify the two expressions
+$x**x$ and $x+Inv[y]**Inv[1-y]$ assuming that $y$ satisfies $resol$
+and $x**x=a$.  The following command computes a Gröbner Basis for the
+union of $resol$ and $\{x^2-a\}$ and simplifies the expressions $x**x$
+and $x+Inv[y]**Inv[1-y]$ using the Gröbner Basis.  Experts will note
+that since we are using an iterative Gröbner Basis algorithm which may
+not terminate, we must set a limit on how many iterations we permit;
+here we specify *at most* 3 iterations.
+
+	NCSimplifyAll[{x**x,x+Inv[y]**Inv[1-y]},Join[{x**x-a},resol],3]
+
+	{a, x + Inv[1 - y] + Inv[y]}
+
+We name the variable $Inv[y]$, because this has more meaning
+to the user than would using a single letter.
+$Inv[y]$ has the same status as a single letter with regard to 
+all of the commands which we have demonstrated.
+
+Next we illustrate an extremely valuable simplification command. The
+following example performs the same computation as the previous
+command, although one does not have to type in $resol$
+explicitly. More generally one does not have to type in relations
+involving the definition of inverse explicitly.  Beware,
+`NCSimplifyRationalX1` picks its own order on variables and completely
+ignores any order that you might have set.
+
+	<< NCSRX1.m
+	NCSimplifyRationalX1[{x**x**x,x+Inv[z]**Inv[1-z]},{x**x-a},3]
+	{a ** x, x + Inv[1 - z] + inv[z]}
+
+WARNING: Never use inv[ \ ] with NCGB since it has special properties
+given to it in NCAlgebra and these are not recognized by the C++ code
+behind NCGB
+
+
+
+## Interlude: ordering on variables and monomials {#Orderings}
 
 As seen above, one needs to declare a *monomial order* before making a
 Gröbner Basis.  There are various monomial orders which can be used

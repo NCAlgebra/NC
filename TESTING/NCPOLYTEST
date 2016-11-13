@@ -13,9 +13,9 @@ tests = {
   "Product",
   "Reduce",
   "Groebner",
-  "Hankel"
+  "Hankel",
+  "NCInterface"
   (*,
-  "NCInterface",
   "NCMakeGB"
   *)
 };
