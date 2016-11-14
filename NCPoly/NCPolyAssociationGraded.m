@@ -179,6 +179,8 @@ Begin["`Private`"];
 
   NCPolyNormalize[p_NCPoly] := Times[p, 1/Part[NCPolyLeadingTerm[p], 2]];
 
+  NCPolyTogether[p_NCPoly] := MapAt[Together, p, {2}];
+
   (* Display Order *)
 
   Clear[NCPolyDisplayOrderAux];

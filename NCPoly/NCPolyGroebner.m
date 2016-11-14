@@ -151,7 +151,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   { i, j, k, kk, l, m, mm, n,
     G, TG, 
     OBS = {}, ij, OBSij, 
-    q, h,
+    q, h, symbolicCoefficients,
     sortFirst, simplifyOBS, sortBasis,
     printObstructions, printBasis, printSPolynomials, 
     labels, sortObstructions,
@@ -205,9 +205,23 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
   labels = MapThread[Take[labels,{#1,#2}]&, {start, end}];
 
+  (* Symbolic coefficients? *)
+  symbolicCoefficients = 
+    Not[And @@ Flatten[Map[NumberQ,
+                           Map[NCPolyGetCoefficients, G], {2}]]];
+    
+  If[ symbolicCoefficients && verboseLevel >= 1,
+      Print["* Symbolic coefficients detected"];
+  ];
+    
   If[ verboseLevel >= 1,
     (* Print order *)
     Print["* Monomial order : ", NCPolyDisplayOrder[labels]];
+  ];
+
+  If[ verboseLevel >= 3,
+    (* Print initial basis *)
+    Print["> G(0) = ", ColumnForm[NCPolyDisplay[G, labels]]];
   ];
 
   (* Simplify and normalize initial relations *)
@@ -217,11 +231,17 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
   m = Length[G];
   G = NCPolyNormalize[NCPolyFullReduce[G]];
+  (* G = NCPolyNormalize[G]; *)
   If[ Length[G] < m, 
       Print[ "> Initial basis reduced to '", ToString[Length[G]],
              "' out of '", ToString[m], "' initial relations." ];
      ,
       Print[ "> Initial basis could not be reduced" ];
+  ];
+
+  If[ verboseLevel >= 3,
+    (* Print initial basis *)
+    Print["> G(0) = ", ColumnForm[NCPolyDisplay[G, labels]]];
   ];
 
   (* Sort basis *)
@@ -278,6 +298,11 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
         Print["- Minor Iteration ", k, ", ", Length[G], " polys in the basis, ", Length[OBS], " obstructions"];
     ];
 
+    (* Call Together if symbolic coefficients *)
+    If[ symbolicCoefficients,
+        G = Map[NCPolyTogether, G];
+    ];
+         
     If[ printBasis,
         Print["* Current basis:"];
         Print["> G(", ToString[k], ") = ", ColumnForm[NCPolyDisplay[G, labels]]];
@@ -345,6 +370,14 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
          q = {1};
          While[ And[ h =!= 0, Flatten[q] =!= {}], 
                 {q, h} = NCPolyReduce[h, G];
+                (* Make sure to simplify coefficients in case of
+                   symbolic coefficients *)
+                If[ symbolicCoefficients,
+                    h = NCPolyPack[NCPolyTogether[h]];
+                ];
+                If[ verboseLevel >= 4,
+                    Print["> h = ", NCPolyDisplay[h, labels]];
+                ];
                 (* Print["h = ", NCPolyDisplay[h, labels]];
                    Print["q = ", Map[NCPolyDisplay[#,labels]&, q, {3}]]; *)
          ];
@@ -408,6 +441,11 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   ];
   G = NCPolyNormalize[NCPolyFullReduce[G]];
 
+  (* Call Together if symbolic coefficients *)
+  If[ symbolicCoefficients,
+      G = Map[NCPolyTogether, G];
+  ];
+      
   If[ OBS === {}
      , 
       Print["* Found Groebner basis with ", ToString[Length[G]], " relations"];

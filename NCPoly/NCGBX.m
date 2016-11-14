@@ -24,7 +24,8 @@ Clear[NCToNCPoly,
 
 Get["NCGBX.usage"];
 
-SetMonomialOrder::InvalidOrder = "Order `1` is invalid."
+SetMonomialOrder::InvalidOrder = "Order `1` is invalid.";
+NCMakeGB::AdditionalRelations = "Relations `1` were not found in the current ordering and have been added to the list of relations. Explicitly add them to the list of relations to control their ordering.";
 
 Begin["`Private`"];
 
@@ -220,35 +221,42 @@ Begin["`Private`"];
     relInvs = NCGrabFunctions[polys, inv];
       
     If[ relInvs =!= {},
-      
+
+        (* Warn user *)
+        Message[NCMakeGB::AdditionalRelations, relInvs];
+        
         (* Process invs *)
         {relRatVars, relNewRels, 
          relRuleRat, relRuleRatRev} = NCMakeGBAux[relInvs];
 
         (* Replace inv's with ratVars *)
         polys = Join[polys //. relRuleRat, relNewRels];
-        vars = Join[{relRatVars}, vars];
-        labels = Join[relInvs, labels];
+        vars = Join[vars, {relRatVars}];
+        labels = Join[labels, relInvs];
         
         (* Append to rules *)
         ruleRat = Join[ruleRat, relRuleRat];
         ruleRatRev = Join[ruleRatRev, relRuleRatRev];
 
-        (* *)
+        (*
         Print["relInvs = ", relInvs];
         Print["relRatVars = ", relRatVars];
         Print["relRuleRat = ", relRuleRat];
         Print["relNewRels = ", relNewRels];
         Print["relRuleRatRev = ", relRuleRatRev];
-        (* *)
+        *)
         
     ];
 
+    (*
     Print["polys = ", polys];
     Print["vars = ", vars];
+    *)
 
     (* Convert to NCPoly *)
     polys = NCToNCPoly[polys, vars];
+      
+    (* Print["polys = ", NCPolyDisplay[polys, vars]]; *)
       
     (* Calculate GB *)
     basis = Sort[ 
