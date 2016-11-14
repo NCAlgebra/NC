@@ -47,9 +47,13 @@
 <li><a href="#ncgbx"><span class="toc-section-number">4.5</span> NCGBX</a></li>
 </ul></li>
 <li><a href="#NCGB"><span class="toc-section-number">5</span> NonCommutative Gröbner Basis</a><ul>
-<li><a href="#gröbner-basis"><span class="toc-section-number">5.1</span> Gröbner Basis</a></li>
+<li><a href="#gröbner-basis"><span class="toc-section-number">5.1</span> Gröbner Basis</a><ul>
+<li><a href="#example-1"><span class="toc-section-number">5.1.1</span> Example 1</a></li>
+<li><a href="#example-2"><span class="toc-section-number">5.1.2</span> Example 2</a></li>
+</ul></li>
 <li><a href="#facilitating-natural-notation"><span class="toc-section-number">5.2</span> Facilitating Natural Notation</a><ul>
-<li><a href="#a-simplification-example"><span class="toc-section-number">5.2.1</span> A simplification example</a></li>
+<li><a href="#example-3"><span class="toc-section-number">5.2.1</span> Example 3</a></li>
+<li><a href="#a-simplification-example"><span class="toc-section-number">5.2.2</span> A simplification example</a></li>
 </ul></li>
 <li><a href="#Orderings"><span class="toc-section-number">5.3</span> Interlude: ordering on variables and monomials</a><ul>
 <li><a href="#lex-order-the-simplest-elimination-order"><span class="toc-section-number">5.3.1</span> Lex Order: the simplest elimination order</a></li>
@@ -568,6 +572,7 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <p>A reader who has no explicit interest in Gröbner Bases might want to skip this section. Readers who lack background in Gröbner Basis may want to read [CLS].</p>
 <p>?? ADD A BRIEF INTRO TO GBs ??</p>
 <h2 id="gröbner-basis"><span class="header-section-number">5.1</span> Gröbner Basis</h2>
+<h3 id="example-1"><span class="header-section-number">5.1.1</span> Example 1</h3>
 <p>Before calculating a Gröbner Basis, one must declare which variables will be used during the computation and must declare a <em>monomial order</em> which can be done using <code>SetNonCommutative</code> and <code>SetMonomialOrder</code> as in:</p>
 <pre><code>SetNonCommutative[a, b, c, x];
 SetMonomialOrder[{a, b, c}, x];</code></pre>
@@ -619,7 +624,8 @@ b ** a -&gt; 1</code></pre>
 \]</span> that is <span class="math inline">\(a = b^{-1}\)</span> and produces the expected result in the form of the relation: <span class="math display">\[
     x = b \, c \, b.
 \]</span></p>
-<p>For a slightly more challenging example consider the monomial order</p>
+<h3 id="example-2"><span class="header-section-number">5.1.2</span> Example 2</h3>
+<p>For a slightly more challenging example consider the same monomial order as before:</p>
 <pre><code>SetNonCommutative[a, b, c, x]
 SetMonomialOrder[{a, b, c}, x];</code></pre>
 <p>that is</p>
@@ -638,19 +644,35 @@ SetMonomialOrder[{a, b, c}, x];</code></pre>
 a ** b ** c -&gt; c
 a ** b ** a -&gt; a 
 b ** a ** b -&gt; b</code></pre>
-<p>In this case the Gröbner basis cannot quite <em>solve</em> the problem but it remarkably produces the necessary condition for existence of solutions: <span class="math display">\[ 
+<p>In this case the Gröbner basis cannot quite <em>solve</em> the equations but it remarkably produces the necessary condition for existence of solutions: <span class="math display">\[ 
     0 = a \, b \, c - c = a \, a^\dag c - c 
 \]</span> that can be interpreted as <span class="math inline">\(c\)</span> being in the range-space of <span class="math inline">\(a\)</span>.</p>
 <h2 id="facilitating-natural-notation"><span class="header-section-number">5.2</span> Facilitating Natural Notation</h2>
+<h3 id="example-3"><span class="header-section-number">5.2.1</span> Example 3</h3>
 <p>Now we turn to a more complicated (though mathematically intuitive) notation. In our first example above, the letter <span class="math inline">\(b\)</span> was essentially introduced to represent the inverse of letter <span class="math inline">\(a\)</span>. It is possible to have <code>NCMakeGB</code> handle all of that automatically by simply adding <code>inv[a]</code> as a member of the ordering:</p>
-<pre><code>SetMonomialOrder[a,inv[a],c,x];</code></pre>
-<p>and calling <code>NCMakeGB</code> with only one relation:</p>
+<pre><code>SetMonomialOrder[{a,inv[a],c},x];</code></pre>
+<p>that is</p>
+<p><span class="math inline">\(a &lt; a^{-1} &lt; c \ll x\)</span></p>
+<p>Calling <code>NCMakeGB</code> with only one relation:</p>
 <pre><code>gb = NCMakeGB[{a**x**a-c},10]</code></pre>
-<p>The result is:</p>
+<p>produces the output</p>
+<pre><code>* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order : a &lt; inv[a] &lt; c &lt;&lt;  x
+* Reduce and normalize initial basis
+&gt; Initial basis could not be reduced
+* Computing initial set of obstructions
+&gt; MAJOR Iteration 1, 5 polys in the basis, 3 obstructions
+&gt; MAJOR Iteration 2, 6 polys in the basis, 3 obstructions
+* Cleaning up basis.
+* Found Groebner basis with 3 relations
+* * * * * * * * * * * * * * * *</code></pre>
+<p>The resulting Gröbner basis is:</p>
 <pre><code>gb = {x -&gt; inv[a]**c**inv[a]}</code></pre>
 <p>which is what one would expect. Internally, an extra variable has been created and extra relations encoding that <span class="math inline">\(a\)</span> were invertible were appended to the list of relations before running <code>NCMakeGB</code>.</p>
 <p>?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??</p>
-<h3 id="a-simplification-example"><span class="header-section-number">5.2.1</span> A simplification example</h3>
+<h3 id="a-simplification-example"><span class="header-section-number">5.2.2</span> A simplification example</h3>
 <p>One can use Gröbner basis to <em>simplify</em> polynomial or rational expressions.</p>
 <p>Consider for instance the order</p>
 <p><span class="math display">\[ y \ll y^{-1} \ll (1-y)^{-1} \]</span></p>

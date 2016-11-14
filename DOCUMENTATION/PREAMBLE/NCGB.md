@@ -26,6 +26,8 @@ want to read [CLS].
 
 ## Gröbner Basis
 
+### Example 1
+
 Before calculating a Gröbner Basis, one must declare which variables
 will be used during the computation and must declare a *monomial
 order* which can be done using `SetNonCommutative` and
@@ -128,7 +130,10 @@ $$
 	x = b \, c \, b.
 $$
 
-For a slightly more challenging example consider the monomial order
+### Example 2
+
+For a slightly more challenging example consider the same monomial
+order as before:
 
 	SetNonCommutative[a, b, c, x]
 	SetMonomialOrder[{a, b, c}, x];
@@ -160,9 +165,9 @@ finds the Gröbner basis:
 	a ** b ** a -> a 
 	b ** a ** b -> b
 
-In this case the Gröbner basis cannot quite *solve* the problem but it
-remarkably produces the necessary condition for existence of
-solutions: 
+In this case the Gröbner basis cannot quite *solve* the equations but
+it remarkably produces the necessary condition for existence of
+solutions:
 $$ 
 	0 = a \, b \, c - c = a \, a^\dag c - c 
 $$ 
@@ -170,19 +175,40 @@ that can be interpreted as $c$ being in the range-space of $a$.
 
 ## Facilitating Natural Notation
 
+### Example 3
+
 Now we turn to a more complicated (though mathematically intuitive)
 notation. In our first example above, the letter $b$ was essentially
 introduced to represent the inverse of letter $a$. It is possible to
 have `NCMakeGB` handle all of that automatically by simply adding
 `inv[a]` as a member of the ordering:
 
-	SetMonomialOrder[a,inv[a],c,x];
+	SetMonomialOrder[{a,inv[a],c},x];
 	
-and calling `NCMakeGB` with only one relation:
+that is
+
+$a < a^{-1} < c \ll x$
+
+Calling `NCMakeGB` with only one relation:
 
     gb = NCMakeGB[{a**x**a-c},10]
 	
-The result is:
+produces the output
+
+    * * * * * * * * * * * * * * * *
+	* * *   NCPolyGroebner    * * *
+	* * * * * * * * * * * * * * * *
+	* Monomial order : a < inv[a] < c <<  x
+	* Reduce and normalize initial basis
+	> Initial basis could not be reduced
+	* Computing initial set of obstructions
+	> MAJOR Iteration 1, 5 polys in the basis, 3 obstructions
+	> MAJOR Iteration 2, 6 polys in the basis, 3 obstructions
+	* Cleaning up basis.
+	* Found Groebner basis with 3 relations
+	* * * * * * * * * * * * * * * *
+
+The resulting Gröbner basis is:
 
 	gb = {x -> inv[a]**c**inv[a]}
 
@@ -192,7 +218,7 @@ appended to the list of relations before running `NCMakeGB`.
 
 ?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??
 
-### A simplification example
+### Example 4 
 
 One can use Gröbner basis to *simplify* polynomial or rational
 expressions. 
@@ -201,15 +227,14 @@ Consider for instance the order
 
 $$ y \ll y^{-1} \ll (1-y)^{-1} $$
 
-implied by the following command:
+implied by the command:
 
 	SetMonomialOrder[y, inv[y], inv[1-y]]
 
-The above ordering encodes the following precise idea of what we mean
-by *simple* versus *complicated*: it formally corresponds to
-specifying that $y$ is simpler than $y^{-1}$ that is simpler than
-$(1-y)^{-1}$, which might sits well with ones intuition.
-
+This ordering encodes the following precise idea of what we mean by
+*simple* versus *complicated*: it formally corresponds to specifying
+that $y$ is simpler than $y^{-1}$ that is simpler than $(1-y)^{-1}$,
+which might sits well with one's intuition.
 
 Of course, there may be many other orders that are mathematically
 correct but might not serve well if simplification is the main
