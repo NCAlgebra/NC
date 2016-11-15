@@ -225,45 +225,71 @@ expressions.
 
 Consider for instance the order 
 
-$$ y \ll y^{-1} \ll (1-y)^{-1} $$
+$$ x \ll x^{-1} \ll (1-x)^{-1} $$
 
 implied by the command:
 
-	SetMonomialOrder[y, inv[y], inv[1-y]]
+	SetMonomialOrder[x, inv[x], inv[1-x]]
 
 This ordering encodes the following precise idea of what we mean by
 *simple* versus *complicated*: it formally corresponds to specifying
-that $y$ is simpler than $y^{-1}$ that is simpler than $(1-y)^{-1}$,
+that $x$ is simpler than $x^{-1}$ that is simpler than $(1-x)^{-1}$,
 which might sits well with one's intuition.
 
 Of course, there may be many other orders that are mathematically
 correct but might not serve well if simplification is the main
 goal. For example, perhaps the order
 
-$$y^{-1} \ll y \ll (1-y)^{-1}$$
+$$x^{-1} \ll x \ll (1-x)^{-1}$$
 
 does not simplify as much as the previous one, since, if possible, it
-would be preferable to express an answer in terms of $y$, rather than
-$y^{-1}$.
+would be preferable to express an answer in terms of $x$, rather than
+$x^{-1}$.
 
+Not consider the following command:
 
-As an example of simplification, we simplify the two expressions
-$x**x$ and $x+Inv[y]**Inv[1-y]$ assuming that $y$ satisfies $resol$
-and $x**x=a$.  The following command computes a Gröbner Basis for the
-union of $resol$ and $\{x^2-a\}$ and simplifies the expressions $x**x$
-and $x+Inv[y]**Inv[1-y]$ using the Gröbner Basis.  Experts will note
-that since we are using an iterative Gröbner Basis algorithm which may
-not terminate, we must set a limit on how many iterations we permit;
-here we specify *at most* 3 iterations.
+	rules = NCMakeGB[{}, 3]
 
-	NCSimplifyAll[{x**x,x+Inv[y]**Inv[1-y]},Join[{x**x-a},resol],3]
+which produces the output
 
-	{a, x + Inv[1 - y] + Inv[y]}
+	* * * * * * * * * * * * * * * *
+	* * *   NCPolyGroebner    * * *
+	* * * * * * * * * * * * * * * *
+	* Monomial order : x <<  inv[x] << inv[1 - x]
+	* Reduce and normalize initial basis
+	> Initial basis could not be reduced
+	* Computing initial set of obstructions
+	> MAJOR Iteration 1, 6 polys in the basis, 6 obstructions
+	* Cleaning up basis.
+	* Found Groebner basis with 6 relations
+	* * * * * * * * * * * * * * * *
 
-We name the variable $Inv[y]$, because this has more meaning
-to the user than would using a single letter.
-$Inv[y]$ has the same status as a single letter with regard to 
-all of the commands which we have demonstrated.
+and results in the rules:
+
+	x ** inv[1 - x] -> -1 + inv[1 - x],
+	x^-1 ** inv[1-x] -> inv[1-x] + x^-1,
+	inv[1-x] ** x -> -1 + inv[1-x],
+	inv[1-x] ** x^-1 -> inv[1-x] + x^-1
+
+One might be puzzled by how this output was produced since the initial
+set of relations was empty (`{}`). Of course the above GB
+correspond to the invertibility assumptions implied by the presence of
+$x^{-1}$ and $(1 - x)^{-1}$ in the ordering.
+
+By the way, those rules can be used for \emph{simplification}. Take
+for example the identity:
+
+$$
+	x (1 - x)^{-1} = (1 - x)^{-1} x
+$$
+
+One can verify this identity by substituting the GB using:
+
+	NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]
+
+which in this cases results in `0`, thus verifying the identity.
+
+?? STOPED HERE ??
 
 Next we illustrate an extremely valuable simplification command. The
 following example performs the same computation as the previous

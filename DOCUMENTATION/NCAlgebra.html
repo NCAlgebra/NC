@@ -53,7 +53,7 @@
 </ul></li>
 <li><a href="#facilitating-natural-notation"><span class="toc-section-number">5.2</span> Facilitating Natural Notation</a><ul>
 <li><a href="#example-3"><span class="toc-section-number">5.2.1</span> Example 3</a></li>
-<li><a href="#a-simplification-example"><span class="toc-section-number">5.2.2</span> A simplification example</a></li>
+<li><a href="#example-4"><span class="toc-section-number">5.2.2</span> Example 4</a></li>
 </ul></li>
 <li><a href="#Orderings"><span class="toc-section-number">5.3</span> Interlude: ordering on variables and monomials</a><ul>
 <li><a href="#lex-order-the-simplest-elimination-order"><span class="toc-section-number">5.3.1</span> Lex Order: the simplest elimination order</a></li>
@@ -63,7 +63,7 @@
 <li><a href="#reducing-a-polynomial-by-a-gb"><span class="toc-section-number">5.4</span> Reducing a polynomial by a GB</a></li>
 <li><a href="#simplifying-expressions"><span class="toc-section-number">5.5</span> Simplifying Expressions</a></li>
 <li><a href="#ncgb-facilitates-natural-notation"><span class="toc-section-number">5.6</span> NCGB Facilitates Natural Notation</a><ul>
-<li><a href="#a-simplification-example-1"><span class="toc-section-number">5.6.1</span> A Simplification example</a></li>
+<li><a href="#a-simplification-example"><span class="toc-section-number">5.6.1</span> A Simplification example</a></li>
 </ul></li>
 <li><a href="#makinggbs-and-inv-tp"><span class="toc-section-number">5.7</span> MakingGB's and Inv[], Tp[]</a></li>
 <li><a href="#simplification-and-gbs-revisited"><span class="toc-section-number">5.8</span> Simplification and GB's revisited</a><ul>
@@ -672,21 +672,44 @@ b ** a ** b -&gt; b</code></pre>
 <pre><code>gb = {x -&gt; inv[a]**c**inv[a]}</code></pre>
 <p>which is what one would expect. Internally, an extra variable has been created and extra relations encoding that <span class="math inline">\(a\)</span> were invertible were appended to the list of relations before running <code>NCMakeGB</code>.</p>
 <p>?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??</p>
-<h3 id="a-simplification-example"><span class="header-section-number">5.2.2</span> A simplification example</h3>
+<h3 id="example-4"><span class="header-section-number">5.2.2</span> Example 4</h3>
 <p>One can use Gröbner basis to <em>simplify</em> polynomial or rational expressions.</p>
 <p>Consider for instance the order</p>
-<p><span class="math display">\[ y \ll y^{-1} \ll (1-y)^{-1} \]</span></p>
-<p>implied by the following command:</p>
-<pre><code>SetMonomialOrder[y, inv[y], inv[1-y]]</code></pre>
-<p>The above ordering encodes the following precise idea of what we mean by <em>simple</em> versus <em>complicated</em>: it formally corresponds to specifying that <span class="math inline">\(y\)</span> is simpler than <span class="math inline">\(y^{-1}\)</span> that is simpler than <span class="math inline">\((1-y)^{-1}\)</span>, which might sits well with ones intuition.</p>
+<p><span class="math display">\[ x \ll x^{-1} \ll (1-x)^{-1} \]</span></p>
+<p>implied by the command:</p>
+<pre><code>SetMonomialOrder[x, inv[x], inv[1-x]]</code></pre>
+<p>This ordering encodes the following precise idea of what we mean by <em>simple</em> versus <em>complicated</em>: it formally corresponds to specifying that <span class="math inline">\(x\)</span> is simpler than <span class="math inline">\(x^{-1}\)</span> that is simpler than <span class="math inline">\((1-x)^{-1}\)</span>, which might sits well with one's intuition.</p>
 <p>Of course, there may be many other orders that are mathematically correct but might not serve well if simplification is the main goal. For example, perhaps the order</p>
-<p><span class="math display">\[y^{-1} \ll y \ll (1-y)^{-1}\]</span></p>
-<p>does not simplify as much as the previous one, since, if possible, it would be preferable to express an answer in terms of <span class="math inline">\(y\)</span>, rather than <span class="math inline">\(y^{-1}\)</span>.</p>
-<p>As an example of simplification, we simplify the two expressions <span class="math inline">\(x**x\)</span> and <span class="math inline">\(x+Inv[y]**Inv[1-y]\)</span> assuming that <span class="math inline">\(y\)</span> satisfies <span class="math inline">\(resol\)</span> and <span class="math inline">\(x**x=a\)</span>. The following command computes a Gröbner Basis for the union of <span class="math inline">\(resol\)</span> and <span class="math inline">\(\{x^2-a\}\)</span> and simplifies the expressions <span class="math inline">\(x**x\)</span> and <span class="math inline">\(x+Inv[y]**Inv[1-y]\)</span> using the Gröbner Basis. Experts will note that since we are using an iterative Gröbner Basis algorithm which may not terminate, we must set a limit on how many iterations we permit; here we specify <em>at most</em> 3 iterations.</p>
-<pre><code>NCSimplifyAll[{x**x,x+Inv[y]**Inv[1-y]},Join[{x**x-a},resol],3]
-
-{a, x + Inv[1 - y] + Inv[y]}</code></pre>
-<p>We name the variable <span class="math inline">\(Inv[y]\)</span>, because this has more meaning to the user than would using a single letter. <span class="math inline">\(Inv[y]\)</span> has the same status as a single letter with regard to all of the commands which we have demonstrated.</p>
+<p><span class="math display">\[x^{-1} \ll x \ll (1-x)^{-1}\]</span></p>
+<p>does not simplify as much as the previous one, since, if possible, it would be preferable to express an answer in terms of <span class="math inline">\(x\)</span>, rather than <span class="math inline">\(x^{-1}\)</span>.</p>
+<p>Not consider the following command:</p>
+<pre><code>rules = NCMakeGB[{}, 3]</code></pre>
+<p>which produces the output</p>
+<pre><code>* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order : x &lt;&lt;  inv[x] &lt;&lt; inv[1 - x]
+* Reduce and normalize initial basis
+&gt; Initial basis could not be reduced
+* Computing initial set of obstructions
+&gt; MAJOR Iteration 1, 6 polys in the basis, 6 obstructions
+* Cleaning up basis.
+* Found Groebner basis with 6 relations
+* * * * * * * * * * * * * * * *</code></pre>
+<p>and results in the rules:</p>
+<pre><code>x ** inv[1 - x] -&gt; -1 + inv[1 - x],
+x^-1 ** inv[1-x] -&gt; inv[1-x] + x^-1,
+inv[1-x] ** x -&gt; -1 + inv[1-x],
+inv[1-x] ** x^-1 -&gt; inv[1-x] + x^-1</code></pre>
+<p>One might be puzzled by how this output was produced since the initial set of relations was empty (<code>{}</code>). Of course the above GB correspond to the invertibility assumptions implied by the presence of <span class="math inline">\(x^{-1}\)</span> and <span class="math inline">\((1 - x)^{-1}\)</span> in the ordering.</p>
+<p>By the way, those rules can be used for . Take for example the identity:</p>
+<p><span class="math display">\[
+    x (1 - x)^{-1} = (1 - x)^{-1} x
+\]</span></p>
+<p>One can verify this identity by substituting the GB using:</p>
+<pre><code>NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]</code></pre>
+<p>which in this cases results in <code>0</code>, thus verifying the identity.</p>
+<p>?? STOPED HERE ??</p>
 <p>Next we illustrate an extremely valuable simplification command. The following example performs the same computation as the previous command, although one does not have to type in <span class="math inline">\(resol\)</span> explicitly. More generally one does not have to type in relations involving the definition of inverse explicitly. Beware, <code>NCSimplifyRationalX1</code> picks its own order on variables and completely ignores any order that you might have set.</p>
 <pre><code>&lt;&lt; NCSRX1.m
 NCSimplifyRationalX1[{x**x**x,x+Inv[z]**Inv[1-z]},{x**x-a},3]
@@ -806,7 +829,7 @@ SetUnknowns[y];</code></pre>
 <pre><code>y, Inv[y], Inv[1-y], a {\rm\ and\ } x.</code></pre>
 <p>In NCAlgebra, lower case letters are noncommutative by default, and functions of noncommutative variables are noncommutative, so the <code>SetNonCommutative</code> command, while harmless, is not necessary.</p>
 <p>Using <span class="math inline">\(Inv[]\)</span> has the advantage that our TeX display commands recognize it and treat it wisely. Also later we see that the command <code>NCMakeRelations</code> generates defining relations for <span class="math inline">\(Inv[]\)</span> automatically.</p>
-<h3 id="a-simplification-example-1"><span class="header-section-number">5.6.1</span> A Simplification example</h3>
+<h3 id="a-simplification-example"><span class="header-section-number">5.6.1</span> A Simplification example</h3>
 <p>We want to simplify a polynomial in the variables of</p>
 <p>We begin by setting the variables noncommutative with the following command.</p>
 <pre><code>SetNonCommutative[y, Inv[y], Inv[1-y], a, x]</code></pre>
@@ -1328,18 +1351,18 @@ G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Original</th>
-<th>Transformed</th>
+<th style="text-align: left;">Original</th>
+<th style="text-align: left;">Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>inv[mon1 + ... + K lead] lead</td>
-<td>(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
+<td style="text-align: left;">inv[mon1 + ... + K lead] lead</td>
+<td style="text-align: left;">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td>lead inv[mon1 + ... + K lead]</td>
-<td>(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
+<td style="text-align: left;">lead inv[mon1 + ... + K lead]</td>
+<td style="text-align: left;">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>
@@ -1347,38 +1370,38 @@ G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th>Original</th>
-<th>Transformed</th>
+<th style="text-align: left;">Original</th>
+<th style="text-align: left;">Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>inv[a] inv[1 + K a b]</td>
-<td>inv[a] - K b inv[1 + K a b]</td>
+<td style="text-align: left;">inv[a] inv[1 + K a b]</td>
+<td style="text-align: left;">inv[a] - K b inv[1 + K a b]</td>
 </tr>
 <tr class="even">
-<td>inv[a] inv[1 + K a]</td>
-<td>inv[a] - K inv[1 + K a]</td>
+<td style="text-align: left;">inv[a] inv[1 + K a]</td>
+<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td>inv[1 + K a b] inv[b]</td>
-<td>inv[b] - K inv[1 + K a b] a</td>
+<td style="text-align: left;">inv[1 + K a b] inv[b]</td>
+<td style="text-align: left;">inv[b] - K inv[1 + K a b] a</td>
 </tr>
 <tr class="even">
-<td>inv[1 + K a] inv[a]</td>
-<td>inv[a] - K inv[1 + K a]</td>
+<td style="text-align: left;">inv[1 + K a] inv[a]</td>
+<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td>inv[1 + K a b] a</td>
-<td>a inv[1 + K b a]</td>
+<td style="text-align: left;">inv[1 + K a b] a</td>
+<td style="text-align: left;">a inv[1 + K b a]</td>
 </tr>
 <tr class="even">
-<td>inv[A inv[a] + B b] inv[a]</td>
-<td>(1/A) inv[1 + (B/A) a b]</td>
+<td style="text-align: left;">inv[A inv[a] + B b] inv[a]</td>
+<td style="text-align: left;">(1/A) inv[1 + (B/A) a b]</td>
 </tr>
 <tr class="odd">
-<td>inv[a] inv[A inv[a] + K b]</td>
-<td>(1/A) inv[1 + (B/A) b a]</td>
+<td style="text-align: left;">inv[a] inv[A inv[a] + K b]</td>
+<td style="text-align: left;">(1/A) inv[1 + (B/A) b a]</td>
 </tr>
 </tbody>
 </table>
@@ -1386,26 +1409,26 @@ G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th>Original</th>
-<th>Transformed</th>
+<th style="text-align: left;">Original</th>
+<th style="text-align: left;">Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>inv[1 + K a b] a b</td>
-<td>(1 - inv[1 + K a b])/K</td>
+<td style="text-align: left;">inv[1 + K a b] a b</td>
+<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td>inv[1 + K a] a</td>
-<td>(1 - inv[1 + K a])/K</td>
+<td style="text-align: left;">inv[1 + K a] a</td>
+<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
 </tr>
 <tr class="odd">
-<td>a b inv[1 + K a b]</td>
-<td>(1 - inv[1 + K a b])/K</td>
+<td style="text-align: left;">a b inv[1 + K a b]</td>
+<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td>a inv[1 + K a]</td>
-<td>(1 - inv[1 + K a])/K</td>
+<td style="text-align: left;">a inv[1 + K a]</td>
+<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
 </tr>
 </tbody>
 </table>

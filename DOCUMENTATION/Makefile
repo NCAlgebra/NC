@@ -24,15 +24,15 @@ install: $(INSTALLDIRS)
 $(INSTALLDIRS):
 	$(MAKE) -C $(@:install-%=%) install
 
-MANUAL = PREAMBLE/Preamble.md \
-	 PREAMBLE/Version50.md \
-         PREAMBLE/Running.md \
-         PREAMBLE/Basic.md \
-         PREAMBLE/Things.md \
-         PREAMBLE/NCGB.md \
-         PREAMBLE/TeX.md \
-         PREAMBLE/SDP.md \
-         PREAMBLE/Reference.md \
+MANUAL = MANUAL/Preamble.md \
+	 MANUAL/Version50.md \
+         MANUAL/Running.md \
+         MANUAL/Basic.md \
+         MANUAL/Things.md \
+         MANUAL/NCGB.md \
+         MANUAL/TeX.md \
+         MANUAL/SDP.md \
+         MANUAL/Reference.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \
 	 NCAlgebra/NCSimplifyRational.md \
