@@ -23,17 +23,12 @@ want to read [CLS].
 
 ?? ADD A BRIEF INTRO TO GBs ??
 
-
-## Gröbner Basis
-
-### Example 1
+## Example 1: solving nc equations
 
 Before calculating a Gröbner Basis, one must declare which variables
 will be used during the computation and must declare a *monomial
-order* which can be done using `SetNonCommutative` and
-`SetMonomialOrder` as in:
+order* which can be done using `SetMonomialOrder` as in:
 
-	SetNonCommutative[a, b, c, x];
 	SetMonomialOrder[{a, b, c}, x];
 
 The monomial ordering imposes a relationship between the variables
@@ -130,12 +125,11 @@ $$
 	x = b \, c \, b.
 $$
 
-### Example 2
+## Example 2: a slightly more challenging example
 
 For a slightly more challenging example consider the same monomial
 order as before:
 
-	SetNonCommutative[a, b, c, x]
 	SetMonomialOrder[{a, b, c}, x];
 
 that is
@@ -173,12 +167,61 @@ $$
 $$ 
 that can be interpreted as $c$ being in the range-space of $a$.
 
-## Facilitating Natural Notation
+## Example 3: simplifying expresions
+
+Our goal now is to verify if it is possible to simplify following
+expression:
+$$
+b b a a - a a b b + a b a
+$$
+if we know that
+$$
+a b a = b
+$$
+using Gröbner basis. With that in mind we set the order:
+
+	SetMonomialOrder[a,b];
+
+and calculate the GB:
+
+	rels = {a ** b ** a - b};
+	rules = NCMakeGB[rels, 10];
+
+which produces the output
+
+	* * * * * * * * * * * * * * * *
+	* * *   NCPolyGroebner    * * *
+	* * * * * * * * * * * * * * * *
+	* Monomial order : a \[LessLess]  b
+	* Reduce and normalize initial basis
+	> Initial basis could not be reduced
+	* Computing initial set of obstructions
+	> MAJOR Iteration 1, 2 polys in the basis, 1 obstructions
+	* Cleaning up basis.
+	* Found Groebner basis with 2 relations
+	* * * * * * * * * * * * * * * *
+
+and the associated GB
+
+	a ** b ** a -> b
+	b ** b ** a -> a ** b ** b
+
+The GB reveals other relationships which must hold true if $a b a = $,
+that can be used to simplify the original expression using
+`NCReplaceRepeated` as in
+ 
+	expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
+	simp = NCReplaceRepeated[expr, rules]
+
+which results in 
+
+	simp = b
+
 
 ### Example 3
 
 Now we turn to a more complicated (though mathematically intuitive)
-notation. In our first example above, the letter $b$ was essentially
+notation. In Example 1 above, the letter $b$ was essentially
 introduced to represent the inverse of letter $a$. It is possible to
 have `NCMakeGB` handle all of that automatically by simply adding
 `inv[a]` as a member of the ordering:

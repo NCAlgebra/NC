@@ -122,7 +122,7 @@ Begin["`Private`"];
   ];
  
   Clear[CheckOrderAux];
-  CheckOrderAux[(_Symbol|_inv)..] := True;
+  CheckOrderAux[(_Symbol|_inv|tp[_Symbol]|aj[_Symbol])..] := True;
   CheckOrderAux[___] := False;
 
   Clear[CheckOrder];
@@ -181,12 +181,43 @@ Begin["`Private`"];
   NCMakeGB[p_List, iter_Integer, opts___Rule] := Module[
     {polys, vars, basis, rules, labels,
      invs, 
-     ratVars, ruleRat, newRels, ruleRatRev,
+     ratVars, ruleRat, newRels, ruleRev,
      relinvs,
-     relRatVars, relNewRels, relRuleRat, relRuleRatRev},
+     relRatVars, relNewRels, relRuleRat, relRuleRatRev,
+     tps, tpVars, tpPos, ruleTp, ruleTpRev},
 
-    (* setup labels *)
-    labels = $NCPolyInterfaceMonomialOrder;
+
+    (* Initializa polys and vars *)
+    polys = p;
+    vars = $NCPolyInterfaceMonomialOrder;
+      
+    (* Look for tp and aj in relations *)
+    tps = NCGrabFunctions[polys, tp|aj];
+    tpVars = Complement[tps, Flatten[vars]][[All,1]];
+
+    (*
+    Print["tps = ", tps];
+    Print["tpVars = ", tpVars];
+    *)
+      
+    If[ tpVars =!= {},
+
+        tpPos = Map[(MapAt[(#+1)&, 
+                           Position[vars, #, {2}], {1, 2}])&, tpVars];
+        
+        (* Insert into vars *)
+        MapThread[(vars = Insert[vars, #1, #2]) &, {tps, tpPos}];
+      
+        (*
+        Print["tpPos = ", tpPos];
+        Print["vars = ", vars];
+        *)
+        
+    ];
+      
+    (* setup labels and ruleRev *)
+    labels = vars;
+    ruleRev = {};
 
     (* Process monomial order for rationals *)
     invs = NCGrabFunctions[$NCPolyInterfaceMonomialOrder, inv];
@@ -194,11 +225,11 @@ Begin["`Private`"];
     If[ invs =!= {},
       
         (* Process invs *)
-        {ratVars, newRels, ruleRat, ruleRatRev} = NCMakeGBAux[invs];
+        {ratVars, newRels, ruleRat, ruleRev} = NCMakeGBAux[invs];
         
         (* Replace inv's with ratVars *)
-        polys = Join[p //. ruleRat, newRels];
-        vars = $NCPolyInterfaceMonomialOrder //. ruleRat;
+        polys = Join[polys //. ruleRat, newRels];
+        vars = vars //. ruleRat;
 
         (*
         Print["invs = ", invs];
@@ -207,13 +238,8 @@ Begin["`Private`"];
         Print["newRels = ", newRels];
         Print["polys = ", polys];
         Print["vars = ", vars];
-        Print["ruleRatRev = ", ruleRatRev];
+        Print["ruleRev = ", ruleRev];
         *)
-        
-       ,
-        
-        polys = p;
-        vars = $NCPolyInterfaceMonomialOrder;
         
     ];
 
@@ -235,8 +261,7 @@ Begin["`Private`"];
         labels = Join[labels, relInvs];
         
         (* Append to rules *)
-        ruleRat = Join[ruleRat, relRuleRat];
-        ruleRatRev = Join[ruleRatRev, relRuleRatRev];
+        ruleRev = Join[ruleRev, relRuleRatRev];
 
         (*
         Print["relInvs = ", relInvs];
@@ -248,6 +273,35 @@ Begin["`Private`"];
         
     ];
 
+    (* Look for tp and aj in vars *)
+    tps = NCGrabFunctions[vars, tp|aj];
+      
+    If[ tps =!= {},
+         
+        (* Create one new variable for each tp *)
+        tpVars = Table[Unique["tp"], Length[tps]];
+        SetNonCommutative[tpVars];
+
+        (* Forward and reverse rules *)
+        ruleTp = Thread[tps -> tpVars];
+        ruleTpRev = Map[Reverse, ruleTp];
+
+        (* Replace tp's with tpVars *)
+        polys = polys //. ruleTp;
+        vars = vars  //. ruleTp;
+
+        (* Append to rules *)
+        ruleRev = Join[ruleRev, ruleTpRev];
+         
+        (*
+        Print["tps = ", tps];
+        Print["tpVars = ", tpVars];
+        Print["ruleTp = ", ruleTp];
+        Print["ruleRev = ", ruleRev];
+        *)
+         
+    ];
+      
     (*
     Print["polys = ", polys];
     Print["vars = ", vars];
@@ -272,10 +326,10 @@ Begin["`Private`"];
     (* Convert to NC *)
     polys = Map[NCPolyToNC[#, vars]&, rules, {2}];
       
-    If[ invs =!= {} || relInvs =!= {},
+    If[ invs =!= {} || relInvs =!= {} || tps =!= {},
       
         (* Substitute variables *)
-        polys = polys /. ruleRatRev;
+        polys = polys /. ruleRev;
         
         (* Delete 1 -> 1 *)
         polys = DeleteCases[polys, 1 -> 1];
