@@ -26,6 +26,8 @@ Get["NCGBX.usage"];
 
 SetMonomialOrder::InvalidOrder = "Order `1` is invalid.";
 NCMakeGB::AdditionalRelations = "Relations `1` were not found in the current ordering and have been added to the list of relations. Explicitly add them to the list of relations to control their ordering.";
+NCMakeGB::MissingSymbol = "Symbols `1` appear in the relations that are not on the monomial order.";
+NCMakeGB::UnknownFunction = "Functions `1` cannot yet be understood by NCMakeGB.";
 
 Begin["`Private`"];
 
@@ -178,18 +180,25 @@ Begin["`Private`"];
     
   ];
   
-  NCMakeGB[p_List, iter_Integer, opts___Rule] := Module[
-    {polys, vars, basis, rules, labels,
+  NCMakeGB[p_List, iter_Integer:4, opts___Rule] := Module[
+    {polys, vars, symbols, basis, rules, labels,
      invs, 
      ratVars, ruleRat, newRels, ruleRev,
      relinvs,
      relRatVars, relNewRels, relRuleRat, relRuleRatRev,
      tps, tpVars, tpPos, ruleTp, ruleTpRev},
 
-
     (* Initializa polys and vars *)
     polys = p;
     vars = $NCPolyInterfaceMonomialOrder;
+    symbols = NCGrabSymbols[polys];
+      
+    (* Look for symbols in polys *)
+    If[ Complement[symbols, Flatten[vars]] =!= {},
+        Message[NCMakeGB::MissingSymbol, 
+                Complement[symbols, Flatten[vars]]];
+        Return[$Failed];
+    ];
       
     (* Look for tp and aj in relations *)
     tps = NCGrabFunctions[polys, tp|aj];
@@ -302,6 +311,15 @@ Begin["`Private`"];
          
     ];
       
+    
+    (* Is is polynomial? *)
+    symbols = NCGrabFunctions[polys];
+    If[ symbols =!= {},
+        Message[NCMakeGB::UnknownFunction, symbols];
+        Return[$Failed];
+    ];
+      
+    
     (*
     Print["polys = ", polys];
     Print["vars = ", vars];
