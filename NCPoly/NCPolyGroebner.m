@@ -372,7 +372,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                 {q, h} = NCPolyReduce[h, G];
                 (* Make sure to simplify coefficients in case of
                    symbolic coefficients *)
-                If[ symbolicCoefficients,
+                If[ h =!= 0 && symbolicCoefficients,
                     h = NCPolyPack[NCPolyTogether[h]];
                 ];
                 If[ verboseLevel >= 4,
