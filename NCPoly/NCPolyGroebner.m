@@ -14,7 +14,7 @@ Options[NCPolyGroebner] = {
   PrintObstructions -> False,
   PrintSPolynomials -> False,
   SimplifyObstructions -> True,
-  ReduceBasis -> False,
+  ReduceBasis -> True,
   SortObstructions -> False,
   SortBasis -> False,
   Labels -> {}
@@ -149,7 +149,7 @@ NCPolyGroebnerSimplifyObstructions[OBSs_List, TG_List, m_Integer, verboseLevel_I
 (* Add to basis *)
 Clear[AddToBasis];
 AddToBasis[g_, tg_, obs_, h_, 
-           simplifyOBS_, verboseLevel_] := Module[
+           labels_, simplifyOBS_, verboseLevel_] := Module[
   {G,TG,OBS,m},
          
   (* Normalize and add h to G, TG *)
@@ -184,7 +184,32 @@ AddToBasis[g_, tg_, obs_, h_,
                
 ];
         
-        
+Clear[ReduceSPolynomial];
+ReduceSPolynomial[G_,H_,labels_,
+                  symbolicCoefficients_,verboseLevel_] := Module[
+  {q,h = H},
+
+  q = {1};
+  While[ And[ h =!= 0, Flatten[q] =!= {}], 
+         {q, h} = NCPolyReduce[h, G];
+         (* Make sure to simplify coefficients in case of
+            symbolic coefficients *)
+         If[ h =!= 0 && symbolicCoefficients,
+             h = NCPolyPack[NCPolyTogether[h]];
+         ];
+         If[ verboseLevel >= 4,
+             Print["> h = ", NCPolyDisplay[h, labels]];
+         ];
+         (* Print["h = ", NCPolyDisplay[h, labels]];
+            Print["q = ", Map[NCPolyDisplay[#,labels]&, q, {3}]]; *)
+  ];
+  
+  Return[h];
+    
+];
+
+
+
 (* Groebner Basis Algortihm *)
 
 NCPolyGroebner[{}, iterations_Integer, opts___Rule] := {};
@@ -194,7 +219,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
     G, TG, 
     OBS = {}, ij, OBSij, 
     q, h,  
-    red, qq, hh,
+    reducible, ii, Gii, index,
     symbolicCoefficients,
     sortFirst, simplifyOBS, sortBasis,
     printObstructions, printBasis, printSPolynomials, 
@@ -414,20 +439,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
          ];
 
          (* Reduce S-Polynomial *)
-         q = {1};
-         While[ And[ h =!= 0, Flatten[q] =!= {}], 
-                {q, h} = NCPolyReduce[h, G];
-                (* Make sure to simplify coefficients in case of
-                   symbolic coefficients *)
-                If[ h =!= 0 && symbolicCoefficients,
-                    h = NCPolyPack[NCPolyTogether[h]];
-                ];
-                If[ verboseLevel >= 4,
-                    Print["> h = ", NCPolyDisplay[h, labels]];
-                ];
-                (* Print["h = ", NCPolyDisplay[h, labels]];
-                   Print["q = ", Map[NCPolyDisplay[#,labels]&, q, {3}]]; *)
-         ];
+         h = ReduceSPolynomial[G,h,labels,symbolicCoefficients,verboseLevel];
 
          ,
 
@@ -444,19 +456,94 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
              Print["> ", NCPolyDisplay[h, labels]];
          ];
 
+         (* Does h divide any poly in the basis? *)
+         reducible = Pick[Range[m], 
+                          Map[(First[NCPolyReduce[#, 
+                                     NCPolyLeadingMonomial[h]]]=!={})&,
+                              TG]];
+         
+         If[ verboseLevel >= 2 && Length[reducible] > 0,
+             Print["> ", Length[reducible], 
+                   " polys in the current base can be reduced by S-Polynomial"];
+         ];
+             
+         (* Add h to basis *)
+         {G,TG,OBS,m} = AddToBasis[G,TG,OBS,h,labels,
+                                   simplifyOBS,verboseLevel];
+         
          If[ reduceBasis,
              
-             (* Does h divide any poly in the basis? *)
-             red = Pick[Range[m], 
-                        Map[(First[NCPolyReduce[#, 
-                                     NCPolyLeadingMonomial[h]]]=!={})&, TG]];
-             Print["red = ", red];
+             If[ verboseLevel >= 2,
+                 Print["* Reducing current base"];
+             ];
+             
+             While[ reducible =!= {},
+                    
+                    ii = First[reducible];
+                    reducible = Rest[reducible];
+                    
+                    If[ verboseLevel >= 3,
+                        Print["> Reducing current base poly ", ii];
+                    ];
+
+                    (* Reduce candidate *)
+                    Gii = ReduceSPolynomial[Delete[G,ii],G[[ii]],labels,
+                                            symbolicCoefficients,verboseLevel];
+
+                    (* Remove obstructions involving G[ii] *)
+                    OBS = Delete[OBS,
+                                 Position[OBS[[All,1]], ii][[All,{1}]]];
+
+                    (* Adjust index in OBS *)
+                    index = Insert[Range[m-1], 0, ii];
+                    OBS[[All,1,1]] = index[[OBS[[All,1,1]]]];
+                    OBS[[All,1,2]] = index[[OBS[[All,1,2]]]];
+
+                    (* Adjust index in reducible *)
+                    reducible = index[[reducible]];
+
+                    (* Remove element ii from base *)
+                    G = Delete[G, ii];
+                    TG = Delete[TG, ii];
+                    m -= 1;
+                    mm -= 1;
+                    
+                    If[ PossibleZeroQ[Gii],
+                        
+                        (* Completely reduced, remove *)
+                        
+                        If[ verboseLevel >= 3,
+                            Print["> Poly ", ii, " reduced to zero; removing from base"];
+                        ];
+                        
+                       ,
+                        
+                        (* Remainder found, add to base *)
+                        
+                        If[ verboseLevel >= 3,
+                            Print["> Poly ", ii, 
+                                  " does not reduce to zero;",
+                                  " remainder added to base"];
+                        ];
+                        
+                        (* Does Gii divide any poly in the basis? *)
+                        mreducible = Pick[Range[m], 
+                                          Map[(First[NCPolyReduce[#, 
+                                            NCPolyLeadingMonomial[Gii]]]=!={})&,
+                                              TG]];
+                        
+                        (* Add divisible polys to reducible list *)
+                        reducible = Union[reducible, mreducible];
+                        
+                        (* Add Gii back basis *)
+                        {G,TG,OBS,m} = AddToBasis[G,TG,OBS,Gii,labels,
+                                                  simplifyOBS,verboseLevel];
+
+                    ];
+                    
+             ];
                   
          ];
-
-         (* Add h to basis *)
-         
-         {G,TG,OBS,m} = AddToBasis[G,TG,OBS,h,simplifyOBS,verboseLevel];
          
         ,
 

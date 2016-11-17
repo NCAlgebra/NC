@@ -90,7 +90,6 @@ SetDirectory[ToFileName[{$NCDir$, "TESTING", "NCPoly"}, "TestProblems"]];
 
 testset = {52, 62, 70}; (* Different than NCGB *)
 testset = Range[0,87];
-testset = Range[0,10];
 
 $NCGB$TestProblems = Map[ 
   If[# < 10, StringJoin["c0", ToString[#], ".data.m"], 
