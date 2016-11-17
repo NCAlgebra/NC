@@ -570,9 +570,8 @@ Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}</code></pre>
 <p>A reader who has no explicit interest in Gröbner Bases might want to skip this section. Readers who lack background in Gröbner Basis may want to read [CLS].</p>
 <p>?? ADD A BRIEF INTRO TO GBs ??</p>
 <h2 id="example-1-solving-nc-equations"><span class="header-section-number">5.1</span> Example 1: solving nc equations</h2>
-<p>Before calculating a Gröbner Basis, one must declare which variables will be used during the computation and must declare a <em>monomial order</em> which can be done using <code>SetNonCommutative</code> and <code>SetMonomialOrder</code> as in:</p>
-<pre><code>SetNonCommutative[a, b, c, x];
-SetMonomialOrder[{a, b, c}, x];</code></pre>
+<p>Before calculating a Gröbner Basis, one must declare which variables will be used during the computation and must declare a <em>monomial order</em> which can be done using <code>SetMonomialOrder</code> as in:</p>
+<pre><code>SetMonomialOrder[{a, b, c}, x];</code></pre>
 <p>The monomial ordering imposes a relationship between the variables which are used to <em>sort</em> the monomials in a polynomial. The ordering implied by the above command can be visualized using:</p>
 <pre><code>PrintMonomialOrder[];</code></pre>
 <p>which in this case prints:</p>
@@ -623,8 +622,7 @@ b ** a -&gt; 1</code></pre>
 \]</span></p>
 <h2 id="example-2-a-slightly-more-challenging-example"><span class="header-section-number">5.2</span> Example 2: a slightly more challenging example</h2>
 <p>For a slightly more challenging example consider the same monomial order as before:</p>
-<pre><code>SetNonCommutative[a, b, c, x]
-SetMonomialOrder[{a, b, c}, x];</code></pre>
+<pre><code>SetMonomialOrder[{a, b, c}, x];</code></pre>
 <p>that is</p>
 <p><span class="math inline">\(a &lt; b &lt; c \ll x\)</span></p>
 <p>and the relations:</p>
@@ -649,8 +647,31 @@ b ** a ** b -&gt; b</code></pre>
 b b a a - a a b b + a b a
 \]</span> if we know that <span class="math display">\[
 a b a = b
-\]</span></p>
-<pre><code>expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a</code></pre>
+\]</span> using Gröbner basis. With that in mind we set the order:</p>
+<pre><code>SetMonomialOrder[a,b];</code></pre>
+<p>and calculate the GB:</p>
+<pre><code>rels = {a ** b ** a - b};
+rules = NCMakeGB[rels, 10];</code></pre>
+<p>which produces the output</p>
+<pre><code>* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order : a \[LessLess]  b
+* Reduce and normalize initial basis
+&gt; Initial basis could not be reduced
+* Computing initial set of obstructions
+&gt; MAJOR Iteration 1, 2 polys in the basis, 1 obstructions
+* Cleaning up basis.
+* Found Groebner basis with 2 relations
+* * * * * * * * * * * * * * * *</code></pre>
+<p>and the associated GB</p>
+<pre><code>a ** b ** a -&gt; b
+b ** b ** a -&gt; a ** b ** b</code></pre>
+<p>The GB reveals other relationships which must hold true if $a b a = $, that can be used to simplify the original expression using <code>NCReplaceRepeated</code> as in</p>
+<pre><code>expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
+simp = NCReplaceRepeated[expr, rules]</code></pre>
+<p>which results in</p>
+<pre><code>simp = b</code></pre>
 <h3 id="example-3"><span class="header-section-number">5.3.1</span> Example 3</h3>
 <p>Now we turn to a more complicated (though mathematically intuitive) notation. In Example 1 above, the letter <span class="math inline">\(b\)</span> was essentially introduced to represent the inverse of letter <span class="math inline">\(a\)</span>. It is possible to have <code>NCMakeGB</code> handle all of that automatically by simply adding <code>inv[a]</code> as a member of the ordering:</p>
 <pre><code>SetMonomialOrder[{a,inv[a],c},x];</code></pre>
@@ -1354,18 +1375,18 @@ G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[mon1 + ... + K lead] lead</td>
-<td style="text-align: left;">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
+<td>inv[mon1 + ... + K lead] lead</td>
+<td>(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">lead inv[mon1 + ... + K lead]</td>
-<td style="text-align: left;">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
+<td>lead inv[mon1 + ... + K lead]</td>
+<td>(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>
@@ -1373,38 +1394,38 @@ G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[1 + K a b]</td>
-<td style="text-align: left;">inv[a] - K b inv[1 + K a b]</td>
+<td>inv[a] inv[1 + K a b]</td>
+<td>inv[a] - K b inv[1 + K a b]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[a] inv[1 + K a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[a] inv[1 + K a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] inv[b]</td>
-<td style="text-align: left;">inv[b] - K inv[1 + K a b] a</td>
+<td>inv[1 + K a b] inv[b]</td>
+<td>inv[b] - K inv[1 + K a b] a</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] inv[a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[1 + K a] inv[a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a</td>
-<td style="text-align: left;">a inv[1 + K b a]</td>
+<td>inv[1 + K a b] a</td>
+<td>a inv[1 + K b a]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[A inv[a] + B b] inv[a]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) a b]</td>
+<td>inv[A inv[a] + B b] inv[a]</td>
+<td>(1/A) inv[1 + (B/A) a b]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[A inv[a] + K b]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) b a]</td>
+<td>inv[a] inv[A inv[a] + K b]</td>
+<td>(1/A) inv[1 + (B/A) b a]</td>
 </tr>
 </tbody>
 </table>
@@ -1412,26 +1433,26 @@ G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a b</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>inv[1 + K a b] a b</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] a</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>inv[1 + K a] a</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">a b inv[1 + K a b]</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>a b inv[1 + K a b]</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">a inv[1 + K a]</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>a inv[1 + K a]</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 </tbody>
 </table>

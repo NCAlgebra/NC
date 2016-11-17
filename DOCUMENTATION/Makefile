@@ -12,10 +12,10 @@ $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
 
 clean: $(CLEANDIRS)
-	rm -f NCAlgebra.tex
+	rm -f NCDocument.tex
 
 wipe: clean
-	rm -f NCAlgebra.html NCAlgebra.pdf
+	rm -f NCDocument.html NCDocument.pdf
 
 $(CLEANDIRS):
 	$(MAKE) -C $(@:clean-%=%) clean
@@ -60,26 +60,27 @@ MANUAL = MANUAL/Preamble.md \
 	 NCTeX/NCRun.md \
 	 TESTING/NCTest.md
 
-doc: NCAlgebra.pdf NCAlgebra.html
+doc: NCDocument.pdf NCDocument.html
 
-NCAlgebra.md: $(MANUAL)
-	pandoc $(MANUAL) -t markdown_github -N --toc --standalone -o NCAlgebra.md
+NCDocument.md: $(MANUAL)
+	pandoc $(MANUAL) -t markdown_github -N --toc --standalone -o NCDocument.md
 
-NCAlgebra.html: $(MANUAL)
-	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCAlgebra.html --mathjax
+NCDocument.html: $(MANUAL)
+	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCDocument.html --mathjax
 
-NCAlgebra.pdf: $(MANUAL)
+NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --standalone \
              --variable=geometry:margin=1in \
              --variable=documentclass:book \
-	     -o NCAlgebra.tex
-	$(PDFLATEX) NCAlgebra.tex
-	$(PDFLATEX) NCAlgebra.tex
-	$(PDFLATEX) NCAlgebra.tex
+	     -o NCDocument.tex
+	$(PDFLATEX) NCDocument.tex
+	$(PDFLATEX) NCDocument.tex
+	$(PDFLATEX) NCDocument.tex
 	rm *.aux *.log *.toc *.out
 
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
-.PHONE: all clean 
-.PHONE: NCAlgebra.html NCAlgebra.pdf
+
+.PHONY: all clean 
+.PHONY: NCDocument.html NCDocument.pdf
 
