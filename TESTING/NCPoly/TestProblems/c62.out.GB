@@ -1,6 +1,6 @@
 (*
  * File produced by NCGBTEST on:
- * Fri 28 Oct 2016 15:03:23
+ * Thu 17 Nov 2016 11:57:02
  *)
 
 {a**Inva -> 1, c**LossLessM -> Ajb, Aja**InvAja -> 1, InvAja**Aja -> 1, 
@@ -26,6 +26,10 @@
   Aja**Aja**Aja**Aja - Aja**Aja**Ajc**Ajb**Aja - Ajc**Ajb**Aja**Aja**Aja + 
    Ajc**Ajb**Aja**Ajc**Ajb**Aja - InvLossLessM**a**a**a**a**LossLessM + 
    InvLossLessM**a**a**a**b**Ajb + InvLossLessM**a**b**c**a**a**LossLessM, 
+ c**b**c**a**b**c**a**LossLessM -> Ajb**Aja**Aja**Aja**Aja - 
+   Ajb**Aja**Aja**Aja**Ajc**Ajb - Ajb**Aja**Ajc**Ajb**Aja**Aja - 
+   c**a**a**a**a**LossLessM + Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb + 
+   c**a**a**b**c**a**LossLessM + c**b**c**a**a**a**LossLessM, 
  InvLossLessM**a**b**c**a**b**c**b -> Aja**Aja**Aja**Aja**Ajc - 
    Aja**Aja**Ajc**Ajb**Aja**Ajc - Ajc**Ajb**Aja**Aja**Aja**Ajc - 
    InvLossLessM**a**a**a**a**b + Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc + 
@@ -35,18 +39,4 @@
    c**a**a**a**a**a**LossLessM - c**a**a**a**a**b**Ajb + 
    Ajb**Aja**Ajc**Ajb**Aja**Ajc**Ajb**Aja - c**a**a**b**c**a**a**LossLessM + 
    c**a**a**b**c**a**b**Ajb - c**b**c**a**a**a**a**LossLessM + 
-   c**b**c**a**a**a**b**Ajb + c**b**c**a**b**c**a**a**LossLessM, 
- InvLossLessM**a**b**c**a**b**c**a**b**Ajb -> -Aja**Aja**Aja**Aja**Aja**Aja + 
-   Aja**Aja**Aja**Aja**Ajc**Ajb**Aja + Aja**Aja**Ajc**Ajb**Aja**Aja**Aja + 
-   Ajc**Ajb**Aja**Aja**Aja**Aja**Aja - Aja**Aja**Ajc**Ajb**Aja**Ajc**Ajb**
-    Aja + Aja**Aja**InvLossLessM**a**a**a**a**LossLessM - 
-   Aja**Aja**InvLossLessM**a**a**a**b**Ajb - Aja**Ajc**c**a**a**a**a**
-    LossLessM + Aja**Ajc**c**a**a**a**b**Ajb + Aja**InvLossLessM**a**a**a**a**
-    a**LossLessM - Aja**InvLossLessM**a**a**a**a**b**Ajb - 
-   Ajc**Ajb**Aja**Aja**Aja**Ajc**Ajb**Aja - Ajc**Ajb**Aja**Ajc**Ajb**Aja**
-    Aja**Aja + InvLossLessM**a**a**a**a**a**a**LossLessM - 
-   InvLossLessM**a**a**a**a**a**b**Ajb + Ajc**Ajb**Aja**Ajc**Ajb**Aja**Ajc**
-    Ajb**Aja - InvLossLessM**a**a**a**b**c**a**a**LossLessM + 
-   InvLossLessM**a**a**a**b**c**a**b**Ajb - InvLossLessM**a**b**c**a**a**a**
-    a**LossLessM + InvLossLessM**a**b**c**a**a**a**b**Ajb + 
-   InvLossLessM**a**b**c**a**b**c**a**a**LossLessM}
+   c**b**c**a**a**a**b**Ajb + c**b**c**a**b**c**a**a**LossLessM}

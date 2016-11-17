@@ -1,6 +1,6 @@
 (*
  * File produced by NCGBTEST on:
- * Fri 28 Oct 2016 13:43:25
+ * Thu 17 Nov 2016 11:59:09
  *)
 
 {x**invx -> 1, x**inv1x -> -1 + inv1x, y**invy -> 1, invx**x -> 1, 
@@ -31,8 +31,6 @@
  inv1x**inv1yx**inv1yx**inv1yx**inv1yx**inv1x -> 
   -inv1x**inv1xy**inv1xy**inv1xy**inv1xy + inv1yx**inv1yx**inv1yx**inv1yx**
     inv1x + inv1x**inv1xy**inv1xy**inv1xy**inv1xy**inv1x, 
- x**inv1yx**inv1yx**inv1yx**inv1yx**inv1yx**inv1x -> 
-  -inv1xy**inv1xy**inv1xy**inv1xy**inv1xy + inv1xy**inv1xy**inv1xy**inv1xy**
-    inv1xy**inv1x, y**inv1xy**inv1xy**inv1xy**inv1xy**inv1xy**inv1x -> 
+ y**inv1xy**inv1xy**inv1xy**inv1xy**inv1xy**inv1x -> 
   -inv1yx**inv1yx**inv1yx**inv1yx**inv1x + inv1yx**inv1yx**inv1yx**inv1yx**
     inv1yx**inv1x + y**inv1xy**inv1xy**inv1xy**inv1xy**inv1xy}

@@ -9,4 +9,5 @@ rels={
 	c**B**A-1
      };
 
+Iterations = 7;
 Interrupted = True;

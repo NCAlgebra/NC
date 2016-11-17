@@ -61,5 +61,4 @@ rels= {A ** pinvA ** A - A,
        tprat3 ** (tppinvA ** tpA - tppinvA ** tpA ** tpB ** tppinvB) - (A ** pinvA - pinvB ** B ** A ** pinvA) ** rat3, 
        tprat3 - rat6}
 
-Iterations=3;
-Interrupted=True;
+Iterations=5;

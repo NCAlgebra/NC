@@ -6,8 +6,16 @@
 BeginPackage[ "NCPolyGroebner`",
               "NCPoly`"  ];
 
-Clear[PrintBasis, PrintObstructions, PrintSPolynomials, 
-      SimplifyObstructions, VerboseLevel];
+Clear[VerboseLevel,
+      PrintBasis, 
+      PrintObstructions, 
+      PrintSPolynomials, 
+      SimplifyObstructions,
+      ReduceBasis,
+      CleanUpBasis,
+      SortObstructions,
+      SortBasis
+     ];
 Options[NCPolyGroebner] = {
   VerboseLevel -> 1,
   PrintBasis -> False,
@@ -15,6 +23,7 @@ Options[NCPolyGroebner] = {
   PrintSPolynomials -> False,
   SimplifyObstructions -> True,
   ReduceBasis -> True,
+  CleanUpBasis -> False,
   SortObstructions -> False,
   SortBasis -> False,
   Labels -> {}
@@ -223,17 +232,17 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
     symbolicCoefficients,
     sortFirst, simplifyOBS, sortBasis,
     printObstructions, printBasis, printSPolynomials, 
-    labels, sortObstructions, reduceBasis,
+    labels, sortObstructions, reduceBasis, cleanUpBasis,
     verboseLevel },
 
   (* Process Options *)
   { simplifyOBS, sortBasis,
     printObstructions, printBasis, printSPolynomials,
-    labels, sortObstructions, reduceBasis,
+    labels, sortObstructions, reduceBasis, cleanUpBasis,
     verboseLevel } = 
      { SimplifyObstructions, SortBasis,
        PrintObstructions, PrintBasis, PrintSPolynomials,
-       Labels, SortObstructions, ReduceBasis,
+       Labels, SortObstructions, ReduceBasis, CleanUpBasis,
        VerboseLevel } /. Flatten[{opts}] /. Options[NCPolyGroebner];
 
   (* Banner *)
@@ -305,7 +314,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   If[ verboseLevel >= 1,
       If[ Length[G] < m, 
           Print[ "> Initial basis reduced to '", ToString[Length[G]],
-                 "' out of '", ToString[m], "' initial relations." ];
+                 "' out of '", ToString[m], "' initial relations" ];
          ,
           Print[ "> Initial basis could not be reduced" ];
       ];
@@ -548,18 +557,20 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
         ,
 
          If[ verboseLevel >= 3,
-             Print["* S-Polynomial was completely reduced and has been removed from the set of obstructions."];
+             Print["* S-Polynomial was completely reduced and has been removed from the set of obstructions"];
          ];
 
     ];
 
   ];
 
-  (* Cleaning up current basis *)
-  If[ verboseLevel >= 1,
-      Print["* Cleaning up basis."];
+  If[ cleanUpBasis,
+      (* Cleaning up current basis *)
+      If[ verboseLevel >= 1,
+          Print["* Cleaning up basis"];
+      ];
+      G = NCPolyNormalize[NCPolyFullReduce[G]];
   ];
-  G = NCPolyNormalize[NCPolyFullReduce[G]];
 
   (* Call Together if symbolic coefficients *)
   If[ symbolicCoefficients,

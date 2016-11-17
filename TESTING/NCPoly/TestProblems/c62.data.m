@@ -35,5 +35,5 @@ rels=Complement[Union[LossLessList],{0}];
 ClearMonomialOrder[];
 SetMonomialOrder[{a,b,c,Aja,InvAja,Inva,LossLessM,InvLossLessM,Ajb,Ajc},1];
 
-Iterations=3;
+Iterations=4;
 Interrupted = True;

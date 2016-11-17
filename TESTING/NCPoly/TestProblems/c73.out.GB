@@ -1,6 +1,6 @@
 (*
  * File produced by NCGBTEST on:
- * Fri 28 Oct 2016 13:43:50
+ * Thu 17 Nov 2016 12:02:21
  *)
 
 {inva -> Inva, a**Inva -> 1, a**inv1a -> -1 + inv1a, c**LossLessM -> Ajb, 
@@ -136,13 +136,4 @@
   -inv1ab**inv1ab**inv1ab**inv1ab**inv1ab + inv1ab**inv1ab**inv1ab**inv1ab**
     inv1ab**inv1a, a**inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b -> 
   -inv1ab**inv1ab**inv1ab**inv1ab**inv1b + a**inv1ba**inv1ba**inv1ba**inv1ba**
-    inv1ba + inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b, 
- Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1a -> 
-  inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1a + 
-   Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab, 
- Inva**inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b -> 
-  -inv1ba + inv1ba**inv1b - inv1ba**inv1ba + Inva**inv1b + 
-   inv1ba**inv1ba**inv1b - inv1ba**inv1ba**inv1ba + 
-   inv1ba**inv1ba**inv1ba**inv1b - inv1ba**inv1ba**inv1ba**inv1ba + 
-   inv1ba**inv1ba**inv1ba**inv1ba**inv1b - inv1ba**inv1ba**inv1ba**inv1ba**
-    inv1ba + inv1ba**inv1ba**inv1ba**inv1ba**inv1ba**inv1b}
+    inv1ba + inv1ab**inv1ab**inv1ab**inv1ab**inv1ab**inv1b}

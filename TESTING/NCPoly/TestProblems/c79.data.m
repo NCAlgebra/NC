@@ -16,4 +16,4 @@ rels=
 	d**g + d**e**b + a**f**g,
 	h**e + h**i**a + c**d**e
 };
-Iterations=5;
+Iterations=6;
