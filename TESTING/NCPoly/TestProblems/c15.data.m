@@ -11,3 +11,5 @@ rels={
 	d**d**d,
 	B**B
      };
+
+Interrupted = True;

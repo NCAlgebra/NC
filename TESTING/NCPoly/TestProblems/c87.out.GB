@@ -1,0 +1,7 @@
+(*
+ * File produced by NCGBTEST on:
+ * Wed 16 Nov 2016 20:51:06
+ *)
+
+{t -> s, s**x -> x**s, s**y -> y**s, s**inv[x] -> inv[x]**s, 
+ s**inv[y] -> inv[y]**s}

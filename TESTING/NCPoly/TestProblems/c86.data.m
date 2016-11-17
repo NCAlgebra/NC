@@ -62,3 +62,4 @@ rels= {A ** pinvA ** A - A,
        tprat3 - rat6}
 
 Iterations=3;
+Interrupted=True;

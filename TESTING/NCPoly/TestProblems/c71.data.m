@@ -1,7 +1,6 @@
 SetNonCommutative[x,y,invx,invy,inv1x,inv1y,inv1xy,inv1yx];
 ClearMonomialOrder[];
 SetMonomialOrder[{x,y,invx,invy,inv1x,inv1y,inv1xy,inv1yx},1];
-Iterations=5;
 
 rels={
 	x**invx - 1,
@@ -15,3 +14,6 @@ rels={
 	inv1yx - y**x**inv1yx - 1, 
 	inv1yx - inv1yx**y**x - 1
      };
+
+Iterations=5;
+Interrupted = True;

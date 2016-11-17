@@ -1,13 +1,13 @@
-SetNonCommutative[T,S,Invx,Invy,x,y];
+SetNonCommutative[TT,S,Invx,Invy,x,y];
 ClearMonomialOrder[];
-SetMonomialOrder[{x,y,Invx,Invy,S,T},1];
+SetMonomialOrder[{x,y,Invx,Invy,S,TT},1];
 Iterations=10;
 
 rels={
-	S**x - x**T,
-	Invx**S - T**Invx,
-	T**y - y**T,
-	Invy**T - T**Invy,
+	S**x - x**TT,
+	Invx**S - TT**Invx,
+	TT**y - y**TT,
+	Invy**TT - TT**Invy,
 	S**x**y - x**y**S,
 	Invx**x - 1,
 	x**Invx - 1,

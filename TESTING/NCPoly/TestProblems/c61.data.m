@@ -40,4 +40,6 @@ SetMonomialOrder[setThree,3];
 SetMonomialOrder[setFour,4];
 SetMonomialOrder[setFive,5];
 SetMonomialOrder[setSix,6];
+
 Iterations=2;
+Interrupted = True;

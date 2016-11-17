@@ -5,7 +5,6 @@ SetMonomialOrder[{z},2];
 SetMonomialOrder[{x},3];
 SetMonomialOrder[{y},4];
 SetMonomialOrder[{w},5];
-Iterations=4;
 
 rels={
 	z ** b ** z -> z + d ** a ** c,
@@ -27,3 +26,5 @@ invrel={
        };
 
 rels=Join[rels,invrel] /. Rule -> Subtract;
+
+Iterations=10;

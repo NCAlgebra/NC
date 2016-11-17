@@ -3,7 +3,6 @@ ClearMonomialOrder[];
 SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
 SetMonomialOrder[{z,iz},2];
 SetMonomialOrder[{x,y,w,ix,iy,iw},3];
-Iterations=4;
 
 rels={
 	d ** x -> 1 - z ** b,
@@ -25,3 +24,5 @@ invrel={
        };
 
 rels=Join[rels,invrel] /. Rule -> Subtract;
+
+Iterations=10;

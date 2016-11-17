@@ -15,9 +15,9 @@ tests = {
   "Groebner",
   "Hankel",
   "NCInterface"
-  (*,
+  ,
   "NCMakeGB"
-  *)
+  
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];

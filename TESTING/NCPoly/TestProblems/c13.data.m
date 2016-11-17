@@ -10,3 +10,4 @@ rels={
 	A**d**A
      };
 
+Interrupted = True;

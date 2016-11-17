@@ -8,3 +8,5 @@ rels={
 	A**B**c-c**B**A,
 	c**B**A-1
      };
+
+Interrupted = True;

@@ -14,12 +14,15 @@ Options[NCPolyGroebner] = {
   PrintObstructions -> False,
   PrintSPolynomials -> False,
   SimplifyObstructions -> True,
+  ReduceBasis -> False,
   SortObstructions -> False,
   SortBasis -> False,
   Labels -> {}
 };
 
 Get["NCPolyGroebner.usage"];
+
+NCPolyGroebner::Interrupted = "Interrupted before Groebner basis with `1` relations on the basis";
 
 Begin["`Private`"];
 
@@ -143,6 +146,45 @@ NCPolyGroebnerSimplifyObstructions[OBSs_List, TG_List, m_Integer, verboseLevel_I
 
 ];
 
+(* Add to basis *)
+Clear[AddToBasis];
+AddToBasis[g_, tg_, obs_, h_, 
+           simplifyOBS_, verboseLevel_] := Module[
+  {G,TG,OBS,m},
+         
+  (* Normalize and add h to G, TG *)
+  G = Append[g, NCPolyNormalize[h]];
+  TG = Append[tg, NCPolyLeadingMonomial[Last[G]]];
+  m = Length[G];
+
+  If[ verboseLevel >= 3,
+      Print["* S-Polynomial added to current basis"];
+  ];
+
+  If[ simplifyOBS,
+    If[ verboseLevel >= 3,
+        Print["* Simplify current set of obstructions"];
+    ];
+    OBS = NCPolyGroebnerSimplifyObstructions[obs, TG, m, verboseLevel];
+  ];
+
+  If[ verboseLevel >= 3,
+      Print["* Computing new set of obstructions"];
+  ];
+
+  (* add new obstructions *)
+  OBS = Join[OBS, NCPolyGroebnerObstructions[G, m, simplifyOBS]];
+
+  If[ printObstructions, 
+      Print["* New set of obstructions:"];
+      Print["> OBS = ", Map[ColumnForm,{OBS[[All,1]], Map[NCPolyDisplay[#,labels]&, Map[Part[#, 2]&, OBS], {3}], OBS[[All,3]]}]];
+  ];
+    
+  Return[{G,TG,OBS,m}];
+               
+];
+        
+        
 (* Groebner Basis Algortihm *)
 
 NCPolyGroebner[{}, iterations_Integer, opts___Rule] := {};
@@ -151,35 +193,39 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   { i, j, k, kk, l, m, mm, n,
     G, TG, 
     OBS = {}, ij, OBSij, 
-    q, h, symbolicCoefficients,
+    q, h,  
+    red, qq, hh,
+    symbolicCoefficients,
     sortFirst, simplifyOBS, sortBasis,
     printObstructions, printBasis, printSPolynomials, 
-    labels, sortObstructions,
+    labels, sortObstructions, reduceBasis,
     verboseLevel },
 
   (* Process Options *)
   { simplifyOBS, sortBasis,
     printObstructions, printBasis, printSPolynomials,
-    labels, sortObstructions,
+    labels, sortObstructions, reduceBasis,
     verboseLevel } = 
      { SimplifyObstructions, SortBasis,
        PrintObstructions, PrintBasis, PrintSPolynomials,
-       Labels, SortObstructions,
+       Labels, SortObstructions, ReduceBasis,
        VerboseLevel } /. Flatten[{opts}] /. Options[NCPolyGroebner];
 
   (* Banner *)
-  Print["* * * * * * * * * * * * * * * *"];
-  Print["* * *   NCPolyGroebner    * * *"];
-  Print["* * * * * * * * * * * * * * * *"];
-  If[ verboseLevel >= 2,
-      Print["* Options:"];
-      Print["> VerboseLevel         -> ", verboseLevel];
-      Print["> SortBasis            -> ", sortBasis];
-      Print["> SimplifyObstructions -> ", simplifyOBS];
-      Print["> SortObstructions     -> ", sortObstructions];
-      Print["> PrintObstructions    -> ", printObstructions];
-      Print["> PrintBasis           -> ", printBasis];
-      Print["> PrintSPolynomials    -> ", printSPolynomials];
+  If[ verboseLevel >= 1,
+      Print["* * * * * * * * * * * * * * * *"];
+      Print["* * *   NCPolyGroebner    * * *"];
+      Print["* * * * * * * * * * * * * * * *"];
+      If[ verboseLevel >= 2,
+          Print["* Options:"];
+          Print["> VerboseLevel         -> ", verboseLevel];
+          Print["> SortBasis            -> ", sortBasis];
+          Print["> SimplifyObstructions -> ", simplifyOBS];
+          Print["> SortObstructions     -> ", sortObstructions];
+          Print["> PrintObstructions    -> ", printObstructions];
+          Print["> PrintBasis           -> ", printBasis];
+          Print["> PrintSPolynomials    -> ", printSPolynomials];
+      ];
   ];
  
   G = {g};
@@ -231,12 +277,13 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
   m = Length[G];
   G = NCPolyNormalize[NCPolyFullReduce[G]];
-  (* G = NCPolyNormalize[G]; *)
-  If[ Length[G] < m, 
-      Print[ "> Initial basis reduced to '", ToString[Length[G]],
-             "' out of '", ToString[m], "' initial relations." ];
-     ,
-      Print[ "> Initial basis could not be reduced" ];
+  If[ verboseLevel >= 1,
+      If[ Length[G] < m, 
+          Print[ "> Initial basis reduced to '", ToString[Length[G]],
+                 "' out of '", ToString[m], "' initial relations." ];
+         ,
+          Print[ "> Initial basis could not be reduced" ];
+      ];
   ];
 
   If[ verboseLevel >= 3,
@@ -397,34 +444,20 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
              Print["> ", NCPolyDisplay[h, labels]];
          ];
 
-         (* Normalize and add h to G, TG *)
-         AppendTo[G, NCPolyNormalize[h]];
-         AppendTo[TG, NCPolyLeadingMonomial[Last[G]]];
-
-         If[ verboseLevel >= 3,
-             Print["* S-Polynomial added to current basis"];
+         If[ reduceBasis,
+             
+             (* Does h divide any poly in the basis? *)
+             red = Pick[Range[m], 
+                        Map[(First[NCPolyReduce[#, 
+                                     NCPolyLeadingMonomial[h]]]=!={})&, TG]];
+             Print["red = ", red];
+                  
          ];
 
-         If[ simplifyOBS,
-           If[ verboseLevel >= 3,
-               Print["* Simplify current set of obstructions"];
-           ];
-           OBS = NCPolyGroebnerSimplifyObstructions[OBS, TG, Length[G], verboseLevel];
-         ];
+         (* Add h to basis *)
          
-         If[ verboseLevel >= 3,
-             Print["* Computing new set of obstructions"];
-         ];
-
-         (* add new obstructions *)
-         m = Length[G];
-         OBS = Join[OBS, NCPolyGroebnerObstructions[G, m, simplifyOBS]];
-
-         If[ printObstructions, 
-             Print["* New set of obstructions:"];
-             Print["> OBS = ", Map[ColumnForm,{OBS[[All,1]], Map[NCPolyDisplay[#,labels]&, Map[Part[#, 2]&, OBS], {3}], OBS[[All,3]]}]];
-         ];
-
+         {G,TG,OBS,m} = AddToBasis[G,TG,OBS,h,simplifyOBS,verboseLevel];
+         
         ,
 
          If[ verboseLevel >= 3,
@@ -446,14 +479,21 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
       G = Map[NCPolyTogether, G];
   ];
       
-  If[ OBS === {}
-     , 
-      Print["* Found Groebner basis with ", ToString[Length[G]], " relations"];
+  If[ OBS =!= {}
      ,
-      Print["* Interrupted before Groebner basis with ", ToString[Length[G]], " relations currently on the basis"];
+      Message[NCPolyGroebner::Interrupted, Length[G]];
+     ,
+      If[ verboseLevel >= 1,
+          Print["* Found Groebner basis with ", 
+                ToString[Length[G]], 
+                " relations"];
+      ];
   ];
-  Print["* * * * * * * * * * * * * * * *"];
-
+      
+  If[ verboseLevel >= 1,
+      Print["* * * * * * * * * * * * * * * *"];
+  ];
+      
   Return[G];
 ];
 

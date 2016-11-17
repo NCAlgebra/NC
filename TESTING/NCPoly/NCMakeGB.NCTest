@@ -9,7 +9,8 @@ Clear[NCMakeGBTest]
 NCMakeGBTest[filename_String, 
              referenceDirectory_String, 
              resultDirectory_String:"" ] := Module[
-   {outRels, outRules, outFile, cmpFile, cmpRels, resultFile},
+   {outRels, outRules, outFile, cmpFile, cmpRels, resultFile,
+    interrupted},
 
    Print["> Testing file ", filename];
    Clear[rels];
@@ -18,13 +19,27 @@ NCMakeGBTest[filename_String,
     * User may override by setting Iterations inside test file *)
    Iterations = 6;
 
+   (* Set if interrupted or not
+    * User may override by setting Interrupted inside test file *)
+   Interrupted = False;
+
    (* Load test problem *)
    Get[filename];
 
    (* Print["rels = ", rels]; *)
 
    (* Calls NCMakeGB *)
-   outRels = NCMakeGB[rels, Iterations];
+   interrupted = False;
+   Quiet[
+     Check[ outRels = NCMakeGB[rels, Iterations];
+           ,
+	    interrupted = True;
+	   ,
+	    NCPolyGroebner::Interrupted
+     ];
+    ,
+     NCPolyGroebner::Interrupted
+   ];
 
    (* Load reference answer *)
    cmpFile = ToFileName[{"..", referenceDirectory},
@@ -48,6 +63,7 @@ NCMakeGBTest[filename_String,
       ,
        NCTest[Complement[outRels /. Rule -> Subtract, cmpRels], {}];
    ];
+   NCTest[interrupted, Interrupted];
 
    (* Generate result *)
    If[ resultDirectory =!= "",
@@ -73,7 +89,8 @@ $CurrentDirectory = Directory[];
 SetDirectory[ToFileName[{$NCDir$, "TESTING", "NCPoly"}, "TestProblems"]];
 
 testset = {52, 62, 70}; (* Different than NCGB *)
-testset = Range[0,86];
+testset = Range[0,87];
+testset = Range[0,10];
 
 $NCGB$TestProblems = Map[ 
   If[# < 10, StringJoin["c0", ToString[#], ".data.m"], 

@@ -52,4 +52,6 @@ SetMonomialOrder[{a,c,LossLessM,InvLossLessM,Ajc,Aja,Inva,InvAja,b,Ajb,
                  inva,invb,inv1a,inv1b,inv1ab,inv1ba},1];
 
 rels=Join[LossLessRelations,ebrels];
+
 Iterations=5;
+Interrupted = True;

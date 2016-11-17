@@ -56,11 +56,13 @@ Begin["`Private`"];
   NCToNCPoly[exp_List, vars_] := 
     Map[NCToNCPoly[#, vars]&, exp];
 
+  (*
   NCToNCPoly[exp_Rule, vars_] := 
     NCToNCPoly[exp[[1]] - exp[[2]], vars];
 
   NCToNCPoly[exp_Equal, vars_] := 
     NCToNCPoly[exp[[1]] - exp[[2]], vars];
+  *)
 
   NCToNCPoly[exp_, vars_] := Module[
     {factors},
@@ -310,15 +312,16 @@ Begin["`Private`"];
         *)
          
     ];
-      
     
-    (* Is is polynomial? *)
+    (* Clean up Rule and Equal *)
+    polys = Replace[polys, a_Rule | a_Equal :> Subtract @@ a, {1}];
+      
+    (* Any other symbol? *)
     symbols = NCGrabFunctions[polys];
     If[ symbols =!= {},
         Message[NCMakeGB::UnknownFunction, symbols];
         Return[$Failed];
     ];
-      
     
     (*
     Print["polys = ", polys];

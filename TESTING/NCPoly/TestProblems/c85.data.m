@@ -20,4 +20,4 @@ rels=
 	g**e**c**b**j**g,
 	e**c**b**j**g**e,
 	c**b**j**g**e**c};
-Iterations=5;
+Iterations=10;

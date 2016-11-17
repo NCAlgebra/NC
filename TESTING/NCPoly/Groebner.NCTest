@@ -77,7 +77,7 @@ Module[
   (* TESTING GROEBNER PROBLEM # 1 -- BEGIN *)
 
   g = {g1, g2};
-  G = NCPolyGroebner[g, 12];
+  G = NCPolyGroebner[g, 12, VerboseLevel -> 0];
 
   NCTest[Map[NCPolyGetCoefficients,G], 
        {{-1,1},{-1,1},{-1,1}}];
@@ -105,7 +105,7 @@ Module[
     - NCPolyMonomial[{q1, q2}, vars] 
   };
 
-  G = NCPolyGroebner[g, 12];
+  G = NCPolyGroebner[g, 12, VerboseLevel -> 0];
   NCTest[Map[NCPolyGetCoefficients,G], 
        {{-1,1},{-1,1},{-1,-1,1},{-1,1,1},{-1,1,1},{-1,1,1,1}}];
   NCTest[Map[NCPolyGetIntegers,G], 

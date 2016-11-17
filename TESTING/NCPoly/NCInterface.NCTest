@@ -72,7 +72,7 @@ Block[
   NCTest[NCExp, NCExpExp];
 
   vars = {{a},{b,c}};
-  NCExp = a**a -> - b**b - c**c;
+  NCExp = a**a -(- b**b - c**c);
   PolyExp = NCToNCPoly[NCExp, vars];
   NCExpExp = NCPolyToNC[PolyExp, vars];
 
@@ -80,7 +80,7 @@ Block[
   NCTest[(NCExp /. (x_ -> y_) -> x - y), NCExpExp];
 
   vars = {{a},{b,c}};
-  NCExp = a**a == - b**b - c**c;
+  NCExp = a**a - (- b**b - c**c);
   PolyExp = NCToNCPoly[NCExp, vars];
   NCExpExp = NCPolyToNC[PolyExp, vars];
 
@@ -220,6 +220,38 @@ Block[
   SetMonomialOrder[{a,b},inv[1+inv[1+c]]];
   NCTest[GetMonomialOrder[], {{a,b},{inv[1+inv[1+c]]}}];
 
+  (* Monomial Order with tps's and ajs *)
+  
+  SetMonomialOrder[{a,b},tp[c]];
+  NCTest[GetMonomialOrder[], {{a,b},{tp[c]}}];
+
+  SetMonomialOrder[{a,b},{tp[c]}];
+  NCTest[GetMonomialOrder[], {{a,b},{tp[c]}}];
+
+  SetMonomialOrder[{a,tp[a],b},{tp[c]}];
+  NCTest[GetMonomialOrder[], {{a,tp[a],b},{tp[c]}}];
+
+  NCTestCheck[SetMonomialOrder[{a,b},tp[1+c]],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
+  SetMonomialOrder[{a,b},aj[c]];
+  NCTest[GetMonomialOrder[], {{a,b},{aj[c]}}];
+
+  SetMonomialOrder[{a,b},{aj[c]}];
+  NCTest[GetMonomialOrder[], {{a,b},{aj[c]}}];
+
+  SetMonomialOrder[{a,aj[a],b},{aj[c]}];
+  NCTest[GetMonomialOrder[], {{a,aj[a],b},{aj[c]}}];
+
+  NCTestCheck[SetMonomialOrder[{a,b},aj[1+c]],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
+  NCTestCheck[SetMonomialOrder[{a,b},Exp[c]],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
   (* TESTING SetMonomialOrder -- END *)
 
   SetMonomialOrder[{a,b},{d},{c,b}];
@@ -233,5 +265,22 @@ Block[
        "a < b \[LessLess]  d \[LessLess]  c < b < e"];
   NCTest[PrintMonomialOrder[], 
        "a < b \[LessLess]  d \[LessLess]  c < b < e"];
+
+  (* TESTING NCMakeGB -- BEGIN *)
+
+  SetMonomialOrder[a,b];
+  NCTestCheck[NCMakeGB[{a,b,c}],
+	      $Failed,
+              NCMakeGB::MissingSymbol];
+
+  NCTestCheck[NCMakeGB[{a,b,inv[a]}, VerboseLevel -> 0],
+	      {1 -> 0},
+              NCMakeGB::AdditionalRelations];
+
+  NCTestCheck[NCMakeGB[{a,b,kinv[a]}],
+	      $Failed,
+              NCMakeGB::UnknownFunction];
+
+  (* TESTING NCMakeGB -- END *)
 
 ];
