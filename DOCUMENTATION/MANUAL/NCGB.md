@@ -23,7 +23,7 @@ want to read [CLS].
 
 ?? ADD A BRIEF INTRO TO GBs ??
 
-## Example 1: solving nc equations
+## Solving equations
 
 Before calculating a Gröbner Basis, one must declare which variables
 will be used during the computation and must declare a *monomial
@@ -125,7 +125,7 @@ $$
 	x = b \, c \, b.
 $$
 
-## Example 2: a slightly more challenging example
+## A slightly more challenging example
 
 For a slightly more challenging example consider the same monomial
 order as before:
@@ -167,7 +167,7 @@ $$
 $$ 
 that can be interpreted as $c$ being in the range-space of $a$.
 
-## Example 3: simplifying expresions
+## Simplifying expresions
 
 Our goal now is to verify if it is possible to simplify following
 expression:
@@ -192,7 +192,7 @@ which produces the output
 	* * * * * * * * * * * * * * * *
 	* * *   NCPolyGroebner    * * *
 	* * * * * * * * * * * * * * * *
-	* Monomial order : a \[LessLess]  b
+	* Monomial order : a << b
 	* Reduce and normalize initial basis
 	> Initial basis could not be reduced
 	* Computing initial set of obstructions
@@ -217,8 +217,7 @@ which results in
 
 	simp = b
 
-
-### Example 3
+## Example 3
 
 Now we turn to a more complicated (though mathematically intuitive)
 notation. In Example 1 above, the letter $b$ was essentially
@@ -261,7 +260,7 @@ appended to the list of relations before running `NCMakeGB`.
 
 ?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??
 
-### Example 4 
+## Example 4 
 
 One can use Gröbner basis to *simplify* polynomial or rational
 expressions. 
@@ -349,8 +348,6 @@ ignores any order that you might have set.
 WARNING: Never use inv[ \ ] with NCGB since it has special properties
 given to it in NCAlgebra and these are not recognized by the C++ code
 behind NCGB
-
-
 
 ## Interlude: ordering on variables and monomials {#Orderings}
 

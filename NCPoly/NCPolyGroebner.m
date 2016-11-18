@@ -31,7 +31,7 @@ Options[NCPolyGroebner] = {
 
 Get["NCPolyGroebner.usage"];
 
-NCPolyGroebner::Interrupted = "Interrupted before Groebner basis with `1` relations on the basis";
+NCPolyGroebner::Interrupted = "Stopped trying to find a Groebner basis at `1` relations";
 
 Begin["`Private`"];
 

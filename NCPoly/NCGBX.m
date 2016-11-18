@@ -25,7 +25,7 @@ Clear[NCToNCPoly,
 Get["NCGBX.usage"];
 
 SetMonomialOrder::InvalidOrder = "Order `1` is invalid.";
-NCMakeGB::AdditionalRelations = "Relations `1` were not found in the current ordering and have been added to the list of relations. Explicitly add them to the list of relations to control their ordering.";
+NCMakeGB::AdditionalRelations = "Relations `1` were not found in the current ordering and have been added to the list of relations. Explicitly add them to the monomial order to control their ordering.";
 NCMakeGB::MissingSymbol = "Symbols `1` appear in the relations that are not on the monomial order.";
 NCMakeGB::CommutativeSymbols = "Commutative symbols `1` have been removed from the monomial order.";
 NCMakeGB::UnknownFunction = "Functions `1` cannot yet be understood by NCMakeGB.";
@@ -187,9 +187,9 @@ Begin["`Private`"];
     {polys, vars, symbols, basis, rules, labels,
      invs, 
      ratVars, ruleRat, newRels, ruleRev,
-     relinvs,
+     relInvs, ii, varInvs,
      relRatVars, relNewRels, relRuleRat, relRuleRatRev,
-     tps, tpVars, tpPos, ruleTp, ruleTpRev},
+     tps, tpVars, ruleTp, ruleTpRev},
 
     (* Initializa polys and vars *)
     polys = p;
@@ -214,14 +214,16 @@ Begin["`Private`"];
       
     If[ tpVars =!= {},
 
-        tpPos = Map[(MapAt[(#+1)&, 
-                           Position[vars, #, {2}], {1, 2}])&, tpVars];
+        (* Insert tp's after corresponding variable *)
+        For[ ii = 1, ii <= Length[tpVars], ii++,
+             vars = Insert[vars, tps[[ii]], 
+                           MapAt[(#+1)&, 
+                                 Position[vars, tpVars[[ii]], {2}],
+                                 {1,2}]
+                   ];
+        ];
         
-        (* Insert into vars *)
-        MapThread[(vars = Insert[vars, #1, #2]) &, {tps, tpPos}];
-      
         (*
-        Print["tpPos = ", tpPos];
         Print["vars = ", vars];
         *)
         
@@ -232,7 +234,7 @@ Begin["`Private`"];
     ruleRev = {};
 
     (* Process monomial order for rationals *)
-    invs = NCGrabFunctions[$NCPolyInterfaceMonomialOrder, inv];
+    invs = NCGrabFunctions[vars, inv];
       
     If[ invs =!= {},
       
@@ -260,28 +262,75 @@ Begin["`Private`"];
       
     If[ relInvs =!= {},
 
-        (* Warn user *)
-        Message[NCMakeGB::AdditionalRelations, relInvs];
+        (* invs of letters in the order are special *)
+        varInvs = DeleteCases[Pick[vars, Map[inv,vars,{2}], 
+                              Alternatives @@ relInvs], tp[],{2}];
+        If[ varInvs =!= {},
         
-        (* Process invs *)
-        {relRatVars, relNewRels, 
-         relRuleRat, relRuleRatRev} = NCMakeGBAux[relInvs];
+            varInvs = Map[inv, varInvs, {2}];
+            
+            (* Insert inv's after corresponding variable *)
+            vars = DeleteCases[Riffle[vars, varInvs], 
+                               {}, {1}];
+            labels = vars /. ruleRev;
+            varInvs = Flatten[varInvs];
+            
+            (* Warn user *)
+            Message[NCMakeGB::AdditionalRelations, varInvs];
+            
+            (* Process varInvs *)
+            {relRatVars, relNewRels, 
+             relRuleRat, relRuleRatRev} = NCMakeGBAux[varInvs];
 
-        (* Replace inv's with ratVars *)
-        polys = Join[polys //. relRuleRat, relNewRels];
-        vars = Join[vars, {relRatVars}];
-        labels = Join[labels, relInvs];
+            (* Replace inv's with ratVars *)
+            polys = Join[polys //. relRuleRat, relNewRels];
+            vars = vars /. relRuleRat;
         
-        (* Append to rules *)
-        ruleRev = Join[ruleRev, relRuleRatRev];
+            (* Append to rules *)
+            ruleRev = Join[ruleRev, relRuleRatRev];
 
-        (*
-        Print["relInvs = ", relInvs];
-        Print["relRatVars = ", relRatVars];
-        Print["relRuleRat = ", relRuleRat];
-        Print["relNewRels = ", relNewRels];
-        Print["relRuleRatRev = ", relRuleRatRev];
-        *)
+            (*
+            Print["vars = ", vars];
+            Print["polys = ", polys];
+            Print["labels = ", labels];
+            Print["varInvs = ", varInvs];
+            Print["relRatVars = ", relRatVars];
+            Print["relRuleRat = ", relRuleRat];
+            Print["relNewRels = ", relNewRels];
+            Print["relRuleRatRev = ", relRuleRatRev];
+            *)
+        
+            (* Repeat for remaining invs in relations *)
+            relInvs = NCGrabFunctions[polys, inv];
+            
+        ];
+        
+        If[ relInvs =!= {},
+            
+            (* Warn user *)
+            Message[NCMakeGB::AdditionalRelations, Flatten[relInvs]];
+            
+            (* Process varInvs *)
+            {relRatVars, relNewRels, 
+             relRuleRat, relRuleRatRev} = NCMakeGBAux[relInvs];
+
+            (* Replace inv's with ratVars *)
+            polys = Join[polys //. relRuleRat, relNewRels];
+            vars = Join[vars, {relRatVars}];
+            labels = Join[labels, relInvs];
+
+            (* Append to rules *)
+            ruleRev = Join[ruleRev, relRuleRatRev];
+
+            (*
+            Print["relInvs = ", relInvs];
+            Print["relRatVars = ", relRatVars];
+            Print["relRuleRat = ", relRuleRat];
+            Print["relNewRels = ", relNewRels];
+            Print["relRuleRatRev = ", relRuleRatRev];
+            *)
+            
+        ];
         
     ];
 
@@ -313,7 +362,7 @@ Begin["`Private`"];
         *)
          
     ];
-    
+      
     (* Clean up Rule and Equal *)
     polys = Replace[polys, a_Rule | a_Equal :> Subtract @@ a, {1}];
       
@@ -330,6 +379,9 @@ Begin["`Private`"];
         vars = DeleteCases[DeleteCases[vars, _?CommutativeQ, {2}], {}];
         Message[NCMakeGB::CommutativeSymbols, symbols];
     ];
+
+    (* Save current monomial order *)
+    SetMonomialOrder @@ labels;
       
     (*
     Print["polys = ", polys];
