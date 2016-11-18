@@ -27,6 +27,7 @@ Get["NCGBX.usage"];
 SetMonomialOrder::InvalidOrder = "Order `1` is invalid.";
 NCMakeGB::AdditionalRelations = "Relations `1` were not found in the current ordering and have been added to the list of relations. Explicitly add them to the list of relations to control their ordering.";
 NCMakeGB::MissingSymbol = "Symbols `1` appear in the relations that are not on the monomial order.";
+NCMakeGB::CommutativeSymbols = "Commutative symbols `1` have been removed from the monomial order.";
 NCMakeGB::UnknownFunction = "Functions `1` cannot yet be understood by NCMakeGB.";
 
 Begin["`Private`"];
@@ -193,7 +194,7 @@ Begin["`Private`"];
     (* Initializa polys and vars *)
     polys = p;
     vars = $NCPolyInterfaceMonomialOrder;
-    symbols = NCGrabSymbols[polys];
+    symbols = DeleteCases[NCGrabSymbols[polys], _?CommutativeQ];
       
     (* Look for symbols in polys *)
     If[ Complement[symbols, Flatten[vars]] =!= {},
@@ -316,13 +317,20 @@ Begin["`Private`"];
     (* Clean up Rule and Equal *)
     polys = Replace[polys, a_Rule | a_Equal :> Subtract @@ a, {1}];
       
-    (* Any other symbol? *)
-    symbols = NCGrabFunctions[polys];
+    (* Any other symbols in polys? *)
+    symbols = DeleteCases[NCGrabFunctions[polys], _?CommutativeQ];
     If[ symbols =!= {},
         Message[NCMakeGB::UnknownFunction, symbols];
         Return[$Failed];
     ];
-    
+
+    (* Any commutative symbols in vars? *)
+    symbols = DeleteCases[Flatten[vars], _?NonCommutativeQ];
+    If[ symbols =!= {},
+        vars = DeleteCases[DeleteCases[vars, _?CommutativeQ, {2}], {}];
+        Message[NCMakeGB::CommutativeSymbols, symbols];
+    ];
+      
     (*
     Print["polys = ", polys];
     Print["vars = ", vars];
