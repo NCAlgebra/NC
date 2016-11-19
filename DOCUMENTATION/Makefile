@@ -28,10 +28,11 @@ MANUAL = MANUAL/Preamble.md \
 	 MANUAL/Version50.md \
          MANUAL/Running.md \
          MANUAL/Basic.md \
-         MANUAL/Things.md \
+         MANUAL/Expressions.md \
+         MANUAL/Matrices.md \
          MANUAL/NCGB.md \
-         MANUAL/TeX.md \
          MANUAL/SDP.md \
+         MANUAL/TeX.md \
          MANUAL/Reference.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \

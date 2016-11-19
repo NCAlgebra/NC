@@ -15,13 +15,48 @@ or simply
 
 if `NC` and `NCAlgebra` have already been loaded.
 
-?? REVISE ??
+## What is a Gröbner Basis?
 
-A reader who has no explicit interest in Gröbner Bases might want to
-skip this section. Readers who lack background in Gröbner Basis may
-want to read [CLS].
+Most commutative algebra packages contain commands based on Gröbner
+Basis and uses of Gröbner Basis. For example, in Mathematica, the
+`Solve` command puts collections of equations in a *canonical form*
+which, for simple collections, readily yields a solution. Likewise,
+the Mathematica `Eliminate` command tries to convert a collection of
+$m$ polynomial equations
+$$
+	\begin{aligned}
+	p_1(x_1,\ldots,x_n) &= 0 \\
+	p_2(x_1,\ldots,x_n) &= 0 \\
+	\vdots \quad & \quad \, \, \vdots \\
+	p_m(x_1,\ldots,x_n) &= 0
+	\end{aligned}
+$$
+	
+in variables $x_1,x_2, \ldots x_n$ to a *triangular* form, that is a
+new collection of equations like
 
-?? ADD A BRIEF INTRO TO GBs ??
+$$
+\begin{aligned}
+	q_1(x_1) &= 0 \\
+	q_2(x_1,x_2) &= 0 \\
+	q_3(x_1,x_2) &= 0 \\
+	q_4(x_1,x_2,x_3)&=0 \\
+	\vdots \quad & \quad \, \, \vdots \\
+	q_{r}(x_1,\ldots,x_n) &= 0.
+	\end{aligned}
+$$
+Here the polynomials $\{q_j: 1\le j\le k_2\}$ generate the same
+*ideal* that the polynomials $\{p_j : 1\le j \le k_1\}$
+generate. Therefore, the set of solutions to the collection of
+polynomial equations $\{p_j=0: 1\le j\le k_1\}$ equals the set of
+solutions to the collection of polynomial equations $\{q_j=0: 1\le
+j\le k_2\}$. This canonical form greatly simplifies the task of
+solving collections of polynomial equations by facilitating
+backsolving for $x_j$ in terms of $x_1,\ldots,x_{j-1}$.
+
+Readers who would like to know more about Gröbner Basis may want to
+read [CLS]. The noncommutatative version of the algorithm implemented
+by `NCGB` is loosely based on [Mora].
 
 ## Solving equations
 
@@ -38,9 +73,7 @@ implied by the above command can be visualized using:
 	PrintMonomialOrder[];
 	
 which in this case prints:
-
-$a < b < c \ll x$.
-
+$$a < b < c \ll x.$$
 A user does not need to know theoretical background related to
 monomials orders. Indeed, as we shall see soon, in many engineering
 problems, it suffices to know which variables correspond to quantities
@@ -107,6 +140,11 @@ which results in
 	a ** b -> 1
 	b ** a -> 1
 
+The *rules* in the output represent the relations in the GB with the
+left-hand side of the rule being the leading monomial. Replacing
+`Rule` by `Subtract` recovers the relations but one would then loose
+the leading monomial as Mathematica alphabetizes the resulting sum.
+
 Someone not familiar with GB's might find it instructive to note this
 output GB effectively *solves* the input equation
 $$
@@ -137,7 +175,6 @@ that is
 $a < b < c \ll x$
 
 and the relations:
-
 $$
 \begin{aligned}
   a \, x - c &= 0, \\
@@ -167,22 +204,22 @@ $$
 $$ 
 that can be interpreted as $c$ being in the range-space of $a$.
 
-## Simplifying expresions
+## Simplifying polynomial expresions
 
-Our goal now is to verify if it is possible to simplify following
+Our goal now is to verify if it is possible to *simplify* the following
 expression:
 $$
-b b a a - a a b b + a b a
+b \, b \, a \, a - a \, a \, b \, b + a \, b \, a
 $$
 if we know that
 $$
-a b a = b
+a \, b \, a = b
 $$
 using Gröbner basis. With that in mind we set the order:
 
 	SetMonomialOrder[a,b];
 
-and calculate the GB:
+and calculate the GB associated with the constraint:
 
 	rels = {a ** b ** a - b};
 	rules = NCMakeGB[rels, 10];
@@ -206,9 +243,9 @@ and the associated GB
 	a ** b ** a -> b
 	b ** b ** a -> a ** b ** b
 
-The GB reveals other relationships which must hold true if $a b a = $,
-that can be used to simplify the original expression using
-`NCReplaceRepeated` as in
+The GB revealed another relationship that must hold true if $a \, b \,
+a = b$. One can use this relationship to simplify the original
+expression using `NCReplaceRepeated` as in
  
 	expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
 	simp = NCReplaceRepeated[expr, rules]
@@ -217,76 +254,28 @@ which results in
 
 	simp = b
 
-## Example 3
+## Simplifying rational expresions
 
-Now we turn to a more complicated (though mathematically intuitive)
-notation. In Example 1 above, the letter $b$ was essentially
-introduced to represent the inverse of letter $a$. It is possible to
-have `NCMakeGB` handle all of that automatically by simply adding
-`inv[a]` as a member of the ordering:
+It is often desirable to simplify expressions involving inverses of
+noncommutative expressions. One challenge is to recognize identities
+implied by the existence of certain inverses. For example, that the
+expression
+$$
+	x (1 - x)^{-1} - (1 - x)^{-1} x
+$$
+is equivalent to $0$. One can use a nc Gröbner basis for that task.
+Consider for instance the order
 
-	SetMonomialOrder[{a,inv[a],c},x];
-	
-that is
-
-$a < a^{-1} < c \ll x$
-
-Calling `NCMakeGB` with only one relation:
-
-    gb = NCMakeGB[{a**x**a-c},10]
-	
-produces the output
-
-    * * * * * * * * * * * * * * * *
-	* * *   NCPolyGroebner    * * *
-	* * * * * * * * * * * * * * * *
-	* Monomial order : a < inv[a] < c <<  x
-	* Reduce and normalize initial basis
-	> Initial basis could not be reduced
-	* Computing initial set of obstructions
-	> MAJOR Iteration 1, 5 polys in the basis, 3 obstructions
-	> MAJOR Iteration 2, 6 polys in the basis, 3 obstructions
-	* Cleaning up basis.
-	* Found Groebner basis with 3 relations
-	* * * * * * * * * * * * * * * *
-
-The resulting Gröbner basis is:
-
-	gb = {x -> inv[a]**c**inv[a]}
-
-which is what one would expect. Internally, an extra variable has been
-created and extra relations encoding that $a$ were invertible were
-appended to the list of relations before running `NCMakeGB`.
-
-?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??
-
-## Example 4 
-
-One can use Gröbner basis to *simplify* polynomial or rational
-expressions. 
-
-Consider for instance the order 
-
-$$ x \ll x^{-1} \ll (1-x)^{-1} $$
+$$ x \ll (1-x)^{-1} $$
 
 implied by the command:
 
-	SetMonomialOrder[x, inv[x], inv[1-x]]
+	SetMonomialOrder[x, inv[1-x]]
 
 This ordering encodes the following precise idea of what we mean by
 *simple* versus *complicated*: it formally corresponds to specifying
-that $x$ is simpler than $x^{-1}$ that is simpler than $(1-x)^{-1}$,
-which might sits well with one's intuition.
-
-Of course, there may be many other orders that are mathematically
-correct but might not serve well if simplification is the main
-goal. For example, perhaps the order
-
-$$x^{-1} \ll x \ll (1-x)^{-1}$$
-
-does not simplify as much as the previous one, since, if possible, it
-would be preferable to express an answer in terms of $x$, rather than
-$x^{-1}$.
+that $x$ is simpler than $(1-x)^{-1}$, which might sits well with
+one's intuition.
 
 Not consider the following command:
 
@@ -309,47 +298,71 @@ which produces the output
 and results in the rules:
 
 	x ** inv[1 - x] -> -1 + inv[1 - x],
-	x^-1 ** inv[1-x] -> inv[1-x] + x^-1,
 	inv[1-x] ** x -> -1 + inv[1-x],
-	inv[1-x] ** x^-1 -> inv[1-x] + x^-1
 
-One might be puzzled by how this output was produced since the initial
-set of relations was empty (`{}`). Of course the above GB
-correspond to the invertibility assumptions implied by the presence of
-$x^{-1}$ and $(1 - x)^{-1}$ in the ordering.
-
-By the way, those rules can be used for \emph{simplification}. Take
-for example the identity:
-
-$$
-	x (1 - x)^{-1} = (1 - x)^{-1} x
-$$
-
-One can verify this identity by substituting the GB using:
+As in the previous example, the GB revealed new relationships that
+must hold true if $1- x$ is invertible, and one can use this
+relationship to \emph{simplify} the original expression using
+`NCReplaceRepeated` as in:
 
 	NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]
 
-which in this cases results in `0`, thus verifying the identity.
+The above command results in `0`, as one would hope.
 
-?? STOPED HERE ??
+For a more challenging example consider the identity:
+$$
+\left (1 - x - y (1 - x)^{-1} y \right )^{-1} = \frac{1}{2} (1 - x - y)^{-1} + \frac{1}{2} (1 - x + y)^{-1}
+$$
+One can verify that the rule based command
+[NCSimplifyRational](#NCSimplifyRational) fails to simplify the
+expression:
 
-Next we illustrate an extremely valuable simplification command. The
-following example performs the same computation as the previous
-command, although one does not have to type in $resol$
-explicitly. More generally one does not have to type in relations
-involving the definition of inverse explicitly.  Beware,
-`NCSimplifyRationalX1` picks its own order on variables and completely
-ignores any order that you might have set.
+	expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+	NCSimplifyRational[expr]
 
-	<< NCSRX1.m
-	NCSimplifyRationalX1[{x**x**x,x+Inv[z]**Inv[1-z]},{x**x-a},3]
-	{a ** x, x + Inv[1 - z] + inv[z]}
+We set the monomial order and calculate the Gröbner basis
 
-WARNING: Never use inv[ \ ] with NCGB since it has special properties
-given to it in NCAlgebra and these are not recognized by the C++ code
-behind NCGB
+	SetMonomialOrder[x, y, inv[1-x], inv[1-x+y], inv[1-x-y], inv[1-x-y**inv[1-x]**y]];
+	rules = NCMakeGB[{}, 3];
 
-## Interlude: ordering on variables and monomials {#Orderings}
+based on the rational involved in the original expression. The result
+is the nc GB:
+
+	inv[1-x-y**inv[1-x]**y] -> (1/2)inv[1-x-y]+(1/2)inv[1-x+y]
+	x**inv[1-x] -> -1+inv[1-x]
+	y**inv[1-x+y] -> 1-inv[1-x+y]+x**inv[1-x+y]
+	y**inv[1-x-y] -> -1+inv[1-x-y]-x**inv[1-x-y]
+	inv[1-x]**x -> -1+inv[1-x]
+	inv[1-x+y]**y -> 1-inv[1-x+y]+inv[1-x+y]**x
+	inv[1-x-y]**y -> -1+inv[1-x-y]-inv[1-x-y]**x
+	inv[1-x+y]**x**inv[1-x-y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x+y]**inv[1-x-y]
+	inv[1-x-y]**x**inv[1-x+y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv[1-x+y]
+
+which succesfully simplifyes the original expression using:
+
+	expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+	NCReplaceRepeated[expr, rules] // NCExpand
+
+resulting in `0`.
+
+## Simplification with `NCGBSimplifyRational`
+
+The simplification process described above is automated in the
+function [NCGBSimplifyRational](#NCGBSimplifyRational) and calls to
+
+	expr = x ** inv[1 - x] - inv[1 - x] ** x
+	NCGBSimplifyRational[expr]
+
+or
+
+	expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+	NCGBSimplifyRational[expr]
+
+both result in `0`.
+
+?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??
+
+## Ordering on variables and monomials {#Orderings}
 
 As seen above, one needs to declare a *monomial order* before making a
 Gröbner Basis.  There are various monomial orders which can be used
@@ -397,18 +410,19 @@ The command
 
 produces the Gröbner basis:
 
-	{y -> -b**a+a**b**x**x, a**x -> 1, x**a -> 1}
+	y -> -b**a + a**b**x**x
+	a**x -> 1 
+	x**a -> 1
 
-after two iterations.
+after one iteration.
 
 Now, we change the order to 
 
 	SetMonomialOrder[y,x,b,a];
 
-and do the same `NCMakeGB` as above:
+and run the same `NCMakeGB` as above:
 
-	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
-	ColumnForm[%]
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
 	
 which, this time, results in
 	
@@ -421,20 +435,20 @@ which, this time, results in
 	b**a**b**a -> -y**y-b**a**y-y**b**a+a**b**x**b**x**x
 	a**b**x**x -> y+b**a
 	b**a**b**b**a -> -y**b**y-b**a**b**y-y**b**b**a-y**y**b**x**x-
-	    > b**a**y**b**x**x+a**b**x**b**x**x**b**x**x
+	                 b**a**y**b**x**x+a**b**x**b**x**x**b**x**x
 
 which is not a Gröbner basis since the algorithm was interrupted at 4
 iterations. Note the presence of the rule
 
-	a**b**x**x -> y + b**a
+	a**b**x**x -> y+b**a
 	
 which shows that the order is not set up to solve for $y$ in terms of
 the other variables in the sense that $y$ is not on the left hand side
 of this rule (but a human could easily solve for $y$ using this rule).
 Also the algorithm created a number of other relations which involved
-$y$. See [CoxLittleOShea].
+$y$.
  
-### Graded lex ordering: A non-elimination order 
+### Graded lex ordering: a non-elimination order 
 
 To impose graded lexicographic order, say $a< b< x< y$ on $a$,
 $b$, $x$ and $y$, one types
@@ -444,8 +458,7 @@ $b$, $x$ and $y$, one types
 This ordering puts high degree monomials high in the order. Thus it
 tries to decrease the total degree of expressions. A call to 
 
-	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
-	ColumnForm[%]
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
 
 now produces
 
@@ -458,15 +471,10 @@ now produces
 	a**b**x**b**x**x -> y**y+b**a**y+y**b**a+b**a**b**a
 	b**x**x**b**x**x -> x**b**y+x**b**b**a+x**y**b**x**x
 	a**b**x**b**x**b**x**x -> y**y**y+b**a**y**y+y**b**a**y+y**y**b**a+
-	    > b**a**b**a**y+b**a**y**b**a+y**b**a**b**a+b**a**b**a**b**a
-	b**x**x**b**x**b**x**x -> x**b**y**y+x**b**b**a**y+x**b**y**b**a
-	    > +x**b**b**a**b**a+x**y**b**x**b**x**x
-	a**b**x**b**x**b**x**b**x**x -> y**y**y**y+b**a**y**y**y+
-	    > y**b**a**y**y+y**y**b**a**y+y**y**y**b**a+b**a**b**a**y**y+
-		> b**a**y**b**a**y+b**a**y**y**b**a+y**b**a**b**a**y+
-		> y**b**a**y**b**a+y**y**b**a**b**a+b**a**b**a**b**a**y+
-		> b**a**b**a**y**b**a+b**a**y**b**a**b**a+y**b**a**b**a**b**a+
-		> b**a**b**a**b**a**b**a
+	                          b**a**b**a**y+b**a**y**b**a+y**b**a**b**a+
+                              b**a**b**a**b**a
+    b**x**x**b**x**b**x**x -> x**b**y**y+x**b**b**a**y+x**b**y**b**a+
+       						  x**b**b**a**b**a+x**y**b**x**b**x**x
 
 which again fails to be a Gröbner basis and does not eliminate
 $y$. Instead, it tries to decrease the total degree of expressions
@@ -484,22 +492,21 @@ and $y$, one types
 
 which separates $y$ from the remaining variables. This time, a call to
 
-	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4];
-	ColumnForm[%]
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
 
-yields
+yields once again
 
 	y -> -b**a+a**b**x**x
 	a**x -> 1
 	x**a -> 1
 
 which not only eliminates $y$ but is also Gröbner basis, calculated
-after 2 iterations. 
+after one iteration. 
 
 For an intuitive idea of why multigraded lex is helpful, we think of
 $a$, $b$, and $x$ as corresponding to variables in some engineering
-problem which represent quantities which are known and $y$ to be
-unknown.  The fact that $a$, $b$ and $x$ are in the top level
+problem which represent quantities which are *known* and $y$ to be
+*unknown*.  The fact that $a$, $b$ and $x$ are in the top level
 indicates that we are very interested in solving for $y$ in terms of
 $a$, $b$, and $x$, but are not willing to solve for, say $x$, in terms
 of expressions involving $y$.
@@ -510,285 +517,121 @@ and `SetUnknowns`. The above ordering would be obtained after setting
 	SetKnowns[a,b,x];
 	SetUnknowns[y];
 
-## Reducing a polynomial by a GB
-
-Now we  reduce a polynomial or ListOfPolynomials  by a GB or by any
-ListofPolynomials2.  First we convert ListOfPolynomials2 to rules
-subordinate to the monomial order which is currently in force 
-in our session.
-
-For example,  let us continue the session above with
-
-	ListOfRules2 = PolyToRule[ourGB]
-	
-results in 
-
-	{x**x->a,b->a,y**x->a,a**x->a,x**a->a,y**a->a, a**a->a} 
-
-To reduce ListOfPolynomials by ListOfRules2 use the command
-
-    Reduction[ ListofPolynomials, ListofRules2]
-          
-For example, to reduce the polynomial
-
-	poly = a**x**y**x**x + x**a**x**y + x**x**y**y
-
-in our session type
-
-	Reduction[ { poly }, ListOfRules2 ]
-
-## Simplifying Expressions
-
-Suppose we want to simplify the expression $a^3 b^3 -c $ assuming that
-we know $a b =1$ and $b a = b$.
-
-First NCAlgebra requires us to declare the variables to be noncommutative.
-
-	SetNonCommutative[a,b,c]
-
-Now we must set an order on the variables $a$, $b$ and $c$.
-
-	SetMonomialOrder[{a,b,c}]
-
-Later we explain what this does, in the context of a more complicated
-example where the command really matters. Here any order will do. We
-now simplify the expression $a^3 b^3 -c$ by typing
-
-	NCSimplifyAll[{a**a**a**b**b**b -c}, {a**b-1,b**a- b}, 3]
-
-you get the answer as the following Mathematica output
-
-	{1 - c} 
-
-The number 3 indicates how hard you want to try (how long you can
-stand to wait) to simplify your expression. 
-
-The way the previously described command `NCSimplifyAll` works is
-
-	NCSimplifyAll[ ListofPolynomials, ListofPolynomials2] =
-                 Reduction[ ListofPolynomials, 
-                          PolyToRule[NCMakeGB[ListofPolynomials2,10]]]
-
-## NCGB Facilitates Natural Notation
-
-Now we turn to a more complicated (though mathematically intuitive)
-notation.  Also we give some more examples of Simplification and GB
-manufacture.  We shall use the variables 
-
-	y, Inv[y], Inv[1-y], a {\rm\ and\ } x.
-
-In NCAlgebra, lower case letters are noncommutative by default, and
-functions of noncommutative variables are noncommutative, so the
-`SetNonCommutative` command, while harmless, is not necessary.  
-
-Using $Inv[]$ has the advantage that our TeX display commands
-recognize it and treat it wisely.  Also later we see that the command
-`NCMakeRelations` generates defining relations for $Inv[]$
-automatically.
-
-### A Simplification example
-
-We want to simplify a polynomial in the variables of 
-
-We begin by setting the variables noncommutative with the following
-command.
-
-	SetNonCommutative[y, Inv[y], Inv[1-y], a, x]
-
-Next we must give the computer a precise idea of what we mean by
-``simple" versus ``complicated". This formally corresponds to
-specifying an order on the indeterminates. If $Inv[y]$ and $Inv[1-y]$
-are going to stand for the inverses of $y$ and $1-y$ respectively, as
-the notation suggests, then the order $$y< Inv[y] < Inv[1-y] < a < x$$
-sits well with intuition, since the matrix $y$ is ``simpler" than
-$(1-y)^{-1}$.
-
-There are many orders which ``sit well with intuition".  Perhaps the
-order $Inv[y] < y < Inv[1-y] < a < x$ does not set well, since, if
-possible, it would be preferable to express an answer in terms of
-$y$,rather than $y^{-1}$.}  To set this order input \footnote{This
-sets a graded lexicographic on the monic monomials involving the
-variables $y$, $Inv[y]$, $Inv[1-y]$, $a$ and $x$ with $y< Inv[y] <
-Inv[1-y] < a < x$.
-
-	SetMonomialOrder[{ y, Inv[y], Inv[1-y], a, x}]
-
-Suppose that we want to connect the Mathematica variables $Inv[y]$
-with the mathematical idea of the inverse of $y$ and $Inv[1-y]$ with
-the mathematical idea of the inverse of $1-y$. Then just type in the
-defining relations for the inverses involved.
-
-	resol = {y ** Inv[y] == 1,   Inv[y] ** y == 1, 
-            (1 - y) ** Inv[1 - y] == 1,   Inv[1 - y] ** (1 - y) == 1}
-
-	{y ** Inv[y] == 1, Inv[y] ** y == 1, 
-       (1 - y) ** Inv[1 - y] == 1, Inv[1 - y] ** (1 - y) == 1}
-
-As an example of simplification, we simplify the two expressions
-$x**x$ and $x+Inv[y]**Inv[1-y]$ assuming that $y$ satisfies $resol$
-and $x**x=a$.  The following command computes a Gröbner Basis for the
-union of $resol$ and $\{x^2-a\}$ and simplifies the expressions $x**x$
-and $x+Inv[y]**Inv[1-y]$ using the Gröbner Basis.  Experts will note
-that since we are using an iterative Gröbner Basis algorithm which may
-not terminate, we must set a limit on how many iterations we permit;
-here we specify *at most* 3 iterations.
-
-	NCSimplifyAll[{x**x,x+Inv[y]**Inv[1-y]},Join[{x**x-a},resol],3]
-
-	{a, x + Inv[1 - y] + Inv[y]}
-
-We name the variable $Inv[y]$, because this has more meaning
-to the user than would using a single letter.
-$Inv[y]$ has the same status as a single letter with regard to 
-all of the commands which we have demonstrated.
-
-Next we illustrate an extremely valuable simplification command. The
-following example performs the same computation as the previous
-command, although one does not have to type in $resol$
-explicitly. More generally one does not have to type in relations
-involving the definition of inverse explicitly.  Beware,
-`NCSimplifyRationalX1` picks its own order on variables and completely
-ignores any order that you might have set.
-
-	<< NCSRX1.m
-	NCSimplifyRationalX1[{x**x**x,x+Inv[z]**Inv[1-z]},{x**x-a},3]
-	{a ** x, x + Inv[1 - z] + inv[z]}
-
-WARNING: Never use inv[ \ ] with NCGB since it has special properties
-given to it in NCAlgebra and these are not recognized by the C++ code
-behind NCGB
-
-## MakingGB's and Inv[], Tp[]
-
-Here is another GB example. This time we use the fancy `Inv[]`
-notation.
-
-	<< NCGB.m
-	SetNonCommutative[y, Inv[y], Inv[1-y], a, x]
-	SetMonomialOrder[{ y, Inv[y], Inv[1-y], a, x}]
-	resol = {y ** Inv[y] == 1,   Inv[y] ** y == 1,
-             (1 - y) ** Inv[1 - y] == 1,   Inv[1 - y] **
-			 (1 - y) == 1}
-
-The following commands makes a Gröbner Basis for $resol$ with respect
-to the monomial order which has been set.
-
-	NCMakeGB[resol,3]
-	{1 - Inv[1 - y] + y ** Inv[1 - y], -1 + y ** Inv[y],
-	>    1 - Inv[1 - y] + Inv[1 - y] ** y, -1 + Inv[y] ** y,
-	>    -Inv[1 - y] - Inv[y] + Inv[y] ** Inv[1 - y],
-	>    -Inv[1 - y] - Inv[y] + Inv[1 - y] ** Inv[y]}
-
-## Simplification and GB's revisited
-
-### Changing polynomials to rules
-
-The following command converts a list of relations to a list of rules
-subordinate to the monomial order specified above.
-
-	PolyToRule[%]
-	{y ** Inv[1 - y] -> -1 + Inv[1 - y], y ** Inv[y] -> 1,
-	>    Inv[1 - y] ** y -> -1 + Inv[1 - y], Inv[y] ** y -> 1,
-	>    Inv[y] ** Inv[1 - y] -> Inv[1 - y] + Inv[y],
-	>    Inv[1 - y] ** Inv[y] -> Inv[1 - y] + Inv[y]}
-
-### Changing rules to polynomials
-
-The following command converts a list of rules to
-a list of relations.
-
-	PolyToRule[%]
-	{1 - Inv[1 - y] + y ** Inv[1 - y], -1 + y ** Inv[y],
-	>    1 - Inv[1 - y] + Inv[1 - y] ** y, -1 + Inv[y] ** y,
-	>    -Inv[1 - y] - Inv[y] + Inv[y] ** Inv[1 - y],
-	>    -Inv[1 - y] - Inv[y] + Inv[1 - y] ** Inv[y]}
-
-
-### Simplifying using a GB revisited
-
-We can apply the rules in \S \ref{section:polynomials:rules}
-repeatedly to an expression to put it into ``canonical form." Often
-the canonical form is simpler than what we started with.
-
-	Reduction[{Inv[y]**Inv[1-y] - Inv[y]}, Out[9]]
-	{Inv[1 - y]}
-
-## Saving lots of time when typing
-
-One can save time in inputting various types of starting relations
-easily by using the command `NCMakeRelations`.
-
-	<< NCMakeRelations.m             
-	NCMakeRelations[{Inv,y,1-y}]
-	{y ** Inv[y] == 1, Inv[y] ** y == 1, (1 - y) ** Inv[1 -	y] == 1,
-    Inv[1 - y] ** (1 - y) == 1}
-
-It is traditional in mathematics to use only single characters
-for indeterminates (e.g., $x$, $y$ and $\alpha$). 
-However,
-we allow these indeterminate names as well as
-more complicated constructs such as
+## A complete example: the partially prescribed matrix inverse problem
+
+This is a type of problem known as a *matrix completion problem*. This
+particular one was suggested by Hugo Woerdeman. We are grateful to
+him for discussions.
+
+**Problem:** *Given matrices $a$, $b$, $c$, and $d$, we wish to
+  determine under what conditions there exists matrices x, y, z, and w
+  such that the block matrices*
+$$  
+  \begin{bmatrix} a & x \\ y & b \end{bmatrix}
+  \qquad 
+  \begin{bmatrix} w & c \\ d & z \end{bmatrix}
 $$
-Inv[x], Inv[y], Inv[1-x**y] \mbox{\rm\ and\ } Rt[x] \, .
+*are inverses of each other. Also, we wish to find formulas for $x$, $y$,
+  $z$, and $w$.*
+
+This problem was solved in a paper by W.W. Barrett, C.R. Johnson,
+M. E. Lundquist and H. Woerderman [BJLW] where they showed it splits
+into several cases depending upon which of $a$, $b$, $c$ and $d$ are
+invertible. In our example, we assume that $a$, $b$, $c$ and $d$ are
+invertible and discover the result which they obtain in this case.
+
+First we set the matrices $a$, $b$, $c$, and $d$ and their inverses as
+*knowns* and $x$, $y$, $w$, and $z$ as unknowns:
+
+	SetKnowns[a, inv[a], b, inv[b], c, inv[c], d, inv[d]];
+	SetUnknowns[{z}, {x, y, w}];
+
+Note that the graded ordedring of the unknowns means that we care more
+about solving for $x$, $y$ and $w$ than for $z$.
+
+Then we define the relations we are interested in, which are obtained
+after multiplying the two block matrices on both sides and equating to
+identity
+
+	A = {{a, x}, {y, b}}
+	B = {{w, c}, {d, z}}
+
+	rels = {
+      MatMult[A, B] - IdentityMatrix[2],
+      MatMult[B, A] - IdentityMatrix[2]
+    } // Flatten
+
+We use `Flatten` to reduce the matrix relations to a simple list of
+relations. The resulting relations in this case are:
+
+	rel = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
+           -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}
+
+After running
+
+	NCMakeGB[rels, 8]
+
+we obtain the Gröbner basis:
+
+	x -> inv[d]-inv[d]**z**b
+	y -> inv[c]-b**z**inv[c]
+	w -> inv[a]**inv[d]**z**b**d
+	z**b**z -> z+d**a**c
+	c**b**z**inv[c]**inv[a] -> inv[a]**inv[d]**z**b**d
+	inv[c]**inv[a]**inv[d]**z**b -> b**z**inv[c]**inv[a]**inv[d]
+	inv[d]**z**b**d**a -> a**c**b**z**inv[c]
+	z**b**d**a**c -> d**a**c**b**z
+	z**inv[c]**inv[a]**inv[d]**inv[b] -> inv[b]**inv[c]**inv[a]**inv[d]**z
+	z**inv[c]**inv[a]**inv[d]**z -> inv[b]+inv[b]**inv[c]**inv[a]**inv[d]**z
+	d**a**c**b**z**inv[c] -> z**b**d**a
+
+after seven iterations. The first four relations
 $$
-In fact, we allow $f[expr]$ to be an indeterminate if $expr$
-is an expression and $f$ is a Mathematica symbol which has no
-Mathematica code associated to it (e.g., $f= Dummy$ or $f=Joe$,
-but NOT $f=List$ or $f=Plus$).
-Also
-one should never use $inv[m]$ to represent $m^{-1}$ in the input of
-any of the commands explained within this document, because
-NCAlgebra has already assigned a meaning to
-$inv[m]$.
-It knows that $inv[m]**m$ is $1$ which will
-transform your starting set of data prematurely.
+\begin{aligned}
+	x &= d^{-1}-d^{-1} \, z \, b \\
+	y &= c^{-1}-b \, z \, c^{-1} \\
+	w &= a^{-1} \, d^{-1}  \, z \, b \, d \\
+	z \, b \, z &= z + d \, a \, c
+\end{aligned}
+$$	
+are the solutions we are looking for, which states that one can find
+$x$, $y$, $z$, and $w$ such that the matrices above are inverses of
+each other if and only if $z \, b \, z = z + d \, a \, c$. The first
+three relations gives formulas for $x$, $y$ and $w$ in terms of $z$.
 
-Besides $Inv$ many more functions are facilitated by NCMakeRelations,
-see Section \ref{command:NCMakeRelations}.
+A variety of scenarios can be quickly investigated under different
+assumptions. For example, say that $c$ is not invertible. Is it still
+possible to solve the problem? One solution is obtained with the
+ordering implied by
 
-### Saving time working in algebras with involution: NCAddTranspose, NCAddAdjoint
+	SetKnowns[a, inv[a], b, inv[b], c, d, inv[d]];
+	SetUnknowns[{y}, {z, w, x}];
 
-One can save time when working in an algebra with transposes or adjoints
-by using the command NCAddTranpose[ ] or NCAddAdjoint[ ].
-These commands ``symmetrize" a set of relations by applying tp[ ] 
-or aj[ ] to the relations and returning
-a list with the new expressions appended to the old ones.
-This saves the user the trouble of typing both $a = b$ and
-$tp[a] = tp[b]$.
-	
-	NCAddTranspose[ { a + b , tp[b] == c + a } ]
+In this case
 
-returns
+	NCMakeGB[rels, 8]
 
-	{ a + b , tp[b] == c + a, b == tp[c] + tp[a], tp[a] + tp[b] }
+produces the Gröbner basis:
 
-### Saving time when setting orders: NCAutomaticOrder
+	z -> inv[b]-inv[b]**y**c
+	w -> inv[a]-c**y**inv[a]
+	x -> a**c**y**inv[a]**inv[d]
+	y**c**y -> y+b**d**a
+	c**y**inv[a]**inv[d]**inv[b] -> inv[a]**inv[d]**inv[b]**y**c
+	d**a**c**y**inv[a] -> inv[b]**y**c**b**d
+	inv[d]**inv[b]**y**c**b -> a**c**y**inv[a]**inv[d]
+	y**c**b**d**a -> b**d**a**c**y
+	y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
 
-One can save time in setting the monomial order by not including all 
-of the indeterminants found in a set of relations,  only
-the variables which they are made of.
-$NCAutomaticOrder[ aMonomialOrder,$ $ aListOfPolynomials ]$ 
-inserts all of the indeterminants found in 
-$aListOfPolynomials$ into $aMonomialOrder$ and sets this order.   
-NCAutomaticOrder[ $aListOfPolynomials ]$ inserts all of the
-indeterminants found in $aListOfPolynomials$ into the ambient monomial
-order.  If x is an indeterminant found in $aMonomialOrder$ then any
-indeterminant whose symbolic representation is a function of x will
-appear next to x.
-
-	NCAutomaticOrder[{{a},{b}},  { a**Inv[a]**tp[a] + tp[b]}]
-
-would set the order to be $a < tp[a] < Inv[a] \ll b < tp[b]$.
-
-
-
-
-
-
-
-
-
-
-
-
-
+after five iterations. Once again, the first four relations
+$$
+\begin{aligned}
+	z &= b^{-1}-b^{-1} \, y \, c \\
+	w &= a^{-1}-c \, y \, a^{-1} \\
+	x &= a \, c \, y \, a^{-1} \, d^{-1} \\
+	y \, c \, y &= y+b \, d \, a
+\end{aligned}
+$$	
+provide formulas, this time for $z$, $w$, and $z$ in terms of $y$
+satisfying $y \, c \, y = y+b \, d \, a$. Note that these formulas do
+not involve $c^{-1}$ since $c$ is no longer assumed invertible.

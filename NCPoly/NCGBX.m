@@ -6,6 +6,7 @@
 BeginPackage[ "NCGBX`",
 	      "NCPolyGroebner`",
 	      "NCPoly`",
+              "NCReplace`",
               "NCUtil`",
 	      "NonCommutativeMultiply`" ];
 
@@ -19,6 +20,7 @@ Clear[NCToNCPoly,
       SetKnowns,
       SetUnknowns,
       NCMakeGB,
+      NCGBSimplifyRational,
       NCReduce,
       NCRuleToPoly];
 
@@ -26,7 +28,7 @@ Get["NCGBX.usage"];
 
 SetMonomialOrder::InvalidOrder = "Order `1` is invalid.";
 NCMakeGB::AdditionalRelations = "Relations `1` were not found in the current ordering and have been added to the list of relations. Explicitly add them to the monomial order to control their ordering.";
-NCMakeGB::MissingSymbol = "Symbols `1` appear in the relations that are not on the monomial order.";
+NCMakeGB::MissingSymbol = "Symbols `1` appear in the relations but not on the monomial order.";
 NCMakeGB::CommutativeSymbols = "Commutative symbols `1` have been removed from the monomial order.";
 NCMakeGB::UnknownFunction = "Functions `1` cannot yet be understood by NCMakeGB.";
 
@@ -56,14 +58,6 @@ Begin["`Private`"];
 
   NCToNCPoly[exp_List, vars_] := 
     Map[NCToNCPoly[#, vars]&, exp];
-
-  (*
-  NCToNCPoly[exp_Rule, vars_] := 
-    NCToNCPoly[exp[[1]] - exp[[2]], vars];
-
-  NCToNCPoly[exp_Equal, vars_] := 
-    NCToNCPoly[exp[[1]] - exp[[2]], vars];
-  *)
 
   NCToNCPoly[exp_, vars_] := Module[
     {factors},
@@ -242,7 +236,7 @@ Begin["`Private`"];
         {ratVars, newRels, ruleRat, ruleRev} = NCMakeGBAux[invs];
         
         (* Replace inv's with ratVars *)
-        polys = Join[polys //. ruleRat, newRels];
+        polys = Join[polys //. ruleRat, newRels //. ruleRat];
         vars = vars //. ruleRat;
 
         (*
@@ -265,7 +259,7 @@ Begin["`Private`"];
         (* invs of letters in the order are special *)
         varInvs = DeleteCases[Pick[vars, Map[inv,vars,{2}], 
                               Alternatives @@ relInvs], tp[],{2}];
-        If[ varInvs =!= {},
+        If[ Flatten[varInvs] =!= {},
         
             varInvs = Map[inv, varInvs, {2}];
             
@@ -308,27 +302,28 @@ Begin["`Private`"];
         If[ relInvs =!= {},
             
             (* Warn user *)
-            Message[NCMakeGB::AdditionalRelations, Flatten[relInvs]];
+            Message[NCMakeGB::AdditionalRelations, 
+                    Flatten[relInvs] //. ruleRev];
             
             (* Process varInvs *)
             {relRatVars, relNewRels, 
              relRuleRat, relRuleRatRev} = NCMakeGBAux[relInvs];
 
             (* Replace inv's with ratVars *)
-            polys = Join[polys //. relRuleRat, relNewRels];
+            polys = Join[polys //. relRuleRat, relNewRels //. relRuleRat];
             vars = Join[vars, {relRatVars}];
-            labels = Join[labels, relInvs];
+            labels = Join[labels, relInvs //. ruleRev];
 
             (* Append to rules *)
             ruleRev = Join[ruleRev, relRuleRatRev];
 
-            (*
+            (* *)
             Print["relInvs = ", relInvs];
             Print["relRatVars = ", relRatVars];
             Print["relRuleRat = ", relRuleRat];
             Print["relNewRels = ", relNewRels];
             Print["relRuleRatRev = ", relRuleRatRev];
-            *)
+            (* *)
             
         ];
         
@@ -366,10 +361,18 @@ Begin["`Private`"];
     (* Clean up Rule and Equal *)
     polys = Replace[polys, a_Rule | a_Equal :> Subtract @@ a, {1}];
       
-    (* Any other symbols in polys? *)
+    (* Any other functions in polys? *)
     symbols = DeleteCases[NCGrabFunctions[polys], _?CommutativeQ];
     If[ symbols =!= {},
         Message[NCMakeGB::UnknownFunction, symbols];
+        Return[$Failed];
+    ];
+
+    (* Any noncommutative symbols not in vars? *)
+    symbols = Complement[DeleteCases[NCGrabSymbols[polys], 
+                                     _?CommutativeQ], Flatten[vars]];
+    If[ symbols =!= {},
+        Message[NCMakeGB::MissingSymbol, symbols];
         Return[$Failed];
     ];
 
@@ -407,10 +410,10 @@ Begin["`Private`"];
     (* Convert to NC *)
     polys = Map[NCPolyToNC[#, vars]&, rules, {2}];
       
-    If[ invs =!= {} || relInvs =!= {} || tps =!= {},
+    If[ invs =!= {} || varInvs =!= {} || relInvs =!= {} || tps =!= {},
       
         (* Substitute variables *)
-        polys = polys /. ruleRev;
+        polys = polys //. ruleRev;
         
         (* Delete 1 -> 1 *)
         polys = DeleteCases[polys, 1 -> 1];
@@ -420,6 +423,28 @@ Begin["`Private`"];
     Return[polys];
   ];
 
+  (* NCGBSimplifyRational *)
+                              
+  NCGBSimplifyRational[expr_, iter_Integer:5, opts___Rule] := Module[
+    {symbols, rats, rules},
+      
+    symbols = DeleteCases[NCGrabSymbols[expr], _?CommutativeQ];
+    rats = NCGrabFunctions[expr, inv];
+
+    (*
+    Print["rats = ", rats];
+    Print["symbols = ", symbols];
+    *)
+    
+    SetMonomialOrder[symbols, rats];
+    rules = NCMakeGB[{}, iter, VerboseLevel -> 0, opts];
+
+    (* Print["rules = ", rules]; *)
+      
+    Return[Simplify[NCReplaceRepeated[expr, rules]]];
+      
+  ];
+                              
   NCReduce[f_List, g_List, complete_:False] := Module[
     {fpolys, gpolys},
 
