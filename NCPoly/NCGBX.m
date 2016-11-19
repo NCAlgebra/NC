@@ -21,6 +21,7 @@ Clear[NCToNCPoly,
       SetUnknowns,
       NCMakeGB,
       NCGBSimplifyRational,
+      NCProcess,
       NCReduce,
       NCRuleToPoly];
 
@@ -423,6 +424,67 @@ Begin["`Private`"];
     Return[polys];
   ];
 
+  (* NCProcess *)
+  NCProcess[p_List, iter_Integer:4, opts___Rule] := Module[
+    {gb, order, knowns, unknowns,
+     solved, unsolved, count, digest,
+     printReport = True},
+      
+    gb = NCMakeGB[p, iter, opts];
+      
+    (* Retrieve order *)
+    order = GetMonomialOrder[];
+    knowns = First[order];
+    unknowns = Flatten[Rest[order]];
+     
+    (*
+    Print["knowns = ", knowns];
+    Print["unknowns = ", unknowns];
+    *)
+
+    (* Equations solved for *)
+    solved = Cases[gb, Rule[s_Symbol, a_] -> (s -> a)];
+    gb = Complement[gb, solved];
+
+    (* Equations involving unknowns *)
+    unsolved = Map[Union[Cases[#, Alternatives @@ unknowns, 
+                               {0, Infinity}]]&, gb];
+    count = Map[Length, unsolved];
+
+    (*  
+    Print["gb = ", gb];
+    Print["unsolved = ", unsolved];
+    Print["count = ", count];
+    *)
+      
+    digest ={solved, 
+             {0,Pick[gb, count, 0]}, 
+             {1,Pick[gb, count, 1]}, 
+             {2,Pick[gb, count, 2]},
+             {Infinity,Pick[gb, count, _?(# > 2&)]}};
+
+    If[ printReport, 
+        Print["* * * * * * * * * * * * * * * *"];
+        Print["*      NCProcess  Report      *"];
+        Print["* * * * * * * * * * * * * * * *"];
+        Print["> Current order:"];
+        Print[PrintMonomialOrder[]];
+        Print["> The following variables have been solved for:"];
+        Print[ColumnForm[digest[[1]]]];
+        Print["> The following relations do not involve any unknowns:"];
+        Print[ColumnForm[digest[[2,2]]]];
+        Print["> The following relations involve 1 unknown:"];
+        Print[ColumnForm[digest[[3,2]]]];
+        Print["> The following relations involve 2 unknowns:"];
+        Print[ColumnForm[digest[[4,2]]]];
+        Print["> The following relations involve more than 2 unknowns:"];
+        Print[ColumnForm[digest[[5,2]]]];
+    ];
+      
+    Return[digest];
+      
+  ];
+                              
   (* NCGBSimplifyRational *)
                               
   NCGBSimplifyRational[expr_, iter_Integer:5, opts___Rule] := Module[
