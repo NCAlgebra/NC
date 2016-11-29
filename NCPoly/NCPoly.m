@@ -575,13 +575,56 @@ Begin["`Private`"];
       
   ];
 
+
+  SimultaneousTriangularization[AA_] := Module[
+    {A = AA, 
+     n = Dimensions[AA][[2]], ii,
+     Astack, v, Q, Qi},
+      
+    Q = IdentityMatrix[n];
+    For[ ii = 1, ii < n, ii++,
+         
+         (* Null space of [A1; A2; ...] *)
+         Astack = ArrayFlatten[Map[List,A[[All,ii;;n,ii;;n]]]];
+         v = Transpose[{NullSpace[Astack][[1]]}];
+         Qi = SingularValueDecomposition[v][[1]];
+
+         (*
+         Print["Astack = ", Normal[Astack]];
+         Print["v = ", Normal[v]];
+         Print["Qi = ", Normal[Qi]];
+         *)
+                           
+         A[[All,ii;;n,ii;;n]] = Map[(Transpose[Qi].#.Qi)&, 
+                                    A[[All,ii;;n,ii;;n]]];
+         Q[[ii;;n,ii;;n]] =  Q[[ii;;n,ii;;n]] . Qi;
+
+         If[ ii > 1,
+             A[[All,1;;ii-1,ii;;n]] = Map[(#.Qi)&, 
+                                          A[[All,1;;ii-1,ii;;n]]];
+         ];
+                           
+         (*
+         Print["A = ", Normal[A]];
+         Print["Q = ", Normal[Q]];
+         *)
+                           
+    ];
+
+    Return[{A,Q}];
+        
+  ];
+                          
   (* NCPolyRealization *)
   NCPolyRealization[poly_NCPoly] := Module[
     {H, 
      lu,p,q,rank,l,u,
      A,b,c,d,
-     T},
+     T,
+     method = "LUDecomposition" },
 
+    Print["> Calculate Hankel matrices"];
+      
     (* calculate Hankel matrices *)
     H = NCPolyHankelMatrix[poly];
       
@@ -589,50 +632,91 @@ Begin["`Private`"];
     d = SparseArray[{{H[[1,1,1]]}}];
     H[[1,1,1]] = 0;
     
-    (* decompose Hankel matrix in full rank factors *)
-    {lu, p, q, rank} = LUDecompositionWithCompletePivoting[H[[1]]];
-    {l, u} = GetLUMatrices[lu];
-    
-    If [rank == 0,
-        Return[{SparseArray[{},{Length[H],0,0}],
-                SparseArray[{},{0,1}],
-                SparseArray[{},{1,0}],
-                d}];
+    Print["> Decompose Hankel matrix"];
+      
+    Switch[ method 
+
+            ,"LUDecomposition",
+      
+            (* decompose Hankel matrix in full rank factors *)
+            {lu, p, q, rank} = LUDecompositionWithCompletePivoting[H[[1]]];
+            {l, u} = GetLUMatrices[lu];
+
+            If [rank == 0,
+                Return[{SparseArray[{},{Length[H],0,0}],
+                        SparseArray[{},{0,1}],
+                        SparseArray[{},{1,0}],
+                        d}];
+            ];
+
+            (* permute rows and columns of l and u *)
+            l[[p]] = l;
+            u[[All, q]] = u;
+
+            (* reduce dimensions to match rank *)
+            l = l[[All, 1 ;; rank]];
+            u = u[[1 ;; rank, All]];
+
+            (*
+            Print["H = ", Normal /@ H];
+            Print["lu = ", Normal[lu]];
+            Print["l = ", Normal[l]];
+            Print["u = ", Normal[u]];
+            *)
+
+            (* calculate b and c *)
+            b = u[[All, {1}]];
+            c = l[[{1}, All]];
+
+            Print["> Calculate Ai's"];
+
+            (* calculate ai's *)
+            linv = SparseArray[LinearSolve[Transpose[l].l, Transpose[l]]];
+            uinv = SparseArray[Transpose[LinearSolve[u.Transpose[u],u]]];
+            A = SparseArray[
+                  Prepend[Map[-Dot[linv, #, uinv]&, Rest[H]], 
+                          SparseArray[{{i_,i_}->1}, {rank,rank}]]];
+
+            (*
+            Print["linv = ", linv];
+            Print["uinv = ", uinv];
+            *)
+      
+            ,"QRDecomposition",
+            
+            (* decompose Hankel matrix in full rank factors *)
+            {Q,R} = QRDecomposition[Transpose[H[[1]]]];
+            rank = MatrixRank[R];
+
+            If [rank == 0,
+                Return[{SparseArray[{},{Length[H],0,0}],
+                        SparseArray[{},{0,1}],
+                        SparseArray[{},{1,0}],
+                        d}];
+            ];
+
+            (* calculate b and c *)
+            b = Q[[All, {1}]];
+            c = {R[[All, 1]]};
+
+            Print["> Calculate Ai's"];
+
+            (* calculate ai's *)
+            Ri = PseudoInverse[R];
+            A = SparseArray[
+                  Prepend[Map[-Dot[Transpose[Ri], #, Transpose[Q]]&, Rest[H]], 
+                          SparseArray[{{i_,i_}->1}, {rank,rank}]]];
+
+            (*
+            Print["Ri = ", Ri];
+            *)
+        
     ];
+
+    Print["> Permutation"];
       
-    (* permute rows and columns of l and u *)
-    l[[p]] = l;
-    u[[All, q]] = u;
-
-    (* reduce dimensions to match rank *)
-    l = l[[All, 1 ;; rank]];
-    u = u[[1 ;; rank, All]];
-
-    (*
-    Print["H = ", Normal /@ H];
-    Print["lu = ", Normal[lu]];
-    Print["l = ", Normal[l]];
-    Print["u = ", Normal[u]];
-    *)
-      
-    (* calculate b and c *)
-    b = u[[All, {1}]];
-    c = l[[{1}, All]];
-
-    (* calculate ai's *)
-    linv = SparseArray[LinearSolve[Transpose[l].l, Transpose[l]]];
-    uinv = SparseArray[Transpose[LinearSolve[u.Transpose[u],u]]];
-    A = SparseArray[
-          Prepend[Map[-Dot[linv, #, uinv]&, Rest[H]], 
-                  SparseArray[{{i_,i_}->1}, {rank,rank}]]];
-
-    (*
-    Print["linv = ", linv];
-    Print["uinv = ", uinv];
-    *)
-    
     (* Permute *)
-    If[ rank > 1,
+    If[ False, (* rank > 1, *)
 
         (* Permute B *)
         p = {LUPartialPivoting[b]};
@@ -671,39 +755,14 @@ Begin["`Private`"];
         
     ];
 
-    (* Full blown orthogonalization *)
-    If[ False,
+    (* Go for upper triangularization *)
+    If[ rank > 1,
+
+        Print["> Simultaneous Triangularization"];
         
-        (* Normalize B *)
-        T = Orthogonalize[Join[NullSpace[Transpose[b]], Transpose[b]]];
-        A[[2;;,All,All]] = Map[T.#.Transpose[T]&, A[[2;;,All,All]]];
-        b = T.b;
-        c = c.Transpose[T];
-
-        (*
-        Print["T = ", T];
-        Print["A = ", Normal[A]];
-        Print["b = ", Normal[b]];
-        Print["c = ", Normal[c]];
-        *)
-
-        Print["C OK = ", c[[1,-1]] == 0];
-        
-        (* Normalize C *)
-        cred = c[[All,1;;-2]];
-        T = Transpose[Orthogonalize[Join[cred,NullSpace[cred]]]];
-        T = PadRight[T, {rank, rank}];
-        T[[rank,rank]] = 1;
-        A[[2;;,All,All]] = Map[T.#.Transpose[T]&, A[[2;;,All,All]]];
-        b = T.b;
-        c = c.Transpose[T];
-
-        (*
-        Print["T = ", T];
-        Print["A = ", Normal[A]];
-        Print["b = ", Normal[b]];
-        Print["c = ", Normal[c]];
-        *)
+        {A[[2;;]], T} = SimultaneousTriangularization[A[[2;;]]];
+        b = Transpose[T] . b;
+        c = c. T;
         
     ];
             

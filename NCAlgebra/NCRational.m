@@ -198,6 +198,7 @@ Begin[ "`Private`" ]
      A,B,C,D,
      rat, opts = {}},
 
+    Print["> NCToNCRational::Polynomial"];
     (*
     Print["a = ", a];
     Print["b = ", b];
@@ -206,6 +207,8 @@ Begin[ "`Private`" ]
     (* polynomial part *)
     rat = If[ a =!= 0,
         
+        Print["> Converting polynomial to NCPoly"];
+              
         (* convert polynomial part to NCPoly *)
         poly = Check[ NCToNCPoly[a, {Flatten[vars]}]
                       ,
@@ -217,6 +220,8 @@ Begin[ "`Private`" ]
                       NCPoly::NotPolynomial
                ];
 
+        Print["> Calculating minimal realization"];
+                      
         (* calculate minimal realization *)
         {A,B,C,D} = NCPolyRealization[poly];
 
@@ -234,13 +239,15 @@ Begin[ "`Private`" ]
             AppendTo[opts, Linear -> True];
         ];
         AppendTo[opts, Polynomial -> True];
-
+                      
         {NCRational[A, B, C, D, vars, opts]}
        ,
         (* If a === 0, *) 
         {}
     ];
         
+    Print["> Adding rational terms"];
+
     (* add rational part *)
     If[ Length[b] > 0,
         rat = Join[rat, Map[NCToNCRationalAux[#, vars]&, b]];
