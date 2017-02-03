@@ -36,50 +36,58 @@ Members are:
 * [NCRObservableRealization](#NCRObservableRealization)
 * [NCRMinimalRealization](#NCRMinimalRealization)
 
-## NCRational {#NCRational}
+## State-space realizations for NC rationals
+
+### NCRational {#NCRational}
 NCRational::usage
 
-## NCToNCRational {#NCToNCRational}
+### NCToNCRational {#NCToNCRational}
 NCToNCRational::usage
 
-## NCRationalToNC {#NCRationalToNC}
+### NCRationalToNC {#NCRationalToNC}
 NCRationalToNC::usage
 
-## NCRationalToCanonical {#NCRationalToCanonical}
+### NCRationalToCanonical {#NCRationalToCanonical}
 NCRationalToCanonical::usage
 
-## CanonicalToNCRational {#CanonicalToNCRational}
+### CanonicalToNCRational {#CanonicalToNCRational}
 CanonicalToNCRational::usage
 
-## NCROrder {#NCROrder}
+## Utilities
+
+### NCROrder {#NCROrder}
 NCROrder::usage
 
-## NCRLinearQ {#NCRLinearQ}
+### NCRLinearQ {#NCRLinearQ}
 NCRLinearQ::usage
 
-## NCRStrictlyProperQ {#NCRStrictlyProperQ}
+### NCRStrictlyProperQ {#NCRStrictlyProperQ}
 NCRStrictlyProperQ::usage
 
-## NCRPlus {#NCRPlus}
+## Operations on NC rationals
+
+### NCRPlus {#NCRPlus}
 NCRPlus::usage
 
-## NCRTimes {#NCRTimes}
+### NCRTimes {#NCRTimes}
 NCRTimes::usage
 
-## NCRTranspose {#NCRTranspose}
+### NCRTranspose {#NCRTranspose}
 NCRTranspose::usage
 
-## NCRInverse {#NCRInverse}
+### NCRInverse {#NCRInverse}
 NCRInverse::usage
 
-## NCRControllableRealization {#NCRControllableRealization}
+## Minimal realizations
+
+### NCRControllableRealization {#NCRControllableRealization}
 NCRControllableRealization::usage
 
-## NCRControllableSubspace {#NCRControllableSubspace}
+### NCRControllableSubspace {#NCRControllableSubspace}
 NCRControllableSubspace::usage
 
-## NCRObservableRealization {#NCRObservableRealization}
+### NCRObservableRealization {#NCRObservableRealization}
 NCRObservableRealization::usage
 
-## NCRMinimalRealization {#NCRMinimalRealization}
+### NCRMinimalRealization {#NCRMinimalRealization}
 NCRMinimalRealization::usage

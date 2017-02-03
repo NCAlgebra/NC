@@ -623,7 +623,7 @@ Begin["`Private`"];
      T,
      method = "LUDecomposition" },
 
-    Print["> Calculate Hankel matrices"];
+    (* Print["> Calculate Hankel matrices"]; *)
       
     (* calculate Hankel matrices *)
     H = NCPolyHankelMatrix[poly];
@@ -632,7 +632,7 @@ Begin["`Private`"];
     d = SparseArray[{{H[[1,1,1]]}}];
     H[[1,1,1]] = 0;
     
-    Print["> Decompose Hankel matrix"];
+    (* Print["> Decompose Hankel matrix"]; *)
       
     Switch[ method 
 
@@ -668,7 +668,7 @@ Begin["`Private`"];
             b = u[[All, {1}]];
             c = l[[{1}, All]];
 
-            Print["> Calculate Ai's"];
+            (* Print["> Calculate Ai's"]; *)
 
             (* calculate ai's *)
             linv = SparseArray[LinearSolve[Transpose[l].l, Transpose[l]]];
@@ -699,7 +699,7 @@ Begin["`Private`"];
             b = Q[[All, {1}]];
             c = {R[[All, 1]]};
 
-            Print["> Calculate Ai's"];
+            (* Print["> Calculate Ai's"]; *)
 
             (* calculate ai's *)
             Ri = PseudoInverse[R];
@@ -713,7 +713,7 @@ Begin["`Private`"];
         
     ];
 
-    Print["> Permutation"];
+    (* Print["> Permutation"]; *)
       
     (* Permute *)
     If[ False, (* rank > 1, *)
@@ -758,7 +758,7 @@ Begin["`Private`"];
     (* Go for upper triangularization *)
     If[ rank > 1,
 
-        Print["> Simultaneous Triangularization"];
+        (* Print["> Simultaneous Triangularization"]; *)
         
         {A[[2;;]], T} = SimultaneousTriangularization[A[[2;;]]];
         b = Transpose[T] . b;

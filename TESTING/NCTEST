@@ -8,7 +8,7 @@ Print["> BEGIN NCTEST\n" ];
 
 tests = {
 (*
-  "CommutativeQ",
+"CommutativeQ",
   "NCMultiplication",
   "NCDeprecated",
   "NCUtil",
@@ -32,9 +32,7 @@ tests = {
   "NCRealization",
   *)
   "NCRational",
-  (*
   "NCConvexity",
-  *)
   "Matrix"
 };
 results = NCTestRun[tests];

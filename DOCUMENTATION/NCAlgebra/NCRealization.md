@@ -1,5 +1,7 @@
 # NCRealization {#PackageNCRealization}
 
+**WARNING: OBSOLETE PACKAGE WILL BE REPLACED BY NCRational**
+
 The package **NCRealization** implements an algorithm due to N. Slinglend for producing minimal
 realizations of nc rational functions in many nc variables. See "Toward Making LMIs Automatically".
 

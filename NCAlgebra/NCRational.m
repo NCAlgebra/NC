@@ -35,6 +35,8 @@ Clear[NCToNCRational,
       NCRTranspose,
       NCRStrictlyProperQ,
       NCRControllableSubspace,
+      NCRControllabilityGramian,
+      NCRObservabilityGramian,
       NCRControllableRealization,
       NCRObservableRealization,
       NCRMinimalRealization];
@@ -198,8 +200,8 @@ Begin[ "`Private`" ]
      A,B,C,D,
      rat, opts = {}},
 
-    Print["> NCToNCRational::Polynomial"];
     (*
+    Print["> NCToNCRational::Polynomial"];
     Print["a = ", a];
     Print["b = ", b];
     *)
@@ -207,7 +209,7 @@ Begin[ "`Private`" ]
     (* polynomial part *)
     rat = If[ a =!= 0,
         
-        Print["> Converting polynomial to NCPoly"];
+        (* Print["> Converting polynomial to NCPoly"]; *)
               
         (* convert polynomial part to NCPoly *)
         poly = Check[ NCToNCPoly[a, {Flatten[vars]}]
@@ -220,7 +222,7 @@ Begin[ "`Private`" ]
                       NCPoly::NotPolynomial
                ];
 
-        Print["> Calculating minimal realization"];
+        (* Print["> Calculating minimal realization"]; *)
                       
         (* calculate minimal realization *)
         {A,B,C,D} = NCPolyRealization[poly];
@@ -246,7 +248,7 @@ Begin[ "`Private`" ]
         {}
     ];
         
-    Print["> Adding rational terms"];
+    (* Print["> Adding rational terms"]; *)
 
     (* add rational part *)
     If[ Length[b] > 0,
@@ -1042,6 +1044,30 @@ Begin[ "`Private`" ]
       NCRControllableRealization[rat, opts], opts
     ];
 
+  (* NCR Gramian *)
+  NCRControllabilityGramian[rat_NCRational,
+                            opts:OptionsPattern[{}]] := Module[
+    {A,B,C,D, n,
+     AA, bb, XX},
+
+    (* Grab matrices *)
+    {A,B,C,D} = Normal[rat];
+    n = Length[B];
+
+    AA = KroneckerProduct[A[[1]],A[[1]]] -
+           Plus @@ Map[KroneckerProduct[#,#]&, Rest[A]];
+    bb = KroneckerProduct[B,B];
+    XX = LinearSolve[AA, bb];
+
+    Return[Transpose[ArrayReshape[XX,{n,n}]]];
+
+  ];
+
+  (* NCR Gramian *)
+  NCRObservabilityGramian[rat_NCRational,
+                          opts:OptionsPattern[{}]] :=
+    NCRControllabilityGramian[NCRTranspose[rat], opts];
+    
 End[]
 
 EndPackage[]
