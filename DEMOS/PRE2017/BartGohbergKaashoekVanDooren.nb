@@ -1,0 +1,338 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     10407,        329]
+NotebookOptionsPosition[      9125,        281]
+NotebookOutlinePosition[      9573,        299]
+CellTagsIndexPosition[      9530,        296]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["The Bart - Gohberg - Kaashoek - Van Dooren Theorem", "Title",
+ CellChangeTimes->{3.4552872122258673`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Load NCGB", "Subsection",
+ CellChangeTimes->{{3.454944003666856*^9, 3.454944005441684*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCGB`"}]}], "Input",
+ CellChangeTimes->{{3.454205923787541*^9, 3.454205930552*^9}, {
+   3.454208284166891*^9, 3.454208311197043*^9}, {3.454208404110283*^9, 
+   3.4542084099651318`*^9}, {3.454209217798544*^9, 3.4542092180118504`*^9}, {
+   3.454339524294148*^9, 3.4543395244261913`*^9}, {3.454341413655561*^9, 
+   3.454341433284811*^9}, 3.454944201903226*^9, {3.5166261347650537`*^9, 
+   3.516626135403599*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Step 1", "Section",
+ CellChangeTimes->{{3.455286665891756*^9, 3.45528666768229*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetNonCommutative", "[", 
+   RowBox[{
+   "A", ",", "B", ",", "C", ",", "m1", ",", "m2", ",", "n1", ",", "n2", ",", 
+    "a", ",", "b", ",", "c", ",", "e", ",", "f", ",", "g"}], "]"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{3.455286432218876*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FAC", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"A", "**", "m1"}], "-", 
+      RowBox[{"m1", "**", "a"}], "-", 
+      RowBox[{"m2", "**", "f", "**", "c"}]}], ",", 
+     RowBox[{
+      RowBox[{"A", "**", "m2"}], "-", 
+      RowBox[{"m2", "**", "e"}]}], ",", 
+     RowBox[{"B", "-", 
+      RowBox[{"m1", "**", "b"}], "-", 
+      RowBox[{"m2", "**", "f"}]}], ",", 
+     RowBox[{
+      RowBox[{"-", "c"}], "+", 
+      RowBox[{"C", "**", "m1"}]}], ",", 
+     RowBox[{
+      RowBox[{"-", "g"}], "+", 
+      RowBox[{"C", "**", "m2"}]}], ",", 
+     RowBox[{
+      RowBox[{"n1", "**", "m1"}], "-", "1"}], ",", 
+     RowBox[{"n1", "**", "m2"}], ",", 
+     RowBox[{"n2", "**", "m1"}], ",", 
+     RowBox[{
+      RowBox[{"n2", "**", "m2"}], "-", "1"}], ",", 
+     RowBox[{
+      RowBox[{"m1", "**", "n1"}], "+", 
+      RowBox[{"m2", "**", "n2"}], "-", "1"}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{3.455286436525352*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetKnowns", "[", 
+   RowBox[{"A", ",", "B", ",", "C"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"SetUnknowns", "[", 
+   RowBox[{
+   "m1", ",", "m2", ",", "n1", ",", "n2", ",", "a", ",", "b", ",", "c", ",", 
+    "e", ",", "f", ",", "g"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{3.455286441364831*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FACans1", "=", 
+   RowBox[{"NCProcess", "[", 
+    RowBox[{"FAC", ",", "2", ",", "\"\<FACans1\>\""}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.455286424793326*^9, 3.455286446241499*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Outputting results to the stream \"\>", "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<FACans1.tex\>\"", ",", " ", "43"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["FACans1.tex", 43], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Outputting results to the stream ", 
+   Format[
+    OutputStream["FACans1.tex", 43], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.455286744733642*^9, 3.455286863052741*^9, 
+  3.455287077571666*^9, 3.455287183174193*^9, 3.516626151535153*^9, 
+  3.5166261918598757`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Done outputting results to the stream \"\>", 
+   "\[InvisibleSpace]", 
+   InterpretationBox[
+    StyleBox[
+     RowBox[{"OutputStream", "[", 
+      RowBox[{"\"\<FACans1.tex\>\"", ",", " ", "43"}], "]"}],
+     ShowStringCharacters->True,
+     NumberMarks->True],
+    Format[
+     OutputStream["FACans1.tex", 43], InputForm],
+    AutoDelete->True,
+    Editable->True]}],
+  SequenceForm["Done outputting results to the stream ", 
+   Format[
+    OutputStream["FACans1.tex", 43], InputForm]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.455286744733642*^9, 3.455286863052741*^9, 
+  3.455287077571666*^9, 3.455287183174193*^9, 3.516626151535153*^9, 
+  3.51662619199927*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"pdflatex -output-directory=.  FACans1.tex 1> \
+\\\"/tmp/mNCRun.out\\\" 2> \\\"/tmp/mNCRun.err\\\"\"\>", 
+   "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "pdflatex -output-directory=.  FACans1.tex 1> \"/tmp/mNCRun.out\" 2> \
+\"/tmp/mNCRun.err\"", "'..."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.455286744733642*^9, 3.455286863052741*^9, 
+  3.455287077571666*^9, 3.455287183174193*^9, 3.516626151535153*^9, 
+  3.516626192003882*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"> Running '\"\>", 
+   "\[InvisibleSpace]", "\<\"open  FACans1.pdf 1> \\\"/tmp/mNCRun.out\\\" 2> \
+\\\"/tmp/mNCRun.err\\\"\"\>", "\[InvisibleSpace]", "\<\"'...\"\>"}],
+  SequenceForm[
+  "> Running '", 
+   "open  FACans1.pdf 1> \"/tmp/mNCRun.out\" 2> \"/tmp/mNCRun.err\"", "'..."],
+  
+  Editable->False]], "Print",
+ CellChangeTimes->{3.455286744733642*^9, 3.455286863052741*^9, 
+  3.455287077571666*^9, 3.455287183174193*^9, 3.516626151535153*^9, 
+  3.516626192118449*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Note: Your TeX and Dvi files are located in the directory \
+\"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio\"\>"}],
+  SequenceForm[
+  "Note: Your TeX and Dvi files are located in the directory ", 
+   "/Users/mauricio"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.455286744733642*^9, 3.455286863052741*^9, 
+  3.455287077571666*^9, 3.455287183174193*^9, 3.516626151535153*^9, 
+  3.516626192228653*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Step 2", "Section",
+ CellChangeTimes->{{3.455286675782715*^9, 3.455286676788732*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetNonCommutative", "[", "P1", "]"}], ";"}]], "Input",
+ CellChangeTimes->{3.455286581839423*^9}],
+
+Cell[BoxData[{
+ RowBox[{"ClearMonomialOrderAll", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetKnowns", "[", 
+   RowBox[{"A", ",", "B", ",", "C", ",", "P1"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"SetUnknowns", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"m1", ",", "m2", ",", "n1", ",", "n2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b", ",", "c", ",", "e", ",", "f", ",", "g"}], "}"}]}],
+    "]"}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.4552865877515297`*^9, {3.455286638073173*^9, 3.4552866389524508`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"discovered", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"m1", "**", "n1"}], "-", "P1"}], ",", 
+     RowBox[{
+      RowBox[{"n1", "**", "m1"}], "-", "1"}], ",", 
+     RowBox[{
+      RowBox[{"n2", "**", "m2"}], "-", "1"}], ",", 
+     RowBox[{
+      RowBox[{"m2", "**", "n2"}], "-", "1", "+", 
+      RowBox[{"m1", "**", "n1"}]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"relations", "=", 
+   RowBox[{"Union", "[", 
+    RowBox[{
+     RowBox[{"FACans1", "[", 
+      RowBox[{"[", "2", "]"}], "]"}], ",", 
+     RowBox[{"FACans1", "[", 
+      RowBox[{"[", "3", "]"}], "]"}], ",", "discovered"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{3.455286652306425*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FACans2", "=", 
+   RowBox[{"NCProcess", "[", 
+    RowBox[{"relations", ",", "2", ",", "\"\<FACans2\>\"", ",", 
+     RowBox[{"UserSelect", "\[Rule]", "discovered"}], ",", 
+     RowBox[{"SB", "\[Rule]", "True"}], ",", 
+     RowBox[{"DegreeCap", "\[Rule]", "3"}], ",", 
+     RowBox[{"DegreeSumCap", "\[Rule]", "6"}], ",", 
+     RowBox[{"PrintScreenOutput", "\[Rule]", "True"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.455286575627944*^9, 3.455286586019248*^9}, {
+  3.455286645385528*^9, 3.4552866588869553`*^9}, {3.455286788054171*^9, 
+  3.455286814717073*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"LinkObject", "::", "linkd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Unable to communicate with closed link \
+\[NoBreak]\\!\\(LinkObject[\\(\\(\\\"/Users/mauricio/NC/NCGB/Binary/p9c/\
+MacOSX-x86-64/p9c\\\", 5, 5\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/LinkObject/linkd\\\", ButtonNote -> \
+\\\"LinkObject::linkd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.51662616171087*^9, 3.516626202338723*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{835, 775},
+WindowMargins->{{226, Automatic}, {Automatic, 0}},
+Magnification->1.25,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 6, \
+2010)",
+StyleDefinitions->FrontEnd`FileName[{"Creative"}, "NaturalColor.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 111, 1, 125, "Title"],
+Cell[CellGroupData[{
+Cell[703, 27, 97, 1, 42, "Subsection"],
+Cell[803, 30, 488, 8, 66, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1328, 43, 90, 1, 89, "Section"],
+Cell[1421, 46, 280, 7, 46, "Input"],
+Cell[1704, 55, 972, 30, 85, "Input"],
+Cell[2679, 87, 341, 9, 66, "Input"],
+Cell[CellGroupData[{
+Cell[3045, 100, 230, 6, 46, "Input"],
+Cell[CellGroupData[{
+Cell[3300, 110, 712, 19, 25, "Print"],
+Cell[4015, 131, 723, 20, 25, "Print"],
+Cell[4741, 153, 570, 13, 45, "Print"],
+Cell[5314, 168, 519, 12, 25, "Print"],
+Cell[5836, 182, 457, 10, 25, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6354, 199, 91, 1, 89, "Section"],
+Cell[6448, 202, 131, 3, 46, "Input"],
+Cell[6582, 207, 552, 14, 85, "Input"],
+Cell[7137, 223, 738, 23, 66, "Input"],
+Cell[CellGroupData[{
+Cell[7900, 250, 606, 13, 66, "Input"],
+Cell[8509, 265, 576, 11, 47, "Message"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
