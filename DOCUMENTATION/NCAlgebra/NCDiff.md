@@ -1,4 +1,4 @@
-# NCDiff {#PackageNCDiff}
+## NCDiff {#PackageNCDiff}
 
 **NCDiff** is a package containing several functions that are used in noncommutative differention of functions and polynomials.
 
@@ -13,7 +13,7 @@ Members being deprecated:
 
 * [DirectionalD](#DirectionalD)
 
-## NCDirectionalD {#NCDirectionalD}
+### NCDirectionalD {#NCDirectionalD}
 
 `NCDirectionalD[expr, {var1, h1}, ...]` takes the directional derivative of expression `expr` with respect to variables `var1`, `var2`, ... successively in the directions `h1`, `h2`, ....
 
@@ -38,7 +38,7 @@ See also:
 [NCGrad](#NCGrad),
 [NCHessian](#NCHessian).
 
-## NCGrad {#NCGrad}
+### NCGrad {#NCGrad}
 
 `NCGrad[expr, var1, ...]` gives the nc gradient of the expression `expr` with respect to variables `var1`, `var2`, .... If there is more than one variable then `NCGrad` returns the gradient in a list.
 
@@ -82,7 +82,7 @@ returns the nc gradient list
 See also:
 [NCDirectionalD](#NCDirectionalD).
 
-## NCHessian {#NCHessian}
+### NCHessian {#NCHessian}
 
 `NCHessian[expr, {var1, h1}, ...]` takes the second directional derivative of nc expression `expr` with respect to variables `var1`, `var2`, ... successively in the directions `h1`, `h2`, ....
 
@@ -106,7 +106,7 @@ in the direction `h` and with respect to `y` in the direction `k`.
 See also:
 [NCDiretionalD](#NCDirectionalD), [NCGrad](#NCGrad).
 
-## DirectionalD {#DirectionalD}
+### DirectionalD {#DirectionalD}
 
 `DirectionalD[expr,var,h]` takes the directional derivative of nc expression `expr` with respect to the single variable `var` in direction `h`.
 
@@ -115,7 +115,7 @@ See also:
 See also:
 [NCDirectionalD](#DirectionalD).
 
-## NCIntegrate {#NCIntegrate}
+### NCIntegrate {#NCIntegrate}
 
 `NCIntegrate[expr,{var1,h1},...]` attempts to calculate the nc antiderivative of nc expression `expr` with respect to the single variable `var` in direction `h`.
 

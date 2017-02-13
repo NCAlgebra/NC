@@ -34,32 +34,37 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/SDP.md \
          MANUAL/TeX.md \
          MANUAL/Reference.md \
+         MANUAL/ExpressionPackages.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \
 	 NCAlgebra/NCSimplifyRational.md \
 	 NCAlgebra/NCDiff.md \
 	 NCAlgebra/NCReplace.md \
 	 NCAlgebra/NCSelfAdjoint.md \
-	 NCAlgebra/NCOutput.md \
-	 NCAlgebra/NCPolynomial.md \
-	 NCAlgebra/NCSylvester.md \
-	 NCAlgebra/NCQuadratic.md \
-	 NCAlgebra/NCRational.md \
+         MANUAL/MatrixPackages.md \
 	 NCAlgebra/NCMatMult.md \
          NCAlgebra/NCMatrixDecompositions.md \
          NCAlgebra/MatrixDecompositions.md \
+         MANUAL/Output.md \
+	 NCAlgebra/NCOutput.md \
+	 NCTeX/NCTeX.md \
+	 NCTeX/NCTeXForm.md \
+	 NCTeX/NCRun.md \
+	 TESTING/NCTest.md \
+         MANUAL/DataStructures.md \
+	 NCPoly/NCPoly.md \
+	 NCAlgebra/NCPolynomial.md \
+	 NCAlgebra/NCSylvester.md \
+	 NCAlgebra/NCQuadratic.md \
 	 NCAlgebra/NCConvexity.md \
-	 NCAlgebra/NCRealization.md \
 	 NCAlgebra/NCUtil.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
 	 NCPoly/NCGBX.md \
-	 NCPoly/NCPoly.md \
 	 NCPoly/NCPolyGroebner.md \
-	 NCTeX/NCTeX.md \
-	 NCTeX/NCTeXForm.md \
-	 NCTeX/NCRun.md \
-	 TESTING/NCTest.md
+         MANUAL/WorkInProgress.md \
+	 NCAlgebra/NCRational.md \
+	 NCAlgebra/NCRealization.md
 
 doc: NCDocument.pdf NCDocument.html
 

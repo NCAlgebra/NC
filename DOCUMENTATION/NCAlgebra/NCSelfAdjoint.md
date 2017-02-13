@@ -1,4 +1,4 @@
-# NCSelfAdjoint {#PackageNCSelfAdjoint}
+## NCSelfAdjoint {#PackageNCSelfAdjoint}
 
 Members are:
 
@@ -8,7 +8,7 @@ Members are:
 * [NCSelfAdjointQ](#NCSelfAdjointQ)
 * [NCSelfAdjointTest](#NCSelfAdjointTest)
 
-## NCSymmetricQ {#NCSymmetricQ}
+### NCSymmetricQ {#NCSymmetricQ}
 
 `NCSymmetricQ[expr]` returns *True* if `expr` is symmetric, i.e. if `tp[exp] == exp`.
 
@@ -17,7 +17,7 @@ Members are:
 See also:
 [NCSelfAdjointQ](#NCSelfAdjointQ), [NCSymmetricTest](#NCSymmetricTest).
 
-## NCSymmetricTest {#NCSymmetricTest}
+### NCSymmetricTest {#NCSymmetricTest}
 
 `NCSymmetricTest[expr]` attempts to establish symmetry of `expr` by assuming symmetry of its variables.
 
@@ -37,7 +37,7 @@ The following options can be given:
 See also:
 [NCSymmetricQ](#NCSymmetricQ), [NCNCSelfAdjointTest](#NCSelfAdjointTest).
 
-## NCSymmetricPart {#NCSymmetricPart}
+### NCSymmetricPart {#NCSymmetricPart}
 
 `NCSymmetricPart[expr]` returns the *symmetric part* of `expr`.
 
@@ -69,14 +69,14 @@ See also:
 [NCSymmetricTest](#NCSymmetricTest).
 
 
-## NCSelfAdjointQ {#NCSelfAdjointQ}
+### NCSelfAdjointQ {#NCSelfAdjointQ}
 
 `NCSelfAdjointQ[expr]` returns true if `expr` is self-adjoint, i.e. if `aj[exp] == exp`.
 
 See also:
 [NCSymmetricQ](#NCSymmetricQ), [NCSelfAdjointTest](#NCSelfAdjointTest).
 
-## NCSelfAdjointTest {#NCSelfAdjointTest}
+### NCSelfAdjointTest {#NCSelfAdjointTest}
 
 `NCSelfAdjointTest[expr]` attempts to establish whether `expr` is self-adjoint by assuming that some of its variables are self-adjoint or symmetric.
 `NCSelfAdjointTest[expr,options]` uses `options`.

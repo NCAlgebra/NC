@@ -1,4 +1,4 @@
-# MatrixDecompositions {#PackageMatrixDecompositions}
+## MatrixDecompositions: linear algebra templates {#PackageMatrixDecompositions}
 
 **MatrixDecompositions** is a package that implements various linear algebra algorithms, such as *LU Decomposition* with *partial* and *complete pivoting*, and *LDL Decomposition*. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for [NCAlgebra](http://math.ucsd.edu/~ncalg). See [NCMatrixDecompositions](#NCMatrixDecompositions).
 
@@ -21,7 +21,7 @@ Members are:
     * [LUNoPartialPivoting](#LUNoPartialPivoting)
     * [LUNoCompletePivoting](#LUNoCompletePivoting)
 
-## LUDecompositionWithPartialPivoting {#LUDecompositionWithPartialPivoting}
+### LUDecompositionWithPartialPivoting {#LUDecompositionWithPartialPivoting}
 
 `LUDecompositionWithPartialPivoting[m]` generates a representation of the LU decomposition of the rectangular matrix `m`.
 
@@ -47,7 +47,7 @@ The following `options` can be given:
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUPartialPivoting](#LUPartialPivoting).
 
-## LUDecompositionWithCompletePivoting {#LUDecompositionWithCompletePivoting}
+### LUDecompositionWithCompletePivoting {#LUDecompositionWithCompletePivoting}
 
 `LUDecompositionWithCompletePivoting[m]` generates a representation of the LU decomposition of the rectangular matrix `m`.
 
@@ -74,7 +74,7 @@ The following `options` can be given:
 See also:
 [LUDecomposition](#LUDecomposition), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
-## LDLDecomposition {#LDLDecomposition}
+### LDLDecomposition {#LDLDecomposition}
 
 `LDLDecomposition[m]` generates a representation of the LDL decomposition of the symmetric or self-adjoint matrix `m`.
 
@@ -106,7 +106,7 @@ The following `options` can be given:
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
 
-## UpperTriangularSolve {#UpperTriangularSolve}
+### UpperTriangularSolve {#UpperTriangularSolve}
 
 `UpperTriangularSolve[u, b]` solves the upper-triangular system of
 equations $u x = b$ using back-substitution.
@@ -120,7 +120,7 @@ returns the solution `x`.
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LDLDecomposition](#LDLDecomposition).
 
-## LowerTriangularSolve {#LowerTriangularSolve}
+### LowerTriangularSolve {#LowerTriangularSolve}
 
 `LowerTriangularSolve[l, b]` solves the lower-triangular system of
 equations $l x = b$ using forward-substitution.
@@ -134,7 +134,7 @@ returns the solution `x`.
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LDLDecomposition](#LDLDecomposition).
 
-## LUInverse {#LUInverse}
+### LUInverse {#LUInverse}
 
 `LUInverse[a]` calculates the inverse of matrix `a`.
 
@@ -143,7 +143,7 @@ See also:
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
-## GetLUMatrices {#GetLUMatrices}
+### GetLUMatrices {#GetLUMatrices}
 
 `GetLUMatrices[m]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
 
@@ -157,7 +157,7 @@ returns the lower-triangular factor `l` and upper-triangular factor `u`.
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).
 	
-## GetLDUMatrices {#GetLDUMatrices}
+### GetLDUMatrices {#GetLDUMatrices}
 
 `GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
 
@@ -171,7 +171,7 @@ returns the lower-triangular factor `l`, the upper-triangular factor `u`, and th
 See also:
 [LDLDecomposition](#LDLDecomposition).
 
-## GetDiagonal {#GetDiagonal}
+### GetDiagonal {#GetDiagonal}
 
 `GetDiagonal[m]` extracts the diagonal entries of matrix `m`.
 
@@ -196,7 +196,7 @@ returns
 See also:
 [LDLDecomposition](#LDLDecomposition).
 
-## LUPartialPivoting {#LUPartialPivoting}
+### LUPartialPivoting {#LUPartialPivoting}
 
 `LUPartialPivoting[v]` returns the index of the element with largest absolute value in the vector `v`. If `v` is a matrix, it returns the index of the element with largest absolute value in the first column.
 
@@ -205,7 +205,7 @@ See also:
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUCompletePivoting](#LUCompletePivoting).
 
-## LUCompletePivoting {#LUCompletePivoting}
+### LUCompletePivoting {#LUCompletePivoting}
 
 `LUCompletePivoting[m]` returns the row and column index of the element with largest absolute value in the matrix `m`.
 

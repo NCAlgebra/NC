@@ -1,4 +1,4 @@
-# NCCollect {#PackageNCCollect}
+## NCCollect {#PackageNCCollect}
 
 Members are:
 
@@ -12,7 +12,7 @@ Members are:
 * [NCDecompose](#NCDecompose)
 * [NCTermsOfDegree](#NCTermsOfDegree)
 
-## NCCollect {#NCCollect}
+### NCCollect {#NCCollect}
 
 `NCCollect[expr,vars]` collects terms of nc expression `expr` according to the elements of `vars` and attempts to combine them. It is weaker than NCStrongCollect in that only same order terms are collected togther. It basically is `NCCompose[NCStrongCollect[NCDecompose]]]`.
 
@@ -22,7 +22,7 @@ If `expr` is a rational nc expression then degree correspond to the degree of th
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
-### Notes
+#### Notes
 
 While `NCCollect[expr, vars]` always returns mathematically correct
 expressions, it may not collect `vars` from as many terms as one might
@@ -31,7 +31,7 @@ think it should.
 See also:
 [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint), [NCRationalToNCPolynomial](#NCRationalToNCPolynomial).
 
-## NCCollectSelfAdjoint {#NCCollectSelfAdjoint}
+### NCCollectSelfAdjoint {#NCCollectSelfAdjoint}
 
 `NCCollectSelfAdjoint[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their adjoints without writing out the adjoints.
 
@@ -40,7 +40,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-## NCCollectSymmetric {#NCCollectSymmetric}
+### NCCollectSymmetric {#NCCollectSymmetric}
 
 `NCCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
@@ -49,7 +49,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-## NCStrongCollect {#NCStrongCollect}
+### NCStrongCollect {#NCStrongCollect}
 
 `NCStrongCollect[expr,vars]` collects terms of expression `expr` according to the elements of `vars` and attempts to combine by association.
 
@@ -62,7 +62,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 See also:
 [NCCollect](#NCCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-## NCStrongCollectSelfAdjoint {#NCStrongCollectSelfAdjoint}
+### NCStrongCollectSelfAdjoint {#NCStrongCollectSelfAdjoint}
 
 `NCStrongCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
@@ -71,7 +71,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric).
 
-## NCStrongCollectSymmetric {#NCStrongCollectSymmetric}
+### NCStrongCollectSymmetric {#NCStrongCollectSymmetric}
 
 `NCStrongCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
@@ -80,7 +80,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
-## NCCompose {#NCCompose}
+### NCCompose {#NCCompose}
 
 `NCCompose[dec]` will reassemble the terms in `dec` which were decomposed by [`NCDecompose`](#NCDecompose).
 
@@ -95,7 +95,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 See also:
 [NCDecompose](#NCDecompose), [NCPDecompose](#NCPDecompose).
 
-## NCDecompose {#NCDecompose}
+### NCDecompose {#NCDecompose}
 
 `NCDecompose[p,vars]` gives an association of elements of the nc polynomial `p` in variables `vars` in which elements of the same order are collected together.
 
@@ -108,7 +108,7 @@ Internally `NCDecompose` uses [`NCPDecompose`](#NCPDecompose).
 See also:
 [NCCompose](#NCCompose), [NCPDecompose](#NCPDecompose).
 
-## NCTermsOfDegree {#NCTermsOfDegree}
+### NCTermsOfDegree {#NCTermsOfDegree}
 
 `NCTermsOfDegree[expr,vars,indices]` returns an expression such that each term has the right number of factors of the variables in `vars`.
 

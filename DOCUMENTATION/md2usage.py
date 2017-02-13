@@ -8,7 +8,7 @@ import datetime
 
 def usage():
     print('md2usage')
-    print("""usage: md2usage [option] filename...
+    print("""usage: md2usage [option] filename
 Options are:
 -H arg : set command heading level        (default '##')
 -h     : print this help message and exit
@@ -31,6 +31,13 @@ def main():
         usage()
         sys.exit(2)
 
+    #print("args = {}".format(args))
+    #print("opts = {}".format(opts))
+
+    if len(args) == 0:
+        print('ERROR: missing filename')
+        opts = (('-h', ''), )
+        
     HEADING = '##'
     CONVERT = ['pandoc', '-t', 'plain', '--wrap=none']
     outfile = None

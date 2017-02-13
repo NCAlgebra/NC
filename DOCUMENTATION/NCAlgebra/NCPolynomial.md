@@ -1,4 +1,7 @@
-# NCPolynomial {#PackageNCPolynomial}
+\section*{\textbf{NCPolynomial}}
+\addcontentsline{toc}{section}{\textbf{NCPolynomial}}
+
+## Efficient storage of NC polynomials with nc coefficients {#PackageNCPolynomial}
 
 This package contains functionality to convert an nc polynomial expression into an expanded efficient representation that can have commutative or noncommutative coefficients.
 

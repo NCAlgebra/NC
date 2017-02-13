@@ -1,4 +1,4 @@
-# NCSimplifyRational {#PackageNCSimplifyRational}
+## NCSimplifyRational {#PackageNCSimplifyRational}
 
 **NCSimplifyRational** is a package with function that simplifies noncommutative expressions and certain functions of their inverses.
 
@@ -62,14 +62,14 @@ Members are:
 * [NCPreSimplifyRational](#NCPreSimplifyRational)
 * [NCPreSimplifyRationalSinglePass](#NCPreSimplifyRationalSinglePass)
 
-## NCNormalizeInverse {#NCNormalizeInverse}
+### NCNormalizeInverse {#NCNormalizeInverse}
 
 `NCNormalizeInverse[expr]` transforms all rational NC expressions of the form `inv[K + b]` into `inv[1 + (1/K) b]/K` if `A` is commutative.
 
 See also:
 [NCSimplifyRational](#NCSimplifyRational), [NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass).
 
-## NCSimplifyRational {#NCSimplifyRational}
+### NCSimplifyRational {#NCSimplifyRational}
 
 `NCSimplifyRational[expr]` repeatedly applies `NCSimplifyRationalSinglePass` in an attempt to simplify the rational NC expression `expr`.
 
@@ -77,7 +77,7 @@ See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
 [NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass).
 
-## NCSimplifyRationalSinglePass {#NCSimplifyRationalSinglePass}
+### NCSimplifyRationalSinglePass {#NCSimplifyRationalSinglePass}
 
 `NCSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational NC expression `expr`.
 
@@ -85,7 +85,7 @@ See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
 [NCSimplifyRational](#NCSimplifyRational).
 
-## NCPreSimplifyRational {#NCPreSimplifyRational}
+### NCPreSimplifyRational {#NCPreSimplifyRational}
 
 `NCPreSimplifyRational[expr]` repeatedly applies `NCPreSimplifyRationalSinglePass` in an attempt to simplify the rational NC expression `expr`.
 
@@ -93,7 +93,7 @@ See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
 [NCPreSimplifyRationalSinglePass](#NCPreSimplifyRationalSinglePass).
 
-## NCPreSimplifyRationalSinglePass {#NCPreSimplifyRationalSinglePass}
+### NCPreSimplifyRationalSinglePass {#NCPreSimplifyRationalSinglePass}
 
 `NCPreSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational NC expression `expr`.
 

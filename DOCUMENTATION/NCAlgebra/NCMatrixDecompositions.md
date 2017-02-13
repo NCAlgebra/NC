@@ -1,4 +1,4 @@
-# NCMatrixDecompositions {#PackageNCMatrixDecompositions}
+## NCMatrixDecompositions {#PackageNCMatrixDecompositions}
 
 Members are:
 
@@ -16,34 +16,34 @@ Members are:
     * [NCLeftDivide](#NCLeftDivide)
     * [NCRightDivide](#NCRightDivide)
 
-## NCLDLDecomposition {#NCLDLDecomposition}
+### NCLDLDecomposition {#NCLDLDecomposition}
 
 
-## NCLeftDivide {#NCLeftDivide}
+### NCLeftDivide {#NCLeftDivide}
 
 
-## NCLowerTriangularSolve {#NCLowerTriangularSolve}
+### NCLowerTriangularSolve {#NCLowerTriangularSolve}
 
 
-## NCLUCompletePivoting {#NCLUCompletePivoting}
+### NCLUCompletePivoting {#NCLUCompletePivoting}
 
 
-## NCLUDecompositionWithCompletePivoting {#NCLUDecompositionWithCompletePivoting}
+### NCLUDecompositionWithCompletePivoting {#NCLUDecompositionWithCompletePivoting}
 
 
-## NCLUDecompositionWithPartialPivoting {#NCLUDecompositionWithPartialPivoting}
+### NCLUDecompositionWithPartialPivoting {#NCLUDecompositionWithPartialPivoting}
 
 
-## NCLUInverse {#NCLUInverse}
+### NCLUInverse {#NCLUInverse}
 
 
-## NCLUPartialPivoting {#NCLUPartialPivoting}
+### NCLUPartialPivoting {#NCLUPartialPivoting}
 
 
-## NCMatrixDecompositions {#NCMatrixDecompositions}
+### NCMatrixDecompositions {#NCMatrixDecompositions}
 
-## NCRightDivide {#NCRightDivide}
+### NCRightDivide {#NCRightDivide}
 
 
-## NCUpperTriangularSolve {#NCUpperTriangularSolve}
+### NCUpperTriangularSolve {#NCUpperTriangularSolve}
 

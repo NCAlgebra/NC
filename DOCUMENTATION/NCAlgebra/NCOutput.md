@@ -1,4 +1,4 @@
-# NCOutput {#PackageNCOutput}
+## NCOutput {#PackageNCOutput}
 
 **NCOutput** is a package that can be used to beautify the display of
 noncommutative expressions. NCOutput does not alter the internal
@@ -9,7 +9,7 @@ Members are:
 
 * [NCSetOutput](#NCSetOutput)
 
-## NCSetOutput {#NCSetOutput}
+### NCSetOutput {#NCSetOutput}
 
 `NCSetOutput[options]` controls the display of expressions in a special format without affecting the internal representation of the expression.
 
