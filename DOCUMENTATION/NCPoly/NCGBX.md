@@ -13,6 +13,7 @@ Members are:
 * [PrintMonomialOrder](#PrintMonomialOrder)
 * [NCMakeGB](#NCMakeGB)
 * [NCReduce](#NCReduce)
+* [NCProcess](#NCProcess)
 
 ## NCToNCPoly {#NCToNCPoly}
 
@@ -343,4 +344,4 @@ is self-adjoint (the input contains the relation $ tp[Inv[a]] ==
 Inv[a]$) we would have the rule, $Inv[a] \rightarrow tp[Inv[a]]$, when
 the user would probably prefer $tp[Inv[a]] \rightarrow Inv[a]$.}
 
-
+## NCProcess {#NCProcess}
