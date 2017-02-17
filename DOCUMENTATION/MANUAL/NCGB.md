@@ -244,7 +244,7 @@ and the associated GB
 	b ** b ** a -> a ** b ** b
 
 The GB revealed another relationship that must hold true if $a \, b \,
-a = b$. One can use this relationship to simplify the original
+a = b$. One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
  
 	expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
@@ -359,8 +359,6 @@ or
 	NCGBSimplifyRational[expr]
 
 both result in `0`.
-
-?? DO WE WANT TO SUPPORT pinv, linv and rinv? ??
 
 ## Ordering on variables and monomials {#Orderings}
 

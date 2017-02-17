@@ -1,4 +1,4 @@
-# NCSylvester {#PackageNCSylvester}
+## NCSylvester {#PackageNCSylvester}
 
 **NCSylvester** is a package that provides functionality to handle linear polynomials in NC variables.
 
@@ -7,7 +7,7 @@ Members are:
 * [NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester)
 * [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial)
 
-## NCPolynomialToNCSylvester {#NCPolynomialToNCSylvester}
+### NCPolynomialToNCSylvester {#NCPolynomialToNCSylvester}
 
 `NCPolynomialToNCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
 
@@ -34,7 +34,7 @@ produces
 See also:
 [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial), [NCPolynomial](#NCPolynomial).
 
-## NCSylvesterToNCPolynomial {#NCSylvesterToNCPolynomial}
+### NCSylvesterToNCPolynomial {#NCSylvesterToNCPolynomial}
 
 `NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCPolynomialToNCSylvester` and converts it back to an `NCPolynomial`.
 

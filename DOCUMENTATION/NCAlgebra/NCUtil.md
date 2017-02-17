@@ -1,4 +1,4 @@
-# NCUtil {#PackageNCUtil}
+## NCUtil {#PackageNCUtil}
 
 **NCUtil** is a package with a collection of utilities used throughout NCAlgebra.
 
@@ -13,11 +13,11 @@ Members are:
 * [NCReplaceData](#NCReplaceData)
 * [NCToExpression](#NCToExpression)
 
-## NCConsistentQ {#NCConsistentQ}
+### NCConsistentQ {#NCConsistentQ}
 
 `NCConsistentQ[expr]` returns *True* is `expr` contains no commutative products or inverses involving noncommutative variables.
 
-## NCGrabFunctions {#NCGrabFunctions}
+### NCGrabFunctions {#NCGrabFunctions}
 
 `NCGragFunctions[expr]` returns a list with all fragments of `expr` containing functions.
 
@@ -42,7 +42,7 @@ returns
 See also:
 [NCGrabSymbols](#NCGragSymbols).
 
-## NCGrabSymbols {#NCGrabSymbols}
+### NCGrabSymbols {#NCGrabSymbols}
 
 `NCGragSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
 
@@ -61,7 +61,7 @@ returns `{inv[x]}`.
 See also:
 [NCGrabFunctions](#NCGragFunctions).
 
-## NCGrabIndeterminants {#NCGrabIndeterminants}
+### NCGrabIndeterminants {#NCGrabIndeterminants}
 
 `NCGragIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
 
@@ -76,7 +76,7 @@ returns
 See also:
 [NCGrabFunctions](#NCGragFunctions), [NCGrabSymbols](#NCGragSymbols).
 
-## NCConsolidateList {#NCConsolidateList}
+### NCConsolidateList {#NCConsolidateList}
 
 `NCConsolidateList[list]` produces two lists:
 
@@ -95,7 +95,7 @@ results in:
 See also:
 `Union`
 
-## NCLeafCount {#NCLeafCount}
+### NCLeafCount {#NCLeafCount}
 
 `NCLeafCount[expr]` returns an number associated with the complexity of an expression:
 
@@ -108,7 +108,7 @@ See also:
 See also:
 `LeafCount`.
 
-## NCReplaceData {#NCReplaceData}
+### NCReplaceData {#NCReplaceData}
 
 `NCReplaceData[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica, for example replacing `**` by `.`. 
 
@@ -117,7 +117,7 @@ See also:
 See also:
 [NCToExpression](#NCToExpression).
 
-## NCToExpression {#NCToExpression}
+### NCToExpression {#NCToExpression}
 
 `NCToExpression[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica. 
 

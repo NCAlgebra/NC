@@ -1,15 +1,13 @@
-# NCConvexity {#PackageNCConvexity}
+## NCConvexity {#PackageNCConvexity}
 
 **NCConvexity** is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.
-
-
 
 Members are:
 
 * [NCIndependent](#NCIndependent)
 * [NCConvexityRegion](#NCConvexityRegion)
 
-## NCIndependent {#NCIndependent}
+### NCIndependent {#NCIndependent}
 
 `NCIndependent[list]` attempts to determine whether the nc entries of `list` are independent.
 
@@ -32,7 +30,7 @@ all return *False*.
 See also:
 [NCConvexity](#NCConvexity).
 
-## NCConvexityRegion {#NCConvexityRegion}
+### NCConvexityRegion {#NCConvexityRegion}
 
 `NCConvexityRegion[expr,vars]` is a function which can be used to determine whether the nc rational `expr` is convex in `vars` or not.
 

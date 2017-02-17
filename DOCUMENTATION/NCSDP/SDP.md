@@ -1,4 +1,4 @@
-# SDP {#PackageSDP}
+## SDP {#PackageSDP}
 
 **SDP** is a package that provides algorithms for the numeric solution
   of semidefinite programs.
@@ -20,31 +20,31 @@ The following members are not supposed to be called directly by users:
 * [SDPSylvesterEval](#SDPSylvesterEval)
 * [SDPSylvesterDiagonalEval](#SDPSylvesterDiagonalEval)
 
-## SDPMatrices {#SDPMatrices}
+### SDPMatrices {#SDPMatrices}
 
-## SDPSolve {#SDPSolve}
+### SDPSolve {#SDPSolve}
 
-## SDPEval {#SDPEval}
+### SDPEval {#SDPEval}
 
-## SDPInner {#SDPInner}
-
-
-## SDPCheckDimensions {#SDPCheckDimensions}
-
-## SDPDualEval {#SDPDualEval}
-
-## SDPFunctions {#SDPFunctions}
-
-## SDPPrimalEval {#SDPPrimalEval}
+### SDPInner {#SDPInner}
 
 
-## SDPScale {#SDPScale}
+### SDPCheckDimensions {#SDPCheckDimensions}
+
+### SDPDualEval {#SDPDualEval}
+
+### SDPFunctions {#SDPFunctions}
+
+### SDPPrimalEval {#SDPPrimalEval}
+
+
+### SDPScale {#SDPScale}
 
 
 
 
-## SDPSylvesterDiagonalEval {#SDPSylvesterDiagonalEval}
+### SDPSylvesterDiagonalEval {#SDPSylvesterDiagonalEval}
 
 
-## SDPSylvesterEval {#SDPSylvesterEval}
+### SDPSylvesterEval {#SDPSylvesterEval}
 

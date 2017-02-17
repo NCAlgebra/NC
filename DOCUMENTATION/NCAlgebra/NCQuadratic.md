@@ -1,4 +1,4 @@
-# NCQuadratic {#PackageNCQuadratic}
+## NCQuadratic {#PackageNCQuadratic}
 
 **NCQuadratic** is a package that provides functionality to handle quadratic polynomials in NC variables.
 
@@ -9,7 +9,7 @@ Members are:
 * [NCQuadratic](#NCQuadratic)
 * [NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial)
 
-## NCQuadratic {#NCQuadratic}
+### NCQuadratic {#NCQuadratic}
 `NCQuadratic[p]` gives an expanded representation for the quadratic `NCPolynomial` `p`.
 
 `NCQuadratic` returns a list with four elements:
@@ -38,14 +38,14 @@ produces
 See also:
 [NCSylvester](#NCSylvester),[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
 
-## NCQuadraticMakeSymmetric {#NCQuadraticMakeSymmetric}
+### NCQuadraticMakeSymmetric {#NCQuadraticMakeSymmetric}
 
 `NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]` takes the output of [`NCQuadratic`](#NCQuadratic) and produces, if possible, an equivalent symmetric representation in which `Map[tp, left] = right` and `middle` is a symmetric matrix.
 
 See also:
 [NCQuadratic](#NCQuadratic).
 
-## NCMatrixOfQuadratic {#NCMatrixOfQuadratic}
+### NCMatrixOfQuadratic {#NCMatrixOfQuadratic}
 
 `NCMatrixOfQuadratic[p, vars]` gives a factorization of the symmetric quadratic	function `p` in noncommutative variables `vars` and their transposes.
 
@@ -76,7 +76,7 @@ MatMult[left,middle,right]`.
 See also:
 [NCQuadratic](#NCQuadratic), [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).
 
-## NCQuadraticToNCPolynomial {#NCQuadraticToNCPolynomial}
+### NCQuadraticToNCPolynomial {#NCQuadraticToNCPolynomial}
 
 `NCQuadraticToNCPolynomial[rep]` takes the list `rep` produced by `NCQuadratic` and converts it back to an `NCPolynomial`.
 

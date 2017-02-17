@@ -1,11 +1,25 @@
 # Semidefinite Programming {#SemidefiniteProgramming}
 
+There are two different packages for solving semidefinite programs:
+
+* [`SDP`](#PackageSDP) provides a template algorithm that can be
+  customized to solve semidefinite programs with special
+  structure. Users can provide their own functions to evaluate the
+  primal and dual constraints and the associated Newton system. A
+  built in solver along conventional lines, working on vector
+  variables, is provided by default. It does not require NCAlgebra to
+  run.
+
+* [`NCSDP`](#PackageNCSDP) coordinates with NCAlgebra to handle matrix
+  variables, allowing constraints, etc, to be entered directly as
+  noncommutative expressions.
+
 ## Semidefinite Programs in Matrix Variables
 
 The package [NCSDP](#PackageNCSDP) allows the symbolic manipulation
 and numeric solution of semidefinite programs.
 
-The package must be loaded using:
+After loading NCAlgebra, the package NCSDP must be loaded using:
 
     << NCSDP`
 

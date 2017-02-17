@@ -1,4 +1,4 @@
-# NCGBX {#PackageNCGBX}
+## NCGBX {#PackageNCGBX}
 
 Members are:
 
@@ -15,7 +15,7 @@ Members are:
 * [NCReduce](#NCReduce)
 * [NCProcess](#NCProcess)
 
-## NCToNCPoly {#NCToNCPoly}
+### NCToNCPoly {#NCToNCPoly}
 
 `NCToNCPoly[expr, var]` constructs a noncommutative polynomial object in
 variables `var` from the nc expression `expr`. 
@@ -29,7 +29,7 @@ y - 2 y z$ in variables `x`, `y` and `z`. The internal representation is so
 that the terms are sorted according to a degree-lexicographic order in
 `vars`. In the above example, $x < y < z$.  
 
-## NCPolyToNC {#NCPolyToNC}
+### NCPolyToNC {#NCPolyToNC}
 
 `NCPolyToNC[poly, vars]` constructs an nc expression from the
 noncommutative polynomial object `poly` in variables `vars`. Monomials are
@@ -48,9 +48,9 @@ See also:
 [NCPolyToNC](#NCPolyToNC),
 [NCPoly](#NCPoly).
 
-## NCRuleToPoly {#NCRuleToPoly}
+### NCRuleToPoly {#NCRuleToPoly}
 
-## SetMonomialOrder {#SetMonomialOrder}
+### SetMonomialOrder {#SetMonomialOrder}
 
 `SetMonomialOrder[var1, var2, ...]` sets the current monomial order.
 
@@ -111,7 +111,7 @@ See also:
 [SetKnowns](#SetKnowns),
 [SetUnknowns](#SetUnknowns).
 
-## SetKnowns {#SetKnowns}
+### SetKnowns {#SetKnowns}
 
 `SetKnowns[var1, var2, ...]` records the variables `var1`, `var2`,
  ... to be corresponding to known quantities.
@@ -163,7 +163,7 @@ See also:
 [SetUnknowns](#SetUnknowns),
 [SetMonomialOrder](#SetMonomialOrder).
 
-## SetUnknowns {#SetUnknowns}
+### SetUnknowns {#SetUnknowns}
 
 `SetUnknowns[var1, var2, ...]` records the variables `var1`, `var2`,
 ...  to be corresponding to unknown quantities.  
@@ -215,7 +215,7 @@ See also:
 [SetKnowns](#SetKnowns),
 [SetMonomialOrder](#SetMonomialOrder).
 
-## ClearMonomialOrder {#ClearMonomialOrder}
+### ClearMonomialOrder {#ClearMonomialOrder}
 
 `ClearMonomialOrder[]` clear the current monomial ordering.
 
@@ -229,7 +229,7 @@ See also:
 [ClearMonomialOrder](#ClearMonomialOrder),
 [PrintMonomialOrder](#PrintMonomialOrder).
 
-## GetMonomialOrder {#GetMonomialOrder}
+### GetMonomialOrder {#GetMonomialOrder}
 
 `GetMonomialOrder[]` returns the current monomial ordering in the form
 of a list.
@@ -250,7 +250,7 @@ See also:
 [ClearMonomialOrder](#ClearMonomialOrder),
 [PrintMonomialOrder](#PrintMonomialOrder).
 
-## PrintMonomialOrder {#PrintMonomialOrder}
+### PrintMonomialOrder {#PrintMonomialOrder}
 
 `PrintMonomialOrder[]` prints the current monomial ordering.
 
@@ -269,7 +269,7 @@ See also:
 [PrintMonomialOrder](#PrintMonomialOrder).
 
 
-## NCMakeGB {#NCMakeGB}
+### NCMakeGB {#NCMakeGB}
 
 `NCMakeGB[{poly1, poly2, ...}, k]` attempts to produces a nc Gröbner
 Basis (GB) associated with the list of nc polynomials `{poly1, poly2,
@@ -325,7 +325,7 @@ See also:
 [SetUnknowns](#SetUnknowns),
 [NCPolyGroebner](#NCPolyGroebner).
 
-## NCReduce {#NCReduce}
+### NCReduce {#NCReduce}
 
 `NCAutomaticOrder[ aMonomialOrder, aListOfPolynomials ]`
 
@@ -344,4 +344,4 @@ is self-adjoint (the input contains the relation $ tp[Inv[a]] ==
 Inv[a]$) we would have the rule, $Inv[a] \rightarrow tp[Inv[a]]$, when
 the user would probably prefer $tp[Inv[a]] \rightarrow Inv[a]$.}
 
-## NCProcess {#NCProcess}
+### NCProcess {#NCProcess}

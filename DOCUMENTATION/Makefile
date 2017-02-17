@@ -37,10 +37,10 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/ExpressionPackages.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \
-	 NCAlgebra/NCSimplifyRational.md \
-	 NCAlgebra/NCDiff.md \
 	 NCAlgebra/NCReplace.md \
 	 NCAlgebra/NCSelfAdjoint.md \
+	 NCAlgebra/NCSimplifyRational.md \
+	 NCAlgebra/NCDiff.md \
          MANUAL/MatrixPackages.md \
 	 NCAlgebra/NCMatMult.md \
          NCAlgebra/NCMatrixDecompositions.md \
@@ -51,13 +51,15 @@ MANUAL = MANUAL/Preamble.md \
 	 NCTeX/NCTeXForm.md \
 	 NCTeX/NCRun.md \
 	 TESTING/NCTest.md \
+	 NCAlgebra/NCUtil.md \
          MANUAL/DataStructures.md \
 	 NCPoly/NCPoly.md \
+	 NCPoly/NCPolyInterface.md \
 	 NCAlgebra/NCPolynomial.md \
 	 NCAlgebra/NCSylvester.md \
 	 NCAlgebra/NCQuadratic.md \
+         MANUAL/Algorithms.md \
 	 NCAlgebra/NCConvexity.md \
-	 NCAlgebra/NCUtil.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
 	 NCPoly/NCGBX.md \
@@ -75,7 +77,7 @@ NCDocument.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCDocument.html --mathjax
 
 NCDocument.pdf: $(MANUAL)
-	$(PANDOC) $(MANUAL) -t latex -N --toc --standalone \
+	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
              --variable=geometry:margin=1in \
              --variable=documentclass:book \
 	     -o NCDocument.tex

@@ -1,8 +1,6 @@
-\part{Work in Progress}
+# Work in Progress {#WorkInProgress}
 
-# Introduction {#ReferenceIntroduction}
-
-Chapters in this part describe experimental packages which are still
-under development.
+Sections in this chapter describe experimental packages which are
+still under development.
 
 

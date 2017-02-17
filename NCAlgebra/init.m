@@ -25,6 +25,9 @@ If [ !ValueQ[$NC$Algebra$Loaded],
 << NCAlias`
 << NCDeprecated`
 
+(* Load NCPoly interface with NCAlgebra *)
+<< NCPolyInterface`
+
 (* Configure output *)
 << NCOutput`
 NCSetOutput[]

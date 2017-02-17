@@ -1,10 +1,10 @@
-# NCPolyGroebner {#PackageNCPolyGroebner}
+## NCPolyGroebner {#PackageNCPolyGroebner}
 
 Members are:
 
 * [NCPolyGroebner](#NCPolyGroebner)
 
-## NCPolyGroebner {#NCPolyGroebner}
+### NCPolyGroebner {#NCPolyGroebner}
 
 `NCPolyGroebner[G]` computes the noncommutative Groebner basis of the
 list of `NCPoly` polynomials `G`.

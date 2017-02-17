@@ -1,4 +1,4 @@
-# NCRational {#PackageNCRational}
+## NCRational {#PackageNCRational}
 
 This package contains functionality to convert an nc rational expression into a descriptor representation.
 
@@ -36,58 +36,58 @@ Members are:
 * [NCRObservableRealization](#NCRObservableRealization)
 * [NCRMinimalRealization](#NCRMinimalRealization)
 
-## State-space realizations for NC rationals
+### State-space realizations for NC rationals
 
-### NCRational {#NCRational}
+#### NCRational {#NCRational}
 NCRational::usage
 
-### NCToNCRational {#NCToNCRational}
+#### NCToNCRational {#NCToNCRational}
 NCToNCRational::usage
 
-### NCRationalToNC {#NCRationalToNC}
+#### NCRationalToNC {#NCRationalToNC}
 NCRationalToNC::usage
 
-### NCRationalToCanonical {#NCRationalToCanonical}
+#### NCRationalToCanonical {#NCRationalToCanonical}
 NCRationalToCanonical::usage
 
-### CanonicalToNCRational {#CanonicalToNCRational}
+#### CanonicalToNCRational {#CanonicalToNCRational}
 CanonicalToNCRational::usage
 
-## Utilities
+### Utilities
 
-### NCROrder {#NCROrder}
+#### NCROrder {#NCROrder}
 NCROrder::usage
 
-### NCRLinearQ {#NCRLinearQ}
+#### NCRLinearQ {#NCRLinearQ}
 NCRLinearQ::usage
 
-### NCRStrictlyProperQ {#NCRStrictlyProperQ}
+#### NCRStrictlyProperQ {#NCRStrictlyProperQ}
 NCRStrictlyProperQ::usage
 
-## Operations on NC rationals
+### Operations on NC rationals
 
-### NCRPlus {#NCRPlus}
+#### NCRPlus {#NCRPlus}
 NCRPlus::usage
 
-### NCRTimes {#NCRTimes}
+#### NCRTimes {#NCRTimes}
 NCRTimes::usage
 
-### NCRTranspose {#NCRTranspose}
+#### NCRTranspose {#NCRTranspose}
 NCRTranspose::usage
 
-### NCRInverse {#NCRInverse}
+#### NCRInverse {#NCRInverse}
 NCRInverse::usage
 
-## Minimal realizations
+### Minimal realizations
 
-### NCRControllableRealization {#NCRControllableRealization}
+#### NCRControllableRealization {#NCRControllableRealization}
 NCRControllableRealization::usage
 
-### NCRControllableSubspace {#NCRControllableSubspace}
+#### NCRControllableSubspace {#NCRControllableSubspace}
 NCRControllableSubspace::usage
 
-### NCRObservableRealization {#NCRObservableRealization}
+#### NCRObservableRealization {#NCRObservableRealization}
 NCRObservableRealization::usage
 
-### NCRMinimalRealization {#NCRMinimalRealization}
+#### NCRMinimalRealization {#NCRMinimalRealization}
 NCRMinimalRealization::usage

@@ -1,11 +1,14 @@
 # Pretty Output with Mathematica Notebooks and TeX {#TeX}
 
-`NCAlgebra` comes with several utilities for facilitating formatting
-of expression in notebooks or using LaTeX.
+`NCAlgebra` comes with several utilities for beautifying expressions
+which are output. [`NCTeXForm`](#PackageNCTeXForm) converts NC expressions
+into \LaTeX.  [`NCTeX`](#PackageNCTeX) goes a step further and
+compiles the results expression in \LaTeX\ and produces a PDF that can
+be embedded in notebooks of used on its own.
 
 ## Pretty Output {#Pretty_Output}
 
-On a Mathematica notebook session the package [NCOutput](#NCOutput)
+In a Mathematica notebook session the package [NCOutput](#NCOutput)
 can be used to control how nc expressions are displayed. `NCOutput`
 does not alter the internal representation of nc expressions, just the
 way they are displayed on the screen.
@@ -61,17 +64,21 @@ You can load NCTeX using the following command
 	<< NCTeX`
 
 `NCTeX` does not need `NCAlgebra` to work. You may want to use it even
-when not using NCAlgebra. It uses `NCRun`, which is a replacement for
-Mathematica's Run command to run `pdflatex`, `latex`, `divps`, etc.
+when not using NCAlgebra. It uses [`NCRun`](#PackageNCRun), which is a
+replacement for Mathematica's Run command to run `pdflatex`, `latex`,
+`divps`, etc.
 
 **WARNING:** Mathematica does not come with LaTeX, dvips, etc. The
 package `NCTeX` does not install these programs but rather assumes
 that they have been previously installed and are available at the
-user's standard shell. Use the `Verbose` options to troubleshoot
-installation problems.
+user's standard shell. Use the `Verbose` [option](#NCTeX_Options) to
+troubleshoot installation problems.
 
 With `NCTeX` loaded you simply type `NCTeX[expr]` and your expression
-will be converted to a PDF image after being processed by `LaTeX`.
+will be converted to a PDF image which, by default, appears in your
+notebook after being processed by `LaTeX`. See
+[options](#NCTeX_Options) for information on how to change this
+behavior to display the PDF on a separate window.
 
 For example:
 
@@ -203,10 +210,11 @@ for the package [NCRun](#NCRun) for more details.
 
 ## Using NCTeXForm {#Using_NCTeXForm}
 
-`NCTeXForm` is a replacement for Mathematica's `TeXForm` that can
-handle noncommutative expressions. It works just as
-`TeXForm`. `NCTeXForm` is automatically loaded with `NCAlgebra` and
-becomes the default processor for `NCTeX`.
+[`NCTeXForm`](#PackageNCTeXForm) is a replacement for Mathematica's
+`TeXForm` which adds definitions allowing it to handle noncommutative
+expressions. It works just as `TeXForm`. `NCTeXForm` is automatically
+loaded with `NCAlgebra` and is the default \TeX\ processor for
+`NCTeX`.
 
 Here is an example:
 

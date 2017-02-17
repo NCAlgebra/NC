@@ -1,18 +1,17 @@
-(*  NCPolyInterface.m                                                      *)
+(*  NCGBX.m                                                                *)
 (*  Author: Mauricio de Oliveira                                           *)
 (*    Date: July 2009                                                      *)
 (* Version: 0.1 ( initial implementation )                                 *)
 
 BeginPackage[ "NCGBX`",
+              "NCPolyInterface`",
 	      "NCPolyGroebner`",
 	      "NCPoly`",
               "NCReplace`",
               "NCUtil`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCToNCPoly,
-      NCPolyToNC,
-      ClearMonomialOrder,
+Clear[ClearMonomialOrder,
       SetMonomialOrder,
       SetMonomialOrder,
       GetMonomialOrder,
@@ -44,53 +43,6 @@ Begin["`Private`"];
   (* NCRuleToPoly *)
   NCRuleToPoly[exp_Rule] := exp[[1]] - exp[[2]];
   NCRuleToPoly[exp_List] := Map[NCRuleToPoly, exp];
-
-  (* NCToNCPoly *)
-
-  Clear[GrabFactors];
-  GrabFactors[exp_?CommutativeQ] := {exp, {}};
-  GrabFactors[a_. exp_NonCommutativeMultiply] := {a, List @@ exp};
-  GrabFactors[a_. exp_Symbol] := {a, {exp}};
-  GrabFactors[_] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
-
-  Clear[GrabTerms];
-  GrabTerms[x_Plus] := List @@ x;
-  GrabTerms[x_] := {x};
-
-  NCToNCPoly[exp_List, vars_] := 
-    Map[NCToNCPoly[#, vars]&, exp];
-
-  NCToNCPoly[exp_, vars_] := Module[
-    {factors},
-      
-    Check[
-      factors = Map[GrabFactors, 
-                    GrabTerms[ExpandNonCommutativeMultiply[exp]]];
-     ,
-      Return[$Failed]
-     ,
-      {NCPoly::NotPolynomial,
-       NCPoly::InvalidList,
-       NCPoly::SizeMismatch,
-       NCMonomialToDigits::InvalidSymbol}
-    ];
-
-    (* Print["factors = ", factors]; *)
-      
-    Return[NCPoly @@ Append[Transpose[factors], vars]];
-      
-  ];
-
-
-  (* NCPolyToNC *)
-
-  NCPolyToNC[exp_?NumericQ, vars_] := exp;
-
-  NCPolyToNC[exp_NCPoly, vars_] := 
-    NCPolyDisplay[exp, vars, Plus, Identity] /. Dot -> NonCommutativeMultiply;
-
-  NCPolyToNC[exp_List, vars_] := 
-    Map[NCPolyToNC[#, vars]&, exp];
 
   (* NCGB Interface *)
 

@@ -1,4 +1,4 @@
-# NCSDP {#PackageNCSDP}
+## NCSDP {#PackageNCSDP}
 
 **NCSDP** is a package that allows the symbolic manipulation and numeric
 solution of semidefinite programs.
@@ -10,7 +10,7 @@ Members are:
 * [NCSDPDual](#NCSDPDual)
 * [NCSDPDualForm](#NCSDPDualForm)
 
-## NCSDP {#NCSDP} 
+### NCSDP {#NCSDP} 
 
 `NCSDP[inequalities,vars,obj,data]` converts the list of NC polynomials
 and NC matrices of polynomials `inequalities` that are linear in the
@@ -29,7 +29,7 @@ semidefinite program.
 See also:
 [NCSDPForm](#NCSDPForm), [NCSDPDual](#NCSDPDual).
 
-## NCSDPForm {#NCSDPForm}
+### NCSDPForm {#NCSDPForm}
 
 `NCSDPForm[[inequalities,vars,obj]` prints out a pretty formatted
 version of the SDP expressed by the list of NC
@@ -39,7 +39,7 @@ linear in the unknowns listed in `vars`.
 See also:
 [NCSDP](#NCSDP), [NCSDPDualForm](#NCSDPDualForm).
 
-## NCSDPDual {#NCSDPDual}
+### NCSDPDual {#NCSDPDual}
 
 `{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj]`
 calculates the symbolic dual of the SDP expressed by the list of NC
@@ -52,7 +52,7 @@ into a dual semidefinite in the following canonical form:
 See also:
 [NCSDPDualForm](#NCSDPDualForm), [NCSDP](#NCSDP).
 
-## NCSDPDualForm {#NCSDPDualForm}
+### NCSDPDualForm {#NCSDPDualForm}
 
 `NCSDPForm[[dInequalities,dVars,dObj]` prints out a pretty formatted
 version of the dual SDP expressed by the list of NC polynomials and NC

@@ -1,7 +1,6 @@
-\section*{\textbf{NCPoly}}
-\addcontentsline{toc}{section}{\textbf{NCPoly}}
+## NCPoly {#PackageNCPoly}
 
-## Efficient storage of NC polynomials with rational coefficients {#PackageNCPoly}
+### Efficient storage of NC polynomials with rational coefficients
 
 Members are:
 
@@ -42,9 +41,9 @@ Members are:
     * [NCDigitsToIndex](#NCDigitsToIndex)
     * [NCPadAndMatch](#NCPadAndMatch)
 
-## Ways to represent NC polynomials
+### Ways to represent NC polynomials
 
-### NCPoly {#NCPoly}
+#### NCPoly {#NCPoly}
 
 `NCPoly[coeff, monomials, vars]` constructs a noncommutative
 polynomial object in variables `vars` where the monomials have
@@ -79,7 +78,7 @@ See also:
 [NCFromDigits](#NCFromDigits).
 
 
-### NCPolyMonomial {#NCPolyMonomial}
+#### NCPolyMonomial {#NCPolyMonomial}
 
 `NCPolyMonomial[monomial, vars]` constructs a noncommutative monomial
 object in variables `vars`.
@@ -131,7 +130,7 @@ See also:
 [NCIntegerDigits](#NCIntegerDigits),
 [NCFromDigits](#NCFromDigits).
 
-### NCPolyConstant {#NCPolyConstant}
+#### NCPolyConstant {#NCPolyConstant}
 
 `NCPolyConstant[value, vars]` constructs a noncommutative monomial
 object in variables `vars` representing the constant `value`.
@@ -147,9 +146,9 @@ See also:
 [NCPoly](#NCPoly),
 [NCPolyMonomial](#NCPolyMonomial).
 
-## Access and utlity functions
+### Access and utlity functions
 
-### NCPolyMonomialQ {#NCPolyMonomialQ}
+#### NCPolyMonomialQ {#NCPolyMonomialQ}
 
 `NCPolyMonomialQ[poly]` returns `True` if `poly` is a `NCPoly` monomial.
 
@@ -157,16 +156,16 @@ See also:
 [NCPoly](#NCPoly),
 [NCPolyMonomial](#NCPolyMonomial).
 
-### NCPolyDegree {#NCPolyDegree}
+#### NCPolyDegree {#NCPolyDegree}
 
 `NCPolyDegree[poly]` returns the degree of the nc polynomial `poly`.
 
-### NCPolyNumberOfVariables {#NCPolyNumberOfVariables}
+#### NCPolyNumberOfVariables {#NCPolyNumberOfVariables}
 
 `NCPolyNumberOfVariables[poly]` returns the number of variables of the
 nc polynomial `poly`.
 
-### NCPolyCoefficient {#NCPolyCoefficient}
+#### NCPolyCoefficient {#NCPolyCoefficient}
 
 `NCPolyCoefficient[poly, mon]` returns the coefficient of the monomial
 `mon` in the nc polynomial `poly`.
@@ -188,7 +187,7 @@ See also:
 [NCPoly](#NCPoly),
 [NCPolyMonomial](#NCPolyMonomial).
 
-### NCPolyGetCoefficients {#NCPolyGetCoefficients}
+#### NCPolyGetCoefficients {#NCPolyGetCoefficients}
 
 `NCPolyGetCoefficients[poly]` returns a list with the coefficients of
 the monomials in the nc polynomial `poly`.
@@ -211,7 +210,7 @@ See also:
 [NCPolyCoefficient](#NCPolyCoefficient),
 [NCPoly](#NCPoly).
 
-### NCPolyGetDigits {#NCPolyGetDigits}
+#### NCPolyGetDigits {#NCPolyGetDigits}
 
 `NCPolyGetDigits[poly]` returns a list with the digits that encode the
 monomials in the nc polynomial `poly` as produced by
@@ -234,7 +233,7 @@ See also:
 [NCPolyGetCoefficients](#NCPolyGetCoefficients),
 [NCPoly](#NCPoly).
 
-### NCPolyGetIntegers {#NCPolyGetIntegers}
+#### NCPolyGetIntegers {#NCPolyGetIntegers}
 
 `NCPolyGetIntegers[poly]` returns a list with the digits that encode
 the monomials in the nc polynomial `poly` as produced by
@@ -257,7 +256,7 @@ See also:
 [NCPolyGetCoefficients](#NCPolyGetCoefficients),
 [NCPoly](#NCPoly).
 
-### NCPolyLeadingMonomial {#NCPolyLeadingMonomial}
+#### NCPolyLeadingMonomial {#NCPolyLeadingMonomial}
 
 `NCPolyLeadingMonomial[poly]` returns an `NCPoly` representing the
 leading term of the nc polynomial `poly`.
@@ -278,7 +277,7 @@ See also:
 [NCPolyMonomial](#NCPolyMonomial),
 [NCPoly](#NCPoly).
 
-### NCPolyLeadingTerm {#NCPolyLeadingTerm}
+#### NCPolyLeadingTerm {#NCPolyLeadingTerm}
 
 `NCPolyLeadingTerm[poly]` returns a rule associated with the leading
 term of the nc polynomial `poly` as understood by
@@ -302,7 +301,7 @@ See also:
 [NCPolyMonomial](#NCPolyMonomial),
 [NCPoly](#NCPoly).
 
-### NCPolyOrderType {#NCPolyOrderType}
+#### NCPolyOrderType {#NCPolyOrderType}
 
 `NCPolyOrderType[poly]` returns the type of monomial order in which
 the nc polynomial `poly` is stored. Order can be `NCPolyGradedDegLex`
@@ -311,7 +310,7 @@ or `NCPolyDegLex`.
 See also:
 [NCPoly](#NCPoly),
 
-### NCPolyToRule {#NCPolyToRule}
+#### NCPolyToRule {#NCPolyToRule}
 
 `NCPolyToRule[poly]` returns a `Rule` associated with polynomial
 `poly`. If `poly = lead + rest`, where `lead` is the leading term in
@@ -333,63 +332,63 @@ See also:
 [NCPolyLeadingMonomial](#NCPolyLeadingMonomial),
 [NCPoly](#NCPoly).
 
-## Formating functions
+### Formating functions
 
-### NCPolyDisplay {#NCPolyDisplay}
+#### NCPolyDisplay {#NCPolyDisplay}
 
 `NCPolyDisplay[poly]` prints the noncommutative polynomial `poly`. 
 
 `NCPolyDisplay[poly, vars]` uses the symbols in the list `vars`.
 
-### NCPolyDisplayOrder {#NCPolyDisplayOrder}
+#### NCPolyDisplayOrder {#NCPolyDisplayOrder}
 
 `NCPolyDisplayOrder[vars]` prints the order implied by the list of
 variables `vars`.
 
-## Arithmetic functions
+### Arithmetic functions
 
-### NCPolyDivideDigits {#NCPolyDivideDigits}
+#### NCPolyDivideDigits {#NCPolyDivideDigits}
 
 `NCPolyDivideDigits[F,G]` returns the result of the division of the
 leading digits lf and lg.
 
-### NCPolyDivideLeading {#NCPolyDivideLeading}
+#### NCPolyDivideLeading {#NCPolyDivideLeading}
 
 `NCPolyDivideLeading[lF,lG,base]` returns the result of the division
 of the leading Rules lf and lg as returned by NCGetLeadingTerm.
 
-### NCPolyFullReduce {#NCPolyFullReduce}
+#### NCPolyFullReduce {#NCPolyFullReduce}
 
 `NCPolyFullReduce[f,g]` applies NCPolyReduce successively until the
 remainder does not change.  See also NCPolyReduce and
 NCPolyQuotientExpand.
 
-### NCPolyNormalize {#NCPolyNormalize}
+#### NCPolyNormalize {#NCPolyNormalize}
 
 `NCPolyNormalize[poly]` makes the coefficient of the leading term of
 `p` to unit. It also works when `poly` is a list.
 
-### NCPolyProduct {#NCPolyProduct}
+#### NCPolyProduct {#NCPolyProduct}
 
 `NCPolyProduct[f,g]` returns a NCPoly that is the product of the
 NCPoly's f and g.
 
-### NCPolyQuotientExpand {#NCPolyQuotientExpand}
+#### NCPolyQuotientExpand {#NCPolyQuotientExpand}
 
 `NCPolyQuotientExpand[q,g]` returns a NCPoly that is the left-right
 product of the quotient as returned by NCPolyReduce by the NCPoly
 g. It also works when g is a list.
 
-### NCPolyReduce {#NCPolyReduce}
+#### NCPolyReduce {#NCPolyReduce}
 
-### NCPolySum {#NCPolySum}
+#### NCPolySum {#NCPolySum}
 
 `NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f
 and g.
 
-## State space realization functions
+### State space realization functions
 
-### NCPolyHankelMatrix {#NCPolyHankelMatrix}
+#### NCPolyHankelMatrix {#NCPolyHankelMatrix}
 
 `NCPolyHankelMatrix[poly]` produces the nc *Hankel matrix* associated
 with the polynomial `poly` and also their shifts per variable.
@@ -424,7 +423,7 @@ See also:
 [NCPolyRealization](#NCPolyRealization),
 [NCIntegerToIndex](#NCIntegerToIndex).
 
-### NCPolyRealization {#NCPolyRealization}
+#### NCPolyRealization {#NCPolyRealization}
 
 `NCPolyRealization[poly]` calculate a minimal descriptor realization
 for the polynomial `poly`.
@@ -446,9 +445,9 @@ See also:
 [NCPolyHankelMatrix](#NCPolyHankelMatrix),
 [NCRational](#NCRational).
 
-## Auxiliary functions
+### Auxiliary functions
 
-### NCFromDigits {#NCFromDigits}
+#### NCFromDigits {#NCFromDigits}
 
 `NCFromDigits[list, b]` constructs a representation of a monomial in
 `b` encoded by the elements of `list` where the digits are in base
@@ -498,7 +497,7 @@ orderings.
 See also:
 [NCIntergerDigits](#NCIntergerDigits).
 
-### NCIntegerDigits {#NCIntegerDigits}
+#### NCIntegerDigits {#NCIntegerDigits}
 
 `NCIntegerDigits[n,b]` is the inverse of the `NCFromDigits`.
 
@@ -542,7 +541,7 @@ to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 See also:
 [NCFromDigits](#NCFromDigits).
 
-### NCDigitsToIndex {#NCDigitsToIndex}
+#### NCDigitsToIndex {#NCDigitsToIndex}
 
 `NCDigitsToIndex[digits, b]` returns the index that the monomial
 represented by `digits` in the base `b` would occupy in the standard
@@ -579,7 +578,7 @@ See also:
 [NCIntergerDigits](#NCIntergerDigits).
 
 
-### NCPadAndMatch {#NCPadAndMatch}
+#### NCPadAndMatch {#NCPadAndMatch}
 
 When list `a` is longer than list `b`, `NCPadAndMatch[a,b]` returns
 the minimum number of elements from list a that should be added to the

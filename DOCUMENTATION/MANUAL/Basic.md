@@ -4,8 +4,8 @@ This chapter provides a gentle introduction to some of the commands
 available in `NCAlgebra`. Before you can use `NCAlgebra` you first
 load it with the following commands:
 
-    In[1]:= << NC`
-    In[2]:= << NCAlgebra`
+    << NC`
+    << NCAlgebra`
 
 ## To Commute Or Not To Commute?
 
@@ -126,7 +126,63 @@ return `co[a]` where `co` stands for complex-conjugate.
 conjugates (`co`) in a notebook environment render as $x^T$, $x^*$,
 and $\bar{x}$.
 
-## Expand and Collect
+## Replace
+
+A key feature of symbolic computation is the ability to perform
+substitutions. The Mathematica substitute commands, e.g. `ReplaceAll`
+(`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,
+so you must use our `NC` versions of these commands. For example:
+
+    NCReplaceAll[x**a**b,a**b->c]
+	
+results in
+
+    x**c
+	
+and
+
+    NCReplaceAll[tp[b**a]+b**a,b**a->c]
+
+results in
+
+    c+tp[a]**tp[b]
+
+USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
+[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically
+create symmetric and self adjoint versions of your rules:
+
+	NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b ** a -> c]]
+
+returns
+
+	c + tp[c]
+
+The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
+understood in the example:
+
+	NCReplaceAll[a ** b ** b, a ** b -> a]
+
+that results in
+
+	a ** b
+
+and
+
+	NCReplaceRepeated[a ** b ** b, a ** b -> a]
+
+that results in
+
+	a
+	
+Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
+`NCReplaceList`, which are analogous to the standard `ReplaceAll`
+(`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
+that one rarely uses `NCReplace` and `NCReplaceList`. 	
+
+**Version 5.0:** the commands `Substitute` and `Transform` have been
+deprecated in favor of the above nc versions of `Replace`.
+
+## Polynomials
 
 The command `NCExpand` expands noncommutative products. For example:
 
@@ -195,63 +251,60 @@ produces
 Keep in mind that `NCStrongCollect` often collects *more* than one
 would normally expect.
 
-## Replace
+NCAlgebra comes with special packages for efficiently storing and
+calcuating with NC polynomials. Those packages are
 
-A key feature of symbolic computation is the ability to perform
-substitutions. The Mathematica substitute commands, e.g. `ReplaceAll`
-(`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,
-so you must use our `NC` versions of these commands. For example:
+* [`NCPoly`](#PackageNCPoly): which handles polynomials with real
+  coefficients, and
+* [`NCPolynomial`](#PackageNCPolynomial): which handles polynomials
+  with noncommutative coefficients.
 
-    NCReplaceAll[x**a**b,a**b->c]
-	
-results in
+For example:
 
-    x**c
-	
-and
+    1 + y**x**y - Sqrt[2] x
 
-    NCReplaceAll[tp[b**a]+b**a,b**a->c]
+is a polynomial with real coefficients in $x$ and $y$, whereas
 
-results in
+    a**y**b**x**c**y - Sqrt[2] x**d
 
-    c+tp[a]**tp[b]
+is a polynomial with nc coefficients in $x$ and $y$, where the letters
+$a$, $b$, $c$, and $d$, are the *nc coefficients*. Of course
 
-USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
-[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically
-create symmetric and self adjoint versions of your rules:
+    1 + y**x**y - Sqrt[2] x
 
-	NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b ** a -> c]]
+is a polynomial with nc coefficients if one considers only $x$ as the
+variable of interest.
+
+In order to take full advantage of [`NCPoly`](#PackageNCPoly) and
+[`NCPolynomial`](#PackageNCPolynomial) one would need to *convert* an
+expression into those special formats. However, there are several
+commands in NCAlgebra that will automatically convert into one of
+these special forms without the users having to intervene. One of
+those commands is `NCCollect`, which was introduced above. Some
+commands are similar to the native Mathematica polynomial
+commands. For example:
+
+	expr = B + A y ** x ** y - 2 x
+	NCVariables[expr]
 
 returns
 
-	c + tp[c]
-
-The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
-understood in the example:
-
-	NCReplaceAll[a ** b ** b, a ** b -> a]
-
-that results in
-
-	a ** b
+	{x,y}
 
 and
 
-	NCReplaceRepeated[a ** b ** b, a ** b -> a]
+	NCCoefficientList[expr, vars]
+	NCMonomialList[expr, vars]
+	NCCoefficientRules[expr, vars]
 
-that results in
+returns
 
-	a
-	
-Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
-`NCReplaceList`, which are analogous to the standard `ReplaceAll`
-(`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
-that one rarely uses `NCReplace` and `NCReplaceList`. 	
+	{B, -2, A}
+	{1, x, y ** x ** y}
+	{1 -> B, x -> -2, y ** x ** y -> A}
 
-**Version 5.0:** the commands `Substitute` and `Transform` have been
-deprecated in favor of the above nc versions of `Replace`.
-
-## Polynomials
+See [NCPolyInterface](#PackageNCPolyInterface) and
+[NCPoly](#PackageNCPoly) for detail.s
 
 ## Rationals and Simplification
 
