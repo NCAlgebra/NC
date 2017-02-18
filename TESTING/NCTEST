@@ -27,12 +27,12 @@ tests = {
   "NCRoots",
   "NCConjugate",
   "NCOutput",
-  "NCSystem",
   "NCConvexity",
   "Matrix"
   (*
   "NCRealization",
-  "NCRational"
+  "NCRational",
+  "NCSystem"
   *)
 };
 results = NCTestRun[tests];

@@ -37,7 +37,7 @@ See also:
 See also:
 [tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).
 
-#### Notes
+**Notes:**
 
 The experienced matrix analyst should always remember that the Mathematica convention for handling vectors is tricky.
 

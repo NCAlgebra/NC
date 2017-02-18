@@ -22,7 +22,7 @@ results in
 
 while 
 
-	A**B-B**A
+    A**B-B**A
     A**b-b**A
 
 both result in `0`.
@@ -251,38 +251,9 @@ produces
 Keep in mind that `NCStrongCollect` often collects *more* than one
 would normally expect.
 
-NCAlgebra comes with special packages for efficiently storing and
-calcuating with NC polynomials. Those packages are
-
-* [`NCPoly`](#PackageNCPoly): which handles polynomials with real
-  coefficients, and
-* [`NCPolynomial`](#PackageNCPolynomial): which handles polynomials
-  with noncommutative coefficients.
-
-For example:
-
-    1 + y**x**y - Sqrt[2] x
-
-is a polynomial with real coefficients in $x$ and $y$, whereas
-
-    a**y**b**x**c**y - Sqrt[2] x**d
-
-is a polynomial with nc coefficients in $x$ and $y$, where the letters
-$a$, $b$, $c$, and $d$, are the *nc coefficients*. Of course
-
-    1 + y**x**y - Sqrt[2] x
-
-is a polynomial with nc coefficients if one considers only $x$ as the
-variable of interest.
-
-In order to take full advantage of [`NCPoly`](#PackageNCPoly) and
-[`NCPolynomial`](#PackageNCPolynomial) one would need to *convert* an
-expression into those special formats. However, there are several
-commands in NCAlgebra that will automatically convert into one of
-these special forms without the users having to intervene. One of
-those commands is `NCCollect`, which was introduced above. Some
-commands are similar to the native Mathematica polynomial
-commands. For example:
+NCAlgebra provides some commands for noncommutative polynomial
+manipulation that are similar to the native Mathematica (commutative)
+polynomial commands. For example:
 
 	expr = B + A y ** x ** y - 2 x
 	NCVariables[expr]
@@ -303,8 +274,78 @@ returns
 	{1, x, y ** x ** y}
 	{1 -> B, x -> -2, y ** x ** y -> A}
 
-See [NCPolyInterface](#PackageNCPolyInterface) and
-[NCPoly](#PackageNCPoly) for detail.s
+Also for testing
+
+	NCMonomialQ[expr]
+
+will return `False` and
+
+	NCPolynomialQ[expr]
+
+will return `True`.
+
+Another useful command is `NCTermsOfDegree`, which will returns an
+expression with terms of a certain degree. For instance:
+
+    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {2,1}]
+
+returns `x**y**x - x**x**y`,
+
+    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {1,0}]
+
+returns `x**w`,
+
+	NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,0}]
+
+returns `z**w`, and
+
+    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,1}]
+
+returns `0`.
+
+A similar command is `NCTermsOfTotalDegree`, which works just like
+`NCTermsOfDegree` but considers the total degree in all variables. For
+example:
+
+For example,
+
+    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 3]
+
+returns `x**y**x - x**x**y`, and
+
+    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 2]
+
+returns `0`.
+
+The above commands are based on special packages for efficiently
+storing and calcuating with NC polynomials. Those packages are
+
+* [`NCPoly`](#PackageNCPoly): which handles polynomials with
+  noncommutative coefficients, and
+* [`NCPolynomial`](#PackageNCPolynomial): which handles polynomials
+  with noncommutative coefficients.
+
+For example:
+
+    1 + y**x**y - A x
+
+is a polynomial with real coefficients in $x$ and $y$, whereas
+
+    a**y**b**x**c**y - A x**d
+
+is a polynomial with nc coefficients in $x$ and $y$, where the letters
+$a$, $b$, $c$, and $d$, are the *nc coefficients*. Of course
+
+    1 + y**x**y - A x
+
+is a polynomial with nc coefficients if one considers only $x$ as the
+variable of interest.
+
+In order to take full advantage of [`NCPoly`](#PackageNCPoly) and
+[`NCPolynomial`](#PackageNCPolynomial) one would need to *convert* an
+expression into those special formats. See
+[NCPolyInterface](#PackageNCPolyInterface), [NCPoly](#PackageNCPoly),
+and [NCPolynomial](#PackageNCPolynomial) for details.
 
 ## Rationals and Simplification
 

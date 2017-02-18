@@ -14,9 +14,12 @@ Clear[NCToNCPoly,
       NCMonomialList,
       NCCoefficientRules,
       NCCoefficientList,
-      NCVariables];
+      NCVariables,
+      NCCoefficientQ,
+      NCMonomialQ,
+      NCPolynomialQ];
 
-Get["NCNCPoly.usage"];
+Get["NCPolyInterface.usage"];
 
 Begin["`Private`"];
 
@@ -36,18 +39,22 @@ Begin["`Private`"];
     Map[NCToNCPoly[#, vars]&, exp];
 
   NCToNCPoly[exp_, vars_] := Module[
-    {factors},
-      
+    {terms, factors},
+    
+    (* Expand and check *)
+    terms = ExpandNonCommutativeMultiply[exp];
+    If[ !NCPolynomialQ[terms],
+        Message[NCPoly::NotPolynomial];
+        Return[$Failed];
+    ];
+    
     Check[
       factors = Map[GrabFactors, 
-                    GrabTerms[ExpandNonCommutativeMultiply[exp]]];
+                    GrabTerms[terms]];
      ,
       Return[$Failed]
      ,
-      {NCPoly::NotPolynomial,
-       NCPoly::InvalidList,
-       NCPoly::SizeMismatch,
-       NCMonomialToDigits::InvalidSymbol}
+      {NCPoly::NotPolynomial}
     ];
 
     (* Print["factors = ", factors]; *)
@@ -101,8 +108,35 @@ Begin["`Private`"];
   ];
 
   (* NCVariables *)
+  NCVariables[expr_] := Select[NCGrabSymbols[expr], NonCommutativeQ];
 
-  NCVariables[expr_] := DeleteCases[NCGrabSymbols[expr], _?CommutativeQ];
+  (* NCCoefficientQ *)
+  Clear[NCCoefficientQAux];
+  NCCoefficientQAux[_?NumericQ] := True;
+  NCCoefficientQAux[a_Symbol /; CommutativeQ[a]] := True;
+  NCCoefficientQAux[_] := False;
   
+  NCCoefficientQ[HoldPattern[Times[__?NCCoefficientQAux]]] := True;
+  NCCoefficientQ[_?NCCoefficientQAux] := True;
+  NCCoefficientQ[_] := False;
+
+  (* NCMonomialQ *)
+  NCMonomialQ[expr_NonCommutativeMultiply /; Depth[expr] == 2] := True;
+  NCMonomialQ[x_Symbol /; NonCommutativeQ[x]] := True;
+  NCMonomialQ[a_?NCCoefficientQ expr_NonCommutativeMultiply
+              /; Depth[expr] == 2] := True;
+  NCMonomialQ[a_?NCCoefficientQ x_Symbol /; NonCommutativeQ[x]] := True;
+  NCMonomialQ[a_?NCCoefficientQ] := True;
+  NCMonomialQ[expr_] := False;
+
+  (* NCPolynomialQ *)
+  Clear[NCPolynomialQAux];
+  NCPolynomialQAux[expr_?NCMonomialQ] := True;
+  NCPolynomialQAux[HoldPattern[Plus[__?NCMonomialQ]]] := True;
+  NCPolynomialQAux[_] := False;
+  
+  NCPolynomialQ[expr_?NCPolynomialQAux] := True;
+  NCPolynomialQ[expr_] := NCPolynomialQAux[ExpandNonCommutativeMultiply[expr]];
+
 End[]
 EndPackage[]

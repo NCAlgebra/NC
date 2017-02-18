@@ -29,7 +29,7 @@ Clear[NCCollect,NCStrongCollect,
       NCCollectSymmetric, NCCollectSelfAdjoint,
       NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint,
       NCDecompose, NCCompose,
-      NCTermsOfDegree];
+      NCTermsOfDegree, NCTermsOfTotalDegree];
 
 Begin["`Private`"];
 
@@ -212,6 +212,9 @@ Begin["`Private`"];
   
   NCTermsOfDegree[expr_, vars_, degree_] :=
     NCPTermsToNC[NCPTermsOfDegree[NCToNCPolynomial[expr, vars], degree]];
+
+  NCTermsOfTotalDegree[expr_, vars_, degree_] :=
+    NCPTermsToNC[NCPTermsOfTotalDegree[NCToNCPolynomial[expr, vars], degree]];
 
 End[]
 

@@ -22,7 +22,7 @@ If `expr` is a rational nc expression then degree correspond to the degree of th
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
-#### Notes
+**Notes:**
 
 While `NCCollect[expr, vars]` always returns mathematically correct
 expressions, it may not collect `vars` from as many terms as one might
@@ -110,19 +110,60 @@ See also:
 
 ### NCTermsOfDegree {#NCTermsOfDegree}
 
-`NCTermsOfDegree[expr,vars,indices]` returns an expression such that each term has the right number of factors of the variables in `vars`.
+`NCTermsOfDegree[expr,vars,degrees]` returns an expression such that
+each term has degree `degrees` in variables `vars`.
 
 For example,
 
-    NCTermsOfDegree[x**y**x + x**w,{x,y},{2,1}]
+    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {2,1}]
 
-returns `x**y**x` and
+returns `x**y**x - x**x**y`,
 
-    NCTermsOfDegree[x**y**x + x**w,{x,y},{1,0}]
+    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {1,0}]
 
-return `x**w`. It returns 0 otherwise.
+returns `x**w`,
 
-This command internally converts nc expressions into the special `NCPolynomial` format.
+	NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,0}]
+
+returns `z**w`, and
+
+    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,1}]
+
+returns `0`.
+
+This command internally converts nc expressions into the special
+`NCPolynomial` format.
 
 See also:
+[NCTermsOfTotalDegree](#NCTermsOfTotalDegree),
+[NCDecompose](#NCDecompose), [NCPDecompose](#NCPDecompose).
+
+### NCTermsOfTotalDegree {#NCTermsOfTotalDegree}
+
+`NCTermsOfTotalDegree[expr,vars,degree]` returns an expression such that
+each term has total degree `degree` in variables `vars`.
+
+For example,
+
+    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 3]
+
+returns `x**y**x - x**x**y`,
+
+    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 1]
+
+returns `x**w`,
+
+	NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 0]
+
+returns `z**w`, and
+
+    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 2]
+
+returns `0`.
+
+This command internally converts nc expressions into the special
+`NCPolynomial` format.
+
+See also:
+[NCTermsOfDegree](#NCTermsOfDegree),
 [NCDecompose](#NCDecompose), [NCPDecompose](#NCPDecompose).

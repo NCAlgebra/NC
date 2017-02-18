@@ -15,6 +15,7 @@
 BeginPackage[ "NCPolynomial`",
               "NCMatMult`",
               "NCUtil`",
+              "NCPolyInterface`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCPolynomial, 
@@ -157,7 +158,7 @@ Begin[ "`Private`" ]
   ];
   
   NCToNCPolynomial[poly_] := 
-      NCToNCPolynomial[poly, Select[NCGrabSymbols[poly], NonCommutativeQ]];
+      NCToNCPolynomial[poly, NCVariables[poly]];
 
   NCToNCPolynomial[poly_, vars_List] := Module[
       {p, m0},
@@ -231,7 +232,7 @@ Begin[ "`Private`" ]
   (* NCRationalToNCPolynomial *)
 
   NCRationalToNCPolynomial[rat_] := 
-      NCRationalToNCPolynomial[rat, Select[NCGrabSymbols[rat], NonCommutativeQ]];
+      NCRationalToNCPolynomial[rat, NCVariables[rat]];
 
   NCRationalToNCPolynomial[rat_, vars_List] := Module[
       {invs, ratVars, ruleRat, ruleRatRev, poly},

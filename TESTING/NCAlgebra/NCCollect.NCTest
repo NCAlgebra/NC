@@ -266,10 +266,18 @@ Module[
    NCTest[NCStrongCollect[expr, {a,tp[a]}], answer];
 
   (* NCTermsOfDegree *)
-  expr = x**y**x + x**w;
-  NCTest[NCTermsOfDegree[expr,{x,y},{2,1}], x**y**x];
+  expr = z + x**y**x + x**w - x**x**y;
+  NCTest[NCTermsOfDegree[expr,{x,y},{2,1}], x**y**x - x**x**y];
   NCTest[NCTermsOfDegree[expr,{x,y},{1,0}], x**w];
   NCTest[NCTermsOfDegree[expr,{x,y},{2,2}], 0];
+  NCTest[NCTermsOfDegree[expr,{x,y},{0,0}], z];
+
+  (* NCTermsOfTotalDegree *)
+  expr = z + x**y**x + x**w - x**x**y;
+  NCTest[NCTermsOfTotalDegree[expr,{x,y},3], x**y**x - x**x**y];
+  NCTest[NCTermsOfTotalDegree[expr,{x,y},1], x**w];
+  NCTest[NCTermsOfTotalDegree[expr,{x,y},2], 0];
+  NCTest[NCTermsOfTotalDegree[expr,{x,y},0], z];
 
   (* Bill's tests *)
   expr = ExpandNonCommutativeMultiply[tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y)];

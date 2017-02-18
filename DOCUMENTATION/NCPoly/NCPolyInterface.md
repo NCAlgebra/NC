@@ -1,5 +1,11 @@
 ## NCPolyInterface {#PackageNCPolyInterface}
 
+The package `NCPolyInterface` provides a basic interface between
+[`NCPoly`](#PackageNCPoly) and `NCAlgebra`. Note that to take full
+advantage of the speed-up possible with `NCPoly` one should always
+convert and manipulate `NCPoly` expressions before converting back to
+`NCAlgebra`.
+
 Members are:
 
 * [NCToNCPoly](#NCToNCPoly)
@@ -8,7 +14,10 @@ Members are:
 * [NCCoefficientRules](#NCCoefficientRules)
 * [NCCoefficientList](#NCCoefficientList)
 * [NCVariables](#NCVariables)
-
+* [NCCoefficientQ](#NCCoefficientQ)
+* [NCMonomialQ](#NCMonomialQ)
+* [NCPolynomialQ](#NCPolynomialQ)
+      
 ### NCToNCPoly {#NCToNCPoly}
 
 `NCToNCPoly[expr, var]` constructs a noncommutative polynomial object in
@@ -120,3 +129,79 @@ See also:
 [NCMonomialList](#NCMonomialList),
 [NCCoefficientRules](#NCCoefficientRules),
 [NCVariables](#NCVariables).
+
+
+### NCCoefficientQ {#NCCoefficientQ}
+
+`NCCoefficientQ[expr]` returns True if `expr` is a valid polynomial
+coefficient.
+
+For example:
+
+	SetCommutative[A]
+    NCCoefficientQ[1]
+	NCCoefficientQ[A]
+	NCCoefficientQ[2 A]
+
+all return `True` and
+
+	SetNonCommutative[x]
+	NCCoefficientQ[x]
+	NCCoefficientQ[x**x]
+	NCCoefficientQ[Exp[x]]
+
+all return `False`.
+
+**IMPORTANT**: `NCCoefficientQ[expr]` does not expand `expr`. This
+means that `NCCoefficientQ[2 (A + 1)]` will return `False`.
+
+See also:
+[NCMonomialQ](#NCMonomialQ),
+[NCPolynomialQ](#NCPolynomialQ)
+
+### NCMonomialQ {#NCMonomialQ}
+
+`NCCoefficientQ[expr]` returns True if `expr` is an nc monomial.
+
+For example:
+
+	SetCommutative[A]
+    NCMonomialQ[1]
+	NCMonomialQ[x]
+	NCMonomialQ[A x ** y]
+	NCMonomialQ[2 A x ** y ** x]
+
+all return `True` and
+
+	NCMonomialQ[x + x ** y]
+
+returns `False`.
+
+**IMPORTANT**: `NCMonomialQ[expr]` does not expand `expr`. This
+means that `NCMonomialQ[2 (A + 1) x**x]` will return `False`.
+
+See also:
+[NCCoefficientQ](#NCCoefficientQ),
+[NCPolynomialQ](#NCPolynomialQ)
+
+### NCPolynomialQ {#NCPolynomialQ}
+
+`NCPolynomialQ[expr]` returns True if `expr` is an nc polynomial with
+commutative coefficients.
+
+For example:
+
+	NCPolynomialQ[A x ** y]
+
+all return `True` and
+
+	NCMonomialQ[x + x ** y]
+
+returns `False`.
+
+**IMPORTANT**: `NCPolynomialQ[expr]` does expand `expr`. This
+means that `NCPolynomialQ[(x + y)^3]` will return `True`.
+
+See also:
+[NCCoefficientQ](#NCCoefficientQ),
+[NCMonomialQ](#NCMonomialQ)
