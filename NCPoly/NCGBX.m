@@ -21,8 +21,7 @@ Clear[ClearMonomialOrder,
       NCMakeGB,
       NCGBSimplifyRational,
       NCProcess,
-      NCReduce,
-      NCRuleToPoly];
+      NCReduce];
 
 Get["NCGBX.usage"];
 
@@ -40,10 +39,6 @@ Begin["`Private`"];
   Clear[$NCPolyInterfaceSetKnowns];
   $NCPolyInterfaceSetKnowns = False;
   
-  (* NCRuleToPoly *)
-  NCRuleToPoly[exp_Rule] := exp[[1]] - exp[[2]];
-  NCRuleToPoly[exp_List] := Map[NCRuleToPoly, exp];
-
   (* NCGB Interface *)
 
   (* This function erases all elements on current monomial order list *)

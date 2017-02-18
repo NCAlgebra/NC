@@ -11,6 +11,7 @@ BeginPackage[ "NCPolyInterface`",
 
 Clear[NCToNCPoly,
       NCPolyToNC,
+      NCRuleToPoly,
       NCMonomialList,
       NCCoefficientRules,
       NCCoefficientList,
@@ -22,6 +23,10 @@ Clear[NCToNCPoly,
 Get["NCPolyInterface.usage"];
 
 Begin["`Private`"];
+
+  (* NCRuleToPoly *)
+  NCRuleToPoly[exp_Rule] := exp[[1]] - exp[[2]];
+  NCRuleToPoly[exp_List] := Map[NCRuleToPoly, exp];
 
   (* NCToNCPoly *)
 

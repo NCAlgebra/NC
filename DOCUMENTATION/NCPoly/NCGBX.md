@@ -2,9 +2,6 @@
 
 Members are:
 
-* [NCToNCPoly](#NCToNCPoly)
-* [NCPolyToNC](#NCPolyToNC)
-* [NCRuleToPoly](#NCRuleToPoly)
 * [SetMonomialOrder](#SetMonomialOrder)
 * [SetKnowns](#SetKnowns)
 * [SetUnknowns](#SetUnknowns)
@@ -14,41 +11,6 @@ Members are:
 * [NCMakeGB](#NCMakeGB)
 * [NCReduce](#NCReduce)
 * [NCProcess](#NCProcess)
-
-### NCToNCPoly {#NCToNCPoly}
-
-`NCToNCPoly[expr, var]` constructs a noncommutative polynomial object in
-variables `var` from the nc expression `expr`. 
-
-For example
-
-    NCToNCPoly[x**y - 2 y**z, {x, y, z}] 
-	
-constructs an object associated with the noncommutative polynomial $x
-y - 2 y z$ in variables `x`, `y` and `z`. The internal representation is so
-that the terms are sorted according to a degree-lexicographic order in
-`vars`. In the above example, $x < y < z$.  
-
-### NCPolyToNC {#NCPolyToNC}
-
-`NCPolyToNC[poly, vars]` constructs an nc expression from the
-noncommutative polynomial object `poly` in variables `vars`. Monomials are
-specified in terms of the symbols in the list `var`.
-
-For example
-
-    poly = NCToNCPoly[x**y - 2 y**z, {x, y, z}];
-	expr = NCPolyToNC[poly, {x, y, z}];
-
-returns
-
-	expr = x**y - 2 y**z
-	
-See also:
-[NCPolyToNC](#NCPolyToNC),
-[NCPoly](#NCPoly).
-
-### NCRuleToPoly {#NCRuleToPoly}
 
 ### SetMonomialOrder {#SetMonomialOrder}
 

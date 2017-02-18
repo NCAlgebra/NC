@@ -10,6 +10,7 @@ Members are:
 
 * [NCToNCPoly](#NCToNCPoly)
 * [NCPolyToNC](#NCPolyToNC)
+* [NCRuleToPoly](#NCRuleToPoly)
 * [NCMonomialList](#NCMonomialList)
 * [NCCoefficientRules](#NCCoefficientRules)
 * [NCCoefficientList](#NCCoefficientList)
@@ -50,6 +51,18 @@ returns
 See also:
 [NCPolyToNC](#NCPolyToNC),
 [NCPoly](#NCPoly).
+
+### NCRuleToPoly {#NCRuleToPoly}
+
+`NCRuleToPoly[a -> b]` converts the rule `a -> b` into the relation `a - b`.
+
+For instance:
+
+    NCRuleToPoly[x**y**y -> x**y - 1]
+
+returns
+
+    x**y**y - x**y + 1
 
 ### NCMonomialList {#NCMonomialList}
 

@@ -9,8 +9,8 @@ date:
 
 \newpage
 
-\chapter*{BSD License}
-\addcontentsline{toc}{chapter}{BSD License}
+\chapter*{License}
+\addcontentsline{toc}{chapter}{License}
 
 **NCAlgebra** is distributed under the terms of the BSD License:
 

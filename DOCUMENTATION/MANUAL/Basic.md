@@ -122,9 +122,9 @@ Similar properties hold to `aj`. Moreover
 	
 return `co[a]` where `co` stands for complex-conjugate. 
 
-**Version 5.0:** transposes (`tp`), adjoints (`aj`) and complex
-conjugates (`co`) in a notebook environment render as $x^T$, $x^*$,
-and $\bar{x}$.
+**Version 5.0:** transposes (`tp`), adjoints (`aj`), complex
+conjugates (`co`), and inverses (`inv`) in a notebook environment
+render as $x^T$, $x^*$, $\bar{x}$, and $x^{-1}$.
 
 ## Replace
 
@@ -314,7 +314,7 @@ returns `x**y**x - x**x**y`, and
 returns `0`.
 
 The above commands are based on special packages for efficiently
-storing and calcuating with NC polynomials. Those packages are
+storing and calcuating with nc polynomials. Those packages are
 
 * [`NCPoly`](#PackageNCPoly): which handles polynomials with
   noncommutative coefficients, and
@@ -463,13 +463,249 @@ polynomials. See [`NCIntegrate`](#NCIntegrate).
 ## Matrices
 
 `NCAlgebra` has many algorithms that handle matrices with
-noncommutative entries.
+noncommutative entries. Think block-matrices. 
 
-    In[52]:= m1={{a,b},{c,d}}
-    Out[52]= {{a,b},{c,d}}
-    In[53]:= m2={{d,2},{e,3}}
-    Out[53]= {{d,2},{e,3}}
-    In[54]:= MatMult[m1,m2]
-    Out[54]= {{a**d+b**e,2 a+3 b},{c**d+d**e,2 c+3 d}}
+There are many new improvements with **Version 5.0**. For instance,
+operators `tp`, `aj`, and `co` now operate directly over
+matrices. That is
 
-?? ADD NCInverse, and much more ??
+	aj[{{a,tp[b]},{co[c],aj[d]}}]
+	
+returns
+
+	{{aj[a],tp[c]},{co[b],d}}
+
+In previous versions one had to use the special commands `tpMat`,
+`ajMat`, and `coMat`. Those are still supported for backward
+compatibility.
+
+One can also directly multiply matrices using `**`. For example
+
+	m1 = {{a, b}, {c, d}}
+	m2 = {{d, 2}, {e, 3}}
+	m1**m2
+
+result in 
+
+	{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
+
+which is held unevaluated. Use `NCMatrixExpand` to evaluate as in
+
+	NCMatrixExpand[m1 ** m2]
+
+that returns
+
+	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
+
+Alternatively one can use `MatMult`
+
+    MatMult[m1,m2]
+	
+which returns
+
+	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
+
+in one step. Note that products of nc symbols appearing in the
+matrices are multiplied using `**`. Compare that with the standard
+`Dot` (`.`) operator.
+
+**WARNING:** Mathematica's choice of treating lists and matrix
+indistinctively can cause much trouble when using the `Plus` (`+`)
+operator. For example
+
+	m1**m2 + m2
+	
+returns
+
+	{{d + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}, 2 + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}}, 
+	 {e + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}, 3 + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}}}
+
+which is different than
+
+	{{d + a ** d + b ** e, 2 + 2 a + 3 b}, 
+	 {e + c ** d + d ** e, 3 + 2 c + 3 d}}
+
+that is returned by 
+
+	NCMatrixExpand[m1 ** m2] + m2
+	
+or
+
+	MatMult[m1, m2] + m2
+
+The reason for this behavior is that `m1**m2` is essentially treated
+as a *scalar* (it does not have `Head` `List`) and therefore gets
+added entrywise to `m2`. We provide the package
+[`Matrix`](#MatrixPackage) that provides a solution to this problem
+with some caveats.
+
+The inverse opearator `inv` also works on matrices. As with `**`,
+`inv` of matrices is held unevaluated and gets expanded using
+`NCMatrixExpand`. For instance
+
+	inv[m1] // NCMatrixExpand
+
+returns
+
+	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+
+A less trivial example is
+
+	m3 = m1**inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1]**m1
+
+that returns 
+
+	-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
+	    {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]
+
+Expanding
+
+	NCMatrixExpand[m3]
+
+results in
+
+	{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
+	    (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
+	    (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
+	  a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
+	    inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
+		b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
+		(1 + a)**inv[c]**(1 + d)]** b}, 
+	 {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
+	    inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
+	  1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
+	    a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
+		inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}
+	
+and finally 
+
+	NCMatrixaExpand[m3] // NCSimplifyRational	
+	
+returns
+
+	{{0, 0}, {0, 0}}
+	
+as expected.
+		
+Just as with `**` and `MatMult`, `inv` has its matrix counterpart,
+`NCInverse`, which evaluates in one step. Note that the difference
+between `NCInverse` and `inv` is not only cosmetic. Evaluating `**`
+and `inv` can prevent useful simplifications from taking place. For
+instance,
+
+	inv[{{a, b}, {c, d}}]**{{a, b}, {c, d}}
+	
+returns a reassuring `1` whereas
+
+	NCInverse[{{a, b}, {c, d}}]**{{a, b}, {c, d}}
+	
+evaluates to
+
+	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}**{{a, b}, {c, d}}
+
+Once again be careful when adding matrix expressions that need expansion!
+
+Behind `NCInverse` there are a host of linear algebra algorithms which
+are implemented in the package:
+
+* [`NCMatrixDecompositions`](#PackageNCMatrixDecompositions):
+implements versions of the $LU$ Decomposition with partial and
+complete pivoting, as well as $LDL$ Decomposition which are suitable
+for calculations with nc matrices. Those functions are based on the
+templated algorithms from the package
+[`MatrixDecompositions`](#PackageMatrixDecompositions).
+
+For instance the function
+[`NCLUDecompositionWithPartialPivoting`](#NCLUDecompositionWithPartialPivoting)
+can be used as
+
+	m = {{a, b}, {c, d}}
+	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
+	
+which returns
+
+	lu = {{a, b}, {c ** inv[a], d - c ** inv[a] ** b}}
+	p = {1, 2}
+
+The list `p` encodes the sequence of permutations calculated during
+the execution of the algorithm. The matrix `lu` contains the factors
+$L$ and $U$. These can be recovered using
+
+	{l, u} = GetLUMatrices[lu]
+	
+resulting in this case in
+
+	l = {{1, 0}, {c ** inv[a], 1}}
+	u = {{a, b}, {0, d - c ** inv[a] ** b}}
+
+**Note:** for efficiency the factors `l` and `u` are returned as
+  `SparseArrays`. Use `Normal` to convert to regular arrays if
+  desired.
+  
+The default pivoting strategy privileges simpler expressions. For
+instance,
+
+	m = {{a, b}, {1, d}}
+	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
+	{l, u} = GetLUMatrices[lu]
+	
+results in the factors
+
+	l = {{1, 0}, {a, 1}}
+	u = {{1, d}, {0, b - a ** d}}
+	
+and a permutation list 
+
+	p = {2, 1}
+	
+which indicates that the number `1`, appearing in the second row, was
+used as the pivot rather than the symbol `a` appearing on the first
+row. Likewise
+
+	m = {{a + b, b}, {c, d}}
+	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
+	{l, u} = GetLUMatrices[lu]
+
+returns
+
+	p = {2, 1}
+	l = {{1, 0}, {(a + b) ** inv[c], 1}} 
+	u = {{c, d}, {0, b - (a + b) ** inv[c] ** d}}
+
+showing that the *simpler* expression `c` was takes as a pivot instead
+of `a + b`.
+
+The function `NCLUDecompositionWithPartialPivoting` is the one that is
+used by `NCInverse`.
+
+Another factorization algorithm is
+[`NCLUDecompositionWithCompletePivoting`](#NCLUDecompositionWithCompletePivoting),
+which can be used to calculate the symbolic rank of nc matrices. For
+example
+
+	m = {{2 a, 2 b}, {a, b}}
+	{lu, p, q, rank} = NCLUDecompositionWithCompletePivoting[m]
+	
+returns the *left* and *right* permutation lists
+
+	p = {2, 1}
+	q = {1, 2}
+	
+and `rank` equal to `1`. The $L$ and $U$ factors can be obtained as
+before using
+
+	{l, u} = GetLUMatrices[lu]
+	
+to get
+
+	l = {{1, 0}, {2, 1}}
+	u = {{a, b}, {0, 0}}
+
+in this case.
+	
+Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the
+$LDL^T$ decomposition of symmetric symbolic nc matrices.
+
+?? EXAMPLE TO FOLLOW ??
