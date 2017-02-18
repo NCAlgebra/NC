@@ -291,10 +291,6 @@ expression with terms of a certain degree. For instance:
 
 returns `x**y**x - x**x**y`,
 
-    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {1,0}]
-
-returns `x**w`,
-
 	NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,0}]
 
 returns `z**w`, and
@@ -382,17 +378,87 @@ rationals. For example, one can verify that
 
 	NCSimplifyRational[expr2] == expr1
 
+`NCAlgebra` has a number of packages that can be used to manipulate
+rational nc expressions. The packages:
+
+* [`NCGBX`](#PackageNCGBX) perform calculations with nc rationals
+  using Gröbner basis, and
+* [`NCRational`](#PackageNCRational) creates state-space
+  representations of nc rationals. This package is still experimental.
+
 ## Calculus
 
-One can calculate directional derivatives with `DirectionalD` and
-noncommutative gradients with `NCGrad`.
+The package [`NCDiff`](#PackageNCDiff) provide functions for
+calculating derivatives and integrals of nc polynomials and nc
+rationals.
 
-    In[50]:= DirectionalD[x**x,x,h]
-    Out[50]= h**x+x**h
-    In[51]:= NCGrad[tp[x]**x+tp[x]**A**x+m**x,x]
-    Out[51]= m+tp[x]**A+tp[x]**tp[A]+2 tp[x]
+The main command is [`NCDirectionalD`](#NCDirectionalD) which
+calculates directional derivatives in one or many variables. For
+example, if:
 
-?? ADD INTEGRATE AND HESSIAN ??
+    expr = a**inv[1+x]**b + x**c**x
+
+then
+
+    NCDirectionalD[expr, {x,h}]
+
+returns
+
+    h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b
+
+In the case of more than one variables
+`NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative
+of `expr` with respect to `x` in the direction `h` and with respect to
+`y` in the direction `k`. For example, if:
+
+    expr = x**q**x - y**x
+
+then
+
+    NCDirectionalD[expr, {x,h}, {y,k}]
+
+returns
+
+	h**q**x + x**q*h - y**h - k**x
+
+The command `NCGrad` calculate nc *gradients*[^grad].
+
+[^grad]: The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
+
+For example, if:
+
+    expr = x**a**x**b + x**c**x**d
+
+then its directional derivative in the direction `h` is
+
+    NCDirectionalD[expr, {x,h}]
+
+which returns
+
+    h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
+
+and
+
+    NCGrad[expr, x]
+
+returns the nc gradient
+
+    a**x**b + b**x**a + c**x**d + d**x**c
+
+For example, if:
+
+    expr = x**a**x**b + x**c**y**d
+
+is a function on variables `x` and `y` then
+
+    NCGrad[expr, x, y]
+
+returns the nc gradient list
+
+    {a**x**b + b**x**a + c**y**d, d**x**c}
+
+**Version 5.0:** introduces experimental support for integration of nc
+polynomials. See [`NCIntegrate`](#NCIntegrate).
 
 ## Matrices
 

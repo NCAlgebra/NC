@@ -32,7 +32,17 @@ returns
 In the case of more than one variables
 `NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative
 of `expr` with respect to `x` in the direction `h` and with respect to
-`y` in the direction `k`.
+`y` in the direction `k`. For example, if:
+
+    expr = x**q**x - y**x
+
+then
+
+    NCDirectionalD[expr, {x,h}, {y,k}]
+
+returns
+
+    h**q**x + x**q*h - y**h - k**x
 
 See also:
 [NCGrad](#NCGrad),
