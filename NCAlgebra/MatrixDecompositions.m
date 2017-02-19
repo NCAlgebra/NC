@@ -110,7 +110,7 @@ Begin[ "`Private`" ]
   (* GetLDUMatrices *)
   
   GetLDUMatrices[ldl_, s_] := Module[
-    {n,m,mats,id,lm,dm,S},
+    {m,n,S,id,dm,lm},
     {m,n} = Dimensions[ldl];
 
     S = Accumulate[s];

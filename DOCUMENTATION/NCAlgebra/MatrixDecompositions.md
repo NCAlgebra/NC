@@ -84,7 +84,7 @@ See also:
 
 - the first element is a combination of upper- and lower-triangular matrices;
 - the second element is a vector specifying rows and columns used for pivoting;
-- the third element is a vector specifying the size of the diagonal blocks; it can be 1 or 2;
+- the third element is a vector specifying the size of the diagonal blocks (entries can be either 1 or 2);
 - the fourth element is the rank of the matrix.
 
 `LUDecompositionWithCompletePivoting` implements a *Bunch-Parlett pivoting* strategy in which the sorting can be configured using the options listed below. It applies only to square symmetric or self-adjoint matrices.

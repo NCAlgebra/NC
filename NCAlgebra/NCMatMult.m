@@ -77,10 +77,6 @@ Begin["`Private`"];
   aj[x_?MatrixQ] := ajMat[x];
   co[x_?MatrixQ] := coMat[x];
   
-
-  (* NCInverse is now NCLUInverse *)
-  NCInverse := NCLUInverse;
-  
 End[];
 EndPackage[];
 

@@ -28,8 +28,7 @@ tests = {
   "NCConjugate",
   "NCOutput",
   "NCConvexity",
-  "Matrix"
-  (*
+  "Matrix" (*,
   "NCRealization",
   "NCRational",
   "NCSystem"

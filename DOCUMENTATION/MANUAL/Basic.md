@@ -151,7 +151,7 @@ USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
 [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically
 create symmetric and self adjoint versions of your rules:
 
-	NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b ** a -> c]]
+	NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b**a -> c]]
 
 returns
 
@@ -160,15 +160,15 @@ returns
 The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
 understood in the example:
 
-	NCReplaceAll[a ** b ** b, a ** b -> a]
+	NCReplaceAll[a**b**b, a**b -> a]
 
 that results in
 
-	a ** b
+	a**b
 
 and
 
-	NCReplaceRepeated[a ** b ** b, a ** b -> a]
+	NCReplaceRepeated[a**b**b, a**b -> a]
 
 that results in
 
@@ -255,7 +255,7 @@ NCAlgebra provides some commands for noncommutative polynomial
 manipulation that are similar to the native Mathematica (commutative)
 polynomial commands. For example:
 
-	expr = B + A y ** x ** y - 2 x
+	expr = B + A y**x**y - 2 x
 	NCVariables[expr]
 
 returns
@@ -271,8 +271,8 @@ and
 returns
 
 	{B, -2, A}
-	{1, x, y ** x ** y}
-	{1 -> B, x -> -2, y ** x ** y -> A}
+	{1, x, y**x**y}
+	{1 -> B, x -> -2, y**x**y -> A}
 
 Also for testing
 
@@ -479,73 +479,214 @@ In previous versions one had to use the special commands `tpMat`,
 `ajMat`, and `coMat`. Those are still supported for backward
 compatibility.
 
-One can also directly multiply matrices using `**`. For example
+A useful command is [`NCInverse`](#NCInverse), which is akin to
+Mathematica's `Inverse` command and produces a block-matrix inverse
+formula[^inv] for an nc matrix. For example
+
+	m1 = {{a, b}, {c, d}}
+	NCInverse[m1]
+
+returns
+
+	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+
+[^inv]: contrary to what happens with symbolic inversion of matrices
+with commutative entries, there exist multiple formulas for the
+symbolic inverse of a matrix with noncommutative entries. Furthermore,
+it may be possible that none of such formulas is "correct". Indeed, it
+is easy to construct a matrix `m1` with block structure as shown that
+is invertible but for which none of the blocks `a`, `b`, `c`, and `d`
+are invertible. In this case no *correct* formula exists for the
+calculation of the inverse of `m1`.
+
+Note that `a` and `d - c**inv[a]**b` were assumed invertible in the
+calculation.
+
+Similarly, one can multiply matrices using [`MatMult`](#MatMult),
+which is similar to Mathematica's `Dot`. For example
 
 	m1 = {{a, b}, {c, d}}
 	m2 = {{d, 2}, {e, 3}}
-	m1**m2
+	MatMult[m1, m2]
 
 result in 
 
 	{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
 
-which is held unevaluated. Use `NCMatrixExpand` to evaluate as in
-
-	NCMatrixExpand[m1 ** m2]
-
-that returns
-
-	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
-
-Alternatively one can use `MatMult`
-
-    MatMult[m1,m2]
-	
-which returns
-
-	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
-
-in one step. Note that products of nc symbols appearing in the
+Note that products of nc symbols appearing in the
 matrices are multiplied using `**`. Compare that with the standard
 `Dot` (`.`) operator.
 
-**WARNING:** Mathematica's choice of treating lists and matrix
-indistinctively can cause much trouble when using the `Plus` (`+`)
-operator. For example
+Behind `NCInverse` there are a host of linear algebra algorithms which
+are implemented in the package:
 
-	m1**m2 + m2
+* [`NCMatrixDecompositions`](#PackageNCMatrixDecompositions):
+implements versions of the $LU$ Decomposition with partial and
+complete pivoting, as well as $LDL$ Decomposition which are suitable
+for calculations with nc matrices. Those functions are based on the
+templated algorithms from the package
+[`MatrixDecompositions`](#PackageMatrixDecompositions).
+
+For instance the function
+[`NCLUDecompositionWithPartialPivoting`](#NCLUDecompositionWithPartialPivoting)
+can be used as
+
+	m = {{a, b}, {c, d}}
+	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
 	
+which returns
+
+	lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
+	p = {1, 2}
+
+The list `p` encodes the sequence of permutations calculated during
+the execution of the algorithm. The matrix `lu` contains the factors
+$L$ and $U$. These can be recovered using
+
+	{l, u} = GetLUMatrices[lu]
+	
+resulting in this case in
+
+	l = {{1, 0}, {c**inv[a], 1}}
+	u = {{a, b}, {0, d - c**inv[a]**b}}
+
+**Note:** for efficiency the factors `l` and `u` are returned as
+  `SparseArrays`. Use `Normal` to convert to regular arrays if
+  desired.
+  
+The default pivoting strategy privileges simpler expressions. For
+instance,
+
+	m = {{a, b}, {1, d}}
+	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
+	{l, u} = GetLUMatrices[lu]
+	
+results in the factors
+
+	l = {{1, 0}, {a, 1}}
+	u = {{1, d}, {0, b - a**d}}
+	
+and a permutation list 
+
+	p = {2, 1}
+	
+which indicates that the number `1`, appearing in the second row, was
+used as the pivot rather than the symbol `a` appearing on the first
+row. Likewise
+
+	m = {{a + b, b}, {c, d}}
+	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
+	{l, u} = GetLUMatrices[lu]
+
 returns
 
-	{{d + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}, 2 + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}}, 
-	 {e + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}, 3 + {{a, b}, {c, d}}**{{d, 2}, {e, 3}}}}
+	p = {2, 1}
+	l = {{1, 0}, {(a + b)**inv[c], 1}} 
+	u = {{c, d}, {0, b - (a + b)**inv[c]**d}}
 
-which is different than
+showing that the *simpler* expression `c` was takes as a pivot instead
+of `a + b`.
 
-	{{d + a ** d + b ** e, 2 + 2 a + 3 b}, 
-	 {e + c ** d + d ** e, 3 + 2 c + 3 d}}
+The function `NCLUDecompositionWithPartialPivoting` is the one that is
+used by `NCInverse`.
 
-that is returned by 
+Another factorization algorithm is
+[`NCLUDecompositionWithCompletePivoting`](#NCLUDecompositionWithCompletePivoting),
+which can be used to calculate the symbolic rank of nc matrices. For
+example
 
-	NCMatrixExpand[m1 ** m2] + m2
+	m = {{2 a, 2 b}, {a, b}}
+	{lu, p, q, rank} = NCLUDecompositionWithCompletePivoting[m]
 	
-or
+returns the *left* and *right* permutation lists
 
-	MatMult[m1, m2] + m2
+	p = {2, 1}
+	q = {1, 2}
+	
+and `rank` equal to `1`. The $L$ and $U$ factors can be obtained as
+before using
 
-The reason for this behavior is that `m1**m2` is essentially treated
-as a *scalar* (it does not have `Head` `List`) and therefore gets
-added entrywise to `m2`. We provide the package
-[`Matrix`](#MatrixPackage) that provides a solution to this problem
-with some caveats.
+	{l, u} = GetLUMatrices[lu]
+	
+to get
 
-The inverse opearator `inv` also works on matrices. As with `**`,
-`inv` of matrices is held unevaluated and gets expanded using
-`NCMatrixExpand`. For instance
+	l = {{1, 0}, {2, 1}}
+	u = {{a, b}, {0, 0}}
+
+in this case.
+	
+Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the
+$LDL^T$ decomposition of symmetric symbolic nc matrices. For example
+
+	m = {{a, b}, {b, c}}
+	{ldl, p, s, rank} = NCLDLDecomposition[m]
+	
+returns `ldl`, which contain the factors, and
+
+	p = {1, 2}
+	s = {1, 1}
+	rank = 2
+	
+The list `p` encodes left and right permutations, `s` is a list
+specifying the size of the diagonal blocks (entries can be either 1 or
+2). The factors can be obtained using
+[`GetLDUMatrices`](#GetLDUMatrices) as in
+
+	{l, d, u} = GetLDUMatrices[ldl, s]
+	
+which in this case returns
+
+	l = {{1, 0}, {b**inv[a], 1}}
+	d = {{a, 0}, {0, c - b**inv[a]**b}}
+	u = {{1, inv[a]**b}, {0, 1}}}
+
+`NCLDLDecomposition` works only on symmetric matrices and, whenever
+possible, will make assumptions on variables so that it can run
+successfully.
+
+## New Matrix Features in Version 5
+
+Starting at **Version 5** the operators `**` and `inv` apply also to
+matrices. However, in order for `**` and `inv` to continue to work as
+full fledged operators, the result of multiplications or inverses of
+matrices is held unevaluated until the user calls
+[`NCMatrixExpand`](#NCMatrixExpand).
+
+For example, with
+
+	m1 = {{a, b}, {c, d}}
+	m2 = {{d, 2}, {e, 3}}
+	
+the call
+
+	m1**m2
+
+results in 
+
+	{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
+
+Upon calling
+
+	m1**m2 // NCMatrixExpand
+
+evaluation takes place returning
+
+	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
+	
+Likewise
+
+	inv[m1]
+
+results in
+
+	inv[{{a, b}, {c, d}}]
+
+and
 
 	inv[m1] // NCMatrixExpand
-
-returns
+	
+returns the evaluated result
 
 	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
 	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
@@ -580,132 +721,87 @@ results in
 	
 and finally 
 
-	NCMatrixaExpand[m3] // NCSimplifyRational	
+	NCMatrixExpand[m3] // NCSimplifyRational	
 	
 returns
 
 	{{0, 0}, {0, 0}}
 	
 as expected.
-		
-Just as with `**` and `MatMult`, `inv` has its matrix counterpart,
-`NCInverse`, which evaluates in one step. Note that the difference
-between `NCInverse` and `inv` is not only cosmetic. Evaluating `**`
-and `inv` can prevent useful simplifications from taking place. For
-instance,
 
-	inv[{{a, b}, {c, d}}]**{{a, b}, {c, d}}
+**WARNING:** Mathematica's choice of treating lists and matrix
+indistinctively can cause much trouble when mixing `**` with `Plus`
+(`+`) operator. For example, the expression
+
+	m1**m2 + m2**m1
 	
-returns a reassuring `1` whereas
+results in
 
-	NCInverse[{{a, b}, {c, d}}]**{{a, b}, {c, d}}
+	{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
 	
-evaluates to
-
-	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
-	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}**{{a, b}, {c, d}}
-
-Once again be careful when adding matrix expressions that need expansion!
-
-Behind `NCInverse` there are a host of linear algebra algorithms which
-are implemented in the package:
-
-* [`NCMatrixDecompositions`](#PackageNCMatrixDecompositions):
-implements versions of the $LU$ Decomposition with partial and
-complete pivoting, as well as $LDL$ Decomposition which are suitable
-for calculations with nc matrices. Those functions are based on the
-templated algorithms from the package
-[`MatrixDecompositions`](#PackageMatrixDecompositions).
-
-For instance the function
-[`NCLUDecompositionWithPartialPivoting`](#NCLUDecompositionWithPartialPivoting)
-can be used as
-
-	m = {{a, b}, {c, d}}
-	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
+and 
 	
-which returns
-
-	lu = {{a, b}, {c ** inv[a], d - c ** inv[a] ** b}}
-	p = {1, 2}
-
-The list `p` encodes the sequence of permutations calculated during
-the execution of the algorithm. The matrix `lu` contains the factors
-$L$ and $U$. These can be recovered using
-
-	{l, u} = GetLUMatrices[lu]
+	m1**m2 + m2**m1 // NCMatrixExpand
 	
-resulting in this case in
+produces the expected result
 
-	l = {{1, 0}, {c ** inv[a], 1}}
-	u = {{a, b}, {0, d - c ** inv[a] ** b}}
+	{{2 c + a ** d + b ** e + d ** a, 2 a + 3 b + 2 d + d ** b}, 
+	 {3 c + c ** d + d ** e + e ** a, 2 c + 6 d + e ** b}}
+ 
+However, because `**` is held unevaluated, the expression
 
-**Note:** for efficiency the factors `l` and `u` are returned as
-  `SparseArrays`. Use `Normal` to convert to regular arrays if
-  desired.
-  
-The default pivoting strategy privileges simpler expressions. For
-instance,
-
-	m = {{a, b}, {1, d}}
-	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
-	{l, u} = GetLUMatrices[lu]
+	m1**m2 + m2 // NCMatrixExpand
 	
-results in the factors
-
-	l = {{1, 0}, {a, 1}}
-	u = {{1, d}, {0, b - a ** d}}
-	
-and a permutation list 
-
-	p = {2, 1}
-	
-which indicates that the number `1`, appearing in the second row, was
-used as the pivot rather than the symbol `a` appearing on the first
-row. Likewise
-
-	m = {{a + b, b}, {c, d}}
-	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
-	{l, u} = GetLUMatrices[lu]
-
 returns
 
-	p = {2, 1}
-	l = {{1, 0}, {(a + b) ** inv[c], 1}} 
-	u = {{c, d}, {0, b - (a + b) ** inv[c] ** d}}
+	{{{{d + a ** d + b ** e, 2 a + 3 b + d}, {d + c ** d + d ** e, 2 c + 4 d}},
+	 {{2 + a ** d + b ** e, 2 + 2 a + 3 b}, {2 + c ** d + d ** e, 2 + 2 c + 3 d}}}, 
+	 {{{e + a ** d + b ** e, 2 a + 3 b + e}, {e + c ** d + d ** e, 2 c + 3 d + e}}, 
+	 {{3 + a ** d + b ** e, 3 + 2 a + 3 b}, {3 + c ** d + d ** e, 3 + 2 c + 3 d}}}}
 
-showing that the *simpler* expression `c` was takes as a pivot instead
-of `a + b`.
+which is different than
 
-The function `NCLUDecompositionWithPartialPivoting` is the one that is
-used by `NCInverse`.
+	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+	 {e + c**d + d**e, 3 + 2 c + 3 d}}
 
-Another factorization algorithm is
-[`NCLUDecompositionWithCompletePivoting`](#NCLUDecompositionWithCompletePivoting),
-which can be used to calculate the symbolic rank of nc matrices. For
-example
+which is returned by either
 
-	m = {{2 a, 2 b}, {a, b}}
-	{lu, p, q, rank} = NCLUDecompositionWithCompletePivoting[m]
+	NCMatrixExpand[m1**m2] + m2
 	
-returns the *left* and *right* permutation lists
+or
 
-	p = {2, 1}
-	q = {1, 2}
+	MatMult[m1, m2] + m2
+
+The reason for this behavior is that `m1**m2` is essentially treated
+as a *scalar* (it does not have *head* `List`) and therefore gets
+added entrywise to `m2` *before* `NCMatrixExpand` has a chance to
+evaluate the `**` product. There are no easy fixes for this problem,
+which affects not only `NCAlgebra` but any similar type of matrix
+product evaluation in Mathematica.
+
+Within `NCAlgebra`, thanks to the new operator nature of `**` and
+`inv`, a better option is to use
+[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) or
+[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated), which are
+special versions of [`NCReplaceAll`](#NCReplaceAll) or
+[`NCReplaceRepeated`](#NCReplaceRepeated) that take extra steps to
+preserve matrix consistency when replacing expressions with nc
+matrices. For example
+
+	NCMatrixReplaceAll[x ** y + y, {x -> m1, y -> m2}]
 	
-and `rank` equal to `1`. The $L$ and $U$ factors can be obtained as
-before using
+does produce the expected result
 
-	{l, u} = GetLUMatrices[lu]
-	
-to get
+	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+	 {e + c**d + d**e, 3 + 2 c + 3 d}}
 
-	l = {{1, 0}, {2, 1}}
-	u = {{a, b}, {0, 0}}
+[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) and
+[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated) also work with
+block matrices. For example
 
-in this case.
-	
-Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the
-$LDL^T$ decomposition of symmetric symbolic nc matrices.
+	rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}}
+	NCMatrixReplaceRepeated[inv[z], rule]
 
-?? EXAMPLE TO FOLLOW ??
+coincides with the result of
+
+	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]

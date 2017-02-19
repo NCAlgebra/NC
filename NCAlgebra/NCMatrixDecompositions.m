@@ -58,8 +58,9 @@ Options[NCLDLDecomposition] = {
 Begin[ "`Private`" ]
 
   (* NCInverse *)
-  NCInverse = NCLUInverse;
-
+  NCInverse[x_?MatrixQ] := NCLUInverse[x];
+  NCInverse[x_] := inv[x];
+  
   (* NC Divide *)
   NCRightDivide[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
   NCLeftDivide[x_, y_] := Map[NonCommutativeMultiply[inv[x], #]&, y];

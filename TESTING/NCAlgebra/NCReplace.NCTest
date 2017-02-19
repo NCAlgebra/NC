@@ -2,10 +2,11 @@
 
 Module[
      {rule, expr, answer, 
-      a,b,c,d,e, K},
+      a,b,c,d,e,K,x,y,z,
+      id,m1,m2,m3},
 
      SetCommutative[K];
-     SetNonCommutative[a,b,c,d,e];
+     SetNonCommutative[a,b,c,d,e,m1,m2,m3,x,y,z,id];
 
      rule = a -> b;
 
@@ -140,5 +141,93 @@ Module[
      answer = {{a -> b, aj[a] -> aj[b], c -> d, aj[c] -> aj[d]},
                {a -> -b, aj[a] -> -aj[b], c -> 2d, aj[c] -> 2aj[d]}};
      NCTest[NCMakeRuleSelfAdjoint[rule], answer];
+
+     (* NCMatrixReplaceAll *)
+     
+     m1 = {{a,b},{c,d}};
+     m2 = {{b,a},{d,e}};
+     rule = {x -> m1, y -> m2, id -> IdentityMatrix[2]};
+
+     answer = MatMult[m1, m2] + m2;
+     expr = NCMatrixReplaceAll[x ** y + y, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[x ** y + y, rule];
+     NCTest[expr, answer];
+
+     answer = MatMult[m1, tp[m2]] + m2;
+     expr = NCMatrixReplaceAll[x ** tp[y] + y, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[x ** tp[y] + y, rule];
+     NCTest[expr, answer];
+
+     answer = MatMult[NCInverse[m1], m2] + m2;
+     expr = NCMatrixReplaceAll[inv[x] ** y + y, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[inv[x] ** y + y, rule];
+     NCTest[expr, answer];
+
+     answer = MatMult[m1, NCInverse[IdentityMatrix[2] + m1]] - 
+              MatMult[NCInverse[IdentityMatrix[2] + m1], m1];
+     expr = NCMatrixReplaceAll[x ** inv[id + x] - inv[id + x] ** x, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[x ** inv[id + x] - inv[id + x] ** x, rule];
+     NCTest[expr, answer];
+
+     answer = MatMult[m1, NCInverse[1 + m1]] + m1;
+     expr = NCMatrixReplaceAll[x ** inv[1 + x] + x, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[x ** inv[1 + x] + x, rule];
+     NCTest[expr, answer];
+
+     answer = MatMult[m1, NCInverse[IdentityMatrix[2] + m1]] + m1;
+     expr = NCMatrixReplaceAll[x ** inv[id + x] + x, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[x ** inv[id + x] + x, rule];
+     NCTest[expr, answer];
+
+     answer = IdentityMatrix[2] + NCInverse[m1];
+     expr = NCMatrixReplaceAll[id + inv[x], rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[id + inv[x], rule];
+     NCTest[expr, answer];
+
+     answer = IdentityMatrix[2] + NCInverse[IdentityMatrix[2] + m1];
+     expr = NCMatrixReplaceAll[id + inv[id + x], rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[id + inv[id + x], rule];
+     NCTest[expr, answer];
+
+     answer = IdentityMatrix[2] + NCInverse[IdentityMatrix[2] + NCInverse[IdentityMatrix[2] + m1]];
+     expr = NCMatrixReplaceAll[id + inv[id + inv[id + x]], rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[id + inv[id + inv[id + x]], rule];
+     NCTest[expr, answer];
+
+     answer = ArrayFlatten[{{IdentityMatrix[2], m1},{m1,IdentityMatrix[2]}}];
+     expr = NCMatrixReplaceAll[{{id, x}, {x, id}}, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[{{id, x}, {x, id}}, rule];
+     NCTest[expr, answer];
+
+     answer = NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1},{m1,IdentityMatrix[2]}}]];
+     expr = NCMatrixReplaceAll[inv[{{id, x}, {x, id}}], rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[inv[{{id, x}, {x, id}}], rule];
+     NCTest[expr, answer];
+
+     answer = NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1},{m1,IdentityMatrix[2]}}]];
+     expr = NCMatrixReplaceAll[inv[{{id, x}, {x, id}}], rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[inv[{{id, x}, {x, id}}], rule];
+     NCTest[expr, answer];
+
+     rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}};
+     answer = NCInverse[{{id,x},{x,id}}];
+     expr = NCMatrixReplaceAll[inv[z], rule];
+     NCTest[expr, answer];
+
+     answer = NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1},{m1,IdentityMatrix[2]}}]];
+     expr = NCMatrixReplaceRepeated[inv[z], rule];
+     NCTest[expr, answer];
 
 ];

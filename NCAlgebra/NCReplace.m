@@ -16,31 +16,27 @@
 *)
 
 BeginPackage[ "NCReplace`", 
+              "NCMatMult`",
               "NonCommutativeMultiply`" ];
 
 Clear[NCReplace, NCReplaceAll, 
       NCReplaceRepeated, NCReplaceList,
-      NCMakeRuleSymmetric, NCMakeRuleSelfAdjoint];
+      NCMakeRuleSymmetric, NCMakeRuleSelfAdjoint,
+      NCMatrixReplaceAll, NCMatrixReplaceRepeated];
 
 Begin["`Private`"]
 
   Clear[FlatNCMultiply];
   SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
 
-  Clear[FlatMatMult];
-  FlatMatMult[x_,y_] := Inner[FlatNonCommutativeMultiply,x,y,Plus];
-  FlatMatMult[x_,y_,z__] := FlatMatMult[FlatMatMult[x,y],z];
- 
   Clear[NCReplaceFlatRules];
   NCReplaceFlatRules = {
-      NonCommutativeMultiply -> FlatNCMultiply,
-      MatMult -> FlatMatMult
+      NonCommutativeMultiply -> FlatNCMultiply
   };
 
   Clear[NCReplaceReverseFlatRules];
   NCReplaceReverseFlatRules = {
-      FlatNCMultiply -> NonCommutativeMultiply,
-      FlatMatMult -> MatMult
+      FlatNCMultiply -> NonCommutativeMultiply
   };
 
   NCReplace[expr_, rule_] := 
@@ -80,7 +76,6 @@ Begin["`Private`"]
                   /. NCReplaceFlatRules),
                 n])
         /. NCReplaceReverseFlatRules);
-
         
   (* NCMakeRuleSymmetric *)
   (* Adapted from http://mathematica.stackexchange.com/questions/31238/how-to-combine-elements-of-two-matrices *)
@@ -98,9 +93,73 @@ Begin["`Private`"]
   NCMakeRuleSelfAdjoint[rules_List] := 
     Function[Null, ##, Listable][rules, 
        Function[Null, Map[aj, ##], Listable][rules]];
+
+  (* NCMatrixReplaceAll *)
   
-        
+  Clear[FlatNCPlus];
+  SetAttributes[FlatNCPlus, {Orderless, OneIdentity}];
+  FlatNCPlus[x_,y_] := (Plus @@ {x,y} /; 
+     And[Not[MatchQ[x, _. (_NonCommutativeMultiply|_FlatNCMultiply|_inv)]],
+         Not[MatchQ[y, _. (_NonCommutativeMultiply|_FlatNCMultiply|_inv)]]]);
+
+  Clear[FlatMatrix];
+     
+  Clear[NCMatrixReplaceReverseFlatPlusRules];
+  NCMatrixReplaceReverseFlatPlusRules = {
+      FlatNCPlus[x_?MatrixQ,y_?MatrixQ] :> 
+        Plus @@ {x,y},
+      inv -> NCInverse
+  };
+      
+  Clear[NCMatrixReplaceFlatRules];
+  NCMatrixReplaceFlatRules = {
+      NonCommutativeMultiply -> FlatNCMultiply,
+      Plus -> FlatNCPlus,
+      x_?MatrixQ :> FlatMatrix[x]
+  };
+
+  Clear[NCMatrixReplaceReverseFlatRules];
+  NCMatrixReplaceReverseFlatRules = {
+      FlatNCMultiply -> NonCommutativeMultiply,
+      FlatMatrix -> ArrayFlatten
+  };
+
+  (*
+  NCMatrixReplaceAll[expr_, rule_] := Module[
+    {tmp},
+
+    tmp = ({expr, rule} 
+             /. NCMatrixReplaceFlatRules);
+
+    Print["tmp0 = ", tmp];
+      
+    tmp = (ReplaceAll @@ 
+            ({expr, rule} 
+             /. NCMatrixReplaceFlatRules))
+               /. NCMatrixReplaceReverseFlatRules;
+
+    Print["tmp1 = ", tmp];
+      
+    tmp = NCMatrixExpand[tmp];
+      
+    Print["tmp2 = ", tmp];
+      
+    Return[tmp /. FlatNCPlus -> Plus];
+  ];
+  *)
+
+  NCMatrixReplaceAll[expr_, rule_] := NCMatrixExpand[
+      (ReplaceAll @@ 
+            ({expr, rule} 
+             /. NCMatrixReplaceFlatRules))
+               /. NCMatrixReplaceReverseFlatRules] /. FlatNCPlus -> Plus;
+
+  NCMatrixReplaceRepeated[expr_, rule_] := NCMatrixExpand[
+      (ReplaceRepeated @@ 
+            ({expr, rule} 
+             /. NCMatrixReplaceFlatRules))
+               /. NCMatrixReplaceReverseFlatRules] /. FlatNCPlus -> Plus;
+  
 End[];
 
 EndPackage[];
-
