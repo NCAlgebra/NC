@@ -12,6 +12,8 @@ Members are:
 * [NCReplaceRepeated](#NCReplaceRepeated)
 * [NCMakeRuleSymmetric](#NCMakeRuleSymmetric)
 * [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint)
+* [NCMatrixReplaceAll](#NCMatrixReplaceAll)
+* [NCMatrixReplaceRepeated](#NCMatrixReplaceRepeated)
 
 ### NCReplace {#NCReplace}
 
@@ -58,3 +60,23 @@ See also:
 
 See also:
 [NCMakeRuleSymmetric](#NCMakeRuleSymmetric), [NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList), [NCReplaceRepeated](#NCReplaceRepeated).
+
+### NCMatrixReplaceAll {#NCMatrixReplaceAll}
+
+`NCMatrixReplaceAll[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform each part of the nc expression `expr`.
+
+`NCMatrixReplaceAll` works as `NCReplaceAll` but takes extra steps to
+make sure substitutions work with matrices.
+
+See also:
+[NCReplaceAll](#NCReplaceAll), [NCMatrixReplaceRepeated](#NCMatrixReplaceRepeated).
+
+### NCMatrixReplaceRepeated {#NCMatrixReplaceRepeated}
+
+`NCMatrixReplaceRepeated[expr,rules]` repeatedly performs replacements using rule or list of rules `rules` until `expr` no longer changes.
+
+`NCMatrixReplaceRepeated` works as `NCReplaceRepeated` but takes extra steps to
+make sure substitutions work with matrices.
+
+See also:
+[NCReplaceRepeated](#NCReplaceRepeated), [NCMatrixReplaceAll](#NCMatrixReplaceAll).
