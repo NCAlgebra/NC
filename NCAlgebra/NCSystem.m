@@ -19,7 +19,7 @@
 
 
 BeginPackage[ "NCSystem`",
-	      "NCMatMult`",
+	      "NCDot`",
 	      "NCMatrixDecompositions`",
 	      "MatrixDecompositions`",
 	      "NCUtil`",

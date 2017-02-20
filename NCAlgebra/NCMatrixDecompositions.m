@@ -15,7 +15,7 @@
 BeginPackage[ "NCMatrixDecompositions`",
               "MatrixDecompositions`",
               "NCSelfAdjoint`",
-              "NCMatMult`",
+              "NCDot`",
               "NCUtil`",
               "NonCommutativeMultiply`"];
 

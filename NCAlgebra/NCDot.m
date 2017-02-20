@@ -17,7 +17,7 @@
 *)
 
 
-BeginPackage["NCMatMult`",
+BeginPackage["NCDot`",
              "NCReplace`",
              "NonCommutativeMultiply`"];
 

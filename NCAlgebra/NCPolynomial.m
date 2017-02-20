@@ -13,7 +13,7 @@
 (* :History: *)
 
 BeginPackage[ "NCPolynomial`",
-              "NCMatMult`",
+              "NCDot`",
               "NCUtil`",
               "NCPolyInterface`",
 	      "NonCommutativeMultiply`" ];

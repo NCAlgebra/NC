@@ -7,7 +7,7 @@ FILES = NonCommutativeMultiply.usage \
 	NCReplace.usage \
 	NCSelfAdjoint.usage \
 	NCOutput.usage \
-	NCMatMult.usage \
+	NCDot.usage \
 	NCPolynomial.usage \
 	NCSylvester.usage \
 	NCQuadratic.usage \

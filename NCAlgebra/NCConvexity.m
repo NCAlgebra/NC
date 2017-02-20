@@ -24,7 +24,7 @@ BeginPackage["NCConvexity`",
              "NCLinearAlgebra`",
 	     "NCSimplifyRational`",
              "NCDiff`",
-             "NCMatMult`",
+             "NCDot`",
              "NCUtil`",
              "NCDeprecated`",
              "NonCommutativeMultiply`"];

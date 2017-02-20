@@ -15,7 +15,7 @@
 BeginPackage[ "NCSylvester`",
 	      "NCPolynomial`",
 	      "MatrixDecompositions`",
-	      "NCMatMult`",
+	      "NCDot`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCPolynomialToNCSylvester,

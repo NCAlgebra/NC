@@ -19,7 +19,7 @@
 BeginPackage[ "NCSelfAdjoint`",
               "NCOptions`",
               "NonCommutativeMultiply`",
-              "NCMatMult`",
+              "NCDot`",
               "NCUtil`" ]
 
 Clear[NCSymmetricQ, NCSymmetricTest, NCSymmetricPart,

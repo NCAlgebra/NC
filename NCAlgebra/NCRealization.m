@@ -33,7 +33,7 @@ Noncommutative Convexity Arises From Linear Matrix Inequalities
 BeginPackage["NCRealization`", 
              "NCSystem`",
 	     "MatrixDecompositions`",
-	     "NCMatMult`",
+	     "NCDot`",
              "NCUtil`",
 	     "NCLinearAlgebra`",
              "NonCommutativeMultiply`"];

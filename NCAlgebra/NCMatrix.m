@@ -17,7 +17,7 @@
 BeginPackage[ 
 	        "NCMatrix`",
 	        "Matrix`",
-	        "NCMatMult`",
+	        "NCDot`",
 	        "NCReplace`",
 (*              "NCCollectOnVariables`", *)
                 "NCCollect`",
@@ -55,7 +55,7 @@ Begin["`Private`"];
 
   co[x_Matrix] ^:= Map[co,x,{2}];
 
-  inv[x_Matrix] ^:= Matrix[NCMatMult`NCInverse[MatrixToList[x]]]
+  inv[x_Matrix] ^:= Matrix[NCDot`NCInverse[MatrixToList[x]]]
 
   NCCollect`NCCollect[x_Matrix,varlist_] ^:= Map[(NCCollect`NCCollect[#,varlist])&,x,{2}]
 

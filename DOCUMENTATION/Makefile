@@ -41,7 +41,7 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCSimplifyRational.md \
 	 NCAlgebra/NCDiff.md \
          MANUAL/MatrixPackages.md \
-	 NCAlgebra/NCMatMult.md \
+	 NCAlgebra/NCDot.md \
          NCAlgebra/NCMatrixDecompositions.md \
          NCAlgebra/MatrixDecompositions.md \
          MANUAL/Output.md \

@@ -17,7 +17,7 @@ BeginPackage[ "NCRational`",
               "NCPoly`",
               "NCGBX`",
 	      "MatrixDecompositions`",
-	      "NCMatMult`",
+	      "NCDot`",
               "NCUtil`",
 	      "NCOptions`",
 	      "NonCommutativeMultiply`" ];

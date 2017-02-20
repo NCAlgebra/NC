@@ -23,7 +23,7 @@ tests = {
   "NCCollect",
   "NCInverse",
   "NCDiff",
-  "NCMatMult",
+  "NCDot",
   "NCRoots",
   "NCConjugate",
   "NCOutput",

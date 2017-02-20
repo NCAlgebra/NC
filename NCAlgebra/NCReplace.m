@@ -16,7 +16,7 @@
 *)
 
 BeginPackage[ "NCReplace`", 
-              "NCMatMult`",
+              "NCDot`",
               "NonCommutativeMultiply`" ];
 
 Clear[NCReplace, NCReplaceAll, 

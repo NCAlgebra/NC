@@ -20,7 +20,7 @@ BeginPackage[ "NCSDP`",
               "NCSylvester`",
 	      "PrimalDual`",
 	      "NCDebug`",
-	      "NCMatMult`",
+	      "NCDot`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCSDP,NCSDPDual,NCSDPForm,NCSDPDualForm];
