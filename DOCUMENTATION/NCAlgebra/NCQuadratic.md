@@ -71,7 +71,7 @@ returns:
 	right={x,x**z}
 
 The answer from `NCMatrixOfQuadratics` always satisfies `p =
-MatMult[left,middle,right]`.
+NCDot[left,middle,right]`.
 
 See also:
 [NCQuadratic](#NCQuadratic), [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).

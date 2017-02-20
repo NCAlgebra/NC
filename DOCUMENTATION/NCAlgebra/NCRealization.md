@@ -28,7 +28,7 @@ Members are:
 
 ### NCDescriptorRealization {#NCDescriptorRealization}
 
-`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that $C G^{-1} B$ is the given `RationalExpression`. i.e. `MatMult[C,NCInverse[G],B] === RationalExpression`.
+`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that $C G^{-1} B$ is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] === RationalExpression`.
 
 `C` and `B` do not contain any `UnknownsVariables` and `G` has linear entries
 in the `UnknownVariables`.
@@ -44,7 +44,7 @@ in the `UnknownVariables`.
 
 ### NCMinimalDescriptorRealization {#NCMinimalDescriptorRealization}
 
-`NCMinimalDescriptorRealization[RationalFunction,UnknownVariables]` returns `{C,G,B}` where `MatMult[C,NCInverse[G],B] == RationalFunction`, `G` is linear in the `UnknownVariables`, and the realization is minimal (may be pinned).
+`NCMinimalDescriptorRealization[RationalFunction,UnknownVariables]` returns `{C,G,B}` where `NCDot[C,NCInverse[G],B] == RationalFunction`, `G` is linear in the `UnknownVariables`, and the realization is minimal (may be pinned).
 
 ### NCSymmetricDescriptorRealization {#NCSymmetricDescriptorRealization}
 

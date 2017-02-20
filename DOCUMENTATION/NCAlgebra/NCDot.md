@@ -1,13 +1,14 @@
-## NCMatMult {#PackageNCMatMult}
+## NCDot {#PackageNCDot}
 
 Members are:
 
 * [tpMat](#tpMat)
 * [ajMat](#ajMat)
 * [coMat](#coMat)
-* [MatMult](#MatMult)
+* [NCDot](#NCDot)
 * [NCInverse](#NCInverse)
 * [NCMatrixExpand](#NCMatrixExpand)
+* [MatMult](#MatMult)
 
 ### tpMat {#tpMat}
 
@@ -30,9 +31,18 @@ See also:
 See also:
 [tpMat](#tpMat), [ajMat](#coMat), [MatMult](#MatMult).
 
+### NCDot {#NCDot}
+
+`NCDot[mat1, mat2, ...]` gives the matrix multiplication of `mat1`, `mat2`, ... using `NonCommutativeMultiply` rather than `Times`.
+
+See also:
+[tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).
+
 ### MatMult {#MatMult}
 
 `MatMult[mat1, mat2, ...]` gives the matrix multiplication of `mat1`, `mat2`, ... using `NonCommutativeMultiply` rather than `Times`.
+
+`MatMult` is being deprecated and has been replaced by [`NCDot`](#NCDot).
 
 See also:
 [tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).

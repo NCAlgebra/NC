@@ -29,7 +29,7 @@ Private members are:
 
 ## CGBMatrixToBigCGB {#CGBMatrixToBigCGB}
 `CGBMatrixToBigCGB[MatrixOfCGB]` returns a list of 3 matrices `{C, G, B}` such
- that `NCMatMult[C, NCInverse[G], B]` is the original matrix that the `MatrixOfCGB` was derived from.
+ that `MatMult[C, NCInverse[G], B]` is the original matrix that the `MatrixOfCGB` was derived from.
 
 ## CGBToPencil {#CGBToPencil}
 `CGBToPencil[CGB]` takes the list of 3 matrices returned by `NCDescriptorRealization` and returns a matrix with linear entries which has a Schur Complement equivalent to the rational expression that the CGB realization represents.
