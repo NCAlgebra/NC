@@ -1,4 +1,4 @@
-# NonCommutative Gröbner Basis {#NCGB}
+# Noncommutative Gröbner Basis {#NCGB}
 
 The package `NCGBX` provides an implementation of a noncommutative
 Gröbner Basis algorithm. Gröbner Basis are useful in the study of

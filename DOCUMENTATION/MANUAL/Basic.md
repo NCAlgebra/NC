@@ -122,7 +122,7 @@ Similar properties hold to `aj`. Moreover
 	
 return `co[a]` where `co` stands for complex-conjugate. 
 
-**Version 5.0:** transposes (`tp`), adjoints (`aj`), complex
+**Version 5:** transposes (`tp`), adjoints (`aj`), complex
 conjugates (`co`), and inverses (`inv`) in a notebook environment
 render as $x^T$, $x^*$, $\bar{x}$, and $x^{-1}$.
 
@@ -179,7 +179,7 @@ Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
 (`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
 that one rarely uses `NCReplace` and `NCReplaceList`. 	
 
-**Version 5.0:** the commands `Substitute` and `Transform` have been
+**Version 5:** the commands `Substitute` and `Transform` have been
 deprecated in favor of the above nc versions of `Replace`.
 
 ## Polynomials
@@ -457,15 +457,78 @@ returns the nc gradient list
 
     {a**x**b + b**x**a + c**y**d, d**x**c}
 
-**Version 5.0:** introduces experimental support for integration of nc
+**Version 5:** introduces experimental support for integration of nc
 polynomials. See [`NCIntegrate`](#NCIntegrate).
 
 ## Matrices
 
+Matrices are represented in Mathematica using *lists of lists*. For
+example
+
+	m = {{a, b}, {c, d}}
+
+is a representation for the matrix 
+
+$\begin{bmatrix} a & b \\ c & d \end{bmatrix}$
+
+The Mathematica command `MatrixForm` output pretty
+matrices. `MatrixForm[m]` prints `m` in a form similar to the above
+matrix.
+
+The experienced matrix analyst should always remember that the
+Mathematica convention for handling vectors is tricky.
+
+- `{{1, 2, 4}}` is a 1x3 *matrix* or a *row vector*;
+- `{{1}, {2}, {4}}` is a 3x1 *matrix* or a *column vector*;
+- `{1, 2, 4}` is a *vector* but **not** a *matrix*. Indeed whether it
+  is a row or column vector depends on the context. We advise not to
+  use *vectors*.
+
 `NCAlgebra` has many algorithms that handle matrices with
 noncommutative entries. Think block-matrices. 
 
-There are many new improvements with **Version 5.0**. For instance,
+A useful command is [`NCInverse`](#NCInverse), which is akin to
+Mathematica's `Inverse` command and produces a block-matrix inverse
+formula[^inv] for an nc matrix. For example
+
+	NCInverse[m]
+
+returns
+
+	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+
+Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
+calculation.
+
+[^inv]: Contrary to what happens with symbolic inversion of matrices
+with commutative entries, there exist multiple formulas for the
+symbolic inverse of a matrix with noncommutative entries. Furthermore,
+it may be possible that none of such formulas is "correct". Indeed, it
+is easy to construct a matrix `m` with block structure as shown that
+is invertible but for which none of the blocks `a`, `b`, `c`, and `d`
+are invertible. In this case no *correct* formula exists for the
+calculation of the inverse of `m`.
+
+Similarly, one can multiply matrices using [`NCDot`](#NCDot),
+which is similar to Mathematica's `Dot`. For example
+
+	m1 = {{a, b}, {c, d}}
+	m2 = {{d, 2}, {e, 3}}
+	NCDot[m1, m2]
+
+result in 
+
+	{{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}
+
+Note that products of nc symbols appearing in the
+matrices are multiplied using `**`. Compare that with the standard
+`Dot` (`.`) operator.
+
+**WARNING:** `NCDot` replaces `MatMult`, which is still available for
+  backward compatibility but will be deprecated in future releases.
+
+There are many new improvements with **Version 5**. For instance,
 operators `tp`, `aj`, and `co` now operate directly over
 matrices. That is
 
@@ -479,47 +542,8 @@ In previous versions one had to use the special commands `tpMat`,
 `ajMat`, and `coMat`. Those are still supported for backward
 compatibility.
 
-A useful command is [`NCInverse`](#NCInverse), which is akin to
-Mathematica's `Inverse` command and produces a block-matrix inverse
-formula[^inv] for an nc matrix. For example
-
-	m1 = {{a, b}, {c, d}}
-	NCInverse[m1]
-
-returns
-
-	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
-	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
-
-[^inv]: contrary to what happens with symbolic inversion of matrices
-with commutative entries, there exist multiple formulas for the
-symbolic inverse of a matrix with noncommutative entries. Furthermore,
-it may be possible that none of such formulas is "correct". Indeed, it
-is easy to construct a matrix `m1` with block structure as shown that
-is invertible but for which none of the blocks `a`, `b`, `c`, and `d`
-are invertible. In this case no *correct* formula exists for the
-calculation of the inverse of `m1`.
-
-Note that `a` and `d - c**inv[a]**b` were assumed invertible in the
-calculation.
-
-Similarly, one can multiply matrices using [`MatMult`](#MatMult),
-which is similar to Mathematica's `Dot`. For example
-
-	m1 = {{a, b}, {c, d}}
-	m2 = {{d, 2}, {e, 3}}
-	MatMult[m1, m2]
-
-result in 
-
-	{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
-
-Note that products of nc symbols appearing in the
-matrices are multiplied using `**`. Compare that with the standard
-`Dot` (`.`) operator.
-
 Behind `NCInverse` there are a host of linear algebra algorithms which
-are implemented in the package:
+are available in the package:
 
 * [`NCMatrixDecompositions`](#PackageNCMatrixDecompositions):
 implements versions of the $LU$ Decomposition with partial and
@@ -551,6 +575,12 @@ resulting in this case in
 	l = {{1, 0}, {c**inv[a], 1}}
 	u = {{a, b}, {0, d - c**inv[a]**b}}
 
+Verify that 
+
+	m - NCDot[l, u]
+	
+returns a zero matrix because $M = L U$.
+
 **Note:** for efficiency the factors `l` and `u` are returned as
   `SparseArrays`. Use `Normal` to convert to regular arrays if
   desired.
@@ -573,7 +603,13 @@ and a permutation list
 	
 which indicates that the number `1`, appearing in the second row, was
 used as the pivot rather than the symbol `a` appearing on the first
-row. Likewise
+row. Because of the permutation, verify that 
+
+    m[[p]] - NCDot[l, u]
+	
+returns a zero matrix because $P M = L U$. Note that the permutation
+matrix $P$ is never constructed. Instead, the rows of $M$ are permuted
+using Mathematica's `Part` (`[[]]`). Likewise
 
 	m = {{a + b, b}, {c, d}}
 	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
@@ -645,163 +681,6 @@ which in this case returns
 possible, will make assumptions on variables so that it can run
 successfully.
 
-## New Matrix Features in Version 5
+**WARNING:** Versions prior to 5 contained a `NCLDUDecomposition` with
+a slightly different syntax which is being deprecated in **Version 5**.
 
-Starting at **Version 5** the operators `**` and `inv` apply also to
-matrices. However, in order for `**` and `inv` to continue to work as
-full fledged operators, the result of multiplications or inverses of
-matrices is held unevaluated until the user calls
-[`NCMatrixExpand`](#NCMatrixExpand).
-
-For example, with
-
-	m1 = {{a, b}, {c, d}}
-	m2 = {{d, 2}, {e, 3}}
-	
-the call
-
-	m1**m2
-
-results in 
-
-	{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
-
-Upon calling
-
-	m1**m2 // NCMatrixExpand
-
-evaluation takes place returning
-
-	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
-	
-Likewise
-
-	inv[m1]
-
-results in
-
-	inv[{{a, b}, {c, d}}]
-
-and
-
-	inv[m1] // NCMatrixExpand
-	
-returns the evaluated result
-
-	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
-	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
-
-A less trivial example is
-
-	m3 = m1**inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1]**m1
-
-that returns 
-
-	-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
-	    {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]
-
-Expanding
-
-	NCMatrixExpand[m3]
-
-results in
-
-	{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
-	    (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
-	    (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
-	  a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
-	    inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
-		b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
-		(1 + a)**inv[c]**(1 + d)]** b}, 
-	 {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
-	    inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
-	  1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
-	    a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
-		inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}
-	
-and finally 
-
-	NCMatrixExpand[m3] // NCSimplifyRational	
-	
-returns
-
-	{{0, 0}, {0, 0}}
-	
-as expected.
-
-**WARNING:** Mathematica's choice of treating lists and matrix
-indistinctively can cause much trouble when mixing `**` with `Plus`
-(`+`) operator. For example, the expression
-
-	m1**m2 + m2**m1
-	
-results in
-
-	{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
-	
-and 
-	
-	m1**m2 + m2**m1 // NCMatrixExpand
-	
-produces the expected result
-
-	{{2 c + a ** d + b ** e + d ** a, 2 a + 3 b + 2 d + d ** b}, 
-	 {3 c + c ** d + d ** e + e ** a, 2 c + 6 d + e ** b}}
- 
-However, because `**` is held unevaluated, the expression
-
-	m1**m2 + m2 // NCMatrixExpand
-	
-returns
-
-	{{{{d + a ** d + b ** e, 2 a + 3 b + d}, {d + c ** d + d ** e, 2 c + 4 d}},
-	 {{2 + a ** d + b ** e, 2 + 2 a + 3 b}, {2 + c ** d + d ** e, 2 + 2 c + 3 d}}}, 
-	 {{{e + a ** d + b ** e, 2 a + 3 b + e}, {e + c ** d + d ** e, 2 c + 3 d + e}}, 
-	 {{3 + a ** d + b ** e, 3 + 2 a + 3 b}, {3 + c ** d + d ** e, 3 + 2 c + 3 d}}}}
-
-which is different than
-
-	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
-	 {e + c**d + d**e, 3 + 2 c + 3 d}}
-
-which is returned by either
-
-	NCMatrixExpand[m1**m2] + m2
-	
-or
-
-	MatMult[m1, m2] + m2
-
-The reason for this behavior is that `m1**m2` is essentially treated
-as a *scalar* (it does not have *head* `List`) and therefore gets
-added entrywise to `m2` *before* `NCMatrixExpand` has a chance to
-evaluate the `**` product. There are no easy fixes for this problem,
-which affects not only `NCAlgebra` but any similar type of matrix
-product evaluation in Mathematica.
-
-Within `NCAlgebra`, thanks to the new operator nature of `**` and
-`inv`, a better option is to use
-[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) or
-[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated), which are
-special versions of [`NCReplaceAll`](#NCReplaceAll) or
-[`NCReplaceRepeated`](#NCReplaceRepeated) that take extra steps to
-preserve matrix consistency when replacing expressions with nc
-matrices. For example
-
-	NCMatrixReplaceAll[x ** y + y, {x -> m1, y -> m2}]
-	
-does produce the expected result
-
-	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
-	 {e + c**d + d**e, 3 + 2 c + 3 d}}
-
-[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) and
-[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated) also work with
-block matrices. For example
-
-	rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}}
-	NCMatrixReplaceRepeated[inv[z], rule]
-
-coincides with the result of
-
-	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]

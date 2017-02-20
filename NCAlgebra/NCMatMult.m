@@ -21,7 +21,7 @@ BeginPackage["NCMatMult`",
              "NCReplace`",
              "NonCommutativeMultiply`"];
 
-Clear[MatMult,
+Clear[NCDot,MatMult,
       tpMat, ajMat, coMat,
       NCMatrixExpand];
 
@@ -33,12 +33,15 @@ NCInverse::NotMatrix = "The input argument is not a MATRIX.";
 
 Begin["`Private`"];
 
+  (* new dot operator *)
+  MatMult = NCDot;
+
   (* No need to test for matrices *)
-  (* MatMult[x_?MatrixQ, y_?MatrixQ] := 
+  (* NCDot[x_?MatrixQ, y_?MatrixQ] := 
      Inner[NonCommutativeMultiply,x,y,Plus]; *)
       
-  MatMult[x_,y_] := Inner[NonCommutativeMultiply,x,y,Plus];
-  MatMult[x_,y_,z__] := MatMult[MatMult[x,y],z];
+  NCDot[x_,y_] := Inner[NonCommutativeMultiply,x,y,Plus];
+  NCDot[x_,y_,z__] := NCDot[NCDot[x,y],z];
 
   
   (*  tp, aj, and co *)
@@ -54,19 +57,19 @@ Begin["`Private`"];
       NCReplaceRepeated[
           (expr //. inv[a_?MatrixQ] :> NCInverse[a])
          , 
-          NonCommutativeMultiply[b_List, c__List] :>
-               MatMult[b, c]
+          NonCommutativeMultiply[b_?ArrayQ, c__?ArrayQ] :>
+               NCDot[b, c]
 
 (*
       {
           NonCommutativeMultiply[b_List, c__List] :>
-               MatMult[b, c],
+               NCDot[b, c],
           NonCommutativeMultiply[b_List, c_] /; Head[c] =!= List :>
                (* Map[NonCommutativeMultiply[#, c]&, b, {2}], *)
-               MatMult[b, {{c}}],
+               NCDot[b, {{c}}],
           NonCommutativeMultiply[b_, c_List] /; Head[b] =!= List :>
                (* Map[NonCommutativeMultiply[b, #]&, c, {2}] *)
-               MatMult[{{b}}, c]
+               NCDot[{{b}}, c]
       }
 *)
       ];

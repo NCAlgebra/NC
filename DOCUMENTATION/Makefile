@@ -28,6 +28,7 @@ MANUAL = MANUAL/Preamble.md \
 	 MANUAL/Version50.md \
          MANUAL/Running.md \
          MANUAL/Basic.md \
+         MANUAL/Advanced.md \
          MANUAL/NCGB.md \
          MANUAL/SDP.md \
          MANUAL/TeX.md \
