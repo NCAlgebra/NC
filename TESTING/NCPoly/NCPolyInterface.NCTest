@@ -1,8 +1,11 @@
 << NCAlgebra`
+<< NCPoly`
+<< NCPolyInterface`
 
 Block[
   {a,b,c,d,
-  vars,NCExp,PolyExp
+  vars,NCExp,PolyExp,
+  A,B,C
   },
   
   (* Test NCAlgebra interface *)
@@ -182,5 +185,23 @@ Block[
   NCTest[NCPolynomialQ[(x + y)**x - (x - y)^3], True];
 
   NCTest[NCPolynomialQ[x + Exp[x]], False];
+
+  (* ** product *)
+  vars = {{a},{b,c}};
+  A = NCPolyMonomial[{a},vars];
+  B = NCPolyMonomial[{b},vars];
+  C = NCPolyMonomial[{c},vars];
+
+  NCTest[A, NCPolyMonomial[{0}, {1,2}]];
+  NCTest[B, NCPolyMonomial[{1}, {1,2}]];
+  NCTest[C, NCPolyMonomial[{2}, {1,2}]];
+
+  NCTest[A**B, NCToNCPoly[a**b, vars]];
+  NCTest[A**B**C, NCToNCPoly[a**b**c, vars]];
+  NCTest[C**A**B, NCToNCPoly[c**a**b, vars]];
+
+  NCTest[2 A**B, NCToNCPoly[2 a**b, vars]];
+  NCTest[3 A**B**C, NCToNCPoly[3 a**b**c, vars]];
+  NCTest[4 C**A**B, NCToNCPoly[4 c**a**b, vars]];
 
 ];

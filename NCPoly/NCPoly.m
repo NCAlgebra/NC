@@ -97,8 +97,20 @@ Begin["`Private`"];
     NCPolyProduct[NCPolyProduct[r,s], t];
 
   (* NonCommutativeMultiply *)
-  NCPoly /: NonCommutativeMultiply[r_NCPoly, s_NCPoly] := NCPolyProduct[r, s];
+  NCPoly /: NonCommutativeMultiply[left___, 
+                                   r_NCPoly, s_NCPoly, 
+                                   right___] := 
+    NonCommutativeMultiply[left, NCPolyProduct[r, s], right];
+    
+  NCPoly /: NonCommutativeMultiply[r_NCPoly] := r;
 
+  (* Power *)
+  NCPoly /: Power[b_NCPoly, c_Integer?Positive] := 
+    Apply[NCPolyProduct, Table[b, {c}]];
+
+  NCPoly /: Power[b_NCPoly, c_Integer?Negative] := 
+    inv[Apply[NCPolyProduct, Table[b, {-c}]]];
+  
   Clear[QuotientExpand];
   QuotientExpand[ {c_, l_NCPoly, r_NCPoly}, g_NCPoly ] := c * NCPolyProduct[l, g, r];
   QuotientExpand[ {c_, l_,       r_NCPoly}, g_NCPoly ] := c * l * NCPolyProduct[g, r];
@@ -425,7 +437,8 @@ Begin["`Private`"];
   (* Sorting *)
 
   Unprotect[Sort];
-  Sort[{l__NCPoly}] := Part[{l}, Ordering[Map[NCPolyLeadingTerm, {l}]]];
+  (* Sort[{l__NCPoly}] := Part[{l}, Ordering[Map[NCPolyLeadingTerm, {l}]]]; *)
+  Sort[{l__NCPoly}] := Part[{l}, Ordering[Map[NCPolyLeadingMonomial, {l}]]];
   Protect[Sort];
 
   NCPoly /: Greater[l__NCPoly] := 

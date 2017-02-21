@@ -650,7 +650,13 @@ to get
 	l = {{1, 0}, {2, 1}}
 	u = {{a, b}, {0, 0}}
 
-in this case.
+In this case
+
+	NCDot[l, u] - m[[p, q]]
+	
+is the zero matrix because $P M Q = L U$. As with partial pivoting,
+the permutation matrices $P$ and $Q$ are never constructed. Instead we
+used `Part` (`[[]]`) to permute both columns and rows.
 	
 Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the
 $LDL^T$ decomposition of symmetric symbolic nc matrices. For example
@@ -676,6 +682,12 @@ which in this case returns
 	l = {{1, 0}, {b**inv[a], 1}}
 	d = {{a, 0}, {0, c - b**inv[a]**b}}
 	u = {{1, inv[a]**b}, {0, 1}}}
+
+Because $P M P^T = L D L^T$,
+
+	NCDot[l, d, u] - m[[p, p]]
+
+is the zero matrix and $U = L^T$.
 
 `NCLDLDecomposition` works only on symmetric matrices and, whenever
 possible, will make assumptions on variables so that it can run

@@ -1,5 +1,8 @@
 # More Advanced Commands {#MoreAdvancedCommands}
 
+In this chapter we describe some more advance features and
+commands. Most of these were introduced in **Version 5**.
+
 ## Matrices
 
 Starting at **Version 5** the operators `**` and `inv` apply also to
@@ -161,12 +164,166 @@ coincides with the result of
 
 	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
 
+## Polynomials with commutative coefficients
+
+The package [`NCPoly`](#PackageNCPoly) provides an efficient structure
+for storing and operating with noncommutative polynomials with
+commutative coefficients. There are two main goals:
+
+1. *Ordering*: to be able to sort polynomials based on an *ordering*
+   specified by the user. See the chapter
+   [Noncommutative Gröbner Basis](#NCGB) for more details.
+2. *Efficiency*: to efficiently perform polynomial algebra with as
+   little overhead as possible.
+
+Those two properties allow for an efficient implementation of
+`NCAlgebra`'s noncommutative Gröbner basis algorithm without the use
+of auxiliary accelerating `C` code. See
+[Noncommutative Gröbner Basis](#NCGB).
+
+The best way to work with `NCPoly` in `NCAlgebra` is by loading the
+package [`NCPolyInterface`](#PackageNCPolyInterface):
+
+    << NCPolyInterface`
+
+This package provides the commands [`NCToNCPoly`](#NCToNCPoly) and
+[`NCPolyToNC`](#NCPolyToNC) to convert nc expressions back and forth
+between `NCAlgebra` and `NCPoly`. For example
+
+    vars = {{x}, {y, z}};
+	p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
+
+converts the polynomial `1 + x**x - 2 x**y**z` from the standard
+`NCAlgebra` format into an `NCPoly` object. The result in this case is
+the `NCPoly` object
+	
+	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>]
+	
+Conversely the command [`NCPolyToNC`](#NCPolyToNC) converts an
+`NCPoly` back into `NCAlgebra` format. For example
+
+	NCPolyToNC[p, vars]
+	
+returns
+
+	1 + x ** x - 2 x ** y ** z
+	
+as expected. Note that an `NCPoly` object does not store symbols, but
+rather a representation of the polynomial based on specially encoded
+monomials. This is the reason why one should provide `vars` as an
+argument to `NCPolyToNC`.
+
+Alternatively, one could construct the same `NCPoly` object by calling
+`NCPoly` directly as in
+
+	NCPoly[{1, 1, -2}, {{}, {x, x}, {x, y, z}}, vars]
+	
+In this syntax the first argument is a list of *coefficients*, the
+scond argument is a list of *monomials*, and the third is the list of
+*variables*. *Monomials* are given as lists, with `{}` being
+equivalent to a constant `1`. The sequence of braces in the list of
+*variables* encodes the *ordering* to be used for sorting
+`NCPoly`s. We provide the convenience command
+[`NCPolyDisplayOrder`](#NCPolyDisplayOrder) that prints the polynomial
+ordering implied by a list of symbols. In this example
+
+	NCPolyDisplayOrder[vars]
+
+prints out 
+
+$x \ll y < z$
+
+See [Noncommutative Gröbner Basis](#NCGB) for details. 
+
+There is also a special constructor for monomials. For example
+
+	NCPolyMonomial[{y,x}, vars]
+	NCPolyMonomial[{x,y}, vars]
+
+return the monomials corresponding to $y x$ and $x y$.
+
+Operations on `NCPoly` objects result on another `NCPoly` object that
+is always expanded. For example:
+
+	1 + NCPolyMonomial[{x, y}, vars] - 2 NCPolyMonomial[{y, x}, vars]
+
+returns 
+
+	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 1, {1, 1, 3} -> -2|>]
+
+and
+
+	p = (1 + NCPolyMonomial[{x}, vars] ** NCPolyMonomial[{y}, vars])^2
+
+returns
+	
+	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
+
+Another convenience function is `NCPolyDisplay` which returns a list
+with the monomials appearing in an `NCPoly` object. For example:
+
+    NCPolyDisplay[p, vars]
+
+returns
+
+	{x.y.x.y, 2 x.y, 1}
+
+The reason for displaying an `NCPoly` object as a list is so that the
+monomials can appear in the same order as they are stored. Using
+`Plus` would revert to Mathematica's default ordering. For example
+
+	p = NCToNCPoly[1 + x ** x ** x - 2 x ** x + z, vars]
+	NCPolyDisplay[p, vars]
+
+returns
+
+	{z, x.x.x, -2 x.x, 1}
+	
+The monomials appear sorted in decreasing order from left to right,
+with `z` being the *leading term* in the above example.
+
+With `NCPoly` the Mathematica command `Sort` is modified to sort lists
+of polynomials. For example
+
+	polys = NCToNCPoly[{x ** x ** x, 2 y ** x - z, z, y ** x - x ** x}, vars]
+	ColumnForm[NCPolyDisplay[Sort[polys], vars]]
+
+returns
+
+	{x.x.x}
+	{z}
+	{y.x, -x.x}
+	{2 y.x, -z}
+
+`Sort` produces a list of polynomials sorted in *ascending* order
+based on their *leading terms*.
+
+To see how much more efficient `NCPoly` is when compared with standard
+`NCAlgebra` objects try
+
+	Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 20, 5}]
+
+which would typically return something like
+
+	{0.000088, 0.001074, 0.017322, 0.240704, 3.61492, 52.0254}
+
+whereas
+
+	Table[Timing[(1 + NCPolyMonomial[{x}, vars])^i][[1]], {i, 0, 20, 5}]
+
+would return
+
+	{0.00097, 0.001653, 0.002208, 0.003908, 0.004306, 0.005049}
+
+On the other hand, `NCPoly` objects have limited functionality and
+should still be considered experimental at this point.
+
+## Gröbner Basis
+
 ## Polynomials with noncommutative coefficients
 
 ## Quadratics with noncommutative coefficients
 
 ## Linear functions with noncommutative coefficients
-
-## Polynomials with commutative coefficients
 
 ## Algorithms

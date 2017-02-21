@@ -145,32 +145,48 @@ Begin["`Private`"];
   NCPolyLeadingMonomial[{p__NCPoly}, i_Integer:1] := 
     Map[NCPolyLeadingMonomial[#, i]&, {p}];
 
-  NCPolyLeadingMonomial[p_NCPoly, i_Integer:1] := 
-    NCPolyMonomial[NCPolyLeadingTerm[p, i], p[[1]]];
+  NCPolyLeadingMonomial[p_NCPoly] := NCPolyLeadingMonomial[p, 1];
 
+  NCPolyLeadingMonomial[p_NCPoly, 1] := 
+    NCPoly[p[[1]], 
+           KeyTake[p[[2]], {Last[Keys[p[[2]]]]}]];
+
+  NCPolyLeadingMonomial[p_NCPoly, i_Integer] := Block[
+    {key},
+    Quiet[
+      Check[ 
+         key = Part[Keys[p[[2]]],-i];
+         NCPoly[p[[1]], KeyTake[p[[2]], {key}]]
+        ,$Failed
+        ,Part::partw
+      ]
+    ]
+  ];
+    
   NCPolyLeadingTerm[{p__NCPoly}, i_Integer:1] := 
     Map[NCPolyLeadingTerm[#, i]&, {p}];
 
-  NCPolyLeadingTerm[p_NCPoly] := 
-    NCPolyLeadingTerm[p, 1];
+  NCPolyLeadingTerm[p_NCPoly] := NCPolyLeadingTerm[p, 1];
 
-  NCPolyLeadingTerm[p_NCPoly, 1] := Block[{key = Last[Keys[p[[2]]]]},
+  NCPolyLeadingTerm[p_NCPoly, 1] := Block[
+    {key = Last[Keys[p[[2]]]]},
     Rule[
       NCFromDigits[NCIntegerDigits[key, p[[1]]], Plus @@ p[[1]]],
       p[[2]][key]
     ]
   ];
 
-  NCPolyLeadingTerm[p_NCPoly, i_Integer] := Block[{key},
+  NCPolyLeadingTerm[p_NCPoly, i_Integer] := Block[
+    {key},
     Quiet[
       Check[ 
         key = Part[Keys[p[[2]]],-i];
         Rule[
-             NCFromDigits[NCIntegerDigits[key, p[[1]]], Plus @@ p[[1]]]
-            ,p[[2]][key]
+          NCFromDigits[NCIntegerDigits[key, p[[1]]], Plus @@ p[[1]]],
+          p[[2]][key]
         ]
-        ,$Failed
-        ,Part::partw
+       ,$Failed
+       ,Part::partw
       ]
     ]
   ];
