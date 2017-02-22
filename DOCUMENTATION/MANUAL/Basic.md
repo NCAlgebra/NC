@@ -462,8 +462,9 @@ polynomials. See [`NCIntegrate`](#NCIntegrate).
 
 ## Matrices
 
-Matrices are represented in Mathematica using *lists of lists*. For
-example
+`NCAlgebra` has many commands for manipulating matrices with
+noncommutative entries. Think block-matrices. Matrices are
+represented in Mathematica using *lists of lists*. For example
 
 	m = {{a, b}, {c, d}}
 
@@ -483,9 +484,6 @@ Mathematica convention for handling vectors is tricky.
 - `{1, 2, 4}` is a *vector* but **not** a *matrix*. Indeed whether it
   is a row or column vector depends on the context. We advise not to
   use *vectors*.
-
-`NCAlgebra` has many algorithms that handle matrices with
-noncommutative entries. Think block-matrices. 
 
 A useful command is [`NCInverse`](#NCInverse), which is akin to
 Mathematica's `Inverse` command and produces a block-matrix inverse
@@ -575,17 +573,17 @@ resulting in this case in
 	l = {{1, 0}, {c**inv[a], 1}}
 	u = {{a, b}, {0, d - c**inv[a]**b}}
 
-Verify that 
+To verify that $M = L U$ input
 
 	m - NCDot[l, u]
 	
-returns a zero matrix because $M = L U$.
+which should returns a zero matrix.
 
 **Note:** for efficiency the factors `l` and `u` are returned as
-  `SparseArrays`. Use `Normal` to convert to regular arrays if
-  desired.
+  `SparseArrays`. Use `Normal[u]` and `Normal[l]` to convert the
+  `SparseArrays` `l` and `u` to regular matrices if desired.
   
-The default pivoting strategy privileges simpler expressions. For
+The default pivoting strategy prioritizes simpler expressions. For
 instance,
 
 	m = {{a, b}, {1, d}}
@@ -603,13 +601,13 @@ and a permutation list
 	
 which indicates that the number `1`, appearing in the second row, was
 used as the pivot rather than the symbol `a` appearing on the first
-row. Because of the permutation, verify that 
+row. Because of the permutation, to verify that $P M = L U$ input
 
     m[[p]] - NCDot[l, u]
 	
-returns a zero matrix because $P M = L U$. Note that the permutation
-matrix $P$ is never constructed. Instead, the rows of $M$ are permuted
-using Mathematica's `Part` (`[[]]`). Likewise
+which should return a zero matrix. Note that the permutation matrix
+$P$ is never constructed. Instead, the rows of $M$ are permuted using
+Mathematica's `Part` (`[[]]`). Likewise
 
 	m = {{a + b, b}, {c, d}}
 	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
@@ -621,7 +619,7 @@ returns
 	l = {{1, 0}, {(a + b)**inv[c], 1}} 
 	u = {{c, d}, {0, b - (a + b)**inv[c]**d}}
 
-showing that the *simpler* expression `c` was takes as a pivot instead
+showing that the *simpler* expression `c` was taken as a pivot instead
 of `a + b`.
 
 The function `NCLUDecompositionWithPartialPivoting` is the one that is
@@ -650,12 +648,12 @@ to get
 	l = {{1, 0}, {2, 1}}
 	u = {{a, b}, {0, 0}}
 
-In this case
+In this case, to verify that $P M Q = L U$ input
 
 	NCDot[l, u] - m[[p, q]]
 	
-is the zero matrix because $P M Q = L U$. As with partial pivoting,
-the permutation matrices $P$ and $Q$ are never constructed. Instead we
+which should return a zero matrix. As with partial pivoting, the
+permutation matrices $P$ and $Q$ are never constructed. Instead we
 used `Part` (`[[]]`) to permute both columns and rows.
 	
 Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the
@@ -694,5 +692,6 @@ possible, will make assumptions on variables so that it can run
 successfully.
 
 **WARNING:** Versions prior to 5 contained a `NCLDUDecomposition` with
-a slightly different syntax which is being deprecated in **Version 5**.
+a slightly different syntax which, while functional, is being
+deprecated in **Version 5**.
 

@@ -282,6 +282,11 @@ See also:
 
 `NCPPlus[p1,p2,...]` gives the sum of the nc polynomials `p1`,`p2`,... .
 
+#### NCPTimes {#NCPTimes}
+
+`NCPTimes[s,p]` gives the product of a commutative `s` times the
+nc polynomial `p`.
+
 #### NCPSort {#NCPSort}
 
 `NCPSort[p]` gives a list of elements of the NCPolynomial `p` in which monomials are sorted first according to their degree then by Mathematica's implicit ordering.

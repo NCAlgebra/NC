@@ -9,7 +9,8 @@ Starting at **Version 5** the operators `**` and `inv` apply also to
 matrices. However, in order for `**` and `inv` to continue to work as
 full fledged operators, the result of multiplications or inverses of
 matrices is held unevaluated until the user calls
-[`NCMatrixExpand`](#NCMatrixExpand).
+[`NCMatrixExpand`](#NCMatrixExpand). This is in the the same spirit as
+good old fashion commutative operations in Mathematica.
 
 For example, with
 
@@ -32,7 +33,7 @@ evaluation takes place returning
 
 	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
 	
-which is what would have been by calling `NCDot[m1,m2]`. Likewise
+which is what would have been by calling `NCDot[m1,m2]`[^matmult]. Likewise
 
 	inv[m1]
 
@@ -48,6 +49,8 @@ returns the evaluated result
 
 	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
 	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+
+[^matmult]: Formerly `MatMult[m1,m2]`.
 
 A less trivial example is
 
@@ -177,9 +180,9 @@ commutative coefficients. There are two main goals:
    little overhead as possible.
 
 Those two properties allow for an efficient implementation of
-`NCAlgebra`'s noncommutative Gröbner basis algorithm without the use
-of auxiliary accelerating `C` code. See
-[Noncommutative Gröbner Basis](#NCGB).
+`NCAlgebra`'s noncommutative Gröbner basis algorithm, new in **Version
+5**, without the use of auxiliary accelerating `C` code, as in
+`NCGB`. See [Noncommutative Gröbner Basis](#NCGB).
 
 The best way to work with `NCPoly` in `NCAlgebra` is by loading the
 package [`NCPolyInterface`](#PackageNCPolyInterface):
@@ -219,7 +222,7 @@ Alternatively, one could construct the same `NCPoly` object by calling
 	NCPoly[{1, 1, -2}, {{}, {x, x}, {x, y, z}}, vars]
 	
 In this syntax the first argument is a list of *coefficients*, the
-scond argument is a list of *monomials*, and the third is the list of
+second argument is a list of *monomials*, and the third is the list of
 *variables*. *Monomials* are given as lists, with `{}` being
 equivalent to a constant `1`. The sequence of braces in the list of
 *variables* encodes the *ordering* to be used for sorting
@@ -318,9 +321,50 @@ would return
 On the other hand, `NCPoly` objects have limited functionality and
 should still be considered experimental at this point.
 
-## Gröbner Basis
-
 ## Polynomials with noncommutative coefficients
+
+A larger class of polynomials in noncommutative variables is that of
+polynomials with noncommutative coefficients. Think of a polynomial
+with commutative coefficients in which certain variables are
+considered to be unknown, i.e. *variables*, where others are
+considered to be known, i.e. *coefficients*. For example, in many
+problems in systems and control the following expression
+
+$p(x) = a x + x a^T - x b x + c$
+
+is often seen as a polynomial in the noncommutative unknown `x` with
+known noncommutative coefficients `a`, `b`, and `c`. A typical problem
+is the determination of a solution to the equation $p(x) = 0$ or the
+inequality $p(x) \succeq 0$.
+
+The package [`NCPolynomial`](#PackageNCPolynomial) handles such
+polynomials with noncommutative coefficients. As with
+[`NCPoly`](#PackageNCPoly), the package provides the commands
+[`NCToNCPolynomial`](#NCToNCPolynomial) and
+[`NCPolynomialToNC`](#NCPolynomialToNC) to convert nc expressions back
+and forth between `NCAlgebra` and `NCPolynomial`. For example
+
+	vars = {x}
+	p = NCToNCPolynomial[a ** x + x ** tp[a] - x ** b ** x + c, vars]
+
+converts the polynomial `a ** x + x ** tp[a] - x ** b ** x + c` from
+the standard `NCAlgebra` format into an `NCPolynomial` object. The
+result in this case is the `NCPolynomial` object
+
+	NCPolynomial[c, <|{x} -> {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -> {{-1, 1, b, 1}}|>, {x}]
+
+Conversely the command [`NCPolynomialToNC`](#NCPolynomialToNC)
+converts an `NCPolynomial` back into `NCAlgebra` format. For example
+
+	NCPolynomialToNC[p]
+	
+returns
+
+	c + a ** x + x ** tp[a] - x ** b ** x
+
+An `NCPolynomial` does store information about the polynomial symbols
+and a list of variables is required only at the time of creation of
+the `NCPolynomial` object.
 
 ## Quadratics with noncommutative coefficients
 

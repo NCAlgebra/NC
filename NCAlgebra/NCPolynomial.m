@@ -25,6 +25,8 @@ Clear[NCPolynomial,
       NCPTermsToNC, NCPDecompose, NCPSort, 
       NCPCompatibleQ, NCPSameVariablesQ, NCPMatrixQ,
       NCPPlus,
+      NCPTimes,
+      NCPDot,
       NCPDegree, NCPMonomialDegree, 
       NCPLinearQ, NCPQuadraticQ,
       NCPNormalize];
@@ -36,6 +38,25 @@ NCPolynomial::VarNotSymbol = "All variables must be Symbols.";
 
 Begin[ "`Private`" ]
 
+  (* Operators *)
+  
+  (* Times *)
+  NCPolynomial /: Times[s_?CommutativeQ, p_NCPolynomial] := NCPTimes[s, p];
+
+  (* Plus *)
+  NCPolynomial /: Plus[r_?CommutativeQ, p_NCPolynomial] := 
+    NCPolynomial[r + p[[1]], p[[2]], p[[3]] ];
+    
+  NCPolynomial /: Plus[r_NCPolynomial, s_NCPolynomial] := NCPPlus[r, s];
+
+  (* NonCommutativeMultiply *)
+  NCPolynomial /: NonCommutativeMultiply[left___, 
+                                         r_NCPolynomial, s_NCPolynomial, 
+                                         right___] := 
+    NonCommutativeMultiply[left, NCPDot[r, s], right];
+      
+  NCPolynomial /: NonCommutativeMultiply[r_NCPolynomial] := r;
+    
   (* NCConsecutiveTermss *)
   
   Clear[NCConsecutiveTerms];
@@ -99,8 +120,25 @@ Begin[ "`Private`" ]
   NCSplitMonomials[m_, vars_List] := {NCSplitMonomialAux[m,vars]};
 
   (* NCPPlus *)
-  
+
   NCPPlus[pp__NCPolynomial?NCPCompatibleQ] := Block[
+    (* copy of pp is needed because of Merge *)
+    {p = {pp}}, 
+    Return[
+      NCPolynomial[Plus @@ p[[All,1]],
+                   Merge[p[[All,2]], Flatten[Join[#], 1]&],
+                   p[[1,3]] ]];
+  ];
+
+  (* NCPTimes *)
+  
+  NCPTimes[r_?CommutativeQ, p_NCPolynomial] := 
+      NCPolynomial[r p[[1]], 
+                   Map[MapAt[(r #)&, #, {1}] &, p[[2]], {2}],
+                   p[[3]]];
+
+  (* NCPDot *)
+  NCPDot[pp__NCPolynomial?NCPCompatibleQ] := Block[
     {p = {pp}},
     Return[
       NCPolynomial[Plus @@ p[[All,1]],
@@ -108,7 +146,6 @@ Begin[ "`Private`" ]
                    p[[1,3]] ]];
   ];
   
-
   (* NCToNCPolynomial *)
 
   Clear[NCPVectorizeAux];
