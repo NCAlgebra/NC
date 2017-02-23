@@ -493,7 +493,7 @@ Module[
    expr = a**x+b**y;
    p1 = NCToNCPolynomial[expr, {x}];
    p2 = NCPPlus[p1,p1];
-   answer = NCPolynomial[2 b ** y, <|{x}->{{1,a,1},{1,a,1}}|>, {x}];
+   answer = NCPolynomial[2 b ** y, <|{x}->{{2,a,1}}|>, {x}];
    NCTest[p2, answer];
 
    expr = a**x+b**y;
@@ -507,8 +507,8 @@ Module[
    expr = a**x+b**y;
    p1 = NCToNCPolynomial[expr, {x,y}];
    p2 = NCPPlus[p1,p1];
-   answer = NCPolynomial[0, <|{x}->{{1,a,1},{1,a,1}},
-                              {y}->{{1,b,1},{1,b,1}}|>, {x,y}];
+   answer = NCPolynomial[0, <|{x}->{{2,a,1}},
+                              {y}->{{2,b,1}}|>, {x,y}];
    NCTest[p2, answer];
    
    expr = a**x+b**y;
@@ -680,6 +680,57 @@ Module[
    NCTest[NCPCompatibleQ[p1,p2], False];
    NCTest[NCPCompatibleQ[p1,p2,p2], False];
    NCTest[NCPCompatibleQ[p2,p2], True];
+
+   (* Operators *)
+   vars = {x, y};
+   answer = NCPolynomial[0, <| |>, vars];
+
+   p1 = p2 = NCToNCPolynomial[1 + x, vars];
+   p = NCToNCPolynomial[(1 + x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[1 + x + x^2, vars];
+   p = NCToNCPolynomial[(1 + x + x^2)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[x ** y - 2 y ** x, vars];
+   p = NCToNCPolynomial[(x ** y - 2 y ** x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[x ** y - 2 y ** a ** x, vars];
+   p = NCToNCPolynomial[(x ** y - 2 y ** a ** x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[x ** a ** y - 2 y ** b ** x, vars];
+   p = NCToNCPolynomial[(x ** a ** y - 2 y ** b ** x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[x ** a ** y - 2 c ** y ** b ** x, vars];
+   p = NCToNCPolynomial[(x ** a ** y - 2 c ** y ** b ** x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[x ** a ** y ** d - 2 c ** y ** b ** x, vars];
+   p = NCToNCPolynomial[(x ** a ** y ** d - 2 c ** y ** b ** x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[x ** y + x + y ** x, vars];
+   p = NCToNCPolynomial[(x ** y + x + y ** x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = p2 = NCToNCPolynomial[1 + x ** y + x + y ** x, vars];
+   p = NCToNCPolynomial[(1 + x ** y + x + y ** x)^2, vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   p1 = NCToNCPolynomial[1 + x ** y + x + y ** x, vars];
+   p2 = NCToNCPolynomial[x ** a ** y ** d - 2 c ** y ** b ** x, vars];
+   p = NCToNCPolynomial[(1 + x ** y + x + y ** x)**(x ** a ** y ** d - 2 c ** y ** b ** x), vars];
+   NCTest[p - NCPDot[p1, p2], answer];
+
+   (* ** *)
+   NCTest[p - p1 ** p2, answer];
+
+   p = NCToNCPolynomial[3 (1 + x ** y + x + y ** x)**(x ** a ** y ** d - 2 c ** y ** b ** x), vars];
+   NCTest[p - 3 NCPDot[p1, p2], answer];
 
    (* TODO: Test NCPolynomials with matrix variables. 
       See NCSylvester.NCTest *)

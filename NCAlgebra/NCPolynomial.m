@@ -120,13 +120,31 @@ Begin[ "`Private`" ]
   NCSplitMonomials[m_, vars_List] := {NCSplitMonomialAux[m,vars]};
 
   (* NCPPlus *)
-
+  Clear[SimplifyCoefficients];
+  SimplifyCoefficients[{left___, {c_?PossibleZeroQ,values__}, right___}] := 
+    SimplifyCoefficients[{left,right}];
+  SimplifyCoefficients[{left___, {lc_,coeff__}, middle___, 
+                        {rc_,coeff__}, right___}] := 
+    If[ PossibleZeroQ[lc+rc], 
+        SimplifyCoefficients[{left, middle, right}],
+        SimplifyCoefficients[{left, {lc+rc,coeff}, middle, right}]
+    ];
+  SimplifyCoefficients[coeffs_] := coeffs;
+  
+  Clear[MergeCoefficients];
+  MergeCoefficients[coeffs__] := SimplifyCoefficients[Flatten[Join[coeffs], 1]];
+  
   NCPPlus[pp__NCPolynomial?NCPCompatibleQ] := Block[
     (* copy of pp is needed because of Merge *)
     {p = {pp}}, 
     Return[
       NCPolynomial[Plus @@ p[[All,1]],
-                   Merge[p[[All,2]], Flatten[Join[#], 1]&],
+                   (* Merge[p[[All,2]], Flatten[Join[#], 1]&], *)
+                   DeleteCases[
+                     Merge[p[[All,2]], 
+                           MergeCoefficients],
+                     {}
+                   ],
                    p[[1,3]] ]];
   ];
 
@@ -138,13 +156,84 @@ Begin[ "`Private`" ]
                    p[[3]]];
 
   (* NCPDot *)
-  NCPDot[pp__NCPolynomial?NCPCompatibleQ] := Block[
-    {p = {pp}},
-    Return[
-      NCPolynomial[Plus @@ p[[All,1]],
-                   Merge[p[[All,2]], Flatten[Join[#], 1]&],
-                   p[[1,3]] ]];
-  ];
+  
+  Clear[MapAux, ExpandMonomialsAux,MonomialMultiply];
+  MapAux[x_, y_] := Map[x -> # &, y];
+  ExpandMonomialsAux[p_] := Flatten[KeyValueMap[MapAux, p[[2]]], 1];
+
+  MonomialMultiply[{l1___, l2_} -> {lc_, lval__, 1}, 
+                   {r1_, r2___} -> {rc_, 1, rval__}] := 
+    {l1, l2 ** r1, r2} -> {lc rc, lval, rval};
+    
+  MonomialMultiply[{l1___, l2_} -> {lc_, l1val__, l2val_SparseArray}, 
+                   {r1_, r2___} -> {rc_, r1val__SparseArray, r2val__}] := 
+    Module[
+      {tmp = NCDot[l2val, r1val][[1,1]]},
+
+      If[ CommutativeQ[tmp],
+          Return[{l1, l2**r1, r2} -> {tmp lc rc, l1val, r2val}];
+      ];
+      Return[{l1, l2, r1, r2} -> {lc rc, l1val, tmp, r2val}];
+    ];
+    
+  MonomialMultiply[{l__} -> {lc_, l1val__, l2val_}, 
+                   {r__} -> {rc_, r1val_, r2val__}] := 
+    {l, r} -> {lc rc, l1val, l2val ** r1val, r2val};
+
+   NCPDot[l_NCPolynomial,r_NCPolynomial] := Module[
+     {tmp},
+
+     tmp = Map[SimplifyCoefficients,
+               Merge[
+                 Flatten[
+                   Outer[MonomialMultiply, 
+                         ExpandMonomialsAux[l], 
+                         ExpandMonomialsAux[r]],
+                   1], 
+                 Join
+               ]];
+
+       
+     If[ MatrixQ[l[[1]]], 
+
+         (* Matrix coefficients *)
+
+         tmp = NCPolynomial[ - NCDot[l[[1]], r[[1]]], tmp, l[[3]] ];
+
+         tmp += NCPolynomial[ 
+                  NCDot[l[[1]], r[[1]]],
+                  Map[MapAt[NCDot[l[[1]],#]&, #, 2] &, r[[2]], {2}],
+                  r[[3]]
+                ];
+
+         tmp += NCPolynomial[ 
+                  NCDot[l[[1]], r[[1]]],
+                  Map[MapAt[NCDot[#,r[[1]]]&, #, -1] &, l[[2]], {2}],
+                  l[[3]]
+                ];
+         
+        ,
+         
+         (* Scalar coefficients *)
+
+         tmp = NCPolynomial[ - l[[1]] r[[1]], tmp, l[[3]] ];
+
+         If[ !PossibleZeroQ[l[[1]]],
+             tmp += l[[1]] r;
+         ];
+       
+         If[ !PossibleZeroQ[r[[1]]],
+             tmp += r[[1]] l;
+         ];
+         
+     ];
+       
+     Return[tmp];
+       
+  ] /; NCPCompatibleQ[l,r];
+
+  NCPDot[l_NCPolynomial, r_NCPolynomial, rest__NCPolynomial] := 
+    NCPDot[NCPDot[l,r], rest];
   
   (* NCToNCPolynomial *)
 

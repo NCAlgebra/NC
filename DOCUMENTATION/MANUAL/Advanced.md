@@ -366,6 +366,47 @@ An `NCPolynomial` does store information about the polynomial symbols
 and a list of variables is required only at the time of creation of
 the `NCPolynomial` object.
 
+As with `NCPoly`, operations on `NCPolynomial` objects result on
+another `NCPolynomial` object that is always expanded. For example:
+
+	vars = {x,y}
+	1 + NCToNCPolynomial[x**y, vars] - 2 NCToNCPolynomial[y**x, vars]
+
+returns 
+
+	NCPolynomial[1, <|{y ** x} -> {{-2, 1, 1}}, {x ** y} -> {{1, 1, 1}}|>, {x, y}]
+
+and
+
+	(1 + NCToNCPolynomial[x, vars] ** NCToNCPolynomial[y, vars])^2
+
+returns
+
+	NCPolynomial[1, <|{x ** y ** x ** y} -> {{1, 1, 1}}, {x ** y} -> {{2, 1, 1}}|>, {x, y}]
+
+To see how much more efficient `NCPolynomial` is when compared with standard
+`NCAlgebra` objects try
+
+	Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 20, 5}]
+
+would return
+
+	{0.000493, 0.003345, 0.005974, 0.013479, 0.018575, 0.02896}
+
+As you can see, `NCPolynomial`s are not as efficient as `NCPoly`s but
+still much more efficient than `NCAlgebra` polynomials.
+
+`NCPolynomials` do not support *orderings* but we do provide the
+`NCPSort` command that produces a list of terms sorted by degree. For
+example
+
+	NCPSort[p]
+
+returns
+
+	{c, a ** x, x ** a^T, -x ** b ** x}
+
+
 ## Quadratics with noncommutative coefficients
 
 ## Linear functions with noncommutative coefficients

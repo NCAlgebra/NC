@@ -18,24 +18,31 @@ which returns
 
 Members are:
 
-* [NCPolynomial](#NCPolynomial)
-* [NCToNCPolynomial](#NCToNCPolynomial)
-* [NCPolynomialToNC](#NCPolynomialToNC)
-* [NCRationalToNCPolynomial](#NCRationalToNCPolynomial)
-* [NCPCoefficients](#NCPCoefficients)
-* [NCPTermsOfDegree](#NCPTermsOfDegree)
-* [NCPTermsOfTotalDegree](#NCPTermsOfTotalDegree)
-* [NCPTermsToNC](#NCPTermsToNC)
-* [NCPSort](#NCPSort)
-* [NCPDecompose](#NCPDecompose)
-* [NCPDegree](#NCPDegree)
-* [NCPMonomialDegree](#NCPMonomialDegree)
-* [NCPCompatibleQ](#NCPCompatibleQ)
-* [NCPSameVariablesQ](#NCPSameVariablesQ)
-* [NCPMatrixQ](#NCPMatrixQ)
-* [NCPLinearQ](#NCPLinearQ)
-* [NCPQuadraticQ](#NCPQuadraticQ)
-* [NCPNormalize](#NCPNormalize)
+
+* Constructors
+  * [NCPolynomial](#NCPolynomial)
+  * [NCToNCPolynomial](#NCToNCPolynomial)
+  * [NCPolynomialToNC](#NCPolynomialToNC)
+  * [NCRationalToNCPolynomial](#NCRationalToNCPolynomial)
+* Access and utilities
+  * [NCPCoefficients](#NCPCoefficients)
+  * [NCPTermsOfDegree](#NCPTermsOfDegree)
+  * [NCPTermsOfTotalDegree](#NCPTermsOfTotalDegree)
+  * [NCPTermsToNC](#NCPTermsToNC)
+  * [NCPDecompose](#NCPDecompose)
+  * [NCPDegree](#NCPDegree)
+  * [NCPMonomialDegree](#NCPMonomialDegree)
+  * [NCPCompatibleQ](#NCPCompatibleQ)
+  * [NCPSameVariablesQ](#NCPSameVariablesQ)
+  * [NCPMatrixQ](#NCPMatrixQ)
+  * [NCPLinearQ](#NCPLinearQ)
+  * [NCPQuadraticQ](#NCPQuadraticQ)
+  * [NCPNormalize](#NCPNormalize)
+* Arithmetic
+  * [NCPTimes](#NCPTimes)
+  * [NCPDot](#NCPDot)
+  * [NCPPlus](#NCPPlus)
+  * [NCPSort](#NCPSort)
 
 ### Ways to represent NC polynomials
 
@@ -287,13 +294,17 @@ See also:
 `NCPTimes[s,p]` gives the product of a commutative `s` times the
 nc polynomial `p`.
 
+#### NCPDot {#NCPDot}
+
+`NCPDot[p1,p2,...]` gives the product of the nc polynomials `p1`,`p2`,... .
+
 #### NCPSort {#NCPSort}
 
 `NCPSort[p]` gives a list of elements of the NCPolynomial `p` in which monomials are sorted first according to their degree then by Mathematica's implicit ordering.
 
 For example
 
-    NCPSort[NCPolynomial[c + x**x - 2 y, {x,y}]]
+    NCPSort[NCToNCPolynomial[c + x**x - 2 y, {x,y}]]
 
 will produce the list
 
@@ -308,7 +319,7 @@ See also:
 
 For example
 
-    NCPDecompose[NCPolynomial[a**x**b+c+d**x**e+a**x**e**x**b+a**x**y, {x,y}]]
+    NCPDecompose[NCToNCPolynomial[a**x**b+c+d**x**e+a**x**e**x**b+a**x**y, {x,y}]]
 
 will produce the Association
 
@@ -316,4 +327,3 @@ will produce the Association
 
 See also:
 [NCPSort](#NCPSort), [NCDecompose](#NCDecompose), [NCCompose](#NCCompose).
-
