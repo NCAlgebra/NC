@@ -1,7 +1,7 @@
 << NCPolynomial`
 
 Module[
-   {expr, answer, vars, p, p1, p2, rules,
+   {expr, answer, vars, p, p1, p2, rules,mat1,mat2,
    a,b,c,d,e,f,g,h,j,x,y,z,A,B,C,K},
 
    SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
@@ -731,6 +731,20 @@ Module[
 
    p = NCToNCPolynomial[3 (1 + x ** y + x + y ** x)**(x ** a ** y ** d - 2 c ** y ** b ** x), vars];
    NCTest[p - 3 NCPDot[p1, p2], answer];
+
+   (* matrix arguments *)
+   
+   mat1 = {{a ** x + x ** a + c ** y + y ** c - x ** q ** x, b ** x},
+           {x ** b, 1}};
+   p1 = NCToNCPolynomial[mat1, {x, y}];
+   answer = ConstantArray[0, {2,2}];
+   NCTest[mat1 - NCPolynomialToNC[p1], answer];
+
+   mat2 = {{1, x ** c}, {c ** x, 1}};
+   p2 = NCToNCPolynomial[mat2, {x, y}];
+   NCTest[mat2 - NCPolynomialToNC[p2], answer];
+
+   NCTest[NCPolynomialToNC[p1 ** p2] - NCDot[mat1, mat2] // NCExpand, answer];
 
    (* TODO: Test NCPolynomials with matrix variables. 
       See NCSylvester.NCTest *)

@@ -106,8 +106,8 @@ and
 	
 produces the expected result
 
-	{{2 c + a ** d + b ** e + d ** a, 2 a + 3 b + 2 d + d ** b}, 
-	 {3 c + c ** d + d ** e + e ** a, 2 c + 6 d + e ** b}}
+	{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+	 {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
  
 However, because `**` is held unevaluated, the expression
 
@@ -115,10 +115,10 @@ However, because `**` is held unevaluated, the expression
 	
 returns the "wrong" result
 
-	{{{{d + a ** d + b ** e, 2 a + 3 b + d}, {d + c ** d + d ** e, 2 c + 4 d}},
-	 {{2 + a ** d + b ** e, 2 + 2 a + 3 b}, {2 + c ** d + d ** e, 2 + 2 c + 3 d}}}, 
-	 {{{e + a ** d + b ** e, 2 a + 3 b + e}, {e + c ** d + d ** e, 2 c + 3 d + e}}, 
-	 {{3 + a ** d + b ** e, 3 + 2 a + 3 b}, {3 + c ** d + d ** e, 3 + 2 c + 3 d}}}}
+	{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
+	 {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
+	 {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
+	 {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}
 
 which is different than the "correct" result
 
@@ -149,7 +149,7 @@ versions of [`NCReplaceAll`](#NCReplaceAll) and
 preserve matrix consistency when replacing expressions with nc
 matrices. For example
 
-	NCMatrixReplaceAll[x ** y + y, {x -> m1, y -> m2}]
+	NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
 	
 does produce the "correct" result
 
@@ -209,7 +209,7 @@ Conversely the command [`NCPolyToNC`](#NCPolyToNC) converts an
 	
 returns
 
-	1 + x ** x - 2 x ** y ** z
+	1 + x**x - 2 x**y**z
 	
 as expected. Note that an `NCPoly` object does not store symbols, but
 rather a representation of the polynomial based on specially encoded
@@ -256,7 +256,7 @@ returns
 
 and
 
-	p = (1 + NCPolyMonomial[{x}, vars] ** NCPolyMonomial[{y}, vars])^2
+	p = (1 + NCPolyMonomial[{x}, vars]**NCPolyMonomial[{y}, vars])^2
 
 returns
 	
@@ -275,7 +275,7 @@ The reason for displaying an `NCPoly` object as a list is so that the
 monomials can appear in the same order as they are stored. Using
 `Plus` would revert to Mathematica's default ordering. For example
 
-	p = NCToNCPoly[1 + x ** x ** x - 2 x ** x + z, vars]
+	p = NCToNCPoly[1 + x**x**x - 2 x**x + z, vars]
 	NCPolyDisplay[p, vars]
 
 returns
@@ -288,7 +288,7 @@ with `z` being the *leading term* in the above example.
 With `NCPoly` the Mathematica command `Sort` is modified to sort lists
 of polynomials. For example
 
-	polys = NCToNCPoly[{x ** x ** x, 2 y ** x - z, z, y ** x - x ** x}, vars]
+	polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars]
 	ColumnForm[NCPolyDisplay[Sort[polys], vars]]
 
 returns
@@ -345,9 +345,9 @@ polynomials with noncommutative coefficients. As with
 and forth between `NCAlgebra` and `NCPolynomial`. For example
 
 	vars = {x}
-	p = NCToNCPolynomial[a ** x + x ** tp[a] - x ** b ** x + c, vars]
+	p = NCToNCPolynomial[a**x + x**tp[a] - x**b**x + c, vars]
 
-converts the polynomial `a ** x + x ** tp[a] - x ** b ** x + c` from
+converts the polynomial `a**x + x**tp[a] - x**b**x + c` from
 the standard `NCAlgebra` format into an `NCPolynomial` object. The
 result in this case is the `NCPolynomial` object
 
@@ -360,7 +360,7 @@ converts an `NCPolynomial` back into `NCAlgebra` format. For example
 	
 returns
 
-	c + a ** x + x ** tp[a] - x ** b ** x
+	c + a**x + x**tp[a] - x**b**x
 
 An `NCPolynomial` does store information about the polynomial symbols
 and a list of variables is required only at the time of creation of
@@ -374,15 +374,15 @@ another `NCPolynomial` object that is always expanded. For example:
 
 returns 
 
-	NCPolynomial[1, <|{y ** x} -> {{-2, 1, 1}}, {x ** y} -> {{1, 1, 1}}|>, {x, y}]
+	NCPolynomial[1, <|{y**x} -> {{-2, 1, 1}}, {x**y} -> {{1, 1, 1}}|>, {x, y}]
 
 and
 
-	(1 + NCToNCPolynomial[x, vars] ** NCToNCPolynomial[y, vars])^2
+	(1 + NCToNCPolynomial[x, vars]**NCToNCPolynomial[y, vars])^2
 
 returns
 
-	NCPolynomial[1, <|{x ** y ** x ** y} -> {{1, 1, 1}}, {x ** y} -> {{2, 1, 1}}|>, {x, y}]
+	NCPolynomial[1, <|{x**y**x**y} -> {{1, 1, 1}}, {x**y} -> {{2, 1, 1}}|>, {x, y}]
 
 To see how much more efficient `NCPolynomial` is when compared with standard
 `NCAlgebra` objects try
@@ -404,7 +404,97 @@ example
 
 returns
 
-	{c, a ** x, x ** a^T, -x ** b ** x}
+	{c, a**x, x**tp[a], -x**b**x}
+
+A useful feature of `NCPolynomial` is the capability of handling
+polynomial matrices. For example
+
+	mat1 = {{a**x + x**tp[a] + c**y + tp[y]**tp[c] - x**q**x, b**x}, 
+	        {x**tp[b], 1}};
+    p1 = NCToNCPolynomial[mat1, {x, y}];
+
+	mat2 = {{1, x**tp[c]}, {c**x, 1}};
+	p2 = NCToNCPolynomial[mat2, {x, y}];
+
+constructs `NCPolynomial` objects representing the polynomial matrices
+`mat1` and `mat2`. Verify that 
+
+	NCPolynomialToNC[p1**p2] - NCDot[mat1, mat2] // NCExpand
+
+is zero as expected. Internally `NCPolynomial` represents a polynomial
+matrix by constructing matrix factors. For example the representation
+of the matrix `mat1` correspond to the factors
+$$ 
+\begin{aligned}
+\begin{bmatrix}
+	a x + x a^T + c y + y^T c^T - x q x & b x \\ 
+	x b^T & 1
+\end{bmatrix} 
+&=
+\begin{bmatrix}
+	0 & 0 \\ 0 & 1
+\end{bmatrix}
++
+\begin{bmatrix}
+	a \\ 0
+\end{bmatrix}
+x
+\begin{bmatrix}
+	1 & 0
+\end{bmatrix}
++
+\begin{bmatrix}
+	1 \\ 0
+\end{bmatrix}
+x
+\begin{bmatrix}
+	a^T & 0
+\end{bmatrix}
++
+\begin{bmatrix}
+	-1 \\ 0
+\end{bmatrix}
+x
+q 
+x
+\begin{bmatrix}
+	1 & 0
+\end{bmatrix}
++ \\
+& \qquad \quad
+\begin{bmatrix}
+	b \\ 0
+\end{bmatrix}
+x
+\begin{bmatrix}
+	0 & 1
+\end{bmatrix}
++
+\begin{bmatrix}
+	0 \\ 1
+\end{bmatrix}
+x
+\begin{bmatrix}
+	b^T & 0
+\end{bmatrix}
++
+\begin{bmatrix}
+	c \\ 0
+\end{bmatrix}
+y
+\begin{bmatrix}
+	1 & 0
+\end{bmatrix}
++
+\begin{bmatrix}
+	1 \\ 0
+\end{bmatrix}
+y^T
+\begin{bmatrix}
+	c^T & 0
+\end{bmatrix}
+\end{aligned}
+$$
 
 
 ## Quadratics with noncommutative coefficients
