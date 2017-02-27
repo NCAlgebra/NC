@@ -28,6 +28,8 @@ Clear[NCPolynomialToNCQuadratic,
 
 Get["NCQuadratic.usage"];
 
+NCQuadratic::NotQuadratic = "Function is not quadratic.";
+
 NCQuadraticMakeSymmetric::NotSymmetric = "Quadratic form is not \
 symmetric. Use SymmetricVariables to declare variables symmetric.";
 
@@ -72,7 +74,7 @@ Begin[ "`Private`" ]
 
     If [!NCPQuadraticQ[p],
         Message[NCQuadratic::NotQuadratic];
-        Return[$Failed];
+        Return[{$Failed,$Failed,$Failed,$Failed,$Failed}];
     ];
 
     (* Print["p = ", NCPolynomialToNC[p]]; *)
@@ -201,7 +203,12 @@ Begin[ "`Private`" ]
       expr = NCToNCPolynomial[p /. symRule, vars];
       
       (* Compute decomposition *) 
-      {m0,sylv,l,m,r} = NCPolynomialToNCQuadratic[expr];
+      Check[ {m0,sylv,l,m,r} = NCPolynomialToNCQuadratic[expr];
+            ,
+             Return[{{},{},{}}];
+            ,
+             NCQuadratic::NotQuadratic
+      ];
 
       (* Symmetrize decomposition *) 
       {m0,sylv,l,m,r} = NCQuadraticMakeSymmetric[{m0,sylv,l,m,r}, 

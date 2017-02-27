@@ -496,9 +496,159 @@ y^T
 \end{aligned}
 $$
 
+See section [linear functions](#LinearPolys) for more features on
+linear polynomial matrices.
 
-## Quadratics with noncommutative coefficients
+### Quadratic polynomials {#Quadratic}
 
-## Linear functions with noncommutative coefficients
+When working with nc quadratics it is useful to be able to factor the
+quadratic into the following form
+$$
+	q(x) = c + s(x) + l(x) M r(x)
+$$
+where $s$ is linear $x$ and $l$ and $r$ are vectors and $M$ is a
+matrix. Load the package
 
-## Algorithms
+	<< NCQuadratic`
+
+and use the command
+[`NCPolynomialToNCQuadratic`](#NCPolynomialToNCQuadratic) as in 
+
+	vars = {x, y};
+	expr = tp[x] ** a ** x ** d + tp[x] ** b ** y + tp[y] ** c ** y + tp[y] ** tp[b] ** x ** d;
+	p = NCToNCPolynomial[expr, vars];
+	{const, lin, left, middle, right} = NCPolynomialToNCQuadratic[p];
+
+which returns
+
+	left = {tp[x],tp[y]}
+	right = {y, x ** d}
+	middle = {{a,b}, {tp[b],c}}
+	
+and zero `const` and `lin`. The format for the linear part `lin` will
+be discussed lated in Section [Linear](#Linear). Note that
+coefficients of an nc quadratic may also appear on the left and right
+vectors, as `d` did in the above example.
+
+An interesting application is the verification of the domain in which
+an nc rational is *convex*. Take for example the quartic
+
+	expr = x ** x ** x ** x;
+
+and calculate its noncommutative directional *Hessian*
+
+	hes = NCHessian[expr, {x, h}]
+	
+This command returns
+
+	2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+
+which is quadratic in the direction `h`. The decomposition of the
+nc Hessian using `NCPolynomialToNCQuadratic`
+
+	p = NCToNCPolynomial[hes, {h}];
+	{const, lin, left, middle, right} = NCPolynomialToNCQuadratic[p];
+
+produces
+
+	left = {h, x ** h, x ** x ** h}
+	right = {h ** x ** x, h ** x, h}
+	middle = {{2, 2 x, 2 x ** x},{0, 2, 2 x},{0, 0, 2}}
+
+Note that the middle matrix
+$$
+\begin{bmatrix}
+2 & 2 x & 2 x^2 \\
+0 & 2 & 2 x \\
+0 & 0 & 2
+\end{bmatrix}
+$$
+is not *symmetric*, as one might have expected. The command
+[`NCQuadraticMakeSymmetric`](#NCQuadraticMakeSymmetric) can fix that
+and produce a symmetric decomposition. For the above example
+
+	{const, lin, sleft, smiddle, sright} = 
+	  NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
+	                           SymmetricVariables -> {x, h}]
+
+results in
+
+	sleft = {x ** x ** h, x ** h, h}
+	sright = {h ** x ** x, h ** x, h}
+	middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x ** x}}
+
+in which `middle` is the symmetric matrix
+$$
+\begin{bmatrix}
+0 & 0 & 2 \\
+0 & 2 & 2 x \\
+2 & 2 x & 2 x^2
+\end{bmatrix}
+$$
+Note the argument `SymetricVariables -> {x,h}` which tells
+`NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
+variables. Because the `middle` matrix is never positive semidefinite
+for any possible value of $x$ the conclusion[^convex] is that the nc quartic
+$x^4$ is *not convex*.
+
+[^convex]: This is in contrast with the commutative $x^4$ which is
+    convex everywhere. See \cite{heltonconvexity} for details.
+
+The production of such symmetric quadratic decompositions is automated
+by the convenience command
+[`NCMatrixOfQuadratic`](#NCMatrixOfQuadratic). Verify that
+
+	{sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]
+
+automatically assumes that both `x` and `h` are symmetric variables
+and produces suitable left and right vectors as well as a symmetric
+middle matrix.
+
+If one is interested in checking convexity of nc rationals the package
+[`NCConvexity`](#PackageNCConvexity) has functions that automate the
+whole process, including the calculation of the Hessian and the middle
+matrix, followed by the diagonalization of the middle matrix as
+produced by [`NCLDLDecomposition`](#NCLDLDecomposition).
+
+For example, the commands evaluate the nc Hessian and calculates its
+quadratic decomposition
+
+	expr = (x + b ** y) ** inv[1 - a ** x ** a + b ** y + y ** b] ** (x + y ** b);
+	{left, middle, right} =	NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];
+
+The resulting middle matrix can be factored using
+
+	{ldl, p, s, rank} = NCLDLDecomposition[middle];
+	{ll, dd, uu} = GetLDUMatrices[ldl, s];
+
+which produces the diagonal factors
+$$
+\begin{bmatrix}
+  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 0
+\end{bmatrix}
+$$
+which indicates the the original nc rational is convex whenever
+$$
+(1 + b y + y b - a x a)^{-1} \succeq 0
+$$
+or, equivalently, whenever
+$$
+1 + b y + y b - a x a \succeq 0
+$$
+The above sequence of calculations is automated by the command
+[`NCConvexityRegion`](#NCConvexityRegion) as in 
+
+	<< NCConvexity`
+	NCConvexityRegion[expr, {x}]
+
+which results in 
+
+	{2 (1 + b ** y + y ** b - a ** x ** a)^-1, 0}
+
+which correspond to the diagonal entries of the LDL decomposition of
+the middle matrix of the nc Hessian.
+
+### Linear polynomials {#Linear}
+

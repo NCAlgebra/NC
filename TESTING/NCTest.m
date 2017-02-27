@@ -46,6 +46,24 @@ Begin[ "`Private`" ]
     NCTest[pass, True];
     NCTest[result, answer];
   ];
+
+  NCTestCheck[expr_, answer_, checkMessages_, quietMessages_] := Block[
+    {result,pass},
+    pass = False;
+    Quiet[
+      Check[ result = Evaluate[expr];
+            ,
+             pass = True;
+            ,
+             checkMessages
+      ];
+     ,
+      quietMessages
+    ];
+    NCTest[pass, True];
+    NCTest[result, answer];
+  ];
+
   SetAttributes[NCTestCheck, HoldAll];
 
   NCTest[result_, answer_] := Block[

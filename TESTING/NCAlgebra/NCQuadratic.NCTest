@@ -337,5 +337,18 @@ Block[
    NCTest[expr1 /. symrule, 0];
    NCTest[Norm[Normal[tpMat[m] - m] /. symrule], 0];
 
-];
+   (* Not quadratic *)
+   vars = {x};
+   exp = x**x**x;
+   p = NCToNCPolynomial[exp, vars];
+   NCTestCheck[{m0,sylv,l,m,r} = NCPolynomialToNCQuadratic[p],
+               {$Failed,$Failed,$Failed,$Failed,$Failed},
+	       NCQuadratic::NotQuadratic];
 
+   NCTestCheck[{l,m,r} = NCMatrixOfQuadratic[exp, {x}],
+               {{},{},{}},
+	       NCQuadratic::NotQuadratic,
+	       {NCQuadratic::NotQuadratic,NCSymmetricQ::SymmetricVariables}];
+
+
+];

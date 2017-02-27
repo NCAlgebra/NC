@@ -122,9 +122,11 @@ Similar properties hold to `aj`. Moreover
 	
 return `co[a]` where `co` stands for complex-conjugate. 
 
-**Version 5:** transposes (`tp`), adjoints (`aj`), complex
-conjugates (`co`), and inverses (`inv`) in a notebook environment
-render as $x^T$, $x^*$, $\bar{x}$, and $x^{-1}$.
+**Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates
+(`co`), and inverses (`inv`) in a notebook environment render as
+$x^T$, $x^*$, $\bar{x}$, and $x^{-1}$. `tp` and `aj` can also be input
+directly as `x^T` and `x^*`. For this reason the symbol `T` is now
+protected in NCAlgebra.
 
 ## Replace
 
