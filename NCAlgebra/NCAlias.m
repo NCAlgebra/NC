@@ -64,9 +64,9 @@ NCAliasRule = {
                *)
 
                (* :NCMatMult.m *)
+               (*
                     MM -> NCMatMult`MatMult,
                     tpM -> NCMatMult`tpMat,
-               (*
                     NCMTMM -> NCMatMult`NCMToMatMult,
                     GauE -> NCMatMult`GaussElimination,
 		    LDU -> NCMatMult`NCLDUDecomposition,

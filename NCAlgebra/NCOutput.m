@@ -24,8 +24,6 @@ Options[NCSetOutput] = {
   inv -> True
 };
 
-Protect[T];
-
 NCSetOutput[opts___Rule:{}] := 
   Module[
     {options},

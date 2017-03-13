@@ -33,6 +33,9 @@ CommuteEverything::Warning = "Commute everything set the variable(s) \
 `1` to be commutative. Use EndCommuteEverything[] to set them back as \
 noncommutative.";
 
+TDefined::Warning = "Symbol T has definitions associated with it \
+that will be cleared by NCAlgebra."
+
 Get["NonCommutativeMultiply.usage"];
 
 Begin[ "`Private`" ]
@@ -378,6 +381,11 @@ Begin[ "`Private`" ]
     inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]];
 
   (* pretty tp *)
+  If[ValueQ[Global`T], 
+     Message[TDefined::Warning];
+     Global`T =. 
+  ];
+  Protect[Global`T];
   Power[a_, Global`T] := tp[a];
 
   Protect[Power];

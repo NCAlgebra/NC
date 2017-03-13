@@ -169,7 +169,9 @@ Begin[ "`Private`" ]
 	 primalFeasRadius, dualFeasRadius, dualFeasMargin,
 	 primalFeasible, dualFeasible,
 	 (* performance *)
-	 cgK, iters = {}
+	 cgK, iters = {},
+         (* TODO: local variables *)
+         FYkmC
       },
 
     (* Process options *)
@@ -812,7 +814,7 @@ Begin[ "`Private`" ]
                   Transpose[Transpose[HHk / HHkSqrtDiag] / HHkSqrtDiag]];
 
               NCDebug[ 2, 
-	               tHHkSolve ];
+	               InputForm[tHHkSolve] ];
 
               HHkSolve = If [ HHkSqrtDiag === 1, 
                               tHHkSolve
@@ -1498,7 +1500,9 @@ Begin[ "`Private`" ]
 
       (* Estimate feasibility *)
      
-      dualFeasMargin = Max[Map[Eigenvalues, (FDualEval @@ Yk) - CC]];
+      FYkmC = (FDualEval @@ Yk) - CC;
+      FYkmC = (FYkmC + Map[Transpose, FYkmC])/2; 
+      dualFeasMargin = Max[Map[Eigenvalues, FYkmC]];
 
       If [ dualFeasMargin > 0, 
 
