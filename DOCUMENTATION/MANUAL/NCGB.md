@@ -7,6 +7,7 @@ algebraic relations.
 In order to load `NCGB` one types:
 
 	<< NC`
+	<< NCAlgebra`
 	<< NCGBX`
 
 or simply

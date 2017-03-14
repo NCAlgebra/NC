@@ -92,7 +92,7 @@ Block[
   g1p=g1+NCPolyMonomial[{0,0}->2,2];
 
   {q,r}=NCPolyReduce[f,{g1p,g2}];
-  NCTest[f -NCPolyQuotientExpand[q,{g1p,g2}]-r];
+  NCTest[f -NCPolyQuotientExpand[q,{g1p,g2}]-r, 0];
   NCTest[NCPolyGetCoefficients[r], {-1,-1}];
 
   {q,r}=NCPolyReduce[f,{g2,g1p},True];
@@ -205,7 +205,7 @@ Block[
   g1p=g1+NCPolyMonomial[{0,0}->2,{1,1}];
 
   {q,r}=NCPolyReduce[f,{g1p,g2}];
-  NCTest[f -NCPolyQuotientExpand[q,{g1p,g2}]-r];
+  NCTest[f -NCPolyQuotientExpand[q,{g1p,g2}]-r, 0];
   NCTest[NCPolyGetCoefficients[r], {-1,-1}];
 
   {q,r}=NCPolyReduce[f,{g2,g1p},True];

@@ -33,18 +33,14 @@ Module[
   NCTest[Hy, answer];
 
   {a, b, c, d} = NCPolyRealization[poly];
-  answer = SparseArray[{
-    {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}},
-    {{0, -1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, -1}, {0, 0, 0, 0}},
-    {{0, 0, -1, 0}, {0, 0, 0, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}}
-    }];
-  NCTest[a, answer];
-  answer = SparseArray[{{0}, {0}, {0}, {-1}}];
-  NCTest[b, answer];
-  answer = SparseArray[{{1, 0, 0, 0}}];
-  NCTest[c, answer];
-  answer = SparseArray[{{0}}];
-  NCTest[d, answer];
+  answer = {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}, {{0, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, -1}, {0, 0, 0, 0}}, {{0, 0, 1, 0}, {0, 0, 0, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}}};
+  NCTest[Normal[a], answer];
+  answer = {{0}, {0}, {0}, {-1}};
+  NCTest[Normal[b], answer];
+  answer = {{-1, 0, 0, 0}};
+  NCTest[Normal[c], answer];
+  answer = {{0}};
+  NCTest[Normal[d], answer];
 
   vars = {{x,y}};
   poly = NCPoly[{1, 1}, {{}, {x}}, vars];
@@ -70,9 +66,9 @@ Module[
     {{0, 0}, {0, 0}}
     }];
   NCTest[a, answer];
-  answer = SparseArray[{{0}, {1}}];
+  answer = {{0}, {1}};
   NCTest[b, answer];
-  answer = SparseArray[{{1, 0}}];
+  answer = {{1, 0}};
   NCTest[c, answer];
   answer = SparseArray[{{1}}];
   NCTest[d, answer];
@@ -96,9 +92,9 @@ Module[
     {{0, -1}, {0, 0}}
     }];
   NCTest[a, answer];
-  answer = SparseArray[{{0}, {1}}];
+  answer = {{0}, {1}};
   NCTest[b, answer];
-  answer = SparseArray[{{1, 0}}];
+  answer = {{1, 0}};
   NCTest[c, answer];
   answer = SparseArray[{{1}}];
   NCTest[d, answer];
