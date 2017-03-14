@@ -54,4 +54,35 @@ Module[
   NCTest[NCSimplifyRational[MatMult[mat, invmat]], 
          {{1,0,0},{0,1,0},{0,0,1}}];
 
+  (* Distributive property *)
+  NCTest[inv[a**b], Unevaluated[inv[a**b]]];
+  NCTest[inv[a**b] =!= inv[b]**inv[a]];
+  
+  NCTest[inv[a**b**c], Unevaluated[inv[a**b**c]]];
+  NCTest[inv[a**b**c] =!= inv[c]**inv[b]**inv[a]];
+  
+  NCTest[Options[inv], {Distribute -> False}];
+
+
+  SetOptions[inv, Distribute -> True];
+  
+  NCTest[inv[a**b], Unevaluated[inv[b]**inv[a]]];
+  NCTest[inv[a**b] === inv[b]**inv[a]];
+
+  NCTest[inv[a**b**c], Unevaluated[inv[c]**inv[b]**inv[a]]];
+  NCTest[inv[a**b**c] === inv[c]**inv[b]**inv[a]];
+
+  NCTest[Options[inv], {Distribute -> True}];
+
+
+  SetOptions[inv, Distribute -> False];
+
+  NCTest[inv[a**b], Unevaluated[inv[a**b]]];
+  NCTest[inv[a**b] =!= inv[b]**inv[a]];
+
+  NCTest[inv[a**b**c], Unevaluated[inv[a**b**c]]];
+  NCTest[inv[a**b**c] =!= inv[c]**inv[b]**inv[a]];
+
+  NCTest[Options[inv], {Distribute -> False}];
+
 ];  

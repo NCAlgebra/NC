@@ -366,7 +366,30 @@ Begin[ "`Private`" ]
   *)
   (* END MAURICIO MAR 2016 *)
 
+  (* Option to control distributive property *)
+  Clear[$inv];
+  Options[$inv] = {Distribute -> False};
+  
+  inv/:SetOptions[inv, OptionsPattern[$inv]] :=
+      If[ OptionValue[Distribute]
+         ,
+          (* install distributive rule *)
+          inv/:inv[NonCommutativeMultiply[a_,b_,c___]] := 
+              NonCommutativeMultiply[inv[NonCommutativeMultiply[b,c]], 
+                                     inv[a]];
+          SetOptions[$inv, Distribute -> True];
+         ,
+          Quiet[
+            (* remove distributive rule *)
+            inv/:inv[NonCommutativeMultiply[a_,b_,c___]] =. ;
+            SetOptions[$inv, Distribute -> False];
+           ,
+            {TagUnset::norep, Unset::norep}  
+         ];
+      ];
 
+  inv/:Options[inv] := Options[$inv];
+      
   (* Power *)
   
   (* Expand monomial rules *)

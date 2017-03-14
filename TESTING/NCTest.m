@@ -66,7 +66,7 @@ Begin[ "`Private`" ]
 
   SetAttributes[NCTestCheck, HoldAll];
 
-  NCTest[result_, answer_] := Block[
+  NCTest[result_, answer_:True] := Block[
     {pass},
     NCTestCounter ++;
     pass = (result === answer);

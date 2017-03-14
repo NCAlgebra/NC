@@ -93,6 +93,20 @@ both lead to `Id = 1` and
 	
 results in `a`.
 
+**Version 5:** `inv` no longer automatically distributes over
+noncommutative products. If this more aggressive behavior is desired
+use `SetOptions[inv, Distribute -> True]`. For example
+
+	SetOptions[inv, Distribute -> True]
+	inv[b**a]
+
+returns `inv[b]**inv[a]`. Conversely
+
+	SetOptions[inv, Distribute -> False]
+	inv[b**a]
+	
+returns `inv[b**a]`.
+
 `tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
 adjoint of symbol `x`. Like `inv`, the properties of transposes and
 adjoints that everyone uses constantly are built-in. For example:
