@@ -18,7 +18,7 @@ BeginPackage[ "NCSylvester`",
 	      "NCDot`",
 	      "NonCommutativeMultiply`" ];
 
-Clear[NCPolynomialToNCSylvester,
+Clear[NCPToNCSylvester,
       NCSylvesterToNCPolynomial,
       NCSylvesterCollectOnVars];
 
@@ -33,10 +33,10 @@ Options[NCSylvesterToNCPolynomial] = {
 
 Begin[ "`Private`" ]
 
-  (* NCPolynomialToNCSylvester *)
+  (* NCPToNCSylvester *)
 
-  Clear[NCPolynomialToNCSylvesterAux];
-  NCPolynomialToNCSylvesterAux[poly_Association, var_Symbol] := Module[
+  Clear[NCPToNCSylvesterAux];
+  NCPToNCSylvesterAux[poly_Association, var_Symbol] := Module[
     {exp, coeff, left, right, leftBasis, rightBasis,
      i, j, p, q, F},
 
@@ -128,14 +128,14 @@ Begin[ "`Private`" ]
 
   ];
 
-  NCPolynomialToNCSylvester[p_NCPolynomial, LinearQ_:True] := (
+  NCPToNCSylvester[p_NCPolynomial, LinearQ_:True] := (
 
     If [LinearQ && !NCPLinearQ[p],
         Message[NCSylvester::NotLinear];
         Return[$Failed];
     ];
     
-    {p[[1]], Association[Map[NCPolynomialToNCSylvesterAux[p[[2]], #]&, p[[3]]]]}
+    {p[[1]], Association[Map[NCPToNCSylvesterAux[p[[2]], #]&, p[[3]]]]}
     
   );
   

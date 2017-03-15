@@ -669,7 +669,7 @@ Begin[ "`Private`" ]
 
       sylv = Map[NCToNCPolynomial[#, vars]&, sylv];
       NCDebug[2, sylv];
-      sylv = Map[NCPolynomialToNCSylvester, sylv];
+      sylv = Map[NCPToNCSylvester, sylv];
       NCDebug[2, sylv];
       sylv = Map[NCSylvesterToNCPolynomial[#,KeepZeros->True]&, sylv];
       NCDebug[2, sylv];
