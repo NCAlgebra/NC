@@ -50,9 +50,13 @@ Options[NCSelfAdjointTest] = {
 Begin[ "`Private`" ]
 
   (* NCSymmetricTest *)
+  Clear[AuxPossibleZeroQ];
+  AuxPossibleZeroQ[exp_?VectorQ] := VectorQ[exp,PossibleZeroQ];
+  AuxPossibleZeroQ[exp_?MatrixQ] := MatrixQ[exp,PossibleZeroQ];
+  AuxPossibleZeroQ[exp_] := PossibleZeroQ[exp];
   
   Clear[NCSymmetricTestAux];
-  NCSymmetricTestAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
+  NCSymmetricTestAux[exp_, diff_, opts:OptionsPattern[{}]] := Module[
       {vars, tpVars, tpDiffVars, symVars, symRule, 
        options, symmetricVars, excludeVars, strict},
       
@@ -76,13 +80,12 @@ Begin[ "`Private`" ]
       Print["----"];
       Print["options = ", options];
       Print["diff = ", Normal[diff]];
-      Print["zero = ", zero];
       Print["symmetricVars = ", symmetricVars];
       Print["excludeVars = ", excludeVars];
       *)
 
       (* easy return *)
-      If[ diff === zero, Return[{True, {}}] ];
+      If[ AuxPossibleZeroQ[diff], Return[{True, {}}] ];
       
       (* check for possible symmetric variables *)
       vars = NCGrabSymbols[exp];
@@ -140,7 +143,7 @@ Begin[ "`Private`" ]
 
       (* Print[symRule]; *)
       
-      If [ (diff /. symRule) =!= zero,
+      If [ !AuxPossibleZeroQ[(diff /. symRule)],
          (* Expression is not symmetric *)
          Return[{False, {}}]
       ];
@@ -156,7 +159,7 @@ Begin[ "`Private`" ]
   NCSymmetricTest[exp_, opts:OptionsPattern[{}]] :=
     NCSymmetricTestAux[exp, 
                        ExpandNonCommutativeMultiply[exp - tp[exp]],
-                       0, opts];
+                       opts];
       
   NCSymmetricTest[mat_SparseArray, opts:OptionsPattern[{}]] := 
     NCSymmetricTest[Normal[mat], opts];
@@ -165,7 +168,7 @@ Begin[ "`Private`" ]
     NCSymmetricTestAux[
         mat, 
         ExpandNonCommutativeMultiply[mat - tpMat[mat]], 
-        ConstantArray[0, Dimensions[mat]], opts];
+        opts];
 
   (* NCSymmetricQ *)
  
@@ -240,7 +243,7 @@ Begin[ "`Private`" ]
   (* NCSelfAdjointQ *)
   
   Clear[NCSelfAdjointTestAux];
-  NCSelfAdjointTestAux[exp_, diff_, zero_, opts:OptionsPattern[{}]] := Module[
+  NCSelfAdjointTestAux[exp_, diff_, opts:OptionsPattern[{}]] := Module[
       {vars, ajVars, ajDiffVars, selfAdjVars, selfAdjRule, ajCoVars, symVars, 
        options, symmetricVars, excludeVars, strict},
       
@@ -268,14 +271,13 @@ Begin[ "`Private`" ]
       Print["-----"];
       Print["options = ", options];
       Print["diff = ", diff];
-      Print["zero = ", zero];
       Print["selfAdjointVars = ", selfAdjointVars];
       Print["symmetricVars = ", symmetricVars];
       Print["excludeVars = ", excludeVars];
       *)
       
       (* easy return *)
-      If[ diff === zero, Return[{True, {}, {}}] ];
+      If[ AuxPossibleZeroQ[diff], Return[{True, {}, {}}] ];
 
       (* check for possible self-adjoint variables *)
       vars = NCGrabSymbols[exp];
@@ -345,7 +347,7 @@ Begin[ "`Private`" ]
 
       (* Print["selfAdjRule = ", selfAdjRule]; *)
       
-      If [ (diff /. selfAdjRule) =!= zero,
+      If [ !AuxPossibleZeroQ[(diff /. selfAdjRule)],
 
         (* Try real assumptions *)
         ajCoVars = Union[NCGrabSymbols[exp, aj|co] /. (aj|co)[x_]->x];
@@ -373,7 +375,7 @@ Begin[ "`Private`" ]
       
         (* Print[selfAdjRule]; *)
 
-        If [ (diff /. selfAdjRule) =!= zero,
+        If [ !AuxPossibleZeroQ[(diff /. selfAdjRule)],
            (* Expression is not adjoint *)
            Return[{False, {}, {}}]
         ];
@@ -399,7 +401,7 @@ Begin[ "`Private`" ]
   NCSelfAdjointTest[exp_, opts:OptionsPattern[{}]] :=
     NCSelfAdjointTestAux[exp, 
                          ExpandNonCommutativeMultiply[exp - aj[exp]],
-                         0, opts];
+                         opts];
 
   NCSelfAdjointTest[mat_SparseArray, opts:OptionsPattern[{}]] := 
     NCSelfAdjointTest[Normal[mat], opts];
@@ -408,7 +410,7 @@ Begin[ "`Private`" ]
     NCSelfAdjointTestAux[
         mat, 
         ExpandNonCommutativeMultiply[mat - ajMat[mat]], 
-        ConstantArray[0, Dimensions[mat]], opts];
+        opts];
 
   (* NCSelfAdjointQ *)
  

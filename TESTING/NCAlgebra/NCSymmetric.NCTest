@@ -93,6 +93,33 @@ Module[
     expr = a + b ** tp[b] + tp[b] ** c + c ** b;
     NCTest[NCSymmetricQ[expr], True];
 
+    expr = {{0,1},{1,0}};
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = 1.*{{0,1},{1,0}};
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = {{0,I},{-I,0}};
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = 1.*{{0,I},{-I,0}};
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = {{0,1},{2,0}};
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = 1.*{{0,1},{2,0}};
+    NCTest[NCSymmetricQ[expr], False];
+
+    expr = {{0,I},{I,0}};
+    NCTest[NCSymmetricQ[expr], True];
+
+    expr = 1.*{{0,I},{I,0}};
+    NCTest[NCSymmetricQ[expr], True];
+    
+    expr = {{x,x},{x,x}};
+    NCTest[NCSymmetricQ[expr], True];
+
     expr = {{x,x},{x,x}};
     NCTest[NCSymmetricQ[expr], True];
 

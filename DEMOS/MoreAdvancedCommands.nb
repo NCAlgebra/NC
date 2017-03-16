@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    105618,       3190]
-NotebookOptionsPosition[     98278,       2939]
-NotebookOutlinePosition[     98631,       2955]
-CellTagsIndexPosition[     98588,       2952]
+NotebookDataLength[    103662,       3129]
+NotebookOptionsPosition[     96518,       2884]
+NotebookOutlinePosition[     96871,       2900]
+CellTagsIndexPosition[     96828,       2897]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -2730,66 +2730,6 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{"left", "\[IndentingNewLine]", "right", "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "middle", "]"}]}], "Input",
- CellChangeTimes->{{3.697165517182498*^9, 3.6971655634709387`*^9}, {
-  3.6972008645038137`*^9, 3.6972009349148207`*^9}, {3.697201286114332*^9, 
-  3.697201299131811*^9}, {3.697201534084147*^9, 3.697201543850266*^9}, {
-  3.697201773748564*^9, 3.697201775148273*^9}, {3.697201932698844*^9, 
-  3.697201934600933*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"h", ",", 
-   RowBox[{"x", "**", "h"}], ",", 
-   RowBox[{"x", "**", "x", "**", "h"}]}], "}"}]], "Output",
- CellChangeTimes->{3.69720249824257*^9, 3.697210341751141*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"h", "**", "x", "**", "x"}], ",", 
-   RowBox[{"h", "**", "x"}], ",", "h"}], "}"}]], "Output",
- CellChangeTimes->{3.69720249824257*^9, 3.697210341765382*^9}],
-
-Cell[BoxData[
- TagBox[
-  RowBox[{"(", "\[NoBreak]", GridBox[{
-     {"2", 
-      RowBox[{"2", " ", "x"}], 
-      RowBox[{"2", " ", 
-       RowBox[{"x", "**", "x"}]}]},
-     {"0", "2", 
-      RowBox[{"2", " ", "x"}]},
-     {"0", "0", "2"}
-    },
-    GridBoxAlignment->{
-     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-      "RowsIndexed" -> {}},
-    GridBoxSpacings->{"Columns" -> {
-        Offset[0.27999999999999997`], {
-         Offset[0.7]}, 
-        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-        Offset[0.2], {
-         Offset[0.4]}, 
-        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
-  Function[BoxForm`e$, 
-   MatrixForm[
-   SparseArray[
-    Automatic, {3, 3}, 0, {
-     1, {{0, 3, 5, 6}, {{1}, {2}, {3}, {2}, {3}, {3}}}, {
-      2, 2 $CellContext`x, 2 
-       NonCommutativeMultiply[$CellContext`x, $CellContext`x], 2, 
-       2 $CellContext`x, 2}}]]]]], "Output",
- CellChangeTimes->{3.69720249824257*^9, 3.6972103417800407`*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{"<<", "NCQuadratic`"}]], "Input",
- CellChangeTimes->{{3.6972068219628267`*^9, 3.697206826688991*^9}}],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[{
  RowBox[{
   RowBox[{"expr", "=", 
@@ -2935,7 +2875,12 @@ Cell[BoxData[
  CellChangeTimes->{3.697209740852538*^9, 3.6972098307005167`*^9, 
   3.697210343607957*^9}]
 }, Open  ]]
-}, Open  ]]
+}, Open  ]],
+
+Cell["Linear polynomials with noncommutative coefficients", "Chapter",
+ CellChangeTimes->{{3.696627232030072*^9, 3.696627245040209*^9}, {
+  3.696859656547398*^9, 3.696859656778236*^9}, {3.697165477290793*^9, 
+  3.697165478737138*^9}, {3.698541676303726*^9, 3.6985416791743107`*^9}}]
 },
 WindowSize->{808, 751},
 WindowMargins->{{Automatic, 0}, {Automatic, 0}},
@@ -3135,7 +3080,7 @@ Cell[CellGroupData[{
 Cell[58634, 1965, 447, 6, 63, "Input"],
 Cell[59084, 1973, 582, 11, 35, "Output"],
 Cell[59669, 1986, 555, 10, 28, "Output"],
-Cell[60227, 1998, 1259, 30, 60, "Output"]
+Cell[60227, 1998, 1259, 30, 49, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[61523, 2033, 336, 9, 46, "Input"],
@@ -3146,7 +3091,7 @@ Cell[CellGroupData[{
 Cell[63055, 2080, 447, 6, 63, "Input"],
 Cell[63505, 2088, 326, 7, 28, "Output"],
 Cell[63834, 2097, 326, 7, 28, "Output"],
-Cell[64163, 2106, 1128, 31, 74, "Output"]
+Cell[64163, 2106, 1128, 31, 63, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[65328, 2142, 605, 16, 46, "Input"],
@@ -3156,7 +3101,7 @@ Cell[CellGroupData[{
 Cell[76708, 2386, 202, 2, 63, "Input"],
 Cell[76913, 2390, 210, 5, 28, "Output"],
 Cell[77126, 2397, 210, 5, 28, "Output"],
-Cell[77339, 2404, 1005, 29, 74, "Output"]
+Cell[77339, 2404, 1005, 29, 63, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[78381, 2438, 388, 9, 28, "Input"],
@@ -3167,31 +3112,25 @@ Cell[CellGroupData[{
 Cell[89800, 2680, 202, 2, 63, "Input"],
 Cell[90005, 2684, 208, 5, 28, "Output"],
 Cell[90216, 2691, 210, 5, 28, "Output"],
-Cell[90429, 2698, 1006, 29, 74, "Output"]
+Cell[90429, 2698, 1006, 29, 63, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[91472, 2732, 447, 6, 63, "Input"],
-Cell[91922, 2740, 207, 5, 28, "Output"],
-Cell[92132, 2747, 207, 5, 28, "Output"],
-Cell[92342, 2754, 1011, 29, 74, "Output"]
-}, Open  ]],
-Cell[93368, 2786, 124, 2, 28, "Input"],
-Cell[CellGroupData[{
-Cell[93517, 2792, 942, 27, 46, "Input"],
-Cell[94462, 2821, 482, 10, 21, "Message"]
+Cell[91472, 2732, 942, 27, 46, "Input"],
+Cell[92417, 2761, 482, 10, 21, "Message"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[94981, 2836, 529, 14, 63, "Input"],
-Cell[95513, 2852, 385, 9, 21, "Message"],
-Cell[95901, 2863, 1273, 35, 76, "Output"]
+Cell[92936, 2776, 529, 14, 63, "Input"],
+Cell[93468, 2792, 385, 9, 21, "Message"],
+Cell[93856, 2803, 1273, 35, 65, "Output"]
 }, Open  ]],
-Cell[97189, 2901, 124, 2, 28, "Input"],
+Cell[95144, 2841, 124, 2, 28, "Input"],
 Cell[CellGroupData[{
-Cell[97338, 2907, 120, 3, 28, "Input"],
-Cell[97461, 2912, 380, 9, 21, "Message"],
-Cell[97844, 2923, 406, 12, 35, "Output"]
+Cell[95293, 2847, 120, 3, 28, "Input"],
+Cell[95416, 2852, 380, 9, 21, "Message"],
+Cell[95799, 2863, 406, 12, 35, "Output"]
 }, Open  ]]
-}, Open  ]]
+}, Open  ]],
+Cell[96232, 2879, 282, 3, 65, "Chapter"]
 }
 ]
 *)

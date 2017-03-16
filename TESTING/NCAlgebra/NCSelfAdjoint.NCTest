@@ -135,12 +135,24 @@ Module[
     expr = 1.*{{0,1},{1,0}};
     NCTest[NCSelfAdjointQ[expr], True];
 
+    expr = {{0,I},{-I,0}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
+    expr = 1.*{{0,I},{-I,0}};
+    NCTest[NCSelfAdjointQ[expr], True];
+
     expr = {{0,1},{2,0}};
     NCTest[NCSelfAdjointQ[expr], False];
 
     expr = 1.*{{0,1},{2,0}};
     NCTest[NCSelfAdjointQ[expr], False];
 
+    expr = {{0,I},{I,0}};
+    NCTest[NCSelfAdjointQ[expr], False];
+
+    expr = 1.*{{0,I},{I,0}};
+    NCTest[NCSelfAdjointQ[expr], False];
+    
     expr = {{x,x},{x,x}};
     NCTest[NCSelfAdjointQ[expr], True];
 
