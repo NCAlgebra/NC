@@ -409,7 +409,7 @@ Begin[ "`Private`" ]
         mat, 
         ExpandNonCommutativeMultiply[mat - ajMat[mat]], 
         ConstantArray[0, Dimensions[mat]], opts];
-    
+
   (* NCSelfAdjointQ *)
  
   NCSelfAdjointQ[exp_, opts:OptionsPattern[{}]] := 
