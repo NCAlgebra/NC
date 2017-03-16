@@ -512,12 +512,12 @@ matrix. Load the package
 	<< NCQuadratic`
 
 and use the command
-[`NCPolynomialToNCQuadratic`](#NCPolynomialToNCQuadratic) as in 
+[`NCPToNCQuadratic`](#NCPToNCQuadratic) as in 
 
 	vars = {x, y};
 	expr = tp[x] ** a ** x ** d + tp[x] ** b ** y + tp[y] ** c ** y + tp[y] ** tp[b] ** x ** d;
 	p = NCToNCPolynomial[expr, vars];
-	{const, lin, left, middle, right} = NCPolynomialToNCQuadratic[p];
+	{const, lin, left, middle, right} = NCPToNCQuadratic[p];
 
 which returns
 
@@ -544,10 +544,10 @@ This command returns
 	2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
 
 which is quadratic in the direction `h`. The decomposition of the
-nc Hessian using `NCPolynomialToNCQuadratic`
+nc Hessian using `NCPToNCQuadratic`
 
 	p = NCToNCPolynomial[hes, {h}];
-	{const, lin, left, middle, right} = NCPolynomialToNCQuadratic[p];
+	{const, lin, left, middle, right} = NCPToNCQuadratic[p];
 
 produces
 
@@ -585,7 +585,7 @@ $$
 2 & 2 x & 2 x^2
 \end{bmatrix}
 $$
-Note the argument `SymetricVariables -> {x,h}` which tells
+Note the argument `SymmetricVariables -> {x,h}` which tells
 `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
 variables. Because the `middle` matrix is never positive semidefinite
 for any possible value of $x$ the conclusion[^convex] is that the nc quartic
@@ -602,7 +602,8 @@ by the convenience command
 
 automatically assumes that both `x` and `h` are symmetric variables
 and produces suitable left and right vectors as well as a symmetric
-middle matrix.
+middle matrix. Now we illustrate the application of such command to
+checking the convexity region of a noncommutative rational function.
 
 If one is interested in checking convexity of nc rationals the package
 [`NCConvexity`](#PackageNCConvexity) has functions that automate the

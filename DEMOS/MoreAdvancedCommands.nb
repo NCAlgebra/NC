@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    105406,       3182]
-NotebookOptionsPosition[     98066,       2931]
-NotebookOutlinePosition[     98419,       2947]
-CellTagsIndexPosition[     98376,       2944]
+NotebookDataLength[    105618,       3190]
+NotebookOptionsPosition[     98278,       2939]
+NotebookOutlinePosition[     98631,       2955]
+CellTagsIndexPosition[     98588,       2952]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1954,12 +1954,12 @@ Cell[BoxData[{
    RowBox[{"{", 
     RowBox[{"const", ",", "lin", ",", "left", ",", "middle", ",", "right"}], 
     "}"}], "=", 
-   RowBox[{"NCPolynomialToNCQuadratic", "[", "p", "]"}]}], ";"}]}], "Input",
+   RowBox[{"NCPToNCQuadratic", "[", "p", "]"}]}], ";"}]}], "Input",
  CellChangeTimes->{{3.697200950323637*^9, 3.697201080520966*^9}, 
    3.697201127750864*^9, {3.697201281938809*^9, 3.697201288825897*^9}, {
    3.697201455729412*^9, 3.697201482304515*^9}, {3.697201764258607*^9, 
    3.6972018147090807`*^9}, {3.697206308938859*^9, 3.6972063326420517`*^9}, {
-   3.697207560565414*^9, 3.697207578845676*^9}}],
+   3.697207560565414*^9, 3.697207578845676*^9}, 3.698540240859294*^9}],
 
 Cell[CellGroupData[{
 
@@ -2071,10 +2071,10 @@ Cell[BoxData[{
    RowBox[{"{", 
     RowBox[{"const", ",", "lin", ",", "left", ",", "middle", ",", "right"}], 
     "}"}], "=", 
-   RowBox[{"NCPolynomialToNCQuadratic", "[", "p", "]"}]}], ";"}]}], "Input",
+   RowBox[{"NCPToNCQuadratic", "[", "p", "]"}]}], ";"}]}], "Input",
  CellChangeTimes->{
   3.697202250566667*^9, {3.697202297286731*^9, 3.6972023064868393`*^9}, 
-   3.6972062609278297`*^9}],
+   3.6972062609278297`*^9, 3.6985402408703203`*^9}],
 
 Cell[CellGroupData[{
 
@@ -2189,8 +2189,9 @@ Cell[BoxData[
                   None, Evaluator -> Automatic, Method -> "Preemptive"], 
                  Alignment -> {Center, Center}, ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], 
                 GraphicsBox[
                  
                  RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}, {
@@ -2207,8 +2208,9 @@ Cell[BoxData[
                  Directive[
                    GrayLevel[0.5, 0.4]], ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}], 
                  Method -> {
                   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                    Automatic, "DefaultPlotStyle" -> Automatic, 
@@ -2248,8 +2250,9 @@ Cell[BoxData[
                   None, Evaluator -> Automatic, Method -> "Preemptive"], 
                  Alignment -> {Center, Center}, ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], 
                 GraphicsBox[
                  
                  RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}, {
@@ -2266,8 +2269,9 @@ Cell[BoxData[
                  Directive[
                    GrayLevel[0.5, 0.4]], ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}], 
                  Method -> {
                   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                    Automatic, "DefaultPlotStyle" -> Automatic, 
@@ -2480,8 +2484,9 @@ Cell[BoxData[
                   None, Evaluator -> Automatic, Method -> "Preemptive"], 
                  Alignment -> {Center, Center}, ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], 
                 GraphicsBox[
                  
                  RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}, {
@@ -2498,8 +2503,9 @@ Cell[BoxData[
                  Directive[
                    GrayLevel[0.5, 0.4]], ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}], 
                  Method -> {
                   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                    Automatic, "DefaultPlotStyle" -> Automatic, 
@@ -2539,8 +2545,9 @@ Cell[BoxData[
                   None, Evaluator -> Automatic, Method -> "Preemptive"], 
                  Alignment -> {Center, Center}, ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], 
                 GraphicsBox[
                  
                  RasterBox[{{{0.772061, 0.92462, 0.998703}, {0.5, 0., 0.}, {
@@ -2557,8 +2564,9 @@ Cell[BoxData[
                  Directive[
                    GrayLevel[0.5, 0.4]], ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}], 
                  Method -> {
                   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                    Automatic, "DefaultPlotStyle" -> Automatic, 
@@ -3122,66 +3130,66 @@ Cell[56295, 1900, 650, 14, 28, "Output"]
 Cell[CellGroupData[{
 Cell[56994, 1920, 226, 3, 65, "Chapter"],
 Cell[57223, 1925, 122, 2, 28, "Input"],
-Cell[57348, 1929, 1248, 32, 82, "Input"],
+Cell[57348, 1929, 1261, 32, 82, "Input"],
 Cell[CellGroupData[{
-Cell[58621, 1965, 447, 6, 63, "Input"],
-Cell[59071, 1973, 582, 11, 35, "Output"],
-Cell[59656, 1986, 555, 10, 28, "Output"],
-Cell[60214, 1998, 1259, 30, 60, "Output"]
+Cell[58634, 1965, 447, 6, 63, "Input"],
+Cell[59084, 1973, 582, 11, 35, "Output"],
+Cell[59669, 1986, 555, 10, 28, "Output"],
+Cell[60227, 1998, 1259, 30, 60, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[61510, 2033, 336, 9, 46, "Input"],
-Cell[61849, 2044, 645, 15, 46, "Output"]
+Cell[61523, 2033, 336, 9, 46, "Input"],
+Cell[61862, 2044, 645, 15, 46, "Output"]
 }, Open  ]],
-Cell[62509, 2062, 493, 14, 46, "Input"],
+Cell[62522, 2062, 508, 14, 46, "Input"],
 Cell[CellGroupData[{
-Cell[63027, 2080, 447, 6, 63, "Input"],
-Cell[63477, 2088, 326, 7, 28, "Output"],
-Cell[63806, 2097, 326, 7, 28, "Output"],
-Cell[64135, 2106, 1128, 31, 74, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[65300, 2142, 605, 16, 46, "Input"],
-Cell[65908, 2160, 10643, 217, 93, "Output"]
+Cell[63055, 2080, 447, 6, 63, "Input"],
+Cell[63505, 2088, 326, 7, 28, "Output"],
+Cell[63834, 2097, 326, 7, 28, "Output"],
+Cell[64163, 2106, 1128, 31, 74, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[76588, 2382, 202, 2, 63, "Input"],
-Cell[76793, 2386, 210, 5, 28, "Output"],
-Cell[77006, 2393, 210, 5, 28, "Output"],
-Cell[77219, 2400, 1005, 29, 74, "Output"]
+Cell[65328, 2142, 605, 16, 46, "Input"],
+Cell[65936, 2160, 10735, 221, 93, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[78261, 2434, 388, 9, 28, "Input"],
-Cell[78652, 2445, 522, 11, 21, "Message"],
-Cell[79177, 2458, 10374, 209, 61, "Output"]
+Cell[76708, 2386, 202, 2, 63, "Input"],
+Cell[76913, 2390, 210, 5, 28, "Output"],
+Cell[77126, 2397, 210, 5, 28, "Output"],
+Cell[77339, 2404, 1005, 29, 74, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[89588, 2672, 202, 2, 63, "Input"],
-Cell[89793, 2676, 208, 5, 28, "Output"],
-Cell[90004, 2683, 210, 5, 28, "Output"],
-Cell[90217, 2690, 1006, 29, 74, "Output"]
+Cell[78381, 2438, 388, 9, 28, "Input"],
+Cell[78772, 2449, 522, 11, 21, "Message"],
+Cell[79297, 2462, 10466, 213, 61, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[91260, 2724, 447, 6, 63, "Input"],
-Cell[91710, 2732, 207, 5, 28, "Output"],
-Cell[91920, 2739, 207, 5, 28, "Output"],
-Cell[92130, 2746, 1011, 29, 74, "Output"]
-}, Open  ]],
-Cell[93156, 2778, 124, 2, 28, "Input"],
-Cell[CellGroupData[{
-Cell[93305, 2784, 942, 27, 46, "Input"],
-Cell[94250, 2813, 482, 10, 21, "Message"]
+Cell[89800, 2680, 202, 2, 63, "Input"],
+Cell[90005, 2684, 208, 5, 28, "Output"],
+Cell[90216, 2691, 210, 5, 28, "Output"],
+Cell[90429, 2698, 1006, 29, 74, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[94769, 2828, 529, 14, 63, "Input"],
-Cell[95301, 2844, 385, 9, 21, "Message"],
-Cell[95689, 2855, 1273, 35, 76, "Output"]
+Cell[91472, 2732, 447, 6, 63, "Input"],
+Cell[91922, 2740, 207, 5, 28, "Output"],
+Cell[92132, 2747, 207, 5, 28, "Output"],
+Cell[92342, 2754, 1011, 29, 74, "Output"]
 }, Open  ]],
-Cell[96977, 2893, 124, 2, 28, "Input"],
+Cell[93368, 2786, 124, 2, 28, "Input"],
 Cell[CellGroupData[{
-Cell[97126, 2899, 120, 3, 28, "Input"],
-Cell[97249, 2904, 380, 9, 21, "Message"],
-Cell[97632, 2915, 406, 12, 35, "Output"]
+Cell[93517, 2792, 942, 27, 46, "Input"],
+Cell[94462, 2821, 482, 10, 21, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94981, 2836, 529, 14, 63, "Input"],
+Cell[95513, 2852, 385, 9, 21, "Message"],
+Cell[95901, 2863, 1273, 35, 76, "Output"]
+}, Open  ]],
+Cell[97189, 2901, 124, 2, 28, "Input"],
+Cell[CellGroupData[{
+Cell[97338, 2907, 120, 3, 28, "Input"],
+Cell[97461, 2912, 380, 9, 21, "Message"],
+Cell[97844, 2923, 406, 12, 35, "Output"]
 }, Open  ]]
 }, Open  ]]
 }
