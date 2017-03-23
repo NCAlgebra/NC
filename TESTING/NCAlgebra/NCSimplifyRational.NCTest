@@ -29,7 +29,6 @@ Module[
      SetNonCommutative[h,x,y,a,b];
      SetCommutative[A,B,C,K,S];
 
-
      (* Normalize inverses *)
 
      expr = inv[x];
@@ -174,6 +173,13 @@ Module[
      (* Print["----test 6 "]; *)
      NCTest[NCSimplifyRational[  -2*inv[1 - 2*b ** a]**b ], 
             -2*b**inv[1 - 2*a ** b]];
+
+     (* Igor's bug *)
+     expr = inv[x - (-1 + A) (-1 + y) ** inv[h]] ** (-1 + y) ** inv[h];
+     answer = 1/(1-A) - inv[x + (-1 + A) inv[h] + (1 - A) y ** inv[h]] ** x/(1 - A);
+     NCTest[NCSimplifyRational[expr], answer];
+
+     (* WATCH OUT FOR CHANGE IN SNC STATUS!!! *)
 
      SetNonCommutative[
           f, g, a, b, c, d, dd, z, W, U, Y, DW, DU, DY,  A, x, B1, B2, 

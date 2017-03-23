@@ -41,8 +41,8 @@ Begin["`Private`"]
             //. ninv[a_, x_] -> inv[a + x])
 
   Clear[NCSimplifyRationalRules];
-  Clear[a,b,K];
-  SetCommutative[K];
+  Clear[a,b,A,B];
+  SetCommutative[A,B];
   SetNonCommutative[a,b];
 
   Clear[NCSimplifyRationalOriginalRules];
@@ -51,50 +51,50 @@ Begin["`Private`"]
       
       (*---------------------------RULE 1---------------------------*) 
       (* rule 1 is as follows:                                      *) 
-      (*    inv[a] inv[1 + K a b] -> inv[a] - K b inv[1 + K a b]    *) 
-      (*    inv[a] inv[1 + K a] -> inv[a] - K inv[1 + K a]          *)
+      (*    inv[a] inv[1 + A a b] -> inv[a] - A b inv[1 + A a b]    *) 
+      (*    inv[a] inv[1 + A a] -> inv[a] - A inv[1 + A a]          *)
       (*------------------------------------------------------------*)
-      inv[a_]**inv[1 + K_. a_**b_] :> inv[a] - K b**inv[1 + K a**b],
-      inv[a_]**inv[1 + K_. a_] :> inv[a] - K inv[1 + K a],
+      inv[a_]**inv[1 + A_. a_**b_] :> inv[a] - A b**inv[1 + A a**b],
+      inv[a_]**inv[1 + A_. a_] :> inv[a] - A inv[1 + A a],
 
       (*-----------------------RULE 2-------------------------------*) 
       (* rule 2 is as follows:                                      *) 
-      (*    inv[1 + K a b] inv[b] -> inv[b] - K inv[1 + K a b] a    *) 
-      (*                   -> inv[b] - K a inv[1 + K a b] (rule #6) *) 
-      (*    inv[1 + K a] inv[a] -> inv[a] - K inv[1 + K a ]         *) 
+      (*    inv[1 + A a b] inv[b] -> inv[b] - A inv[1 + A a b] a    *) 
+      (*                   -> inv[b] - A a inv[1 + A a b] (rule #6) *) 
+      (*    inv[1 + A a] inv[a] -> inv[a] - A inv[1 + A a ]         *) 
       (*------------------------------------------------------------*)
-      inv[1 + K_. a_**b_]**inv[b_] :> inv[b] - K a**inv[1 + K a**b],
-      inv[1 + K_. a_]**inv[a_] :> inv[a] - K inv[1 + K a],
+      inv[1 + A_. a_**b_]**inv[b_] :> inv[b] - A a**inv[1 + A a**b],
+      inv[1 + A_. a_]**inv[a_] :> inv[a] - A inv[1 + A a],
       
       (*-----------------------RULE 3-------------------------------*) 
       (* rule 3 is as follows:                                      *)
-      (*    inv[1 + K a b ] a b -> (1 - inv[1 + K a b])/K           *)
-      (*    inv[1 + K a] a -> (1 - inv[1 + K a])/K                  *) 
+      (*    inv[1 + A a b ] a b -> (1 - inv[1 + A a b])/A           *)
+      (*    inv[1 + A a] a -> (1 - inv[1 + A a])/A                  *) 
       (*------------------------------------------------------------*)
-      inv[1 + K_. a_**b_]**a_**b_ :> (1/K) - (1/K) inv[1 + K a**b],
-      inv[1 + K_. a_]**a_ :> (1/K) - (1/K) inv[1 + K a],
+      inv[1 + A_. a_**b_]**a_**b_ :> (1/A) - (1/A) inv[1 + A a**b],
+      inv[1 + A_. a_]**a_ :> (1/A) - (1/A) inv[1 + A a],
       
       (*-----------------------RULE 4-------------------------------*) 
       (* rule 4 is as follows:                                      *)
-      (*    a b inv[1 + K a b ] -> (1 - inv[1 + K a b])/K           *)
-      (*    a inv[1 + K a] -> (1 - inv[1 + K a])/K                  *) 
+      (*    a b inv[1 + A a b ] -> (1 - inv[1 + A a b])/A           *)
+      (*    a inv[1 + A a] -> (1 - inv[1 + A a])/A                  *) 
       (*------------------------------------------------------------*)
-      a_**b_**inv[1 + K_. a_**b_] :> (1/K) - (1/K) inv[1 + K a**b],
-      a_**inv[1 + K_. a_] :> (1/K) - (1/K) inv[1 + K a],
+      a_**b_**inv[1 + A_. a_**b_] :> (1/A) - (1/A) inv[1 + A a**b],
+      a_**inv[1 + A_. a_] :> (1/A) - (1/A) inv[1 + A a],
 
       (*----------------------RULE 5-------------------------------*) 
       (* rule 5 is as follows:                                     *) 
-      (*    inv[1 + K a b] inv[a] -> inv[a] inv[1 + K a b]         *)
-      (*    inv[1 + K a] inv[a] -> inv[a] inv[1 + K a]             *)
+      (*    inv[1 + A a b] inv[a] -> inv[a] inv[1 + A a b]         *)
+      (*    inv[1 + A a] inv[a] -> inv[a] inv[1 + A a]             *)
       (*-----------------------------------------------------------*)
       (* RULE 5 IS WRONG! RULE 2 OVERCOMES IT!                     *)
       (*-----------------------------------------------------------*)
       
       (*---------------------------------RULE 6---------------------*) 
       (* rule 6 is as follows:                                      *)
-      (*      inv[1 + K a b] a  =  a inv[1 + K b a]                 *) 
+      (*      inv[1 + A a b] a  =  a inv[1 + A b a]                 *) 
       (*------------------------------------------------------------*)
-      inv[1 + K_. a_**b_]**a_ :> a**inv[1 + K b**a]
+      inv[1 + A_. a_**b_]**a_ :> a**inv[1 + A b**a]
       
   };
   
@@ -104,31 +104,31 @@ Begin["`Private`"]
       
       (*---------------------------RULE 1---------------------------*) 
       (* rule 1 is as follows:                                      *) 
-      (*    inv[a] inv[1 + K a b] -> inv[a] - K b inv[1 + K a b]    *) 
-      (*    inv[a] inv[1 + K a] -> inv[a] - K inv[1 + K a]          *)
+      (*    inv[a] inv[1 + A a b] -> inv[a] - A b inv[1 + A a b]    *) 
+      (*    inv[a] inv[1 + A a] -> inv[a] - A inv[1 + A a]          *)
       (*------------------------------------------------------------*)
-      inv[a_]**inv[1 + K_. a_**b_] :> inv[a] - K b**inv[1 + K a**b],
-      inv[a_]**inv[1 + K_. a_] :> inv[a] - K inv[1 + K a],
+      inv[a_]**inv[1 + A_. a_**b_] :> inv[a] - A b**inv[1 + A a**b],
+      inv[a_]**inv[1 + A_. a_] :> inv[a] - A inv[1 + A a],
 
       (*-----------------------RULE 2-------------------------------*) 
       (* rule 2 is as follows:                                      *) 
-      (*    inv[1 + K a b] inv[b] -> inv[b] - K inv[1 + K a b] a    *) 
-      (*                   -> inv[b] - K a inv[1 + K a b] (rule #6) *) 
-      (*    inv[1 + K a] inv[a] -> inv[a] - K inv[1 + K a ]         *) 
+      (*    inv[1 + A a b] inv[b] -> inv[b] - A inv[1 + A a b] a    *) 
+      (*                   -> inv[b] - A a inv[1 + A a b] (rule #6) *) 
+      (*    inv[1 + A a] inv[a] -> inv[a] - A inv[1 + A a ]         *) 
       (*------------------------------------------------------------*)
-      inv[1 + K_. a_**b_]**inv[b_] :> inv[b] - K a**inv[1 + K a**b],
-      inv[1 + K_. a_]**inv[a_] :> inv[a] - K inv[1 + K a],
+      inv[1 + A_. a_**b_]**inv[b_] :> inv[b] - A a**inv[1 + A a**b],
+      inv[1 + A_. a_]**inv[a_] :> inv[a] - A inv[1 + A a],
       
       (*---------------------------------RULE 6---------------------*) 
       (* rule 6 is as follows:                                      *)
-      (*      inv[1 + K a b] a  =  a inv[1 + K b a]                 *) 
+      (*      inv[1 + A a b] a  =  a inv[1 + A b a]                 *) 
       (*------------------------------------------------------------*)
-      inv[1 + K_. a_**b_]**a_ :> a**inv[1 + K b**a],
+      inv[1 + A_. a_**b_]**a_ :> a**inv[1 + A b**a],
       
       (*---------------------------------RULE 7---------------------*) 
       (* rule 6 is as follows:                                      *)
       (*   inv[A inv[a] + B b] inv[a]  =  (1/A) inv[1 + (B/A) a b]  *) 
-      (*   inv[a] inv[A inv[a] + K b]  =  (1/A) inv[1 + (B/A) b a]  *) 
+      (*   inv[a] inv[A inv[a] + A b]  =  (1/A) inv[1 + (B/A) b a]  *) 
       (*------------------------------------------------------------*)
       inv[A_. inv[a_] + B_. b_]**inv[a_] :> (1/A)inv[1 + (B/A) a ** b],
       inv[a_]**inv[A_. inv[a_] + B_. b_] :> (1/A)inv[1 + (B/A) b ** a]
@@ -141,6 +141,7 @@ Begin["`Private`"]
               NCReplaceRepeated[NCNormalizeInverse[expr], 
                                 NCSimplifyRationalOriginalRules]]];
 
+    
   Clear[NCPreSimplifyRational];
   NCPreSimplifyRational[expr_] := 
     FixedPoint[NCPreSimplifyRationalSinglePass, expr];
@@ -181,7 +182,7 @@ Begin["`Private`"]
     (* Convert from rational to polynomial *)
     {poly,rvars,rules} = NCRationalToNCPolynomial[tmp];
 
-    (*
+    (* 
     Print["expr = ", expr];
     Print["poly = ", poly];
     Print["rvars = ", rvars];
@@ -199,7 +200,8 @@ Begin["`Private`"]
     simpRules = Reverse[
         Map[NCSimplifyRationalAuxRules[
                 NCPSort[NCToNCPolynomial[#[[2,1]]]], 
-                #[[1]]]&, rules]];
+                #[[1]]]&, 
+            rules]];
 
     (* Print["simpRules = ", simpRules]; *)
 
@@ -222,8 +224,11 @@ Begin["`Private`"]
 
     (* Apply AB rules *)
       
-    tmp = ExpandAll[ExpandNonCommutativeMultiply[
-              NCReplaceRepeated[tmp, NCSimplifyRationalABRules]]];
+    tmp = NCReplaceRepeated[
+        ExpandAll[ExpandNonCommutativeMultiply[
+              NCReplaceRepeated[tmp, NCSimplifyRationalABRules]]],
+        a_. + A_. b_?NonCommutativeQ + B_ b_?NonCommutativeQ -> a+(A+B)b
+    ];
 
     (* Print["tmp = ", tmp]; *)
       

@@ -351,7 +351,8 @@ Begin[ "`Private`" ]
           Return[$Failed];
       ];
       
-      Return[NCPolynomial[m0, p, vars]];
+      (* Simplify Coefficients *)
+      Return[NCPolynomial[m0, Map[SimplifyCoefficients, p], vars]];
       
   ];
 

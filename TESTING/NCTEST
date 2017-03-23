@@ -27,7 +27,7 @@ tests = {
   "NCRoots",
   "NCConjugate",
   "NCOutput",
-  "NCConvexity",
+  "NCConvexity", 
   "Matrix" (*,
   "NCRealization",
   "NCRational",

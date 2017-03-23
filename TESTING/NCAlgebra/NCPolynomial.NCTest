@@ -342,6 +342,50 @@ Module[
    NCTest[NCPMonomialDegree[expr], {{1,1},{1,2}}];
    NCTest[NCPDegree[expr], 3];
 
+   p = A x**y + B x**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{x**y}->{{A+B,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = (A + B) x**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}];
+   NCTest[NCPDegree[expr], 2];
+
+   p = x + A x**y + B x**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{x}->{{1,1,1}},{x**y}->{{A+B,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = x + (A + B) x**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{1,1}}];
+   NCTest[NCPDegree[expr], 2];
+
+   p = x +  x**y + B x**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{x}->{{1,1,1}},{x**y}->{{1+B,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = x + (1 + B) x**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{1,1}}];
+   NCTest[NCPDegree[expr], 2];
+
+   p = x +  x**y + x**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{x}->{{1,1,1}},{x**y}->{{1+1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = x + (1 + 1) x**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{1,0},{1,1}}];
+   NCTest[NCPDegree[expr], 2];
+
    p = A y**a**x;
    expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{y,x}->{{A,1,a,1}}|>, vars];
