@@ -23,6 +23,7 @@ Clear[NCPoly,
       NCPolyLeadingMonomial,
       NCPolyGetCoefficients,
       NCPolyCoefficient,
+      NCPolyCoefficientArray,
       NCPolyGetDigits,
       NCPolyGetIntegers,
       NCPolyNumberOfVariables,
@@ -488,8 +489,7 @@ Begin["`Private`"];
 
   NCPolyDisplay[p___] := $Failed;
 
-
-  (* NCPolyIntegersToIndex *)
+  (* NCPolySplitDigits *)
       
   NCPolySplitDigits[digits_List] :=
       Table[{digits[[;;k]], digits[[k+1;;]]}, {k, 0, Length[digits]}];

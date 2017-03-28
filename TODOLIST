@@ -1,1 +1,4 @@
-Check for _Symbol in case of Subscript
+1. Subscript[_Symbol,__] as Symbol
+   a) Check for pattern _Symbol instead of _?NCSymbolOrSubscriptQ
+   b) Test NCPoly
+   c) Test NCSDP

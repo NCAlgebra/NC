@@ -52,7 +52,8 @@ Begin["`Private`"];
     NCPolyMonomial[monomials, {var}];
 
   Clear[NCPolyAux];
-  NCPolyAux[vars__Symbol] := Length[{vars}];
+  (* NCPolyAux[vars__Symbol] := Length[{vars}]; *)
+  NCPolyAux[vars:(_Symbol|Subscript[_Symbol,__])..] := Length[{vars}];
   NCPolyAux[var___] := (Message[NCPoly::InvalidList]; $Failed);
   
   (* NCPoly Constructor *)
@@ -69,7 +70,8 @@ Begin["`Private`"];
 
     (* list of variables *)
 
-    If[ Depth[{Vars}] > 3,
+    If[ And[Depth[{Vars}] > 3, 
+            Depth[{Vars} /. Subscript[x_,__] -> x] > 3],
         Message[NCPoly::InvalidList];
         Return[$Failed];
     ];
@@ -388,6 +390,22 @@ Begin["`Private`"];
     Return[{q, r}]
 
   ] /; f[[1]] === g[[1]];
+
+  (* NCPolyCoefficientArray *)
+      
+  Clear[DegreeToIndex];
+  DegreeToIndex[d_, n_] := (n^d - 1)/(n - 1);
+      
+  NCPolyCoefficientArray[p_NCPoly] := Module[
+    {n = Total[p[[1]]], d = NCPolyDegree[p]},
+    Return[
+      SparseArray[
+        Normal[
+          KeyMap[(DegreeToIndex[Total[Drop[#,-1]],n]+Last[#]+1)&,
+                 p[[2]]]
+        ],{DegreeToIndex[d+1,n]}]
+    ];
+  ];
 
 End[];
 EndPackage[]
