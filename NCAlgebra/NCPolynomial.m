@@ -71,18 +71,13 @@ Begin[ "`Private`" ]
 
   (* NCSplitMonomials *)
 
-  Clear[SymbolOrSubscriptQ];
-  SymbolOrSubscriptQ[_Symbol] := True;
-  SymbolOrSubscriptQ[Subscript[_Symbol,__]] := True;
-  SymbolOrSubscriptQ[_] := False;
-  
   Clear[NCSplitMonomialAux];
-  NCSplitMonomialAux[m_?SymbolOrSubscriptQ, vars_List] := {1,1,m,1};
-  NCSplitMonomialAux[a_?CommutativeQ m_?SymbolOrSubscriptQ, vars_List] := {a,1,m,1};
-  NCSplitMonomialAux[tp[m_?SymbolOrSubscriptQ], vars_List] := {1,1,tp[m],1};
-  NCSplitMonomialAux[a_?CommutativeQ tp[m_?SymbolOrSubscriptQ], vars_List] := {a,1,tp[m],1};
-  NCSplitMonomialAux[aj[m_?SymbolOrSubscriptQ], vars_List] := {1,1,aj[m],1};
-  NCSplitMonomialAux[a_?CommutativeQ aj[m_?SymbolOrSubscriptQ], vars_List] := {a,1,aj[m],1};
+  NCSplitMonomialAux[m_?NCSymbolOrSubscriptQ, vars_List] := {1,1,m,1};
+  NCSplitMonomialAux[a_?CommutativeQ m_?NCSymbolOrSubscriptQ, vars_List] := {a,1,m,1};
+  NCSplitMonomialAux[tp[m_?NCSymbolOrSubscriptQ], vars_List] := {1,1,tp[m],1};
+  NCSplitMonomialAux[a_?CommutativeQ tp[m_?NCSymbolOrSubscriptQ], vars_List] := {a,1,tp[m],1};
+  NCSplitMonomialAux[aj[m_?NCSymbolOrSubscriptQ], vars_List] := {1,1,aj[m],1};
+  NCSplitMonomialAux[a_?CommutativeQ aj[m_?NCSymbolOrSubscriptQ], vars_List] := {a,1,aj[m],1};
   NCSplitMonomialAux[m_NonCommutativeMultiply, vars_List] := Module[
     {tmp},
 
@@ -295,7 +290,7 @@ Begin[ "`Private`" ]
       {p, m0},
 
       (* Make sure vars is a list of Symbols *)
-      If [ Not[MatchQ[vars, {___?SymbolOrSubscriptQ}]],
+      If [ Not[MatchQ[vars, {___?NCSymbolOrSubscriptQ}]],
           Message[NCPolynomial::VarNotSymbol];
           Return[$Failed];
       ];
@@ -467,8 +462,8 @@ Begin[ "`Private`" ]
      {tmp = m /. {tp[x_] -> x, aj[x_] -> x}},
      Map[Count[tmp, #]&, vars]
   ];
-  NCPDegreeAux[m_?SymbolOrSubscriptQ, vars_] := Exponent[vars, m];
-  NCPDegreeAux[(tp|aj)[m_?SymbolOrSubscriptQ], vars_] := Exponent[vars, m];
+  NCPDegreeAux[m_?NCSymbolOrSubscriptQ, vars_] := Exponent[vars, m];
+  NCPDegreeAux[(tp|aj)[m_?NCSymbolOrSubscriptQ], vars_] := Exponent[vars, m];
   
   NCPMonomialDegree[p_NCPolynomial] := 
     Map[NCPDegreeAux[#,p[[3]]]&,

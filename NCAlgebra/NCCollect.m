@@ -23,6 +23,7 @@
 BeginPackage[ "NCCollect`",
               "NCReplace`",
               "NCPolynomial`",
+              "NCUtil`",
               "NonCommutativeMultiply`" ];
 
 Clear[NCCollect,NCStrongCollect, 
@@ -134,10 +135,10 @@ Begin["`Private`"];
   NCCollect[exp_, var_List] := Module[
     {vars = var, expr = exp, rules = {}, dec, rvars, rrules},
 
-    If [ Not[MatchQ[vars, {___Symbol}]], 
+    If [ Not[MatchQ[vars, {___?NCSymbolOrSubscriptQ}]], 
          
          (* select expressions which are not symbols *)
-         pos = Flatten[Position[vars, Except[_Symbol], {1}]];
+         pos = Flatten[Position[vars, Except[_?NCSymbolOrSubscriptQ], {1}]];
          exprs = vars[[pos]];
          
          (* create replacement variables *)

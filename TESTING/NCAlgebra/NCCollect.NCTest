@@ -27,6 +27,13 @@ Module[
    NCTest[NCCollect[exp,x], answer];
    NCTest[NCCollect[exp,{x}], answer];
 
+   exp = A Subscript[x,1]**y + B Subscript[x,1];
+   answer = Subscript[x,1]**(B + A y);
+   NCTest[NCStrongCollect[exp,Subscript[x,1]], answer];
+   NCTest[NCStrongCollect[exp,{Subscript[x,1]}], answer];
+   NCTest[NCCollect[exp,Subscript[x,1]], answer];
+   NCTest[NCCollect[exp,{Subscript[x,1]}], answer];
+   
    exp = y**x + x;
    answer = (1+y)**x;
    NCTest[NCStrongCollect[exp,x], answer];

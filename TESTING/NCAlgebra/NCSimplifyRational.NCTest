@@ -79,6 +79,9 @@ Module[
      answer = inv[1 + inv[1 + inv[x]/(1+B)]/(1+A)/(1+B)]/(1+A);
      NCTest[NCNormalizeInverse[expr], answer];
 
+     expr = inv[1 + A + inv[1 + B + inv[Subscript[x,1]]]];
+     answer = inv[1 + inv[1 + inv[Subscript[x,1]]/(1+B)]/(1+A)/(1+B)]/(1+A);
+     NCTest[NCNormalizeInverse[expr], answer];
 
      (* Basic rules *)
 
@@ -108,6 +111,10 @@ Module[
      answer = ExpandNonCommutativeMultiply[1/A - (1/A) inv[1 + A x ** y]];
      NCTest[NCSimplifyRational[expr], answer];
 
+     expr = inv[1 + A Subscript[x,1] ** y] ** Subscript[x,1] ** y;
+     answer = ExpandNonCommutativeMultiply[1/A - (1/A) inv[1 + A Subscript[x,1] ** y]];
+     NCTest[NCSimplifyRational[expr], answer];
+     
      expr = inv[1 + A x] ** x;
      answer = 1/A - (1/A) inv[1 + A x];
      NCTest[NCSimplifyRational[expr], answer];

@@ -150,10 +150,15 @@ Begin["`Private`"]
   NCSimplifyRationalAuxRules[terms_, rat_] := Module[
     {last = Last[terms], rest = (Plus @@ Most[terms]), factor},
       
+    (* WATCH OUT FOR POSSIBLE BUG:
+       pattern (_NonCommutativeMultiply|_Symbol|_Subscript)
+       should be (_NonCommutativeMultiply|_?NCSymbolOrSubscriptQ) ?
+    *)
+  
     (* Normalize last *)
     factor = Replace[last, 
-                {A_?CommutativeQ (_NonCommutativeMultiply|_Symbol) -> A, 
-                 (_NonCommutativeMultiply|_Symbol) -> 1 }];
+                {A_?CommutativeQ (_NonCommutativeMultiply|_Symbol|_Subscript) -> A, 
+                 (_NonCommutativeMultiply|_Symbol|_Subscript) -> 1 }];
       
     last /= factor;
     rest /= factor;

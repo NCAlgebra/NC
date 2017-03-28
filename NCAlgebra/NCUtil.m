@@ -24,21 +24,26 @@ Clear[NCGrabSymbols,
       NCGrabIndeterminants,
       NCConsolidateList,
       NCConsistentQ,
+      NCSymbolOrSubscriptQ,
       NCLeafCount,
       NCReplaceData,
       NCToExpression];
 
+Get["NCUtil.usage"];
+
 Begin["`Private`"];
 
-  Get["NCUtil.usage"];
+  NCSymbolOrSubscriptQ[_Symbol] := True;
+  NCSymbolOrSubscriptQ[Subscript[_Symbol,__]] := True;
+  NCSymbolOrSubscriptQ[_] := False;
   
   NCGrabSymbols[expr_SparseArray] := NCGrabSymbols[expr["NonzeroValues"]];
   NCGrabSymbols[expr_SparseArray, pattern_] := 
       NCGrabSymbols[expr["NonzeroValues"], pattern];
   
-  NCGrabSymbols[expr_] := Union[Cases[expr, _Symbol, {0, Infinity}]];
+  NCGrabSymbols[expr_] := Union[Cases[expr, _Symbol|Subscript[_Symbol,___], {0, Infinity}]];
   NCGrabSymbols[expr_, pattern_] := 
-    Union[Cases[expr, (pattern)[_Symbol], {0, Infinity}]];
+    Union[Cases[expr, (pattern)[_Symbol|Subscript[_Symbol,___]], {0, Infinity}]];
 
   NCGrabFunctions[expr_SparseArray] := NCGrabFunctions[expr["NonzeroValues"]];
   NCGrabFunctions[expr_SparseArray, f_] := 
