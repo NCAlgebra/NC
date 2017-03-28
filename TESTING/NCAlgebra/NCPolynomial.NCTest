@@ -793,4 +793,301 @@ Module[
    (* TODO: Test NCPolynomials with matrix variables. 
       See NCSylvester.NCTest *)
 
+   (* symbols as subsctripts *)
+
+   vars = {Subscript[x,1], y};
+   
+   p = Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = Subscript[x,1]+a;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[a,<|{Subscript[x,1]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = Subscript[x,1]+y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y}->{{1,1,1}},{Subscript[x,1]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = tp[Subscript[x,1]]+tp[y];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{tp[y]}->{{1,1,1}},{tp[Subscript[x,1]]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = tp[Subscript[x,1]]**tp[Subscript[x,1]]+tp[y];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{tp[Subscript[x,1]]**tp[Subscript[x,1]]}->{{1,1,1}},{tp[y]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = Subscript[x,1]+a**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]}->{{1,a,1},{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = y**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y**Subscript[x,1]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = Subscript[x,1]**y+y**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y**Subscript[x,1]}->{{1,1,1}},{Subscript[x,1]**y}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = y**a**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y,Subscript[x,1]}->{{1,1,a,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = Subscript[x,1]**y**a+a**y**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y**Subscript[x,1]}->{{1,a,1}}, {Subscript[x,1]**y}->{{1,1,a}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = a**Subscript[x,1]**b+c+d**Subscript[x,1]**e+a**Subscript[x,1]**e**Subscript[x,1]**b;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[c,
+                         <|{Subscript[x,1]}->{{1,a,b},{1,d,e}},
+                           {Subscript[x,1],Subscript[x,1]}->{{1,a,e,b}}|>, 
+                         vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = a**Subscript[x,1]**b+c+d**Subscript[x,1]**e+a**Subscript[x,1]**e**Subscript[x,1]**b+a**Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[c,
+                         <|{Subscript[x,1]}->{{1,a,b},{1,d,e}},
+                           {Subscript[x,1]**y}->{{1,a,1}},
+                           {Subscript[x,1],Subscript[x,1]}->{{1,a,e,b}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = A Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]}->{{A,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = B y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y}->{{B,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = A Subscript[x,1] + B a;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[B a,<|{Subscript[x,1]}->{{A,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = A Subscript[x,1] + B y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y}->{{B,1,1}},{Subscript[x,1]}->{{A,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = A Subscript[x,1] + B a**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]}->{{B,a,1},{A,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 1];
+
+   p = A Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{A,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = B y**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y**Subscript[x,1]}->{{B,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = A Subscript[x,1]**y + B y**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y**Subscript[x,1]}->{{B,1,1}},{Subscript[x,1]**y}->{{A,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = A Subscript[x,1]**y + B y**Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{A,1,1}}, {y**Subscript[x,1]**y}->{{B,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 3];
+
+   p = A Subscript[x,1]**y + B Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{A+B,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = (A + B) Subscript[x,1]**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPDegree[expr], 2];
+
+   p = Subscript[x,1] + A Subscript[x,1]**y + B Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{A+B,1,1}},{Subscript[x,1]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = Subscript[x,1] + (A + B) Subscript[x,1]**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPDegree[expr], 2];
+
+   p = Subscript[x,1] +  Subscript[x,1]**y + B Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{1+B,1,1}},{Subscript[x,1]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = Subscript[x,1] + (1 + B) Subscript[x,1]**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPDegree[expr], 2];
+
+   p = Subscript[x,1] +  Subscript[x,1]**y + Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{1+1,1,1}},{Subscript[x,1]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   answer = Subscript[x,1] + (1 + 1) Subscript[x,1]**y;
+   NCTest[NCPolynomialToNC[expr], answer];
+   NCTest[NCPDegree[expr], 2];
+
+   p = A y**a**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y,Subscript[x,1]}->{{A,1,a,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = A Subscript[x,1]**y**a + B a**y**Subscript[x,1];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y**Subscript[x,1]}->{{B,a,1}}, {Subscript[x,1]**y}->{{A,1,a}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPDegree[expr], 2];
+
+   p = A a**Subscript[x,1]**b + B c + C d**Subscript[x,1]**e + A B a**Subscript[x,1]**e**Subscript[x,1]**b;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[B c,
+                         <|{Subscript[x,1]}->{{A,a,b},{C,d,e}},
+                           {Subscript[x,1],Subscript[x,1]}->{{A B,a,e,b}}|>, 
+                         vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   p = A a**Subscript[x,1]**b + B c + C d**Subscript[x,1]**e + A B a**Subscript[x,1]**e**Subscript[x,1]**b + A C a**Subscript[x,1]**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[B c,
+                         <|{Subscript[x,1]}->{{A,a,b},{C,d,e}},
+                           {Subscript[x,1]**y}->{{A C,a,1}},
+                           {Subscript[x,1],Subscript[x,1]}->{{A B,a,e,b}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPDegree[expr], 2];
+
+   NCTest[NCPTermsOfDegree[expr, {1,0}], <|{Subscript[x,1]}->{{A,a,b},{C,d,e}}|>];
+   NCTest[NCPTermsOfDegree[expr, {1,1}], <|{Subscript[x,1]**y}->{{A C,a,1}}|>];
+   NCTest[NCPTermsOfDegree[expr, {2,0}], <|{Subscript[x,1],Subscript[x,1]}->{{A B,a,e,b}}|>];
+   NCTest[NCPTermsOfDegree[expr, {2,2}], <||>];
+   NCTest[NCPTermsOfDegree[expr, {0,0}], <|{}->{{B c}}|>];
+
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {1,0}]], A a**Subscript[x,1]**b + C d**Subscript[x,1]**e];
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {1,1}]], A C a**Subscript[x,1]**y];
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {2,0}]], A B a**Subscript[x,1]**e**Subscript[x,1]**b]; 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {2,2}]], 0]; 
+   NCTest[NCPTermsToNC[NCPTermsOfDegree[expr, {0,0}]], B c]; 
+
+   NCTest[NCPTermsOfTotalDegree[expr, 1], <|{Subscript[x,1]}->{{A,a,b},{C,d,e}}|>]; 
+   NCTest[NCPTermsOfTotalDegree[expr, 2], <|{Subscript[x,1]**y}->{{A C,a,1}},
+                                          {Subscript[x,1],Subscript[x,1]}->{{A B,a,e,b}}|>];
+   NCTest[NCPTermsOfTotalDegree[expr, 3], <||>];
+   NCTest[NCPTermsOfTotalDegree[expr, 0], <|{}->{{B c}}|>];
+
+   Quiet[
+
+     (* NotPolynomial *)
+     p = y**inv[Subscript[x,1]];
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed];
+
+     p = inv[Subscript[x,1]]**y;
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed];
+
+     p = Subscript[x,1]**inv[1 + y];
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed];
+
+     p = Subscript[x,1]**inv[1 + y] + inv[1 + Subscript[x,1]];
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed];
+
+     (* Commutative product fails *)
+     p = Subscript[x,1]*y;
+     expr = NCToNCPolynomial[p, vars];
+     NCTest[expr, $Failed];
+
+     ,
+     NCPolynomial::NotPolynomial
+   ];
+
+   Quiet[
+
+     (* VarNotSymbol *)
+     p = Subscript[x,1]**tp[y];
+     expr = NCToNCPolynomial[p, {tp[Subscript[x,1]]}];
+     NCTest[expr, $Failed];
+
+     p = Subscript[x,1]**tp[y];
+     expr = NCToNCPolynomial[p, {Subscript[x,1], tp[Subscript[x,1]]}];
+     NCTest[expr, $Failed];
+
+     ,
+     NCPolynomial::VarNotSymbol
+   ];
+   
 ];
