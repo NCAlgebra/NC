@@ -1,4 +1,8 @@
-Block[{k,i,j},
+Block[
+  {k,i,j,
+   exp1,exp2,
+   pattern1,pattern2,pattern3,pattern4,
+   $zzzz,$yyyy},
 
   (* History:  Nov 2015: CommutativeQ test (mauricio) *)
 
@@ -93,4 +97,39 @@ Block[{k,i,j},
 
   Clear[$zzzz];
 
+  (* Test exceptions *)
+  
+  NCTestCheck[SetNonCommutative[1],
+              CommutativeQ::NonCommutativeSubscript];
+  NCTestCheck[SetNonCommutative[Subscript[$zzzz,1]],
+              CommutativeQ::NonCommutativeSubscript];
+  NCTestCheck[SetNonCommutative[f[x]],
+              CommutativeQ::NonCommutativeSubscript];
+  NCTestCheck[SetNonCommutative[x + y],
+              CommutativeQ::NonCommutativeSubscript];
+
+  NCTestCheck[SetCommutative[1],
+              CommutativeQ::CommutativeSubscript];
+  NCTestCheck[SetCommutative[Subscript[$zzzz,1]],
+              CommutativeQ::CommutativeSubscript];
+  NCTestCheck[SetCommutative[f[x]],
+              CommutativeQ::CommutativeSubscript];
+  NCTestCheck[SetCommutative[x + y],
+              CommutativeQ::CommutativeSubscript];
+
+  (* Test subscripts *)
+  SetNonCommutative[$zzzz];
+
+  NCCheck[NonCommutativeQ[$zzzz], True];
+  NCCheck[NonCommutativeQ[Subscript[$zzzz,1]], True];
+  NCCheck[NonCommutativeQ[Subscript[$zzzz,1,2]], True];
+
+  SetCommutative[$zzzz];
+
+  NCCheck[CommutativeQ[$zzzz], True];
+  NCCheck[CommutativeQ[Subscript[$zzzz,1]], True];
+  NCCheck[CommutativeQ[Subscript[$zzzz,1,2]], True];
+
+  Clear[$zzzz];
+  
 ];

@@ -26,8 +26,11 @@ Clear[aj, tp, rt, inv, co,
       BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative];
 
-CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative";
-CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative";
+CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative.";
+CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative.";
+
+CommutativeQ::CommutativeSubscript = "Tried to set the subscript \"`2`\" of symbol \"`1`\" to be commutative. Please set the symbol \"`1`\" to be commutative instead.";
+CommutativeQ::NonCommutativeSubscript = "Tried to set the subscript \"`2`\" of symbol \"`1`\" to be noncommutative. Please set the symbol \"`1`\" to be noncommutative instead.";
 
 CommuteEverything::Warning = "Commute everything set the variable(s) \
 `1` to be commutative. Use EndCommuteEverything[] to set them back as \
@@ -87,6 +90,8 @@ Begin[ "`Private`" ]
   Clear[DoSetNonCommutative];
   DoSetNonCommutative[x_Symbol] := CommutativeQ[x] ^= False;
   DoSetNonCommutative[x_List] := SetNonCommutative /@ x;
+  DoSetNonCommutative[Subscript[x_Symbol, y__]] := 
+    Message[CommutativeQ::NonCommutativeSubscript, x, y];
   DoSetNonCommutative[x_?NumberQ] := 
     Message[CommutativeQ::NonCommutative, "number", x];
   DoSetNonCommutative[x_] := 
@@ -97,6 +102,8 @@ Begin[ "`Private`" ]
   Clear[DoSetCommutative];
   DoSetCommutative[x_Symbol] := CommutativeQ[x] ^= True;
   DoSetCommutative[x_List] := SetCommutative /@ x;
+  DoSetNonCommutative[Subscript[x_Symbol, y__]] := 
+    Message[CommutativeQ::CommutativeSubscript, x, y];
   DoSetCommutative[x_?NumberQ] := 
     Message[CommutativeQ::Commutative, "number", x];
   DoSetCommutative[x_] := 
