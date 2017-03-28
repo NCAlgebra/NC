@@ -28,9 +28,10 @@ tests = {
   "NCConjugate",
   "NCOutput",
   "NCConvexity", 
-  "Matrix" (*,
-  "NCRealization",
+  "Matrix"
+  (*,
   "NCRational",
+  "NCRealization",
   "NCSystem"
   *)
 };

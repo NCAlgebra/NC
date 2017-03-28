@@ -16,6 +16,7 @@ BeginPackage[ "NCSylvester`",
 	      "NCPolynomial`",
 	      "MatrixDecompositions`",
 	      "NCDot`",
+	      "NCUtil`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCPToNCSylvester,
@@ -36,7 +37,7 @@ Begin[ "`Private`" ]
   (* NCPToNCSylvester *)
 
   Clear[NCPToNCSylvesterAux];
-  NCPToNCSylvesterAux[poly_Association, var_Symbol] := Module[
+  NCPToNCSylvesterAux[poly_Association, var_?NCSymbolOrSubscriptQ] := Module[
     {exp, coeff, left, right, leftBasis, rightBasis,
      i, j, p, q, F},
 

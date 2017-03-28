@@ -102,6 +102,17 @@ Block[
               NCSylvesterToNCPolynomial[answer]]],
           exp];
 
+   exp = 2 + a**Subscript[x,1]**b + c**Subscript[x,1]**d + y;
+   p = NCToNCPolynomial[exp, {Subscript[x,1], y}];
+   answer = {2, 
+             <|Subscript[x,1]->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]},
+               y->{{1},{1},SparseArray[{{1}}]}|>};
+   NCTest[NCPToNCSylvester[p], answer];
+   NCTest[ExpandNonCommutativeMultiply[
+            NCPolynomialToNC[ 
+              NCSylvesterToNCPolynomial[answer]]],
+          exp];
+	  
    exp = 0;
    p = NCToNCPolynomial[exp, vars];
    answer = {0,
