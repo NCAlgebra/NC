@@ -396,6 +396,9 @@ Begin["`Private`"];
   Clear[DegreeToIndex];
   DegreeToIndex[d_, n_] := (n^d - 1)/(n - 1);
       
+  Clear[IndexToDegree];
+  IndexToDegree[m_, n_] := Floor[Log[(m - 1/(1 - n)) (-1 + n)] / Log[n]];
+  
   NCPolyCoefficientArray[p_NCPoly] := Module[
     {n = Total[p[[1]]], d = NCPolyDegree[p]},
     Return[
@@ -407,5 +410,29 @@ Begin["`Private`"];
     ];
   ];
 
+  Clear[IndexToDegree];
+  IndexToDegree[m_, n_] := Floor[Log[(m - 1/(1 - n)) (-1 + n)] / Log[n]];
+
+  NCPolyFromCoefficientArray[m_SparseArray, vars_] := Module[
+    {index, degree, 
+     n = Total[vars],
+     rules = Drop[ArrayRules[m], -1]},
+      
+    degree = Apply[IndexToDegree[# - 1, n] &, 
+                   rules[[All, 1]], {1}];
+    index = Map[DegreeToIndex[#, 2] &, degree];
+    coeff = Transpose[{degree, Flatten[rules[[All,1]]] - index - 1}];
+
+    (* *)
+    Print["n = ", n];
+    Print["rules = ", rules];
+    Print["degree = ", degree];
+    Print["index = ", index];
+    Print["coeff = ", coeff];
+    (* *)
+    
+    Return[NCPoly[vars, <|Thread[coeff -> rules[[All,2]]]|>]];
+  ];
+  
 End[];
 EndPackage[]

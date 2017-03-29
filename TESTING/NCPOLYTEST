@@ -12,9 +12,10 @@ tests = {
   "Arithmetic",
   "Product",
   "Reduce",
+  "CoeffArray" (*,
   "Groebner",
   "Hankel",
-  "NCPolyInterface" (*,
+  "NCPolyInterface",
   "NCGBX",
   "NCMakeGB"*)
 };

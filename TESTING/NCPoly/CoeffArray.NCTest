@@ -1,0 +1,27 @@
+<< NCPoly`
+
+Block[
+  {vars,poly,mat,p,
+   answer},
+
+  vars = {{x, y}};
+  poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
+  
+  mat = NCPolyCoefficientArray[poly];
+  answer = SparseArray[{0,0,0,0,1,-1,0}];
+  NCTest[mat, answer];
+
+  p = NCPolyFromCoefficientArray[mat, {2}];
+  NCTest[p, poly];
+
+  poly = NCPoly[{2, 1, -1, 1}, {{x}, {x, y}, {y, x}, {x,x,x}}, vars];
+  
+  mat = NCPolyCoefficientArray[poly];
+  answer = SparseArray[{0,2,0,0,1,-1,0,1,0,0,0,0,0,0,0}];
+  NCTest[mat, answer];
+
+  p = NCPolyFromCoefficientArray[mat, {2}];
+  NCTest[p, poly];
+
+
+];
