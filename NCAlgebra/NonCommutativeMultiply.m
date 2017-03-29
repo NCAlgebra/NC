@@ -105,7 +105,7 @@ Begin[ "`Private`" ]
   Clear[DoSetCommutative];
   DoSetCommutative[x_Symbol] := CommutativeQ[x] ^= True;
   DoSetCommutative[x_List] := SetCommutative /@ x;
-  DoSetNonCommutative[Subscript[x_Symbol, y__]] := 
+  DoSetCommutative[Subscript[x_Symbol, y__]] := 
     Message[CommutativeQ::CommutativeSubscript, x, y];
   DoSetCommutative[x_?NumberQ] := 
     Message[CommutativeQ::Commutative, "number", x];
