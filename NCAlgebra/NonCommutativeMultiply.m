@@ -69,6 +69,9 @@ Begin[ "`Private`" ]
   (* a matrix is noncommutative *)
   CommutativeQ[_?MatrixQ] := False;
   
+  (* commutative subscripts depend on symbol *)
+  CommutativeQ[Subscript[x_,___]] := CommutativeQ[x];
+  
   (* a commutative functions is commutative if all arguments are 
      also commutative *)
   CommutativeQ[f_?CommutativeQ[x___]] := 

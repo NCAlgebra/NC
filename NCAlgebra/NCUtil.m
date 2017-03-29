@@ -40,11 +40,21 @@ Begin["`Private`"];
   NCGrabSymbols[expr_SparseArray] := NCGrabSymbols[expr["NonzeroValues"]];
   NCGrabSymbols[expr_SparseArray, pattern_] := 
       NCGrabSymbols[expr["NonzeroValues"], pattern];
+
+  (* Free of Subscripts? That's simple *)
+  NCGrabSymbols[expr_] := Union[Cases[expr, _Symbol, {0, Infinity}]] /; FreeQ[expr, Subscript];
   
-  NCGrabSymbols[expr_] := Union[Cases[expr, _Symbol|Subscript[_Symbol,___], {0, Infinity}]];
+  (* Otherwise need to worry about Subscripts
+     Solution here is inspired by the discussion at:
+     http://mathematica.stackexchange.com/questions/91256/matching-symbol-or-subscript-but-not-symbol-arguments-of-subscript
+  *)
+  NCGrabSymbols[expr_] := 
+    Union[Flatten[Reap[NCGrabSymbols[expr /. Subscript[a_Symbol, b___] :> (Sow[Subscript[a, b]]; ##&[])]]]];
+  
   NCGrabSymbols[expr_, pattern_] := 
     Union[Cases[expr, (pattern)[_Symbol|Subscript[_Symbol,___]], {0, Infinity}]];
-
+    
+  (* Grab functions *)
   NCGrabFunctions[expr_SparseArray] := NCGrabFunctions[expr["NonzeroValues"]];
   NCGrabFunctions[expr_SparseArray, f_] := 
       NCGrabFunctions[expr["NonzeroValues"], f];

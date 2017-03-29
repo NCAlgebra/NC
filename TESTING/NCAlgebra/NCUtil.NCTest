@@ -1,10 +1,10 @@
 << NCUtil`
 
 Block[
-  {k,test,expr,a,b,c,d,x,y,z,list,index,X,Y},
+  {k,test,expr,a,b,c,d,i,x,y,z,list,index,X,Y},
 
   SetCommutative[a,b,c,d];
-  SetNonCommutative[x,y,z];
+  SetNonCommutative[i,x,y,z];
 
   (* NCConsistentQ *)
 
@@ -93,6 +93,7 @@ Block[
   NCTest[NCConsistentQ[expr], False];
 
   (* NCGrabSymbols *)
+  
   expr = a aj[x]**y+inv[1+inv[x**tp[y]+b]];
   NCTest[NCGrabSymbols[expr], {a,b,x,y}];
   NCTest[NCGrabSymbols[expr, tp], {tp[y]}];
@@ -105,6 +106,20 @@ Block[
   NCTest[NCGrabSymbols[expr], {a,b,x,y}];
   NCTest[NCGrabSymbols[expr, tp], {tp[x],tp[y]}];
 
+  (* with Subscript *)
+  expr = Subscript[a,i] aj[Subscript[x,i]]**y+inv[1+inv[Subscript[x,i]**tp[y]+b]];
+  NCTest[NCGrabSymbols[expr], Union[{Subscript[a,i],b,Subscript[x,i],y}]];
+  NCTest[NCGrabSymbols[expr, tp], {tp[y]}];
+  NCTest[NCGrabSymbols[expr, tp|aj], {aj[Subscript[x,i]],tp[y]}];
+
+  expr = {{Subscript[a,i]**Subscript[x,i], b**tp[y]},{1,y**tp[Subscript[x,i]]}};
+  NCTest[NCGrabSymbols[expr], Union[{Subscript[a,i],b,Subscript[x,i],y}]];
+
+  expr = SparseArray[{{Subscript[a,i]**Subscript[x,i], b**tp[y]},{1,y**tp[Subscript[x,i]]}}];
+  NCTest[NCGrabSymbols[expr], Union[{Subscript[a,i],b,Subscript[x,i],y}]];
+  NCTest[NCGrabSymbols[expr, tp], Union[{tp[Subscript[x,i]],tp[y]}]];
+
+  (* NCGrabFunctions *)
   expr = a aj[x]**y+inv[1+inv[x**tp[y]+b]];
   NCTest[NCGrabFunctions[expr, tp], {tp[y]}];
   NCTest[NCGrabFunctions[expr, tp|aj], {aj[x],tp[y]}];

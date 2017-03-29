@@ -126,12 +126,14 @@ Block[
   NCCheck[NonCommutativeQ[zz], True];
   NCCheck[NonCommutativeQ[Subscript[zz,1]], True];
   NCCheck[NonCommutativeQ[Subscript[zz,1,2]], True];
+  NCCheck[NonCommutativeQ[Subscript[zz,x]], True];
 
   SetCommutative[zz];
 
   NCCheck[CommutativeQ[zz], True];
   NCCheck[CommutativeQ[Subscript[zz,1]], True];
   NCCheck[CommutativeQ[Subscript[zz,1,2]], True];
+  NCCheck[CommutativeQ[Subscript[zz,x]], True];
 
   Clear[zz];
   
