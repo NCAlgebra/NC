@@ -42,6 +42,12 @@ See also:
 
 `inv[expr]` is the 2-sided inverse of expression `expr`.
 
+If `Options[inv, Distrubute]` is `False` (the default) then 
+
+    inv[a**b]
+
+returns `inv[a**a]`. Conversely, if `Options[inv, Distrubute]` is `True` then it returns `inv[b]**inv[a]`.
+
 ### rt {#rt}
 
 `rt[expr]` is the root of expression `expr`.

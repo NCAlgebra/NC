@@ -12,7 +12,7 @@ are first normalized to
 
    inv[1 + terms/A]/A
 
-using `NCNormalizeInverse`.
+using `NCNormalizeInverse`. Here `A` is commutative.
 
 For each `inv` found in expression, a custom set of rules is constructed based on its associated NC Groebner basis.
 
@@ -53,6 +53,19 @@ Rules in `NCSimplifyRational` and `NCPreSimplifyRational` are applied repeatedly
 Rules in `NCSimplifyRationalSinglePass` and `NCPreSimplifyRationalSinglePass` are applied only once.
 
 The particular ordering of monomials used by `NCSimplifyRational` is the one implied by the `NCPolynomial` format. This ordering is a variant of the deg-lex ordering where the lexical ordering is Mathematica's natural ordering.
+
+`NCSimplifyRational` is limited by its rule list and what rules are
+best is unknown and might depend on additional assumptions. For example:
+
+    NCSimplifyRational[y ** inv[y + x ** y]]
+
+returns `y ** inv[y + x ** y]` not `inv[1 + x]`, which is what one
+would expect if `y` were to be invertible. Indeed,
+     
+    NCSimplifyRational[inv[y] ** inv[inv[y] + x ** inv[y]]]
+
+does return `inv[1 + x]`, since in this case the appearing of `inv[y]`
+trigger rules that implicitely assume `y` is invertible.
 
 Members are:
 

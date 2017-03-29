@@ -167,6 +167,232 @@ coincides with the result of
 
 	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
 
+## Advanced Rules and Replacements {#AdvancedReplace}
+
+Substitution is a key feature of Symbolic computation. We will now
+discuss some issues related to Mathematica's implementation of rules
+and replacements that can affect the behavior of `NCAlgebra`
+expressions.
+
+The first issue is related to how Mathematica performs substitutions,
+which is through
+[pattern matching](http://reference.wolfram.com/language/guide/RulesAndPatterns.html). For
+a rule to be effective if has to *match* the *structural*
+representation of an expression. That representation might be
+different than one would normally think based on the usual properties
+of mathematical operators. For example, one would expect the rule:
+
+	rule = 1 + x_ -> x
+
+to match all the expressions bellow:
+
+    1 + a
+    1 + 2 a
+	1 + a + b
+	1 + 2 a * b
+
+so that
+
+	expr /. rule
+
+with `expr` taking the above expressions would result in:
+
+	a
+	2 a
+	a + b
+	2 a * b
+
+Indeed, Mathematica's attribute `Flat` does precisely that. Note that
+this is stil *structural matching*, not *mathematical matching*, since
+the pattern `1 + x_` would not match an integer `2`, even though one
+could write `2 = 1 + 1`!
+
+Unfortunately, `**`, which is the `NonCommutativeMultiply` operator,
+*is not* `Flat`[^notflat]. This is the reason why substitution based
+on a simple rule such as:
+
+	rule = a**b -> c
+
+so that
+
+    expr /. rule
+
+will work for some `expr` like
+
+	1 + 2 a**b
+
+resulting in
+
+	1 + 2 c
+
+but will fail to produce the *expected* result in cases like:
+
+	a**b**c
+	c**a**b
+	c**a**b**d
+	1 + 2 a**b**c
+
+That's what the `NCAlgebra` family of replacement functions are made
+for. Calling
+
+	NCReplaceAll[a**b**c, rule]
+	NCReplaceAll[ c**a**b, rule ]
+	NCReplaceAll[c**a**b**d, rule]
+	NCReplaceAll[1 + 2 a**b**c, rule ]
+
+would produce the results one would expect:
+
+	c**c
+	c**c
+	c**c**d
+	1 + 2 c**c
+
+For this reason, when substituting in `NCAlgebra` it is always safer
+to use functions from the [`NCReplace` package](#NCReplacePackage)
+rather than the corresponding Mathematice `Replace` family of
+functions. Unfortunately, this comes at a the expense of sacrificing
+the standard operators `/.` (`ReplaceAll`) and `//.`
+(`ReplaceRepeated`), which cannot be safely overloaded, forcing one to
+use the full names `NCReplaceAll` and `NCReplaceRepeated`.
+
+A second more esoteric issue related to substitution in `NCAlgebra`
+does not a clean solution. It is also one that usually lurks into
+hidden pieces of code and can be very difficult to spot. We have been
+victim of such "bug" many times. Luckily it only affect advanced users
+that are using `NCAlgebra` inside their own functions using
+Mathematica's `Block` and `Module` constructions. It is also not a
+real bug, since it follows from some often not well understood issues
+with the usage of
+[`Block` versus `Module`](http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html). Our
+goal here is therefore not to *fix* the issue but simply to alert
+advanced users of its existence. Start by first revisiting the
+following example from the
+[Mathematica documentation](http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html). Let
+
+	m = i^2
+
+and run
+
+	Block[{i = a}, i + m]
+
+which returns the ``expected''
+
+	a + a**a
+
+versus
+
+	Module[{i = a}, i + m]
+
+which returns the ``surprising''
+
+	a + i**i
+
+The reason for this behavior is that `Block` effectively evaluates `i`
+as a *local variable* and then `m` using whatever values are available
+at the time of evaluation, whereas `Module` only evaluates the symbol
+`i` which appears *explicitly* in `i + m` and not `m` using the local
+value of `i = a`. This can lead to many surprises when using
+rules and substitution inside `Module`. For example:
+
+	Block[{i = a}, i_ -> i]
+
+will return
+
+	i_ -> a
+
+whereas
+
+	Module[{i = a}, i_ -> i]
+
+will return
+
+	i_ -> i
+
+More devastating for `NCAlgebra` is the fact that `Module` will hide
+local definitions from rules, which will often lead to disaster if
+local variables need to be declared noncommutative. Consider for
+example the trivial definitions for `F` and `G` below:
+
+	F[exp_] := Module[
+	  {rule, aa, bb},
+	  SetNonCommutative[aa, bb];
+	  rule = aa_**bb_ -> bb**aa;
+	  NCReplaceAll[exp, rule]
+	]
+
+	G[exp_] := Block[
+	  {rule, aa, bb},
+	  SetNonCommutative[aa, bb];
+	  rule = aa_**bb_ -> bb**aa;
+	  NCReplaceAll[exp, rule]
+	]
+
+Their only difference is that one is defined using a `Block` and the
+other is defined using a `Module`. The task is to apply a rule that
+*flips* the noncommutative product of their arguments, say, `x**y`,
+into `y**x`.  The problem is that only one of those definitions work
+``as expected''. Indeed, verify that
+
+	G[x**y]
+
+returns the ``expected''
+
+	y**x
+
+whereas
+
+	F[x**y]
+
+returns
+
+	x y
+
+which completely destroys the noncommutative product. The reason for
+the catastrophic failure of the definition of `F`, which is inside a
+`Module`, is that the letters `aa` and `bb` appearing in `rule` are
+*not treated as the local symbols `aa` and `bb`*[^argh]. For this
+reason, the right-hand side of the rule `rule` involves the global
+symbols `aa` and `bb`, which are, in the absence of a declaration to
+the contrary, commutative. On the other hand, the definition of `G`
+inside a `Block` makes sure that `aa` and `bb` are evaluated with
+whatever value they might have locally at the time of execution.
+
+The above subtlety often manifests itself partially, sometimes causing
+what might be perceived as some kind of *erratic behavior*. Indeed, if
+one had used symbols that were already declared globaly noncommutative
+by `NCAlgebra`, such as single small cap roman letters as in the
+definition:
+
+	H[exp_] := Module[
+	  {rule, a, b},
+      SetNonCommutative[a, b];
+	  rule = a_**b_ -> b**a];
+	  NCReplaceAll[exp, rule]
+    ]
+
+then calling `H[x**y]` would have worked ``as expected'', even if for
+the wrong reasons!
+
+[^notflat]: The reason is that making an operator `Flat` is a
+convenience that comes with a price: lack of control over execution
+and evaluation. Since `NCAlgebra` has to operate at a very low level
+this lack of control over evaluation is fatal. Indeed, making
+`NonCommutativeMultiply` have an attribute `Flat` will throw
+Mathematica into infinite loops in seemingly trivial noncommutative
+expression. Hey, email us if you find a way around that :)
+
+[^argh]: By the way, I find that behavior of Mathematica's `Module`
+questionable, since something like
+
+        F[exp_] := Module[{aa, bb},
+	      SetNonCommutative[aa, bb];
+	      aa**bb
+	    ]
+
+    would not fail to treat `aa` and `bb` locally. It is their
+    appearance in a rule that triggers the mostly odd behavior.
+
+
 ## Polynomials with commutative coefficients
 
 The package [`NCPoly`](#PackageNCPoly) provides an efficient structure
@@ -197,8 +423,11 @@ between `NCAlgebra` and `NCPoly`. For example
 	p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
 
 converts the polynomial `1 + x**x - 2 x**y**z` from the standard
-`NCAlgebra` format into an `NCPoly` object. The result in this case is
-the `NCPoly` object
+`NCAlgebra` format into an `NCPoly` object. The reason for the braces
+in the definition of `vars` will be explained below, when we introduce
+*ordering*. See also Section
+[Noncommutative Gröbner Basis](#NCGB). The result in this case is the
+`NCPoly` object
 	
 	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>]
 	
@@ -224,11 +453,14 @@ Alternatively, one could construct the same `NCPoly` object by calling
 In this syntax the first argument is a list of *coefficients*, the
 second argument is a list of *monomials*, and the third is the list of
 *variables*. *Monomials* are given as lists, with `{}` being
-equivalent to a constant `1`. The sequence of braces in the list of
-*variables* encodes the *ordering* to be used for sorting
-`NCPoly`s. We provide the convenience command
-[`NCPolyDisplayOrder`](#NCPolyDisplayOrder) that prints the polynomial
-ordering implied by a list of symbols. In this example
+equivalent to a constant `1`.
+
+The sequence of braces in the list of *variables* encodes the
+*ordering* to be used for sorting `NCPoly`s. Orderings specify how
+monomials should be ordered, and is discussed in detail in
+[Noncommutative Gröbner Basis](#NCGB). We provide the convenience
+command [`NCPolyDisplayOrder`](#NCPolyDisplayOrder) that prints the
+polynomial ordering implied by a list of symbols. In this example
 
 	NCPolyDisplayOrder[vars]
 
@@ -236,7 +468,8 @@ prints out
 
 $x \ll y < z$
 
-See [Noncommutative Gröbner Basis](#NCGB) for details. 
+from where you can see that grouping variables inside braces induces a
+graded type ordering, as discussed in Section \ref{Orderings}.
 
 There is also a special constructor for monomials. For example
 
@@ -245,7 +478,7 @@ There is also a special constructor for monomials. For example
 
 return the monomials corresponding to $y x$ and $x y$.
 
-Operations on `NCPoly` objects result on another `NCPoly` object that
+Operations on `NCPoly` objects result in another `NCPoly` object that
 is always expanded. For example:
 
 	1 + NCPolyMonomial[{x, y}, vars] - 2 NCPolyMonomial[{y, x}, vars]
@@ -281,7 +514,17 @@ monomials can appear in the same order as they are stored. Using
 returns
 
 	{z, x.x.x, -2 x.x, 1}
-	
+
+whereas
+
+	NCPolyToNC[p, vars]
+
+would return
+
+	1 + z - 2 x ** x + x ** x ** x
+
+in which the sorting of the monomials has been destroyed by `Plus`.
+
 The monomials appear sorted in decreasing order from left to right,
 with `z` being the *leading term* in the above example.
 
@@ -515,14 +758,14 @@ and use the command
 [`NCPToNCQuadratic`](#NCPToNCQuadratic) as in 
 
 	vars = {x, y};
-	expr = tp[x] ** a ** x ** d + tp[x] ** b ** y + tp[y] ** c ** y + tp[y] ** tp[b] ** x ** d;
+	expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
 	p = NCToNCPolynomial[expr, vars];
 	{const, lin, left, middle, right} = NCPToNCQuadratic[p];
 
 which returns
 
 	left = {tp[x],tp[y]}
-	right = {y, x ** d}
+	right = {y, x**d}
 	middle = {{a,b}, {tp[b],c}}
 	
 and zero `const` and `lin`. The format for the linear part `lin` will
@@ -533,7 +776,7 @@ vectors, as `d` did in the above example.
 An interesting application is the verification of the domain in which
 an nc rational is *convex*. Take for example the quartic
 
-	expr = x ** x ** x ** x;
+	expr = x**x**x**x;
 
 and calculate its noncommutative directional *Hessian*
 
@@ -551,9 +794,9 @@ nc Hessian using `NCPToNCQuadratic`
 
 produces
 
-	left = {h, x ** h, x ** x ** h}
-	right = {h ** x ** x, h ** x, h}
-	middle = {{2, 2 x, 2 x ** x},{0, 2, 2 x},{0, 0, 2}}
+	left = {h, x**h, x**x**h}
+	right = {h**x**x, h**x, h}
+	middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
 
 Note that the middle matrix
 $$
@@ -573,9 +816,9 @@ and produce a symmetric decomposition. For the above example
 
 results in
 
-	sleft = {x ** x ** h, x ** h, h}
-	sright = {h ** x ** x, h ** x, h}
-	middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x ** x}}
+	sleft = {x**x**h, x**h, h}
+	sright = {h**x**x, h**x, h}
+	middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
 
 in which `middle` is the symmetric matrix
 $$
@@ -614,7 +857,7 @@ produced by [`NCLDLDecomposition`](#NCLDLDecomposition).
 For example, the commands evaluate the nc Hessian and calculates its
 quadratic decomposition
 
-	expr = (x + b ** y) ** inv[1 - a ** x ** a + b ** y + y ** b] ** (x + y ** b);
+	expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
 	{left, middle, right} =	NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];
 
 The resulting middle matrix can be factored using
@@ -646,7 +889,7 @@ The above sequence of calculations is automated by the command
 
 which results in 
 
-	{2 (1 + b ** y + y ** b - a ** x ** a)^-1, 0}
+	{2 (1 + b**y + y**b - a**x**a)^-1, 0}
 
 which correspond to the diagonal entries of the LDL decomposition of
 the middle matrix of the nc Hessian.

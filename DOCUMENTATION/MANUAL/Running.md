@@ -19,39 +19,58 @@ If this step fails, your installation has problems (check out installation instr
        /your_home_directory/NC.
     You can now use "<< NCAlgebra`" to load NCAlgebra or "<< NCGB`" to load NCGB.
 
-Just type 
+Then just type 
 
     << NCAlgebra`
 
-to load `NCAlgebra`, or
-
-    << NCGB`
-
-to load `NCAlgebra` *and* `NCGB`.
+to load `NCAlgebra`.
 
 ## Now what?
 
+Extensive documentation is found in the directory `DOCUMENTATION`,
+including this document.
+
 Basic documentation is found in the project wiki:
 
-https://github.com/NCAlgebra/NC/wiki
+[`https://github.com/NCAlgebra/NC/wiki`](https://github.com/NCAlgebra/NC/wiki)
 
-Extensive documentation is found in the directory `DOCUMENTATION`.
+You may want to try some of the several demo files in the directory
+`DEMOS` after installing `NCAlgebra`.
 
-You may want to try some of the several demo files in the directory `DEMOS` after installing `NCAlgebra`.
-
-You can also run some tests to see if things are working fine.
+You can also run some tests to see if things are working fine. See
+Section [Testing](#Testing).
 
 ## Testing
 
-Type 
+There are 3 test sets which you can use to troubleshoot parts of
+NCAlgebra. The most comprehensive test set is run by typing:
 
     << NCTEST
 
-to test NCAlgebra. Type 
+This will test the core functionality of NCAlgebra. You can test
+functionality related to the package [`NCPoly`](#NCPolyPackage),
+including the new `NCGBX` package [`NCGBX`](#NCGBXPackage), by typing:
 
-    << NCGBTEST
+    << NCPOLYTEST
 
-to test NCGB. 
+Finally our Semidefinite Programming Solver [`NCSDP`](#NCSDPPackage)
+can be tested with 
+
+    << NCSDPTEST
 
 We recommend that you restart the kernel before and after running
 tests. Each test takes a few minutes to run.
+
+## NCGB
+
+The old `C++` version of our Groebner Basis Algorithm still ships with
+this version and can be loaded using:
+
+    << NCGB`
+
+This will at once load `NCAlgebra` *and* `NCGB`. It can be tested
+using
+
+	<< NCGBTEST
+
+

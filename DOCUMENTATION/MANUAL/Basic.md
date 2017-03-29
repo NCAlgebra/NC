@@ -98,14 +98,14 @@ noncommutative products. If this more aggressive behavior is desired
 use `SetOptions[inv, Distribute -> True]`. For example
 
 	SetOptions[inv, Distribute -> True]
-	inv[b**a]
+	inv[a**b]
 
 returns `inv[b]**inv[a]`. Conversely
 
 	SetOptions[inv, Distribute -> False]
-	inv[b**a]
+	inv[a**b]
 	
-returns `inv[b**a]`.
+returns `inv[a**b]`.
 
 `tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
 adjoint of symbol `x`. Like `inv`, the properties of transposes and
@@ -140,7 +140,7 @@ return `co[a]` where `co` stands for complex-conjugate.
 (`co`), and inverses (`inv`) in a notebook environment render as
 $x^T$, $x^*$, $\bar{x}$, and $x^{-1}$. `tp` and `aj` can also be input
 directly as `x^T` and `x^*`. For this reason the symbol `T` is now
-protected in NCAlgebra.
+protected in `NCAlgebra`.
 
 ## Replace
 
@@ -194,6 +194,10 @@ Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
 `NCReplaceList`, which are analogous to the standard `ReplaceAll`
 (`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
 that one rarely uses `NCReplace` and `NCReplaceList`. 	
+
+See the Section [Advanced Rules and Replacement](#AdvancedReplace) for
+a deeper discussion on some issues involved with rules and
+replacements in `NCAlgebra`.
 
 **Version 5:** the commands `Substitute` and `Transform` have been
 deprecated in favor of the above nc versions of `Replace`.
@@ -267,7 +271,7 @@ produces
 Keep in mind that `NCStrongCollect` often collects *more* than one
 would normally expect.
 
-NCAlgebra provides some commands for noncommutative polynomial
+`NCAlgebra` provides some commands for noncommutative polynomial
 manipulation that are similar to the native Mathematica (commutative)
 polynomial commands. For example:
 

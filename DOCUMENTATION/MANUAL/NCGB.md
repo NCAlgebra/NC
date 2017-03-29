@@ -1,10 +1,11 @@
 # Noncommutative Gröbner Basis {#NCGB}
 
 The package `NCGBX` provides an implementation of a noncommutative
-Gröbner Basis algorithm. Gröbner Basis are useful in the study of
-algebraic relations. 
+Gröbner Basis algorithm. It is a Mathematica only replacement to the
+C++ `NCGB` which is still provided with this distribution. Gröbner
+Basis are useful in the study of algebraic relations.
 
-In order to load `NCGB` one types:
+In order to load `NCGBX` one types:
 
 	<< NC`
 	<< NCAlgebra`
@@ -23,7 +24,7 @@ Basis and uses of Gröbner Basis. For example, in Mathematica, the
 `Solve` command puts collections of equations in a *canonical form*
 which, for simple collections, readily yields a solution. Likewise,
 the Mathematica `Eliminate` command tries to convert a collection of
-$m$ polynomial equations
+$m$ polynomial equations (often called relations)
 $$
 	\begin{aligned}
 	p_1(x_1,\ldots,x_n) &= 0 \\
@@ -86,7 +87,7 @@ separate the *knowns*, $a, b, c$, from the *unknown*, $x$. For more
 details on orderings see Section [Orderings](#Ordering).
 
 Our goal is to calculate the Gröbner basis associated with the
-following relations:
+following relations (i.e. a list of polynomials):
 $$
 \begin{aligned}
 	a \, x \, a &= c, &

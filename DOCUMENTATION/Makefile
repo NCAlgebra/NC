@@ -79,6 +79,8 @@ NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
              --variable=geometry:margin=1in \
              --variable=documentclass:book \
+	     --variable=colorlinks \
+	     --variable=linkcolor:MidnightBlue \
 	     -o NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
