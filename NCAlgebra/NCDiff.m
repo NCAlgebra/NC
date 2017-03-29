@@ -24,6 +24,7 @@ BeginPackage[ "NCDiff`",
 
 Clear[NCDirectionalD, DirectionalD, NCGrad, NCHessian, NCIntegrate];
 
+NCGrad::Failed = "Do not know how to calculate NCGrad. Expression `1` is most likely not rational or invalid.";
 NCIntegrate::NotIntegrable = "Expression `1` is not integrable";
 
 Get["NCDiff.usage"];
@@ -81,8 +82,16 @@ Begin["`Private`"];
     SetNonCommutative[hs];
 
     (* Calculate directional derivative *)
-    df = NCToNCPolynomial[
-            NCDirectionalD @@ Prepend[Transpose[{{xs},hs}], f], hs];
+    Check[
+      df = NCToNCPolynomial[
+              NCDirectionalD @@ Prepend[Transpose[{{xs},hs}], f], 
+           hs];
+      ,
+      Message[NCGrad::Failed, f];
+      Return[$Failed];
+      ,
+      NCPolynomial::NotPolynomial
+    ];
 
     (* Inititalize gradient *)
     grad = ConstantArray[0, n];
