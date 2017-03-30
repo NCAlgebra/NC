@@ -239,12 +239,12 @@ Module[
 
   {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
  
-  answer = {w1,{{w2[1,1],tp[w2[2,1]]},{w2[2,1],w2[2,2]}}};
+  answer = {w1,{{Subscript[w2,1,1],tp[Subscript[w2,2,1]]},{Subscript[w2,2,1],Subscript[w2,2,2]}}};
   NCTest[dVars, answer];
 
-  answer = {-w2[2,2] + tp[a] ** w1 + w1 ** a, 
-            2 tp[b] ** w1 - 2 tp[w2[2,1]], 
-            -1 - w2[1,1]};
+  answer = {-Subscript[w2,2,2] + tp[a] ** w1 + w1 ** a, 
+            2 tp[b] ** w1 - 2 tp[Subscript[w2,2,1]], 
+            -1 - Subscript[w2,1,1]};
   NCTest[dF, answer];
 
   answer = {b1 ** tp[b1], {{0,0},{0,0}}};
@@ -282,12 +282,12 @@ Module[
 
   {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
 
-  answer = {-w2 + tp[a] ** w1[1,1] + w1[1,1] ** a
-                + tp[c1] ** w1[2,1] + tp[w1[2,1]] ** c1, 
-            2 tp[b] ** w1[1,1] + 2 tp[d12] ** w1[2,1]};
+  answer = {-w2 + tp[a] ** Subscript[w1,1,1] + Subscript[w1,1,1] ** a
+                + tp[c1] ** Subscript[w1,2,1] + tp[Subscript[w1,2,1]] ** c1, 
+            2 tp[b] ** Subscript[w1,1,1] + 2 tp[d12] ** Subscript[w1,2,1]};
   NCTest[dF, answer];
 
-  answer = {{{w1[1,1],tp[w1[2,1]]},{w1[2,1],w1[2,2]}}, w2};
+  answer = {{{Subscript[w1,1,1],tp[Subscript[w1,2,1]]},{Subscript[w1,2,1],Subscript[w1,2,2]}}, w2};
   NCTest[dVars, answer];
 
   answer = {{{b1 ** tp[b1],0},{0,-1}},0};
@@ -320,13 +320,13 @@ Module[
 
   {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w", DebugLevel -> 0];
  
-  answer = {{{w1[1,1],tp[w1[2,1]]},{w1[2,1],w1[2,2]}}, {{w2[1,1],tp[w2[2,1]]},{w2[2,1],w2[2,2]}}};
+  answer = {{{Subscript[w1,1,1],tp[Subscript[w1,2,1]]},{Subscript[w1,2,1],Subscript[w1,2,2]}}, {{Subscript[w2,1,1],tp[Subscript[w2,2,1]]},{Subscript[w2,2,1],Subscript[w2,2,2]}}};
   NCTest[dVars, answer];
 
-  answer = {-w2[2,2] + tp[a] ** w1[1,1] + w1[1,1] ** a
-                + tp[c1] ** w1[2,1] + tp[w1[2,1]] ** c1, 
-            2 tp[b] ** w1[1,1] + 2 tp[d12] ** w1[2,1] - 2 tp[w2[2,1]], 
-	    -1 - w2[1,1]};
+  answer = {-Subscript[w2,2,2] + tp[a] ** Subscript[w1,1,1] + Subscript[w1,1,1] ** a
+                + tp[c1] ** Subscript[w1,2,1] + tp[Subscript[w1,2,1]] ** c1, 
+            2 tp[b] ** Subscript[w1,1,1] + 2 tp[d12] ** Subscript[w1,2,1] - 2 tp[Subscript[w2,2,1]], 
+	    -1 - Subscript[w2,1,1]};
   NCTest[dF, answer];
 
   answer = {{{b1 ** tp[b1],0},{0,-1}},{{0,0},{0,0}}};

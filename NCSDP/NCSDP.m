@@ -795,7 +795,8 @@ Begin[ "`Private`" ]
 
   Clear[NCSDPDualMatrixAux];
   NCSDPDualMatrixAux[entry_?MatrixQ, {i_}, var_] := 
-      Array[Symbol[ToString[var] <> ToString[i]], Dimensions[entry]];
+      (* Array[Symbol[ToString[var] <> ToString[i]], Dimensions[entry]]; *)
+      Array[Subscript[Symbol[ToString[var] <> ToString[i]],##]&, Dimensions[entry]];
   NCSDPDualMatrixAux[entry_, {i_}, var_] := 
       Symbol[ToString[var] <> ToString[i]];
 
@@ -881,7 +882,7 @@ Begin[ "`Private`" ]
     NCDebug[2, dVarList];
 
     (* Make symmetric *) 
-    dVars = dVars /. (x_[k_,l_] /; k < l :> tp[x[l,k]]);
+    dVars = dVars /. (Subscript[x_,k_,l_] /; k < l :> tp[Subscript[x,l,k]]);
     NCDebug[2, dVars];
 
     (* Symmetric dual variables *)
