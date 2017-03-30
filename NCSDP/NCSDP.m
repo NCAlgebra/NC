@@ -879,7 +879,7 @@ Begin[ "`Private`" ]
     dVarList = Table[Symbol[ToString[dualSymbol] <> ToString[i]], 
                      {i, Length[sylv]}];
     SetNonCommutative[dVarList];
-    NCDebug[2, dVarList];
+    NCDebug[2, dVarList, dVars];
 
     (* Make symmetric *) 
     dVars = dVars /. (Subscript[x_,k_,l_] /; k < l :> tp[Subscript[x,l,k]]);
