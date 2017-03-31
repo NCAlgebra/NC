@@ -437,6 +437,8 @@ Begin["`Private`"];
   NCGBSimplifyRational[expr_, iter_Integer:5, opts___Rule] := Module[
     {symbols, rats, rules},
       
+    (* TODO Add custom invertibility *)
+      
     symbols = DeleteCases[NCGrabSymbols[expr], _?CommutativeQ];
     rats = NCGrabFunctions[expr, inv];
 
