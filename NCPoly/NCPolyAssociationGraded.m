@@ -399,21 +399,36 @@ Begin["`Private`"];
   Clear[IndexToDegree];
   IndexToDegree[m_, n_] := Floor[Log[(m - 1/(1 - n)) (-1 + n)] / Log[n]];
   
-  NCPolyCoefficientArray[p_NCPoly] := Module[
-    {n = Total[p[[1]]], d = NCPolyDegree[p]},
+  NCPolyCoefficientArray[p_NCPoly, dd_:-1] := Module[
+    {n = Total[p[[1]]], d},
+    d = If[dd < 0, NCPolyDegree[p], dd];
     Return[
+     {
       SparseArray[
         Normal[
           KeyMap[(DegreeToIndex[Total[Drop[#,-1]],n]+Last[#]+1)&,
                  p[[2]]]
         ],{DegreeToIndex[d+1,n]}]
+      ,
+       p[[1]]
+     }
     ];
   ];
+  
+  NCPolyCoefficientArray[ps_List] := Block[
+    {d, tmp},
+    d = Max[Map[NCPolyDegree, ps]];
+    tmp = Map[NCPolyCoefficientArray[#,d]&, ps];
+    Return[{SparseArray[tmp[[All,1]]], ps[[1,1]]}];
+  ]; /; Count[Unitize[Max /@ ps[[All,1]] - Min /@ ps[[All,1]] ], 0]
 
   Clear[IndexToDegree];
-  IndexToDegree[m_, n_] := Floor[Log[(m - 1/(1 - n)) (-1 + n)] / Log[n]];
+  IndexToDegree[m_, n_] := Floor[Log[n, (m - 1/(1 - n)) (-1 + n)]];
 
-  NCPolyFromCoefficientArray[m_SparseArray, vars_] := Module[
+  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 3, vars_] := 
+    Map[NCPolyFromCoefficientArray[#,vars]&, m];
+
+  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 2, vars_] := Module[
     {index, degree, 
      n = Total[vars],
      rules = Drop[ArrayRules[m], -1]},
@@ -423,16 +438,18 @@ Begin["`Private`"];
     index = Map[DegreeToIndex[#, 2] &, degree];
     coeff = Transpose[{degree, Flatten[rules[[All,1]]] - index - 1}];
 
-    (* *)
+    (*
+    Print["Depth[m] = ", Depth[m]];
     Print["n = ", n];
     Print["rules = ", rules];
     Print["degree = ", degree];
     Print["index = ", index];
     Print["coeff = ", coeff];
-    (* *)
+    *)
     
     Return[NCPoly[vars, <|Thread[coeff -> rules[[All,2]]]|>]];
   ];
+
   
 End[];
 EndPackage[]
