@@ -794,12 +794,10 @@ Begin[ "`Private`" ]
   NCSDPDualTransposeAux[entries_] := Map[NCSDPDualTransposeEntryAux, entries];
 
   Clear[NCSDPDualMatrixAux];
-  NCSDPDualMatrixAux[entry_?MatrixQ, {i_}, var_] := 
-      (* Array[Symbol[ToString[var] <> ToString[i]], Dimensions[entry]]; *)
-      Array[Subscript[Symbol[ToString[var] <> ToString[i]],##]&, Dimensions[entry]];
-  NCSDPDualMatrixAux[entry_, {i_}, var_] := 
-      Symbol[ToString[var] <> ToString[i]];
-
+  NCSDPDualMatrixAux[entry_?MatrixQ, var_] := 
+      Array[Subscript[var,##]&, Dimensions[entry]];
+  NCSDPDualMatrixAux[entry_, var_] := var;
+      
   Clear[NCSDPDualReplaceAux];
   NCSDPDualReplaceAux[entry_, dvar_, vars_] := Block[
     {dims = Dimensions[dvar]},
@@ -813,7 +811,7 @@ Begin[ "`Private`" ]
                             ])&, vars] ];
    ];
 
-  NCSDPDual[exp_, Vars_, obj_:{},
+  NCSDPDual[exp_, Vars_, obj_:{}, dualVars_:{},
            OptionsPattern[{DebugLevel -> 0, DualSymbol -> "w"}]] := Module[
     {cc, bb, vars, varIndex, 
      dVars, dVarList, dSymVars,
@@ -845,11 +843,9 @@ Begin[ "`Private`" ]
         
       (* Ensure no tp[] of vars are present *)
       tmp = sylv /. Map[(tp[#] -> 0)&, vars];
-      NCDebug[2, tmp];
       diff = sylv - tmp;
-      NCDebug[2, diff];
       sylv = tmp + Map[tpAux, diff];
-      NCDebug[2, sylv];
+      NCDebug[2, tmp, diff, sylv];
         
       , 
       Return[{$Failed, $Failed, $Failed}];
@@ -857,8 +853,7 @@ Begin[ "`Private`" ]
       NCSymmetricPart::notSymmetric
     ];
             
-    NCDebug[2, sylv];
-    NCDebug[2, symVars];
+    NCDebug[2, sylv, symVars];
   
     (* Convert to NCPolynomial *)
     sylv = Map[NCToNCPolynomial[#, vars]&, sylv];
@@ -871,15 +866,23 @@ Begin[ "`Private`" ]
 
     (* Index of variables *)
     varIndex = MapIndexed[#1 -> #2[[1]] &, vars];
-    NCDebug[2, varIndex];
 
     (* Create dual variables *)
-    dVars = MapIndexed[NCSDPDualMatrixAux[#1, #2, dualSymbol]&, 
-                       Part[sylv, All, 1]];
-    dVarList = Table[Symbol[ToString[dualSymbol] <> ToString[i]], 
-                     {i, Length[sylv]}];
+    dVarList = If[ dualVars === {},
+      Table[Symbol[ToString[dualSymbol] <> ToString[i]], {i, Length[sylv]}]
+     ,
+      If[ Length[dualVars] != Length[sylv], 
+          Message[NCSDP::invalidParameters, 
+                 "'dualVars' should have the same length as 'exp'"];
+          Return[{$Failed, $Failed, $Failed}];
+      ];
+      dualVars
+    ];
     SetNonCommutative[dVarList];
-    NCDebug[2, dVarList, dVars];
+
+    dVars = MapThread[NCSDPDualMatrixAux[#1, #2]&, 
+                      {Part[sylv, All, 1], dVarList}];
+    NCDebug[2, varIndex, dVarList, dVars];
 
     (* Make symmetric *) 
     dVars = dVars /. (Subscript[x_,k_,l_] /; k < l :> tp[Subscript[x,l,k]]);
