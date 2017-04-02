@@ -286,6 +286,62 @@ Module[
   NCTest[NCTermsOfTotalDegree[expr,{x,y},2], 0];
   NCTest[NCTermsOfTotalDegree[expr,{x,y},0], z];
 
+  (* NCTermsOfDegree *)
+  expr = z + Subscript[x,1]**y**Subscript[x,1] + Subscript[x,1]**w - Subscript[x,1]**Subscript[x,1]**y;
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1],y},{2,1}], Subscript[x,1]**y**Subscript[x,1] - Subscript[x,1]**Subscript[x,1]**y];
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1],y},{1,0}], Subscript[x,1]**w];
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1],y},{2,2}], 0];
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1],y},{0,0}], z];
+
+  (* NCTermsOfTotalDegree *)
+  expr = z + Subscript[x,1]**y**Subscript[x,1] + Subscript[x,1]**w - Subscript[x,1]**Subscript[x,1]**y;
+  NCTest[NCTermsOfTotalDegree[expr,{Subscript[x,1],y},3], Subscript[x,1]**y**Subscript[x,1] - Subscript[x,1]**Subscript[x,1]**y];
+  NCTest[NCTermsOfTotalDegree[expr,{Subscript[x,1],y},1], Subscript[x,1]**w];
+  NCTest[NCTermsOfTotalDegree[expr,{Subscript[x,1],y},2], 0];
+  NCTest[NCTermsOfTotalDegree[expr,{Subscript[x,1],y},0], z];
+
+  (* NCTermsOfDegree *)
+  expr = z + x**y**x + x**w - x**x**y;
+  NCTest[NCTermsOfDegree[expr,{x},{2}], x**y**x - x**x**y];
+  NCTest[NCTermsOfDegree[expr,{x},{1}], x**w];
+  NCTest[NCTermsOfDegree[expr,{x},{3}], 0];
+  NCTest[NCTermsOfDegree[expr,{x},{0}], z];
+
+  (* NCTermsOfDegree *)
+  expr = z + x**y**x + x**w - x**x**y;
+  NCTest[NCTermsOfDegree[expr,x,2], x**y**x - x**x**y];
+  NCTest[NCTermsOfDegree[expr,x,1], x**w];
+  NCTest[NCTermsOfDegree[expr,x,3], 0];
+  NCTest[NCTermsOfDegree[expr,x,0], z];
+  
+  (* NCTermsOfTotalDegree *)
+  expr = z + x**y**x + x**w - x**x**y;
+  NCTest[NCTermsOfTotalDegree[expr,x,2], x**y**x - x**x**y];
+  NCTest[NCTermsOfTotalDegree[expr,x,1], x**w];
+  NCTest[NCTermsOfTotalDegree[expr,x,3], 0];
+  NCTest[NCTermsOfTotalDegree[expr,x,0], z];
+  
+  (* NCTermsOfDegree *)
+  expr = z + Subscript[x,1]**y**Subscript[x,1] + Subscript[x,1]**w - Subscript[x,1]**Subscript[x,1]**y;
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1]},{2}], Subscript[x,1]**y**Subscript[x,1] - Subscript[x,1]**Subscript[x,1]**y];
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1]},{1}], Subscript[x,1]**w];
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1]},{3}], 0];
+  NCTest[NCTermsOfDegree[expr,{Subscript[x,1]},{0}], z];
+
+  (* NCTermsOfDegree *)
+  expr = z + Subscript[x,1]**y**Subscript[x,1] + Subscript[x,1]**w - Subscript[x,1]**Subscript[x,1]**y;
+  NCTest[NCTermsOfDegree[expr,Subscript[x,1],2], Subscript[x,1]**y**Subscript[x,1] - Subscript[x,1]**Subscript[x,1]**y];
+  NCTest[NCTermsOfDegree[expr,Subscript[x,1],1], Subscript[x,1]**w];
+  NCTest[NCTermsOfDegree[expr,Subscript[x,1],3], 0];
+  NCTest[NCTermsOfDegree[expr,Subscript[x,1],0], z];
+  
+  (* NCTermsOfTotalDegree *)
+  expr = z + Subscript[x,1]**y**Subscript[x,1] + Subscript[x,1]**w - Subscript[x,1]**Subscript[x,1]**y;
+  NCTest[NCTermsOfTotalDegree[expr,Subscript[x,1],2], Subscript[x,1]**y**Subscript[x,1] - Subscript[x,1]**Subscript[x,1]**y];
+  NCTest[NCTermsOfTotalDegree[expr,Subscript[x,1],1], Subscript[x,1]**w];
+  NCTest[NCTermsOfTotalDegree[expr,Subscript[x,1],3], 0];
+  NCTest[NCTermsOfTotalDegree[expr,Subscript[x,1],0], z];
+  
   (* Bill's tests *)
   expr = ExpandNonCommutativeMultiply[tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y)];
   answer = tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y);
