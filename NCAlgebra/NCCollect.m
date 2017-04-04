@@ -61,7 +61,9 @@ Begin["`Private`"];
     Return[tmp];
   ];
 
-  NCStrongCollect[f_, x_] :=
+  NCStrongCollect[f_, x_?CommutativeQ] := Collect[f, x];
+
+  NCStrongCollect[f_, x_?NonCommutativeQ] :=
     ReplaceRepeated[f, {
 
          A_. * left___**x**right___ + B_. * left___**x**right___ :> 
@@ -93,7 +95,7 @@ Begin["`Private`"];
         
     }
   ];
-
+    
   (* NCDecompose *)                                       
                                         
   NCDecompose[expr_] := 
