@@ -22,6 +22,7 @@ BeginPackage["NCUtil`",
 Clear[NCGrabSymbols,
       NCGrabFunctions,
       NCGrabIndeterminants,
+      NCVariables,
       NCConsolidateList,
       NCConsistentQ,
       NCSymbolOrSubscriptQ,
@@ -98,6 +99,9 @@ Begin["`Private`"];
   NCGrabIndeterminants[c_?NumberQ] := {};
 
   NCGrabIndeterminants[x_] := {x};
+
+  (* NCVariables *)
+  NCVariables[expr_] := Select[NCGrabSymbols[expr], NonCommutativeQ];
 
   (* NCConsolidateList *)
   

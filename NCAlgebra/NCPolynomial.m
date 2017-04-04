@@ -265,6 +265,12 @@ Begin[ "`Private`" ]
 
   ];
   
+  NCToNCPolynomial[poly_] := 
+      NCToNCPolynomial[poly, NCVariables[poly]];
+
+  NCToNCPolynomial[poly_, var:(_Symbol|Subscript[_Symbol,___])] := 
+      NCToNCPolynomial[poly, {var}];
+      
   NCToNCPolynomial[mat_?MatrixQ, vars_List] := Module[
     {tmp},
 
@@ -283,9 +289,6 @@ Begin[ "`Private`" ]
      
   ];
   
-  NCToNCPolynomial[poly_] := 
-      NCToNCPolynomial[poly, NCVariables[poly]];
-
   NCToNCPolynomial[poly_, vars_List] := Module[
       {p, m0},
 

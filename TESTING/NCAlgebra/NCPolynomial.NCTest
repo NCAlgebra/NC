@@ -1029,6 +1029,8 @@ Module[
    NCTest[NCPolynomialToNC[expr], p];
    NCTest[NCPDegree[expr], 2];
 
+   (* NCPTermsOfDegree *)
+
    NCTest[NCPTermsOfDegree[expr, {1,0}], <|{Subscript[x,1]}->{{A,a,b},{C,d,e}}|>];
    NCTest[NCPTermsOfDegree[expr, {1,1}], <|{Subscript[x,1]**y}->{{A C,a,1}}|>];
    NCTest[NCPTermsOfDegree[expr, {2,0}], <|{Subscript[x,1],Subscript[x,1]}->{{A B,a,e,b}}|>];
@@ -1046,6 +1048,24 @@ Module[
                                           {Subscript[x,1],Subscript[x,1]}->{{A B,a,e,b}}|>];
    NCTest[NCPTermsOfTotalDegree[expr, 3], <||>];
    NCTest[NCPTermsOfTotalDegree[expr, 0], <|{}->{{B c}}|>];
+
+   (* Univariate *)
+   
+   p = a**x**b+c+d**x**e+a**x**e**x**b+a**x**y;
+   expr = NCToNCPolynomial[p, x];
+   answer = NCPolynomial[c,
+                         <|{x}->{{1,a,b},{1,a,y},{1,d,e}},
+                           {x,x}->{{1,a,e,b}}|>, {x}];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{1},{2}}];
+   NCTest[NCPDegree[expr], 2];
+   NCTest[NCPDecompose[answer], 
+          <|{1}->a**x**b + d**x**e + a**x**y,
+	    {2}->a**x**e**x**b,
+	    {0}->c|>];
 
    Quiet[
 

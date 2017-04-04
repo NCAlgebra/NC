@@ -15,7 +15,6 @@ Clear[NCToNCPoly,
       NCMonomialList,
       NCCoefficientRules,
       NCCoefficientList,
-      NCVariables,
       NCCoefficientQ,
       NCMonomialQ,
       NCPolynomialQ];
@@ -111,9 +110,6 @@ Begin["`Private`"];
                       NCPolyGetDigits[poly] + 1] /. {} -> 1, 1],
             NCPolyGetCoefficients[poly]]]];
   ];
-
-  (* NCVariables *)
-  NCVariables[expr_] := Select[NCGrabSymbols[expr], NonCommutativeQ];
 
   (* NCCoefficientQ *)
   Clear[NCCoefficientQAux];
