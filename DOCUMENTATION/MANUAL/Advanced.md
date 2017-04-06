@@ -255,6 +255,22 @@ the standard operators `/.` (`ReplaceAll`) and `//.`
 (`ReplaceRepeated`), which cannot be safely overloaded, forcing one to
 use the full names `NCReplaceAll` and `NCReplaceRepeated`.
 
+On the same vein, the following substitution rule
+
+    NCReplace[2 a ** b + c, 2 a -> b]
+
+will return `2 a ** b + c` intact since `FullForm[2 a ** b]` is indeed
+
+    Times[2, NonCommutativeMuliply[a, b]]
+
+which is not structurally related to `FullForm[2 a]`, which is
+`Times[2, a]`. Of course, in this case a simple solution is to use the
+alternative rule:
+
+    NCReplace[2 a ** b + c, a -> b / 2]
+
+which results in `b ** b + c`, as one might expect.
+
 A second more esoteric issue related to substitution in `NCAlgebra`
 does not a clean solution. It is also one that usually lurks into
 hidden pieces of code and can be very difficult to spot. We have been

@@ -33,6 +33,7 @@ Clear[NCPolynomial,
 
 Get["NCPolynomial.usage"];
 
+NCPolynomial::NotRational = "Expression is not an nc rational.";
 NCPolynomial::NotPolynomial = "Expression is not an nc polynomial.";
 NCPolynomial::VarNotSymbol = "All variables must be Symbols.";
 
@@ -364,8 +365,8 @@ Begin[ "`Private`" ]
   NCRationalToNCPolynomial[rat_] := 
       NCRationalToNCPolynomial[rat, NCVariables[rat]];
 
-  NCRationalToNCPolynomial[rat_, vars_List] := Module[
-      {invs, ratVars, ruleRat, ruleRatRev, poly},
+  NCRationalToNCPolynomial[rat_, vars_List] := Block[
+      {invs, ratVars, ruleRat, ruleRatRev, poly, retVal},
     
       (* Grab inv's *)
       invs = NCGrabFunctions[rat, inv];
@@ -396,9 +397,22 @@ Begin[ "`Private`" ]
 
       (* Print["ruleRatRev = ", ruleRatRev]; *)
 
-      Return[{NCToNCPolynomial[poly, Join[vars, ratVars]], 
-              ratVars,
-              ruleRatRev}];
+      Quiet[
+        retVal = Check[
+          {NCToNCPolynomial[poly, Join[vars, ratVars]], 
+           ratVars,
+           ruleRatRev}
+         ,
+          Message[NCPolynomial::NotRational];
+          {$Failed, {},{}}
+          ,
+         NCPolynomial::NotPolynomial
+        ];
+       ,
+        NCPolynomial::NotPolynomial
+      ];
+      
+      Return[retVal];
 
   ];
       

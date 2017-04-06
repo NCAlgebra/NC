@@ -230,4 +230,13 @@ Module[
      expr = NCMatrixReplaceRepeated[inv[z], rule];
      NCTest[expr, answer];
 
+     (* Bill's substitution *)
+     expr = 2 a ** b + c;
+     answer = 2 a ** b + c;
+     NCTest[NCReplaceAll[expr, 2 a -> b], answer];
+
+     expr = 2 a ** b + c;
+     answer = b ** b + c;
+     NCTest[NCReplaceAll[expr, a -> b/2], answer];
+
 ];

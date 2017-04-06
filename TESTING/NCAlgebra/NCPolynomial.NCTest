@@ -633,6 +633,36 @@ Module[
    NCTest[ExpandNonCommutativeMultiply[NCPolynomialToNC[p]], answer];
    NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
 
+   Quiet[
+
+     vars = {x,y};
+     
+     (* NotPolynomial *)
+     p = x inv[y];
+     expr = NCRationalToNCPolynomial[p, vars];
+     NCTest[expr, {$Failed, {}, {}}];
+
+     p = x inv[y];
+     expr = NCRationalToNCPolynomial[p, vars];
+     NCTest[expr, {$Failed, {}, {}}];
+
+     p = x inv[1 + y];
+     expr = NCRationalToNCPolynomial[p, vars];
+     NCTest[expr, {$Failed, {}, {}}];
+
+     p = x inv[1 + y] + inv[1 + x];
+     expr = NCRationalToNCPolynomial[p, vars];
+     NCTest[expr, {$Failed, {}, {}}];
+
+     (* Commutative product fails *)
+     p = x*y;
+     expr = NCRationalToNCPolynomial[p, vars];
+     NCTest[expr, {$Failed, {}, {}}];
+
+     ,
+     NCPolynomial::NotRational
+   ];
+   
    (* Matrix NCPolynomial *)
 
    (* NCPVectorize *)

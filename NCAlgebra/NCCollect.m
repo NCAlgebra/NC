@@ -219,10 +219,7 @@ Begin["`Private`"];
   NCTermsOfDegree[expr_, vars_List, degree_List] :=
     NCPTermsToNC[NCPTermsOfDegree[NCToNCPolynomial[expr, vars], degree]];
 
-  NCTermsOfTotalDegree[expr_, var:(_Symbol|Subscript[_Symbol,___]), degree_Integer] :=
-    NCTermsOfTotalDegree[expr, {var}, degree];
-    
-  NCTermsOfTotalDegree[expr_, vars_List, degree_Integer] :=
+  NCTermsOfTotalDegree[expr_, vars_, degree_Integer] :=
     NCPTermsToNC[NCPTermsOfTotalDegree[NCToNCPolynomial[expr, vars], degree]];
 
 End[]

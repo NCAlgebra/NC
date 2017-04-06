@@ -31,6 +31,11 @@ NCMakeGB::MissingSymbol = "Symbols `1` appear in the relations but not on the mo
 NCMakeGB::CommutativeSymbols = "Commutative symbols `1` have been removed from the monomial order.";
 NCMakeGB::UnknownFunction = "Functions `1` cannot yet be understood by NCMakeGB.";
 
+Clear[ReturnRules];
+Options[NCMakeGB] = {
+  ReturnRules -> True
+};
+
 Begin["`Private`"];
 
   Clear[$NCPolyInterfaceMonomialOrder];
@@ -368,6 +373,11 @@ Begin["`Private`"];
         
     ];
 
+    (* Return polys? *)
+    If[ Not[ReturnRules /. {opts} /. Options[ReturnRules]],
+        polys = polys /. Rule -> Subtract
+    ];
+      
     Return[polys];
   ];
 

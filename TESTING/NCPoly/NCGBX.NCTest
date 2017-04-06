@@ -156,6 +156,16 @@ Block[
   (* TESTING NCMakeGB -- BEGIN *)
 
   SetMonomialOrder[a,b];
+  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> True],
+         {a ** a -> 0, a ** b -> 0, b ** a -> a}];
+  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> False],
+         {a ** a, a ** b, b ** a - a}];
+	 
+  NCTest[NCMakeGB[{a,b}, VerboseLevel -> 0, ReturnRules -> True],
+         {a -> 0, b -> 0}];
+  NCTest[NCMakeGB[{a,b}, VerboseLevel -> 0, ReturnRules -> False],
+         {a, b}];
+	   
   NCTestCheck[NCMakeGB[{a,b,c}],
 	      $Failed,
               NCMakeGB::MissingSymbol];

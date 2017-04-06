@@ -12,11 +12,11 @@ tests = {
   "Arithmetic",
   "Product",
   "Reduce",
-  "CoeffArray" (*,
+  "CoeffArray",
   "Groebner",
   "Hankel",
   "NCPolyInterface",
-  "NCGBX",
+  "NCGBX" (*,
   "NCMakeGB"*)
 };
 results = NCTestRun[tests];
