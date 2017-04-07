@@ -811,7 +811,7 @@ Begin[ "`Private`" ]
                             ])&, vars] ];
    ];
 
-  NCSDPDual[exp_, Vars_, obj_:{}, dualVars_:{},
+  NCSDPDual[exp_, Vars_, obj_List:{}, dualVars_List:{},
            OptionsPattern[{DebugLevel -> 0, DualSymbol -> "w"}]] := Module[
     {cc, bb, vars, varIndex, 
      dVars, dVarList, dSymVars,
@@ -824,6 +824,8 @@ Begin[ "`Private`" ]
 
     SetOptions[NCDebug, DebugLevel -> debugLevel];
 
+    NCDebug[2, obj, dualVars];
+               
     (* Check variable list *)
     vars = Flatten[Vars];
     If [vars =!= Vars,

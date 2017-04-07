@@ -41,6 +41,7 @@ def main():
     HEADING = '##'
     CONVERT = ['pandoc', '-t', 'plain', '--wrap=none']
     outfile = None
+    debug = True
 
     for o, a in opts:
         if o in ("-h", "--help"):
@@ -72,6 +73,8 @@ def main():
             # match name pattern
             if re.match(name_pattern, line) is not None:
                 # ignore
+                if debug:
+                    print('> NAME MATCH: {}'.format(line), file = sys.stderr)
                 continue
 
             # match heading pattern
@@ -80,16 +83,31 @@ def main():
                 if mode == State.scanning:
                     # finished function
                     functions[function] = body
+                    if debug:
+                        print('< END FUNCTION', file = sys.stderr)
                 elif mode == State.idle:
                     # go into scanning mode
                     mode = State.scanning
+                    if debug:
+                        print('> SCANNIG...', file = sys.stderr)
                 # retrieve function name
                 function = match.group(1)
                 # reset body
                 body = ""
+                if debug:
+                    print('> BEGIN FUNCTION: {}'.format(function), file = sys.stderr)
             else:
                 body += line
 
+        if mode == State.scanning:
+            # finished function
+            functions[function] = body
+            if debug:
+                print('> END FUNCTION', file = sys.stderr)
+                
+        if debug:
+            print('< END FILE', file = sys.stderr)
+                
     # produce output file
     fsock = None
     if outfile:
@@ -110,7 +128,10 @@ def main():
                                 stdin=subprocess.PIPE,
                                 stdout=subprocess.PIPE)
         output = proc.communicate(value.encode('utf-8'))[0].decode('utf-8')
-        
+
+        # escape slash
+        output = re.sub(r'\\', r'\\\\', output)
+
         # protect quotes
         output = output.replace('"', '\\"')
 
@@ -118,7 +139,9 @@ def main():
         print('\n(* ' + key + ' *)', file=fsock)
 
         # print usage statement
-        print(key + '::usage = "\\\n' + output.strip() + '";', file=fsock)
+        print(key + '::usage = "\\\n'
+              + output.strip() 
+              + '";', file=fsock)
 
     if outfile:
         fsock.close()

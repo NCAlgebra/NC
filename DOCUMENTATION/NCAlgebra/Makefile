@@ -1,5 +1,7 @@
 include ../make.inc
 
+MD2USAGE_OPTIONS = -H "\#\#\#"
+
 FILES = NonCommutativeMultiply.usage \
 	NCCollect.usage \
 	NCSimplifyRational.usage \
@@ -8,10 +10,8 @@ FILES = NonCommutativeMultiply.usage \
 	NCSelfAdjoint.usage \
 	NCOutput.usage \
 	NCDot.usage \
-	NCPolynomial.usage \
 	NCSylvester.usage \
 	NCQuadratic.usage \
-	NCRational.usage \
 	NCConvexity.usage \
 	NCConvexity.private.usage \
 	NCRealization.usage \
@@ -20,10 +20,16 @@ FILES = NonCommutativeMultiply.usage \
         MatrixDecompositions.usage \
 	NCUtil.usage
 
-all: $(FILES)
+FILES3 = NCPolynomial.usage \
+         NCRational.usage
+
+all: $(FILES) files3
+
+files3: MD2USAGE_OPTIONS = -H "\#\#\#\#"
+files3: $(FILES3)
 
 clean:
-	rm -f $(FILES)
+	rm -f $(FILES) $(FILES3)
 
 install:
-	mv $(FILES) ../../NCAlgebra/.
+	mv $(FILES) $(FILES3) ../../NCAlgebra/.

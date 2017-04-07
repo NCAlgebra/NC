@@ -34,95 +34,95 @@ Members are:
 * [ShortStep](#ShortStep)
 * [SparseWeights](#SparseWeights)
 
-## AHO {#AHO}
+### AHO {#AHO}
 AHO::usage
 
-## CG {#CG}
+### CG {#CG}
 CG::usage
 
-## CGMaxIter {#CGMaxIter}
+### CGMaxIter {#CGMaxIter}
 CGMaxIter::usage
 
-## CGPreconditioner {#CGPreconditioner}
+### CGPreconditioner {#CGPreconditioner}
 CGPreconditioner::usage
 
-## CGTol {#CGTol}
+### CGTol {#CGTol}
 CGTol::usage
 
-## Direct {#Direct}
+### Direct {#Direct}
 Direct::usage
 
-## DualFeasibilityRadius {#DualFeasibilityRadius}
+### DualFeasibilityRadius {#DualFeasibilityRadius}
 DualFeasibilityRadius::usage
 
-## DualFeasible {#DualFeasible}
+### DualFeasible {#DualFeasible}
 DualFeasible::usage
 
-## FeasibilityRadius {#FeasibilityRadius}
+### FeasibilityRadius {#FeasibilityRadius}
 FeasibilityRadius::usage
 
-## FeasibilityTol {#FeasibilityTol}
+### FeasibilityTol {#FeasibilityTol}
 FeasibilityTol::usage
 
-## GapTol {#GapTol}
+### GapTol {#GapTol}
 GapTol::usage
 
-## KSH {#KSH}
+### KSH {#KSH}
 KSH::usage
 
-## KSHDual {#KSHDual}
+### KSHDual {#KSHDual}
 KSHDual::usage
 
-## LeastSquaresSolver {#LeastSquaresSolver}
+### LeastSquaresSolver {#LeastSquaresSolver}
 LeastSquaresSolver::usage
 
-## LeastSquaresSolverFactored {#LeastSquaresSolverFactored}
+### LeastSquaresSolverFactored {#LeastSquaresSolverFactored}
 LeastSquaresSolverFactored::usage
 
-## LongStep {#LongStep}
+### LongStep {#LongStep}
 LongStep::usage
 
-## MaxIter {#MaxIter}
+### MaxIter {#MaxIter}
 MaxIter::usage
 
-## NT {#NT}
+### NT {#NT}
 NT::usage
 
-## PredictorCorrector {#PredictorCorrector}
+### PredictorCorrector {#PredictorCorrector}
 PredictorCorrector::usage
 
-## PrimalDual {#PrimalDual}
+### PrimalDual {#PrimalDual}
 Solve semidefinite program using a primal dual method
 
-## PrimalFeasibilityMargin {#PrimalFeasibilityMargin}
+### PrimalFeasibilityMargin {#PrimalFeasibilityMargin}
 PrimalFeasibilityMargin::usage
 
-## PrimalFeasible {#PrimalFeasible}
+### PrimalFeasible {#PrimalFeasible}
 PrimalFeasible::usage
 
-## PrintIterations {#PrintIterations}
+### PrintIterations {#PrintIterations}
 PrintIterations::usage
 
-## PrintSummary {#PrintSummary}
+### PrintSummary {#PrintSummary}
 PrintSummary::usage
 
-## Profiling {#Profiling}
+### Profiling {#Profiling}
 Profiling::usage
 
-## RationalizeIterates {#RationalizeIterates}
+### RationalizeIterates {#RationalizeIterates}
 RationalizeIterates::usage
 
-## RationalizeTol {#RationalizeTol}
+### RationalizeTol {#RationalizeTol}
 RationalizeTol::usage
 
-## ScaleHessian {#ScaleHessian}
+### ScaleHessian {#ScaleHessian}
 ScaleHessian::usage
 
-## SearchDirection {#SearchDirection}
+### SearchDirection {#SearchDirection}
 SearchDirection::usage
 
-## ShortStep {#ShortStep}
+### ShortStep {#ShortStep}
 ShortStep::usage
 
-## SparseWeights {#SparseWeights}
+### SparseWeights {#SparseWeights}
 SparseWeights::usage

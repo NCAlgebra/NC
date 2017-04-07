@@ -31,7 +31,7 @@ Options[NCPolyGroebner] = {
 
 Get["NCPolyGroebner.usage"];
 
-NCPolyGroebner::Interrupted = "Stopped trying to find a Groebner basis at `1` relations";
+NCPolyGroebner::Interrupted = "Stopped trying to find a Groebner basis at `1` polynomials";
 
 Begin["`Private`"];
 
@@ -306,17 +306,17 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
   (* Simplify and normalize initial relations *)
   If[ verboseLevel >= 1,
-      Print["* Reduce and normalize initial basis"];
+      Print["* Reduce and normalize initial set"];
   ];
 
   m = Length[G];
   G = NCPolyNormalize[NCPolyFullReduce[G]];
   If[ verboseLevel >= 1,
       If[ Length[G] < m, 
-          Print[ "> Initial basis reduced to '", ToString[Length[G]],
-                 "' out of '", ToString[m], "' initial relations" ];
+          Print[ "> Initial set reduced to '", ToString[Length[G]],
+                 "' out of '", ToString[m], "' polynomials" ];
          ,
-          Print[ "> Initial basis could not be reduced" ];
+          Print[ "> Initial set could not be reduced" ];
       ];
   ];
 
@@ -567,7 +567,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   If[ cleanUpBasis,
       (* Cleaning up current basis *)
       If[ verboseLevel >= 1,
-          Print["* Cleaning up basis"];
+          Print["* Cleaning up..."];
       ];
       G = NCPolyNormalize[NCPolyFullReduce[G]];
   ];
@@ -584,7 +584,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
       If[ verboseLevel >= 1,
           Print["* Found Groebner basis with ", 
                 ToString[Length[G]], 
-                " relations"];
+                " polynomials"];
       ];
   ];
       

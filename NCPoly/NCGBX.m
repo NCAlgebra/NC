@@ -450,8 +450,11 @@ Begin["`Private`"];
     (* TODO Add custom invertibility *)
       
     symbols = DeleteCases[NCGrabSymbols[expr], _?CommutativeQ];
-    rats = NCGrabFunctions[expr, inv];
-
+    rats = Join[
+        NCGrabFunctions[expr, inv],
+        Rationals /. {opts} /. Rationals -> {}
+    ];
+      
     (*
     Print["rats = ", rats];
     Print["symbols = ", symbols];

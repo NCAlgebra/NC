@@ -101,7 +101,7 @@ for matrices $A$ and $B$, then he might say that $A$ and $B$ satisfy
 the polynomial equation $a\, b - 1 = 0$. An algebraist would say that
 $a\, b - 1$ is a relation.
 
-To calculate a Gröbner basis one defines a list of relations
+To calculate a Gröbner basis one defines a list of relations:
 
 	rels = {a ** x ** a - c, a ** b - 1, b ** a - 1}
 
@@ -115,22 +115,31 @@ which should produces an output similar to:
 	* * *   NCPolyGroebner    * * *
 	* * * * * * * * * * * * * * * *
 	* Monomial order : a < b < c << x
-	* Reduce and normalize initial basis
-	> Initial basis could not be reduced
+	* Reduce and normalize initial set
+	> Initial set could not be reduced
 	* Computing initial set of obstructions
 	> MAJOR Iteration 1, 4 polys in the basis, 2 obstructions
 	> MAJOR Iteration 2, 5 polys in the basis, 2 obstructions
-	* Cleaning up basis.
-	* Found Groebner basis with 3 relations
+	* Cleaning up...
+	* Found Groebner basis with 3 polynomials
 	* * * * * * * * * * * * * * * *
 
 The number `10` in the call to `NCMakeGB` is very important because a
 finite GB may not exist. It instructs `NCMakeGB` to abort after `10`
 iterations if a GB has not been found at that point.
 
-The result of the above calculation is the list of relations:
+The result of the above calculation is the list of relations in the
+form of a list of rules:
            
 	{x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
+
+**Version 5:** For efficiency, `NCMakeGB` returns a list of rules
+  instead of a list of polynomials. The left-hand side of the rule is
+  the leading monomial in the current order. This is incompatible with
+  early versions, which returned a list of polynomials. You can
+  recover the old behavior setting the option `ReturnRules ->
+  False`. This can be done in the `NCMakeGB` command or globally
+  through `SetOptions[ReturnRules -> False]`.
 
 Our favorite format for displaying lists of relations is `ColumnForm`.
            
@@ -232,12 +241,12 @@ which produces the output
 	* * *   NCPolyGroebner    * * *
 	* * * * * * * * * * * * * * * *
 	* Monomial order : a << b
-	* Reduce and normalize initial basis
-	> Initial basis could not be reduced
+	* Reduce and normalize initial set
+	> Initial set could not be reduced
 	* Computing initial set of obstructions
 	> MAJOR Iteration 1, 2 polys in the basis, 1 obstructions
-	* Cleaning up basis.
-	* Found Groebner basis with 2 relations
+	* Cleaning up...
+	* Found Groebner basis with 2 polynomials
 	* * * * * * * * * * * * * * * *
 
 and the associated GB
@@ -279,7 +288,7 @@ This ordering encodes the following precise idea of what we mean by
 that $x$ is simpler than $(1-x)^{-1}$, which might sits well with
 one's intuition.
 
-Not consider the following command:
+Now consider the following command:
 
 	rules = NCMakeGB[{}, 3]
 
@@ -289,12 +298,12 @@ which produces the output
 	* * *   NCPolyGroebner    * * *
 	* * * * * * * * * * * * * * * *
 	* Monomial order : x <<  inv[x] << inv[1 - x]
-	* Reduce and normalize initial basis
-	> Initial basis could not be reduced
+	* Reduce and normalize initial set
+	> Initial set could not be reduced
 	* Computing initial set of obstructions
 	> MAJOR Iteration 1, 6 polys in the basis, 6 obstructions
-	* Cleaning up basis.
-	* Found Groebner basis with 6 relations
+	* Cleaning up...
+	* Found Groebner basis with 6 polynomials
 	* * * * * * * * * * * * * * * *
 
 and results in the rules:
@@ -350,7 +359,9 @@ resulting in `0`.
 ## Simplification with `NCGBSimplifyRational`
 
 The simplification process described above is automated in the
-function [NCGBSimplifyRational](#NCGBSimplifyRational) and calls to
+function [NCGBSimplifyRational](#NCGBSimplifyRational). 
+
+For example, calls to
 
 	expr = x ** inv[1 - x] - inv[1 - x] ** x
 	NCGBSimplifyRational[expr]

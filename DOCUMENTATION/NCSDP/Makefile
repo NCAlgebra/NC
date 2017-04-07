@@ -1,5 +1,7 @@
 include ../make.inc
 
+MD2USAGE_OPTIONS = -H "\#\#\#"
+
 FILES = NCSDP.usage \
 	SDP.usage \
 	SDPFlat.usage \
