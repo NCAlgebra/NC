@@ -58,11 +58,21 @@ Block[
               $Failed,
 	      NCPoly::InvalidList];
 
+  (* something other than symbol *)
+  NCTestCheck[NCPoly[{1,2},{{x},{y}},{{x,tp[x]}}],
+              $Failed,
+	      NCPoly::InvalidList];
+	      
   (* empty list *)
   NCTestCheck[NCPoly[{1,2},{{x},{y}},{x,y,{}}],
               $Failed,
 	      NCPoly::InvalidList];
 
+  (* repeat variable *)
+  NCTestCheck[NCPoly[{1,2},{{x},{y}},{x,y,x}],
+              $Failed,
+	      NCPoly::InvalidList];
+	      
   (* Monomial Constructos *)
 
   m0 = NCPolyConstant[3, 3];

@@ -426,16 +426,39 @@ Those two properties allow for an efficient implementation of
 5**, without the use of auxiliary accelerating `C` code, as in
 `NCGB`. See [Noncommutative Gröbner Basis](#NCGB).
 
+Before getting into details, to see how much more efficient `NCPoly`
+is when compared with standard `NCAlgebra` objects try
+
+	Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 20, 5}]
+
+which would typically return something like
+
+	{0.000088, 0.001074, 0.017322, 0.240704, 3.61492, 52.0254}
+
+whereas the equivalent
+
+    << NCPoly`
+	Table[Timing[(1 + NCPolyMonomial[{x}, {x}])^i][[1]], {i, 0, 20, 5}]
+
+would return
+
+	{0.00097, 0.001653, 0.002208, 0.003908, 0.004306, 0.005049}
+
+Beware that `NCPoly` objects have limited functionality and should
+still be considered experimental at this point.
+
 The best way to work with `NCPoly` in `NCAlgebra` is by loading the
 package [`NCPolyInterface`](#PackageNCPolyInterface):
 
     << NCPolyInterface`
 
-This package provides the commands [`NCToNCPoly`](#NCToNCPoly) and
+which provides the commands [`NCToNCPoly`](#NCToNCPoly) and
 [`NCPolyToNC`](#NCPolyToNC) to convert nc expressions back and forth
-between `NCAlgebra` and `NCPoly`. For example
+between `NCAlgebra` and `NCPoly`.
 
-    vars = {{x}, {y, z}};
+For example
+
+    vars = {x, y, z};
 	p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
 
 converts the polynomial `1 + x**x - 2 x**y**z` from the standard
@@ -445,7 +468,7 @@ in the definition of `vars` will be explained below, when we introduce
 [Noncommutative Gröbner Basis](#NCGB). The result in this case is the
 `NCPoly` object
 	
-	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>]
+	NCPoly[{1, 1, 1}, <|{0, 0, 0, 0} -> 1, {0, 0, 2, 0} -> 1, {1, 1, 1, 5} -> -2|>]
 	
 Conversely the command [`NCPolyToNC`](#NCPolyToNC) converts an
 `NCPoly` back into `NCAlgebra` format. For example
@@ -471,21 +494,42 @@ second argument is a list of *monomials*, and the third is the list of
 *variables*. *Monomials* are given as lists, with `{}` being
 equivalent to a constant `1`.
 
+The particular coefficients in the `NCPoly` object depend not only on
+the polynomial being represented but also on the *ordering* implied by
+the sequence of symbols in the list of variables `vars`. For example:
+
+    vars = {{x}, {y, z}};
+	p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
+
+produces:
+
+	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
+
 The sequence of braces in the list of *variables* encodes the
 *ordering* to be used for sorting `NCPoly`s. Orderings specify how
 monomials should be ordered, and is discussed in detail in
 [Noncommutative Gröbner Basis](#NCGB). We provide the convenience
 command [`NCPolyDisplayOrder`](#NCPolyDisplayOrder) that prints the
-polynomial ordering implied by a list of symbols. In this example
+polynomial ordering implied by a list of symbols. For example
 
-	NCPolyDisplayOrder[vars]
+	NCPolyDisplayOrder[{x,y,z}]
+
+prints out 
+
+$x \ll y \ll z$
+
+and 
+
+	NCPolyDisplayOrder[{{x},{y,z}}]
 
 prints out 
 
 $x \ll y < z$
 
 from where you can see that grouping variables inside braces induces a
-graded type ordering, as discussed in Section \ref{Orderings}.
+graded type ordering, as discussed in Section
+\ref{Orderings}. `NCPoly`s constructed from different orderings cannot
+be combined.
 
 There is also a special constructor for monomials. For example
 
@@ -497,6 +541,7 @@ return the monomials corresponding to $y x$ and $x y$.
 Operations on `NCPoly` objects result in another `NCPoly` object that
 is always expanded. For example:
 
+    vars = {{x}, {y, z}};
 	1 + NCPolyMonomial[{x, y}, vars] - 2 NCPolyMonomial[{y, x}, vars]
 
 returns 
@@ -559,26 +604,6 @@ returns
 
 `Sort` produces a list of polynomials sorted in *ascending* order
 based on their *leading terms*.
-
-To see how much more efficient `NCPoly` is when compared with standard
-`NCAlgebra` objects try
-
-	Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 20, 5}]
-
-which would typically return something like
-
-	{0.000088, 0.001074, 0.017322, 0.240704, 3.61492, 52.0254}
-
-whereas
-
-	Table[Timing[(1 + NCPolyMonomial[{x}, vars])^i][[1]], {i, 0, 20, 5}]
-
-would return
-
-	{0.00097, 0.001653, 0.002208, 0.003908, 0.004306, 0.005049}
-
-On the other hand, `NCPoly` objects have limited functionality and
-should still be considered experimental at this point.
 
 ## Polynomials with noncommutative coefficients
 

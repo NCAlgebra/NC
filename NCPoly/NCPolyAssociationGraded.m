@@ -75,6 +75,13 @@ Begin["`Private`"];
         Message[NCPoly::InvalidList];
         Return[$Failed];
     ];
+
+      
+    (* repeat variables *)
+    If[ Length[Flatten[{Vars}]] != Length[Union[Flatten[{Vars}]]],
+        Message[NCPoly::InvalidList];
+        Return[$Failed];
+    ];
       
     (* normalize list of variables *)
       
