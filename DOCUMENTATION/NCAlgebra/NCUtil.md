@@ -8,6 +8,7 @@ Members are:
 * [NCGrabFunctions](#NCGrabFunctions)
 * [NCGrabSymbols](#NCGrabSymbols)
 * [NCGrabIndeterminants](#NCGrabIndeterminants)
+* [NCVariables](#NCVariables)
 * [NCConsolidateList](#NCConsolidateList)
 * [NCLeafCount](#NCLeafCount)
 * [NCReplaceData](#NCReplaceData)
@@ -75,6 +76,22 @@ returns
 
 See also:
 [NCGrabFunctions](#NCGragFunctions), [NCGrabSymbols](#NCGragSymbols).
+
+### NCVariables {#NCVariables}
+
+`NCVariables[expr]` gives a list of all independent nc variables in the
+expression `expr`.
+
+For example:
+
+	NCVariables[B + A y ** x ** y - 2 x]
+
+returns
+
+	{x,y}
+
+See also:
+[NCGrabSymbols](#NCGrabSymbols).
 
 ### NCConsolidateList {#NCConsolidateList}
 

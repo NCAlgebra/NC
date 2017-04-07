@@ -18,6 +18,7 @@ Block[
    NCTest[{m0,sylv,l,m,r}, answer];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
    NCTest[expr1, 0];
+   NCTest[NCQuadraticToNC[{m0,sylv,l,m,r}], x**(1+a+e)**x];
 
    vars = {x};
    exp = x**x + x**a**x + x**e**x + 1 + y;
@@ -28,6 +29,7 @@ Block[
    NCTest[{m0,sylv,l,m,r}, answer];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
    NCTest[1 + y + expr1, 0];
+   NCTest[NCQuadraticToNC[{m0,sylv,l,m,r}], 1 + y + x**(1+a+e)**x];
 
    vars = {x};
    exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
@@ -39,6 +41,7 @@ Block[
    NCTest[{m0,sylv,l,m,r}, answer];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
    NCTest[d + x + x**b**y**d + d**y**c**y**d + expr1, 0];
+   NCTest[NCQuadraticToNC[{m0,sylv,l,m,r}], d**y**c**y**d + d + x ** (1 + b ** y ** d) + x**(1+a+e)**x];
 
    vars = {y};
    exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
@@ -50,6 +53,7 @@ Block[
    NCTest[{m0,sylv,l,m,r}, answer];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
    NCTest[d + x + x**x + x**a**x + x**e**x + x**b**y**d + expr1, 0];
+   NCTest[NCQuadraticToNC[{m0,sylv,l,m,r}], exp];
 
    vars = {x,y};
    exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
@@ -62,6 +66,18 @@ Block[
    NCTest[{m0,sylv,l,m,r}, answer];
    expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
    NCTest[d + x + expr1, 0];
+
+   vars = {x,y};
+   exp = d + x + x**x + x**a**x + x**e**x + x**b**y**d + d**y**c**y**d;
+   answer = {d,
+             <|x->{{1},{1},SparseArray[{{1}}]}, 
+               y->{{},{},{}}|>,
+             {x,d**y},SparseArray[{{1+a+e,b},{0,c}}],{x,y**d}};
+   {m0,sylv,l,m,r} = NCToNCQuadratic[exp,vars];
+   NCTest[{m0,sylv,l,m,r}, answer];
+   expr1 = ExpandNonCommutativeMultiply[MatMult[l, m, r]] - ExpandNonCommutativeMultiply[exp];
+   NCTest[d + x + expr1, 0];
+
 
    (* test 1 *)
    f = x**x;

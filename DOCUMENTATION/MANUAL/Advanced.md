@@ -796,12 +796,11 @@ matrix. Load the package
 	<< NCQuadratic`
 
 and use the command
-[`NCPToNCQuadratic`](#NCPToNCQuadratic) as in 
+[`NCToNCQuadratic`](#NCToNCQuadratic) to factor an nc polynomial into the the above form:
 
 	vars = {x, y};
 	expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
-	p = NCToNCPolynomial[expr, vars];
-	{const, lin, left, middle, right} = NCPToNCQuadratic[p];
+	{const, lin, left, middle, right} = NCPToNCQuadratic[expr, vars];
 
 which returns
 
@@ -828,10 +827,9 @@ This command returns
 	2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
 
 which is quadratic in the direction `h`. The decomposition of the
-nc Hessian using `NCPToNCQuadratic`
+nc Hessian using `NCToNCQuadratic`
 
-	p = NCToNCPolynomial[hes, {h}];
-	{const, lin, left, middle, right} = NCPToNCQuadratic[p];
+	{const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];
 
 produces
 

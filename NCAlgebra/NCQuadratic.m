@@ -22,7 +22,9 @@ BeginPackage[ "NCQuadratic`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCPToNCQuadratic,
+      NCToNCQuadratic,
       NCQuadraticToNCPolynomial,
+      NCQuadraticToNC,
       NCQuadraticMakeSymmetric,
       NCMatrixOfQuadratic];
 
@@ -68,6 +70,8 @@ Begin[ "`Private`" ]
     Return[{basis, coefficient}];
       
   ];
+
+  NCToNCQuadratic[p_, vars_] := NCPToNCQuadratic[NCToNCPolynomial[p, vars]];
   
   NCPToNCQuadratic[p_NCPolynomial] := Module[
     {terms},
@@ -285,45 +289,19 @@ Begin[ "`Private`" ]
 
   ];
 
-  NCQuadraticToNCPolynomial[sylv_, 
-                      opts:OptionsPattern[{}]] := Module[
-    {options, collect, m0, rules, vars},
-
+  NCQuadraticToNC[{m0_, lin_, left_, middle_, right_}, 
+                  opts:OptionsPattern[{}]] := Module[
+    {retval},
+  
     (* process options *)
 
-    options = Flatten[{opts}];
+    retval = NCSylvesterToNC[{m0, lin}, opts] \
+           + NCMatrixExpand[left ** middle ** right];
 
-    collect = Collect
-	    /. options
-	    /. Options[NCQuadraticToNCPolynomial, Collect];
-      
-    m0 = First[sylv];
-    vars = sylv[[2;;,4]];
-                          
-    (* Collect polynomial *)
-
-    rules = Map[NCQuadraticToNCPolynomialAux[#,collect]&,
-                Rest[sylv], {1}];
-
-    (* 
-    Print["vars = ", vars];
-    Print["rules = ", rules];
-    *)
-
-    rules = <|Map[{#[[3]]}->Transpose[#[[{1,2}]]]&, rules]|>;
-
-    (* Print["rules = ", rules]; *)
-
-    (* Add scalar *)
-    rules = Map[Prepend[#,1]&, rules, {2}];
-
-    (* Print["rules = ", rules]; *)
-
-    Return[NCPNormalize[NCPolynomial[m0, rules, vars]]];
+    Return[retval];
       
   ];
 
-  
 End[]
 
 EndPackage[]

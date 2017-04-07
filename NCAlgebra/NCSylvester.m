@@ -20,7 +20,9 @@ BeginPackage[ "NCSylvester`",
 	      "NonCommutativeMultiply`" ];
 
 Clear[NCPToNCSylvester,
+      NCToNCSylvester,
       NCSylvesterToNCPolynomial,
+      NCSylvesterToNC,
       NCSylvesterCollectOnVars];
 
 Get["NCSylvester.usage"];
@@ -258,6 +260,10 @@ Begin[ "`Private`" ]
 
     ];
 
+  NCSylvesterToNC[{m0_, sylv_}, 
+                  opts:OptionsPattern[{}]] := 
+    NCPolynomialToNC[NCSylvesterToNCPolynomial[{m0, sylv}, opts]]; 
+                          
   NCSylvesterToNCPolynomial[{m0_, sylv_}, 
                       opts:OptionsPattern[{}]] := Module[
     {options, collect, keepZeros, rules, vars, dims, Ze},

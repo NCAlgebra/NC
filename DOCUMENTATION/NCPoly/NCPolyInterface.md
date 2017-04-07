@@ -14,7 +14,6 @@ Members are:
 * [NCMonomialList](#NCMonomialList)
 * [NCCoefficientRules](#NCCoefficientRules)
 * [NCCoefficientList](#NCCoefficientList)
-* [NCVariables](#NCVariables)
 * [NCCoefficientQ](#NCCoefficientQ)
 * [NCMonomialQ](#NCMonomialQ)
 * [NCPolynomialQ](#NCPolynomialQ)
@@ -124,25 +123,6 @@ See also:
 [NCMonomialList](#NCMonomialList),
 [NCCoefficientRules](#NCCoefficientRules),
 [NCVariables](#NCVariables).
-
-### NCVariables {#NCVariables}
-
-`NCVariables[poly]` gives a list of all independent nc variables in the
-polynomial `poly`.
-
-For example:
-
-	NCVariables[B + A y ** x ** y - 2 x]
-
-returns
-
-	{x,y}
-
-See also:
-[NCMonomialList](#NCMonomialList),
-[NCCoefficientRules](#NCCoefficientRules),
-[NCVariables](#NCVariables).
-
 
 ### NCCoefficientQ {#NCCoefficientQ}
 

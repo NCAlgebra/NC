@@ -6,8 +6,26 @@ Members are:
 
 * [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
 * [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
+* [NCToNCQuadratic](#NCToNCQuadratic)
+* [NCQuadraticToNC](#NCQuadraticToNC)
 * [NCPToNCQuadratic](#NCPToNCQuadratic)
 * [NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial)
+
+### NCToNCQuadratic {#NCToNCQuadratic}
+`NCToNCQuadratic[p, vars]` is shorthand for
+
+    NCPToNCQuadratic[NCToNCPolynomial[p, vars]]
+
+See also:
+[NCToNCQuadratic](#NCToNCQuadratic),[NCToNCPolynomial](#NCToNCPolynomial).
+
+### NCQuadraticToNC {#NCQuadraticToNC}
+`NCQuadraticToNC[const, lin, left, middle, right]` is shorthand for
+
+    NCPolynomialToNC[NCQuadraticToNCPolynomial[const, lin, left, middle, right]]
+
+See also:
+[NCQuadraticToNCPolynomial](#NCQuadraticToNC),[NCPolynomialToNC](#NCPolynomialToNC).
 
 ### NCPToNCQuadratic {#NCPToNCQuadratic}
 `NCPToNCQuadratic[p]` gives an expanded representation for the quadratic `NCPolynomial` `p`.

@@ -36,6 +36,7 @@ Get["NCPolynomial.usage"];
 NCPolynomial::NotRational = "Expression is not an nc rational.";
 NCPolynomial::NotPolynomial = "Expression is not an nc polynomial.";
 NCPolynomial::VarNotSymbol = "All variables must be Symbols.";
+NCPolynomial::InvalidList = "Invalid list of variables.";
 
 Begin[ "`Private`" ]
 
@@ -296,6 +297,12 @@ Begin[ "`Private`" ]
       (* Make sure vars is a list of Symbols *)
       If [ Not[MatchQ[vars, {___?NCSymbolOrSubscriptQ}]],
           Message[NCPolynomial::VarNotSymbol];
+          Return[$Failed];
+      ];
+      
+      (* repeat variables *)
+      If[ Length[vars] != Length[Union[vars]],
+          Message[NCPolynomial::InvalidList];
           Return[$Failed];
       ];
       

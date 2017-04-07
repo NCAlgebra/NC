@@ -492,20 +492,19 @@ Module[
      NCPolynomial::NotPolynomial
    ];
 
-   Quiet[
+   (* VarNotSymbol *)
+   NCTestCheck[NCToNCPolynomial[x**tp[y], {tp[x]}],
+               $Failed,
+               NCPolynomial::VarNotSymbol];
 
-     (* VarNotSymbol *)
-     p = x**tp[y];
-     expr = NCToNCPolynomial[p, {tp[x]}];
-     NCTest[expr, $Failed];
+   NCTestCheck[NCToNCPolynomial[x**tp[y], {x, tp[x]}],
+	       $Failed,
+	       NCPolynomial::VarNotSymbol];
 
-     p = x**tp[y];
-     expr = NCToNCPolynomial[p, {x, tp[x]}];
-     NCTest[expr, $Failed];
-
-     ,
-     NCPolynomial::VarNotSymbol
-   ];
+   (* Repeated vars *)
+   NCTestCheck[NCToNCPolynomial[x**tp[y], {x, y, x}],
+	       $Failed,
+	       NCPolynomial::InvalidList];
 
    (* NCPSameVariablesQ *)
    expr = a**x+b**y;
