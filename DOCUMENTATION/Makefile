@@ -71,10 +71,10 @@ MANUAL = MANUAL/Preamble.md \
 
 doc: NCDocument.pdf NCDocument.html
 
-NCDocument.md: $(MANUAL)
+README.md: $(MANUAL)
 	pandoc $(MANUAL) -t markdown_github -N --toc --standalone \
              --bibliography references.bib \
-	     -o NCDocument.md
+	     -o README.md
 
 NCDocument.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
