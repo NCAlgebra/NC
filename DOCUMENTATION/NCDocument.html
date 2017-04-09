@@ -42,7 +42,7 @@
 <li><a href="#MoreAdvancedCommands"><span class="toc-section-number">4</span> More Advanced Commands</a><ul>
 <li><a href="#matrices-1"><span class="toc-section-number">4.1</span> Matrices</a></li>
 <li><a href="#AdvancedReplace"><span class="toc-section-number">4.2</span> Advanced Rules and Replacements</a></li>
-<li><a href="#polynomials-with-commutative-coefficients"><span class="toc-section-number">4.3</span> Polynomials with commutative coefficients</a></li>
+<li><a href="#PolysWithCommutativeCoefficients"><span class="toc-section-number">4.3</span> Polynomials with commutative coefficients</a></li>
 <li><a href="#polynomials-with-noncommutative-coefficients"><span class="toc-section-number">4.4</span> Polynomials with noncommutative coefficients</a></li>
 <li><a href="#Quadratic"><span class="toc-section-number">4.5</span> Quadratic polynomials</a></li>
 <li><a href="#Linear"><span class="toc-section-number">4.6</span> Linear polynomials</a></li>
@@ -372,7 +372,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
 <h1 id="changes-in-version-5.0"><span class="header-section-number">1</span> Changes in Version 5.0</h1>
 <ol type="1">
 <li>Completely rewritten core handling of noncommutative expressions with significant speed gains.</li>
-<li>Completely rewritten noncommutative Groebner basis algorithm without any dependence on compiled code. See chapter <a href="#NCGB">Noncommutative Gröbner Basis</a> in the user guide and the <a href="#PackageNCGBX">NCGBX</a> package.</li>
+<li>Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter <a href="#NCGB">Noncommutative Gröbner Basis</a> in the user guide and the <a href="#PackageNCGBX">NCGBX</a> package.</li>
 <li>New algorithms for representing and operating with noncommutative polynomials with commutative coefficients. These support the new package <a href="#PackageNCGBX">NCGBX</a>. See this section in the chapter <a href="#PolysWithCommutativeCoefficients">More advanced Commands</a> and the packages <a href="#PackageNCPolyInterface">NCPolyInterface</a> and <a href="#PackageNCPoly">NCPoly</a>.</li>
 <li>New algorithms for representing and operating with noncommutative polynomials with noncommutative coefficients (<a href="#PackageNCPolynomial">NCPolynomial</a>) with specialized facilities for noncommutative quadratic polynomials (<a href="#PackageNCQuadratica">NCQuadratic</a>) and noncommutative linear polynomials (<a href="#PackageNCSylvester">NCSylvester</a>).</li>
 <li>Commands <code>Transform</code>, <code>Substitute</code>, <code>SubstituteSymmetric</code>, etc, have been replaced by the much more reliable commands in the new package <a href="#PackageNCReplace">NCReplace</a>.</li>
@@ -914,7 +914,7 @@ G[exp_] := Block[
   NCReplaceAll[exp, rule]
 ]</code></pre>
 <p>then calling <code>H[x**y]</code> would have worked ``as expected'', even if for the wrong reasons!</p>
-<h2 id="polynomials-with-commutative-coefficients"><span class="header-section-number">4.3</span> Polynomials with commutative coefficients</h2>
+<h2 id="PolysWithCommutativeCoefficients"><span class="header-section-number">4.3</span> Polynomials with commutative coefficients</h2>
 <p>The package <a href="#PackageNCPoly"><code>NCPoly</code></a> provides an efficient structure for storing and operating with noncommutative polynomials with commutative coefficients. There are two main goals:</p>
 <ol type="1">
 <li><em>Ordering</em>: to be able to sort polynomials based on an <em>ordering</em> specified by the user. See the chapter <a href="#NCGB">Noncommutative Gröbner Basis</a> for more details.</li>

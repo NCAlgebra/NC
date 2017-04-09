@@ -2,7 +2,7 @@
 
 1. Completely rewritten core handling of noncommutative expressions
    with significant speed gains.
-2. Completely rewritten noncommutative Groebner basis algorithm
+2. Completely rewritten noncommutative Gröbner basis algorithm
    without any dependence on compiled code. See chapter
    [Noncommutative Gröbner Basis](#NCGB) in the user guide and the 
    [NCGBX](#PackageNCGBX) package.
