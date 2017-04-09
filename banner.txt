@@ -4,18 +4,23 @@ Compatible with Mathematica Version 10
 
 Authors:
   J. William Helton*
-  Mauricio de Oliveira* 
-  Mark Stankus* 
+  Mauricio de Oliveira&
+
+* Math, UCSD, La Jolla, CA
+& MAE, UCSD, La Jolla, CA
+
+with earlier contributions by:
+
+  Mark Stankus$ 
   Robert L. Miller#
 
-* Math Dept, UCSD
+$ Math, Cal Poly San Luis Obispo
 # General Atomics Corp
-  La  Jolla, CA 92093
 
 Copyright: 
-  Helton and Miller June 1991
+  Helton and de Oliveira 2017
   Helton 2002
-  Helton and de Oliveira 2016
+  Helton and Miller June 1991
   All rights reserved.
 
 The program was written by the authors and by:
