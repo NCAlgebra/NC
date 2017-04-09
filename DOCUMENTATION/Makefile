@@ -72,10 +72,14 @@ MANUAL = MANUAL/Preamble.md \
 doc: NCDocument.pdf NCDocument.html
 
 NCDocument.md: $(MANUAL)
-	pandoc $(MANUAL) -t markdown_github -N --toc --standalone -o NCDocument.md
+	pandoc $(MANUAL) -t markdown_github -N --toc --standalone \
+             --bibliography references.bib \
+	     -o NCDocument.md
 
 NCDocument.html: $(MANUAL)
-	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css -o NCDocument.html --mathjax
+	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
+             --bibliography references.bib \
+	     -o NCDocument.html --mathjax
 
 NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \

@@ -409,7 +409,7 @@ questionable, since something like
     appearance in a rule that triggers the mostly odd behavior.
 
 
-## Polynomials with commutative coefficients
+## Polynomials with commutative coefficients {#PolysWithCommutativeCoefficients}
 
 The package [`NCPoly`](#PackageNCPoly) provides an efficient structure
 for storing and operating with noncommutative polynomials with

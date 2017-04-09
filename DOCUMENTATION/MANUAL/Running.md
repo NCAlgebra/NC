@@ -37,8 +37,7 @@ Basic documentation is found in the project wiki:
 You may want to try some of the several demo files in the directory
 `DEMOS` after installing `NCAlgebra`.
 
-You can also run some tests to see if things are working fine. See
-Section [Testing](#Testing).
+You can also run some tests to see if things are working fine.
 
 ## Testing
 
@@ -48,12 +47,12 @@ NCAlgebra. The most comprehensive test set is run by typing:
     << NCTEST
 
 This will test the core functionality of NCAlgebra. You can test
-functionality related to the package [`NCPoly`](#NCPolyPackage),
-including the new `NCGBX` package [`NCGBX`](#NCGBXPackage), by typing:
+functionality related to the package [`NCPoly`](#PackageNCPoly),
+including the new `NCGBX` package [`NCGBX`](#PackageNCGBX), by typing:
 
     << NCPOLYTEST
 
-Finally our Semidefinite Programming Solver [`NCSDP`](#NCSDPPackage)
+Finally our Semidefinite Programming Solver [`NCSDP`](#PackageNCSDP)
 can be tested with 
 
     << NCSDPTEST

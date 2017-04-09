@@ -336,7 +336,7 @@
 <li><a href="#PinningSpace"><span class="toc-section-number">14.2.13</span> PinningSpace</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#references"><span class="toc-section-number">15</span> References</a></li>
+<li><a href="#references">References</a></li>
 </ul>
 </nav>
 \newpage
@@ -372,11 +372,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
 <h1 id="changes-in-version-5.0"><span class="header-section-number">1</span> Changes in Version 5.0</h1>
 <ol type="1">
 <li>Completely rewritten core handling of noncommutative expressions with significant speed gains.</li>
+<li>Completely rewritten noncommutative Groebner basis algorithm without any dependence on compiled code. See chapter <a href="#NCGB">Noncommutative Gröbner Basis</a> in the user guide and the <a href="#PackageNCGBX">NCGBX</a> package.</li>
+<li>New algorithms for representing and operating with noncommutative polynomials with commutative coefficients. These support the new package <a href="#PackageNCGBX">NCGBX</a>. See this section in the chapter <a href="#PolysWithCommutativeCoefficients">More advanced Commands</a> and the packages <a href="#PackageNCPolyInterface">NCPolyInterface</a> and <a href="#PackageNCPoly">NCPoly</a>.</li>
+<li>New algorithms for representing and operating with noncommutative polynomials with noncommutative coefficients (<a href="#PackageNCPolynomial">NCPolynomial</a>) with specialized facilities for noncommutative quadratic polynomials (<a href="#PackageNCQuadratica">NCQuadratic</a>) and noncommutative linear polynomials (<a href="#PackageNCSylvester">NCSylvester</a>).</li>
 <li>Commands <code>Transform</code>, <code>Substitute</code>, <code>SubstituteSymmetric</code>, etc, have been replaced by the much more reliable commands in the new package <a href="#PackageNCReplace">NCReplace</a>.</li>
 <li>Modified behavior of <code>CommuteEverything</code> (see important notes in <a href="#CommuteEverything">CommuteEverything</a>).</li>
 <li>Improvements and consolidation of NC calculus in the package <a href="#PackageNCDiff">NCDiff</a>.</li>
 <li>Added a complete set of linear algebra solvers in the new package <a href="#PackageMatrixDecomposition">MatrixDecomposition</a> and their noncommutative versions in the new package <a href="#PackageNCMatrixDecomposition">NCMatrixDecomposition</a>.</li>
-<li>New algorithms for representing and operating with NC polynomials (<a href="#PackageNCPolynomial">NCPolynomial</a>) and NC linear polynomials (<a href="#PackageNCSylvester">NCSylvester</a>).</li>
 <li>General improvements on the Semidefinite Programming package <a href="#PackageNCSDP">NCSDP</a>.</li>
 <li>New algorithms for simplification of noncommutative rationals (<a href="#PackageNCSylvester">NCSimplifyRational</a>).</li>
 </ol>
@@ -398,13 +400,13 @@ You can now use &quot;&lt;&lt; NCAlgebra`&quot; to load NCAlgebra or &quot;&lt;&
 <p>Basic documentation is found in the project wiki:</p>
 <p><a href="https://github.com/NCAlgebra/NC/wiki"><code>https://github.com/NCAlgebra/NC/wiki</code></a></p>
 <p>You may want to try some of the several demo files in the directory <code>DEMOS</code> after installing <code>NCAlgebra</code>.</p>
-<p>You can also run some tests to see if things are working fine. See Section <a href="#Testing">Testing</a>.</p>
+<p>You can also run some tests to see if things are working fine.</p>
 <h2 id="testing"><span class="header-section-number">2.3</span> Testing</h2>
 <p>There are 3 test sets which you can use to troubleshoot parts of NCAlgebra. The most comprehensive test set is run by typing:</p>
 <pre><code>&lt;&lt; NCTEST</code></pre>
-<p>This will test the core functionality of NCAlgebra. You can test functionality related to the package <a href="#NCPolyPackage"><code>NCPoly</code></a>, including the new <code>NCGBX</code> package <a href="#NCGBXPackage"><code>NCGBX</code></a>, by typing:</p>
+<p>This will test the core functionality of NCAlgebra. You can test functionality related to the package <a href="#PackageNCPoly"><code>NCPoly</code></a>, including the new <code>NCGBX</code> package <a href="#PackageNCGBX"><code>NCGBX</code></a>, by typing:</p>
 <pre><code>&lt;&lt; NCPOLYTEST</code></pre>
-<p>Finally our Semidefinite Programming Solver <a href="#NCSDPPackage"><code>NCSDP</code></a> can be tested with</p>
+<p>Finally our Semidefinite Programming Solver <a href="#PackageNCSDP"><code>NCSDP</code></a> can be tested with</p>
 <pre><code>&lt;&lt; NCSDPTEST</code></pre>
 <p>We recommend that you restart the kernel before and after running tests. Each test takes a few minutes to run.</p>
 <h2 id="ncgb"><span class="header-section-number">2.4</span> NCGB</h2>
@@ -1212,7 +1214,7 @@ expr = 1 + a**x + x**tp[a] - x + b**y**d + tp[d]**tp[y]**tp[b];
 <p>returns</p>
 <pre><code>{{d^T}, {b^T}, SparseArray[&lt; 1 &gt;, {1, 1}]}</code></pre>
 <p>Note that transposes and adjoints are treated as independent variables.</p>
-<p>Perhaps the most useful consequence of the above factorization is the possibility of producing a linear polynomial which has the smallest possible number of terms, as explaining in detail in <span class="citation" data-cites="oliveira:SSP:2012">[@oliveira:SSP:2012]</span>. This is done automatically by <a href="#NCSylvesterToNC"><code>NCSylvesterToNC</code></a>. For example</p>
+<p>Perhaps the most useful consequence of the above factorization is the possibility of producing a linear polynomial which has the smallest possible number of terms, as explaining in detail in <span class="citation" data-cites="oliveira:SSP:2012">(Oliveira 2012)</span>. This is done automatically by <a href="#NCSylvesterToNC"><code>NCSylvesterToNC</code></a>. For example</p>
 <pre><code>vars = {x, y};
 expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**y**d
 {const, lin} = NCToNCSylvester[expr, vars]
@@ -1228,7 +1230,7 @@ expr = {{a ** x + x ** tp[a], b ** x, tp[c]},
 <p>result in:</p>
 <pre><code>const = SparseArray[&lt; 6 &gt;, {3, 3}]
 lin = &lt;|x -&gt; {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[&lt; 4 &gt;, {9, 9}]}|&gt;</code></pre>
-<p>See <span class="citation" data-cites="oliveira:SSP:2012">[@oliveira:SSP:2012]</span> for details on the structure of the constant array <span class="math inline">\(F\)</span> in this case.</p>
+<p>See <span class="citation" data-cites="oliveira:SSP:2012">(Oliveira 2012)</span> for details on the structure of the constant array <span class="math inline">\(F\)</span> in this case.</p>
 <h1 id="NCGB"><span class="header-section-number">5</span> Noncommutative Gröbner Basis</h1>
 <p>The package <code>NCGBX</code> provides an implementation of a noncommutative Gröbner Basis algorithm. It is a Mathematica only replacement to the C++ <code>NCGB</code> which is still provided with this distribution. Gröbner Basis are useful in the study of algebraic relations.</p>
 <p>In order to load <code>NCGBX</code> one types:</p>
@@ -3856,7 +3858,15 @@ gb = NCMakeGB[{x^2 - 1, x^3 - 1}, 20]</code></pre>
 <p><code>PinnedQ[Pencil_,Unknowns_]</code> is True or False.</p>
 <h3 id="PinningSpace"><span class="header-section-number">14.2.13</span> PinningSpace</h3>
 <p><code>PinningSpace[Pencil_,Unknowns_]</code> returns a matrix whose columns span the pinning space of <code>Pencil</code>. Generally, either an empty matrix or a d-by-1 matrix (vector).</p>
-<h1 id="references"><span class="header-section-number">15</span> References</h1>
+<h1 id="references" class="unnumbered">References</h1>
+<div id="refs" class="references">
+<div id="ref-camino:MIS:2003">
+<p>Camino, Juan F., John William Helton, Robert E. Skelton, and Jieping Ye. 2003. “Matrix Inequalities: a Symbolic Procedure to Determine Convexity Automatically.” <em>Integral Equation and Operator Theory</em> 46 (4): 399–454.</p>
+</div>
+<div id="ref-oliveira:SSP:2012">
+<p>Oliveira, Mauricio C. de. 2012. “Simplification of symbolic polynomials on non-commutative variables.” <em>Linear Algebra and Its Applications</em> 437 (7): 1734–48. doi:<a href="https://doi.org/10.1016/j.laa.2012.05.015">10.1016/j.laa.2012.05.015</a>.</p>
+</div>
+</div>
 <section class="footnotes">
 <hr />
 <ol>
@@ -3870,7 +3880,7 @@ gb = NCMakeGB[{x^2 - 1, x^3 - 1}, 20]</code></pre>
   aa**bb
 ]</code></pre>
 <p>would not fail to treat <code>aa</code> and <code>bb</code> locally. It is their appearance in a rule that triggers the mostly odd behavior.<a href="#fnref5">↩</a></p></li>
-<li id="fn6"><p>This is in contrast with the commutative <span class="math inline">\(x^4\)</span> which is convex everywhere. See <span class="citation" data-cites="camino:MIS:2003">[@camino:MIS:2003]</span> for details.<a href="#fnref6">↩</a></p></li>
+<li id="fn6"><p>This is in contrast with the commutative <span class="math inline">\(x^4\)</span> which is convex everywhere. See <span class="citation" data-cites="camino:MIS:2003">(Camino et al. 2003)</span> for details.<a href="#fnref6">↩</a></p></li>
 </ol>
 </section>
 </body>
