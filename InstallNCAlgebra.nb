@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     27258,        662]
-NotebookOptionsPosition[     26296,        626]
-NotebookOutlinePosition[     26883,        648]
-CellTagsIndexPosition[     26840,        645]
+NotebookDataLength[     28500,        694]
+NotebookOptionsPosition[     27502,        657]
+NotebookOutlinePosition[     28088,        679]
+CellTagsIndexPosition[     28045,        676]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,6 +26,23 @@ Cell["\<\
 This notebook modifies your Mathematica initialization file by adding \
 instructions to set NCAlgebra in your Mathematica path.\
 \>", "Text",
+ FontSize->16],
+
+Cell[TextData[{
+ StyleBox["Before you start, make sure that the directory containing this \
+file is named ",
+  FontWeight->"Bold",
+  FontColor->GrayLevel[0]],
+ StyleBox["NC",
+  FontWeight->"Bold",
+  FontSlant->"Italic",
+  FontColor->GrayLevel[0]],
+ StyleBox[".\nIf not, rename it before running this notebook!",
+  FontWeight->"Bold",
+  FontColor->GrayLevel[0]]
+}], "Text",
+ CellChangeTimes->{{3.700705565924305*^9, 3.7007056218542633`*^9}, {
+   3.700705652919243*^9, 3.700705653199708*^9}, 3.7007057209544287`*^9},
  FontSize->16],
 
 Cell[TextData[{
@@ -577,18 +594,31 @@ individually if you want to complete the entire test.\>\"", ",",
         RowBox[{"\"\<<< NCTEST\\nQuit[]\>\"", ",", "\"\<Input\>\""}], "]"}], 
        ",", "\[IndentingNewLine]", 
        RowBox[{"TextCell", "[", 
-        RowBox[{"\"\<Test NCGB\>\"", ",", "\"\<Section\>\""}], "]"}], ",", 
+        RowBox[{"\"\<Test NCPoly\>\"", ",", "\"\<Section\>\""}], "]"}], ",", 
        "\[IndentingNewLine]", 
        RowBox[{"TextCell", "[", 
         RowBox[{
-        "\"\<Execute the following commands to test NCGB:\>\"", ",", 
+        "\"\<Execute the following commands to test NCPoly:\>\"", ",", 
          "\"\<Text\>\""}], "]"}], ",", "\[IndentingNewLine]", 
        RowBox[{"TextCell", "[", 
-        RowBox[{"\"\<<< NC`\\n<< NCGB`\>\"", ",", "\"\<Input\>\""}], "]"}], 
-       ",", "\[IndentingNewLine]", 
+        RowBox[{"\"\<<< NC`\\n<< NCAlgebra`\>\"", ",", "\"\<Input\>\""}], 
+        "]"}], ",", "\[IndentingNewLine]", 
        RowBox[{"TextCell", "[", 
-        RowBox[{"\"\<<< NCGBTEST\\nQuit[]\>\"", ",", "\"\<Input\>\""}], "]"}],
-        ",", "\[IndentingNewLine]", 
+        RowBox[{"\"\<<< NCPOLYTEST\\nQuit[]\>\"", ",", "\"\<Input\>\""}], 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<Test NCSDP\>\"", ",", "\"\<Section\>\""}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{
+        "\"\<Execute the following commands to test NCSDP:\>\"", ",", 
+         "\"\<Text\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<<< NC`\>\"", ",", "\"\<Input\>\""}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"\"\<<< NCSDPTEST\\nQuit[]\>\"", ",", "\"\<Input\>\""}], 
+        "]"}], ",", "\[IndentingNewLine]", 
        RowBox[{"TextCell", "[", 
         RowBox[{"\"\<Test NCTeX\>\"", ",", "\"\<Section\>\""}], "]"}], ",", 
        "\[IndentingNewLine]", 
@@ -621,7 +651,8 @@ because of path problems.\>\"", ",", "\"\<Text\>\""}], "]"}], ",",
    3.517488242833321*^9}, 3.5174883096175413`*^9, {3.517490115223216*^9, 
    3.517490123241871*^9}, {3.517490713484054*^9, 3.51749073900843*^9}, {
    3.517491469830192*^9, 3.517491626827239*^9}, {3.51749167575172*^9, 
-   3.517491707272455*^9}, {3.517491855993052*^9, 3.5174918603865957`*^9}}]
+   3.517491707272455*^9}, {3.517491855993052*^9, 3.5174918603865957`*^9}, {
+   3.700705941238793*^9, 3.700706054376013*^9}}]
 }, Open  ]]
 },
 CellGrouping->Manual,
@@ -632,8 +663,8 @@ DockedCells->(FrontEndExecute[{
     FrontEnd`InputNotebook[], #, Placeholder]}]& ),
 PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
 ShowSelection->True,
-FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
-2013)",
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -650,22 +681,22 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[567, 22, 32, 0, 92, "Title"],
 Cell[602, 24, 166, 4, 55, "Text"],
-Cell[771, 30, 293, 10, 33, "Text"],
-Cell[1067, 42, 173, 4, 55, "Text"],
-Cell[1243, 48, 77, 1, 33, "Text"],
-Cell[1323, 51, 3445, 94, 19, "Input",
+Cell[771, 30, 529, 15, 55, "Text"],
+Cell[1303, 47, 293, 10, 33, "Text"],
+Cell[1599, 59, 173, 4, 55, "Text"],
+Cell[1775, 65, 77, 1, 33, "Text"],
+Cell[1855, 68, 3445, 94, 19, "Input",
  CellOpen->False],
-Cell[4771, 147, 5360, 118, 19, "Input",
+Cell[5303, 164, 5360, 118, 19, "Input",
  CellOpen->False],
-Cell[10134, 267, 321, 9, 19, "Input",
+Cell[10666, 284, 321, 9, 19, "Input",
  CellOpen->False],
-Cell[10458, 278, 11982, 263, 19, "Input",
+Cell[10990, 295, 11982, 263, 19, "Input",
  CellOpen->False],
-Cell[22443, 543, 3837, 80, 19, "Input",
+Cell[22975, 560, 4511, 94, 19, "Input",
  CellOpen->False]
 }, Open  ]]
 }
 ]
 *)
 
-(* End of internal cache information *)
