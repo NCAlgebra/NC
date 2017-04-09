@@ -24,7 +24,8 @@ Clear[aj, tp, rt, inv, co,
       SetCommutative, SetNonCommutative,
       ExpandNonCommutativeMultiply,
       BeginCommuteEverything, EndCommuteEverything, 
-      CommuteEverything, Commutative];
+      CommuteEverything, Commutative,
+      SNC, NCExpand, NCE];
 
 CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative.";
 CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative.";
@@ -432,6 +433,11 @@ Begin[ "`Private`" ]
   (* pretty co *)
   OverBar[a_] := co[a];
 
+  (* Aliases *)
+  SNC = SetNonCommutative;
+  NCExpand = ExpandNonCommutativeMultiply;
+  NCE = ExpandNonCommutativeMultiply;
+  
 End[]
 
 EndPackage[]

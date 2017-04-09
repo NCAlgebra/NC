@@ -39,14 +39,13 @@ Begin[ "`Private`" ]
   (* NCPToNCSylvester *)
 
   Clear[NCPToNCSylvesterAux];
-  NCPToNCSylvesterAux[poly_Association, var_?NCSymbolOrSubscriptQ] := Module[
+  NCPToNCSylvesterAux[poly_Association, var_] := Module[
     {exp, coeff, left, right, leftBasis, rightBasis,
      i, j, p, q, F},
 
     (* Quick return if independent of var *)
     (* This will automatically select linear terms *)
-    If [!KeyExistsQ[poly, {var}] || (exp = poly[{var}]) === {}
-        ,
+    If[ !KeyExistsQ[poly, {var}] || (exp = poly[{var}]) === {},
         Return[var -> {{},{},SparseArray[{}, {0, 0}]}];
     ];
 
@@ -131,16 +130,46 @@ Begin[ "`Private`" ]
 
   ];
 
-  NCPToNCSylvester[p_NCPolynomial, LinearQ_:True] := (
+  NCToNCSylvester[p_,vars_] := NCPToNCSylvester[NCToNCPolynomial[p,vars]];
+
+  NCPToNCSylvester[p_NCPolynomial, LinearQ_:True] := Block[
+    {lin},
 
     If [LinearQ && !NCPLinearQ[p],
         Message[NCSylvester::NotLinear];
         Return[$Failed];
     ];
+
+    (* Retrieve variable terms *)
+    lin = Association[Map[NCPToNCSylvesterAux[p[[2]], #]&, p[[3]]]];
+
+    (* Lookup tp's *)
+    If[ !FreeQ[Keys[p[[2]]], tp]
+       ,
+        lin = Join[lin,
+                   DeleteCases[
+                      Association[Map[NCPToNCSylvesterAux[p[[2]], #]&, 
+                                  Map[tp,p[[3]]]]],
+                      {{},{},{}}
+                   ]
+        ];
+    ];
+      
+    (* Lookup aj's *)
+    If[ !FreeQ[Keys[p[[2]]], aj]
+       ,
+        lin = Join[lin,
+                   DeleteCases[
+                      Association[Map[NCPToNCSylvesterAux[p[[2]], #]&, 
+                                  Map[aj,p[[3]]]]],
+                      {{},{},{}}
+                   ]
+        ];
+    ];
+      
+    Return[{p[[1]], lin}];
     
-    {p[[1]], Association[Map[NCPToNCSylvesterAux[p[[2]], #]&, p[[3]]]]}
-    
-  );
+  ];
   
   
   (* NCSylvesterToNCPolynomial *)

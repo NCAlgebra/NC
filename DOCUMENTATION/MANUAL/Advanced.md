@@ -257,9 +257,9 @@ use the full names `NCReplaceAll` and `NCReplaceRepeated`.
 
 On the same vein, the following substitution rule
 
-    NCReplace[2 a ** b + c, 2 a -> b]
+    NCReplace[2 a**b + c, 2 a -> b]
 
-will return `2 a ** b + c` intact since `FullForm[2 a ** b]` is indeed
+will return `2 a**b + c` intact since `FullForm[2 a**b]` is indeed
 
     Times[2, NonCommutativeMuliply[a, b]]
 
@@ -267,9 +267,9 @@ which is not structurally related to `FullForm[2 a]`, which is
 `Times[2, a]`. Of course, in this case a simple solution is to use the
 alternative rule:
 
-    NCReplace[2 a ** b + c, a -> b / 2]
+    NCReplace[2 a**b + c, a -> b / 2]
 
-which results in `b ** b + c`, as one might expect.
+which results in `b**b + c`, as one might expect.
 
 A second more esoteric issue related to substitution in `NCAlgebra`
 does not a clean solution. It is also one that usually lurks into
@@ -582,7 +582,7 @@ whereas
 
 would return
 
-	1 + z - 2 x ** x + x ** x ** x
+	1 + z - 2 x**x + x**x**x
 
 in which the sorting of the monomials has been destroyed by `Plus`.
 
@@ -783,7 +783,7 @@ $$
 See section [linear functions](#LinearPolys) for more features on
 linear polynomial matrices.
 
-### Quadratic polynomials {#Quadratic}
+## Quadratic polynomials {#Quadratic}
 
 When working with nc quadratics it is useful to be able to factor the
 quadratic into the following form
@@ -811,7 +811,17 @@ which returns
 and zero `const` and `lin`. The format for the linear part `lin` will
 be discussed lated in Section [Linear](#Linear). Note that
 coefficients of an nc quadratic may also appear on the left and right
-vectors, as `d` did in the above example.
+vectors, as `d` did in the above example. You can also convert an
+`NCPolynomial` using
+[`NCPToNCQuadratic`](#NCPToNCQuadratic). Conversely,
+[`NCQuadraticToNC`](#NCQuadraticToNC) converts a list with factors
+back to an nc expression as in:
+
+	NCQuadraticToNC[{const, lin, left, middle, right}]
+	
+which results in 
+
+	(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
 
 An interesting application is the verification of the domain in which
 an nc rational is *convex*. Take for example the quartic
@@ -874,7 +884,7 @@ for any possible value of $x$ the conclusion[^convex] is that the nc quartic
 $x^4$ is *not convex*.
 
 [^convex]: This is in contrast with the commutative $x^4$ which is
-    convex everywhere. See \cite{heltonconvexity} for details.
+    convex everywhere. See [@camino:MIS:2003] for details.
 
 The production of such symmetric quadratic decompositions is automated
 by the convenience command
@@ -933,5 +943,88 @@ which results in
 which correspond to the diagonal entries of the LDL decomposition of
 the middle matrix of the nc Hessian.
 
-### Linear polynomials {#Linear}
+## Linear polynomials {#Linear}
 
+Another interesting class of nc polynomials is that of linear
+polynomials, which can be factor in the form:
+$$
+	s(x) = l (F \otimes x) r
+$$
+where $l$ and $r$ are vectors with symbolic expressions and $F$ is a
+numeric matrix. This functionality is in the package
+
+	<< NCSylvester`
+
+Use the command [`NCToNCSylvester`](#NCToNCSylvester) to factor a
+linear nc polynomial into the the above form. For example:
+
+	vars = {x, y};
+	expr = 1 + a**x + x**tp[a] - x + b**y**d + tp[d]**tp[y]**tp[b];
+	{const, lin} = NCToNCSylvester[expr, vars];
+
+which returns
+
+	const = 1
+
+and an `Association` `lin` containing the factorization. For example
+
+	lin[x]
+	
+returns a list with the left and right vectors `l`
+and `r` and the coefficient array `F`. 
+
+	{{1, a}, {1, a^T}, SparseArray[< 2 >, {2, 2}]}
+
+which in this case is the matrix:
+
+$$
+\begin{bmatrix}
+	-1 & 1\\
+	1 & 0
+\end{bmatrix}
+$$
+
+and 
+	
+	lin[tp[y]]
+	
+returns
+
+	{{d^T}, {b^T}, SparseArray[< 1 >, {1, 1}]}
+
+Note that transposes and adjoints are treated as independent
+variables.
+
+Perhaps the most useful consequence of the above factorization is the
+possibility of producing a linear polynomial which has the smallest
+possible number of terms, as explaining in detail in
+[@oliveira:SSP:2012]. This is done automatically by
+[`NCSylvesterToNC`](#NCSylvesterToNC). For example
+
+	vars = {x, y};
+	expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**y**d
+	{const, lin} = NCToNCSylvester[expr, vars]
+	NCSylvesterToNC[{const, lin}]
+	
+produces:
+
+	(a + b) ** x ** (c - d) + (a + b) ** y ** (-c + d)
+
+This factorization even works with linear matrix polynomials, and is
+used by the our semidefinite programming algorithm (see Chapter
+[Semidefinite Programming](#SemidefiniteProgramming)) to factor linear
+matrix inequalities in the least possible number of terms. For example:
+
+	vars = {x};
+	expr = {{a ** x + x ** tp[a], b ** x, tp[c]},
+            {x ** tp[b], -1, tp[d]},
+	        {c, d, -1}}
+	{const, lin} = NCToNCSylvester[expr, vars]
+
+result in:
+
+	const = SparseArray[< 6 >, {3, 3}]
+	lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
+
+See [@oliveira:SSP:2012] for details on the structure of the constant
+array $F$ in this case.

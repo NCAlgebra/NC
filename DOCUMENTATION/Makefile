@@ -12,10 +12,11 @@ $(BUILDDIRS):
 	$(MAKE) -C $(@:build-%=%)
 
 clean: $(CLEANDIRS)
-	rm -f NCDocument.tex
+	rm -f NCDocument.tex NCDocument.tex.* \
+              NCDocument.run.xml NCDocument.b*
 
 wipe: clean
-	rm -f NCDocument.html NCDocument.pdf
+	rm -f NCDocument.html NCDocument.pdf 
 
 $(CLEANDIRS):
 	$(MAKE) -C $(@:clean-%=%) clean
@@ -65,7 +66,8 @@ MANUAL = MANUAL/Preamble.md \
 	 NCPoly/NCPolyGroebner.md \
          MANUAL/WorkInProgress.md \
 	 NCAlgebra/NCRational.md \
-	 NCAlgebra/NCRealization.md
+	 NCAlgebra/NCRealization.md \
+	 MANUAL/Bibliography.md
 
 doc: NCDocument.pdf NCDocument.html
 
@@ -77,12 +79,15 @@ NCDocument.html: $(MANUAL)
 
 NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
+	     --biblatex \
+             --bibliography references.bib \
              --variable=geometry:margin=1in \
              --variable=documentclass:book \
 	     --variable=colorlinks \
 	     --variable=linkcolor:MidnightBlue \
 	     -o NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
+	biber NCDocument
 	$(PDFLATEX) NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
 	rm *.aux *.log *.toc *.out

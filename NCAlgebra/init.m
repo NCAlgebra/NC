@@ -22,7 +22,6 @@ If [ !ValueQ[$NC$Algebra$Loaded],
 << NCDot`
 << NCMatrixDecompositions`
 << NCSimplifyRational`
-<< NCAlias`
 << NCDeprecated`
 
 (* Load NCPoly interface with NCAlgebra *)

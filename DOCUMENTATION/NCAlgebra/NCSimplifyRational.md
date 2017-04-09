@@ -75,6 +75,11 @@ Members are:
 * [NCPreSimplifyRational](#NCPreSimplifyRational)
 * [NCPreSimplifyRationalSinglePass](#NCPreSimplifyRationalSinglePass)
 
+Aliases:
+
+* [NCSR](#NCSR) for [NCSimplifyRational](#NCSimplifyRational)
+
+
 ### NCNormalizeInverse {#NCNormalizeInverse}
 
 `NCNormalizeInverse[expr]` transforms all rational NC expressions of the form `inv[K + b]` into `inv[1 + (1/K) b]/K` if `A` is commutative.
@@ -89,6 +94,13 @@ See also:
 See also:
 [NCNormalizeInverse](#NCNormalizeInverse),
 [NCSimplifyRationalSinglePass](#NCSimplifyRationalSinglePass).
+
+### NCSR {#NCSR}
+
+`NCSR` is an alias for `NCSimplifyRational`.
+
+See also:
+[NCSimplifyRational](#NCSimplifyRational).
 
 ### NCSimplifyRationalSinglePass {#NCSimplifyRationalSinglePass}
 

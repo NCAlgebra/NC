@@ -1,0 +1,605 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20320,        597]
+NotebookOptionsPosition[     16906,        488]
+NotebookOutlinePosition[     18129,        523]
+CellTagsIndexPosition[     17845,        515]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCAlgebra`"}]}], "Input",
+ CellChangeTimes->{{3.667354547786566*^9, 3.667354555843665*^9}, {
+   3.6674132186342163`*^9, 3.6674132238380547`*^9}, 3.668044391251453*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{
+  3.668044346075273*^9, {3.6680443821058607`*^9, 3.6680444055428543`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.668044346075273*^9, {3.6680443821058607`*^9, 3.6680444055470657`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"You can now use \\\"<< NCAlgebra`\\\" to load NCAlgebra or \
+\"\>", "\[InvisibleSpace]", "\<\"\\\"<< NCGB`\\\" to load NCGB.\"\>"}],
+  SequenceForm[
+  "You can now use \"<< NCAlgebra`\" to load NCAlgebra or ", 
+   "\"<< NCGB`\" to load NCGB."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.668044346075273*^9, {3.6680443821058607`*^9, 3.668044405550991*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Load NCPolynomial", "Section",
+ CellChangeTimes->{{3.667414000653289*^9, 3.6674140079371643`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"<<", "NCPolynomial`"}]], "Input",
+ CellChangeTimes->{{3.667413243744375*^9, 3.667413246839623*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Converting an NCPolynomial from an NC expression", "Section",
+ CellChangeTimes->{{3.667413966665009*^9, 3.6674139867059*^9}, {
+  3.6834064814700317`*^9, 3.683406481940257*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "NCPolynomial"}]], "Input",
+ CellChangeTimes->{{3.667413773802555*^9, 3.667413779391707*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"NCPolynomial[indep,rules,vars] is an expanded efficient \
+representation for an nc polynomial in vars which can have commutative or \
+noncommutative coefficients.\\n\\nThe nc expression indep collects all terms \
+that are independent of the letters in vars.\\n\\nThe _Association_ rules \
+stores terms in the following format:\\n\\n    {mon1, ..., monN} -> {scalar, \
+term1, ..., termN+1}\\n\\nwhere:\\n\\n-   mon1, ..., monN: are nc monomials \
+in vars;\\n-   scalar: contains all commutative coefficients; and\\n-   \
+term1, ..., termN+1: are nc expressions on letters other than the ones in \
+vars which are typically the noncommutative coefficients of the \
+polynomial.\\n\\nvars is a list of _Symbols_.\\n\\nFor example the polynomial\
+\\n\\n    a**x**b - 2 x**y**c**x + a**c\\n\\nin variables x and y is stored \
+as:\\n\\n    NCPolynomial[a**c, <|{x}->{{1,a,b}},{x**y,x}->{{2,1,c,1}}|>, \
+{x,y}]\\n\\nNCPolynomial specific functions are prefixed with NCP, e.g. \
+NCPDegree.\\n\\nSee also: NCToNCPolynomial, NCPolynomialToNC, \
+NCTermsToNC.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.668044406935454*^9},
+ CellTags->"Info-5da20733-102a-4cba-811d-5c81ccee8df4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"exp", "=", 
+  RowBox[{
+   RowBox[{"a", "**", "x", "**", "b"}], "-", 
+   RowBox[{"2", " ", 
+    RowBox[{"x", "**", "y", "**", "c", "**", "x"}]}], "+", 
+   RowBox[{"a", "**", "c"}], "+", 
+   RowBox[{"d", "**", "x"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p", "=", 
+  RowBox[{"NCToNCPolynomial", "[", 
+   RowBox[{"exp", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"NCPolynomialToNC", "[", "p", "]"}]}], "Input",
+ CellChangeTimes->{{3.6674137315798883`*^9, 3.6674137564174433`*^9}, {
+  3.66741380978374*^9, 3.667413809959085*^9}, {3.667413949473784*^9, 
+  3.667413957695998*^9}, {3.6674147725942307`*^9, 3.6674147752745113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "**", "c"}], "+", 
+  RowBox[{"d", "**", "x"}], "+", 
+  RowBox[{"a", "**", "x", "**", "b"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"x", "**", "y", "**", "c", "**", "x"}]}]}]], "Output",
+ CellChangeTimes->{{3.667413735904677*^9, 3.667413756912965*^9}, 
+   3.6674138108345833`*^9, 3.6674138934883204`*^9, 3.667413958041905*^9, 
+   3.667414179949876*^9, {3.667414752292939*^9, 3.667414775854801*^9}, 
+   3.667424066327853*^9, 3.667425069455462*^9, 3.6680442846772003`*^9, 
+   3.668044407252739*^9}],
+
+Cell[BoxData[
+ RowBox[{"NCPolynomial", "[", 
+  RowBox[{
+   RowBox[{"a", "**", "c"}], ",", 
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", "x", "}"}], "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", "d", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "a", ",", "b"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"x", "**", "y"}], ",", "x"}], "}"}], "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "1", ",", "c", ",", "1"}], "}"}], "}"}]}]}],
+     "\[RightAssociation]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.667413735904677*^9, 3.667413756912965*^9}, 
+   3.6674138108345833`*^9, 3.6674138934883204`*^9, 3.667413958041905*^9, 
+   3.667414179949876*^9, {3.667414752292939*^9, 3.667414775854801*^9}, 
+   3.667424066327853*^9, 3.667425069455462*^9, 3.6680442846772003`*^9, 
+   3.668044407256946*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "**", "c"}], "+", 
+  RowBox[{"d", "**", "x"}], "+", 
+  RowBox[{"a", "**", "x", "**", "b"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"x", "**", "y", "**", "c", "**", "x"}]}]}]], "Output",
+ CellChangeTimes->{{3.667413735904677*^9, 3.667413756912965*^9}, 
+   3.6674138108345833`*^9, 3.6674138934883204`*^9, 3.667413958041905*^9, 
+   3.667414179949876*^9, {3.667414752292939*^9, 3.667414775854801*^9}, 
+   3.667424066327853*^9, 3.667425069455462*^9, 3.6680442846772003`*^9, 
+   3.668044407259487*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+You can retrieve raw coefficients of individual terms using NCPCoefficients\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.6674142048124113`*^9, 3.667414237079762*^9}, {
+  3.667414776698806*^9, 3.667414777337627*^9}, {3.667415946310668*^9, 
+  3.667415947390773*^9}, {3.668044301865562*^9, 3.6680443037451*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "NCPCoefficients"}]], "Input",
+ CellChangeTimes->{{3.667424071983882*^9, 3.6674240740884247`*^9}, {
+  3.667424197957374*^9, 3.6674242006681232`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"NCPCoefficients[p, m] gives all coefficients of the \
+NCPolynomial p in the monomial m.\\n\\nFor example:\\n\\n    exp = a ** x ** \
+b - 2 x ** y ** c ** x + a ** c + d ** x\\n    p = NCToNCPolynomial[exp, {x, \
+y}]\\n    NCPCoefficients[p, {x}]\\n\\nreturns\\n\\n    {{1, d, 1}, {1, a, \
+b}}\\n\\nand\\n\\n    NCPCoefficients[p, {x ** y, x}]\\n\\nreturns\\n\\n    \
+{{-2, 1, c, 1}}\\n\\nSee also: NCPTermsToNC.\"\>", "MSG"]], "Print", \
+"PrintUsage",
+ CellChangeTimes->{3.66804440732901*^9},
+ CellTags->"Info-61130a65-ca9c-4a11-99a6-8fae2a916006"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"NCPCoefficients", "[", 
+  RowBox[{"p", ",", 
+   RowBox[{"{", "x", "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"NCPCoefficients", "[", 
+  RowBox[{"p", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "**", "y"}], ",", "x"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6674147560181293`*^9, 3.667414763321931*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "d", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "a", ",", "b"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.667414220059264*^9, {3.667414758807304*^9, 3.6674147809830513`*^9}, 
+   3.667424068930194*^9, 3.6674250743248367`*^9, 3.668044305764501*^9, 
+   3.668044407376294*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"-", "2"}], ",", "1", ",", "c", ",", "1"}], "}"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.667414220059264*^9, {3.667414758807304*^9, 3.6674147809830513`*^9}, 
+   3.667424068930194*^9, 3.6674250743248367`*^9, 3.668044305764501*^9, 
+   3.668044407380439*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["You can also retrieve terms by degree", "Subsubsection",
+ CellChangeTimes->{{3.667414995836349*^9, 3.667415005657353*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "NCPTermsOfDegree"}]], "Input",
+ CellChangeTimes->{{3.667425079788371*^9, 3.667425085538493*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"NCPTermsOfDegree[p,deg] gives all terms of the NCPolynomial p \
+of degree deg.\\n\\nThe degree deg is a list with the degree of each \
+symbol.\\n\\nFor example:\\n\\n    p = NCPolynomial[0, \
+<|{x,y}->{{2,a,b,c}},\\n                           {x,x}->{{1,a,b,c}},\\n     \
+                      {x**x}->{{-1,a,b}}|>, {x,y}]\\n    NCPTermsOfDegree[p, \
+{1,1}]\\n\\nreturns\\n\\n    <|{x,y}->{{2,a,b,c}}|>\\n\\nand\\n\\n    \
+NCPTermsOfDegree[p, {2,0}]\\n\\nreturns\\n\\n    <|{x,x}->{{1,a,b,c}}, \
+{x**x}->{{-1,a,b}}|>\\n\\nSee also: NCPTermsOfTotalDegree,NCPTermsToNC.\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.66804440744587*^9},
+ CellTags->"Info-c3ecfa5d-1baa-40d3-b913-bc400a320e4b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"exp", "=", 
+  RowBox[{
+   RowBox[{"2", " ", 
+    RowBox[{"a", "**", "x", "**", "b", "**", "y", "**", "c"}]}], "-", 
+   RowBox[{"a", "**", "x", "**", "x", "**", "b"}], "+", 
+   RowBox[{
+   "a", "**", "x", "**", "b", "**", "x", "**", 
+    "c"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p", "=", 
+  RowBox[{"NCToNCPolynomial", "[", 
+   RowBox[{"exp", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], "\n", 
+ RowBox[{"term1", "=", 
+  RowBox[{"NCPTermsOfDegree", "[", 
+   RowBox[{"p", ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "\n", 
+ RowBox[{"term2", "=", 
+  RowBox[{"NCPTermsOfDegree", "[", 
+   RowBox[{"p", ",", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "0"}], "}"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.667415044103511*^9, 3.667415067072283*^9}, {
+  3.667416060204321*^9, 3.667416083935339*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   RowBox[{"a", "**", "x", "**", "x", "**", "b"}]}], "+", 
+  RowBox[{"a", "**", "x", "**", "b", "**", "x", "**", "c"}], "+", 
+  RowBox[{"2", " ", 
+   RowBox[{"a", "**", "x", "**", "b", "**", "y", "**", "c"}]}]}]], "Output",
+ CellChangeTimes->{3.667415025364935*^9, 3.667415067573354*^9, 
+  3.667415954456335*^9, 3.667416085435858*^9, 3.6680443118948317`*^9, 
+  3.6680444075225983`*^9}],
+
+Cell[BoxData[
+ RowBox[{"NCPolynomial", "[", 
+  RowBox[{"0", ",", 
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", "**", "x"}], "}"}], "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", "a", ",", "b"}], "}"}], "}"}]}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", "x"}], "}"}], "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "a", ",", "b", ",", "c"}], "}"}], "}"}]}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", "y"}], "}"}], "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "a", ",", "b", ",", "c"}], "}"}], "}"}]}]}], 
+    "\[RightAssociation]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.667415025364935*^9, 3.667415067573354*^9, 
+  3.667415954456335*^9, 3.667416085435858*^9, 3.6680443118948317`*^9, 
+  3.668044407526305*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}], "\[Rule]", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "a", ",", "b", ",", "c"}], "}"}], "}"}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellChangeTimes->{3.667415025364935*^9, 3.667415067573354*^9, 
+  3.667415954456335*^9, 3.667416085435858*^9, 3.6680443118948317`*^9, 
+  3.668044407528839*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", "**", "x"}], "}"}], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", "a", ",", "b"}], "}"}], "}"}]}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "x"}], "}"}], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "a", ",", "b", ",", "c"}], "}"}], "}"}]}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellChangeTimes->{3.667415025364935*^9, 3.667415067573354*^9, 
+  3.667415954456335*^9, 3.667416085435858*^9, 3.6680443118948317`*^9, 
+  3.6680444075311728`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Use NCPTermsToNC to convert terms to nc expressions", "Subsubsection",
+ CellChangeTimes->{{3.667415999960249*^9, 3.6674160144512568`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "NCPTermsToNC"}]], "Input",
+ CellChangeTimes->{{3.667425095012061*^9, 3.667425099447796*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"NCPTermsToNC gives a nc expression corresponding to terms \
+produced by NCPTermsOfDegree or NCTermsOfTotalDegree.\\n\\nFor example:\\n\\n \
+   terms = <|{x,x}->{{1,a,b,c}}, {x**x}->{{-1,a,b}}|>\\n    \
+NCPTermsToNC[terms]\\n\\nreturns\\n\\n    a**x**b**c-a**x**b\\n\\nSee also: \
+NCPTermsOfDegree,NCPTermsOfTotalDegree.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.668044407745118*^9},
+ CellTags->"Info-e048dd52-943c-4ccd-a927-184994961a64"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"NCPTermsToNC", "[", "term1", "]"}], "\n", 
+ RowBox[{"NCPTermsToNC", "[", "term2", "]"}]}], "Input",
+ CellChangeTimes->{{3.667416029083501*^9, 3.6674160483874083`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"2", " ", 
+  RowBox[{"a", "**", "x", "**", "b", "**", "y", "**", "c"}]}]], "Output",
+ CellChangeTimes->{3.667416048803697*^9, 3.6674160900347652`*^9, 
+  3.6680443169630947`*^9, 3.668044407937108*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   RowBox[{"a", "**", "x", "**", "x", "**", "b"}]}], "+", 
+  RowBox[{"a", "**", "x", "**", "b", "**", "x", "**", "c"}]}]], "Output",
+ CellChangeTimes->{3.667416048803697*^9, 3.6674160900347652`*^9, 
+  3.6680443169630947`*^9, 3.668044407939983*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCPDecompose", "[", "p", "]"}]], "Input",
+ CellChangeTimes->{{3.667413802474221*^9, 3.667413806863778*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"2", ",", "0"}], "}"}], "\[Rule]", 
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"a", "**", "x", "**", "x", "**", "b"}]}], "+", 
+     RowBox[{"a", "**", "x", "**", "b", "**", "x", "**", "c"}]}]}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1"}], "}"}], "\[Rule]", 
+    RowBox[{"2", " ", 
+     RowBox[{"a", "**", "x", "**", "b", "**", "y", "**", "c"}]}]}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellChangeTimes->{
+  3.667413812011054*^9, 3.667413894160119*^9, 3.667414181692152*^9, {
+   3.668044318646625*^9, 3.668044329686006*^9}, 3.668044408026993*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.667413838526525*^9, 3.667413917533924*^9}, {
+  3.6674141860129423`*^9, 3.6674142018205643`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.667413237148415*^9, 3.6674133023623753`*^9}, 
+   3.667414991572711*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NCPTermsOfTotalDegree", "[", 
+  RowBox[{"p", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.667413660334303*^9, 3.667413666670157*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", "**", "x"}], "}"}], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", "a", ",", "b"}], "}"}], "}"}]}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "x"}], "}"}], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "a", ",", "b", ",", "c"}], "}"}], "}"}]}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "a", ",", "b", ",", "c"}], "}"}], "}"}]}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellChangeTimes->{3.6674136674256153`*^9, 3.66804432473332*^9, 
+  3.668044408282002*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1015, 755},
+WindowMargins->{{Automatic, -1}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info-5da20733-102a-4cba-811d-5c81ccee8df4"->{
+  Cell[2387, 78, 1210, 17, 639, "Print",
+   CellTags->"Info-5da20733-102a-4cba-811d-5c81ccee8df4"]},
+ "Info-61130a65-ca9c-4a11-99a6-8fae2a916006"->{
+  Cell[7050, 192, 577, 9, 471, "Print",
+   CellTags->"Info-61130a65-ca9c-4a11-99a6-8fae2a916006"]},
+ "Info-c3ecfa5d-1baa-40d3-b913-bc400a320e4b"->{
+  Cell[9066, 253, 734, 11, 534, "Print",
+   CellTags->"Info-c3ecfa5d-1baa-40d3-b913-bc400a320e4b"]},
+ "Info-e048dd52-943c-4ccd-a927-184994961a64"->{
+  Cell[13556, 385, 484, 7, 282, "Print",
+   CellTags->"Info-e048dd52-943c-4ccd-a927-184994961a64"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info-5da20733-102a-4cba-811d-5c81ccee8df4", 17275, 500},
+ {"Info-61130a65-ca9c-4a11-99a6-8fae2a916006", 17424, 503},
+ {"Info-c3ecfa5d-1baa-40d3-b913-bc400a320e4b", 17572, 506},
+ {"Info-e048dd52-943c-4ccd-a927-184994961a64", 17721, 509}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 246, 4, 57, "Input"],
+Cell[CellGroupData[{
+Cell[851, 30, 188, 3, 26, "Print"],
+Cell[1042, 35, 279, 6, 26, "Print"],
+Cell[1324, 43, 416, 9, 26, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1789, 58, 104, 1, 80, "Section"],
+Cell[1896, 61, 123, 2, 36, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2056, 68, 182, 2, 80, "Section"],
+Cell[CellGroupData[{
+Cell[2263, 74, 121, 2, 36, "Input"],
+Cell[2387, 78, 1210, 17, 639, "Print",
+ CellTags->"Info-5da20733-102a-4cba-811d-5c81ccee8df4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3634, 100, 711, 16, 78, "Input"],
+Cell[4348, 118, 533, 11, 36, "Output"],
+Cell[4884, 131, 1070, 29, 36, "Output"],
+Cell[5957, 162, 533, 11, 36, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6527, 178, 318, 5, 43, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[6870, 187, 177, 3, 35, "Input"],
+Cell[7050, 192, 577, 9, 471, "Print",
+ CellTags->"Info-61130a65-ca9c-4a11-99a6-8fae2a916006"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7664, 206, 353, 9, 57, "Input"],
+Cell[8020, 217, 382, 10, 35, "Output"],
+Cell[8405, 229, 331, 9, 35, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8785, 244, 128, 1, 43, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[8938, 249, 125, 2, 36, "Input"],
+Cell[9066, 253, 734, 11, 534, "Print",
+ CellTags->"Info-c3ecfa5d-1baa-40d3-b913-bc400a320e4b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9837, 269, 878, 25, 99, "Input"],
+Cell[10718, 296, 425, 9, 36, "Output"],
+Cell[11146, 307, 996, 29, 57, "Output"],
+Cell[12145, 338, 421, 11, 36, "Output"],
+Cell[12569, 351, 645, 19, 35, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13263, 376, 144, 1, 43, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[13432, 381, 121, 2, 35, "Input"],
+Cell[13556, 385, 484, 7, 282, "Print",
+ CellTags->"Info-e048dd52-943c-4ccd-a927-184994961a64"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14077, 397, 192, 3, 57, "Input"],
+Cell[14272, 402, 222, 4, 36, "Output"],
+Cell[14497, 408, 287, 6, 35, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14821, 419, 131, 2, 36, "Input"],
+Cell[14955, 423, 675, 18, 36, "Output"]
+}, Open  ]],
+Cell[15645, 444, 145, 2, 35, "Input"],
+Cell[15793, 448, 120, 2, 35, "Input"],
+Cell[CellGroupData[{
+Cell[15938, 454, 163, 3, 36, "Input"],
+Cell[16104, 459, 762, 24, 36, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

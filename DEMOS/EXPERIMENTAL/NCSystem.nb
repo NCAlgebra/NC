@@ -1,0 +1,250 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6198,        182]*)
+(*NotebookOutlinePosition[      6827,        204]*)
+(*  CellTagsIndexPosition[      6783,        200]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["System Routines", "Title"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(Get["\<NCAlgebra.m\>"];\)\), "\[IndentingNewLine]", 
+    \(\(SetOutput[all \[Rule] True];\)\), "\[IndentingNewLine]", 
+    \(\(Get["\<NCSystem.m\>"];\)\), "\[IndentingNewLine]", 
+    \(NCGuts[NCSymbols \[Rule] True, 
+      NCStrongProduct2 \[Rule] True]\)}], "Input"],
+
+Cell[BoxData[
+    \(Get::"noopen" \(\(:\)\(\ \)\) 
+      "Cannot open \!\(\"NCAlgebra.m\"\)."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"spell1" \(\(:\)\(\ \)\) 
+      "Possible spelling error: new symbol name \"\!\(all\)\" is similar to \
+existing symbol \"\!\(All\)\"."\)], "Message"],
+
+Cell[BoxData[
+    \(Get::"noopen" \(\(:\)\(\ \)\) 
+      "Cannot open \!\(\"NCSystem.m\"\)."\)], "Message"],
+
+Cell[BoxData[
+    \(NCGuts[NCSymbols \[Rule] True, 
+      NCStrongProduct2 \[Rule] True]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Test System Definitions", "Section"],
+
+Cell[BoxData[{
+    \(s1\  = \ System[A, \ B, \ C, \ D]\), "\[IndentingNewLine]", 
+    \(s2\  = \ System[A, \ B, \ C, 0]\), "\[IndentingNewLine]", 
+    \(s3\  = \ System[{{A, \ B}, \ {C, \ D}}, \ 1]\), "\[IndentingNewLine]", 
+    \(s3\  = \ System[A, B, C]\), "\[IndentingNewLine]", 
+    \(FullForm[s1]\), "\[IndentingNewLine]", 
+    \(s1[\([1]\)]\), "\[IndentingNewLine]", 
+    \(SystemQ[s1]\), "\[IndentingNewLine]", 
+    \(Head[s1]\), "\[IndentingNewLine]", 
+    \(Part[s1, \ 1]\), "\[IndentingNewLine]", 
+    \(GetA[s1]\), "\[IndentingNewLine]", 
+    \(Dimensions[s1, \ 1]\), "\[IndentingNewLine]", 
+    \(Dimensions[s1, \ 2]\), "\[IndentingNewLine]", 
+    \(Dimensions[s1, \ 0]\), "\[IndentingNewLine]", 
+    \(Dimensions[s1, \ 4]\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Test LFT & Schur Complement", "Section"],
+
+Cell[BoxData[{
+    \(MMM\  = \ {{a, \ b}, \ {c, \ d}}\), "\[IndentingNewLine]", 
+    \(MatrixForm[SchurComplement[MMM, \ 2, 2]]\), "\[IndentingNewLine]", 
+    \(LFT[a_, b_, c_, d_] := \ 
+      a\  - \ b\  ** \ inv[d - Id] ** c\), "\[IndentingNewLine]", 
+    \(LFT[MMM, \ 2, 2]\), "\[IndentingNewLine]", 
+    \(LFT[a, b, c, d]\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Test System connnections", "Section"],
+
+Cell[BoxData[{
+    \(\(Clear[A1, \ B1, \ C1, \ D1];\)\), "\[IndentingNewLine]", 
+    \(\(SNC[A1, \ B1, \ C1, \ D1];\)\), "\[IndentingNewLine]", 
+    \(\(Clear[A2, \ B2, \ C2, \ D2];\)\), "\[IndentingNewLine]", 
+    \(\(SNC[A2, \ B2, \ C2, \ D2];\)\), "\[IndentingNewLine]", 
+    \(\(Clear[A3, \ B3, \ C3, \ D3];\)\), "\[IndentingNewLine]", 
+    \(\(SNC[A3, \ B3, \ C3, \ D3];\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys1\  = \ System[A1, \ B1, \ C1, \ D1]\), "\[IndentingNewLine]", 
+    \(Sys2\  = \ System[A2, \ B2, \ C2, \ D2]\), "\[IndentingNewLine]", 
+    \(Sys3\  = \ System[A3, \ B3, \ C3, \ D3]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys4\  = \ ConnectParallel[Sys1, \ Sys2]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys4\  = \ ConnectSeries[Sys1, \ Sys2]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys4\  = \ 
+      ConnectFeedback[ConnectParallel[Sys1, \ Sys2], 1, 
+        2]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys4\  = \ 
+      ConnectParallel[ConnectParallel[Sys1, \ Sys2], \ 
+        Sys3]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys4\  = \ 
+      ConnectFeedback[ConnectParallel[ConnectParallel[Sys1, \ Sys2], \ Sys3], 
+        1, 2]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys4\  = \ 
+      ConnectSeries[ConnectParallel[Sys1, \ Sys2], \ Sys3, \ 2, \ 
+        1]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Sys4\  = \ ConnectPlus[Sys1, \ Sys2]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\), "\[IndentingNewLine]", 
+    \(Sys4\  = \ 
+      ConnectOutputs[
+        ConnectParallel[Sys1, \ Sys2], \ {1, 2}]\), "\[IndentingNewLine]", 
+    \(MatrixForm[GetMatrices[Sys4]]\), "\[IndentingNewLine]", 
+    \(MatrixForm[
+      GetMatrices[
+        ConnectOutputs[
+          ConnectParallel[Sys1, \ Sys2], \ {1, 
+            2}]]]\), "\[IndentingNewLine]", 
+    \(MatrixForm[
+      GetMatrices[
+        ConnectInputs[ConnectParallel[Sys1, \ Sys2], \ {2, 1}]]]\)}], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{1011, 672},
+WindowMargins->{{0, Automatic}, {Automatic, 0}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 32, 0, 114, "Title"],
+
+Cell[CellGroupData[{
+Cell[1784, 56, 290, 5, 75, "Input"],
+Cell[2077, 63, 108, 2, 23, "Message"],
+Cell[2188, 67, 179, 3, 23, "Message"],
+Cell[2370, 72, 107, 2, 23, "Message"],
+Cell[2480, 76, 102, 2, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2619, 83, 42, 0, 60, "Section"],
+Cell[2664, 85, 748, 14, 235, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3449, 104, 46, 0, 60, "Section"],
+Cell[3498, 106, 339, 6, 91, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3874, 117, 43, 0, 53, "Section"],
+Cell[3920, 119, 391, 6, 130, "Input"],
+Cell[4314, 127, 220, 3, 70, "Input"],
+Cell[4537, 132, 138, 2, 50, "Input"],
+Cell[4678, 136, 136, 2, 50, "Input"],
+Cell[4817, 140, 177, 4, 50, "Input"],
+Cell[4997, 146, 179, 4, 50, "Input"],
+Cell[5179, 152, 202, 4, 50, "Input"],
+Cell[5384, 158, 187, 4, 50, "Input"],
+Cell[5574, 164, 596, 14, 130, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -27,7 +27,8 @@ Clear[NCNormalizeInverse,
       NCPreSimplifyRationalSinglePass,
       NCPreSimplifyRational,
       NCSimplifyRationalSinglePass,
-      NCSimplifyRational];
+      NCSimplifyRational,
+      NCSR];
 
 Get["NCSimplifyRational.usage"];
 
@@ -243,7 +244,10 @@ Begin["`Private`"]
 
   NCSimplifyRational[expr_] := 
      FixedPoint[NCSimplifyRationalSinglePass, expr];
-  
+
+  (* Alias *)
+  NCSR = NCSimplifyRational;
+     
 End[];
 
 EndPackage[];

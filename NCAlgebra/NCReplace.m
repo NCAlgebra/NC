@@ -19,10 +19,24 @@ BeginPackage[ "NCReplace`",
               "NCDot`",
               "NonCommutativeMultiply`"];
 
-Clear[NCReplace, NCReplaceAll, 
-      NCReplaceRepeated, NCReplaceList,
+Clear[NCReplace, 
+      NCReplaceAll, 
+      NCReplaceRepeated, 
+      NCReplaceList,
       NCMakeRuleSymmetric, NCMakeRuleSelfAdjoint,
-      NCMatrixReplaceAll, NCMatrixReplaceRepeated];
+      NCReplaceSymmetric, 
+      NCReplaceAllSymmetric, 
+      NCReplaceRepeatedSymmetric, 
+      NCReplaceListSymmetric,
+      NCReplaceSelfAdjoint, 
+      NCReplaceAllSelfAdjoint, 
+      NCReplaceRepeatedSelfAdjoint, 
+      NCReplaceListSelfAdjoint,
+      NCMatrixReplaceAll, 
+      NCMatrixReplaceRepeated,
+      NCR, NCRA, NCRR, NCRL,
+      NCRSym, NCRASym, NCRRSym, NCRLSym,
+      NCRSA, NCRASA, NCRRSA, NCRLSA];
 
 Begin["`Private`"]
 
@@ -159,7 +173,43 @@ Begin["`Private`"]
             ({expr, rule} 
              /. NCMatrixReplaceFlatRules))
                /. NCMatrixReplaceReverseFlatRules] /. FlatNCPlus -> Plus;
+
+  (* Convenience methods *)
+      
+  NCReplaceSymmetric[expr_, rule_, args___] := 
+    NCReplaceSymmetric[expr, NCMakeRuleSymmetric[rule], args];
+  NCReplaceAllSymmetric[expr_, rule_, args___] := 
+    NCReplaceAllSymmetric[expr, NCMakeRuleSymmetric[rule], args];
+  NCReplaceRepeatedSymmetric[expr_, rule_, args___] := 
+    NCReplaceRepeatedSymmetric[expr, NCMakeRuleSymmetric[rule], args];
+  NCReplaceListSymmetric[expr_, rule_, args___] := 
+    NCReplaceListSymmetric[expr, NCMakeRuleSymmetric[rule], args];
   
+  NCReplaceSelfAdjoint[expr_, rule_, args___] := 
+    NCReplaceSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
+  NCReplaceAllSelfAdjoint[expr_, rule_, args___] := 
+    NCReplaceAllSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
+  NCReplaceRepeatedSelfAdjoint[expr_, rule_, args___] := 
+    NCReplaceRepeatedSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
+  NCReplaceListSelfAdjoint[expr_, rule_, args___] := 
+    NCReplaceListSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
+
+  (* Aliases *)
+  NCR = NCReplace;
+  NCRA = NCReplaceAll;
+  NCRR = NCReplaceRepeated;
+  NCRL = NCReplaceList;
+
+  NCRSym = NCReplaceSymmetric;
+  NCRASym = NCReplaceAllSymmetric;
+  NCRRSym = NCReplaceRepeatedSymmetric;
+  NCRLSym = NCReplaceListSymmetric;
+  
+  NCRSA = NCReplaceSelfAdjoint;
+  NCRASA = NCReplaceAllSelfAdjoint;
+  NCRRSA = NCReplaceRepeatedSelfAdjoint;
+  NCRLSA = NCReplaceListSelfAdjoint;
+    
 End[];
 
 EndPackage[];

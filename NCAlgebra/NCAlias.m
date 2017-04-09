@@ -42,16 +42,16 @@ NCAliasRule = {
                     NCCSym -> NCCollect`NCCollectSymmetric,
                         
                (* :NCDiff.m *)
+               (*
                     DirD -> NCDiff`DirectionalD,
                     NCGradPoly -> NCDiff`NCGrad,
-               (*
                     DirDP -> NCDiff`DirectionalDPolynomial,
                     Cri -> NCDiff`CriticalPoint,
                     Crit -> NCDiff`CriticalPoint,
                *)
                     
                (* :NCDoTeX.m: *)
-                    ExprToTeXFile -> TeXStuff`ExpressionToTeXFile,
+               (*   ExprToTeXFile -> TeXStuff`ExpressionToTeXFile, *)
 
                (* :NCInverse.m *)
                (*
@@ -74,18 +74,24 @@ NCAliasRule = {
                     
                (* :NC1SetCommands.m *)
                     SNC -> NonCommutativeMultiply`SetNonCommutative,
+               (*
                     NCM -> System`NonCommutativeMultiply,
                     SetNC -> NonCommutativeMultiply`SetNonCommutative,
+               *)
                         
                (* :NC( 012)SimplifyRational.m *)
+               (*
                     NCSR -> NCSimplifyRational`NCSimplifyRational,
                     NCS1R -> NCSimplify1Rational`NCSimplify1Rational,
                     NCS2R -> NCSimplify2Rational`NCSimplify2Rational,
                     NCIE -> NCSimplify2Rational`NCInvExtractor,
                     MSR -> NCSimplify2Rational`MakeSimplifyingRule,
+               *)
 
                (* :NCSolve.m *)
+               (*
                     NCSolve -> NCSolveLinear1`NCSolveLinear1,
+               *)
 
                (* :NCSubstitute.m *)
                (*
@@ -103,6 +109,7 @@ NCAliasRule = {
                *)
 
                (* :NCTools.m: *)
+                
                     NCHDP -> NCTools`NCHighestDegreePosition,
                     NCHD -> NCTools`NCHighestDegree,
                     LPR -> NCTools`LeftPatternRule,

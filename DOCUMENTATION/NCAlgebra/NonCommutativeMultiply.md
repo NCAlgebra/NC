@@ -20,6 +20,12 @@ Members are:
 * [EndCommuteEverything](#EndCommuteEverything)
 * [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
 
+Aliases are:
+
+* [SNC](#SNC) for [SetNonCommutative](#SetNonCommutative)
+* [NCExpand](#NCExpand) for [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
+* [NCE](#NCE) for [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
+
 ### aj {#aj}
 
 `aj[expr]` is the adjoint of expression `expr`. It is a conjugate linear involution.
@@ -87,6 +93,13 @@ See also:
 See also:
 [SetCommutative](#SetCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
 
+### SNC {#SNC}
+
+`SNC` is an alias for `SetNonCommutative`.
+
+See also:
+[SetNonCommutative](#SetNonCommutative).
+
 ### Commutative {#Commutative}
 
 `Commutative[symbol]` is commutative even if `symbol` is noncommutative.
@@ -131,4 +144,21 @@ returns
 
     a**b+a**c.
 
-Its aliases are `NCE`, and `NCExpand`.
+See also:
+[NCExpand](#NCExpand), [NCE](#NCE).
+
+### NCExpand {#NCExpand}
+
+`NCExpand` is an alias for `ExpandNonCommutativeMultiply`.
+
+See also:
+[ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
+[NCE](#NCE).
+
+### NCE {#NCE}
+
+`NCE` is an alias for `ExpandNonCommutativeMultiply`.
+
+See also:
+[ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
+[NCExpand](#NCExpand).
