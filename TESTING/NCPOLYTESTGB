@@ -2,26 +2,18 @@ SetOptions[$Output,PageWidth->1000];
 
 << NC`
 << NCTest`
-<< NCPoly`
+<< NCAlgebra`
+<< NCGBX`
 
-Print["> BEGIN NCPOLYTEST\n" ];
+Print["> BEGIN NCPOLYTESTGB\n" ];
 
 tests = {
-  "Digits",
-  "Constructors",
-  "Arithmetic",
-  "Product",
-  "Reduce",
-  "CoeffArray",
-  "Groebner",
-  "Hankel",
-  "NCPolyInterface",
-  "NCGBX"
+  "NCMakeGB"
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];
 
-Print["\n> END NCPOLYTEST\n" ];
+Print["\n> END NCPOLYTESTGB\n" ];
 
 Print["> EVEN IF ALL THE TESTS SUCCEEDED YOU SHOULD QUIT THE KERNEL"]
 Print["  IN YOUR MATHEMATICA SESSION AND START OVER." ];
