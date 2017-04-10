@@ -21,9 +21,9 @@
 Module[
      {
      A, B, C, B1, B2, C1, C2, D11, D12, D21, D22, DU, DW, DY, G1, G2, 
-     K, KK, S, U, W, XX, Y, YY, a, b, c, coxz, cozz, d, dd, f, 
+     K, KK, S, U, W, XX, Y, YY, a, b, c, coxz, cozz, d, dd, e, f, 
      g, h, parta, partb, x, y, z,
-     expr, answer
+     expr, answer,m1,m2,m3
      },
 
      SetNonCommutative[h,x,y,a,b];
@@ -297,5 +297,12 @@ Module[
      (* test 16 tests NCSimplifyRational2 added 7/03. Tests norm rule 4 in NCS1R *)
      (* Print["----test 16"]; *)
      NCTest[NCSimplifyRational[ inv[AAA + inv[BBB + inv[CCC+x]]] ], inv[1 + inv[1 + inv[1+x/CCC]/(BBB*CCC)]/(AAA*BBB)]/AAA]; 
+
+     (* Bug due to mutual import of NCUtil and NonCommutativeMultiply *)
+     SetNonCommutative[a,b,c,d,e];
+     m1 = {{a, b}, {c, d}};
+     m2 = {{d, 2}, {e, 3}};
+     m3 = m1 ** inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1] ** m1;
+     NCTest[NCSimplifyRational[NCMatrixExpand[m3]], {{0,0},{0,0}}];
 
 ];

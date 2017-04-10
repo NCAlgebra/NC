@@ -16,8 +16,7 @@
 (* :History:
 *)
 
-BeginPackage["NCUtil`",
-             "NonCommutativeMultiply`"];
+BeginPackage["NCUtil`"];
 
 Clear[NCGrabSymbols,
       NCGrabFunctions,
@@ -34,6 +33,8 @@ Get["NCUtil.usage"];
 
 Begin["`Private`"];
 
+  Needs["NonCommutativeMultiply`"];
+             
   NCSymbolOrSubscriptQ[_Symbol] := True;
   NCSymbolOrSubscriptQ[Subscript[_Symbol,__]] := True;
   NCSymbolOrSubscriptQ[_] := False;

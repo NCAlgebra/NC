@@ -16,8 +16,7 @@
 (* :History:
 *)
 
-BeginPackage[ "NonCommutativeMultiply`",
-              "NCUtil`" ];
+BeginPackage[ "NonCommutativeMultiply`" ];
 
 Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 
@@ -43,6 +42,13 @@ that will be cleared by NCAlgebra."
 Get["NonCommutativeMultiply.usage"];
 
 Begin[ "`Private`" ]
+
+  (* Idea from 
+     http://mathematica.stackexchange.com/questions/10306/how-to- 
+            properly-handle-mutual-imports-of-multiple-packages 
+     to take care of mutal import of NCUtil` 
+  *)
+  Needs["NCUtil`"];
 
   (* Overide Mathematica's existing NonCommutativeMultiply operator *)
   
