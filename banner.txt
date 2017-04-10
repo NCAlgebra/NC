@@ -1,15 +1,16 @@
 ------------------------------------------------------------
 NCAlgebra - Version 5.0
-Compatible with Mathematica Version 10
+Compatible with Mathematica Version 10 and above
 
 Authors:
+
   J. William Helton*
   Mauricio de Oliveira&
 
 * Math, UCSD, La Jolla, CA
 & MAE, UCSD, La Jolla, CA
 
-with earlier contributions by:
+with major earlier contributions by:
 
   Mark Stankus$ 
   Robert L. Miller#
@@ -30,28 +31,17 @@ The program was written by the authors and by:
   The beginnings of the program come from eran@slac.
   Considerable recent help came from Igor Klep.
 
+Current primary support is from the 
+  NSF Division of Mathematical Sciences.
+  
 This program was written with support from 
   AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
   UCSD Faculty Mentor Program,
   and US Department of Education.
-  Primary support in 2010 is from the 
-    NSF Division of Mathematical Sciences.
-
-If you 
-  (1) are a user, 
-  (2) want to be a user, 
-  (3) refer to NCAlgebra in a publication, or 
-  (4) have had an interesting experience with NCAlgebra,
-let us know by sending an e-mail message to  
-
-  ncalg@math.ucsd.edu. 
-
-We do not want to restrict access to NCAlgebra, but do 
-  want to keep track of how it is being used.
 
 For NCAlgebra updates see:
 
-  www.math.ucsd.edu/~ncalg
   www.github.com/NCAlgebra/NC
+  www.math.ucsd.edu/~ncalg
 
 ------------------------------------------------------------

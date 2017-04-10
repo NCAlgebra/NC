@@ -65,8 +65,7 @@ If[ $NC$INITDOTMPATH =!= {}
     AppendTo[$Path,ToFileName[{$NCDir$, "TESTING", "NCPoly"}]];
              
              
-    Print["You can now use \"<< NCAlgebra`\" to load NCAlgebra or ",
-          "\"<< NCGB`\" to load NCGB."];
+    Print["You can now use \"<< NCAlgebra`\" to load NCAlgebra."];
 
   , 
     Print["ERROR: Could not find NC directory. See documentation for installation information."];

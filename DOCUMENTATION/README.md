@@ -1,9 +1,10 @@
+-   [Acknowledgements](#acknowledgements)
 -   [Changes in Version 5.0](#changes-in-version-5.0)
 -   [Introduction](#UserGuideIntroduction)
     -   [Running NCAlgebra](#RunningNCAlgebra)
     -   [Now what?](#now-what)
     -   [Testing](#testing)
-    -   [NCGB](#ncgb)
+    -   [Pre-2017 NCGB C++ version](#pre-2017-ncgb-c-version)
 -   [Most Basic Commands](#MostBasicCommands)
     -   [To Commute Or Not To Commute?](#to-commute-or-not-to-commute)
     -   [Inverses, Transposes and Adjoints](#inverses-transposes-and-adjoints)
@@ -125,7 +126,6 @@
         -   [ajMat](#ajMat)
         -   [coMat](#coMat)
         -   [NCDot](#NCDot)
-        -   [MatMult](#MatMult)
         -   [NCInverse](#NCInverse)
         -   [NCMatrixExpand](#NCMatrixExpand)
     -   [NCMatrixDecompositions](#PackageNCMatrixDecompositions)
@@ -276,7 +276,7 @@
 \chapter*{License}\addcontentsline{toc}{chapter}{License}
 **NCAlgebra** is distributed under the terms of the BSD License:
 
-    Copyright (c) 2016, J. William Helton and Mauricio C. de Oliveira
+    Copyright (c) 2017, J. William Helton and Mauricio C. de Oliveira
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -293,7 +293,7 @@
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
     ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
     DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
     (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
     LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -301,19 +301,28 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+Acknowledgements
+================
+
+This work was partially supported by the Division of Mathematical Sciences of the National Science Foundation.
+
 Changes in Version 5.0
 ======================
 
 1.  Completely rewritten core handling of noncommutative expressions with significant speed gains.
-2.  Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter [Noncommutative Gröbner Basis](#NCGB) in the user guide and the [NCGBX](#PackageNCGBX) package.
-3.  New algorithms for representing and operating with noncommutative polynomials with commutative coefficients. These support the new package [NCGBX](#PackageNCGBX). See this section in the chapter [More advanced Commands](#PolysWithCommutativeCoefficients) and the packages [NCPolyInterface](#PackageNCPolyInterface) and [NCPoly](#PackageNCPoly).
+2.  Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter [Noncommutative Gröbner Basis](#NCGB) in the user guide and the [NCGBX](#PackageNCGBX) package. Some `NCGB` features are not fully supported yet, most notably [NCProcess](#NCProcess).
+3.  New algorithms for representing and operating with noncommutative polynomials with commutative coefficients. These support the new package [NCGBX](#PackageNCGBX). See this section in the chapter [More Advanced Commands](#PolysWithCommutativeCoefficients) and the packages [NCPolyInterface](#PackageNCPolyInterface) and [NCPoly](#PackageNCPoly).
 4.  New algorithms for representing and operating with noncommutative polynomials with noncommutative coefficients ([NCPolynomial](#PackageNCPolynomial)) with specialized facilities for noncommutative quadratic polynomials ([NCQuadratic](#PackageNCQuadratica)) and noncommutative linear polynomials ([NCSylvester](#PackageNCSylvester)).
-5.  Commands `Transform`, `Substitute`, `SubstituteSymmetric`, etc, have been replaced by the much more reliable commands in the new package [NCReplace](#PackageNCReplace).
-6.  Modified behavior of `CommuteEverything` (see important notes in [CommuteEverything](#CommuteEverything)).
-7.  Improvements and consolidation of NC calculus in the package [NCDiff](#PackageNCDiff).
-8.  Added a complete set of linear algebra solvers in the new package [MatrixDecomposition](#PackageMatrixDecomposition) and their noncommutative versions in the new package [NCMatrixDecomposition](#PackageNCMatrixDecomposition).
-9.  General improvements on the Semidefinite Programming package [NCSDP](#PackageNCSDP).
-10. New algorithms for simplification of noncommutative rationals ([NCSimplifyRational](#PackageNCSylvester)).
+5.  Modified behavior of `CommuteEverything` (see important notes in [CommuteEverything](#CommuteEverything)).
+6.  Improvements and consolidation of noncommutative calculus in the package [NCDiff](#PackageNCDiff).
+7.  Added a complete set of linear algebra algorithms in the new package [MatrixDecomposition](#PackageMatrixDecomposition) and their noncommutative versions in the new package [NCMatrixDecomposition](#PackageNCMatrixDecomposition).
+8.  General improvements on the Semidefinite Programming package [NCSDP](#PackageNCSDP).
+9.  New algorithms for simplification of noncommutative rationals ([NCSimplifyRational](#PackageNCSylvester)).
+10. Commands `Transform`, `Substitute`, `SubstituteSymmetric`, etc, have been replaced by the much more reliable commands in the new package [NCReplace](#PackageNCReplace).
+11. Command `MatMult` has been replaced by [NCDot](#NCDot). Alias `MM` has been deprecated.
+12. Noncommutative power is now supported, with `x^3` expanding to `x**x**x`, `x^-1` expanding to `inv[x]`.
+13. `x^T` expands to `tp[x]` and `x^*` expands to `aj[x]`. Symbol `T` is now protected.
+14. Support for subscripted variables in notebooks.
 
 Introduction
 ============
@@ -321,6 +330,8 @@ Introduction
 This *User Guide* attempts to document the many improvements introduced in `NCAlgebra` Version 5.0. Please be patient, as we move to incorporate the many recent changes into this document.
 
 See [Reference Manual](#ReferenceIntroduction) for a detailed description of the available commands.
+
+There are also notebooks in the `NC/DEMOS` directory that accompany each of the chapters of this user guide.
 
 Running NCAlgebra
 -----------------
@@ -333,7 +344,7 @@ If this step fails, your installation has problems (check out installation instr
 
     You are using the version of NCAlgebra which is found in:
        /your_home_directory/NC.
-    You can now use "<< NCAlgebra`" to load NCAlgebra or "<< NCGB`" to load NCGB.
+    You can now use "<< NCAlgebra`" to load NCAlgebra.
 
 Then just type
 
@@ -357,11 +368,17 @@ You can also run some tests to see if things are working fine.
 Testing
 -------
 
+You do not need to load `NCAlgebra` before running any of the tests below, but you need to load `NC` as in
+
+    << NC`
+
 There are 3 test sets which you can use to troubleshoot parts of NCAlgebra. The most comprehensive test set is run by typing:
 
     << NCTEST
 
-This will test the core functionality of NCAlgebra. You can test functionality related to the package [`NCPoly`](#PackageNCPoly), including the new `NCGBX` package [`NCGBX`](#PackageNCGBX), by typing:
+This will test the core functionality of NCAlgebra.
+
+You can test functionality related to the package [`NCPoly`](#PackageNCPoly), including the new `NCGBX` package [`NCGBX`](#PackageNCGBX), by typing:
 
     << NCPOLYTEST
 
@@ -371,8 +388,14 @@ Finally our Semidefinite Programming Solver [`NCSDP`](#PackageNCSDP) can be test
 
 We recommend that you restart the kernel before and after running tests. Each test takes a few minutes to run.
 
-NCGB
-----
+You can also call
+
+    << NCPOLYTESGB
+
+to perform extensive and long testing of `NCGBX`.
+
+Pre-2017 NCGB C++ version
+-------------------------
 
 The old `C++` version of our Groebner Basis Algorithm still ships with this version and can be loaded using:
 
@@ -385,7 +408,11 @@ This will at once load `NCAlgebra` *and* `NCGB`. It can be tested using
 Most Basic Commands
 ===================
 
-This chapter provides a gentle introduction to some of the commands available in `NCAlgebra`. Before you can use `NCAlgebra` you first load it with the following commands:
+This chapter provides a gentle introduction to some of the commands available in `NCAlgebra`.
+
+If you want a living version of this chapter just run the notebook `NC/DEMOS/1_MostBasicCommands.nb`.
+
+Before you can use `NCAlgebra` you first load it with the following commands:
 
     << NC`
     << NCAlgebra`
@@ -973,6 +1000,8 @@ More Advanced Commands
 ======================
 
 In this chapter we describe some more advance features and commands. Most of these were introduced in **Version 5**.
+
+If you want a living version of this chapter just run the notebook `NC/DEMOS/2_MoreAdvancedCommands.nb`.
 
 Matrices
 --------
@@ -1755,8 +1784,8 @@ Note that transposes and adjoints are treated as independent variables.
 Perhaps the most useful consequence of the above factorization is the possibility of producing a linear polynomial which has the smallest possible number of terms, as explaining in detail in (Oliveira 2012). This is done automatically by [`NCSylvesterToNC`](#NCSylvesterToNC). For example
 
     vars = {x, y};
-    expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**y**d
-    {const, lin} = NCToNCSylvester[expr, vars]
+    expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**y**d;
+    {const, lin} = NCToNCSylvester[expr, vars];
     NCSylvesterToNC[{const, lin}]
 
 produces:
@@ -1768,7 +1797,7 @@ This factorization even works with linear matrix polynomials, and is used by the
     vars = {x};
     expr = {{a ** x + x ** tp[a], b ** x, tp[c]},
             {x ** tp[b], -1, tp[d]},
-            {c, d, -1}}
+            {c, d, -1}};
     {const, lin} = NCToNCSylvester[expr, vars]
 
 result in:
@@ -1781,7 +1810,11 @@ See (Oliveira 2012) for details on the structure of the constant array *F* in th
 Noncommutative Gröbner Basis
 ============================
 
-The package `NCGBX` provides an implementation of a noncommutative Gröbner Basis algorithm. It is a Mathematica only replacement to the C++ `NCGB` which is still provided with this distribution. Gröbner Basis are useful in the study of algebraic relations.
+The package `NCGBX` provides an implementation of a noncommutative Gröbner Basis algorithm. It is a Mathematica only replacement to the C++ `NCGB` which is still provided with this distribution.
+
+If you want a living version of this chapter just run the notebook `NC/DEMOS/3_NCGroebnerBasis.nb`.
+
+Gröbner Basis are useful in the study of algebraic relations.
 
 In order to load `NCGBX` one types:
 
@@ -2297,6 +2330,8 @@ provide formulas, this time for *z*, *w*, and *z* in terms of *y* satisfying *y*
 Semidefinite Programming
 ========================
 
+If you want a living version of this chapter just run the notebook `NC/DEMOS/4_SemidefiniteProgramming.nb`.
+
 There are two different packages for solving semidefinite programs:
 
 -   [`SDP`](#PackageSDP) provides a template algorithm that can be customized to solve semidefinite programs with special structure. Users can provide their own functions to evaluate the primal and dual constraints and the associated Newton system. A built in solver along conventional lines, working on vector variables, is provided by default. It does not require NCAlgebra to run.
@@ -2483,6 +2518,8 @@ The package `SDP` is built so as to be easily overloaded with more efficient or 
 
 Pretty Output with Mathematica Notebooks and TeX
 ================================================
+
+If you want a living version of this chapter just run the notebook `NC/DEMOS/5_PrettyOutput.nb`.
 
 `NCAlgebra` comes with several utilities for beautifying expressions which are output. [`NCTeXForm`](#PackageNCTeXForm) converts NC expressions into . [`NCTeX`](#PackageNCTeX) goes a step further and compiles the results expression in  and produces a PDF that can be embedded in notebooks of used on its own.
 
@@ -2758,7 +2795,7 @@ produce
 Introduction
 ============
 
-Each following chapter describes a `Package` inside *NCAlgebra*.
+The following chapters and sections describes packages inside `NCAlgebra`.
 
 Packages are automatically loaded unless otherwise noted.
 
@@ -3655,39 +3692,28 @@ Members are:
 -   [NCDot](#NCDot)
 -   [NCInverse](#NCInverse)
 -   [NCMatrixExpand](#NCMatrixExpand)
--   [MatMult](#MatMult)
 
 ### tpMat
 
 `tpMat[mat]` gives the transpose of matrix `mat` using `tp`.
 
-See also: [ajMat](#tpMat), [coMat](#coMat), [MatMult](#MatMult).
+See also: [ajMat](#tpMat), [coMat](#coMat), [NCDot](#NCDot).
 
 ### ajMat
 
 `ajMat[mat]` gives the adjoint transpose of matrix `mat` using `aj` instead of `ConjugateTranspose`.
 
-See also: [tpMat](#tpMat), [coMat](#coMat), [MatMult](#MatMult).
+See also: [tpMat](#tpMat), [coMat](#coMat), [NCDot](#NCDot).
 
 ### coMat
 
 `coMat[mat]` gives the conjugate of matrix `mat` using `co` instead of `Conjugate`.
 
-See also: [tpMat](#tpMat), [ajMat](#coMat), [MatMult](#MatMult).
+See also: [tpMat](#tpMat), [ajMat](#coMat), [NCDot](#NCDot).
 
 ### NCDot
 
 `NCDot[mat1, mat2, ...]` gives the matrix multiplication of `mat1`, `mat2`, ... using `NonCommutativeMultiply` rather than `Times`.
-
-See also: [tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).
-
-### MatMult
-
-`MatMult[mat1, mat2, ...]` gives the matrix multiplication of `mat1`, `mat2`, ... using `NonCommutativeMultiply` rather than `Times`.
-
-`MatMult` is being deprecated and has been replaced by [`NCDot`](#NCDot).
-
-See also: [tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).
 
 **Notes:**
 
@@ -3696,6 +3722,8 @@ The experienced matrix analyst should always remember that the Mathematica conve
 -   `{{1,2,4}}` is a 1x3 *matrix* or a *row vector*;
 -   `{{1},{2},{4}}` is a 3x1 *matrix* or a *column vector*;
 -   `{1,2,4}` is a *vector* but **not** a *matrix*. Indeed whether it is a row or column vector depends on the context. We advise not to use *vectors*.
+
+See also: [tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).
 
 ### NCInverse
 
@@ -3707,9 +3735,9 @@ See also: [tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).
 
 ### NCMatrixExpand
 
-`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `MatMult`.
+`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
 
-See also: [NCInverse](#NCInverse), [MatMult](#MatMult).
+See also: [NCInverse](#NCInverse), [NCDot](#NCDot).
 
 NCMatrixDecompositions
 ----------------------

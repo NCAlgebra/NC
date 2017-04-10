@@ -2,7 +2,8 @@
 
 # Introduction {#ReferenceIntroduction}
 
-Each following chapter describes a `Package` inside *NCAlgebra*.
+The following chapters and sections describes packages inside
+`NCAlgebra`.
 
 Packages are automatically loaded unless otherwise noted.
 

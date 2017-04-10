@@ -20,7 +20,7 @@ If this step fails, your installation has problems (check out installation instr
 
     You are using the version of NCAlgebra which is found in:
        /your_home_directory/NC.
-    You can now use "<< NCAlgebra`" to load NCAlgebra or "<< NCGB`" to load NCGB.
+    You can now use "<< NCAlgebra`" to load NCAlgebra.
 
 Then just type 
 
@@ -44,14 +44,21 @@ You can also run some tests to see if things are working fine.
 
 ## Testing
 
+You do not need to load `NCAlgebra` before running any of the tests
+below, but you need to load `NC` as in
+
+    << NC`
+
 There are 3 test sets which you can use to troubleshoot parts of
 NCAlgebra. The most comprehensive test set is run by typing:
 
     << NCTEST
 
-This will test the core functionality of NCAlgebra. You can test
-functionality related to the package [`NCPoly`](#PackageNCPoly),
-including the new `NCGBX` package [`NCGBX`](#PackageNCGBX), by typing:
+This will test the core functionality of NCAlgebra.
+
+You can test functionality related to the package
+[`NCPoly`](#PackageNCPoly), including the new `NCGBX` package
+[`NCGBX`](#PackageNCGBX), by typing:
 
     << NCPOLYTEST
 
@@ -62,6 +69,12 @@ can be tested with
 
 We recommend that you restart the kernel before and after running
 tests. Each test takes a few minutes to run.
+
+You can also call
+
+    << NCPOLYTESGB
+	
+to perform extensive and long testing of `NCGBX`.
 
 ## Pre-2017 NCGB C++ version
 
