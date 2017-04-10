@@ -6,7 +6,8 @@ The latest version of NCAlgebra can be downloaded from:
 
 https://github.com/NCAlgebra/NC
 
-Additional information is also available at:
+Additional information, including old releases and historical
+examples, is available at:
 
 http://math.ucsd.edu/~ncalg
 
