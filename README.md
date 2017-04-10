@@ -1,9 +1,14 @@
 # NCAlgebra - Version 5.0
 
-Thanks for your interest in NCAlgebra. The latest version of NCAlgebra
-can be downloaded from:
+Thanks for your interest in NCAlgebra. 
+
+The latest version of NCAlgebra can be downloaded from:
 
 https://github.com/NCAlgebra/NC
+
+Additional information is also available at:
+
+http://math.ucsd.edu/~ncalg
 
 ## Downloading
 
