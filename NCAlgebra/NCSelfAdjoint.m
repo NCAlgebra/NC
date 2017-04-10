@@ -32,7 +32,7 @@ NCSymmetricQ::SymmetricVariables =
 NCSymmetricPart::notSymmetric = "Expression is not symmetric";
 
 NCSelfAdjointQ::SelfAdjointVariables =
-"The variable(s) `1` was(were) assumed adjoint";
+"The variable(s) `1` was(were) assumed self-adjoint";
 
 Options[NCSymmetricTest] = {
   SymmetricVariables -> {},

@@ -39,7 +39,7 @@ Module[
   NCTest[NCSimplifyRational[NCInverse[NCInverse[{{a,b},{0,d}}]]],
          {{a,b},{0,d}}];
 
-  NCTest[NCSimplifyRational[MatMult[invmat,mat]],
+  NCTest[NCSimplifyRational[NCDot[invmat,mat]],
          {{1,0},{0,1}}];
 
   mat = {{a,0},{c,d}};
@@ -51,7 +51,7 @@ Module[
   mat = {{tp[x], 0, 3}, {y, inv[y], 1}, {2, x ** y, 0}};
   invmat = NCInverse[mat];
 
-  NCTest[NCSimplifyRational[MatMult[mat, invmat]], 
+  NCTest[NCSimplifyRational[NCDot[mat, invmat]], 
          {{1,0,0},{0,1,0},{0,0,1}}];
 
   (* Distributive property *)

@@ -31,7 +31,7 @@ NCMakeGBTest[filename_String,
    (* Calls NCMakeGB *)
    interrupted = False;
    Quiet[
-     Check[ outRels = Union[NCMakeGB[rels, Iterations]];
+     Check[ outRels = Sort[NCMakeGB[rels, Iterations]];
            ,
 	    interrupted = True;
 	   ,
@@ -45,7 +45,7 @@ NCMakeGBTest[filename_String,
    cmpFile = ToFileName[{"..", referenceDirectory},
                         StringReplace[filename, ".data.m" -> ".out.GB" ] ];
    Print["> Comparing result to reference in ", cmpFile];
-   cmpRels = Union[Get[cmpFile]];
+   cmpRels = Sort[Get[cmpFile]];
 
    (* Compare and write diagnostics if it failed *)
    (*

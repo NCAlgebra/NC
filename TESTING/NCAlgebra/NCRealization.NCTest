@@ -38,7 +38,7 @@ Module[
 		  {0,0,0,0,1,y/3},
 		  {0,0,0,0,-x,1}}];
   NCTest[Bv, Transpose[{{1,0,1/3,0,1/3,0}}]];
-  answer = MatMult[Cv, NCInverse[Pencil], Bv][[1, 1]];
+  answer = NCDot[Cv, NCInverse[Pencil], Bv][[1, 1]];
   NCTest[NCSimplifyRational[answer-expr], 0];
 
   {CSym, PencilSym} = 
@@ -74,7 +74,7 @@ Module[
 
   expr = 2 + x ** x + inv[1 + y ** y]; 
   {Cv, Pencil, Bv} = NCMinimalDescriptorRealization[expr, {x, y}];
-  answer = MatMult[Cv, NCInverse[Pencil], Bv][[1, 1]];
+  answer = NCDot[Cv, NCInverse[Pencil], Bv][[1, 1]];
   NCTest[NCSimplifyRational[answer-expr], 0];
 
   NCTest[TestDescriptorRealization[expr, {Cv, Pencil, Bv}, {x, y}], True];

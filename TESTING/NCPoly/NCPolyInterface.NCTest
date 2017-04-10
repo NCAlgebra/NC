@@ -130,8 +130,10 @@ Block[
   NCTest[NCCoefficientQ[1], True];
   NCTest[NCCoefficientQ[A], True];
   NCTest[NCCoefficientQ[2 A], True];
+  NCTest[NCCoefficientQ[1 + A], True];
 
   NCTest[NCCoefficientQ[x], False];
+  NCTest[NCCoefficientQ[1 + x], False];
   NCTest[NCCoefficientQ[x**x], False];
   NCTest[NCCoefficientQ[Exp[x]], False];
 
@@ -147,11 +149,11 @@ Block[
   NCTest[NCMonomialQ[2 x ** y], True];
   NCTest[NCMonomialQ[A x ** y], True];
   NCTest[NCMonomialQ[2 A x ** y], True];
+  NCTest[NCMonomialQ[(1 + A) x], True];
 
   NCTest[NCMonomialQ[Exp[x]], False];
   NCTest[NCMonomialQ[1 + y], False];
   NCTest[NCMonomialQ[x + y], False];
-  NCTest[NCMonomialQ[(1 + A) x], False];
   NCTest[NCMonomialQ[2 A x ** Exp[x]], False];
   NCTest[NCMonomialQ[2 A x ** (x + y)], False];
 

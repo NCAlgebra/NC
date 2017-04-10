@@ -42,7 +42,7 @@ Begin["`Private`"];
   MatrixExpand[expr_] := 
     ExpandExpression[ NCReplaceRepeated[expr, {
         NonCommutativeMultiply[b_Matrix, c_Matrix] :>
-             Matrix[MatMult[MatrixToList[b],MatrixToList[c]]],
+             Matrix[NCDot[MatrixToList[b],MatrixToList[c]]],
         NonCommutativeMultiply[b_Matrix, c_] :>
              Map[NonCommutativeMultiply[#, c]&, b, {2}],
         NonCommutativeMultiply[b_, c_Matrix] :>

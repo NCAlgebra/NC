@@ -37,7 +37,7 @@ Options[NCMatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,
   LeftDivide -> NCLeftDivide,
   RightDivide -> NCRightDivide,
-  Dot -> MatMult,
+  Dot -> NCDot,
   SelfAdjointMatrixQ -> NCSelfAdjointQ
 };
 

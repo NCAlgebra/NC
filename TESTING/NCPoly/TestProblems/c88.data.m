@@ -1,9 +1,9 @@
 (* Eric's long run with old version of the algorithm that required 
  clean up base *)
 
-SNC[z1, z2, w, h]
-SetMonomialOrder[z1, z2, w, h]
-Clear[c0, c1, c2]
+SNC[z1, z2, w, h];
+SetMonomialOrder[z1, z2, w, h];
+Clear[c0, c1, c2];
 
 rels={
     w ** z2 -> 1/c2 - (c0 w)/c2 - (c1 w ** z1)/c2, 
@@ -54,4 +54,4 @@ c0 c1 z1 ** z2)/(1 + c1^2 - c2^2) + (c0 c1 z2 ** z1)/(
 1 + c1^2 - c2^2) - (c0 (-1 - c1^2 + 3 c2^2) z2 ** z2)/(
 c2 (-1 - c1^2 + c2^2)) + (c1 (-1 + c1^2 - c2^2) z2 ** z1 ** z2)/(
 c2 (-1 - c1^2 + c2^2))
-     };
+     } /. Rule -> Subtract;

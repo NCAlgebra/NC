@@ -1,5 +1,8 @@
 # Semidefinite Programming {#SemidefiniteProgramming}
 
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/4_SemidefiniteProgramming.nb`.
+
 There are two different packages for solving semidefinite programs:
 
 * [`SDP`](#PackageSDP) provides a template algorithm that can be
@@ -13,6 +16,7 @@ There are two different packages for solving semidefinite programs:
 * [`NCSDP`](#PackageNCSDP) coordinates with NCAlgebra to handle matrix
   variables, allowing constraints, etc, to be entered directly as
   noncommutative expressions.
+
 
 ## Semidefinite Programs in Matrix Variables
 

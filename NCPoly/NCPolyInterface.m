@@ -113,6 +113,8 @@ Begin["`Private`"];
 
   (* NCCoefficientQ *)
   Clear[NCCoefficientQAux];
+  (* NOT NECESSARY: *)
+  (*
   NCCoefficientQAux[_?NumericQ] := True;
   NCCoefficientQAux[a_Symbol /; CommutativeQ[a]] := True;
   NCCoefficientQAux[_] := False;
@@ -120,13 +122,17 @@ Begin["`Private`"];
   NCCoefficientQ[HoldPattern[Times[__?NCCoefficientQAux]]] := True;
   NCCoefficientQ[_?NCCoefficientQAux] := True;
   NCCoefficientQ[_] := False;
+  *)
+  NCCoefficientQ[a_] := CommutativeQ[a];
 
   (* NCMonomialQ *)
   NCMonomialQ[expr_NonCommutativeMultiply /; Depth[expr] == 2] := True;
   NCMonomialQ[x_Symbol /; NonCommutativeQ[x]] := True;
+  NCMonomialQ[Subscript[x_Symbol,___] /; NonCommutativeQ[x]] := True;
   NCMonomialQ[a_?NCCoefficientQ expr_NonCommutativeMultiply
               /; Depth[expr] == 2] := True;
   NCMonomialQ[a_?NCCoefficientQ x_Symbol /; NonCommutativeQ[x]] := True;
+  NCMonomialQ[a_?NCCoefficientQ Subscript[x_Symbol,___] /; NonCommutativeQ[x]] := True;
   NCMonomialQ[a_?NCCoefficientQ] := True;
   NCMonomialQ[expr_] := False;
 

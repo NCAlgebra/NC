@@ -1,8 +1,13 @@
 # Most Basic Commands {#MostBasicCommands}
 
 This chapter provides a gentle introduction to some of the commands
-available in `NCAlgebra`. Before you can use `NCAlgebra` you first
-load it with the following commands:
+available in `NCAlgebra`. 
+
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/1_MostBasicCommands.nb`.
+
+Before you can use `NCAlgebra` you first load it with the following
+commands:
 
     << NC`
     << NCAlgebra`

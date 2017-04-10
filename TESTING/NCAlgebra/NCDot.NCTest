@@ -27,29 +27,29 @@ Module[
   NCTest[coMat[{{a,b},{c,d}}], {{co[a],co[b]},{co[c],co[d]}}];
   NCTest[co[{{a,b},{c,d}}], coMat[{{a,b},{c,d}}]];
 
-  (* MatMult *)
+  (* NCDot *)
 
-  NCTest[MatMult[{{a, b},{c,d}}, {{u,v},{w,x}}], 
+  NCTest[NCDot[{{a, b},{c,d}}, {{u,v},{w,x}}], 
                  {{a**u+b**w, a**v+b**x}, 
                   {c**u+d**w, c**v+d**x}}];
 
-  NCTest[MatMult[{{a, b},{c,d}}, 
+  NCTest[NCDot[{{a, b},{c,d}}, 
                   {u,w}], 
                   {a**u+b**w, c**u+d**w}];
 
-  NCTest[MatMult[{u,w}, {{a, b},{c,d}}], {u**a+w**c, u**b+w**d}];
+  NCTest[NCDot[{u,w}, {{a, b},{c,d}}], {u**a+w**c, u**b+w**d}];
 
-  NCTest[MatMult[{u,v}, {w,x}], u**w+v**x];
+  NCTest[NCDot[{u,v}, {w,x}], u**w+v**x];
 
-  NCTest[MatMult[{{a, b},{c,d}}, {{1,0},{0,1}}, {{u,v},{w,x}}], 
+  NCTest[NCDot[{{a, b},{c,d}}, {{1,0},{0,1}}, {{u,v},{w,x}}], 
                  {{a**u+b**w, a**v+b**x}, 
                   {c**u+d**w, c**v+d**x}}];
 
-  NCTest[MatMult[{{a, b},{c,d}}, {{2,0},{0,-1}}, {{u,v},{w,x}}], 
+  NCTest[NCDot[{{a, b},{c,d}}, {{2,0},{0,-1}}, {{u,v},{w,x}}], 
                  {{2 a**u-b**w, 2 a**v-b**x}, 
                   {2 c**u-d**w, 2 c**v-d**x}}];
 
-  NCTest[MatMult[{{a, b},{c,d}}, {{1,0},{0,1}}, 
+  NCTest[NCDot[{{a, b},{c,d}}, {{1,0},{0,1}}, 
                  {{2,0},{0,-1}}, {{u,v},{w,x}}], 
                  {{2 a**u-b**w, 2 a**v-b**x}, 
                   {2 c**u-d**w, 2 c**v-d**x}}];
@@ -97,7 +97,7 @@ Module[
 
   mat = {{a,b,0},{tp[b],e,d},{0,tp[d],i}};
   mati = NCInverse[mat];
-  NCTest[NCSimplifyRational[MatMult[mati, mat]],
+  NCTest[NCSimplifyRational[NCDot[mati, mat]],
          {{1,0,0},{0,1,0},{0,0,1}}];
 
   (* NCInverse with NCMatrixExpand *)
@@ -109,7 +109,7 @@ Module[
 	 inv[{{a,b,0},{tp[b],e,d},{0,tp[d],i}}]**mati];
 
   NCTest[NCMatrixExpand[inv[mat]**mati],
-	 MatMult[mati,mati]];
+	 NCDot[mati,mati]];
 
 
   (* NCSymmetricQ *)

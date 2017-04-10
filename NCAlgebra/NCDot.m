@@ -1,8 +1,8 @@
-(* :Title: 	NCMatMult.m *)
+(* :Title: 	NCDot.m *)
 
 (* :Author: 	Unknown. *)
 
-(* :Context: 	NCMatMult` *)
+(* :Context: 	NCDot` *)
 
 (* :Summary:
 *)
@@ -21,11 +21,11 @@ BeginPackage["NCDot`",
              "NCReplace`",
              "NonCommutativeMultiply`"];
 
-Clear[NCDot,MatMult,
+Clear[NCDot,
       tpMat, ajMat, coMat,
       NCMatrixExpand];
 
-Get["NCMatMult.usage"];
+Get["NCDot.usage"];
 
 NCInverse::NotSquare = "The input matrix is not SQUARE.";
 NCInverse::Singular = "The input matrix appears to be SINGULAR.";
@@ -34,7 +34,7 @@ NCInverse::NotMatrix = "The input argument is not a MATRIX.";
 Begin["`Private`"];
 
   (* new dot operator *)
-  MatMult = NCDot;
+  (* MatMult = NCDot; *)
 
   (* No need to test for matrices *)
   (* NCDot[x_?MatrixQ, y_?MatrixQ] := 

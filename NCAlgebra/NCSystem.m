@@ -95,7 +95,7 @@ Begin["`Private`"];
 
   (* TransferFunction *)
   NCSystemToTransferFunction[s_NCSystem, var_Symbol:S] :=
-   MatMult[s[[3]], 
+   NCDot[s[[3]], 
            NCInverse[var IdentityMatrix[Dimensions[s][[3]]] - s[[1]]], 
            s[[2]]] + s[[4]];
   
@@ -152,10 +152,10 @@ Begin["`Private`"];
 
     Return[
       System[
-        ArrayFlatten[{{s1[[1]],0},{MatMult[s2[[2]],s1[[3]]],s2[[1]]}}],
-        ArrayFlatten[{{s1[[2]]},{MatMult[s2[[2]],s1[[4]]]}}],
-        ArrayFlatten[{{MatMult[s2[[4]],s1[[3]]],s2[[3]]}}],
-        MatMult[s2[[4]],s1[[4]]]
+        ArrayFlatten[{{s1[[1]],0},{NCDot[s2[[2]],s1[[3]]],s2[[1]]}}],
+        ArrayFlatten[{{s1[[2]]},{NCDot[s2[[2]],s1[[4]]]}}],
+        ArrayFlatten[{{NCDot[s2[[4]],s1[[3]]],s2[[3]]}}],
+        NCDot[s2[[4]],s1[[4]]]
       ]];
   ];
 
@@ -172,9 +172,9 @@ Begin["`Private`"];
 
     Return[
       System[
-          s[[1]] - MatMult[s[[2]], Di, s[[3]]],
-          MatMult[s[[2]], Di],
-          -MatMult[Di, s[[3]]],
+          s[[1]] - NCDot[s[[2]], Di, s[[3]]],
+          NCDot[s[[2]], Di],
+          -NCDot[Di, s[[3]]],
           Di
       ]];
   ];
@@ -190,7 +190,7 @@ Begin["`Private`"];
   NCSControllabilityMatrix[a_?MatrixQ, b_?MatrixQ, 
                            qq_Integer:-1, 
                            opts:OptionsPattern[{
-                               Dot -> MatMult
+                               Dot -> NCDot
                            }]] := Module[
       {i, q = If[qq == -1, Length[a], qq], n = Length[a], 
        m = Dimensions[b][[2]], 
@@ -212,7 +212,7 @@ Begin["`Private`"];
   (* Controllable realization *)
   NCSControllableRealization[sys_NCSystem,
                              opts:OptionsPattern[{
-                               Dot -> MatMult,
+                               Dot -> NCDot,
                                Inverse -> NCInverse
                              }]] := Module[
       {ctrb, L, rank, R,
@@ -260,7 +260,7 @@ Begin["`Private`"];
       Print["u = ", Normal[u]];
       Print["rank = ", rank];
       Print["L = ", L];
-      Print["L ctrb = ", MatMult[L, ctrb]];
+      Print["L ctrb = ", NCDot[L, ctrb]];
       *)
       
       Return[{L, rank}];
@@ -277,7 +277,7 @@ Begin["`Private`"];
 
   NCSObservableRealization[sys_NCSystem,
                            opts:OptionsPattern[{
-                             Dot -> MatMult,
+                             Dot -> NCDot,
                              Inverse -> NCInverse
                            }]] := Module[
       {obsv, L, rank, R,

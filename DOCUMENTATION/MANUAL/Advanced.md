@@ -3,6 +3,9 @@
 In this chapter we describe some more advance features and
 commands. Most of these were introduced in **Version 5**.
 
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/2_MoreAdvancedCommands.nb`.
+
 ## Matrices
 
 Starting at **Version 5** the operators `**` and `inv` apply also to
@@ -1002,8 +1005,8 @@ possible number of terms, as explaining in detail in
 [`NCSylvesterToNC`](#NCSylvesterToNC). For example
 
 	vars = {x, y};
-	expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**y**d
-	{const, lin} = NCToNCSylvester[expr, vars]
+	expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**y**d;
+	{const, lin} = NCToNCSylvester[expr, vars];
 	NCSylvesterToNC[{const, lin}]
 	
 produces:
@@ -1018,7 +1021,7 @@ matrix inequalities in the least possible number of terms. For example:
 	vars = {x};
 	expr = {{a ** x + x ** tp[a], b ** x, tp[c]},
             {x ** tp[b], -1, tp[d]},
-	        {c, d, -1}}
+	        {c, d, -1}};
 	{const, lin} = NCToNCSylvester[expr, vars]
 
 result in:

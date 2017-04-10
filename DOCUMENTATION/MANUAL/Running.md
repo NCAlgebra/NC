@@ -7,6 +7,9 @@ to incorporate the many recent changes into this document.
 See [Reference Manual](#ReferenceIntroduction) for a detailed
 description of the available commands.
 
+There are also notebooks in the `NC/DEMOS` directory that accompany
+each of the chapters of this user guide.
+
 ## Running NCAlgebra {#RunningNCAlgebra}
 
 In *Mathematica* (notebook or text interface), type
@@ -60,7 +63,7 @@ can be tested with
 We recommend that you restart the kernel before and after running
 tests. Each test takes a few minutes to run.
 
-## NCGB
+## Pre-2017 NCGB C++ version
 
 The old `C++` version of our Groebner Basis Algorithm still ships with
 this version and can be loaded using:

@@ -8,5 +8,5 @@ Iterations=4;
 first ={{a,x},{y,b}};
 second={{w,c},{d,z}};
 
-rels=Flatten[{MatMult[first,second] - IdentityMatrix[2],
-                 MatMult[second,first] - IdentityMatrix[2]}];
+rels=Flatten[{NCDot[first,second] - IdentityMatrix[2],
+                 NCDot[second,first] - IdentityMatrix[2]}];

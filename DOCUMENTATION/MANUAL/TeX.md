@@ -1,5 +1,8 @@
 # Pretty Output with Mathematica Notebooks and TeX {#TeX}
 
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/5_PrettyOutput.nb`.
+
 `NCAlgebra` comes with several utilities for beautifying expressions
 which are output. [`NCTeXForm`](#PackageNCTeXForm) converts NC expressions
 into \LaTeX.  [`NCTeX`](#PackageNCTeX) goes a step further and

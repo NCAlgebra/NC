@@ -145,9 +145,9 @@ Begin["`Private`"]
 
     (********** MatMultFromRight (Left) **********)
 
-    MatMultFromRight[x_, y_] := MatMult[x, y];
-    MatMultFromRight[x__, y_, z_] := MatMultFromRight[x, MatMult[y, z]];
-    MatMultFromLeft = MatMult;
+    MatMultFromRight[x_, y_] := NCDot[x, y];
+    MatMultFromRight[x__, y_, z_] := MatMultFromRight[x, NCDot[y, z]];
+    MatMultFromLeft = NCDot;
 
 
     (********** NCDescriptorRealization **********)
@@ -178,7 +178,7 @@ Begin["`Private`"]
               ];
 
           LPCombineTimes[ALB1_, ALB2_] := Module[{B1A2, m1, n1, m2, n2}, 
-              B1A2 = MatMult[  ALB1[[3]], tpMat[ ALB2[[1]] ]  ];
+              B1A2 = NCDot[  ALB1[[3]], tpMat[ ALB2[[1]] ]  ];
               {m1, n1} = Dimensions[ALB1[[2]]];
               {m2, n2} = Dimensions[ALB2[[2]]];
 
@@ -343,7 +343,7 @@ Begin["`Private`"]
           B = ArrayFlatten[{{CGB[[3]]}, {Z[mB, nB]}}]/2;
           K = ArrayFlatten[{{NCZeroMatrix[mG, nG], tpMat[CGB[[2]]]}, {CGB[[2]],
                   NCZeroMatrix[mG, nG]}}];
-          D = K + MatMult[B, tpMat[B]];
+          D = K + NCDot[B, tpMat[B]];
 
           (* Now construct the pencil using B, C and D *)
           {m, n} = 
@@ -432,7 +432,7 @@ Begin["`Private`"]
           A1, A2, ...} and returns {A0^(-1).A1, A0^(-1).A2, ...}*)
 
     (*FormLettersFromPencil[A_] := 
-          Module[{}, Map[MatMult[Inverse[A[[1]]], #] &, Rest[A]]];*)
+          Module[{}, Map[NCDot[Inverse[A[[1]]], #] &, Rest[A]]];*)
 
 
 
@@ -441,7 +441,7 @@ Begin["`Private`"]
     NCMakeMonic[{CC_, Pencil_, BB_}, Unknowns_] := Module[{A, A0inv},
           A = NCPencilToList[Pencil, Unknowns];
           A0inv = Inverse[A[[1]]];
-          {CC, MatMult[A0inv, Pencil], MatMult[A0inv, BB]}
+          {CC, NCDot[A0inv, Pencil], NCDot[A0inv, BB]}
           ];
 
 
@@ -451,7 +451,7 @@ Begin["`Private`"]
           If[Verbose /. {opts} /. Options[NCRealization], 
             Print["Finding inverse of monic (affine) term"]];
           A0inv = Inverse[A[[1]]];
-          {Map[MatMult[A0inv, #] &, Rest[A]], MatMult[A0inv, B]}];
+          {Map[NCDot[A0inv, #] &, Rest[A]], NCDot[A0inv, B]}];
 
 
 
@@ -473,7 +473,7 @@ Begin["`Private`"]
         AWordsTimesB[word_List] := 
           AWordsTimesB[word] = 
             If[Length[word] === 0, 
-              B, (MatMult[A[[First[word]]], AWordsTimesB[Rest[word]]])];
+              B, (NCDot[A[[First[word]]], AWordsTimesB[Rest[word]]])];
 
         While[NeedToCheck,
           NeedToCheck = False;
@@ -657,9 +657,9 @@ Begin["`Private`"]
             *)
 
             (* Calculate reduced realization *)
-            A2 = Map[MatMult[L, #, R]&, A2];
-            B2 = MatMult[L, B2];
-            C2 = MatMult[C2, R];
+            A2 = Map[NCDot[L, #, R]&, A2];
+            B2 = NCDot[L, B2];
+            C2 = NCDot[C2, R];
             n = Length[B2];
             
         ];
@@ -699,9 +699,9 @@ Begin["`Private`"]
             *)
 
             (* Calculate reduced realization *)
-            A2 = Map[MatMult[L, #, R]&, A2];
-            B2 = MatMult[L, B2];
-            C2 = MatMult[C2, R];
+            A2 = Map[NCDot[L, #, R]&, A2];
+            B2 = NCDot[L, B2];
+            C2 = NCDot[C2, R];
             
         ];
         
@@ -772,10 +772,10 @@ Begin["`Private`"]
                       MatrixForm];
                 *)
 
-              {MatMult[C, Q][[All, Range[MinimalSize]]], 
+              {NCDot[C, Q][[All, Range[MinimalSize]]], 
                 A0 + (Plus @@ MapThread[MultByUnknown, {A2, unknowns}])[[Range[
                         MinimalSize], Range[MinimalSize]]], 
-                MatMult[Qinv, B2][[Range[MinimalSize], All]]}
+                NCDot[Qinv, B2][[Range[MinimalSize], All]]}
 
               ]; (*** ReduceUsingControllability ***)
 
@@ -800,7 +800,7 @@ Begin["`Private`"]
           (* Print["Done"]; *)
 
           Return[{Cm, Gm, Bm}];
-          (*** Note : MatMult[Cm, NCInverse[Gm], Bm] == rat ***)
+          (*** Note : NCDot[Cm, NCInverse[Gm], Bm] == rat ***)
           ];
 
 
@@ -843,7 +843,7 @@ Begin["`Private`"]
           AWordsTimesVector[word_List, A_, V_] := 
             AWordsTimesVector[word, A, V] = 
               If[Length[word] === 0, 
-                V, (MatMult[A[[First[word]]], 
+                V, (NCDot[A[[First[word]]], 
                     AWordsTimesVector[Rest[word], A, V]])];
 
           {A, B} = NCFormLettersFromPencil[NCPencilToList[Gmm, unknowns], Bmm];
@@ -873,7 +873,7 @@ Begin["`Private`"]
 
           Ctilda = Cmm.TransposeInverseR;
           Atilda = 
-            MatMult[J, Transpose[R], (IdentityMatrix[Length[Gmm]] - Gmm), 
+            NCDot[J, Transpose[R], (IdentityMatrix[Length[Gmm]] - Gmm), 
               TransposeInverseR];
 
           {Ctilda, J - Atilda}  (* The symmetric realization *)

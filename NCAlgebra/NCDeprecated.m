@@ -18,10 +18,12 @@
 
 BeginPackage["NCDeprecated`",
 	     "NCReplace`",
+             "NCDot`",
 	     "NCUtil`",
              "NonCommutativeMultiply`"];
 
-Clear[Transform,
+Clear[MatMult,
+      Transform,
       Substitute,
       SubstituteAll,
       SubstituteSingleReplace,
@@ -37,6 +39,9 @@ NCDeprecated::OptionGone = "Option \"`1`\" has been deprecated and is no longer 
 
 Begin["`Private`"];
 
+  MatMult[expr___] :=
+    (Message[NCDeprecated::Going, MatMult, NCDot]; NCDot[expr]);
+    
   Transform[expr_, rules_] :=
     (Message[NCDeprecated::Going, Transform, NCReplaceRepeated]; NCReplaceRepeated[expr, rules]);
 

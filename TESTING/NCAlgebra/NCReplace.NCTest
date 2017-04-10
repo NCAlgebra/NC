@@ -17,6 +17,9 @@ Module[
      NCTest[NCReplace[expr,rule], answer];
      NCTest[NCReplaceAll[expr,rule], answer];
      NCTest[NCReplaceRepeated[expr,rule], answer];
+     NCTest[NCR[expr,rule], answer];
+     NCTest[NCRA[expr,rule], answer];
+     NCTest[NCRR[expr,rule], answer];
 
      expr = a**b;
 
@@ -148,38 +151,38 @@ Module[
      m2 = {{b,a},{d,e}};
      rule = {x -> m1, y -> m2, id -> IdentityMatrix[2]};
 
-     answer = MatMult[m1, m2] + m2;
+     answer = NCDot[m1, m2] + m2;
      expr = NCMatrixReplaceAll[x ** y + y, rule];
      NCTest[expr, answer];
      expr = NCMatrixReplaceRepeated[x ** y + y, rule];
      NCTest[expr, answer];
 
-     answer = MatMult[m1, tp[m2]] + m2;
+     answer = NCDot[m1, tp[m2]] + m2;
      expr = NCMatrixReplaceAll[x ** tp[y] + y, rule];
      NCTest[expr, answer];
      expr = NCMatrixReplaceRepeated[x ** tp[y] + y, rule];
      NCTest[expr, answer];
 
-     answer = MatMult[NCInverse[m1], m2] + m2;
+     answer = NCDot[NCInverse[m1], m2] + m2;
      expr = NCMatrixReplaceAll[inv[x] ** y + y, rule];
      NCTest[expr, answer];
      expr = NCMatrixReplaceRepeated[inv[x] ** y + y, rule];
      NCTest[expr, answer];
 
-     answer = MatMult[m1, NCInverse[IdentityMatrix[2] + m1]] - 
-              MatMult[NCInverse[IdentityMatrix[2] + m1], m1];
+     answer = NCDot[m1, NCInverse[IdentityMatrix[2] + m1]] - 
+              NCDot[NCInverse[IdentityMatrix[2] + m1], m1];
      expr = NCMatrixReplaceAll[x ** inv[id + x] - inv[id + x] ** x, rule];
      NCTest[expr, answer];
      expr = NCMatrixReplaceRepeated[x ** inv[id + x] - inv[id + x] ** x, rule];
      NCTest[expr, answer];
 
-     answer = MatMult[m1, NCInverse[1 + m1]] + m1;
+     answer = NCDot[m1, NCInverse[1 + m1]] + m1;
      expr = NCMatrixReplaceAll[x ** inv[1 + x] + x, rule];
      NCTest[expr, answer];
      expr = NCMatrixReplaceRepeated[x ** inv[1 + x] + x, rule];
      NCTest[expr, answer];
 
-     answer = MatMult[m1, NCInverse[IdentityMatrix[2] + m1]] + m1;
+     answer = NCDot[m1, NCInverse[IdentityMatrix[2] + m1]] + m1;
      expr = NCMatrixReplaceAll[x ** inv[id + x] + x, rule];
      NCTest[expr, answer];
      expr = NCMatrixReplaceRepeated[x ** inv[id + x] + x, rule];

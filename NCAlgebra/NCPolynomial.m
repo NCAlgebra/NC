@@ -431,10 +431,10 @@ Begin[ "`Private`" ]
   
   Clear[NCPTermsToNCProductAux];
   NCPTermsToNCProductAux[scalar_, left_?MatrixQ, middle_?MatrixQ, right__] := 
-    scalar * MatMult[left, middle, right];
+    scalar * NCDot[left, middle, right];
 
   NCPTermsToNCProductAux[scalar_, left_?MatrixQ, middle__, right_] := 
-    scalar * MatMult[left, {{NonCommutativeMultiply[middle]}}, right];
+    scalar * NCDot[left, {{NonCommutativeMultiply[middle]}}, right];
 
   NCPTermsToNCProductAux[scalar_, terms___] := 
     scalar * NonCommutativeMultiply[terms];

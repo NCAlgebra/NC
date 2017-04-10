@@ -176,11 +176,11 @@ Begin[ "`Private`" ]
 
   Clear[LeftFactorMultiply];
   LeftFactorMultiply[left_, l_, r_] :=  
-    MatMult[Transpose[KroneckerProduct[left, IdentityMatrix[r]]], l]
+    NCDot[Transpose[KroneckerProduct[left, IdentityMatrix[r]]], l]
 
   Clear[RightFactorMultiply];
   RightFactorMultiply[right_, u_, s_] :=
-    MatMult[u, KroneckerProduct[right, IdentityMatrix[s]]];
+    NCDot[u, KroneckerProduct[right, IdentityMatrix[s]]];
 
   Clear[FactorMultiply];
   FactorMultiply[left_, right_, l_, u_, var_, r_, s_] := { 

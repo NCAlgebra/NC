@@ -288,7 +288,7 @@ Begin[ "`Private`" ]
 
     Return[
       If[ NCROrder[rat] > 0,
-          MatMult[C, 
+          NCDot[C, 
                   NCInverse[First[A] + Plus @@ (Rest[A] * rat[[5]])],
                   B] + D
          ,
@@ -970,9 +970,9 @@ Begin[ "`Private`" ]
                 "Analytic"
                ,
                 
-                A2 = Map[MatMult[L, #, R]&, A2];
-                B2 = MatMult[L, B2];
-                C2 = MatMult[C2, R];
+                A2 = Map[NCDot[L, #, R]&, A2];
+                B2 = NCDot[L, B2];
+                C2 = NCDot[C2, R];
                 A0 = IdentityMatrix[rank];
                 If[ singular,
                     A0 -= Plus @@ (x0 * A2);
@@ -983,10 +983,10 @@ Begin[ "`Private`" ]
                 "CommutativeScaling"
                ,
 
-                A0 = MatMult[L, First[A], R];
-                A2 = Map[MatMult[L, #, R]&, Rest[A]];
-                B2 = MatMult[L, B2];
-                C2 = MatMult[C2, R];
+                A0 = NCDot[L, First[A], R];
+                A2 = Map[NCDot[L, #, R]&, Rest[A]];
+                B2 = NCDot[L, B2];
+                C2 = NCDot[C2, R];
 
         ];
         

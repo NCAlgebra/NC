@@ -2,8 +2,12 @@
 
 The package `NCGBX` provides an implementation of a noncommutative
 Gröbner Basis algorithm. It is a Mathematica only replacement to the
-C++ `NCGB` which is still provided with this distribution. Gröbner
-Basis are useful in the study of algebraic relations.
+C++ `NCGB` which is still provided with this distribution. 
+
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/3_NCGroebnerBasis.nb`.
+
+Gröbner Basis are useful in the study of algebraic relations.
 
 In order to load `NCGBX` one types:
 

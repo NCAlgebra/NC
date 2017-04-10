@@ -1,5 +1,5 @@
 ---
-title: The NCAlgebra Suite
+title: The NCAlgebra Suite - Version 5.0
 author: 
 - J. William Helton
 - Mauricio C. de Oliveira
