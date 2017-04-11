@@ -1,4 +1,4 @@
-# Changes in Version 5.0
+# Changes in Version 5.0 {#Version5_0}
 
 1. Completely rewritten core handling of noncommutative expressions
    with significant speed gains.
