@@ -93,7 +93,8 @@ Module[
 
   answer=SDPSylvesterEval[AAv,X11];
   H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
-  scl = Norm[H1];
+  scl = Norm[1.*H1];
+
 
   exp = Abs[Total[H1-answer, Infinity]];
   NCTest[exp < scl*10^(-9), True];
@@ -203,7 +204,7 @@ Module[
 
   answer=SDPSylvesterEval[AAv,X11];
   H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
-  scl = Norm[H1];
+  scl = Norm[1.*H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
   NCTest[exp < scl*10^(-9), True];
@@ -324,7 +325,7 @@ Module[
 
   answer=SDPSylvesterEval[AAv,X11];
   H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
-  scl = Norm[H1];
+  scl = Norm[1.*H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
   NCTest[exp < scl*10^(-9), True];
@@ -463,7 +464,7 @@ Module[
   answer=SDPSylvesterEval[AAv,X11];
 
   H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
-  scl = Norm[H1];
+  scl = Norm[1.*H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
   NCTest[exp < scl*10^(-9), True];

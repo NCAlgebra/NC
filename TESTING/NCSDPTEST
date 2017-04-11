@@ -9,7 +9,7 @@ tests = {
   "SDPLinearCoefficientArrays",
   "SDPEval",
   "SDPSylvester1",
-  "SDPSylvester2", 
+  "SDPSylvester2",
   "SDPSedumi",
   "NCSDP",
   "SDPSylvesterSolve"
