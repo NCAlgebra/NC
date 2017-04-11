@@ -69,17 +69,17 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCRealization.md \
 	 MANUAL/Bibliography.md
 
-doc: NCDocument.pdf NCDocument.html
+doc: NCDocument.pdf index.html
 
 README.md: $(MANUAL)
 	pandoc $(MANUAL) -t markdown_github -N --toc --standalone \
              --bibliography references.bib \
 	     -o README.md
 
-NCDocument.html: $(MANUAL)
+index.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
              --bibliography references.bib \
-	     -o NCDocument.html --mathjax
+	     -o index.html --mathjax
 
 NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
