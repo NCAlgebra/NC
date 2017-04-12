@@ -8,11 +8,13 @@ Members are:
     * [NCPoly](#NCPoly)
     * [NCPolyMonomial](#NCPolyMonomial)
     * [NCPolyConstant](#NCPolyConstant)
+    * [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray)
 * Access and utilities
     * [NCPolyMonomialQ](#NCPolyMonomialQ)
     * [NCPolyDegree](#NCPolyDegree)
     * [NCPolyNumberOfVariables](#NCPolyNumberOfVariables)
     * [NCPolyCoefficient](#NCPolyCoefficient)
+    * [NCPolyCoefficientArray](#NCPolyCoefficientArray)
     * [NCPolyGetCoefficients](#NCPolyGetCoefficients)
     * [NCPolyGetDigits](#NCPolyGetDigits)
     * [NCPolyGetIntegers](#NCPolyGetIntegers)
@@ -146,6 +148,19 @@ See also:
 [NCPoly](#NCPoly),
 [NCPolyMonomial](#NCPolyMonomial).
 
+#### NCPolyFromCoefficientArray {#NCPolyFromCoefficientArray}
+
+`NCPolyFromCoefficientArray[mat, vars]` returns an `NCPoly` constructed from the coefficient array `mat` in variables `vars`.
+
+For example:
+
+returns `mat` as a `SparseArray` corresponding to the rules:
+
+See also:
+[NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray),
+[NCPolyCoefficient](#NCPolyCoefficient).
+
+
 ### Access and utlity functions
 
 #### NCPolyMonomialQ {#NCPolyMonomialQ}
@@ -186,6 +201,27 @@ returns
 See also:
 [NCPoly](#NCPoly),
 [NCPolyMonomial](#NCPolyMonomial).
+
+#### NCPolyCoefficientArray {#NCPolyCoefficientArray}
+
+`NCPolyCoefficientArray[poly]` returns a coefficient array corresponding to the monomials in the nc polynomial `poly`.
+
+For example:
+
+	coeff = {1, 2, 3, -1, -2, -3, 1/2};
+	mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+	vars = {x,y,z};
+	poly = NCPoly[coeff, mon, vars];
+
+	mat = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];
+
+returns `mat` as a `SparseArray` corresponding to the rules:
+
+    {{1} -> 1, {2} -> 2, {6} -> -1, {50} -> -2, {4} -> 3, {11} -> -3, {121} -> 1/2}
+
+See also:
+[NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray),
+[NCPolyCoefficient](#NCPolyCoefficient).
 
 #### NCPolyGetCoefficients {#NCPolyGetCoefficients}
 

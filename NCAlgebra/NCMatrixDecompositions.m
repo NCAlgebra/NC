@@ -62,9 +62,12 @@ Begin[ "`Private`" ]
   NCInverse[x_] := inv[x];
   
   (* NC Divide *)
-  NCRightDivide[x_, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
-  NCLeftDivide[x_, y_] := Map[NonCommutativeMultiply[inv[x], #]&, y];
-
+  NCRightDivide[x_SparseArray, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
+  NCRightDivide[x_List, y_] := Map[NonCommutativeMultiply[#, inv[y]]&, x];
+  
+  NCLeftDivide[x_, y_SparseArray] := Map[NonCommutativeMultiply[inv[x], #]&, y];
+  NCLeftDivide[x_, y_List] := Map[NonCommutativeMultiply[inv[x], #]&, y];
+  
   (* partial pivoting *)
   NCLUPartialPivoting[mat_?MatrixQ, f_:NCLeafCount] := 
     NCLUPartialPivoting[mat[[All,1]], f];

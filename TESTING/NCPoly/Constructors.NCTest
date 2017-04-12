@@ -1,5 +1,6 @@
 Block[
-  {x,y,z,
+  {vars,vars1,vars2,
+   x,y,z,
    coeff1,mon1,p1,
    coeff2,mon2,p2,
    m0,m1,m2,m3,m4,m5,
@@ -405,5 +406,18 @@ Block[
   NCTest[NCPolyGetDigits[p2], \
        {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
 
+  (* Convert *)
+  vars1 = {{x, y, z}};
+  coeff1 = {1, 2, 3, -1, -2, -3, 1/2};
+  mon1 = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+  p1 = NCPoly[coeff1, mon1, vars1];
+
+  vars2 = {{x}, {y, z}};
+  coeff1 = {1, 2, 3, -1, -2, -3, 1/2};
+  mon1 = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+  p2 = NCPoly[coeff1, mon1, vars2];
+
+  NCTest[NCPolyConvert[p1, vars2], p2];
+  NCTest[NCPolyConvert[p2, vars1], p1];
 
 ];

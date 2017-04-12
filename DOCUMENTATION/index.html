@@ -170,17 +170,16 @@
 <li><a href="#NCMatrixExpand"><span class="toc-section-number">11.1.6</span> NCMatrixExpand</a></li>
 </ul></li>
 <li><a href="#PackageNCMatrixDecompositions"><span class="toc-section-number">11.2</span> NCMatrixDecompositions</a><ul>
-<li><a href="#NCLDLDecomposition"><span class="toc-section-number">11.2.1</span> NCLDLDecomposition</a></li>
-<li><a href="#NCLeftDivide"><span class="toc-section-number">11.2.2</span> NCLeftDivide</a></li>
-<li><a href="#NCLowerTriangularSolve"><span class="toc-section-number">11.2.3</span> NCLowerTriangularSolve</a></li>
-<li><a href="#NCLUCompletePivoting"><span class="toc-section-number">11.2.4</span> NCLUCompletePivoting</a></li>
-<li><a href="#NCLUDecompositionWithCompletePivoting"><span class="toc-section-number">11.2.5</span> NCLUDecompositionWithCompletePivoting</a></li>
-<li><a href="#NCLUDecompositionWithPartialPivoting"><span class="toc-section-number">11.2.6</span> NCLUDecompositionWithPartialPivoting</a></li>
-<li><a href="#NCLUInverse"><span class="toc-section-number">11.2.7</span> NCLUInverse</a></li>
-<li><a href="#NCLUPartialPivoting"><span class="toc-section-number">11.2.8</span> NCLUPartialPivoting</a></li>
-<li><a href="#NCMatrixDecompositions"><span class="toc-section-number">11.2.9</span> NCMatrixDecompositions</a></li>
+<li><a href="#NCLUDecompositionWithPartialPivoting"><span class="toc-section-number">11.2.1</span> NCLUDecompositionWithPartialPivoting</a></li>
+<li><a href="#NCLUDecompositionWithCompletePivoting"><span class="toc-section-number">11.2.2</span> NCLUDecompositionWithCompletePivoting</a></li>
+<li><a href="#NCLDLDecomposition"><span class="toc-section-number">11.2.3</span> NCLDLDecomposition</a></li>
+<li><a href="#NCUpperTriangularSolve"><span class="toc-section-number">11.2.4</span> NCUpperTriangularSolve</a></li>
+<li><a href="#NCLowerTriangularSolve"><span class="toc-section-number">11.2.5</span> NCLowerTriangularSolve</a></li>
+<li><a href="#NCLUInverse"><span class="toc-section-number">11.2.6</span> NCLUInverse</a></li>
+<li><a href="#NCLUPartialPivoting"><span class="toc-section-number">11.2.7</span> NCLUPartialPivoting</a></li>
+<li><a href="#NCLUCompletePivoting"><span class="toc-section-number">11.2.8</span> NCLUCompletePivoting</a></li>
+<li><a href="#NCLeftDivide"><span class="toc-section-number">11.2.9</span> NCLeftDivide</a></li>
 <li><a href="#NCRightDivide"><span class="toc-section-number">11.2.10</span> NCRightDivide</a></li>
-<li><a href="#NCUpperTriangularSolve"><span class="toc-section-number">11.2.11</span> NCUpperTriangularSolve</a></li>
 </ul></li>
 <li><a href="#PackageMatrixDecompositions"><span class="toc-section-number">11.3</span> MatrixDecompositions: linear algebra templates</a><ul>
 <li><a href="#LUDecompositionWithPartialPivoting"><span class="toc-section-number">11.3.1</span> LUDecompositionWithPartialPivoting</a></li>
@@ -2506,6 +2505,8 @@ symVars = {x}</code></pre>
 <p><code>NCMatrixExpand[expr]</code> expands <code>inv</code> and <code>**</code> of matrices appearing in nc expression <code>expr</code>. It effectively substitutes <code>inv</code> for <code>NCInverse</code> and <code>**</code> by <code>NCDot</code>.</p>
 <p>See also: <a href="#NCInverse">NCInverse</a>, <a href="#NCDot">NCDot</a>.</p>
 <h2 id="PackageNCMatrixDecompositions"><span class="header-section-number">11.2</span> NCMatrixDecompositions</h2>
+<p><code>NCMatrixDecompositions</code> provide noncommutative versions of the linear algebra algorithms in the package <a href="#PackageMatrixDecompositions">MatrixDecompositions</a>.</p>
+<p>See the documentation for the package <a href="#PackageMatrixDecompositions">MatrixDecompositions</a> for details on the algorithms and options.</p>
 <p>Members are:</p>
 <ul>
 <li>Decompositions
@@ -2528,19 +2529,75 @@ symVars = {x}</code></pre>
 <li><a href="#NCRightDivide">NCRightDivide</a></li>
 </ul></li>
 </ul>
-<h3 id="NCLDLDecomposition"><span class="header-section-number">11.2.1</span> NCLDLDecomposition</h3>
-<h3 id="NCLeftDivide"><span class="header-section-number">11.2.2</span> NCLeftDivide</h3>
-<h3 id="NCLowerTriangularSolve"><span class="header-section-number">11.2.3</span> NCLowerTriangularSolve</h3>
-<h3 id="NCLUCompletePivoting"><span class="header-section-number">11.2.4</span> NCLUCompletePivoting</h3>
-<h3 id="NCLUDecompositionWithCompletePivoting"><span class="header-section-number">11.2.5</span> NCLUDecompositionWithCompletePivoting</h3>
-<h3 id="NCLUDecompositionWithPartialPivoting"><span class="header-section-number">11.2.6</span> NCLUDecompositionWithPartialPivoting</h3>
-<h3 id="NCLUInverse"><span class="header-section-number">11.2.7</span> NCLUInverse</h3>
-<h3 id="NCLUPartialPivoting"><span class="header-section-number">11.2.8</span> NCLUPartialPivoting</h3>
-<h3 id="NCMatrixDecompositions"><span class="header-section-number">11.2.9</span> NCMatrixDecompositions</h3>
+<h3 id="NCLUDecompositionWithPartialPivoting"><span class="header-section-number">11.2.1</span> NCLUDecompositionWithPartialPivoting</h3>
+<p><code>NCLUDecompositionWithPartialPivoting</code> is a noncommutative version of <a href="#NCLUDecompositionWithPartialPivoting">NCLUDecompositionWithPartialPivoting</a>.</p>
+<p>The following <code>options</code> can be given:</p>
+<ul>
+<li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
+<li><code>RightDivide</code> (<a href="#NCRightDivide">NCRightDivide</a>): function used to divide a vector by an entry;</li>
+<li><code>Dot</code> (<a href="#NCDot">NCDot</a>): function used to multiply vectors and matrices;</li>
+<li><code>Pivoting</code> (<a href="#NCLUPartialPivoting">NCLUPartialPivoting</a>): function used to sort rows for pivoting;</li>
+<li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
+</ul>
+<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>.</p>
+<h3 id="NCLUDecompositionWithCompletePivoting"><span class="header-section-number">11.2.2</span> NCLUDecompositionWithCompletePivoting</h3>
+<p><code>NCLUDecompositionWithCompletePivoting</code> is a noncommutative version of <a href="#NCLUDecompositionWithCompletePivoting">NCLUDecompositionWithCompletePivoting</a>.</p>
+<p>The following <code>options</code> can be given:</p>
+<ul>
+<li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
+<li><code>RightDivide</code> (<a href="#NCRightDivide">NCRightDivide</a>): function used to divide a vector by an entry;</li>
+<li><code>Dot</code> (<a href="#NCDot">NCDot</a>): function used to multiply vectors and matrices;</li>
+<li><code>Pivoting</code> (<a href="#NCLUCompletePivoting">NCLUCompletePivoting</a>): function used to sort rows for pivoting;</li>
+<li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
+</ul>
+<p>See also: <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>.</p>
+<h3 id="NCLDLDecomposition"><span class="header-section-number">11.2.3</span> NCLDLDecomposition</h3>
+<p><code>NCLDLDecomposition</code> is a noncommutative version of <a href="#LDLDecomposition">LDLDecomposition</a>.</p>
+<p>The following <code>options</code> can be given:</p>
+<ul>
+<li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
+<li><code>RightDivide</code> (<a href="#NCRightDivide">NCRightDivide</a>): function used to divide a vector by an entry on the right;</li>
+<li><code>LeftDivide</code> (<a href="#NCLeftDivide">NCLeftDivide</a>): function used to divide a vector by an entry on the left;</li>
+<li><code>Dot</code> (<code>NCDot</code>): function used to multiply vectors and matrices;</li>
+<li><code>CompletePivoting</code> (<a href="#NCLUCompletePivoting">NCLUCompletePivoting</a>): function used to sort rows for complete pivoting;</li>
+<li><code>PartialPivoting</code> (<a href="#NCLUPartialPivoting">NCLUPartialPivoting</a>): function used to sort matrices for complete pivoting;</li>
+<li><code>Inverse</code> (<a href="#NCLUInverse">NCLUInverse</a>): function used to invert 2x2 diagonal blocks;</li>
+<li><code>SelfAdjointQ</code> (<a href="#SelfAdjointMatrixQ">SelfAdjointMatrixQ</a>): function to test if matrix is self-adjoint;</li>
+<li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
+</ul>
+<p>See also: <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>.</p>
+<h3 id="NCUpperTriangularSolve"><span class="header-section-number">11.2.4</span> NCUpperTriangularSolve</h3>
+<p><code>NCUpperTriangularSolve</code> is a noncommutative version of <a href="#UpperTriangularSolve">UpperTriangularSolve</a>.</p>
+<p>See also: <a href="#UpperTriangularSolve">UpperTriangularSolve</a>.</p>
+<h3 id="NCLowerTriangularSolve"><span class="header-section-number">11.2.5</span> NCLowerTriangularSolve</h3>
+<p><code>NCLowerTriangularSolve</code> is a noncommutative version of <a href="#LowerTriangularSolve">LowerTriangularSolve</a>.</p>
+<p>See also: <a href="#LowerTriangularSolve">LowerTriangularSolve</a>.</p>
+<h3 id="NCLUInverse"><span class="header-section-number">11.2.6</span> NCLUInverse</h3>
+<p><code>NCLUInverse</code> is a noncommutative version of <a href="#LUInverse">LUInverse</a>.</p>
+<p>See also: <a href="#LUInverse">LUInverse</a>.</p>
+<h3 id="NCLUPartialPivoting"><span class="header-section-number">11.2.7</span> NCLUPartialPivoting</h3>
+<p><code>NCLUPartialPivoting</code> is a noncommutative version of <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
+<p>See also: <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
+<h3 id="NCLUCompletePivoting"><span class="header-section-number">11.2.8</span> NCLUCompletePivoting</h3>
+<p><code>NCLUCompletePivoting</code> is a noncommutative version of <a href="#LUCompletePivoting">LUCompletePivoting</a>.</p>
+<p>See also: <a href="#LUCompletePivoting">LUCompletePivoting</a>.</p>
+<h3 id="NCLeftDivide"><span class="header-section-number">11.2.9</span> NCLeftDivide</h3>
+<p><code>NCLeftDivide[x,y]</code> divides each entry of the list <code>y</code> by <code>x</code> on the left.</p>
+<p>For example:</p>
+<pre><code>NCLeftDivide[x, {a,b,c}]</code></pre>
+<p>returns</p>
+<pre><code>{inv[x]**a, inv[x]**b, inv[x]**c}</code></pre>
+<p>See also: <a href="#NCRightDivide">NCRightDivide</a>.</p>
 <h3 id="NCRightDivide"><span class="header-section-number">11.2.10</span> NCRightDivide</h3>
-<h3 id="NCUpperTriangularSolve"><span class="header-section-number">11.2.11</span> NCUpperTriangularSolve</h3>
+<p><code>NCRightDivide[x,y]</code> divides each entry of the list <code>x</code> by <code>y</code> on the right.</p>
+<p>For example:</p>
+<pre><code>NCRightDivide[{a,b,c}, y]</code></pre>
+<p>returns</p>
+<pre><code>{a**inv[y], b**inv[y], c**inv[y]}</code></pre>
+<p>See also: <a href="#NCLeftDivide">NCLeftDivide</a>.</p>
 <h2 id="PackageMatrixDecompositions"><span class="header-section-number">11.3</span> MatrixDecompositions: linear algebra templates</h2>
-<p><strong>MatrixDecompositions</strong> is a package that implements various linear algebra algorithms, such as <em>LU Decomposition</em> with <em>partial</em> and <em>complete pivoting</em>, and <em>LDL Decomposition</em>. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for <a href="http://math.ucsd.edu/~ncalg">NCAlgebra</a>. See <a href="#NCMatrixDecompositions">NCMatrixDecompositions</a>.</p>
+<p><code>MatrixDecompositions</code> is a package that implements various linear algebra algorithms, such as <em>LU Decomposition</em> with <em>partial</em> and <em>complete pivoting</em>, and <em>LDL Decomposition</em>. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for <a href="http://math.ucsd.edu/~ncalg">NCAlgebra</a>.</p>
+<p>See the package <a href="#PackageNCMatrixDecompositions">NCMatrixDecompositions</a> for noncommutative versions of these algorithms.</p>
 <p>Members are:</p>
 <ul>
 <li>Decompositions
@@ -2579,9 +2636,9 @@ symVars = {x}</code></pre>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
-<li><code>RightDivide</code> (<code>RightDivide</code>): function used to divide a vector by an entry;</li>
+<li><code>RightDivide</code> (<code>Divide</code>): function used to divide a vector by an entry;</li>
 <li><code>Dot</code> (<code>Dot</code>): function used to multiply vectors and matrices;</li>
-<li><code>Pivoting</code> (<code>LUPartialPivoting</code>): function used to sort rows for pivoting;</li>
+<li><code>Pivoting</code> (<a href="#LUPartialPivoting">LUPartialPivoting</a>): function used to sort rows for pivoting;</li>
 <li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
 </ul>
 <p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
@@ -2602,7 +2659,7 @@ symVars = {x}</code></pre>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
 <li><code>Divide</code> (<code>Divide</code>): function used to divide a vector by an entry;</li>
 <li><code>Dot</code> (<code>Dot</code>): function used to multiply vectors and matrices;</li>
-<li><code>Pivoting</code> (<code>LUCompletePivoting</code>): function used to sort rows for pivoting;</li>
+<li><code>Pivoting</code> (<a href="#LUCompletePivoting">LUCompletePivoting</a>): function used to sort rows for pivoting;</li>
 </ul>
 <p>See also: <a href="#LUDecomposition">LUDecomposition</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>.</p>
 <h3 id="LDLDecomposition"><span class="header-section-number">11.3.3</span> LDLDecomposition</h3>
@@ -2620,13 +2677,13 @@ symVars = {x}</code></pre>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
-<li><code>RightDivide</code> (<code>RightDivide</code>): function used to divide a vector by an entry on the right;</li>
-<li><code>LeftDivide</code> (<code>LeftDivide</code>): function used to divide a vector by an entry on the left;</li>
+<li><code>RightDivide</code> (<code>Divide</code>): function used to divide a vector by an entry on the right;</li>
+<li><code>LeftDivide</code> (<code>Divide</code>): function used to divide a vector by an entry on the left;</li>
 <li><code>Dot</code> (<code>Dot</code>): function used to multiply vectors and matrices;</li>
-<li><code>CompletePivoting</code> (<code>LUCompletePivoting</code>): function used to sort rows for complete pivoting;</li>
-<li><code>PartialPivoting</code> (<code>LUPartialPivoting</code>): function used to sort matrices for complete pivoting;</li>
+<li><code>CompletePivoting</code> (<a href="#LUCompletePivoting">LUCompletePivoting</a>): function used to sort rows for complete pivoting;</li>
+<li><code>PartialPivoting</code> (<a href="#LUPartialPivoting">LUPartialPivoting</a>): function used to sort matrices for complete pivoting;</li>
 <li><code>Inverse</code> (<code>Inverse</code>): function used to invert 2x2 diagonal blocks;</li>
-<li><code>SelfAdjointQ</code> (<code>SelfAdjointMatrixQ</code>): function to test if matrix is self-adjoint;</li>
+<li><code>SelfAdjointQ</code> (<a href="#SelfAdjointMatrixQ">SelfAdjointMatrixQ</a>): function to test if matrix is self-adjoint;</li>
 <li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
 </ul>
 <p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
@@ -2750,6 +2807,14 @@ symVars = {x}</code></pre>
 <li><a href="#NCRun">NCRun</a></li>
 </ul>
 <h3 id="NCRun"><span class="header-section-number">12.4.1</span> NCRun</h3>
+<p><code>NCRun[command]</code> is a replacement for the built-in <code>Run</code> command that gives a bit more control over the execution process.</p>
+<p><code>NCRun[command, options]</code> uses <code>options</code>.</p>
+<p>The following <code>options</code> can be given:</p>
+<ul>
+<li><code>Verbose</code> (<code>True</code>): print information on command being run;</li>
+<li><code>CommandPrefix</code> (<code>&quot;&quot;</code>): prefix to <code>command</code>;</li>
+</ul>
+<p>See also: <code>Run</code>.</p>
 <h2 id="PackageNCTest"><span class="header-section-number">12.5</span> NCTest</h2>
 <p>Members are:</p>
 <ul>
@@ -2859,6 +2924,7 @@ index = {1,2,3,4,5,4,1};</code></pre>
 <li><a href="#NCPoly">NCPoly</a></li>
 <li><a href="#NCPolyMonomial">NCPolyMonomial</a></li>
 <li><a href="#NCPolyConstant">NCPolyConstant</a></li>
+<li><a href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a></li>
 </ul></li>
 <li>Access and utilities
 <ul>
@@ -2866,6 +2932,7 @@ index = {1,2,3,4,5,4,1};</code></pre>
 <li><a href="#NCPolyDegree">NCPolyDegree</a></li>
 <li><a href="#NCPolyNumberOfVariables">NCPolyNumberOfVariables</a></li>
 <li><a href="#NCPolyCoefficient">NCPolyCoefficient</a></li>
+<li><a href="#NCPolyCoefficientArray">NCPolyCoefficientArray</a></li>
 <li><a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a></li>
 <li><a href="#NCPolyGetDigits">NCPolyGetDigits</a></li>
 <li><a href="#NCPolyGetIntegers">NCPolyGetIntegers</a></li>
@@ -2964,7 +3031,21 @@ c = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];</code></pre>
 <p>returns</p>
 <pre><code>c = -1</code></pre>
 <p>See also: <a href="#NCPoly">NCPoly</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
-<h4 id="NCPolyGetCoefficients"><span class="header-section-number">13.1.3.5</span> NCPolyGetCoefficients</h4>
+<h4 id="NCPolyCoefficientArray"><span class="header-section-number">13.1.3.5</span> NCPolyCoefficientArray</h4>
+<p><code>NCPolyCoefficientArray[poly]</code> returns a coefficient array corresponding to the monomials in the nc polynomial <code>poly</code>.</p>
+<p>For example:</p>
+<pre><code>coeff = {1, 2, 3, -1, -2, -3, 1/2};
+mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+vars = {x,y,z};
+poly = NCPoly[coeff, mon, vars];
+
+c = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];</code></pre>
+<p>returns <code>mat</code> as a <code>SparseArray</code> corresponding to the rules:</p>
+<pre><code>{{1} -&gt; 1, {2} -&gt; 2, {6} -&gt; -1, {50} -&gt; -2, {4} -&gt; 3, {11} -&gt; -3, {121} -&gt; 1/2}</code></pre>
+<p>and</p>
+<pre><code>d = {1, 1, 1}</code></pre>
+<p>See also: <a href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a>, <a href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
+<h4 id="NCPolyGetCoefficients"><span class="header-section-number">13.1.3.6</span> NCPolyGetCoefficients</h4>
 <p><code>NCPolyGetCoefficients[poly]</code> returns a list with the coefficients of the monomials in the nc polynomial <code>poly</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -2974,7 +3055,7 @@ coeffs = NCPolyGetCoefficients[poly];</code></pre>
 <pre><code>coeffs = {2,-1}</code></pre>
 <p>The coefficients are returned according to the current graded degree-lexicographic ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetDigits">NCPolyGetDigits</a>, <a href="#NCPolyCoefficient">NCPolyCoefficient</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyGetDigits"><span class="header-section-number">13.1.3.6</span> NCPolyGetDigits</h4>
+<h4 id="NCPolyGetDigits"><span class="header-section-number">13.1.3.7</span> NCPolyGetDigits</h4>
 <p><code>NCPolyGetDigits[poly]</code> returns a list with the digits that encode the monomials in the nc polynomial <code>poly</code> as produced by <a href="#NCIntegerDigits">NCIntegerDigits</a>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -2984,7 +3065,7 @@ digits = NCPolyGetDigits[poly];</code></pre>
 <pre><code>digits = {{2}, {0,1,0}}</code></pre>
 <p>The digits are returned according to the current ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyGetIntegers"><span class="header-section-number">13.1.3.7</span> NCPolyGetIntegers</h4>
+<h4 id="NCPolyGetIntegers"><span class="header-section-number">13.1.3.8</span> NCPolyGetIntegers</h4>
 <p><code>NCPolyGetIntegers[poly]</code> returns a list with the digits that encode the monomials in the nc polynomial <code>poly</code> as produced by <a href="#NCFromDigits">NCFromDigits</a>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -2994,7 +3075,7 @@ digits = NCPolyGetIntegers[poly];</code></pre>
 <pre><code>digits = {{1,2}, {3,3}}</code></pre>
 <p>The digits are returned according to the current ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyLeadingMonomial"><span class="header-section-number">13.1.3.8</span> NCPolyLeadingMonomial</h4>
+<h4 id="NCPolyLeadingMonomial"><span class="header-section-number">13.1.3.9</span> NCPolyLeadingMonomial</h4>
 <p><code>NCPolyLeadingMonomial[poly]</code> returns an <code>NCPoly</code> representing the leading term of the nc polynomial <code>poly</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -3002,7 +3083,7 @@ poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
 lead = NCPolyLeadingMonomial[poly];</code></pre>
 <p>returns an <code>NCPoly</code> representing the monomial <span class="math inline">\(x y x\)</span>. The leading monomial is computed according to the current ordering, in this example <code>x &lt; y &lt; z</code>. The actual representation of <code>lead</code> varies with the implementation.</p>
 <p>See also: <a href="#NCPolyLeadingTerm">NCPolyLeadingTerm</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyLeadingTerm"><span class="header-section-number">13.1.3.9</span> NCPolyLeadingTerm</h4>
+<h4 id="NCPolyLeadingTerm"><span class="header-section-number">13.1.3.10</span> NCPolyLeadingTerm</h4>
 <p><code>NCPolyLeadingTerm[poly]</code> returns a rule associated with the leading term of the nc polynomial <code>poly</code> as understood by <a href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -3012,10 +3093,10 @@ lead = NCPolyLeadingTerm[poly];</code></pre>
 <pre><code>lead = {3,3} -&gt; -1</code></pre>
 <p>representing the monomial <span class="math inline">\(- x y x\)</span>. The leading monomial is computed according to the current ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyLeadingMonomial">NCPolyLeadingMonomial</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyOrderType"><span class="header-section-number">13.1.3.10</span> NCPolyOrderType</h4>
+<h4 id="NCPolyOrderType"><span class="header-section-number">13.1.3.11</span> NCPolyOrderType</h4>
 <p><code>NCPolyOrderType[poly]</code> returns the type of monomial order in which the nc polynomial <code>poly</code> is stored. Order can be <code>NCPolyGradedDegLex</code> or <code>NCPolyDegLex</code>.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>,</p>
-<h4 id="NCPolyToRule"><span class="header-section-number">13.1.3.11</span> NCPolyToRule</h4>
+<h4 id="NCPolyToRule"><span class="header-section-number">13.1.3.12</span> NCPolyToRule</h4>
 <p><code>NCPolyToRule[poly]</code> returns a <code>Rule</code> associated with polynomial <code>poly</code>. If <code>poly = lead + rest</code>, where <code>lead</code> is the leading term in the current order, then <code>NCPolyToRule[poly]</code> returns the rule <code>lead -&gt; -rest</code> where the coefficient of the leading term has been normalized to <code>1</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x, y, z};

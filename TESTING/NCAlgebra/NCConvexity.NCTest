@@ -32,8 +32,8 @@ Module[
      {ldl,p,s,rank} = NCLDLDecomposition[mq];
      {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = Map[Normal,GetDiagonal[d,s]];
-     NCTest[diagonal, ans]; 
-
+     NCTest[diagonal, ans];
+     
      (* test 2 *)
      f = x**x**x;
      ans = NCConvexityRegion[ f, {x} ];
@@ -74,7 +74,7 @@ Module[
      {lt,d,rt} = GetLDUMatrices[ldl,s];
      diagonal = Map[Normal,GetDiagonal[d,s]];
      NCTest[diagonal, ans];
-
+     
      (* test 6 *)
      f = 2*x**x**x + 7*x**x + x;
      ans = NCConvexityRegion[ f, {x,y} ];

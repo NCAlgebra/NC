@@ -51,47 +51,62 @@ Begin["`Private`"];
   NCPolyMonomial[monomials_List, var_List] := 
     NCPolyMonomial[monomials, {var}];
 
-  Clear[NCPolyAux];
-  (* NCPolyAux[vars__Symbol] := Length[{vars}]; *)
-  NCPolyAux[vars:(_Symbol|Subscript[_Symbol,__])..] := Length[{vars}];
-  NCPolyAux[var___] := (Message[NCPoly::InvalidList]; $Failed);
-  
   (* NCPoly Constructor *)
   
-  NCPoly[{}, {}, var_List] := 0;
+  Clear[NCPolyAux];
+  NCPolyAux[vars:(_Symbol|Subscript[_Symbol,__])..] := Length[{vars}];
+  NCPolyAux[var___] := (Message[NCPoly::InvalidList]; $Failed);
 
-  NCPoly[coeff_List, monomials_List, {Vars__}] := Module[
-    {vars, varnames},
-
-    If[ Length[coeff] =!= Length[monomials],
-        Message[NCPoly::SizeMismatch];
-        Return[$Failed];
-    ];
-
+  Clear[NCPolyVarAux];
+  NCPolyVarAux[Vars_List] := Block[
+    {vars},
+      
     (* list of variables *)
 
-    If[ And[Depth[{Vars}] > 3, 
-            Depth[{Vars} /. Subscript[x_,__] -> x] > 3],
+    If[ And[Depth[Vars] > 3, 
+            Depth[Vars /. Subscript[x_,__] -> x] > 3],
         Message[NCPoly::InvalidList];
         Return[$Failed];
     ];
-
       
     (* repeat variables *)
-    If[ Length[Flatten[{Vars}]] != Length[Union[Flatten[{Vars}]]],
+    If[ Length[Flatten[Vars]] != Length[Union[Flatten[Vars]]],
         Message[NCPoly::InvalidList];
         Return[$Failed];
     ];
       
     (* normalize list of variables *)
       
-    Check[ vars = Apply[NCPolyAux, Map[Flatten, Map[List, {Vars}]], 1]
+    vars = Check[
+           Apply[NCPolyAux, Map[Flatten, Map[List, Vars]], 1]
+          ,
+           $Failed
+          ,
+           NCPoly::InvalidList
+    ];
+
+    Return[vars];
+  ];
+  
+  NCPoly[{}, {}, var_List] := 0;
+
+  NCPoly[coeff_List, monomials_List, Vars_List] := Module[
+    {vars, varnames},
+
+    (* check monomial and coefficient size *)
+    If[ Length[coeff] =!= Length[monomials],
+        Message[NCPoly::SizeMismatch];
+        Return[$Failed];
+    ];
+
+    (* list of variables *)
+    Check[ vars = NCPolyVarAux[Vars];
           ,
            Return[$Failed]
           ,
            NCPoly::InvalidList
     ];
-    varnames = Flatten[{Vars}];
+    varnames = Flatten[Vars];
       
     Check[
       NCPolyPack[
@@ -119,7 +134,7 @@ Begin["`Private`"];
   ];
 
   NCPoly[r_,Association[]] := 0;
-  
+
   (* errors *)
   
   NCPoly[r_,s_] := (Message[NCPoly::NotPolynomial]; 
@@ -129,6 +144,34 @@ Begin["`Private`"];
   NCPoly[r___] := (Message[NCPoly::NotPolynomial]; 
     $Failed) /; Length[{r}] =!= 2;
 
+  (* NCPolyConvert *)
+  NCPolyConvert[p_List, Vars_List] := 
+    Map[NCPolyConvert[#, Vars]&, p];
+      
+  NCPolyConvert[p_NCPoly, Vars_List] := Module[
+    {vars},
+      
+    (* list of variables *)
+    Check[ vars = NCPolyVarAux[Vars];
+          ,
+           Return[$Failed]
+          ,
+           NCPoly::InvalidList
+    ];
+      
+    If[p[[1]] == Vars,
+       (* same poly's, return *)
+       Return[p];
+    ];
+    
+    (* Need to convert *)
+    Return[
+      NCPoly[vars, KeyMap[ NCFromDigits[#, vars] &,
+                           KeyMap[NCIntegerDigits[#, p[[1]]] &, p[[2]]]
+    ]]];
+      
+  ];
+  
   (* NCPoly Utilities *)
 
   NCPolyPack[p_NCPoly] := 
@@ -407,45 +450,61 @@ Begin["`Private`"];
   IndexToDegree[m_, n_] := Floor[Log[(m - 1/(1 - n)) (-1 + n)] / Log[n]];
   
   NCPolyCoefficientArray[p_NCPoly, dd_:-1] := Module[
-    {n = Total[p[[1]]], d},
-    d = If[dd < 0, NCPolyDegree[p], dd];
+    {n = Total[p[[1]]], d = NCPolyDegree[p]},
+
+    (* degree *)
+    d = If[dd >= 0,
+           If[d > dd, 
+              Message[NCPolyCoefficientArray::InvalidDegree];
+              Return[$Failed];
+           ];
+           dd, d];
+    
+    (* calculate coefficients *)
     Return[
-     {
       SparseArray[
         Normal[
           KeyMap[(DegreeToIndex[Total[Drop[#,-1]],n]+Last[#]+1)&,
                  p[[2]]]
         ],{DegreeToIndex[d+1,n]}]
-      ,
-       p[[1]]
-     }
     ];
   ];
   
   NCPolyCoefficientArray[ps_List] := Block[
-    {d, tmp},
+    {d},
     d = Max[Map[NCPolyDegree, ps]];
-    tmp = Map[NCPolyCoefficientArray[#,d]&, ps];
-    Return[{SparseArray[tmp[[All,1]]], ps[[1,1]]}];
-  ]; /; Count[Unitize[Max /@ ps[[All,1]] - Min /@ ps[[All,1]] ], 0]
+    Return[SparseArray[Map[NCPolyCoefficientArray[#,d]&, ps]]];
+  ]; /; Count[Unitize[Max /@ ps[[All,1]] - Min /@ ps[[All,1]]], 0]
 
   Clear[IndexToDegree];
   IndexToDegree[m_, n_] := Floor[Log[n, (m - 1/(1 - n)) (-1 + n)]];
 
-  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 3, vars_] := 
+  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 3, vars_List] := 
     Map[NCPolyFromCoefficientArray[#,vars]&, m];
 
-  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 2, vars_] := Module[
-    {index, degree, 
-     n = Total[vars],
-     rules = Drop[ArrayRules[m], -1]},
-      
+  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 2, Vars_List] := Module[
+    {index, degree, n,
+     rules = Drop[ArrayRules[m], -1],
+     vars,flatvars},
+
+    (* list of variables *)
+    Check[ vars = NCPolyVarAux[Vars];
+          ,
+           Return[$Failed]
+          ,
+           NCPoly::InvalidList
+    ];
+    n = Total[vars];
+
     degree = Apply[IndexToDegree[# - 1, n] &, 
                    rules[[All, 1]], {1}];
     index = Map[DegreeToIndex[#, 2] &, degree];
     coeff = Transpose[{degree, Flatten[rules[[All,1]]] - index - 1}];
 
     (*
+    Print["m = ", Normal[m]];
+    Print["Vars = ", Vars];
+    Print["vars = ", vars];
     Print["Depth[m] = ", Depth[m]];
     Print["n = ", n];
     Print["rules = ", rules];
@@ -454,7 +513,12 @@ Begin["`Private`"];
     Print["coeff = ", coeff];
     *)
     
-    Return[NCPoly[vars, <|Thread[coeff -> rules[[All,2]]]|>]];
+    Return[
+      NCPolyConvert[
+          NCPoly[{n}, <|Thread[coeff -> rules[[All,2]]]|>],
+          Vars
+      ]
+    ];
   ];
 
   

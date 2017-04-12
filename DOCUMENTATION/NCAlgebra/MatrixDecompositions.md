@@ -1,6 +1,16 @@
 ## MatrixDecompositions: linear algebra templates {#PackageMatrixDecompositions}
 
-**MatrixDecompositions** is a package that implements various linear algebra algorithms, such as *LU Decomposition* with *partial* and *complete pivoting*, and *LDL Decomposition*. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for [NCAlgebra](http://math.ucsd.edu/~ncalg). See [NCMatrixDecompositions](#NCMatrixDecompositions).
+`MatrixDecompositions` is a package that implements various linear
+algebra algorithms, such as *LU Decomposition* with *partial* and
+*complete pivoting*, and *LDL Decomposition*. The algorithms have been
+written with correctness and easy of customization rather than
+efficiency as the main goals. They were originally developed to serve
+as the core of the noncommutative linear algebra algorithms for
+[NCAlgebra](http://math.ucsd.edu/~ncalg). 
+
+See the package
+[NCMatrixDecompositions](#PackageNCMatrixDecompositions) for
+noncommutative versions of these algorithms.
 
 Members are:
 
@@ -39,9 +49,9 @@ The triangular factors are recovered using [GetLUMatrices](#GetLUMatrices).
 The following `options` can be given:
 
 - `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
-- `RightDivide` (`RightDivide`): function used to divide a vector by an entry;
+- `RightDivide` (`Divide`): function used to divide a vector by an entry;
 - `Dot` (`Dot`): function used to multiply vectors and matrices;
-- `Pivoting` (`LUPartialPivoting`): function used to sort rows for pivoting;
+- `Pivoting` ([LUPartialPivoting](#LUPartialPivoting)): function used to sort rows for pivoting;
 - `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
@@ -69,7 +79,7 @@ The following `options` can be given:
 - `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
 - `Divide` (`Divide`): function used to divide a vector by an entry;
 - `Dot` (`Dot`): function used to multiply vectors and matrices;
-- `Pivoting` (`LUCompletePivoting`): function used to sort rows for pivoting;
+- `Pivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for pivoting;
 
 See also:
 [LUDecomposition](#LUDecomposition), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
@@ -94,13 +104,13 @@ The triangular factors are recovered using [GetLDUMatrices](#GetLDUMatrices).
 The following `options` can be given:
 
 - `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
-- `RightDivide` (`RightDivide`): function used to divide a vector by an entry on the right;
-- `LeftDivide` (`LeftDivide`): function used to divide a vector by an entry on the left;
+- `RightDivide` (`Divide`): function used to divide a vector by an entry on the right;
+- `LeftDivide` (`Divide`): function used to divide a vector by an entry on the left;
 - `Dot` (`Dot`): function used to multiply vectors and matrices;
-- `CompletePivoting` (`LUCompletePivoting`): function used to sort rows for complete pivoting;
-- `PartialPivoting` (`LUPartialPivoting`): function used to sort matrices for complete pivoting;
+- `CompletePivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for complete pivoting;
+- `PartialPivoting` ([LUPartialPivoting](#LUPartialPivoting)): function used to sort matrices for complete pivoting;
 - `Inverse` (`Inverse`): function used to invert 2x2 diagonal blocks;
-- `SelfAdjointQ` (`SelfAdjointMatrixQ`): function to test if matrix is self-adjoint;
+- `SelfAdjointQ` ([SelfAdjointMatrixQ](#SelfAdjointMatrixQ)): function to test if matrix is self-adjoint;
 - `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
