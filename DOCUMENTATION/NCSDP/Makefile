@@ -7,7 +7,8 @@ FILES = NCSDP.usage \
 	SDPFlat.usage \
 	SDPSylvester.usage \
 	PrimalDual.usage \
-	Sylvester.usage
+	Sylvester.usage \
+	SDP.private.usage
 
 all: $(FILES)
 

@@ -18,37 +18,20 @@ BeginPackage[ "SDP`",
 	      "NCDebug`"
 ]
 
-Clear[SDPEval];
-SDPEval::usage = "";
+Clear[SDPEval,
+      SDPDualEval,
+      SDPMatrices,
+      SDPSolve,
+      SDPPrimalEval,
+      SDPScale,
+      SDPSylvesterEval,
+      SDPSylvesterDiagonalEval,
+      SDPInner,
+      SDPFunctions,
+      SDPCheckDimensions];
 
-Clear[SDPPrimalEval];
-SDPPrimalEval::usage = "";
-
-Clear[SDPDualEval];
-SDPDualEval::usage = "";
-
-Clear[SDPScale];
-SDPScale::usage = "";
-
-Clear[SDPSylvesterEval];
-SDPSylvesterEval::usage = "";
-
-Clear[SDPSylvesterDiagonalEval];
-SDPSylvesterDiagonalEval::usage = "";
-
-Clear[SDPInner];
-
-Clear[SDPMatrices];
-SDPMatrices::usage = "";
-
-Clear[SDPFunctions];
-SDPFunctions::usage = "";
-
-Clear[SDPSolve];
-SDPSolve::usage = "";
-
-Clear[SDPCheckDimensions];
-SDPCheckDimensions::usage = "";
+Get["SDP.usage"];
+Get["SDP.private.usage"];
 
 SDP::ErrorInDimensions = "Dimension error: `1`";
 SDP::notLinear = "Expression is not linear.";

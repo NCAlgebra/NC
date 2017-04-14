@@ -120,6 +120,18 @@ See also:
 For example
 
 See also:
+[SDPDualEval](#SDPDualEval),
+[SDPSolve](#SDPSolve),
+[SDPMatrices](#SDPMatrices).
+
+### SDPDualEval {#SDPDualEval}
+
+`SDPDualEval[A, X]` evaluates the linear function $A^* X$ in an `SDP`.
+
+For example
+
+See also:
+[SDPEval](#SDPEval),
 [SDPSolve](#SDPSolve),
 [SDPMatrices](#SDPMatrices).
 
@@ -127,8 +139,6 @@ See also:
 
 
 ### SDPCheckDimensions {#SDPCheckDimensions}
-
-### SDPDualEval {#SDPDualEval}
 
 ### SDPFunctions {#SDPFunctions}
 
