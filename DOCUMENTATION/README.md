@@ -1,5 +1,5 @@
 -   [Acknowledgements](#acknowledgements)
--   [Changes in Version 5.0](#changes-in-version-5.0)
+-   [Changes in Version 5.0](#Version5_0)
 -   [Introduction](#UserGuideIntroduction)
     -   [Running NCAlgebra](#RunningNCAlgebra)
     -   [Now what?](#now-what)
@@ -129,17 +129,16 @@
         -   [NCInverse](#NCInverse)
         -   [NCMatrixExpand](#NCMatrixExpand)
     -   [NCMatrixDecompositions](#PackageNCMatrixDecompositions)
-        -   [NCLDLDecomposition](#NCLDLDecomposition)
-        -   [NCLeftDivide](#NCLeftDivide)
-        -   [NCLowerTriangularSolve](#NCLowerTriangularSolve)
-        -   [NCLUCompletePivoting](#NCLUCompletePivoting)
-        -   [NCLUDecompositionWithCompletePivoting](#NCLUDecompositionWithCompletePivoting)
         -   [NCLUDecompositionWithPartialPivoting](#NCLUDecompositionWithPartialPivoting)
+        -   [NCLUDecompositionWithCompletePivoting](#NCLUDecompositionWithCompletePivoting)
+        -   [NCLDLDecomposition](#NCLDLDecomposition)
+        -   [NCUpperTriangularSolve](#NCUpperTriangularSolve)
+        -   [NCLowerTriangularSolve](#NCLowerTriangularSolve)
         -   [NCLUInverse](#NCLUInverse)
         -   [NCLUPartialPivoting](#NCLUPartialPivoting)
-        -   [NCMatrixDecompositions](#NCMatrixDecompositions)
+        -   [NCLUCompletePivoting](#NCLUCompletePivoting)
+        -   [NCLeftDivide](#NCLeftDivide)
         -   [NCRightDivide](#NCRightDivide)
-        -   [NCUpperTriangularSolve](#NCUpperTriangularSolve)
     -   [MatrixDecompositions: linear algebra templates](#PackageMatrixDecompositions)
         -   [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting)
         -   [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting)
@@ -305,6 +304,19 @@ Acknowledgements
 ================
 
 This work was partially supported by the Division of Mathematical Sciences of the National Science Foundation.
+
+The program was written by the authors and:
+
+-   David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister, Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple.
+
+The beginnings of the program come from eran@slac.
+
+Considerable recent help came from Igor Klep.
+
+Major earlier contributions came from:
+
+-   Mark Stankus, Math, Cal Poly San Luis Obispo
+-   Robert L. Miller, General Atomics Corp
 
 Changes in Version 5.0
 ======================
@@ -3742,6 +3754,10 @@ See also: [NCInverse](#NCInverse), [NCDot](#NCDot).
 NCMatrixDecompositions
 ----------------------
 
+`NCMatrixDecompositions` provide noncommutative versions of the linear algebra algorithms in the package [MatrixDecompositions](#PackageMatrixDecompositions).
+
+See the documentation for the package [MatrixDecompositions](#PackageMatrixDecompositions) for details on the algorithms and options.
+
 Members are:
 
 -   Decompositions
@@ -3758,32 +3774,116 @@ Members are:
     -   [NCLeftDivide](#NCLeftDivide)
     -   [NCRightDivide](#NCRightDivide)
 
-### NCLDLDecomposition
+### NCLUDecompositionWithPartialPivoting
 
-### NCLeftDivide
+`NCLUDecompositionWithPartialPivoting` is a noncommutative version of [NCLUDecompositionWithPartialPivoting](#NCLUDecompositionWithPartialPivoting).
 
-### NCLowerTriangularSolve
+The following `options` can be given:
 
-### NCLUCompletePivoting
+-   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+-   `RightDivide` ([NCRightDivide](#NCRightDivide)): function used to divide a vector by an entry;
+-   `Dot` ([NCDot](#NCDot)): function used to multiply vectors and matrices;
+-   `Pivoting` ([NCLUPartialPivoting](#NCLUPartialPivoting)): function used to sort rows for pivoting;
+-   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+
+See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
 ### NCLUDecompositionWithCompletePivoting
 
-### NCLUDecompositionWithPartialPivoting
+`NCLUDecompositionWithCompletePivoting` is a noncommutative version of [NCLUDecompositionWithCompletePivoting](#NCLUDecompositionWithCompletePivoting).
+
+The following `options` can be given:
+
+-   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+-   `RightDivide` ([NCRightDivide](#NCRightDivide)): function used to divide a vector by an entry;
+-   `Dot` ([NCDot](#NCDot)): function used to multiply vectors and matrices;
+-   `Pivoting` ([NCLUCompletePivoting](#NCLUCompletePivoting)): function used to sort rows for pivoting;
+-   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+
+See also: [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).
+
+### NCLDLDecomposition
+
+`NCLDLDecomposition` is a noncommutative version of [LDLDecomposition](#LDLDecomposition).
+
+The following `options` can be given:
+
+-   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+-   `RightDivide` ([NCRightDivide](#NCRightDivide)): function used to divide a vector by an entry on the right;
+-   `LeftDivide` ([NCLeftDivide](#NCLeftDivide)): function used to divide a vector by an entry on the left;
+-   `Dot` (`NCDot`): function used to multiply vectors and matrices;
+-   `CompletePivoting` ([NCLUCompletePivoting](#NCLUCompletePivoting)): function used to sort rows for complete pivoting;
+-   `PartialPivoting` ([NCLUPartialPivoting](#NCLUPartialPivoting)): function used to sort matrices for complete pivoting;
+-   `Inverse` ([NCLUInverse](#NCLUInverse)): function used to invert 2x2 diagonal blocks;
+-   `SelfAdjointQ` ([SelfAdjointMatrixQ](#SelfAdjointMatrixQ)): function to test if matrix is self-adjoint;
+-   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+
+See also: [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).
+
+### NCUpperTriangularSolve
+
+`NCUpperTriangularSolve` is a noncommutative version of [UpperTriangularSolve](#UpperTriangularSolve).
+
+See also: [UpperTriangularSolve](#UpperTriangularSolve).
+
+### NCLowerTriangularSolve
+
+`NCLowerTriangularSolve` is a noncommutative version of [LowerTriangularSolve](#LowerTriangularSolve).
+
+See also: [LowerTriangularSolve](#LowerTriangularSolve).
 
 ### NCLUInverse
 
+`NCLUInverse` is a noncommutative version of [LUInverse](#LUInverse).
+
+See also: [LUInverse](#LUInverse).
+
 ### NCLUPartialPivoting
 
-### NCMatrixDecompositions
+`NCLUPartialPivoting` is a noncommutative version of [LUPartialPivoting](#LUPartialPivoting).
+
+See also: [LUPartialPivoting](#LUPartialPivoting).
+
+### NCLUCompletePivoting
+
+`NCLUCompletePivoting` is a noncommutative version of [LUCompletePivoting](#LUCompletePivoting).
+
+See also: [LUCompletePivoting](#LUCompletePivoting).
+
+### NCLeftDivide
+
+`NCLeftDivide[x,y]` divides each entry of the list `y` by `x` on the left.
+
+For example:
+
+    NCLeftDivide[x, {a,b,c}]
+
+returns
+
+    {inv[x]**a, inv[x]**b, inv[x]**c}
+
+See also: [NCRightDivide](#NCRightDivide).
 
 ### NCRightDivide
 
-### NCUpperTriangularSolve
+`NCRightDivide[x,y]` divides each entry of the list `x` by `y` on the right.
+
+For example:
+
+    NCRightDivide[{a,b,c}, y]
+
+returns
+
+    {a**inv[y], b**inv[y], c**inv[y]}
+
+See also: [NCLeftDivide](#NCLeftDivide).
 
 MatrixDecompositions: linear algebra templates
 ----------------------------------------------
 
-**MatrixDecompositions** is a package that implements various linear algebra algorithms, such as *LU Decomposition* with *partial* and *complete pivoting*, and *LDL Decomposition*. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for [NCAlgebra](http://math.ucsd.edu/~ncalg). See [NCMatrixDecompositions](#NCMatrixDecompositions).
+`MatrixDecompositions` is a package that implements various linear algebra algorithms, such as *LU Decomposition* with *partial* and *complete pivoting*, and *LDL Decomposition*. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for [NCAlgebra](http://math.ucsd.edu/~ncalg).
+
+See the package [NCMatrixDecompositions](#PackageNCMatrixDecompositions) for noncommutative versions of these algorithms.
 
 Members are:
 
@@ -3822,9 +3922,9 @@ The triangular factors are recovered using [GetLUMatrices](#GetLUMatrices).
 The following `options` can be given:
 
 -   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `RightDivide` (`RightDivide`): function used to divide a vector by an entry;
+-   `RightDivide` (`Divide`): function used to divide a vector by an entry;
 -   `Dot` (`Dot`): function used to multiply vectors and matrices;
--   `Pivoting` (`LUPartialPivoting`): function used to sort rows for pivoting;
+-   `Pivoting` ([LUPartialPivoting](#LUPartialPivoting)): function used to sort rows for pivoting;
 -   `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUPartialPivoting](#LUPartialPivoting).
@@ -3851,7 +3951,7 @@ The following `options` can be given:
 -   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
 -   `Divide` (`Divide`): function used to divide a vector by an entry;
 -   `Dot` (`Dot`): function used to multiply vectors and matrices;
--   `Pivoting` (`LUCompletePivoting`): function used to sort rows for pivoting;
+-   `Pivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for pivoting;
 
 See also: [LUDecomposition](#LUDecomposition), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
@@ -3875,13 +3975,13 @@ The triangular factors are recovered using [GetLDUMatrices](#GetLDUMatrices).
 The following `options` can be given:
 
 -   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `RightDivide` (`RightDivide`): function used to divide a vector by an entry on the right;
--   `LeftDivide` (`LeftDivide`): function used to divide a vector by an entry on the left;
+-   `RightDivide` (`Divide`): function used to divide a vector by an entry on the right;
+-   `LeftDivide` (`Divide`): function used to divide a vector by an entry on the left;
 -   `Dot` (`Dot`): function used to multiply vectors and matrices;
--   `CompletePivoting` (`LUCompletePivoting`): function used to sort rows for complete pivoting;
--   `PartialPivoting` (`LUPartialPivoting`): function used to sort matrices for complete pivoting;
+-   `CompletePivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for complete pivoting;
+-   `PartialPivoting` ([LUPartialPivoting](#LUPartialPivoting)): function used to sort matrices for complete pivoting;
 -   `Inverse` (`Inverse`): function used to invert 2x2 diagonal blocks;
--   `SelfAdjointQ` (`SelfAdjointMatrixQ`): function to test if matrix is self-adjoint;
+-   `SelfAdjointQ` ([SelfAdjointMatrixQ](#SelfAdjointMatrixQ)): function to test if matrix is self-adjoint;
 -   `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
@@ -4097,6 +4197,17 @@ Members are:
 
 ### NCRun
 
+`NCRun[command]` is a replacement for the built-in `Run` command that gives a bit more control over the execution process.
+
+`NCRun[command, options]` uses `options`.
+
+The following `options` can be given:
+
+-   `Verbose` (`True`): print information on command being run;
+-   `CommandPrefix` (`""`): prefix to `command`;
+
+See also: `Run`.
+
 NCTest
 ------
 
@@ -4281,11 +4392,13 @@ Members are:
     -   [NCPoly](#NCPoly)
     -   [NCPolyMonomial](#NCPolyMonomial)
     -   [NCPolyConstant](#NCPolyConstant)
+    -   [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray)
 -   Access and utilities
     -   [NCPolyMonomialQ](#NCPolyMonomialQ)
     -   [NCPolyDegree](#NCPolyDegree)
     -   [NCPolyNumberOfVariables](#NCPolyNumberOfVariables)
     -   [NCPolyCoefficient](#NCPolyCoefficient)
+    -   [NCPolyCoefficientArray](#NCPolyCoefficientArray)
     -   [NCPolyGetCoefficients](#NCPolyGetCoefficients)
     -   [NCPolyGetDigits](#NCPolyGetDigits)
     -   [NCPolyGetIntegers](#NCPolyGetIntegers)
@@ -4392,6 +4505,25 @@ constructs an object associated with the constant `3` in variables `x`, `y` and 
 
 See also: [NCPoly](#NCPoly), [NCPolyMonomial](#NCPolyMonomial).
 
+#### NCPolyFromCoefficientArray
+
+`NCPolyFromCoefficientArray[mat, vars]` returns an `NCPoly` constructed from the coefficient array `mat` in variables `vars`.
+
+For example, for `mat` equal to the `SparseArray` corresponding to the rules:
+
+    {{1} -> 1, {2} -> 2, {6} -> -1, {50} -> -2, {4} -> 3, {11} -> -3, {121} -> 1/2}
+
+the
+
+    vars = {{x},{y,z}};
+    NCPolyFromCoefficientArray[mat, vars]
+
+returns
+
+    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
+
+See also: [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray), [NCPolyCoefficient](#NCPolyCoefficient).
+
 ### Access and utlity functions
 
 #### NCPolyMonomialQ
@@ -4426,6 +4558,25 @@ returns
     c = -1
 
 See also: [NCPoly](#NCPoly), [NCPolyMonomial](#NCPolyMonomial).
+
+#### NCPolyCoefficientArray
+
+`NCPolyCoefficientArray[poly]` returns a coefficient array corresponding to the monomials in the nc polynomial `poly`.
+
+For example:
+
+    coeff = {1, 2, 3, -1, -2, -3, 1/2};
+    mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+    vars = {x,y,z};
+    poly = NCPoly[coeff, mon, vars];
+
+    mat = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];
+
+returns `mat` as a `SparseArray` corresponding to the rules:
+
+    {{1} -> 1, {2} -> 2, {6} -> -1, {50} -> -2, {4} -> 3, {11} -> -3, {121} -> 1/2}
+
+See also: [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray), [NCPolyCoefficient](#NCPolyCoefficient).
 
 #### NCPolyGetCoefficients
 

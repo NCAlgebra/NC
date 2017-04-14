@@ -166,9 +166,11 @@ Begin["`Private`"];
     
     (* Need to convert *)
     Return[
-      NCPoly[vars, KeyMap[ NCFromDigits[#, vars] &,
-                           KeyMap[NCIntegerDigits[#, p[[1]]] &, p[[2]]]
-    ]]];
+      NCPoly[vars, 
+             KeySort[ KeyMap[ NCFromDigits[#, vars] &,
+                              KeyMap[NCIntegerDigits[#, p[[1]]] &, 
+                                     p[[2]] ] ] ]
+    ]];
       
   ];
   
@@ -496,9 +498,15 @@ Begin["`Private`"];
     ];
     n = Total[vars];
 
+    If[ DegreeToIndex[IndexToDegree[Length[m], n], n] != Length[m]
+       , 
+        Message[NCPolyFromCoefficientArray::InvalidDegree];
+        Return[$Failed];
+    ];
+      
     degree = Apply[IndexToDegree[# - 1, n] &, 
                    rules[[All, 1]], {1}];
-    index = Map[DegreeToIndex[#, 2] &, degree];
+    index = Map[DegreeToIndex[#, n] &, degree];
     coeff = Transpose[{degree, Flatten[rules[[All,1]]] - index - 1}];
 
     (*

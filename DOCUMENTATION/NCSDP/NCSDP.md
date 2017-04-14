@@ -20,14 +20,37 @@ following canonical form:
 
     max  <obj, vars>  s.t.  inequalities <= 0.
 
+It returns a list with two entries:
+
+- The first is a list with the an instance of
+  [SDPSylvester](#SDPSylvester);
+- The second is a list of rules with properties of certain variables.
+
+Both entries should be supplied to [SDPSolve](#SDPSolve) in order to
+numerically solve the semidefinite program. For example:
+
+    {abc, rules} = NCSDP[F, vars, obj, data];
+	
+generates an instance of [SDPSylvester](#SDPSylvester) that can be
+solved using:
+
+    << SDPSylvester`
+    {Y, X, S, flags} = SDPSolve[abc, rules];
+
 `NCSDP` uses the user supplied rules in `data` to set up the problem
 data.
 
 `NCSDP[constraints,vars,data]` converts problem into a feasibility
 semidefinite program. 
 
+`NCSDP[inequalities,vars,obj,data,options]` uses `options`.
+
+The following `options` can be given:
+
+- `DebugLevel` (`0`): control printing of debugging information.
+
 See also:
-[NCSDPForm](#NCSDPForm), [NCSDPDual](#NCSDPDual).
+[NCSDPForm](#NCSDPForm), [NCSDPDual](#NCSDPDual), [SDPSolve](#SDPSolve).
 
 ### NCSDPForm {#NCSDPForm}
 
@@ -48,6 +71,16 @@ linear in the unknowns listed in `vars` with linear objective `obj`
 into a dual semidefinite in the following canonical form:
 
     max <dObj, dVars>  s.t.  dInequalities == 0,   dVars >= 0.
+
+`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj,dualVars]`
+uses the symbols in `dualVars` as `dVars`.
+
+`NCSDPDual[inequalities,vars,...,options]` uses `options`.
+
+The following `options` can be given:
+
+- `DualSymbol` (`w`): letter to be used as symbol for dual variable;
+- `DebugLevel` (`0`): control printing of debugging information.
 
 See also:
 [NCSDPDualForm](#NCSDPDualForm), [NCSDP](#NCSDP).

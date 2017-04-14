@@ -63,7 +63,7 @@ Begin[ "`Private`" ]
   SDPDualEval[A_List, X_List] := 
     Map[(Total[# * X, 3])&, A];
 
-  SDPEval = SDPPrimalEval;
+  SDPEval[A_List, {{y_List}}] := SDPPrimalEval[A, y];
 
   SDPScale[A_List, W_List] := SDPScale[A, W, W];
   SDPScale[A_List, Wl_List, Wr_List] :=  
@@ -235,20 +235,21 @@ Begin[ "`Private`" ]
       FSylvesterSolve, FSylvesterSolveFactored } 
       = SDPFunctions[{AA,BB,CC},opts];
 
-    (* Parse options *)
-    options = Flatten[{opts}];
-    If[ FSylvesterSolve =!= Null,
-      AppendTo[options, LeastSquaresSolver -> FSylvesterSolve];
-    ];
-    If[ FSylvesterSolveFactored =!= Null,
-      AppendTo[options, LeastSquaresSolverFactored -> FSylvesterSolveFactored];
-    ];
+    (* Options are passed directly to PrimalDual
+      options = Flatten[{opts}];
+      If[ FSylvesterSolve =!= Null,
+        AppendTo[options, LeastSquaresSolver -> FSylvesterSolve];
+      ];
+      If[ FSylvesterSolveFactored =!= Null,
+        AppendTo[options, LeastSquaresSolverFactored -> FSylvesterSolveFactored];
+      ];
+    *)
 
     (* Solve problem *)
     retValue = 
       PrimalDual[ FDualEval, FPrimalEval, 
                   FSylvesterEval, FSylvesterDiagonalEval, 
-		  BB, CC, Sequence @@ options ];
+		  BB, CC, opts ];
 
     Return[retValue];
 

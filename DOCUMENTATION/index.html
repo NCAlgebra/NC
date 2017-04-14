@@ -3011,6 +3011,16 @@ mon = NCPolyMonomial[{x,y,x},vars];</code></pre>
 <pre><code>NCPolyConstant[3, {x, y, z}]</code></pre>
 <p>constructs an object associated with the constant <code>3</code> in variables <code>x</code>, <code>y</code> and <code>z</code>.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
+<h4 id="NCPolyFromCoefficientArray"><span class="header-section-number">13.1.2.4</span> NCPolyFromCoefficientArray</h4>
+<p><code>NCPolyFromCoefficientArray[mat, vars]</code> returns an <code>NCPoly</code> constructed from the coefficient array <code>mat</code> in variables <code>vars</code>.</p>
+<p>For example, for <code>mat</code> equal to the <code>SparseArray</code> corresponding to the rules:</p>
+<pre><code>{{1} -&gt; 1, {2} -&gt; 2, {6} -&gt; -1, {50} -&gt; -2, {4} -&gt; 3, {11} -&gt; -3, {121} -&gt; 1/2}</code></pre>
+<p>the</p>
+<pre><code>vars = {{x},{y,z}};
+NCPolyFromCoefficientArray[mat, vars]</code></pre>
+<p>returns</p>
+<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 1, 0} -&gt; 2, {1, 0, 2} -&gt; 3, {1, 1, 1} -&gt; -1, {1, 1, 6} -&gt; -3, {1, 3, 9} -&gt; -2, {4, 0, 80} -&gt; 1/2|&gt;]</code></pre>
+<p>See also: <a href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a>, <a href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
 <h3 id="access-and-utlity-functions"><span class="header-section-number">13.1.3</span> Access and utlity functions</h3>
 <h4 id="NCPolyMonomialQ"><span class="header-section-number">13.1.3.1</span> NCPolyMonomialQ</h4>
 <p><code>NCPolyMonomialQ[poly]</code> returns <code>True</code> if <code>poly</code> is a <code>NCPoly</code> monomial.</p>
@@ -3039,11 +3049,9 @@ mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
 vars = {x,y,z};
 poly = NCPoly[coeff, mon, vars];
 
-c = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];</code></pre>
+mat = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];</code></pre>
 <p>returns <code>mat</code> as a <code>SparseArray</code> corresponding to the rules:</p>
 <pre><code>{{1} -&gt; 1, {2} -&gt; 2, {6} -&gt; -1, {50} -&gt; -2, {4} -&gt; 3, {11} -&gt; -3, {121} -&gt; 1/2}</code></pre>
-<p>and</p>
-<pre><code>d = {1, 1, 1}</code></pre>
 <p>See also: <a href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a>, <a href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
 <h4 id="NCPolyGetCoefficients"><span class="header-section-number">13.1.3.6</span> NCPolyGetCoefficients</h4>
 <p><code>NCPolyGetCoefficients[poly]</code> returns a list with the coefficients of the monomials in the nc polynomial <code>poly</code>.</p>

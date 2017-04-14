@@ -8,6 +8,7 @@ Members are:
     * [NCPoly](#NCPoly)
     * [NCPolyMonomial](#NCPolyMonomial)
     * [NCPolyConstant](#NCPolyConstant)
+    * [NCPolyConvert](#NCPolyConvert)
     * [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray)
 * Access and utilities
     * [NCPolyMonomialQ](#NCPolyMonomialQ)
@@ -148,18 +149,55 @@ See also:
 [NCPoly](#NCPoly),
 [NCPolyMonomial](#NCPolyMonomial).
 
+#### NCPolyConvert {#NCPolyConvert}
+
+`NCPolyConvert[poly, vars]` convert NCPoly `poly` to the ordering implied by `vars`.
+
+For example, if
+
+    vars1 = {{x, y, z}};
+    coeff = {1, 2, 3, -1, -2, -3, 1/2};
+    mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+    poly1 = NCPoly[coeff, mon, vars1];
+
+with respect to the ordering
+
+$x \ll y \ll z$
+
+then 
+	
+	vars2 = {{x},{y,z}};
+	poly2 = NCPolyConvert[poly, vars];
+	
+is the same polynomial as `poly1` but in the ordering
+
+$x \ll y < z$
+
+See also:
+[NCPoly](#NCPoly),
+[NCPolyCoefficient](#NCPolyCoefficient).
+
 #### NCPolyFromCoefficientArray {#NCPolyFromCoefficientArray}
 
 `NCPolyFromCoefficientArray[mat, vars]` returns an `NCPoly` constructed from the coefficient array `mat` in variables `vars`.
 
-For example:
+For example, for `mat` equal to the `SparseArray` corresponding to the rules:
 
-returns `mat` as a `SparseArray` corresponding to the rules:
+    {{1} -> 1, {2} -> 2, {6} -> -1, {50} -> -2, {4} -> 3, {11} -> -3, {121} -> 1/2}
+
+the 
+
+    vars = {{x},{y,z}};
+    NCPolyFromCoefficientArray[mat, vars]
+
+returns 
+
+	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, 
+	       {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
 
 See also:
-[NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray),
+[NCPolyCoefficientArray](#NCPolyCoefficientArray),
 [NCPolyCoefficient](#NCPolyCoefficient).
-
 
 ### Access and utlity functions
 

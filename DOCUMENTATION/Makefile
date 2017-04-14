@@ -56,8 +56,8 @@ MANUAL = MANUAL/Preamble.md \
 	 NCPoly/NCPoly.md \
 	 NCPoly/NCPolyInterface.md \
 	 NCAlgebra/NCPolynomial.md \
-	 NCAlgebra/NCSylvester.md \
 	 NCAlgebra/NCQuadratic.md \
+	 NCAlgebra/NCSylvester.md \
          MANUAL/Algorithms.md \
 	 NCAlgebra/NCConvexity.md \
 	 NCSDP/NCSDP.md \

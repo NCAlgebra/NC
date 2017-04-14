@@ -61,6 +61,7 @@ NCPoly::SizeMismatch = "Number of monomials and coefficients do not match.";
 NCPoly::InvalidList = "Invalid list of variables.";
 NCMonomialToDigits::InvalidSymbol = "Monomial contain symbol not present in variable list";
 NCPolyCoefficientArray::InvalidDegree = "Provided degree has to be greater or equal to the polynomial degree.";
+NCPolyFromCoefficientArray::InvalidDegree = "Array size does not match an integer degree.";
 
 Begin["`Private`"];
 

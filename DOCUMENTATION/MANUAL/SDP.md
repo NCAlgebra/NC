@@ -83,12 +83,12 @@ Equipped with the above list of rules representing a problem instance
 one can load [`SDPSylvester`](#SDPSylvester) and use `NCSDP` to create
 a problem instance as follows:
 
-    << SDPSylvester`
     {abc, rules} = NCSDP[ineqs, vars, obj, data];
 
 The resulting `abc` and `rules` objects are used for calculating the
 numerical solution using [`SDPSolve`](#SDPSolve). The command:
 
+    << SDPSylvester`
     {Y, X, S, flags} = SDPSolve[abc, rules];
 	
 produces an output like the folowing:
@@ -182,7 +182,7 @@ For example, problems can be stated as:
 $$
 \begin{aligned} 
   \min_y \quad & f(y), \\
-  \text{s.t.} \quad & G(y) >= 0
+  \text{s.t.} \quad & G(y) \succeq 0
 \end{aligned}
 $$
 where $f(y)$ and $G(y)$ are affine functions of the vector
