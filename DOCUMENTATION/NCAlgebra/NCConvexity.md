@@ -28,7 +28,7 @@ return *True* while
 all return *False*.
 
 See also:
-[NCConvexity](#NCConvexity).
+[NCConvexityRegion](#NCConvexityRegion).
 
 ### NCConvexityRegion {#NCConvexityRegion}
 

@@ -63,6 +63,7 @@ MANUAL = MANUAL/Preamble.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
 	 NCSDP/SDPSylvester.md \
+	 NCSDP/PrimalDual.md \
 	 NCPoly/NCGBX.md \
 	 NCPoly/NCPolyGroebner.md \
          MANUAL/WorkInProgress.md \

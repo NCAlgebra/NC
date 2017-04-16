@@ -33,7 +33,7 @@ See also:
 `NCPToNCQuadratic` returns a list with four elements:
 
 * the first element is the independent term;
-* the second represents the linear part as in [`NCSylvester`](#NCSylvester);
+* the second represents the linear part as in [`NCSylvester`](#PackageNCSylvester);
 * the third element is a list of left NC symbols;
 * the fourth element is a numeric `SparseArray`;
 * the fifth element is a list of right NC symbols.
@@ -54,7 +54,7 @@ produces
 	right = {x,y**d}
 
 See also:
-[NCSylvester](#NCSylvester),[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
+[NCSylvester](#PackageNCSylvester),[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
 
 ### NCQuadraticMakeSymmetric {#NCQuadraticMakeSymmetric}
 

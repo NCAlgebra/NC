@@ -4,11 +4,11 @@ MD2USAGE_OPTIONS = -H "\#\#\#"
 
 FILES = NCSDP.usage \
 	SDP.usage \
+	SDP.private.usage \
 	SDPFlat.usage \
 	SDPSylvester.usage \
 	PrimalDual.usage \
 	Sylvester.usage \
-	SDP.private.usage
 
 all: $(FILES)
 

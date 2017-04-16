@@ -1,0 +1,40 @@
+<< SDP`
+<< SDPFlat`
+<< SDPSeDuMi`
+
+Begin["NCTest`Local`"];
+
+Module[
+  {A, b, y, sdp,
+   X, Y, S, flags,
+   AA, BB, CC
+  },
+
+  RunTest[problem_, answer_] := Module[
+    {AA, BB, CC},
+
+    {AA,BB,CC} = SDPImport[problem];
+
+    {Y, X, S, flags} = SDPSolve[{AA, BB, CC}];
+    exp = -SDPInner[BB, Y];
+    (* Print["exp = ", exp]; *)
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True];
+
+    exp = -SDPInner[CC, X];
+    (* Print["exp = ", exp]; *)
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True];
+
+  ];
+
+  problems = { 
+    {"data/arch0", 0.56652},
+    {"data/trto3", 1},
+    {"data/OH_2Pi_STO-6GN9r12g1T2", 1},
+    {"data/control07", 126.734}
+  };
+
+  Map[RunTest @@ ##&, problems];
+
+];
+
+End[];

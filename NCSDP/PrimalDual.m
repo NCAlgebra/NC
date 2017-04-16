@@ -17,7 +17,6 @@ BeginPackage[ "PrimalDual`",
  	      "NesterovTodd`",
               "Kronecker`",
               "MatrixVector`",
-              "CG`",
               "RationalApproximate`",
               "NCDebug`" 
 ]
@@ -28,12 +27,14 @@ PrimalDual::HessianNotPositiveDefinite = "Hessian is no longer positive definite
 PrimalDual::linearDependence = "SDP most likely contain linearly dependent columns or is unbounded. Try adding additional constraints.";
 PrimalDual::lineSearch = "Line search failed";
 PrimalDual::unproductive = "Unproductive iteration. Aborting.";
+PrimalDual::InvalidSearchDirection = "Search direction `1` is invalid. Supported search directions are NT, KSH and KSHDual";
+PrimalDual::InvalidMethod = "Method `1` is invalid. Supported methods are PredictorCorrector, LongStep, ShortStep";
 
 Clear[
-  Direct, CG,
-  NT, KSH, KSHDual, AHO,
-  ShortStep, LongStep, PredictorCorrector, Profiling,
-  SparseWeights
+  Direct,
+  NT, KSH, KSHDual,
+  ShortStep, LongStep, PredictorCorrector, 
+  Profiling, SparseWeights
 ];
 
 Options[PrimalDual] = {
@@ -45,9 +46,6 @@ Options[PrimalDual] = {
   GapTol -> 10.^(-9),
   FeasibilityTol -> 10.^(3) * GapTol,
   MaxIter -> 250,
-  CGTol -> 10.^(-3),
-  CGMaxIter -> Infinity,
-  CGPreconditioner -> Diagonal,
   ScaleHessian -> True,
   SparseWeights -> True,
   RationalizeIterates -> False,
@@ -169,7 +167,7 @@ Begin[ "`Private`" ]
 	 primalFeasRadius, dualFeasRadius, dualFeasMargin,
 	 primalFeasible, dualFeasible,
 	 (* performance *)
-	 cgK, iters = {},
+	 iters = {}, flags,
          (* TODO: local variables *)
          FYkmC
       },
@@ -233,19 +231,6 @@ Begin[ "`Private`" ]
           /. options
           /. Options[PrimalDual, MaxIter];
 
-    cgTol = CGTol
-          /. options
-          /. Options[PrimalDual, CGTol];
-
-    cgMaxIter = CGMaxIter
-          /. options
-          /. Options[PrimalDual, CGMaxIter];
-    cgK = cgMaxIter;
-
-    cgPreconditioner = CGPreconditioner
-          /. options
-          /. Options[PrimalDual, CGPreconditioner];
-
     symmetricVariables = SymmetricVariables 
           /. options
           /. Options[PrimalDual, SymmetricVariables];
@@ -264,6 +249,22 @@ Begin[ "`Private`" ]
 
     SetOptions[NCDebug, DebugLevel -> debugLevel];
 
+    (* Check options *)
+    If[ !MatchQ[searchDirection, NT|KSH|KSHDual],
+         Message[PrimalDual::InvalidSearchDirection, 
+                 searchDirection];
+         Return[{$Failed,$Failed,$Failed,$Failed}];
+    ];
+    If[ !MatchQ[method, PredictorCorrector|ShortStep|LongStep],
+         Message[PrimalDual::InvalidMethod, 
+                 method];
+         Return[{$Failed,$Failed,$Failed,$Failed}];
+    ];
+    If[ rationalizeIterates && sparseWeights,
+        sparseWeights = False;
+    ];
+        
+        
     (* get block dimensions of CC and BB *)
     dimcc = MatrixVectorBlockDimensions[CC];
     dimbb = MatrixVectorBlockDimensions[BB]; 
@@ -282,10 +283,8 @@ Begin[ "`Private`" ]
     syms = Table[ False, {i, Length[BB]}];
     Part[ syms, symmetricVariables ] = True;
 
-    NCDebug[ 2, syms ];
-
     NCDebug[ 2, 
-             dimcc, dimbb, mi, n, numcons ];
+             syms, dimcc, dimbb, mi, n, numcons ];
 
     (* initialization *)
     EyeCC = MatrixVectorPartition[
@@ -344,7 +343,8 @@ Begin[ "`Private`" ]
     (* augmented system dimenstions *)
     NN = n + 1;
 
-    Switch [ method, 
+    Switch [
+        method, 
         ShortStep, 
 
 	(* short step algorithm *)
@@ -362,9 +362,6 @@ Begin[ "`Private`" ]
     mu0 = (Total[MapThread[Total[Flatten[#1*#2]]&, {Xk, Sk}]] + tauk*rhok) / NN;
     muk = mu0;
 
-    NCDebug[ 2, 
-             mu0 ];
-
     (* neighborhoods *)
     mukiXkSk = MatrixVectorDot[Xk, Sk] / muk;
     N2 = Sqrt[
@@ -377,7 +374,7 @@ Begin[ "`Private`" ]
       - Min[Min[MatrixVectorEigenvalues[MatrixVectorDot[Xk, Sk]]], tauk*rhok];
 
     NCDebug[ 2, 
-             N2, Noo, Dmoo ];
+             mu0, N2, Noo, Dmoo ];
 	              
     (* Print Header *)
 
@@ -400,12 +397,6 @@ Begin[ "`Private`" ]
         If[ rationalizeIterates, 
             SequenceForm["\t(tol = ", ScientificForm[rationalizeTol], ")" ],
             "" ]];
-      If [ leastSquares === CG,
-        Print["\n CG Options:"];
-        Print[" * CG tolerance            = ", ScientificForm[cgTol]];
-        Print[" * CG maximum # iterations = ", ScientificForm[cgMaxIter]];
-        Print[" * CG preconditioner       = ", cgPreconditioner];
-      ];
       Print["\n Other options:"];
       Print[" * Debug level             = ", debugLevel];
 
@@ -416,48 +407,35 @@ Begin[ "`Private`" ]
     If [ printIterations, 
       (* Print Header *)
 
-      If[ leastSquares === CG, 
-        Print["                                                                        ",
-              " Conj Grad"];
-        Print["                                                                        ",
-              "-----------"];
-      ];
-
       Print["  K     <B, Y>         mu  theta/tau      alpha",
       	    "     |X S|2    |X S|oo ",
-            " |A* X-B|   |A Y+S-C|",
-            If[ leastSquares === CG, "      #      res", "" ]
+            " |A* X-B|   |A Y+S-C|"
       ];
       Print[" -----------------------------------------------------",
-            "--------------------------------------",
-            If[ leastSquares === CG, "-----------------", "" ]
+            "--------------------------------------"
       ];
     ];
 
-    (* If[ searchDirection === NT, *)
+    NCDebug[ 1, "* Initializing computations"];
 
-      NCDebug[ 1, "* Initializing NT computations"];
+    (* initial Rk and RkSolve for calculating W *)
+    plnSk = MatrixVectorBlockMatrix[Sk];
+    plnXk = MatrixVectorBlockMatrix[Xk];
 
-      (* initial Rk and RkSolve for calculating W *)
-      plnSk = MatrixVectorBlockMatrix[Sk];
-      plnXk = MatrixVectorBlockMatrix[Xk];
+    (* R^T R = S *)
+    Rk = Map[CholeskyDecomposition, plnSk];
+    Rkt = Map[ Transpose, Rk ];
+    tRktSolve = Map[ LinearSolve, Rkt ];
+    RktSolve = MapThread[ #1[#2]&, {tRktSolve, #} ]&;
 
-      (* R^T R = S *)
-      Rk = Map[CholeskyDecomposition, plnSk];
-      Rkt = Map[ Transpose, Rk ];
-      tRktSolve = Map[ LinearSolve, Rkt ];
-      RktSolve = MapThread[ #1[#2]&, {tRktSolve, #} ]&;
+    (* L^T L = X *)
+    Lk = Map[CholeskyDecomposition, plnXk];
+    Lkt = Map[ Transpose, Lk ];
+    tLktSolve = Map[ LinearSolve, Lkt ];
+    LktSolve = MapThread[ #1[#2]&, {tLktSolve, #} ]&;
 
-      (* L^T L = X *)
-      Lk = Map[CholeskyDecomposition, plnXk];
-      Lkt = Map[ Transpose, Lk ];
-      tLktSolve = Map[ LinearSolve, Lkt ];
-      LktSolve = MapThread[ #1[#2]&, {tLktSolve, #} ]&;
+    NCDebug[ 4, plnSk, plnSk, Rk, Lk ];
 
-      NCDebug[ 4, plnSk, plnSk, Rk, Lk ];
-
-    (* ]; *)
-     
     (* start of the numerical search *)
     success = True;
     While[ (muk > gapTol && counter < maxIter),
@@ -476,7 +454,8 @@ Begin[ "`Private`" ]
 
       timeSD = Timing[
 
-        Switch [ searchDirection,
+        Switch [ 
+          searchDirection,
 
           (* Nesterov-Todd direction *)
 
@@ -514,7 +493,7 @@ Begin[ "`Private`" ]
 
 	    Wkl = Ski;
   	    Wkr = Xk;
-
+           
         ];
 
       ];
@@ -577,7 +556,7 @@ Begin[ "`Private`" ]
              Check[
 
                 tHkSolve = LinearSolve[Hk, Method -> "Cholesky"];
-
+                 
                ,
 
 	        Message[PrimalDual::HessianNotPositiveDefinite];
@@ -613,6 +592,7 @@ Begin[ "`Private`" ]
                            , 
 			   (tHkSolve[# / HkSqrtDiag] / HkSqrtDiag)&
 	     ];
+             
 
          ];
 
@@ -623,48 +603,28 @@ Begin[ "`Private`" ]
 
       timePredictor = Timing [      
 
-           NCDebug[ 1, "* Computing RHS of (Predictor) Sylvester equation"];
+          NCDebug[ 1, "* Computing RHS of (Predictor) Sylvester equation"];
 
-           (* calculate RHS of Predictor Sylvester equation *)
-           If[ method === PredictorCorrector, 
-               Pk = Xk;
-	       pk = rhok;
-              ,
-	       Pk = Xk - sigmak * muk * Ski;
-	       pk = rhok - sigmak*muk/tauk;
- 	   ];
-           Pktau = MapThread[Dot, {Wkl, CC, Wkr}];
-           Pktau = (Pktau + Map[Transpose, Pktau])/2; 
+          (* calculate RHS of Predictor Sylvester equation *)
+          If[ method === PredictorCorrector, 
+              Pk = Xk;
+              pk = rhok;
+             ,
+              Pk = Xk - sigmak * muk * Ski;
+              pk = rhok - sigmak*muk/tauk;
+          ];
+          Pktau = MapThread[Dot, {Wkl, CC, Wkr}];
+          Pktau = (Pktau + Map[Transpose, Pktau])/2; 
 
-           Pktheta = MapThread[Dot, {Wkl, CCbar, Wkr}];
-           Pktheta = (Pktheta + Map[Transpose, Pktheta])/2; 
+          Pktheta = MapThread[Dot, {Wkl, CCbar, Wkr}];
+          Pktheta = (Pktheta + Map[Transpose, Pktheta])/2; 
 
-           If[ rationalizeIterates,
-               pk = RationalApproximate[pk, rationalizeTol];
-               Pk = RationalApproximate[Pk, rationalizeTol];
-               Pktau = RationalApproximate[Pktau, rationalizeTol];
-               Pktheta = RationalApproximate[Pktheta, rationalizeTol];
-           ];
-
-	   (* 
-	      CGLS[F, G, h1, h2, x0]
-
-	      G -> A^* = FPrimalEval
-	      F -> (1/2) (E A F + F A E) = Wk FDualEval Wk
-	      h1 -> Pk
-	      h2 -> 0
-
-              ( * Run conjugate gradient * )
-
-              {ddYk, {cgRes, cgK}} = 
-              CGLS[ MatrixVectorDot[Wkl, FDualEval @@ ##, Wkr]&, 
-                    (FPrimalEval @@ ##)&, 
- 	   	    Pk, 0*BB, 
-	   	    dY0, 
-                    10.^(-4), 1000, inner, Identity, True, 10
-              ];
-
- 	   *)
+          If[ rationalizeIterates,
+              pk = RationalApproximate[pk, rationalizeTol];
+              Pk = RationalApproximate[Pk, rationalizeTol];
+              Pktau = RationalApproximate[Pktau, rationalizeTol];
+              Pktheta = RationalApproximate[Pktheta, rationalizeTol];
+          ];
 
           NCDebug[ 1, "*   Flatten right hand sides"];
 
@@ -957,22 +917,24 @@ Begin[ "`Private`" ]
 
 	         (* Compute corrector term *)
 
-	         Kk = Switch [ searchDirection,
+	         Kk = Switch [ searchDirection
 
 		              (* Nesterov-Todd direction *)
 
-        		      NT, 
+        		     , NT , 
 
 			      (* Calculate Kk *)
 			      NesterovToddCorrector[ dXk, dSk, Gk, dk ]
 
-                             ,
-
-			      KSH,
+                             , KSH ,
 
 			      (* Calculate Kk *)
 			      MapThread[Dot, {dXk, dSk, Ski} ]
 
+			     , KSHDual ,
+
+			      (* Calculate Kk *)
+			      MapThread[Dot, {dXk, dSk, Ski} ]
                  ];
 
 		 (* Symmetrize Kk *)
@@ -1452,26 +1414,23 @@ Begin[ "`Private`" ]
                " ", PrintNumber[N[N2]], 
                " ", PrintNumber[N[Noo]], 
                " ", PrintNumber[N[NFeasPrimal]], 
-               " ", PrintNumber[N[NFeasDual]], 
-               "", 
-               If[ leastSquares === CG, PaddedForm[cgK,4], "    " ],
-               "", 
-               If[ leastSquares === CG, PrintNumber[N[cgRes]], "      " ]
+               " ", PrintNumber[N[NFeasDual]]
         ];
       ];
 
-      (* report performance *)
-      If[ leastSquares === CG, 
-        iters = Join[iters, {{counter, -obj, muk, Abs[thetak], cgK, cgRes}}],
-	iters = Join[iters, {{counter, -obj, muk, Abs[thetak]}}]
+      If[ debugLevel > 1,
+          (* report performance *)
+          AppendTo[iters, 
+                   {counter, -obj, muk, 
+                    NFeas, alpha, N2, Noo, 
+                    NFeasPrimal, NFeasDual}];
       ];
 
     ];
 
     If [ printIterations, 
       Print[" -----------------------------------------------------",
-            "--------------------------------------",
-            If[ leastSquares === CG, "----------------", "" ]
+            "--------------------------------------"
       ];
     ];
 
@@ -1573,15 +1532,15 @@ Begin[ "`Private`" ]
     ];
 
     (* numerical result *)
-    Return[{Yk, Xk, Sk, 
-            {
+    flags = {
              PrimalDual`FeasibilityRadius -> dualFeasRadius, 
              PrimalDual`PrimalFeasible -> dualFeasible, 
              PrimalDual`PrimalFeasibilityMargin -> dualFeasMargin, 
              PrimalDual`DualFeasible -> primalFeasible,
              PrimalDual`DualFeasibilityRadius -> primalFeasRadius
-            }
-           }];
+            };
+    If[ debugLevel > 1, AppendTo[flags, PrimalDual`Iterations -> iters] ];
+    Return[{Yk, Xk, Sk, flags}];
 
   ];
 
