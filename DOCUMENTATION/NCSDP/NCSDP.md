@@ -29,7 +29,7 @@ It returns a list with two entries:
 Both entries should be supplied to [SDPSolve](#SDPSolve) in order to
 numerically solve the semidefinite program. For example:
 
-    {abc, rules} = NCSDP[F, vars, obj, data];
+    {abc, rules} = NCSDP[inequalities, vars, obj, data];
 	
 generates an instance of [SDPSylvester](#SDPSylvester) that can be
 solved using:
@@ -40,7 +40,7 @@ solved using:
 `NCSDP` uses the user supplied rules in `data` to set up the problem
 data.
 
-`NCSDP[constraints,vars,data]` converts problem into a feasibility
+`NCSDP[inequalities,vars,data]` converts problem into a feasibility
 semidefinite program. 
 
 `NCSDP[inequalities,vars,obj,data,options]` uses `options`.
@@ -79,7 +79,7 @@ uses the symbols in `dualVars` as `dVars`.
 
 The following `options` can be given:
 
-- `DualSymbol` (`w`): letter to be used as symbol for dual variable;
+- `DualSymbol` (`"w"`): letter to be used as symbol for dual variable;
 - `DebugLevel` (`0`): control printing of debugging information.
 
 See also:

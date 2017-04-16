@@ -62,6 +62,7 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCConvexity.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
+	 NCSDP/SDPSylvester.md \
 	 NCPoly/NCGBX.md \
 	 NCPoly/NCPolyGroebner.md \
          MANUAL/WorkInProgress.md \

@@ -167,8 +167,8 @@ as in:
 Semidefinite programs are optimization problems of the form:
 $$
 \begin{aligned}
-  \min_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + c = S \\
+  \max_{y, S} \quad & b^T y \\
+  \text{s.t.} \quad & A y + S = c \\
                     & S \succeq 0
 \end{aligned}
 $$

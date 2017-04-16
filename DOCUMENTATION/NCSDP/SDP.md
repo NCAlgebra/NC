@@ -18,17 +18,7 @@ Members are:
 * [SDPMatrices](#SDPMatrices)
 * [SDPSolve](#SDPSolve)
 * [SDPEval](#SDPEval)
-* [SDPInner](#SDPInner)
-
-The following members are not supposed to be called directly by users:
-
-* [SDPCheckDimensions](#SDPCheckDimensions)
-* [SDPScale](#SDPScale)
-* [SDPFunctions](#SDPFunctions)
-* [SDPPrimalEval](#SDPPrimalEval)
 * [SDPDualEval](#SDPDualEval)
-* [SDPSylvesterEval](#SDPSylvesterEval)
-* [SDPSylvesterDiagonalEval](#SDPSylvesterDiagonalEval)
 
 ### SDPMatrices {#SDPMatrices}
 
@@ -134,24 +124,4 @@ See also:
 [SDPEval](#SDPEval),
 [SDPSolve](#SDPSolve),
 [SDPMatrices](#SDPMatrices).
-
-### SDPInner {#SDPInner}
-
-
-### SDPCheckDimensions {#SDPCheckDimensions}
-
-### SDPFunctions {#SDPFunctions}
-
-### SDPPrimalEval {#SDPPrimalEval}
-
-
-### SDPScale {#SDPScale}
-
-
-
-
-### SDPSylvesterDiagonalEval {#SDPSylvesterDiagonalEval}
-
-
-### SDPSylvesterEval {#SDPSylvesterEval}
 

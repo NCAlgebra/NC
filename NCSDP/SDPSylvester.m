@@ -31,7 +31,8 @@ Begin[ "`Private`" ]
 
   (* SDPFunctions *)
 
-  SDPFunctions[AA_List,BB_List,CC_List,syms_List] := Module[ 
+  Clear[SDPFunctionsAux];
+  SDPFunctionsAux[AA_List,BB_List,CC_List,syms_List] := Module[ 
     { FDualEval, FPrimalEval, 
       FSylvesterEval, FSylvesterDiagonalEval,
       FSylvesterSolve, FSylvesterSolveFactored }, 
@@ -67,7 +68,7 @@ Begin[ "`Private`" ]
 
     NCDebug[3, syms];
 
-    Return[ SDPFunctions[AA,BB,CC,syms] ];
+    Return[ SDPFunctionsAux[AA,BB,CC,syms] ];
 
   ];
 

@@ -35,7 +35,11 @@ Module[
 
   data = {a -> A};
 
-  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+  Quiet[
+     {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
 
   Idn = IdentityMatrix[n];
   Ze = ConstantArray[0, {n,n}];
@@ -58,7 +62,11 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
-  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+  Quiet[
+     {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
  
   answer = {w1,w2};
   NCTest[dVars, answer];
@@ -80,7 +88,11 @@ Module[
   Q = {{2, 1}, {1, 2}};
   data = {a -> A, q -> Q};
 
-  {abc, rules} = NCSDP[F, vars, obj, data, UserRules -> {tp[q] -> q}, DebugLevel -> 0];
+  Quiet[
+     {abc, rules} = NCSDP[F, vars, obj, data, UserRules -> {tp[q] -> q}, DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
 
   answer = {
     {
@@ -101,7 +113,11 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
-  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+  Quiet[
+     {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
  
   answer = {w1,w2};
   NCTest[dVars, answer];
@@ -124,8 +140,12 @@ Module[
   B = A . A;
   data = {a -> A, b -> B, q -> Q};
 
-  {abc, rules} = NCSDP[F, vars, obj, data, UserRules -> {tp[q] -> q}, DebugLevel -> 0];
-
+  Quiet[
+     {abc, rules} = NCSDP[F, vars, obj, data, UserRules -> {tp[q] -> q}, DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
+   
   answer = {
     {
       {ArrayFlatten[{{A, B}}], ArrayFlatten[{{2 Idn, Transpose[B]}}]}
@@ -145,7 +165,11 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
-  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+  Quiet[
+     {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
  
   answer = {w1,w2};
   NCTest[dVars, answer];
@@ -170,7 +194,11 @@ Module[
   Ze = ConstantArray[0, {nx,nx}];
   Zemn = ConstantArray[0, {nu,nx}];
 
-  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+  Quiet[
+     {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
 
   answer = {
     {
@@ -191,7 +219,11 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
-  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+  Quiet[
+     {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
  
   answer = {w1,w2};
   NCTest[dVars, answer];
@@ -220,7 +252,11 @@ Module[
   IdW=ArrayFlatten[{{Idm},{Zenm}}];
   Zenpm=ConstantArray[0,{nx+nu,nx+nu}];
 
-  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+  Quiet[
+     {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
 
   answer = {
     {{A,2 Idn},{B,2 Idn},{Zenm,Transpose[Zenm]}},(* A X + B L < -I *)
@@ -237,8 +273,12 @@ Module[
   answer = SymmetricVariables->{1,3};
   NCTest[rules, answer];
 
-  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
- 
+  Quiet[
+     {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
+     
   answer = {w1,{{Subscript[w2,1,1],tp[Subscript[w2,2,1]]},{Subscript[w2,2,1],Subscript[w2,2,2]}}};
   NCTest[dVars, answer];
 
@@ -259,8 +299,12 @@ Module[
   obj = {};
 
   data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
-  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
-
+  Quiet[
+     {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
+    
   Zepp=ConstantArray[0,{nz,nz}];
   Zenp=ConstantArray[0,{nx,nz}];
   answer = {
@@ -280,8 +324,12 @@ Module[
   answer = SymmetricVariables->{1};
   NCTest[rules, answer];
 
-  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
-
+  Quiet[
+     {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w"];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
+ 
   answer = {-w2 + tp[a] ** Subscript[w1,1,1] + Subscript[w1,1,1] ** a
                 + tp[c1] ** Subscript[w1,2,1] + tp[Subscript[w1,2,1]] ** c1, 
             2 tp[b] ** Subscript[w1,1,1] + 2 tp[d12] ** Subscript[w1,2,1]};
@@ -302,7 +350,11 @@ Module[
   vars = {x, y, w};
   obj = {0, 0, -1};
 
-  {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+  Quiet[
+     {abc, rules} = NCSDP[F, vars, obj, data, DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
 
   answer = {
     {{ArrayFlatten[{{A},{C1}}], 2 ArrayFlatten[{{Idn,Zenp}}]},
@@ -318,7 +370,11 @@ Module[
   answer = { -ArrayFlatten[{{B1 . Transpose[B1], Zenp}, {Transpose[Zenp], -Idpp}}], Zenpm};
   NCTest[abc[[3]], answer];
 
-  {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w", DebugLevel -> 0];
+  Quiet[
+     {dF, dVars, dObj} = NCSDPDual[F, vars, obj, DualSymbol -> "w", DebugLevel -> 0];
+    ,
+     NCSymmetricQ::SymmetricVariables
+  ];
  
   answer = {{{Subscript[w1,1,1],tp[Subscript[w1,2,1]]},{Subscript[w1,2,1],Subscript[w1,2,2]}}, {{Subscript[w2,1,1],tp[Subscript[w2,2,1]]},{Subscript[w2,2,1],Subscript[w2,2,2]}}};
   NCTest[dVars, answer];
