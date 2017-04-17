@@ -51,21 +51,14 @@ Begin[ "`Private`" ]
   SDPFunctions[AA_List, AFlat_SparseArray,
                CFlat_, dims_List ] :=
   Module[ 
-    { FDualEval, FPrimalEval, 
-      FSylvesterEval, FSylvesterDiagonalEval,
-      FSylvesterSolve, FSylvesterSolveFactored }, 
+    { FDualEval, FPrimalEval, FSylvesterEval }, 
 
     FDualEval = {{SDPFlatDualEval[AFlat, {##}]}}&;
     FPrimalEval = SDPFlatPrimalEval[AFlat, dims, ##[[1]]]&;
     FSylvesterEval = SDPFlatSylvesterEval[AA, AFlat, #1, #2]&;
-    FSylvesterDiagonalEval = SDPSylvesterDiagonalEval[AA, #1, #2]&;
-    FSylvesterSolve = Null;
-    FSylvesterSolveFactored = Null;
 
     (* Return *)
-    Return[ {FDualEval, FPrimalEval, 
-	     FSylvesterEval, FSylvesterDiagonalEval, 
-	     FSylvesterSolve, FSylvesterSolveFactored} ];
+    Return[ {FDualEval, FPrimalEval, FSylvesterEval} ];
 
   ];
 

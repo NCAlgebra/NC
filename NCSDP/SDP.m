@@ -25,7 +25,6 @@ Clear[SDPEval,
       SDPPrimalEval,
       SDPScale,
       SDPSylvesterEval,
-      SDPSylvesterDiagonalEval,
       SDPInner,
       SDPFunctions,
       SDPCheckDimensions];
@@ -60,10 +59,12 @@ Begin[ "`Private`" ]
   SDPSylvesterEval[A_List, Wl_List, Wr_List] := 
     Map[(SDPDualEval[A,#])&, SDPScale[A, Wl, Wr]];
 
+  (*
   SDPSylvesterDiagonalEval[A_List, W_List] := 
     SDPSylvesterDiagonalEval[A, W, W];
   SDPSylvesterDiagonalEval[A_List, Wl_List, Wr_List] := 
     MapThread[Total[#1 * #2, 3]&, {A, SDPScale[A, Wl, Wr]}];
+  *)
 
   (* Dimension checking *)
   SDPCheckDimensions[A_List,B_List,C_List] := Module[ 
@@ -183,9 +184,7 @@ Begin[ "`Private`" ]
   (* SDPFunctions *)
 
   SDPFunctions[{AA_List,BB_List,CC_List},opts:OptionsPattern[{}]] := Module[ 
-    { FDualEval, FPrimalEval, 
-      FSylvesterEval, FSylvesterDiagonalEval,
-      FSylvesterSolve, FSylvesterSolveFactored }, 
+    { FDualEval, FPrimalEval, FSylvesterEval }, 
 
     (* Check dimensions *)
     SDPCheckDimensions[AA,BB,CC];
@@ -193,45 +192,25 @@ Begin[ "`Private`" ]
     FDualEval = {{SDPDualEval[AA, {##}]}}&;
     FPrimalEval = SDPPrimalEval[AA, ##[[1]]]&;
     FSylvesterEval = SDPSylvesterEval[AA, #1, #2]&;
-    FSylvesterDiagonalEval = SDPSylvesterDiagonalEval[AA, #1, #2]&;
-    FSylvesterSolve = Null;
-    FSylvesterSolveFactored = Null;
 
     (* Return *)
-    Return[ {FDualEval, FPrimalEval, 
-             FSylvesterEval, FSylvesterDiagonalEval, 
-	     FSylvesterSolve, FSylvesterSolveFactored} ];
+    Return[ {FDualEval, FPrimalEval, FSylvesterEval} ];
 
   ];
 
   (* SDPSolve *)
 
   SDPSolve[{AA_,BB_,CC_},opts:OptionsPattern[{}]] := Module[
-    {FDualEval, FPrimalEval, 
-     FSylvesterEval, FSylvesterDiagonalEval,
-     FSylvesterSolve, FSylvesterSolveFactored,
+    {FDualEval, FPrimalEval, FSylvesterEval,
      options, retValue},
 
     (* Generate functions *)
-    { FDualEval, FPrimalEval, 
-      FSylvesterEval, FSylvesterDiagonalEval, 
-      FSylvesterSolve, FSylvesterSolveFactored } 
+    { FDualEval, FPrimalEval, FSylvesterEval } 
       = SDPFunctions[{AA,BB,CC},opts];
-
-    (* Options are passed directly to PrimalDual
-      options = Flatten[{opts}];
-      If[ FSylvesterSolve =!= Null,
-        AppendTo[options, LeastSquaresSolver -> FSylvesterSolve];
-      ];
-      If[ FSylvesterSolveFactored =!= Null,
-        AppendTo[options, LeastSquaresSolverFactored -> FSylvesterSolveFactored];
-      ];
-    *)
 
     (* Solve problem *)
     retValue = 
-      PrimalDual[ FDualEval, FPrimalEval, 
-                  FSylvesterEval, FSylvesterDiagonalEval, 
+      PrimalDual[ FDualEval, FPrimalEval, FSylvesterEval,
 		  BB, CC, opts ];
 
     Return[retValue];

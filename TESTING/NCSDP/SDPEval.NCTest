@@ -60,10 +60,6 @@ RunTest[kk_:1] := Module[
     ];
     NCTest[exp, answer];
 
-    answer = Tr[answer, List];
-    exp = SDPSylvesterDiagonalEval[AA, X1];
-    NCTest[exp, answer];
-
     exp = SDPSylvesterEval[AA, X1, X2];
     answer = {};
     For[ii = 1, ii <= n, ii++, 
@@ -75,14 +71,8 @@ RunTest[kk_:1] := Module[
     ];
     NCTest[exp, answer];
 
-    answer = Tr[answer, List];
-    exp = SDPSylvesterDiagonalEval[AA, X1, X2];
-    NCTest[exp, answer];
-
     (* TEST SDP FUNCTIONS *)
-    {FDualEval, FPrimalEval, 
-     SylvesterVecEval, SylvesterVecDiagonalEval, 
-     FSylvesterSolve, FSylvesterSolveFactored} \
+    {FDualEval, FPrimalEval, SylvesterVecEval} \
       = SDPFunctions[{AA, BB, CC}];
 
     exp = FDualEval @@ X1;
@@ -95,10 +85,6 @@ RunTest[kk_:1] := Module[
 
     exp = SylvesterVecEval @@ {X1, X1};
     answer = SDPSylvesterEval[AA, X1];
-    NCTest[Total[exp-answer,Infinity], 0];
-
-    exp = SylvesterVecDiagonalEval @@ {X1, X1};
-    answer = SDPSylvesterDiagonalEval[AA, X1];
     NCTest[Total[exp-answer,Infinity], 0];
 
   ];

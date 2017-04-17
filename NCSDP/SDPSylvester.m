@@ -33,21 +33,14 @@ Begin[ "`Private`" ]
 
   Clear[SDPFunctionsAux];
   SDPFunctionsAux[AA_List,BB_List,CC_List,syms_List] := Module[ 
-    { FDualEval, FPrimalEval, 
-      FSylvesterEval, FSylvesterDiagonalEval,
-      FSylvesterSolve, FSylvesterSolveFactored }, 
+    { FDualEval, FPrimalEval, FSylvesterEval }, 
 
     FDualEval = SylvesterDualEval[AA, {##}, syms]&;
     FPrimalEval = SylvesterPrimalEval[AA, {##}]&;
     FSylvesterEval = SylvesterSylvesterVecEval[AA, #1, Map[Dimensions, BB], syms, True]&;
-    FSylvesterDiagonalEval = Null;
-    FSylvesterSolve = Null;
-    FSylvesterSolveFactored = Null;
 
     (* Return *)
-    Return[ {FDualEval, FPrimalEval, 
-	     FSylvesterEval, FSylvesterDiagonalEval, 
-	     FSylvesterSolve, FSylvesterSolveFactored} ];
+    Return[ {FDualEval, FPrimalEval, FSylvesterEval} ];
 
   ];
 

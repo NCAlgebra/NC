@@ -18,11 +18,9 @@ Module[
    n,m,Idn,Ze,Idm,Zemm,Zenm,Idx,IdW,Zenpm,
    X,L,W,
    FvDualEval, FvPrimalEval, 
-   FvSylvesterEval, FvSylvesterDiagonalEval,	
-   FvSylvesterSolve, FvSylvesterSolveFactored,
+   FvSylvesterEval,
    FDualEval, FPrimalEval, 
-   FSylvesterEval, FSylvesterDiagonalEval, 
-   FSylvesterSolve, FSylvesterSolveFactored
+   FSylvesterEval
   },
 
   A={{-1,1},{0,-2}};
@@ -109,15 +107,11 @@ Module[
 
   << SDP`;
 
-  {FvDualEval, FvPrimalEval, 
-   FvSylvesterEval, FvSylvesterDiagonalEval,	
-    FvSylvesterSolve, FvSylvesterSolveFactored} = SDPFunctions[{AAv, BBv, CCv}];
+  {FvDualEval, FvPrimalEval, FvSylvesterEval} = SDPFunctions[{AAv, BBv, CCv}];
 
   << SDPSylvester`;
 
-  {FDualEval, FPrimalEval, 
-   FSylvesterEval, FSylvesterDiagonalEval, 
-    FSylvesterSolve, FSylvesterSolveFactored} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
+  {FDualEval, FPrimalEval, FSylvesterEval} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
 
   Fv = FvPrimalEval @@ {{y}};
   FF = FPrimalEval @@ {Y};
@@ -216,15 +210,11 @@ Module[
 
   << SDP`;
 
-  {FvDualEval, FvPrimalEval, 
-   FvSylvesterEval, FvSylvesterDiagonalEval,	
-    FvSylvesterSolve, FvSylvesterSolveFactored} = SDPFunctions[{AAv, BBv, CCv}];
+  {FvDualEval, FvPrimalEval, FvSylvesterEval} = SDPFunctions[{AAv, BBv, CCv}];
 
   << SDPSylvester`;
 
-  {FDualEval, FPrimalEval, 
-   FSylvesterEval, FSylvesterDiagonalEval, 
-    FSylvesterSolve, FSylvesterSolveFactored} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
+  {FDualEval, FPrimalEval, FSylvesterEval} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
 
   Fv = FvPrimalEval @@ {{y}};
   FF = FPrimalEval @@ {Y};
@@ -346,15 +336,11 @@ Module[
 
   << SDP`;
 
-  {FvDualEval, FvPrimalEval, 
-   FvSylvesterEval, FvSylvesterDiagonalEval,	
-    FvSylvesterSolve, FvSylvesterSolveFactored} = SDPFunctions[{AAv, BBv, CCv}];
+  {FvDualEval, FvPrimalEval, FvSylvesterEval} = SDPFunctions[{AAv, BBv, CCv}];
 
   << SDPSylvester`;
 
-  {FDualEval, FPrimalEval, 
-   FSylvesterEval, FSylvesterDiagonalEval, 
-    FSylvesterSolve, FSylvesterSolveFactored} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
+  {FDualEval, FPrimalEval, FSylvesterEval} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
 
   Fv = FvPrimalEval @@ {{y}};
   FF = FPrimalEval @@ {Y,K};
@@ -489,15 +475,11 @@ Module[
 
   << SDP`;
 
-  {FvDualEval, FvPrimalEval, 
-   FvSylvesterEval, FvSylvesterDiagonalEval,	
-    FvSylvesterSolve, FvSylvesterSolveFactored} = SDPFunctions[{AAv, BBv, CCv}];
+  {FvDualEval, FvPrimalEval, FvSylvesterEval} = SDPFunctions[{AAv, BBv, CCv}];
 
   << SDPSylvester`;
 
-  {FDualEval, FPrimalEval, 
-   FSylvesterEval, FSylvesterDiagonalEval, 
-    FSylvesterSolve, FSylvesterSolveFactored} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
+  {FDualEval, FPrimalEval, FSylvesterEval} = SDPSylvester`Private`SDPFunctionsAux[AA, BB, CC, syms];
 
   Fv = FvPrimalEval @@ {{y}};
   FF = FPrimalEval @@ {X,L,W};

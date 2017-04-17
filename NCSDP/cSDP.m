@@ -72,7 +72,7 @@ Begin[ "`Private`" ]
   SDPFunctions[AA_List, n_Integer, sizeBlocks_List] := 
   Module[
     { FPrimalEval, FDualEval, 
-      FSylvesterEval, FSylvesterDiagonalEval,
+      FSylvesterEval, 
       FSylvesterSolve, FSylvesterSolveFactored }, 
 
     (*
@@ -84,14 +84,13 @@ Begin[ "`Private`" ]
     FDualEval = SDPcDualEval[sizeBlocks, ##[[1]]]&;
 
     FSylvesterEval = SDPcSylvesterEval[n, #1, #2]&;
-    FSylvesterDiagonalEval = SDPSylvesterDiagonalEval[AA, #1, #2]&;
 
     FSylvesterSolve = SDPcSylvesterSolve;
     FSylvesterSolveFactored = SDPcSylvesterSolveFactored;
 
     (* Return *)
     Return[ {FPrimalEval, FDualEval, 
-             FSylvesterEval, FSylvesterDiagonalEval, 
+             FSylvesterEval, 
 	     FSylvesterSolve, FSylvesterSolveFactored} ];
 
   ];

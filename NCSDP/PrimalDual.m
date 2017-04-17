@@ -31,7 +31,6 @@ PrimalDual::InvalidSearchDirection = "Search direction `1` is invalid. Supported
 PrimalDual::InvalidMethod = "Method `1` is invalid. Supported methods are PredictorCorrector, LongStep, ShortStep";
 
 Clear[
-  Direct,
   NT, KSH, KSHDual,
   ShortStep, LongStep, PredictorCorrector, 
   Profiling, SparseWeights
@@ -40,9 +39,6 @@ Clear[
 Options[PrimalDual] = {
   SearchDirection -> NT,
   Method -> PredictorCorrector,
-  LeastSquares -> Direct,
-  LeastSquaresSolver -> Null,
-  LeastSquaresSolverFactored -> Null,
   GapTol -> 10.^(-9),
   FeasibilityTol -> 10.^(3) * GapTol,
   MaxIter -> 250,
@@ -140,8 +136,7 @@ Begin[ "`Private`" ]
   ];
 
   PrimalDual[
-    FPrimalEval_, FDualEval_, 
-    SylvesterVecEval_, SylvesterVecDiagonalEval_, 
+    FPrimalEval_, FDualEval_, SylvesterVecEval_,
     BB_, CC_,
     opts___Rule:{}
   ] := 
@@ -150,8 +145,6 @@ Begin[ "`Private`" ]
          delta = 4/10,
          gamma = 95/100,
          sigma = 3/10,
-         leastSquares, 
-         leastSquaresSolver, 
 	 method,
          maxIter,
          (* options *)
@@ -202,18 +195,6 @@ Begin[ "`Private`" ]
     scaleHessian = ScaleHessian
           /. options
           /. Options[PrimalDual, ScaleHessian];
-
-    leastSquares = LeastSquares
-          /. options
-          /. Options[PrimalDual, LeastSquares];
-
-    leastSquaresSolver = LeastSquaresSolver
-          /. options
-          /. Options[PrimalDual, LeastSquaresSolver];
-
-    leastSquaresSolverFactored = LeastSquaresSolverFactored
-          /. options
-          /. Options[PrimalDual, LeastSquaresSolverFactored];
 
     searchDirection = SearchDirection
           /. options
@@ -500,106 +481,99 @@ Begin[ "`Private`" ]
 
       If[ profiling, Print["> Scaling = ", timeSD[[1]]] ];
 
-      If [ leastSquaresSolver === Null,
+      (* start default least squares solver *)
 
-         (* start default least squares solver *)
+      timeHessianAssembly = Timing[
 
-         timeHessianAssembly = Timing[
+            NCDebug[ 1, "*   Assembling Hessian"];
 
-               NCDebug[ 1, "*   Assembling Hessian"];
+            Hk = ArrayFlatten[SylvesterVecEval @@ {Wkl, Wkr}];
 
-               Hk = ArrayFlatten[SylvesterVecEval @@ {Wkl, Wkr}];
+            NCDebug[ 2, 
+                     Norm[Hk-Transpose[Hk]] ];
 
-               NCDebug[ 2, 
-                        Norm[Hk-Transpose[Hk]] ];
+            (* Symmetrize Hk *)
+            Hk = (Hk + Transpose[Hk])/2;
 
-               (* Symmetrize Hk *)
-               Hk = (Hk + Transpose[Hk])/2;
+            NCDebug[ 3, 
+                     Hk, Eigenvalues[Hk], Min[Eigenvalues[Hk]] ];
 
-               NCDebug[ 3, 
-                        Eigenvalues[Hk], Min[Eigenvalues[Hk]] ];
+            NCDebug[ 1, "*   Scaling Hessian"];
 
-               NCDebug[ 3, 
-	                Hk ];
-      
-               NCDebug[ 1, "*   Scaling Hessian"];
+            If [ (!rationalizeIterates) && scaleHessian, 
 
-               If [ (!rationalizeIterates) && scaleHessian, 
+                 (* Hessian diagonal scaling *)
+                 HkSqrtDiag = Tr[Hk, List];
 
-                    (* Hessian diagonal scaling *)
-                    HkSqrtDiag = Tr[Hk, List];
+                 If [ Min[HkSqrtDiag] <= 0, 
+                      Message[PrimalDual::HessianNotPositiveDefinite];
+                      success = False;
+                      Break[];
+                 ];
+                 HkSqrtDiag = Sqrt[HkSqrtDiag];
 
-                    If [ Min[HkSqrtDiag] <= 0, 
-		         Message[PrimalDual::HessianNotPositiveDefinite];
-			 success = False;
-                         Break[];
-                    ];
-                    HkSqrtDiag = Sqrt[HkSqrtDiag];
+                 Hk = Transpose[Hk / HkSqrtDiag] / HkSqrtDiag;
 
-                    Hk = Transpose[Hk / HkSqrtDiag] / HkSqrtDiag;
+                , 
 
-                   , 
+                 HkSqrtDiag = 1;
+           ];
 
-                    HkSqrtDiag = 1;
-	      ];
+           NCDebug[ 2, HkSqrtDiag ];
 
-              NCDebug[ 2, HkSqrtDiag ];
+      ];
 
-         ];
+      If [ profiling, Print["> Hessian Assembly = ", timeHessianAssembly[[1]]] ];
 
-         If [ profiling, Print["> Hessian Assembly = ", timeHessianAssembly[[1]]] ];
+      timeFactorization = Timing [
 
-         timeFactorization = Timing [
+          NCDebug[ 1, "*   Factoring Hessian"];
 
-             NCDebug[ 1, "*   Factoring Hessian"];
+          Check[
 
-             Check[
+             tHkSolve = LinearSolve[Hk, Method -> "Cholesky"];
 
-                tHkSolve = LinearSolve[Hk, Method -> "Cholesky"];
-                 
-               ,
+            ,
 
-	        Message[PrimalDual::HessianNotPositiveDefinite];
-                success = False;
-                Break[];
+             Message[PrimalDual::HessianNotPositiveDefinite];
+             success = False;
+             Break[];
 
+          ];
+
+          NCDebug[ 2, Head[tHkSolve] ];
+
+          Check[
+
+             If [ Head[tHkSolve] =!= LinearSolveFunction,
+                  tHkSolve = LinearSolve[Hk];
              ];
 
-             NCDebug[ 2, Head[tHkSolve] ];
+            ,
 
-             Check[
+             Message[PrimalDual::HessianNotPositiveDefinite];
 
-                If [ Head[tHkSolve] =!= LinearSolveFunction,
-                     tHkSolve = LinearSolve[Hk];
-                ];
-
-               ,
-
-	        Message[PrimalDual::HessianNotPositiveDefinite];
-
-                If [ counter == 0,
-		     Message[PrimalDual::linearDependence];
-     		     success = False;
-                     Break[];
-                ];
-
+             If [ counter == 0,
+                  Message[PrimalDual::linearDependence];
+                  success = False;
+                  Break[];
              ];
 
-             NCDebug[ 2, Head[tHkSolve] ];
+          ];
 
-             HkSolve = If [ HkSqrtDiag === 1, 
-                            tHkSolve
-                           , 
-			   (tHkSolve[# / HkSqrtDiag] / HkSqrtDiag)&
-	     ];
-             
+          NCDebug[ 2, Head[tHkSolve] ];
 
-         ];
-
-         If [ profiling, Print["> Hessian Factorization = ", timeFactorization[[1]]] ];
+          HkSolve = If [ HkSqrtDiag === 1, 
+                         tHkSolve
+                        , 
+                        (tHkSolve[# / HkSqrtDiag] / HkSqrtDiag)&
+          ];
 
 
       ];
+
+      If [ profiling, Print["> Hessian Factorization = ", timeFactorization[[1]]] ];
+
 
       timePredictor = Timing [      
 
@@ -641,63 +615,18 @@ Begin[ "`Private`" ]
 
           NCDebug[ 1, "*   Computing (predictor) search direction"];
 
-          If [ leastSquaresSolver === Null,
+          timeSolve = Timing [
 
-	        timeSolve = Timing [
+              dyk = HkSolve[gk];
+              dyktau = HkSolve[gktau];
+              dyktheta = HkSolve[gktheta];
 
-                    dyk = HkSolve[gk];
-                    dyktau = HkSolve[gktau];
-                    dyktheta = HkSolve[gktheta];
+              NCDebug[ 3, 
+                       dyk, dyktau, dyktheta ];
 
-                    NCDebug[ 3, 
-	                     dyk, dyktau, dyktheta ];
+          ];
 
-                    (* Residuals *)
-		    (* 
-                      resk = (Hk . (dyk * HkSqrtDiag)) * HkSqrtDiag - gk ;
-                      resktau = (Hk . (dyktau  * HkSqrtDiag)) * HkSqrtDiag - gktau;
-                      resktheta = (Hk . (dyktheta  * HkSqrtDiag)) * HkSqrtDiag - gktheta;
-
-                      NCDebug[ 0, 
-                               Norm[resk], Norm[resktau], Norm[resktheta] ];
- 		     *)
-
-	        ];
-
-		If [ profiling, Print["> > Predictor Solution = ", timeSolve[[1]]] ];
-
-	  ,
-  
-                NCDebug[ 1, "*     Invoking custom linear algebra solver"];
-
-                (* start custom least squares solver *)
-
-                timeCLS = Timing [
-
-		    Check[
-
-      	                {dyk, dyktau, dyktheta} 
-	                    = leastSquaresSolver @@ {Wkl, Wkr, {gk, gktau, gktheta}};
-
-	               ,
-
-		        Message[PrimalDual::HessianNotPositiveDefinite];
-			success = False;
-			Break[];
-
-			(*,
-		       
-			 CholeskyDecomposition::posdef *)
-
-		    ];
-
-                ];
-
-                If[ profiling, Print["> > Custom Least Squares  = ", timeCLS[[1]]] ];
-
-                (* end custom least squares solver *)
-
-	  ];
+          If [ profiling, Print["> > Predictor Solution = ", timeSolve[[1]]] ];
 
           NCDebug[ 1, "*   Reshaping (predictor) search directions"];
 
@@ -707,8 +636,6 @@ Begin[ "`Private`" ]
               dYk = reshape[dyk, mi, syms];
               dYktau = reshape[dyktau, mi, syms];
               dYktheta = reshape[dyktheta, mi, syms];
-
-              (* NCDebug[0, MatrixVectorFrobeniusNorm[ddYk-dYk]]; *)
 
           ];
 
@@ -729,17 +656,6 @@ Begin[ "`Private`" ]
               dXktheta = (dXktheta + Map[Transpose, dXktheta])/2; 
 
           ];
-
-          (* Primal Predictor Residuals *)
-	  (* 
-            res1 = - FPrimalEval @@ dXk;
-            res2 = - (FPrimalEval @@ dXktau) + BB;
-            res3 = - (FPrimalEval @@ dXktheta) - BBbar;
-            NCDebug[ 0,
-       	             Map[Norm, res1],
-       	             Map[Norm, res2],
-      	             Map[Norm, res3] ];
-          *)
 
           If[ profiling, Print["> > Dual directions = ", timeDual[[1]]] ];
 
@@ -767,14 +683,8 @@ Begin[ "`Private`" ]
                                 , 
                                  1 ];
 
-              NCDebug[ 2, 
-	               HHk, HHkSqrtDiag ];
-
     	      tHHkSolve = LinearSolve[
                   Transpose[Transpose[HHk / HHkSqrtDiag] / HHkSqrtDiag]];
-
-              NCDebug[ 2, 
-	               InputForm[tHHkSolve] ];
 
               HHkSolve = If [ HHkSqrtDiag === 1, 
                               tHHkSolve
@@ -782,7 +692,9 @@ Begin[ "`Private`" ]
                               (tHHkSolve[# / HHkSqrtDiag] / HHkSqrtDiag)&
               ];
 
-	      NCDebug[ 2, 
+              NCDebug[ 2, 
+	               HHk, HHkSqrtDiag, 
+                       InputForm[tHHkSolve],
 		       HHkSolve ];
 
           ];
@@ -799,21 +711,11 @@ Begin[ "`Private`" ]
 		        + inner[BBbar,dYk] 
 			- inner[CCbar,dXk];
 
-		NCDebug[ 2, 
-		         ggk ];
-
                 {dtauk, dthetak} = HHkSolve[ggk];
 
 		NCDebug[ 2, 
+		         ggk, 
 		         dtauk, dthetak ];
-
-		(* Compute residuals *)
- 		(* 
- 	        restauthetak = HHk . {dtauk, dthetak} - ggk;
-     
-		NCDebug[ 2, 
-		         Norm[restauthetak] ];
-	        *)
 
           ];
 
@@ -833,9 +735,7 @@ Begin[ "`Private`" ]
 		     + dthetak * zbar;
 
 	       NCDebug[ 2, 
-	       		dYk, dSk, dXk, drhok ];
-
-	       NCDebug[ 2, 
+	       		dYk, dSk, dXk, drhok, 
      	       		MatrixVectorFrobeniusNorm[dXk], 
 	      		MatrixVectorFrobeniusNorm[dSk],
 	      		MatrixVectorFrobeniusNorm[dYk] ];
@@ -843,15 +743,6 @@ Begin[ "`Private`" ]
    	  ];
 
      	  If[ profiling, Print["> > Search directions = ", timeSearchDirections[[1]]] ];
-
-          (* Predictor Residuals *)
-	  (*
-	    predRes1 = (FPrimalEval @@ dXk) - dtauk * BB + dthetak * BBbar;
-            predRes2 = - inner[ BBbar, dYk] + inner[ CCbar, dXk] - dtauk * zbar;
-
-            NCDebug[ 0,
-      	       	     Map[Norm, predRes1], predRes2 ];
-           *)
 
       ];
 
@@ -961,29 +852,7 @@ Begin[ "`Private`" ]
 
                  NCDebug[ 1, "*   Computing corrector search direction"];
 
-	         If [ leastSquaresSolverFactored === Null,
-
-		      dyk = HkSolve[gk];
-
-                      (* Residuals *)
-		      (* 
-                        resk = Hk . dyk - gk;
- 
-		        NCDebug[ 2, 
-                                 Norm[resk] ];
-		      *)
-
-		    ,
-
-                      timeCLS = Timing [
-
-    	                {dyk} = leastSquaresSolverFactored @@ {{gk}};
-
-               	      ];
-
-                      If[ profiling, Print["> > Custom Least Squares  = ", timeCLS[[1]]] ];
-
-	         ];
+                 dyk = HkSolve[gk];
 
                  NCDebug[ 1, "*   Reshaping (corrector) search directions"];
 
@@ -1017,14 +886,6 @@ Begin[ "`Private`" ]
 		 NCDebug[ 2, 
 		          dtauk, dthetak ];
 
- 		 (* Compute residuals *)
- 		 (* 
-		    restauthetak = HHk . {dtauk, dthetak} - ggk;
-     
-		    NCDebug[ 2, 
-		             Norm[restauthetak] ];
-		 *)
-
                  NCDebug[ 1, "*   Computing final (corrector) search direction"];
 
 	         (* Compute final corrector directions *)
@@ -1045,14 +906,6 @@ Begin[ "`Private`" ]
 
       ];
 
-      (* Corrector Residuals *)
-      (*
-        res1 = (FPrimalEval @@ dXk) - dtauk * BB + dthetak * BBbar;
-        res4 = - inner[ BBbar, dYk] + inner[ CCbar, dXk] - dtauk * zbar;
-        NCDebug[ 0,
-                 Map[Norm, res1], res4 ];
-      *)
-
       timeLineSearch = Timing[
 
           NCDebug[ 1, "* Starting line search."];
@@ -1062,11 +915,6 @@ Begin[ "`Private`" ]
 	  dXkScaled = LktSolve[dXkScaled];
 	  dXkScaled = dXkScaled + Map[ Transpose, dXkScaled ];
 
-(*
-	  alphaDX = Min[1, - 2 * 0.9995 / Min[ Map[minEig, dXkScaled] ]];
-          If [ alphaDX < 0, alphaDX = 1 ];
-*)
-
           lambdaDX = Min[ Map[minEig, dXkScaled] ];
 	  alphaDX = If [ lambdaDX >= 0, 1, Min[1, - 2 * 0.9995 / lambdaDX] ];
 
@@ -1074,11 +922,6 @@ Begin[ "`Private`" ]
 	  dSkScaled = Map[ Transpose, dSkScaled ];
 	  dSkScaled = RktSolve[dSkScaled];
 	  dSkScaled = dSkScaled + Map[ Transpose, dSkScaled ];
-
-(*
-	  alphaDS = Min[1, - 2 * 0.9995 / Min[ Map[minEig, dSkScaled] ]];
-          If [ alphaDS < 0, alphaDS = 1 ];
-*)
 
           lambdaDS = Min[ Map[minEig, dSkScaled] ];
           alphaDS = If [ lambdaDS >= 0, 1, Min[1, - 2 * 0.9995 / lambdaDS]];
@@ -1254,16 +1097,6 @@ Begin[ "`Private`" ]
           	     Check[ MatrixVectorCholeskyDecomposition[plnSkpi], 
 	       	            Print["Inverse[Sk] is not positive definite!"] ];
 
-	   	     (*
-			Quiet[
-			Skpi = Check[MatrixVectorInverse[Skp], $Failed, Inverse::luc];
-			If [Skpi == $Failed, 
-			alpha *=  99 / 100;
-	        	Continue[];
-              		];
-           		];
-	  	     *)
-
           	     Break[];
         	    ,
 
@@ -1369,12 +1202,6 @@ Begin[ "`Private`" ]
       NCDebug[ 2, 
 	       normCentralPath ];
 
-(*
-      PrintNumber[x_, n_: 3, m_: 2] := 
-        NumberForm[ x, {n+2,n},
-                    ExponentFunction -> (#&) ];
-*)
-
       NumberFormatFunction[m_, s_, e_] :=
         Row[ {NumberForm[ ToExpression[m], 
                           {4,3},
@@ -1388,21 +1215,6 @@ Begin[ "`Private`" ]
 
       PrintNumber[x_, n_: 3, m_: 2] := 
         ScientificForm[ x, NumberFormat -> NumberFormatFunction ];
-
-(*
-      PrintNumber[x_, n_: 4, m_: 2] := Module[
-        {exp, mantissa},
-        exp = Floor[Log[10, Abs[x]]];
-        If[ exp === Indeterminate || exp === -Infinity,
-            exp = 0;
-            mantissa = 0;
-           ,
-            mantissa = x/(10^exp);
-        ];
-        Return[SequenceForm[PaddedForm[mantissa, {n+1,n}], " E", 
-               PaddedForm[exp, m]]];
-      ];
-*)
 
       If [ printIterations, 
         (* show progress *)
@@ -1418,7 +1230,7 @@ Begin[ "`Private`" ]
         ];
       ];
 
-      If[ debugLevel > 1,
+      If[ debugLevel > 0,
           (* report performance *)
           AppendTo[iters, 
                    {counter, -obj, muk, 
@@ -1445,11 +1257,6 @@ Begin[ "`Private`" ]
       Yk = RationalApproximate[Yk, rationalizeTol];
       Sk = RationalApproximate[Sk, rationalizeTol];
 
-      (*
-        tauk   = RationalApproximate[tauk, rationalizeTol];
-        thetak = RationalApproximate[thetak, rationalizeTol];
-        rhok   = RationalApproximate[rhok, rationalizeTol];
-      *)
     ];
 
     NCDebug[ 2, 
