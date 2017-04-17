@@ -25,9 +25,7 @@ The following `options` can be given:
 - `PrintObstructions` (`False`);
 - `PrintSPolynomials` (`False`);
 
-The algorithm is based on T. Mora, "An introduction to commuative and
-noncommutative Groebner Bases," *Theoretical Computer Science*, v. 134,
-pp. 131-173, 2000.
+The algorithm is based on [@mora:ICN:1994].
 
 See also:
 [NCPoly](#NCPoly).

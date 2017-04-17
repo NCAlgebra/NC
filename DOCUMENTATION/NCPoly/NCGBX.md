@@ -290,21 +290,6 @@ See also:
 
 ### NCReduce {#NCReduce}
 
-`NCAutomaticOrder[ aMonomialOrder, aListOfPolynomials ]`
-
-This command assists the user in specifying a monomial order.  It
-inserts all of the indeterminants found in $aListOfPolynomials$ into
-the monomial order.  If x is an indeterminant found in
-$aMonomialOrder$ then any indeterminant whose symbolic representation
-is a function of x will appear next to x.  For example,
-NCAutomaticOrder[\{\{a\},\{b\}\},\{ a**Inv[a]**tp[a] + tp[b]\}] would
-set the order to be $a < tp[a] < Inv[a] \ll b < tp[b]$.}  {A list of
-indeterminants which specifies the general order.  A list of
-polynomials which will make up the input to the Gröbner basis
-command.}  {If tp[Inv[a]] is found after Inv[a] NCAutomaticOrder[ ]
-would generate the order $a < tp[Inv[a]] < Inv[a]$.  If the variable
-is self-adjoint (the input contains the relation $ tp[Inv[a]] ==
-Inv[a]$) we would have the rule, $Inv[a] \rightarrow tp[Inv[a]]$, when
-the user would probably prefer $tp[Inv[a]] \rightarrow Inv[a]$.}
+`NCReduce`
 
 ### NCProcess {#NCProcess}
