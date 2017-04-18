@@ -279,7 +279,7 @@ The following `options` can be given:
 - `ReturnRules` (`True`): if `True` rules representing relations in which the left-hand side is the leading monomial are returned instead of polynomials. Use `False` for backward compatibility. Can be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
 
 `NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in
-[NCPolyGroeber](#NCPolyGroeber).
+[NCPolyGroebner](#NCPolyGroebner).
 
 See also:
 [ClearMonomialOrder](#ClearMonomialOrder),

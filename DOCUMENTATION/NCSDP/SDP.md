@@ -1,8 +1,7 @@
 ## SDP {#PackageSDP}
 
-`SDP` is a package that provides algorithms for the numeric solution
-of semidefinite programs. Semidefinite programs are optimization
-problems of the form:
+`SDP` is a package that provides data structures for the numeric solution
+of semidefinite programs of the form:
 $$
 \begin{aligned}
   \max_{y, S} \quad & b^T y \\
@@ -12,6 +11,9 @@ $$
 $$
 where $S$ is a symmetric positive semidefinite matrix and $y$ is a
 vector of decision variables.
+
+See the package [SDP](#PackageSDP) for a potentially more efficient
+alternative to the basic implementation provided by this package.
 
 Members are:
 
@@ -125,3 +127,16 @@ See also:
 [SDPSolve](#SDPSolve),
 [SDPMatrices](#SDPMatrices).
 
+### SDPSylvesterEval {#SDPSylvesterEval}
+
+`SDPSylvesterEval[a, W]` returns a matrix
+representation of the Sylvester mapping $A^* (W A (\Delta_y) W)$
+when applied to the scaling `W`.
+
+`SDPSylvesterEval[a, Wl, Wr]` returns a matrix
+representation of the Sylvester mapping $A^* (W_l A (\Delta_y) W_r)$
+when applied to the left- and right-scalings `Wl` and `Wr`.
+
+See also:
+[SDPPrimalEval](#SDPPrimalEval),
+[SDPDualEval](#SDPDualEval).

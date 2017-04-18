@@ -315,13 +315,13 @@ Begin["`Private`"];
 
   (* NCDigitsToIndex *)
     
-  NCPolyIntegersToIndexAux[{degree_Integer, i_Integer}, 1] := 
+  NCIntegersToIndexAux[{degree_Integer, i_Integer}, 1] := 
     degree + 1;
 
-  NCPolyIntegersToIndexAux[{degree_Integer, i_Integer}, n_Integer] := 
+  NCIntegersToIndexAux[{degree_Integer, i_Integer}, n_Integer] := 
     (1 - n^degree)/(1-n) + i + 1;
 
-  NCPolyIntegersToIndexAux[{degrees__Integer, i_Integer}, n_Integer] := 
+  NCIntegersToIndexAux[{degrees__Integer, i_Integer}, n_Integer] := 
     (1 - n^Total[{degrees}])/(1-n) + i + 1;
               
   NCDigitsToIndex[{digits__List}, base_Integer] := 
@@ -332,12 +332,12 @@ Begin["`Private`"];
       
   NCDigitsToIndex[digits_List, base_Integer] := Module[
     {i = NCFromDigits[digits, base]},
-    NCPolyIntegersToIndexAux[i, base]
+    NCIntegersToIndexAux[i, base]
   ];
 
   NCDigitsToIndex[digits_List, base_List] := Module[
     {i = NCFromDigits[digits, base]},
-    NCPolyIntegersToIndexAux[i, Total[base]]
+    NCIntegersToIndexAux[i, Total[base]]
   ];
 
   (* NCMonomialToDigits *)

@@ -103,9 +103,30 @@ Begin[ "`Private`" ]
      N=Np/p;
      m=Nm/N;
 
-     (* Computes {R_i W, W L_i *)
+     (* Computes {W L_i, R_i W} *)
      Return[
        {W . L, ArrayFlatten[Map[(#1 . W)&, Partition[R,{n,p}]]] }
+     ];
+  ];
+  
+  SylvesterEntryScale[{L_,R_},Wl_,Wr_]:=Module[
+    {m,n,p,Np,q,Nm,N},
+
+    (* 
+	Dimensions:
+	W: p x q
+        R: n x N p
+        L: q x N m
+     *)
+     {p,q}=Dimensions[Wl];
+     {n,Np}=Dimensions[R];
+     {q,Nm}=Dimensions[L];
+     N=Np/p;
+     m=Nm/N;
+
+     (* Computes {Wl L_i, R_i Wr} *)
+     Return[
+       {Wl . L, ArrayFlatten[Map[(#1 . Wr)&, Partition[R,{n,p}]]] }
      ];
   ];
 
@@ -364,10 +385,10 @@ Begin[ "`Private`" ]
             {#,dims,symmetric}]&
         ,AA]]];
 
-  SylvesterSylvesterVecEval[AA_,WW_,dims_,symmetry_,reduced_:False] := Module[
+  SylvesterSylvesterVecEval[AA_,Wl_,Wr_,dims_,symmetry_,reduced_:False] := Module[
     {H,n,m,iota,i,j,jmax,
      dimi,dimj,
-     Aiota,Wiota,
+     Aiota,Wliota,Wriota,
      U,V,
      LRj,LRi},
 
@@ -386,12 +407,13 @@ Begin[ "`Private`" ]
     For[iota=1,iota<=m,iota++,
 
 	Aiota=Part[AA,iota];
-        Wiota=Part[WW,iota];
+        Wliota=Part[Wl,iota];
+        Wriota=Part[Wr,iota];
 
 	For[i=1,i<=n,i++,
 
 	   (* scale Li and Ri *)
-	   LRi=SylvesterEntryScale[Part[Aiota,i], Wiota];
+	   LRi=SylvesterEntryScale[Part[Aiota,i],Wliota,Wriota];
        	   jmax = If[ reduced, i, n ];
 (*	   jmax = n; *)
 

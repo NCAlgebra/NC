@@ -43,7 +43,6 @@ Members are:
     * [NCIntegerDigits](#NCIntegerDigits)
     * [NCDigitsToIndex](#NCDigitsToIndex)
     * [NCPadAndMatch](#NCPadAndMatch)
-	* [NCIntegerToIndex](#NCIntegerToIndex)
 
 ### Ways to represent NC polynomials
 
@@ -456,6 +455,24 @@ g. It also works when g is a list.
 
 #### NCPolyReduce {#NCPolyReduce}
 
+`NCPolyReduce[polys, rules]` reduces the list of `NCPoly`s `polys`
+with respect to the list of `NCPoly`s `rules`. The substitutions
+implied by `rules` are applied repeatedly to the polynomials in the
+`polys` until no further reduction occurs.
+
+`NCPolyReduce[polys]` reduces each polynomial in the list of `NCPoly`s
+`polys` with respect to the remaining elements of the list of
+polyomials `polys` until no further reduction occurs.
+
+By default, `NCPolyReduce` only reduces the leading monomial in the
+current order. Use the optional boolean flag `complete` to completely
+reduce all monomials. For example, `NCPolyReduce[polys, rules, True]`
+and `NCPolyReduce[polys, True]`.
+
+See also:
+[NCPolyGroebner](#NCPolyGroebner).
+
+
 #### NCPolySum {#NCPolySum}
 
 `NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f
@@ -496,7 +513,7 @@ which are the Hankel matrices associated with the commutator $x y - y x$.
 
 See also:
 [NCPolyRealization](#NCPolyRealization),
-[NCIntegerToIndex](#NCIntegerToIndex).
+[NCDigitsToIndex](#NCDigitsToIndex).
 
 #### NCPolyRealization {#NCPolyRealization}
 
@@ -663,6 +680,3 @@ than list `a`, return the opposite match.
 `NCPadAndMatch` returns all possible matches with the minimum number
 of elements.
 
-#### NCIntegerToIndex {#NCIntegerToIndex}
-
-TODO

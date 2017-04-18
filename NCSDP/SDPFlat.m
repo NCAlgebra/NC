@@ -19,23 +19,19 @@ BeginPackage[ "SDPFlat`",
 	      "NCDebug`"
 ]
 
-Clear[SDPFlatData];
-SDPFlatData::usage = "";
-
-Clear[SDPFlatDualEval];
-SDPFlatDualEval::usage = "";
-
-Clear[SDPFlatPrimalEval];
-SDPFlatPrimalEval::usage = "";
-
-Clear[SDPFlatSylvesterEval];
-SDPFlatSylvesterEval::usage = "";
-
-Clear[SDPFlatSylvesterDiagonalEval];
-SDPFlatSylvesterDiagonalEval::usage = "";
+Clear[SDPFlatData,
+      SDPFlatDualEval,
+      SDPFlatPrimalEval,
+      SDPFlatSylvesterEval];
 
 Begin[ "`Private`" ]
 
+  (* SDPEval *)
+  (* SDPEval = SDPFlatPrimalEval; *)
+
+  (* SDPEval *)
+  (* SDPDualEval = SDPFlatDualEval; *)
+  
   SDPFlatData[{AA_,BB_,CC_}] := Module[
     {AFlat, CFlat, dims},
     
@@ -47,9 +43,9 @@ Begin[ "`Private`" ]
   ]
 
   (* SDPFunctions *)
-
-  SDPFunctions[AA_List, AFlat_SparseArray,
-               CFlat_, dims_List ] :=
+  Clear[SDPFunctionsAux];
+  SDPFunctionsAux[AA_List, AFlat_SparseArray,
+                  CFlat_, dims_List ] :=
   Module[ 
     { FDualEval, FPrimalEval, FSylvesterEval }, 
 
@@ -63,7 +59,7 @@ Begin[ "`Private`" ]
   ];
 
   SDPFunctions[{AA_List,BB_List,CC_List},opts:OptionsPattern[{}]] := 
-    SDPFunctions @@ SDPFlatData[{AA,BB,CC}];
+    SDPFunctionsAux @@ SDPFlatData[{AA,BB,CC}];
 
   (* Flat Evaluations *)
 

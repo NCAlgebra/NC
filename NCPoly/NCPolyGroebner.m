@@ -6,7 +6,8 @@
 BeginPackage[ "NCPolyGroebner`",
               "NCPoly`"  ];
 
-Clear[VerboseLevel,
+Clear[NCPolyGroebner,
+      VerboseLevel,
       PrintBasis, 
       PrintObstructions, 
       PrintSPolynomials, 

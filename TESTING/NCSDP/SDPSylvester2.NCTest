@@ -90,7 +90,7 @@ Module[
   X11 = MapThread[Dot, {X1,X1}];
 
   answer=SDPSylvesterEval[AAv,X11];
-  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  H1=SylvesterSylvesterVecEval[AA,X11,X11,dims,syms];
   scl = Norm[1.*H1];
 
 
@@ -100,7 +100,7 @@ Module[
   P2 = {{1, 0, 0, 0}, {0, 1/2, 1/2, 0}, {0, 0, 0, 1}};
   Q2 = Transpose[P2].Inverse[P2.Transpose[P2]];
 
-  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+  H2 = SylvesterSylvesterVecEval[AA, X11, X11,dims, syms, True];
 
   exp = Abs[Total[Transpose[Q2] . H1 . Q2 - H2, Infinity]];
   NCTest[exp < scl*10^(-9), True];
@@ -197,13 +197,13 @@ Module[
   X11 = MapThread[Dot, {X1,X1}];
 
   answer=SDPSylvesterEval[AAv,X11];
-  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  H1=SylvesterSylvesterVecEval[AA,X11,X11,dims,syms];
   scl = Norm[1.*H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
   NCTest[exp < scl*10^(-9), True];
 
-  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+  H2 = SylvesterSylvesterVecEval[AA, X11, X11, dims, syms, True];
 
   exp = Abs[Total[Transpose[Q2] . H1 . Q2 - H2, Infinity]];
   NCTest[exp < scl*10^(-9), True];
@@ -314,13 +314,13 @@ Module[
   X11 = MapThread[Dot, {X1,X1}];
 
   answer=SDPSylvesterEval[AAv,X11];
-  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  H1=SylvesterSylvesterVecEval[AA,X11,X11,dims,syms];
   scl = Norm[1.*H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
   NCTest[exp < scl*10^(-9), True];
 
-  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+  H2 = SylvesterSylvesterVecEval[AA, X11, X11,dims, syms, True];
 
   exp = Abs[Total[Transpose[Q2] . H1[[1;;4,1;;4]] . Q2 - H2[[1;;3,1;;3]], Infinity]];
   NCTest[exp < scl*10^(-9), True];
@@ -449,13 +449,13 @@ Module[
 
   answer=SDPSylvesterEval[AAv,X11];
 
-  H1=SylvesterSylvesterVecEval[AA,X11,dims,syms];
+  H1=SylvesterSylvesterVecEval[AA,X11,X11,dims,syms];
   scl = Norm[1.*H1];
 
   exp = Abs[Total[H1-answer, Infinity]];
   NCTest[exp < scl*10^(-9), True];
 
-  H2 = SylvesterSylvesterVecEval[AA, X11, dims, syms, True];
+  H2 = SylvesterSylvesterVecEval[AA, X11, X11,dims, syms, True];
 
   exp = Transpose[Q2] . H1[[1;;4,1;;4]] . Q2 - H2[[1;;3,1;;3]];
   exp = Abs[Total[exp, Infinity]];

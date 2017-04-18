@@ -77,7 +77,7 @@ in variables `x` and `y` is stored as:
 NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
 
 See also:
-[`NCToNCPolynomial`](#NCToNCPolynomial), [`NCPolynomialToNC`](#NCPolynomialToNC), [`NCTermsToNC`](#NCTermsToNC).
+[`NCToNCPolynomial`](#NCToNCPolynomial), [`NCPolynomialToNC`](#NCPolynomialToNC), [`NCPTermsToNC`](#NCPTermsToNC).
 
 #### NCToNCPolynomial {#NCToNCPolynomial}
 
@@ -182,7 +182,7 @@ See also:
 
 #### NCPTermsToNC {#NCPTermsToNC}
 
-`NCPTermsToNC` gives a nc expression corresponding to terms produced by `NCPTermsOfDegree` or `NCTermsOfTotalDegree`.
+`NCPTermsToNC` gives a nc expression corresponding to terms produced by `NCPTermsOfDegree` or `NCPTermsOfTotalDegree`.
 
 For example:
 

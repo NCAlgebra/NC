@@ -27,7 +27,10 @@ SylvesterToVectorizedSDP::usage="";
 Begin[ "`Private`" ]
 
   (* SDPEval *)
-  SDPEval = SylvesterPrimalEval;
+  SDPSylvesterPrimalEval = SylvesterPrimalEval;
+
+  (* SDPDualEval *)
+  SDPSylvesterDualEval = SylvesterDualEval;
 
   (* SDPFunctions *)
 
@@ -37,7 +40,8 @@ Begin[ "`Private`" ]
 
     FDualEval = SylvesterDualEval[AA, {##}, syms]&;
     FPrimalEval = SylvesterPrimalEval[AA, {##}]&;
-    FSylvesterEval = SylvesterSylvesterVecEval[AA, #1, Map[Dimensions, BB], syms, True]&;
+    FSylvesterEval = SylvesterSylvesterVecEval[AA, #1, #2, 
+                                               Map[Dimensions, BB], syms, True]&;
 
     (* Return *)
     Return[ {FDualEval, FPrimalEval, FSylvesterEval} ];

@@ -59,13 +59,14 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCQuadratic.md \
 	 NCAlgebra/NCSylvester.md \
          MANUAL/Algorithms.md \
+	 NCPoly/NCGBX.md \
+	 NCPoly/NCPolyGroebner.md \
 	 NCAlgebra/NCConvexity.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
+	 NCSDP/SDPFlat.md \
 	 NCSDP/SDPSylvester.md \
 	 NCSDP/PrimalDual.md \
-	 NCPoly/NCGBX.md \
-	 NCPoly/NCPolyGroebner.md \
          MANUAL/WorkInProgress.md \
 	 NCAlgebra/NCRational.md \
 	 NCAlgebra/NCRealization.md \

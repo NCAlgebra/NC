@@ -783,7 +783,7 @@ y^T
 \end{aligned}
 $$
 
-See section [linear functions](#LinearPolys) for more features on
+See section [linear functions](#Linear) for more features on
 linear polynomial matrices.
 
 ## Quadratic polynomials {#Quadratic}

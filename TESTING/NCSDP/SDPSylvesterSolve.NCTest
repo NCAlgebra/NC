@@ -65,6 +65,16 @@ Module[
   exp = Abs[Total[S - Sv, Infinity]];
   NCTest[exp < 10^(-7), True];
 
+  (* Options *)
+
+  {Y, X, S, iters} = SDPSolve[{AA, BB, CC}, SymmetricVariables -> {1}, SearchDirection -> KSH, DebugLevel -> 0];
+
+  exp = Abs[Total[X - Xv, Infinity]];
+  NCTest[exp < 10^(-7), True];
+
+  exp = Abs[Total[S - Sv, Infinity]];
+  NCTest[exp < 10^(-7), True];
+  
   (* Test #2: n x n Lyapunov equation *)
 
    n = 40;
