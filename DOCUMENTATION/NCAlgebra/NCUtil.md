@@ -20,9 +20,9 @@ Members are:
 
 ### NCGrabFunctions {#NCGrabFunctions}
 
-`NCGragFunctions[expr]` returns a list with all fragments of `expr` containing functions.
+`NCGrabFunctions[expr]` returns a list with all fragments of `expr` containing functions.
 
-`NCGragFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
+`NCGrabFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
 
 For example:
 
@@ -41,13 +41,13 @@ returns
     {inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}
 
 See also:
-[NCGrabSymbols](#NCGragSymbols).
+[NCGrabSymbols](#NCGrabSymbols).
 
 ### NCGrabSymbols {#NCGrabSymbols}
 
-`NCGragSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
+`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
 
-`NCGragSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
+`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
 
 For example:
 
@@ -60,11 +60,11 @@ returns `{x,y}` and
 returns `{inv[x]}`.
 
 See also:
-[NCGrabFunctions](#NCGragFunctions).
+[NCGrabFunctions](#NCGrabFunctions).
 
 ### NCGrabIndeterminants {#NCGrabIndeterminants}
 
-`NCGragIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
+`NCGrabIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
 
 For example:
 
@@ -75,7 +75,7 @@ returns
     {y, inv[x], inv[1 + inv[1 + tp[x] ** y]], tp[y]}
 
 See also:
-[NCGrabFunctions](#NCGragFunctions), [NCGrabSymbols](#NCGragSymbols).
+[NCGrabFunctions](#NCGrabFunctions), [NCGrabSymbols](#NCGrabSymbols).
 
 ### NCVariables {#NCVariables}
 

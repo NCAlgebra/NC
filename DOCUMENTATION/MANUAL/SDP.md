@@ -80,7 +80,7 @@ substitution. For example:
     data = {a -> A};
 
 Equipped with the above list of rules representing a problem instance
-one can load [`SDPSylvester`](#SDPSylvester) and use `NCSDP` to create
+one can load [`SDPSylvester`](#PackageSDPSylvester) and use `NCSDP` to create
 a problem instance as follows:
 
     {abc, rules} = NCSDP[ineqs, vars, obj, data];
@@ -155,9 +155,9 @@ which can be visualized using [`NCSDPDualForm`](#NCSDPDualForm) using:
 
 ## Semidefinite Programs in Vector Variables
 
-The package [SDP](#SDP) provides a crude and not very efficient way to
-define and solve semidefinite programs in standard form, that is
-vectorized. You do not need to load `NCAlgebra` if you just want to
+The package [SDP](#PackageSDP) provides a crude and not very efficient
+way to define and solve semidefinite programs in standard form, that
+is vectorized. You do not need to load `NCAlgebra` if you just want to
 use the semidefinite program solver. But you still need to load `NC`
 as in:
 
@@ -223,4 +223,4 @@ found in the variable `flags`.
 
 The package `SDP` is built so as to be easily overloaded with more
 efficient or more structure functions. See for example
-[SDPFlat](#SDPFlat) and [SDPSylvester](#SDPSylvester).
+[SDPFlat](#PackageSDPFlat) and [SDPSylvester](#PackageSDPSylvester).

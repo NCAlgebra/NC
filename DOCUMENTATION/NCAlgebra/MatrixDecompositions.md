@@ -18,6 +18,8 @@ Members are:
     * [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting)
     * [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting)
     * [LDLDecomposition](#LDLDecomposition)
+    * [LURowReduce](#LURowReduce)
+    * [LURowReduceIncremental](#LURowReduceIncremental)
 * Solvers
     * [LowerTriangularSolve](#LowerTriangularSolve)
     * [UpperTriangularSolve](#UpperTriangularSolve)
@@ -28,8 +30,6 @@ Members are:
     * [GetDiagonal](#GetDiagonal)
     * [LUPartialPivoting](#LUPartialPivoting)
     * [LUCompletePivoting](#LUCompletePivoting)
-    * [LUNoPartialPivoting](#LUNoPartialPivoting)
-    * [LUNoCompletePivoting](#LUNoCompletePivoting)
 
 ### LUDecompositionWithPartialPivoting {#LUDecompositionWithPartialPivoting}
 
@@ -82,7 +82,7 @@ The following `options` can be given:
 - `Pivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for pivoting;
 
 See also:
-[LUDecomposition](#LUDecomposition), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
+LUDecomposition, [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
 ### LDLDecomposition {#LDLDecomposition}
 
@@ -110,7 +110,7 @@ The following `options` can be given:
 - `CompletePivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for complete pivoting;
 - `PartialPivoting` ([LUPartialPivoting](#LUPartialPivoting)): function used to sort matrices for complete pivoting;
 - `Inverse` (`Inverse`): function used to invert 2x2 diagonal blocks;
-- `SelfAdjointQ` ([SelfAdjointMatrixQ](#SelfAdjointMatrixQ)): function to test if matrix is self-adjoint;
+- `SelfAdjointMatrixQ` (HermitianQ): function to test if matrix is self-adjoint;
 - `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
@@ -148,7 +148,7 @@ See also:
 
 `LUInverse[a]` calculates the inverse of matrix `a`.
 
-`LUInverse` uses the [LuDecompositionWithPartialPivoting](#LuDecompositionWithPartialPivoting) and the triangular solvers [LowerTriangularSolve](#LowerTriangularSolve) and [UpperTriangularSolve](#UpperTriangularSolve).
+`LUInverse` uses the [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting) and the triangular solvers [LowerTriangularSolve](#LowerTriangularSolve) and [UpperTriangularSolve](#UpperTriangularSolve).
 
 See also:
 [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
@@ -224,3 +224,6 @@ See also:
 See also:
 [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
 
+### LURowReduce {#LURowReduce}
+
+### LURowReduceIncremental {#LURowReduceIncremental}

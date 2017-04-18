@@ -4,14 +4,26 @@
 
 Members are:
 
-* [NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester)
+* [NCToNCSylvester](#NCToNCSylvester)
+* [NCPToNCSylvester](#NCPToNCSylvester)
+* [NCSylvesterToNC](#NCSylvesterToNC)
 * [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial)
 
-### NCPolynomialToNCSylvester {#NCPolynomialToNCSylvester}
+### NCToNCSylvester {#NCToNCSylvester}
 
-`NCPolynomialToNCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
+`NCToNCSylvester[p, vars]` is shorthand for
 
-`NCPolynomialToNCSylvester` returns a list with two elements:
+    NCPToNCSylvester[NCToNCPolynomial[p, vars]]
+
+See also:
+[NCToNCSylvester](#NCToNCSylvester),
+[NCToNCPolynomial](#NCToNCPolynomial).
+
+### NCPToNCSylvester {#NCPToNCSylvester}
+
+`NCPToNCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
+
+`NCPToNCSylvester` returns a list with two elements:
 
 * the first is a the independent term;
 * the second is an association where each key is one of the variables and each value is a list with three elements:
@@ -22,8 +34,8 @@ Members are:
 
 Example:
 
-    p = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-    {p0,sylv} = NCPolynomialToNCSylvester[p,x]
+	p = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
+    {p0,sylv} = NCPolynomialToNCSylvester[p]
 
 produces
 
@@ -32,11 +44,24 @@ produces
    	         y->{{1},{1},SparseArray[{{1}}]}|>
 
 See also:
-[NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial), [NCPolynomial](#NCPolynomial).
+[NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial),
+[NCSylvesterToNC](#NCSylvesterToNCPolynomial),
+[NCToNCSylvester](#NCToNCSylvester),
+[NCPolynomial](#NCPolynomial).
+
+### NCSylvesterToNC {#NCSylvesterToNC}
+
+`NCSylvesterToNC[{const, lin}]` is shorthand for
+
+    NCPolynomialToNC[NCSylvesterToNCPolynomial[{const, lin}]]
+
+See also:
+[NCSylvesterToNCPolynomial](#NCSylvesterToNC),
+[NCPolynomialToNC](#NCPolynomialToNC).
 
 ### NCSylvesterToNCPolynomial {#NCSylvesterToNCPolynomial}
 
-`NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCPolynomialToNCSylvester` and converts it back to an `NCPolynomial`.
+`NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCPToNCSylvester` and converts it back to an `NCPolynomial`.
 
 `NCSylvesterToNCPolynomial[rep,options]` uses `options`.
 
@@ -44,4 +69,7 @@ The following `options` can be given:
 * `Collect` (*True*): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.
 
 See also:
-[NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester), [NCPolynomial](#NCPolynomial).
+[NCPToNCSylvester](#NCPToNCSylvester),
+[NCToNCSylvester](#NCToNCSylvester),
+[NCPolynomial](#NCPolynomial).
+

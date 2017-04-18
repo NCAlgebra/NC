@@ -43,6 +43,7 @@ Members are:
     * [NCIntegerDigits](#NCIntegerDigits)
     * [NCDigitsToIndex](#NCDigitsToIndex)
     * [NCPadAndMatch](#NCPadAndMatch)
+	* [NCIntegerToIndex](#NCIntegerToIndex)
 
 ### Ways to represent NC polynomials
 
@@ -569,7 +570,7 @@ This construction is used to represent graded degree-lexicographic
 orderings.
 
 See also:
-[NCIntergerDigits](#NCIntergerDigits).
+[NCIntegerDigits](#NCIntegerDigits).
 
 #### NCIntegerDigits {#NCIntegerDigits}
 
@@ -649,7 +650,7 @@ returns
 
 See also:
 [NCFromDigits](#NCFromDigits),
-[NCIntergerDigits](#NCIntergerDigits).
+[NCIntegerDigits](#NCIntegerDigits).
 
 
 #### NCPadAndMatch {#NCPadAndMatch}
@@ -662,3 +663,6 @@ than list `a`, return the opposite match.
 `NCPadAndMatch` returns all possible matches with the minimum number
 of elements.
 
+#### NCIntegerToIndex {#NCIntegerToIndex}
+
+TODO

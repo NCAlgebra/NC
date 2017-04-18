@@ -251,7 +251,7 @@ would produce the results one would expect:
 	1 + 2 c**c
 
 For this reason, when substituting in `NCAlgebra` it is always safer
-to use functions from the [`NCReplace` package](#NCReplacePackage)
+to use functions from the [`NCReplace` package](#PackageNCReplace)
 rather than the corresponding Mathematice `Replace` family of
 functions. Unfortunately, this comes at a the expense of sacrificing
 the standard operators `/.` (`ReplaceAll`) and `//.`

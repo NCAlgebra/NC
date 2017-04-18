@@ -22,8 +22,7 @@ following canonical form:
 
 It returns a list with two entries:
 
-- The first is a list with the an instance of
-  [SDPSylvester](#SDPSylvester);
+- The first is a list with the an instance of [SDPSylvester](#PackageSDPSylvester);
 - The second is a list of rules with properties of certain variables.
 
 Both entries should be supplied to [SDPSolve](#SDPSolve) in order to
@@ -31,7 +30,7 @@ numerically solve the semidefinite program. For example:
 
     {abc, rules} = NCSDP[inequalities, vars, obj, data];
 	
-generates an instance of [SDPSylvester](#SDPSylvester) that can be
+generates an instance of [SDPSylvester](#PackageSDPSylvester) that can be
 solved using:
 
     << SDPSylvester`

@@ -123,14 +123,14 @@ See also:
 `BeginCommuteEverything` answers the question *what does it sound like?*
 
 See also:
-[EndCommuteEverything](#EndCommuteEverythning), [Commutative](#Commutative).
+[EndCommuteEverything](#EndCommuteEverything), [Commutative](#Commutative).
 
 ### EndCommuteEverything {#EndCommuteEverything}
 
 `EndCommuteEverything[expr]` restores noncommutative behaviour to symbols affected by `BeginCommuteEverything`.
 
 See also:
-[BeginCommuteEverything](#BeginCommuteEverythning), [Commutative](#Commutative).
+[BeginCommuteEverything](#BeginCommuteEverything), [Commutative](#Commutative).
 
 ### ExpandNonCommutativeMultiply {#ExpandNonCommutativeMultiply}
 

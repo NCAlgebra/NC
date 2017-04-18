@@ -17,16 +17,16 @@
    polynomials with noncommutative coefficients
    ([NCPolynomial](#PackageNCPolynomial)) with specialized facilities
    for noncommutative quadratic polynomials
-   ([NCQuadratic](#PackageNCQuadratica)) and noncommutative linear
+   ([NCQuadratic](#PackageNCQuadratic)) and noncommutative linear
    polynomials ([NCSylvester](#PackageNCSylvester)).
 5. Modified behavior of `CommuteEverything` (see important notes in
    [CommuteEverything](#CommuteEverything)).
 6. Improvements and consolidation of noncommutative calculus in the
    package [NCDiff](#PackageNCDiff).
 7. Added a complete set of linear algebra algorithms in the new
-   package [MatrixDecomposition](#PackageMatrixDecomposition) and
+   package [MatrixDecompositions](#PackageMatrixDecompositions) and
    their noncommutative versions in the new package
-   [NCMatrixDecomposition](#PackageNCMatrixDecomposition).
+   [NCMatrixDecompositions](#PackageNCMatrixDecompositions).
 8. General improvements on the Semidefinite Programming package
    [NCSDP](#PackageNCSDP).
 9. New algorithms for simplification of noncommutative rationals

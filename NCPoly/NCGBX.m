@@ -13,7 +13,6 @@ BeginPackage[ "NCGBX`",
 
 Clear[ClearMonomialOrder,
       SetMonomialOrder,
-      SetMonomialOrder,
       GetMonomialOrder,
       PrintMonomialOrder,
       SetKnowns,

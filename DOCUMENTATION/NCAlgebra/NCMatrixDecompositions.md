@@ -65,7 +65,7 @@ The following `options` can be given:
 - `CompletePivoting` ([NCLUCompletePivoting](#NCLUCompletePivoting)): function used to sort rows for complete pivoting;
 - `PartialPivoting` ([NCLUPartialPivoting](#NCLUPartialPivoting)): function used to sort matrices for complete pivoting;
 - `Inverse` ([NCLUInverse](#NCLUInverse)): function used to invert 2x2 diagonal blocks;
-- `SelfAdjointQ` ([SelfAdjointMatrixQ](#SelfAdjointMatrixQ)): function to test if matrix is self-adjoint;
+- `SelfAdjointMatrixQ` ([NCSelfAdjointQ](#NCSelfAdjointQ)): function to test if matrix is self-adjoint;
 - `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).

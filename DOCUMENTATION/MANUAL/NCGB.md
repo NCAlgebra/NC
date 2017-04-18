@@ -88,7 +88,7 @@ are *unknown*. If one is solving for a variable or desires to prove
 that a certain quantity is zero, then one would want to view that
 variable as *unknown*. In the above example, the symbol '$\ll$'
 separate the *knowns*, $a, b, c$, from the *unknown*, $x$. For more
-details on orderings see Section [Orderings](#Ordering).
+details on orderings see Section [Orderings](#Orderings).
 
 Our goal is to calculate the Gröbner basis associated with the
 following relations (i.e. a list of polynomials):

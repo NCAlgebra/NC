@@ -11,7 +11,7 @@ be embedded in notebooks of used on its own.
 
 ## Pretty Output {#Pretty_Output}
 
-In a Mathematica notebook session the package [NCOutput](#NCOutput)
+In a Mathematica notebook session the package [NCOutput](#PackageNCOutput)
 can be used to control how nc expressions are displayed. `NCOutput`
 does not alter the internal representation of nc expressions, just the
 way they are displayed on the screen.

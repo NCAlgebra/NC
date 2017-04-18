@@ -4,14 +4,15 @@
 
 Members are:
 
-* [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
-* [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
 * [NCToNCQuadratic](#NCToNCQuadratic)
-* [NCQuadraticToNC](#NCQuadraticToNC)
 * [NCPToNCQuadratic](#NCPToNCQuadratic)
+* [NCQuadraticToNC](#NCQuadraticToNC)
 * [NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial)
+* [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
+* [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
 
 ### NCToNCQuadratic {#NCToNCQuadratic}
+
 `NCToNCQuadratic[p, vars]` is shorthand for
 
     NCPToNCQuadratic[NCToNCPolynomial[p, vars]]
@@ -19,15 +20,8 @@ Members are:
 See also:
 [NCToNCQuadratic](#NCToNCQuadratic),[NCToNCPolynomial](#NCToNCPolynomial).
 
-### NCQuadraticToNC {#NCQuadraticToNC}
-`NCQuadraticToNC[const, lin, left, middle, right]` is shorthand for
-
-    NCPolynomialToNC[NCQuadraticToNCPolynomial[const, lin, left, middle, right]]
-
-See also:
-[NCQuadraticToNCPolynomial](#NCQuadraticToNC),[NCPolynomialToNC](#NCPolynomialToNC).
-
 ### NCPToNCQuadratic {#NCPToNCQuadratic}
+
 `NCPToNCQuadratic[p]` gives an expanded representation for the quadratic `NCPolynomial` `p`.
 
 `NCPToNCQuadratic` returns a list with four elements:
@@ -56,12 +50,27 @@ produces
 See also:
 [NCSylvester](#PackageNCSylvester),[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
 
-### NCQuadraticMakeSymmetric {#NCQuadraticMakeSymmetric}
+### NCQuadraticToNC {#NCQuadraticToNC}
 
-`NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]` takes the output of [`NCPToNCQuadratic`](#NCPToNCQuadratic) and produces, if possible, an equivalent symmetric representation in which `Map[tp, left] = right` and `middle` is a symmetric matrix.
+`NCQuadraticToNC[{const, lin, left, middle, right}]` is shorthand for
+
+    NCPolynomialToNC[NCQuadraticToNCPolynomial[{const, lin, left, middle, right}]]
 
 See also:
-[NCPToNCQuadratic](#NCPToNCQuadratic).
+[NCQuadraticToNCPolynomial](#NCQuadraticToNC),[NCPolynomialToNC](#NCPolynomialToNC).
+
+### NCQuadraticToNCPolynomial {#NCQuadraticToNCPolynomial}
+
+`NCQuadraticToNCPolynomial[rep]` takes the list `rep` produced by `NCPToNCQuadratic` and converts it back to an `NCPolynomial`.
+
+`NCQuadraticToNCPolynomial[rep,options]` uses options.
+
+The following options can be given:
+
+- `Collect` (*True*): controls whether the coefficients of the resulting `NCPolynomial` are collected to produce the minimal possible number of terms.
+
+See also:
+[NCPToNCQuadratic](#NCPToNCQuadratic), [NCPolynomial](#NCPolynomial).
 
 ### NCMatrixOfQuadratic {#NCMatrixOfQuadratic}
 
@@ -94,15 +103,10 @@ NCDot[left,middle,right]`.
 See also:
 [NCPToNCQuadratic](#NCPToNCQuadratic), [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).
 
-### NCQuadraticToNCPolynomial {#NCQuadraticToNCPolynomial}
+### NCQuadraticMakeSymmetric {#NCQuadraticMakeSymmetric}
 
-`NCQuadraticToNCPolynomial[rep]` takes the list `rep` produced by `NCPToNCQuadratic` and converts it back to an `NCPolynomial`.
-
-`NCQuadraticToNCPolynomial[rep,options]` uses options.
-
-The following options can be given:
-
-- `Collect` (*True*): controls whether the coefficients of the resulting `NCPolynomial` are collected to produce the minimal possible number of terms.
+`NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]` takes the output of [`NCPToNCQuadratic`](#NCPToNCQuadratic) and produces, if possible, an equivalent symmetric representation in which `Map[tp, left] = right` and `middle` is a symmetric matrix.
 
 See also:
-[NCPToNCQuadratic](#NCPToNCQuadratic), [NCPolynomial](#NCPolynomial).
+[NCPToNCQuadratic](#NCPToNCQuadratic).
+
