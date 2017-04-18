@@ -73,7 +73,7 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCRealization.md \
 	 MANUAL/Bibliography.md
 
-doc: NCDocument.pdf index.html
+doc: NCDocument.pdf index.html README.md
 
 README.md: $(MANUAL)
 	pandoc $(MANUAL) -t markdown_github -N --toc --standalone \
@@ -104,5 +104,5 @@ NCDocument.pdf: $(MANUAL)
 .PHONY: subdirs $(BUILDDIRS)
 
 .PHONY: all clean 
-.PHONY: NCDocument.html NCDocument.pdf
+.PHONY: index.html NCDocument.pdf README.md
 

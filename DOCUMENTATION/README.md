@@ -258,6 +258,7 @@
         -   [SDPFlatDualEval](#SDPFlatDualEval)
         -   [SDPFlatSylvesterEval](#SDPFlatSylvesterEval)
     -   [SDPSylvester](#PackageSDPSylvester)
+        -   [SDPEval](#SDPSylvesterEval)
         -   [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval)
         -   [SDPSylvesterDualEval](#SDPSylvesterDualEval)
         -   [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval)
@@ -6129,7 +6130,7 @@ See also: [SDPPrimalEval](#SDPPrimalEval), [SDPDualEval](#SDPDualEval), [SDPSolv
 
 `SDPPrimalEval[A, {{y}}]` evaluates the linear function \(A y\) in an `SDP`.
 
-See [SDPPrimalEval](#SDPPrimalEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
+See [SDPEval](#SDPEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
 See also: [SDPEval](#SDPEval), [SDPDualEval](#SDPDualEval), [SDPSolve](#SDPSolve), [SDPMatrices](#SDPMatrices).
 
@@ -6213,17 +6214,26 @@ SDPSylvester
 
 Members are:
 
--   [SDPSylvesterEval](#SDPSylvesterEval)
+-   [SDPEval](#SDPSylvesterEval)
+-   [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval)
 -   [SDPSylvesterDualEval](#SDPSylvesterDualEval)
 -   [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval)
+
+### SDPEval
+
+`SDPEval[A, y]` evaluates the linear function \(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\) in an `SDPSylvester`.
+
+This is a convenient replacement for [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval) in which the list `y` can be used directly.
+
+See also: [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval), [SDPSylvesterDualEval](#SDPSylvesterDualEval).
 
 ### SDPSylvesterPrimalEval
 
 `SDPSylvesterPrimalEval[a, y]` evaluates the linear function \(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\) in an `SDPSylvester`.
 
-For example
+See [SDPSylvesterEval](#SDPSylvesterEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
-See also: [SDPSylvesterDualEval](#SDPSylvesterDualEval), [SDPSolve](#SDPSylvesterSolve).
+See also: [SDPSylvesterDualEval](#SDPSylvesterDualEval), [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval).
 
 ### SDPSylvesterDualEval
 

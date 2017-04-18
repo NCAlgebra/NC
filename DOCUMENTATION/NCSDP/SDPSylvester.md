@@ -13,19 +13,30 @@ where $S$ is a symmetric positive semidefinite matrix and $y = \{ y_1, \ldots, y
 
 Members are:
 
-* [SDPSylvesterEval](#SDPSylvesterEval)
+* [SDPEval](#SDPSylvesterEval)
+* [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval)
 * [SDPSylvesterDualEval](#SDPSylvesterDualEval)
 * [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval)
+
+### SDPEval {#SDPSylvesterEval}
+
+`SDPEval[A, y]` evaluates the linear function $A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T$ in an `SDPSylvester`.
+
+This is a convenient replacement for [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval) in which the list `y` can be used directly.
+
+See also:
+[SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval),
+[SDPSylvesterDualEval](#SDPSylvesterDualEval).
 
 ### SDPSylvesterPrimalEval {#SDPSylvesterPrimalEval}
 
 `SDPSylvesterPrimalEval[a, y]` evaluates the linear function $A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T$ in an `SDPSylvester`.
 
-For example
+See [SDPSylvesterEval](#SDPSylvesterEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
 See also:
 [SDPSylvesterDualEval](#SDPSylvesterDualEval),
-[SDPSolve](#SDPSylvesterSolve).
+[SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval).
 
 ### SDPSylvesterDualEval {#SDPSylvesterDualEval}
 

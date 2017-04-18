@@ -32,8 +32,10 @@ Begin[ "`Private`" ]
   (* SDPDualEval *)
   SDPSylvesterDualEval = SylvesterDualEval;
 
+  (* SDPEval *)
+  SDPEval = SylvesterPrimalEval;
+  
   (* SDPFunctions *)
-
   Clear[SDPFunctionsAux];
   SDPFunctionsAux[AA_List,BB_List,CC_List,syms_List] := Module[ 
     { FDualEval, FPrimalEval, FSylvesterEval }, 

@@ -124,7 +124,7 @@ See also:
 
 `SDPPrimalEval[A, {{y}}]` evaluates the linear function $A y$ in an `SDP`.
 
-See [SDPPrimalEval](#SDPPrimalEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
+See [SDPEval](#SDPEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
 See also:
 [SDPEval](#SDPEval),

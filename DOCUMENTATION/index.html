@@ -322,9 +322,10 @@
 <li><a href="#SDPFlatSylvesterEval"><span class="toc-section-number">14.6.4</span> SDPFlatSylvesterEval</a></li>
 </ul></li>
 <li><a href="#PackageSDPSylvester"><span class="toc-section-number">14.7</span> SDPSylvester</a><ul>
-<li><a href="#SDPSylvesterPrimalEval"><span class="toc-section-number">14.7.1</span> SDPSylvesterPrimalEval</a></li>
-<li><a href="#SDPSylvesterDualEval"><span class="toc-section-number">14.7.2</span> SDPSylvesterDualEval</a></li>
-<li><a href="#SDPSylvesterSylvesterEval"><span class="toc-section-number">14.7.3</span> SDPSylvesterSylvesterEval</a></li>
+<li><a href="#SDPSylvesterEval"><span class="toc-section-number">14.7.1</span> SDPEval</a></li>
+<li><a href="#SDPSylvesterPrimalEval"><span class="toc-section-number">14.7.2</span> SDPSylvesterPrimalEval</a></li>
+<li><a href="#SDPSylvesterDualEval"><span class="toc-section-number">14.7.3</span> SDPSylvesterDualEval</a></li>
+<li><a href="#SDPSylvesterSylvesterEval"><span class="toc-section-number">14.7.4</span> SDPSylvesterSylvesterEval</a></li>
 </ul></li>
 <li><a href="#PackagePrimalDual"><span class="toc-section-number">14.8</span> PrimalDual</a><ul>
 <li><a href="#PrimalDual"><span class="toc-section-number">14.8.1</span> PrimalDual</a></li>
@@ -4019,7 +4020,7 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <p>See also: <a href="#SDPPrimalEval">SDPPrimalEval</a>, <a href="#SDPDualEval">SDPDualEval</a>, <a href="#SDPSolve">SDPSolve</a>, <a href="#SDPMatrices">SDPMatrices</a>.</p>
 <h3 id="SDPPrimalEval"><span class="header-section-number">14.5.4</span> SDPPrimalEval</h3>
 <p><code>SDPPrimalEval[A, {{y}}]</code> evaluates the linear function <span class="math inline">\(A y\)</span> in an <code>SDP</code>.</p>
-<p>See <a href="#SDPPrimalEval">SDPPrimalEval</a> for a convenient replacement for <code>SDPPrimalEval</code> in which the list <code>y</code> can be used directly.</p>
+<p>See <a href="#SDPEval">SDPEval</a> for a convenient replacement for <code>SDPPrimalEval</code> in which the list <code>y</code> can be used directly.</p>
 <p>See also: <a href="#SDPEval">SDPEval</a>, <a href="#SDPDualEval">SDPDualEval</a>, <a href="#SDPSolve">SDPSolve</a>, <a href="#SDPMatrices">SDPMatrices</a>.</p>
 <h3 id="SDPDualEval"><span class="header-section-number">14.5.5</span> SDPDualEval</h3>
 <p><code>SDPDualEval[A, X]</code> evaluates the linear function <span class="math inline">\(A^* X\)</span> in an <code>SDP</code>.</p>
@@ -4074,19 +4075,24 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 \]</span> where <span class="math inline">\(S\)</span> is a symmetric positive semidefinite matrix and <span class="math inline">\(y = \{ y_1, \ldots, y_n \}\)</span> is a list of matrix decision variables.</p>
 <p>Members are:</p>
 <ul>
-<li><a href="#SDPSylvesterEval">SDPSylvesterEval</a></li>
+<li><a href="#SDPSylvesterEval">SDPEval</a></li>
+<li><a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a></li>
 <li><a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a></li>
 <li><a href="#SDPSylvesterSylvesterEval">SDPSylvesterSylvesterEval</a></li>
 </ul>
-<h3 id="SDPSylvesterPrimalEval"><span class="header-section-number">14.7.1</span> SDPSylvesterPrimalEval</h3>
+<h3 id="SDPSylvesterEval"><span class="header-section-number">14.7.1</span> SDPEval</h3>
+<p><code>SDPEval[A, y]</code> evaluates the linear function <span class="math inline">\(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\)</span> in an <code>SDPSylvester</code>.</p>
+<p>This is a convenient replacement for <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a> in which the list <code>y</code> can be used directly.</p>
+<p>See also: <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a>, <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>.</p>
+<h3 id="SDPSylvesterPrimalEval"><span class="header-section-number">14.7.2</span> SDPSylvesterPrimalEval</h3>
 <p><code>SDPSylvesterPrimalEval[a, y]</code> evaluates the linear function <span class="math inline">\(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\)</span> in an <code>SDPSylvester</code>.</p>
-<p>For example</p>
-<p>See also: <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>, <a href="#SDPSylvesterSolve">SDPSolve</a>.</p>
-<h3 id="SDPSylvesterDualEval"><span class="header-section-number">14.7.2</span> SDPSylvesterDualEval</h3>
+<p>See <a href="#SDPSylvesterEval">SDPSylvesterEval</a> for a convenient replacement for <code>SDPPrimalEval</code> in which the list <code>y</code> can be used directly.</p>
+<p>See also: <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>, <a href="#SDPSylvesterSylvesterEval">SDPSylvesterSylvesterEval</a>.</p>
+<h3 id="SDPSylvesterDualEval"><span class="header-section-number">14.7.3</span> SDPSylvesterDualEval</h3>
 <p><code>SDPSylvesterDualEval[A, X]</code> evaluates the linear function <span class="math inline">\(A^* X = \{ b_1 X a_1, \cdots, b_n X a_n \}\)</span> in an <code>SDPSylvester</code>.</p>
 <p>For example</p>
 <p>See also: <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a>, <a href="#SDPSylvesterSylvesterEval">SDPSylvesterSylvesterEval</a>.</p>
-<h3 id="SDPSylvesterSylvesterEval"><span class="header-section-number">14.7.3</span> SDPSylvesterSylvesterEval</h3>
+<h3 id="SDPSylvesterSylvesterEval"><span class="header-section-number">14.7.4</span> SDPSylvesterSylvesterEval</h3>
 <p><code>SDPSylvesterEval[a, W]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W A (\Delta_y) W)\)</span> when applied to the scaling <code>W</code>.</p>
 <p><code>SDPSylvesterEval[a, Wl, Wr]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W_l A (\Delta_y) W_r)\)</span> when applied to the left- and right-scalings <code>Wl</code> and <code>Wr</code>.</p>
 <p>See also: <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a>, <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>.</p>
