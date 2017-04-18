@@ -29,6 +29,7 @@ PrimalDual::lineSearch = "Line search failed";
 PrimalDual::unproductive = "Unproductive iteration. Aborting.";
 PrimalDual::InvalidSearchDirection = "Search direction `1` is invalid. Supported search directions are NT, KSH and KSHDual";
 PrimalDual::InvalidMethod = "Method `1` is invalid. Supported methods are PredictorCorrector, LongStep, ShortStep";
+PrimalDual::Error = "@ `1`::`2`";
 
 Clear[
   NT, KSH, KSHDual,
@@ -487,7 +488,12 @@ Begin[ "`Private`" ]
 
             NCDebug[ 1, "*   Assembling Hessian"];
 
-            Hk = ArrayFlatten[SylvesterVecEval @@ {Wkl, Wkr}];
+            Check[ Hk = ArrayFlatten[SylvesterVecEval @@ {Wkl,Wkr}];
+                  ,
+                   Hk = {{-1}};
+                  , 
+                   PrimalDual::Error
+            ];
 
             NCDebug[ 2, 
                      Norm[Hk-Transpose[Hk]] ];

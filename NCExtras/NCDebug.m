@@ -14,8 +14,10 @@
 
 BeginPackage[ "NCDebug`" ];
 
-Clear[NCDebug]
-NCDebug::usage = "Yet to come.";
+Clear[NCDebug];
+
+Get["NCDebug.usage"];
+
 NCDebug::level = "NCDebug must be called with an integer level";
 
 Clear[DebugLevel]

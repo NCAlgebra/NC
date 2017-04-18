@@ -103,22 +103,22 @@ Block[
   (* Test exceptions *)
   
   NCTestCheck[SetNonCommutative[1],
-              CommutativeQ::NonCommutativeSubscript];
+              CommutativeQ::NonCommutative];
   NCTestCheck[SetNonCommutative[Subscript[zz,1]],
               CommutativeQ::NonCommutativeSubscript];
   NCTestCheck[SetNonCommutative[f[x]],
-              CommutativeQ::NonCommutativeSubscript];
+              CommutativeQ::NonCommutative];
   NCTestCheck[SetNonCommutative[x + y],
-              CommutativeQ::NonCommutativeSubscript];
+              CommutativeQ::NonCommutative];
 
   NCTestCheck[SetCommutative[1],
-              CommutativeQ::CommutativeSubscript];
+              CommutativeQ::Commutative];
   NCTestCheck[SetCommutative[Subscript[zz,1]],
               CommutativeQ::CommutativeSubscript];
   NCTestCheck[SetCommutative[f[x]],
-              CommutativeQ::CommutativeSubscript];
+              CommutativeQ::Commutative];
   NCTestCheck[SetCommutative[x + y],
-              CommutativeQ::CommutativeSubscript];
+              CommutativeQ::Commutative];
 
   (* Test subscripts *)
   SetNonCommutative[zz];

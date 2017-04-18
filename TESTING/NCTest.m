@@ -30,6 +30,22 @@ Begin[ "`Private`" ]
   NCTestResults = Association[];
   NCTestCounter = 0;
 
+  NCTestCheck[expr_, messages_] := Block[
+    {result,pass},
+    pass = False;
+    Quiet[
+      Check[ result = Evaluate[expr];
+            ,
+             pass = True;
+            ,
+             messages
+      ];
+     ,
+      messages
+    ];
+    NCTest[pass, True];
+  ];
+  
   NCTestCheck[expr_, answer_, messages_] := Block[
     {result,pass},
     pass = False;

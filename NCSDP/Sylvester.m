@@ -108,6 +108,12 @@ Begin[ "`Private`" ]
        {W . L, ArrayFlatten[Map[(#1 . W)&, Partition[R,{n,p}]]] }
      ];
   ];
+
+  SylvesterEntryScale[{L_,R_},Wl_,Wr_] := (
+    Message[PrimalDual`PrimalDual::Error, 
+            SylvesterEntryScale,
+            "Asymmetric scalings are not supported yet."];
+    Return[{L, R}];) /; Wl =!= Wr;
   
   SylvesterEntryScale[{L_,R_},Wl_,Wr_]:=Module[
     {m,n,p,Np,q,Nm,N},
@@ -385,6 +391,12 @@ Begin[ "`Private`" ]
             {#,dims,symmetric}]&
         ,AA]]];
 
+  SylvesterSylvesterVecEval[AA_,Wl_,Wr_,dims_,symmetry_,reduced_:False] := (
+    Message[PrimalDual`PrimalDual::Error, 
+            SylvesterSylvesterVecEval,
+            "Asymmetric scalings are not supported yet."];
+    Return[{{-1}}];) /; Wl =!= Wr;
+    
   SylvesterSylvesterVecEval[AA_,Wl_,Wr_,dims_,symmetry_,reduced_:False] := Module[
     {H,n,m,iota,i,j,jmax,
      dimi,dimj,

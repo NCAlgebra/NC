@@ -89,7 +89,7 @@ def main():
                     # go into scanning mode
                     mode = State.scanning
                     if debug:
-                        print('> SCANNIG...', file = sys.stderr)
+                        print('> SCANNING...', file = sys.stderr)
                 # retrieve function name
                 function = match.group(1)
                 # reset body

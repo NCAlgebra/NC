@@ -67,14 +67,12 @@ Module[
 
   (* Options *)
 
-  {Y, X, S, iters} = SDPSolve[{AA, BB, CC}, SymmetricVariables -> {1}, SearchDirection -> KSH, DebugLevel -> 0];
+  NCTestCheck[
+     {Y, X, S, iters} = SDPSolve[{AA, BB, CC}, SymmetricVariables -> {1}, SearchDirection -> KSH];
+    ,
+     PrimalDual::Error
+  ];
 
-  exp = Abs[Total[X - Xv, Infinity]];
-  NCTest[exp < 10^(-7), True];
-
-  exp = Abs[Total[S - Sv, Infinity]];
-  NCTest[exp < 10^(-7), True];
-  
   (* Test #2: n x n Lyapunov equation *)
 
    n = 40;

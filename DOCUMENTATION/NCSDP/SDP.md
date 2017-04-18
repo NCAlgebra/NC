@@ -20,7 +20,10 @@ Members are:
 * [SDPMatrices](#SDPMatrices)
 * [SDPSolve](#SDPSolve)
 * [SDPEval](#SDPEval)
+* [SDPPrimalEval](#SDPPrimalEval)
+* [SDPEval](#SDPEval)
 * [SDPDualEval](#SDPDualEval)
+* [SDPSylvesterEval](#SDPSylvesterEval)
 
 ### SDPMatrices {#SDPMatrices}
 
@@ -109,9 +112,22 @@ See also:
 
 `SDPEval[A, y]` evaluates the linear function $A y$ in an `SDP`.
 
-For example
+This is a convenient replacement for [SDPPrimalEval](#SDPPrimalEval) in which the list `y` can be used directly.
 
 See also:
+[SDPPrimalEval](#SDPPrimalEval),
+[SDPDualEval](#SDPDualEval),
+[SDPSolve](#SDPSolve),
+[SDPMatrices](#SDPMatrices).
+
+### SDPPrimalEval {#SDPPrimalEval}
+
+`SDPPrimalEval[A, {{y}}]` evaluates the linear function $A y$ in an `SDP`.
+
+See [SDPPrimalEval](#SDPPrimalEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
+
+See also:
+[SDPEval](#SDPEval),
 [SDPDualEval](#SDPDualEval),
 [SDPSolve](#SDPSolve),
 [SDPMatrices](#SDPMatrices).
@@ -120,10 +136,8 @@ See also:
 
 `SDPDualEval[A, X]` evaluates the linear function $A^* X$ in an `SDP`.
 
-For example
-
 See also:
-[SDPEval](#SDPEval),
+[SDPPrimalEval](#SDPPrimalEval),
 [SDPSolve](#SDPSolve),
 [SDPMatrices](#SDPMatrices).
 

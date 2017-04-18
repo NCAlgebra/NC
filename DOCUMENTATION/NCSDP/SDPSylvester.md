@@ -35,7 +35,7 @@ For example
 
 See also:
 [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval),
-[SDPSolve](#SDPSylvesterSolve).
+[SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval).
 
 ### SDPSylvesterSylvesterEval {#SDPSylvesterSylvesterEval}
 
@@ -48,5 +48,5 @@ representation of the Sylvester mapping $A^* (W_l A (\Delta_y) W_r)$
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also:
-[SDPPrimalEval](#SDPPrimalEval),
-[SDPDualEval](#SDPDualEval).
+[SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval),
+[SDPSylvesterDualEval](#SDPSylvesterDualEval).

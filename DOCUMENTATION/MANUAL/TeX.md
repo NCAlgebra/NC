@@ -1,4 +1,4 @@
-# Pretty Output with Mathematica Notebooks and TeX {#TeX}
+# Pretty Output with Notebooks and \TeX {#TeX}
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/5_PrettyOutput.nb`.

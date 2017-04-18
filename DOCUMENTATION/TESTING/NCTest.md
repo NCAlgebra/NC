@@ -3,6 +3,7 @@
 Members are:
 
 * [NCTest](#NCTest)
+* [NCTestCheck](#NCTestCheck)
 * [NCTestRun](#NCTestRun)
 * [NCTestSummarize](#NCTestSummarize)
 
@@ -11,8 +12,22 @@ Members are:
 `NCTest[expr,answer]` asserts whether `expr` is equal to `answer`. The result of the test is collected when `NCTest` is run from `NCTestRun`.
 
 See also:
-[NCTestRun](#NCTestRun), [NCTestSummarize](#NCTestSummarize)
+[NCTestCheck](#NCTestCheck),
+[NCTestRun](#NCTestRun), 
+[NCTestSummarize](#NCTestSummarize).
 
+### NCTestCheck {#NCTestCheck}
+
+`NCTestCheck[expr,messages]` evaluates `expr` and asserts that the messages in `messages` have been issued. The result of the test is collected when `NCTest` is run from `NCTestRun`.
+
+`NCTestCheck[expr,answer,messages]` also asserts whether `expr` is equal to `answer`.
+
+`NCTestCheck[expr,answer,messages,quiet]` quiets messages in `quiet`.
+
+See also:
+[NCTest](#NCTest),
+[NCTestRun](#NCTestRun),
+[NCTestSummarize](#NCTestSummarize).
 
 ### NCTestRun {#NCTestRun}
 
@@ -26,7 +41,9 @@ For example:
 will run the test files "NCCollec.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
 
 See also:
-[NCTest](#NCTest), [NCTestSummarize](#NCTestSummarize)
+[NCTest](#NCTest), 
+[NCTestCheck](#NCTestCheck), 
+[NCTestSummarize](#NCTestSummarize).
 
 
 ### NCTestSummarize {#NCTestSummarize}
@@ -34,4 +51,4 @@ See also:
 `NCTestSummarize[results]` will print a summary of the results in `results` as produced by `NCTestRun`.
 
 See also:
-[NCTestRun](#NCTestRun)
+[NCTestRun](#NCTestRun).
