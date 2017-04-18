@@ -35,7 +35,7 @@
 -   [Semidefinite Programming](#SemidefiniteProgramming)
     -   [Semidefinite Programs in Matrix Variables](#semidefinite-programs-in-matrix-variables)
     -   [Semidefinite Programs in Vector Variables](#semidefinite-programs-in-vector-variables)
--   [Pretty Output with Mathematica Notebooks and TeX](#TeX)
+-   [Pretty Output with Notebooks and ](#TeX)
     -   [Pretty Output](#Pretty_Output)
     -   [Using NCTeX](#Using_NCTeX)
         -   [NCTeX Options](#NCTeX_Options)
@@ -151,6 +151,8 @@
         -   [GetDiagonal](#GetDiagonal)
         -   [LUPartialPivoting](#LUPartialPivoting)
         -   [LUCompletePivoting](#LUCompletePivoting)
+        -   [LURowReduce](#LURowReduce)
+        -   [LURowReduceIncremental](#LURowReduceIncremental)
 -   [Packages for pretty output, testing, and utilities](#packages-for-pretty-output-testing-and-utilities)
     -   [NCOutput](#PackageNCOutput)
         -   [NCSetOutput](#NCSetOutput)
@@ -169,8 +171,11 @@
         -   [NCRun](#NCRun)
     -   [NCTest](#PackageNCTest)
         -   [NCTest](#NCTest)
+        -   [NCTestCheck](#NCTestCheck)
         -   [NCTestRun](#NCTestRun)
         -   [NCTestSummarize](#NCTestSummarize)
+    -   [NCDebug](#PackageNCDebug)
+        -   [NCDebug](#NCDebug)
     -   [NCUtil](#PackageNCUtil)
         -   [NCConsistentQ](#NCConsistentQ)
         -   [NCGrabFunctions](#NCGrabFunctions)
@@ -208,34 +213,17 @@
         -   [Operations on NC polynomials](#operations-on-nc-polynomials)
     -   [NCQuadratic](#PackageNCQuadratic)
         -   [NCToNCQuadratic](#NCToNCQuadratic)
-        -   [NCQuadraticToNC](#NCQuadraticToNC)
         -   [NCPToNCQuadratic](#NCPToNCQuadratic)
-        -   [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
-        -   [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
+        -   [NCQuadraticToNC](#NCQuadraticToNC)
         -   [NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial)
+        -   [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
+        -   [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
     -   [NCSylvester](#PackageNCSylvester)
-        -   [NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester)
+        -   [NCToNCSylvester](#NCToNCSylvester)
+        -   [NCPToNCSylvester](#NCPToNCSylvester)
+        -   [NCSylvesterToNC](#NCSylvesterToNC)
         -   [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial)
 -   [Algorithms](#algorithms)
-    -   [NCConvexity](#PackageNCConvexity)
-        -   [NCIndependent](#NCIndependent)
-        -   [NCConvexityRegion](#NCConvexityRegion)
-    -   [NCSDP](#PackageNCSDP)
-        -   [NCSDP](#NCSDP)
-        -   [NCSDPForm](#NCSDPForm)
-        -   [NCSDPDual](#NCSDPDual)
-        -   [NCSDPDualForm](#NCSDPDualForm)
-    -   [SDP](#PackageSDP)
-        -   [SDPMatrices](#SDPMatrices)
-        -   [SDPSolve](#SDPSolve)
-        -   [SDPEval](#SDPEval)
-        -   [SDPDualEval](#SDPDualEval)
-    -   [SDPSylvester](#PackageSDPSylvester)
-        -   [SDPSolve](#SDPSylvesterSolve)
-        -   [SDPEval](#SDPSylvesterEval)
-        -   [SDPDualEval](#SDPSylvesterDualEval)
-    -   [PrimalDual](#PackagePrimalDual)
-        -   [PrimalDual](#PrimalDual)
     -   [NCGBX](#PackageNCGBX)
         -   [SetMonomialOrder](#SetMonomialOrder)
         -   [SetKnowns](#SetKnowns)
@@ -249,6 +237,32 @@
         -   [NCReduce](#NCReduce)
     -   [NCPolyGroebner](#PackageNCPolyGroebner)
         -   [NCPolyGroebner](#NCPolyGroebner)
+    -   [NCConvexity](#PackageNCConvexity)
+        -   [NCIndependent](#NCIndependent)
+        -   [NCConvexityRegion](#NCConvexityRegion)
+    -   [NCSDP](#PackageNCSDP)
+        -   [NCSDP](#NCSDP)
+        -   [NCSDPForm](#NCSDPForm)
+        -   [NCSDPDual](#NCSDPDual)
+        -   [NCSDPDualForm](#NCSDPDualForm)
+    -   [SDP](#PackageSDP)
+        -   [SDPMatrices](#SDPMatrices)
+        -   [SDPSolve](#SDPSolve)
+        -   [SDPEval](#SDPEval)
+        -   [SDPPrimalEval](#SDPPrimalEval)
+        -   [SDPDualEval](#SDPDualEval)
+        -   [SDPSylvesterEval](#SDPSylvesterEval)
+    -   [SDPFlat](#PackageSDPFlat)
+        -   [SDPFlatData](#SDPFlatData)
+        -   [SDPFlatPrimalEval](#SDPFlatPrimalEval)
+        -   [SDPFlatDualEval](#SDPFlatDualEval)
+        -   [SDPFlatSylvesterEval](#SDPFlatSylvesterEval)
+    -   [SDPSylvester](#PackageSDPSylvester)
+        -   [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval)
+        -   [SDPSylvesterDualEval](#SDPSylvesterDualEval)
+        -   [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval)
+    -   [PrimalDual](#PackagePrimalDual)
+        -   [PrimalDual](#PrimalDual)
 -   [Work in Progress](#WorkInProgress)
     -   [NCRational](#PackageNCRational)
         -   [State-space realizations for NC rationals](#state-space-realizations-for-nc-rationals)
@@ -324,10 +338,10 @@ Changes in Version 5.0
 1.  Completely rewritten core handling of noncommutative expressions with significant speed gains.
 2.  Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter [Noncommutative Gröbner Basis](#NCGB) in the user guide and the [NCGBX](#PackageNCGBX) package. Some `NCGB` features are not fully supported yet, most notably [NCProcess](#NCProcess).
 3.  New algorithms for representing and operating with noncommutative polynomials with commutative coefficients. These support the new package [NCGBX](#PackageNCGBX). See this section in the chapter [More Advanced Commands](#PolysWithCommutativeCoefficients) and the packages [NCPolyInterface](#PackageNCPolyInterface) and [NCPoly](#PackageNCPoly).
-4.  New algorithms for representing and operating with noncommutative polynomials with noncommutative coefficients ([NCPolynomial](#PackageNCPolynomial)) with specialized facilities for noncommutative quadratic polynomials ([NCQuadratic](#PackageNCQuadratica)) and noncommutative linear polynomials ([NCSylvester](#PackageNCSylvester)).
+4.  New algorithms for representing and operating with noncommutative polynomials with noncommutative coefficients ([NCPolynomial](#PackageNCPolynomial)) with specialized facilities for noncommutative quadratic polynomials ([NCQuadratic](#PackageNCQuadratic)) and noncommutative linear polynomials ([NCSylvester](#PackageNCSylvester)).
 5.  Modified behavior of `CommuteEverything` (see important notes in [CommuteEverything](#CommuteEverything)).
 6.  Improvements and consolidation of noncommutative calculus in the package [NCDiff](#PackageNCDiff).
-7.  Added a complete set of linear algebra algorithms in the new package [MatrixDecomposition](#PackageMatrixDecomposition) and their noncommutative versions in the new package [NCMatrixDecomposition](#PackageNCMatrixDecomposition).
+7.  Added a complete set of linear algebra algorithms in the new package [MatrixDecompositions](#PackageMatrixDecompositions) and their noncommutative versions in the new package [NCMatrixDecompositions](#PackageNCMatrixDecompositions).
 8.  General improvements on the Semidefinite Programming package [NCSDP](#PackageNCSDP).
 9.  New algorithms for simplification of noncommutative rationals ([NCSimplifyRational](#PackageNCSylvester)).
 10. Commands `Transform`, `Substitute`, `SubstituteSymmetric`, etc, have been replaced by the much more reliable commands in the new package [NCReplace](#PackageNCReplace).
@@ -1223,7 +1237,7 @@ would produce the results one would expect:
     c**c**d
     1 + 2 c**c
 
-For this reason, when substituting in `NCAlgebra` it is always safer to use functions from the [`NCReplace` package](#NCReplacePackage) rather than the corresponding Mathematice `Replace` family of functions. Unfortunately, this comes at a the expense of sacrificing the standard operators `/.` (`ReplaceAll`) and `//.` (`ReplaceRepeated`), which cannot be safely overloaded, forcing one to use the full names `NCReplaceAll` and `NCReplaceRepeated`.
+For this reason, when substituting in `NCAlgebra` it is always safer to use functions from the [`NCReplace` package](#PackageNCReplace) rather than the corresponding Mathematice `Replace` family of functions. Unfortunately, this comes at a the expense of sacrificing the standard operators `/.` (`ReplaceAll`) and `//.` (`ReplaceRepeated`), which cannot be safely overloaded, forcing one to use the full names `NCReplaceAll` and `NCReplaceRepeated`.
 
 On the same vein, the following substitution rule
 
@@ -1622,7 +1636,7 @@ y^T
 \end{aligned}
 \]
 
-See section [linear functions](#LinearPolys) for more features on linear polynomial matrices.
+See section [linear functions](#Linear) for more features on linear polynomial matrices.
 
 Quadratic polynomials
 ---------------------
@@ -1871,7 +1885,7 @@ The monomial ordering imposes a relationship between the variables which are use
 
     PrintMonomialOrder[];
 
-which in this case prints: \[a < b < c \ll x.\] A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see soon, in many engineering problems, it suffices to know which variables correspond to quantities which are *known* and which variables correspond to quantities which are *unknown*. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as *unknown*. In the above example, the symbol '\(\ll\)' separate the *knowns*, \(a, b, c\), from the *unknown*, \(x\). For more details on orderings see Section [Orderings](#Ordering).
+which in this case prints: \[a < b < c \ll x.\] A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see soon, in many engineering problems, it suffices to know which variables correspond to quantities which are *known* and which variables correspond to quantities which are *unknown*. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as *unknown*. In the above example, the symbol '\(\ll\)' separate the *knowns*, \(a, b, c\), from the *unknown*, \(x\). For more details on orderings see Section [Orderings](#Orderings).
 
 Our goal is to calculate the Gröbner basis associated with the following relations (i.e. a list of polynomials): \[
 \begin{aligned}
@@ -2372,7 +2386,7 @@ In order to obtaining a numerical solution for an instance of the above semidefi
     A = {{0, 1}, {-1, -2}};
     data = {a -> A};
 
-Equipped with the above list of rules representing a problem instance one can load [`SDPSylvester`](#SDPSylvester) and use `NCSDP` to create a problem instance as follows:
+Equipped with the above list of rules representing a problem instance one can load [`SDPSylvester`](#PackageSDPSylvester) and use `NCSDP` to create a problem instance as follows:
 
     {abc, rules} = NCSDP[ineqs, vars, obj, data];
 
@@ -2440,7 +2454,7 @@ The dual program for the example problem above is: \[
 Semidefinite Programs in Vector Variables
 -----------------------------------------
 
-The package [SDP](#SDP) provides a crude and not very efficient way to define and solve semidefinite programs in standard form, that is vectorized. You do not need to load `NCAlgebra` if you just want to use the semidefinite program solver. But you still need to load `NC` as in:
+The package [SDP](#PackageSDP) provides a crude and not very efficient way to define and solve semidefinite programs in standard form, that is vectorized. You do not need to load `NCAlgebra` if you just want to use the semidefinite program solver. But you still need to load `NC` as in:
 
     << NC`
     << SDP`
@@ -2488,10 +2502,10 @@ The resulting SDP is solved using [`SDPSolve`](#SDPSolve):
 
 The variables `Y` and `S` are the *primal* solutions and `X` is the *dual* solution. Detailed information on the computed solution is found in the variable `flags`.
 
-The package `SDP` is built so as to be easily overloaded with more efficient or more structure functions. See for example [SDPFlat](#SDPFlat) and [SDPSylvester](#SDPSylvester).
+The package `SDP` is built so as to be easily overloaded with more efficient or more structure functions. See for example [SDPFlat](#PackageSDPFlat) and [SDPSylvester](#PackageSDPSylvester).
 
-Pretty Output with Mathematica Notebooks and TeX
-================================================
+Pretty Output with Notebooks and 
+=================================
 
 If you want a living version of this chapter just run the notebook `NC/DEMOS/5_PrettyOutput.nb`.
 
@@ -2500,7 +2514,7 @@ If you want a living version of this chapter just run the notebook `NC/DEMOS/5_P
 Pretty Output
 -------------
 
-In a Mathematica notebook session the package [NCOutput](#NCOutput) can be used to control how nc expressions are displayed. `NCOutput` does not alter the internal representation of nc expressions, just the way they are displayed on the screen.
+In a Mathematica notebook session the package [NCOutput](#PackageNCOutput) can be used to control how nc expressions are displayed. `NCOutput` does not alter the internal representation of nc expressions, just the way they are displayed on the screen.
 
 The function [NCSetOutput](#NCSetOutput) can be used to set the display options. For example:
 
@@ -2891,13 +2905,13 @@ See also: [BeginCommuteEverything](#BeginCommuteEverything), [Commutative](#Comm
 
 `BeginCommuteEverything` answers the question *what does it sound like?*
 
-See also: [EndCommuteEverything](#EndCommuteEverythning), [Commutative](#Commutative).
+See also: [EndCommuteEverything](#EndCommuteEverything), [Commutative](#Commutative).
 
 ### EndCommuteEverything
 
 `EndCommuteEverything[expr]` restores noncommutative behaviour to symbols affected by `BeginCommuteEverything`.
 
-See also: [BeginCommuteEverything](#BeginCommuteEverythning), [Commutative](#Commutative).
+See also: [BeginCommuteEverything](#BeginCommuteEverything), [Commutative](#Commutative).
 
 ### ExpandNonCommutativeMultiply
 
@@ -3777,7 +3791,7 @@ The following `options` can be given:
 -   `CompletePivoting` ([NCLUCompletePivoting](#NCLUCompletePivoting)): function used to sort rows for complete pivoting;
 -   `PartialPivoting` ([NCLUPartialPivoting](#NCLUPartialPivoting)): function used to sort matrices for complete pivoting;
 -   `Inverse` ([NCLUInverse](#NCLUInverse)): function used to invert 2x2 diagonal blocks;
--   `SelfAdjointQ` ([SelfAdjointMatrixQ](#SelfAdjointMatrixQ)): function to test if matrix is self-adjoint;
+-   `SelfAdjointMatrixQ` ([NCSelfAdjointQ](#NCSelfAdjointQ)): function to test if matrix is self-adjoint;
 -   `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).
@@ -3853,6 +3867,8 @@ Members are:
     -   [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting)
     -   [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting)
     -   [LDLDecomposition](#LDLDecomposition)
+    -   [LURowReduce](#LURowReduce)
+    -   [LURowReduceIncremental](#LURowReduceIncremental)
 -   Solvers
     -   [LowerTriangularSolve](#LowerTriangularSolve)
     -   [UpperTriangularSolve](#UpperTriangularSolve)
@@ -3863,8 +3879,6 @@ Members are:
     -   [GetDiagonal](#GetDiagonal)
     -   [LUPartialPivoting](#LUPartialPivoting)
     -   [LUCompletePivoting](#LUCompletePivoting)
-    -   [LUNoPartialPivoting](#LUNoPartialPivoting)
-    -   [LUNoCompletePivoting](#LUNoCompletePivoting)
 
 ### LUDecompositionWithPartialPivoting
 
@@ -3915,7 +3929,7 @@ The following `options` can be given:
 -   `Dot` (`Dot`): function used to multiply vectors and matrices;
 -   `Pivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for pivoting;
 
-See also: [LUDecomposition](#LUDecomposition), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
+See also: LUDecomposition, [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
 ### LDLDecomposition
 
@@ -3943,7 +3957,7 @@ The following `options` can be given:
 -   `CompletePivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for complete pivoting;
 -   `PartialPivoting` ([LUPartialPivoting](#LUPartialPivoting)): function used to sort matrices for complete pivoting;
 -   `Inverse` (`Inverse`): function used to invert 2x2 diagonal blocks;
--   `SelfAdjointQ` ([SelfAdjointMatrixQ](#SelfAdjointMatrixQ)): function to test if matrix is self-adjoint;
+-   `SelfAdjointMatrixQ` (HermitianQ): function to test if matrix is self-adjoint;
 -   `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
@@ -3976,7 +3990,7 @@ See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoti
 
 `LUInverse[a]` calculates the inverse of matrix `a`.
 
-`LUInverse` uses the [LuDecompositionWithPartialPivoting](#LuDecompositionWithPartialPivoting) and the triangular solvers [LowerTriangularSolve](#LowerTriangularSolve) and [UpperTriangularSolve](#UpperTriangularSolve).
+`LUInverse` uses the [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting) and the triangular solvers [LowerTriangularSolve](#LowerTriangularSolve) and [UpperTriangularSolve](#UpperTriangularSolve).
 
 See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
@@ -4045,6 +4059,10 @@ See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoti
 `LUCompletePivoting[v, f]` sorts with respect to the function `f` instead of the absolute value.
 
 See also: [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
+
+### LURowReduce
+
+### LURowReduceIncremental
 
 Packages for pretty output, testing, and utilities
 ==================================================
@@ -4176,6 +4194,7 @@ NCTest
 Members are:
 
 -   [NCTest](#NCTest)
+-   [NCTestCheck](#NCTestCheck)
 -   [NCTestRun](#NCTestRun)
 -   [NCTestSummarize](#NCTestSummarize)
 
@@ -4183,7 +4202,17 @@ Members are:
 
 `NCTest[expr,answer]` asserts whether `expr` is equal to `answer`. The result of the test is collected when `NCTest` is run from `NCTestRun`.
 
-See also: [NCTestRun](#NCTestRun), [NCTestSummarize](#NCTestSummarize)
+See also: [NCTestCheck](#NCTestCheck), [NCTestRun](#NCTestRun), [NCTestSummarize](#NCTestSummarize).
+
+### NCTestCheck
+
+`NCTestCheck[expr,messages]` evaluates `expr` and asserts that the messages in `messages` have been issued. The result of the test is collected when `NCTest` is run from `NCTestRun`.
+
+`NCTestCheck[expr,answer,messages]` also asserts whether `expr` is equal to `answer`.
+
+`NCTestCheck[expr,answer,messages,quiet]` quiets messages in `quiet`.
+
+See also: [NCTest](#NCTest), [NCTestRun](#NCTestRun), [NCTestSummarize](#NCTestSummarize).
 
 ### NCTestRun
 
@@ -4195,13 +4224,31 @@ For example:
 
 will run the test files "NCCollec.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
 
-See also: [NCTest](#NCTest), [NCTestSummarize](#NCTestSummarize)
+See also: [NCTest](#NCTest), [NCTestCheck](#NCTestCheck), [NCTestSummarize](#NCTestSummarize).
 
 ### NCTestSummarize
 
 `NCTestSummarize[results]` will print a summary of the results in `results` as produced by `NCTestRun`.
 
-See also: [NCTestRun](#NCTestRun)
+See also: [NCTestRun](#NCTestRun).
+
+NCDebug
+-------
+
+Members are:
+
+-   [NCDebug](#NCDebug)
+
+### NCDebug
+
+`NCDebug[level, message]` prints the objects `message` if level is higher than the current `DebugLevel` option.
+
+Use `SetOptions[NCDebug, DebugLevel -> level]` to set up the current debug level.
+
+Available options are:
+
+-   `DebugLevel` (0): current debug level;
+-   `DebugLogFile` (`$Ouput`): current file to which messages are printed.
 
 NCUtil
 ------
@@ -4226,9 +4273,9 @@ Members are:
 
 ### NCGrabFunctions
 
-`NCGragFunctions[expr]` returns a list with all fragments of `expr` containing functions.
+`NCGrabFunctions[expr]` returns a list with all fragments of `expr` containing functions.
 
-`NCGragFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
+`NCGrabFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
 
 For example:
 
@@ -4246,13 +4293,13 @@ returns
 
     {inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}
 
-See also: [NCGrabSymbols](#NCGragSymbols).
+See also: [NCGrabSymbols](#NCGrabSymbols).
 
 ### NCGrabSymbols
 
-`NCGragSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
+`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
 
-`NCGragSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
+`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
 
 For example:
 
@@ -4264,11 +4311,11 @@ returns `{x,y}` and
 
 returns `{inv[x]}`.
 
-See also: [NCGrabFunctions](#NCGragFunctions).
+See also: [NCGrabFunctions](#NCGrabFunctions).
 
 ### NCGrabIndeterminants
 
-`NCGragIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
+`NCGrabIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
 
 For example:
 
@@ -4278,7 +4325,7 @@ returns
 
     {y, inv[x], inv[1 + inv[1 + tp[x] ** y]], tp[y]}
 
-See also: [NCGrabFunctions](#NCGragFunctions), [NCGrabSymbols](#NCGragSymbols).
+See also: [NCGrabFunctions](#NCGrabFunctions), [NCGrabSymbols](#NCGrabSymbols).
 
 ### NCVariables
 
@@ -4714,6 +4761,14 @@ See also: [NCPolyLeadingTerm](#NCPolyLeadingTerm), [NCPolyLeadingMonomial](#NCPo
 
 #### NCPolyReduce
 
+`NCPolyReduce[polys, rules]` reduces the list of `NCPoly`s `polys` with respect to the list of `NCPoly`s `rules`. The substitutions implied by `rules` are applied repeatedly to the polynomials in the `polys` until no further reduction occurs.
+
+`NCPolyReduce[polys]` reduces each polynomial in the list of `NCPoly`s `polys` with respect to the remaining elements of the list of polyomials `polys` until no further reduction occurs.
+
+By default, `NCPolyReduce` only reduces the leading monomial in the current order. Use the optional boolean flag `complete` to completely reduce all monomials. For example, `NCPolyReduce[polys, rules, True]` and `NCPolyReduce[polys, True]`.
+
+See also: [NCPolyGroebner](#NCPolyGroebner).
+
 #### NCPolySum
 
 `NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f and g.
@@ -4750,7 +4805,7 @@ results in the matrices
 
 which are the Hankel matrices associated with the commutator \(x y - y x\).
 
-See also: [NCPolyRealization](#NCPolyRealization), [NCIntegerToIndex](#NCIntegerToIndex).
+See also: [NCPolyRealization](#NCPolyRealization), [NCDigitsToIndex](#NCDigitsToIndex).
 
 #### NCPolyRealization
 
@@ -4806,7 +4861,7 @@ in which `3` is the partial degree of the monomial \(xzyy\) with respect to lett
 
 This construction is used to represent graded degree-lexicographic orderings.
 
-See also: [NCIntergerDigits](#NCIntergerDigits).
+See also: [NCIntegerDigits](#NCIntegerDigits).
 
 #### NCIntegerDigits
 
@@ -4872,7 +4927,7 @@ returns
 
     {1,3, 5,27}
 
-See also: [NCFromDigits](#NCFromDigits), [NCIntergerDigits](#NCIntergerDigits).
+See also: [NCFromDigits](#NCFromDigits), [NCIntegerDigits](#NCIntegerDigits).
 
 #### NCPadAndMatch
 
@@ -5122,7 +5177,7 @@ in variables `x` and `y` is stored as:
 
 NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
 
-See also: [`NCToNCPolynomial`](#NCToNCPolynomial), [`NCPolynomialToNC`](#NCPolynomialToNC), [`NCTermsToNC`](#NCTermsToNC).
+See also: [`NCToNCPolynomial`](#NCToNCPolynomial), [`NCPolynomialToNC`](#NCPolynomialToNC), [`NCPTermsToNC`](#NCPTermsToNC).
 
 #### NCToNCPolynomial
 
@@ -5222,7 +5277,7 @@ See also: [`NCPTermsOfDegree`](#NCPTermsOfDegree),[`NCPTermsToNC`](#NCPTermsToNC
 
 #### NCPTermsToNC
 
-`NCPTermsToNC` gives a nc expression corresponding to terms produced by `NCPTermsOfDegree` or `NCTermsOfTotalDegree`.
+`NCPTermsToNC` gives a nc expression corresponding to terms produced by `NCPTermsOfDegree` or `NCPTermsOfTotalDegree`.
 
 For example:
 
@@ -5360,12 +5415,12 @@ NCQuadratic
 
 Members are:
 
--   [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
--   [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
 -   [NCToNCQuadratic](#NCToNCQuadratic)
--   [NCQuadraticToNC](#NCQuadraticToNC)
 -   [NCPToNCQuadratic](#NCPToNCQuadratic)
+-   [NCQuadraticToNC](#NCQuadraticToNC)
 -   [NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial)
+-   [NCMatrixOfQuadratic](#NCMatrixOfQuadratic)
+-   [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric)
 
 ### NCToNCQuadratic
 
@@ -5374,14 +5429,6 @@ Members are:
     NCPToNCQuadratic[NCToNCPolynomial[p, vars]]
 
 See also: [NCToNCQuadratic](#NCToNCQuadratic),[NCToNCPolynomial](#NCToNCPolynomial).
-
-### NCQuadraticToNC
-
-`NCQuadraticToNC[const, lin, left, middle, right]` is shorthand for
-
-    NCPolynomialToNC[NCQuadraticToNCPolynomial[const, lin, left, middle, right]]
-
-See also: [NCQuadraticToNCPolynomial](#NCQuadraticToNC),[NCPolynomialToNC](#NCPolynomialToNC).
 
 ### NCPToNCQuadratic
 
@@ -5412,11 +5459,25 @@ produces
 
 See also: [NCSylvester](#PackageNCSylvester),[NCQuadraticToNCPolynomial](#NCQuadraticToNCPolynomial),[NCPolynomial](#NCPolynomial).
 
-### NCQuadraticMakeSymmetric
+### NCQuadraticToNC
 
-`NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]` takes the output of [`NCPToNCQuadratic`](#NCPToNCQuadratic) and produces, if possible, an equivalent symmetric representation in which `Map[tp, left] = right` and `middle` is a symmetric matrix.
+`NCQuadraticToNC[{const, lin, left, middle, right}]` is shorthand for
 
-See also: [NCPToNCQuadratic](#NCPToNCQuadratic).
+    NCPolynomialToNC[NCQuadraticToNCPolynomial[{const, lin, left, middle, right}]]
+
+See also: [NCQuadraticToNCPolynomial](#NCQuadraticToNC),[NCPolynomialToNC](#NCPolynomialToNC).
+
+### NCQuadraticToNCPolynomial
+
+`NCQuadraticToNCPolynomial[rep]` takes the list `rep` produced by `NCPToNCQuadratic` and converts it back to an `NCPolynomial`.
+
+`NCQuadraticToNCPolynomial[rep,options]` uses options.
+
+The following options can be given:
+
+-   `Collect` (*True*): controls whether the coefficients of the resulting `NCPolynomial` are collected to produce the minimal possible number of terms.
+
+See also: [NCPToNCQuadratic](#NCPToNCQuadratic), [NCPolynomial](#NCPolynomial).
 
 ### NCMatrixOfQuadratic
 
@@ -5447,17 +5508,11 @@ The answer from `NCMatrixOfQuadratics` always satisfies `p = NCDot[left,middle,r
 
 See also: [NCPToNCQuadratic](#NCPToNCQuadratic), [NCQuadraticMakeSymmetric](#NCQuadraticMakeSymmetric).
 
-### NCQuadraticToNCPolynomial
+### NCQuadraticMakeSymmetric
 
-`NCQuadraticToNCPolynomial[rep]` takes the list `rep` produced by `NCPToNCQuadratic` and converts it back to an `NCPolynomial`.
+`NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]` takes the output of [`NCPToNCQuadratic`](#NCPToNCQuadratic) and produces, if possible, an equivalent symmetric representation in which `Map[tp, left] = right` and `middle` is a symmetric matrix.
 
-`NCQuadraticToNCPolynomial[rep,options]` uses options.
-
-The following options can be given:
-
--   `Collect` (*True*): controls whether the coefficients of the resulting `NCPolynomial` are collected to produce the minimal possible number of terms.
-
-See also: [NCPToNCQuadratic](#NCPToNCQuadratic), [NCPolynomial](#NCPolynomial).
+See also: [NCPToNCQuadratic](#NCPToNCQuadratic).
 
 NCSylvester
 -----------
@@ -5466,14 +5521,24 @@ NCSylvester
 
 Members are:
 
--   [NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester)
+-   [NCToNCSylvester](#NCToNCSylvester)
+-   [NCPToNCSylvester](#NCPToNCSylvester)
+-   [NCSylvesterToNC](#NCSylvesterToNC)
 -   [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial)
 
-### NCPolynomialToNCSylvester
+### NCToNCSylvester
 
-`NCPolynomialToNCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
+`NCToNCSylvester[p, vars]` is shorthand for
 
-`NCPolynomialToNCSylvester` returns a list with two elements:
+    NCPToNCSylvester[NCToNCPolynomial[p, vars]]
+
+See also: [NCToNCSylvester](#NCToNCSylvester), [NCToNCPolynomial](#NCToNCPolynomial).
+
+### NCPToNCSylvester
+
+`NCPToNCSylvester[p]` gives an expanded representation for the linear `NCPolynomial` `p`.
+
+`NCPToNCSylvester` returns a list with two elements:
 
 -   the first is a the independent term;
 -   the second is an association where each key is one of the variables and each value is a list with three elements:
@@ -5485,7 +5550,7 @@ Members are:
 Example:
 
     p = NCToNCPolynomial[2 + a**x**b + c**x**d + y, {x,y}];
-    {p0,sylv} = NCPolynomialToNCSylvester[p,x]
+    {p0,sylv} = NCPolynomialToNCSylvester[p]
 
 produces
 
@@ -5493,401 +5558,28 @@ produces
     sylv = <|x->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]}, 
              y->{{1},{1},SparseArray[{{1}}]}|>
 
-See also: [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial), [NCPolynomial](#NCPolynomial).
+See also: [NCSylvesterToNCPolynomial](#NCSylvesterToNCPolynomial), [NCSylvesterToNC](#NCSylvesterToNCPolynomial), [NCToNCSylvester](#NCToNCSylvester), [NCPolynomial](#NCPolynomial).
+
+### NCSylvesterToNC
+
+`NCSylvesterToNC[{const, lin}]` is shorthand for
+
+    NCPolynomialToNC[NCSylvesterToNCPolynomial[{const, lin}]]
+
+See also: [NCSylvesterToNCPolynomial](#NCSylvesterToNC), [NCPolynomialToNC](#NCPolynomialToNC).
 
 ### NCSylvesterToNCPolynomial
 
-`NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCPolynomialToNCSylvester` and converts it back to an `NCPolynomial`.
+`NCSylvesterToNCPolynomial[rep]` takes the list `rep` produced by `NCPToNCSylvester` and converts it back to an `NCPolynomial`.
 
 `NCSylvesterToNCPolynomial[rep,options]` uses `options`.
 
 The following `options` can be given: \* `Collect` (*True*): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.
 
-See also: [NCPolynomialToNCSylvester](#NCPolynomialToNCSylvester), [NCPolynomial](#NCPolynomial).
+See also: [NCPToNCSylvester](#NCPToNCSylvester), [NCToNCSylvester](#NCToNCSylvester), [NCPolynomial](#NCPolynomial).
 
 Algorithms
 ==========
-
-NCConvexity
------------
-
-**NCConvexity** is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.
-
-Members are:
-
--   [NCIndependent](#NCIndependent)
--   [NCConvexityRegion](#NCConvexityRegion)
-
-### NCIndependent
-
-`NCIndependent[list]` attempts to determine whether the nc entries of `list` are independent.
-
-Entries of `NCIndependent` can be nc polynomials or nc rationals.
-
-For example:
-
-    NCIndependent[{x,y,z}]
-
-return *True* while
-
-    NCIndependent[{x,0,z}]
-    NCIndependent[{x,y,x}]
-    NCIndependent[{x,y,x+y}]
-    NCIndependent[{x,y,A x + B y}]
-    NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]
-
-all return *False*.
-
-See also: [NCConvexityRegion](#NCConvexityRegion).
-
-### NCConvexityRegion
-
-`NCConvexityRegion[expr,vars]` is a function which can be used to determine whether the nc rational `expr` is convex in `vars` or not.
-
-For example:
-
-    d = NCConvexityRegion[x**x**x, {x}];
-
-returns
-
-    d = {2 x, -2 inv[x]}
-
-from which we conclude that `x**x**x` is not convex in `x` because \(x \succ 0\) and \(-{x}^{-1} \succ 0\) cannot simultaneously hold.
-
-`NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
-
-    hes = NCHessian[expr, {x, h}];
-
-then
-
-    {lt, mq, rt} = NCMatrixOfQuadratic[hes, {h}]
-
-to decompose the Hessian into a product of a left row vector, `lt`, times a middle matrix, `mq`, times a right column vector, `rt`. The middle matrix, `mq`, is factored using the `NCLDLDecomposition`:
-
-    {ldl, p, s, rank} = NCLDLDecomposition[mq];
-    {lf, d, rt} = GetLDUMatrices[ldl, s];
-
-from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix `d`.
-
-See also: [NCHessian](#NCHessian), [NCMatrixOfQuadratic](#NCMatrixOfQuadratic), [NCLDLDecomposition](#NCLDLDecomposition).
-
-NCSDP
------
-
-**NCSDP** is a package that allows the symbolic manipulation and numeric solution of semidefinite programs.
-
-Members are:
-
--   [NCSDP](#NCSDP)
--   [NCSDPForm](#NCSDPForm)
--   [NCSDPDual](#NCSDPDual)
--   [NCSDPDualForm](#NCSDPDualForm)
-
-### NCSDP
-
-`NCSDP[inequalities,vars,obj,data]` converts the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars` into the semidefinite program with linear objective `obj`. The semidefinite program (SDP) should be given in the following canonical form:
-
-    max  <obj, vars>  s.t.  inequalities <= 0.
-
-It returns a list with two entries:
-
--   The first is a list with the an instance of [SDPSylvester](#SDPSylvester);
--   The second is a list of rules with properties of certain variables.
-
-Both entries should be supplied to [SDPSolve](#SDPSolve) in order to numerically solve the semidefinite program. For example:
-
-    {abc, rules} = NCSDP[inequalities, vars, obj, data];
-
-generates an instance of [SDPSylvester](#SDPSylvester) that can be solved using:
-
-    << SDPSylvester`
-    {Y, X, S, flags} = SDPSolve[abc, rules];
-
-`NCSDP` uses the user supplied rules in `data` to set up the problem data.
-
-`NCSDP[inequalities,vars,data]` converts problem into a feasibility semidefinite program.
-
-`NCSDP[inequalities,vars,obj,data,options]` uses `options`.
-
-The following `options` can be given:
-
--   `DebugLevel` (`0`): control printing of debugging information.
-
-See also: [NCSDPForm](#NCSDPForm), [NCSDPDual](#NCSDPDual), [SDPSolve](#SDPSolve).
-
-### NCSDPForm
-
-`NCSDPForm[[inequalities,vars,obj]` prints out a pretty formatted version of the SDP expressed by the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars`.
-
-See also: [NCSDP](#NCSDP), [NCSDPDualForm](#NCSDPDualForm).
-
-### NCSDPDual
-
-`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj]` calculates the symbolic dual of the SDP expressed by the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars` with linear objective `obj` into a dual semidefinite in the following canonical form:
-
-    max <dObj, dVars>  s.t.  dInequalities == 0,   dVars >= 0.
-
-`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj,dualVars]` uses the symbols in `dualVars` as `dVars`.
-
-`NCSDPDual[inequalities,vars,...,options]` uses `options`.
-
-The following `options` can be given:
-
--   `DualSymbol` (`"w"`): letter to be used as symbol for dual variable;
--   `DebugLevel` (`0`): control printing of debugging information.
-
-See also: [NCSDPDualForm](#NCSDPDualForm), [NCSDP](#NCSDP).
-
-### NCSDPDualForm
-
-`NCSDPForm[[dInequalities,dVars,dObj]` prints out a pretty formatted version of the dual SDP expressed by the list of NC polynomials and NC matrices of polynomials `dInequalities` that are linear in the unknowns listed in `dVars` with linear objective `dObj`.
-
-See also: [NCSDPDual](#NCSDPDual), [NCSDPForm](#NCSDPForm).
-
-SDP
----
-
-`SDP` is a package that provides algorithms for the numeric solution of semidefinite programs. Semidefinite programs are optimization problems of the form: \[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(S\) is a symmetric positive semidefinite matrix and \(y\) is a vector of decision variables.
-
-Members are:
-
--   [SDPMatrices](#SDPMatrices)
--   [SDPSolve](#SDPSolve)
--   [SDPEval](#SDPEval)
--   [SDPDualEval](#SDPDualEval)
-
-### SDPMatrices
-
-`SDPMatrices[f, G, y]` converts the symbolic linear functions `f`, `G` in the variables `y` associated to the semidefinite program:
-
-\[
-\begin{aligned} 
-  \min_y \quad & f(y), \\
-  \text{s.t.} \quad & G(y) \succeq 0
-\end{aligned}
-\]
-
-into numerical data that can be used to solve an SDP in the form:
-
-\[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\]
-
-`SDPMatrices` returns a list with three entries:
-
--   The first is the coefficient array `A`;
--   The second is the coefficient array `b`;
--   The third is the coefficient array `c`.
-
-For example:
-
-    f = -x
-    G = {{1, x}, {x, 1}}
-    vars = {x}
-    {A,b,c} = SDPMatrices[f, G, vars]
-
-results in
-
-    A = {{{{0, -1}, {-1, 0}}}}
-    b = {{{1}}}
-    c = {{{1, 0}, {0, 1}}}
-
-All data is stored as `SparseArray`s.
-
-See also: [SDPSolve](#SDPSolve).
-
-### SDPSolve
-
-`SDPSolve[{A,b,c}]` solves an SDP in the form:
-
-\[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\]
-
-`SDPSolve` returns a list with four entries:
-
--   The first is the primal solution \(y\);
--   The second is the dual solution \(X\);
--   The third is the primal slack variable \(S\);
--   The fourth is a list of flags:
-    -   `PrimalFeasible`: `True` if primal problem is feasible;
-    -   `FeasibilityRadius`: less than one if primal problem is feasible;
-    -   `PrimalFeasibilityMargin`: close to zero if primal problem is feasible;
-    -   `DualFeasible`: `True` if dual problem is feasible;
-    -   `DualFeasibilityRadius`: close to zero if dual problem is feasible.
-
-For example:
-
-    {Y, X, S, flags} = SDPSolve[abc]
-
-solves the SDP `abc`.
-
-`SDPSolve[{A,b,c}, options]` uses `options`.
-
-`options` are those of [PrimalDual](#PrimalDual).
-
-See also: [SDPMatrices](#SDPMatrices).
-
-### SDPEval
-
-`SDPEval[A, y]` evaluates the linear function \(A y\) in an `SDP`.
-
-For example
-
-See also: [SDPDualEval](#SDPDualEval), [SDPSolve](#SDPSolve), [SDPMatrices](#SDPMatrices).
-
-### SDPDualEval
-
-`SDPDualEval[A, X]` evaluates the linear function \(A^* X\) in an `SDP`.
-
-For example
-
-See also: [SDPEval](#SDPEval), [SDPSolve](#SDPSolve), [SDPMatrices](#SDPMatrices).
-
-SDPSylvester
-------------
-
-`SDPSylvester` is a package that provides algorithms for the numeric solution of semidefinite programs. `SDPSylvester` solves semidefinite programs of the form: \[
-\begin{aligned}
-  \max_{y, S} \quad & \sum_i \operatorname{trace}(b_i^T y_i) \\
-  \text{s.t.} \quad & A y + S = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T + S = C \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(S\) is a symmetric positive semidefinite matrix and \(y = \{ y_1, \ldots, y_n \}\) is a list of matrix decision variables.
-
-Members are:
-
--   [SDPSolve](#SDPSylvesterSolve)
--   [SDPEval](#SDPSylvesterEval)
--   [SDPDualEval](#SDPSylvesterDualEval)
-
-### SDPSolve
-
-`SDPSolve[{A,b,c}]` solves an SDP in the form: \[
-\begin{aligned}
-  \max_{y, S} \quad & \sum_i \operatorname{trace}(b_i^T y_i) \\
-  \text{s.t.} \quad & A y + S = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T + S = C \\
-                    & S \succeq 0
-\end{aligned}
-\] `SDPSolve` returns a list with four entries:
-
--   The first is the primal solution \(y\);
--   The second is the dual solution \(X\);
--   The third is the primal slack variable \(S\);
--   The fourth is a list of flags:
-    -   `PrimalFeasible`: `True` if primal problem is feasible;
-    -   `FeasibilityRadius`: less than one if primal problem is feasible;
-    -   `PrimalFeasibilityMargin`: close to zero if primal problem is feasible;
-    -   `DualFeasible`: `True` if dual problem is feasible;
-    -   `DualFeasibilityRadius`: close to zero if dual problem is feasible.
-
-For example:
-
-    {Y, X, S, flags} = SDPSolve[abc]
-
-solves the SDP `abc`.
-
-`SDPSolve[{A,b,c}, options]` uses `options`.
-
-`options` are those of [PrimalDual](#PrimalDual).
-
-The easiest way to create parameters `abc` to be solved by `SDPSolve` is using [NCSDP](#NCSDP).
-
-See also: [NCSDP](#NCSDP).
-
-### SDPEval
-
-`SDPEval[A, y]` evaluates the linear function \(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\) in an `SDPSylvester`.
-
-For example
-
-See also: [SDPDualEval](#SDPSylvesterDualEval), [SDPSolve](#SDPSylvesterSolve), [SDPMatrices](#SDPSylvesterMatrices).
-
-### SDPDualEval
-
-`SDPDualEval[A, X]` evaluates the linear function \(A^* X = \{ b_1 X a_1, \cdots, b_n X a_n \}\) in an `SDPSylvester`.
-
-For example
-
-See also: [SDPEval](#SDPSylvesterEval), [SDPSolve](#SDPSylvesterSolve), [SDPMatrices](#SDPSylvesterMatrices).
-
-PrimalDual
-----------
-
-`PrimalDual` provides an algorithm for solving a pair of primal-dual semidefinite programs in the form \[
-\tag{Primal}
-\begin{aligned}
-  \min_{X} \quad & \operatorname{trace}(c X) \\
-  \text{s.t.} \quad & A^*(X) = b \\
-                    & X \succeq 0
-\end{aligned}
-\] \[
-\tag{Dual}
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A(y) + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(X\) is the primal variable and \((y,S)\) are the dual variables.
-
-The algorithm is parametrized and users should provide their own means of evaluating the mappings \(A\), \(A^*\) and also the Sylvester mapping \[
-    A^*(W_l A(\Delta_y) W_r)
-\] used to solve the least-square subproblem.
-
-Users can develop custom algorithms that can take advantage of special structure, as done for instance in [NCSDP](#PackageNCSDP).
-
-The algorithm constructs a feasible solution using the Self-Dual Embedding of \[\].
-
-Members are:
-
--   [PrimalDual](#PrimalDual)
-
-### PrimalDual
-
-`PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c]` solves the semidefinite program using a primal dual method.
-
-`PrimalEval` should return the primal mapping \(A^*(X)\) when applied to the current primal variable `X` as in `PrimalEval @@ X`.
-
-`DualEval` should return the dual mapping \(A(y)\) when applied to the current dual variable `y` as in `DualEval @@ y`.
-
-`SylvesterVecEval` should return a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
-
-`PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c,options]` uses `options`.
-
-The following `options` can be given:
-
--   `Method` (`PredictorCorrector`): choice of method for updating duality gap; possible options are `ShortStep`, `LongStep` and `PredictorCorrector`;
--   `SearchDirection` (`NT`): choice of search direction to use; possible options are `NT` for Nesterov-Todd, `KSH` for HRVM/KSH/M, `KSHDual` for dual HRVM/KSH/M;
-
--   `FeasibilityTol` (10^-3): tolerance used to assess feasibility;
--   `GapTol` (10^-9): tolerance used to assess optimality;
--   `MaxIter` (250): maximum number of iterations allowed;
-
--   `SparseWeights` (`True`): whether weights should be converted to a `SparseArray`;
--   `RationalizeIterates` (`False`): whether to rationalize iterates in an attempt to construct a rational solution;
--   `SymmetricVariables` (`{}`): list of index of dual variables to be considered symmetric.
-
--   `ScaleHessian` (`True`): whether to scale the least-squares subproblem coefficient matrix;
-
--   `PrintSummary` (`True`): whether to print summary information;
--   `PrintIterations` (`True`): whether to print progrees at each iteration;
--   `DebugLevel` (0): whether to print debug information;
-
--   `Profiling` (`False`): whether to print messages with detailed timing of steps.
 
 NCGBX
 -----
@@ -6118,7 +5810,7 @@ The following `options` can be given:
 -   `PrintSPolynomials` (`False`): if `True` prints every S-polynomial formed at each minor iteration.
 -   `ReturnRules` (`True`): if `True` rules representing relations in which the left-hand side is the leading monomial are returned instead of polynomials. Use `False` for backward compatibility. Can be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
 
-`NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in [NCPolyGroeber](#NCPolyGroeber).
+`NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in [NCPolyGroebner](#NCPolyGroebner).
 
 See also: [ClearMonomialOrder](#ClearMonomialOrder), [GetMonomialOrder](#GetMonomialOrder), [PrintMonomialOrder](#PrintMonomialOrder), [SetKnowns](#SetKnowns), [SetUnknowns](#SetUnknowns), [NCPolyGroebner](#NCPolyGroebner).
 
@@ -6185,6 +5877,433 @@ The following `options` can be given:
 The algorithm is based on (Mora 1994).
 
 See also: [NCPoly](#NCPoly).
+
+NCConvexity
+-----------
+
+**NCConvexity** is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.
+
+Members are:
+
+-   [NCIndependent](#NCIndependent)
+-   [NCConvexityRegion](#NCConvexityRegion)
+
+### NCIndependent
+
+`NCIndependent[list]` attempts to determine whether the nc entries of `list` are independent.
+
+Entries of `NCIndependent` can be nc polynomials or nc rationals.
+
+For example:
+
+    NCIndependent[{x,y,z}]
+
+return *True* while
+
+    NCIndependent[{x,0,z}]
+    NCIndependent[{x,y,x}]
+    NCIndependent[{x,y,x+y}]
+    NCIndependent[{x,y,A x + B y}]
+    NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]
+
+all return *False*.
+
+See also: [NCConvexityRegion](#NCConvexityRegion).
+
+### NCConvexityRegion
+
+`NCConvexityRegion[expr,vars]` is a function which can be used to determine whether the nc rational `expr` is convex in `vars` or not.
+
+For example:
+
+    d = NCConvexityRegion[x**x**x, {x}];
+
+returns
+
+    d = {2 x, -2 inv[x]}
+
+from which we conclude that `x**x**x` is not convex in `x` because \(x \succ 0\) and \(-{x}^{-1} \succ 0\) cannot simultaneously hold.
+
+`NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
+
+    hes = NCHessian[expr, {x, h}];
+
+then
+
+    {lt, mq, rt} = NCMatrixOfQuadratic[hes, {h}]
+
+to decompose the Hessian into a product of a left row vector, `lt`, times a middle matrix, `mq`, times a right column vector, `rt`. The middle matrix, `mq`, is factored using the `NCLDLDecomposition`:
+
+    {ldl, p, s, rank} = NCLDLDecomposition[mq];
+    {lf, d, rt} = GetLDUMatrices[ldl, s];
+
+from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix `d`.
+
+See also: [NCHessian](#NCHessian), [NCMatrixOfQuadratic](#NCMatrixOfQuadratic), [NCLDLDecomposition](#NCLDLDecomposition).
+
+NCSDP
+-----
+
+**NCSDP** is a package that allows the symbolic manipulation and numeric solution of semidefinite programs.
+
+Members are:
+
+-   [NCSDP](#NCSDP)
+-   [NCSDPForm](#NCSDPForm)
+-   [NCSDPDual](#NCSDPDual)
+-   [NCSDPDualForm](#NCSDPDualForm)
+
+### NCSDP
+
+`NCSDP[inequalities,vars,obj,data]` converts the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars` into the semidefinite program with linear objective `obj`. The semidefinite program (SDP) should be given in the following canonical form:
+
+    max  <obj, vars>  s.t.  inequalities <= 0.
+
+It returns a list with two entries:
+
+-   The first is a list with the an instance of [SDPSylvester](#PackageSDPSylvester);
+-   The second is a list of rules with properties of certain variables.
+
+Both entries should be supplied to [SDPSolve](#SDPSolve) in order to numerically solve the semidefinite program. For example:
+
+    {abc, rules} = NCSDP[inequalities, vars, obj, data];
+
+generates an instance of [SDPSylvester](#PackageSDPSylvester) that can be solved using:
+
+    << SDPSylvester`
+    {Y, X, S, flags} = SDPSolve[abc, rules];
+
+`NCSDP` uses the user supplied rules in `data` to set up the problem data.
+
+`NCSDP[inequalities,vars,data]` converts problem into a feasibility semidefinite program.
+
+`NCSDP[inequalities,vars,obj,data,options]` uses `options`.
+
+The following `options` can be given:
+
+-   `DebugLevel` (`0`): control printing of debugging information.
+
+See also: [NCSDPForm](#NCSDPForm), [NCSDPDual](#NCSDPDual), [SDPSolve](#SDPSolve).
+
+### NCSDPForm
+
+`NCSDPForm[[inequalities,vars,obj]` prints out a pretty formatted version of the SDP expressed by the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars`.
+
+See also: [NCSDP](#NCSDP), [NCSDPDualForm](#NCSDPDualForm).
+
+### NCSDPDual
+
+`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj]` calculates the symbolic dual of the SDP expressed by the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars` with linear objective `obj` into a dual semidefinite in the following canonical form:
+
+    max <dObj, dVars>  s.t.  dInequalities == 0,   dVars >= 0.
+
+`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj,dualVars]` uses the symbols in `dualVars` as `dVars`.
+
+`NCSDPDual[inequalities,vars,...,options]` uses `options`.
+
+The following `options` can be given:
+
+-   `DualSymbol` (`"w"`): letter to be used as symbol for dual variable;
+-   `DebugLevel` (`0`): control printing of debugging information.
+
+See also: [NCSDPDualForm](#NCSDPDualForm), [NCSDP](#NCSDP).
+
+### NCSDPDualForm
+
+`NCSDPForm[[dInequalities,dVars,dObj]` prints out a pretty formatted version of the dual SDP expressed by the list of NC polynomials and NC matrices of polynomials `dInequalities` that are linear in the unknowns listed in `dVars` with linear objective `dObj`.
+
+See also: [NCSDPDual](#NCSDPDual), [NCSDPForm](#NCSDPForm).
+
+SDP
+---
+
+`SDP` is a package that provides data structures for the numeric solution of semidefinite programs of the form: \[
+\begin{aligned}
+  \max_{y, S} \quad & b^T y \\
+  \text{s.t.} \quad & A y + S = c \\
+                    & S \succeq 0
+\end{aligned}
+\] where \(S\) is a symmetric positive semidefinite matrix and \(y\) is a vector of decision variables.
+
+See the package [SDP](#PackageSDP) for a potentially more efficient alternative to the basic implementation provided by this package.
+
+Members are:
+
+-   [SDPMatrices](#SDPMatrices)
+-   [SDPSolve](#SDPSolve)
+-   [SDPEval](#SDPEval)
+-   [SDPPrimalEval](#SDPPrimalEval)
+-   [SDPEval](#SDPEval)
+-   [SDPDualEval](#SDPDualEval)
+-   [SDPSylvesterEval](#SDPSylvesterEval)
+
+### SDPMatrices
+
+`SDPMatrices[f, G, y]` converts the symbolic linear functions `f`, `G` in the variables `y` associated to the semidefinite program:
+
+\[
+\begin{aligned} 
+  \min_y \quad & f(y), \\
+  \text{s.t.} \quad & G(y) \succeq 0
+\end{aligned}
+\]
+
+into numerical data that can be used to solve an SDP in the form:
+
+\[
+\begin{aligned}
+  \max_{y, S} \quad & b^T y \\
+  \text{s.t.} \quad & A y + S = c \\
+                    & S \succeq 0
+\end{aligned}
+\]
+
+`SDPMatrices` returns a list with three entries:
+
+-   The first is the coefficient array `A`;
+-   The second is the coefficient array `b`;
+-   The third is the coefficient array `c`.
+
+For example:
+
+    f = -x
+    G = {{1, x}, {x, 1}}
+    vars = {x}
+    {A,b,c} = SDPMatrices[f, G, vars]
+
+results in
+
+    A = {{{{0, -1}, {-1, 0}}}}
+    b = {{{1}}}
+    c = {{{1, 0}, {0, 1}}}
+
+All data is stored as `SparseArray`s.
+
+See also: [SDPSolve](#SDPSolve).
+
+### SDPSolve
+
+`SDPSolve[{A,b,c}]` solves an SDP in the form:
+
+\[
+\begin{aligned}
+  \max_{y, S} \quad & b^T y \\
+  \text{s.t.} \quad & A y + S = c \\
+                    & S \succeq 0
+\end{aligned}
+\]
+
+`SDPSolve` returns a list with four entries:
+
+-   The first is the primal solution \(y\);
+-   The second is the dual solution \(X\);
+-   The third is the primal slack variable \(S\);
+-   The fourth is a list of flags:
+    -   `PrimalFeasible`: `True` if primal problem is feasible;
+    -   `FeasibilityRadius`: less than one if primal problem is feasible;
+    -   `PrimalFeasibilityMargin`: close to zero if primal problem is feasible;
+    -   `DualFeasible`: `True` if dual problem is feasible;
+    -   `DualFeasibilityRadius`: close to zero if dual problem is feasible.
+
+For example:
+
+    {Y, X, S, flags} = SDPSolve[abc]
+
+solves the SDP `abc`.
+
+`SDPSolve[{A,b,c}, options]` uses `options`.
+
+`options` are those of [PrimalDual](#PrimalDual).
+
+See also: [SDPMatrices](#SDPMatrices).
+
+### SDPEval
+
+`SDPEval[A, y]` evaluates the linear function \(A y\) in an `SDP`.
+
+This is a convenient replacement for [SDPPrimalEval](#SDPPrimalEval) in which the list `y` can be used directly.
+
+See also: [SDPPrimalEval](#SDPPrimalEval), [SDPDualEval](#SDPDualEval), [SDPSolve](#SDPSolve), [SDPMatrices](#SDPMatrices).
+
+### SDPPrimalEval
+
+`SDPPrimalEval[A, {{y}}]` evaluates the linear function \(A y\) in an `SDP`.
+
+See [SDPPrimalEval](#SDPPrimalEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
+
+See also: [SDPEval](#SDPEval), [SDPDualEval](#SDPDualEval), [SDPSolve](#SDPSolve), [SDPMatrices](#SDPMatrices).
+
+### SDPDualEval
+
+`SDPDualEval[A, X]` evaluates the linear function \(A^* X\) in an `SDP`.
+
+See also: [SDPPrimalEval](#SDPPrimalEval), [SDPSolve](#SDPSolve), [SDPMatrices](#SDPMatrices).
+
+### SDPSylvesterEval
+
+`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping \(A^* (W A (\Delta_y) W)\) when applied to the scaling `W`.
+
+`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr`.
+
+See also: [SDPPrimalEval](#SDPPrimalEval), [SDPDualEval](#SDPDualEval).
+
+SDPFlat
+-------
+
+`SDPFlat` is a package that provides data structures for the numeric solution of semidefinite programs of the form: \[
+\begin{aligned}
+  \max_{y, S} \quad & b^T y \\
+  \text{s.t.} \quad & A y + S = c \\
+                    & S \succeq 0
+\end{aligned}
+\] where \(S\) is a symmetric positive semidefinite matrix and \(y\) is a vector of decision variables.
+
+It is a potentially more efficient alternative to the basic implementation provided by the package [SDP](#PackageSDP).
+
+Members are:
+
+-   [SDPFlatData](#SDPFlatData)
+-   [SDPFlatPrimalEval](#SDPFlatPrimalEval)
+-   [SDPFlatDualEval](#SDPFlatDualEval)
+-   [SDPFlatSylvesterEval](#SDPFlatSylvesterEval)
+
+### SDPFlatData
+
+`SDPFlatData[{a,b,c}]` converts the triplet `{a,b,c}` from the format of the package [SDP](#PackageSDP) to the `SDPFlat` format.
+
+It returns a list with four entries:
+
+-   The first is the input array `a`;
+-   The second is its flattened version `AFlat`;
+-   The third is the flattened version of `c`, `cFlat`;
+-   The fourth is an array with the flattened dimensions.
+
+See also: [SDP](#PackageSDP).
+
+### SDPFlatPrimalEval
+
+`SDPFlatPrimalEval[aFlat, y]` evaluates the linear function \(A y\) in an `SDPFlat`.
+
+See also: [SDPFlatDualEval](#SDPFlatDualEval), [SDPFlatSylvesterEval](#SDPFlatSylvesterEval).
+
+### SDPFlatDualEval
+
+`SDPFlatDualEval[aFlat, X]` evaluates the linear function \(A^* X\) in an `SDPFlat`.
+
+See also: [SDPFlatPrimalEval](#SDPFlatPrimalEval), [SDPFlatSylvesterEval](#SDPFlatSylvesterEval).
+
+### SDPFlatSylvesterEval
+
+`SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix representation of the Sylvester mapping \(A^* (W A (\Delta_y) W)\) when applied to the scaling `W`.
+
+`SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr`.
+
+See also: [SDPFlatPrimalEval](#SDPFlatPrimalEval), [SDPFlatDualEval](#SDPFlatDualEval).
+
+SDPSylvester
+------------
+
+`SDPSylvester` is a package that provides data structures for the numeric solution of semidefinite programs of the form: \[
+\begin{aligned}
+  \max_{y, S} \quad & \sum_i \operatorname{trace}(b_i^T y_i) \\
+  \text{s.t.} \quad & A y + S = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T + S = C \\
+                    & S \succeq 0
+\end{aligned}
+\] where \(S\) is a symmetric positive semidefinite matrix and \(y = \{ y_1, \ldots, y_n \}\) is a list of matrix decision variables.
+
+Members are:
+
+-   [SDPSylvesterEval](#SDPSylvesterEval)
+-   [SDPSylvesterDualEval](#SDPSylvesterDualEval)
+-   [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval)
+
+### SDPSylvesterPrimalEval
+
+`SDPSylvesterPrimalEval[a, y]` evaluates the linear function \(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\) in an `SDPSylvester`.
+
+For example
+
+See also: [SDPSylvesterDualEval](#SDPSylvesterDualEval), [SDPSolve](#SDPSylvesterSolve).
+
+### SDPSylvesterDualEval
+
+`SDPSylvesterDualEval[A, X]` evaluates the linear function \(A^* X = \{ b_1 X a_1, \cdots, b_n X a_n \}\) in an `SDPSylvester`.
+
+For example
+
+See also: [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval), [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval).
+
+### SDPSylvesterSylvesterEval
+
+`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping \(A^* (W A (\Delta_y) W)\) when applied to the scaling `W`.
+
+`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr`.
+
+See also: [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval), [SDPSylvesterDualEval](#SDPSylvesterDualEval).
+
+PrimalDual
+----------
+
+`PrimalDual` provides an algorithm for solving a pair of primal-dual semidefinite programs in the form \[
+\tag{Primal}
+\begin{aligned}
+  \min_{X} \quad & \operatorname{trace}(c X) \\
+  \text{s.t.} \quad & A^*(X) = b \\
+                    & X \succeq 0
+\end{aligned}
+\] \[
+\tag{Dual}
+\begin{aligned}
+  \max_{y, S} \quad & b^T y \\
+  \text{s.t.} \quad & A(y) + S = c \\
+                    & S \succeq 0
+\end{aligned}
+\] where \(X\) is the primal variable and \((y,S)\) are the dual variables.
+
+The algorithm is parametrized and users should provide their own means of evaluating the mappings \(A\), \(A^*\) and also the Sylvester mapping \[
+    A^*(W_l A(\Delta_y) W_r)
+\] used to solve the least-square subproblem.
+
+Users can develop custom algorithms that can take advantage of special structure, as done for instance in [NCSDP](#PackageNCSDP).
+
+The algorithm constructs a feasible solution using the Self-Dual Embedding of \[\].
+
+Members are:
+
+-   [PrimalDual](#PrimalDual)
+
+### PrimalDual
+
+`PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c]` solves the semidefinite program using a primal dual method.
+
+`PrimalEval` should return the primal mapping \(A^*(X)\) when applied to the current primal variable `X` as in `PrimalEval @@ X`.
+
+`DualEval` should return the dual mapping \(A(y)\) when applied to the current dual variable `y` as in `DualEval @@ y`.
+
+`SylvesterVecEval` should return a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
+
+`PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c,options]` uses `options`.
+
+The following `options` can be given:
+
+-   `Method` (`PredictorCorrector`): choice of method for updating duality gap; possible options are `ShortStep`, `LongStep` and `PredictorCorrector`;
+-   `SearchDirection` (`NT`): choice of search direction to use; possible options are `NT` for Nesterov-Todd, `KSH` for HRVM/KSH/M, `KSHDual` for dual HRVM/KSH/M;
+
+-   `FeasibilityTol` (10^-3): tolerance used to assess feasibility;
+-   `GapTol` (10^-9): tolerance used to assess optimality;
+-   `MaxIter` (250): maximum number of iterations allowed;
+
+-   `SparseWeights` (`True`): whether weights should be converted to a `SparseArray`;
+-   `RationalizeIterates` (`False`): whether to rationalize iterates in an attempt to construct a rational solution;
+-   `SymmetricVariables` (`{}`): list of index of dual variables to be considered symmetric.
+
+-   `ScaleHessian` (`True`): whether to scale the least-squares subproblem coefficient matrix;
+
+-   `PrintSummary` (`True`): whether to print summary information;
+-   `PrintIterations` (`True`): whether to print progrees at each iteration;
+-   `DebugLevel` (0): whether to print debug information;
+
+-   `Profiling` (`False`): whether to print messages with detailed timing of steps.
 
 Work in Progress
 ================
