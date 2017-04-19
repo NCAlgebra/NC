@@ -96,11 +96,11 @@ Module[
 
     (* check if FeynCalc is installed. If not, install it *)
     If [ FindFile["NC`"] =!= $Failed,
-         Get["NC`"],
+         Needs["NC`"],
          Print["Installation of NCAlgebra failed!"]
     ];
     If [ FindFile["NCAlgebra`"] =!= $Failed,
-         Get["NCAlgebra`"],
+         Needs["NCAlgebra`"],
          Print["Installation of NCAlgebra failed!"]
     ];
     Print["> Congratulations, you have succesfully intalled NCAlgebra!"];
