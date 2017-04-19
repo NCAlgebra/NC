@@ -46,8 +46,10 @@ Module[
     Print["************************************"];
     Print["***   Welcome to NCWebInstall!   ***"];
     Print["************************************"];
-    Print["This program install the latest version of NCAlgebra from"];
-    Print[$ZipFile];
+    Print["This program install the latest version of NCAlgebra from:"];
+    Print["  ", $ZipFile];
+    Print["into the directory:"];
+    Print["  ", $installdirectory];
     
     (* Import Unzip *)
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
@@ -73,7 +75,8 @@ Module[
                 input = ToUpperCase[
                    InputString["> Do you want NCWebInstall to rename " 
                                <> "the folder '" <> existing <> " as " 
-                               <> existing <> version <> "'? (y/n)"]];
+                               <> existing <> version 
+                               <> "'? (y/n) "]];
          ];
          If[ input == "Y"
             ,
@@ -85,8 +88,6 @@ Module[
          ];
     ];
 
-    Return[];
-         
     If[ !DirectoryQ[$installdirectory],
         Print["> Installation directory does not exist. Creating..."];
         CreateDirectory[$installdirectory]
