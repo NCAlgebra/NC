@@ -85,7 +85,7 @@ Module[
     ];
 
     CopyRemote[$ZipFile, ziplocal];
-    Print["> Downloading done"];
+    Print["> Done downloading."];
     Print["> Extracting NCAlgebra files to '", $installdirectory, "'"];
     Print["> Please wait..."];
           
@@ -96,11 +96,11 @@ Module[
 
     (* check if FeynCalc is installed. If not, install it *)
     If [ FindFile["NC`"] =!= $Failed,
-         Needs["NC`"],
+         Get["NC`"],
          Print["Installation of NCAlgebra failed!"]
     ];
     If [ FindFile["NCAlgebra`"] =!= $Failed,
-         Needs["NCAlgebra`"],
+         Get["NCAlgebra`"],
          Print["Installation of NCAlgebra failed!"]
     ];
     Print["> Congratulations, you have succesfully intalled NCAlgebra!"];
