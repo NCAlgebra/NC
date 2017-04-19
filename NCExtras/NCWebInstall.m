@@ -42,6 +42,8 @@ If[ !ValueQ[$installdirectory],
 Module[ 
     {existing, ziplocal, fcfilesize,
      label, version, input},
+
+    Print["Welcome to NCWebInstall!"];
     
     (* Import Unzip *)
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
