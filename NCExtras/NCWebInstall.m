@@ -65,21 +65,28 @@ Module[
                " already in the directory '", existing, "'."];
          Print["  Version: ", label, " ", version];
          Print["  Installing multiple copies of NCAlgebra may create conflicts."];
+         
+         (* Rename folder *)
          input = "Z";
-         While[ Or[ToUpperCase[input] != "Y", ToUpperCase[input] != "N"],
-           input = Input["> Do you want NCWebInstall to rename " <>
-                        "the folder '" <> existing <> " as " <> 
-                        existing <> version <> "']? (y/n)"];
+         While[ !(input === "Y" || input === "N"),
+           input = ToUpperCase[
+               Input["> Do you want NCWebInstall to rename " 
+                     <> "the folder '" <> existing <> " as " 
+                     <> existing <> version <> "']? (y/n)"]
+           ];
          ];
-         If[ input == "Y",
+         If[ input == "Y"
+            ,
              Print["> Renaming folder '", existing, "' as '", 
                    existing <> version];
              (* RenameDirectory[existing, existing <> version]; *)
+            ,
+             Print["> Proceeding without renaming folder."];
          ];
-         
-         Return[];
     ];
-      
+
+    Return[];
+         
     If[ !DirectoryQ[$installdirectory],
         Print["> Installation directory does not exist. Creating..."];
         CreateDirectory[$installdirectory]
