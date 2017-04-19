@@ -41,16 +41,17 @@ If[ !ValueQ[$installdirectory],
 
 Module[ 
     {existing, ziplocal, fcfilesize,
-     label, version, input},
+     label, version, input,
+     initfile, info, stream},
 
-    Print["************************************"];
-    Print["***   Welcome to NCWebInstall!   ***"];
-    Print["************************************"];
-    Print["> This program install the latest version of NCAlgebra from:"];
+    Print["************************************************************************"];
+    Print["***                     Welcome to NCWebInstall!                     ***"];
+    Print["************************************************************************"];
+    Print["\n> This program install the latest version of NCAlgebra from:"];
     Print["  ", $ZipFile];
     Print["  into the directory:"];
     Print["  ", $installdirectory];
-    
+
     (* Import Unzip *)
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
     Needs["Unzip`"];
@@ -63,9 +64,10 @@ Module[
                                                 "NC_VERSION"}]][[1, {1,2}]];
          version = StringReplace[version, Whitespace -> ""];
          
-         Print["> There seems to be an installation of"];
+         Print["\n> There seems to be an installation of"];
          Print["  ", label, " ", version];
-         Print["  already in the directory '", existing, "'."];
+         Print["  already in the directory"];
+         Print["  ", existing];
          Print["  Installing multiple copies of NCAlgebra may create conflicts."];
          
          (* Rename folder *)
@@ -73,83 +75,110 @@ Module[
          While[ !(input == "Y" || input == "N")
                ,
                 input = ToUpperCase[
-                   InputString["> Do you want NCWebInstall to rename " 
+                   InputString["  Do you want NCWebInstall to rename " 
                                <> "the folder '" <> existing <> " as " 
                                <> existing <> version 
                                <> "'? (y/n) "]];
          ];
          If[ input == "Y"
             ,
-             Print["> Renaming folder '", existing, "' as '", 
+             Print["  Renaming folder '", existing, "' as '", 
                    existing <> version];
+             Print["  You may have to manually remove the old directory from $Path."];
              (* RenameDirectory[existing, existing <> version]; *)
             ,
-             Print["> Proceeding without renaming folder."];
+             Print["  Proceeding without renaming folder."];
          ];
     ];
 
     (* Create directory if needed *)
     If[ !DirectoryQ[$installdirectory],
-        Print["> Installation directory does not exist. Creating..."];
+        Print["\n> Installation directory does not exist. Creating..."];
         CreateDirectory[$installdirectory]
     ];
 
     (* Download zip file *)
     ziplocal = FileNameJoin[{ $installdirectory, FileNameTake @ $ZipFile}];
-    Print["> Downloading:"];
+    Print["\n> Downloading:"];
     Print["  ", $ZipFile];
     Print["  into directory:"];
     Print["  ", ziplocal];
     
     (* get rid of previous download *)
     If[ FileExistsQ[ziplocal],
-        Print["> A local copy already exists. Deleting..."];
+        Print["\n> A local copy already exists."];
+        Print["  Deleting."];
         DeleteFile@ziplocal
     ];
         
     (* Download file *)
     fcfilesize = Unzip`URLFileByteSize[$ZipFile];
-    If[ (Head[$FrontEnd]===System`FrontEndObject) && (Global`$FCProgressDisplay =!= False),
-        PrintTemporary @  (* this way it does not get saved which is good *)
-        Dynamic@Row[{"Downloading ", Round[fcfilesize/1024^2]," MB from ", 
-        If[ StringQ[Setting@#],
-            #,
-            " "
-        ] &@$ZipFile, " ", 
-        ProgressIndicator[
-         Quiet[If[ ! NumberQ[#],
-                   0,
-                   #
-               ] &@( Refresh[FileByteCount[ziplocal], 
-                     UpdateInterval -> .01]/fcfilesize )]],
-        " ", If[ ! NumberQ[Setting@#],
-                 0,
-                 #
-             ] &@
-         Refresh[FileByteCount[ziplocal]/1024.^2, UpdateInterval -> .02], 
-        " MByte"
-        }],
-        Print["> Downloading ", Round[fcfilesize/1024^2]," MB from ", $ZipFile]
+    Print[""];
+    Print["> Downloading ", ToString[Round[fcfilesize/1024^2]], " MB from:"];
+    Print["  ", $ZipFile];
+    Print["  Please wait..."];
+    Unzip`CopyRemote[$ZipFile, ziplocal];
+    Print["  Done downloading."];
+
+    Print["\n> Extracting NCAlgebra files to:"];
+    Print["  ", $installdirectory];
+    Print["  Please wait..."];
+    (* Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False]; *)
+    Print["  Done extracting files."];
+
+    (* Installled? *)
+    Print["\n> Loading NCAlgebra."];
+    If [ FindFile[$installdirectory] === $Failed,
+         Print["  Directory"];
+         Print["  ", $installdirectory];
+         Print["  does not to seem in the system $Path."];
+         input = "Z";
+         While[ !(input == "Y" || input == "N")
+               ,
+                input = ToUpperCase[
+                   InputString["  Do you want NCWebInstall to add " 
+                               <> "the folder '" <> $installdirectory
+                               <> "' to the system $Path? (y/n) "]];
+         ];
+         If[ input == "Y"
+            ,
+             Print["  Adding '", $installdirectory, "' to the system $Path"];
+             initfile = FileNameJoin[{$UserBaseDirectory, "Kernel", "init.m"}];
+             Print["  Looking for user's init.m file..."];
+             info = FileInformation[initfile];
+             stream = If[ info === {}
+                         ,
+                          Print["  User does not have an init.m file."];
+                          Print["  Creating '", initfile, "'"];
+                          OpenWrite[initfile]
+                        ,
+                          Print["  User already has an init file"];
+                          Print["  Appending to '", initfile, "'"];
+                          OpenAppend[initfile]
+             ];
+             Print["  Adding '", $installdirectory, "' to $Path"];
+             WriteString[stream, "\n(* NCINSTALL - BEGIN *)\n"];
+             WriteString[stream, "AppendTo[$Path,\"", $installdirectory, "\"];\n"];
+             WriteString[stream, "(* NCINSTALL - END *)\n\n"];
+             Close[stream];
+            ,
+             Print["  Proceeding without adding folder to $Path."];
+             Print["  You may not be able to load NCAlgebra!"];
+         ];
+         
     ];
 
-    Unzip`CopyRemote[$ZipFile, ziplocal];
-    Print["> Done downloading."];
-    Print["> Extracting NCAlgebra files to '", $installdirectory, "'"];
-    Print["> Please wait..."];
-          
-    (* Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False]; *)
-          
-    Print["> Installation of NCAlgebra ready."];
-    Print["> Loading NCAlgebra."];
-
-    (* check if FeynCalc is installed. If not, install it *)
+    (* Load *)
     If [ FindFile["NC`"] =!= $Failed,
-         Needs["NC`"],
+         Quiet[Needs["NC`"], Needs::nocont],
          Print["Installation of NCAlgebra failed!"]
+         Return[];
     ];
     If [ FindFile["NCAlgebra`"] =!= $Failed,
-         Needs["NCAlgebra`"],
+         Quiet[Needs["NCAlgebra`"], Needs::nocont],
          Print["Installation of NCAlgebra failed!"]
+         Return[];
     ];
-    Print["> Congratulations, you have succesfully intalled NCAlgebra!"];
+    Print["\n> Congratulations, you have succesfully intalled NCAlgebra!"];
+
 ];
