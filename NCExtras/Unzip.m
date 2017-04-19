@@ -110,8 +110,8 @@ BeginPackage["Unzip`",{"JLink`"}]
       ] );
 
     URLFileByteSize[link_String] :=
-      URLFileByteSize[link] = 
-      Module[ {url, urlcon, len},
+      Module[ 
+          {url, urlcon, len},
           url = JavaNew["java.net.URL", link];
           urlcon = url@openConnection[];
           len = urlcon@getContentLength[];
