@@ -68,12 +68,12 @@ Module[
          
          (* Rename folder *)
          input = "Z";
-         While[ !(input === "Y" || input === "N"),
+         While[ !(input == "Y" || input == "N"),
            input = ToUpperCase[
-               Input["> Do you want NCWebInstall to rename " 
-                     <> "the folder '" <> existing <> " as " 
-                     <> existing <> version <> "']? (y/n)"]
-           ];
+               InputString["> Do you want NCWebInstall to rename " 
+                           <> "the folder '" <> existing <> " as " 
+                           <> existing <> version <> "'? (y/n)"]];
+           Print["'", input, "'"];
          ];
          If[ input == "Y"
             ,
@@ -126,12 +126,12 @@ Module[
         Print["> Downloading ", Round[fcfilesize/1024^2]," MB from ", $ZipFile]
     ];
 
-    CopyRemote[$ZipFile, ziplocal];
+    Unzip`CopyRemote[$ZipFile, ziplocal];
     Print["> Done downloading."];
     Print["> Extracting NCAlgebra files to '", $installdirectory, "'"];
     Print["> Please wait..."];
           
-    Unzip[ziplocal, $installdirectory, Verbose -> False];
+    Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False];
           
     Print["> Installation of NCAlgebra ready."];
     Print["> Loading NCAlgebra."];
