@@ -41,20 +41,25 @@ If[ !ValueQ[$installdirectory],
 (* Import Unzip *)
 
 Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
+Needs["Unzip`"];
 
 Module[ 
     {ziplocal, fcfilesize},
     If[ !DirectoryQ[$installdirectory],
+        Print["> Installation directory does not exist. Creating..."];
         CreateDirectory[$installdirectory]
     ];
-    Print["> Downloading ", $ZipFile, ". Please wait..."];
-    
+
     ziplocal = FileNameJoin[{ $installdirectory, FileNameTake @ $ZipFile}];
 
+    Print["> Downloading ", $ZipFile, " into directory ", ziplocal];
+    
     (* get rid of previous download *)
     If[ FileExistsQ[ziplocal],
+        Print["> Local file already exists. Deleting..."];
         DeleteFile@ziplocal
     ];
+          
     fcfilesize = Unzip`URLFileByteSize[$ZipFile];
     If[ (Head[$FrontEnd]===System`FrontEndObject) && (Global`$FCProgressDisplay =!= False),
         PrintTemporary @  (* this way it does not get saved which is good *)
@@ -78,13 +83,16 @@ Module[
         }],
         Print["> Downloading ", Round[fcfilesize/1024^2]," MB from ", $ZipFile]
     ];
+
     CopyRemote[$ZipFile, ziplocal];
-    Print["> Downloading done, installing NCAlgebra on ", Style[$installdirectory, FontWeight -> "Bold"]];
+    Print["> Downloading done"];
+    Print["> Installing NCAlgebra on '", $installdirectory, "'"];
+          
     (* Unzip[ziplocal, $installdirectory, Verbose -> False]; *)
+          
     Print["> Installation of NCAlgebra ready."];
     Print["> Loading NCAlgebra."];
 
-    (*
     (* check if FeynCalc is installed. If not, install it *)
     Which [ 
            FindFile["NC`"] =!= $Failed,
