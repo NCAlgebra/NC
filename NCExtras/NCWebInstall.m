@@ -1,11 +1,12 @@
 (* 
-   This is an installation file to be called once from within a Mathematica Kernel or FrontEnd like this:
+   This is an installation file to be called once from within 
+   a Mathematica Kernel or FrontEnd like this:
 
    Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/install.m"];
 
    By default the installation will be done to 
 
-      FileNameJoin[{$UserBaseDirectory,"Applications"}] ,
+      FileNameJoin[{$UserBaseDirectory,"Applications"}]
 
    However,this can be changed by uncommenting the next line:
    
@@ -38,13 +39,22 @@ If[ !ValueQ[$installdirectory],
     $installdirectory = FileNameJoin[{$UserBaseDirectory,"Applications"}]
 ];
 
-(* Import Unzip *)
-
-Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
-Needs["Unzip`"];
-
 Module[ 
-    {ziplocal, fcfilesize},
+    {existing, ziplocal, fcfilesize},
+    
+    (* Import Unzip *)
+    Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
+    Needs["Unzip`"];
+    
+    (* Check for existing installations *)
+    existing = FindFile["NC`"];
+    If [ existing =!= $Failed,
+         Print["> There seems to be an installation of NCAlgebra "
+               " already in the directory '", existing, "'."];
+         Print["> Installing multiple copies of NCAlgebra may create conflicts"];
+         Break[];
+    ];
+      
     If[ !DirectoryQ[$installdirectory],
         Print["> Installation directory does not exist. Creating..."];
         CreateDirectory[$installdirectory]
