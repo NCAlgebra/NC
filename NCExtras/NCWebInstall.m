@@ -68,12 +68,12 @@ Module[
          
          (* Rename folder *)
          input = "Z";
-         While[ !(input == "Y" || input == "N"),
-           input = ToUpperCase[
-               InputString["> Do you want NCWebInstall to rename " 
-                           <> "the folder '" <> existing <> " as " 
-                           <> existing <> version <> "'? (y/n)"]];
-           Print["'", input, "'"];
+         While[ !(input == "Y" || input == "N")
+               ,
+                input = ToUpperCase[
+                   InputString["> Do you want NCWebInstall to rename " 
+                               <> "the folder '" <> existing <> " as " 
+                               <> existing <> version <> "'? (y/n)"]];
          ];
          If[ input == "Y"
             ,
