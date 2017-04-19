@@ -46,9 +46,9 @@ Module[
     Print["************************************"];
     Print["***   Welcome to NCWebInstall!   ***"];
     Print["************************************"];
-    Print["This program install the latest version of NCAlgebra from:"];
+    Print["> This program install the latest version of NCAlgebra from:"];
     Print["  ", $ZipFile];
-    Print["into the directory:"];
+    Print["  into the directory:"];
     Print["  ", $installdirectory];
     
     (* Import Unzip *)
@@ -63,9 +63,9 @@ Module[
                                                 "NC_VERSION"}]][[1, {1,2}]];
          version = StringReplace[version, Whitespace -> ""];
          
-         Print["> There seems to be an installation of NCAlgebra ",
-               " already in the directory '", existing, "'."];
-         Print["  Version: ", label, " ", version];
+         Print["> There seems to be an installation of"];
+         Print["  label, " ", version];
+         Print["  already in the directory '", existing, "'."];
          Print["  Installing multiple copies of NCAlgebra may create conflicts."];
          
          (* Rename folder *)
