@@ -64,7 +64,7 @@ Module[
          version = StringReplace[version, Whitespace -> ""];
          
          Print["> There seems to be an installation of"];
-         Print["  label, " ", version];
+         Print["  ", label, " ", version];
          Print["  already in the directory '", existing, "'."];
          Print["  Installing multiple copies of NCAlgebra may create conflicts."];
          
