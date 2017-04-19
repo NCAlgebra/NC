@@ -40,7 +40,8 @@ If[ !ValueQ[$installdirectory],
 ];
 
 Module[ 
-    {existing, ziplocal, fcfilesize},
+    {existing, ziplocal, fcfilesize,
+     label, version, input},
     
     (* Import Unzip *)
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
@@ -49,9 +50,26 @@ Module[
     (* Check for existing installations *)
     existing = FindFile["NC`"];
     If [ existing =!= $Failed,
+         existing = StringReplace[existing, a_ ~~ $PathnameSeparator <> "init.m" -> a];
+         {label, version} = Import[FileNameJoin[{existing, 
+                                                "NC_VERSION"}]][[1, {1,2}]];
+         version = StringReplace[version, Whitespace -> ""];
+         
          Print["> There seems to be an installation of NCAlgebra ",
                " already in the directory '", existing, "'."];
-         Print["> Installing multiple copies of NCAlgebra may create conflicts"];
+         Print["  Version: ", label, " ", version];
+         Print["  Installing multiple copies of NCAlgebra may create conflicts."];
+         input = "Z";
+         While[ Or[ToUpperCase[input] != "Y", ToUpperCase[input] != "N"],
+           input = Input["> Do you want NCWebInstall to rename the folder ",
+                         "'NC_", version, "'? (y/n)"];
+         ];
+         If[ input == "Y",
+             Print["> Renaming folder '", existing, "' as '", 
+                   existing <> version];
+             (* RenameDirectory[existing, existing <> version]; *)
+         ];
+         
          Return[];
     ];
       
