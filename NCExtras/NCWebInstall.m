@@ -2,7 +2,7 @@
    This is an installation file to be called once from within 
    a Mathematica Kernel or FrontEnd like this:
 
-   Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/install.m"];
+   Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/NCWebInstall.m"];
 
    By default the installation will be done to 
 
@@ -49,10 +49,10 @@ Module[
     (* Check for existing installations *)
     existing = FindFile["NC`"];
     If [ existing =!= $Failed,
-         Print["> There seems to be an installation of NCAlgebra "
+         Print["> There seems to be an installation of NCAlgebra ",
                " already in the directory '", existing, "'."];
          Print["> Installing multiple copies of NCAlgebra may create conflicts"];
-         Break[];
+         Return[];
     ];
       
     If[ !DirectoryQ[$installdirectory],
