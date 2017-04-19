@@ -88,21 +88,26 @@ Module[
          ];
     ];
 
+    (* Create directory if needed *)
     If[ !DirectoryQ[$installdirectory],
         Print["> Installation directory does not exist. Creating..."];
         CreateDirectory[$installdirectory]
     ];
 
+    (* Download zip file *)
     ziplocal = FileNameJoin[{ $installdirectory, FileNameTake @ $ZipFile}];
-
-    Print["> Downloading ", $ZipFile, " into directory ", ziplocal];
+    Print["> Downloading:"];
+    Print["  ", $ZipFile];
+    Print["  into directory:"];
+    Print["  ", ziplocal];
     
     (* get rid of previous download *)
     If[ FileExistsQ[ziplocal],
-        Print["> Local file already exists. Deleting..."];
+        Print["> A local copy already exists. Deleting..."];
         DeleteFile@ziplocal
     ];
-          
+        
+    (* Download file *)
     fcfilesize = Unzip`URLFileByteSize[$ZipFile];
     If[ (Head[$FrontEnd]===System`FrontEndObject) && (Global`$FCProgressDisplay =!= False),
         PrintTemporary @  (* this way it does not get saved which is good *)
@@ -132,7 +137,7 @@ Module[
     Print["> Extracting NCAlgebra files to '", $installdirectory, "'"];
     Print["> Please wait..."];
           
-    Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False];
+    (* Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False]; *)
           
     Print["> Installation of NCAlgebra ready."];
     Print["> Loading NCAlgebra."];
