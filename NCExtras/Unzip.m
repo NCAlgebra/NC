@@ -69,7 +69,7 @@ BeginPackage["Unzip`",{"JLink`"}]
 
     Options[CopyRemote] = {ProxyHost :> None, ProxyPort :> None};
 
-    CopyRemote[url_String /; StringMatchQ[url, "http://*.*", IgnoreCase-> True],
+    CopyRemote[url_String /; StringMatchQ[url, "http*://*.*", IgnoreCase-> True],
                localfile_:Automatic, opts___?OptionQ] :=
     (
       Needs["JLink`"];
