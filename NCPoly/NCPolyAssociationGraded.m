@@ -255,13 +255,14 @@ Begin["`Private`"];
 
   Clear[NCPolyDisplayOrderAux];
   NCPolyDisplayOrderAux[a_, b__, symbol_String] :=
-    ToString[a] <> " " <> symbol <> " " <> NCPolyDisplayOrderAux[b, symbol];
+    Join[{a, symbol}, NCPolyDisplayOrderAux[b, symbol]];
 
-  NCPolyDisplayOrderAux[a_, symbol_String] := ToString[a];
+  NCPolyDisplayOrderAux[a_, symbol_String] := {a};
 
   NCPolyDisplayOrder[vars_List] := 
-    (NCPolyDisplayOrderAux[##, "\[LessLess] "]&) @@
-    Apply[NCPolyDisplayOrderAux[##,"<"]&,  vars, 1];
+    DisplayForm[
+      RowBox[Flatten[(NCPolyDisplayOrderAux[##, "\[LessLess] "]&) @@
+              Apply[NCPolyDisplayOrderAux[##,"<"]&,  vars, 1]]]];
 
   (* NCPoly Operators *)
 

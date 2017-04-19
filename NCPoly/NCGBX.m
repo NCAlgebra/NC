@@ -73,7 +73,7 @@ Begin["`Private`"];
   ];
  
   Clear[CheckOrderAux];
-  CheckOrderAux[(_Symbol|_inv|tp[_Symbol]|aj[_Symbol])..] := True;
+  CheckOrderAux[(_Symbol|Subscript[_Symbol,___]|_inv|tp[_Symbol]|aj[_Symbol])..] := True;
   CheckOrderAux[___] := False;
 
   Clear[CheckOrder];
@@ -128,7 +128,7 @@ Begin["`Private`"];
     Return[{ratVars, newRels, ruleRat, ruleRatRev}];
     
   ];
-  
+
   NCMakeGB[p_List, iter_Integer:4, opts___Rule] := Module[
     {polys, vars, symbols, basis, rules, labels,
      invs, 
@@ -380,6 +380,9 @@ Begin["`Private`"];
     Return[polys];
   ];
 
+  NCMakeGB[p_, iter_Integer:4, opts___Rule] := 
+    NCMakeGB[{p}, iter, opts];
+      
   (* NCProcess *)
   NCProcess[p_List, iter_Integer:4, opts___Rule] := Module[
     {gb, order, knowns, unknowns,
@@ -441,6 +444,9 @@ Begin["`Private`"];
       
   ];
                               
+  NCProcess[p_, iter_Integer:4, opts___Rule] := 
+    NCProcess[{p}, iter, opts];
+    
   (* NCGBSimplifyRational *)
                               
   NCGBSimplifyRational[expr_, iter_Integer:5, opts___Rule] := Module[
