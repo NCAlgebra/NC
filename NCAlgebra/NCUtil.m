@@ -62,7 +62,7 @@ Begin["`Private`"];
       NCGrabFunctions[expr["NonzeroValues"], f];
     
   NCGrabFunctions[expr_] :=
-    Union[Cases[expr, (Except[Plus|Times|NonCommutativeMultiply|List])[__], {0, Infinity}]];
+    Union[Cases[expr, (Except[Plus|Times|NonCommutativeMultiply|List|Subscript])[__], {0, Infinity}]];
   NCGrabFunctions[expr_, f_] :=
     Union[Cases[expr, (f)[__], {0, Infinity}]];
 

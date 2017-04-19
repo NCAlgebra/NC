@@ -73,6 +73,11 @@ Block[
   NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]];
   NCTest[NCExp, NCExpExp];
 
+  vars = {{a},{Subscript[b,1],c}};
+  NCExp = a**a + Subscript[b,1]**Subscript[b,1] + c**c;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+  
   vars = {{a},{b,c}};
   NCExp = a**a -(- b**b - c**c);
   PolyExp = NCToNCPoly[NCExp, vars];
@@ -137,6 +142,15 @@ Block[
   NCTest[NCCoefficientQ[x**x], False];
   NCTest[NCCoefficientQ[Exp[x]], False];
 
+  NCTest[NCCoefficientQ[Subscript[A,1]], True];
+  NCTest[NCCoefficientQ[2 Subscript[A,1]], True];
+  NCTest[NCCoefficientQ[1 + Subscript[A,1]], True];
+
+  NCTest[NCCoefficientQ[Subscript[x,1]], False];
+  NCTest[NCCoefficientQ[1 + Subscript[x,1]], False];
+  NCTest[NCCoefficientQ[Subscript[x,1]**Subscript[x,1]], False];
+  NCTest[NCCoefficientQ[Exp[Subscript[x,1]]], False];
+
   (* NCMonomialQ *)
 
   NCTest[NCMonomialQ[1], True];
@@ -156,6 +170,23 @@ Block[
   NCTest[NCMonomialQ[x + y], False];
   NCTest[NCMonomialQ[2 A x ** Exp[x]], False];
   NCTest[NCMonomialQ[2 A x ** (x + y)], False];
+
+  NCTest[NCMonomialQ[Subscript[A,1]], True];
+  NCTest[NCMonomialQ[Subscript[x,1]], True];
+  NCTest[NCMonomialQ[Subscript[A,1] Subscript[x,1]], True];
+  NCTest[NCMonomialQ[2 Subscript[x,1]], True];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1]], True];
+  NCTest[NCMonomialQ[Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[2 Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[Subscript[A,1] Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[(1 + Subscript[A,1]) Subscript[x,1]], True];
+
+  NCTest[NCMonomialQ[Exp[Subscript[x,1]]], False];
+  NCTest[NCMonomialQ[1 + Subscript[y,2]], False];
+  NCTest[NCMonomialQ[Subscript[x,1] + Subscript[y,2]], False];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** Exp[Subscript[x,1]]], False];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** (Subscript[x,1] + Subscript[y,2])], False];
 
   (* NCPolynomialQ *)
   

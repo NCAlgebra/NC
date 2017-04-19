@@ -267,6 +267,12 @@ Begin[ "`Private`" ]
 
   ];
   
+  NCToNCPolynomial[polys_List] := 
+      Map[NCToNCPolynomial, polys];
+  
+  NCToNCPolynomial[polys_List /; !MatrixQ[polys], vars_List] := 
+      Map[NCToNCPolynomial[#, vars]&, polys]; 
+      
   NCToNCPolynomial[poly_] := 
       NCToNCPolynomial[poly, NCVariables[poly]];
 

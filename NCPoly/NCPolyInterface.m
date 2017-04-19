@@ -33,6 +33,7 @@ Begin["`Private`"];
   GrabFactors[exp_?CommutativeQ] := {exp, {}};
   GrabFactors[a_. exp_NonCommutativeMultiply] := {a, List @@ exp};
   GrabFactors[a_. exp_Symbol] := {a, {exp}};
+  GrabFactors[a_. exp:(Subscript[_Symbol,___])] := {a, {exp}};
   GrabFactors[_] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
 
   Clear[GrabTerms];
@@ -126,11 +127,10 @@ Begin["`Private`"];
   NCCoefficientQ[a_] := CommutativeQ[a];
 
   (* NCMonomialQ *)
-  NCMonomialQ[expr_NonCommutativeMultiply /; Depth[expr] == 2] := True;
+  NCMonomialQ[HoldPattern[NonCommutativeMultiply[(_Symbol|Subscript[_Symbol,___])..]]] := True;
   NCMonomialQ[x_Symbol /; NonCommutativeQ[x]] := True;
   NCMonomialQ[Subscript[x_Symbol,___] /; NonCommutativeQ[x]] := True;
-  NCMonomialQ[a_?NCCoefficientQ expr_NonCommutativeMultiply
-              /; Depth[expr] == 2] := True;
+  NCMonomialQ[a_?NCCoefficientQ HoldPattern[NonCommutativeMultiply[(_Symbol|Subscript[_Symbol,___])..]]] := True;
   NCMonomialQ[a_?NCCoefficientQ x_Symbol /; NonCommutativeQ[x]] := True;
   NCMonomialQ[a_?NCCoefficientQ Subscript[x_Symbol,___] /; NonCommutativeQ[x]] := True;
   NCMonomialQ[a_?NCCoefficientQ] := True;

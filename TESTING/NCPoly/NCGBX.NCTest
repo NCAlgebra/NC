@@ -143,15 +143,15 @@ Block[
 
   SetMonomialOrder[{a,b},{d},{c,b}];
   NCTest[NCPolyDisplayOrder[GetMonomialOrder[]], 
-       "a < b \[LessLess]  d \[LessLess]  c < b"];
+         DisplayForm[RowBox[List[a, "<", b, "\[LessLess] ", d, "\[LessLess] ", c, "<", b]]]];
   NCTest[PrintMonomialOrder[], 
-       "a < b \[LessLess]  d \[LessLess]  c < b"];
+         DisplayForm[RowBox[List[a, "<", b, "\[LessLess] ", d, "\[LessLess] ", c, "<", b]]]];
 
   SetMonomialOrder[{a,b},{d},{c,b,e}];
   NCTest[NCPolyDisplayOrder[GetMonomialOrder[]], 
-       "a < b \[LessLess]  d \[LessLess]  c < b < e"];
+         DisplayForm[RowBox[List[a, "<", b, "\[LessLess] ", d, "\[LessLess] ", c, "<", b, "<", e]]]];
   NCTest[PrintMonomialOrder[], 
-       "a < b \[LessLess]  d \[LessLess]  c < b < e"];
+         DisplayForm[RowBox[List[a, "<", b, "\[LessLess] ", d, "\[LessLess] ", c, "<", b, "<", e]]]];
 
   (* TESTING NCMakeGB -- BEGIN *)
 
