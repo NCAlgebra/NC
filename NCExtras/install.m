@@ -1,7 +1,7 @@
 (* 
    This is an installation file to be called once from within a Mathematica Kernel or FrontEnd like this:
 
-   Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/install.m"];
+   Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/install.m"];
 
    By default the installation will be done to 
 
@@ -30,7 +30,7 @@ If[ ("AllowInternetUse" /. SystemInformation["Network"]) === False,
     Quit[]
 ];
 
-$ZipFile = "https://github.com/NCAlgebra/NC/archive/master.zip";
+$ZipFile = "https://github.com/NCAlgebra/NC/archive/devel.zip";
 
 (* Default directory *)
 
@@ -40,7 +40,7 @@ If[ !ValueQ[$installdirectory],
 
 (* Import Unzip *)
 
-Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/Unzip.m"];
+Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
 
 Module[ 
     {ziplocal, fcfilesize},
