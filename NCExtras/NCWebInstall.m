@@ -43,7 +43,11 @@ Module[
     {existing, ziplocal, fcfilesize,
      label, version, input},
 
-    Print["Welcome to NCWebInstall!"];
+    Print["************************************"];
+    Print["***   Welcome to NCWebInstall!   ***"];
+    Print["************************************"];
+    Print["This program install the latest version of NCAlgebra from"];
+    Print[$ZipFile];
     
     (* Import Unzip *)
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
