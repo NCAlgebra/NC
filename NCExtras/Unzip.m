@@ -14,9 +14,12 @@ BeginPackage["Unzip`",{"JLink`"}]
 
   Options[Unzip] = {Verbose -> True};
 
-  Unzip[zipfilein_String?FileExistsQ, dir_: Directory[], OptionsPattern[]] :=
+  Unzip[zipfilein_String?FileExistsQ, 
+        dir_: Directory[], 
+        OptionsPattern[]] :=
     JavaBlock[
-    Module[ {enum, saveEntry, startdir, zf, buf, zipfile, comments, targets, target, len, dirs},
+    Module[ 
+        {enum, saveEntry, startdir, zf, buf, zipfile, comments, targets, target, len, dirs},
         zipfile = If[ DirectoryName[zipfilein] === "",
                       FileNameJoin[{Directory[],zipfilein}],
                       zipfilein
