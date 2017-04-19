@@ -88,7 +88,7 @@ Module[
     Print["> Downloading done"];
     Print["> Installing NCAlgebra on '", $installdirectory, "'"];
           
-    (* Unzip[ziplocal, $installdirectory, Verbose -> False]; *)
+    Unzip[ziplocal, $installdirectory, Verbose -> True];
           
     Print["> Installation of NCAlgebra ready."];
     Print["> Loading NCAlgebra."];
