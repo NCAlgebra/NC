@@ -61,8 +61,9 @@ Module[
          Print["  Installing multiple copies of NCAlgebra may create conflicts."];
          input = "Z";
          While[ Or[ToUpperCase[input] != "Y", ToUpperCase[input] != "N"],
-           input = Input["> Do you want NCWebInstall to rename the folder ",
-                         "'NC_", version, "'? (y/n)"];
+           input = Input["> Do you want NCWebInstall to rename " <>
+                        "the folder '" <> existing <> " as " <> 
+                        existing <> version <> "']? (y/n)"];
          ];
          If[ input == "Y",
              Print["> Renaming folder '", existing, "' as '", 
