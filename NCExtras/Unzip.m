@@ -1,11 +1,10 @@
 BeginPackage["Unzip`",{"JLink`"}]
-  
+
+  Clear[CopyRemote, Unzip, URLFileByteSize, Verbose];
+
   CopyRemote::usage = "CopyRemote[url, localfilename] copies a file from an http location to localfilename.";
-
   Unzip::usage = "Unzip[file] unzips file.";
-
   URLFileByteSize::usage = "gives the remote file size in Byte."
-
   Verbose::usage = "Verbose is an option to Unzip."
 
   Begin["`Private`"]
