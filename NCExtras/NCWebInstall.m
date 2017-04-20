@@ -1,22 +1,12 @@
 (* 
-   This is an installation file to be called once from within 
-   a Mathematica Kernel or FrontEnd like this:
-
-   Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/NCWebInstall.m"];
-
-   By default the installation will be done to 
-
-      FileNameJoin[{$UserBaseDirectory,"Applications"}]
-
-   However,this can be changed by uncommenting the next line:
    
-*)
+   Call:
 
-(* $installdirectory = FileNameJoin[{$BaseDirectory,"Applications"}]; *)
+     Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
 
-(* 
-
-   This installation script is adapted from 
+   from the Mathematica Kernel or FrontEnd to install NCAlgebra.
+   
+   This installation script is inspired by:
 
    http://www.feyncalc.org/install.m 
 
@@ -43,7 +33,7 @@ Module[
     Print["************************************************************************"];
 
     (* Import Unzip *)
-    Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
+    Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/Unzip.m"];
     Needs["Unzip`"];
     
     (* Check for existing installations *)
@@ -92,7 +82,7 @@ Module[
         installdirectory = FileNameJoin[{$UserBaseDirectory,"Applications"}]
     ];
     
-    zipremote = "https://github.com/NCAlgebra/NC/archive/devel.zip";
+    zipremote = "https://github.com/NCAlgebra/NC/archive/master.zip";
     Print["\n> This program will install the latest version of NCAlgebra from:"];
     Print["  ", zipremote];
     Print["  in the directory:"];
@@ -116,7 +106,7 @@ Module[
 
     (* Download zip file *)
     ziplocal = FileNameJoin[{ installdirectory, FileNameTake @ zipremote}];
-    dirlocal = FileNameJoin[{ installdirectory, "NC-devel"}];
+    dirlocal = FileNameJoin[{ installdirectory, "NC-master"}];
     nclocal = FileNameJoin[{ installdirectory, "NC"}];
     Print["\n> Downloading:"];
     Print["  ", zipremote];
