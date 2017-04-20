@@ -35,7 +35,6 @@ Module[
     (* Import NC_VERSION *)
     {label, version} = Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NC_VERSION"][[1, {1,2}]];
     version = StringReplace[version, Whitespace -> ""];
-    Print[];
     Print["> This program will install ", label, " ", version];
     
     (* Import Unzip *)
@@ -79,7 +78,8 @@ Module[
              DeleteDirectory[existing, DeleteContents->True];
             ,
              Print["  Proceeding without removing existing installation."];
-             Print["  You might want to rename the directory 'NC' to avoid conflicts."];
+             Print["  You might want to rename the directory '", 
+                   existing, "' to avoid conflicts."];
          ];
     ];
 
@@ -93,6 +93,21 @@ Module[
     Print["  ", zipremote];
     Print["  in the directory:"];
     Print["  ", installdirectory];
+    input = "Z";
+    While[ !(input == "Y" || input == "N")
+          ,
+           input = ToUpperCase[
+              InputString["  Do you want to change the installation directory? (y/n) "]];
+    ];
+    If[ input == "Y",
+        installdirectory = StringTrim[InputString["  Type installation directory: "]];
+
+        Print["\n> This program will install the latest version of NCAlgebra from:"];
+        Print["  ", zipremote];
+        Print["  in the directory:"];
+        Print["  ", installdirectory];
+    ];
+         
     input = "Z";
     While[ !(input == "Y" || input == "N")
           ,
