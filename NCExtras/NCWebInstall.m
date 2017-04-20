@@ -34,7 +34,8 @@ Module[
 
     (* Import NC_VERSION *)
     {label, version} = Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NC_VERSION"][[1, {1,2}]];
-    Print["\n> This program will install ", label, " ", version];
+    Print[];
+    Print["> This program will install ", label, " ", version];
     
     (* Import Unzip *)
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/Unzip.m"];
