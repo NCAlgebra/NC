@@ -64,11 +64,11 @@ Module[
          While[ !(input == "Y" || input == "N")
                ,
                 input = ToUpperCase[
-                   InputString["  Do you want install on this same directory? (y/n) "]];
+                   InputString["  Do you want to install on this same directory? (y/n) "]];
          ];
          If[ input == "Y"
             ,
-             installdirectory = existing;
+             installdirectory = FileNameJoin[Drop[FileNameSplit[existing],-1]];
             ,
              input = "Z";
              While[ !(input == "Y" || input == "N")
@@ -80,10 +80,10 @@ Module[
          If[ input == "Y"
             ,
              Print["  Deleting '", existing, "'."];
-             DeleteDirectory[nclocal, DeleteContents->True];
+             DeleteDirectory[existing, DeleteContents->True];
             ,
              Print["  Proceeding without removing existing installation."];
-             Print["  Beware of potential conflicts."];
+             Print["  You might want to rename the directory 'NC' to avoid conflicts."];
          ];
     ];
 
@@ -93,15 +93,19 @@ Module[
     ];
     
     zipremote = "https://github.com/NCAlgebra/NC/archive/devel.zip";
-    Print["\n> This program install the latest version of NCAlgebra from:"];
+    Print["\n> This program will install the latest version of NCAlgebra from:"];
     Print["  ", zipremote];
-    Print["  into the directory:"];
+    Print["  in the directory:"];
     Print["  ", installdirectory];
     input = "Z";
     While[ !(input == "Y" || input == "N")
           ,
            input = ToUpperCase[
               InputString["  Do you want to proceed? (y/n) "]];
+    ];
+    If[ input == "N",
+        Print["\n> Aborting..."];
+        Return[];
     ];
                 
     (* Create directory if needed *)
