@@ -31,26 +31,16 @@ If[ ("AllowInternetUse" /. SystemInformation["Network"]) === False,
     Quit[]
 ];
 
-$ZipFile = "https://github.com/NCAlgebra/NC/archive/devel.zip";
-
-(* Default directory *)
-
-If[ !ValueQ[$installdirectory],
-    $installdirectory = FileNameJoin[{$UserBaseDirectory,"Applications"}]
-];
-
 Module[ 
-    {existing, ziplocal, dirlocal, nclocal, fcfilesize,
+    {existing, ziplocal, zipremote, 
+     dirlocal, nclocal, fcfilesize,
+     installdirectory,
      label, version, input,
      initfile, info, stream},
 
     Print["************************************************************************"];
     Print["***                     Welcome to NCWebInstall!                     ***"];
     Print["************************************************************************"];
-    Print["\n> This program install the latest version of NCAlgebra from:"];
-    Print["  ", $ZipFile];
-    Print["  into the directory:"];
-    Print["  ", $installdirectory];
 
     (* Import Unzip *)
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/devel/NCExtras/Unzip.m"];
@@ -68,41 +58,64 @@ Module[
          Print["  ", label, " ", version];
          Print["  already in the directory"];
          Print["  ", existing];
-         Print["  Installing multiple copies of NCAlgebra may create conflicts."];
          
          (* Rename folder *)
          input = "Z";
          While[ !(input == "Y" || input == "N")
                ,
                 input = ToUpperCase[
-                   InputString["  Do you want NCWebInstall to rename " 
-                               <> "this folder as '" 
-                               <> existing <> version 
-                               <> "'? (y/n) "]];
+                   InputString["  Do you want install on this same directory? (y/n) "]];
          ];
          If[ input == "Y"
             ,
-             Print["  Renaming folder '", existing, "' as '", 
-                   existing <> version];
-             Print["  You may have to manually remove the old directory from $Path."];
-             (* RenameDirectory[existing, existing <> version]; *)
+             installdirectory = existing;
             ,
-             Print["  Proceeding without renaming folder."];
+             input = "Z";
+             While[ !(input == "Y" || input == "N")
+                   ,
+                    input = ToUpperCase[
+                       InputString["  Do you want to remove the existing installation? (y/n) "]];
+             ];
+         ];
+         If[ input == "Y"
+            ,
+             Print["  Deleting '", existing, "'."];
+             DeleteDirectory[nclocal, DeleteContents->True];
+            ,
+             Print["  Proceeding without removing existing installation."];
+             Print["  Beware of potential conflicts."];
          ];
     ];
 
+    (* Default installation path *)
+    If[ !ValueQ[installdirectory],
+        installdirectory = FileNameJoin[{$UserBaseDirectory,"Applications"}]
+    ];
+    
+    zipremote = "https://github.com/NCAlgebra/NC/archive/devel.zip";
+    Print["\n> This program install the latest version of NCAlgebra from:"];
+    Print["  ", zipremote];
+    Print["  into the directory:"];
+    Print["  ", installdirectory];
+    input = "Z";
+    While[ !(input == "Y" || input == "N")
+          ,
+           input = ToUpperCase[
+              InputString["  Do you want to proceed? (y/n) "]];
+    ];
+                
     (* Create directory if needed *)
-    If[ !DirectoryQ[$installdirectory],
+    If[ !DirectoryQ[installdirectory],
         Print["\n> Installation directory does not exist. Creating..."];
-        CreateDirectory[$installdirectory]
+        CreateDirectory[installdirectory]
     ];
 
     (* Download zip file *)
-    ziplocal = FileNameJoin[{ $installdirectory, FileNameTake @ $ZipFile}];
-    dirlocal = FileNameJoin[{ $installdirectory, "NC-devel"}];
-    nclocal = FileNameJoin[{ $installdirectory, "NC"}];
+    ziplocal = FileNameJoin[{ installdirectory, FileNameTake @ zipremote}];
+    dirlocal = FileNameJoin[{ installdirectory, "NC-devel"}];
+    nclocal = FileNameJoin[{ installdirectory, "NC"}];
     Print["\n> Downloading:"];
-    Print["  ", $ZipFile];
+    Print["  ", zipremote];
     Print["  into directory:"];
     Print["  ", ziplocal];
     
@@ -124,30 +137,30 @@ Module[
     ];
        
     (* Download file *)
-    fcfilesize = Unzip`URLFileByteSize[$ZipFile];
+    fcfilesize = Unzip`URLFileByteSize[zipremote];
     Print[""];
     Print["> Downloading ", ToString[Round[fcfilesize/1024^2]], " MB from:"];
-    Print["  ", $ZipFile];
+    Print["  ", zipremote];
     Print["  Please be patient..."];
-    Unzip`CopyRemote[$ZipFile, ziplocal];
+    Unzip`CopyRemote[zipremote, ziplocal];
     Print["  Done downloading."];
 
     Print["\n> Extracting NCAlgebra files to:"];
-    Print["  ", $installdirectory];
+    Print["  ", installdirectory];
     Print["  Please be patient..."];
-    Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False];
+    Unzip`Unzip[ziplocal, installdirectory, Verbose -> False];
     Print["  Done extracting files."];
 
     Print["  Renaming downloaded folder."];
     RenameDirectory[ dirlocal,
-                     FileNameJoin[{ $installdirectory, "NC"}] ];
+                     FileNameJoin[{ installdirectory, "NC"}] ];
           
     (* Installled? *)
     Print["\n> Installation successful?"];
     If [ FindFile[ "NC`" ] === $Failed
         ,
          Print["  Directory"];
-         Print["  ", $installdirectory];
+         Print["  ", installdirectory];
          Print["  does not to seem in the system $Path."];
          input = "Z";
          While[ !(input == "Y" || input == "N")
@@ -158,7 +171,7 @@ Module[
          ];
          If[ input == "Y"
             ,
-             Print["  Adding '", $installdirectory, "' to the system $Path"];
+             Print["  Adding '", installdirectory, "' to the system $Path"];
              initfile = FileNameJoin[{$UserBaseDirectory, "Kernel", "init.m"}];
              Print["  Looking for user's init.m file..."];
              info = FileInformation[initfile];
@@ -172,9 +185,9 @@ Module[
                           Print["  Appending to '", initfile, "'"];
                           OpenAppend[initfile]
              ];
-             Print["  Adding '", $installdirectory, "' to $Path"];
+             Print["  Adding '", installdirectory, "' to $Path"];
              WriteString[stream, "\n(* NCINSTALL - BEGIN *)\n"];
-             WriteString[stream, "AppendTo[$Path,\"", $installdirectory, "\"];\n"];
+             WriteString[stream, "AppendTo[$Path,\"", installdirectory, "\"];\n"];
              WriteString[stream, "(* NCINSTALL - END *)\n\n"];
              Close[stream];
             ,
