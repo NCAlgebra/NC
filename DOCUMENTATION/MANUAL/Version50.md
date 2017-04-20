@@ -1,5 +1,12 @@
 # Changes in Version 5.0 {#Version5_0}
 
+## Version 5.0.1 {#Version5_0_1}
+
+1. Introducing `NCWebInstall` and `NCWebUpdate`.
+2. Bug fixes.
+
+## Version 5.0.0 {#Version5_0_0}
+
 1. Completely rewritten core handling of noncommutative expressions
    with significant speed gains.
 2. Completely rewritten noncommutative Gröbner basis algorithm without

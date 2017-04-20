@@ -64,6 +64,3 @@ Major earlier contributions came from:
 
 * Mark Stankus, Math, Cal Poly San Luis Obispo
 * Robert L. Miller, General Atomics Corp
-
-
-

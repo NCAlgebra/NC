@@ -11,11 +11,30 @@ examples, is available at:
 
 http://math.ucsd.edu/~ncalg
 
-## Downloading
+## Automatic Installation
+
+Starting with version 5.0.1, the easiest way to download and install
+NCAlgebra is using the `NCWebInstall` script. Just type:
+
+    Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
+
+from the Mathematica Kernel or FrontEnd and follow the instructions to download and install NCAlgebra.
+
+This method will always install the latest available stable release
+available in the branch `master`. It may be ahead of the latest
+release.
+
+Alternatively you can download and install NCAlgebra as outlined below.
+
+## Manual installation
+
+Skip this section if you installed with `NCWebInstall`.
+
+### Downloading
 
 You can download NCAlgebra in one of the following ways.
 
-### Clone
+#### Via `git clone`
 
 You can clone the repository using git:
 
@@ -33,7 +52,7 @@ version switch to branch *devel* using:
 If you're happy with the latest stable release you do not need to
 do anything.
 
-### Download
+#### From github download button
 
 After you downloaded a zip file from github use your favorite zip
 utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
@@ -41,7 +60,7 @@ favorite location.
 
 **IMPORTANT:** Rename the top directory `NC`!
 
-### Releases
+#### From one of our releases
 
 Releases are stable snapshots that you can find at
 
@@ -51,23 +70,23 @@ Earlier releases can be downloaded from:
 
 www.math.ucsd.edu/~ncalg
 
-## Installation
+Releases in github are also branches so you can easily switch from
+version to version using git.
+
+### Post-download installation
 
 All that is needed for NCAlgebra to run is that its top directory, the
-`NC` directory, be on Mathematica's search path. If you are on a unix
+`NC` directory, be on Mathematica's search path.
+
+If you are on a unix
 flavored machine (Solaris, Linux, Mac OSX) then unpacking or cloning
-in your home directory (`~`) is all you need to do. You may want to try
-to run NCAlgebra as explained in the next section to see if that
-works.
+in your home directory (`~`) is all you need to do.
 
-If you want to put the files someplace else, all you need to do is to
-modify Mathematica's search path. You can do this in one of two ways:
+Otherwise, you may need to add the installation directory to
+Mathematica's search path. This is done automatically for you if you
+used `NCWebInstall`.
 
-* Use our installation notebook: 
-
-  You can use our `InstallNCAlgebra.nb` notebook to automagically set up the Mathematica's `$Path` variable. Navigate to the directory `DEMOS` inside the `NC` directory, open this notebook and follow the directions which are found there.
-
-* or, if you are experienced with Mathematica: 
+If you are experienced with Mathematica: 
 
   Edit the main *Mathematica* init.m file (not the one inside the `NC` directory) to add the name of the directory which contains the `NC` folder to the Mathematica variable `$Path`, as in:
 

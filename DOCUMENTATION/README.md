@@ -1,5 +1,7 @@
 -   [Acknowledgements](#acknowledgements)
 -   [Changes in Version 5.0](#Version5_0)
+    -   [Version 5.0.1](#Version5_0_1)
+    -   [Version 5.0.0](#Version5_0_0)
 -   [Introduction](#UserGuideIntroduction)
     -   [Running NCAlgebra](#RunningNCAlgebra)
     -   [Now what?](#now-what)
@@ -335,6 +337,15 @@ Major earlier contributions came from:
 
 Changes in Version 5.0
 ======================
+
+Version 5.0.1
+-------------
+
+1.  Introducing `NCWebInstall` and `NCWebUpdate`.
+2.  Bug fixes.
+
+Version 5.0.0
+-------------
 
 1.  Completely rewritten core handling of noncommutative expressions with significant speed gains.
 2.  Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter [Noncommutative Gröbner Basis](#NCGB) in the user guide and the [NCGBX](#PackageNCGBX) package. Some `NCGB` features are not fully supported yet, most notably [NCProcess](#NCProcess).
