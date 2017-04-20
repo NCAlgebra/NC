@@ -75,7 +75,11 @@ Module[
          If[ input == "Y"
             ,
              Print["  Deleting '", existing, "'."];
-             DeleteDirectory[existing, DeleteContents->True];
+             Check[ DeleteDirectory[existing, DeleteContents->True];
+                   ,
+                    Print["\n> Something went wrong.\n  Aborting..."];
+                    Return[];
+             ];
             ,
              Print["  Proceeding without removing existing installation."];
              Print["  You might want to rename the directory '", 
@@ -118,11 +122,16 @@ Module[
         Print["\n> Aborting..."];
         Return[];
     ];
-                
+        
+
     (* Create directory if needed *)
     If[ !DirectoryQ[installdirectory],
         Print["\n> Installation directory does not exist. Creating..."];
-        CreateDirectory[installdirectory]
+        Check[ CreateDirectory[installdirectory]
+              ,
+               Print["\n> Something went wrong.\n  Aborting..."];
+               Return[];
+        ];
     ];
 
     (* Download zip file *)
@@ -138,17 +147,29 @@ Module[
     If[ FileExistsQ[ziplocal],
         Print["\n> A local copy of the zip file already exists."];
         Print["  Deleting '", ziplocal, "'."];
-        DeleteFile@ziplocal
+        Check[ DeleteFile@ziplocal;
+              ,
+               Print["\n> Something went wrong.\n  Aborting..."];
+               Return[];
+        ];
     ];
     If[ DirectoryQ[dirlocal],
         Print["\n> A local copy of the expanded files already exists."];
         Print["  Deleting '", dirlocal, "'."];
-        DeleteDirectory[dirlocal, DeleteContents->True];
+        Check[ DeleteDirectory[dirlocal, DeleteContents->True];
+              ,
+               Print["\n> Something went wrong.\n  Aborting..."];
+               Return[];
+        ];
     ];
     If[ DirectoryQ[nclocal],
         Print["\n> A local copy of the package already exists."];
         Print["  Deleting '", nclocal, "'."];
-        DeleteDirectory[nclocal, DeleteContents->True];
+        Check[ DeleteDirectory[nclocal, DeleteContents->True];
+              ,
+               Print["\n> Something went wrong.\n  Aborting..."];
+               Return[];
+        ];
     ];
        
     (* Download file *)
@@ -157,18 +178,30 @@ Module[
     Print["> Downloading ", ToString[Round[fcfilesize/1024^2]], " MB from:"];
     Print["  ", zipremote];
     Print["  Please be patient..."];
-    Unzip`CopyRemote[zipremote, ziplocal];
+    Check[ Unzip`CopyRemote[zipremote, ziplocal];
+          ,
+           Print["\n> Something went wrong.\n  Aborting..."];
+           Return[];
+    ];
     Print["  Done downloading."];
 
     Print["\n> Extracting NCAlgebra files to:"];
     Print["  ", installdirectory];
     Print["  Please be patient..."];
-    Unzip`Unzip[ziplocal, installdirectory, Verbose -> False];
+    Check[ Unzip`Unzip[ziplocal, installdirectory, Verbose -> False];
+          ,
+           Print["\n> Something went wrong.\n  Aborting..."];
+           Return[];
+    ];
     Print["  Done extracting files."];
 
     Print["  Renaming downloaded folder."];
-    RenameDirectory[ dirlocal,
-                     FileNameJoin[{ installdirectory, "NC"}] ];
+    Check[ RenameDirectory[ dirlocal,
+                            FileNameJoin[{ installdirectory, "NC"}] ];
+          ,
+           Print["\n> Something went wrong.\n  Aborting..."];
+           Return[];
+    ];
           
     (* Installled? *)
     Print["\n> Installation successful?"];
