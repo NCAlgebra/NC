@@ -94,7 +94,7 @@ Edit the main *Mathematica* `init.m` file (not the one inside the `NC` directory
 
     AppendTo[$Path,"/Users/YourName/"];
 
-You can locate where your user `init.m` file is located by typing:
+You can locate your user `init.m` file by typing:
 
     FileNameJoin[{$UserBaseDirectory, "Kernel", "init.m"}]
 
