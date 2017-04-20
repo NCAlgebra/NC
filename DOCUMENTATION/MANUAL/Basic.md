@@ -168,7 +168,7 @@ results in
 
     c+tp[a]**tp[b]
 
-USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
+Use [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and
 [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically
 create symmetric and self adjoint versions of your rules:
 

@@ -542,7 +542,7 @@ tp[aj[a]]</code></pre>
 <pre><code>NCReplaceAll[tp[b**a]+b**a,b**a-&gt;c]</code></pre>
 <p>results in</p>
 <pre><code>c+tp[a]**tp[b]</code></pre>
-<p>USe <a href="#NCMakeRuleSymmetric">NCMakeRuleSymmetric</a> and <a href="#NCMakeRuleSelfAdjoint">NCMakeRuleSelfAdjoint</a> to automatically create symmetric and self adjoint versions of your rules:</p>
+<p>Use <a href="#NCMakeRuleSymmetric">NCMakeRuleSymmetric</a> and <a href="#NCMakeRuleSelfAdjoint">NCMakeRuleSelfAdjoint</a> to automatically create symmetric and self adjoint versions of your rules:</p>
 <pre><code>NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b**a -&gt; c]]</code></pre>
 <p>returns</p>
 <pre><code>c + tp[c]</code></pre>

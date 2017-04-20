@@ -590,7 +590,7 @@ results in
 
     c+tp[a]**tp[b]
 
-USe [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically create symmetric and self adjoint versions of your rules:
+Use [NCMakeRuleSymmetric](#NCMakeRuleSymmetric) and [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint) to automatically create symmetric and self adjoint versions of your rules:
 
     NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b**a -> c]]
 
