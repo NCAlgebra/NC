@@ -18,7 +18,7 @@ NCAlgebra is using the `NCWebInstall` script. Just type:
 
     Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
 
-from the Mathematica Kernel or FrontEnd and follow the instructions to download and install NCAlgebra.
+on the Mathematica Kernel or FrontEnd and follow the instructions to download and install NCAlgebra.
 
 This method will always install the latest available stable release
 available in the branch `master`. It may be ahead of the latest
@@ -52,7 +52,7 @@ version switch to branch *devel* using:
 If you're happy with the latest stable release you do not need to
 do anything.
 
-#### From github download button
+#### From the github download button
 
 After you downloaded a zip file from github use your favorite zip
 utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
@@ -65,6 +65,8 @@ favorite location.
 Releases are stable snapshots that you can find at
 
 https://github.com/NCAlgebra/NC/releases
+
+**IMPORTANT:** Rename the top directory `NC`!
 
 Earlier releases can be downloaded from:
 
@@ -86,11 +88,17 @@ Otherwise, you may need to add the installation directory to
 Mathematica's search path. This is done automatically for you if you
 used `NCWebInstall`.
 
-If you are experienced with Mathematica: 
+**If you are experienced with Mathematica:**
 
-  Edit the main *Mathematica* init.m file (not the one inside the `NC` directory) to add the name of the directory which contains the `NC` folder to the Mathematica variable `$Path`, as in:
+Edit the main *Mathematica* `init.m` file (not the one inside the `NC` directory) to add the name of the directory which contains the `NC` folder to the Mathematica variable `$Path`, as in:
 
-        AppendTo[$Path,"/Users/YourName/"];
+    AppendTo[$Path,"/Users/YourName/"];
+
+You can locate where your user `init.m` file is located by typing:
+
+    FileNameJoin[{$UserBaseDirectory, "Kernel", "init.m"}]
+
+in Mathematica.
 
 ## Running NCAlgebra
 
