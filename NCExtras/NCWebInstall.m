@@ -40,7 +40,7 @@ If[ !ValueQ[$installdirectory],
 ];
 
 Module[ 
-    {existing, ziplocal, fcfilesize,
+    {existing, ziplocal, dirlocal, nclocal, fcfilesize,
      label, version, input,
      initfile, info, stream},
 
@@ -59,7 +59,7 @@ Module[
     (* Check for existing installations *)
     existing = FindFile["NC`"];
     If [ existing =!= $Failed,
-         existing = StringReplace[existing, a_ ~~ $PathnameSeparator <> "init.m" -> a];
+         existing = DirectoryName[existing];
          {label, version} = Import[FileNameJoin[{existing, 
                                                 "NC_VERSION"}]][[1, {1,2}]];
          version = StringReplace[version, Whitespace -> ""];
@@ -76,7 +76,7 @@ Module[
                ,
                 input = ToUpperCase[
                    InputString["  Do you want NCWebInstall to rename " 
-                               <> "the folder '" <> existing <> " as " 
+                               <> "this folder as '" 
                                <> existing <> version 
                                <> "'? (y/n) "]];
          ];
@@ -99,6 +99,8 @@ Module[
 
     (* Download zip file *)
     ziplocal = FileNameJoin[{ $installdirectory, FileNameTake @ $ZipFile}];
+    dirlocal = FileNameJoin[{ $installdirectory, "NC-devel"}];
+    nclocal = FileNameJoin[{ $installdirectory, "NC"}];
     Print["\n> Downloading:"];
     Print["  ", $ZipFile];
     Print["  into directory:"];
@@ -106,29 +108,44 @@ Module[
     
     (* get rid of previous download *)
     If[ FileExistsQ[ziplocal],
-        Print["\n> A local copy already exists."];
-        Print["  Deleting."];
+        Print["\n> A local copy of the zip file already exists."];
+        Print["  Deleting '", ziplocal, "'."];
         DeleteFile@ziplocal
     ];
-        
+    If[ DirectoryQ[dirlocal],
+        Print["\n> A local copy of the expanded files already exists."];
+        Print["  Deleting '", dirlocal, "'."];
+        DeleteDirectory[dirlocal, DeleteContents->True];
+    ];
+    If[ DirectoryQ[nclocal],
+        Print["\n> A local copy of the package already exists."];
+        Print["  Deleting '", nclocal, "'."];
+        DeleteDirectory[nclocal, DeleteContents->True];
+    ];
+       
     (* Download file *)
     fcfilesize = Unzip`URLFileByteSize[$ZipFile];
     Print[""];
     Print["> Downloading ", ToString[Round[fcfilesize/1024^2]], " MB from:"];
     Print["  ", $ZipFile];
-    Print["  Please wait..."];
+    Print["  Please be patient..."];
     Unzip`CopyRemote[$ZipFile, ziplocal];
     Print["  Done downloading."];
 
     Print["\n> Extracting NCAlgebra files to:"];
     Print["  ", $installdirectory];
-    Print["  Please wait..."];
-    (* Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False]; *)
+    Print["  Please be patient..."];
+    Unzip`Unzip[ziplocal, $installdirectory, Verbose -> False];
     Print["  Done extracting files."];
 
+    Print["  Renaming downloaded folder."];
+    RenameDirectory[ dirlocal,
+                     FileNameJoin[{ $installdirectory, "NC"}] ];
+          
     (* Installled? *)
-    Print["\n> Loading NCAlgebra."];
-    If [ FindFile[$installdirectory] === $Failed,
+    Print["\n> Installation successful?"];
+    If [ FindFile[ "NC`" ] === $Failed
+        ,
          Print["  Directory"];
          Print["  ", $installdirectory];
          Print["  does not to seem in the system $Path."];
@@ -137,8 +154,7 @@ Module[
                ,
                 input = ToUpperCase[
                    InputString["  Do you want NCWebInstall to add " 
-                               <> "the folder '" <> $installdirectory
-                               <> "' to the system $Path? (y/n) "]];
+                               <> "this folder to the system $Path? (y/n) "]];
          ];
          If[ input == "Y"
             ,
@@ -165,20 +181,25 @@ Module[
              Print["  Proceeding without adding folder to $Path."];
              Print["  You may not be able to load NCAlgebra!"];
          ];
-         
+        ,
+         Print["  Looking good."];
     ];
 
     (* Load *)
+    Print["\n> Try to load NC.\n"];
     If [ FindFile["NC`"] =!= $Failed,
          Quiet[Needs["NC`"], Needs::nocont],
          Print["Installation of NCAlgebra failed!"]
          Return[];
     ];
+         
+    Print["\n> Try to load NCAlgebra.\n"];
     If [ FindFile["NCAlgebra`"] =!= $Failed,
          Quiet[Needs["NCAlgebra`"], Needs::nocont],
          Print["Installation of NCAlgebra failed!"]
          Return[];
     ];
     Print["\n> Congratulations, you have succesfully intalled NCAlgebra!"];
+    Print["\n> Type '<< NCTEST' to test basic NCAlgebra functionality."];
 
 ];
