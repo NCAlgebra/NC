@@ -34,6 +34,7 @@ Module[
 
     (* Import NC_VERSION *)
     {label, version} = Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NC_VERSION"][[1, {1,2}]];
+    version = StringReplace[version, Whitespace -> ""];
     Print[];
     Print["> This program will install ", label, " ", version];
     
