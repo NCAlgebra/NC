@@ -30,6 +30,8 @@ Clear[NCCollect,NCStrongCollect,
 
 NCCollect::NotPolynomial = "Could not transform expression into nc polynomial";
 
+Options[NCCollect] = {ByTotalDegree -> False};
+
 Begin["`Private`"];
 
   Get["NCCollect.usage"];
@@ -59,7 +61,8 @@ Begin["`Private`"];
     Return[tmp];
   ];
 
-  NCStrongCollect[f_, x_?CommutativeQ] := Collect[f, x];
+  NCStrongCollect[f_, x_?CommutativeQ] := 
+    MapAt[Collect[#, x]&, f, Position[f, _Plus]];
 
   NCStrongCollect[f_, x_?NonCommutativeQ] :=
     ReplaceRepeated[f, {
@@ -139,8 +142,6 @@ Begin["`Private`"];
 
   (* NCCollect *)
 
-  Options[NCCollect] = {TotalDegree -> False};
-  
   NCCollect[expr_List, vars_, opts:OptionsPattern[]] := 
      Map[NCCollect[#, vars, opts]&, expr];
 
@@ -148,14 +149,14 @@ Begin["`Private`"];
      NCCollect[expr, {var}, opts];
                              
   NCCollect[exp_, var_List, opts:OptionsPattern[]] := Module[
-    {vars = var, expr = exp, rules = {}, 
-     dec, rvars, rrules, cvars},
+    {ncVars = var, cVars, expr = exp, rules = {}, 
+     dec, rVars, rrules},
 
-    If [ Not[MatchQ[vars, {___?NCSymbolOrSubscriptQ}]], 
+    If [ Not[MatchQ[ncVars, {___?NCSymbolOrSubscriptQ}]], 
          
          (* select expressions which are not symbols *)
-         pos = Flatten[Position[vars, Except[_?NCSymbolOrSubscriptQ], {1}]];
-         exprs = vars[[pos]];
+         pos = Flatten[Position[ncVars, Except[_?NCSymbolOrSubscriptQ], {1}]];
+         exprs = ncVars[[pos]];
          
          (* create replacement variables *)
          expVars = Table[Unique["exp"], Length[exprs]];
@@ -164,34 +165,33 @@ Begin["`Private`"];
          (* and a rule to replace *)
          rules = Thread[exprs -> expVars];
 
-         (* replace in expression and vars *)
+         (* replace in expression and ncVars *)
          expr = NCReplaceAll[expr, rules];
-         vars[[pos]] = expVars;
+         ncVars[[pos]] = expVars;
          
          (* reverse rule *)
          rules = Map[Reverse, rules];
 
          (*
          Print["expr = ", expr];
-         Print["vars = ", vars];
+         Print["ncVars = ", ncVars];
          Print["rules = ", rules];
          *)
          
     ];
       
-    (* Handle commutative symbols *)
-    cvars = Select[vars, CommutativeQ];
-    If[ cvars =!= {},
-        vars = DeleteCases[vars, _?CommutativeQ];
-        Print["cvars = ", cvars];
-        Print["vars = ", vars];
+    (* Split commutative symbols *)
+    cVars = Select[ncVars, CommutativeQ];
+    If[ cVars =!= {}
+       , 
+        ncVars = DeleteCases[ncVars, _?CommutativeQ];
     ];
       
-    {dec,rvars,rrules} = Quiet[
-       Check[ {NCPDecompose[NCToNCPolynomial[expr, vars]], {}, {}}
+    {dec,rVars,rrules} = Quiet[
+       Check[ {NCPDecompose[NCToNCPolynomial[expr, ncVars]], {}, {}}
              ,
               Check[ Apply[{NCPDecompose[#1], #2, #3}&, 
-                           NCRationalToNCPolynomial[expr, vars]]
+                           NCRationalToNCPolynomial[expr, ncVars]]
                     ,
                      Message[NCCollect::NotPolynomial];
                      {$Failed, $Failed, $Failed}
@@ -208,7 +208,7 @@ Begin["`Private`"];
     If[ dec === $Failed, Return[expr] ];
       
     (* group by total degree? *)
-    If[ OptionValue[TotalDegree]
+    If[ OptionValue[ByTotalDegree]
        ,
         (* sum degree in decompose before applying NCStrongCollect *)
         dec = Merge[MapAt[Total, Normal[dec], {All, 1}], Total];
@@ -216,36 +216,29 @@ Begin["`Private`"];
       
     (*
     Print["dec = ", dec];
-    Print["rvars = ", rvars];
+    Print["rVars = ", rVars];
     Print["rrules = ", rrules];
     Print["collected = ", 
-          Map[NCStrongCollect[#, Join[vars, rvars]]&, dec]];
+          Map[NCStrongCollect[#, Join[ncVars, rVars]]&, dec]];
     *)
 
     (* Apply NCStrongCollect *)
-    expr = NCCompose[Map[NCStrongCollect[#, Join[vars, rvars]]&,
-                         dec]] //. rrules //. rules;
-      
-    Return[ 
-      If[ cvars === {}
-         ,
-          expr
-         ,
-          Collect[expr, cvars]
-      ]
-    ];
+    Return[NCCompose[Map[NCStrongCollect[#, Join[ncVars, rVars, cVars]]&,
+                         dec]] //. rrules //. rules];
       
   ];
       
   (* NCCollectSymmetric *)
                              
-  NCCollectSymmetric[expr_, vars_] := NCCollectSymmetric[expr, {vars}];
-  NCCollectSymmetric[expr_, vars_List] :=
-    NCCollect[expr, Flatten[Transpose[{vars,Map[tp,vars]}]]];
+  NCCollectSymmetric[expr_, vars_, opts:OptionsPattern[]] := 
+    NCCollectSymmetric[expr, {vars}, opts];
+  NCCollectSymmetric[expr_, vars_List, opts:OptionsPattern[]] :=
+    NCCollect[expr, Flatten[Transpose[{vars,Map[tp,vars]}]], opts];
 
-  NCCollectSelfAdjoint[expr_, vars_] := NCCollectSelfAdjoint[expr, {vars}];
-  NCCollectSelfAdjoint[expr_, vars_List] :=
-    NCCollect[expr, Flatten[Transpose[{vars,Map[aj,vars]}]]];
+  NCCollectSelfAdjoint[expr_, vars_, opts:OptionsPattern[]] := 
+    NCCollectSelfAdjoint[expr, {vars}, opts];
+  NCCollectSelfAdjoint[expr_, vars_List, opts:OptionsPattern[]] :=
+    NCCollect[expr, Flatten[Transpose[{vars,Map[aj,vars]}]], opts];
 
   (* NCStrongCollectSymmetric *)
                              

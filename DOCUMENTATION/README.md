@@ -569,7 +569,7 @@ Similar properties hold to `aj`. Moreover
 
 return `co[a]` where `co` stands for complex-conjugate.
 
-**Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates (`co`), and inverses (`inv`) in a notebook environment render as \(x^T\), \(x^*\), \(\bar{x}\), and \(x^{-1}\). `tp` and `aj` can also be input directly as `x^T` and `x^*`. For this reason the symbol `T` is now protected in `NCAlgebra`.
+**Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates (`co`), and inverses (`inv`) in a notebook environment render as *x*<sup>*T*</sup>, *x*<sup>\*</sup>, $\\bar{x}$, and *x*<sup>−1</sup>. `tp` and `aj` can also be input directly as `x^T` and `x^*`. For this reason the symbol `T` is now protected in `NCAlgebra`.
 
 Replace
 -------
@@ -748,15 +748,15 @@ For example:
 
     1 + y**x**y - A x
 
-is a polynomial with real coefficients in \(x\) and \(y\), whereas
+is a polynomial with real coefficients in *x* and *y*, whereas
 
     a**y**b**x**c**y - A x**d
 
-is a polynomial with nc coefficients in \(x\) and \(y\), where the letters \(a\), \(b\), \(c\), and \(d\), are the *nc coefficients*. Of course
+is a polynomial with nc coefficients in *x* and *y*, where the letters *a*, *b*, *c*, and *d*, are the *nc coefficients*. Of course
 
     1 + y**x**y - A x
 
-is a polynomial with nc coefficients if one considers only \(x\) as the variable of interest.
+is a polynomial with nc coefficients if one considers only *x* as the variable of interest.
 
 In order to take full advantage of [`NCPoly`](#PackageNCPoly) and [`NCPolynomial`](#PackageNCPolynomial) one would need to *convert* an expression into those special formats. See [NCPolyInterface](#PackageNCPolyInterface), [NCPoly](#PackageNCPoly), and [NCPolynomial](#PackageNCPolynomial) for details.
 
@@ -867,7 +867,7 @@ Matrices
 
 is a representation for the matrix
 
-\(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\)
+$\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$
 
 The Mathematica command `MatrixForm` output pretty matrices. `MatrixForm[m]` prints `m` in a form similar to the above matrix.
 
@@ -914,7 +914,7 @@ In previous versions one had to use the special commands `tpMat`, `ajMat`, and `
 
 Behind `NCInverse` there are a host of linear algebra algorithms which are available in the package:
 
--   [`NCMatrixDecompositions`](#PackageNCMatrixDecompositions): implements versions of the \(LU\) Decomposition with partial and complete pivoting, as well as \(LDL\) Decomposition which are suitable for calculations with nc matrices. Those functions are based on the templated algorithms from the package [`MatrixDecompositions`](#PackageMatrixDecompositions).
+-   [`NCMatrixDecompositions`](#PackageNCMatrixDecompositions): implements versions of the *L**U* Decomposition with partial and complete pivoting, as well as *L**D**L* Decomposition which are suitable for calculations with nc matrices. Those functions are based on the templated algorithms from the package [`MatrixDecompositions`](#PackageMatrixDecompositions).
 
 For instance the function [`NCLUDecompositionWithPartialPivoting`](#NCLUDecompositionWithPartialPivoting) can be used as
 
@@ -926,7 +926,7 @@ which returns
     lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
     p = {1, 2}
 
-The list `p` encodes the sequence of permutations calculated during the execution of the algorithm. The matrix `lu` contains the factors \(L\) and \(U\). These can be recovered using
+The list `p` encodes the sequence of permutations calculated during the execution of the algorithm. The matrix `lu` contains the factors *L* and *U*. These can be recovered using
 
     {l, u} = GetLUMatrices[lu]
 
@@ -935,7 +935,7 @@ resulting in this case in
     l = {{1, 0}, {c**inv[a], 1}}
     u = {{a, b}, {0, d - c**inv[a]**b}}
 
-To verify that \(M = L U\) input
+To verify that *M* = *L**U* input
 
     m - NCDot[l, u]
 
@@ -958,11 +958,11 @@ and a permutation list
 
     p = {2, 1}
 
-which indicates that the number `1`, appearing in the second row, was used as the pivot rather than the symbol `a` appearing on the first row. Because of the permutation, to verify that \(P M = L U\) input
+which indicates that the number `1`, appearing in the second row, was used as the pivot rather than the symbol `a` appearing on the first row. Because of the permutation, to verify that *P**M* = *L**U* input
 
     m[[p]] - NCDot[l, u]
 
-which should return a zero matrix. Note that the permutation matrix \(P\) is never constructed. Instead, the rows of \(M\) are permuted using Mathematica's `Part` (`[[]]`). Likewise
+which should return a zero matrix. Note that the permutation matrix *P* is never constructed. Instead, the rows of *M* are permuted using Mathematica's `Part` (`[[]]`). Likewise
 
     m = {{a + b, b}, {c, d}}
     {lu, p} = NCLUDecompositionWithPartialPivoting[m]
@@ -988,7 +988,7 @@ returns the *left* and *right* permutation lists
     p = {2, 1}
     q = {1, 2}
 
-and `rank` equal to `1`. The \(L\) and \(U\) factors can be obtained as before using
+and `rank` equal to `1`. The *L* and *U* factors can be obtained as before using
 
     {l, u} = GetLUMatrices[lu]
 
@@ -997,13 +997,13 @@ to get
     l = {{1, 0}, {2, 1}}
     u = {{a, b}, {0, 0}}
 
-In this case, to verify that \(P M Q = L U\) input
+In this case, to verify that *P**M**Q* = *L**U* input
 
     NCDot[l, u] - m[[p, q]]
 
-which should return a zero matrix. As with partial pivoting, the permutation matrices \(P\) and \(Q\) are never constructed. Instead we used `Part` (`[[]]`) to permute both columns and rows.
+which should return a zero matrix. As with partial pivoting, the permutation matrices *P* and *Q* are never constructed. Instead we used `Part` (`[[]]`) to permute both columns and rows.
 
-Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the \(LDL^T\) decomposition of symmetric symbolic nc matrices. For example
+Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the *L**D**L*<sup>*T*</sup> decomposition of symmetric symbolic nc matrices. For example
 
     m = {{a, b}, {b, c}}
     {ldl, p, s, rank} = NCLDLDecomposition[m]
@@ -1024,11 +1024,11 @@ which in this case returns
     d = {{a, 0}, {0, c - b**inv[a]**b}}
     u = {{1, inv[a]**b}, {0, 1}}}
 
-Because \(P M P^T = L D L^T\),
+Because *P**M**P*<sup>*T*</sup> = *L**D**L*<sup>*T*</sup>,
 
     NCDot[l, d, u] - m[[p, p]]
 
-is the zero matrix and \(U = L^T\).
+is the zero matrix and *U* = *L*<sup>*T*</sup>.
 
 `NCLDLDecomposition` works only on symmetric matrices and, whenever possible, will make assumptions on variables so that it can run successfully.
 
@@ -1421,7 +1421,7 @@ The sequence of braces in the list of *variables* encodes the *ordering* to be u
 
 prints out
 
-\(x \ll y \ll z\)
+*x* ≪ *y* ≪ *z*
 
 and
 
@@ -1429,7 +1429,7 @@ and
 
 prints out
 
-\(x \ll y < z\)
+*x* ≪ *y* &lt; *z*
 
 from where you can see that grouping variables inside braces induces a graded type ordering, as discussed in Section . `NCPoly`s constructed from different orderings cannot be combined.
 
@@ -1438,7 +1438,7 @@ There is also a special constructor for monomials. For example
     NCPolyMonomial[{y,x}, vars]
     NCPolyMonomial[{x,y}, vars]
 
-return the monomials corresponding to \(y x\) and \(x y\).
+return the monomials corresponding to *y**x* and *x**y*.
 
 Operations on `NCPoly` objects result in another `NCPoly` object that is always expanded. For example:
 
@@ -1505,9 +1505,9 @@ Polynomials with noncommutative coefficients
 
 A larger class of polynomials in noncommutative variables is that of polynomials with noncommutative coefficients. Think of a polynomial with commutative coefficients in which certain variables are considered to be unknown, i.e. *variables*, where others are considered to be known, i.e. *coefficients*. For example, in many problems in systems and control the following expression
 
-\(p(x) = a x + x a^T - x b x + c\)
+*p*(*x*)=*a**x* + *x**a*<sup>*T*</sup> − *x**b**x* + *c*
 
-is often seen as a polynomial in the noncommutative unknown `x` with known noncommutative coefficients `a`, `b`, and `c`. A typical problem is the determination of a solution to the equation \(p(x) = 0\) or the inequality \(p(x) \succeq 0\).
+is often seen as a polynomial in the noncommutative unknown `x` with known noncommutative coefficients `a`, `b`, and `c`. A typical problem is the determination of a solution to the equation *p*(*x*)=0 or the inequality *p*(*x*)≽0.
 
 The package [`NCPolynomial`](#PackageNCPolynomial) handles such polynomials with noncommutative coefficients. As with [`NCPoly`](#PackageNCPoly), the package provides the commands [`NCToNCPolynomial`](#NCToNCPolynomial) and [`NCPolynomialToNC`](#NCPolynomialToNC) to convert nc expressions back and forth between `NCAlgebra` and `NCPolynomial`. For example
 
@@ -1576,86 +1576,87 @@ constructs `NCPolynomial` objects representing the polynomial matrices `mat1` an
 
     NCPolynomialToNC[p1**p2] - NCDot[mat1, mat2] // NCExpand
 
-is zero as expected. Internally `NCPolynomial` represents a polynomial matrix by constructing matrix factors. For example the representation of the matrix `mat1` correspond to the factors \[ 
-\begin{aligned}
-\begin{bmatrix}
-    a x + x a^T + c y + y^T c^T - x q x & b x \\ 
+is zero as expected. Internally `NCPolynomial` represents a polynomial matrix by constructing matrix factors. For example the representation of the matrix `mat1` correspond to the factors
+$$ 
+\\begin{aligned}
+\\begin{bmatrix}
+    a x + x a^T + c y + y^T c^T - x q x & b x \\\\ 
     x b^T & 1
-\end{bmatrix} 
+\\end{bmatrix} 
 &=
-\begin{bmatrix}
-    0 & 0 \\ 0 & 1
-\end{bmatrix}
+\\begin{bmatrix}
+    0 & 0 \\\\ 0 & 1
+\\end{bmatrix}
 +
-\begin{bmatrix}
-    a \\ 0
-\end{bmatrix}
+\\begin{bmatrix}
+    a \\\\ 0
+\\end{bmatrix}
 x
-\begin{bmatrix}
+\\begin{bmatrix}
     1 & 0
-\end{bmatrix}
+\\end{bmatrix}
 +
-\begin{bmatrix}
-    1 \\ 0
-\end{bmatrix}
+\\begin{bmatrix}
+    1 \\\\ 0
+\\end{bmatrix}
 x
-\begin{bmatrix}
+\\begin{bmatrix}
     a^T & 0
-\end{bmatrix}
+\\end{bmatrix}
 +
-\begin{bmatrix}
-    -1 \\ 0
-\end{bmatrix}
+\\begin{bmatrix}
+    -1 \\\\ 0
+\\end{bmatrix}
 x
 q 
 x
-\begin{bmatrix}
+\\begin{bmatrix}
     1 & 0
-\end{bmatrix}
-+ \\
-& \qquad \quad
-\begin{bmatrix}
-    b \\ 0
-\end{bmatrix}
+\\end{bmatrix}
++ \\\\
+& \\qquad \\quad
+\\begin{bmatrix}
+    b \\\\ 0
+\\end{bmatrix}
 x
-\begin{bmatrix}
+\\begin{bmatrix}
     0 & 1
-\end{bmatrix}
+\\end{bmatrix}
 +
-\begin{bmatrix}
-    0 \\ 1
-\end{bmatrix}
+\\begin{bmatrix}
+    0 \\\\ 1
+\\end{bmatrix}
 x
-\begin{bmatrix}
+\\begin{bmatrix}
     b^T & 0
-\end{bmatrix}
+\\end{bmatrix}
 +
-\begin{bmatrix}
-    c \\ 0
-\end{bmatrix}
+\\begin{bmatrix}
+    c \\\\ 0
+\\end{bmatrix}
 y
-\begin{bmatrix}
+\\begin{bmatrix}
     1 & 0
-\end{bmatrix}
+\\end{bmatrix}
 +
-\begin{bmatrix}
-    1 \\ 0
-\end{bmatrix}
+\\begin{bmatrix}
+    1 \\\\ 0
+\\end{bmatrix}
 y^T
-\begin{bmatrix}
+\\begin{bmatrix}
     c^T & 0
-\end{bmatrix}
-\end{aligned}
-\]
+\\end{bmatrix}
+\\end{aligned}
+$$
 
 See section [linear functions](#Linear) for more features on linear polynomial matrices.
 
 Quadratic polynomials
 ---------------------
 
-When working with nc quadratics it is useful to be able to factor the quadratic into the following form \[
-    q(x) = c + s(x) + l(x) M r(x)
-\] where \(s\) is linear \(x\) and \(l\) and \(r\) are vectors and \(M\) is a matrix. Load the package
+When working with nc quadratics it is useful to be able to factor the quadratic into the following form
+*q*(*x*)=*c* + *s*(*x*)+*l*(*x*)*M**r*(*x*)
+ where *s* is linear *x* and *l* and *r* are vectors and *M* is a matrix. Load the package
 
     << NCQuadratic`
 
@@ -1701,13 +1702,15 @@ produces
     right = {h**x**x, h**x, h}
     middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
 
-Note that the middle matrix \[
-\begin{bmatrix}
-2 & 2 x & 2 x^2 \\
-0 & 2 & 2 x \\
+Note that the middle matrix
+$$
+\\begin{bmatrix}
+2 & 2 x & 2 x^2 \\\\
+0 & 2 & 2 x \\\\
 0 & 0 & 2
-\end{bmatrix}
-\] is not *symmetric*, as one might have expected. The command [`NCQuadraticMakeSymmetric`](#NCQuadraticMakeSymmetric) can fix that and produce a symmetric decomposition. For the above example
+\\end{bmatrix}
+$$
+ is not *symmetric*, as one might have expected. The command [`NCQuadraticMakeSymmetric`](#NCQuadraticMakeSymmetric) can fix that and produce a symmetric decomposition. For the above example
 
     {const, lin, sleft, smiddle, sright} = 
       NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
@@ -1719,13 +1722,15 @@ results in
     sright = {h**x**x, h**x, h}
     middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
 
-in which `middle` is the symmetric matrix \[
-\begin{bmatrix}
-0 & 0 & 2 \\
-0 & 2 & 2 x \\
+in which `middle` is the symmetric matrix
+$$
+\\begin{bmatrix}
+0 & 0 & 2 \\\\
+0 & 2 & 2 x \\\\
 2 & 2 x & 2 x^2
-\end{bmatrix}
-\] Note the argument `SymmetricVariables -> {x,h}` which tells `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric variables. Because the `middle` matrix is never positive semidefinite for any possible value of \(x\) the conclusion[6] is that the nc quartic \(x^4\) is *not convex*.
+\\end{bmatrix}
+$$
+ Note the argument `SymmetricVariables -> {x,h}` which tells `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric variables. Because the `middle` matrix is never positive semidefinite for any possible value of *x* the conclusion[6] is that the nc quartic *x*<sup>4</sup> is *not convex*.
 
 The production of such symmetric quadratic decompositions is automated by the convenience command [`NCMatrixOfQuadratic`](#NCMatrixOfQuadratic). Verify that
 
@@ -1745,17 +1750,19 @@ The resulting middle matrix can be factored using
     {ldl, p, s, rank} = NCLDLDecomposition[middle];
     {ll, dd, uu} = GetLDUMatrices[ldl, s];
 
-which produces the diagonal factors \[
-\begin{bmatrix}
-  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\
-  0 & 0 & 0 \\
+which produces the diagonal factors
+$$
+\\begin{bmatrix}
+  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\\\
+  0 & 0 & 0 \\\\
   0 & 0 & 0
-\end{bmatrix}
-\] which indicates the the original nc rational is convex whenever \[
-(1 + b y + y b - a x a)^{-1} \succeq 0
-\] or, equivalently, whenever \[
-1 + b y + y b - a x a \succeq 0
-\] The above sequence of calculations is automated by the command [`NCConvexityRegion`](#NCConvexityRegion) as in
+\\end{bmatrix}
+$$
+ which indicates the the original nc rational is convex whenever
+(1 + *b**y* + *y**b* − *a**x**a*)<sup>−1</sup> ≽ 0
+ or, equivalently, whenever
+1 + *b**y* + *y**b* − *a**x**a* ≽ 0
+ The above sequence of calculations is automated by the command [`NCConvexityRegion`](#NCConvexityRegion) as in
 
     << NCConvexity`
     NCConvexityRegion[expr, {x}]
@@ -1769,9 +1776,9 @@ which correspond to the diagonal entries of the LDL decomposition of the middle 
 Linear polynomials
 ------------------
 
-Another interesting class of nc polynomials is that of linear polynomials, which can be factor in the form: \[
-    s(x) = l (F \otimes x) r
-\] where \(l\) and \(r\) are vectors with symbolic expressions and \(F\) is a numeric matrix. This functionality is in the package
+Another interesting class of nc polynomials is that of linear polynomials, which can be factor in the form:
+*s*(*x*)=*l*(*F* ⊗ *x*)*r*
+ where *l* and *r* are vectors with symbolic expressions and *F* is a numeric matrix. This functionality is in the package
 
     << NCSylvester`
 
@@ -1795,12 +1802,12 @@ returns a list with the left and right vectors `l` and `r` and the coefficient a
 
 which in this case is the matrix:
 
-\[
-\begin{bmatrix}
-    -1 & 1\\
+$$
+\\begin{bmatrix}
+    -1 & 1\\\\
     1 & 0
-\end{bmatrix}
-\]
+\\end{bmatrix}
+$$
 
 and
 
@@ -1836,7 +1843,7 @@ result in:
     const = SparseArray[< 6 >, {3, 3}]
     lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
 
-See (Oliveira 2012) for details on the structure of the constant array \(F\) in this case.
+See (Oliveira 2012) for details on the structure of the constant array *F* in this case.
 
 Noncommutative Gröbner Basis
 ============================
@@ -1862,27 +1869,29 @@ if `NC` and `NCAlgebra` have already been loaded.
 What is a Gröbner Basis?
 ------------------------
 
-Most commutative algebra packages contain commands based on Gröbner Basis and uses of Gröbner Basis. For example, in Mathematica, the `Solve` command puts collections of equations in a *canonical form* which, for simple collections, readily yields a solution. Likewise, the Mathematica `Eliminate` command tries to convert a collection of \(m\) polynomial equations (often called relations) \[
-    \begin{aligned}
-    p_1(x_1,\ldots,x_n) &= 0 \\
-    p_2(x_1,\ldots,x_n) &= 0 \\
-    \vdots \quad & \quad \, \, \vdots \\
-    p_m(x_1,\ldots,x_n) &= 0
-    \end{aligned}
-\]
+Most commutative algebra packages contain commands based on Gröbner Basis and uses of Gröbner Basis. For example, in Mathematica, the `Solve` command puts collections of equations in a *canonical form* which, for simple collections, readily yields a solution. Likewise, the Mathematica `Eliminate` command tries to convert a collection of *m* polynomial equations (often called relations)
+$$
+    \\begin{aligned}
+    p\_1(x\_1,\\ldots,x\_n) &= 0 \\\\
+    p\_2(x\_1,\\ldots,x\_n) &= 0 \\\\
+    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
+    p\_m(x\_1,\\ldots,x\_n) &= 0
+    \\end{aligned}
+$$
 
-in variables \(x_1,x_2, \ldots x_n\) to a *triangular* form, that is a new collection of equations like
+in variables *x*<sub>1</sub>, *x*<sub>2</sub>, …*x*<sub>*n*</sub> to a *triangular* form, that is a new collection of equations like
 
-\[
-\begin{aligned}
-    q_1(x_1) &= 0 \\
-    q_2(x_1,x_2) &= 0 \\
-    q_3(x_1,x_2) &= 0 \\
-    q_4(x_1,x_2,x_3)&=0 \\
-    \vdots \quad & \quad \, \, \vdots \\
-    q_{r}(x_1,\ldots,x_n) &= 0.
-    \end{aligned}
-\] Here the polynomials \(\{q_j: 1\le j\le k_2\}\) generate the same *ideal* that the polynomials \(\{p_j : 1\le j \le k_1\}\) generate. Therefore, the set of solutions to the collection of polynomial equations \(\{p_j=0: 1\le j\le k_1\}\) equals the set of solutions to the collection of polynomial equations \(\{q_j=0: 1\le j\le k_2\}\). This canonical form greatly simplifies the task of solving collections of polynomial equations by facilitating backsolving for \(x_j\) in terms of \(x_1,\ldots,x_{j-1}\).
+$$
+\\begin{aligned}
+    q\_1(x\_1) &= 0 \\\\
+    q\_2(x\_1,x\_2) &= 0 \\\\
+    q\_3(x\_1,x\_2) &= 0 \\\\
+    q\_4(x\_1,x\_2,x\_3)&=0 \\\\
+    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
+    q\_{r}(x\_1,\\ldots,x\_n) &= 0.
+    \\end{aligned}
+$$
+ Here the polynomials {*q*<sub>*j*</sub> : 1 ≤ *j* ≤ *k*<sub>2</sub>} generate the same *ideal* that the polynomials {*p*<sub>*j*</sub> : 1 ≤ *j* ≤ *k*<sub>1</sub>} generate. Therefore, the set of solutions to the collection of polynomial equations {*p*<sub>*j*</sub> = 0 : 1 ≤ *j* ≤ *k*<sub>1</sub>} equals the set of solutions to the collection of polynomial equations {*q*<sub>*j*</sub> = 0 : 1 ≤ *j* ≤ *k*<sub>2</sub>}. This canonical form greatly simplifies the task of solving collections of polynomial equations by facilitating backsolving for *x*<sub>*j*</sub> in terms of *x*<sub>1</sub>, …, *x*<sub>*j* − 1</sub>.
 
 Readers who would like to know more about Gröbner Basis may want to read \[CLS\]. The noncommutatative version of the algorithm implemented by `NCGB` is loosely based on \[Mora\].
 
@@ -1897,15 +1906,19 @@ The monomial ordering imposes a relationship between the variables which are use
 
     PrintMonomialOrder[];
 
-which in this case prints: \[a < b < c \ll x.\] A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see soon, in many engineering problems, it suffices to know which variables correspond to quantities which are *known* and which variables correspond to quantities which are *unknown*. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as *unknown*. In the above example, the symbol '\(\ll\)' separate the *knowns*, \(a, b, c\), from the *unknown*, \(x\). For more details on orderings see Section [Orderings](#Orderings).
+which in this case prints:
+*a* &lt; *b* &lt; *c* ≪ *x*.
+ A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see soon, in many engineering problems, it suffices to know which variables correspond to quantities which are *known* and which variables correspond to quantities which are *unknown*. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as *unknown*. In the above example, the symbol '≪' separate the *knowns*, *a*, *b*, *c*, from the *unknown*, *x*. For more details on orderings see Section [Orderings](#Orderings).
 
-Our goal is to calculate the Gröbner basis associated with the following relations (i.e. a list of polynomials): \[
-\begin{aligned}
-    a \, x \, a &= c, &
-    a \, b &= 1, &
-    b \, a &= 1.
-\end{aligned}
-\] We shall use the word *relation* to mean a polynomial in noncommuting indeterminates. For example, if an analyst saw the equation \(A B = 1\) for matrices \(A\) and \(B\), then he might say that \(A\) and \(B\) satisfy the polynomial equation \(a\, b - 1 = 0\). An algebraist would say that \(a\, b - 1\) is a relation.
+Our goal is to calculate the Gröbner basis associated with the following relations (i.e. a list of polynomials):
+$$
+\\begin{aligned}
+    a \\, x \\, a &= c, &
+    a \\, b &= 1, &
+    b \\, a &= 1.
+\\end{aligned}
+$$
+ We shall use the word *relation* to mean a polynomial in noncommuting indeterminates. For example, if an analyst saw the equation *A**B* = 1 for matrices *A* and *B*, then he might say that *A* and *B* satisfy the polynomial equation *a* *b* − 1 = 0. An algebraist would say that *a* *b* − 1 is a relation.
 
 To calculate a Gröbner basis one defines a list of relations:
 
@@ -1950,16 +1963,17 @@ which results in
 
 The *rules* in the output represent the relations in the GB with the left-hand side of the rule being the leading monomial. Replacing `Rule` by `Subtract` recovers the relations but one would then loose the leading monomial as Mathematica alphabetizes the resulting sum.
 
-Someone not familiar with GB's might find it instructive to note this output GB effectively *solves* the input equation \[
-    a \, x \, a - c = 0
-\] under the assumptions that \[
-\begin{aligned}
-    b \, a - 1 &= 0, &
-    a \, b - 1 & =0,
-\end{aligned}
-\] that is \(a = b^{-1}\) and produces the expected result in the form of the relation: \[
-    x = b \, c \, b.
-\]
+Someone not familiar with GB's might find it instructive to note this output GB effectively *solves* the input equation
+*a* *x* *a* − *c* = 0
+ under the assumptions that
+$$
+\\begin{aligned}
+    b \\, a - 1 &= 0, &
+    a \\, b - 1 & =0,
+\\end{aligned}
+$$
+ that is *a* = *b*<sup>−1</sup> and produces the expected result in the form of the relation:
+*x* = *b* *c* *b*.
 
 A slightly more challenging example
 -----------------------------------
@@ -1970,15 +1984,17 @@ For a slightly more challenging example consider the same monomial order as befo
 
 that is
 
-\(a < b < c \ll x\)
+*a* &lt; *b* &lt; *c* ≪ *x*
 
-and the relations: \[
-\begin{aligned}
-  a \, x - c &= 0, \\
-  a \, b \, a - a &= 0, \\
-  b \, a \, b - b &= 0,
-\end{aligned}
-\] from which one can recognize the problem of solving the linear equation \(a \, x = c\) in terms of the *pseudo-inverse* \(b = a^\dag\). The calculation:
+and the relations:
+$$
+\\begin{aligned}
+  a \\, x - c &= 0, \\\\
+  a \\, b \\, a - a &= 0, \\\\
+  b \\, a \\, b - b &= 0,
+\\end{aligned}
+$$
+ from which one can recognize the problem of solving the linear equation *a* *x* = *c* in terms of the *pseudo-inverse* *b* = *a*<sup>†</sup>. The calculation:
 
     gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
 
@@ -1989,18 +2005,18 @@ finds the Gröbner basis:
     a ** b ** a -> a 
     b ** a ** b -> b
 
-In this case the Gröbner basis cannot quite *solve* the equations but it remarkably produces the necessary condition for existence of solutions: \[ 
-    0 = a \, b \, c - c = a \, a^\dag c - c 
-\] that can be interpreted as \(c\) being in the range-space of \(a\).
+In this case the Gröbner basis cannot quite *solve* the equations but it remarkably produces the necessary condition for existence of solutions:
+0 = *a* *b* *c* − *c* = *a* *a*<sup>†</sup>*c* − *c*
+ that can be interpreted as *c* being in the range-space of *a*.
 
 Simplifying polynomial expresions
 ---------------------------------
 
-Our goal now is to verify if it is possible to *simplify* the following expression: \[
-b \, b \, a \, a - a \, a \, b \, b + a \, b \, a
-\] if we know that \[
-a \, b \, a = b
-\] using Gröbner basis. With that in mind we set the order:
+Our goal now is to verify if it is possible to *simplify* the following expression:
+*b* *b* *a* *a* − *a* *a* *b* *b* + *a* *b* *a*
+ if we know that
+*a* *b* *a* = *b*
+ using Gröbner basis. With that in mind we set the order:
 
     SetMonomialOrder[a,b];
 
@@ -2028,7 +2044,7 @@ and the associated GB
     a ** b ** a -> b
     b ** b ** a -> a ** b ** b
 
-The GB revealed another relationship that must hold true if \(a \, b \, a = b\). One can use these relationships to simplify the original expression using `NCReplaceRepeated` as in
+The GB revealed another relationship that must hold true if *a* *b* *a* = *b*. One can use these relationships to simplify the original expression using `NCReplaceRepeated` as in
 
     expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
     simp = NCReplaceRepeated[expr, rules]
@@ -2040,17 +2056,17 @@ which results in
 Simplifying rational expresions
 -------------------------------
 
-It is often desirable to simplify expressions involving inverses of noncommutative expressions. One challenge is to recognize identities implied by the existence of certain inverses. For example, that the expression \[
-    x (1 - x)^{-1} - (1 - x)^{-1} x
-\] is equivalent to \(0\). One can use a nc Gröbner basis for that task. Consider for instance the order
+It is often desirable to simplify expressions involving inverses of noncommutative expressions. One challenge is to recognize identities implied by the existence of certain inverses. For example, that the expression
+*x*(1 − *x*)<sup>−1</sup> − (1 − *x*)<sup>−1</sup>*x*
+ is equivalent to 0. One can use a nc Gröbner basis for that task. Consider for instance the order
 
-\[ x \ll (1-x)^{-1} \]
+*x* ≪ (1 − *x*)<sup>−1</sup>
 
 implied by the command:
 
     SetMonomialOrder[x, inv[1-x]]
 
-This ordering encodes the following precise idea of what we mean by *simple* versus *complicated*: it formally corresponds to specifying that \(x\) is simpler than \((1-x)^{-1}\), which might sits well with one's intuition.
+This ordering encodes the following precise idea of what we mean by *simple* versus *complicated*: it formally corresponds to specifying that *x* is simpler than (1 − *x*)<sup>−1</sup>, which might sits well with one's intuition.
 
 Now consider the following command:
 
@@ -2075,15 +2091,17 @@ and results in the rules:
     x ** inv[1 - x] -> -1 + inv[1 - x],
     inv[1-x] ** x -> -1 + inv[1-x],
 
-As in the previous example, the GB revealed new relationships that must hold true if \(1- x\) is invertible, and one can use this relationship to the original expression using `NCReplaceRepeated` as in:
+As in the previous example, the GB revealed new relationships that must hold true if 1 − *x* is invertible, and one can use this relationship to the original expression using `NCReplaceRepeated` as in:
 
     NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]
 
 The above command results in `0`, as one would hope.
 
-For a more challenging example consider the identity: \[
-\left (1 - x - y (1 - x)^{-1} y \right )^{-1} = \frac{1}{2} (1 - x - y)^{-1} + \frac{1}{2} (1 - x + y)^{-1}
-\] One can verify that the rule based command [NCSimplifyRational](#NCSimplifyRational) fails to simplify the expression:
+For a more challenging example consider the identity:
+$$
+\\left (1 - x - y (1 - x)^{-1} y \\right )^{-1} = \\frac{1}{2} (1 - x - y)^{-1} + \\frac{1}{2} (1 - x + y)^{-1}
+$$
+ One can verify that the rule based command [NCSimplifyRational](#NCSimplifyRational) fails to simplify the expression:
 
     expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
     NCSimplifyRational[expr]
@@ -2140,21 +2158,22 @@ We now discuss each of these types of orders.
 
 ### Lex Order: the simplest elimination order
 
-To impose lexicographic order, say \(a\ll b\ll x\ll y\) on \(a\), \(b\), \(x\) and \(y\), one types
+To impose lexicographic order, say *a* ≪ *b* ≪ *x* ≪ *y* on *a*, *b*, *x* and *y*, one types
 
     SetMonomialOrder[a,b,x,y];
 
-This order is useful for attempting to solve for \(y\) in terms of \(a\), \(b\) and \(x\), since the highest priority of the GB algorithm is to produce polynomials which do not contain \(y\). If producing high order polynomials is a consequence of this fanaticism so be it. Unlike graded orders, lex orders pay little attention to the degree of terms. Likewise its second highest priority is to eliminate \(x\).
+This order is useful for attempting to solve for *y* in terms of *a*, *b* and *x*, since the highest priority of the GB algorithm is to produce polynomials which do not contain *y*. If producing high order polynomials is a consequence of this fanaticism so be it. Unlike graded orders, lex orders pay little attention to the degree of terms. Likewise its second highest priority is to eliminate *x*.
 
 Once this order is set, one can use all of the commands in the preceeding section in exactly the same form.
 
-We now give a simple example how one can solve for \(y\) given that \(a\),\(b\),\(x\) and \(y\) satisfy the equations: \[
-\begin{aligned}
--b\, x + x\, y  \, a + x\, b \, a \,  a &= 0 \\
-x \, a-1&=0 \\
-a\, x-1&=0
-\end{aligned}
-\]
+We now give a simple example how one can solve for *y* given that *a*,*b*,*x* and *y* satisfy the equations:
+$$
+\\begin{aligned}
+-b\\, x + x\\, y  \\, a + x\\, b \\, a \\,  a &= 0 \\\\
+x \\, a-1&=0 \\\\
+a\\, x-1&=0
+\\end{aligned}
+$$
 
 The command
 
@@ -2193,11 +2212,11 @@ which is not a Gröbner basis since the algorithm was interrupted at 4 iteration
 
     a**b**x**x -> y+b**a
 
-which shows that the order is not set up to solve for \(y\) in terms of the other variables in the sense that \(y\) is not on the left hand side of this rule (but a human could easily solve for \(y\) using this rule). Also the algorithm created a number of other relations which involved \(y\).
+which shows that the order is not set up to solve for *y* in terms of the other variables in the sense that *y* is not on the left hand side of this rule (but a human could easily solve for *y* using this rule). Also the algorithm created a number of other relations which involved *y*.
 
 ### Graded lex ordering: a non-elimination order
 
-To impose graded lexicographic order, say \(a< b< x< y\) on \(a\), \(b\), \(x\) and \(y\), one types
+To impose graded lexicographic order, say *a* &lt; *b* &lt; *x* &lt; *y* on *a*, *b*, *x* and *y*, one types
 
     SetMonomialOrder[{a,b,x,y}];
 
@@ -2221,15 +2240,15 @@ now produces
     b**x**x**b**x**b**x**x -> x**b**y**y+x**b**b**a**y+x**b**y**b**a+
                               x**b**b**a**b**a+x**y**b**x**b**x**x
 
-which again fails to be a Gröbner basis and does not eliminate \(y\). Instead, it tries to decrease the total degree of expressions involving \(a\), \(b\), \(x\), and \(y\).
+which again fails to be a Gröbner basis and does not eliminate *y*. Instead, it tries to decrease the total degree of expressions involving *a*, *b*, *x*, and *y*.
 
 ### Multigraded lex ordering : a variety of elimination orders
 
-There are other useful monomial orders which one can use other than graded lex and lex. Another type of order is what we call multigraded lex and is a mixture of graded lex and lex order. To impose multi-graded lexicographic order, say \(a< b< x\ll y\) on \(a\), \(b\), \(x\) and \(y\), one types
+There are other useful monomial orders which one can use other than graded lex and lex. Another type of order is what we call multigraded lex and is a mixture of graded lex and lex order. To impose multi-graded lexicographic order, say *a* &lt; *b* &lt; *x* ≪ *y* on *a*, *b*, *x* and *y*, one types
 
     SetMonomialOrder[{a,b,x},y];
 
-which separates \(y\) from the remaining variables. This time, a call to
+which separates *y* from the remaining variables. This time, a call to
 
     NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
 
@@ -2239,9 +2258,9 @@ yields once again
     a**x -> 1
     x**a -> 1
 
-which not only eliminates \(y\) but is also Gröbner basis, calculated after one iteration.
+which not only eliminates *y* but is also Gröbner basis, calculated after one iteration.
 
-For an intuitive idea of why multigraded lex is helpful, we think of \(a\), \(b\), and \(x\) as corresponding to variables in some engineering problem which represent quantities which are *known* and \(y\) to be *unknown*. The fact that \(a\), \(b\) and \(x\) are in the top level indicates that we are very interested in solving for \(y\) in terms of \(a\), \(b\), and \(x\), but are not willing to solve for, say \(x\), in terms of expressions involving \(y\).
+For an intuitive idea of why multigraded lex is helpful, we think of *a*, *b*, and *x* as corresponding to variables in some engineering problem which represent quantities which are *known* and *y* to be *unknown*. The fact that *a*, *b* and *x* are in the top level indicates that we are very interested in solving for *y* in terms of *a*, *b*, and *x*, but are not willing to solve for, say *x*, in terms of expressions involving *y*.
 
 This situation is so common that we provide the commands `SetKnowns` and `SetUnknowns`. The above ordering would be obtained after setting
 
@@ -2253,20 +2272,22 @@ A complete example: the partially prescribed matrix inverse problem
 
 This is a type of problem known as a *matrix completion problem*. This particular one was suggested by Hugo Woerdeman. We are grateful to him for discussions.
 
-**Problem:** *Given matrices \(a\), \(b\), \(c\), and \(d\), we wish to determine under what conditions there exists matrices x, y, z, and w such that the block matrices* \[  
-  \begin{bmatrix} a & x \\ y & b \end{bmatrix}
-  \qquad 
-  \begin{bmatrix} w & c \\ d & z \end{bmatrix}
-\] *are inverses of each other. Also, we wish to find formulas for \(x\), \(y\), \(z\), and \(w\).*
+**Problem:** *Given matrices *a*, *b*, *c*, and *d*, we wish to determine under what conditions there exists matrices x, y, z, and w such that the block matrices*
+$$  
+  \\begin{bmatrix} a & x \\\\ y & b \\end{bmatrix}
+  \\qquad 
+  \\begin{bmatrix} w & c \\\\ d & z \\end{bmatrix}
+$$
+ *are inverses of each other. Also, we wish to find formulas for *x*, *y*, *z*, and *w*.*
 
-This problem was solved in a paper by W.W. Barrett, C.R. Johnson, M. E. Lundquist and H. Woerderman \[BJLW\] where they showed it splits into several cases depending upon which of \(a\), \(b\), \(c\) and \(d\) are invertible. In our example, we assume that \(a\), \(b\), \(c\) and \(d\) are invertible and discover the result which they obtain in this case.
+This problem was solved in a paper by W.W. Barrett, C.R. Johnson, M. E. Lundquist and H. Woerderman \[BJLW\] where they showed it splits into several cases depending upon which of *a*, *b*, *c* and *d* are invertible. In our example, we assume that *a*, *b*, *c* and *d* are invertible and discover the result which they obtain in this case.
 
-First we set the matrices \(a\), \(b\), \(c\), and \(d\) and their inverses as *knowns* and \(x\), \(y\), \(w\), and \(z\) as unknowns:
+First we set the matrices *a*, *b*, *c*, and *d* and their inverses as *knowns* and *x*, *y*, *w*, and *z* as unknowns:
 
     SetKnowns[a, inv[a], b, inv[b], c, inv[c], d, inv[d]];
     SetUnknowns[{z}, {x, y, w}];
 
-Note that the graded ordedring of the unknowns means that we care more about solving for \(x\), \(y\) and \(w\) than for \(z\).
+Note that the graded ordedring of the unknowns means that we care more about solving for *x*, *y* and *w* than for *z*.
 
 Then we define the relations we are interested in, which are obtained after multiplying the two block matrices on both sides and equating to identity
 
@@ -2301,17 +2322,18 @@ we obtain the Gröbner basis:
     z**inv[c]**inv[a]**inv[d]**z -> inv[b]+inv[b]**inv[c]**inv[a]**inv[d]**z
     d**a**c**b**z**inv[c] -> z**b**d**a
 
-after seven iterations. The first four relations \[
-\begin{aligned}
-    x &= d^{-1}-d^{-1} \, z \, b \\
-    y &= c^{-1}-b \, z \, c^{-1} \\
-    w &= a^{-1} \, d^{-1}  \, z \, b \, d \\
-    z \, b \, z &= z + d \, a \, c
-\end{aligned}
-\]
-are the solutions we are looking for, which states that one can find \(x\), \(y\), \(z\), and \(w\) such that the matrices above are inverses of each other if and only if \(z \, b \, z = z + d \, a \, c\). The first three relations gives formulas for \(x\), \(y\) and \(w\) in terms of \(z\).
+after seven iterations. The first four relations
+$$
+\\begin{aligned}
+    x &= d^{-1}-d^{-1} \\, z \\, b \\\\
+    y &= c^{-1}-b \\, z \\, c^{-1} \\\\
+    w &= a^{-1} \\, d^{-1}  \\, z \\, b \\, d \\\\
+    z \\, b \\, z &= z + d \\, a \\, c
+\\end{aligned}
+$$
+are the solutions we are looking for, which states that one can find *x*, *y*, *z*, and *w* such that the matrices above are inverses of each other if and only if *z* *b* *z* = *z* + *d* *a* *c*. The first three relations gives formulas for *x*, *y* and *w* in terms of *z*.
 
-A variety of scenarios can be quickly investigated under different assumptions. For example, say that \(c\) is not invertible. Is it still possible to solve the problem? One solution is obtained with the ordering implied by
+A variety of scenarios can be quickly investigated under different assumptions. For example, say that *c* is not invertible. Is it still possible to solve the problem? One solution is obtained with the ordering implied by
 
     SetKnowns[a, inv[a], b, inv[b], c, d, inv[d]];
     SetUnknowns[{y}, {z, w, x}];
@@ -2332,15 +2354,16 @@ produces the Gröbner basis:
     y**c**b**d**a -> b**d**a**c**y
     y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
 
-after five iterations. Once again, the first four relations \[
-\begin{aligned}
-    z &= b^{-1}-b^{-1} \, y \, c \\
-    w &= a^{-1}-c \, y \, a^{-1} \\
-    x &= a \, c \, y \, a^{-1} \, d^{-1} \\
-    y \, c \, y &= y+b \, d \, a
-\end{aligned}
-\]
-provide formulas, this time for \(z\), \(w\), and \(z\) in terms of \(y\) satisfying \(y \, c \, y = y+b \, d \, a\). Note that these formulas do not involve \(c^{-1}\) since \(c\) is no longer assumed invertible.
+after five iterations. Once again, the first four relations
+$$
+\\begin{aligned}
+    z &= b^{-1}-b^{-1} \\, y \\, c \\\\
+    w &= a^{-1}-c \\, y \\, a^{-1} \\\\
+    x &= a \\, c \\, y \\, a^{-1} \\, d^{-1} \\\\
+    y \\, c \\, y &= y+b \\, d \\, a
+\\end{aligned}
+$$
+provide formulas, this time for *z*, *w*, and *z* in terms of *y* satisfying *y* *c* *y* = *y* + *b* *d* *a*. Note that these formulas do not involve *c*<sup>−1</sup> since *c* is no longer assumed invertible.
 
 Semidefinite Programming
 ========================
@@ -2362,29 +2385,34 @@ After loading NCAlgebra, the package NCSDP must be loaded using:
 
     << NCSDP`
 
-Semidefinite programs consist of symbolic noncommutative expressions representing inequalities and a list of rules for data replacement. For example the semidefinite program: \[
-\begin{aligned}
-\min_Y \quad & <I,Y> \\
-\text{s.t.} \quad & A Y + Y A^T + I \preceq 0 \\
-            & Y \succeq 0
-\end{aligned}
-\] can be solved by defining the noncommutative expressions
+Semidefinite programs consist of symbolic noncommutative expressions representing inequalities and a list of rules for data replacement. For example the semidefinite program:
+$$
+\\begin{aligned}
+\\min\_Y \\quad & &lt;I,Y&gt; \\\\
+\\text{s.t.} \\quad & A Y + Y A^T + I \\preceq 0 \\\\
+            & Y \\succeq 0
+\\end{aligned}
+$$
+ can be solved by defining the noncommutative expressions
 
     SNC[a, y];
     obj = {-1};
     ineqs = {a ** y + y ** tp[a] + 1, -y};
 
-The inequalities are stored in the list `ineqs` in the form of noncommutative linear polyonomials in the variable `y` and the objective function constains the symbolic coefficients of the inner product, in this case `-1`. The reason for the negative signs in the objective as well as in the second inequality is that semidefinite programs are expected to be cast in the following *canonical form*: \[
-\begin{aligned} 
-  \max_y \quad & <b,y> \\ 
-  \text{s.t.} \quad & f(y) \preceq 0 
-\end{aligned}
-\] or, equivalently: \[
-\begin{aligned} 
-  \max_y \quad & <b,y> \\ 
-  \text{s.t.} \quad & f(y) + s = 0, \quad s \succeq 0
-\end{aligned}
-\]
+The inequalities are stored in the list `ineqs` in the form of noncommutative linear polyonomials in the variable `y` and the objective function constains the symbolic coefficients of the inner product, in this case `-1`. The reason for the negative signs in the objective as well as in the second inequality is that semidefinite programs are expected to be cast in the following *canonical form*:
+$$
+\\begin{aligned} 
+  \\max\_y \\quad & &lt;b,y&gt; \\\\ 
+  \\text{s.t.} \\quad & f(y) \\preceq 0 
+\\end{aligned}
+$$
+ or, equivalently:
+$$
+\\begin{aligned} 
+  \\max\_y \\quad & &lt;b,y&gt; \\\\ 
+  \\text{s.t.} \\quad & f(y) + s = 0, \\quad s \\succeq 0
+\\end{aligned}
+$$
 
 Semidefinite programs can be visualized using [`NCSDPForm`](#NCSDPForm) as in:
 
@@ -2447,19 +2475,23 @@ A symbolic dual problem can be calculated easily using [`NCSDPDual`](#NCSDPDual)
 
     {dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];
 
-The dual program for the example problem above is: \[
-\begin{aligned} 
-  \max_x \quad & <c,x> \\ 
-  \text{s.t.} \quad & f^*(x) + b = 0, \quad x \succeq 0
-\end{aligned}
-\] In the case of the above problem the dual program is \[
-\begin{aligned}
-\max_{X_1, X_2} \quad & <I,X_1> \\
-\text{s.t.} \quad & A^T X_1 + X_1 A -X_2 - I = 0 \\
-            & X_1 \succeq 0, \\
-        & X_2 \succeq 0
-\end{aligned}
-\] which can be visualized using [`NCSDPDualForm`](#NCSDPDualForm) using:
+The dual program for the example problem above is:
+$$
+\\begin{aligned} 
+  \\max\_x \\quad & &lt;c,x&gt; \\\\ 
+  \\text{s.t.} \\quad & f^\*(x) + b = 0, \\quad x \\succeq 0
+\\end{aligned}
+$$
+ In the case of the above problem the dual program is
+$$
+\\begin{aligned}
+\\max\_{X\_1, X\_2} \\quad & &lt;I,X\_1&gt; \\\\
+\\text{s.t.} \\quad & A^T X\_1 + X\_1 A -X\_2 - I = 0 \\\\
+            & X\_1 \\succeq 0, \\\\
+        & X\_2 \\succeq 0
+\\end{aligned}
+$$
+ which can be visualized using [`NCSDPDualForm`](#NCSDPDualForm) using:
 
     NCSDPDualForm[dIneqs, dVars, dObj]
 
@@ -2471,22 +2503,26 @@ The package [SDP](#PackageSDP) provides a crude and not very efficient way to de
     << NC`
     << SDP`
 
-Semidefinite programs are optimization problems of the form: \[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(S\) is a symmetric positive semidefinite matrix and \(y\) is a vector of decision variables.
+Semidefinite programs are optimization problems of the form:
+$$
+\\begin{aligned}
+  \\max\_{y, S} \\quad & b^T y \\\\
+  \\text{s.t.} \\quad & A y + S = c \\\\
+                    & S \\succeq 0
+\\end{aligned}
+$$
+ where *S* is a symmetric positive semidefinite matrix and *y* is a vector of decision variables.
 
-A user can input the problem data, the triplet \((A, b, c)\), or use the following convenient methods for producing data in the proper format.
+A user can input the problem data, the triplet (*A*, *b*, *c*), or use the following convenient methods for producing data in the proper format.
 
-For example, problems can be stated as: \[
-\begin{aligned} 
-  \min_y \quad & f(y), \\
-  \text{s.t.} \quad & G(y) \succeq 0
-\end{aligned}
-\] where \(f(y)\) and \(G(y)\) are affine functions of the vector of variables \(y\).
+For example, problems can be stated as:
+$$
+\\begin{aligned} 
+  \\min\_y \\quad & f(y), \\\\
+  \\text{s.t.} \\quad & G(y) \\succeq 0
+\\end{aligned}
+$$
+ where *f*(*y*) and *G*(*y*) are affine functions of the vector of variables *y*.
 
 Here is a simple example:
 
@@ -2494,17 +2530,19 @@ Here is a simple example:
     f = y2;
     G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
 
-The list of constraints in `G` is to be interpreted as: \[
-\begin{aligned} 
-  y_0 - 2 \geq 0, \\
-  \begin{bmatrix} y_1 & y_0 \\ y_0 & 1 \end{bmatrix} \succeq 0, \\
-  \begin{bmatrix} y_2 & y_1 \\ y_1 & 1 \end{bmatrix} \succeq 0.
-\end{aligned}
-\] The function [`SDPMatrices`](#SDPMatrices) convert the above symbolic problem into numerical data that can be used to solve an SDP.
+The list of constraints in `G` is to be interpreted as:
+$$
+\\begin{aligned} 
+  y\_0 - 2 \\geq 0, \\\\
+  \\begin{bmatrix} y\_1 & y\_0 \\\\ y\_0 & 1 \\end{bmatrix} \\succeq 0, \\\\
+  \\begin{bmatrix} y\_2 & y\_1 \\\\ y\_1 & 1 \\end{bmatrix} \\succeq 0.
+\\end{aligned}
+$$
+ The function [`SDPMatrices`](#SDPMatrices) convert the above symbolic problem into numerical data that can be used to solve an SDP.
 
     abc = SDPMatrices[f, G, y]
 
-All required data, that is \(A\), \(b\), and \(c\), is stored in the variable `abc` as Mathematica's sparse matrices. Their contents can be revealed using the Mathematica command `Normal`.
+All required data, that is *A*, *b*, and *c*, is stored in the variable `abc` as Mathematica's sparse matrices. Their contents can be revealed using the Mathematica command `Normal`.
 
     Normal[abc]
 
@@ -2538,7 +2576,7 @@ makes the expression
 
 be displayed as
 
-`(tp[a] + b)`\(^{-1}\)
+`(tp[a] + b)`**<sup>−1</sup>
 
 Conversely
 
@@ -2546,7 +2584,7 @@ Conversely
 
 makes `expr` be displayed as
 
-`inv[a`\(^\mathtt{T}\) `+ b]`
+`inv[a`**<sup>`T`</sup> `+ b]`
 
 The default settings are
 
@@ -2554,16 +2592,16 @@ The default settings are
 
 which makes `expr` be displayed as
 
-`(a`\(^\mathtt{T}\) `+ b)`\(^{-1}\)
+`(a`**<sup>`T`</sup> `+ b)`**<sup>−1</sup>
 
 The complete set of options and their default values are:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` \(\bullet\) `y`';
--   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`\(^\mathtt{T}\)';
--   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`\(^{-1}\)';
--   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`\(^*\)';
--   `co` (`True`): If `True` `co[x]` is displayed as '\(\bar{\mathtt{x}}\)';
--   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`\(^{1/2}\)'.
+-   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` • `y`';
+-   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`**<sup>`T`</sup>';
+-   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`**<sup>−1</sup>';
+-   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`**<sup>\*</sup>';
+-   `co` (`True`): If `True` `co[x]` is displayed as '$\\bar{\\mathtt{x}}$';
+-   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`**<sup>1/2</sup>'.
 
 The special symbol `All` can be used to set all options to `True` or `False`, as in
 
@@ -2590,7 +2628,7 @@ For example:
 
 produces
 
-\(1 + \sin \left ( x + \frac{y - z}{\sqrt{2}} \right )\)
+$1 + \\sin \\left ( x + \\frac{y - z}{\\sqrt{2}} \\right )$
 
 If `NCAlgebra` is not loaded then `NCTeX` uses the built in `TeXForm` to produce the LaTeX expressions. If `NCAlgebra` is loaded, `NCTeXForm` is used. See [NCTeXForm](#NCTeXForm) for details.
 
@@ -2601,7 +2639,7 @@ Here is another example:
 
 that produces
 
-\(\left( \begin{array}{cc}  \sin \left(x+\frac{y-z}{\sqrt{2}}\right)+1 &  \frac{x}{y} \\  z & \sqrt{5} n \\ \end{array} \right)\)
+$\\left( \\begin{array}{cc}  \\sin \\left(x+\\frac{y-z}{\\sqrt{2}}\\right)+1 &  \\frac{x}{y} \\\\  z & \\sqrt{5} n \\\\ \\end{array} \\right)$
 
 In some cases Mathematica will have difficulty displaying certain PDF files. When this happens `NCTeX` will span a PDF viewer so that you can look at the formula. If your PDF viewer does not pop up automatically you can force it by passing the following option to `NCTeX`:
 
@@ -2702,7 +2740,7 @@ Note that the LaTeX output contains special code so that the expression looks ne
 
 to produce
 
-\(a.x.{b}^T-{\left(d+c.{\left (a+b.c\right)}^{-1}.{y}^T\right )}^{-1}\)
+*a*.*x*.*b*<sup>*T*</sup> − (*d*+*c*.(*a*+*b*.*c*)<sup>−1</sup>.*y*<sup>*T*</sup>)<sup>−1</sup>
 
 `NCTeX` represents noncommutative products with a dot (`.`) in order to distinguish it from its commutative cousin. We can see the difference in an expression that has both commutative and noncommutative products:
 
@@ -2711,7 +2749,7 @@ to produce
 
 produces
 
-\(2 \left(a.b\right) - 3 (c.d)\)
+2(*a*.*b*) − 3(*c*.*d*)
 
 NCTeXForm handles lists and matrices as well. Here is a list:
 
@@ -2720,7 +2758,7 @@ NCTeXForm handles lists and matrices as well. Here is a list:
 
 and its output:
 
-\(\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \}\)
+{*x*, *x*<sup>*T*</sup>, *x* + *y*, *x* + *y*<sup>*T*</sup>, *x* + *y*<sup>−1</sup>, *x*.*x*}
 
 and here is a matrix example:
 
@@ -2729,7 +2767,7 @@ and here is a matrix example:
 
 and its output:
 
-\(\begin{bmatrix} x & y \\ y & z \end{bmatrix}\)
+$\\begin{bmatrix} x & y \\\\ y & z \\end{bmatrix}$
 
 Here are some more examples:
 
@@ -2738,14 +2776,14 @@ Here are some more examples:
 
 produces
 
-\(\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} & x {y}^{-1} \\ z & \sqrt{5} n \end{bmatrix}\)
+$\\begin{bmatrix} 1+\\operatorname{sin}{\\left (x+\\frac{1}{\\sqrt{2}} \\left (y-z\\right )\\right )} & x {y}^{-1} \\\\ z & \\sqrt{5} n \\end{bmatrix}$
 
     exp = {inv[x + y], inv[x + inv[y]]}
     NCTeX[exp]
 
 produces:
 
-\(\{ {\left (x+y\right )}^{-1}, {\left (x+{y}^{-1}\right )}^{-1} \}\)
+{(*x*+*y*)<sup>−1</sup>, (*x*+*y*<sup>−1</sup>)<sup>−1</sup>}
 
     exp = {Sin[x], x y, Sin[x] y, Sin[x + y], Cos[gamma], 
            Sin[alpha] tp[x] ** (y - tp[y]), (x + tp[x]) (y ** z), -tp[y], 1/2, 
@@ -2754,14 +2792,14 @@ produces:
 
 produces:
 
-\(\{ \operatorname{sin}{x}, x y, y \operatorname{sin}{x}, \operatorname{sin}{\left (x+y\right )}, \operatorname{cos}{\gamma}, \left({x}^T.\left (y-{y}^T\right )\right ) \operatorname{sin}{\alpha}, y z \left (x+{x}^T\right ), -{y}^T, \frac{1}{2}, \sqrt{2} \left(x.y\right ) \}\)
+$\\{ \\operatorname{sin}{x}, x y, y \\operatorname{sin}{x}, \\operatorname{sin}{\\left (x+y\\right )}, \\operatorname{cos}{\\gamma}, \\left({x}^T.\\left (y-{y}^T\\right )\\right ) \\operatorname{sin}{\\alpha}, y z \\left (x+{x}^T\\right ), -{y}^T, \\frac{1}{2}, \\sqrt{2} \\left(x.y\\right ) \\}$
 
     exp = inv[x + tp[inv[y]]]
     NCTeX[exp]
 
 produces:
 
-\({\left (x+{{y}^T}^{-1}\right )}^{-1}\)
+(*x*+*y*<sup>*T*</sup><sup>−1</sup>)<sup>−1</sup>
 
 `NCTeXForm` does not know as many functions as `TeXForm`. In some cases `TeXForm` will produce better results. Compare:
 
@@ -2770,7 +2808,7 @@ produces:
 
 output:
 
-\(\operatorname{BesselJ}\left (2, x\right )\)
+BesselJ(2,*x*)
 
 with
 
@@ -2778,7 +2816,7 @@ with
 
 output:
 
-\(J_2(x)\)
+*J*<sub>2</sub>(*x*)
 
 It should be easy to customize `NCTeXForm` though. Just overload `NCTeXForm`. In this example:
 
@@ -2790,7 +2828,7 @@ makes
 
 produce
 
-\(J_2(x)\)
+*J*<sub>2</sub>(*x*)
 
 Introduction
 ============
@@ -2976,6 +3014,12 @@ If `expr` is a rational nc expression then degree correspond to the degree of th
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
+`NCCollect[expr,vars,options]` uses options.
+
+The following option is available:
+
+-   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
+
 **Notes:**
 
 While `NCCollect[expr, vars]` always returns mathematically correct expressions, it may not collect `vars` from as many terms as one might think it should.
@@ -2988,6 +3032,12 @@ See also: [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSy
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
+`NCCollectSelfAdjoint[expr,vars,options]` uses options.
+
+The following option is available:
+
+-   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
+
 See also: [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
 ### NCCollectSymmetric
@@ -2995,6 +3045,12 @@ See also: [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCColle
 `NCCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
+
+`NCCollectSymmetric[expr,vars,options]` uses options.
+
+The following option is available:
+
+-   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
 
 See also: [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
@@ -3446,18 +3502,18 @@ where `lead` is the leading monomial with the highest degree then the following 
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">Original</th>
-<th align="left">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">inv[mon1 + ... + K lead] lead</td>
-<td align="left">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
+<td>inv[mon1 + ... + K lead] lead</td>
+<td>(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td align="left">lead inv[mon1 + ... + K lead]</td>
-<td align="left">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
+<td>lead inv[mon1 + ... + K lead]</td>
+<td>(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>
@@ -3976,7 +4032,7 @@ See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoti
 
 ### UpperTriangularSolve
 
-`UpperTriangularSolve[u, b]` solves the upper-triangular system of equations \(u x = b\) using back-substitution.
+`UpperTriangularSolve[u, b]` solves the upper-triangular system of equations *u**x* = *b* using back-substitution.
 
 For example:
 
@@ -3988,7 +4044,7 @@ See also: [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoti
 
 ### LowerTriangularSolve
 
-`LowerTriangularSolve[l, b]` solves the lower-triangular system of equations \(l x = b\) using forward-substitution.
+`LowerTriangularSolve[l, b]` solves the lower-triangular system of equations *l**x* = *b* using forward-substitution.
 
 For example:
 
@@ -4094,12 +4150,12 @@ Members are:
 
 The following `options` can be given:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` \(\bullet\) `y`';
--   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`\(^\mathtt{T}\)';
--   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`\(^{-1}\)';
--   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`\(^*\)';
--   `co` (`True`): If `True` `co[x]` is displayed as '\(\bar{\mathtt{x}}\)';
--   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`\(^{1/2}\)';
+-   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` • `y`';
+-   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`**<sup>`T`</sup>';
+-   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`**<sup>−1</sup>';
+-   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`**<sup>\*</sup>';
+-   `co` (`True`): If `True` `co[x]` is displayed as '$\\bar{\\mathtt{x}}$';
+-   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`**<sup>1/2</sup>';
 -   `All`: Set all available options to `True` or `False`.
 
 See also: [NCTex](#NCTeX), [NCTexForm](#NCTeXForm).
@@ -4462,7 +4518,7 @@ For example:
     vars = {x,y,z};
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
 
-constructs an object associated with the noncommutative polynomial \(2 z - x y x\) in variables `x`, `y` and `z`.
+constructs an object associated with the noncommutative polynomial 2*z* − *x**y**x* in variables `x`, `y` and `z`.
 
 The internal representation varies with the implementation but it is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, `x < y < z`.
 
@@ -4484,13 +4540,13 @@ Monic monomials are specified in terms of the symbols in the list `vars`, for ex
     vars = {x,y,z};
     mon = NCPolyMonomial[{x,y,x},vars];
 
-returns an `NCPoly` object encoding the monomial \(xyx\) in noncommutative variables `x`,`y`, and `z`. The actual representation of `mon` varies with the implementation.
+returns an `NCPoly` object encoding the monomial *x**y**x* in noncommutative variables `x`,`y`, and `z`. The actual representation of `mon` varies with the implementation.
 
 Monomials can also be specified implicitly using indices, for example:
 
     mon = NCPolyMonomial[{0,1,0}, 3];
 
-also returns an `NCPoly` object encoding the monomial \(xyx\) in noncommutative variables `x`,`y`, and `z`.
+also returns an `NCPoly` object encoding the monomial *x**y**x* in noncommutative variables `x`,`y`, and `z`.
 
 If graded ordering is supported then
 
@@ -4501,7 +4557,7 @@ or
 
     mon = NCPolyMonomial[{0,1,0}, {1,2}];
 
-construct the same monomial \(xyx\) in noncommutative variables `x`,`y`, and `z` this time using a graded order in which `x << y < z`.
+construct the same monomial *x**y**x* in noncommutative variables `x`,`y`, and `z` this time using a graded order in which `x << y < z`.
 
 There is also an alternative syntax for `NCPolyMonomial` that allows users to input the monomial along with a coefficient using rules and the output of [NCFromDigits](#NCFromDigits). For example:
 
@@ -4511,7 +4567,7 @@ or
 
     mon = NCPolyMonomial[NCFromDigits[{0,1,0}, 3] -> -2, 3];
 
-represent the monomial \(-2 xyx\) with has coefficient `-2`.
+represent the monomial −2*x**y**x* with has coefficient `-2`.
 
 See also: [NCPoly](#NCPoly), [NCIntegerDigits](#NCIntegerDigits), [NCFromDigits](#NCFromDigits).
 
@@ -4540,7 +4596,7 @@ For example, if
 
 with respect to the ordering
 
-\(x \ll y \ll z\)
+*x* ≪ *y* ≪ *z*
 
 then
 
@@ -4549,7 +4605,7 @@ then
 
 is the same polynomial as `poly1` but in the ordering
 
-\(x \ll y < z\)
+*x* ≪ *y* &lt; *z*
 
 See also: [NCPoly](#NCPoly), [NCPolyCoefficient](#NCPolyCoefficient).
 
@@ -4691,7 +4747,7 @@ For example:
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
     lead = NCPolyLeadingMonomial[poly];
 
-returns an `NCPoly` representing the monomial \(x y x\). The leading monomial is computed according to the current ordering, in this example `x < y < z`. The actual representation of `lead` varies with the implementation.
+returns an `NCPoly` representing the monomial *x**y**x*. The leading monomial is computed according to the current ordering, in this example `x < y < z`. The actual representation of `lead` varies with the implementation.
 
 See also: [NCPolyLeadingTerm](#NCPolyLeadingTerm), [NCPolyMonomial](#NCPolyMonomial), [NCPoly](#NCPoly).
 
@@ -4709,7 +4765,7 @@ returns
 
     lead = {3,3} -> -1
 
-representing the monomial \(- x y x\). The leading monomial is computed according to the current ordering, in this example `x < y < z`.
+representing the monomial −*x**y**x*. The leading monomial is computed according to the current ordering, in this example `x < y < z`.
 
 See also: [NCPolyLeadingMonomial](#NCPolyLeadingMonomial), [NCPolyMonomial](#NCPolyMonomial), [NCPoly](#NCPoly).
 
@@ -4729,7 +4785,7 @@ For example:
     poly = NCPoly[{-1, 2, 3}, {{x, y, x}, {z}, {x, y}}, vars];
     rule = NCPolyToRule[poly]
 
-returns the rule `lead -> rest` where `lead` represents is the nc monomial \(x y x\) and `rest` is the nc polynomial \(2 z + 3 x y\)
+returns the rule `lead -> rest` where `lead` represents is the nc monomial *x**y**x* and `rest` is the nc polynomial 2*z* + 3*x**y*
 
 See also: [NCPolyLeadingTerm](#NCPolyLeadingTerm), [NCPolyLeadingMonomial](#NCPolyLeadingMonomial), [NCPoly](#NCPoly).
 
@@ -4815,7 +4871,7 @@ results in the matrices
           {  0,  0,  0,  0,  0 },
           {  0,  0,  0,  0,  0 }}
 
-which are the Hankel matrices associated with the commutator \(x y - y x\).
+which are the Hankel matrices associated with the commutator *x**y* − *y**x*.
 
 See also: [NCPolyRealization](#NCPolyRealization), [NCDigitsToIndex](#NCDigitsToIndex).
 
@@ -4831,7 +4887,7 @@ For example:
     poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
     {{a0,ax,ay},b,c,d} = NCPolyRealization[poly]
 
-produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a row vector `c`, and a scalar `d` such that \(c . inv[a0 + ax \, x + ay \, y] . b + d = x y - y x\).
+produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a row vector `c`, and a scalar `d` such that *c*.*i**n**v*\[*a*0 + *a**x* *x* + *a**y* *y*\].*b* + *d* = *x**y* − *y**x*.
 
 See also: [NCPolyHankelMatrix](#NCPolyHankelMatrix), [NCRational](#NCRational).
 
@@ -4843,7 +4899,7 @@ See also: [NCPolyHankelMatrix](#NCPolyHankelMatrix), [NCRational](#NCRational).
 
 `NCFromDigits[{list1,list2}, b]` applies `NCFromDigits` to each `list1`, `list2`, ....
 
-List of integers are used to codify monomials. For example the list `{0,1}` represents a monomial \(xy\) and the list `{1,0}` represents the monomial \(yx\). The call
+List of integers are used to codify monomials. For example the list `{0,1}` represents a monomial *x**y* and the list `{1,0}` represents the monomial *y**x*. The call
 
     NCFromDigits[{0,0,0,1}, 2]
 
@@ -4851,7 +4907,7 @@ returns
 
     {4,1}
 
-in which `4` is the degree of the monomial \(xxxy\) and `1` is `0001` in base `2`. Likewise
+in which `4` is the degree of the monomial *x**x**x**y* and `1` is `0001` in base `2`. Likewise
 
     NCFromDigits[{0,2,1,1}, 3]
 
@@ -4859,7 +4915,7 @@ returns
 
     {4,22}
 
-in which `4` is the degree of the monomial \(xzyy\) and `22` is `0211` in base `3`.
+in which `4` is the degree of the monomial *x**z**y**y* and `22` is `0211` in base `3`.
 
 If `b` is a list, then degree is also a list with the partial degrees of each letters appearing in the monomial. For example:
 
@@ -4869,7 +4925,7 @@ returns
 
     {3, 1, 22}
 
-in which `3` is the partial degree of the monomial \(xzyy\) with respect to letters `y` and `z`, `1` is the partial degree with respect to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
+in which `3` is the partial degree of the monomial *x**z**y**y* with respect to letters `y` and `z`, `1` is the partial degree with respect to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 
 This construction is used to represent graded degree-lexicographic orderings.
 
@@ -4930,7 +4986,7 @@ all return
 
     5
 
-which is the index of the monomial \(x y\) in the standard monomial basis of polynomials in \(x\) and \(y\). Likewise
+which is the index of the monomial *x**y* in the standard monomial basis of polynomials in *x* and *y*. Likewise
 
     digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
     NCDigitsToIndex[digits, 2]
@@ -4972,7 +5028,7 @@ For example
 
     NCToNCPoly[x**y - 2 y**z, {x, y, z}] 
 
-constructs an object associated with the noncommutative polynomial \(x y - 2 y z\) in variables `x`, `y` and `z`. The internal representation is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, \(x < y < z\).
+constructs an object associated with the noncommutative polynomial *x**y* − 2*y**z* in variables `x`, `y` and `z`. The internal representation is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, *x* &lt; *y* &lt; *z*.
 
 ### NCPolyToNC
 
@@ -5617,13 +5673,13 @@ For example
 
     SetMonomialOrder[a,b,c]
 
-sets the lex order \(a \ll b \ll c\).
+sets the lex order *a* ≪ *b* ≪ *c*.
 
 If one uses a list of variables rather than a single variable as one of the arguments, then multigraded lex order is used. For example
 
     SetMonomialOrder[{a,b,c}]
 
-sets the graded lex order \(a < b < c\).
+sets the graded lex order *a* &lt; *b* &lt; *c*.
 
 Another example:
 
@@ -5633,7 +5689,7 @@ or
 
     SetMonomialOrder[{a, b}, c]
 
-set the multigraded lex order \(a < b \ll c\).
+set the multigraded lex order *a* &lt; *b* ≪ *c*.
 
 Finally
 
@@ -5652,7 +5708,7 @@ There is also an older syntax which is still supported:
 
     SetMonomialOrder[{a, b, c}, n]
 
-sets the order of monomials to be \(a < b < c\) and assigns them grading level `n`.
+sets the order of monomials to be *a* &lt; *b* &lt; *c* and assigns them grading level `n`.
 
     SetMonomialOrder[{a, b, c}, 1]
 
@@ -5675,7 +5731,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order \(a < b \ll c \ll d\) and
+which corresponds to the order *a* &lt; *b* ≪ *c* ≪ *d* and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -5684,7 +5740,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order \(a < b \ll c < d\).
+which corresponds to the order *a* &lt; *b* ≪ *c* &lt; *d*.
 
 Note that `SetKnowns` flattens grading so that
 
@@ -5694,7 +5750,7 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order \(a < b\).
+result both in the order *a* &lt; *b*.
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns and unknowns. For example
 
@@ -5703,7 +5759,7 @@ Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns 
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering \(c < d \ll a \ll b\).
+results in an ordering *c* &lt; *d* ≪ *a* ≪ *b*.
 
 See also: [SetUnknowns](#SetUnknowns), [SetMonomialOrder](#SetMonomialOrder).
 
@@ -5722,7 +5778,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order \(a < b \ll c \ll d\) and
+which corresponds to the order *a* &lt; *b* ≪ *c* ≪ *d* and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -5731,7 +5787,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order \(a < b \ll c < d\).
+which corresponds to the order *a* &lt; *b* ≪ *c* &lt; *d*.
 
 Note that `SetKnowns` flattens grading so that
 
@@ -5741,7 +5797,7 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order \(a < b\).
+result both in the order *a* &lt; *b*.
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns and unknowns. For example
 
@@ -5750,7 +5806,7 @@ Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns 
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering \(c < d \ll a \ll b\).
+results in an ordering *c* &lt; *d* ≪ *a* ≪ *b*.
 
 See also: [SetKnowns](#SetKnowns), [SetMonomialOrder](#SetMonomialOrder).
 
@@ -5786,7 +5842,7 @@ For example
     SetMonomialOrder[{a,b}, {c}, {d}]
     PrintMonomialOrder[]
 
-print \(a < b \ll c \ll d\).
+print *a* &lt; *b* ≪ *c* ≪ *d*.
 
 See also: [SetKnowns](#SetKnowns), [SetUnknowns](#SetUnknowns), [SetMonomialOrder](#SetMonomialOrder), [ClearMonomialOrder](#ClearMonomialOrder), [PrintMonomialOrder](#PrintMonomialOrder).
 
@@ -5807,7 +5863,7 @@ returns
 
     gb = {x -> 1}
 
-that corresponds to the polynomial \(x - 1\), which is the nc Gröbner basis for the ideal generated by \(x^2-1\) and \(x^3-1\).
+that corresponds to the polynomial *x* − 1, which is the nc Gröbner basis for the ideal generated by *x*<sup>2</sup> − 1 and *x*<sup>3</sup> − 1.
 
 `NCMakeGB[{poly1, poly2, ...}, k, options]` uses `options`.
 
@@ -5934,7 +5990,7 @@ returns
 
     d = {2 x, -2 inv[x]}
 
-from which we conclude that `x**x**x` is not convex in `x` because \(x \succ 0\) and \(-{x}^{-1} \succ 0\) cannot simultaneously hold.
+from which we conclude that `x**x**x` is not convex in `x` because *x* ≻ 0 and −*x*<sup>−1</sup> ≻ 0 cannot simultaneously hold.
 
 `NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
 
@@ -6029,13 +6085,15 @@ See also: [NCSDPDual](#NCSDPDual), [NCSDPForm](#NCSDPForm).
 SDP
 ---
 
-`SDP` is a package that provides data structures for the numeric solution of semidefinite programs of the form: \[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(S\) is a symmetric positive semidefinite matrix and \(y\) is a vector of decision variables.
+`SDP` is a package that provides data structures for the numeric solution of semidefinite programs of the form:
+$$
+\\begin{aligned}
+  \\max\_{y, S} \\quad & b^T y \\\\
+  \\text{s.t.} \\quad & A y + S = c \\\\
+                    & S \\succeq 0
+\\end{aligned}
+$$
+ where *S* is a symmetric positive semidefinite matrix and *y* is a vector of decision variables.
 
 See the package [SDP](#PackageSDP) for a potentially more efficient alternative to the basic implementation provided by this package.
 
@@ -6053,22 +6111,22 @@ Members are:
 
 `SDPMatrices[f, G, y]` converts the symbolic linear functions `f`, `G` in the variables `y` associated to the semidefinite program:
 
-\[
-\begin{aligned} 
-  \min_y \quad & f(y), \\
-  \text{s.t.} \quad & G(y) \succeq 0
-\end{aligned}
-\]
+$$
+\\begin{aligned} 
+  \\min\_y \\quad & f(y), \\\\
+  \\text{s.t.} \\quad & G(y) \\succeq 0
+\\end{aligned}
+$$
 
 into numerical data that can be used to solve an SDP in the form:
 
-\[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+  \\max\_{y, S} \\quad & b^T y \\\\
+  \\text{s.t.} \\quad & A y + S = c \\\\
+                    & S \\succeq 0
+\\end{aligned}
+$$
 
 `SDPMatrices` returns a list with three entries:
 
@@ -6097,19 +6155,19 @@ See also: [SDPSolve](#SDPSolve).
 
 `SDPSolve[{A,b,c}]` solves an SDP in the form:
 
-\[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+  \\max\_{y, S} \\quad & b^T y \\\\
+  \\text{s.t.} \\quad & A y + S = c \\\\
+                    & S \\succeq 0
+\\end{aligned}
+$$
 
 `SDPSolve` returns a list with four entries:
 
--   The first is the primal solution \(y\);
--   The second is the dual solution \(X\);
--   The third is the primal slack variable \(S\);
+-   The first is the primal solution *y*;
+-   The second is the dual solution *X*;
+-   The third is the primal slack variable *S*;
 -   The fourth is a list of flags:
     -   `PrimalFeasible`: `True` if primal problem is feasible;
     -   `FeasibilityRadius`: less than one if primal problem is feasible;
@@ -6131,7 +6189,7 @@ See also: [SDPMatrices](#SDPMatrices).
 
 ### SDPEval
 
-`SDPEval[A, y]` evaluates the linear function \(A y\) in an `SDP`.
+`SDPEval[A, y]` evaluates the linear function *A**y* in an `SDP`.
 
 This is a convenient replacement for [SDPPrimalEval](#SDPPrimalEval) in which the list `y` can be used directly.
 
@@ -6139,7 +6197,7 @@ See also: [SDPPrimalEval](#SDPPrimalEval), [SDPDualEval](#SDPDualEval), [SDPSolv
 
 ### SDPPrimalEval
 
-`SDPPrimalEval[A, {{y}}]` evaluates the linear function \(A y\) in an `SDP`.
+`SDPPrimalEval[A, {{y}}]` evaluates the linear function *A**y* in an `SDP`.
 
 See [SDPEval](#SDPEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
@@ -6147,28 +6205,30 @@ See also: [SDPEval](#SDPEval), [SDPDualEval](#SDPDualEval), [SDPSolve](#SDPSolve
 
 ### SDPDualEval
 
-`SDPDualEval[A, X]` evaluates the linear function \(A^* X\) in an `SDP`.
+`SDPDualEval[A, X]` evaluates the linear function *A*<sup>\*</sup>*X* in an `SDP`.
 
 See also: [SDPPrimalEval](#SDPPrimalEval), [SDPSolve](#SDPSolve), [SDPMatrices](#SDPMatrices).
 
 ### SDPSylvesterEval
 
-`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping \(A^* (W A (\Delta_y) W)\) when applied to the scaling `W`.
+`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping *A*<sup>\*</sup>(*W**A*(*Δ*<sub>*y*</sub>)*W*) when applied to the scaling `W`.
 
-`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr`.
+`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping *A*<sup>\*</sup>(*W*<sub>*l*</sub>*A*(*Δ*<sub>*y*</sub>)*W*<sub>*r*</sub>) when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also: [SDPPrimalEval](#SDPPrimalEval), [SDPDualEval](#SDPDualEval).
 
 SDPFlat
 -------
 
-`SDPFlat` is a package that provides data structures for the numeric solution of semidefinite programs of the form: \[
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A y + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(S\) is a symmetric positive semidefinite matrix and \(y\) is a vector of decision variables.
+`SDPFlat` is a package that provides data structures for the numeric solution of semidefinite programs of the form:
+$$
+\\begin{aligned}
+  \\max\_{y, S} \\quad & b^T y \\\\
+  \\text{s.t.} \\quad & A y + S = c \\\\
+                    & S \\succeq 0
+\\end{aligned}
+$$
+ where *S* is a symmetric positive semidefinite matrix and *y* is a vector of decision variables.
 
 It is a potentially more efficient alternative to the basic implementation provided by the package [SDP](#PackageSDP).
 
@@ -6194,34 +6254,36 @@ See also: [SDP](#PackageSDP).
 
 ### SDPFlatPrimalEval
 
-`SDPFlatPrimalEval[aFlat, y]` evaluates the linear function \(A y\) in an `SDPFlat`.
+`SDPFlatPrimalEval[aFlat, y]` evaluates the linear function *A**y* in an `SDPFlat`.
 
 See also: [SDPFlatDualEval](#SDPFlatDualEval), [SDPFlatSylvesterEval](#SDPFlatSylvesterEval).
 
 ### SDPFlatDualEval
 
-`SDPFlatDualEval[aFlat, X]` evaluates the linear function \(A^* X\) in an `SDPFlat`.
+`SDPFlatDualEval[aFlat, X]` evaluates the linear function *A*<sup>\*</sup>*X* in an `SDPFlat`.
 
 See also: [SDPFlatPrimalEval](#SDPFlatPrimalEval), [SDPFlatSylvesterEval](#SDPFlatSylvesterEval).
 
 ### SDPFlatSylvesterEval
 
-`SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix representation of the Sylvester mapping \(A^* (W A (\Delta_y) W)\) when applied to the scaling `W`.
+`SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix representation of the Sylvester mapping *A*<sup>\*</sup>(*W**A*(*Δ*<sub>*y*</sub>)*W*) when applied to the scaling `W`.
 
-`SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr`.
+`SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix representation of the Sylvester mapping *A*<sup>\*</sup>(*W*<sub>*l*</sub>*A*(*Δ*<sub>*y*</sub>)*W*<sub>*r*</sub>) when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also: [SDPFlatPrimalEval](#SDPFlatPrimalEval), [SDPFlatDualEval](#SDPFlatDualEval).
 
 SDPSylvester
 ------------
 
-`SDPSylvester` is a package that provides data structures for the numeric solution of semidefinite programs of the form: \[
-\begin{aligned}
-  \max_{y, S} \quad & \sum_i \operatorname{trace}(b_i^T y_i) \\
-  \text{s.t.} \quad & A y + S = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T + S = C \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(S\) is a symmetric positive semidefinite matrix and \(y = \{ y_1, \ldots, y_n \}\) is a list of matrix decision variables.
+`SDPSylvester` is a package that provides data structures for the numeric solution of semidefinite programs of the form:
+$$
+\\begin{aligned}
+  \\max\_{y, S} \\quad & \\sum\_i \\operatorname{trace}(b\_i^T y\_i) \\\\
+  \\text{s.t.} \\quad & A y + S = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T + S = C \\\\
+                    & S \\succeq 0
+\\end{aligned}
+$$
+ where *S* is a symmetric positive semidefinite matrix and *y* = {*y*<sub>1</sub>, …, *y*<sub>*n*</sub>} is a list of matrix decision variables.
 
 Members are:
 
@@ -6232,7 +6294,7 @@ Members are:
 
 ### SDPEval
 
-`SDPEval[A, y]` evaluates the linear function \(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\) in an `SDPSylvester`.
+`SDPEval[A, y]` evaluates the linear function $A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T$ in an `SDPSylvester`.
 
 This is a convenient replacement for [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval) in which the list `y` can be used directly.
 
@@ -6240,7 +6302,7 @@ See also: [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval), [SDPSylvesterDualEv
 
 ### SDPSylvesterPrimalEval
 
-`SDPSylvesterPrimalEval[a, y]` evaluates the linear function \(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\) in an `SDPSylvester`.
+`SDPSylvesterPrimalEval[a, y]` evaluates the linear function $A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T$ in an `SDPSylvester`.
 
 See [SDPSylvesterEval](#SDPSylvesterEval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
@@ -6248,7 +6310,7 @@ See also: [SDPSylvesterDualEval](#SDPSylvesterDualEval), [SDPSylvesterSylvesterE
 
 ### SDPSylvesterDualEval
 
-`SDPSylvesterDualEval[A, X]` evaluates the linear function \(A^* X = \{ b_1 X a_1, \cdots, b_n X a_n \}\) in an `SDPSylvester`.
+`SDPSylvesterDualEval[A, X]` evaluates the linear function *A*<sup>\*</sup>*X* = {*b*<sub>1</sub>*X**a*<sub>1</sub>, ⋯, *b*<sub>*n*</sub>*X**a*<sub>*n*</sub>} in an `SDPSylvester`.
 
 For example
 
@@ -6256,34 +6318,37 @@ See also: [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval), [SDPSylvesterSylves
 
 ### SDPSylvesterSylvesterEval
 
-`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping \(A^* (W A (\Delta_y) W)\) when applied to the scaling `W`.
+`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping *A*<sup>\*</sup>(*W**A*(*Δ*<sub>*y*</sub>)*W*) when applied to the scaling `W`.
 
-`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr`.
+`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping *A*<sup>\*</sup>(*W*<sub>*l*</sub>*A*(*Δ*<sub>*y*</sub>)*W*<sub>*r*</sub>) when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also: [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval), [SDPSylvesterDualEval](#SDPSylvesterDualEval).
 
 PrimalDual
 ----------
 
-`PrimalDual` provides an algorithm for solving a pair of primal-dual semidefinite programs in the form \[
-\tag{Primal}
-\begin{aligned}
-  \min_{X} \quad & \operatorname{trace}(c X) \\
-  \text{s.t.} \quad & A^*(X) = b \\
-                    & X \succeq 0
-\end{aligned}
-\] \[
-\tag{Dual}
-\begin{aligned}
-  \max_{y, S} \quad & b^T y \\
-  \text{s.t.} \quad & A(y) + S = c \\
-                    & S \succeq 0
-\end{aligned}
-\] where \(X\) is the primal variable and \((y,S)\) are the dual variables.
+`PrimalDual` provides an algorithm for solving a pair of primal-dual semidefinite programs in the form
+$$
+\\tag{Primal}
+\\begin{aligned}
+  \\min\_{X} \\quad & \\operatorname{trace}(c X) \\\\
+  \\text{s.t.} \\quad & A^\*(X) = b \\\\
+                    & X \\succeq 0
+\\end{aligned}
+$$
+$$
+\\tag{Dual}
+\\begin{aligned}
+  \\max\_{y, S} \\quad & b^T y \\\\
+  \\text{s.t.} \\quad & A(y) + S = c \\\\
+                    & S \\succeq 0
+\\end{aligned}
+$$
+ where *X* is the primal variable and (*y*, *S*) are the dual variables.
 
-The algorithm is parametrized and users should provide their own means of evaluating the mappings \(A\), \(A^*\) and also the Sylvester mapping \[
-    A^*(W_l A(\Delta_y) W_r)
-\] used to solve the least-square subproblem.
+The algorithm is parametrized and users should provide their own means of evaluating the mappings *A*, *A*<sup>\*</sup> and also the Sylvester mapping
+*A*<sup>\*</sup>(*W*<sub>*l*</sub>*A*(*Δ*<sub>*y*</sub>)*W*<sub>*r*</sub>)
+ used to solve the least-square subproblem.
 
 Users can develop custom algorithms that can take advantage of special structure, as done for instance in [NCSDP](#PackageNCSDP).
 
@@ -6297,11 +6362,11 @@ Members are:
 
 `PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c]` solves the semidefinite program using a primal dual method.
 
-`PrimalEval` should return the primal mapping \(A^*(X)\) when applied to the current primal variable `X` as in `PrimalEval @@ X`.
+`PrimalEval` should return the primal mapping *A*<sup>\*</sup>(*X*) when applied to the current primal variable `X` as in `PrimalEval @@ X`.
 
-`DualEval` should return the dual mapping \(A(y)\) when applied to the current dual variable `y` as in `DualEval @@ y`.
+`DualEval` should return the dual mapping *A*(*y*) when applied to the current dual variable `y` as in `DualEval @@ y`.
 
-`SylvesterVecEval` should return a matrix representation of the Sylvester mapping \(A^* (W_l A (\Delta_y) W_r)\) when applied to the left- and right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
+`SylvesterVecEval` should return a matrix representation of the Sylvester mapping *A*<sup>\*</sup>(*W*<sub>*l*</sub>*A*(*Δ*<sub>*y*</sub>)*W*<sub>*r*</sub>) when applied to the left- and right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
 
 `PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c,options]` uses `options`.
 
@@ -6471,7 +6536,7 @@ Members are:
 
 ### NCDescriptorRealization
 
-`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that \(C G^{-1} B\) is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] === RationalExpression`.
+`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that *C**G*<sup>−1</sup>*B* is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] === RationalExpression`.
 
 `C` and `B` do not contain any `UnknownsVariables` and `G` has linear entries in the `UnknownVariables`.
 
@@ -6515,7 +6580,7 @@ Members are:
 
 ### TestDescriptorRealization
 
-`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals \(C G^{-1} B\) by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
+`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals *C**G*<sup>−1</sup>*B* by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
 
 ### PinnedQ
 
@@ -6551,4 +6616,4 @@ Oliveira, Mauricio C. de. 2012. “Simplification of symbolic polynomials on non
 
 would not fail to treat `aa` and `bb` locally. It is their appearance in a rule that triggers the mostly odd behavior.
 
-[6] This is in contrast with the commutative \(x^4\) which is convex everywhere. See (Camino et al. 2003) for details.
+[6] This is in contrast with the commutative *x*<sup>4</sup> which is convex everywhere. See (Camino et al. 2003) for details.

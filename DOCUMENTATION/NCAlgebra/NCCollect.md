@@ -22,6 +22,12 @@ If `expr` is a rational nc expression then degree correspond to the degree of th
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
+`NCCollect[expr,vars,options]` uses options.
+
+The following option is available:
+ 
+- `ByTotalDegree` (`False`): whether to collect by total or partial degree.
+
 **Notes:**
 
 While `NCCollect[expr, vars]` always returns mathematically correct
@@ -37,6 +43,12 @@ See also:
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
+`NCCollectSelfAdjoint[expr,vars,options]` uses options.
+
+The following option is available:
+ 
+- `ByTotalDegree` (`False`): whether to collect by total or partial degree.
+
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).
 
@@ -45,6 +57,12 @@ See also:
 `NCCollectSymmetric[expr,vars]` allows one to collect terms of nc expression `expr` on the variables `vars` and their transposes without writing out the transposes.
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
+
+`NCCollectSymmetric[expr,vars,options]` uses options.
+
+The following option is available:
+ 
+- `ByTotalDegree` (`False`): whether to collect by total or partial degree.
 
 See also:
 [NCCollect](#NCCollect), [NCStrongCollect](#NCStrongCollect), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint).

@@ -2029,16 +2029,31 @@ NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
 <p>If <code>expr</code> is a rational nc expression then degree correspond to the degree of the polynomial obtained using <a href="#NCRationalToNCPolynomial">NCRationalToNCPolynomial</a>.</p>
 <p><code>NCCollect</code> also works with nc expressions instead of <em>Symbols</em> in vars. In this case nc expressions are replaced by new variables and <code>NCCollect</code> is called using the resulting expression and the newly created <em>Symbols</em>.</p>
 <p>This command internally converts nc expressions into the special <code>NCPolynomial</code> format.</p>
+<p><code>NCCollect[expr,vars,options]</code> uses options.</p>
+<p>The following option is available:</p>
+<ul>
+<li><code>ByTotalDegree</code> (<code>False</code>): whether to collect by total or partial degree.</li>
+</ul>
 <p><strong>Notes:</strong></p>
 <p>While <code>NCCollect[expr, vars]</code> always returns mathematically correct expressions, it may not collect <code>vars</code> from as many terms as one might think it should.</p>
 <p>See also: <a href="#NCStrongCollect">NCStrongCollect</a>, <a href="#NCCollectSymmetric">NCCollectSymmetric</a>, <a href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>, <a href="#NCRationalToNCPolynomial">NCRationalToNCPolynomial</a>.</p>
 <h3 id="NCCollectSelfAdjoint"><span class="header-section-number">10.2.2</span> NCCollectSelfAdjoint</h3>
 <p><code>NCCollectSelfAdjoint[expr,vars]</code> allows one to collect terms of nc expression <code>expr</code> on the variables <code>vars</code> and their adjoints without writing out the adjoints.</p>
 <p>This command internally converts nc expressions into the special <code>NCPolynomial</code> format.</p>
+<p><code>NCCollectSelfAdjoint[expr,vars,options]</code> uses options.</p>
+<p>The following option is available:</p>
+<ul>
+<li><code>ByTotalDegree</code> (<code>False</code>): whether to collect by total or partial degree.</li>
+</ul>
 <p>See also: <a href="#NCCollect">NCCollect</a>, <a href="#NCStrongCollect">NCStrongCollect</a>, <a href="#NCCollectSymmetric">NCCollectSymmetric</a>, <a href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>.</p>
 <h3 id="NCCollectSymmetric"><span class="header-section-number">10.2.3</span> NCCollectSymmetric</h3>
 <p><code>NCCollectSymmetric[expr,vars]</code> allows one to collect terms of nc expression <code>expr</code> on the variables <code>vars</code> and their transposes without writing out the transposes.</p>
 <p>This command internally converts nc expressions into the special <code>NCPolynomial</code> format.</p>
+<p><code>NCCollectSymmetric[expr,vars,options]</code> uses options.</p>
+<p>The following option is available:</p>
+<ul>
+<li><code>ByTotalDegree</code> (<code>False</code>): whether to collect by total or partial degree.</li>
+</ul>
 <p>See also: <a href="#NCCollect">NCCollect</a>, <a href="#NCStrongCollect">NCStrongCollect</a>, <a href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>.</p>
 <h3 id="NCStrongCollect"><span class="header-section-number">10.2.4</span> NCStrongCollect</h3>
 <p><code>NCStrongCollect[expr,vars]</code> collects terms of expression <code>expr</code> according to the elements of <code>vars</code> and attempts to combine by association.</p>
@@ -2305,18 +2320,18 @@ symVars = {x}</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[mon1 + ... + K lead] lead</td>
-<td style="text-align: left;">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
+<td>inv[mon1 + ... + K lead] lead</td>
+<td>(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">lead inv[mon1 + ... + K lead]</td>
-<td style="text-align: left;">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
+<td>lead inv[mon1 + ... + K lead]</td>
+<td>(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>
@@ -2324,38 +2339,38 @@ symVars = {x}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[1 + K a b]</td>
-<td style="text-align: left;">inv[a] - K b inv[1 + K a b]</td>
+<td>inv[a] inv[1 + K a b]</td>
+<td>inv[a] - K b inv[1 + K a b]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[a] inv[1 + K a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[a] inv[1 + K a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] inv[b]</td>
-<td style="text-align: left;">inv[b] - K inv[1 + K a b] a</td>
+<td>inv[1 + K a b] inv[b]</td>
+<td>inv[b] - K inv[1 + K a b] a</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] inv[a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[1 + K a] inv[a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a</td>
-<td style="text-align: left;">a inv[1 + K b a]</td>
+<td>inv[1 + K a b] a</td>
+<td>a inv[1 + K b a]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[A inv[a] + B b] inv[a]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) a b]</td>
+<td>inv[A inv[a] + B b] inv[a]</td>
+<td>(1/A) inv[1 + (B/A) a b]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[A inv[a] + K b]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) b a]</td>
+<td>inv[a] inv[A inv[a] + K b]</td>
+<td>(1/A) inv[1 + (B/A) b a]</td>
 </tr>
 </tbody>
 </table>
@@ -2363,26 +2378,26 @@ symVars = {x}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a b</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>inv[1 + K a b] a b</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] a</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>inv[1 + K a] a</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">a b inv[1 + K a b]</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>a b inv[1 + K a b]</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">a inv[1 + K a]</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>a inv[1 + K a]</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 </tbody>
 </table>

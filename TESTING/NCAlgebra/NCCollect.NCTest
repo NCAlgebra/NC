@@ -351,14 +351,15 @@ Module[
   NCTestCheck[NCCollect[A (x**y(x - y) + (y - x)**x), {x,y}],
               NCCollect::NotPolynomial];
 
-  (* NCCollect TotalDegree *)
+  (* NCCollect ByTotalDegree *)
   expr = ExpandNonCommutativeMultiply[A (x**y**(x - y) + (y - x)**x)];
   answer = -(A x - A y) ** x + x ** y ** (A x - A y);
-  NCTest[NCCollect[expr, {x,y}, TotalDegree -> True], answer];
+  NCTest[NCCollect[expr, {x,y}, ByTotalDegree -> True], answer];
 
-  (* NCCollect TotalDegree *)
-  expr = ExpandNonCommutativeMultiply[A (x**y**(x - y) + (y - x)**x)];
-  answer = A (x ** y ** (x - y) - (x - y) ** x);
-  NCTest[NCCollect[expr, {x,y,A}, TotalDegree -> True], answer];
+  answer = A x**y**(x - y) - A (x - y)**x;
+  NCTest[NCCollect[expr, {x,y,A}, ByTotalDegree -> True], answer];
+
+  answer = A (-x ** ((1 - y) ** x + y ** y) + y ** x);
+  NCTest[NCStrongCollect[expr, {x,y,A}], answer];
 
 ];

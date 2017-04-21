@@ -1,5 +1,8 @@
-doc:
+usage:
 	(cd DOCUMENTATION; make all install)
+
+doc:
+	(cd DOCUMENTATION; make doc)
 
 NCDocument.pdf:
 	(cd DOCUMENTATION; make NCDocument.pdf)
