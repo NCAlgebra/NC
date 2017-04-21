@@ -9,11 +9,7 @@
 		variables.
 *)
 
-(* :Alias:	NCDec ::= NCDecompose, NCCom ::= NCCompose,
-		decompose ::= NCDecompose, compose ::= NCCompose,
-                NCC ::= NCCollect,
-		NCSC ::= NCStrongCollect, NCCSym ::= NCCollectSymmetric,
-*)
+(* :Alias: *)
 
 (* :Warnings: *)
 
@@ -31,6 +27,8 @@ Clear[NCCollect,NCStrongCollect,
       NCStrongCollectSymmetric, NCStrongCollectSelfAdjoint,
       NCDecompose, NCCompose,
       NCTermsOfDegree, NCTermsOfTotalDegree];
+
+NCCollect::NotPolynomial = "Could not transform expression into nc polynomial";
 
 Begin["`Private`"];
 
@@ -135,7 +133,7 @@ Begin["`Private`"];
   NCCollect[expr_, var_] := NCCollect[expr, {var}];
                              
   NCCollect[exp_, var_List] := Module[
-    {vars = var, expr = exp, rules = {}, dec, rvars, rrules},
+    {vars = var, expr = exp, rules = {}, dec, rvars, rrules, cvars},
 
     If [ Not[MatchQ[vars, {___?NCSymbolOrSubscriptQ}]], 
          
@@ -165,17 +163,33 @@ Begin["`Private`"];
          
     ];
       
+    (* Handle commutative symbols *)
+    cvars = Select[vars, CommutativeQ];
+    If[ cvars =!= {},
+        vars = DeleteCases[vars, _?CommutativeQ];
+        Print["cvars = ", cvars];
+        Print["vars = ", vars];
+    ];
+      
     {dec,rvars,rrules} = Quiet[
        Check[ {NCPDecompose[NCToNCPolynomial[expr, vars]], {}, {}}
              ,
-              Apply[{NCPDecompose[#1], #2, #3}&, NCRationalToNCPolynomial[expr, vars]]
+              Check[ Apply[{NCPDecompose[#1], #2, #3}&, NCRationalToNCPolynomial[expr, vars]]
+                    ,
+                     Message[NCCollect::NotPolynomial];
+                     {$Failed, $Failed, $Failed}
+                    ,
+                     NCPolynomial::NotRational
+              ]
              ,
               NCPolynomial::NotPolynomial
        ]
       ,
-       NCPolynomial::NotPolynomial
+       {NCPolynomial::NotPolynomial,NCPolynomial::NotRational}
     ];
 
+    If[ dec === $Failed, Return[expr] ];
+      
     (*
     Print["dec = ", dec];
     Print["rvars = ", rvars];

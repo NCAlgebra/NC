@@ -347,4 +347,10 @@ Module[
   answer = tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y);
   NCTest[NCCollect[expr, {k,m}], answer];
 
+  (* Commutative variables *)
+  expr = ExpandNonCommutativeMultiply[A (x**y(x - y) + (y - x)**x)];
+  Print["expr = ", expr];
+  answer = A (x**y**(x - y) + (y - x)**x);
+  NCTest[NCCollect[expr, {x,y,A}], answer];
+
 ];
