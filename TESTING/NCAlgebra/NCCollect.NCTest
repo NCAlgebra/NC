@@ -347,10 +347,18 @@ Module[
   answer = tp[a**x+y]**k**(a**x+y) + tp[a**x+y]**m**(a**x+y);
   NCTest[NCCollect[expr, {k,m}], answer];
 
-  (* Commutative variables *)
-  expr = ExpandNonCommutativeMultiply[A (x**y(x - y) + (y - x)**x)];
-  Print["expr = ", expr];
-  answer = A (x**y**(x - y) + (y - x)**x);
-  NCTest[NCCollect[expr, {x,y,A}], answer];
+  (* Invalid expression *)
+  NCTestCheck[NCCollect[A (x**y(x - y) + (y - x)**x), {x,y}],
+              NCCollect::NotPolynomial];
+
+  (* NCCollect TotalDegree *)
+  expr = ExpandNonCommutativeMultiply[A (x**y**(x - y) + (y - x)**x)];
+  answer = -(A x - A y) ** x + x ** y ** (A x - A y);
+  NCTest[NCCollect[expr, {x,y}, TotalDegree -> True], answer];
+
+  (* NCCollect TotalDegree *)
+  expr = ExpandNonCommutativeMultiply[A (x**y**(x - y) + (y - x)**x)];
+  answer = A (x ** y ** (x - y) - (x - y) ** x);
+  NCTest[NCCollect[expr, {x,y,A}, TotalDegree -> True], answer];
 
 ];

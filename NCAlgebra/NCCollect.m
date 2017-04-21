@@ -100,7 +100,13 @@ Begin["`Private`"];
     Quiet[
        Check[ NCPDecompose[NCToNCPolynomial[expr]]
              ,
-              Apply[(NCPDecompose[#1] /. #3)&, NCRationalToNCPolynomial[expr]]
+              Check[ Apply[(NCPDecompose[#1] /. #3)&, NCRationalToNCPolynomial[expr]]
+                    ,
+                     Message[NCCollect::NotPolynomial];
+                     $Failed
+                    ,
+                     NCPolynomial::NotRational
+              ]
              ,
               NCPolynomial::NotPolynomial
        ]
@@ -112,7 +118,13 @@ Begin["`Private`"];
     Quiet[
        Check[ NCPDecompose[NCToNCPolynomial[expr, vars]]
              ,
-              Apply[(NCPDecompose[#1] /. #3)&, NCRationalToNCPolynomial[expr, vars]]
+              Check[ Apply[(NCPDecompose[#1] /. #3)&, NCRationalToNCPolynomial[expr, vars]]
+                    ,
+                     Message[NCCollect::NotPolynomial];
+                     $Failed
+                    ,
+                     NCPolynomial::NotRational
+              ]
              ,
               NCPolynomial::NotPolynomial
        ]
@@ -127,13 +139,17 @@ Begin["`Private`"];
 
   (* NCCollect *)
 
-  NCCollect[expr_List, vars_] := 
-     Map[NCCollect[#, vars]&, expr];
+  Options[NCCollect] = {TotalDegree -> False};
+  
+  NCCollect[expr_List, vars_, opts:OptionsPattern[]] := 
+     Map[NCCollect[#, vars, opts]&, expr];
 
-  NCCollect[expr_, var_] := NCCollect[expr, {var}];
+  NCCollect[expr_, var_, opts:OptionsPattern[]] := 
+     NCCollect[expr, {var}, opts];
                              
-  NCCollect[exp_, var_List] := Module[
-    {vars = var, expr = exp, rules = {}, dec, rvars, rrules, cvars},
+  NCCollect[exp_, var_List, opts:OptionsPattern[]] := Module[
+    {vars = var, expr = exp, rules = {}, 
+     dec, rvars, rrules, cvars},
 
     If [ Not[MatchQ[vars, {___?NCSymbolOrSubscriptQ}]], 
          
@@ -174,7 +190,8 @@ Begin["`Private`"];
     {dec,rvars,rrules} = Quiet[
        Check[ {NCPDecompose[NCToNCPolynomial[expr, vars]], {}, {}}
              ,
-              Check[ Apply[{NCPDecompose[#1], #2, #3}&, NCRationalToNCPolynomial[expr, vars]]
+              Check[ Apply[{NCPDecompose[#1], #2, #3}&, 
+                           NCRationalToNCPolynomial[expr, vars]]
                     ,
                      Message[NCCollect::NotPolynomial];
                      {$Failed, $Failed, $Failed}
@@ -190,6 +207,13 @@ Begin["`Private`"];
 
     If[ dec === $Failed, Return[expr] ];
       
+    (* group by total degree? *)
+    If[ OptionValue[TotalDegree]
+       ,
+        (* sum degree in decompose before applying NCStrongCollect *)
+        dec = Merge[MapAt[Total, Normal[dec], {All, 1}], Total];
+    ];
+      
     (*
     Print["dec = ", dec];
     Print["rvars = ", rvars];
@@ -197,9 +221,19 @@ Begin["`Private`"];
     Print["collected = ", 
           Map[NCStrongCollect[#, Join[vars, rvars]]&, dec]];
     *)
+
+    (* Apply NCStrongCollect *)
+    expr = NCCompose[Map[NCStrongCollect[#, Join[vars, rvars]]&,
+                         dec]] //. rrules //. rules;
       
-    Return[NCCompose[Map[NCStrongCollect[#, Join[vars, rvars]]&,
-                         dec]] //. rrules //. rules]
+    Return[ 
+      If[ cvars === {}
+         ,
+          expr
+         ,
+          Collect[expr, cvars]
+      ]
+    ];
       
   ];
       
