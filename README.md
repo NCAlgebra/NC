@@ -11,7 +11,7 @@ examples, is available at:
 
 http://math.ucsd.edu/~ncalg
 
-## Automatic Installation
+## Automatic Installation and Updates
 
 Starting with version 5.0.1, the easiest way to download and install
 NCAlgebra is using the `NCWebInstall` script. Just type:
@@ -25,6 +25,14 @@ available in the branch `master`. It may be ahead of the latest
 release.
 
 Alternatively you can download and install NCAlgebra as outlined below.
+
+Automatic updates are also available using:
+
+    << NCWebUpdate`
+    NCUpdate
+
+checks the main repository for the latest version and run
+`NCWebInstall`.
 
 ## Manual installation
 

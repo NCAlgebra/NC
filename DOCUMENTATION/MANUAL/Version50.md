@@ -1,5 +1,11 @@
 # Changes in Version 5.0 {#Version5_0}
 
+## Version 5.0.2 {#Version5_0_2}
+
+1. `NCCollect` and `NCStrongCollect` can handle commutative variables.
+2. Cleaned up initialization files.
+3. New function `SetNonCommutativeHold` with `HoldAll` attribute can be used to set Symbols that have been previously assigned values.
+
 ## Version 5.0.1 {#Version5_0_1}
 
 1. Introducing `NCWebInstall` and `NCWebUpdate`.

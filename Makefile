@@ -12,5 +12,7 @@ clean:
 
 test:
 	math < TESTING/NCTEST
+	@echo "> Press [Enter] to continue"; read nothing
 	math < TESTING/NCPOLYTEST
+	@echo "> Press [Enter] to continue"; read nothing
 	math < TESTING/NCSDPTEST

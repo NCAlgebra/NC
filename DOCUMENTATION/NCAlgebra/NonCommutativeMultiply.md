@@ -1,6 +1,6 @@
 ## NonCommutativeMultiply {#PackageNonCommutativeMultiply}
 
-**NonCommutativeMultiply** is the main package that provides noncommutative functionality to Mathematica's native `NonCommutativeMultiply` bound to the operator `**`.
+`NonCommutativeMultiply` is the main package that provides noncommutative functionality to Mathematica's native `NonCommutativeMultiply` bound to the operator `**`.
 
 Members are:
 
@@ -14,6 +14,7 @@ Members are:
 * [NonCommutativeQ](#NonCommutativeQ)
 * [SetCommutative](#SetCommutative)
 * [SetNonCommutative](#SetNonCommutative)
+* [SetNonCommutativeHold](#SetNonCommutativeHold)
 * [Commutative](#Commutative)
 * [CommuteEverything](#CommuteEverything)
 * [BeginCommuteEverything](#BeginCommuteEverything)
@@ -67,7 +68,7 @@ See also:
 
 ### CommutativeQ {#CommutativeQ}
 
-`CommutativeQ[expr]` is *True* if expression `expr` is commutative (the default), and *False* if `expr` is noncommutative.
+`CommutativeQ[expr]` is `True` if expression `expr` is commutative (the default), and `False` if `expr` is noncommutative.
 
 See also:
 [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative).
@@ -81,14 +82,23 @@ See also:
 
 ### SetCommutative {#SetCommutative}
 
-`SetCommutative[a,b,c,...]` sets all the *Symbols* `a`, `b`, `c`, ... to be commutative.
+`SetCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be commutative.
 
 See also:
 [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
 
 ### SetNonCommutative {#SetNonCommutative}
 
-`SetNonCommutative[a,b,c,...]` sets all the *Symbols* `a`, `b`, `c`, ... to be noncommutative.
+`SetNonCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be noncommutative.
+
+See also:
+[SetCommutative](#SetCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
+
+### SetNonCommutativeHold {#SetNonCommutativeHold}
+
+`SetNonCommutativeHold[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be noncommutative.
+
+`SetNonCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
 
 See also:
 [SetCommutative](#SetCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
@@ -142,7 +152,7 @@ For example
 
 returns
 
-    a**b+a**c.
+    a**b + a**c.
 
 See also:
 [NCExpand](#NCExpand), [NCE](#NCE).

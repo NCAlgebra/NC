@@ -23,7 +23,15 @@ If[ ("AllowInternetUse" /. SystemInformation["Network"]) === False,
     Quit[]
 ];
 
-Module[ 
+BeginPackage[ "NCWebUpdate`" ];
+
+Clear[NCUpdate];
+
+Get["NCWebUpdate.usage"];
+
+Begin[ "`Private`" ]
+
+  NCUpdate := Module[
     {existing, existingLabel, existingVersion,
      latestLabel, latestVersion,
      input},
@@ -74,14 +82,19 @@ Module[
           ,
            input = ToUpperCase[
              InputString["  Do you want to upgrade? (y/n) "]];
-   ];
-   If[ input == "Y"
-      ,
-       Print["> Upgrading..."];
-       Print[];
-       Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
-      ,
-       Print["  Exiting..."];
-   ];
-       
-];
+    ];
+    If[ input == "Y"
+       ,
+        Print["> Upgrading..."];
+        Print[];
+        Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
+       ,
+        Print["  Exiting..."];
+    ];
+    
+    Return[];
+  ];
+        
+End[]
+
+EndPackage[]

@@ -1,6 +1,6 @@
 include ../make.inc
 
-FILES = NCDebug.usage
+FILES = NCDebug.usage NCWebUpdate.usage
 
 all: $(FILES)
 

@@ -21,6 +21,7 @@ BeginPackage[ "NonCommutativeMultiply`" ];
 Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 
       SetCommutative, SetNonCommutative,
+      SetNonCommutativeHold,
       ExpandNonCommutativeMultiply,
       BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative,
@@ -98,7 +99,7 @@ Begin[ "`Private`" ]
   (*  SetCommutative and SetNonCommutative *)
 
   Clear[DoSetNonCommutative];
-  DoSetNonCommutative[x_Symbol] := CommutativeQ[x] ^= False;
+  DoSetNonCommutative[x_Symbol] := (x /: HoldPattern[CommutativeQ[x]] = False);
   DoSetNonCommutative[x_List] := SetNonCommutative /@ x;
   DoSetNonCommutative[Subscript[x_Symbol, y__]] := 
     Message[CommutativeQ::NonCommutativeSubscript, x, y];
@@ -106,8 +107,12 @@ Begin[ "`Private`" ]
     Message[CommutativeQ::NonCommutative, "number", x];
   DoSetNonCommutative[x_] := 
     Message[CommutativeQ::NonCommutative, "expression", x];
+  SetAttributes[DoSetNonCommutative, HoldAll];
 
   SetNonCommutative[a__] := Scan[DoSetNonCommutative, {a}];
+  
+  SetNonCommutativeHold[a__] := Scan[DoSetNonCommutative, Unevaluated[{a}]];
+  SetAttributes[SetNonCommutativeHold, HoldAll];
 
   Clear[DoSetCommutative];
   DoSetCommutative[x_Symbol] := CommutativeQ[x] ^= True;
