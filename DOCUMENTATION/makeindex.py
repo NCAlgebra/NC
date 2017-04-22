@@ -48,17 +48,14 @@ if __name__ == "__main__":
     # then save to file
     with open('pandoc.idx','w') as f:
         for (anchor,values) in anchors.items():
-            if len(values) == 1:
-                # single anchor
-                level, link, text = values[0]
-                f.write('{}\t{}\t{}\t{}\n'.format(level,
-                                                  link,
-                                                  anchor,
-                                                  text))
-                        
-            elif len(values) > 1:
-                for (i,(level, link, text)) in enumerate(values):
+            for (i,(level, link, text)) in enumerate(values):
+                if i == 0:
                     f.write('{}\t{}\t{}\t{}\n'.format(level,
                                                       link,
-                                                      anchor + '-' + str(i+1),
+                                                      anchor,
+                                                      text))
+                else:
+                    f.write('{}\t{}\t{}\t{}\n'.format(level,
+                                                      link,
+                                                      anchor + '-' + str(i),
                                                       text))
