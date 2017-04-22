@@ -13,8 +13,8 @@ def create_anchor(level, link, text):
     # as discussed in
     # https://gist.github.com/asabaylus/3071099
     
-    anchor = re.sub('[\.`]', '', text.strip().lower())
-    anchor = re.sub('[^\w\- :]+', ' ', anchor)
+    anchor = re.sub('[\.:`]', '', text.strip().lower())
+    anchor = re.sub('[^\w\- ]+', ' ', anchor)
     anchor = re.sub('\s+', '-', anchor)
     anchor = re.sub('\-+$', '', anchor)
 
