@@ -76,9 +76,14 @@ MANUAL = MANUAL/Preamble.md \
 doc: NCDocument.pdf index.html README.md
 
 README.md: $(MANUAL)
-	pandoc $(MANUAL) -t markdown_github -N --toc --standalone \
+	pandoc $(MANUAL) -t markdown -N --toc --standalone \
              --bibliography references.bib \
+	     --filter makeindex.py \
+	     -o README.tmp.md
+	pandoc README.tmp.md -t markdown_github \
+	     --filter github-mangle.py \
 	     -o README.md
+	rm -f README.tmp.md
 
 index.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \

@@ -4,3 +4,4 @@ TESTING/NCPoly/TestResults/*.GB
 DOCUMENTATION/NCDocument.tex
 DOCUMENTATION/NCDocument.b*
 DOCUMENTATION/NCDocument.run*
+DOCUMENTATION/pandoc.idx
