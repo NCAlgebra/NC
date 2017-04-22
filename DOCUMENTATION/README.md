@@ -31,10 +31,10 @@
     -   [Simplifying rational expresions](#simplifying-rational-expresions)
     -   [Simplification with `NCGBSimplifyRational`](#simplification-with)
     -   [Ordering on variables and monomials](#ordering-on-variables-and-monomials)
-        -   [Lex Order: the simplest elimination order](#lex-order-the-simplest-elimination-order)
-        -   [Graded lex ordering: a non-elimination order](#graded-lex-ordering-a-non-elimination-order)
-        -   [Multigraded lex ordering : a variety of elimination orders](#multigraded-lex-ordering-a-variety-of-elimination-orders)
-    -   [A complete example: the partially prescribed matrix inverse problem](#a-complete-example-the-partially-prescribed-matrix-inverse-problem)
+        -   [Lex Order: the simplest elimination order](#lex-order:-the-simplest-elimination-order)
+        -   [Graded lex ordering: a non-elimination order](#graded-lex-ordering:-a-non-elimination-order)
+        -   [Multigraded lex ordering: a variety of elimination orders](#multigraded-lex-ordering:-a-variety-of-elimination-orders)
+    -   [A complete example: the partially prescribed matrix inverse problem](#a-complete-example:-the-partially-prescribed-matrix-inverse-problem)
 -   [Semidefinite Programming](#semidefinite-programming)
     -   [Semidefinite Programs in Matrix Variables](#semidefinite-programs-in-matrix-variables)
     -   [Semidefinite Programs in Vector Variables](#semidefinite-programs-in-vector-variables)
@@ -143,7 +143,7 @@
         -   [NCLUCompletePivoting](#nclucompletepivoting)
         -   [NCLeftDivide](#ncleftdivide)
         -   [NCRightDivide](#ncrightdivide)
-    -   [MatrixDecompositions: linear algebra templates](#matrixdecompositions-linear-algebra-templates)
+    -   [MatrixDecompositions: linear algebra templates](#matrixdecompositions:-linear-algebra-templates)
         -   [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting)
         -   [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting)
         -   [LDLDecomposition](#ldldecomposition)
@@ -255,14 +255,14 @@
         -   [SDPEval](#sdpeval)
         -   [SDPPrimalEval](#sdpprimaleval)
         -   [SDPDualEval](#sdpdualeval)
-        -   [SDPSylvesterEval](#sdpsylvestereval)
+        -   [SDPSylvesterEval](#sdpeval-1)
     -   [SDPFlat](#sdpflat)
         -   [SDPFlatData](#sdpflatdata)
         -   [SDPFlatPrimalEval](#sdpflatprimaleval)
         -   [SDPFlatDualEval](#sdpflatdualeval)
         -   [SDPFlatSylvesterEval](#sdpflatsylvestereval)
     -   [SDPSylvester](#sdpsylvester)
-        -   [SDPEval](#sdpsylvestereval)
+        -   [SDPEval](#sdpeval-1)
         -   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
         -   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
         -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
@@ -364,7 +364,7 @@ Version 5.0.0
 4.  New algorithms for representing and operating with noncommutative polynomials with noncommutative coefficients ([NCPolynomial](#ncpolynomial)) with specialized facilities for noncommutative quadratic polynomials ([NCQuadratic](#ncquadratic)) and noncommutative linear polynomials ([NCSylvester](#ncsylvester)).
 5.  Modified behavior of `CommuteEverything` (see important notes in [CommuteEverything](#commuteeverything)).
 6.  Improvements and consolidation of noncommutative calculus in the package [NCDiff](#ncdiff).
-7.  Added a complete set of linear algebra algorithms in the new package [MatrixDecompositions](#matrixdecompositions-linear-algebra-templates) and their noncommutative versions in the new package [NCMatrixDecompositions](#ncmatrixdecompositions).
+7.  Added a complete set of linear algebra algorithms in the new package [MatrixDecompositions](#matrixdecompositions:-linear-algebra-templates) and their noncommutative versions in the new package [NCMatrixDecompositions](#ncmatrixdecompositions).
 8.  General improvements on the Semidefinite Programming package [NCSDP](#ncsdp).
 9.  New algorithms for simplification of noncommutative rationals ([NCSimplifyRational](#ncsylvester)).
 10. Commands `Transform`, `Substitute`, `SubstituteSymmetric`, etc, have been replaced by the much more reliable commands in the new package [NCReplace](#ncreplace).
@@ -925,7 +925,7 @@ In previous versions one had to use the special commands `tpMat`, `ajMat`, and `
 
 Behind `NCInverse` there are a host of linear algebra algorithms which are available in the package:
 
--   [`NCMatrixDecompositions`](#ncmatrixdecompositions): implements versions of the *L**U* Decomposition with partial and complete pivoting, as well as *L**D**L* Decomposition which are suitable for calculations with nc matrices. Those functions are based on the templated algorithms from the package [`MatrixDecompositions`](#matrixdecompositions-linear-algebra-templates).
+-   [`NCMatrixDecompositions`](#ncmatrixdecompositions): implements versions of the *L**U* Decomposition with partial and complete pivoting, as well as *L**D**L* Decomposition which are suitable for calculations with nc matrices. Those functions are based on the templated algorithms from the package [`MatrixDecompositions`](#matrixdecompositions:-linear-algebra-templates).
 
 For instance the function [`NCLUDecompositionWithPartialPivoting`](#ncludecompositionwithpartialpivoting) can be used as
 
@@ -1944,7 +1944,7 @@ which should produces an output similar to:
     * * * * * * * * * * * * * * * *
     * * *   NCPolyGroebner    * * *
     * * * * * * * * * * * * * * * *
-    * Monomial order : a < b < c << x
+    * Monomial order: a < b < c << x
     * Reduce and normalize initial set
     > Initial set could not be reduced
     * Computing initial set of obstructions
@@ -2041,7 +2041,7 @@ which produces the output
     * * * * * * * * * * * * * * * *
     * * *   NCPolyGroebner    * * *
     * * * * * * * * * * * * * * * *
-    * Monomial order : a << b
+    * Monomial order: a << b
     * Reduce and normalize initial set
     > Initial set could not be reduced
     * Computing initial set of obstructions
@@ -2088,7 +2088,7 @@ which produces the output
     * * * * * * * * * * * * * * * *
     * * *   NCPolyGroebner    * * *
     * * * * * * * * * * * * * * * *
-    * Monomial order : x <<  inv[x] << inv[1 - x]
+    * Monomial order: x <<  inv[x] << inv[1 - x]
     * Reduce and normalize initial set
     > Initial set could not be reduced
     * Computing initial set of obstructions
@@ -2253,7 +2253,7 @@ now produces
 
 which again fails to be a Gröbner basis and does not eliminate *y*. Instead, it tries to decrease the total degree of expressions involving *a*, *b*, *x*, and *y*.
 
-### Multigraded lex ordering : a variety of elimination orders
+### Multigraded lex ordering: a variety of elimination orders
 
 There are other useful monomial orders which one can use other than graded lex and lex. Another type of order is what we call multigraded lex and is a mixture of graded lex and lex order. To impose multi-graded lexicographic order, say *a* &lt; *b* &lt; *x* ≪ *y* on *a*, *b*, *x* and *y*, one types
 
@@ -3822,9 +3822,9 @@ See also: [NCInverse](#ncinverse), [NCDot](#ncdot-1).
 NCMatrixDecompositions
 ----------------------
 
-`NCMatrixDecompositions` provide noncommutative versions of the linear algebra algorithms in the package [MatrixDecompositions](#matrixdecompositions-linear-algebra-templates).
+`NCMatrixDecompositions` provide noncommutative versions of the linear algebra algorithms in the package [MatrixDecompositions](#matrixdecompositions:-linear-algebra-templates).
 
-See the documentation for the package [MatrixDecompositions](#matrixdecompositions-linear-algebra-templates) for details on the algorithms and options.
+See the documentation for the package [MatrixDecompositions](#matrixdecompositions:-linear-algebra-templates) for details on the algorithms and options.
 
 Members are:
 
@@ -6129,7 +6129,7 @@ Members are:
 -   [SDPPrimalEval](#sdpprimaleval)
 -   [SDPEval](#sdpeval)
 -   [SDPDualEval](#sdpdualeval)
--   [SDPSylvesterEval](#sdpsylvestereval)
+-   [SDPSylvesterEval](#sdpeval-1)
 
 ### SDPMatrices
 
@@ -6311,7 +6311,7 @@ $$
 
 Members are:
 
--   [SDPEval](#sdpsylvestereval)
+-   [SDPEval](#sdpeval-1)
 -   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
 -   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
 -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
@@ -6328,7 +6328,7 @@ See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval), [SDPSylvesterDualEv
 
 `SDPSylvesterPrimalEval[a, y]` evaluates the linear function $A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T$ in an `SDPSylvester`.
 
-See [SDPSylvesterEval](#sdpsylvestereval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
+See [SDPSylvesterEval](#sdpeval-1) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
 See also: [SDPSylvesterDualEval](#sdpsylvesterdualeval), [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval).
 
