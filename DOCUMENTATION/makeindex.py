@@ -18,10 +18,10 @@ def create_anchor(level, link, text):
     anchor = re.sub('\s+', '-', anchor)
     anchor = re.sub('\-+$', '', anchor)
 
-    if link not in anchors:
-        anchors[link] = [[level, anchor, re.sub('\t','\\t',text)]]
+    if anchor not in anchors:
+        anchors[anchor] = [[level, link, re.sub('\t','\\t',text)]]
     else:
-        anchors[link].append([level, anchor, re.sub('\t','\\t',text)])
+        anchors[anchor].append([level, link, re.sub('\t','\\t',text)])
     
 def filter(key, value, format, meta):
     if key == 'Header':
@@ -47,18 +47,18 @@ if __name__ == "__main__":
 
     # then save to file
     with open('pandoc.idx','w') as f:
-        for (k,v) in anchors.items():
-            if len(v) == 1:
+        for (anchor,values) in anchors.items():
+            if len(values) == 1:
                 # single anchor
-                level, anchor, text = v[0]
+                level, link, text = values[0]
                 f.write('{}\t{}\t{}\t{}\n'.format(level,
-                                                  k,
+                                                  link,
                                                   anchor,
                                                   text))
                         
-            elif len(v) > 1:
-                for (i,(level, anchor, text)) in enumerate(v):
+            elif len(values) > 1:
+                for (i,(level, link, text)) in enumerate(values):
                     f.write('{}\t{}\t{}\t{}\n'.format(level,
-                                                      k + '-' + str(i+1),
-                                                      anchor,
+                                                      link,
+                                                      anchor + '-' + str(i+1),
                                                       text))
