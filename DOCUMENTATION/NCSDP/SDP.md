@@ -21,7 +21,6 @@ Members are:
 * [SDPSolve](#SDPSolve)
 * [SDPEval](#SDPEval)
 * [SDPPrimalEval](#SDPPrimalEval)
-* [SDPEval](#SDPEval)
 * [SDPDualEval](#SDPDualEval)
 * [SDPSylvesterEval](#SDPSylvesterEval)
 

@@ -262,7 +262,7 @@
         -   [SDPFlatDualEval](#sdpflatdualeval)
         -   [SDPFlatSylvesterEval](#sdpflatsylvestereval)
     -   [SDPSylvester](#sdpsylvester)
-        -   [SDPEval](#sdpsylvestereval)
+        -   [SDPEval](#sdpeval-1)
         -   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
         -   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
         -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
@@ -6127,7 +6127,6 @@ Members are:
 -   [SDPSolve](#sdpsolve)
 -   [SDPEval](#sdpeval)
 -   [SDPPrimalEval](#sdpprimaleval)
--   [SDPEval](#sdpeval)
 -   [SDPDualEval](#sdpdualeval)
 -   [SDPSylvesterEval](#sdpsylvestereval)
 
@@ -6311,7 +6310,7 @@ $$
 
 Members are:
 
--   [SDPEval](#sdpsylvestereval)
+-   [SDPEval](#sdpeval-1)
 -   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
 -   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
 -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)

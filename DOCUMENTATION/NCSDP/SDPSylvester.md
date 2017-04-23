@@ -13,12 +13,12 @@ where $S$ is a symmetric positive semidefinite matrix and $y = \{ y_1, \ldots, y
 
 Members are:
 
-* [SDPEval](#SDPSylvesterEval)
+* [SDPEval](#SDPSylvesterSDPEval)
 * [SDPSylvesterPrimalEval](#SDPSylvesterPrimalEval)
 * [SDPSylvesterDualEval](#SDPSylvesterDualEval)
 * [SDPSylvesterSylvesterEval](#SDPSylvesterSylvesterEval)
 
-### SDPEval {#SDPSylvesterEval}
+### SDPEval {#SDPSylvesterSDPEval}
 
 `SDPEval[A, y]` evaluates the linear function $A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T$ in an `SDPSylvester`.
 
