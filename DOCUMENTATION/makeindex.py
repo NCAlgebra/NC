@@ -33,6 +33,8 @@ def filter(key, value, format, meta):
                 string += v['c']
             elif v['t'] == 'Space':
                 string += ' '
+            elif v['t'] == 'Code':
+                string += '`' + v['c'][1] + '`'
                 
         create_anchor(value[0],
                       value[1][0],

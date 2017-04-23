@@ -29,7 +29,7 @@
     -   [A slightly more challenging example](#a-slightly-more-challenging-example)
     -   [Simplifying polynomial expresions](#simplifying-polynomial-expresions)
     -   [Simplifying rational expresions](#simplifying-rational-expresions)
-    -   [Simplification with `NCGBSimplifyRational`](#simplification-with)
+    -   [Simplification with `NCGBSimplifyRational`](#simplification-with-ncgbsimplifyrational)
     -   [Ordering on variables and monomials](#ordering-on-variables-and-monomials)
         -   [Lex Order: the simplest elimination order](#lex-order-the-simplest-elimination-order)
         -   [Graded lex ordering: a non-elimination order](#graded-lex-ordering-a-non-elimination-order)
@@ -255,14 +255,14 @@
         -   [SDPEval](#sdpeval)
         -   [SDPPrimalEval](#sdpprimaleval)
         -   [SDPDualEval](#sdpdualeval)
-        -   [SDPSylvesterEval](#sdpsylvestereval)
+        -   [SDPSylvesterEval](#sdpeval-1)
     -   [SDPFlat](#sdpflat)
         -   [SDPFlatData](#sdpflatdata)
         -   [SDPFlatPrimalEval](#sdpflatprimaleval)
         -   [SDPFlatDualEval](#sdpflatdualeval)
         -   [SDPFlatSylvesterEval](#sdpflatsylvestereval)
     -   [SDPSylvester](#sdpsylvester)
-        -   [SDPEval](#sdpsylvestereval)
+        -   [SDPEval](#sdpeval-1)
         -   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
         -   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
         -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
@@ -6129,7 +6129,7 @@ Members are:
 -   [SDPPrimalEval](#sdpprimaleval)
 -   [SDPEval](#sdpeval)
 -   [SDPDualEval](#sdpdualeval)
--   [SDPSylvesterEval](#sdpsylvestereval)
+-   [SDPSylvesterEval](#sdpeval-1)
 
 ### SDPMatrices
 
@@ -6311,7 +6311,7 @@ $$
 
 Members are:
 
--   [SDPEval](#sdpsylvestereval)
+-   [SDPEval](#sdpeval-1)
 -   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
 -   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
 -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
@@ -6328,7 +6328,7 @@ See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval), [SDPSylvesterDualEv
 
 `SDPSylvesterPrimalEval[a, y]` evaluates the linear function $A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T$ in an `SDPSylvester`.
 
-See [SDPSylvesterEval](#sdpsylvestereval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
+See [SDPSylvesterEval](#sdpeval-1) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
 See also: [SDPSylvesterDualEval](#sdpsylvesterdualeval), [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval).
 
