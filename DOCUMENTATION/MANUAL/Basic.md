@@ -485,7 +485,7 @@ returns the nc gradient list
 **Version 5:** introduces experimental support for integration of nc
 polynomials. See [`NCIntegrate`](#NCIntegrate).
 
-## Matrices
+## Matrices {#BasicMatrices}
 
 `NCAlgebra` has many commands for manipulating matrices with
 noncommutative entries. Think block-matrices. Matrices are

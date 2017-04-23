@@ -118,7 +118,7 @@ which should produces an output similar to:
 	* * * * * * * * * * * * * * * *
 	* * *   NCPolyGroebner    * * *
 	* * * * * * * * * * * * * * * *
-	* Monomial order : a < b < c << x
+	* Monomial order: a < b < c << x
 	* Reduce and normalize initial set
 	> Initial set could not be reduced
 	* Computing initial set of obstructions
@@ -244,7 +244,7 @@ which produces the output
 	* * * * * * * * * * * * * * * *
 	* * *   NCPolyGroebner    * * *
 	* * * * * * * * * * * * * * * *
-	* Monomial order : a << b
+	* Monomial order: a << b
 	* Reduce and normalize initial set
 	> Initial set could not be reduced
 	* Computing initial set of obstructions
@@ -301,7 +301,7 @@ which produces the output
 	* * * * * * * * * * * * * * * *
 	* * *   NCPolyGroebner    * * *
 	* * * * * * * * * * * * * * * *
-	* Monomial order : x <<  inv[x] << inv[1 - x]
+	* Monomial order: x <<  inv[x] << inv[1 - x]
 	* Reduce and normalize initial set
 	> Initial set could not be reduced
 	* Computing initial set of obstructions
@@ -360,7 +360,7 @@ which succesfully simplifyes the original expression using:
 
 resulting in `0`.
 
-## Simplification with `NCGBSimplifyRational`
+## Simplification with NCGBSimplifyRational
 
 The simplification process described above is automated in the
 function [NCGBSimplifyRational](#NCGBSimplifyRational). 
@@ -495,7 +495,7 @@ which again fails to be a Gröbner basis and does not eliminate
 $y$. Instead, it tries to decrease the total degree of expressions
 involving $a$, $b$, $x$, and $y$.
 
-### Multigraded lex ordering : a variety of elimination orders 
+### Multigraded lex ordering: a variety of elimination orders 
 
 There are other useful monomial orders which one can use other than
 graded lex and lex.  Another type of order is what we call multigraded
