@@ -70,9 +70,11 @@ def filter(key, value, format, meta):
         par = False
         if value[0]['t'] == 'InlineMath':
             formula = '$' + value[1] + '$'
+            caption = value[1]
         else:
             par = True
             formula = r'\begin{align*}' + value[1] + r'\end{align*}'
+            caption = ''
                 
         # typeset formula
         count += 1
@@ -80,7 +82,7 @@ def filter(key, value, format, meta):
 
         # replace by image
         return Image(['', [], []],
-                     [Str(value[1])],
+                     [Str(caption)],
                      [base_url + version + '/eqn_{}.png'.format(count), ''])
 
 

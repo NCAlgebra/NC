@@ -1587,53 +1587,14 @@ constructs `NCPolynomial` objects representing the polynomial matrices `mat1` an
 
     NCPolynomialToNC[p1**p2] - NCDot[mat1, mat2] // NCExpand
 
-is zero as expected. Internally `NCPolynomial` represents a polynomial matrix by constructing matrix factors. For example the representation of the matrix `mat1` correspond to the factors ![ 
-\\begin{aligned}
-\\begin{bmatrix}
-    a x + x a^T + c y + y^T c^T - x q x & b x \\\\ 
-    x b^T & 1
-\\end{bmatrix} 
-&=
-\\begin{bmatrix} 0 & 0 \\\\ 0 & 1 \\end{bmatrix}
-+
-\\begin{bmatrix} a \\\\ 0 \\end{bmatrix}
-x
-\\begin{bmatrix} 1 & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}
-x
-\\begin{bmatrix} a^T & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} -1 \\\\ 0 \\end{bmatrix}
-x q x
-\\begin{bmatrix} 1 & 0 \\end{bmatrix}
-+ \\\\ & \\qquad \\quad
-\\begin{bmatrix} b \\\\ 0 \\end{bmatrix}
-x
-\\begin{bmatrix} 0 & 1 \\end{bmatrix}
-+
-\\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}
-x
-\\begin{bmatrix} b^T & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} c \\\\ 0 \\end{bmatrix}
-y
-\\begin{bmatrix} 1 & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}
-y^T
-\\begin{bmatrix} c^T & 0 \\end{bmatrix}
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_38.png)
+is zero as expected. Internally `NCPolynomial` represents a polynomial matrix by constructing matrix factors. For example the representation of the matrix `mat1` correspond to the factors ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_38.png)
 
 See section [linear functions](#linear-polynomials) for more features on linear polynomial matrices.
 
 Quadratic polynomials
 ---------------------
 
-When working with nc quadratics it is useful to be able to factor the quadratic into the following form ![
-    q(x) = c + s(x) + l(x) M r(x)
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_39.png) where ![s](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_40.png) is linear ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_41.png) and ![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_42.png) and ![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_43.png) are vectors and ![M](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_44.png) is a matrix. Load the package
+When working with nc quadratics it is useful to be able to factor the quadratic into the following form ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_39.png) where ![s](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_40.png) is linear ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_41.png) and ![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_42.png) and ![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_43.png) are vectors and ![M](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_44.png) is a matrix. Load the package
 
     << NCQuadratic`
 
@@ -1679,13 +1640,7 @@ produces
     right = {h**x**x, h**x, h}
     middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
 
-Note that the middle matrix ![
-\\begin{bmatrix}
-2 & 2 x & 2 x^2 \\\\
-0 & 2 & 2 x \\\\
-0 & 0 & 2
-\\end{bmatrix}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_45.png) is not *symmetric*, as one might have expected. The command [`NCQuadraticMakeSymmetric`](#ncquadraticmakesymmetric) can fix that and produce a symmetric decomposition. For the above example
+Note that the middle matrix ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_45.png) is not *symmetric*, as one might have expected. The command [`NCQuadraticMakeSymmetric`](#ncquadraticmakesymmetric) can fix that and produce a symmetric decomposition. For the above example
 
     {const, lin, sleft, smiddle, sright} = 
       NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
@@ -1697,13 +1652,7 @@ results in
     sright = {h**x**x, h**x, h}
     middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
 
-in which `middle` is the symmetric matrix ![
-\\begin{bmatrix}
-0 & 0 & 2 \\\\
-0 & 2 & 2 x \\\\
-2 & 2 x & 2 x^2
-\\end{bmatrix}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_46.png) Note the argument `SymmetricVariables -> {x,h}` which tells `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric variables. Because the `middle` matrix is never positive semidefinite for any possible value of ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_47.png) the conclusion[6] is that the nc quartic ![x^4](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_49.png) is *not convex*.
+in which `middle` is the symmetric matrix ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_46.png) Note the argument `SymmetricVariables -> {x,h}` which tells `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric variables. Because the `middle` matrix is never positive semidefinite for any possible value of ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_47.png) the conclusion[6] is that the nc quartic ![x^4](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_49.png) is *not convex*.
 
 The production of such symmetric quadratic decompositions is automated by the convenience command [`NCMatrixOfQuadratic`](#ncmatrixofquadratic). Verify that
 
@@ -1723,17 +1672,7 @@ The resulting middle matrix can be factored using
     {ldl, p, s, rank} = NCLDLDecomposition[middle];
     {ll, dd, uu} = GetLDUMatrices[ldl, s];
 
-which produces the diagonal factors ![
-\\begin{bmatrix}
-  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\\\
-  0 & 0 & 0 \\\\
-  0 & 0 & 0
-\\end{bmatrix}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_50.png) which indicates the the original nc rational is convex whenever ![
-(1 + b y + y b - a x a)^{-1} \\succeq 0
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_51.png) or, equivalently, whenever ![
-1 + b y + y b - a x a \\succeq 0
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_52.png) The above sequence of calculations is automated by the command [`NCConvexityRegion`](#ncconvexityregion) as in
+which produces the diagonal factors ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_50.png) which indicates the the original nc rational is convex whenever ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_51.png) or, equivalently, whenever ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_52.png) The above sequence of calculations is automated by the command [`NCConvexityRegion`](#ncconvexityregion) as in
 
     << NCConvexity`
     NCConvexityRegion[expr, {x}]
@@ -1747,9 +1686,7 @@ which correspond to the diagonal entries of the LDL decomposition of the middle 
 Linear polynomials
 ------------------
 
-Another interesting class of nc polynomials is that of linear polynomials, which can be factor in the form: ![
-    s(x) = l (F \\otimes x) r
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_53.png) where ![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_54.png) and ![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_55.png) are vectors with symbolic expressions and ![F](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_56.png) is a numeric matrix. This functionality is in the package
+Another interesting class of nc polynomials is that of linear polynomials, which can be factor in the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_53.png) where ![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_54.png) and ![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_55.png) are vectors with symbolic expressions and ![F](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_56.png) is a numeric matrix. This functionality is in the package
 
     << NCSylvester`
 
@@ -1773,12 +1710,7 @@ returns a list with the left and right vectors `l` and `r` and the coefficient a
 
 which in this case is the matrix:
 
-![
-\\begin{bmatrix}
-    -1 & 1\\\\
-    1 & 0
-\\end{bmatrix}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_57.png)
+![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_57.png)
 
 and
 
@@ -1840,27 +1772,11 @@ if `NC` and `NCAlgebra` have already been loaded.
 What is a Gröbner Basis?
 ------------------------
 
-Most commutative algebra packages contain commands based on Gröbner Basis and uses of Gröbner Basis. For example, in Mathematica, the `Solve` command puts collections of equations in a *canonical form* which, for simple collections, readily yields a solution. Likewise, the Mathematica `Eliminate` command tries to convert a collection of ![m](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_59.png) polynomial equations (often called relations) ![
-    \\begin{aligned}
-    p\_1(x\_1,\\ldots,x\_n) &= 0 \\\\
-    p\_2(x\_1,\\ldots,x\_n) &= 0 \\\\
-    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
-    p\_m(x\_1,\\ldots,x\_n) &= 0
-    \\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_60.png)
+Most commutative algebra packages contain commands based on Gröbner Basis and uses of Gröbner Basis. For example, in Mathematica, the `Solve` command puts collections of equations in a *canonical form* which, for simple collections, readily yields a solution. Likewise, the Mathematica `Eliminate` command tries to convert a collection of ![m](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_59.png) polynomial equations (often called relations) ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_60.png)
 
 in variables ![x\_1,x\_2, \\ldots x\_n](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_61.png) to a *triangular* form, that is a new collection of equations like
 
-![
-\\begin{aligned}
-    q\_1(x\_1) &= 0 \\\\
-    q\_2(x\_1,x\_2) &= 0 \\\\
-    q\_3(x\_1,x\_2) &= 0 \\\\
-    q\_4(x\_1,x\_2,x\_3)&=0 \\\\
-    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
-    q\_{r}(x\_1,\\ldots,x\_n) &= 0.
-    \\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_62.png) Here the polynomials ![\\{q\_j: 1\\le j\\le k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_63.png) generate the same *ideal* that the polynomials ![\\{p\_j : 1\\le j \\le k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_64.png) generate. Therefore, the set of solutions to the collection of polynomial equations ![\\{p\_j=0: 1\\le j\\le k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_65.png) equals the set of solutions to the collection of polynomial equations ![\\{q\_j=0: 1\\le j\\le k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_66.png). This canonical form greatly simplifies the task of solving collections of polynomial equations by facilitating backsolving for ![x\_j](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_67.png) in terms of ![x\_1,\\ldots,x\_{j-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_68.png).
+![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_62.png) Here the polynomials ![\\{q\_j: 1\\le j\\le k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_63.png) generate the same *ideal* that the polynomials ![\\{p\_j : 1\\le j \\le k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_64.png) generate. Therefore, the set of solutions to the collection of polynomial equations ![\\{p\_j=0: 1\\le j\\le k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_65.png) equals the set of solutions to the collection of polynomial equations ![\\{q\_j=0: 1\\le j\\le k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_66.png). This canonical form greatly simplifies the task of solving collections of polynomial equations by facilitating backsolving for ![x\_j](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_67.png) in terms of ![x\_1,\\ldots,x\_{j-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_68.png).
 
 Readers who would like to know more about Gröbner Basis may want to read \[CLS\]. The noncommutatative version of the algorithm implemented by `NCGB` is loosely based on \[Mora\].
 
@@ -1875,15 +1791,9 @@ The monomial ordering imposes a relationship between the variables which are use
 
     PrintMonomialOrder[];
 
-which in this case prints: ![a &lt; b &lt; c \\ll x.](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_69.png) A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see soon, in many engineering problems, it suffices to know which variables correspond to quantities which are *known* and which variables correspond to quantities which are *unknown*. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as *unknown*. In the above example, the symbol '![\\ll](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_70.png)' separate the *knowns*, ![a, b, c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_71.png), from the *unknown*, ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_72.png). For more details on orderings see Section [Orderings](#ordering-on-variables-and-monomials).
+which in this case prints: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_69.png) A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see soon, in many engineering problems, it suffices to know which variables correspond to quantities which are *known* and which variables correspond to quantities which are *unknown*. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as *unknown*. In the above example, the symbol '![\\ll](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_70.png)' separate the *knowns*, ![a, b, c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_71.png), from the *unknown*, ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_72.png). For more details on orderings see Section [Orderings](#ordering-on-variables-and-monomials).
 
-Our goal is to calculate the Gröbner basis associated with the following relations (i.e. a list of polynomials): ![
-\\begin{aligned}
-    a \\, x \\, a &= c, &
-    a \\, b &= 1, &
-    b \\, a &= 1.
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_73.png) We shall use the word *relation* to mean a polynomial in noncommuting indeterminates. For example, if an analyst saw the equation ![A B = 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_74.png) for matrices ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_75.png) and ![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_76.png), then he might say that ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_77.png) and ![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_78.png) satisfy the polynomial equation ![a\\, b - 1 = 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_79.png). An algebraist would say that ![a\\, b - 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_80.png) is a relation.
+Our goal is to calculate the Gröbner basis associated with the following relations (i.e. a list of polynomials): ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_73.png) We shall use the word *relation* to mean a polynomial in noncommuting indeterminates. For example, if an analyst saw the equation ![A B = 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_74.png) for matrices ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_75.png) and ![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_76.png), then he might say that ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_77.png) and ![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_78.png) satisfy the polynomial equation ![a\\, b - 1 = 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_79.png). An algebraist would say that ![a\\, b - 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_80.png) is a relation.
 
 To calculate a Gröbner basis one defines a list of relations:
 
@@ -1928,16 +1838,7 @@ which results in
 
 The *rules* in the output represent the relations in the GB with the left-hand side of the rule being the leading monomial. Replacing `Rule` by `Subtract` recovers the relations but one would then loose the leading monomial as Mathematica alphabetizes the resulting sum.
 
-Someone not familiar with GB's might find it instructive to note this output GB effectively *solves* the input equation ![
-    a \\, x \\, a - c = 0
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_81.png) under the assumptions that ![
-\\begin{aligned}
-    b \\, a - 1 &= 0, &
-    a \\, b - 1 & =0,
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_82.png) that is ![a = b^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_83.png) and produces the expected result in the form of the relation: ![
-    x = b \\, c \\, b.
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_84.png)
+Someone not familiar with GB's might find it instructive to note this output GB effectively *solves* the input equation ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_81.png) under the assumptions that ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_82.png) that is ![a = b^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_83.png) and produces the expected result in the form of the relation: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_84.png)
 
 A slightly more challenging example
 -----------------------------------
@@ -1950,13 +1851,7 @@ that is
 
 ![a &lt; b &lt; c \\ll x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_85.png)
 
-and the relations: ![
-\\begin{aligned}
-  a \\, x - c &= 0, \\\\
-  a \\, b \\, a - a &= 0, \\\\
-  b \\, a \\, b - b &= 0,
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_86.png) from which one can recognize the problem of solving the linear equation ![a \\, x = c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_87.png) in terms of the *pseudo-inverse* ![b = a^\\dag](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_88.png). The calculation:
+and the relations: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_86.png) from which one can recognize the problem of solving the linear equation ![a \\, x = c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_87.png) in terms of the *pseudo-inverse* ![b = a^\\dag](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_88.png). The calculation:
 
     gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
 
@@ -1967,18 +1862,12 @@ finds the Gröbner basis:
     a ** b ** a -> a 
     b ** a ** b -> b
 
-In this case the Gröbner basis cannot quite *solve* the equations but it remarkably produces the necessary condition for existence of solutions: ![ 
-    0 = a \\, b \\, c - c = a \\, a^\\dag c - c 
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_89.png) that can be interpreted as ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_90.png) being in the range-space of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_91.png).
+In this case the Gröbner basis cannot quite *solve* the equations but it remarkably produces the necessary condition for existence of solutions: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_89.png) that can be interpreted as ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_90.png) being in the range-space of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_91.png).
 
 Simplifying polynomial expresions
 ---------------------------------
 
-Our goal now is to verify if it is possible to *simplify* the following expression: ![
-b \\, b \\, a \\, a - a \\, a \\, b \\, b + a \\, b \\, a
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_92.png) if we know that ![
-a \\, b \\, a = b
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_93.png) using Gröbner basis. With that in mind we set the order:
+Our goal now is to verify if it is possible to *simplify* the following expression: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_92.png) if we know that ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_93.png) using Gröbner basis. With that in mind we set the order:
 
     SetMonomialOrder[a,b];
 
@@ -2018,11 +1907,9 @@ which results in
 Simplifying rational expresions
 -------------------------------
 
-It is often desirable to simplify expressions involving inverses of noncommutative expressions. One challenge is to recognize identities implied by the existence of certain inverses. For example, that the expression ![
-    x (1 - x)^{-1} - (1 - x)^{-1} x
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_95.png) is equivalent to ![0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_96.png). One can use a nc Gröbner basis for that task. Consider for instance the order
+It is often desirable to simplify expressions involving inverses of noncommutative expressions. One challenge is to recognize identities implied by the existence of certain inverses. For example, that the expression ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_95.png) is equivalent to ![0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_96.png). One can use a nc Gröbner basis for that task. Consider for instance the order
 
-![ x \\ll (1-x)^{-1} ](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_97.png)
+![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_97.png)
 
 implied by the command:
 
@@ -2059,9 +1946,7 @@ As in the previous example, the GB revealed new relationships that must hold tru
 
 The above command results in `0`, as one would hope.
 
-For a more challenging example consider the identity: ![
-\\left (1 - x - y (1 - x)^{-1} y \\right )^{-1} = \\frac{1}{2} (1 - x - y)^{-1} + \\frac{1}{2} (1 - x + y)^{-1}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_101.png) One can verify that the rule based command [NCSimplifyRational](#ncsimplifyrational-1) fails to simplify the expression:
+For a more challenging example consider the identity: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_101.png) One can verify that the rule based command [NCSimplifyRational](#ncsimplifyrational-1) fails to simplify the expression:
 
     expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
     NCSimplifyRational[expr]
@@ -2126,13 +2011,7 @@ This order is useful for attempting to solve for ![y](http://math.ucsd.edu/~ncal
 
 Once this order is set, one can use all of the commands in the preceeding section in exactly the same form.
 
-We now give a simple example how one can solve for ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_113.png) given that ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_114.png),![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_115.png),![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_116.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_117.png) satisfy the equations: ![
-\\begin{aligned}
--b\\, x + x\\, y  \\, a + x\\, b \\, a \\,  a &= 0 \\\\
-x \\, a-1&=0 \\\\
-a\\, x-1&=0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_118.png)
+We now give a simple example how one can solve for ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_113.png) given that ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_114.png),![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_115.png),![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_116.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_117.png) satisfy the equations: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_118.png)
 
 The command
 
@@ -2231,11 +2110,7 @@ A complete example: the partially prescribed matrix inverse problem
 
 This is a type of problem known as a *matrix completion problem*. This particular one was suggested by Hugo Woerdeman. We are grateful to him for discussions.
 
-**Problem:** *Given matrices ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_153.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_154.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_155.png), and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_156.png), we wish to determine under what conditions there exists matrices x, y, z, and w such that the block matrices* ![  
-  \\begin{bmatrix} a & x \\\\ y & b \\end{bmatrix}
-  \\qquad 
-  \\begin{bmatrix} w & c \\\\ d & z \\end{bmatrix}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_157.png) *are inverses of each other. Also, we wish to find formulas for ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_158.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_159.png), ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_160.png), and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_161.png).*
+**Problem:** *Given matrices ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_153.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_154.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_155.png), and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_156.png), we wish to determine under what conditions there exists matrices x, y, z, and w such that the block matrices* ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_157.png) *are inverses of each other. Also, we wish to find formulas for ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_158.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_159.png), ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_160.png), and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_161.png).*
 
 This problem was solved in a paper by W.W. Barrett, C.R. Johnson, M. E. Lundquist and H. Woerderman \[BJLW\] where they showed it splits into several cases depending upon which of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_162.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_163.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_164.png) and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_165.png) are invertible. In our example, we assume that ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_166.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_167.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_168.png) and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_169.png) are invertible and discover the result which they obtain in this case.
 
@@ -2279,14 +2154,7 @@ we obtain the Gröbner basis:
     z**inv[c]**inv[a]**inv[d]**z -> inv[b]+inv[b]**inv[c]**inv[a]**inv[d]**z
     d**a**c**b**z**inv[c] -> z**b**d**a
 
-after seven iterations. The first four relations ![
-\\begin{aligned}
-    x &= d^{-1}-d^{-1} \\, z \\, b \\\\
-    y &= c^{-1}-b \\, z \\, c^{-1} \\\\
-    w &= a^{-1} \\, d^{-1}  \\, z \\, b \\, d \\\\
-    z \\, b \\, z &= z + d \\, a \\, c
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_182.png)
+after seven iterations. The first four relations ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_182.png)
 are the solutions we are looking for, which states that one can find ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_183.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_184.png), ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_185.png), and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_186.png) such that the matrices above are inverses of each other if and only if ![z \\, b \\, z = z + d \\, a \\, c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_187.png). The first three relations gives formulas for ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_188.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_189.png) and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_190.png) in terms of ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_191.png).
 
 A variety of scenarios can be quickly investigated under different assumptions. For example, say that ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_192.png) is not invertible. Is it still possible to solve the problem? One solution is obtained with the ordering implied by
@@ -2310,14 +2178,7 @@ produces the Gröbner basis:
     y**c**b**d**a -> b**d**a**c**y
     y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
 
-after five iterations. Once again, the first four relations ![
-\\begin{aligned}
-    z &= b^{-1}-b^{-1} \\, y \\, c \\\\
-    w &= a^{-1}-c \\, y \\, a^{-1} \\\\
-    x &= a \\, c \\, y \\, a^{-1} \\, d^{-1} \\\\
-    y \\, c \\, y &= y+b \\, d \\, a
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_193.png)
+after five iterations. Once again, the first four relations ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_193.png)
 provide formulas, this time for ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_194.png), ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_195.png), and ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_196.png) in terms of ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_197.png) satisfying ![y \\, c \\, y = y+b \\, d \\, a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_198.png). Note that these formulas do not involve ![c^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_199.png) since ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_200.png) is no longer assumed invertible.
 
 Semidefinite Programming
@@ -2340,29 +2201,13 @@ After loading NCAlgebra, the package NCSDP must be loaded using:
 
     << NCSDP`
 
-Semidefinite programs consist of symbolic noncommutative expressions representing inequalities and a list of rules for data replacement. For example the semidefinite program: ![
-\\begin{aligned}
-\\min\_Y \\quad & &lt;I,Y&gt; \\\\
-\\text{s.t.} \\quad & A Y + Y A^T + I \\preceq 0 \\\\
-            & Y \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_201.png) can be solved by defining the noncommutative expressions
+Semidefinite programs consist of symbolic noncommutative expressions representing inequalities and a list of rules for data replacement. For example the semidefinite program: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_201.png) can be solved by defining the noncommutative expressions
 
     SNC[a, y];
     obj = {-1};
     ineqs = {a ** y + y ** tp[a] + 1, -y};
 
-The inequalities are stored in the list `ineqs` in the form of noncommutative linear polyonomials in the variable `y` and the objective function constains the symbolic coefficients of the inner product, in this case `-1`. The reason for the negative signs in the objective as well as in the second inequality is that semidefinite programs are expected to be cast in the following *canonical form*: ![
-\\begin{aligned} 
-  \\max\_y \\quad & &lt;b,y&gt; \\\\ 
-  \\text{s.t.} \\quad & f(y) \\preceq 0 
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_202.png) or, equivalently: ![
-\\begin{aligned} 
-  \\max\_y \\quad & &lt;b,y&gt; \\\\ 
-  \\text{s.t.} \\quad & f(y) + s = 0, \\quad s \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_203.png)
+The inequalities are stored in the list `ineqs` in the form of noncommutative linear polyonomials in the variable `y` and the objective function constains the symbolic coefficients of the inner product, in this case `-1`. The reason for the negative signs in the objective as well as in the second inequality is that semidefinite programs are expected to be cast in the following *canonical form*: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_202.png) or, equivalently: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_203.png)
 
 Semidefinite programs can be visualized using [`NCSDPForm`](#ncsdpform) as in:
 
@@ -2425,19 +2270,7 @@ A symbolic dual problem can be calculated easily using [`NCSDPDual`](#ncsdpdual)
 
     {dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];
 
-The dual program for the example problem above is: ![
-\\begin{aligned} 
-  \\max\_x \\quad & &lt;c,x&gt; \\\\ 
-  \\text{s.t.} \\quad & f^\*(x) + b = 0, \\quad x \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_204.png) In the case of the above problem the dual program is ![
-\\begin{aligned}
-\\max\_{X\_1, X\_2} \\quad & &lt;I,X\_1&gt; \\\\
-\\text{s.t.} \\quad & A^T X\_1 + X\_1 A -X\_2 - I = 0 \\\\
-            & X\_1 \\succeq 0, \\\\
-        & X\_2 \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_205.png) which can be visualized using [`NCSDPDualForm`](#ncsdpdualform) using:
+The dual program for the example problem above is: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_204.png) In the case of the above problem the dual program is ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_205.png) which can be visualized using [`NCSDPDualForm`](#ncsdpdualform) using:
 
     NCSDPDualForm[dIneqs, dVars, dObj]
 
@@ -2449,22 +2282,11 @@ The package [SDP](#sdp) provides a crude and not very efficient way to define an
     << NC`
     << SDP`
 
-Semidefinite programs are optimization problems of the form: ![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_206.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_207.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_208.png) is a vector of decision variables.
+Semidefinite programs are optimization problems of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_206.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_207.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_208.png) is a vector of decision variables.
 
 A user can input the problem data, the triplet ![(A, b, c)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_209.png), or use the following convenient methods for producing data in the proper format.
 
-For example, problems can be stated as: ![
-\\begin{aligned} 
-  \\min\_y \\quad & f(y), \\\\
-  \\text{s.t.} \\quad & G(y) \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_210.png) where ![f(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_211.png) and ![G(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_212.png) are affine functions of the vector of variables ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_213.png).
+For example, problems can be stated as: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_210.png) where ![f(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_211.png) and ![G(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_212.png) are affine functions of the vector of variables ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_213.png).
 
 Here is a simple example:
 
@@ -2472,13 +2294,7 @@ Here is a simple example:
     f = y2;
     G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
 
-The list of constraints in `G` is to be interpreted as: ![
-\\begin{aligned} 
-  y\_0 - 2 \\geq 0, \\\\
-  \\begin{bmatrix} y\_1 & y\_0 \\\\ y\_0 & 1 \\end{bmatrix} \\succeq 0, \\\\
-  \\begin{bmatrix} y\_2 & y\_1 \\\\ y\_1 & 1 \\end{bmatrix} \\succeq 0.
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_214.png) The function [`SDPMatrices`](#sdpmatrices) convert the above symbolic problem into numerical data that can be used to solve an SDP.
+The list of constraints in `G` is to be interpreted as: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_214.png) The function [`SDPMatrices`](#sdpmatrices) convert the above symbolic problem into numerical data that can be used to solve an SDP.
 
     abc = SDPMatrices[f, G, y]
 
@@ -6038,13 +5854,7 @@ See also: [NCSDPDual](#ncsdpdual), [NCSDPForm](#ncsdpform).
 SDP
 ---
 
-`SDP` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_290.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_291.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_292.png) is a vector of decision variables.
+`SDP` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_290.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_291.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_292.png) is a vector of decision variables.
 
 See the package [SDP](#sdp) for a potentially more efficient alternative to the basic implementation provided by this package.
 
@@ -6061,22 +5871,11 @@ Members are:
 
 `SDPMatrices[f, G, y]` converts the symbolic linear functions `f`, `G` in the variables `y` associated to the semidefinite program:
 
-![
-\\begin{aligned} 
-  \\min\_y \\quad & f(y), \\\\
-  \\text{s.t.} \\quad & G(y) \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_293.png)
+![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_293.png)
 
 into numerical data that can be used to solve an SDP in the form:
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_294.png)
+![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_294.png)
 
 `SDPMatrices` returns a list with three entries:
 
@@ -6105,13 +5904,7 @@ See also: [SDPSolve](#sdpsolve).
 
 `SDPSolve[{A,b,c}]` solves an SDP in the form:
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_295.png)
+![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_295.png)
 
 `SDPSolve` returns a list with four entries:
 
@@ -6170,13 +5963,7 @@ See also: [SDPPrimalEval](#sdpprimaleval), [SDPDualEval](#sdpdualeval).
 SDPFlat
 -------
 
-`SDPFlat` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_304.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_305.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_306.png) is a vector of decision variables.
+`SDPFlat` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_304.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_305.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_306.png) is a vector of decision variables.
 
 It is a potentially more efficient alternative to the basic implementation provided by the package [SDP](#sdp).
 
@@ -6223,13 +6010,7 @@ See also: [SDPFlatPrimalEval](#sdpflatprimaleval), [SDPFlatDualEval](#sdpflatdua
 SDPSylvester
 ------------
 
-`SDPSylvester` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & \\sum\_i \\operatorname{trace}(b\_i^T y\_i) \\\\
-  \\text{s.t.} \\quad & A y + S = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T + S = C \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_311.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_312.png) is a symmetric positive semidefinite matrix and ![y = \\{ y\_1, \\ldots, y\_n \\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_313.png) is a list of matrix decision variables.
+`SDPSylvester` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_311.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_312.png) is a symmetric positive semidefinite matrix and ![y = \\{ y\_1, \\ldots, y\_n \\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_313.png) is a list of matrix decision variables.
 
 Members are:
 
@@ -6273,25 +6054,9 @@ See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval), [SDPSylvesterDualEv
 PrimalDual
 ----------
 
-`PrimalDual` provides an algorithm for solving a pair of primal-dual semidefinite programs in the form ![
-\\tag{Primal}
-\\begin{aligned}
-  \\min\_{X} \\quad & \\operatorname{trace}(c X) \\\\
-  \\text{s.t.} \\quad & A^\*(X) = b \\\\
-                    & X \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_319.png) ![
-\\tag{Dual}
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A(y) + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_320.png) where ![X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_321.png) is the primal variable and ![(y,S)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_322.png) are the dual variables.
+`PrimalDual` provides an algorithm for solving a pair of primal-dual semidefinite programs in the form ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_319.png) ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_320.png) where ![X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_321.png) is the primal variable and ![(y,S)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_322.png) are the dual variables.
 
-The algorithm is parametrized and users should provide their own means of evaluating the mappings ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_323.png), ![A^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_324.png) and also the Sylvester mapping ![
-    A^\*(W\_l A(\\Delta\_y) W\_r)
-](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_325.png) used to solve the least-square subproblem.
+The algorithm is parametrized and users should provide their own means of evaluating the mappings ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_323.png), ![A^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_324.png) and also the Sylvester mapping ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_325.png) used to solve the least-square subproblem.
 
 Users can develop custom algorithms that can take advantage of special structure, as done for instance in [NCSDP](#ncsdp).
 
