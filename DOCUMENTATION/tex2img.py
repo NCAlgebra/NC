@@ -19,7 +19,7 @@ def latex(formula, count):
     
     # create file 'formula.tex'
     with open('formula.tex','w') as f:
-        f.write(r"""\documentclass[border=2pt]{standalone}
+        f.write(r"""\documentclass[border=2pt,10pt]{standalone}
 \usepackage{amsmath,amsfonts}
 \usepackage{varwidth}
 \begin{document}

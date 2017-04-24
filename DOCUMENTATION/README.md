@@ -1594,68 +1594,35 @@ is zero as expected. Internally `NCPolynomial` represents a polynomial matrix by
     x b^T & 1
 \\end{bmatrix} 
 &=
-\\begin{bmatrix}
-    0 & 0 \\\\ 0 & 1
-\\end{bmatrix}
+\\begin{bmatrix} 0 & 0 \\\\ 0 & 1 \\end{bmatrix}
 +
-\\begin{bmatrix}
-    a \\\\ 0
-\\end{bmatrix}
+\\begin{bmatrix} a \\\\ 0 \\end{bmatrix}
 x
-\\begin{bmatrix}
-    1 & 0
-\\end{bmatrix}
+\\begin{bmatrix} 1 & 0 \\end{bmatrix}
 +
-\\begin{bmatrix}
-    1 \\\\ 0
-\\end{bmatrix}
+\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}
 x
-\\begin{bmatrix}
-    a^T & 0
-\\end{bmatrix}
+\\begin{bmatrix} a^T & 0 \\end{bmatrix}
 +
-\\begin{bmatrix}
-    -1 \\\\ 0
-\\end{bmatrix}
+\\begin{bmatrix} -1 \\\\ 0 \\end{bmatrix}
+x q x
+\\begin{bmatrix} 1 & 0 \\end{bmatrix}
++ \\\\ & \\qquad \\quad
+\\begin{bmatrix} b \\\\ 0 \\end{bmatrix}
 x
-q 
-x
-\\begin{bmatrix}
-    1 & 0
-\\end{bmatrix}
-+ \\\\
-& \\qquad \\quad
-\\begin{bmatrix}
-    b \\\\ 0
-\\end{bmatrix}
-x
-\\begin{bmatrix}
-    0 & 1
-\\end{bmatrix}
+\\begin{bmatrix} 0 & 1 \\end{bmatrix}
 +
-\\begin{bmatrix}
-    0 \\\\ 1
-\\end{bmatrix}
+\\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}
 x
-\\begin{bmatrix}
-    b^T & 0
-\\end{bmatrix}
+\\begin{bmatrix} b^T & 0 \\end{bmatrix}
 +
-\\begin{bmatrix}
-    c \\\\ 0
-\\end{bmatrix}
+\\begin{bmatrix} c \\\\ 0 \\end{bmatrix}
 y
-\\begin{bmatrix}
-    1 & 0
-\\end{bmatrix}
+\\begin{bmatrix} 1 & 0 \\end{bmatrix}
 +
-\\begin{bmatrix}
-    1 \\\\ 0
-\\end{bmatrix}
+\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}
 y^T
-\\begin{bmatrix}
-    c^T & 0
-\\end{bmatrix}
+\\begin{bmatrix} c^T & 0 \\end{bmatrix}
 \\end{aligned}
 ](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_38.png)
 
