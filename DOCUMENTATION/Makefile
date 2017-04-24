@@ -82,8 +82,9 @@ README.md: $(MANUAL)
 	     -o README.tmp.md
 	pandoc README.tmp.md -t markdown_github \
 	     --filter github-mangle.py \
+	     --filter tex2img.py \
 	     -o README.md
-	rm -f README.tmp.md
+	rm -f README.tmp.md formula.*
 
 index.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
