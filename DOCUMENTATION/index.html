@@ -42,11 +42,11 @@
 <li><a href="#polynomials"><span class="toc-section-number">4.4</span> Polynomials</a></li>
 <li><a href="#rationals-and-simplification"><span class="toc-section-number">4.5</span> Rationals and Simplification</a></li>
 <li><a href="#calculus"><span class="toc-section-number">4.6</span> Calculus</a></li>
-<li><a href="#matrices"><span class="toc-section-number">4.7</span> Matrices</a></li>
+<li><a href="#BasicMatrices"><span class="toc-section-number">4.7</span> Matrices</a></li>
 </ul></li>
 <li><a href="#MoreAdvancedCommands"><span class="toc-section-number">5</span> More Advanced Commands</a><ul>
-<li><a href="#matrices-1"><span class="toc-section-number">5.1</span> Matrices</a></li>
-<li><a href="#AdvancedReplace"><span class="toc-section-number">5.2</span> Advanced Rules and Replacements</a></li>
+<li><a href="#AdvancedReplace"><span class="toc-section-number">5.1</span> Advanced Rules and Replacements</a></li>
+<li><a href="#AdvancedMatrices"><span class="toc-section-number">5.2</span> Matrices</a></li>
 <li><a href="#PolysWithCommutativeCoefficients"><span class="toc-section-number">5.3</span> Polynomials with commutative coefficients</a></li>
 <li><a href="#polynomials-with-noncommutative-coefficients"><span class="toc-section-number">5.4</span> Polynomials with noncommutative coefficients</a></li>
 <li><a href="#Quadratic"><span class="toc-section-number">5.5</span> Quadratic polynomials</a></li>
@@ -58,11 +58,11 @@
 <li><a href="#a-slightly-more-challenging-example"><span class="toc-section-number">6.3</span> A slightly more challenging example</a></li>
 <li><a href="#simplifying-polynomial-expresions"><span class="toc-section-number">6.4</span> Simplifying polynomial expresions</a></li>
 <li><a href="#simplifying-rational-expresions"><span class="toc-section-number">6.5</span> Simplifying rational expresions</a></li>
-<li><a href="#simplification-with-ncgbsimplifyrational"><span class="toc-section-number">6.6</span> Simplification with <code>NCGBSimplifyRational</code></a></li>
+<li><a href="#simplification-with-ncgbsimplifyrational"><span class="toc-section-number">6.6</span> Simplification with NCGBSimplifyRational</a></li>
 <li><a href="#Orderings"><span class="toc-section-number">6.7</span> Ordering on variables and monomials</a><ul>
 <li><a href="#lex-order-the-simplest-elimination-order"><span class="toc-section-number">6.7.1</span> Lex Order: the simplest elimination order</a></li>
 <li><a href="#graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">6.7.2</span> Graded lex ordering: a non-elimination order</a></li>
-<li><a href="#multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">6.7.3</span> Multigraded lex ordering : a variety of elimination orders</a></li>
+<li><a href="#multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">6.7.3</span> Multigraded lex ordering: a variety of elimination orders</a></li>
 </ul></li>
 <li><a href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span class="toc-section-number">6.8</span> A complete example: the partially prescribed matrix inverse problem</a></li>
 </ul></li>
@@ -327,7 +327,7 @@
 <li><a href="#SDPFlatSylvesterEval"><span class="toc-section-number">14.6.4</span> SDPFlatSylvesterEval</a></li>
 </ul></li>
 <li><a href="#PackageSDPSylvester"><span class="toc-section-number">14.7</span> SDPSylvester</a><ul>
-<li><a href="#SDPSylvesterEval"><span class="toc-section-number">14.7.1</span> SDPEval</a></li>
+<li><a href="#SDPSylvesterSDPEval"><span class="toc-section-number">14.7.1</span> SDPEval</a></li>
 <li><a href="#SDPSylvesterPrimalEval"><span class="toc-section-number">14.7.2</span> SDPSylvesterPrimalEval</a></li>
 <li><a href="#SDPSylvesterDualEval"><span class="toc-section-number">14.7.3</span> SDPSylvesterDualEval</a></li>
 <li><a href="#SDPSylvesterSylvesterEval"><span class="toc-section-number">14.7.4</span> SDPSylvesterSylvesterEval</a></li>
@@ -692,7 +692,7 @@ expr2 = inv[1+a**b]**a</code></pre>
 <p>returns the nc gradient list</p>
 <pre><code>{a**x**b + b**x**a + c**y**d, d**x**c}</code></pre>
 <p><strong>Version 5:</strong> introduces experimental support for integration of nc polynomials. See <a href="#NCIntegrate"><code>NCIntegrate</code></a>.</p>
-<h2 id="matrices"><span class="header-section-number">4.7</span> Matrices</h2>
+<h2 id="BasicMatrices"><span class="header-section-number">4.7</span> Matrices</h2>
 <p><code>NCAlgebra</code> has many commands for manipulating matrices with noncommutative entries. Think block-matrices. Matrices are represented in Mathematica using <em>lists of lists</em>. For example</p>
 <pre><code>m = {{a, b}, {c, d}}</code></pre>
 <p>is a representation for the matrix</p>
@@ -798,88 +798,7 @@ u = {{1, inv[a]**b}, {0, 1}}}</code></pre>
 <h1 id="MoreAdvancedCommands"><span class="header-section-number">5</span> More Advanced Commands</h1>
 <p>In this chapter we describe some more advance features and commands. Most of these were introduced in <strong>Version 5</strong>.</p>
 <p>If you want a living version of this chapter just run the notebook <code>NC/DEMOS/2_MoreAdvancedCommands.nb</code>.</p>
-<h2 id="matrices-1"><span class="header-section-number">5.1</span> Matrices</h2>
-<p>Starting at <strong>Version 5</strong> the operators <code>**</code> and <code>inv</code> apply also to matrices. However, in order for <code>**</code> and <code>inv</code> to continue to work as full fledged operators, the result of multiplications or inverses of matrices is held unevaluated until the user calls <a href="#NCMatrixExpand"><code>NCMatrixExpand</code></a>. This is in the the same spirit as good old fashion commutative operations in Mathematica.</p>
-<p>For example, with</p>
-<pre><code>m1 = {{a, b}, {c, d}}
-m2 = {{d, 2}, {e, 3}}</code></pre>
-<p>the call</p>
-<pre><code>m1**m2</code></pre>
-<p>results in</p>
-<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}}</code></pre>
-<p>Upon calling</p>
-<pre><code>m1**m2 // NCMatrixExpand</code></pre>
-<p>evaluation takes place returning</p>
-<pre><code>{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}</code></pre>
-<p>which is what would have been by calling <code>NCDot[m1,m2]</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. Likewise</p>
-<pre><code>inv[m1]</code></pre>
-<p>results in</p>
-<pre><code>inv[{{a, b}, {c, d}}]</code></pre>
-<p>and</p>
-<pre><code>inv[m1] // NCMatrixExpand</code></pre>
-<p>returns the evaluated result</p>
-<pre><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
- {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}</code></pre>
-<p>A less trivial example is</p>
-<pre><code>m3 = m1**inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1]**m1</code></pre>
-<p>that returns</p>
-<pre><code>-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
-    {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]</code></pre>
-<p>Expanding</p>
-<pre><code>NCMatrixExpand[m3]</code></pre>
-<p>results in</p>
-<pre><code>{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
-    (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
-    (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
-  a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
-    inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
-    b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
-    (1 + a)**inv[c]**(1 + d)]** b}, 
- {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
-    inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
-  1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
-    a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
-    inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}</code></pre>
-<p>and finally</p>
-<pre><code>NCMatrixExpand[m3] // NCSimplifyRational    </code></pre>
-<p>returns</p>
-<pre><code>{{0, 0}, {0, 0}}</code></pre>
-<p>as expected.</p>
-<p><strong>WARNING:</strong> Mathematica's choice of treating lists and matrix indistinctively can cause much trouble when mixing <code>**</code> with <code>Plus</code> (<code>+</code>) operator. For example, the expression</p>
-<pre><code>m1**m2 + m2**m1</code></pre>
-<p>results in</p>
-<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}</code></pre>
-<p>and</p>
-<pre><code>m1**m2 + m2**m1 // NCMatrixExpand</code></pre>
-<p>produces the expected result</p>
-<pre><code>{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
- {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}</code></pre>
-<p>However, because <code>**</code> is held unevaluated, the expression</p>
-<pre><code>m1**m2 + m2 // NCMatrixExpand</code></pre>
-<p>returns the &quot;wrong&quot; result</p>
-<pre><code>{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
- {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
- {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
- {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}</code></pre>
-<p>which is different than the &quot;correct&quot; result</p>
-<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
- {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
-<p>which is returned by either</p>
-<pre><code>NCMatrixExpand[m1**m2] + m2</code></pre>
-<p>or</p>
-<pre><code>NCDot[m1, m2] + m2</code></pre>
-<p>The reason for this behavior is that <code>m1**m2</code> is essentially treated as a <em>scalar</em> (it does not have <em>head</em> <code>List</code>) and therefore gets added entrywise to <code>m2</code> <em>before</em> <code>NCMatrixExpand</code> has a chance to evaluate the <code>**</code> product. There are no easy fixes for this problem, which affects not only <code>NCAlgebra</code> but any similar type of matrix product evaluation in Mathematica. With <code>NCAlgebra</code>, a better option is to use <a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> or <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>.</p>
-<p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a> are special versions of <a href="#NCReplaceAll"><code>NCReplaceAll</code></a> and <a href="#NCReplaceRepeated"><code>NCReplaceRepeated</code></a> that take extra steps to preserve matrix consistency when replacing expressions with nc matrices. For example</p>
-<pre><code>NCMatrixReplaceAll[x**y + y, {x -&gt; m1, y -&gt; m2}]</code></pre>
-<p>does produce the &quot;correct&quot; result</p>
-<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
- {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
-<p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a> also work with block matrices. For example</p>
-<pre><code>rule = {x -&gt; m1, y -&gt; m2, id -&gt; IdentityMatrix[2], z -&gt; {{id,x},{x,id}}}
-NCMatrixReplaceRepeated[inv[z], rule]</code></pre>
-<p>coincides with the result of</p>
-<pre><code>NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]</code></pre>
-<h2 id="AdvancedReplace"><span class="header-section-number">5.2</span> Advanced Rules and Replacements</h2>
+<h2 id="AdvancedReplace"><span class="header-section-number">5.1</span> Advanced Rules and Replacements</h2>
 <p>Substitution is a key feature of Symbolic computation. We will now discuss some issues related to Mathematica's implementation of rules and replacements that can affect the behavior of <code>NCAlgebra</code> expressions.</p>
 <p>The first issue is related to how Mathematica performs substitutions, which is through <a href="http://reference.wolfram.com/language/guide/RulesAndPatterns.html">pattern matching</a>. For a rule to be effective if has to <em>match</em> the <em>structural</em> representation of an expression. That representation might be different than one would normally think based on the usual properties of mathematical operators. For example, one would expect the rule:</p>
 <pre><code>rule = 1 + x_ -&gt; x</code></pre>
@@ -896,7 +815,7 @@ NCMatrixReplaceRepeated[inv[z], rule]</code></pre>
 a + b
 2 a * b</code></pre>
 <p>Indeed, Mathematica's attribute <code>Flat</code> does precisely that. Note that this is stil <em>structural matching</em>, not <em>mathematical matching</em>, since the pattern <code>1 + x_</code> would not match an integer <code>2</code>, even though one could write <code>2 = 1 + 1</code>!</p>
-<p>Unfortunately, <code>**</code>, which is the <code>NonCommutativeMultiply</code> operator, <em>is not</em> <code>Flat</code><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. This is the reason why substitution based on a simple rule such as:</p>
+<p>Unfortunately, <code>**</code>, which is the <code>NonCommutativeMultiply</code> operator, <em>is not</em> <code>Flat</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. This is the reason why substitution based on a simple rule such as:</p>
 <pre><code>rule = a**b -&gt; c</code></pre>
 <p>so that</p>
 <pre><code>expr /. rule</code></pre>
@@ -967,7 +886,7 @@ G[exp_] := Block[
 <pre><code>F[x**y]</code></pre>
 <p>returns</p>
 <pre><code>x y</code></pre>
-<p>which completely destroys the noncommutative product. The reason for the catastrophic failure of the definition of <code>F</code>, which is inside a <code>Module</code>, is that the letters <code>aa</code> and <code>bb</code> appearing in <code>rule</code> are <em>not treated as the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. For this reason, the right-hand side of the rule <code>rule</code> involves the global symbols <code>aa</code> and <code>bb</code>, which are, in the absence of a declaration to the contrary, commutative. On the other hand, the definition of <code>G</code> inside a <code>Block</code> makes sure that <code>aa</code> and <code>bb</code> are evaluated with whatever value they might have locally at the time of execution.</p>
+<p>which completely destroys the noncommutative product. The reason for the catastrophic failure of the definition of <code>F</code>, which is inside a <code>Module</code>, is that the letters <code>aa</code> and <code>bb</code> appearing in <code>rule</code> are <em>not treated as the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. For this reason, the right-hand side of the rule <code>rule</code> involves the global symbols <code>aa</code> and <code>bb</code>, which are, in the absence of a declaration to the contrary, commutative. On the other hand, the definition of <code>G</code> inside a <code>Block</code> makes sure that <code>aa</code> and <code>bb</code> are evaluated with whatever value they might have locally at the time of execution.</p>
 <p>The above subtlety often manifests itself partially, sometimes causing what might be perceived as some kind of <em>erratic behavior</em>. Indeed, if one had used symbols that were already declared globaly noncommutative by <code>NCAlgebra</code>, such as single small cap roman letters as in the definition:</p>
 <pre><code>H[exp_] := Module[
   {rule, a, b},
@@ -976,6 +895,87 @@ G[exp_] := Block[
   NCReplaceAll[exp, rule]
 ]</code></pre>
 <p>then calling <code>H[x**y]</code> would have worked ``as expected'', even if for the wrong reasons!</p>
+<h2 id="AdvancedMatrices"><span class="header-section-number">5.2</span> Matrices</h2>
+<p>Starting at <strong>Version 5</strong> the operators <code>**</code> and <code>inv</code> apply also to matrices. However, in order for <code>**</code> and <code>inv</code> to continue to work as full fledged operators, the result of multiplications or inverses of matrices is held unevaluated until the user calls <a href="#NCMatrixExpand"><code>NCMatrixExpand</code></a>. This is in the the same spirit as good old fashion commutative operations in Mathematica.</p>
+<p>For example, with</p>
+<pre><code>m1 = {{a, b}, {c, d}}
+m2 = {{d, 2}, {e, 3}}</code></pre>
+<p>the call</p>
+<pre><code>m1**m2</code></pre>
+<p>results in</p>
+<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}}</code></pre>
+<p>Upon calling</p>
+<pre><code>m1**m2 // NCMatrixExpand</code></pre>
+<p>evaluation takes place returning</p>
+<pre><code>{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}</code></pre>
+<p>which is what would have been by calling <code>NCDot[m1,m2]</code><a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. Likewise</p>
+<pre><code>inv[m1]</code></pre>
+<p>results in</p>
+<pre><code>inv[{{a, b}, {c, d}}]</code></pre>
+<p>and</p>
+<pre><code>inv[m1] // NCMatrixExpand</code></pre>
+<p>returns the evaluated result</p>
+<pre><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+ {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}</code></pre>
+<p>A less trivial example is</p>
+<pre><code>m3 = m1**inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1]**m1</code></pre>
+<p>that returns</p>
+<pre><code>-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
+    {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]</code></pre>
+<p>Expanding</p>
+<pre><code>NCMatrixExpand[m3]</code></pre>
+<p>results in</p>
+<pre><code>{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
+  a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
+    inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
+    b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)]** b}, 
+ {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
+    inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
+  1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
+    a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
+    inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}</code></pre>
+<p>and finally</p>
+<pre><code>NCMatrixExpand[m3] // NCSimplifyRational    </code></pre>
+<p>returns</p>
+<pre><code>{{0, 0}, {0, 0}}</code></pre>
+<p>as expected.</p>
+<p><strong>WARNING:</strong> Mathematica's choice of treating lists and matrix indistinctively can cause much trouble when mixing <code>**</code> with <code>Plus</code> (<code>+</code>) operator. For example, the expression</p>
+<pre><code>m1**m2 + m2**m1</code></pre>
+<p>results in</p>
+<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}</code></pre>
+<p>and</p>
+<pre><code>m1**m2 + m2**m1 // NCMatrixExpand</code></pre>
+<p>produces the expected result</p>
+<pre><code>{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+ {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}</code></pre>
+<p>However, because <code>**</code> is held unevaluated, the expression</p>
+<pre><code>m1**m2 + m2 // NCMatrixExpand</code></pre>
+<p>returns the &quot;wrong&quot; result</p>
+<pre><code>{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
+ {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
+ {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
+ {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}</code></pre>
+<p>which is different than the &quot;correct&quot; result</p>
+<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
+<p>which is returned by either</p>
+<pre><code>NCMatrixExpand[m1**m2] + m2</code></pre>
+<p>or</p>
+<pre><code>NCDot[m1, m2] + m2</code></pre>
+<p>The reason for this behavior is that <code>m1**m2</code> is essentially treated as a <em>scalar</em> (it does not have <em>head</em> <code>List</code>) and therefore gets added entrywise to <code>m2</code> <em>before</em> <code>NCMatrixExpand</code> has a chance to evaluate the <code>**</code> product. There are no easy fixes for this problem, which affects not only <code>NCAlgebra</code> but any similar type of matrix product evaluation in Mathematica. With <code>NCAlgebra</code>, a better option is to use <a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> or <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>.</p>
+<p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a> are special versions of <a href="#NCReplaceAll"><code>NCReplaceAll</code></a> and <a href="#NCReplaceRepeated"><code>NCReplaceRepeated</code></a> that take extra steps to preserve matrix consistency when replacing expressions with nc matrices. For example</p>
+<pre><code>NCMatrixReplaceAll[x**y + y, {x -&gt; m1, y -&gt; m2}]</code></pre>
+<p>does produce the &quot;correct&quot; result</p>
+<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
+<p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a> also work with block matrices. For example</p>
+<pre><code>rule = {x -&gt; m1, y -&gt; m2, id -&gt; IdentityMatrix[2], z -&gt; {{id,x},{x,id}}}
+NCMatrixReplaceRepeated[inv[z], rule]</code></pre>
+<p>coincides with the result of</p>
+<pre><code>NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]</code></pre>
 <h2 id="PolysWithCommutativeCoefficients"><span class="header-section-number">5.3</span> Polynomials with commutative coefficients</h2>
 <p>The package <a href="#PackageNCPoly"><code>NCPoly</code></a> provides an efficient structure for storing and operating with noncommutative polynomials with commutative coefficients. There are two main goals:</p>
 <ol type="1">
@@ -1108,68 +1108,35 @@ p2 = NCToNCPolynomial[mat2, {x, y}];</code></pre>
     x b^T &amp; 1
 \end{bmatrix} 
 &amp;=
-\begin{bmatrix}
-    0 &amp; 0 \\ 0 &amp; 1
-\end{bmatrix}
+\begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}
 +
-\begin{bmatrix}
-    a \\ 0
-\end{bmatrix}
+\begin{bmatrix} a \\ 0 \end{bmatrix}
 x
-\begin{bmatrix}
-    1 &amp; 0
-\end{bmatrix}
+\begin{bmatrix} 1 &amp; 0 \end{bmatrix}
 +
-\begin{bmatrix}
-    1 \\ 0
-\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \end{bmatrix}
 x
-\begin{bmatrix}
-    a^T &amp; 0
-\end{bmatrix}
+\begin{bmatrix} a^T &amp; 0 \end{bmatrix}
 +
-\begin{bmatrix}
-    -1 \\ 0
-\end{bmatrix}
+\begin{bmatrix} -1 \\ 0 \end{bmatrix}
+x q x
+\begin{bmatrix} 1 &amp; 0 \end{bmatrix}
++ \\ &amp; \qquad \quad
+\begin{bmatrix} b \\ 0 \end{bmatrix}
 x
-q 
-x
-\begin{bmatrix}
-    1 &amp; 0
-\end{bmatrix}
-+ \\
-&amp; \qquad \quad
-\begin{bmatrix}
-    b \\ 0
-\end{bmatrix}
-x
-\begin{bmatrix}
-    0 &amp; 1
-\end{bmatrix}
+\begin{bmatrix} 0 &amp; 1 \end{bmatrix}
 +
-\begin{bmatrix}
-    0 \\ 1
-\end{bmatrix}
+\begin{bmatrix} 0 \\ 1 \end{bmatrix}
 x
-\begin{bmatrix}
-    b^T &amp; 0
-\end{bmatrix}
+\begin{bmatrix} b^T &amp; 0 \end{bmatrix}
 +
-\begin{bmatrix}
-    c \\ 0
-\end{bmatrix}
+\begin{bmatrix} c \\ 0 \end{bmatrix}
 y
-\begin{bmatrix}
-    1 &amp; 0
-\end{bmatrix}
+\begin{bmatrix} 1 &amp; 0 \end{bmatrix}
 +
-\begin{bmatrix}
-    1 \\ 0
-\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \end{bmatrix}
 y^T
-\begin{bmatrix}
-    c^T &amp; 0
-\end{bmatrix}
+\begin{bmatrix} c^T &amp; 0 \end{bmatrix}
 \end{aligned}
 \]</span></p>
 <p>See section <a href="#Linear">linear functions</a> for more features on linear polynomial matrices.</p>
@@ -1346,7 +1313,7 @@ lin = &lt;|x -&gt; {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[&lt; 4 &gt;, {9, 9
 <pre><code>* * * * * * * * * * * * * * * *
 * * *   NCPolyGroebner    * * *
 * * * * * * * * * * * * * * * *
-* Monomial order : a &lt; b &lt; c &lt;&lt; x
+* Monomial order: a &lt; b &lt; c &lt;&lt; x
 * Reduce and normalize initial set
 &gt; Initial set could not be reduced
 * Computing initial set of obstructions
@@ -1411,7 +1378,7 @@ rules = NCMakeGB[rels, 10];</code></pre>
 <pre><code>* * * * * * * * * * * * * * * *
 * * *   NCPolyGroebner    * * *
 * * * * * * * * * * * * * * * *
-* Monomial order : a &lt;&lt; b
+* Monomial order: a &lt;&lt; b
 * Reduce and normalize initial set
 &gt; Initial set could not be reduced
 * Computing initial set of obstructions
@@ -1441,7 +1408,7 @@ simp = NCReplaceRepeated[expr, rules]</code></pre>
 <pre><code>* * * * * * * * * * * * * * * *
 * * *   NCPolyGroebner    * * *
 * * * * * * * * * * * * * * * *
-* Monomial order : x &lt;&lt;  inv[x] &lt;&lt; inv[1 - x]
+* Monomial order: x &lt;&lt;  inv[x] &lt;&lt; inv[1 - x]
 * Reduce and normalize initial set
 &gt; Initial set could not be reduced
 * Computing initial set of obstructions
@@ -1477,7 +1444,7 @@ inv[1-x-y]**x**inv[1-x+y] -&gt; -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv
 <pre><code>expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
 NCReplaceRepeated[expr, rules] // NCExpand</code></pre>
 <p>resulting in <code>0</code>.</p>
-<h2 id="simplification-with-ncgbsimplifyrational"><span class="header-section-number">6.6</span> Simplification with <code>NCGBSimplifyRational</code></h2>
+<h2 id="simplification-with-ncgbsimplifyrational"><span class="header-section-number">6.6</span> Simplification with NCGBSimplifyRational</h2>
 <p>The simplification process described above is automated in the function <a href="#NCGBSimplifyRational">NCGBSimplifyRational</a>.</p>
 <p>For example, calls to</p>
 <pre><code>expr = x ** inv[1 - x] - inv[1 - x] ** x
@@ -1547,7 +1514,7 @@ a**b**x**b**x**b**x**x -&gt; y**y**y+b**a**y**y+y**b**a**y+y**y**b**a+
 b**x**x**b**x**b**x**x -&gt; x**b**y**y+x**b**b**a**y+x**b**y**b**a+
                           x**b**b**a**b**a+x**y**b**x**b**x**x</code></pre>
 <p>which again fails to be a Gröbner basis and does not eliminate <span class="math inline">\(y\)</span>. Instead, it tries to decrease the total degree of expressions involving <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(y\)</span>.</p>
-<h3 id="multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="header-section-number">6.7.3</span> Multigraded lex ordering : a variety of elimination orders</h3>
+<h3 id="multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="header-section-number">6.7.3</span> Multigraded lex ordering: a variety of elimination orders</h3>
 <p>There are other useful monomial orders which one can use other than graded lex and lex. Another type of order is what we call multigraded lex and is a mixture of graded lex and lex order. To impose multi-graded lexicographic order, say <span class="math inline">\(a&lt; b&lt; x\ll y\)</span> on <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, one types</p>
 <pre><code>SetMonomialOrder[{a,b,x},y];</code></pre>
 <p>which separates <span class="math inline">\(y\)</span> from the remaining variables. This time, a call to</p>
@@ -3985,7 +3952,6 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><a href="#SDPSolve">SDPSolve</a></li>
 <li><a href="#SDPEval">SDPEval</a></li>
 <li><a href="#SDPPrimalEval">SDPPrimalEval</a></li>
-<li><a href="#SDPEval">SDPEval</a></li>
 <li><a href="#SDPDualEval">SDPDualEval</a></li>
 <li><a href="#SDPSylvesterEval">SDPSylvesterEval</a></li>
 </ul>
@@ -4112,12 +4078,12 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 \]</span> where <span class="math inline">\(S\)</span> is a symmetric positive semidefinite matrix and <span class="math inline">\(y = \{ y_1, \ldots, y_n \}\)</span> is a list of matrix decision variables.</p>
 <p>Members are:</p>
 <ul>
-<li><a href="#SDPSylvesterEval">SDPEval</a></li>
+<li><a href="#SDPSylvesterSDPEval">SDPEval</a></li>
 <li><a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a></li>
 <li><a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a></li>
 <li><a href="#SDPSylvesterSylvesterEval">SDPSylvesterSylvesterEval</a></li>
 </ul>
-<h3 id="SDPSylvesterEval"><span class="header-section-number">14.7.1</span> SDPEval</h3>
+<h3 id="SDPSylvesterSDPEval"><span class="header-section-number">14.7.1</span> SDPEval</h3>
 <p><code>SDPEval[A, y]</code> evaluates the linear function <span class="math inline">\(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\)</span> in an <code>SDPSylvester</code>.</p>
 <p>This is a convenient replacement for <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a> in which the list <code>y</code> can be used directly.</p>
 <p>See also: <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a>, <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>.</p>
@@ -4316,14 +4282,14 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <ol>
 <li id="fn1"><p>The transpose of the gradient of the nc expression <code>expr</code> is the derivative with respect to the direction <code>h</code> of the trace of the directional derivative of <code>expr</code> in the direction <code>h</code>.<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>Contrary to what happens with symbolic inversion of matrices with commutative entries, there exist multiple formulas for the symbolic inverse of a matrix with noncommutative entries. Furthermore, it may be possible that none of such formulas is &quot;correct&quot;. Indeed, it is easy to construct a matrix <code>m</code> with block structure as shown that is invertible but for which none of the blocks <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> are invertible. In this case no <em>correct</em> formula exists for the calculation of the inverse of <code>m</code>.<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>Formerly <code>MatMult[m1,m2]</code>.<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>The reason is that making an operator <code>Flat</code> is a convenience that comes with a price: lack of control over execution and evaluation. Since <code>NCAlgebra</code> has to operate at a very low level this lack of control over evaluation is fatal. Indeed, making <code>NonCommutativeMultiply</code> have an attribute <code>Flat</code> will throw Mathematica into infinite loops in seemingly trivial noncommutative expression. Hey, email us if you find a way around that :)<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>By the way, I find that behavior of Mathematica's <code>Module</code> questionable, since something like</p>
+<li id="fn3"><p>The reason is that making an operator <code>Flat</code> is a convenience that comes with a price: lack of control over execution and evaluation. Since <code>NCAlgebra</code> has to operate at a very low level this lack of control over evaluation is fatal. Indeed, making <code>NonCommutativeMultiply</code> have an attribute <code>Flat</code> will throw Mathematica into infinite loops in seemingly trivial noncommutative expression. Hey, email us if you find a way around that :)<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>By the way, I find that behavior of Mathematica's <code>Module</code> questionable, since something like</p>
 <pre><code>F[exp_] := Module[{aa, bb},
   SetNonCommutative[aa, bb];
   aa**bb
 ]</code></pre>
-<p>would not fail to treat <code>aa</code> and <code>bb</code> locally. It is their appearance in a rule that triggers the mostly odd behavior.<a href="#fnref5">↩</a></p></li>
+<p>would not fail to treat <code>aa</code> and <code>bb</code> locally. It is their appearance in a rule that triggers the mostly odd behavior.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>Formerly <code>MatMult[m1,m2]</code>.<a href="#fnref5">↩</a></p></li>
 <li id="fn6"><p>This is in contrast with the commutative <span class="math inline">\(x^4\)</span> which is convex everywhere. See <span class="citation" data-cites="camino:MIS:2003">(Camino et al. 2003)</span> for details.<a href="#fnref6">↩</a></p></li>
 </ol>
 </section>
