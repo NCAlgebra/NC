@@ -2,6 +2,8 @@
 
 Thanks for your interest in NCAlgebra. 
 
+Click here to [![donate](http://math.ucsd.edu/~ncalg/DOCUMENTATION/donate.png)](https://giveto.ucsd.edu/make-a-gift?id=d86e6857-0c22-4102-ae7a-bfdc9487cb1d) to this project.
+
 The latest version of NCAlgebra can be downloaded from:
 
 https://github.com/NCAlgebra/NC
