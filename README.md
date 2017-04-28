@@ -1,4 +1,4 @@
-# NCAlgebra - Version 5.0.2
+# NCAlgebra - Version 5.0.3
 
 Thanks for your interest in NCAlgebra. 
 
