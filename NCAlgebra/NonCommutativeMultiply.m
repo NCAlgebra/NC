@@ -80,13 +80,14 @@ Begin[ "`Private`" ]
   CommutativeQ[BlankNullSequence] = False;
 
   (* a matrix is noncommutative *)
-  CommutativeQ[_?MatrixQ] := False;
+  CommutativeQ[a_List] := False /; MatrixQ[a];
+  CommutativeQ[a_SparseArray] := False /; MatrixQ[a];
   
   (* commutative subscripts depend on symbol *)
   CommutativeQ[Subscript[x_,___]] := CommutativeQ[x];
   
   (* a commutative functions is commutative if all arguments are 
-     also commutative *)
+     also commutative; this includes lists which are not matrices *)
   CommutativeQ[f_?CommutativeQ[x___]] := 
       Apply[And, Map[CommutativeQ,{x}]];
 
@@ -154,7 +155,7 @@ Begin[ "`Private`" ]
                         
   (* Identity *)
   (* MAURICIO BUG: 07/07/2016
-     The following can be replaced by f_[a__] which triggers some ...
+     The following can be replaced by f_[a__] which triggers some
      recursive calls.
   *)
   (*
