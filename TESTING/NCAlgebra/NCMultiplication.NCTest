@@ -186,6 +186,8 @@ Block[
     CommuteEverything::Warning
   ];
 
+  EndCommuteEverything[];
+
   (* x[1] *)
   exp = NonCommutativeMultiply[x[1]];
   answer = x[1];
@@ -226,5 +228,28 @@ Block[
   (* ___ *)
   exp = NonCommutativeMultiply[___];
   NCTest[Head[exp], NonCommutativeMultiply];
+
+  (* SetCommutingOperators *)
+  SetCommutingOperators[x,y];
+  NCTest[CommutingOperatorsQ[y,x]];
+  NCTest[CommutingOperatorsQ[x,y]];
+
+  UnsetCommutingOperators[y,x];
+  NCTest[CommutingOperatorsQ[x,y], False];
+  NCTest[CommutingOperatorsQ[y,x], False];
+
+  SetCommutingOperators[x,y];
+  NCTest[CommutingOperatorsQ[x,y]];
+  NCTest[CommutingOperatorsQ[y,x]];
+
+  NCTestCheck[SetCommutingOperators[y,x],
+              SetCommutingOperators::AlreadyDefined];
+  NCTest[CommutingOperatorsQ[x,y]];
+  NCTest[CommutingOperatorsQ[y,x]];
+
+  NCTest[CommutingOperatorsQ[x,x]];
+  NCTest[CommutingOperatorsQ[x,1]];
+  NCTest[CommutingOperatorsQ[1,x]];
+  NCTest[CommutingOperatorsQ[x,w], False];
 
 ];

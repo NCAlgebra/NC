@@ -22,6 +22,9 @@ Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 
       SetCommutative, SetNonCommutative,
       SetNonCommutativeHold,
+      SetCommutingOperators,
+      UnsetCommutingOperators,
+      CommutingOperatorsQ,
       ExpandNonCommutativeMultiply,
       BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative,
@@ -39,6 +42,8 @@ noncommutative.";
 
 TDefined::Warning = "Symbol T has definitions associated with it \
 that will be cleared by NCAlgebra."
+
+SetCommutingOperators::AlreadyDefined = "Symbols `1` and `2` were already defined commutative. Replacing existing rule."
 
 Get["NonCommutativeMultiply.usage"];
 
@@ -444,6 +449,39 @@ Begin[ "`Private`" ]
   (* pretty co *)
   OverBar[a_] := co[a];
 
+  (* SetCommutingOperators using upvalues *)
+  SetCommutingOperators[a_, b_] := (
+    If[ ValueQ[NonCommutativeMultiply[c___, a, b, d___]]
+       ,
+        Message[SetCommutingOperators::AlreadyDefined, b, a];
+        UnsetCommutingOperators[b, a];
+    ];
+    (* define commutation rule *)
+    (c___ ** b ** a ** d___ ^:= c ** a ** b ** d)
+  ) /; a =!= b;
+  
+  UnsetCommutingOperators[a_,b_] := Block[{},
+    If[ ValueQ[c___ ** a ** b ** d___]
+       ,
+        a /: c___ ** a ** b ** d___ =. ;
+        b /: c___ ** a ** b ** d___ =. ;
+       ,
+        If[ ValueQ[c___ ** b ** a ** d___]
+           ,
+            a /: c___ ** b ** a ** d___ =. ;
+            b /: c___ ** b ** a ** d___ =.
+        ];
+    ];
+  ];
+  
+  CommutingOperatorsQ[a_,a_] := True;
+  CommutingOperatorsQ[a_,b_?CommutativeQ] := True;
+  CommutingOperatorsQ[a_?CommutativeQ,b_] := True;
+  
+  CommutingOperatorsQ[a_,b_] := 
+    ValueQ[NonCommutativeMultiply[c___, a, b, d___]] ||
+    ValueQ[NonCommutativeMultiply[c___, b, a, d___]];
+  
   (* Aliases *)
   SNC = SetNonCommutative;
   NCExpand = ExpandNonCommutativeMultiply;

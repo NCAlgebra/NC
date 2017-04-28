@@ -15,6 +15,9 @@ Members are:
 * [SetCommutative](#SetCommutative)
 * [SetNonCommutative](#SetNonCommutative)
 * [SetNonCommutativeHold](#SetNonCommutativeHold)
+* [SetCommutingOperators](#SetCommutingOperators)
+* [UnsetCommutingOperators](#UnsetCommutingOperators)
+* [CommutingOperatorsQ](#CommutingOperatorsQ)
 * [Commutative](#Commutative)
 * [CommuteEverything](#CommuteEverything)
 * [BeginCommuteEverything](#BeginCommuteEverything)
@@ -109,6 +112,34 @@ See also:
 
 See also:
 [SetNonCommutative](#SetNonCommutative).
+
+### SetCommutingOperators {#SetCommutingOperators}
+
+`SetCommutingOperators[a,b]` will define a rule that substitute any
+noncommutative product `b ** a` by `a ** b`, effectively making the
+pair `a` and `b` commutative. If you want to create a rule to replace
+`a ** b` by `b ** a` use `SetCommutingOperators[b,a]` instead.
+
+See also:
+[UnsetCommutingOperators](#UnsetCommutingOperators),
+[CommutingOperatorsQ](#CommutingOperatorsQ)
+
+### UnsetCommutingOperators {#UnsetCommutingOperators}
+
+`UnsetCommutingOperators[a,b]` remove any rules previously created by
+`SetCommutingOperators[a,b]` or `SetCommutingOperators[b,a]`.
+
+See also:
+[SetCommutingOperators](#SetCommutingOperators),
+[CommutingOperatorsQ](#CommutingOperatorsQ)
+
+### CommutingOperatorsQ {#CommutingOperatorsQ}
+
+`CommutingOperatorsQ[a,b]` returns `True` if `a` and `b` are commuting operators.
+
+See also:
+[SetCommutingOperators](#SetCommutingOperators),
+[UnsetCommutingOperators](#UnsetCommutingOperators)
 
 ### Commutative {#Commutative}
 

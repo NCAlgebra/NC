@@ -25,9 +25,10 @@
 <ul>
 <li><a href="#acknowledgements"><span class="toc-section-number">1</span> Acknowledgements</a></li>
 <li><a href="#Version5_0"><span class="toc-section-number">2</span> Changes in Version 5.0</a><ul>
-<li><a href="#Version5_0_2"><span class="toc-section-number">2.1</span> Version 5.0.2</a></li>
-<li><a href="#Version5_0_1"><span class="toc-section-number">2.2</span> Version 5.0.1</a></li>
-<li><a href="#Version5_0_0"><span class="toc-section-number">2.3</span> Version 5.0.0</a></li>
+<li><a href="#Version5_0_3"><span class="toc-section-number">2.1</span> Version 5.0.3</a></li>
+<li><a href="#Version5_0_2"><span class="toc-section-number">2.2</span> Version 5.0.2</a></li>
+<li><a href="#Version5_0_1"><span class="toc-section-number">2.3</span> Version 5.0.1</a></li>
+<li><a href="#Version5_0_0"><span class="toc-section-number">2.4</span> Version 5.0.0</a></li>
 </ul></li>
 <li><a href="#UserGuideIntroduction"><span class="toc-section-number">3</span> Introduction</a><ul>
 <li><a href="#RunningNCAlgebra"><span class="toc-section-number">3.1</span> Running NCAlgebra</a></li>
@@ -92,13 +93,16 @@
 <li><a href="#SetNonCommutative"><span class="toc-section-number">10.1.10</span> SetNonCommutative</a></li>
 <li><a href="#SetNonCommutativeHold"><span class="toc-section-number">10.1.11</span> SetNonCommutativeHold</a></li>
 <li><a href="#SNC"><span class="toc-section-number">10.1.12</span> SNC</a></li>
-<li><a href="#Commutative"><span class="toc-section-number">10.1.13</span> Commutative</a></li>
-<li><a href="#CommuteEverything"><span class="toc-section-number">10.1.14</span> CommuteEverything</a></li>
-<li><a href="#BeginCommuteEverything"><span class="toc-section-number">10.1.15</span> BeginCommuteEverything</a></li>
-<li><a href="#EndCommuteEverything"><span class="toc-section-number">10.1.16</span> EndCommuteEverything</a></li>
-<li><a href="#ExpandNonCommutativeMultiply"><span class="toc-section-number">10.1.17</span> ExpandNonCommutativeMultiply</a></li>
-<li><a href="#NCExpand"><span class="toc-section-number">10.1.18</span> NCExpand</a></li>
-<li><a href="#NCE"><span class="toc-section-number">10.1.19</span> NCE</a></li>
+<li><a href="#SetCommutingOperators"><span class="toc-section-number">10.1.13</span> SetCommutingOperators</a></li>
+<li><a href="#UnsetCommutingOperators"><span class="toc-section-number">10.1.14</span> UnsetCommutingOperators</a></li>
+<li><a href="#CommutingOperatorsQ"><span class="toc-section-number">10.1.15</span> CommutingOperatorsQ</a></li>
+<li><a href="#Commutative"><span class="toc-section-number">10.1.16</span> Commutative</a></li>
+<li><a href="#CommuteEverything"><span class="toc-section-number">10.1.17</span> CommuteEverything</a></li>
+<li><a href="#BeginCommuteEverything"><span class="toc-section-number">10.1.18</span> BeginCommuteEverything</a></li>
+<li><a href="#EndCommuteEverything"><span class="toc-section-number">10.1.19</span> EndCommuteEverything</a></li>
+<li><a href="#ExpandNonCommutativeMultiply"><span class="toc-section-number">10.1.20</span> ExpandNonCommutativeMultiply</a></li>
+<li><a href="#NCExpand"><span class="toc-section-number">10.1.21</span> NCExpand</a></li>
+<li><a href="#NCE"><span class="toc-section-number">10.1.22</span> NCE</a></li>
 </ul></li>
 <li><a href="#PackageNCCollect"><span class="toc-section-number">10.2</span> NCCollect</a><ul>
 <li><a href="#NCCollect"><span class="toc-section-number">10.2.1</span> NCCollect</a></li>
@@ -406,18 +410,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
 <li>Robert L. Miller, General Atomics Corp</li>
 </ul>
 <h1 id="Version5_0"><span class="header-section-number">2</span> Changes in Version 5.0</h1>
-<h2 id="Version5_0_2"><span class="header-section-number">2.1</span> Version 5.0.2</h2>
+<h2 id="Version5_0_3"><span class="header-section-number">2.1</span> Version 5.0.3</h2>
+<ol type="1">
+<li>Restored functionality of <a href="#SetCommutingOperators">SetCommutingOperators</a>.</li>
+</ol>
+<h2 id="Version5_0_2"><span class="header-section-number">2.2</span> Version 5.0.2</h2>
 <ol type="1">
 <li><code>NCCollect</code> and <code>NCStrongCollect</code> can handle commutative variables.</li>
 <li>Cleaned up initialization files.</li>
 <li>New function <code>SetNonCommutativeHold</code> with <code>HoldAll</code> attribute can be used to set Symbols that have been previously assigned values.</li>
 </ol>
-<h2 id="Version5_0_1"><span class="header-section-number">2.2</span> Version 5.0.1</h2>
+<h2 id="Version5_0_1"><span class="header-section-number">2.3</span> Version 5.0.1</h2>
 <ol type="1">
 <li>Introducing <code>NCWebInstall</code> and <code>NCWebUpdate</code>.</li>
 <li>Bug fixes.</li>
 </ol>
-<h2 id="Version5_0_0"><span class="header-section-number">2.3</span> Version 5.0.0</h2>
+<h2 id="Version5_0_0"><span class="header-section-number">2.4</span> Version 5.0.0</h2>
 <ol type="1">
 <li>Completely rewritten core handling of noncommutative expressions with significant speed gains.</li>
 <li>Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter <a href="#NCGB">Noncommutative Gröbner Basis</a> in the user guide and the <a href="#PackageNCGBX">NCGBX</a> package. Some <code>NCGB</code> features are not fully supported yet, most notably <a href="#NCProcess">NCProcess</a>.</li>
@@ -1915,6 +1923,9 @@ NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
 <li><a href="#SetCommutative">SetCommutative</a></li>
 <li><a href="#SetNonCommutative">SetNonCommutative</a></li>
 <li><a href="#SetNonCommutativeHold">SetNonCommutativeHold</a></li>
+<li><a href="#SetCommutingOperators">SetCommutingOperators</a></li>
+<li><a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></li>
+<li><a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></li>
 <li><a href="#Commutative">Commutative</a></li>
 <li><a href="#CommuteEverything">CommuteEverything</a></li>
 <li><a href="#BeginCommuteEverything">BeginCommuteEverything</a></li>
@@ -1964,31 +1975,40 @@ NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
 <h3 id="SNC"><span class="header-section-number">10.1.12</span> SNC</h3>
 <p><code>SNC</code> is an alias for <code>SetNonCommutative</code>.</p>
 <p>See also: <a href="#SetNonCommutative">SetNonCommutative</a>.</p>
-<h3 id="Commutative"><span class="header-section-number">10.1.13</span> Commutative</h3>
+<h3 id="SetCommutingOperators"><span class="header-section-number">10.1.13</span> SetCommutingOperators</h3>
+<p><code>SetCommutingOperators[a,b]</code> will define a rule that substitute any noncommutative product <code>b ** a</code> by <code>a ** b</code>, effectively making the pair <code>a</code> and <code>b</code> commutative. If you want to create a rule to replace <code>a ** b</code> by <code>b ** a</code> use <code>SetCommutingOperators[b,a]</code> instead.</p>
+<p>See also: <a href="#UnsetCommutingOperators">UnsetCommutingOperators</a>, <a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></p>
+<h3 id="UnsetCommutingOperators"><span class="header-section-number">10.1.14</span> UnsetCommutingOperators</h3>
+<p><code>UnsetCommutingOperators[a,b]</code> remove any rules previously created by <code>SetCommutingOperators[a,b]</code> or <code>SetCommutingOperators[b,a]</code>.</p>
+<p>See also: <a href="#SetCommutingOperators">SetCommutingOperators</a>, <a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></p>
+<h3 id="CommutingOperatorsQ"><span class="header-section-number">10.1.15</span> CommutingOperatorsQ</h3>
+<p><code>CommutingOperatorsQ[a,b]</code> returns <code>True</code> if <code>a</code> and <code>b</code> are commuting operators.</p>
+<p>See also: <a href="#SetCommutingOperators">SetCommutingOperators</a>, <a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></p>
+<h3 id="Commutative"><span class="header-section-number">10.1.16</span> Commutative</h3>
 <p><code>Commutative[symbol]</code> is commutative even if <code>symbol</code> is noncommutative.</p>
 <p>See also: <a href="#CommuteEverything">CommuteEverything</a>, <a href="#CommutativeQ">CommutativeQ</a>, <a href="#SetCommutative">SetCommutative</a>, <a href="#SetNonCommutative">SetNonCommutative</a>.</p>
-<h3 id="CommuteEverything"><span class="header-section-number">10.1.14</span> CommuteEverything</h3>
+<h3 id="CommuteEverything"><span class="header-section-number">10.1.17</span> CommuteEverything</h3>
 <p><code>CommuteEverything[expr]</code> is an alias for <a href="#BeginCommuteEverything">BeginCommuteEverything</a>.</p>
 <p>See also: <a href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a href="#Commutative">Commutative</a>.</p>
-<h3 id="BeginCommuteEverything"><span class="header-section-number">10.1.15</span> BeginCommuteEverything</h3>
+<h3 id="BeginCommuteEverything"><span class="header-section-number">10.1.18</span> BeginCommuteEverything</h3>
 <p><code>BeginCommuteEverything[expr]</code> sets all symbols appearing in <code>expr</code> as commutative so that the resulting expression contains only commutative products or inverses. It issues messages warning about which symbols have been affected.</p>
 <p><code>EndCommuteEverything[]</code> restores the symbols noncommutative behaviour.</p>
 <p><code>BeginCommuteEverything</code> answers the question <em>what does it sound like?</em></p>
 <p>See also: <a href="#EndCommuteEverything">EndCommuteEverything</a>, <a href="#Commutative">Commutative</a>.</p>
-<h3 id="EndCommuteEverything"><span class="header-section-number">10.1.16</span> EndCommuteEverything</h3>
+<h3 id="EndCommuteEverything"><span class="header-section-number">10.1.19</span> EndCommuteEverything</h3>
 <p><code>EndCommuteEverything[expr]</code> restores noncommutative behaviour to symbols affected by <code>BeginCommuteEverything</code>.</p>
 <p>See also: <a href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a href="#Commutative">Commutative</a>.</p>
-<h3 id="ExpandNonCommutativeMultiply"><span class="header-section-number">10.1.17</span> ExpandNonCommutativeMultiply</h3>
+<h3 id="ExpandNonCommutativeMultiply"><span class="header-section-number">10.1.20</span> ExpandNonCommutativeMultiply</h3>
 <p><code>ExpandNonCommutativeMultiply[expr]</code> expands out <code>**</code>s in <code>expr</code>.</p>
 <p>For example</p>
 <pre><code>ExpandNonCommutativeMultiply[a**(b+c)]</code></pre>
 <p>returns</p>
 <pre><code>a**b + a**c.</code></pre>
 <p>See also: <a href="#NCExpand">NCExpand</a>, <a href="#NCE">NCE</a>.</p>
-<h3 id="NCExpand"><span class="header-section-number">10.1.18</span> NCExpand</h3>
+<h3 id="NCExpand"><span class="header-section-number">10.1.21</span> NCExpand</h3>
 <p><code>NCExpand</code> is an alias for <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>, <a href="#NCE">NCE</a>.</p>
-<h3 id="NCE"><span class="header-section-number">10.1.19</span> NCE</h3>
+<h3 id="NCE"><span class="header-section-number">10.1.22</span> NCE</h3>
 <p><code>NCE</code> is an alias for <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>, <a href="#NCExpand">NCExpand</a>.</p>
 <h2 id="PackageNCCollect"><span class="header-section-number">10.2</span> NCCollect</h2>
@@ -2300,18 +2320,18 @@ symVars = {x}</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Original</th>
-<th>Transformed</th>
+<th style="text-align: left;">Original</th>
+<th style="text-align: left;">Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>inv[mon1 + ... + K lead] lead</td>
-<td>(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
+<td style="text-align: left;">inv[mon1 + ... + K lead] lead</td>
+<td style="text-align: left;">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td>lead inv[mon1 + ... + K lead]</td>
-<td>(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
+<td style="text-align: left;">lead inv[mon1 + ... + K lead]</td>
+<td style="text-align: left;">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>
@@ -2319,38 +2339,38 @@ symVars = {x}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th>Original</th>
-<th>Transformed</th>
+<th style="text-align: left;">Original</th>
+<th style="text-align: left;">Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>inv[a] inv[1 + K a b]</td>
-<td>inv[a] - K b inv[1 + K a b]</td>
+<td style="text-align: left;">inv[a] inv[1 + K a b]</td>
+<td style="text-align: left;">inv[a] - K b inv[1 + K a b]</td>
 </tr>
 <tr class="even">
-<td>inv[a] inv[1 + K a]</td>
-<td>inv[a] - K inv[1 + K a]</td>
+<td style="text-align: left;">inv[a] inv[1 + K a]</td>
+<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td>inv[1 + K a b] inv[b]</td>
-<td>inv[b] - K inv[1 + K a b] a</td>
+<td style="text-align: left;">inv[1 + K a b] inv[b]</td>
+<td style="text-align: left;">inv[b] - K inv[1 + K a b] a</td>
 </tr>
 <tr class="even">
-<td>inv[1 + K a] inv[a]</td>
-<td>inv[a] - K inv[1 + K a]</td>
+<td style="text-align: left;">inv[1 + K a] inv[a]</td>
+<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td>inv[1 + K a b] a</td>
-<td>a inv[1 + K b a]</td>
+<td style="text-align: left;">inv[1 + K a b] a</td>
+<td style="text-align: left;">a inv[1 + K b a]</td>
 </tr>
 <tr class="even">
-<td>inv[A inv[a] + B b] inv[a]</td>
-<td>(1/A) inv[1 + (B/A) a b]</td>
+<td style="text-align: left;">inv[A inv[a] + B b] inv[a]</td>
+<td style="text-align: left;">(1/A) inv[1 + (B/A) a b]</td>
 </tr>
 <tr class="odd">
-<td>inv[a] inv[A inv[a] + K b]</td>
-<td>(1/A) inv[1 + (B/A) b a]</td>
+<td style="text-align: left;">inv[a] inv[A inv[a] + K b]</td>
+<td style="text-align: left;">(1/A) inv[1 + (B/A) b a]</td>
 </tr>
 </tbody>
 </table>
@@ -2358,26 +2378,26 @@ symVars = {x}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th>Original</th>
-<th>Transformed</th>
+<th style="text-align: left;">Original</th>
+<th style="text-align: left;">Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>inv[1 + K a b] a b</td>
-<td>(1 - inv[1 + K a b])/K</td>
+<td style="text-align: left;">inv[1 + K a b] a b</td>
+<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td>inv[1 + K a] a</td>
-<td>(1 - inv[1 + K a])/K</td>
+<td style="text-align: left;">inv[1 + K a] a</td>
+<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
 </tr>
 <tr class="odd">
-<td>a b inv[1 + K a b]</td>
-<td>(1 - inv[1 + K a b])/K</td>
+<td style="text-align: left;">a b inv[1 + K a b]</td>
+<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td>a inv[1 + K a]</td>
-<td>(1 - inv[1 + K a])/K</td>
+<td style="text-align: left;">a inv[1 + K a]</td>
+<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
 </tr>
 </tbody>
 </table>

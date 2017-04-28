@@ -1,5 +1,9 @@
 # Changes in Version 5.0 {#Version5_0}
 
+## Version 5.0.3 {#Version5_0_3}
+
+1. Restored functionality of [SetCommutingOperators](#SetCommutingOperators).
+
 ## Version 5.0.2 {#Version5_0_2}
 
 1. `NCCollect` and `NCStrongCollect` can handle commutative variables.
