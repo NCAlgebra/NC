@@ -1,5 +1,6 @@
 -   [Acknowledgements](#acknowledgements)
 -   [Changes in Version 5.0](#changes-in-version-50)
+    -   [Version 5.0.3](#version-503)
     -   [Version 5.0.2](#version-502)
     -   [Version 5.0.1](#version-501)
     -   [Version 5.0.0](#version-500)
@@ -58,6 +59,9 @@
         -   [SetNonCommutative](#setnoncommutative)
         -   [SetNonCommutativeHold](#setnoncommutativehold)
         -   [SNC](#snc)
+        -   [SetCommutingOperators](#setcommutingoperators)
+        -   [UnsetCommutingOperators](#unsetcommutingoperators)
+        -   [CommutingOperatorsQ](#commutingoperatorsq)
         -   [Commutative](#commutative)
         -   [CommuteEverything](#commuteeverything)
         -   [BeginCommuteEverything](#begincommuteeverything)
@@ -341,6 +345,11 @@ Major earlier contributions came from:
 
 Changes in Version 5.0
 ======================
+
+Version 5.0.3
+-------------
+
+1.  Restored functionality of [SetCommutingOperators](#setcommutingoperators).
 
 Version 5.0.2
 -------------
@@ -2614,6 +2623,9 @@ Members are:
 -   [SetCommutative](#setcommutative)
 -   [SetNonCommutative](#setnoncommutative)
 -   [SetNonCommutativeHold](#setnoncommutativehold)
+-   [SetCommutingOperators](#setcommutingoperators)
+-   [UnsetCommutingOperators](#unsetcommutingoperators)
+-   [CommutingOperatorsQ](#commutingoperatorsq)
 -   [Commutative](#commutative)
 -   [CommuteEverything](#commuteeverything)
 -   [BeginCommuteEverything](#begincommuteeverything)
@@ -2699,6 +2711,24 @@ See also: [SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [Non
 `SNC` is an alias for `SetNonCommutative`.
 
 See also: [SetNonCommutative](#setnoncommutative).
+
+### SetCommutingOperators
+
+`SetCommutingOperators[a,b]` will define a rule that substitute any noncommutative product `b ** a` by `a ** b`, effectively making the pair `a` and `b` commutative. If you want to create a rule to replace `a ** b` by `b ** a` use `SetCommutingOperators[b,a]` instead.
+
+See also: [UnsetCommutingOperators](#unsetcommutingoperators), [CommutingOperatorsQ](#commutingoperatorsq)
+
+### UnsetCommutingOperators
+
+`UnsetCommutingOperators[a,b]` remove any rules previously created by `SetCommutingOperators[a,b]` or `SetCommutingOperators[b,a]`.
+
+See also: [SetCommutingOperators](#setcommutingoperators), [CommutingOperatorsQ](#commutingoperatorsq)
+
+### CommutingOperatorsQ
+
+`CommutingOperatorsQ[a,b]` returns `True` if `a` and `b` are commuting operators.
+
+See also: [SetCommutingOperators](#setcommutingoperators), [UnsetCommutingOperators](#unsetcommutingoperators)
 
 ### Commutative
 
