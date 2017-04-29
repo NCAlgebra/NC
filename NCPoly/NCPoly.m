@@ -342,6 +342,12 @@ Begin["`Private`"];
     NCIntegersToIndexAux[i, Total[base]]
   ];
 
+  NCDigitsToIndex[{digits__List}, base_, Reverse -> True] := 
+    NCDigitsToIndex[Map[Reverse, {digits}], base];
+              
+  NCDigitsToIndex[digits_List, base_, Reverse -> True] := 
+    NCDigitsToIndex[Reverse[digits], base];
+    
   (* NCMonomialToDigits *)
               
   Clear[NCMonomialToDigitsAux];
@@ -790,15 +796,16 @@ Begin["`Private`"];
   ];
 
   Clear[NCPolyGramMatrixAux1];
-  NCPolyGramMatrixAux1[{ldigits_, rdigits_}, base_] :=
-    Map[NCDigitsToIndex[#, base] &, {ldigits, rdigits}];
-
-  NCPolyGramMatrixAux1[{ldigits_}, base_] :=
-    NCPolyGramMatrixAux1[{ldigits, {}}, base];
-
+  NCPolyGramMatrixAux1[{}] := {{}};
+  NCPolyGramMatrixAux1[l_] := Partition[l, UpTo[Ceiling[Length[l]/2]]];
+         
   Clear[NCPolyGramMatrixAux2];
-  NCPolyGramMatrixAux2[{}] := {{}};
-  NCPolyGramMatrixAux2[l_] := Partition[l, UpTo[Ceiling[Length[l]/2]]];
+  NCPolyGramMatrixAux2[{ldigits_, rdigits_}, base_] :=
+    {NCDigitsToIndex[ldigits, base], 
+     NCDigitsToIndex[rdigits, base, Reverse -> True]};
+
+  NCPolyGramMatrixAux2[{ldigits_}, base_] :=
+    NCPolyGramMatrixAux2[{ldigits, {}}, base];
 
   NCPolyGramMatrix[p_NCPoly] := Module[
     {digits,base,sdigits,index,deg},
@@ -807,9 +814,9 @@ Begin["`Private`"];
 
     digits = NCPolyGetDigits[p];
     base = p[[1]];
-    sdigits = Map[NCPolyGramMatrixAux2, digits];
+    sdigits = Map[NCPolyGramMatrixAux1, digits];
 
-    index = Map[NCPolyGramMatrixAux1[#, base] &, sdigits];
+    index = Map[NCPolyGramMatrixAux2[#, base] &, sdigits];
     deg = Max[Max /@ index];
 
     (*

@@ -534,7 +534,7 @@ Begin["`Private`"];
 
   NCPolyFromGramMatrix[m_SparseArray, Vars_List] := Module[
     {n, vars,
-     index, degree, digits, 
+     index, degree, digits, rindex,
      rules = Drop[ArrayRules[m], -1],
      loffset, coeff},
 
@@ -547,21 +547,21 @@ Begin["`Private`"];
     ];
     n = Total[vars];
 
-    (*
-    If[ DegreeToIndex[IndexToDegree[Length[m], n], n] != Length[m]
-       , 
-        Message[NCPolyFromCoefficientArray::InvalidDegree];
-        Return[$Failed];
-    ];
-    *)
-      
     degree = Map[IndexToDegree[# - 1, n] &, 
                    rules[[All, 1]], {2}];
     index = Map[DegreeToIndex[#, n] &, degree, {2}];
     index = rules[[All,1]] - index - 1;
 
+    (* flip digits on the right *)
+    rindex = NCFromDigits[
+               Map[Reverse,
+                   Map[NCIntegerDigits[#,n]&, 
+                       Transpose[{degree[[All,2]], index[[All,2]]}]]
+               ], n][[All,2]];
+
+    (* offset digits on the left *)
     loffset = Map[n^(#)&, degree[[All,2]] ];
-    digits = index[[All,1]] * loffset + index[[All,2]];
+    digits = index[[All,1]] * loffset + rindex;
     coeff = Transpose[{Map[Total, degree], digits}];
       
     (*
@@ -579,7 +579,7 @@ Begin["`Private`"];
     
     Return[
       NCPolyConvert[
-          NCPoly[{n}, <|Thread[coeff -> rules[[All,2]]]|>],
+          NCPoly[{n}, Merge[Thread[coeff -> rules[[All,2]]], Total]],
           Vars
       ]
     ];

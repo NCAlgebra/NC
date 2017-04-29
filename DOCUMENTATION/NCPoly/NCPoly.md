@@ -10,12 +10,14 @@ Members are:
     * [NCPolyConstant](#NCPolyConstant)
     * [NCPolyConvert](#NCPolyConvert)
     * [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray)
+    * [NCPolyFromGramMatrix](#NCPolyFromGramMatrix)
 * Access and utilities
     * [NCPolyMonomialQ](#NCPolyMonomialQ)
     * [NCPolyDegree](#NCPolyDegree)
     * [NCPolyNumberOfVariables](#NCPolyNumberOfVariables)
     * [NCPolyCoefficient](#NCPolyCoefficient)
     * [NCPolyCoefficientArray](#NCPolyCoefficientArray)
+    * [NCPolyGramMatrix](#NCPolyGramMatrix)
     * [NCPolyGetCoefficients](#NCPolyGetCoefficients)
     * [NCPolyGetDigits](#NCPolyGetDigits)
     * [NCPolyGetIntegers](#NCPolyGetIntegers)
@@ -185,12 +187,12 @@ For example, for `mat` equal to the `SparseArray` corresponding to the rules:
 
     {{1} -> 1, {2} -> 2, {6} -> -1, {50} -> -2, {4} -> 3, {11} -> -3, {121} -> 1/2}
 
-the 
+the commands
 
     vars = {{x},{y,z}};
     NCPolyFromCoefficientArray[mat, vars]
 
-returns 
+return 
 
 	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, 
 	       {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
@@ -198,6 +200,27 @@ returns
 See also:
 [NCPolyCoefficientArray](#NCPolyCoefficientArray),
 [NCPolyCoefficient](#NCPolyCoefficient).
+
+#### NCPolyFromGramMatrix {#NCPolyFromGramMatrix}
+
+`NCPolyFromGramMatrix[mat, vars]` returns an `NCPoly` constructed from the Gram matrix `mat` in variables `vars`.
+
+For example, for `mat` equal to the `SparseArray` corresponding to the rules:
+
+    {{1, 1} -> 1, {2, 1} -> 2, {2, 3} -> -1, {4, 1} -> 3, {4, 2} -> -3, {6, 5} -> -2, {13, 13} -> 1/2}
+
+the commands
+
+    vars = {{x},{y,z}};
+    NCPolyFromCoefficientArray[mat, vars]
+
+return 
+
+	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, 
+	       {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
+
+See also:
+[NCPolyGramMatrix](#NCPolyGramMatrix).
 
 ### Access and utlity functions
 
@@ -251,7 +274,7 @@ For example:
 	vars = {x,y,z};
 	poly = NCPoly[coeff, mon, vars];
 
-	mat = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];
+	mat = NCPolyCoefficient[poly];
 
 returns `mat` as a `SparseArray` corresponding to the rules:
 
@@ -260,6 +283,26 @@ returns `mat` as a `SparseArray` corresponding to the rules:
 See also:
 [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray),
 [NCPolyCoefficient](#NCPolyCoefficient).
+
+#### NCPolyGramMatrix {#NCPolyFromMatrix}
+
+`NCPolyGramMatrix[poly]` returns a Gram matrix corresponding to the monomials in the nc polynomial `poly`.
+
+For example:
+
+	coeff = {1, 2, 3, -1, -2, -3, 1/2};
+	mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+	vars = {x,y,z};
+	poly = NCPoly[coeff, mon, vars];
+
+	mat = NCPolyGramMatrix[poly];
+
+returns `mat` as a `SparseArray` corresponding to the rules:
+
+    {{1, 1} -> 1, {2, 1} -> 2, {2, 3} -> -1, {4, 1} -> 3, {4, 2} -> -3, {6, 5} -> -2, {13, 13} -> 1/2}
+
+See also:
+[NCPolyFromGramMatrix](#NCPolyFromGramMatrix).
 
 #### NCPolyGetCoefficients {#NCPolyGetCoefficients}
 
@@ -642,6 +685,9 @@ monomial basis.
 `NCDigitsToIndex[{digit1,digits2}, b]` applies `NCDigitsToIndex` to each
 `digit1`, `digit2`, ....
 
+`NCDigitsToIndex[digits, b, Reverse -> True]` returns the index as
+occupied by the permuted digits.
+
 `NCDigitsToIndex` returns the same index for graded or simple basis. 
 
 For example:
@@ -663,7 +709,13 @@ basis of polynomials in $x$ and $y$. Likewise
 
 returns
 
-	{1,3, 5,27}
+	{1,3,5,27}
+
+Finally 
+
+	NCDigitsToIndex[{0, 1}, 2, Reverse -> True]
+	
+returns `6` instead of `5`.
 
 See also:
 [NCFromDigits](#NCFromDigits),
