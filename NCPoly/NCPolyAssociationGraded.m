@@ -145,8 +145,8 @@ Begin["`Private`"];
     $Failed) /; Length[{r}] =!= 2;
 
   (* NCPolyConvert *)
-  NCPolyConvert[p_List, Vars_List] := 
-    Map[NCPolyConvert[#, Vars]&, p];
+  NCPolyConvert[{p__NCPoly}, Vars_List] := 
+    Map[NCPolyConvert[#, Vars]&, {p}];
       
   NCPolyConvert[p_NCPoly, Vars_List] := Module[
     {vars},
@@ -473,22 +473,22 @@ Begin["`Private`"];
     ];
   ];
   
-  NCPolyCoefficientArray[ps_List] := Block[
+  NCPolyCoefficientArray[{ps__NCPoly}] := Block[
     {d},
-    d = Max[Map[NCPolyDegree, ps]];
-    Return[SparseArray[Map[NCPolyCoefficientArray[#,d]&, ps]]];
-  ]; /; Count[Unitize[Max /@ ps[[All,1]] - Min /@ ps[[All,1]]], 0]
+    d = Max[Map[NCPolyDegree, {ps}]];
+    Return[SparseArray[Map[NCPolyCoefficientArray[#,d]&, {ps}]]];
+  ] /; (Count[Unitize[Max /@ {ps}[[All,1]] - Min /@ {ps}[[All,1]]], 0] == Length[{ps}]);
 
   Clear[IndexToDegree];
   IndexToDegree[m_, n_] := Floor[Log[n, (m - 1/(1 - n)) (-1 + n)]];
 
-  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 3, vars_List] := 
+  NCPolyFromCoefficientArray[m_SparseArray?MatrixQ, vars_List] := 
     Map[NCPolyFromCoefficientArray[#,vars]&, m];
 
-  NCPolyFromCoefficientArray[m_SparseArray /; Depth[m] == 2, Vars_List] := Module[
-    {index, degree, n,
+  NCPolyFromCoefficientArray[m_SparseArray, Vars_List] := Module[
+    {index, degree, coeff, n, 
      rules = Drop[ArrayRules[m], -1],
-     vars,flatvars},
+     vars},
 
     (* list of variables *)
     Check[ vars = NCPolyVarAux[Vars];
@@ -529,7 +529,62 @@ Begin["`Private`"];
       ]
     ];
   ];
+  
+  (* From GramMatrix *)
 
+  NCPolyFromGramMatrix[m_SparseArray, Vars_List] := Module[
+    {n, vars,
+     index, degree, digits, 
+     rules = Drop[ArrayRules[m], -1],
+     loffset, coeff},
+
+    (* list of variables *)
+    Check[ vars = NCPolyVarAux[Vars];
+          ,
+           Return[$Failed]
+          ,
+           NCPoly::InvalidList
+    ];
+    n = Total[vars];
+
+    (*
+    If[ DegreeToIndex[IndexToDegree[Length[m], n], n] != Length[m]
+       , 
+        Message[NCPolyFromCoefficientArray::InvalidDegree];
+        Return[$Failed];
+    ];
+    *)
+      
+    degree = Map[IndexToDegree[# - 1, n] &, 
+                   rules[[All, 1]], {2}];
+    index = Map[DegreeToIndex[#, n] &, degree, {2}];
+    index = rules[[All,1]] - index - 1;
+
+    loffset = Map[n^(#)&, degree[[All,2]] ];
+    digits = index[[All,1]] * loffset + index[[All,2]];
+    coeff = Transpose[{Map[Total, degree], digits}];
+      
+    (*
+    Print["m = ", Normal[m]];
+    Print["n = ", n];
+    Print["Vars = ", Vars];
+    Print["vars = ", vars];
+    Print["rules = ", rules];
+    Print["degree = ", degree];
+    Print["index = ", index];
+    Print["digits = ", digits];
+    Print["loffset = ", loffset];
+    Print["coeff = ", coeff];
+    *)
+    
+    Return[
+      NCPolyConvert[
+          NCPoly[{n}, <|Thread[coeff -> rules[[All,2]]]|>],
+          Vars
+      ]
+    ];
+      
+  ];
   
 End[];
 EndPackage[]

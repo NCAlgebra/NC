@@ -3,6 +3,7 @@
 ## Version 5.0.3 {#Version5_0_3}
 
 1. Restored functionality of [SetCommutingOperators](#SetCommutingOperators).
+2. Improved implementation of [CommutativeQ](#CommutativeQ) for arrays.
 
 ## Version 5.0.2 {#Version5_0_2}
 

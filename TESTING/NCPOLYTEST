@@ -13,6 +13,7 @@ tests = {
   "Product",
   "Reduce",
   "CoeffArray",
+  "GramMatrix",
   "Groebner",
   "Hankel",
   "NCPolyInterface",

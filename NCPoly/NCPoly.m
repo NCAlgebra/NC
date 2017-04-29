@@ -26,6 +26,7 @@ Clear[NCPoly,
       NCPolyCoefficient,
       NCPolyCoefficientArray,
       NCPolyFromCoefficientArray,
+      NCPolyFromGramMatrix,
       NCPolyGetDigits,
       NCPolyGetIntegers,
       NCPolyNumberOfVariables,
@@ -39,9 +40,6 @@ Clear[NCPoly,
       NCPolyQuotientExpand,
       NCPolyNormalize];
 
-Clear[NCPolyHankelMatrix,
-      NCPolyRealization];
-
 (* The following generic functions are implemented here *)
 
 Clear[NCFromDigits,
@@ -53,6 +51,10 @@ Clear[NCFromDigits,
       NCPolyDivideLeading,
       NCPolyDisplay,
       NCPolyOrderType];
+
+Clear[NCPolyHankelMatrix,
+      NCPolyRealization,
+      NCPolyGramMatrix];
 
 Get["NCPoly.usage"];
 
@@ -592,7 +594,7 @@ Begin["`Private`"];
       
   ];
 
-
+  Clear[SimultaneousTriangularization];
   SimultaneousTriangularization[AA_] := Module[
     {A = AA, 
      n = Dimensions[AA][[2]], ii,
@@ -786,7 +788,42 @@ Begin["`Private`"];
     Return[{A,b,c,d}];
       
   ];
+
+  Clear[NCPolyGramMatrixAux1];
+  NCPolyGramMatrixAux1[{ldigits_, rdigits_}, base_] :=
+    Map[NCDigitsToIndex[#, base] &, {ldigits, rdigits}];
+
+  NCPolyGramMatrixAux1[{ldigits_}, base_] :=
+    NCPolyGramMatrixAux1[{ldigits, {}}, base];
+
+  Clear[NCPolyGramMatrixAux2];
+  NCPolyGramMatrixAux2[{}] := {{}};
+  NCPolyGramMatrixAux2[l_] := Partition[l, UpTo[Ceiling[Length[l]/2]]];
+
+  NCPolyGramMatrix[p_NCPoly] := Module[
+    {digits,base,sdigits,index,deg},
+    
+    (* build Gram matrix *)
+
+    digits = NCPolyGetDigits[p];
+    base = p[[1]];
+    sdigits = Map[NCPolyGramMatrixAux2, digits];
+
+    index = Map[NCPolyGramMatrixAux1[#, base] &, sdigits];
+    deg = Max[Max /@ index];
+
+    (*
+    Print["digits = ", digits];
+    Print["base = ", base];
+    Print["sdigits = ", sdigits];
+    Print["index = ", index];
+    Print["deg = ", deg];
+    *)
       
+    Return[SparseArray[Thread[index -> Values[p[[2]]]], {deg,deg}]];
+      
+  ];
+         
 End[]
       
 (* Load NCPolyAssociationGraded *)

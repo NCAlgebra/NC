@@ -48,6 +48,15 @@ Block[
   p = NCPolyFromCoefficientArray[mat, vars];
   NCTest[p, {p1,p2}];
 
+  (* inhomogenous list *)
+  poly = {p1, 3};
+  NCTest[NCPolyCoefficientArray[poly], NCPolyCoefficientArray[poly]];
+
+  (* inhomogenous list *)
+  p2 = NCPoly[{2, 1, -1, 1}, {{x}, {x, y}, {y, x}, {x,x,x}}, {{x}, {y}}];
+  poly = {p1, p2};
+  NCTest[NCPolyCoefficientArray[poly], NCPolyCoefficientArray[poly]];
+
   vars = {x, y, z};
   poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
   mat = NCPolyCoefficientArray[poly];
