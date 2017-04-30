@@ -25,10 +25,11 @@
 <ul>
 <li><a href="#acknowledgements"><span class="toc-section-number">1</span> Acknowledgements</a></li>
 <li><a href="#Version5_0"><span class="toc-section-number">2</span> Changes in Version 5.0</a><ul>
-<li><a href="#Version5_0_3"><span class="toc-section-number">2.1</span> Version 5.0.3</a></li>
-<li><a href="#Version5_0_2"><span class="toc-section-number">2.2</span> Version 5.0.2</a></li>
-<li><a href="#Version5_0_1"><span class="toc-section-number">2.3</span> Version 5.0.1</a></li>
-<li><a href="#Version5_0_0"><span class="toc-section-number">2.4</span> Version 5.0.0</a></li>
+<li><a href="#Version5_0_4"><span class="toc-section-number">2.1</span> Version 5.0.4</a></li>
+<li><a href="#Version5_0_3"><span class="toc-section-number">2.2</span> Version 5.0.3</a></li>
+<li><a href="#Version5_0_2"><span class="toc-section-number">2.3</span> Version 5.0.2</a></li>
+<li><a href="#Version5_0_1"><span class="toc-section-number">2.4</span> Version 5.0.1</a></li>
+<li><a href="#Version5_0_0"><span class="toc-section-number">2.5</span> Version 5.0.0</a></li>
 </ul></li>
 <li><a href="#UserGuideIntroduction"><span class="toc-section-number">3</span> Introduction</a><ul>
 <li><a href="#RunningNCAlgebra"><span class="toc-section-number">3.1</span> Running NCAlgebra</a></li>
@@ -410,22 +411,27 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
 <li>Robert L. Miller, General Atomics Corp</li>
 </ul>
 <h1 id="Version5_0"><span class="header-section-number">2</span> Changes in Version 5.0</h1>
-<h2 id="Version5_0_3"><span class="header-section-number">2.1</span> Version 5.0.3</h2>
+<h2 id="Version5_0_4"><span class="header-section-number">2.1</span> Version 5.0.4</h2>
+<ol type="1">
+<li>First implementation of <a href="#NCPolyGramMatrix">NCPolyGramMatrix</a> and <a href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a>.</li>
+</ol>
+<h2 id="Version5_0_3"><span class="header-section-number">2.2</span> Version 5.0.3</h2>
 <ol type="1">
 <li>Restored functionality of <a href="#SetCommutingOperators">SetCommutingOperators</a>.</li>
+<li>Improved implementation of <a href="#CommutativeQ">CommutativeQ</a> for arrays.</li>
 </ol>
-<h2 id="Version5_0_2"><span class="header-section-number">2.2</span> Version 5.0.2</h2>
+<h2 id="Version5_0_2"><span class="header-section-number">2.3</span> Version 5.0.2</h2>
 <ol type="1">
 <li><code>NCCollect</code> and <code>NCStrongCollect</code> can handle commutative variables.</li>
 <li>Cleaned up initialization files.</li>
 <li>New function <code>SetNonCommutativeHold</code> with <code>HoldAll</code> attribute can be used to set Symbols that have been previously assigned values.</li>
 </ol>
-<h2 id="Version5_0_1"><span class="header-section-number">2.3</span> Version 5.0.1</h2>
+<h2 id="Version5_0_1"><span class="header-section-number">2.4</span> Version 5.0.1</h2>
 <ol type="1">
 <li>Introducing <code>NCWebInstall</code> and <code>NCWebUpdate</code>.</li>
 <li>Bug fixes.</li>
 </ol>
-<h2 id="Version5_0_0"><span class="header-section-number">2.4</span> Version 5.0.0</h2>
+<h2 id="Version5_0_0"><span class="header-section-number">2.5</span> Version 5.0.0</h2>
 <ol type="1">
 <li>Completely rewritten core handling of noncommutative expressions with significant speed gains.</li>
 <li>Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter <a href="#NCGB">Noncommutative Gröbner Basis</a> in the user guide and the <a href="#PackageNCGBX">NCGBX</a> package. Some <code>NCGB</code> features are not fully supported yet, most notably <a href="#NCProcess">NCProcess</a>.</li>
@@ -2990,6 +2996,7 @@ index = {1,2,3,4,5,4,1};</code></pre>
 <li><a href="#NCPolyConstant">NCPolyConstant</a></li>
 <li><a href="#NCPolyConvert">NCPolyConvert</a></li>
 <li><a href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a></li>
+<li><a href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a></li>
 </ul></li>
 <li>Access and utilities
 <ul>
@@ -2998,6 +3005,7 @@ index = {1,2,3,4,5,4,1};</code></pre>
 <li><a href="#NCPolyNumberOfVariables">NCPolyNumberOfVariables</a></li>
 <li><a href="#NCPolyCoefficient">NCPolyCoefficient</a></li>
 <li><a href="#NCPolyCoefficientArray">NCPolyCoefficientArray</a></li>
+<li><a href="#NCPolyGramMatrix">NCPolyGramMatrix</a></li>
 <li><a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a></li>
 <li><a href="#NCPolyGetDigits">NCPolyGetDigits</a></li>
 <li><a href="#NCPolyGetIntegers">NCPolyGetIntegers</a></li>
@@ -3095,13 +3103,24 @@ poly2 = NCPolyConvert[poly, vars];</code></pre>
 <p><code>NCPolyFromCoefficientArray[mat, vars]</code> returns an <code>NCPoly</code> constructed from the coefficient array <code>mat</code> in variables <code>vars</code>.</p>
 <p>For example, for <code>mat</code> equal to the <code>SparseArray</code> corresponding to the rules:</p>
 <pre><code>{{1} -&gt; 1, {2} -&gt; 2, {6} -&gt; -1, {50} -&gt; -2, {4} -&gt; 3, {11} -&gt; -3, {121} -&gt; 1/2}</code></pre>
-<p>the</p>
+<p>the commands</p>
 <pre><code>vars = {{x},{y,z}};
 NCPolyFromCoefficientArray[mat, vars]</code></pre>
-<p>returns</p>
+<p>return</p>
 <pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 1, 0} -&gt; 2, {1, 0, 2} -&gt; 3, {1, 1, 1} -&gt; -1, 
        {1, 1, 6} -&gt; -3, {1, 3, 9} -&gt; -2, {4, 0, 80} -&gt; 1/2|&gt;]</code></pre>
 <p>See also: <a href="#NCPolyCoefficientArray">NCPolyCoefficientArray</a>, <a href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
+<h4 id="NCPolyFromGramMatrix"><span class="header-section-number">13.1.2.6</span> NCPolyFromGramMatrix</h4>
+<p><code>NCPolyFromGramMatrix[mat, vars]</code> returns an <code>NCPoly</code> constructed from the Gram matrix <code>mat</code> in variables <code>vars</code>.</p>
+<p>For example, for <code>mat</code> equal to the <code>SparseArray</code> corresponding to the rules:</p>
+<pre><code>{{1, 1} -&gt; 1, {2, 1} -&gt; 2, {2, 3} -&gt; -1, {4, 1} -&gt; 3, {4, 2} -&gt; -3, {6, 5} -&gt; -2, {13, 13} -&gt; 1/2}</code></pre>
+<p>the commands</p>
+<pre><code>vars = {{x},{y,z}};
+NCPolyFromCoefficientArray[mat, vars]</code></pre>
+<p>return</p>
+<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 1, 0} -&gt; 2, {1, 0, 2} -&gt; 3, {1, 1, 1} -&gt; -1, 
+       {1, 1, 6} -&gt; -3, {1, 3, 9} -&gt; -2, {4, 0, 80} -&gt; 1/2|&gt;]</code></pre>
+<p>See also: <a href="#NCPolyGramMatrix">NCPolyGramMatrix</a>.</p>
 <h3 id="access-and-utlity-functions"><span class="header-section-number">13.1.3</span> Access and utlity functions</h3>
 <h4 id="NCPolyMonomialQ"><span class="header-section-number">13.1.3.1</span> NCPolyMonomialQ</h4>
 <p><code>NCPolyMonomialQ[poly]</code> returns <code>True</code> if <code>poly</code> is a <code>NCPoly</code> monomial.</p>
@@ -3130,11 +3149,23 @@ mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
 vars = {x,y,z};
 poly = NCPoly[coeff, mon, vars];
 
-mat = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];</code></pre>
+mat = NCPolyCoefficient[poly];</code></pre>
 <p>returns <code>mat</code> as a <code>SparseArray</code> corresponding to the rules:</p>
 <pre><code>{{1} -&gt; 1, {2} -&gt; 2, {6} -&gt; -1, {50} -&gt; -2, {4} -&gt; 3, {11} -&gt; -3, {121} -&gt; 1/2}</code></pre>
 <p>See also: <a href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a>, <a href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
-<h4 id="NCPolyGetCoefficients"><span class="header-section-number">13.1.3.6</span> NCPolyGetCoefficients</h4>
+<h4 id="NCPolyFromMatrix"><span class="header-section-number">13.1.3.6</span> NCPolyGramMatrix</h4>
+<p><code>NCPolyGramMatrix[poly]</code> returns a Gram matrix corresponding to the monomials in the nc polynomial <code>poly</code>.</p>
+<p>For example:</p>
+<pre><code>coeff = {1, 2, 3, -1, -2, -3, 1/2};
+mon = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+vars = {x,y,z};
+poly = NCPoly[coeff, mon, vars];
+
+mat = NCPolyGramMatrix[poly];</code></pre>
+<p>returns <code>mat</code> as a <code>SparseArray</code> corresponding to the rules:</p>
+<pre><code>{{1, 1} -&gt; 1, {2, 1} -&gt; 2, {2, 3} -&gt; -1, {4, 1} -&gt; 3, {4, 2} -&gt; -3, {6, 5} -&gt; -2, {13, 13} -&gt; 1/2}</code></pre>
+<p>See also: <a href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a>.</p>
+<h4 id="NCPolyGetCoefficients"><span class="header-section-number">13.1.3.7</span> NCPolyGetCoefficients</h4>
 <p><code>NCPolyGetCoefficients[poly]</code> returns a list with the coefficients of the monomials in the nc polynomial <code>poly</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -3144,7 +3175,7 @@ coeffs = NCPolyGetCoefficients[poly];</code></pre>
 <pre><code>coeffs = {2,-1}</code></pre>
 <p>The coefficients are returned according to the current graded degree-lexicographic ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetDigits">NCPolyGetDigits</a>, <a href="#NCPolyCoefficient">NCPolyCoefficient</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyGetDigits"><span class="header-section-number">13.1.3.7</span> NCPolyGetDigits</h4>
+<h4 id="NCPolyGetDigits"><span class="header-section-number">13.1.3.8</span> NCPolyGetDigits</h4>
 <p><code>NCPolyGetDigits[poly]</code> returns a list with the digits that encode the monomials in the nc polynomial <code>poly</code> as produced by <a href="#NCIntegerDigits">NCIntegerDigits</a>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -3154,7 +3185,7 @@ digits = NCPolyGetDigits[poly];</code></pre>
 <pre><code>digits = {{2}, {0,1,0}}</code></pre>
 <p>The digits are returned according to the current ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyGetIntegers"><span class="header-section-number">13.1.3.8</span> NCPolyGetIntegers</h4>
+<h4 id="NCPolyGetIntegers"><span class="header-section-number">13.1.3.9</span> NCPolyGetIntegers</h4>
 <p><code>NCPolyGetIntegers[poly]</code> returns a list with the digits that encode the monomials in the nc polynomial <code>poly</code> as produced by <a href="#NCFromDigits">NCFromDigits</a>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -3164,7 +3195,7 @@ digits = NCPolyGetIntegers[poly];</code></pre>
 <pre><code>digits = {{1,2}, {3,3}}</code></pre>
 <p>The digits are returned according to the current ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyLeadingMonomial"><span class="header-section-number">13.1.3.9</span> NCPolyLeadingMonomial</h4>
+<h4 id="NCPolyLeadingMonomial"><span class="header-section-number">13.1.3.10</span> NCPolyLeadingMonomial</h4>
 <p><code>NCPolyLeadingMonomial[poly]</code> returns an <code>NCPoly</code> representing the leading term of the nc polynomial <code>poly</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -3172,7 +3203,7 @@ poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
 lead = NCPolyLeadingMonomial[poly];</code></pre>
 <p>returns an <code>NCPoly</code> representing the monomial <span class="math inline">\(x y x\)</span>. The leading monomial is computed according to the current ordering, in this example <code>x &lt; y &lt; z</code>. The actual representation of <code>lead</code> varies with the implementation.</p>
 <p>See also: <a href="#NCPolyLeadingTerm">NCPolyLeadingTerm</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyLeadingTerm"><span class="header-section-number">13.1.3.10</span> NCPolyLeadingTerm</h4>
+<h4 id="NCPolyLeadingTerm"><span class="header-section-number">13.1.3.11</span> NCPolyLeadingTerm</h4>
 <p><code>NCPolyLeadingTerm[poly]</code> returns a rule associated with the leading term of the nc polynomial <code>poly</code> as understood by <a href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
 <p>For example:</p>
 <pre><code>vars = {x,y,z};
@@ -3182,10 +3213,10 @@ lead = NCPolyLeadingTerm[poly];</code></pre>
 <pre><code>lead = {3,3} -&gt; -1</code></pre>
 <p>representing the monomial <span class="math inline">\(- x y x\)</span>. The leading monomial is computed according to the current ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyLeadingMonomial">NCPolyLeadingMonomial</a>, <a href="#NCPolyMonomial">NCPolyMonomial</a>, <a href="#NCPoly">NCPoly</a>.</p>
-<h4 id="NCPolyOrderType"><span class="header-section-number">13.1.3.11</span> NCPolyOrderType</h4>
+<h4 id="NCPolyOrderType"><span class="header-section-number">13.1.3.12</span> NCPolyOrderType</h4>
 <p><code>NCPolyOrderType[poly]</code> returns the type of monomial order in which the nc polynomial <code>poly</code> is stored. Order can be <code>NCPolyGradedDegLex</code> or <code>NCPolyDegLex</code>.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>,</p>
-<h4 id="NCPolyToRule"><span class="header-section-number">13.1.3.12</span> NCPolyToRule</h4>
+<h4 id="NCPolyToRule"><span class="header-section-number">13.1.3.13</span> NCPolyToRule</h4>
 <p><code>NCPolyToRule[poly]</code> returns a <code>Rule</code> associated with polynomial <code>poly</code>. If <code>poly = lead + rest</code>, where <code>lead</code> is the leading term in the current order, then <code>NCPolyToRule[poly]</code> returns the rule <code>lead -&gt; -rest</code> where the coefficient of the leading term has been normalized to <code>1</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x, y, z};
@@ -3294,6 +3325,7 @@ poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
 <h4 id="NCDigitsToIndex"><span class="header-section-number">13.1.7.3</span> NCDigitsToIndex</h4>
 <p><code>NCDigitsToIndex[digits, b]</code> returns the index that the monomial represented by <code>digits</code> in the base <code>b</code> would occupy in the standard monomial basis.</p>
 <p><code>NCDigitsToIndex[{digit1,digits2}, b]</code> applies <code>NCDigitsToIndex</code> to each <code>digit1</code>, <code>digit2</code>, ....</p>
+<p><code>NCDigitsToIndex[digits, b, Reverse -&gt; True]</code> returns the index as occupied by the permuted digits.</p>
 <p><code>NCDigitsToIndex</code> returns the same index for graded or simple basis.</p>
 <p>For example:</p>
 <pre><code>digits = {0, 1};
@@ -3306,7 +3338,10 @@ NCDigitsToIndex[digits, {1, 1}]</code></pre>
 <pre><code>digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
 NCDigitsToIndex[digits, 2]</code></pre>
 <p>returns</p>
-<pre><code>{1,3, 5,27}</code></pre>
+<pre><code>{1,3,5,27}</code></pre>
+<p>Finally</p>
+<pre><code>NCDigitsToIndex[{0, 1}, 2, Reverse -&gt; True]</code></pre>
+<p>returns <code>6</code> instead of <code>5</code>.</p>
 <p>See also: <a href="#NCFromDigits">NCFromDigits</a>, <a href="#NCIntegerDigits">NCIntegerDigits</a>.</p>
 <h4 id="NCPadAndMatch"><span class="header-section-number">13.1.7.4</span> NCPadAndMatch</h4>
 <p>When list <code>a</code> is longer than list <code>b</code>, <code>NCPadAndMatch[a,b]</code> returns the minimum number of elements from list a that should be added to the left and right of list <code>b</code> so that <code>a = l b r</code>. When list <code>b</code> is longer than list <code>a</code>, return the opposite match.</p>
