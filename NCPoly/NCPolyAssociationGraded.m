@@ -532,6 +532,9 @@ Begin["`Private`"];
   
   (* From GramMatrix *)
 
+  NCPolyFromGramMatrix[m_List?MatrixQ, Vars_List] := 
+    NCPolyFromGramMatrix[SparseArray[m], Vars];
+  
   NCPolyFromGramMatrix[m_SparseArray, Vars_List] := Module[
     {n, vars,
      index, degree, digits, rindex,

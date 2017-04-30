@@ -153,6 +153,8 @@ Begin[ "`Private`" ]
   SDPMatrices[a_, vars_] := Module[
     {AA, CC}, 
 
+    (* Problem format is: min 0 s.t. a >= 0 *)
+      
     (* Extract constraints *)
     {CC, AA} = SDPLinearCoefficientArrays[a, vars];
 
