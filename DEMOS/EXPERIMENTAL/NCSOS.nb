@@ -1,0 +1,3258 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    121185,       3250]
+NotebookOptionsPosition[    117147,       3123]
+NotebookOutlinePosition[    117501,       3139]
+CellTagsIndexPosition[    117458,       3136]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCAlgebra`"}]}], "Input",
+ CellChangeTimes->{{3.702490092714489*^9, 3.702490100250081*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"You are using the version of NCAlgebra which is found in:\"\
+\>"], "Print",
+ CellChangeTimes->{3.702490103326934*^9, 3.7024904377503443`*^9, 
+  3.7024967492803383`*^9, 3.7024993477330008`*^9, 3.702577376515012*^9, 
+  3.7025860701121883`*^9, 3.70260372062131*^9, 3.7026426825248957`*^9, 
+  3.702644334576098*^9, 3.702654330631928*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  \"\>", "\[InvisibleSpace]", "\<\"/Users/mauricio/NC/\"\>"}],
+  SequenceForm["  ", "/Users/mauricio/NC/"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.702490103326934*^9, 3.7024904377503443`*^9, 
+  3.7024967492803383`*^9, 3.7024993477330008`*^9, 3.702577376515012*^9, 
+  3.7025860701121883`*^9, 3.70260372062131*^9, 3.7026426825248957`*^9, 
+  3.702644334576098*^9, 3.7026543306401854`*^9}],
+
+Cell[BoxData["\<\"You can now use \\\"<< NCAlgebra`\\\" to load \
+NCAlgebra.\"\>"], "Print",
+ CellChangeTimes->{3.702490103326934*^9, 3.7024904377503443`*^9, 
+  3.7024967492803383`*^9, 3.7024993477330008`*^9, 3.702577376515012*^9, 
+  3.7025860701121883`*^9, 3.70260372062131*^9, 3.7026426825248957`*^9, 
+  3.702644334576098*^9, 3.702654330650221*^9}],
+
+Cell["\<\
+------------------------------------------------------------
+NCAlgebra - Version 5.0.4
+Compatible with Mathematica Version 10 and above
+
+Authors:
+
+  J. William Helton*
+  Mauricio de Oliveira&
+
+* Math, UCSD, La Jolla, CA
+& MAE, UCSD, La Jolla, CA
+
+with major earlier contributions by:
+
+  Mark Stankus$ 
+  Robert L. Miller#
+
+$ Math, Cal Poly San Luis Obispo
+# General Atomics Corp
+
+Copyright: 
+  Helton and de Oliveira 2017
+  Helton 2002
+  Helton and Miller June 1991
+  All rights reserved.
+
+The program was written by the authors and by:
+  David Hurst, Daniel Lamm, Orlando Merino, Robert Obar,
+  Henry Pfister, Mike Walker, John Wavrik, Lois Yu,
+  J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple. 
+  The beginnings of the program come from eran@slac.
+  Considerable recent help came from Igor Klep.
+
+Current primary support is from the 
+  NSF Division of Mathematical Sciences.
+  
+This program was written with support from 
+  AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
+  UCSD Faculty Mentor Program,
+  and US Department of Education.
+
+For NCAlgebra updates see:
+
+  www.github.com/NCAlgebra/NC
+  www.math.ucsd.edu/~ncalg
+
+------------------------------------------------------------\
+\>", "Print",
+ CellChangeTimes->{3.702490103326934*^9, 3.7024904377503443`*^9, 
+  3.7024967492803383`*^9, 3.7024993477330008`*^9, 3.702577376515012*^9, 
+  3.7025860701121883`*^9, 3.70260372062131*^9, 3.7026426825248957`*^9, 
+  3.702644334576098*^9, 3.7026543306615467`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{"<<", "NCPolyInterface`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCPoly`"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "NCPolyAssociationGraded`"}]}], "Input",
+ CellChangeTimes->{{3.7024904543938723`*^9, 3.7024904688064547`*^9}, {
+  3.702578421055456*^9, 3.702578426343968*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "NCPolySOS`"}]], "Input",
+ CellChangeTimes->{{3.702577378947301*^9, 3.702577381090974*^9}, {
+  3.702642689159713*^9, 3.702642689767345*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Get", "::", "noopen"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot open \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"NCPolySOS.usage\\\\\\\"\\\"}]\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/noopen\\\", ButtonNote -> \
+\\\"Get::noopen\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.702577381564232*^9, 3.7025773977252407`*^9}, {
+   3.702577435149199*^9, 3.702577461778562*^9}, {3.702577650934141*^9, 
+   3.7025776609828243`*^9}, {3.7025776959497223`*^9, 3.702577739509552*^9}, 
+   3.7025778430283737`*^9, 3.702577965424863*^9, 3.702578019551149*^9, 
+   3.7025780572521343`*^9, 3.702578101756345*^9, {3.70257840705593*^9, 
+   3.702578433798218*^9}, 3.702578619539936*^9, {3.702578659901602*^9, 
+   3.7025787015410757`*^9}, 3.702578751799095*^9, {3.702586089427033*^9, 
+   3.702586094234137*^9}, 3.702586296630485*^9, 3.702586356056118*^9, {
+   3.7025866348346567`*^9, 3.702586653238345*^9}, {3.702603727108613*^9, 
+   3.702603759432432*^9}, 3.702603791946068*^9, {3.70260396704604*^9, 
+   3.702603981611368*^9}, 3.7026040122909803`*^9, {3.7026041004909773`*^9, 
+   3.702604127159371*^9}, 3.7026049150411863`*^9, {3.702604957800593*^9, 
+   3.7026049986414413`*^9}, 3.702605334137373*^9, 3.7026426904175577`*^9, 
+   3.702643698030933*^9, 3.7026443372673683`*^9, 3.7026448559079943`*^9, 
+   3.702653212090114*^9, 3.702653337091655*^9, 3.702653429381795*^9, 
+   3.702653697820463*^9, 3.702653799594617*^9, 3.702653899370864*^9, {
+   3.702654245498431*^9, 3.7026542633914347`*^9}, 3.702654332893495*^9, 
+   3.702654411270103*^9, 3.702654490450225*^9, {3.702654665184238*^9, 
+   3.7026546943643427`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", "=", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"p", "=", 
+  RowBox[{"(", 
+   RowBox[{"x", "+", "y", "-", 
+    RowBox[{"x", "**", "x"}]}], ")"}]}], "\[IndentingNewLine]", 
+ RowBox[{"poly1", "=", 
+  RowBox[{"NCToNCPoly", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"p", "**", "p"}], "+", 
+     RowBox[{"x", "**", "y", "**", "y", "**", "x"}], "+", 
+     RowBox[{"x", "**", "x"}]}], ",", "vars"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.702490105779408*^9, 3.7024901544604683`*^9}, {
+   3.702490187621544*^9, 3.702490189788888*^9}, {3.702603852201206*^9, 
+   3.7026038599293737`*^9}, {3.702604931127651*^9, 3.702604934478566*^9}, 
+   3.7026539477928467`*^9, {3.702654937105117*^9, 3.702654937440503*^9}}],
+
+Cell[BoxData[
+ RowBox[{"x", "+", "y", "-", 
+  RowBox[{"x", "**", "x"}]}]], "Output",
+ CellChangeTimes->{{3.702490128421348*^9, 3.7024901401684628`*^9}, {
+   3.702490190654339*^9, 3.7024901926107607`*^9}, 3.702490337992886*^9, {
+   3.702490439407164*^9, 3.702490469999065*^9}, 3.702490509750414*^9, 
+   3.7024962381905127`*^9, 3.702496751046854*^9, 3.702499349531612*^9, 
+   3.702502486857625*^9, 3.702577735939536*^9, {3.702578427497612*^9, 
+   3.7025784313630743`*^9}, {3.702586072675417*^9, 3.7025860850527*^9}, 
+   3.70260372320557*^9, 3.702603860638225*^9, 3.70260493616969*^9, 
+   3.702604999315436*^9, 3.702605334796977*^9, 3.702642700661072*^9, 
+   3.70264433841926*^9, 3.7026448565508327`*^9, 3.7026532127948313`*^9, 
+   3.7026533381568527`*^9, 3.7026534301911983`*^9, 3.7026536994163513`*^9, 
+   3.70265380012381*^9, 3.7026538999326477`*^9, {3.702653948603018*^9, 
+   3.7026539674899073`*^9}, {3.702654246050846*^9, 3.7026542638911552`*^9}, 
+   3.7026543336872053`*^9, 3.702654411839028*^9, 3.702654491115613*^9, {
+   3.7026546656927834`*^9, 3.702654694879455*^9}, 3.702654746199521*^9, {
+   3.702654938148876*^9, 3.7026549608406143`*^9}, 3.7026550334363203`*^9}],
+
+Cell[BoxData[
+ RowBox[{"NCPoly", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1"}], "}"}], ",", 
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "2", ",", "0"}], "}"}], "\[Rule]", "2"}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "3", ",", "0"}], "}"}], "\[Rule]", 
+      RowBox[{"-", "2"}]}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "4", ",", "0"}], "}"}], "\[Rule]", "1"}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1", ",", "1"}], "}"}], "\[Rule]", "1"}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1", ",", "2"}], "}"}], "\[Rule]", "1"}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "1"}], "}"}], "\[Rule]", 
+      RowBox[{"-", "1"}]}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "4"}], "}"}], "\[Rule]", 
+      RowBox[{"-", "1"}]}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", "0", ",", "3"}], "}"}], "\[Rule]", "1"}], ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", "2", ",", "6"}], "}"}], "\[Rule]", "1"}]}], 
+    "\[RightAssociation]"}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.702490128421348*^9, 3.7024901401684628`*^9}, {
+   3.702490190654339*^9, 3.7024901926107607`*^9}, 3.702490337992886*^9, {
+   3.702490439407164*^9, 3.702490469999065*^9}, 3.702490509750414*^9, 
+   3.7024962381905127`*^9, 3.702496751046854*^9, 3.702499349531612*^9, 
+   3.702502486857625*^9, 3.702577735939536*^9, {3.702578427497612*^9, 
+   3.7025784313630743`*^9}, {3.702586072675417*^9, 3.7025860850527*^9}, 
+   3.70260372320557*^9, 3.702603860638225*^9, 3.70260493616969*^9, 
+   3.702604999315436*^9, 3.702605334796977*^9, 3.702642700661072*^9, 
+   3.70264433841926*^9, 3.7026448565508327`*^9, 3.7026532127948313`*^9, 
+   3.7026533381568527`*^9, 3.7026534301911983`*^9, 3.7026536994163513`*^9, 
+   3.70265380012381*^9, 3.7026538999326477`*^9, {3.702653948603018*^9, 
+   3.7026539674899073`*^9}, {3.702654246050846*^9, 3.7026542638911552`*^9}, 
+   3.7026543336872053`*^9, 3.702654411839028*^9, 3.702654491115613*^9, {
+   3.7026546656927834`*^9, 3.702654694879455*^9}, 3.702654746199521*^9, {
+   3.702654938148876*^9, 3.7026549608406143`*^9}, 3.702655033448617*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"q1", ",", "Q1"}], "}"}], "=", 
+   RowBox[{"NCPolySOS", "[", 
+    RowBox[{"poly1", ",", "q"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"Q", ",", "sol", ",", "solQ"}], "}"}], "=", 
+  RowBox[{"NCPolySOSToSDP", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"poly1", "-", "q1"}], "}"}], ",", 
+    RowBox[{"{", "Q1", "}"}], ",", "x"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.702653847301862*^9, 3.702653847437476*^9}, {
+  3.7026539064793777`*^9, 3.702653965097455*^9}, {3.7026548810787983`*^9, 
+  3.7026548878301487`*^9}, {3.702654948728867*^9, 3.702654949064517*^9}, {
+  3.702655023986829*^9, 3.7026550302033863`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", "1", ",", 
+        RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1", ",", 
+        RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", "1", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}]}], "}"}], "}"}], 
+   ",", 
+   RowBox[{"{", "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "0", ",", "0"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "1", ",", "0"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "1", ",", "1"}]], "\[Rule]", "2"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "2", ",", "0"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "2", ",", "1"}]], "\[Rule]", "1"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "2", ",", "2"}]], "\[Rule]", "1"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "3", ",", "0"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "3", ",", "1"}]], "\[Rule]", 
+      RowBox[{"-", "1"}]}], ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "3", ",", "2"}]], "\[Rule]", 
+      RowBox[{"-", "1"}]}], ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "3", ",", "3"}]], "\[Rule]", "1"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "4", ",", "0"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "4", ",", "1"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "4", ",", "2"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "4", ",", "3"}]], "\[Rule]", "0"}],
+      ",", 
+     RowBox[{
+      SubscriptBox["q", 
+       RowBox[{"NCPolySOS`Private`k", ",", "4", ",", "4"}]], "\[Rule]", 
+      "1"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.7026550304655952`*^9, 3.702655034019969*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", "=", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"p", "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"x", "+", "y", "-", 
+     RowBox[{"x", "**", "x"}]}], ")"}], "+", 
+   RowBox[{"(", 
+    RowBox[{"x", "-", 
+     RowBox[{"2", 
+      RowBox[{"y", "**", "x"}]}]}], ")"}], "+", 
+   RowBox[{
+   "x", "**", "y", "**", "x", "**", "x"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"pt", "=", 
+  RowBox[{
+   RowBox[{"tp", "[", "p", "]"}], "/.", 
+   RowBox[{"tp", "\[Rule]", "Identity"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"poly1", "=", 
+   RowBox[{"NCToNCPoly", "[", 
+    RowBox[{
+     RowBox[{"pt", "**", "p"}], ",", "vars"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.702654858013871*^9, {3.7026549399846354`*^9, 3.702654940319805*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"y", "**", "x"}]}], "+", 
+  RowBox[{"x", "**", "y", "**", "x", "**", "x"}]}]], "Output",
+ CellChangeTimes->{{3.702654859954032*^9, 3.702654868100998*^9}, 
+   3.702654905302141*^9, 3.702654941201104*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"x", "**", "y"}]}], "+", 
+  RowBox[{"x", "**", "x", "**", "y", "**", "x"}]}]], "Output",
+ CellChangeTimes->{{3.702654859954032*^9, 3.702654868100998*^9}, 
+   3.702654905302141*^9, 3.702654941213678*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", "=", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"p1", "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"x", "+", "y", "-", 
+     RowBox[{"x", "**", "x"}]}], ")"}], "+", 
+   RowBox[{"(", 
+    RowBox[{"x", "-", 
+     RowBox[{"2", 
+      RowBox[{"y", "**", "x"}]}]}], ")"}], "+", 
+   RowBox[{
+   "x", "**", "y", "**", "x", "**", "x"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p2", "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"x", "+", "y", "-", 
+     RowBox[{"x", "**", "x"}]}], ")"}], "**", 
+   RowBox[{"(", 
+    RowBox[{"x", "-", 
+     RowBox[{"x", "**", "y"}], "+", 
+     RowBox[{"y", "**", "y"}]}], ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p1t", "=", 
+  RowBox[{
+   RowBox[{"tp", "[", "p1", "]"}], "/.", 
+   RowBox[{"tp", "\[Rule]", "Identity"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p2t", "=", 
+  RowBox[{
+   RowBox[{"tp", "[", "p2", "]"}], "/.", 
+   RowBox[{"tp", "\[Rule]", "Identity"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"poly1", "=", 
+   RowBox[{"NCToNCPoly", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"p1t", "**", "p1"}], "+", 
+      RowBox[{"p2t", "**", "p2"}]}], ",", "vars"}], "]"}]}], ";"}]}], "Input",\
+
+ CellChangeTimes->{{3.7026051826223717`*^9, 3.702605257056847*^9}, 
+   3.702654944736313*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"y", "**", "x"}]}], "+", 
+  RowBox[{"x", "**", "y", "**", "x", "**", "x"}]}]], "Output",
+ CellChangeTimes->{3.7026549453342543`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"x", "+", "y", "-", 
+    RowBox[{"x", "**", "x"}]}], ")"}], "**", 
+  RowBox[{"(", 
+   RowBox[{"x", "-", 
+    RowBox[{"x", "**", "y"}], "+", 
+    RowBox[{"y", "**", "y"}]}], ")"}]}]], "Output",
+ CellChangeTimes->{3.702654945345739*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"x", "**", "y"}]}], "+", 
+  RowBox[{"x", "**", "x", "**", "y", "**", "x"}]}]], "Output",
+ CellChangeTimes->{3.702654945354892*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"x", "-", 
+    RowBox[{"y", "**", "x"}], "+", 
+    RowBox[{"y", "**", "y"}]}], ")"}], "**", 
+  RowBox[{"(", 
+   RowBox[{"x", "+", "y", "-", 
+    RowBox[{"x", "**", "x"}]}], ")"}]}]], "Output",
+ CellChangeTimes->{3.7026549453643007`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Q1", "/.", "solQ"}], "//", "MatrixForm"}], "\[IndentingNewLine]", 
+ RowBox[{"p1", "-", 
+  RowBox[{"NCPolyFromGramMatrix", "[", 
+   RowBox[{"%", ",", "vars"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.702654702836317*^9, 3.7026547404662952`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"$Aborted", "[", "]"}]], "Output",
+ CellChangeTimes->{{3.702654705122314*^9, 3.7026547481287327`*^9}, 
+   3.702654910641824*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", "=", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"p", "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"x", "+", "y", "-", 
+     RowBox[{"x", "**", "x"}]}], ")"}], "+", 
+   RowBox[{"(", 
+    RowBox[{"x", "-", 
+     RowBox[{"2", 
+      RowBox[{"y", "**", "x"}]}]}], ")"}], "+", 
+   RowBox[{
+   "x", "**", "y", "**", "x", "**", "x"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"pt", "=", 
+  RowBox[{
+   RowBox[{"tp", "[", "p", "]"}], "/.", 
+   RowBox[{"tp", "\[Rule]", "Identity"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"poly", "=", 
+   RowBox[{"NCToNCPoly", "[", 
+    RowBox[{
+     RowBox[{"pt", "**", "p"}], ",", "vars"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.702502513005231*^9, 3.702502560469686*^9}, {
+   3.702502611223484*^9, 3.70250261563988*^9}, {3.7025042371994057`*^9, 
+   3.702504238397728*^9}, {3.702604976186352*^9, 3.7026049819450083`*^9}, 
+   3.702605038473878*^9, {3.7026051659037*^9, 3.702605167278017*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"y", "**", "x"}]}], "+", 
+  RowBox[{"x", "**", "y", "**", "x", "**", "x"}]}]], "Output",
+ CellChangeTimes->{{3.702502522327379*^9, 3.702502560872939*^9}, 
+   3.702502617110314*^9, 3.702504239050666*^9, 3.70257842812613*^9, 
+   3.702603790520937*^9, {3.702604956473435*^9, 3.702605000019608*^9}, 
+   3.7026050390382547`*^9, 3.702605335557537*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"x", "**", "y"}]}], "+", 
+  RowBox[{"x", "**", "x", "**", "y", "**", "x"}]}]], "Output",
+ CellChangeTimes->{{3.702502522327379*^9, 3.702502560872939*^9}, 
+   3.702502617110314*^9, 3.702504239050666*^9, 3.70257842812613*^9, 
+   3.702603790520937*^9, {3.702604956473435*^9, 3.702605000019608*^9}, 
+   3.7026050390382547`*^9, 3.7026053355700073`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", "=", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"p1", "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"x", "+", "y", "-", 
+     RowBox[{"x", "**", "x"}]}], ")"}], "+", 
+   RowBox[{"(", 
+    RowBox[{"x", "-", 
+     RowBox[{"2", 
+      RowBox[{"y", "**", "x"}]}]}], ")"}], "+", 
+   RowBox[{
+   "x", "**", "y", "**", "x", "**", "x"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p2", "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"x", "+", "y", "-", 
+     RowBox[{"x", "**", "x"}]}], ")"}], "**", 
+   RowBox[{"(", 
+    RowBox[{"x", "-", 
+     RowBox[{"x", "**", "y"}], "+", 
+     RowBox[{"y", "**", "y"}]}], ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p1t", "=", 
+  RowBox[{
+   RowBox[{"tp", "[", "p1", "]"}], "/.", 
+   RowBox[{"tp", "\[Rule]", "Identity"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"p2t", "=", 
+  RowBox[{
+   RowBox[{"tp", "[", "p2", "]"}], "/.", 
+   RowBox[{"tp", "\[Rule]", "Identity"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"poly", "=", 
+   RowBox[{"NCToNCPoly", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"p1t", "**", "p1"}], "+", 
+      RowBox[{"p2t", "**", "p2"}]}], ",", "vars"}], "]"}]}], ";"}]}], "Input",\
+
+ CellChangeTimes->{{3.7026051826223717`*^9, 3.702605257056847*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"y", "**", "x"}]}], "+", 
+  RowBox[{"x", "**", "y", "**", "x", "**", "x"}]}]], "Output",
+ CellChangeTimes->{{3.702605237875299*^9, 3.70260525752985*^9}, 
+   3.702605336264234*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"x", "+", "y", "-", 
+    RowBox[{"x", "**", "x"}]}], ")"}], "**", 
+  RowBox[{"(", 
+   RowBox[{"x", "-", 
+    RowBox[{"x", "**", "y"}], "+", 
+    RowBox[{"y", "**", "y"}]}], ")"}]}]], "Output",
+ CellChangeTimes->{{3.702605237875299*^9, 3.70260525752985*^9}, 
+   3.702605336275651*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"2", " ", "x"}], "+", "y", "-", 
+  RowBox[{"x", "**", "x"}], "-", 
+  RowBox[{"2", " ", 
+   RowBox[{"x", "**", "y"}]}], "+", 
+  RowBox[{"x", "**", "x", "**", "y", "**", "x"}]}]], "Output",
+ CellChangeTimes->{{3.702605237875299*^9, 3.70260525752985*^9}, 
+   3.702605336283976*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"x", "-", 
+    RowBox[{"y", "**", "x"}], "+", 
+    RowBox[{"y", "**", "y"}]}], ")"}], "**", 
+  RowBox[{"(", 
+   RowBox[{"x", "+", "y", "-", 
+    RowBox[{"x", "**", "x"}]}], ")"}]}]], "Output",
+ CellChangeTimes->{{3.702605237875299*^9, 3.70260525752985*^9}, 
+   3.702605336290752*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"Q", ",", "sol"}], "}"}], "=", 
+  RowBox[{"NCSOS", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{"{", "poly", "}"}], ",", "x"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.702605283529334*^9, 3.702605283729638*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"4", ",", "2", ",", 
+        RowBox[{"-", "2"}], ",", 
+        RowBox[{"-", "4"}], ",", 
+        SubscriptBox["x", "187"], ",", 
+        SubscriptBox["x", "186"], ",", 
+        SubscriptBox["x", "185"], ",", 
+        SubscriptBox["x", "183"], ",", 
+        SubscriptBox["x", "180"], ",", 
+        SubscriptBox["x", "178"], ",", 
+        SubscriptBox["x", "174"], ",", "2", ",", 
+        SubscriptBox["x", "170"], ",", 
+        SubscriptBox["x", "165"]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "1", ",", 
+        RowBox[{
+         RowBox[{"-", "1"}], "-", 
+         SubscriptBox["x", "187"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "2"}], "-", 
+         SubscriptBox["x", "186"]}], ",", "0", ",", "0", ",", 
+        SubscriptBox["x", "184"], ",", 
+        SubscriptBox["x", "182"], ",", 
+        SubscriptBox["x", "179"], ",", 
+        SubscriptBox["x", "177"], ",", 
+        SubscriptBox["x", "173"], ",", 
+        SubscriptBox["x", "171"], ",", 
+        SubscriptBox["x", "169"], ",", 
+        SubscriptBox["x", "164"]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "2"}], ",", 
+        RowBox[{
+         RowBox[{"-", "1"}], "-", 
+         SubscriptBox["x", "187"]}], ",", 
+        RowBox[{"2", "-", 
+         RowBox[{"2", " ", 
+          SubscriptBox["x", "185"]}]}], ",", "3", ",", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["x", "183"]}], "-", 
+         SubscriptBox["x", "184"]}], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "178"]}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        SubscriptBox["x", "181"], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "171"]}], ",", 
+        SubscriptBox["x", "176"], ",", "1", ",", 
+        RowBox[{"-", "1"}], ",", 
+        SubscriptBox["x", "168"], ",", 
+        SubscriptBox["x", "163"]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4"}], ",", 
+        RowBox[{
+         RowBox[{"-", "2"}], "-", 
+         SubscriptBox["x", "186"]}], ",", "3", ",", "5", ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "180"]}], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "174"]}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", "1", ",", "1", ",", 
+        RowBox[{"-", "2"}], ",", "1", ",", 
+        RowBox[{"-", "1"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "187"], ",", "0", ",", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["x", "183"]}], "-", 
+         SubscriptBox["x", "184"]}], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "180"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "2"}], " ", 
+         SubscriptBox["x", "182"]}], ",", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["x", "177"]}], "-", 
+         SubscriptBox["x", "179"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "1"}], "-", 
+         SubscriptBox["x", "170"], "-", 
+         SubscriptBox["x", "181"]}], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "169"]}], ",", "0", ",", 
+        SubscriptBox["x", "175"], ",", 
+        SubscriptBox["x", "172"], ",", "0", ",", 
+        SubscriptBox["x", "167"], ",", 
+        SubscriptBox["x", "162"]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "186"], ",", "0", ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "178"]}], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "174"]}], ",", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["x", "177"]}], "-", 
+         SubscriptBox["x", "179"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "2"}], " ", 
+         SubscriptBox["x", "173"]}], ",", 
+        RowBox[{"1", "-", 
+         SubscriptBox["x", "165"], "-", 
+         SubscriptBox["x", "176"]}], ",", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["x", "164"]}], "-", 
+         SubscriptBox["x", "175"]}], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "172"]}], ",", "0", ",", "0", ",", "0", ",", 
+        SubscriptBox["x", "166"], ",", 
+        SubscriptBox["x", "161"]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "185"], ",", 
+        SubscriptBox["x", "184"], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{
+         RowBox[{"-", "1"}], "-", 
+         SubscriptBox["x", "170"], "-", 
+         SubscriptBox["x", "181"]}], ",", 
+        RowBox[{"1", "-", 
+         SubscriptBox["x", "165"], "-", 
+         SubscriptBox["x", "176"]}], ",", "1", ",", 
+        RowBox[{"2", "-", 
+         SubscriptBox["x", "168"]}], ",", "1", ",", 
+        RowBox[{
+         RowBox[{"-", "2"}], "-", 
+         SubscriptBox["x", "163"]}], ",", 
+        RowBox[{"-", "1"}], ",", "0", ",", 
+        RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "183"], ",", 
+        SubscriptBox["x", "182"], ",", 
+        SubscriptBox["x", "181"], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "169"]}], ",", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["x", "164"]}], "-", 
+         SubscriptBox["x", "175"]}], ",", 
+        RowBox[{"2", "-", 
+         SubscriptBox["x", "168"]}], ",", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", 
+          SubscriptBox["x", "167"]}]}], ",", "1", ",", 
+        RowBox[{
+         RowBox[{"-", "1"}], "-", 
+         SubscriptBox["x", "162"], "-", 
+         SubscriptBox["x", "166"]}], ",", 
+        RowBox[{"-", "1"}], ",", "0", ",", 
+        RowBox[{"-", "1"}], ",", 
+        SubscriptBox["x", "160"]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "180"], ",", 
+        SubscriptBox["x", "179"], ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "171"]}], ",", 
+        RowBox[{"-", "1"}], ",", "0", ",", 
+        RowBox[{"-", 
+         SubscriptBox["x", "172"]}], ",", "1", ",", "1", ",", "1", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", "0", ",", 
+        RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "178"], ",", 
+        SubscriptBox["x", "177"], ",", 
+        SubscriptBox["x", "176"], ",", "1", ",", 
+        SubscriptBox["x", "175"], ",", "0", ",", 
+        RowBox[{
+         RowBox[{"-", "2"}], "-", 
+         SubscriptBox["x", "163"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "1"}], "-", 
+         SubscriptBox["x", "162"], "-", 
+         SubscriptBox["x", "166"]}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", " ", 
+          SubscriptBox["x", "161"]}]}], ",", "1", ",", "0", ",", 
+        RowBox[{"2", "-", 
+         SubscriptBox["x", "160"]}], ",", 
+        RowBox[{"-", "1"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "174"], ",", 
+        SubscriptBox["x", "173"], ",", "1", ",", "1", ",", 
+        SubscriptBox["x", "172"], ",", "0", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", "1", ",", "1", ",", "0", ",", "1", ",", 
+        RowBox[{"-", "1"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", 
+        SubscriptBox["x", "171"], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "2"}], ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+        ",", "0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "170"], ",", 
+        SubscriptBox["x", "169"], ",", 
+        SubscriptBox["x", "168"], ",", "1", ",", 
+        SubscriptBox["x", "167"], ",", 
+        SubscriptBox["x", "166"], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"2", "-", 
+         SubscriptBox["x", "160"]}], ",", "1", ",", "0", ",", "1", ",", 
+        RowBox[{"-", "1"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "165"], ",", 
+        SubscriptBox["x", "164"], ",", 
+        SubscriptBox["x", "163"], ",", 
+        RowBox[{"-", "1"}], ",", 
+        SubscriptBox["x", "162"], ",", 
+        SubscriptBox["x", "161"], ",", "1", ",", 
+        SubscriptBox["x", "160"], ",", "1", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", "0", ",", 
+        RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}], "}"}], ",", 
+   RowBox[{"{", "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.702605286232751*^9, 3.702605339725833*^9, 
+  3.702605441580619*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"MatrixForm", ",", "Q"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7026055315071898`*^9, 3.7026055414816113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  TagBox[
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"4", "2", 
+       RowBox[{"-", "2"}], 
+       RowBox[{"-", "4"}], 
+       SubscriptBox["x", "187"], 
+       SubscriptBox["x", "186"], 
+       SubscriptBox["x", "185"], 
+       SubscriptBox["x", "183"], 
+       SubscriptBox["x", "180"], 
+       SubscriptBox["x", "178"], 
+       SubscriptBox["x", "174"], "2", 
+       SubscriptBox["x", "170"], 
+       SubscriptBox["x", "165"]},
+      {"2", "1", 
+       RowBox[{
+        RowBox[{"-", "1"}], "-", 
+        SubscriptBox["x", "187"]}], 
+       RowBox[{
+        RowBox[{"-", "2"}], "-", 
+        SubscriptBox["x", "186"]}], "0", "0", 
+       SubscriptBox["x", "184"], 
+       SubscriptBox["x", "182"], 
+       SubscriptBox["x", "179"], 
+       SubscriptBox["x", "177"], 
+       SubscriptBox["x", "173"], 
+       SubscriptBox["x", "171"], 
+       SubscriptBox["x", "169"], 
+       SubscriptBox["x", "164"]},
+      {
+       RowBox[{"-", "2"}], 
+       RowBox[{
+        RowBox[{"-", "1"}], "-", 
+        SubscriptBox["x", "187"]}], 
+       RowBox[{"2", "-", 
+        RowBox[{"2", " ", 
+         SubscriptBox["x", "185"]}]}], "3", 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["x", "183"]}], "-", 
+        SubscriptBox["x", "184"]}], 
+       RowBox[{"-", 
+        SubscriptBox["x", "178"]}], 
+       RowBox[{"-", "1"}], 
+       SubscriptBox["x", "181"], 
+       RowBox[{"-", 
+        SubscriptBox["x", "171"]}], 
+       SubscriptBox["x", "176"], "1", 
+       RowBox[{"-", "1"}], 
+       SubscriptBox["x", "168"], 
+       SubscriptBox["x", "163"]},
+      {
+       RowBox[{"-", "4"}], 
+       RowBox[{
+        RowBox[{"-", "2"}], "-", 
+        SubscriptBox["x", "186"]}], "3", "5", 
+       RowBox[{"-", 
+        SubscriptBox["x", "180"]}], 
+       RowBox[{"-", 
+        SubscriptBox["x", "174"]}], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], "1", "1", 
+       RowBox[{"-", "2"}], "1", 
+       RowBox[{"-", "1"}]},
+      {
+       SubscriptBox["x", "187"], "0", 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["x", "183"]}], "-", 
+        SubscriptBox["x", "184"]}], 
+       RowBox[{"-", 
+        SubscriptBox["x", "180"]}], 
+       RowBox[{
+        RowBox[{"-", "2"}], " ", 
+        SubscriptBox["x", "182"]}], 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["x", "177"]}], "-", 
+        SubscriptBox["x", "179"]}], 
+       RowBox[{
+        RowBox[{"-", "1"}], "-", 
+        SubscriptBox["x", "170"], "-", 
+        SubscriptBox["x", "181"]}], 
+       RowBox[{"-", 
+        SubscriptBox["x", "169"]}], "0", 
+       SubscriptBox["x", "175"], 
+       SubscriptBox["x", "172"], "0", 
+       SubscriptBox["x", "167"], 
+       SubscriptBox["x", "162"]},
+      {
+       SubscriptBox["x", "186"], "0", 
+       RowBox[{"-", 
+        SubscriptBox["x", "178"]}], 
+       RowBox[{"-", 
+        SubscriptBox["x", "174"]}], 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["x", "177"]}], "-", 
+        SubscriptBox["x", "179"]}], 
+       RowBox[{
+        RowBox[{"-", "2"}], " ", 
+        SubscriptBox["x", "173"]}], 
+       RowBox[{"1", "-", 
+        SubscriptBox["x", "165"], "-", 
+        SubscriptBox["x", "176"]}], 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["x", "164"]}], "-", 
+        SubscriptBox["x", "175"]}], 
+       RowBox[{"-", 
+        SubscriptBox["x", "172"]}], "0", "0", "0", 
+       SubscriptBox["x", "166"], 
+       SubscriptBox["x", "161"]},
+      {
+       SubscriptBox["x", "185"], 
+       SubscriptBox["x", "184"], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], 
+       RowBox[{
+        RowBox[{"-", "1"}], "-", 
+        SubscriptBox["x", "170"], "-", 
+        SubscriptBox["x", "181"]}], 
+       RowBox[{"1", "-", 
+        SubscriptBox["x", "165"], "-", 
+        SubscriptBox["x", "176"]}], "1", 
+       RowBox[{"2", "-", 
+        SubscriptBox["x", "168"]}], "1", 
+       RowBox[{
+        RowBox[{"-", "2"}], "-", 
+        SubscriptBox["x", "163"]}], 
+       RowBox[{"-", "1"}], "0", 
+       RowBox[{"-", "1"}], "1"},
+      {
+       SubscriptBox["x", "183"], 
+       SubscriptBox["x", "182"], 
+       SubscriptBox["x", "181"], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", 
+        SubscriptBox["x", "169"]}], 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["x", "164"]}], "-", 
+        SubscriptBox["x", "175"]}], 
+       RowBox[{"2", "-", 
+        SubscriptBox["x", "168"]}], 
+       RowBox[{"1", "-", 
+        RowBox[{"2", " ", 
+         SubscriptBox["x", "167"]}]}], "1", 
+       RowBox[{
+        RowBox[{"-", "1"}], "-", 
+        SubscriptBox["x", "162"], "-", 
+        SubscriptBox["x", "166"]}], 
+       RowBox[{"-", "1"}], "0", 
+       RowBox[{"-", "1"}], 
+       SubscriptBox["x", "160"]},
+      {
+       SubscriptBox["x", "180"], 
+       SubscriptBox["x", "179"], 
+       RowBox[{"-", 
+        SubscriptBox["x", "171"]}], 
+       RowBox[{"-", "1"}], "0", 
+       RowBox[{"-", 
+        SubscriptBox["x", "172"]}], "1", "1", "1", 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], "0", 
+       RowBox[{"-", "1"}], "1"},
+      {
+       SubscriptBox["x", "178"], 
+       SubscriptBox["x", "177"], 
+       SubscriptBox["x", "176"], "1", 
+       SubscriptBox["x", "175"], "0", 
+       RowBox[{
+        RowBox[{"-", "2"}], "-", 
+        SubscriptBox["x", "163"]}], 
+       RowBox[{
+        RowBox[{"-", "1"}], "-", 
+        SubscriptBox["x", "162"], "-", 
+        SubscriptBox["x", "166"]}], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"1", "-", 
+        RowBox[{"2", " ", 
+         SubscriptBox["x", "161"]}]}], "1", "0", 
+       RowBox[{"2", "-", 
+        SubscriptBox["x", "160"]}], 
+       RowBox[{"-", "1"}]},
+      {
+       SubscriptBox["x", "174"], 
+       SubscriptBox["x", "173"], "1", "1", 
+       SubscriptBox["x", "172"], "0", 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], "1", "1", "0", "1", 
+       RowBox[{"-", "1"}]},
+      {"2", 
+       SubscriptBox["x", "171"], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "2"}], "0", "0", "0", "0", "0", "0", "0", "1", "0", "0"},
+      {
+       SubscriptBox["x", "170"], 
+       SubscriptBox["x", "169"], 
+       SubscriptBox["x", "168"], "1", 
+       SubscriptBox["x", "167"], 
+       SubscriptBox["x", "166"], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], 
+       RowBox[{"2", "-", 
+        SubscriptBox["x", "160"]}], "1", "0", "1", 
+       RowBox[{"-", "1"}]},
+      {
+       SubscriptBox["x", "165"], 
+       SubscriptBox["x", "164"], 
+       SubscriptBox["x", "163"], 
+       RowBox[{"-", "1"}], 
+       SubscriptBox["x", "162"], 
+       SubscriptBox["x", "161"], "1", 
+       SubscriptBox["x", "160"], "1", 
+       RowBox[{"-", "1"}], 
+       RowBox[{"-", "1"}], "0", 
+       RowBox[{"-", "1"}], "1"}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+        "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.7]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+   Function[BoxForm`e$, 
+    MatrixForm[BoxForm`e$]]], "}"}]], "Output",
+ CellChangeTimes->{{3.70260553557759*^9, 3.702605541953003*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"<<", "SDP`"}]], "Input",
+ CellChangeTimes->{{3.702502696549431*^9, 3.7025026987219954`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", "=", 
+   RowBox[{"Variables", "[", "Q", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"abc", "=", 
+   RowBox[{"SDPMatrices", "[", 
+    RowBox[{"Q", ",", "vars"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.702502695028844*^9, 3.7025027020554953`*^9}, {
+   3.7025027792783537`*^9, 3.7025028051974993`*^9}, 3.702605133077401*^9, {
+   3.702605373516918*^9, 3.702605376444578*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", "Y", "}"}], "}"}], ",", "X", ",", "S", ",", "flags"}], 
+    "}"}], "=", 
+   RowBox[{"SDPSolve", "[", "abc", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.702502806578023*^9, 3.702502872919672*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\" Problem data:\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444068666*^9}],
+
+Cell[BoxData["\<\" * Dimensions (total):\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444080018*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"   - Variables             = \"\>", "\[InvisibleSpace]", "28"}],
+  SequenceForm["   - Variables             = ", 28],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444096006*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"   - Inequalities          = \"\>", "\[InvisibleSpace]", "1"}],
+  
+  SequenceForm["   - Inequalities          = ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444107189*^9}],
+
+Cell[BoxData["\<\" * Dimensions (detail):\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444119771*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"   - Variables             = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "28"}], "}"}], "}"}]}],
+  SequenceForm["   - Variables             = ", {{1, 28}}],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444130681*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"   - Inequalities          = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "14", "}"}]}],
+  SequenceForm["   - Inequalities          = ", {14}],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444141953*^9}],
+
+Cell[BoxData["\<\"\\n Method:\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444153495*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" * Method                  = \"\>", "\[InvisibleSpace]", 
+   "PredictorCorrector"}],
+  SequenceForm[" * Method                  = ", PrimalDual`PredictorCorrector],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.7026054441674643`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" * Search direction        = \"\>", "\[InvisibleSpace]", "NT"}],
+  SequenceForm[" * Search direction        = ", PrimalDual`NT],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.70260544418272*^9}],
+
+Cell[BoxData["\<\"\\n Precision:\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444195387*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" * Gap tolerance           = \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     RowBox[{"\<\"1.\"\>", "\[Times]", 
+      SuperscriptBox["10", "\<\"-9\"\>"]}],
+     1.*^-9,
+     AutoDelete->True],
+    ScientificForm]}],
+  SequenceForm[" * Gap tolerance           = ", 
+   ScientificForm[1.*^-9]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.70260544421397*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" * Feasibility tolerance   = \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     RowBox[{"\<\"1.\"\>", "\[Times]", 
+      SuperscriptBox["10", "\<\"-6\"\>"]}],
+     1.0000000000000002`*^-6,
+     AutoDelete->True],
+    ScientificForm]}],
+  SequenceForm[" * Feasibility tolerance   = ", 
+   ScientificForm[1.0000000000000002`*^-6]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444229917*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" * Rationalize iterates    = \"\>", "\[InvisibleSpace]", 
+   "False", "\[InvisibleSpace]", "\<\"\"\>"}],
+  SequenceForm[" * Rationalize iterates    = ", False, ""],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444244444*^9}],
+
+Cell[BoxData["\<\"\\n Other options:\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444259768*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" * Debug level             = \"\>", "\[InvisibleSpace]", "0"}],
+  
+  SequenceForm[" * Debug level             = ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444277094*^9}],
+
+Cell[BoxData["\<\"\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444292198*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  K     <B, Y>         mu  theta/tau      alpha\"\>", 
+   "\[InvisibleSpace]", "\<\"     |X S|2    |X S|oo \"\>", 
+   "\[InvisibleSpace]", "\<\" |A* X-B|   |A Y+S-C|\"\>"}],
+  SequenceForm[
+  "  K     <B, Y>         mu  theta/tau      alpha", 
+   "     |X S|2    |X S|oo ", " |A* X-B|   |A Y+S-C|"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444307975*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" -----------------------------------------------------\"\>", 
+   "\[InvisibleSpace]", "\<\"--------------------------------------\"\>"}],
+  SequenceForm[
+  " -----------------------------------------------------", 
+   "--------------------------------------"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444323535*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  1\"\>",
+     1,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.653\"", 1.6532, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.16531994118689428`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 6.508\"", 6.50788, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.6507876766827917,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.523\"", 8.52285, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8522853079620419,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.847\"", 1.84667, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.8466717513057243`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.952\"", 9.95192, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9951917182991419,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 7.264\"", 7.26364, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-16\"", -16, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     7.263641169243965*^-16,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 7.752\"", 7.75175, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-16\"", -16, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     7.751749229560343*^-16,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[1, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.16531994118689428`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.6507876766827917, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8522853079620419, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.8466717513057243`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9951917182991419, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   7.263641169243965*^-16, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   7.751749229560343*^-16, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.7026054443422127`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  2\"\>",
+     2,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 7.746\"", 7.74621, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-02\"", -2, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.07746214632259063,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 4.607\"", 4.60702, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.4607017042807249,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 5.314\"", 5.31441, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.531441,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.592\"", 1.59162, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.5916211759656411`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.717\"", 9.71691, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9716910055674838,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 3.800\"", 3.80029, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-14\"", -14, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     3.8002931169813144`*^-14,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 7.734\"", 7.73434, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-16\"", -16, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     7.734338105214639*^-16,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[2, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.07746214632259063, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.4607017042807249, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.531441, NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.5916211759656411`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9716910055674838, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   3.8002931169813144`*^-14, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   7.734338105214639*^-16, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444360304*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  3\"\>",
+     3,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.472\"", 1.47178, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-02\"", -2, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.014717807801292278`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.164\"", 1.16354, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.11635385540232292`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.100\"", 8.1, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.81,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.639\"", 1.63918, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.639179521000383,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.432\"", 9.4321, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9432100665897103,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 4.136\"", 4.13555, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-14\"", -14, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     4.1355453517316104`*^-14,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.286\"", 8.28618, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-16\"", -16, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     8.2861786540538155`*^-16,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[3, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.014717807801292278`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.11635385540232292`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.81, NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.639179521000383, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9432100665897103, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   4.1355453517316104`*^-14, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   8.2861786540538155`*^-16, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.7026054443835506`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  4\"\>",
+     4,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.763\"", 1.76275, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-03\"", -3, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.0017627465036352873`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.427\"", 1.42695, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-02\"", -2, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.01426949418520999,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.802\"", 8.8023, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8802303626032876,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.568\"", 1.56839, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.568387390075156,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.814\"", 8.81435, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8814347579312952,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 4.076\"", 4.07602, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-14\"", -14, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     4.0760177212690716`*^-14,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.220\"", 8.21991, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-16\"", -16, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     8.219910357152026*^-16,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[4, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.0017627465036352873`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.01426949418520999, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8802303626032876, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.568387390075156, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8814347579312952, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   4.0760177212690716`*^-14, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   8.219910357152026*^-16, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444404316*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  5\"\>",
+     5,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.230\"", 2.22978, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-04\"", -4, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.00022297800244858298`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.687\"", 1.68675, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-03\"", -3, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.0016867507271648128`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.736\"", 8.73593, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8735926122953025,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.630\"", 1.63046, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.6304554025143343`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.827\"", 8.82707, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8827066762885503,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 4.148\"", 4.14767, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-14\"", -14, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     4.147667257007624*^-14,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.368\"", 8.36793, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-16\"", -16, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     8.367931508437314*^-16,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[5, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.00022297800244858298`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.0016867507271648128`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8735926122953025, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.6304554025143343`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8827066762885503, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   4.147667257007624*^-14, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   8.367931508437314*^-16, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444425947*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  6\"\>",
+     6,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.487\"", 2.48697, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-05\"", -5, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.000024869670357627696`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.802\"", 1.80211, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-04\"", -4, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.00018021083763927433`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.885\"", 8.88504, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8885037654922123,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.674\"", 1.6744, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.6744039020100299`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.077\"", 9.07729, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9077292775985234,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 6.499\"", 6.49867, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-14\"", -14, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     6.498674266631869*^-14,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.010\"", 9.01001, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-16\"", -16, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     9.010011027933*^-16,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[6, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.000024869670357627696`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.00018021083763927433`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8885037654922123, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.6744039020100299`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9077292775985234, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   6.498674266631869*^-14, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   9.010011027933*^-16, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444448573*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  7\"\>",
+     7,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.694\"", 2.69443, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-06\"", -6, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.694434560726238*^-6,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.904\"", 1.90398, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-05\"", -5, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.000019039849589269977`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.917\"", 8.91664, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8916643624911894,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.690\"", 1.6896, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.6895987540251416`,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.059\"", 9.05935, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9059349764088456,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.965\"", 2.96503, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-13\"", -13, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.96502529796191*^-13,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.256\"", 1.25583, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-15\"", -15, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.2558260851484023`*^-15,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[7, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.694434560726238*^-6, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.000019039849589269977`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8916643624911894, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.6895987540251416`, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9059349764088456, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.96502529796191*^-13, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.2558260851484023`*^-15, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444505556*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  8\"\>",
+     8,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.910\"", 2.91032, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-07\"", -7, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.9103162262540316`*^-7,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.009\"", 2.00934, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-06\"", -6, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.009343305655423*^-6,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.920\"", 8.91993, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8919928354806173,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.703\"", 1.70301, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.703007378709546,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.029\"", 9.02926, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9029264120423576,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 3.071\"", 3.07137, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-12\"", -12, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     3.071370715569107*^-12,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.251\"", 1.25074, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-15\"", -15, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.2507411992803848`*^-15,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[8, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.9103162262540316`*^-7, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.009343305655423*^-6, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8919928354806173, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.703007378709546, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9029264120423576, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   3.071370715569107*^-12, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.2507411992803848`*^-15, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444518127*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\"  9\"\>",
+     9,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.471\"", 2.47051, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-09\"", -9, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.4705096209554382`*^-9,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.664\"", 1.66433, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-08\"", -8, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.6643273576847403`*^-8,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.915\"", 9.91515, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9915149259073038,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.764\"", 2.76363, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.763633658277993,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.952\"", 9.95198, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.9951983629327318,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 6.166\"", 6.16582, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-11\"", -11, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     6.165824121732915*^-11,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.369\"", 1.36918, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-15\"", -15, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.3691795785129948`*^-15,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[9, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.4705096209554382`*^-9, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.6643273576847403`*^-8, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9915149259073038, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.763633658277993, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.9951983629327318, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   6.165824121732915*^-11, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.3691795785129948`*^-15, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444530386*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    InterpretationBox["\<\" 10\"\>",
+     10,
+     Editable->False],
+    PaddedForm[#, 2]& ], "\[InvisibleSpace]", "\<\" \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 0.000\"", 0., AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.383\"", 2.38279, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-10\"", -10, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.3827925054411253`*^-10,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.593\"", 1.59255, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-09\"", -9, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.5925504249092475`*^-9,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 8.971\"", 8.97145, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.8971454613461886,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.771\"", 2.77081, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"+00\"", 0, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.770810080824432,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 9.636\"", 9.63592, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-01\"", -1, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     0.963592125198151,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 2.147\"", 2.14651, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-09\"", -9, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     2.1465132962297956`*^-9,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ], 
+   "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     TemplateBox[{TagBox[
+        InterpretationBox["\" 1.438\"", 1.43811, AutoDelete -> True], 
+        NumberForm[#, {4, 3}, NumberPadding -> {" ", "0"}]& ],"\"e\"",TagBox[
+        InterpretationBox["\"-15\"", -15, Editable -> False], 
+        NumberForm[#, 2, NumberPadding -> {"0", ""}, 
+         NumberSigns -> {"-", "+"}, SignPadding -> True]& ]},
+      "RowDefault"],
+     1.4381134058450629`*^-15,
+     Editable->False],
+    ScientificForm[#, NumberFormat -> 
+     PrimalDual`Private`NumberFormatFunction]& ]}],
+  SequenceForm[
+   PaddedForm[10, 2], " ", 
+   ScientificForm[
+   0., NumberFormat -> PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.3827925054411253`*^-10, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.5925504249092475`*^-9, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.8971454613461886, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.770810080824432, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   0.963592125198151, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   2.1465132962297956`*^-9, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction], " ", 
+   ScientificForm[
+   1.4381134058450629`*^-15, NumberFormat -> 
+    PrimalDual`Private`NumberFormatFunction]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444543541*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" -----------------------------------------------------\"\>", 
+   "\[InvisibleSpace]", "\<\"--------------------------------------\"\>"}],
+  SequenceForm[
+  " -----------------------------------------------------", 
+   "--------------------------------------"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.70260544455623*^9}],
+
+Cell[BoxData["\<\"* Primal solution is not strictly feasible but is within \
+tolerance\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.7026054445651817`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"(0 <= max eig(A* Y - C) = \"\>", "\[InvisibleSpace]", 
+   "2.8242195198916298`*^-9", "\[InvisibleSpace]", "\<\" < \"\>", 
+   "\[InvisibleSpace]", "1.0000000000000002`*^-6", 
+   "\[InvisibleSpace]", "\<\" )\"\>"}],
+  SequenceForm[
+  "(0 <= max eig(A* Y - C) = ", 2.8242195198916298`*^-9, " < ", 
+   1.0000000000000002`*^-6, " )"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.7026054445730143`*^9}],
+
+Cell[BoxData["\<\"* Dual solution is within tolerance\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.7026054445808067`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"(|| A X - B || = \"\>", "\[InvisibleSpace]", 
+   "1.8185304738246165`*^-8", "\[InvisibleSpace]", "\<\" < \"\>", 
+   "\[InvisibleSpace]", "1.0000000000000002`*^-6", 
+   "\[InvisibleSpace]", "\<\")\"\>"}],
+  SequenceForm[
+  "(|| A X - B || = ", 1.8185304738246165`*^-8, " < ", 
+   1.0000000000000002`*^-6, ")"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.7026054445888147`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"* Feasibility radius = \"\>", "\[InvisibleSpace]", 
+   "0.9999980056504277`"}],
+  SequenceForm["* Feasibility radius = ", 0.9999980056504277],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444597777*^9}],
+
+Cell[BoxData["\<\"  (should be less than 1 when feasible)\"\>"], "Print",
+ CellChangeTimes->{
+  3.702502812700193*^9, {3.702502847635498*^9, 3.702502873413065*^9}, 
+   3.70250425841932*^9, 3.702605380199242*^9, 3.702605444605858*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"solSDP", "=", 
+  RowBox[{"Thread", "[", 
+   RowBox[{"vars", "->", "Y"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7025028624223433`*^9, 3.702502902568461*^9}, {
+  3.702605394317687*^9, 3.702605395756968*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["x", "160"], "\[Rule]", "0.9999999978793614`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "161"], "\[Rule]", 
+    RowBox[{"-", "2.4209219067561136`*^-9"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "162"], "\[Rule]", "2.9446673359903723`*^-10"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "163"], "\[Rule]", 
+    RowBox[{"-", "0.9999999983200698`"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "164"], "\[Rule]", "7.047161762285513`*^-10"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "165"], "\[Rule]", "4.541653466366514`*^-10"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "166"], "\[Rule]", "4.304148133124439`*^-10"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "167"], "\[Rule]", 
+    RowBox[{"-", "2.5029332431636152`*^-9"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "168"], "\[Rule]", "0.9999999979201057`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "169"], "\[Rule]", 
+    RowBox[{"-", "7.530199708033695`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "170"], "\[Rule]", 
+    RowBox[{"-", "7.244209895169845`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "171"], "\[Rule]", "0.99999999827796`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "172"], "\[Rule]", "5.7788687551678965`*^-11"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "173"], "\[Rule]", 
+    RowBox[{"-", "1.7392596132080066`*^-9"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "174"], "\[Rule]", 
+    RowBox[{"-", "8.87095664176485`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "175"], "\[Rule]", 
+    RowBox[{"-", "1.1274640337166258`*^-9"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "176"], "\[Rule]", "0.9999999986171914`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "177"], "\[Rule]", 
+    RowBox[{"-", "7.326470746960428`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "178"], "\[Rule]", 
+    RowBox[{"-", "7.546016277748893`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "179"], "\[Rule]", 
+    RowBox[{"-", "2.369783577433944`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "180"], "\[Rule]", "7.325362510907261`*^-10"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "181"], "\[Rule]", 
+    RowBox[{"-", "0.9999999986527432`"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "182"], "\[Rule]", 
+    RowBox[{"-", "1.5527013146277693`*^-9"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "183"], "\[Rule]", "8.321116549756952`*^-11"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "184"], "\[Rule]", 
+    RowBox[{"-", "5.500713812928263`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "185"], "\[Rule]", 
+    RowBox[{"-", "1.3599278755619646`*^-9"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "186"], "\[Rule]", 
+    RowBox[{"-", "4.6098138381709136`*^-10"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "187"], "\[Rule]", 
+    RowBox[{"-", "4.3537000353270276`*^-10"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.702502862721878*^9, 3.702502902955566*^9}, 
+   3.7025042651662416`*^9, 3.702605397383749*^9, 3.702605446161714*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Q", "/.", "solSDP"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Chop", "[", 
+  RowBox[{
+   RowBox[{"Eigenvalues", "[", "%", "]"}], ",", 
+   RowBox[{"10", "^", 
+    RowBox[{"(", 
+     RowBox[{"-", "8"}], ")"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.702502881609717*^9, 3.702502924472904*^9}, {
+  3.702605401269943*^9, 3.702605422919633*^9}, {3.7026054589911013`*^9, 
+  3.702605474255786*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "13.162277660111496`", ",", "6.837722340185977`", ",", "0", ",", "0", ",", 
+   "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+   ",", "0", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{{3.702502907129105*^9, 3.702502924757536*^9}, 
+   3.702504270224687*^9, {3.70260540490606*^9, 3.702605477469851*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Chop", "[", 
+  RowBox[{"solSDP", ",", 
+   RowBox[{"10", "^", 
+    RowBox[{"(", 
+     RowBox[{"-", "8"}], ")"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.702605497305835*^9, 3.7026054992483187`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["x", "160"], "\[Rule]", "0.9999999978793614`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "161"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "162"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "163"], "\[Rule]", 
+    RowBox[{"-", "0.9999999983200698`"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "164"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "165"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "166"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "167"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "168"], "\[Rule]", "0.9999999979201057`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "169"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "170"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "171"], "\[Rule]", "0.99999999827796`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "172"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "173"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "174"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "175"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "176"], "\[Rule]", "0.9999999986171914`"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "177"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "178"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "179"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "180"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "181"], "\[Rule]", 
+    RowBox[{"-", "0.9999999986527432`"}]}], ",", 
+   RowBox[{
+    SubscriptBox["x", "182"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "183"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "184"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "185"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "186"], "\[Rule]", "0"}], ",", 
+   RowBox[{
+    SubscriptBox["x", "187"], "\[Rule]", "0"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.7026054997936373`*^9, 3.702605503807989*^9}}]
+}, Open  ]]
+},
+WindowSize->{808, 751},
+WindowMargins->{{63, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 170, 3, 46, "Input"],
+Cell[CellGroupData[{
+Cell[775, 29, 351, 5, 22, "Print"],
+Cell[1129, 36, 446, 8, 21, "Print"],
+Cell[1578, 46, 350, 5, 22, "Print"],
+Cell[1931, 53, 1488, 52, 665, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[3446, 109, 302, 5, 63, "Input"],
+Cell[CellGroupData[{
+Cell[3773, 118, 169, 3, 28, "Input"],
+Cell[3945, 123, 1772, 29, 24, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5754, 157, 800, 19, 63, "Input"],
+Cell[6557, 178, 1172, 17, 28, "Output"],
+Cell[7732, 197, 2316, 52, 46, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10085, 254, 752, 19, 46, "Input"],
+Cell[10840, 275, 2677, 82, 135, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13554, 362, 841, 26, 80, "Input"],
+Cell[14398, 390, 335, 8, 28, "Output"],
+Cell[14736, 400, 335, 8, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15108, 413, 1326, 42, 114, "Input"],
+Cell[16437, 457, 265, 7, 28, "Output"],
+Cell[16705, 466, 285, 9, 28, "Output"],
+Cell[16993, 477, 263, 7, 28, "Output"],
+Cell[17259, 486, 287, 9, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17583, 500, 282, 6, 46, "Input"],
+Cell[17868, 508, 151, 3, 39, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18056, 516, 1032, 28, 80, "Input"],
+Cell[19091, 546, 478, 10, 28, "Output"],
+Cell[19572, 558, 480, 10, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20089, 573, 1299, 41, 114, "Input"],
+Cell[21391, 616, 312, 8, 28, "Output"],
+Cell[21706, 626, 334, 10, 28, "Output"],
+Cell[22043, 638, 312, 8, 28, "Output"],
+Cell[22358, 648, 334, 10, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22729, 663, 278, 8, 28, "Input"],
+Cell[23010, 673, 8688, 242, 250, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31735, 920, 158, 3, 28, "Input"],
+Cell[31896, 925, 7393, 236, 251, "Output"]
+}, Open  ]],
+Cell[39304, 1164, 116, 2, 28, "Input"],
+Cell[39423, 1168, 440, 10, 46, "Input"],
+Cell[CellGroupData[{
+Cell[39888, 1182, 302, 9, 28, "Input"],
+Cell[CellGroupData[{
+Cell[40215, 1195, 208, 3, 21, "Print"],
+Cell[40426, 1200, 216, 3, 21, "Print"],
+Cell[40645, 1205, 356, 7, 21, "Print"],
+Cell[41004, 1214, 357, 8, 22, "Print"],
+Cell[41364, 1224, 217, 3, 21, "Print"],
+Cell[41584, 1229, 438, 10, 21, "Print"],
+Cell[42025, 1241, 382, 8, 22, "Print"],
+Cell[42410, 1251, 205, 3, 37, "Print"],
+Cell[42618, 1256, 405, 8, 21, "Print"],
+Cell[43026, 1266, 366, 7, 21, "Print"],
+Cell[43395, 1275, 208, 3, 37, "Print"],
+Cell[43606, 1280, 550, 15, 24, "Print"],
+Cell[44159, 1297, 585, 15, 24, "Print"],
+Cell[44747, 1314, 403, 8, 21, "Print"],
+Cell[45153, 1324, 212, 3, 38, "Print"],
+Cell[45368, 1329, 357, 8, 22, "Print"],
+Cell[45728, 1339, 194, 3, 21, "Print"],
+Cell[45925, 1344, 538, 11, 22, "Print"],
+Cell[46466, 1357, 499, 10, 21, "Print"],
+Cell[46968, 1369, 6087, 148, 21, "Print"],
+Cell[53058, 1519, 6063, 147, 21, "Print"],
+Cell[59124, 1668, 6060, 147, 21, "Print"],
+Cell[65187, 1817, 6091, 148, 21, "Print"],
+Cell[71281, 1967, 6100, 148, 21, "Print"],
+Cell[77384, 2117, 6097, 148, 21, "Print"],
+Cell[83484, 2267, 6101, 148, 21, "Print"],
+Cell[89588, 2417, 6098, 148, 21, "Print"],
+Cell[95689, 2567, 6102, 148, 21, "Print"],
+Cell[101794, 2717, 6106, 148, 21, "Print"],
+Cell[107903, 2867, 498, 10, 21, "Print"],
+Cell[108404, 2879, 264, 4, 22, "Print"],
+Cell[108671, 2885, 570, 12, 24, "Print"],
+Cell[109244, 2899, 231, 3, 21, "Print"],
+Cell[109478, 2904, 550, 12, 24, "Print"],
+Cell[110031, 2918, 381, 8, 22, "Print"],
+Cell[110415, 2928, 233, 3, 21, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[110697, 2937, 232, 5, 28, "Input"],
+Cell[110932, 2944, 2972, 77, 153, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[113941, 3026, 432, 11, 46, "Input"],
+Cell[114376, 3039, 376, 7, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[114789, 3051, 224, 6, 28, "Input"],
+Cell[115016, 3059, 2115, 61, 63, "Output"]
+}, Open  ]]
+}
+]
+*)
+
