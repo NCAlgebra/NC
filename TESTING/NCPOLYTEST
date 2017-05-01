@@ -17,7 +17,8 @@ tests = {
   "Groebner",
   "Hankel",
   "NCPolyInterface",
-  "NCGBX"
+  "NCGBX",
+  "NCPolySOS"
 };
 results = NCTestRun[tests];
 NCTestSummarize[results];

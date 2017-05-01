@@ -12,6 +12,7 @@ BeginPackage[ "NCPoly`",
 *)
 
 Clear[NCPoly,
+      NCPolyVarsToIntegers,
       NCPolyMonomial,
       NCPolyMonomialQ,
       NCPolyConvert,
@@ -54,6 +55,7 @@ Clear[NCFromDigits,
 
 Clear[NCPolyHankelMatrix,
       NCPolyRealization,
+      NCPolyGramMatrixDimensions,
       NCPolyGramMatrix];
 
 Get["NCPoly.usage"];
@@ -831,6 +833,11 @@ Begin["`Private`"];
       
   ];
          
+  NCPolyGramMatrixDimensions[degree_, vars_] := Block[
+    {base = {Total[NCPolyVarsToIntegers[vars]]}},
+    Return[NCDigitsToIndex[NCIntegerDigits[{Ceiling[degree/2]+1,0}, base], base] - 1];
+  ];
+     
 End[]
       
 (* Load NCPolyAssociationGraded *)

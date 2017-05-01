@@ -1,0 +1,48 @@
+<< NCPolySOS`
+
+Block[
+  {vars,p,pt,poly1,q1,Q1,q,s,
+   x,y,
+   answer},
+
+  SetNonCommutative[x,y];
+
+  q[a__] := Subscript[q,a];
+
+  (* Test 1 *)
+
+  vars = {x, y};
+  p = (x + y - x ** x);
+  poly1 = NCToNCPoly[p ** p + x ** y ** y ** x + x ** x, vars];
+
+  {q1, Q1} = NCPolySOS[poly1, q];
+  answer = NCToNCPoly[q[0, 0] + 2 x q[1, 0] + 2 y q[2, 0] + y ** y q[2, 2] + x ** x (q[1, 1] + 2 q[3, 0]) + 2 x ** x ** x q[3, 1] + x ** x ** y q[3, 2] + y ** x ** x q[3, 2] + x ** x ** x ** x q[3, 3] + x ** y (q[2, 1] + q[4, 0]) + y ** x (q[2, 1] + q[4, 0]) + 2 x ** y ** x q[4, 1] + x ** y ** y q[4, 2] + y ** y ** x q[4, 2] + x ** x ** y ** x q[4, 3] + x ** y ** x ** x q[4, 3] + x ** y ** y ** x q[4, 4], vars];
+  NCTest[q1, answer];
+  answer = {
+    {q[0, 0], q[1, 0], q[2, 0], q[3, 0], q[4, 0]},
+    {q[1, 0], q[1, 1], q[2, 1], q[3, 1], q[4, 1]},
+    {q[2, 0], q[2, 1], q[2, 2], q[3, 2], q[4, 2]},
+    {q[3, 0], q[3, 1], q[3, 2], q[3, 3], q[4, 3]},
+    {q[4, 0], q[4, 1], q[4, 2], q[4, 3], q[4, 4]}};
+  NCTest[Q1, answer];
+
+  {Q, sol, solQ} = NCPolySOSToSDP[{}, {poly1 - q1}, {Q1}, x];
+  answer = {{{2, 1, -1, 0}, {1, 1, -1, 0}, {-1, -1, 1, 0}, {0, 0, 0, 1}}};
+  NCTest[Q, answer];
+  NCTest[sol, {}];
+  answer = {q[0, 0] -> 0, q[1, 0] -> 0, q[1, 1] -> 2, q[2, 0] -> 0, q[2, 1] -> 1, q[2, 2] -> 1, q[3, 0] -> 0, q[3, 1] -> -1, q[3, 2] -> -1, q[3, 3] -> 1, q[4, 0] -> 0, q[4, 1] -> 0, q[4, 2] -> 0, q[4, 3] -> 0, q[4, 4] -> 1};
+  NCTest[solQ, answer];
+  NCTest[poly1 - (q1 /. solQ), 0];
+
+  (* Test 2 *)
+
+  vars = {x, y};
+  p = (x + y - x ** x) + (x - 2 y ** x) + x ** y ** x ** x;
+  pt = tp[p] /. tp -> Identity;
+  poly1 = NCToNCPoly[pt ** p, vars];
+
+  {q1, Q1} = NCPolySOS[poly1, q];
+  {Q, sol, solQ} = NCPolySOSToSDP[{}, {poly1 - q1}, {Q1}, x];
+  NCTest[poly1 - (q1 /. solQ), 0];
+
+];

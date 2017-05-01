@@ -41,6 +41,7 @@ Members are:
     * [NCPolyHankelMatrix](#NCPolyHankelMatrix)
     * [NCPolyRealization] (#NCPolyRealization)
 * Auxiliary functions
+    * [NCPolyVarsToIntegers](#NCPolyVarsToIntegers)
     * [NCFromDigits](#NCFromDigits)
     * [NCIntegerDigits](#NCIntegerDigits)
     * [NCDigitsToIndex](#NCDigitsToIndex)
@@ -581,6 +582,28 @@ See also:
 [NCRational](#NCRational).
 
 ### Auxiliary functions
+
+### NCPolyVarsToIntegers {#NCPolyVarsToIntegers}
+
+`NCPolyVarsToIntegers[vars]` converts the list of symbols `vars` into
+a list of integers corresponding to the graded ordering implied by
+`vars`.
+
+For example:
+
+    NCPolyVarsToIntegers[{{x},{y,z}}]
+	
+returns `{1,2}`, indicating that there are a total of three variables
+with the last two ranking higher than the first.
+
+`NCPolyVarsToIntegers` raises `NCPoly::InvalidList` in case it cannot
+correctly parse the list of variables.
+
+If `vars` is a list of integers, `NCPolyVarsToIntegers` returns this
+list intact.
+
+See also:
+[NCPoly](#NCPoly).
 
 #### NCFromDigits {#NCFromDigits}
 

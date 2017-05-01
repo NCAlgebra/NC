@@ -57,8 +57,10 @@ Begin["`Private`"];
   NCPolyAux[vars:(_Symbol|Subscript[_Symbol,__])..] := Length[{vars}];
   NCPolyAux[var___] := (Message[NCPoly::InvalidList]; $Failed);
 
-  Clear[NCPolyVarAux];
-  NCPolyVarAux[Vars_List] := Block[
+  (* NCPolyVarsToIntegers *)
+  NCPolyVarsToIntegers[{Vars__Integer}] := Return[{Vars}];
+
+  NCPolyVarsToIntegers[Vars_List] := Block[
     {vars},
       
     (* list of variables *)
@@ -100,7 +102,7 @@ Begin["`Private`"];
     ];
 
     (* list of variables *)
-    Check[ vars = NCPolyVarAux[Vars];
+    Check[ vars = NCPolyVarsToIntegers[Vars];
           ,
            Return[$Failed]
           ,
@@ -152,7 +154,7 @@ Begin["`Private`"];
     {vars},
       
     (* list of variables *)
-    Check[ vars = NCPolyVarAux[Vars];
+    Check[ vars = NCPolyVarsToIntegers[Vars];
           ,
            Return[$Failed]
           ,
@@ -491,7 +493,7 @@ Begin["`Private`"];
      vars},
 
     (* list of variables *)
-    Check[ vars = NCPolyVarAux[Vars];
+    Check[ vars = NCPolyVarsToIntegers[Vars];
           ,
            Return[$Failed]
           ,
@@ -542,7 +544,7 @@ Begin["`Private`"];
      loffset, coeff},
 
     (* list of variables *)
-    Check[ vars = NCPolyVarAux[Vars];
+    Check[ vars = NCPolyVarsToIntegers[Vars];
           ,
            Return[$Failed]
           ,
