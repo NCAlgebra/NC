@@ -24,6 +24,10 @@ Block[
        {{0, 0}, {1, 0}, {1, 2}, {2, 1}, {2, 6}, {4, 9}, {4, 80}}];
   NCTest[NCPolyGetDigits[p1], \
        {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
+  NCTest[NCPolyTermsOfTotalDegree[p1, 2],
+         NCPoly[coeff1[[{4,6}]], mon1[[{4,6}]], vars]];
+  NCTest[NCPolyTermsOfTotalDegree[p1, 4],
+         NCPoly[coeff1[[{5,7}]], mon1[[{5,7}]], vars]];
 
   coeff2 = {1, 0, 2, 3, -1, -2, -3, 0, 1/2};
   mon2 = {{}, {x,x}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {y,z}, {z, z, z, z}};
@@ -185,6 +189,10 @@ Block[
   NCTest[NCPolyDegree[p1], 4];
   NCTest[NCPolyGetDigits[p1], \
        {{}, {0}, {0, 1}, {0, 1, 0, 0}, {2}, {2, 0}, {2, 2, 2, 2}}];
+  NCTest[NCPolyTermsOfTotalDegree[p1, 2],
+         NCPoly[coeff1[[{4,6}]], mon1[[{4,6}]], vars]];
+  NCTest[NCPolyTermsOfTotalDegree[p1, 4],
+         NCPoly[coeff1[[{5,7}]], mon1[[{5,7}]], vars]];
 
   coeff2 = {1,     0,   2,   3,    -1,        -2,   -3,     0,          1/2};
   mon2 = { {}, {x,x}, {x}, {z}, {x,y}, {x,y,x,x}, {z,x}, {y,z}, {z, z, z, z}};

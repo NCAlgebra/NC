@@ -15,6 +15,12 @@ Block[
   p = (x + y - x ** x);
   poly1 = NCToNCPoly[p ** p + x ** y ** y ** x + x ** x, vars];
 
+  NCTest[True];
+  
+];
+
+If[ 0,
+
   {q1, Q1} = NCPolySOS[poly1, q];
   answer = NCToNCPoly[q[0, 0] + 2 x q[1, 0] + 2 y q[2, 0] + y ** y q[2, 2] + x ** x (q[1, 1] + 2 q[3, 0]) + 2 x ** x ** x q[3, 1] + x ** x ** y q[3, 2] + y ** x ** x q[3, 2] + x ** x ** x ** x q[3, 3] + x ** y (q[2, 1] + q[4, 0]) + y ** x (q[2, 1] + q[4, 0]) + 2 x ** y ** x q[4, 1] + x ** y ** y q[4, 2] + y ** y ** x q[4, 2] + x ** x ** y ** x q[4, 3] + x ** y ** x ** x q[4, 3] + x ** y ** y ** x q[4, 4], vars];
   NCTest[q1, answer];

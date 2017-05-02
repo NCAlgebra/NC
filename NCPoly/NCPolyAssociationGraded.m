@@ -184,9 +184,9 @@ Begin["`Private`"];
   NCPolyMonomialQ[p_NCPoly] := (Length[Part[p, 2]] === 1);
   NCPolyMonomialQ[p_] := False;
 
-  NCPolyNumberOfVariables[p_NCPoly] := Plus @@ p[[1]];
+  NCPolyNumberOfVariables[p_NCPoly] := Total[p[[1]]];
 
-  NCPolyDegree[p_NCPoly] := Max @@ Map[Plus @@ Drop[#, -1] &, Keys[p[[2]]]];
+  NCPolyDegree[p_NCPoly] := Max @@ Map[Total[Drop[#, -1]]&, Keys[p[[2]]]];
 
   NCPolyGetCoefficients[p_NCPoly] := Values[p[[2]]];
 
@@ -227,7 +227,7 @@ Begin["`Private`"];
   NCPolyLeadingTerm[p_NCPoly, 1] := Block[
     {key = Last[Keys[p[[2]]]]},
     Rule[
-      NCFromDigits[NCIntegerDigits[key, p[[1]]], Plus @@ p[[1]]],
+      NCFromDigits[NCIntegerDigits[key, p[[1]]], Total[p[[1]]]],
       p[[2]][key]
     ]
   ];
@@ -238,7 +238,7 @@ Begin["`Private`"];
       Check[ 
         key = Part[Keys[p[[2]]],-i];
         Rule[
-          NCFromDigits[NCIntegerDigits[key, p[[1]]], Plus @@ p[[1]]],
+          NCFromDigits[NCIntegerDigits[key, p[[1]]], Total[p[[1]]]],
           p[[2]][key]
         ]
        ,$Failed
@@ -253,6 +253,14 @@ Begin["`Private`"];
 
   NCPolyTogether[p_NCPoly] := MapAt[Together, p, {2}];
 
+  (* NCPolyTerms *)
+  NCPolyTermsOfDegree[p_NCPoly] := Message["Not implemented yet"];
+  
+  NCPolyTermsOfTotalDegree[p_NCPoly, degree_Integer] := 
+    NCPoly[p[[1]], 
+           p[[2]][[Flatten[Position[Map[Total[Drop[#, -1]]&, 
+                                        Keys[p[[2]]]], degree]]]]];
+  
   (* Display Order *)
 
   Clear[NCPolyDisplayOrderAux];
@@ -311,7 +319,7 @@ Begin["`Private`"];
     *)
 
     (* Compute monomials *)
-    sdegree = Map[Plus @@ Drop[#, -1] &, Keys[s[[2]]]];
+    sdegree = Map[Total[Drop[#, -1]] &, Keys[s[[2]]]];
     loffset = Map[nvars^(#)&, sdegree];
 
     rdigits = NCPolyGetIntegers[r];

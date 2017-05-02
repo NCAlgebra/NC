@@ -129,7 +129,7 @@ or
 
     mon = NCPolyMonomial[NCFromDigits[{0,1,0}, 3] -> -2, 3];
 
-represent the monomial $-2 xyx$ with has coefficient `-2`.
+represent the monomial $-2 xyx$ that has coefficient `-2`.
 
 See also:
 [NCPoly](#NCPoly),
@@ -478,8 +478,11 @@ of the leading Rules lf and lg as returned by NCGetLeadingTerm.
 #### NCPolyFullReduce {#NCPolyFullReduce}
 
 `NCPolyFullReduce[f,g]` applies NCPolyReduce successively until the
-remainder does not change.  See also NCPolyReduce and
-NCPolyQuotientExpand.
+remainder does not change.  
+
+See also:
+[NCPolyReduce](#NCPolyReduce),
+[NCPolyQuotientExpand](#NCPolyQuotientExpand).
 
 #### NCPolyNormalize {#NCPolyNormalize}
 

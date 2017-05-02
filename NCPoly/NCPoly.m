@@ -23,6 +23,8 @@ Clear[NCPoly,
       NCPolyDegree,
       NCPolyLeadingTerm,
       NCPolyLeadingMonomial,
+      NCPolyTermsOfDegree,
+      NCPolyTermsOfTotalDegree,
       NCPolyGetCoefficients,
       NCPolyCoefficient,
       NCPolyCoefficientArray,
@@ -132,10 +134,10 @@ Begin["`Private`"];
   QuotientExpand[ {l_,       r_}, g_NCPoly ] := r * l * g;
 
   NCPolyQuotientExpand[q_List, g_NCPoly] := 
-    Plus @@ Map[ QuotientExpand[#, g]&, q ];
+    Total[Map[ QuotientExpand[#, g]&, q ]];
 
   NCPolyQuotientExpand[q_List, {g__NCPoly}] :=
-   Plus @@ Map[ NCPolyQuotientExpand[Part[#,1],{g}[[Part[#,2]]]]&, q];
+    Total[Map[ NCPolyQuotientExpand[Part[#,1],{g}[[Part[#,2]]]]&, q]];
 
   NCPolyDivideDigits[{f__Integer}, {g__Integer}] := 
     Flatten[ ReplaceList[{f}, Join[{a___,g,b___}] :> {{a}, {b}}, 1], 1];
@@ -278,7 +280,7 @@ Begin["`Private`"];
     Map[NCFromDigits[#, base]&, {p}];
 
   NCFromDigits[p_List, {base__Integer}] := 
-    Append[ Reverse[ BinCounts[p, {Prepend[Accumulate[{base}], 0]}] ], FromDigits[p, Plus @@ {base}] ];
+    Append[ Reverse[ BinCounts[p, {Prepend[Accumulate[{base}], 0]}] ], FromDigits[p, Total[{base}]] ];
 
   (* DEG Ordered *)
   NCFromDigits[p_List, base_Integer] := 
@@ -297,7 +299,7 @@ Begin["`Private`"];
     IntegerDigits[n, base, d];
 
   NCIntegerDigits[{d__Integer, n_Integer}, {base__Integer}] := 
-    IntegerDigits[n, Plus @@ {base}, Plus @@ {d}];
+    IntegerDigits[n, Total[{base}], Total[{d}]];
 
   NCIntegerDigits[dn_List, base_Integer] :=
     Map[NCIntegerDigits[#, base]&, dn] /; Depth[dn] === 3;
@@ -310,7 +312,7 @@ Begin["`Private`"];
   NCIntegerDigits[{d_Integer, n_Integer}, base_Integer, len_Integer] := 
     IntegerDigits[n, base, len];
   NCIntegerDigits[{d__Integer, n_Integer}, {base__Integer}, len_Integer] := 
-    IntegerDigits[n, Plus @@ {base}, len];
+    IntegerDigits[n, Total[{base}], len];
   NCIntegerDigits[dn_List, base_Integer, len_Integer] :=
     Map[NCIntegerDigits[#, base, len]&, dn] /; Depth[dn] === 3;
   NCIntegerDigits[dn_List, {base__Integer}, len_Integer] :=
@@ -831,6 +833,18 @@ Begin["`Private`"];
       
     Return[SparseArray[Thread[index -> Values[p[[2]]]], {deg,deg}]];
       
+  ];
+
+  NCPolyGramMatrixDimensions[p_NCPoly] := Block[
+    {assoc, index, base = {Total[p[[1]]]}},
+
+    assoc = NCPolyTermsOfTotalDegree[p, NCPolyDegree[p]][[2]];
+    index = Keys[assoc[[Ordering[Keys[assoc][[All, -1]], -1]]]][[1]];
+    
+    (* TODO: SPLIT INDEX IN HALF *)
+    Return[NCDigitsToIndex[
+             NCIntegerDigits[{Total[Drop[index, -1]], index[[-1]]}, 
+                             base], base] - 1];
   ];
          
   NCPolyGramMatrixDimensions[degree_, vars_] := Block[

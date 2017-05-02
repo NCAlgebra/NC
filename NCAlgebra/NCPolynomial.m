@@ -59,7 +59,7 @@ Begin[ "`Private`" ]
       
   NCPolynomial /: NonCommutativeMultiply[r_NCPolynomial] := r;
     
-  (* NCConsecutiveTermss *)
+  (* NCConsecutiveTerms *)
   
   Clear[NCConsecutiveTerms];
   NCConsecutiveTerms[(tp|aj)[x_], (tp|aj)[y_], vars_] := 
