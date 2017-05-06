@@ -21,10 +21,13 @@ Clear[NCPoly,
       NCPolyDisplayOrder,
       NCPolyConstant,
       NCPolyDegree,
+      NCPolyMonomialDegree,
+      NCPolyPartialDegree,
       NCPolyLeadingTerm,
       NCPolyLeadingMonomial,
       NCPolyTermsOfDegree,
       NCPolyTermsOfTotalDegree,
+      NCPolyReverseMonomials,
       NCPolyGetCoefficients,
       NCPolyCoefficient,
       NCPolyCoefficientArray,
@@ -47,6 +50,7 @@ Clear[NCPoly,
 
 Clear[NCFromDigits,
       NCIntegerDigits,
+      NCIntegerReverse,
       NCDigitsToIndex,
       NCMonomialToDigits,
       NCPadAndMatch,
@@ -319,6 +323,25 @@ Begin["`Private`"];
     Map[NCIntegerDigits[#, {base}, len]&, dn] /; Depth[dn] === 3;
   *)
 
+  (* NCIntegerReverse *)
+   
+  (* IntegerReverse fails for 0 *)
+  Unprotect[IntegerReverse];
+  IntegerReverse[0, rest__] := 0;
+  Protect[IntegerReverse];
+              
+  NCIntegerReverse[{d_Integer, n_Integer}, base_Integer] :=
+    {d, IntegerReverse[n, base, d]};
+
+  NCIntegerReverse[{d__Integer, n_Integer}, {base__Integer}] :=
+    {d, IntegerReverse[n, Total[{base}], Total[{d}]]};
+
+  NCIntegerReverse[dn_List, base_Integer] :=
+    Map[NCIntegerReverse[#, base]&, dn] /; Depth[dn] === 3;
+
+  NCIntegerReverse[dn_List, {base__Integer}] :=
+    Map[NCIntegerReverse[#, {base}]&, dn] /; Depth[dn] === 3;
+              
   (* NCDigitsToIndex *)
     
   NCIntegersToIndexAux[{degree_Integer, i_Integer}, 1] := 

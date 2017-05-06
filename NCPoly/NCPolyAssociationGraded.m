@@ -188,6 +188,16 @@ Begin["`Private`"];
 
   NCPolyDegree[p_NCPoly] := Max @@ Map[Total[Drop[#, -1]]&, Keys[p[[2]]]];
 
+  NCPolyPartialDegree[p_NCPoly] := 
+    Apply[Max, Transpose[NCPolyMonomialDegree[p]], {1}];
+  
+  NCPolyMonomialDegree[p_NCPoly] := 
+    Range[0, Total[p[[1]]]-1] /.
+      Map[Append[#, _Integer -> 0] &,
+          Apply[Rule,
+                Map[Tally[NCIntegerDigits[#, p[[1]]]]&, Keys[p[[2]]]],
+                {2}]];
+      
   NCPolyGetCoefficients[p_NCPoly] := Values[p[[2]]];
 
   NCPolyCoefficient[p_NCPoly, m_?NCPolyMonomialQ] :=
@@ -254,7 +264,15 @@ Begin["`Private`"];
   NCPolyTogether[p_NCPoly] := MapAt[Together, p, {2}];
 
   (* NCPolyTerms *)
-  NCPolyTermsOfDegree[p_NCPoly] := Message["Not implemented yet"];
+  NCPolyTermsOfDegree[p_NCPoly, degree_List] := Block[
+      {d = Total[degree], tmp},
+
+      (* First pick the monomials with the right degree *)
+      tmp = NCPolyTermsOfTotalDegree[p, d];
+      
+      (* then select by monomial *)
+      Return[tmp];
+  ];
   
   NCPolyTermsOfTotalDegree[p_NCPoly, degree_Integer] := 
     NCPoly[p[[1]], 
@@ -274,6 +292,11 @@ Begin["`Private`"];
       RowBox[Flatten[(NCPolyDisplayOrderAux[##, "\[LessLess] "]&) @@
               Apply[NCPolyDisplayOrderAux[##,"<"]&,  vars, 1]]]];
 
+  (* NCPolyReverseMonomials *)
+  NCPolyReverseMonomials[p_NCPoly] :=
+    NCPoly[p[[1]], 
+           KeyMap[NCIntegerReverse[#, p[[1]]]&, p[[2]]]];
+    
   (* NCPoly Operators *)
 
   (* Times *)

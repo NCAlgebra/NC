@@ -155,7 +155,8 @@ Begin["`Private`"];
     If [ Not[MatchQ[ncVars, {___?NCSymbolOrSubscriptQ}]], 
          
          (* select expressions which are not symbols *)
-         pos = Flatten[Position[ncVars, Except[_?NCSymbolOrSubscriptQ], {1}]];
+         pos = Flatten[Position[ncVars, 
+                                Except[_?NCSymbolOrSubscriptQ|_?CommutativeQ], {1}]];
          exprs = ncVars[[pos]];
          
          (* create replacement variables *)

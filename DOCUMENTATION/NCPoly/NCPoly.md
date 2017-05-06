@@ -14,6 +14,7 @@ Members are:
 * Access and utilities
     * [NCPolyMonomialQ](#NCPolyMonomialQ)
     * [NCPolyDegree](#NCPolyDegree)
+    * [NCPolyPartialDegree](#NCPolyPartialDegree)
     * [NCPolyNumberOfVariables](#NCPolyNumberOfVariables)
     * [NCPolyCoefficient](#NCPolyCoefficient)
     * [NCPolyCoefficientArray](#NCPolyCoefficientArray)
@@ -25,6 +26,9 @@ Members are:
     * [NCPolyLeadingTerm](#NCPolyLeadingTerm)
     * [NCPolyOrderType](#NCPolyOrderType)
     * [NCPolyToRule](#NCPolyToRule)
+	* [NCPolyTermsOfDegree](#NCPolyTermsOfDegree)
+	* [NCPolyTermsOfTotalDegree](#NCPolyTermsOfTotalDegree)
+	* [NCPolyReverseMonomials](#NCPolyReverseMonomials)
 * Formatting
     * [NCPolyDisplay](#NCPolyDisplay)
     * [NCPolyDisplayOrder](#NCPolyDisplayOrder)
@@ -44,6 +48,7 @@ Members are:
     * [NCPolyVarsToIntegers](#NCPolyVarsToIntegers)
     * [NCFromDigits](#NCFromDigits)
     * [NCIntegerDigits](#NCIntegerDigits)
+    * [NCIntegerReverse](#NCIntegerReverse)
     * [NCDigitsToIndex](#NCDigitsToIndex)
     * [NCPadAndMatch](#NCPadAndMatch)
 
@@ -236,6 +241,23 @@ See also:
 #### NCPolyDegree {#NCPolyDegree}
 
 `NCPolyDegree[poly]` returns the degree of the nc polynomial `poly`.
+
+See also:
+[NCPolyPartialDegree](#NCPolyPartialDegree)
+
+#### NCPolyPartialDegree {#NCPolyPartialDegree}
+
+`NCPolyPartialDegree[poly]` returns the maximum degree appearing in the monomials of the nc polynomial `poly`.
+
+See also:
+[NCPolyDegree](#NCPolyDegree)
+
+#### NCPolyMonomialDegree {#NCPolyMonomialDegree}
+
+`NCPolyMonomialDegree[poly]` returns the partial degree of each symbol appearing in the monomials of the nc polynomial `poly`.
+
+See also:
+[NCPolyDegree](#NCPolyDegree)
 
 #### NCPolyNumberOfVariables {#NCPolyNumberOfVariables}
 
@@ -449,6 +471,80 @@ See also:
 [NCPolyLeadingTerm](#NCPolyLeadingTerm),
 [NCPolyLeadingMonomial](#NCPolyLeadingMonomial),
 [NCPoly](#NCPoly).
+
+### NCPolyTermsOfDegree {#NCPolyTermsOfDegree}
+
+`NCPolyTermsOfDegree[p, d]` returns a polynomial `p` in which only the monomials with degree `d` are present. The degree `d` is a list with the partial degrees on each variable.
+
+For example:
+
+	vars = {x, y};
+	poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
+	
+corresponds to the polynomial $x + 2 x y + 3 y x + 4 x^2$ and
+
+    NCPolyTermsOfTotalDegree[p, {1,1}]
+
+returns 
+
+    NCPoly[{1, 1}, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
+
+which corresponds to the polyomial $2 x y + 3 y x$. Likewise
+
+    NCPolyTermsOfTotalDegree[p, {2,0}]
+
+returns 
+
+    NCPoly[{1, 1}, {0, 2, 0} -> 4|>]
+
+which corresponds to the polyomial $4 x^2$.
+	
+See also:
+[NCPolyTermsOfTotalDegree](#NCPolyTermsOfTotalDegree).
+
+### NCPolyTermsOfTotalDegree {#NCPolyTermsOfTotalDegree}
+
+`NCPolyTermsOfTotalDegree[p, d]` returns a polynomial `p` in which only the monomials with total degree `d` are present. The degree `d` is an integer.
+
+For example:
+
+	vars = {x, y};
+	poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
+
+corresponds to the polynomial $x + 2 x y + 3 y x + 4 x^2$ and
+
+	NCPolyTermsOfTotalDegree[p, 2]
+
+returns 
+
+    NCPoly[{1, 1}, <|{0, 2, 0} -> 4, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
+
+which corresponds to the polyomial $2 x y + 3 y x + 4 x^2$.
+
+See also:
+[NCPolyTermsOfDegree](#NCPolyTermsOfDegree).
+
+### NCPolyReverseMonomials {#NCPolyReverseMonomials}
+
+`NCPolyReverseMonomials[p]` reverses the order of the symbols appearing in each monomial of the polynomial `p`.
+
+For example:
+
+	vars = {x, y};
+	poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
+
+corresponds to the polynomial $x + 2 x y + 3 y x + 4 x^2$ and
+
+	NCPolyReverseMonomials[p]
+	
+returns
+
+    NCPoly[{1, 1}, <|{0, 1, 0} -> 1, {0, 2, 0} -> 4, {1, 1, 2} -> 2, {1, 1, 1} -> 3|>]
+
+which correspond to the polynomial $x + 2 y x + 3 x y + 4 x^2$.
+
+See also:
+[NCIntegerReverse](#NCIntegerReverse).
 
 ### Formating functions
 
@@ -701,6 +797,26 @@ to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 
 See also:
 [NCFromDigits](#NCFromDigits).
+
+#### NCIntegerReverse {#NCIntegerReverse}
+
+`NCIntegerReverse[n,b]` reverses the integer `n` on the base `b` as returned by `NCFromDigits`.
+
+`NCIntegerReverse[{list1,list2}, b]` applies `NCIntegerReverse` to each
+`list1`, `list2`, ....
+
+For example:
+
+	NCIntegerReverse[{4,1}, 2]
+
+in which `{4,1}` correspond to the digits `{1,0,0,0}` returns
+
+    {4, 8}
+
+which correspond to the digits `{1,0,0,0}`.
+
+See also:
+[NCIntegerDigits](#NCIntegerDigits).
 
 #### NCDigitsToIndex {#NCDigitsToIndex}
 
