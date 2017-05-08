@@ -218,6 +218,7 @@ Begin["`Private`"];
   NCPolyMonomialQ[p_] := False;
 
   NCPolyNumberOfVariables[p_NCPoly] := Total[p[[1]]];
+  NCPolyNumberOfTerms[p_NCPoly] := Length[p[[2]]];
 
   NCPolyDegree[p_NCPoly] := Max @@ Map[Total[Drop[#, -1]]&, Keys[p[[2]]]];
 
@@ -375,7 +376,7 @@ Begin["`Private`"];
     {even, halfDigits} = NCPolyQuadraticTermsAux[p];
     
     (* generate chipset *)
-    chipset = Join @@ Map[Table[Take[#, -i], {i, Length[#]}]&, halfDigits];
+    chipset = Union[Join @@ Map[Table[Take[#, -i], {i, Length[#]}]&, halfDigits]];
     If[ MemberQ[halfDigits, {}],
         PrependTo[chipset, {}];
     ];

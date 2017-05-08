@@ -19,8 +19,36 @@ Begin["`Private`"];
     Table[If[i >= j, Subscript[q, k, i, j], 
                      Subscript[q, k, j, i]], {i, 0, d}, {j, 0, d}];
 
-  NCPolySOS[p_NCPoly, symbol_:q] := 
-    NCPolySOS[NCPolyDegree[p], p[[1]], symbol];
+  NCPolySOS[p_NCPoly, symbol_:q] := Block[
+    {chipset = NCPolyQuadraticChipset[p], 
+     index, Q},
+      
+    (* Generate Gram matrix only at chipset *)
+    index = Sort[
+      Flatten[
+        Drop[
+          Keys[
+            ArrayRules[
+              NCPolyCoefficientArray[NCPolyAdjoint[chipset]]
+            ]
+          ],
+          -1]]];
+
+    (* Print["index = ", index]; *)
+      
+    Q = SparseArray[
+      Thread[
+        Flatten[Outer[List, index, index], 1] ->
+          Flatten[
+            Outer[If[#1 >= #2, 
+                     Subscript[symbol, #1, #2], 
+                     Subscript[symbol, #2, #1]]&, index, index ]]
+      ] 
+    ];
+    
+    Return[{NCPolyFromGramMatrix[Q, p[[1]]], Q}];
+      
+  ];
 
   NCPolySOS[degree_Integer, vars_List, symbol_:q] := Block[
     {d = NCPolyGramMatrixDimensions[degree, vars], Q},
@@ -33,19 +61,21 @@ Begin["`Private`"];
   ];
 
   Clear[deleteColumns];
-  deleteColumns[m_, cols_] := Map[Delete[#, Map[List, cols]]&, m];
+  deleteColumns[m_SparseArray, cols_] := Transpose[deleteRows[Transpose[m], cols]];
+  deleteColumns[m_List, cols_] := Map[Delete[#, Map[List, cols]]&, m];
 
   Clear[deleteRows];
   deleteRows[m_, cols_] := Delete[m, Map[List, cols]];
   
-  NCPolySOSToSDP[f_:{}, {a__NCPoly}, qs_List, symbol_:x] := Block[
+  NCPolySOSToSDP[f_:{}, {a__NCPoly}, qqs_List, symbol_:x] := Block[
     {constraints = {a},
      allVars, qVars, vars,
      b1, A1, A1perp, n1, x1, x1s, sol1,
      Q, sol, solQ,
+     qs = Map[SparseArray, qqs],
      b2, A2, A2perp, n2, x2, x2s, sol2,
      zeroDiag, eqs},
-      
+
     (* min tr(C, Q) s.t. a(Q, x) = 0, Q >= 0 *)
 
     (* Extract variables *)
@@ -68,18 +98,18 @@ Begin["`Private`"];
     NCDebug[3, Dimensions[A1], LinearSolve[A1, b1], Normal[A1perp]];
 
     (* Substitute solution *)
-    Q = qs /. sol1;
+    Q = SparseArray[ArrayRules[qs] /. sol1];
     sol = Thread[vars -> (vars /. sol1)];
     solQ = Thread[qVars -> (qVars /. sol1)];
   
-    NCDebug[1, Q, sol];
+    NCDebug[1, sol, Map[MatrixForm, Q]];
       
     (* Simplify based on the diagonal *)
     While[ True
           ,
            
            (* zero diagonals? *)
-           zeroDiag = Map[Flatten[Position[Diagonal[#], 
+           zeroDiag = Map[Flatten[Position[Normal[Diagonal[#]], 
                                            _?PossibleZeroQ]]&, Q];
            
            (* Impose row and column to be zero if diagonal is zero *)
@@ -92,7 +122,7 @@ Begin["`Private`"];
            Q = MapThread[deleteRows, {Q,zeroDiag}];
            Q = MapThread[deleteColumns, {Q,zeroDiag}];
 
-           NCDebug[1, zeroDiag, eqs, Q];
+           NCDebug[1, zeroDiag, eqs, Map[MatrixForm, Q]];
 
            (* No more zero diagonals? *)
            If[ eqs === {}, Break[] ];
@@ -114,13 +144,14 @@ Begin["`Private`"];
            NCDebug[2, Normal[b2], Normal[A2], x2s, sol2];
            NCDebug[3, Normal[A2perp]];
            
-           Q = Q /. sol2 /. x2 -> x1;
+           Q = SparseArray[ArrayRules[Q] /. sol2 /. x2 -> x1];
            sol = sol /. sol2 /. x2 -> x1; 
            solQ = solQ /. sol2 /. x2 -> x1;
      
     ];
       
-    Return[{Q, sol, solQ} /. x1 -> symbol];
+    Q = SparseArray[ArrayRules[Q] /. x1 -> symbol];
+    Return[{Q, Variables[ArrayRules[Q][[All,2]]], sol, solQ} /. x1 -> symbol];
       
   ];
 

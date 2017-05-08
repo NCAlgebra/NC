@@ -17,6 +17,7 @@ Members are:
     * [NCPolyPartialDegree](#NCPolyPartialDegree)
     * [NCPolyMonomialDegree](#NCPolyMonomialDegree)
     * [NCPolyNumberOfVariables](#NCPolyNumberOfVariables)
+    * [NCPolyNumberOfTerms](#NCPolyNumberOfTerms)
     * [NCPolyCoefficient](#NCPolyCoefficient)
     * [NCPolyCoefficientArray](#NCPolyCoefficientArray)
     * [NCPolyGramMatrix](#NCPolyGramMatrix)
@@ -266,6 +267,11 @@ See also:
 #### NCPolyNumberOfVariables {#NCPolyNumberOfVariables}
 
 `NCPolyNumberOfVariables[poly]` returns the number of variables of the
+nc polynomial `poly`.
+
+#### NCPolyNumberOfTerms {#NCPolyNumberOfTerms}
+
+`NCPolyNumberOfTerms[poly]` returns the number of terms of the
 nc polynomial `poly`.
 
 #### NCPolyCoefficient {#NCPolyCoefficient}
