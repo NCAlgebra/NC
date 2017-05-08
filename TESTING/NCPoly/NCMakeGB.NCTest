@@ -84,9 +84,10 @@ NCMakeGBTest[filename_String,
 
 $NCGB$ResultDirectory = "TestResults";
 $NCGB$ReferenceDirectory = "TestProblems";
+$NC$Dir = DirectoryName[FindFile["NC`"]];
 
 $CurrentDirectory = Directory[];
-SetDirectory[ToFileName[{$NCDir$, "TESTING", "NCPoly"}, "TestProblems"]];
+SetDirectory[ToFileName[{$NC$Dir, "TESTING", "NCPoly"}, "TestProblems"]];
 
 testset = {52, 62, 70}; (* Different than NCGB *)
 testset = Range[0,88];

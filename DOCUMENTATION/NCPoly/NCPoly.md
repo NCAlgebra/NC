@@ -15,6 +15,7 @@ Members are:
     * [NCPolyMonomialQ](#NCPolyMonomialQ)
     * [NCPolyDegree](#NCPolyDegree)
     * [NCPolyPartialDegree](#NCPolyPartialDegree)
+    * [NCPolyMonomialDegree](#NCPolyMonomialDegree)
     * [NCPolyNumberOfVariables](#NCPolyNumberOfVariables)
     * [NCPolyCoefficient](#NCPolyCoefficient)
     * [NCPolyCoefficientArray](#NCPolyCoefficientArray)
@@ -28,7 +29,10 @@ Members are:
     * [NCPolyToRule](#NCPolyToRule)
 	* [NCPolyTermsOfDegree](#NCPolyTermsOfDegree)
 	* [NCPolyTermsOfTotalDegree](#NCPolyTermsOfTotalDegree)
+	* [NCPolyQuadraticTerms](#NCPolyQuadraticTerms)
+	* [NCPolyQuadraticChipset](#NCPolyQuadraticChipset)
 	* [NCPolyReverseMonomials](#NCPolyReverseMonomials)
+    * [NCPolyGetOptions](#NCPolyGetOptions)
 * Formatting
     * [NCPolyDisplay](#NCPolyDisplay)
     * [NCPolyDisplayOrder](#NCPolyDisplayOrder)
@@ -472,7 +476,7 @@ See also:
 [NCPolyLeadingMonomial](#NCPolyLeadingMonomial),
 [NCPoly](#NCPoly).
 
-### NCPolyTermsOfDegree {#NCPolyTermsOfDegree}
+#### NCPolyTermsOfDegree {#NCPolyTermsOfDegree}
 
 `NCPolyTermsOfDegree[p, d]` returns a polynomial `p` in which only the monomials with degree `d` are present. The degree `d` is a list with the partial degrees on each variable.
 
@@ -502,7 +506,7 @@ which corresponds to the polyomial $4 x^2$.
 See also:
 [NCPolyTermsOfTotalDegree](#NCPolyTermsOfTotalDegree).
 
-### NCPolyTermsOfTotalDegree {#NCPolyTermsOfTotalDegree}
+#### NCPolyTermsOfTotalDegree {#NCPolyTermsOfTotalDegree}
 
 `NCPolyTermsOfTotalDegree[p, d]` returns a polynomial `p` in which only the monomials with total degree `d` are present. The degree `d` is an integer.
 
@@ -524,7 +528,73 @@ which corresponds to the polyomial $2 x y + 3 y x + 4 x^2$.
 See also:
 [NCPolyTermsOfDegree](#NCPolyTermsOfDegree).
 
-### NCPolyReverseMonomials {#NCPolyReverseMonomials}
+#### NCPolyQuadraticTerms {#NCPolyQuadraticTerms}
+
+`NCPolyQuadraticTerms[p]` returns a polynomial with only the
+"square" quadratic terms of `p`.
+
+For example:
+
+    vars = {{x, y, z}}
+    coeff = {1, 1, 4, 3, 2, -1}
+    digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
+    p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
+	
+corresponds to the polynomial $p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x +
+1$ in which $x$ and $y$ are transposes of each other, that is $y =
+x^T$. Its `NCPoly` object is
+
+	NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
+
+A call to 
+
+    NCPolyQuadraticTerms[p]
+   
+results in 
+
+    NCPoly[{3}, <|{0, 0} -> 1, {2, 3} -> 4, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
+
+corresponding to the polynomial $-x.z.z.y + 4 y.x + 1$ which contains
+only "square" quadratic terms of $p(x,y,z)$.
+
+See also:
+`NCPolyQuadraticChipset`(#NCPolyQuadraticChipset).
+
+#### NCPolyQuadraticChipset {#NCPolyQuadraticChipset}
+
+`NCPolyQuadraticChipset[p]` returns a polynomial with only the "half"
+terms of `p` that can be in an NC SOS decomposition of `p`.
+
+For example:
+
+    vars = {{x, y, z}}
+    coeff = {1, 1, 4, 3, 2, -1}
+    digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
+    p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
+	
+corresponds to the polynomial $p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x +
+1$ in which $x$ and $y$ are transposes of each other, that is $y =
+x^T$. Its `NCPoly` object is
+
+	NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
+
+A call to 
+
+    NCPolyQuadraticChipset[p]
+   
+results in 
+
+    NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {1, 1} -> 1, {2, 7} -> 1|>, 
+ TransposePairs -> {{0, 1}}]
+
+corresponding to the polynomial $z.y + y + x + 1$ that contains only
+terms which contain monomials with "half" of the monomials of
+$p(x,y,z)$ which can appear in an NC SOS decomposition of `p`.
+
+See also:
+`NCPolyQuadraticTerms`(#NCPolyQuadraticTerms).
+
+#### NCPolyReverseMonomials {#NCPolyReverseMonomials}
 
 `NCPolyReverseMonomials[p]` reverses the order of the symbols appearing in each monomial of the polynomial `p`.
 
@@ -545,6 +615,17 @@ which correspond to the polynomial $x + 2 y x + 3 x y + 4 x^2$.
 
 See also:
 [NCIntegerReverse](#NCIntegerReverse).
+
+#### NCPolyGetOptions {#NCPolyGetOptions}
+
+`NCPolyGetOptions[p]` returns the options embedded in the polynomial `p`.
+
+Available options are:
+
+- `TransposePairs`: list with pairs of variables to be treated as
+  transposes of each other;
+- `SelfAdjointPairs`: list with pairs of variables to be treated as
+  adjoints of each other.
 
 ### Formating functions
 
@@ -682,7 +763,7 @@ See also:
 
 ### Auxiliary functions
 
-### NCPolyVarsToIntegers {#NCPolyVarsToIntegers}
+#### NCPolyVarsToIntegers {#NCPolyVarsToIntegers}
 
 `NCPolyVarsToIntegers[vars]` converts the list of symbols `vars` into
 a list of integers corresponding to the graded ordering implied by

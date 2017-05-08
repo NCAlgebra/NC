@@ -17,83 +17,79 @@ Begin["`Private`"];
   NCPolyMonomial[{}, {n__Integer}] := 1;
 
   (* DIGITS DEG MONOMIAL constructor *)
-  NCPolyMonomial[s_List, n_Integer] := 
-    NCPoly[{n}, Association[NCFromDigits[s, n] -> 1]];
+  NCPolyMonomial[s_List, n_Integer, opts:OptionsPattern[]] := 
+    NCPoly[{n}, Association[NCFromDigits[s, n] -> 1], opts];
 
   (* DIGITS LEX MONOMIAL constructor *)
-  NCPolyMonomial[s_List, {n__Integer}] := 
-    NCPoly[{n}, Association[NCFromDigits[s, {n}] -> 1]];
+  NCPolyMonomial[s_List, {n__Integer}, opts:OptionsPattern[]] := 
+    NCPoly[{n}, Association[NCFromDigits[s, {n}] -> 1], opts];
 
   (* RULE MONOMIAL constructors *)
-  NCPolyMonomial[s_Rule, {n__Integer}] := 
+  NCPolyMonomial[s_Rule, {n__Integer}, opts:OptionsPattern[]] := 
     NCPoly[
       {n}, 
       Association[NCFromDigits[NCIntegerDigits[s[[1]], Flatten[{n}]], {n}] -> s[[2]]]
-    ];
+      opts
+  ];
 
-  NCPolyMonomial[s_Rule, n_Integer] := 
-    NCPolyMonomial[s, {n}];
+  NCPolyMonomial[s_Rule, n_Integer, opts:OptionsPattern[]] := 
+    NCPolyMonomial[s, {n}, opts];
 
-  NCPolyMonomial[s_Rule, {var__List}] :=
-    NCPolyMonomial[s, Map[Length,{var}]];
+  NCPolyMonomial[s_Rule, {var__List}, opts:OptionsPattern[]] :=
+    NCPolyMonomial[s, Map[Length,{var}], opts];
 
-  NCPolyMonomial[s_Rule, var_List] :=
-    NCPolyMonomial[s, {var}];
+  NCPolyMonomial[s_Rule, var_List, opts:OptionsPattern[]] :=
+    NCPolyMonomial[s, {var}, opts];
 
   (* LEX constructor *)
-  NCPolyMonomial[monomials_List, {var__List}] := 
+  NCPolyMonomial[monomials_List, {var__List}, opts:OptionsPattern[]] := 
     NCPolyMonomial[
        Flatten[Map[(Position[Flatten[{var}], #]-1)&, monomials]]
-      ,Map[Length,{var}]
+      ,
+       Map[Length,{var}]
+      ,
+       opts
     ];
 
   (* DEG constructor *)
-  NCPolyMonomial[monomials_List, var_List] := 
-    NCPolyMonomial[monomials, {var}];
+  NCPolyMonomial[monomials_List, var_List, opts:OptionsPattern[]] := 
+    NCPolyMonomial[monomials, {var}, opts];
 
   (* NCPoly Constructor *)
   
-  Clear[NCPolyAux];
-  NCPolyAux[vars:(_Symbol|Subscript[_Symbol,__])..] := Length[{vars}];
-  NCPolyAux[var___] := (Message[NCPoly::InvalidList]; $Failed);
-
   (* NCPolyVarsToIntegers *)
   NCPolyVarsToIntegers[{Vars__Integer}] := Return[{Vars}];
 
-  NCPolyVarsToIntegers[Vars_List] := Block[
-    {vars},
+  NCPolyVarsToIntegers[Vars_List] := 
+    NCPolyVarsToIntegers[Map[List, Vars]];
+  
+  NCPolyVarsToIntegers[{Vars__List}] := Block[
+    {vars = {Vars}},
       
     (* list of variables *)
-
-    If[ And[Depth[Vars] > 3, 
-            Depth[Vars /. Subscript[x_,__] -> x] > 3],
+      
+    If[ Cases[Map[Part[#, 0] &, Level[vars, {2}]], 
+                  Except[Symbol|Subscript]] =!= {},
         Message[NCPoly::InvalidList];
         Return[$Failed];
     ];
       
     (* repeat variables *)
-    If[ Length[Flatten[Vars]] != Length[Union[Flatten[Vars]]],
+    If[ Length[Flatten[vars]] != Length[Union[Flatten[vars]]],
         Message[NCPoly::InvalidList];
         Return[$Failed];
     ];
       
-    (* normalize list of variables *)
+    (* convert to integers *)
+    Return[Map[Length, vars]];
       
-    vars = Check[
-           Apply[NCPolyAux, Map[Flatten, Map[List, Vars]], 1]
-          ,
-           $Failed
-          ,
-           NCPoly::InvalidList
-    ];
-
-    Return[vars];
   ];
   
-  NCPoly[{}, {}, var_List] := 0;
+  NCPoly[{}, {}, var_List, OptionsPattern[]] := 0;
 
-  NCPoly[coeff_List, monomials_List, Vars_List] := Module[
-    {vars, varnames},
+  NCPoly[coeff_List, monomials_List, Vars_List, 
+         opts:OptionsPattern[]] := Module[
+    {vars, varnames, varRule, tpVars, ajVars, options = {}},
 
     (* check monomial and coefficient size *)
     If[ Length[coeff] =!= Length[monomials],
@@ -109,10 +105,31 @@ Begin["`Private`"];
            NCPoly::InvalidList
     ];
     varnames = Flatten[Vars];
+    varRule = Flatten[MapIndexed[{#1 -> #2[[1]]-1} &, varnames]];
+
+    tpVars = OptionValue[TransposePairs];
+    If[ tpVars =!= {},
+        AppendTo[options,
+                 TransposePairs -> (tpVars /. varRule)];
+    ];
+
+    ajVars = OptionValue[SelfAdjointPairs];
+    If[ ajVars =!= {},
+        AppendTo[options,
+                 SelfAdjointPairs -> (ajVars /. varRule)];
+    ];
+             
+    (* 
+    Print["tpVars = ", tpVars];
+    Print["ajVars = ", ajVars];
+    Print["varRule = ", varRule];
+    Print["options = ", options];
+    *)
       
     Check[
       NCPolyPack[
-        NCPoly[ vars
+        NCPoly[
+            vars
            ,
             KeySort[
               Merge[
@@ -126,6 +143,8 @@ Begin["`Private`"];
                 Total
               ]
             ]
+           , 
+            Sequence @@ options
         ]
       ]
      ,
@@ -135,16 +154,24 @@ Begin["`Private`"];
     ]
   ];
 
-  NCPoly[r_,Association[]] := 0;
+  NCPoly[r_, Association[], OptionsPattern[]] := 0;
 
+  (* NCPolyGetOptions *)
+  NCPolyGetOptions[p_NCPoly] := Drop[List @@ p, 2];
+  
+  Clear[NCPolyGetOptionsSequence];
+  NCPolyGetOptionsSequence[p_NCPoly] := Sequence @@ Drop[List @@ p, 2];
+  
   (* errors *)
   
-  NCPoly[r_,s_] := (Message[NCPoly::NotPolynomial]; 
+  NCPoly[r_,s_,OptionsPattern[]] := (Message[NCPoly::NotPolynomial]; 
     $Failed) /; Or[ Head[r] =!= List, Depth[r] =!= 2,
                    Head[s] =!= Association ];
 
-  NCPoly[r___] := (Message[NCPoly::NotPolynomial]; 
-    $Failed) /; Length[{r}] =!= 2;
+  (*
+  NCPoly[r___,opt:OptionsPattern[]] := (Print["opts =", opts]; Message[NCPoly::NotPolynomial]; 
+    $Failed) /; Length[{r}] != 2;
+  *)
 
   (* NCPolyConvert *)
   NCPolyConvert[{p__NCPoly}, Vars_List] := 
@@ -168,18 +195,24 @@ Begin["`Private`"];
     
     (* Need to convert *)
     Return[
-      NCPoly[vars, 
-             KeySort[ KeyMap[ NCFromDigits[#, vars] &,
-                              KeyMap[NCIntegerDigits[#, p[[1]]] &, 
-                                     p[[2]] ] ] ]
-    ]];
+      NCPoly[ vars
+             , 
+              KeySort[ KeyMap[ NCFromDigits[#, vars] &,
+                               KeyMap[NCIntegerDigits[#, p[[1]]] &, 
+                                      p[[2]] ] ] ]
+             ,
+              NCPolyGetOptionsSequence[p]
+      ]
+    ];
       
   ];
   
   (* NCPoly Utilities *)
 
   NCPolyPack[p_NCPoly] := 
-    NCPoly[ p[[1]], DeleteCases[p[[2]], 0] ];
+    NCPoly[ p[[1]], 
+            DeleteCases[p[[2]], 0], 
+            NCPolyGetOptionsSequence[p] ];
 
   NCPolyMonomialQ[p_NCPoly] := (Length[Part[p, 2]] === 1);
   NCPolyMonomialQ[p_] := False;
@@ -214,15 +247,16 @@ Begin["`Private`"];
   NCPolyLeadingMonomial[p_NCPoly] := NCPolyLeadingMonomial[p, 1];
 
   NCPolyLeadingMonomial[p_NCPoly, 1] := 
-    NCPoly[p[[1]], 
-           KeyTake[p[[2]], {Last[Keys[p[[2]]]]}]];
+    NCPoly[ p[[1]], 
+            KeyTake[p[[2]], {Last[Keys[p[[2]]]]}],
+            NCPolyGetOptionsSequence[p] ];
 
   NCPolyLeadingMonomial[p_NCPoly, i_Integer] := Block[
     {key},
     Quiet[
       Check[ 
          key = Part[Keys[p[[2]]],-i];
-         NCPoly[p[[1]], KeyTake[p[[2]], {key}]]
+         NCPoly[p[[1]], KeyTake[p[[2]], {key}], NCPolyGetOptionsSequence[p] ]
         ,$Failed
         ,Part::partw
       ]
@@ -277,8 +311,88 @@ Begin["`Private`"];
   NCPolyTermsOfTotalDegree[p_NCPoly, degree_Integer] := 
     NCPoly[p[[1]], 
            p[[2]][[Flatten[Position[Map[Total[Drop[#, -1]]&, 
-                                        Keys[p[[2]]]], degree]]]]];
+                                        Keys[p[[2]]]], degree]]]]
+           NCPolyGetOptionsSequence[p] ];
+
+  (* NCPolyQuadraticTerms *)
+  Clear[NCPolyQuadraticTermsAux];
+  NCPolyQuadraticTermsAux[p_NCPoly] := Block[
+    {even, digits, halfDigits, sameDigits,
+     opts = NCPolyGetOptions[p],
+     tpRules, ajRules, index},
+
+    (* ajRules *)
+    If[ (ajRules = OptionValue[NCPoly, opts, SelfAdjointPairs]) =!= {}
+       ,
+        ajRules = Apply[Rule, 
+                        Join[ajRules, Map[Reverse, ajRules]], 
+                        {1}];
+    ];
+      
+    (* tpRules *)
+    If[ (tpRules = OptionValue[NCPoly, opts, TransposePairs]) =!= {}
+       ,
+        ajRules = Join[ajRules, Apply[Rule, 
+                                      Join[tpRules, Map[Reverse, tpRules]], 
+                                      {1}] ];
+    ];
+      
+    (* even terms *)
+    even = KeySelect[p[[2]], EvenQ[Total[Drop[#, -1]]] &];
+      
+    (* split digits *)
+    digits = Map[NCIntegerDigits[#,p[[1]]]&, Keys[even]];
+    halfDigits = Map[{Reverse[Take[#, Length[#]/2]] /. ajRules, 
+                      Take[#, {Length[#]/2+1, -1}]}&, digits];
+      
+    (* select for symmetry *)
+    sameDigits = Apply[Equal, halfDigits, {1}];  
+    index = Flatten[Position[sameDigits,True]];
+
+    (*
+    Print["even = ", even];
+    Print["digits = ", digits];
+    Print["halfDigits = ", halfDigits];
+    Print["sameDigits = ", sameDigits];
+    Print["index = ", index];
+    *)
+      
+    Return[{even[[index]], halfDigits[[index, 1]]}];
+      
+  ];
   
+  NCPolyQuadraticTerms[p_NCPoly] := 
+    NCPoly[ p[[1]],
+            NCPolyQuadraticTermsAux[p][[1]],
+            NCPolyGetOptionsSequence[p] ];
+    
+  (* NCPolyQuadraticChipset *)
+
+  NCPolyQuadraticChipset[p_NCPoly] := Block[
+    {even, halfDigits, chipset},
+    
+    (* Get square half-digits *)
+    {even, halfDigits} = NCPolyQuadraticTermsAux[p];
+    
+    (* generate chipset *)
+    chipset = Join @@ Map[Table[Take[#, -i], {i, Length[#]}]&, halfDigits];
+    If[ MemberQ[halfDigits, {}],
+        PrependTo[chipset, {}];
+    ];
+      
+    chipset = Map[NCFromDigits[#, p[[1]]]&, chipset];
+      
+    (*
+    Print["even = ", even];
+    Print["halfDigits = ", halfDigits];
+    Print["chipset = ", chipset];
+    *)
+    
+    Return[NCPoly[ p[[1]],
+                   KeySort[<|Thread[chipset -> 1]|>],
+                   NCPolyGetOptionsSequence[p] ] ];
+  ];
+      
   (* Display Order *)
 
   Clear[NCPolyDisplayOrderAux];
@@ -293,19 +407,89 @@ Begin["`Private`"];
               Apply[NCPolyDisplayOrderAux[##,"<"]&,  vars, 1]]]];
 
   (* NCPolyReverseMonomials *)
+  (* DOES IT NEED SORTING? *)
   NCPolyReverseMonomials[p_NCPoly] :=
-    NCPoly[p[[1]], 
-           KeyMap[NCIntegerReverse[#, p[[1]]]&, p[[2]]]];
+    NCPoly[ p[[1]], 
+            KeySort[KeyMap[NCIntegerReverse[#, p[[1]]]&, p[[2]]]],
+            NCPolyGetOptionsSequence[p] ];
     
+  (* NCPolyTranspose *)
+  NCPolyTranspose[p_NCPoly] := NCPolyReverseMonomials[p] /; Length[p] == 2;
+
+  NCPolyTranspose[p_NCPoly] := Block[
+    {tmp = p,
+     opts = NCPolyGetOptions[p],
+     tpRules },
+      
+    (* Transpose variables *)
+    Return[
+      If[ (tpRules = OptionValue[NCPoly, opts, TransposePairs]) =!= {}
+         ,
+          tpRules = Apply[Rule, 
+                          Join[tpRules, Map[Reverse, tpRules]], 
+                          {1}];
+          
+          (* Print["tpRules = ", tpRules]; *)
+          
+          NCPoly[ p[[1]],
+                  KeySort[KeyMap[NCFromDigits[Reverse[NCIntegerDigits[#, p[[1]]]] /. tpRules, p[[1]]]&, p[[2]]]],
+                  NCPolyGetOptionsSequence[p] ]
+         ,
+          NCPolyReverseMonomials[p]
+      ]
+    ];
+
+  ];
+
+  (* NCPolyAdjoint *)
+  NCPolyAdjoint[p_NCPoly] := NCPolyReverseMonomials[p] /; Length[p] == 2;
+
+  NCPolyAdjoint[p_NCPoly] := Block[
+    {tmp = p,
+     opts = NCPolyGetOptions[p],
+     tpRules, ajRules },
+      
+    (* ajRules *)
+    If[ (ajRules = OptionValue[NCPoly, opts, SelfAdjointPairs]) =!= {}
+       ,
+        ajRules = Apply[Rule, 
+                        Join[ajRules, Map[Reverse, ajRules]], 
+                        {1}];
+    ];
+      
+    (* tpRules *)
+    If[ (tpRules = OptionValue[NCPoly, opts, TransposePairs]) =!= {}
+       ,
+        ajRules = Join[ajRules, Apply[Rule, 
+                                      Join[tpRules, Map[Reverse, tpRules]], 
+                                      {1}] ];
+    ];
+      
+    (* Adjoint variables? *)
+    Return[
+      If[ ajRules =!= {}
+         ,
+          NCPoly[ p[[1]],
+                  KeySort[Map[Conjugate, KeyMap[NCFromDigits[Reverse[NCIntegerDigits[#, p[[1]]]] /. ajRules, p[[1]]]&, p[[2]]]]],
+                  NCPolyGetOptionsSequence[p] ]
+         ,
+          NCPolyReverseMonomials[p]
+      ]
+    ];
+       
+  ];
+  
   (* NCPoly Operators *)
 
   (* Times *)
-  NCPoly /: Times[r_, s_NCPoly] := NCPoly[s[[1]], r s[[2]]];
+  NCPoly /: Times[r_, s_NCPoly] := NCPoly[s[[1]], r s[[2]], 
+                                          NCPolyGetOptionsSequence[s] ];
 
   (* Plus *)
   NCPolySum[r_NCPoly, s_NCPoly] := NCPoly[
     r[[1]], 
-    KeySort[DeleteCases[Merge[{r[[2]], s[[2]]}, Total], 0]]
+    KeySort[DeleteCases[Merge[{r[[2]], s[[2]]}, Total], 0]],
+    NCPolyGetOptionsSequence[s]
   ] /; s[[1]] === r[[1]];
 
   (* Product *)
@@ -402,11 +586,17 @@ Begin["`Private`"];
     If [ NCPolyMonomialQ[r] || NCPolyMonomialQ[s],
 
       (* No repeats! *)  
-      Return[NCPoly[n, KeySort[Association[MapThread[Rule,{digits, coeff}]]]]];
+      Return[NCPoly[n, 
+                    KeySort[Association[MapThread[Rule,{digits, coeff}]]],
+                    NCPolyGetOptionsSequence[r] ]
+      ];
       ,
 
       (* Handle repeats with Merge *) 
-      Return[NCPoly[n, KeySort[Merge[MapThread[Rule,{digits, coeff}], Total]]]];
+      Return[NCPoly[n, 
+                    KeySort[Merge[MapThread[Rule,{digits, coeff}], Total]],
+                    NCPolyGetOptionsSequence[r] ]
+      ];
 
     ];
 

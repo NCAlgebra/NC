@@ -25,9 +25,14 @@ Clear[NCPoly,
       NCPolyPartialDegree,
       NCPolyLeadingTerm,
       NCPolyLeadingMonomial,
+      NCPolyQuadraticTerms,
+      NCPolyQuadraticChipset,
       NCPolyTermsOfDegree,
       NCPolyTermsOfTotalDegree,
       NCPolyReverseMonomials,
+      NCPolyTranspose,
+      NCPolyAdjoint,
+      NCPolyGetOptions,
       NCPolyGetCoefficients,
       NCPolyCoefficient,
       NCPolyCoefficientArray,
@@ -72,6 +77,11 @@ NCPoly::InvalidList = "Invalid list of variables.";
 NCMonomialToDigits::InvalidSymbol = "Monomial contain symbol not present in variable list";
 NCPolyCoefficientArray::InvalidDegree = "Provided degree has to be greater or equal to the polynomial degree.";
 NCPolyFromCoefficientArray::InvalidDegree = "Array size does not match an integer degree.";
+
+Options[NCPoly] = { 
+    TransposePairs -> {}, 
+    SelfAdjointPairs -> {} 
+};
 
 Begin["`Private`"];
 

@@ -19,8 +19,6 @@ Begin["`Private`"];
     Table[If[i >= j, Subscript[q, k, i, j], 
                      Subscript[q, k, j, i]], {i, 0, d}, {j, 0, d}];
 
-  Clear[NCPolySOS];
-  
   NCPolySOS[p_NCPoly, symbol_:q] := 
     NCPolySOS[NCPolyDegree[p], p[[1]], symbol];
 

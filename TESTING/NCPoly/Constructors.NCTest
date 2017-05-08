@@ -28,7 +28,8 @@ Block[
          NCPoly[coeff1[[{4,6}]], mon1[[{4,6}]], vars]];
   NCTest[NCPolyTermsOfTotalDegree[p1, 4],
          NCPoly[coeff1[[{5,7}]], mon1[[{5,7}]], vars]];
-  NCTest[NCPolyPartialDegree[p1], {{0, 0, 0}, {1, 0, 0}, {0, 0, 1}, {1, 1, 0}, {1, 0, 1}, {3, 1, 0}, {0, 0, 4}}];
+  NCTest[NCPolyMonomialDegree[p1], {{0, 0, 0}, {1, 0, 0}, {0, 0, 1}, {1, 1, 0}, {1, 0, 1}, {3, 1, 0}, {0, 0, 4}}];
+  NCTest[NCPolyPartialDegree[p1], {3,1,4}];
 
   coeff2 = {1, 0, 2, 3, -1, -2, -3, 0, 1/2};
   mon2 = {{}, {x,x}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {y,z}, {z, z, z, z}};
@@ -40,7 +41,8 @@ Block[
        {{0, 0}, {1, 0}, {1, 2}, {2, 1}, {2, 6}, {4, 9}, {4, 80}}];
   NCTest[NCPolyGetDigits[p2], \
        {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
-  NCTest[NCPolyPartialDegree[p2], {{0, 0, 0}, {1, 0, 0}, {0, 0, 1}, {1, 1, 0}, {1, 0, 1}, {3, 1, 0}, {0, 0, 4}}];
+  NCTest[NCPolyMonomialDegree[p2], {{0, 0, 0}, {1, 0, 0}, {0, 0, 1}, {1, 1, 0}, {1, 0, 1}, {3, 1, 0}, {0, 0, 4}}];
+  NCTest[NCPolyPartialDegree[p2], {3,1,4}];
 
   (* zero *)
   NCTest[NCPoly[{},{},{x,y}], 0];
@@ -195,7 +197,8 @@ Block[
          NCPoly[coeff1[[{4,6}]], mon1[[{4,6}]], vars]];
   NCTest[NCPolyTermsOfTotalDegree[p1, 4],
          NCPoly[coeff1[[{5,7}]], mon1[[{5,7}]], vars]];
-  NCTest[NCPolyPartialDegree[p1], {{0, 0, 0}, {1, 0, 0}, {1, 1, 0}, {3, 1, 0}, {0, 0, 1}, {1, 0, 1}, {0, 0, 4}}];
+  NCTest[NCPolyMonomialDegree[p1], {{0, 0, 0}, {1, 0, 0}, {1, 1, 0}, {3, 1, 0}, {0, 0, 1}, {1, 0, 1}, {0, 0, 4}}];
+  NCTest[NCPolyPartialDegree[p1], {3,1,4}];
 
   coeff2 = {1,     0,   2,   3,    -1,        -2,   -3,     0,          1/2};
   mon2 = { {}, {x,x}, {x}, {z}, {x,y}, {x,y,x,x}, {z,x}, {y,z}, {z, z, z, z}};
@@ -205,7 +208,8 @@ Block[
   NCTest[NCPolyDegree[p2], 4];
   NCTest[NCPolyGetDigits[p2], \
        {{}, {0}, {0, 1}, {0, 1, 0, 0}, {2}, {2, 0}, {2, 2, 2, 2}}];
-  NCTest[NCPolyPartialDegree[p2], {{0, 0, 0}, {1, 0, 0}, {1, 1, 0}, {3, 1, 0}, {0, 0, 1}, {1, 0, 1}, {0, 0, 4}}];
+  NCTest[NCPolyMonomialDegree[p2], {{0, 0, 0}, {1, 0, 0}, {1, 1, 0}, {3, 1, 0}, {0, 0, 1}, {1, 0, 1}, {0, 0, 4}}];
+  NCTest[NCPolyPartialDegree[p2], {3,1,4}];
 
   (* Standard Constructor *)
 
@@ -215,7 +219,7 @@ Block[
 
   (* Lex variation *)
   
-  vars = {{x, y}, z};
+  vars = {{x, y}, {z}};
   p1 = NCPoly[coeff1, mon1, vars];
 
   NCTest[NCPolyGetCoefficients[p1], {1, 2, -1, -2, 3, -3, 1/2}];
@@ -429,5 +433,93 @@ Block[
 
   NCTest[NCPolyConvert[p1, vars2], p2];
   NCTest[NCPolyConvert[p2, vars1], p1];
+
+  (* Transpose *)
+  
+  vars = {{x, y, z}};
+  coeff1 = {1, 2, 3, -1, -2, -3, 1/2};
+  mon1 = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+  p1 = NCPoly[coeff1, mon1, vars, TransposePairs -> {{x,y}}];
+  
+  NCTest[NCPolyGetCoefficients[p1], {1, 2, 3, -1, -3, -2, 1/2}];
+  NCTest[NCPolyGetIntegers[p1], \
+       {{0, 0}, {1, 0}, {1, 2}, {2, 1}, {2, 6}, {4, 9}, {4, 80}}];
+  NCTest[NCPolyGetDigits[p1], \
+       {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
+  NCTest[NCPolyGetOptions[p1], \
+       {TransposePairs -> {{0,1}}}];
+
+  mon2 = Map[Reverse, mon1];
+  p2 = NCPoly[coeff1, mon2, vars, TransposePairs -> {{x,y}}];
+  NCTest[NCPolyReverseMonomials[p1], p2];
+
+  mon2 = Map[Reverse, mon1] /. {x->y,y->x};
+  p2 = NCPoly[coeff1, mon2, vars, TransposePairs -> {{x,y}}];
+  NCTest[NCPolyTranspose[p1], p2];
+
+  (* Adjoint *)
+
+  NCTest[NCPolyAdjoint[p1], p2];
+
+  coeff1 = {1, 2, 3+I, -1, -2+I, -3, 1/2};
+  mon1 = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+  p1 = NCPoly[coeff1, mon1, vars, TransposePairs -> {{x,y}}];
+
+  mon2 = Map[Reverse, mon1] /. {x->y,y->x};
+  p2 = NCPoly[coeff1, mon2, vars, TransposePairs -> {{x,y}}];
+  NCTest[NCPolyTranspose[p1], p2];
+
+  mon2 = Map[Reverse, mon1] /. {x->y,y->x};
+  p2 = NCPoly[Map[Conjugate, coeff1], mon2, vars, TransposePairs -> {{x,y}}];
+  NCTest[NCPolyAdjoint[p1], p2];
+
+  coeff1 = {1, 2, 3+I, -1, -2+I, -3, 1/2};
+  mon1 = {{}, {x}, {z}, {x, y}, {x, y, x, x}, {z, x}, {z, z, z, z}};
+  p1 = NCPoly[coeff1, mon1, vars, SelfAdjointPairs -> {{x,y}}];
+
+  (* self adjoints do not transpose *)
+  mon2 = Map[Reverse, mon1];
+  p2 = NCPoly[coeff1, mon2, vars, SelfAdjointPairs -> {{x,y}}];
+  NCTest[NCPolyTranspose[p1], p2];
+
+  mon2 = Map[Reverse, mon1] /. {x->y,y->x};
+  p2 = NCPoly[Map[Conjugate, coeff1], mon2, vars, SelfAdjointPairs -> {{x,y}}];
+  NCTest[NCPolyAdjoint[p1], p2];
+
+  (* QuadraticTerms *)
+  
+  vars = {{x, y, z}};
+  coeff1 = {1, 1, 4, 3, 2, -1};
+  digits1 = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}};
+  p1 = NCPoly[coeff1, digits1, vars, TransposePairs -> {{x, y}}];
+  p2 = NCPolyQuadraticTerms[p1];
+
+  NCTest[NCPolyGetCoefficients[p2], {1, 4, -1}];
+  NCTest[NCPolyGetDigits[p2], {{}, {1, 0}, {0, 2, 2, 1}}];
+
+  (* QuadraticChipset *)
+  
+  p2 = NCPolyQuadraticChipset[p1];
+  
+  NCTest[NCPolyGetCoefficients[p2], {1, 1, 1, 1}];
+  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {2, 1}}];
+
+  (* QuadraticTerms *)
+  
+  vars = {{x, y, z}};
+  coeff1 = {1, 1, 4 + I, 3, I - 2, -1};
+  digits1 = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}};
+  p1 = NCPoly[coeff1, digits1, vars, SelfAdjointPairs -> {{x, y}}];
+  p2 = NCPolyQuadraticTerms[p1];
+
+  NCTest[NCPolyGetCoefficients[p2], {1, 4 + I, -1}];
+  NCTest[NCPolyGetDigits[p2], {{}, {1, 0}, {0, 2, 2, 1}}];
+
+  (* QuadraticChipset *)
+  
+  p2 = NCPolyQuadraticChipset[p1];
+  
+  NCTest[NCPolyGetCoefficients[p2], {1, 1, 1, 1}];
+  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {2, 1}}];
 
 ];

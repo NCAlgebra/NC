@@ -43,9 +43,69 @@ Begin["`Private`"];
   NCToNCPoly[exp_List, vars_] := 
     Map[NCToNCPoly[#, vars]&, exp];
 
-  NCToNCPoly[exp_, vars_] := Module[
-    {terms, factors},
+  NCToNCPoly[expr_, Vars_] := Module[
+    {exp = expr, vars = Vars,
+     terms, factors, 
+     tps, tpVars, ruleTp,
+     ajs, ajVars, ruleAj,
+     tmp, opts = {}},
     
+    (* Grab tp's *)
+    tps = NCGrabFunctions[vars, tp];
+    If[ tps =!= {}
+       ,
+        (* Create one new variable for each tp *)
+        tpVars = Table[Unique["tp"], Length[tps]];
+        SetNonCommutative[tpVars];
+
+        (* Replace tp's with tpVars *)
+        tmp = Intersection[Map[tp, tps], Flatten[vars]];
+        If[ tmp =!= {},
+            AppendTo[opts, 
+                     TransposePairs -> 
+                       Transpose[{tmp, 
+                                  tmp /. Thread[Map[tp, tps] -> tpVars]}]];
+        ];
+        ruleTp = Thread[tps -> tpVars];
+        exp = exp /. ruleTp;
+        vars = vars /. ruleTp;
+        
+        (*
+        Print["tpVars = ", tpVars];
+        Print["ruleTp = ", ruleTp];
+        Print["opts = ", opts];
+        *) 
+        
+    ];
+      
+    (* Grab aj's *)
+    ajs = NCGrabFunctions[vars, aj];
+    If[ ajs =!= {}
+       ,
+        (* Create one new variable for each aj *)
+        ajVars = Table[Unique["aj"], Length[ajs]];
+        SetNonCommutative[ajVars];
+
+        (* Replace aj's with ajVars *)
+        tmp = Intersection[Map[aj, ajs], Flatten[vars]];
+        If[ tmp =!= {},
+            AppendTo[opts, 
+                     SelfAdjointPairs -> 
+                       Transpose[{tmp, 
+                                  tmp /. Thread[Map[aj, ajs] -> ajVars]}]];
+        ];
+        ruleAj = Thread[ajs -> ajVars];
+        exp = exp /. ruleAj;
+        vars = vars /. ruleAj;
+        
+        (*
+        Print["ajVars = ", ajVars];
+        Print["ruleAj = ", ruleAj];
+        Print["opts = ", opts];
+        *) 
+        
+    ];
+      
     (* Expand and check *)
     terms = ExpandNonCommutativeMultiply[exp];
     If[ !NCPolynomialQ[terms],
@@ -64,7 +124,7 @@ Begin["`Private`"];
 
     (* Print["factors = ", factors]; *)
       
-    Return[NCPoly @@ Append[Transpose[factors], vars]];
+    Return[NCPoly @@ Join[Transpose[factors], {vars}, opts]];
       
   ];
 

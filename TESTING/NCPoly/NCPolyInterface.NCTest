@@ -4,7 +4,7 @@
 
 Block[
   {a,b,c,d,
-  vars,NCExp,PolyExp,
+  vars,NCExp,NCExpExp,PolyExp,
   A,B,C
   },
   
@@ -236,5 +236,133 @@ Block[
   NCTest[2 A**B, NCToNCPoly[2 a**b, vars]];
   NCTest[3 A**B**C, NCToNCPoly[3 a**b**c, vars]];
   NCTest[4 C**A**B, NCToNCPoly[4 c**a**b, vars]];
+
+  (* tp and aj *)
+
+  (* NCToNCPoly *)
+  
+  vars = {{a},{tp[a],c}};
+  NCExp = a;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, NCPolyMonomial[{0}, {1,2}, TransposePairs -> {{0,1}}]];
+  NCTest[NCExp, NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = 2 tp[a];
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, 2 NCPolyMonomial[{1}, {1,2}, TransposePairs -> {{0,1}}]];
+  NCTest[NCExp, NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = - c;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, -NCPolyMonomial[{2},{1,2}, TransposePairs -> {{0,1}}]];
+  NCTest[NCExp, NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = tp[a] ** a;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, NCPolyMonomial[{1,0}, {1,2}, TransposePairs -> {{0,1}}]];
+  NCTest[NCExp, NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = 5 c ** tp[a] ** a;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, 5 NCPolyMonomial[{2,1,0},{1,2}, TransposePairs -> {{0,1}}]];
+  NCTest[NCExp, NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = - tp[a] ** c ** tp[a] ** a;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, - NCPolyMonomial[{1,2,1,0}, {1,2}, TransposePairs -> {{0,1}}]];
+  NCTest[NCExp, NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = a**a + tp[a]**tp[a] + c**c;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars /. tp[a]->b, TransposePairs -> {{a,b}}]];
+  
+  NCTest[NCExp, NCExpExp];
+
+  vars = {{a},{tp[b],c}};
+  NCExp = a**a + tp[b]**tp[b] + c**c;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{tp[b],tp[b]},{c,c}} /. tp[b]->b, vars /. tp[b]->b]];
+  
+  vars = {{a},{tp[Subscript[b,1]],Subscript[b,1]}};
+  NCExp = a**a + tp[Subscript[b,1]]**tp[Subscript[b,1]] + Subscript[b,1]**Subscript[b,1];
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = a**a -(- tp[a]**tp[a] - c**c);
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{tp[a],tp[a]},{c,c}} /. tp[a]->b, vars /. tp[a]->b, TransposePairs -> {{a,b}}]];
+  NCTest[(NCExp /. (x_ -> y_) -> x - y), NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = a**a - (- tp[a]**tp[a] - c**c);
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{tp[a],tp[a]},{c,c}} /. tp[a] -> b, vars /. tp[a] -> b, TransposePairs -> {{a,b}}]];
+  NCTest[(NCExp /. (x_ == y_) -> x - y), NCExpExp];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = a**a + tp[a]**tp[a] + c**c + d**d;
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCMonomialToDigits::InvalidSymbol];
+
+  vars = {{a},{tp[a],{c}}};
+  NCExp = a**a + tp[a]**tp[a] + c**c;
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCPoly::InvalidList];
+
+  vars = {{a},{tp[a],c}};
+  NCExp = a**a + tp[a]**tp[a] + c**c +inv[a];
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCPoly::NotPolynomial];
+
+  NCExp = inv[a**a + tp[a]**tp[a] + c**c];
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCPoly::NotPolynomial];
+
+  (* Reverse *)
+  vars = {a, tp[a], b};
+  NCExp = 1 + a + 2 b ** tp[a] + 3 b ** a + 4 a ** a;
+  PolyExp = NCPolyReverseMonomials[NCToNCPoly[NCExp, vars]];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+  
+  NCTest[NCExpExp, NCExp /. NonCommutativeMultiply[x__] :> NonCommutativeMultiply @@ Reverse[{x}]];
+  
+  (* Transpose *)
+  vars = {a, tp[a], b};
+  NCExp = 1 + a + 2 b ** tp[a] + 3 b ** a + 4 a ** a;
+  PolyExp = NCPolyTranspose[NCToNCPoly[NCExp, vars]];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+  
+  NCTest[NCExpExp, tp[NCExp] /. tp[b] -> b];
 
 ];
