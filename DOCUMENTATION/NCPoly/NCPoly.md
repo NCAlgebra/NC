@@ -590,11 +590,10 @@ A call to
    
 results in 
 
-    NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {1, 1} -> 1, {2, 7} -> 1|>, 
- TransposePairs -> {{0, 1}}]
+    NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {1, 1} -> 1, {2, 2} -> 1|>, TransposePairs -> {{0, 1}}]
 
-corresponding to the polynomial $z.y + y + x + 1$ that contains only
-terms which contain monomials with "half" of the monomials of
+corresponding to the polynomial $x.z + y + x + 1$ that contains only
+terms which contain monomials with the "left half" of the monomials of
 $p(x,y,z)$ which can appear in an NC SOS decomposition of `p`.
 
 See also:

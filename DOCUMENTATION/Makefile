@@ -62,6 +62,7 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/Algorithms.md \
 	 NCPoly/NCGBX.md \
 	 NCPoly/NCPolyGroebner.md \
+	 NCPoly/NCPolySOS.md \
 	 NCAlgebra/NCConvexity.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \

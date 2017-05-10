@@ -12,6 +12,8 @@ Clear[NCPolySOSToSDP,
 
 Get["NCPolySOS.usage"];
 
+NCPolySOS::NotSOS = "Polynomial is not a sum-of-squares.";
+
 Begin["`Private`"];
 
   Clear[NCPolySOSAux1];
@@ -29,7 +31,7 @@ Begin["`Private`"];
         Drop[
           Keys[
             ArrayRules[
-              NCPolyCoefficientArray[NCPolyAdjoint[chipset]]
+              NCPolyCoefficientArray[chipset]
             ]
           ],
           -1]]];
@@ -80,7 +82,7 @@ Begin["`Private`"];
 
     (* Extract variables *)
     allVars = Variables[Map[Values[#[[2]]]&, constraints]];
-    qVars = Union[Flatten[qs]];
+    qVars = Rest[Union[Flatten[qs]]];
     vars = Complement[allVars, qVars];
 
     NCDebug[1, allVars, vars, qVars];
@@ -91,8 +93,23 @@ Begin["`Private`"];
     A1perp = NullSpace[A1];
     n1 = Length[A1perp];
     x1s = Table[Subscript[x1, i], {i, n1}];
-    sol1 = Thread[allVars -> (Transpose[A1perp].x1s - LinearSolve[A1, b1])];
-
+    Quiet[
+       Check[
+          sol1 = Thread[allVars -> 
+                        If[ n1 > 0
+                           ,
+                            Transpose[A1perp].x1s - LinearSolve[A1,b1]
+                           ,
+                            - LinearSolve[A1,b1]
+                        ]]
+         ,
+          Message[NCPolySOS::NotSOS];
+          Return[{$Failed, $Failed, $Failed, $Failed}];
+       ];
+      ,
+       LinearSolve::nosol
+    ];
+      
     NCDebug[1, n1];
     NCDebug[2, Normal[b1], Normal[A1], x1s, sol1];
     NCDebug[3, Dimensions[A1], LinearSolve[A1, b1], Normal[A1perp]];
@@ -102,7 +119,8 @@ Begin["`Private`"];
     sol = Thread[vars -> (vars /. sol1)];
     solQ = Thread[qVars -> (qVars /. sol1)];
   
-    NCDebug[1, sol, Map[MatrixForm, Q]];
+    NCDebug[1, sol, solQ];
+    NCDebug[2, Map[MatrixForm, Q]];
       
     (* Simplify based on the diagonal *)
     While[ True
@@ -122,7 +140,8 @@ Begin["`Private`"];
            Q = MapThread[deleteRows, {Q,zeroDiag}];
            Q = MapThread[deleteColumns, {Q,zeroDiag}];
 
-           NCDebug[1, zeroDiag, eqs, Map[MatrixForm, Q]];
+           NCDebug[1, zeroDiag, eqs];
+           NCDebug[2, Map[MatrixForm, Q]];
 
            (* No more zero diagonals? *)
            If[ eqs === {}, Break[] ];

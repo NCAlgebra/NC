@@ -343,8 +343,9 @@ Begin["`Private`"];
       
     (* split digits *)
     digits = Map[NCIntegerDigits[#,p[[1]]]&, Keys[even]];
-    halfDigits = Map[{Reverse[Take[#, Length[#]/2]] /. ajRules, 
-                      Take[#, {Length[#]/2+1, -1}]}&, digits];
+    halfDigits = Map[{Take[#, Length[#]/2], 
+                      Reverse[Take[#, {Length[#]/2+1, -1}]] /. ajRules}&, 
+                     digits];
       
     (* select for symmetry *)
     sameDigits = Apply[Equal, halfDigits, {1}];  
@@ -376,7 +377,7 @@ Begin["`Private`"];
     {even, halfDigits} = NCPolyQuadraticTermsAux[p];
     
     (* generate chipset *)
-    chipset = Union[Join @@ Map[Table[Take[#, -i], {i, Length[#]}]&, halfDigits]];
+    chipset = Union[Join @@ Map[Table[Take[#, i], {i, Length[#]}]&, halfDigits]];
     If[ MemberQ[halfDigits, {}],
         PrependTo[chipset, {}];
     ];

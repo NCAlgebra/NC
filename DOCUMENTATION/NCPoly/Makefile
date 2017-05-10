@@ -2,7 +2,7 @@ include ../make.inc
 
 MD2USAGE_OPTIONS = -H "\#\#\#"
 
-FILES = NCGBX.usage NCPolyGroebner.usage NCPolyInterface.usage
+FILES = NCGBX.usage NCPolyGroebner.usage NCPolyInterface.usage NCPolySOS.usage
 
 FILES3 = NCPoly.usage
 

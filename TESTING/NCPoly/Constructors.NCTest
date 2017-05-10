@@ -518,7 +518,7 @@ Block[
   p2 = NCPolyQuadraticChipset[p1];
   
   NCTest[NCPolyGetCoefficients[p2], {1, 1, 1, 1}];
-  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {2, 1}}];
+  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {0, 2}}];
 
   (* QuadraticTerms *)
   
@@ -536,6 +536,6 @@ Block[
   p2 = NCPolyQuadraticChipset[p1];
   
   NCTest[NCPolyGetCoefficients[p2], {1, 1, 1, 1}];
-  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {2, 1}}];
+  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {0, 2}}];
 
 ];
