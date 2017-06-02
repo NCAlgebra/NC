@@ -9,7 +9,7 @@ from pandocfilters import toJSONFilter, Para, Str, Image
 import re, sys, os
 import subprocess
 
-version = '5.0.2'
+version = '5.0.4'
 base_url = 'http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/'
 count = 0
 

@@ -129,6 +129,9 @@
         -   [NCHessian](#nchessian)
         -   [DirectionalD](#directionald)
         -   [NCIntegrate](#ncintegrate)
+    -   [NCConvexity](#ncconvexity)
+        -   [NCIndependent](#ncindependent)
+        -   [NCConvexityRegion](#ncconvexityregion)
 -   [Packages for manipulating NC block matrices](#packages-for-manipulating-nc-block-matrices)
     -   [NCDot](#ncdot)
         -   [tpMat](#tpmat)
@@ -232,7 +235,7 @@
         -   [NCPToNCSylvester](#ncptoncsylvester)
         -   [NCSylvesterToNC](#ncsylvestertonc)
         -   [NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial)
--   [Algorithms](#algorithms)
+-   [Noncommutative Gröbner Bases Algorithms](#noncommutative-gröbner-bases-algorithms)
     -   [NCGBX](#ncgbx)
         -   [SetMonomialOrder](#setmonomialorder)
         -   [SetKnowns](#setknowns)
@@ -246,12 +249,8 @@
         -   [NCReduce](#ncreduce)
     -   [NCPolyGroebner](#ncpolygroebner)
         -   [NCPolyGroebner](#ncpolygroebner-1)
-    -   [NCPolySOS](#ncpolysos)
-        -   [NCPolySOS](#ncpolysos-1)
-        -   [NCPolySOSToSDP](#ncpolysostosdp)
-    -   [NCConvexity](#ncconvexity)
-        -   [NCIndependent](#ncindependent)
-        -   [NCConvexityRegion](#ncconvexityregion)
+    -   [NCGB](#ncgb)
+-   [Semidefinite Programming Algorithms](#semidefinite-programming-algorithms)
     -   [NCSDP](#ncsdp)
         -   [NCSDP](#ncsdp-1)
         -   [NCSDPForm](#ncsdpform)
@@ -276,6 +275,9 @@
         -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
     -   [PrimalDual](#primaldual)
         -   [PrimalDual](#primaldual-1)
+    -   [NCPolySOS](#ncpolysos)
+        -   [NCPolySOS](#ncpolysos-1)
+        -   [NCPolySOSToSDP](#ncpolysostosdp)
 -   [Work in Progress](#work-in-progress)
     -   [NCRational](#ncrational)
         -   [State-space realizations for NC rationals](#state-space-realizations-for-nc-rationals)
@@ -3543,6 +3545,69 @@ returns
 
 See also: [NCDirectionalD](#directionald).
 
+NCConvexity
+-----------
+
+**NCConvexity** is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.
+
+Members are:
+
+-   [NCIndependent](#ncindependent)
+-   [NCConvexityRegion](#ncconvexityregion)
+
+### NCIndependent
+
+`NCIndependent[list]` attempts to determine whether the nc entries of `list` are independent.
+
+Entries of `NCIndependent` can be nc polynomials or nc rationals.
+
+For example:
+
+    NCIndependent[{x,y,z}]
+
+return *True* while
+
+    NCIndependent[{x,0,z}]
+    NCIndependent[{x,y,x}]
+    NCIndependent[{x,y,x+y}]
+    NCIndependent[{x,y,A x + B y}]
+    NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]
+
+all return *False*.
+
+See also: [NCConvexityRegion](#ncconvexityregion).
+
+### NCConvexityRegion
+
+`NCConvexityRegion[expr,vars]` is a function which can be used to determine whether the nc rational `expr` is convex in `vars` or not.
+
+For example:
+
+    d = NCConvexityRegion[x**x**x, {x}];
+
+returns
+
+    d = {2 x, -2 inv[x]}
+
+from which we conclude that `x**x**x` is not convex in `x` because ![x \\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_241.png) and ![-{x}^{-1} \\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_242.png) cannot simultaneously hold.
+
+`NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
+
+    hes = NCHessian[expr, {x, h}];
+
+then
+
+    {lt, mq, rt} = NCMatrixOfQuadratic[hes, {h}]
+
+to decompose the Hessian into a product of a left row vector, `lt`, times a middle matrix, `mq`, times a right column vector, `rt`. The middle matrix, `mq`, is factored using the `NCLDLDecomposition`:
+
+    {ldl, p, s, rank} = NCLDLDecomposition[mq];
+    {lf, d, rt} = GetLDUMatrices[ldl, s];
+
+from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix `d`.
+
+See also: [NCHessian](#nchessian), [NCMatrixOfQuadratic](#ncmatrixofquadratic), [NCLDLDecomposition](#ncldldecomposition).
+
 Packages for manipulating NC block matrices
 ===========================================
 
@@ -3734,7 +3799,7 @@ See also: [NCLeftDivide](#ncleftdivide).
 MatrixDecompositions: linear algebra templates
 ----------------------------------------------
 
-`MatrixDecompositions` is a package that implements various linear algebra algorithms, such as *LU Decomposition* with *partial* and *complete pivoting*, and *LDL Decomposition*. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for [NCAlgebra](http://math.ucsd.edu/~ncalg).
+`MatrixDecompositions` is a package that implements various linear algebra algorithms, such as *LU Decomposition* with *partial* and *complete pivoting*, and *LDL Decomposition*. The algorithms have been written with correctness and ease of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for [NCAlgebra](http://math.ucsd.edu/~ncalg).
 
 See the package [NCMatrixDecompositions](#ncmatrixdecompositions) for noncommutative versions of these algorithms.
 
@@ -3841,7 +3906,7 @@ See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoti
 
 ### UpperTriangularSolve
 
-`UpperTriangularSolve[u, b]` solves the upper-triangular system of equations ![u x = b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_241.png) using back-substitution.
+`UpperTriangularSolve[u, b]` solves the upper-triangular system of equations ![u x = b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_243.png) using back-substitution.
 
 For example:
 
@@ -3853,7 +3918,7 @@ See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoti
 
 ### LowerTriangularSolve
 
-`LowerTriangularSolve[l, b]` solves the lower-triangular system of equations ![l x = b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_242.png) using forward-substitution.
+`LowerTriangularSolve[l, b]` solves the lower-triangular system of equations ![l x = b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_244.png) using forward-substitution.
 
 For example:
 
@@ -3959,12 +4024,12 @@ Members are:
 
 The following `options` can be given:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` ![\\bullet](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_243.png) `y`';
--   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_244.png)';
--   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_245.png)';
--   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`![^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_246.png)';
--   `co` (`True`): If `True` `co[x]` is displayed as '![\\bar{\\mathtt{x}}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_247.png)';
--   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`![^{1/2}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_248.png)';
+-   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` ![\\bullet](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_245.png) `y`';
+-   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_246.png)';
+-   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_247.png)';
+-   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`![^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_248.png)';
+-   `co` (`True`): If `True` `co[x]` is displayed as '![\\bar{\\mathtt{x}}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_249.png)';
+-   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`![^{1/2}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_250.png)';
 -   `All`: Set all available options to `True` or `False`.
 
 See also: [NCTex](#nctex-1), [NCTexForm](#nctexform-1).
@@ -4068,6 +4133,8 @@ See also: `Run`.
 NCTest
 ------
 
+These are commands for automatically testing if our algorithms produce the correct answer. Problems and answers are stored under the directory `NC/TESTING`.
+
 Members are:
 
 -   [NCTest](#nctest-1)
@@ -4099,7 +4166,7 @@ For example:
 
     results = NCTestRun[{"NCCollect", "NCSylvester"}]
 
-will run the test files "NCCollec.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
+will run the test files "NCCollect.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
 
 See also: [NCTest](#nctest-1), [NCTestCheck](#nctestcheck), [NCTestSummarize](#nctestsummarize).
 
@@ -4267,6 +4334,8 @@ See also: [NCReplaceData](#ncreplacedata).
 Data structures for fast calculations
 =====================================
 
+This chapter describes packages that handle special data structures that enable fast calculations in Mathematica.
+
 NCPoly
 ------
 
@@ -4340,7 +4409,7 @@ For example:
     vars = {x,y,z};
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
 
-constructs an object associated with the noncommutative polynomial ![2 z - x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_249.png) in variables `x`, `y` and `z`.
+constructs an object associated with the noncommutative polynomial ![2 z - x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_251.png) in variables `x`, `y` and `z`.
 
 The internal representation varies with the implementation but it is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, `x < y < z`.
 
@@ -4362,13 +4431,13 @@ Monic monomials are specified in terms of the symbols in the list `vars`, for ex
     vars = {x,y,z};
     mon = NCPolyMonomial[{x,y,x},vars];
 
-returns an `NCPoly` object encoding the monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_250.png) in noncommutative variables `x`,`y`, and `z`. The actual representation of `mon` varies with the implementation.
+returns an `NCPoly` object encoding the monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_252.png) in noncommutative variables `x`,`y`, and `z`. The actual representation of `mon` varies with the implementation.
 
 Monomials can also be specified implicitly using indices, for example:
 
     mon = NCPolyMonomial[{0,1,0}, 3];
 
-also returns an `NCPoly` object encoding the monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_251.png) in noncommutative variables `x`,`y`, and `z`.
+also returns an `NCPoly` object encoding the monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_253.png) in noncommutative variables `x`,`y`, and `z`.
 
 If graded ordering is supported then
 
@@ -4379,7 +4448,7 @@ or
 
     mon = NCPolyMonomial[{0,1,0}, {1,2}];
 
-construct the same monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_252.png) in noncommutative variables `x`,`y`, and `z` this time using a graded order in which `x << y < z`.
+construct the same monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_254.png) in noncommutative variables `x`,`y`, and `z` this time using a graded order in which `x << y < z`.
 
 There is also an alternative syntax for `NCPolyMonomial` that allows users to input the monomial along with a coefficient using rules and the output of [NCFromDigits](#ncfromdigits). For example:
 
@@ -4389,7 +4458,7 @@ or
 
     mon = NCPolyMonomial[NCFromDigits[{0,1,0}, 3] -> -2, 3];
 
-represent the monomial ![-2 xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_253.png) that has coefficient `-2`.
+represent the monomial ![-2 xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_255.png) that has coefficient `-2`.
 
 See also: [NCPoly](#ncpoly-1), [NCIntegerDigits](#ncintegerdigits), [NCFromDigits](#ncfromdigits).
 
@@ -4418,7 +4487,7 @@ For example, if
 
 with respect to the ordering
 
-![x \\ll y \\ll z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_254.png)
+![x \\ll y \\ll z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_256.png)
 
 then
 
@@ -4427,7 +4496,7 @@ then
 
 is the same polynomial as `poly1` but in the ordering
 
-![x \\ll y &lt; z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_255.png)
+![x \\ll y &lt; z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_257.png)
 
 See also: [NCPoly](#ncpoly-1), [NCPolyCoefficient](#ncpolycoefficient).
 
@@ -4626,7 +4695,7 @@ For example:
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
     lead = NCPolyLeadingMonomial[poly];
 
-returns an `NCPoly` representing the monomial ![x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_256.png). The leading monomial is computed according to the current ordering, in this example `x < y < z`. The actual representation of `lead` varies with the implementation.
+returns an `NCPoly` representing the monomial ![x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_258.png). The leading monomial is computed according to the current ordering, in this example `x < y < z`. The actual representation of `lead` varies with the implementation.
 
 See also: [NCPolyLeadingTerm](#ncpolyleadingterm), [NCPolyMonomial](#ncpolymonomial), [NCPoly](#ncpoly-1).
 
@@ -4644,7 +4713,7 @@ returns
 
     lead = {3,3} -> -1
 
-representing the monomial ![- x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_257.png). The leading monomial is computed according to the current ordering, in this example `x < y < z`.
+representing the monomial ![- x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_259.png). The leading monomial is computed according to the current ordering, in this example `x < y < z`.
 
 See also: [NCPolyLeadingMonomial](#ncpolyleadingmonomial), [NCPolyMonomial](#ncpolymonomial), [NCPoly](#ncpoly-1).
 
@@ -4664,7 +4733,7 @@ For example:
     poly = NCPoly[{-1, 2, 3}, {{x, y, x}, {z}, {x, y}}, vars];
     rule = NCPolyToRule[poly]
 
-returns the rule `lead -> rest` where `lead` represents is the nc monomial ![x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_258.png) and `rest` is the nc polynomial ![2 z + 3 x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_259.png)
+returns the rule `lead -> rest` where `lead` represents is the nc monomial ![x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_260.png) and `rest` is the nc polynomial ![2 z + 3 x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_261.png)
 
 See also: [NCPolyLeadingTerm](#ncpolyleadingterm), [NCPolyLeadingMonomial](#ncpolyleadingmonomial), [NCPoly](#ncpoly-1).
 
@@ -4677,7 +4746,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_260.png) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_262.png) and
 
     NCPolyTermsOfTotalDegree[p, {1,1}]
 
@@ -4685,7 +4754,7 @@ returns
 
     NCPoly[{1, 1}, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
-which corresponds to the polyomial ![2 x y + 3 y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_261.png). Likewise
+which corresponds to the polyomial ![2 x y + 3 y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_263.png). Likewise
 
     NCPolyTermsOfTotalDegree[p, {2,0}]
 
@@ -4693,7 +4762,7 @@ returns
 
     NCPoly[{1, 1}, {0, 2, 0} -> 4|>]
 
-which corresponds to the polyomial ![4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_262.png).
+which corresponds to the polyomial ![4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_264.png).
 
 See also: [NCPolyTermsOfTotalDegree](#ncpolytermsoftotaldegree).
 
@@ -4706,7 +4775,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_263.png) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_265.png) and
 
     NCPolyTermsOfTotalDegree[p, 2]
 
@@ -4714,7 +4783,7 @@ returns
 
     NCPoly[{1, 1}, <|{0, 2, 0} -> 4, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
-which corresponds to the polyomial ![2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_264.png).
+which corresponds to the polyomial ![2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_266.png).
 
 See also: [NCPolyTermsOfDegree](#ncpolytermsofdegree).
 
@@ -4729,7 +4798,7 @@ For example:
     digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
     p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
 
-corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_265.png) in which ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_266.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_267.png) are transposes of each other, that is ![y = x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_268.png). Its `NCPoly` object is
+corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_267.png) in which ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_268.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_269.png) are transposes of each other, that is ![y = x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_270.png). Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
@@ -4741,7 +4810,7 @@ results in
 
     NCPoly[{3}, <|{0, 0} -> 1, {2, 3} -> 4, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
-corresponding to the polynomial ![-x.z.z.y + 4 y.x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_269.png) which contains only "square" quadratic terms of ![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_270.png).
+corresponding to the polynomial ![-x.z.z.y + 4 y.x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_271.png) which contains only "square" quadratic terms of ![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_272.png).
 
 See also: `NCPolyQuadraticChipset`(\#NCPolyQuadraticChipset).
 
@@ -4756,7 +4825,7 @@ For example:
     digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
     p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
 
-corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_271.png) in which ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_272.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_273.png) are transposes of each other, that is ![y = x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_274.png). Its `NCPoly` object is
+corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_273.png) in which ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_274.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_275.png) are transposes of each other, that is ![y = x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_276.png). Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
@@ -4768,7 +4837,7 @@ results in
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {1, 1} -> 1, {2, 2} -> 1|>, TransposePairs -> {{0, 1}}]
 
-corresponding to the polynomial ![x.z + y + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_275.png) that contains only terms which contain monomials with the "left half" of the monomials of ![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_276.png) which can appear in an NC SOS decomposition of `p`.
+corresponding to the polynomial ![x.z + y + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_277.png) that contains only terms which contain monomials with the "left half" of the monomials of ![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_278.png) which can appear in an NC SOS decomposition of `p`.
 
 See also: `NCPolyQuadraticTerms`(\#NCPolyQuadraticTerms).
 
@@ -4781,7 +4850,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_277.png) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_279.png) and
 
     NCPolyReverseMonomials[p]
 
@@ -4789,7 +4858,7 @@ returns
 
     NCPoly[{1, 1}, <|{0, 1, 0} -> 1, {0, 2, 0} -> 4, {1, 1, 2} -> 2, {1, 1, 1} -> 3|>]
 
-which correspond to the polynomial ![x + 2 y x + 3 x y + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_278.png).
+which correspond to the polynomial ![x + 2 y x + 3 x y + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_280.png).
 
 See also: [NCIntegerReverse](#ncintegerreverse).
 
@@ -4886,7 +4955,7 @@ results in the matrices
           {  0,  0,  0,  0,  0 },
           {  0,  0,  0,  0,  0 }}
 
-which are the Hankel matrices associated with the commutator ![x y - y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_279.png).
+which are the Hankel matrices associated with the commutator ![x y - y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_281.png).
 
 See also: [NCPolyRealization](#ncpolyrealization), [NCDigitsToIndex](#ncdigitstoindex).
 
@@ -4902,7 +4971,7 @@ For example:
     poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
     {{a0,ax,ay},b,c,d} = NCPolyRealization[poly]
 
-produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a row vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\, y\] . b + d = x y - y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_280.png).
+produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a row vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\, y\] . b + d = x y - y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_282.png).
 
 See also: [NCPolyHankelMatrix](#ncpolyhankelmatrix), [NCRational](#ncrational-1).
 
@@ -4930,7 +4999,7 @@ See also: [NCPoly](#ncpoly-1).
 
 `NCFromDigits[{list1,list2}, b]` applies `NCFromDigits` to each `list1`, `list2`, ....
 
-List of integers are used to codify monomials. For example the list `{0,1}` represents a monomial ![xy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_281.png) and the list `{1,0}` represents the monomial ![yx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_282.png). The call
+List of integers are used to codify monomials. For example the list `{0,1}` represents a monomial ![xy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_283.png) and the list `{1,0}` represents the monomial ![yx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_284.png). The call
 
     NCFromDigits[{0,0,0,1}, 2]
 
@@ -4938,7 +5007,7 @@ returns
 
     {4,1}
 
-in which `4` is the degree of the monomial ![xxxy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_283.png) and `1` is `0001` in base `2`. Likewise
+in which `4` is the degree of the monomial ![xxxy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_285.png) and `1` is `0001` in base `2`. Likewise
 
     NCFromDigits[{0,2,1,1}, 3]
 
@@ -4946,7 +5015,7 @@ returns
 
     {4,22}
 
-in which `4` is the degree of the monomial ![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_284.png) and `22` is `0211` in base `3`.
+in which `4` is the degree of the monomial ![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_286.png) and `22` is `0211` in base `3`.
 
 If `b` is a list, then degree is also a list with the partial degrees of each letters appearing in the monomial. For example:
 
@@ -4956,7 +5025,7 @@ returns
 
     {3, 1, 22}
 
-in which `3` is the partial degree of the monomial ![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_285.png) with respect to letters `y` and `z`, `1` is the partial degree with respect to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
+in which `3` is the partial degree of the monomial ![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_287.png) with respect to letters `y` and `z`, `1` is the partial degree with respect to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 
 This construction is used to represent graded degree-lexicographic orderings.
 
@@ -5037,7 +5106,7 @@ all return
 
     5
 
-which is the index of the monomial ![x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_286.png) in the standard monomial basis of polynomials in ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_287.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_288.png). Likewise
+which is the index of the monomial ![x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_288.png) in the standard monomial basis of polynomials in ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_289.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_290.png). Likewise
 
     digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
     NCDigitsToIndex[digits, 2]
@@ -5085,7 +5154,7 @@ For example
 
     NCToNCPoly[x**y - 2 y**z, {x, y, z}] 
 
-constructs an object associated with the noncommutative polynomial ![x y - 2 y z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_289.png) in variables `x`, `y` and `z`. The internal representation is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, ![x &lt; y &lt; z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_290.png).
+constructs an object associated with the noncommutative polynomial ![x y - 2 y z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_291.png) in variables `x`, `y` and `z`. The internal representation is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, ![x &lt; y &lt; z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_292.png).
 
 ### NCPolyToNC
 
@@ -5703,11 +5772,13 @@ The following `options` can be given: \* `Collect` (*True*): controls whether th
 
 See also: [NCPToNCSylvester](#ncptoncsylvester), [NCToNCSylvester](#nctoncsylvester), [NCPolynomial](#ncpolynomial-1).
 
-Algorithms
-==========
+Noncommutative Gröbner Bases Algorithms
+=======================================
 
 NCGBX
 -----
+
+This is an interface to a Gröebner Bases code that runs purely under Mathematica. The actual algorithm is implemented in the package [NCPolyGroebner](#ncpolygroebner). Its function names, inputs and outputs are very similar (but not always exactly the same) to the ones provided in the legacy package [NCGB](#ncgb), which requires both Mathematica and auxiliary executables compiled from C++ to run. [NCGBX](#ncgbx) may run slower on some medium size problems but will succeed on large size problems which might fail under [NCGB](#ncgb).
 
 Members are:
 
@@ -5730,13 +5801,13 @@ For example
 
     SetMonomialOrder[a,b,c]
 
-sets the lex order ![a \\ll b \\ll c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_291.png).
+sets the lex order ![a \\ll b \\ll c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_293.png).
 
 If one uses a list of variables rather than a single variable as one of the arguments, then multigraded lex order is used. For example
 
     SetMonomialOrder[{a,b,c}]
 
-sets the graded lex order ![a &lt; b &lt; c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_292.png).
+sets the graded lex order ![a &lt; b &lt; c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_294.png).
 
 Another example:
 
@@ -5746,7 +5817,7 @@ or
 
     SetMonomialOrder[{a, b}, c]
 
-set the multigraded lex order ![a &lt; b \\ll c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_293.png).
+set the multigraded lex order ![a &lt; b \\ll c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_295.png).
 
 Finally
 
@@ -5765,7 +5836,7 @@ There is also an older syntax which is still supported:
 
     SetMonomialOrder[{a, b, c}, n]
 
-sets the order of monomials to be ![a &lt; b &lt; c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_294.png) and assigns them grading level `n`.
+sets the order of monomials to be ![a &lt; b &lt; c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_296.png) and assigns them grading level `n`.
 
     SetMonomialOrder[{a, b, c}, 1]
 
@@ -5788,7 +5859,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_295.png) and
+which corresponds to the order ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_297.png) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -5797,7 +5868,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a &lt; b \\ll c &lt; d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_296.png).
+which corresponds to the order ![a &lt; b \\ll c &lt; d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_298.png).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -5807,7 +5878,7 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order ![a &lt; b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_297.png).
+result both in the order ![a &lt; b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_299.png).
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns and unknowns. For example
 
@@ -5816,7 +5887,7 @@ Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns 
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c &lt; d \\ll a \\ll b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_298.png).
+results in an ordering ![c &lt; d \\ll a \\ll b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_300.png).
 
 See also: [SetUnknowns](#setunknowns), [SetMonomialOrder](#setmonomialorder).
 
@@ -5835,7 +5906,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_299.png) and
+which corresponds to the order ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_301.png) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -5844,7 +5915,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a &lt; b \\ll c &lt; d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_300.png).
+which corresponds to the order ![a &lt; b \\ll c &lt; d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_302.png).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -5854,7 +5925,7 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order ![a &lt; b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_301.png).
+result both in the order ![a &lt; b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_303.png).
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns and unknowns. For example
 
@@ -5863,7 +5934,7 @@ Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns 
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c &lt; d \\ll a \\ll b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_302.png).
+results in an ordering ![c &lt; d \\ll a \\ll b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_304.png).
 
 See also: [SetKnowns](#setknowns), [SetMonomialOrder](#setmonomialorder).
 
@@ -5899,7 +5970,7 @@ For example
     SetMonomialOrder[{a,b}, {c}, {d}]
     PrintMonomialOrder[]
 
-print ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_303.png).
+print ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_305.png).
 
 See also: [SetKnowns](#setknowns), [SetUnknowns](#setunknowns), [SetMonomialOrder](#setmonomialorder), [ClearMonomialOrder](#clearmonomialorder), [PrintMonomialOrder](#printmonomialorder).
 
@@ -5920,7 +5991,7 @@ returns
 
     gb = {x -> 1}
 
-that corresponds to the polynomial ![x - 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_304.png), which is the nc Gröbner basis for the ideal generated by ![x^2-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_305.png) and ![x^3-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_306.png).
+that corresponds to the polynomial ![x - 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_306.png), which is the nc Gröbner basis for the ideal generated by ![x^2-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_307.png) and ![x^3-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_308.png).
 
 `NCMakeGB[{poly1, poly2, ...}, k, options]` uses `options`.
 
@@ -5978,6 +6049,8 @@ See also: [NCMakeGB](#ncmakegb), [NCGBSimplifyRational](#ncgbsimplifyrational).
 NCPolyGroebner
 --------------
 
+This packages implements a Gröebner Bases algorithm that runs purely under Mathematica. This algorithm is the one called by the user-friendly functions in the package [NCGBX](#ncgbx).
+
 Members are:
 
 -   [NCPolyGroebner](#ncpolygroebner-1)
@@ -6003,92 +6076,15 @@ The algorithm is based on \[@mora:ICN:1994\].
 
 See also: [NCPoly](#ncpoly-1).
 
-NCPolySOS
----------
+NCGB
+----
 
-Members are:
+This packages supports our legacy Gröebner Bases algorithm that requires both Mathematica and auxiliary executables compiled from C++ to run. [NCGBX](#ncgbx) may run slower on some medium size problems but will succeed on large size problems which might fail under [NCGB](#ncgb).
 
--   [NCPolySOS](#ncpolysos-1)
--   [NCPolySOSToSDP](#ncpolysostosdp) (\#NCPolySOSToSDP)
+This code has become hard to maintain and support and may be deprecated in the future. See older versions of the NC documentation for a complete description of its functionality.
 
-### NCPolySOS
-
-`NCPolySOS[p, var]` returns an `NCPoly` with symbolic coefficients on the variable `var` corresponding to a possible Gram representation of the polynomial `p`.
-
-`NCPolySOS` uses [NCPolyQuadraticChipset](#ncpolyquadraticchipset) to generate a sparse Gram representation.
-
-`NCPolySOS[p]` uses `q` as default symbol.
-
-See also: [NCPolySOSToSDP](#ncpolysostosdp), [NCPolyQuadraticChipset](#ncpolyquadraticchipset)
-
-### NCPolySOSToSDP
-
-`NCPolySOSToSDP[G, options]`
-
-See also: [NCPolySOS](#ncpolysos-1).
-
-NCConvexity
------------
-
-**NCConvexity** is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.
-
-Members are:
-
--   [NCIndependent](#ncindependent)
--   [NCConvexityRegion](#ncconvexityregion)
-
-### NCIndependent
-
-`NCIndependent[list]` attempts to determine whether the nc entries of `list` are independent.
-
-Entries of `NCIndependent` can be nc polynomials or nc rationals.
-
-For example:
-
-    NCIndependent[{x,y,z}]
-
-return *True* while
-
-    NCIndependent[{x,0,z}]
-    NCIndependent[{x,y,x}]
-    NCIndependent[{x,y,x+y}]
-    NCIndependent[{x,y,A x + B y}]
-    NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]
-
-all return *False*.
-
-See also: [NCConvexityRegion](#ncconvexityregion).
-
-### NCConvexityRegion
-
-`NCConvexityRegion[expr,vars]` is a function which can be used to determine whether the nc rational `expr` is convex in `vars` or not.
-
-For example:
-
-    d = NCConvexityRegion[x**x**x, {x}];
-
-returns
-
-    d = {2 x, -2 inv[x]}
-
-from which we conclude that `x**x**x` is not convex in `x` because ![x \\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_307.png) and ![-{x}^{-1} \\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.2/eqn_308.png) cannot simultaneously hold.
-
-`NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
-
-    hes = NCHessian[expr, {x, h}];
-
-then
-
-    {lt, mq, rt} = NCMatrixOfQuadratic[hes, {h}]
-
-to decompose the Hessian into a product of a left row vector, `lt`, times a middle matrix, `mq`, times a right column vector, `rt`. The middle matrix, `mq`, is factored using the `NCLDLDecomposition`:
-
-    {ldl, p, s, rank} = NCLDLDecomposition[mq];
-    {lf, d, rt} = GetLDUMatrices[ldl, s];
-
-from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix `d`.
-
-See also: [NCHessian](#nchessian), [NCMatrixOfQuadratic](#ncmatrixofquadratic), [NCLDLDecomposition](#ncldldecomposition).
+Semidefinite Programming Algorithms
+===================================
 
 NCSDP
 -----
@@ -6410,6 +6406,30 @@ The following `options` can be given:
 -   `DebugLevel` (0): whether to print debug information;
 
 -   `Profiling` (`False`): whether to print messages with detailed timing of steps.
+
+NCPolySOS
+---------
+
+Members are:
+
+-   [NCPolySOS](#ncpolysos-1)
+-   [NCPolySOSToSDP](#ncpolysostosdp) (\#NCPolySOSToSDP)
+
+### NCPolySOS
+
+`NCPolySOS[p, var]` returns an `NCPoly` with symbolic coefficients on the variable `var` corresponding to a possible Gram representation of the polynomial `p`.
+
+`NCPolySOS` uses [NCPolyQuadraticChipset](#ncpolyquadraticchipset) to generate a sparse Gram representation.
+
+`NCPolySOS[p]` uses `q` as default symbol.
+
+See also: [NCPolySOSToSDP](#ncpolysostosdp), [NCPolyQuadraticChipset](#ncpolyquadraticchipset)
+
+### NCPolySOSToSDP
+
+`NCPolySOSToSDP[G, options]`
+
+See also: [NCPolySOS](#ncpolysos-1).
 
 Work in Progress
 ================

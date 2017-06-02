@@ -169,6 +169,10 @@
 <li><a href="#DirectionalD"><span class="toc-section-number">10.6.4</span> DirectionalD</a></li>
 <li><a href="#NCIntegrate"><span class="toc-section-number">10.6.5</span> NCIntegrate</a></li>
 </ul></li>
+<li><a href="#PackageNCConvexity"><span class="toc-section-number">10.7</span> NCConvexity</a><ul>
+<li><a href="#NCIndependent"><span class="toc-section-number">10.7.1</span> NCIndependent</a></li>
+<li><a href="#NCConvexityRegion"><span class="toc-section-number">10.7.2</span> NCConvexityRegion</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#packages-for-manipulating-nc-block-matrices"><span class="toc-section-number">11</span> Packages for manipulating NC block matrices</a><ul>
 <li><a href="#PackageNCDot"><span class="toc-section-number">11.1</span> NCDot</a><ul>
@@ -291,7 +295,7 @@
 <li><a href="#NCSylvesterToNCPolynomial"><span class="toc-section-number">13.5.4</span> NCSylvesterToNCPolynomial</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#algorithms"><span class="toc-section-number">14</span> Algorithms</a><ul>
+<li><a href="#NCGBChapter"><span class="toc-section-number">14</span> Noncommutative Gröbner Bases Algorithms</a><ul>
 <li><a href="#PackageNCGBX"><span class="toc-section-number">14.1</span> NCGBX</a><ul>
 <li><a href="#SetMonomialOrder"><span class="toc-section-number">14.1.1</span> SetMonomialOrder</a></li>
 <li><a href="#SetKnowns"><span class="toc-section-number">14.1.2</span> SetKnowns</a></li>
@@ -307,65 +311,64 @@
 <li><a href="#PackageNCPolyGroebner"><span class="toc-section-number">14.2</span> NCPolyGroebner</a><ul>
 <li><a href="#NCPolyGroebner"><span class="toc-section-number">14.2.1</span> NCPolyGroebner</a></li>
 </ul></li>
-<li><a href="#PackageNCPolySOS"><span class="toc-section-number">14.3</span> NCPolySOS</a><ul>
-<li><a href="#NCPolySOS"><span class="toc-section-number">14.3.1</span> NCPolySOS</a></li>
-<li><a href="#NCPolySOSToSDP"><span class="toc-section-number">14.3.2</span> NCPolySOSToSDP</a></li>
+<li><a href="#PackageNCGB"><span class="toc-section-number">14.3</span> NCGB</a></li>
 </ul></li>
-<li><a href="#PackageNCConvexity"><span class="toc-section-number">14.4</span> NCConvexity</a><ul>
-<li><a href="#NCIndependent"><span class="toc-section-number">14.4.1</span> NCIndependent</a></li>
-<li><a href="#NCConvexityRegion"><span class="toc-section-number">14.4.2</span> NCConvexityRegion</a></li>
+<li><a href="#SDPChapter"><span class="toc-section-number">15</span> Semidefinite Programming Algorithms</a><ul>
+<li><a href="#PackageNCSDP"><span class="toc-section-number">15.1</span> NCSDP</a><ul>
+<li><a href="#NCSDP"><span class="toc-section-number">15.1.1</span> NCSDP</a></li>
+<li><a href="#NCSDPForm"><span class="toc-section-number">15.1.2</span> NCSDPForm</a></li>
+<li><a href="#NCSDPDual"><span class="toc-section-number">15.1.3</span> NCSDPDual</a></li>
+<li><a href="#NCSDPDualForm"><span class="toc-section-number">15.1.4</span> NCSDPDualForm</a></li>
 </ul></li>
-<li><a href="#PackageNCSDP"><span class="toc-section-number">14.5</span> NCSDP</a><ul>
-<li><a href="#NCSDP"><span class="toc-section-number">14.5.1</span> NCSDP</a></li>
-<li><a href="#NCSDPForm"><span class="toc-section-number">14.5.2</span> NCSDPForm</a></li>
-<li><a href="#NCSDPDual"><span class="toc-section-number">14.5.3</span> NCSDPDual</a></li>
-<li><a href="#NCSDPDualForm"><span class="toc-section-number">14.5.4</span> NCSDPDualForm</a></li>
+<li><a href="#PackageSDP"><span class="toc-section-number">15.2</span> SDP</a><ul>
+<li><a href="#SDPMatrices"><span class="toc-section-number">15.2.1</span> SDPMatrices</a></li>
+<li><a href="#SDPSolve"><span class="toc-section-number">15.2.2</span> SDPSolve</a></li>
+<li><a href="#SDPEval"><span class="toc-section-number">15.2.3</span> SDPEval</a></li>
+<li><a href="#SDPPrimalEval"><span class="toc-section-number">15.2.4</span> SDPPrimalEval</a></li>
+<li><a href="#SDPDualEval"><span class="toc-section-number">15.2.5</span> SDPDualEval</a></li>
+<li><a href="#SDPSylvesterEval"><span class="toc-section-number">15.2.6</span> SDPSylvesterEval</a></li>
 </ul></li>
-<li><a href="#PackageSDP"><span class="toc-section-number">14.6</span> SDP</a><ul>
-<li><a href="#SDPMatrices"><span class="toc-section-number">14.6.1</span> SDPMatrices</a></li>
-<li><a href="#SDPSolve"><span class="toc-section-number">14.6.2</span> SDPSolve</a></li>
-<li><a href="#SDPEval"><span class="toc-section-number">14.6.3</span> SDPEval</a></li>
-<li><a href="#SDPPrimalEval"><span class="toc-section-number">14.6.4</span> SDPPrimalEval</a></li>
-<li><a href="#SDPDualEval"><span class="toc-section-number">14.6.5</span> SDPDualEval</a></li>
-<li><a href="#SDPSylvesterEval"><span class="toc-section-number">14.6.6</span> SDPSylvesterEval</a></li>
+<li><a href="#PackageSDPFlat"><span class="toc-section-number">15.3</span> SDPFlat</a><ul>
+<li><a href="#SDPFlatData"><span class="toc-section-number">15.3.1</span> SDPFlatData</a></li>
+<li><a href="#SDPFlatPrimalEval"><span class="toc-section-number">15.3.2</span> SDPFlatPrimalEval</a></li>
+<li><a href="#SDPFlatDualEval"><span class="toc-section-number">15.3.3</span> SDPFlatDualEval</a></li>
+<li><a href="#SDPFlatSylvesterEval"><span class="toc-section-number">15.3.4</span> SDPFlatSylvesterEval</a></li>
 </ul></li>
-<li><a href="#PackageSDPFlat"><span class="toc-section-number">14.7</span> SDPFlat</a><ul>
-<li><a href="#SDPFlatData"><span class="toc-section-number">14.7.1</span> SDPFlatData</a></li>
-<li><a href="#SDPFlatPrimalEval"><span class="toc-section-number">14.7.2</span> SDPFlatPrimalEval</a></li>
-<li><a href="#SDPFlatDualEval"><span class="toc-section-number">14.7.3</span> SDPFlatDualEval</a></li>
-<li><a href="#SDPFlatSylvesterEval"><span class="toc-section-number">14.7.4</span> SDPFlatSylvesterEval</a></li>
+<li><a href="#PackageSDPSylvester"><span class="toc-section-number">15.4</span> SDPSylvester</a><ul>
+<li><a href="#SDPSylvesterSDPEval"><span class="toc-section-number">15.4.1</span> SDPEval</a></li>
+<li><a href="#SDPSylvesterPrimalEval"><span class="toc-section-number">15.4.2</span> SDPSylvesterPrimalEval</a></li>
+<li><a href="#SDPSylvesterDualEval"><span class="toc-section-number">15.4.3</span> SDPSylvesterDualEval</a></li>
+<li><a href="#SDPSylvesterSylvesterEval"><span class="toc-section-number">15.4.4</span> SDPSylvesterSylvesterEval</a></li>
 </ul></li>
-<li><a href="#PackageSDPSylvester"><span class="toc-section-number">14.8</span> SDPSylvester</a><ul>
-<li><a href="#SDPSylvesterSDPEval"><span class="toc-section-number">14.8.1</span> SDPEval</a></li>
-<li><a href="#SDPSylvesterPrimalEval"><span class="toc-section-number">14.8.2</span> SDPSylvesterPrimalEval</a></li>
-<li><a href="#SDPSylvesterDualEval"><span class="toc-section-number">14.8.3</span> SDPSylvesterDualEval</a></li>
-<li><a href="#SDPSylvesterSylvesterEval"><span class="toc-section-number">14.8.4</span> SDPSylvesterSylvesterEval</a></li>
-</ul></li>
-<li><a href="#PackagePrimalDual"><span class="toc-section-number">14.9</span> PrimalDual</a><ul>
-<li><a href="#PrimalDual"><span class="toc-section-number">14.9.1</span> PrimalDual</a></li>
+<li><a href="#PackagePrimalDual"><span class="toc-section-number">15.5</span> PrimalDual</a><ul>
+<li><a href="#PrimalDual"><span class="toc-section-number">15.5.1</span> PrimalDual</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#WorkInProgress"><span class="toc-section-number">15</span> Work in Progress</a><ul>
-<li><a href="#PackageNCRational"><span class="toc-section-number">15.1</span> NCRational</a><ul>
-<li><a href="#state-space-realizations-for-nc-rationals"><span class="toc-section-number">15.1.1</span> State-space realizations for NC rationals</a></li>
-<li><a href="#utilities-1"><span class="toc-section-number">15.1.2</span> Utilities</a></li>
-<li><a href="#operations-on-nc-rationals"><span class="toc-section-number">15.1.3</span> Operations on NC rationals</a></li>
-<li><a href="#minimal-realizations"><span class="toc-section-number">15.1.4</span> Minimal realizations</a></li>
+<li><a href="#WorkInProgress"><span class="toc-section-number">16</span> Work in Progress</a><ul>
+<li><a href="#PackageNCPolySOS"><span class="toc-section-number">16.1</span> NCPolySOS</a><ul>
+<li><a href="#NCPolySOS"><span class="toc-section-number">16.1.1</span> NCPolySOS</a></li>
+<li><a href="#NCPolySOSToSDP"><span class="toc-section-number">16.1.2</span> NCPolySOSToSDP</a></li>
 </ul></li>
-<li><a href="#PackageNCRealization"><span class="toc-section-number">15.2</span> NCRealization</a><ul>
-<li><a href="#NCDescriptorRealization"><span class="toc-section-number">15.2.1</span> NCDescriptorRealization</a></li>
-<li><a href="#NCDeterminantalRepresentationReciprocal"><span class="toc-section-number">15.2.2</span> NCDeterminantalRepresentationReciprocal</a></li>
-<li><a href="#NCMatrixDescriptorRealization"><span class="toc-section-number">15.2.3</span> NCMatrixDescriptorRealization</a></li>
-<li><a href="#NCMinimalDescriptorRealization"><span class="toc-section-number">15.2.4</span> NCMinimalDescriptorRealization</a></li>
-<li><a href="#NCSymmetricDescriptorRealization"><span class="toc-section-number">15.2.5</span> NCSymmetricDescriptorRealization</a></li>
-<li><a href="#NCSymmetricDeterminantalRepresentationDirect"><span class="toc-section-number">15.2.6</span> NCSymmetricDeterminantalRepresentationDirect</a></li>
-<li><a href="#NCSymmetricDeterminantalRepresentationReciprocal"><span class="toc-section-number">15.2.7</span> NCSymmetricDeterminantalRepresentationReciprocal</a></li>
-<li><a href="#NCSymmetrizeMinimalDescriptorRealization"><span class="toc-section-number">15.2.8</span> NCSymmetrizeMinimalDescriptorRealization</a></li>
-<li><a href="#NonCommutativeLift"><span class="toc-section-number">15.2.9</span> NonCommutativeLift</a></li>
-<li><a href="#SignatureOfAffineTerm"><span class="toc-section-number">15.2.10</span> SignatureOfAffineTerm</a></li>
-<li><a href="#TestDescriptorRealization"><span class="toc-section-number">15.2.11</span> TestDescriptorRealization</a></li>
-<li><a href="#PinnedQ"><span class="toc-section-number">15.2.12</span> PinnedQ</a></li>
-<li><a href="#PinningSpace"><span class="toc-section-number">15.2.13</span> PinningSpace</a></li>
+<li><a href="#PackageNCRational"><span class="toc-section-number">16.2</span> NCRational</a><ul>
+<li><a href="#state-space-realizations-for-nc-rationals"><span class="toc-section-number">16.2.1</span> State-space realizations for NC rationals</a></li>
+<li><a href="#utilities-1"><span class="toc-section-number">16.2.2</span> Utilities</a></li>
+<li><a href="#operations-on-nc-rationals"><span class="toc-section-number">16.2.3</span> Operations on NC rationals</a></li>
+<li><a href="#minimal-realizations"><span class="toc-section-number">16.2.4</span> Minimal realizations</a></li>
+</ul></li>
+<li><a href="#PackageNCRealization"><span class="toc-section-number">16.3</span> NCRealization</a><ul>
+<li><a href="#NCDescriptorRealization"><span class="toc-section-number">16.3.1</span> NCDescriptorRealization</a></li>
+<li><a href="#NCDeterminantalRepresentationReciprocal"><span class="toc-section-number">16.3.2</span> NCDeterminantalRepresentationReciprocal</a></li>
+<li><a href="#NCMatrixDescriptorRealization"><span class="toc-section-number">16.3.3</span> NCMatrixDescriptorRealization</a></li>
+<li><a href="#NCMinimalDescriptorRealization"><span class="toc-section-number">16.3.4</span> NCMinimalDescriptorRealization</a></li>
+<li><a href="#NCSymmetricDescriptorRealization"><span class="toc-section-number">16.3.5</span> NCSymmetricDescriptorRealization</a></li>
+<li><a href="#NCSymmetricDeterminantalRepresentationDirect"><span class="toc-section-number">16.3.6</span> NCSymmetricDeterminantalRepresentationDirect</a></li>
+<li><a href="#NCSymmetricDeterminantalRepresentationReciprocal"><span class="toc-section-number">16.3.7</span> NCSymmetricDeterminantalRepresentationReciprocal</a></li>
+<li><a href="#NCSymmetrizeMinimalDescriptorRealization"><span class="toc-section-number">16.3.8</span> NCSymmetrizeMinimalDescriptorRealization</a></li>
+<li><a href="#NonCommutativeLift"><span class="toc-section-number">16.3.9</span> NonCommutativeLift</a></li>
+<li><a href="#SignatureOfAffineTerm"><span class="toc-section-number">16.3.10</span> SignatureOfAffineTerm</a></li>
+<li><a href="#TestDescriptorRealization"><span class="toc-section-number">16.3.11</span> TestDescriptorRealization</a></li>
+<li><a href="#PinnedQ"><span class="toc-section-number">16.3.12</span> PinnedQ</a></li>
+<li><a href="#PinningSpace"><span class="toc-section-number">16.3.13</span> PinningSpace</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#references">References</a></li>
@@ -2520,6 +2523,42 @@ symVars = {x}</code></pre>
 <p>returns</p>
 <pre><code>x**x</code></pre>
 <p>See also: <a href="#DirectionalD">NCDirectionalD</a>.</p>
+<h2 id="PackageNCConvexity"><span class="header-section-number">10.7</span> NCConvexity</h2>
+<p><strong>NCConvexity</strong> is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.</p>
+<p>Members are:</p>
+<ul>
+<li><a href="#NCIndependent">NCIndependent</a></li>
+<li><a href="#NCConvexityRegion">NCConvexityRegion</a></li>
+</ul>
+<h3 id="NCIndependent"><span class="header-section-number">10.7.1</span> NCIndependent</h3>
+<p><code>NCIndependent[list]</code> attempts to determine whether the nc entries of <code>list</code> are independent.</p>
+<p>Entries of <code>NCIndependent</code> can be nc polynomials or nc rationals.</p>
+<p>For example:</p>
+<pre><code>NCIndependent[{x,y,z}]</code></pre>
+<p>return <em>True</em> while</p>
+<pre><code>NCIndependent[{x,0,z}]
+NCIndependent[{x,y,x}]
+NCIndependent[{x,y,x+y}]
+NCIndependent[{x,y,A x + B y}]
+NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
+<p>all return <em>False</em>.</p>
+<p>See also: <a href="#NCConvexityRegion">NCConvexityRegion</a>.</p>
+<h3 id="NCConvexityRegion"><span class="header-section-number">10.7.2</span> NCConvexityRegion</h3>
+<p><code>NCConvexityRegion[expr,vars]</code> is a function which can be used to determine whether the nc rational <code>expr</code> is convex in <code>vars</code> or not.</p>
+<p>For example:</p>
+<pre><code>d = NCConvexityRegion[x**x**x, {x}];</code></pre>
+<p>returns</p>
+<pre><code>d = {2 x, -2 inv[x]}</code></pre>
+<p>from which we conclude that <code>x**x**x</code> is not convex in <code>x</code> because <span class="math inline">\(x \succ 0\)</span> and <span class="math inline">\(-{x}^{-1} \succ 0\)</span> cannot simultaneously hold.</p>
+<p><code>NCConvexityRegion</code> works by factoring the <code>NCHessian</code>, essentially calling:</p>
+<pre><code>hes = NCHessian[expr, {x, h}];</code></pre>
+<p>then</p>
+<pre><code>{lt, mq, rt} = NCMatrixOfQuadratic[hes, {h}]</code></pre>
+<p>to decompose the Hessian into a product of a left row vector, <code>lt</code>, times a middle matrix, <code>mq</code>, times a right column vector, <code>rt</code>. The middle matrix, <code>mq</code>, is factored using the <code>NCLDLDecomposition</code>:</p>
+<pre><code>{ldl, p, s, rank} = NCLDLDecomposition[mq];
+{lf, d, rt} = GetLDUMatrices[ldl, s];</code></pre>
+<p>from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix <code>d</code>.</p>
+<p>See also: <a href="#NCHessian">NCHessian</a>, <a href="#NCMatrixOfQuadratic">NCMatrixOfQuadratic</a>, <a href="#NCLDLDecomposition">NCLDLDecomposition</a>.</p>
 <h1 id="packages-for-manipulating-nc-block-matrices"><span class="header-section-number">11</span> Packages for manipulating NC block matrices</h1>
 <h2 id="PackageNCDot"><span class="header-section-number">11.1</span> NCDot</h2>
 <p>Members are:</p>
@@ -2649,7 +2688,7 @@ symVars = {x}</code></pre>
 <pre><code>{a**inv[y], b**inv[y], c**inv[y]}</code></pre>
 <p>See also: <a href="#NCLeftDivide">NCLeftDivide</a>.</p>
 <h2 id="PackageMatrixDecompositions"><span class="header-section-number">11.3</span> MatrixDecompositions: linear algebra templates</h2>
-<p><code>MatrixDecompositions</code> is a package that implements various linear algebra algorithms, such as <em>LU Decomposition</em> with <em>partial</em> and <em>complete pivoting</em>, and <em>LDL Decomposition</em>. The algorithms have been written with correctness and easy of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for <a href="http://math.ucsd.edu/~ncalg">NCAlgebra</a>.</p>
+<p><code>MatrixDecompositions</code> is a package that implements various linear algebra algorithms, such as <em>LU Decomposition</em> with <em>partial</em> and <em>complete pivoting</em>, and <em>LDL Decomposition</em>. The algorithms have been written with correctness and ease of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for <a href="http://math.ucsd.edu/~ncalg">NCAlgebra</a>.</p>
 <p>See the package <a href="#PackageNCMatrixDecompositions">NCMatrixDecompositions</a> for noncommutative versions of these algorithms.</p>
 <p>Members are:</p>
 <ul>
@@ -2871,6 +2910,7 @@ symVars = {x}</code></pre>
 </ul>
 <p>See also: <code>Run</code>.</p>
 <h2 id="PackageNCTest"><span class="header-section-number">12.5</span> NCTest</h2>
+<p>These are commands for automatically testing if our algorithms produce the correct answer. Problems and answers are stored under the directory <code>NC/TESTING</code>.</p>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCTest">NCTest</a></li>
@@ -2890,7 +2930,7 @@ symVars = {x}</code></pre>
 <p><code>NCTest[list]</code> runs the test files listed in <code>list</code> after appending the '.NCTest' suffix and return the results.</p>
 <p>For example:</p>
 <pre><code>results = NCTestRun[{&quot;NCCollect&quot;, &quot;NCSylvester&quot;}]</code></pre>
-<p>will run the test files &quot;NCCollec.NCTest&quot; and &quot;NCSylvester.NCTest&quot; and return the results in <code>results</code>.</p>
+<p>will run the test files &quot;NCCollect.NCTest&quot; and &quot;NCSylvester.NCTest&quot; and return the results in <code>results</code>.</p>
 <p>See also: <a href="#NCTest">NCTest</a>, <a href="#NCTestCheck">NCTestCheck</a>, <a href="#NCTestSummarize">NCTestSummarize</a>.</p>
 <h3 id="NCTestSummarize"><span class="header-section-number">12.5.4</span> NCTestSummarize</h3>
 <p><code>NCTestSummarize[results]</code> will print a summary of the results in <code>results</code> as produced by <code>NCTestRun</code>.</p>
@@ -2989,6 +3029,7 @@ index = {1,2,3,4,5,4,1};</code></pre>
 <p><code>NCToExpression</code> attempts to resize entries in expressions involving matrices.</p>
 <p>See also: <a href="#NCReplaceData">NCReplaceData</a>.</p>
 <h1 id="data-structures-for-fast-calculations"><span class="header-section-number">13</span> Data structures for fast calculations</h1>
+<p>This chapter describes packages that handle special data structures that enable fast calculations in Mathematica.</p>
 <h2 id="PackageNCPoly"><span class="header-section-number">13.1</span> NCPoly</h2>
 <h3 id="efficient-storage-of-nc-polynomials-with-rational-coefficients"><span class="header-section-number">13.1.1</span> Efficient storage of NC polynomials with rational coefficients</h3>
 <p>Members are:</p>
@@ -3849,8 +3890,9 @@ sylv = &lt;|x-&gt;{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]},
 <p><code>NCSylvesterToNCPolynomial[rep,options]</code> uses <code>options</code>.</p>
 <p>The following <code>options</code> can be given: * <code>Collect</code> (<em>True</em>): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.</p>
 <p>See also: <a href="#NCPToNCSylvester">NCPToNCSylvester</a>, <a href="#NCToNCSylvester">NCToNCSylvester</a>, <a href="#NCPolynomial">NCPolynomial</a>.</p>
-<h1 id="algorithms"><span class="header-section-number">14</span> Algorithms</h1>
+<h1 id="NCGBChapter"><span class="header-section-number">14</span> Noncommutative Gröbner Bases Algorithms</h1>
 <h2 id="PackageNCGBX"><span class="header-section-number">14.1</span> NCGBX</h2>
+<p>This is an interface to a Gröebner Bases code that runs purely under Mathematica. The actual algorithm is implemented in the package <a href="#PackageNCPolyGroebner">NCPolyGroebner</a>. Its function names, inputs and outputs are very similar (but not always exactly the same) to the ones provided in the legacy package <a href="#PackageNCGB">NCGB</a>, which requires both Mathematica and auxiliary executables compiled from C++ to run. <a href="#PackageNCGBX">NCGBX</a> may run slower on some medium size problems but will succeed on large size problems which might fail under <a href="#PackageNCGB">NCGB</a>.</p>
 <p>Members are:</p>
 <ul>
 <li><a href="#SetMonomialOrder">SetMonomialOrder</a></li>
@@ -4005,6 +4047,7 @@ NCGBSimplifyRational[expr]</code></pre>
 <p>By default, <code>NCReduce</code> only reduces the leading monomial in the current order. Use the optional boolean flag <code>complete</code> to completely reduce all monomials. For example, <code>NCReduce[polys, rules, True]</code> and <code>NCReduce[polys, True]</code>.</p>
 <p>See also: <a href="#NCMakeGB">NCMakeGB</a>, <a href="#NCGBSimplifyRational">NCGBSimplifyRational</a>.</p>
 <h2 id="PackageNCPolyGroebner"><span class="header-section-number">14.2</span> NCPolyGroebner</h2>
+<p>This packages implements a Gröebner Bases algorithm that runs purely under Mathematica. This algorithm is the one called by the user-friendly functions in the package <a href="#PackageNCGBX">NCGBX</a>.</p>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCPolyGroebner">NCPolyGroebner</a></li>
@@ -4025,57 +4068,11 @@ NCGBSimplifyRational[expr]</code></pre>
 </ul>
 <p>The algorithm is based on <span class="citation" data-cites="mora:ICN:1994">(Mora 1994)</span>.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>.</p>
-<h2 id="PackageNCPolySOS"><span class="header-section-number">14.3</span> NCPolySOS</h2>
-<p>Members are:</p>
-<ul>
-<li><a href="#NCPolySOS">NCPolySOS</a></li>
-<li><a href="#NCPolySOSToSDP">NCPolySOSToSDP</a> (#NCPolySOSToSDP)</li>
-</ul>
-<h3 id="NCPolySOS"><span class="header-section-number">14.3.1</span> NCPolySOS</h3>
-<p><code>NCPolySOS[p, var]</code> returns an <code>NCPoly</code> with symbolic coefficients on the variable <code>var</code> corresponding to a possible Gram representation of the polynomial <code>p</code>.</p>
-<p><code>NCPolySOS</code> uses <a href="#NCPolyQuadraticChipset">NCPolyQuadraticChipset</a> to generate a sparse Gram representation.</p>
-<p><code>NCPolySOS[p]</code> uses <code>q</code> as default symbol.</p>
-<p>See also: <a href="#NCPolySOSToSDP">NCPolySOSToSDP</a>, <a href="#NCPolyQuadraticChipset">NCPolyQuadraticChipset</a></p>
-<h3 id="NCPolySOSToSDP"><span class="header-section-number">14.3.2</span> NCPolySOSToSDP</h3>
-<p><code>NCPolySOSToSDP[G, options]</code></p>
-<p>See also: <a href="#NCPolySOS">NCPolySOS</a>.</p>
-<h2 id="PackageNCConvexity"><span class="header-section-number">14.4</span> NCConvexity</h2>
-<p><strong>NCConvexity</strong> is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.</p>
-<p>Members are:</p>
-<ul>
-<li><a href="#NCIndependent">NCIndependent</a></li>
-<li><a href="#NCConvexityRegion">NCConvexityRegion</a></li>
-</ul>
-<h3 id="NCIndependent"><span class="header-section-number">14.4.1</span> NCIndependent</h3>
-<p><code>NCIndependent[list]</code> attempts to determine whether the nc entries of <code>list</code> are independent.</p>
-<p>Entries of <code>NCIndependent</code> can be nc polynomials or nc rationals.</p>
-<p>For example:</p>
-<pre><code>NCIndependent[{x,y,z}]</code></pre>
-<p>return <em>True</em> while</p>
-<pre><code>NCIndependent[{x,0,z}]
-NCIndependent[{x,y,x}]
-NCIndependent[{x,y,x+y}]
-NCIndependent[{x,y,A x + B y}]
-NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
-<p>all return <em>False</em>.</p>
-<p>See also: <a href="#NCConvexityRegion">NCConvexityRegion</a>.</p>
-<h3 id="NCConvexityRegion"><span class="header-section-number">14.4.2</span> NCConvexityRegion</h3>
-<p><code>NCConvexityRegion[expr,vars]</code> is a function which can be used to determine whether the nc rational <code>expr</code> is convex in <code>vars</code> or not.</p>
-<p>For example:</p>
-<pre><code>d = NCConvexityRegion[x**x**x, {x}];</code></pre>
-<p>returns</p>
-<pre><code>d = {2 x, -2 inv[x]}</code></pre>
-<p>from which we conclude that <code>x**x**x</code> is not convex in <code>x</code> because <span class="math inline">\(x \succ 0\)</span> and <span class="math inline">\(-{x}^{-1} \succ 0\)</span> cannot simultaneously hold.</p>
-<p><code>NCConvexityRegion</code> works by factoring the <code>NCHessian</code>, essentially calling:</p>
-<pre><code>hes = NCHessian[expr, {x, h}];</code></pre>
-<p>then</p>
-<pre><code>{lt, mq, rt} = NCMatrixOfQuadratic[hes, {h}]</code></pre>
-<p>to decompose the Hessian into a product of a left row vector, <code>lt</code>, times a middle matrix, <code>mq</code>, times a right column vector, <code>rt</code>. The middle matrix, <code>mq</code>, is factored using the <code>NCLDLDecomposition</code>:</p>
-<pre><code>{ldl, p, s, rank} = NCLDLDecomposition[mq];
-{lf, d, rt} = GetLDUMatrices[ldl, s];</code></pre>
-<p>from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix <code>d</code>.</p>
-<p>See also: <a href="#NCHessian">NCHessian</a>, <a href="#NCMatrixOfQuadratic">NCMatrixOfQuadratic</a>, <a href="#NCLDLDecomposition">NCLDLDecomposition</a>.</p>
-<h2 id="PackageNCSDP"><span class="header-section-number">14.5</span> NCSDP</h2>
+<h2 id="PackageNCGB"><span class="header-section-number">14.3</span> NCGB</h2>
+<p>This packages supports our legacy Gröebner Bases algorithm that requires both Mathematica and auxiliary executables compiled from C++ to run. <a href="#PackageNCGBX">NCGBX</a> may run slower on some medium size problems but will succeed on large size problems which might fail under <a href="#PackageNCGB">NCGB</a>.</p>
+<p>This code has become hard to maintain and support and may be deprecated in the future. See older versions of the NC documentation for a complete description of its functionality.</p>
+<h1 id="SDPChapter"><span class="header-section-number">15</span> Semidefinite Programming Algorithms</h1>
+<h2 id="PackageNCSDP"><span class="header-section-number">15.1</span> NCSDP</h2>
 <p><strong>NCSDP</strong> is a package that allows the symbolic manipulation and numeric solution of semidefinite programs.</p>
 <p>Members are:</p>
 <ul>
@@ -4084,7 +4081,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><a href="#NCSDPDual">NCSDPDual</a></li>
 <li><a href="#NCSDPDualForm">NCSDPDualForm</a></li>
 </ul>
-<h3 id="NCSDP"><span class="header-section-number">14.5.1</span> NCSDP</h3>
+<h3 id="NCSDP"><span class="header-section-number">15.1.1</span> NCSDP</h3>
 <p><code>NCSDP[inequalities,vars,obj,data]</code> converts the list of NC polynomials and NC matrices of polynomials <code>inequalities</code> that are linear in the unknowns listed in <code>vars</code> into the semidefinite program with linear objective <code>obj</code>. The semidefinite program (SDP) should be given in the following canonical form:</p>
 <pre><code>max  &lt;obj, vars&gt;  s.t.  inequalities &lt;= 0.</code></pre>
 <p>It returns a list with two entries:</p>
@@ -4105,10 +4102,10 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><code>DebugLevel</code> (<code>0</code>): control printing of debugging information.</li>
 </ul>
 <p>See also: <a href="#NCSDPForm">NCSDPForm</a>, <a href="#NCSDPDual">NCSDPDual</a>, <a href="#SDPSolve">SDPSolve</a>.</p>
-<h3 id="NCSDPForm"><span class="header-section-number">14.5.2</span> NCSDPForm</h3>
+<h3 id="NCSDPForm"><span class="header-section-number">15.1.2</span> NCSDPForm</h3>
 <p><code>NCSDPForm[[inequalities,vars,obj]</code> prints out a pretty formatted version of the SDP expressed by the list of NC polynomials and NC matrices of polynomials <code>inequalities</code> that are linear in the unknowns listed in <code>vars</code>.</p>
 <p>See also: <a href="#NCSDP">NCSDP</a>, <a href="#NCSDPDualForm">NCSDPDualForm</a>.</p>
-<h3 id="NCSDPDual"><span class="header-section-number">14.5.3</span> NCSDPDual</h3>
+<h3 id="NCSDPDual"><span class="header-section-number">15.1.3</span> NCSDPDual</h3>
 <p><code>{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj]</code> calculates the symbolic dual of the SDP expressed by the list of NC polynomials and NC matrices of polynomials <code>inequalities</code> that are linear in the unknowns listed in <code>vars</code> with linear objective <code>obj</code> into a dual semidefinite in the following canonical form:</p>
 <pre><code>max &lt;dObj, dVars&gt;  s.t.  dInequalities == 0,   dVars &gt;= 0.</code></pre>
 <p><code>{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj,dualVars]</code> uses the symbols in <code>dualVars</code> as <code>dVars</code>.</p>
@@ -4119,10 +4116,10 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><code>DebugLevel</code> (<code>0</code>): control printing of debugging information.</li>
 </ul>
 <p>See also: <a href="#NCSDPDualForm">NCSDPDualForm</a>, <a href="#NCSDP">NCSDP</a>.</p>
-<h3 id="NCSDPDualForm"><span class="header-section-number">14.5.4</span> NCSDPDualForm</h3>
+<h3 id="NCSDPDualForm"><span class="header-section-number">15.1.4</span> NCSDPDualForm</h3>
 <p><code>NCSDPForm[[dInequalities,dVars,dObj]</code> prints out a pretty formatted version of the dual SDP expressed by the list of NC polynomials and NC matrices of polynomials <code>dInequalities</code> that are linear in the unknowns listed in <code>dVars</code> with linear objective <code>dObj</code>.</p>
 <p>See also: <a href="#NCSDPDual">NCSDPDual</a>, <a href="#NCSDPForm">NCSDPForm</a>.</p>
-<h2 id="PackageSDP"><span class="header-section-number">14.6</span> SDP</h2>
+<h2 id="PackageSDP"><span class="header-section-number">15.2</span> SDP</h2>
 <p><code>SDP</code> is a package that provides data structures for the numeric solution of semidefinite programs of the form: <span class="math display">\[
 \begin{aligned}
   \max_{y, S} \quad &amp; b^T y \\
@@ -4140,7 +4137,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><a href="#SDPDualEval">SDPDualEval</a></li>
 <li><a href="#SDPSylvesterEval">SDPSylvesterEval</a></li>
 </ul>
-<h3 id="SDPMatrices"><span class="header-section-number">14.6.1</span> SDPMatrices</h3>
+<h3 id="SDPMatrices"><span class="header-section-number">15.2.1</span> SDPMatrices</h3>
 <p><code>SDPMatrices[f, G, y]</code> converts the symbolic linear functions <code>f</code>, <code>G</code> in the variables <code>y</code> associated to the semidefinite program:</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -4173,7 +4170,7 @@ b = {{{1}}}
 c = {{{1, 0}, {0, 1}}}</code></pre>
 <p>All data is stored as <code>SparseArray</code>s.</p>
 <p>See also: <a href="#SDPSolve">SDPSolve</a>.</p>
-<h3 id="SDPSolve"><span class="header-section-number">14.6.2</span> SDPSolve</h3>
+<h3 id="SDPSolve"><span class="header-section-number">15.2.2</span> SDPSolve</h3>
 <p><code>SDPSolve[{A,b,c}]</code> solves an SDP in the form:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -4202,22 +4199,22 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <p><code>SDPSolve[{A,b,c}, options]</code> uses <code>options</code>.</p>
 <p><code>options</code> are those of <a href="#PrimalDual">PrimalDual</a>.</p>
 <p>See also: <a href="#SDPMatrices">SDPMatrices</a>.</p>
-<h3 id="SDPEval"><span class="header-section-number">14.6.3</span> SDPEval</h3>
+<h3 id="SDPEval"><span class="header-section-number">15.2.3</span> SDPEval</h3>
 <p><code>SDPEval[A, y]</code> evaluates the linear function <span class="math inline">\(A y\)</span> in an <code>SDP</code>.</p>
 <p>This is a convenient replacement for <a href="#SDPPrimalEval">SDPPrimalEval</a> in which the list <code>y</code> can be used directly.</p>
 <p>See also: <a href="#SDPPrimalEval">SDPPrimalEval</a>, <a href="#SDPDualEval">SDPDualEval</a>, <a href="#SDPSolve">SDPSolve</a>, <a href="#SDPMatrices">SDPMatrices</a>.</p>
-<h3 id="SDPPrimalEval"><span class="header-section-number">14.6.4</span> SDPPrimalEval</h3>
+<h3 id="SDPPrimalEval"><span class="header-section-number">15.2.4</span> SDPPrimalEval</h3>
 <p><code>SDPPrimalEval[A, {{y}}]</code> evaluates the linear function <span class="math inline">\(A y\)</span> in an <code>SDP</code>.</p>
 <p>See <a href="#SDPEval">SDPEval</a> for a convenient replacement for <code>SDPPrimalEval</code> in which the list <code>y</code> can be used directly.</p>
 <p>See also: <a href="#SDPEval">SDPEval</a>, <a href="#SDPDualEval">SDPDualEval</a>, <a href="#SDPSolve">SDPSolve</a>, <a href="#SDPMatrices">SDPMatrices</a>.</p>
-<h3 id="SDPDualEval"><span class="header-section-number">14.6.5</span> SDPDualEval</h3>
+<h3 id="SDPDualEval"><span class="header-section-number">15.2.5</span> SDPDualEval</h3>
 <p><code>SDPDualEval[A, X]</code> evaluates the linear function <span class="math inline">\(A^* X\)</span> in an <code>SDP</code>.</p>
 <p>See also: <a href="#SDPPrimalEval">SDPPrimalEval</a>, <a href="#SDPSolve">SDPSolve</a>, <a href="#SDPMatrices">SDPMatrices</a>.</p>
-<h3 id="SDPSylvesterEval"><span class="header-section-number">14.6.6</span> SDPSylvesterEval</h3>
+<h3 id="SDPSylvesterEval"><span class="header-section-number">15.2.6</span> SDPSylvesterEval</h3>
 <p><code>SDPSylvesterEval[a, W]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W A (\Delta_y) W)\)</span> when applied to the scaling <code>W</code>.</p>
 <p><code>SDPSylvesterEval[a, Wl, Wr]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W_l A (\Delta_y) W_r)\)</span> when applied to the left- and right-scalings <code>Wl</code> and <code>Wr</code>.</p>
 <p>See also: <a href="#SDPPrimalEval">SDPPrimalEval</a>, <a href="#SDPDualEval">SDPDualEval</a>.</p>
-<h2 id="PackageSDPFlat"><span class="header-section-number">14.7</span> SDPFlat</h2>
+<h2 id="PackageSDPFlat"><span class="header-section-number">15.3</span> SDPFlat</h2>
 <p><code>SDPFlat</code> is a package that provides data structures for the numeric solution of semidefinite programs of the form: <span class="math display">\[
 \begin{aligned}
   \max_{y, S} \quad &amp; b^T y \\
@@ -4233,7 +4230,7 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <li><a href="#SDPFlatDualEval">SDPFlatDualEval</a></li>
 <li><a href="#SDPFlatSylvesterEval">SDPFlatSylvesterEval</a></li>
 </ul>
-<h3 id="SDPFlatData"><span class="header-section-number">14.7.1</span> SDPFlatData</h3>
+<h3 id="SDPFlatData"><span class="header-section-number">15.3.1</span> SDPFlatData</h3>
 <p><code>SDPFlatData[{a,b,c}]</code> converts the triplet <code>{a,b,c}</code> from the format of the package <a href="#PackageSDP">SDP</a> to the <code>SDPFlat</code> format.</p>
 <p>It returns a list with four entries:</p>
 <ul>
@@ -4243,17 +4240,17 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <li>The fourth is an array with the flattened dimensions.</li>
 </ul>
 <p>See also: <a href="#PackageSDP">SDP</a>.</p>
-<h3 id="SDPFlatPrimalEval"><span class="header-section-number">14.7.2</span> SDPFlatPrimalEval</h3>
+<h3 id="SDPFlatPrimalEval"><span class="header-section-number">15.3.2</span> SDPFlatPrimalEval</h3>
 <p><code>SDPFlatPrimalEval[aFlat, y]</code> evaluates the linear function <span class="math inline">\(A y\)</span> in an <code>SDPFlat</code>.</p>
 <p>See also: <a href="#SDPFlatDualEval">SDPFlatDualEval</a>, <a href="#SDPFlatSylvesterEval">SDPFlatSylvesterEval</a>.</p>
-<h3 id="SDPFlatDualEval"><span class="header-section-number">14.7.3</span> SDPFlatDualEval</h3>
+<h3 id="SDPFlatDualEval"><span class="header-section-number">15.3.3</span> SDPFlatDualEval</h3>
 <p><code>SDPFlatDualEval[aFlat, X]</code> evaluates the linear function <span class="math inline">\(A^* X\)</span> in an <code>SDPFlat</code>.</p>
 <p>See also: <a href="#SDPFlatPrimalEval">SDPFlatPrimalEval</a>, <a href="#SDPFlatSylvesterEval">SDPFlatSylvesterEval</a>.</p>
-<h3 id="SDPFlatSylvesterEval"><span class="header-section-number">14.7.4</span> SDPFlatSylvesterEval</h3>
+<h3 id="SDPFlatSylvesterEval"><span class="header-section-number">15.3.4</span> SDPFlatSylvesterEval</h3>
 <p><code>SDPFlatSylvesterEval[a, aFlat, W]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W A (\Delta_y) W)\)</span> when applied to the scaling <code>W</code>.</p>
 <p><code>SDPFlatSylvesterEval[a, aFlat, Wl, Wr]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W_l A (\Delta_y) W_r)\)</span> when applied to the left- and right-scalings <code>Wl</code> and <code>Wr</code>.</p>
 <p>See also: <a href="#SDPFlatPrimalEval">SDPFlatPrimalEval</a>, <a href="#SDPFlatDualEval">SDPFlatDualEval</a>.</p>
-<h2 id="PackageSDPSylvester"><span class="header-section-number">14.8</span> SDPSylvester</h2>
+<h2 id="PackageSDPSylvester"><span class="header-section-number">15.4</span> SDPSylvester</h2>
 <p><code>SDPSylvester</code> is a package that provides data structures for the numeric solution of semidefinite programs of the form: <span class="math display">\[
 \begin{aligned}
   \max_{y, S} \quad &amp; \sum_i \operatorname{trace}(b_i^T y_i) \\
@@ -4268,23 +4265,23 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <li><a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a></li>
 <li><a href="#SDPSylvesterSylvesterEval">SDPSylvesterSylvesterEval</a></li>
 </ul>
-<h3 id="SDPSylvesterSDPEval"><span class="header-section-number">14.8.1</span> SDPEval</h3>
+<h3 id="SDPSylvesterSDPEval"><span class="header-section-number">15.4.1</span> SDPEval</h3>
 <p><code>SDPEval[A, y]</code> evaluates the linear function <span class="math inline">\(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\)</span> in an <code>SDPSylvester</code>.</p>
 <p>This is a convenient replacement for <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a> in which the list <code>y</code> can be used directly.</p>
 <p>See also: <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a>, <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>.</p>
-<h3 id="SDPSylvesterPrimalEval"><span class="header-section-number">14.8.2</span> SDPSylvesterPrimalEval</h3>
+<h3 id="SDPSylvesterPrimalEval"><span class="header-section-number">15.4.2</span> SDPSylvesterPrimalEval</h3>
 <p><code>SDPSylvesterPrimalEval[a, y]</code> evaluates the linear function <span class="math inline">\(A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T\)</span> in an <code>SDPSylvester</code>.</p>
 <p>See <a href="#SDPSylvesterEval">SDPSylvesterEval</a> for a convenient replacement for <code>SDPPrimalEval</code> in which the list <code>y</code> can be used directly.</p>
 <p>See also: <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>, <a href="#SDPSylvesterSylvesterEval">SDPSylvesterSylvesterEval</a>.</p>
-<h3 id="SDPSylvesterDualEval"><span class="header-section-number">14.8.3</span> SDPSylvesterDualEval</h3>
+<h3 id="SDPSylvesterDualEval"><span class="header-section-number">15.4.3</span> SDPSylvesterDualEval</h3>
 <p><code>SDPSylvesterDualEval[A, X]</code> evaluates the linear function <span class="math inline">\(A^* X = \{ b_1 X a_1, \cdots, b_n X a_n \}\)</span> in an <code>SDPSylvester</code>.</p>
 <p>For example</p>
 <p>See also: <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a>, <a href="#SDPSylvesterSylvesterEval">SDPSylvesterSylvesterEval</a>.</p>
-<h3 id="SDPSylvesterSylvesterEval"><span class="header-section-number">14.8.4</span> SDPSylvesterSylvesterEval</h3>
+<h3 id="SDPSylvesterSylvesterEval"><span class="header-section-number">15.4.4</span> SDPSylvesterSylvesterEval</h3>
 <p><code>SDPSylvesterEval[a, W]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W A (\Delta_y) W)\)</span> when applied to the scaling <code>W</code>.</p>
 <p><code>SDPSylvesterEval[a, Wl, Wr]</code> returns a matrix representation of the Sylvester mapping <span class="math inline">\(A^* (W_l A (\Delta_y) W_r)\)</span> when applied to the left- and right-scalings <code>Wl</code> and <code>Wr</code>.</p>
 <p>See also: <a href="#SDPSylvesterPrimalEval">SDPSylvesterPrimalEval</a>, <a href="#SDPSylvesterDualEval">SDPSylvesterDualEval</a>.</p>
-<h2 id="PackagePrimalDual"><span class="header-section-number">14.9</span> PrimalDual</h2>
+<h2 id="PackagePrimalDual"><span class="header-section-number">15.5</span> PrimalDual</h2>
 <p><code>PrimalDual</code> provides an algorithm for solving a pair of primal-dual semidefinite programs in the form <span class="math display">\[
 \tag{Primal}
 \begin{aligned}
@@ -4309,7 +4306,7 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <ul>
 <li><a href="#PrimalDual">PrimalDual</a></li>
 </ul>
-<h3 id="PrimalDual"><span class="header-section-number">14.9.1</span> PrimalDual</h3>
+<h3 id="PrimalDual"><span class="header-section-number">15.5.1</span> PrimalDual</h3>
 <p><code>PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c]</code> solves the semidefinite program using a primal dual method.</p>
 <p><code>PrimalEval</code> should return the primal mapping <span class="math inline">\(A^*(X)\)</span> when applied to the current primal variable <code>X</code> as in <code>PrimalEval @@ X</code>.</p>
 <p><code>DualEval</code> should return the dual mapping <span class="math inline">\(A(y)\)</span> when applied to the current dual variable <code>y</code> as in <code>DualEval @@ y</code>.</p>
@@ -4331,9 +4328,23 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <li><p><code>DebugLevel</code> (0): whether to print debug information;</p></li>
 <li><p><code>Profiling</code> (<code>False</code>): whether to print messages with detailed timing of steps.</p></li>
 </ul>
-<h1 id="WorkInProgress"><span class="header-section-number">15</span> Work in Progress</h1>
+<h1 id="WorkInProgress"><span class="header-section-number">16</span> Work in Progress</h1>
 <p>Sections in this chapter describe experimental packages which are still under development.</p>
-<h2 id="PackageNCRational"><span class="header-section-number">15.1</span> NCRational</h2>
+<h2 id="PackageNCPolySOS"><span class="header-section-number">16.1</span> NCPolySOS</h2>
+<p>Members are:</p>
+<ul>
+<li><a href="#NCPolySOS">NCPolySOS</a></li>
+<li><a href="#NCPolySOSToSDP">NCPolySOSToSDP</a> (#NCPolySOSToSDP)</li>
+</ul>
+<h3 id="NCPolySOS"><span class="header-section-number">16.1.1</span> NCPolySOS</h3>
+<p><code>NCPolySOS[p, var]</code> returns an <code>NCPoly</code> with symbolic coefficients on the variable <code>var</code> corresponding to a possible Gram representation of the polynomial <code>p</code>.</p>
+<p><code>NCPolySOS</code> uses <a href="#NCPolyQuadraticChipset">NCPolyQuadraticChipset</a> to generate a sparse Gram representation.</p>
+<p><code>NCPolySOS[p]</code> uses <code>q</code> as default symbol.</p>
+<p>See also: <a href="#NCPolySOSToSDP">NCPolySOSToSDP</a>, <a href="#NCPolyQuadraticChipset">NCPolyQuadraticChipset</a></p>
+<h3 id="NCPolySOSToSDP"><span class="header-section-number">16.1.2</span> NCPolySOSToSDP</h3>
+<p><code>NCPolySOSToSDP[G, options]</code></p>
+<p>See also: <a href="#NCPolySOS">NCPolySOS</a>.</p>
+<h2 id="PackageNCRational"><span class="header-section-number">16.2</span> NCRational</h2>
 <p>This package contains functionality to convert an nc rational expression into a descriptor representation.</p>
 <p>For example the rational</p>
 <pre><code>exp = 1 + inv[1 + x]</code></pre>
@@ -4360,43 +4371,43 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <li><a href="#NCRObservableRealization">NCRObservableRealization</a></li>
 <li><p><a href="#NCRMinimalRealization">NCRMinimalRealization</a></p></li>
 </ul>
-<h3 id="state-space-realizations-for-nc-rationals"><span class="header-section-number">15.1.1</span> State-space realizations for NC rationals</h3>
-<h4 id="NCRational"><span class="header-section-number">15.1.1.1</span> NCRational</h4>
+<h3 id="state-space-realizations-for-nc-rationals"><span class="header-section-number">16.2.1</span> State-space realizations for NC rationals</h3>
+<h4 id="NCRational"><span class="header-section-number">16.2.1.1</span> NCRational</h4>
 <p>NCRational::usage</p>
-<h4 id="NCToNCRational"><span class="header-section-number">15.1.1.2</span> NCToNCRational</h4>
+<h4 id="NCToNCRational"><span class="header-section-number">16.2.1.2</span> NCToNCRational</h4>
 <p>NCToNCRational::usage</p>
-<h4 id="NCRationalToNC"><span class="header-section-number">15.1.1.3</span> NCRationalToNC</h4>
+<h4 id="NCRationalToNC"><span class="header-section-number">16.2.1.3</span> NCRationalToNC</h4>
 <p>NCRationalToNC::usage</p>
-<h4 id="NCRationalToCanonical"><span class="header-section-number">15.1.1.4</span> NCRationalToCanonical</h4>
+<h4 id="NCRationalToCanonical"><span class="header-section-number">16.2.1.4</span> NCRationalToCanonical</h4>
 <p>NCRationalToCanonical::usage</p>
-<h4 id="CanonicalToNCRational"><span class="header-section-number">15.1.1.5</span> CanonicalToNCRational</h4>
+<h4 id="CanonicalToNCRational"><span class="header-section-number">16.2.1.5</span> CanonicalToNCRational</h4>
 <p>CanonicalToNCRational::usage</p>
-<h3 id="utilities-1"><span class="header-section-number">15.1.2</span> Utilities</h3>
-<h4 id="NCROrder"><span class="header-section-number">15.1.2.1</span> NCROrder</h4>
+<h3 id="utilities-1"><span class="header-section-number">16.2.2</span> Utilities</h3>
+<h4 id="NCROrder"><span class="header-section-number">16.2.2.1</span> NCROrder</h4>
 <p>NCROrder::usage</p>
-<h4 id="NCRLinearQ"><span class="header-section-number">15.1.2.2</span> NCRLinearQ</h4>
+<h4 id="NCRLinearQ"><span class="header-section-number">16.2.2.2</span> NCRLinearQ</h4>
 <p>NCRLinearQ::usage</p>
-<h4 id="NCRStrictlyProperQ"><span class="header-section-number">15.1.2.3</span> NCRStrictlyProperQ</h4>
+<h4 id="NCRStrictlyProperQ"><span class="header-section-number">16.2.2.3</span> NCRStrictlyProperQ</h4>
 <p>NCRStrictlyProperQ::usage</p>
-<h3 id="operations-on-nc-rationals"><span class="header-section-number">15.1.3</span> Operations on NC rationals</h3>
-<h4 id="NCRPlus"><span class="header-section-number">15.1.3.1</span> NCRPlus</h4>
+<h3 id="operations-on-nc-rationals"><span class="header-section-number">16.2.3</span> Operations on NC rationals</h3>
+<h4 id="NCRPlus"><span class="header-section-number">16.2.3.1</span> NCRPlus</h4>
 <p>NCRPlus::usage</p>
-<h4 id="NCRTimes"><span class="header-section-number">15.1.3.2</span> NCRTimes</h4>
+<h4 id="NCRTimes"><span class="header-section-number">16.2.3.2</span> NCRTimes</h4>
 <p>NCRTimes::usage</p>
-<h4 id="NCRTranspose"><span class="header-section-number">15.1.3.3</span> NCRTranspose</h4>
+<h4 id="NCRTranspose"><span class="header-section-number">16.2.3.3</span> NCRTranspose</h4>
 <p>NCRTranspose::usage</p>
-<h4 id="NCRInverse"><span class="header-section-number">15.1.3.4</span> NCRInverse</h4>
+<h4 id="NCRInverse"><span class="header-section-number">16.2.3.4</span> NCRInverse</h4>
 <p>NCRInverse::usage</p>
-<h3 id="minimal-realizations"><span class="header-section-number">15.1.4</span> Minimal realizations</h3>
-<h4 id="NCRControllableRealization"><span class="header-section-number">15.1.4.1</span> NCRControllableRealization</h4>
+<h3 id="minimal-realizations"><span class="header-section-number">16.2.4</span> Minimal realizations</h3>
+<h4 id="NCRControllableRealization"><span class="header-section-number">16.2.4.1</span> NCRControllableRealization</h4>
 <p>NCRControllableRealization::usage</p>
-<h4 id="NCRControllableSubspace"><span class="header-section-number">15.1.4.2</span> NCRControllableSubspace</h4>
+<h4 id="NCRControllableSubspace"><span class="header-section-number">16.2.4.2</span> NCRControllableSubspace</h4>
 <p>NCRControllableSubspace::usage</p>
-<h4 id="NCRObservableRealization"><span class="header-section-number">15.1.4.3</span> NCRObservableRealization</h4>
+<h4 id="NCRObservableRealization"><span class="header-section-number">16.2.4.3</span> NCRObservableRealization</h4>
 <p>NCRObservableRealization::usage</p>
-<h4 id="NCRMinimalRealization"><span class="header-section-number">15.1.4.4</span> NCRMinimalRealization</h4>
+<h4 id="NCRMinimalRealization"><span class="header-section-number">16.2.4.4</span> NCRMinimalRealization</h4>
 <p>NCRMinimalRealization::usage</p>
-<h2 id="PackageNCRealization"><span class="header-section-number">15.2</span> NCRealization</h2>
+<h2 id="PackageNCRealization"><span class="header-section-number">16.3</span> NCRealization</h2>
 <p><strong>WARNING: OBSOLETE PACKAGE WILL BE REPLACED BY NCRational</strong></p>
 <p>The package <strong>NCRealization</strong> implements an algorithm due to N. Slinglend for producing minimal realizations of nc rational functions in many nc variables. See &quot;Toward Making LMIs Automatically&quot;.</p>
 <p>It actually computes formulas similar to those used in the paper &quot;Noncommutative Convexity Arises From Linear Matrix Inequalities&quot; by J William Helton, Scott A. McCullough, and Victor Vinnikov. In particular, there are functions for calculating (symmetric) minimal descriptor realizations of nc (symmetric) rational functions, and determinantal representations of polynomials.</p>
@@ -4422,33 +4433,33 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <li><a href="#SignatureOfAffineTerm">SignatureOfAffineTerm</a></li>
 </ul></li>
 </ul>
-<h3 id="NCDescriptorRealization"><span class="header-section-number">15.2.1</span> NCDescriptorRealization</h3>
+<h3 id="NCDescriptorRealization"><span class="header-section-number">16.3.1</span> NCDescriptorRealization</h3>
 <p><code>NCDescriptorRealization[RationalExpression,UnknownVariables]</code> returns a list of 3 matrices <code>{C,G,B}</code> such that <span class="math inline">\(C G^{-1} B\)</span> is the given <code>RationalExpression</code>. i.e. <code>NCDot[C,NCInverse[G],B] === RationalExpression</code>.</p>
 <p><code>C</code> and <code>B</code> do not contain any <code>UnknownsVariables</code> and <code>G</code> has linear entries in the <code>UnknownVariables</code>.</p>
-<h3 id="NCDeterminantalRepresentationReciprocal"><span class="header-section-number">15.2.2</span> NCDeterminantalRepresentationReciprocal</h3>
+<h3 id="NCDeterminantalRepresentationReciprocal"><span class="header-section-number">16.3.2</span> NCDeterminantalRepresentationReciprocal</h3>
 <p><code>NCDeterminantalRepresentationReciprocal[Polynomial,Unknowns]</code> returns a linear pencil matrix whose determinant equals <code>Constant * CommuteEverything[Polynomial]</code>. This uses the reciprocal algorithm: find a minimal descriptor realization of <code>inv[Polynomial]</code>, so <code>Polynomial</code> must be nonzero at the origin.</p>
-<h3 id="NCMatrixDescriptorRealization"><span class="header-section-number">15.2.3</span> NCMatrixDescriptorRealization</h3>
+<h3 id="NCMatrixDescriptorRealization"><span class="header-section-number">16.3.3</span> NCMatrixDescriptorRealization</h3>
 <p><code>NCMatrixDescriptorRealization[RationalMatrix,UnknownVariables]</code> is similar to <code>NCDescriptorRealization</code> except it takes a <em>Matrix</em> with rational function entries and returns a matrix of lists of the vectors/matrix <code>{C,G,B}</code>. A different <code>{C,G,B}</code> for each entry.</p>
-<h3 id="NCMinimalDescriptorRealization"><span class="header-section-number">15.2.4</span> NCMinimalDescriptorRealization</h3>
+<h3 id="NCMinimalDescriptorRealization"><span class="header-section-number">16.3.4</span> NCMinimalDescriptorRealization</h3>
 <p><code>NCMinimalDescriptorRealization[RationalFunction,UnknownVariables]</code> returns <code>{C,G,B}</code> where <code>NCDot[C,NCInverse[G],B] == RationalFunction</code>, <code>G</code> is linear in the <code>UnknownVariables</code>, and the realization is minimal (may be pinned).</p>
-<h3 id="NCSymmetricDescriptorRealization"><span class="header-section-number">15.2.5</span> NCSymmetricDescriptorRealization</h3>
+<h3 id="NCSymmetricDescriptorRealization"><span class="header-section-number">16.3.5</span> NCSymmetricDescriptorRealization</h3>
 <p><code>NCSymmetricDescriptorRealization[RationalSymmetricFunction, Unknowns]</code> combines two steps: <code>NCSymmetrizeMinimalDescriptorRealization[NCMinimalDescriptorRealization[RationalSymmetricFunction, Unknowns]]</code>.</p>
-<h3 id="NCSymmetricDeterminantalRepresentationDirect"><span class="header-section-number">15.2.6</span> NCSymmetricDeterminantalRepresentationDirect</h3>
+<h3 id="NCSymmetricDeterminantalRepresentationDirect"><span class="header-section-number">16.3.6</span> NCSymmetricDeterminantalRepresentationDirect</h3>
 <p><code>NCSymmetricDeterminantalRepresentationDirect[SymmetricPolynomial,Unknowns]</code> returns a linear pencil matrix whose determinant equals <code>Constant * CommuteEverything[SymmetricPolynomial]</code>. This uses the direct algorithm: Find a realization of 1 - NCSymmetricPolynomial,...</p>
-<h3 id="NCSymmetricDeterminantalRepresentationReciprocal"><span class="header-section-number">15.2.7</span> NCSymmetricDeterminantalRepresentationReciprocal</h3>
+<h3 id="NCSymmetricDeterminantalRepresentationReciprocal"><span class="header-section-number">16.3.7</span> NCSymmetricDeterminantalRepresentationReciprocal</h3>
 <p><code>NCSymmetricDeterminantalRepresentationReciprocal[SymmetricPolynomial,Unknowns]</code> returns a linear pencil matrix whose determinant equals <code>Constant * CommuteEverything[NCSymmetricPolynomial]</code>. This uses the reciprocal algorithm: find a symmetric minimal descriptor realization of <code>inv[NCSymmetricPolynomial]</code>, so NCSymmetricPolynomial must be nonzero at the origin.</p>
-<h3 id="NCSymmetrizeMinimalDescriptorRealization"><span class="header-section-number">15.2.8</span> NCSymmetrizeMinimalDescriptorRealization</h3>
+<h3 id="NCSymmetrizeMinimalDescriptorRealization"><span class="header-section-number">16.3.8</span> NCSymmetrizeMinimalDescriptorRealization</h3>
 <p><code>NCSymmetrizeMinimalDescriptorRealization[{C,G,B},Unknowns]</code> symmetrizes the minimal realization <code>{C,G,B}</code> (such as output from <code>NCMinimalRealization</code>) and outputs <code>{Ctilda,Gtilda}</code> corresponding to the realization <code>{Ctilda, Gtilda,Transpose[Ctilda]}</code>.</p>
 <p><strong>WARNING:</strong> May produces errors if the realization doesn't correspond to a symmetric rational function.</p>
-<h3 id="NonCommutativeLift"><span class="header-section-number">15.2.9</span> NonCommutativeLift</h3>
+<h3 id="NonCommutativeLift"><span class="header-section-number">16.3.9</span> NonCommutativeLift</h3>
 <p><code>NonCommutativeLift[Rational]</code> returns a noncommutative symmetric lift of <code>Rational</code>.</p>
-<h3 id="SignatureOfAffineTerm"><span class="header-section-number">15.2.10</span> SignatureOfAffineTerm</h3>
+<h3 id="SignatureOfAffineTerm"><span class="header-section-number">16.3.10</span> SignatureOfAffineTerm</h3>
 <p><code>SignatureOfAffineTerm[Pencil,Unknowns]</code> returns a list of the number of positive, negative and zero eigenvalues in the affine part of <code>Pencil</code>.</p>
-<h3 id="TestDescriptorRealization"><span class="header-section-number">15.2.11</span> TestDescriptorRealization</h3>
+<h3 id="TestDescriptorRealization"><span class="header-section-number">16.3.11</span> TestDescriptorRealization</h3>
 <p><code>TestDescriptorRealization[Rat,{C,G,B},Unknowns]</code> checks if <code>Rat</code> equals <span class="math inline">\(C G^{-1} B\)</span> by substituting random 2-by-2 matrices in for the unknowns. <code>TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]</code> can be used to specify the <code>NumberOfTests</code>, the default being 5.</p>
-<h3 id="PinnedQ"><span class="header-section-number">15.2.12</span> PinnedQ</h3>
+<h3 id="PinnedQ"><span class="header-section-number">16.3.12</span> PinnedQ</h3>
 <p><code>PinnedQ[Pencil_,Unknowns_]</code> is True or False.</p>
-<h3 id="PinningSpace"><span class="header-section-number">15.2.13</span> PinningSpace</h3>
+<h3 id="PinningSpace"><span class="header-section-number">16.3.13</span> PinningSpace</h3>
 <p><code>PinningSpace[Pencil_,Unknowns_]</code> returns a matrix whose columns span the pinning space of <code>Pencil</code>. Generally, either an empty matrix or a d-by-1 matrix (vector).</p>
 <h1 id="references" class="unnumbered">References</h1>
 <div id="refs" class="references">

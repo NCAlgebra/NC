@@ -3,7 +3,7 @@
 `MatrixDecompositions` is a package that implements various linear
 algebra algorithms, such as *LU Decomposition* with *partial* and
 *complete pivoting*, and *LDL Decomposition*. The algorithms have been
-written with correctness and easy of customization rather than
+written with correctness and ease of customization rather than
 efficiency as the main goals. They were originally developed to serve
 as the core of the noncommutative linear algebra algorithms for
 [NCAlgebra](http://math.ucsd.edu/~ncalg). 

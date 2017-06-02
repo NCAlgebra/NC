@@ -1,5 +1,9 @@
 ## NCPolyGroebner {#PackageNCPolyGroebner}
 
+This packages implements a Gröebner Bases algorithm that runs purely
+under Mathematica. This algorithm is the one called by the
+user-friendly functions in the package [NCGBX](#PackageNCGBX).
+
 Members are:
 
 * [NCPolyGroebner](#NCPolyGroebner)

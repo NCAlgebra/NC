@@ -1,5 +1,15 @@
 ## NCGBX {#PackageNCGBX}
 
+This is an interface to a Gröebner Bases code that runs purely under
+Mathematica. The actual algorithm is implemented in the package
+[NCPolyGroebner](#PackageNCPolyGroebner). Its function names, inputs
+and outputs are very similar (but not always exactly the same) to the
+ones provided in the legacy package [NCGB](#PackageNCGB), which
+requires both Mathematica and auxiliary executables compiled from C++
+to run. [NCGBX](#PackageNCGBX) may run slower on some medium size
+problems but will succeed on large size problems which might fail
+under [NCGB](#PackageNCGB).
+
 Members are:
 
 * [SetMonomialOrder](#SetMonomialOrder)

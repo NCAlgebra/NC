@@ -41,6 +41,7 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCSelfAdjoint.md \
 	 NCAlgebra/NCSimplifyRational.md \
 	 NCAlgebra/NCDiff.md \
+	 NCAlgebra/NCConvexity.md \
          MANUAL/MatrixPackages.md \
 	 NCAlgebra/NCDot.md \
          NCAlgebra/NCMatrixDecompositions.md \
@@ -59,17 +60,18 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCPolynomial.md \
 	 NCAlgebra/NCQuadratic.md \
 	 NCAlgebra/NCSylvester.md \
-         MANUAL/Algorithms.md \
+         MANUAL/NCGBChapter.md \
 	 NCPoly/NCGBX.md \
 	 NCPoly/NCPolyGroebner.md \
-	 NCPoly/NCPolySOS.md \
-	 NCAlgebra/NCConvexity.md \
+	 NCPoly/NCGB.md \
+         MANUAL/SDPChapter.md \
 	 NCSDP/NCSDP.md \
 	 NCSDP/SDP.md \
 	 NCSDP/SDPFlat.md \
 	 NCSDP/SDPSylvester.md \
 	 NCSDP/PrimalDual.md \
          MANUAL/WorkInProgress.md \
+	 NCPoly/NCPolySOS.md \
 	 NCAlgebra/NCRational.md \
 	 NCAlgebra/NCRealization.md \
 	 MANUAL/Bibliography.md

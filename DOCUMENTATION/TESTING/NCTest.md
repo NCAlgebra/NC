@@ -1,5 +1,9 @@
 ## NCTest {#PackageNCTest}
 
+These are commands for automatically testing if our algorithms produce
+the correct answer. Problems and answers are stored under the
+directory `NC/TESTING`.
+
 Members are:
 
 * [NCTest](#NCTest)
@@ -38,7 +42,7 @@ For example:
 
     results = NCTestRun[{"NCCollect", "NCSylvester"}]
 	
-will run the test files "NCCollec.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
+will run the test files "NCCollect.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
 
 See also:
 [NCTest](#NCTest), 
