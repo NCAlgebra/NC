@@ -40,7 +40,11 @@ Begin[ "`Private`" ]
 
   Clear[NCPToNCSylvesterAux];
   NCPToNCSylvesterAux[poly_Association, var_] := Module[
-    {exp, coeff, left, right, leftBasis, rightBasis,
+    {exp, coeff, 
+     left, right, 
+     leftBasis, rightBasis,
+     leftContainsZero, rightContainsZero,
+     leftOffset, rightOffset,
      i, j, p, q, F},
 
     (* Quick return if independent of var *)
@@ -49,19 +53,30 @@ Begin[ "`Private`" ]
         Return[var -> {{},{},SparseArray[{}, {0, 0}]}];
     ];
 
-    (* Print["exp = ", exp]; *)
+    (* 
+    Print["var = ", var]; 
+    Print["exp = ", exp]; 
+    *)
 
     {coeff, left, right} = Transpose[exp];
     leftBasis = Union[Flatten[left]];
     rightBasis = Union[Flatten[right]];
 
-    (*                                   
+    (* left and right offset *) 
+    leftContainsZero = MemberQ[leftBasis, 0];
+    rightContainsZero = MemberQ[rightBasis, 0];
+      
+    (*      
     Print["coeff = ", coeff];
     Print["leftBasis = ", leftBasis];
     Print["rightBasis = ", rightBasis];
                                    
-    Print["left = ", left];
-    Print["right = ", right];
+    Print["left = ", Normal[left]];
+    Print["right = ", Normal[right]];
+
+    Print["leftContainsZero = ", leftContainsZero];
+    Print["rightContainsZero = ", rightContainsZero];
+    
     *)
 
     If [ MatrixQ[left[[1]]] || MatrixQ[right[[1]]]
@@ -79,10 +94,13 @@ Begin[ "`Private`" ]
 
          (* Determine indices *)
                       
-         i = r*(Map[Flatten[Map[(Position[leftBasis,#,1])&,#]]&,left,{2}]-2);
-         j = s*(Map[Flatten[Map[(Position[rightBasis,#,1])&,#]]&,right,{2}]-2);
+         leftOffset = If[leftContainsZero, 2, 1];
+         rightOffset = If[rightContainsZero, 2, 1];
+         
+         i = r*(Map[Flatten[Map[(Position[leftBasis,#,1])&,#]]&,left,{2}]-leftOffset);
+         j = s*(Map[Flatten[Map[(Position[rightBasis,#,1])&,#]]&,right,{2}]-rightOffset);
 
-         (* 
+         (*
          Print["i = ", i];
          Print["j = ", j];
          *)
@@ -96,8 +114,12 @@ Begin[ "`Private`" ]
          *)
          
          (* Drop 0 from basis *)
-         leftBasis = Rest[leftBasis];
-         rightBasis = Rest[rightBasis];
+         If[ leftContainsZero, 
+             leftBasis = Rest[leftBasis]; 
+         ];
+         If[ rightContainsZero,
+             rightBasis = Rest[rightBasis];
+         ];
          
         ,
          
@@ -361,7 +383,7 @@ Begin[ "`Private`" ]
   ];
 
   
-  (* NCSylvesterCollectOnVar *)
+  (* NCSylvesterCollectOnVars *)
   
   Clear[NCSylvesterGrowRepresentation];
   NCSylvesterGrowRepresentation[

@@ -205,12 +205,27 @@ Begin["`Private`"];
 
     (* Process relations for rationals *)
     relInvs = NCGrabFunctions[polys, inv];
+
+    (* Print["relInvs = ", relInvs]; *)
       
     If[ relInvs =!= {},
-
+        
         (* invs of letters in the order are special *)
-        varInvs = DeleteCases[Pick[vars, Map[inv,vars,{2}], 
-                              Alternatives @@ relInvs], tp[],{2}];
+        (* FIXED BUG: Pick fails due to structural incompatibility 
+        varInvs = DeleteCases[Pick[vars, 
+                                   Map[inv,vars, {2}], 
+                                   If[ Length[relInvs] > 1,
+                                       Alternatives @@ relInvs,
+                                       relInvs[[1]]
+                                   ]], tp[],{2}];
+        *)
+        
+        varInvs = DeleteCases[Pick[vars,
+                                  Map[MatchQ[#, If[ Length[relInvs] > 1,
+                                                    Alternatives @@ relInvs,
+                                                    relInvs[[1]] ]]&, 
+                                             Map[inv,vars, {2}]]], tp[],{2}];
+        
         If[ Flatten[varInvs] =!= {},
         
             varInvs = Map[inv, varInvs, {2}];
@@ -269,13 +284,13 @@ Begin["`Private`"];
             (* Append to rules *)
             ruleRev = Join[ruleRev, relRuleRatRev];
 
-            (* *)
+            (*
             Print["relInvs = ", relInvs];
             Print["relRatVars = ", relRatVars];
             Print["relRuleRat = ", relRuleRat];
             Print["relNewRels = ", relNewRels];
             Print["relRuleRatRev = ", relRuleRatRev];
-            (* *)
+            *)
             
         ];
         
@@ -336,7 +351,8 @@ Begin["`Private`"];
     ];
 
     (* Save current monomial order *)
-    SetMonomialOrder @@ labels;
+    (* SetMonomialOrder @@ labels; *)
+    $NCPolyInterfaceMonomialOrder = labels;
       
     (*
     Print["polys = ", polys];
