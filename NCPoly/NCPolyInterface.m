@@ -122,7 +122,11 @@ Begin["`Private`"];
       {NCPoly::NotPolynomial}
     ];
 
-    (* Print["factors = ", factors]; *)
+    (*
+    Print["factors = ", factors]; 
+    Print["vars = ", vars]; 
+    Print["opts = ", opts];
+    *)
       
     Return[NCPoly @@ Join[Transpose[factors], {vars}, opts]];
       

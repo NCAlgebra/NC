@@ -138,9 +138,15 @@ Begin["`Private`"];
      tps, tpVars, ruleTp, ruleTpRev},
 
     (* Initializa polys and vars *)
-    polys = p;
+    polys = Replace[p, a_Rule | a_Equal :> Subtract @@ a, {1}];
     vars = $NCPolyInterfaceMonomialOrder;
     symbols = DeleteCases[NCGrabSymbols[polys], _?CommutativeQ];
+
+    (*
+    Print["polys = ", polys];
+    Print["vars = ", vars];
+    Print["symbols = ", symbols];
+    *)
       
     (* Look for symbols in polys *)
     If[ Complement[symbols, Flatten[vars]] =!= {},
@@ -150,7 +156,8 @@ Begin["`Private`"];
     ];
       
     (* Look for tp and aj in relations *)
-    tps = NCGrabFunctions[polys, tp|aj];
+    tps = Union[NCGrabFunctions[vars, tp|aj],
+                NCGrabFunctions[polys, tp|aj]];
     tpVars = Complement[tps, Flatten[vars]][[All,1]];
 
     (*
@@ -180,10 +187,15 @@ Begin["`Private`"];
     ruleRev = {};
 
     (* Process monomial order for rationals *)
-    invs = NCGrabFunctions[vars, inv];
+    invs = Cases[vars, _inv, {2}];
+
+    (*
+    Print["vars = ", vars];
+    Print["invs = ", invs];
+    *)
       
     If[ invs =!= {},
-      
+
         (* Process invs *)
         {ratVars, newRels, ruleRat, ruleRev} = NCMakeGBAux[invs];
         
@@ -203,28 +215,21 @@ Begin["`Private`"];
         
     ];
 
-    (* Process relations for rationals *)
-    relInvs = NCGrabFunctions[polys, inv];
+    (* Process relations for rationals in polys and 
+       remaining relations in vars *)
+    relInvs = Union[NCGrabFunctions[polys, inv],
+                    NCGrabFunctions[vars, inv]];
 
     (* Print["relInvs = ", relInvs]; *)
       
     If[ relInvs =!= {},
         
-        (* invs of letters in the order are special *)
-        (* FIXED BUG: Pick fails due to structural incompatibility 
-        varInvs = DeleteCases[Pick[vars, 
-                                   Map[inv,vars, {2}], 
-                                   If[ Length[relInvs] > 1,
-                                       Alternatives @@ relInvs,
-                                       relInvs[[1]]
-                                   ]], tp[],{2}];
-        *)
-        
+        (* invs of letters in the order will be treated last *)
         varInvs = DeleteCases[Pick[vars,
-                                  Map[MatchQ[#, If[ Length[relInvs] > 1,
-                                                    Alternatives @@ relInvs,
-                                                    relInvs[[1]] ]]&, 
-                                             Map[inv,vars, {2}]]], tp[],{2}];
+                                   Map[MatchQ[#, If[ Length[relInvs] > 1,
+                                                     Alternatives @@ relInvs,
+                                                     relInvs[[1]] ]]&, 
+                                              Map[inv, vars, {2}]]], tp[], {2}];
         
         If[ Flatten[varInvs] =!= {},
         
@@ -325,9 +330,6 @@ Begin["`Private`"];
          
     ];
       
-    (* Clean up Rule and Equal *)
-    polys = Replace[polys, a_Rule | a_Equal :> Subtract @@ a, {1}];
-      
     (* Any other functions in polys? *)
     symbols = DeleteCases[NCGrabFunctions[polys], _?CommutativeQ];
     If[ symbols =!= {},
@@ -350,19 +352,24 @@ Begin["`Private`"];
         Message[NCMakeGB::CommutativeSymbols, symbols];
     ];
 
-    (* Save current monomial order *)
-    (* SetMonomialOrder @@ labels; *)
-    $NCPolyInterfaceMonomialOrder = labels;
-      
     (*
     Print["polys = ", polys];
     Print["vars = ", vars];
+    Print["labels = ", labels];
+    Print["rulesRev = ", ruleRev];
+    Print["$NCPolyInterfaceMonomialOrder = ", $NCPolyInterfaceMonomialOrder];
+    (* Check conversion *)
+    Print["ZEROS = ", Replace[p, a_Rule | a_Equal :> Subtract @@ a, {1}] - DeleteCases[polys[[1;;Length[p]]] //. ruleRev, 0]];
+    
     *)
-
+      
     (* Convert to NCPoly *)
     polys = NCToNCPoly[polys, vars];
       
-    (* Print["polys = ", NCPolyDisplay[polys, vars]]; *)
+    (*
+    Print["polys = ", polys]; 
+    Print["polys = ", NCPolyDisplay[polys, vars]]; 
+    *)
       
     (* Calculate GB *)
     basis = Sort[ 
@@ -418,7 +425,7 @@ Begin["`Private`"];
     *)
 
     (* Equations solved for *)
-    solved = Cases[gb, Rule[s_Symbol, a_] -> (s -> a)];
+    solved = Cases[gb, Except[Rule[s_NonCommutativeMultiply, a_]]];
     gb = Complement[gb, solved];
 
     (* Equations involving unknowns *)

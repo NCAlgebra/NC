@@ -399,7 +399,7 @@ Begin["`Private`"];
 
   NCMonomialToDigits[monomial_List, var_List] :=
     NCMonomialToDigitsAux[ 
-      Map[Flatten[Position[var, #]-1]&, monomial]
+      Map[Flatten[Position[var, #, {1}]-1]&, monomial]
     ];
     
   (* Auxiliary routines for pattern matching of monomials *)

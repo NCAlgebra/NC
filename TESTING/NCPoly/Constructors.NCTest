@@ -407,6 +407,37 @@ Block[
   NCTest[NCPolyNumberOfVariables[p2], 3];
   NCTest[NCPolyNumberOfTerms[p2], 7];
 
+  (* Same letter *)
+
+  Clear[x];
+  vars = {{Subscript[x,1], x, Subscript[x,2]}};
+
+  coeff1 = {1, 2, 3, -1, -2, -3, 1/2};
+  mon1 = {{}, {Subscript[x,1]}, {Subscript[x,2]}, {Subscript[x,1], x}, {Subscript[x,1], x, Subscript[x,1], Subscript[x,1]}, {Subscript[x,2], Subscript[x,1]}, {Subscript[x,2], Subscript[x,2], Subscript[x,2], Subscript[x,2]}};
+  p1 = NCPoly[coeff1, mon1, vars];
+
+  NCTest[NCPolyGetCoefficients[p1], {1, 2, 3, -1, -3, -2, 1/2}];
+  NCTest[NCPolyDegree[p1], 4];
+  NCTest[NCPolyGetIntegers[p1], \
+       {{0, 0}, {1, 0}, {1, 2}, {2, 1}, {2, 6}, {4, 9}, {4, 80}}];
+  NCTest[NCPolyGetDigits[p1], \
+       {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
+  NCTest[NCPolyNumberOfVariables[p1], 3];
+  NCTest[NCPolyNumberOfTerms[p1], 7];
+
+  coeff2 = {1, 0, 2, 3, -1, -2, -3, 0, 1/2};
+  mon2 = {{}, {Subscript[x,1],Subscript[x,1]}, {Subscript[x,1]}, {Subscript[x,2]}, {Subscript[x,1], x}, {Subscript[x,1], x, Subscript[x,1], Subscript[x,1]}, {Subscript[x,2], Subscript[x,1]}, {x,Subscript[x,2]}, {Subscript[x,2], Subscript[x,2], Subscript[x,2], Subscript[x,2]}};
+  p2 = NCPoly[coeff2, mon2, vars];
+
+  NCTest[NCPolyGetCoefficients[p2], {1, 2, 3, -1, -3, -2, 1/2}];
+  NCTest[NCPolyDegree[p2], 4];
+  NCTest[NCPolyGetIntegers[p2], \
+       {{0, 0}, {1, 0}, {1, 2}, {2, 1}, {2, 6}, {4, 9}, {4, 80}}];
+  NCTest[NCPolyGetDigits[p2], \
+       {{}, {0}, {2}, {0, 1}, {2, 0}, {0, 1, 0, 0}, {2, 2, 2, 2}}];
+  NCTest[NCPolyNumberOfVariables[p2], 3];
+  NCTest[NCPolyNumberOfTerms[p2], 7];
+
   (* Functional coefficients *)
 
   Clear[x, y, z];

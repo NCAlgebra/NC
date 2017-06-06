@@ -119,7 +119,9 @@ Begin["`Private`"];
                  SelfAdjointPairs -> (ajVars /. varRule)];
     ];
              
-    (* 
+    (*
+    Print["varnames = ", varnames];
+    Print["monomials = ", monomials];
     Print["tpVars = ", tpVars];
     Print["ajVars = ", ajVars];
     Print["varRule = ", varRule];
@@ -135,7 +137,7 @@ Begin["`Private`"];
               Merge[
                 Thread[ 
                   NCFromDigits[
-                    Map[ NCMonomialToDigits[#, varnames]&, monomials]
+                    Map[NCMonomialToDigits[#, varnames]&, monomials]
                    ,vars
                   ] ->  coeff
                 ]
