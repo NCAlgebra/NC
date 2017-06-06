@@ -13,6 +13,7 @@ Get["SmallBasis.m"];
 Get["OutputArrayForTeX.m"];
 (* MAURICIO - BEGIN *)
 (* Get["TeXFile.m"]; *)
+Get["NCTeX.m"];
 (* MAURICIO - END *)
 
 shrinkIdealIterOne = 3;

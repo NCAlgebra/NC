@@ -41,9 +41,11 @@ CommuteEverything::Warning = "Commute everything set the variable(s) \
 noncommutative.";
 
 TDefined::Warning = "Symbol T has definitions associated with it \
-that will be cleared by NCAlgebra."
+that will be cleared by NCAlgebra.";
 
-SetCommutingOperators::AlreadyDefined = "Symbols `1` and `2` were already defined commutative. Replacing existing rule."
+SetNonCommutative::Protected = "WARNING: Symbol `1` is protected. You should seriously consider not setting it as noncommutative.";
+
+SetCommutingOperators::AlreadyDefined = "Symbols `1` and `2` were already defined commutative. Replacing existing rule.";
 
 Get["NonCommutativeMultiply.usage"];
 
@@ -105,7 +107,21 @@ Begin[ "`Private`" ]
   (*  SetCommutative and SetNonCommutative *)
 
   Clear[DoSetNonCommutative];
-  DoSetNonCommutative[x_Symbol] := (x /: HoldPattern[CommutativeQ[x]] = False);
+  DoSetNonCommutative[x_Symbol] := 
+    Quiet[
+      Check[
+         (x /: HoldPattern[CommutativeQ[x]] = False);
+        ,
+         Message[SetNonCommutative::Protected, x];
+         Unprotect[x];
+         (x /: HoldPattern[CommutativeQ[x]] = False);
+         Protect[x];
+        , 
+         TagSet::write
+      ];
+     , 
+      TagSet::write
+    ];
   DoSetNonCommutative[x_List] := SetNonCommutative /@ x;
   DoSetNonCommutative[Subscript[x_Symbol, y__]] := 
     Message[CommutativeQ::NonCommutativeSubscript, x, y];

@@ -59,7 +59,9 @@ END OF BILL's MOVING
    LOAD NCAlgebra type files 
 *)
 
-Get["NCGBNCAlgebra.m"];
+(* Get["NCGBNCAlgebra.m"]; *)
+Get["NCAlgebra`"];
+   
 Get["NCMPolynomialQ.m"];
 
 (*
@@ -91,7 +93,10 @@ Get["NCGBMaster.m"];
 *)
 
 If[Head[$NC$Binary$Dir$]=!= String
-  , $NC$Binary$Dir$ = StringJoin[$NCDir$,"NCGB/Binary/"];
+  , 
+   (* $NC$Binary$Dir$ = StringJoin[$NCDir$,"NCGB/Binary/"]; *)
+   $NC$Binary$Dir$ = StringJoin[DirectoryName[FindFile["NC`"]],
+                                "NCGB/Binary/"];
 ];
 (* 
    If your binary is NOT NAMED p9c, then set

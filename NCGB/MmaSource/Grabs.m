@@ -45,11 +45,13 @@ GrabVariable::usage =
         GrabVariable[LazyPower[x,m]] gives x. \n \
         GrabVariable[x] = x.";
 
+Remove[NCDeprecated`GrabVariables];
 Clear[GrabVariables];
 
 GrabVariables::usage = 
        "Find all symbols in an expression.";
 
+Remove[NCDeprecated`GrabIndeterminants];
 Clear[GrabIndeterminants];
 
 GrabIndeterminants::usage =

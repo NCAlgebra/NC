@@ -25,7 +25,7 @@ Options[NCTeX] = {
   TeXProcessor -> TeXForm,
   PDFViewer -> "",
   LaTeXCommand -> "latex",
-  PDFLaTeXCommand -> Null,
+  PDFLaTeXCommand -> "pdflatex",
   DVIPSCommand -> "dvips",
   PS2PDFCommand -> "epstopdf"
 };

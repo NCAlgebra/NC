@@ -35,10 +35,10 @@ NCCollectOnVariables::usage =
 	If aListOfVariables is not specified, WhatIsSetOfIndeterminants[1] 
 	is used, but in this case the Options cannot be specified.";
 
-Clear[NCCoefficientList];
+Clear[NCCOVCoefficientList];
 
-NCCoefficientList::usage = 
-  "NCCoefficientList[aPolynomial_, aListOfVariables_] gives a list of 
+NCCOVCoefficientList::usage = 
+  "NCCOVCoefficientList[aPolynomial_, aListOfVariables_] gives a list of 
 	the left coefficients of products of the variables in 
 	aListOfVariables which are found in aPolynomial and 
 	also a list of the right coefficients of the same variables.";
@@ -292,7 +292,7 @@ Begin["`Private`"];
   (*********************************************************************)
 
 
-  NCCoefficientList[poly_, listofvars_] := NCCollectOnVariables[poly, listofvars, Output->LeftsAndRights];
+  NCCOVCoefficientList[poly_, listofvars_] := NCCollectOnVariables[poly, listofvars, Output->LeftsAndRights];
 
 End[];
 EndPackage[]

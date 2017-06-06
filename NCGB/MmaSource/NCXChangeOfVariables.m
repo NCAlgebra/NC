@@ -135,7 +135,7 @@ ElimAllButQ = EliminateAllButQ
 	(*Return a list of pairs {expression, possible motivated unknown} *)
 NCXAllPossibleChangeOfVariables[list_] := Module[{},Select[
     Flatten[Array[Function[i,
-	Map[({list[[i]], #})&, Union[Flatten[NCCoefficientList[list[[i]], 
+	Map[({list[[i]], #})&, Union[Flatten[NCCOVCoefficientList[list[[i]], 
 		WhatIsSetOfIndeterminants[1]]]]]],
     Length[list]],1], Not[IntegerQ[#[[2]]]]&]]
 
