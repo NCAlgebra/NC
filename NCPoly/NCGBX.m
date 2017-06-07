@@ -35,6 +35,16 @@ Options[NCMakeGB] = {
   ReturnRules -> True
 };
 
+Options[NCProcess] = {
+  MaxDigest -> 2,
+  InfiniteDigest -> True,
+  PrintReport -> True,
+  GridOptions -> {
+      Alignment -> {{Right, Left}}, 
+      Background -> {None, {{LightGray, LightYellow}} }
+  }
+};
+
 Begin["`Private`"];
 
   Clear[$NCPolyInterfaceMonomialOrder];
@@ -405,13 +415,50 @@ Begin["`Private`"];
 
   NCMakeGB[p_, iter_Integer:4, opts___Rule] := 
     NCMakeGB[{p}, iter, opts];
-      
+
   (* NCProcess *)
+
+  PrintEntry[n_] := Map[ToString[#] <> "." &, Range[n]];
+  
+  PrintDigestAux[index_, gb_, unsolved_] := (
+
+    (* Header *)
+    Print["+ in unknowns ", index, ":"];
+
+    (* Print relations *)
+    Print[Grid[Transpose[{PrintEntry[Length[unsolved[index]]], 
+                          Part[gb, unsolved[index]]}],
+               Sequence @@ (GridOptions /. Options[NCProcess, GridOptions])]];
+  );
+
+  PrintDigest[digest_, gb_, unsolved_, i_] := (
+
+    (* Quick Return *)
+    If[ digest[i] === {}, Return[] ];
+      
+    (* Header *)
+    Print["> The following relations involve " 
+          <> ToString[i] <> " unknown" <> If[i > 1, "s:", ":"]];
+      
+    (* Digest per group *)
+    Map[PrintDigestAux[#, gb, unsolved]&, digest[i]];
+                   
+  );
+  
   NCProcess[p_List, iter_Integer:4, opts___Rule] := Module[
     {gb, order, knowns, unknowns,
      solved, unsolved, count, digest,
-     printReport = True},
+     printReport, maxDigest, infiniteDigest, gridOptions,
+     notSolved
+     },
       
+    (* NCProcessOptions *)
+    printReport = PrintReport /. {opts} /. Options[NCProcess, PrintReport];
+    maxDigest = MaxDigest /. {opts} /. Options[NCProcess, MaxDigest];
+    infiniteDigest = InfiniteDigest /. {opts} /. Options[NCProcess, InfiniteDigest];
+    gridOptions = Sequence @@ (GridOptions /. {opts} /. Options[NCProcess, GridOptions]);
+      
+    (* Call NCMakeGB *)
     gb = NCMakeGB[p, iter, opts];
       
     (* Retrieve order *)
@@ -431,19 +478,25 @@ Begin["`Private`"];
     (* Equations involving unknowns *)
     unsolved = Map[Union[Cases[#, Alternatives @@ unknowns, 
                                {0, Infinity}]]&, gb];
-    count = Map[Length, unsolved];
+    unsolved = KeySort[Merge[MapIndexed[Rule[#1, #2[[1]]]&, unsolved], Join]];
+    count = Map[Length, Keys[unsolved]];
 
-    (*  
+    (* Digest up to maxDigest *)
+    digest = <|Table[i -> Pick[Keys[unsolved], count, i], {i,0,maxDigest}]|>;
+    
+    (* Digest up to Infinity *)
+    If[ infiniteDigest, 
+        AppendTo[digest, 
+                 <| Infinity -> Pick[Keys[unsolved], 
+                                     count, _?(#>maxDigest&)] |>];
+    ];
+
+    (*
     Print["gb = ", gb];
     Print["unsolved = ", unsolved];
     Print["count = ", count];
+    Print["digest = ", digest];
     *)
-      
-    digest ={solved, 
-             {0,Pick[gb, count, 0]}, 
-             {1,Pick[gb, count, 1]}, 
-             {2,Pick[gb, count, 2]},
-             {Infinity,Pick[gb, count, _?(# > 2&)]}};
 
     If[ printReport, 
         Print["* * * * * * * * * * * * * * * *"];
@@ -451,19 +504,46 @@ Begin["`Private`"];
         Print["* * * * * * * * * * * * * * * *"];
         Print["> Current order:"];
         Print[PrintMonomialOrder[]];
-        Print["> The following variables have been solved for:"];
-        Print[ColumnForm[digest[[1]]]];
-        Print["> The following relations do not involve any unknowns:"];
-        Print[ColumnForm[digest[[2,2]]]];
-        Print["> The following relations involve 1 unknown:"];
-        Print[ColumnForm[digest[[3,2]]]];
-        Print["> The following relations involve 2 unknowns:"];
-        Print[ColumnForm[digest[[4,2]]]];
-        Print["> The following relations involve more than 2 unknowns:"];
-        Print[ColumnForm[digest[[5,2]]]];
+        
+        (* Solved variables *)
+        If[ solved =!= {},
+            Print["> The following variables have been solved for:"];
+            Print[Grid[Transpose[{PrintEntry[Length[solved]], 
+                                  solved}],
+                       gridOptions,
+                       Alignment -> {{Right, Left}}]];
+        ];
+        
+        (* Unsolved variables *)
+        notSolved = Complement[Flatten[order], Map[First, solved]];
+        If[ notSolved =!= {},
+            Print["> The following variables have not been solved for:"];
+            Print[Row[notSolved, ","]];
+        ];
+        
+        (* No unknowns *)
+        If[ digest[0] =!= {},
+            Print["> The following relations do not involve any unknowns:"];
+            Map[PrintDigestAux[#, gb, unsolved]&, digest[0]];
+        ]
+        
+        (* Less than MaxDigest *)
+        Table[PrintDigest[digest, gb, unsolved, i], {i,0,maxDigest}];
+        
+        (* Nore than MaxDigest *)
+        If[ infiniteDigest && digest[Infinity] =!= {},
+            Print["> The following relations involve more than ",
+                  maxDigest, " unknowns:"];
+            Map[PrintDigestAux[#, gb, unsolved]&, digest[Infinity]];
+        ];
     ];
       
-    Return[digest];
+      
+    (* digest *)
+    Return[
+      Join[<|"Solved" -> solved |>,
+           Map[AssociationMap[gb[[unsolved[#]]]&, #]&, digest] ]
+    ];
       
   ];
                               
