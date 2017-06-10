@@ -158,9 +158,11 @@ NCPolyGroebnerSimplifyObstructions[OBSs_List, TG_List, m_Integer, verboseLevel_I
 
 (* Add to basis *)
 Clear[AddToBasis];
-AddToBasis[g_, tg_, obs_, h_, 
+AddToBasis[g_, tg_, obs_, 
+           gnodes_, gtree_,
+           h_, ij_,
            labels_, simplifyOBS_, verboseLevel_] := Module[
-  {G,TG,OBS,m},
+  {G,TG,OBS,m,GNodes,GTree,node},
          
   (* Normalize and add h to G, TG *)
   G = Append[g, NCPolyNormalize[h]];
@@ -170,7 +172,20 @@ AddToBasis[g_, tg_, obs_, h_,
   If[ verboseLevel >= 3,
       Print["* S-Polynomial added to current basis"];
   ];
-
+               
+  (* Update tree *)
+  node = gnodes[[-1]] + 1;
+  GNodes = Append[gnodes, node];
+  GTree = VertexAdd[gtree, node];
+  GTree = EdgeAdd[GTree, Thread[ij -> node]];
+               
+  If[ verboseLevel >= 3,
+      Print["* GTree updated"];
+      If[ verboseLevel >= 4,
+          Print["* GTree = ", GTree];
+      ];
+  ];
+               
   If[ simplifyOBS,
     If[ verboseLevel >= 3,
         Print["* Simplify current set of obstructions"];
@@ -190,7 +205,7 @@ AddToBasis[g_, tg_, obs_, h_,
       Print["> OBS = ", Map[ColumnForm,{OBS[[All,1]], Map[NCPolyDisplay[#,labels]&, Map[Part[#, 2]&, OBS], {3}], OBS[[All,3]]}]];
   ];
     
-  Return[{G,TG,OBS,m}];
+  Return[{G,TG,OBS,m,GNodes,GTree}];
                
 ];
         
@@ -226,7 +241,7 @@ NCPolyGroebner[{}, iterations_Integer, opts___Rule] := {};
 
 NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   { i, j, k, kk, l, m, mm, n,
-    G, TG, 
+    G, TG,
     OBS = {}, ij, OBSij, 
     q, h,  
     reducible, ii, Gii, index,
@@ -234,7 +249,8 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
     sortFirst, simplifyOBS, sortBasis,
     printObstructions, printBasis, printSPolynomials, 
     labels, sortObstructions, reduceBasis, cleanUpBasis,
-    verboseLevel },
+    verboseLevel, 
+    GTree, GNodes },
 
   (* Process Options *)
   { simplifyOBS, sortBasis,
@@ -336,6 +352,17 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
   If[ printBasis,
       Print["> G(0) = ", ColumnForm[NCPolyDisplay[G, labels]]];
+  ];
+      
+  (* Initialize G tree *)
+  If[ verboseLevel >= 2,
+      Print["* Initializing G tree"];
+  ];
+  GNodes = Range[m];
+  GTree = Graph[Thread[0 -> GNodes], VertexLabels->"Name"];
+      
+  If[ verboseLevel >= 3,
+      Print["> GTree = ", GTree];
   ];
       
   If[ verboseLevel >= 2,
@@ -478,8 +505,10 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
          ];
              
          (* Add h to basis *)
-         {G,TG,OBS,m} = AddToBasis[G,TG,OBS,h,labels,
-                                   simplifyOBS,verboseLevel];
+         {G,TG,OBS,m,GNodes,GTree} = AddToBasis[G,TG,OBS,
+                                                GNodes, GTree,
+                                                h,ij,labels,
+                                                simplifyOBS,verboseLevel];
          
          If[ reduceBasis,
              
@@ -518,6 +547,11 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                     m -= 1;
                     mm -= 1;
                     
+                    (* Remove element ii from GTree *)
+                    edges = EdgeList[NeighborhoodGraph[GTree, GNodes[[ii]]]];
+                    GTree = VertexDelete[GTree, GNodes[[ii]]];
+                    GNodes = Delete[GNodes, ii];
+                    
                     If[ PossibleZeroQ[Gii],
                         
                         (* Completely reduced, remove *)
@@ -546,8 +580,10 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                         reducible = Union[reducible, mreducible];
                         
                         (* Add Gii back basis *)
-                        {G,TG,OBS,m} = AddToBasis[G,TG,OBS,Gii,labels,
-                                                  simplifyOBS,verboseLevel];
+                        {G,TG,OBS,m,GNodes,GTree} = AddToBasis[G,TG,OBS,
+                                                               GNodes,GTree,
+                                                               Gii,ij,labels,
+                                                               simplifyOBS,verboseLevel];
 
                     ];
                     
