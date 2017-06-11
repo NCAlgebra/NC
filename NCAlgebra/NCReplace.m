@@ -120,9 +120,9 @@ Begin["`Private`"]
      
   Clear[NCMatrixReplaceReverseFlatPlusRules];
   NCMatrixReplaceReverseFlatPlusRules = {
+      inv -> NCInverse,
       FlatNCPlus[x_?MatrixQ,y_?MatrixQ] :> 
-        Plus @@ {x,y},
-      inv -> NCInverse
+        Plus @@ {x,y}
   };
       
   Clear[NCMatrixReplaceFlatRules];
@@ -168,12 +168,18 @@ Begin["`Private`"]
              /. NCMatrixReplaceFlatRules))
                /. NCMatrixReplaceReverseFlatRules] /. FlatNCPlus -> Plus;
 
+  NCMatrixReplaceAll[expr_?MatrixQ, rule_] :=
+    ArrayFlatten[Map[NCMatrixReplaceAll[#, rule]&, expr, {2}]];
+  
   NCMatrixReplaceRepeated[expr_, rule_] := NCMatrixExpand[
       (ReplaceRepeated @@ 
             ({expr, rule} 
              /. NCMatrixReplaceFlatRules))
                /. NCMatrixReplaceReverseFlatRules] /. FlatNCPlus -> Plus;
 
+  NCMatrixReplaceRepeated[expr_?MatrixQ, rule_] :=
+    ArrayFlatten[Map[NCMatrixReplaceRepeated[#, rule]&, expr, {2}]];
+    
   (* Convenience methods *)
       
   NCReplaceSymmetric[expr_, rule_, args___] := 

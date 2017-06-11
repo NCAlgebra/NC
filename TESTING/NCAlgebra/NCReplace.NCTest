@@ -233,6 +233,13 @@ Module[
      expr = NCMatrixReplaceRepeated[inv[z], rule];
      NCTest[expr, answer];
 
+     answer = ArrayFlatten[{{NCDot[m1, m2] + m2, tp[m2] - NCDot[m2,m1]},
+                            {tp[m2], NCDot[m1,m2,tp[m1]] - m2}}];
+     expr = NCMatrixReplaceAll[{{x ** y + y, tp[y] - y ** x}, {tp[y], x ** y ** tp[x] - y}}, rule];
+     NCTest[expr, answer];
+     expr = NCMatrixReplaceRepeated[{{x ** y + y, tp[y] - y ** x}, {tp[y], x ** y ** tp[x] - y}}, rule];
+     NCTest[expr, answer];
+
      (* Bill's substitution *)
      expr = 2 a ** b + c;
      answer = 2 a ** b + c;

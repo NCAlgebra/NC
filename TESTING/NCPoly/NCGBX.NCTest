@@ -173,12 +173,10 @@ Block[
   NCTestCheck[NCMakeGB[{a,b,inv[a]}, VerboseLevel -> 0],
 	      {1 -> 0},
               NCMakeGB::AdditionalRelations];
-  Print["---"];
 
   NCTestCheck[NCMakeGB[{a,b,kinv[a]}],
 	      $Failed,
               NCMakeGB::UnknownFunction];
-  Print["---"];
 
   (* TESTING NCMakeGB -- END *)
 

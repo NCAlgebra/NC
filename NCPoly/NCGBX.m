@@ -32,7 +32,8 @@ NCMakeGB::UnknownFunction = "Functions `1` cannot yet be understood by NCMakeGB.
 
 Clear[ReturnRules];
 Options[NCMakeGB] = {
-  ReturnRules -> True
+  ReturnRules -> True,
+  ReturnGraph -> False
 };
 
 Options[NCProcess] = {
@@ -140,7 +141,7 @@ Begin["`Private`"];
   ];
 
   NCMakeGB[p_List, iter_Integer:4, opts___Rule] := Module[
-    {polys, vars, symbols, basis, rules, labels,
+    {polys, vars, symbols, basis, graph, rules, labels,
      invs, 
      ratVars, ruleRat, newRels, ruleRev,
      relInvs, ii, varInvs,
@@ -382,12 +383,8 @@ Begin["`Private`"];
     *)
       
     (* Calculate GB *)
-    basis = Sort[ 
-              NCPolyReduce[ 
-                NCPolyGroebner[polys, iter, opts,
-                               Labels -> labels],
-                True]
-            ];
+    {basis,graph} = NCPolyGroebner[polys, iter, opts, Labels -> labels];
+    basis = Sort[NCPolyReduce[basis, True]];
 
     (* Convert to rules *)
     rules = NCPolyToRule[basis];
@@ -406,11 +403,19 @@ Begin["`Private`"];
     ];
 
     (* Return polys? *)
-    If[ Not[ReturnRules /. {opts} /. Options[ReturnRules]],
+    If[ Not[ReturnRules /. {opts} /. Options[NCMakeGB, ReturnRules]],
         polys = polys /. Rule -> Subtract
     ];
-      
-    Return[polys];
+
+    Return[
+      If[ (ReturnGraph /. {opts} /. Options[NCMakeGB, ReturnGraph])
+         ,
+          {polys,graph}
+         ,
+          polys
+      ]
+    ];
+
   ];
 
   NCMakeGB[p_, iter_Integer:4, opts___Rule] := 
@@ -423,7 +428,9 @@ Begin["`Private`"];
   PrintDigestAux[index_, gb_, unsolved_] := (
 
     (* Header *)
-    Print["+ in unknowns ", index, ":"];
+    If[ index =!= {},
+        Print["+ in unknowns ", index, ":"];
+    ];
 
     (* Print relations *)
     Print[Grid[Transpose[{PrintEntry[Length[unsolved[index]]], 
@@ -528,7 +535,7 @@ Begin["`Private`"];
         ]
         
         (* Less than MaxDigest *)
-        Table[PrintDigest[digest, gb, unsolved, i], {i,0,maxDigest}];
+        Table[PrintDigest[digest, gb, unsolved, i], {i,1,maxDigest}];
         
         (* Nore than MaxDigest *)
         If[ infiniteDigest && digest[Infinity] =!= {},
