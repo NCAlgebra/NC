@@ -182,7 +182,10 @@ AddToBasis[g_, tg_, obs_,
   If[ verboseLevel >= 3,
       Print["* Added node to GTree"];
       If[ verboseLevel >= 4,
-          Print["* GTree = ", Graph[GTree, VertexLabels -> "Name"]];
+          Print["* GTree = ", 
+                Graph[VertexReplace[GTree, 
+                                    Thread[GNodes -> NCPolyDisplay[G]]], 
+                      VertexLabels -> "Name"]];
           Print["* GNodes = ", GNodes];
           Print["* Acyclic? = ", AcyclicGraphQ[GTree]];
           If[ verboseLevel >= 5,
@@ -260,6 +263,10 @@ DoReduceBasis[{g__NCPoly},
   If[ m > 1,
     For [ii = 1, ii <= m, ii++, 
 
+      If[ verboseLevel >= 3,
+          Print["* Cleaning up ", ii , "th basis entry"];
+      ];
+         
       rii = r[[ii]];
       {ri, ij} = ReducePolynomial[Delete[r, ii], rii,
                                   symbolicCoefficients,
@@ -310,6 +317,10 @@ DoReduceBasis[{g__NCPoly},
            
            (* partially reduced *)
 
+           If[ verboseLevel >= 4,
+               Print["* Element ", ii , " can be partially reduced"];
+           ];
+           
            (* Insert remainder on graph *)
            AppendTo[GNodes, m];
            GTree = VertexAdd[GTree, m];
@@ -323,6 +334,10 @@ DoReduceBasis[{g__NCPoly},
            
            (* Completely reduced *)
 
+           If[ verboseLevel >= 4,
+               Print["* Element ", ii , " can be fully reduced"];
+           ];
+           
            (* Remove from basis *)
            r = Delete[r, ii];
            ii--; m--;
@@ -715,8 +730,10 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                         If[ verboseLevel >= 3,
                             Print["* Removed from GTree"];
                             If[ verboseLevel >= 4,
-                                Print["* GTree = ", Graph[GTree,
-                                                      VertexLabels -> "Name"]];
+                                Print["* GTree = ", 
+                                         Graph[VertexReplace[GTree, 
+                                           Thread[GNodes -> NCPolyDisplay[G]]], 
+                                           VertexLabels -> "Name"]];
                                 Print["* GNodes = ", GNodes];
                                 Print["* Acyclic? = ", AcyclicGraphQ[GTree]];
                             ];
@@ -754,8 +771,10 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                         If[ verboseLevel >= 3,
                             Print["* Replaced at GTree"];
                             If[ verboseLevel >= 4,
-                                Print["* GTree = ", Graph[GTree, 
-                                                      VertexLabels -> "Name"]];
+                                Print["* GTree = ", 
+                                         Graph[VertexReplace[GTree, 
+                                           Thread[GNodes -> NCPolyDisplay[G]]], 
+                                           VertexLabels -> "Name"]];
                                 Print["* GNodes = ", GNodes];
                                 Print["* Acyclic? = ", AcyclicGraphQ[GTree]];
                             ];
@@ -828,7 +847,8 @@ NCPolyRemoveRedundant[{basis_, graph_},
                           
   subgraph = Subgraph[graph, 
                       Pick[VertexList[graph], 
-                           VertexInDegree[graph], _?(# <= OptionValue[RedundantDistance] &)]];
+                           VertexInDegree[graph], 
+                           _?(# <= OptionValue[RedundantDistance] &)]];
   subbasis = basis[[VertexList[subgraph, Except[0]]]];
                           
   Return[{subbasis, subgraph}];
