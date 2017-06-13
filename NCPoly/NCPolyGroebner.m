@@ -175,10 +175,9 @@ AddToBasis[g_, tg_, obs_,
   ];
                
   (* Update tree *)
-  node = m;
-  GNodes = Append[gnodes, node];
-  GTree = VertexAdd[gtree, node];
-  GTree = EdgeAdd[GTree, Thread[Union[ij] -> node]];
+  GNodes = Append[gnodes, m];
+  GTree = VertexAdd[gtree, m];
+  GTree = EdgeAdd[GTree, Thread[Union[ij] -> m]];
                
   If[ verboseLevel >= 3,
       Print["* Added node to GTree"];
@@ -215,16 +214,17 @@ AddToBasis[g_, tg_, obs_,
                
 ];
         
-Clear[ReduceSPolynomial];
-ReduceSPolynomial[G_,H_,labels_,
-                  symbolicCoefficients_,verboseLevel_] := Module[
+Clear[ReducePolynomial];
+ReducePolynomial[G_,H_,labels_,
+                 symbolicCoefficients_, 
+                 verboseLevel_, complete_:False] := Module[
   {q,h = H,ij = {}},
 
   q = {1};
   While[ And[ h =!= 0, Flatten[q] =!= {}], 
 
          (* Reduce *)
-         {q, h} = NCPolyReduce[h, G];
+         {q, h} = NCPolyReduce[h, G, complete];
          
          (* Collect contributions *)
          If[ q =!= {}, ij = Union[ij, Part[q, All, 2]] ];
@@ -246,7 +246,103 @@ ReduceSPolynomial[G_,H_,labels_,
   Return[{h, ij}];
 ];
 
+Clear[DoReduceBasis];
+DoReduceBasis[{g__NCPoly}, 
+              graph_, gnodes_,
+              symbolicCoefficients_, 
+              verboseLevel_, 
+              complete_:False] := Block[
+  { r = {g}, GTree = graph, GNodes = gnodes,
+    m, ri, rii, ii, ij, modified = False, 
+    index, rule },
 
+  m = Length[r];
+  If[ m > 1,
+    For [ii = 1, ii <= m, ii++, 
+
+      rii = r[[ii]];
+      {ri, ij} = ReducePolynomial[Delete[r, ii], rii,
+                                  symbolicCoefficients,
+                                  verboseLevel, 
+                                  complete];
+
+      (* Continue if nothing changed... *)
+      If [ ri === rii,
+           Continue[];
+      ];
+         
+      (* Build reduced index *)
+      index = Insert[Range[m-1], 0, ii];
+
+      (* Make node ii be -1 and adjust other nodes *)
+      rule = Append[
+        Thread[Delete[GNodes, ii] -> Delete[index, ii]],
+        GNodes[[ii]] -> -1
+      ];
+      GTree = VertexReplace[GTree, rule];
+
+      (* Replace edges containing -1 
+         by edges containing ij *)
+      GTree = EdgeAdd[GTree, 
+        Complement[
+          Flatten[EdgeList[GTree, 
+                           DirectedEdge[-1, 
+                                        Except[Alternatives @@ ij]]]
+                             /. Map[List, Thread[-1 -> ij]]]
+         ,
+          EdgeList[GTree, DirectedEdge[Alternatives @@ ij, _]]
+        ]
+      ];
+                    
+      (* Add node 0 to ij? *)
+      If[ EdgeQ[GTree, 0 -> -1],
+          If[ verboseLevel >= 3,
+              Print["* Node contains 0"];
+          ];
+          AppendTo[ij, 0];
+      ];
+         
+      (* Remove element -1 from GTree *)
+      GTree = VertexDelete[GTree, -1];
+      GNodes = Delete[index, ii];
+         
+      If [ ri =!= 0,
+           
+           (* partially reduced *)
+
+           (* Insert remainder on graph *)
+           AppendTo[GNodes, m];
+           GTree = VertexAdd[GTree, m];
+           GTree = EdgeAdd[GTree, Thread[ij -> m]];
+           
+           (* Insert remainder on basis *)
+           Part[r, ii] = ri;
+           modified = True;
+           
+          ,
+           
+           (* Completely reduced *)
+
+           (* Remove from basis *)
+           r = Delete[r, ii];
+           ii--; m--;
+           If[ m <= 1, Break[]; ];
+
+      ];
+    ];
+  ];
+
+  Return[ 
+    If [ modified
+        , 
+         DoReduceBasis[r, GTree, GNodes, 
+                       symbolicCoefficients, verboseLevel, complete]
+        , 
+         {r, GTree}
+    ]
+  ];
+
+];
 
 (* Groebner Basis Algortihm *)
 
@@ -492,8 +588,8 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
          ];
 
          (* Reduce S-Polynomial *)
-         {h,hij} = ReduceSPolynomial[G,h,labels,
-                                     symbolicCoefficients,verboseLevel];
+         {h,hij} = ReducePolynomial[G,h,labels,
+                                    symbolicCoefficients,verboseLevel];
 
          (* Merge contributions *)
          ij = Union[ij, hij];
@@ -546,8 +642,8 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                     ];
 
                     (* Reduce candidate *)
-                    {Gii,ij} = ReduceSPolynomial[Delete[G,ii],G[[ii]],labels,
-                                                 symbolicCoefficients,verboseLevel];
+                    {Gii,ij} = ReducePolynomial[Delete[G,ii],G[[ii]],labels,
+                                                symbolicCoefficients,verboseLevel];
 
                     (* Remove obstructions involving G[ii] *)
                     OBS = Delete[OBS,
@@ -574,8 +670,25 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                            ];
                     GTree = VertexReplace[GTree, rule];
 
+                    (* Replace edges containing -1 
+                       by edges containing ij *)
+                    GTree = EdgeAdd[GTree, 
+                      Complement[
+                         Flatten[EdgeList[GTree, 
+                                          DirectedEdge[-1, 
+                                            Except[Alternatives @@ ij]]]
+                                   /. Map[List, Thread[-1 -> ij]]]
+                        ,
+                         EdgeList[GTree, 
+                                  DirectedEdge[Alternatives @@ ij, _]]
+                      ]
+                    ];
+                    
                     (* Add node 0 to ij? *)
                     If[ EdgeQ[GTree, 0 -> -1],
+                        If[ verboseLevel >= 3,
+                            Print["* Node contains 0"];
+                        ];
                         AppendTo[ij, 0];
                     ];
                     
@@ -586,6 +699,18 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                     If[ PossibleZeroQ[Gii],
                         
                         (* Completely reduced, remove *)
+                        (*
+                        If[ MemberQ[ij, 0],
+                            (* Mark ij as initial *)
+                            GTree = EdgeAdd[GTree, 
+                               Complement[
+                                  Thread[DirectedEdge[0, DeleteCases[ij, 0]]]
+                                 ,
+                                  EdgeList[GTree, DirectedEdge[0, _]]
+                               ]
+                            ];
+                        ];
+                        *)
                         
                         If[ verboseLevel >= 3,
                             Print["* Removed from GTree"];
@@ -633,7 +758,6 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                                                       VertexLabels -> "Name"]];
                                 Print["* GNodes = ", GNodes];
                                 Print["* Acyclic? = ", AcyclicGraphQ[GTree]];
-                                Print["* ij = ", ij];
                             ];
                         ];
                     ];
@@ -657,23 +781,14 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
       If[ verboseLevel >= 1,
           Print["* Cleaning up..."];
       ];
-      G = NCPolyNormalize[NCPolyFullReduce[G]];
+      (* G = NCPolyNormalize[NCPolyFullReduce[G]]; *)
+      {G, GTree} = DoReduceBasis[G, GTree, GNodes, 
+                                 symbolicCoefficients, verboseLevel, True];
   ];
 
   (* Call Together if symbolic coefficients *)
   If[ symbolicCoefficients,
       G = Map[NCPolyTogether, G];
-  ];
-      
-  If[ OBS =!= {}
-     ,
-      Message[NCPolyGroebner::Interrupted, Length[G]];
-     ,
-      If[ verboseLevel >= 1,
-          Print["* Found Groebner basis with ", 
-                ToString[Length[G]], 
-                " polynomials"];
-      ];
   ];
       
   (* Remove redundant? *)
@@ -689,6 +804,17 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
       ];
   ];
       
+  If[ OBS =!= {}
+     ,
+      Message[NCPolyGroebner::Interrupted, Length[G]];
+     ,
+      If[ verboseLevel >= 1,
+          Print["* Found Groebner basis with ", 
+                ToString[Length[G]], 
+                " polynomials"];
+      ];
+  ];
+      
   If[ verboseLevel >= 1,
       Print["* * * * * * * * * * * * * * * *"];
   ];
@@ -699,10 +825,12 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 NCPolyRemoveRedundant[{basis_, graph_}, 
                       OptionsPattern[{RedundantDistance -> 1}]] := Block[
   {subgraph, subbasis},
-    
-  subgraph = NeighborhoodGraph[graph, {0}, OptionValue[RedundantDistance]];
+                          
+  subgraph = Subgraph[graph, 
+                      Pick[VertexList[graph], 
+                           VertexInDegree[graph], _?(# <= OptionValue[RedundantDistance] &)]];
   subbasis = basis[[VertexList[subgraph, Except[0]]]];
-
+                          
   Return[{subbasis, subgraph}];
 ];
 

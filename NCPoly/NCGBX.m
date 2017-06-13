@@ -33,7 +33,8 @@ NCMakeGB::UnknownFunction = "Functions `1` cannot yet be understood by NCMakeGB.
 Clear[ReturnRules];
 Options[NCMakeGB] = {
   ReturnRules -> True,
-  ReturnGraph -> False
+  ReturnGraph -> False,
+  ReduceBasis -> False
 };
 
 Options[NCProcess] = {
@@ -146,8 +147,13 @@ Begin["`Private`"];
      ratVars, ruleRat, newRels, ruleRev,
      relInvs, ii, varInvs,
      relRatVars, relNewRels, relRuleRat, relRuleRatRev,
-     tps, tpVars, ruleTp, ruleTpRev},
+     tps, tpVars, ruleTp, ruleTpRev,
+     returnGraph, returnRules, reduceBasis},
 
+    (* Options *)
+    {returnGraph, returnRules, reduceBasis} =
+     {ReturnGraph, ReturnRules, ReduceBasis} /. {opts} /. Options[NCMakeGB];
+      
     (* Initializa polys and vars *)
     polys = Replace[p, a_Rule | a_Equal :> Subtract @@ a, {1}];
     vars = $NCPolyInterfaceMonomialOrder;
@@ -384,7 +390,15 @@ Begin["`Private`"];
       
     (* Calculate GB *)
     {basis,graph} = NCPolyGroebner[polys, iter, opts, Labels -> labels];
-    basis = Sort[NCPolyReduce[basis, True]];
+
+    (* Reduce Basis? *)
+    (* TODO: THIS WILL INVALIDATE THE GRAPH! *)
+    If[ reduceBasis,
+        If[ returnGraph,
+            Message["THIS WILL INVALIDATE GRAPH!"];
+        ];
+        basis = Sort[NCPolyReduce[basis, True]];
+    ];
 
     (* Convert to rules *)
     rules = NCPolyToRule[basis];
@@ -403,12 +417,12 @@ Begin["`Private`"];
     ];
 
     (* Return polys? *)
-    If[ Not[ReturnRules /. {opts} /. Options[NCMakeGB, ReturnRules]],
+    If[ Not[returnRules],
         polys = polys /. Rule -> Subtract
     ];
 
     Return[
-      If[ (ReturnGraph /. {opts} /. Options[NCMakeGB, ReturnGraph])
+      If[ returnGraph
          ,
           {polys,graph}
          ,

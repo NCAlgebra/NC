@@ -157,9 +157,9 @@ Block[
 
   SetMonomialOrder[a,b];
   NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> True],
-         {a ** a -> 0, a ** b -> 0, b ** a -> a}];
+         {a ** b -> 0, b ** a -> a, a ** a -> 0}];
   NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> False],
-         {a ** a, a ** b, b ** a - a}];
+         {a ** b, b ** a - a, a ** a}];
 	 
   NCTest[NCMakeGB[{a,b}, VerboseLevel -> 0, ReturnRules -> True],
          {a -> 0, b -> 0}];
