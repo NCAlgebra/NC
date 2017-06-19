@@ -5,12 +5,14 @@
  *   Date: 12/01/2009
  *)
 
-Clear[NCMakeGBTest]
+Clear[NCMakeGBTest];
 NCMakeGBTest[filename_String, 
-             referenceDirectory_String, 
-             resultDirectory_String:"" ] := Module[
+             referenceDirectory_String,
+             resultDirectory_String:"",
+	     removeRedundant_:True,
+	     opts___:{}] := Module[
    {outRels, outRules, outFile, cmpFile, cmpRels, resultFile,
-    interrupted},
+    outRR, interrupted},
 
    Print["> Testing file ", filename];
    Clear[rels];
@@ -31,7 +33,8 @@ NCMakeGBTest[filename_String,
    (* Calls NCMakeGB *)
    interrupted = False;
    Quiet[
-     Check[ outRels = Sort[NCMakeGB[rels, Iterations]];
+     Check[ outRels = Sort[NCMakeGB[rels, Iterations,
+                                    opts, ReduceBasis -> True]];
            ,
 	    interrupted = True;
 	   ,
@@ -48,24 +51,10 @@ NCMakeGBTest[filename_String,
    cmpRels = Sort[Get[cmpFile]];
 
    (* Compare and write diagnostics if it failed *)
-   (*
-   Print["> Test ", filename, ": " , 
-    If[outRels =!= cmpRels, "Failed", "Passed"]];
-   If[outRels =!= cmpRels, 
-    Print["> ", outRels]; 
-    Print["> differs from"];
-    Print["> ", cmpRels]; 
-   ];
-   *)
-   If[ True
-      ,
-       NCTest[outRels, cmpRels];
-      ,
-       NCTest[Complement[outRels /. Rule -> Subtract, cmpRels], {}];
-   ];
+   NCTest[outRels, cmpRels];
    NCTest[interrupted, Interrupted];
 
-   (* Generate result *)
+   (* Generate result file *)
    If[ resultDirectory =!= "",
      resultFile = ToFileName[{"..", resultDirectory}, 
      		             StringReplace[filename, ".data.m" -> ".out.GB"]];
@@ -78,32 +67,85 @@ NCMakeGBTest[filename_String,
      Close[stmp];
      PutAppend[outRels, resultFile];
    ];
+
+   (* Test RemoveRedundant *)
+   If[ removeRedundant,
+       Print["> Testing RemoveRedundant..."];
+
+       (* Calls NCMakeGB *)
+       interrupted = False;
+       Quiet[
+	 Check[ outRels = Sort[NCMakeGB[rels, Iterations,
+                                       	opts,
+					RemoveRedundant -> True]];
+		Print["rels = ", rels];
+		Print["outRels = ", outRels];
+		outRR = Sort[NCMakeGB[outRels, Iterations + 1, opts]];
+		NCTest[Intersection[outRR,outRels], outRels];
+	       ,
+		interrupted = True;
+	       ,
+		NCPolyGroebner::Interrupted
+	 ];
+	,
+	 NCPolyGroebner::Interrupted
+       ];
+
+       (* Generate result file *)
+       If[ resultDirectory =!= "",
+	 resultFile = ToFileName[{"..", resultDirectory}, 
+				 StringReplace[filename, ".data.m" -> ".out.RR"]];
+	 Print["> Saving result in ", resultFile];
+	 stmp = OpenWrite[resultFile];
+	 WriteString[stmp, "(*\n"];
+	 WriteString[stmp, " * File produced by NCGBTEST on:\n"];
+	 WriteString[stmp, " * " <> DateString[] <> "\n"];
+	 WriteString[stmp, " * RemoveRedundant -> True \n"];
+	 WriteString[stmp, " *)\n\n"];
+	 Close[stmp];
+	 PutAppend[outRR, resultFile];
+       ];
+  ];
+
 ];
 
-(* Perform tests *)
+NCMakeGBRunTests[testset_, opts___:{}] := Module[
+  {$NCGB$ResultDirectory = "TestResults",
+   $NCGB$ReferenceDirectory = "TestProblems",
+   $NCGB$RemoveRedundant = False,
+   $NC$Dir,
+   $CurrentDirectory,
+   $NCGB$TestProblems,
+   verboseLevel = 1},
+  
+  (* Perform tests *)
 
-$NCGB$ResultDirectory = "TestResults";
-$NCGB$ReferenceDirectory = "TestProblems";
-$NC$Dir = DirectoryName[FindFile["NC`"]];
+  $NC$Dir = DirectoryName[FindFile["NC`"]];
 
-$CurrentDirectory = Directory[];
-SetDirectory[ToFileName[{$NC$Dir, "TESTING", "NCPoly"}, "TestProblems"]];
+  $CurrentDirectory = Directory[];
+  SetDirectory[ToFileName[{$NC$Dir, "TESTING", "NCPoly"}, "TestProblems"]];
 
-testset = {52, 62, 70}; (* Different than NCGB *)
+  $NCGB$TestProblems = Map[ 
+    If[# < 10, StringJoin["c0", ToString[#], ".data.m"], 
+	       StringJoin["c", ToString[#], ".data.m"]] &, 
+    Intersection[
+      ToExpression[
+	Flatten[Map[StringCases[#, DigitCharacter ..] &, FileNames[]]]
+      ],
+      testset
+    ]
+  ];
+
+  Map[NCMakeGBTest[#,$NCGB$ReferenceDirectory,
+		     $NCGB$ResultDirectory,
+		     $NCGB$RemoveRedundant,
+		     opts]&, 
+      $NCGB$TestProblems];
+
+  SetDirectory[$CurrentDirectory];
+
+];
+
 testset = Range[0,88];
 
-$NCGB$TestProblems = Map[ 
-  If[# < 10, StringJoin["c0", ToString[#], ".data.m"], 
-             StringJoin["c", ToString[#], ".data.m"]] &, 
-  Intersection[
-    ToExpression[
-      Flatten[Map[StringCases[#, DigitCharacter ..] &, FileNames[]]]
-    ],
-    testset
-  ]
-]
-
-Map[NCMakeGBTest[#,$NCGB$ReferenceDirectory,$NCGB$ResultDirectory]&, 
-    $NCGB$TestProblems];
-
-SetDirectory[$CurrentDirectory];
+NCMakeGBRunTests[testset, VerboseLevel -> 1];

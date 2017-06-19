@@ -353,7 +353,7 @@ DoReduceBasis[{g__NCPoly},
          DoReduceBasis[r, GTree, GNodes, 
                        symbolicCoefficients, verboseLevel, complete]
         , 
-         {r, GTree}
+         {r, GTree, GNodes}
     ]
   ];
 
@@ -801,8 +801,8 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
           Print["* Cleaning up..."];
       ];
       (* G = NCPolyNormalize[NCPolyFullReduce[G]]; *)
-      {G, GTree} = DoReduceBasis[G, GTree, GNodes, 
-                                 symbolicCoefficients, verboseLevel, True];
+      {G, GTree, GNodes} = DoReduceBasis[G, GTree, GNodes, 
+                                         symbolicCoefficients, verboseLevel, True];
   ];
 
   (* Call Together if symbolic coefficients *)
@@ -820,6 +820,15 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
           Print["* Basis reduced to ",
                 ToString[Length[G]], 
                 " polynomials"];
+          
+          If[ verboseLevel >= 4,
+              Print["* GTree = ", 
+                    Graph[VertexReplace[GTree, 
+                                        Thread[DeleteCases[VertexList[GTree],0] -> NCPolyDisplay[G]]], 
+                          VertexLabels -> "Name"]];
+              Print["* GNodes = ", GNodes];
+              Print["* Acyclic? = ", AcyclicGraphQ[GTree]];
+          ];
       ];
   ];
       
@@ -844,6 +853,11 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 NCPolyRemoveRedundant[{basis_, graph_}, 
                       OptionsPattern[{RedundantDistance -> 1}]] := Block[
   {subgraph, subbasis},
+
+  (*                          
+  Print["nodes = ", Thread[DeleteCases[VertexList[GTree],0] -> NCPolyDisplay[G]]]; 
+  Print["degrees = ", Thread[VertexList[graph] -> VertexInDegree[graph]]];
+  *)
                           
   subgraph = Subgraph[graph, 
                       Pick[VertexList[graph], 
