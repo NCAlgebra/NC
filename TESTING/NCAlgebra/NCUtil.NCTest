@@ -119,6 +119,12 @@ Block[
   NCTest[NCGrabSymbols[expr], Union[{Subscript[a,i],b,Subscript[x,i],y}]];
   NCTest[NCGrabSymbols[expr, tp], Union[{tp[Subscript[x,i]],tp[y]}]];
 
+  expr = (1 - Subscript[a,i]) ** b;
+  NCTest[NCGrabSymbols[expr], Union[{Subscript[a,i],b}]];
+
+  expr = inv[(1 - Subscript[a,i])];
+  NCTest[NCGrabSymbols[expr], Union[{Subscript[a,i]}]];
+
   (* NCGrabFunctions *)
   expr = a aj[x]**y+inv[1+inv[x**tp[y]+b]];
   NCTest[NCGrabFunctions[expr, tp], {tp[y]}];

@@ -50,11 +50,19 @@ Begin["`Private`"];
      Solution here is inspired by the discussion at:
      http://mathematica.stackexchange.com/questions/91256/matching-symbol-or-subscript-but-not-symbol-arguments-of-subscript
   *)
+  (* MAURICIO: OCTOBER 2017
+     - ##&[] evaluates to -1, hence inv[1 - x_1] throws an error
+             and (1 - x_1) ** y gives the wrong error
   NCGrabSymbols[expr_] := 
-    Union[Flatten[Reap[NCGrabSymbols[expr /. Subscript[a_Symbol, b___] :> (Sow[Subscript[a, b]]; ##&[])]]]];
+    Union[Flatten[Reap[NCGrabSymbols[expr /. Subscript[a_Symbol, 
+                        b__] :> (Sow[Subscript[a, b]]; ##&[])]]]];
+  *)
+  NCGrabSymbols[expr_] := 
+    Union[Flatten[Reap[NCGrabSymbols[expr /. Subscript[a_Symbol, 
+                        b__] :> (Sow[Subscript[a, b]]; Unique[][])]]]];
   
   NCGrabSymbols[expr_, pattern_] := 
-    Union[Cases[expr, (pattern)[_Symbol|Subscript[_Symbol,___]], {0, Infinity}]];
+    Union[Cases[expr, (pattern)[_Symbol|Subscript[_Symbol,__]], {0, Infinity}]];
     
   (* Grab functions *)
   NCGrabFunctions[expr_SparseArray] := NCGrabFunctions[expr["NonzeroValues"]];

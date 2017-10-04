@@ -85,7 +85,7 @@ Begin["`Private`"];
   ];
  
   Clear[CheckOrderAux];
-  CheckOrderAux[(_Symbol|Subscript[_Symbol,___]|_inv|tp[_Symbol|Subscript[_Symbol,___]]|aj[_Symbol|Subscript[_Symbol,___]])..] := True;
+  CheckOrderAux[(_Symbol|Subscript[_Symbol,__]|_inv|tp[_Symbol|Subscript[_Symbol,__]]|aj[_Symbol|Subscript[_Symbol,__]])..] := True;
   CheckOrderAux[___] := False;
 
   Clear[CheckOrder];

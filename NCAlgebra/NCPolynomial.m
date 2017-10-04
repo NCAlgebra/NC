@@ -375,7 +375,7 @@ Begin[ "`Private`" ]
 
   (* NCRationalToNCPolynomial *)
 
-  NCRationalToNCPolynomial[rat_] := 
+  NCRationalToNCPolynomial[rat_] :=
       NCRationalToNCPolynomial[rat, NCVariables[rat]];
 
   NCRationalToNCPolynomial[rat_, vars_List] := Block[

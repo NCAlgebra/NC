@@ -188,7 +188,7 @@ Begin["`Private`"]
     (* Convert from rational to polynomial *)
     {poly,rvars,rules} = NCRationalToNCPolynomial[tmp];
 
-    (* 
+    (*
     Print["expr = ", expr];
     Print["poly = ", poly];
     Print["rvars = ", rvars];
