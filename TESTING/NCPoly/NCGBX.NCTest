@@ -139,6 +139,38 @@ Block[
 	      $Failed,
 	      SetMonomialOrder::InvalidOrder];
 
+  (* Monomial Order with tps's, ajs and Subscript *)
+  
+  SetMonomialOrder[{Subscript[a,1],b},tp[Subscript[c,1]]];
+  NCTest[GetMonomialOrder[], {{Subscript[a,1],b},{tp[Subscript[c,1]]}}];
+
+  SetMonomialOrder[{Subscript[a,1],b},{tp[Subscript[c,1]]}];
+  NCTest[GetMonomialOrder[], {{Subscript[a,1],b},{tp[Subscript[c,1]]}}];
+
+  SetMonomialOrder[{Subscript[a,1],tp[Subscript[a,1]],b},{tp[Subscript[c,1]]}];
+  NCTest[GetMonomialOrder[], {{Subscript[a,1],tp[Subscript[a,1]],b},{tp[Subscript[c,1]]}}];
+
+  NCTestCheck[SetMonomialOrder[{Subscript[a,1],b},tp[1+Subscript[c,1]]],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
+  SetMonomialOrder[{Subscript[a,1],b},aj[Subscript[c,1]]];
+  NCTest[GetMonomialOrder[], {{Subscript[a,1],b},{aj[Subscript[c,1]]}}];
+
+  SetMonomialOrder[{Subscript[a,1],b},{aj[Subscript[c,1]]}];
+  NCTest[GetMonomialOrder[], {{Subscript[a,1],b},{aj[Subscript[c,1]]}}];
+
+  SetMonomialOrder[{Subscript[a,1],aj[Subscript[a,1]],b},{aj[Subscript[c,1]]}];
+  NCTest[GetMonomialOrder[], {{Subscript[a,1],aj[Subscript[a,1]],b},{aj[Subscript[c,1]]}}];
+
+  NCTestCheck[SetMonomialOrder[{Subscript[a,1],b},aj[1+Subscript[c,1]]],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
+  NCTestCheck[SetMonomialOrder[{Subscript[a,1],b},Exp[Subscript[c,1]]],
+	      $Failed,
+	      SetMonomialOrder::InvalidOrder];
+
   (* TESTING SetMonomialOrder -- END *)
 
   SetMonomialOrder[{a,b},{d},{c,b}];
