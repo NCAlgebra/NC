@@ -32,8 +32,8 @@ Begin["`Private`"];
   Clear[GrabFactors];
   GrabFactors[exp_?CommutativeQ] := {exp, {}};
   GrabFactors[a_. exp_NonCommutativeMultiply] := {a, List @@ exp};
-  GrabFactors[a_. exp_Symbol] := {a, {exp}};
-  GrabFactors[a_. exp:(Subscript[_Symbol,___])] := {a, {exp}};
+  GrabFactors[a_. exp_Symbol?NonCommutativeQ] := {a, {exp}};
+  GrabFactors[a_. exp:(Subscript[_Symbol?NonCommutativeQ,___])] := {a, {exp}};
   GrabFactors[_] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
 
   Clear[GrabTerms];
@@ -123,6 +123,7 @@ Begin["`Private`"];
     ];
 
     (*
+    Print["terms = ",  GrabTerms[terms]];
     Print["factors = ", factors]; 
     Print["vars = ", vars]; 
     Print["opts = ", opts];

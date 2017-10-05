@@ -78,6 +78,11 @@ Block[
   PolyExp = NCToNCPoly[NCExp, vars];
   NCExpExp = NCPolyToNC[PolyExp, vars];
   
+  vars = {{a},{Subscript[b,1],c}};
+  NCExp = a**a + alpha * Subscript[b,1] + c**c;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
   vars = {{a},{b,c}};
   NCExp = a**a -(- b**b - c**c);
   PolyExp = NCToNCPoly[NCExp, vars];
