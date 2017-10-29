@@ -1280,17 +1280,21 @@ Begin[ "`Private`" ]
 
          If [ dualFeasMargin < feasibilityTol, 
 			  
-            Print[ "* Primal solution is not strictly feasible but is within tolerance"];
-            Print[ "(0 <= max eig(A* Y - C) = ", 
-                   dualFeasMargin, " < ", feasibilityTol, " )" ];
+            If[ printSummary,
+              Print[ "* Primal solution is not strictly feasible but is within tolerance"];
+              Print[ "(0 <= max eig(A* Y - C) = ", 
+                     dualFeasMargin, " < ", feasibilityTol, " )" ];
+            ];
 
             dualFeasible = True;
 
            ,
 
-            Print[ "* Primal solution is not strictly feasible"];
-	    Print[ "(max eig(A* Y - C) = ", 
-                   dualFeasMargin, " > 0)" ];
+            If[ printSummary,
+              Print[ "* Primal solution is not strictly feasible"];
+  	      Print[ "(max eig(A* Y - C) = ", 
+                     dualFeasMargin, " > 0)" ];
+            ];
 
             dualFeasible = False;
 
@@ -1312,9 +1316,11 @@ Begin[ "`Private`" ]
 
       If [ primalFeasRadius > feasibilityTol, 
 
-         Print[ "* Dual solution is not within tolerance"];
-	 Print[ "(|| A X - B || = ", 
-                primalFeasRadius, " >= ", feasibilityTol, ")" ];
+         If[ printSummary,
+           Print[ "* Dual solution is not within tolerance"];
+           Print[ "(|| A X - B || = ", 
+                  primalFeasRadius, " >= ", feasibilityTol, ")" ];
+         ];
 
          primalFeasible = False;
 
@@ -1334,8 +1340,10 @@ Begin[ "`Private`" ]
                          Infinity, 
                          Abs[(1 + dualFeasMargin - feasibilityTol) / (1 - dualFeasMargin + feasibilityTol)] ];
 
-      Print[ "* Feasibility radius = ", dualFeasRadius];
-      Print[ "  (should be less than 1 when feasible)" ];
+      If[ printSummary,
+        Print[ "* Feasibility radius = ", dualFeasRadius];
+        Print[ "  (should be less than 1 when feasible)" ];
+      ];
 
       ,
 
