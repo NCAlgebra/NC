@@ -300,10 +300,6 @@
         -   [PinningSpace](#pinningspace)
 -   [References](#references)
 
-\newpage
-
-\chapter*{License}
-\addcontentsline{toc}{chapter}{License}
 **NCAlgebra** is distributed under the terms of the BSD License:
 
     Copyright (c) 2017, J. William Helton and Mauricio C. de Oliveira
@@ -356,6 +352,8 @@ Version 5.0.4
 -------------
 
 1.  First implementation of [NCPolyGramMatrix](#NCPolyGramMatrix) and [NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
+2.  Improvements in NCReplace.
+3.  Several bug fixes and improvements. Thanks Eric Evert!
 
 Version 5.0.3
 -------------
@@ -3302,29 +3300,25 @@ For example, if
 
 where `lead` is the leading monomial with the highest degree then the following rules are generated:
 
-<table style="width:14%;">
+<table style="width:39%;">
 <colgroup>
-<col width="6%" />
-<col width="6%" />
+<col width="19%" />
+<col width="19%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Orig inal</th>
-<th align="left">Tran sfor med</th>
+<th align="left">Original</th>
+<th align="left">Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>inv<br />
-[mon 1 + ... + K lead ] lead</td>
-<td align="left">(1 - inv<br />
-[mon 1 + ... + K lead ] (mon 1 + ...) )/K</td>
+<td align="left">inv[mon1 + ... + K lead] lead</td>
+<td align="left">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td>lead inv<br />
-[mon 1 + ... + K lead ]</td>
-<td align="left">(1 - (mon 1 + ...) inv<br />
-[mon 1 + ... + K lead ])/ K</td>
+<td align="left">lead inv[mon1 + ... + K lead]</td>
+<td align="left">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>

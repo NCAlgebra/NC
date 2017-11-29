@@ -9,7 +9,7 @@
   <title>The NCAlgebra Suite - Version 5.0</title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="base.css">
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -17,9 +17,9 @@
 <body>
 <header>
 <h1 class="title">The NCAlgebra Suite - Version 5.0</h1>
-<h2 class="author">J. William Helton</h2>
-<h2 class="author">Mauricio C. de Oliveira</h2>
-<h3 class="date">with earlier contributions by Bob Miller &amp; Mark Stankus</h3>
+<p class="author">J. William Helton</p>
+<p class="author">Mauricio C. de Oliveira</p>
+<p class="date">with earlier contributions by Bob Miller &amp; Mark Stankus</p>
 </header>
 <nav id="TOC">
 <ul>
@@ -374,10 +374,10 @@
 <li><a href="#references">References</a></li>
 </ul>
 </nav>
-\newpage
-\chapter*{License}\addcontentsline{toc}{chapter}{License}
+
+
 <p><strong>NCAlgebra</strong> is distributed under the terms of the BSD License:</p>
-<p></p>
+
 <pre><code>Copyright (c) 2017, J. William Helton and Mauricio C. de Oliveira
 All rights reserved.
 
@@ -402,8 +402,8 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
-<p></p>
-<p></p>
+
+
 <h1 id="acknowledgements"><span class="header-section-number">1</span> Acknowledgements</h1>
 <p>This work was partially supported by the Division of Mathematical Sciences of the National Science Foundation.</p>
 <p>The program was written by the authors and:</p>
@@ -1918,7 +1918,7 @@ NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
 <pre><code>NCTeX[exp, TeXProcessor -&gt; NCTeXForm]</code></pre>
 <p>produce</p>
 <p><span class="math inline">\(J_2(x)\)</span></p>
-<p></p>
+
 <h1 id="ReferenceIntroduction"><span class="header-section-number">9</span> Introduction</h1>
 <p>The following chapters and sections describes packages inside <code>NCAlgebra</code>.</p>
 <p>Packages are automatically loaded unless otherwise noted.</p>
@@ -2335,18 +2335,18 @@ symVars = {x}</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[mon1 + ... + K lead] lead</td>
-<td style="text-align: left;">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
+<td>inv[mon1 + ... + K lead] lead</td>
+<td>(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">lead inv[mon1 + ... + K lead]</td>
-<td style="text-align: left;">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
+<td>lead inv[mon1 + ... + K lead]</td>
+<td>(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
 </tr>
 </tbody>
 </table>
@@ -2354,38 +2354,38 @@ symVars = {x}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[1 + K a b]</td>
-<td style="text-align: left;">inv[a] - K b inv[1 + K a b]</td>
+<td>inv[a] inv[1 + K a b]</td>
+<td>inv[a] - K b inv[1 + K a b]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[a] inv[1 + K a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[a] inv[1 + K a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] inv[b]</td>
-<td style="text-align: left;">inv[b] - K inv[1 + K a b] a</td>
+<td>inv[1 + K a b] inv[b]</td>
+<td>inv[b] - K inv[1 + K a b] a</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] inv[a]</td>
-<td style="text-align: left;">inv[a] - K inv[1 + K a]</td>
+<td>inv[1 + K a] inv[a]</td>
+<td>inv[a] - K inv[1 + K a]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a</td>
-<td style="text-align: left;">a inv[1 + K b a]</td>
+<td>inv[1 + K a b] a</td>
+<td>a inv[1 + K b a]</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[A inv[a] + B b] inv[a]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) a b]</td>
+<td>inv[A inv[a] + B b] inv[a]</td>
+<td>(1/A) inv[1 + (B/A) a b]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inv[a] inv[A inv[a] + K b]</td>
-<td style="text-align: left;">(1/A) inv[1 + (B/A) b a]</td>
+<td>inv[a] inv[A inv[a] + K b]</td>
+<td>(1/A) inv[1 + (B/A) b a]</td>
 </tr>
 </tbody>
 </table>
@@ -2393,26 +2393,26 @@ symVars = {x}</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Original</th>
-<th style="text-align: left;">Transformed</th>
+<th>Original</th>
+<th>Transformed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">inv[1 + K a b] a b</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>inv[1 + K a b] a b</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">inv[1 + K a] a</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>inv[1 + K a] a</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">a b inv[1 + K a b]</td>
-<td style="text-align: left;">(1 - inv[1 + K a b])/K</td>
+<td>a b inv[1 + K a b]</td>
+<td>(1 - inv[1 + K a b])/K</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">a inv[1 + K a]</td>
-<td style="text-align: left;">(1 - inv[1 + K a])/K</td>
+<td>a inv[1 + K a]</td>
+<td>(1 - inv[1 + K a])/K</td>
 </tr>
 </tbody>
 </table>
