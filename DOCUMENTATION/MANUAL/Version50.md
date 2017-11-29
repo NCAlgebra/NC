@@ -3,6 +3,8 @@
 ## Version 5.0.4 {#Version5_0_4}
 
 1. First implementation of [NCPolyGramMatrix](#NCPolyGramMatrix) and [NCPolyFromGramMatrix](#NCPolyFromGramMatrix).
+2. Improvements in NCReplace.
+3. Several bug fixes and improvements. Thanks Eric Evert!
 
 ## Version 5.0.3 {#Version5_0_3}
 

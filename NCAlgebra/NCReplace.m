@@ -43,6 +43,9 @@ Begin["`Private`"]
   Clear[FlatNCMultiply];
   SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
 
+  FlatNCMultiply[a___, b_?CommutativeQ c_, d___] :=
+    b FlatNCMultiply[a, c, d];
+    
   Clear[NCReplaceFlatRules];
   NCReplaceFlatRules = {
       NonCommutativeMultiply -> FlatNCMultiply

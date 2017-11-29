@@ -249,4 +249,15 @@ Module[
      answer = b ** b + c;
      NCTest[NCReplaceAll[expr, a -> b/2], answer];
 
+     (* https://mathematica.stackexchange.com/questions/159007/non-commutative-algebra-lm-t2-ml-using-ncalgebra-mathematica *)
+
+     expr = a ** b;
+     rule = a ** b -> K^2 b**a;
+     answer = K^2 b ** a;
+     NCTest[NCReplaceAll[expr, rule], answer];
+
+     expr = a ** b^2;
+     answer = K^4 b ** b ** a;
+     NCTest[NCReplaceRepeated[expr, rule], answer];
+
 ];
