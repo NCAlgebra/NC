@@ -190,7 +190,7 @@ Begin["`Private`"];
            NCPoly::InvalidList
     ];
       
-    If[p[[1]] == Vars,
+    If[p[[1]] === Vars,
        (* same poly's, return *)
        Return[p];
     ];
@@ -660,7 +660,7 @@ Begin["`Private`"];
                 r -= NCPoly`Private`QuotientExpand[qi, g];
                 If[ debugLevel > 1, Print["r = ", NCPolyDisplay[r]]; Print["j = ", j]; ];
            ];
-           If [ r === 0,
+           If [ NCPolyPossibleZeroQ[r],
                 (* no reminder, terminate *)
                 If[ debugLevel > 1, Print["no reminder, terminate"]; ];
                 Break[];

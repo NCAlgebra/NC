@@ -63,7 +63,8 @@ Clear[NCFromDigits,
       NCPolyDivideDigits,
       NCPolyDivideLeading,
       NCPolyDisplay,
-      NCPolyOrderType];
+      NCPolyOrderType,
+      NCPolyPossibleZeroQ];
 
 Clear[NCPolyHankelMatrix,
       NCPolyRealization,
@@ -136,7 +137,12 @@ Begin["`Private`"];
 
   NCPoly /: Power[b_NCPoly, c_Integer?Negative] := 
     inv[Apply[NCPolyProduct, Table[b, {-c}]]];
-  
+
+  (* Reduce and related functions *)
+  Clear[NCPolyPossibleZeroQ];
+  NCPolyPossibleZeroQ[exp_?NumberQ] := PossibleZeroQ[exp];
+  NCPolyPossibleZeroQ[exp_] := PossibleZeroQ[Simplify[exp]];
+    
   Clear[QuotientExpand];
   QuotientExpand[ {c_, l_NCPoly, r_NCPoly}, g_NCPoly ] := c * NCPolyProduct[l, g, r];
   QuotientExpand[ {c_, l_,       r_NCPoly}, g_NCPoly ] := c * l * NCPolyProduct[g, r];
@@ -256,7 +262,7 @@ Begin["`Private`"];
         (* Append to remainder *)
         AppendTo[q, {qi, i} ];
         (* If zero reminder *)
-        If[ r === 0,
+        If[ NCPolyPossibleZeroQ[r],
            (* terminate *)
            If[ debugLevel > 1, Print["no reminder, terminate"]; ];
            Break[];
@@ -705,7 +711,7 @@ Begin["`Private`"];
             {lu, p, q, rank} = LUDecompositionWithCompletePivoting[H[[1]]];
             {l, u} = GetLUMatrices[lu];
 
-            If [rank == 0,
+            If [rank === 0,
                 Return[{SparseArray[{},{Length[H],0,0}],
                         SparseArray[{},{0,1}],
                         SparseArray[{},{1,0}],
@@ -751,7 +757,7 @@ Begin["`Private`"];
             {Q,R} = QRDecomposition[Transpose[H[[1]]]];
             rank = MatrixRank[R];
 
-            If [rank == 0,
+            If [rank === 0,
                 Return[{SparseArray[{},{Length[H],0,0}],
                         SparseArray[{},{0,1}],
                         SparseArray[{},{1,0}],
