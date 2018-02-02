@@ -6,7 +6,7 @@ Block[
    q,r,
    f,g,h,c,m,G,
    g1,g2,g1p,
-   isGraded
+   isGraded,answer
   },
   
   (* Test Reduction *)
@@ -230,5 +230,17 @@ Block[
   G = NCPolyReduce[G];
   NCTest[Length[G], 1];
   NCTest[G[[1]]-h, 0];
+
+  (* Reduction with complex coefficients *)
+  (* Eric's example *)
+  g1 = {NCPoly[{2,2,1,1,2},<|{0,0,0,0,1,1}->1,{0,0,1,0,0,4}->-1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,0,3}->1,{0,1,0,0,0,5}->-1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,1,2}->1,{0,0,0,1,1,16}->1/2-(I Sqrt[3])/2|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,0,0,0,3,0}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,2,2}->1,{0,0,0,1,2,128}->1/2+(I Sqrt[3])/2|>],NCPoly[{2,2,1,1,2},<|{0,0,0,2,1,18}->1,{0,0,0,2,1,144}->1/2+(I Sqrt[3])/2|>]};
+  g2 = NCPolyNormalize[NCPolyReduce[g1]];
+  answer = List[NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 1, 1], -1], Rule[List[0, 0, 1, 0, 0, 4], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 0, 3], -1], Rule[List[0, 1, 0, 0, 0, 5], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 1, 2], Power[Plus[Rational[1, 2], Times[Complex[0, Rational[-1, 2]], Power[3, Rational[1, 2]]]], -1]], Rule[List[0, 0, 0, 1, 1, 16], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 3, 0], 1]]]];
+  NCTest[g2,answer];
+
+  g1 = {NCPoly[{2,2,1,1,2},<|{0,0,0,0,1,1}->1,{0,0,1,0,0,4}->-1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,0,3}->1,{0,1,0,0,0,5}->-1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,1,2}->1,{0,0,0,1,1,16}->1/2-(I Sqrt[3])/2|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,0,0,0,3,0}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,2,2}->1,{0,0,0,1,2,128}->1/2+(I Sqrt[3])/2|>],NCPoly[{2,2,1,1,2},<|{0,0,0,2,1,18}->1,{0,0,0,2,1,144}->1/2+(I Sqrt[3])/2|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,0,0,3,0,146}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,2,2,18}->1,{0,0,0,2,2,1152}->1/2-(I Sqrt[3])/2|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,1,0}->1,{1,0,0,0,0,6}->-1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,0,2}->1,{1,0,0,0,0,7}->-1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,1,11}->1/2+(I Sqrt[3])/2,{0,0,0,1,1,25}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,0,0,0,3,73}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,1,2,75}->1/2-(I Sqrt[3])/2,{0,0,0,1,2,201}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,2,1,91}->1/2-(I Sqrt[3])/2,{0,0,0,2,1,217}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,0,0,3,0,219}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,2,2,603}->1/2+(I Sqrt[3])/2,{0,0,0,2,2,1737}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,0,1,0,1,32}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,0,1,0,1,4}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,1,0,1,0,42}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{0,1,0,1,0,21}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{1,0,0,0,1,49}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{1,0,0,0,1,14}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{1,0,0,1,0,59}->1|>],NCPoly[{2,2,1,1,2},<|{0,0,0,0,0,0}->-1,{1,0,0,1,0,31}->1|>]};
+  g2 = NCPolyNormalize[NCPolyReduce[g1]];
+  answer = List[NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 1, 1], -1], Rule[List[0, 0, 1, 0, 0, 4], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 0, 3], -1], Rule[List[0, 1, 0, 0, 0, 5], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 1, 2], Power[Plus[Rational[1, 2], Times[Complex[0, Rational[-1, 2]], Power[3, Rational[1, 2]]]], -1]], Rule[List[0, 0, 0, 1, 1, 16], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 3, 0], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 3, 0, 146], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 1, 0], -1], Rule[List[1, 0, 0, 0, 0, 6], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 0, 2], -1], Rule[List[1, 0, 0, 0, 0, 7], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 1, 11], Plus[Rational[1, 2], Times[Complex[0, Rational[1, 2]], Power[3, Rational[1, 2]]]]], Rule[List[0, 0, 0, 1, 1, 25], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 3, 73], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 3, 0, 219], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 2, 8], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 2, 1], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 2, 0, 26], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 2, 0, 19], 1]]]];
+  NCTest[g2,answer];
 
 ];

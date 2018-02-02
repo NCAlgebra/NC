@@ -62,6 +62,7 @@ Clear[NCFromDigits,
       NCPadAndMatch,
       NCPolyDivideDigits,
       NCPolyDivideLeading,
+      NCPolyVariables,
       NCPolyDisplay,
       NCPolyOrderType,
       NCPolyPossibleZeroQ];
@@ -184,15 +185,17 @@ Begin["`Private`"];
       For [i = 1, i <= m, i++, 
         rii = r[[i]];
         {qi, ri} = NCPolyReduce[rii, Drop[r, {i}], complete, debugLevel];
-        If [ ri =!= 0,
+        If [ NCPolyPossibleZeroQ[ri],
+             (* If zero reminder *)
+             r = Delete[r, i];
+             i--; m--;
+             If[ m <= 1, Break[]; ];
+            ,
+             (* If not zero reminder *)
              If [ ri =!= rii,
                Part[r, i] = ri;
                modified = True;
              ];
-            ,
-             r = Delete[r, i];
-             i--; m--;
-             If[ m <= 1, Break[]; ];
         ];
       ];
     ];
@@ -211,13 +214,13 @@ Begin["`Private`"];
     m = Length[fs];
     For [i = 1, i <= m, i++, 
       {qi, ri} = NCPolyReduce[fs[[i]], gs, complete, debugLevel];
-      If [ ri =!= 0,
-           (* If not zero reminder, update *)
-           Part[fs, i] = ri;
-          ,
+      If [ NCPolyPossibleZeroQ[ri],
            (* If zero reminder, remove *)
            fs = Delete[fs, i];
            i--; m--;
+          ,
+           (* If not zero reminder, update *)
+           Part[fs, i] = ri;
       ];
     ];
 
@@ -232,14 +235,14 @@ Begin["`Private`"];
     If[ m > 1,
       For [i = 1, i <= m, i++, 
         {qi, ri} = NCPolyReduce[r[[i]], Drop[r, {i}], complete, debugLevel];
-        If [ ri =!= 0,
-             (* If not zero reminder, update *)
-             Part[r, i] = ri;
-            ,
+        If [ NCPolyPossibleZeroQ[ri],
              (* If zero reminder, remove *)
              r = Delete[r, i];
              i--; m--;
              If[ m <= 1, Break[]; ];
+            ,
+             (* If not zero reminder, update *)
+             Part[r, i] = ri;
         ];
       ];
     ];
@@ -265,6 +268,7 @@ Begin["`Private`"];
         If[ NCPolyPossibleZeroQ[r],
            (* terminate *)
            If[ debugLevel > 1, Print["no reminder, terminate"]; ];
+           r = 0;
            Break[];
           ,
            (* update dividend, go back to first term and continue *)
@@ -519,10 +523,15 @@ Begin["`Private`"];
 
   (* Display *)
 
+  (*
   NCPolyVariables[p_NCPoly] := 
     Table[Symbol[FromCharacterCode[ToCharacterCode["@"]+i]], 
           {i, NCPolyNumberOfVariables[p]}];    
-  
+  *)
+
+  NCPolyVariables[p_NCPoly] := 
+    Table["X" <> ToString[i], {i, NCPolyNumberOfVariables[p]}];    
+      
   NCPolyDisplay[{p__NCPoly}] := Map[NCPolyDisplay, {p}];
 
   NCPolyDisplay[{p__NCPoly}, args__] := 
@@ -541,7 +550,7 @@ Begin["`Private`"];
                                        NCPolyGetDigits[p] + 1] /. {} -> 1, 1] }
         ]];
 
-  NCPolyDisplay[p_, vars_List:{}, ___] := p;
+  (* NCPolyDisplay[p_, vars_List:{}, ___] := p; *)
 
   NCPolyDisplay[p___] := $Failed;
 
