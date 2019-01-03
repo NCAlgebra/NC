@@ -44,7 +44,12 @@
 <li><a href="#polynomials"><span class="toc-section-number">4.4</span> Polynomials</a></li>
 <li><a href="#rationals-and-simplification"><span class="toc-section-number">4.5</span> Rationals and Simplification</a></li>
 <li><a href="#calculus"><span class="toc-section-number">4.6</span> Calculus</a></li>
-<li><a href="#BasicMatrices"><span class="toc-section-number">4.7</span> Matrices</a></li>
+<li><a href="#BasicMatrices"><span class="toc-section-number">4.7</span> Matrices</a><ul>
+<li><a href="#BasicMatrices:Inverses"><span class="toc-section-number">4.7.1</span> Inverses, products, adjoints, etc</a></li>
+<li><a href="#BasicMatrices:LUDecomposition"><span class="toc-section-number">4.7.2</span> LU Decomposition</a></li>
+<li><a href="#BasicMatrices:LUDecompositionWithCompletePivoting"><span class="toc-section-number">4.7.3</span> LU Decomposition with complete pivoting</a></li>
+<li><a href="#BasicMatrices:LDLDecomposition"><span class="toc-section-number">4.7.4</span> LDL Decomposition</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#MoreAdvancedCommands"><span class="toc-section-number">5</span> More Advanced Commands</a><ul>
 <li><a href="#AdvancedReplace"><span class="toc-section-number">5.1</span> Advanced Rules and Replacements</a></li>
@@ -203,12 +208,14 @@
 <li><a href="#LowerTriangularSolve"><span class="toc-section-number">11.3.5</span> LowerTriangularSolve</a></li>
 <li><a href="#LUInverse"><span class="toc-section-number">11.3.6</span> LUInverse</a></li>
 <li><a href="#GetLUMatrices"><span class="toc-section-number">11.3.7</span> GetLUMatrices</a></li>
-<li><a href="#GetLDUMatrices"><span class="toc-section-number">11.3.8</span> GetLDUMatrices</a></li>
-<li><a href="#GetDiagonal"><span class="toc-section-number">11.3.9</span> GetDiagonal</a></li>
-<li><a href="#LUPartialPivoting"><span class="toc-section-number">11.3.10</span> LUPartialPivoting</a></li>
-<li><a href="#LUCompletePivoting"><span class="toc-section-number">11.3.11</span> LUCompletePivoting</a></li>
-<li><a href="#LURowReduce"><span class="toc-section-number">11.3.12</span> LURowReduce</a></li>
-<li><a href="#LURowReduceIncremental"><span class="toc-section-number">11.3.13</span> LURowReduceIncremental</a></li>
+<li><a href="#GetFullLUMatrices"><span class="toc-section-number">11.3.8</span> GetFullLUMatrices</a></li>
+<li><a href="#GetLDUMatrices"><span class="toc-section-number">11.3.9</span> GetLDUMatrices</a></li>
+<li><a href="#GetFullLDUMatrices"><span class="toc-section-number">11.3.10</span> GetFullLDUMatrices</a></li>
+<li><a href="#GetDiagonal"><span class="toc-section-number">11.3.11</span> GetDiagonal</a></li>
+<li><a href="#LUPartialPivoting"><span class="toc-section-number">11.3.12</span> LUPartialPivoting</a></li>
+<li><a href="#LUCompletePivoting"><span class="toc-section-number">11.3.13</span> LUCompletePivoting</a></li>
+<li><a href="#LURowReduce"><span class="toc-section-number">11.3.14</span> LURowReduce</a></li>
+<li><a href="#LURowReduceIncremental"><span class="toc-section-number">11.3.15</span> LURowReduceIncremental</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#packages-for-pretty-output-testing-and-utilities"><span class="toc-section-number">12</span> Packages for pretty output, testing, and utilities</a><ul>
@@ -697,18 +704,18 @@ expr2 = inv[1+a**b]**a</code></pre>
 <pre><code>NCDirectionalD[expr, {x,h}, {y,k}]</code></pre>
 <p>returns</p>
 <pre><code>h**q**x + x**q*h - y**h - k**x</code></pre>
-<p>The command <code>NCGrad</code> calculate nc <em>gradients</em><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
-<p>For example, if:</p>
+<p>A further example, if:</p>
 <pre><code>expr = x**a**x**b + x**c**x**d</code></pre>
 <p>then its directional derivative in the direction <code>h</code> is</p>
 <pre><code>NCDirectionalD[expr, {x,h}]</code></pre>
 <p>which returns</p>
 <pre><code>h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d</code></pre>
-<p>and</p>
+<p>The command <code>NCGrad</code> calculates nc <em>gradients</em><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>For example:</p>
 <pre><code>NCGrad[expr, x]</code></pre>
 <p>returns the nc gradient</p>
 <pre><code>a**x**b + b**x**a + c**x**d + d**x**c</code></pre>
-<p>For example, if:</p>
+<p>A further example, if:</p>
 <pre><code>expr = x**a**x**b + x**c**y**d</code></pre>
 <p>is a function on variables <code>x</code> and <code>y</code> then</p>
 <pre><code>NCGrad[expr, x, y]</code></pre>
@@ -720,18 +727,23 @@ expr2 = inv[1+a**b]**a</code></pre>
 <pre><code>m = {{a, b}, {c, d}}</code></pre>
 <p>is a representation for the matrix</p>
 <p><span class="math inline">\(\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\)</span></p>
-<p>The Mathematica command <code>MatrixForm</code> output pretty matrices. <code>MatrixForm[m]</code> prints <code>m</code> in a form similar to the above matrix.</p>
+<p>The Mathematica command <code>MatrixForm</code> output pretty matrices. <code>MatrixForm[m]</code> prints <code>m</code> in a form similar to the above matrix. Beware when copying and pasting parts of an expression rendered by<code>MatrixForm</code> because it may not execute correctly. If in doubt, use <code>FullForm</code> to reveal the contents of the expression.</p>
 <p>The experienced matrix analyst should always remember that the Mathematica convention for handling vectors is tricky.</p>
 <ul>
 <li><code>{{1, 2, 4}}</code> is a 1x3 <em>matrix</em> or a <em>row vector</em>;</li>
 <li><code>{{1}, {2}, {4}}</code> is a 3x1 <em>matrix</em> or a <em>column vector</em>;</li>
 <li><code>{1, 2, 4}</code> is a <em>vector</em> but <strong>not</strong> a <em>matrix</em>. Indeed whether it is a row or column vector depends on the context. We advise not to use <em>vectors</em>.</li>
 </ul>
+<h3 id="BasicMatrices:Inverses"><span class="header-section-number">4.7.1</span> Inverses, products, adjoints, etc</h3>
 <p>A useful command is <a href="#NCInverse"><code>NCInverse</code></a>, which is akin to Mathematica's <code>Inverse</code> command and produces a block-matrix inverse formula<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> for an nc matrix. For example</p>
 <pre><code>NCInverse[m]</code></pre>
 <p>returns</p>
 <pre><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
  {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}</code></pre>
+<p>or, using <code>MatrixForm</code></p>
+<p><code>NCInverse[m] // MatrixForm NCInverse[m] // MatrixForm</code></p>
+<p>returns</p>
+<p><span class="math inline">\(\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) &amp; -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-2} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b) \end{bmatrix}\)</span></p>
 <p>Note that <code>a</code> and <code>d - c**inv[a]**b</code> were assumed invertible during the calculation.</p>
 <p>Similarly, one can multiply matrices using <a href="#NCDot"><code>NCDot</code></a>, which is similar to Mathematica's <code>Dot</code>. For example</p>
 <pre><code>m1 = {{a, b}, {c, d}}
@@ -746,6 +758,8 @@ NCDot[m1, m2]</code></pre>
 <p>returns</p>
 <pre><code>{{aj[a],tp[c]},{co[b],d}}</code></pre>
 <p>In previous versions one had to use the special commands <code>tpMat</code>, <code>ajMat</code>, and <code>coMat</code>. Those are still supported for backward compatibility.</p>
+<p>See <a href="#AdvancedMatrices">advanced matrix commands</a> for other useful matrix manipulation routines, such as <a href="#NCMatrixExpand"><code>NCMatrixExpand</code></a>, <a href="#NCMatrixReplace"><code>NCMatrixReplace</code></a>, <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>, etc, that allow one to work with matrices with symbolic noncommutative entries.</p>
+<h3 id="BasicMatrices:LUDecomposition"><span class="header-section-number">4.7.2</span> LU Decomposition</h3>
 <p>Behind <code>NCInverse</code> there are a host of linear algebra algorithms which are available in the package:</p>
 <ul>
 <li><a href="#PackageNCMatrixDecompositions"><code>NCMatrixDecompositions</code></a>: implements versions of the <span class="math inline">\(LU\)</span> Decomposition with partial and complete pivoting, as well as <span class="math inline">\(LDL\)</span> Decomposition which are suitable for calculations with nc matrices. Those functions are based on the templated algorithms from the package <a href="#PackageMatrixDecompositions"><code>MatrixDecompositions</code></a>.</li>
@@ -756,19 +770,23 @@ NCDot[m1, m2]</code></pre>
 <p>which returns</p>
 <pre><code>lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
 p = {1, 2}</code></pre>
-<p>The list <code>p</code> encodes the sequence of permutations calculated during the execution of the algorithm. The matrix <code>lu</code> contains the factors <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span>. These can be recovered using</p>
-<pre><code>{l, u} = GetLUMatrices[lu]</code></pre>
+<p>Using <code>MatrixForm</code>:</p>
+<p><span class="math inline">\(\begin{bmatrix} a &amp; b \\ c a^{-1} &amp; d - c a^{-1} b \end{bmatrix}\)</span></p>
+<p>The list <code>p</code> encodes the sequence of permutations calculated during the execution of the algorithm. The matrix <code>lu</code> contains the factors <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span> in the way most common to numerical analysts. These factors can be recovered using</p>
+<pre><code>{l, u} = GetFullLUMatrices[lu]</code></pre>
 <p>resulting in this case in</p>
 <pre><code>l = {{1, 0}, {c**inv[a], 1}}
 u = {{a, b}, {0, d - c**inv[a]**b}}</code></pre>
+<p>Using <code>MatrixForm</code>:</p>
+<p><span class="math inline">\(L = \begin{bmatrix} 1 &amp; 0 \\ c a^{-1} &amp; 1 \end{bmatrix} \qquad U = \begin{bmatrix} a &amp; b \\ 0 &amp; d - c a^{-1} b \end{bmatrix}\)</span></p>
 <p>To verify that <span class="math inline">\(M = L U\)</span> input</p>
 <pre><code>m - NCDot[l, u]</code></pre>
-<p>which should returns a zero matrix.</p>
-<p><strong>Note:</strong> for efficiency the factors <code>l</code> and <code>u</code> are returned as <code>SparseArrays</code>. Use <code>Normal[u]</code> and <code>Normal[l]</code> to convert the <code>SparseArrays</code> <code>l</code> and <code>u</code> to regular matrices if desired.</p>
-<p>The default pivoting strategy prioritizes simpler expressions. For instance,</p>
+<p>which should return a zero matrix.</p>
+<p><strong>Note:</strong> if you are looking for efficiency, the function <a href="#GetLUMatrices"><code>GetLUMatrices</code></a> (also <a href="#GetLDUMatrices"><code>GetLDUMatrices</code></a>) returns the factors <code>l</code> and <code>u</code> as <code>SparseArrays</code>.</p>
+<p>The default pivoting strategy prioritizes pivoting on simpler expressions. For instance,</p>
 <pre><code>m = {{a, b}, {1, d}}
 {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-{l, u} = GetLUMatrices[lu]</code></pre>
+{l, u} = GetFullLUMatrices[lu]</code></pre>
 <p>results in the factors</p>
 <pre><code>l = {{1, 0}, {a, 1}}
 u = {{1, d}, {0, b - a**d}}</code></pre>
@@ -776,30 +794,34 @@ u = {{1, d}, {0, b - a**d}}</code></pre>
 <pre><code>p = {2, 1}</code></pre>
 <p>which indicates that the number <code>1</code>, appearing in the second row, was used as the pivot rather than the symbol <code>a</code> appearing on the first row. Because of the permutation, to verify that <span class="math inline">\(P M = L U\)</span> input</p>
 <pre><code>m[[p]] - NCDot[l, u]</code></pre>
-<p>which should return a zero matrix. Note that the permutation matrix <span class="math inline">\(P\)</span> is never constructed. Instead, the rows of <span class="math inline">\(M\)</span> are permuted using Mathematica's <code>Part</code> (<code>[[]]</code>). Likewise</p>
+<p>which should return a zero matrix. Note that in the above example the permutation matrix <span class="math inline">\(P\)</span> is never constructed. Instead, the rows of <span class="math inline">\(M\)</span> are directly permuted using Mathematica's <code>Part</code> (<code>[[]]</code>) command. Likewise</p>
 <pre><code>m = {{a + b, b}, {c, d}}
 {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-{l, u} = GetLUMatrices[lu]</code></pre>
+{l, u} = GetFullLUMatrices[lu]</code></pre>
 <p>returns</p>
 <pre><code>p = {2, 1}
 l = {{1, 0}, {(a + b)**inv[c], 1}} 
 u = {{c, d}, {0, b - (a + b)**inv[c]**d}}</code></pre>
 <p>showing that the <em>simpler</em> expression <code>c</code> was taken as a pivot instead of <code>a + b</code>.</p>
 <p>The function <code>NCLUDecompositionWithPartialPivoting</code> is the one that is used by <code>NCInverse</code>.</p>
+<h3 id="BasicMatrices:LUDecompositionWithCompletePivoting"><span class="header-section-number">4.7.3</span> LU Decomposition with complete pivoting</h3>
 <p>Another factorization algorithm is <a href="#NCLUDecompositionWithCompletePivoting"><code>NCLUDecompositionWithCompletePivoting</code></a>, which can be used to calculate the symbolic rank of nc matrices. For example</p>
 <pre><code>m = {{2 a, 2 b}, {a, b}}
 {lu, p, q, rank} = NCLUDecompositionWithCompletePivoting[m]</code></pre>
 <p>returns the <em>left</em> and <em>right</em> permutation lists</p>
 <pre><code>p = {2, 1}
 q = {1, 2}</code></pre>
-<p>and <code>rank</code> equal to <code>1</code>. The <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span> factors can be obtained as before using</p>
-<pre><code>{l, u} = GetLUMatrices[lu]</code></pre>
+<p>and <code>rank</code> equal to <code>1</code>. Note that <code>p = {2, 1}</code> and <code>q = {1,2}</code> tell us that the element that was pivoted on was the symbol <code>a</code>, which is the first entry of the second row, rather then <code>2 a</code>, which is the first entry of the first row, because <code>a</code> is <em>simpler</em> than <code>2 a</code> . The <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span> factors can be obtained as before using</p>
+<pre><code>{l, u} = GetFullLUMatrices[lu]</code></pre>
 <p>to get</p>
 <pre><code>l = {{1, 0}, {2, 1}}
 u = {{a, b}, {0, 0}}</code></pre>
+<p>Using <code>MatrixForm</code>:</p>
+<p><span class="math inline">\(L = \begin{bmatrix} 1 &amp; 0 \\ 2 &amp; 1 \end{bmatrix} \qquad U = \begin{bmatrix} a &amp; b \\ 0 &amp; 0 \end{bmatrix}\)</span></p>
 <p>In this case, to verify that <span class="math inline">\(P M Q = L U\)</span> input</p>
 <pre><code>NCDot[l, u] - m[[p, q]]</code></pre>
-<p>which should return a zero matrix. As with partial pivoting, the permutation matrices <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are never constructed. Instead we used <code>Part</code> (<code>[[]]</code>) to permute both columns and rows.</p>
+<p>which should return a zero matrix. As with partial pivoting, the permutation matrices <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are never constructed. Instead we used <code>Part</code> (<code>[[]]</code>) to permute both rows and columns.</p>
+<h3 id="BasicMatrices:LDLDecomposition"><span class="header-section-number">4.7.4</span> LDL Decomposition</h3>
 <p>Finally <a href="#NCLDLDecomposition"><code>NCLDLDecomposition</code></a> computes the <span class="math inline">\(LDL^T\)</span> decomposition of symmetric symbolic nc matrices. For example</p>
 <pre><code>m = {{a, b}, {b, c}}
 {ldl, p, s, rank} = NCLDLDecomposition[m]</code></pre>
@@ -808,7 +830,7 @@ u = {{a, b}, {0, 0}}</code></pre>
 s = {1, 1}
 rank = 2</code></pre>
 <p>The list <code>p</code> encodes left and right permutations, <code>s</code> is a list specifying the size of the diagonal blocks (entries can be either 1 or 2). The factors can be obtained using <a href="#GetLDUMatrices"><code>GetLDUMatrices</code></a> as in</p>
-<pre><code>{l, d, u} = GetLDUMatrices[ldl, s]</code></pre>
+<pre><code>{l, d, u} = GetFullLDUMatrices[ldl, s]</code></pre>
 <p>which in this case returns</p>
 <pre><code>l = {{1, 0}, {b**inv[a], 1}}
 d = {{a, 0}, {0, c - b**inv[a]**b}}
@@ -816,7 +838,7 @@ u = {{1, inv[a]**b}, {0, 1}}}</code></pre>
 <p>Because <span class="math inline">\(P M P^T = L D L^T\)</span>,</p>
 <pre><code>NCDot[l, d, u] - m[[p, p]]</code></pre>
 <p>is the zero matrix and <span class="math inline">\(U = L^T\)</span>.</p>
-<p><code>NCLDLDecomposition</code> works only on symmetric matrices and, whenever possible, will make assumptions on variables so that it can run successfully.</p>
+<p><code>NCLDLDecomposition</code> works only on symmetric matrices and, whenever possible, will make invertibility and symmetry assumptions on variables so that it can run successfully. If not possible it will warn the users.</p>
 <p><strong>WARNING:</strong> Versions prior to 5 contained a <code>NCLDUDecomposition</code> with a slightly different syntax which, while functional, is being deprecated in <strong>Version 5</strong>.</p>
 <h1 id="MoreAdvancedCommands"><span class="header-section-number">5</span> More Advanced Commands</h1>
 <p>In this chapter we describe some more advance features and commands. Most of these were introduced in <strong>Version 5</strong>.</p>
@@ -2711,7 +2733,9 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li>Utilities
 <ul>
 <li><a href="#GetLUMatrices">GetLUMatrices</a></li>
+<li><a href="#GetFullLUMatrices">GetFullLUMatrices</a></li>
 <li><a href="#GetLDUMatrices">GetLDUMatrices</a></li>
+<li><a href="#GetFullLDUMatrices">GetFullLDUMatrices</a></li>
 <li><a href="#GetDiagonal">GetDiagonal</a></li>
 <li><a href="#LUPartialPivoting">LUPartialPivoting</a></li>
 <li><a href="#LUCompletePivoting">LUCompletePivoting</a></li>
@@ -2726,7 +2750,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li>the second element is a vector specifying rows used for pivoting.</li>
 </ul>
 <p><code>LUDecompositionWithPartialPivoting</code> is similar in functionality with the built-in <code>LUDecomposition</code>. It implements a <em>partial pivoting</em> strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.</p>
-<p>The triangular factors are recovered using <a href="#GetLUMatrices">GetLUMatrices</a>.</p>
+<p>The triangular factors are recovered using <a href="#GetLUMatrices">GetLUMatrices</a> or <a href="#GetFullLUMatrices">GetFullLUMatrices</a>.</p>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
@@ -2735,7 +2759,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><code>Pivoting</code> (<a href="#LUPartialPivoting">LUPartialPivoting</a>): function used to sort rows for pivoting;</li>
 <li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
 </ul>
-<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
+<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#GetFullLUMatrices">GetFullLUMatrices</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
 <h3 id="LUDecompositionWithCompletePivoting"><span class="header-section-number">11.3.2</span> LUDecompositionWithCompletePivoting</h3>
 <p><code>LUDecompositionWithCompletePivoting[m]</code> generates a representation of the LU decomposition of the rectangular matrix <code>m</code>.</p>
 <p><code>LUDecompositionWithCompletePivoting[m, options]</code> uses <code>options</code>.</p>
@@ -2747,7 +2771,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li>the fourth element is the rank of the matrix.</li>
 </ul>
 <p><code>LUDecompositionWithCompletePivoting</code> implements a <em>complete pivoting</em> strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.</p>
-<p>The triangular factors are recovered using <a href="#GetLUMatrices">GetLUMatrices</a>.</p>
+<p>The triangular factors are recovered using <a href="#GetLUMatrices">GetLUMatrices</a> or <a href="#GetFullLUMatrices">GetFullLUMatrices</a>.</p>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
@@ -2755,7 +2779,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><code>Dot</code> (<code>Dot</code>): function used to multiply vectors and matrices;</li>
 <li><code>Pivoting</code> (<a href="#LUCompletePivoting">LUCompletePivoting</a>): function used to sort rows for pivoting;</li>
 </ul>
-<p>See also: LUDecomposition, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>.</p>
+<p>See also: LUDecomposition, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#GetFullLUMatrices">GetFullLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>.</p>
 <h3 id="LDLDecomposition"><span class="header-section-number">11.3.3</span> LDLDecomposition</h3>
 <p><code>LDLDecomposition[m]</code> generates a representation of the LDL decomposition of the symmetric or self-adjoint matrix <code>m</code>.</p>
 <p><code>LDLDecomposition[m, options]</code> uses <code>options</code>.</p>
@@ -2767,7 +2791,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li>the fourth element is the rank of the matrix.</li>
 </ul>
 <p><code>LUDecompositionWithCompletePivoting</code> implements a <em>Bunch-Parlett pivoting</em> strategy in which the sorting can be configured using the options listed below. It applies only to square symmetric or self-adjoint matrices.</p>
-<p>The triangular factors are recovered using <a href="#GetLDUMatrices">GetLDUMatrices</a>.</p>
+<p>The triangular factors are recovered using <a href="#GetLDUMatrices">GetLDUMatrices</a> or <a href="#GetFullLDUMatrices">GetFullLDUMatrices</a>.</p>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to decide if a pivot is zero;</li>
@@ -2780,7 +2804,7 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <li><code>SelfAdjointMatrixQ</code> (HermitianQ): function to test if matrix is self-adjoint;</li>
 <li><code>SuppressPivoting</code> (<code>False</code>): whether to perform pivoting or not.</li>
 </ul>
-<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
+<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>, <a href="#GetFullLDUMatrices">GetFullLDUMatrices</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
 <h3 id="UpperTriangularSolve"><span class="header-section-number">11.3.4</span> UpperTriangularSolve</h3>
 <p><code>UpperTriangularSolve[u, b]</code> solves the upper-triangular system of equations <span class="math inline">\(u x = b\)</span> using back-substitution.</p>
 <p>For example:</p>
@@ -2802,16 +2826,30 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <p>For example:</p>
 <pre><code>{lu, p} = LUDecompositionWithPartialPivoting[A];
 {l, u} = GetLUMatrices[lu];</code></pre>
+<p>returns the lower-triangular factor <code>l</code> and upper-triangular factor <code>u</code> as <code>SparseArray</code>s.</p>
+<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetFullLUMatrices">GetFullLUMatrices</a>.</p>
+<h3 id="GetFullLUMatrices"><span class="header-section-number">11.3.8</span> GetFullLUMatrices</h3>
+<p><code>GetFullLUMatrices[m]</code> extracts lower- and upper-triangular blocks produced by <code>LDUDecompositionWithPartialPivoting</code> and <code>LDUDecompositionWithCompletePivoting</code>.</p>
+<p>For example:</p>
+<pre><code>{lu, p} = LUDecompositionWithPartialPivoting[A];
+{l, u} = GetFullLUMatrices[lu];</code></pre>
 <p>returns the lower-triangular factor <code>l</code> and upper-triangular factor <code>u</code>.</p>
-<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>.</p>
-<h3 id="GetLDUMatrices"><span class="header-section-number">11.3.8</span> GetLDUMatrices</h3>
+<p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#GetLUMatrices">GetLUMatrices</a>.</p>
+<h3 id="GetLDUMatrices"><span class="header-section-number">11.3.9</span> GetLDUMatrices</h3>
+<p><code>GetLDUMatrices[m,s]</code> extracts lower-, upper-triangular and diagonal blocks produced by <code>LDLDecomposition</code>.</p>
+<p>For example:</p>
+<pre><code>{ldl, p, s, rank} = LDLDecomposition[A];
+{l,d,u} = GetLDUMatrices[ldl,s];</code></pre>
+<p>returns the lower-triangular factor <code>l</code>, the upper-triangular factor <code>u</code>, and the block-diagonal factor <code>d</code> as <code>SparseArray</code>s.</p>
+<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>, <a href="#GetFullLDUMatrices">GetFullLDUMatrices</a>.</p>
+<h3 id="GetFullLDUMatrices"><span class="header-section-number">11.3.10</span> GetFullLDUMatrices</h3>
 <p><code>GetLDUMatrices[m,s]</code> extracts lower-, upper-triangular and diagonal blocks produced by <code>LDLDecomposition</code>.</p>
 <p>For example:</p>
 <pre><code>{ldl, p, s, rank} = LDLDecomposition[A];
 {l,d,u} = GetLDUMatrices[ldl,s];</code></pre>
 <p>returns the lower-triangular factor <code>l</code>, the upper-triangular factor <code>u</code>, and the block-diagonal factor <code>d</code>.</p>
-<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>.</p>
-<h3 id="GetDiagonal"><span class="header-section-number">11.3.9</span> GetDiagonal</h3>
+<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>, <a href="#GetLDUMatrices">GetLDUMatrices</a>.</p>
+<h3 id="GetDiagonal"><span class="header-section-number">11.3.11</span> GetDiagonal</h3>
 <p><code>GetDiagonal[m]</code> extracts the diagonal entries of matrix <code>m</code>.</p>
 <p><code>GetDiagonal[m, s]</code> extracts the block-diagonal entries of matrix <code>m</code> with block size <code>s</code>.</p>
 <p>For example:</p>
@@ -2823,16 +2861,16 @@ NCIndependent[{inv[1+x]**inv[x], inv[x], inv[1+x]}]</code></pre>
 <p>returns</p>
 <pre><code>d = {{{1,-1},{-1,2}},3}</code></pre>
 <p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>.</p>
-<h3 id="LUPartialPivoting"><span class="header-section-number">11.3.10</span> LUPartialPivoting</h3>
+<h3 id="LUPartialPivoting"><span class="header-section-number">11.3.12</span> LUPartialPivoting</h3>
 <p><code>LUPartialPivoting[v]</code> returns the index of the element with largest absolute value in the vector <code>v</code>. If <code>v</code> is a matrix, it returns the index of the element with largest absolute value in the first column.</p>
 <p><code>LUPartialPivoting[v, f]</code> sorts with respect to the function <code>f</code> instead of the absolute value.</p>
 <p>See also: <a href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>, <a href="#LUCompletePivoting">LUCompletePivoting</a>.</p>
-<h3 id="LUCompletePivoting"><span class="header-section-number">11.3.11</span> LUCompletePivoting</h3>
+<h3 id="LUCompletePivoting"><span class="header-section-number">11.3.13</span> LUCompletePivoting</h3>
 <p><code>LUCompletePivoting[m]</code> returns the row and column index of the element with largest absolute value in the matrix <code>m</code>.</p>
 <p><code>LUCompletePivoting[v, f]</code> sorts with respect to the function <code>f</code> instead of the absolute value.</p>
 <p>See also: <a href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>, <a href="#LUPartialPivoting">LUPartialPivoting</a>.</p>
-<h3 id="LURowReduce"><span class="header-section-number">11.3.12</span> LURowReduce</h3>
-<h3 id="LURowReduceIncremental"><span class="header-section-number">11.3.13</span> LURowReduceIncremental</h3>
+<h3 id="LURowReduce"><span class="header-section-number">11.3.14</span> LURowReduce</h3>
+<h3 id="LURowReduceIncremental"><span class="header-section-number">11.3.15</span> LURowReduceIncremental</h3>
 <h1 id="packages-for-pretty-output-testing-and-utilities"><span class="header-section-number">12</span> Packages for pretty output, testing, and utilities</h1>
 <h2 id="PackageNCOutput"><span class="header-section-number">12.1</span> NCOutput</h2>
 <p><strong>NCOutput</strong> is a package that can be used to beautify the display of noncommutative expressions. NCOutput does not alter the internal representation of nc expressions, just the way they are displayed on the screen.</p>

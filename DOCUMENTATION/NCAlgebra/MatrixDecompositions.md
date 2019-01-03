@@ -26,7 +26,9 @@ Members are:
     * [LUInverse](#LUInverse)
 * Utilities
     * [GetLUMatrices](#GetLUMatrices)
+    * [GetFullLUMatrices](#GetFullLUMatrices)
     * [GetLDUMatrices](#GetLDUMatrices)
+    * [GetFullLDUMatrices](#GetFullLDUMatrices)
     * [GetDiagonal](#GetDiagonal)
     * [LUPartialPivoting](#LUPartialPivoting)
     * [LUCompletePivoting](#LUCompletePivoting)
@@ -44,7 +46,7 @@ Members are:
 
 `LUDecompositionWithPartialPivoting` is similar in functionality with the built-in `LUDecomposition`. It implements a *partial pivoting* strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.
 
-The triangular factors are recovered using [GetLUMatrices](#GetLUMatrices).
+The triangular factors are recovered using [GetLUMatrices](#GetLUMatrices) or [GetFullLUMatrices](#GetFullLUMatrices).
 
 The following `options` can be given:
 
@@ -55,7 +57,7 @@ The following `options` can be given:
 - `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
-[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUPartialPivoting](#LUPartialPivoting).
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [GetFullLUMatrices](#GetFullLUMatrices), [LUPartialPivoting](#LUPartialPivoting).
 
 ### LUDecompositionWithCompletePivoting {#LUDecompositionWithCompletePivoting}
 
@@ -72,7 +74,7 @@ See also:
 
 `LUDecompositionWithCompletePivoting` implements a *complete pivoting* strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.
 
-The triangular factors are recovered using [GetLUMatrices](#GetLUMatrices).
+The triangular factors are recovered using [GetLUMatrices](#GetLUMatrices) or [GetFullLUMatrices](#GetFullLUMatrices).
 
 The following `options` can be given:
 
@@ -82,7 +84,7 @@ The following `options` can be given:
 - `Pivoting` ([LUCompletePivoting](#LUCompletePivoting)): function used to sort rows for pivoting;
 
 See also:
-LUDecomposition, [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
+LUDecomposition, [GetLUMatrices](#GetLUMatrices), [GetFullLUMatrices](#GetFullLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
 ### LDLDecomposition {#LDLDecomposition}
 
@@ -99,7 +101,7 @@ LUDecomposition, [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUComple
 
 `LUDecompositionWithCompletePivoting` implements a *Bunch-Parlett pivoting* strategy in which the sorting can be configured using the options listed below. It applies only to square symmetric or self-adjoint matrices.
 
-The triangular factors are recovered using [GetLDUMatrices](#GetLDUMatrices).
+The triangular factors are recovered using [GetLDUMatrices](#GetLDUMatrices) or [GetFullLDUMatrices](#GetFullLDUMatrices).
 
 The following `options` can be given:
 
@@ -114,7 +116,7 @@ The following `options` can be given:
 - `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
-[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices), [GetFullLDUMatrices](#GetFullLDUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUPartialPivoting](#LUPartialPivoting).
 
 ### UpperTriangularSolve {#UpperTriangularSolve}
 
@@ -162,12 +164,40 @@ For example:
     {lu, p} = LUDecompositionWithPartialPivoting[A];
     {l, u} = GetLUMatrices[lu];
 	
+returns the lower-triangular factor `l` and upper-triangular factor `u` as `SparseArray`s.
+
+See also:
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetFullLUMatrices](#GetFullLUMatrices).
+	
+### GetFullLUMatrices {#GetFullLUMatrices}
+
+`GetFullLUMatrices[m]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
+
+For example:
+
+    {lu, p} = LUDecompositionWithPartialPivoting[A];
+    {l, u} = GetFullLUMatrices[lu];
+	
 returns the lower-triangular factor `l` and upper-triangular factor `u`.
 
 See also:
-[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).
-	
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices).
+
 ### GetLDUMatrices {#GetLDUMatrices}
+
+`GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+
+For example:
+
+    {ldl, p, s, rank} = LDLDecomposition[A];
+    {l,d,u} = GetLDUMatrices[ldl,s];
+
+returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d` as `SparseArray`s.
+
+See also:
+[LDLDecomposition](#LDLDecomposition), [GetFullLDUMatrices](#GetFullLDUMatrices).
+
+### GetFullLDUMatrices {#GetFullLDUMatrices}
 
 `GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
 
@@ -179,7 +209,7 @@ For example:
 returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d`.
 
 See also:
-[LDLDecomposition](#LDLDecomposition).
+[LDLDecomposition](#LDLDecomposition), [GetLDUMatrices](#GetLDUMatrices).
 
 ### GetDiagonal {#GetDiagonal}
 

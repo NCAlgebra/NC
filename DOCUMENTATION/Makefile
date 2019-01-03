@@ -102,6 +102,7 @@ NCDocument.pdf: $(MANUAL)
              --variable=documentclass:book \
 	     --variable=colorlinks \
 	     --variable=linkcolor:MidnightBlue \
+	     --variable=classoption:dvipsnames \
 	     -o NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
 	biber NCDocument
