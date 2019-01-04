@@ -49,15 +49,22 @@
 <li><a href="#BasicMatrices:LUDecomposition"><span class="toc-section-number">4.7.2</span> LU Decomposition</a></li>
 <li><a href="#BasicMatrices:LUDecompositionWithCompletePivoting"><span class="toc-section-number">4.7.3</span> LU Decomposition with complete pivoting</a></li>
 <li><a href="#BasicMatrices:LDLDecomposition"><span class="toc-section-number">4.7.4</span> LDL Decomposition</a></li>
+<li><a href="#ReplaceWithMatrices"><span class="toc-section-number">4.7.5</span> Replace with matrices</a></li>
 </ul></li>
+<li><a href="#Quadratic"><span class="toc-section-number">4.8</span> Quadratic polynomials</a></li>
 </ul></li>
 <li><a href="#MoreAdvancedCommands"><span class="toc-section-number">5</span> More Advanced Commands</a><ul>
-<li><a href="#AdvancedReplace"><span class="toc-section-number">5.1</span> Advanced Rules and Replacements</a></li>
-<li><a href="#AdvancedMatrices"><span class="toc-section-number">5.2</span> Matrices</a></li>
+<li><a href="#AdvancedReplace"><span class="toc-section-number">5.1</span> Advanced Rules and Replacements</a><ul>
+<li><a href="#replaceall-.-and-replacerepeated-.-often-fail"><span class="toc-section-number">5.1.1</span> <code>ReplaceAll</code> (<code>/.</code>) and <code>ReplaceRepeated</code> (<code>//.</code>) often fail</a></li>
+<li><a href="#the-fix-is-ncreplace"><span class="toc-section-number">5.1.2</span> The fix is <code>NCReplace</code></a></li>
+<li><a href="#trouble-with-block-and-module"><span class="toc-section-number">5.1.3</span> Trouble with <code>Block</code> and <code>Module</code></a></li>
+</ul></li>
+<li><a href="#AdvancedMatrices"><span class="toc-section-number">5.2</span> Expanding matrix products</a><ul>
+<li><a href="#trouble-with-plus-and-matrices"><span class="toc-section-number">5.2.1</span> Trouble with <code>Plus</code> (<code>+</code>) and matrices</a></li>
+</ul></li>
 <li><a href="#PolysWithCommutativeCoefficients"><span class="toc-section-number">5.3</span> Polynomials with commutative coefficients</a></li>
 <li><a href="#polynomials-with-noncommutative-coefficients"><span class="toc-section-number">5.4</span> Polynomials with noncommutative coefficients</a></li>
-<li><a href="#Quadratic"><span class="toc-section-number">5.5</span> Quadratic polynomials</a></li>
-<li><a href="#Linear"><span class="toc-section-number">5.6</span> Linear polynomials</a></li>
+<li><a href="#Linear"><span class="toc-section-number">5.5</span> Linear polynomials</a></li>
 </ul></li>
 <li><a href="#NCGB"><span class="toc-section-number">6</span> Noncommutative Gröbner Basis</a><ul>
 <li><a href="#what-is-a-gröbner-basis"><span class="toc-section-number">6.1</span> What is a Gröbner Basis?</a></li>
@@ -660,7 +667,7 @@ NCCoefficientRules[expr, vars]</code></pre>
 <p>The above commands are based on special packages for efficiently storing and calcuating with nc polynomials. Those packages are</p>
 <ul>
 <li><a href="#PackageNCPoly"><code>NCPoly</code></a>: which handles polynomials with noncommutative coefficients, and</li>
-<li><a href="#PackageNCPolynomial"><code>NCPolynomial</code></a>: which handles polynomials with noncommutative coefficients.</li>
+<li><a href="#PackageNCPolynomial"><code>NCPolynomial</code></a>: which handles polynomials with real coefficients.</li>
 </ul>
 <p>For example:</p>
 <pre><code>1 + y**x**y - A x</code></pre>
@@ -743,7 +750,7 @@ expr2 = inv[1+a**b]**a</code></pre>
 <p>or, using <code>MatrixForm</code></p>
 <p><code>NCInverse[m] // MatrixForm NCInverse[m] // MatrixForm</code></p>
 <p>returns</p>
-<p><span class="math inline">\(\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) &amp; -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-2} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b) \end{bmatrix}\)</span></p>
+<p><span class="math inline">\(\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) &amp; -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b)^{-1} \end{bmatrix}\)</span></p>
 <p>Note that <code>a</code> and <code>d - c**inv[a]**b</code> were assumed invertible during the calculation.</p>
 <p>Similarly, one can multiply matrices using <a href="#NCDot"><code>NCDot</code></a>, which is similar to Mathematica's <code>Dot</code>. For example</p>
 <pre><code>m1 = {{a, b}, {c, d}}
@@ -778,7 +785,7 @@ p = {1, 2}</code></pre>
 <pre><code>l = {{1, 0}, {c**inv[a], 1}}
 u = {{a, b}, {0, d - c**inv[a]**b}}</code></pre>
 <p>Using <code>MatrixForm</code>:</p>
-<p><span class="math inline">\(L = \begin{bmatrix} 1 &amp; 0 \\ c a^{-1} &amp; 1 \end{bmatrix} \qquad U = \begin{bmatrix} a &amp; b \\ 0 &amp; d - c a^{-1} b \end{bmatrix}\)</span></p>
+<p><span class="math inline">\(L = \begin{bmatrix} 1 &amp; 0 \\ c a^{-1} &amp; 1 \end{bmatrix}, \qquad U = \begin{bmatrix} a &amp; b \\ 0 &amp; d - c a^{-1} b \end{bmatrix}\)</span></p>
 <p>To verify that <span class="math inline">\(M = L U\)</span> input</p>
 <pre><code>m - NCDot[l, u]</code></pre>
 <p>which should return a zero matrix.</p>
@@ -794,7 +801,12 @@ u = {{1, d}, {0, b - a**d}}</code></pre>
 <pre><code>p = {2, 1}</code></pre>
 <p>which indicates that the number <code>1</code>, appearing in the second row, was used as the pivot rather than the symbol <code>a</code> appearing on the first row. Because of the permutation, to verify that <span class="math inline">\(P M = L U\)</span> input</p>
 <pre><code>m[[p]] - NCDot[l, u]</code></pre>
-<p>which should return a zero matrix. Note that in the above example the permutation matrix <span class="math inline">\(P\)</span> is never constructed. Instead, the rows of <span class="math inline">\(M\)</span> are directly permuted using Mathematica's <code>Part</code> (<code>[[]]</code>) command. Likewise</p>
+<p>which should return a zero matrix. Note that in the above example the permutation matrix <span class="math inline">\(P\)</span> is never constructed. Instead, the rows of <span class="math inline">\(M\)</span> are directly permuted using Mathematica's <code>Part</code> (<code>[[]]</code>) command. Of course, if one prefers to work with permutation matrices, they can be easily obtained by permuting the rows of the identity matrix as in the following example</p>
+<pre><code>p = {2, 1, 3}
+IdentityMatrix[3][[p]] // MatrixForm</code></pre>
+<p>to produce</p>
+<p><span class="math inline">\(\begin{bmatrix} 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span></p>
+<p>Likewise</p>
 <pre><code>m = {{a + b, b}, {c, d}}
 {lu, p} = NCLUDecompositionWithPartialPivoting[m]
 {l, u} = GetFullLUMatrices[lu]</code></pre>
@@ -817,7 +829,7 @@ q = {1, 2}</code></pre>
 <pre><code>l = {{1, 0}, {2, 1}}
 u = {{a, b}, {0, 0}}</code></pre>
 <p>Using <code>MatrixForm</code>:</p>
-<p><span class="math inline">\(L = \begin{bmatrix} 1 &amp; 0 \\ 2 &amp; 1 \end{bmatrix} \qquad U = \begin{bmatrix} a &amp; b \\ 0 &amp; 0 \end{bmatrix}\)</span></p>
+<p><span class="math inline">\(L = \begin{bmatrix} 1 &amp; 0 \\ 2 &amp; 1 \end{bmatrix}, \qquad U = \begin{bmatrix} a &amp; b \\ 0 &amp; 0 \end{bmatrix}\)</span></p>
 <p>In this case, to verify that <span class="math inline">\(P M Q = L U\)</span> input</p>
 <pre><code>NCDot[l, u] - m[[p, q]]</code></pre>
 <p>which should return a zero matrix. As with partial pivoting, the permutation matrices <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are never constructed. Instead we used <code>Part</code> (<code>[[]]</code>) to permute both rows and columns.</p>
@@ -839,13 +851,121 @@ u = {{1, inv[a]**b}, {0, 1}}}</code></pre>
 <pre><code>NCDot[l, d, u] - m[[p, p]]</code></pre>
 <p>is the zero matrix and <span class="math inline">\(U = L^T\)</span>.</p>
 <p><code>NCLDLDecomposition</code> works only on symmetric matrices and, whenever possible, will make invertibility and symmetry assumptions on variables so that it can run successfully. If not possible it will warn the users.</p>
-<p><strong>WARNING:</strong> Versions prior to 5 contained a <code>NCLDUDecomposition</code> with a slightly different syntax which, while functional, is being deprecated in <strong>Version 5</strong>.</p>
+<p><strong>WARNING:</strong> Versions prior to 5 contained the command <code>NCLDUDecomposition</code> which is being deprecated in <strong>Version 5</strong> as its functionality is now provided by <a href="#NCDLDDecomposition"><code>NCLDLDecomposition</code></a>, with a slightly different syntax.</p>
+<h3 id="ReplaceWithMatrices"><span class="header-section-number">4.7.5</span> Replace with matrices</h3>
+<p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a> are special versions of <a href="#NCReplaceAll"><code>NCReplaceAll</code></a> and <a href="#NCReplaceRepeated"><code>NCReplaceRepeated</code></a> that take extra steps to preserve matrix consistency when replacing expressions with nc matrices. For example, with</p>
+<pre><code>m1 = {{a, b}, {c, d}}
+m2 = {{d, 2}, {e, 3}}</code></pre>
+<p>and</p>
+<pre><code>M = {{a11,a12}}</code></pre>
+<p>the call</p>
+<pre><code>NCMatrixReplaceRepeated[M, {a11 -&gt; m1, a12 -&gt; m2}]</code></pre>
+<p>produces as a result the matrix</p>
+<pre><code>{{a, b, d, 2}, {c, d, e, 3}}</code></pre>
+<p>or, using <code>MatrixForm</code>:</p>
+<p><span class="math inline">\(\begin{bmatrix} a &amp; b &amp; d &amp; 2 \\ c &amp; d &amp; e &amp; 3 \end{bmatrix}\)</span></p>
+<p>Note how the symbols were treated as block-matrices during the substitution. As a second example, with</p>
+<pre><code>M = {{a11, 0}, {0, a22}}</code></pre>
+<p>the command</p>
+<pre><code>NCMatrixReplaceRepeated[M, {a11 -&gt; m1, a22 -&gt; m2}]</code></pre>
+<p>produces the matrix</p>
+<pre><code>{{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}</code></pre>
+<p>or, using <code>MatrixForm</code>:</p>
+<p><span class="math inline">\(\begin{bmatrix} a &amp; b &amp; 0 &amp; 0 \\ c &amp; d &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; d &amp; 2 \\ 0 &amp; 0 &amp; e &amp; 3 \end{bmatrix}\)</span></p>
+<p>in which the <code>0</code> blocks were automatically expanded to fit the adjacent block matrices.</p>
+<p>Another feature of <code>NCMatrixReplace</code> and its variants is its ability to withold evaluation until all matrix substitutions have taken place. For example,</p>
+<pre><code>NCMatrixReplaceAll[x**y + y, {x -&gt; m1, y -&gt; m2}]</code></pre>
+<p>produces</p>
+<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
+<p>Finally, <code>NCMatrixReplace</code> substitutes <code>NCInverse</code> for <code>inv</code> so that, for instance, the result of</p>
+<pre><code>rule = {x -&gt; m1, y -&gt; m2, id -&gt; IdentityMatrix[2], z -&gt; {{id,x},{x,id}}}
+NCMatrixReplaceRepeated[inv[z], rule]</code></pre>
+<p>coincides with</p>
+<pre><code>NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]</code></pre>
+<h2 id="Quadratic"><span class="header-section-number">4.8</span> Quadratic polynomials</h2>
+<p>When working with nc quadratics it is useful to be able to factor the quadratic into the following form <span class="math display">\[
+    q(x) = c + s(x) + l(x) M r(x)
+\]</span> where <span class="math inline">\(s\)</span> is linear <span class="math inline">\(x\)</span> and <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are vectors and <span class="math inline">\(M\)</span> is a matrix. Load the package</p>
+<pre><code>&lt;&lt; NCQuadratic`</code></pre>
+<p>and use the command <a href="#NCToNCQuadratic"><code>NCToNCQuadratic</code></a> to factor an nc polynomial into the the above form:</p>
+<pre><code>vars = {x, y};
+expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
+{const, lin, left, middle, right} = NCToNCQuadratic[expr, vars];</code></pre>
+<p>which returns</p>
+<pre><code>left = {tp[x],tp[y]}
+right = {y, x**d}
+middle = {{a,b}, {tp[b],c}}</code></pre>
+<p>and zero <code>const</code> and <code>lin</code>. The format for the linear part <code>lin</code> will be discussed lated in Section <a href="#Linear">Linear</a>. Note that coefficients of an nc quadratic may also appear on the left and right vectors, as <code>d</code> did in the above example. Conversely, <a href="#NCQuadraticToNC"><code>NCQuadraticToNC</code></a> converts a list with factors back to an nc expression as in:</p>
+<pre><code>NCQuadraticToNC[{const, lin, left, middle, right}]</code></pre>
+<p>which results in</p>
+<pre><code>(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d</code></pre>
+<p>An interesting application is the verification of the domain in which an nc rational is <em>convex</em>. Take for example the quartic</p>
+<pre><code>expr = x**x**x**x;</code></pre>
+<p>and calculate its noncommutative directional <em>Hessian</em></p>
+<pre><code>hes = NCHessian[expr, {x, h}]</code></pre>
+<p>This command returns</p>
+<pre><code>2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h</code></pre>
+<p>which is quadratic in the direction <code>h</code>. The decomposition of the nc Hessian using <code>NCToNCQuadratic</code></p>
+<pre><code>{const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];</code></pre>
+<p>produces</p>
+<pre><code>left = {h, x**h, x**x**h}
+right = {h**x**x, h**x, h}
+middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}</code></pre>
+<p>Note that the middle matrix <span class="math display">\[
+\begin{bmatrix}
+2 &amp; 2 x &amp; 2 x^2 \\
+0 &amp; 2 &amp; 2 x \\
+0 &amp; 0 &amp; 2
+\end{bmatrix}
+\]</span> is not <em>symmetric</em>, as one might have expected. The command <a href="#NCQuadraticMakeSymmetric"><code>NCQuadraticMakeSymmetric</code></a> can fix that and produce a symmetric decomposition. For the above example</p>
+<pre><code>{const, lin, sleft, smiddle, sright} = 
+  NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
+                           SymmetricVariables -&gt; {x, h}]</code></pre>
+<p>results in</p>
+<pre><code>sleft = {x**x**h, x**h, h}
+sright = {h**x**x, h**x, h}
+middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}</code></pre>
+<p>in which <code>middle</code> is the symmetric matrix <span class="math display">\[
+\begin{bmatrix}
+0 &amp; 0 &amp; 2 \\
+0 &amp; 2 &amp; 2 x \\
+2 &amp; 2 x &amp; 2 x^2
+\end{bmatrix}
+\]</span> Note the argument <code>SymmetricVariables -&gt; {x,h}</code> which tells <code>NCQuadraticMakeSymmetric</code> to consider <code>x</code> and <code>y</code> as symmetric variables. Because the <code>middle</code> matrix is never positive semidefinite for any possible value of <span class="math inline">\(x\)</span> the conclusion<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> is that the nc quartic <span class="math inline">\(x^4\)</span> is <em>not convex</em>.</p>
+<p>The production of such symmetric quadratic decompositions is automated by the convenience command <a href="#NCMatrixOfQuadratic"><code>NCMatrixOfQuadratic</code></a>. Verify that</p>
+<pre><code>{sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]</code></pre>
+<p>automatically assumes that both <code>x</code> and <code>h</code> are symmetric variables and produces suitable left and right vectors as well as a symmetric middle matrix. Now we illustrate the application of such command to checking the convexity region of a noncommutative rational function.</p>
+<p>If one is interested in checking convexity of nc rationals the package <a href="#PackageNCConvexity"><code>NCConvexity</code></a> has functions that automate the whole process, including the calculation of the Hessian and the middle matrix, followed by the diagonalization of the middle matrix as produced by <a href="#NCLDLDecomposition"><code>NCLDLDecomposition</code></a>.</p>
+<p>For example, the commands evaluate the nc Hessian and calculates its quadratic decomposition</p>
+<pre><code>expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
+{left, middle, right} = NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];</code></pre>
+<p>The resulting middle matrix can be factored using</p>
+<pre><code>{ldl, p, s, rank} = NCLDLDecomposition[middle];
+{ll, dd, uu} = GetLDUMatrices[ldl, s];</code></pre>
+<p>which produces the diagonal factors <span class="math display">\[
+\begin{bmatrix}
+  2 (1 + b y + y b - a x a)^{-1} &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span> which indicates the the original nc rational is convex whenever <span class="math display">\[
+(1 + b y + y b - a x a)^{-1} \succeq 0
+\]</span> or, equivalently, whenever <span class="math display">\[
+1 + b y + y b - a x a \succeq 0
+\]</span> The above sequence of calculations is automated by the command <a href="#NCConvexityRegion"><code>NCConvexityRegion</code></a> as in</p>
+<pre><code>&lt;&lt; NCConvexity`
+NCConvexityRegion[expr, {x}]</code></pre>
+<p>which results in</p>
+<pre><code>{2 inv[1 + b**y + y**b - a**x**a], 0}</code></pre>
+<p>which correspond to the diagonal entries of the LDL decomposition of the middle matrix of the nc Hessian.</p>
 <h1 id="MoreAdvancedCommands"><span class="header-section-number">5</span> More Advanced Commands</h1>
 <p>In this chapter we describe some more advance features and commands. Most of these were introduced in <strong>Version 5</strong>.</p>
 <p>If you want a living version of this chapter just run the notebook <code>NC/DEMOS/2_MoreAdvancedCommands.nb</code>.</p>
 <h2 id="AdvancedReplace"><span class="header-section-number">5.1</span> Advanced Rules and Replacements</h2>
 <p>Substitution is a key feature of Symbolic computation. We will now discuss some issues related to Mathematica's implementation of rules and replacements that can affect the behavior of <code>NCAlgebra</code> expressions.</p>
-<p>The first issue is related to how Mathematica performs substitutions, which is through <a href="http://reference.wolfram.com/language/guide/RulesAndPatterns.html">pattern matching</a>. For a rule to be effective if has to <em>match</em> the <em>structural</em> representation of an expression. That representation might be different than one would normally think based on the usual properties of mathematical operators. For example, one would expect the rule:</p>
+<h3 id="replaceall-.-and-replacerepeated-.-often-fail"><span class="header-section-number">5.1.1</span> <code>ReplaceAll</code> (<code>/.</code>) and <code>ReplaceRepeated</code> (<code>//.</code>) often fail</h3>
+<p>The first issue is related to how Mathematica performs substitutions, which is through <a href="http://reference.wolfram.com/language/guide/RulesAndPatterns.html">pattern matching</a>. For a rule to be effective if has to match the <em>structural</em> representation of an expression. That representation might be different than one would normally think based on the usual properties of mathematical operators. For example, one would expect the rule:</p>
 <pre><code>rule = 1 + x_ -&gt; x</code></pre>
 <p>to match all the expressions bellow:</p>
 <pre><code>1 + a
@@ -859,8 +979,8 @@ u = {{1, inv[a]**b}, {0, 1}}}</code></pre>
 2 a
 a + b
 2 a * b</code></pre>
-<p>Indeed, Mathematica's attribute <code>Flat</code> does precisely that. Note that this is stil <em>structural matching</em>, not <em>mathematical matching</em>, since the pattern <code>1 + x_</code> would not match an integer <code>2</code>, even though one could write <code>2 = 1 + 1</code>!</p>
-<p>Unfortunately, <code>**</code>, which is the <code>NonCommutativeMultiply</code> operator, <em>is not</em> <code>Flat</code><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. This is the reason why substitution based on a simple rule such as:</p>
+<p>Indeed, Mathematica's attribute <code>Flat</code> does precisely that. Note that this is still <em>structural matching</em>, not <em>mathematical matching</em>, since the pattern <code>1 + x_</code> would not match an integer <code>2</code>, even though one could write <code>2 = 1 + 1</code>!</p>
+<p>Unfortunately, <code>**</code>, which is the <code>NonCommutativeMultiply</code> operator, <em>is not</em> <code>Flat</code><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. This is the reason why substitution based on a simple rule such as:</p>
 <pre><code>rule = a**b -&gt; c</code></pre>
 <p>so that</p>
 <pre><code>expr /. rule</code></pre>
@@ -873,17 +993,19 @@ a + b
 c**a**b
 c**a**b**d
 1 + 2 a**b**c</code></pre>
-<p>That's what the <code>NCAlgebra</code> family of replacement functions are made for. Calling</p>
+<p>That's what the <code>NCAlgebra</code> family of replacement functions discussed in the next section are made for.</p>
+<h3 id="the-fix-is-ncreplace"><span class="header-section-number">5.1.2</span> The fix is <code>NCReplace</code></h3>
+<p>Continuing with the example in the previous section, the calls</p>
 <pre><code>NCReplaceAll[a**b**c, rule]
 NCReplaceAll[ c**a**b, rule ]
 NCReplaceAll[c**a**b**d, rule]
 NCReplaceAll[1 + 2 a**b**c, rule ]</code></pre>
-<p>would produce the results one would expect:</p>
+<p>produces the results one would expect:</p>
 <pre><code>c**c
 c**c
 c**c**d
 1 + 2 c**c</code></pre>
-<p>For this reason, when substituting in <code>NCAlgebra</code> it is always safer to use functions from the <a href="#PackageNCReplace"><code>NCReplace</code> package</a> rather than the corresponding Mathematice <code>Replace</code> family of functions. Unfortunately, this comes at a the expense of sacrificing the standard operators <code>/.</code> (<code>ReplaceAll</code>) and <code>//.</code> (<code>ReplaceRepeated</code>), which cannot be safely overloaded, forcing one to use the full names <code>NCReplaceAll</code> and <code>NCReplaceRepeated</code>.</p>
+<p>For this reason, when substituting in <code>NCAlgebra</code> it is always safer to use functions from the <a href="#PackageNCReplace"><code>NCReplace</code> package</a> rather than the corresponding Mathematica <code>Replace</code> family of functions. Unfortunately, this comes at a the expense of sacrificing the standard operators <code>/.</code> (<code>ReplaceAll</code>) and <code>//.</code> (<code>ReplaceRepeated</code>), which cannot be safely overloaded, forcing one to use the full names <code>NCReplaceAll</code> and <code>NCReplaceRepeated</code>.</p>
 <p>On the same vein, the following substitution rule</p>
 <pre><code>NCReplace[2 a**b + c, 2 a -&gt; b]</code></pre>
 <p>will return <code>2 a**b + c</code> intact since <code>FullForm[2 a**b]</code> is indeed</p>
@@ -891,7 +1013,8 @@ c**c**d
 <p>which is not structurally related to <code>FullForm[2 a]</code>, which is <code>Times[2, a]</code>. Of course, in this case a simple solution is to use the alternative rule:</p>
 <pre><code>NCReplace[2 a**b + c, a -&gt; b / 2]</code></pre>
 <p>which results in <code>b**b + c</code>, as one might expect.</p>
-<p>A second more esoteric issue related to substitution in <code>NCAlgebra</code> does not a clean solution. It is also one that usually lurks into hidden pieces of code and can be very difficult to spot. We have been victim of such &quot;bug&quot; many times. Luckily it only affect advanced users that are using <code>NCAlgebra</code> inside their own functions using Mathematica's <code>Block</code> and <code>Module</code> constructions. It is also not a real bug, since it follows from some often not well understood issues with the usage of <a href="http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html"><code>Block</code> versus <code>Module</code></a>. Our goal here is therefore not to <em>fix</em> the issue but simply to alert advanced users of its existence. Start by first revisiting the following example from the <a href="http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html">Mathematica documentation</a>. Let</p>
+<h3 id="trouble-with-block-and-module"><span class="header-section-number">5.1.3</span> Trouble with <code>Block</code> and <code>Module</code></h3>
+<p>A second more esoteric issue related to substitution in <code>NCAlgebra</code> does not have a clean solution. It is also one that usually lurks in hidden pieces of code and can be very difficult to spot. We have been victim of such &quot;bugs&quot; many times. Luckily it only affect advanced users that are using <code>NCAlgebra</code> inside their own functions using Mathematica's <code>Block</code> and <code>Module</code> constructions. It is also not a real bug, since it follows from some often not well understood issues with the usage of <a href="http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html"><code>Block</code> versus <code>Module</code></a>. Our goal here is therefore not to <em>fix</em> the issue but simply to alert advanced users of its existence. Start by first revisiting the following example from the <a href="http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html">Mathematica documentation</a>. Let</p>
 <pre><code>m = i^2</code></pre>
 <p>and run</p>
 <pre><code>Block[{i = a}, i + m]</code></pre>
@@ -901,7 +1024,7 @@ c**c**d
 <pre><code>Module[{i = a}, i + m]</code></pre>
 <p>which returns the ``surprising''</p>
 <pre><code>a + i**i</code></pre>
-<p>The reason for this behavior is that <code>Block</code> effectively evaluates <code>i</code> as a <em>local variable</em> and then <code>m</code> using whatever values are available at the time of evaluation, whereas <code>Module</code> only evaluates the symbol <code>i</code> which appears <em>explicitly</em> in <code>i + m</code> and not <code>m</code> using the local value of <code>i = a</code>. This can lead to many surprises when using rules and substitution inside <code>Module</code>. For example:</p>
+<p>The reason for this behavior is that <code>Block</code> effectively evaluates <code>i</code> as a <em>local variable</em> and evaluates <code>m</code> using whatever values are available at the time of evaluation, whereas <code>Module</code> only evaluates the symbol <code>i</code> which appears <em>explicitly</em> in <code>i + m</code> and not <code>m</code> using the local value of <code>i = a</code>. This can lead to many surprises when using rules and substitution inside a <code>Module</code>. For example:</p>
 <pre><code>Block[{i = a}, i_ -&gt; i]</code></pre>
 <p>will return</p>
 <pre><code>i_ -&gt; a</code></pre>
@@ -931,7 +1054,7 @@ G[exp_] := Block[
 <pre><code>F[x**y]</code></pre>
 <p>returns</p>
 <pre><code>x y</code></pre>
-<p>which completely destroys the noncommutative product. The reason for the catastrophic failure of the definition of <code>F</code>, which is inside a <code>Module</code>, is that the letters <code>aa</code> and <code>bb</code> appearing in <code>rule</code> are <em>not treated as the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. For this reason, the right-hand side of the rule <code>rule</code> involves the global symbols <code>aa</code> and <code>bb</code>, which are, in the absence of a declaration to the contrary, commutative. On the other hand, the definition of <code>G</code> inside a <code>Block</code> makes sure that <code>aa</code> and <code>bb</code> are evaluated with whatever value they might have locally at the time of execution.</p>
+<p>which completely destroys the noncommutative product. The reason for the catastrophic failure of the definition of <code>F</code>, which is inside a <code>Module</code>, is that the letters <code>aa</code> and <code>bb</code> appearing in <code>rule</code> are <em>not treated as the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. For this reason, the right-hand side of the rule <code>rule</code> involves the global symbols <code>aa</code> and <code>bb</code>, which are, in the absence of a declaration to the contrary, commutative. On the other hand, the definition of <code>G</code> inside a <code>Block</code> makes sure that <code>aa</code> and <code>bb</code> are evaluated with whatever value they might have locally at the time of execution.</p>
 <p>The above subtlety often manifests itself partially, sometimes causing what might be perceived as some kind of <em>erratic behavior</em>. Indeed, if one had used symbols that were already declared globaly noncommutative by <code>NCAlgebra</code>, such as single small cap roman letters as in the definition:</p>
 <pre><code>H[exp_] := Module[
   {rule, a, b},
@@ -940,7 +1063,7 @@ G[exp_] := Block[
   NCReplaceAll[exp, rule]
 ]</code></pre>
 <p>then calling <code>H[x**y]</code> would have worked ``as expected'', even if for the wrong reasons!</p>
-<h2 id="AdvancedMatrices"><span class="header-section-number">5.2</span> Matrices</h2>
+<h2 id="AdvancedMatrices"><span class="header-section-number">5.2</span> Expanding matrix products</h2>
 <p>Starting at <strong>Version 5</strong> the operators <code>**</code> and <code>inv</code> apply also to matrices. However, in order for <code>**</code> and <code>inv</code> to continue to work as full fledged operators, the result of multiplications or inverses of matrices is held unevaluated until the user calls <a href="#NCMatrixExpand"><code>NCMatrixExpand</code></a>. This is in the the same spirit as good old fashion commutative operations in Mathematica.</p>
 <p>For example, with</p>
 <pre><code>m1 = {{a, b}, {c, d}}
@@ -953,7 +1076,7 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <pre><code>m1**m2 // NCMatrixExpand</code></pre>
 <p>evaluation takes place returning</p>
 <pre><code>{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}</code></pre>
-<p>which is what would have been by calling <code>NCDot[m1,m2]</code><a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. Likewise</p>
+<p>which is what would have arisen from calling <code>NCDot[m1,m2]</code><a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>. Likewise</p>
 <pre><code>inv[m1]</code></pre>
 <p>results in</p>
 <pre><code>inv[{{a, b}, {c, d}}]</code></pre>
@@ -962,6 +1085,8 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <p>returns the evaluated result</p>
 <pre><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
  {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}</code></pre>
+<p>or, using <code>MatrixForm</code>:</p>
+<p><span class="math inline">\(\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) &amp; -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b)^{-1} \end{bmatrix}\)</span></p>
 <p>A less trivial example is</p>
 <pre><code>m3 = m1**inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1]**m1</code></pre>
 <p>that returns</p>
@@ -987,18 +1112,16 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <p>returns</p>
 <pre><code>{{0, 0}, {0, 0}}</code></pre>
 <p>as expected.</p>
-<p><strong>WARNING:</strong> Mathematica's choice of treating lists and matrix indistinctively can cause much trouble when mixing <code>**</code> with <code>Plus</code> (<code>+</code>) operator. For example, the expression</p>
-<pre><code>m1**m2 + m2**m1</code></pre>
-<p>results in</p>
-<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}</code></pre>
-<p>and</p>
-<pre><code>m1**m2 + m2**m1 // NCMatrixExpand</code></pre>
-<p>produces the expected result</p>
-<pre><code>{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
- {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}</code></pre>
-<p>However, because <code>**</code> is held unevaluated, the expression</p>
+<h3 id="trouble-with-plus-and-matrices"><span class="header-section-number">5.2.1</span> Trouble with <code>Plus</code> (<code>+</code>) and matrices</h3>
+<p>Mathematica's choice of treating lists and matrix indistinctively can cause much trouble when mixing <code>**</code> with <code>Plus</code> (<code>+</code>) operator. The reason for that is that <code>Plus</code> is <code>Listable</code>, and an expression like</p>
+<pre><code>z + m1</code></pre>
+<p>where <code>m1</code> is an array and <code>z</code> is not, is automatically expanded into</p>
+<pre><code>{{a + z, b + z}, {c + z, d + z}}</code></pre>
+<p>or, using <code>MatrixForm</code>:</p>
+<p><span class="math inline">\(\begin{bmatrix} a + z &amp; b + z \\ c + z &amp; d + z \end{bmatrix}\)</span></p>
+<p>Because of this &quot;feature&quot;, the expression</p>
 <pre><code>m1**m2 + m2 // NCMatrixExpand</code></pre>
-<p>returns the &quot;wrong&quot; result</p>
+<p>evaluates to the &quot;wrong&quot; result</p>
 <pre><code>{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
  {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
  {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
@@ -1010,17 +1133,21 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <pre><code>NCMatrixExpand[m1**m2] + m2</code></pre>
 <p>or</p>
 <pre><code>NCDot[m1, m2] + m2</code></pre>
-<p>The reason for this behavior is that <code>m1**m2</code> is essentially treated as a <em>scalar</em> (it does not have <em>head</em> <code>List</code>) and therefore gets added entrywise to <code>m2</code> <em>before</em> <code>NCMatrixExpand</code> has a chance to evaluate the <code>**</code> product. There are no easy fixes for this problem, which affects not only <code>NCAlgebra</code> but any similar type of matrix product evaluation in Mathematica. With <code>NCAlgebra</code>, a better option is to use <a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> or <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>.</p>
-<p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a> are special versions of <a href="#NCReplaceAll"><code>NCReplaceAll</code></a> and <a href="#NCReplaceRepeated"><code>NCReplaceRepeated</code></a> that take extra steps to preserve matrix consistency when replacing expressions with nc matrices. For example</p>
+<p>The reason for the behavior is that <code>m1**m2</code> is essentially treated as a <em>scalar</em> (it does not have <em>head</em> <code>List</code>) and therefore gets added entrywise to <code>m2</code> <em>before</em> <code>NCMatrixExpand</code> has a chance to evaluate the <code>**</code> product.</p>
+<p>There are no easy fixes for this problem, which affects not only <code>NCAlgebra</code> but any similar type of matrix product evaluation in Mathematica. With <code>NCAlgebra</code>, a better option is to use <a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> or <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>. As seen in the section <a href="#ReplaceWithMatrices">Replace with matrices</a>, the command</p>
 <pre><code>NCMatrixReplaceAll[x**y + y, {x -&gt; m1, y -&gt; m2}]</code></pre>
-<p>does produce the &quot;correct&quot; result</p>
+<p>produces the expected result:</p>
 <pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
  {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
-<p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and <a href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a> also work with block matrices. For example</p>
-<pre><code>rule = {x -&gt; m1, y -&gt; m2, id -&gt; IdentityMatrix[2], z -&gt; {{id,x},{x,id}}}
-NCMatrixReplaceRepeated[inv[z], rule]</code></pre>
-<p>coincides with the result of</p>
-<pre><code>NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]</code></pre>
+<p>Note that the above behavior might be erratic, since in an expression like</p>
+<pre><code>m1**m2 + m2**m1</code></pre>
+<p>in which <code>**</code> is kept unevaluated as in</p>
+<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}</code></pre>
+<p>the command</p>
+<pre><code>m1**m2 + m2**m1 // NCMatrixExpand</code></pre>
+<p>expands to the expected result</p>
+<pre><code>{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+ {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}</code></pre>
 <h2 id="PolysWithCommutativeCoefficients"><span class="header-section-number">5.3</span> Polynomials with commutative coefficients</h2>
 <p>The package <a href="#PackageNCPoly"><code>NCPoly</code></a> provides an efficient structure for storing and operating with noncommutative polynomials with commutative coefficients. There are two main goals:</p>
 <ol type="1">
@@ -1184,85 +1311,9 @@ y^T
 \begin{bmatrix} c^T &amp; 0 \end{bmatrix}
 \end{aligned}
 \]</span></p>
-<p>See section <a href="#Linear">linear functions</a> for more features on linear polynomial matrices.</p>
-<h2 id="Quadratic"><span class="header-section-number">5.5</span> Quadratic polynomials</h2>
-<p>When working with nc quadratics it is useful to be able to factor the quadratic into the following form <span class="math display">\[
-    q(x) = c + s(x) + l(x) M r(x)
-\]</span> where <span class="math inline">\(s\)</span> is linear <span class="math inline">\(x\)</span> and <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are vectors and <span class="math inline">\(M\)</span> is a matrix. Load the package</p>
-<pre><code>&lt;&lt; NCQuadratic`</code></pre>
-<p>and use the command <a href="#NCToNCQuadratic"><code>NCToNCQuadratic</code></a> to factor an nc polynomial into the the above form:</p>
-<pre><code>vars = {x, y};
-expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
-{const, lin, left, middle, right} = NCPToNCQuadratic[expr, vars];</code></pre>
-<p>which returns</p>
-<pre><code>left = {tp[x],tp[y]}
-right = {y, x**d}
-middle = {{a,b}, {tp[b],c}}</code></pre>
-<p>and zero <code>const</code> and <code>lin</code>. The format for the linear part <code>lin</code> will be discussed lated in Section <a href="#Linear">Linear</a>. Note that coefficients of an nc quadratic may also appear on the left and right vectors, as <code>d</code> did in the above example. You can also convert an <code>NCPolynomial</code> using <a href="#NCPToNCQuadratic"><code>NCPToNCQuadratic</code></a>. Conversely, <a href="#NCQuadraticToNC"><code>NCQuadraticToNC</code></a> converts a list with factors back to an nc expression as in:</p>
-<pre><code>NCQuadraticToNC[{const, lin, left, middle, right}]</code></pre>
-<p>which results in</p>
-<pre><code>(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d</code></pre>
-<p>An interesting application is the verification of the domain in which an nc rational is <em>convex</em>. Take for example the quartic</p>
-<pre><code>expr = x**x**x**x;</code></pre>
-<p>and calculate its noncommutative directional <em>Hessian</em></p>
-<pre><code>hes = NCHessian[expr, {x, h}]</code></pre>
-<p>This command returns</p>
-<pre><code>2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h</code></pre>
-<p>which is quadratic in the direction <code>h</code>. The decomposition of the nc Hessian using <code>NCToNCQuadratic</code></p>
-<pre><code>{const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];</code></pre>
-<p>produces</p>
-<pre><code>left = {h, x**h, x**x**h}
-right = {h**x**x, h**x, h}
-middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}</code></pre>
-<p>Note that the middle matrix <span class="math display">\[
-\begin{bmatrix}
-2 &amp; 2 x &amp; 2 x^2 \\
-0 &amp; 2 &amp; 2 x \\
-0 &amp; 0 &amp; 2
-\end{bmatrix}
-\]</span> is not <em>symmetric</em>, as one might have expected. The command <a href="#NCQuadraticMakeSymmetric"><code>NCQuadraticMakeSymmetric</code></a> can fix that and produce a symmetric decomposition. For the above example</p>
-<pre><code>{const, lin, sleft, smiddle, sright} = 
-  NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
-                           SymmetricVariables -&gt; {x, h}]</code></pre>
-<p>results in</p>
-<pre><code>sleft = {x**x**h, x**h, h}
-sright = {h**x**x, h**x, h}
-middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}</code></pre>
-<p>in which <code>middle</code> is the symmetric matrix <span class="math display">\[
-\begin{bmatrix}
-0 &amp; 0 &amp; 2 \\
-0 &amp; 2 &amp; 2 x \\
-2 &amp; 2 x &amp; 2 x^2
-\end{bmatrix}
-\]</span> Note the argument <code>SymmetricVariables -&gt; {x,h}</code> which tells <code>NCQuadraticMakeSymmetric</code> to consider <code>x</code> and <code>y</code> as symmetric variables. Because the <code>middle</code> matrix is never positive semidefinite for any possible value of <span class="math inline">\(x\)</span> the conclusion<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> is that the nc quartic <span class="math inline">\(x^4\)</span> is <em>not convex</em>.</p>
-<p>The production of such symmetric quadratic decompositions is automated by the convenience command <a href="#NCMatrixOfQuadratic"><code>NCMatrixOfQuadratic</code></a>. Verify that</p>
-<pre><code>{sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]</code></pre>
-<p>automatically assumes that both <code>x</code> and <code>h</code> are symmetric variables and produces suitable left and right vectors as well as a symmetric middle matrix. Now we illustrate the application of such command to checking the convexity region of a noncommutative rational function.</p>
-<p>If one is interested in checking convexity of nc rationals the package <a href="#PackageNCConvexity"><code>NCConvexity</code></a> has functions that automate the whole process, including the calculation of the Hessian and the middle matrix, followed by the diagonalization of the middle matrix as produced by <a href="#NCLDLDecomposition"><code>NCLDLDecomposition</code></a>.</p>
-<p>For example, the commands evaluate the nc Hessian and calculates its quadratic decomposition</p>
-<pre><code>expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
-{left, middle, right} = NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];</code></pre>
-<p>The resulting middle matrix can be factored using</p>
-<pre><code>{ldl, p, s, rank} = NCLDLDecomposition[middle];
-{ll, dd, uu} = GetLDUMatrices[ldl, s];</code></pre>
-<p>which produces the diagonal factors <span class="math display">\[
-\begin{bmatrix}
-  2 (1 + b y + y b - a x a)^{-1} &amp; 0 &amp; 0 \\
-  0 &amp; 0 &amp; 0 \\
-  0 &amp; 0 &amp; 0
-\end{bmatrix}
-\]</span> which indicates the the original nc rational is convex whenever <span class="math display">\[
-(1 + b y + y b - a x a)^{-1} \succeq 0
-\]</span> or, equivalently, whenever <span class="math display">\[
-1 + b y + y b - a x a \succeq 0
-\]</span> The above sequence of calculations is automated by the command <a href="#NCConvexityRegion"><code>NCConvexityRegion</code></a> as in</p>
-<pre><code>&lt;&lt; NCConvexity`
-NCConvexityRegion[expr, {x}]</code></pre>
-<p>which results in</p>
-<pre><code>{2 (1 + b**y + y**b - a**x**a)^-1, 0}</code></pre>
-<p>which correspond to the diagonal entries of the LDL decomposition of the middle matrix of the nc Hessian.</p>
-<h2 id="Linear"><span class="header-section-number">5.6</span> Linear polynomials</h2>
-<p>Another interesting class of nc polynomials is that of linear polynomials, which can be factor in the form: <span class="math display">\[
+<p>See section <a href="#Linear">linear polynomials</a> for more features on linear polynomial matrices.</p>
+<h2 id="Linear"><span class="header-section-number">5.5</span> Linear polynomials</h2>
+<p>Another interesting class of nc polynomials is that of linear polynomials, which can be factored in the form: <span class="math display">\[
     s(x) = l (F \otimes x) r
 \]</span> where <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are vectors with symbolic expressions and <span class="math inline">\(F\)</span> is a numeric matrix. This functionality is in the package</p>
 <pre><code>&lt;&lt; NCSylvester`</code></pre>
@@ -4518,15 +4569,15 @@ c = {{{1, 0}, {0, 1}}}</code></pre>
 <ol>
 <li id="fn1"><p>The transpose of the gradient of the nc expression <code>expr</code> is the derivative with respect to the direction <code>h</code> of the trace of the directional derivative of <code>expr</code> in the direction <code>h</code>.<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>Contrary to what happens with symbolic inversion of matrices with commutative entries, there exist multiple formulas for the symbolic inverse of a matrix with noncommutative entries. Furthermore, it may be possible that none of such formulas is &quot;correct&quot;. Indeed, it is easy to construct a matrix <code>m</code> with block structure as shown that is invertible but for which none of the blocks <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> are invertible. In this case no <em>correct</em> formula exists for the calculation of the inverse of <code>m</code>.<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>The reason is that making an operator <code>Flat</code> is a convenience that comes with a price: lack of control over execution and evaluation. Since <code>NCAlgebra</code> has to operate at a very low level this lack of control over evaluation is fatal. Indeed, making <code>NonCommutativeMultiply</code> have an attribute <code>Flat</code> will throw Mathematica into infinite loops in seemingly trivial noncommutative expression. Hey, email us if you find a way around that :)<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>By the way, I find that behavior of Mathematica's <code>Module</code> questionable, since something like</p>
+<li id="fn3"><p>This is in contrast with the commutative <span class="math inline">\(x^4\)</span> which is convex everywhere. See <span class="citation" data-cites="camino:MIS:2003">(Camino et al. 2003)</span> for details.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>The reason is that making an operator <code>Flat</code> is a convenience that comes with a price: lack of control over execution and evaluation. Since <code>NCAlgebra</code> has to operate at a very low level this lack of control over evaluation is fatal. Indeed, making <code>NonCommutativeMultiply</code> have an attribute <code>Flat</code> will throw Mathematica into infinite loops in seemingly trivial noncommutative expression. Hey, email us if you find a way around that :)<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>By the way, I find that behavior of Mathematica's <code>Module</code> questionable, since something like</p>
 <pre><code>F[exp_] := Module[{aa, bb},
   SetNonCommutative[aa, bb];
   aa**bb
 ]</code></pre>
-<p>would not fail to treat <code>aa</code> and <code>bb</code> locally. It is their appearance in a rule that triggers the mostly odd behavior.<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>Formerly <code>MatMult[m1,m2]</code>.<a href="#fnref5">↩</a></p></li>
-<li id="fn6"><p>This is in contrast with the commutative <span class="math inline">\(x^4\)</span> which is convex everywhere. See <span class="citation" data-cites="camino:MIS:2003">(Camino et al. 2003)</span> for details.<a href="#fnref6">↩</a></p></li>
+<p>would not fail to treat <code>aa</code> and <code>bb</code> locally. It is their appearance in a rule that triggers the mostly odd behavior.<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>Formerly <code>MatMult[m1,m2]</code>.<a href="#fnref6">↩</a></p></li>
 </ol>
 </section>
 </body>

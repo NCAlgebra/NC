@@ -98,6 +98,7 @@ NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
 	     --biblatex \
              --bibliography references.bib \
+             --variable=biblio-style:alphabetic \
              --variable=geometry:margin=1in \
              --variable=documentclass:book \
 	     --variable=colorlinks \

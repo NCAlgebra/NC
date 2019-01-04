@@ -344,7 +344,7 @@ storing and calcuating with nc polynomials. Those packages are
 * [`NCPoly`](#PackageNCPoly): which handles polynomials with
   noncommutative coefficients, and
 * [`NCPolynomial`](#PackageNCPolynomial): which handles polynomials
-  with noncommutative coefficients.
+  with real coefficients.
 
 For example:
 
@@ -531,7 +531,7 @@ NCInverse[m] // MatrixForm
 
 returns
 
-$\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-2} b)^{-1} c a^{-1} & (d - c a^{-1} b) \end{bmatrix}$
+$\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}$
 
 Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
 calculation.
@@ -620,7 +620,7 @@ resulting in this case in
 
 Using `MatrixForm`:
 
-$L = \begin{bmatrix} 1 & 0 \\ c a^{-1} & 1 \end{bmatrix} \qquad U = \begin{bmatrix} a & b \\ 0 & d - c a^{-1} b \end{bmatrix}$
+$L = \begin{bmatrix} 1 & 0 \\ c a^{-1} & 1 \end{bmatrix}, \qquad U = \begin{bmatrix} a & b \\ 0 & d - c a^{-1} b \end{bmatrix}$
 
 To verify that $M = L U$ input
 
@@ -654,7 +654,16 @@ row. Because of the permutation, to verify that $P M = L U$ input
 
 which should return a zero matrix. Note that in the above example the permutation matrix
 $P$ is never constructed. Instead, the rows of $M$ are directly permuted using
-Mathematica's `Part` (`[[]]`) command. Likewise
+Mathematica's `Part` (`[[]]`) command. Of course, if one prefers to work with permutation matrices, they can be easily obtained by permuting the rows of the identity matrix as in the following example
+
+    p = {2, 1, 3}
+	IdentityMatrix[3][[p]] // MatrixForm
+
+to produce
+
+$\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}$
+
+Likewise
 
 	m = {{a + b, b}, {c, d}}
 	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
@@ -699,7 +708,7 @@ to get
 
 Using `MatrixForm`:
 
-$L = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix} \qquad U = \begin{bmatrix} a & b \\ 0 & 0 \end{bmatrix}$
+$L = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}, \qquad U = \begin{bmatrix} a & b \\ 0 & 0 \end{bmatrix}$
 
 In this case, to verify that $P M Q = L U$ input
 
@@ -745,7 +754,233 @@ is the zero matrix and $U = L^T$.
 possible, will make invertibility and symmetry assumptions on variables so that it can run
 successfully. If not possible it will warn the users.
 
-**WARNING:** Versions prior to 5 contained a `NCLDUDecomposition` with
-a slightly different syntax which, while functional, is being
-deprecated in **Version 5**.
+**WARNING:** Versions prior to 5 contained the command
+`NCLDUDecomposition` which is being
+deprecated in **Version 5** as its functionality is now provided by
+[`NCLDLDecomposition`](#NCDLDDecomposition), with a slightly different
+syntax.
+
+### Replace with matrices {#ReplaceWithMatrices}
+
+[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) and
+[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated) are special
+versions of [`NCReplaceAll`](#NCReplaceAll) and
+[`NCReplaceRepeated`](#NCReplaceRepeated) that take extra steps to
+preserve matrix consistency when replacing expressions with nc
+matrices. For example, with
+
+	m1 = {{a, b}, {c, d}}
+	m2 = {{d, 2}, {e, 3}}
+	
+and
+
+    M = {{a11,a12}}
+
+the call
+
+    NCMatrixReplaceRepeated[M, {a11 -> m1, a12 -> m2}]
+	
+produces as a result the matrix 
+
+    {{a, b, d, 2}, {c, d, e, 3}}
+
+or, using `MatrixForm`:
+
+$\begin{bmatrix} a & b & d & 2 \\ c & d & e & 3 \end{bmatrix}$
+
+Note how the symbols were treated as block-matrices during the substitution. As a second example, with
+
+    M = {{a11, 0}, {0, a22}}
+
+the command
+
+    NCMatrixReplaceRepeated[M, {a11 -> m1, a22 -> m2}]
+
+produces the matrix
+
+    {{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}
+
+or, using `MatrixForm`:
+
+$\begin{bmatrix} a & b & 0 & 0 \\ c & d & 0 & 0 \\ 0 & 0 & d & 2 \\ 0 & 0 & e & 3 \end{bmatrix}$
+
+in which the `0` blocks were automatically expanded to fit the adjacent block matrices.
+
+Another feature of `NCMatrixReplace` and its variants is its ability to withold evaluation until all matrix substitutions have taken place. For example,
+
+	NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
+	
+produces
+
+	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+	 {e + c**d + d**e, 3 + 2 c + 3 d}}
+
+Finally, `NCMatrixReplace` substitutes `NCInverse` for `inv` so that, for instance, the result of
+
+	rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}}
+	NCMatrixReplaceRepeated[inv[z], rule]
+
+coincides with
+
+	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
+	
+## Quadratic polynomials {#Quadratic}
+
+When working with nc quadratics it is useful to be able to factor the
+quadratic into the following form
+$$
+	q(x) = c + s(x) + l(x) M r(x)
+$$
+where $s$ is linear $x$ and $l$ and $r$ are vectors and $M$ is a
+matrix. Load the package
+
+	<< NCQuadratic`
+
+and use the command
+[`NCToNCQuadratic`](#NCToNCQuadratic) to factor an nc polynomial into the the above form:
+
+	vars = {x, y};
+	expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
+	{const, lin, left, middle, right} = NCToNCQuadratic[expr, vars];
+
+which returns
+
+	left = {tp[x],tp[y]}
+	right = {y, x**d}
+	middle = {{a,b}, {tp[b],c}}
+	
+and zero `const` and `lin`. The format for the linear part `lin` will
+be discussed lated in Section [Linear](#Linear). Note that
+coefficients of an nc quadratic may also appear on the left and right
+vectors, as `d` did in the above example. Conversely,
+[`NCQuadraticToNC`](#NCQuadraticToNC) converts a list with factors
+back to an nc expression as in:
+
+	NCQuadraticToNC[{const, lin, left, middle, right}]
+	
+which results in 
+
+	(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
+
+An interesting application is the verification of the domain in which
+an nc rational is *convex*. Take for example the quartic
+
+	expr = x**x**x**x;
+
+and calculate its noncommutative directional *Hessian*
+
+	hes = NCHessian[expr, {x, h}]
+	
+This command returns
+
+	2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+
+which is quadratic in the direction `h`. The decomposition of the
+nc Hessian using `NCToNCQuadratic`
+
+	{const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];
+
+produces
+
+	left = {h, x**h, x**x**h}
+	right = {h**x**x, h**x, h}
+	middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
+
+Note that the middle matrix
+$$
+\begin{bmatrix}
+2 & 2 x & 2 x^2 \\
+0 & 2 & 2 x \\
+0 & 0 & 2
+\end{bmatrix}
+$$
+is not *symmetric*, as one might have expected. The command
+[`NCQuadraticMakeSymmetric`](#NCQuadraticMakeSymmetric) can fix that
+and produce a symmetric decomposition. For the above example
+
+	{const, lin, sleft, smiddle, sright} = 
+	  NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
+	                           SymmetricVariables -> {x, h}]
+
+results in
+
+	sleft = {x**x**h, x**h, h}
+	sright = {h**x**x, h**x, h}
+	middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
+
+in which `middle` is the symmetric matrix
+$$
+\begin{bmatrix}
+0 & 0 & 2 \\
+0 & 2 & 2 x \\
+2 & 2 x & 2 x^2
+\end{bmatrix}
+$$
+Note the argument `SymmetricVariables -> {x,h}` which tells
+`NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
+variables. Because the `middle` matrix is never positive semidefinite
+for any possible value of $x$ the conclusion[^convex] is that the nc quartic
+$x^4$ is *not convex*.
+
+[^convex]: This is in contrast with the commutative $x^4$ which is
+    convex everywhere. See [@camino:MIS:2003] for details.
+
+The production of such symmetric quadratic decompositions is automated
+by the convenience command
+[`NCMatrixOfQuadratic`](#NCMatrixOfQuadratic). Verify that
+
+	{sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]
+
+automatically assumes that both `x` and `h` are symmetric variables
+and produces suitable left and right vectors as well as a symmetric
+middle matrix. Now we illustrate the application of such command to
+checking the convexity region of a noncommutative rational function.
+
+If one is interested in checking convexity of nc rationals the package
+[`NCConvexity`](#PackageNCConvexity) has functions that automate the
+whole process, including the calculation of the Hessian and the middle
+matrix, followed by the diagonalization of the middle matrix as
+produced by [`NCLDLDecomposition`](#NCLDLDecomposition).
+
+For example, the commands evaluate the nc Hessian and calculates its
+quadratic decomposition
+
+	expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
+	{left, middle, right} =	NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];
+
+The resulting middle matrix can be factored using
+
+	{ldl, p, s, rank} = NCLDLDecomposition[middle];
+	{ll, dd, uu} = GetLDUMatrices[ldl, s];
+
+which produces the diagonal factors
+$$
+\begin{bmatrix}
+  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 0
+\end{bmatrix}
+$$
+which indicates the the original nc rational is convex whenever
+$$
+(1 + b y + y b - a x a)^{-1} \succeq 0
+$$
+or, equivalently, whenever
+$$
+1 + b y + y b - a x a \succeq 0
+$$
+The above sequence of calculations is automated by the command
+[`NCConvexityRegion`](#NCConvexityRegion) as in 
+
+	<< NCConvexity`
+	NCConvexityRegion[expr, {x}]
+
+which results in 
+
+	{2 inv[1 + b**y + y**b - a**x**a], 0}
+
+which correspond to the diagonal entries of the LDL decomposition of
+the middle matrix of the nc Hessian.
+
+
 
