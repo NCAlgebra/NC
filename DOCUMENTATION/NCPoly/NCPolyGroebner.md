@@ -18,7 +18,7 @@ list of `NCPoly` polynomials `G`.
 The following `options` can be given:
 
 - `SimplifyObstructions` (`True`) whether to remove obstructions
-  before constructing the S-polynomials;
+  before constructing more S-polynomials;
 - `SortObstructions` (`False`) whether to sort obstructions using
   Mora's SUGAR ranking;
 - `SortBasis` (`False`) whether to sort basis before starting
