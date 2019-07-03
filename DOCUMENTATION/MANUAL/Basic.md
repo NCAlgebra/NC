@@ -3,7 +3,7 @@
 This chapter provides a gentle introduction to some of the commands
 available in `NCAlgebra`. 
 
-If you want a living version of this chapter just run the notebook
+If you want a living analog of this chapter just run the notebook
 `NC/DEMOS/1_MostBasicCommands.nb`.
 
 Before you can use `NCAlgebra` you first load it with the following
@@ -350,7 +350,7 @@ For example:
 
     1 + y**x**y - A x
 
-is a polynomial with real coefficients in $x$ and $y$, whereas
+is a polynomial with commutative coefficients in $x$ and $y$, whereas
 
     a**y**b**x**c**y - A x**d
 
@@ -824,9 +824,12 @@ coincides with
 
 	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
 	
-## Quadratic polynomials {#Quadratic}
+## Quadratic polynomials, second direction derivatives and convexity {#Quadratic}
 
-When working with nc quadratics it is useful to be able to factor the
+The closest related demo to the material in this section is
+`NC/DEMOS/NCConvexity.nb`.
+
+When working with nc quadratics it is useful to be able to "factor" the
 quadratic into the following form
 $$
 	q(x) = c + s(x) + l(x) M r(x)
@@ -863,7 +866,8 @@ which results in
 	(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
 
 An interesting application is the verification of the domain in which
-an nc rational is *convex*. Take for example the quartic
+an nc rational function is *convex*. This uses the second direction
+derivative, called the Hessian. Take for example the quartic
 
 	expr = x**x**x**x;
 

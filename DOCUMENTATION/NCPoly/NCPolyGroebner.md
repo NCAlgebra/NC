@@ -17,8 +17,8 @@ list of `NCPoly` polynomials `G`.
 
 The following `options` can be given:
 
-- `SimplifyObstructions` (`True`) whether to simplify obstructions
-  before constructions S-polynomials;
+- `SimplifyObstructions` (`True`) whether to remove obstructions
+  before constructing the S-polynomials;
 - `SortObstructions` (`False`) whether to sort obstructions using
   Mora's SUGAR ranking;
 - `SortBasis` (`False`) whether to sort basis before starting
@@ -29,7 +29,7 @@ The following `options` can be given:
 - `PrintObstructions` (`False`);
 - `PrintSPolynomials` (`False`);
 
-The algorithm is based on [@mora:ICN:1994].
+The algorithm is based on [@mora:ICN:1994] and uses the terminology there.
 
 See also:
 [NCPoly](#NCPoly).

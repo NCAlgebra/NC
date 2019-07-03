@@ -109,7 +109,7 @@ NCDocument.pdf: $(MANUAL)
 	biber NCDocument
 	$(PDFLATEX) NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
-	rm *.aux *.log *.toc *.out
+	rm -f *.aux *.log *.toc *.out
 
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)

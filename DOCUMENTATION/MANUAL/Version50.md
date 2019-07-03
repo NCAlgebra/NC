@@ -1,5 +1,10 @@
 # Changes in Version 5.0 {#Version5_0}
 
+## Version 5.0.5 {#Version5_0_5}
+
+1. Improved documentation
+2. Bug fixes 
+
 ## Version 5.0.4 {#Version5_0_4}
 
 1. First implementation of [NCPolyGramMatrix](#NCPolyGramMatrix) and [NCPolyFromGramMatrix](#NCPolyFromGramMatrix).
