@@ -28,7 +28,7 @@ Clear[aj, tp, rt, inv, co,
       ExpandNonCommutativeMultiply,
       BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative,
-      SNC, NCExpand, NCE];
+      SNC, NCExpand, NCE, NCValueQ];
 
 CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative.";
 CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative.";
@@ -466,9 +466,19 @@ Begin[ "`Private`" ]
   (* pretty co *)
   OverBar[a_] := co[a];
 
+  (* NCValueQ *)
+  (* BEGIN MAURICIO
+      This is needed due to an update on the behavior of ValueQ in v.12.2
+     END MAURICIO *)
+  If[TrueQ[$VersionNumber >= 12.2],
+    NCValueQ[x_] := ValueQ[x, Method->"TrialEvaluation"],
+    NCValueQ[x_] := ValueQ[x]
+  ];
+  SetAttributes[NCValueQ, HoldAll];
+   
   (* SetCommutingOperators using upvalues *)
   SetCommutingOperators[a_, b_] := (
-    If[ ValueQ[NonCommutativeMultiply[c___, a, b, d___]]
+    If[ NCValueQ[NonCommutativeMultiply[c___, a, b, d___]]
        ,
         Message[SetCommutingOperators::AlreadyDefined, b, a];
         UnsetCommutingOperators[b, a];
@@ -478,12 +488,12 @@ Begin[ "`Private`" ]
   ) /; a =!= b;
   
   UnsetCommutingOperators[a_,b_] := Block[{},
-    If[ ValueQ[c___ ** a ** b ** d___]
+    If[ NCValueQ[c___ ** a ** b ** d___]
        ,
         a /: c___ ** a ** b ** d___ =. ;
         b /: c___ ** a ** b ** d___ =. ;
        ,
-        If[ ValueQ[c___ ** b ** a ** d___]
+        If[ NCValueQ[c___ ** b ** a ** d___]
            ,
             a /: c___ ** b ** a ** d___ =. ;
             b /: c___ ** b ** a ** d___ =.
@@ -496,8 +506,8 @@ Begin[ "`Private`" ]
   CommutingOperatorsQ[a_?CommutativeQ,b_] := True;
   
   CommutingOperatorsQ[a_,b_] := 
-    ValueQ[NonCommutativeMultiply[c___, a, b, d___]] ||
-    ValueQ[NonCommutativeMultiply[c___, b, a, d___]];
+    NCValueQ[NonCommutativeMultiply[c___, a, b, d___]] ||
+    NCValueQ[NonCommutativeMultiply[c___, b, a, d___]];
   
   (* Aliases *)
   SNC = SetNonCommutative;
