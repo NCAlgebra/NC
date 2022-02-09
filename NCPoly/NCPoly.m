@@ -347,15 +347,23 @@ Begin["`Private`"];
   (* NCIntegerReverse *)
    
   (* IntegerReverse fails for 0 *)
+  (*
   Unprotect[IntegerReverse];
   IntegerReverse[0, rest__] := 0;
   Protect[IntegerReverse];
+  *)
+  (* JANUARY 2022:
+     overiding IntegerReverse now puts out an error message even when not called;
+     creating an intermediate symbol should solve the problem
+   *)
+  PrivateIntegerReverse[0, rest__] := 0;
+  PrivateIntegerReverse[args__] := IntegerReverse[args];
               
   NCIntegerReverse[{d_Integer, n_Integer}, base_Integer] :=
-    {d, IntegerReverse[n, base, d]};
+    {d, PrivateIntegerReverse[n, base, d]};
 
   NCIntegerReverse[{d__Integer, n_Integer}, {base__Integer}] :=
-    {d, IntegerReverse[n, Total[{base}], Total[{d}]]};
+    {d, PrivateIntegerReverse[n, Total[{base}], Total[{d}]]};
 
   NCIntegerReverse[dn_List, base_Integer] :=
     Map[NCIntegerReverse[#, base]&, dn] /; Depth[dn] === 3;

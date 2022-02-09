@@ -435,16 +435,33 @@ Begin[ "`Private`" ]
   inv/:Options[inv] := Options[$inv];
       
   (* Power *)
-  
+
+  (* MAURICIO BUG: 02/08/2022
+     Igor found a nasty bug in which the power rules where interacting with Slot and
+     the built in function RootApproximant. Introduced PowerCommutativeQ which is basically
+     CommutativeQ that fails for commutative patterns
+   *)
+  PowerCommutativeQ[x_Commutative] ^= True;
+  PowerCommutativeQ[x_Symbol] := CommutativeQ[x];
+  PowerCommutativeQ[a_List] := False /; MatrixQ[a];
+  PowerCommutativeQ[a_SparseArray] := False /; MatrixQ[a];
+
+  PowerCommutativeQ[Subscript[x_,___]] := CommutativeQ[x];
+  PowerCommutativeQ[Slot[___]] := True;
+  PowerCommutativeQ[f_?CommutativeQ[x___]] := Apply[And, Map[CommutativeQ,{x}]];
+  (* The next rule makes sure powers of #1 do not get expanded *)
+  PowerCommutativeQ[f_[x___]] /; NCPatternQ[f] := Apply[And, Map[CommutativeQ,{x}]];
+  PowerCommutativeQ[f_[x___]] := False;
+
+  PowerCommutativeQ[_] := True;
+  PowerNonCommutativeQ[x_] := Not[PowerCommutativeQ[x]];
+
   (* Expand monomial rules *)
   Unprotect[Power];
-  
-  Power[b_?NonCommutativeQ, 1/2] := rt[b];
-
-  Power[b_?NonCommutativeQ, c_Integer?Positive] := 
+  Power[b_?PowerNonCommutativeQ, 1/2] := rt[b];
+  Power[b_?PowerNonCommutativeQ, c_Integer?Positive] :=
     Apply[NonCommutativeMultiply, Table[b, {c}]];
-
-  Power[b_?NonCommutativeQ, c_Integer?Negative] := 
+  Power[b_?PowerNonCommutativeQ, c_Integer?Negative] :=
     inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]];
 
   (* pretty tp *)
@@ -453,8 +470,7 @@ Begin[ "`Private`" ]
      Global`T =. 
   ];
   Protect[Global`T];
-  Power[a_, Global`T] := tp[a];
-
+  Power[a_?PowerNonCommutativeQ, Global`T] := tp[a];
   Protect[Power];
 
   (* pretty aj *)

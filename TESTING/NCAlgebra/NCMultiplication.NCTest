@@ -136,6 +136,10 @@ Block[
   NCTest[Subscript[x,1]**Sqrt[2]**Subscript[x,1], Sqrt[2] Subscript[x,1]**Subscript[x,1]];
   NCTest[Subscript[x,1]**Pi**Subscript[x,1], Pi Subscript[x,1]**Subscript[x,1]];
 
+  (* Power of slots *)
+  exp = #1^2;
+  NCTest[Head[exp], Power];
+
   (* Expand *)
   exp = x**(x+y);
   answer = x**x + x**y;
@@ -204,6 +208,14 @@ Block[
   NCTest[exp, answer];
 
   (* Patterns *)
+
+  (* Slot *)
+  exp = NonCommutativeMultiply[Slot[name]];
+  NCTest[Head[exp], NonCommutativeMultiply];
+
+  (* Slot *)
+  exp = NonCommutativeMultiply[Slot[1]];
+  NCTest[Head[exp], NonCommutativeMultiply];
 
   (* x_ *)
   exp = NonCommutativeMultiply[x_];

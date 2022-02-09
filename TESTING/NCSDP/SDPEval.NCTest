@@ -109,6 +109,11 @@ RunTest[kk_:1] := Module[
 
   TestEval[];
 
+  AA = Map[Normal, AA];
+  BB = Map[Normal, BB];
+  CC = Map[Normal, CC];
+  TestEval[];
+
   (* Truncated Sturm Example *)
 
   (* Ai's *)
@@ -121,6 +126,11 @@ RunTest[kk_:1] := Module[
   BB = {{y}};
   CC = AA[[1]];
 
+  TestEval[];
+
+  AA = Map[Normal, AA];
+  BB = Map[Normal, BB];
+  CC = Map[Normal, CC];
   TestEval[];
 
   (* Block-diagonal example *)
@@ -141,6 +151,11 @@ RunTest[kk_:1] := Module[
   BB = {{y}};
   CC = AA[[1]];
 
+  TestEval[];
+
+  AA = Map[Normal, AA];
+  BB = Map[Normal, BB];
+  CC = Map[Normal, CC];
   TestEval[];
 
   Return[k];
