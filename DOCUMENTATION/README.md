@@ -1021,7 +1021,7 @@ represented in Mathematica using *lists of lists*. For example
 
 is a representation for the matrix
 
-![\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+c+%26+d+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20%26%20d%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 The Mathematica command `MatrixForm` output pretty
 matrices. `MatrixForm[m]` prints `m` in a form similar to the above
@@ -1055,7 +1055,7 @@ or, using `MatrixForm`
 
 returns
 
-![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a%5E%7B-1%7D+%281+%2B+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D%29+%26+-a%5E%7B-1%7D+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5C%5C+-%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D+%26+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
 calculation.
@@ -1120,7 +1120,7 @@ which returns
 
 Using `MatrixForm`:
 
-![\\begin{bmatrix} a & b \\\\ c a^{-1} & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+c+a%5E%7B-1%7D+%26+d+-+c+a%5E%7B-1%7D+b+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} a & b \\\\ c a^{-1} & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 The list `p` encodes the sequence of permutations calculated during
 the execution of the algorithm. The matrix `lu` contains the factors
@@ -1135,9 +1135,9 @@ resulting in this case in
 
 Using `MatrixForm`:
 
-![L = \\begin{bmatrix} 1 & 0 \\\\ c a^{-1} & 1 \\end{bmatrix}, \\qquad U = \\begin{bmatrix} a & b \\\\ 0 & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L+%3D+%5Cbegin%7Bbmatrix%7D+1+%26+0+%5C%5C+c+a%5E%7B-1%7D+%26+1+%5Cend%7Bbmatrix%7D%2C+%5Cqquad+U+%3D+%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+0+%26+d+-+c+a%5E%7B-1%7D+b+%5Cend%7Bbmatrix%7D&mode=inline)
+![L = \\begin{bmatrix} 1 & 0 \\\\ c a^{-1} & 1 \\end{bmatrix}, \\qquad U = \\begin{bmatrix} a & b \\\\ 0 & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%20U%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D&mode=inline)
 
-To verify that ![M = L U](https://render.githubusercontent.com/render/math?math=M+%3D+L+U&mode=inline) input
+To verify that ![M = L U](https://render.githubusercontent.com/render/math?math=M%20%3D%20L%20U&mode=inline) input
 
     m - NCDot[l, u]
 
@@ -1163,7 +1163,7 @@ and a permutation list
 
 which indicates that the number `1`, appearing in the second row, was
 used as the pivot rather than the symbol `a` appearing on the first
-row. Because of the permutation, to verify that ![P M = L U](https://render.githubusercontent.com/render/math?math=P+M+%3D+L+U&mode=inline) input
+row. Because of the permutation, to verify that ![P M = L U](https://render.githubusercontent.com/render/math?math=P%20M%20%3D%20L%20U&mode=inline) input
 
     m[[p]] - NCDot[l, u]
 
@@ -1176,7 +1176,7 @@ Mathematica’s `Part` (`[[]]`) command. Of course, if one prefers to work with 
 
 to produce
 
-![\\begin{bmatrix} 0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+0+%26+1+%26+0+%5C%5C+1+%26+0+%26+0+%5C%5C+0+%26+0+%26+1+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} 0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%26%200%20%5C%5C%201%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Likewise
 
@@ -1223,9 +1223,9 @@ to get
 
 Using `MatrixForm`:
 
-![L = \\begin{bmatrix} 1 & 0 \\\\ 2 & 1 \\end{bmatrix}, \\qquad U = \\begin{bmatrix} a & b \\\\ 0 & 0 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L+%3D+%5Cbegin%7Bbmatrix%7D+1+%26+0+%5C%5C+2+%26+1+%5Cend%7Bbmatrix%7D%2C+%5Cqquad+U+%3D+%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+0+%26+0+%5Cend%7Bbmatrix%7D&mode=inline)
+![L = \\begin{bmatrix} 1 & 0 \\\\ 2 & 1 \\end{bmatrix}, \\qquad U = \\begin{bmatrix} a & b \\\\ 0 & 0 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%202%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%20U%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%200%20%5Cend%7Bbmatrix%7D&mode=inline)
 
-In this case, to verify that ![P M Q = L U](https://render.githubusercontent.com/render/math?math=P+M+Q+%3D+L+U&mode=inline) input
+In this case, to verify that ![P M Q = L U](https://render.githubusercontent.com/render/math?math=P%20M%20Q%20%3D%20L%20U&mode=inline) input
 
     NCDot[l, u] - m[[p, q]]
 
@@ -1260,11 +1260,11 @@ which in this case returns
     d = {{a, 0}, {0, c - b**inv[a]**b}}
     u = {{1, inv[a]**b}, {0, 1}}}
 
-Because ![P M P^T = L D L^T](https://render.githubusercontent.com/render/math?math=P+M+P%5ET+%3D+L+D+L%5ET&mode=inline),
+Because ![P M P^T = L D L^T](https://render.githubusercontent.com/render/math?math=P%20M%20P%5ET%20%3D%20L%20D%20L%5ET&mode=inline),
 
     NCDot[l, d, u] - m[[p, p]]
 
-is the zero matrix and ![U = L^T](https://render.githubusercontent.com/render/math?math=U+%3D+L%5ET&mode=inline).
+is the zero matrix and ![U = L^T](https://render.githubusercontent.com/render/math?math=U%20%3D%20L%5ET&mode=inline).
 
 `NCLDLDecomposition` works only on symmetric matrices and, whenever
 possible, will make invertibility and symmetry assumptions on variables so that it can run
@@ -1302,7 +1302,7 @@ produces as a result the matrix
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a & b & d & 2 \\\\ c & d & e & 3 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%26+d+%26+2+%5C%5C+c+%26+d+%26+e+%26+3+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} a & b & d & 2 \\\\ c & d & e & 3 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20c%20%26%20d%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Note how the symbols were treated as block-matrices during the substitution. As a second example, with
 
@@ -1318,7 +1318,7 @@ produces the matrix
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a & b & 0 & 0 \\\\ c & d & 0 & 0 \\\\ 0 & 0 & d & 2 \\\\ 0 & 0 & e & 3 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%26+0+%26+0+%5C%5C+c+%26+d+%26+0+%26+0+%5C%5C+0+%26+0+%26+d+%26+2+%5C%5C+0+%26+0+%26+e+%26+3+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} a & b & 0 & 0 \\\\ c & d & 0 & 0 \\\\ 0 & 0 & d & 2 \\\\ 0 & 0 & e & 3 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%200%20%26%200%20%5C%5C%20c%20%26%20d%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%20d%20%26%202%20%5C%5C%200%20%26%200%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 in which the `0` blocks were automatically expanded to fit the adjacent block matrices.
 
@@ -1347,7 +1347,7 @@ The closest related demo to the material in this section is
 
 When working with nc quadratics it is useful to be able to “factor” the
 quadratic into the following form
-![&#10;    q(x) = c + s(x) + l(x) M r(x)&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A++++q%28x%29+%3D+c+%2B+s%28x%29+%2B+l%28x%29+M+r%28x%29%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;    q(x) = c + s(x) + l(x) M r(x)&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20q%28x%29%20%3D%20c%20%2B%20s%28x%29%20%2B%20l%28x%29%20M%20r%28x%29%0A%5Cend%7Baligned%7D)
 where ![s](https://render.githubusercontent.com/render/math?math=s&mode=inline) is linear ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![l](https://render.githubusercontent.com/render/math?math=l&mode=inline) and ![r](https://render.githubusercontent.com/render/math?math=r&mode=inline) are vectors and ![M](https://render.githubusercontent.com/render/math?math=M&mode=inline) is a
 matrix. Load the package
 
@@ -1405,7 +1405,7 @@ produces
     middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
 
 Note that the middle matrix
-![&#10;\\begin{bmatrix}&#10;2 & 2 x & 2 x^2 \\\\&#10;0 & 2 & 2 x \\\\&#10;0 & 0 & 2&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A2+%26+2+x+%26+2+x%5E2+%5C%5C%0A0+%26+2+%26+2+x+%5C%5C%0A0+%26+0+%26+2%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{bmatrix}&#10;2 & 2 x & 2 x^2 \\\\&#10;0 & 2 & 2 x \\\\&#10;0 & 0 & 2&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20x%20%26%202%20x%5E2%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A0%20%26%200%20%26%202%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
 is not *symmetric*, as one might have expected. The command
 [`NCQuadraticMakeSymmetric`](#ncquadraticmakesymmetric) can fix that
 and produce a symmetric decomposition. For the above example
@@ -1421,7 +1421,7 @@ results in
     middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
 
 in which `middle` is the symmetric matrix
-![&#10;\\begin{bmatrix}&#10;0 & 0 & 2 \\\\&#10;0 & 2 & 2 x \\\\&#10;2 & 2 x & 2 x^2&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A0+%26+0+%26+2+%5C%5C%0A0+%26+2+%26+2+x+%5C%5C%0A2+%26+2+x+%26+2+x%5E2%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{bmatrix}&#10;0 & 0 & 2 \\\\&#10;0 & 2 & 2 x \\\\&#10;2 & 2 x & 2 x^2&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A0%20%26%200%20%26%202%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A2%20%26%202%20x%20%26%202%20x%5E2%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
 Note the argument `SymmetricVariables -> {x,h}` which tells
 `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
 variables. Because the `middle` matrix is never positive semidefinite
@@ -1457,11 +1457,11 @@ The resulting middle matrix can be factored using
     {ll, dd, uu} = GetLDUMatrices[ldl, s];
 
 which produces the diagonal factors
-![&#10;\\begin{bmatrix}&#10;  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\\\&#10;  0 & 0 & 0 \\\\&#10;  0 & 0 & 0&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A++2+%281+%2B+b+y+%2B+y+b+-+a+x+a%29%5E%7B-1%7D+%26+0+%26+0+%5C%5C%0A++0+%26+0+%26+0+%5C%5C%0A++0+%26+0+%26+0%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{bmatrix}&#10;  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\\\&#10;  0 & 0 & 0 \\\\&#10;  0 & 0 & 0&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A%20%202%20%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
 which indicates the the original nc rational is convex whenever
-![&#10;(1 + b y + y b - a x a)^{-1} \\succeq 0&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%281+%2B+b+y+%2B+y+b+-+a+x+a%29%5E%7B-1%7D+%5Csucceq+0%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;(1 + b y + y b - a x a)^{-1} \\succeq 0&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 or, equivalently, whenever
-![&#10;1 + b y + y b - a x a \\succeq 0&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A1+%2B+b+y+%2B+y+b+-+a+x+a+%5Csucceq+0%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;1 + b y + y b - a x a \\succeq 0&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A1%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 The above sequence of calculations is automated by the command
 [`NCConvexityRegion`](#ncconvexityregion) as in
 
@@ -1761,7 +1761,7 @@ returns the evaluated result
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a%5E%7B-1%7D+%281+%2B+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D%29+%26+-a%5E%7B-1%7D+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5C%5C+-%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D+%26+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 A less trivial example is
 
@@ -1817,7 +1817,7 @@ where `m1` is an array and `z` is not, is automatically expanded into
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a + z & b + z \\\\ c + z & d + z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%2B+z+%26+b+%2B+z+%5C%5C+c+%2B+z+%26+d+%2B+z+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} a + z & b + z \\\\ c + z & d + z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%2B%20z%20%26%20b%20%2B%20z%20%5C%5C%20c%20%2B%20z%20%26%20d%20%2B%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Because of this “feature”, the expression
 
@@ -1986,7 +1986,7 @@ polynomial ordering implied by a list of symbols. For example
 
 prints out
 
-![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%5Cll+z&mode=inline)
+![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
 
 and
 
@@ -1994,7 +1994,7 @@ and
 
 prints out
 
-![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%3C+z&mode=inline)
+![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
 
 from where you can see that grouping variables inside braces induces a
 graded type ordering, as discussed in Section
@@ -2006,7 +2006,7 @@ There is also a special constructor for monomials. For example
     NCPolyMonomial[{y,x}, vars]
     NCPolyMonomial[{x,y}, vars]
 
-return the monomials corresponding to ![y x](https://render.githubusercontent.com/render/math?math=y+x&mode=inline) and ![x y](https://render.githubusercontent.com/render/math?math=x+y&mode=inline).
+return the monomials corresponding to ![y x](https://render.githubusercontent.com/render/math?math=y%20x&mode=inline) and ![x y](https://render.githubusercontent.com/render/math?math=x%20y&mode=inline).
 
 Operations on `NCPoly` objects result in another `NCPoly` object that
 is always expanded. For example:
@@ -2084,12 +2084,12 @@ considered to be unknown, i.e. *variables*, where others are
 considered to be known, i.e. *coefficients*. For example, in many
 problems in systems and control the following expression
 
-![p(x) = a x + x a^T - x b x + c](https://render.githubusercontent.com/render/math?math=p%28x%29+%3D+a+x+%2B+x+a%5ET+-+x+b+x+%2B+c&mode=inline)
+![p(x) = a x + x a^T - x b x + c](https://render.githubusercontent.com/render/math?math=p%28x%29%20%3D%20a%20x%20%2B%20x%20a%5ET%20-%20x%20b%20x%20%2B%20c&mode=inline)
 
 is often seen as a polynomial in the noncommutative unknown `x` with
 known noncommutative coefficients `a`, `b`, and `c`. A typical problem
-is the determination of a solution to the equation ![p(x) = 0](https://render.githubusercontent.com/render/math?math=p%28x%29+%3D+0&mode=inline) or the
-inequality ![p(x) \\succeq 0](https://render.githubusercontent.com/render/math?math=p%28x%29+%5Csucceq+0&mode=inline).
+is the determination of a solution to the equation ![p(x) = 0](https://render.githubusercontent.com/render/math?math=p%28x%29%20%3D%200&mode=inline) or the
+inequality ![p(x) \\succeq 0](https://render.githubusercontent.com/render/math?math=p%28x%29%20%5Csucceq%200&mode=inline).
 
 The package [`NCPolynomial`](#ncpolynomial) handles such
 polynomials with noncommutative coefficients. As with
@@ -2178,7 +2178,7 @@ constructs `NCPolynomial` objects representing the polynomial matrices
 is zero as expected. Internally `NCPolynomial` represents a polynomial
 matrix by constructing matrix factors. For example the representation
 of the matrix `mat1` correspond to the factors
-![ &#10;\\begin{aligned}&#10;\\begin{bmatrix}&#10;    a x + x a^T + c y + y^T c^T - x q x & b x \\\\ &#10;    x b^T & 1&#10;\\end{bmatrix} &#10;&=&#10;\\begin{bmatrix} 0 & 0 \\\\ 0 & 1 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} a \\\\ 0 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} 1 & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} a^T & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} -1 \\\\ 0 \\end{bmatrix}&#10;x q x&#10;\\begin{bmatrix} 1 & 0 \\end{bmatrix}&#10;+ \\\\ & \\qquad \\quad&#10;\\begin{bmatrix} b \\\\ 0 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} 0 & 1 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} b^T & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} c \\\\ 0 \\end{bmatrix}&#10;y&#10;\\begin{bmatrix} 1 & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}&#10;y^T&#10;\\begin{bmatrix} c^T & 0 \\end{bmatrix}&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D+%0A%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A++++a+x+%2B+x+a%5ET+%2B+c+y+%2B+y%5ET+c%5ET+-+x+q+x+%26+b+x+%5C%5C+%0A++++x+b%5ET+%26+1%0A%5Cend%7Bbmatrix%7D+%0A%26%3D%0A%5Cbegin%7Bbmatrix%7D+0+%26+0+%5C%5C+0+%26+1+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+a+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+1+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+1+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+a%5ET+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+-1+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax+q+x%0A%5Cbegin%7Bbmatrix%7D+1+%26+0+%5Cend%7Bbmatrix%7D%0A%2B+%5C%5C+%26+%5Cqquad+%5Cquad%0A%5Cbegin%7Bbmatrix%7D+b+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+0+%26+1+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+0+%5C%5C+1+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+b%5ET+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+c+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ay%0A%5Cbegin%7Bbmatrix%7D+1+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+1+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ay%5ET%0A%5Cbegin%7Bbmatrix%7D+c%5ET+%26+0+%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![ &#10;\\begin{aligned}&#10;\\begin{bmatrix}&#10;    a x + x a^T + c y + y^T c^T - x q x & b x \\\\ &#10;    x b^T & 1&#10;\\end{bmatrix} &#10;&=&#10;\\begin{bmatrix} 0 & 0 \\\\ 0 & 1 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} a \\\\ 0 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} 1 & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} a^T & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} -1 \\\\ 0 \\end{bmatrix}&#10;x q x&#10;\\begin{bmatrix} 1 & 0 \\end{bmatrix}&#10;+ \\\\ & \\qquad \\quad&#10;\\begin{bmatrix} b \\\\ 0 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} 0 & 1 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}&#10;x&#10;\\begin{bmatrix} b^T & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} c \\\\ 0 \\end{bmatrix}&#10;y&#10;\\begin{bmatrix} 1 & 0 \\end{bmatrix}&#10;+&#10;\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}&#10;y^T&#10;\\begin{bmatrix} c^T & 0 \\end{bmatrix}&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20a%20x%20%2B%20x%20a%5ET%20%2B%20c%20y%20%2B%20y%5ET%20c%5ET%20-%20x%20q%20x%20%26%20b%20x%20%5C%5C%20%0A%20%20%20%20x%20b%5ET%20%26%201%0A%5Cend%7Bbmatrix%7D%20%0A%26%3D%0A%5Cbegin%7Bbmatrix%7D%200%20%26%200%20%5C%5C%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20a%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20a%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20-1%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%20q%20x%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%20%5C%5C%20%26%20%5Cqquad%20%5Cquad%0A%5Cbegin%7Bbmatrix%7D%20b%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%200%20%5C%5C%201%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20b%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20c%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%5ET%0A%5Cbegin%7Bbmatrix%7D%20c%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 
 See section [linear polynomials](#linear-polynomials) for more features on
 linear polynomial matrices.
@@ -2187,7 +2187,7 @@ linear polynomial matrices.
 
 Another interesting class of nc polynomials is that of linear
 polynomials, which can be factored in the form:
-![&#10;    s(x) = l (F \\otimes x) r&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A++++s%28x%29+%3D+l+%28F+%5Cotimes+x%29+r%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;    s(x) = l (F \\otimes x) r&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20s%28x%29%20%3D%20l%20%28F%20%5Cotimes%20x%29%20r%0A%5Cend%7Baligned%7D)
 where ![l](https://render.githubusercontent.com/render/math?math=l&mode=inline) and ![r](https://render.githubusercontent.com/render/math?math=r&mode=inline) are vectors with symbolic expressions and ![F](https://render.githubusercontent.com/render/math?math=F&mode=inline) is a
 numeric matrix. This functionality is in the package
 
@@ -2215,7 +2215,7 @@ and `r` and the coefficient array `F`.
 
 which in this case is the matrix:
 
-![&#10;\\begin{bmatrix}&#10;    -1 & 1\\\\&#10;    1 & 0&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A++++-1+%26+1%5C%5C%0A++++1+%26+0%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{bmatrix}&#10;    -1 & 1\\\\&#10;    1 & 0&#10;\\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20-1%20%26%201%5C%5C%0A%20%20%20%201%20%26%200%0A%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
 
 and
 
@@ -2293,17 +2293,17 @@ Basis and uses of Gröbner Basis. For example, in Mathematica, the
 which, for simple collections, readily yields a solution. Likewise,
 the Mathematica `Eliminate` command tries to convert a collection of
 ![m](https://render.githubusercontent.com/render/math?math=m&mode=inline) polynomial equations (often called relations)
-![&#10;    \\begin{aligned}&#10;    p\_1(x\_1,\\ldots,x\_n) &= 0 \\\\&#10;    p\_2(x\_1,\\ldots,x\_n) &= 0 \\\\&#10;    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\&#10;    p\_m(x\_1,\\ldots,x\_n) &= 0&#10;    \\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A++++%5Cbegin%7Baligned%7D%0A++++p_1%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0+%5C%5C%0A++++p_2%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0+%5C%5C%0A++++%5Cvdots+%5Cquad+%26+%5Cquad+%5C%2C+%5C%2C+%5Cvdots+%5C%5C%0A++++p_m%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0%0A++++%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;    \\begin{aligned}&#10;    p\_1(x\_1,\\ldots,x\_n) &= 0 \\\\&#10;    p\_2(x\_1,\\ldots,x\_n) &= 0 \\\\&#10;    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\&#10;    p\_m(x\_1,\\ldots,x\_n) &= 0&#10;    \\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20%5Cbegin%7Baligned%7D%0A%20%20%20%20p_1%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20p_2%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20p_m%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%0A%20%20%20%20%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 
-in variables ![x\_1,x\_2, \\ldots x\_n](https://render.githubusercontent.com/render/math?math=x_1%2Cx_2%2C+%5Cldots+x_n&mode=inline) to a *triangular* form, that is a
+in variables ![x\_1,x\_2, \\ldots x\_n](https://render.githubusercontent.com/render/math?math=x_1%2Cx_2%2C%20%5Cldots%20x_n&mode=inline) to a *triangular* form, that is a
 new collection of equations like
 
-![&#10;\\begin{aligned}&#10;    q\_1(x\_1) &= 0 \\\\&#10;    q\_2(x\_1,x\_2) &= 0 \\\\&#10;    q\_3(x\_1,x\_2) &= 0 \\\\&#10;    q\_4(x\_1,x\_2,x\_3)&=0 \\\\&#10;    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\&#10;    q\_{r}(x\_1,\\ldots,x\_n) &= 0.&#10;    \\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++++q_1%28x_1%29+%26%3D+0+%5C%5C%0A++++q_2%28x_1%2Cx_2%29+%26%3D+0+%5C%5C%0A++++q_3%28x_1%2Cx_2%29+%26%3D+0+%5C%5C%0A++++q_4%28x_1%2Cx_2%2Cx_3%29%26%3D0+%5C%5C%0A++++%5Cvdots+%5Cquad+%26+%5Cquad+%5C%2C+%5C%2C+%5Cvdots+%5C%5C%0A++++q_%7Br%7D%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0.%0A++++%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
-Here the polynomials ![\\{q\_j: 1\\le j\\le k\_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3A+1%5Cle+j%5Cle+k_2%5C%7D&mode=inline) generate the same
-*ideal* that the polynomials ![\\{p\_j : 1\\le j \\le k\_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j+%3A+1%5Cle+j+%5Cle+k_1%5C%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;    q\_1(x\_1) &= 0 \\\\&#10;    q\_2(x\_1,x\_2) &= 0 \\\\&#10;    q\_3(x\_1,x\_2) &= 0 \\\\&#10;    q\_4(x\_1,x\_2,x\_3)&=0 \\\\&#10;    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\&#10;    q\_{r}(x\_1,\\ldots,x\_n) &= 0.&#10;    \\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%20%20q_1%28x_1%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_2%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_3%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_4%28x_1%2Cx_2%2Cx_3%29%26%3D0%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20q_%7Br%7D%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200.%0A%20%20%20%20%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
+Here the polynomials ![\\{q\_j: 1\\le j\\le k\_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline) generate the same
+*ideal* that the polynomials ![\\{p\_j : 1\\le j \\le k\_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%20%3A%201%5Cle%20j%20%5Cle%20k_1%5C%7D&mode=inline)
 generate. Therefore, the set of solutions to the collection of
-polynomial equations ![\\{p\_j=0: 1\\le j\\le k\_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%3D0%3A+1%5Cle+j%5Cle+k_1%5C%7D&mode=inline) equals the set of
-solutions to the collection of polynomial equations ![\\{q\_j=0: 1\\le j\\le k\_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3D0%3A+1%5Cle+j%5Cle+k_2%5C%7D&mode=inline). This canonical form greatly simplifies the task of
+polynomial equations ![\\{p\_j=0: 1\\le j\\le k\_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%3D0%3A%201%5Cle%20j%5Cle%20k_1%5C%7D&mode=inline) equals the set of
+solutions to the collection of polynomial equations ![\\{q\_j=0: 1\\le j\\le k\_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3D0%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline). This canonical form greatly simplifies the task of
 solving collections of polynomial equations by facilitating
 backsolving for ![x\_j](https://render.githubusercontent.com/render/math?math=x_j&mode=inline) in terms of ![x\_1,\\ldots,x\_{j-1}](https://render.githubusercontent.com/render/math?math=x_1%2C%5Cldots%2Cx_%7Bj-1%7D&mode=inline).
 
@@ -2326,7 +2326,7 @@ implied by the above command can be visualized using:
     PrintMonomialOrder[];
 
 which in this case prints:
-![a \< b \< c \\ll x.](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7Da+%3C+b+%3C+c+%5Cll+x.%5Cend%7Baligned%7D&mode=inline)
+![a \< b \< c \\ll x.](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7Da%20%3C%20b%20%3C%20c%20%5Cll%20x.%5Cend%7Baligned%7D)
 A user does not need to know theoretical background related to
 monomials orders. Indeed, as we shall see soon, in many engineering
 problems, it suffices to know which variables correspond to quantities
@@ -2334,17 +2334,17 @@ which are *known* and which variables correspond to quantities which
 are *unknown*. If one is solving for a variable or desires to prove
 that a certain quantity is zero, then one would want to view that
 variable as *unknown*. In the above example, the symbol ‘![\\ll](https://render.githubusercontent.com/render/math?math=%5Cll&mode=inline)’
-separate the *knowns*, ![a, b, c](https://render.githubusercontent.com/render/math?math=a%2C+b%2C+c&mode=inline), from the *unknown*, ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline). For more
+separate the *knowns*, ![a, b, c](https://render.githubusercontent.com/render/math?math=a%2C%20b%2C%20c&mode=inline), from the *unknown*, ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline). For more
 details on orderings see Section [Orderings](#ordering-on-variables-and-monomials).
 
 Our goal is to calculate the Gröbner basis associated with the
 following relations (i.e. a list of polynomials):
-![&#10;\\begin{aligned}&#10;    a \\, x \\, a &= c, &&#10;    a \\, b &= 1, &&#10;    b \\, a &= 1.&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++++a+%5C%2C+x+%5C%2C+a+%26%3D+c%2C+%26%0A++++a+%5C%2C+b+%26%3D+1%2C+%26%0A++++b+%5C%2C+a+%26%3D+1.%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;    a \\, x \\, a &= c, &&#10;    a \\, b &= 1, &&#10;    b \\, a &= 1.&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%20%20a%20%5C%2C%20x%20%5C%2C%20a%20%26%3D%20c%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20%26%3D%201%2C%20%26%0A%20%20%20%20b%20%5C%2C%20a%20%26%3D%201.%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 We shall use the word *relation* to mean a polynomial in noncommuting
-indeterminates. For example, if an analyst saw the equation ![A B = 1](https://render.githubusercontent.com/render/math?math=A+B+%3D+1&mode=inline)
+indeterminates. For example, if an analyst saw the equation ![A B = 1](https://render.githubusercontent.com/render/math?math=A%20B%20%3D%201&mode=inline)
 for matrices ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline) and ![B](https://render.githubusercontent.com/render/math?math=B&mode=inline), then he might say that ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline) and ![B](https://render.githubusercontent.com/render/math?math=B&mode=inline) satisfy
-the polynomial equation ![a\\, b - 1 = 0](https://render.githubusercontent.com/render/math?math=a%5C%2C+b+-+1+%3D+0&mode=inline). An algebraist would say that
-![a\\, b - 1](https://render.githubusercontent.com/render/math?math=a%5C%2C+b+-+1&mode=inline) is a relation.
+the polynomial equation ![a\\, b - 1 = 0](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201%20%3D%200&mode=inline). An algebraist would say that
+![a\\, b - 1](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201&mode=inline) is a relation.
 
 To calculate a Gröbner basis one defines a list of relations:
 
@@ -2402,12 +2402,12 @@ the leading monomial as Mathematica alphabetizes the resulting sum.
 
 Someone not familiar with GB’s might find it instructive to note this
 output GB effectively *solves* the input equation
-![&#10;    a \\, x \\, a - c = 0&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A++++a+%5C%2C+x+%5C%2C+a+-+c+%3D+0%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;    a \\, x \\, a - c = 0&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20a%20%5C%2C%20x%20%5C%2C%20a%20-%20c%20%3D%200%0A%5Cend%7Baligned%7D)
 under the assumptions that
-![&#10;\\begin{aligned}&#10;    b \\, a - 1 &= 0, &&#10;    a \\, b - 1 & =0,&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++++b+%5C%2C+a+-+1+%26%3D+0%2C+%26%0A++++a+%5C%2C+b+-+1+%26+%3D0%2C%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
-that is ![a = b^{-1}](https://render.githubusercontent.com/render/math?math=a+%3D+b%5E%7B-1%7D&mode=inline) and produces the expected result in the form of
+![&#10;\\begin{aligned}&#10;    b \\, a - 1 &= 0, &&#10;    a \\, b - 1 & =0,&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%20%20b%20%5C%2C%20a%20-%201%20%26%3D%200%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20-%201%20%26%20%3D0%2C%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
+that is ![a = b^{-1}](https://render.githubusercontent.com/render/math?math=a%20%3D%20b%5E%7B-1%7D&mode=inline) and produces the expected result in the form of
 the relation:
-![&#10;    x = b \\, c \\, b.&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A++++x+%3D+b+%5C%2C+c+%5C%2C+b.%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;    x = b \\, c \\, b.&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20x%20%3D%20b%20%5C%2C%20c%20%5C%2C%20b.%0A%5Cend%7Baligned%7D)
 
 ## A slightly more challenging example
 
@@ -2418,12 +2418,12 @@ order as before:
 
 that is
 
-![a \< b \< c \\ll x](https://render.githubusercontent.com/render/math?math=a+%3C+b+%3C+c+%5Cll+x&mode=inline)
+![a \< b \< c \\ll x](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x&mode=inline)
 
 and the relations:
-![&#10;\\begin{aligned}&#10;  a \\, x - c &= 0, \\\\&#10;  a \\, b \\, a - a &= 0, \\\\&#10;  b \\, a \\, b - b &= 0,&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++a+%5C%2C+x+-+c+%26%3D+0%2C+%5C%5C%0A++a+%5C%2C+b+%5C%2C+a+-+a+%26%3D+0%2C+%5C%5C%0A++b+%5C%2C+a+%5C%2C+b+-+b+%26%3D+0%2C%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;  a \\, x - c &= 0, \\\\&#10;  a \\, b \\, a - a &= 0, \\\\&#10;  b \\, a \\, b - b &= 0,&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20a%20%5C%2C%20x%20-%20c%20%26%3D%200%2C%20%5C%5C%0A%20%20a%20%5C%2C%20b%20%5C%2C%20a%20-%20a%20%26%3D%200%2C%20%5C%5C%0A%20%20b%20%5C%2C%20a%20%5C%2C%20b%20-%20b%20%26%3D%200%2C%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 from which one can recognize the problem of solving the linear
-equation ![a \\, x = c](https://render.githubusercontent.com/render/math?math=a+%5C%2C+x+%3D+c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\\dag](https://render.githubusercontent.com/render/math?math=b+%3D+a%5E%5Cdag&mode=inline). The
+equation ![a \\, x = c](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%3D%20c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\\dag](https://render.githubusercontent.com/render/math?math=b%20%3D%20a%5E%5Cdag&mode=inline). The
 calculation:
 
     gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
@@ -2438,16 +2438,16 @@ finds the Gröbner basis:
 In this case the Gröbner basis cannot quite *solve* the equations but
 it remarkably produces the necessary condition for existence of
 solutions:
-![ &#10;    0 = a \\, b \\, c - c = a \\, a^\\dag c - c &#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D+%0A++++0+%3D+a+%5C%2C+b+%5C%2C+c+-+c+%3D+a+%5C%2C+a%5E%5Cdag+c+-+c+%0A%5Cend%7Baligned%7D&mode=inline)
+![ &#10;    0 = a \\, b \\, c - c = a \\, a^\\dag c - c &#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%20%200%20%3D%20a%20%5C%2C%20b%20%5C%2C%20c%20-%20c%20%3D%20a%20%5C%2C%20a%5E%5Cdag%20c%20-%20c%20%0A%5Cend%7Baligned%7D)
 that can be interpreted as ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) being in the range-space of ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline).
 
 ## Simplifying polynomial expresions
 
 Our goal now is to verify if it is possible to *simplify* the following
 expression:
-![&#10;b \\, b \\, a \\, a - a \\, a \\, b \\, b + a \\, b \\, a&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0Ab+%5C%2C+b+%5C%2C+a+%5C%2C+a+-+a+%5C%2C+a+%5C%2C+b+%5C%2C+b+%2B+a+%5C%2C+b+%5C%2C+a%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;b \\, b \\, a \\, a - a \\, a \\, b \\, b + a \\, b \\, a&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0Ab%20%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20a%20-%20a%20%5C%2C%20a%20%5C%2C%20b%20%5C%2C%20b%20%2B%20a%20%5C%2C%20b%20%5C%2C%20a%0A%5Cend%7Baligned%7D)
 if we know that
-![&#10;a \\, b \\, a = b&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0Aa+%5C%2C+b+%5C%2C+a+%3D+b%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;a \\, b \\, a = b&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0Aa%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b%0A%5Cend%7Baligned%7D)
 using Gröbner basis. With that in mind we set the order:
 
     SetMonomialOrder[a,b];
@@ -2476,7 +2476,7 @@ and the associated GB
     a ** b ** a -> b
     b ** b ** a -> a ** b ** b
 
-The GB revealed another relationship that must hold true if ![a \\, b \\, a = b](https://render.githubusercontent.com/render/math?math=a+%5C%2C+b+%5C%2C+a+%3D+b&mode=inline). One can use these relationships to simplify the original
+The GB revealed another relationship that must hold true if ![a \\, b \\, a = b](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b&mode=inline). One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
 
     expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
@@ -2532,11 +2532,11 @@ It is often desirable to simplify expressions involving inverses of
 noncommutative expressions. One challenge is to recognize identities
 implied by the existence of certain inverses. For example, that the
 expression
-![&#10;    x (1 - x)^{-1} - (1 - x)^{-1} x&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A++++x+%281+-+x%29%5E%7B-1%7D+-+%281+-+x%29%5E%7B-1%7D+x%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;    x (1 - x)^{-1} - (1 - x)^{-1} x&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20x%20%281%20-%20x%29%5E%7B-1%7D%20-%20%281%20-%20x%29%5E%7B-1%7D%20x%0A%5Cend%7Baligned%7D)
 is equivalent to ![0](https://render.githubusercontent.com/render/math?math=0&mode=inline). One can use a nc Gröbner basis for that task.
 Consider for instance the order
 
-![ x \\ll (1-x)^{-1} ](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D+x+%5Cll+%281-x%29%5E%7B-1%7D+%5Cend%7Baligned%7D&mode=inline)
+![ x \\ll (1-x)^{-1} ](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20x%20%5Cll%20%281-x%29%5E%7B-1%7D%20%5Cend%7Baligned%7D)
 
 implied by the command:
 
@@ -2571,7 +2571,7 @@ and results in the rules:
     inv[1-x] ** x -> -1 + inv[1-x],
 
 As in the previous example, the GB revealed new relationships that
-must hold true if ![1- x](https://render.githubusercontent.com/render/math?math=1-+x&mode=inline) is invertible, and one can use this
+must hold true if ![1- x](https://render.githubusercontent.com/render/math?math=1-%20x&mode=inline) is invertible, and one can use this
 relationship to  the original expression using
 `NCReplaceRepeated` as in:
 
@@ -2580,7 +2580,7 @@ relationship to  the original expression using
 The above command results in `0`, as one would hope.
 
 For a more challenging example consider the identity:
-![&#10;\\left (1 - x - y (1 - x)^{-1} y \\right )^{-1} = \\frac{1}{2} (1 - x - y)^{-1} + \\frac{1}{2} (1 - x + y)^{-1}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cleft+%281+-+x+-+y+%281+-+x%29%5E%7B-1%7D+y+%5Cright+%29%5E%7B-1%7D+%3D+%5Cfrac%7B1%7D%7B2%7D+%281+-+x+-+y%29%5E%7B-1%7D+%2B+%5Cfrac%7B1%7D%7B2%7D+%281+-+x+%2B+y%29%5E%7B-1%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\left (1 - x - y (1 - x)^{-1} y \\right )^{-1} = \\frac{1}{2} (1 - x - y)^{-1} + \\frac{1}{2} (1 - x + y)^{-1}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cleft%20%281%20-%20x%20-%20y%20%281%20-%20x%29%5E%7B-1%7D%20y%20%5Cright%20%29%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20-%20y%29%5E%7B-1%7D%20%2B%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20%2B%20y%29%5E%7B-1%7D%0A%5Cend%7Baligned%7D)
 One can verify that the rule based command
 [NCSimplifyRational](#ncsimplifyrational-1) fails to simplify the
 expression:
@@ -2646,7 +2646,7 @@ We now discuss each of these types of orders.
 
 ### Lex Order: the simplest elimination order
 
-To impose lexicographic order, say ![a\\ll b\\ll x\\ll y](https://render.githubusercontent.com/render/math?math=a%5Cll+b%5Cll+x%5Cll+y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
+To impose lexicographic order, say ![a\\ll b\\ll x\\ll y](https://render.githubusercontent.com/render/math?math=a%5Cll%20b%5Cll%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
 and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[a,b,x,y];
@@ -2668,7 +2668,7 @@ preceeding section in exactly the same form.
 We now give a simple example how one can solve for
 ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) given that ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline),![b](https://render.githubusercontent.com/render/math?math=b&mode=inline),![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline)
 satisfy the equations:
-![&#10;\\begin{aligned}&#10;-b\\, x + x\\, y  \\, a + x\\, b \\, a \\,  a &= 0 \\\\&#10;x \\, a-1&=0 \\\\&#10;a\\, x-1&=0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A-b%5C%2C+x+%2B+x%5C%2C+y++%5C%2C+a+%2B+x%5C%2C+b+%5C%2C+a+%5C%2C++a+%26%3D+0+%5C%5C%0Ax+%5C%2C+a-1%26%3D0+%5C%5C%0Aa%5C%2C+x-1%26%3D0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;-b\\, x + x\\, y  \\, a + x\\, b \\, a \\,  a &= 0 \\\\&#10;x \\, a-1&=0 \\\\&#10;a\\, x-1&=0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A-b%5C%2C%20x%20%2B%20x%5C%2C%20y%20%20%5C%2C%20a%20%2B%20x%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20%20a%20%26%3D%200%20%5C%5C%0Ax%20%5C%2C%20a-1%26%3D0%20%5C%5C%0Aa%5C%2C%20x-1%26%3D0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 
 The command
 
@@ -2716,7 +2716,7 @@ Also the algorithm created a number of other relations which involved
 
 ### Graded lex ordering: a non-elimination order
 
-To impose graded lexicographic order, say ![a\< b\< x\< y](https://render.githubusercontent.com/render/math?math=a%3C+b%3C+x%3C+y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline),
+To impose graded lexicographic order, say ![a\< b\< x\< y](https://render.githubusercontent.com/render/math?math=a%3C%20b%3C%20x%3C%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline),
 ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[{a,b,x,y}];
@@ -2751,7 +2751,7 @@ involving ![a](https://render.githubusercontent.com/render/math?math=a&mode=inli
 There are other useful monomial orders which one can use other than
 graded lex and lex. Another type of order is what we call multigraded
 lex and is a mixture of graded lex and lex order. To impose
-multi-graded lexicographic order, say ![a\< b\< x\\ll y](https://render.githubusercontent.com/render/math?math=a%3C+b%3C+x%5Cll+y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
+multi-graded lexicographic order, say ![a\< b\< x\\ll y](https://render.githubusercontent.com/render/math?math=a%3C%20b%3C%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
 and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[{a,b,x},y];
@@ -2792,7 +2792,7 @@ him for discussions.
 **Problem:** *Given matrices ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline), and ![d](https://render.githubusercontent.com/render/math?math=d&mode=inline), we wish to
 determine under what conditions there exists matrices x, y, z, and w
 such that the block matrices*
-![  &#10;  \\begin{bmatrix} a & x \\\\ y & b \\end{bmatrix}&#10;  \\qquad &#10;  \\begin{bmatrix} w & c \\\\ d & z \\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D++%0A++%5Cbegin%7Bbmatrix%7D+a+%26+x+%5C%5C+y+%26+b+%5Cend%7Bbmatrix%7D%0A++%5Cqquad+%0A++%5Cbegin%7Bbmatrix%7D+w+%26+c+%5C%5C+d+%26+z+%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![  &#10;  \\begin{bmatrix} a & x \\\\ y & b \\end{bmatrix}&#10;  \\qquad &#10;  \\begin{bmatrix} w & c \\\\ d & z \\end{bmatrix}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%20%0A%20%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20x%20%5C%5C%20y%20%26%20b%20%5Cend%7Bbmatrix%7D%0A%20%20%5Cqquad%20%0A%20%20%5Cbegin%7Bbmatrix%7D%20w%20%26%20c%20%5C%5C%20d%20%26%20z%20%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
 *are inverses of each other. Also, we wish to find formulas for ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline),
 ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline).*
 
@@ -2848,10 +2848,10 @@ we obtain the Gröbner basis:
     d**a**c**b**z**inv[c] -> z**b**d**a
 
 after seven iterations. The first four relations
-![&#10;\\begin{aligned}&#10;    x &= d^{-1}-d^{-1} \\, z \\, b \\\\&#10;    y &= c^{-1}-b \\, z \\, c^{-1} \\\\&#10;    w &= a^{-1} \\, d^{-1}  \\, z \\, b \\, d \\\\&#10;    z \\, b \\, z &= z + d \\, a \\, c&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++++x+%26%3D+d%5E%7B-1%7D-d%5E%7B-1%7D+%5C%2C+z+%5C%2C+b+%5C%5C%0A++++y+%26%3D+c%5E%7B-1%7D-b+%5C%2C+z+%5C%2C+c%5E%7B-1%7D+%5C%5C%0A++++w+%26%3D+a%5E%7B-1%7D+%5C%2C+d%5E%7B-1%7D++%5C%2C+z+%5C%2C+b+%5C%2C+d+%5C%5C%0A++++z+%5C%2C+b+%5C%2C+z+%26%3D+z+%2B+d+%5C%2C+a+%5C%2C+c%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)  
+![&#10;\\begin{aligned}&#10;    x &= d^{-1}-d^{-1} \\, z \\, b \\\\&#10;    y &= c^{-1}-b \\, z \\, c^{-1} \\\\&#10;    w &= a^{-1} \\, d^{-1}  \\, z \\, b \\, d \\\\&#10;    z \\, b \\, z &= z + d \\, a \\, c&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%20%20x%20%26%3D%20d%5E%7B-1%7D-d%5E%7B-1%7D%20%5C%2C%20z%20%5C%2C%20b%20%5C%5C%0A%20%20%20%20y%20%26%3D%20c%5E%7B-1%7D-b%20%5C%2C%20z%20%5C%2C%20c%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%20%5C%2C%20z%20%5C%2C%20b%20%5C%2C%20d%20%5C%5C%0A%20%20%20%20z%20%5C%2C%20b%20%5C%2C%20z%20%26%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)  
 are the solutions we are looking for, which states that one can find
 ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline) such that the matrices above are inverses of
-each other if and only if ![z \\, b \\, z = z + d \\, a \\, c](https://render.githubusercontent.com/render/math?math=z+%5C%2C+b+%5C%2C+z+%3D+z+%2B+d+%5C%2C+a+%5C%2C+c&mode=inline). The first
+each other if and only if ![z \\, b \\, z = z + d \\, a \\, c](https://render.githubusercontent.com/render/math?math=z%20%5C%2C%20b%20%5C%2C%20z%20%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c&mode=inline). The first
 three relations gives formulas for ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline) in terms of ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline).
 
 A variety of scenarios can be quickly investigated under different
@@ -2879,9 +2879,9 @@ produces the Gröbner basis:
     y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
 
 after five iterations. Once again, the first four relations
-![&#10;\\begin{aligned}&#10;    z &= b^{-1}-b^{-1} \\, y \\, c \\\\&#10;    w &= a^{-1}-c \\, y \\, a^{-1} \\\\&#10;    x &= a \\, c \\, y \\, a^{-1} \\, d^{-1} \\\\&#10;    y \\, c \\, y &= y+b \\, d \\, a&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++++z+%26%3D+b%5E%7B-1%7D-b%5E%7B-1%7D+%5C%2C+y+%5C%2C+c+%5C%5C%0A++++w+%26%3D+a%5E%7B-1%7D-c+%5C%2C+y+%5C%2C+a%5E%7B-1%7D+%5C%5C%0A++++x+%26%3D+a+%5C%2C+c+%5C%2C+y+%5C%2C+a%5E%7B-1%7D+%5C%2C+d%5E%7B-1%7D+%5C%5C%0A++++y+%5C%2C+c+%5C%2C+y+%26%3D+y%2Bb+%5C%2C+d+%5C%2C+a%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)  
+![&#10;\\begin{aligned}&#10;    z &= b^{-1}-b^{-1} \\, y \\, c \\\\&#10;    w &= a^{-1}-c \\, y \\, a^{-1} \\\\&#10;    x &= a \\, c \\, y \\, a^{-1} \\, d^{-1} \\\\&#10;    y \\, c \\, y &= y+b \\, d \\, a&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%20%20z%20%26%3D%20b%5E%7B-1%7D-b%5E%7B-1%7D%20%5C%2C%20y%20%5C%2C%20c%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D-c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20x%20%26%3D%20a%20%5C%2C%20c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20y%20%5C%2C%20c%20%5C%2C%20y%20%26%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)  
 provide formulas, this time for ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline), and ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline) in terms of ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline)
-satisfying ![y \\, c \\, y = y+b \\, d \\, a](https://render.githubusercontent.com/render/math?math=y+%5C%2C+c+%5C%2C+y+%3D+y%2Bb+%5C%2C+d+%5C%2C+a&mode=inline). Note that these formulas do
+satisfying ![y \\, c \\, y = y+b \\, d \\, a](https://render.githubusercontent.com/render/math?math=y%20%5C%2C%20c%20%5C%2C%20y%20%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a&mode=inline). Note that these formulas do
 not involve ![c^{-1}](https://render.githubusercontent.com/render/math?math=c%5E%7B-1%7D&mode=inline) since ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) is no longer assumed invertible.
 
 # Semidefinite Programming
@@ -2915,7 +2915,7 @@ After loading NCAlgebra, the package NCSDP must be loaded using:
 Semidefinite programs consist of symbolic noncommutative expressions
 representing inequalities and a list of rules for data
 replacement. For example the semidefinite program:
-![&#10;\\begin{aligned}&#10;\\min\_Y \\quad & \<I,Y\> \\\\&#10;\\text{s.t.} \\quad & A Y + Y A^T + I \\preceq 0 \\\\&#10;            & Y \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%5Cmin_Y+%5Cquad+%26+%3CI%2CY%3E+%5C%5C%0A%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+Y+%2B+Y+A%5ET+%2B+I+%5Cpreceq+0+%5C%5C%0A++++++++++++%26+Y+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;\\min\_Y \\quad & \<I,Y\> \\\\&#10;\\text{s.t.} \\quad & A Y + Y A^T + I \\preceq 0 \\\\&#10;            & Y \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%5Cmin_Y%20%5Cquad%20%26%20%3CI%2CY%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20Y%20%2B%20Y%20A%5ET%20%2B%20I%20%5Cpreceq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20Y%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 can be solved by defining the noncommutative expressions
 
     SNC[a, y];
@@ -2928,9 +2928,9 @@ objective function constains the symbolic coefficients of the inner
 product, in this case `-1`. The reason for the negative signs in the
 objective as well as in the second inequality is that semidefinite
 programs are expected to be cast in the following *canonical form*:
-![&#10;\\begin{aligned} &#10;  \\max\_y \\quad & \<b,y\> \\\\ &#10;  \\text{s.t.} \\quad & f(y) \\preceq 0 &#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D+%0A++%5Cmax_y+%5Cquad+%26+%3Cb%2Cy%3E+%5C%5C+%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+f%28y%29+%5Cpreceq+0+%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned} &#10;  \\max\_y \\quad & \<b,y\> \\\\ &#10;  \\text{s.t.} \\quad & f(y) \\preceq 0 &#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%5Cpreceq%200%20%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 or, equivalently:
-![&#10;\\begin{aligned} &#10;  \\max\_y \\quad & \<b,y\> \\\\ &#10;  \\text{s.t.} \\quad & f(y) + s = 0, \\quad s \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D+%0A++%5Cmax_y+%5Cquad+%26+%3Cb%2Cy%3E+%5C%5C+%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+f%28y%29+%2B+s+%3D+0%2C+%5Cquad+s+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned} &#10;  \\max\_y \\quad & \<b,y\> \\\\ &#10;  \\text{s.t.} \\quad & f(y) + s = 0, \\quad s \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%2B%20s%20%3D%200%2C%20%5Cquad%20s%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 
 Semidefinite programs can be visualized using
 [`NCSDPForm`](#ncsdpform) as in:
@@ -3003,9 +3003,9 @@ A symbolic dual problem can be calculated easily using
     {dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];
 
 The dual program for the example problem above is:
-![&#10;\\begin{aligned} &#10;  \\max\_x \\quad & \<c,x\> \\\\ &#10;  \\text{s.t.} \\quad & f^\*(x) + b = 0, \\quad x \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D+%0A++%5Cmax_x+%5Cquad+%26+%3Cc%2Cx%3E+%5C%5C+%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+f%5E%2A%28x%29+%2B+b+%3D+0%2C+%5Cquad+x+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned} &#10;  \\max\_x \\quad & \<c,x\> \\\\ &#10;  \\text{s.t.} \\quad & f^\*(x) + b = 0, \\quad x \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_x%20%5Cquad%20%26%20%3Cc%2Cx%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%5E%2A%28x%29%20%2B%20b%20%3D%200%2C%20%5Cquad%20x%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 In the case of the above problem the dual program is
-![&#10;\\begin{aligned}&#10;\\max\_{X\_1, X\_2} \\quad & \<I,X\_1\> \\\\&#10;\\text{s.t.} \\quad & A^T X\_1 + X\_1 A -X\_2 - I = 0 \\\\&#10;            & X\_1 \\succeq 0, \\\\&#10;        & X\_2 \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%5Cmax_%7BX_1%2C+X_2%7D+%5Cquad+%26+%3CI%2CX_1%3E+%5C%5C%0A%5Ctext%7Bs.t.%7D+%5Cquad+%26+A%5ET+X_1+%2B+X_1+A+-X_2+-+I+%3D+0+%5C%5C%0A++++++++++++%26+X_1+%5Csucceq+0%2C+%5C%5C%0A++++++++%26+X_2+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;\\max\_{X\_1, X\_2} \\quad & \<I,X\_1\> \\\\&#10;\\text{s.t.} \\quad & A^T X\_1 + X\_1 A -X\_2 - I = 0 \\\\&#10;            & X\_1 \\succeq 0, \\\\&#10;        & X\_2 \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%5Cmax_%7BX_1%2C%20X_2%7D%20%5Cquad%20%26%20%3CI%2CX_1%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5ET%20X_1%20%2B%20X_1%20A%20-X_2%20-%20I%20%3D%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20X_1%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%20%20%20%20%20%20%26%20X_2%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 which can be visualized using [`NCSDPDualForm`](#ncsdpdualform) using:
 
     NCSDPDualForm[dIneqs, dVars, dObj]
@@ -3022,15 +3022,15 @@ as in:
     << SDP`
 
 Semidefinite programs are optimization problems of the form:
-![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) is a
 vector of decision variables.
 
-A user can input the problem data, the triplet ![(A, b, c)](https://render.githubusercontent.com/render/math?math=%28A%2C+b%2C+c%29&mode=inline), or use the
+A user can input the problem data, the triplet ![(A, b, c)](https://render.githubusercontent.com/render/math?math=%28A%2C%20b%2C%20c%29&mode=inline), or use the
 following convenient methods for producing data in the proper format.
 
 For example, problems can be stated as:
-![&#10;\\begin{aligned} &#10;  \\min\_y \\quad & f(y), \\\\&#10;  \\text{s.t.} \\quad & G(y) \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D+%0A++%5Cmin_y+%5Cquad+%26+f%28y%29%2C+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+G%28y%29+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned} &#10;  \\min\_y \\quad & f(y), \\\\&#10;  \\text{s.t.} \\quad & G(y) \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 where ![f(y)](https://render.githubusercontent.com/render/math?math=f%28y%29&mode=inline) and ![G(y)](https://render.githubusercontent.com/render/math?math=G%28y%29&mode=inline) are affine functions of the vector
 of variables ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline).
 
@@ -3041,7 +3041,7 @@ Here is a simple example:
     G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
 
 The list of constraints in `G` is to be interpreted as:
-![&#10;\\begin{aligned} &#10;  y\_0 - 2 \\geq 0, \\\\&#10;  \\begin{bmatrix} y\_1 & y\_0 \\\\ y\_0 & 1 \\end{bmatrix} \\succeq 0, \\\\&#10;  \\begin{bmatrix} y\_2 & y\_1 \\\\ y\_1 & 1 \\end{bmatrix} \\succeq 0.&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D+%0A++y_0+-+2+%5Cgeq+0%2C+%5C%5C%0A++%5Cbegin%7Bbmatrix%7D+y_1+%26+y_0+%5C%5C+y_0+%26+1+%5Cend%7Bbmatrix%7D+%5Csucceq+0%2C+%5C%5C%0A++%5Cbegin%7Bbmatrix%7D+y_2+%26+y_1+%5C%5C+y_1+%26+1+%5Cend%7Bbmatrix%7D+%5Csucceq+0.%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned} &#10;  y\_0 - 2 \\geq 0, \\\\&#10;  \\begin{bmatrix} y\_1 & y\_0 \\\\ y\_0 & 1 \\end{bmatrix} \\succeq 0, \\\\&#10;  \\begin{bmatrix} y\_2 & y\_1 \\\\ y\_1 & 1 \\end{bmatrix} \\succeq 0.&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%20%0A%20%20y_0%20-%202%20%5Cgeq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_1%20%26%20y_0%20%5C%5C%20y_0%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_2%20%26%20y_1%20%5C%5C%20y_1%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200.%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 The function [`SDPMatrices`](#sdpmatrices) convert the above symbolic
 problem into numerical data that can be used to solve an SDP.
 
@@ -3119,7 +3119,7 @@ The complete set of options and their default values are:
   - `inv` (`True`): If `True` `inv[x]` is displayed as ‘`x`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D&mode=inline)’;
   - `aj` (`True`): If `True` `aj[x]` is displayed as ‘`x`![^\*](https://render.githubusercontent.com/render/math?math=%5E%2A&mode=inline)’;
   - `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathtt{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathtt%7Bx%7D%7D&mode=inline)’;
-  - `rt` (`True`): If `True` `rt[x]` is displayed as ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1%2F2%7D&mode=inline)’.
+  - `rt` (`True`): If `True` `rt[x]` is displayed as ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1/2%7D&mode=inline)’.
 
 The special symbol `All` can be used to set all options to `True` or
 `False`, as in
@@ -3157,7 +3157,7 @@ For example:
 
 produces
 
-![1 + \\sin \\left ( x + \\frac{y - z}{\\sqrt{2}} \\right )](https://render.githubusercontent.com/render/math?math=1+%2B+%5Csin+%5Cleft+%28+x+%2B+%5Cfrac%7By+-+z%7D%7B%5Csqrt%7B2%7D%7D+%5Cright+%29&mode=inline)
+![1 + \\sin \\left ( x + \\frac{y - z}{\\sqrt{2}} \\right )](https://render.githubusercontent.com/render/math?math=1%20%2B%20%5Csin%20%5Cleft%20%28%20x%20%2B%20%5Cfrac%7By%20-%20z%7D%7B%5Csqrt%7B2%7D%7D%20%5Cright%20%29&mode=inline)
 
 If `NCAlgebra` is not loaded then `NCTeX` uses the built in
 `TeXForm` to produce the LaTeX expressions. If `NCAlgebra` is loaded,
@@ -3170,7 +3170,7 @@ Here is another example:
 
 that produces
 
-![\\left( \\begin{array}{cc} \\sin \\left(x+\\frac{y-z}{\\sqrt{2}}\\right)+1 & \\frac{x}{y} \\\\ z & \\sqrt{5} n \\\\ \\end{array} \\right)](https://render.githubusercontent.com/render/math?math=%5Cleft%28+%5Cbegin%7Barray%7D%7Bcc%7D+%5Csin+%5Cleft%28x%2B%5Cfrac%7By-z%7D%7B%5Csqrt%7B2%7D%7D%5Cright%29%2B1+%26+%5Cfrac%7Bx%7D%7By%7D+%5C%5C+z+%26+%5Csqrt%7B5%7D+n+%5C%5C+%5Cend%7Barray%7D+%5Cright%29&mode=inline)
+![\\left( \\begin{array}{cc} \\sin \\left(x+\\frac{y-z}{\\sqrt{2}}\\right)+1 & \\frac{x}{y} \\\\ z & \\sqrt{5} n \\\\ \\end{array} \\right)](https://render.githubusercontent.com/render/math?math=%5Cleft%28%20%5Cbegin%7Barray%7D%7Bcc%7D%20%5Csin%20%5Cleft%28x%2B%5Cfrac%7By-z%7D%7B%5Csqrt%7B2%7D%7D%5Cright%29%2B1%20%26%20%5Cfrac%7Bx%7D%7By%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5C%5C%20%5Cend%7Barray%7D%20%5Cright%29&mode=inline)
 
 In some cases Mathematica will have difficulty displaying certain PDF
 files. When this happens `NCTeX` will span a PDF viewer so that you
@@ -3299,7 +3299,7 @@ expression looks neat on the screen. You can see the result using
 
 to produce
 
-![a.x.{b}^T-{\\left(d+c.{\\left (a+b.c\\right)}^{-1}.{y}^T\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=a.x.%7Bb%7D%5ET-%7B%5Cleft%28d%2Bc.%7B%5Cleft+%28a%2Bb.c%5Cright%29%7D%5E%7B-1%7D.%7By%7D%5ET%5Cright+%29%7D%5E%7B-1%7D&mode=inline)
+![a.x.{b}^T-{\\left(d+c.{\\left (a+b.c\\right)}^{-1}.{y}^T\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=a.x.%7Bb%7D%5ET-%7B%5Cleft%28d%2Bc.%7B%5Cleft%20%28a%2Bb.c%5Cright%29%7D%5E%7B-1%7D.%7By%7D%5ET%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
 
 `NCTeX` represents noncommutative products with a dot (`.`) in order
 to distinguish it from its commutative cousin. We can see the
@@ -3311,7 +3311,7 @@ noncommutative products:
 
 produces
 
-![2 \\left(a.b\\right) - 3 (c.d)](https://render.githubusercontent.com/render/math?math=2+%5Cleft%28a.b%5Cright%29+-+3+%28c.d%29&mode=inline)
+![2 \\left(a.b\\right) - 3 (c.d)](https://render.githubusercontent.com/render/math?math=2%20%5Cleft%28a.b%5Cright%29%20-%203%20%28c.d%29&mode=inline)
 
 NCTeXForm handles lists and matrices as well. Here is a list:
 
@@ -3320,7 +3320,7 @@ NCTeXForm handles lists and matrices as well. Here is a list:
 
 and its output:
 
-![\\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \\}](https://render.githubusercontent.com/render/math?math=%5C%7B+x%2C+%7Bx%7D%5ET%2C+x%2By%2C+x%2B%7By%7D%5ET%2C+x%2B%7By%7D%5E%7B-1%7D%2C+x.x+%5C%7D&mode=inline)
+![\\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20x%2C%20%7Bx%7D%5ET%2C%20x%2By%2C%20x%2B%7By%7D%5ET%2C%20x%2B%7By%7D%5E%7B-1%7D%2C%20x.x%20%5C%7D&mode=inline)
 
 and here is a matrix example:
 
@@ -3329,7 +3329,7 @@ and here is a matrix example:
 
 and its output:
 
-![\\begin{bmatrix} x & y \\\\ y & z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+x+%26+y+%5C%5C+y+%26+z+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} x & y \\\\ y & z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20x%20%26%20y%20%5C%5C%20y%20%26%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Here are some more examples:
 
@@ -3338,14 +3338,14 @@ Here are some more examples:
 
 produces
 
-![\\begin{bmatrix} 1+\\operatorname{sin}{\\left (x+\\frac{1}{\\sqrt{2}} \\left (y-z\\right )\\right )} & x {y}^{-1} \\\\ z & \\sqrt{5} n \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+1%2B%5Coperatorname%7Bsin%7D%7B%5Cleft+%28x%2B%5Cfrac%7B1%7D%7B%5Csqrt%7B2%7D%7D+%5Cleft+%28y-z%5Cright+%29%5Cright+%29%7D+%26+x+%7By%7D%5E%7B-1%7D+%5C%5C+z+%26+%5Csqrt%7B5%7D+n+%5Cend%7Bbmatrix%7D&mode=inline)
+![\\begin{bmatrix} 1+\\operatorname{sin}{\\left (x+\\frac{1}{\\sqrt{2}} \\left (y-z\\right )\\right )} & x {y}^{-1} \\\\ z & \\sqrt{5} n \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%201%2B%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2B%5Cfrac%7B1%7D%7B%5Csqrt%7B2%7D%7D%20%5Cleft%20%28y-z%5Cright%20%29%5Cright%20%29%7D%20%26%20x%20%7By%7D%5E%7B-1%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5Cend%7Bbmatrix%7D&mode=inline)
 
     exp = {inv[x + y], inv[x + inv[y]]}
     NCTeX[exp]
 
 produces:
 
-![\\{ {\\left (x+y\\right )}^{-1}, {\\left (x+{y}^{-1}\\right )}^{-1} \\}](https://render.githubusercontent.com/render/math?math=%5C%7B+%7B%5Cleft+%28x%2By%5Cright+%29%7D%5E%7B-1%7D%2C+%7B%5Cleft+%28x%2B%7By%7D%5E%7B-1%7D%5Cright+%29%7D%5E%7B-1%7D+%5C%7D&mode=inline)
+![\\{ {\\left (x+y\\right )}^{-1}, {\\left (x+{y}^{-1}\\right )}^{-1} \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%5E%7B-1%7D%2C%20%7B%5Cleft%20%28x%2B%7By%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D%20%5C%7D&mode=inline)
 
     exp = {Sin[x], x y, Sin[x] y, Sin[x + y], Cos[gamma], 
            Sin[alpha] tp[x] ** (y - tp[y]), (x + tp[x]) (y ** z), -tp[y], 1/2, 
@@ -3354,14 +3354,14 @@ produces:
 
 produces:
 
-![\\{ \\operatorname{sin}{x}, x y, y \\operatorname{sin}{x}, \\operatorname{sin}{\\left (x+y\\right )}, \\operatorname{cos}{\\gamma}, \\left({x}^T.\\left (y-{y}^T\\right )\\right ) \\operatorname{sin}{\\alpha}, y z \\left (x+{x}^T\\right ), -{y}^T, \\frac{1}{2}, \\sqrt{2} \\left(x.y\\right ) \\}](https://render.githubusercontent.com/render/math?math=%5C%7B+%5Coperatorname%7Bsin%7D%7Bx%7D%2C+x+y%2C+y+%5Coperatorname%7Bsin%7D%7Bx%7D%2C+%5Coperatorname%7Bsin%7D%7B%5Cleft+%28x%2By%5Cright+%29%7D%2C+%5Coperatorname%7Bcos%7D%7B%5Cgamma%7D%2C+%5Cleft%28%7Bx%7D%5ET.%5Cleft+%28y-%7By%7D%5ET%5Cright+%29%5Cright+%29+%5Coperatorname%7Bsin%7D%7B%5Calpha%7D%2C+y+z+%5Cleft+%28x%2B%7Bx%7D%5ET%5Cright+%29%2C+-%7By%7D%5ET%2C+%5Cfrac%7B1%7D%7B2%7D%2C+%5Csqrt%7B2%7D+%5Cleft%28x.y%5Cright+%29+%5C%7D&mode=inline)
+![\\{ \\operatorname{sin}{x}, x y, y \\operatorname{sin}{x}, \\operatorname{sin}{\\left (x+y\\right )}, \\operatorname{cos}{\\gamma}, \\left({x}^T.\\left (y-{y}^T\\right )\\right ) \\operatorname{sin}{\\alpha}, y z \\left (x+{x}^T\\right ), -{y}^T, \\frac{1}{2}, \\sqrt{2} \\left(x.y\\right ) \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20x%20y%2C%20y%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%2C%20%5Coperatorname%7Bcos%7D%7B%5Cgamma%7D%2C%20%5Cleft%28%7Bx%7D%5ET.%5Cleft%20%28y-%7By%7D%5ET%5Cright%20%29%5Cright%20%29%20%5Coperatorname%7Bsin%7D%7B%5Calpha%7D%2C%20y%20z%20%5Cleft%20%28x%2B%7Bx%7D%5ET%5Cright%20%29%2C%20-%7By%7D%5ET%2C%20%5Cfrac%7B1%7D%7B2%7D%2C%20%5Csqrt%7B2%7D%20%5Cleft%28x.y%5Cright%20%29%20%5C%7D&mode=inline)
 
     exp = inv[x + tp[inv[y]]]
     NCTeX[exp]
 
 produces:
 
-![{\\left (x+{{y}^T}^{-1}\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=%7B%5Cleft+%28x%2B%7B%7By%7D%5ET%7D%5E%7B-1%7D%5Cright+%29%7D%5E%7B-1%7D&mode=inline)
+![{\\left (x+{{y}^T}^{-1}\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=%7B%5Cleft%20%28x%2B%7B%7By%7D%5ET%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
 
 `NCTeXForm` does not know as many functions as `TeXForm`. In some
 cases `TeXForm` will produce better results. Compare:
@@ -3371,7 +3371,7 @@ cases `TeXForm` will produce better results. Compare:
 
 output:
 
-![\\operatorname{BesselJ}\\left (2, x\\right )](https://render.githubusercontent.com/render/math?math=%5Coperatorname%7BBesselJ%7D%5Cleft+%282%2C+x%5Cright+%29&mode=inline)
+![\\operatorname{BesselJ}\\left (2, x\\right )](https://render.githubusercontent.com/render/math?math=%5Coperatorname%7BBesselJ%7D%5Cleft%20%282%2C%20x%5Cright%20%29&mode=inline)
 
 with
 
@@ -4453,7 +4453,7 @@ returns
 
     d = {2 x, -2 inv[x]}
 
-from which we conclude that `x**x**x` is not convex in `x` because ![x \\succ 0](https://render.githubusercontent.com/render/math?math=x+%5Csucc+0&mode=inline) and ![-{x}^{-1} \\succ 0](https://render.githubusercontent.com/render/math?math=-%7Bx%7D%5E%7B-1%7D+%5Csucc+0&mode=inline) cannot simultaneously hold.
+from which we conclude that `x**x**x` is not convex in `x` because ![x \\succ 0](https://render.githubusercontent.com/render/math?math=x%20%5Csucc%200&mode=inline) and ![-{x}^{-1} \\succ 0](https://render.githubusercontent.com/render/math?math=-%7Bx%7D%5E%7B-1%7D%20%5Csucc%200&mode=inline) cannot simultaneously hold.
 
 `NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
 
@@ -4792,7 +4792,7 @@ See also:
 ### UpperTriangularSolve
 
 `UpperTriangularSolve[u, b]` solves the upper-triangular system of
-equations ![u x = b](https://render.githubusercontent.com/render/math?math=u+x+%3D+b&mode=inline) using back-substitution.
+equations ![u x = b](https://render.githubusercontent.com/render/math?math=u%20x%20%3D%20b&mode=inline) using back-substitution.
 
 For example:
 
@@ -4806,7 +4806,7 @@ See also:
 ### LowerTriangularSolve
 
 `LowerTriangularSolve[l, b]` solves the lower-triangular system of
-equations ![l x = b](https://render.githubusercontent.com/render/math?math=l+x+%3D+b&mode=inline) using forward-substitution.
+equations ![l x = b](https://render.githubusercontent.com/render/math?math=l%20x%20%3D%20b&mode=inline) using forward-substitution.
 
 For example:
 
@@ -4953,7 +4953,7 @@ The following `options` can be given:
   - `inv` (`True`): If `True` `inv[x]` is displayed as ‘`x`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D&mode=inline)’;
   - `aj` (`True`): If `True` `aj[x]` is displayed as ‘`x`![^\*](https://render.githubusercontent.com/render/math?math=%5E%2A&mode=inline)’;
   - `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathtt{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathtt%7Bx%7D%7D&mode=inline)’;
-  - `rt` (`True`): If `True` `rt[x]` is displayed as ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1%2F2%7D&mode=inline)’;
+  - `rt` (`True`): If `True` `rt[x]` is displayed as ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1/2%7D&mode=inline)’;
   - `All`: Set all available options to `True` or `False`.
 
 See also:
@@ -5359,7 +5359,7 @@ For example:
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
 
 constructs an object associated with the noncommutative polynomial
-![2 z - x y x](https://render.githubusercontent.com/render/math?math=2+z+-+x+y+x&mode=inline) in variables `x`, `y` and `z`.
+![2 z - x y x](https://render.githubusercontent.com/render/math?math=2%20z%20-%20x%20y%20x&mode=inline) in variables `x`, `y` and `z`.
 
 The internal representation varies with the implementation but it is
 so that the terms are sorted according to a degree-lexicographic order
@@ -5423,7 +5423,7 @@ or
 
     mon = NCPolyMonomial[NCFromDigits[{0,1,0}, 3] -> -2, 3];
 
-represent the monomial ![-2 xyx](https://render.githubusercontent.com/render/math?math=-2+xyx&mode=inline) that has coefficient `-2`.
+represent the monomial ![-2 xyx](https://render.githubusercontent.com/render/math?math=-2%20xyx&mode=inline) that has coefficient `-2`.
 
 See also:
 [NCPoly](#ncpoly-1),
@@ -5459,7 +5459,7 @@ For example, if
 
 with respect to the ordering
 
-![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%5Cll+z&mode=inline)
+![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
 
 then
 
@@ -5468,7 +5468,7 @@ then
 
 is the same polynomial as `poly1` but in the ordering
 
-![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%3C+z&mode=inline)
+![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
 
 See also:
 [NCPoly](#ncpoly-1),
@@ -5701,7 +5701,7 @@ For example:
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
     lead = NCPolyLeadingMonomial[poly];
 
-returns an `NCPoly` representing the monomial ![x y x](https://render.githubusercontent.com/render/math?math=x+y+x&mode=inline). The leading
+returns an `NCPoly` representing the monomial ![x y x](https://render.githubusercontent.com/render/math?math=x%20y%20x&mode=inline). The leading
 monomial is computed according to the current ordering, in this
 example `x < y < z`. The actual representation of `lead` varies with
 the implementation.
@@ -5727,7 +5727,7 @@ returns
 
     lead = {3,3} -> -1
 
-representing the monomial ![- x y x](https://render.githubusercontent.com/render/math?math=-+x+y+x&mode=inline). The leading monomial is computed
+representing the monomial ![- x y x](https://render.githubusercontent.com/render/math?math=-%20x%20y%20x&mode=inline). The leading monomial is computed
 according to the current ordering, in this example `x < y < z`.
 
 See also:
@@ -5758,7 +5758,7 @@ For example:
     rule = NCPolyToRule[poly]
 
 returns the rule `lead -> rest` where `lead` represents is the nc
-monomial ![x y x](https://render.githubusercontent.com/render/math?math=x+y+x&mode=inline) and `rest` is the nc polynomial ![2 z + 3 x y](https://render.githubusercontent.com/render/math?math=2+z+%2B+3+x+y&mode=inline)
+monomial ![x y x](https://render.githubusercontent.com/render/math?math=x%20y%20x&mode=inline) and `rest` is the nc polynomial ![2 z + 3 x y](https://render.githubusercontent.com/render/math?math=2%20z%20%2B%203%20x%20y&mode=inline)
 
 See also:
 [NCPolyLeadingTerm](#ncpolyleadingterm),
@@ -5774,7 +5774,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+x+y+%2B+3+y+x+%2B+4+x%5E2&mode=inline) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline) and
 
     NCPolyTermsOfTotalDegree[p, {1,1}]
 
@@ -5782,7 +5782,7 @@ returns
 
     NCPoly[{1, 1}, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
-which corresponds to the polyomial ![2 x y + 3 y x](https://render.githubusercontent.com/render/math?math=2+x+y+%2B+3+y+x&mode=inline). Likewise
+which corresponds to the polyomial ![2 x y + 3 y x](https://render.githubusercontent.com/render/math?math=2%20x%20y%20%2B%203%20y%20x&mode=inline). Likewise
 
     NCPolyTermsOfTotalDegree[p, {2,0}]
 
@@ -5790,7 +5790,7 @@ returns
 
     NCPoly[{1, 1}, {0, 2, 0} -> 4|>]
 
-which corresponds to the polyomial ![4 x^2](https://render.githubusercontent.com/render/math?math=4+x%5E2&mode=inline).
+which corresponds to the polyomial ![4 x^2](https://render.githubusercontent.com/render/math?math=4%20x%5E2&mode=inline).
 
 See also:
 [NCPolyTermsOfTotalDegree](#ncpolytermsoftotaldegree).
@@ -5804,7 +5804,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+x+y+%2B+3+y+x+%2B+4+x%5E2&mode=inline) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline) and
 
     NCPolyTermsOfTotalDegree[p, 2]
 
@@ -5812,7 +5812,7 @@ returns
 
     NCPoly[{1, 1}, <|{0, 2, 0} -> 4, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
-which corresponds to the polyomial ![2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=2+x+y+%2B+3+y+x+%2B+4+x%5E2&mode=inline).
+which corresponds to the polyomial ![2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=2%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline).
 
 See also:
 [NCPolyTermsOfDegree](#ncpolytermsofdegree).
@@ -5829,7 +5829,7 @@ For example:
     digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
     p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
 
-corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29+%3D+-x.z.z.y+%2B+2+z.y+%2B+3+z.x+%2B+4+y.x+%2B+x+%2B+1&mode=inline) in which ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) are transposes of each other, that is ![y = x^T](https://render.githubusercontent.com/render/math?math=y+%3D+x%5ET&mode=inline). Its `NCPoly` object is
+corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29%20%3D%20-x.z.z.y%20%2B%202%20z.y%20%2B%203%20z.x%20%2B%204%20y.x%20%2B%20x%20%2B%201&mode=inline) in which ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) are transposes of each other, that is ![y = x^T](https://render.githubusercontent.com/render/math?math=y%20%3D%20x%5ET&mode=inline). Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
@@ -5841,7 +5841,7 @@ results in
 
     NCPoly[{3}, <|{0, 0} -> 1, {2, 3} -> 4, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
-corresponding to the polynomial ![-x.z.z.y + 4 y.x + 1](https://render.githubusercontent.com/render/math?math=-x.z.z.y+%2B+4+y.x+%2B+1&mode=inline) which contains
+corresponding to the polynomial ![-x.z.z.y + 4 y.x + 1](https://render.githubusercontent.com/render/math?math=-x.z.z.y%20%2B%204%20y.x%20%2B%201&mode=inline) which contains
 only “square” quadratic terms of ![p(x,y,z)](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29&mode=inline).
 
 See also:
@@ -5859,7 +5859,7 @@ For example:
     digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
     p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
 
-corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29+%3D+-x.z.z.y+%2B+2+z.y+%2B+3+z.x+%2B+4+y.x+%2B+x+%2B+1&mode=inline) in which ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) are transposes of each other, that is ![y = x^T](https://render.githubusercontent.com/render/math?math=y+%3D+x%5ET&mode=inline). Its `NCPoly` object is
+corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29%20%3D%20-x.z.z.y%20%2B%202%20z.y%20%2B%203%20z.x%20%2B%204%20y.x%20%2B%20x%20%2B%201&mode=inline) in which ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) are transposes of each other, that is ![y = x^T](https://render.githubusercontent.com/render/math?math=y%20%3D%20x%5ET&mode=inline). Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
@@ -5871,7 +5871,7 @@ results in
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {1, 1} -> 1, {2, 2} -> 1|>, TransposePairs -> {{0, 1}}]
 
-corresponding to the polynomial ![x.z + y + x + 1](https://render.githubusercontent.com/render/math?math=x.z+%2B+y+%2B+x+%2B+1&mode=inline) that contains only
+corresponding to the polynomial ![x.z + y + x + 1](https://render.githubusercontent.com/render/math?math=x.z%20%2B%20y%20%2B%20x%20%2B%201&mode=inline) that contains only
 terms which contain monomials with the “left half” of the monomials of
 ![p(x,y,z)](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29&mode=inline) which can appear in an NC SOS decomposition of `p`.
 
@@ -5887,7 +5887,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+x+y+%2B+3+y+x+%2B+4+x%5E2&mode=inline) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline) and
 
     NCPolyReverseMonomials[p]
 
@@ -5895,7 +5895,7 @@ returns
 
     NCPoly[{1, 1}, <|{0, 1, 0} -> 1, {0, 2, 0} -> 4, {1, 1, 2} -> 2, {1, 1, 1} -> 3|>]
 
-which correspond to the polynomial ![x + 2 y x + 3 x y + 4 x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+y+x+%2B+3+x+y+%2B+4+x%5E2&mode=inline).
+which correspond to the polynomial ![x + 2 y x + 3 x y + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20y%20x%20%2B%203%20x%20y%20%2B%204%20x%5E2&mode=inline).
 
 See also:
 [NCIntegerReverse](#ncintegerreverse).
@@ -6016,7 +6016,7 @@ results in the matrices
           {  0,  0,  0,  0,  0 },
           {  0,  0,  0,  0,  0 }}
 
-which are the Hankel matrices associated with the commutator ![x y - y x](https://render.githubusercontent.com/render/math?math=x+y+-+y+x&mode=inline).
+which are the Hankel matrices associated with the commutator ![x y - y x](https://render.githubusercontent.com/render/math?math=x%20y%20-%20y%20x&mode=inline).
 
 See also:
 [NCPolyRealization](#ncpolyrealization),
@@ -6037,7 +6037,7 @@ For example:
     {{a0,ax,ay},b,c,d} = NCPolyRealization[poly]
 
 produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a
-row vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\, y\] . b + d = x y - y x](https://render.githubusercontent.com/render/math?math=c+.+inv%5Ba0+%2B+ax+%5C%2C+x+%2B+ay+%5C%2C+y%5D+.+b+%2B+d+%3D+x+y+-+y+x&mode=inline).
+row vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\, y\] . b + d = x y - y x](https://render.githubusercontent.com/render/math?math=c%20.%20inv%5Ba0%20%2B%20ax%20%5C%2C%20x%20%2B%20ay%20%5C%2C%20y%5D%20.%20b%20%2B%20d%20%3D%20x%20y%20-%20y%20x&mode=inline).
 
 See also:
 [NCPolyHankelMatrix](#ncpolyhankelmatrix),
@@ -6207,7 +6207,7 @@ all return
 5
 ```
 
-which is the index of the monomial ![x y](https://render.githubusercontent.com/render/math?math=x+y&mode=inline) in the standard monomial
+which is the index of the monomial ![x y](https://render.githubusercontent.com/render/math?math=x%20y&mode=inline) in the standard monomial
 basis of polynomials in ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline). Likewise
 
     digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
@@ -6266,9 +6266,9 @@ For example
 
     NCToNCPoly[x**y - 2 y**z, {x, y, z}] 
 
-constructs an object associated with the noncommutative polynomial ![x y - 2 y z](https://render.githubusercontent.com/render/math?math=x+y+-+2+y+z&mode=inline) in variables `x`, `y` and `z`. The internal representation is so
+constructs an object associated with the noncommutative polynomial ![x y - 2 y z](https://render.githubusercontent.com/render/math?math=x%20y%20-%202%20y%20z&mode=inline) in variables `x`, `y` and `z`. The internal representation is so
 that the terms are sorted according to a degree-lexicographic order in
-`vars`. In the above example, ![x \< y \< z](https://render.githubusercontent.com/render/math?math=x+%3C+y+%3C+z&mode=inline).
+`vars`. In the above example, ![x \< y \< z](https://render.githubusercontent.com/render/math?math=x%20%3C%20y%20%3C%20z&mode=inline).
 
 ### NCPolyToNC
 
@@ -6987,14 +6987,14 @@ For example
 
     SetMonomialOrder[a,b,c]
 
-sets the lex order ![a \\ll b \\ll c](https://render.githubusercontent.com/render/math?math=a+%5Cll+b+%5Cll+c&mode=inline).
+sets the lex order ![a \\ll b \\ll c](https://render.githubusercontent.com/render/math?math=a%20%5Cll%20b%20%5Cll%20c&mode=inline).
 
 If one uses a list of variables rather than a single variable as one
 of the arguments, then multigraded lex order is used. For example
 
     SetMonomialOrder[{a,b,c}]
 
-sets the graded lex order ![a \< b \< c](https://render.githubusercontent.com/render/math?math=a+%3C+b+%3C+c&mode=inline).
+sets the graded lex order ![a \< b \< c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c&mode=inline).
 
 Another example:
 
@@ -7004,7 +7004,7 @@ or
 
     SetMonomialOrder[{a, b}, c]
 
-set the multigraded lex order ![a \< b \\ll c](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c&mode=inline).
+set the multigraded lex order ![a \< b \\ll c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c&mode=inline).
 
 Finally
 
@@ -7023,7 +7023,7 @@ There is also an older syntax which is still supported:
 
     SetMonomialOrder[{a, b, c}, n]
 
-sets the order of monomials to be ![a \< b \< c](https://render.githubusercontent.com/render/math?math=a+%3C+b+%3C+c&mode=inline) and assigns them grading
+sets the order of monomials to be ![a \< b \< c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c&mode=inline) and assigns them grading
 level `n`.
 
     SetMonomialOrder[{a, b, c}, 1]
@@ -7057,7 +7057,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%5Cll+d&mode=inline) and
+which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -7066,7 +7066,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%3C+d&mode=inline).
+which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -7076,7 +7076,7 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order ![a \< b](https://render.githubusercontent.com/render/math?math=a+%3C+b&mode=inline).
+result both in the order ![a \< b](https://render.githubusercontent.com/render/math?math=a%20%3C%20b&mode=inline).
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the
 previous knowns and unknowns. For example
@@ -7086,7 +7086,7 @@ previous knowns and unknowns. For example
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c+%3C+d+%5Cll+a+%5Cll+b&mode=inline).
+results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
 
 See also:
 [SetUnknowns](#setunknowns),
@@ -7109,7 +7109,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%5Cll+d&mode=inline) and
+which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -7118,7 +7118,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%3C+d&mode=inline).
+which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -7128,7 +7128,7 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order ![a \< b](https://render.githubusercontent.com/render/math?math=a+%3C+b&mode=inline).
+result both in the order ![a \< b](https://render.githubusercontent.com/render/math?math=a%20%3C%20b&mode=inline).
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the
 previous knowns and unknowns. For example
@@ -7138,7 +7138,7 @@ previous knowns and unknowns. For example
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c+%3C+d+%5Cll+a+%5Cll+b&mode=inline).
+results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
 
 See also:
 [SetKnowns](#setknowns),
@@ -7188,7 +7188,7 @@ For example
     SetMonomialOrder[{a,b}, {c}, {d}]
     PrintMonomialOrder[]
 
-print ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%5Cll+d&mode=inline).
+print ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline).
 
 See also:
 [SetKnowns](#setknowns),
@@ -7219,7 +7219,7 @@ returns
 
     gb = {x -> 1}
 
-that corresponds to the polynomial ![x - 1](https://render.githubusercontent.com/render/math?math=x+-+1&mode=inline), which is the nc Gröbner
+that corresponds to the polynomial ![x - 1](https://render.githubusercontent.com/render/math?math=x%20-%201&mode=inline), which is the nc Gröbner
 basis for the ideal generated by ![x^2-1](https://render.githubusercontent.com/render/math?math=x%5E2-1&mode=inline) and ![x^3-1](https://render.githubusercontent.com/render/math?math=x%5E3-1&mode=inline).
 
 `NCMakeGB[{poly1, poly2, ...}, k, options]` uses `options`.
@@ -7471,7 +7471,7 @@ See also:
 
 `SDP` is a package that provides data structures for the numeric solution
 of semidefinite programs of the form:
-![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) is a
 vector of decision variables.
 
@@ -7492,11 +7492,11 @@ Members are:
 `SDPMatrices[f, G, y]` converts the symbolic linear functions `f`,
 `G` in the variables `y` associated to the semidefinite program:
 
-![&#10;\\begin{aligned} &#10;  \\min\_y \\quad & f(y), \\\\&#10;  \\text{s.t.} \\quad & G(y) \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D+%0A++%5Cmin_y+%5Cquad+%26+f%28y%29%2C+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+G%28y%29+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned} &#10;  \\min\_y \\quad & f(y), \\\\&#10;  \\text{s.t.} \\quad & G(y) \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 
 into numerical data that can be used to solve an SDP in the form:
 
-![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 
 `SDPMatrices` returns a list with three entries:
 
@@ -7526,7 +7526,7 @@ See also:
 
 `SDPSolve[{A,b,c}]` solves an SDP in the form:
 
-![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 
 `SDPSolve` returns a list with four entries:
 
@@ -7555,7 +7555,7 @@ See also:
 
 ### SDPEval
 
-`SDPEval[A, y]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A+y&mode=inline) in an `SDP`.
+`SDPEval[A, y]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A%20y&mode=inline) in an `SDP`.
 
 This is a convenient replacement for [SDPPrimalEval](#sdpprimaleval) in which the list `y` can be used directly.
 
@@ -7567,7 +7567,7 @@ See also:
 
 ### SDPPrimalEval
 
-`SDPPrimalEval[A, {{y}}]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A+y&mode=inline) in an `SDP`.
+`SDPPrimalEval[A, {{y}}]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A%20y&mode=inline) in an `SDP`.
 
 See [SDPEval](#sdpeval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
@@ -7579,7 +7579,7 @@ See also:
 
 ### SDPDualEval
 
-`SDPDualEval[A, X]` evaluates the linear function ![A^\* X](https://render.githubusercontent.com/render/math?math=A%5E%2A+X&mode=inline) in an `SDP`.
+`SDPDualEval[A, X]` evaluates the linear function ![A^\* X](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X&mode=inline) in an `SDP`.
 
 See also:
 [SDPPrimalEval](#sdpprimaleval),
@@ -7589,11 +7589,11 @@ See also:
 ### SDPSylvesterEval
 
 `SDPSylvesterEval[a, W]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W+A+%28%5CDelta_y%29+W%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
 when applied to the scaling `W`.
 
 `SDPSylvesterEval[a, Wl, Wr]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also:
@@ -7604,7 +7604,7 @@ See also:
 
 `SDPFlat` is a package that provides data structures for the numeric solution
 of semidefinite programs of the form:
-![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A y + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) is a
 vector of decision variables.
 
@@ -7635,7 +7635,7 @@ See also:
 
 ### SDPFlatPrimalEval
 
-`SDPFlatPrimalEval[aFlat, y]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A+y&mode=inline) in an `SDPFlat`.
+`SDPFlatPrimalEval[aFlat, y]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A%20y&mode=inline) in an `SDPFlat`.
 
 See also:
 [SDPFlatDualEval](#sdpflatdualeval),
@@ -7643,7 +7643,7 @@ See also:
 
 ### SDPFlatDualEval
 
-`SDPFlatDualEval[aFlat, X]` evaluates the linear function ![A^\* X](https://render.githubusercontent.com/render/math?math=A%5E%2A+X&mode=inline) in an `SDPFlat`.
+`SDPFlatDualEval[aFlat, X]` evaluates the linear function ![A^\* X](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X&mode=inline) in an `SDPFlat`.
 
 See also:
 [SDPFlatPrimalEval](#sdpflatprimaleval),
@@ -7652,11 +7652,11 @@ See also:
 ### SDPFlatSylvesterEval
 
 `SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W+A+%28%5CDelta_y%29+W%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
 when applied to the scaling `W`.
 
 `SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also:
@@ -7667,8 +7667,8 @@ See also:
 
 `SDPSylvester` is a package that provides data structures for the
 numeric solution of semidefinite programs of the form:
-![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & \\sum\_i \\operatorname{trace}(b\_i^T y\_i) \\\\&#10;  \\text{s.t.} \\quad & A y + S = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T + S = C \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+%5Csum_i+%5Coperatorname%7Btrace%7D%28b_i%5ET+y_i%29+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+%5Cfrac%7B1%7D%7B2%7D+%5Csum_i+a_i+y_i+b_i+%2B+%28a_i+y_i+b_i%29%5ET+%2B+S+%3D+C+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
-where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y = \\{ y\_1, \\ldots, y\_n \\}](https://render.githubusercontent.com/render/math?math=y+%3D+%5C%7B+y_1%2C+%5Cldots%2C+y_n+%5C%7D&mode=inline) is a list of matrix decision variables.
+![&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & \\sum\_i \\operatorname{trace}(b\_i^T y\_i) \\\\&#10;  \\text{s.t.} \\quad & A y + S = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T + S = C \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20%5Csum_i%20%5Coperatorname%7Btrace%7D%28b_i%5ET%20y_i%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET%20%2B%20S%20%3D%20C%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
+where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y = \\{ y\_1, \\ldots, y\_n \\}](https://render.githubusercontent.com/render/math?math=y%20%3D%20%5C%7B%20y_1%2C%20%5Cldots%2C%20y_n%20%5C%7D&mode=inline) is a list of matrix decision variables.
 
 Members are:
 
@@ -7679,7 +7679,7 @@ Members are:
 
 ### SDPEval
 
-`SDPEval[A, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T](https://render.githubusercontent.com/render/math?math=A+y+%3D+%5Cfrac%7B1%7D%7B2%7D+%5Csum_i+a_i+y_i+b_i+%2B+%28a_i+y_i+b_i%29%5ET&mode=inline) in an `SDPSylvester`.
+`SDPEval[A, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
 
 This is a convenient replacement for [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval) in which the list `y` can be used directly.
 
@@ -7689,7 +7689,7 @@ See also:
 
 ### SDPSylvesterPrimalEval
 
-`SDPSylvesterPrimalEval[a, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T](https://render.githubusercontent.com/render/math?math=A+y+%3D+%5Cfrac%7B1%7D%7B2%7D+%5Csum_i+a_i+y_i+b_i+%2B+%28a_i+y_i+b_i%29%5ET&mode=inline) in an `SDPSylvester`.
+`SDPSylvesterPrimalEval[a, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
 
 See [SDPSylvesterEval](#sdpsylvestereval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
@@ -7699,7 +7699,7 @@ See also:
 
 ### SDPSylvesterDualEval
 
-`SDPSylvesterDualEval[A, X]` evaluates the linear function ![A^\* X = \\{ b\_1 X a\_1, \\cdots, b\_n X a\_n \\}](https://render.githubusercontent.com/render/math?math=A%5E%2A+X+%3D+%5C%7B+b_1+X+a_1%2C+%5Ccdots%2C+b_n+X+a_n+%5C%7D&mode=inline) in an `SDPSylvester`.
+`SDPSylvesterDualEval[A, X]` evaluates the linear function ![A^\* X = \\{ b\_1 X a\_1, \\cdots, b\_n X a\_n \\}](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X%20%3D%20%5C%7B%20b_1%20X%20a_1%2C%20%5Ccdots%2C%20b_n%20X%20a_n%20%5C%7D&mode=inline) in an `SDPSylvester`.
 
 For example
 
@@ -7710,11 +7710,11 @@ See also:
 ### SDPSylvesterSylvesterEval
 
 `SDPSylvesterEval[a, W]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W+A+%28%5CDelta_y%29+W%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
 when applied to the scaling `W`.
 
 `SDPSylvesterEval[a, Wl, Wr]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also:
@@ -7725,13 +7725,13 @@ See also:
 
 `PrimalDual` provides an algorithm for solving a pair of primal-dual
 semidefinite programs in the form
-![&#10;\\tag{Primal}&#10;\\begin{aligned}&#10;  \\min\_{X} \\quad & \\operatorname{trace}(c X) \\\\&#10;  \\text{s.t.} \\quad & A^\*(X) = b \\\\&#10;                    & X \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Ctag%7BPrimal%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmin_%7BX%7D+%5Cquad+%26+%5Coperatorname%7Btrace%7D%28c+X%29+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A%5E%2A%28X%29+%3D+b+%5C%5C%0A++++++++++++++++++++%26+X+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
-![&#10;\\tag{Dual}&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A(y) + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Ctag%7BDual%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A%28y%29+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;\\tag{Primal}&#10;\\begin{aligned}&#10;  \\min\_{X} \\quad & \\operatorname{trace}(c X) \\\\&#10;  \\text{s.t.} \\quad & A^\*(X) = b \\\\&#10;                    & X \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Ctag%7BPrimal%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmin_%7BX%7D%20%5Cquad%20%26%20%5Coperatorname%7Btrace%7D%28c%20X%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5E%2A%28X%29%20%3D%20b%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20X%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
+![&#10;\\tag{Dual}&#10;\\begin{aligned}&#10;  \\max\_{y, S} \\quad & b^T y \\\\&#10;  \\text{s.t.} \\quad & A(y) + S = c \\\\&#10;                    & S \\succeq 0&#10;\\end{aligned}&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Ctag%7BDual%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%28y%29%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D%0A%5Cend%7Baligned%7D)
 where ![X](https://render.githubusercontent.com/render/math?math=X&mode=inline) is the primal variable and ![(y,S)](https://render.githubusercontent.com/render/math?math=%28y%2CS%29&mode=inline) are the dual variables.
 
 The algorithm is parametrized and users should provide their own means
 of evaluating the mappings ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline), ![A^\*](https://render.githubusercontent.com/render/math?math=A%5E%2A&mode=inline) and also the Sylvester mapping
-![&#10;    A^\*(W\_l A(\\Delta\_y) W\_r)&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A++++A%5E%2A%28W_l+A%28%5CDelta_y%29+W_r%29%0A%5Cend%7Baligned%7D&mode=inline)
+![&#10;    A^\*(W\_l A(\\Delta\_y) W\_r)&#10;](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20A%5E%2A%28W_l%20A%28%5CDelta_y%29%20W_r%29%0A%5Cend%7Baligned%7D)
 used to solve the least-square subproblem.
 
 Users can develop custom algorithms that can take advantage of special
@@ -7756,7 +7756,7 @@ the current primal variable `X` as in `PrimalEval @@ X`.
 current dual variable `y` as in `DualEval @@ y`.
 
 `SylvesterVecEval` should return a matrix representation of the
-Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29&mode=inline) when applied to the left- and
+Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline) when applied to the left- and
 right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
 
 `PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c,options]` uses `options`.
@@ -7981,7 +7981,7 @@ Members are:
 
 ### NCDescriptorRealization
 
-`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that ![C G^{-1} B](https://render.githubusercontent.com/render/math?math=C+G%5E%7B-1%7D+B&mode=inline) is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] === RationalExpression`.
+`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that ![C G^{-1} B](https://render.githubusercontent.com/render/math?math=C%20G%5E%7B-1%7D%20B&mode=inline) is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] === RationalExpression`.
 
 `C` and `B` do not contain any `UnknownsVariables` and `G` has linear entries
 in the `UnknownVariables`.
@@ -8027,7 +8027,7 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
 
 ### TestDescriptorRealization
 
-`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals ![C G^{-1} B](https://render.githubusercontent.com/render/math?math=C+G%5E%7B-1%7D+B&mode=inline) by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
+`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals ![C G^{-1} B](https://render.githubusercontent.com/render/math?math=C%20G%5E%7B-1%7D%20B&mode=inline) by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
 
 ### PinnedQ
 
