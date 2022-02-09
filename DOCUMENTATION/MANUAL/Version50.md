@@ -3,7 +3,7 @@
 ## Version 5.0.5 {#Version5_0_5}
 
 1. Improved documentation
-2. Bug fixes 
+2. Bug fixes. Thanks Igor Klep!
 
 ## Version 5.0.4 {#Version5_0_4}
 
