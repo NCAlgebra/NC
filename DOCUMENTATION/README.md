@@ -978,11 +978,11 @@ return `co[a]` where `co` stands for complex-conjugate.
 
 **Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates
 (`co`), and inverses (`inv`) in a notebook environment render as
-![x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_1.png),
-![x^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_2.png),
-![\\bar{x}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_3.png),
+![x^T](https://render.githubusercontent.com/render/math?math=x%5ET),
+![x^\*](https://render.githubusercontent.com/render/math?math=x%5E%2A),
+![\\bar{x}](https://render.githubusercontent.com/render/math?math=%5Cbar%7Bx%7D),
 and
-![x^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_4.png).
+![x^{-1}](https://render.githubusercontent.com/render/math?math=x%5E%7B-1%7D).
 `tp` and `aj` can also be input directly as `x^T` and `x^*`. For this
 reason the symbol `T` is now protected in `NCAlgebra`.
 
@@ -1191,28 +1191,25 @@ For example:
     1 + y**x**y - A x
 
 is a polynomial with commutative coefficients in
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_5.png) and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_6.png),
-whereas
+![x](https://render.githubusercontent.com/render/math?math=x) and
+![y](https://render.githubusercontent.com/render/math?math=y), whereas
 
     a**y**b**x**c**y - A x**d
 
 is a polynomial with nc coefficients in
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_7.png) and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_8.png),
-where the letters
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_9.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_10.png),
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_11.png),
-and
-![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_12.png),
-are the *nc coefficients*. Of course
+![x](https://render.githubusercontent.com/render/math?math=x) and
+![y](https://render.githubusercontent.com/render/math?math=y), where the
+letters ![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![c](https://render.githubusercontent.com/render/math?math=c), and
+![d](https://render.githubusercontent.com/render/math?math=d), are the
+*nc coefficients*. Of course
 
     1 + y**x**y - A x
 
 is a polynomial with nc coefficients if one considers only
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_13.png) as
-the variable of interest.
+![x](https://render.githubusercontent.com/render/math?math=x) as the
+variable of interest.
 
 In order to take full advantage of [`NCPoly`](#ncpoly) and
 [`NCPolynomial`](#ncpolynomial) one would need to *convert* an
@@ -1344,7 +1341,7 @@ in Mathematica using *lists of lists*. For example
 is a representation for the matrix
 
 ![\\begin{bmatrix} a & b \\\\ c & d
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_14.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+c+%26+d+%5Cend%7Bbmatrix%7D)
 
 The Mathematica command `MatrixForm` output pretty matrices.
 `MatrixForm[m]` prints `m` in a form similar to the above matrix. Beware
@@ -1383,7 +1380,7 @@ returns
 ![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) &
 -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} &
 (d - c a^{-1} b)^{-1}
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_15.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a%5E%7B-1%7D+%281+%2B+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D%29+%26+-a%5E%7B-1%7D+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5C%5C+-%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D+%26+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5Cend%7Bbmatrix%7D)
 
 Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
 calculation.
@@ -1434,9 +1431,9 @@ are available in the package:
 
   - [`NCMatrixDecompositions`](#ncmatrixdecompositions): implements
     versions of the
-    ![LU](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_16.png)
+    ![LU](https://render.githubusercontent.com/render/math?math=LU)
     Decomposition with partial and complete pivoting, as well as
-    ![LDL](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_17.png)
+    ![LDL](https://render.githubusercontent.com/render/math?math=LDL)
     Decomposition which are suitable for calculations with nc matrices.
     Those functions are based on the templated algorithms from the
     package
@@ -1457,15 +1454,13 @@ which returns
 Using `MatrixForm`:
 
 ![\\begin{bmatrix} a & b \\\\ c a^{-1} & d - c a^{-1} b
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_18.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+c+a%5E%7B-1%7D+%26+d+-+c+a%5E%7B-1%7D+b+%5Cend%7Bbmatrix%7D)
 
 The list `p` encodes the sequence of permutations calculated during the
 execution of the algorithm. The matrix `lu` contains the factors
-![L](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_19.png)
-and
-![U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_20.png) in
-the way most common to numerical analysts. These factors can be
-recovered using
+![L](https://render.githubusercontent.com/render/math?math=L) and
+![U](https://render.githubusercontent.com/render/math?math=U) in the way
+most common to numerical analysts. These factors can be recovered using
 
     {l, u} = GetFullLUMatrices[lu]
 
@@ -1478,10 +1473,10 @@ Using `MatrixForm`:
 
 ![L = \\begin{bmatrix} 1 & 0 \\\\ c a^{-1} & 1 \\end{bmatrix}, \\qquad U
 = \\begin{bmatrix} a & b \\\\ 0 & d - c a^{-1} b
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_21.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L+%3D+%5Cbegin%7Bbmatrix%7D+1+%26+0+%5C%5C+c+a%5E%7B-1%7D+%26+1+%5Cend%7Bbmatrix%7D%2C+%5Cqquad+U+%3D+%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+0+%26+d+-+c+a%5E%7B-1%7D+b+%5Cend%7Bbmatrix%7D)
 
 To verify that ![M = L
-U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_22.png)
+U](https://render.githubusercontent.com/render/math?math=M+%3D+L+U)
 input
 
     m - NCDot[l, u]
@@ -1512,17 +1507,17 @@ and a permutation list
 which indicates that the number `1`, appearing in the second row, was
 used as the pivot rather than the symbol `a` appearing on the first row.
 Because of the permutation, to verify that ![P M = L
-U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_23.png)
+U](https://render.githubusercontent.com/render/math?math=P+M+%3D+L+U)
 input
 
     m[[p]] - NCDot[l, u]
 
 which should return a zero matrix. Note that in the above example the
 permutation matrix
-![P](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_24.png) is
-never constructed. Instead, the rows of
-![M](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_25.png)
-are directly permuted using Mathematica’s `Part` (`[[]]`) command. Of
+![P](https://render.githubusercontent.com/render/math?math=P) is never
+constructed. Instead, the rows of
+![M](https://render.githubusercontent.com/render/math?math=M) are
+directly permuted using Mathematica’s `Part` (`[[]]`) command. Of
 course, if one prefers to work with permutation matrices, they can be
 easily obtained by permuting the rows of the identity matrix as in the
 following example
@@ -1533,7 +1528,7 @@ following example
 to produce
 
 ![\\begin{bmatrix} 0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_26.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+0+%26+1+%26+0+%5C%5C+1+%26+0+%26+0+%5C%5C+0+%26+0+%26+1+%5Cend%7Bbmatrix%7D)
 
 Likewise
 
@@ -1572,10 +1567,9 @@ and `rank` equal to `1`. Note that `p = {2, 1}` and `q = {1,2}` tell us
 that the element that was pivoted on was the symbol `a`, which is the
 first entry of the second row, rather then `2 a`, which is the first
 entry of the first row, because `a` is *simpler* than `2 a` . The
-![L](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_27.png)
-and
-![U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_28.png)
-factors can be obtained as before using
+![L](https://render.githubusercontent.com/render/math?math=L) and
+![U](https://render.githubusercontent.com/render/math?math=U) factors
+can be obtained as before using
 
     {l, u} = GetFullLUMatrices[lu]
 
@@ -1588,26 +1582,25 @@ Using `MatrixForm`:
 
 ![L = \\begin{bmatrix} 1 & 0 \\\\ 2 & 1 \\end{bmatrix}, \\qquad U =
 \\begin{bmatrix} a & b \\\\ 0 & 0
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_29.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L+%3D+%5Cbegin%7Bbmatrix%7D+1+%26+0+%5C%5C+2+%26+1+%5Cend%7Bbmatrix%7D%2C+%5Cqquad+U+%3D+%5Cbegin%7Bbmatrix%7D+a+%26+b+%5C%5C+0+%26+0+%5Cend%7Bbmatrix%7D)
 
 In this case, to verify that ![P M Q = L
-U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_30.png)
+U](https://render.githubusercontent.com/render/math?math=P+M+Q+%3D+L+U)
 input
 
     NCDot[l, u] - m[[p, q]]
 
 which should return a zero matrix. As with partial pivoting, the
 permutation matrices
-![P](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_31.png)
-and
-![Q](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_32.png)
-are never constructed. Instead we used `Part` (`[[]]`) to permute both
-rows and columns.
+![P](https://render.githubusercontent.com/render/math?math=P) and
+![Q](https://render.githubusercontent.com/render/math?math=Q) are never
+constructed. Instead we used `Part` (`[[]]`) to permute both rows and
+columns.
 
 ### LDL Decomposition
 
 Finally [`NCLDLDecomposition`](#ncldldecomposition) computes the
-![LDL^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_33.png)
+![LDL^T](https://render.githubusercontent.com/render/math?math=LDL%5ET)
 decomposition of symmetric symbolic nc matrices. For example
 
     m = {{a, b}, {b, c}}
@@ -1633,12 +1626,12 @@ which in this case returns
     u = {{1, inv[a]**b}, {0, 1}}}
 
 Because ![P M P^T = L D
-L^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_34.png),
+L^T](https://render.githubusercontent.com/render/math?math=P+M+P%5ET+%3D+L+D+L%5ET),
 
     NCDot[l, d, u] - m[[p, p]]
 
 is the zero matrix and ![U =
-L^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_35.png).
+L^T](https://render.githubusercontent.com/render/math?math=U+%3D+L%5ET).
 
 `NCLDLDecomposition` works only on symmetric matrices and, whenever
 possible, will make invertibility and symmetry assumptions on variables
@@ -1677,7 +1670,7 @@ produces as a result the matrix
 or, using `MatrixForm`:
 
 ![\\begin{bmatrix} a & b & d & 2 \\\\ c & d & e & 3
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_36.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%26+d+%26+2+%5C%5C+c+%26+d+%26+e+%26+3+%5Cend%7Bbmatrix%7D)
 
 Note how the symbols were treated as block-matrices during the
 substitution. As a second example, with
@@ -1696,7 +1689,7 @@ or, using `MatrixForm`:
 
 ![\\begin{bmatrix} a & b & 0 & 0 \\\\ c & d & 0 & 0 \\\\ 0 & 0 & d & 2
 \\\\ 0 & 0 & e & 3
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_37.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%26+b+%26+0+%26+0+%5C%5C+c+%26+d+%26+0+%26+0+%5C%5C+0+%26+0+%26+d+%26+2+%5C%5C+0+%26+0+%26+e+%26+3+%5Cend%7Bbmatrix%7D)
 
 in which the `0` blocks were automatically expanded to fit the adjacent
 block matrices.
@@ -1729,18 +1722,14 @@ The closest related demo to the material in this section is
 
 When working with nc quadratics it is useful to be able to “factor” the
 quadratic into the following form
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_38.png)
-where
-![s](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_39.png) is
-linear
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_40.png)
-and
-![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_41.png)
-and
-![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_42.png)
-are vectors and
-![M](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_43.png) is
-a matrix. Load the package
+![](https://render.githubusercontent.com/render/math?math=%0A++++q%28x%29+%3D+c+%2B+s%28x%29+%2B+l%28x%29+M+r%28x%29%0A)
+where ![s](https://render.githubusercontent.com/render/math?math=s) is
+linear ![x](https://render.githubusercontent.com/render/math?math=x) and
+![l](https://render.githubusercontent.com/render/math?math=l) and
+![r](https://render.githubusercontent.com/render/math?math=r) are
+vectors and
+![M](https://render.githubusercontent.com/render/math?math=M) is a
+matrix. Load the package
 
     << NCQuadratic`
 
@@ -1796,8 +1785,8 @@ produces
     middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
 
 Note that the middle matrix
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_44.png) is
-not *symmetric*, as one might have expected. The command
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Bbmatrix%7D%0A2+%26+2+x+%26+2+x%5E2+%5C%5C%0A0+%26+2+%26+2+x+%5C%5C%0A0+%26+0+%26+2%0A%5Cend%7Bbmatrix%7D%0A)
+is not *symmetric*, as one might have expected. The command
 [`NCQuadraticMakeSymmetric`](#ncquadraticmakesymmetric) can fix that and
 produce a symmetric decomposition. For the above example
 
@@ -1812,15 +1801,15 @@ results in
     middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
 
 in which `middle` is the symmetric matrix
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_45.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Bbmatrix%7D%0A0+%26+0+%26+2+%5C%5C%0A0+%26+2+%26+2+x+%5C%5C%0A2+%26+2+x+%26+2+x%5E2%0A%5Cend%7Bbmatrix%7D%0A)
 Note the argument `SymmetricVariables -> {x,h}` which tells
 `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
 variables. Because the `middle` matrix is never positive semidefinite
 for any possible value of
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_46.png)
-the conclusion\[3\] is that the nc quartic
-![x^4](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_48.png)
-is *not convex*.
+![x](https://render.githubusercontent.com/render/math?math=x) the
+conclusion\[3\] is that the nc quartic
+![x^4](https://render.githubusercontent.com/render/math?math=x%5E4) is
+*not convex*.
 
 The production of such symmetric quadratic decompositions is automated
 by the convenience command
@@ -1851,12 +1840,12 @@ The resulting middle matrix can be factored using
     {ll, dd, uu} = GetLDUMatrices[ldl, s];
 
 which produces the diagonal factors
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_49.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Bbmatrix%7D%0A++2+%281+%2B+b+y+%2B+y+b+-+a+x+a%29%5E%7B-1%7D+%26+0+%26+0+%5C%5C%0A++0+%26+0+%26+0+%5C%5C%0A++0+%26+0+%26+0%0A%5Cend%7Bbmatrix%7D%0A)
 which indicates the the original nc rational is convex whenever
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_50.png) or,
-equivalently, whenever
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_51.png) The
-above sequence of calculations is automated by the command
+![](https://render.githubusercontent.com/render/math?math=%0A%281+%2B+b+y+%2B+y+b+-+a+x+a%29%5E%7B-1%7D+%5Csucceq+0%0A)
+or, equivalently, whenever
+![](https://render.githubusercontent.com/render/math?math=%0A1+%2B+b+y+%2B+y+b+-+a+x+a+%5Csucceq+0%0A)
+The above sequence of calculations is automated by the command
 [`NCConvexityRegion`](#ncconvexityregion) as in
 
     << NCConvexity`
@@ -2160,7 +2149,7 @@ or, using `MatrixForm`:
 ![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) &
 -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} &
 (d - c a^{-1} b)^{-1}
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_52.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a%5E%7B-1%7D+%281+%2B+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D%29+%26+-a%5E%7B-1%7D+b+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5C%5C+-%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+c+a%5E%7B-1%7D+%26+%28d+-+c+a%5E%7B-1%7D+b%29%5E%7B-1%7D+%5Cend%7Bbmatrix%7D)
 
 A less trivial example is
 
@@ -2217,7 +2206,7 @@ where `m1` is an array and `z` is not, is automatically expanded into
 or, using `MatrixForm`:
 
 ![\\begin{bmatrix} a + z & b + z \\\\ c + z & d + z
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_53.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+a+%2B+z+%26+b+%2B+z+%5C%5C+c+%2B+z+%26+d+%2B+z+%5Cend%7Bbmatrix%7D)
 
 Because of this “feature”, the expression
 
@@ -2388,7 +2377,7 @@ polynomial ordering implied by a list of symbols. For example
 prints out
 
 ![x \\ll y \\ll
-z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_54.png)
+z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%5Cll+z)
 
 and
 
@@ -2397,7 +2386,7 @@ and
 prints out
 
 ![x \\ll y \<
-z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_55.png)
+z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%3C+z)
 
 from where you can see that grouping variables inside braces induces a
 graded type ordering, as discussed in Section . `NCPoly`s constructed
@@ -2409,8 +2398,8 @@ There is also a special constructor for monomials. For example
     NCPolyMonomial[{x,y}, vars]
 
 return the monomials corresponding to ![y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_56.png) and
-![x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_57.png).
+x](https://render.githubusercontent.com/render/math?math=y+x) and ![x
+y](https://render.githubusercontent.com/render/math?math=x+y).
 
 Operations on `NCPoly` objects result in another `NCPoly` object that is
 always expanded. For example:
@@ -2489,14 +2478,14 @@ i.e. *coefficients*. For example, in many problems in systems and
 control the following expression
 
 ![p(x) = a x + x a^T - x b x +
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_58.png)
+c](https://render.githubusercontent.com/render/math?math=p%28x%29+%3D+a+x+%2B+x+a%5ET+-+x+b+x+%2B+c)
 
 is often seen as a polynomial in the noncommutative unknown `x` with
 known noncommutative coefficients `a`, `b`, and `c`. A typical problem
 is the determination of a solution to the equation ![p(x)
-= 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_59.png) or
-the inequality ![p(x)
-\\succeq 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_60.png).
+= 0](https://render.githubusercontent.com/render/math?math=p%28x%29+%3D+0)
+or the inequality ![p(x)
+\\succeq 0](https://render.githubusercontent.com/render/math?math=p%28x%29+%5Csucceq+0).
 
 The package [`NCPolynomial`](#ncpolynomial) handles such polynomials
 with noncommutative coefficients. As with [`NCPoly`](#ncpoly), the
@@ -2584,7 +2573,7 @@ constructs `NCPolynomial` objects representing the polynomial matrices
 is zero as expected. Internally `NCPolynomial` represents a polynomial
 matrix by constructing matrix factors. For example the representation of
 the matrix `mat1` correspond to the factors
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_61.png)
+![](https://render.githubusercontent.com/render/math?math=+%0A%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A++++a+x+%2B+x+a%5ET+%2B+c+y+%2B+y%5ET+c%5ET+-+x+q+x+%26+b+x+%5C%5C+%0A++++x+b%5ET+%26+1%0A%5Cend%7Bbmatrix%7D+%0A%26%3D%0A%5Cbegin%7Bbmatrix%7D+0+%26+0+%5C%5C+0+%26+1+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+a+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+1+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+1+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+a%5ET+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+-1+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax+q+x%0A%5Cbegin%7Bbmatrix%7D+1+%26+0+%5Cend%7Bbmatrix%7D%0A%2B+%5C%5C+%26+%5Cqquad+%5Cquad%0A%5Cbegin%7Bbmatrix%7D+b+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+0+%26+1+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+0+%5C%5C+1+%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D+b%5ET+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+c+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ay%0A%5Cbegin%7Bbmatrix%7D+1+%26+0+%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D+1+%5C%5C+0+%5Cend%7Bbmatrix%7D%0Ay%5ET%0A%5Cbegin%7Bbmatrix%7D+c%5ET+%26+0+%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D%0A)
 
 See section [linear polynomials](#linear-polynomials) for more features
 on linear polynomial matrices.
@@ -2593,14 +2582,12 @@ on linear polynomial matrices.
 
 Another interesting class of nc polynomials is that of linear
 polynomials, which can be factored in the form:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_62.png)
-where
-![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_63.png)
-and
-![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_64.png)
-are vectors with symbolic expressions and
-![F](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_65.png) is
-a numeric matrix. This functionality is in the package
+![](https://render.githubusercontent.com/render/math?math=%0A++++s%28x%29+%3D+l+%28F+%5Cotimes+x%29+r%0A)
+where ![l](https://render.githubusercontent.com/render/math?math=l) and
+![r](https://render.githubusercontent.com/render/math?math=r) are
+vectors with symbolic expressions and
+![F](https://render.githubusercontent.com/render/math?math=F) is a
+numeric matrix. This functionality is in the package
 
     << NCSylvester`
 
@@ -2626,7 +2613,7 @@ coefficient array `F`.
 
 which in this case is the matrix:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_66.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Bbmatrix%7D%0A++++-1+%26+1%5C%5C%0A++++1+%26+0%0A%5Cend%7Bbmatrix%7D%0A)
 
 and
 
@@ -2670,8 +2657,7 @@ result in:
     lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
 
 See \[@oliveira:SSP:2012\] for details on the structure of the constant
-array
-![F](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_67.png) in
+array ![F](https://render.githubusercontent.com/render/math?math=F) in
 this case.
 
 # Noncommutative Gröbner Basis
@@ -2704,30 +2690,30 @@ Basis and uses of Gröbner Basis. For example, in Mathematica, the
 `Solve` command puts collections of equations in a *canonical form*
 which, for simple collections, readily yields a solution. Likewise, the
 Mathematica `Eliminate` command tries to convert a collection of
-![m](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_68.png)
-polynomial equations (often called relations)
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_69.png)
+![m](https://render.githubusercontent.com/render/math?math=m) polynomial
+equations (often called relations)
+![](https://render.githubusercontent.com/render/math?math=%0A++++%5Cbegin%7Baligned%7D%0A++++p_1%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0+%5C%5C%0A++++p_2%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0+%5C%5C%0A++++%5Cvdots+%5Cquad+%26+%5Cquad+%5C%2C+%5C%2C+%5Cvdots+%5C%5C%0A++++p_m%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0%0A++++%5Cend%7Baligned%7D%0A)
 
 in variables ![x\_1,x\_2, \\ldots
-x\_n](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_70.png)
+x\_n](https://render.githubusercontent.com/render/math?math=x_1%2Cx_2%2C+%5Cldots+x_n)
 to a *triangular* form, that is a new collection of equations like
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_71.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++++q_1%28x_1%29+%26%3D+0+%5C%5C%0A++++q_2%28x_1%2Cx_2%29+%26%3D+0+%5C%5C%0A++++q_3%28x_1%2Cx_2%29+%26%3D+0+%5C%5C%0A++++q_4%28x_1%2Cx_2%2Cx_3%29%26%3D0+%5C%5C%0A++++%5Cvdots+%5Cquad+%26+%5Cquad+%5C%2C+%5C%2C+%5Cvdots+%5C%5C%0A++++q_%7Br%7D%28x_1%2C%5Cldots%2Cx_n%29+%26%3D+0.%0A++++%5Cend%7Baligned%7D%0A)
 Here the polynomials ![\\{q\_j: 1\\le j\\le
-k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_72.png)
+k\_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3A+1%5Cle+j%5Cle+k_2%5C%7D)
 generate the same *ideal* that the polynomials ![\\{p\_j : 1\\le j \\le
-k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_73.png)
+k\_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j+%3A+1%5Cle+j+%5Cle+k_1%5C%7D)
 generate. Therefore, the set of solutions to the collection of
 polynomial equations ![\\{p\_j=0: 1\\le j\\le
-k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_74.png)
+k\_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%3D0%3A+1%5Cle+j%5Cle+k_1%5C%7D)
 equals the set of solutions to the collection of polynomial equations
 ![\\{q\_j=0: 1\\le j\\le
-k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_75.png).
+k\_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3D0%3A+1%5Cle+j%5Cle+k_2%5C%7D).
 This canonical form greatly simplifies the task of solving collections
 of polynomial equations by facilitating backsolving for
-![x\_j](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_76.png)
-in terms of
-![x\_1,\\ldots,x\_{j-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_77.png).
+![x\_j](https://render.githubusercontent.com/render/math?math=x_j) in
+terms of
+![x\_1,\\ldots,x\_{j-1}](https://render.githubusercontent.com/render/math?math=x_1%2C%5Cldots%2Cx_%7Bj-1%7D).
 
 Readers who would like to know more about Gröbner Basis may want to read
 \[CLS\]. The noncommutatative version of the algorithm implemented by
@@ -2748,41 +2734,39 @@ by the above command can be visualized using:
     PrintMonomialOrder[];
 
 which in this case prints:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_78.png) A
-user does not need to know theoretical background related to monomials
+![](https://render.githubusercontent.com/render/math?math=a+%3C+b+%3C+c+%5Cll+x.)
+A user does not need to know theoretical background related to monomials
 orders. Indeed, as we shall see soon, in many engineering problems, it
 suffices to know which variables correspond to quantities which are
 *known* and which variables correspond to quantities which are
 *unknown*. If one is solving for a variable or desires to prove that a
 certain quantity is zero, then one would want to view that variable as
 *unknown*. In the above example, the symbol
-‘![\\ll](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_79.png)’
+‘![\\ll](https://render.githubusercontent.com/render/math?math=%5Cll)’
 separate the *knowns*, ![a, b,
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_80.png),
+c](https://render.githubusercontent.com/render/math?math=a%2C+b%2C+c),
 from the *unknown*,
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_81.png).
-For more details on orderings see Section
+![x](https://render.githubusercontent.com/render/math?math=x). For more
+details on orderings see Section
 [Orderings](#ordering-on-variables-and-monomials).
 
 Our goal is to calculate the Gröbner basis associated with the following
 relations (i.e. a list of polynomials):
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_82.png) We
-shall use the word *relation* to mean a polynomial in noncommuting
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++++a+%5C%2C+x+%5C%2C+a+%26%3D+c%2C+%26%0A++++a+%5C%2C+b+%26%3D+1%2C+%26%0A++++b+%5C%2C+a+%26%3D+1.%0A%5Cend%7Baligned%7D%0A)
+We shall use the word *relation* to mean a polynomial in noncommuting
 indeterminates. For example, if an analyst saw the equation ![A B
-= 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_83.png)
+= 1](https://render.githubusercontent.com/render/math?math=A+B+%3D+1)
 for matrices
-![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_84.png)
-and
-![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_85.png),
-then he might say that
-![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_86.png)
-and
-![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_87.png)
-satisfy the polynomial equation ![a\\, b - 1
-= 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_88.png).
+![A](https://render.githubusercontent.com/render/math?math=A) and
+![B](https://render.githubusercontent.com/render/math?math=B), then he
+might say that
+![A](https://render.githubusercontent.com/render/math?math=A) and
+![B](https://render.githubusercontent.com/render/math?math=B) satisfy
+the polynomial equation ![a\\, b - 1
+= 0](https://render.githubusercontent.com/render/math?math=a%5C%2C+b+-+1+%3D+0).
 An algebraist would say that ![a\\, b
-- 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_89.png) is
-a relation.
+- 1](https://render.githubusercontent.com/render/math?math=a%5C%2C+b+-+1)
+is a relation.
 
 To calculate a Gröbner basis one defines a list of relations:
 
@@ -2841,13 +2825,13 @@ leading monomial as Mathematica alphabetizes the resulting sum.
 
 Someone not familiar with GB’s might find it instructive to note this
 output GB effectively *solves* the input equation
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_90.png)
+![](https://render.githubusercontent.com/render/math?math=%0A++++a+%5C%2C+x+%5C%2C+a+-+c+%3D+0%0A)
 under the assumptions that
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_91.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++++b+%5C%2C+a+-+1+%26%3D+0%2C+%26%0A++++a+%5C%2C+b+-+1+%26+%3D0%2C%0A%5Cend%7Baligned%7D%0A)
 that is ![a =
-b^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_92.png)
+b^{-1}](https://render.githubusercontent.com/render/math?math=a+%3D+b%5E%7B-1%7D)
 and produces the expected result in the form of the relation:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_93.png)
+![](https://render.githubusercontent.com/render/math?math=%0A++++x+%3D+b+%5C%2C+c+%5C%2C+b.%0A)
 
 ## A slightly more challenging example
 
@@ -2859,15 +2843,15 @@ as before:
 that is
 
 ![a \< b \< c \\ll
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_94.png)
+x](https://render.githubusercontent.com/render/math?math=a+%3C+b+%3C+c+%5Cll+x)
 
 and the relations:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_95.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++a+%5C%2C+x+-+c+%26%3D+0%2C+%5C%5C%0A++a+%5C%2C+b+%5C%2C+a+-+a+%26%3D+0%2C+%5C%5C%0A++b+%5C%2C+a+%5C%2C+b+-+b+%26%3D+0%2C%0A%5Cend%7Baligned%7D%0A)
 from which one can recognize the problem of solving the linear equation
 ![a \\, x =
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_96.png) in
-terms of the *pseudo-inverse* ![b =
-a^\\dag](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_97.png).
+c](https://render.githubusercontent.com/render/math?math=a+%5C%2C+x+%3D+c)
+in terms of the *pseudo-inverse* ![b =
+a^\\dag](https://render.githubusercontent.com/render/math?math=b+%3D+a%5E%5Cdag).
 The calculation:
 
     gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
@@ -2881,19 +2865,19 @@ finds the Gröbner basis:
 
 In this case the Gröbner basis cannot quite *solve* the equations but it
 remarkably produces the necessary condition for existence of solutions:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_98.png)
+![](https://render.githubusercontent.com/render/math?math=+%0A++++0+%3D+a+%5C%2C+b+%5C%2C+c+-+c+%3D+a+%5C%2C+a%5E%5Cdag+c+-+c+%0A)
 that can be interpreted as
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_99.png)
-being in the range-space of
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_100.png).
+![c](https://render.githubusercontent.com/render/math?math=c) being in
+the range-space of
+![a](https://render.githubusercontent.com/render/math?math=a).
 
 ## Simplifying polynomial expresions
 
 Our goal now is to verify if it is possible to *simplify* the following
 expression:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_101.png) if
-we know that
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_102.png)
+![](https://render.githubusercontent.com/render/math?math=%0Ab+%5C%2C+b+%5C%2C+a+%5C%2C+a+-+a+%5C%2C+a+%5C%2C+b+%5C%2C+b+%2B+a+%5C%2C+b+%5C%2C+a%0A)
+if we know that
+![](https://render.githubusercontent.com/render/math?math=%0Aa+%5C%2C+b+%5C%2C+a+%3D+b%0A)
 using Gröbner basis. With that in mind we set the order:
 
     SetMonomialOrder[a,b];
@@ -2924,7 +2908,7 @@ and the associated GB
 
 The GB revealed another relationship that must hold true if ![a \\, b
 \\, a =
-b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_103.png).
+b](https://render.githubusercontent.com/render/math?math=a+%5C%2C+b+%5C%2C+a+%3D+b).
 One can use these relationships to simplify the original expression
 using `NCReplaceRepeated` as in
 
@@ -2981,13 +2965,12 @@ It is often desirable to simplify expressions involving inverses of
 noncommutative expressions. One challenge is to recognize identities
 implied by the existence of certain inverses. For example, that the
 expression
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_104.png) is
-equivalent to
-![0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_105.png).
-One can use a nc Gröbner basis for that task. Consider for instance the
-order
+![](https://render.githubusercontent.com/render/math?math=%0A++++x+%281+-+x%29%5E%7B-1%7D+-+%281+-+x%29%5E%7B-1%7D+x%0A)
+is equivalent to
+![0](https://render.githubusercontent.com/render/math?math=0). One can
+use a nc Gröbner basis for that task. Consider for instance the order
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_106.png)
+![](https://render.githubusercontent.com/render/math?math=+x+%5Cll+%281-x%29%5E%7B-1%7D+)
 
 implied by the command:
 
@@ -2995,10 +2978,9 @@ implied by the command:
 
 This ordering encodes the following precise idea of what we mean by
 *simple* versus *complicated*: it formally corresponds to specifying
-that
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_107.png)
-is simpler than
-![(1-x)^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_108.png),
+that ![x](https://render.githubusercontent.com/render/math?math=x) is
+simpler than
+![(1-x)^{-1}](https://render.githubusercontent.com/render/math?math=%281-x%29%5E%7B-1%7D),
 which might sits well with one’s intuition.
 
 Now consider the following command:
@@ -3026,7 +3008,7 @@ and results in the rules:
 
 As in the previous example, the GB revealed new relationships that must
 hold true if ![1-
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_109.png) is
+x](https://render.githubusercontent.com/render/math?math=1-+x) is
 invertible, and one can use this relationship to  the original
 expression using `NCReplaceRepeated` as in:
 
@@ -3035,7 +3017,7 @@ expression using `NCReplaceRepeated` as in:
 The above command results in `0`, as one would hope.
 
 For a more challenging example consider the identity:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_110.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cleft+%281+-+x+-+y+%281+-+x%29%5E%7B-1%7D+y+%5Cright+%29%5E%7B-1%7D+%3D+%5Cfrac%7B1%7D%7B2%7D+%281+-+x+-+y%29%5E%7B-1%7D+%2B+%5Cfrac%7B1%7D%7B2%7D+%281+-+x+%2B+y%29%5E%7B-1%7D%0A)
 One can verify that the rule based command
 [NCSimplifyRational](#ncsimplifyrational-1) fails to simplify the
 expression:
@@ -3102,13 +3084,11 @@ We now discuss each of these types of orders.
 ### Lex Order: the simplest elimination order
 
 To impose lexicographic order, say ![a\\ll b\\ll x\\ll
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_111.png) on
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_112.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_113.png),
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_114.png)
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_115.png),
-one types
+y](https://render.githubusercontent.com/render/math?math=a%5Cll+b%5Cll+x%5Cll+y)
+on ![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![x](https://render.githubusercontent.com/render/math?math=x) and
+![y](https://render.githubusercontent.com/render/math?math=y), one types
 
     SetMonomialOrder[a,b,x,y];
 
@@ -3117,31 +3097,27 @@ or, equivalently
     SetMonomialOrder[{a},{b},{x},{y}];
 
 This order is useful for attempting to solve for
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_116.png)
-in terms of
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_117.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_118.png)
-and
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_119.png),
-since the highest priority of the GB algorithm is to produce polynomials
-which do not contain
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_120.png).
-If producing high order polynomials is a consequence of this fanaticism
-so be it. Unlike graded orders, lex orders pay little attention to the
+![y](https://render.githubusercontent.com/render/math?math=y) in terms
+of ![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b) and
+![x](https://render.githubusercontent.com/render/math?math=x), since the
+highest priority of the GB algorithm is to produce polynomials which do
+not contain
+![y](https://render.githubusercontent.com/render/math?math=y). If
+producing high order polynomials is a consequence of this fanaticism so
+be it. Unlike graded orders, lex orders pay little attention to the
 degree of terms. Likewise its second highest priority is to eliminate
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_121.png).
+![x](https://render.githubusercontent.com/render/math?math=x).
 
 Once this order is set, one can use all of the commands in the
 preceeding section in exactly the same form.
 
 We now give a simple example how one can solve for
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_122.png)
-given that
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_123.png),![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_124.png),![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_125.png)
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_126.png)
+![y](https://render.githubusercontent.com/render/math?math=y) given that
+![a](https://render.githubusercontent.com/render/math?math=a),![b](https://render.githubusercontent.com/render/math?math=b),![x](https://render.githubusercontent.com/render/math?math=x)
+and ![y](https://render.githubusercontent.com/render/math?math=y)
 satisfy the equations:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_127.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A-b%5C%2C+x+%2B+x%5C%2C+y++%5C%2C+a+%2B+x%5C%2C+b+%5C%2C+a+%5C%2C++a+%26%3D+0+%5C%5C%0Ax+%5C%2C+a-1%26%3D0+%5C%5C%0Aa%5C%2C+x-1%26%3D0%0A%5Cend%7Baligned%7D%0A)
 
 The command
 
@@ -3182,26 +3158,22 @@ iterations. Note the presence of the rule
     a**b**x**x -> y+b**a
 
 which shows that the order is not set up to solve for
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_128.png)
-in terms of the other variables in the sense that
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_129.png)
-is not on the left hand side of this rule (but a human could easily
-solve for
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_130.png)
-using this rule). Also the algorithm created a number of other relations
-which involved
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_131.png).
+![y](https://render.githubusercontent.com/render/math?math=y) in terms
+of the other variables in the sense that
+![y](https://render.githubusercontent.com/render/math?math=y) is not on
+the left hand side of this rule (but a human could easily solve for
+![y](https://render.githubusercontent.com/render/math?math=y) using this
+rule). Also the algorithm created a number of other relations which
+involved ![y](https://render.githubusercontent.com/render/math?math=y).
 
 ### Graded lex ordering: a non-elimination order
 
 To impose graded lexicographic order, say ![a\< b\< x\<
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_132.png) on
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_133.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_134.png),
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_135.png)
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_136.png),
-one types
+y](https://render.githubusercontent.com/render/math?math=a%3C+b%3C+x%3C+y)
+on ![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![x](https://render.githubusercontent.com/render/math?math=x) and
+![y](https://render.githubusercontent.com/render/math?math=y), one types
 
     SetMonomialOrder[{a,b,x,y}];
 
@@ -3227,13 +3199,12 @@ now produces
                               x**b**b**a**b**a+x**y**b**x**b**x**x
 
 which again fails to be a Gröbner basis and does not eliminate
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_137.png).
-Instead, it tries to decrease the total degree of expressions involving
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_138.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_139.png),
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_140.png),
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_141.png).
+![y](https://render.githubusercontent.com/render/math?math=y). Instead,
+it tries to decrease the total degree of expressions involving
+![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![x](https://render.githubusercontent.com/render/math?math=x), and
+![y](https://render.githubusercontent.com/render/math?math=y).
 
 ### Multigraded lex ordering: a variety of elimination orders
 
@@ -3241,19 +3212,17 @@ There are other useful monomial orders which one can use other than
 graded lex and lex. Another type of order is what we call multigraded
 lex and is a mixture of graded lex and lex order. To impose multi-graded
 lexicographic order, say ![a\< b\< x\\ll
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_142.png) on
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_143.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_144.png),
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_145.png)
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_146.png),
-one types
+y](https://render.githubusercontent.com/render/math?math=a%3C+b%3C+x%5Cll+y)
+on ![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![x](https://render.githubusercontent.com/render/math?math=x) and
+![y](https://render.githubusercontent.com/render/math?math=y), one types
 
     SetMonomialOrder[{a,b,x},y];
 
 which separates
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_147.png)
-from the remaining variables. This time, a call to
+![y](https://render.githubusercontent.com/render/math?math=y) from the
+remaining variables. This time, a call to
 
     NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
 
@@ -3264,34 +3233,29 @@ yields once again
     x**a -> 1
 
 which not only eliminates
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_148.png)
-but is also Gröbner basis, calculated after one iteration.
+![y](https://render.githubusercontent.com/render/math?math=y) but is
+also Gröbner basis, calculated after one iteration.
 
 For an intuitive idea of why multigraded lex is helpful, we think of
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_149.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_150.png),
-and
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_151.png)
-as corresponding to variables in some engineering problem which
-represent quantities which are *known* and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_152.png)
-to be *unknown*. The fact that
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_153.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_154.png)
-and
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_155.png)
-are in the top level indicates that we are very interested in solving
-for
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_156.png)
-in terms of
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_157.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_158.png),
-and
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_159.png),
-but are not willing to solve for, say
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_160.png),
-in terms of expressions involving
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_161.png).
+![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b), and
+![x](https://render.githubusercontent.com/render/math?math=x) as
+corresponding to variables in some engineering problem which represent
+quantities which are *known* and
+![y](https://render.githubusercontent.com/render/math?math=y) to be
+*unknown*. The fact that
+![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b) and
+![x](https://render.githubusercontent.com/render/math?math=x) are in the
+top level indicates that we are very interested in solving for
+![y](https://render.githubusercontent.com/render/math?math=y) in terms
+of ![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b), and
+![x](https://render.githubusercontent.com/render/math?math=x), but are
+not willing to solve for, say
+![x](https://render.githubusercontent.com/render/math?math=x), in terms
+of expressions involving
+![y](https://render.githubusercontent.com/render/math?math=y).
 
 This situation is so common that we provide the commands `SetKnowns` and
 `SetUnknowns`. The above ordering would be obtained after setting
@@ -3306,62 +3270,54 @@ particular one was suggested by Hugo Woerdeman. We are grateful to him
 for discussions.
 
 **Problem:** *Given matrices
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_162.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_163.png),
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_164.png),
-and
-![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_165.png),
-we wish to determine under what conditions there exists matrices x, y,
-z, and w such that the block matrices*
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_166.png)
+![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![c](https://render.githubusercontent.com/render/math?math=c), and
+![d](https://render.githubusercontent.com/render/math?math=d), we wish
+to determine under what conditions there exists matrices x, y, z, and w
+such that the block matrices*
+![](https://render.githubusercontent.com/render/math?math=++%0A++%5Cbegin%7Bbmatrix%7D+a+%26+x+%5C%5C+y+%26+b+%5Cend%7Bbmatrix%7D%0A++%5Cqquad+%0A++%5Cbegin%7Bbmatrix%7D+w+%26+c+%5C%5C+d+%26+z+%5Cend%7Bbmatrix%7D%0A)
 *are inverses of each other. Also, we wish to find formulas for
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_167.png),
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_168.png),
-![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_169.png),
-and
-![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_170.png).*
+![x](https://render.githubusercontent.com/render/math?math=x),
+![y](https://render.githubusercontent.com/render/math?math=y),
+![z](https://render.githubusercontent.com/render/math?math=z), and
+![w](https://render.githubusercontent.com/render/math?math=w).*
 
 This problem was solved in a paper by W.W. Barrett, C.R. Johnson, M. E.
 Lundquist and H. Woerderman \[BJLW\] where they showed it splits into
 several cases depending upon which of
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_171.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_172.png),
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_173.png)
-and
-![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_174.png)
-are invertible. In our example, we assume that
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_175.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_176.png),
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_177.png)
-and
-![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_178.png)
-are invertible and discover the result which they obtain in this case.
+![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![c](https://render.githubusercontent.com/render/math?math=c) and
+![d](https://render.githubusercontent.com/render/math?math=d) are
+invertible. In our example, we assume that
+![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![c](https://render.githubusercontent.com/render/math?math=c) and
+![d](https://render.githubusercontent.com/render/math?math=d) are
+invertible and discover the result which they obtain in this case.
 
 First we set the matrices
-![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_179.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_180.png),
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_181.png),
-and
-![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_182.png)
-and their inverses as *knowns* and
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_183.png),
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_184.png),
-![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_185.png),
-and
-![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_186.png)
-as unknowns:
+![a](https://render.githubusercontent.com/render/math?math=a),
+![b](https://render.githubusercontent.com/render/math?math=b),
+![c](https://render.githubusercontent.com/render/math?math=c), and
+![d](https://render.githubusercontent.com/render/math?math=d) and their
+inverses as *knowns* and
+![x](https://render.githubusercontent.com/render/math?math=x),
+![y](https://render.githubusercontent.com/render/math?math=y),
+![w](https://render.githubusercontent.com/render/math?math=w), and
+![z](https://render.githubusercontent.com/render/math?math=z) as
+unknowns:
 
     SetKnowns[a, inv[a], b, inv[b], c, inv[c], d, inv[d]];
     SetUnknowns[{z}, {x, y, w}];
 
 Note that the graded ordedring of the unknowns means that we care more
 about solving for
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_187.png),
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_188.png)
-and
-![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_189.png)
-than for
-![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_190.png).
+![x](https://render.githubusercontent.com/render/math?math=x),
+![y](https://render.githubusercontent.com/render/math?math=y) and
+![w](https://render.githubusercontent.com/render/math?math=w) than for
+![z](https://render.githubusercontent.com/render/math?math=z).
 
 Then we define the relations we are interested in, which are obtained
 after multiplying the two block matrices on both sides and equating to
@@ -3400,29 +3356,26 @@ we obtain the Gröbner basis:
     d**a**c**b**z**inv[c] -> z**b**d**a
 
 after seven iterations. The first four relations
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_191.png)  
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++++x+%26%3D+d%5E%7B-1%7D-d%5E%7B-1%7D+%5C%2C+z+%5C%2C+b+%5C%5C%0A++++y+%26%3D+c%5E%7B-1%7D-b+%5C%2C+z+%5C%2C+c%5E%7B-1%7D+%5C%5C%0A++++w+%26%3D+a%5E%7B-1%7D+%5C%2C+d%5E%7B-1%7D++%5C%2C+z+%5C%2C+b+%5C%2C+d+%5C%5C%0A++++z+%5C%2C+b+%5C%2C+z+%26%3D+z+%2B+d+%5C%2C+a+%5C%2C+c%0A%5Cend%7Baligned%7D%0A)  
 are the solutions we are looking for, which states that one can find
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_192.png),
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_193.png),
-![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_194.png),
-and
-![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_195.png)
-such that the matrices above are inverses of each other if and only if
-![z \\, b \\, z = z + d \\, a \\,
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_196.png).
+![x](https://render.githubusercontent.com/render/math?math=x),
+![y](https://render.githubusercontent.com/render/math?math=y),
+![z](https://render.githubusercontent.com/render/math?math=z), and
+![w](https://render.githubusercontent.com/render/math?math=w) such that
+the matrices above are inverses of each other if and only if ![z \\, b
+\\, z = z + d \\, a \\,
+c](https://render.githubusercontent.com/render/math?math=z+%5C%2C+b+%5C%2C+z+%3D+z+%2B+d+%5C%2C+a+%5C%2C+c).
 The first three relations gives formulas for
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_197.png),
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_198.png)
-and
-![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_199.png)
-in terms of
-![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_200.png).
+![x](https://render.githubusercontent.com/render/math?math=x),
+![y](https://render.githubusercontent.com/render/math?math=y) and
+![w](https://render.githubusercontent.com/render/math?math=w) in terms
+of ![z](https://render.githubusercontent.com/render/math?math=z).
 
 A variety of scenarios can be quickly investigated under different
 assumptions. For example, say that
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_201.png)
-is not invertible. Is it still possible to solve the problem? One
-solution is obtained with the ordering implied by
+![c](https://render.githubusercontent.com/render/math?math=c) is not
+invertible. Is it still possible to solve the problem? One solution is
+obtained with the ordering implied by
 
     SetKnowns[a, inv[a], b, inv[b], c, d, inv[d]];
     SetUnknowns[{y}, {z, w, x}];
@@ -3444,21 +3397,18 @@ produces the Gröbner basis:
     y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
 
 after five iterations. Once again, the first four relations
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_202.png)  
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++++z+%26%3D+b%5E%7B-1%7D-b%5E%7B-1%7D+%5C%2C+y+%5C%2C+c+%5C%5C%0A++++w+%26%3D+a%5E%7B-1%7D-c+%5C%2C+y+%5C%2C+a%5E%7B-1%7D+%5C%5C%0A++++x+%26%3D+a+%5C%2C+c+%5C%2C+y+%5C%2C+a%5E%7B-1%7D+%5C%2C+d%5E%7B-1%7D+%5C%5C%0A++++y+%5C%2C+c+%5C%2C+y+%26%3D+y%2Bb+%5C%2C+d+%5C%2C+a%0A%5Cend%7Baligned%7D%0A)  
 provide formulas, this time for
-![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_203.png),
-![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_204.png),
-and
-![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_205.png)
-in terms of
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_206.png)
+![z](https://render.githubusercontent.com/render/math?math=z),
+![w](https://render.githubusercontent.com/render/math?math=w), and
+![z](https://render.githubusercontent.com/render/math?math=z) in terms
+of ![y](https://render.githubusercontent.com/render/math?math=y)
 satisfying ![y \\, c \\, y = y+b \\, d \\,
-a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_207.png).
+a](https://render.githubusercontent.com/render/math?math=y+%5C%2C+c+%5C%2C+y+%3D+y%2Bb+%5C%2C+d+%5C%2C+a).
 Note that these formulas do not involve
-![c^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_208.png)
-since
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_209.png)
-is no longer assumed invertible.
+![c^{-1}](https://render.githubusercontent.com/render/math?math=c%5E%7B-1%7D)
+since ![c](https://render.githubusercontent.com/render/math?math=c) is
+no longer assumed invertible.
 
 # Semidefinite Programming
 
@@ -3490,7 +3440,7 @@ After loading NCAlgebra, the package NCSDP must be loaded using:
 Semidefinite programs consist of symbolic noncommutative expressions
 representing inequalities and a list of rules for data replacement. For
 example the semidefinite program:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_210.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A%5Cmin_Y+%5Cquad+%26+%3CI%2CY%3E+%5C%5C%0A%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+Y+%2B+Y+A%5ET+%2B+I+%5Cpreceq+0+%5C%5C%0A++++++++++++%26+Y+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
 can be solved by defining the noncommutative expressions
 
     SNC[a, y];
@@ -3503,9 +3453,9 @@ function constains the symbolic coefficients of the inner product, in
 this case `-1`. The reason for the negative signs in the objective as
 well as in the second inequality is that semidefinite programs are
 expected to be cast in the following *canonical form*:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_211.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D+%0A++%5Cmax_y+%5Cquad+%26+%3Cb%2Cy%3E+%5C%5C+%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+f%28y%29+%5Cpreceq+0+%0A%5Cend%7Baligned%7D%0A)
 or, equivalently:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_212.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D+%0A++%5Cmax_y+%5Cquad+%26+%3Cb%2Cy%3E+%5C%5C+%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+f%28y%29+%2B+s+%3D+0%2C+%5Cquad+s+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
 
 Semidefinite programs can be visualized using [`NCSDPForm`](#ncsdpform)
 as in:
@@ -3578,9 +3528,9 @@ A symbolic dual problem can be calculated easily using
     {dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];
 
 The dual program for the example problem above is:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_213.png) In
-the case of the above problem the dual program is
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_214.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D+%0A++%5Cmax_x+%5Cquad+%26+%3Cc%2Cx%3E+%5C%5C+%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+f%5E%2A%28x%29+%2B+b+%3D+0%2C+%5Cquad+x+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
+In the case of the above problem the dual program is
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A%5Cmax_%7BX_1%2C+X_2%7D+%5Cquad+%26+%3CI%2CX_1%3E+%5C%5C%0A%5Ctext%7Bs.t.%7D+%5Cquad+%26+A%5ET+X_1+%2B+X_1+A+-X_2+-+I+%3D+0+%5C%5C%0A++++++++++++%26+X_1+%5Csucceq+0%2C+%5C%5C%0A++++++++%26+X_2+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
 which can be visualized using [`NCSDPDualForm`](#ncsdpdualform) using:
 
     NCSDPDualForm[dIneqs, dVars, dObj]
@@ -3596,26 +3546,25 @@ the semidefinite program solver. But you still need to load `NC` as in:
     << SDP`
 
 Semidefinite programs are optimization problems of the form:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_215.png)
-where
-![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_216.png)
-is a symmetric positive semidefinite matrix and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_217.png)
-is a vector of decision variables.
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
+where ![S](https://render.githubusercontent.com/render/math?math=S) is a
+symmetric positive semidefinite matrix and
+![y](https://render.githubusercontent.com/render/math?math=y) is a
+vector of decision variables.
 
 A user can input the problem data, the triplet ![(A, b,
-c)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_218.png),
+c)](https://render.githubusercontent.com/render/math?math=%28A%2C+b%2C+c%29),
 or use the following convenient methods for producing data in the proper
 format.
 
 For example, problems can be stated as:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_219.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D+%0A++%5Cmin_y+%5Cquad+%26+f%28y%29%2C+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+G%28y%29+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
 where
-![f(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_220.png)
+![f(y)](https://render.githubusercontent.com/render/math?math=f%28y%29)
 and
-![G(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_221.png)
+![G(y)](https://render.githubusercontent.com/render/math?math=G%28y%29)
 are affine functions of the vector of variables
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_222.png).
+![y](https://render.githubusercontent.com/render/math?math=y).
 
 Here is a simple example:
 
@@ -3624,19 +3573,18 @@ Here is a simple example:
     G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
 
 The list of constraints in `G` is to be interpreted as:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_223.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D+%0A++y_0+-+2+%5Cgeq+0%2C+%5C%5C%0A++%5Cbegin%7Bbmatrix%7D+y_1+%26+y_0+%5C%5C+y_0+%26+1+%5Cend%7Bbmatrix%7D+%5Csucceq+0%2C+%5C%5C%0A++%5Cbegin%7Bbmatrix%7D+y_2+%26+y_1+%5C%5C+y_1+%26+1+%5Cend%7Bbmatrix%7D+%5Csucceq+0.%0A%5Cend%7Baligned%7D%0A)
 The function [`SDPMatrices`](#sdpmatrices) convert the above symbolic
 problem into numerical data that can be used to solve an SDP.
 
     abc = SDPMatrices[f, G, y]
 
 All required data, that is
-![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_224.png),
-![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_225.png),
-and
-![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_226.png),
-is stored in the variable `abc` as Mathematica’s sparse matrices. Their
-contents can be revealed using the Mathematica command `Normal`.
+![A](https://render.githubusercontent.com/render/math?math=A),
+![b](https://render.githubusercontent.com/render/math?math=b), and
+![c](https://render.githubusercontent.com/render/math?math=c), is stored
+in the variable `abc` as Mathematica’s sparse matrices. Their contents
+can be revealed using the Mathematica command `Normal`.
 
     Normal[abc]
 
@@ -3682,7 +3630,7 @@ makes the expression
 be displayed as
 
 `(tp[a] +
-b)`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_227.png)
+b)`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D)
 
 Conversely
 
@@ -3690,7 +3638,7 @@ Conversely
 
 makes `expr` be displayed as
 
-`inv[a`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_228.png)
+`inv[a`![^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5E%5Cmathtt%7BT%7D)
 `+ b]`
 
 The default settings are
@@ -3699,26 +3647,26 @@ The default settings are
 
 which makes `expr` be displayed as
 
-`(a`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_229.png)
+`(a`![^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5E%5Cmathtt%7BT%7D)
 `+
-b)`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_230.png)
+b)`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D)
 
 The complete set of options and their default values are:
 
   - `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as
     ‘`x`
-    ![\\bullet](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_231.png)
+    ![\\bullet](https://render.githubusercontent.com/render/math?math=%5Cbullet)
     `y`’;
   - `tp` (`True`): If `True` `tp[x]` is displayed as
-    ‘`x`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_232.png)’;
+    ‘`x`![^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5E%5Cmathtt%7BT%7D)’;
   - `inv` (`True`): If `True` `inv[x]` is displayed as
-    ‘`x`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_233.png)’;
+    ‘`x`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D)’;
   - `aj` (`True`): If `True` `aj[x]` is displayed as
-    ‘`x`![^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_234.png)’;
+    ‘`x`![^\*](https://render.githubusercontent.com/render/math?math=%5E%2A)’;
   - `co` (`True`): If `True` `co[x]` is displayed as
-    ‘![\\bar{\\mathtt{x}}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_235.png)’;
+    ‘![\\bar{\\mathtt{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathtt%7Bx%7D%7D)’;
   - `rt` (`True`): If `True` `rt[x]` is displayed as
-    ‘`x`![^{1/2}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_236.png)’.
+    ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1%2F2%7D)’.
 
 The special symbol `All` can be used to set all options to `True` or
 `False`, as in
@@ -3757,7 +3705,7 @@ For example:
 produces
 
 ![1 + \\sin \\left ( x + \\frac{y - z}{\\sqrt{2}} \\right
-)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_237.png)
+)](https://render.githubusercontent.com/render/math?math=1+%2B+%5Csin+%5Cleft+%28+x+%2B+%5Cfrac%7By+-+z%7D%7B%5Csqrt%7B2%7D%7D+%5Cright+%29)
 
 If `NCAlgebra` is not loaded then `NCTeX` uses the built in `TeXForm` to
 produce the LaTeX expressions. If `NCAlgebra` is loaded, `NCTeXForm` is
@@ -3773,7 +3721,7 @@ that produces
 ![\\left( \\begin{array}{cc} \\sin
 \\left(x+\\frac{y-z}{\\sqrt{2}}\\right)+1 & \\frac{x}{y} \\\\ z &
 \\sqrt{5} n \\\\ \\end{array}
-\\right)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_238.png)
+\\right)](https://render.githubusercontent.com/render/math?math=%5Cleft%28+%5Cbegin%7Barray%7D%7Bcc%7D+%5Csin+%5Cleft%28x%2B%5Cfrac%7By-z%7D%7B%5Csqrt%7B2%7D%7D%5Cright%29%2B1+%26+%5Cfrac%7Bx%7D%7By%7D+%5C%5C+z+%26+%5Csqrt%7B5%7D+n+%5C%5C+%5Cend%7Barray%7D+%5Cright%29)
 
 In some cases Mathematica will have difficulty displaying certain PDF
 files. When this happens `NCTeX` will span a PDF viewer so that you can
@@ -3897,7 +3845,7 @@ convert the expression to PDF. Try
 to produce
 
 ![a.x.{b}^T-{\\left(d+c.{\\left (a+b.c\\right)}^{-1}.{y}^T\\right
-)}^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_239.png)
+)}^{-1}](https://render.githubusercontent.com/render/math?math=a.x.%7Bb%7D%5ET-%7B%5Cleft%28d%2Bc.%7B%5Cleft+%28a%2Bb.c%5Cright%29%7D%5E%7B-1%7D.%7By%7D%5ET%5Cright+%29%7D%5E%7B-1%7D)
 
 `NCTeX` represents noncommutative products with a dot (`.`) in order to
 distinguish it from its commutative cousin. We can see the difference in
@@ -3909,7 +3857,7 @@ an expression that has both commutative and noncommutative products:
 produces
 
 ![2 \\left(a.b\\right) - 3
-(c.d)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_240.png)
+(c.d)](https://render.githubusercontent.com/render/math?math=2+%5Cleft%28a.b%5Cright%29+-+3+%28c.d%29)
 
 NCTeXForm handles lists and matrices as well. Here is a list:
 
@@ -3919,7 +3867,7 @@ NCTeXForm handles lists and matrices as well. Here is a list:
 and its output:
 
 ![\\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x
-\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_241.png)
+\\}](https://render.githubusercontent.com/render/math?math=%5C%7B+x%2C+%7Bx%7D%5ET%2C+x%2By%2C+x%2B%7By%7D%5ET%2C+x%2B%7By%7D%5E%7B-1%7D%2C+x.x+%5C%7D)
 
 and here is a matrix example:
 
@@ -3929,7 +3877,7 @@ and here is a matrix example:
 and its output:
 
 ![\\begin{bmatrix} x & y \\\\ y & z
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_242.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+x+%26+y+%5C%5C+y+%26+z+%5Cend%7Bbmatrix%7D)
 
 Here are some more examples:
 
@@ -3940,7 +3888,7 @@ produces
 
 ![\\begin{bmatrix} 1+\\operatorname{sin}{\\left (x+\\frac{1}{\\sqrt{2}}
 \\left (y-z\\right )\\right )} & x {y}^{-1} \\\\ z & \\sqrt{5} n
-\\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_243.png)
+\\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D+1%2B%5Coperatorname%7Bsin%7D%7B%5Cleft+%28x%2B%5Cfrac%7B1%7D%7B%5Csqrt%7B2%7D%7D+%5Cleft+%28y-z%5Cright+%29%5Cright+%29%7D+%26+x+%7By%7D%5E%7B-1%7D+%5C%5C+z+%26+%5Csqrt%7B5%7D+n+%5Cend%7Bbmatrix%7D)
 
     exp = {inv[x + y], inv[x + inv[y]]}
     NCTeX[exp]
@@ -3948,7 +3896,7 @@ produces
 produces:
 
 ![\\{ {\\left (x+y\\right )}^{-1}, {\\left (x+{y}^{-1}\\right )}^{-1}
-\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_244.png)
+\\}](https://render.githubusercontent.com/render/math?math=%5C%7B+%7B%5Cleft+%28x%2By%5Cright+%29%7D%5E%7B-1%7D%2C+%7B%5Cleft+%28x%2B%7By%7D%5E%7B-1%7D%5Cright+%29%7D%5E%7B-1%7D+%5C%7D)
 
     exp = {Sin[x], x y, Sin[x] y, Sin[x + y], Cos[gamma], 
            Sin[alpha] tp[x] ** (y - tp[y]), (x + tp[x]) (y ** z), -tp[y], 1/2, 
@@ -3962,7 +3910,7 @@ produces:
 \\left({x}^T.\\left (y-{y}^T\\right )\\right )
 \\operatorname{sin}{\\alpha}, y z \\left (x+{x}^T\\right ), -{y}^T,
 \\frac{1}{2}, \\sqrt{2} \\left(x.y\\right )
-\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_245.png)
+\\}](https://render.githubusercontent.com/render/math?math=%5C%7B+%5Coperatorname%7Bsin%7D%7Bx%7D%2C+x+y%2C+y+%5Coperatorname%7Bsin%7D%7Bx%7D%2C+%5Coperatorname%7Bsin%7D%7B%5Cleft+%28x%2By%5Cright+%29%7D%2C+%5Coperatorname%7Bcos%7D%7B%5Cgamma%7D%2C+%5Cleft%28%7Bx%7D%5ET.%5Cleft+%28y-%7By%7D%5ET%5Cright+%29%5Cright+%29+%5Coperatorname%7Bsin%7D%7B%5Calpha%7D%2C+y+z+%5Cleft+%28x%2B%7Bx%7D%5ET%5Cright+%29%2C+-%7By%7D%5ET%2C+%5Cfrac%7B1%7D%7B2%7D%2C+%5Csqrt%7B2%7D+%5Cleft%28x.y%5Cright+%29+%5C%7D)
 
     exp = inv[x + tp[inv[y]]]
     NCTeX[exp]
@@ -3970,7 +3918,7 @@ produces:
 produces:
 
 ![{\\left (x+{{y}^T}^{-1}\\right
-)}^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_246.png)
+)}^{-1}](https://render.githubusercontent.com/render/math?math=%7B%5Cleft+%28x%2B%7B%7By%7D%5ET%7D%5E%7B-1%7D%5Cright+%29%7D%5E%7B-1%7D)
 
 `NCTeXForm` does not know as many functions as `TeXForm`. In some cases
 `TeXForm` will produce better results. Compare:
@@ -3981,7 +3929,7 @@ produces:
 output:
 
 ![\\operatorname{BesselJ}\\left (2, x\\right
-)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_247.png)
+)](https://render.githubusercontent.com/render/math?math=%5Coperatorname%7BBesselJ%7D%5Cleft+%282%2C+x%5Cright+%29)
 
 with
 
@@ -3989,7 +3937,7 @@ with
 
 output:
 
-![J\_2(x)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_248.png)
+![J\_2(x)](https://render.githubusercontent.com/render/math?math=J_2%28x%29)
 
 It should be easy to customize `NCTeXForm` though. Just overload
 `NCTeXForm`. In this example:
@@ -4002,7 +3950,7 @@ makes
 
 produce
 
-![J\_2(x)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_249.png)
+![J\_2(x)](https://render.githubusercontent.com/render/math?math=J_2%28x%29)
 
 # Introduction
 
@@ -5201,9 +5149,9 @@ returns
     d = {2 x, -2 inv[x]}
 
 from which we conclude that `x**x**x` is not convex in `x` because ![x
-\\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_250.png)
+\\succ 0](https://render.githubusercontent.com/render/math?math=x+%5Csucc+0)
 and ![-{x}^{-1}
-\\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_251.png)
+\\succ 0](https://render.githubusercontent.com/render/math?math=-%7Bx%7D%5E%7B-1%7D+%5Csucc+0)
 cannot simultaneously hold.
 
 `NCConvexityRegion` works by factoring the `NCHessian`, essentially
@@ -5625,7 +5573,7 @@ See also:
 
 `UpperTriangularSolve[u, b]` solves the upper-triangular system of
 equations ![u x =
-b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_252.png)
+b](https://render.githubusercontent.com/render/math?math=u+x+%3D+b)
 using back-substitution.
 
 For example:
@@ -5643,7 +5591,7 @@ See also:
 
 `LowerTriangularSolve[l, b]` solves the lower-triangular system of
 equations ![l x =
-b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_253.png)
+b](https://render.githubusercontent.com/render/math?math=l+x+%3D+b)
 using forward-substitution.
 
 For example:
@@ -5814,18 +5762,18 @@ The following `options` can be given:
 
   - `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as
     ‘`x`
-    ![\\bullet](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_254.png)
+    ![\\bullet](https://render.githubusercontent.com/render/math?math=%5Cbullet)
     `y`’;
   - `tp` (`True`): If `True` `tp[x]` is displayed as
-    ‘`x`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_255.png)’;
+    ‘`x`![^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5E%5Cmathtt%7BT%7D)’;
   - `inv` (`True`): If `True` `inv[x]` is displayed as
-    ‘`x`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_256.png)’;
+    ‘`x`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D)’;
   - `aj` (`True`): If `True` `aj[x]` is displayed as
-    ‘`x`![^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_257.png)’;
+    ‘`x`![^\*](https://render.githubusercontent.com/render/math?math=%5E%2A)’;
   - `co` (`True`): If `True` `co[x]` is displayed as
-    ‘![\\bar{\\mathtt{x}}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_258.png)’;
+    ‘![\\bar{\\mathtt{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathtt%7Bx%7D%7D)’;
   - `rt` (`True`): If `True` `rt[x]` is displayed as
-    ‘`x`![^{1/2}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_259.png)’;
+    ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1%2F2%7D)’;
   - `All`: Set all available options to `True` or `False`.
 
 See also: [NCTex](#nctex-1), [NCTexForm](#nctexform-1).
@@ -6241,7 +6189,7 @@ For example:
 
 constructs an object associated with the noncommutative polynomial ![2 z
 - x y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_260.png) in
+x](https://render.githubusercontent.com/render/math?math=2+z+-+x+y+x) in
 variables `x`, `y` and `z`.
 
 The internal representation varies with the implementation but it is so
@@ -6271,17 +6219,17 @@ Monic monomials are specified in terms of the symbols in the list
     mon = NCPolyMonomial[{x,y,x},vars];
 
 returns an `NCPoly` object encoding the monomial
-![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_261.png)
-in noncommutative variables `x`,`y`, and `z`. The actual representation
-of `mon` varies with the implementation.
+![xyx](https://render.githubusercontent.com/render/math?math=xyx) in
+noncommutative variables `x`,`y`, and `z`. The actual representation of
+`mon` varies with the implementation.
 
 Monomials can also be specified implicitly using indices, for example:
 
     mon = NCPolyMonomial[{0,1,0}, 3];
 
 also returns an `NCPoly` object encoding the monomial
-![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_262.png)
-in noncommutative variables `x`,`y`, and `z`.
+![xyx](https://render.githubusercontent.com/render/math?math=xyx) in
+noncommutative variables `x`,`y`, and `z`.
 
 If graded ordering is supported then
 
@@ -6293,9 +6241,9 @@ or
     mon = NCPolyMonomial[{0,1,0}, {1,2}];
 
 construct the same monomial
-![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_263.png)
-in noncommutative variables `x`,`y`, and `z` this time using a graded
-order in which `x << y < z`.
+![xyx](https://render.githubusercontent.com/render/math?math=xyx) in
+noncommutative variables `x`,`y`, and `z` this time using a graded order
+in which `x << y < z`.
 
 There is also an alternative syntax for `NCPolyMonomial` that allows
 users to input the monomial along with a coefficient using rules and the
@@ -6308,8 +6256,8 @@ or
     mon = NCPolyMonomial[NCFromDigits[{0,1,0}, 3] -> -2, 3];
 
 represent the monomial ![-2
-xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_264.png)
-that has coefficient `-2`.
+xyx](https://render.githubusercontent.com/render/math?math=-2+xyx) that
+has coefficient `-2`.
 
 See also: [NCPoly](#ncpoly-1), [NCIntegerDigits](#ncintegerdigits),
 [NCFromDigits](#ncfromdigits).
@@ -6343,7 +6291,7 @@ For example, if
 with respect to the ordering
 
 ![x \\ll y \\ll
-z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_265.png)
+z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%5Cll+z)
 
 then
 
@@ -6353,7 +6301,7 @@ then
 is the same polynomial as `poly1` but in the ordering
 
 ![x \\ll y \<
-z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_266.png)
+z](https://render.githubusercontent.com/render/math?math=x+%5Cll+y+%3C+z)
 
 See also: [NCPoly](#ncpoly-1), [NCPolyCoefficient](#ncpolycoefficient).
 
@@ -6578,10 +6526,10 @@ For example:
     lead = NCPolyLeadingMonomial[poly];
 
 returns an `NCPoly` representing the monomial ![x y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_267.png).
-The leading monomial is computed according to the current ordering, in
-this example `x < y < z`. The actual representation of `lead` varies
-with the implementation.
+x](https://render.githubusercontent.com/render/math?math=x+y+x). The
+leading monomial is computed according to the current ordering, in this
+example `x < y < z`. The actual representation of `lead` varies with the
+implementation.
 
 See also: [NCPolyLeadingTerm](#ncpolyleadingterm),
 [NCPolyMonomial](#ncpolymonomial), [NCPoly](#ncpoly-1).
@@ -6603,9 +6551,9 @@ returns
     lead = {3,3} -> -1
 
 representing the monomial ![- x y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_268.png).
-The leading monomial is computed according to the current ordering, in
-this example `x < y < z`.
+x](https://render.githubusercontent.com/render/math?math=-+x+y+x). The
+leading monomial is computed according to the current ordering, in this
+example `x < y < z`.
 
 See also: [NCPolyLeadingMonomial](#ncpolyleadingmonomial),
 [NCPolyMonomial](#ncpolymonomial), [NCPoly](#ncpoly-1).
@@ -6633,9 +6581,9 @@ For example:
 
 returns the rule `lead -> rest` where `lead` represents is the nc
 monomial ![x y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_269.png) and
+x](https://render.githubusercontent.com/render/math?math=x+y+x) and
 `rest` is the nc polynomial ![2 z + 3 x
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_270.png)
+y](https://render.githubusercontent.com/render/math?math=2+z+%2B+3+x+y)
 
 See also: [NCPolyLeadingTerm](#ncpolyleadingterm),
 [NCPolyLeadingMonomial](#ncpolyleadingmonomial), [NCPoly](#ncpoly-1).
@@ -6652,7 +6600,7 @@ For example:
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
 corresponds to the polynomial ![x + 2 x y + 3 y x + 4
-x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_271.png)
+x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+x+y+%2B+3+y+x+%2B+4+x%5E2)
 and
 
     NCPolyTermsOfTotalDegree[p, {1,1}]
@@ -6662,7 +6610,7 @@ returns
     NCPoly[{1, 1}, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
 which corresponds to the polyomial ![2 x y + 3 y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_272.png).
+x](https://render.githubusercontent.com/render/math?math=2+x+y+%2B+3+y+x).
 Likewise
 
     NCPolyTermsOfTotalDegree[p, {2,0}]
@@ -6672,7 +6620,7 @@ returns
     NCPoly[{1, 1}, {0, 2, 0} -> 4|>]
 
 which corresponds to the polyomial ![4
-x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_273.png).
+x^2](https://render.githubusercontent.com/render/math?math=4+x%5E2).
 
 See also: [NCPolyTermsOfTotalDegree](#ncpolytermsoftotaldegree).
 
@@ -6688,7 +6636,7 @@ For example:
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
 corresponds to the polynomial ![x + 2 x y + 3 y x + 4
-x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_274.png)
+x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+x+y+%2B+3+y+x+%2B+4+x%5E2)
 and
 
     NCPolyTermsOfTotalDegree[p, 2]
@@ -6698,7 +6646,7 @@ returns
     NCPoly[{1, 1}, <|{0, 2, 0} -> 4, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
 which corresponds to the polyomial ![2 x y + 3 y x + 4
-x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_275.png).
+x^2](https://render.githubusercontent.com/render/math?math=2+x+y+%2B+3+y+x+%2B+4+x%5E2).
 
 See also: [NCPolyTermsOfDegree](#ncpolytermsofdegree).
 
@@ -6716,13 +6664,11 @@ For example:
 
 corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4
 y.x + x
-+ 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_276.png)
-in which
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_277.png)
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_278.png)
-are transposes of each other, that is ![y =
-x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_279.png).
++ 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29+%3D+-x.z.z.y+%2B+2+z.y+%2B+3+z.x+%2B+4+y.x+%2B+x+%2B+1)
+in which ![x](https://render.githubusercontent.com/render/math?math=x)
+and ![y](https://render.githubusercontent.com/render/math?math=y) are
+transposes of each other, that is ![y =
+x^T](https://render.githubusercontent.com/render/math?math=y+%3D+x%5ET).
 Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
@@ -6736,9 +6682,9 @@ results in
     NCPoly[{3}, <|{0, 0} -> 1, {2, 3} -> 4, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
 corresponding to the polynomial ![-x.z.z.y + 4 y.x
-+ 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_280.png)
++ 1](https://render.githubusercontent.com/render/math?math=-x.z.z.y+%2B+4+y.x+%2B+1)
 which contains only “square” quadratic terms of
-![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_281.png).
+![p(x,y,z)](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29).
 
 See also: `NCPolyQuadraticChipset`(\#NCPolyQuadraticChipset).
 
@@ -6756,13 +6702,11 @@ For example:
 
 corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4
 y.x + x
-+ 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_282.png)
-in which
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_283.png)
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_284.png)
-are transposes of each other, that is ![y =
-x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_285.png).
++ 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29+%3D+-x.z.z.y+%2B+2+z.y+%2B+3+z.x+%2B+4+y.x+%2B+x+%2B+1)
+in which ![x](https://render.githubusercontent.com/render/math?math=x)
+and ![y](https://render.githubusercontent.com/render/math?math=y) are
+transposes of each other, that is ![y =
+x^T](https://render.githubusercontent.com/render/math?math=y+%3D+x%5ET).
 Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
@@ -6776,10 +6720,10 @@ results in
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {1, 1} -> 1, {2, 2} -> 1|>, TransposePairs -> {{0, 1}}]
 
 corresponding to the polynomial ![x.z + y + x
-+ 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_286.png)
++ 1](https://render.githubusercontent.com/render/math?math=x.z+%2B+y+%2B+x+%2B+1)
 that contains only terms which contain monomials with the “left half” of
 the monomials of
-![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_287.png)
+![p(x,y,z)](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29)
 which can appear in an NC SOS decomposition of `p`.
 
 See also: `NCPolyQuadraticTerms`(\#NCPolyQuadraticTerms).
@@ -6795,7 +6739,7 @@ For example:
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
 corresponds to the polynomial ![x + 2 x y + 3 y x + 4
-x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_288.png)
+x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+x+y+%2B+3+y+x+%2B+4+x%5E2)
 and
 
     NCPolyReverseMonomials[p]
@@ -6805,7 +6749,7 @@ returns
     NCPoly[{1, 1}, <|{0, 1, 0} -> 1, {0, 2, 0} -> 4, {1, 1, 2} -> 2, {1, 1, 1} -> 3|>]
 
 which correspond to the polynomial ![x + 2 y x + 3 x y + 4
-x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_289.png).
+x^2](https://render.githubusercontent.com/render/math?math=x+%2B+2+y+x+%2B+3+x+y+%2B+4+x%5E2).
 
 See also: [NCIntegerReverse](#ncintegerreverse).
 
@@ -6925,7 +6869,7 @@ results in the matrices
           {  0,  0,  0,  0,  0 }}
 
 which are the Hankel matrices associated with the commutator ![x y - y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_290.png).
+x](https://render.githubusercontent.com/render/math?math=x+y+-+y+x).
 
 See also: [NCPolyRealization](#ncpolyrealization),
 [NCDigitsToIndex](#ncdigitstoindex).
@@ -6947,7 +6891,7 @@ For example:
 produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a row
 vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\,
 y\] . b + d = x y - y
-x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_291.png).
+x](https://render.githubusercontent.com/render/math?math=c+.+inv%5Ba0+%2B+ax+%5C%2C+x+%2B+ay+%5C%2C+y%5D+.+b+%2B+d+%3D+x+y+-+y+x).
 
 See also: [NCPolyHankelMatrix](#ncpolyhankelmatrix),
 [NCRational](#ncrational-1).
@@ -6984,10 +6928,10 @@ encoded by the elements of `list` where the digits are in base `b`.
 
 List of integers are used to codify monomials. For example the list
 `{0,1}` represents a monomial
-![xy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_292.png)
-and the list `{1,0}` represents the monomial
-![yx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_293.png).
-The call
+![xy](https://render.githubusercontent.com/render/math?math=xy) and the
+list `{1,0}` represents the monomial
+![yx](https://render.githubusercontent.com/render/math?math=yx). The
+call
 
     NCFromDigits[{0,0,0,1}, 2]
 
@@ -6996,8 +6940,8 @@ returns
     {4,1}
 
 in which `4` is the degree of the monomial
-![xxxy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_294.png)
-and `1` is `0001` in base `2`. Likewise
+![xxxy](https://render.githubusercontent.com/render/math?math=xxxy) and
+`1` is `0001` in base `2`. Likewise
 
     NCFromDigits[{0,2,1,1}, 3]
 
@@ -7006,8 +6950,8 @@ returns
     {4,22}
 
 in which `4` is the degree of the monomial
-![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_295.png)
-and `22` is `0211` in base `3`.
+![xzyy](https://render.githubusercontent.com/render/math?math=xzyy) and
+`22` is `0211` in base `3`.
 
 If `b` is a list, then degree is also a list with the partial degrees of
 each letters appearing in the monomial. For example:
@@ -7019,9 +6963,9 @@ returns
     {3, 1, 22}
 
 in which `3` is the partial degree of the monomial
-![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_296.png)
-with respect to letters `y` and `z`, `1` is the partial degree with
-respect to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
+![xzyy](https://render.githubusercontent.com/render/math?math=xzyy) with
+respect to letters `y` and `z`, `1` is the partial degree with respect
+to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 
 This construction is used to represent graded degree-lexicographic
 orderings.
@@ -7118,12 +7062,10 @@ all return
 ```
 
 which is the index of the monomial ![x
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_297.png) in
-the standard monomial basis of polynomials in
-![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_298.png)
-and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_299.png).
-Likewise
+y](https://render.githubusercontent.com/render/math?math=x+y) in the
+standard monomial basis of polynomials in
+![x](https://render.githubusercontent.com/render/math?math=x) and
+![y](https://render.githubusercontent.com/render/math?math=y). Likewise
 
     digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
     NCDigitsToIndex[digits, 2]
@@ -7181,11 +7123,11 @@ For example
 
 constructs an object associated with the noncommutative polynomial ![x y
 - 2 y
-z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_300.png) in
+z](https://render.githubusercontent.com/render/math?math=x+y+-+2+y+z) in
 variables `x`, `y` and `z`. The internal representation is so that the
 terms are sorted according to a degree-lexicographic order in `vars`. In
 the above example, ![x \< y \<
-z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_301.png).
+z](https://render.githubusercontent.com/render/math?math=x+%3C+y+%3C+z).
 
 ### NCPolyToNC
 
@@ -7925,7 +7867,7 @@ For example
     SetMonomialOrder[a,b,c]
 
 sets the lex order ![a \\ll b \\ll
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_302.png).
+c](https://render.githubusercontent.com/render/math?math=a+%5Cll+b+%5Cll+c).
 
 If one uses a list of variables rather than a single variable as one of
 the arguments, then multigraded lex order is used. For example
@@ -7933,7 +7875,7 @@ the arguments, then multigraded lex order is used. For example
     SetMonomialOrder[{a,b,c}]
 
 sets the graded lex order ![a \< b \<
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_303.png).
+c](https://render.githubusercontent.com/render/math?math=a+%3C+b+%3C+c).
 
 Another example:
 
@@ -7944,7 +7886,7 @@ or
     SetMonomialOrder[{a, b}, c]
 
 set the multigraded lex order ![a \< b \\ll
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_304.png).
+c](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c).
 
 Finally
 
@@ -7964,8 +7906,8 @@ There is also an older syntax which is still supported:
     SetMonomialOrder[{a, b, c}, n]
 
 sets the order of monomials to be ![a \< b \<
-c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_305.png) and
-assigns them grading level `n`.
+c](https://render.githubusercontent.com/render/math?math=a+%3C+b+%3C+c)
+and assigns them grading level `n`.
 
     SetMonomialOrder[{a, b, c}, 1]
 
@@ -7997,7 +7939,8 @@ is equivalent to
     SetMonomialOrder[{a,b}, {c}, {d}]
 
 which corresponds to the order ![a \< b \\ll c \\ll
-d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_306.png) and
+d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%5Cll+d)
+and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -8007,7 +7950,7 @@ is equivalent to
     SetMonomialOrder[{a,b}, {c, d}]
 
 which corresponds to the order ![a \< b \\ll c \<
-d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_307.png).
+d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%3C+d).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -8018,7 +7961,7 @@ and
     SetKnowns[{a},{b}] 
 
 result both in the order ![a \<
-b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_308.png).
+b](https://render.githubusercontent.com/render/math?math=a+%3C+b).
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous
 knowns and unknowns. For example
@@ -8029,7 +7972,7 @@ knowns and unknowns. For example
     SetUnknowns[a,b]
 
 results in an ordering ![c \< d \\ll a \\ll
-b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_309.png).
+b](https://render.githubusercontent.com/render/math?math=c+%3C+d+%5Cll+a+%5Cll+b).
 
 See also: [SetUnknowns](#setunknowns),
 [SetMonomialOrder](#setmonomialorder).
@@ -8052,7 +7995,8 @@ is equivalent to
     SetMonomialOrder[{a,b}, {c}, {d}]
 
 which corresponds to the order ![a \< b \\ll c \\ll
-d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_310.png) and
+d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%5Cll+d)
+and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -8062,7 +8006,7 @@ is equivalent to
     SetMonomialOrder[{a,b}, {c, d}]
 
 which corresponds to the order ![a \< b \\ll c \<
-d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_311.png).
+d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%3C+d).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -8073,7 +8017,7 @@ and
     SetKnowns[{a},{b}] 
 
 result both in the order ![a \<
-b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_312.png).
+b](https://render.githubusercontent.com/render/math?math=a+%3C+b).
 
 Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous
 knowns and unknowns. For example
@@ -8084,7 +8028,7 @@ knowns and unknowns. For example
     SetUnknowns[a,b]
 
 results in an ordering ![c \< d \\ll a \\ll
-b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_313.png).
+b](https://render.githubusercontent.com/render/math?math=c+%3C+d+%5Cll+a+%5Cll+b).
 
 See also: [SetKnowns](#setknowns),
 [SetMonomialOrder](#setmonomialorder).
@@ -8130,7 +8074,7 @@ For example
     PrintMonomialOrder[]
 
 print ![a \< b \\ll c \\ll
-d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_314.png).
+d](https://render.githubusercontent.com/render/math?math=a+%3C+b+%5Cll+c+%5Cll+d).
 
 See also: [SetKnowns](#setknowns), [SetUnknowns](#setunknowns),
 [SetMonomialOrder](#setmonomialorder),
@@ -8161,11 +8105,11 @@ returns
     gb = {x -> 1}
 
 that corresponds to the polynomial ![x
-- 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_315.png),
-which is the nc Gröbner basis for the ideal generated by
-![x^2-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_316.png)
+- 1](https://render.githubusercontent.com/render/math?math=x+-+1), which
+is the nc Gröbner basis for the ideal generated by
+![x^2-1](https://render.githubusercontent.com/render/math?math=x%5E2-1)
 and
-![x^3-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_317.png).
+![x^3-1](https://render.githubusercontent.com/render/math?math=x%5E3-1).
 
 `NCMakeGB[{poly1, poly2, ...}, k, options]` uses `options`.
 
@@ -8411,12 +8355,11 @@ See also: [NCSDPDual](#ncsdpdual), [NCSDPForm](#ncsdpform).
 
 `SDP` is a package that provides data structures for the numeric
 solution of semidefinite programs of the form:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_318.png)
-where
-![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_319.png)
-is a symmetric positive semidefinite matrix and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_320.png)
-is a vector of decision variables.
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
+where ![S](https://render.githubusercontent.com/render/math?math=S) is a
+symmetric positive semidefinite matrix and
+![y](https://render.githubusercontent.com/render/math?math=y) is a
+vector of decision variables.
 
 See the package [SDP](#sdp) for a potentially more efficient alternative
 to the basic implementation provided by this package.
@@ -8435,11 +8378,11 @@ Members are:
 `SDPMatrices[f, G, y]` converts the symbolic linear functions `f`, `G`
 in the variables `y` associated to the semidefinite program:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_321.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D+%0A++%5Cmin_y+%5Cquad+%26+f%28y%29%2C+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+G%28y%29+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
 
 into numerical data that can be used to solve an SDP in the form:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_322.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
 
 `SDPMatrices` returns a list with three entries:
 
@@ -8468,16 +8411,16 @@ See also: [SDPSolve](#sdpsolve).
 
 `SDPSolve[{A,b,c}]` solves an SDP in the form:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_323.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
 
 `SDPSolve` returns a list with four entries:
 
   - The first is the primal solution
-    ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_324.png);
+    ![y](https://render.githubusercontent.com/render/math?math=y);
   - The second is the dual solution
-    ![X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_325.png);
+    ![X](https://render.githubusercontent.com/render/math?math=X);
   - The third is the primal slack variable
-    ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_326.png);
+    ![S](https://render.githubusercontent.com/render/math?math=S);
   - The fourth is a list of flags:
       - `PrimalFeasible`: `True` if primal problem is feasible;
       - `FeasibilityRadius`: less than one if primal problem is
@@ -8503,8 +8446,8 @@ See also: [SDPMatrices](#sdpmatrices).
 ### SDPEval
 
 `SDPEval[A, y]` evaluates the linear function ![A
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_327.png) in
-an `SDP`.
+y](https://render.githubusercontent.com/render/math?math=A+y) in an
+`SDP`.
 
 This is a convenient replacement for [SDPPrimalEval](#sdpprimaleval) in
 which the list `y` can be used directly.
@@ -8515,8 +8458,8 @@ See also: [SDPPrimalEval](#sdpprimaleval), [SDPDualEval](#sdpdualeval),
 ### SDPPrimalEval
 
 `SDPPrimalEval[A, {{y}}]` evaluates the linear function ![A
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_328.png) in
-an `SDP`.
+y](https://render.githubusercontent.com/render/math?math=A+y) in an
+`SDP`.
 
 See [SDPEval](#sdpeval) for a convenient replacement for `SDPPrimalEval`
 in which the list `y` can be used directly.
@@ -8527,7 +8470,7 @@ See also: [SDPEval](#sdpeval), [SDPDualEval](#sdpdualeval),
 ### SDPDualEval
 
 `SDPDualEval[A, X]` evaluates the linear function ![A^\*
-X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_329.png) in
+X](https://render.githubusercontent.com/render/math?math=A%5E%2A+X) in
 an `SDP`.
 
 See also: [SDPPrimalEval](#sdpprimaleval), [SDPSolve](#sdpsolve),
@@ -8537,12 +8480,12 @@ See also: [SDPPrimalEval](#sdpprimaleval), [SDPSolve](#sdpsolve),
 
 `SDPSylvesterEval[a, W]` returns a matrix representation of the
 Sylvester mapping ![A^\* (W A (\\Delta\_y)
-W)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_330.png)
+W)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W+A+%28%5CDelta_y%29+W%29)
 when applied to the scaling `W`.
 
 `SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the
 Sylvester mapping ![A^\* (W\_l A (\\Delta\_y)
-W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_331.png)
+W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also: [SDPPrimalEval](#sdpprimaleval), [SDPDualEval](#sdpdualeval).
@@ -8551,12 +8494,11 @@ See also: [SDPPrimalEval](#sdpprimaleval), [SDPDualEval](#sdpdualeval).
 
 `SDPFlat` is a package that provides data structures for the numeric
 solution of semidefinite programs of the form:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_332.png)
-where
-![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_333.png)
-is a symmetric positive semidefinite matrix and
-![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_334.png)
-is a vector of decision variables.
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
+where ![S](https://render.githubusercontent.com/render/math?math=S) is a
+symmetric positive semidefinite matrix and
+![y](https://render.githubusercontent.com/render/math?math=y) is a
+vector of decision variables.
 
 It is a potentially more efficient alternative to the basic
 implementation provided by the package [SDP](#sdp).
@@ -8585,8 +8527,8 @@ See also: [SDP](#sdp).
 ### SDPFlatPrimalEval
 
 `SDPFlatPrimalEval[aFlat, y]` evaluates the linear function ![A
-y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_335.png) in
-an `SDPFlat`.
+y](https://render.githubusercontent.com/render/math?math=A+y) in an
+`SDPFlat`.
 
 See also: [SDPFlatDualEval](#sdpflatdualeval),
 [SDPFlatSylvesterEval](#sdpflatsylvestereval).
@@ -8594,7 +8536,7 @@ See also: [SDPFlatDualEval](#sdpflatdualeval),
 ### SDPFlatDualEval
 
 `SDPFlatDualEval[aFlat, X]` evaluates the linear function ![A^\*
-X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_336.png) in
+X](https://render.githubusercontent.com/render/math?math=A%5E%2A+X) in
 an `SDPFlat`.
 
 See also: [SDPFlatPrimalEval](#sdpflatprimaleval),
@@ -8604,12 +8546,12 @@ See also: [SDPFlatPrimalEval](#sdpflatprimaleval),
 
 `SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix representation of
 the Sylvester mapping ![A^\* (W A (\\Delta\_y)
-W)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_337.png)
+W)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W+A+%28%5CDelta_y%29+W%29)
 when applied to the scaling `W`.
 
 `SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix representation
 of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y)
-W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_338.png)
+W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also: [SDPFlatPrimalEval](#sdpflatprimaleval),
@@ -8619,12 +8561,10 @@ See also: [SDPFlatPrimalEval](#sdpflatprimaleval),
 
 `SDPSylvester` is a package that provides data structures for the
 numeric solution of semidefinite programs of the form:
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_339.png)
-where
-![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_340.png)
-is a symmetric positive semidefinite matrix and ![y = \\{ y\_1, \\ldots,
-y\_n
-\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_341.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+%5Csum_i+%5Coperatorname%7Btrace%7D%28b_i%5ET+y_i%29+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A+y+%2B+S+%3D+%5Cfrac%7B1%7D%7B2%7D+%5Csum_i+a_i+y_i+b_i+%2B+%28a_i+y_i+b_i%29%5ET+%2B+S+%3D+C+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
+where ![S](https://render.githubusercontent.com/render/math?math=S) is a
+symmetric positive semidefinite matrix and ![y = \\{ y\_1, \\ldots, y\_n
+\\}](https://render.githubusercontent.com/render/math?math=y+%3D+%5C%7B+y_1%2C+%5Cldots%2C+y_n+%5C%7D)
 is a list of matrix decision variables.
 
 Members are:
@@ -8638,7 +8578,7 @@ Members are:
 
 `SDPEval[A, y]` evaluates the linear function ![A y = \\frac{1}{2}
 \\sum\_i a\_i y\_i b\_i + (a\_i y\_i
-b\_i)^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_342.png)
+b\_i)^T](https://render.githubusercontent.com/render/math?math=A+y+%3D+%5Cfrac%7B1%7D%7B2%7D+%5Csum_i+a_i+y_i+b_i+%2B+%28a_i+y_i+b_i%29%5ET)
 in an `SDPSylvester`.
 
 This is a convenient replacement for
@@ -8652,7 +8592,7 @@ See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval),
 
 `SDPSylvesterPrimalEval[a, y]` evaluates the linear function ![A y =
 \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i
-b\_i)^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_343.png)
+b\_i)^T](https://render.githubusercontent.com/render/math?math=A+y+%3D+%5Cfrac%7B1%7D%7B2%7D+%5Csum_i+a_i+y_i+b_i+%2B+%28a_i+y_i+b_i%29%5ET)
 in an `SDPSylvester`.
 
 See [SDPSylvesterEval](#sdpsylvestereval) for a convenient replacement
@@ -8665,7 +8605,7 @@ See also: [SDPSylvesterDualEval](#sdpsylvesterdualeval),
 
 `SDPSylvesterDualEval[A, X]` evaluates the linear function ![A^\* X =
 \\{ b\_1 X a\_1, \\cdots, b\_n X a\_n
-\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_344.png)
+\\}](https://render.githubusercontent.com/render/math?math=A%5E%2A+X+%3D+%5C%7B+b_1+X+a_1%2C+%5Ccdots%2C+b_n+X+a_n+%5C%7D)
 in an `SDPSylvester`.
 
 For example
@@ -8677,12 +8617,12 @@ See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval),
 
 `SDPSylvesterEval[a, W]` returns a matrix representation of the
 Sylvester mapping ![A^\* (W A (\\Delta\_y)
-W)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_345.png)
+W)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W+A+%28%5CDelta_y%29+W%29)
 when applied to the scaling `W`.
 
 `SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the
 Sylvester mapping ![A^\* (W\_l A (\\Delta\_y)
-W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_346.png)
+W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval),
@@ -8692,20 +8632,19 @@ See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval),
 
 `PrimalDual` provides an algorithm for solving a pair of primal-dual
 semidefinite programs in the form
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_347.png)
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_348.png)
-where
-![X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_349.png)
-is the primal variable and
-![(y,S)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_350.png)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Ctag%7BPrimal%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmin_%7BX%7D+%5Cquad+%26+%5Coperatorname%7Btrace%7D%28c+X%29+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A%5E%2A%28X%29+%3D+b+%5C%5C%0A++++++++++++++++++++%26+X+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
+![](https://render.githubusercontent.com/render/math?math=%0A%5Ctag%7BDual%7D%0A%5Cbegin%7Baligned%7D%0A++%5Cmax_%7By%2C+S%7D+%5Cquad+%26+b%5ET+y+%5C%5C%0A++%5Ctext%7Bs.t.%7D+%5Cquad+%26+A%28y%29+%2B+S+%3D+c+%5C%5C%0A++++++++++++++++++++%26+S+%5Csucceq+0%0A%5Cend%7Baligned%7D%0A)
+where ![X](https://render.githubusercontent.com/render/math?math=X) is
+the primal variable and
+![(y,S)](https://render.githubusercontent.com/render/math?math=%28y%2CS%29)
 are the dual variables.
 
 The algorithm is parametrized and users should provide their own means
 of evaluating the mappings
-![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_351.png),
-![A^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_352.png)
+![A](https://render.githubusercontent.com/render/math?math=A),
+![A^\*](https://render.githubusercontent.com/render/math?math=A%5E%2A)
 and also the Sylvester mapping
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_353.png)
+![](https://render.githubusercontent.com/render/math?math=%0A++++A%5E%2A%28W_l+A%28%5CDelta_y%29+W_r%29%0A)
 used to solve the least-square subproblem.
 
 Users can develop custom algorithms that can take advantage of special
@@ -8724,16 +8663,16 @@ Members are:
 semidefinite program using a primal dual method.
 
 `PrimalEval` should return the primal mapping
-![A^\*(X)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_354.png)
+![A^\*(X)](https://render.githubusercontent.com/render/math?math=A%5E%2A%28X%29)
 when applied to the current primal variable `X` as in `PrimalEval @@ X`.
 
 `DualEval` should return the dual mapping
-![A(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_355.png)
+![A(y)](https://render.githubusercontent.com/render/math?math=A%28y%29)
 when applied to the current dual variable `y` as in `DualEval @@ y`.
 
 `SylvesterVecEval` should return a matrix representation of the
 Sylvester mapping ![A^\* (W\_l A (\\Delta\_y)
-W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_356.png)
+W\_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A+%28W_l+A+%28%5CDelta_y%29+W_r%29)
 when applied to the left- and right-scalings `Wl` and `Wr` as in
 `SylvesterVecEval @@ {Wl, Wr}`.
 
@@ -8970,8 +8909,8 @@ Members are:
 
 `NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a
 list of 3 matrices `{C,G,B}` such that ![C G^{-1}
-B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_357.png) is
-the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] ===
+B](https://render.githubusercontent.com/render/math?math=C+G%5E%7B-1%7D+B)
+is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] ===
 RationalExpression`.
 
 `C` and `B` do not contain any `UnknownsVariables` and `G` has linear
@@ -9046,8 +8985,8 @@ positive, negative and zero eigenvalues in the affine part of `Pencil`.
 
 `TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals
 ![C G^{-1}
-B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_358.png) by
-substituting random 2-by-2 matrices in for the unknowns.
+B](https://render.githubusercontent.com/render/math?math=C+G%5E%7B-1%7D+B)
+by substituting random 2-by-2 matrices in for the unknowns.
 `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be
 used to specify the `NumberOfTests`, the default being 5.
 
@@ -9077,7 +9016,7 @@ d-by-1 matrix (vector).
     calculation of the inverse of `m`.
 
 3.  This is in contrast with the commutative
-    ![x^4](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.5/eqn_47.png)
+    ![x^4](https://render.githubusercontent.com/render/math?math=x%5E4)
     which is convex everywhere. See \[@camino:MIS:2003\] for details.
 
 4.  The reason is that making an operator `Flat` is a convenience that
