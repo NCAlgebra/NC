@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Pandoc filter to convert all regular text to uppercase.
@@ -9,7 +9,7 @@ from pandocfilters import toJSONFilter, Para, Str, Image
 import re, sys, os
 import subprocess
 
-version = '5.0.4'
+version = '5.0.5'
 base_url = 'http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/'
 count = 0
 
@@ -47,6 +47,7 @@ def latex(formula, count):
                               'formula.pdf',
                               '-quality',
                               '90',
+                              '-strip',
                               'formula.png'],
                              stdin=subprocess.PIPE,
                              stdout=subprocess.PIPE)
@@ -56,7 +57,7 @@ def latex(formula, count):
         os.rename('formula.png','eqns/' + version + '/eqn_{}.png'.format(count))
         
     except subprocess.CalledProcessError as e:
-        print(e, file = sys.stderr)
+        sys.stderr.write(e)
     
         
 def filter(key, value, format, meta):

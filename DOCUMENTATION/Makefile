@@ -83,7 +83,7 @@ README.md: $(MANUAL)
              --bibliography references.bib \
 	     --filter makeindex.py \
 	     -o README.tmp.md
-	pandoc README.tmp.md -t markdown_github \
+	pandoc README.tmp.md -t gfm \
 	     --filter github-mangle.py \
 	     --filter tex2img.py \
 	     -o README.md
