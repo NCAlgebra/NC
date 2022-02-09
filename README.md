@@ -1,6 +1,6 @@
 # NCAlgebra - Version 5.0.5
 
-Thanks for your interest in NCAlgebra. As of 19 Jan 2022, this produces two failed tests with Mathematica 13.
+Thanks for your interest in NCAlgebra.
 
 [![donate](http://math.ucsd.edu/~ncalg/DOCUMENTATION/donate_small.png)](https://giveto.ucsd.edu/make-a-gift?id=d86e6857-0c22-4102-ae7a-bfdc9487cb1d)
 
