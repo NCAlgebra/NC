@@ -3307,7 +3307,7 @@ be displayed as
 
 <div style="display:block;">
 
-![inline equation](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7B%28tp%5Ba%5D%20%2B%20b%29%7D%5E%7B-1%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%28%5Cmathrm%7Btp%5Ba%5D%7D%20%2B%20%5Cmathrm%7Bb%7D%29%5E%7B-1%7D)
 
 </div>
 
@@ -3317,7 +3317,11 @@ Conversely
 
 makes `expr` be displayed as
 
-`inv[a<sup>T</sup> + b]`
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Binv%7D%5Cmathrm%7B%5B%7D%5Cmathrm%7Ba%7D%5ET%20%2B%20%5Cmathrm%7Bb%7D%5Cmathrm%7B%5D%7D)
+
+</div>
 
 The default settings are
 
