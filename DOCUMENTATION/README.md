@@ -3305,7 +3305,7 @@ makes the expression
 
 be displayed as
 
-(tp[a] + b)``<sup>-1</sup>
+`(tp[a] + b)` <sup>-1</sup>
 
 Conversely
 
@@ -3313,7 +3313,7 @@ Conversely
 
 makes `expr` be displayed as
 
-`inv[a`![{}^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%7B%7D%5E%5Cmathtt%7BT%7D&mode=inline) `+ b]`
+`inv[a<sup>T</sup> + b]`
 
 The default settings are
 
