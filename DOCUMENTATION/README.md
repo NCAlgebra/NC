@@ -3307,7 +3307,7 @@ be displayed as
 
 <div style="display:block;">
 
-![inline equation](https://render.githubusercontent.com/render/math?math=%28%5Cmathrm%7Btp%5Ba%5D%7D%20%2B%20%5Cmathrm%7Bb%7D%29%5E%7B-1%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%28%5Cmathtt%7Btp%5Ba%5D%7D%20%2B%20%5Cmathtt%7Bb%7D%29%5E%7B-1%7D)
 
 </div>
 
@@ -3319,7 +3319,7 @@ makes `expr` be displayed as
 
 <div style="display:block;">
 
-![inline equation](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Binv%7D%5Cmathrm%7B%5B%7D%5Cmathrm%7Ba%7D%5ET%20%2B%20%5Cmathrm%7Bb%7D%5Cmathrm%7B%5D%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cmathtt%7Binv%7D%5Cmathtt%7B%5B%7D%5Cmathtt%7Ba%7D%5ET%20%2B%20%5Cmathtt%7Bb%7D%5Cmathtt%7B%5D%7D)
 
 </div>
 
@@ -3329,16 +3329,20 @@ The default settings are
 
 which makes `expr` be displayed as
 
-`(a`![^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5E%5Cmathtt%7BT%7D&mode=inline) `+ b)`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D&mode=inline)
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%28%5Cmathtt%7Ba%7D%5E%5Cmathtt%7BT%7D%20%2B%20%5Cmathtt%7Bb%7D%29%5E%7B-1%7D)
+
+</div>
 
 The complete set of options and their default values are:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘`x` ![\\bullet](https://render.githubusercontent.com/render/math?math=%5Cbullet&mode=inline) `y`’;
--   `tp` (`True`): If `True` `tp[x]` is displayed as ‘`x`![^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5E%5Cmathtt%7BT%7D&mode=inline)’;
--   `inv` (`True`): If `True` `inv[x]` is displayed as ‘`x`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D&mode=inline)’;
--   `aj` (`True`): If `True` `aj[x]` is displayed as ‘`x`![^\*](https://render.githubusercontent.com/render/math?math=%5E%2A&mode=inline)’;
+-   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\\mathtt{x} \\bullet \`\\mathtt{y}](https://render.githubusercontent.com/render/math?math=%5Cmathtt%7Bx%7D%20%5Cbullet%20%60%5Cmathtt%7By%7D&mode=inline)’;
+-   `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\\mathtt{x}^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5Cmathtt%7Bx%7D%5E%5Cmathtt%7BT%7D&mode=inline)’;
+-   `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\\mathtt{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathtt%7Bx%7D%5E%7B-1%7D&mode=inline)’;
+-   `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\\mathtt{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathtt%7Bx%7D%5E%2A&mode=inline)’;
 -   `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathtt{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathtt%7Bx%7D%7D&mode=inline)’;
--   `rt` (`True`): If `True` `rt[x]` is displayed as ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1/2%7D&mode=inline)’.
+-   `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\\mathtt{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathtt%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
 
 The special symbol `All` can be used to set all options to `True` or
 `False`, as in
