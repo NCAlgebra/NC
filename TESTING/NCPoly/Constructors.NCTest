@@ -569,4 +569,10 @@ Block[
   NCTest[NCPolyGetCoefficients[p2], {1, 1, 1, 1}];
   NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {0, 2}}];
 
+  (* NCPolyPossibleZeroQ *)
+  NCTest[NCPolyPossibleZeroQ[1], False];
+  NCTest[NCPolyPossibleZeroQ[0], True];
+  NCTest[NCPolyPossibleZeroQ[0.], True];
+  NCTest[NCPolyPossibleZeroQ[1 + Exp[2/3 Pi I] + Exp[-2/3 Pi I]], True];
+
 ];

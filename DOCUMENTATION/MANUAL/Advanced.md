@@ -13,10 +13,12 @@ discuss some issues related to Mathematica's implementation of rules
 and replacements that can affect the behavior of `NCAlgebra`
 expressions.
 
+### `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`) often fail
+
 The first issue is related to how Mathematica performs substitutions,
 which is through
 [pattern matching](http://reference.wolfram.com/language/guide/RulesAndPatterns.html). For
-a rule to be effective if has to *match* the *structural*
+a rule to be effective if has to match the *structural*
 representation of an expression. That representation might be
 different than one would normally think based on the usual properties
 of mathematical operators. For example, one would expect the rule:
@@ -42,7 +44,7 @@ with `expr` taking the above expressions would result in:
 	2 a * b
 
 Indeed, Mathematica's attribute `Flat` does precisely that. Note that
-this is stil *structural matching*, not *mathematical matching*, since
+this is still *structural matching*, not *mathematical matching*, since
 the pattern `1 + x_` would not match an integer `2`, even though one
 could write `2 = 1 + 1`!
 
@@ -71,15 +73,18 @@ but will fail to produce the *expected* result in cases like:
 	c**a**b**d
 	1 + 2 a**b**c
 
-That's what the `NCAlgebra` family of replacement functions are made
-for. Calling
+That's what the `NCAlgebra` family of replacement functions discussed in the next section are made for.
+
+### The fix is `NCReplace`
+
+Continuing with the example in the previous section, the calls
 
 	NCReplaceAll[a**b**c, rule]
 	NCReplaceAll[ c**a**b, rule ]
 	NCReplaceAll[c**a**b**d, rule]
 	NCReplaceAll[1 + 2 a**b**c, rule ]
 
-would produce the results one would expect:
+produces the results one would expect:
 
 	c**c
 	c**c
@@ -88,7 +93,7 @@ would produce the results one would expect:
 
 For this reason, when substituting in `NCAlgebra` it is always safer
 to use functions from the [`NCReplace` package](#PackageNCReplace)
-rather than the corresponding Mathematice `Replace` family of
+rather than the corresponding Mathematica `Replace` family of
 functions. Unfortunately, this comes at a the expense of sacrificing
 the standard operators `/.` (`ReplaceAll`) and `//.`
 (`ReplaceRepeated`), which cannot be safely overloaded, forcing one to
@@ -110,10 +115,12 @@ alternative rule:
 
 which results in `b**b + c`, as one might expect.
 
+### Trouble with `Block` and `Module`
+
 A second more esoteric issue related to substitution in `NCAlgebra`
-does not a clean solution. It is also one that usually lurks into
+does not have a clean solution. It is also one that usually lurks in
 hidden pieces of code and can be very difficult to spot. We have been
-victim of such "bug" many times. Luckily it only affect advanced users
+victim of such "bugs" many times. Luckily it only affect advanced users
 that are using `NCAlgebra` inside their own functions using
 Mathematica's `Block` and `Module` constructions. It is also not a
 real bug, since it follows from some often not well understood issues
@@ -143,11 +150,11 @@ which returns the ``surprising''
 	a + i**i
 
 The reason for this behavior is that `Block` effectively evaluates `i`
-as a *local variable* and then `m` using whatever values are available
+as a *local variable* and evaluates `m` using whatever values are available
 at the time of evaluation, whereas `Module` only evaluates the symbol
 `i` which appears *explicitly* in `i + m` and not `m` using the local
 value of `i = a`. This can lead to many surprises when using
-rules and substitution inside `Module`. For example:
+rules and substitution inside a `Module`. For example:
 
 	Block[{i = a}, i_ -> i]
 
@@ -248,7 +255,7 @@ questionable, since something like
     appearance in a rule that triggers the mostly odd behavior.
 
 
-## Matrices {#AdvancedMatrices}
+## Expanding matrix products {#AdvancedMatrices}
 
 Starting at **Version 5** the operators `**` and `inv` apply also to
 matrices. However, in order for `**` and `inv` to continue to work as
@@ -278,7 +285,7 @@ evaluation takes place returning
 
 	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
 	
-which is what would have been by calling `NCDot[m1,m2]`[^matmult]. Likewise
+which is what would have arisen from calling `NCDot[m1,m2]`[^matmult]. Likewise
 
 	inv[m1]
 
@@ -294,6 +301,10 @@ returns the evaluated result
 
 	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
 	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+
+or, using `MatrixForm`:
+
+$\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}$
 
 [^matmult]: Formerly `MatMult[m1,m2]`.
 
@@ -335,30 +346,27 @@ returns
 	
 as expected.
 
-**WARNING:** Mathematica's choice of treating lists and matrix
-indistinctively can cause much trouble when mixing `**` with `Plus`
-(`+`) operator. For example, the expression
+### Trouble with `Plus` (`+`) and matrices
 
-	m1**m2 + m2**m1
-	
-results in
+Mathematica's choice of treating lists and matrix indistinctively can
+cause much trouble when mixing `**` with `Plus` (`+`) operator. The
+reason for that is that `Plus` is `Listable`, and an expression like
 
-	{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
-	
-and 
-	
-	m1**m2 + m2**m1 // NCMatrixExpand
-	
-produces the expected result
+    z + m1
 
-	{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
-	 {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
- 
-However, because `**` is held unevaluated, the expression
+where `m1` is an array and `z` is not, is automatically expanded into
+
+    {{a + z, b + z}, {c + z, d + z}}
+
+or, using `MatrixForm`:
+
+$\begin{bmatrix} a + z & b + z \\ c + z & d + z \end{bmatrix}$
+
+Because of this "feature", the expression
 
 	m1**m2 + m2 // NCMatrixExpand
 	
-returns the "wrong" result
+evaluates to the "wrong" result
 
 	{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
 	 {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
@@ -378,39 +386,42 @@ or
 
 	NCDot[m1, m2] + m2
 
-The reason for this behavior is that `m1**m2` is essentially treated
+The reason for the behavior is that `m1**m2` is essentially treated
 as a *scalar* (it does not have *head* `List`) and therefore gets
 added entrywise to `m2` *before* `NCMatrixExpand` has a chance to
-evaluate the `**` product. There are no easy fixes for this problem,
-which affects not only `NCAlgebra` but any similar type of matrix
-product evaluation in Mathematica. With `NCAlgebra`, a better option
-is to use [`NCMatrixReplaceAll`](#NCMatrixReplaceAll) or
-[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated).
+evaluate the `**` product. 
 
-[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) and
-[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated) are special
-versions of [`NCReplaceAll`](#NCReplaceAll) and
-[`NCReplaceRepeated`](#NCReplaceRepeated) that take extra steps to
-preserve matrix consistency when replacing expressions with nc
-matrices. For example
+There are no easy fixes for this problem, which affects not only
+`NCAlgebra` but any similar type of matrix product evaluation in
+Mathematica. With `NCAlgebra`, a better option is to use
+[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) or
+[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated). As seen in the
+section [Replace with matrices](#ReplaceWithMatrices), the command
 
 	NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
 	
-does produce the "correct" result
+produces the expected result:
 
 	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
 	 {e + c**d + d**e, 3 + 2 c + 3 d}}
 
-[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) and
-[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated) also work with
-block matrices. For example
+Note that the above behavior might be erratic, since in an expression like
 
-	rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}}
-	NCMatrixReplaceRepeated[inv[z], rule]
+	m1**m2 + m2**m1
+	
+in which `**` is kept unevaluated as in
 
-coincides with the result of
+	{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
 
-	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
+the command
+	
+	m1**m2 + m2**m1 // NCMatrixExpand
+	
+expands to the expected result
+
+	{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+	 {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
+
 
 ## Polynomials with commutative coefficients {#PolysWithCommutativeCoefficients}
 
@@ -530,8 +541,8 @@ prints out
 $x \ll y < z$
 
 from where you can see that grouping variables inside braces induces a
-graded type ordering, as discussed in Section
-\ref{Orderings}. `NCPoly`s constructed from different orderings cannot
+graded type ordering, as discussed in [Noncommutative Gröbner
+Basis](#NCGB). `NCPoly`s constructed from different orderings cannot
 be combined.
 
 There is also a special constructor for monomials. For example
@@ -750,173 +761,13 @@ y^T
 \end{aligned}
 $$
 
-See section [linear functions](#Linear) for more features on
+See section [linear polynomials](#Linear) for more features on
 linear polynomial matrices.
-
-## Quadratic polynomials {#Quadratic}
-
-When working with nc quadratics it is useful to be able to factor the
-quadratic into the following form
-$$
-	q(x) = c + s(x) + l(x) M r(x)
-$$
-where $s$ is linear $x$ and $l$ and $r$ are vectors and $M$ is a
-matrix. Load the package
-
-	<< NCQuadratic`
-
-and use the command
-[`NCToNCQuadratic`](#NCToNCQuadratic) to factor an nc polynomial into the the above form:
-
-	vars = {x, y};
-	expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
-	{const, lin, left, middle, right} = NCPToNCQuadratic[expr, vars];
-
-which returns
-
-	left = {tp[x],tp[y]}
-	right = {y, x**d}
-	middle = {{a,b}, {tp[b],c}}
-	
-and zero `const` and `lin`. The format for the linear part `lin` will
-be discussed lated in Section [Linear](#Linear). Note that
-coefficients of an nc quadratic may also appear on the left and right
-vectors, as `d` did in the above example. You can also convert an
-`NCPolynomial` using
-[`NCPToNCQuadratic`](#NCPToNCQuadratic). Conversely,
-[`NCQuadraticToNC`](#NCQuadraticToNC) converts a list with factors
-back to an nc expression as in:
-
-	NCQuadraticToNC[{const, lin, left, middle, right}]
-	
-which results in 
-
-	(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
-
-An interesting application is the verification of the domain in which
-an nc rational is *convex*. Take for example the quartic
-
-	expr = x**x**x**x;
-
-and calculate its noncommutative directional *Hessian*
-
-	hes = NCHessian[expr, {x, h}]
-	
-This command returns
-
-	2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
-
-which is quadratic in the direction `h`. The decomposition of the
-nc Hessian using `NCToNCQuadratic`
-
-	{const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];
-
-produces
-
-	left = {h, x**h, x**x**h}
-	right = {h**x**x, h**x, h}
-	middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
-
-Note that the middle matrix
-$$
-\begin{bmatrix}
-2 & 2 x & 2 x^2 \\
-0 & 2 & 2 x \\
-0 & 0 & 2
-\end{bmatrix}
-$$
-is not *symmetric*, as one might have expected. The command
-[`NCQuadraticMakeSymmetric`](#NCQuadraticMakeSymmetric) can fix that
-and produce a symmetric decomposition. For the above example
-
-	{const, lin, sleft, smiddle, sright} = 
-	  NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
-	                           SymmetricVariables -> {x, h}]
-
-results in
-
-	sleft = {x**x**h, x**h, h}
-	sright = {h**x**x, h**x, h}
-	middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
-
-in which `middle` is the symmetric matrix
-$$
-\begin{bmatrix}
-0 & 0 & 2 \\
-0 & 2 & 2 x \\
-2 & 2 x & 2 x^2
-\end{bmatrix}
-$$
-Note the argument `SymmetricVariables -> {x,h}` which tells
-`NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
-variables. Because the `middle` matrix is never positive semidefinite
-for any possible value of $x$ the conclusion[^convex] is that the nc quartic
-$x^4$ is *not convex*.
-
-[^convex]: This is in contrast with the commutative $x^4$ which is
-    convex everywhere. See [@camino:MIS:2003] for details.
-
-The production of such symmetric quadratic decompositions is automated
-by the convenience command
-[`NCMatrixOfQuadratic`](#NCMatrixOfQuadratic). Verify that
-
-	{sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]
-
-automatically assumes that both `x` and `h` are symmetric variables
-and produces suitable left and right vectors as well as a symmetric
-middle matrix. Now we illustrate the application of such command to
-checking the convexity region of a noncommutative rational function.
-
-If one is interested in checking convexity of nc rationals the package
-[`NCConvexity`](#PackageNCConvexity) has functions that automate the
-whole process, including the calculation of the Hessian and the middle
-matrix, followed by the diagonalization of the middle matrix as
-produced by [`NCLDLDecomposition`](#NCLDLDecomposition).
-
-For example, the commands evaluate the nc Hessian and calculates its
-quadratic decomposition
-
-	expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
-	{left, middle, right} =	NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];
-
-The resulting middle matrix can be factored using
-
-	{ldl, p, s, rank} = NCLDLDecomposition[middle];
-	{ll, dd, uu} = GetLDUMatrices[ldl, s];
-
-which produces the diagonal factors
-$$
-\begin{bmatrix}
-  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\
-  0 & 0 & 0 \\
-  0 & 0 & 0
-\end{bmatrix}
-$$
-which indicates the the original nc rational is convex whenever
-$$
-(1 + b y + y b - a x a)^{-1} \succeq 0
-$$
-or, equivalently, whenever
-$$
-1 + b y + y b - a x a \succeq 0
-$$
-The above sequence of calculations is automated by the command
-[`NCConvexityRegion`](#NCConvexityRegion) as in 
-
-	<< NCConvexity`
-	NCConvexityRegion[expr, {x}]
-
-which results in 
-
-	{2 (1 + b**y + y**b - a**x**a)^-1, 0}
-
-which correspond to the diagonal entries of the LDL decomposition of
-the middle matrix of the nc Hessian.
 
 ## Linear polynomials {#Linear}
 
 Another interesting class of nc polynomials is that of linear
-polynomials, which can be factor in the form:
+polynomials, which can be factored in the form:
 $$
 	s(x) = l (F \otimes x) r
 $$

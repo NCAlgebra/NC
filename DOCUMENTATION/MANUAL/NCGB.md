@@ -269,6 +269,47 @@ which results in
 
 	simp = b
 
+## Minimal versus reduced Gröbner Basis
+
+The algorithm implemented by `NCGB` always produces a Gröbner Basis
+with the *minimal* possible number of polynomials. However, such
+polynomials are not necessarily the "simplest" possible polynomials;
+called the *reduced* Gröbner Basis. The *reduced* Gröbner Basis is
+unique given the relations and the monomial order. Consider for
+example the following monimial order
+
+    SetMonomialOrder[x, y]
+	
+and the relations
+
+    rels = {x^3 - 2 x ** y, x^2 ** y - 2 y^2 + x}
+	
+for which
+
+    NCMakeGB[rels]
+	
+produces the following *minimal* Gröbner Basis
+
+	x**x->0
+	x**y->x**x**x/2
+	y**x->x**y
+	y**y->x/2+x**x**y/2
+
+but 
+
+    NCMakeGB[rels, ReduceBasis -> True]
+
+returns the *reduced* Gröbner Basis
+
+	x**x->0
+    x**y->0
+	y**x->0
+	y**y->x/2
+
+in which not only the leading mononials but also all lower-order
+monomials have been reduced by the basis' leading monomials.
+
+
 ## Simplifying rational expresions
 
 It is often desirable to simplify expressions involving inverses of
@@ -317,7 +358,7 @@ and results in the rules:
 
 As in the previous example, the GB revealed new relationships that
 must hold true if $1- x$ is invertible, and one can use this
-relationship to \emph{simplify} the original expression using
+relationship to *simplify* the original expression using
 `NCReplaceRepeated` as in:
 
 	NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]
@@ -397,6 +438,10 @@ To impose lexicographic order, say $a\ll b\ll x\ll y$ on $a$, $b$, $x$
 and $y$, one types
 
 	SetMonomialOrder[a,b,x,y];
+
+or, equivalently
+
+	SetMonomialOrder[{a},{b},{x},{y}];
 
 This order is useful for attempting to solve for $y$ in terms of $a$,
 $b$ and $x$, since the highest priority of the GB algorithm is to
@@ -579,8 +624,8 @@ identity
 We use `Flatten` to reduce the matrix relations to a simple list of
 relations. The resulting relations in this case are:
 
-	rel = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
-           -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}
+	rels = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
+            -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}
 
 After running
 
@@ -650,3 +695,4 @@ $$
 provide formulas, this time for $z$, $w$, and $z$ in terms of $y$
 satisfying $y \, c \, y = y+b \, d \, a$. Note that these formulas do
 not involve $c^{-1}$ since $c$ is no longer assumed invertible.
+

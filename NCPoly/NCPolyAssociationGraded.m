@@ -190,7 +190,7 @@ Begin["`Private`"];
            NCPoly::InvalidList
     ];
       
-    If[p[[1]] == Vars,
+    If[p[[1]] === Vars,
        (* same poly's, return *)
        Return[p];
     ];
@@ -492,7 +492,8 @@ Begin["`Private`"];
   (* Plus *)
   NCPolySum[r_NCPoly, s_NCPoly] := NCPoly[
     r[[1]], 
-    KeySort[DeleteCases[Merge[{r[[2]], s[[2]]}, Total], 0]],
+    (* KeySort[DeleteCases[Merge[{r[[2]], s[[2]]}, Total], 0]], *)
+    KeySort[DeleteCases[Merge[{r[[2]], s[[2]]}, Total], _?NCPolyPossibleZeroQ]],
     NCPolyGetOptionsSequence[s]
   ] /; s[[1]] === r[[1]];
 
@@ -660,9 +661,12 @@ Begin["`Private`"];
                 r -= NCPoly`Private`QuotientExpand[qi, g];
                 If[ debugLevel > 1, Print["r = ", NCPolyDisplay[r]]; Print["j = ", j]; ];
            ];
-           If [ r === 0,
+           (* MAURICIO: OK to test with exact 0 here because
+              QuotientExpand will apply NCPolyPossibleZeroQ *)
+           If [ r === 0, 
                 (* no reminder, terminate *)
                 If[ debugLevel > 1, Print["no reminder, terminate"]; ];
+                r = 0;
                 Break[];
            ];
     ];

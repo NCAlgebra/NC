@@ -1,304 +1,317 @@
--   [Acknowledgements](#acknowledgements)
--   [Changes in Version 5.0](#changes-in-version-50)
-    -   [Version 5.0.4](#version-504)
-    -   [Version 5.0.3](#version-503)
-    -   [Version 5.0.2](#version-502)
-    -   [Version 5.0.1](#version-501)
-    -   [Version 5.0.0](#version-500)
--   [Introduction](#introduction)
-    -   [Running NCAlgebra](#running-ncalgebra)
-    -   [Now what?](#now-what)
-    -   [Testing](#testing)
-    -   [Pre-2017 NCGB C++ version](#pre-2017-ncgb-c-version)
--   [Most Basic Commands](#most-basic-commands)
-    -   [To Commute Or Not To Commute?](#to-commute-or-not-to-commute)
-    -   [Inverses, Transposes and Adjoints](#inverses-transposes-and-adjoints)
-    -   [Replace](#replace)
-    -   [Polynomials](#polynomials)
-    -   [Rationals and Simplification](#rationals-and-simplification)
-    -   [Calculus](#calculus)
-    -   [Matrices](#matrices)
--   [More Advanced Commands](#more-advanced-commands)
-    -   [Advanced Rules and Replacements](#advanced-rules-and-replacements)
-    -   [Matrices](#matrices-1)
-    -   [Polynomials with commutative coefficients](#polynomials-with-commutative-coefficients)
-    -   [Polynomials with noncommutative coefficients](#polynomials-with-noncommutative-coefficients)
-    -   [Quadratic polynomials](#quadratic-polynomials)
-    -   [Linear polynomials](#linear-polynomials)
--   [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis)
-    -   [What is a Gröbner Basis?](#what-is-a-gröbner-basis)
-    -   [Solving equations](#solving-equations)
-    -   [A slightly more challenging example](#a-slightly-more-challenging-example)
-    -   [Simplifying polynomial expresions](#simplifying-polynomial-expresions)
-    -   [Simplifying rational expresions](#simplifying-rational-expresions)
-    -   [Simplification with NCGBSimplifyRational](#simplification-with-ncgbsimplifyrational)
-    -   [Ordering on variables and monomials](#ordering-on-variables-and-monomials)
-        -   [Lex Order: the simplest elimination order](#lex-order-the-simplest-elimination-order)
-        -   [Graded lex ordering: a non-elimination order](#graded-lex-ordering-a-non-elimination-order)
-        -   [Multigraded lex ordering: a variety of elimination orders](#multigraded-lex-ordering-a-variety-of-elimination-orders)
-    -   [A complete example: the partially prescribed matrix inverse problem](#a-complete-example-the-partially-prescribed-matrix-inverse-problem)
--   [Semidefinite Programming](#semidefinite-programming)
-    -   [Semidefinite Programs in Matrix Variables](#semidefinite-programs-in-matrix-variables)
-    -   [Semidefinite Programs in Vector Variables](#semidefinite-programs-in-vector-variables)
--   [Pretty Output with Notebooks and ](#pretty-output-with-notebooks-and)
-    -   [Pretty Output](#pretty-output)
-    -   [Using NCTeX](#using-nctex)
-        -   [NCTeX Options](#nctex-options)
-    -   [Using NCTeXForm](#using-nctexform)
--   [Introduction](#introduction-1)
--   [Packages for manipulating NC expressions](#packages-for-manipulating-nc-expressions)
-    -   [NonCommutativeMultiply](#noncommutativemultiply)
-        -   [aj](#aj)
-        -   [co](#co)
-        -   [Id](#id)
-        -   [inv](#inv)
-        -   [rt](#rt)
-        -   [tp](#tp)
-        -   [CommutativeQ](#commutativeq)
-        -   [NonCommutativeQ](#noncommutativeq)
-        -   [SetCommutative](#setcommutative)
-        -   [SetNonCommutative](#setnoncommutative)
-        -   [SetNonCommutativeHold](#setnoncommutativehold)
-        -   [SNC](#snc)
-        -   [SetCommutingOperators](#setcommutingoperators)
-        -   [UnsetCommutingOperators](#unsetcommutingoperators)
-        -   [CommutingOperatorsQ](#commutingoperatorsq)
-        -   [Commutative](#commutative)
-        -   [CommuteEverything](#commuteeverything)
-        -   [BeginCommuteEverything](#begincommuteeverything)
-        -   [EndCommuteEverything](#endcommuteeverything)
-        -   [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
-        -   [NCExpand](#ncexpand)
-        -   [NCE](#nce)
-    -   [NCCollect](#nccollect)
-        -   [NCCollect](#nccollect-1)
-        -   [NCCollectSelfAdjoint](#nccollectselfadjoint)
-        -   [NCCollectSymmetric](#nccollectsymmetric)
-        -   [NCStrongCollect](#ncstrongcollect)
-        -   [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
-        -   [NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
-        -   [NCCompose](#nccompose)
-        -   [NCDecompose](#ncdecompose)
-        -   [NCTermsOfDegree](#nctermsofdegree)
-        -   [NCTermsOfTotalDegree](#nctermsoftotaldegree)
-    -   [NCReplace](#ncreplace)
-        -   [NCReplace](#ncreplace-1)
-        -   [NCReplaceAll](#ncreplaceall)
-        -   [NCReplaceList](#ncreplacelist)
-        -   [NCReplaceRepeated](#ncreplacerepeated)
-        -   [NCR](#ncr)
-        -   [NCRA](#ncra)
-        -   [NCRR](#ncrr)
-        -   [NCRL](#ncrl)
-        -   [NCMakeRuleSymmetric](#ncmakerulesymmetric)
-        -   [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
-        -   [NCReplaceSymmetric](#ncreplacesymmetric)
-        -   [NCReplaceAllSymmetric](#ncreplaceallsymmetric)
-        -   [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
-        -   [NCReplaceListSymmetric](#ncreplacelistsymmetric)
-        -   [NCRSym](#ncrsym)
-        -   [NCRASym](#ncrasym)
-        -   [NCRRSym](#ncrrsym)
-        -   [NCRLSym](#ncrlsym)
-        -   [NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
-        -   [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
-        -   [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
-        -   [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
-        -   [NCRSA](#ncrsa)
-        -   [NCRASA](#ncrasa)
-        -   [NCRRSA](#ncrrsa)
-        -   [NCRLSA](#ncrlsa)
-        -   [NCMatrixReplaceAll](#ncmatrixreplaceall)
-        -   [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
-    -   [NCSelfAdjoint](#ncselfadjoint)
-        -   [NCSymmetricQ](#ncsymmetricq)
-        -   [NCSymmetricTest](#ncsymmetrictest)
-        -   [NCSymmetricPart](#ncsymmetricpart)
-        -   [NCSelfAdjointQ](#ncselfadjointq)
-        -   [NCSelfAdjointTest](#ncselfadjointtest)
-    -   [NCSimplifyRational](#ncsimplifyrational)
-        -   [NCNormalizeInverse](#ncnormalizeinverse)
-        -   [NCSimplifyRational](#ncsimplifyrational-1)
-        -   [NCSR](#ncsr)
-        -   [NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass)
-        -   [NCPreSimplifyRational](#ncpresimplifyrational)
-        -   [NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass)
-    -   [NCDiff](#ncdiff)
-        -   [NCDirectionalD](#ncdirectionald)
-        -   [NCGrad](#ncgrad)
-        -   [NCHessian](#nchessian)
-        -   [DirectionalD](#directionald)
-        -   [NCIntegrate](#ncintegrate)
-    -   [NCConvexity](#ncconvexity)
-        -   [NCIndependent](#ncindependent)
-        -   [NCConvexityRegion](#ncconvexityregion)
--   [Packages for manipulating NC block matrices](#packages-for-manipulating-nc-block-matrices)
-    -   [NCDot](#ncdot)
-        -   [tpMat](#tpmat)
-        -   [ajMat](#ajmat)
-        -   [coMat](#comat)
-        -   [NCDot](#ncdot-1)
-        -   [NCInverse](#ncinverse)
-        -   [NCMatrixExpand](#ncmatrixexpand)
-    -   [NCMatrixDecompositions](#ncmatrixdecompositions)
-        -   [NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting)
-        -   [NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting)
-        -   [NCLDLDecomposition](#ncldldecomposition)
-        -   [NCUpperTriangularSolve](#ncuppertriangularsolve)
-        -   [NCLowerTriangularSolve](#nclowertriangularsolve)
-        -   [NCLUInverse](#ncluinverse)
-        -   [NCLUPartialPivoting](#nclupartialpivoting)
-        -   [NCLUCompletePivoting](#nclucompletepivoting)
-        -   [NCLeftDivide](#ncleftdivide)
-        -   [NCRightDivide](#ncrightdivide)
-    -   [MatrixDecompositions: linear algebra templates](#matrixdecompositions-linear-algebra-templates)
-        -   [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting)
-        -   [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting)
-        -   [LDLDecomposition](#ldldecomposition)
-        -   [UpperTriangularSolve](#uppertriangularsolve)
-        -   [LowerTriangularSolve](#lowertriangularsolve)
-        -   [LUInverse](#luinverse)
-        -   [GetLUMatrices](#getlumatrices)
-        -   [GetLDUMatrices](#getldumatrices)
-        -   [GetDiagonal](#getdiagonal)
-        -   [LUPartialPivoting](#lupartialpivoting)
-        -   [LUCompletePivoting](#lucompletepivoting)
-        -   [LURowReduce](#lurowreduce)
-        -   [LURowReduceIncremental](#lurowreduceincremental)
--   [Packages for pretty output, testing, and utilities](#packages-for-pretty-output-testing-and-utilities)
-    -   [NCOutput](#ncoutput)
-        -   [NCSetOutput](#ncsetoutput)
-    -   [NCTeX](#nctex)
-        -   [NCTeX](#nctex-1)
-        -   [NCRunDVIPS](#ncrundvips)
-        -   [NCRunLaTeX](#ncrunlatex)
-        -   [NCRunPDFLaTeX](#ncrunpdflatex)
-        -   [NCRunPDFViewer](#ncrunpdfviewer)
-        -   [NCRunPS2PDF](#ncrunps2pdf)
-    -   [NCTeXForm](#nctexform)
-        -   [NCTeXForm](#nctexform-1)
-        -   [NCTeXFormSetStarStar](#nctexformsetstarstar)
-        -   [NCTeXFormSetStar](#nctexformsetstar)
-    -   [NCRun](#ncrun)
-        -   [NCRun](#ncrun-1)
-    -   [NCTest](#nctest)
-        -   [NCTest](#nctest-1)
-        -   [NCTestCheck](#nctestcheck)
-        -   [NCTestRun](#nctestrun)
-        -   [NCTestSummarize](#nctestsummarize)
-    -   [NCDebug](#ncdebug)
-        -   [NCDebug](#ncdebug-1)
-    -   [NCUtil](#ncutil)
-        -   [NCConsistentQ](#ncconsistentq)
-        -   [NCGrabFunctions](#ncgrabfunctions)
-        -   [NCGrabSymbols](#ncgrabsymbols)
-        -   [NCGrabIndeterminants](#ncgrabindeterminants)
-        -   [NCVariables](#ncvariables)
-        -   [NCConsolidateList](#ncconsolidatelist)
-        -   [NCLeafCount](#ncleafcount)
-        -   [NCReplaceData](#ncreplacedata)
-        -   [NCToExpression](#nctoexpression)
--   [Data structures for fast calculations](#data-structures-for-fast-calculations)
-    -   [NCPoly](#ncpoly)
-        -   [Efficient storage of NC polynomials with rational coefficients](#efficient-storage-of-nc-polynomials-with-rational-coefficients)
-        -   [Ways to represent NC polynomials](#ways-to-represent-nc-polynomials)
-        -   [Access and utlity functions](#access-and-utlity-functions)
-        -   [Formating functions](#formating-functions)
-        -   [Arithmetic functions](#arithmetic-functions)
-        -   [State space realization functions](#state-space-realization-functions)
-        -   [Auxiliary functions](#auxiliary-functions)
-    -   [NCPolyInterface](#ncpolyinterface)
-        -   [NCToNCPoly](#nctoncpoly)
-        -   [NCPolyToNC](#ncpolytonc)
-        -   [NCRuleToPoly](#ncruletopoly)
-        -   [NCMonomialList](#ncmonomiallist)
-        -   [NCCoefficientRules](#nccoefficientrules)
-        -   [NCCoefficientList](#nccoefficientlist)
-        -   [NCCoefficientQ](#nccoefficientq)
-        -   [NCMonomialQ](#ncmonomialq)
-        -   [NCPolynomialQ](#ncpolynomialq)
-    -   [NCPolynomial](#ncpolynomial)
-        -   [Efficient storage of NC polynomials with nc coefficients](#efficient-storage-of-nc-polynomials-with-nc-coefficients)
-        -   [Ways to represent NC polynomials](#ways-to-represent-nc-polynomials-1)
-        -   [Grouping terms by degree](#grouping-terms-by-degree)
-        -   [Utilities](#utilities)
-        -   [Operations on NC polynomials](#operations-on-nc-polynomials)
-    -   [NCQuadratic](#ncquadratic)
-        -   [NCToNCQuadratic](#nctoncquadratic)
-        -   [NCPToNCQuadratic](#ncptoncquadratic)
-        -   [NCQuadraticToNC](#ncquadratictonc)
-        -   [NCQuadraticToNCPolynomial](#ncquadratictoncpolynomial)
-        -   [NCMatrixOfQuadratic](#ncmatrixofquadratic)
-        -   [NCQuadraticMakeSymmetric](#ncquadraticmakesymmetric)
-    -   [NCSylvester](#ncsylvester)
-        -   [NCToNCSylvester](#nctoncsylvester)
-        -   [NCPToNCSylvester](#ncptoncsylvester)
-        -   [NCSylvesterToNC](#ncsylvestertonc)
-        -   [NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial)
--   [Noncommutative Gröbner Bases Algorithms](#noncommutative-gröbner-bases-algorithms)
-    -   [NCGBX](#ncgbx)
-        -   [SetMonomialOrder](#setmonomialorder)
-        -   [SetKnowns](#setknowns)
-        -   [SetUnknowns](#setunknowns)
-        -   [ClearMonomialOrder](#clearmonomialorder)
-        -   [GetMonomialOrder](#getmonomialorder)
-        -   [PrintMonomialOrder](#printmonomialorder)
-        -   [NCMakeGB](#ncmakegb)
-        -   [NCProcess](#ncprocess)
-        -   [NCGBSimplifyRational](#ncgbsimplifyrational)
-        -   [NCReduce](#ncreduce)
-    -   [NCPolyGroebner](#ncpolygroebner)
-        -   [NCPolyGroebner](#ncpolygroebner-1)
-    -   [NCGB](#ncgb)
--   [Semidefinite Programming Algorithms](#semidefinite-programming-algorithms)
-    -   [NCSDP](#ncsdp)
-        -   [NCSDP](#ncsdp-1)
-        -   [NCSDPForm](#ncsdpform)
-        -   [NCSDPDual](#ncsdpdual)
-        -   [NCSDPDualForm](#ncsdpdualform)
-    -   [SDP](#sdp)
-        -   [SDPMatrices](#sdpmatrices)
-        -   [SDPSolve](#sdpsolve)
-        -   [SDPEval](#sdpeval)
-        -   [SDPPrimalEval](#sdpprimaleval)
-        -   [SDPDualEval](#sdpdualeval)
-        -   [SDPSylvesterEval](#sdpsylvestereval)
-    -   [SDPFlat](#sdpflat)
-        -   [SDPFlatData](#sdpflatdata)
-        -   [SDPFlatPrimalEval](#sdpflatprimaleval)
-        -   [SDPFlatDualEval](#sdpflatdualeval)
-        -   [SDPFlatSylvesterEval](#sdpflatsylvestereval)
-    -   [SDPSylvester](#sdpsylvester)
-        -   [SDPEval](#sdpeval-1)
-        -   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
-        -   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
-        -   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
-    -   [PrimalDual](#primaldual)
-        -   [PrimalDual](#primaldual-1)
--   [Work in Progress](#work-in-progress)
-    -   [NCPolySOS](#ncpolysos)
-        -   [NCPolySOS](#ncpolysos-1)
-        -   [NCPolySOSToSDP](#ncpolysostosdp)
-    -   [NCRational](#ncrational)
-        -   [State-space realizations for NC rationals](#state-space-realizations-for-nc-rationals)
-        -   [Utilities](#utilities-1)
-        -   [Operations on NC rationals](#operations-on-nc-rationals)
-        -   [Minimal realizations](#minimal-realizations)
-    -   [NCRealization](#ncrealization)
-        -   [NCDescriptorRealization](#ncdescriptorrealization)
-        -   [NCDeterminantalRepresentationReciprocal](#ncdeterminantalrepresentationreciprocal)
-        -   [NCMatrixDescriptorRealization](#ncmatrixdescriptorrealization)
-        -   [NCMinimalDescriptorRealization](#ncminimaldescriptorrealization)
-        -   [NCSymmetricDescriptorRealization](#ncsymmetricdescriptorrealization)
-        -   [NCSymmetricDeterminantalRepresentationDirect](#ncsymmetricdeterminantalrepresentationdirect)
-        -   [NCSymmetricDeterminantalRepresentationReciprocal](#ncsymmetricdeterminantalrepresentationreciprocal)
-        -   [NCSymmetrizeMinimalDescriptorRealization](#ncsymmetrizeminimaldescriptorrealization)
-        -   [NonCommutativeLift](#noncommutativelift)
-        -   [SignatureOfAffineTerm](#signatureofaffineterm)
-        -   [TestDescriptorRealization](#testdescriptorrealization)
-        -   [PinnedQ](#pinnedq)
-        -   [PinningSpace](#pinningspace)
--   [References](#references)
+-   [<span class="toc-section-number">1</span> Acknowledgements](#acknowledgements)
+-   [<span class="toc-section-number">2</span> Changes in Version 5.0](#changes-in-version-50)
+    -   [<span class="toc-section-number">2.1</span> Version 5.0.5](#version-505)
+    -   [<span class="toc-section-number">2.2</span> Version 5.0.4](#version-504)
+    -   [<span class="toc-section-number">2.3</span> Version 5.0.3](#version-503)
+    -   [<span class="toc-section-number">2.4</span> Version 5.0.2](#version-502)
+    -   [<span class="toc-section-number">2.5</span> Version 5.0.1](#version-501)
+    -   [<span class="toc-section-number">2.6</span> Version 5.0.0](#version-500)
+-   [<span class="toc-section-number">3</span> Introduction](#introduction)
+    -   [<span class="toc-section-number">3.1</span> Running NCAlgebra](#running-ncalgebra)
+    -   [<span class="toc-section-number">3.2</span> Now what?](#now-what)
+    -   [<span class="toc-section-number">3.3</span> Testing](#testing)
+    -   [<span class="toc-section-number">3.4</span> Pre-2017 NCGB C++ version](#pre-2017-ncgb-c-version)
+-   [<span class="toc-section-number">4</span> Most Basic Commands](#most-basic-commands)
+    -   [<span class="toc-section-number">4.1</span> To Commute Or Not To Commute?](#to-commute-or-not-to-commute)
+    -   [<span class="toc-section-number">4.2</span> Inverses, Transposes and Adjoints](#inverses-transposes-and-adjoints)
+    -   [<span class="toc-section-number">4.3</span> Replace](#replace)
+    -   [<span class="toc-section-number">4.4</span> Polynomials](#polynomials)
+    -   [<span class="toc-section-number">4.5</span> Rationals and Simplification](#rationals-and-simplification)
+    -   [<span class="toc-section-number">4.6</span> Calculus](#calculus)
+    -   [<span class="toc-section-number">4.7</span> Matrices](#matrices)
+        -   [<span class="toc-section-number">4.7.1</span> Inverses, products, adjoints, etc](#inverses-products-adjoints-etc)
+        -   [<span class="toc-section-number">4.7.2</span> LU Decomposition](#lu-decomposition)
+        -   [<span class="toc-section-number">4.7.3</span> LU Decomposition with complete pivoting](#lu-decomposition-with-complete-pivoting)
+        -   [<span class="toc-section-number">4.7.4</span> LDL Decomposition](#ldl-decomposition)
+        -   [<span class="toc-section-number">4.7.5</span> Replace with matrices](#replace-with-matrices)
+    -   [<span class="toc-section-number">4.8</span> Quadratic polynomials, second direction derivatives and convexity](#quadratic-polynomials-second-direction-derivatives-and-convexity)
+-   [<span class="toc-section-number">5</span> More Advanced Commands](#more-advanced-commands)
+    -   [<span class="toc-section-number">5.1</span> Advanced Rules and Replacements](#advanced-rules-and-replacements)
+        -   [<span class="toc-section-number">5.1.1</span> `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`) often fail](#replaceall-and-replacerepeated-often-fail)
+        -   [<span class="toc-section-number">5.1.2</span> The fix is `NCReplace`](#the-fix-is-ncreplace)
+        -   [<span class="toc-section-number">5.1.3</span> Trouble with `Block` and `Module`](#trouble-with-block-and-module)
+    -   [<span class="toc-section-number">5.2</span> Expanding matrix products](#expanding-matrix-products)
+        -   [<span class="toc-section-number">5.2.1</span> Trouble with `Plus` (`+`) and matrices](#trouble-with-plus-and-matrices)
+    -   [<span class="toc-section-number">5.3</span> Polynomials with commutative coefficients](#polynomials-with-commutative-coefficients)
+    -   [<span class="toc-section-number">5.4</span> Polynomials with noncommutative coefficients](#polynomials-with-noncommutative-coefficients)
+    -   [<span class="toc-section-number">5.5</span> Linear polynomials](#linear-polynomials)
+-   [<span class="toc-section-number">6</span> Noncommutative Gröbner Basis](#noncommutative-gröbner-basis)
+    -   [<span class="toc-section-number">6.1</span> What is a Gröbner Basis?](#what-is-a-gröbner-basis)
+    -   [<span class="toc-section-number">6.2</span> Solving equations](#solving-equations)
+    -   [<span class="toc-section-number">6.3</span> A slightly more challenging example](#a-slightly-more-challenging-example)
+    -   [<span class="toc-section-number">6.4</span> Simplifying polynomial expresions](#simplifying-polynomial-expresions)
+    -   [<span class="toc-section-number">6.5</span> Minimal versus reduced Gröbner Basis](#minimal-versus-reduced-gröbner-basis)
+    -   [<span class="toc-section-number">6.6</span> Simplifying rational expresions](#simplifying-rational-expresions)
+    -   [<span class="toc-section-number">6.7</span> Simplification with NCGBSimplifyRational](#simplification-with-ncgbsimplifyrational)
+    -   [<span class="toc-section-number">6.8</span> Ordering on variables and monomials](#ordering-on-variables-and-monomials)
+        -   [<span class="toc-section-number">6.8.1</span> Lex Order: the simplest elimination order](#lex-order-the-simplest-elimination-order)
+        -   [<span class="toc-section-number">6.8.2</span> Graded lex ordering: a non-elimination order](#graded-lex-ordering-a-non-elimination-order)
+        -   [<span class="toc-section-number">6.8.3</span> Multigraded lex ordering: a variety of elimination orders](#multigraded-lex-ordering-a-variety-of-elimination-orders)
+    -   [<span class="toc-section-number">6.9</span> A complete example: the partially prescribed matrix inverse problem](#a-complete-example-the-partially-prescribed-matrix-inverse-problem)
+-   [<span class="toc-section-number">7</span> Semidefinite Programming](#semidefinite-programming)
+    -   [<span class="toc-section-number">7.1</span> Semidefinite Programs in Matrix Variables](#semidefinite-programs-in-matrix-variables)
+    -   [<span class="toc-section-number">7.2</span> Semidefinite Programs in Vector Variables](#semidefinite-programs-in-vector-variables)
+-   [<span class="toc-section-number">8</span> Pretty Output with Notebooks and TeX ](#pretty-output-with-notebooks-and)
+    -   [<span class="toc-section-number">8.1</span> Pretty Output](#pretty-output)
+    -   [<span class="toc-section-number">8.2</span> Using NCTeX](#using-nctex)
+        -   [<span class="toc-section-number">8.2.1</span> NCTeX Options](#nctex-options)
+    -   [<span class="toc-section-number">8.3</span> Using NCTeXForm](#using-nctexform)
+-   [<span class="toc-section-number">9</span> Introduction](#introduction-1)
+-   [<span class="toc-section-number">10</span> Packages for manipulating NC expressions](#packages-for-manipulating-nc-expressions)
+    -   [<span class="toc-section-number">10.1</span> NonCommutativeMultiply](#noncommutativemultiply)
+        -   [<span class="toc-section-number">10.1.1</span> aj](#aj)
+        -   [<span class="toc-section-number">10.1.2</span> co](#co)
+        -   [<span class="toc-section-number">10.1.3</span> Id](#id)
+        -   [<span class="toc-section-number">10.1.4</span> inv](#inv)
+        -   [<span class="toc-section-number">10.1.5</span> rt](#rt)
+        -   [<span class="toc-section-number">10.1.6</span> tp](#tp)
+        -   [<span class="toc-section-number">10.1.7</span> CommutativeQ](#commutativeq)
+        -   [<span class="toc-section-number">10.1.8</span> NonCommutativeQ](#noncommutativeq)
+        -   [<span class="toc-section-number">10.1.9</span> SetCommutative](#setcommutative)
+        -   [<span class="toc-section-number">10.1.10</span> SetNonCommutative](#setnoncommutative)
+        -   [<span class="toc-section-number">10.1.11</span> SetNonCommutativeHold](#setnoncommutativehold)
+        -   [<span class="toc-section-number">10.1.12</span> SNC](#snc)
+        -   [<span class="toc-section-number">10.1.13</span> SetCommutingOperators](#setcommutingoperators)
+        -   [<span class="toc-section-number">10.1.14</span> UnsetCommutingOperators](#unsetcommutingoperators)
+        -   [<span class="toc-section-number">10.1.15</span> CommutingOperatorsQ](#commutingoperatorsq)
+        -   [<span class="toc-section-number">10.1.16</span> Commutative](#commutative)
+        -   [<span class="toc-section-number">10.1.17</span> CommuteEverything](#commuteeverything)
+        -   [<span class="toc-section-number">10.1.18</span> BeginCommuteEverything](#begincommuteeverything)
+        -   [<span class="toc-section-number">10.1.19</span> EndCommuteEverything](#endcommuteeverything)
+        -   [<span class="toc-section-number">10.1.20</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
+        -   [<span class="toc-section-number">10.1.21</span> NCExpand](#ncexpand)
+        -   [<span class="toc-section-number">10.1.22</span> NCE](#nce)
+    -   [<span class="toc-section-number">10.2</span> NCCollect](#nccollect)
+        -   [<span class="toc-section-number">10.2.1</span> NCCollect](#nccollect-1)
+        -   [<span class="toc-section-number">10.2.2</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
+        -   [<span class="toc-section-number">10.2.3</span> NCCollectSymmetric](#nccollectsymmetric)
+        -   [<span class="toc-section-number">10.2.4</span> NCStrongCollect](#ncstrongcollect)
+        -   [<span class="toc-section-number">10.2.5</span> NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
+        -   [<span class="toc-section-number">10.2.6</span> NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
+        -   [<span class="toc-section-number">10.2.7</span> NCCompose](#nccompose)
+        -   [<span class="toc-section-number">10.2.8</span> NCDecompose](#ncdecompose)
+        -   [<span class="toc-section-number">10.2.9</span> NCTermsOfDegree](#nctermsofdegree)
+        -   [<span class="toc-section-number">10.2.10</span> NCTermsOfTotalDegree](#nctermsoftotaldegree)
+    -   [<span class="toc-section-number">10.3</span> NCReplace](#ncreplace)
+        -   [<span class="toc-section-number">10.3.1</span> NCReplace](#ncreplace-1)
+        -   [<span class="toc-section-number">10.3.2</span> NCReplaceAll](#ncreplaceall)
+        -   [<span class="toc-section-number">10.3.3</span> NCReplaceList](#ncreplacelist)
+        -   [<span class="toc-section-number">10.3.4</span> NCReplaceRepeated](#ncreplacerepeated)
+        -   [<span class="toc-section-number">10.3.5</span> NCR](#ncr)
+        -   [<span class="toc-section-number">10.3.6</span> NCRA](#ncra)
+        -   [<span class="toc-section-number">10.3.7</span> NCRR](#ncrr)
+        -   [<span class="toc-section-number">10.3.8</span> NCRL](#ncrl)
+        -   [<span class="toc-section-number">10.3.9</span> NCMakeRuleSymmetric](#ncmakerulesymmetric)
+        -   [<span class="toc-section-number">10.3.10</span> NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
+        -   [<span class="toc-section-number">10.3.11</span> NCReplaceSymmetric](#ncreplacesymmetric)
+        -   [<span class="toc-section-number">10.3.12</span> NCReplaceAllSymmetric](#ncreplaceallsymmetric)
+        -   [<span class="toc-section-number">10.3.13</span> NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
+        -   [<span class="toc-section-number">10.3.14</span> NCReplaceListSymmetric](#ncreplacelistsymmetric)
+        -   [<span class="toc-section-number">10.3.15</span> NCRSym](#ncrsym)
+        -   [<span class="toc-section-number">10.3.16</span> NCRASym](#ncrasym)
+        -   [<span class="toc-section-number">10.3.17</span> NCRRSym](#ncrrsym)
+        -   [<span class="toc-section-number">10.3.18</span> NCRLSym](#ncrlsym)
+        -   [<span class="toc-section-number">10.3.19</span> NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
+        -   [<span class="toc-section-number">10.3.20</span> NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
+        -   [<span class="toc-section-number">10.3.21</span> NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+        -   [<span class="toc-section-number">10.3.22</span> NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
+        -   [<span class="toc-section-number">10.3.23</span> NCRSA](#ncrsa)
+        -   [<span class="toc-section-number">10.3.24</span> NCRASA](#ncrasa)
+        -   [<span class="toc-section-number">10.3.25</span> NCRRSA](#ncrrsa)
+        -   [<span class="toc-section-number">10.3.26</span> NCRLSA](#ncrlsa)
+        -   [<span class="toc-section-number">10.3.27</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
+        -   [<span class="toc-section-number">10.3.28</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
+    -   [<span class="toc-section-number">10.4</span> NCSelfAdjoint](#ncselfadjoint)
+        -   [<span class="toc-section-number">10.4.1</span> NCSymmetricQ](#ncsymmetricq)
+        -   [<span class="toc-section-number">10.4.2</span> NCSymmetricTest](#ncsymmetrictest)
+        -   [<span class="toc-section-number">10.4.3</span> NCSymmetricPart](#ncsymmetricpart)
+        -   [<span class="toc-section-number">10.4.4</span> NCSelfAdjointQ](#ncselfadjointq)
+        -   [<span class="toc-section-number">10.4.5</span> NCSelfAdjointTest](#ncselfadjointtest)
+    -   [<span class="toc-section-number">10.5</span> NCSimplifyRational](#ncsimplifyrational)
+        -   [<span class="toc-section-number">10.5.1</span> NCNormalizeInverse](#ncnormalizeinverse)
+        -   [<span class="toc-section-number">10.5.2</span> NCSimplifyRational](#ncsimplifyrational-1)
+        -   [<span class="toc-section-number">10.5.3</span> NCSR](#ncsr)
+        -   [<span class="toc-section-number">10.5.4</span> NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass)
+        -   [<span class="toc-section-number">10.5.5</span> NCPreSimplifyRational](#ncpresimplifyrational)
+        -   [<span class="toc-section-number">10.5.6</span> NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass)
+    -   [<span class="toc-section-number">10.6</span> NCDiff](#ncdiff)
+        -   [<span class="toc-section-number">10.6.1</span> NCDirectionalD](#ncdirectionald)
+        -   [<span class="toc-section-number">10.6.2</span> NCGrad](#ncgrad)
+        -   [<span class="toc-section-number">10.6.3</span> NCHessian](#nchessian)
+        -   [<span class="toc-section-number">10.6.4</span> DirectionalD](#directionald)
+        -   [<span class="toc-section-number">10.6.5</span> NCIntegrate](#ncintegrate)
+    -   [<span class="toc-section-number">10.7</span> NCConvexity](#ncconvexity)
+        -   [<span class="toc-section-number">10.7.1</span> NCIndependent](#ncindependent)
+        -   [<span class="toc-section-number">10.7.2</span> NCConvexityRegion](#ncconvexityregion)
+-   [<span class="toc-section-number">11</span> Packages for manipulating NC block matrices](#packages-for-manipulating-nc-block-matrices)
+    -   [<span class="toc-section-number">11.1</span> NCDot](#ncdot)
+        -   [<span class="toc-section-number">11.1.1</span> tpMat](#tpmat)
+        -   [<span class="toc-section-number">11.1.2</span> ajMat](#ajmat)
+        -   [<span class="toc-section-number">11.1.3</span> coMat](#comat)
+        -   [<span class="toc-section-number">11.1.4</span> NCDot](#ncdot-1)
+        -   [<span class="toc-section-number">11.1.5</span> NCInverse](#ncinverse)
+        -   [<span class="toc-section-number">11.1.6</span> NCMatrixExpand](#ncmatrixexpand)
+    -   [<span class="toc-section-number">11.2</span> NCMatrixDecompositions](#ncmatrixdecompositions)
+        -   [<span class="toc-section-number">11.2.1</span> NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting)
+        -   [<span class="toc-section-number">11.2.2</span> NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting)
+        -   [<span class="toc-section-number">11.2.3</span> NCLDLDecomposition](#ncldldecomposition)
+        -   [<span class="toc-section-number">11.2.4</span> NCUpperTriangularSolve](#ncuppertriangularsolve)
+        -   [<span class="toc-section-number">11.2.5</span> NCLowerTriangularSolve](#nclowertriangularsolve)
+        -   [<span class="toc-section-number">11.2.6</span> NCLUInverse](#ncluinverse)
+        -   [<span class="toc-section-number">11.2.7</span> NCLUPartialPivoting](#nclupartialpivoting)
+        -   [<span class="toc-section-number">11.2.8</span> NCLUCompletePivoting](#nclucompletepivoting)
+        -   [<span class="toc-section-number">11.2.9</span> NCLeftDivide](#ncleftdivide)
+        -   [<span class="toc-section-number">11.2.10</span> NCRightDivide](#ncrightdivide)
+    -   [<span class="toc-section-number">11.3</span> MatrixDecompositions: linear algebra templates](#matrixdecompositions-linear-algebra-templates)
+        -   [<span class="toc-section-number">11.3.1</span> LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting)
+        -   [<span class="toc-section-number">11.3.2</span> LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting)
+        -   [<span class="toc-section-number">11.3.3</span> LDLDecomposition](#ldldecomposition)
+        -   [<span class="toc-section-number">11.3.4</span> UpperTriangularSolve](#uppertriangularsolve)
+        -   [<span class="toc-section-number">11.3.5</span> LowerTriangularSolve](#lowertriangularsolve)
+        -   [<span class="toc-section-number">11.3.6</span> LUInverse](#luinverse)
+        -   [<span class="toc-section-number">11.3.7</span> GetLUMatrices](#getlumatrices)
+        -   [<span class="toc-section-number">11.3.8</span> GetFullLUMatrices](#getfulllumatrices)
+        -   [<span class="toc-section-number">11.3.9</span> GetLDUMatrices](#getldumatrices)
+        -   [<span class="toc-section-number">11.3.10</span> GetFullLDUMatrices](#getfullldumatrices)
+        -   [<span class="toc-section-number">11.3.11</span> GetDiagonal](#getdiagonal)
+        -   [<span class="toc-section-number">11.3.12</span> LUPartialPivoting](#lupartialpivoting)
+        -   [<span class="toc-section-number">11.3.13</span> LUCompletePivoting](#lucompletepivoting)
+        -   [<span class="toc-section-number">11.3.14</span> LURowReduce](#lurowreduce)
+        -   [<span class="toc-section-number">11.3.15</span> LURowReduceIncremental](#lurowreduceincremental)
+-   [<span class="toc-section-number">12</span> Packages for pretty output, testing, and utilities](#packages-for-pretty-output-testing-and-utilities)
+    -   [<span class="toc-section-number">12.1</span> NCOutput](#ncoutput)
+        -   [<span class="toc-section-number">12.1.1</span> NCSetOutput](#ncsetoutput)
+    -   [<span class="toc-section-number">12.2</span> NCTeX](#nctex)
+        -   [<span class="toc-section-number">12.2.1</span> NCTeX](#nctex-1)
+        -   [<span class="toc-section-number">12.2.2</span> NCRunDVIPS](#ncrundvips)
+        -   [<span class="toc-section-number">12.2.3</span> NCRunLaTeX](#ncrunlatex)
+        -   [<span class="toc-section-number">12.2.4</span> NCRunPDFLaTeX](#ncrunpdflatex)
+        -   [<span class="toc-section-number">12.2.5</span> NCRunPDFViewer](#ncrunpdfviewer)
+        -   [<span class="toc-section-number">12.2.6</span> NCRunPS2PDF](#ncrunps2pdf)
+    -   [<span class="toc-section-number">12.3</span> NCTeXForm](#nctexform)
+        -   [<span class="toc-section-number">12.3.1</span> NCTeXForm](#nctexform-1)
+        -   [<span class="toc-section-number">12.3.2</span> NCTeXFormSetStarStar](#nctexformsetstarstar)
+        -   [<span class="toc-section-number">12.3.3</span> NCTeXFormSetStar](#nctexformsetstar)
+    -   [<span class="toc-section-number">12.4</span> NCRun](#ncrun)
+        -   [<span class="toc-section-number">12.4.1</span> NCRun](#ncrun-1)
+    -   [<span class="toc-section-number">12.5</span> NCTest](#nctest)
+        -   [<span class="toc-section-number">12.5.1</span> NCTest](#nctest-1)
+        -   [<span class="toc-section-number">12.5.2</span> NCTestCheck](#nctestcheck)
+        -   [<span class="toc-section-number">12.5.3</span> NCTestRun](#nctestrun)
+        -   [<span class="toc-section-number">12.5.4</span> NCTestSummarize](#nctestsummarize)
+    -   [<span class="toc-section-number">12.6</span> NCDebug](#ncdebug)
+        -   [<span class="toc-section-number">12.6.1</span> NCDebug](#ncdebug-1)
+    -   [<span class="toc-section-number">12.7</span> NCUtil](#ncutil)
+        -   [<span class="toc-section-number">12.7.1</span> NCConsistentQ](#ncconsistentq)
+        -   [<span class="toc-section-number">12.7.2</span> NCGrabFunctions](#ncgrabfunctions)
+        -   [<span class="toc-section-number">12.7.3</span> NCGrabSymbols](#ncgrabsymbols)
+        -   [<span class="toc-section-number">12.7.4</span> NCGrabIndeterminants](#ncgrabindeterminants)
+        -   [<span class="toc-section-number">12.7.5</span> NCVariables](#ncvariables)
+        -   [<span class="toc-section-number">12.7.6</span> NCConsolidateList](#ncconsolidatelist)
+        -   [<span class="toc-section-number">12.7.7</span> NCLeafCount](#ncleafcount)
+        -   [<span class="toc-section-number">12.7.8</span> NCReplaceData](#ncreplacedata)
+        -   [<span class="toc-section-number">12.7.9</span> NCToExpression](#nctoexpression)
+-   [<span class="toc-section-number">13</span> Data structures for fast calculations](#data-structures-for-fast-calculations)
+    -   [<span class="toc-section-number">13.1</span> NCPoly](#ncpoly)
+        -   [<span class="toc-section-number">13.1.1</span> Efficient storage of NC polynomials with rational coefficients](#efficient-storage-of-nc-polynomials-with-rational-coefficients)
+        -   [<span class="toc-section-number">13.1.2</span> Ways to represent NC polynomials](#ways-to-represent-nc-polynomials)
+        -   [<span class="toc-section-number">13.1.3</span> Access and utlity functions](#access-and-utlity-functions)
+        -   [<span class="toc-section-number">13.1.4</span> Formating functions](#formating-functions)
+        -   [<span class="toc-section-number">13.1.5</span> Arithmetic functions](#arithmetic-functions)
+        -   [<span class="toc-section-number">13.1.6</span> State space realization functions](#state-space-realization-functions)
+        -   [<span class="toc-section-number">13.1.7</span> Auxiliary functions](#auxiliary-functions)
+    -   [<span class="toc-section-number">13.2</span> NCPolyInterface](#ncpolyinterface)
+        -   [<span class="toc-section-number">13.2.1</span> NCToNCPoly](#nctoncpoly)
+        -   [<span class="toc-section-number">13.2.2</span> NCPolyToNC](#ncpolytonc)
+        -   [<span class="toc-section-number">13.2.3</span> NCRuleToPoly](#ncruletopoly)
+        -   [<span class="toc-section-number">13.2.4</span> NCMonomialList](#ncmonomiallist)
+        -   [<span class="toc-section-number">13.2.5</span> NCCoefficientRules](#nccoefficientrules)
+        -   [<span class="toc-section-number">13.2.6</span> NCCoefficientList](#nccoefficientlist)
+        -   [<span class="toc-section-number">13.2.7</span> NCCoefficientQ](#nccoefficientq)
+        -   [<span class="toc-section-number">13.2.8</span> NCMonomialQ](#ncmonomialq)
+        -   [<span class="toc-section-number">13.2.9</span> NCPolynomialQ](#ncpolynomialq)
+    -   [<span class="toc-section-number">13.3</span> NCPolynomial](#ncpolynomial)
+        -   [<span class="toc-section-number">13.3.1</span> Efficient storage of NC polynomials with nc coefficients](#efficient-storage-of-nc-polynomials-with-nc-coefficients)
+        -   [<span class="toc-section-number">13.3.2</span> Ways to represent NC polynomials](#ways-to-represent-nc-polynomials-1)
+        -   [<span class="toc-section-number">13.3.3</span> Grouping terms by degree](#grouping-terms-by-degree)
+        -   [<span class="toc-section-number">13.3.4</span> Utilities](#utilities)
+        -   [<span class="toc-section-number">13.3.5</span> Operations on NC polynomials](#operations-on-nc-polynomials)
+    -   [<span class="toc-section-number">13.4</span> NCQuadratic](#ncquadratic)
+        -   [<span class="toc-section-number">13.4.1</span> NCToNCQuadratic](#nctoncquadratic)
+        -   [<span class="toc-section-number">13.4.2</span> NCPToNCQuadratic](#ncptoncquadratic)
+        -   [<span class="toc-section-number">13.4.3</span> NCQuadraticToNC](#ncquadratictonc)
+        -   [<span class="toc-section-number">13.4.4</span> NCQuadraticToNCPolynomial](#ncquadratictoncpolynomial)
+        -   [<span class="toc-section-number">13.4.5</span> NCMatrixOfQuadratic](#ncmatrixofquadratic)
+        -   [<span class="toc-section-number">13.4.6</span> NCQuadraticMakeSymmetric](#ncquadraticmakesymmetric)
+    -   [<span class="toc-section-number">13.5</span> NCSylvester](#ncsylvester)
+        -   [<span class="toc-section-number">13.5.1</span> NCToNCSylvester](#nctoncsylvester)
+        -   [<span class="toc-section-number">13.5.2</span> NCPToNCSylvester](#ncptoncsylvester)
+        -   [<span class="toc-section-number">13.5.3</span> NCSylvesterToNC](#ncsylvestertonc)
+        -   [<span class="toc-section-number">13.5.4</span> NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial)
+-   [<span class="toc-section-number">14</span> Noncommutative Gröbner Bases Algorithms](#noncommutative-gröbner-bases-algorithms)
+    -   [<span class="toc-section-number">14.1</span> NCGBX](#ncgbx)
+        -   [<span class="toc-section-number">14.1.1</span> SetMonomialOrder](#setmonomialorder)
+        -   [<span class="toc-section-number">14.1.2</span> SetKnowns](#setknowns)
+        -   [<span class="toc-section-number">14.1.3</span> SetUnknowns](#setunknowns)
+        -   [<span class="toc-section-number">14.1.4</span> ClearMonomialOrder](#clearmonomialorder)
+        -   [<span class="toc-section-number">14.1.5</span> GetMonomialOrder](#getmonomialorder)
+        -   [<span class="toc-section-number">14.1.6</span> PrintMonomialOrder](#printmonomialorder)
+        -   [<span class="toc-section-number">14.1.7</span> NCMakeGB](#ncmakegb)
+        -   [<span class="toc-section-number">14.1.8</span> NCProcess](#ncprocess)
+        -   [<span class="toc-section-number">14.1.9</span> NCGBSimplifyRational](#ncgbsimplifyrational)
+        -   [<span class="toc-section-number">14.1.10</span> NCReduce](#ncreduce)
+    -   [<span class="toc-section-number">14.2</span> NCPolyGroebner](#ncpolygroebner)
+        -   [<span class="toc-section-number">14.2.1</span> NCPolyGroebner](#ncpolygroebner-1)
+    -   [<span class="toc-section-number">14.3</span> NCGB](#ncgb)
+-   [<span class="toc-section-number">15</span> Semidefinite Programming Algorithms](#semidefinite-programming-algorithms)
+    -   [<span class="toc-section-number">15.1</span> NCSDP](#ncsdp)
+        -   [<span class="toc-section-number">15.1.1</span> NCSDP](#ncsdp-1)
+        -   [<span class="toc-section-number">15.1.2</span> NCSDPForm](#ncsdpform)
+        -   [<span class="toc-section-number">15.1.3</span> NCSDPDual](#ncsdpdual)
+        -   [<span class="toc-section-number">15.1.4</span> NCSDPDualForm](#ncsdpdualform)
+    -   [<span class="toc-section-number">15.2</span> SDP](#sdp)
+        -   [<span class="toc-section-number">15.2.1</span> SDPMatrices](#sdpmatrices)
+        -   [<span class="toc-section-number">15.2.2</span> SDPSolve](#sdpsolve)
+        -   [<span class="toc-section-number">15.2.3</span> SDPEval](#sdpeval)
+        -   [<span class="toc-section-number">15.2.4</span> SDPPrimalEval](#sdpprimaleval)
+        -   [<span class="toc-section-number">15.2.5</span> SDPDualEval](#sdpdualeval)
+        -   [<span class="toc-section-number">15.2.6</span> SDPSylvesterEval](#sdpsylvestereval)
+    -   [<span class="toc-section-number">15.3</span> SDPFlat](#sdpflat)
+        -   [<span class="toc-section-number">15.3.1</span> SDPFlatData](#sdpflatdata)
+        -   [<span class="toc-section-number">15.3.2</span> SDPFlatPrimalEval](#sdpflatprimaleval)
+        -   [<span class="toc-section-number">15.3.3</span> SDPFlatDualEval](#sdpflatdualeval)
+        -   [<span class="toc-section-number">15.3.4</span> SDPFlatSylvesterEval](#sdpflatsylvestereval)
+    -   [<span class="toc-section-number">15.4</span> SDPSylvester](#sdpsylvester)
+        -   [<span class="toc-section-number">15.4.1</span> SDPEval](#sdpeval-1)
+        -   [<span class="toc-section-number">15.4.2</span> SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
+        -   [<span class="toc-section-number">15.4.3</span> SDPSylvesterDualEval](#sdpsylvesterdualeval)
+        -   [<span class="toc-section-number">15.4.4</span> SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
+    -   [<span class="toc-section-number">15.5</span> PrimalDual](#primaldual)
+        -   [<span class="toc-section-number">15.5.1</span> PrimalDual](#primaldual-1)
+-   [<span class="toc-section-number">16</span> Work in Progress](#work-in-progress)
+    -   [<span class="toc-section-number">16.1</span> NCPolySOS](#ncpolysos)
+        -   [<span class="toc-section-number">16.1.1</span> NCPolySOS](#ncpolysos-1)
+        -   [<span class="toc-section-number">16.1.2</span> NCPolySOSToSDP](#ncpolysostosdp)
+    -   [<span class="toc-section-number">16.2</span> NCRational](#ncrational)
+        -   [<span class="toc-section-number">16.2.1</span> State-space realizations for NC rationals](#state-space-realizations-for-nc-rationals)
+        -   [<span class="toc-section-number">16.2.2</span> Utilities](#utilities-1)
+        -   [<span class="toc-section-number">16.2.3</span> Operations on NC rationals](#operations-on-nc-rationals)
+        -   [<span class="toc-section-number">16.2.4</span> Minimal realizations](#minimal-realizations)
+    -   [<span class="toc-section-number">16.3</span> NCRealization](#ncrealization)
+        -   [<span class="toc-section-number">16.3.1</span> NCDescriptorRealization](#ncdescriptorrealization)
+        -   [<span class="toc-section-number">16.3.2</span> NCDeterminantalRepresentationReciprocal](#ncdeterminantalrepresentationreciprocal)
+        -   [<span class="toc-section-number">16.3.3</span> NCMatrixDescriptorRealization](#ncmatrixdescriptorrealization)
+        -   [<span class="toc-section-number">16.3.4</span> NCMinimalDescriptorRealization](#ncminimaldescriptorrealization)
+        -   [<span class="toc-section-number">16.3.5</span> NCSymmetricDescriptorRealization](#ncsymmetricdescriptorrealization)
+        -   [<span class="toc-section-number">16.3.6</span> NCSymmetricDeterminantalRepresentationDirect](#ncsymmetricdeterminantalrepresentationdirect)
+        -   [<span class="toc-section-number">16.3.7</span> NCSymmetricDeterminantalRepresentationReciprocal](#ncsymmetricdeterminantalrepresentationreciprocal)
+        -   [<span class="toc-section-number">16.3.8</span> NCSymmetrizeMinimalDescriptorRealization](#ncsymmetrizeminimaldescriptorrealization)
+        -   [<span class="toc-section-number">16.3.9</span> NonCommutativeLift](#noncommutativelift)
+        -   [<span class="toc-section-number">16.3.10</span> SignatureOfAffineTerm](#signatureofaffineterm)
+        -   [<span class="toc-section-number">16.3.11</span> TestDescriptorRealization](#testdescriptorrealization)
+        -   [<span class="toc-section-number">16.3.12</span> PinnedQ](#pinnedq)
+        -   [<span class="toc-section-number">16.3.13</span> PinningSpace](#pinningspace)
+-   [<span class="toc-section-number">17</span> References](#references)
 
 **NCAlgebra** is distributed under the terms of the BSD License:
 
@@ -327,82 +340,114 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Acknowledgements
-================
+# Acknowledgements
 
-This work was partially supported by the Division of Mathematical Sciences of the National Science Foundation.
+This work was partially supported by the Division of Mathematical
+Sciences of the National Science Foundation.
 
-The program was written by the authors and:
-
--   David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister, Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple.
-
-The beginnings of the program come from eran@slac.
-
-Considerable recent help came from Igor Klep.
-
-Major earlier contributions came from:
+The program was written by the authors with mjor earlier contributions from:
 
 -   Mark Stankus, Math, Cal Poly San Luis Obispo
 -   Robert L. Miller, General Atomics Corp
 
-Changes in Version 5.0
-======================
+Considerable recent help came from
 
-Version 5.0.4
--------------
+-   Igor Klep, University of Ljubljana
+
+Other contributors include:
+
+-   David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister,
+    Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall,
+    T. Shaheen, John Shopple.
+
+The beginnings of the program come from eran@slac.
+
+# Changes in Version 5.0
+
+## Version 5.0.5
+
+1.  Improved documentation
+2.  Bug fixes. Thanks Igor Klep!
+
+## Version 5.0.4
 
 1.  First implementation of [NCPolyGramMatrix](#NCPolyGramMatrix) and [NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
 2.  Improvements in NCReplace.
 3.  Several bug fixes and improvements. Thanks Eric Evert!
 
-Version 5.0.3
--------------
+## Version 5.0.3
 
 1.  Restored functionality of [SetCommutingOperators](#setcommutingoperators).
 2.  Improved implementation of [CommutativeQ](#commutativeq) for arrays.
 
-Version 5.0.2
--------------
+## Version 5.0.2
 
 1.  `NCCollect` and `NCStrongCollect` can handle commutative variables.
 2.  Cleaned up initialization files.
 3.  New function `SetNonCommutativeHold` with `HoldAll` attribute can be used to set Symbols that have been previously assigned values.
 
-Version 5.0.1
--------------
+## Version 5.0.1
 
 1.  Introducing `NCWebInstall` and `NCWebUpdate`.
 2.  Bug fixes.
 
-Version 5.0.0
--------------
+## Version 5.0.0
 
-1.  Completely rewritten core handling of noncommutative expressions with significant speed gains.
-2.  Completely rewritten noncommutative Gröbner basis algorithm without any dependence on compiled code. See chapter [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis) in the user guide and the [NCGBX](#ncgbx) package. Some `NCGB` features are not fully supported yet, most notably [NCProcess](#ncprocess).
-3.  New algorithms for representing and operating with noncommutative polynomials with commutative coefficients. These support the new package [NCGBX](#ncgbx). See this section in the chapter [More Advanced Commands](#polynomials-with-commutative-coefficients) and the packages [NCPolyInterface](#ncpolyinterface) and [NCPoly](#ncpoly).
-4.  New algorithms for representing and operating with noncommutative polynomials with noncommutative coefficients ([NCPolynomial](#ncpolynomial)) with specialized facilities for noncommutative quadratic polynomials ([NCQuadratic](#ncquadratic)) and noncommutative linear polynomials ([NCSylvester](#ncsylvester)).
-5.  Modified behavior of `CommuteEverything` (see important notes in [CommuteEverything](#commuteeverything)).
-6.  Improvements and consolidation of noncommutative calculus in the package [NCDiff](#ncdiff).
-7.  Added a complete set of linear algebra algorithms in the new package [MatrixDecompositions](#matrixdecompositions-linear-algebra-templates) and their noncommutative versions in the new package [NCMatrixDecompositions](#ncmatrixdecompositions).
-8.  General improvements on the Semidefinite Programming package [NCSDP](#ncsdp).
-9.  New algorithms for simplification of noncommutative rationals ([NCSimplifyRational](#ncsylvester)).
-10. Commands `Transform`, `Substitute`, `SubstituteSymmetric`, etc, have been replaced by the much more reliable commands in the new package [NCReplace](#ncreplace).
-11. Command `MatMult` has been replaced by [NCDot](#ncdot-1). Alias `MM` has been deprecated.
-12. Noncommutative power is now supported, with `x^3` expanding to `x**x**x`, `x^-1` expanding to `inv[x]`.
-13. `x^T` expands to `tp[x]` and `x^*` expands to `aj[x]`. Symbol `T` is now protected.
+1.  Completely rewritten core handling of noncommutative expressions
+    with significant speed gains.
+2.  Completely rewritten noncommutative Gröbner basis algorithm without
+    any dependence on compiled code. See chapter
+    [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis) in the user guide and the
+    [NCGBX](#ncgbx) package. Some `NCGB` features are not fully
+    supported yet, most notably [NCProcess](#ncprocess).
+3.  New algorithms for representing and operating with noncommutative
+    polynomials with commutative coefficients. These support the new
+    package [NCGBX](#ncgbx). See this section in the chapter
+    [More Advanced Commands](#polynomials-with-commutative-coefficients) and the
+    packages [NCPolyInterface](#ncpolyinterface) and
+    [NCPoly](#ncpoly).
+4.  New algorithms for representing and operating with noncommutative
+    polynomials with noncommutative coefficients
+    ([NCPolynomial](#ncpolynomial)) with specialized facilities
+    for noncommutative quadratic polynomials
+    ([NCQuadratic](#ncquadratic)) and noncommutative linear
+    polynomials ([NCSylvester](#ncsylvester)).
+5.  Modified behavior of `CommuteEverything` (see important notes in
+    [CommuteEverything](#commuteeverything)).
+6.  Improvements and consolidation of noncommutative calculus in the
+    package [NCDiff](#ncdiff).
+7.  Added a complete set of linear algebra algorithms in the new
+    package [MatrixDecompositions](#matrixdecompositions-linear-algebra-templates) and
+    their noncommutative versions in the new package
+    [NCMatrixDecompositions](#ncmatrixdecompositions).
+8.  General improvements on the Semidefinite Programming package
+    [NCSDP](#ncsdp).
+9.  New algorithms for simplification of noncommutative rationals
+    ([NCSimplifyRational](#ncsylvester)).
+10. Commands `Transform`, `Substitute`, `SubstituteSymmetric`, etc,
+    have been replaced by the much more reliable commands in the new
+    package [NCReplace](#ncreplace).
+11. Command `MatMult` has been replaced by [NCDot](#ncdot-1). Alias `MM`
+    has been deprecated.
+12. Noncommutative power is now supported, with `x^3` expanding to
+    `x**x**x`, `x^-1` expanding to `inv[x]`.
+13. `x^T` expands to `tp[x]` and `x^*` expands to `aj[x]`. Symbol `T`
+    is now protected.
 14. Support for subscripted variables in notebooks.
 
-Introduction
-============
+# Introduction
 
-This *User Guide* attempts to document the many improvements introduced in `NCAlgebra` Version 5.0. Please be patient, as we move to incorporate the many recent changes into this document.
+This *User Guide* attempts to document the many improvements
+introduced in `NCAlgebra` Version 5.0. Please be patient, as we move
+to incorporate the many recent changes into this document.
 
-See [Reference Manual](#introduction-1) for a detailed description of the available commands.
+See [Reference Manual](#introduction-1) for a detailed
+description of the available commands.
 
-There are also notebooks in the `NC/DEMOS` directory that accompany each of the chapters of this user guide.
+There are also notebooks in the `NC/DEMOS` directory that accompany
+each of the chapters of this user guide.
 
-Running NCAlgebra
------------------
+## Running NCAlgebra
 
 In *Mathematica* (notebook or text interface), type
 
@@ -420,41 +465,47 @@ Then just type
 
 to load `NCAlgebra`.
 
-Now what?
----------
+## Now what?
 
-Extensive documentation is found in the directory `DOCUMENTATION`, including this document.
+Extensive documentation is found in the directory `DOCUMENTATION`,
+including this document.
 
 Basic documentation is found in the project wiki:
 
 [`https://github.com/NCAlgebra/NC/wiki`](https://github.com/NCAlgebra/NC/wiki)
 
-You may want to try some of the several demo files in the directory `DEMOS` after installing `NCAlgebra`.
+You may want to try some of the several demo files in the directory
+`DEMOS` after installing `NCAlgebra`.
 
 You can also run some tests to see if things are working fine.
 
-Testing
--------
+## Testing
 
-You do not need to load `NCAlgebra` before running any of the tests below, but you need to load `NC` as in
+You do not need to load `NCAlgebra` before running any of the tests
+below, but you need to load `NC` as in
 
     << NC`
 
-There are 3 test sets which you can use to troubleshoot parts of NCAlgebra. The most comprehensive test set is run by typing:
+There are 3 test sets which you can use to troubleshoot parts of
+NCAlgebra. The most comprehensive test set is run by typing:
 
     << NCTEST
 
 This will test the core functionality of NCAlgebra.
 
-You can test functionality related to the package [`NCPoly`](#ncpoly), including the new `NCGBX` package [`NCGBX`](#ncgbx), by typing:
+You can test functionality related to the package
+[`NCPoly`](#ncpoly), including the new `NCGBX` package
+[`NCGBX`](#ncgbx), by typing:
 
     << NCPOLYTEST
 
-Finally our Semidefinite Programming Solver [`NCSDP`](#ncsdp) can be tested with
+Finally our Semidefinite Programming Solver [`NCSDP`](#ncsdp)
+can be tested with
 
     << NCSDPTEST
 
-We recommend that you restart the kernel before and after running tests. Each test takes a few minutes to run.
+We recommend that you restart the kernel before and after running
+tests. Each test takes a few minutes to run.
 
 You can also call
 
@@ -462,33 +513,38 @@ You can also call
 
 to perform extensive and long testing of `NCGBX`.
 
-Pre-2017 NCGB C++ version
--------------------------
+## Pre-2017 NCGB C++ version
 
-The old `C++` version of our Groebner Basis Algorithm still ships with this version and can be loaded using:
+The old `C++` version of our Groebner Basis Algorithm still ships with
+this version and can be loaded using:
 
     << NCGB`
 
-This will at once load `NCAlgebra` *and* `NCGB`. It can be tested using
+This will at once load `NCAlgebra` *and* `NCGB`. It can be tested
+using
 
     << NCGBTEST
 
-Most Basic Commands
-===================
+# Most Basic Commands
 
-This chapter provides a gentle introduction to some of the commands available in `NCAlgebra`.
+This chapter provides a gentle introduction to some of the commands
+available in `NCAlgebra`.
 
-If you want a living version of this chapter just run the notebook `NC/DEMOS/1_MostBasicCommands.nb`.
+If you want a living analog of this chapter just run the notebook
+`NC/DEMOS/1_MostBasicCommands.nb`.
 
-Before you can use `NCAlgebra` you first load it with the following commands:
+Before you can use `NCAlgebra` you first load it with the following
+commands:
 
     << NC`
     << NCAlgebra`
 
-To Commute Or Not To Commute?
------------------------------
+## To Commute Or Not To Commute?
 
-In `NCAlgebra`, the operator `**` denotes *noncommutative multiplication*. At present, single-letter lower case variables are noncommutative by default and all others are commutative by default. For example:
+In `NCAlgebra`, the operator `**` denotes *noncommutative
+multiplication*. At present, single-letter lower case variables are
+noncommutative by default and all others are commutative by
+default. For example:
 
     a**b-b**a
 
@@ -503,7 +559,10 @@ while
 
 both result in `0`.
 
-One of Bill's favorite commands is `CommuteEverything`, which temporarily makes all noncommutative symbols appearing in a given expression to behave as if they were commutative and returns the resulting commutative expression. For example:
+One of Bill’s favorite commands is `CommuteEverything`, which
+temporarily makes all noncommutative symbols appearing in a given
+expression to behave as if they were commutative and returns the
+resulting commutative expression. For example:
 
     CommuteEverything[a**b-b**a]
 
@@ -513,7 +572,8 @@ results in `0`. The command
 
 restores the original noncommutative behavior.
 
-One can make any symbol behave as noncommutative using `SetNonCommutative`. For example:
+One can make any symbol behave as noncommutative
+using `SetNonCommutative`. For example:
 
     SetNonCommutative[A,B]
     A**B-B**A
@@ -528,7 +588,8 @@ Likewise, symbols can be made commutative using `SetCommutative`. For example:
     SetCommutative[B]
     A**B-B**A
 
-results in `0`. `SNC` is an alias for `SetNonCommutative`. So, `SNC` can be typed rather than the longer `SetNonCommutative`:
+results in `0`. `SNC` is an alias for `SetNonCommutative`. So, `SNC`
+can be typed rather than the longer `SetNonCommutative`:
 
     SNC[A];
     A**a-a**A
@@ -537,19 +598,21 @@ results in:
 
     -a**A+A**a
 
-One can check whether a given symbol is commutative or not using `CommutativeQ` or `NonCommutativeQ`. For example:
+One can check whether a given symbol is commutative or not using
+`CommutativeQ` or `NonCommutativeQ`. For example:
 
     CommutativeQ[B]
     NonCommutativeQ[a]
 
 both return `True`.
 
-Inverses, Transposes and Adjoints
----------------------------------
+## Inverses, Transposes and Adjoints
 
-The multiplicative identity is denoted `Id` in the program. At the present time, `Id` is set to 1.
+The multiplicative identity is denoted `Id` in the program. At the
+present time, `Id` is set to 1.
 
-A symbol `a` may have an inverse, which will be denoted by `inv[a]`. `inv` operates as expected in most cases.
+A symbol `a` may have an inverse, which will be denoted by
+`inv[a]`. `inv` operates as expected in most cases.
 
 For example:
 
@@ -562,7 +625,9 @@ both lead to `Id = 1` and
 
 results in `a`.
 
-**Version 5:** `inv` no longer automatically distributes over noncommutative products. If this more aggressive behavior is desired use `SetOptions[inv, Distribute -> True]`. For example
+**Version 5:** `inv` no longer automatically distributes over
+noncommutative products. If this more aggressive behavior is desired
+use `SetOptions[inv, Distribute -> True]`. For example
 
     SetOptions[inv, Distribute -> True]
     inv[a**b]
@@ -574,7 +639,9 @@ returns `inv[b]**inv[a]`. Conversely
 
 returns `inv[a**b]`.
 
-`tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the adjoint of symbol `x`. Like `inv`, the properties of transposes and adjoints that everyone uses constantly are built-in. For example:
+`tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
+adjoint of symbol `x`. Like `inv`, the properties of transposes and
+adjoints that everyone uses constantly are built-in. For example:
 
     tp[a**b]
 
@@ -590,7 +657,9 @@ returns
 
     tp[a]+tp[b]
 
-Likewise `tp[tp[a]] == a` and `tp` for anything for which `CommutativeQ` returns `True` is simply the identity. For example `tp[5] == 5`, `tp[2 + 3I] == 2 + 3 I`, and `tp[B] == B`.
+Likewise `tp[tp[a]] == a` and `tp` for anything for which
+`CommutativeQ` returns `True` is simply the identity. For example
+`tp[5] == 5`, `tp[2 + 3I] == 2 + 3 I`, and `tp[B] == B`.
 
 Similar properties hold to `aj`. Moreover
 
@@ -599,12 +668,18 @@ Similar properties hold to `aj`. Moreover
 
 return `co[a]` where `co` stands for complex-conjugate.
 
-**Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates (`co`), and inverses (`inv`) in a notebook environment render as ![x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_1.png), ![x^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_2.png), ![\\bar{x}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_3.png), and ![x^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_4.png). `tp` and `aj` can also be input directly as `x^T` and `x^*`. For this reason the symbol `T` is now protected in `NCAlgebra`.
+**Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates
+(`co`), and inverses (`inv`) in a notebook environment render as
+![x^T](https://render.githubusercontent.com/render/math?math=x%5ET&mode=inline), ![x^\*](https://render.githubusercontent.com/render/math?math=x%5E%2A&mode=inline), ![\\bar{x}](https://render.githubusercontent.com/render/math?math=%5Cbar%7Bx%7D&mode=inline), and ![x^{-1}](https://render.githubusercontent.com/render/math?math=x%5E%7B-1%7D&mode=inline). `tp` and `aj` can also be input
+directly as `x^T` and `x^*`. For this reason the symbol `T` is now
+protected in `NCAlgebra`.
 
-Replace
--------
+## Replace
 
-A key feature of symbolic computation is the ability to perform substitutions. The Mathematica substitute commands, e.g. `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`, so you must use our `NC` versions of these commands. For example:
+A key feature of symbolic computation is the ability to perform
+substitutions. The Mathematica substitute commands, e.g. `ReplaceAll`
+(`/.`) and `ReplaceRepeated` (`//.`), are not reliable in `NCAlgebra`,
+so you must use our `NC` versions of these commands. For example:
 
     NCReplaceAll[x**a**b,a**b->c]
 
@@ -620,7 +695,9 @@ results in
 
     c+tp[a]**tp[b]
 
-Use [NCMakeRuleSymmetric](#ncmakerulesymmetric) and [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint) to automatically create symmetric and self adjoint versions of your rules:
+Use [NCMakeRuleSymmetric](#ncmakerulesymmetric) and
+[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint) to automatically
+create symmetric and self adjoint versions of your rules:
 
     NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b**a -> c]]
 
@@ -628,7 +705,8 @@ returns
 
     c + tp[c]
 
-The difference between `NCReplaceAll` and `NCReplaceRepeated` can be understood in the example:
+The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
+understood in the example:
 
     NCReplaceAll[a**b**b, a**b -> a]
 
@@ -644,14 +722,19 @@ that results in
 
     a
 
-Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and `NCReplaceList`, which are analogous to the standard `ReplaceAll` (`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note that one rarely uses `NCReplace` and `NCReplaceList`.
+Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
+`NCReplaceList`, which are analogous to the standard `ReplaceAll`
+(`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
+that one rarely uses `NCReplace` and `NCReplaceList`.
 
-See the Section [Advanced Rules and Replacement](#advanced-rules-and-replacements) for a deeper discussion on some issues involved with rules and replacements in `NCAlgebra`.
+See the Section [Advanced Rules and Replacement](#advanced-rules-and-replacements) for
+a deeper discussion on some issues involved with rules and
+replacements in `NCAlgebra`.
 
-**Version 5:** the commands `Substitute` and `Transform` have been deprecated in favor of the above nc versions of `Replace`.
+**Version 5:** the commands `Substitute` and `Transform` have been
+deprecated in favor of the above nc versions of `Replace`.
 
-Polynomials
------------
+## Polynomials
 
 The command `NCExpand` expands noncommutative products. For example:
 
@@ -661,7 +744,8 @@ returns
 
     a**x+b**x
 
-Conversely, one can collect noncommutative terms involving same powers of a symbol using `NCCollect`. For example:
+Conversely, one can collect noncommutative terms involving same powers
+of a symbol using `NCCollect`. For example:
 
     NCCollect[a**x+b**x,x]
 
@@ -669,7 +753,8 @@ recovers
 
     (a+b)**x
 
-`NCCollect` groups terms by degree before collecting and accepts more than one variable. For example:
+`NCCollect` groups terms by degree before collecting and accepts more
+than one variable. For example:
 
     expr = a**x+b**x+y**c+y**d+a**x**y+b**x**y
     NCCollect[expr, {x}]
@@ -686,9 +771,11 @@ returns
 
     (a+b)**x+y**(c+d)+(a+b)**x**y
 
-Note that the last term has degree 2 in `x` and `y` and therefore does not get collected with the first order terms.
+Note that the last term has degree 2 in `x` and `y` and therefore does
+not get collected with the first order terms.
 
-The list of variables accepts `tp`, `aj` and `inv`, and
+The list of variables accepts `tp`, `aj` and
+`inv`, and
 
     NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]
 
@@ -700,9 +787,12 @@ Alternatively one could use
 
     NCCollectSymmetric[tp[x]**a**x+tp[x]**b**x+z,{x}]
 
-to obtain the same result. A similar command, [NCCollectSelfAdjoint](#nccollectselfadjoint), works with self-adjoint variables.
+to obtain the same result. A similar command,
+[NCCollectSelfAdjoint](#nccollectselfadjoint), works with self-adjoint
+variables.
 
-There is also a stronger version of collect called `NCStrongCollect`. `NCStrongCollect` does not group terms by degree. For instance:
+There is also a stronger version of collect called `NCStrongCollect`.
+`NCStrongCollect` does not group terms by degree. For instance:
 
     NCStrongCollect[expr, {x, y}]
 
@@ -710,9 +800,12 @@ produces
 
     y**(c+d)+(a+b)**x**(1+y)
 
-Keep in mind that `NCStrongCollect` often collects *more* than one would normally expect.
+Keep in mind that `NCStrongCollect` often collects *more* than one
+would normally expect.
 
-`NCAlgebra` provides some commands for noncommutative polynomial manipulation that are similar to the native Mathematica (commutative) polynomial commands. For example:
+`NCAlgebra` provides some commands for noncommutative polynomial
+manipulation that are similar to the native Mathematica (commutative)
+polynomial commands. For example:
 
     expr = B + A y**x**y - 2 x
     NCVariables[expr]
@@ -743,7 +836,8 @@ will return `False` and
 
 will return `True`.
 
-Another useful command is `NCTermsOfDegree`, which will returns an expression with terms of a certain degree. For instance:
+Another useful command is `NCTermsOfDegree`, which will returns an
+expression with terms of a certain degree. For instance:
 
     NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {2,1}]
 
@@ -757,7 +851,9 @@ returns `z**w`, and
 
 returns `0`.
 
-A similar command is `NCTermsOfTotalDegree`, which works just like `NCTermsOfDegree` but considers the total degree in all variables. For example:
+A similar command is `NCTermsOfTotalDegree`, which works just like
+`NCTermsOfDegree` but considers the total degree in all variables. For
+example:
 
 For example,
 
@@ -769,44 +865,59 @@ returns `x**y**x - x**x**y`, and
 
 returns `0`.
 
-The above commands are based on special packages for efficiently storing and calcuating with nc polynomials. Those packages are
+The above commands are based on special packages for efficiently
+storing and calcuating with nc polynomials. Those packages are
 
--   [`NCPoly`](#ncpoly): which handles polynomials with noncommutative coefficients, and
--   [`NCPolynomial`](#ncpolynomial): which handles polynomials with noncommutative coefficients.
+-   [`NCPoly`](#ncpoly): which handles polynomials with
+    noncommutative coefficients, and
+-   [`NCPolynomial`](#ncpolynomial): which handles polynomials
+    with real coefficients.
 
 For example:
 
     1 + y**x**y - A x
 
-is a polynomial with real coefficients in ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_5.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_6.png), whereas
+is a polynomial with commutative coefficients in ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), whereas
 
     a**y**b**x**c**y - A x**d
 
-is a polynomial with nc coefficients in ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_7.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_8.png), where the letters ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_9.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_10.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_11.png), and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_12.png), are the *nc coefficients*. Of course
+is a polynomial with nc coefficients in ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), where the letters
+![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline), and ![d](https://render.githubusercontent.com/render/math?math=d&mode=inline), are the *nc coefficients*. Of course
 
     1 + y**x**y - A x
 
-is a polynomial with nc coefficients if one considers only ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_13.png) as the variable of interest.
+is a polynomial with nc coefficients if one considers only ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) as the
+variable of interest.
 
-In order to take full advantage of [`NCPoly`](#ncpoly) and [`NCPolynomial`](#ncpolynomial) one would need to *convert* an expression into those special formats. See [NCPolyInterface](#ncpolyinterface), [NCPoly](#ncpoly), and [NCPolynomial](#ncpolynomial) for details.
+In order to take full advantage of [`NCPoly`](#ncpoly) and
+[`NCPolynomial`](#ncpolynomial) one would need to *convert* an
+expression into those special formats. See
+[NCPolyInterface](#ncpolyinterface), [NCPoly](#ncpoly),
+and [NCPolynomial](#ncpolynomial) for details.
 
-Rationals and Simplification
-----------------------------
+## Rationals and Simplification
 
-One of the great challenges of noncommutative symbolic algebra is the simplification of rational nc expressions. `NCAlgebra` provides various algorithms that can be used for simplification and general manipulation of nc rationals.
+One of the great challenges of noncommutative symbolic algebra is the
+simplification of rational nc expressions. `NCAlgebra` provides
+various algorithms that can be used for simplification and general
+manipulation of nc rationals.
 
-One such function is `NCSimplifyRational`, which attempts to simplify noncommutative rationals using a predefined set of rules. For example:
+One such function is `NCSimplifyRational`, which attempts to simplify
+noncommutative rationals using a predefined set of rules. For example:
 
     expr = 1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b \
            -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
     NCSimplifyRational[expr]
 
-leads to `1`. Of course the great challenge here is to reveal well known identities that can lead to simplification. For example, the two expressions:
+leads to `1`. Of course the great challenge here is to reveal well
+known identities that can lead to simplification. For example, the two
+expressions:
 
     expr1 = a**inv[1+b**a]
     expr2 = inv[1+a**b]**a
 
-and one can use `NCSimplifyRational` to test such equivalence by evaluating
+and one can use `NCSimplifyRational` to test such equivalence by
+evaluating
 
     NCSimplifyRational[expr1 - expr2]
 
@@ -814,21 +925,28 @@ which results in `0` or
 
     NCSimplifyRational[expr1**inv[expr2]]
 
-which results in `1`. `NCSimplifyRational` works by transforming nc rationals. For example, one can verify that
+which results in `1`. `NCSimplifyRational` works by transforming nc
+rationals. For example, one can verify that
 
     NCSimplifyRational[expr2] == expr1
 
-`NCAlgebra` has a number of packages that can be used to manipulate rational nc expressions. The packages:
+`NCAlgebra` has a number of packages that can be used to manipulate
+rational nc expressions. The packages:
 
--   [`NCGBX`](#ncgbx) perform calculations with nc rationals using Gröbner basis, and
--   [`NCRational`](#ncrational) creates state-space representations of nc rationals. This package is still experimental.
+-   [`NCGBX`](#ncgbx) perform calculations with nc rationals
+    using Gröbner basis, and
+-   [`NCRational`](#ncrational) creates state-space
+    representations of nc rationals. This package is still experimental.
 
-Calculus
---------
+## Calculus
 
-The package [`NCDiff`](#ncdiff) provide functions for calculating derivatives and integrals of nc polynomials and nc rationals.
+The package [`NCDiff`](#ncdiff) provide functions for
+calculating derivatives and integrals of nc polynomials and nc
+rationals.
 
-The main command is [`NCDirectionalD`](#ncdirectionald) which calculates directional derivatives in one or many variables. For example, if:
+The main command is [`NCDirectionalD`](#ncdirectionald) which
+calculates directional derivatives in one or many variables. For
+example, if:
 
     expr = a**inv[1+x]**b + x**c**x
 
@@ -840,7 +958,10 @@ returns
 
     h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b
 
-In the case of more than one variables `NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative of `expr` with respect to `x` in the direction `h` and with respect to `y` in the direction `k`. For example, if:
+In the case of more than one variables
+`NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative
+of `expr` with respect to `x` in the direction `h` and with respect to
+`y` in the direction `k`. For example, if:
 
     expr = x**q**x - y**x
 
@@ -852,9 +973,7 @@ returns
 
     h**q**x + x**q*h - y**h - k**x
 
-The command `NCGrad` calculate nc *gradients*[1].
-
-For example, if:
+A further example, if:
 
     expr = x**a**x**b + x**c**x**d
 
@@ -866,7 +985,9 @@ which returns
 
     h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
 
-and
+The command `NCGrad` calculates nc *gradients*[^1].
+
+For example:
 
     NCGrad[expr, x]
 
@@ -874,7 +995,7 @@ returns the nc gradient
 
     a**x**b + b**x**a + c**x**d + d**x**c
 
-For example, if:
+A further example, if:
 
     expr = x**a**x**b + x**c**y**d
 
@@ -886,28 +1007,39 @@ returns the nc gradient list
 
     {a**x**b + b**x**a + c**y**d, d**x**c}
 
-**Version 5:** introduces experimental support for integration of nc polynomials. See [`NCIntegrate`](#ncintegrate).
+**Version 5:** introduces experimental support for integration of nc
+polynomials. See [`NCIntegrate`](#ncintegrate).
 
-Matrices
---------
+## Matrices
 
-`NCAlgebra` has many commands for manipulating matrices with noncommutative entries. Think block-matrices. Matrices are represented in Mathematica using *lists of lists*. For example
+`NCAlgebra` has many commands for manipulating matrices with
+noncommutative entries. Think block-matrices. Matrices are
+represented in Mathematica using *lists of lists*. For example
 
     m = {{a, b}, {c, d}}
 
 is a representation for the matrix
 
-![\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_14.png)
+![\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20%26%20d%20%5Cend%7Bbmatrix%7D&mode=inline)
 
-The Mathematica command `MatrixForm` output pretty matrices. `MatrixForm[m]` prints `m` in a form similar to the above matrix.
+The Mathematica command `MatrixForm` output pretty
+matrices. `MatrixForm[m]` prints `m` in a form similar to the above
+matrix. Beware when copying and pasting parts of an expression rendered by`MatrixForm` because it may not execute correctly. If in doubt, use `FullForm` to reveal the contents of the expression.
 
-The experienced matrix analyst should always remember that the Mathematica convention for handling vectors is tricky.
+The experienced matrix analyst should always remember that the
+Mathematica convention for handling vectors is tricky.
 
 -   `{{1, 2, 4}}` is a 1x3 *matrix* or a *row vector*;
 -   `{{1}, {2}, {4}}` is a 3x1 *matrix* or a *column vector*;
--   `{1, 2, 4}` is a *vector* but **not** a *matrix*. Indeed whether it is a row or column vector depends on the context. We advise not to use *vectors*.
+-   `{1, 2, 4}` is a *vector* but **not** a *matrix*. Indeed whether it
+    is a row or column vector depends on the context. We advise not to
+    use *vectors*.
 
-A useful command is [`NCInverse`](#ncinverse), which is akin to Mathematica's `Inverse` command and produces a block-matrix inverse formula[2] for an nc matrix. For example
+### Inverses, products, adjoints, etc
+
+A useful command is [`NCInverse`](#ncinverse), which is akin to
+Mathematica’s `Inverse` command and produces a block-matrix inverse
+formula[^2] for an nc matrix. For example
 
     NCInverse[m]
 
@@ -916,9 +1048,19 @@ returns
     {{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
      {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
 
-Note that `a` and `d - c**inv[a]**b` were assumed invertible during the calculation.
+or, using `MatrixForm`
 
-Similarly, one can multiply matrices using [`NCDot`](#ncdot-1), which is similar to Mathematica's `Dot`. For example
+`NCInverse[m] // MatrixForm NCInverse[m] // MatrixForm`
+
+returns
+
+![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
+
+Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
+calculation.
+
+Similarly, one can multiply matrices using [`NCDot`](#ncdot-1),
+which is similar to Mathematica’s `Dot`. For example
 
     m1 = {{a, b}, {c, d}}
     m2 = {{d, 2}, {e, 3}}
@@ -928,11 +1070,16 @@ result in
 
     {{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}
 
-Note that products of nc symbols appearing in the matrices are multiplied using `**`. Compare that with the standard `Dot` (`.`) operator.
+Note that products of nc symbols appearing in the
+matrices are multiplied using `**`. Compare that with the standard
+`Dot` (`.`) operator.
 
-**WARNING:** `NCDot` replaces `MatMult`, which is still available for backward compatibility but will be deprecated in future releases.
+**WARNING:** `NCDot` replaces `MatMult`, which is still available for
+backward compatibility but will be deprecated in future releases.
 
-There are many new improvements with **Version 5**. For instance, operators `tp`, `aj`, and `co` now operate directly over matrices. That is
+There are many new improvements with **Version 5**. For instance,
+operators `tp`, `aj`, and `co` now operate directly over
+matrices. That is
 
     aj[{{a,tp[b]},{co[c],aj[d]}}]
 
@@ -940,13 +1087,27 @@ returns
 
     {{aj[a],tp[c]},{co[b],d}}
 
-In previous versions one had to use the special commands `tpMat`, `ajMat`, and `coMat`. Those are still supported for backward compatibility.
+In previous versions one had to use the special commands `tpMat`,
+`ajMat`, and `coMat`. Those are still supported for backward
+compatibility.
 
-Behind `NCInverse` there are a host of linear algebra algorithms which are available in the package:
+See [advanced matrix commands](#expanding-matrix-products) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#ncmatrixexpand), [`NCMatrixReplace`](#NCMatrixReplace), [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
 
--   [`NCMatrixDecompositions`](#ncmatrixdecompositions): implements versions of the ![LU](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_15.png) Decomposition with partial and complete pivoting, as well as ![LDL](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_16.png) Decomposition which are suitable for calculations with nc matrices. Those functions are based on the templated algorithms from the package [`MatrixDecompositions`](#matrixdecompositions-linear-algebra-templates).
+### LU Decomposition
 
-For instance the function [`NCLUDecompositionWithPartialPivoting`](#ncludecompositionwithpartialpivoting) can be used as
+Behind `NCInverse` there are a host of linear algebra algorithms which
+are available in the package:
+
+-   [`NCMatrixDecompositions`](#ncmatrixdecompositions):
+    implements versions of the ![LU](https://render.githubusercontent.com/render/math?math=LU&mode=inline) Decomposition with partial and
+    complete pivoting, as well as ![LDL](https://render.githubusercontent.com/render/math?math=LDL&mode=inline) Decomposition which are suitable
+    for calculations with nc matrices. Those functions are based on the
+    templated algorithms from the package
+    [`MatrixDecompositions`](#matrixdecompositions-linear-algebra-templates).
+
+For instance the function
+[`NCLUDecompositionWithPartialPivoting`](#ncludecompositionwithpartialpivoting)
+can be used as
 
     m = {{a, b}, {c, d}}
     {lu, p} = NCLUDecompositionWithPartialPivoting[m]
@@ -956,28 +1117,47 @@ which returns
     lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
     p = {1, 2}
 
-The list `p` encodes the sequence of permutations calculated during the execution of the algorithm. The matrix `lu` contains the factors ![L](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_17.png) and ![U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_18.png). These can be recovered using
+Using `MatrixForm`:
 
-    {l, u} = GetLUMatrices[lu]
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+
+</div>
+
+The list `p` encodes the sequence of permutations calculated during
+the execution of the algorithm. The matrix `lu` contains the factors
+![L](https://render.githubusercontent.com/render/math?math=L&mode=inline) and ![U](https://render.githubusercontent.com/render/math?math=U&mode=inline) in the way most common to numerical analysts. These factors can be recovered using
+
+    {l, u} = GetFullLUMatrices[lu]
 
 resulting in this case in
 
     l = {{1, 0}, {c**inv[a], 1}}
     u = {{a, b}, {0, d - c**inv[a]**b}}
 
-To verify that ![M = L U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_19.png) input
+Using `MatrixForm`:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+
+</div>
+
+To verify that ![M = L U](https://render.githubusercontent.com/render/math?math=M%20%3D%20L%20U&mode=inline) input
 
     m - NCDot[l, u]
 
-which should returns a zero matrix.
+which should return a zero matrix.
 
-**Note:** for efficiency the factors `l` and `u` are returned as `SparseArrays`. Use `Normal[u]` and `Normal[l]` to convert the `SparseArrays` `l` and `u` to regular matrices if desired.
+**Note:** if you are looking for efficiency, the function [`GetLUMatrices`](#getlumatrices) (also [`GetLDUMatrices`](#getldumatrices)) returns the factors `l` and `u` as `SparseArrays`.
 
-The default pivoting strategy prioritizes simpler expressions. For instance,
+The default pivoting strategy prioritizes pivoting on simpler expressions. For
+instance,
 
     m = {{a, b}, {1, d}}
     {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-    {l, u} = GetLUMatrices[lu]
+    {l, u} = GetFullLUMatrices[lu]
 
 results in the factors
 
@@ -988,15 +1168,32 @@ and a permutation list
 
     p = {2, 1}
 
-which indicates that the number `1`, appearing in the second row, was used as the pivot rather than the symbol `a` appearing on the first row. Because of the permutation, to verify that ![P M = L U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_20.png) input
+which indicates that the number `1`, appearing in the second row, was
+used as the pivot rather than the symbol `a` appearing on the first
+row. Because of the permutation, to verify that ![P M = L U](https://render.githubusercontent.com/render/math?math=P%20M%20%3D%20L%20U&mode=inline) input
 
     m[[p]] - NCDot[l, u]
 
-which should return a zero matrix. Note that the permutation matrix ![P](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_21.png) is never constructed. Instead, the rows of ![M](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_22.png) are permuted using Mathematica's `Part` (`[[]]`). Likewise
+which should return a zero matrix. Note that in the above example the permutation matrix
+![P](https://render.githubusercontent.com/render/math?math=P&mode=inline) is never constructed. Instead, the rows of ![M](https://render.githubusercontent.com/render/math?math=M&mode=inline) are directly permuted using
+Mathematica’s `Part` (`[[]]`) command. Of course, if one prefers to work with permutation matrices, they can be easily obtained by permuting the rows of the identity matrix as in the following example
+
+    p = {2, 1, 3}
+    IdentityMatrix[3][[p]] // MatrixForm
+
+to produce
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%26%200%20%5C%5C%201%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
+
+</div>
+
+Likewise
 
     m = {{a + b, b}, {c, d}}
     {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-    {l, u} = GetLUMatrices[lu]
+    {l, u} = GetFullLUMatrices[lu]
 
 returns
 
@@ -1004,11 +1201,18 @@ returns
     l = {{1, 0}, {(a + b)**inv[c], 1}} 
     u = {{c, d}, {0, b - (a + b)**inv[c]**d}}
 
-showing that the *simpler* expression `c` was taken as a pivot instead of `a + b`.
+showing that the *simpler* expression `c` was taken as a pivot instead
+of `a + b`.
 
-The function `NCLUDecompositionWithPartialPivoting` is the one that is used by `NCInverse`.
+The function `NCLUDecompositionWithPartialPivoting` is the one that is
+used by `NCInverse`.
 
-Another factorization algorithm is [`NCLUDecompositionWithCompletePivoting`](#ncludecompositionwithcompletepivoting), which can be used to calculate the symbolic rank of nc matrices. For example
+### LU Decomposition with complete pivoting
+
+Another factorization algorithm is
+[`NCLUDecompositionWithCompletePivoting`](#ncludecompositionwithcompletepivoting),
+which can be used to calculate the symbolic rank of nc matrices. For
+example
 
     m = {{2 a, 2 b}, {a, b}}
     {lu, p, q, rank} = NCLUDecompositionWithCompletePivoting[m]
@@ -1018,22 +1222,36 @@ returns the *left* and *right* permutation lists
     p = {2, 1}
     q = {1, 2}
 
-and `rank` equal to `1`. The ![L](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_23.png) and ![U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_24.png) factors can be obtained as before using
+and `rank` equal to `1`. Note that `p = {2, 1}` and `q = {1,2}` tell us that the element that was pivoted on was the symbol `a`, which is the first entry of the second row, rather then `2 a`, which is the first entry of the first row, because `a` is *simpler* than `2 a` . The ![L](https://render.githubusercontent.com/render/math?math=L&mode=inline) and ![U](https://render.githubusercontent.com/render/math?math=U&mode=inline) factors can be obtained as
+before using
 
-    {l, u} = GetLUMatrices[lu]
+    {l, u} = GetFullLUMatrices[lu]
 
 to get
 
     l = {{1, 0}, {2, 1}}
     u = {{a, b}, {0, 0}}
 
-In this case, to verify that ![P M Q = L U](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_25.png) input
+Using `MatrixForm`:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%202%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%200%20%5Cend%7Bbmatrix%7D)
+
+</div>
+
+In this case, to verify that ![P M Q = L U](https://render.githubusercontent.com/render/math?math=P%20M%20Q%20%3D%20L%20U&mode=inline) input
 
     NCDot[l, u] - m[[p, q]]
 
-which should return a zero matrix. As with partial pivoting, the permutation matrices ![P](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_26.png) and ![Q](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_27.png) are never constructed. Instead we used `Part` (`[[]]`) to permute both columns and rows.
+which should return a zero matrix. As with partial pivoting, the
+permutation matrices ![P](https://render.githubusercontent.com/render/math?math=P&mode=inline) and ![Q](https://render.githubusercontent.com/render/math?math=Q&mode=inline) are never constructed. Instead we
+used `Part` (`[[]]`) to permute both rows and columns.
 
-Finally [`NCLDLDecomposition`](#ncldldecomposition) computes the ![LDL^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_28.png) decomposition of symmetric symbolic nc matrices. For example
+### LDL Decomposition
+
+Finally [`NCLDLDecomposition`](#ncldldecomposition) computes the
+![LDL^T](https://render.githubusercontent.com/render/math?math=LDL%5ET&mode=inline) decomposition of symmetric symbolic nc matrices. For example
 
     m = {{a, b}, {b, c}}
     {ldl, p, s, rank} = NCLDLDecomposition[m]
@@ -1044,9 +1262,12 @@ returns `ldl`, which contain the factors, and
     s = {1, 1}
     rank = 2
 
-The list `p` encodes left and right permutations, `s` is a list specifying the size of the diagonal blocks (entries can be either 1 or 2). The factors can be obtained using [`GetLDUMatrices`](#getldumatrices) as in
+The list `p` encodes left and right permutations, `s` is a list
+specifying the size of the diagonal blocks (entries can be either 1 or
+2). The factors can be obtained using
+[`GetLDUMatrices`](#getldumatrices) as in
 
-    {l, d, u} = GetLDUMatrices[ldl, s]
+    {l, d, u} = GetFullLDUMatrices[ldl, s]
 
 which in this case returns
 
@@ -1054,29 +1275,285 @@ which in this case returns
     d = {{a, 0}, {0, c - b**inv[a]**b}}
     u = {{1, inv[a]**b}, {0, 1}}}
 
-Because ![P M P^T = L D L^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_29.png),
+Because ![P M P^T = L D L^T](https://render.githubusercontent.com/render/math?math=P%20M%20P%5ET%20%3D%20L%20D%20L%5ET&mode=inline),
 
     NCDot[l, d, u] - m[[p, p]]
 
-is the zero matrix and ![U = L^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_30.png).
+is the zero matrix and ![U = L^T](https://render.githubusercontent.com/render/math?math=U%20%3D%20L%5ET&mode=inline).
 
-`NCLDLDecomposition` works only on symmetric matrices and, whenever possible, will make assumptions on variables so that it can run successfully.
+`NCLDLDecomposition` works only on symmetric matrices and, whenever
+possible, will make invertibility and symmetry assumptions on variables so that it can run
+successfully. If not possible it will warn the users.
 
-**WARNING:** Versions prior to 5 contained a `NCLDUDecomposition` with a slightly different syntax which, while functional, is being deprecated in **Version 5**.
+**WARNING:** Versions prior to 5 contained the command
+`NCLDUDecomposition` which is being
+deprecated in **Version 5** as its functionality is now provided by
+[`NCLDLDecomposition`](#NCDLDDecomposition), with a slightly different
+syntax.
 
-More Advanced Commands
-======================
+### Replace with matrices
 
-In this chapter we describe some more advance features and commands. Most of these were introduced in **Version 5**.
+[`NCMatrixReplaceAll`](#ncmatrixreplaceall) and
+[`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated) are special
+versions of [`NCReplaceAll`](#ncreplaceall) and
+[`NCReplaceRepeated`](#ncreplacerepeated) that take extra steps to
+preserve matrix consistency when replacing expressions with nc
+matrices. For example, with
 
-If you want a living version of this chapter just run the notebook `NC/DEMOS/2_MoreAdvancedCommands.nb`.
+    m1 = {{a, b}, {c, d}}
+    m2 = {{d, 2}, {e, 3}}
 
-Advanced Rules and Replacements
--------------------------------
+and
 
-Substitution is a key feature of Symbolic computation. We will now discuss some issues related to Mathematica's implementation of rules and replacements that can affect the behavior of `NCAlgebra` expressions.
+    M = {{a11,a12}}
 
-The first issue is related to how Mathematica performs substitutions, which is through [pattern matching](http://reference.wolfram.com/language/guide/RulesAndPatterns.html). For a rule to be effective if has to *match* the *structural* representation of an expression. That representation might be different than one would normally think based on the usual properties of mathematical operators. For example, one would expect the rule:
+the call
+
+    NCMatrixReplaceRepeated[M, {a11 -> m1, a12 -> m2}]
+
+produces as a result the matrix
+
+    {{a, b, d, 2}, {c, d, e, 3}}
+
+or, using `MatrixForm`:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20c%20%26%20d%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D)
+
+</div>
+
+Note how the symbols were treated as block-matrices during the substitution. As a second example, with
+
+    M = {{a11, 0}, {0, a22}}
+
+the command
+
+    NCMatrixReplaceRepeated[M, {a11 -> m1, a22 -> m2}]
+
+produces the matrix
+
+    {{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}
+
+or, using `MatrixForm`:
+
+![\\begin{bmatrix} a & b & 0 & 0 \\\\ c & d & 0 & 0 \\\\ 0 & 0 & d & 2 \\\\ 0 & 0 & e & 3 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%200%20%26%200%20%5C%5C%20c%20%26%20d%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%20d%20%26%202%20%5C%5C%200%20%26%200%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D&mode=inline)
+
+in which the `0` blocks were automatically expanded to fit the adjacent block matrices.
+
+Another feature of `NCMatrixReplace` and its variants is its ability to withold evaluation until all matrix substitutions have taken place. For example,
+
+    NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
+
+produces
+
+    {{d + a**d + b**e, 2 + 2 a + 3 b}, 
+     {e + c**d + d**e, 3 + 2 c + 3 d}}
+
+Finally, `NCMatrixReplace` substitutes `NCInverse` for `inv` so that, for instance, the result of
+
+    rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}}
+    NCMatrixReplaceRepeated[inv[z], rule]
+
+coincides with
+
+    NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
+
+## Quadratic polynomials, second direction derivatives and convexity
+
+The closest related demo to the material in this section is
+`NC/DEMOS/NCConvexity.nb`.
+
+When working with nc quadratics it is useful to be able to “factor” the
+quadratic into the following form
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=q%28x%29%20%3D%20c%20%2B%20s%28x%29%20%2B%20l%28x%29%20M%20r%28x%29)
+
+</div>
+
+where ![s](https://render.githubusercontent.com/render/math?math=s&mode=inline) is linear ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![l](https://render.githubusercontent.com/render/math?math=l&mode=inline) and ![r](https://render.githubusercontent.com/render/math?math=r&mode=inline) are vectors and ![M](https://render.githubusercontent.com/render/math?math=M&mode=inline) is a
+matrix. Load the package
+
+    << NCQuadratic`
+
+and use the command
+[`NCToNCQuadratic`](#nctoncquadratic) to factor an nc polynomial into the the above form:
+
+    vars = {x, y};
+    expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
+    {const, lin, left, middle, right} = NCToNCQuadratic[expr, vars];
+
+which returns
+
+    left = {tp[x],tp[y]}
+    right = {y, x**d}
+    middle = {{a,b}, {tp[b],c}}
+
+and zero `const` and `lin`. The format for the linear part `lin` will
+be discussed lated in Section [Linear](#linear-polynomials). Note that
+coefficients of an nc quadratic may also appear on the left and right
+vectors, as `d` did in the above example. Conversely,
+[`NCQuadraticToNC`](#ncquadratictonc) converts a list with factors
+back to an nc expression as in:
+
+    NCQuadraticToNC[{const, lin, left, middle, right}]
+
+which results in
+
+    (tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
+
+An interesting application is the verification of the domain in which
+an nc rational function is *convex*. This uses the second direction
+derivative, called the Hessian. Take for example the quartic
+
+    expr = x**x**x**x;
+
+and calculate its noncommutative directional *Hessian*
+
+    hes = NCHessian[expr, {x, h}]
+
+This command returns
+
+    2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+
+which is quadratic in the direction `h`. The decomposition of the
+nc Hessian using `NCToNCQuadratic`
+
+    {const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];
+
+produces
+
+    left = {h, x**h, x**x**h}
+    right = {h**x**x, h**x, h}
+    middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
+
+Note that the middle matrix
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20x%20%26%202%20x%5E2%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A0%20%26%200%20%26%202%0A%5Cend%7Bbmatrix%7D)
+
+</div>
+
+is not *symmetric*, as one might have expected. The command
+[`NCQuadraticMakeSymmetric`](#ncquadraticmakesymmetric) can fix that
+and produce a symmetric decomposition. For the above example
+
+    {const, lin, sleft, smiddle, sright} = 
+      NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
+                               SymmetricVariables -> {x, h}]
+
+results in
+
+    sleft = {x**x**h, x**h, h}
+    sright = {h**x**x, h**x, h}
+    middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
+
+in which `middle` is the symmetric matrix
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A0%20%26%200%20%26%202%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A2%20%26%202%20x%20%26%202%20x%5E2%0A%5Cend%7Bbmatrix%7D)
+
+</div>
+
+Note the argument `SymmetricVariables -> {x,h}` which tells
+`NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
+variables. Because the `middle` matrix is never positive semidefinite
+for any possible value of ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) the conclusion[^3] is that the nc quartic
+![x^4](https://render.githubusercontent.com/render/math?math=x%5E4&mode=inline) is *not convex*.
+
+The production of such symmetric quadratic decompositions is automated
+by the convenience command
+[`NCMatrixOfQuadratic`](#ncmatrixofquadratic). Verify that
+
+    {sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]
+
+automatically assumes that both `x` and `h` are symmetric variables
+and produces suitable left and right vectors as well as a symmetric
+middle matrix. Now we illustrate the application of such command to
+checking the convexity region of a noncommutative rational function.
+
+If one is interested in checking convexity of nc rationals the package
+[`NCConvexity`](#ncconvexity) has functions that automate the
+whole process, including the calculation of the Hessian and the middle
+matrix, followed by the diagonalization of the middle matrix as
+produced by [`NCLDLDecomposition`](#ncldldecomposition).
+
+For example, the commands evaluate the nc Hessian and calculates its
+quadratic decomposition
+
+    expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
+    {left, middle, right} = NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];
+
+The resulting middle matrix can be factored using
+
+    {ldl, p, s, rank} = NCLDLDecomposition[middle];
+    {ll, dd, uu} = GetLDUMatrices[ldl, s];
+
+which produces the diagonal factors
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A%20%202%20%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%0A%5Cend%7Bbmatrix%7D)
+
+</div>
+
+which indicates the the original nc rational is convex whenever
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%5Csucceq%200)
+
+</div>
+
+or, equivalently, whenever
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=1%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%20%5Csucceq%200)
+
+</div>
+
+The above sequence of calculations is automated by the command
+[`NCConvexityRegion`](#ncconvexityregion) as in
+
+    << NCConvexity`
+    NCConvexityRegion[expr, {x}]
+
+which results in
+
+    {2 inv[1 + b**y + y**b - a**x**a], 0}
+
+which correspond to the diagonal entries of the LDL decomposition of
+the middle matrix of the nc Hessian.
+
+# More Advanced Commands
+
+In this chapter we describe some more advance features and
+commands. Most of these were introduced in **Version 5**.
+
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/2_MoreAdvancedCommands.nb`.
+
+## Advanced Rules and Replacements
+
+Substitution is a key feature of Symbolic computation. We will now
+discuss some issues related to Mathematica’s implementation of rules
+and replacements that can affect the behavior of `NCAlgebra`
+expressions.
+
+### `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`) often fail
+
+The first issue is related to how Mathematica performs substitutions,
+which is through
+[pattern matching](http://reference.wolfram.com/language/guide/RulesAndPatterns.html). For
+a rule to be effective if has to match the *structural*
+representation of an expression. That representation might be
+different than one would normally think based on the usual properties
+of mathematical operators. For example, one would expect the rule:
 
     rule = 1 + x_ -> x
 
@@ -1098,9 +1575,14 @@ with `expr` taking the above expressions would result in:
     a + b
     2 a * b
 
-Indeed, Mathematica's attribute `Flat` does precisely that. Note that this is stil *structural matching*, not *mathematical matching*, since the pattern `1 + x_` would not match an integer `2`, even though one could write `2 = 1 + 1`!
+Indeed, Mathematica’s attribute `Flat` does precisely that. Note that
+this is still *structural matching*, not *mathematical matching*, since
+the pattern `1 + x_` would not match an integer `2`, even though one
+could write `2 = 1 + 1`!
 
-Unfortunately, `**`, which is the `NonCommutativeMultiply` operator, *is not* `Flat`[3]. This is the reason why substitution based on a simple rule such as:
+Unfortunately, `**`, which is the `NonCommutativeMultiply` operator,
+*is not* `Flat`[^4]. This is the reason why substitution based
+on a simple rule such as:
 
     rule = a**b -> c
 
@@ -1123,21 +1605,31 @@ but will fail to produce the *expected* result in cases like:
     c**a**b**d
     1 + 2 a**b**c
 
-That's what the `NCAlgebra` family of replacement functions are made for. Calling
+That’s what the `NCAlgebra` family of replacement functions discussed in the next section are made for.
+
+### The fix is `NCReplace`
+
+Continuing with the example in the previous section, the calls
 
     NCReplaceAll[a**b**c, rule]
     NCReplaceAll[ c**a**b, rule ]
     NCReplaceAll[c**a**b**d, rule]
     NCReplaceAll[1 + 2 a**b**c, rule ]
 
-would produce the results one would expect:
+produces the results one would expect:
 
     c**c
     c**c
     c**c**d
     1 + 2 c**c
 
-For this reason, when substituting in `NCAlgebra` it is always safer to use functions from the [`NCReplace` package](#ncreplace) rather than the corresponding Mathematice `Replace` family of functions. Unfortunately, this comes at a the expense of sacrificing the standard operators `/.` (`ReplaceAll`) and `//.` (`ReplaceRepeated`), which cannot be safely overloaded, forcing one to use the full names `NCReplaceAll` and `NCReplaceRepeated`.
+For this reason, when substituting in `NCAlgebra` it is always safer
+to use functions from the [`NCReplace` package](#ncreplace)
+rather than the corresponding Mathematica `Replace` family of
+functions. Unfortunately, this comes at a the expense of sacrificing
+the standard operators `/.` (`ReplaceAll`) and `//.`
+(`ReplaceRepeated`), which cannot be safely overloaded, forcing one to
+use the full names `NCReplaceAll` and `NCReplaceRepeated`.
 
 On the same vein, the following substitution rule
 
@@ -1147,13 +1639,29 @@ will return `2 a**b + c` intact since `FullForm[2 a**b]` is indeed
 
     Times[2, NonCommutativeMuliply[a, b]]
 
-which is not structurally related to `FullForm[2 a]`, which is `Times[2, a]`. Of course, in this case a simple solution is to use the alternative rule:
+which is not structurally related to `FullForm[2 a]`, which is
+`Times[2, a]`. Of course, in this case a simple solution is to use the
+alternative rule:
 
     NCReplace[2 a**b + c, a -> b / 2]
 
 which results in `b**b + c`, as one might expect.
 
-A second more esoteric issue related to substitution in `NCAlgebra` does not a clean solution. It is also one that usually lurks into hidden pieces of code and can be very difficult to spot. We have been victim of such "bug" many times. Luckily it only affect advanced users that are using `NCAlgebra` inside their own functions using Mathematica's `Block` and `Module` constructions. It is also not a real bug, since it follows from some often not well understood issues with the usage of [`Block` versus `Module`](http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html). Our goal here is therefore not to *fix* the issue but simply to alert advanced users of its existence. Start by first revisiting the following example from the [Mathematica documentation](http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html). Let
+### Trouble with `Block` and `Module`
+
+A second more esoteric issue related to substitution in `NCAlgebra`
+does not have a clean solution. It is also one that usually lurks in
+hidden pieces of code and can be very difficult to spot. We have been
+victim of such “bugs” many times. Luckily it only affect advanced users
+that are using `NCAlgebra` inside their own functions using
+Mathematica’s `Block` and `Module` constructions. It is also not a
+real bug, since it follows from some often not well understood issues
+with the usage of
+[`Block` versus `Module`](http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html). Our
+goal here is therefore not to *fix* the issue but simply to alert
+advanced users of its existence. Start by first revisiting the
+following example from the
+[Mathematica documentation](http://reference.wolfram.com/language/tutorial/BlocksComparedWithModules.html). Let
 
     m = i^2
 
@@ -1161,7 +1669,7 @@ and run
 
     Block[{i = a}, i + m]
 
-which returns the \`\`expected''
+which returns the \`\`expected’’
 
     a + a**a
 
@@ -1169,11 +1677,16 @@ versus
 
     Module[{i = a}, i + m]
 
-which returns the \`\`surprising''
+which returns the \`\`surprising’’
 
     a + i**i
 
-The reason for this behavior is that `Block` effectively evaluates `i` as a *local variable* and then `m` using whatever values are available at the time of evaluation, whereas `Module` only evaluates the symbol `i` which appears *explicitly* in `i + m` and not `m` using the local value of `i = a`. This can lead to many surprises when using rules and substitution inside `Module`. For example:
+The reason for this behavior is that `Block` effectively evaluates `i`
+as a *local variable* and evaluates `m` using whatever values are available
+at the time of evaluation, whereas `Module` only evaluates the symbol
+`i` which appears *explicitly* in `i + m` and not `m` using the local
+value of `i = a`. This can lead to many surprises when using
+rules and substitution inside a `Module`. For example:
 
     Block[{i = a}, i_ -> i]
 
@@ -1189,7 +1702,10 @@ will return
 
     i_ -> i
 
-More devastating for `NCAlgebra` is the fact that `Module` will hide local definitions from rules, which will often lead to disaster if local variables need to be declared noncommutative. Consider for example the trivial definitions for `F` and `G` below:
+More devastating for `NCAlgebra` is the fact that `Module` will hide
+local definitions from rules, which will often lead to disaster if
+local variables need to be declared noncommutative. Consider for
+example the trivial definitions for `F` and `G` below:
 
     F[exp_] := Module[
       {rule, aa, bb},
@@ -1205,11 +1721,15 @@ More devastating for `NCAlgebra` is the fact that `Module` will hide local defin
       NCReplaceAll[exp, rule]
     ]
 
-Their only difference is that one is defined using a `Block` and the other is defined using a `Module`. The task is to apply a rule that *flips* the noncommutative product of their arguments, say, `x**y`, into `y**x`. The problem is that only one of those definitions work \`\`as expected''. Indeed, verify that
+Their only difference is that one is defined using a `Block` and the
+other is defined using a `Module`. The task is to apply a rule that
+*flips* the noncommutative product of their arguments, say, `x**y`,
+into `y**x`. The problem is that only one of those definitions work
+\`\`as expected’’. Indeed, verify that
 
     G[x**y]
 
-returns the \`\`expected''
+returns the \`\`expected’’
 
     y**x
 
@@ -1221,9 +1741,21 @@ returns
 
     x y
 
-which completely destroys the noncommutative product. The reason for the catastrophic failure of the definition of `F`, which is inside a `Module`, is that the letters `aa` and `bb` appearing in `rule` are *not treated as the local symbols `aa` and `bb`*[4]. For this reason, the right-hand side of the rule `rule` involves the global symbols `aa` and `bb`, which are, in the absence of a declaration to the contrary, commutative. On the other hand, the definition of `G` inside a `Block` makes sure that `aa` and `bb` are evaluated with whatever value they might have locally at the time of execution.
+which completely destroys the noncommutative product. The reason for
+the catastrophic failure of the definition of `F`, which is inside a
+`Module`, is that the letters `aa` and `bb` appearing in `rule` are
+*not treated as the local symbols `aa` and `bb`*[^5]. For this
+reason, the right-hand side of the rule `rule` involves the global
+symbols `aa` and `bb`, which are, in the absence of a declaration to
+the contrary, commutative. On the other hand, the definition of `G`
+inside a `Block` makes sure that `aa` and `bb` are evaluated with
+whatever value they might have locally at the time of execution.
 
-The above subtlety often manifests itself partially, sometimes causing what might be perceived as some kind of *erratic behavior*. Indeed, if one had used symbols that were already declared globaly noncommutative by `NCAlgebra`, such as single small cap roman letters as in the definition:
+The above subtlety often manifests itself partially, sometimes causing
+what might be perceived as some kind of *erratic behavior*. Indeed, if
+one had used symbols that were already declared globaly noncommutative
+by `NCAlgebra`, such as single small cap roman letters as in the
+definition:
 
     H[exp_] := Module[
       {rule, a, b},
@@ -1232,12 +1764,17 @@ The above subtlety often manifests itself partially, sometimes causing what migh
       NCReplaceAll[exp, rule]
     ]
 
-then calling `H[x**y]` would have worked \`\`as expected'', even if for the wrong reasons!
+then calling `H[x**y]` would have worked \`\`as expected’’, even if for
+the wrong reasons!
 
-Matrices
---------
+## Expanding matrix products
 
-Starting at **Version 5** the operators `**` and `inv` apply also to matrices. However, in order for `**` and `inv` to continue to work as full fledged operators, the result of multiplications or inverses of matrices is held unevaluated until the user calls [`NCMatrixExpand`](#ncmatrixexpand). This is in the the same spirit as good old fashion commutative operations in Mathematica.
+Starting at **Version 5** the operators `**` and `inv` apply also to
+matrices. However, in order for `**` and `inv` to continue to work as
+full fledged operators, the result of multiplications or inverses of
+matrices is held unevaluated until the user calls
+[`NCMatrixExpand`](#ncmatrixexpand). This is in the the same spirit as
+good old fashion commutative operations in Mathematica.
 
 For example, with
 
@@ -1260,7 +1797,7 @@ evaluation takes place returning
 
     {{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
 
-which is what would have been by calling `NCDot[m1,m2]`[5]. Likewise
+which is what would have arisen from calling `NCDot[m1,m2]`[^6]. Likewise
 
     inv[m1]
 
@@ -1276,6 +1813,10 @@ returns the evaluated result
 
     {{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
      {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+
+or, using `MatrixForm`:
+
+![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 A less trivial example is
 
@@ -1315,35 +1856,34 @@ returns
 
 as expected.
 
-**WARNING:** Mathematica's choice of treating lists and matrix indistinctively can cause much trouble when mixing `**` with `Plus` (`+`) operator. For example, the expression
+### Trouble with `Plus` (`+`) and matrices
 
-    m1**m2 + m2**m1
+Mathematica’s choice of treating lists and matrix indistinctively can
+cause much trouble when mixing `**` with `Plus` (`+`) operator. The
+reason for that is that `Plus` is `Listable`, and an expression like
 
-results in
+    z + m1
 
-    {{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
+where `m1` is an array and `z` is not, is automatically expanded into
 
-and
+    {{a + z, b + z}, {c + z, d + z}}
 
-    m1**m2 + m2**m1 // NCMatrixExpand
+or, using `MatrixForm`:
 
-produces the expected result
+![\\begin{bmatrix} a + z & b + z \\\\ c + z & d + z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%2B%20z%20%26%20b%20%2B%20z%20%5C%5C%20c%20%2B%20z%20%26%20d%20%2B%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
 
-    {{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
-     {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
-
-However, because `**` is held unevaluated, the expression
+Because of this “feature”, the expression
 
     m1**m2 + m2 // NCMatrixExpand
 
-returns the "wrong" result
+evaluates to the “wrong” result
 
     {{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
      {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
      {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
      {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}
 
-which is different than the "correct" result
+which is different than the “correct” result
 
     {{d + a**d + b**e, 2 + 2 a + 3 b}, 
      {e + c**d + d**e, 3 + 2 c + 3 d}}
@@ -1356,37 +1896,61 @@ or
 
     NCDot[m1, m2] + m2
 
-The reason for this behavior is that `m1**m2` is essentially treated as a *scalar* (it does not have *head* `List`) and therefore gets added entrywise to `m2` *before* `NCMatrixExpand` has a chance to evaluate the `**` product. There are no easy fixes for this problem, which affects not only `NCAlgebra` but any similar type of matrix product evaluation in Mathematica. With `NCAlgebra`, a better option is to use [`NCMatrixReplaceAll`](#ncmatrixreplaceall) or [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated).
+The reason for the behavior is that `m1**m2` is essentially treated
+as a *scalar* (it does not have *head* `List`) and therefore gets
+added entrywise to `m2` *before* `NCMatrixExpand` has a chance to
+evaluate the `**` product.
 
-[`NCMatrixReplaceAll`](#ncmatrixreplaceall) and [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated) are special versions of [`NCReplaceAll`](#ncreplaceall) and [`NCReplaceRepeated`](#ncreplacerepeated) that take extra steps to preserve matrix consistency when replacing expressions with nc matrices. For example
+There are no easy fixes for this problem, which affects not only
+`NCAlgebra` but any similar type of matrix product evaluation in
+Mathematica. With `NCAlgebra`, a better option is to use
+[`NCMatrixReplaceAll`](#ncmatrixreplaceall) or
+[`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated). As seen in the
+section [Replace with matrices](#replace-with-matrices), the command
 
     NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
 
-does produce the "correct" result
+produces the expected result:
 
     {{d + a**d + b**e, 2 + 2 a + 3 b}, 
      {e + c**d + d**e, 3 + 2 c + 3 d}}
 
-[`NCMatrixReplaceAll`](#ncmatrixreplaceall) and [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated) also work with block matrices. For example
+Note that the above behavior might be erratic, since in an expression like
 
-    rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}}
-    NCMatrixReplaceRepeated[inv[z], rule]
+    m1**m2 + m2**m1
 
-coincides with the result of
+in which `**` is kept unevaluated as in
 
-    NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
+    {{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
 
-Polynomials with commutative coefficients
------------------------------------------
+the command
 
-The package [`NCPoly`](#ncpoly) provides an efficient structure for storing and operating with noncommutative polynomials with commutative coefficients. There are two main goals:
+    m1**m2 + m2**m1 // NCMatrixExpand
 
-1.  *Ordering*: to be able to sort polynomials based on an *ordering* specified by the user. See the chapter [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis) for more details.
-2.  *Efficiency*: to efficiently perform polynomial algebra with as little overhead as possible.
+expands to the expected result
 
-Those two properties allow for an efficient implementation of `NCAlgebra`'s noncommutative Gröbner basis algorithm, new in **Version 5**, without the use of auxiliary accelerating `C` code, as in `NCGB`. See [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis).
+    {{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+     {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
 
-Before getting into details, to see how much more efficient `NCPoly` is when compared with standard `NCAlgebra` objects try
+## Polynomials with commutative coefficients
+
+The package [`NCPoly`](#ncpoly) provides an efficient structure
+for storing and operating with noncommutative polynomials with
+commutative coefficients. There are two main goals:
+
+1.  *Ordering*: to be able to sort polynomials based on an *ordering*
+    specified by the user. See the chapter
+    [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis) for more details.
+2.  *Efficiency*: to efficiently perform polynomial algebra with as
+    little overhead as possible.
+
+Those two properties allow for an efficient implementation of
+`NCAlgebra`’s noncommutative Gröbner basis algorithm, new in **Version
+5**, without the use of auxiliary accelerating `C` code, as in
+`NCGB`. See [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis).
+
+Before getting into details, to see how much more efficient `NCPoly`
+is when compared with standard `NCAlgebra` objects try
 
     Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 20, 5}]
 
@@ -1403,24 +1967,34 @@ would return
 
     {0.00097, 0.001653, 0.002208, 0.003908, 0.004306, 0.005049}
 
-Beware that `NCPoly` objects have limited functionality and should still be considered experimental at this point.
+Beware that `NCPoly` objects have limited functionality and should
+still be considered experimental at this point.
 
-The best way to work with `NCPoly` in `NCAlgebra` is by loading the package [`NCPolyInterface`](#ncpolyinterface):
+The best way to work with `NCPoly` in `NCAlgebra` is by loading the
+package [`NCPolyInterface`](#ncpolyinterface):
 
     << NCPolyInterface`
 
-which provides the commands [`NCToNCPoly`](#nctoncpoly) and [`NCPolyToNC`](#ncpolytonc) to convert nc expressions back and forth between `NCAlgebra` and `NCPoly`.
+which provides the commands [`NCToNCPoly`](#nctoncpoly) and
+[`NCPolyToNC`](#ncpolytonc) to convert nc expressions back and forth
+between `NCAlgebra` and `NCPoly`.
 
 For example
 
     vars = {x, y, z};
     p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
 
-converts the polynomial `1 + x**x - 2 x**y**z` from the standard `NCAlgebra` format into an `NCPoly` object. The reason for the braces in the definition of `vars` will be explained below, when we introduce *ordering*. See also Section [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis). The result in this case is the `NCPoly` object
+converts the polynomial `1 + x**x - 2 x**y**z` from the standard
+`NCAlgebra` format into an `NCPoly` object. The reason for the braces
+in the definition of `vars` will be explained below, when we introduce
+*ordering*. See also Section
+[Noncommutative Gröbner Basis](#noncommutative-gröbner-basis). The result in this case is the
+`NCPoly` object
 
     NCPoly[{1, 1, 1}, <|{0, 0, 0, 0} -> 1, {0, 0, 2, 0} -> 1, {1, 1, 1, 5} -> -2|>]
 
-Conversely the command [`NCPolyToNC`](#ncpolytonc) converts an `NCPoly` back into `NCAlgebra` format. For example
+Conversely the command [`NCPolyToNC`](#ncpolytonc) converts an
+`NCPoly` back into `NCAlgebra` format. For example
 
     NCPolyToNC[p, vars]
 
@@ -1428,15 +2002,24 @@ returns
 
     1 + x**x - 2 x**y**z
 
-as expected. Note that an `NCPoly` object does not store symbols, but rather a representation of the polynomial based on specially encoded monomials. This is the reason why one should provide `vars` as an argument to `NCPolyToNC`.
+as expected. Note that an `NCPoly` object does not store symbols, but
+rather a representation of the polynomial based on specially encoded
+monomials. This is the reason why one should provide `vars` as an
+argument to `NCPolyToNC`.
 
-Alternatively, one could construct the same `NCPoly` object by calling `NCPoly` directly as in
+Alternatively, one could construct the same `NCPoly` object by calling
+`NCPoly` directly as in
 
     NCPoly[{1, 1, -2}, {{}, {x, x}, {x, y, z}}, vars]
 
-In this syntax the first argument is a list of *coefficients*, the second argument is a list of *monomials*, and the third is the list of *variables*. *Monomials* are given as lists, with `{}` being equivalent to a constant `1`.
+In this syntax the first argument is a list of *coefficients*, the
+second argument is a list of *monomials*, and the third is the list of
+*variables*. *Monomials* are given as lists, with `{}` being
+equivalent to a constant `1`.
 
-The particular coefficients in the `NCPoly` object depend not only on the polynomial being represented but also on the *ordering* implied by the sequence of symbols in the list of variables `vars`. For example:
+The particular coefficients in the `NCPoly` object depend not only on
+the polynomial being represented but also on the *ordering* implied by
+the sequence of symbols in the list of variables `vars`. For example:
 
     vars = {{x}, {y, z}};
     p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
@@ -1445,13 +2028,18 @@ produces:
 
     NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
 
-The sequence of braces in the list of *variables* encodes the *ordering* to be used for sorting `NCPoly`s. Orderings specify how monomials should be ordered, and is discussed in detail in [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis). We provide the convenience command [`NCPolyDisplayOrder`](#ncpolydisplayorder) that prints the polynomial ordering implied by a list of symbols. For example
+The sequence of braces in the list of *variables* encodes the
+*ordering* to be used for sorting `NCPoly`s. Orderings specify how
+monomials should be ordered, and is discussed in detail in
+[Noncommutative Gröbner Basis](#noncommutative-gröbner-basis). We provide the convenience
+command [`NCPolyDisplayOrder`](#ncpolydisplayorder) that prints the
+polynomial ordering implied by a list of symbols. For example
 
     NCPolyDisplayOrder[{x,y,z}]
 
 prints out
 
-![x \\ll y \\ll z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_31.png)
+![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
 
 and
 
@@ -1459,18 +2047,22 @@ and
 
 prints out
 
-![x \\ll y &lt; z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_32.png)
+![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
 
-from where you can see that grouping variables inside braces induces a graded type ordering, as discussed in Section . `NCPoly`s constructed from different orderings cannot be combined.
+from where you can see that grouping variables inside braces induces a
+graded type ordering, as discussed in [Noncommutative Gröbner
+Basis](#noncommutative-gröbner-basis). `NCPoly`s constructed from different orderings cannot
+be combined.
 
 There is also a special constructor for monomials. For example
 
     NCPolyMonomial[{y,x}, vars]
     NCPolyMonomial[{x,y}, vars]
 
-return the monomials corresponding to ![y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_33.png) and ![x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_34.png).
+return the monomials corresponding to ![y x](https://render.githubusercontent.com/render/math?math=y%20x&mode=inline) and ![x y](https://render.githubusercontent.com/render/math?math=x%20y&mode=inline).
 
-Operations on `NCPoly` objects result in another `NCPoly` object that is always expanded. For example:
+Operations on `NCPoly` objects result in another `NCPoly` object that
+is always expanded. For example:
 
     vars = {{x}, {y, z}};
     1 + NCPolyMonomial[{x, y}, vars] - 2 NCPolyMonomial[{y, x}, vars]
@@ -1487,7 +2079,8 @@ returns
 
     NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
 
-Another convenience function is `NCPolyDisplay` which returns a list with the monomials appearing in an `NCPoly` object. For example:
+Another convenience function is `NCPolyDisplay` which returns a list
+with the monomials appearing in an `NCPoly` object. For example:
 
     NCPolyDisplay[p, vars]
 
@@ -1495,7 +2088,9 @@ returns
 
     {x.y.x.y, 2 x.y, 1}
 
-The reason for displaying an `NCPoly` object as a list is so that the monomials can appear in the same order as they are stored. Using `Plus` would revert to Mathematica's default ordering. For example
+The reason for displaying an `NCPoly` object as a list is so that the
+monomials can appear in the same order as they are stored. Using
+`Plus` would revert to Mathematica’s default ordering. For example
 
     p = NCToNCPoly[1 + x**x**x - 2 x**x + z, vars]
     NCPolyDisplay[p, vars]
@@ -1514,9 +2109,11 @@ would return
 
 in which the sorting of the monomials has been destroyed by `Plus`.
 
-The monomials appear sorted in decreasing order from left to right, with `z` being the *leading term* in the above example.
+The monomials appear sorted in decreasing order from left to right,
+with `z` being the *leading term* in the above example.
 
-With `NCPoly` the Mathematica command `Sort` is modified to sort lists of polynomials. For example
+With `NCPoly` the Mathematica command `Sort` is modified to sort lists
+of polynomials. For example
 
     polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars]
     ColumnForm[NCPolyDisplay[Sort[polys], vars]]
@@ -1528,27 +2125,43 @@ returns
     {y.x, -x.x}
     {2 y.x, -z}
 
-`Sort` produces a list of polynomials sorted in *ascending* order based on their *leading terms*.
+`Sort` produces a list of polynomials sorted in *ascending* order
+based on their *leading terms*.
 
-Polynomials with noncommutative coefficients
---------------------------------------------
+## Polynomials with noncommutative coefficients
 
-A larger class of polynomials in noncommutative variables is that of polynomials with noncommutative coefficients. Think of a polynomial with commutative coefficients in which certain variables are considered to be unknown, i.e. *variables*, where others are considered to be known, i.e. *coefficients*. For example, in many problems in systems and control the following expression
+A larger class of polynomials in noncommutative variables is that of
+polynomials with noncommutative coefficients. Think of a polynomial
+with commutative coefficients in which certain variables are
+considered to be unknown, i.e. *variables*, where others are
+considered to be known, i.e. *coefficients*. For example, in many
+problems in systems and control the following expression
 
-![p(x) = a x + x a^T - x b x + c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_35.png)
+![p(x) = a x + x a^T - x b x + c](https://render.githubusercontent.com/render/math?math=p%28x%29%20%3D%20a%20x%20%2B%20x%20a%5ET%20-%20x%20b%20x%20%2B%20c&mode=inline)
 
-is often seen as a polynomial in the noncommutative unknown `x` with known noncommutative coefficients `a`, `b`, and `c`. A typical problem is the determination of a solution to the equation ![p(x) = 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_36.png) or the inequality ![p(x) \\succeq 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_37.png).
+is often seen as a polynomial in the noncommutative unknown `x` with
+known noncommutative coefficients `a`, `b`, and `c`. A typical problem
+is the determination of a solution to the equation ![p(x) = 0](https://render.githubusercontent.com/render/math?math=p%28x%29%20%3D%200&mode=inline) or the
+inequality ![p(x) \\succeq 0](https://render.githubusercontent.com/render/math?math=p%28x%29%20%5Csucceq%200&mode=inline).
 
-The package [`NCPolynomial`](#ncpolynomial) handles such polynomials with noncommutative coefficients. As with [`NCPoly`](#ncpoly), the package provides the commands [`NCToNCPolynomial`](#nctoncpolynomial) and [`NCPolynomialToNC`](#ncpolynomialtonc) to convert nc expressions back and forth between `NCAlgebra` and `NCPolynomial`. For example
+The package [`NCPolynomial`](#ncpolynomial) handles such
+polynomials with noncommutative coefficients. As with
+[`NCPoly`](#ncpoly), the package provides the commands
+[`NCToNCPolynomial`](#nctoncpolynomial) and
+[`NCPolynomialToNC`](#ncpolynomialtonc) to convert nc expressions back
+and forth between `NCAlgebra` and `NCPolynomial`. For example
 
     vars = {x}
     p = NCToNCPolynomial[a**x + x**tp[a] - x**b**x + c, vars]
 
-converts the polynomial `a**x + x**tp[a] - x**b**x + c` from the standard `NCAlgebra` format into an `NCPolynomial` object. The result in this case is the `NCPolynomial` object
+converts the polynomial `a**x + x**tp[a] - x**b**x + c` from
+the standard `NCAlgebra` format into an `NCPolynomial` object. The
+result in this case is the `NCPolynomial` object
 
     NCPolynomial[c, <|{x} -> {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -> {{-1, 1, b, 1}}|>, {x}]
 
-Conversely the command [`NCPolynomialToNC`](#ncpolynomialtonc) converts an `NCPolynomial` back into `NCAlgebra` format. For example
+Conversely the command [`NCPolynomialToNC`](#ncpolynomialtonc)
+converts an `NCPolynomial` back into `NCAlgebra` format. For example
 
     NCPolynomialToNC[p]
 
@@ -1556,9 +2169,12 @@ returns
 
     c + a**x + x**tp[a] - x**b**x
 
-An `NCPolynomial` does store information about the polynomial symbols and a list of variables is required only at the time of creation of the `NCPolynomial` object.
+An `NCPolynomial` does store information about the polynomial symbols
+and a list of variables is required only at the time of creation of
+the `NCPolynomial` object.
 
-As with `NCPoly`, operations on `NCPolynomial` objects result on another `NCPolynomial` object that is always expanded. For example:
+As with `NCPoly`, operations on `NCPolynomial` objects result on
+another `NCPolynomial` object that is always expanded. For example:
 
     vars = {x,y}
     1 + NCToNCPolynomial[x**y, vars] - 2 NCToNCPolynomial[y**x, vars]
@@ -1575,7 +2191,8 @@ returns
 
     NCPolynomial[1, <|{x**y**x**y} -> {{1, 1, 1}}, {x**y} -> {{2, 1, 1}}|>, {x, y}]
 
-To see how much more efficient `NCPolynomial` is when compared with standard `NCAlgebra` objects try
+To see how much more efficient `NCPolynomial` is when compared with standard
+`NCAlgebra` objects try
 
     Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 20, 5}]
 
@@ -1583,9 +2200,12 @@ would return
 
     {0.000493, 0.003345, 0.005974, 0.013479, 0.018575, 0.02896}
 
-As you can see, `NCPolynomial`s are not as efficient as `NCPoly`s but still much more efficient than `NCAlgebra` polynomials.
+As you can see, `NCPolynomial`s are not as efficient as `NCPoly`s but
+still much more efficient than `NCAlgebra` polynomials.
 
-`NCPolynomials` do not support *orderings* but we do provide the `NCPSort` command that produces a list of terms sorted by degree. For example
+`NCPolynomials` do not support *orderings* but we do provide the
+`NCPSort` command that produces a list of terms sorted by degree. For
+example
 
     NCPSort[p]
 
@@ -1593,7 +2213,8 @@ returns
 
     {c, a**x, x**tp[a], -x**b**x}
 
-A useful feature of `NCPolynomial` is the capability of handling polynomial matrices. For example
+A useful feature of `NCPolynomial` is the capability of handling
+polynomial matrices. For example
 
     mat1 = {{a**x + x**tp[a] + c**y + tp[y]**tp[c] - x**q**x, b**x}, 
             {x**tp[b], 1}};
@@ -1602,114 +2223,42 @@ A useful feature of `NCPolynomial` is the capability of handling polynomial matr
     mat2 = {{1, x**tp[c]}, {c**x, 1}};
     p2 = NCToNCPolynomial[mat2, {x, y}];
 
-constructs `NCPolynomial` objects representing the polynomial matrices `mat1` and `mat2`. Verify that
+constructs `NCPolynomial` objects representing the polynomial matrices
+`mat1` and `mat2`. Verify that
 
     NCPolynomialToNC[p1**p2] - NCDot[mat1, mat2] // NCExpand
 
-is zero as expected. Internally `NCPolynomial` represents a polynomial matrix by constructing matrix factors. For example the representation of the matrix `mat1` correspond to the factors ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_38.png)
+is zero as expected. Internally `NCPolynomial` represents a polynomial
+matrix by constructing matrix factors. For example the representation
+of the matrix `mat1` correspond to the factors
 
-See section [linear functions](#linear-polynomials) for more features on linear polynomial matrices.
+<div style="display:block;">
 
-Quadratic polynomials
----------------------
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20a%20x%20%2B%20x%20a%5ET%20%2B%20c%20y%20%2B%20y%5ET%20c%5ET%20-%20x%20q%20x%20%26%20b%20x%20%5C%5C%20%0A%20%20%20%20x%20b%5ET%20%26%201%0A%5Cend%7Bbmatrix%7D%20%0A%26%3D%0A%5Cbegin%7Bbmatrix%7D%200%20%26%200%20%5C%5C%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20a%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20a%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20-1%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%20q%20x%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%20%5C%5C%20%26%20%5Cqquad%20%5Cquad%0A%5Cbegin%7Bbmatrix%7D%20b%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%200%20%5C%5C%201%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20b%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20c%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%5ET%0A%5Cbegin%7Bbmatrix%7D%20c%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
 
-When working with nc quadratics it is useful to be able to factor the quadratic into the following form ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_39.png) where ![s](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_40.png) is linear ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_41.png) and ![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_42.png) and ![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_43.png) are vectors and ![M](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_44.png) is a matrix. Load the package
+</div>
 
-    << NCQuadratic`
+See section [linear polynomials](#linear-polynomials) for more features on
+linear polynomial matrices.
 
-and use the command [`NCToNCQuadratic`](#nctoncquadratic) to factor an nc polynomial into the the above form:
+## Linear polynomials
 
-    vars = {x, y};
-    expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
-    {const, lin, left, middle, right} = NCPToNCQuadratic[expr, vars];
+Another interesting class of nc polynomials is that of linear
+polynomials, which can be factored in the form:
 
-which returns
+<div style="display:block;">
 
-    left = {tp[x],tp[y]}
-    right = {y, x**d}
-    middle = {{a,b}, {tp[b],c}}
+![inline equation](https://render.githubusercontent.com/render/math?math=s%28x%29%20%3D%20l%20%28F%20%5Cotimes%20x%29%20r)
 
-and zero `const` and `lin`. The format for the linear part `lin` will be discussed lated in Section [Linear](#linear-polynomials). Note that coefficients of an nc quadratic may also appear on the left and right vectors, as `d` did in the above example. You can also convert an `NCPolynomial` using [`NCPToNCQuadratic`](#ncptoncquadratic). Conversely, [`NCQuadraticToNC`](#ncquadratictonc) converts a list with factors back to an nc expression as in:
+</div>
 
-    NCQuadraticToNC[{const, lin, left, middle, right}]
-
-which results in
-
-    (tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
-
-An interesting application is the verification of the domain in which an nc rational is *convex*. Take for example the quartic
-
-    expr = x**x**x**x;
-
-and calculate its noncommutative directional *Hessian*
-
-    hes = NCHessian[expr, {x, h}]
-
-This command returns
-
-    2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
-
-which is quadratic in the direction `h`. The decomposition of the nc Hessian using `NCToNCQuadratic`
-
-    {const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];
-
-produces
-
-    left = {h, x**h, x**x**h}
-    right = {h**x**x, h**x, h}
-    middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
-
-Note that the middle matrix ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_45.png) is not *symmetric*, as one might have expected. The command [`NCQuadraticMakeSymmetric`](#ncquadraticmakesymmetric) can fix that and produce a symmetric decomposition. For the above example
-
-    {const, lin, sleft, smiddle, sright} = 
-      NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
-                               SymmetricVariables -> {x, h}]
-
-results in
-
-    sleft = {x**x**h, x**h, h}
-    sright = {h**x**x, h**x, h}
-    middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
-
-in which `middle` is the symmetric matrix ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_46.png) Note the argument `SymmetricVariables -> {x,h}` which tells `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric variables. Because the `middle` matrix is never positive semidefinite for any possible value of ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_47.png) the conclusion[6] is that the nc quartic ![x^4](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_49.png) is *not convex*.
-
-The production of such symmetric quadratic decompositions is automated by the convenience command [`NCMatrixOfQuadratic`](#ncmatrixofquadratic). Verify that
-
-    {sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]
-
-automatically assumes that both `x` and `h` are symmetric variables and produces suitable left and right vectors as well as a symmetric middle matrix. Now we illustrate the application of such command to checking the convexity region of a noncommutative rational function.
-
-If one is interested in checking convexity of nc rationals the package [`NCConvexity`](#ncconvexity) has functions that automate the whole process, including the calculation of the Hessian and the middle matrix, followed by the diagonalization of the middle matrix as produced by [`NCLDLDecomposition`](#ncldldecomposition).
-
-For example, the commands evaluate the nc Hessian and calculates its quadratic decomposition
-
-    expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
-    {left, middle, right} = NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];
-
-The resulting middle matrix can be factored using
-
-    {ldl, p, s, rank} = NCLDLDecomposition[middle];
-    {ll, dd, uu} = GetLDUMatrices[ldl, s];
-
-which produces the diagonal factors ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_50.png) which indicates the the original nc rational is convex whenever ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_51.png) or, equivalently, whenever ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_52.png) The above sequence of calculations is automated by the command [`NCConvexityRegion`](#ncconvexityregion) as in
-
-    << NCConvexity`
-    NCConvexityRegion[expr, {x}]
-
-which results in
-
-    {2 (1 + b**y + y**b - a**x**a)^-1, 0}
-
-which correspond to the diagonal entries of the LDL decomposition of the middle matrix of the nc Hessian.
-
-Linear polynomials
-------------------
-
-Another interesting class of nc polynomials is that of linear polynomials, which can be factor in the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_53.png) where ![l](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_54.png) and ![r](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_55.png) are vectors with symbolic expressions and ![F](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_56.png) is a numeric matrix. This functionality is in the package
+where ![l](https://render.githubusercontent.com/render/math?math=l&mode=inline) and ![r](https://render.githubusercontent.com/render/math?math=r&mode=inline) are vectors with symbolic expressions and ![F](https://render.githubusercontent.com/render/math?math=F&mode=inline) is a
+numeric matrix. This functionality is in the package
 
     << NCSylvester`
 
-Use the command [`NCToNCSylvester`](#nctoncsylvester) to factor a linear nc polynomial into the the above form. For example:
+Use the command [`NCToNCSylvester`](#nctoncsylvester) to factor a
+linear nc polynomial into the the above form. For example:
 
     vars = {x, y};
     expr = 1 + a**x + x**tp[a] - x + b**y**d + tp[d]**tp[y]**tp[b];
@@ -1723,13 +2272,14 @@ and an `Association` `lin` containing the factorization. For example
 
     lin[x]
 
-returns a list with the left and right vectors `l` and `r` and the coefficient array `F`.
+returns a list with the left and right vectors `l`
+and `r` and the coefficient array `F`.
 
     {{1, a}, {1, a^T}, SparseArray[< 2 >, {2, 2}]}
 
 which in this case is the matrix:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_57.png)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20-1%20%26%201%5C%5C%0A%20%20%20%201%20%26%200%0A%5Cend%7Bbmatrix%7D)
 
 and
 
@@ -1739,9 +2289,14 @@ returns
 
     {{d^T}, {b^T}, SparseArray[< 1 >, {1, 1}]}
 
-Note that transposes and adjoints are treated as independent variables.
+Note that transposes and adjoints are treated as independent
+variables.
 
-Perhaps the most useful consequence of the above factorization is the possibility of producing a linear polynomial which has the smallest possible number of terms, as explaining in detail in \[@oliveira:SSP:2012\]. This is done automatically by [`NCSylvesterToNC`](#ncsylvestertonc). For example
+Perhaps the most useful consequence of the above factorization is the
+possibility of producing a linear polynomial which has the smallest
+possible number of terms, as explaining in detail in
+\[@oliveira:SSP:2012\]. This is done automatically by
+[`NCSylvesterToNC`](#ncsylvestertonc). For example
 
     vars = {x, y};
     expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**y**d;
@@ -1752,7 +2307,10 @@ produces:
 
     (a + b) ** x ** (c - d) + (a + b) ** y ** (-c + d)
 
-This factorization even works with linear matrix polynomials, and is used by the our semidefinite programming algorithm (see Chapter [Semidefinite Programming](#semidefinite-programming)) to factor linear matrix inequalities in the least possible number of terms. For example:
+This factorization even works with linear matrix polynomials, and is
+used by the our semidefinite programming algorithm (see Chapter
+[Semidefinite Programming](#semidefinite-programming)) to factor linear
+matrix inequalities in the least possible number of terms. For example:
 
     vars = {x};
     expr = {{a ** x + x ** tp[a], b ** x, tp[c]},
@@ -1765,14 +2323,17 @@ result in:
     const = SparseArray[< 6 >, {3, 3}]
     lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
 
-See \[@oliveira:SSP:2012\] for details on the structure of the constant array ![F](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_58.png) in this case.
+See \[@oliveira:SSP:2012\] for details on the structure of the constant
+array ![F](https://render.githubusercontent.com/render/math?math=F&mode=inline) in this case.
 
-Noncommutative Gröbner Basis
-============================
+# Noncommutative Gröbner Basis
 
-The package `NCGBX` provides an implementation of a noncommutative Gröbner Basis algorithm. It is a Mathematica only replacement to the C++ `NCGB` which is still provided with this distribution.
+The package `NCGBX` provides an implementation of a noncommutative
+Gröbner Basis algorithm. It is a Mathematica only replacement to the
+C++ `NCGB` which is still provided with this distribution.
 
-If you want a living version of this chapter just run the notebook `NC/DEMOS/3_NCGroebnerBasis.nb`.
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/3_NCGroebnerBasis.nb`.
 
 Gröbner Basis are useful in the study of algebraic relations.
 
@@ -1788,31 +2349,88 @@ or simply
 
 if `NC` and `NCAlgebra` have already been loaded.
 
-What is a Gröbner Basis?
-------------------------
+## What is a Gröbner Basis?
 
-Most commutative algebra packages contain commands based on Gröbner Basis and uses of Gröbner Basis. For example, in Mathematica, the `Solve` command puts collections of equations in a *canonical form* which, for simple collections, readily yields a solution. Likewise, the Mathematica `Eliminate` command tries to convert a collection of ![m](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_59.png) polynomial equations (often called relations) ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_60.png)
+Most commutative algebra packages contain commands based on Gröbner
+Basis and uses of Gröbner Basis. For example, in Mathematica, the
+`Solve` command puts collections of equations in a *canonical form*
+which, for simple collections, readily yields a solution. Likewise,
+the Mathematica `Eliminate` command tries to convert a collection of
+![m](https://render.githubusercontent.com/render/math?math=m&mode=inline) polynomial equations (often called relations)
 
-in variables ![x\_1,x\_2, \\ldots x\_n](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_61.png) to a *triangular* form, that is a new collection of equations like
+<div style="display:block;">
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_62.png) Here the polynomials ![\\{q\_j: 1\\le j\\le k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_63.png) generate the same *ideal* that the polynomials ![\\{p\_j : 1\\le j \\le k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_64.png) generate. Therefore, the set of solutions to the collection of polynomial equations ![\\{p\_j=0: 1\\le j\\le k\_1\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_65.png) equals the set of solutions to the collection of polynomial equations ![\\{q\_j=0: 1\\le j\\le k\_2\\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_66.png). This canonical form greatly simplifies the task of solving collections of polynomial equations by facilitating backsolving for ![x\_j](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_67.png) in terms of ![x\_1,\\ldots,x\_{j-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_68.png).
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20p_1%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20p_2%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20p_m%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%0A%20%20%20%20%5Cend%7Baligned%7D)
 
-Readers who would like to know more about Gröbner Basis may want to read \[CLS\]. The noncommutatative version of the algorithm implemented by `NCGB` is loosely based on \[Mora\].
+</div>
 
-Solving equations
------------------
+in variables ![x_1,x_2, \\ldots x_n](https://render.githubusercontent.com/render/math?math=x_1%2Cx_2%2C%20%5Cldots%20x_n&mode=inline) to a *triangular* form, that is a
+new collection of equations like
 
-Before calculating a Gröbner Basis, one must declare which variables will be used during the computation and must declare a *monomial order* which can be done using `SetMonomialOrder` as in:
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20q_1%28x_1%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_2%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_3%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_4%28x_1%2Cx_2%2Cx_3%29%26%3D0%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20q_%7Br%7D%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200.%0A%20%20%20%20%5Cend%7Baligned%7D)
+
+</div>
+
+Here the polynomials ![\\{q_j: 1\\le j\\le k_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline) generate the same
+*ideal* that the polynomials ![\\{p_j : 1\\le j \\le k_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%20%3A%201%5Cle%20j%20%5Cle%20k_1%5C%7D&mode=inline)
+generate. Therefore, the set of solutions to the collection of
+polynomial equations ![\\{p_j=0: 1\\le j\\le k_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%3D0%3A%201%5Cle%20j%5Cle%20k_1%5C%7D&mode=inline) equals the set of
+solutions to the collection of polynomial equations ![\\{q_j=0: 1\\le j\\le k_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3D0%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline). This canonical form greatly simplifies the task of
+solving collections of polynomial equations by facilitating
+backsolving for ![x_j](https://render.githubusercontent.com/render/math?math=x_j&mode=inline) in terms of ![x_1,\\ldots,x\_{j-1}](https://render.githubusercontent.com/render/math?math=x_1%2C%5Cldots%2Cx_%7Bj-1%7D&mode=inline).
+
+Readers who would like to know more about Gröbner Basis may want to
+read \[CLS\]. The noncommutatative version of the algorithm implemented
+by `NCGB` is loosely based on \[Mora\].
+
+## Solving equations
+
+Before calculating a Gröbner Basis, one must declare which variables
+will be used during the computation and must declare a *monomial
+order* which can be done using `SetMonomialOrder` as in:
 
     SetMonomialOrder[{a, b, c}, x];
 
-The monomial ordering imposes a relationship between the variables which are used to *sort* the monomials in a polynomial. The ordering implied by the above command can be visualized using:
+The monomial ordering imposes a relationship between the variables
+which are used to *sort* the monomials in a polynomial. The ordering
+implied by the above command can be visualized using:
 
     PrintMonomialOrder[];
 
-which in this case prints: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_69.png) A user does not need to know theoretical background related to monomials orders. Indeed, as we shall see soon, in many engineering problems, it suffices to know which variables correspond to quantities which are *known* and which variables correspond to quantities which are *unknown*. If one is solving for a variable or desires to prove that a certain quantity is zero, then one would want to view that variable as *unknown*. In the above example, the symbol '![\\ll](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_70.png)' separate the *knowns*, ![a, b, c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_71.png), from the *unknown*, ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_72.png). For more details on orderings see Section [Orderings](#ordering-on-variables-and-monomials).
+which in this case prints:
 
-Our goal is to calculate the Gröbner basis associated with the following relations (i.e. a list of polynomials): ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_73.png) We shall use the word *relation* to mean a polynomial in noncommuting indeterminates. For example, if an analyst saw the equation ![A B = 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_74.png) for matrices ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_75.png) and ![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_76.png), then he might say that ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_77.png) and ![B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_78.png) satisfy the polynomial equation ![a\\, b - 1 = 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_79.png). An algebraist would say that ![a\\, b - 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_80.png) is a relation.
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x.)
+
+</div>
+
+A user does not need to know theoretical background related to
+monomials orders. Indeed, as we shall see soon, in many engineering
+problems, it suffices to know which variables correspond to quantities
+which are *known* and which variables correspond to quantities which
+are *unknown*. If one is solving for a variable or desires to prove
+that a certain quantity is zero, then one would want to view that
+variable as *unknown*. In the above example, the symbol ‘![\\ll](https://render.githubusercontent.com/render/math?math=%5Cll&mode=inline)’
+separate the *knowns*, ![a, b, c](https://render.githubusercontent.com/render/math?math=a%2C%20b%2C%20c&mode=inline), from the *unknown*, ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline). For more
+details on orderings see Section [Orderings](#ordering-on-variables-and-monomials).
+
+Our goal is to calculate the Gröbner basis associated with the
+following relations (i.e. a list of polynomials):
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20a%20%5C%2C%20x%20%5C%2C%20a%20%26%3D%20c%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20%26%3D%201%2C%20%26%0A%20%20%20%20b%20%5C%2C%20a%20%26%3D%201.%0A%5Cend%7Baligned%7D)
+
+</div>
+
+We shall use the word *relation* to mean a polynomial in noncommuting
+indeterminates. For example, if an analyst saw the equation ![A B = 1](https://render.githubusercontent.com/render/math?math=A%20B%20%3D%201&mode=inline)
+for matrices ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline) and ![B](https://render.githubusercontent.com/render/math?math=B&mode=inline), then he might say that ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline) and ![B](https://render.githubusercontent.com/render/math?math=B&mode=inline) satisfy
+the polynomial equation ![a\\, b - 1 = 0](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201%20%3D%200&mode=inline). An algebraist would say that
+![a\\, b - 1](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201&mode=inline) is a relation.
 
 To calculate a Gröbner basis one defines a list of relations:
 
@@ -1837,13 +2455,21 @@ which should produces an output similar to:
     * Found Groebner basis with 3 polynomials
     * * * * * * * * * * * * * * * *
 
-The number `10` in the call to `NCMakeGB` is very important because a finite GB may not exist. It instructs `NCMakeGB` to abort after `10` iterations if a GB has not been found at that point.
+The number `10` in the call to `NCMakeGB` is very important because a
+finite GB may not exist. It instructs `NCMakeGB` to abort after `10`
+iterations if a GB has not been found at that point.
 
-The result of the above calculation is the list of relations in the form of a list of rules:
+The result of the above calculation is the list of relations in the
+form of a list of rules:
 
     {x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
 
-**Version 5:** For efficiency, `NCMakeGB` returns a list of rules instead of a list of polynomials. The left-hand side of the rule is the leading monomial in the current order. This is incompatible with early versions, which returned a list of polynomials. You can recover the old behavior setting the option `ReturnRules ->   False`. This can be done in the `NCMakeGB` command or globally through `SetOptions[ReturnRules -> False]`.
+**Version 5:** For efficiency, `NCMakeGB` returns a list of rules
+instead of a list of polynomials. The left-hand side of the rule is
+the leading monomial in the current order. This is incompatible with
+early versions, which returned a list of polynomials. You can
+recover the old behavior setting the option `ReturnRules ->   False`. This can be done in the `NCMakeGB` command or globally
+through `SetOptions[ReturnRules -> False]`.
 
 Our favorite format for displaying lists of relations is `ColumnForm`.
 
@@ -1855,22 +2481,59 @@ which results in
     a ** b -> 1
     b ** a -> 1
 
-The *rules* in the output represent the relations in the GB with the left-hand side of the rule being the leading monomial. Replacing `Rule` by `Subtract` recovers the relations but one would then loose the leading monomial as Mathematica alphabetizes the resulting sum.
+The *rules* in the output represent the relations in the GB with the
+left-hand side of the rule being the leading monomial. Replacing
+`Rule` by `Subtract` recovers the relations but one would then loose
+the leading monomial as Mathematica alphabetizes the resulting sum.
 
-Someone not familiar with GB's might find it instructive to note this output GB effectively *solves* the input equation ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_81.png) under the assumptions that ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_82.png) that is ![a = b^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_83.png) and produces the expected result in the form of the relation: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_84.png)
+Someone not familiar with GB’s might find it instructive to note this
+output GB effectively *solves* the input equation
 
-A slightly more challenging example
------------------------------------
+<div style="display:block;">
 
-For a slightly more challenging example consider the same monomial order as before:
+![inline equation](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%5C%2C%20a%20-%20c%20%3D%200)
+
+</div>
+
+under the assumptions that
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20b%20%5C%2C%20a%20-%201%20%26%3D%200%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20-%201%20%26%20%3D0%2C%0A%5Cend%7Baligned%7D)
+
+</div>
+
+that is ![a = b^{-1}](https://render.githubusercontent.com/render/math?math=a%20%3D%20b%5E%7B-1%7D&mode=inline) and produces the expected result in the form of
+the relation:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%3D%20b%20%5C%2C%20c%20%5C%2C%20b.)
+
+</div>
+
+## A slightly more challenging example
+
+For a slightly more challenging example consider the same monomial
+order as before:
 
     SetMonomialOrder[{a, b, c}, x];
 
 that is
 
-![a &lt; b &lt; c \\ll x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_85.png)
+![a \< b \< c \\ll x](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x&mode=inline)
 
-and the relations: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_86.png) from which one can recognize the problem of solving the linear equation ![a \\, x = c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_87.png) in terms of the *pseudo-inverse* ![b = a^\\dag](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_88.png). The calculation:
+and the relations:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20a%20%5C%2C%20x%20-%20c%20%26%3D%200%2C%20%5C%5C%0A%20%20a%20%5C%2C%20b%20%5C%2C%20a%20-%20a%20%26%3D%200%2C%20%5C%5C%0A%20%20b%20%5C%2C%20a%20%5C%2C%20b%20-%20b%20%26%3D%200%2C%0A%5Cend%7Baligned%7D)
+
+</div>
+
+from which one can recognize the problem of solving the linear
+equation ![a \\, x = c](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%3D%20c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\\dag](https://render.githubusercontent.com/render/math?math=b%20%3D%20a%5E%5Cdag&mode=inline). The
+calculation:
 
     gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
 
@@ -1881,12 +2544,38 @@ finds the Gröbner basis:
     a ** b ** a -> a 
     b ** a ** b -> b
 
-In this case the Gröbner basis cannot quite *solve* the equations but it remarkably produces the necessary condition for existence of solutions: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_89.png) that can be interpreted as ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_90.png) being in the range-space of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_91.png).
+In this case the Gröbner basis cannot quite *solve* the equations but
+it remarkably produces the necessary condition for existence of
+solutions:
 
-Simplifying polynomial expresions
----------------------------------
+<div style="display:block;">
 
-Our goal now is to verify if it is possible to *simplify* the following expression: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_92.png) if we know that ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_93.png) using Gröbner basis. With that in mind we set the order:
+![inline equation](https://render.githubusercontent.com/render/math?math=0%20%3D%20a%20%5C%2C%20b%20%5C%2C%20c%20-%20c%20%3D%20a%20%5C%2C%20a%5E%5Cdag%20c%20-%20c)
+
+</div>
+
+that can be interpreted as ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) being in the range-space of ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline).
+
+## Simplifying polynomial expresions
+
+Our goal now is to verify if it is possible to *simplify* the following
+expression:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=b%20%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20a%20-%20a%20%5C%2C%20a%20%5C%2C%20b%20%5C%2C%20b%20%2B%20a%20%5C%2C%20b%20%5C%2C%20a)
+
+</div>
+
+if we know that
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b)
+
+</div>
+
+using Gröbner basis. With that in mind we set the order:
 
     SetMonomialOrder[a,b];
 
@@ -1914,7 +2603,8 @@ and the associated GB
     a ** b ** a -> b
     b ** b ** a -> a ** b ** b
 
-The GB revealed another relationship that must hold true if ![a \\, b \\, a = b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_94.png). One can use these relationships to simplify the original expression using `NCReplaceRepeated` as in
+The GB revealed another relationship that must hold true if ![a \\, b \\, a = b](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b&mode=inline). One can use these relationships to simplify the original
+expression using `NCReplaceRepeated` as in
 
     expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
     simp = NCReplaceRepeated[expr, rules]
@@ -1923,18 +2613,72 @@ which results in
 
     simp = b
 
-Simplifying rational expresions
--------------------------------
+## Minimal versus reduced Gröbner Basis
 
-It is often desirable to simplify expressions involving inverses of noncommutative expressions. One challenge is to recognize identities implied by the existence of certain inverses. For example, that the expression ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_95.png) is equivalent to ![0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_96.png). One can use a nc Gröbner basis for that task. Consider for instance the order
+The algorithm implemented by `NCGB` always produces a Gröbner Basis
+with the *minimal* possible number of polynomials. However, such
+polynomials are not necessarily the “simplest” possible polynomials;
+called the *reduced* Gröbner Basis. The *reduced* Gröbner Basis is
+unique given the relations and the monomial order. Consider for
+example the following monimial order
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_97.png)
+    SetMonomialOrder[x, y]
+
+and the relations
+
+    rels = {x^3 - 2 x ** y, x^2 ** y - 2 y^2 + x}
+
+for which
+
+    NCMakeGB[rels]
+
+produces the following *minimal* Gröbner Basis
+
+    x**x->0
+    x**y->x**x**x/2
+    y**x->x**y
+    y**y->x/2+x**x**y/2
+
+but
+
+    NCMakeGB[rels, ReduceBasis -> True]
+
+returns the *reduced* Gröbner Basis
+
+    x**x->0
+    x**y->0
+    y**x->0
+    y**y->x/2
+
+in which not only the leading mononials but also all lower-order
+monomials have been reduced by the basis’ leading monomials.
+
+## Simplifying rational expresions
+
+It is often desirable to simplify expressions involving inverses of
+noncommutative expressions. One challenge is to recognize identities
+implied by the existence of certain inverses. For example, that the
+expression
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%281%20-%20x%29%5E%7B-1%7D%20-%20%281%20-%20x%29%5E%7B-1%7D%20x)
+
+</div>
+
+is equivalent to ![0](https://render.githubusercontent.com/render/math?math=0&mode=inline). One can use a nc Gröbner basis for that task.
+Consider for instance the order
+
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20%281-x%29%5E%7B-1%7D)
 
 implied by the command:
 
     SetMonomialOrder[x, inv[1-x]]
 
-This ordering encodes the following precise idea of what we mean by *simple* versus *complicated*: it formally corresponds to specifying that ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_98.png) is simpler than ![(1-x)^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_99.png), which might sits well with one's intuition.
+This ordering encodes the following precise idea of what we mean by
+*simple* versus *complicated*: it formally corresponds to specifying
+that ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) is simpler than ![(1-x)^{-1}](https://render.githubusercontent.com/render/math?math=%281-x%29%5E%7B-1%7D&mode=inline), which might sits well with
+one’s intuition.
 
 Now consider the following command:
 
@@ -1959,13 +2703,26 @@ and results in the rules:
     x ** inv[1 - x] -> -1 + inv[1 - x],
     inv[1-x] ** x -> -1 + inv[1-x],
 
-As in the previous example, the GB revealed new relationships that must hold true if ![1- x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_100.png) is invertible, and one can use this relationship to the original expression using `NCReplaceRepeated` as in:
+As in the previous example, the GB revealed new relationships that
+must hold true if ![1- x](https://render.githubusercontent.com/render/math?math=1-%20x&mode=inline) is invertible, and one can use this
+relationship to *simplify* the original expression using
+`NCReplaceRepeated` as in:
 
     NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]
 
 The above command results in `0`, as one would hope.
 
-For a more challenging example consider the identity: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_101.png) One can verify that the rule based command [NCSimplifyRational](#ncsimplifyrational-1) fails to simplify the expression:
+For a more challenging example consider the identity:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cleft%20%281%20-%20x%20-%20y%20%281%20-%20x%29%5E%7B-1%7D%20y%20%5Cright%20%29%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20-%20y%29%5E%7B-1%7D%20%2B%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20%2B%20y%29%5E%7B-1%7D)
+
+</div>
+
+One can verify that the rule based command
+[NCSimplifyRational](#ncsimplifyrational-1) fails to simplify the
+expression:
 
     expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
     NCSimplifyRational[expr]
@@ -1975,7 +2732,8 @@ We set the monomial order and calculate the Gröbner basis
     SetMonomialOrder[x, y, inv[1-x], inv[1-x+y], inv[1-x-y], inv[1-x-y**inv[1-x]**y]];
     rules = NCMakeGB[{}, 3];
 
-based on the rational involved in the original expression. The result is the nc GB:
+based on the rational involved in the original expression. The result
+is the nc GB:
 
     inv[1-x-y**inv[1-x]**y] -> (1/2)inv[1-x-y]+(1/2)inv[1-x+y]
     x**inv[1-x] -> -1+inv[1-x]
@@ -1994,10 +2752,10 @@ which succesfully simplifyes the original expression using:
 
 resulting in `0`.
 
-Simplification with NCGBSimplifyRational
-----------------------------------------
+## Simplification with NCGBSimplifyRational
 
-The simplification process described above is automated in the function [NCGBSimplifyRational](#ncgbsimplifyrational).
+The simplification process described above is automated in the
+function [NCGBSimplifyRational](#ncgbsimplifyrational).
 
 For example, calls to
 
@@ -2011,26 +2769,50 @@ or
 
 both result in `0`.
 
-Ordering on variables and monomials
------------------------------------
+## Ordering on variables and monomials
 
-As seen above, one needs to declare a *monomial order* before making a Gröbner Basis. There are various monomial orders which can be used when computing Gröbner Basis. The most common are *lexicographic* and *graded lexicographic* orders. We consider also *multi-graded lexicographic* orders.
+As seen above, one needs to declare a *monomial order* before making a
+Gröbner Basis. There are various monomial orders which can be used
+when computing Gröbner Basis. The most common are *lexicographic* and
+*graded lexicographic* orders. We consider also *multi-graded
+lexicographic* orders.
 
-Lexicographic and multi-graded lexicographic orders are examples of elimination orderings. An elimination ordering is an ordering which is used for solving for some of the variables in terms of others.
+Lexicographic and multi-graded lexicographic orders are examples of
+elimination orderings. An elimination ordering is an ordering which is
+used for solving for some of the variables in terms of others.
 
 We now discuss each of these types of orders.
 
 ### Lex Order: the simplest elimination order
 
-To impose lexicographic order, say ![a\\ll b\\ll x\\ll y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_102.png) on ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_103.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_104.png), ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_105.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_106.png), one types
+To impose lexicographic order, say ![a\\ll b\\ll x\\ll y](https://render.githubusercontent.com/render/math?math=a%5Cll%20b%5Cll%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
+and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[a,b,x,y];
 
-This order is useful for attempting to solve for ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_107.png) in terms of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_108.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_109.png) and ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_110.png), since the highest priority of the GB algorithm is to produce polynomials which do not contain ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_111.png). If producing high order polynomials is a consequence of this fanaticism so be it. Unlike graded orders, lex orders pay little attention to the degree of terms. Likewise its second highest priority is to eliminate ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_112.png).
+or, equivalently
 
-Once this order is set, one can use all of the commands in the preceeding section in exactly the same form.
+    SetMonomialOrder[{a},{b},{x},{y}];
 
-We now give a simple example how one can solve for ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_113.png) given that ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_114.png),![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_115.png),![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_116.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_117.png) satisfy the equations: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_118.png)
+This order is useful for attempting to solve for ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) in terms of ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline),
+![b](https://render.githubusercontent.com/render/math?math=b&mode=inline) and ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), since the highest priority of the GB algorithm is to
+produce polynomials which do not contain ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline). If producing high order
+polynomials is a consequence of this fanaticism so be it. Unlike
+graded orders, lex orders pay little attention to the degree of terms.
+Likewise its second highest priority is to eliminate ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline).
+
+Once this order is set, one can use all of the commands in the
+preceeding section in exactly the same form.
+
+We now give a simple example how one can solve for
+![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) given that ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline),![b](https://render.githubusercontent.com/render/math?math=b&mode=inline),![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline)
+satisfy the equations:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A-b%5C%2C%20x%20%2B%20x%5C%2C%20y%20%20%5C%2C%20a%20%2B%20x%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20%20a%20%26%3D%200%20%5C%5C%0Ax%20%5C%2C%20a-1%26%3D0%20%5C%5C%0Aa%5C%2C%20x-1%26%3D0%0A%5Cend%7Baligned%7D)
+
+</div>
 
 The command
 
@@ -2065,19 +2847,26 @@ which, this time, results in
     b**a**b**b**a -> -y**b**y-b**a**b**y-y**b**b**a-y**y**b**x**x-
                      b**a**y**b**x**x+a**b**x**b**x**x**b**x**x
 
-which is not a Gröbner basis since the algorithm was interrupted at 4 iterations. Note the presence of the rule
+which is not a Gröbner basis since the algorithm was interrupted at 4
+iterations. Note the presence of the rule
 
     a**b**x**x -> y+b**a
 
-which shows that the order is not set up to solve for ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_119.png) in terms of the other variables in the sense that ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_120.png) is not on the left hand side of this rule (but a human could easily solve for ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_121.png) using this rule). Also the algorithm created a number of other relations which involved ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_122.png).
+which shows that the order is not set up to solve for ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) in terms of
+the other variables in the sense that ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) is not on the left hand side
+of this rule (but a human could easily solve for ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) using this rule).
+Also the algorithm created a number of other relations which involved
+![y](https://render.githubusercontent.com/render/math?math=y&mode=inline).
 
 ### Graded lex ordering: a non-elimination order
 
-To impose graded lexicographic order, say ![a&lt; b&lt; x&lt; y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_123.png) on ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_124.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_125.png), ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_126.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_127.png), one types
+To impose graded lexicographic order, say ![a\< b\< x\< y](https://render.githubusercontent.com/render/math?math=a%3C%20b%3C%20x%3C%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline),
+![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[{a,b,x,y}];
 
-This ordering puts high degree monomials high in the order. Thus it tries to decrease the total degree of expressions. A call to
+This ordering puts high degree monomials high in the order. Thus it
+tries to decrease the total degree of expressions. A call to
 
     NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
 
@@ -2097,15 +2886,21 @@ now produces
     b**x**x**b**x**b**x**x -> x**b**y**y+x**b**b**a**y+x**b**y**b**a+
                               x**b**b**a**b**a+x**y**b**x**b**x**x
 
-which again fails to be a Gröbner basis and does not eliminate ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_128.png). Instead, it tries to decrease the total degree of expressions involving ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_129.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_130.png), ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_131.png), and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_132.png).
+which again fails to be a Gröbner basis and does not eliminate
+![y](https://render.githubusercontent.com/render/math?math=y&mode=inline). Instead, it tries to decrease the total degree of expressions
+involving ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline).
 
 ### Multigraded lex ordering: a variety of elimination orders
 
-There are other useful monomial orders which one can use other than graded lex and lex. Another type of order is what we call multigraded lex and is a mixture of graded lex and lex order. To impose multi-graded lexicographic order, say ![a&lt; b&lt; x\\ll y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_133.png) on ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_134.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_135.png), ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_136.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_137.png), one types
+There are other useful monomial orders which one can use other than
+graded lex and lex. Another type of order is what we call multigraded
+lex and is a mixture of graded lex and lex order. To impose
+multi-graded lexicographic order, say ![a\< b\< x\\ll y](https://render.githubusercontent.com/render/math?math=a%3C%20b%3C%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
+and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[{a,b,x},y];
 
-which separates ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_138.png) from the remaining variables. This time, a call to
+which separates ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) from the remaining variables. This time, a call to
 
     NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
 
@@ -2115,32 +2910,60 @@ yields once again
     a**x -> 1
     x**a -> 1
 
-which not only eliminates ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_139.png) but is also Gröbner basis, calculated after one iteration.
+which not only eliminates ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) but is also Gröbner basis, calculated
+after one iteration.
 
-For an intuitive idea of why multigraded lex is helpful, we think of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_140.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_141.png), and ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_142.png) as corresponding to variables in some engineering problem which represent quantities which are *known* and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_143.png) to be *unknown*. The fact that ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_144.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_145.png) and ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_146.png) are in the top level indicates that we are very interested in solving for ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_147.png) in terms of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_148.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_149.png), and ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_150.png), but are not willing to solve for, say ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_151.png), in terms of expressions involving ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_152.png).
+For an intuitive idea of why multigraded lex is helpful, we think of
+![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), and ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) as corresponding to variables in some engineering
+problem which represent quantities which are *known* and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) to be
+*unknown*. The fact that ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline) and ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) are in the top level
+indicates that we are very interested in solving for ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) in terms of
+![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), and ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), but are not willing to solve for, say ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), in terms
+of expressions involving ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline).
 
-This situation is so common that we provide the commands `SetKnowns` and `SetUnknowns`. The above ordering would be obtained after setting
+This situation is so common that we provide the commands `SetKnowns`
+and `SetUnknowns`. The above ordering would be obtained after setting
 
     SetKnowns[a,b,x];
     SetUnknowns[y];
 
-A complete example: the partially prescribed matrix inverse problem
--------------------------------------------------------------------
+## A complete example: the partially prescribed matrix inverse problem
 
-This is a type of problem known as a *matrix completion problem*. This particular one was suggested by Hugo Woerdeman. We are grateful to him for discussions.
+This is a type of problem known as a *matrix completion problem*. This
+particular one was suggested by Hugo Woerdeman. We are grateful to
+him for discussions.
 
-**Problem:** *Given matrices ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_153.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_154.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_155.png), and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_156.png), we wish to determine under what conditions there exists matrices x, y, z, and w such that the block matrices* ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_157.png) *are inverses of each other. Also, we wish to find formulas for ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_158.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_159.png), ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_160.png), and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_161.png).*
+**Problem:** *Given matrices ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline), and ![d](https://render.githubusercontent.com/render/math?math=d&mode=inline), we wish to
+determine under what conditions there exists matrices x, y, z, and w
+such that the block matrices*
 
-This problem was solved in a paper by W.W. Barrett, C.R. Johnson, M. E. Lundquist and H. Woerderman \[BJLW\] where they showed it splits into several cases depending upon which of ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_162.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_163.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_164.png) and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_165.png) are invertible. In our example, we assume that ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_166.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_167.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_168.png) and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_169.png) are invertible and discover the result which they obtain in this case.
+<div style="display:block;">
 
-First we set the matrices ![a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_170.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_171.png), ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_172.png), and ![d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_173.png) and their inverses as *knowns* and ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_174.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_175.png), ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_176.png), and ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_177.png) as unknowns:
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20x%20%5C%5C%20y%20%26%20b%20%5Cend%7Bbmatrix%7D%0A%20%20%5Cqquad%20%0A%20%20%5Cbegin%7Bbmatrix%7D%20w%20%26%20c%20%5C%5C%20d%20%26%20z%20%5Cend%7Bbmatrix%7D)
+
+</div>
+
+*are inverses of each other. Also, we wish to find formulas for ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline),
+![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline).*
+
+This problem was solved in a paper by W.W. Barrett, C.R. Johnson,
+M. E. Lundquist and H. Woerderman \[BJLW\] where they showed it splits
+into several cases depending upon which of ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) and ![d](https://render.githubusercontent.com/render/math?math=d&mode=inline) are
+invertible. In our example, we assume that ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) and ![d](https://render.githubusercontent.com/render/math?math=d&mode=inline) are
+invertible and discover the result which they obtain in this case.
+
+First we set the matrices ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline), and ![d](https://render.githubusercontent.com/render/math?math=d&mode=inline) and their inverses as
+*knowns* and ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline), and ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline) as unknowns:
 
     SetKnowns[a, inv[a], b, inv[b], c, inv[c], d, inv[d]];
     SetUnknowns[{z}, {x, y, w}];
 
-Note that the graded ordedring of the unknowns means that we care more about solving for ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_178.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_179.png) and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_180.png) than for ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_181.png).
+Note that the graded ordedring of the unknowns means that we care more
+about solving for ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline) than for ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline).
 
-Then we define the relations we are interested in, which are obtained after multiplying the two block matrices on both sides and equating to identity
+Then we define the relations we are interested in, which are obtained
+after multiplying the two block matrices on both sides and equating to
+identity
 
     A = {{a, x}, {y, b}}
     B = {{w, c}, {d, z}}
@@ -2150,10 +2973,11 @@ Then we define the relations we are interested in, which are obtained after mult
       MatMult[B, A] - IdentityMatrix[2]
     } // Flatten
 
-We use `Flatten` to reduce the matrix relations to a simple list of relations. The resulting relations in this case are:
+We use `Flatten` to reduce the matrix relations to a simple list of
+relations. The resulting relations in this case are:
 
-    rel = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
-           -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}
+    rels = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
+            -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}
 
 After running
 
@@ -2173,10 +2997,24 @@ we obtain the Gröbner basis:
     z**inv[c]**inv[a]**inv[d]**z -> inv[b]+inv[b]**inv[c]**inv[a]**inv[d]**z
     d**a**c**b**z**inv[c] -> z**b**d**a
 
-after seven iterations. The first four relations ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_182.png)
-are the solutions we are looking for, which states that one can find ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_183.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_184.png), ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_185.png), and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_186.png) such that the matrices above are inverses of each other if and only if ![z \\, b \\, z = z + d \\, a \\, c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_187.png). The first three relations gives formulas for ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_188.png), ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_189.png) and ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_190.png) in terms of ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_191.png).
+after seven iterations. The first four relations
 
-A variety of scenarios can be quickly investigated under different assumptions. For example, say that ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_192.png) is not invertible. Is it still possible to solve the problem? One solution is obtained with the ordering implied by
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20x%20%26%3D%20d%5E%7B-1%7D-d%5E%7B-1%7D%20%5C%2C%20z%20%5C%2C%20b%20%5C%5C%0A%20%20%20%20y%20%26%3D%20c%5E%7B-1%7D-b%20%5C%2C%20z%20%5C%2C%20c%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%20%5C%2C%20z%20%5C%2C%20b%20%5C%2C%20d%20%5C%5C%0A%20%20%20%20z%20%5C%2C%20b%20%5C%2C%20z%20%26%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c%0A%5Cend%7Baligned%7D)
+
+</div>
+
+  
+are the solutions we are looking for, which states that one can find
+![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline) such that the matrices above are inverses of
+each other if and only if ![z \\, b \\, z = z + d \\, a \\, c](https://render.githubusercontent.com/render/math?math=z%20%5C%2C%20b%20%5C%2C%20z%20%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c&mode=inline). The first
+three relations gives formulas for ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline) in terms of ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline).
+
+A variety of scenarios can be quickly investigated under different
+assumptions. For example, say that ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) is not invertible. Is it still
+possible to solve the problem? One solution is obtained with the
+ordering implied by
 
     SetKnowns[a, inv[a], b, inv[b], c, d, inv[d]];
     SetUnknowns[{y}, {z, w, x}];
@@ -2197,54 +3035,108 @@ produces the Gröbner basis:
     y**c**b**d**a -> b**d**a**c**y
     y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
 
-after five iterations. Once again, the first four relations ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_193.png)
-provide formulas, this time for ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_194.png), ![w](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_195.png), and ![z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_196.png) in terms of ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_197.png) satisfying ![y \\, c \\, y = y+b \\, d \\, a](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_198.png). Note that these formulas do not involve ![c^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_199.png) since ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_200.png) is no longer assumed invertible.
+after five iterations. Once again, the first four relations
 
-Semidefinite Programming
-========================
+<div style="display:block;">
 
-If you want a living version of this chapter just run the notebook `NC/DEMOS/4_SemidefiniteProgramming.nb`.
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20z%20%26%3D%20b%5E%7B-1%7D-b%5E%7B-1%7D%20%5C%2C%20y%20%5C%2C%20c%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D-c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20x%20%26%3D%20a%20%5C%2C%20c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20y%20%5C%2C%20c%20%5C%2C%20y%20%26%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a%0A%5Cend%7Baligned%7D)
+
+</div>
+
+  
+provide formulas, this time for ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline), and ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline) in terms of ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline)
+satisfying ![y \\, c \\, y = y+b \\, d \\, a](https://render.githubusercontent.com/render/math?math=y%20%5C%2C%20c%20%5C%2C%20y%20%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a&mode=inline). Note that these formulas do
+not involve ![c^{-1}](https://render.githubusercontent.com/render/math?math=c%5E%7B-1%7D&mode=inline) since ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) is no longer assumed invertible.
+
+# Semidefinite Programming
+
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/4_SemidefiniteProgramming.nb`.
 
 There are two different packages for solving semidefinite programs:
 
--   [`SDP`](#sdp) provides a template algorithm that can be customized to solve semidefinite programs with special structure. Users can provide their own functions to evaluate the primal and dual constraints and the associated Newton system. A built in solver along conventional lines, working on vector variables, is provided by default. It does not require NCAlgebra to run.
+-   [`SDP`](#sdp) provides a template algorithm that can be
+    customized to solve semidefinite programs with special
+    structure. Users can provide their own functions to evaluate the
+    primal and dual constraints and the associated Newton system. A
+    built in solver along conventional lines, working on vector
+    variables, is provided by default. It does not require NCAlgebra to
+    run.
 
--   [`NCSDP`](#ncsdp) coordinates with NCAlgebra to handle matrix variables, allowing constraints, etc, to be entered directly as noncommutative expressions.
+-   [`NCSDP`](#ncsdp) coordinates with NCAlgebra to handle matrix
+    variables, allowing constraints, etc, to be entered directly as
+    noncommutative expressions.
 
-Semidefinite Programs in Matrix Variables
------------------------------------------
+## Semidefinite Programs in Matrix Variables
 
-The package [NCSDP](#ncsdp) allows the symbolic manipulation and numeric solution of semidefinite programs.
+The package [NCSDP](#ncsdp) allows the symbolic manipulation
+and numeric solution of semidefinite programs.
 
 After loading NCAlgebra, the package NCSDP must be loaded using:
 
     << NCSDP`
 
-Semidefinite programs consist of symbolic noncommutative expressions representing inequalities and a list of rules for data replacement. For example the semidefinite program: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_201.png) can be solved by defining the noncommutative expressions
+Semidefinite programs consist of symbolic noncommutative expressions
+representing inequalities and a list of rules for data
+replacement. For example the semidefinite program:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cmin_Y%20%5Cquad%20%26%20%3CI%2CY%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20Y%20%2B%20Y%20A%5ET%20%2B%20I%20%5Cpreceq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20Y%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+can be solved by defining the noncommutative expressions
 
     SNC[a, y];
     obj = {-1};
     ineqs = {a ** y + y ** tp[a] + 1, -y};
 
-The inequalities are stored in the list `ineqs` in the form of noncommutative linear polyonomials in the variable `y` and the objective function constains the symbolic coefficients of the inner product, in this case `-1`. The reason for the negative signs in the objective as well as in the second inequality is that semidefinite programs are expected to be cast in the following *canonical form*: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_202.png) or, equivalently: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_203.png)
+The inequalities are stored in the list `ineqs` in the form of
+noncommutative linear polyonomials in the variable `y` and the
+objective function constains the symbolic coefficients of the inner
+product, in this case `-1`. The reason for the negative signs in the
+objective as well as in the second inequality is that semidefinite
+programs are expected to be cast in the following *canonical form*:
 
-Semidefinite programs can be visualized using [`NCSDPForm`](#ncsdpform) as in:
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%5Cpreceq%200%20%0A%5Cend%7Baligned%7D)
+
+</div>
+
+or, equivalently:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%2B%20s%20%3D%200%2C%20%5Cquad%20s%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+Semidefinite programs can be visualized using
+[`NCSDPForm`](#ncsdpform) as in:
 
     vars = {y};
     NCSDPForm[ineqs, vars, obj]
 
-The above commands produce a formatted output similar to the ones shown above.
+The above commands produce a formatted output similar to the ones
+shown above.
 
-In order to obtaining a numerical solution for an instance of the above semidefinite program one must provide a list of rules for data substitution. For example:
+In order to obtaining a numerical solution for an instance of the
+above semidefinite program one must provide a list of rules for data
+substitution. For example:
 
     A = {{0, 1}, {-1, -2}};
     data = {a -> A};
 
-Equipped with the above list of rules representing a problem instance one can load [`SDPSylvester`](#sdpsylvester) and use `NCSDP` to create a problem instance as follows:
+Equipped with the above list of rules representing a problem instance
+one can load [`SDPSylvester`](#sdpsylvester) and use `NCSDP` to create
+a problem instance as follows:
 
     {abc, rules} = NCSDP[ineqs, vars, obj, data];
 
-The resulting `abc` and `rules` objects are used for calculating the numerical solution using [`SDPSolve`](#sdpsolve). The command:
+The resulting `abc` and `rules` objects are used for calculating the
+numerical solution using [`SDPSolve`](#sdpsolve). The command:
 
     << SDPSylvester`
     {Y, X, S, flags} = SDPSolve[abc, rules];
@@ -2283,29 +3175,69 @@ produces an output like the folowing:
     * Feasibility radius = 0.999998
     (should be less than 1 when feasible)
 
-The output variables `Y` and `S` are the *primal* solutions and `X` is the *dual* solution.
+The output variables `Y` and `S` are the *primal* solutions and `X` is
+the *dual* solution.
 
-A symbolic dual problem can be calculated easily using [`NCSDPDual`](#ncsdpdual):
+A symbolic dual problem can be calculated easily using
+[`NCSDPDual`](#ncsdpdual):
 
     {dIneqs, dVars, dObj} = NCSDPDual[ineqs, vars, obj];
 
-The dual program for the example problem above is: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_204.png) In the case of the above problem the dual program is ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_205.png) which can be visualized using [`NCSDPDualForm`](#ncsdpdualform) using:
+The dual program for the example problem above is:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_x%20%5Cquad%20%26%20%3Cc%2Cx%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%5E%2A%28x%29%20%2B%20b%20%3D%200%2C%20%5Cquad%20x%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+In the case of the above problem the dual program is
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cmax_%7BX_1%2C%20X_2%7D%20%5Cquad%20%26%20%3CI%2CX_1%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5ET%20X_1%20%2B%20X_1%20A%20-X_2%20-%20I%20%3D%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20X_1%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%20%20%20%20%20%20%26%20X_2%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+which can be visualized using [`NCSDPDualForm`](#ncsdpdualform) using:
 
     NCSDPDualForm[dIneqs, dVars, dObj]
 
-Semidefinite Programs in Vector Variables
------------------------------------------
+## Semidefinite Programs in Vector Variables
 
-The package [SDP](#sdp) provides a crude and not very efficient way to define and solve semidefinite programs in standard form, that is vectorized. You do not need to load `NCAlgebra` if you just want to use the semidefinite program solver. But you still need to load `NC` as in:
+The package [SDP](#sdp) provides a crude and not very efficient
+way to define and solve semidefinite programs in standard form, that
+is vectorized. You do not need to load `NCAlgebra` if you just want to
+use the semidefinite program solver. But you still need to load `NC`
+as in:
 
     << NC`
     << SDP`
 
-Semidefinite programs are optimization problems of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_206.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_207.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_208.png) is a vector of decision variables.
+Semidefinite programs are optimization problems of the form:
 
-A user can input the problem data, the triplet ![(A, b, c)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_209.png), or use the following convenient methods for producing data in the proper format.
+<div style="display:block;">
 
-For example, problems can be stated as: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_210.png) where ![f(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_211.png) and ![G(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_212.png) are affine functions of the vector of variables ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_213.png).
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) is a
+vector of decision variables.
+
+A user can input the problem data, the triplet ![(A, b, c)](https://render.githubusercontent.com/render/math?math=%28A%2C%20b%2C%20c%29&mode=inline), or use the
+following convenient methods for producing data in the proper format.
+
+For example, problems can be stated as:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+where ![f(y)](https://render.githubusercontent.com/render/math?math=f%28y%29&mode=inline) and ![G(y)](https://render.githubusercontent.com/render/math?math=G%28y%29&mode=inline) are affine functions of the vector
+of variables ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline).
 
 Here is a simple example:
 
@@ -2313,11 +3245,22 @@ Here is a simple example:
     f = y2;
     G = {y0 - 2, {{y1, y0}, {y0, 1}}, {{y2, y1}, {y1, 1}}};
 
-The list of constraints in `G` is to be interpreted as: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_214.png) The function [`SDPMatrices`](#sdpmatrices) convert the above symbolic problem into numerical data that can be used to solve an SDP.
+The list of constraints in `G` is to be interpreted as:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20y_0%20-%202%20%5Cgeq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_1%20%26%20y_0%20%5C%5C%20y_0%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_2%20%26%20y_1%20%5C%5C%20y_1%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200.%0A%5Cend%7Baligned%7D)
+
+</div>
+
+The function [`SDPMatrices`](#sdpmatrices) convert the above symbolic
+problem into numerical data that can be used to solve an SDP.
 
     abc = SDPMatrices[f, G, y]
 
-All required data, that is ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_215.png), ![b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_216.png), and ![c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_217.png), is stored in the variable `abc` as Mathematica's sparse matrices. Their contents can be revealed using the Mathematica command `Normal`.
+All required data, that is ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), and ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline), is stored in the
+variable `abc` as Mathematica’s sparse matrices. Their contents can be
+revealed using the Mathematica command `Normal`.
 
     Normal[abc]
 
@@ -2325,23 +3268,34 @@ The resulting SDP is solved using [`SDPSolve`](#sdpsolve):
 
     {Y, X, S, flags} = SDPSolve[abc];
 
-The variables `Y` and `S` are the *primal* solutions and `X` is the *dual* solution. Detailed information on the computed solution is found in the variable `flags`.
+The variables `Y` and `S` are the *primal* solutions and `X` is the
+*dual* solution. Detailed information on the computed solution is
+found in the variable `flags`.
 
-The package `SDP` is built so as to be easily overloaded with more efficient or more structure functions. See for example [SDPFlat](#sdpflat) and [SDPSylvester](#sdpsylvester).
+The package `SDP` is built so as to be easily overloaded with more
+efficient or more structure functions. See for example
+[SDPFlat](#sdpflat) and [SDPSylvester](#sdpsylvester).
 
-Pretty Output with Notebooks and 
-=================================
+# Pretty Output with Notebooks and TeX 
 
-If you want a living version of this chapter just run the notebook `NC/DEMOS/5_PrettyOutput.nb`.
+If you want a living version of this chapter just run the notebook
+`NC/DEMOS/5_PrettyOutput.nb`.
 
-`NCAlgebra` comes with several utilities for beautifying expressions which are output. [`NCTeXForm`](#nctexform) converts NC expressions into . [`NCTeX`](#nctex) goes a step further and compiles the results expression in  and produces a PDF that can be embedded in notebooks of used on its own.
+`NCAlgebra` comes with several utilities for beautifying expressions
+which are output. [`NCTeXForm`](#nctexform) converts NC expressions
+into LaTeX. [`NCTeX`](#nctex) goes a step further and
+compiles the results expression in LaTeX and produces a PDF that can
+be embedded in notebooks of used on its own.
 
-Pretty Output
--------------
+## Pretty Output
 
-In a Mathematica notebook session the package [NCOutput](#ncoutput) can be used to control how nc expressions are displayed. `NCOutput` does not alter the internal representation of nc expressions, just the way they are displayed on the screen.
+In a Mathematica notebook session the package [NCOutput](#ncoutput)
+can be used to control how nc expressions are displayed. `NCOutput`
+does not alter the internal representation of nc expressions, just the
+way they are displayed on the screen.
 
-The function [NCSetOutput](#ncsetoutput) can be used to set the display options. For example:
+The function [NCSetOutput](#ncsetoutput) can be used to set the
+display options. For example:
 
     NCSetOutput[tp -> False, inv -> True];
 
@@ -2351,7 +3305,11 @@ makes the expression
 
 be displayed as
 
-`(tp[a] + b)`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_218.png)
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%28%5Cmathrm%7Btp%5Ba%5D%7D%20%2B%20%5Cmathrm%7Bb%7D%29%5E%7B-1%7D)
+
+</div>
 
 Conversely
 
@@ -2359,7 +3317,11 @@ Conversely
 
 makes `expr` be displayed as
 
-`inv[a`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_219.png) `+ b]`
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Binv%7D%5Cmathrm%7B%5B%7D%5Cmathrm%7Ba%7D%5ET%20%2B%20%5Cmathrm%7Bb%7D%5Cmathrm%7B%5D%7D)
+
+</div>
 
 The default settings are
 
@@ -2367,34 +3329,49 @@ The default settings are
 
 which makes `expr` be displayed as
 
-`(a`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_220.png) `+ b)`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_221.png)
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%28%5Cmathrm%7Ba%7D%5E%5Cmathrm%7BT%7D%20%2B%20%5Cmathrm%7Bb%7D%29%5E%7B-1%7D)
+
+</div>
 
 The complete set of options and their default values are:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` ![\\bullet](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_222.png) `y`';
--   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_223.png)';
--   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_224.png)';
--   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`![^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_225.png)';
--   `co` (`True`): If `True` `co[x]` is displayed as '![\\bar{\\mathtt{x}}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_226.png)';
--   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`![^{1/2}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_227.png)'.
+-   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\\mathrm{x} \\bullet \\mathrm{y}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%20%5Cbullet%20%5Cmathrm%7By%7D&mode=inline)’;
+-   `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\\mathrm{x}^\\mathrm{T}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%5Cmathrm%7BT%7D&mode=inline)’;
+-   `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\\mathrm{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B-1%7D&mode=inline)’;
+-   `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\\mathrm{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%2A&mode=inline)’;
+-   `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathrm{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathrm%7Bx%7D%7D&mode=inline)’;
+-   `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\\mathrm{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
 
-The special symbol `All` can be used to set all options to `True` or `False`, as in
+The special symbol `All` can be used to set all options to `True` or
+`False`, as in
 
     NCSetOutput[All -> True];
 
-Using NCTeX
------------
+## Using NCTeX
 
 You can load NCTeX using the following command
 
     << NC` 
     << NCTeX`
 
-`NCTeX` does not need `NCAlgebra` to work. You may want to use it even when not using NCAlgebra. It uses [`NCRun`](#ncrun), which is a replacement for Mathematica's Run command to run `pdflatex`, `latex`, `divps`, etc.
+`NCTeX` does not need `NCAlgebra` to work. You may want to use it even
+when not using NCAlgebra. It uses [`NCRun`](#ncrun), which is a
+replacement for Mathematica’s Run command to run `pdflatex`, `latex`,
+`divps`, etc.
 
-**WARNING:** Mathematica does not come with LaTeX, dvips, etc. The package `NCTeX` does not install these programs but rather assumes that they have been previously installed and are available at the user's standard shell. Use the `Verbose` [option](#nctex-options) to troubleshoot installation problems.
+**WARNING:** Mathematica does not come with LaTeX, dvips, etc. The
+package `NCTeX` does not install these programs but rather assumes
+that they have been previously installed and are available at the
+user’s standard shell. Use the `Verbose` [option](#nctex-options) to
+troubleshoot installation problems.
 
-With `NCTeX` loaded you simply type `NCTeX[expr]` and your expression will be converted to a PDF image which, by default, appears in your notebook after being processed by `LaTeX`. See [options](#nctex-options) for information on how to change this behavior to display the PDF on a separate window.
+With `NCTeX` loaded you simply type `NCTeX[expr]` and your expression
+will be converted to a PDF image which, by default, appears in your
+notebook after being processed by `LaTeX`. See
+[options](#nctex-options) for information on how to change this
+behavior to display the PDF on a separate window.
 
 For example:
 
@@ -2403,9 +3380,11 @@ For example:
 
 produces
 
-![1 + \\sin \\left ( x + \\frac{y - z}{\\sqrt{2}} \\right )](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_228.png)
+![1 + \\sin \\left ( x + \\frac{y - z}{\\sqrt{2}} \\right )](https://render.githubusercontent.com/render/math?math=1%20%2B%20%5Csin%20%5Cleft%20%28%20x%20%2B%20%5Cfrac%7By%20-%20z%7D%7B%5Csqrt%7B2%7D%7D%20%5Cright%20%29&mode=inline)
 
-If `NCAlgebra` is not loaded then `NCTeX` uses the built in `TeXForm` to produce the LaTeX expressions. If `NCAlgebra` is loaded, `NCTeXForm` is used. See [NCTeXForm](#nctexform-1) for details.
+If `NCAlgebra` is not loaded then `NCTeX` uses the built in
+`TeXForm` to produce the LaTeX expressions. If `NCAlgebra` is loaded,
+`NCTeXForm` is used. See [NCTeXForm](#nctexform-1) for details.
 
 Here is another example:
 
@@ -2414,19 +3393,26 @@ Here is another example:
 
 that produces
 
-![\\left( \\begin{array}{cc} \\sin \\left(x+\\frac{y-z}{\\sqrt{2}}\\right)+1 & \\frac{x}{y} \\\\ z & \\sqrt{5} n \\\\ \\end{array} \\right)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_229.png)
+![\\left( \\begin{array}{cc} \\sin \\left(x+\\frac{y-z}{\\sqrt{2}}\\right)+1 & \\frac{x}{y} \\\\ z & \\sqrt{5} n \\\\ \\end{array} \\right)](https://render.githubusercontent.com/render/math?math=%5Cleft%28%20%5Cbegin%7Barray%7D%7Bcc%7D%20%5Csin%20%5Cleft%28x%2B%5Cfrac%7By-z%7D%7B%5Csqrt%7B2%7D%7D%5Cright%29%2B1%20%26%20%5Cfrac%7Bx%7D%7By%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5C%5C%20%5Cend%7Barray%7D%20%5Cright%29&mode=inline)
 
-In some cases Mathematica will have difficulty displaying certain PDF files. When this happens `NCTeX` will span a PDF viewer so that you can look at the formula. If your PDF viewer does not pop up automatically you can force it by passing the following option to `NCTeX`:
+In some cases Mathematica will have difficulty displaying certain PDF
+files. When this happens `NCTeX` will span a PDF viewer so that you
+can look at the formula. If your PDF viewer does not pop up
+automatically you can force it by passing the following option to
+`NCTeX`:
 
     expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}};
     NCTeX[exp, DisplayPDF -> True]
 
-Here is another example were the current version of Mathematica fails to import the PDF:
+Here is another example were the current version of Mathematica fails
+to import the PDF:
 
     expr = Table[x^i y^(-j) , {i, 0, 10}, {j, 0, 30}];
     NCTeX[expr, DisplayPDF -> True]
 
-You can also suppress Mathematica from importing the PDF altogether as well. This and other options are covered in detail in the next section.
+You can also suppress Mathematica from importing the PDF altogether as
+well. This and other options are covered in detail in the next
+section.
 
 ### NCTeX Options
 
@@ -2435,12 +3421,18 @@ The following command:
     expr = {{1 + Sin[x + (y - z)/2 Sqrt[2]], x/y}, {z, n Sqrt[5]}};
     NCTeX[exp, DisplayPDF -> True, ImportPDF -> False]
 
-uses `DisplayPDF -> True` to ensure that the PDF viewer is called and `ImportPDF -> False` to prevent Mathematica from displaying the formula inline. In other words, it displays the formula in the PDF viewer without trying to import the PDF into Mathematica. The default values for these options when using the Mathematica notebook interface are:
+uses `DisplayPDF -> True` to ensure that the PDF viewer is called and
+`ImportPDF -> False` to prevent Mathematica from displaying the
+formula inline. In other words, it displays the formula in the PDF
+viewer without trying to import the PDF into Mathematica. The default
+values for these options when using the Mathematica notebook interface
+are:
 
 1.  `DisplayPDF` (`False`)
 2.  `ImportPDF` (`True`)
 
-When `NCTeX` is invoked using the command line interpreter version of Mathematica the defaults are:
+When `NCTeX` is invoked using the command line interpreter version of
+Mathematica the defaults are:
 
 1.  `DisplayPDF` (`False`)
 2.  `ImportPDF` (`True`)
@@ -2451,14 +3443,20 @@ Other useful options and their default options are:
 2.  `BreakEquations` (`True`)
 3.  `TeXProcessor` (`NCTeXForm`)
 
-Set `BreakEquations -> True` to use the LaTeX package `beqn` to produce nice displays of long equations. Try the following example:
+Set `BreakEquations -> True` to use the LaTeX package `beqn` to
+produce nice displays of long equations. Try the following
+example:
 
     expr = Series[Exp[x], {x, 0, 20}]
     NCTeX[expr]
 
-Use `TexProcessor` to select your own `TeX` converter. If `NCAlgebra` is loaded then `NCTeXForm` is the default. Otherwise Mathematica's `TeXForm` is used.
+Use `TexProcessor` to select your own `TeX` converter. If `NCAlgebra`
+is loaded then `NCTeXForm` is the default. Otherwise Mathematica’s
+`TeXForm` is used.
 
-If `Verbose -> True` you can see a detailed display of what is going on behing the scenes. This is very useful for debugging. For example, try:
+If `Verbose -> True` you can see a detailed display of what is going
+on behing the scenes. This is very useful for debugging. For example,
+try:
 
     expr = BesselJ[2, x]
     NCTeX[exp, Verbose -> True]
@@ -2473,7 +3471,8 @@ to produce an output similar to the following one:
     > Running 'epstopdf  /tmp/mNCTeX.ps 1> "/tmp/mNCRun.out" 2> "/tmp/mNCRun.err"'...
     > Importing pdf file '/tmp/mNCTeX.pdf'...
 
-Locate the files with extension .err as indicated by the verbose run of NCTeX to diagnose errors.
+Locate the files with extension .err as indicated by the verbose run
+of NCTeX to diagnose errors.
 
 The remaining options:
 
@@ -2483,7 +3482,9 @@ The remaining options:
 4.  `DVIPSCommand` (`"dvips"`)
 5.  `PS2PDFCommand` (`"epstopdf"`)
 
-let you specify the names and, when appropriate, the path, of the corresponding programs to be used by `NCTeX`. Alternatively, you can also directly implement custom versions of
+let you specify the names and, when appropriate, the path, of the
+corresponding programs to be used by `NCTeX`. Alternatively, you can
+also directly implement custom versions of
 
     NCRunDVIPS
     NCRunLaTeX
@@ -2491,12 +3492,16 @@ let you specify the names and, when appropriate, the path, of the corresponding 
     NCRunPDFViewer
     NCRunPS2PDF
 
-Those commands are invoked using `NCRun`. Look at the documentation for the package [NCRun](#ncrun-1) for more details.
+Those commands are invoked using `NCRun`. Look at the documentation
+for the package [NCRun](#ncrun-1) for more details.
 
-Using NCTeXForm
----------------
+## Using NCTeXForm
 
-[`NCTeXForm`](#nctexform) is a replacement for Mathematica's `TeXForm` which adds definitions allowing it to handle noncommutative expressions. It works just as `TeXForm`. `NCTeXForm` is automatically loaded with `NCAlgebra` and is the default  processor for `NCTeX`.
+[`NCTeXForm`](#nctexform) is a replacement for Mathematica’s
+`TeXForm` which adds definitions allowing it to handle noncommutative
+expressions. It works just as `TeXForm`. `NCTeXForm` is automatically
+loaded with `NCAlgebra` and is the default TeX processor for
+`NCTeX`.
 
 Here is an example:
 
@@ -2508,23 +3513,28 @@ produces
 
     a.x.{b}^T-{\left(d+c.{\left(a+b.c\right)}^{-1}.{y}^T\right)}^{-1}
 
-Note that the LaTeX output contains special code so that the expression looks neat on the screen. You can see the result using `NCTeX` to convert the expression to PDF. Try
+Note that the LaTeX output contains special code so that the
+expression looks neat on the screen. You can see the result using
+`NCTeX` to convert the expression to PDF. Try
 
     SetOptions[NCTeX, TeXProcessor -> NCTeXForm];
     NCTeX[exp]
 
 to produce
 
-![a.x.{b}^T-{\\left(d+c.{\\left (a+b.c\\right)}^{-1}.{y}^T\\right )}^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_230.png)
+![a.x.{b}^T-{\\left(d+c.{\\left (a+b.c\\right)}^{-1}.{y}^T\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=a.x.%7Bb%7D%5ET-%7B%5Cleft%28d%2Bc.%7B%5Cleft%20%28a%2Bb.c%5Cright%29%7D%5E%7B-1%7D.%7By%7D%5ET%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
 
-`NCTeX` represents noncommutative products with a dot (`.`) in order to distinguish it from its commutative cousin. We can see the difference in an expression that has both commutative and noncommutative products:
+`NCTeX` represents noncommutative products with a dot (`.`) in order
+to distinguish it from its commutative cousin. We can see the
+difference in an expression that has both commutative and
+noncommutative products:
 
     exp = 2 a ** b - 3 c ** d
     NCTeX[exp]
 
 produces
 
-![2 \\left(a.b\\right) - 3 (c.d)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_231.png)
+![2 \\left(a.b\\right) - 3 (c.d)](https://render.githubusercontent.com/render/math?math=2%20%5Cleft%28a.b%5Cright%29%20-%203%20%28c.d%29&mode=inline)
 
 NCTeXForm handles lists and matrices as well. Here is a list:
 
@@ -2533,7 +3543,7 @@ NCTeXForm handles lists and matrices as well. Here is a list:
 
 and its output:
 
-![\\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_232.png)
+![\\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20x%2C%20%7Bx%7D%5ET%2C%20x%2By%2C%20x%2B%7By%7D%5ET%2C%20x%2B%7By%7D%5E%7B-1%7D%2C%20x.x%20%5C%7D&mode=inline)
 
 and here is a matrix example:
 
@@ -2542,7 +3552,7 @@ and here is a matrix example:
 
 and its output:
 
-![\\begin{bmatrix} x & y \\\\ y & z \\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_233.png)
+![\\begin{bmatrix} x & y \\\\ y & z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20x%20%26%20y%20%5C%5C%20y%20%26%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Here are some more examples:
 
@@ -2551,14 +3561,14 @@ Here are some more examples:
 
 produces
 
-![\\begin{bmatrix} 1+\\operatorname{sin}{\\left (x+\\frac{1}{\\sqrt{2}} \\left (y-z\\right )\\right )} & x {y}^{-1} \\\\ z & \\sqrt{5} n \\end{bmatrix}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_234.png)
+![\\begin{bmatrix} 1+\\operatorname{sin}{\\left (x+\\frac{1}{\\sqrt{2}} \\left (y-z\\right )\\right )} & x {y}^{-1} \\\\ z & \\sqrt{5} n \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%201%2B%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2B%5Cfrac%7B1%7D%7B%5Csqrt%7B2%7D%7D%20%5Cleft%20%28y-z%5Cright%20%29%5Cright%20%29%7D%20%26%20x%20%7By%7D%5E%7B-1%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5Cend%7Bbmatrix%7D&mode=inline)
 
     exp = {inv[x + y], inv[x + inv[y]]}
     NCTeX[exp]
 
 produces:
 
-![\\{ {\\left (x+y\\right )}^{-1}, {\\left (x+{y}^{-1}\\right )}^{-1} \\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_235.png)
+![\\{ {\\left (x+y\\right )}^{-1}, {\\left (x+{y}^{-1}\\right )}^{-1} \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%5E%7B-1%7D%2C%20%7B%5Cleft%20%28x%2B%7By%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D%20%5C%7D&mode=inline)
 
     exp = {Sin[x], x y, Sin[x] y, Sin[x + y], Cos[gamma], 
            Sin[alpha] tp[x] ** (y - tp[y]), (x + tp[x]) (y ** z), -tp[y], 1/2, 
@@ -2567,23 +3577,24 @@ produces:
 
 produces:
 
-![\\{ \\operatorname{sin}{x}, x y, y \\operatorname{sin}{x}, \\operatorname{sin}{\\left (x+y\\right )}, \\operatorname{cos}{\\gamma}, \\left({x}^T.\\left (y-{y}^T\\right )\\right ) \\operatorname{sin}{\\alpha}, y z \\left (x+{x}^T\\right ), -{y}^T, \\frac{1}{2}, \\sqrt{2} \\left(x.y\\right ) \\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_236.png)
+![\\{ \\operatorname{sin}{x}, x y, y \\operatorname{sin}{x}, \\operatorname{sin}{\\left (x+y\\right )}, \\operatorname{cos}{\\gamma}, \\left({x}^T.\\left (y-{y}^T\\right )\\right ) \\operatorname{sin}{\\alpha}, y z \\left (x+{x}^T\\right ), -{y}^T, \\frac{1}{2}, \\sqrt{2} \\left(x.y\\right ) \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20x%20y%2C%20y%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%2C%20%5Coperatorname%7Bcos%7D%7B%5Cgamma%7D%2C%20%5Cleft%28%7Bx%7D%5ET.%5Cleft%20%28y-%7By%7D%5ET%5Cright%20%29%5Cright%20%29%20%5Coperatorname%7Bsin%7D%7B%5Calpha%7D%2C%20y%20z%20%5Cleft%20%28x%2B%7Bx%7D%5ET%5Cright%20%29%2C%20-%7By%7D%5ET%2C%20%5Cfrac%7B1%7D%7B2%7D%2C%20%5Csqrt%7B2%7D%20%5Cleft%28x.y%5Cright%20%29%20%5C%7D&mode=inline)
 
     exp = inv[x + tp[inv[y]]]
     NCTeX[exp]
 
 produces:
 
-![{\\left (x+{{y}^T}^{-1}\\right )}^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_237.png)
+![{\\left (x+{{y}^T}^{-1}\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=%7B%5Cleft%20%28x%2B%7B%7By%7D%5ET%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
 
-`NCTeXForm` does not know as many functions as `TeXForm`. In some cases `TeXForm` will produce better results. Compare:
+`NCTeXForm` does not know as many functions as `TeXForm`. In some
+cases `TeXForm` will produce better results. Compare:
 
     exp = BesselJ[2, x]
     NCTeX[exp, TeXProcessor -> NCTeXForm]
 
 output:
 
-![\\operatorname{BesselJ}\\left (2, x\\right )](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_238.png)
+![\\operatorname{BesselJ}\\left (2, x\\right )](https://render.githubusercontent.com/render/math?math=%5Coperatorname%7BBesselJ%7D%5Cleft%20%282%2C%20x%5Cright%20%29&mode=inline)
 
 with
 
@@ -2591,9 +3602,10 @@ with
 
 output:
 
-![J\_2(x)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_239.png)
+![J_2(x)](https://render.githubusercontent.com/render/math?math=J_2%28x%29&mode=inline)
 
-It should be easy to customize `NCTeXForm` though. Just overload `NCTeXForm`. In this example:
+It should be easy to customize `NCTeXForm` though. Just overload
+`NCTeXForm`. In this example:
 
     NCTeXForm[BesselJ[x_, y_]] := Format[BesselJ[x, y], TeXForm]
 
@@ -2603,22 +3615,20 @@ makes
 
 produce
 
-![J\_2(x)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_240.png)
+![J_2(x)](https://render.githubusercontent.com/render/math?math=J_2%28x%29&mode=inline)
 
-Introduction
-============
+# Introduction
 
-The following chapters and sections describes packages inside `NCAlgebra`.
+The following chapters and sections describes packages inside
+`NCAlgebra`.
 
 Packages are automatically loaded unless otherwise noted.
 
-Packages for manipulating NC expressions
-========================================
+# Packages for manipulating NC expressions
 
-NonCommutativeMultiply
-----------------------
+## NonCommutativeMultiply
 
-`NonCommutativeMultiply` is the main package that provides noncommutative functionality to Mathematica's native `NonCommutativeMultiply` bound to the operator `**`.
+`NonCommutativeMultiply` is the main package that provides noncommutative functionality to Mathematica’s native `NonCommutativeMultiply` bound to the operator `**`.
 
 Members are:
 
@@ -2652,13 +3662,15 @@ Aliases are:
 
 `aj[expr]` is the adjoint of expression `expr`. It is a conjugate linear involution.
 
-See also: [tp](#tp), [co](#co).
+See also:
+[tp](#tp), [co](#co).
 
 ### co
 
 `co[expr]` is the conjugate of expression `expr`. It is a linear involution.
 
-See also: [aj](#aj).
+See also:
+[aj](#aj).
 
 ### Id
 
@@ -2682,75 +3694,94 @@ returns `inv[a**a]`. Conversely, if `Options[inv, Distrubute]` is `True` then it
 
 `tp[expr]` is the tranpose of expression `expr`. It is a linear involution.
 
-See also: [aj](#tp), [co](#co).
+See also:
+[aj](#tp), [co](#co).
 
 ### CommutativeQ
 
 `CommutativeQ[expr]` is `True` if expression `expr` is commutative (the default), and `False` if `expr` is noncommutative.
 
-See also: [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative).
+See also:
+[SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative).
 
 ### NonCommutativeQ
 
 `NonCommutativeQ[expr]` is equal to `Not[CommutativeQ[expr]]`.
 
-See also: [CommutativeQ](#commutativeq).
+See also:
+[CommutativeQ](#commutativeq).
 
 ### SetCommutative
 
-`SetCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be commutative.
+`SetCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, … to be commutative.
 
-See also: [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+See also:
+[SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
 
 ### SetNonCommutative
 
-`SetNonCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be noncommutative.
+`SetNonCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, … to be noncommutative.
 
-See also: [SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+See also:
+[SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
 
 ### SetNonCommutativeHold
 
-`SetNonCommutativeHold[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be noncommutative.
+`SetNonCommutativeHold[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, … to be noncommutative.
 
 `SetNonCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
 
-See also: [SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+See also:
+[SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
 
 ### SNC
 
 `SNC` is an alias for `SetNonCommutative`.
 
-See also: [SetNonCommutative](#setnoncommutative).
+See also:
+[SetNonCommutative](#setnoncommutative).
 
 ### SetCommutingOperators
 
-`SetCommutingOperators[a,b]` will define a rule that substitute any noncommutative product `b ** a` by `a ** b`, effectively making the pair `a` and `b` commutative. If you want to create a rule to replace `a ** b` by `b ** a` use `SetCommutingOperators[b,a]` instead.
+`SetCommutingOperators[a,b]` will define a rule that substitute any
+noncommutative product `b ** a` by `a ** b`, effectively making the
+pair `a` and `b` commutative. If you want to create a rule to replace
+`a ** b` by `b ** a` use `SetCommutingOperators[b,a]` instead.
 
-See also: [UnsetCommutingOperators](#unsetcommutingoperators), [CommutingOperatorsQ](#commutingoperatorsq)
+See also:
+[UnsetCommutingOperators](#unsetcommutingoperators),
+[CommutingOperatorsQ](#commutingoperatorsq)
 
 ### UnsetCommutingOperators
 
-`UnsetCommutingOperators[a,b]` remove any rules previously created by `SetCommutingOperators[a,b]` or `SetCommutingOperators[b,a]`.
+`UnsetCommutingOperators[a,b]` remove any rules previously created by
+`SetCommutingOperators[a,b]` or `SetCommutingOperators[b,a]`.
 
-See also: [SetCommutingOperators](#setcommutingoperators), [CommutingOperatorsQ](#commutingoperatorsq)
+See also:
+[SetCommutingOperators](#setcommutingoperators),
+[CommutingOperatorsQ](#commutingoperatorsq)
 
 ### CommutingOperatorsQ
 
 `CommutingOperatorsQ[a,b]` returns `True` if `a` and `b` are commuting operators.
 
-See also: [SetCommutingOperators](#setcommutingoperators), [UnsetCommutingOperators](#unsetcommutingoperators)
+See also:
+[SetCommutingOperators](#setcommutingoperators),
+[UnsetCommutingOperators](#unsetcommutingoperators)
 
 ### Commutative
 
 `Commutative[symbol]` is commutative even if `symbol` is noncommutative.
 
-See also: [CommuteEverything](#commuteeverything), [CommutativeQ](#commutativeq), [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative).
+See also:
+[CommuteEverything](#commuteeverything), [CommutativeQ](#commutativeq), [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative).
 
 ### CommuteEverything
 
 `CommuteEverything[expr]` is an alias for [BeginCommuteEverything](#begincommuteeverything).
 
-See also: [BeginCommuteEverything](#begincommuteeverything), [Commutative](#commutative).
+See also:
+[BeginCommuteEverything](#begincommuteeverything), [Commutative](#commutative).
 
 ### BeginCommuteEverything
 
@@ -2760,13 +3791,15 @@ See also: [BeginCommuteEverything](#begincommuteeverything), [Commutative](#comm
 
 `BeginCommuteEverything` answers the question *what does it sound like?*
 
-See also: [EndCommuteEverything](#endcommuteeverything), [Commutative](#commutative).
+See also:
+[EndCommuteEverything](#endcommuteeverything), [Commutative](#commutative).
 
 ### EndCommuteEverything
 
 `EndCommuteEverything[expr]` restores noncommutative behaviour to symbols affected by `BeginCommuteEverything`.
 
-See also: [BeginCommuteEverything](#begincommuteeverything), [Commutative](#commutative).
+See also:
+[BeginCommuteEverything](#begincommuteeverything), [Commutative](#commutative).
 
 ### ExpandNonCommutativeMultiply
 
@@ -2780,22 +3813,26 @@ returns
 
     a**b + a**c.
 
-See also: [NCExpand](#ncexpand), [NCE](#nce).
+See also:
+[NCExpand](#ncexpand), [NCE](#nce).
 
 ### NCExpand
 
 `NCExpand` is an alias for `ExpandNonCommutativeMultiply`.
 
-See also: [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply), [NCE](#nce).
+See also:
+[ExpandNonCommutativeMultiply](#expandnoncommutativemultiply),
+[NCE](#nce).
 
 ### NCE
 
 `NCE` is an alias for `ExpandNonCommutativeMultiply`.
 
-See also: [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply), [NCExpand](#ncexpand).
+See also:
+[ExpandNonCommutativeMultiply](#expandnoncommutativemultiply),
+[NCExpand](#ncexpand).
 
-NCCollect
----------
+## NCCollect
 
 Members are:
 
@@ -2827,9 +3864,12 @@ The following option is available:
 
 **Notes:**
 
-While `NCCollect[expr, vars]` always returns mathematically correct expressions, it may not collect `vars` from as many terms as one might think it should.
+While `NCCollect[expr, vars]` always returns mathematically correct
+expressions, it may not collect `vars` from as many terms as one might
+think it should.
 
-See also: [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint), [NCRationalToNCPolynomial](#ncrationaltoncpolynomial).
+See also:
+[NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint), [NCRationalToNCPolynomial](#ncrationaltoncpolynomial).
 
 ### NCCollectSelfAdjoint
 
@@ -2843,7 +3883,8 @@ The following option is available:
 
 -   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
 
-See also: [NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
+See also:
+[NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
 
 ### NCCollectSymmetric
 
@@ -2857,7 +3898,8 @@ The following option is available:
 
 -   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
 
-See also: [NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
+See also:
+[NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
 
 ### NCStrongCollect
 
@@ -2869,7 +3911,8 @@ For example, a symbol `x` will factor out of terms where it appears both linearl
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
-See also: [NCCollect](#nccollect-1), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
+See also:
+[NCCollect](#nccollect-1), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
 
 ### NCStrongCollectSelfAdjoint
 
@@ -2877,7 +3920,8 @@ See also: [NCCollect](#nccollect-1), [NCCollectSymmetric](#nccollectsymmetric), 
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
-See also: [NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric).
+See also:
+[NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric).
 
 ### NCStrongCollectSymmetric
 
@@ -2885,7 +3929,8 @@ See also: [NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCol
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
-See also: [NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
+See also:
+[NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
 
 ### NCCompose
 
@@ -2899,7 +3944,8 @@ The expression `NCCompose[NCDecompose[p,vars], degree]` will reproduce only the 
 
 This command internally converts nc expressions into the special `NCPolynomial` format.
 
-See also: [NCDecompose](#ncdecompose), [NCPDecompose](#ncpdecompose).
+See also:
+[NCDecompose](#ncdecompose), [NCPDecompose](#ncpdecompose).
 
 ### NCDecompose
 
@@ -2911,11 +3957,13 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 
 Internally `NCDecompose` uses [`NCPDecompose`](#ncpdecompose).
 
-See also: [NCCompose](#nccompose), [NCPDecompose](#ncpdecompose).
+See also:
+[NCCompose](#nccompose), [NCPDecompose](#ncpdecompose).
 
 ### NCTermsOfDegree
 
-`NCTermsOfDegree[expr,vars,degrees]` returns an expression such that each term has degree `degrees` in variables `vars`.
+`NCTermsOfDegree[expr,vars,degrees]` returns an expression such that
+each term has degree `degrees` in variables `vars`.
 
 For example,
 
@@ -2935,13 +3983,17 @@ returns `z**w`, and
 
 returns `0`.
 
-This command internally converts nc expressions into the special `NCPolynomial` format.
+This command internally converts nc expressions into the special
+`NCPolynomial` format.
 
-See also: [NCTermsOfTotalDegree](#nctermsoftotaldegree), [NCDecompose](#ncdecompose), [NCPDecompose](#ncpdecompose).
+See also:
+[NCTermsOfTotalDegree](#nctermsoftotaldegree),
+[NCDecompose](#ncdecompose), [NCPDecompose](#ncpdecompose).
 
 ### NCTermsOfTotalDegree
 
-`NCTermsOfTotalDegree[expr,vars,degree]` returns an expression such that each term has total degree `degree` in variables `vars`.
+`NCTermsOfTotalDegree[expr,vars,degree]` returns an expression such that
+each term has total degree `degree` in variables `vars`.
 
 For example,
 
@@ -2961,14 +4013,16 @@ returns `z**w`, and
 
 returns `0`.
 
-This command internally converts nc expressions into the special `NCPolynomial` format.
+This command internally converts nc expressions into the special
+`NCPolynomial` format.
 
-See also: [NCTermsOfDegree](#nctermsofdegree), [NCDecompose](#ncdecompose), [NCPDecompose](#ncpdecompose).
+See also:
+[NCTermsOfDegree](#nctermsofdegree),
+[NCDecompose](#ncdecompose), [NCPDecompose](#ncpdecompose).
 
-NCReplace
----------
+## NCReplace
 
-**NCReplace** is a package containing several functions that are useful in making replacements in noncommutative expressions. It offers replacements to Mathematica's `Replace`, `ReplaceAll`, `ReplaceRepeated`, and `ReplaceList` functions.
+**NCReplace** is a package containing several functions that are useful in making replacements in noncommutative expressions. It offers replacements to Mathematica’s `Replace`, `ReplaceAll`, `ReplaceRepeated`, and `ReplaceList` functions.
 
 Commands in this package replace the old `Substitute` and `Transform` family of command which are been deprecated. The new commands are much more reliable and work faster than the old commands. From the beginning, substitution was always problematic and certain patterns would be missed. We reassure that the call expression that are returned are mathematically correct but some opportunities for substitution may have been missed.
 
@@ -3012,13 +4066,15 @@ Aliases:
 
 `NCReplace[expr,rules,levelspec]` applies `rules` to parts of `expr` specified by `levelspec`.
 
-See also: [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
+See also:
+[NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCReplaceAll
 
 `NCReplaceAll[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform each part of the nc expression `expr`.
 
-See also: [NCReplace](#ncreplace-1), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
+See also:
+[NCReplace](#ncreplace-1), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCReplaceList
 
@@ -3026,164 +4082,191 @@ See also: [NCReplace](#ncreplace-1), [NCReplaceList](#ncreplacelist), [NCReplace
 
 `ReplaceList[expr,rules,n]` gives a list of at most `n` results.
 
-See also: [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceRepeated](#ncreplacerepeated).
+See also:
+[NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCReplaceRepeated
 
 `NCReplaceRepeated[expr,rules]` repeatedly performs replacements using rule or list of rules `rules` until `expr` no longer changes.
 
-See also: [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist).
+See also:
+[NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist).
 
 ### NCR
 
 `NCR` is an alias for `NCReplace`.
 
-See also: [NCReplace](#ncreplace-1).
+See also:
+[NCReplace](#ncreplace-1).
 
 ### NCRA
 
 `NCRA` is an alias for `NCReplaceAll`.
 
-See also: [NCReplaceAll](#ncreplaceall).
+See also:
+[NCReplaceAll](#ncreplaceall).
 
 ### NCRR
 
 `NCRR` is an alias for `NCReplaceRepeated`.
 
-See also: [NCReplaceRepeated](#ncreplacerepeated).
+See also:
+[NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCRL
 
 `NCRL` is an alias for `NCReplaceList`.
 
-See also: [NCReplaceList](#ncreplacelist).
+See also:
+[NCReplaceList](#ncreplacelist).
 
 ### NCMakeRuleSymmetric
 
 `NCMakeRuleSymmetric[rules]` add rules to transform the transpose of the left-hand side of `rules` into the transpose of the right-hand side of `rules`.
 
-See also: [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint), [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
+See also:
+[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint), [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCMakeRuleSelfAdjoint
 
 `NCMakeRuleSelfAdjoint[rules]` add rules to transform the adjoint of the left-hand side of `rules` into the adjoint of the right-hand side of `rules`.
 
-See also: [NCMakeRuleSymmetric](#ncmakerulesymmetric), [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
+See also:
+[NCMakeRuleSymmetric](#ncmakerulesymmetric), [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCReplaceSymmetric
 
 `NCReplaceSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplace`.
 
-See also: [NCReplace](#ncreplace-1), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
+See also:
+[NCReplace](#ncreplace-1), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
 
 ### NCReplaceAllSymmetric
 
 `NCReplaceAllSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceAll`.
 
-See also: [NCReplaceAll](#ncreplaceall), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
+See also:
+[NCReplaceAll](#ncreplaceall), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
 
 ### NCReplaceRepeatedSymmetric
 
 `NCReplaceRepeatedSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceRepeated`.
 
-See also: [NCReplaceRepeated](#ncreplacerepeated), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
+See also:
+[NCReplaceRepeated](#ncreplacerepeated), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
 
 ### NCReplaceListSymmetric
 
 `NCReplaceListSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceList`.
 
-See also: [NCReplaceList](#ncreplacelist), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
+See also:
+[NCReplaceList](#ncreplacelist), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
 
 ### NCRSym
 
 `NCRSym` is an alias for `NCReplaceSymmetric`.
 
-See also: [NCReplaceSymmetric](#ncreplacesymmetric).
+See also:
+[NCReplaceSymmetric](#ncreplacesymmetric).
 
 ### NCRASym
 
 `NCRASym` is an alias for `NCReplaceAllSymmetric`.
 
-See also: [NCReplaceAllSymmetric](#ncreplaceallsymmetric).
+See also:
+[NCReplaceAllSymmetric](#ncreplaceallsymmetric).
 
 ### NCRRSym
 
 `NCRRSym` is an alias for `NCReplaceRepeatedSymmetric`.
 
-See also: [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric).
+See also:
+[NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric).
 
 ### NCRLSym
 
 `NCRLSym` is an alias for `NCReplaceListSymmetric`.
 
-See also: [NCReplaceListSymmetric](#ncreplacelistsymmetric).
+See also:
+[NCReplaceListSymmetric](#ncreplacelistsymmetric).
 
 ### NCReplaceSelfAdjoint
 
 `NCReplaceSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplace`.
 
-See also: [NCReplace](#ncreplace-1), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+See also:
+[NCReplace](#ncreplace-1), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
 
 ### NCReplaceAllSelfAdjoint
 
 `NCReplaceAllSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceAll`.
 
-See also: [NCReplaceAll](#ncreplaceall), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+See also:
+[NCReplaceAll](#ncreplaceall), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
 
 ### NCReplaceRepeatedSelfAdjoint
 
 `NCReplaceRepeatedSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceRepeated`.
 
-See also: [NCReplaceRepeated](#ncreplacerepeated), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+See also:
+[NCReplaceRepeated](#ncreplacerepeated), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
 
 ### NCReplaceListSelfAdjoint
 
 `NCReplaceListSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceList`.
 
-See also: [NCReplaceList](#ncreplacelist), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+See also:
+[NCReplaceList](#ncreplacelist), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
 
 ### NCRSA
 
 `NCRSA` is an alias for `NCReplaceSymmetric`.
 
-See also: [NCReplaceSymmetric](#ncreplacesymmetric).
+See also:
+[NCReplaceSymmetric](#ncreplacesymmetric).
 
 ### NCRASA
 
 `NCRASA` is an alias for `NCReplaceAllSymmetric`.
 
-See also: [NCReplaceAllSymmetric](#ncreplaceallsymmetric).
+See also:
+[NCReplaceAllSymmetric](#ncreplaceallsymmetric).
 
 ### NCRRSA
 
 `NCRRSA` is an alias for `NCReplaceRepeatedSymmetric`.
 
-See also: [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric).
+See also:
+[NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric).
 
 ### NCRLSA
 
 `NCRLSA` is an alias for `NCReplaceListSymmetric`.
 
-See also: [NCReplaceListSymmetric](#ncreplacelistsymmetric).
+See also:
+[NCReplaceListSymmetric](#ncreplacelistsymmetric).
 
 ### NCMatrixReplaceAll
 
 `NCMatrixReplaceAll[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform each part of the nc expression `expr`.
 
-`NCMatrixReplaceAll` works as `NCReplaceAll` but takes extra steps to make sure substitutions work with matrices.
+`NCMatrixReplaceAll` works as `NCReplaceAll` but takes extra steps to
+make sure substitutions work with matrices.
 
-See also: [NCReplaceAll](#ncreplaceall), [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated).
+See also:
+[NCReplaceAll](#ncreplaceall), [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated).
 
 ### NCMatrixReplaceRepeated
 
 `NCMatrixReplaceRepeated[expr,rules]` repeatedly performs replacements using rule or list of rules `rules` until `expr` no longer changes.
 
-`NCMatrixReplaceRepeated` works as `NCReplaceRepeated` but takes extra steps to make sure substitutions work with matrices.
+`NCMatrixReplaceRepeated` works as `NCReplaceRepeated` but takes extra steps to
+make sure substitutions work with matrices.
 
-See also: [NCReplaceRepeated](#ncreplacerepeated), [NCMatrixReplaceAll](#ncmatrixreplaceall).
+See also:
+[NCReplaceRepeated](#ncreplacerepeated), [NCMatrixReplaceAll](#ncmatrixreplaceall).
 
-NCSelfAdjoint
--------------
+## NCSelfAdjoint
 
 Members are:
 
@@ -3195,11 +4278,12 @@ Members are:
 
 ### NCSymmetricQ
 
-`NCSymmetricQ[expr]` returns *True* if `expr` is symmetric, i.e. if `tp[exp] == exp`.
+`NCSymmetricQ[expr]` returns *True* if `expr` is symmetric, i.e. if `tp[exp] == exp`.
 
 `NCSymmetricQ` attempts to detect symmetric variables using `NCSymmetricTest`.
 
-See also: [NCSelfAdjointQ](#ncselfadjointq), [NCSymmetricTest](#ncsymmetrictest).
+See also:
+[NCSelfAdjointQ](#ncselfadjointq), [NCSymmetricTest](#ncsymmetrictest).
 
 ### NCSymmetricTest
 
@@ -3218,7 +4302,8 @@ The following options can be given:
 -   `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables;
 -   `Strict`: treats as non-symmetric any variable that appears inside `tp`.
 
-See also: [NCSymmetricQ](#ncsymmetricq), [NCNCSelfAdjointTest](#ncselfadjointtest).
+See also:
+[NCSymmetricQ](#ncsymmetricq), [NCNCSelfAdjointTest](#ncselfadjointtest).
 
 ### NCSymmetricPart
 
@@ -3248,17 +4333,20 @@ The following options can be given:
 -   `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
 -   `Strict`: treats as non-symmetric any variable that appears inside `tp`.
 
-See also: [NCSymmetricTest](#ncsymmetrictest).
+See also:
+[NCSymmetricTest](#ncsymmetrictest).
 
 ### NCSelfAdjointQ
 
-`NCSelfAdjointQ[expr]` returns true if `expr` is self-adjoint, i.e. if `aj[exp] == exp`.
+`NCSelfAdjointQ[expr]` returns true if `expr` is self-adjoint, i.e. if `aj[exp] == exp`.
 
-See also: [NCSymmetricQ](#ncsymmetricq), [NCSelfAdjointTest](#ncselfadjointtest).
+See also:
+[NCSymmetricQ](#ncsymmetricq), [NCSelfAdjointTest](#ncselfadjointtest).
 
 ### NCSelfAdjointTest
 
-`NCSelfAdjointTest[expr]` attempts to establish whether `expr` is self-adjoint by assuming that some of its variables are self-adjoint or symmetric. `NCSelfAdjointTest[expr,options]` uses `options`.
+`NCSelfAdjointTest[expr]` attempts to establish whether `expr` is self-adjoint by assuming that some of its variables are self-adjoint or symmetric.
+`NCSelfAdjointTest[expr,options]` uses `options`.
 
 `NCSelfAdjointTest` returns a list of three elements:
 
@@ -3273,10 +4361,10 @@ The following options can be given:
 -   `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
 -   `Strict`: treats as non-self-adjoint any variable that appears inside `aj`.
 
-See also: [NCSelfAdjointQ](#ncselfadjointq).
+See also:
+[NCSelfAdjointQ](#ncselfadjointq).
 
-NCSimplifyRational
-------------------
+## NCSimplifyRational
 
 **NCSimplifyRational** is a package with function that simplifies noncommutative expressions and certain functions of their inverses.
 
@@ -3300,28 +4388,10 @@ For example, if
 
 where `lead` is the leading monomial with the highest degree then the following rules are generated:
 
-<table style="width:39%;">
-<colgroup>
-<col width="19%" />
-<col width="19%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Original</th>
-<th align="left">Transformed</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">inv[mon1 + ... + K lead] lead</td>
-<td align="left">(1 - inv[mon1 + ... + K lead] (mon1 + ...))/K</td>
-</tr>
-<tr class="even">
-<td align="left">lead inv[mon1 + ... + K lead]</td>
-<td align="left">(1 - (mon1 + ...) inv[mon1 + ... + K lead])/K</td>
-</tr>
-</tbody>
-</table>
+| Original                      | Transformed                                 |
+|:------------------------------|:--------------------------------------------|
+| inv\[mon1 + … + K lead\] lead | (1 - inv\[mon1 + … + K lead\] (mon1 + …))/K |
+| lead inv\[mon1 + … + K lead\] | (1 - (mon1 + …) inv\[mon1 + … + K lead\])/K |
 
 Finally the following pattern based rules are applied:
 
@@ -3348,17 +4418,20 @@ Rules in `NCSimplifyRational` and `NCPreSimplifyRational` are applied repeatedly
 
 Rules in `NCSimplifyRationalSinglePass` and `NCPreSimplifyRationalSinglePass` are applied only once.
 
-The particular ordering of monomials used by `NCSimplifyRational` is the one implied by the `NCPolynomial` format. This ordering is a variant of the deg-lex ordering where the lexical ordering is Mathematica's natural ordering.
+The particular ordering of monomials used by `NCSimplifyRational` is the one implied by the `NCPolynomial` format. This ordering is a variant of the deg-lex ordering where the lexical ordering is Mathematica’s natural ordering.
 
-`NCSimplifyRational` is limited by its rule list and what rules are best is unknown and might depend on additional assumptions. For example:
+`NCSimplifyRational` is limited by its rule list and what rules are
+best is unknown and might depend on additional assumptions. For example:
 
     NCSimplifyRational[y ** inv[y + x ** y]]
 
-returns `y ** inv[y + x ** y]` not `inv[1 + x]`, which is what one would expect if `y` were to be invertible. Indeed,
+returns `y ** inv[y + x ** y]` not `inv[1 + x]`, which is what one
+would expect if `y` were to be invertible. Indeed,
 
     NCSimplifyRational[inv[y] ** inv[inv[y] + x ** inv[y]]]
 
-does return `inv[1 + x]`, since in this case the appearing of `inv[y]` trigger rules that implicitely assume `y` is invertible.
+does return `inv[1 + x]`, since in this case the appearing of `inv[y]`
+trigger rules that implicitely assume `y` is invertible.
 
 Members are:
 
@@ -3376,40 +4449,49 @@ Aliases:
 
 `NCNormalizeInverse[expr]` transforms all rational NC expressions of the form `inv[K + b]` into `inv[1 + (1/K) b]/K` if `A` is commutative.
 
-See also: [NCSimplifyRational](#ncsimplifyrational-1), [NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass).
+See also:
+[NCSimplifyRational](#ncsimplifyrational-1), [NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass).
 
 ### NCSimplifyRational
 
 `NCSimplifyRational[expr]` repeatedly applies `NCSimplifyRationalSinglePass` in an attempt to simplify the rational NC expression `expr`.
 
-See also: [NCNormalizeInverse](#ncnormalizeinverse), [NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass).
+See also:
+[NCNormalizeInverse](#ncnormalizeinverse),
+[NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass).
 
 ### NCSR
 
 `NCSR` is an alias for `NCSimplifyRational`.
 
-See also: [NCSimplifyRational](#ncsimplifyrational-1).
+See also:
+[NCSimplifyRational](#ncsimplifyrational-1).
 
 ### NCSimplifyRationalSinglePass
 
 `NCSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational NC expression `expr`.
 
-See also: [NCNormalizeInverse](#ncnormalizeinverse), [NCSimplifyRational](#ncsimplifyrational-1).
+See also:
+[NCNormalizeInverse](#ncnormalizeinverse),
+[NCSimplifyRational](#ncsimplifyrational-1).
 
 ### NCPreSimplifyRational
 
 `NCPreSimplifyRational[expr]` repeatedly applies `NCPreSimplifyRationalSinglePass` in an attempt to simplify the rational NC expression `expr`.
 
-See also: [NCNormalizeInverse](#ncnormalizeinverse), [NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass).
+See also:
+[NCNormalizeInverse](#ncnormalizeinverse),
+[NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass).
 
 ### NCPreSimplifyRationalSinglePass
 
 `NCPreSimplifyRationalSinglePass[expr]` applies a series of custom rules only once in an attempt to simplify the rational NC expression `expr`.
 
-See also: [NCNormalizeInverse](#ncnormalizeinverse), [NCPreSimplifyRational](#ncpresimplifyrational).
+See also:
+[NCNormalizeInverse](#ncnormalizeinverse),
+[NCPreSimplifyRational](#ncpresimplifyrational).
 
-NCDiff
-------
+## NCDiff
 
 **NCDiff** is a package containing several functions that are used in noncommutative differention of functions and polynomials.
 
@@ -3426,7 +4508,7 @@ Members being deprecated:
 
 ### NCDirectionalD
 
-`NCDirectionalD[expr, {var1, h1}, ...]` takes the directional derivative of expression `expr` with respect to variables `var1`, `var2`, ... successively in the directions `h1`, `h2`, ....
+`NCDirectionalD[expr, {var1, h1}, ...]` takes the directional derivative of expression `expr` with respect to variables `var1`, `var2`, … successively in the directions `h1`, `h2`, ….
 
 For example, if:
 
@@ -3440,7 +4522,10 @@ returns
 
     h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b
 
-In the case of more than one variables `NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative of `expr` with respect to `x` in the direction `h` and with respect to `y` in the direction `k`. For example, if:
+In the case of more than one variables
+`NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative
+of `expr` with respect to `x` in the direction `h` and with respect to
+`y` in the direction `k`. For example, if:
 
     expr = x**q**x - y**x
 
@@ -3452,11 +4537,13 @@ returns
 
     h**q**x + x**q*h - y**h - k**x
 
-See also: [NCGrad](#ncgrad), [NCHessian](#nchessian).
+See also:
+[NCGrad](#ncgrad),
+[NCHessian](#nchessian).
 
 ### NCGrad
 
-`NCGrad[expr, var1, ...]` gives the nc gradient of the expression `expr` with respect to variables `var1`, `var2`, .... If there is more than one variable then `NCGrad` returns the gradient in a list.
+`NCGrad[expr, var1, ...]` gives the nc gradient of the expression `expr` with respect to variables `var1`, `var2`, …. If there is more than one variable then `NCGrad` returns the gradient in a list.
 
 The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
 
@@ -3494,11 +4581,12 @@ returns the nc gradient list
 
 **IMPORTANT**: The expression returned by NCGrad is the transpose or the adjoint of the standard gradient. This is done so that no assumption on the symbols are needed. The calculated expression is correct even if symbols are self-adjoint or symmetric.
 
-See also: [NCDirectionalD](#ncdirectionald).
+See also:
+[NCDirectionalD](#ncdirectionald).
 
 ### NCHessian
 
-`NCHessian[expr, {var1, h1}, ...]` takes the second directional derivative of nc expression `expr` with respect to variables `var1`, `var2`, ... successively in the directions `h1`, `h2`, ....
+`NCHessian[expr, {var1, h1}, ...]` takes the second directional derivative of nc expression `expr` with respect to variables `var1`, `var2`, … successively in the directions `h1`, `h2`, ….
 
 For example, if:
 
@@ -3513,9 +4601,12 @@ returns
     2 h**a**h + 2 s**inv[x]**s - 2 s**inv[x]**h**inv[x]**y -
     2 y**inv[x]**h**inv[x]**s + 2 y**inv[x]**h**inv[x]**h**inv[x]**y
 
-In the case of more than one variables `NCHessian[expr, {x,h}, {y,k}]` takes the second directional derivative of `expr` with respect to `x` in the direction `h` and with respect to `y` in the direction `k`.
+In the case of more than one variables `NCHessian[expr, {x,h}, {y,k}]`
+takes the second directional derivative of `expr` with respect to `x`
+in the direction `h` and with respect to `y` in the direction `k`.
 
-See also: [NCDiretionalD](#ncdirectionald), [NCGrad](#ncgrad).
+See also:
+[NCDiretionalD](#ncdirectionald), [NCGrad](#ncgrad).
 
 ### DirectionalD
 
@@ -3523,7 +4614,8 @@ See also: [NCDiretionalD](#ncdirectionald), [NCGrad](#ncgrad).
 
 **DEPRECATION NOTICE**: This syntax is limited to one variable and is being deprecated in favor of the more general syntax in [NCDirectionalD](#ncdirectionald).
 
-See also: [NCDirectionalD](#directionald).
+See also:
+[NCDirectionalD](#directionald).
 
 ### NCIntegrate
 
@@ -3537,10 +4629,10 @@ returns
 
     x**x
 
-See also: [NCDirectionalD](#directionald).
+See also:
+[NCDirectionalD](#directionald).
 
-NCConvexity
------------
+## NCConvexity
 
 **NCConvexity** is a package that provides functionality to determine whether a rational or polynomial noncommutative function is convex.
 
@@ -3569,7 +4661,8 @@ return *True* while
 
 all return *False*.
 
-See also: [NCConvexityRegion](#ncconvexityregion).
+See also:
+[NCConvexityRegion](#ncconvexityregion).
 
 ### NCConvexityRegion
 
@@ -3583,7 +4676,7 @@ returns
 
     d = {2 x, -2 inv[x]}
 
-from which we conclude that `x**x**x` is not convex in `x` because ![x \\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_241.png) and ![-{x}^{-1} \\succ 0](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_242.png) cannot simultaneously hold.
+from which we conclude that `x**x**x` is not convex in `x` because ![x \\succ 0](https://render.githubusercontent.com/render/math?math=x%20%5Csucc%200&mode=inline) and ![-{x}^{-1} \\succ 0](https://render.githubusercontent.com/render/math?math=-%7Bx%7D%5E%7B-1%7D%20%5Csucc%200&mode=inline) cannot simultaneously hold.
 
 `NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
 
@@ -3600,13 +4693,12 @@ to decompose the Hessian into a product of a left row vector, `lt`, times a midd
 
 from which the output of NCConvexityRegion is the a list with the block-diagonal entries of the matrix `d`.
 
-See also: [NCHessian](#nchessian), [NCMatrixOfQuadratic](#ncmatrixofquadratic), [NCLDLDecomposition](#ncldldecomposition).
+See also:
+[NCHessian](#nchessian), [NCMatrixOfQuadratic](#ncmatrixofquadratic), [NCLDLDecomposition](#ncldldecomposition).
 
-Packages for manipulating NC block matrices
-===========================================
+# Packages for manipulating NC block matrices
 
-NCDot
------
+## NCDot
 
 Members are:
 
@@ -3621,23 +4713,26 @@ Members are:
 
 `tpMat[mat]` gives the transpose of matrix `mat` using `tp`.
 
-See also: [ajMat](#tpmat), [coMat](#comat), [NCDot](#ncdot-1).
+See also:
+[ajMat](#tpmat), [coMat](#comat), [NCDot](#ncdot-1).
 
 ### ajMat
 
 `ajMat[mat]` gives the adjoint transpose of matrix `mat` using `aj` instead of `ConjugateTranspose`.
 
-See also: [tpMat](#tpmat), [coMat](#comat), [NCDot](#ncdot-1).
+See also:
+[tpMat](#tpmat), [coMat](#comat), [NCDot](#ncdot-1).
 
 ### coMat
 
 `coMat[mat]` gives the conjugate of matrix `mat` using `co` instead of `Conjugate`.
 
-See also: [tpMat](#tpmat), [ajMat](#comat), [NCDot](#ncdot-1).
+See also:
+[tpMat](#tpmat), [ajMat](#comat), [NCDot](#ncdot-1).
 
 ### NCDot
 
-`NCDot[mat1, mat2, ...]` gives the matrix multiplication of `mat1`, `mat2`, ... using `NonCommutativeMultiply` rather than `Times`.
+`NCDot[mat1, mat2, ...]` gives the matrix multiplication of `mat1`, `mat2`, … using `NonCommutativeMultiply` rather than `Times`.
 
 **Notes:**
 
@@ -3647,28 +4742,33 @@ The experienced matrix analyst should always remember that the Mathematica conve
 -   `{{1},{2},{4}}` is a 3x1 *matrix* or a *column vector*;
 -   `{1,2,4}` is a *vector* but **not** a *matrix*. Indeed whether it is a row or column vector depends on the context. We advise not to use *vectors*.
 
-See also: [tpMat](#tpmat), [ajMat](#comat), [coMat](#comat).
+See also:
+[tpMat](#tpmat), [ajMat](#comat), [coMat](#comat).
 
 ### NCInverse
 
 `NCInverse[mat]` gives the nc inverse of the square matrix `mat`. `NCInverse` uses partial pivoting to find a nonzero pivot.
 
-`NCInverse` is primarily used symbolically. Usually the elements of the inverse matrix are huge expressions. We recommend using `NCSimplifyRational` to improve the results.
+`NCInverse` is primarily used symbolically. Usually the elements of the inverse matrix are huge expressions.
+We recommend using `NCSimplifyRational` to improve the results.
 
-See also: [tpMat](#tpmat), [ajMat](#comat), [coMat](#comat).
+See also:
+[tpMat](#tpmat), [ajMat](#comat), [coMat](#comat).
 
 ### NCMatrixExpand
 
 `NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
 
-See also: [NCInverse](#ncinverse), [NCDot](#ncdot-1).
+See also:
+[NCInverse](#ncinverse), [NCDot](#ncdot-1).
 
-NCMatrixDecompositions
-----------------------
+## NCMatrixDecompositions
 
 `NCMatrixDecompositions` provide noncommutative versions of the linear algebra algorithms in the package [MatrixDecompositions](#matrixdecompositions-linear-algebra-templates).
 
-See the documentation for the package [MatrixDecompositions](#matrixdecompositions-linear-algebra-templates) for details on the algorithms and options.
+See the documentation for the package
+[MatrixDecompositions](#matrixdecompositions-linear-algebra-templates) for details on
+the algorithms and options.
 
 Members are:
 
@@ -3688,7 +4788,8 @@ Members are:
 
 ### NCLUDecompositionWithPartialPivoting
 
-`NCLUDecompositionWithPartialPivoting` is a noncommutative version of [NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting).
+`NCLUDecompositionWithPartialPivoting` is a noncommutative version of
+[NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting).
 
 The following `options` can be given:
 
@@ -3702,7 +4803,8 @@ See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoti
 
 ### NCLUDecompositionWithCompletePivoting
 
-`NCLUDecompositionWithCompletePivoting` is a noncommutative version of [NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting).
+`NCLUDecompositionWithCompletePivoting` is a noncommutative version of
+[NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting).
 
 The following `options` can be given:
 
@@ -3790,12 +4892,19 @@ returns
 
 See also: [NCLeftDivide](#ncleftdivide).
 
-MatrixDecompositions: linear algebra templates
-----------------------------------------------
+## MatrixDecompositions: linear algebra templates
 
-`MatrixDecompositions` is a package that implements various linear algebra algorithms, such as *LU Decomposition* with *partial* and *complete pivoting*, and *LDL Decomposition*. The algorithms have been written with correctness and ease of customization rather than efficiency as the main goals. They were originally developed to serve as the core of the noncommutative linear algebra algorithms for [NCAlgebra](http://math.ucsd.edu/~ncalg).
+`MatrixDecompositions` is a package that implements various linear
+algebra algorithms, such as *LU Decomposition* with *partial* and
+*complete pivoting*, and *LDL Decomposition*. The algorithms have been
+written with correctness and ease of customization rather than
+efficiency as the main goals. They were originally developed to serve
+as the core of the noncommutative linear algebra algorithms for
+[NCAlgebra](http://math.ucsd.edu/~ncalg).
 
-See the package [NCMatrixDecompositions](#ncmatrixdecompositions) for noncommutative versions of these algorithms.
+See the package
+[NCMatrixDecompositions](#ncmatrixdecompositions) for
+noncommutative versions of these algorithms.
 
 Members are:
 
@@ -3811,7 +4920,9 @@ Members are:
     -   [LUInverse](#luinverse)
 -   Utilities
     -   [GetLUMatrices](#getlumatrices)
+    -   [GetFullLUMatrices](#getfulllumatrices)
     -   [GetLDUMatrices](#getldumatrices)
+    -   [GetFullLDUMatrices](#getfullldumatrices)
     -   [GetDiagonal](#getdiagonal)
     -   [LUPartialPivoting](#lupartialpivoting)
     -   [LUCompletePivoting](#lucompletepivoting)
@@ -3829,7 +4940,7 @@ Members are:
 
 `LUDecompositionWithPartialPivoting` is similar in functionality with the built-in `LUDecomposition`. It implements a *partial pivoting* strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.
 
-The triangular factors are recovered using [GetLUMatrices](#getlumatrices).
+The triangular factors are recovered using [GetLUMatrices](#getlumatrices) or [GetFullLUMatrices](#getfulllumatrices).
 
 The following `options` can be given:
 
@@ -3839,7 +4950,8 @@ The following `options` can be given:
 -   `Pivoting` ([LUPartialPivoting](#lupartialpivoting)): function used to sort rows for pivoting;
 -   `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
-See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices), [LUPartialPivoting](#lupartialpivoting).
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices), [GetFullLUMatrices](#getfulllumatrices), [LUPartialPivoting](#lupartialpivoting).
 
 ### LUDecompositionWithCompletePivoting
 
@@ -3856,7 +4968,7 @@ See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoti
 
 `LUDecompositionWithCompletePivoting` implements a *complete pivoting* strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.
 
-The triangular factors are recovered using [GetLUMatrices](#getlumatrices).
+The triangular factors are recovered using [GetLUMatrices](#getlumatrices) or [GetFullLUMatrices](#getfulllumatrices).
 
 The following `options` can be given:
 
@@ -3865,7 +4977,8 @@ The following `options` can be given:
 -   `Dot` (`Dot`): function used to multiply vectors and matrices;
 -   `Pivoting` ([LUCompletePivoting](#lucompletepivoting)): function used to sort rows for pivoting;
 
-See also: LUDecomposition, [GetLUMatrices](#getlumatrices), [LUCompletePivoting](#lucompletepivoting), [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting).
+See also:
+LUDecomposition, [GetLUMatrices](#getlumatrices), [GetFullLUMatrices](#getfulllumatrices), [LUCompletePivoting](#lucompletepivoting), [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting).
 
 ### LDLDecomposition
 
@@ -3882,7 +4995,7 @@ See also: LUDecomposition, [GetLUMatrices](#getlumatrices), [LUCompletePivoting]
 
 `LUDecompositionWithCompletePivoting` implements a *Bunch-Parlett pivoting* strategy in which the sorting can be configured using the options listed below. It applies only to square symmetric or self-adjoint matrices.
 
-The triangular factors are recovered using [GetLDUMatrices](#getldumatrices).
+The triangular factors are recovered using [GetLDUMatrices](#getldumatrices) or [GetFullLDUMatrices](#getfullldumatrices).
 
 The following `options` can be given:
 
@@ -3896,11 +5009,13 @@ The following `options` can be given:
 -   `SelfAdjointMatrixQ` (HermitianQ): function to test if matrix is self-adjoint;
 -   `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
-See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices), [LUCompletePivoting](#lucompletepivoting), [LUPartialPivoting](#lupartialpivoting).
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices), [GetFullLDUMatrices](#getfullldumatrices), [LUCompletePivoting](#lucompletepivoting), [LUPartialPivoting](#lupartialpivoting).
 
 ### UpperTriangularSolve
 
-`UpperTriangularSolve[u, b]` solves the upper-triangular system of equations ![u x = b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_243.png) using back-substitution.
+`UpperTriangularSolve[u, b]` solves the upper-triangular system of
+equations ![u x = b](https://render.githubusercontent.com/render/math?math=u%20x%20%3D%20b&mode=inline) using back-substitution.
 
 For example:
 
@@ -3908,11 +5023,13 @@ For example:
 
 returns the solution `x`.
 
-See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [LDLDecomposition](#ldldecomposition).
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [LDLDecomposition](#ldldecomposition).
 
 ### LowerTriangularSolve
 
-`LowerTriangularSolve[l, b]` solves the lower-triangular system of equations ![l x = b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_244.png) using forward-substitution.
+`LowerTriangularSolve[l, b]` solves the lower-triangular system of
+equations ![l x = b](https://render.githubusercontent.com/render/math?math=l%20x%20%3D%20b&mode=inline) using forward-substitution.
 
 For example:
 
@@ -3920,7 +5037,8 @@ For example:
 
 returns the solution `x`.
 
-See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [LDLDecomposition](#ldldecomposition).
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [LDLDecomposition](#ldldecomposition).
 
 ### LUInverse
 
@@ -3928,7 +5046,8 @@ See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoti
 
 `LUInverse` uses the [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting) and the triangular solvers [LowerTriangularSolve](#lowertriangularsolve) and [UpperTriangularSolve](#uppertriangularsolve).
 
-See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting).
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting).
 
 ### GetLUMatrices
 
@@ -3939,9 +5058,24 @@ For example:
     {lu, p} = LUDecompositionWithPartialPivoting[A];
     {l, u} = GetLUMatrices[lu];
 
+returns the lower-triangular factor `l` and upper-triangular factor `u` as `SparseArray`s.
+
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetFullLUMatrices](#getfulllumatrices).
+
+### GetFullLUMatrices
+
+`GetFullLUMatrices[m]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
+
+For example:
+
+    {lu, p} = LUDecompositionWithPartialPivoting[A];
+    {l, u} = GetFullLUMatrices[lu];
+
 returns the lower-triangular factor `l` and upper-triangular factor `u`.
 
-See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting).
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices).
 
 ### GetLDUMatrices
 
@@ -3952,9 +5086,24 @@ For example:
     {ldl, p, s, rank} = LDLDecomposition[A];
     {l,d,u} = GetLDUMatrices[ldl,s];
 
+returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d` as `SparseArray`s.
+
+See also:
+[LDLDecomposition](#ldldecomposition), [GetFullLDUMatrices](#getfullldumatrices).
+
+### GetFullLDUMatrices
+
+`GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+
+For example:
+
+    {ldl, p, s, rank} = LDLDecomposition[A];
+    {l,d,u} = GetLDUMatrices[ldl,s];
+
 returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d`.
 
-See also: [LDLDecomposition](#ldldecomposition).
+See also:
+[LDLDecomposition](#ldldecomposition), [GetLDUMatrices](#getldumatrices).
 
 ### GetDiagonal
 
@@ -3978,7 +5127,8 @@ returns
 
     d = {{{1,-1},{-1,2}},3}
 
-See also: [LDLDecomposition](#ldldecomposition).
+See also:
+[LDLDecomposition](#ldldecomposition).
 
 ### LUPartialPivoting
 
@@ -3986,7 +5136,8 @@ See also: [LDLDecomposition](#ldldecomposition).
 
 `LUPartialPivoting[v, f]` sorts with respect to the function `f` instead of the absolute value.
 
-See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUCompletePivoting](#lucompletepivoting).
+See also:
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUCompletePivoting](#lucompletepivoting).
 
 ### LUCompletePivoting
 
@@ -3994,19 +5145,21 @@ See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoti
 
 `LUCompletePivoting[v, f]` sorts with respect to the function `f` instead of the absolute value.
 
-See also: [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [LUPartialPivoting](#lupartialpivoting).
+See also:
+[LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [LUPartialPivoting](#lupartialpivoting).
 
 ### LURowReduce
 
 ### LURowReduceIncremental
 
-Packages for pretty output, testing, and utilities
-==================================================
+# Packages for pretty output, testing, and utilities
 
-NCOutput
---------
+## NCOutput
 
-**NCOutput** is a package that can be used to beautify the display of noncommutative expressions. NCOutput does not alter the internal representation of nc expressions, just the way they are displayed on the screen.
+**NCOutput** is a package that can be used to beautify the display of
+noncommutative expressions. NCOutput does not alter the internal
+representation of nc expressions, just the way they are displayed on
+the screen.
 
 Members are:
 
@@ -4018,18 +5171,19 @@ Members are:
 
 The following `options` can be given:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` ![\\bullet](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_245.png) `y`';
--   `tp` (`True`): If `True` `tp[x]` is displayed as '`x`![^\\mathtt{T}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_246.png)';
--   `inv` (`True`): If `True` `inv[x]` is displayed as '`x`![^{-1}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_247.png)';
--   `aj` (`True`): If `True` `aj[x]` is displayed as '`x`![^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_248.png)';
--   `co` (`True`): If `True` `co[x]` is displayed as '![\\bar{\\mathtt{x}}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_249.png)';
--   `rt` (`True`): If `True` `rt[x]` is displayed as '`x`![^{1/2}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_250.png)';
+-   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\\mathrm{x} \\bullet \\mathrm{y}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%20%5Cbullet%20%5Cmathrm%7By%7D&mode=inline)’;
+-   `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\\mathrm{x}^\\mathrm{T}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%5Cmathrm%7BT%7D&mode=inline)’;
+-   `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\\mathrm{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B-1%7D&mode=inline)’;
+-   `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\\mathrm{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%2A&mode=inline)’;
+-   `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathrm{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathrm%7Bx%7D%7D&mode=inline)’;
+-   `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\\mathrm{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
 -   `All`: Set all available options to `True` or `False`.
 
-See also: [NCTex](#nctex-1), [NCTexForm](#nctexform-1).
+See also:
+[NCTex](#nctex-1),
+[NCTexForm](#nctexform-1).
 
-NCTeX
------
+## NCTeX
 
 Members are:
 
@@ -4064,8 +5218,7 @@ Members are:
 
 `NCRunPS2PDF[file]` run pd2pdf on `file`. Produces a pdf output.
 
-NCTeXForm
----------
+## NCTeXForm
 
 Members are:
 
@@ -4082,7 +5235,8 @@ Should work better than the Mathematica `TeXForm` :)
 
 ### NCTeXFormSetStarStar
 
-`NCTeXFormSetStarStar[string]` replaces the standard '\*\*' for `string` in noncommutative multiplications.
+`NCTeXFormSetStarStar[string]` replaces the standard ‘\*\*’ for `string`
+in noncommutative multiplications.
 
 For example:
 
@@ -4090,22 +5244,23 @@ For example:
 
 uses a dot (`.`) to replace `NonCommutativeMultiply`(`**`).
 
-See also: [NCTeXFormSetStar](#nctexformsetstar).
+See also:
+[NCTeXFormSetStar](#nctexformsetstar).
 
 ### NCTeXFormSetStar
 
-`NCTeXFormSetStar[string]` replaces the standard '\*' for `string` in noncommutative multiplications.
+`NCTeXFormSetStar[string]` replaces the standard ‘\*’ for `string`
+in noncommutative multiplications.
 
 For example:
 
     NCTeXFormSetStar[" "]
 
-uses a space (`` `) to replace ``Times`(`\*\`).
+uses a space (\``) to replace`Times`(`\*\`).
 
 [NCTeXFormSetStarStar](#nctexformsetstarstar).
 
-NCRun
------
+## NCRun
 
 Members are:
 
@@ -4113,7 +5268,8 @@ Members are:
 
 ### NCRun
 
-`NCRun[command]` is a replacement for the built-in `Run` command that gives a bit more control over the execution process.
+`NCRun[command]` is a replacement for the built-in `Run` command that gives a
+bit more control over the execution process.
 
 `NCRun[command, options]` uses `options`.
 
@@ -4124,10 +5280,11 @@ The following `options` can be given:
 
 See also: `Run`.
 
-NCTest
-------
+## NCTest
 
-These are commands for automatically testing if our algorithms produce the correct answer. Problems and answers are stored under the directory `NC/TESTING`.
+These are commands for automatically testing if our algorithms produce
+the correct answer. Problems and answers are stored under the
+directory `NC/TESTING`.
 
 Members are:
 
@@ -4140,7 +5297,10 @@ Members are:
 
 `NCTest[expr,answer]` asserts whether `expr` is equal to `answer`. The result of the test is collected when `NCTest` is run from `NCTestRun`.
 
-See also: [NCTestCheck](#nctestcheck), [NCTestRun](#nctestrun), [NCTestSummarize](#nctestsummarize).
+See also:
+[NCTestCheck](#nctestcheck),
+[NCTestRun](#nctestrun),
+[NCTestSummarize](#nctestsummarize).
 
 ### NCTestCheck
 
@@ -4150,28 +5310,35 @@ See also: [NCTestCheck](#nctestcheck), [NCTestRun](#nctestrun), [NCTestSummarize
 
 `NCTestCheck[expr,answer,messages,quiet]` quiets messages in `quiet`.
 
-See also: [NCTest](#nctest-1), [NCTestRun](#nctestrun), [NCTestSummarize](#nctestsummarize).
+See also:
+[NCTest](#nctest-1),
+[NCTestRun](#nctestrun),
+[NCTestSummarize](#nctestsummarize).
 
 ### NCTestRun
 
-`NCTest[list]` runs the test files listed in `list` after appending the '.NCTest' suffix and return the results.
+`NCTest[list]` runs the test files listed in `list` after appending
+the ‘.NCTest’ suffix and return the results.
 
 For example:
 
     results = NCTestRun[{"NCCollect", "NCSylvester"}]
 
-will run the test files "NCCollect.NCTest" and "NCSylvester.NCTest" and return the results in `results`.
+will run the test files “NCCollect.NCTest” and “NCSylvester.NCTest” and return the results in `results`.
 
-See also: [NCTest](#nctest-1), [NCTestCheck](#nctestcheck), [NCTestSummarize](#nctestsummarize).
+See also:
+[NCTest](#nctest-1),
+[NCTestCheck](#nctestcheck),
+[NCTestSummarize](#nctestsummarize).
 
 ### NCTestSummarize
 
 `NCTestSummarize[results]` will print a summary of the results in `results` as produced by `NCTestRun`.
 
-See also: [NCTestRun](#nctestrun).
+See also:
+[NCTestRun](#nctestrun).
 
-NCDebug
--------
+## NCDebug
 
 Members are:
 
@@ -4181,15 +5348,15 @@ Members are:
 
 `NCDebug[level, message]` prints the objects `message` if level is higher than the current `DebugLevel` option.
 
-Use `SetOptions[NCDebug, DebugLevel -> level]` to set up the current debug level.
+Use `SetOptions[NCDebug, DebugLevel -> level]` to set up the current
+debug level.
 
 Available options are:
 
 -   `DebugLevel` (0): current debug level;
 -   `DebugLogFile` (`$Ouput`): current file to which messages are printed.
 
-NCUtil
-------
+## NCUtil
 
 **NCUtil** is a package with a collection of utilities used throughout NCAlgebra.
 
@@ -4231,7 +5398,8 @@ returns
 
     {inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}
 
-See also: [NCGrabSymbols](#ncgrabsymbols).
+See also:
+[NCGrabSymbols](#ncgrabsymbols).
 
 ### NCGrabSymbols
 
@@ -4249,7 +5417,8 @@ returns `{x,y}` and
 
 returns `{inv[x]}`.
 
-See also: [NCGrabFunctions](#ncgrabfunctions).
+See also:
+[NCGrabFunctions](#ncgrabfunctions).
 
 ### NCGrabIndeterminants
 
@@ -4263,11 +5432,13 @@ returns
 
     {y, inv[x], inv[1 + inv[1 + tp[x] ** y]], tp[y]}
 
-See also: [NCGrabFunctions](#ncgrabfunctions), [NCGrabSymbols](#ncgrabsymbols).
+See also:
+[NCGrabFunctions](#ncgrabfunctions), [NCGrabSymbols](#ncgrabsymbols).
 
 ### NCVariables
 
-`NCVariables[expr]` gives a list of all independent nc variables in the expression `expr`.
+`NCVariables[expr]` gives a list of all independent nc variables in the
+expression `expr`.
 
 For example:
 
@@ -4277,7 +5448,8 @@ returns
 
     {x,y}
 
-See also: [NCGrabSymbols](#ncgrabsymbols).
+See also:
+[NCGrabSymbols](#ncgrabsymbols).
 
 ### NCConsolidateList
 
@@ -4295,7 +5467,8 @@ results in:
     list = {z,t,s,f,d};
     index = {1,2,3,4,5,4,1};
 
-See also: `Union`
+See also:
+`Union`
 
 ### NCLeafCount
 
@@ -4307,7 +5480,8 @@ See also: `Union`
 
 `NCLeafCount` is `Listable`.
 
-See also: `LeafCount`.
+See also:
+`LeafCount`.
 
 ### NCReplaceData
 
@@ -4315,7 +5489,8 @@ See also: `LeafCount`.
 
 `NCReplaceData` does not attempt to resize entries in expressions involving matrices. Use `NCToExpression` for that.
 
-See also: [NCToExpression](#nctoexpression).
+See also:
+[NCToExpression](#nctoexpression).
 
 ### NCToExpression
 
@@ -4323,15 +5498,15 @@ See also: [NCToExpression](#nctoexpression).
 
 `NCToExpression` attempts to resize entries in expressions involving matrices.
 
-See also: [NCReplaceData](#ncreplacedata).
+See also:
+[NCReplaceData](#ncreplacedata).
 
-Data structures for fast calculations
-=====================================
+# Data structures for fast calculations
 
-This chapter describes packages that handle special data structures that enable fast calculations in Mathematica.
+This chapter describes packages that handle special data structures
+that enable fast calculations in Mathematica.
 
-NCPoly
-------
+## NCPoly
 
 ### Efficient storage of NC polynomials with rational coefficients
 
@@ -4381,7 +5556,7 @@ Members are:
     -   [NCPolySum](#ncpolysum)
 -   State space realization
     -   [NCPolyHankelMatrix](#ncpolyhankelmatrix)
-    -   [NCPolyRealization](#ncpolyrealization) (\#NCPolyRealization)
+    -   [NCPolyRealization](#ncpolyrealization) (#NCPolyRealization)
 -   Auxiliary functions
     -   [NCPolyVarsToIntegers](#ncpolyvarstointegers)
     -   [NCFromDigits](#ncfromdigits)
@@ -4394,44 +5569,60 @@ Members are:
 
 #### NCPoly
 
-`NCPoly[coeff, monomials, vars]` constructs a noncommutative polynomial object in variables `vars` where the monomials have coefficient `coeff`.
+`NCPoly[coeff, monomials, vars]` constructs a noncommutative
+polynomial object in variables `vars` where the monomials have
+coefficient `coeff`.
 
-Monomials are specified in terms of the symbols in the list `vars` as in [NCPolyMonomial](#ncpolymonomial).
+Monomials are specified in terms of the symbols in the list `vars` as
+in [NCPolyMonomial](#ncpolymonomial).
 
 For example:
 
     vars = {x,y,z};
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
 
-constructs an object associated with the noncommutative polynomial ![2 z - x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_251.png) in variables `x`, `y` and `z`.
+constructs an object associated with the noncommutative polynomial
+![2 z - x y x](https://render.githubusercontent.com/render/math?math=2%20z%20-%20x%20y%20x&mode=inline) in variables `x`, `y` and `z`.
 
-The internal representation varies with the implementation but it is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, `x < y < z`.
+The internal representation varies with the implementation but it is
+so that the terms are sorted according to a degree-lexicographic order
+in `vars`. In the above example, `x < y < z`.
 
 The construction:
 
     vars = {{x},{y,z}};
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
 
-represents the same polyomial in a graded degree-lexicographic order in `vars`, in this example, `x << y < z`.
+represents the same polyomial in a graded degree-lexicographic order
+in `vars`, in this example, `x << y < z`.
 
-See also: [NCPolyMonomial](#ncpolymonomial), [NCIntegerDigits](#ncintegerdigits), [NCFromDigits](#ncfromdigits).
+See also:
+[NCPolyMonomial](#ncpolymonomial),
+[NCIntegerDigits](#ncintegerdigits),
+[NCFromDigits](#ncfromdigits).
 
 #### NCPolyMonomial
 
-`NCPolyMonomial[monomial, vars]` constructs a noncommutative monomial object in variables `vars`.
+`NCPolyMonomial[monomial, vars]` constructs a noncommutative monomial
+object in variables `vars`.
 
-Monic monomials are specified in terms of the symbols in the list `vars`, for example:
+Monic monomials are specified in terms of the symbols in the list
+`vars`, for example:
 
     vars = {x,y,z};
     mon = NCPolyMonomial[{x,y,x},vars];
 
-returns an `NCPoly` object encoding the monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_252.png) in noncommutative variables `x`,`y`, and `z`. The actual representation of `mon` varies with the implementation.
+returns an `NCPoly` object encoding the monomial ![xyx](https://render.githubusercontent.com/render/math?math=xyx&mode=inline) in
+noncommutative variables `x`,`y`, and `z`. The actual representation
+of `mon` varies with the implementation.
 
-Monomials can also be specified implicitly using indices, for example:
+Monomials can also be specified implicitly using indices, for
+example:
 
     mon = NCPolyMonomial[{0,1,0}, 3];
 
-also returns an `NCPoly` object encoding the monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_253.png) in noncommutative variables `x`,`y`, and `z`.
+also returns an `NCPoly` object encoding the monomial ![xyx](https://render.githubusercontent.com/render/math?math=xyx&mode=inline) in
+noncommutative variables `x`,`y`, and `z`.
 
 If graded ordering is supported then
 
@@ -4442,9 +5633,12 @@ or
 
     mon = NCPolyMonomial[{0,1,0}, {1,2}];
 
-construct the same monomial ![xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_254.png) in noncommutative variables `x`,`y`, and `z` this time using a graded order in which `x << y < z`.
+construct the same monomial ![xyx](https://render.githubusercontent.com/render/math?math=xyx&mode=inline) in noncommutative variables
+`x`,`y`, and `z` this time using a graded order in which `x << y < z`.
 
-There is also an alternative syntax for `NCPolyMonomial` that allows users to input the monomial along with a coefficient using rules and the output of [NCFromDigits](#ncfromdigits). For example:
+There is also an alternative syntax for `NCPolyMonomial` that allows
+users to input the monomial along with a coefficient using rules and
+the output of [NCFromDigits](#ncfromdigits). For example:
 
     mon = NCPolyMonomial[{3, 3} -> -2, 3];
 
@@ -4452,21 +5646,28 @@ or
 
     mon = NCPolyMonomial[NCFromDigits[{0,1,0}, 3] -> -2, 3];
 
-represent the monomial ![-2 xyx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_255.png) that has coefficient `-2`.
+represent the monomial ![-2 xyx](https://render.githubusercontent.com/render/math?math=-2%20xyx&mode=inline) that has coefficient `-2`.
 
-See also: [NCPoly](#ncpoly-1), [NCIntegerDigits](#ncintegerdigits), [NCFromDigits](#ncfromdigits).
+See also:
+[NCPoly](#ncpoly-1),
+[NCIntegerDigits](#ncintegerdigits),
+[NCFromDigits](#ncfromdigits).
 
 #### NCPolyConstant
 
-`NCPolyConstant[value, vars]` constructs a noncommutative monomial object in variables `vars` representing the constant `value`.
+`NCPolyConstant[value, vars]` constructs a noncommutative monomial
+object in variables `vars` representing the constant `value`.
 
 For example:
 
     NCPolyConstant[3, {x, y, z}]
 
-constructs an object associated with the constant `3` in variables `x`, `y` and `z`.
+constructs an object associated with the constant `3` in variables
+`x`, `y` and `z`.
 
-See also: [NCPoly](#ncpoly-1), [NCPolyMonomial](#ncpolymonomial).
+See also:
+[NCPoly](#ncpoly-1),
+[NCPolyMonomial](#ncpolymonomial).
 
 #### NCPolyConvert
 
@@ -4481,7 +5682,7 @@ For example, if
 
 with respect to the ordering
 
-![x \\ll y \\ll z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_256.png)
+![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
 
 then
 
@@ -4490,9 +5691,11 @@ then
 
 is the same polynomial as `poly1` but in the ordering
 
-![x \\ll y &lt; z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_257.png)
+![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
 
-See also: [NCPoly](#ncpoly-1), [NCPolyCoefficient](#ncpolycoefficient).
+See also:
+[NCPoly](#ncpoly-1),
+[NCPolyCoefficient](#ncpolycoefficient).
 
 #### NCPolyFromCoefficientArray
 
@@ -4512,7 +5715,9 @@ return
     NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, 
            {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
 
-See also: [NCPolyCoefficientArray](#ncpolycoefficientarray), [NCPolyCoefficient](#ncpolycoefficient).
+See also:
+[NCPolyCoefficientArray](#ncpolycoefficientarray),
+[NCPolyCoefficient](#ncpolycoefficient).
 
 #### NCPolyFromGramMatrix
 
@@ -4532,7 +5737,8 @@ return
     NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, 
            {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
 
-See also: [NCPolyGramMatrix](#NCPolyGramMatrix).
+See also:
+[NCPolyGramMatrix](#NCPolyGramMatrix).
 
 ### Access and utlity functions
 
@@ -4540,37 +5746,45 @@ See also: [NCPolyGramMatrix](#NCPolyGramMatrix).
 
 `NCPolyMonomialQ[poly]` returns `True` if `poly` is a `NCPoly` monomial.
 
-See also: [NCPoly](#ncpoly-1), [NCPolyMonomial](#ncpolymonomial).
+See also:
+[NCPoly](#ncpoly-1),
+[NCPolyMonomial](#ncpolymonomial).
 
 #### NCPolyDegree
 
 `NCPolyDegree[poly]` returns the degree of the nc polynomial `poly`.
 
-See also: [NCPolyPartialDegree](#ncpolypartialdegree)
+See also:
+[NCPolyPartialDegree](#ncpolypartialdegree)
 
 #### NCPolyPartialDegree
 
 `NCPolyPartialDegree[poly]` returns the maximum degree appearing in the monomials of the nc polynomial `poly`.
 
-See also: [NCPolyDegree](#ncpolydegree)
+See also:
+[NCPolyDegree](#ncpolydegree)
 
 #### NCPolyMonomialDegree
 
 `NCPolyMonomialDegree[poly]` returns the partial degree of each symbol appearing in the monomials of the nc polynomial `poly`.
 
-See also: [NCPolyDegree](#ncpolydegree)
+See also:
+[NCPolyDegree](#ncpolydegree)
 
 #### NCPolyNumberOfVariables
 
-`NCPolyNumberOfVariables[poly]` returns the number of variables of the nc polynomial `poly`.
+`NCPolyNumberOfVariables[poly]` returns the number of variables of the
+nc polynomial `poly`.
 
 #### NCPolyNumberOfTerms
 
-`NCPolyNumberOfTerms[poly]` returns the number of terms of the nc polynomial `poly`.
+`NCPolyNumberOfTerms[poly]` returns the number of terms of the
+nc polynomial `poly`.
 
 #### NCPolyCoefficient
 
-`NCPolyCoefficient[poly, mon]` returns the coefficient of the monomial `mon` in the nc polynomial `poly`.
+`NCPolyCoefficient[poly, mon]` returns the coefficient of the monomial
+`mon` in the nc polynomial `poly`.
 
 For example, in:
 
@@ -4585,7 +5799,9 @@ returns
 
     c = -1
 
-See also: [NCPoly](#ncpoly-1), [NCPolyMonomial](#ncpolymonomial).
+See also:
+[NCPoly](#ncpoly-1),
+[NCPolyMonomial](#ncpolymonomial).
 
 #### NCPolyCoefficientArray
 
@@ -4604,7 +5820,9 @@ returns `mat` as a `SparseArray` corresponding to the rules:
 
     {{1} -> 1, {2} -> 2, {6} -> -1, {50} -> -2, {4} -> 3, {11} -> -3, {121} -> 1/2}
 
-See also: [NCPolyFromCoefficientArray](#ncpolyfromcoefficientarray), [NCPolyCoefficient](#ncpolycoefficient).
+See also:
+[NCPolyFromCoefficientArray](#ncpolyfromcoefficientarray),
+[NCPolyCoefficient](#ncpolycoefficient).
 
 #### NCPolyGramMatrix
 
@@ -4623,11 +5841,13 @@ returns `mat` as a `SparseArray` corresponding to the rules:
 
     {{1, 1} -> 1, {2, 1} -> 2, {2, 3} -> -1, {4, 1} -> 3, {4, 2} -> -3, {6, 5} -> -2, {13, 13} -> 1/2}
 
-See also: [NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
+See also:
+[NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
 
 #### NCPolyGetCoefficients
 
-`NCPolyGetCoefficients[poly]` returns a list with the coefficients of the monomials in the nc polynomial `poly`.
+`NCPolyGetCoefficients[poly]` returns a list with the coefficients of
+the monomials in the nc polynomial `poly`.
 
 For example:
 
@@ -4639,13 +5859,19 @@ returns
 
     coeffs = {2,-1}
 
-The coefficients are returned according to the current graded degree-lexicographic ordering, in this example `x < y < z`.
+The coefficients are returned according to the current graded
+degree-lexicographic ordering, in this example `x < y < z`.
 
-See also: [NCPolyGetDigits](#ncpolygetdigits), [NCPolyCoefficient](#ncpolycoefficient), [NCPoly](#ncpoly-1).
+See also:
+[NCPolyGetDigits](#ncpolygetdigits),
+[NCPolyCoefficient](#ncpolycoefficient),
+[NCPoly](#ncpoly-1).
 
 #### NCPolyGetDigits
 
-`NCPolyGetDigits[poly]` returns a list with the digits that encode the monomials in the nc polynomial `poly` as produced by [NCIntegerDigits](#ncintegerdigits).
+`NCPolyGetDigits[poly]` returns a list with the digits that encode the
+monomials in the nc polynomial `poly` as produced by
+[NCIntegerDigits](#ncintegerdigits).
 
 For example:
 
@@ -4657,13 +5883,18 @@ returns
 
     digits = {{2}, {0,1,0}}
 
-The digits are returned according to the current ordering, in this example `x < y < z`.
+The digits are returned according to the current ordering, in
+this example `x < y < z`.
 
-See also: [NCPolyGetCoefficients](#ncpolygetcoefficients), [NCPoly](#ncpoly-1).
+See also:
+[NCPolyGetCoefficients](#ncpolygetcoefficients),
+[NCPoly](#ncpoly-1).
 
 #### NCPolyGetIntegers
 
-`NCPolyGetIntegers[poly]` returns a list with the digits that encode the monomials in the nc polynomial `poly` as produced by [NCFromDigits](#ncfromdigits).
+`NCPolyGetIntegers[poly]` returns a list with the digits that encode
+the monomials in the nc polynomial `poly` as produced by
+[NCFromDigits](#ncfromdigits).
 
 For example:
 
@@ -4675,13 +5906,17 @@ returns
 
     digits = {{1,2}, {3,3}}
 
-The digits are returned according to the current ordering, in this example `x < y < z`.
+The digits are returned according to the current ordering, in
+this example `x < y < z`.
 
-See also: [NCPolyGetCoefficients](#ncpolygetcoefficients), [NCPoly](#ncpoly-1).
+See also:
+[NCPolyGetCoefficients](#ncpolygetcoefficients),
+[NCPoly](#ncpoly-1).
 
 #### NCPolyLeadingMonomial
 
-`NCPolyLeadingMonomial[poly]` returns an `NCPoly` representing the leading term of the nc polynomial `poly`.
+`NCPolyLeadingMonomial[poly]` returns an `NCPoly` representing the
+leading term of the nc polynomial `poly`.
 
 For example:
 
@@ -4689,13 +5924,21 @@ For example:
     poly = NCPoly[{-1, 2}, {{x,y,x}, {z}}, vars];
     lead = NCPolyLeadingMonomial[poly];
 
-returns an `NCPoly` representing the monomial ![x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_258.png). The leading monomial is computed according to the current ordering, in this example `x < y < z`. The actual representation of `lead` varies with the implementation.
+returns an `NCPoly` representing the monomial ![x y x](https://render.githubusercontent.com/render/math?math=x%20y%20x&mode=inline). The leading
+monomial is computed according to the current ordering, in this
+example `x < y < z`. The actual representation of `lead` varies with
+the implementation.
 
-See also: [NCPolyLeadingTerm](#ncpolyleadingterm), [NCPolyMonomial](#ncpolymonomial), [NCPoly](#ncpoly-1).
+See also:
+[NCPolyLeadingTerm](#ncpolyleadingterm),
+[NCPolyMonomial](#ncpolymonomial),
+[NCPoly](#ncpoly-1).
 
 #### NCPolyLeadingTerm
 
-`NCPolyLeadingTerm[poly]` returns a rule associated with the leading term of the nc polynomial `poly` as understood by [NCPolyMonomial](#ncpolymonomial).
+`NCPolyLeadingTerm[poly]` returns a rule associated with the leading
+term of the nc polynomial `poly` as understood by
+[NCPolyMonomial](#ncpolymonomial).
 
 For example:
 
@@ -4707,19 +5950,29 @@ returns
 
     lead = {3,3} -> -1
 
-representing the monomial ![- x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_259.png). The leading monomial is computed according to the current ordering, in this example `x < y < z`.
+representing the monomial ![- x y x](https://render.githubusercontent.com/render/math?math=-%20x%20y%20x&mode=inline). The leading monomial is computed
+according to the current ordering, in this example `x < y < z`.
 
-See also: [NCPolyLeadingMonomial](#ncpolyleadingmonomial), [NCPolyMonomial](#ncpolymonomial), [NCPoly](#ncpoly-1).
+See also:
+[NCPolyLeadingMonomial](#ncpolyleadingmonomial),
+[NCPolyMonomial](#ncpolymonomial),
+[NCPoly](#ncpoly-1).
 
 #### NCPolyOrderType
 
-`NCPolyOrderType[poly]` returns the type of monomial order in which the nc polynomial `poly` is stored. Order can be `NCPolyGradedDegLex` or `NCPolyDegLex`.
+`NCPolyOrderType[poly]` returns the type of monomial order in which
+the nc polynomial `poly` is stored. Order can be `NCPolyGradedDegLex`
+or `NCPolyDegLex`.
 
-See also: [NCPoly](#ncpoly-1),
+See also:
+[NCPoly](#ncpoly-1),
 
 #### NCPolyToRule
 
-`NCPolyToRule[poly]` returns a `Rule` associated with polynomial `poly`. If `poly = lead + rest`, where `lead` is the leading term in the current order, then `NCPolyToRule[poly]` returns the rule `lead -> -rest` where the coefficient of the leading term has been normalized to `1`.
+`NCPolyToRule[poly]` returns a `Rule` associated with polynomial
+`poly`. If `poly = lead + rest`, where `lead` is the leading term in
+the current order, then `NCPolyToRule[poly]` returns the rule `lead -> -rest` where the coefficient of the leading term has been normalized
+to `1`.
 
 For example:
 
@@ -4727,9 +5980,13 @@ For example:
     poly = NCPoly[{-1, 2, 3}, {{x, y, x}, {z}, {x, y}}, vars];
     rule = NCPolyToRule[poly]
 
-returns the rule `lead -> rest` where `lead` represents is the nc monomial ![x y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_260.png) and `rest` is the nc polynomial ![2 z + 3 x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_261.png)
+returns the rule `lead -> rest` where `lead` represents is the nc
+monomial ![x y x](https://render.githubusercontent.com/render/math?math=x%20y%20x&mode=inline) and `rest` is the nc polynomial ![2 z + 3 x y](https://render.githubusercontent.com/render/math?math=2%20z%20%2B%203%20x%20y&mode=inline)
 
-See also: [NCPolyLeadingTerm](#ncpolyleadingterm), [NCPolyLeadingMonomial](#ncpolyleadingmonomial), [NCPoly](#ncpoly-1).
+See also:
+[NCPolyLeadingTerm](#ncpolyleadingterm),
+[NCPolyLeadingMonomial](#ncpolyleadingmonomial),
+[NCPoly](#ncpoly-1).
 
 #### NCPolyTermsOfDegree
 
@@ -4740,7 +5997,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_262.png) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline) and
 
     NCPolyTermsOfTotalDegree[p, {1,1}]
 
@@ -4748,7 +6005,7 @@ returns
 
     NCPoly[{1, 1}, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
-which corresponds to the polyomial ![2 x y + 3 y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_263.png). Likewise
+which corresponds to the polyomial ![2 x y + 3 y x](https://render.githubusercontent.com/render/math?math=2%20x%20y%20%2B%203%20y%20x&mode=inline). Likewise
 
     NCPolyTermsOfTotalDegree[p, {2,0}]
 
@@ -4756,9 +6013,10 @@ returns
 
     NCPoly[{1, 1}, {0, 2, 0} -> 4|>]
 
-which corresponds to the polyomial ![4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_264.png).
+which corresponds to the polyomial ![4 x^2](https://render.githubusercontent.com/render/math?math=4%20x%5E2&mode=inline).
 
-See also: [NCPolyTermsOfTotalDegree](#ncpolytermsoftotaldegree).
+See also:
+[NCPolyTermsOfTotalDegree](#ncpolytermsoftotaldegree).
 
 #### NCPolyTermsOfTotalDegree
 
@@ -4769,7 +6027,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_265.png) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline) and
 
     NCPolyTermsOfTotalDegree[p, 2]
 
@@ -4777,13 +6035,15 @@ returns
 
     NCPoly[{1, 1}, <|{0, 2, 0} -> 4, {1, 1, 1} -> 2, {1, 1, 2} -> 3|>]
 
-which corresponds to the polyomial ![2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_266.png).
+which corresponds to the polyomial ![2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=2%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline).
 
-See also: [NCPolyTermsOfDegree](#ncpolytermsofdegree).
+See also:
+[NCPolyTermsOfDegree](#ncpolytermsofdegree).
 
 #### NCPolyQuadraticTerms
 
-`NCPolyQuadraticTerms[p]` returns a polynomial with only the "square" quadratic terms of `p`.
+`NCPolyQuadraticTerms[p]` returns a polynomial with only the
+“square” quadratic terms of `p`.
 
 For example:
 
@@ -4792,7 +6052,7 @@ For example:
     digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
     p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
 
-corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_267.png) in which ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_268.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_269.png) are transposes of each other, that is ![y = x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_270.png). Its `NCPoly` object is
+corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29%20%3D%20-x.z.z.y%20%2B%202%20z.y%20%2B%203%20z.x%20%2B%204%20y.x%20%2B%20x%20%2B%201&mode=inline) in which ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) are transposes of each other, that is ![y = x^T](https://render.githubusercontent.com/render/math?math=y%20%3D%20x%5ET&mode=inline). Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
@@ -4804,13 +6064,16 @@ results in
 
     NCPoly[{3}, <|{0, 0} -> 1, {2, 3} -> 4, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
-corresponding to the polynomial ![-x.z.z.y + 4 y.x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_271.png) which contains only "square" quadratic terms of ![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_272.png).
+corresponding to the polynomial ![-x.z.z.y + 4 y.x + 1](https://render.githubusercontent.com/render/math?math=-x.z.z.y%20%2B%204%20y.x%20%2B%201&mode=inline) which contains
+only “square” quadratic terms of ![p(x,y,z)](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29&mode=inline).
 
-See also: `NCPolyQuadraticChipset`(\#NCPolyQuadraticChipset).
+See also:
+`NCPolyQuadraticChipset`(#NCPolyQuadraticChipset).
 
 #### NCPolyQuadraticChipset
 
-`NCPolyQuadraticChipset[p]` returns a polynomial with only the "half" terms of `p` that can be in an NC SOS decomposition of `p`.
+`NCPolyQuadraticChipset[p]` returns a polynomial with only the “half”
+terms of `p` that can be in an NC SOS decomposition of `p`.
 
 For example:
 
@@ -4819,7 +6082,7 @@ For example:
     digits = {{}, {x}, {y, x}, {z, x}, {z, y}, {x, z, z, y}}
     p = NCPoly[coeff, digits, vars, TransposePairs -> {{x, y}}]
 
-corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_273.png) in which ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_274.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_275.png) are transposes of each other, that is ![y = x^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_276.png). Its `NCPoly` object is
+corresponds to the polynomial ![p(x,y,z) = -x.z.z.y + 2 z.y + 3 z.x + 4 y.x + x + 1](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29%20%3D%20-x.z.z.y%20%2B%202%20z.y%20%2B%203%20z.x%20%2B%204%20y.x%20%2B%20x%20%2B%201&mode=inline) in which ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) are transposes of each other, that is ![y = x^T](https://render.githubusercontent.com/render/math?math=y%20%3D%20x%5ET&mode=inline). Its `NCPoly` object is
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {2, 3} -> 4, {2, 6} -> 3, {2, 7} -> 2, {4, 25} -> -1|>, TransposePairs -> {{0, 1}}]
 
@@ -4831,9 +6094,12 @@ results in
 
     NCPoly[{3}, <|{0, 0} -> 1, {1, 0} -> 1, {1, 1} -> 1, {2, 2} -> 1|>, TransposePairs -> {{0, 1}}]
 
-corresponding to the polynomial ![x.z + y + x + 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_277.png) that contains only terms which contain monomials with the "left half" of the monomials of ![p(x,y,z)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_278.png) which can appear in an NC SOS decomposition of `p`.
+corresponding to the polynomial ![x.z + y + x + 1](https://render.githubusercontent.com/render/math?math=x.z%20%2B%20y%20%2B%20x%20%2B%201&mode=inline) that contains only
+terms which contain monomials with the “left half” of the monomials of
+![p(x,y,z)](https://render.githubusercontent.com/render/math?math=p%28x%2Cy%2Cz%29&mode=inline) which can appear in an NC SOS decomposition of `p`.
 
-See also: `NCPolyQuadraticTerms`(\#NCPolyQuadraticTerms).
+See also:
+`NCPolyQuadraticTerms`(#NCPolyQuadraticTerms).
 
 #### NCPolyReverseMonomials
 
@@ -4844,7 +6110,7 @@ For example:
     vars = {x, y};
     poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];
 
-corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_279.png) and
+corresponds to the polynomial ![x + 2 x y + 3 y x + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20x%20y%20%2B%203%20y%20x%20%2B%204%20x%5E2&mode=inline) and
 
     NCPolyReverseMonomials[p]
 
@@ -4852,9 +6118,10 @@ returns
 
     NCPoly[{1, 1}, <|{0, 1, 0} -> 1, {0, 2, 0} -> 4, {1, 1, 2} -> 2, {1, 1, 1} -> 3|>]
 
-which correspond to the polynomial ![x + 2 y x + 3 x y + 4 x^2](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_280.png).
+which correspond to the polynomial ![x + 2 y x + 3 x y + 4 x^2](https://render.githubusercontent.com/render/math?math=x%20%2B%202%20y%20x%20%2B%203%20x%20y%20%2B%204%20x%5E2&mode=inline).
 
-See also: [NCIntegerReverse](#ncintegerreverse).
+See also:
+[NCIntegerReverse](#ncintegerreverse).
 
 #### NCPolyGetOptions
 
@@ -4862,8 +6129,10 @@ See also: [NCIntegerReverse](#ncintegerreverse).
 
 Available options are:
 
--   `TransposePairs`: list with pairs of variables to be treated as transposes of each other;
--   `SelfAdjointPairs`: list with pairs of variables to be treated as adjoints of each other.
+-   `TransposePairs`: list with pairs of variables to be treated as
+    transposes of each other;
+-   `SelfAdjointPairs`: list with pairs of variables to be treated as
+    adjoints of each other.
 
 ### Formating functions
 
@@ -4875,55 +6144,76 @@ Available options are:
 
 #### NCPolyDisplayOrder
 
-`NCPolyDisplayOrder[vars]` prints the order implied by the list of variables `vars`.
+`NCPolyDisplayOrder[vars]` prints the order implied by the list of
+variables `vars`.
 
 ### Arithmetic functions
 
 #### NCPolyDivideDigits
 
-`NCPolyDivideDigits[F,G]` returns the result of the division of the leading digits lf and lg.
+`NCPolyDivideDigits[F,G]` returns the result of the division of the
+leading digits lf and lg.
 
 #### NCPolyDivideLeading
 
-`NCPolyDivideLeading[lF,lG,base]` returns the result of the division of the leading Rules lf and lg as returned by NCGetLeadingTerm.
+`NCPolyDivideLeading[lF,lG,base]` returns the result of the division
+of the leading Rules lf and lg as returned by NCGetLeadingTerm.
 
 #### NCPolyFullReduce
 
-`NCPolyFullReduce[f,g]` applies NCPolyReduce successively until the remainder does not change.
+`NCPolyFullReduce[f,g]` applies NCPolyReduce successively until the
+remainder does not change.
 
-See also: [NCPolyReduce](#ncpolyreduce), [NCPolyQuotientExpand](#ncpolyquotientexpand).
+See also:
+[NCPolyReduce](#ncpolyreduce),
+[NCPolyQuotientExpand](#ncpolyquotientexpand).
 
 #### NCPolyNormalize
 
-`NCPolyNormalize[poly]` makes the coefficient of the leading term of `p` to unit. It also works when `poly` is a list.
+`NCPolyNormalize[poly]` makes the coefficient of the leading term of
+`p` to unit. It also works when `poly` is a list.
 
 #### NCPolyProduct
 
-`NCPolyProduct[f,g]` returns a NCPoly that is the product of the NCPoly's f and g.
+`NCPolyProduct[f,g]` returns a NCPoly that is the product of the
+NCPoly’s f and g.
 
 #### NCPolyQuotientExpand
 
-`NCPolyQuotientExpand[q,g]` returns a NCPoly that is the left-right product of the quotient as returned by NCPolyReduce by the NCPoly g. It also works when g is a list.
+`NCPolyQuotientExpand[q,g]` returns a NCPoly that is the left-right
+product of the quotient as returned by NCPolyReduce by the NCPoly
+g. It also works when g is a list.
 
 #### NCPolyReduce
 
-`NCPolyReduce[polys, rules]` reduces the list of `NCPoly`s `polys` with respect to the list of `NCPoly`s `rules`. The substitutions implied by `rules` are applied repeatedly to the polynomials in the `polys` until no further reduction occurs.
+`NCPolyReduce[polys, rules]` reduces the list of `NCPoly`s `polys`
+with respect to the list of `NCPoly`s `rules`. The substitutions
+implied by `rules` are applied repeatedly to the polynomials in the
+`polys` until no further reduction occurs.
 
-`NCPolyReduce[polys]` reduces each polynomial in the list of `NCPoly`s `polys` with respect to the remaining elements of the list of polyomials `polys` until no further reduction occurs.
+`NCPolyReduce[polys]` reduces each polynomial in the list of `NCPoly`s
+`polys` with respect to the remaining elements of the list of
+polyomials `polys` until no further reduction occurs.
 
-By default, `NCPolyReduce` only reduces the leading monomial in the current order. Use the optional boolean flag `complete` to completely reduce all monomials. For example, `NCPolyReduce[polys, rules, True]` and `NCPolyReduce[polys, True]`.
+By default, `NCPolyReduce` only reduces the leading monomial in the
+current order. Use the optional boolean flag `complete` to completely
+reduce all monomials. For example, `NCPolyReduce[polys, rules, True]`
+and `NCPolyReduce[polys, True]`.
 
-See also: [NCPolyGroebner](#ncpolygroebner-1).
+See also:
+[NCPolyGroebner](#ncpolygroebner-1).
 
 #### NCPolySum
 
-`NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f and g.
+`NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly’s f
+and g.
 
 ### State space realization functions
 
 #### NCPolyHankelMatrix
 
-`NCPolyHankelMatrix[poly]` produces the nc *Hankel matrix* associated with the polynomial `poly` and also their shifts per variable.
+`NCPolyHankelMatrix[poly]` produces the nc *Hankel matrix* associated
+with the polynomial `poly` and also their shifts per variable.
 
 For example:
 
@@ -4949,15 +6239,19 @@ results in the matrices
           {  0,  0,  0,  0,  0 },
           {  0,  0,  0,  0,  0 }}
 
-which are the Hankel matrices associated with the commutator ![x y - y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_281.png).
+which are the Hankel matrices associated with the commutator ![x y - y x](https://render.githubusercontent.com/render/math?math=x%20y%20-%20y%20x&mode=inline).
 
-See also: [NCPolyRealization](#ncpolyrealization), [NCDigitsToIndex](#ncdigitstoindex).
+See also:
+[NCPolyRealization](#ncpolyrealization),
+[NCDigitsToIndex](#ncdigitstoindex).
 
 #### NCPolyRealization
 
-`NCPolyRealization[poly]` calculate a minimal descriptor realization for the polynomial `poly`.
+`NCPolyRealization[poly]` calculate a minimal descriptor realization
+for the polynomial `poly`.
 
-`NCPolyRealization` uses `NCPolyHankelMatrix` and the resulting realization is compatible with the format used by `NCRational`.
+`NCPolyRealization` uses `NCPolyHankelMatrix` and the resulting
+realization is compatible with the format used by `NCRational`.
 
 For example:
 
@@ -4965,35 +6259,49 @@ For example:
     poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
     {{a0,ax,ay},b,c,d} = NCPolyRealization[poly]
 
-produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a row vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\, y\] . b + d = x y - y x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_282.png).
+produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a
+row vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\, y\] . b + d = x y - y x](https://render.githubusercontent.com/render/math?math=c%20.%20inv%5Ba0%20%2B%20ax%20%5C%2C%20x%20%2B%20ay%20%5C%2C%20y%5D%20.%20b%20%2B%20d%20%3D%20x%20y%20-%20y%20x&mode=inline).
 
-See also: [NCPolyHankelMatrix](#ncpolyhankelmatrix), [NCRational](#ncrational-1).
+See also:
+[NCPolyHankelMatrix](#ncpolyhankelmatrix),
+[NCRational](#ncrational-1).
 
 ### Auxiliary functions
 
 #### NCPolyVarsToIntegers
 
-`NCPolyVarsToIntegers[vars]` converts the list of symbols `vars` into a list of integers corresponding to the graded ordering implied by `vars`.
+`NCPolyVarsToIntegers[vars]` converts the list of symbols `vars` into
+a list of integers corresponding to the graded ordering implied by
+`vars`.
 
 For example:
 
     NCPolyVarsToIntegers[{{x},{y,z}}]
 
-returns `{1,2}`, indicating that there are a total of three variables with the last two ranking higher than the first.
+returns `{1,2}`, indicating that there are a total of three variables
+with the last two ranking higher than the first.
 
-`NCPolyVarsToIntegers` raises `NCPoly::InvalidList` in case it cannot correctly parse the list of variables.
+`NCPolyVarsToIntegers` raises `NCPoly::InvalidList` in case it cannot
+correctly parse the list of variables.
 
-If `vars` is a list of integers, `NCPolyVarsToIntegers` returns this list intact.
+If `vars` is a list of integers, `NCPolyVarsToIntegers` returns this
+list intact.
 
-See also: [NCPoly](#ncpoly-1).
+See also:
+[NCPoly](#ncpoly-1).
 
 #### NCFromDigits
 
-`NCFromDigits[list, b]` constructs a representation of a monomial in `b` encoded by the elements of `list` where the digits are in base `b`.
+`NCFromDigits[list, b]` constructs a representation of a monomial in
+`b` encoded by the elements of `list` where the digits are in base
+`b`.
 
-`NCFromDigits[{list1,list2}, b]` applies `NCFromDigits` to each `list1`, `list2`, ....
+`NCFromDigits[{list1,list2}, b]` applies `NCFromDigits` to each
+`list1`, `list2`, ….
 
-List of integers are used to codify monomials. For example the list `{0,1}` represents a monomial ![xy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_283.png) and the list `{1,0}` represents the monomial ![yx](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_284.png). The call
+List of integers are used to codify monomials. For example the list
+`{0,1}` represents a monomial ![xy](https://render.githubusercontent.com/render/math?math=xy&mode=inline) and the list `{1,0}` represents
+the monomial ![yx](https://render.githubusercontent.com/render/math?math=yx&mode=inline). The call
 
     NCFromDigits[{0,0,0,1}, 2]
 
@@ -5001,7 +6309,8 @@ returns
 
     {4,1}
 
-in which `4` is the degree of the monomial ![xxxy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_285.png) and `1` is `0001` in base `2`. Likewise
+in which `4` is the degree of the monomial ![xxxy](https://render.githubusercontent.com/render/math?math=xxxy&mode=inline) and `1` is
+`0001` in base `2`. Likewise
 
     NCFromDigits[{0,2,1,1}, 3]
 
@@ -5009,9 +6318,11 @@ returns
 
     {4,22}
 
-in which `4` is the degree of the monomial ![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_286.png) and `22` is `0211` in base `3`.
+in which `4` is the degree of the monomial ![xzyy](https://render.githubusercontent.com/render/math?math=xzyy&mode=inline) and `22` is
+`0211` in base `3`.
 
-If `b` is a list, then degree is also a list with the partial degrees of each letters appearing in the monomial. For example:
+If `b` is a list, then degree is also a list with the partial degrees
+of each letters appearing in the monomial. For example:
 
     NCFromDigits[{0,2,1,1}, {1,2}]
 
@@ -5019,17 +6330,22 @@ returns
 
     {3, 1, 22}
 
-in which `3` is the partial degree of the monomial ![xzyy](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_287.png) with respect to letters `y` and `z`, `1` is the partial degree with respect to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
+in which `3` is the partial degree of the monomial ![xzyy](https://render.githubusercontent.com/render/math?math=xzyy&mode=inline) with
+respect to letters `y` and `z`, `1` is the partial degree with respect
+to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 
-This construction is used to represent graded degree-lexicographic orderings.
+This construction is used to represent graded degree-lexicographic
+orderings.
 
-See also: [NCIntegerDigits](#ncintegerdigits).
+See also:
+[NCIntegerDigits](#ncintegerdigits).
 
 #### NCIntegerDigits
 
 `NCIntegerDigits[n,b]` is the inverse of the `NCFromDigits`.
 
-`NCIntegerDigits[{list1,list2}, b]` applies `NCIntegerDigits` to each `list1`, `list2`, ....
+`NCIntegerDigits[{list1,list2}, b]` applies `NCIntegerDigits` to each
+`list1`, `list2`, ….
 
 For example:
 
@@ -5039,7 +6355,8 @@ returns
 
     {0,0,0,1}
 
-in which `4` is the degree of the monomial `x**x**x**y` and `1` is `0001` in base `2`. Likewise
+in which `4` is the degree of the monomial `x**x**x**y` and `1` is
+`0001` in base `2`. Likewise
 
     NCIntegerDigits[{4,22}, 3]
 
@@ -5047,9 +6364,11 @@ returns
 
     {0,2,1,1}
 
-in which `4` is the degree of the monomial `x**z**y**y` and `22` is `0211` in base `3`.
+in which `4` is the degree of the monomial `x**z**y**y` and `22` is
+`0211` in base `3`.
 
-If `b` is a list, then degree is also a list with the partial degrees of each letters appearing in the monomial. For example:
+If `b` is a list, then degree is also a list with the partial degrees
+of each letters appearing in the monomial. For example:
 
     NCIntegerDigits[{3, 1, 22}, {1,2}]
 
@@ -5057,15 +6376,19 @@ returns
 
     {0,2,1,1}
 
-in which `3` is the partial degree of the monomial `x**z**y**y` with respect to letters `y` and `z`, `1` is the partial degree with respect to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
+in which `3` is the partial degree of the monomial `x**z**y**y` with
+respect to letters `y` and `z`, `1` is the partial degree with respect
+to letter `x` and `22` is `0211` in base `3 = 1 + 2`.
 
-See also: [NCFromDigits](#ncfromdigits).
+See also:
+[NCFromDigits](#ncfromdigits).
 
 #### NCIntegerReverse
 
 `NCIntegerReverse[n,b]` reverses the integer `n` on the base `b` as returned by `NCFromDigits`.
 
-`NCIntegerReverse[{list1,list2}, b]` applies `NCIntegerReverse` to each `list1`, `list2`, ....
+`NCIntegerReverse[{list1,list2}, b]` applies `NCIntegerReverse` to each
+`list1`, `list2`, ….
 
 For example:
 
@@ -5077,15 +6400,20 @@ in which `{4,1}` correspond to the digits `{1,0,0,0}` returns
 
 which correspond to the digits `{1,0,0,0}`.
 
-See also: [NCIntegerDigits](#ncintegerdigits).
+See also:
+[NCIntegerDigits](#ncintegerdigits).
 
 #### NCDigitsToIndex
 
-`NCDigitsToIndex[digits, b]` returns the index that the monomial represented by `digits` in the base `b` would occupy in the standard monomial basis.
+`NCDigitsToIndex[digits, b]` returns the index that the monomial
+represented by `digits` in the base `b` would occupy in the standard
+monomial basis.
 
-`NCDigitsToIndex[{digit1,digits2}, b]` applies `NCDigitsToIndex` to each `digit1`, `digit2`, ....
+`NCDigitsToIndex[{digit1,digits2}, b]` applies `NCDigitsToIndex` to each
+`digit1`, `digit2`, ….
 
-`NCDigitsToIndex[digits, b, Reverse -> True]` returns the index as occupied by the permuted digits.
+`NCDigitsToIndex[digits, b, Reverse -> True]` returns the index as
+occupied by the permuted digits.
 
 `NCDigitsToIndex` returns the same index for graded or simple basis.
 
@@ -5100,7 +6428,8 @@ all return
 
     5
 
-which is the index of the monomial ![x y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_288.png) in the standard monomial basis of polynomials in ![x](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_289.png) and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_290.png). Likewise
+which is the index of the monomial ![x y](https://render.githubusercontent.com/render/math?math=x%20y&mode=inline) in the standard monomial
+basis of polynomials in ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline). Likewise
 
     digits = {{}, {1}, {0, 1}, {0, 2, 1, 1}};
     NCDigitsToIndex[digits, 2]
@@ -5115,18 +6444,27 @@ Finally
 
 returns `6` instead of `5`.
 
-See also: [NCFromDigits](#ncfromdigits), [NCIntegerDigits](#ncintegerdigits).
+See also:
+[NCFromDigits](#ncfromdigits),
+[NCIntegerDigits](#ncintegerdigits).
 
 #### NCPadAndMatch
 
-When list `a` is longer than list `b`, `NCPadAndMatch[a,b]` returns the minimum number of elements from list a that should be added to the left and right of list `b` so that `a = l b r`. When list `b` is longer than list `a`, return the opposite match.
+When list `a` is longer than list `b`, `NCPadAndMatch[a,b]` returns
+the minimum number of elements from list a that should be added to the
+left and right of list `b` so that `a = l b r`. When list `b` is longer
+than list `a`, return the opposite match.
 
-`NCPadAndMatch` returns all possible matches with the minimum number of elements.
+`NCPadAndMatch` returns all possible matches with the minimum number
+of elements.
 
-NCPolyInterface
----------------
+## NCPolyInterface
 
-The package `NCPolyInterface` provides a basic interface between [`NCPoly`](#ncpoly) and `NCAlgebra`. Note that to take full advantage of the speed-up possible with `NCPoly` one should always convert and manipulate `NCPoly` expressions before converting back to `NCAlgebra`.
+The package `NCPolyInterface` provides a basic interface between
+[`NCPoly`](#ncpoly) and `NCAlgebra`. Note that to take full
+advantage of the speed-up possible with `NCPoly` one should always
+convert and manipulate `NCPoly` expressions before converting back to
+`NCAlgebra`.
 
 Members are:
 
@@ -5142,17 +6480,22 @@ Members are:
 
 ### NCToNCPoly
 
-`NCToNCPoly[expr, var]` constructs a noncommutative polynomial object in variables `var` from the nc expression `expr`.
+`NCToNCPoly[expr, var]` constructs a noncommutative polynomial object in
+variables `var` from the nc expression `expr`.
 
 For example
 
     NCToNCPoly[x**y - 2 y**z, {x, y, z}] 
 
-constructs an object associated with the noncommutative polynomial ![x y - 2 y z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_291.png) in variables `x`, `y` and `z`. The internal representation is so that the terms are sorted according to a degree-lexicographic order in `vars`. In the above example, ![x &lt; y &lt; z](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_292.png).
+constructs an object associated with the noncommutative polynomial ![x y - 2 y z](https://render.githubusercontent.com/render/math?math=x%20y%20-%202%20y%20z&mode=inline) in variables `x`, `y` and `z`. The internal representation is so
+that the terms are sorted according to a degree-lexicographic order in
+`vars`. In the above example, ![x \< y \< z](https://render.githubusercontent.com/render/math?math=x%20%3C%20y%20%3C%20z&mode=inline).
 
 ### NCPolyToNC
 
-`NCPolyToNC[poly, vars]` constructs an nc expression from the noncommutative polynomial object `poly` in variables `vars`. Monomials are specified in terms of the symbols in the list `var`.
+`NCPolyToNC[poly, vars]` constructs an nc expression from the
+noncommutative polynomial object `poly` in variables `vars`. Monomials are
+specified in terms of the symbols in the list `var`.
 
 For example
 
@@ -5163,7 +6506,9 @@ returns
 
     expr = x**y - 2 y**z
 
-See also: [NCPolyToNC](#ncpolytonc), [NCPoly](#ncpoly-1).
+See also:
+[NCPolyToNC](#ncpolytonc),
+[NCPoly](#ncpoly-1).
 
 ### NCRuleToPoly
 
@@ -5179,7 +6524,8 @@ returns
 
 ### NCMonomialList
 
-`NCMonomialList[poly]` gives the list of all monomials in the polynomial `poly`.
+`NCMonomialList[poly]` gives the list of all monomials in the
+polynomial `poly`.
 
 For example:
 
@@ -5191,11 +6537,15 @@ returns
 
     {1, x, y ** x ** y}
 
-See also: [NCCoefficientRules](#nccoefficientrules), [NCCoefficientList](#nccoefficientlist), [NCVariables](#ncvariables).
+See also:
+[NCCoefficientRules](#nccoefficientrules),
+[NCCoefficientList](#nccoefficientlist),
+[NCVariables](#ncvariables).
 
 ### NCCoefficientRules
 
-`NCCoefficientRules[poly]` gives a list of rules between all the monomials polynomial `poly`.
+`NCCoefficientRules[poly]` gives a list of rules between all the monomials
+polynomial `poly`.
 
 For example:
 
@@ -5207,11 +6557,15 @@ returns
 
     {1 -> B, x -> -2, y ** x ** y -> A}
 
-See also: [NCMonomialList](#ncmonomiallist), [NCCoefficientRules](#nccoefficientrules), [NCVariables](#ncvariables).
+See also:
+[NCMonomialList](#ncmonomiallist),
+[NCCoefficientRules](#nccoefficientrules),
+[NCVariables](#ncvariables).
 
 ### NCCoefficientList
 
-`NCCoefficientList[poly]` gives the list of all coefficients in the polynomial `poly`.
+`NCCoefficientList[poly]` gives the list of all coefficients in the
+polynomial `poly`.
 
 For example:
 
@@ -5223,11 +6577,15 @@ returns
 
     {B, -2, A}
 
-See also: [NCMonomialList](#ncmonomiallist), [NCCoefficientRules](#nccoefficientrules), [NCVariables](#ncvariables).
+See also:
+[NCMonomialList](#ncmonomiallist),
+[NCCoefficientRules](#nccoefficientrules),
+[NCVariables](#ncvariables).
 
 ### NCCoefficientQ
 
-`NCCoefficientQ[expr]` returns True if `expr` is a valid polynomial coefficient.
+`NCCoefficientQ[expr]` returns True if `expr` is a valid polynomial
+coefficient.
 
 For example:
 
@@ -5245,9 +6603,12 @@ all return `True` and
 
 all return `False`.
 
-**IMPORTANT**: `NCCoefficientQ[expr]` does not expand `expr`. This means that `NCCoefficientQ[2 (A + 1)]` will return `False`.
+**IMPORTANT**: `NCCoefficientQ[expr]` does not expand `expr`. This
+means that `NCCoefficientQ[2 (A + 1)]` will return `False`.
 
-See also: [NCMonomialQ](#ncmonomialq), [NCPolynomialQ](#ncpolynomialq)
+See also:
+[NCMonomialQ](#ncmonomialq),
+[NCPolynomialQ](#ncpolynomialq)
 
 ### NCMonomialQ
 
@@ -5267,13 +6628,17 @@ all return `True` and
 
 returns `False`.
 
-**IMPORTANT**: `NCMonomialQ[expr]` does not expand `expr`. This means that `NCMonomialQ[2 (A + 1) x**x]` will return `False`.
+**IMPORTANT**: `NCMonomialQ[expr]` does not expand `expr`. This
+means that `NCMonomialQ[2 (A + 1) x**x]` will return `False`.
 
-See also: [NCCoefficientQ](#nccoefficientq), [NCPolynomialQ](#ncpolynomialq)
+See also:
+[NCCoefficientQ](#nccoefficientq),
+[NCPolynomialQ](#ncpolynomialq)
 
 ### NCPolynomialQ
 
-`NCPolynomialQ[expr]` returns True if `expr` is an nc polynomial with commutative coefficients.
+`NCPolynomialQ[expr]` returns True if `expr` is an nc polynomial with
+commutative coefficients.
 
 For example:
 
@@ -5285,12 +6650,14 @@ all return `True` and
 
 returns `False`.
 
-**IMPORTANT**: `NCPolynomialQ[expr]` does expand `expr`. This means that `NCPolynomialQ[(x + y)^3]` will return `True`.
+**IMPORTANT**: `NCPolynomialQ[expr]` does expand `expr`. This
+means that `NCPolynomialQ[(x + y)^3]` will return `True`.
 
-See also: [NCCoefficientQ](#nccoefficientq), [NCMonomialQ](#ncmonomialq)
+See also:
+[NCCoefficientQ](#nccoefficientq),
+[NCMonomialQ](#ncmonomialq)
 
-NCPolynomial
-------------
+## NCPolynomial
 
 ### Efficient storage of NC polynomials with nc coefficients
 
@@ -5311,29 +6678,29 @@ which returns
 Members are:
 
 -   Constructors
--   [NCPolynomial](#ncpolynomial-1)
--   [NCToNCPolynomial](#nctoncpolynomial)
--   [NCPolynomialToNC](#ncpolynomialtonc)
--   [NCRationalToNCPolynomial](#ncrationaltoncpolynomial)
+    -   [NCPolynomial](#ncpolynomial-1)
+    -   [NCToNCPolynomial](#nctoncpolynomial)
+    -   [NCPolynomialToNC](#ncpolynomialtonc)
+    -   [NCRationalToNCPolynomial](#ncrationaltoncpolynomial)
 -   Access and utilities
--   [NCPCoefficients](#ncpcoefficients)
--   [NCPTermsOfDegree](#ncptermsofdegree)
--   [NCPTermsOfTotalDegree](#ncptermsoftotaldegree)
--   [NCPTermsToNC](#ncptermstonc)
--   [NCPDecompose](#ncpdecompose)
--   [NCPDegree](#ncpdegree)
--   [NCPMonomialDegree](#ncpmonomialdegree)
--   [NCPCompatibleQ](#ncpcompatibleq)
--   [NCPSameVariablesQ](#ncpsamevariablesq)
--   [NCPMatrixQ](#ncpmatrixq)
--   [NCPLinearQ](#ncplinearq)
--   [NCPQuadraticQ](#ncpquadraticq)
--   [NCPNormalize](#ncpnormalize)
+    -   [NCPCoefficients](#ncpcoefficients)
+    -   [NCPTermsOfDegree](#ncptermsofdegree)
+    -   [NCPTermsOfTotalDegree](#ncptermsoftotaldegree)
+    -   [NCPTermsToNC](#ncptermstonc)
+    -   [NCPDecompose](#ncpdecompose)
+    -   [NCPDegree](#ncpdegree)
+    -   [NCPMonomialDegree](#ncpmonomialdegree)
+    -   [NCPCompatibleQ](#ncpcompatibleq)
+    -   [NCPSameVariablesQ](#ncpsamevariablesq)
+    -   [NCPMatrixQ](#ncpmatrixq)
+    -   [NCPLinearQ](#ncplinearq)
+    -   [NCPQuadraticQ](#ncpquadraticq)
+    -   [NCPNormalize](#ncpnormalize)
 -   Arithmetic
--   [NCPTimes](#ncptimes)
--   [NCPDot](#ncpdot)
--   [NCPPlus](#ncpplus)
--   [NCPSort](#ncpsort)
+    -   [NCPTimes](#ncptimes)
+    -   [NCPDot](#ncpdot)
+    -   [NCPPlus](#ncpplus)
+    -   [NCPSort](#ncpsort)
 
 ### Ways to represent NC polynomials
 
@@ -5351,7 +6718,9 @@ where:
 
 -   `mon1, ..., monN`: are nc monomials in vars;
 -   `scalar`: contains all commutative coefficients; and
--   `term1, ..., termN+1`: are nc expressions on letters other than the ones in vars which are typically the noncommutative coefficients of the polynomial.
+-   `term1, ..., termN+1`: are nc expressions on letters other than
+    the ones in vars which are typically the noncommutative
+    coefficients of the polynomial.
 
 `vars` is a list of *Symbols*.
 
@@ -5363,9 +6732,10 @@ in variables `x` and `y` is stored as:
 
     NCPolynomial[a**c, <|{x}->{{1,a,b}},{x**y,x}->{{2,1,c,1}}|>, {x,y}]
 
-NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
+NCPolynomial specific functions are prefixed with NCP, e.g. NCPDegree.
 
-See also: [`NCToNCPolynomial`](#nctoncpolynomial), [`NCPolynomialToNC`](#ncpolynomialtonc), [`NCPTermsToNC`](#ncptermstonc).
+See also:
+[`NCToNCPolynomial`](#nctoncpolynomial), [`NCPolynomialToNC`](#ncpolynomialtonc), [`NCPTermsToNC`](#ncptermstonc).
 
 #### NCToNCPolynomial
 
@@ -5382,13 +6752,15 @@ returns
 
     NCPolynomial[a**c, <|{x}->{{1,a,b}},{x**y,x}->{{2,1,c,1}}|>, {x,y}]
 
-See also: [`NCPolynomial`](#ncpolynomial-1), [`NCPolynomialToNC`](#ncpolynomialtonc).
+See also:
+[`NCPolynomial`](#ncpolynomial-1), [`NCPolynomialToNC`](#ncpolynomialtonc).
 
 #### NCPolynomialToNC
 
 `NCPolynomialToNC[p]` converts the NCPolynomial `p` back into a regular nc polynomial.
 
-See also: [`NCPolynomial`](#ncpolynomial-1), [`NCToNCPolynomial`](#nctoncpolynomial).
+See also:
+[`NCPolynomial`](#ncpolynomial-1), [`NCToNCPolynomial`](#nctoncpolynomial).
 
 #### NCRationalToNCPolynomial
 
@@ -5413,7 +6785,8 @@ returns
     rvars = {rat1}
     rules = {rat1->inv[x]}
 
-See also: [`NCToNCPolynomial`](#ncpolynomial-1), [`NCPolynomialToNC`](#ncpolynomialtonc).
+See also:
+[`NCToNCPolynomial`](#ncpolynomial-1), [`NCPolynomialToNC`](#ncpolynomialtonc).
 
 ### Grouping terms by degree
 
@@ -5442,7 +6815,8 @@ returns
 
     <|{x,x}->{{1,a,b,c}}, {x**x}->{{-1,a,b}}|>
 
-See also: [`NCPTermsOfTotalDegree`](#ncptermsoftotaldegree),[`NCPTermsToNC`](#ncptermstonc).
+See also:
+[`NCPTermsOfTotalDegree`](#ncptermsoftotaldegree),[`NCPTermsToNC`](#ncptermstonc).
 
 #### NCPTermsOfTotalDegree
 
@@ -5461,7 +6835,8 @@ returns
 
     <|{x,y}->{{2,a,b,c}},{x,x}->{{1,a,b,c}},{x**x}->{{-1,a,b}}|>
 
-See also: [`NCPTermsOfDegree`](#ncptermsofdegree),[`NCPTermsToNC`](#ncptermstonc).
+See also:
+[`NCPTermsOfDegree`](#ncptermsofdegree),[`NCPTermsToNC`](#ncptermstonc).
 
 #### NCPTermsToNC
 
@@ -5476,7 +6851,8 @@ returns
 
     a**x**b**c-a**x**b
 
-See also: [`NCPTermsOfDegree`](#ncptermsofdegree),[`NCPTermsOfTotalDegree`](#ncptermsoftotaldegree).
+See also:
+[`NCPTermsOfDegree`](#ncptermsofdegree),[`NCPTermsOfTotalDegree`](#ncptermsoftotaldegree).
 
 ### Utilities
 
@@ -5484,13 +6860,15 @@ See also: [`NCPTermsOfDegree`](#ncptermsofdegree),[`NCPTermsOfTotalDegree`](#ncp
 
 `NCPDegree[p]` gives the degree of the NCPolynomial `p`.
 
-See also: [`NCPMonomialDegree`](#ncpmonomialdegree).
+See also:
+[`NCPMonomialDegree`](#ncpmonomialdegree).
 
 #### NCPMonomialDegree
 
 `NCPMonomialDegree[p]` gives the degree of each monomial in the NCPolynomial `p`.
 
-See also: [`NCDegree`](#ncpmonomialdegree).
+See also:
+[`NCDegree`](#ncpmonomialdegree).
 
 #### NCPCoefficients
 
@@ -5514,63 +6892,73 @@ returns
 
     {{-2, 1, c, 1}}
 
-See also: [`NCPTermsToNC`](#ncptermstonc).
+See also:
+[`NCPTermsToNC`](#ncptermstonc).
 
 #### NCPLinearQ
 
 `NCPLinearQ[p]` gives True if the NCPolynomial `p` is linear.
 
-See also: [`NCPQuadraticQ`](#ncpquadraticq).
+See also:
+[`NCPQuadraticQ`](#ncpquadraticq).
 
 #### NCPQuadraticQ
 
 `NCPQuadraticQ[p]` gives True if the NCPolynomial `p` is quadratic.
 
-See also: [`NCPLinearQ`](#ncplinearq).
+See also:
+[`NCPLinearQ`](#ncplinearq).
 
 #### NCPCompatibleQ
 
-`NCPCompatibleQ[p1,p2,...]` returns *True* if the polynomials `p1`,`p2`,... have the same variables and dimensions.
+`NCPCompatibleQ[p1,p2,...]` returns *True* if the polynomials `p1`,`p2`,… have the same variables and dimensions.
 
-See also: [NCPSameVariablesQ](#ncpsamevariablesq), [NCPMatrixQ](#ncpmatrixq).
+See also:
+[NCPSameVariablesQ](#ncpsamevariablesq), [NCPMatrixQ](#ncpmatrixq).
 
 #### NCPSameVariablesQ
 
-`NCPSameVariablesQ[p1,p2,...]` returns *True* if the polynomials `p1`,`p2`,... have the same variables.
+`NCPSameVariablesQ[p1,p2,...]` returns *True* if the polynomials `p1`,`p2`,… have the same variables.
 
-See also: [NCPCompatibleQ](#ncpcompatibleq), [NCPMatrixQ](#ncpmatrixq).
+See also:
+[NCPCompatibleQ](#ncpcompatibleq), [NCPMatrixQ](#ncpmatrixq).
 
 #### NCPMatrixQ
 
 `NCMatrixQ[p]` returns *True* if the polynomial `p` is a matrix polynomial.
 
-See also: [NCPCompatibleQ](#ncpcompatibleq).
+See also:
+[NCPCompatibleQ](#ncpcompatibleq).
 
 #### NCPNormalize
 
-`NCPNormalizes[p]` gives a normalized version of NCPolynomial p where all factors that have free commutative products are collectd in the scalar.
+`NCPNormalizes[p]` gives a normalized version of NCPolynomial p
+where all factors that have free commutative products are
+collectd in the scalar.
 
 This function is intended to be used mostly by developers.
 
-See also: [`NCPolynomial`](#ncpolynomial-1)
+See also:
+[`NCPolynomial`](#ncpolynomial-1)
 
 ### Operations on NC polynomials
 
 #### NCPPlus
 
-`NCPPlus[p1,p2,...]` gives the sum of the nc polynomials `p1`,`p2`,... .
+`NCPPlus[p1,p2,...]` gives the sum of the nc polynomials `p1`,`p2`,… .
 
 #### NCPTimes
 
-`NCPTimes[s,p]` gives the product of a commutative `s` times the nc polynomial `p`.
+`NCPTimes[s,p]` gives the product of a commutative `s` times the
+nc polynomial `p`.
 
 #### NCPDot
 
-`NCPDot[p1,p2,...]` gives the product of the nc polynomials `p1`,`p2`,... .
+`NCPDot[p1,p2,...]` gives the product of the nc polynomials `p1`,`p2`,… .
 
 #### NCPSort
 
-`NCPSort[p]` gives a list of elements of the NCPolynomial `p` in which monomials are sorted first according to their degree then by Mathematica's implicit ordering.
+`NCPSort[p]` gives a list of elements of the NCPolynomial `p` in which monomials are sorted first according to their degree then by Mathematica’s implicit ordering.
 
 For example
 
@@ -5580,7 +6968,8 @@ will produce the list
 
     {c, -2 y, x**x}
 
-See also: [NCPDecompose](#ncpdecompose), [NCDecompose](#ncdecompose), [NCCompose](#nccompose).
+See also:
+[NCPDecompose](#ncpdecompose), [NCDecompose](#ncdecompose), [NCCompose](#nccompose).
 
 #### NCPDecompose
 
@@ -5594,10 +6983,10 @@ will produce the Association
 
     <|{1,0}->a**x**b + d**x**e, {1,1}->a**x**y, {2,0}->a**x**e**x**b, {0,0}->c|>
 
-See also: [NCPSort](#ncpsort), [NCDecompose](#ncdecompose), [NCCompose](#nccompose).
+See also:
+[NCPSort](#ncpsort), [NCDecompose](#ncdecompose), [NCCompose](#nccompose).
 
-NCQuadratic
------------
+## NCQuadratic
 
 **NCQuadratic** is a package that provides functionality to handle quadratic polynomials in NC variables.
 
@@ -5616,7 +7005,8 @@ Members are:
 
     NCPToNCQuadratic[NCToNCPolynomial[p, vars]]
 
-See also: [NCToNCQuadratic](#nctoncquadratic),[NCToNCPolynomial](#nctoncpolynomial).
+See also:
+[NCToNCQuadratic](#nctoncquadratic),[NCToNCPolynomial](#nctoncpolynomial).
 
 ### NCPToNCQuadratic
 
@@ -5645,7 +7035,8 @@ produces
     middle = SparseArray[{{1+a+e,b},{0,c}}]
     right = {x,y**d}
 
-See also: [NCSylvester](#ncsylvester),[NCQuadraticToNCPolynomial](#ncquadratictoncpolynomial),[NCPolynomial](#ncpolynomial-1).
+See also:
+[NCSylvester](#ncsylvester),[NCQuadraticToNCPolynomial](#ncquadratictoncpolynomial),[NCPolynomial](#ncpolynomial-1).
 
 ### NCQuadraticToNC
 
@@ -5653,7 +7044,8 @@ See also: [NCSylvester](#ncsylvester),[NCQuadraticToNCPolynomial](#ncquadraticto
 
     NCPolynomialToNC[NCQuadraticToNCPolynomial[{const, lin, left, middle, right}]]
 
-See also: [NCQuadraticToNCPolynomial](#ncquadratictonc),[NCPolynomialToNC](#ncpolynomialtonc).
+See also:
+[NCQuadraticToNCPolynomial](#ncquadratictonc),[NCPolynomialToNC](#ncpolynomialtonc).
 
 ### NCQuadraticToNCPolynomial
 
@@ -5665,7 +7057,8 @@ The following options can be given:
 
 -   `Collect` (*True*): controls whether the coefficients of the resulting `NCPolynomial` are collected to produce the minimal possible number of terms.
 
-See also: [NCPToNCQuadratic](#ncptoncquadratic), [NCPolynomial](#ncpolynomial-1).
+See also:
+[NCPToNCQuadratic](#ncptoncquadratic), [NCPolynomial](#ncpolynomial-1).
 
 ### NCMatrixOfQuadratic
 
@@ -5694,16 +7087,17 @@ returns:
 
 The answer from `NCMatrixOfQuadratics` always satisfies `p = NCDot[left,middle,right]`.
 
-See also: [NCPToNCQuadratic](#ncptoncquadratic), [NCQuadraticMakeSymmetric](#ncquadraticmakesymmetric).
+See also:
+[NCPToNCQuadratic](#ncptoncquadratic), [NCQuadraticMakeSymmetric](#ncquadraticmakesymmetric).
 
 ### NCQuadraticMakeSymmetric
 
 `NCQuadraticMakeSymmetric[{p0, sylv, left, middle, right}]` takes the output of [`NCPToNCQuadratic`](#ncptoncquadratic) and produces, if possible, an equivalent symmetric representation in which `Map[tp, left] = right` and `middle` is a symmetric matrix.
 
-See also: [NCPToNCQuadratic](#ncptoncquadratic).
+See also:
+[NCPToNCQuadratic](#ncptoncquadratic).
 
-NCSylvester
------------
+## NCSylvester
 
 **NCSylvester** is a package that provides functionality to handle linear polynomials in NC variables.
 
@@ -5720,7 +7114,9 @@ Members are:
 
     NCPToNCSylvester[NCToNCPolynomial[p, vars]]
 
-See also: [NCToNCSylvester](#nctoncsylvester), [NCToNCPolynomial](#nctoncpolynomial).
+See also:
+[NCToNCSylvester](#nctoncsylvester),
+[NCToNCPolynomial](#nctoncpolynomial).
 
 ### NCPToNCSylvester
 
@@ -5729,11 +7125,12 @@ See also: [NCToNCSylvester](#nctoncsylvester), [NCToNCPolynomial](#nctoncpolynom
 `NCPToNCSylvester` returns a list with two elements:
 
 -   the first is a the independent term;
+
 -   the second is an association where each key is one of the variables and each value is a list with three elements:
 
--   the first element is a list of left NC symbols;
--   the second element is a list of right NC symbols;
--   the third element is a numeric `SparseArray`.
+    -   the first element is a list of left NC symbols;
+    -   the second element is a list of right NC symbols;
+    -   the third element is a numeric `SparseArray`.
 
 Example:
 
@@ -5746,7 +7143,11 @@ produces
     sylv = <|x->{{a,c},{b,d},SparseArray[{{1,0},{0,1}}]}, 
              y->{{1},{1},SparseArray[{{1}}]}|>
 
-See also: [NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial), [NCSylvesterToNC](#ncsylvestertoncpolynomial), [NCToNCSylvester](#nctoncsylvester), [NCPolynomial](#ncpolynomial-1).
+See also:
+[NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial),
+[NCSylvesterToNC](#ncsylvestertoncpolynomial),
+[NCToNCSylvester](#nctoncsylvester),
+[NCPolynomial](#ncpolynomial-1).
 
 ### NCSylvesterToNC
 
@@ -5754,7 +7155,9 @@ See also: [NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial), [NCSylvesterT
 
     NCPolynomialToNC[NCSylvesterToNCPolynomial[{const, lin}]]
 
-See also: [NCSylvesterToNCPolynomial](#ncsylvestertonc), [NCPolynomialToNC](#ncpolynomialtonc).
+See also:
+[NCSylvesterToNCPolynomial](#ncsylvestertonc),
+[NCPolynomialToNC](#ncpolynomialtonc).
 
 ### NCSylvesterToNCPolynomial
 
@@ -5762,17 +7165,27 @@ See also: [NCSylvesterToNCPolynomial](#ncsylvestertonc), [NCPolynomialToNC](#ncp
 
 `NCSylvesterToNCPolynomial[rep,options]` uses `options`.
 
-The following `options` can be given: \* `Collect` (*True*): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.
+The following `options` can be given:
+\* `Collect` (*True*): controls whether the coefficients of the resulting NCPolynomial are collected to produce the minimal possible number of terms.
 
-See also: [NCPToNCSylvester](#ncptoncsylvester), [NCToNCSylvester](#nctoncsylvester), [NCPolynomial](#ncpolynomial-1).
+See also:
+[NCPToNCSylvester](#ncptoncsylvester),
+[NCToNCSylvester](#nctoncsylvester),
+[NCPolynomial](#ncpolynomial-1).
 
-Noncommutative Gröbner Bases Algorithms
-=======================================
+# Noncommutative Gröbner Bases Algorithms
 
-NCGBX
------
+## NCGBX
 
-This is an interface to a Gröebner Bases code that runs purely under Mathematica. The actual algorithm is implemented in the package [NCPolyGroebner](#ncpolygroebner). Its function names, inputs and outputs are very similar (but not always exactly the same) to the ones provided in the legacy package [NCGB](#ncgb), which requires both Mathematica and auxiliary executables compiled from C++ to run. [NCGBX](#ncgbx) may run slower on some medium size problems but will succeed on large size problems which might fail under [NCGB](#ncgb).
+This is an interface to a Gröebner Bases code that runs purely under
+Mathematica. The actual algorithm is implemented in the package
+[NCPolyGroebner](#ncpolygroebner). Its function names, inputs
+and outputs are very similar (but not always exactly the same) to the
+ones provided in the legacy package [NCGB](#ncgb), which
+requires both Mathematica and auxiliary executables compiled from C++
+to run. [NCGBX](#ncgbx) may run slower on some medium size
+problems but will succeed on large size problems which might fail
+under [NCGB](#ncgb).
 
 Members are:
 
@@ -5795,13 +7208,14 @@ For example
 
     SetMonomialOrder[a,b,c]
 
-sets the lex order ![a \\ll b \\ll c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_293.png).
+sets the lex order ![a \\ll b \\ll c](https://render.githubusercontent.com/render/math?math=a%20%5Cll%20b%20%5Cll%20c&mode=inline).
 
-If one uses a list of variables rather than a single variable as one of the arguments, then multigraded lex order is used. For example
+If one uses a list of variables rather than a single variable as one
+of the arguments, then multigraded lex order is used. For example
 
     SetMonomialOrder[{a,b,c}]
 
-sets the graded lex order ![a &lt; b &lt; c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_294.png).
+sets the graded lex order ![a \< b \< c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c&mode=inline).
 
 Another example:
 
@@ -5811,7 +7225,7 @@ or
 
     SetMonomialOrder[{a, b}, c]
 
-set the multigraded lex order ![a &lt; b \\ll c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_295.png).
+set the multigraded lex order ![a \< b \\ll c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c&mode=inline).
 
 Finally
 
@@ -5830,19 +7244,30 @@ There is also an older syntax which is still supported:
 
     SetMonomialOrder[{a, b, c}, n]
 
-sets the order of monomials to be ![a &lt; b &lt; c](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_296.png) and assigns them grading level `n`.
+sets the order of monomials to be ![a \< b \< c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c&mode=inline) and assigns them grading
+level `n`.
 
     SetMonomialOrder[{a, b, c}, 1]
 
-is equivalent to `SetMonomialOrder[{a, b, c}]`. When using this older syntax the user is responsible for calling [ClearMonomialOrder](#clearmonomialorder) to make sure that the current order is empty before starting.
+is equivalent to `SetMonomialOrder[{a, b, c}]`. When using this older
+syntax the user is responsible for calling
+[ClearMonomialOrder](#clearmonomialorder) to make sure that the
+current order is empty before starting.
 
-See also: [ClearMonomialOrder](#clearmonomialorder), [GetMonomialOrder](#getmonomialorder), [PrintMonomialOrder](#printmonomialorder), [SetKnowns](#setknowns), [SetUnknowns](#setunknowns).
+See also:
+[ClearMonomialOrder](#clearmonomialorder),
+[GetMonomialOrder](#getmonomialorder),
+[PrintMonomialOrder](#printmonomialorder),
+[SetKnowns](#setknowns),
+[SetUnknowns](#setunknowns).
 
 ### SetKnowns
 
-`SetKnowns[var1, var2, ...]` records the variables `var1`, `var2`, ... to be corresponding to known quantities.
+`SetKnowns[var1, var2, ...]` records the variables `var1`, `var2`,
+… to be corresponding to known quantities.
 
-`SetUnknowns` and `Setknowns` prescribe a monomial order with the knowns at the the bottom and the unknowns at the top.
+`SetUnknowns` and `Setknowns` prescribe a monomial order with the
+knowns at the the bottom and the unknowns at the top.
 
 For example
 
@@ -5853,7 +7278,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_297.png) and
+which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -5862,7 +7287,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a &lt; b \\ll c &lt; d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_298.png).
+which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -5872,24 +7297,29 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order ![a &lt; b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_299.png).
+result both in the order ![a \< b](https://render.githubusercontent.com/render/math?math=a%20%3C%20b&mode=inline).
 
-Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns and unknowns. For example
+Successive calls to `SetUnknowns` and `SetKnowns` overwrite the
+previous knowns and unknowns. For example
 
     SetKnowns[a,b] 
     SetUnknowns[c,d]
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c &lt; d \\ll a \\ll b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_300.png).
+results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
 
-See also: [SetUnknowns](#setunknowns), [SetMonomialOrder](#setmonomialorder).
+See also:
+[SetUnknowns](#setunknowns),
+[SetMonomialOrder](#setmonomialorder).
 
 ### SetUnknowns
 
-`SetUnknowns[var1, var2, ...]` records the variables `var1`, `var2`, ... to be corresponding to unknown quantities.
+`SetUnknowns[var1, var2, ...]` records the variables `var1`, `var2`,
+… to be corresponding to unknown quantities.
 
-`SetUnknowns` and `SetKnowns` prescribe a monomial order with the knowns at the the bottom and the unknowns at the top.
+`SetUnknowns` and `SetKnowns` prescribe a monomial order with the
+knowns at the the bottom and the unknowns at the top.
 
 For example
 
@@ -5900,7 +7330,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_301.png) and
+which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -5909,7 +7339,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a &lt; b \\ll c &lt; d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_302.png).
+which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -5919,30 +7349,40 @@ and
 
     SetKnowns[{a},{b}] 
 
-result both in the order ![a &lt; b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_303.png).
+result both in the order ![a \< b](https://render.githubusercontent.com/render/math?math=a%20%3C%20b&mode=inline).
 
-Successive calls to `SetUnknowns` and `SetKnowns` overwrite the previous knowns and unknowns. For example
+Successive calls to `SetUnknowns` and `SetKnowns` overwrite the
+previous knowns and unknowns. For example
 
     SetKnowns[a,b] 
     SetUnknowns[c,d]
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c &lt; d \\ll a \\ll b](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_304.png).
+results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
 
-See also: [SetKnowns](#setknowns), [SetMonomialOrder](#setmonomialorder).
+See also:
+[SetKnowns](#setknowns),
+[SetMonomialOrder](#setmonomialorder).
 
 ### ClearMonomialOrder
 
 `ClearMonomialOrder[]` clear the current monomial ordering.
 
-It is only necessary to use `ClearMonomialOrder` if using the indexed version of `SetMonomialOrder`.
+It is only necessary to use `ClearMonomialOrder` if using the indexed
+version of `SetMonomialOrder`.
 
-See also: [SetKnowns](#setknowns), [SetUnknowns](#setunknowns), [SetMonomialOrder](#setmonomialorder), [ClearMonomialOrder](#clearmonomialorder), [PrintMonomialOrder](#printmonomialorder).
+See also:
+[SetKnowns](#setknowns),
+[SetUnknowns](#setunknowns),
+[SetMonomialOrder](#setmonomialorder),
+[ClearMonomialOrder](#clearmonomialorder),
+[PrintMonomialOrder](#printmonomialorder).
 
 ### GetMonomialOrder
 
-`GetMonomialOrder[]` returns the current monomial ordering in the form of a list.
+`GetMonomialOrder[]` returns the current monomial ordering in the form
+of a list.
 
 For example
 
@@ -5953,7 +7393,12 @@ returns
 
     order = {{a,b},{c},{d}}
 
-See also: [SetKnowns](#setknowns), [SetUnknowns](#setunknowns), [SetMonomialOrder](#setmonomialorder), [ClearMonomialOrder](#clearmonomialorder), [PrintMonomialOrder](#printmonomialorder).
+See also:
+[SetKnowns](#setknowns),
+[SetUnknowns](#setunknowns),
+[SetMonomialOrder](#setmonomialorder),
+[ClearMonomialOrder](#clearmonomialorder),
+[PrintMonomialOrder](#printmonomialorder).
 
 ### PrintMonomialOrder
 
@@ -5964,17 +7409,27 @@ For example
     SetMonomialOrder[{a,b}, {c}, {d}]
     PrintMonomialOrder[]
 
-print ![a &lt; b \\ll c \\ll d](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_305.png).
+print ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline).
 
-See also: [SetKnowns](#setknowns), [SetUnknowns](#setunknowns), [SetMonomialOrder](#setmonomialorder), [ClearMonomialOrder](#clearmonomialorder), [PrintMonomialOrder](#printmonomialorder).
+See also:
+[SetKnowns](#setknowns),
+[SetUnknowns](#setunknowns),
+[SetMonomialOrder](#setmonomialorder),
+[ClearMonomialOrder](#clearmonomialorder),
+[PrintMonomialOrder](#printmonomialorder).
 
 ### NCMakeGB
 
-`NCMakeGB[{poly1, poly2, ...}, k]` attempts to produces a nc Gröbner Basis (GB) associated with the list of nc polynomials `{poly1, poly2, ...}`. The GB algorithm proceeds through *at most* `k` iterations until a Gröbner basis is found for the given list of polynomials with respect to the order imposed by [SetMonomialOrder](#setmonomialorder).
+`NCMakeGB[{poly1, poly2, ...}, k]` attempts to produces a nc Gröbner
+Basis (GB) associated with the list of nc polynomials `{poly1, poly2, ...}`. The GB algorithm proceeds through *at most* `k` iterations
+until a Gröbner basis is found for the given list of polynomials with
+respect to the order imposed by [SetMonomialOrder](#setmonomialorder).
 
-If `NCMakeGB` terminates before finding a GB the message `NCMakeGB::Interrupted` is issued.
+If `NCMakeGB` terminates before finding a GB the message
+`NCMakeGB::Interrupted` is issued.
 
-The output of `NCMakeGB` is a list of rules with left side of the rule being the *leading* monomial of the polynomials in the GB.
+The output of `NCMakeGB` is a list of rules with left side of the rule
+being the *leading* monomial of the polynomials in the GB.
 
 For example:
 
@@ -5985,36 +7440,71 @@ returns
 
     gb = {x -> 1}
 
-that corresponds to the polynomial ![x - 1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_306.png), which is the nc Gröbner basis for the ideal generated by ![x^2-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_307.png) and ![x^3-1](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_308.png).
+that corresponds to the polynomial ![x - 1](https://render.githubusercontent.com/render/math?math=x%20-%201&mode=inline), which is the nc Gröbner
+basis for the ideal generated by ![x^2-1](https://render.githubusercontent.com/render/math?math=x%5E2-1&mode=inline) and ![x^3-1](https://render.githubusercontent.com/render/math?math=x%5E3-1&mode=inline).
 
 `NCMakeGB[{poly1, poly2, ...}, k, options]` uses `options`.
 
+For example
+
+    gb = NCMakeGB[{x^2 - 1, x^3 - 1}, 20, RedudeBasis -> True]
+
+runs the Gröbner basis algortihm and completely reduces the output
+set of polynomials.
+
 The following `options` can be given:
 
--   `SimplifyObstructions` (`True`): control whether obstructions are simplified before being added to the list of active obstructions;
--   `SortObstructions` (`False`): control whether obstructions are sorted before being processed;
--   `SortBasis` (`False`): control whether initial basis is sorted before initiating algorithm;
--   `VerboseLevel` (`1`): control level of verbosity from `0` (no messages) to `5` (very verbose);
--   `PrintBasis` (`False`): if `True` prints current basis at each major iteration;
--   `PrintObstructions` (`False`): if `True` prints current list of obstructions at each major iteration;
--   `PrintSPolynomials` (`False`): if `True` prints every S-polynomial formed at each minor iteration.
+-   `ReduceBasis` (`False`): control whether the resulting basis output
+    by the command is a reduced Gröbner basis at the completion of the
+    algorithm. This corresponds to running `NCReduce` with the
+    Boolean flag `True` to completely reduce the output basis. Can be set
+    globally as `SetOptions[NCMakeGB, ReturnBasis -> True]`.
+-   `SimplifyObstructions` (`True`): control whether whether to remove obstructions
+    before constructing more S-polynomials;
+-   `SortObstructions` (`False`): control whether obstructions are
+    sorted before being processed;
+-   `SortBasis` (`False`): control whether initial basis is sorted
+    before initiating algorithm;
+-   `VerboseLevel` (`1`): control level of verbosity from `0` (no
+    messages) to `5` (very verbose);
+-   `PrintBasis` (`False`): if `True` prints current basis at each major
+    iteration;
+-   `PrintObstructions` (`False`): if `True` prints current list of
+    obstructions at each major iteration;
+-   `PrintSPolynomials` (`False`): if `True` prints every S-polynomial
+    formed at each minor iteration.
 -   `ReturnRules` (`True`): if `True` rules representing relations in which the left-hand side is the leading monomial are returned instead of polynomials. Use `False` for backward compatibility. Can be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
 
-`NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in [NCPolyGroebner](#ncpolygroebner-1).
+`NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in
+[NCPolyGroebner](#ncpolygroebner-1).
 
-See also: [ClearMonomialOrder](#clearmonomialorder), [GetMonomialOrder](#getmonomialorder), [PrintMonomialOrder](#printmonomialorder), [SetKnowns](#setknowns), [SetUnknowns](#setunknowns), [NCPolyGroebner](#ncpolygroebner-1).
+See also:
+[NCReduce](#ncreduce),
+[ClearMonomialOrder](#clearmonomialorder),
+[GetMonomialOrder](#getmonomialorder),
+[PrintMonomialOrder](#printmonomialorder),
+[SetKnowns](#setknowns),
+[SetUnknowns](#setunknowns),
+[NCPolyGroebner](#ncpolygroebner-1).
 
 ### NCProcess
 
-`NCProcess[{poly1, poly2, ...}, k]` finds a new generating set for the ideal generated by `{poly1, poly2, ...}` using [NCMakeGB](#ncmakegb) then produces an summary report on the findings.
+`NCProcess[{poly1, poly2, ...}, k]` finds a new generating set for the
+ideal generated by `{poly1, poly2, ...}` using [NCMakeGB](#ncmakegb)
+then produces an summary report on the findings.
 
-Not all features of `NCProcess` in the old `NCGB` C++ version are supported yet.
+Not all features of `NCProcess` in the old `NCGB` C++ version are
+supported yet.
 
-See also: [NCMakeGB](#ncmakegb).
+See also:
+[NCMakeGB](#ncmakegb).
 
 ### NCGBSimplifyRational
 
-`NCGBSimplifyRational[expr]` creates a set of relations for each rational expression and sub-expression found in `expr` which are used to produce simplification rules using [NCMakeGB](#ncmakegb) then replaced using [NCReduce](#ncreduce).
+`NCGBSimplifyRational[expr]` creates a set of relations for each
+rational expression and sub-expression found in `expr` which are used
+to produce simplification rules using [NCMakeGB](#ncmakegb) then
+replaced using [NCReduce](#ncreduce).
 
 For example:
 
@@ -6028,22 +7518,35 @@ or
 
 both result in `0`.
 
-See also: [NCMakeGB](#ncmakegb), [NCReduce](#ncreduce).
+See also:
+[NCMakeGB](#ncmakegb),
+[NCReduce](#ncreduce).
 
 ### NCReduce
 
-`NCReduce[polys, rules]` reduces the list of polynomials `polys` with respect to the list of polyomials `rules`. The substitutions implied by `rules` are applied repeatedly to the polynomials in the `polys` until no further reduction occurs.
+`NCReduce[polys, rules]` reduces the list of polynomials `polys` with
+respect to the list of polyomials `rules`. The substitutions implied
+by `rules` are applied repeatedly to the polynomials in the `polys`
+until no further reduction occurs.
 
-`NCReduce[polys]` reduces each polynomial in the list of polynomials `polys` with respect to the remaining elements of the list of polyomials `polys` until no further reduction occurs.
+`NCReduce[polys]` reduces each polynomial in the list of polynomials
+`polys` with respect to the remaining elements of the list of
+polyomials `polys` until no further reduction occurs.
 
-By default, `NCReduce` only reduces the leading monomial in the current order. Use the optional boolean flag `complete` to completely reduce all monomials. For example, `NCReduce[polys, rules, True]` and `NCReduce[polys, True]`.
+By default, `NCReduce` only reduces the leading monomial in the
+current order. Use the optional boolean flag `complete` to completely
+reduce all monomials. For example, `NCReduce[polys, rules, True]` and
+`NCReduce[polys, True]`.
 
-See also: [NCMakeGB](#ncmakegb), [NCGBSimplifyRational](#ncgbsimplifyrational).
+See also:
+[NCMakeGB](#ncmakegb),
+[NCGBSimplifyRational](#ncgbsimplifyrational).
 
-NCPolyGroebner
---------------
+## NCPolyGroebner
 
-This packages implements a Gröebner Bases algorithm that runs purely under Mathematica. This algorithm is the one called by the user-friendly functions in the package [NCGBX](#ncgbx).
+This packages implements a Gröebner Bases algorithm that runs purely
+under Mathematica. This algorithm is the one called by the
+user-friendly functions in the package [NCGBX](#ncgbx).
 
 Members are:
 
@@ -6051,39 +7554,48 @@ Members are:
 
 ### NCPolyGroebner
 
-`NCPolyGroebner[G]` computes the noncommutative Groebner basis of the list of `NCPoly` polynomials `G`.
+`NCPolyGroebner[G]` computes the noncommutative Groebner basis of the
+list of `NCPoly` polynomials `G`.
 
 `NCPolyGroebner[G, options]` uses `options`.
 
 The following `options` can be given:
 
--   `SimplifyObstructions` (`True`) whether to simplify obstructions before constructions S-polynomials;
--   `SortObstructions` (`False`) whether to sort obstructions using Mora's SUGAR ranking;
--   `SortBasis` (`False`) whether to sort basis before starting algorithm;
+-   `SimplifyObstructions` (`True`) whether to remove obstructions
+    before constructing more S-polynomials;
+-   `SortObstructions` (`False`) whether to sort obstructions using
+    Mora’s SUGAR ranking;
+-   `SortBasis` (`False`) whether to sort basis before starting
+    algorithm;
 -   `Labels` (`{}`) list of labels to use in verbose printing;
 -   `VerboseLevel` (`1`): function used to decide if a pivot is zero;
 -   `PrintBasis` (`False`): function used to divide a vector by an entry;
 -   `PrintObstructions` (`False`);
 -   `PrintSPolynomials` (`False`);
 
-The algorithm is based on \[@mora:ICN:1994\].
+The algorithm is based on \[@mora:ICN:1994\] and uses the terminology there.
 
-See also: [NCPoly](#ncpoly-1).
+See also:
+[NCPoly](#ncpoly-1).
 
-NCGB
-----
+## NCGB
 
-This packages supports our legacy Gröebner Bases algorithm that requires both Mathematica and auxiliary executables compiled from C++ to run. [NCGBX](#ncgbx) may run slower on some medium size problems but will succeed on large size problems which might fail under [NCGB](#ncgb).
+This packages supports our legacy Gröebner Bases algorithm that
+requires both Mathematica and auxiliary executables compiled from C++
+to run. [NCGBX](#ncgbx) may run slower on some medium size
+problems but will succeed on large size problems which might fail
+under [NCGB](#ncgb).
 
-This code has become hard to maintain and support and may be deprecated in the future. See older versions of the NC documentation for a complete description of its functionality.
+This code has become hard to maintain and support and may be
+deprecated in the future. See older versions of the NC documentation
+for a complete description of its functionality.
 
-Semidefinite Programming Algorithms
-===================================
+# Semidefinite Programming Algorithms
 
-NCSDP
------
+## NCSDP
 
-**NCSDP** is a package that allows the symbolic manipulation and numeric solution of semidefinite programs.
+**NCSDP** is a package that allows the symbolic manipulation and numeric
+solution of semidefinite programs.
 
 Members are:
 
@@ -6094,7 +7606,11 @@ Members are:
 
 ### NCSDP
 
-`NCSDP[inequalities,vars,obj,data]` converts the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars` into the semidefinite program with linear objective `obj`. The semidefinite program (SDP) should be given in the following canonical form:
+`NCSDP[inequalities,vars,obj,data]` converts the list of NC polynomials
+and NC matrices of polynomials `inequalities` that are linear in the
+unknowns listed in `vars` into the semidefinite program with linear
+objective `obj`. The semidefinite program (SDP) should be given in the
+following canonical form:
 
     max  <obj, vars>  s.t.  inequalities <= 0.
 
@@ -6103,18 +7619,22 @@ It returns a list with two entries:
 -   The first is a list with the an instance of [SDPSylvester](#sdpsylvester);
 -   The second is a list of rules with properties of certain variables.
 
-Both entries should be supplied to [SDPSolve](#sdpsolve) in order to numerically solve the semidefinite program. For example:
+Both entries should be supplied to [SDPSolve](#sdpsolve) in order to
+numerically solve the semidefinite program. For example:
 
     {abc, rules} = NCSDP[inequalities, vars, obj, data];
 
-generates an instance of [SDPSylvester](#sdpsylvester) that can be solved using:
+generates an instance of [SDPSylvester](#sdpsylvester) that can be
+solved using:
 
     << SDPSylvester`
     {Y, X, S, flags} = SDPSolve[abc, rules];
 
-`NCSDP` uses the user supplied rules in `data` to set up the problem data.
+`NCSDP` uses the user supplied rules in `data` to set up the problem
+data.
 
-`NCSDP[inequalities,vars,data]` converts problem into a feasibility semidefinite program.
+`NCSDP[inequalities,vars,data]` converts problem into a feasibility
+semidefinite program.
 
 `NCSDP[inequalities,vars,obj,data,options]` uses `options`.
 
@@ -6122,21 +7642,31 @@ The following `options` can be given:
 
 -   `DebugLevel` (`0`): control printing of debugging information.
 
-See also: [NCSDPForm](#ncsdpform), [NCSDPDual](#ncsdpdual), [SDPSolve](#sdpsolve).
+See also:
+[NCSDPForm](#ncsdpform), [NCSDPDual](#ncsdpdual), [SDPSolve](#sdpsolve).
 
 ### NCSDPForm
 
-`NCSDPForm[[inequalities,vars,obj]` prints out a pretty formatted version of the SDP expressed by the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars`.
+`NCSDPForm[[inequalities,vars,obj]` prints out a pretty formatted
+version of the SDP expressed by the list of NC
+polynomials and NC matrices of polynomials `inequalities` that are
+linear in the unknowns listed in `vars`.
 
-See also: [NCSDP](#ncsdp-1), [NCSDPDualForm](#ncsdpdualform).
+See also:
+[NCSDP](#ncsdp-1), [NCSDPDualForm](#ncsdpdualform).
 
 ### NCSDPDual
 
-`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj]` calculates the symbolic dual of the SDP expressed by the list of NC polynomials and NC matrices of polynomials `inequalities` that are linear in the unknowns listed in `vars` with linear objective `obj` into a dual semidefinite in the following canonical form:
+`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj]`
+calculates the symbolic dual of the SDP expressed by the list of NC
+polynomials and NC matrices of polynomials `inequalities` that are
+linear in the unknowns listed in `vars` with linear objective `obj`
+into a dual semidefinite in the following canonical form:
 
     max <dObj, dVars>  s.t.  dInequalities == 0,   dVars >= 0.
 
-`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj,dualVars]` uses the symbols in `dualVars` as `dVars`.
+`{dInequalities, dVars, dObj} = NCSDPDual[inequalities,vars,obj,dualVars]`
+uses the symbols in `dualVars` as `dVars`.
 
 `NCSDPDual[inequalities,vars,...,options]` uses `options`.
 
@@ -6145,20 +7675,35 @@ The following `options` can be given:
 -   `DualSymbol` (`"w"`): letter to be used as symbol for dual variable;
 -   `DebugLevel` (`0`): control printing of debugging information.
 
-See also: [NCSDPDualForm](#ncsdpdualform), [NCSDP](#ncsdp-1).
+See also:
+[NCSDPDualForm](#ncsdpdualform), [NCSDP](#ncsdp-1).
 
 ### NCSDPDualForm
 
-`NCSDPForm[[dInequalities,dVars,dObj]` prints out a pretty formatted version of the dual SDP expressed by the list of NC polynomials and NC matrices of polynomials `dInequalities` that are linear in the unknowns listed in `dVars` with linear objective `dObj`.
+`NCSDPForm[[dInequalities,dVars,dObj]` prints out a pretty formatted
+version of the dual SDP expressed by the list of NC polynomials and NC
+matrices of polynomials `dInequalities` that are linear in the
+unknowns listed in `dVars` with linear objective `dObj`.
 
-See also: [NCSDPDual](#ncsdpdual), [NCSDPForm](#ncsdpform).
+See also:
+[NCSDPDual](#ncsdpdual), [NCSDPForm](#ncsdpform).
 
-SDP
----
+## SDP
 
-`SDP` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_309.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_310.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_311.png) is a vector of decision variables.
+`SDP` is a package that provides data structures for the numeric solution
+of semidefinite programs of the form:
 
-See the package [SDP](#sdp) for a potentially more efficient alternative to the basic implementation provided by this package.
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) is a
+vector of decision variables.
+
+See the package [SDP](#sdp) for a potentially more efficient
+alternative to the basic implementation provided by this package.
 
 Members are:
 
@@ -6171,13 +7716,14 @@ Members are:
 
 ### SDPMatrices
 
-`SDPMatrices[f, G, y]` converts the symbolic linear functions `f`, `G` in the variables `y` associated to the semidefinite program:
+`SDPMatrices[f, G, y]` converts the symbolic linear functions `f`,
+`G` in the variables `y` associated to the semidefinite program:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_312.png)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 into numerical data that can be used to solve an SDP in the form:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_313.png)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 `SDPMatrices` returns a list with three entries:
 
@@ -6200,19 +7746,20 @@ results in
 
 All data is stored as `SparseArray`s.
 
-See also: [SDPSolve](#sdpsolve).
+See also:
+[SDPSolve](#sdpsolve).
 
 ### SDPSolve
 
 `SDPSolve[{A,b,c}]` solves an SDP in the form:
 
-![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_314.png)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 `SDPSolve` returns a list with four entries:
 
--   The first is the primal solution ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_315.png);
--   The second is the dual solution ![X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_316.png);
--   The third is the primal slack variable ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_317.png);
+-   The first is the primal solution ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline);
+-   The second is the dual solution ![X](https://render.githubusercontent.com/render/math?math=X&mode=inline);
+-   The third is the primal slack variable ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline);
 -   The fourth is a list of flags:
     -   `PrimalFeasible`: `True` if primal problem is feasible;
     -   `FeasibilityRadius`: less than one if primal problem is feasible;
@@ -6230,44 +7777,72 @@ solves the SDP `abc`.
 
 `options` are those of [PrimalDual](#primaldual-1).
 
-See also: [SDPMatrices](#sdpmatrices).
+See also:
+[SDPMatrices](#sdpmatrices).
 
 ### SDPEval
 
-`SDPEval[A, y]` evaluates the linear function ![A y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_318.png) in an `SDP`.
+`SDPEval[A, y]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A%20y&mode=inline) in an `SDP`.
 
 This is a convenient replacement for [SDPPrimalEval](#sdpprimaleval) in which the list `y` can be used directly.
 
-See also: [SDPPrimalEval](#sdpprimaleval), [SDPDualEval](#sdpdualeval), [SDPSolve](#sdpsolve), [SDPMatrices](#sdpmatrices).
+See also:
+[SDPPrimalEval](#sdpprimaleval),
+[SDPDualEval](#sdpdualeval),
+[SDPSolve](#sdpsolve),
+[SDPMatrices](#sdpmatrices).
 
 ### SDPPrimalEval
 
-`SDPPrimalEval[A, {{y}}]` evaluates the linear function ![A y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_319.png) in an `SDP`.
+`SDPPrimalEval[A, {{y}}]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A%20y&mode=inline) in an `SDP`.
 
 See [SDPEval](#sdpeval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
-See also: [SDPEval](#sdpeval), [SDPDualEval](#sdpdualeval), [SDPSolve](#sdpsolve), [SDPMatrices](#sdpmatrices).
+See also:
+[SDPEval](#sdpeval),
+[SDPDualEval](#sdpdualeval),
+[SDPSolve](#sdpsolve),
+[SDPMatrices](#sdpmatrices).
 
 ### SDPDualEval
 
-`SDPDualEval[A, X]` evaluates the linear function ![A^\* X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_320.png) in an `SDP`.
+`SDPDualEval[A, X]` evaluates the linear function ![A^\* X](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X&mode=inline) in an `SDP`.
 
-See also: [SDPPrimalEval](#sdpprimaleval), [SDPSolve](#sdpsolve), [SDPMatrices](#sdpmatrices).
+See also:
+[SDPPrimalEval](#sdpprimaleval),
+[SDPSolve](#sdpsolve),
+[SDPMatrices](#sdpmatrices).
 
 ### SDPSylvesterEval
 
-`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_321.png) when applied to the scaling `W`.
+`SDPSylvesterEval[a, W]` returns a matrix
+representation of the Sylvester mapping ![A^\* (W A (\\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
+when applied to the scaling `W`.
 
-`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_322.png) when applied to the left- and right-scalings `Wl` and `Wr`.
+`SDPSylvesterEval[a, Wl, Wr]` returns a matrix
+representation of the Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
+when applied to the left- and right-scalings `Wl` and `Wr`.
 
-See also: [SDPPrimalEval](#sdpprimaleval), [SDPDualEval](#sdpdualeval).
+See also:
+[SDPPrimalEval](#sdpprimaleval),
+[SDPDualEval](#sdpdualeval).
 
-SDPFlat
--------
+## SDPFlat
 
-`SDPFlat` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_323.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_324.png) is a symmetric positive semidefinite matrix and ![y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_325.png) is a vector of decision variables.
+`SDPFlat` is a package that provides data structures for the numeric solution
+of semidefinite programs of the form:
 
-It is a potentially more efficient alternative to the basic implementation provided by the package [SDP](#sdp).
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) is a
+vector of decision variables.
+
+It is a potentially more efficient alternative to the basic
+implementation provided by the package [SDP](#sdp).
 
 Members are:
 
@@ -6278,7 +7853,8 @@ Members are:
 
 ### SDPFlatData
 
-`SDPFlatData[{a,b,c}]` converts the triplet `{a,b,c}` from the format of the package [SDP](#sdp) to the `SDPFlat` format.
+`SDPFlatData[{a,b,c}]` converts the triplet `{a,b,c}` from the format
+of the package [SDP](#sdp) to the `SDPFlat` format.
 
 It returns a list with four entries:
 
@@ -6287,32 +7863,51 @@ It returns a list with four entries:
 -   The third is the flattened version of `c`, `cFlat`;
 -   The fourth is an array with the flattened dimensions.
 
-See also: [SDP](#sdp).
+See also:
+[SDP](#sdp).
 
 ### SDPFlatPrimalEval
 
-`SDPFlatPrimalEval[aFlat, y]` evaluates the linear function ![A y](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_326.png) in an `SDPFlat`.
+`SDPFlatPrimalEval[aFlat, y]` evaluates the linear function ![A y](https://render.githubusercontent.com/render/math?math=A%20y&mode=inline) in an `SDPFlat`.
 
-See also: [SDPFlatDualEval](#sdpflatdualeval), [SDPFlatSylvesterEval](#sdpflatsylvestereval).
+See also:
+[SDPFlatDualEval](#sdpflatdualeval),
+[SDPFlatSylvesterEval](#sdpflatsylvestereval).
 
 ### SDPFlatDualEval
 
-`SDPFlatDualEval[aFlat, X]` evaluates the linear function ![A^\* X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_327.png) in an `SDPFlat`.
+`SDPFlatDualEval[aFlat, X]` evaluates the linear function ![A^\* X](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X&mode=inline) in an `SDPFlat`.
 
-See also: [SDPFlatPrimalEval](#sdpflatprimaleval), [SDPFlatSylvesterEval](#sdpflatsylvestereval).
+See also:
+[SDPFlatPrimalEval](#sdpflatprimaleval),
+[SDPFlatSylvesterEval](#sdpflatsylvestereval).
 
 ### SDPFlatSylvesterEval
 
-`SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_328.png) when applied to the scaling `W`.
+`SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix
+representation of the Sylvester mapping ![A^\* (W A (\\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
+when applied to the scaling `W`.
 
-`SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_329.png) when applied to the left- and right-scalings `Wl` and `Wr`.
+`SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix
+representation of the Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
+when applied to the left- and right-scalings `Wl` and `Wr`.
 
-See also: [SDPFlatPrimalEval](#sdpflatprimaleval), [SDPFlatDualEval](#sdpflatdualeval).
+See also:
+[SDPFlatPrimalEval](#sdpflatprimaleval),
+[SDPFlatDualEval](#sdpflatdualeval).
 
-SDPSylvester
-------------
+## SDPSylvester
 
-`SDPSylvester` is a package that provides data structures for the numeric solution of semidefinite programs of the form: ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_330.png) where ![S](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_331.png) is a symmetric positive semidefinite matrix and ![y = \\{ y\_1, \\ldots, y\_n \\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_332.png) is a list of matrix decision variables.
+`SDPSylvester` is a package that provides data structures for the
+numeric solution of semidefinite programs of the form:
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20%5Csum_i%20%5Coperatorname%7Btrace%7D%28b_i%5ET%20y_i%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET%20%2B%20S%20%3D%20C%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y = \\{ y_1, \\ldots, y_n \\}](https://render.githubusercontent.com/render/math?math=y%20%3D%20%5C%7B%20y_1%2C%20%5Cldots%2C%20y_n%20%5C%7D&mode=inline) is a list of matrix decision variables.
 
 Members are:
 
@@ -6323,46 +7918,83 @@ Members are:
 
 ### SDPEval
 
-`SDPEval[A, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_333.png) in an `SDPSylvester`.
+`SDPEval[A, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum_i a_i y_i b_i + (a_i y_i b_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
 
 This is a convenient replacement for [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval) in which the list `y` can be used directly.
 
-See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval), [SDPSylvesterDualEval](#sdpsylvesterdualeval).
+See also:
+[SDPSylvesterPrimalEval](#sdpsylvesterprimaleval),
+[SDPSylvesterDualEval](#sdpsylvesterdualeval).
 
 ### SDPSylvesterPrimalEval
 
-`SDPSylvesterPrimalEval[a, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum\_i a\_i y\_i b\_i + (a\_i y\_i b\_i)^T](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_334.png) in an `SDPSylvester`.
+`SDPSylvesterPrimalEval[a, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum_i a_i y_i b_i + (a_i y_i b_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
 
 See [SDPSylvesterEval](#sdpsylvestereval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
-See also: [SDPSylvesterDualEval](#sdpsylvesterdualeval), [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval).
+See also:
+[SDPSylvesterDualEval](#sdpsylvesterdualeval),
+[SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval).
 
 ### SDPSylvesterDualEval
 
-`SDPSylvesterDualEval[A, X]` evaluates the linear function ![A^\* X = \\{ b\_1 X a\_1, \\cdots, b\_n X a\_n \\}](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_335.png) in an `SDPSylvester`.
+`SDPSylvesterDualEval[A, X]` evaluates the linear function ![A^\* X = \\{ b_1 X a_1, \\cdots, b_n X a_n \\}](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X%20%3D%20%5C%7B%20b_1%20X%20a_1%2C%20%5Ccdots%2C%20b_n%20X%20a_n%20%5C%7D&mode=inline) in an `SDPSylvester`.
 
 For example
 
-See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval), [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval).
+See also:
+[SDPSylvesterPrimalEval](#sdpsylvesterprimaleval),
+[SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval).
 
 ### SDPSylvesterSylvesterEval
 
-`SDPSylvesterEval[a, W]` returns a matrix representation of the Sylvester mapping ![A^\* (W A (\\Delta\_y) W)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_336.png) when applied to the scaling `W`.
+`SDPSylvesterEval[a, W]` returns a matrix
+representation of the Sylvester mapping ![A^\* (W A (\\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
+when applied to the scaling `W`.
 
-`SDPSylvesterEval[a, Wl, Wr]` returns a matrix representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_337.png) when applied to the left- and right-scalings `Wl` and `Wr`.
+`SDPSylvesterEval[a, Wl, Wr]` returns a matrix
+representation of the Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
+when applied to the left- and right-scalings `Wl` and `Wr`.
 
-See also: [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval), [SDPSylvesterDualEval](#sdpsylvesterdualeval).
+See also:
+[SDPSylvesterPrimalEval](#sdpsylvesterprimaleval),
+[SDPSylvesterDualEval](#sdpsylvesterdualeval).
 
-PrimalDual
-----------
+## PrimalDual
 
-`PrimalDual` provides an algorithm for solving a pair of primal-dual semidefinite programs in the form ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_338.png) ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_339.png) where ![X](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_340.png) is the primal variable and ![(y,S)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_341.png) are the dual variables.
+`PrimalDual` provides an algorithm for solving a pair of primal-dual
+semidefinite programs in the form
 
-The algorithm is parametrized and users should provide their own means of evaluating the mappings ![A](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_342.png), ![A^\*](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_343.png) and also the Sylvester mapping ![](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_344.png) used to solve the least-square subproblem.
+<div style="display:block;">
 
-Users can develop custom algorithms that can take advantage of special structure, as done for instance in [NCSDP](#ncsdp).
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Ctag%7BPrimal%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmin_%7BX%7D%20%5Cquad%20%26%20%5Coperatorname%7Btrace%7D%28c%20X%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5E%2A%28X%29%20%3D%20b%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20X%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
-The algorithm constructs a feasible solution using the Self-Dual Embedding of \[\].
+</div>
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Ctag%7BDual%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%28y%29%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+
+</div>
+
+where ![X](https://render.githubusercontent.com/render/math?math=X&mode=inline) is the primal variable and ![(y,S)](https://render.githubusercontent.com/render/math?math=%28y%2CS%29&mode=inline) are the dual variables.
+
+The algorithm is parametrized and users should provide their own means
+of evaluating the mappings ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline), ![A^\*](https://render.githubusercontent.com/render/math?math=A%5E%2A&mode=inline) and also the Sylvester mapping
+
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=A%5E%2A%28W_l%20A%28%5CDelta_y%29%20W_r%29)
+
+</div>
+
+used to solve the least-square subproblem.
+
+Users can develop custom algorithms that can take advantage of special
+structure, as done for instance in [NCSDP](#ncsdp).
+
+The algorithm constructs a feasible solution using the Self-Dual
+Embedding of \[\].
 
 Members are:
 
@@ -6370,68 +8002,91 @@ Members are:
 
 ### PrimalDual
 
-`PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c]` solves the semidefinite program using a primal dual method.
+`PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c]`
+solves the semidefinite program using a primal dual method.
 
-`PrimalEval` should return the primal mapping ![A^\*(X)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_345.png) when applied to the current primal variable `X` as in `PrimalEval @@ X`.
+`PrimalEval` should return the primal mapping ![A^\*(X)](https://render.githubusercontent.com/render/math?math=A%5E%2A%28X%29&mode=inline) when applied to
+the current primal variable `X` as in `PrimalEval @@ X`.
 
-`DualEval` should return the dual mapping ![A(y)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_346.png) when applied to the current dual variable `y` as in `DualEval @@ y`.
+`DualEval` should return the dual mapping ![A(y)](https://render.githubusercontent.com/render/math?math=A%28y%29&mode=inline) when applied to the
+current dual variable `y` as in `DualEval @@ y`.
 
-`SylvesterVecEval` should return a matrix representation of the Sylvester mapping ![A^\* (W\_l A (\\Delta\_y) W\_r)](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_347.png) when applied to the left- and right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
+`SylvesterVecEval` should return a matrix representation of the
+Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline) when applied to the left- and
+right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
 
 `PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c,options]` uses `options`.
 
 The following `options` can be given:
 
--   `Method` (`PredictorCorrector`): choice of method for updating duality gap; possible options are `ShortStep`, `LongStep` and `PredictorCorrector`;
--   `SearchDirection` (`NT`): choice of search direction to use; possible options are `NT` for Nesterov-Todd, `KSH` for HRVM/KSH/M, `KSHDual` for dual HRVM/KSH/M;
+-   `Method` (`PredictorCorrector`): choice of method for updating
+    duality gap; possible options are `ShortStep`, `LongStep` and
+    `PredictorCorrector`;
+
+-   `SearchDirection` (`NT`): choice of search direction to use;
+    possible options are `NT` for Nesterov-Todd, `KSH` for HRVM/KSH/M,
+    `KSHDual` for dual HRVM/KSH/M;
 
 -   `FeasibilityTol` (10^-3): tolerance used to assess feasibility;
+
 -   `GapTol` (10^-9): tolerance used to assess optimality;
+
 -   `MaxIter` (250): maximum number of iterations allowed;
 
--   `SparseWeights` (`True`): whether weights should be converted to a `SparseArray`;
--   `RationalizeIterates` (`False`): whether to rationalize iterates in an attempt to construct a rational solution;
--   `SymmetricVariables` (`{}`): list of index of dual variables to be considered symmetric.
+-   `SparseWeights` (`True`): whether weights should be converted to a
+    `SparseArray`;
 
--   `ScaleHessian` (`True`): whether to scale the least-squares subproblem coefficient matrix;
+-   `RationalizeIterates` (`False`): whether to rationalize iterates in an attempt to construct a rational solution;
+
+-   `SymmetricVariables` (`{}`): list of index of dual variables to be
+    considered symmetric.
+
+-   `ScaleHessian` (`True`): whether to scale the least-squares subproblem
+    coefficient matrix;
 
 -   `PrintSummary` (`True`): whether to print summary information;
+
 -   `PrintIterations` (`True`): whether to print progrees at each iteration;
+
 -   `DebugLevel` (0): whether to print debug information;
 
 -   `Profiling` (`False`): whether to print messages with detailed timing of steps.
 
-Work in Progress
-================
+# Work in Progress
 
-Sections in this chapter describe experimental packages which are still under development.
+Sections in this chapter describe experimental packages which are
+still under development.
 
-NCPolySOS
----------
+## NCPolySOS
 
 Members are:
 
 -   [NCPolySOS](#ncpolysos-1)
--   [NCPolySOSToSDP](#ncpolysostosdp) (\#NCPolySOSToSDP)
+-   [NCPolySOSToSDP](#ncpolysostosdp) (#NCPolySOSToSDP)
 
 ### NCPolySOS
 
-`NCPolySOS[p, var]` returns an `NCPoly` with symbolic coefficients on the variable `var` corresponding to a possible Gram representation of the polynomial `p`.
+`NCPolySOS[p, var]` returns an `NCPoly` with symbolic coefficients on
+the variable `var` corresponding to a possible Gram representation of
+the polynomial `p`.
 
-`NCPolySOS` uses [NCPolyQuadraticChipset](#ncpolyquadraticchipset) to generate a sparse Gram representation.
+`NCPolySOS` uses [NCPolyQuadraticChipset](#ncpolyquadraticchipset) to
+generate a sparse Gram representation.
 
 `NCPolySOS[p]` uses `q` as default symbol.
 
-See also: [NCPolySOSToSDP](#ncpolysostosdp), [NCPolyQuadraticChipset](#ncpolyquadraticchipset)
+See also:
+[NCPolySOSToSDP](#ncpolysostosdp),
+[NCPolyQuadraticChipset](#ncpolyquadraticchipset)
 
 ### NCPolySOSToSDP
 
 `NCPolySOSToSDP[G, options]`
 
-See also: [NCPolySOS](#ncpolysos-1).
+See also:
+[NCPolySOS](#ncpolysos-1).
 
-NCRational
-----------
+## NCRational
 
 This package contains functionality to convert an nc rational expression into a descriptor representation.
 
@@ -6450,23 +8105,35 @@ which returns
 Members are:
 
 -   [NCRational](#ncrational-1)
+
 -   [NCToNCRational](#nctoncrational)
+
 -   [NCRationalToNC](#ncrationaltonc)
+
 -   [NCRationalToCanonical](#ncrationaltocanonical)
+
 -   [CanonicalToNCRational](#canonicaltoncrational)
 
 -   [NCROrder](#ncrorder)
+
 -   [NCRLinearQ](#ncrlinearq)
+
 -   [NCRStrictlyProperQ](#ncrstrictlyproperq)
 
 -   [NCRPlus](#ncrplus)
+
 -   [NCRTimes](#ncrtimes)
+
 -   [NCRTranspose](#ncrtranspose)
+
 -   [NCRInverse](#ncrinverse)
 
 -   [NCRControllableSubspace](#ncrcontrollablesubspace)
+
 -   [NCRControllableRealization](#ncrcontrollablerealization)
+
 -   [NCRObservableRealization](#ncrobservablerealization)
+
 -   [NCRMinimalRealization](#ncrminimalrealization)
 
 ### State-space realizations for NC rationals
@@ -6541,14 +8208,14 @@ NCRObservableRealization::usage
 
 NCRMinimalRealization::usage
 
-NCRealization
--------------
+## NCRealization
 
 **WARNING: OBSOLETE PACKAGE WILL BE REPLACED BY NCRational**
 
-The package **NCRealization** implements an algorithm due to N. Slinglend for producing minimal realizations of nc rational functions in many nc variables. See "Toward Making LMIs Automatically".
+The package **NCRealization** implements an algorithm due to N. Slinglend for producing minimal
+realizations of nc rational functions in many nc variables. See “Toward Making LMIs Automatically”.
 
-It actually computes formulas similar to those used in the paper "Noncommutative Convexity Arises From Linear Matrix Inequalities" by J William Helton, Scott A. McCullough, and Victor Vinnikov. In particular, there are functions for calculating (symmetric) minimal descriptor realizations of nc (symmetric) rational functions, and determinantal representations of polynomials.
+It actually computes formulas similar to those used in the paper “Noncommutative Convexity Arises From Linear Matrix Inequalities” by J William Helton, Scott A. McCullough, and Victor Vinnikov. In particular, there are functions for calculating (symmetric) minimal descriptor realizations of nc (symmetric) rational functions, and determinantal representations of polynomials.
 
 Members are:
 
@@ -6570,13 +8237,15 @@ Members are:
 
 ### NCDescriptorRealization
 
-`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that ![C G^{-1} B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_348.png) is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] === RationalExpression`.
+`NCDescriptorRealization[RationalExpression,UnknownVariables]` returns a list of 3 matrices `{C,G,B}` such that ![C G^{-1} B](https://render.githubusercontent.com/render/math?math=C%20G%5E%7B-1%7D%20B&mode=inline) is the given `RationalExpression`. i.e. `NCDot[C,NCInverse[G],B] === RationalExpression`.
 
-`C` and `B` do not contain any `UnknownsVariables` and `G` has linear entries in the `UnknownVariables`.
+`C` and `B` do not contain any `UnknownsVariables` and `G` has linear entries
+in the `UnknownVariables`.
 
 ### NCDeterminantalRepresentationReciprocal
 
-`NCDeterminantalRepresentationReciprocal[Polynomial,Unknowns]` returns a linear pencil matrix whose determinant equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algorithm: find a minimal descriptor realization of `inv[Polynomial]`, so `Polynomial` must be nonzero at the origin.
+`NCDeterminantalRepresentationReciprocal[Polynomial,Unknowns]` returns a linear pencil matrix whose determinant
+equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algorithm: find a minimal descriptor realization of `inv[Polynomial]`, so `Polynomial` must be nonzero at the origin.
 
 ### NCMatrixDescriptorRealization
 
@@ -6592,7 +8261,7 @@ Members are:
 
 ### NCSymmetricDeterminantalRepresentationDirect
 
-`NCSymmetricDeterminantalRepresentationDirect[SymmetricPolynomial,Unknowns]` returns a linear pencil matrix whose determinant equals `Constant * CommuteEverything[SymmetricPolynomial]`. This uses the direct algorithm: Find a realization of 1 - NCSymmetricPolynomial,...
+`NCSymmetricDeterminantalRepresentationDirect[SymmetricPolynomial,Unknowns]` returns a linear pencil matrix whose determinant equals `Constant * CommuteEverything[SymmetricPolynomial]`. This uses the direct algorithm: Find a realization of 1 - NCSymmetricPolynomial,…
 
 ### NCSymmetricDeterminantalRepresentationReciprocal
 
@@ -6602,7 +8271,7 @@ Members are:
 
 `NCSymmetrizeMinimalDescriptorRealization[{C,G,B},Unknowns]` symmetrizes the minimal realization `{C,G,B}` (such as output from `NCMinimalRealization`) and outputs `{Ctilda,Gtilda}` corresponding to the realization `{Ctilda, Gtilda,Transpose[Ctilda]}`.
 
-**WARNING:** May produces errors if the realization doesn't correspond to a symmetric rational function.
+**WARNING:** May produces errors if the realization doesn’t correspond to a symmetric rational function.
 
 ### NonCommutativeLift
 
@@ -6614,7 +8283,7 @@ Members are:
 
 ### TestDescriptorRealization
 
-`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals ![C G^{-1} B](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_349.png) by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
+`TestDescriptorRealization[Rat,{C,G,B},Unknowns]` checks if `Rat` equals ![C G^{-1} B](https://render.githubusercontent.com/render/math?math=C%20G%5E%7B-1%7D%20B&mode=inline) by substituting random 2-by-2 matrices in for the unknowns. `TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]` can be used to specify the `NumberOfTests`, the default being 5.
 
 ### PinnedQ
 
@@ -6624,24 +8293,39 @@ Members are:
 
 `PinningSpace[Pencil_,Unknowns_]` returns a matrix whose columns span the pinning space of `Pencil`. Generally, either an empty matrix or a d-by-1 matrix (vector).
 
-References
-==========
+# References
 
-[1] The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
+[^1]: The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
 
-[2] Contrary to what happens with symbolic inversion of matrices with commutative entries, there exist multiple formulas for the symbolic inverse of a matrix with noncommutative entries. Furthermore, it may be possible that none of such formulas is "correct". Indeed, it is easy to construct a matrix `m` with block structure as shown that is invertible but for which none of the blocks `a`, `b`, `c`, and `d` are invertible. In this case no *correct* formula exists for the calculation of the inverse of `m`.
+[^2]: Contrary to what happens with symbolic inversion of matrices
+    with commutative entries, there exist multiple formulas for the
+    symbolic inverse of a matrix with noncommutative entries. Furthermore,
+    it may be possible that none of such formulas is “correct”. Indeed, it
+    is easy to construct a matrix `m` with block structure as shown that
+    is invertible but for which none of the blocks `a`, `b`, `c`, and `d`
+    are invertible. In this case no *correct* formula exists for the
+    calculation of the inverse of `m`.
 
-[3] The reason is that making an operator `Flat` is a convenience that comes with a price: lack of control over execution and evaluation. Since `NCAlgebra` has to operate at a very low level this lack of control over evaluation is fatal. Indeed, making `NonCommutativeMultiply` have an attribute `Flat` will throw Mathematica into infinite loops in seemingly trivial noncommutative expression. Hey, email us if you find a way around that :)
+[^3]: This is in contrast with the commutative ![x^4](https://render.githubusercontent.com/render/math?math=x%5E4&mode=inline) which is
+    convex everywhere. See \[@camino:MIS:2003\] for details.
 
-[4] By the way, I find that behavior of Mathematica's `Module` questionable, since something like
+[^4]: The reason is that making an operator `Flat` is a
+    convenience that comes with a price: lack of control over execution
+    and evaluation. Since `NCAlgebra` has to operate at a very low level
+    this lack of control over evaluation is fatal. Indeed, making
+    `NonCommutativeMultiply` have an attribute `Flat` will throw
+    Mathematica into infinite loops in seemingly trivial noncommutative
+    expression. Hey, email us if you find a way around that :)
 
-    F[exp_] := Module[{aa, bb},
-      SetNonCommutative[aa, bb];
-      aa**bb
-    ]
+[^5]: By the way, I find that behavior of Mathematica’s `Module`
+    questionable, since something like
 
-would not fail to treat `aa` and `bb` locally. It is their appearance in a rule that triggers the mostly odd behavior.
+        F[exp_] := Module[{aa, bb},
+          SetNonCommutative[aa, bb];
+          aa**bb
+        ]
 
-[5] Formerly `MatMult[m1,m2]`.
+    would not fail to treat `aa` and `bb` locally. It is their
+    appearance in a rule that triggers the mostly odd behavior.
 
-[6] This is in contrast with the commutative ![x^4](http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/5.0.4/eqn_48.png) which is convex everywhere. See \[@camino:MIS:2003\] for details.
+[^6]: Formerly `MatMult[m1,m2]`.

@@ -21,6 +21,7 @@ Clear[LUDecompositionWithPartialPivoting,
       LowerTriangularSolve,
       LUInverse,
       GetLUMatrices, GetLDUMatrices,
+      GetFullLUMatrices, GetFullLDUMatrices,
       GetDiagonal,
       LUPartialPivoting, LUCompletePivoting,
       LURowReduce,
@@ -129,6 +130,11 @@ Begin[ "`Private`" ]
   ];
 
   
+  (* Get Full LU Matrices *)
+
+  GetFullLUMatrices[s___] := Normal[GetLUMatrices[s]];
+  GetFullLDUMatrices[s___] := Normal[GetLDUMatrices[s]];
+		   
   (* GetDiagonal *)
   
   GetDiagonal[m_?SquareMatrixQ] := Tr[m, List];

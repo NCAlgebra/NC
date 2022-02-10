@@ -9,6 +9,7 @@ from pandocfilters import toJSONFilter, Str, Link
 import sys, re
 
 def filter(key, value, format, meta):
+
     if key == 'Link':
         link = value[2][0]
         if link[0] == '#' and link[1:] in links:
@@ -17,6 +18,13 @@ def filter(key, value, format, meta):
             value[2][0] = '#' + links[link[1:]]
             return Link(value[0], value[1], value[2])
 
+    elif key == 'RawInline':
+        text = value[1]
+        if text == '\TeX':
+            return Str('TeX')
+        elif text == '\LaTeX':
+            return Str('LaTeX')
+        
 if __name__ == "__main__":
 
     links = {}

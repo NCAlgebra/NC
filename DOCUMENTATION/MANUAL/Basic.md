@@ -3,7 +3,7 @@
 This chapter provides a gentle introduction to some of the commands
 available in `NCAlgebra`. 
 
-If you want a living version of this chapter just run the notebook
+If you want a living analog of this chapter just run the notebook
 `NC/DEMOS/1_MostBasicCommands.nb`.
 
 Before you can use `NCAlgebra` you first load it with the following
@@ -20,7 +20,7 @@ noncommutative by default and all others are commutative by
 default. For example:
 
     a**b-b**a
-	
+
 results in
 
     a**b-b**a
@@ -38,11 +38,11 @@ expression to behave as if they were commutative and returns the
 resulting commutative expression. For example:
 
     CommuteEverything[a**b-b**a]
-	
+
 results in `0`. The command
 
 	EndCommuteEverything[]
-	
+
 restores the original noncommutative behavior.
 
 One can make any symbol behave as noncommutative
@@ -50,16 +50,16 @@ using `SetNonCommutative`. For example:
 
     SetNonCommutative[A,B]
     A**B-B**A
-	
+
 results in:
-	
+
     A**B-B**A
-	
+
 Likewise, symbols can be made commutative using `SetCommutative`. For example:
 
 	SetNonCommutative[A] 
 	SetCommutative[B]
-    A**B-B**A
+	A**B-B**A
 
 results in `0`. `SNC` is an alias for `SetNonCommutative`. So, `SNC`
 can be typed rather than the longer `SetNonCommutative`:
@@ -76,7 +76,7 @@ One can check whether a given symbol is commutative or not using
 
 	CommutativeQ[B]
 	NonCommutativeQ[a]
-	
+
 both return `True`.
 
 ## Inverses, Transposes and Adjoints
@@ -91,11 +91,11 @@ For example:
 
     inv[a]**a
     inv[a**b]**a**b
-	
+
 both lead to `Id = 1` and
-	
-	a**b**inv[b]
-	
+
+    a**b**inv[b]
+
 results in `a`.
 
 **Version 5:** `inv` no longer automatically distributes over
@@ -109,7 +109,7 @@ returns `inv[b]**inv[a]`. Conversely
 
 	SetOptions[inv, Distribute -> False]
 	inv[a**b]
-	
+
 returns `inv[a**b]`.
 
 `tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
@@ -117,11 +117,11 @@ adjoint of symbol `x`. Like `inv`, the properties of transposes and
 adjoints that everyone uses constantly are built-in. For example:
 
     tp[a**b]
-	
+
 leads to 
 
     tp[b]**tp[a]
-	
+
 and
 
     tp[a+b]
@@ -138,7 +138,7 @@ Similar properties hold to `aj`. Moreover
 
 	aj[tp[a]]
 	tp[aj[a]]
-	
+
 return `co[a]` where `co` stands for complex-conjugate. 
 
 **Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates
@@ -155,11 +155,11 @@ substitutions. The Mathematica substitute commands, e.g. `ReplaceAll`
 so you must use our `NC` versions of these commands. For example:
 
     NCReplaceAll[x**a**b,a**b->c]
-	
+
 results in
 
     x**c
-	
+
 and
 
     NCReplaceAll[tp[b**a]+b**a,b**a->c]
@@ -194,7 +194,7 @@ and
 that results in
 
 	a
-	
+
 Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
 `NCReplaceList`, which are analogous to the standard `ReplaceAll`
 (`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
@@ -221,7 +221,7 @@ Conversely, one can collect noncommutative terms involving same powers
 of a symbol using `NCCollect`. For example:
 
     NCCollect[a**x+b**x,x]
-	
+
 recovers
 
     (a+b)**x
@@ -231,7 +231,7 @@ than one variable. For example:
 
 	expr = a**x+b**x+y**c+y**d+a**x**y+b**x**y
 	NCCollect[expr, {x}]
-	
+
 returns
 
 	y**c+y**d+(a+b)**x**(1+y)
@@ -239,7 +239,7 @@ returns
 and 
 
 	NCCollect[expr, {x, y}]
-	
+
 returns
 
 	(a+b)**x+y**(c+d)+(a+b)**x**y
@@ -251,15 +251,15 @@ The list of variables accepts `tp`, `aj` and
 `inv`, and
 
 	NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]
-	
+
 returns
-	
+
     z+tp[x]**(a+b)**x
 
 Alternatively one could use
 
 	NCCollectSymmetric[tp[x]**a**x+tp[x]**b**x+z,{x}]
-	
+
 to obtain the same result. A similar command,
 [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), works with self-adjoint
 variables.
@@ -268,7 +268,7 @@ There is also a stronger version of collect called `NCStrongCollect`.
 `NCStrongCollect` does not group terms by degree. For instance:
 
 	NCStrongCollect[expr, {x, y}]
-	
+
 produces
 
 	y**(c+d)+(a+b)**x**(1+y)
@@ -344,13 +344,13 @@ storing and calcuating with nc polynomials. Those packages are
 * [`NCPoly`](#PackageNCPoly): which handles polynomials with
   noncommutative coefficients, and
 * [`NCPolynomial`](#PackageNCPolynomial): which handles polynomials
-  with noncommutative coefficients.
+  with real coefficients.
 
 For example:
 
     1 + y**x**y - A x
 
-is a polynomial with real coefficients in $x$ and $y$, whereas
+is a polynomial with commutative coefficients in $x$ and $y$, whereas
 
     a**y**b**x**c**y - A x**d
 
@@ -380,15 +380,15 @@ noncommutative rationals using a predefined set of rules. For example:
 
     expr = 1+inv[d]**c**inv[S-a]**b-inv[d]**c**inv[S-a+b**inv[d]**c]**b \
            -inv[d]**c**inv[S-a+b**inv[d]**c]**b**inv[d]**c**inv[S-a]**b
-	NCSimplifyRational[expr]
-	
+    NCSimplifyRational[expr]
+
 leads to `1`. Of course the great challenge here is to reveal well
 known identities that can lead to simplification. For example, the two
 expressions:
 
 	expr1 = a**inv[1+b**a]
 	expr2 = inv[1+a**b]**a
-	
+
 and one can use `NCSimplifyRational` to test such equivalence by
 evaluating
 
@@ -397,7 +397,7 @@ evaluating
 which results in `0` or 
 
 	NCSimplifyRational[expr1**inv[expr2]]
-	
+
 which results in `1`. `NCSimplifyRational` works by transforming nc
 rationals. For example, one can verify that
 
@@ -446,11 +446,7 @@ returns
 
 	h**q**x + x**q*h - y**h - k**x
 
-The command `NCGrad` calculate nc *gradients*[^grad].
-
-[^grad]: The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
-
-For example, if:
+A further example, if:
 
     expr = x**a**x**b + x**c**x**d
 
@@ -462,7 +458,11 @@ which returns
 
     h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
 
-and
+The command `NCGrad` calculates nc *gradients*[^grad].
+
+[^grad]: The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
+
+For example:
 
     NCGrad[expr, x]
 
@@ -470,7 +470,7 @@ returns the nc gradient
 
     a**x**b + b**x**a + c**x**d + d**x**c
 
-For example, if:
+A further example, if:
 
     expr = x**a**x**b + x**c**y**d
 
@@ -499,7 +499,7 @@ $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$
 
 The Mathematica command `MatrixForm` output pretty
 matrices. `MatrixForm[m]` prints `m` in a form similar to the above
-matrix.
+matrix. Beware when copying and pasting parts of an expression rendered by`MatrixForm` because it may not execute correctly. If in doubt, use `FullForm` to reveal the contents of the expression.
 
 The experienced matrix analyst should always remember that the
 Mathematica convention for handling vectors is tricky.
@@ -509,6 +509,8 @@ Mathematica convention for handling vectors is tricky.
 - `{1, 2, 4}` is a *vector* but **not** a *matrix*. Indeed whether it
   is a row or column vector depends on the context. We advise not to
   use *vectors*.
+
+### Inverses, products, adjoints, etc {#BasicMatrices:Inverses}
 
 A useful command is [`NCInverse`](#NCInverse), which is akin to
 Mathematica's `Inverse` command and produces a block-matrix inverse
@@ -520,6 +522,16 @@ returns
 
 	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
 	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+
+or, using `MatrixForm`
+
+```NCInverse[m] // MatrixForm
+NCInverse[m] // MatrixForm
+```
+
+returns
+
+$\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}$
 
 Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
 calculation.
@@ -556,7 +568,7 @@ operators `tp`, `aj`, and `co` now operate directly over
 matrices. That is
 
 	aj[{{a,tp[b]},{co[c],aj[d]}}]
-	
+
 returns
 
 	{{aj[a],tp[c]},{co[b],d}}
@@ -564,6 +576,10 @@ returns
 In previous versions one had to use the special commands `tpMat`,
 `ajMat`, and `coMat`. Those are still supported for backward
 compatibility.
+
+See [advanced matrix commands](#AdvancedMatrices) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#NCMatrixExpand), [`NCMatrixReplace`](#NCMatrixReplace), [`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
+
+### LU Decomposition {#BasicMatrices:LUDecomposition}
 
 Behind `NCInverse` there are a host of linear algebra algorithms which
 are available in the package:
@@ -581,62 +597,76 @@ can be used as
 
 	m = {{a, b}, {c, d}}
 	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
-	
+
 which returns
 
 	lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
 	p = {1, 2}
 
+Using `MatrixForm`:
+$$\begin{bmatrix} a & b \\ c a^{-1} & d - c a^{-1} b \end{bmatrix}$$
 The list `p` encodes the sequence of permutations calculated during
 the execution of the algorithm. The matrix `lu` contains the factors
-$L$ and $U$. These can be recovered using
+$L$ and $U$ in the way most common to numerical analysts. These factors can be recovered using
 
-	{l, u} = GetLUMatrices[lu]
-	
+	{l, u} = GetFullLUMatrices[lu]
+
 resulting in this case in
 
 	l = {{1, 0}, {c**inv[a], 1}}
 	u = {{a, b}, {0, d - c**inv[a]**b}}
 
+Using `MatrixForm`:
+$$
+L = \begin{bmatrix} 1 & 0 \\ c a^{-1} & 1 \end{bmatrix}, \qquad
+U = \begin{bmatrix} a & b \\ 0 & d - c a^{-1} b \end{bmatrix}
+$$
 To verify that $M = L U$ input
 
 	m - NCDot[l, u]
-	
-which should returns a zero matrix.
 
-**Note:** for efficiency the factors `l` and `u` are returned as
-  `SparseArrays`. Use `Normal[u]` and `Normal[l]` to convert the
-  `SparseArrays` `l` and `u` to regular matrices if desired.
-  
-The default pivoting strategy prioritizes simpler expressions. For
+which should return a zero matrix.
+
+**Note:** if you are looking for efficiency, the function [`GetLUMatrices`](#GetLUMatrices) (also [`GetLDUMatrices`](#GetLDUMatrices)) returns the factors `l` and `u`  as  `SparseArrays`.
+
+The default pivoting strategy prioritizes pivoting on simpler expressions. For
 instance,
 
 	m = {{a, b}, {1, d}}
 	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
-	{l, u} = GetLUMatrices[lu]
-	
+	{l, u} = GetFullLUMatrices[lu]
+
 results in the factors
 
 	l = {{1, 0}, {a, 1}}
 	u = {{1, d}, {0, b - a**d}}
-	
+
 and a permutation list 
 
 	p = {2, 1}
-	
+
 which indicates that the number `1`, appearing in the second row, was
 used as the pivot rather than the symbol `a` appearing on the first
 row. Because of the permutation, to verify that $P M = L U$ input
 
     m[[p]] - NCDot[l, u]
-	
-which should return a zero matrix. Note that the permutation matrix
-$P$ is never constructed. Instead, the rows of $M$ are permuted using
-Mathematica's `Part` (`[[]]`). Likewise
+
+which should return a zero matrix. Note that in the above example the permutation matrix
+$P$ is never constructed. Instead, the rows of $M$ are directly permuted using
+Mathematica's `Part` (`[[]]`) command. Of course, if one prefers to work with permutation matrices, they can be easily obtained by permuting the rows of the identity matrix as in the following example
+
+    p = {2, 1, 3}
+	IdentityMatrix[3][[p]] // MatrixForm
+
+to produce
+$$
+\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+Likewise
 
 	m = {{a + b, b}, {c, d}}
 	{lu, p} = NCLUDecompositionWithPartialPivoting[m]
-	{l, u} = GetLUMatrices[lu]
+	{l, u} = GetFullLUMatrices[lu]
 
 returns
 
@@ -650,6 +680,8 @@ of `a + b`.
 The function `NCLUDecompositionWithPartialPivoting` is the one that is
 used by `NCInverse`.
 
+### LU Decomposition with complete pivoting {#BasicMatrices:LUDecompositionWithCompletePivoting}
+
 Another factorization algorithm is
 [`NCLUDecompositionWithCompletePivoting`](#NCLUDecompositionWithCompletePivoting),
 which can be used to calculate the symbolic rank of nc matrices. For
@@ -657,49 +689,55 @@ example
 
 	m = {{2 a, 2 b}, {a, b}}
 	{lu, p, q, rank} = NCLUDecompositionWithCompletePivoting[m]
-	
+
 returns the *left* and *right* permutation lists
 
 	p = {2, 1}
 	q = {1, 2}
-	
-and `rank` equal to `1`. The $L$ and $U$ factors can be obtained as
+
+and `rank` equal to `1`. Note that `p = {2, 1}` and `q = {1,2}` tell us that the element that was pivoted on was the symbol `a`, which is the first entry of the second row, rather then `2 a`, which is the first entry of the first row, because `a` is *simpler* than `2 a` . The $L$ and $U$ factors can be obtained as
 before using
 
-	{l, u} = GetLUMatrices[lu]
-	
+	{l, u} = GetFullLUMatrices[lu]
+
 to get
 
 	l = {{1, 0}, {2, 1}}
 	u = {{a, b}, {0, 0}}
 
+Using `MatrixForm`:
+$$
+L = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}, \qquad
+U = \begin{bmatrix} a & b \\ 0 & 0 \end{bmatrix}
+$$
 In this case, to verify that $P M Q = L U$ input
 
 	NCDot[l, u] - m[[p, q]]
-	
+
 which should return a zero matrix. As with partial pivoting, the
 permutation matrices $P$ and $Q$ are never constructed. Instead we
-used `Part` (`[[]]`) to permute both columns and rows.
-	
+used `Part` (`[[]]`) to permute both rows and columns.
+
+### LDL Decomposition {#BasicMatrices:LDLDecomposition}	
 Finally [`NCLDLDecomposition`](#NCLDLDecomposition) computes the
 $LDL^T$ decomposition of symmetric symbolic nc matrices. For example
 
 	m = {{a, b}, {b, c}}
 	{ldl, p, s, rank} = NCLDLDecomposition[m]
-	
+
 returns `ldl`, which contain the factors, and
 
 	p = {1, 2}
 	s = {1, 1}
 	rank = 2
-	
+
 The list `p` encodes left and right permutations, `s` is a list
 specifying the size of the diagonal blocks (entries can be either 1 or
 2). The factors can be obtained using
 [`GetLDUMatrices`](#GetLDUMatrices) as in
 
-	{l, d, u} = GetLDUMatrices[ldl, s]
-	
+	{l, d, u} = GetFullLDUMatrices[ldl, s]
+
 which in this case returns
 
 	l = {{1, 0}, {b**inv[a], 1}}
@@ -713,10 +751,240 @@ Because $P M P^T = L D L^T$,
 is the zero matrix and $U = L^T$.
 
 `NCLDLDecomposition` works only on symmetric matrices and, whenever
-possible, will make assumptions on variables so that it can run
-successfully.
+possible, will make invertibility and symmetry assumptions on variables so that it can run
+successfully. If not possible it will warn the users.
 
-**WARNING:** Versions prior to 5 contained a `NCLDUDecomposition` with
-a slightly different syntax which, while functional, is being
-deprecated in **Version 5**.
+**WARNING:** Versions prior to 5 contained the command
+`NCLDUDecomposition` which is being
+deprecated in **Version 5** as its functionality is now provided by
+[`NCLDLDecomposition`](#NCDLDDecomposition), with a slightly different
+syntax.
+
+### Replace with matrices {#ReplaceWithMatrices}
+
+[`NCMatrixReplaceAll`](#NCMatrixReplaceAll) and
+[`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated) are special
+versions of [`NCReplaceAll`](#NCReplaceAll) and
+[`NCReplaceRepeated`](#NCReplaceRepeated) that take extra steps to
+preserve matrix consistency when replacing expressions with nc
+matrices. For example, with
+
+	m1 = {{a, b}, {c, d}}
+	m2 = {{d, 2}, {e, 3}}
+	
+and
+
+    M = {{a11,a12}}
+
+the call
+
+    NCMatrixReplaceRepeated[M, {a11 -> m1, a12 -> m2}]
+	
+produces as a result the matrix 
+
+    {{a, b, d, 2}, {c, d, e, 3}}
+
+or, using `MatrixForm`:
+$$
+\begin{bmatrix} a & b & d & 2 \\ c & d & e & 3 \end{bmatrix}
+$$
+Note how the symbols were treated as block-matrices during the substitution. As a second example, with
+
+    M = {{a11, 0}, {0, a22}}
+
+the command
+
+    NCMatrixReplaceRepeated[M, {a11 -> m1, a22 -> m2}]
+
+produces the matrix
+
+    {{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}
+
+or, using `MatrixForm`:
+
+$\begin{bmatrix} a & b & 0 & 0 \\ c & d & 0 & 0 \\ 0 & 0 & d & 2 \\ 0 & 0 & e & 3 \end{bmatrix}$
+
+in which the `0` blocks were automatically expanded to fit the adjacent block matrices.
+
+Another feature of `NCMatrixReplace` and its variants is its ability to withold evaluation until all matrix substitutions have taken place. For example,
+
+	NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
+	
+produces
+
+	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+	 {e + c**d + d**e, 3 + 2 c + 3 d}}
+
+Finally, `NCMatrixReplace` substitutes `NCInverse` for `inv` so that, for instance, the result of
+
+	rule = {x -> m1, y -> m2, id -> IdentityMatrix[2], z -> {{id,x},{x,id}}}
+	NCMatrixReplaceRepeated[inv[z], rule]
+
+coincides with
+
+	NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
+	
+## Quadratic polynomials, second direction derivatives and convexity {#Quadratic}
+
+The closest related demo to the material in this section is
+`NC/DEMOS/NCConvexity.nb`.
+
+When working with nc quadratics it is useful to be able to "factor" the
+quadratic into the following form
+$$
+	q(x) = c + s(x) + l(x) M r(x)
+$$
+where $s$ is linear $x$ and $l$ and $r$ are vectors and $M$ is a
+matrix. Load the package
+
+	<< NCQuadratic`
+
+and use the command
+[`NCToNCQuadratic`](#NCToNCQuadratic) to factor an nc polynomial into the the above form:
+
+	vars = {x, y};
+	expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
+	{const, lin, left, middle, right} = NCToNCQuadratic[expr, vars];
+
+which returns
+
+	left = {tp[x],tp[y]}
+	right = {y, x**d}
+	middle = {{a,b}, {tp[b],c}}
+	
+and zero `const` and `lin`. The format for the linear part `lin` will
+be discussed lated in Section [Linear](#Linear). Note that
+coefficients of an nc quadratic may also appear on the left and right
+vectors, as `d` did in the above example. Conversely,
+[`NCQuadraticToNC`](#NCQuadraticToNC) converts a list with factors
+back to an nc expression as in:
+
+	NCQuadraticToNC[{const, lin, left, middle, right}]
+	
+which results in 
+
+	(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
+
+An interesting application is the verification of the domain in which
+an nc rational function is *convex*. This uses the second direction
+derivative, called the Hessian. Take for example the quartic
+
+	expr = x**x**x**x;
+
+and calculate its noncommutative directional *Hessian*
+
+	hes = NCHessian[expr, {x, h}]
+	
+This command returns
+
+	2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+
+which is quadratic in the direction `h`. The decomposition of the
+nc Hessian using `NCToNCQuadratic`
+
+	{const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];
+
+produces
+
+	left = {h, x**h, x**x**h}
+	right = {h**x**x, h**x, h}
+	middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
+
+Note that the middle matrix
+$$
+\begin{bmatrix}
+2 & 2 x & 2 x^2 \\
+0 & 2 & 2 x \\
+0 & 0 & 2
+\end{bmatrix}
+$$
+is not *symmetric*, as one might have expected. The command
+[`NCQuadraticMakeSymmetric`](#NCQuadraticMakeSymmetric) can fix that
+and produce a symmetric decomposition. For the above example
+
+	{const, lin, sleft, smiddle, sright} = 
+	  NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
+	                           SymmetricVariables -> {x, h}]
+
+results in
+
+	sleft = {x**x**h, x**h, h}
+	sright = {h**x**x, h**x, h}
+	middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
+
+in which `middle` is the symmetric matrix
+$$
+\begin{bmatrix}
+0 & 0 & 2 \\
+0 & 2 & 2 x \\
+2 & 2 x & 2 x^2
+\end{bmatrix}
+$$
+Note the argument `SymmetricVariables -> {x,h}` which tells
+`NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
+variables. Because the `middle` matrix is never positive semidefinite
+for any possible value of $x$ the conclusion[^convex] is that the nc quartic
+$x^4$ is *not convex*.
+
+[^convex]: This is in contrast with the commutative $x^4$ which is
+    convex everywhere. See [@camino:MIS:2003] for details.
+
+The production of such symmetric quadratic decompositions is automated
+by the convenience command
+[`NCMatrixOfQuadratic`](#NCMatrixOfQuadratic). Verify that
+
+	{sleft, smiddle, sright} = NCMatrixOfQuadratic[hes, {h}]
+
+automatically assumes that both `x` and `h` are symmetric variables
+and produces suitable left and right vectors as well as a symmetric
+middle matrix. Now we illustrate the application of such command to
+checking the convexity region of a noncommutative rational function.
+
+If one is interested in checking convexity of nc rationals the package
+[`NCConvexity`](#PackageNCConvexity) has functions that automate the
+whole process, including the calculation of the Hessian and the middle
+matrix, followed by the diagonalization of the middle matrix as
+produced by [`NCLDLDecomposition`](#NCLDLDecomposition).
+
+For example, the commands evaluate the nc Hessian and calculates its
+quadratic decomposition
+
+	expr = (x + b**y)**inv[1 - a**x**a + b**y + y**b]**(x + y**b);
+	{left, middle, right} =	NCMatrixOfQuadratic[NCHessian[expr, {x, h}], {h}];
+
+The resulting middle matrix can be factored using
+
+	{ldl, p, s, rank} = NCLDLDecomposition[middle];
+	{ll, dd, uu} = GetLDUMatrices[ldl, s];
+
+which produces the diagonal factors
+$$
+\begin{bmatrix}
+  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 0
+\end{bmatrix}
+$$
+which indicates the the original nc rational is convex whenever
+$$
+(1 + b y + y b - a x a)^{-1} \succeq 0
+$$
+or, equivalently, whenever
+$$
+1 + b y + y b - a x a \succeq 0
+$$
+The above sequence of calculations is automated by the command
+[`NCConvexityRegion`](#NCConvexityRegion) as in 
+
+	<< NCConvexity`
+	NCConvexityRegion[expr, {x}]
+
+which results in 
+
+	{2 inv[1 + b**y + y**b - a**x**a], 0}
+
+which correspond to the diagonal entries of the LDL decomposition of
+the middle matrix of the nc Hessian.
+
+
 

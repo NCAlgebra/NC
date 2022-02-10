@@ -1,4 +1,4 @@
-# Pretty Output with Notebooks and \TeX {#TeX}
+# Pretty Output with Notebooks and \TeX\ {#TeX}
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/5_PrettyOutput.nb`.
@@ -26,33 +26,34 @@ makes the expression
 	expr = inv[tp[a] + b]
 
 be displayed as
-
-`(tp[a] + b)`$^{-1}$
-
+$$
+(\mathrm{tp[a]} + \mathrm{b})^{-1}
+$$
 Conversely
 
     NCSetOutput[tp -> True, inv -> False];
 
 makes `expr` be displayed as
-
-`inv[a`$^\mathtt{T}$ ` + b]`
+$$
+\mathrm{inv}\mathrm{[}\mathrm{a}^T + \mathrm{b}\mathrm{]}
+$$
 
 The default settings are 
 
     NCSetOutput[tp -> True, inv -> True];
 
 which makes `expr` be displayed as
-
-`(a`$^\mathtt{T}$ ` + b)`$^{-1}$
-
+$$
+(\mathrm{a}^\mathrm{T} + \mathrm{b})^{-1}
+$$
 The complete set of options and their default values are:
 
-* `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` $\bullet$ `y`';
-* `tp` (`True`): If `True` `tp[x]` is displayed as '`x`$^\mathtt{T}$';
-* `inv` (`True`): If `True` `inv[x]` is displayed as '`x`$^{-1}$';
-* `aj` (`True`): If `True` `aj[x]` is displayed as '`x`$^*$';
-* `co` (`True`): If `True` `co[x]` is displayed as '$\bar{\mathtt{x}}$';
-* `rt` (`True`): If `True` `rt[x]` is displayed as '`x`$^{1/2}$'.
+* `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '$\mathrm{x} \bullet \mathrm{y}$';
+* `tp` (`True`): If `True` `tp[x]` is displayed as '$\mathrm{x}^\mathrm{T}$';
+* `inv` (`True`): If `True` `inv[x]` is displayed as '$\mathrm{x}^{-1}$';
+* `aj` (`True`): If `True` `aj[x]` is displayed as '$\mathrm{x}^*$';
+* `co` (`True`): If `True` `co[x]` is displayed as '$\bar{\mathrm{x}}$';
+* `rt` (`True`): If `True` `rt[x]` is displayed as '$\mathrm{x}^{1/2}$'.
 
 The special symbol `All` can be used to set all options to `True` or
 `False`, as in

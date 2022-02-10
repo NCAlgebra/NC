@@ -66,20 +66,31 @@ Begin[ "`Private`" ]
     MapThread[Total[#1 * #2, 3]&, {A, SDPScale[A, Wl, Wr]}];
   *)
 
+  (* MAURICIO BUG: 02/07/2022
+     Depth gives the incorrect dimension when SparseArray are used as coefficients.
+  *)
+  SDPDepth[x_] := Module[
+    {dims},
+    dims = Map[Length[Dimensions[#]] &, x, {2}];
+    Return[
+      3 + If[And @@ Apply[Equal, dims, {1}], dims[[1, 1]], 0]
+    ];
+  ];
+
   (* Dimension checking *)
   SDPCheckDimensions[A_List,B_List,C_List] := Module[ 
     {},
 
     (* Check dimensions *)
-    If[ Depth[A] != 5,
+    If[ SDPDepth[A] != 5,
         Message[SDP::ErrorInDimensions, "Depth of A must be 5"];
     ];
 
-    If[ Depth[B] != 4,
+    If[ SDPDepth[B] != 4,
         Message[SDP::ErrorInDimensions, "Depth of B must be 4"];
     ];
 
-    If[ Depth[C] != 4,
+    If[ SDPDepth[C] != 4,
         Message[SDP::ErrorInDimensions, "Depth of C must be 4"];
     ];
 

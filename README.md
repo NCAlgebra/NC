@@ -1,6 +1,6 @@
-# NCAlgebra - Version 5.0.4
+# NCAlgebra - Version 5.0.5
 
-Thanks for your interest in NCAlgebra. 
+Thanks for your interest in NCAlgebra.
 
 [![donate](http://math.ucsd.edu/~ncalg/DOCUMENTATION/donate_small.png)](https://giveto.ucsd.edu/make-a-gift?id=d86e6857-0c22-4102-ae7a-bfdc9487cb1d)
 
@@ -133,8 +133,6 @@ to load NCAlgebra
 ## Now what?
 
 Extensive documentation is found in the directory [DOCUMENTATION](https://github.com/NCAlgebra/NC/tree/master/DOCUMENTATION).
-
-An [online version of the manual](http://math.ucsd.edu/~ncalg/DOCUMENTATION) is also available.
 
 Basic documentation is provided on the project Wiki:
 

@@ -82,12 +82,14 @@ README.md: $(MANUAL)
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
              --bibliography references.bib \
 	     --filter makeindex.py \
+	     --wrap=preserve \
 	     -o README.tmp.md
-	pandoc README.tmp.md -t markdown_github \
+	pandoc README.tmp.md -t gfm \
 	     --filter github-mangle.py \
-	     --filter tex2img.py \
+	     --filter github-math.py \
+	     --wrap=preserve \
 	     -o README.md
-	rm -f README.tmp.md formula.*
+	rm -f README.tmp.md
 
 index.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
@@ -98,16 +100,18 @@ NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
 	     --biblatex \
              --bibliography references.bib \
+             --variable=biblio-style:alphabetic \
              --variable=geometry:margin=1in \
              --variable=documentclass:book \
 	     --variable=colorlinks \
 	     --variable=linkcolor:MidnightBlue \
+	     --variable=classoption:dvipsnames \
 	     -o NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
 	biber NCDocument
 	$(PDFLATEX) NCDocument.tex
 	$(PDFLATEX) NCDocument.tex
-	rm *.aux *.log *.toc *.out
+	rm -f *.aux *.log *.toc *.out
 
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)

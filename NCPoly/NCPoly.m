@@ -62,8 +62,10 @@ Clear[NCFromDigits,
       NCPadAndMatch,
       NCPolyDivideDigits,
       NCPolyDivideLeading,
+      NCPolyVariables,
       NCPolyDisplay,
-      NCPolyOrderType];
+      NCPolyOrderType,
+      NCPolyPossibleZeroQ];
 
 Clear[NCPolyHankelMatrix,
       NCPolyRealization,
@@ -136,7 +138,12 @@ Begin["`Private`"];
 
   NCPoly /: Power[b_NCPoly, c_Integer?Negative] := 
     inv[Apply[NCPolyProduct, Table[b, {-c}]]];
-  
+
+  (* Reduce and related functions *)
+  Clear[NCPolyPossibleZeroQ];
+  NCPolyPossibleZeroQ[exp_?NumberQ] := PossibleZeroQ[exp];
+  NCPolyPossibleZeroQ[exp_] := PossibleZeroQ[Simplify[exp]];
+    
   Clear[QuotientExpand];
   QuotientExpand[ {c_, l_NCPoly, r_NCPoly}, g_NCPoly ] := c * NCPolyProduct[l, g, r];
   QuotientExpand[ {c_, l_,       r_NCPoly}, g_NCPoly ] := c * l * NCPolyProduct[g, r];
@@ -178,15 +185,17 @@ Begin["`Private`"];
       For [i = 1, i <= m, i++, 
         rii = r[[i]];
         {qi, ri} = NCPolyReduce[rii, Drop[r, {i}], complete, debugLevel];
-        If [ ri =!= 0,
+        If [ NCPolyPossibleZeroQ[ri],
+             (* If zero reminder *)
+             r = Delete[r, i];
+             i--; m--;
+             If[ m <= 1, Break[]; ];
+            ,
+             (* If not zero reminder *)
              If [ ri =!= rii,
                Part[r, i] = ri;
                modified = True;
              ];
-            ,
-             r = Delete[r, i];
-             i--; m--;
-             If[ m <= 1, Break[]; ];
         ];
       ];
     ];
@@ -205,13 +214,13 @@ Begin["`Private`"];
     m = Length[fs];
     For [i = 1, i <= m, i++, 
       {qi, ri} = NCPolyReduce[fs[[i]], gs, complete, debugLevel];
-      If [ ri =!= 0,
-           (* If not zero reminder, update *)
-           Part[fs, i] = ri;
-          ,
+      If [ NCPolyPossibleZeroQ[ri],
            (* If zero reminder, remove *)
            fs = Delete[fs, i];
            i--; m--;
+          ,
+           (* If not zero reminder, update *)
+           Part[fs, i] = ri;
       ];
     ];
 
@@ -226,14 +235,14 @@ Begin["`Private`"];
     If[ m > 1,
       For [i = 1, i <= m, i++, 
         {qi, ri} = NCPolyReduce[r[[i]], Drop[r, {i}], complete, debugLevel];
-        If [ ri =!= 0,
-             (* If not zero reminder, update *)
-             Part[r, i] = ri;
-            ,
+        If [ NCPolyPossibleZeroQ[ri],
              (* If zero reminder, remove *)
              r = Delete[r, i];
              i--; m--;
              If[ m <= 1, Break[]; ];
+            ,
+             (* If not zero reminder, update *)
+             Part[r, i] = ri;
         ];
       ];
     ];
@@ -256,9 +265,10 @@ Begin["`Private`"];
         (* Append to remainder *)
         AppendTo[q, {qi, i} ];
         (* If zero reminder *)
-        If[ r === 0,
+        If[ NCPolyPossibleZeroQ[r],
            (* terminate *)
            If[ debugLevel > 1, Print["no reminder, terminate"]; ];
+           r = 0;
            Break[];
           ,
            (* update dividend, go back to first term and continue *)
@@ -337,15 +347,23 @@ Begin["`Private`"];
   (* NCIntegerReverse *)
    
   (* IntegerReverse fails for 0 *)
+  (*
   Unprotect[IntegerReverse];
   IntegerReverse[0, rest__] := 0;
   Protect[IntegerReverse];
+  *)
+  (* JANUARY 2022:
+     overiding IntegerReverse now puts out an error message even when not called;
+     creating an intermediate symbol should solve the problem
+   *)
+  PrivateIntegerReverse[0, rest__] := 0;
+  PrivateIntegerReverse[args__] := IntegerReverse[args];
               
   NCIntegerReverse[{d_Integer, n_Integer}, base_Integer] :=
-    {d, IntegerReverse[n, base, d]};
+    {d, PrivateIntegerReverse[n, base, d]};
 
   NCIntegerReverse[{d__Integer, n_Integer}, {base__Integer}] :=
-    {d, IntegerReverse[n, Total[{base}], Total[{d}]]};
+    {d, PrivateIntegerReverse[n, Total[{base}], Total[{d}]]};
 
   NCIntegerReverse[dn_List, base_Integer] :=
     Map[NCIntegerReverse[#, base]&, dn] /; Depth[dn] === 3;
@@ -513,10 +531,15 @@ Begin["`Private`"];
 
   (* Display *)
 
+  (*
   NCPolyVariables[p_NCPoly] := 
     Table[Symbol[FromCharacterCode[ToCharacterCode["@"]+i]], 
           {i, NCPolyNumberOfVariables[p]}];    
-  
+  *)
+
+  NCPolyVariables[p_NCPoly] := 
+    Table["X" <> ToString[i], {i, NCPolyNumberOfVariables[p]}];    
+      
   NCPolyDisplay[{p__NCPoly}] := Map[NCPolyDisplay, {p}];
 
   NCPolyDisplay[{p__NCPoly}, args__] := 
@@ -535,7 +558,7 @@ Begin["`Private`"];
                                        NCPolyGetDigits[p] + 1] /. {} -> 1, 1] }
         ]];
 
-  NCPolyDisplay[p_, vars_List:{}, ___] := p;
+  (* NCPolyDisplay[p_, vars_List:{}, ___] := p; *)
 
   NCPolyDisplay[p___] := $Failed;
 
@@ -705,7 +728,7 @@ Begin["`Private`"];
             {lu, p, q, rank} = LUDecompositionWithCompletePivoting[H[[1]]];
             {l, u} = GetLUMatrices[lu];
 
-            If [rank == 0,
+            If [rank === 0,
                 Return[{SparseArray[{},{Length[H],0,0}],
                         SparseArray[{},{0,1}],
                         SparseArray[{},{1,0}],
@@ -751,7 +774,7 @@ Begin["`Private`"];
             {Q,R} = QRDecomposition[Transpose[H[[1]]]];
             rank = MatrixRank[R];
 
-            If [rank == 0,
+            If [rank === 0,
                 Return[{SparseArray[{},{Length[H],0,0}],
                         SparseArray[{},{0,1}],
                         SparseArray[{},{1,0}],

@@ -28,7 +28,7 @@ Clear[aj, tp, rt, inv, co,
       ExpandNonCommutativeMultiply,
       BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative,
-      SNC, NCExpand, NCE];
+      SNC, NCExpand, NCE, NCValueQ];
 
 CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative.";
 CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative.";
@@ -435,16 +435,33 @@ Begin[ "`Private`" ]
   inv/:Options[inv] := Options[$inv];
       
   (* Power *)
-  
+
+  (* MAURICIO BUG: 02/08/2022
+     Igor found a nasty bug in which the power rules where interacting with Slot and
+     the built in function RootApproximant. Introduced PowerCommutativeQ which is basically
+     CommutativeQ that fails for commutative patterns
+   *)
+  PowerCommutativeQ[x_Commutative] ^= True;
+  PowerCommutativeQ[x_Symbol] := CommutativeQ[x];
+  PowerCommutativeQ[a_List] := False /; MatrixQ[a];
+  PowerCommutativeQ[a_SparseArray] := False /; MatrixQ[a];
+
+  PowerCommutativeQ[Subscript[x_,___]] := CommutativeQ[x];
+  PowerCommutativeQ[Slot[___]] := True;
+  PowerCommutativeQ[f_?CommutativeQ[x___]] := Apply[And, Map[CommutativeQ,{x}]];
+  (* The next rule makes sure powers of #1 do not get expanded *)
+  PowerCommutativeQ[f_[x___]] /; NCPatternQ[f] := Apply[And, Map[CommutativeQ,{x}]];
+  PowerCommutativeQ[f_[x___]] := False;
+
+  PowerCommutativeQ[_] := True;
+  PowerNonCommutativeQ[x_] := Not[PowerCommutativeQ[x]];
+
   (* Expand monomial rules *)
   Unprotect[Power];
-  
-  Power[b_?NonCommutativeQ, 1/2] := rt[b];
-
-  Power[b_?NonCommutativeQ, c_Integer?Positive] := 
+  Power[b_?PowerNonCommutativeQ, 1/2] := rt[b];
+  Power[b_?PowerNonCommutativeQ, c_Integer?Positive] :=
     Apply[NonCommutativeMultiply, Table[b, {c}]];
-
-  Power[b_?NonCommutativeQ, c_Integer?Negative] := 
+  Power[b_?PowerNonCommutativeQ, c_Integer?Negative] :=
     inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]];
 
   (* pretty tp *)
@@ -453,8 +470,7 @@ Begin[ "`Private`" ]
      Global`T =. 
   ];
   Protect[Global`T];
-  Power[a_, Global`T] := tp[a];
-
+  Power[a_?PowerNonCommutativeQ, Global`T] := tp[a];
   Protect[Power];
 
   (* pretty aj *)
@@ -466,9 +482,19 @@ Begin[ "`Private`" ]
   (* pretty co *)
   OverBar[a_] := co[a];
 
+  (* NCValueQ *)
+  (* BEGIN MAURICIO
+      This is needed due to an update on the behavior of ValueQ in v.12.2
+     END MAURICIO *)
+  If[TrueQ[$VersionNumber >= 12.2],
+    NCValueQ[x_] := ValueQ[x, Method->"TrialEvaluation"],
+    NCValueQ[x_] := ValueQ[x]
+  ];
+  SetAttributes[NCValueQ, HoldAll];
+   
   (* SetCommutingOperators using upvalues *)
   SetCommutingOperators[a_, b_] := (
-    If[ ValueQ[NonCommutativeMultiply[c___, a, b, d___]]
+    If[ NCValueQ[NonCommutativeMultiply[c___, a, b, d___]]
        ,
         Message[SetCommutingOperators::AlreadyDefined, b, a];
         UnsetCommutingOperators[b, a];
@@ -478,12 +504,12 @@ Begin[ "`Private`" ]
   ) /; a =!= b;
   
   UnsetCommutingOperators[a_,b_] := Block[{},
-    If[ ValueQ[c___ ** a ** b ** d___]
+    If[ NCValueQ[c___ ** a ** b ** d___]
        ,
         a /: c___ ** a ** b ** d___ =. ;
         b /: c___ ** a ** b ** d___ =. ;
        ,
-        If[ ValueQ[c___ ** b ** a ** d___]
+        If[ NCValueQ[c___ ** b ** a ** d___]
            ,
             a /: c___ ** b ** a ** d___ =. ;
             b /: c___ ** b ** a ** d___ =.
@@ -496,8 +522,8 @@ Begin[ "`Private`" ]
   CommutingOperatorsQ[a_?CommutativeQ,b_] := True;
   
   CommutingOperatorsQ[a_,b_] := 
-    ValueQ[NonCommutativeMultiply[c___, a, b, d___]] ||
-    ValueQ[NonCommutativeMultiply[c___, b, a, d___]];
+    NCValueQ[NonCommutativeMultiply[c___, a, b, d___]] ||
+    NCValueQ[NonCommutativeMultiply[c___, b, a, d___]];
   
   (* Aliases *)
   SNC = SetNonCommutative;

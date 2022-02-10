@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Pandoc filter to convert all regular text to uppercase.
@@ -24,6 +24,7 @@ def create_anchor(level, link, text):
         anchors[anchor].append([level, link, re.sub('\t','\\t',text)])
     
 def filter(key, value, format, meta):
+
     if key == 'Header':
 
         # string
@@ -48,7 +49,7 @@ if __name__ == "__main__":
     toJSONFilter(filter)
 
     # then save to file
-    with open('pandoc.idx','w') as f:
+    with open('pandoc.idx','w', encoding='utf-8') as f:
         for (anchor,values) in anchors.items():
             for (i,(level, link, text)) in enumerate(values):
                 if i == 0:
