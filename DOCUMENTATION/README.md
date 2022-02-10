@@ -3305,7 +3305,11 @@ makes the expression
 
 be displayed as
 
-`(tp[a] + b)` <sup>-1</sup>
+<div style="display:block;">
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7B%28tp%5Ba%5D%20%2B%20b%29%7D%5E%7B-1%7D)
+
+</div>
 
 Conversely
 
