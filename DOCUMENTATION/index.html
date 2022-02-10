@@ -38,17 +38,19 @@ class="toc-section-number">1</span> Acknowledgements</a></li>
 <li><a href="#Version5_0"><span class="toc-section-number">2</span>
 Changes in Version 5.0</a>
 <ul>
-<li><a href="#Version5_0_5"><span class="toc-section-number">2.1</span>
+<li><a href="#Version5_0_6"><span class="toc-section-number">2.1</span>
+Version 5.0.6</a></li>
+<li><a href="#Version5_0_5"><span class="toc-section-number">2.2</span>
 Version 5.0.5</a></li>
-<li><a href="#Version5_0_4"><span class="toc-section-number">2.2</span>
+<li><a href="#Version5_0_4"><span class="toc-section-number">2.3</span>
 Version 5.0.4</a></li>
-<li><a href="#Version5_0_3"><span class="toc-section-number">2.3</span>
+<li><a href="#Version5_0_3"><span class="toc-section-number">2.4</span>
 Version 5.0.3</a></li>
-<li><a href="#Version5_0_2"><span class="toc-section-number">2.4</span>
+<li><a href="#Version5_0_2"><span class="toc-section-number">2.5</span>
 Version 5.0.2</a></li>
-<li><a href="#Version5_0_1"><span class="toc-section-number">2.5</span>
+<li><a href="#Version5_0_1"><span class="toc-section-number">2.6</span>
 Version 5.0.1</a></li>
-<li><a href="#Version5_0_0"><span class="toc-section-number">2.6</span>
+<li><a href="#Version5_0_0"><span class="toc-section-number">2.7</span>
 Version 5.0.0</a></li>
 </ul></li>
 <li><a href="#UserGuideIntroduction"><span
@@ -343,10 +345,12 @@ NCRASA</a></li>
 NCRRSA</a></li>
 <li><a href="#NCRLSA"><span class="toc-section-number">10.3.26</span>
 NCRLSA</a></li>
+<li><a href="#NCMatrixExpand"><span
+class="toc-section-number">10.3.27</span> NCMatrixExpand</a></li>
 <li><a href="#NCMatrixReplaceAll"><span
-class="toc-section-number">10.3.27</span> NCMatrixReplaceAll</a></li>
+class="toc-section-number">10.3.28</span> NCMatrixReplaceAll</a></li>
 <li><a href="#NCMatrixReplaceRepeated"><span
-class="toc-section-number">10.3.28</span>
+class="toc-section-number">10.3.29</span>
 NCMatrixReplaceRepeated</a></li>
 </ul></li>
 <li><a href="#PackageNCSelfAdjoint"><span
@@ -421,8 +425,6 @@ coMat</a></li>
 NCDot</a></li>
 <li><a href="#NCInverse"><span class="toc-section-number">11.1.5</span>
 NCInverse</a></li>
-<li><a href="#NCMatrixExpand"><span
-class="toc-section-number">11.1.6</span> NCMatrixExpand</a></li>
 </ul></li>
 <li><a href="#PackageNCMatrixDecompositions"><span
 class="toc-section-number">11.2</span> NCMatrixDecompositions</a>
@@ -889,14 +891,19 @@ Ovall, T. Shaheen, John Shopple.</li>
 <p>The beginnings of the program come from eran@slac.</p>
 <h1 data-number="2" id="Version5_0"><span
 class="header-section-number">2</span> Changes in Version 5.0</h1>
-<h2 data-number="2.1" id="Version5_0_5"><span
-class="header-section-number">2.1</span> Version 5.0.5</h2>
+<h2 data-number="2.1" id="Version5_0_6"><span
+class="header-section-number">2.1</span> Version 5.0.6</h2>
+<ol type="1">
+<li>NC<code>and NCAlgebra</code> are now Contexts</li>
+</ol>
+<h2 data-number="2.2" id="Version5_0_5"><span
+class="header-section-number">2.2</span> Version 5.0.5</h2>
 <ol type="1">
 <li>Improved documentation</li>
 <li>Bug fixes. Thanks Igor Klep!</li>
 </ol>
-<h2 data-number="2.2" id="Version5_0_4"><span
-class="header-section-number">2.2</span> Version 5.0.4</h2>
+<h2 data-number="2.3" id="Version5_0_4"><span
+class="header-section-number">2.3</span> Version 5.0.4</h2>
 <ol type="1">
 <li>First implementation of <a
 href="#NCPolyGramMatrix">NCPolyGramMatrix</a> and <a
@@ -904,16 +911,16 @@ href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a>.</li>
 <li>Improvements in NCReplace.</li>
 <li>Several bug fixes and improvements. Thanks Eric Evert!</li>
 </ol>
-<h2 data-number="2.3" id="Version5_0_3"><span
-class="header-section-number">2.3</span> Version 5.0.3</h2>
+<h2 data-number="2.4" id="Version5_0_3"><span
+class="header-section-number">2.4</span> Version 5.0.3</h2>
 <ol type="1">
 <li>Restored functionality of <a
 href="#SetCommutingOperators">SetCommutingOperators</a>.</li>
 <li>Improved implementation of <a href="#CommutativeQ">CommutativeQ</a>
 for arrays.</li>
 </ol>
-<h2 data-number="2.4" id="Version5_0_2"><span
-class="header-section-number">2.4</span> Version 5.0.2</h2>
+<h2 data-number="2.5" id="Version5_0_2"><span
+class="header-section-number">2.5</span> Version 5.0.2</h2>
 <ol type="1">
 <li><code>NCCollect</code> and <code>NCStrongCollect</code> can handle
 commutative variables.</li>
@@ -922,15 +929,15 @@ commutative variables.</li>
 <code>HoldAll</code> attribute can be used to set Symbols that have been
 previously assigned values.</li>
 </ol>
-<h2 data-number="2.5" id="Version5_0_1"><span
-class="header-section-number">2.5</span> Version 5.0.1</h2>
+<h2 data-number="2.6" id="Version5_0_1"><span
+class="header-section-number">2.6</span> Version 5.0.1</h2>
 <ol type="1">
 <li>Introducing <code>NCWebInstall</code> and
 <code>NCWebUpdate</code>.</li>
 <li>Bug fixes.</li>
 </ol>
-<h2 data-number="2.6" id="Version5_0_0"><span
-class="header-section-number">2.6</span> Version 5.0.0</h2>
+<h2 data-number="2.7" id="Version5_0_0"><span
+class="header-section-number">2.7</span> Version 5.0.0</h2>
 <ol type="1">
 <li>Completely rewritten core handling of noncommutative expressions
 with significant speed gains.</li>
@@ -3966,6 +3973,7 @@ href="#NCReplaceRepeatedSymmetric">NCReplaceRepeatedSymmetric</a></li>
 href="#NCReplaceListSelfAdjoint">NCReplaceListSelfAdjoint</a></li>
 <li><a
 href="#NCReplaceRepeatedSelfAdjoint">NCReplaceRepeatedSelfAdjoint</a></li>
+<li><a href="#NCMatrixExpand">NCMatrixExpand</a></li>
 <li><a href="#NCMatrixReplaceAll">NCMatrixReplaceAll</a></li>
 <li><a href="#NCMatrixReplaceRepeated">NCMatrixReplaceRepeated</a></li>
 </ul>
@@ -4175,8 +4183,16 @@ class="header-section-number">10.3.26</span> NCRLSA</h3>
 <code>NCReplaceListSymmetric</code>.</p>
 <p>See also: <a
 href="#NCReplaceListSymmetric">NCReplaceListSymmetric</a>.</p>
-<h3 data-number="10.3.27" id="NCMatrixReplaceAll"><span
-class="header-section-number">10.3.27</span> NCMatrixReplaceAll</h3>
+<h3 data-number="10.3.27" id="NCMatrixExpand"><span
+class="header-section-number">10.3.27</span> NCMatrixExpand</h3>
+<p><code>NCMatrixExpand[expr]</code> expands <code>inv</code> and
+<code>**</code> of matrices appearing in nc expression
+<code>expr</code>. It effectively substitutes <code>inv</code> for
+<code>NCInverse</code> and <code>**</code> by <code>NCDot</code>.</p>
+<p>See also: <a href="#NCInverse">NCInverse</a>, <a
+href="#NCDot">NCDot</a>.</p>
+<h3 data-number="10.3.28" id="NCMatrixReplaceAll"><span
+class="header-section-number">10.3.28</span> NCMatrixReplaceAll</h3>
 <p><code>NCMatrixReplaceAll[expr,rules]</code> applies a rule or list of
 rules <code>rules</code> in an attempt to transform each part of the nc
 expression <code>expr</code>.</p>
@@ -4184,8 +4200,8 @@ expression <code>expr</code>.</p>
 but takes extra steps to make sure substitutions work with matrices.</p>
 <p>See also: <a href="#NCReplaceAll">NCReplaceAll</a>, <a
 href="#NCMatrixReplaceRepeated">NCMatrixReplaceRepeated</a>.</p>
-<h3 data-number="10.3.28" id="NCMatrixReplaceRepeated"><span
-class="header-section-number">10.3.28</span>
+<h3 data-number="10.3.29" id="NCMatrixReplaceRepeated"><span
+class="header-section-number">10.3.29</span>
 NCMatrixReplaceRepeated</h3>
 <p><code>NCMatrixReplaceRepeated[expr,rules]</code> repeatedly performs
 replacements using rule or list of rules <code>rules</code> until
@@ -4676,7 +4692,6 @@ class="header-section-number">11.1</span> NCDot</h2>
 <li><a href="#coMat">coMat</a></li>
 <li><a href="#NCDot">NCDot</a></li>
 <li><a href="#NCInverse">NCInverse</a></li>
-<li><a href="#NCMatrixExpand">NCMatrixExpand</a></li>
 </ul>
 <h3 data-number="11.1.1" id="tpMat"><span
 class="header-section-number">11.1.1</span> tpMat</h3>
@@ -4727,14 +4742,6 @@ elements of the inverse matrix are huge expressions. We recommend using
 <code>NCSimplifyRational</code> to improve the results.</p>
 <p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a
 href="#coMat">coMat</a>.</p>
-<h3 data-number="11.1.6" id="NCMatrixExpand"><span
-class="header-section-number">11.1.6</span> NCMatrixExpand</h3>
-<p><code>NCMatrixExpand[expr]</code> expands <code>inv</code> and
-<code>**</code> of matrices appearing in nc expression
-<code>expr</code>. It effectively substitutes <code>inv</code> for
-<code>NCInverse</code> and <code>**</code> by <code>NCDot</code>.</p>
-<p>See also: <a href="#NCInverse">NCInverse</a>, <a
-href="#NCDot">NCDot</a>.</p>
 <h2 data-number="11.2" id="PackageNCMatrixDecompositions"><span
 class="header-section-number">11.2</span> NCMatrixDecompositions</h2>
 <p><code>NCMatrixDecompositions</code> provide noncommutative versions

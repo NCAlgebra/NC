@@ -5,6 +5,7 @@
 
 BeginPackage[ "NCPolyInterface`",
               "NCPoly`",
+              "NCDot`",
               "NCReplace`",
               "NCUtil`",
 	      "NonCommutativeMultiply`" ];

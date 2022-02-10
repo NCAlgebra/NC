@@ -1,4 +1,4 @@
-SetNoncommutative[a,b,c,d];
+SetNonCommutative[a,b,c,d];
 SetKnowns[a,b];
 SetUnknowns[c,d];
 

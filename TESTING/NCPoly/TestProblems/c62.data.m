@@ -1,5 +1,5 @@
 ClearMonomialOrderAll[];
-SNC[a,b,c,Aja,InvAja,Inva,LossLessM,InvLossLessM,Ajb,Ajc];
+SetNonCommutative[a,b,c,Aja,InvAja,Inva,LossLessM,InvLossLessM,Ajb,Ajc];
 
      Rel[0] =  + InvLossLessM ** LossLessM - 1;
      Rel[1] =  + LossLessM ** InvLossLessM - 1;

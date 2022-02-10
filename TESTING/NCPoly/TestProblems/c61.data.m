@@ -1,4 +1,4 @@
-SNC[A,B,C0,DD,ACROSS, proj1,proj2,leftm1,leftm2,rightm1,rightm2,a,b,c,e,f,g,m1,m2];
+SetNonCommutative[A,B,C0,DD,ACROSS, proj1,proj2,leftm1,leftm2,rightm1,rightm2,a,b,c,e,f,g,m1,m2];
 
 cheat={
 	m1**leftm1-> proj1,

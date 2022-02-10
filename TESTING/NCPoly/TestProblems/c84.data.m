@@ -2,6 +2,7 @@
 (* This is a test file created from relations in the dcyc problem given to 
 us by Ben Keller.
 *)
+SetNonCommutative[a,d,f,c,g,b,h,i,e];
 SetMonomialOrder[a,d,f,c,g,b,h,i,e];
 
 rels=

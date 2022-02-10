@@ -17,6 +17,7 @@ BeginPackage[ "NCQuadratic`",
 	      "NCPolynomial`",
 	      "NCSelfAdjoint`",
 	      "NCDot`",
+	      "NCReplace`",
               "NCUtil`",
 	      "NCOptions`",
 	      "NonCommutativeMultiply`" ];

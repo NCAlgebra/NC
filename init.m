@@ -1,21 +1,29 @@
 (* 
    Allows accessing NCAlgebra and NCGB from anywhere through
      << NC`   
-   Done by M. de Oliveira  2004, Updated 2017
+   Done by M. de Oliveira  2004, Updated 2017, 2022
 *)
 
-Module[
-  {$NC$Dir = DirectoryName[FindFile["NC`"]]},
+BeginPackage["NC`"];
+
+Begin["`Private`"];
+
+  verbose = If[ValueQ[$NC$Loaded], False, $NC$Loaded=True];
+
+  $NC$Dir = DirectoryName[FindFile["NC`"]];
       
   If[ $NC$Dir =!= {}
      ,
       (* Setup Path *)
 
-      Print["You are using the version of NCAlgebra which is found in:"];
-      Print["  ", $NC$Dir];
+      If[ verbose
+	 ,
+          Print["You are using the version of NCAlgebra which is found in:"];
+          Print["  ", $NC$Dir];
+      ];
 
       (* Setting NCAlgebra Path *)
-      AppendTo[$Path,$NC$Dir];
+      AppendTo[$Path, $NC$Dir];
       AppendTo[$Path,ToFileName[{$NC$Dir, "NCAlgebra" }]];
       AppendTo[$Path,ToFileName[{$NC$Dir, "NCAlgebra", "Systems" }]];
 
@@ -50,10 +58,15 @@ Module[
       AppendTo[$Path,ToFileName[{$NC$Dir, "TESTING", "NCSDP"}]];
       AppendTo[$Path,ToFileName[{$NC$Dir, "TESTING", "NCPoly"}]];
 
-      Print["You can now use \"<< NCAlgebra`\" to load NCAlgebra."];
+      If[ verbose
+	 ,
+          Print["You can now use \"<< NCAlgebra`\" to load NCAlgebra."];
+      ];
      ,
       (* Did not find NC` *)
       Print["ERROR: Could not find NC directory. See documentation for installation information."];
   ];
-    
-];
+
+End[]
+
+EndPackage[];

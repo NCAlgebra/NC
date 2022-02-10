@@ -1,5 +1,9 @@
 # Changes in Version 5.0 {#Version5_0}
 
+## Version 5.0.6 {#Version5_0_6}
+
+1. NC` and NCAlgebra` are now Contexts
+
 ## Version 5.0.5 {#Version5_0_5}
 
 1. Improved documentation

@@ -7,7 +7,6 @@ Members are:
 * [coMat](#coMat)
 * [NCDot](#NCDot)
 * [NCInverse](#NCInverse)
-* [NCMatrixExpand](#NCMatrixExpand)
 
 ### tpMat {#tpMat}
 
@@ -54,10 +53,3 @@ We recommend using `NCSimplifyRational` to improve the results.
 
 See also:
 [tpMat](#tpMat), [ajMat](#coMat), [coMat](#coMat).
-
-### NCMatrixExpand {#NCMatrixExpand}
-
-`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
-
-See also:
-[NCInverse](#NCInverse), [NCDot](#NCDot).

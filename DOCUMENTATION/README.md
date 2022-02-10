@@ -1,11 +1,12 @@
 -   [<span class="toc-section-number">1</span> Acknowledgements](#acknowledgements)
 -   [<span class="toc-section-number">2</span> Changes in Version 5.0](#changes-in-version-50)
-    -   [<span class="toc-section-number">2.1</span> Version 5.0.5](#version-505)
-    -   [<span class="toc-section-number">2.2</span> Version 5.0.4](#version-504)
-    -   [<span class="toc-section-number">2.3</span> Version 5.0.3](#version-503)
-    -   [<span class="toc-section-number">2.4</span> Version 5.0.2](#version-502)
-    -   [<span class="toc-section-number">2.5</span> Version 5.0.1](#version-501)
-    -   [<span class="toc-section-number">2.6</span> Version 5.0.0](#version-500)
+    -   [<span class="toc-section-number">2.1</span> Version 5.0.6](#version-506)
+    -   [<span class="toc-section-number">2.2</span> Version 5.0.5](#version-505)
+    -   [<span class="toc-section-number">2.3</span> Version 5.0.4](#version-504)
+    -   [<span class="toc-section-number">2.4</span> Version 5.0.3](#version-503)
+    -   [<span class="toc-section-number">2.5</span> Version 5.0.2](#version-502)
+    -   [<span class="toc-section-number">2.6</span> Version 5.0.1](#version-501)
+    -   [<span class="toc-section-number">2.7</span> Version 5.0.0](#version-500)
 -   [<span class="toc-section-number">3</span> Introduction](#introduction)
     -   [<span class="toc-section-number">3.1</span> Running NCAlgebra](#running-ncalgebra)
     -   [<span class="toc-section-number">3.2</span> Now what?](#now-what)
@@ -119,8 +120,9 @@
         -   [<span class="toc-section-number">10.3.24</span> NCRASA](#ncrasa)
         -   [<span class="toc-section-number">10.3.25</span> NCRRSA](#ncrrsa)
         -   [<span class="toc-section-number">10.3.26</span> NCRLSA](#ncrlsa)
-        -   [<span class="toc-section-number">10.3.27</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
-        -   [<span class="toc-section-number">10.3.28</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
+        -   [<span class="toc-section-number">10.3.27</span> NCMatrixExpand](#ncmatrixexpand)
+        -   [<span class="toc-section-number">10.3.28</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
+        -   [<span class="toc-section-number">10.3.29</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
     -   [<span class="toc-section-number">10.4</span> NCSelfAdjoint](#ncselfadjoint)
         -   [<span class="toc-section-number">10.4.1</span> NCSymmetricQ](#ncsymmetricq)
         -   [<span class="toc-section-number">10.4.2</span> NCSymmetricTest](#ncsymmetrictest)
@@ -150,7 +152,6 @@
         -   [<span class="toc-section-number">11.1.3</span> coMat](#comat)
         -   [<span class="toc-section-number">11.1.4</span> NCDot](#ncdot-1)
         -   [<span class="toc-section-number">11.1.5</span> NCInverse](#ncinverse)
-        -   [<span class="toc-section-number">11.1.6</span> NCMatrixExpand](#ncmatrixexpand)
     -   [<span class="toc-section-number">11.2</span> NCMatrixDecompositions](#ncmatrixdecompositions)
         -   [<span class="toc-section-number">11.2.1</span> NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting)
         -   [<span class="toc-section-number">11.2.2</span> NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting)
@@ -363,6 +364,10 @@ Other contributors include:
 The beginnings of the program come from eran@slac.
 
 # Changes in Version 5.0
+
+## Version 5.0.6
+
+1.  NC`and NCAlgebra` are now Contexts
 
 ## Version 5.0.5
 
@@ -4042,6 +4047,7 @@ Members are:
 -   [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
 -   [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
 -   [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+-   [NCMatrixExpand](#ncmatrixexpand)
 -   [NCMatrixReplaceAll](#ncmatrixreplaceall)
 -   [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
 
@@ -4245,6 +4251,13 @@ See also:
 
 See also:
 [NCReplaceListSymmetric](#ncreplacelistsymmetric).
+
+### NCMatrixExpand
+
+`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
+
+See also:
+[NCInverse](#ncinverse), [NCDot](#ncdot-1).
 
 ### NCMatrixReplaceAll
 
@@ -4707,7 +4720,6 @@ Members are:
 -   [coMat](#comat)
 -   [NCDot](#ncdot-1)
 -   [NCInverse](#ncinverse)
--   [NCMatrixExpand](#ncmatrixexpand)
 
 ### tpMat
 
@@ -4754,13 +4766,6 @@ We recommend using `NCSimplifyRational` to improve the results.
 
 See also:
 [tpMat](#tpmat), [ajMat](#comat), [coMat](#comat).
-
-### NCMatrixExpand
-
-`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
-
-See also:
-[NCInverse](#ncinverse), [NCDot](#ncdot-1).
 
 ## NCMatrixDecompositions
 

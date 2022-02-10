@@ -1,9 +1,9 @@
 (* History:  Mar 2016: Multiplication test (mauricio) *)
 
 Block[
-  {k,test,i,j,x,y,z,exp,answer},
+  {k,test,i,j,x,y,z,w,exp,answer},
 
-  SetNonCommutative[x,y];
+  SetNonCommutative[x,y,w];
   SetCommutative[z];
 
   (* Identities *)
@@ -262,6 +262,7 @@ Block[
   NCTest[CommutingOperatorsQ[x,x]];
   NCTest[CommutingOperatorsQ[x,1]];
   NCTest[CommutingOperatorsQ[1,x]];
+
   NCTest[CommutingOperatorsQ[x,w], False];
 
 ];
