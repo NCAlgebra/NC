@@ -541,8 +541,8 @@ prints out
 $x \ll y < z$
 
 from where you can see that grouping variables inside braces induces a
-graded type ordering, as discussed in Section
-\ref{Orderings}. `NCPoly`s constructed from different orderings cannot
+graded type ordering, as discussed in [Noncommutative Gröbner
+Basis](#NCGB). `NCPoly`s constructed from different orderings cannot
 be combined.
 
 There is also a special constructor for monomials. For example

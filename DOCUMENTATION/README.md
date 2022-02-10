@@ -5171,12 +5171,12 @@ Members are:
 
 The following `options` can be given:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘`x` ![\\bullet](https://render.githubusercontent.com/render/math?math=%5Cbullet&mode=inline) `y`’;
--   `tp` (`True`): If `True` `tp[x]` is displayed as ‘`x`![^\\mathtt{T}](https://render.githubusercontent.com/render/math?math=%5E%5Cmathtt%7BT%7D&mode=inline)’;
--   `inv` (`True`): If `True` `inv[x]` is displayed as ‘`x`![^{-1}](https://render.githubusercontent.com/render/math?math=%5E%7B-1%7D&mode=inline)’;
--   `aj` (`True`): If `True` `aj[x]` is displayed as ‘`x`![^\*](https://render.githubusercontent.com/render/math?math=%5E%2A&mode=inline)’;
--   `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathtt{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathtt%7Bx%7D%7D&mode=inline)’;
--   `rt` (`True`): If `True` `rt[x]` is displayed as ‘`x`![^{1/2}](https://render.githubusercontent.com/render/math?math=%5E%7B1/2%7D&mode=inline)’;
+-   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\\mathrm{x} \\bullet \\mathrm{y}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%20%5Cbullet%20%5Cmathrm%7By%7D&mode=inline)’;
+-   `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\\mathrm{x}^\\mathrm{T}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%5Cmathrm%7BT%7D&mode=inline)’;
+-   `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\\mathrm{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B-1%7D&mode=inline)’;
+-   `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\\mathrm{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%2A&mode=inline)’;
+-   `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathrm{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathrm%7Bx%7D%7D&mode=inline)’;
+-   `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\\mathrm{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
 -   `All`: Set all available options to `True` or `False`.
 
 See also:

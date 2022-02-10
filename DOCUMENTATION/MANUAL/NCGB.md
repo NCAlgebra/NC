@@ -358,7 +358,7 @@ and results in the rules:
 
 As in the previous example, the GB revealed new relationships that
 must hold true if $1- x$ is invertible, and one can use this
-relationship to \emph{simplify} the original expression using
+relationship to *simplify* the original expression using
 `NCReplaceRepeated` as in:
 
 	NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]

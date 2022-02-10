@@ -15,12 +15,12 @@ Members are:
 
 The following `options` can be given:
 
-* `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '`x` $\bullet$ `y`';
-* `tp` (`True`): If `True` `tp[x]` is displayed as '`x`$^\mathtt{T}$';
-* `inv` (`True`): If `True` `inv[x]` is displayed as '`x`$^{-1}$';
-* `aj` (`True`): If `True` `aj[x]` is displayed as '`x`$^*$';
-* `co` (`True`): If `True` `co[x]` is displayed as '$\bar{\mathtt{x}}$';
-* `rt` (`True`): If `True` `rt[x]` is displayed as '`x`$^{1/2}$';
+* `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as '$\mathrm{x} \bullet \mathrm{y}$';
+* `tp` (`True`): If `True` `tp[x]` is displayed as '$\mathrm{x}^\mathrm{T}$';
+* `inv` (`True`): If `True` `inv[x]` is displayed as '$\mathrm{x}^{-1}$';
+* `aj` (`True`): If `True` `aj[x]` is displayed as '$\mathrm{x}^*$';
+* `co` (`True`): If `True` `co[x]` is displayed as '$\bar{\mathrm{x}}$';
+* `rt` (`True`): If `True` `rt[x]` is displayed as '$\mathrm{x}^{1/2}$'.
 * `All`: Set all available options to `True` or `False`.
 
 See also:

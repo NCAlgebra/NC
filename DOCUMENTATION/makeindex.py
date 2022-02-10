@@ -24,6 +24,7 @@ def create_anchor(level, link, text):
         anchors[anchor].append([level, link, re.sub('\t','\\t',text)])
     
 def filter(key, value, format, meta):
+
     if key == 'Header':
 
         # string

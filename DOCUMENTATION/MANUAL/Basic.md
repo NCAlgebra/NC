@@ -604,9 +604,7 @@ which returns
 	p = {1, 2}
 
 Using `MatrixForm`:
-
-$\begin{bmatrix} a & b \\ c a^{-1} & d - c a^{-1} b \end{bmatrix}$
-
+$$\begin{bmatrix} a & b \\ c a^{-1} & d - c a^{-1} b \end{bmatrix}$$
 The list `p` encodes the sequence of permutations calculated during
 the execution of the algorithm. The matrix `lu` contains the factors
 $L$ and $U$ in the way most common to numerical analysts. These factors can be recovered using
@@ -619,9 +617,10 @@ resulting in this case in
 	u = {{a, b}, {0, d - c**inv[a]**b}}
 
 Using `MatrixForm`:
-
-$L = \begin{bmatrix} 1 & 0 \\ c a^{-1} & 1 \end{bmatrix}, \qquad U = \begin{bmatrix} a & b \\ 0 & d - c a^{-1} b \end{bmatrix}$
-
+$$
+L = \begin{bmatrix} 1 & 0 \\ c a^{-1} & 1 \end{bmatrix}, \qquad
+U = \begin{bmatrix} a & b \\ 0 & d - c a^{-1} b \end{bmatrix}
+$$
 To verify that $M = L U$ input
 
 	m - NCDot[l, u]
@@ -660,9 +659,9 @@ Mathematica's `Part` (`[[]]`) command. Of course, if one prefers to work with pe
 	IdentityMatrix[3][[p]] // MatrixForm
 
 to produce
-
-$\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}$
-
+$$
+\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
 Likewise
 
 	m = {{a + b, b}, {c, d}}
@@ -707,9 +706,10 @@ to get
 	u = {{a, b}, {0, 0}}
 
 Using `MatrixForm`:
-
-$L = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}, \qquad U = \begin{bmatrix} a & b \\ 0 & 0 \end{bmatrix}$
-
+$$
+L = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}, \qquad
+U = \begin{bmatrix} a & b \\ 0 & 0 \end{bmatrix}
+$$
 In this case, to verify that $P M Q = L U$ input
 
 	NCDot[l, u] - m[[p, q]]
@@ -785,9 +785,9 @@ produces as a result the matrix
     {{a, b, d, 2}, {c, d, e, 3}}
 
 or, using `MatrixForm`:
-
-$\begin{bmatrix} a & b & d & 2 \\ c & d & e & 3 \end{bmatrix}$
-
+$$
+\begin{bmatrix} a & b & d & 2 \\ c & d & e & 3 \end{bmatrix}
+$$
 Note how the symbols were treated as block-matrices during the substitution. As a second example, with
 
     M = {{a11, 0}, {0, a22}}

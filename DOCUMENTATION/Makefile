@@ -82,12 +82,14 @@ README.md: $(MANUAL)
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
              --bibliography references.bib \
 	     --filter makeindex.py \
+	     --wrap=preserve \
 	     -o README.tmp.md
 	pandoc README.tmp.md -t gfm \
 	     --filter github-mangle.py \
-	     --filter tex2img.py \
+	     --filter github-math.py \
+	     --wrap=preserve \
 	     -o README.md
-	rm -f README.tmp.md formula.*
+	rm -f README.tmp.md
 
 index.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \

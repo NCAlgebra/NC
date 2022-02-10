@@ -8,9 +8,11 @@ Code, link URLs, etc. are not affected.
 from pandocfilters import toJSONFilter, Para, Str, Image
 import re, sys, os
 import subprocess
+from urllib import quote_plus
 
 version = '5.0.5'
-base_url = 'http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/'
+base_url = 'http://math.ucsd.edu/~ncalg/DOCUMENTATION/eqns/' + version
+params = ''
 count = 0
 
 def latex(formula, count):
@@ -54,7 +56,7 @@ def latex(formula, count):
         p.wait()
 
         # move file
-        os.rename('formula.png','eqns/' + version + '/eqn_{}.png'.format(count))
+        os.rename('formula.png','eqns/eqn_{}.png'.format(count))
         
     except subprocess.CalledProcessError as e:
         sys.stderr.write(e)
@@ -82,10 +84,11 @@ def filter(key, value, format, meta):
         latex(formula, count)
 
         # replace by image
-        return Image(['', [], []],
-                     [Str(caption)],
-                     [base_url + version + '/eqn_{}.png'.format(count), ''])
-
+        return Image(
+            ['', [], []],
+            [Str(caption)],
+            [base_url + '/eqn_{}.png{}'.format(count,params), '']
+        )
 
 if __name__ == "__main__":
 
