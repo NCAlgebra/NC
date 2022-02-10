@@ -18,7 +18,7 @@ http://math.ucsd.edu/~ncalg
 Starting with version 5.0.1, the easiest way to download and install
 NCAlgebra is using the `NCWebInstall` script. Just type:
 
-    Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
+    Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m", CharacterEncoding -> "UTF8"];
 
 on the Mathematica Kernel or FrontEnd and follow the instructions to download and install NCAlgebra.
 

@@ -36,6 +36,8 @@ Begin[ "`Private`" ]
      latestLabel, latestVersion,
      input},
 
+    ImportWithEncoding[args___] := Import[args, CharacterEncoding->"UTF8"];
+
     Print["************************************************************************"];
     Print["***      N C W e b U p d a t e: a web autoupdater for NCAlgebra      ***"];
     Print["************************************************************************"];
@@ -45,8 +47,8 @@ Begin[ "`Private`" ]
     If [ existing =!= $Failed,
          existing = DirectoryName[existing];
          {existingLabel, existingVersion} = 
-           Import[FileNameJoin[{existing, 
-                               "NC_VERSION"}]][[1, {1,2}]];
+           ImportWithEncoding[FileNameJoin[{existing, 
+                                            "NC_VERSION"}]][[1, {1,2}]];
          existingVersion = StringTrim[existingVersion];
          
          Print["\n> Found an installation of"];
@@ -62,7 +64,7 @@ Begin[ "`Private`" ]
 
     (* Retrieve latest NC_VERSION *)
     {latestLabel, latestVersion} = 
-       Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NC_VERSION"][[1, {1,2}]];
+       ImportWithEncoding["https://raw.githubusercontent.com/NCAlgebra/NC/master/NC_VERSION"][[1, {1,2}]];
     latestVersion = StringTrim[latestVersion];
 
     If[ latestVersion != existingVersion
@@ -87,7 +89,7 @@ Begin[ "`Private`" ]
        ,
         Print["> Upgrading..."];
         Print[];
-        Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
+        ImportWithEncoding["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
        ,
         Print["  Exiting..."];
     ];

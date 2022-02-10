@@ -2,7 +2,7 @@
    
    Call:
 
-     Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m"];
+     Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m" , CharacterEncoding->"UTF8"];
 
    from the Mathematica Kernel or FrontEnd to install NCAlgebra.
    
@@ -28,25 +28,27 @@ Module[
      label, version, input,
      initfile, info, stream},
 
+    ImportWithEncoding[args___] := Import[args, CharacterEncoding->"UTF8"];
+
     Print["************************************************************************"];
     Print["***    N C W e b I n s t a l l: a web autoinstaller for NCAlgebra    ***"];
     Print["************************************************************************"];
 
     (* Import NC_VERSION *)
-    {label, version} = Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NC_VERSION"][[1, {1,2}]];
+    {label, version} = ImportWithEncoding["https://raw.githubusercontent.com/NCAlgebra/NC/master/NC_VERSION"][[1, {1,2}]];
     version = StringTrim[version];
     Print["> This program will install ", label, " ", version];
     
     (* Import Unzip *)
-    Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/Unzip.m"];
+    ImportWithEncoding["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/Unzip.m"];
     Needs["Unzip`"];
     
     (* Check for existing installations *)
     existing = FindFile["NC`"];
     If [ existing =!= $Failed,
          existing = DirectoryName[existing];
-         {label, version} = Import[FileNameJoin[{existing, 
-                                                "NC_VERSION"}]][[1, {1,2}]];
+         {label, version} = ImportWithEncoding[FileNameJoin[{existing,
+					       "NC_VERSION"}]][[1, {1,2}]];
          version = StringTrim[version];
          
          Print["\n> There seems to be an installation of"];
