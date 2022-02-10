@@ -134,8 +134,6 @@ to load NCAlgebra
 
 Extensive documentation is found in the directory [DOCUMENTATION](https://github.com/NCAlgebra/NC/tree/master/DOCUMENTATION).
 
-An [online version of the manual](http://math.ucsd.edu/~ncalg/DOCUMENTATION) is also available.
-
 Basic documentation is provided on the project Wiki:
 
 https://github.com/NCAlgebra/NC/wiki
