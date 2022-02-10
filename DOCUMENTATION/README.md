@@ -51,7 +51,7 @@
 -   [<span class="toc-section-number">7</span> Semidefinite Programming](#semidefinite-programming)
     -   [<span class="toc-section-number">7.1</span> Semidefinite Programs in Matrix Variables](#semidefinite-programs-in-matrix-variables)
     -   [<span class="toc-section-number">7.2</span> Semidefinite Programs in Vector Variables](#semidefinite-programs-in-vector-variables)
--   [<span class="toc-section-number">8</span> Pretty Output with Notebooks and ](#pretty-output-with-notebooks-and)
+-   [<span class="toc-section-number">8</span> Pretty Output with Notebooks and TeX ](#pretty-output-with-notebooks-and)
     -   [<span class="toc-section-number">8.1</span> Pretty Output](#pretty-output)
     -   [<span class="toc-section-number">8.2</span> Using NCTeX](#using-nctex)
         -   [<span class="toc-section-number">8.2.1</span> NCTeX Options](#nctex-options)
@@ -2050,8 +2050,8 @@ prints out
 ![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
 
 from where you can see that grouping variables inside braces induces a
-graded type ordering, as discussed in Section
-. `NCPoly`s constructed from different orderings cannot
+graded type ordering, as discussed in [Noncommutative Gröbner
+Basis](#noncommutative-gröbner-basis). `NCPoly`s constructed from different orderings cannot
 be combined.
 
 There is also a special constructor for monomials. For example
@@ -2705,7 +2705,7 @@ and results in the rules:
 
 As in the previous example, the GB revealed new relationships that
 must hold true if ![1- x](https://render.githubusercontent.com/render/math?math=1-%20x&mode=inline) is invertible, and one can use this
-relationship to the original expression using
+relationship to *simplify* the original expression using
 `NCReplaceRepeated` as in:
 
     NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]
@@ -3276,16 +3276,18 @@ The package `SDP` is built so as to be easily overloaded with more
 efficient or more structure functions. See for example
 [SDPFlat](#sdpflat) and [SDPSylvester](#sdpsylvester).
 
-# Pretty Output with Notebooks and 
+# Pretty Output with Notebooks and TeX 
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/5_PrettyOutput.nb`.
 
 `NCAlgebra` comes with several utilities for beautifying expressions
 which are output. [`NCTeXForm`](#nctexform) converts NC expressions
-into . [`NCTeX`](#nctex) goes a step further and
-compiles the results expression in  and produces a PDF that can
+into LaTeX. [`NCTeX`](#nctex) goes a step further and
+compiles the results expression in LaTeX and produces a PDF that can
 be embedded in notebooks of used on its own.
+
+![\\TeX](https://render.githubusercontent.com/render/math?math=%5CTeX&mode=inline)
 
 ## Pretty Output
 
@@ -3488,7 +3490,7 @@ for the package [NCRun](#ncrun-1) for more details.
 [`NCTeXForm`](#nctexform) is a replacement for Mathematica’s
 `TeXForm` which adds definitions allowing it to handle noncommutative
 expressions. It works just as `TeXForm`. `NCTeXForm` is automatically
-loaded with `NCAlgebra` and is the default  processor for
+loaded with `NCAlgebra` and is the default TeX processor for
 `NCTeX`.
 
 Here is an example:
