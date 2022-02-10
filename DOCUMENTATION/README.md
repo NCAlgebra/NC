@@ -1121,7 +1121,7 @@ Using `MatrixForm`:
 
 <div style="display:block;">
 
-![\\begin{bmatrix} a & b \\\\ c a^{-1} & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1140,10 +1140,7 @@ Using `MatrixForm`:
 
 <div style="display:block;">
 
-![
-L = \\begin{bmatrix} 1 & 0 \\\\ c a^{-1} & 1 \\end{bmatrix}, \\qquad
-U = \\begin{bmatrix} a & b \\\\ 0 & d - c a^{-1} b \\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1188,9 +1185,7 @@ to produce
 
 <div style="display:block;">
 
-![
-\\begin{bmatrix} 0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%26%200%20%5C%5C%201%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%26%200%20%5C%5C%201%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1241,10 +1236,7 @@ Using `MatrixForm`:
 
 <div style="display:block;">
 
-![
-L = \\begin{bmatrix} 1 & 0 \\\\ 2 & 1 \\end{bmatrix}, \\qquad
-U = \\begin{bmatrix} a & b \\\\ 0 & 0 \\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%202%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%200%20%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%202%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%200%20%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1327,9 +1319,7 @@ or, using `MatrixForm`:
 
 <div style="display:block;">
 
-![
-\\begin{bmatrix} a & b & d & 2 \\\\ c & d & e & 3 \\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20c%20%26%20d%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20c%20%26%20d%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1379,9 +1369,7 @@ quadratic into the following form
 
 <div style="display:block;">
 
-![
-    q(x) = c + s(x) + l(x) M r(x)
-](https://render.githubusercontent.com/render/math?math=q%28x%29%20%3D%20c%20%2B%20s%28x%29%20%2B%20l%28x%29%20M%20r%28x%29)
+![inline equation](https://render.githubusercontent.com/render/math?math=q%28x%29%20%3D%20c%20%2B%20s%28x%29%20%2B%20l%28x%29%20M%20r%28x%29)
 
 </div>
 
@@ -1445,13 +1433,7 @@ Note that the middle matrix
 
 <div style="display:block;">
 
-![
-\\begin{bmatrix}
-2 & 2 x & 2 x^2 \\\\
-0 & 2 & 2 x \\\\
-0 & 0 & 2
-\\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20x%20%26%202%20x%5E2%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A0%20%26%200%20%26%202%0A%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20x%20%26%202%20x%5E2%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A0%20%26%200%20%26%202%0A%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1473,13 +1455,7 @@ in which `middle` is the symmetric matrix
 
 <div style="display:block;">
 
-![
-\\begin{bmatrix}
-0 & 0 & 2 \\\\
-0 & 2 & 2 x \\\\
-2 & 2 x & 2 x^2
-\\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A0%20%26%200%20%26%202%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A2%20%26%202%20x%20%26%202%20x%5E2%0A%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A0%20%26%200%20%26%202%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A2%20%26%202%20x%20%26%202%20x%5E2%0A%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1521,13 +1497,7 @@ which produces the diagonal factors
 
 <div style="display:block;">
 
-![
-\\begin{bmatrix}
-  2 (1 + b y + y b - a x a)^{-1} & 0 & 0 \\\\
-  0 & 0 & 0 \\\\
-  0 & 0 & 0
-\\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A%20%202%20%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%0A%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A%20%202%20%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%0A%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -1535,9 +1505,7 @@ which indicates the the original nc rational is convex whenever
 
 <div style="display:block;">
 
-![
-(1 + b y + y b - a x a)^{-1} \\succeq 0
-](https://render.githubusercontent.com/render/math?math=%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%5Csucceq%200)
+![inline equation](https://render.githubusercontent.com/render/math?math=%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%5Csucceq%200)
 
 </div>
 
@@ -1545,9 +1513,7 @@ or, equivalently, whenever
 
 <div style="display:block;">
 
-![
-1 + b y + y b - a x a \\succeq 0
-](https://render.githubusercontent.com/render/math?math=1%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%20%5Csucceq%200)
+![inline equation](https://render.githubusercontent.com/render/math?math=1%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%20%5Csucceq%200)
 
 </div>
 
@@ -2268,44 +2234,7 @@ of the matrix `mat1` correspond to the factors
 
 <div style="display:block;">
 
-![ 
-\\begin{aligned}
-\\begin{bmatrix}
-    a x + x a^T + c y + y^T c^T - x q x & b x \\\\ 
-    x b^T & 1
-\\end{bmatrix} 
-&=
-\\begin{bmatrix} 0 & 0 \\\\ 0 & 1 \\end{bmatrix}
-+
-\\begin{bmatrix} a \\\\ 0 \\end{bmatrix}
-x
-\\begin{bmatrix} 1 & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}
-x
-\\begin{bmatrix} a^T & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} -1 \\\\ 0 \\end{bmatrix}
-x q x
-\\begin{bmatrix} 1 & 0 \\end{bmatrix}
-+ \\\\ & \\qquad \\quad
-\\begin{bmatrix} b \\\\ 0 \\end{bmatrix}
-x
-\\begin{bmatrix} 0 & 1 \\end{bmatrix}
-+
-\\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}
-x
-\\begin{bmatrix} b^T & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} c \\\\ 0 \\end{bmatrix}
-y
-\\begin{bmatrix} 1 & 0 \\end{bmatrix}
-+
-\\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix}
-y^T
-\\begin{bmatrix} c^T & 0 \\end{bmatrix}
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20a%20x%20%2B%20x%20a%5ET%20%2B%20c%20y%20%2B%20y%5ET%20c%5ET%20-%20x%20q%20x%20%26%20b%20x%20%5C%5C%20%0A%20%20%20%20x%20b%5ET%20%26%201%0A%5Cend%7Bbmatrix%7D%20%0A%26%3D%0A%5Cbegin%7Bbmatrix%7D%200%20%26%200%20%5C%5C%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20a%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20a%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20-1%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%20q%20x%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%20%5C%5C%20%26%20%5Cqquad%20%5Cquad%0A%5Cbegin%7Bbmatrix%7D%20b%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%200%20%5C%5C%201%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20b%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20c%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%5ET%0A%5Cbegin%7Bbmatrix%7D%20c%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20a%20x%20%2B%20x%20a%5ET%20%2B%20c%20y%20%2B%20y%5ET%20c%5ET%20-%20x%20q%20x%20%26%20b%20x%20%5C%5C%20%0A%20%20%20%20x%20b%5ET%20%26%201%0A%5Cend%7Bbmatrix%7D%20%0A%26%3D%0A%5Cbegin%7Bbmatrix%7D%200%20%26%200%20%5C%5C%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20a%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20a%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20-1%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%20q%20x%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%20%5C%5C%20%26%20%5Cqquad%20%5Cquad%0A%5Cbegin%7Bbmatrix%7D%20b%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%200%20%5C%5C%201%20%5Cend%7Bbmatrix%7D%0Ax%0A%5Cbegin%7Bbmatrix%7D%20b%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%20c%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%0A%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5Cend%7Bbmatrix%7D%0A%2B%0A%5Cbegin%7Bbmatrix%7D%201%20%5C%5C%200%20%5Cend%7Bbmatrix%7D%0Ay%5ET%0A%5Cbegin%7Bbmatrix%7D%20c%5ET%20%26%200%20%5Cend%7Bbmatrix%7D%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -2319,9 +2248,7 @@ polynomials, which can be factored in the form:
 
 <div style="display:block;">
 
-![
-    s(x) = l (F \\otimes x) r
-](https://render.githubusercontent.com/render/math?math=s%28x%29%20%3D%20l%20%28F%20%5Cotimes%20x%29%20r)
+![inline equation](https://render.githubusercontent.com/render/math?math=s%28x%29%20%3D%20l%20%28F%20%5Cotimes%20x%29%20r)
 
 </div>
 
@@ -2352,12 +2279,7 @@ and `r` and the coefficient array `F`.
 
 which in this case is the matrix:
 
-![
-\\begin{bmatrix}
-    -1 & 1\\\\
-    1 & 0
-\\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20-1%20%26%201%5C%5C%0A%20%20%20%201%20%26%200%0A%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A%20%20%20%20-1%20%26%201%5C%5C%0A%20%20%20%201%20%26%200%0A%5Cend%7Bbmatrix%7D)
 
 and
 
@@ -2438,14 +2360,7 @@ the Mathematica `Eliminate` command tries to convert a collection of
 
 <div style="display:block;">
 
-![
-    \\begin{aligned}
-    p_1(x_1,\\ldots,x_n) &= 0 \\\\
-    p_2(x_1,\\ldots,x_n) &= 0 \\\\
-    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
-    p_m(x_1,\\ldots,x_n) &= 0
-    \\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20p_1%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20p_2%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20p_m%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%0A%20%20%20%20%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20p_1%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20p_2%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20p_m%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200%0A%20%20%20%20%5Cend%7Baligned%7D)
 
 </div>
 
@@ -2454,16 +2369,7 @@ new collection of equations like
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-    q_1(x_1) &= 0 \\\\
-    q_2(x_1,x_2) &= 0 \\\\
-    q_3(x_1,x_2) &= 0 \\\\
-    q_4(x_1,x_2,x_3)&=0 \\\\
-    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
-    q\_{r}(x_1,\\ldots,x_n) &= 0.
-    \\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20q_1%28x_1%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_2%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_3%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_4%28x_1%2Cx_2%2Cx_3%29%26%3D0%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20q_%7Br%7D%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200.%0A%20%20%20%20%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20q_1%28x_1%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_2%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_3%28x_1%2Cx_2%29%20%26%3D%200%20%5C%5C%0A%20%20%20%20q_4%28x_1%2Cx_2%2Cx_3%29%26%3D0%20%5C%5C%0A%20%20%20%20%5Cvdots%20%5Cquad%20%26%20%5Cquad%20%5C%2C%20%5C%2C%20%5Cvdots%20%5C%5C%0A%20%20%20%20q_%7Br%7D%28x_1%2C%5Cldots%2Cx_n%29%20%26%3D%200.%0A%20%20%20%20%5Cend%7Baligned%7D)
 
 </div>
 
@@ -2497,7 +2403,7 @@ which in this case prints:
 
 <div style="display:block;">
 
-![a \< b \< c \\ll x.](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x.)
+![inline equation](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x.)
 
 </div>
 
@@ -2516,13 +2422,7 @@ following relations (i.e. a list of polynomials):
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-    a \\, x \\, a &= c, &
-    a \\, b &= 1, &
-    b \\, a &= 1.
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20a%20%5C%2C%20x%20%5C%2C%20a%20%26%3D%20c%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20%26%3D%201%2C%20%26%0A%20%20%20%20b%20%5C%2C%20a%20%26%3D%201.%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20a%20%5C%2C%20x%20%5C%2C%20a%20%26%3D%20c%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20%26%3D%201%2C%20%26%0A%20%20%20%20b%20%5C%2C%20a%20%26%3D%201.%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -2591,9 +2491,7 @@ output GB effectively *solves* the input equation
 
 <div style="display:block;">
 
-![
-    a \\, x \\, a - c = 0
-](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%5C%2C%20a%20-%20c%20%3D%200)
+![inline equation](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%5C%2C%20a%20-%20c%20%3D%200)
 
 </div>
 
@@ -2601,12 +2499,7 @@ under the assumptions that
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-    b \\, a - 1 &= 0, &
-    a \\, b - 1 & =0,
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20b%20%5C%2C%20a%20-%201%20%26%3D%200%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20-%201%20%26%20%3D0%2C%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20b%20%5C%2C%20a%20-%201%20%26%3D%200%2C%20%26%0A%20%20%20%20a%20%5C%2C%20b%20-%201%20%26%20%3D0%2C%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -2615,9 +2508,7 @@ the relation:
 
 <div style="display:block;">
 
-![
-    x = b \\, c \\, b.
-](https://render.githubusercontent.com/render/math?math=x%20%3D%20b%20%5C%2C%20c%20%5C%2C%20b.)
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%3D%20b%20%5C%2C%20c%20%5C%2C%20b.)
 
 </div>
 
@@ -2636,13 +2527,7 @@ and the relations:
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-  a \\, x - c &= 0, \\\\
-  a \\, b \\, a - a &= 0, \\\\
-  b \\, a \\, b - b &= 0,
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20a%20%5C%2C%20x%20-%20c%20%26%3D%200%2C%20%5C%5C%0A%20%20a%20%5C%2C%20b%20%5C%2C%20a%20-%20a%20%26%3D%200%2C%20%5C%5C%0A%20%20b%20%5C%2C%20a%20%5C%2C%20b%20-%20b%20%26%3D%200%2C%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20a%20%5C%2C%20x%20-%20c%20%26%3D%200%2C%20%5C%5C%0A%20%20a%20%5C%2C%20b%20%5C%2C%20a%20-%20a%20%26%3D%200%2C%20%5C%5C%0A%20%20b%20%5C%2C%20a%20%5C%2C%20b%20-%20b%20%26%3D%200%2C%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -2665,9 +2550,7 @@ solutions:
 
 <div style="display:block;">
 
-![ 
-    0 = a \\, b \\, c - c = a \\, a^\\dag c - c 
-](https://render.githubusercontent.com/render/math?math=0%20%3D%20a%20%5C%2C%20b%20%5C%2C%20c%20-%20c%20%3D%20a%20%5C%2C%20a%5E%5Cdag%20c%20-%20c)
+![inline equation](https://render.githubusercontent.com/render/math?math=0%20%3D%20a%20%5C%2C%20b%20%5C%2C%20c%20-%20c%20%3D%20a%20%5C%2C%20a%5E%5Cdag%20c%20-%20c)
 
 </div>
 
@@ -2680,9 +2563,7 @@ expression:
 
 <div style="display:block;">
 
-![
-b \\, b \\, a \\, a - a \\, a \\, b \\, b + a \\, b \\, a
-](https://render.githubusercontent.com/render/math?math=b%20%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20a%20-%20a%20%5C%2C%20a%20%5C%2C%20b%20%5C%2C%20b%20%2B%20a%20%5C%2C%20b%20%5C%2C%20a)
+![inline equation](https://render.githubusercontent.com/render/math?math=b%20%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20a%20-%20a%20%5C%2C%20a%20%5C%2C%20b%20%5C%2C%20b%20%2B%20a%20%5C%2C%20b%20%5C%2C%20a)
 
 </div>
 
@@ -2690,9 +2571,7 @@ if we know that
 
 <div style="display:block;">
 
-![
-a \\, b \\, a = b
-](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b)
+![inline equation](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b)
 
 </div>
 
@@ -2783,16 +2662,14 @@ expression
 
 <div style="display:block;">
 
-![
-    x (1 - x)^{-1} - (1 - x)^{-1} x
-](https://render.githubusercontent.com/render/math?math=x%20%281%20-%20x%29%5E%7B-1%7D%20-%20%281%20-%20x%29%5E%7B-1%7D%20x)
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%281%20-%20x%29%5E%7B-1%7D%20-%20%281%20-%20x%29%5E%7B-1%7D%20x)
 
 </div>
 
 is equivalent to ![0](https://render.githubusercontent.com/render/math?math=0&mode=inline). One can use a nc Gröbner basis for that task.
 Consider for instance the order
 
-![ x \\ll (1-x)^{-1} ](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20%281-x%29%5E%7B-1%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20%281-x%29%5E%7B-1%7D)
 
 implied by the command:
 
@@ -2839,9 +2716,7 @@ For a more challenging example consider the identity:
 
 <div style="display:block;">
 
-![
-\\left (1 - x - y (1 - x)^{-1} y \\right )^{-1} = \\frac{1}{2} (1 - x - y)^{-1} + \\frac{1}{2} (1 - x + y)^{-1}
-](https://render.githubusercontent.com/render/math?math=%5Cleft%20%281%20-%20x%20-%20y%20%281%20-%20x%29%5E%7B-1%7D%20y%20%5Cright%20%29%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20-%20y%29%5E%7B-1%7D%20%2B%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20%2B%20y%29%5E%7B-1%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cleft%20%281%20-%20x%20-%20y%20%281%20-%20x%29%5E%7B-1%7D%20y%20%5Cright%20%29%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20-%20y%29%5E%7B-1%7D%20%2B%20%5Cfrac%7B1%7D%7B2%7D%20%281%20-%20x%20%2B%20y%29%5E%7B-1%7D)
 
 </div>
 
@@ -2935,13 +2810,7 @@ satisfy the equations:
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
--b\\, x + x\\, y  \\, a + x\\, b \\, a \\,  a &= 0 \\\\
-x \\, a-1&=0 \\\\
-a\\, x-1&=0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A-b%5C%2C%20x%20%2B%20x%5C%2C%20y%20%20%5C%2C%20a%20%2B%20x%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20%20a%20%26%3D%200%20%5C%5C%0Ax%20%5C%2C%20a-1%26%3D0%20%5C%5C%0Aa%5C%2C%20x-1%26%3D0%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A-b%5C%2C%20x%20%2B%20x%5C%2C%20y%20%20%5C%2C%20a%20%2B%20x%5C%2C%20b%20%5C%2C%20a%20%5C%2C%20%20a%20%26%3D%200%20%5C%5C%0Ax%20%5C%2C%20a-1%26%3D0%20%5C%5C%0Aa%5C%2C%20x-1%26%3D0%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3070,11 +2939,7 @@ such that the block matrices*
 
 <div style="display:block;">
 
-![  
-  \\begin{bmatrix} a & x \\\\ y & b \\end{bmatrix}
-  \\qquad 
-  \\begin{bmatrix} w & c \\\\ d & z \\end{bmatrix}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20x%20%5C%5C%20y%20%26%20b%20%5Cend%7Bbmatrix%7D%0A%20%20%5Cqquad%20%0A%20%20%5Cbegin%7Bbmatrix%7D%20w%20%26%20c%20%5C%5C%20d%20%26%20z%20%5Cend%7Bbmatrix%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20x%20%5C%5C%20y%20%26%20b%20%5Cend%7Bbmatrix%7D%0A%20%20%5Cqquad%20%0A%20%20%5Cbegin%7Bbmatrix%7D%20w%20%26%20c%20%5C%5C%20d%20%26%20z%20%5Cend%7Bbmatrix%7D)
 
 </div>
 
@@ -3136,14 +3001,7 @@ after seven iterations. The first four relations
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-    x &= d^{-1}-d^{-1} \\, z \\, b \\\\
-    y &= c^{-1}-b \\, z \\, c^{-1} \\\\
-    w &= a^{-1} \\, d^{-1}  \\, z \\, b \\, d \\\\
-    z \\, b \\, z &= z + d \\, a \\, c
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20x%20%26%3D%20d%5E%7B-1%7D-d%5E%7B-1%7D%20%5C%2C%20z%20%5C%2C%20b%20%5C%5C%0A%20%20%20%20y%20%26%3D%20c%5E%7B-1%7D-b%20%5C%2C%20z%20%5C%2C%20c%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%20%5C%2C%20z%20%5C%2C%20b%20%5C%2C%20d%20%5C%5C%0A%20%20%20%20z%20%5C%2C%20b%20%5C%2C%20z%20%26%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20x%20%26%3D%20d%5E%7B-1%7D-d%5E%7B-1%7D%20%5C%2C%20z%20%5C%2C%20b%20%5C%5C%0A%20%20%20%20y%20%26%3D%20c%5E%7B-1%7D-b%20%5C%2C%20z%20%5C%2C%20c%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%20%5C%2C%20z%20%5C%2C%20b%20%5C%2C%20d%20%5C%5C%0A%20%20%20%20z%20%5C%2C%20b%20%5C%2C%20z%20%26%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3181,14 +3039,7 @@ after five iterations. Once again, the first four relations
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-    z &= b^{-1}-b^{-1} \\, y \\, c \\\\
-    w &= a^{-1}-c \\, y \\, a^{-1} \\\\
-    x &= a \\, c \\, y \\, a^{-1} \\, d^{-1} \\\\
-    y \\, c \\, y &= y+b \\, d \\, a
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20z%20%26%3D%20b%5E%7B-1%7D-b%5E%7B-1%7D%20%5C%2C%20y%20%5C%2C%20c%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D-c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20x%20%26%3D%20a%20%5C%2C%20c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20y%20%5C%2C%20c%20%5C%2C%20y%20%26%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%20%20z%20%26%3D%20b%5E%7B-1%7D-b%5E%7B-1%7D%20%5C%2C%20y%20%5C%2C%20c%20%5C%5C%0A%20%20%20%20w%20%26%3D%20a%5E%7B-1%7D-c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20x%20%26%3D%20a%20%5C%2C%20c%20%5C%2C%20y%20%5C%2C%20a%5E%7B-1%7D%20%5C%2C%20d%5E%7B-1%7D%20%5C%5C%0A%20%20%20%20y%20%5C%2C%20c%20%5C%2C%20y%20%26%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3231,13 +3082,7 @@ replacement. For example the semidefinite program:
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-\\min_Y \\quad & \<I,Y\> \\\\
-\\text{s.t.} \\quad & A Y + Y A^T + I \\preceq 0 \\\\
-            & Y \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cmin_Y%20%5Cquad%20%26%20%3CI%2CY%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20Y%20%2B%20Y%20A%5ET%20%2B%20I%20%5Cpreceq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20Y%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cmin_Y%20%5Cquad%20%26%20%3CI%2CY%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20Y%20%2B%20Y%20A%5ET%20%2B%20I%20%5Cpreceq%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20Y%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3256,12 +3101,7 @@ programs are expected to be cast in the following *canonical form*:
 
 <div style="display:block;">
 
-![
-\\begin{aligned} 
-  \\max_y \\quad & \<b,y\> \\\\ 
-  \\text{s.t.} \\quad & f(y) \\preceq 0 
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%5Cpreceq%200%20%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%5Cpreceq%200%20%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3269,12 +3109,7 @@ or, equivalently:
 
 <div style="display:block;">
 
-![
-\\begin{aligned} 
-  \\max_y \\quad & \<b,y\> \\\\ 
-  \\text{s.t.} \\quad & f(y) + s = 0, \\quad s \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%2B%20s%20%3D%200%2C%20%5Cquad%20s%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_y%20%5Cquad%20%26%20%3Cb%2Cy%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%28y%29%20%2B%20s%20%3D%200%2C%20%5Cquad%20s%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3352,12 +3187,7 @@ The dual program for the example problem above is:
 
 <div style="display:block;">
 
-![
-\\begin{aligned} 
-  \\max_x \\quad & \<c,x\> \\\\ 
-  \\text{s.t.} \\quad & f^\*(x) + b = 0, \\quad x \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_x%20%5Cquad%20%26%20%3Cc%2Cx%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%5E%2A%28x%29%20%2B%20b%20%3D%200%2C%20%5Cquad%20x%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmax_x%20%5Cquad%20%26%20%3Cc%2Cx%3E%20%5C%5C%20%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20f%5E%2A%28x%29%20%2B%20b%20%3D%200%2C%20%5Cquad%20x%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3365,14 +3195,7 @@ In the case of the above problem the dual program is
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-\\max\_{X_1, X_2} \\quad & \<I,X_1\> \\\\
-\\text{s.t.} \\quad & A^T X_1 + X_1 A -X_2 - I = 0 \\\\
-            & X_1 \\succeq 0, \\\\
-        & X_2 \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cmax_%7BX_1%2C%20X_2%7D%20%5Cquad%20%26%20%3CI%2CX_1%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5ET%20X_1%20%2B%20X_1%20A%20-X_2%20-%20I%20%3D%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20X_1%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%20%20%20%20%20%20%26%20X_2%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%5Cmax_%7BX_1%2C%20X_2%7D%20%5Cquad%20%26%20%3CI%2CX_1%3E%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5ET%20X_1%20%2B%20X_1%20A%20-X_2%20-%20I%20%3D%200%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%26%20X_1%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%20%20%20%20%20%20%26%20X_2%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3395,13 +3218,7 @@ Semidefinite programs are optimization problems of the form:
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3415,12 +3232,7 @@ For example, problems can be stated as:
 
 <div style="display:block;">
 
-![
-\\begin{aligned} 
-  \\min_y \\quad & f(y), \\\\
-  \\text{s.t.} \\quad & G(y) \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -3437,13 +3249,7 @@ The list of constraints in `G` is to be interpreted as:
 
 <div style="display:block;">
 
-![
-\\begin{aligned} 
-  y_0 - 2 \\geq 0, \\\\
-  \\begin{bmatrix} y_1 & y_0 \\\\ y_0 & 1 \\end{bmatrix} \\succeq 0, \\\\
-  \\begin{bmatrix} y_2 & y_1 \\\\ y_1 & 1 \\end{bmatrix} \\succeq 0.
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20y_0%20-%202%20%5Cgeq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_1%20%26%20y_0%20%5C%5C%20y_0%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_2%20%26%20y_1%20%5C%5C%20y_1%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200.%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20y_0%20-%202%20%5Cgeq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_1%20%26%20y_0%20%5C%5C%20y_0%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200%2C%20%5C%5C%0A%20%20%5Cbegin%7Bbmatrix%7D%20y_2%20%26%20y_1%20%5C%5C%20y_1%20%26%201%20%5Cend%7Bbmatrix%7D%20%5Csucceq%200.%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -7877,13 +7683,7 @@ of semidefinite programs of the form:
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -7907,22 +7707,11 @@ Members are:
 `SDPMatrices[f, G, y]` converts the symbolic linear functions `f`,
 `G` in the variables `y` associated to the semidefinite program:
 
-![
-\\begin{aligned} 
-  \\min_y \\quad & f(y), \\\\
-  \\text{s.t.} \\quad & G(y) \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%20%0A%20%20%5Cmin_y%20%5Cquad%20%26%20f%28y%29%2C%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20G%28y%29%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 into numerical data that can be used to solve an SDP in the form:
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 `SDPMatrices` returns a list with three entries:
 
@@ -7952,13 +7741,7 @@ See also:
 
 `SDPSolve[{A,b,c}]` solves an SDP in the form:
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 `SDPSolve` returns a list with four entries:
 
@@ -8039,13 +7822,7 @@ of semidefinite programs of the form:
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A y + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -8114,13 +7891,7 @@ numeric solution of semidefinite programs of the form:
 
 <div style="display:block;">
 
-![
-\\begin{aligned}
-  \\max\_{y, S} \\quad & \\sum_i \\operatorname{trace}(b_i^T y_i) \\\\
-  \\text{s.t.} \\quad & A y + S = \\frac{1}{2} \\sum_i a_i y_i b_i + (a_i y_i b_i)^T + S = C \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20%5Csum_i%20%5Coperatorname%7Btrace%7D%28b_i%5ET%20y_i%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET%20%2B%20S%20%3D%20C%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20%5Csum_i%20%5Coperatorname%7Btrace%7D%28b_i%5ET%20y_i%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%20y%20%2B%20S%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET%20%2B%20S%20%3D%20C%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -8184,27 +7955,13 @@ semidefinite programs in the form
 
 <div style="display:block;">
 
-![
-\\tag{Primal}
-\\begin{aligned}
-  \\min\_{X} \\quad & \\operatorname{trace}(c X) \\\\
-  \\text{s.t.} \\quad & A^\*(X) = b \\\\
-                    & X \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Ctag%7BPrimal%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmin_%7BX%7D%20%5Cquad%20%26%20%5Coperatorname%7Btrace%7D%28c%20X%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5E%2A%28X%29%20%3D%20b%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20X%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Ctag%7BPrimal%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmin_%7BX%7D%20%5Cquad%20%26%20%5Coperatorname%7Btrace%7D%28c%20X%29%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%5E%2A%28X%29%20%3D%20b%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20X%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
 <div style="display:block;">
 
-![
-\\tag{Dual}
-\\begin{aligned}
-  \\max\_{y, S} \\quad & b^T y \\\\
-  \\text{s.t.} \\quad & A(y) + S = c \\\\
-                    & S \\succeq 0
-\\end{aligned}
-](https://render.githubusercontent.com/render/math?math=%5Ctag%7BDual%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%28y%29%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Ctag%7BDual%7D%0A%5Cbegin%7Baligned%7D%0A%20%20%5Cmax_%7By%2C%20S%7D%20%5Cquad%20%26%20b%5ET%20y%20%5C%5C%0A%20%20%5Ctext%7Bs.t.%7D%20%5Cquad%20%26%20A%28y%29%20%2B%20S%20%3D%20c%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%20S%20%5Csucceq%200%0A%5Cend%7Baligned%7D)
 
 </div>
 
@@ -8215,9 +7972,7 @@ of evaluating the mappings ![A](https://render.githubusercontent.com/render/math
 
 <div style="display:block;">
 
-![
-    A^\*(W_l A(\\Delta_y) W_r)
-](https://render.githubusercontent.com/render/math?math=A%5E%2A%28W_l%20A%28%5CDelta_y%29%20W_r%29)
+![inline equation](https://render.githubusercontent.com/render/math?math=A%5E%2A%28W_l%20A%28%5CDelta_y%29%20W_r%29)
 
 </div>
 
