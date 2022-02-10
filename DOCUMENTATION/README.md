@@ -3287,8 +3287,6 @@ into LaTeX. [`NCTeX`](#nctex) goes a step further and
 compiles the results expression in LaTeX and produces a PDF that can
 be embedded in notebooks of used on its own.
 
-![\\TeX](https://render.githubusercontent.com/render/math?math=%5CTeX&mode=inline)
-
 ## Pretty Output
 
 In a Mathematica notebook session the package [NCOutput](#ncoutput)
