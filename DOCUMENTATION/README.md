@@ -1119,7 +1119,11 @@ which returns
 
 Using `MatrixForm`:
 
-![\\begin{bmatrix} a & b \\\\ c a^{-1} & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D&mode=inline)
+<div style="display:block;">
+
+![\\begin{bmatrix} a & b \\\\ c a^{-1} & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+
+</div>
 
 The list `p` encodes the sequence of permutations calculated during
 the execution of the algorithm. The matrix `lu` contains the factors
@@ -1134,7 +1138,14 @@ resulting in this case in
 
 Using `MatrixForm`:
 
-![L = \\begin{bmatrix} 1 & 0 \\\\ c a^{-1} & 1 \\end{bmatrix}, \\qquad U = \\begin{bmatrix} a & b \\\\ 0 & d - c a^{-1} b \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%20U%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D&mode=inline)
+<div style="display:block;">
+
+![
+L = \\begin{bmatrix} 1 & 0 \\\\ c a^{-1} & 1 \\end{bmatrix}, \\qquad
+U = \\begin{bmatrix} a & b \\\\ 0 & d - c a^{-1} b \\end{bmatrix}
+](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+
+</div>
 
 To verify that ![M = L U](https://render.githubusercontent.com/render/math?math=M%20%3D%20L%20U&mode=inline) input
 
@@ -1175,7 +1186,13 @@ Mathematica’s `Part` (`[[]]`) command. Of course, if one prefers to work with 
 
 to produce
 
-![\\begin{bmatrix} 0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%26%200%20%5C%5C%201%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D&mode=inline)
+<div style="display:block;">
+
+![
+\\begin{bmatrix} 0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}
+](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%26%200%20%5C%5C%201%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
+
+</div>
 
 Likewise
 
@@ -1222,7 +1239,14 @@ to get
 
 Using `MatrixForm`:
 
-![L = \\begin{bmatrix} 1 & 0 \\\\ 2 & 1 \\end{bmatrix}, \\qquad U = \\begin{bmatrix} a & b \\\\ 0 & 0 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%202%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%20U%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%200%20%5Cend%7Bbmatrix%7D&mode=inline)
+<div style="display:block;">
+
+![
+L = \\begin{bmatrix} 1 & 0 \\\\ 2 & 1 \\end{bmatrix}, \\qquad
+U = \\begin{bmatrix} a & b \\\\ 0 & 0 \\end{bmatrix}
+](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%202%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%200%20%5Cend%7Bbmatrix%7D)
+
+</div>
 
 In this case, to verify that ![P M Q = L U](https://render.githubusercontent.com/render/math?math=P%20M%20Q%20%3D%20L%20U&mode=inline) input
 
@@ -1301,7 +1325,13 @@ produces as a result the matrix
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a & b & d & 2 \\\\ c & d & e & 3 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20c%20%26%20d%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D&mode=inline)
+<div style="display:block;">
+
+![
+\\begin{bmatrix} a & b & d & 2 \\\\ c & d & e & 3 \\end{bmatrix}
+](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20c%20%26%20d%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D)
+
+</div>
 
 Note how the symbols were treated as block-matrices during the substitution. As a second example, with
 
@@ -1347,7 +1377,7 @@ The closest related demo to the material in this section is
 When working with nc quadratics it is useful to be able to “factor” the
 quadratic into the following form
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
     q(x) = c + s(x) + l(x) M r(x)
@@ -1413,7 +1443,7 @@ produces
 
 Note that the middle matrix
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{bmatrix}
@@ -1441,7 +1471,7 @@ results in
 
 in which `middle` is the symmetric matrix
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{bmatrix}
@@ -1489,7 +1519,7 @@ The resulting middle matrix can be factored using
 
 which produces the diagonal factors
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{bmatrix}
@@ -1503,7 +1533,7 @@ which produces the diagonal factors
 
 which indicates the the original nc rational is convex whenever
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 (1 + b y + y b - a x a)^{-1} \\succeq 0
@@ -1513,7 +1543,7 @@ which indicates the the original nc rational is convex whenever
 
 or, equivalently, whenever
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 1 + b y + y b - a x a \\succeq 0
@@ -2236,7 +2266,7 @@ is zero as expected. Internally `NCPolynomial` represents a polynomial
 matrix by constructing matrix factors. For example the representation
 of the matrix `mat1` correspond to the factors
 
-<div style="display: block">
+<div style="display:block;">
 
 ![ 
 \\begin{aligned}
@@ -2287,7 +2317,7 @@ linear polynomial matrices.
 Another interesting class of nc polynomials is that of linear
 polynomials, which can be factored in the form:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
     s(x) = l (F \\otimes x) r
@@ -2406,7 +2436,7 @@ which, for simple collections, readily yields a solution. Likewise,
 the Mathematica `Eliminate` command tries to convert a collection of
 ![m](https://render.githubusercontent.com/render/math?math=m&mode=inline) polynomial equations (often called relations)
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
     \\begin{aligned}
@@ -2422,7 +2452,7 @@ the Mathematica `Eliminate` command tries to convert a collection of
 in variables ![x_1,x_2, \\ldots x_n](https://render.githubusercontent.com/render/math?math=x_1%2Cx_2%2C%20%5Cldots%20x_n&mode=inline) to a *triangular* form, that is a
 new collection of equations like
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -2465,7 +2495,7 @@ implied by the above command can be visualized using:
 
 which in this case prints:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![a \< b \< c \\ll x.](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x.)
 
@@ -2484,7 +2514,7 @@ details on orderings see Section [Orderings](#ordering-on-variables-and-monomial
 Our goal is to calculate the Gröbner basis associated with the
 following relations (i.e. a list of polynomials):
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -2559,7 +2589,7 @@ the leading monomial as Mathematica alphabetizes the resulting sum.
 Someone not familiar with GB’s might find it instructive to note this
 output GB effectively *solves* the input equation
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
     a \\, x \\, a - c = 0
@@ -2569,7 +2599,7 @@ output GB effectively *solves* the input equation
 
 under the assumptions that
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -2583,7 +2613,7 @@ under the assumptions that
 that is ![a = b^{-1}](https://render.githubusercontent.com/render/math?math=a%20%3D%20b%5E%7B-1%7D&mode=inline) and produces the expected result in the form of
 the relation:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
     x = b \\, c \\, b.
@@ -2604,7 +2634,7 @@ that is
 
 and the relations:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -2633,7 +2663,7 @@ In this case the Gröbner basis cannot quite *solve* the equations but
 it remarkably produces the necessary condition for existence of
 solutions:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![ 
     0 = a \\, b \\, c - c = a \\, a^\\dag c - c 
@@ -2648,7 +2678,7 @@ that can be interpreted as ![c](https://render.githubusercontent.com/render/math
 Our goal now is to verify if it is possible to *simplify* the following
 expression:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 b \\, b \\, a \\, a - a \\, a \\, b \\, b + a \\, b \\, a
@@ -2658,7 +2688,7 @@ b \\, b \\, a \\, a - a \\, a \\, b \\, b + a \\, b \\, a
 
 if we know that
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 a \\, b \\, a = b
@@ -2751,7 +2781,7 @@ noncommutative expressions. One challenge is to recognize identities
 implied by the existence of certain inverses. For example, that the
 expression
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
     x (1 - x)^{-1} - (1 - x)^{-1} x
@@ -2807,7 +2837,7 @@ The above command results in `0`, as one would hope.
 
 For a more challenging example consider the identity:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\left (1 - x - y (1 - x)^{-1} y \\right )^{-1} = \\frac{1}{2} (1 - x - y)^{-1} + \\frac{1}{2} (1 - x + y)^{-1}
@@ -2903,7 +2933,7 @@ We now give a simple example how one can solve for
 ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) given that ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline),![b](https://render.githubusercontent.com/render/math?math=b&mode=inline),![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline)
 satisfy the equations:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -3038,7 +3068,7 @@ him for discussions.
 determine under what conditions there exists matrices x, y, z, and w
 such that the block matrices*
 
-<div style="display: block">
+<div style="display:block;">
 
 ![  
   \\begin{bmatrix} a & x \\\\ y & b \\end{bmatrix}
@@ -3104,7 +3134,7 @@ we obtain the Gröbner basis:
 
 after seven iterations. The first four relations
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -3149,7 +3179,7 @@ produces the Gröbner basis:
 
 after five iterations. Once again, the first four relations
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -3199,7 +3229,7 @@ Semidefinite programs consist of symbolic noncommutative expressions
 representing inequalities and a list of rules for data
 replacement. For example the semidefinite program:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -3224,7 +3254,7 @@ product, in this case `-1`. The reason for the negative signs in the
 objective as well as in the second inequality is that semidefinite
 programs are expected to be cast in the following *canonical form*:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned} 
@@ -3237,7 +3267,7 @@ programs are expected to be cast in the following *canonical form*:
 
 or, equivalently:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned} 
@@ -3320,7 +3350,7 @@ A symbolic dual problem can be calculated easily using
 
 The dual program for the example problem above is:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned} 
@@ -3333,7 +3363,7 @@ The dual program for the example problem above is:
 
 In the case of the above problem the dual program is
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -3363,7 +3393,7 @@ as in:
 
 Semidefinite programs are optimization problems of the form:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -3383,7 +3413,7 @@ following convenient methods for producing data in the proper format.
 
 For example, problems can be stated as:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned} 
@@ -3405,7 +3435,7 @@ Here is a simple example:
 
 The list of constraints in `G` is to be interpreted as:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned} 
@@ -7845,7 +7875,7 @@ See also:
 `SDP` is a package that provides data structures for the numeric solution
 of semidefinite programs of the form:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -8007,7 +8037,7 @@ See also:
 `SDPFlat` is a package that provides data structures for the numeric solution
 of semidefinite programs of the form:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -8082,7 +8112,7 @@ See also:
 `SDPSylvester` is a package that provides data structures for the
 numeric solution of semidefinite programs of the form:
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\begin{aligned}
@@ -8152,7 +8182,7 @@ See also:
 `PrimalDual` provides an algorithm for solving a pair of primal-dual
 semidefinite programs in the form
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\tag{Primal}
@@ -8165,7 +8195,7 @@ semidefinite programs in the form
 
 </div>
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
 \\tag{Dual}
@@ -8183,7 +8213,7 @@ where ![X](https://render.githubusercontent.com/render/math?math=X&mode=inline) 
 The algorithm is parametrized and users should provide their own means
 of evaluating the mappings ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline), ![A^\*](https://render.githubusercontent.com/render/math?math=A%5E%2A&mode=inline) and also the Sylvester mapping
 
-<div style="display: block">
+<div style="display:block;">
 
 ![
     A^\*(W_l A(\\Delta_y) W_r)
