@@ -3650,10 +3650,10 @@ or `Needs`, as in
 
     Needs["NC`"]
 
-Once NC is loaded, you can then proceed to load any other package from the
+Once `NC` is loaded, you can then proceed to load any other package from the
 *NCAlgebra suite*.
 
-For example you can load the package NCAlgebra using
+For example you can load the package `NCAlgebra` using
 
     << NCAlgebra`
 
@@ -3662,7 +3662,7 @@ For example you can load the package NCAlgebra using
 The following `options` can be set using `SetOptions` before loading other packages:
 
 -   `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
-    NCAlgebra will set all global single letter small cap symbols as
+    `NCAlgebra` will set all global single letter small cap symbols as
     noncommutative; {#SmallCapSymbolsNonCommutative}
 -   `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
     during the first loading of a package.
@@ -3681,9 +3681,9 @@ or `Needs`, as in
     Needs["NCAlgebra`"]
 
 If the option [`SmallCapSymbolsNonCommutative`](#options) is
-`True` then NCAlgebra will set all global single letter small cap
+`True` then `NCAlgebra` will set all global single letter small cap
 symbols as noncommutative. If that is not desired simply set
-`SmallCapSymbolsNonCommutative` to `False` before loading NCAlgebra, as in
+`SmallCapSymbolsNonCommutative` to `False` before loading `NCAlgebra`, as in
 
     SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
     << NCAlgebra`
@@ -3702,9 +3702,9 @@ or
     Off[NCAlgebra::NoSymbolsNonCommutative]
     << NCAlgebra`
 
-will load NCAlgebra without issuing a symbol assignment message.
+will load `NCAlgebra` without issuing a symbol assignment message.
 
-Upon loading NCAlgebra for the first time, a large banner will be
+Upon loading `NCAlgebra` for the first time, a large banner will be
 shown. If you do not want this banner to be displayed at all set the
 option [`ShowBanner`](#options) to `False` before loading, as in
 
@@ -3718,7 +3718,7 @@ One of the following messages will be displayed after loading.
 -   `NCAlgebra::SmallCapSymbolsNonCommutative`, if small cap single letter symbols have
     been set as noncomutative;
 -   `NCAlgebra::NoSymbolsNonCommutative`, if no symbols have been set as noncomutative by
-    NCAlgebra.
+    `NCAlgebra`.
 
 # Packages for manipulating NC expressions
 
