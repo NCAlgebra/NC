@@ -1,5 +1,6 @@
 BeginPackage["NCAlgebra`",
-	     {"NonCommutativeMultiply`",
+	     {"NC`",
+	      "NonCommutativeMultiply`",
               "NCCollect`",
               "NCDiff`",
               "NCDot`",
@@ -10,22 +11,30 @@ BeginPackage["NCAlgebra`",
               "NCPolyInterface`",
               "NCOutput`"}];
 
+NCAlgebra::SmallCapSymbolsNonCommutative = "All lower cap single letter symbols (e.g. a,b,c,...) were set as noncommutative.";
+NCAlgebra::NoSymbolsNonCommutative = "No symbols were set as noncommutative. Use SetNonCommutative to set noncommutative symbols.";
+
 Begin["Private`"];
 
-  If [ !ValueQ[$NC$AlgebraLoaded]
-      ,
-       (* First time loading *)
-       (* Print banner *)
-       FilePrint[FindFile["banner.txt"]];
-       $NC$AlgebraLoaded = True;
+  verbose = If[ValueQ[$NCAlgebra$Loaded], False, $NCAlgebra$Loaded=True];
+
+  (* Print banner *)
+  If [ verbose && ShowBanner /. Options[NC, ShowBanner], FilePrint[FindFile["banner.txt"]]];
+
+  
+  If[ SmallCapSymbolsNonCommutative /. Options[NC, SmallCapSymbolsNonCommutative]
+     ,
+      (* Sets all lower case letters to be NonCommutative *)
+      SetNonCommutativeHold[Global`a, Global`b, Global`c, Global`d, Global`e,
+  			    Global`f, Global`g, Global`h, Global`i, Global`j,
+			    Global`k, Global`l, Global`m, Global`n, Global`o,
+			    Global`p, Global`q, Global`r, Global`s, Global`t,
+			    Global`u, Global`v, Global`w, Global`x, Global`y,
+			    Global`z];
+      Message[NCAlgebra::SmallCapSymbolsNonCommutative];
+     ,
+      Message[NCAlgebra::NoSymbolsNonCommutative];
   ];
-
-End[];
-
-Begin["Global`"];
-
-(* Sets all lower case letters to be NonCommutative *)
-SetNonCommutativeHold[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
 
 End[];
 

@@ -6,6 +6,11 @@
 
 BeginPackage["NC`"];
 
+Options[NC] = {
+  SmallCapSymbolsNonCommutative -> True,
+  ShowBanner ->	True
+};
+
 Begin["`Private`"];
 
   verbose = If[ValueQ[$NC$Loaded], False, $NC$Loaded=True];

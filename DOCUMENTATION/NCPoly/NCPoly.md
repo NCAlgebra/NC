@@ -317,7 +317,7 @@ See also:
 [NCPolyFromCoefficientArray](#NCPolyFromCoefficientArray),
 [NCPolyCoefficient](#NCPolyCoefficient).
 
-#### NCPolyGramMatrix {#NCPolyFromMatrix}
+#### NCPolyGramMatrix {#NCPolyGramMatrix}
 
 `NCPolyGramMatrix[poly]` returns a Gram matrix corresponding to the monomials in the nc polynomial `poly`.
 

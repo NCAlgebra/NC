@@ -203,7 +203,21 @@ class="toc-section-number">8.2.1</span> NCTeX Options</a></li>
 class="toc-section-number">8.3</span> Using NCTeXForm</a></li>
 </ul></li>
 <li><a href="#ReferenceIntroduction"><span
-class="toc-section-number">9</span> Introduction</a></li>
+class="toc-section-number">9</span> Introduction</a>
+<ul>
+<li><a href="#PackageNC"><span class="toc-section-number">9.1</span>
+NC</a>
+<ul>
+<li><a href="#PackageNCOptions"><span
+class="toc-section-number">9.1.1</span> Options</a></li>
+</ul></li>
+<li><a href="#PackageNCAlgebra"><span
+class="toc-section-number">9.2</span> NCAlgebra</a>
+<ul>
+<li><a href="#NCAlgebraMessages"><span
+class="toc-section-number">9.2.1</span> Messages</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#ManipulatingNCExpressions"><span
 class="toc-section-number">10</span> Packages for manipulating NC
 expressions</a>
@@ -895,6 +909,8 @@ class="header-section-number">2</span> Changes in Version 5.0</h1>
 class="header-section-number">2.1</span> Version 5.0.6</h2>
 <ol type="1">
 <li>NC<code>and NCAlgebra</code> are now Contexts</li>
+<li>NCMatrixExpand moved from NCDot to NCReplace</li>
+<li>Tests fixed to work even if a-z are not defined as NC globally</li>
 </ol>
 <h2 data-number="2.2" id="Version5_0_5"><span
 class="header-section-number">2.2</span> Version 5.0.5</h2>
@@ -1007,6 +1023,9 @@ You can now use &quot;&lt;&lt; NCAlgebra`&quot; to load NCAlgebra.</code></pre>
 <p>Then just type</p>
 <pre><code>&lt;&lt; NCAlgebra`</code></pre>
 <p>to load <code>NCAlgebra</code>.</p>
+<p>Advanced options for controlling the loading of <code>NC</code> and
+<code>NCAlgebra</code> can be found in <a href="#PackageNC">here</a> and
+<a href="#PackageNCAlgebra">here</a>.</p>
 <h2 data-number="3.2" id="now-what"><span
 class="header-section-number">3.2</span> Now what?</h2>
 <p>Extensive documentation is found in the directory
@@ -1465,7 +1484,7 @@ are still supported for backward compatibility.</p>
 <p>See <a href="#AdvancedMatrices">advanced matrix commands</a> for
 other useful matrix manipulation routines, such as <a
 href="#NCMatrixExpand"><code>NCMatrixExpand</code></a>, <a
-href="#NCMatrixReplace"><code>NCMatrixReplace</code></a>, <a
+href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a>, <a
 href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>,
 etc, that allow one to work with matrices with symbolic noncommutative
 entries.</p>
@@ -1623,7 +1642,7 @@ the users.</p>
 <p><strong>WARNING:</strong> Versions prior to 5 contained the command
 <code>NCLDUDecomposition</code> which is being deprecated in
 <strong>Version 5</strong> as its functionality is now provided by <a
-href="#NCDLDDecomposition"><code>NCLDLDecomposition</code></a>, with a
+href="#NCLDLDecomposition"><code>NCLDLDecomposition</code></a>, with a
 slightly different syntax.</p>
 <h3 data-number="4.7.5" id="ReplaceWithMatrices"><span
 class="header-section-number">4.7.5</span> Replace with matrices</h3>
@@ -3539,6 +3558,75 @@ class="header-section-number">9</span> Introduction</h1>
 <p>The following chapters and sections describes packages inside
 <code>NCAlgebra</code>.</p>
 <p>Packages are automatically loaded unless otherwise noted.</p>
+<h2 data-number="9.1" id="PackageNC"><span
+class="header-section-number">9.1</span> NC</h2>
+<p><strong>NC</strong> is a meta package that enables the functionality
+of the <em>NCAlgebra suite</em> of non-commutative algebra packages for
+Mathematica.</p>
+<p>The package can be loaded using <code>Get</code>, as in</p>
+<pre><code>&lt;&lt; NC`</code></pre>
+<p>or <code>Needs</code>, as in</p>
+<pre><code>Needs[&quot;NC`&quot;]</code></pre>
+<p>Once NC is loaded, you can then proceed to load any other package
+from the <em>NCAlgebra suite</em>.</p>
+<p>For example you can load the package NCAlgebra using</p>
+<pre><code>&lt;&lt; NCAlgebra`</code></pre>
+<h3 data-number="9.1.1" id="PackageNCOptions"><span
+class="header-section-number">9.1.1</span> Options</h3>
+<p>The following <code>options</code> can be set using
+<code>SetOptions</code> before loading other packages:</p>
+<ul>
+<li><code>SmallCapSymbolsNonCommutative</code> (<code>True</code>): If
+<code>True</code>, loading NCAlgebra will set all global single letter
+small cap symbols as noncommutative;
+{#SmallCapSymbolsNonCommutative}</li>
+<li><code>ShowBanner</code> (<code>True</code>): If <code>True</code>, a
+banner, when available, will be shown during the first loading of a
+package.</li>
+</ul>
+<h2 data-number="9.2" id="PackageNCAlgebra"><span
+class="header-section-number">9.2</span> NCAlgebra</h2>
+<p><strong>NCAlgebra</strong> is the main package of the <em>NCAlgebra
+suite</em> of non-commutative algebra packages for Mathematica.</p>
+<p>The package can be loaded using <code>Get</code>, as in</p>
+<pre><code>&lt;&lt; NCAlgebra`</code></pre>
+<p>or <code>Needs</code>, as in</p>
+<pre><code>Needs[&quot;NCAlgebra`&quot;]</code></pre>
+<p>If the option <a
+href="#PackageNCOptions"><code>SmallCapSymbolsNonCommutative</code></a>
+is <code>True</code> then NCAlgebra will set all global single letter
+small cap symbols as noncommutative. If that is not desired simply set
+<code>SmallCapSymbolsNonCommutative</code> to <code>False</code> before
+loading NCAlgebra, as in</p>
+<pre><code>SetOptions[NC, SmallCapSymbolsNonCommutative -&gt; False]
+&lt;&lt; NCAlgebra`</code></pre>
+<p>A message will be issued warning users whether any letters have been
+set as noncommutative upon loading. Those messages are documented <a
+href="#NCAlgebraMessages">here</a>. Users can use Mathematica’s
+<code>Quiet</code> and <code>Off</code> if they do not want these
+messages to display. For example,</p>
+<pre><code>Off[NCAlgebra::SmallCapSymbolsNonCommutative]
+&lt;&lt; NCAlgebra`</code></pre>
+<p>or</p>
+<pre><code>SetOptions[NC, SmallCapSymbolsNonCommutative -&gt; False]
+Off[NCAlgebra::NoSymbolsNonCommutative]
+&lt;&lt; NCAlgebra`</code></pre>
+<p>will load NCAlgebra without issuing a symbol assignment message.</p>
+<p>Upon loading NCAlgebra for the first time, a large banner will be
+shown. If you do not want this banner to be displayed at all set the
+option <a href="#PackageNCOptions"><code>ShowBanner</code></a> to
+<code>False</code> before loading, as in</p>
+<pre><code>SetOptions[NC, ShowBanner -&gt; False]
+&lt;&lt; NCAlgebra`</code></pre>
+<h3 data-number="9.2.1" id="NCAlgebraMessages"><span
+class="header-section-number">9.2.1</span> Messages</h3>
+<p>One of the following messages will be displayed after loading.</p>
+<ul>
+<li><code>NCAlgebra::SmallCapSymbolsNonCommutative</code>, if small cap
+single letter symbols have been set as noncomutative;</li>
+<li><code>NCAlgebra::NoSymbolsNonCommutative</code>, if no symbols have
+been set as noncomutative by NCAlgebra.</li>
+</ul>
 <h1 data-number="10" id="ManipulatingNCExpressions"><span
 class="header-section-number">10</span> Packages for manipulating NC
 expressions</h1>
@@ -5812,7 +5900,7 @@ to the rules:</p>
 <p>See also: <a
 href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a>, <a
 href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
-<h4 data-number="13.1.3.9" id="NCPolyFromMatrix"><span
+<h4 data-number="13.1.3.9" id="NCPolyGramMatrix"><span
 class="header-section-number">13.1.3.9</span> NCPolyGramMatrix</h4>
 <p><code>NCPolyGramMatrix[poly]</code> returns a Gram matrix
 corresponding to the monomials in the nc polynomial

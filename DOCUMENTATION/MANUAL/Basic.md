@@ -577,7 +577,7 @@ In previous versions one had to use the special commands `tpMat`,
 `ajMat`, and `coMat`. Those are still supported for backward
 compatibility.
 
-See [advanced matrix commands](#AdvancedMatrices) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#NCMatrixExpand), [`NCMatrixReplace`](#NCMatrixReplace), [`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
+See [advanced matrix commands](#AdvancedMatrices) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#NCMatrixExpand), [`NCMatrixReplaceAll`](#NCMatrixReplaceAll), [`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
 
 ### LU Decomposition {#BasicMatrices:LUDecomposition}
 
@@ -757,7 +757,7 @@ successfully. If not possible it will warn the users.
 **WARNING:** Versions prior to 5 contained the command
 `NCLDUDecomposition` which is being
 deprecated in **Version 5** as its functionality is now provided by
-[`NCLDLDecomposition`](#NCDLDDecomposition), with a slightly different
+[`NCLDLDecomposition`](#NCLDLDecomposition), with a slightly different
 syntax.
 
 ### Replace with matrices {#ReplaceWithMatrices}

@@ -3,6 +3,8 @@
 ## Version 5.0.6 {#Version5_0_6}
 
 1. NC` and NCAlgebra` are now Contexts
+2. NCMatrixExpand moved from NCDot to NCReplace
+3. Tests fixed to work even if a-z are not defined as NC globally
 
 ## Version 5.0.5 {#Version5_0_5}
 

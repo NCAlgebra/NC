@@ -58,6 +58,10 @@
         -   [<span class="toc-section-number">8.2.1</span> NCTeX Options](#nctex-options)
     -   [<span class="toc-section-number">8.3</span> Using NCTeXForm](#using-nctexform)
 -   [<span class="toc-section-number">9</span> Introduction](#introduction-1)
+    -   [<span class="toc-section-number">9.1</span> NC](#nc)
+        -   [<span class="toc-section-number">9.1.1</span> Options](#options)
+    -   [<span class="toc-section-number">9.2</span> NCAlgebra](#ncalgebra)
+        -   [<span class="toc-section-number">9.2.1</span> Messages](#messages)
 -   [<span class="toc-section-number">10</span> Packages for manipulating NC expressions](#packages-for-manipulating-nc-expressions)
     -   [<span class="toc-section-number">10.1</span> NonCommutativeMultiply](#noncommutativemultiply)
         -   [<span class="toc-section-number">10.1.1</span> aj](#aj)
@@ -368,6 +372,8 @@ The beginnings of the program come from eran@slac.
 ## Version 5.0.6
 
 1.  NC`and NCAlgebra` are now Contexts
+2.  NCMatrixExpand moved from NCDot to NCReplace
+3.  Tests fixed to work even if a-z are not defined as NC globally
 
 ## Version 5.0.5
 
@@ -376,7 +382,7 @@ The beginnings of the program come from eran@slac.
 
 ## Version 5.0.4
 
-1.  First implementation of [NCPolyGramMatrix](#NCPolyGramMatrix) and [NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
+1.  First implementation of [NCPolyGramMatrix](#ncpolygrammatrix) and [NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
 2.  Improvements in NCReplace.
 3.  Several bug fixes and improvements. Thanks Eric Evert!
 
@@ -469,6 +475,8 @@ Then just type
     << NCAlgebra`
 
 to load `NCAlgebra`.
+
+Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#nc) and [here](#ncalgebra).
 
 ## Now what?
 
@@ -1096,7 +1104,7 @@ In previous versions one had to use the special commands `tpMat`,
 `ajMat`, and `coMat`. Those are still supported for backward
 compatibility.
 
-See [advanced matrix commands](#expanding-matrix-products) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#ncmatrixexpand), [`NCMatrixReplace`](#NCMatrixReplace), [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
+See [advanced matrix commands](#expanding-matrix-products) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#ncmatrixexpand), [`NCMatrixReplaceAll`](#ncmatrixreplaceall), [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
 
 ### LU Decomposition
 
@@ -1293,7 +1301,7 @@ successfully. If not possible it will warn the users.
 **WARNING:** Versions prior to 5 contained the command
 `NCLDUDecomposition` which is being
 deprecated in **Version 5** as its functionality is now provided by
-[`NCLDLDecomposition`](#NCDLDDecomposition), with a slightly different
+[`NCLDLDecomposition`](#ncldldecomposition), with a slightly different
 syntax.
 
 ### Replace with matrices
@@ -3629,6 +3637,89 @@ The following chapters and sections describes packages inside
 
 Packages are automatically loaded unless otherwise noted.
 
+## NC
+
+**NC** is a meta package that enables the functionality of the
+*NCAlgebra suite* of non-commutative algebra packages for Mathematica.
+
+The package can be loaded using `Get`, as in
+
+    << NC`
+
+or `Needs`, as in
+
+    Needs["NC`"]
+
+Once NC is loaded, you can then proceed to load any other package from the
+*NCAlgebra suite*.
+
+For example you can load the package NCAlgebra using
+
+    << NCAlgebra`
+
+### Options
+
+The following `options` can be set using `SetOptions` before loading other packages:
+
+-   `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
+    NCAlgebra will set all global single letter small cap symbols as
+    noncommutative; {#SmallCapSymbolsNonCommutative}
+-   `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
+    during the first loading of a package.
+
+## NCAlgebra
+
+**NCAlgebra** is the main package of the *NCAlgebra suite* of
+non-commutative algebra packages for Mathematica.
+
+The package can be loaded using `Get`, as in
+
+    << NCAlgebra`
+
+or `Needs`, as in
+
+    Needs["NCAlgebra`"]
+
+If the option [`SmallCapSymbolsNonCommutative`](#options) is
+`True` then NCAlgebra will set all global single letter small cap
+symbols as noncommutative. If that is not desired simply set
+`SmallCapSymbolsNonCommutative` to `False` before loading NCAlgebra, as in
+
+    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    << NCAlgebra`
+
+A message will be issued warning users whether any letters have been
+set as noncommutative upon loading. Those messages are documented
+[here](#messages). Users can use Mathematica’s `Quiet` and
+`Off` if they do not want these messages to display. For example,
+
+    Off[NCAlgebra::SmallCapSymbolsNonCommutative]
+    << NCAlgebra`
+
+or
+
+    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    Off[NCAlgebra::NoSymbolsNonCommutative]
+    << NCAlgebra`
+
+will load NCAlgebra without issuing a symbol assignment message.
+
+Upon loading NCAlgebra for the first time, a large banner will be
+shown. If you do not want this banner to be displayed at all set the
+option [`ShowBanner`](#options) to `False` before loading, as in
+
+    SetOptions[NC, ShowBanner -> False]
+    << NCAlgebra`
+
+### Messages
+
+One of the following messages will be displayed after loading.
+
+-   `NCAlgebra::SmallCapSymbolsNonCommutative`, if small cap single letter symbols have
+    been set as noncomutative;
+-   `NCAlgebra::NoSymbolsNonCommutative`, if no symbols have been set as noncomutative by
+    NCAlgebra.
+
 # Packages for manipulating NC expressions
 
 ## NonCommutativeMultiply
@@ -5533,7 +5624,7 @@ Members are:
     -   [NCPolyNumberOfTerms](#ncpolynumberofterms)
     -   [NCPolyCoefficient](#ncpolycoefficient)
     -   [NCPolyCoefficientArray](#ncpolycoefficientarray)
-    -   [NCPolyGramMatrix](#NCPolyGramMatrix)
+    -   [NCPolyGramMatrix](#ncpolygrammatrix)
     -   [NCPolyGetCoefficients](#ncpolygetcoefficients)
     -   [NCPolyGetDigits](#ncpolygetdigits)
     -   [NCPolyGetIntegers](#ncpolygetintegers)
@@ -5743,7 +5834,7 @@ return
            {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
 
 See also:
-[NCPolyGramMatrix](#NCPolyGramMatrix).
+[NCPolyGramMatrix](#ncpolygrammatrix).
 
 ### Access and utlity functions
 
