@@ -24,6 +24,6 @@ The following `options` can be set using `SetOptions` before loading other packa
 
 * `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
   `NCAlgebra` will set all global single letter small cap symbols as
-  noncommutative; {#SmallCapSymbolsNonCommutative}
+  noncommutative;
 * `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
   during the first loading of a package.
