@@ -131,4 +131,6 @@ Module[
 
   NCTest[a ** b ** tr[a ** b], tr[a ** b] a ** b];
 
+  NCTest[Head[tr[a]^2], Power];
+
 ];

@@ -6,6 +6,8 @@
 
 BeginPackage["NC`"];
 
+NC::Directory = "You are using the version of NCAlgebra which is found in: \"`1`\"";
+
 Options[NC] = {
   SmallCapSymbolsNonCommutative -> True,
   ShowBanner ->	True
@@ -20,12 +22,7 @@ Begin["`Private`"];
   If[ $NC$Dir =!= {}
      ,
       (* Setup Path *)
-
-      If[ verbose
-	 ,
-          Print["You are using the version of NCAlgebra which is found in:"];
-          Print["  ", $NC$Dir];
-      ];
+      Message[NC::Directory, $NC$Dir];
 
       (* Setting NCAlgebra Path *)
       AppendTo[$Path, $NC$Dir];
@@ -63,10 +60,12 @@ Begin["`Private`"];
       AppendTo[$Path,ToFileName[{$NC$Dir, "TESTING", "NCSDP"}]];
       AppendTo[$Path,ToFileName[{$NC$Dir, "TESTING", "NCPoly"}]];
 
+      (*
       If[ verbose
 	 ,
           Print["You can now use \"<< NCAlgebra`\" to load NCAlgebra."];
       ];
+      *)
      ,
       (* Did not find NC` *)
       Print["ERROR: Could not find NC directory. See documentation for installation information."];

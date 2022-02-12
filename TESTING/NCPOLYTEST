@@ -1,6 +1,6 @@
 SetOptions[$Output,PageWidth->1000];
 
-<< NC`
+Quiet[Get["NC`"], NC`NC::Directory];
 << NCTest`
 << NCPoly`
 

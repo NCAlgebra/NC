@@ -165,9 +165,11 @@ Begin[ "`Private`" ]
     Quiet[
       Check[
          f /: HoldPattern[CommutativeQ[f[___]]] = True;
+         f /: HoldPattern[PowerCommutativeQ[f[___]]] = True;
         ,
          Unprotect[f];
          f /: HoldPattern[CommutativeQ[f[___]]] = True;
+         f /: HoldPattern[PowerCommutativeQ[f[___]]] = True;
          Protect[f];
          Message[SetCommutative::Protected, f];
         ,
