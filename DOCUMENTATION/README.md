@@ -755,6 +755,15 @@ always simplifies to zero. Also `b ** a ** tr[b ** a]` simpplifies to
 because `tr` is a commutative function. See
 [SetCommutativeFunction](#setcommutativefunction).
 
+Use [NCMatrixExpand](#ncmatrixexpand) to expand `tr` over matrices
+with noncommutative entries. For example,
+
+    tr[{{a,b},{c,d}}]
+
+evaluates to
+
+    tr[a] + tr[b]
+
 ## Replace
 
 A key feature of symbolic computation is the ability to perform
