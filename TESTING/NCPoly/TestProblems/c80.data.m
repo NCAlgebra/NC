@@ -2,6 +2,7 @@
 us by Ben Keller.
 *)
 
+SetNonCommutative[c,b,a];
 ClearMonomialOrder[];
 SetMonomialOrder[{c,b,a}];
 rels=

@@ -34,6 +34,8 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/SDP.md \
          MANUAL/TeX.md \
          MANUAL/Reference.md \
+         NC.md \
+         NCAlgebra/NCAlgebra.md \
          MANUAL/ExpressionPackages.md \
          NCAlgebra/NonCommutativeMultiply.md \
 	 NCAlgebra/NCCollect.md \

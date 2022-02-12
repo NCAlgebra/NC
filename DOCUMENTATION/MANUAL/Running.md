@@ -28,6 +28,8 @@ Then just type
 
 to load `NCAlgebra`.
 
+Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#PackageNC) and [here](#PackageNCAlgebra).
+
 ## Now what?
 
 Extensive documentation is found in the directory `DOCUMENTATION`,

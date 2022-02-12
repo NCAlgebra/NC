@@ -20,6 +20,7 @@ Members are:
 * [NCReplaceAllSelfAdjoint](#NCReplaceAllSelfAdjoint)
 * [NCReplaceListSelfAdjoint](#NCReplaceListSelfAdjoint)
 * [NCReplaceRepeatedSelfAdjoint](#NCReplaceRepeatedSelfAdjoint)
+* [NCMatrixExpand](#NCMatrixExpand)
 * [NCMatrixReplaceAll](#NCMatrixReplaceAll)
 * [NCMatrixReplaceRepeated](#NCMatrixReplaceRepeated)
 
@@ -223,6 +224,13 @@ See also:
 
 See also:
 [NCReplaceListSymmetric](#NCReplaceListSymmetric).
+
+### NCMatrixExpand {#NCMatrixExpand}
+
+`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
+
+See also:
+[NCInverse](#NCInverse), [NCDot](#NCDot).
 
 ### NCMatrixReplaceAll {#NCMatrixReplaceAll}
 

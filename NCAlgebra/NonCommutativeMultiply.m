@@ -21,6 +21,7 @@ BeginPackage[ "NonCommutativeMultiply`" ];
 Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 
       SetCommutative, SetNonCommutative,
+      SetCommutativeFunction,
       SetNonCommutativeHold,
       SetCommutingOperators,
       UnsetCommutingOperators,
@@ -43,7 +44,9 @@ noncommutative.";
 TDefined::Warning = "Symbol T has definitions associated with it \
 that will be cleared by NCAlgebra.";
 
-SetNonCommutative::Protected = "WARNING: Symbol `1` is protected. You should seriously consider not setting it as noncommutative.";
+SetNonCommutative::Protected = "WARNING: Symbol `1` was set as non commutative but it is protected. You should seriously consider not setting it as noncommutative.";
+
+SetCommutative::Protected = "WARNING: Symbol `1` was set as commutative but it is protected. You should seriously consider not setting it as commutative.";
 
 SetCommutingOperators::AlreadyDefined = "Symbols `1` and `2` were already defined commutative. Replacing existing rule.";
 
@@ -90,8 +93,7 @@ Begin[ "`Private`" ]
   
   (* a commutative functions is commutative if all arguments are 
      also commutative; this includes lists which are not matrices *)
-  CommutativeQ[f_?CommutativeQ[x___]] := 
-      Apply[And, Map[CommutativeQ,{x}]];
+  CommutativeQ[f_?CommutativeQ[x___]] := Apply[And, Map[CommutativeQ,{x}]];
 
   (* otherwise it is noncommutative *)
   CommutativeQ[f_[x___]] := False;
@@ -100,28 +102,31 @@ Begin[ "`Private`" ]
   CommutativeQ[_] = True;
   
   (* NonCommutativeQ *)
-  
   NonCommutativeQ[x_] := Not[CommutativeQ[x]];
 
 
   (*  SetCommutative and SetNonCommutative *)
-
-  Clear[DoSetNonCommutative];
-  DoSetNonCommutative[x_Symbol] := 
+  Clear[OverwriteWriteProtection];
+  OverwriteWriteProtection[message_, x_Symbol, value_] :=
     Quiet[
       Check[
-         (x /: HoldPattern[CommutativeQ[x]] = False);
+         (x /: HoldPattern[CommutativeQ[x]] = value);
         ,
-         Message[SetNonCommutative::Protected, x];
          Unprotect[x];
-         (x /: HoldPattern[CommutativeQ[x]] = False);
+         (x /: HoldPattern[CommutativeQ[x]] = value);
          Protect[x];
+         Message[message, x];
         , 
          TagSet::write
       ];
      , 
       TagSet::write
     ];
+  SetAttributes[OverwriteWriteProtection, HoldFirst];
+
+  Clear[DoSetNonCommutative];
+  DoSetNonCommutative[x_Symbol] :=
+    OverwriteWriteProtection[SetNonCommutative::Protected, x, False];
   DoSetNonCommutative[x_List] := SetNonCommutative /@ x;
   DoSetNonCommutative[Subscript[x_Symbol, y__]] := 
     Message[CommutativeQ::NonCommutativeSubscript, x, y];
@@ -137,7 +142,8 @@ Begin[ "`Private`" ]
   SetAttributes[SetNonCommutativeHold, HoldAll];
 
   Clear[DoSetCommutative];
-  DoSetCommutative[x_Symbol] := CommutativeQ[x] ^= True;
+  DoSetCommutative[x_Symbol] :=
+    OverwriteWriteProtection[SetCommutative::Protected, x, True];
   DoSetCommutative[x_List] := SetCommutative /@ x;
   DoSetCommutative[Subscript[x_Symbol, y__]] := 
     Message[CommutativeQ::CommutativeSubscript, x, y];
@@ -148,7 +154,27 @@ Begin[ "`Private`" ]
 
   SetCommutative[a__] := Scan[DoSetCommutative, {a}];
 
+  SetCommutativeHold[a__] := Scan[DoSetCommutative, Unevaluated[{a}]];
+  SetAttributes[SetCommutativeHold, HoldAll];
+
   SetNonCommutative[NonCommutativeMultiply];
+
+  (* SetCommutativeFunction *)
+  SetCommutativeFunction[f_Symbol] :=
+    Quiet[
+      Check[
+         f /: HoldPattern[CommutativeQ[f[___]]] = True;
+        ,
+         Unprotect[f];
+         f /: HoldPattern[CommutativeQ[f[___]]] = True;
+         Protect[f];
+         Message[SetCommutative::Protected, f];
+        ,
+         TagSet::write
+      ];
+     ,
+      TagSet::write
+    ];
 
   (* Commutative *)
   

@@ -15,9 +15,9 @@
 (* :History: 
 *)
 
-BeginPackage[ "NCReplace`", 
-              "NCDot`",
-              "NonCommutativeMultiply`"];
+BeginPackage[ "NCReplace`",
+             {"NCDot`",
+              "NonCommutativeMultiply`"}];
 
 Clear[NCReplace, 
       NCReplaceAll, 
@@ -32,11 +32,14 @@ Clear[NCReplace,
       NCReplaceAllSelfAdjoint, 
       NCReplaceRepeatedSelfAdjoint, 
       NCReplaceListSelfAdjoint,
+      NCMatrixExpand,
       NCMatrixReplaceAll, 
       NCMatrixReplaceRepeated,
       NCR, NCRA, NCRR, NCRL,
       NCRSym, NCRASym, NCRRSym, NCRLSym,
       NCRSA, NCRASA, NCRRSA, NCRLSA];
+
+Get["NCReplace.usage"];
 
 Begin["`Private`"]
 
@@ -141,29 +144,28 @@ Begin["`Private`"]
       FlatMatrix -> ArrayFlatten
   };
 
-  (*
-  NCMatrixReplaceAll[expr_, rule_] := Module[
-    {tmp},
 
-    tmp = ({expr, rule} 
-             /. NCMatrixReplaceFlatRules);
+  (* Expand ** between matrices *)
+  NCMatrixExpand[expr_] :=
+      NCReplaceRepeated[
+          (expr //. inv[a_?MatrixQ] :> NCInverse[a])
+         ,
+          NonCommutativeMultiply[b_?ArrayQ, c__?ArrayQ] :>
+               NCDot[b, c]
 
-    Print["tmp0 = ", tmp];
-      
-    tmp = (ReplaceAll @@ 
-            ({expr, rule} 
-             /. NCMatrixReplaceFlatRules))
-               /. NCMatrixReplaceReverseFlatRules;
-
-    Print["tmp1 = ", tmp];
-      
-    tmp = NCMatrixExpand[tmp];
-      
-    Print["tmp2 = ", tmp];
-      
-    Return[tmp /. FlatNCPlus -> Plus];
+(*
+      {
+          NonCommutativeMultiply[b_List, c__List] :>
+               NCDot[b, c],
+          NonCommutativeMultiply[b_List, c_] /; Head[c] =!= List :>
+               (* Map[NonCommutativeMultiply[#, c]&, b, {2}], *)
+               NCDot[b, {{c}}],
+          NonCommutativeMultiply[b_, c_List] /; Head[b] =!= List :>
+               (* Map[NonCommutativeMultiply[b, #]&, c, {2}] *)
+               NCDot[{{b}}, c]
+      }
+*)
   ];
-  *)
 
   NCMatrixReplaceAll[expr_, rule_] := NCMatrixExpand[
       (ReplaceAll @@ 

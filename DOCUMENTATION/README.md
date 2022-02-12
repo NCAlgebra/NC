@@ -1,11 +1,12 @@
 -   [<span class="toc-section-number">1</span> Acknowledgements](#acknowledgements)
 -   [<span class="toc-section-number">2</span> Changes in Version 5.0](#changes-in-version-50)
-    -   [<span class="toc-section-number">2.1</span> Version 5.0.5](#version-505)
-    -   [<span class="toc-section-number">2.2</span> Version 5.0.4](#version-504)
-    -   [<span class="toc-section-number">2.3</span> Version 5.0.3](#version-503)
-    -   [<span class="toc-section-number">2.4</span> Version 5.0.2](#version-502)
-    -   [<span class="toc-section-number">2.5</span> Version 5.0.1](#version-501)
-    -   [<span class="toc-section-number">2.6</span> Version 5.0.0](#version-500)
+    -   [<span class="toc-section-number">2.1</span> Version 5.0.6](#version-506)
+    -   [<span class="toc-section-number">2.2</span> Version 5.0.5](#version-505)
+    -   [<span class="toc-section-number">2.3</span> Version 5.0.4](#version-504)
+    -   [<span class="toc-section-number">2.4</span> Version 5.0.3](#version-503)
+    -   [<span class="toc-section-number">2.5</span> Version 5.0.2](#version-502)
+    -   [<span class="toc-section-number">2.6</span> Version 5.0.1](#version-501)
+    -   [<span class="toc-section-number">2.7</span> Version 5.0.0](#version-500)
 -   [<span class="toc-section-number">3</span> Introduction](#introduction)
     -   [<span class="toc-section-number">3.1</span> Running NCAlgebra](#running-ncalgebra)
     -   [<span class="toc-section-number">3.2</span> Now what?](#now-what)
@@ -57,6 +58,10 @@
         -   [<span class="toc-section-number">8.2.1</span> NCTeX Options](#nctex-options)
     -   [<span class="toc-section-number">8.3</span> Using NCTeXForm](#using-nctexform)
 -   [<span class="toc-section-number">9</span> Introduction](#introduction-1)
+    -   [<span class="toc-section-number">9.1</span> NC](#nc)
+        -   [<span class="toc-section-number">9.1.1</span> Options](#options)
+    -   [<span class="toc-section-number">9.2</span> NCAlgebra](#ncalgebra)
+        -   [<span class="toc-section-number">9.2.1</span> Messages](#messages)
 -   [<span class="toc-section-number">10</span> Packages for manipulating NC expressions](#packages-for-manipulating-nc-expressions)
     -   [<span class="toc-section-number">10.1</span> NonCommutativeMultiply](#noncommutativemultiply)
         -   [<span class="toc-section-number">10.1.1</span> aj](#aj)
@@ -68,19 +73,21 @@
         -   [<span class="toc-section-number">10.1.7</span> CommutativeQ](#commutativeq)
         -   [<span class="toc-section-number">10.1.8</span> NonCommutativeQ](#noncommutativeq)
         -   [<span class="toc-section-number">10.1.9</span> SetCommutative](#setcommutative)
-        -   [<span class="toc-section-number">10.1.10</span> SetNonCommutative](#setnoncommutative)
-        -   [<span class="toc-section-number">10.1.11</span> SetNonCommutativeHold](#setnoncommutativehold)
-        -   [<span class="toc-section-number">10.1.12</span> SNC](#snc)
-        -   [<span class="toc-section-number">10.1.13</span> SetCommutingOperators](#setcommutingoperators)
-        -   [<span class="toc-section-number">10.1.14</span> UnsetCommutingOperators](#unsetcommutingoperators)
-        -   [<span class="toc-section-number">10.1.15</span> CommutingOperatorsQ](#commutingoperatorsq)
-        -   [<span class="toc-section-number">10.1.16</span> Commutative](#commutative)
-        -   [<span class="toc-section-number">10.1.17</span> CommuteEverything](#commuteeverything)
-        -   [<span class="toc-section-number">10.1.18</span> BeginCommuteEverything](#begincommuteeverything)
-        -   [<span class="toc-section-number">10.1.19</span> EndCommuteEverything](#endcommuteeverything)
-        -   [<span class="toc-section-number">10.1.20</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
-        -   [<span class="toc-section-number">10.1.21</span> NCExpand](#ncexpand)
-        -   [<span class="toc-section-number">10.1.22</span> NCE](#nce)
+        -   [<span class="toc-section-number">10.1.10</span> SetCommutativeHold](#setcommutativehold)
+        -   [<span class="toc-section-number">10.1.11</span> SetNonCommutative](#setnoncommutative)
+        -   [<span class="toc-section-number">10.1.12</span> SetNonCommutativeHold](#setnoncommutativehold)
+        -   [<span class="toc-section-number">10.1.13</span> SetCommutativeFunction](#setcommutativefunction)
+        -   [<span class="toc-section-number">10.1.14</span> SNC](#snc)
+        -   [<span class="toc-section-number">10.1.15</span> SetCommutingOperators](#setcommutingoperators)
+        -   [<span class="toc-section-number">10.1.16</span> UnsetCommutingOperators](#unsetcommutingoperators)
+        -   [<span class="toc-section-number">10.1.17</span> CommutingOperatorsQ](#commutingoperatorsq)
+        -   [<span class="toc-section-number">10.1.18</span> Commutative](#commutative)
+        -   [<span class="toc-section-number">10.1.19</span> CommuteEverything](#commuteeverything)
+        -   [<span class="toc-section-number">10.1.20</span> BeginCommuteEverything](#begincommuteeverything)
+        -   [<span class="toc-section-number">10.1.21</span> EndCommuteEverything](#endcommuteeverything)
+        -   [<span class="toc-section-number">10.1.22</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
+        -   [<span class="toc-section-number">10.1.23</span> NCExpand](#ncexpand)
+        -   [<span class="toc-section-number">10.1.24</span> NCE](#nce)
     -   [<span class="toc-section-number">10.2</span> NCCollect](#nccollect)
         -   [<span class="toc-section-number">10.2.1</span> NCCollect](#nccollect-1)
         -   [<span class="toc-section-number">10.2.2</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
@@ -119,8 +126,9 @@
         -   [<span class="toc-section-number">10.3.24</span> NCRASA](#ncrasa)
         -   [<span class="toc-section-number">10.3.25</span> NCRRSA](#ncrrsa)
         -   [<span class="toc-section-number">10.3.26</span> NCRLSA](#ncrlsa)
-        -   [<span class="toc-section-number">10.3.27</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
-        -   [<span class="toc-section-number">10.3.28</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
+        -   [<span class="toc-section-number">10.3.27</span> NCMatrixExpand](#ncmatrixexpand)
+        -   [<span class="toc-section-number">10.3.28</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
+        -   [<span class="toc-section-number">10.3.29</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
     -   [<span class="toc-section-number">10.4</span> NCSelfAdjoint](#ncselfadjoint)
         -   [<span class="toc-section-number">10.4.1</span> NCSymmetricQ](#ncsymmetricq)
         -   [<span class="toc-section-number">10.4.2</span> NCSymmetricTest](#ncsymmetrictest)
@@ -150,7 +158,6 @@
         -   [<span class="toc-section-number">11.1.3</span> coMat](#comat)
         -   [<span class="toc-section-number">11.1.4</span> NCDot](#ncdot-1)
         -   [<span class="toc-section-number">11.1.5</span> NCInverse](#ncinverse)
-        -   [<span class="toc-section-number">11.1.6</span> NCMatrixExpand](#ncmatrixexpand)
     -   [<span class="toc-section-number">11.2</span> NCMatrixDecompositions](#ncmatrixdecompositions)
         -   [<span class="toc-section-number">11.2.1</span> NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting)
         -   [<span class="toc-section-number">11.2.2</span> NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting)
@@ -364,6 +371,14 @@ The beginnings of the program come from eran@slac.
 
 # Changes in Version 5.0
 
+## Version 5.0.6
+
+1.  NC`and NCAlgebra` are now Contexts
+2.  NCMatrixExpand moved from NCDot to NCReplace
+3.  Added SetCommutativeFunction
+4.  Tests fixed to work even if a-z are not defined as NC globally
+5.  More tests for CommutativeQ
+
 ## Version 5.0.5
 
 1.  Improved documentation
@@ -371,7 +386,7 @@ The beginnings of the program come from eran@slac.
 
 ## Version 5.0.4
 
-1.  First implementation of [NCPolyGramMatrix](#NCPolyGramMatrix) and [NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
+1.  First implementation of [NCPolyGramMatrix](#ncpolygrammatrix) and [NCPolyFromGramMatrix](#ncpolyfromgrammatrix).
 2.  Improvements in NCReplace.
 3.  Several bug fixes and improvements. Thanks Eric Evert!
 
@@ -464,6 +479,8 @@ Then just type
     << NCAlgebra`
 
 to load `NCAlgebra`.
+
+Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#nc) and [here](#ncalgebra).
 
 ## Now what?
 
@@ -1091,7 +1108,7 @@ In previous versions one had to use the special commands `tpMat`,
 `ajMat`, and `coMat`. Those are still supported for backward
 compatibility.
 
-See [advanced matrix commands](#expanding-matrix-products) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#ncmatrixexpand), [`NCMatrixReplace`](#NCMatrixReplace), [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
+See [advanced matrix commands](#expanding-matrix-products) for other useful matrix manipulation routines, such as [`NCMatrixExpand`](#ncmatrixexpand), [`NCMatrixReplaceAll`](#ncmatrixreplaceall), [`NCMatrixReplaceRepeated`](#ncmatrixreplacerepeated), etc, that allow one to work with matrices with symbolic noncommutative entries.
 
 ### LU Decomposition
 
@@ -1288,7 +1305,7 @@ successfully. If not possible it will warn the users.
 **WARNING:** Versions prior to 5 contained the command
 `NCLDUDecomposition` which is being
 deprecated in **Version 5** as its functionality is now provided by
-[`NCLDLDecomposition`](#NCDLDDecomposition), with a slightly different
+[`NCLDLDecomposition`](#ncldldecomposition), with a slightly different
 syntax.
 
 ### Replace with matrices
@@ -3624,6 +3641,89 @@ The following chapters and sections describes packages inside
 
 Packages are automatically loaded unless otherwise noted.
 
+## NC
+
+**NC** is a meta package that enables the functionality of the
+*NCAlgebra suite* of non-commutative algebra packages for Mathematica.
+
+The package can be loaded using `Get`, as in
+
+    << NC`
+
+or `Needs`, as in
+
+    Needs["NC`"]
+
+Once `NC` is loaded, you can then proceed to load any other package from the
+*NCAlgebra suite*.
+
+For example you can load the package `NCAlgebra` using
+
+    << NCAlgebra`
+
+### Options
+
+The following `options` can be set using `SetOptions` before loading other packages:
+
+-   `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
+    `NCAlgebra` will set all global single letter small cap symbols as
+    noncommutative;
+-   `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
+    during the first loading of a package.
+
+## NCAlgebra
+
+**NCAlgebra** is the main package of the *NCAlgebra suite* of
+non-commutative algebra packages for Mathematica.
+
+The package can be loaded using `Get`, as in
+
+    << NCAlgebra`
+
+or `Needs`, as in
+
+    Needs["NCAlgebra`"]
+
+If the option [`SmallCapSymbolsNonCommutative`](#options) is
+`True` then `NCAlgebra` will set all global single letter small cap
+symbols as noncommutative. If that is not desired simply set
+`SmallCapSymbolsNonCommutative` to `False` before loading `NCAlgebra`, as in
+
+    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    << NCAlgebra`
+
+A message will be issued warning users whether any letters have been
+set as noncommutative upon loading. Those messages are documented
+[here](#messages). Users can use Mathematica’s `Quiet` and
+`Off` if they do not want these messages to display. For example,
+
+    Off[NCAlgebra::SmallCapSymbolsNonCommutative]
+    << NCAlgebra`
+
+or
+
+    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    Off[NCAlgebra::NoSymbolsNonCommutative]
+    << NCAlgebra`
+
+will load `NCAlgebra` without issuing a symbol assignment message.
+
+Upon loading `NCAlgebra` for the first time, a large banner will be
+shown. If you do not want this banner to be displayed at all set the
+option [`ShowBanner`](#options) to `False` before loading, as in
+
+    SetOptions[NC, ShowBanner -> False]
+    << NCAlgebra`
+
+### Messages
+
+One of the following messages will be displayed after loading.
+
+-   `NCAlgebra::SmallCapSymbolsNonCommutative`, if small cap single letter symbols have
+    been set as noncomutative;
+-   `NCAlgebra::NoSymbolsNonCommutative`, if no symbols have been set as noncomutative by
+    `NCAlgebra`.
+
 # Packages for manipulating NC expressions
 
 ## NonCommutativeMultiply
@@ -3641,8 +3741,10 @@ Members are:
 -   [CommutativeQ](#commutativeq)
 -   [NonCommutativeQ](#noncommutativeq)
 -   [SetCommutative](#setcommutative)
+-   [SetCommutativeHold](#setcommutativehold)
 -   [SetNonCommutative](#setnoncommutative)
 -   [SetNonCommutativeHold](#setnoncommutativehold)
+-   [SetCommutativeFunction](#setcommutativefunction)
 -   [SetCommutingOperators](#setcommutingoperators)
 -   [UnsetCommutingOperators](#unsetcommutingoperators)
 -   [CommutingOperatorsQ](#commutingoperatorsq)
@@ -3718,6 +3820,15 @@ See also:
 See also:
 [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
 
+### SetCommutativeHold
+
+`SetCommutativeHold[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, … to be commutative.
+
+`SetCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
+
+See also:
+[SetNonCommutativeHold](#setnoncommutativehold), [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+
 ### SetNonCommutative
 
 `SetNonCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, … to be noncommutative.
@@ -3732,7 +3843,26 @@ See also:
 `SetNonCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
 
 See also:
-[SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+[SetCommutativeHold](#setcommutativehold), [SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+
+### SetCommutativeFunction
+
+`SetCommutativeFunction[f]` sets expressions with `Head` `f`, i.e. functions, to be commutative.
+
+By default, expressions in which the `Head` or any of its arguments is noncommutative will be considered noncommutative. For example,
+
+    SetCommutative[tr];
+    a ** b ** tr[a ** b]
+
+evaluates to `a ** b ** tr[a ** b]` while
+
+    SetCommutativeFunction[tr];
+    a ** b ** tr[a ** b]
+
+evaluates to `tr[a**b] * a ** b`.
+
+See also:
+[SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
 
 ### SNC
 
@@ -4042,6 +4172,7 @@ Members are:
 -   [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
 -   [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
 -   [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+-   [NCMatrixExpand](#ncmatrixexpand)
 -   [NCMatrixReplaceAll](#ncmatrixreplaceall)
 -   [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
 
@@ -4245,6 +4376,13 @@ See also:
 
 See also:
 [NCReplaceListSymmetric](#ncreplacelistsymmetric).
+
+### NCMatrixExpand
+
+`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
+
+See also:
+[NCInverse](#ncinverse), [NCDot](#ncdot-1).
 
 ### NCMatrixReplaceAll
 
@@ -4707,7 +4845,6 @@ Members are:
 -   [coMat](#comat)
 -   [NCDot](#ncdot-1)
 -   [NCInverse](#ncinverse)
--   [NCMatrixExpand](#ncmatrixexpand)
 
 ### tpMat
 
@@ -4754,13 +4891,6 @@ We recommend using `NCSimplifyRational` to improve the results.
 
 See also:
 [tpMat](#tpmat), [ajMat](#comat), [coMat](#comat).
-
-### NCMatrixExpand
-
-`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
-
-See also:
-[NCInverse](#ncinverse), [NCDot](#ncdot-1).
 
 ## NCMatrixDecompositions
 
@@ -5528,7 +5658,7 @@ Members are:
     -   [NCPolyNumberOfTerms](#ncpolynumberofterms)
     -   [NCPolyCoefficient](#ncpolycoefficient)
     -   [NCPolyCoefficientArray](#ncpolycoefficientarray)
-    -   [NCPolyGramMatrix](#NCPolyGramMatrix)
+    -   [NCPolyGramMatrix](#ncpolygrammatrix)
     -   [NCPolyGetCoefficients](#ncpolygetcoefficients)
     -   [NCPolyGetDigits](#ncpolygetdigits)
     -   [NCPolyGetIntegers](#ncpolygetintegers)
@@ -5738,7 +5868,7 @@ return
            {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
 
 See also:
-[NCPolyGramMatrix](#NCPolyGramMatrix).
+[NCPolyGramMatrix](#ncpolygrammatrix).
 
 ### Access and utlity functions
 

@@ -1,7 +1,7 @@
 (* Eric's long run with old version of the algorithm that required 
  clean up base *)
 
-SNC[z1, z2, w, h];
+SetNonCommutative[z1, z2, w, h];
 SetMonomialOrder[z1, z2, w, h];
 Clear[c0, c1, c2];
 

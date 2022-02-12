@@ -123,18 +123,54 @@ Block[
   (* Test subscripts *)
   SetNonCommutative[zz];
 
-  NCCheck[NonCommutativeQ[zz], True];
-  NCCheck[NonCommutativeQ[Subscript[zz,1]], True];
-  NCCheck[NonCommutativeQ[Subscript[zz,1,2]], True];
-  NCCheck[NonCommutativeQ[Subscript[zz,x]], True];
+  NCTest[NonCommutativeQ[zz], True];
+  NCTest[NonCommutativeQ[Subscript[zz,1]], True];
+  NCTest[NonCommutativeQ[Subscript[zz,1,2]], True];
+  NCTest[NonCommutativeQ[Subscript[zz,x]], True];
 
   SetCommutative[zz];
 
-  NCCheck[CommutativeQ[zz], True];
-  NCCheck[CommutativeQ[Subscript[zz,1]], True];
-  NCCheck[CommutativeQ[Subscript[zz,1,2]], True];
-  NCCheck[CommutativeQ[Subscript[zz,x]], True];
+  NCTest[CommutativeQ[zz], True];
+  NCTest[CommutativeQ[Subscript[zz,1]], True];
+  NCTest[CommutativeQ[Subscript[zz,1,2]], True];
+  NCTest[CommutativeQ[Subscript[zz,x]], True];
 
   Clear[zz];
+
+  (* Test functions *)
+  SetNonCommutative[x, y];
+  SetCommutative[b];
+  NCTest[CommutativeQ[b[y]], False];
+  NCTest[CommutativeQ[b[y,x]], False];
+  NCTest[CommutativeQ[b[b,x]], False];
+  NCTest[CommutativeQ[b[b,b]], True];
+  NCTest[CommutativeQ[x[b,b]], False];
+  NCTest[CommutativeQ[x[y]], False];
+
+  SetCommutativeFunction[x];
+  NCTest[CommutativeQ[x[y]], True];
+
+  (* Protected Symbols *)
+  NCTestCheck[SetNonCommutative[E], SetNonCommutative::Protected];
+  NCTest[CommutativeQ[E], False];
+
+  NCTestCheck[SetCommutative[E], SetCommutative::Protected];
+  NCTest[CommutativeQ[E], True];
+
+  NCTest[CommutativeQ[Tr[x]], False];
+  NCTestCheck[SetCommutativeFunction[Tr], SetCommutative::Protected];
+  NCTest[CommutativeQ[Tr[x]], True];
+
+  (* Test SetNonCommutativeHold *)
+  b = 1;
+  NCTestCheck[SetCommutative[b], CommutativeQ::Commutative];
+  NCTest[CommutativeQ[b], True];
+  SetCommutativeHold[b];
+  NCTest[CommutativeQ[b], True];
+
+  NCTestCheck[SetNonCommutative[b], CommutativeQ::NonCommutative];
+  NCTest[CommutativeQ[b], True];
+  SetNonCommutativeHold[b];
+  NCTest[CommutativeQ[b], True];
   
 ];

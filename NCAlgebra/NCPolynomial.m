@@ -14,6 +14,7 @@
 
 BeginPackage[ "NCPolynomial`",
               "NCDot`",
+              "NCReplace`",
               "NCUtil`",
               "NCPolyInterface`",
 	      "NonCommutativeMultiply`" ];

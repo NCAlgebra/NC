@@ -3,10 +3,10 @@
 
 Block[
    {exp, answer, vars, p,
-   a,b,c,d,e,f,g,h,j,x,y,z,A,B,C,
+   a,b,c,d,e,f,g,h,j,x,y,z,w,A,B,C,
    isSym, symList},
 
-   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z];
+   SetNonCommutative[a,b,c,d,e,f,g,h,j,x,y,z,w];
    SetCommutative[A,B,C];
 
    vars = {x};

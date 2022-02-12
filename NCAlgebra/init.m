@@ -1,31 +1,41 @@
-(* Load NCAlgebra packages *)
-<< NonCommutativeMultiply`
+BeginPackage["NCAlgebra`",
+	     {"NC`",
+	      "NonCommutativeMultiply`",
+              "NCCollect`",
+              "NCDiff`",
+              "NCDot`",
+              "NCReplace`",
+              "NCMatrixDecompositions`",
+              "NCSimplifyRational`",
+              "NCDeprecated`",
+              "NCPolyInterface`",
+              "NCOutput`"}];
 
-If [ !ValueQ[$NC$AlgebraLoaded],
-    
-    (* First time loading *)
-     
-    (* Print banner *)
-    FilePrint[FindFile["banner.txt"]];
-     
-    $NC$AlgebraLoaded = True;
-];
+NCAlgebra::SmallCapSymbolsNonCommutative = "All lower cap single letter symbols (e.g. a,b,c,...) were set as noncommutative.";
+NCAlgebra::NoSymbolsNonCommutative = "No symbols were set as noncommutative. Use SetNonCommutative to set noncommutative symbols.";
 
-(* Sets all lower case letters to be NonCommutative *)
-SetNonCommutativeHold[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
+Begin["Private`"];
 
-(* Load default packages *)
-<< NCCollect`
-<< NCDiff`
-<< NCReplace`
-<< NCDot`
-<< NCMatrixDecompositions`
-<< NCSimplifyRational`
-<< NCDeprecated`
+  verbose = If[ValueQ[$NCAlgebra$Loaded], False, $NCAlgebra$Loaded=True];
 
-(* Load NCPoly interface with NCAlgebra *)
-<< NCPolyInterface`
+  (* Print banner *)
+  If [ verbose && ShowBanner /. Options[NC, ShowBanner], FilePrint[FindFile["banner.txt"]]];
 
-(* Configure output *)
-<< NCOutput`
-NCSetOutput[]
+  
+  If[ SmallCapSymbolsNonCommutative /. Options[NC, SmallCapSymbolsNonCommutative]
+     ,
+      (* Sets all lower case letters to be NonCommutative *)
+      SetNonCommutativeHold[Global`a, Global`b, Global`c, Global`d, Global`e,
+  			    Global`f, Global`g, Global`h, Global`i, Global`j,
+			    Global`k, Global`l, Global`m, Global`n, Global`o,
+			    Global`p, Global`q, Global`r, Global`s, Global`t,
+			    Global`u, Global`v, Global`w, Global`x, Global`y,
+			    Global`z];
+      Message[NCAlgebra::SmallCapSymbolsNonCommutative];
+     ,
+      Message[NCAlgebra::NoSymbolsNonCommutative];
+  ];
+
+End[];
+
+EndPackage[];

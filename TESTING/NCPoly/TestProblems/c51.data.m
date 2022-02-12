@@ -1,4 +1,4 @@
-SNC[a,b,c,d,x,y,z,w,ia,ib,ic,id];
+SetNonCommutative[a,b,c,d,x,y,z,w,ia,ib,ic,id];
 ClearMonomialOrder[];
 SetMonomialOrder[{a,b,c,d,ia,ib,ic,id},1];
 SetMonomialOrder[{z},2];

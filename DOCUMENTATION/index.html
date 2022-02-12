@@ -38,17 +38,19 @@ class="toc-section-number">1</span> Acknowledgements</a></li>
 <li><a href="#Version5_0"><span class="toc-section-number">2</span>
 Changes in Version 5.0</a>
 <ul>
-<li><a href="#Version5_0_5"><span class="toc-section-number">2.1</span>
+<li><a href="#Version5_0_6"><span class="toc-section-number">2.1</span>
+Version 5.0.6</a></li>
+<li><a href="#Version5_0_5"><span class="toc-section-number">2.2</span>
 Version 5.0.5</a></li>
-<li><a href="#Version5_0_4"><span class="toc-section-number">2.2</span>
+<li><a href="#Version5_0_4"><span class="toc-section-number">2.3</span>
 Version 5.0.4</a></li>
-<li><a href="#Version5_0_3"><span class="toc-section-number">2.3</span>
+<li><a href="#Version5_0_3"><span class="toc-section-number">2.4</span>
 Version 5.0.3</a></li>
-<li><a href="#Version5_0_2"><span class="toc-section-number">2.4</span>
+<li><a href="#Version5_0_2"><span class="toc-section-number">2.5</span>
 Version 5.0.2</a></li>
-<li><a href="#Version5_0_1"><span class="toc-section-number">2.5</span>
+<li><a href="#Version5_0_1"><span class="toc-section-number">2.6</span>
 Version 5.0.1</a></li>
-<li><a href="#Version5_0_0"><span class="toc-section-number">2.6</span>
+<li><a href="#Version5_0_0"><span class="toc-section-number">2.7</span>
 Version 5.0.0</a></li>
 </ul></li>
 <li><a href="#UserGuideIntroduction"><span
@@ -201,7 +203,21 @@ class="toc-section-number">8.2.1</span> NCTeX Options</a></li>
 class="toc-section-number">8.3</span> Using NCTeXForm</a></li>
 </ul></li>
 <li><a href="#ReferenceIntroduction"><span
-class="toc-section-number">9</span> Introduction</a></li>
+class="toc-section-number">9</span> Introduction</a>
+<ul>
+<li><a href="#PackageNC"><span class="toc-section-number">9.1</span>
+NC</a>
+<ul>
+<li><a href="#PackageNCOptions"><span
+class="toc-section-number">9.1.1</span> Options</a></li>
+</ul></li>
+<li><a href="#PackageNCAlgebra"><span
+class="toc-section-number">9.2</span> NCAlgebra</a>
+<ul>
+<li><a href="#NCAlgebraMessages"><span
+class="toc-section-number">9.2.1</span> Messages</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#ManipulatingNCExpressions"><span
 class="toc-section-number">10</span> Packages for manipulating NC
 expressions</a>
@@ -227,34 +243,39 @@ class="toc-section-number">10.1.7</span> CommutativeQ</a></li>
 class="toc-section-number">10.1.8</span> NonCommutativeQ</a></li>
 <li><a href="#SetCommutative"><span
 class="toc-section-number">10.1.9</span> SetCommutative</a></li>
+<li><a href="#SetCommutativeHold"><span
+class="toc-section-number">10.1.10</span> SetCommutativeHold</a></li>
 <li><a href="#SetNonCommutative"><span
-class="toc-section-number">10.1.10</span> SetNonCommutative</a></li>
+class="toc-section-number">10.1.11</span> SetNonCommutative</a></li>
 <li><a href="#SetNonCommutativeHold"><span
-class="toc-section-number">10.1.11</span> SetNonCommutativeHold</a></li>
-<li><a href="#SNC"><span class="toc-section-number">10.1.12</span>
+class="toc-section-number">10.1.12</span> SetNonCommutativeHold</a></li>
+<li><a href="#SetCommutativeFunction"><span
+class="toc-section-number">10.1.13</span>
+SetCommutativeFunction</a></li>
+<li><a href="#SNC"><span class="toc-section-number">10.1.14</span>
 SNC</a></li>
 <li><a href="#SetCommutingOperators"><span
-class="toc-section-number">10.1.13</span> SetCommutingOperators</a></li>
+class="toc-section-number">10.1.15</span> SetCommutingOperators</a></li>
 <li><a href="#UnsetCommutingOperators"><span
-class="toc-section-number">10.1.14</span>
+class="toc-section-number">10.1.16</span>
 UnsetCommutingOperators</a></li>
 <li><a href="#CommutingOperatorsQ"><span
-class="toc-section-number">10.1.15</span> CommutingOperatorsQ</a></li>
+class="toc-section-number">10.1.17</span> CommutingOperatorsQ</a></li>
 <li><a href="#Commutative"><span
-class="toc-section-number">10.1.16</span> Commutative</a></li>
+class="toc-section-number">10.1.18</span> Commutative</a></li>
 <li><a href="#CommuteEverything"><span
-class="toc-section-number">10.1.17</span> CommuteEverything</a></li>
+class="toc-section-number">10.1.19</span> CommuteEverything</a></li>
 <li><a href="#BeginCommuteEverything"><span
-class="toc-section-number">10.1.18</span>
+class="toc-section-number">10.1.20</span>
 BeginCommuteEverything</a></li>
 <li><a href="#EndCommuteEverything"><span
-class="toc-section-number">10.1.19</span> EndCommuteEverything</a></li>
+class="toc-section-number">10.1.21</span> EndCommuteEverything</a></li>
 <li><a href="#ExpandNonCommutativeMultiply"><span
-class="toc-section-number">10.1.20</span>
+class="toc-section-number">10.1.22</span>
 ExpandNonCommutativeMultiply</a></li>
-<li><a href="#NCExpand"><span class="toc-section-number">10.1.21</span>
+<li><a href="#NCExpand"><span class="toc-section-number">10.1.23</span>
 NCExpand</a></li>
-<li><a href="#NCE"><span class="toc-section-number">10.1.22</span>
+<li><a href="#NCE"><span class="toc-section-number">10.1.24</span>
 NCE</a></li>
 </ul></li>
 <li><a href="#PackageNCCollect"><span
@@ -343,10 +364,12 @@ NCRASA</a></li>
 NCRRSA</a></li>
 <li><a href="#NCRLSA"><span class="toc-section-number">10.3.26</span>
 NCRLSA</a></li>
+<li><a href="#NCMatrixExpand"><span
+class="toc-section-number">10.3.27</span> NCMatrixExpand</a></li>
 <li><a href="#NCMatrixReplaceAll"><span
-class="toc-section-number">10.3.27</span> NCMatrixReplaceAll</a></li>
+class="toc-section-number">10.3.28</span> NCMatrixReplaceAll</a></li>
 <li><a href="#NCMatrixReplaceRepeated"><span
-class="toc-section-number">10.3.28</span>
+class="toc-section-number">10.3.29</span>
 NCMatrixReplaceRepeated</a></li>
 </ul></li>
 <li><a href="#PackageNCSelfAdjoint"><span
@@ -421,8 +444,6 @@ coMat</a></li>
 NCDot</a></li>
 <li><a href="#NCInverse"><span class="toc-section-number">11.1.5</span>
 NCInverse</a></li>
-<li><a href="#NCMatrixExpand"><span
-class="toc-section-number">11.1.6</span> NCMatrixExpand</a></li>
 </ul></li>
 <li><a href="#PackageNCMatrixDecompositions"><span
 class="toc-section-number">11.2</span> NCMatrixDecompositions</a>
@@ -889,14 +910,23 @@ Ovall, T. Shaheen, John Shopple.</li>
 <p>The beginnings of the program come from eran@slac.</p>
 <h1 data-number="2" id="Version5_0"><span
 class="header-section-number">2</span> Changes in Version 5.0</h1>
-<h2 data-number="2.1" id="Version5_0_5"><span
-class="header-section-number">2.1</span> Version 5.0.5</h2>
+<h2 data-number="2.1" id="Version5_0_6"><span
+class="header-section-number">2.1</span> Version 5.0.6</h2>
+<ol type="1">
+<li>NC<code>and NCAlgebra</code> are now Contexts</li>
+<li>NCMatrixExpand moved from NCDot to NCReplace</li>
+<li>Added SetCommutativeFunction</li>
+<li>Tests fixed to work even if a-z are not defined as NC globally</li>
+<li>More tests for CommutativeQ</li>
+</ol>
+<h2 data-number="2.2" id="Version5_0_5"><span
+class="header-section-number">2.2</span> Version 5.0.5</h2>
 <ol type="1">
 <li>Improved documentation</li>
 <li>Bug fixes. Thanks Igor Klep!</li>
 </ol>
-<h2 data-number="2.2" id="Version5_0_4"><span
-class="header-section-number">2.2</span> Version 5.0.4</h2>
+<h2 data-number="2.3" id="Version5_0_4"><span
+class="header-section-number">2.3</span> Version 5.0.4</h2>
 <ol type="1">
 <li>First implementation of <a
 href="#NCPolyGramMatrix">NCPolyGramMatrix</a> and <a
@@ -904,16 +934,16 @@ href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a>.</li>
 <li>Improvements in NCReplace.</li>
 <li>Several bug fixes and improvements. Thanks Eric Evert!</li>
 </ol>
-<h2 data-number="2.3" id="Version5_0_3"><span
-class="header-section-number">2.3</span> Version 5.0.3</h2>
+<h2 data-number="2.4" id="Version5_0_3"><span
+class="header-section-number">2.4</span> Version 5.0.3</h2>
 <ol type="1">
 <li>Restored functionality of <a
 href="#SetCommutingOperators">SetCommutingOperators</a>.</li>
 <li>Improved implementation of <a href="#CommutativeQ">CommutativeQ</a>
 for arrays.</li>
 </ol>
-<h2 data-number="2.4" id="Version5_0_2"><span
-class="header-section-number">2.4</span> Version 5.0.2</h2>
+<h2 data-number="2.5" id="Version5_0_2"><span
+class="header-section-number">2.5</span> Version 5.0.2</h2>
 <ol type="1">
 <li><code>NCCollect</code> and <code>NCStrongCollect</code> can handle
 commutative variables.</li>
@@ -922,15 +952,15 @@ commutative variables.</li>
 <code>HoldAll</code> attribute can be used to set Symbols that have been
 previously assigned values.</li>
 </ol>
-<h2 data-number="2.5" id="Version5_0_1"><span
-class="header-section-number">2.5</span> Version 5.0.1</h2>
+<h2 data-number="2.6" id="Version5_0_1"><span
+class="header-section-number">2.6</span> Version 5.0.1</h2>
 <ol type="1">
 <li>Introducing <code>NCWebInstall</code> and
 <code>NCWebUpdate</code>.</li>
 <li>Bug fixes.</li>
 </ol>
-<h2 data-number="2.6" id="Version5_0_0"><span
-class="header-section-number">2.6</span> Version 5.0.0</h2>
+<h2 data-number="2.7" id="Version5_0_0"><span
+class="header-section-number">2.7</span> Version 5.0.0</h2>
 <ol type="1">
 <li>Completely rewritten core handling of noncommutative expressions
 with significant speed gains.</li>
@@ -1000,6 +1030,9 @@ You can now use &quot;&lt;&lt; NCAlgebra`&quot; to load NCAlgebra.</code></pre>
 <p>Then just type</p>
 <pre><code>&lt;&lt; NCAlgebra`</code></pre>
 <p>to load <code>NCAlgebra</code>.</p>
+<p>Advanced options for controlling the loading of <code>NC</code> and
+<code>NCAlgebra</code> can be found in <a href="#PackageNC">here</a> and
+<a href="#PackageNCAlgebra">here</a>.</p>
 <h2 data-number="3.2" id="now-what"><span
 class="header-section-number">3.2</span> Now what?</h2>
 <p>Extensive documentation is found in the directory
@@ -1458,7 +1491,7 @@ are still supported for backward compatibility.</p>
 <p>See <a href="#AdvancedMatrices">advanced matrix commands</a> for
 other useful matrix manipulation routines, such as <a
 href="#NCMatrixExpand"><code>NCMatrixExpand</code></a>, <a
-href="#NCMatrixReplace"><code>NCMatrixReplace</code></a>, <a
+href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a>, <a
 href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>,
 etc, that allow one to work with matrices with symbolic noncommutative
 entries.</p>
@@ -1616,7 +1649,7 @@ the users.</p>
 <p><strong>WARNING:</strong> Versions prior to 5 contained the command
 <code>NCLDUDecomposition</code> which is being deprecated in
 <strong>Version 5</strong> as its functionality is now provided by <a
-href="#NCDLDDecomposition"><code>NCLDLDecomposition</code></a>, with a
+href="#NCLDLDecomposition"><code>NCLDLDecomposition</code></a>, with a
 slightly different syntax.</p>
 <h3 data-number="4.7.5" id="ReplaceWithMatrices"><span
 class="header-section-number">4.7.5</span> Replace with matrices</h3>
@@ -3532,6 +3565,76 @@ class="header-section-number">9</span> Introduction</h1>
 <p>The following chapters and sections describes packages inside
 <code>NCAlgebra</code>.</p>
 <p>Packages are automatically loaded unless otherwise noted.</p>
+<h2 data-number="9.1" id="PackageNC"><span
+class="header-section-number">9.1</span> NC</h2>
+<p><strong>NC</strong> is a meta package that enables the functionality
+of the <em>NCAlgebra suite</em> of non-commutative algebra packages for
+Mathematica.</p>
+<p>The package can be loaded using <code>Get</code>, as in</p>
+<pre><code>&lt;&lt; NC`</code></pre>
+<p>or <code>Needs</code>, as in</p>
+<pre><code>Needs[&quot;NC`&quot;]</code></pre>
+<p>Once <code>NC</code> is loaded, you can then proceed to load any
+other package from the <em>NCAlgebra suite</em>.</p>
+<p>For example you can load the package <code>NCAlgebra</code> using</p>
+<pre><code>&lt;&lt; NCAlgebra`</code></pre>
+<h3 data-number="9.1.1" id="PackageNCOptions"><span
+class="header-section-number">9.1.1</span> Options</h3>
+<p>The following <code>options</code> can be set using
+<code>SetOptions</code> before loading other packages:</p>
+<ul>
+<li><code>SmallCapSymbolsNonCommutative</code> (<code>True</code>): If
+<code>True</code>, loading <code>NCAlgebra</code> will set all global
+single letter small cap symbols as noncommutative;</li>
+<li><code>ShowBanner</code> (<code>True</code>): If <code>True</code>, a
+banner, when available, will be shown during the first loading of a
+package.</li>
+</ul>
+<h2 data-number="9.2" id="PackageNCAlgebra"><span
+class="header-section-number">9.2</span> NCAlgebra</h2>
+<p><strong>NCAlgebra</strong> is the main package of the <em>NCAlgebra
+suite</em> of non-commutative algebra packages for Mathematica.</p>
+<p>The package can be loaded using <code>Get</code>, as in</p>
+<pre><code>&lt;&lt; NCAlgebra`</code></pre>
+<p>or <code>Needs</code>, as in</p>
+<pre><code>Needs[&quot;NCAlgebra`&quot;]</code></pre>
+<p>If the option <a
+href="#PackageNCOptions"><code>SmallCapSymbolsNonCommutative</code></a>
+is <code>True</code> then <code>NCAlgebra</code> will set all global
+single letter small cap symbols as noncommutative. If that is not
+desired simply set <code>SmallCapSymbolsNonCommutative</code> to
+<code>False</code> before loading <code>NCAlgebra</code>, as in</p>
+<pre><code>SetOptions[NC, SmallCapSymbolsNonCommutative -&gt; False]
+&lt;&lt; NCAlgebra`</code></pre>
+<p>A message will be issued warning users whether any letters have been
+set as noncommutative upon loading. Those messages are documented <a
+href="#NCAlgebraMessages">here</a>. Users can use Mathematica’s
+<code>Quiet</code> and <code>Off</code> if they do not want these
+messages to display. For example,</p>
+<pre><code>Off[NCAlgebra::SmallCapSymbolsNonCommutative]
+&lt;&lt; NCAlgebra`</code></pre>
+<p>or</p>
+<pre><code>SetOptions[NC, SmallCapSymbolsNonCommutative -&gt; False]
+Off[NCAlgebra::NoSymbolsNonCommutative]
+&lt;&lt; NCAlgebra`</code></pre>
+<p>will load <code>NCAlgebra</code> without issuing a symbol assignment
+message.</p>
+<p>Upon loading <code>NCAlgebra</code> for the first time, a large
+banner will be shown. If you do not want this banner to be displayed at
+all set the option <a
+href="#PackageNCOptions"><code>ShowBanner</code></a> to
+<code>False</code> before loading, as in</p>
+<pre><code>SetOptions[NC, ShowBanner -&gt; False]
+&lt;&lt; NCAlgebra`</code></pre>
+<h3 data-number="9.2.1" id="NCAlgebraMessages"><span
+class="header-section-number">9.2.1</span> Messages</h3>
+<p>One of the following messages will be displayed after loading.</p>
+<ul>
+<li><code>NCAlgebra::SmallCapSymbolsNonCommutative</code>, if small cap
+single letter symbols have been set as noncomutative;</li>
+<li><code>NCAlgebra::NoSymbolsNonCommutative</code>, if no symbols have
+been set as noncomutative by <code>NCAlgebra</code>.</li>
+</ul>
 <h1 data-number="10" id="ManipulatingNCExpressions"><span
 class="header-section-number">10</span> Packages for manipulating NC
 expressions</h1>
@@ -3552,8 +3655,10 @@ noncommutative functionality to Mathematica’s native
 <li><a href="#CommutativeQ">CommutativeQ</a></li>
 <li><a href="#NonCommutativeQ">NonCommutativeQ</a></li>
 <li><a href="#SetCommutative">SetCommutative</a></li>
+<li><a href="#SetCommutativeHold">SetCommutativeHold</a></li>
 <li><a href="#SetNonCommutative">SetNonCommutative</a></li>
 <li><a href="#SetNonCommutativeHold">SetNonCommutativeHold</a></li>
+<li><a href="#SetCommutativeFunction">SetCommutativeFunction</a></li>
 <li><a href="#SetCommutingOperators">SetCommutingOperators</a></li>
 <li><a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></li>
 <li><a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></li>
@@ -3626,31 +3731,62 @@ to be commutative.</p>
 <p>See also: <a href="#SetNonCommutative">SetNonCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
-<h3 data-number="10.1.10" id="SetNonCommutative"><span
-class="header-section-number">10.1.10</span> SetNonCommutative</h3>
+<h3 data-number="10.1.10" id="SetCommutativeHold"><span
+class="header-section-number">10.1.10</span> SetCommutativeHold</h3>
+<p><code>SetCommutativeHold[a,b,c,...]</code> sets all the
+<code>Symbols</code> <code>a</code>, <code>b</code>, <code>c</code>, …
+to be commutative.</p>
+<p><code>SetCommutativeHold</code> has attribute <code>HoldAll</code>
+and can be used to set Symbols which have already been assigned a
+value.</p>
+<p>See also: <a href="#SetNonCommutativeHold">SetNonCommutativeHold</a>,
+<a href="#SetCommutative">SetCommutative</a>, <a
+href="#SetNonCommutative">SetNonCommutative</a>, <a
+href="#CommutativeQ">CommutativeQ</a>, <a
+href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
+<h3 data-number="10.1.11" id="SetNonCommutative"><span
+class="header-section-number">10.1.11</span> SetNonCommutative</h3>
 <p><code>SetNonCommutative[a,b,c,...]</code> sets all the
 <code>Symbols</code> <code>a</code>, <code>b</code>, <code>c</code>, …
 to be noncommutative.</p>
 <p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
-<h3 data-number="10.1.11" id="SetNonCommutativeHold"><span
-class="header-section-number">10.1.11</span> SetNonCommutativeHold</h3>
+<h3 data-number="10.1.12" id="SetNonCommutativeHold"><span
+class="header-section-number">10.1.12</span> SetNonCommutativeHold</h3>
 <p><code>SetNonCommutativeHold[a,b,c,...]</code> sets all the
 <code>Symbols</code> <code>a</code>, <code>b</code>, <code>c</code>, …
 to be noncommutative.</p>
 <p><code>SetNonCommutativeHold</code> has attribute <code>HoldAll</code>
 and can be used to set Symbols which have already been assigned a
 value.</p>
-<p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
+<p>See also: <a href="#SetCommutativeHold">SetCommutativeHold</a>, <a
+href="#SetCommutative">SetCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
-<h3 data-number="10.1.12" id="SNC"><span
-class="header-section-number">10.1.12</span> SNC</h3>
+<h3 data-number="10.1.13" id="SetCommutativeFunction"><span
+class="header-section-number">10.1.13</span> SetCommutativeFunction</h3>
+<p><code>SetCommutativeFunction[f]</code> sets expressions with
+<code>Head</code> <code>f</code>, i.e. functions, to be commutative.</p>
+<p>By default, expressions in which the <code>Head</code> or any of its
+arguments is noncommutative will be considered noncommutative. For
+example,</p>
+<pre><code>SetCommutative[tr];
+a ** b ** tr[a ** b]</code></pre>
+<p>evaluates to <code>a ** b ** tr[a ** b]</code> while</p>
+<pre><code>SetCommutativeFunction[tr];
+a ** b ** tr[a ** b]</code></pre>
+<p>evaluates to <code>tr[a**b] * a ** b</code>.</p>
+<p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
+href="#SetNonCommutative">SetNonCommutative</a>, <a
+href="#CommutativeQ">CommutativeQ</a>, <a
+href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
+<h3 data-number="10.1.14" id="SNC"><span
+class="header-section-number">10.1.14</span> SNC</h3>
 <p><code>SNC</code> is an alias for <code>SetNonCommutative</code>.</p>
 <p>See also: <a href="#SetNonCommutative">SetNonCommutative</a>.</p>
-<h3 data-number="10.1.13" id="SetCommutingOperators"><span
-class="header-section-number">10.1.13</span> SetCommutingOperators</h3>
+<h3 data-number="10.1.15" id="SetCommutingOperators"><span
+class="header-section-number">10.1.15</span> SetCommutingOperators</h3>
 <p><code>SetCommutingOperators[a,b]</code> will define a rule that
 substitute any noncommutative product <code>b ** a</code> by
 <code>a ** b</code>, effectively making the pair <code>a</code> and
@@ -3660,37 +3796,37 @@ substitute any noncommutative product <code>b ** a</code> by
 <p>See also: <a
 href="#UnsetCommutingOperators">UnsetCommutingOperators</a>, <a
 href="#CommutingOperatorsQ">CommutingOperatorsQ</a></p>
-<h3 data-number="10.1.14" id="UnsetCommutingOperators"><span
-class="header-section-number">10.1.14</span>
+<h3 data-number="10.1.16" id="UnsetCommutingOperators"><span
+class="header-section-number">10.1.16</span>
 UnsetCommutingOperators</h3>
 <p><code>UnsetCommutingOperators[a,b]</code> remove any rules previously
 created by <code>SetCommutingOperators[a,b]</code> or
 <code>SetCommutingOperators[b,a]</code>.</p>
 <p>See also: <a href="#SetCommutingOperators">SetCommutingOperators</a>,
 <a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></p>
-<h3 data-number="10.1.15" id="CommutingOperatorsQ"><span
-class="header-section-number">10.1.15</span> CommutingOperatorsQ</h3>
+<h3 data-number="10.1.17" id="CommutingOperatorsQ"><span
+class="header-section-number">10.1.17</span> CommutingOperatorsQ</h3>
 <p><code>CommutingOperatorsQ[a,b]</code> returns <code>True</code> if
 <code>a</code> and <code>b</code> are commuting operators.</p>
 <p>See also: <a href="#SetCommutingOperators">SetCommutingOperators</a>,
 <a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></p>
-<h3 data-number="10.1.16" id="Commutative"><span
-class="header-section-number">10.1.16</span> Commutative</h3>
+<h3 data-number="10.1.18" id="Commutative"><span
+class="header-section-number">10.1.18</span> Commutative</h3>
 <p><code>Commutative[symbol]</code> is commutative even if
 <code>symbol</code> is noncommutative.</p>
 <p>See also: <a href="#CommuteEverything">CommuteEverything</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#SetCommutative">SetCommutative</a>, <a
 href="#SetNonCommutative">SetNonCommutative</a>.</p>
-<h3 data-number="10.1.17" id="CommuteEverything"><span
-class="header-section-number">10.1.17</span> CommuteEverything</h3>
+<h3 data-number="10.1.19" id="CommuteEverything"><span
+class="header-section-number">10.1.19</span> CommuteEverything</h3>
 <p><code>CommuteEverything[expr]</code> is an alias for <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>.</p>
 <p>See also: <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a
 href="#Commutative">Commutative</a>.</p>
-<h3 data-number="10.1.18" id="BeginCommuteEverything"><span
-class="header-section-number">10.1.18</span> BeginCommuteEverything</h3>
+<h3 data-number="10.1.20" id="BeginCommuteEverything"><span
+class="header-section-number">10.1.20</span> BeginCommuteEverything</h3>
 <p><code>BeginCommuteEverything[expr]</code> sets all symbols appearing
 in <code>expr</code> as commutative so that the resulting expression
 contains only commutative products or inverses. It issues messages
@@ -3701,16 +3837,16 @@ noncommutative behaviour.</p>
 does it sound like?</em></p>
 <p>See also: <a href="#EndCommuteEverything">EndCommuteEverything</a>,
 <a href="#Commutative">Commutative</a>.</p>
-<h3 data-number="10.1.19" id="EndCommuteEverything"><span
-class="header-section-number">10.1.19</span> EndCommuteEverything</h3>
+<h3 data-number="10.1.21" id="EndCommuteEverything"><span
+class="header-section-number">10.1.21</span> EndCommuteEverything</h3>
 <p><code>EndCommuteEverything[expr]</code> restores noncommutative
 behaviour to symbols affected by
 <code>BeginCommuteEverything</code>.</p>
 <p>See also: <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a
 href="#Commutative">Commutative</a>.</p>
-<h3 data-number="10.1.20" id="ExpandNonCommutativeMultiply"><span
-class="header-section-number">10.1.20</span>
+<h3 data-number="10.1.22" id="ExpandNonCommutativeMultiply"><span
+class="header-section-number">10.1.22</span>
 ExpandNonCommutativeMultiply</h3>
 <p><code>ExpandNonCommutativeMultiply[expr]</code> expands out
 <code>**</code>s in <code>expr</code>.</p>
@@ -3720,15 +3856,15 @@ ExpandNonCommutativeMultiply</h3>
 <pre><code>a**b + a**c.</code></pre>
 <p>See also: <a href="#NCExpand">NCExpand</a>, <a
 href="#NCE">NCE</a>.</p>
-<h3 data-number="10.1.21" id="NCExpand"><span
-class="header-section-number">10.1.21</span> NCExpand</h3>
+<h3 data-number="10.1.23" id="NCExpand"><span
+class="header-section-number">10.1.23</span> NCExpand</h3>
 <p><code>NCExpand</code> is an alias for
 <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCE">NCE</a>.</p>
-<h3 data-number="10.1.22" id="NCE"><span
-class="header-section-number">10.1.22</span> NCE</h3>
+<h3 data-number="10.1.24" id="NCE"><span
+class="header-section-number">10.1.24</span> NCE</h3>
 <p><code>NCE</code> is an alias for
 <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a
@@ -3966,6 +4102,7 @@ href="#NCReplaceRepeatedSymmetric">NCReplaceRepeatedSymmetric</a></li>
 href="#NCReplaceListSelfAdjoint">NCReplaceListSelfAdjoint</a></li>
 <li><a
 href="#NCReplaceRepeatedSelfAdjoint">NCReplaceRepeatedSelfAdjoint</a></li>
+<li><a href="#NCMatrixExpand">NCMatrixExpand</a></li>
 <li><a href="#NCMatrixReplaceAll">NCMatrixReplaceAll</a></li>
 <li><a href="#NCMatrixReplaceRepeated">NCMatrixReplaceRepeated</a></li>
 </ul>
@@ -4175,8 +4312,16 @@ class="header-section-number">10.3.26</span> NCRLSA</h3>
 <code>NCReplaceListSymmetric</code>.</p>
 <p>See also: <a
 href="#NCReplaceListSymmetric">NCReplaceListSymmetric</a>.</p>
-<h3 data-number="10.3.27" id="NCMatrixReplaceAll"><span
-class="header-section-number">10.3.27</span> NCMatrixReplaceAll</h3>
+<h3 data-number="10.3.27" id="NCMatrixExpand"><span
+class="header-section-number">10.3.27</span> NCMatrixExpand</h3>
+<p><code>NCMatrixExpand[expr]</code> expands <code>inv</code> and
+<code>**</code> of matrices appearing in nc expression
+<code>expr</code>. It effectively substitutes <code>inv</code> for
+<code>NCInverse</code> and <code>**</code> by <code>NCDot</code>.</p>
+<p>See also: <a href="#NCInverse">NCInverse</a>, <a
+href="#NCDot">NCDot</a>.</p>
+<h3 data-number="10.3.28" id="NCMatrixReplaceAll"><span
+class="header-section-number">10.3.28</span> NCMatrixReplaceAll</h3>
 <p><code>NCMatrixReplaceAll[expr,rules]</code> applies a rule or list of
 rules <code>rules</code> in an attempt to transform each part of the nc
 expression <code>expr</code>.</p>
@@ -4184,8 +4329,8 @@ expression <code>expr</code>.</p>
 but takes extra steps to make sure substitutions work with matrices.</p>
 <p>See also: <a href="#NCReplaceAll">NCReplaceAll</a>, <a
 href="#NCMatrixReplaceRepeated">NCMatrixReplaceRepeated</a>.</p>
-<h3 data-number="10.3.28" id="NCMatrixReplaceRepeated"><span
-class="header-section-number">10.3.28</span>
+<h3 data-number="10.3.29" id="NCMatrixReplaceRepeated"><span
+class="header-section-number">10.3.29</span>
 NCMatrixReplaceRepeated</h3>
 <p><code>NCMatrixReplaceRepeated[expr,rules]</code> repeatedly performs
 replacements using rule or list of rules <code>rules</code> until
@@ -4676,7 +4821,6 @@ class="header-section-number">11.1</span> NCDot</h2>
 <li><a href="#coMat">coMat</a></li>
 <li><a href="#NCDot">NCDot</a></li>
 <li><a href="#NCInverse">NCInverse</a></li>
-<li><a href="#NCMatrixExpand">NCMatrixExpand</a></li>
 </ul>
 <h3 data-number="11.1.1" id="tpMat"><span
 class="header-section-number">11.1.1</span> tpMat</h3>
@@ -4727,14 +4871,6 @@ elements of the inverse matrix are huge expressions. We recommend using
 <code>NCSimplifyRational</code> to improve the results.</p>
 <p>See also: <a href="#tpMat">tpMat</a>, <a href="#coMat">ajMat</a>, <a
 href="#coMat">coMat</a>.</p>
-<h3 data-number="11.1.6" id="NCMatrixExpand"><span
-class="header-section-number">11.1.6</span> NCMatrixExpand</h3>
-<p><code>NCMatrixExpand[expr]</code> expands <code>inv</code> and
-<code>**</code> of matrices appearing in nc expression
-<code>expr</code>. It effectively substitutes <code>inv</code> for
-<code>NCInverse</code> and <code>**</code> by <code>NCDot</code>.</p>
-<p>See also: <a href="#NCInverse">NCInverse</a>, <a
-href="#NCDot">NCDot</a>.</p>
 <h2 data-number="11.2" id="PackageNCMatrixDecompositions"><span
 class="header-section-number">11.2</span> NCMatrixDecompositions</h2>
 <p><code>NCMatrixDecompositions</code> provide noncommutative versions
@@ -5805,7 +5941,7 @@ to the rules:</p>
 <p>See also: <a
 href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a>, <a
 href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
-<h4 data-number="13.1.3.9" id="NCPolyFromMatrix"><span
+<h4 data-number="13.1.3.9" id="NCPolyGramMatrix"><span
 class="header-section-number">13.1.3.9</span> NCPolyGramMatrix</h4>
 <p><code>NCPolyGramMatrix[poly]</code> returns a Gram matrix
 corresponding to the monomials in the nc polynomial

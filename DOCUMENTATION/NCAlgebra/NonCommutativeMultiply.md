@@ -13,8 +13,10 @@ Members are:
 * [CommutativeQ](#CommutativeQ)
 * [NonCommutativeQ](#NonCommutativeQ)
 * [SetCommutative](#SetCommutative)
+* [SetCommutativeHold](#SetCommutativeHold)
 * [SetNonCommutative](#SetNonCommutative)
 * [SetNonCommutativeHold](#SetNonCommutativeHold)
+* [SetCommutativeFunction](#SetCommutativeFunction)
 * [SetCommutingOperators](#SetCommutingOperators)
 * [UnsetCommutingOperators](#UnsetCommutingOperators)
 * [CommutingOperatorsQ](#CommutingOperatorsQ)
@@ -90,6 +92,15 @@ See also:
 See also:
 [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
 
+### SetCommutativeHold {#SetCommutativeHold}
+
+`SetCommutativeHold[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be commutative.
+
+`SetCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
+
+See also:
+[SetNonCommutativeHold](#SetNonCommutativeHold), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
+
 ### SetNonCommutative {#SetNonCommutative}
 
 `SetNonCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, ... to be noncommutative.
@@ -104,7 +115,26 @@ See also:
 `SetNonCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
 
 See also:
-[SetCommutative](#SetCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
+[SetCommutativeHold](#SetCommutativeHold), [SetCommutative](#SetCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
+
+### SetCommutativeFunction {#SetCommutativeFunction}
+
+`SetCommutativeFunction[f]` sets expressions with `Head` `f`, i.e. functions, to be commutative.
+
+By default, expressions in which the `Head` or any of its arguments is noncommutative will be considered noncommutative. For example,
+
+    SetCommutative[tr];
+    a ** b ** tr[a ** b]
+
+evaluates to `a ** b ** tr[a ** b]` while
+
+    SetCommutativeFunction[tr];
+    a ** b ** tr[a ** b]
+
+evaluates to `tr[a**b] * a ** b`.
+
+See also:
+[SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ).
 
 ### SNC {#SNC}
 

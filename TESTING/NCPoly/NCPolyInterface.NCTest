@@ -3,7 +3,7 @@
 << NCPolyInterface`
 
 Block[
-  {a,b,c,d,
+  {a,b,c,d,x,y,
   vars,NCExp,NCExpExp,PolyExp,
   A,B,C
   },
@@ -12,8 +12,7 @@ Block[
 
   (* TESTING NCToNCPoly/NCPolyToNC -- BEGIN *)
 
-  Clear[a,b,c,d];
-  SNC[a,b,c,d];
+  SNC[a,b,c,d,x,y];
 
   (* NCToNCPoly *)
   
@@ -143,6 +142,7 @@ Block[
   NCTest[NCCoefficientQ[1 + A], True];
 
   NCTest[NCCoefficientQ[x], False];
+
   NCTest[NCCoefficientQ[1 + x], False];
   NCTest[NCCoefficientQ[x**x], False];
   NCTest[NCCoefficientQ[Exp[x]], False];
