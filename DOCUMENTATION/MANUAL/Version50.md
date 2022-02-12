@@ -4,7 +4,9 @@
 
 1. NC` and NCAlgebra` are now Contexts
 2. NCMatrixExpand moved from NCDot to NCReplace
-3. Tests fixed to work even if a-z are not defined as NC globally
+3. Added SetCommutativeFunction
+4. Tests fixed to work even if a-z are not defined as NC globally
+5. More tests for CommutativeQ
 
 ## Version 5.0.5 {#Version5_0_5}
 
