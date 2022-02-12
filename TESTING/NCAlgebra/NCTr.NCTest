@@ -69,4 +69,6 @@ Module[
   NCTest[List @@ tr[d ** a ** tp[d] ** b], {a ** d^T ** b ** d}];
   NCTest[List @@ tr[a ** b - tp[b ** a]], 0];
 
+  NCTest[a ** b ** tr[a ** b], tr[a ** b] a ** b];
+
 ];

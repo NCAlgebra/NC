@@ -1197,6 +1197,16 @@ class="math inline">\(x^{-1}\)</span>. <code>tp</code> and
 <code>aj</code> can also be input directly as <code>x^T</code> and
 <code>x^*</code>. For this reason the symbol <code>T</code> is now
 protected in <code>NCAlgebra</code>.</p>
+<p>A trace like operator, <code>tr</code>, was introduced in v5.0.6. It
+is a commutative operator keeps its list of arguments cyclicly sorted so
+that <code>tr[b ** a]</code> evaluates to <code>tr[a ** b]</code> and
+that automatically distribute over sums so that an expression like</p>
+<pre><code>tr[a ** b - b ** a]</code></pre>
+<p>always simplifies to zero. Also <code>b ** a ** tr[b ** a]</code>
+simpplifies to</p>
+<pre><code>tr[a ** b] a ** b</code></pre>
+<p>because <code>tr</code> is a commutative function. See <a
+href="#SetCommutativeFunction">SetCommutativeFunction</a>.</p>
 <h2 data-number="4.3" id="replace"><span
 class="header-section-number">4.3</span> Replace</h2>
 <p>A key feature of symbolic computation is the ability to perform

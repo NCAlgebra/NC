@@ -697,6 +697,20 @@ return `co[a]` where `co` stands for complex-conjugate.
 directly as `x^T` and `x^*`. For this reason the symbol `T` is now
 protected in `NCAlgebra`.
 
+A trace like operator, `tr`, was introduced in v5.0.6. It is a
+commutative operator keeps its list of arguments cyclicly sorted so
+that `tr[b ** a]` evaluates to `tr[a ** b]` and that automatically
+distribute over sums so that an expression like
+
+    tr[a ** b - b ** a]
+
+always simplifies to zero. Also `b ** a ** tr[b ** a]` simpplifies to
+
+    tr[a ** b] a ** b
+
+because `tr` is a commutative function. See
+[SetCommutativeFunction](#setcommutativefunction).
+
 ## Replace
 
 A key feature of symbolic computation is the ability to perform
