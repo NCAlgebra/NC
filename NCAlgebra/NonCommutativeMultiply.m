@@ -151,6 +151,7 @@ Begin[ "`Private`" ]
     Message[CommutativeQ::Commutative, "number", x];
   DoSetCommutative[x_] := 
     Message[CommutativeQ::Commutative, "expression", x];
+  SetAttributes[DoSetCommutative, HoldAll];
 
   SetCommutative[a__] := Scan[DoSetCommutative, {a}];
 

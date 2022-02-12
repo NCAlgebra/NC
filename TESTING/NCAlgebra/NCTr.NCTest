@@ -1,50 +1,81 @@
 << NCTr`
 
 Module[
-  {a,b,c,l},
+  {a,b,c,l,head},
 
   SNC[a,b,c];
 
   (* Test SortCyclicPermutation *)
   l = {b, a, c};
   NCTest[SortedCyclicPermutationQ[l], False];
-  NCTest[SortCyclicPermutation[l, {}, 0], {2}];
+  NCTest[NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {2}];
   NCTest[l = SortCyclicPermutation[l], {a, c, b}];
   NCTest[SortedCyclicPermutationQ[l], True];
 
   l = {a, b, c, 1 + a, 1, a ** b};
   NCTest[SortedCyclicPermutationQ[l], False];
-  NCTest[SortCyclicPermutation[l, {}, 0], {5}];
+  NCTest[NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {5}];
   NCTest[l = SortCyclicPermutation[l], {1, a ** b, a, b, c, 1 + a}];
   NCTest[SortedCyclicPermutationQ[l], True];
 
   l = {a, 1, b, c, 1 + 1, 1, a ** b};
   NCTest[SortedCyclicPermutationQ[l], False];
-  NCTest[pos = SortCyclicPermutation[l, {}, 0], {2, 6}];
-  NCTest[SortCyclicPermutation[l, pos, 1], {2}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {2, 6}];
+  NCTest[NCTr`Private`OrderingCyclicPermutation[l, pos, 1], {2}];
   NCTest[l = SortCyclicPermutation[l], {1, b, c, 2, 1, a ** b, a}];
   NCTest[SortedCyclicPermutationQ[l], True];
 
   l = {a, 1, a ** b, 1, c, 1 + 1, 1, b};
   NCTest[SortedCyclicPermutationQ[l], False];
-  NCTest[pos = SortCyclicPermutation[l, {}, 0], {2, 4, 7}];
-  NCTest[SortCyclicPermutation[l, pos, 1], {7}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {2, 4, 7}];
+  NCTest[NCTr`Private`OrderingCyclicPermutation[l, pos, 1], {7}];
   NCTest[l = SortCyclicPermutation[l], {1, b, a, 1, a ** b, 1, c, 2}];
   NCTest[SortedCyclicPermutationQ[l], True];
 
   l = {a, 1, a ** b, 1, c, 1 + 1, 1, b, b, 1, b};
   NCTest[SortedCyclicPermutationQ[l], False];
-  NCTest[pos = SortCyclicPermutation[l, {}, 0], {2, 4, 7, 10}];
-  NCTest[pos = SortCyclicPermutation[l, pos, 1], {7, 10}];
-  NCTest[SortCyclicPermutation[l, pos, 2], {10}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {2, 4, 7, 10}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, pos, 1], {7, 10}];
+  NCTest[NCTr`Private`OrderingCyclicPermutation[l, pos, 2], {10}];
   NCTest[l = SortCyclicPermutation[l], {1, b, a, 1, a ** b, 1, c, 2, 1, b, b}];
   NCTest[SortedCyclicPermutationQ[l], True];
 
-  NCTest[pos = SortCyclicPermutation[l, {}, 0], {1, 4, 6, 9}];
-  NCTest[pos = SortCyclicPermutation[l, pos, 1], {1, 9}];
-  NCTest[SortCyclicPermutation[l, pos, 2], {1}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {1, 4, 6, 9}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, pos, 1], {1, 9}];
+  NCTest[NCTr`Private`OrderingCyclicPermutation[l, pos, 2], {1}];
   NCTest[l = SortCyclicPermutation[l], {1, b, a, 1, a ** b, 1, c, 2, 1, b, b}];
   NCTest[SortedCyclicPermutationQ[l], True];
+
+  l = head[a, 1, a ** b, 1, c, 1 + 1, 1, b, b, 1, b];
+  NCTest[SortedCyclicPermutationQ[l], False];
+  NCTest[l = SortCyclicPermutation[l], head[1, b, a, 1, a ** b, 1, c, 2, 1, b, b]];
+  NCTest[SortedCyclicPermutationQ[l], True];
+
+  l = {c, a, tp[b], tp[a]};
+  NCTest[la = SortCyclicPermutation[l], {a, b^T, a^T, c}];
+  NCTest[SortedCyclicPermutationQ[la], True];
+  NCTest[SortedCyclicPermutationQ[la, tp], False];
+  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[la], False];
+  NCTest[lb = SortCyclicPermutation[tp /@ Reverse[l]], {a, b, a^T, c^T}];
+  NCTest[SortedCyclicPermutationQ[lb], True];
+  NCTest[SortedCyclicPermutationQ[lb, tp], True];
+  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[lb], True];
+  NCTest[SortCyclicPermutation[la, lb], {a, b, a^T, c^T}];
+  NCTest[l = SortCyclicPermutation[l, tp], {a, b, a^T, c^T}];
+  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[l], True];
+
+  l = {c, a, aj[b], aj[a]};
+  NCTest[la = SortCyclicPermutation[l], {a, SuperStar[b], SuperStar[a], c}];
+  NCTest[SortedCyclicPermutationQ[la], True];
+  NCTest[SortedCyclicPermutationQ[la, aj], False];
+  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[la], False];
+  NCTest[lb = SortCyclicPermutation[aj /@ Reverse[l]], {a, b, SuperStar[a], SuperStar[c]}];
+  NCTest[SortedCyclicPermutationQ[lb], True];
+  NCTest[SortedCyclicPermutationQ[lb, aj], True];
+  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[lb], True];
+  NCTest[SortCyclicPermutation[la, lb], {a, b, SuperStar[a], SuperStar[c]}];
+  NCTest[l = SortCyclicPermutation[l, aj], {a, b, SuperStar[a], SuperStar[c]}];
+  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[l], True];
 
   (* Test tr *)
   NCTest[tr[2], 2];
@@ -57,14 +88,43 @@ Module[
   NCTest[NCExpand[tr[b ** a - a ** (b - inv[a])]], 1];
 
   NCTest[tr[tp[a]], tr[a]];
-  NCTest[List @@ tr[tp[a]**tp[b]], {a ** b}];
-  NCTest[List @@ tr[a**tp[b]], {a ** tp[b]}];
+  NCTest[List @@ tr[tp[a] ** tp[b]], {a ** b}];
+  NCTest[List @@ tr[a ** tp[b]], {a ** tp[b]}];
+
+  NCTest[List @@ tr[a ** b], {a ** b}];
 
   NCTest[List @@ tr[tp[a] ** b], {a ** b^T}];
   NCTest[List @@ tr[tp[a] ** tp[b]], {a ** b}];
   NCTest[List @@ tr[tp[b] ** tp[a]], {a ** b}];
   NCTest[List @@ tr[tp[b] ** a], {a ** b^T}];
   
+  NCTest[List @@ tr[aj[a] ** b], {a ** aj[b]}];
+  NCTest[List @@ tr[aj[a] ** aj[b]], {a ** b}];
+  NCTest[List @@ tr[aj[b] ** aj[a]], {a ** b}];
+  NCTest[List @@ tr[aj[b] ** a], {a ** aj[b]}];
+
+  NCTest[List @@ tr[a ** b ** c], {a ** b ** c}];
+
+  NCTest[List @@ tr[tp[a] ** b ** c], {a ** c^T ** b^T}];
+  NCTest[List @@ tr[a ** tp[b] ** c], {a ** b^T ** c}];
+  NCTest[List @@ tr[a ** b ** tp[c]], {a ** b ** c^T}];
+
+  NCTest[List @@ tr[tp[a] ** tp[b] ** c], {a ** c^T ** b}];
+  NCTest[List @@ tr[a ** tp[b] ** tp[c]], {a ** b^T ** c^T}];
+  NCTest[List @@ tr[tp[a] ** b ** tp[c]], {a ** c ** b^T}];
+
+  NCTest[List @@ tr[tp[a] ** tp[b] ** tp[c]], {a ** c ** b}];
+
+  NCTest[List @@ tr[aj[a] ** b ** c], {a ** aj[c] ** aj[b]}];
+  NCTest[List @@ tr[a ** aj[b] ** c], {a ** aj[b] ** c}];
+  NCTest[List @@ tr[a ** b ** aj[c]], {a ** b ** aj[c]}];
+
+  NCTest[List @@ tr[aj[a] ** aj[b] ** c], {a ** aj[c] ** b}];
+  NCTest[List @@ tr[a ** aj[b] ** aj[c]], {a ** aj[b] ** aj[c]}];
+  NCTest[List @@ tr[aj[a] ** b ** aj[c]], {a ** c ** aj[b]}];
+
+  NCTest[List @@ tr[aj[a] ** aj[b] ** aj[c]], {a ** c ** b}];
+
   NCTest[List @@ tr[d ** c ** tp[a] ** b], {a ** c^T ** d^T ** b^T}];
   NCTest[List @@ tr[d ** a ** tp[d] ** b], {a ** d^T ** b ** d}];
   NCTest[List @@ tr[a ** b - tp[b ** a]], 0];
