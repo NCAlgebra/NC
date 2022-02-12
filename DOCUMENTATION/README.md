@@ -758,7 +758,7 @@ because `tr` is a commutative function. See
 Use [NCMatrixExpand](#ncmatrixexpand) to expand `tr` over matrices
 with noncommutative entries. For example,
 
-    tr[{{a,b},{c,d}}] // NCMatrixExpand
+    NCMatrixExpand[tr[{{a,b},{c,d}}]]
 
 evaluates to
 
