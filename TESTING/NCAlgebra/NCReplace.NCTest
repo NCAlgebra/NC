@@ -1,6 +1,6 @@
 << NCReplace`
 
-Module[
+Block[
      {rule, expr, answer, 
       a,b,c,d,e,K,x,y,z,
       id,m1,m2,m3},

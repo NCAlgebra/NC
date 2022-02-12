@@ -1,3 +1,16 @@
+# The NCAlgebra Suite
+
+## Version 5.0.6
+
+## Authors
+
+-   J. William Helton
+-   Mauricio C. de Oliveira
+
+with earlier contributions by Bob Miller & Mark Stankus
+
+# Table of Contents
+
 -   [<span class="toc-section-number">1</span> Acknowledgements](#acknowledgements)
 -   [<span class="toc-section-number">2</span> Changes in Version 5.0](#changes-in-version-50)
     -   [<span class="toc-section-number">2.1</span> Version 5.0.6](#version-506)
@@ -1803,6 +1816,18 @@ definition:
 
 then calling `H[x**y]` would have worked \`\`as expected’’, even if for
 the wrong reasons!
+
+Another possible “fix” is to use a delayed rule, as in:
+
+    H[exp_] := Module[
+      {rule, aa, bb},
+      SetNonCommutative[aa, bb];
+      rule = aa_**bb_ :> bb**aa];
+      NCReplaceAll[exp, rule]
+    ]
+
+which would also work as the evaluation of the right-hand side of the
+rule is delayed until the time of its application.
 
 ## Expanding matrix products
 
@@ -3879,7 +3904,7 @@ evaluates to `a ** b ** trace[a ** b]` while
     SetCommutativeFunction[trace];
     a ** b ** trace[a ** b]
 
-evaluates to `trace[a**b] * a ** b`.
+evaluates to `trace[a ** b] * a ** b`.
 
 See also:
 [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq), [tr](#tr).

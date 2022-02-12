@@ -87,7 +87,7 @@ README.md: $(MANUAL)
 	     --filter makeindex.py \
 	     --wrap=preserve \
 	     -o README.tmp.md
-	pandoc README.tmp.md -t gfm \
+	pandoc MANUAL/Cover.md README.tmp.md -t gfm \
 	     --filter github-mangle.py \
 	     --filter github-math.py \
 	     --wrap=preserve \

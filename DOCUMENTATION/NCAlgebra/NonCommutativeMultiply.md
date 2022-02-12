@@ -131,7 +131,7 @@ evaluates to `a ** b ** trace[a ** b]` while
     SetCommutativeFunction[trace];
     a ** b ** trace[a ** b]
 
-evaluates to `trace[a**b] * a ** b`.
+evaluates to `trace[a ** b] * a ** b`.
 
 See also:
 [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ), [tr](#tr).

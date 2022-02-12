@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="J. William Helton" />
   <meta name="author" content="Mauricio C. de Oliveira" />
-  <title>The NCAlgebra Suite - Version 5.0</title>
+  <title>The NCAlgebra Suite</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -25,7 +25,8 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">The NCAlgebra Suite - Version 5.0</h1>
+<h1 class="title">The NCAlgebra Suite</h1>
+<p class="subtitle">Version 5.0.6</p>
 <p class="author">J. William Helton</p>
 <p class="author">Mauricio C. de Oliveira</p>
 <p class="date">with earlier contributions by Bob Miller &amp; Mark
@@ -2044,6 +2045,15 @@ single small cap roman letters as in the definition:</p>
 ]</code></pre>
 <p>then calling <code>H[x**y]</code> would have worked ``as expected’’,
 even if for the wrong reasons!</p>
+<p>Another possible “fix” is to use a delayed rule, as in:</p>
+<pre><code>H[exp_] := Module[
+  {rule, aa, bb},
+  SetNonCommutative[aa, bb];
+  rule = aa_**bb_ :&gt; bb**aa];
+  NCReplaceAll[exp, rule]
+]</code></pre>
+<p>which would also work as the evaluation of the right-hand side of the
+rule is delayed until the time of its application.</p>
 <h2 data-number="5.2" id="AdvancedMatrices"><span
 class="header-section-number">5.2</span> Expanding matrix products</h2>
 <p>Starting at <strong>Version 5</strong> the operators <code>**</code>
@@ -3800,7 +3810,7 @@ a ** b ** trace[a ** b]</code></pre>
 <p>evaluates to <code>a ** b ** trace[a ** b]</code> while</p>
 <pre><code>SetCommutativeFunction[trace];
 a ** b ** trace[a ** b]</code></pre>
-<p>evaluates to <code>trace[a**b] * a ** b</code>.</p>
+<p>evaluates to <code>trace[a ** b] * a ** b</code>.</p>
 <p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
 href="#SetNonCommutative">SetNonCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a

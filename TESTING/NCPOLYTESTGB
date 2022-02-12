@@ -2,7 +2,8 @@ SetOptions[$Output,PageWidth->1000];
 
 << NC`
 << NCTest`
-<< NCAlgebra`
+SetOptions[NC, SmallCapSymbolsNonCommutative -> False, ShowBanner -> False];
+Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 << NCGBX`
 
 Print["> BEGIN NCPOLYTESTGB\n" ];

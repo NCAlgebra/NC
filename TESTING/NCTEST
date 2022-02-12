@@ -1,6 +1,7 @@
 SetOptions[$Output,PageWidth->1000];
 
 << NC`
+SetOptions[NC, SmallCapSymbolsNonCommutative -> False, ShowBanner -> False];
 << NCAlgebra`
 << NCTest`
 

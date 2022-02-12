@@ -235,6 +235,18 @@ definition:
 then calling `H[x**y]` would have worked ``as expected'', even if for
 the wrong reasons!
 
+Another possible "fix" is to use a delayed rule, as in:
+
+	H[exp_] := Module[
+	  {rule, aa, bb},
+      SetNonCommutative[aa, bb];
+	  rule = aa_**bb_ :> bb**aa];
+	  NCReplaceAll[exp, rule]
+    ]
+
+which would also work as the evaluation of the right-hand side of the
+rule is delayed until the time of its application.
+
 [^notflat]: The reason is that making an operator `Flat` is a
 convenience that comes with a price: lack of control over execution
 and evaluation. Since `NCAlgebra` has to operate at a very low level

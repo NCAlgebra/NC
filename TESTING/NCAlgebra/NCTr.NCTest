@@ -1,9 +1,9 @@
 << NCTr`
 
 Module[
-  {a,b,c,l,head},
+  {a,b,c,d,l,head},
 
-  SNC[a,b,c];
+  SNC[a,b,c,d];
 
   (* Test SortCyclicPermutation *)
   l = {b, a, c};
