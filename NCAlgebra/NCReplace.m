@@ -17,6 +17,7 @@
 
 BeginPackage[ "NCReplace`",
              {"NCDot`",
+              "NCTr`",
               "NonCommutativeMultiply`"}];
 
 Clear[NCReplace, 
@@ -148,11 +149,12 @@ Begin["`Private`"]
   (* Expand ** between matrices *)
   NCMatrixExpand[expr_] :=
       NCReplaceRepeated[
-          (expr //. inv[a_?MatrixQ] :> NCInverse[a])
-         ,
-          NonCommutativeMultiply[b_?ArrayQ, c__?ArrayQ] :>
-               NCDot[b, c]
-
+        (expr //. inv[a_?MatrixQ] :> NCInverse[a])
+       ,
+        {
+         NonCommutativeMultiply[b_?ArrayQ, c__?ArrayQ] :> NCDot[b, c],
+         tr[m_?ArrayQ] :> Plus @@ tr /@ Diagonal[m]
+        }
 (*
       {
           NonCommutativeMultiply[b_List, c__List] :>

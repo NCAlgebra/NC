@@ -1,9 +1,9 @@
 << NCTr`
 
 Module[
-  {a,b,c,d,l,head},
+  {a,b,c,d,e,f,l,head},
 
-  SNC[a,b,c,d];
+  SNC[a,b,c,d,e,f];
 
   (* Test SortCyclicPermutation *)
   l = {b, a, c};
@@ -132,5 +132,8 @@ Module[
   NCTest[a ** b ** tr[a ** b], tr[a ** b] a ** b];
 
   NCTest[Head[tr[a]^2], Power];
+  NCTest[tr[{{a,b},{c,d}}], tr[{{a,b},{c,d}}]];
+  NCTest[NCMatrixExpand[tr[{{a,b},{c,d}}]], tr[a]+tr[d]];
+  NCTest[NCMatrixExpand[tr[{{a,b,e},{c,d,f}}]], tr[a]+tr[d]];
 
 ];
