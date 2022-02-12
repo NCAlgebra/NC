@@ -28,11 +28,13 @@ tests = {
   "NCConjugate",
   "NCOutput",
   "NCConvexity", 
+  "NCTr", 
   "Matrix"
   (*,
   "NCRational",
   "NCRealization",
   "NCSystem"
+  "NCSolve" 
   *)
 };
 results = NCTestRun[tests];

@@ -88,69 +88,73 @@
         -   [<span class="toc-section-number">10.1.22</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
         -   [<span class="toc-section-number">10.1.23</span> NCExpand](#ncexpand)
         -   [<span class="toc-section-number">10.1.24</span> NCE](#nce)
-    -   [<span class="toc-section-number">10.2</span> NCCollect](#nccollect)
-        -   [<span class="toc-section-number">10.2.1</span> NCCollect](#nccollect-1)
-        -   [<span class="toc-section-number">10.2.2</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
-        -   [<span class="toc-section-number">10.2.3</span> NCCollectSymmetric](#nccollectsymmetric)
-        -   [<span class="toc-section-number">10.2.4</span> NCStrongCollect](#ncstrongcollect)
-        -   [<span class="toc-section-number">10.2.5</span> NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
-        -   [<span class="toc-section-number">10.2.6</span> NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
-        -   [<span class="toc-section-number">10.2.7</span> NCCompose](#nccompose)
-        -   [<span class="toc-section-number">10.2.8</span> NCDecompose](#ncdecompose)
-        -   [<span class="toc-section-number">10.2.9</span> NCTermsOfDegree](#nctermsofdegree)
-        -   [<span class="toc-section-number">10.2.10</span> NCTermsOfTotalDegree](#nctermsoftotaldegree)
-    -   [<span class="toc-section-number">10.3</span> NCReplace](#ncreplace)
-        -   [<span class="toc-section-number">10.3.1</span> NCReplace](#ncreplace-1)
-        -   [<span class="toc-section-number">10.3.2</span> NCReplaceAll](#ncreplaceall)
-        -   [<span class="toc-section-number">10.3.3</span> NCReplaceList](#ncreplacelist)
-        -   [<span class="toc-section-number">10.3.4</span> NCReplaceRepeated](#ncreplacerepeated)
-        -   [<span class="toc-section-number">10.3.5</span> NCR](#ncr)
-        -   [<span class="toc-section-number">10.3.6</span> NCRA](#ncra)
-        -   [<span class="toc-section-number">10.3.7</span> NCRR](#ncrr)
-        -   [<span class="toc-section-number">10.3.8</span> NCRL](#ncrl)
-        -   [<span class="toc-section-number">10.3.9</span> NCMakeRuleSymmetric](#ncmakerulesymmetric)
-        -   [<span class="toc-section-number">10.3.10</span> NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
-        -   [<span class="toc-section-number">10.3.11</span> NCReplaceSymmetric](#ncreplacesymmetric)
-        -   [<span class="toc-section-number">10.3.12</span> NCReplaceAllSymmetric](#ncreplaceallsymmetric)
-        -   [<span class="toc-section-number">10.3.13</span> NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
-        -   [<span class="toc-section-number">10.3.14</span> NCReplaceListSymmetric](#ncreplacelistsymmetric)
-        -   [<span class="toc-section-number">10.3.15</span> NCRSym](#ncrsym)
-        -   [<span class="toc-section-number">10.3.16</span> NCRASym](#ncrasym)
-        -   [<span class="toc-section-number">10.3.17</span> NCRRSym](#ncrrsym)
-        -   [<span class="toc-section-number">10.3.18</span> NCRLSym](#ncrlsym)
-        -   [<span class="toc-section-number">10.3.19</span> NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
-        -   [<span class="toc-section-number">10.3.20</span> NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
-        -   [<span class="toc-section-number">10.3.21</span> NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
-        -   [<span class="toc-section-number">10.3.22</span> NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
-        -   [<span class="toc-section-number">10.3.23</span> NCRSA](#ncrsa)
-        -   [<span class="toc-section-number">10.3.24</span> NCRASA](#ncrasa)
-        -   [<span class="toc-section-number">10.3.25</span> NCRRSA](#ncrrsa)
-        -   [<span class="toc-section-number">10.3.26</span> NCRLSA](#ncrlsa)
-        -   [<span class="toc-section-number">10.3.27</span> NCMatrixExpand](#ncmatrixexpand)
-        -   [<span class="toc-section-number">10.3.28</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
-        -   [<span class="toc-section-number">10.3.29</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
-    -   [<span class="toc-section-number">10.4</span> NCSelfAdjoint](#ncselfadjoint)
-        -   [<span class="toc-section-number">10.4.1</span> NCSymmetricQ](#ncsymmetricq)
-        -   [<span class="toc-section-number">10.4.2</span> NCSymmetricTest](#ncsymmetrictest)
-        -   [<span class="toc-section-number">10.4.3</span> NCSymmetricPart](#ncsymmetricpart)
-        -   [<span class="toc-section-number">10.4.4</span> NCSelfAdjointQ](#ncselfadjointq)
-        -   [<span class="toc-section-number">10.4.5</span> NCSelfAdjointTest](#ncselfadjointtest)
-    -   [<span class="toc-section-number">10.5</span> NCSimplifyRational](#ncsimplifyrational)
-        -   [<span class="toc-section-number">10.5.1</span> NCNormalizeInverse](#ncnormalizeinverse)
-        -   [<span class="toc-section-number">10.5.2</span> NCSimplifyRational](#ncsimplifyrational-1)
-        -   [<span class="toc-section-number">10.5.3</span> NCSR](#ncsr)
-        -   [<span class="toc-section-number">10.5.4</span> NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass)
-        -   [<span class="toc-section-number">10.5.5</span> NCPreSimplifyRational](#ncpresimplifyrational)
-        -   [<span class="toc-section-number">10.5.6</span> NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass)
-    -   [<span class="toc-section-number">10.6</span> NCDiff](#ncdiff)
-        -   [<span class="toc-section-number">10.6.1</span> NCDirectionalD](#ncdirectionald)
-        -   [<span class="toc-section-number">10.6.2</span> NCGrad](#ncgrad)
-        -   [<span class="toc-section-number">10.6.3</span> NCHessian](#nchessian)
-        -   [<span class="toc-section-number">10.6.4</span> DirectionalD](#directionald)
-        -   [<span class="toc-section-number">10.6.5</span> NCIntegrate](#ncintegrate)
-    -   [<span class="toc-section-number">10.7</span> NCConvexity](#ncconvexity)
-        -   [<span class="toc-section-number">10.7.1</span> NCIndependent](#ncindependent)
-        -   [<span class="toc-section-number">10.7.2</span> NCConvexityRegion](#ncconvexityregion)
+    -   [<span class="toc-section-number">10.2</span> NCTr](#nctr)
+        -   [<span class="toc-section-number">10.2.1</span> tr](#tr)
+        -   [<span class="toc-section-number">10.2.2</span> SortCyclicPermutation](#sortcyclicpermutation)
+        -   [<span class="toc-section-number">10.2.3</span> SortedCyclicPermutationQ](#sortedcyclicpermutationq)
+    -   [<span class="toc-section-number">10.3</span> NCCollect](#nccollect)
+        -   [<span class="toc-section-number">10.3.1</span> NCCollect](#nccollect-1)
+        -   [<span class="toc-section-number">10.3.2</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
+        -   [<span class="toc-section-number">10.3.3</span> NCCollectSymmetric](#nccollectsymmetric)
+        -   [<span class="toc-section-number">10.3.4</span> NCStrongCollect](#ncstrongcollect)
+        -   [<span class="toc-section-number">10.3.5</span> NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
+        -   [<span class="toc-section-number">10.3.6</span> NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
+        -   [<span class="toc-section-number">10.3.7</span> NCCompose](#nccompose)
+        -   [<span class="toc-section-number">10.3.8</span> NCDecompose](#ncdecompose)
+        -   [<span class="toc-section-number">10.3.9</span> NCTermsOfDegree](#nctermsofdegree)
+        -   [<span class="toc-section-number">10.3.10</span> NCTermsOfTotalDegree](#nctermsoftotaldegree)
+    -   [<span class="toc-section-number">10.4</span> NCReplace](#ncreplace)
+        -   [<span class="toc-section-number">10.4.1</span> NCReplace](#ncreplace-1)
+        -   [<span class="toc-section-number">10.4.2</span> NCReplaceAll](#ncreplaceall)
+        -   [<span class="toc-section-number">10.4.3</span> NCReplaceList](#ncreplacelist)
+        -   [<span class="toc-section-number">10.4.4</span> NCReplaceRepeated](#ncreplacerepeated)
+        -   [<span class="toc-section-number">10.4.5</span> NCR](#ncr)
+        -   [<span class="toc-section-number">10.4.6</span> NCRA](#ncra)
+        -   [<span class="toc-section-number">10.4.7</span> NCRR](#ncrr)
+        -   [<span class="toc-section-number">10.4.8</span> NCRL](#ncrl)
+        -   [<span class="toc-section-number">10.4.9</span> NCMakeRuleSymmetric](#ncmakerulesymmetric)
+        -   [<span class="toc-section-number">10.4.10</span> NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
+        -   [<span class="toc-section-number">10.4.11</span> NCReplaceSymmetric](#ncreplacesymmetric)
+        -   [<span class="toc-section-number">10.4.12</span> NCReplaceAllSymmetric](#ncreplaceallsymmetric)
+        -   [<span class="toc-section-number">10.4.13</span> NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
+        -   [<span class="toc-section-number">10.4.14</span> NCReplaceListSymmetric](#ncreplacelistsymmetric)
+        -   [<span class="toc-section-number">10.4.15</span> NCRSym](#ncrsym)
+        -   [<span class="toc-section-number">10.4.16</span> NCRASym](#ncrasym)
+        -   [<span class="toc-section-number">10.4.17</span> NCRRSym](#ncrrsym)
+        -   [<span class="toc-section-number">10.4.18</span> NCRLSym](#ncrlsym)
+        -   [<span class="toc-section-number">10.4.19</span> NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
+        -   [<span class="toc-section-number">10.4.20</span> NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
+        -   [<span class="toc-section-number">10.4.21</span> NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+        -   [<span class="toc-section-number">10.4.22</span> NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
+        -   [<span class="toc-section-number">10.4.23</span> NCRSA](#ncrsa)
+        -   [<span class="toc-section-number">10.4.24</span> NCRASA](#ncrasa)
+        -   [<span class="toc-section-number">10.4.25</span> NCRRSA](#ncrrsa)
+        -   [<span class="toc-section-number">10.4.26</span> NCRLSA](#ncrlsa)
+        -   [<span class="toc-section-number">10.4.27</span> NCMatrixExpand](#ncmatrixexpand)
+        -   [<span class="toc-section-number">10.4.28</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
+        -   [<span class="toc-section-number">10.4.29</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
+    -   [<span class="toc-section-number">10.5</span> NCSelfAdjoint](#ncselfadjoint)
+        -   [<span class="toc-section-number">10.5.1</span> NCSymmetricQ](#ncsymmetricq)
+        -   [<span class="toc-section-number">10.5.2</span> NCSymmetricTest](#ncsymmetrictest)
+        -   [<span class="toc-section-number">10.5.3</span> NCSymmetricPart](#ncsymmetricpart)
+        -   [<span class="toc-section-number">10.5.4</span> NCSelfAdjointQ](#ncselfadjointq)
+        -   [<span class="toc-section-number">10.5.5</span> NCSelfAdjointTest](#ncselfadjointtest)
+    -   [<span class="toc-section-number">10.6</span> NCSimplifyRational](#ncsimplifyrational)
+        -   [<span class="toc-section-number">10.6.1</span> NCNormalizeInverse](#ncnormalizeinverse)
+        -   [<span class="toc-section-number">10.6.2</span> NCSimplifyRational](#ncsimplifyrational-1)
+        -   [<span class="toc-section-number">10.6.3</span> NCSR](#ncsr)
+        -   [<span class="toc-section-number">10.6.4</span> NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass)
+        -   [<span class="toc-section-number">10.6.5</span> NCPreSimplifyRational](#ncpresimplifyrational)
+        -   [<span class="toc-section-number">10.6.6</span> NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass)
+    -   [<span class="toc-section-number">10.7</span> NCDiff](#ncdiff)
+        -   [<span class="toc-section-number">10.7.1</span> NCDirectionalD](#ncdirectionald)
+        -   [<span class="toc-section-number">10.7.2</span> NCGrad](#ncgrad)
+        -   [<span class="toc-section-number">10.7.3</span> NCHessian](#nchessian)
+        -   [<span class="toc-section-number">10.7.4</span> DirectionalD](#directionald)
+        -   [<span class="toc-section-number">10.7.5</span> NCIntegrate](#ncintegrate)
+    -   [<span class="toc-section-number">10.8</span> NCConvexity](#ncconvexity)
+        -   [<span class="toc-section-number">10.8.1</span> NCIndependent](#ncindependent)
+        -   [<span class="toc-section-number">10.8.2</span> NCConvexityRegion](#ncconvexityregion)
 -   [<span class="toc-section-number">11</span> Packages for manipulating NC block matrices](#packages-for-manipulating-nc-block-matrices)
     -   [<span class="toc-section-number">11.1</span> NCDot](#ncdot)
         -   [<span class="toc-section-number">11.1.1</span> tpMat](#tpmat)
@@ -3961,6 +3965,41 @@ See also:
 See also:
 [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply),
 [NCExpand](#ncexpand).
+
+## NCTr
+
+Members are:
+
+-   [tr](#tr)
+-   [SortCyclicPermutation](#sortcyclicpermutation)
+-   [SortedCyclicPermutationQ](#sortedcyclicpermutationq)
+
+### tr
+
+`tr[expr]` is an linear operator with the following properties:
+
+-   `tr` automatically distributes over sums;
+-   when `expr` is a noncommutative product, then product is sorted;
+    for example `tr[b ** a]` evaluates into `tr[a ** b]`
+
+See also:
+[SortCyclicPermutation](#sortcyclicpermutation),
+[SortedCyclicPermutationQ](#sortedcyclicpermutationq).
+
+### SortCyclicPermutation
+
+`SortedCyclicPermutation[list]` returns a cyclic permutation of list sorted in
+ascending order.
+
+See also:
+[SortedCyclicPermutationQ](#sortedcyclicpermutationq).
+
+### SortedCyclicPermutationQ
+
+`SortCyclicPermutationQ[list]` returns `True` if `list` is a sorted cyclic permutation.
+
+See also:
+[SortCyclicPermutation](#sortcyclicpermutation).
 
 ## NCCollect
 

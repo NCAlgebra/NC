@@ -1,6 +1,7 @@
 BeginPackage["NCAlgebra`",
 	     {"NC`",
 	      "NonCommutativeMultiply`",
+	      "NCTr`",
               "NCCollect`",
               "NCDiff`",
               "NCDot`",
@@ -14,7 +15,7 @@ BeginPackage["NCAlgebra`",
 NCAlgebra::SmallCapSymbolsNonCommutative = "All lower cap single letter symbols (e.g. a,b,c,...) were set as noncommutative.";
 NCAlgebra::NoSymbolsNonCommutative = "No symbols were set as noncommutative. Use SetNonCommutative to set noncommutative symbols.";
 
-Begin["Private`"];
+Begin["`Private`"];
 
   verbose = If[ValueQ[$NCAlgebra$Loaded], False, $NCAlgebra$Loaded=True];
 

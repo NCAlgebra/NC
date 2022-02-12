@@ -24,7 +24,7 @@ Options[NCSetOutput] = {
   inv -> True
 };
 
-Begin["Private`"];
+Begin["`Private`"];
 
   NCSetOutput[opts___Rule:{}] :=
     Module[{options},

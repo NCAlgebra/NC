@@ -32,6 +32,8 @@ NCCollect::NotPolynomial = "Could not transform expression into nc polynomial";
 
 Options[NCCollect] = {ByTotalDegree -> False};
 
+Get["NCCollect.usage"];
+
 Begin["`Private`"];
 
   Get["NCCollect.usage"];

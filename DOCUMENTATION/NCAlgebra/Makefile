@@ -3,6 +3,7 @@ include ../make.inc
 MD2USAGE_OPTIONS = -H "\#\#\#"
 
 FILES = NonCommutativeMultiply.usage \
+	NCTr.usage \
 	NCCollect.usage \
 	NCSimplifyRational.usage \
 	NCDiff.usage \
