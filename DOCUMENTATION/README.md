@@ -762,7 +762,7 @@ with noncommutative entries. For example,
 
 evaluates to
 
-    tr[a] + tr[b]
+    tr[a] + tr[d]
 
 ## Replace
 
