@@ -4,14 +4,36 @@
 
 ## Authors
 
--   J. William Helton\*
-
--   Mauricio C. de Oliveira&
-
--   Math, UCSD, La Jolla, CA
-    & MAE, UCSD, La Jolla, CA
+-   J. William Helton[^1]
+-   Mauricio C. de Oliveira[^2]
 
 with earlier contributions by Bob Miller & Mark Stankus
+
+Copyright:
+- Helton and de Oliveira 2017
+- Helton 2002
+- Helton and Miller June 1991
+All rights reserved.
+
+The program was written by the authors and by:
+David Hurst, Daniel Lamm, Orlando Merino, Robert Obar,
+Henry Pfister, Mike Walker, John Wavrik, Lois Yu,
+J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple.
+The beginnings of the program come from eran@slac.
+Considerable recent help came from Igor Klep.
+
+Current primary support is from the
+NSF Division of Mathematical Sciences.
+
+This program was written with support from
+AFOSR, NSF, ONR, Lab for Math and Statistics at UCSD,
+UCSD Faculty Mentor Program,
+and US Department of Education.
+
+For NCAlgebra updates see:
+
+www.github.com/NCAlgebra/NC
+www.math.ucsd.edu/\~ncalg
 
 # Table of Contents
 
@@ -1039,7 +1061,7 @@ which returns
 
     h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
 
-The command `NCGrad` calculates nc *gradients*[^1].
+The command `NCGrad` calculates nc *gradients*[^3].
 
 For example:
 
@@ -1093,7 +1115,7 @@ Mathematica convention for handling vectors is tricky.
 
 A useful command is [`NCInverse`](#ncinverse), which is akin to
 Mathematica’s `Inverse` command and produces a block-matrix inverse
-formula[^2] for an nc matrix. For example
+formula[^4] for an nc matrix. For example
 
     NCInverse[m]
 
@@ -1516,7 +1538,7 @@ in which `middle` is the symmetric matrix
 Note the argument `SymmetricVariables -> {x,h}` which tells
 `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
 variables. Because the `middle` matrix is never positive semidefinite
-for any possible value of ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) the conclusion[^3] is that the nc quartic
+for any possible value of ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) the conclusion[^5] is that the nc quartic
 ![x^4](https://render.githubusercontent.com/render/math?math=x%5E4&mode=inline) is *not convex*.
 
 The production of such symmetric quadratic decompositions is automated
@@ -1635,7 +1657,7 @@ the pattern `1 + x_` would not match an integer `2`, even though one
 could write `2 = 1 + 1`!
 
 Unfortunately, `**`, which is the `NonCommutativeMultiply` operator,
-*is not* `Flat`[^4]. This is the reason why substitution based
+*is not* `Flat`[^6]. This is the reason why substitution based
 on a simple rule such as:
 
     rule = a**b -> c
@@ -1798,7 +1820,7 @@ returns
 which completely destroys the noncommutative product. The reason for
 the catastrophic failure of the definition of `F`, which is inside a
 `Module`, is that the letters `aa` and `bb` appearing in `rule` are
-*not treated as the local symbols `aa` and `bb`*[^5]. For this
+*not treated as the local symbols `aa` and `bb`*[^7]. For this
 reason, the right-hand side of the rule `rule` involves the global
 symbols `aa` and `bb`, which are, in the absence of a declaration to
 the contrary, commutative. On the other hand, the definition of `G`
@@ -1863,7 +1885,7 @@ evaluation takes place returning
 
     {{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
 
-which is what would have arisen from calling `NCDot[m1,m2]`[^6]. Likewise
+which is what would have arisen from calling `NCDot[m1,m2]`[^8]. Likewise
 
     inv[m1]
 
@@ -8509,9 +8531,13 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
 
 # References
 
-[^1]: The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
+[^1]: Math, UCSD, La Jolla, CA
 
-[^2]: Contrary to what happens with symbolic inversion of matrices
+[^2]: MAE, UCSD, La Jolla, CA
+
+[^3]: The transpose of the gradient of the nc expression `expr` is the derivative with respect to the direction `h` of the trace of the directional derivative of `expr` in the direction `h`.
+
+[^4]: Contrary to what happens with symbolic inversion of matrices
     with commutative entries, there exist multiple formulas for the
     symbolic inverse of a matrix with noncommutative entries. Furthermore,
     it may be possible that none of such formulas is “correct”. Indeed, it
@@ -8520,10 +8546,10 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
     are invertible. In this case no *correct* formula exists for the
     calculation of the inverse of `m`.
 
-[^3]: This is in contrast with the commutative ![x^4](https://render.githubusercontent.com/render/math?math=x%5E4&mode=inline) which is
+[^5]: This is in contrast with the commutative ![x^4](https://render.githubusercontent.com/render/math?math=x%5E4&mode=inline) which is
     convex everywhere. See \[@camino:MIS:2003\] for details.
 
-[^4]: The reason is that making an operator `Flat` is a
+[^6]: The reason is that making an operator `Flat` is a
     convenience that comes with a price: lack of control over execution
     and evaluation. Since `NCAlgebra` has to operate at a very low level
     this lack of control over evaluation is fatal. Indeed, making
@@ -8531,7 +8557,7 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
     Mathematica into infinite loops in seemingly trivial noncommutative
     expression. Hey, email us if you find a way around that :)
 
-[^5]: By the way, I find that behavior of Mathematica’s `Module`
+[^7]: By the way, I find that behavior of Mathematica’s `Module`
     questionable, since something like
 
         F[exp_] := Module[{aa, bb},
@@ -8542,4 +8568,4 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
     would not fail to treat `aa` and `bb` locally. It is their
     appearance in a rule that triggers the mostly odd behavior.
 
-[^6]: Formerly `MatMult[m1,m2]`.
+[^8]: Formerly `MatMult[m1,m2]`.
