@@ -9,13 +9,6 @@
 
 with earlier contributions by Bob Miller & Mark Stankus
 
-Copyright:
-- Helton and de Oliveira 2017
-- Helton 2002
-- Helton and Miller June 1991
-
-All rights reserved.
-
 The program was written by the authors and by:
 
 David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister,
@@ -36,6 +29,14 @@ For NCAlgebra updates see:
 [www.github.com/NCAlgebra/NC](https://www.github.com/NCAlgebra/NC)
 
 [www.math.ucsd.edu/\~ncalg](https://www.math.ucsd.edu/~ncalg)
+
+## Copyright:
+
+-   Helton and de Oliveira 2017
+-   Helton 2002
+-   Helton and Miller June 1991
+
+All rights reserved.
 
 # Table of Contents
 
