@@ -1,6 +1,6 @@
 \part{Reference Manual}
 
-# Introduction {#ReferenceIntroduction}
+# Reference Manual {#ReferenceIntroduction}
 
 The following chapters and sections describes packages inside
 `NCAlgebra`.

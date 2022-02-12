@@ -30,7 +30,7 @@ For NCAlgebra updates see:
 
 [www.math.ucsd.edu/\~ncalg](https://www.math.ucsd.edu/~ncalg)
 
-A PDF version of this document is available [here](./NCDocument.pdf)
+A PDF version of this document is available [here](./NCDocument.pdf).
 
 ## Copyright
 
@@ -101,7 +101,7 @@ All rights reserved.
     -   [<span class="toc-section-number">8.2</span> Using NCTeX](#using-nctex)
         -   [<span class="toc-section-number">8.2.1</span> NCTeX Options](#nctex-options)
     -   [<span class="toc-section-number">8.3</span> Using NCTeXForm](#using-nctexform)
--   [<span class="toc-section-number">9</span> Introduction](#introduction-1)
+-   [<span class="toc-section-number">9</span> Reference Manual](#reference-manual)
     -   [<span class="toc-section-number">9.1</span> NC](#nc)
         -   [<span class="toc-section-number">9.1.1</span> Options](#options)
     -   [<span class="toc-section-number">9.2</span> NCAlgebra](#ncalgebra)
@@ -506,7 +506,7 @@ This *User Guide* attempts to document the many improvements
 introduced in `NCAlgebra` Version 5.0. Please be patient, as we move
 to incorporate the many recent changes into this document.
 
-See [Reference Manual](#introduction-1) for a detailed
+See [Reference Manual](#reference-manual) for a detailed
 description of the available commands.
 
 There are also notebooks in the `NC/DEMOS` directory that accompany
@@ -3710,7 +3710,7 @@ produce
 
 ![J_2(x)](https://render.githubusercontent.com/render/math?math=J_2%28x%29&mode=inline)
 
-# Introduction
+# Reference Manual
 
 The following chapters and sections describes packages inside
 `NCAlgebra`.
