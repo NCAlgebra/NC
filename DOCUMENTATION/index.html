@@ -243,34 +243,39 @@ class="toc-section-number">10.1.7</span> CommutativeQ</a></li>
 class="toc-section-number">10.1.8</span> NonCommutativeQ</a></li>
 <li><a href="#SetCommutative"><span
 class="toc-section-number">10.1.9</span> SetCommutative</a></li>
+<li><a href="#SetCommutativeHold"><span
+class="toc-section-number">10.1.10</span> SetCommutativeHold</a></li>
 <li><a href="#SetNonCommutative"><span
-class="toc-section-number">10.1.10</span> SetNonCommutative</a></li>
+class="toc-section-number">10.1.11</span> SetNonCommutative</a></li>
 <li><a href="#SetNonCommutativeHold"><span
-class="toc-section-number">10.1.11</span> SetNonCommutativeHold</a></li>
-<li><a href="#SNC"><span class="toc-section-number">10.1.12</span>
+class="toc-section-number">10.1.12</span> SetNonCommutativeHold</a></li>
+<li><a href="#SetCommutativeFunction"><span
+class="toc-section-number">10.1.13</span>
+SetCommutativeFunction</a></li>
+<li><a href="#SNC"><span class="toc-section-number">10.1.14</span>
 SNC</a></li>
 <li><a href="#SetCommutingOperators"><span
-class="toc-section-number">10.1.13</span> SetCommutingOperators</a></li>
+class="toc-section-number">10.1.15</span> SetCommutingOperators</a></li>
 <li><a href="#UnsetCommutingOperators"><span
-class="toc-section-number">10.1.14</span>
+class="toc-section-number">10.1.16</span>
 UnsetCommutingOperators</a></li>
 <li><a href="#CommutingOperatorsQ"><span
-class="toc-section-number">10.1.15</span> CommutingOperatorsQ</a></li>
+class="toc-section-number">10.1.17</span> CommutingOperatorsQ</a></li>
 <li><a href="#Commutative"><span
-class="toc-section-number">10.1.16</span> Commutative</a></li>
+class="toc-section-number">10.1.18</span> Commutative</a></li>
 <li><a href="#CommuteEverything"><span
-class="toc-section-number">10.1.17</span> CommuteEverything</a></li>
+class="toc-section-number">10.1.19</span> CommuteEverything</a></li>
 <li><a href="#BeginCommuteEverything"><span
-class="toc-section-number">10.1.18</span>
+class="toc-section-number">10.1.20</span>
 BeginCommuteEverything</a></li>
 <li><a href="#EndCommuteEverything"><span
-class="toc-section-number">10.1.19</span> EndCommuteEverything</a></li>
+class="toc-section-number">10.1.21</span> EndCommuteEverything</a></li>
 <li><a href="#ExpandNonCommutativeMultiply"><span
-class="toc-section-number">10.1.20</span>
+class="toc-section-number">10.1.22</span>
 ExpandNonCommutativeMultiply</a></li>
-<li><a href="#NCExpand"><span class="toc-section-number">10.1.21</span>
+<li><a href="#NCExpand"><span class="toc-section-number">10.1.23</span>
 NCExpand</a></li>
-<li><a href="#NCE"><span class="toc-section-number">10.1.22</span>
+<li><a href="#NCE"><span class="toc-section-number">10.1.24</span>
 NCE</a></li>
 </ul></li>
 <li><a href="#PackageNCCollect"><span
@@ -3648,8 +3653,10 @@ noncommutative functionality to Mathematica’s native
 <li><a href="#CommutativeQ">CommutativeQ</a></li>
 <li><a href="#NonCommutativeQ">NonCommutativeQ</a></li>
 <li><a href="#SetCommutative">SetCommutative</a></li>
+<li><a href="#SetCommutativeHold">SetCommutativeHold</a></li>
 <li><a href="#SetNonCommutative">SetNonCommutative</a></li>
 <li><a href="#SetNonCommutativeHold">SetNonCommutativeHold</a></li>
+<li><a href="#SetCommutativeFunction">SetCommutativeFunction</a></li>
 <li><a href="#SetCommutingOperators">SetCommutingOperators</a></li>
 <li><a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></li>
 <li><a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></li>
@@ -3722,31 +3729,62 @@ to be commutative.</p>
 <p>See also: <a href="#SetNonCommutative">SetNonCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
-<h3 data-number="10.1.10" id="SetNonCommutative"><span
-class="header-section-number">10.1.10</span> SetNonCommutative</h3>
+<h3 data-number="10.1.10" id="SetCommutativeHold"><span
+class="header-section-number">10.1.10</span> SetCommutativeHold</h3>
+<p><code>SetCommutativeHold[a,b,c,...]</code> sets all the
+<code>Symbols</code> <code>a</code>, <code>b</code>, <code>c</code>, …
+to be commutative.</p>
+<p><code>SetCommutativeHold</code> has attribute <code>HoldAll</code>
+and can be used to set Symbols which have already been assigned a
+value.</p>
+<p>See also: <a href="#SetNonCommutativeHold">SetNonCommutativeHold</a>,
+<a href="#SetCommutative">SetCommutative</a>, <a
+href="#SetNonCommutative">SetNonCommutative</a>, <a
+href="#CommutativeQ">CommutativeQ</a>, <a
+href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
+<h3 data-number="10.1.11" id="SetNonCommutative"><span
+class="header-section-number">10.1.11</span> SetNonCommutative</h3>
 <p><code>SetNonCommutative[a,b,c,...]</code> sets all the
 <code>Symbols</code> <code>a</code>, <code>b</code>, <code>c</code>, …
 to be noncommutative.</p>
 <p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
-<h3 data-number="10.1.11" id="SetNonCommutativeHold"><span
-class="header-section-number">10.1.11</span> SetNonCommutativeHold</h3>
+<h3 data-number="10.1.12" id="SetNonCommutativeHold"><span
+class="header-section-number">10.1.12</span> SetNonCommutativeHold</h3>
 <p><code>SetNonCommutativeHold[a,b,c,...]</code> sets all the
 <code>Symbols</code> <code>a</code>, <code>b</code>, <code>c</code>, …
 to be noncommutative.</p>
 <p><code>SetNonCommutativeHold</code> has attribute <code>HoldAll</code>
 and can be used to set Symbols which have already been assigned a
 value.</p>
-<p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
+<p>See also: <a href="#SetCommutativeHold">SetCommutativeHold</a>, <a
+href="#SetCommutative">SetCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
-<h3 data-number="10.1.12" id="SNC"><span
-class="header-section-number">10.1.12</span> SNC</h3>
+<h3 data-number="10.1.13" id="SetCommutativeFunction"><span
+class="header-section-number">10.1.13</span> SetCommutativeFunction</h3>
+<p><code>SetCommutativeFunction[f]</code> sets expressions with
+<code>Head</code> <code>f</code>, i.e. functions, to be commutative.</p>
+<p>By default, expressions in which the <code>Head</code> or any of its
+arguments is noncommutative will be considered noncommutative. For
+example,</p>
+<pre><code>SetCommutative[tr];
+a ** b ** tr[a ** b]</code></pre>
+<p>evaluates to <code>a ** b ** tr[a ** b]</code> while</p>
+<pre><code>SetCommutativeFunction[tr];
+a ** b ** tr[a ** b]</code></pre>
+<p>evaluates to <code>tr[a**b] * a ** b</code>.</p>
+<p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
+href="#SetNonCommutative">SetNonCommutative</a>, <a
+href="#CommutativeQ">CommutativeQ</a>, <a
+href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
+<h3 data-number="10.1.14" id="SNC"><span
+class="header-section-number">10.1.14</span> SNC</h3>
 <p><code>SNC</code> is an alias for <code>SetNonCommutative</code>.</p>
 <p>See also: <a href="#SetNonCommutative">SetNonCommutative</a>.</p>
-<h3 data-number="10.1.13" id="SetCommutingOperators"><span
-class="header-section-number">10.1.13</span> SetCommutingOperators</h3>
+<h3 data-number="10.1.15" id="SetCommutingOperators"><span
+class="header-section-number">10.1.15</span> SetCommutingOperators</h3>
 <p><code>SetCommutingOperators[a,b]</code> will define a rule that
 substitute any noncommutative product <code>b ** a</code> by
 <code>a ** b</code>, effectively making the pair <code>a</code> and
@@ -3756,37 +3794,37 @@ substitute any noncommutative product <code>b ** a</code> by
 <p>See also: <a
 href="#UnsetCommutingOperators">UnsetCommutingOperators</a>, <a
 href="#CommutingOperatorsQ">CommutingOperatorsQ</a></p>
-<h3 data-number="10.1.14" id="UnsetCommutingOperators"><span
-class="header-section-number">10.1.14</span>
+<h3 data-number="10.1.16" id="UnsetCommutingOperators"><span
+class="header-section-number">10.1.16</span>
 UnsetCommutingOperators</h3>
 <p><code>UnsetCommutingOperators[a,b]</code> remove any rules previously
 created by <code>SetCommutingOperators[a,b]</code> or
 <code>SetCommutingOperators[b,a]</code>.</p>
 <p>See also: <a href="#SetCommutingOperators">SetCommutingOperators</a>,
 <a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></p>
-<h3 data-number="10.1.15" id="CommutingOperatorsQ"><span
-class="header-section-number">10.1.15</span> CommutingOperatorsQ</h3>
+<h3 data-number="10.1.17" id="CommutingOperatorsQ"><span
+class="header-section-number">10.1.17</span> CommutingOperatorsQ</h3>
 <p><code>CommutingOperatorsQ[a,b]</code> returns <code>True</code> if
 <code>a</code> and <code>b</code> are commuting operators.</p>
 <p>See also: <a href="#SetCommutingOperators">SetCommutingOperators</a>,
 <a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></p>
-<h3 data-number="10.1.16" id="Commutative"><span
-class="header-section-number">10.1.16</span> Commutative</h3>
+<h3 data-number="10.1.18" id="Commutative"><span
+class="header-section-number">10.1.18</span> Commutative</h3>
 <p><code>Commutative[symbol]</code> is commutative even if
 <code>symbol</code> is noncommutative.</p>
 <p>See also: <a href="#CommuteEverything">CommuteEverything</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#SetCommutative">SetCommutative</a>, <a
 href="#SetNonCommutative">SetNonCommutative</a>.</p>
-<h3 data-number="10.1.17" id="CommuteEverything"><span
-class="header-section-number">10.1.17</span> CommuteEverything</h3>
+<h3 data-number="10.1.19" id="CommuteEverything"><span
+class="header-section-number">10.1.19</span> CommuteEverything</h3>
 <p><code>CommuteEverything[expr]</code> is an alias for <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>.</p>
 <p>See also: <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a
 href="#Commutative">Commutative</a>.</p>
-<h3 data-number="10.1.18" id="BeginCommuteEverything"><span
-class="header-section-number">10.1.18</span> BeginCommuteEverything</h3>
+<h3 data-number="10.1.20" id="BeginCommuteEverything"><span
+class="header-section-number">10.1.20</span> BeginCommuteEverything</h3>
 <p><code>BeginCommuteEverything[expr]</code> sets all symbols appearing
 in <code>expr</code> as commutative so that the resulting expression
 contains only commutative products or inverses. It issues messages
@@ -3797,16 +3835,16 @@ noncommutative behaviour.</p>
 does it sound like?</em></p>
 <p>See also: <a href="#EndCommuteEverything">EndCommuteEverything</a>,
 <a href="#Commutative">Commutative</a>.</p>
-<h3 data-number="10.1.19" id="EndCommuteEverything"><span
-class="header-section-number">10.1.19</span> EndCommuteEverything</h3>
+<h3 data-number="10.1.21" id="EndCommuteEverything"><span
+class="header-section-number">10.1.21</span> EndCommuteEverything</h3>
 <p><code>EndCommuteEverything[expr]</code> restores noncommutative
 behaviour to symbols affected by
 <code>BeginCommuteEverything</code>.</p>
 <p>See also: <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a
 href="#Commutative">Commutative</a>.</p>
-<h3 data-number="10.1.20" id="ExpandNonCommutativeMultiply"><span
-class="header-section-number">10.1.20</span>
+<h3 data-number="10.1.22" id="ExpandNonCommutativeMultiply"><span
+class="header-section-number">10.1.22</span>
 ExpandNonCommutativeMultiply</h3>
 <p><code>ExpandNonCommutativeMultiply[expr]</code> expands out
 <code>**</code>s in <code>expr</code>.</p>
@@ -3816,15 +3854,15 @@ ExpandNonCommutativeMultiply</h3>
 <pre><code>a**b + a**c.</code></pre>
 <p>See also: <a href="#NCExpand">NCExpand</a>, <a
 href="#NCE">NCE</a>.</p>
-<h3 data-number="10.1.21" id="NCExpand"><span
-class="header-section-number">10.1.21</span> NCExpand</h3>
+<h3 data-number="10.1.23" id="NCExpand"><span
+class="header-section-number">10.1.23</span> NCExpand</h3>
 <p><code>NCExpand</code> is an alias for
 <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCE">NCE</a>.</p>
-<h3 data-number="10.1.22" id="NCE"><span
-class="header-section-number">10.1.22</span> NCE</h3>
+<h3 data-number="10.1.24" id="NCE"><span
+class="header-section-number">10.1.24</span> NCE</h3>
 <p><code>NCE</code> is an alias for
 <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a

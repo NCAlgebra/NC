@@ -73,19 +73,21 @@
         -   [<span class="toc-section-number">10.1.7</span> CommutativeQ](#commutativeq)
         -   [<span class="toc-section-number">10.1.8</span> NonCommutativeQ](#noncommutativeq)
         -   [<span class="toc-section-number">10.1.9</span> SetCommutative](#setcommutative)
-        -   [<span class="toc-section-number">10.1.10</span> SetNonCommutative](#setnoncommutative)
-        -   [<span class="toc-section-number">10.1.11</span> SetNonCommutativeHold](#setnoncommutativehold)
-        -   [<span class="toc-section-number">10.1.12</span> SNC](#snc)
-        -   [<span class="toc-section-number">10.1.13</span> SetCommutingOperators](#setcommutingoperators)
-        -   [<span class="toc-section-number">10.1.14</span> UnsetCommutingOperators](#unsetcommutingoperators)
-        -   [<span class="toc-section-number">10.1.15</span> CommutingOperatorsQ](#commutingoperatorsq)
-        -   [<span class="toc-section-number">10.1.16</span> Commutative](#commutative)
-        -   [<span class="toc-section-number">10.1.17</span> CommuteEverything](#commuteeverything)
-        -   [<span class="toc-section-number">10.1.18</span> BeginCommuteEverything](#begincommuteeverything)
-        -   [<span class="toc-section-number">10.1.19</span> EndCommuteEverything](#endcommuteeverything)
-        -   [<span class="toc-section-number">10.1.20</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
-        -   [<span class="toc-section-number">10.1.21</span> NCExpand](#ncexpand)
-        -   [<span class="toc-section-number">10.1.22</span> NCE](#nce)
+        -   [<span class="toc-section-number">10.1.10</span> SetCommutativeHold](#setcommutativehold)
+        -   [<span class="toc-section-number">10.1.11</span> SetNonCommutative](#setnoncommutative)
+        -   [<span class="toc-section-number">10.1.12</span> SetNonCommutativeHold](#setnoncommutativehold)
+        -   [<span class="toc-section-number">10.1.13</span> SetCommutativeFunction](#setcommutativefunction)
+        -   [<span class="toc-section-number">10.1.14</span> SNC](#snc)
+        -   [<span class="toc-section-number">10.1.15</span> SetCommutingOperators](#setcommutingoperators)
+        -   [<span class="toc-section-number">10.1.16</span> UnsetCommutingOperators](#unsetcommutingoperators)
+        -   [<span class="toc-section-number">10.1.17</span> CommutingOperatorsQ](#commutingoperatorsq)
+        -   [<span class="toc-section-number">10.1.18</span> Commutative](#commutative)
+        -   [<span class="toc-section-number">10.1.19</span> CommuteEverything](#commuteeverything)
+        -   [<span class="toc-section-number">10.1.20</span> BeginCommuteEverything](#begincommuteeverything)
+        -   [<span class="toc-section-number">10.1.21</span> EndCommuteEverything](#endcommuteeverything)
+        -   [<span class="toc-section-number">10.1.22</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
+        -   [<span class="toc-section-number">10.1.23</span> NCExpand](#ncexpand)
+        -   [<span class="toc-section-number">10.1.24</span> NCE](#nce)
     -   [<span class="toc-section-number">10.2</span> NCCollect](#nccollect)
         -   [<span class="toc-section-number">10.2.1</span> NCCollect](#nccollect-1)
         -   [<span class="toc-section-number">10.2.2</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
@@ -3737,8 +3739,10 @@ Members are:
 -   [CommutativeQ](#commutativeq)
 -   [NonCommutativeQ](#noncommutativeq)
 -   [SetCommutative](#setcommutative)
+-   [SetCommutativeHold](#setcommutativehold)
 -   [SetNonCommutative](#setnoncommutative)
 -   [SetNonCommutativeHold](#setnoncommutativehold)
+-   [SetCommutativeFunction](#setcommutativefunction)
 -   [SetCommutingOperators](#setcommutingoperators)
 -   [UnsetCommutingOperators](#unsetcommutingoperators)
 -   [CommutingOperatorsQ](#commutingoperatorsq)
@@ -3814,6 +3818,15 @@ See also:
 See also:
 [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
 
+### SetCommutativeHold
+
+`SetCommutativeHold[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, … to be commutative.
+
+`SetCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
+
+See also:
+[SetNonCommutativeHold](#setnoncommutativehold), [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+
 ### SetNonCommutative
 
 `SetNonCommutative[a,b,c,...]` sets all the `Symbols` `a`, `b`, `c`, … to be noncommutative.
@@ -3828,7 +3841,26 @@ See also:
 `SetNonCommutativeHold` has attribute `HoldAll` and can be used to set Symbols which have already been assigned a value.
 
 See also:
-[SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+[SetCommutativeHold](#setcommutativehold), [SetCommutative](#setcommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+
+### SetCommutativeFunction
+
+`SetCommutativeFunction[f]` sets expressions with `Head` `f`, i.e. functions, to be commutative.
+
+By default, expressions in which the `Head` or any of its arguments is noncommutative will be considered noncommutative. For example,
+
+    SetCommutative[tr];
+    a ** b ** tr[a ** b]
+
+evaluates to `a ** b ** tr[a ** b]` while
+
+    SetCommutativeFunction[tr];
+    a ** b ** tr[a ** b]
+
+evaluates to `tr[a**b] * a ** b`.
+
+See also:
+[SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
 
 ### SNC
 
