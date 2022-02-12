@@ -3795,16 +3795,16 @@ class="header-section-number">10.1.13</span> SetCommutativeFunction</h3>
 <p>By default, expressions in which the <code>Head</code> or any of its
 arguments is noncommutative will be considered noncommutative. For
 example,</p>
-<pre><code>SetCommutative[tr];
-a ** b ** tr[a ** b]</code></pre>
-<p>evaluates to <code>a ** b ** tr[a ** b]</code> while</p>
-<pre><code>SetCommutativeFunction[tr];
-a ** b ** tr[a ** b]</code></pre>
-<p>evaluates to <code>tr[a**b] * a ** b</code>.</p>
+<pre><code>SetCommutative[trace];
+a ** b ** trace[a ** b]</code></pre>
+<p>evaluates to <code>a ** b ** trace[a ** b]</code> while</p>
+<pre><code>SetCommutativeFunction[trace];
+a ** b ** trace[a ** b]</code></pre>
+<p>evaluates to <code>trace[a**b] * a ** b</code>.</p>
 <p>See also: <a href="#SetCommutative">SetCommutative</a>, <a
 href="#SetNonCommutative">SetNonCommutative</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
-href="#NonCommutativeQ">NonCommutativeQ</a>.</p>
+href="#NonCommutativeQ">NonCommutativeQ</a>, <a href="#tr">tr</a>.</p>
 <h3 data-number="10.1.14" id="SNC"><span
 class="header-section-number">10.1.14</span> SNC</h3>
 <p><code>SNC</code> is an alias for <code>SetNonCommutative</code>.</p>

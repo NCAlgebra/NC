@@ -3871,18 +3871,18 @@ See also:
 
 By default, expressions in which the `Head` or any of its arguments is noncommutative will be considered noncommutative. For example,
 
-    SetCommutative[tr];
-    a ** b ** tr[a ** b]
+    SetCommutative[trace];
+    a ** b ** trace[a ** b]
 
-evaluates to `a ** b ** tr[a ** b]` while
+evaluates to `a ** b ** trace[a ** b]` while
 
-    SetCommutativeFunction[tr];
-    a ** b ** tr[a ** b]
+    SetCommutativeFunction[trace];
+    a ** b ** trace[a ** b]
 
-evaluates to `tr[a**b] * a ** b`.
+evaluates to `trace[a**b] * a ** b`.
 
 See also:
-[SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq).
+[SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq), [tr](#tr).
 
 ### SNC
 
