@@ -17,11 +17,11 @@ Copyright:
 All rights reserved.
 
 The program was written by the authors and by:
-David Hurst, Daniel Lamm, Orlando Merino, Robert Obar,
-Henry Pfister, Mike Walker, John Wavrik, Lois Yu,
-J. Camino, J. Griffin, J. Ovall, T. Shaheen, John Shopple.
-The beginnings of the program come from eran@slac.
-Considerable recent help came from Igor Klep.
+
+David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister,
+Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall,
+T. Shaheen, John Shopple. The beginnings of the program come from
+eran@slac. Considerable recent help came from Igor Klep.
 
 Current primary support is from the
 NSF Division of Mathematical Sciences.
@@ -33,9 +33,9 @@ and US Department of Education.
 
 For NCAlgebra updates see:
 
-www.github.com/NCAlgebra/NC
+[www.github.com/NCAlgebra/NC](https://www.github.com/NCAlgebra/NC)
 
-www.math.ucsd.edu/\~ncalg
+[www.math.ucsd.edu/\~ncalg](https://www.math.ucsd.edu/~ncalg)
 
 # Table of Contents
 
