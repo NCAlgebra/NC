@@ -13,6 +13,7 @@ Copyright:
 - Helton and de Oliveira 2017
 - Helton 2002
 - Helton and Miller June 1991
+
 All rights reserved.
 
 The program was written by the authors and by:
@@ -33,6 +34,7 @@ and US Department of Education.
 For NCAlgebra updates see:
 
 www.github.com/NCAlgebra/NC
+
 www.math.ucsd.edu/\~ncalg
 
 # Table of Contents
