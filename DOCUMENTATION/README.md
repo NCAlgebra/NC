@@ -1,11 +1,15 @@
 # The NCAlgebra Suite
 
-## Version 5.0.6
+*Version 5.0.6*
 
 ## Authors
 
--   J. William Helton
--   Mauricio C. de Oliveira
+-   J. William Helton\*
+
+-   Mauricio C. de Oliveira&
+
+-   Math, UCSD, La Jolla, CA
+    & MAE, UCSD, La Jolla, CA
 
 with earlier contributions by Bob Miller & Mark Stankus
 
