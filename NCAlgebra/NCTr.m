@@ -39,15 +39,15 @@ Begin["`Private`"];
     Return[If[index == {}, pos, index[[pos]]]];
   ];
 
-(* Perhaps SortCyclicPermutation[perm_, aj|tp] can be made mode efficient
+  (* Perhaps SortCyclicPermutation[perm_, aj|tp] can be made mode efficient
    by avoiding the double sorting *)
   SortCyclicPermutation[perm_, op:(aj|tp)] :=
     Sort[{SortCyclicPermutation[perm],
 	  SortCyclicPermutation[op /@ Reverse[perm]]}][[1]];
   SortCyclicPermutation[perm_ /; Length[perm] <= 1] := perm;
   SortCyclicPermutation[perm_] := Module[
-    {pos = {}, n = 0},
-    While[n == 0 || Length[pos] != 1,
+    {pos = {}, m = Length[perm], n = 0},
+    While[(n == 0 || Length[pos] != 1) && n < m,
       pos = OrderingCyclicPermutation[perm, pos, n++];
     ];
     Return[RotateLeft[perm, pos[[1]] - 1]];
@@ -60,8 +60,8 @@ Begin["`Private`"];
      Ordering[{perm, SortCyclicPermutation[op /@ Reverse[perm]]}, 1][[1]] == 1);
   SortedCyclicPermutationQ[perm_ /; Length[perm] <= 1] := True;
   SortedCyclicPermutationQ[perm_] := Module[
-    {pos = {}, n = 0},
-    While[n == 0 || Length[pos] != 1,
+    {pos = {}, m = Length[perm], n = 0},
+    While[(n == 0 || Length[pos] != 1) && n < m,
       pos = OrderingCyclicPermutation[perm, pos, n++];
       If[pos[[1]] != 1, Return[False]];
     ];

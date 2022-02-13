@@ -1,7 +1,7 @@
 << NCTr`
 
 Module[
-  {a,b,c,d,e,f,l,head},
+  {a,b,c,d,e,f,l,head,pos},
 
   SNC[a,b,c,d,e,f];
 
@@ -51,6 +51,27 @@ Module[
   NCTest[l = SortCyclicPermutation[l], head[1, b, a, 1, a ** b, 1, c, 2, 1, b, b]];
   NCTest[SortedCyclicPermutationQ[l], True];
 
+  (* perfect cycles *)
+  l = {a, a};
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {1, 2}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, pos, 1], {1, 2}];
+  NCTest[SortedCyclicPermutationQ[l], True];
+  NCTest[SortCyclicPermutation[l], {a, a}];
+
+  l = {b, a, b, a};
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {2, 4}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, pos, 1], {2, 4}];
+  NCTest[SortedCyclicPermutationQ[l], False];
+  NCTest[SortCyclicPermutation[l], {a, b, a, b}];
+
+  l = {c, a, b, c, a, b};
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, {}, 0], {2, 5}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, pos, 1], {2, 5}];
+  NCTest[pos = NCTr`Private`OrderingCyclicPermutation[l, pos, 2], {2, 5}];
+  NCTest[SortedCyclicPermutationQ[l], False];
+  NCTest[SortCyclicPermutation[l], {a, b, c, a, b, c}];
+
+  (* tp, aj, and co *)
   l = {c, a, tp[b], tp[a]};
   NCTest[la = SortCyclicPermutation[l], {a, b^T, a^T, c}];
   NCTest[SortedCyclicPermutationQ[la], True];
@@ -165,5 +186,10 @@ Module[
   NCTest[aj[tr[aj[a]]], tr[a]];
   NCTest[aj[tr[co[a]]], tr[a]];
   NCTest[co[tr[aj[a]]], tr[a]];
+
+  (* perfect cycles *)
+  NCTest[List @@ tr[a ** a], {a ** a}];
+  NCTest[List @@ tr[b ** a ** b ** a], {a ** b ** a ** b}];
+  NCTest[List @@ tr[c ** a ** b ** c ** a ** b], {a ** b ** c ** a ** b ** c}];
 
 ];
