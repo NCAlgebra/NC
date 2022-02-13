@@ -3927,7 +3927,9 @@ properties:</p>
 <li><code>tr</code> automatically distributes over sums;</li>
 <li>when <code>expr</code> is a noncommutative product, then product is
 sorted; for example <code>tr[b ** a]</code> evaluates into
-<code>tr[a ** b]</code></li>
+<code>tr[a ** b]</code>;</li>
+<li><code>tr[aj[expr]]</code> gets normalized as
+<code>Conjugate[tr[expr]]</code>.</li>
 </ul>
 <p>See also: <a href="#SortCyclicPermutation">SortCyclicPermutation</a>,
 <a href="#SortedCyclicPermutationQ">SortedCyclicPermutationQ</a>.</p>

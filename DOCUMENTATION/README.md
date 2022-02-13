@@ -4061,7 +4061,8 @@ Members are:
 
 -   `tr` automatically distributes over sums;
 -   when `expr` is a noncommutative product, then product is sorted;
-    for example `tr[b ** a]` evaluates into `tr[a ** b]`
+    for example `tr[b ** a]` evaluates into `tr[a ** b]`;
+-   `tr[aj[expr]]` gets normalized as `Conjugate[tr[expr]]`.
 
 See also:
 [SortCyclicPermutation](#sortcyclicpermutation),
