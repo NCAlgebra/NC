@@ -520,8 +520,7 @@ In *Mathematica* (notebook or text interface), type
 
 If this step fails, your installation has problems (check out installation instructions on the main page). If your installation is succesful you will see a message like:
 
-    NC::Directory: You are using the version of NCAlgebra which is found in:
-       "/your_home_directory/NC".
+    NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
 
 Then just type
 
@@ -3748,6 +3747,9 @@ For example you can load the package `NCAlgebra` using
 
     << NCAlgebra`
 
+See section [NCAlgebra](#ncalgebra) for more options and
+details available while loading `NCAlgebra`.
+
 The `NC::Directory` message can be suppressed by using standard Mathematica message control functions. For example,
 
     Off[NC`NC::Directory]
@@ -3758,8 +3760,7 @@ or
     Quiet[<< NC`, NC`NC::Directory]
 
 will load `NC` quietly. Note that you have to refer to the message by
-its fully qualified name ``` NC``NC::Directory ``` because the context
-```` NC``` is only available after loading ````NC\`.
+its fully qualified name `NC`NC::Directory`because the context`NC\``is only available after loading`NC\`.
 
 ### Options
 

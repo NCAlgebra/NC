@@ -1039,8 +1039,7 @@ class="header-section-number">3.1</span> Running NCAlgebra</h2>
 <p>If this step fails, your installation has problems (check out
 installation instructions on the main page). If your installation is
 succesful you will see a message like:</p>
-<pre><code>NC::Directory: You are using the version of NCAlgebra which is found in:
-   &quot;/your_home_directory/NC&quot;.</code></pre>
+<pre><code>NC::Directory: You are using the version of NCAlgebra which is found in: &quot;/your_home_directory/NC&quot;.</code></pre>
 <p>Then just type</p>
 <pre><code>&lt;&lt; NCAlgebra`</code></pre>
 <p>to load <code>NCAlgebra</code>.</p>
@@ -3619,6 +3618,8 @@ Mathematica.</p>
 suite</em>.</p>
 <p>For example you can load the package <code>NCAlgebra</code> using</p>
 <pre><code>&lt;&lt; NCAlgebra`</code></pre>
+<p>See section <a href="#PackageNCAlgebra">NCAlgebra</a> for more
+options and details available while loading <code>NCAlgebra</code>.</p>
 <p>The <code>NC::Directory</code> message can be suppressed by using
 standard Mathematica message control functions. For example,</p>
 <pre><code>Off[NC`NC::Directory]
@@ -3626,9 +3627,8 @@ standard Mathematica message control functions. For example,</p>
 <p>or</p>
 <pre><code>Quiet[&lt;&lt; NC`, NC`NC::Directory]</code></pre>
 <p>will load <code>NC</code> quietly. Note that you have to refer to the
-message by its fully qualified name <code>NC``NC::Directory</code>
-because the context
-<code>NC``` is only available after loading</code>NC`.</p>
+message by its fully qualified name
+<code>NC</code>NC::Directory<code>because the context</code>NC`<code>is only available after loading</code>NC`.</p>
 <h3 data-number="9.1.1" id="PackageNCOptions"><span
 class="header-section-number">9.1.1</span> Options</h3>
 <p>The following <code>options</code> can be set using
