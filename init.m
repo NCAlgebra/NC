@@ -6,7 +6,7 @@
 
 BeginPackage["NC`"];
 
-NC::Directory = "You are using the version of NCAlgebra which is found in: \"`1`\"";
+NC::Directory = "You are using the version of NCAlgebra which is found in: \"`1`\".";
 
 Options[NC] = {
   SmallCapSymbolsNonCommutative -> True,

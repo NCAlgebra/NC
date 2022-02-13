@@ -82,7 +82,7 @@ Earlier releases can be downloaded from:
 
 www.math.ucsd.edu/~ncalg
 
-Releases in github are also branches so you can easily switch from
+Releases in github are also tagged so you can easily switch from
 version to version using git.
 
 ### Post-download installation
@@ -120,9 +120,8 @@ If this fails, your installation has problems (check out previous
 section). If your installation is succesful you will see a message
 like:
 
-    You are using the version of NCAlgebra which is found in:
-      /your_home_directory/NC.
-    You can now use "<< NCAlgebra`" to load NCAlgebra.
+    NC::Directory: You are using the version of NCAlgebra which is found in:
+      "/your_home_directory/NC".
 
 Just type 
 
@@ -132,7 +131,7 @@ to load NCAlgebra
 
 ## Now what?
 
-Extensive documentation is found in the directory [DOCUMENTATION](https://github.com/NCAlgebra/NC/tree/master/DOCUMENTATION).
+Extensive documentation is found in the directory [DOCUMENTATION](./DOCUMENTATION).
 
 Basic documentation is provided on the project Wiki:
 
@@ -188,6 +187,8 @@ This will at once load `NCAlgebra` *and* `NCGB`. It can be tested
 using
 
 	<< NCGBTEST
+
+IMPORTANT: this version of `NCGB` is no longer being maintained. In many cases the `NCGBX` implementation is as fast if not faster than the old `NCGB`.
 
 ## Reporting Bugs
 
