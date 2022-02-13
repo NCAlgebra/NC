@@ -60,7 +60,7 @@ Module[
   NCTest[SortedCyclicPermutationQ[lb], True];
   NCTest[SortedCyclicPermutationQ[lb, tp], True];
   NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[lb], True];
-  NCTest[SortCyclicPermutation[la, lb], {a, b, a^T, c^T}];
+  (* NCTest[NCTr`Private`OrderingCyclicPermutation[la, lb], {{a, b, a^T, c^T}, 2}]; *)
   NCTest[l = SortCyclicPermutation[l, tp], {a, b, a^T, c^T}];
   NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[l], True];
 
@@ -73,21 +73,30 @@ Module[
   NCTest[SortedCyclicPermutationQ[lb], True];
   NCTest[SortedCyclicPermutationQ[lb, aj], True];
   NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[lb], True];
-  NCTest[SortCyclicPermutation[la, lb], {a, b, SuperStar[a], SuperStar[c]}];
+  (* NCTest[NCTr`Private`OrderingCyclicPermutation[la, lb], {{a, b, SuperStar[a], SuperStar[c]}, 2}]; *)
   NCTest[l = SortCyclicPermutation[l, aj], {a, b, SuperStar[a], SuperStar[c]}];
   NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[l], True];
 
-  (* Test tr *)
+  (* Test tr, aj *)
   NCTest[tr[2], 2];
+
   NCTest[tr[2 a], 2 tr[a]];
   NCTest[tr[a], tr[a]];
+  NCTest[tr[tp[a]], tr[a]];
+  NCTest[tr[2 tp[a]], 2 tr[a]];
+
+  NCTest[tr[aj[a]], Conjugate[tr[a]]];
+  NCTest[tr[2 aj[a]], 2 Conjugate[tr[a]]];
+
+  NCTest[tr[co[a]], Conjugate[tr[a]]];
+  NCTest[tr[2 co[a]], 2 Conjugate[tr[a]]];
+
   NCTest[List @@ tr[b ** a], {a ** b}];
   NCTest[List @@ tr[b ** a ** c], {a ** c ** b}];
   
   NCTest[tr[b ** a - a ** b], 0];
   NCTest[NCExpand[tr[b ** a - a ** (b - inv[a])]], 1];
-
-  NCTest[tr[tp[a]], tr[a]];
+ 
   NCTest[List @@ tr[tp[a] ** tp[b]], {a ** b}];
   NCTest[List @@ tr[a ** tp[b]], {a ** tp[b]}];
 
@@ -98,10 +107,17 @@ Module[
   NCTest[List @@ tr[tp[b] ** tp[a]], {a ** b}];
   NCTest[List @@ tr[tp[b] ** a], {a ** b^T}];
   
-  NCTest[List @@ tr[aj[a] ** b], {a ** aj[b]}];
-  NCTest[List @@ tr[aj[a] ** aj[b]], {a ** b}];
-  NCTest[List @@ tr[aj[b] ** aj[a]], {a ** b}];
+  NCTest[List @@ Conjugate[tr[aj[a] ** b]], {a ** aj[b]}];
+
+  NCTest[List @@ Conjugate[tr[aj[a] ** aj[b]]], {a ** b}];
+  NCTest[List @@ Conjugate[tr[aj[b] ** aj[a]]], {a ** b}];
   NCTest[List @@ tr[aj[b] ** a], {a ** aj[b]}];
+
+  NCTest[List @@ Conjugate[tr[co[a] ** b]], {a ** co[b]}];
+  NCTest[List @@ Conjugate[tr[co[a] ** co[b]]], {a ** b}];
+  NCTest[List @@ Conjugate[tr[co[b] ** co[a]]], {a ** b}];
+
+  NCTest[List @@ tr[co[b] ** a], {a ** co[b]}];
 
   NCTest[List @@ tr[a ** b ** c], {a ** b ** c}];
 
@@ -115,15 +131,25 @@ Module[
 
   NCTest[List @@ tr[tp[a] ** tp[b] ** tp[c]], {a ** c ** b}];
 
-  NCTest[List @@ tr[aj[a] ** b ** c], {a ** aj[c] ** aj[b]}];
+  NCTest[List @@ Conjugate[tr[aj[a] ** b ** c]], {a ** aj[c] ** aj[b]}];
   NCTest[List @@ tr[a ** aj[b] ** c], {a ** aj[b] ** c}];
   NCTest[List @@ tr[a ** b ** aj[c]], {a ** b ** aj[c]}];
 
-  NCTest[List @@ tr[aj[a] ** aj[b] ** c], {a ** aj[c] ** b}];
+  NCTest[List @@ Conjugate[tr[aj[a] ** aj[b] ** c]], {a ** aj[c] ** b}];
   NCTest[List @@ tr[a ** aj[b] ** aj[c]], {a ** aj[b] ** aj[c]}];
-  NCTest[List @@ tr[aj[a] ** b ** aj[c]], {a ** c ** aj[b]}];
+  NCTest[List @@ Conjugate[tr[aj[a] ** b ** aj[c]]], {a ** c ** aj[b]}];
 
-  NCTest[List @@ tr[aj[a] ** aj[b] ** aj[c]], {a ** c ** b}];
+  NCTest[List @@ Conjugate[tr[aj[a] ** aj[b] ** aj[c]]], {a ** c ** b}];
+
+  NCTest[List @@ Conjugate[tr[co[a] ** b ** c]], {a ** co[c] ** co[b]}];
+  NCTest[List @@ tr[a ** co[b] ** c], {a ** co[b] ** c}];
+  NCTest[List @@ tr[a ** b ** co[c]], {a ** b ** co[c]}];
+
+  NCTest[List @@ Conjugate[tr[co[a] ** co[b] ** c]], {a ** co[c] ** b}];
+  NCTest[List @@ tr[a ** co[b] ** co[c]], {a ** co[b] ** co[c]}];
+  NCTest[List @@ Conjugate[tr[co[a] ** b ** co[c]]], {a ** c ** co[b]}];
+
+  NCTest[List @@ Conjugate[tr[co[a] ** co[b] ** co[c]]], {a ** c ** b}];
 
   NCTest[List @@ tr[d ** c ** tp[a] ** b], {a ** c^T ** d^T ** b^T}];
   NCTest[List @@ tr[d ** a ** tp[d] ** b], {a ** d^T ** b ** d}];
@@ -135,5 +161,9 @@ Module[
   NCTest[tr[{{a,b},{c,d}}], tr[{{a,b},{c,d}}]];
   NCTest[NCMatrixExpand[tr[{{a,b},{c,d}}]], tr[a]+tr[d]];
   NCTest[NCMatrixExpand[tr[{{a,b,e},{c,d,f}}]], tr[a]+tr[d]];
+
+  NCTest[aj[tr[aj[a]]], tr[a]];
+  NCTest[aj[tr[co[a]]], tr[a]];
+  NCTest[co[tr[aj[a]]], tr[a]];
 
 ];

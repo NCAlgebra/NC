@@ -39,16 +39,11 @@ Begin["`Private`"];
     Return[If[index == {}, pos, index[[pos]]]];
   ];
 
-  SortCyclicPermutation[perm1_, perm2_] := Sort[{perm1, perm2}][[1]];
-  (* Perhaps SortCyclicPermutation[perm_, aj] and SortCyclicPermutation[perm_, tp]
-     can be made mode efficient by avoiding the double sorting *)
-  SortCyclicPermutation[perm_, aj] := 
-    SortCyclicPermutation[SortCyclicPermutation[perm], 
-                          SortCyclicPermutation[aj /@ Reverse[perm]]];
-  SortCyclicPermutation[perm_, tp] := 
-    SortCyclicPermutation[SortCyclicPermutation[perm], 
-                          SortCyclicPermutation[tp /@ Reverse[perm]]];
-
+(* Perhaps SortCyclicPermutation[perm_, aj|tp] can be made mode efficient
+   by avoiding the double sorting *)
+  SortCyclicPermutation[perm_, op:(aj|tp)] :=
+    Sort[{SortCyclicPermutation[perm],
+	  SortCyclicPermutation[op /@ Reverse[perm]]}][[1]];
   SortCyclicPermutation[perm_ /; Length[perm] <= 1] := perm;
   SortCyclicPermutation[perm_] := Module[
     {pos = {}, n = 0},
@@ -60,12 +55,9 @@ Begin["`Private`"];
 
   (* Perhaps SortedCyclicPermutationQ[perm_, aj] and SortedCyclicPermutationQ[perm_, tp]
      can be made mode efficient by avoiding the double sorting *)
-  SortedCyclicPermutationQ[perm_, aj] :=
+  SortedCyclicPermutationQ[perm_, op:(aj|tp|co)] :=
     (SortedCyclicPermutationQ[perm] && 
-     Ordering[{perm, SortCyclicPermutation[aj /@ Reverse[perm]]}, 1][[1]] == 1);
-  SortedCyclicPermutationQ[perm_, tp] :=
-    (SortedCyclicPermutationQ[perm] && 
-     Ordering[{perm, SortCyclicPermutation[tp /@ Reverse[perm]]}, 1][[1]] == 1);
+     Ordering[{perm, SortCyclicPermutation[op /@ Reverse[perm]]}, 1][[1]] == 1);
   SortedCyclicPermutationQ[perm_ /; Length[perm] <= 1] := True;
   SortedCyclicPermutationQ[perm_] := Module[
     {pos = {}, n = 0},
@@ -78,7 +70,7 @@ Begin["`Private`"];
 
   Clear[SortedCyclicPermutationExtendedQ];
   SortedCyclicPermutationExtendedQ[perm_] :=
-    If[ FreeQ[perm, aj]
+    If[ FreeQ[perm, aj|co]
        ,
         If[ FreeQ[perm, tp]
            ,
@@ -87,14 +79,30 @@ Begin["`Private`"];
             SortedCyclicPermutationQ[perm, tp]
         ]
       ,
-       SortedCyclicPermutationQ[perm, aj]
+       SortedCyclicPermutationQ[perm, If[FreeQ[perm, aj], co, aj]]
+  ];
+
+  Clear[trAjAux];
+  trAjAux[perm_] := Module[
+    (* perm is already sorted *)
+    {permAj = SortCyclicPermutation[If[FreeQ[perm, aj], co, aj] /@ Reverse[perm]]},
+    Return[
+      If[ Ordering[{perm, permAj}][[1]] == 1
+         ,
+	  tr[perm]
+         ,
+          Conjugate[tr[permAj]]
+      ]
+    ];
   ];
 
   SetCommutativeFunction[tr];
   tr[l_Plus] := tr /@ l;
   tr[tp[a_]] := tr[a];
+  tr[aj[a_]] := Conjugate[tr[a]];
+  tr[co[a_]] := Conjugate[tr[a]];
   tr[l_NonCommutativeMultiply] :=
-    If[ FreeQ[l, aj]
+    If[ FreeQ[l, aj|co]
        ,
         If[ FreeQ[l, tp]
            ,
@@ -103,7 +111,8 @@ Begin["`Private`"];
             tr[SortCyclicPermutation[l, tp]]
         ]
        ,
-        tr[SortCyclicPermutation[l, aj]]
+	(* aj/co case requires conjugation *)
+	trAjAux[SortCyclicPermutation[l]]
     ] /; ! SortedCyclicPermutationExtendedQ[l];
   tr[a_?CommutativeQ] := a;
   tr[a_?CommutativeQ b_] := a tr[b];
