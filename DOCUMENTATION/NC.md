@@ -35,7 +35,7 @@ or
 
 will load `NC` quietly. Note that you have to refer to the message by
 its fully qualified name ``NC`NC::Directory`` because the context
-``NC``` is only available after loading `NC`.
+`NC` is only available after loading the package.
 
 ### Options {#PackageNCOptions}
 
