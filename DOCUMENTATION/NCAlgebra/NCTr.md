@@ -1,5 +1,8 @@
 ## NCTr {#PackageNCTr}
 
+`NCTr` provides the commutative operator `tr` that behaves as the
+standard mathematical trace operator.
+
 Members are:
 
 * [tr](#tr)

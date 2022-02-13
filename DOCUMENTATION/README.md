@@ -3811,7 +3811,7 @@ or
 will load `NCAlgebra` without issuing a symbol assignment message.
 
 Upon loading `NCAlgebra` for the first time, a large banner will be
-shown. If you do not want this banner to be displayed at all set the
+shown. If you do not want this banner to be displayed set the
 option [`ShowBanner`](#options) to `False` before loading, as in
 
     SetOptions[NC, ShowBanner -> False]
@@ -4072,6 +4072,9 @@ See also:
 [NCExpand](#ncexpand).
 
 ## NCTr
+
+`NCTr` provides the commutative operator `tr` that behaves as the
+standard mathematical trace operator.
 
 Members are:
 
