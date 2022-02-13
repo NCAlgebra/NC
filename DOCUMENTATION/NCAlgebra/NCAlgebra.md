@@ -24,13 +24,13 @@ set as noncommutative upon loading. Those messages are documented
 [here](#NCAlgebraMessages). Users can use Mathematica's `Quiet` and
 `Off` if they do not want these messages to display. For example,
 
-    Off[NCAlgebra::SmallCapSymbolsNonCommutative]
+    Off[NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative]
     << NCAlgebra`
 
 or
 
     SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
-    Off[NCAlgebra::NoSymbolsNonCommutative]
+    Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
     << NCAlgebra`
 
 will load `NCAlgebra` without issuing a symbol assignment message.
@@ -41,6 +41,13 @@ option [`ShowBanner`](#PackageNCOptions) to `False` before loading, as in
 
     SetOptions[NC, ShowBanner -> False]
     << NCAlgebra`
+
+For example, the following commands will perform a completly quiet
+loading of `NC` *and* `NCAlgebra`:
+
+    Quiet[<< NC`, NC`NC::Directory];
+    SetOptions[NC, ShowBanner -> False];
+    Quiet[<< NCAlgebra`, NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative];
 
 ### Messages {#NCAlgebraMessages}
 

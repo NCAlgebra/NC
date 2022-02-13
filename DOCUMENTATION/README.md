@@ -520,9 +520,8 @@ In *Mathematica* (notebook or text interface), type
 
 If this step fails, your installation has problems (check out installation instructions on the main page). If your installation is succesful you will see a message like:
 
-    You are using the version of NCAlgebra which is found in:
-       /your_home_directory/NC.
-    You can now use "<< NCAlgebra`" to load NCAlgebra.
+    NC::Directory: You are using the version of NCAlgebra which is found in:
+       "/your_home_directory/NC".
 
 Then just type
 
@@ -3739,12 +3738,28 @@ or `Needs`, as in
 
     Needs["NC`"]
 
-Once `NC` is loaded, you can then proceed to load any other package from the
-*NCAlgebra suite*.
+Once `NC` is loaded you will see a message like
+
+    NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
+
+You can then proceed to load any other package from the *NCAlgebra suite*.
 
 For example you can load the package `NCAlgebra` using
 
     << NCAlgebra`
+
+The `NC::Directory` message can be suppressed by using standard Mathematica message control functions. For example,
+
+    Off[NC`NC::Directory]
+    << NC`
+
+or
+
+    Quiet[<< NC`, NC`NC::Directory]
+
+will load `NC` quietly. Note that you have to refer to the message by
+its fully qualified name ``` NC``NC::Directory ``` because the context
+```` NC``` is only available after loading ````NC\`.
 
 ### Options
 
@@ -3782,13 +3797,13 @@ set as noncommutative upon loading. Those messages are documented
 [here](#messages). Users can use Mathematica’s `Quiet` and
 `Off` if they do not want these messages to display. For example,
 
-    Off[NCAlgebra::SmallCapSymbolsNonCommutative]
+    Off[NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative]
     << NCAlgebra`
 
 or
 
     SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
-    Off[NCAlgebra::NoSymbolsNonCommutative]
+    Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
     << NCAlgebra`
 
 will load `NCAlgebra` without issuing a symbol assignment message.
@@ -3799,6 +3814,13 @@ option [`ShowBanner`](#options) to `False` before loading, as in
 
     SetOptions[NC, ShowBanner -> False]
     << NCAlgebra`
+
+For example, the following commands will perform a completly quiet
+loading of `NC` *and* `NCAlgebra`:
+
+    Quiet[<< NC`, NC`NC::Directory];
+    SetOptions[NC, ShowBanner -> False];
+    Quiet[<< NCAlgebra`, NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative];
 
 ### Messages
 

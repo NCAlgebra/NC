@@ -1039,9 +1039,8 @@ class="header-section-number">3.1</span> Running NCAlgebra</h2>
 <p>If this step fails, your installation has problems (check out
 installation instructions on the main page). If your installation is
 succesful you will see a message like:</p>
-<pre><code>You are using the version of NCAlgebra which is found in:
-   /your_home_directory/NC.
-You can now use &quot;&lt;&lt; NCAlgebra`&quot; to load NCAlgebra.</code></pre>
+<pre><code>NC::Directory: You are using the version of NCAlgebra which is found in:
+   &quot;/your_home_directory/NC&quot;.</code></pre>
 <p>Then just type</p>
 <pre><code>&lt;&lt; NCAlgebra`</code></pre>
 <p>to load <code>NCAlgebra</code>.</p>
@@ -3614,10 +3613,22 @@ Mathematica.</p>
 <pre><code>&lt;&lt; NC`</code></pre>
 <p>or <code>Needs</code>, as in</p>
 <pre><code>Needs[&quot;NC`&quot;]</code></pre>
-<p>Once <code>NC</code> is loaded, you can then proceed to load any
-other package from the <em>NCAlgebra suite</em>.</p>
+<p>Once <code>NC</code> is loaded you will see a message like</p>
+<pre><code>NC::Directory: You are using the version of NCAlgebra which is found in: &quot;/your_home_directory/NC&quot;.</code></pre>
+<p>You can then proceed to load any other package from the <em>NCAlgebra
+suite</em>.</p>
 <p>For example you can load the package <code>NCAlgebra</code> using</p>
 <pre><code>&lt;&lt; NCAlgebra`</code></pre>
+<p>The <code>NC::Directory</code> message can be suppressed by using
+standard Mathematica message control functions. For example,</p>
+<pre><code>Off[NC`NC::Directory]
+&lt;&lt; NC`</code></pre>
+<p>or</p>
+<pre><code>Quiet[&lt;&lt; NC`, NC`NC::Directory]</code></pre>
+<p>will load <code>NC</code> quietly. Note that you have to refer to the
+message by its fully qualified name <code>NC``NC::Directory</code>
+because the context
+<code>NC``` is only available after loading</code>NC`.</p>
 <h3 data-number="9.1.1" id="PackageNCOptions"><span
 class="header-section-number">9.1.1</span> Options</h3>
 <p>The following <code>options</code> can be set using
@@ -3651,11 +3662,11 @@ set as noncommutative upon loading. Those messages are documented <a
 href="#NCAlgebraMessages">here</a>. Users can use Mathematica’s
 <code>Quiet</code> and <code>Off</code> if they do not want these
 messages to display. For example,</p>
-<pre><code>Off[NCAlgebra::SmallCapSymbolsNonCommutative]
+<pre><code>Off[NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative]
 &lt;&lt; NCAlgebra`</code></pre>
 <p>or</p>
 <pre><code>SetOptions[NC, SmallCapSymbolsNonCommutative -&gt; False]
-Off[NCAlgebra::NoSymbolsNonCommutative]
+Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
 &lt;&lt; NCAlgebra`</code></pre>
 <p>will load <code>NCAlgebra</code> without issuing a symbol assignment
 message.</p>
@@ -3666,6 +3677,11 @@ href="#PackageNCOptions"><code>ShowBanner</code></a> to
 <code>False</code> before loading, as in</p>
 <pre><code>SetOptions[NC, ShowBanner -&gt; False]
 &lt;&lt; NCAlgebra`</code></pre>
+<p>For example, the following commands will perform a completly quiet
+loading of <code>NC</code> <em>and</em> <code>NCAlgebra</code>:</p>
+<pre><code>Quiet[&lt;&lt; NC`, NC`NC::Directory];
+SetOptions[NC, ShowBanner -&gt; False];
+Quiet[&lt;&lt; NCAlgebra`, NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative];</code></pre>
 <h3 data-number="9.2.1" id="NCAlgebraMessages"><span
 class="header-section-number">9.2.1</span> Messages</h3>
 <p>One of the following messages will be displayed after loading.</p>

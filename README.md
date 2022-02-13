@@ -120,8 +120,7 @@ If this fails, your installation has problems (check out previous
 section). If your installation is succesful you will see a message
 like:
 
-    NC::Directory: You are using the version of NCAlgebra which is found in:
-      "/your_home_directory/NC".
+    NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
 
 Just type 
 
@@ -188,7 +187,7 @@ using
 
 	<< NCGBTEST
 
-IMPORTANT: this version of `NCGB` is no longer being maintained. In many cases the `NCGBX` implementation is as fast if not faster than the old `NCGB`.
+IMPORTANT: this version of `NCGB` is no longer supported. In many cases the `NCGBX` implementation is as fast if not faster than the old `NCGB`.
 
 ## Reporting Bugs
 
