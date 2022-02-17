@@ -6,9 +6,11 @@ BeginPackage["NCOutput`",
 	     If[ $Notebooks
 		,
 		 {"Notation`",
+         	  "NCUtil`",
                   "NonCommutativeMultiply`"}
 		,
-                 {"NonCommutativeMultiply`"}
+                 {"NCUtil`",
+		  "NonCommutativeMultiply`"}
 	     ]];
 
 Clear[NCSetOutput];
@@ -86,10 +88,42 @@ Begin["`Private`"];
       SetOptions[NCSetOutput, inv -> (inv /. options /. Options[NCSetOutput])];
       If[ inv /. Options[NCSetOutput]
          ,
-          inv /: MakeBoxes[inv[a_], fmt_] :=
-                   SuperscriptBox[Parenthesize[a, fmt, Power, Left], -1];
+	  Unprotect[Power];
+	  If[ $Notebooks
+	     ,
+	      Quiet[
+                Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] =. ;
+                Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] =. ;
+  	       ,
+	        Unset::norep
+	      ];
+	      Power /: MakeBoxes[Power[a_?NonCommutativeQ, n_?Negative], fmt_] := 
+                    SuperscriptBox[Parenthesize[a, fmt, Power, Left], n];
+	     ,
+	      Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] := 
+                    Superscript[ToString[a], n];
+              Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] := 
+                    ToString[inv][a];
+          ];
+	  Protect[Power];
          ,
-          Quiet[inv /: MakeBoxes[inv[a_], fmt_] =., Unset::norep];
+          Quiet[
+            Unprotect[Power];
+            If[ $Notebooks
+	       ,
+	        Power /: MakeBoxes[Power[a_?NonCommutativeQ, n_?Negative], fmt_] =.;
+  	        Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] := 
+                      Superscript[ToString[a], n];
+                Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] := 
+                      ToString[inv][a];
+   	       ,
+	        Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] =.; 
+                Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] =. ;
+            ];
+	    Protect[Power];
+	   ,
+	    Unset::norep
+	 ];
       ];
 
       (* pretty ** *)

@@ -32,7 +32,8 @@ Clear[NCGrabSymbols,
       NCNonCommutativeSymbolOrSubscriptQ,
       NCLeafCount,
       NCReplaceData,
-      NCToExpression];
+      NCToExpression,
+      NotMatrixQ];
 
 Get["NCUtil.usage"];
 
@@ -40,6 +41,8 @@ Begin["`Private`"];
 
   Needs["NonCommutativeMultiply`"];
              
+  NotMatrixQ[x_] := Not[MatrixQ[x]];
+    
   NCSymbolOrSubscriptQ[_Symbol|Subscript[_Symbol,__]] := True;
   NCSymbolOrSubscriptQ[_] := False;
 

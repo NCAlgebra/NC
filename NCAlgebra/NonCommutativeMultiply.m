@@ -165,11 +165,9 @@ Begin[ "`Private`" ]
     Quiet[
       Check[
          f /: HoldPattern[CommutativeQ[f[___]]] = True;
-         f /: HoldPattern[PowerCommutativeQ[f[___]]] = True;
         ,
          Unprotect[f];
          f /: HoldPattern[CommutativeQ[f[___]]] = True;
-         f /: HoldPattern[PowerCommutativeQ[f[___]]] = True;
          Protect[f];
          Message[SetCommutative::Protected, f];
         ,
@@ -199,9 +197,6 @@ Begin[ "`Private`" ]
     b NonCommutativeMultiply[a, c]; 
                         
   (* Power *)
-  Clear[NotMatrixQ]
-  NotMatrixQ[x_] := Not[MatrixQ[x]];
-    
   NonCommutativeMultiply[a___, b_?NotMatrixQ, d:(b_ ..), c___] := 
     NonCommutativeMultiply[a, Power[b, Length[{d}]+1], c];
   NonCommutativeMultiply[b___,a_?NotMatrixQ^n_.,a_^m_.,c___] :=
@@ -383,6 +378,7 @@ Begin[ "`Private`" ]
  
   (* tp[rt[]] = rt[tp[]] *)
   tp[rt[a_]] := rt[tp[a]];
+   (* MAURICIO: FEB 2022: shouldn't we have a similar rule for aj and co? *)
 
   (* BEGIN MAURICIO MAR 2016 *)
   (*
@@ -405,32 +401,34 @@ Begin[ "`Private`" ]
 
   (* identity *)
   Id = 1;
-  (* NonCommutativeMultiply[a___,Id,c___] := NonCommutativeMultiply[a,c]; *)
 
   inv[a_ /; !MatrixQ[a]] := Power[a, -1];
-  (*
-  ( * commutative inverse * )
-  inv[a_?CommutativeQ] := a^(-1);
-  inv[a_?NumberQ] := 1/a;
+  (* MAURICIO: FEB 2022 BEGIN
+     most properties of inv now derive from Power *)
+  (* 
+    ( * commutative inverse * )
+    inv[a_?CommutativeQ] := a^(-1);
+    inv[a_?NumberQ] := 1/a;
 
-  ( * inv is idempotent * )
-  inv[inv[a_]] := a;
+    ( * inv is idempotent * )
+    inv[inv[a_]] := a;
 
-  ( * tp threads over Times * )
-  inv[a_Times] := inv /@ a;
+    ( * tp threads over Times * )
+    inv[a_Times] := inv /@ a;
 
-  ( * inv simplifications * )
-  inv/:NonCommutativeMultiply[b___,a_,inv[a_],c___] :=
-         NonCommutativeMultiply[b,c];
-  inv/:NonCommutativeMultiply[b___,inv[a_],a_,c___] :=
-         NonCommutativeMultiply[b,c];
-  inv/:NonCommutativeMultiply[b___,a__,
-                              inv[NonCommutativeMultiply[a__]],c___] :=
-         NonCommutativeMultiply[b,c];
-  inv/:NonCommutativeMultiply[b___,
-                              inv[NonCommutativeMultiply[a__]],a__,c___] :=
-         NonCommutativeMultiply[b,c];
+    ( * inv simplifications * )
+    inv/:NonCommutativeMultiply[b___,a_,inv[a_],c___] :=
+    NonCommutativeMultiply[b,c];
+    inv/:NonCommutativeMultiply[b___,inv[a_],a_,c___] :=
+    NonCommutativeMultiply[b,c];
+    inv/:NonCommutativeMultiply[b___,a__, 
+			        inv[NonCommutativeMultiply[a__]],c___] :=
+    NonCommutativeMultiply[b,c];
+    inv/:NonCommutativeMultiply[b___,
+			        inv[NonCommutativeMultiply[a__]],a__,c___] :=
+    NonCommutativeMultiply[b,c];
   *)
+  (* MAURICIO: FEB 2022 END *)
 
   (* MAURICIO MAR 2016 *)
   (* THESE OLD RULES ARE UNECESSARY *)
@@ -495,53 +493,20 @@ Begin[ "`Private`" ]
       ];
 
   inv/:Options[inv] := Options[$inv];
-      
-  (* Power *)
-
-  (* MAURICIO BUG: 02/08/2022
-     Igor found a nasty bug in which the power rules where interacting with Slot and
-     the built in function RootApproximant. Introduced PowerCommutativeQ which is basically
-     CommutativeQ that fails for commutative patterns
-   *)
-  PowerCommutativeQ[x_Commutative] ^= True;
-  PowerCommutativeQ[x_Symbol] := CommutativeQ[x];
-  PowerCommutativeQ[a_List] := False /; MatrixQ[a];
-  PowerCommutativeQ[a_SparseArray] := False /; MatrixQ[a];
-
-  PowerCommutativeQ[Subscript[x_,___]] := CommutativeQ[x];
-  PowerCommutativeQ[Slot[___]] := True;
-  PowerCommutativeQ[f_?CommutativeQ[x___]] := Apply[And, Map[CommutativeQ,{x}]];
-  (* The next rule makes sure powers of #1 do not get expanded *)
-  PowerCommutativeQ[f_[x___]] /; NCPatternQ[f] := Apply[And, Map[CommutativeQ,{x}]];
-  PowerCommutativeQ[f_[x___]] := False;
-
-  PowerCommutativeQ[_] := True;
-  PowerNonCommutativeQ[x_] := Not[PowerCommutativeQ[x]];
-
-  (* Expand monomial rules *)
-  Unprotect[Power];
-  (*
-  Power[b_?PowerNonCommutativeQ, 1/2] := rt[b];
-  Power[b_?PowerNonCommutativeQ, c_Integer?Positive] :=
-    Apply[NonCommutativeMultiply, Table[b, {c}]];
-  Power[b_?PowerNonCommutativeQ, c_Integer?Negative] :=
-    inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]];
-  *)
 
   (* pretty tp *)
   If[ValueQ[Global`T], 
      Message[TDefined::Warning];
      Global`T =. 
   ];
+  Global`T /: Power[a_?NonCommutativeQ, Global`T] := tp[a];
   Protect[Global`T];
-  Power[a_?NonCommutativeQ, Global`T] := tp[a];
-  Protect[Power];
 
   (* pretty aj *)
   SuperStar[a_] := aj[a];
 
   (* pretty inv *)
-  Superscript[a_, -1] := inv[a];
+  (* Superscript[a_?NonCommutativeQ, -1] := inv[a]; *)
 
   (* pretty co *)
   OverBar[a_] := co[a];

@@ -1,5 +1,5 @@
 ------------------------------------------------------------
-NCAlgebra - Version 5.0.6
+NCAlgebra - Version 6.0.0
 Compatible with Mathematica Version 10 and above
 
 Authors:

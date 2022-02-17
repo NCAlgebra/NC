@@ -307,6 +307,38 @@ Module[
      NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
      NCTest[NCSimplifyRational[expr], answer];
      
+     (* Rule #6 *)
+
+     expr = inv[A inv[x] + B y] ** inv[x];
+     answer = (1/A) inv[1 + (B/A) x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[A inv[x ** y] + B y] ** inv[x ** y];
+     answer = (1/A) inv[1 + (B/A) x ** y^2];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[A inv[x^2 ** y] + B y] ** inv[x^2 ** y];
+     answer = (1/A) inv[1 + (B/A) x^2 ** y^2];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     expr = inv[x] ** inv[A inv[x] + B y];
+     answer = (1/A) inv[1 + (B/A) y ** x];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x ** y] ** inv[A inv[x ** y] + B y];
+     answer = (1/A) inv[1 + (B/A) y ** x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x^2 ** y] ** inv[A inv[x^2 ** y] + B y];
+     answer = (1/A) inv[1 + (B/A) y ** x^2 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+
      (* Print["Starting SimplifyRational.NCTest"]; *)
      (* test 1 tests rule 1 *)
      (* Print["----test 1 "]; *)

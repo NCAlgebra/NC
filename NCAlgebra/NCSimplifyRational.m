@@ -61,7 +61,7 @@ Begin["`Private`"]
       (*---------------------------------------------------------------*)
       inv[a_]**inv[1 + A_. a_^n_.**b_] :>
         inv[a] - A a^(n-1)**b**inv[1 + A a^n**b],
-      inv[a__**r_^m_.]**inv[1 + A_. a__**r_^n_.**b___] /; n>=m :>
+      inv[a__**r_^m_.]**inv[1 + A_. a__**r_^n_.**b___] /; n>=m>=0 :>
         inv[a**r^m] - A r^(n-m)**b**inv[1 + A a**r^n**b],
       inv[a_]**inv[1 + A_. a_] :>
         inv[a] - A inv[1 + A a],
@@ -74,7 +74,7 @@ Begin["`Private`"]
       (*---------------------------------------------------------------*)
       inv[1 + A_. a_**b_^n_.]**inv[b_] :>
         inv[b] - A a**b^(n-1)**inv[1 + A a**b^n],
-      inv[1 + A_. a___**l_^n_.**b__]**inv[l_^m_.**b__] /; n>=m :>
+      inv[1 + A_. a___**l_^n_.**b__]**inv[l_^m_.**b__] /; n>=m>=0 :>
         inv[l^m**b] - A a**l^(n-m)**inv[1 + A a**l^n**b],
       inv[1 + A_. a_]**inv[a_] :>
         inv[a] - A inv[1 + A a],
@@ -87,7 +87,7 @@ Begin["`Private`"]
       (* MAURICIO: FEB 2022; this rule is the same as the next         *)
       (* inv[1 + A_. a_**b_]**a_**b_ :> (1/A) - (1/A) inv[1 + A a**b], *)
       (*---------------------------------------------------------------*)
-      inv[1 + A_. a__**r_^m_.]**a__**r_^n_. /; n>=m :>
+      inv[1 + A_. a__**r_^m_.]**a__**r_^n_. /; n>=m>=0 :>
         (1/A) r^(n-m) - (1/A) inv[1 + A a**r^m]**r^(n-m),
       inv[1 + A_. a_]**a_ :>
         (1/A) - (1/A) inv[1 + A a],
@@ -100,7 +100,7 @@ Begin["`Private`"]
       (* MAURICIO: FEB 2022; this rule is the same as the next         *)
       (* a_**b_**inv[1 + A_. a_**b_] :> (1/A) - (1/A) inv[1 + A a**b], *)
       (*---------------------------------------------------------------*)
-      l_^n_.**a__**inv[1 + A_. l_^m_.**a__] /; n>=m :>
+      l_^n_.**a__**inv[1 + A_. l_^m_.**a__] /; n>=m>=0 :>
         (1/A) l^(n-m) - (1/A) l^(n-m)**inv[1 + A l^m**a],
       a_**inv[1 + A_. a_] :>
         (1/A) - (1/A) inv[1 + A a],
@@ -117,10 +117,22 @@ Begin["`Private`"]
       (* rule 6 is as follows:                                         *)
       (*      inv[1 + A a b] a  =  a inv[1 + A b a]                    *) 
       (*---------------------------------------------------------------*)
-      inv[1 + A_. a__**r_^n_.**b___]**a__**r_^m_. /; n>=m :>
+      inv[1 + A_. a__**r_^n_.**b___]**a__**r_^m_. /; n>=m>=0 :>
         a**r^m**inv[1 + A r^(n-m)**b**a**r^m],
       inv[1 + A_. a_^n_.**b_]**a_ :>
-        a**inv[1 + A a^(n-1)**b**a]
+        a**inv[1 + A a^(n-1)**b**a],
+
+      (*---------------------------------RULE 7------------------------*) 
+      (* rule 7 is as follows:                                         *)
+      (*   inv[A inv[a] + B b] inv[a]  =  (1/A) inv[1 + (B/A) a b]     *) 
+      (*   inv[a] inv[A inv[a] + A b]  =  (1/A) inv[1 + (B/A) b a]     *) 
+      (*---------------------------------------------------------------*)
+      (* MAURICIO: FEB 2022; these were part of the AB set only        *)
+      (*---------------------------------------------------------------*)
+      inv[A_. inv[a_] + B_. b_]**inv[a_] :>
+        (1/A)inv[1 + (B/A) a ** b],
+      inv[a_]**inv[A_. inv[a_] + B_. b_] :>
+        (1/A)inv[1 + (B/A) b ** a]
       
   };
   
