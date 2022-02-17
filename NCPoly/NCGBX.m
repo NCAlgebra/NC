@@ -85,7 +85,7 @@ Begin["`Private`"];
   ];
  
   Clear[CheckOrderAux];
-  CheckOrderAux[(_Symbol|Subscript[_Symbol,__]|_inv|tp[_Symbol|Subscript[_Symbol,__]]|aj[_Symbol|Subscript[_Symbol,__]])..] := True;
+  CheckOrderAux[(_?NCSymbolOrSubscriptQ|Power[_,-1]|(tp|aj)[_?NCSymbolOrSubscriptQ])..] := True;
   CheckOrderAux[___] := False;
 
   Clear[CheckOrder];
@@ -157,7 +157,7 @@ Begin["`Private`"];
     (* Initializa polys and vars *)
     polys = Replace[p, a_Rule | a_Equal :> Subtract @@ a, {1}];
     vars = $NCPolyInterfaceMonomialOrder;
-    symbols = DeleteCases[NCGrabSymbols[polys], _?CommutativeQ];
+    symbols = NCGrabNCSymbols[polys];
 
     (*
     Print["polys = ", polys];
@@ -204,7 +204,7 @@ Begin["`Private`"];
     ruleRev = {};
 
     (* Process monomial order for rationals *)
-    invs = Cases[vars, _inv, {2}];
+    invs = Cases[vars, Power[_,-1], {2}];
 
     (*
     Print["vars = ", vars];
@@ -234,7 +234,7 @@ Begin["`Private`"];
 
     (* Process relations for rationals in polys and 
        remaining relations in vars *)
-    relInvs = Union[NCGrabFunctions[polys, inv],
+    relInvs = Union[DeleteCases[NCGrabFunctions[polys, inv], Power[_?CommutativeQ,_]],
                     NCGrabFunctions[vars, inv]];
 
     (* Print["relInvs = ", relInvs]; *)
@@ -348,15 +348,14 @@ Begin["`Private`"];
     ];
       
     (* Any other functions in polys? *)
-    symbols = DeleteCases[NCGrabFunctions[polys], _?CommutativeQ];
+    symbols = DeleteCases[NCGrabFunctions[polys], _?CommutativeQ|Power[_?NCNonCommutativeSymbolOrSubscriptQ, n_Integer?Positive]];
     If[ symbols =!= {},
         Message[NCMakeGB::UnknownFunction, symbols];
         Return[$Failed];
     ];
 
     (* Any noncommutative symbols not in vars? *)
-    symbols = Complement[DeleteCases[NCGrabSymbols[polys], 
-                                     _?CommutativeQ], Flatten[vars]];
+    symbols = Complement[NCGrabNCSymbols[polys], Flatten[vars]];
     If[ symbols =!= {},
         Message[NCMakeGB::MissingSymbol, symbols];
         Return[$Failed];
@@ -578,7 +577,7 @@ Begin["`Private`"];
       
     (* TODO Add custom invertibility *)
       
-    symbols = DeleteCases[NCGrabSymbols[expr], _?CommutativeQ];
+    symbols = NCGrabNCSymbols[expr];
     rats = Join[
         NCGrabFunctions[expr, inv],
         Rationals /. {opts} /. Rationals -> {}

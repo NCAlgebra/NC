@@ -17,7 +17,13 @@ Module[
   NCTest[rt[3 a ** b], Unevaluated[Sqrt[3] rt[a ** b]]];
   NCTest[rt[(3 + I) a ** b], Unevaluated[Sqrt[Complex[3,1]] rt[a ** b]]];
 
+  NCTest[List @@ (rt[a]**a), {a, rt[a]}];
+
   NCTest[rt[a]**rt[a], a];
+  NCTest[rt[a]**rt[a]**rt[a], a**rt[a]];
+  NCTest[rt[a]**rt[a]**rt[a]**rt[a], a**a];
+  NCTest[rt[a]**rt[a]**rt[a]**rt[a]**rt[a], a**a**rt[a]];
+  NCTest[rt[a]^3, a**rt[a]];
 
   NCTest[tp[rt[a]], rt[tp[a]]];
   NCTest[tp[rt[a ** b]], rt[tp[b]**tp[a]]];

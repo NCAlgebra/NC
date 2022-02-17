@@ -68,18 +68,28 @@ Begin["`Private`"];
     Return[True];
   ];
 
-  Clear[SortedCyclicPermutationExtendedQ];
-  SortedCyclicPermutationExtendedQ[perm_] :=
-    If[ FreeQ[perm, aj|co]
+  (* MAURICIO: FEBRUARY 2022
+     With the new cannonization of a**a as Power[a, 2], an infinite loop is possible
+     if working with the original heading NonCommutativeMultiply
+  *)
+  (* Clear[SortedCyclicPermutationExtendedQ]; *)
+  SortCyclicPermutation[perm_NonCommutativeMultiply, op:(aj|tp|co)] :=
+    NonCommutativeMultiply @@ SortCyclicPermutation[List @@ perm, op];
+  SortCyclicPermutation[perm_NonCommutativeMultiply] :=
+    NonCommutativeMultiply @@ SortCyclicPermutation[List @@ perm];
+  SortedCyclicPermutationQ[perm_NonCommutativeMultiply] := Module[
+    {list = List @@ perm},
+    If[ FreeQ[list, aj|co]
        ,
-        If[ FreeQ[perm, tp]
+        If[ FreeQ[list, tp]
            ,
-            SortedCyclicPermutationQ[perm]
+            SortedCyclicPermutationQ[list]
            ,
-            SortedCyclicPermutationQ[perm, tp]
+            SortedCyclicPermutationQ[list, tp]
         ]
       ,
-       SortedCyclicPermutationQ[perm, If[FreeQ[perm, aj], co, aj]]
+       SortedCyclicPermutationQ[list, If[FreeQ[list, aj], co, aj]]
+    ]
   ];
 
   Clear[trAjAux];
@@ -113,7 +123,7 @@ Begin["`Private`"];
        ,
 	(* aj/co case requires conjugation *)
 	trAjAux[SortCyclicPermutation[l]]
-    ] /; ! SortedCyclicPermutationExtendedQ[l];
+    ] /; !SortedCyclicPermutationQ[l];
   tr[a_?CommutativeQ] := a;
   tr[a_?CommutativeQ b_] := a tr[b];
 

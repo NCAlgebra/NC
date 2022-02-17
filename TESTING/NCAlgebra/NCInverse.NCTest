@@ -85,4 +85,6 @@ Module[
 
   NCTest[Options[inv], {Distribute -> False}];
 
+  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
+
 ];  

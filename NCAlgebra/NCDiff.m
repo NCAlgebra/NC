@@ -35,6 +35,7 @@ Begin["`Private`"];
                
   Clear[NCDAux];
   NCDAux[inv[f_], x_] := -inv[f] ** NCDAux[f, x] ** inv[f];
+  NCDAux[Power[f_, -1], x_] := -inv[f] ** NCDAux[f, x] ** inv[f];
   NCDAux[f_Plus, x_] := Map[NCDAux[#,x]&, f];
   NCDAux[f_NonCommutativeMultiply, x_] := 
     Plus @@ 
@@ -52,8 +53,8 @@ Begin["`Private`"];
      {T},
      SetCommutative[T];
      (* Print["f = ", f]; *)
-     tmp = f /. x -> x + T h /. Conjugate[T] -> T;
-     (* Print["tmp1 = ", tmp]; *)
+     tmp = ExpandNonCommutativeMultiply[f /. x -> x + T h] /. Conjugate[T] -> T;
+     (* Print["tmp1 = ", FullForm[tmp]]; *)
      tmp = NCDAux[tmp, T] /. T -> 0;
      (* Print["tmp2 = ", tmp]; *)
      Return[tmp];

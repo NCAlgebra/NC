@@ -147,10 +147,33 @@ Module[
    NCTest[NCPMonomialDegree[expr], {{1,0},{0,1}}];
    NCTest[NCPDegree[expr], 1];
 
+   p = x**x+tp[y];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{x^2}->{{1,1,1}},{tp[y]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{2,0},{0,1}}];
+   NCTest[NCPDegree[expr], 2];
+
    p = tp[x]**tp[x]+tp[y];
    expr = NCToNCPolynomial[p, vars];
-   answer = NCPolynomial[0,<|{tp[x]**tp[x]}->{{1,1,1}},{tp[y]}->{{1,1,1}}|>, vars];
+   answer = NCPolynomial[0,<|{tp[x]^2}->{{1,1,1}},{tp[y]}->{{1,1,1}}|>, vars];
    NCTest[expr, answer];
+
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{2,0},{0,1}}];
+   NCTest[NCPDegree[expr], 2];
+
+   p = aj[x]**aj[x]+tp[y];
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{aj[x]^2}->{{1,1,1}},{tp[y]}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+
    NCTest[NCPolynomialToNC[expr], p];
    NCTest[NCPLinearQ[expr], False];
    NCTest[NCPQuadraticQ[expr], True];
@@ -187,6 +210,16 @@ Module[
    NCTest[NCPMonomialDegree[expr], {{1,1}}];
    NCTest[NCPDegree[expr], 2];
 
+   p = y**x**x;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y**x^2}->{{1,1,1}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], False];
+   NCTest[NCPMonomialDegree[expr], {{2,1}}];
+   NCTest[NCPDegree[expr], 3];
+
    p = x**y+y**x;
    expr = NCToNCPolynomial[p, vars];
    answer = NCPolynomial[0,<|{x**y}->{{1,1,1}}, {y**x}->{{1,1,1}}|>, vars];
@@ -220,6 +253,20 @@ Module[
                Flatten[Apply[NCPolynomial`Private`NCPTermsToNCAux,
                        Normal[answer[[2]]],
                        {1}],1], {1}], {a**y**x, x**y**a}];
+
+   p = x**x**a+a**y**y;
+   expr = NCToNCPolynomial[p, vars];
+   answer = NCPolynomial[0,<|{y^2}->{{1,a,1}}, {x^2}->{{1,1,a}}|>, vars];
+   NCTest[expr, answer];
+   NCTest[NCPLinearQ[expr], False];
+   NCTest[NCPQuadraticQ[expr], True];
+   NCTest[NCPMonomialDegree[expr], {{0,2},{2,0}}];
+   NCTest[NCPDegree[expr], 2];
+
+   NCTest[Apply[NCPolynomial`Private`NCPTermsToNCProductAux,
+               Flatten[Apply[NCPolynomial`Private`NCPTermsToNCAux,
+                       Normal[answer[[2]]],
+                       {1}],1], {1}], {a**y^2, x^2**a}];
 
    p = a**x**b+c+d**x**e+a**x**e**x**b;
    expr = NCToNCPolynomial[p, vars];
@@ -458,7 +505,7 @@ Module[
 
    p = x**tp[x]+y**y;
    expr = NCToNCPolynomial[p, vars];
-   NCTest[expr, NCPolynomial[0,<|{x**tp[x]}->{{1,1,1}},{y**y}->{{1,1,1}}|>, vars]];
+   NCTest[expr, NCPolynomial[0,<|{y**y}->{{1,1,1}},{x**tp[x]}->{{1,1,1}}|>, vars]];
 
    p = tp[x]+y**y;
    expr = NCToNCPolynomial[p, vars];
@@ -581,12 +628,12 @@ Module[
 
    expr = c + x**x - y;
    p = NCToNCPolynomial[expr, {x,y}];
-   answer = {c, -y, x**x};
+   answer = {c, x^2, -y};
    NCTest[NCPSort[p], answer];
 
    expr = c + x**x - 2 y;
    p = NCToNCPolynomial[expr, {x,y}];
-   answer = {c, -2 y, x**x};
+   answer = {c, x^2, -2 y};
    NCTest[NCPSort[p], answer];
 
    expr = a**x**b+c+2 d**x**e-a**x**e**x**b+a**x**y;
@@ -630,6 +677,33 @@ Module[
               vars[[3]] ** b ** vars[[1]] ** c ** 
               vars[[2]] ** b;
    NCTest[ExpandNonCommutativeMultiply[NCPolynomialToNC[p]], answer];
+   NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
+
+   expr = 1 + c ** inv[a^2] ** b;
+   {p, vars, rules} = NCRationalToNCPolynomial[expr, {a,b,c}];
+   answer = 1 + c ** vars[[1]]^2 ** b;
+   NCTest[ExpandNonCommutativeMultiply[NCPolynomialToNC[p]], answer];
+   NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
+   
+   expr = 1 + c ** inv[(a**b)^2] ** b + a ** (1 + inv[b]);
+   {p, vars, rules} = NCRationalToNCPolynomial[expr, {a,b,c}];
+   answer = 1 + c ** vars[[2]]^2 ** b + a ** (1 + vars[[1]]);
+   NCTest[NCPolynomialToNC[p], ExpandNonCommutativeMultiply[answer]];
+   NCTest[rules, {vars[[1]] -> inv[b], vars[[2]] -> inv[a**b]}];
+   NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
+
+   expr = 1 + c ** inv[(a**b)^2] ** b + a ** (1 + inv[a**b]);
+   {p, vars, rules} = NCRationalToNCPolynomial[expr, {a,b,c}];
+   answer = 1 + c ** vars[[1]]^2 ** b + a ** (1 + vars[[1]]);
+   NCTest[NCPolynomialToNC[p], ExpandNonCommutativeMultiply[answer]];
+   NCTest[rules, {vars[[1]] -> inv[a**b]}];
+   NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
+
+   expr = 1 + c ** inv[a^2] ** b + a ** (1 + inv[1 + inv[a]]);
+   {p, vars, rules} = NCRationalToNCPolynomial[expr, {a,b,c}];
+   answer = 1 + c ** vars[[2]]^2 ** b + a ** (1 + vars[[1]]);
+   NCTest[NCPolynomialToNC[p], ExpandNonCommutativeMultiply[answer]];
+   NCTest[rules, {vars[[1]] -> inv[1 + vars[[2]]], vars[[2]] -> inv[a]}];
    NCTest[ExpandNonCommutativeMultiply[(NCPolynomialToNC[p] //. rules) - expr], 0];
 
    Quiet[
@@ -801,7 +875,6 @@ Module[
 
    (* ** *)
    NCTest[p - p1 ** p2, answer];
-
    p = NCToNCPolynomial[3 (1 + x ** y + x + y ** x)**(x ** a ** y ** d - 2 c ** y ** b ** x), vars];
    NCTest[p - 3 NCPDot[p1, p2], answer];
 
@@ -809,6 +882,7 @@ Module[
    
    mat1 = {{a ** x + x ** a + c ** y + y ** c - x ** q ** x, b ** x},
            {x ** b, 1}};
+ 
    p1 = NCToNCPolynomial[mat1, {x, y}];
    answer = ConstantArray[0, {2,2}];
    NCTest[mat1 - NCPolynomialToNC[p1], answer];
@@ -860,10 +934,10 @@ Module[
    NCTest[expr, answer];
    NCTest[NCPolynomialToNC[expr], p];
    NCTest[NCPDegree[expr], 1];
-
+   
    p = tp[Subscript[x,1]]**tp[Subscript[x,1]]+tp[y];
    expr = NCToNCPolynomial[p, vars];
-   answer = NCPolynomial[0,<|{tp[Subscript[x,1]]**tp[Subscript[x,1]]}->{{1,1,1}},{tp[y]}->{{1,1,1}}|>, vars];
+   answer = NCPolynomial[0,<|{tp[y]}->{{1,1,1}},{tp[Subscript[x,1]]^2}->{{1,1,1}}|>, vars];
    NCTest[expr, answer];
    NCTest[NCPolynomialToNC[expr], p];
    NCTest[NCPDegree[expr], 2];
@@ -880,6 +954,7 @@ Module[
    answer = NCPolynomial[0,<|{Subscript[x,1]**y}->{{1,1,1}}|>, vars];
    NCTest[expr, answer];
    NCTest[NCPolynomialToNC[expr], p];
+   NCTest[NCPMonomialDegree[expr], {{1,1}}];
    NCTest[NCPDegree[expr], 2];
 
    p = y**Subscript[x,1];
@@ -1138,5 +1213,7 @@ Module[
      ,
      NCPolynomial::VarNotSymbol
    ];
-   
+
+   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
+ 
 ];

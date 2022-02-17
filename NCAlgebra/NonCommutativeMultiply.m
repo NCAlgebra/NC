@@ -187,7 +187,7 @@ Begin[ "`Private`" ]
   (* -------------------------------------------- *)
   (*  NonCommutative Muliplication book-keeping   *)
   (* -------------------------------------------- *)
-                        
+
   (* Flatten *)
   NonCommutativeMultiply[a___, NonCommutativeMultiply[b__], c___] :=
     NonCommutativeMultiply[a, b, c];
@@ -198,6 +198,19 @@ Begin[ "`Private`" ]
   NonCommutativeMultiply[a___, b_?CommutativeQ, c___] :=
     b NonCommutativeMultiply[a, c]; 
                         
+  (* Power *)
+  Clear[NotMatrixQ]
+  NotMatrixQ[x_] := Not[MatrixQ[x]];
+    
+  NonCommutativeMultiply[a___, b_?NotMatrixQ, d:(b_ ..), c___] := 
+    NonCommutativeMultiply[a, Power[b, Length[{d}]+1], c];
+  NonCommutativeMultiply[b___,a_?NotMatrixQ^n_.,a_^m_.,c___] :=
+    NonCommutativeMultiply[b,Power[a,n+m],c];
+  NonCommutativeMultiply[b___,NonCommutativeMultiply[a__]^n_.,a__,c___] :=
+    NonCommutativeMultiply[b,Power[NonCommutativeMultiply[a],n+1],c];
+  NonCommutativeMultiply[b___,a__,NonCommutativeMultiply[a__]^n_.,c___] :=
+    NonCommutativeMultiply[b,Power[NonCommutativeMultiply[a],n+1],c];
+
   (* Identity *)
   (* MAURICIO BUG: 07/07/2016
      The following can be replaced by f_[a__] which triggers some
@@ -217,8 +230,22 @@ Begin[ "`Private`" ]
   (* ---------------------------------------------------------------- *)
 
   ExpandNonCommutativeMultiply[expr_] :=
-    Expand[expr //. NonCommutativeMultiply[a___, b_Plus, c___] :>
-       (NonCommutativeMultiply[a, #, c]& /@ b)];
+    (* Expand[expr //. NonCommutativeMultiply[a___, b_Plus, c___] :>
+	      (NonCommutativeMultiply[a, #, c]& /@ b)]; *)
+    ExpandAll[expr //. {
+      Power[b_Plus, c_Integer?Positive] :> 
+        Plus @@ Apply[NonCommutativeMultiply, 
+          Distribute[Table[List @@ b, {c}], List], {1}],
+      Power[b_Plus, c_Integer?((Negative[#] && # < -1) &)] :> 
+        Power[Plus @@ Apply[NonCommutativeMultiply, 
+          Distribute[Table[List @@ b, {-c}], List], {1}], -1],
+      Power[b_?(Not[NCSymbolOrSubscriptQ[#]] &), c_Integer?Positive] :> 
+        NonCommutativeMultiply @@ Table[b, {c}], 
+      Power[b_?(Not[NCSymbolOrSubscriptQ[#]] &), c_Integer?((Negative[#] && # < -1) &)] :> 
+        Power[NonCommutativeMultiply @@ Table[b, {-c}], -1],
+      NonCommutativeMultiply[a___, b_Plus, c___] :>
+        (NonCommutativeMultiply[a, #, c] & /@ b)
+    }];
 
   (* 05/14/2012 MAURICIO - BEGIN COMMENT *)
   (* Szabolcs Horvát <szhorvat@gmail.com> suggested a rule like:
@@ -278,7 +305,8 @@ Begin[ "`Private`" ]
   tp[a_NonCommutativeMultiply] := tp /@ Reverse[a];
 
   (* tp[inv[]] = inv[tp[]] *)
-  tp[inv[a_]] := inv[tp[a]];
+  (* tp[inv[a_]] := inv[tp[a]]; *)
+  tp[a_^n_] := tp[a]^n;
 
   (* aj *)
 
@@ -348,8 +376,10 @@ Begin[ "`Private`" ]
   rt[a_Times] := rt /@ a;
 
   (* Simplification *)
-  NonCommutativeMultiply[n___,rt[m_],rt[m_],l___] :=
-    NonCommutativeMultiply[n,m,l] 
+  rt /: Power[rt[m_], n_Integer?Positive] := If[EvenQ[n], m^(n/2), m^((n-1)/2) ** rt[m]];
+
+  (* Cannonization *)
+  NonCommutativeMultiply[b___, rt[a_], a_, c___] := b ** a ** rt[a] ** c;
  
   (* tp[rt[]] = rt[tp[]] *)
   tp[rt[a_]] := rt[tp[a]];
@@ -377,17 +407,19 @@ Begin[ "`Private`" ]
   Id = 1;
   (* NonCommutativeMultiply[a___,Id,c___] := NonCommutativeMultiply[a,c]; *)
 
-  (* commutative inverse *)
+  inv[a_ /; !MatrixQ[a]] := Power[a, -1];
+  (*
+  ( * commutative inverse * )
   inv[a_?CommutativeQ] := a^(-1);
   inv[a_?NumberQ] := 1/a;
 
-  (* inv is idempotent *)
+  ( * inv is idempotent * )
   inv[inv[a_]] := a;
 
-  (* tp threads over Times *)
+  ( * tp threads over Times * )
   inv[a_Times] := inv /@ a;
 
-  (* inv simplifications *)
+  ( * inv simplifications * )
   inv/:NonCommutativeMultiply[b___,a_,inv[a_],c___] :=
          NonCommutativeMultiply[b,c];
   inv/:NonCommutativeMultiply[b___,inv[a_],a_,c___] :=
@@ -398,6 +430,7 @@ Begin[ "`Private`" ]
   inv/:NonCommutativeMultiply[b___,
                               inv[NonCommutativeMultiply[a__]],a__,c___] :=
          NonCommutativeMultiply[b,c];
+  *)
 
   (* MAURICIO MAR 2016 *)
   (* THESE OLD RULES ARE UNECESSARY *)
@@ -447,14 +480,14 @@ Begin[ "`Private`" ]
       If[ OptionValue[Distribute]
          ,
           (* install distributive rule *)
-          inv/:inv[NonCommutativeMultiply[a_,b_,c___]] := 
+          NonCommutativeMultiply /: Power[NonCommutativeMultiply[a_,b_,c___],-1] := 
               NonCommutativeMultiply[inv[NonCommutativeMultiply[b,c]], 
                                      inv[a]];
           SetOptions[$inv, Distribute -> True];
          ,
           Quiet[
             (* remove distributive rule *)
-            inv/:inv[NonCommutativeMultiply[a_,b_,c___]] =. ;
+            NonCommutativeMultiply /: Power[NonCommutativeMultiply[a_,b_,c___],-1] =. ;
             SetOptions[$inv, Distribute -> False];
            ,
             {TagUnset::norep, Unset::norep}  
@@ -487,11 +520,13 @@ Begin[ "`Private`" ]
 
   (* Expand monomial rules *)
   Unprotect[Power];
+  (*
   Power[b_?PowerNonCommutativeQ, 1/2] := rt[b];
   Power[b_?PowerNonCommutativeQ, c_Integer?Positive] :=
     Apply[NonCommutativeMultiply, Table[b, {c}]];
   Power[b_?PowerNonCommutativeQ, c_Integer?Negative] :=
     inv[Apply[NonCommutativeMultiply, Table[b, {-c}]]];
+  *)
 
   (* pretty tp *)
   If[ValueQ[Global`T], 
@@ -499,7 +534,7 @@ Begin[ "`Private`" ]
      Global`T =. 
   ];
   Protect[Global`T];
-  Power[a_?PowerNonCommutativeQ, Global`T] := tp[a];
+  Power[a_?NonCommutativeQ, Global`T] := tp[a];
   Protect[Power];
 
   (* pretty aj *)

@@ -78,7 +78,6 @@ Block[
    expr1 = ExpandNonCommutativeMultiply[NCDot[l, m, r]] - ExpandNonCommutativeMultiply[exp];
    NCTest[d + x + expr1, 0];
 
-
    (* test 1 *)
    f = x**x;
    hes = NCHessian[f,{x,h}];
@@ -92,6 +91,7 @@ Block[
    f = x**x**x;
    hes = NCHessian[f,{x,h}];
    p = NCToNCPolynomial[hes,{h}];
+   
    {m0,sylv,l,m,r} = NCPToNCQuadratic[p];
    NCTest[{l,m,r}, {{h,x**h},SparseArray[{{2,2 x},{0,2}}],{h**x,h}}];
    expr1 = ExpandNonCommutativeMultiply[NCDot[l, m, r]] - ExpandNonCommutativeMultiply[hes];
@@ -366,5 +366,6 @@ Block[
 	       NCQuadratic::NotQuadratic,
 	       {NCQuadratic::NotQuadratic,NCSymmetricQ::SymmetricVariables}];
 
+   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

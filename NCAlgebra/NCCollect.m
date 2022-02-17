@@ -66,40 +66,53 @@ Begin["`Private`"];
   NCStrongCollect[f_, x_?CommutativeQ] := 
     MapAt[Collect[#, x]&, f, Position[f, _Plus]];
 
-  NCStrongCollect[f_, x_?NonCommutativeQ] :=
-    ReplaceRepeated[f, {
+  Clear[NCStrongCollectRules]
+  (* OLD RULES WITHOUT EXPONENTS *)
+  NCStrongCollectRules[x_] := {
+    A_. * left___**x**right___ + B_. * left___**x**right___ :> 
+      (A + B) * left ** x ** right,
+    A_. * left___**x**a___ + B_. * left___**x**b___ :> 
+      left ** x ** (A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]),
+    A_. * a___**x**right___ + B_. *b___**x**right___ :> 
+      (A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]) ** x ** right,
+    A_. * x + B_. * x**b___ :> 
+      x ** (A + B*NonCommutativeMultiply[b]),
+    A_. * x + B_. * b___**x :> 
+      (A + B*NonCommutativeMultiply[b]) ** x,
+    left___ ** (a_Plus?IsFirstNegative) ** right___ :> 
+      -NonCommutativeMultiply[left, Expand[-a], right]
+  };
 
-         A_. * left___**x**right___ + B_. * left___**x**right___ :> 
-           (A + B)
-           NonCommutativeMultiply[left, x, right],
+  Clear[NCStrongCollectPowerRules];
+  (* MAURICIO: FEB 2022
+     NEW RULES ACCOUTING FOR EXPONENTS ON SYMBOLS
+     OTHER NC THINGS MATCH WITHOUT EXPONENTS
+   *)
+  NCStrongCollectPowerRules[x_] := {
+    A_.*left___ ** x^n_. ** right___ + B_.*left___ ** x^n_. ** right___ :>
+      (A + B)*left ** x^n ** right,
+    A_.*left___ ** x^n_. ** a___ + B_.*left___ ** x^m_. ** b___ :> 
+      left ** x^(Min[m, n]) ** (A*x^(n - Min[m, n]) ** a + B*x^(m - Min[m, n]) ** b),
+    A_.*a___ ** x^n_. ** right___ + B_.*b___ ** x^m_. ** right___ :>
+      (A*a ** x^(n - Min[m, n]) + B*b ** x^(m - Min[m, n])) ** x^(Min[m, n]) ** right,
+    A_.*x^n_. + B_.*x^m_. ** b___ :>
+      x^(Min[m, n]) ** (A*x^(n - Min[m, n]) + B*x^(m - Min[m, n]) ** b),
+    A_.*x^n_. + B_.*b___ ** x^m_. :>
+      (A*x^(n - Min[m, n]) + B*b ** x^(m - Min[m, n])) ** x^(Min[m, n]),
+    left___ ** (a_Plus?IsFirstNegative) ** right___ :>
+      -NonCommutativeMultiply[left, Expand[-a], right]
+  };
 
-         A_. * left___**x**a___ + B_. * left___**x**b___ :> 
-           NonCommutativeMultiply[
-             left, 
-             x,
-             A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]
-           ],
+  NCStrongCollect[f_, x:((tp|aj)[_?NCSymbolOrSubscriptQ])] :=
+    ReplaceRepeated[f, NCStrongCollectPowerRules[x]];
 
-         A_. * a___**x**right___ + B_. *b___**x**right___ :> 
-           NonCommutativeMultiply[
-             (A*NonCommutativeMultiply[a]+B*NonCommutativeMultiply[b]),
-             x,
-             right
-           ],
-
-         A_. * x + B_. * x**b___ :> 
-           NonCommutativeMultiply[x, (A + B*NonCommutativeMultiply[b])],
-
-         A_. * x + B_. * b___**x :> 
-           NonCommutativeMultiply[(A + B*NonCommutativeMultiply[b]), x],
-
-         left___**(a_Plus?IsFirstNegative)**right___ :> 
-             -NonCommutativeMultiply[left, Expand[-a], right]
-        
-    }
-  ];
+  NCStrongCollect[f_, x_?NCSymbolOrSubscriptQ] :=
+    ReplaceRepeated[f, NCStrongCollectPowerRules[x]];
     
-  (* NCDecompose *)                                       
+  NCStrongCollect[f_, x_?NonCommutativeQ] :=
+    ReplaceRepeated[f, NCStrongCollectRules[x]];
+
+  (* NCDecompose *)              
                                         
   NCDecompose[expr_] := 
     Quiet[

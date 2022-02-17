@@ -83,85 +83,86 @@ Module[
    NCTest[NCCollect[exp,x], answer];
    NCTest[NCCollect[exp,{x}], answer];
 
-   exp = x**x**y + y**x**x + y**x**y + x**y**x;
+   exp = x^2**y + y**x^2 + y**x**y + x**y**x;
    answer = x**(x**y + y**x) + y**x**(x + y);
    NCTest[NCStrongCollect[exp,x], answer];
    NCTest[NCStrongCollect[exp,{x}], answer];
 
-   answer = x**(x**y + y**x) + y**x**x + y**x**y;
+   answer = x**(x**y + y**x) + y**x^2 + y**x**y;
    NCTest[NCCollect[exp,x], answer];
    NCTest[NCCollect[exp,{x}], answer];
 
-   answer = x**x**y + y**(x**x + x**y) + x**y**x;
+   answer = x^2**y + y**(x^2 + x**y) + x**y**x;
    NCTest[NCStrongCollect[exp,y], answer];
    NCTest[NCStrongCollect[exp,{y}], answer];
 
-   answer = x**x**y + y**x**x + y**x**y + x**y**x;
+   answer = x^2**y + y**x^2 + y**x**y + x**y**x;
    NCTest[NCCollect[exp,y], answer];
    NCTest[NCCollect[exp,{y}], answer];
 
-   exp = x**x**y + y**x**x + y**x**y + x**y**y;
-   answer = x**(x**y + y**y) + y**x**(x + y);
+   exp = x^2**y + y**x^2 + y**x**y + x**y^2;
+   answer = x**(x**y + y^2) + y**x**(x + y);
    NCTest[NCStrongCollect[exp,x], answer];
    NCTest[NCStrongCollect[exp,{x}], answer];
 
-   answer = x**x**y + y**x**x + y**x**y + x**y**y;
+   answer = x^2**y + y**x^2 + y**x**y + x**y^2;
    NCTest[NCCollect[exp,x], answer];
    NCTest[NCCollect[exp,{x}], answer];
 
    answer = x**(x + y)**y + y**x**(x + y);
    NCTest[NCStrongCollect[exp,{x,y}], answer];
 
-   answer = x**x**y + y**x**x + (y**x + x**y)**y;
+   answer = x^2**y + y**x^2 + (y**x + x**y)**y;
    NCTest[NCCollect[exp,{x,y}], answer];
 
-   answer = y**(x**x + x**y) + (x**x + x**y)**y;
+   answer = y**(x^2 + x**y) + (x^2 + x**y)**y;
    NCTest[NCStrongCollect[exp,y], answer];
    NCTest[NCStrongCollect[exp,{y}], answer];
 
-   answer = x**x**y + y**x**x + (y**x + x**y)**y;
+   answer = x^2**y + y**x^2 + (y**x + x**y)**y;
    NCTest[NCCollect[exp,{y}], answer];
 
    answer = x**(x + y)**y + y**x**(x + y);
    NCTest[NCStrongCollect[exp,{y,x}], answer];
 
-   answer = x**x**y + y**x**x + (y**x + x**y)**y;
+   answer = x^2**y + y**x^2 + (y**x + x**y)**y;
    NCTest[NCCollect[exp,{y,x}], answer];
 
 
    (* NCDecompose *)
 
-   exp = x**x**y + y**x**x + y**x**y + x**y**x;
-   answer = <|{2}->x**x**y + x**y**x + y**x**x,
+   exp = x^2**y + y**x^2 + y**x**y + x**y**x;
+   answer = <|{2}->x^2**y + x**y**x + y**x^2,
               {1}->y**x**y|>;
    tmp = NCDecompose[exp,{x}];
    NCTest[tmp, answer];
    NCTest[NCCompose[tmp], exp];
    NCTest[NCCompose[tmp, {1}], y**x**y];
-   NCTest[NCCompose[tmp, {2}], x**x**y + x**y**x + y**x**x];
+   NCTest[NCCompose[tmp, {2}], x^2**y + x**y**x + y**x^2];
 
-   answer = <|{2,1}->x**x**y + x**y**x + y**x**x,
+   answer = <|{2,1}->x^2**y + x**y**x + y**x^2,
               {1,2}->y**x**y|>;
    tmp = NCDecompose[exp,{x,y}];
    NCTest[tmp, answer];
    NCTest[NCCompose[tmp], exp];
    NCTest[NCCompose[tmp, {1,2}], y**x**y];
-   NCTest[NCCompose[tmp, {2,1}], x**x**y + x**y**x + y**x**x];
+   NCTest[NCCompose[tmp, {2,1}], x^2**y + x**y**x + y**x^2];
 
-   exp = y**x**inv[1+x] + y**x**x + y**x**y + x**y**inv[1+x];
-   answer = <|{1,1}->y**x**inv[1+x] + x**y**inv[1+x],
-   	      {2,0}->y**x**x,
+   exp = y**x**inv[1+x] + y**x^2 + y**x**y + x**y**inv[1+x];
+   answer = <|{2,0}->y**x^2,
+              {1,1}->y**x**inv[1+x] + x**y**inv[1+x],
               {1,0}->y**x**y|>;
    tmp = NCDecompose[exp,{x}];
    NCTest[tmp, answer];
+
    NCTest[NCCompose[tmp], exp];
    NCTest[NCCompose[tmp, {1,0}], y**x**y];
-   NCTest[NCCompose[tmp, {2,0}], y**x**x];
+   NCTest[NCCompose[tmp, {2,0}], y**x^2];
    NCTest[NCCompose[tmp, {1,1}], y**x**inv[1+x] + x**y**inv[1+x]];
 
    (* NCCollect with rationals *)
-   exp = y**x**inv[1+x] + y**y**x + y**y**x**y + x**y**inv[1+x];
-   answer = (x**y + y**x)**inv[1 + x] + y**y**x**(1 + y);
+   exp = y**x**inv[1+x] + y^2**x + y^2**x**y + x**y**inv[1+x];
+   answer = (x**y + y**x)**inv[1 + x] + y^2**x**(1 + y);
    NCTest[NCCollect[exp, {x}], answer];
 
    (* tp *)
@@ -258,7 +259,7 @@ Module[
      tp[h] ** inv[tp[g]] ** inv[g] ** h + tp[h] ** inv[tp[g]] ** tp[f] ** c - 
      c ** d ** inv[a] ** inv[tp[a]] ** tp[d] ** c;
    answer = -c ** (d ** inv[a] ** b + d ** inv[a] ** inv[tp[a]] ** tp[d] ** c) -
-     j ** b - (j ** inv[tp[a]] ** tp[d] - inv[e] ** f ** tp[f] -
+     j ** b + (- j ** inv[tp[a]] ** tp[d] + inv[e] ** f ** tp[f] +
      tp[h] ** inv[tp[g]] ** tp[f]) ** c + inv[e] ** f ** inv[g] ** h +
      tp[h] ** inv[tp[g]] ** inv[g] ** h;
    NCTest[NCStrongCollect[exp,{c}], answer];
@@ -273,15 +274,15 @@ Module[
    NCTest[NCStrongCollect[expr, {a,tp[a]}], answer];
 
    (* NCTermsOfDegree *)
-   expr = z + x**y**x + x**w - x**x**y;
-   NCTest[NCTermsOfDegree[expr,{x,y},{2,1}], x**y**x - x**x**y];
+   expr = z + x**y**x + x**w - x^2**y;
+   NCTest[NCTermsOfDegree[expr,{x,y},{2,1}], x**y**x - x^2**y];
    NCTest[NCTermsOfDegree[expr,{x,y},{1,0}], x**w];
    NCTest[NCTermsOfDegree[expr,{x,y},{2,2}], 0];
    NCTest[NCTermsOfDegree[expr,{x,y},{0,0}], z];
 
    (* NCTermsOfTotalDegree *)
-   expr = z + x**y**x + x**w - x**x**y;
-   NCTest[NCTermsOfTotalDegree[expr,{x,y},3], x**y**x - x**x**y];
+   expr = z + x**y**x + x**w - x^2**y;
+   NCTest[NCTermsOfTotalDegree[expr,{x,y},3], x**y**x - x^2**y];
    NCTest[NCTermsOfTotalDegree[expr,{x,y},1], x**w];
    NCTest[NCTermsOfTotalDegree[expr,{x,y},2], 0];
    NCTest[NCTermsOfTotalDegree[expr,{x,y},0], z];
@@ -301,22 +302,22 @@ Module[
    NCTest[NCTermsOfTotalDegree[expr,{Subscript[x,1],y},0], z];
 
    (* NCTermsOfDegree *)
-   expr = z + x**y**x + x**w - x**x**y;
-   NCTest[NCTermsOfDegree[expr,{x},{2}], x**y**x - x**x**y];
+   expr = z + x**y**x + x**w - x^2**y;
+   NCTest[NCTermsOfDegree[expr,{x},{2}], x**y**x - x^2**y];
    NCTest[NCTermsOfDegree[expr,{x},{1}], x**w];
    NCTest[NCTermsOfDegree[expr,{x},{3}], 0];
    NCTest[NCTermsOfDegree[expr,{x},{0}], z];
 
    (* NCTermsOfDegree *)
-   expr = z + x**y**x + x**w - x**x**y;
-   NCTest[NCTermsOfDegree[expr,x,2], x**y**x - x**x**y];
+   expr = z + x**y**x + x**w - x^2**y;
+   NCTest[NCTermsOfDegree[expr,x,2], x**y**x - x^2**y];
    NCTest[NCTermsOfDegree[expr,x,1], x**w];
    NCTest[NCTermsOfDegree[expr,x,3], 0];
    NCTest[NCTermsOfDegree[expr,x,0], z];
 
    (* NCTermsOfTotalDegree *)
-   expr = z + x**y**x + x**w - x**x**y;
-   NCTest[NCTermsOfTotalDegree[expr,x,2], x**y**x - x**x**y];
+   expr = z + x**y**x + x**w - x^2**y;
+   NCTest[NCTermsOfTotalDegree[expr,x,2], x**y**x - x^2**y];
    NCTest[NCTermsOfTotalDegree[expr,x,1], x**w];
    NCTest[NCTermsOfTotalDegree[expr,x,3], 0];
    NCTest[NCTermsOfTotalDegree[expr,x,0], z];
@@ -361,5 +362,7 @@ Module[
 
    answer = A (-x ** ((1 - y) ** x + y ** y) + y ** x);
    NCTest[NCStrongCollect[expr, {x,y,A}], answer];
+
+   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

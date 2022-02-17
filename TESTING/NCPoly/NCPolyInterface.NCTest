@@ -15,6 +15,108 @@ Block[
 
   SNC[a,b,c,d,x,y];
 
+  (* TESTING NCPolynomial FACILITIES *)
+
+  (* NCCoefficientQ *)
+  
+  NCTest[NCCoefficientQ[1], True];
+  NCTest[NCCoefficientQ[A], True];
+  NCTest[NCCoefficientQ[2 A], True];
+  NCTest[NCCoefficientQ[1 + A], True];
+
+  NCTest[NCCoefficientQ[x], False];
+
+  NCTest[NCCoefficientQ[1 + x], False];
+  NCTest[NCCoefficientQ[x**x], False];
+  NCTest[NCCoefficientQ[x**y], False];
+  NCTest[NCCoefficientQ[Exp[x]], False];
+
+  NCTest[NCCoefficientQ[Subscript[A,1]], True];
+  NCTest[NCCoefficientQ[2 Subscript[A,1]], True];
+  NCTest[NCCoefficientQ[1 + Subscript[A,1]], True];
+
+  NCTest[NCCoefficientQ[Subscript[x,1]], False];
+  NCTest[NCCoefficientQ[1 + Subscript[x,1]], False];
+  NCTest[NCCoefficientQ[Subscript[x,1]**Subscript[x,1]], False];
+  NCTest[NCCoefficientQ[Exp[Subscript[x,1]]], False];
+
+  (* NCMonomialQ *)
+
+  NCTest[NCMonomialQ[1], True];
+  NCTest[NCMonomialQ[A], True];
+  NCTest[NCMonomialQ[x], True];
+  NCTest[NCMonomialQ[A x], True];
+  NCTest[NCMonomialQ[2 x], True];
+  NCTest[NCMonomialQ[2 A x], True];
+  NCTest[NCMonomialQ[x ** y], True];
+  NCTest[NCMonomialQ[x ** x], True];
+  NCTest[NCMonomialQ[x^2 ** y], True];
+  NCTest[NCMonomialQ[2 x ** y], True];
+  NCTest[NCMonomialQ[A x ** y], True];
+  NCTest[NCMonomialQ[A x ** x], True];
+  NCTest[NCMonomialQ[A x^2 ** y], True];
+  NCTest[NCMonomialQ[2 A x ** y], True];
+  NCTest[NCMonomialQ[(1 + A) x], True];
+
+  NCTest[NCMonomialQ[Exp[x]], False];
+  NCTest[NCMonomialQ[1 + y], False];
+  NCTest[NCMonomialQ[x + y], False];
+  NCTest[NCMonomialQ[2 A x ** Exp[x]], False];
+
+  NCTest[NCMonomialQ[2 A x ** (x + y)], False];
+
+  NCTest[NCMonomialQ[Subscript[A,1]], True];
+  NCTest[NCMonomialQ[Subscript[x,1]], True];
+  NCTest[NCMonomialQ[Subscript[A,1] Subscript[x,1]], True];
+  NCTest[NCMonomialQ[2 Subscript[x,1]], True];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1]], True];
+  NCTest[NCMonomialQ[Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[Subscript[x,1]^2], True];
+  NCTest[NCMonomialQ[Subscript[x,1]^2 ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[2 Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[Subscript[A,1] Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[2 Subscript[x,1]^2], True];
+  NCTest[NCMonomialQ[2 Subscript[x,1]^2 ** Subscript[y,2]], True];
+  NCTest[NCMonomialQ[(1 + Subscript[A,1]) Subscript[x,1]], True];
+
+  NCTest[NCMonomialQ[Exp[Subscript[x,1]]], False];
+  NCTest[NCMonomialQ[1 + Subscript[y,2]], False];
+  NCTest[NCMonomialQ[Subscript[x,1] + Subscript[y,2]], False];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** Exp[Subscript[x,1]]], False];
+  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** (Subscript[x,1] + Subscript[y,2])], False];
+
+  (* NCPolynomialQ *)
+  
+  NCTest[NCPolynomialQ[1], True];
+  NCTest[NCPolynomialQ[A], True];
+  NCTest[NCPolynomialQ[x], True];
+  NCTest[NCPolynomialQ[A x], True];
+  NCTest[NCPolynomialQ[2 x], True];
+  NCTest[NCPolynomialQ[2 A x], True];
+  NCTest[NCPolynomialQ[x ** y], True];
+  NCTest[NCPolynomialQ[2 x ** y], True];
+  NCTest[NCPolynomialQ[A x ** y], True];
+  NCTest[NCPolynomialQ[2 A x ** y], True];
+
+  NCTest[NCPolynomialQ[1 + x], True];
+  NCTest[NCPolynomialQ[A + x], True];
+  NCTest[NCPolynomialQ[x + y], True];
+  NCTest[NCPolynomialQ[A x + x], True];
+  NCTest[NCPolynomialQ[2 x + y], True];
+  NCTest[NCPolynomialQ[2 A x - y], True];
+  NCTest[NCPolynomialQ[x ** y + y], True];
+  NCTest[NCPolynomialQ[2 x ** y - x], True];
+  NCTest[NCPolynomialQ[A x ** y - x ** y], True];
+  NCTest[NCPolynomialQ[2 A x ** y + x ** y], True];
+
+  NCTest[NCPolynomialQ[(x + y)**x], True];
+  NCTest[NCPolynomialQ[1 + (x + y)**x], True];
+  NCTest[NCPolynomialQ[A + (x + y)**x], True];
+  NCTest[NCPolynomialQ[(x + y)**x - (x - y)^3], True];
+
+  NCTest[NCPolynomialQ[x + Exp[x]], False];
+
   (* NCToNCPoly *)
   
   vars = {{a},{b,c}};
@@ -69,8 +171,13 @@ Block[
   NCExp = a**a + b**b + c**c;
   PolyExp = NCToNCPoly[NCExp, vars];
   NCExpExp = NCPolyToNC[PolyExp, vars];
-
   NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]];
+  NCTest[NCExp, NCExpExp];
+
+  NCExp = a**a + 2 b**b + c**c;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+  NCTest[PolyExp, NCPoly[{1,2,1}, {{a,a},{b,b},{c,c}}, vars]];
   NCTest[NCExp, NCExpExp];
 
   vars = {{a},{Subscript[b,1],c}};
@@ -132,98 +239,6 @@ Block[
   NCTest[NCExp, NCExpExp];
 
   (* TESTING NCToNCPoly/NCPolyToNC -- END *)
-
-  (* TESTING NCPolynomial FACILITIES *)
-
-  (* NCCoefficientQ *)
-  
-  NCTest[NCCoefficientQ[1], True];
-  NCTest[NCCoefficientQ[A], True];
-  NCTest[NCCoefficientQ[2 A], True];
-  NCTest[NCCoefficientQ[1 + A], True];
-
-  NCTest[NCCoefficientQ[x], False];
-
-  NCTest[NCCoefficientQ[1 + x], False];
-  NCTest[NCCoefficientQ[x**x], False];
-  NCTest[NCCoefficientQ[Exp[x]], False];
-
-  NCTest[NCCoefficientQ[Subscript[A,1]], True];
-  NCTest[NCCoefficientQ[2 Subscript[A,1]], True];
-  NCTest[NCCoefficientQ[1 + Subscript[A,1]], True];
-
-  NCTest[NCCoefficientQ[Subscript[x,1]], False];
-  NCTest[NCCoefficientQ[1 + Subscript[x,1]], False];
-  NCTest[NCCoefficientQ[Subscript[x,1]**Subscript[x,1]], False];
-  NCTest[NCCoefficientQ[Exp[Subscript[x,1]]], False];
-
-  (* NCMonomialQ *)
-
-  NCTest[NCMonomialQ[1], True];
-  NCTest[NCMonomialQ[A], True];
-  NCTest[NCMonomialQ[x], True];
-  NCTest[NCMonomialQ[A x], True];
-  NCTest[NCMonomialQ[2 x], True];
-  NCTest[NCMonomialQ[2 A x], True];
-  NCTest[NCMonomialQ[x ** y], True];
-  NCTest[NCMonomialQ[2 x ** y], True];
-  NCTest[NCMonomialQ[A x ** y], True];
-  NCTest[NCMonomialQ[2 A x ** y], True];
-  NCTest[NCMonomialQ[(1 + A) x], True];
-
-  NCTest[NCMonomialQ[Exp[x]], False];
-  NCTest[NCMonomialQ[1 + y], False];
-  NCTest[NCMonomialQ[x + y], False];
-  NCTest[NCMonomialQ[2 A x ** Exp[x]], False];
-  NCTest[NCMonomialQ[2 A x ** (x + y)], False];
-
-  NCTest[NCMonomialQ[Subscript[A,1]], True];
-  NCTest[NCMonomialQ[Subscript[x,1]], True];
-  NCTest[NCMonomialQ[Subscript[A,1] Subscript[x,1]], True];
-  NCTest[NCMonomialQ[2 Subscript[x,1]], True];
-  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1]], True];
-  NCTest[NCMonomialQ[Subscript[x,1] ** Subscript[y,2]], True];
-  NCTest[NCMonomialQ[2 Subscript[x,1] ** Subscript[y,2]], True];
-  NCTest[NCMonomialQ[Subscript[A,1] Subscript[x,1] ** Subscript[y,2]], True];
-  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** Subscript[y,2]], True];
-  NCTest[NCMonomialQ[(1 + Subscript[A,1]) Subscript[x,1]], True];
-
-  NCTest[NCMonomialQ[Exp[Subscript[x,1]]], False];
-  NCTest[NCMonomialQ[1 + Subscript[y,2]], False];
-  NCTest[NCMonomialQ[Subscript[x,1] + Subscript[y,2]], False];
-  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** Exp[Subscript[x,1]]], False];
-  NCTest[NCMonomialQ[2 Subscript[A,1] Subscript[x,1] ** (Subscript[x,1] + Subscript[y,2])], False];
-
-  (* NCPolynomialQ *)
-  
-  NCTest[NCPolynomialQ[1], True];
-  NCTest[NCPolynomialQ[A], True];
-  NCTest[NCPolynomialQ[x], True];
-  NCTest[NCPolynomialQ[A x], True];
-  NCTest[NCPolynomialQ[2 x], True];
-  NCTest[NCPolynomialQ[2 A x], True];
-  NCTest[NCPolynomialQ[x ** y], True];
-  NCTest[NCPolynomialQ[2 x ** y], True];
-  NCTest[NCPolynomialQ[A x ** y], True];
-  NCTest[NCPolynomialQ[2 A x ** y], True];
-
-  NCTest[NCPolynomialQ[1 + x], True];
-  NCTest[NCPolynomialQ[A + x], True];
-  NCTest[NCPolynomialQ[x + y], True];
-  NCTest[NCPolynomialQ[A x + x], True];
-  NCTest[NCPolynomialQ[2 x + y], True];
-  NCTest[NCPolynomialQ[2 A x - y], True];
-  NCTest[NCPolynomialQ[x ** y + y], True];
-  NCTest[NCPolynomialQ[2 x ** y - x], True];
-  NCTest[NCPolynomialQ[A x ** y - x ** y], True];
-  NCTest[NCPolynomialQ[2 A x ** y + x ** y], True];
-
-  NCTest[NCPolynomialQ[(x + y)**x], True];
-  NCTest[NCPolynomialQ[1 + (x + y)**x], True];
-  NCTest[NCPolynomialQ[A + (x + y)**x], True];
-  NCTest[NCPolynomialQ[(x + y)**x - (x - y)^3], True];
-
-  NCTest[NCPolynomialQ[x + Exp[x]], False];
 
   (* ** product *)
   vars = {{a},{b,c}};
@@ -370,5 +385,7 @@ Block[
   NCExpExp = NCPolyToNC[PolyExp, vars];
   
   NCTest[NCExpExp, tp[NCExp] /. tp[b] -> b];
+
+  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

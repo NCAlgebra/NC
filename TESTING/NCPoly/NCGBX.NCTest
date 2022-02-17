@@ -3,7 +3,7 @@ Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 << NCGBX`
 
 Block[
-  {a,b,c,d,
+  {a,b,c,d,x,
   vars,NCExp,PolyExp
   },
   
@@ -12,7 +12,7 @@ Block[
   (* TESTING SetKnowns/SetUnknowns -- BEGIN *)
 
   Clear[a,b,c,d];
-  SNC[a,b,c,d];
+  SNC[a,b,c,d,x];
 
   SetKnowns[a,b];
   SetUnknowns[c,d];
@@ -189,16 +189,19 @@ Block[
   (* TESTING NCMakeGB -- BEGIN *)
 
   SetMonomialOrder[a,b];
-  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> True],
-         {a ** b -> 0, b ** a -> a, a ** a -> 0}];
-  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> False],
-         {a ** b, b ** a - a, a ** a}];
-	 
   NCTest[NCMakeGB[{a,b}, VerboseLevel -> 0, ReturnRules -> True],
          {a -> 0, b -> 0}];
   NCTest[NCMakeGB[{a,b}, VerboseLevel -> 0, ReturnRules -> False],
          {a, b}];
-	   
+
+  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> True],
+         {a ** b -> 0, b ** a -> a, a ** a -> 0}];
+  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> False],
+         {a ** b, b ** a - a, a ** a}];
+
+  NCTest[NCMakeGB[{b**b**a**b, b**b**a - b**a}, VerboseLevel -> 0, ReturnRules -> True],
+         {b ** a ** b -> 0, b^2 ** a -> b ** a}];
+
   NCTestCheck[NCMakeGB[{a,b,c}],
 	      $Failed,
               NCMakeGB::MissingSymbol];
@@ -211,6 +214,10 @@ Block[
 	      $Failed,
               NCMakeGB::UnknownFunction];
 
-  (* TESTING NCMakeGB -- END *)
+  SetMonomialOrder[{a,inv[a],b},{x}];
+  NCTest[NCMakeGB[{a**x-b}, VerboseLevel -> 0, ReturnRules -> True],
+         { x -> inv[a] ** b}];
+
+ (* TESTING NCMakeGB -- END *)
 
 ];

@@ -14,6 +14,7 @@
    :8/03    Added test 11-12 and 13-16 to test normrule. (JShopple)
    :8/03    Added ** between KK and x because KK is declared NC. (Jshopple)
    :6/29/04 Changed Substitute to Transform in 3 places. (Jshopple)
+   :01/01/2017 Major rewrite (Mauricio)
 *)
 
 << NCSimplifyRational`
@@ -26,11 +27,12 @@ Module[
      expr, answer,m1,m2,m3
      },
 
-     SetNonCommutative[h,x,y,a,b];
+     SetNonCommutative[h,x,y,z,a,b];
      SetCommutative[A,B,C,K,S];
 
      (* Normalize inverses *)
 
+     (*
      expr = inv[x];
      answer = expr;
      NCTest[NCNormalizeInverse[expr], answer];
@@ -82,70 +84,229 @@ Module[
      expr = inv[1 + A + inv[1 + B + inv[Subscript[x,1]]]];
      answer = inv[1 + inv[1 + inv[Subscript[x,1]]/(1+B)]/(1+A)/(1+B)]/(1+A);
      NCTest[NCNormalizeInverse[expr], answer];
+     *)
 
      (* Basic rules *)
 
      (* Rule #1 *)
 
-     expr = inv[x] ** inv[1 + A x ** y];
-     answer = inv[x] - A y ** inv[1 + A x ** y];
-     NCTest[NCSimplifyRational[expr], answer];
-
      expr = inv[x] ** inv[1 + A x];
      answer = inv[x] - A inv[1 + A x];
      NCTest[NCSimplifyRational[expr], answer];
 
-     (* Rule #2 *)
-
-     expr = inv[1 + A x ** y] ** inv[y];
-     answer = inv[y] - A x ** inv[1 + A x ** y];
+     expr = inv[x] ** inv[1 + A x ** y];
+     answer = inv[x] - A y ** inv[1 + A x ** y];
      NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x] ** inv[1 + A x ** y ** z];
+     answer = inv[x] - A y ** z ** inv[1 + A x ** y ** z];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x] ** inv[1 + A x^2 ** y];
+     answer = inv[x] - A x ** y ** inv[1 + A x^2 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x ** y] ** inv[1 + A x ** y ** z];
+     answer = inv[x ** y] - A z ** inv[1 + A x ** y ** z];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x ** y] ** inv[1 + A x ** y^2];
+     answer = inv[x ** y] - A y ** inv[1 + A x ** y^2];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x ** y] ** inv[1 + A x ** y^2 ** z];
+     answer = inv[x ** y] - A y ** z ** inv[1 + A x ** y^2 ** z];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x ** y^2] ** inv[1 + A x ** y^2 ** z];
+     answer = inv[x ** y^2] - A z ** inv[1 + A x ** y^2 ** z];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x ** y^2] ** inv[1 + A x ** y^3 ** z];
+     answer = inv[x ** y^2] - A y ** z ** inv[1 + A x ** y^3 ** z];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[x ** y^2] ** inv[1 + A x ** y ** z];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], expr];
+     NCTest[NCSimplifyRationalSinglePass[expr], expr];
+     NCTest[NCSimplifyRational[expr], expr];
+
+     (* Rule #2 *)
 
      expr = inv[1 + A x] ** inv[x];
      answer = inv[x] - A inv[1 + A x];
      NCTest[NCSimplifyRational[expr], answer];
 
-     (* Rule #3 *)
-
-     expr = inv[1 + A x ** y] ** x ** y;
-     answer = ExpandNonCommutativeMultiply[1/A - (1/A) inv[1 + A x ** y]];
+     expr = inv[1 + A x ** y] ** inv[y];
+     answer = inv[y] - A x ** inv[1 + A x ** y];
      NCTest[NCSimplifyRational[expr], answer];
 
-     expr = inv[1 + A Subscript[x,1] ** y] ** Subscript[x,1] ** y;
-     answer = ExpandNonCommutativeMultiply[1/A - (1/A) inv[1 + A Subscript[x,1] ** y]];
+     expr = inv[1 + A z ** x ** y] ** inv[y];
+     answer = inv[y] - A z ** x ** inv[1 + A z ** x ** y];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A x ** y^2] ** inv[y];
+     answer = inv[y] - A x ** y ** inv[1 + A x ** y^2];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A z ** x ** y] ** inv[x ** y];
+     answer = inv[x ** y] - A z ** inv[1 + A z ** x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A x^2 ** y] ** inv[x ** y];
+     answer = inv[x ** y] - A x ** inv[1 + A x^2 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A z ** x^2 ** y] ** inv[x ** y];
+     answer = inv[x ** y] - A z ** x ** inv[1 + A z ** x^2 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A z ** x^2 ** y] ** inv[x^2 ** y];
+     answer = inv[x^2 ** y] - A z ** inv[1 + A z ** x^2 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A z ** x^3 ** y] ** inv[x^2 ** y];
+     answer = inv[x^2 ** y] - A z ** x ** inv[1 + A z ** x^3 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRationalSinglePass[expr], answer];
      NCTest[NCSimplifyRational[expr], answer];
      
+     expr = inv[1 + A z ** x ** y] ** inv[x^2 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], expr];
+     NCTest[NCSimplifyRationalSinglePass[expr], expr];
+     NCTest[NCSimplifyRational[expr], expr];
+     
+     (* Rule #3 *)
+
      expr = inv[1 + A x] ** x;
      answer = 1/A - (1/A) inv[1 + A x];
      NCTest[NCSimplifyRational[expr], answer];
 
-     (* Rule #4 *)
-
-     expr = x ** y ** inv[1 + A x ** y];
-     answer = ExpandNonCommutativeMultiply[1/A - (1/A) inv[1 + A x ** y]];
+     expr = inv[1 + A Subscript[x,1] ** y] ** Subscript[x,1] ** y;
+     answer = 1/A - (1/A) inv[1 + A Subscript[x,1] ** y];
      NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A x ** y] ** x ** y;
+     answer = 1/A - (1/A) inv[1 + A x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A x ** y] ** x ** y ** z;
+     answer = 1/A z - (1/A) inv[1 + A x ** y]**z;
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     expr = inv[1 + A x ** y] ** x ** y^2;
+     answer = 1/A y - (1/A) inv[1 + A x ** y]**y;
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A x ** y] ** x ** y^2 ** z;
+     answer = 1/A y**z - (1/A) inv[1 + A x ** y]**y**z;
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     expr = inv[1 + A x ** y^2] ** x ** y^2 ** z;
+     answer = 1/A z - (1/A) inv[1 + A x ** y^2]**z;
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[1 + A x ** y^3] ** x ** y^2 ** z;
+     (* RULE 6 KICKS IN! *)
+     answer = x ** y^2 ** inv[1 + A y ** x ** y^2] ** z;
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     (* Rule #4 *)
 
      expr = x ** inv[1 + A x];
      answer = 1/A - (1/A) inv[1 + A x];
      NCTest[NCSimplifyRational[expr], answer];
 
+     expr = x ** y ** inv[1 + A x ** y];
+     answer = 1/A - (1/A) inv[1 + A x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = z ** x ** y ** inv[1 + A x ** y];
+     answer = 1/A z - (1/A) z ** inv[1 + A x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = x^2 ** y ** inv[1 + A x ** y];
+     answer = 1/A x - (1/A) x ** inv[1 + A x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     expr = z ** x^2 ** y ** inv[1 + A x ** y];
+     answer = 1/A z**x - (1/A) z**x ** inv[1 + A x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = z ** x^2 ** y ** inv[1 + A x^2 ** y];
+     answer = 1/A z - (1/A) z ** inv[1 + A x^2 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     expr = z ** x^2 ** y ** inv[1 + A x^3 ** y];
+     answer = 1/A z - (1/A) z ** inv[1 + A x^3 ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], expr];
+     NCTest[NCSimplifyRational[expr], expr];
+     
      (* Rule #6 *)
 
      expr = x ** inv[1 + A x ** y];
      answer = expr;
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
      NCTest[NCSimplifyRational[expr], answer];
 
      expr = inv[1 + A x ** y] ** x;
      answer = x ** inv[1 + A y ** x];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
      NCTest[NCSimplifyRational[expr], answer];
 
-     (*
-     rules = NCSimplifyRational`Private`NCSimplifyRationalRules;
-     Print["expr1 = ", expr];
-     Print["expr2 = ", NCReplaceRepeated[expr, rules[[3]]]];
-     Print["expr2 = ", expr /. rules[[3]]];
-     *)
+     expr = inv[1 + A x ** y ** z] ** x;
+     answer = x ** inv[1 + A y ** z ** x];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
 
+     expr = inv[1 + A x^2 ** y] ** x;
+     answer = x ** inv[1 + A x ** y ** x];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     expr = inv[1 + A x^2 ** y] ** x ** z;
+     answer = x ** inv[1 + A x ** y ** x] ** z;
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
+     expr = inv[1 + A x ** y^2] ** x ** y;
+     answer =  x ** y ** inv[1 + A y ** x ** y];
+     NCTest[NCPreSimplifyRationalSinglePass[expr], answer];
+     NCTest[NCSimplifyRational[expr], answer];
+     
      (* Print["Starting SimplifyRational.NCTest"]; *)
      (* test 1 tests rule 1 *)
      (* Print["----test 1 "]; *)
@@ -292,12 +453,13 @@ Module[
      (* test 15 tests NCSimplifyRational2 added 7/03. Tests norm rule 3 in NCS1R *)
      (* Print["----test 15"]; *)
      SetCommutative[B,C];
-     NCTest[NCSimplifyRational[ inv[B+3*x + C*y + x**y**z] ], ExpandAll[inv[ 1 + (3x+C*y+x**y**z)/B ] / B]];           
+     NCTest[NCSimplifyRational[ inv[B+3*x + C*y + x**y**z] ], inv[ 1 + (3x+C*y+x**y**z)/B ] / B];
 
      (* test 16 tests NCSimplifyRational2 added 7/03. Tests norm rule 4 in NCS1R *)
      (* Print["----test 16"]; *)
      NCTest[NCSimplifyRational[ inv[AAA + inv[BBB + inv[CCC+x]]] ], inv[1 + inv[1 + inv[1+x/CCC]/(BBB*CCC)]/(AAA*BBB)]/AAA]; 
 
+  
      (* Bug due to mutual import of NCUtil and NonCommutativeMultiply *)
      SetNonCommutative[a,b,c,d,e];
      m1 = {{a, b}, {c, d}};
@@ -305,4 +467,6 @@ Module[
      m3 = m1 ** inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1] ** m1;
      NCTest[NCSimplifyRational[NCMatrixExpand[m3]], {{0,0},{0,0}}];
 
+  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
+     
 ];

@@ -19,12 +19,17 @@
 BeginPackage["NCUtil`"];
 
 Clear[NCGrabSymbols,
+      NCGrabNCSymbols,
+      NCGrabSymbolsInProduct,
       NCGrabFunctions,
       NCGrabIndeterminants,
+      NCGrabFirst,
+      NCCasesFirst,
       NCVariables,
       NCConsolidateList,
       NCConsistentQ,
       NCSymbolOrSubscriptQ,
+      NCNonCommutativeSymbolOrSubscriptQ,
       NCLeafCount,
       NCReplaceData,
       NCToExpression];
@@ -35,16 +40,32 @@ Begin["`Private`"];
 
   Needs["NonCommutativeMultiply`"];
              
-  NCSymbolOrSubscriptQ[_Symbol] := True;
-  NCSymbolOrSubscriptQ[Subscript[_Symbol,__]] := True;
+  NCSymbolOrSubscriptQ[_Symbol|Subscript[_Symbol,__]] := True;
   NCSymbolOrSubscriptQ[_] := False;
-  
+
+  NCNonCommutativeSymbolOrSubscriptQ[x_] := NCSymbolOrSubscriptQ[x] && NonCommutativeQ[x];
+
+  NCGrabFirst[exp_, rule_Rule] := (exp /. rule) /; MatchQ[exp, rule[[1]]];
+  NCGrabFirst[exp_, pattern_Pattern] := exp /; MatchQ[exp, pattern];
+  NCGrabFirst[exp_, patternOrRule_] := Union[DeleteCases[
+    Flatten[NCGrabFirst[#, patternOrRule] & /@ (List @@ exp)], Null]
+  ];
+  NCGrabFirst[exp_ /; Depth[exp] == 1, rule_Rule] :=
+    If[MatchQ[exp, rule[[1]]], exp /. rule, Null];
+  NCGrabFirst[exp_ /; Depth[exp] == 1, pattern_Pattern] :=
+    If[MatchQ[exp, pattern], exp, Null];
+
+  NCCasesFirst[exp_, rule_Rule] := (exp /. rule) /; MatchQ[exp, rule[[1]]];
+  NCCasesFirst[exp_, rule_Rule] := exp[[0]] @@ (NCCasesFirst[#, rule] & /@ (List @@ exp));
+  NCCasesFirst[exp_ /; Depth[exp] == 1, rule_Rule] := exp;
+
   NCGrabSymbols[expr_SparseArray] := NCGrabSymbols[expr["NonzeroValues"]];
-  NCGrabSymbols[expr_SparseArray, pattern_] := 
-      NCGrabSymbols[expr["NonzeroValues"], pattern];
+  NCGrabSymbols[expr_SparseArray, pattern_] :=
+    NCGrabSymbols[expr["NonzeroValues"], pattern];
 
   (* Free of Subscripts? That's simple *)
-  NCGrabSymbols[expr_] := Union[Cases[expr, _Symbol, {0, Infinity}]] /; FreeQ[expr, Subscript];
+  NCGrabSymbols[expr_] :=
+    Union[Cases[expr, _Symbol, {0, Infinity}]] /; FreeQ[expr, Subscript];
   
   (* Otherwise need to worry about Subscripts
      Solution here is inspired by the discussion at:
@@ -62,17 +83,35 @@ Begin["`Private`"];
                         b__] :> (Sow[Subscript[a, b]]; Unique[][])]]]];
   
   NCGrabSymbols[expr_, pattern_] := 
-    Union[Cases[expr, (pattern)[_Symbol|Subscript[_Symbol,__]], {0, Infinity}]];
+    Union[Cases[expr, (pattern)[_?NCSymbolOrSubscriptQ], {0, Infinity}]];
+
+  NCGrabNCSymbols[expr_] :=
+    DeleteCases[NCGrabSymbols[expr], _?CommutativeQ];
+  NCGrabNCSymbols[expr_, pattern_] :=
+    DeleteCases[NCGrabSymbols[expr, pattern], _?CommutativeQ];
     
+
+  (* NCGrabSymbolsInProduct *)
+  NCGrabSymbolsInProduct[expr_] :=
+    Union[
+      Flatten[
+        Cases[expr,
+          p : (NonCommutativeMultiply[l___, _?NCSymbolOrSubscriptQ, r___]) :>
+              Cases[p, _?NCSymbolOrSubscriptQ], {0, Infinity}]
+      ]
+    ];
+
   (* Grab functions *)
   NCGrabFunctions[expr_SparseArray] := NCGrabFunctions[expr["NonzeroValues"]];
   NCGrabFunctions[expr_SparseArray, f_] := 
       NCGrabFunctions[expr["NonzeroValues"], f];
     
+  NCGrabFunctions[expr_, inv, levelSpec_:{0, Infinity}] :=
+    Union[Cases[expr, Power[_, _Integer?Negative], levelSpec]];
+  NCGrabFunctions[expr_, f_, levelSpec_:{0, Infinity}] :=
+    Union[Cases[expr, (f)[__], levelSpec]];
   NCGrabFunctions[expr_] :=
     Union[Cases[expr, (Except[Plus|Times|NonCommutativeMultiply|List|Subscript])[__], {0, Infinity}]];
-  NCGrabFunctions[expr_, f_] :=
-    Union[Cases[expr, (f)[__], {0, Infinity}]];
 
   (*
   NCGrabIndeterminants[expr_] := Union[NCGrabSymbols[expr], 
@@ -86,7 +125,8 @@ Begin["`Private`"];
   NCGrabIndeterminants[x_Rule] := 
     NCGrabIndeterminants[Apply[List,x]];
 
-  NCGrabIndeterminants[x_Power] := NCGrabIndeterminants[x[[1]]];
+  NCGrabIndeterminants[Power[x_,_Integer?Positive]] := NCGrabIndeterminants[x];
+  NCGrabIndeterminants[Power[x_,n_Integer?Negative]] := {Power[x, n]};
 
   NCGrabIndeterminants[x_Equal] := 
     NCGrabIndeterminants[Apply[List,x]];
@@ -136,7 +176,7 @@ Begin["`Private`"];
   NCReplaceData[expr_, {data__Rule}] := ReplaceRepeated[expr, 
     Join[{data}, {tp -> Transpose, 
                   aj -> ConjugateTranspose,
-                  inv -> Inverse,
+                  Power -> MatrixPower,
                   co -> Conjugate,
                   NonCommutativeMultiply -> Dot}]
   ];

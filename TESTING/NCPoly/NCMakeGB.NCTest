@@ -12,7 +12,7 @@ NCMakeGBTest[filename_String,
 	     removeRedundant_:True,
 	     opts___:{}] := Module[
    {outRels, outRules, outFile, cmpFile, cmpRels, resultFile,
-    outRR, interrupted},
+    outRR, interrupted, diff},
 
    Print["> Testing file ", filename];
    Clear[rels];
@@ -51,7 +51,8 @@ NCMakeGBTest[filename_String,
    cmpRels = Sort[Get[cmpFile]];
 
    (* Compare and write diagnostics if it failed *)
-   NCTest[outRels, cmpRels];
+   diff = NCExpand[(outRels /. Rule -> Subtract) - (cmpRels /. Rule -> Subtract)];
+   NCTest[If[diff != {}, Norm[diff], 0], 0];
    NCTest[interrupted, Interrupted];
 
    (* Generate result file *)

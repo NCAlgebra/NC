@@ -29,12 +29,16 @@ Begin["`Private`"];
   NCRuleToPoly[exp_List] := Map[NCRuleToPoly, exp];
 
   (* NCToNCPoly *)
-
+  Clear[NonCommutativeMultiplyToList];
+  NonCommutativeMultiplyToList[exp_NonCommutativeMultiply] :=
+    Flatten[List @@ exp /. Power[x_, n_] :> Table[x, n]];
+  
   Clear[GrabFactors];
   GrabFactors[exp_?CommutativeQ] := {exp, {}};
-  GrabFactors[a_. exp_NonCommutativeMultiply] := {a, List @@ exp};
-  GrabFactors[a_. exp_Symbol?NonCommutativeQ] := {a, {exp}};
-  GrabFactors[a_. exp:(Subscript[_Symbol?NonCommutativeQ,___])] := {a, {exp}};
+  GrabFactors[a_. exp_NonCommutativeMultiply] := {a, NonCommutativeMultiplyToList[exp]};
+  GrabFactors[a_. Power[x_?NCNonCommutativeSymbolOrSubscriptQ, n_]] := {a, Table[x,n]};
+  GrabFactors[a_. exp_?NCNonCommutativeSymbolOrSubscriptQ] := {a, {exp}};
+  (* GrabFactors[a_. exp:(Subscript[_Symbol?NonCommutativeQ,___])] := {a, {exp}}; *)
   GrabFactors[_] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
 
   Clear[GrabTerms];
@@ -106,7 +110,7 @@ Begin["`Private`"];
         *) 
         
     ];
-      
+
     (* Expand and check *)
     terms = ExpandNonCommutativeMultiply[exp];
     If[ !NCPolynomialQ[terms],
@@ -114,6 +118,8 @@ Begin["`Private`"];
         Return[$Failed];
     ];
     
+    (* Print["terms = ", terms]; *)
+
     Check[
       factors = Map[GrabFactors, 
                     GrabTerms[terms]];
@@ -193,12 +199,18 @@ Begin["`Private`"];
   NCCoefficientQ[a_] := CommutativeQ[a];
 
   (* NCMonomialQ *)
-  NCMonomialQ[HoldPattern[NonCommutativeMultiply[(_Symbol|Subscript[_Symbol,___])..]]] := True;
-  NCMonomialQ[x_Symbol /; NonCommutativeQ[x]] := True;
+  NCMonomialQ[HoldPattern[NonCommutativeMultiply[(Power[_?NCNonCommutativeSymbolOrSubscriptQ, _.])..]]] := True;
+  NCMonomialQ[Power[x_?NCSymbolOrSubscriptQ, _Integer?Positive] /; NonCommutativeQ[x]] := True;
+  NCMonomialQ[x_?NCSymbolOrSubscriptQ /; NonCommutativeQ[x]] := True;
+  (*
   NCMonomialQ[Subscript[x_Symbol,___] /; NonCommutativeQ[x]] := True;
+  *)
+  NCMonomialQ[a_?NCCoefficientQ b_] := NCMonomialQ[b];
+  (*
   NCMonomialQ[a_?NCCoefficientQ HoldPattern[NonCommutativeMultiply[(_Symbol|Subscript[_Symbol,___])..]]] := True;
   NCMonomialQ[a_?NCCoefficientQ x_Symbol /; NonCommutativeQ[x]] := True;
   NCMonomialQ[a_?NCCoefficientQ Subscript[x_Symbol,___] /; NonCommutativeQ[x]] := True;
+   *)
   NCMonomialQ[a_?NCCoefficientQ] := True;
   NCMonomialQ[expr_] := False;
 
