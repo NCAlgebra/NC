@@ -79,6 +79,31 @@ One can check whether a given symbol is commutative or not using
 
 both return `True`.
 
+> **WARNING:** Prior to **Version 6**, noncommutative monomials would be
+> stored in an expanded form, without exponents. That is, the monomial
+> ```
+> a**b**a^2**b
+> ```
+> would be stored as
+> ```
+> NonCommutativeMultiply[a, b, a, a, b]
+> ```
+> The automatic expansion of powers of noncommutative symbols required
+> overloading the behavior of the built in `Power` operator, which was
+> interfeering and causing much trouble when commutative polynomial
+> operations were performed inside an `NCAlgebra` session.
+>
+> Starting with **Version 6**, noncommutative monomials are represented
+> with exponents. For instance, the same monomial above is now
+> represented as
+> ```
+> NonCommutativeMultiply[a, b, Power[a, 2], b]
+> ```
+> Even if you type `a**b**a**a**b`, the repeated letters get compressed
+> to the compact representation with exponents. Exponents are now also
+> used to represent the noncommutative inverse. See the notes in the
+> next section.
+
 ## Inverses, Transposes and Adjoints
 
 The multiplicative identity is denoted `Id` in the program. At the
@@ -98,9 +123,12 @@ both lead to `Id = 1` and
 
 results in `a`.
 
-**Version 5:** `inv` no longer automatically distributes over
-noncommutative products. If this more aggressive behavior is desired
-use `SetOptions[inv, Distribute -> True]`. For example
+---
+
+**WARNING:** Since **Version 5**, `inv` no longer automatically
+distributes over noncommutative products. If this more aggressive
+behavior is desired use `SetOptions[inv, Distribute -> True]`. For
+example
 
 	SetOptions[inv, Distribute -> True]
 	inv[a**b]
@@ -111,6 +139,8 @@ returns `inv[b]**inv[a]`. Conversely
 	inv[a**b]
 
 returns `inv[a**b]`.
+
+---
 
 `tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
 adjoint of symbol `x`. Like `inv`, the properties of transposes and
@@ -141,7 +171,9 @@ Similar properties hold to `aj`. Moreover
 
 return `co[a]` where `co` stands for complex-conjugate. 
 
-**Version 5:** transposes (`tp`), adjoints (`aj`), complex conjugates
+---
+
+**WARNING:** transposes (`tp`), adjoints (`aj`), complex conjugates
 (`co`), and inverses (`inv`) in a notebook environment render as
 $x^T$, $x^*$, $\bar{x}$, and $x^{-1}$. `tp` and `aj` can also be input
 directly as `x^T` and `x^*`. For this reason the symbol `T` is now
@@ -169,6 +201,8 @@ with noncommutative entries. For example,
 evaluates to
 
     tr[a] + tr[d]
+
+---
 
 ## Replace
 
@@ -227,8 +261,12 @@ See the Section [Advanced Rules and Replacement](#AdvancedReplace) for
 a deeper discussion on some issues involved with rules and
 replacements in `NCAlgebra`.
 
-**Version 5:** the commands `Substitute` and `Transform` have been
-deprecated in favor of the above nc versions of `Replace`.
+---
+
+**WARNING:** the commands `Substitute` and `Transform` have been
+deprecated in **Version 5** in favor of the above nc versions of `Replace`.
+
+---
 
 ## Polynomials
 
@@ -364,10 +402,9 @@ returns `0`.
 The above commands are based on special packages for efficiently
 storing and calcuating with nc polynomials. Those packages are
 
-* [`NCPoly`](#PackageNCPoly): which handles polynomials with
+* [`NCPolynomial`](#PackageNCPolynomial): which handles polynomials with
   noncommutative coefficients, and
-* [`NCPolynomial`](#PackageNCPolynomial): which handles polynomials
-  with real coefficients.
+* [`NCPoly`](#PackageNCPoly): which handles polynomials with real coefficients.
 
 For example:
 
@@ -505,7 +542,7 @@ returns the nc gradient list
 
     {a**x**b + b**x**a + c**y**d, d**x**c}
 
-**Version 5:** introduces experimental support for integration of nc
+**Version 5** introduced experimental support for integration of nc
 polynomials. See [`NCIntegrate`](#NCIntegrate).
 
 ## Matrices {#BasicMatrices}
@@ -777,11 +814,10 @@ is the zero matrix and $U = L^T$.
 possible, will make invertibility and symmetry assumptions on variables so that it can run
 successfully. If not possible it will warn the users.
 
-**WARNING:** Versions prior to 5 contained the command
-`NCLDUDecomposition` which is being
-deprecated in **Version 5** as its functionality is now provided by
-[`NCLDLDecomposition`](#NCLDLDecomposition), with a slightly different
-syntax.
+> **WARNING:** Prior versions contained the command `NCLDUDecomposition`
+> which was deprecated in **Version 5** as its functionality is now
+> provided by [`NCLDLDecomposition`](#NCLDLDecomposition), with a
+> slightly different syntax.
 
 ### Replace with matrices {#ReplaceWithMatrices}
 

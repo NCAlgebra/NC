@@ -26,6 +26,7 @@ $(INSTALLDIRS):
 	$(MAKE) -C $(@:install-%=%) install
 
 MANUAL = MANUAL/Preamble.md \
+	 MANUAL/Version60.md \
 	 MANUAL/Version50.md \
          MANUAL/Running.md \
          MANUAL/Basic.md \

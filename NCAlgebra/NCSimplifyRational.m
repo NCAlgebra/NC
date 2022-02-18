@@ -136,50 +136,6 @@ Begin["`Private`"]
       
   };
   
-  Clear[NCSimplifyRationalABRules];
-  NCSimplifyRationalABRules =
-  {
-      
-      (*---------------------------RULE 1---------------------------*) 
-      (* rule 1 is as follows:                                      *) 
-      (*    inv[a] inv[1 + A a b] -> inv[a] - A b inv[1 + A a b]    *) 
-      (*    inv[a] inv[1 + A a] -> inv[a] - A inv[1 + A a]          *)
-      (*------------------------------------------------------------*)
-      inv[a_]**inv[1 + A_. a_**b_] :>
-        inv[a] - A b**inv[1 + A a**b],
-      inv[a_]**inv[1 + A_. a_] :>
-        inv[a] - A inv[1 + A a],
-
-      (*-----------------------RULE 2-------------------------------*) 
-      (* rule 2 is as follows:                                      *) 
-      (*    inv[1 + A a b] inv[b] -> inv[b] - A inv[1 + A a b] a    *) 
-      (*                   -> inv[b] - A a inv[1 + A a b] (rule #6) *) 
-      (*    inv[1 + A a] inv[a] -> inv[a] - A inv[1 + A a ]         *) 
-      (*------------------------------------------------------------*)
-      inv[1 + A_. a_**b_]**inv[b_] :>
-        inv[b] - A a**inv[1 + A a**b],
-      inv[1 + A_. a_]**inv[a_] :>
-        inv[a] - A inv[1 + A a],
-      
-      (*---------------------------------RULE 6---------------------*) 
-      (* rule 6 is as follows:                                      *)
-      (*      inv[1 + A a b] a  =  a inv[1 + A b a]                 *) 
-      (*------------------------------------------------------------*)
-      inv[1 + A_. a_**b_]**a_ :>
-        a**inv[1 + A b**a],
-      
-      (*---------------------------------RULE 7---------------------*) 
-      (* rule 7 is as follows:                                      *)
-      (*   inv[A inv[a] + B b] inv[a]  =  (1/A) inv[1 + (B/A) a b]  *) 
-      (*   inv[a] inv[A inv[a] + A b]  =  (1/A) inv[1 + (B/A) b a]  *) 
-      (*------------------------------------------------------------*)
-      inv[A_. inv[a_] + B_. b_]**inv[a_] :>
-        (1/A)inv[1 + (B/A) a ** b],
-      inv[a_]**inv[A_. inv[a_] + B_. b_] :>
-        (1/A)inv[1 + (B/A) b ** a]
-      
-  };
-
   Clear[NCPreSimplifyRationalSinglePass];
   NCPreSimplifyRationalSinglePass[expr_] := 
     ExpandNonCommutativeMultiply[
@@ -258,7 +214,7 @@ Begin["`Private`"]
 
     tmp = NCPolynomialToNC[poly];
 
-    (* Print["tmp0 = ", tmp]; *)
+    If[debug, Print["tmp0 = ", tmp]];
 
     (* Apply rational rules *)
       
@@ -277,18 +233,6 @@ Begin["`Private`"]
     (* MAURICIO: FEB 2022
        OLD VERSION USING AB RULES
        I DO NOT THINK THEY YIELD ANY DIFFERENT RESULT *)
-    (*
-    tmp = NCNormalizeInverse[
-      NCReplaceRepeated[
-        ExpandNonCommutativeMultiply[
-              NCReplaceRepeated[tmp, NCSimplifyRationalABRules]
-	]
-       ,
-        a_. + A_. b_?NonCommutativeQ + B_ b_?NonCommutativeQ -> a+(A+B)b
-      ]
-    ];
-    *)
-
     tmp = NCNormalizeInverse[
       NCReplaceRepeated[
         NCPreSimplifyRationalSinglePass[tmp]

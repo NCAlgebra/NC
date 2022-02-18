@@ -50,8 +50,12 @@ Options[NCReplace] = {
 
 Begin["`Private`"]
 
+  (*
+    - Single letter symbols match within the power and they do not need generalization
+  *)
   NCReplacePowerRule[{expr___Rule}] := Map[NCReplacePowerRule, {expr}];
-  NCReplacePowerRule[Power[l_?NCSymbolOrSubscriptQ, i_.] ** s___ ** Power[r_?NCSymbolOrSubscriptQ, j_.] -> expr_] :=
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [Power[l_?NCSymbolOrSubscriptQ, i_.] ** s___ ** Power[r_?NCSymbolOrSubscriptQ, j_.], expr_]] := op[
     If[ i == 1
        ,
         If[ j == 1
@@ -67,22 +71,28 @@ Begin["`Private`"]
 	   ,
             l^(n_Integer?((#>=i)&)) ** s ** r^(m_Integer?((#>=j)&))
 	]
-    ] -> l^(n - i) ** expr ** r^(m - j);
-  NCReplacePowerRule[Power[l_?NCSymbolOrSubscriptQ, i_.] ** s__ -> expr_] :=
+    ], l^(n - i) ** expr ** r^(m - j)
+  ];
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [Power[l_?NCSymbolOrSubscriptQ, i_.] ** s__, expr_]] := op[
     If[ i == 1
        ,
         l^(n_.) ** s
        ,
         l^(n_Integer?((#>=i)&))
-    ] -> l^(n - i) ** expr;
-  NCReplacePowerRule[s__ ** Power[r_?NCSymbolOrSubscriptQ, j_.] -> expr_] :=
-    If[ j == 1
+    ], l^(n - i) ** expr
+  ];
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [s__ ** Power[r_?NCSymbolOrSubscriptQ, j_.], expr_]] := op[
+   If[ j == 1
        ,
 	s ** r^(m_.)
        ,
         s ** r^(m_Integer?((#>=j)&))
-    ] -> expr ** r^(m - j);
-  NCReplacePowerRule[expr_Rule] := expr;
+     ],
+   expr ** r^(m - j)
+  ];
+  NCReplacePowerRule[(expr_Rule|expr_RuleDelayed)] := expr;
   
   Clear[FlatNCMultiply];
   SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
@@ -109,43 +119,33 @@ Begin["`Private`"]
 	rule
     ];
 
+  Clear[NCApplyFlatRules];
+  NCApplyFlatRules[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    {expr, NCRuleProcessOptions[rule, options]} /. NCReplaceFlatRules;
+
+  Clear[NCReverseFlatRules];
+  NCReverseFlatRules[expr_] := expr /. NCReplaceReverseFlatRules;
+  NCReverseFlatRules[seq__] := Sequence @@ (List @ seq /. NCReplaceReverseFlatRules);
+  
   NCReplace[expr_, rule_, options:OptionsPattern[NCReplace]] := 
-    ((Replace @@ 
-        ({expr, NCRuleProcessOptions[rule, options]} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+    NCReverseFlatRules[Replace @@ NCApplyFlatRules[expr, rule, options]];
 
   NCReplace[expr_, rule_, levelspec_, options:OptionsPattern[NCReplace]] := 
-    ((Replace @@ 
-        Append[({expr, NCRuleProcessOptions[rule, options]} 
-                  /. NCReplaceFlatRules),
-               levelspec])
-        /. NCReplaceReverseFlatRules);
+    NCReverseFlatRules[Replace @@ 
+        Append[NCApplyFlatRules[expr, rule, options], levelspec]];
         
   NCReplaceAll[expr_, rule_, options:OptionsPattern[NCReplace]] := 
-    ((ReplaceAll @@ 
-        ({expr, NCRuleProcessOptions[rule, options]} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+    NCReverseFlatRules[ReplaceAll @@ NCApplyFlatRules[expr, rule, options]];
 
   NCReplaceRepeated[expr_, rule_, options:OptionsPattern[NCReplace]] := 
-    ((ReplaceRepeated @@ 
-        ({expr, NCRuleProcessOptions[rule, options]} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+    NCReverseFlatRules[ReplaceRepeated @@ NCApplyFlatRules[expr, rule, options]];
 
   NCReplaceList[expr_, rule_, options:OptionsPattern[NCReplace]] := 
-    ((ReplaceList @@ 
-        ({expr, NCRuleProcessOptions[rule, options]} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+    NCReverseFlatRules[ReplaceList @@ NCApplyFlatRules[expr, rule, options]];
 
   NCReplaceList[expr_, rule_, n_, options:OptionsPattern[NCReplace]] := 
-    ((ReplaceList @@ 
-        Append[({expr, NCRuleProcessOptions[rule, options]} 
-                  /. NCReplaceFlatRules),
-                n])
-        /. NCReplaceReverseFlatRules);
+    NCReverseFlatRules[ReplaceList @@ 
+        Append[NCApplyFlatRules[expr, rule, options], n]];
         
   (* NCMakeRuleSymmetric *)
   (* Adapted from http://mathematica.stackexchange.com/questions/31238/how-to-combine-elements-of-two-matrices *)

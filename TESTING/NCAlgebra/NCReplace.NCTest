@@ -187,6 +187,15 @@ Block[
      answer = 1 - inv[1 + x];
      NCTest[NCReplaceRepeated[expr,rule], answer];
 
+     (* NCReplaceAll returning sequence *)
+
+     expr = a ** b ** c;
+     rule = b__ ** c :> b;
+     answer = Sequence[a, b];
+     NCTest[NCReplace[expr, rule], answer];
+     NCTest[NCReplaceAll[expr, rule], answer];
+     NCTest[NCReplaceRepeated[expr, rule], answer];
+
      (* NCReplacePowerRule on lists *)
 
      rule = {a**b -> a, d**a-> b};
