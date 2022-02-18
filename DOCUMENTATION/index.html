@@ -2049,7 +2049,7 @@ powers</h3>
 <p>Starting with <strong>Version 6</strong>, <code>NCAlgebra</code>
 stores repeated symbols in noncommutative monomials using powers. This
 means that</p>
-<pre><code>expr = a^3**b**a^2**b**a**b</code></pre>
+<pre><code>expr = a**a**a**b**a**a**b**a**b</code></pre>
 <p>is internally stored as</p>
 <pre><code>NonCommutativeMultiply[a^3, b, a^2, b, a, b]</code></pre>
 <p>This means that a replacement such as</p>

@@ -1819,7 +1819,7 @@ which results in `b**b + c`, as one might expect.
 Starting with **Version 6**, `NCAlgebra` stores repeated symbols in
 noncommutative monomials using powers. This means that
 
-    expr = a^3**b**a^2**b**a**b
+    expr = a**a**a**b**a**a**b**a**b
 
 is internally stored as
 
