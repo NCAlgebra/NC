@@ -807,6 +807,18 @@ evaluates to
 
     tr[a] + tr[d]
 
+> **WARNING:** Starting with **Version 6**, the `inv` operator acts
+> mostly as a wrapper for `Power`. For example, `inv[a]` internally
+> evaluates to `Power[a, -1]`. However, `inv` is still available and
+> used to display the noncommutative inverse outside of a notebook
+> environment. Beware that `inv[a**a]` now evaluates to
+> `Power[a, -2]`, hence certain patterns may no longer work. For example:
+>
+>     NCReplace[inv[a ** a], a ** a -> b]
+>
+> would produce `inv[b]` in previous versions of `NCAlgebra` but will
+> fail in **Version 6**.
+
 ## Replace
 
 A key feature of symbolic computation is the ability to perform
@@ -838,10 +850,32 @@ returns
 
     c + tp[c]
 
+> **WARNING:** The change in internal representation introduced in
+> **Version 6**, in which repeated letters in monomials are represented
+> as powers, presents a new challenge to pattern matching for
+> `NCAlgebra` expressions. For example, the seeminlgy inocent substitution
+>
+>     NCReplaceAll[a**b**b, a**b -> c]
+>
+> which in previous versions returned `c**b` will fail in
+> **Version 6**. The reason for the failure is that `a**b**b` is now
+> internally represented as `a**Power[b, 2]`, which does not match
+> `a**b`. The command [NCReplacePowerRule](#NCReplacePowerRule) can
+> be used to make the following replacement
+>
+>     NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c]]
+>
+> return `c ** b` in **Version 6**. An alternative syntax is to call
+> `NCReplaceAll` with the option
+>
+>     NCReplaceAll[a**b**b, a**b -> c, ApplyPowerRule -> True]
+>
+> with the exact same outcome.
+
 The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
 understood in the example:
 
-    NCReplaceAll[a**b**b, a**b -> a]
+    NCReplaceAll[a**b**b, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 
@@ -849,7 +883,7 @@ that results in
 
 and
 
-    NCReplaceRepeated[a**b**b, a**b -> a]
+    NCReplaceRepeated[a**b**b, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 
@@ -864,12 +898,9 @@ See the Section [Advanced Rules and Replacement](#advanced-rules-and-replacement
 a deeper discussion on some issues involved with rules and
 replacements in `NCAlgebra`.
 
-------------------------------------------------------------------------
-
-**WARNING:** the commands `Substitute` and `Transform` have been
-deprecated in **Version 5** in favor of the above nc versions of `Replace`.
-
-------------------------------------------------------------------------
+> **WARNING:** the commands `Substitute` and `Transform` have been
+> deprecated in **Version 5** in favor of the above nc versions of
+> `Replace`.
 
 ## Polynomials
 
