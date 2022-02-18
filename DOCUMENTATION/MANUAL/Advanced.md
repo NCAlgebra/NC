@@ -84,7 +84,7 @@ Continuing with the example in the previous section, the calls
 	NCReplaceAll[c**a**b**d, rule]
 	NCReplaceAll[1 + 2 a**b**c, rule ]
 
-produces the results one would expect:
+produce the results one would expect:
 
 	c**c
 	c**c
@@ -115,6 +115,96 @@ alternative rule:
 
 which results in `b**b + c`, as one might expect.
 
+### Matching monomials with powers
+
+Starting with **Version 6**, `NCAlgebra` stores repeated symbols in
+noncommutative monomials using powers. This means that
+
+    expr = a^3**b**a^2**b**a**b
+
+is internally stored as
+
+    NonCommutativeMultiply[a^3, b, a^2, b, a, b]
+
+This means that a replacement such as
+
+    NCReplaceAll[expr, a**b -> c]
+
+will result in
+
+    a^3**b**a^2**b**c
+
+with the rule failing to match the `a**b` in the terms `a**b^2` and
+`a**b^3`. This situation might be familiar to an experienced
+Mathematica user who is a aware of the difference between structural
+pattern matching and mathematical matching[^match]. As a convenience
+for `NCAlgebra` users, **Version 6** provides the function
+[NCReplacePowerRule](#NCReplacePowerRule) that modifies a user's rule
+in order to accomplish matching of symbols in `NCAlgebra` expressions
+including powers. For example, for the same `expr` above, the
+following replacement
+
+    NCReplaceAll[expr, NCReplacePowerRule[a**b -> c]]
+
+will produce
+
+    a^2**c**a^2**b**a**b
+
+after matching `a**b` in the term `a^3**b`, and
+
+    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
+
+will produce
+
+    a^2**c**a**c^2
+
+after matching `a**b` in `a^3**b`, `a^2**b`, and `a**b`.
+
+The command `NCReplacePowerRule` works by modifying noncommutative
+monomial patterns with symbols appearing at the edges to account for
+the potential presence of `Power` in a noncommutative monomial. For
+example,
+
+    NCReplacePowerRule[a**c**b -> d]
+
+produces the modified rule
+
+    a^n_.**c**b^m_. -> a^(n-1)**d**b^(m-1)
+
+which can successfully match powers of the symbols `a` and `b`
+appearing in the monomial `a**c**b`.
+
+The application of `NCReplacePowerRule` can also be done by invoking
+the option `ApplyPowerRule` with the functions of the package
+[NCReplace](#PackageNCReplace). For example, the command
+
+    NCReplaceRepeated[expr, a**b -> c, ApplyPowerRule -> True]
+
+is the same as 
+
+    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
+
+This option can also be set globally for all calls to the `NCReplace`
+family of functions in a `NCAlgebra` session by calling
+
+    SetOptions[NCReplace, ApplyPowerRule -> True]
+
+After that, all calls to `NCReplace`, `NCReplaceAll`,
+`NCReplaceRepeated`, and related function, will done with the option
+`ApplyPowerRule -> True` automatically.
+
+To revert to the default behavior just set
+
+    SetOptions[NCReplace, ApplyPowerRule -> False]
+
+[^match]: One might have encountered this difficulty when trying to
+match a product of commutative variables in a commutative monomial
+such as
+```
+x y^2 /. x y -> z
+```
+which fails to match `x y^2` even though `x y^2` is equal to `(x y) y`.
+
 ### Trouble with `Block` and `Module`
 
 A second more esoteric issue related to substitution in `NCAlgebra`
@@ -137,7 +227,7 @@ and run
 
 	Block[{i = a}, i + m]
 
-which returns the ``expected''
+which returns the "expected"
 
 	a + a**a
 
@@ -145,7 +235,7 @@ versus
 
 	Module[{i = a}, i + m]
 
-which returns the ``surprising''
+which returns the "surprising"
 
 	a + i**i
 
@@ -193,11 +283,11 @@ Their only difference is that one is defined using a `Block` and the
 other is defined using a `Module`. The task is to apply a rule that
 *flips* the noncommutative product of their arguments, say, `x**y`,
 into `y**x`.  The problem is that only one of those definitions work
-``as expected''. Indeed, verify that
+"as expected." Indeed, verify that
 
 	G[x**y]
 
-returns the ``expected''
+returns the "expected"
 
 	y**x
 
@@ -232,7 +322,7 @@ definition:
 	  NCReplaceAll[exp, rule]
     ]
 
-then calling `H[x**y]` would have worked ``as expected'', even if for
+then calling `H[x**y]` would have worked "as expected," even if for
 the wrong reasons!
 
 Another possible "fix" is to use a delayed rule, as in:
@@ -253,7 +343,7 @@ and evaluation. Since `NCAlgebra` has to operate at a very low level
 this lack of control over evaluation is fatal. Indeed, making
 `NonCommutativeMultiply` have an attribute `Flat` will throw
 Mathematica into infinite loops in seemingly trivial noncommutative
-expression. Hey, email us if you find a way around that :)
+expressions. Hey, email us if you find a way around that :)
 
 [^argh]: By the way, I find that behavior of Mathematica's `Module`
 questionable, since something like
@@ -841,7 +931,7 @@ possible number of terms, as explaining in detail in
 	
 produces:
 
-	(a + b) ** x ** (c - d) + (a + b) ** y ** (-c + d)
+	(a + b)**x**(c - d) + (a + b)**y**(-c + d)
 
 This factorization even works with linear matrix polynomials, and is
 used by the our semidefinite programming algorithm (see Chapter
@@ -849,8 +939,8 @@ used by the our semidefinite programming algorithm (see Chapter
 matrix inequalities in the least possible number of terms. For example:
 
 	vars = {x};
-	expr = {{a ** x + x ** tp[a], b ** x, tp[c]},
-            {x ** tp[b], -1, tp[d]},
+	expr = {{a**x + x**tp[a], b**x, tp[c]},
+            {x**tp[b], -1, tp[d]},
 	        {c, d, -1}};
 	{const, lin} = NCToNCSylvester[expr, vars]
 

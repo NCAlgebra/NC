@@ -99,7 +99,7 @@ both return `True`.
 > ```
 > NonCommutativeMultiply[a, b, Power[a, 2], b]
 > ```
-> Even if you type `a**b**a**a**b`, the repeated letters get compressed
+> Even if you type `a**b**a**a**b`, the repeated symbols get compressed
 > to the compact representation with exponents. Exponents are now also
 > used to represent the noncommutative inverse. See the notes in the
 > next section.
@@ -123,24 +123,20 @@ both lead to `Id = 1` and
 
 results in `a`.
 
----
-
-**WARNING:** Since **Version 5**, `inv` no longer automatically
-distributes over noncommutative products. If this more aggressive
-behavior is desired use `SetOptions[inv, Distribute -> True]`. For
-example
-
-	SetOptions[inv, Distribute -> True]
-	inv[a**b]
-
-returns `inv[b]**inv[a]`. Conversely
-
-	SetOptions[inv, Distribute -> False]
-	inv[a**b]
-
-returns `inv[a**b]`.
-
----
+> **WARNING:** Since **Version 5**, `inv` no longer automatically
+> distributes over noncommutative products. If this more aggressive
+> behavior is desired use `SetOptions[inv, Distribute -> True]`. For
+> example
+> ```
+> SetOptions[inv, Distribute -> True]
+> inv[a**b]
+> ```
+> returns `inv[b]**inv[a]`. Conversely
+> ```
+> SetOptions[inv, Distribute -> False]
+> inv[a**b]
+> ```
+> returns `inv[a**b]`.
 
 `tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
 adjoint of symbol `x`. Like `inv`, the properties of transposes and
@@ -171,15 +167,13 @@ Similar properties hold to `aj`. Moreover
 
 return `co[a]` where `co` stands for complex-conjugate. 
 
----
+> **WARNING:** Since **Version 5** transposes (`tp`), adjoints (`aj`),
+> complex conjugates (`co`), and inverses (`inv`) in a notebook
+> environment render as $x^T$, $x^*$, $\bar{x}$, and $x^{-1}$. `tp`
+> and `aj` can also be input directly as `x^T` and `x^*`. For this
+> reason the symbol `T` is now protected in `NCAlgebra`.
 
-**WARNING:** transposes (`tp`), adjoints (`aj`), complex conjugates
-(`co`), and inverses (`inv`) in a notebook environment render as
-$x^T$, $x^*$, $\bar{x}$, and $x^{-1}$. `tp` and `aj` can also be input
-directly as `x^T` and `x^*`. For this reason the symbol `T` is now
-protected in `NCAlgebra`.
-
-A trace like operator, `tr`, was introduced in v5.0.6. It is a
+A trace like operator, `tr`, was introduced in **v5.0.6**. It is a
 commutative operator keeps its list of arguments cyclicly sorted so
 that `tr[b ** a]` evaluates to `tr[a ** b]` and that automatically
 distribute over sums so that an expression like
@@ -202,7 +196,18 @@ evaluates to
 
     tr[a] + tr[d]
 
----
+> **WARNING:** Starting with **Version 6**, the `inv` operator acts
+> mostly as a wrapper for `Power`. For example, `inv[a]` internally
+> evaluates to `Power[a, -1]`. However, `inv` is still available and
+> used to display the noncommutative inverse outside of a notebook
+> environment. Beware that `inv[a**a]` now evaluates to
+> `Power[a, -2]`, hence certain patterns may no longer work. For example:
+> ```
+> NCReplace[inv[a ** a], a ** a -> b]
+> ```
+> would produce `inv[b]` in previous versions of `NCAlgebra` but will
+> fail in **Version 6**.
+
 
 ## Replace
 
@@ -235,10 +240,32 @@ returns
 
 	c + tp[c]
 
+> **WARNING:** The change in internal representation introduced in
+> **Version 6**, in which repeated letters in monomials are represented
+> as powers, presents a new challenge to pattern matching for
+> `NCAlgebra` expressions. For example, the seeminlgy inocent substitution
+> ```
+> NCReplaceAll[a**b**b, a**b -> c]
+> ```
+> which in previous versions returned `c**b` will fail in
+> **Version 6**. The reason for the failure is that `a**b**b` is now
+> internally represented as `a**Power[b, 2]`, which does not match
+> `a**b`. The command [NCReplacePowerRule](#NCReplacePowerRule) can
+> be used to make the following replacement
+> ```
+> NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c]]
+> ```
+> return `c**b` in **Version 6**. An alternative syntax is to call
+> `NCReplaceAll` with the option
+> ```
+> NCReplaceAll[a**b**b, a**b -> c, ApplyPowerRule -> True]
+> ```
+> with the exact same outcome.
+
 The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
 understood in the example:
 
-	NCReplaceAll[a**b**b, a**b -> a]
+	NCReplaceAll[a**b**b, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 
@@ -246,7 +273,7 @@ that results in
 
 and
 
-	NCReplaceRepeated[a**b**b, a**b -> a]
+	NCReplaceRepeated[a**b**b, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 
@@ -261,12 +288,10 @@ See the Section [Advanced Rules and Replacement](#AdvancedReplace) for
 a deeper discussion on some issues involved with rules and
 replacements in `NCAlgebra`.
 
----
+> **WARNING:** The commands `Substitute` and `Transform` have been
+> deprecated in **Version 5** in favor of the above nc versions of
+> `Replace`. 
 
-**WARNING:** the commands `Substitute` and `Transform` have been
-deprecated in **Version 5** in favor of the above nc versions of `Replace`.
-
----
 
 ## Polynomials
 
@@ -620,8 +645,8 @@ Note that products of nc symbols appearing in the
 matrices are multiplied using `**`. Compare that with the standard
 `Dot` (`.`) operator.
 
-**WARNING:** `NCDot` replaces `MatMult`, which is still available for
-  backward compatibility but will be deprecated in future releases.
+> **WARNING:** `NCDot` replaces `MatMult`, which is still available for
+>  backward compatibility but will be deprecated in future releases.
 
 There are many new improvements with **Version 5**. For instance,
 operators `tp`, `aj`, and `co` now operate directly over

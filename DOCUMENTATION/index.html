@@ -124,8 +124,11 @@ often fail</a></li>
 <li><a href="#the-fix-is-ncreplace"><span
 class="toc-section-number">6.1.2</span> The fix is
 <code>NCReplace</code></a></li>
+<li><a href="#matching-monomials-with-powers"><span
+class="toc-section-number">6.1.3</span> Matching monomials with
+powers</a></li>
 <li><a href="#trouble-with-block-and-module"><span
-class="toc-section-number">6.1.3</span> Trouble with <code>Block</code>
+class="toc-section-number">6.1.4</span> Trouble with <code>Block</code>
 and <code>Module</code></a></li>
 </ul></li>
 <li><a href="#AdvancedMatrices"><span
@@ -1181,7 +1184,7 @@ session.</p>
 are represented with exponents. For instance, the same monomial above is
 now represented as</p>
 <pre><code>NonCommutativeMultiply[a, b, Power[a, 2], b]</code></pre>
-<p>Even if you type <code>a**b**a**a**b</code>, the repeated letters get
+<p>Even if you type <code>a**b**a**a**b</code>, the repeated symbols get
 compressed to the compact representation with exponents. Exponents are
 now also used to represent the noncommutative inverse. See the notes in
 the next section.</p>
@@ -1200,7 +1203,7 @@ inv[a**b]**a**b</code></pre>
 <p>both lead to <code>Id = 1</code> and</p>
 <pre><code>a**b**inv[b]</code></pre>
 <p>results in <code>a</code>.</p>
-<hr />
+<blockquote>
 <p><strong>WARNING:</strong> Since <strong>Version 5</strong>,
 <code>inv</code> no longer automatically distributes over noncommutative
 products. If this more aggressive behavior is desired use
@@ -1211,7 +1214,7 @@ inv[a**b]</code></pre>
 <pre><code>SetOptions[inv, Distribute -&gt; False]
 inv[a**b]</code></pre>
 <p>returns <code>inv[a**b]</code>.</p>
-<hr />
+</blockquote>
 <p><code>tp[x]</code> denotes the transpose of symbol <code>x</code> and
 <code>aj[x]</code> denotes the adjoint of symbol <code>x</code>. Like
 <code>inv</code>, the properties of transposes and adjoints that
@@ -1232,21 +1235,23 @@ the identity. For example <code>tp[5] == 5</code>,
 tp[aj[a]]</code></pre>
 <p>return <code>co[a]</code> where <code>co</code> stands for
 complex-conjugate.</p>
-<hr />
-<p><strong>WARNING:</strong> transposes (<code>tp</code>), adjoints
-(<code>aj</code>), complex conjugates (<code>co</code>), and inverses
-(<code>inv</code>) in a notebook environment render as <span
-class="math inline">\(x^T\)</span>, <span
+<blockquote>
+<p><strong>WARNING:</strong> Since <strong>Version 5</strong> transposes
+(<code>tp</code>), adjoints (<code>aj</code>), complex conjugates
+(<code>co</code>), and inverses (<code>inv</code>) in a notebook
+environment render as <span class="math inline">\(x^T\)</span>, <span
 class="math inline">\(x^*\)</span>, <span
 class="math inline">\(\bar{x}\)</span>, and <span
 class="math inline">\(x^{-1}\)</span>. <code>tp</code> and
 <code>aj</code> can also be input directly as <code>x^T</code> and
 <code>x^*</code>. For this reason the symbol <code>T</code> is now
 protected in <code>NCAlgebra</code>.</p>
-<p>A trace like operator, <code>tr</code>, was introduced in v5.0.6. It
-is a commutative operator keeps its list of arguments cyclicly sorted so
-that <code>tr[b ** a]</code> evaluates to <code>tr[a ** b]</code> and
-that automatically distribute over sums so that an expression like</p>
+</blockquote>
+<p>A trace like operator, <code>tr</code>, was introduced in
+<strong>v5.0.6</strong>. It is a commutative operator keeps its list of
+arguments cyclicly sorted so that <code>tr[b ** a]</code> evaluates to
+<code>tr[a ** b]</code> and that automatically distribute over sums so
+that an expression like</p>
 <pre><code>tr[a ** b - b ** a]</code></pre>
 <p>always simplifies to zero. Also <code>b ** a ** tr[b ** a]</code>
 simpplifies to</p>
@@ -1259,7 +1264,19 @@ example,</p>
 <pre><code>NCMatrixExpand[tr[{{a,b},{c,d}}]]</code></pre>
 <p>evaluates to</p>
 <pre><code>tr[a] + tr[d]</code></pre>
-<hr />
+<blockquote>
+<p><strong>WARNING:</strong> Starting with <strong>Version 6</strong>,
+the <code>inv</code> operator acts mostly as a wrapper for
+<code>Power</code>. For example, <code>inv[a]</code> internally
+evaluates to <code>Power[a, -1]</code>. However, <code>inv</code> is
+still available and used to display the noncommutative inverse outside
+of a notebook environment. Beware that <code>inv[a**a]</code> now
+evaluates to <code>Power[a, -2]</code>, hence certain patterns may no
+longer work. For example:</p>
+<pre><code>NCReplace[inv[a ** a], a ** a -&gt; b]</code></pre>
+<p>would produce <code>inv[b]</code> in previous versions of
+<code>NCAlgebra</code> but will fail in <strong>Version 6</strong>.</p>
+</blockquote>
 <h2 data-number="5.3" id="replace"><span
 class="header-section-number">5.3</span> Replace</h2>
 <p>A key feature of symbolic computation is the ability to perform
@@ -1281,13 +1298,33 @@ create symmetric and self adjoint versions of your rules:</p>
 <pre><code>NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b**a -&gt; c]]</code></pre>
 <p>returns</p>
 <pre><code>c + tp[c]</code></pre>
+<blockquote>
+<p><strong>WARNING:</strong> The change in internal representation
+introduced in <strong>Version 6</strong>, in which repeated letters in
+monomials are represented as powers, presents a new challenge to pattern
+matching for <code>NCAlgebra</code> expressions. For example, the
+seeminlgy inocent substitution</p>
+<pre><code>NCReplaceAll[a**b**b, a**b -&gt; c]</code></pre>
+<p>which in previous versions returned <code>c**b</code> will fail in
+<strong>Version 6</strong>. The reason for the failure is that
+<code>a**b**b</code> is now internally represented as
+<code>a**Power[b, 2]</code>, which does not match <code>a**b</code>. The
+command <a href="#NCReplacePowerRule">NCReplacePowerRule</a> can be used
+to make the following replacement</p>
+<pre><code>NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
+<p>return <code>c**b</code> in <strong>Version 6</strong>. An
+alternative syntax is to call <code>NCReplaceAll</code> with the
+option</p>
+<pre><code>NCReplaceAll[a**b**b, a**b -&gt; c, ApplyPowerRule -&gt; True]</code></pre>
+<p>with the exact same outcome.</p>
+</blockquote>
 <p>The difference between <code>NCReplaceAll</code> and
 <code>NCReplaceRepeated</code> can be understood in the example:</p>
-<pre><code>NCReplaceAll[a**b**b, a**b -&gt; a]</code></pre>
+<pre><code>NCReplaceAll[a**b**b, a**b -&gt; a, ApplyPowerRule -&gt; True]</code></pre>
 <p>that results in</p>
 <pre><code>a**b</code></pre>
 <p>and</p>
-<pre><code>NCReplaceRepeated[a**b**b, a**b -&gt; a]</code></pre>
+<pre><code>NCReplaceRepeated[a**b**b, a**b -&gt; a, ApplyPowerRule -&gt; True]</code></pre>
 <p>that results in</p>
 <pre><code>a</code></pre>
 <p>Beside <code>NCReplaceAll</code> and <code>NCReplaceRepeated</code>
@@ -1299,12 +1336,12 @@ and <code>ReplaceList</code>. Note that one rarely uses
 <p>See the Section <a href="#AdvancedReplace">Advanced Rules and
 Replacement</a> for a deeper discussion on some issues involved with
 rules and replacements in <code>NCAlgebra</code>.</p>
-<hr />
-<p><strong>WARNING:</strong> the commands <code>Substitute</code> and
+<blockquote>
+<p><strong>WARNING:</strong> The commands <code>Substitute</code> and
 <code>Transform</code> have been deprecated in <strong>Version
 5</strong> in favor of the above nc versions of
 <code>Replace</code>.</p>
-<hr />
+</blockquote>
 <h2 data-number="5.4" id="polynomials"><span
 class="header-section-number">5.4</span> Polynomials</h2>
 <p>The command <code>NCExpand</code> expands noncommutative products.
@@ -1556,9 +1593,11 @@ NCDot[m1, m2]</code></pre>
 <p>Note that products of nc symbols appearing in the matrices are
 multiplied using <code>**</code>. Compare that with the standard
 <code>Dot</code> (<code>.</code>) operator.</p>
+<blockquote>
 <p><strong>WARNING:</strong> <code>NCDot</code> replaces
 <code>MatMult</code>, which is still available for backward
 compatibility but will be deprecated in future releases.</p>
+</blockquote>
 <p>There are many new improvements with <strong>Version 5</strong>. For
 instance, operators <code>tp</code>, <code>aj</code>, and
 <code>co</code> now operate directly over matrices. That is</p>
@@ -1980,7 +2019,7 @@ class="header-section-number">6.1.2</span> The fix is
 NCReplaceAll[ c**a**b, rule ]
 NCReplaceAll[c**a**b**d, rule]
 NCReplaceAll[1 + 2 a**b**c, rule ]</code></pre>
-<p>produces the results one would expect:</p>
+<p>produce the results one would expect:</p>
 <pre><code>c**c
 c**c
 c**c**d
@@ -2004,8 +2043,68 @@ which is <code>Times[2, a]</code>. Of course, in this case a simple
 solution is to use the alternative rule:</p>
 <pre><code>NCReplace[2 a**b + c, a -&gt; b / 2]</code></pre>
 <p>which results in <code>b**b + c</code>, as one might expect.</p>
-<h3 data-number="6.1.3" id="trouble-with-block-and-module"><span
-class="header-section-number">6.1.3</span> Trouble with
+<h3 data-number="6.1.3" id="matching-monomials-with-powers"><span
+class="header-section-number">6.1.3</span> Matching monomials with
+powers</h3>
+<p>Starting with <strong>Version 6</strong>, <code>NCAlgebra</code>
+stores repeated symbols in noncommutative monomials using powers. This
+means that</p>
+<pre><code>expr = a^3**b**a^2**b**a**b</code></pre>
+<p>is internally stored as</p>
+<pre><code>NonCommutativeMultiply[a^3, b, a^2, b, a, b]</code></pre>
+<p>This means that a replacement such as</p>
+<pre><code>NCReplaceAll[expr, a**b -&gt; c]</code></pre>
+<p>will result in</p>
+<pre><code>a^3**b**a^2**b**c</code></pre>
+<p>with the rule failing to match the <code>a**b</code> in the terms
+<code>a**b^2</code> and <code>a**b^3</code>. This situation might be
+familiar to an experienced Mathematica user who is a aware of the
+difference between structural pattern matching and mathematical
+matching<a href="#fn5" class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a>. As a convenience for
+<code>NCAlgebra</code> users, <strong>Version 6</strong> provides the
+function <a href="#NCReplacePowerRule">NCReplacePowerRule</a> that
+modifies a user’s rule in order to accomplish matching of symbols in
+<code>NCAlgebra</code> expressions including powers. For example, for
+the same <code>expr</code> above, the following replacement</p>
+<pre><code>NCReplaceAll[expr, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
+<p>will produce</p>
+<pre><code>a^2**c**a^2**b**a**b</code></pre>
+<p>after matching <code>a**b</code> in the term <code>a^3**b</code>,
+and</p>
+<pre><code>NCReplaceRepeated[expr, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
+<p>will produce</p>
+<pre><code>a^2**c**a**c^2</code></pre>
+<p>after matching <code>a**b</code> in <code>a^3**b</code>,
+<code>a^2**b</code>, and <code>a**b</code>.</p>
+<p>The command <code>NCReplacePowerRule</code> works by modifying
+noncommutative monomial patterns with symbols appearing at the edges to
+account for the potential presence of <code>Power</code> in a
+noncommutative monomial. For example,</p>
+<pre><code>NCReplacePowerRule[a**c**b -&gt; d]</code></pre>
+<p>produces the modified rule</p>
+<pre><code>a^n_.**c**b^m_. -&gt; a^(n-1)**d**b^(m-1)</code></pre>
+<p>which can successfully match powers of the symbols <code>a</code> and
+<code>b</code> appearing in the monomial <code>a**c**b</code>.</p>
+<p>The application of <code>NCReplacePowerRule</code> can also be done
+by invoking the option <code>ApplyPowerRule</code> with the functions of
+the package <a href="#PackageNCReplace">NCReplace</a>. For example, the
+command</p>
+<pre><code>NCReplaceRepeated[expr, a**b -&gt; c, ApplyPowerRule -&gt; True]</code></pre>
+<p>is the same as</p>
+<pre><code>NCReplaceRepeated[expr, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
+<p>This option can also be set globally for all calls to the
+<code>NCReplace</code> family of functions in a <code>NCAlgebra</code>
+session by calling</p>
+<pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; True]</code></pre>
+<p>After that, all calls to <code>NCReplace</code>,
+<code>NCReplaceAll</code>, <code>NCReplaceRepeated</code>, and related
+function, will done with the option
+<code>ApplyPowerRule -&gt; True</code> automatically.</p>
+<p>To revert to the default behavior just set</p>
+<pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; False]</code></pre>
+<h3 data-number="6.1.4" id="trouble-with-block-and-module"><span
+class="header-section-number">6.1.4</span> Trouble with
 <code>Block</code> and <code>Module</code></h3>
 <p>A second more esoteric issue related to substitution in
 <code>NCAlgebra</code> does not have a clean solution. It is also one
@@ -2024,11 +2123,11 @@ documentation</a>. Let</p>
 <pre><code>m = i^2</code></pre>
 <p>and run</p>
 <pre><code>Block[{i = a}, i + m]</code></pre>
-<p>which returns the ``expected’’</p>
+<p>which returns the “expected”</p>
 <pre><code>a + a**a</code></pre>
 <p>versus</p>
 <pre><code>Module[{i = a}, i + m]</code></pre>
-<p>which returns the ``surprising’’</p>
+<p>which returns the “surprising”</p>
 <pre><code>a + i**i</code></pre>
 <p>The reason for this behavior is that <code>Block</code> effectively
 evaluates <code>i</code> as a <em>local variable</em> and evaluates
@@ -2068,9 +2167,9 @@ G[exp_] := Block[
 The task is to apply a rule that <em>flips</em> the noncommutative
 product of their arguments, say, <code>x**y</code>, into
 <code>y**x</code>. The problem is that only one of those definitions
-work ``as expected’’. Indeed, verify that</p>
+work “as expected.” Indeed, verify that</p>
 <pre><code>G[x**y]</code></pre>
-<p>returns the ``expected’’</p>
+<p>returns the “expected”</p>
 <pre><code>y**x</code></pre>
 <p>whereas</p>
 <pre><code>F[x**y]</code></pre>
@@ -2080,8 +2179,8 @@ work ``as expected’’. Indeed, verify that</p>
 the catastrophic failure of the definition of <code>F</code>, which is
 inside a <code>Module</code>, is that the letters <code>aa</code> and
 <code>bb</code> appearing in <code>rule</code> are <em>not treated as
-the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn5"
-class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.
+the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn6"
+class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.
 For this reason, the right-hand side of the rule <code>rule</code>
 involves the global symbols <code>aa</code> and <code>bb</code>, which
 are, in the absence of a declaration to the contrary, commutative. On
@@ -2100,7 +2199,7 @@ single small cap roman letters as in the definition:</p>
   rule = a_**b_ -&gt; b**a];
   NCReplaceAll[exp, rule]
 ]</code></pre>
-<p>then calling <code>H[x**y]</code> would have worked ``as expected’’,
+<p>then calling <code>H[x**y]</code> would have worked “as expected,”
 even if for the wrong reasons!</p>
 <p>Another possible “fix” is to use a delayed rule, as in:</p>
 <pre><code>H[exp_] := Module[
@@ -2133,8 +2232,8 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <p>evaluation takes place returning</p>
 <pre><code>{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}</code></pre>
 <p>which is what would have arisen from calling
-<code>NCDot[m1,m2]</code><a href="#fn6" class="footnote-ref" id="fnref6"
-role="doc-noteref"><sup>6</sup></a>. Likewise</p>
+<code>NCDot[m1,m2]</code><a href="#fn7" class="footnote-ref" id="fnref7"
+role="doc-noteref"><sup>7</sup></a>. Likewise</p>
 <pre><code>inv[m1]</code></pre>
 <p>results in</p>
 <pre><code>inv[{{a, b}, {c, d}}]</code></pre>
@@ -2545,15 +2644,15 @@ expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**
 {const, lin} = NCToNCSylvester[expr, vars];
 NCSylvesterToNC[{const, lin}]</code></pre>
 <p>produces:</p>
-<pre><code>(a + b) ** x ** (c - d) + (a + b) ** y ** (-c + d)</code></pre>
+<pre><code>(a + b)**x**(c - d) + (a + b)**y**(-c + d)</code></pre>
 <p>This factorization even works with linear matrix polynomials, and is
 used by the our semidefinite programming algorithm (see Chapter <a
 href="#SemidefiniteProgramming">Semidefinite Programming</a>) to factor
 linear matrix inequalities in the least possible number of terms. For
 example:</p>
 <pre><code>vars = {x};
-expr = {{a ** x + x ** tp[a], b ** x, tp[c]},
-        {x ** tp[b], -1, tp[d]},
+expr = {{a**x + x**tp[a], b**x, tp[c]},
+        {x**tp[b], -1, tp[d]},
         {c, d, -1}};
 {const, lin} = NCToNCSylvester[expr, vars]</code></pre>
 <p>result in:</p>
@@ -8280,10 +8379,17 @@ control over execution and evaluation. Since <code>NCAlgebra</code> has
 to operate at a very low level this lack of control over evaluation is
 fatal. Indeed, making <code>NonCommutativeMultiply</code> have an
 attribute <code>Flat</code> will throw Mathematica into infinite loops
-in seemingly trivial noncommutative expression. Hey, email us if you
+in seemingly trivial noncommutative expressions. Hey, email us if you
 find a way around that :)<a href="#fnref4" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>By the way, I find that behavior of
+<li id="fn5" role="doc-endnote"><p>One might have encountered this
+difficulty when trying to match a product of commutative variables in a
+commutative monomial such as</p>
+<pre><code>x y^2 /. x y -&gt; z</code></pre>
+<p>which fails to match <code>x y^2</code> even though
+<code>x y^2</code> is equal to <code>(x y) y</code>.<a href="#fnref5"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>By the way, I find that behavior of
 Mathematica’s <code>Module</code> questionable, since something like</p>
 <pre><code>F[exp_] := Module[{aa, bb},
   SetNonCommutative[aa, bb];
@@ -8291,10 +8397,10 @@ Mathematica’s <code>Module</code> questionable, since something like</p>
 ]</code></pre>
 <p>would not fail to treat <code>aa</code> and <code>bb</code> locally.
 It is their appearance in a rule that triggers the mostly odd
-behavior.<a href="#fnref5" class="footnote-back"
+behavior.<a href="#fnref6" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote"><p>Formerly
-<code>MatMult[m1,m2]</code>.<a href="#fnref6" class="footnote-back"
+<li id="fn7" role="doc-endnote"><p>Formerly
+<code>MatMult[m1,m2]</code>.<a href="#fnref7" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
