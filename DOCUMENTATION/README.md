@@ -734,24 +734,20 @@ both lead to `Id = 1` and
 
 results in `a`.
 
-------------------------------------------------------------------------
-
-**WARNING:** Since **Version 5**, `inv` no longer automatically
-distributes over noncommutative products. If this more aggressive
-behavior is desired use `SetOptions[inv, Distribute -> True]`. For
-example
-
-    SetOptions[inv, Distribute -> True]
-    inv[a**b]
-
-returns `inv[b]**inv[a]`. Conversely
-
-    SetOptions[inv, Distribute -> False]
-    inv[a**b]
-
-returns `inv[a**b]`.
-
-------------------------------------------------------------------------
+> **WARNING:** Since **Version 5**, `inv` no longer automatically
+> distributes over noncommutative products. If this more aggressive
+> behavior is desired use `SetOptions[inv, Distribute -> True]`. For
+> example
+>
+>     SetOptions[inv, Distribute -> True]
+>     inv[a**b]
+>
+> returns `inv[b]**inv[a]`. Conversely
+>
+>     SetOptions[inv, Distribute -> False]
+>     inv[a**b]
+>
+> returns `inv[a**b]`.
 
 `tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
 adjoint of symbol `x`. Like `inv`, the properties of transposes and
@@ -782,15 +778,13 @@ Similar properties hold to `aj`. Moreover
 
 return `co[a]` where `co` stands for complex-conjugate.
 
-------------------------------------------------------------------------
+> **WARNING:** since **Version 5** transposes (`tp`), adjoints (`aj`),
+> complex conjugates (`co`), and inverses (`inv`) in a notebook
+> environment render as ![x^T](https://render.githubusercontent.com/render/math?math=x%5ET&mode=inline), ![x^\*](https://render.githubusercontent.com/render/math?math=x%5E%2A&mode=inline), ![\\bar{x}](https://render.githubusercontent.com/render/math?math=%5Cbar%7Bx%7D&mode=inline), and ![x^{-1}](https://render.githubusercontent.com/render/math?math=x%5E%7B-1%7D&mode=inline). `tp`
+> and `aj` can also be input directly as `x^T` and `x^*`. For this
+> reason the symbol `T` is now protected in `NCAlgebra`.
 
-**WARNING:** transposes (`tp`), adjoints (`aj`), complex conjugates
-(`co`), and inverses (`inv`) in a notebook environment render as
-![x^T](https://render.githubusercontent.com/render/math?math=x%5ET&mode=inline), ![x^\*](https://render.githubusercontent.com/render/math?math=x%5E%2A&mode=inline), ![\\bar{x}](https://render.githubusercontent.com/render/math?math=%5Cbar%7Bx%7D&mode=inline), and ![x^{-1}](https://render.githubusercontent.com/render/math?math=x%5E%7B-1%7D&mode=inline). `tp` and `aj` can also be input
-directly as `x^T` and `x^*`. For this reason the symbol `T` is now
-protected in `NCAlgebra`.
-
-A trace like operator, `tr`, was introduced in v5.0.6. It is a
+A trace like operator, `tr`, was introduced in **v5.0.6**. It is a
 commutative operator keeps its list of arguments cyclicly sorted so
 that `tr[b ** a]` evaluates to `tr[a ** b]` and that automatically
 distribute over sums so that an expression like
@@ -812,8 +806,6 @@ with noncommutative entries. For example,
 evaluates to
 
     tr[a] + tr[d]
-
-------------------------------------------------------------------------
 
 ## Replace
 
