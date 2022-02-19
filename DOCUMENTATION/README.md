@@ -371,7 +371,7 @@ All rights reserved.
         -   [<span class="toc-section-number">17.3.11</span> TestDescriptorRealization](#testdescriptorrealization)
         -   [<span class="toc-section-number">17.3.12</span> PinnedQ](#pinnedq)
         -   [<span class="toc-section-number">17.3.13</span> PinningSpace](#pinningspace)
--   [<span class="toc-section-number">18</span> References](#references)
+-   [References](#references)
 
 **NCAlgebra** is distributed under the terms of the BSD License:
 
