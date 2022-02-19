@@ -30,7 +30,8 @@ Clear[aj, tp, rt, inv, co,
       NCExpandExponents,
       BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative,
-      SNC, NCExpand, NCE, NCValueQ];
+      SNC, NCExpand, NCE,
+      NCValueQ, NCToList];
 
 CommutativeQ::Commutative = "Tried to set the `1` \"`2`\" to be commutative.";
 CommutativeQ::NonCommutative = "Tried to set the `1` \"`2`\" to be noncommutative.";
@@ -206,6 +207,11 @@ Begin[ "`Private`" ]
     NonCommutativeMultiply[b,Power[NonCommutativeMultiply[a],n+1],c];
   NonCommutativeMultiply[b___,a__,NonCommutativeMultiply[a__]^n_.,c___] :=
     NonCommutativeMultiply[b,Power[NonCommutativeMultiply[a],n+1],c];
+
+  (* Convert noncommutative product into list expanding powers *)
+  NCToList[l_NonCommutativeMultiply] :=
+    Flatten[(List @@ l) /. Power[x_,n_?Positive] :> Table[x, {n}]];
+  NCToList[expr_] := NCToList[ExpandNonCommutativeMultiply[expr]];
 
   (* Identity *)
   (* MAURICIO BUG: 07/07/2016
