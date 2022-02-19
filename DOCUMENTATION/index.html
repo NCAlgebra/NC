@@ -14,6 +14,25 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
   <link rel="stylesheet" href="base.css" />
   <script
@@ -882,8 +901,7 @@ PinnedQ</a></li>
 class="toc-section-number">17.3.13</span> PinningSpace</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#references"><span class="toc-section-number">18</span>
-References</a></li>
+<li><a href="#references">References</a></li>
 </ul>
 </nav>
 <p><strong>NCAlgebra</strong> is distributed under the terms of the BSD
@@ -2647,9 +2665,8 @@ variables.</p>
 <p>Perhaps the most useful consequence of the above factorization is the
 possibility of producing a linear polynomial which has the smallest
 possible number of terms, as explaining in detail in <span
-class="citation"
-data-cites="oliveira:SSP:2012">[@oliveira:SSP:2012]</span>. This is done
-automatically by <a
+class="citation" data-cites="oliveira:SSP:2012">(Oliveira 2012)</span>.
+This is done automatically by <a
 href="#NCSylvesterToNC"><code>NCSylvesterToNC</code></a>. For
 example</p>
 <pre><code>vars = {x, y};
@@ -2671,9 +2688,8 @@ expr = {{a**x + x**tp[a], b**x, tp[c]},
 <p>result in:</p>
 <pre><code>const = SparseArray[&lt; 6 &gt;, {3, 3}]
 lin = &lt;|x -&gt; {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[&lt; 4 &gt;, {9, 9}]}|&gt;</code></pre>
-<p>See <span class="citation"
-data-cites="oliveira:SSP:2012">[@oliveira:SSP:2012]</span> for details
-on the structure of the constant array <span
+<p>See <span class="citation" data-cites="oliveira:SSP:2012">(Oliveira
+2012)</span> for details on the structure of the constant array <span
 class="math inline">\(F\)</span> in this case.</p>
 <h1 data-number="7" id="NCGB"><span
 class="header-section-number">7</span> Noncommutative Gröbner Basis</h1>
@@ -7670,8 +7686,8 @@ divide a vector by an entry;</li>
 <li><code>PrintSPolynomials</code> (<code>False</code>);</li>
 </ul>
 <p>The algorithm is based on <span class="citation"
-data-cites="mora:ICN:1994">[@mora:ICN:1994]</span> and uses the
-terminology there.</p>
+data-cites="mora:ICN:1994">(Mora 1994)</span> and uses the terminology
+there.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>.</p>
 <h2 data-number="15.3" id="PackageNCGB"><span
 class="header-section-number">15.3</span> NCGB</h2>
@@ -8393,8 +8409,29 @@ class="header-section-number">17.3.13</span> PinningSpace</h3>
 <p><code>PinningSpace[Pencil_,Unknowns_]</code> returns a matrix whose
 columns span the pinning space of <code>Pencil</code>. Generally, either
 an empty matrix or a d-by-1 matrix (vector).</p>
-<h1 data-number="18" id="references"><span
-class="header-section-number">18</span> References</h1>
+<h1 class="unnumbered" id="references">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-camino:MIS:2003" class="csl-entry" role="doc-biblioentry">
+Camino, Juan F., John William Helton, Robert E. Skelton, and Jieping Ye.
+2003. <span>“<span class="nocase">Matrix Inequalities: a Symbolic
+Procedure to Determine Convexity Automatically</span>.”</span>
+<em>Integral Equation and Operator Theory</em> 46 (4): 399–454.
+</div>
+<div id="ref-mora:ICN:1994" class="csl-entry" role="doc-biblioentry">
+Mora, Teo. 1994. <span>“An Introduction to Commutative and
+Noncommutative Groebner Bases.”</span> <em>Theoretical Computer
+Science</em> 134: 131–73.
+</div>
+<div id="ref-oliveira:SSP:2012" class="csl-entry"
+role="doc-biblioentry">
+Oliveira, Mauricio C. de. 2012. <span>“<span
+class="nocase">Simplification of symbolic polynomials on non-commutative
+variables</span>.”</span> <em>Linear Algebra and Its Applications</em>
+437 (7): 1734–48. <a
+href="https://doi.org/10.1016/j.laa.2012.05.015">https://doi.org/10.1016/j.laa.2012.05.015</a>.
+</div>
+</div>
 <section class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
@@ -8417,7 +8454,7 @@ href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>This is in contrast with the
 commutative <span class="math inline">\(x^4\)</span> which is convex
 everywhere. See <span class="citation"
-data-cites="camino:MIS:2003">[@camino:MIS:2003]</span> for details.<a
+data-cites="camino:MIS:2003">(Camino et al. 2003)</span> for details.<a
 href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4" role="doc-endnote"><p>The reason is that making an operator
 <code>Flat</code> is a convenience that comes with a price: lack of
