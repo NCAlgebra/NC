@@ -1,6 +1,6 @@
 # The NCAlgebra Suite
 
-*Version 5.0.6*
+*Version 6.0.0*
 
 ## Authors
 

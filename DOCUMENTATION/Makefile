@@ -82,7 +82,7 @@ MANUAL = MANUAL/Preamble.md \
 
 doc: NCDocument.pdf index.html README.md
 
-README.md: $(MANUAL)
+README.md: $(MANUAL) MANUAL/Cover.md
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
              --bibliography references.bib \
 	     --filter makeindex.py \
