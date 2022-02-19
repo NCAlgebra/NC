@@ -941,13 +941,15 @@ class="header-section-number">2.1</span> Version 6.0.0</h2>
 <li><p>Changed cannonical representation of noncommutative expressions
 to allow for powers to be present in
 <code>NonCommutativeMultiply</code>.</p>
+<blockquote>
 <p><strong>WARNING:</strong> THIS IS A BREAKING CHANGE THAT CAN AFFECT
 EXISTING PROGRAMS USING NCALGEBRA. THE MOST NOTABLE LIKELY CONSTRUCTION
 THAT IS AFFECTED BY THIS CHANGE IS THE APPLICATION OF RULES BASED ON
 PATTERN MATCHING, WHICH NOW NEED TO EXPLICITLY TAKE INTO ACCOUNT THE
 PRESENCE OF EXPONENTS. SEE MANUAL FOR DETAILS ON HOW TO MITIGATE THE
 IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE BEEN REWRITTEN TO
-ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.</p></li>
+ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.</p>
+</blockquote></li>
 <li><p>Streamlined rules for <code>NCSimplifyRational</code>.</p></li>
 <li><p><code>NonCommutativeMultiply</code>: new function
 <code>NCExpandExponents</code>.</p></li>
