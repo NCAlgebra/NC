@@ -1,14 +1,3 @@
----
-author:
-- J. William Helton
-- Mauricio C. de Oliveira
-bibliography: references.bib
-date:
-- with earlier contributions by Bob Miller & Mark Stankus
-subtitle: Version 6.0.0
-title: The NCAlgebra Suite
----
-
 # The NCAlgebra Suite
 
 *Version 6.0.0*
