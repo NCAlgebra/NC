@@ -26,6 +26,7 @@ Members are:
 * [EndCommuteEverything](#EndCommuteEverything)
 * [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
 * [NCExpandExponents](#NCExpandExponents)
+* [NCToList](#NCToList)
 
 Aliases are:
 
@@ -237,7 +238,7 @@ See also:
 
 ### NCExpandExponents {#NCExpandExponents}
 
-`NCExpandExponents[expr]` expands out powers of monomials appearing in `expr`.
+`NCExpandExponents[expr]` expands out powers of the monomials appearing in `expr`.
 
 For example
 
@@ -252,5 +253,29 @@ symbols or other expressions are not expanded using
 `NCExpandExponents`.
 
 See also:
+[NCToList](#NCToList)
 [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
 [NCExpand](#NCExpand), [NCE](#NCE).
+
+### NCToList {#NCToList}
+
+`NCToList[expr]` produces a list with the symbols appearing in
+monomial `expr`. If `expr` is not a monomial it remains
+unevaluated. Powers of symbols are expanded before the list being
+produced.
+
+For example
+
+    NCToList[a**b**a^2]
+
+returns
+
+    {a,b,a,a}
+
+See also:
+[NCExpandExponents](#NCExpandExponents),
+[ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
+[NCExpand](#NCExpand), [NCE](#NCE).
+
+
+

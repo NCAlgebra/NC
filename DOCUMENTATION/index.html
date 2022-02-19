@@ -308,6 +308,8 @@ NCExpand</a></li>
 NCE</a></li>
 <li><a href="#NCExpandExponents"><span
 class="toc-section-number">11.1.25</span> NCExpandExponents</a></li>
+<li><a href="#NCToList"><span class="toc-section-number">11.1.26</span>
+NCToList</a></li>
 </ul></li>
 <li><a href="#PackageNCTr"><span class="toc-section-number">11.2</span>
 NCTr</a>
@@ -3906,6 +3908,7 @@ noncommutative functionality to Mathematica’s native
 <li><a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a></li>
 <li><a href="#NCExpandExponents">NCExpandExponents</a></li>
+<li><a href="#NCToList">NCToList</a></li>
 </ul>
 <p>Aliases are:</p>
 <ul>
@@ -4110,8 +4113,8 @@ href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCExpand">NCExpand</a>.</p>
 <h3 data-number="11.1.25" id="NCExpandExponents"><span
 class="header-section-number">11.1.25</span> NCExpandExponents</h3>
-<p><code>NCExpandExponents[expr]</code> expands out powers of monomials
-appearing in <code>expr</code>.</p>
+<p><code>NCExpandExponents[expr]</code> expands out powers of the
+monomials appearing in <code>expr</code>.</p>
 <p>For example</p>
 <pre><code>NCExpandExponents[a**(b**c)^2**(c+d)]</code></pre>
 <p>returns</p>
@@ -4119,7 +4122,20 @@ appearing in <code>expr</code>.</p>
 <p><code>NCExpandExponents</code> only expands powers of monomials.
 Powers of symbols or other expressions are not expanded using
 <code>NCExpandExponents</code>.</p>
-<p>See also: <a
+<p>See also: <a href="#NCToList">NCToList</a> <a
+href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
+<a href="#NCExpand">NCExpand</a>, <a href="#NCE">NCE</a>.</p>
+<h3 data-number="11.1.26" id="NCToList"><span
+class="header-section-number">11.1.26</span> NCToList</h3>
+<p><code>NCToList[expr]</code> produces a list with the symbols
+appearing in monomial <code>expr</code>. If <code>expr</code> is not a
+monomial it remains unevaluated. Powers of symbols are expanded before
+the list being produced.</p>
+<p>For example</p>
+<pre><code>NCToList[a**b**a^2]</code></pre>
+<p>returns</p>
+<pre><code>{a,b,a,a}</code></pre>
+<p>See also: <a href="#NCExpandExponents">NCExpandExponents</a>, <a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCExpand">NCExpand</a>, <a href="#NCE">NCE</a>.</p>
 <h2 data-number="11.2" id="PackageNCTr"><span

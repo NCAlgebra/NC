@@ -136,6 +136,7 @@ All rights reserved.
         -   [<span class="toc-section-number">11.1.23</span> NCExpand](#ncexpand)
         -   [<span class="toc-section-number">11.1.24</span> NCE](#nce)
         -   [<span class="toc-section-number">11.1.25</span> NCExpandExponents](#ncexpandexponents)
+        -   [<span class="toc-section-number">11.1.26</span> NCToList](#nctolist)
     -   [<span class="toc-section-number">11.2</span> NCTr](#nctr)
         -   [<span class="toc-section-number">11.2.1</span> tr](#tr)
         -   [<span class="toc-section-number">11.2.2</span> SortCyclicPermutation](#sortcyclicpermutation)
@@ -4031,6 +4032,7 @@ Members are:
 -   [EndCommuteEverything](#endcommuteeverything)
 -   [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
 -   [NCExpandExponents](#ncexpandexponents)
+-   [NCToList](#nctolist)
 
 Aliases are:
 
@@ -4242,7 +4244,7 @@ See also:
 
 ### NCExpandExponents
 
-`NCExpandExponents[expr]` expands out powers of monomials appearing in `expr`.
+`NCExpandExponents[expr]` expands out powers of the monomials appearing in `expr`.
 
 For example
 
@@ -4257,6 +4259,27 @@ symbols or other expressions are not expanded using
 `NCExpandExponents`.
 
 See also:
+[NCToList](#nctolist)
+[ExpandNonCommutativeMultiply](#expandnoncommutativemultiply),
+[NCExpand](#ncexpand), [NCE](#nce).
+
+### NCToList
+
+`NCToList[expr]` produces a list with the symbols appearing in
+monomial `expr`. If `expr` is not a monomial it remains
+unevaluated. Powers of symbols are expanded before the list being
+produced.
+
+For example
+
+    NCToList[a**b**a^2]
+
+returns
+
+    {a,b,a,a}
+
+See also:
+[NCExpandExponents](#ncexpandexponents),
 [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply),
 [NCExpand](#ncexpand), [NCE](#nce).
 

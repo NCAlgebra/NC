@@ -84,6 +84,8 @@ doc: NCDocument.pdf index.html README.md
 
 README.md: $(MANUAL) MANUAL/Cover.md
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
+             --bibliography references.bib \
+             --citeproc \
 	     --filter makeindex.py \
 	     --wrap=preserve \
 	     -o README.tmp.md
@@ -99,6 +101,7 @@ README.md: $(MANUAL) MANUAL/Cover.md
 index.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
              --bibliography references.bib \
+             --citeproc \
 	     -o index.html --mathjax
 
 NCDocument.pdf: $(MANUAL)
