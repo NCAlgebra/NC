@@ -1,7 +1,7 @@
 # More Advanced Commands {#MoreAdvancedCommands}
 
 In this chapter we describe some more advance features and
-commands. Most of these were introduced in **Version 5**.
+commands.
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/2_MoreAdvancedCommands.nb`.

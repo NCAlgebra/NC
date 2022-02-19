@@ -1,7 +1,7 @@
 # Introduction {#UserGuideIntroduction}
 
 This *User Guide* attempts to document the many improvements
-introduced in `NCAlgebra` Version 5.0. Please be patient, as we move
+introduced in `NCAlgebra` Version 6.0. Please be patient, as we move
 to incorporate the many recent changes into this document.
 
 See [Reference Manual](#ReferenceIntroduction) for a detailed

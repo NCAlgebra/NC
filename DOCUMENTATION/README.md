@@ -529,7 +529,7 @@ The beginnings of the program come from eran@slac.
 # Introduction
 
 This *User Guide* attempts to document the many improvements
-introduced in `NCAlgebra` Version 5.0. Please be patient, as we move
+introduced in `NCAlgebra` Version 6.0. Please be patient, as we move
 to incorporate the many recent changes into this document.
 
 See [Reference Manual](#reference-manual) for a detailed
@@ -1706,7 +1706,7 @@ the middle matrix of the nc Hessian.
 # More Advanced Commands
 
 In this chapter we describe some more advance features and
-commands. Most of these were introduced in **Version 5**.
+commands.
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/2_MoreAdvancedCommands.nb`.
@@ -2563,7 +2563,7 @@ variables.
 Perhaps the most useful consequence of the above factorization is the
 possibility of producing a linear polynomial which has the smallest
 possible number of terms, as explaining in detail in
-\[@oliveira:SSP:2012\]. This is done automatically by
+(Oliveira 2012). This is done automatically by
 [`NCSylvesterToNC`](#ncsylvestertonc). For example
 
     vars = {x, y};
@@ -2591,7 +2591,7 @@ result in:
     const = SparseArray[< 6 >, {3, 3}]
     lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
 
-See \[@oliveira:SSP:2012\] for details on the structure of the constant
+See (Oliveira 2012) for details on the structure of the constant
 array ![F](https://render.githubusercontent.com/render/math?math=F&mode=inline) in this case.
 
 # Noncommutative Gröbner Basis
@@ -8059,7 +8059,7 @@ The following `options` can be given:
 -   `PrintObstructions` (`False`);
 -   `PrintSPolynomials` (`False`);
 
-The algorithm is based on \[@mora:ICN:1994\] and uses the terminology there.
+The algorithm is based on (Mora 1994) and uses the terminology there.
 
 See also:
 [NCPoly](#ncpoly-1).
@@ -8781,6 +8781,28 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
 
 # References
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-camino:MIS:2003" class="csl-entry">
+
+Camino, Juan F., John William Helton, Robert E. Skelton, and Jieping Ye. 2003. “<span class="nocase">Matrix Inequalities: a Symbolic Procedure to Determine Convexity Automatically</span>.” *Integral Equation and Operator Theory* 46 (4): 399–454.
+
+</div>
+
+<div id="ref-mora:ICN:1994" class="csl-entry">
+
+Mora, Teo. 1994. “An Introduction to Commutative and Noncommutative Groebner Bases.” *Theoretical Computer Science* 134: 131–73.
+
+</div>
+
+<div id="ref-oliveira:SSP:2012" class="csl-entry">
+
+Oliveira, Mauricio C. de. 2012. “<span class="nocase">Simplification of symbolic polynomials on non-commutative variables</span>.” *Linear Algebra and Its Applications* 437 (7): 1734–48. <https://doi.org/10.1016/j.laa.2012.05.015>.
+
+</div>
+
+</div>
+
 [^1]: Math, UCSD, La Jolla, CA
 
 [^2]: MAE, UCSD, La Jolla, CA
@@ -8797,7 +8819,7 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
     calculation of the inverse of `m`.
 
 [^5]: This is in contrast with the commutative ![x^4](https://render.githubusercontent.com/render/math?math=x%5E4&mode=inline) which is
-    convex everywhere. See \[@camino:MIS:2003\] for details.
+    convex everywhere. See (Camino et al. 2003) for details.
 
 [^6]: The reason is that making an operator `Flat` is a
     convenience that comes with a price: lack of control over execution

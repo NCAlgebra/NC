@@ -84,11 +84,12 @@ doc: NCDocument.pdf index.html README.md
 
 README.md: $(MANUAL) MANUAL/Cover.md
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
-             --bibliography references.bib \
 	     --filter makeindex.py \
 	     --wrap=preserve \
 	     -o README.tmp.md
 	pandoc MANUAL/Cover.md README.tmp.md -t gfm \
+             --bibliography references.bib \
+             --citeproc \
 	     --filter github-mangle.py \
 	     --filter github-math.py \
 	     --wrap=preserve \
