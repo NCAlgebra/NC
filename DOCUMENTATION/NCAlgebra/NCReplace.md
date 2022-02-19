@@ -23,6 +23,7 @@ Members are:
 * [NCMatrixExpand](#NCMatrixExpand)
 * [NCMatrixReplaceAll](#NCMatrixReplaceAll)
 * [NCMatrixReplaceRepeated](#NCMatrixReplaceRepeated)
+* [NCReplacePowerRule](#NCReplacePowerRule)
 
 Aliases:
 
@@ -38,6 +39,12 @@ Aliases:
 * [NCRASA](#NCRASA) for [NCReplaceAllSelfAdjoint](#NCReplaceAllSelfAdjoint)
 * [NCRLSA](#NCRLSA) for [NCReplaceListSelfAdjoint](#NCReplaceListSelfAdjoint)
 * [NCRRSA](#NCRRSA) for [NCReplaceRepeatedSelfAdjoint](#NCReplaceRepeatedSelfAdjoint)
+
+Options:
+
+* `ApplyPowerRule` (`False`): If `True`, `NCReplacePowerRule` is
+  automatically applied to all rules in `NCReplace`, `NCReplaceAll`,
+  `NCReplaceRepeated`, and `NCReplaceList`.
 
 ### NCReplace {#NCReplace}
 
@@ -251,3 +258,15 @@ make sure substitutions work with matrices.
 
 See also:
 [NCReplaceRepeated](#NCReplaceRepeated), [NCMatrixReplaceAll](#NCMatrixReplaceAll).
+
+### NCReplacePowerRule {#NCReplacePowerRule}
+
+`NCReplacePowerRule[rule]` transforms rules that consist of a
+noncommutative monomial so that symbols appearing on the left and on
+right of the monomial also match positive powers of that symbol.
+
+See also:
+[NCReplace](#NCReplace),
+[NCReplaceAll](#NCReplaceAll),
+[NCReplaceList](#NCReplaceList),
+[NCReplaceRepeated](#NCReplaceRepeated).

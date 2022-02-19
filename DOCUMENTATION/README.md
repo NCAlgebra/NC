@@ -135,6 +135,7 @@ All rights reserved.
         -   [<span class="toc-section-number">11.1.22</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
         -   [<span class="toc-section-number">11.1.23</span> NCExpand](#ncexpand)
         -   [<span class="toc-section-number">11.1.24</span> NCE](#nce)
+        -   [<span class="toc-section-number">11.1.25</span> NCExpandExponents](#ncexpandexponents)
     -   [<span class="toc-section-number">11.2</span> NCTr](#nctr)
         -   [<span class="toc-section-number">11.2.1</span> tr](#tr)
         -   [<span class="toc-section-number">11.2.2</span> SortCyclicPermutation](#sortcyclicpermutation)
@@ -180,6 +181,7 @@ All rights reserved.
         -   [<span class="toc-section-number">11.4.27</span> NCMatrixExpand](#ncmatrixexpand)
         -   [<span class="toc-section-number">11.4.28</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
         -   [<span class="toc-section-number">11.4.29</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
+        -   [<span class="toc-section-number">11.4.30</span> NCReplacePowerRule](#ncreplacepowerrule)
     -   [<span class="toc-section-number">11.5</span> NCSelfAdjoint](#ncselfadjoint)
         -   [<span class="toc-section-number">11.5.1</span> NCSymmetricQ](#ncsymmetricq)
         -   [<span class="toc-section-number">11.5.2</span> NCSymmetricTest](#ncsymmetrictest)
@@ -436,6 +438,10 @@ The beginnings of the program come from eran@slac.
     BEEN REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
 
 2.  Streamlined rules for `NCSimplifyRational`.
+
+3.  `NonCommutativeMultiply`: new function `NCExpandExponents`.
+
+4.  `NCReplace`: new functions `NCReplacePowerRule`; option `ApplyPowerRule`.
 
 # Changes in Version 5.0
 
@@ -861,7 +867,7 @@ returns
 > which in previous versions returned `c**b` will fail in
 > **Version 6**. The reason for the failure is that `a**b**b` is now
 > internally represented as `a**Power[b, 2]`, which does not match
-> `a**b`. The command [NCReplacePowerRule](#NCReplacePowerRule) can
+> `a**b`. The command [NCReplacePowerRule](#ncreplacepowerrule) can
 > be used to make the following replacement
 >
 >     NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c]]
@@ -1825,7 +1831,7 @@ is internally stored as
 
     NonCommutativeMultiply[a^3, b, a^2, b, a, b]
 
-This means that a replacement such as
+so that a replacement such as
 
     NCReplaceAll[expr, a**b -> c]
 
@@ -1833,15 +1839,16 @@ will result in
 
     a^3**b**a^2**b**c
 
-with the rule failing to match the `a**b` in the terms `a**b^2` and
+Note how the rule fails to match the `a**b` in the terms `a**b^2` and
 `a**b^3`. This situation might be familiar to an experienced
 Mathematica user who is a aware of the difference between structural
-pattern matching and mathematical matching[^7]. As a convenience
-for `NCAlgebra` users, **Version 6** provides the function
-[NCReplacePowerRule](#NCReplacePowerRule) that modifies a user’s rule
-in order to accomplish matching of symbols in `NCAlgebra` expressions
-including powers. For example, for the same `expr` above, the
-following replacement
+pattern matching and mathematical matching[^7].
+
+As a convenience for `NCAlgebra` users, **Version 6** provides the
+function [NCReplacePowerRule](#ncreplacepowerrule) that modifies a
+user’s rule in order to accomplish matching of symbols in `NCAlgebra`
+expressions including powers. For example, for the same `expr` above,
+the following replacement
 
     NCReplaceAll[expr, NCReplacePowerRule[a**b -> c]]
 
@@ -1860,13 +1867,13 @@ will produce
 after matching `a**b` in `a^3**b`, `a^2**b`, and `a**b`.
 
 The command `NCReplacePowerRule` works by modifying noncommutative
-monomial patterns with symbols appearing at the edges to account for
-the potential presence of `Power` in a noncommutative monomial. For
-example,
+patterns with symbols appearing at the edges of monomials to account
+for the potential presence of `Power` in a noncommutative
+monomial. For example,
 
     NCReplacePowerRule[a**c**b -> d]
 
-produces the modified rule
+produces the modified rule[^8]
 
     a^n_.**c**b^m_. -> a^(n-1)**d**b^(m-1)
 
@@ -1874,12 +1881,12 @@ which can successfully match powers of the symbols `a` and `b`
 appearing in the monomial `a**c**b`.
 
 The application of `NCReplacePowerRule` can also be done by invoking
-the option `ApplyPowerRule` with the functions of the package
-[NCReplace](#ncreplace). For example, the command
+the option `ApplyPowerRule`, which is available in all functions of
+the package [NCReplace](#ncreplace). For example, the command
 
     NCReplaceRepeated[expr, a**b -> c, ApplyPowerRule -> True]
 
-is the same as
+does the same thing as
 
     NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
 
@@ -1889,7 +1896,7 @@ family of functions in a `NCAlgebra` session by calling
     SetOptions[NCReplace, ApplyPowerRule -> True]
 
 After that, all calls to `NCReplace`, `NCReplaceAll`,
-`NCReplaceRepeated`, and related function, will done with the option
+`NCReplaceRepeated`, and related function, will be done with the option
 `ApplyPowerRule -> True` automatically.
 
 To revert to the default behavior just set
@@ -1993,7 +2000,7 @@ returns
 which completely destroys the noncommutative product. The reason for
 the catastrophic failure of the definition of `F`, which is inside a
 `Module`, is that the letters `aa` and `bb` appearing in `rule` are
-*not treated as the local symbols `aa` and `bb`*[^8]. For this
+*not treated as the local symbols `aa` and `bb`*[^9]. For this
 reason, the right-hand side of the rule `rule` involves the global
 symbols `aa` and `bb`, which are, in the absence of a declaration to
 the contrary, commutative. On the other hand, the definition of `G`
@@ -2058,7 +2065,7 @@ evaluation takes place returning
 
     {{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
 
-which is what would have arisen from calling `NCDot[m1,m2]`[^9]. Likewise
+which is what would have arisen from calling `NCDot[m1,m2]`[^10]. Likewise
 
     inv[m1]
 
@@ -4023,6 +4030,7 @@ Members are:
 -   [BeginCommuteEverything](#begincommuteeverything)
 -   [EndCommuteEverything](#endcommuteeverything)
 -   [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
+-   [NCExpandExponents](#ncexpandexponents)
 
 Aliases are:
 
@@ -4231,6 +4239,26 @@ See also:
 See also:
 [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply),
 [NCExpand](#ncexpand).
+
+### NCExpandExponents
+
+`NCExpandExponents[expr]` expands out powers of monomials appearing in `expr`.
+
+For example
+
+    NCExpandExponents[a**(b**c)^2**(c+d)]
+
+returns
+
+    a**b**c**b**c**(c+d).
+
+`NCExpandExponents` only expands powers of monomials. Powers of
+symbols or other expressions are not expanded using
+`NCExpandExponents`.
+
+See also:
+[ExpandNonCommutativeMultiply](#expandnoncommutativemultiply),
+[NCExpand](#ncexpand), [NCE](#nce).
 
 ## NCTr
 
@@ -4484,6 +4512,7 @@ Members are:
 -   [NCMatrixExpand](#ncmatrixexpand)
 -   [NCMatrixReplaceAll](#ncmatrixreplaceall)
 -   [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
+-   [NCReplacePowerRule](#ncreplacepowerrule)
 
 Aliases:
 
@@ -4499,6 +4528,12 @@ Aliases:
 -   [NCRASA](#ncrasa) for [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
 -   [NCRLSA](#ncrlsa) for [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
 -   [NCRRSA](#ncrrsa) for [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+
+Options:
+
+-   `ApplyPowerRule` (`False`): If `True`, `NCReplacePowerRule` is
+    automatically applied to all rules in `NCReplace`, `NCReplaceAll`,
+    `NCReplaceRepeated`, and `NCReplaceList`.
 
 ### NCReplace
 
@@ -4712,6 +4747,18 @@ make sure substitutions work with matrices.
 
 See also:
 [NCReplaceRepeated](#ncreplacerepeated), [NCMatrixReplaceAll](#ncmatrixreplaceall).
+
+### NCReplacePowerRule
+
+`NCReplacePowerRule[rule]` transforms rules that consist of a
+noncommutative monomial so that symbols appearing on the left and on
+right of the monomial also match positive powers of that symbol.
+
+See also:
+[NCReplace](#ncreplace-1),
+[NCReplaceAll](#ncreplaceall),
+[NCReplaceList](#ncreplacelist),
+[NCReplaceRepeated](#ncreplacerepeated).
 
 ## NCSelfAdjoint
 
@@ -8762,13 +8809,15 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
 
 [^7]: One might have encountered this difficulty when trying to
     match a product of commutative variables in a commutative monomial
-    such as
+    such as `x y^2 /. x y -> z` which fails to match `x y^2` even though
+    `x y^2` is equal to `(x y) y`.
 
-        x y^2 /. x y -> z
+[^8]: The actual rule in this case is the more complicated
+    `a^n:_Integer?Positive:1**c**b^m:_Integer?Positive:1 -> a^(n-1)**d**b^(m-1)`
+    with additional checks that prevent the rule from working with
+    negative powers.
 
-    which fails to match `x y^2` even though `x y^2` is equal to `(x y) y`.
-
-[^8]: By the way, I find that behavior of Mathematica’s `Module`
+[^9]: By the way, I find that behavior of Mathematica’s `Module`
     questionable, since something like
 
         F[exp_] := Module[{aa, bb},
@@ -8779,4 +8828,4 @@ equals `Constant * CommuteEverything[Polynomial]`. This uses the reciprocal algo
     would not fail to treat `aa` and `bb` locally. It is their
     appearance in a rule that triggers the mostly odd behavior.
 
-[^9]: Formerly `MatMult[m1,m2]`.
+[^10]: Formerly `MatMult[m1,m2]`.

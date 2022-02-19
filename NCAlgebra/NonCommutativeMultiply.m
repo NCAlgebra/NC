@@ -27,6 +27,7 @@ Clear[aj, tp, rt, inv, co,
       UnsetCommutingOperators,
       CommutingOperatorsQ,
       ExpandNonCommutativeMultiply,
+      NCExpandExponents,
       BeginCommuteEverything, EndCommuteEverything, 
       CommuteEverything, Commutative,
       SNC, NCExpand, NCE, NCValueQ];
@@ -218,7 +219,12 @@ Begin[ "`Private`" ]
   NonCommutativeMultiply[f_[a__]] /; !NCPatternQ[f] := f[a];
   NonCommutativeMultiply[a_Symbol] := a;
   NonCommutativeMultiply[] := 1;
-                        
+
+  NCExpandExponents[expr_] := 
+    ReplaceRepeated[expr, 
+      (x_?NonCommutativeQ^n_ /; Not[NCSymbolOrSubscriptQ[x]]) :>
+         NonCommutativeMultiply @@ Table[x, {n}]];
+
   (* ---------------------------------------------------------------- *)
   (*  We added Expand[] outside  the original Eran formula for ENCM,  *)
   (*  this was neccessary to deal with commuting elements.	    *)
@@ -504,9 +510,6 @@ Begin[ "`Private`" ]
 
   (* pretty aj *)
   SuperStar[a_] := aj[a];
-
-  (* pretty inv *)
-  (* Superscript[a_?NonCommutativeQ, -1] := inv[a]; *)
 
   (* pretty co *)
   OverBar[a_] := co[a];

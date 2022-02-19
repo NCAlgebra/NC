@@ -25,6 +25,7 @@ Members are:
 * [BeginCommuteEverything](#BeginCommuteEverything)
 * [EndCommuteEverything](#EndCommuteEverything)
 * [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
+* [NCExpandExponents](#NCExpandExponents)
 
 Aliases are:
 
@@ -233,3 +234,23 @@ See also:
 See also:
 [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
 [NCExpand](#NCExpand).
+
+### NCExpandExponents {#NCExpandExponents}
+
+`NCExpandExponents[expr]` expands out powers of monomials appearing in `expr`.
+
+For example
+
+    NCExpandExponents[a**(b**c)^2**(c+d)]
+
+returns
+
+    a**b**c**b**c**(c+d).
+
+`NCExpandExponents` only expands powers of monomials. Powers of
+symbols or other expressions are not expanded using
+`NCExpandExponents`.
+
+See also:
+[ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
+[NCExpand](#NCExpand), [NCE](#NCE).

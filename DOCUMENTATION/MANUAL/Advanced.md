@@ -126,7 +126,7 @@ is internally stored as
 
     NonCommutativeMultiply[a^3, b, a^2, b, a, b]
 
-This means that a replacement such as
+so that a replacement such as
 
     NCReplaceAll[expr, a**b -> c]
 
@@ -134,15 +134,21 @@ will result in
 
     a^3**b**a^2**b**c
 
-with the rule failing to match the `a**b` in the terms `a**b^2` and
+Note how the rule fails to match the `a**b` in the terms `a**b^2` and
 `a**b^3`. This situation might be familiar to an experienced
 Mathematica user who is a aware of the difference between structural
-pattern matching and mathematical matching[^match]. As a convenience
-for `NCAlgebra` users, **Version 6** provides the function
-[NCReplacePowerRule](#NCReplacePowerRule) that modifies a user's rule
-in order to accomplish matching of symbols in `NCAlgebra` expressions
-including powers. For example, for the same `expr` above, the
-following replacement
+pattern matching and mathematical matching[^match].
+
+[^match]: One might have encountered this difficulty when trying to
+match a product of commutative variables in a commutative monomial
+such as `x y^2 /. x y -> z` which fails to match `x y^2` even though
+`x y^2` is equal to `(x y) y`.
+
+As a convenience for `NCAlgebra` users, **Version 6** provides the
+function [NCReplacePowerRule](#NCReplacePowerRule) that modifies a
+user's rule in order to accomplish matching of symbols in `NCAlgebra`
+expressions including powers. For example, for the same `expr` above,
+the following replacement
 
     NCReplaceAll[expr, NCReplacePowerRule[a**b -> c]]
 
@@ -161,26 +167,31 @@ will produce
 after matching `a**b` in `a^3**b`, `a^2**b`, and `a**b`.
 
 The command `NCReplacePowerRule` works by modifying noncommutative
-monomial patterns with symbols appearing at the edges to account for
-the potential presence of `Power` in a noncommutative monomial. For
-example,
+patterns with symbols appearing at the edges of monomials to account
+for the potential presence of `Power` in a noncommutative
+monomial. For example,
 
     NCReplacePowerRule[a**c**b -> d]
 
-produces the modified rule
+produces the modified rule[^power-rule]
 
     a^n_.**c**b^m_. -> a^(n-1)**d**b^(m-1)
-
+    
 which can successfully match powers of the symbols `a` and `b`
 appearing in the monomial `a**c**b`.
 
+[^power-rule]: The actual rule in this case is the more complicated
+`a^n:_Integer?Positive:1**c**b^m:_Integer?Positive:1 -> a^(n-1)**d**b^(m-1)`
+with additional checks that prevent the rule from working with
+negative powers.
+
 The application of `NCReplacePowerRule` can also be done by invoking
-the option `ApplyPowerRule` with the functions of the package
-[NCReplace](#PackageNCReplace). For example, the command
+the option `ApplyPowerRule`, which is available in all functions of
+the package [NCReplace](#PackageNCReplace). For example, the command
 
     NCReplaceRepeated[expr, a**b -> c, ApplyPowerRule -> True]
 
-is the same as 
+does the same thing as 
 
     NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
 
@@ -190,20 +201,12 @@ family of functions in a `NCAlgebra` session by calling
     SetOptions[NCReplace, ApplyPowerRule -> True]
 
 After that, all calls to `NCReplace`, `NCReplaceAll`,
-`NCReplaceRepeated`, and related function, will done with the option
+`NCReplaceRepeated`, and related function, will be done with the option
 `ApplyPowerRule -> True` automatically.
 
 To revert to the default behavior just set
 
     SetOptions[NCReplace, ApplyPowerRule -> False]
-
-[^match]: One might have encountered this difficulty when trying to
-match a product of commutative variables in a commutative monomial
-such as
-```
-x y^2 /. x y -> z
-```
-which fails to match `x y^2` even though `x y^2` is equal to `(x y) y`.
 
 ### Trouble with `Block` and `Module`
 

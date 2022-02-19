@@ -287,6 +287,8 @@ ExpandNonCommutativeMultiply</a></li>
 NCExpand</a></li>
 <li><a href="#NCE"><span class="toc-section-number">11.1.24</span>
 NCE</a></li>
+<li><a href="#NCExpandExponents"><span
+class="toc-section-number">11.1.25</span> NCExpandExponents</a></li>
 </ul></li>
 <li><a href="#PackageNCTr"><span class="toc-section-number">11.2</span>
 NCTr</a>
@@ -392,6 +394,8 @@ class="toc-section-number">11.4.28</span> NCMatrixReplaceAll</a></li>
 <li><a href="#NCMatrixReplaceRepeated"><span
 class="toc-section-number">11.4.29</span>
 NCMatrixReplaceRepeated</a></li>
+<li><a href="#NCReplacePowerRule"><span
+class="toc-section-number">11.4.30</span> NCReplacePowerRule</a></li>
 </ul></li>
 <li><a href="#PackageNCSelfAdjoint"><span
 class="toc-section-number">11.5</span> NCSelfAdjoint</a>
@@ -945,6 +949,11 @@ PRESENCE OF EXPONENTS. SEE MANUAL FOR DETAILS ON HOW TO MITIGATE THE
 IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE BEEN REWRITTEN TO
 ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.</p></li>
 <li><p>Streamlined rules for <code>NCSimplifyRational</code>.</p></li>
+<li><p><code>NonCommutativeMultiply</code>: new function
+<code>NCExpandExponents</code>.</p></li>
+<li><p><code>NCReplace</code>: new functions
+<code>NCReplacePowerRule</code>; option
+<code>ApplyPowerRule</code>.</p></li>
 </ol>
 <h1 data-number="3" id="Version5_0"><span
 class="header-section-number">3</span> Changes in Version 5.0</h1>
@@ -2052,19 +2061,20 @@ means that</p>
 <pre><code>expr = a**a**a**b**a**a**b**a**b</code></pre>
 <p>is internally stored as</p>
 <pre><code>NonCommutativeMultiply[a^3, b, a^2, b, a, b]</code></pre>
-<p>This means that a replacement such as</p>
+<p>so that a replacement such as</p>
 <pre><code>NCReplaceAll[expr, a**b -&gt; c]</code></pre>
 <p>will result in</p>
 <pre><code>a^3**b**a^2**b**c</code></pre>
-<p>with the rule failing to match the <code>a**b</code> in the terms
+<p>Note how the rule fails to match the <code>a**b</code> in the terms
 <code>a**b^2</code> and <code>a**b^3</code>. This situation might be
 familiar to an experienced Mathematica user who is a aware of the
 difference between structural pattern matching and mathematical
 matching<a href="#fn5" class="footnote-ref" id="fnref5"
-role="doc-noteref"><sup>5</sup></a>. As a convenience for
-<code>NCAlgebra</code> users, <strong>Version 6</strong> provides the
-function <a href="#NCReplacePowerRule">NCReplacePowerRule</a> that
-modifies a user’s rule in order to accomplish matching of symbols in
+role="doc-noteref"><sup>5</sup></a>.</p>
+<p>As a convenience for <code>NCAlgebra</code> users, <strong>Version
+6</strong> provides the function <a
+href="#NCReplacePowerRule">NCReplacePowerRule</a> that modifies a user’s
+rule in order to accomplish matching of symbols in
 <code>NCAlgebra</code> expressions including powers. For example, for
 the same <code>expr</code> above, the following replacement</p>
 <pre><code>NCReplaceAll[expr, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
@@ -2078,20 +2088,21 @@ and</p>
 <p>after matching <code>a**b</code> in <code>a^3**b</code>,
 <code>a^2**b</code>, and <code>a**b</code>.</p>
 <p>The command <code>NCReplacePowerRule</code> works by modifying
-noncommutative monomial patterns with symbols appearing at the edges to
-account for the potential presence of <code>Power</code> in a
+noncommutative patterns with symbols appearing at the edges of monomials
+to account for the potential presence of <code>Power</code> in a
 noncommutative monomial. For example,</p>
 <pre><code>NCReplacePowerRule[a**c**b -&gt; d]</code></pre>
-<p>produces the modified rule</p>
+<p>produces the modified rule<a href="#fn6" class="footnote-ref"
+id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <pre><code>a^n_.**c**b^m_. -&gt; a^(n-1)**d**b^(m-1)</code></pre>
 <p>which can successfully match powers of the symbols <code>a</code> and
 <code>b</code> appearing in the monomial <code>a**c**b</code>.</p>
 <p>The application of <code>NCReplacePowerRule</code> can also be done
-by invoking the option <code>ApplyPowerRule</code> with the functions of
-the package <a href="#PackageNCReplace">NCReplace</a>. For example, the
-command</p>
+by invoking the option <code>ApplyPowerRule</code>, which is available
+in all functions of the package <a
+href="#PackageNCReplace">NCReplace</a>. For example, the command</p>
 <pre><code>NCReplaceRepeated[expr, a**b -&gt; c, ApplyPowerRule -&gt; True]</code></pre>
-<p>is the same as</p>
+<p>does the same thing as</p>
 <pre><code>NCReplaceRepeated[expr, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
 <p>This option can also be set globally for all calls to the
 <code>NCReplace</code> family of functions in a <code>NCAlgebra</code>
@@ -2099,7 +2110,7 @@ session by calling</p>
 <pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; True]</code></pre>
 <p>After that, all calls to <code>NCReplace</code>,
 <code>NCReplaceAll</code>, <code>NCReplaceRepeated</code>, and related
-function, will done with the option
+function, will be done with the option
 <code>ApplyPowerRule -&gt; True</code> automatically.</p>
 <p>To revert to the default behavior just set</p>
 <pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; False]</code></pre>
@@ -2179,8 +2190,8 @@ work “as expected.” Indeed, verify that</p>
 the catastrophic failure of the definition of <code>F</code>, which is
 inside a <code>Module</code>, is that the letters <code>aa</code> and
 <code>bb</code> appearing in <code>rule</code> are <em>not treated as
-the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn6"
-class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.
+the local symbols <code>aa</code> and <code>bb</code></em><a href="#fn7"
+class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.
 For this reason, the right-hand side of the rule <code>rule</code>
 involves the global symbols <code>aa</code> and <code>bb</code>, which
 are, in the absence of a declaration to the contrary, commutative. On
@@ -2232,8 +2243,8 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <p>evaluation takes place returning</p>
 <pre><code>{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}</code></pre>
 <p>which is what would have arisen from calling
-<code>NCDot[m1,m2]</code><a href="#fn7" class="footnote-ref" id="fnref7"
-role="doc-noteref"><sup>7</sup></a>. Likewise</p>
+<code>NCDot[m1,m2]</code><a href="#fn8" class="footnote-ref" id="fnref8"
+role="doc-noteref"><sup>8</sup></a>. Likewise</p>
 <pre><code>inv[m1]</code></pre>
 <p>results in</p>
 <pre><code>inv[{{a, b}, {c, d}}]</code></pre>
@@ -3876,6 +3887,7 @@ noncommutative functionality to Mathematica’s native
 <li><a href="#EndCommuteEverything">EndCommuteEverything</a></li>
 <li><a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a></li>
+<li><a href="#NCExpandExponents">NCExpandExponents</a></li>
 </ul>
 <p>Aliases are:</p>
 <ul>
@@ -4078,6 +4090,20 @@ class="header-section-number">11.1.24</span> NCE</h3>
 <p>See also: <a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCExpand">NCExpand</a>.</p>
+<h3 data-number="11.1.25" id="NCExpandExponents"><span
+class="header-section-number">11.1.25</span> NCExpandExponents</h3>
+<p><code>NCExpandExponents[expr]</code> expands out powers of monomials
+appearing in <code>expr</code>.</p>
+<p>For example</p>
+<pre><code>NCExpandExponents[a**(b**c)^2**(c+d)]</code></pre>
+<p>returns</p>
+<pre><code>a**b**c**b**c**(c+d).</code></pre>
+<p><code>NCExpandExponents</code> only expands powers of monomials.
+Powers of symbols or other expressions are not expanded using
+<code>NCExpandExponents</code>.</p>
+<p>See also: <a
+href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
+<a href="#NCExpand">NCExpand</a>, <a href="#NCE">NCE</a>.</p>
 <h2 data-number="11.2" id="PackageNCTr"><span
 class="header-section-number">11.2</span> NCTr</h2>
 <p><code>NCTr</code> provides the commutative operator <code>tr</code>
@@ -4351,6 +4377,7 @@ href="#NCReplaceRepeatedSelfAdjoint">NCReplaceRepeatedSelfAdjoint</a></li>
 <li><a href="#NCMatrixExpand">NCMatrixExpand</a></li>
 <li><a href="#NCMatrixReplaceAll">NCMatrixReplaceAll</a></li>
 <li><a href="#NCMatrixReplaceRepeated">NCMatrixReplaceRepeated</a></li>
+<li><a href="#NCReplacePowerRule">NCReplacePowerRule</a></li>
 </ul>
 <p>Aliases:</p>
 <ul>
@@ -4377,6 +4404,14 @@ href="#NCReplaceAllSelfAdjoint">NCReplaceAllSelfAdjoint</a></li>
 href="#NCReplaceListSelfAdjoint">NCReplaceListSelfAdjoint</a></li>
 <li><a href="#NCRRSA">NCRRSA</a> for <a
 href="#NCReplaceRepeatedSelfAdjoint">NCReplaceRepeatedSelfAdjoint</a></li>
+</ul>
+<p>Options:</p>
+<ul>
+<li><code>ApplyPowerRule</code> (<code>False</code>): If
+<code>True</code>, <code>NCReplacePowerRule</code> is automatically
+applied to all rules in <code>NCReplace</code>,
+<code>NCReplaceAll</code>, <code>NCReplaceRepeated</code>, and
+<code>NCReplaceList</code>.</li>
 </ul>
 <h3 data-number="11.4.1" id="NCReplace"><span
 class="header-section-number">11.4.1</span> NCReplace</h3>
@@ -4586,6 +4621,15 @@ replacements using rule or list of rules <code>rules</code> until
 substitutions work with matrices.</p>
 <p>See also: <a href="#NCReplaceRepeated">NCReplaceRepeated</a>, <a
 href="#NCMatrixReplaceAll">NCMatrixReplaceAll</a>.</p>
+<h3 data-number="11.4.30" id="NCReplacePowerRule"><span
+class="header-section-number">11.4.30</span> NCReplacePowerRule</h3>
+<p><code>NCReplacePowerRule[rule]</code> transforms rules that consist
+of a noncommutative monomial so that symbols appearing on the left and
+on right of the monomial also match positive powers of that symbol.</p>
+<p>See also: <a href="#NCReplace">NCReplace</a>, <a
+href="#NCReplaceAll">NCReplaceAll</a>, <a
+href="#NCReplaceList">NCReplaceList</a>, <a
+href="#NCReplaceRepeated">NCReplaceRepeated</a>.</p>
 <h2 data-number="11.5" id="PackageNCSelfAdjoint"><span
 class="header-section-number">11.5</span> NCSelfAdjoint</h2>
 <p>Members are:</p>
@@ -8384,12 +8428,17 @@ find a way around that :)<a href="#fnref4" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 <li id="fn5" role="doc-endnote"><p>One might have encountered this
 difficulty when trying to match a product of commutative variables in a
-commutative monomial such as</p>
-<pre><code>x y^2 /. x y -&gt; z</code></pre>
-<p>which fails to match <code>x y^2</code> even though
-<code>x y^2</code> is equal to <code>(x y) y</code>.<a href="#fnref5"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote"><p>By the way, I find that behavior of
+commutative monomial such as <code>x y^2 /. x y -&gt; z</code> which
+fails to match <code>x y^2</code> even though <code>x y^2</code> is
+equal to <code>(x y) y</code>.<a href="#fnref5" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>The actual rule in this case is the
+more complicated
+<code>a^n:_Integer?Positive:1**c**b^m:_Integer?Positive:1 -&gt; a^(n-1)**d**b^(m-1)</code>
+with additional checks that prevent the rule from working with negative
+powers.<a href="#fnref6" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>By the way, I find that behavior of
 Mathematica’s <code>Module</code> questionable, since something like</p>
 <pre><code>F[exp_] := Module[{aa, bb},
   SetNonCommutative[aa, bb];
@@ -8397,10 +8446,10 @@ Mathematica’s <code>Module</code> questionable, since something like</p>
 ]</code></pre>
 <p>would not fail to treat <code>aa</code> and <code>bb</code> locally.
 It is their appearance in a rule that triggers the mostly odd
-behavior.<a href="#fnref6" class="footnote-back"
+behavior.<a href="#fnref7" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn7" role="doc-endnote"><p>Formerly
-<code>MatMult[m1,m2]</code>.<a href="#fnref7" class="footnote-back"
+<li id="fn8" role="doc-endnote"><p>Formerly
+<code>MatMult[m1,m2]</code>.<a href="#fnref8" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>

@@ -55,40 +55,40 @@ Begin["`Private`"]
   *)
   NCReplacePowerRule[{expr___Rule}] := Map[NCReplacePowerRule, {expr}];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
-		     [Power[l_?NCSymbolOrSubscriptQ, i_.] ** s___ ** Power[r_?NCSymbolOrSubscriptQ, j_.], expr_]] := op[
+		     [Power[l_?NCSymbolOrSubscriptQ, i:_Integer?Positive:1] ** s___ ** Power[r_?NCSymbolOrSubscriptQ, j:_Integer?Positive:1], expr_]] := op[
     If[ i == 1
        ,
         If[ j == 1
 	   ,
-	    l^(n_.) ** s ** r^(m_.)
+	    l^(n:_Integer?Positive:1) ** s ** r^(m:_Integer?Positive:1)
 	   ,
-            l^(n_.) ** s ** r^(m_Integer?((#>=j)&))
+            l^(n:_Integer?Positive:1) ** s ** r^(m_Integer?((#>=j)&))
 	]
        ,
         If[ j == 1
 	   ,
-            l^(n_Integer?((#>=i)&)) ** s ** r^(m_.)
+            l^(n_Integer?((#>=i)&)) ** s ** r^(m:_Integer?Positive:1)
 	   ,
             l^(n_Integer?((#>=i)&)) ** s ** r^(m_Integer?((#>=j)&))
 	]
     ], l^(n - i) ** expr ** r^(m - j)
   ];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
-		     [Power[l_?NCSymbolOrSubscriptQ, i_.] ** s__, expr_]] := op[
+		     [Power[l_?NCSymbolOrSubscriptQ, i:_Integer?Positive:1] ** s__, expr_]] := op[
     If[ i == 1
        ,
-        l^(n_.) ** s
+        l^(n:_Integer?Positive:1) ** s
        ,
         l^(n_Integer?((#>=i)&))
     ], l^(n - i) ** expr
   ];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
-		     [s__ ** Power[r_?NCSymbolOrSubscriptQ, j_.], expr_]] := op[
+		     [s__ ** Power[r_?NCSymbolOrSubscriptQ, j:_Integer?Positive:1], expr_]] := op[
    If[ j == 1
        ,
-	s ** r^(m_.)
+	s ** r^(m:_Integer?Positive:1)
        ,
-        s ** r^(m_Integer?((#>=j)&))
+       s ** r^(m:_Integer?((#>=j)&))
      ],
    expr ** r^(m - j)
   ];

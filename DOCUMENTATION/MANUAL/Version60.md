@@ -14,3 +14,5 @@
    BEEN REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
 
 2. Streamlined rules for `NCSimplifyRational`.
+3. `NonCommutativeMultiply`: new function `NCExpandExponents`.
+4. `NCReplace`: new functions `NCReplacePowerRule`; option `ApplyPowerRule`.
