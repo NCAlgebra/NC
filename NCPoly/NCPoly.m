@@ -134,10 +134,10 @@ Begin["`Private`"];
 
   (* Power *)
   NCPoly /: Power[b_NCPoly, c_Integer?Positive] := 
-    Apply[NCPolyProduct, Table[b, {c}]];
+    Apply[NCPolyProduct, Table[b, c]];
 
   NCPoly /: Power[b_NCPoly, c_Integer?Negative] := 
-    inv[Apply[NCPolyProduct, Table[b, {-c}]]];
+    inv[Apply[NCPolyProduct, Table[b, -c]]];
 
   (* Reduce and related functions *)
   Clear[NCPolyPossibleZeroQ];
@@ -296,10 +296,10 @@ Begin["`Private`"];
   (* From digits *)
 
   NCFromDigits[{}, {base__}] := 
-    Table[0, {i, Length[{base}] + 1}];
+    Table[0, Length[{base}] + 1];
 
   NCFromDigits[{}, base_] := 
-    Table[0, {i, 2}];
+    Table[0, 2];
 
   NCFromDigits[{p__List}, base_] := 
     Map[NCFromDigits[#, base]&, {p}];

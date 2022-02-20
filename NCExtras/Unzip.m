@@ -49,7 +49,7 @@ BeginPackage["Unzip`",{"JLink`"}]
         len = zf[size[]];
         enum = zf[entries[]];
         comments = OptionValue[Verbose] /. Options[Unzip];
-        targets = Table[enum[nextElement[]],{len}];
+        targets = Table[enum[nextElement[]], len];
         dirs = Function[x, If[ !DirectoryQ[x],
                                CreateDirectory[x, CreateIntermediateDirectories -> True]
                            ]] /@ (Union[DirectoryName[#[getName[]]]& /@ targets]/."":>Sequence[]);

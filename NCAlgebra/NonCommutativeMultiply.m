@@ -210,9 +210,9 @@ Begin[ "`Private`" ]
 
   (* Convert noncommutative product into list expanding powers *)
   NCToList[l_NonCommutativeMultiply] :=
-    Flatten[(List @@ l) /. Power[x_,n_?Positive] :> Table[x, {n}]];
+    Flatten[(List @@ l) /. Power[x_,n_?Positive] :> Table[x, n]];
   NCToList[Power[x_?NonCommutativeQ, n:_Integer?Positive:1]] :=
-    Table[x, {n}];
+    Table[x, n];
 
   (* Identity *)
   (* MAURICIO BUG: 07/07/2016
@@ -230,7 +230,7 @@ Begin[ "`Private`" ]
   NCExpandExponents[expr_] := 
     ReplaceRepeated[expr, 
       (x_?NonCommutativeQ^n_ /; Not[NCSymbolOrSubscriptQ[x]]) :>
-         NonCommutativeMultiply @@ Table[x, {n}]];
+         NonCommutativeMultiply @@ Table[x, n]];
 
   (* ---------------------------------------------------------------- *)
   (*  We added Expand[] outside  the original Eran formula for ENCM,  *)
@@ -243,14 +243,14 @@ Begin[ "`Private`" ]
     ExpandAll[expr //. {
       Power[b_Plus, c_Integer?Positive] :> 
         Plus @@ Apply[NonCommutativeMultiply, 
-          Distribute[Table[List @@ b, {c}], List], {1}],
+          Distribute[Table[List @@ b, c], List], {1}],
       Power[b_Plus, c_Integer?((Negative[#] && # < -1) &)] :> 
         Power[Plus @@ Apply[NonCommutativeMultiply, 
-          Distribute[Table[List @@ b, {-c}], List], {1}], -1],
+          Distribute[Table[List @@ b, -c], List], {1}], -1],
       Power[b_?(Not[NCSymbolOrSubscriptQ[#]] &), c_Integer?Positive] :> 
-        NonCommutativeMultiply @@ Table[b, {c}], 
+        NonCommutativeMultiply @@ Table[b, c],
       Power[b_?(Not[NCSymbolOrSubscriptQ[#]] &), c_Integer?((Negative[#] && # < -1) &)] :> 
-        Power[NonCommutativeMultiply @@ Table[b, {-c}], -1],
+        Power[NonCommutativeMultiply @@ Table[b, -c], -1],
       NonCommutativeMultiply[a___, b_Plus, c___] :>
         (NonCommutativeMultiply[a, #, c] & /@ b)
     }];

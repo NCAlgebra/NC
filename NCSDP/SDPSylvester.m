@@ -62,7 +62,7 @@ Begin[ "`Private`" ]
 
     NCDebug[3, symmetricVariables];
 
-    syms = Table[ False, {i, Length[BB]}];
+    syms = Table[False, Length[BB]];
     Part[ syms, symmetricVariables ] = True;
 
     NCDebug[3, syms];
@@ -83,7 +83,7 @@ Begin[ "`Private`" ]
           /. options
           /. Options[PrimalDual, SymmetricVariables];
 
-    syms = Table[ False, {i, Length[BB]}];
+    syms = Table[False, Length[BB]];
     Part[ syms, symmetricVariables ] = True;
 
     (* Compute dimensions *)
