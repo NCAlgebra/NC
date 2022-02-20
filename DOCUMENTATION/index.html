@@ -97,35 +97,36 @@ class="toc-section-number">5</span> Most Basic Commands</a>
 <li><a href="#to-commute-or-not-to-commute"><span
 class="toc-section-number">5.1</span> To Commute Or Not To
 Commute?</a></li>
-<li><a href="#inverses-transposes-and-adjoints"><span
-class="toc-section-number">5.2</span> Inverses, Transposes and
-Adjoints</a></li>
-<li><a href="#replace"><span class="toc-section-number">5.3</span>
+<li><a href="#inverses"><span class="toc-section-number">5.2</span>
+Inverses</a></li>
+<li><a href="#transposes-and-adjoints"><span
+class="toc-section-number">5.3</span> Transposes and Adjoints</a></li>
+<li><a href="#replace"><span class="toc-section-number">5.4</span>
 Replace</a></li>
-<li><a href="#polynomials"><span class="toc-section-number">5.4</span>
+<li><a href="#polynomials"><span class="toc-section-number">5.5</span>
 Polynomials</a></li>
 <li><a href="#rationals-and-simplification"><span
-class="toc-section-number">5.5</span> Rationals and
+class="toc-section-number">5.6</span> Rationals and
 Simplification</a></li>
-<li><a href="#calculus"><span class="toc-section-number">5.6</span>
+<li><a href="#calculus"><span class="toc-section-number">5.7</span>
 Calculus</a></li>
-<li><a href="#BasicMatrices"><span class="toc-section-number">5.7</span>
+<li><a href="#BasicMatrices"><span class="toc-section-number">5.8</span>
 Matrices</a>
 <ul>
 <li><a href="#BasicMatrices:Inverses"><span
-class="toc-section-number">5.7.1</span> Inverses, products, adjoints,
+class="toc-section-number">5.8.1</span> Inverses, products, adjoints,
 etc</a></li>
 <li><a href="#BasicMatrices:LUDecomposition"><span
-class="toc-section-number">5.7.2</span> LU Decomposition</a></li>
+class="toc-section-number">5.8.2</span> LU Decomposition</a></li>
 <li><a href="#BasicMatrices:LUDecompositionWithCompletePivoting"><span
-class="toc-section-number">5.7.3</span> LU Decomposition with complete
+class="toc-section-number">5.8.3</span> LU Decomposition with complete
 pivoting</a></li>
 <li><a href="#BasicMatrices:LDLDecomposition"><span
-class="toc-section-number">5.7.4</span> LDL Decomposition</a></li>
+class="toc-section-number">5.8.4</span> LDL Decomposition</a></li>
 <li><a href="#ReplaceWithMatrices"><span
-class="toc-section-number">5.7.5</span> Replace with matrices</a></li>
+class="toc-section-number">5.8.5</span> Replace with matrices</a></li>
 </ul></li>
-<li><a href="#Quadratic"><span class="toc-section-number">5.8</span>
+<li><a href="#Quadratic"><span class="toc-section-number">5.9</span>
 Quadratic polynomials, second direction derivatives and
 convexity</a></li>
 </ul></li>
@@ -327,26 +328,28 @@ class="toc-section-number">11.3</span> NCCollect</a>
 <ul>
 <li><a href="#NCCollect"><span class="toc-section-number">11.3.1</span>
 NCCollect</a></li>
+<li><a href="#NCCollectExponents"><span
+class="toc-section-number">11.3.2</span> NCCollectExponents</a></li>
 <li><a href="#NCCollectSelfAdjoint"><span
-class="toc-section-number">11.3.2</span> NCCollectSelfAdjoint</a></li>
+class="toc-section-number">11.3.3</span> NCCollectSelfAdjoint</a></li>
 <li><a href="#NCCollectSymmetric"><span
-class="toc-section-number">11.3.3</span> NCCollectSymmetric</a></li>
+class="toc-section-number">11.3.4</span> NCCollectSymmetric</a></li>
 <li><a href="#NCStrongCollect"><span
-class="toc-section-number">11.3.4</span> NCStrongCollect</a></li>
+class="toc-section-number">11.3.5</span> NCStrongCollect</a></li>
 <li><a href="#NCStrongCollectSelfAdjoint"><span
-class="toc-section-number">11.3.5</span>
+class="toc-section-number">11.3.6</span>
 NCStrongCollectSelfAdjoint</a></li>
 <li><a href="#NCStrongCollectSymmetric"><span
-class="toc-section-number">11.3.6</span>
+class="toc-section-number">11.3.7</span>
 NCStrongCollectSymmetric</a></li>
-<li><a href="#NCCompose"><span class="toc-section-number">11.3.7</span>
+<li><a href="#NCCompose"><span class="toc-section-number">11.3.8</span>
 NCCompose</a></li>
 <li><a href="#NCDecompose"><span
-class="toc-section-number">11.3.8</span> NCDecompose</a></li>
+class="toc-section-number">11.3.9</span> NCDecompose</a></li>
 <li><a href="#NCTermsOfDegree"><span
-class="toc-section-number">11.3.9</span> NCTermsOfDegree</a></li>
+class="toc-section-number">11.3.10</span> NCTermsOfDegree</a></li>
 <li><a href="#NCTermsOfTotalDegree"><span
-class="toc-section-number">11.3.10</span> NCTermsOfTotalDegree</a></li>
+class="toc-section-number">11.3.11</span> NCTermsOfTotalDegree</a></li>
 </ul></li>
 <li><a href="#PackageNCReplace"><span
 class="toc-section-number">11.4</span> NCReplace</a>
@@ -971,11 +974,13 @@ IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE BEEN REWRITTEN TO
 ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.</p>
 </blockquote></li>
 <li><p>Streamlined rules for <code>NCSimplifyRational</code>.</p></li>
-<li><p><code>NonCommutativeMultiply</code>: new function
-<code>NCExpandExponents</code>.</p></li>
+<li><p><code>NonCommutativeMultiply</code>: new functions
+<code>NCExpandExponents</code> and <code>NCToList</code>.</p></li>
 <li><p><code>NCReplace</code>: new functions
 <code>NCReplacePowerRule</code>; option
 <code>ApplyPowerRule</code>.</p></li>
+<li><p><code>NCCollect</code>: new function
+<code>NCCollectExponents</code>.</p></li>
 </ol>
 <h1 data-number="3" id="Version5_0"><span
 class="header-section-number">3</span> Changes in Version 5.0</h1>
@@ -1201,14 +1206,14 @@ NonCommutativeQ[a]</code></pre>
 <p>both return <code>True</code>.</p>
 <blockquote>
 <p><strong>WARNING:</strong> Prior to <strong>Version 6</strong>,
-noncommutative monomials would be stored in an expanded form, without
-exponents. That is, the monomial</p>
+noncommutative monomials would be stored in expanded form, without
+exponents. For example, the monomial</p>
 <pre><code>a**b**a^2**b</code></pre>
 <p>would be stored as</p>
 <pre><code>NonCommutativeMultiply[a, b, a, a, b]</code></pre>
 <p>The automatic expansion of powers of noncommutative symbols required
 overloading the behavior of the built in <code>Power</code> operator,
-which was interfeering and causing much trouble when commutative
+which was interfering and causing much trouble when commutative
 polynomial operations were performed inside an <code>NCAlgebra</code>
 session.</p>
 <p>Starting with <strong>Version 6</strong>, noncommutative monomials
@@ -1220,9 +1225,8 @@ compressed to the compact representation with exponents. Exponents are
 now also used to represent the noncommutative inverse. See the notes in
 the next section.</p>
 </blockquote>
-<h2 data-number="5.2" id="inverses-transposes-and-adjoints"><span
-class="header-section-number">5.2</span> Inverses, Transposes and
-Adjoints</h2>
+<h2 data-number="5.2" id="inverses"><span
+class="header-section-number">5.2</span> Inverses</h2>
 <p>The multiplicative identity is denoted <code>Id</code> in the
 program. At the present time, <code>Id</code> is set to 1.</p>
 <p>A symbol <code>a</code> may have an inverse, which will be denoted by
@@ -1235,6 +1239,19 @@ inv[a**b]**a**b</code></pre>
 <pre><code>a**b**inv[b]</code></pre>
 <p>results in <code>a</code>.</p>
 <blockquote>
+<p><strong>WARNING:</strong> Starting with <strong>Version 6</strong>,
+the <code>inv</code> operator acts mostly as a wrapper for
+<code>Power</code>. For example, <code>inv[a]</code> internally
+evaluates to <code>Power[a, -1]</code>. However, <code>inv</code> is
+still available and used to display the noncommutative inverse of
+noncommutative expressions outside of a notebook environment. Beware
+that <code>inv[a**a]</code> now evaluates to <code>Power[a, -2]</code>,
+hence certain patterns may no longer work. For example:</p>
+<pre><code>NCReplace[inv[a ** a], a ** a -&gt; b]</code></pre>
+<p>would produce <code>inv[b]</code> in previous versions of
+<code>NCAlgebra</code> but will fail in <strong>Version 6</strong>.</p>
+</blockquote>
+<blockquote>
 <p><strong>WARNING:</strong> Since <strong>Version 5</strong>,
 <code>inv</code> no longer automatically distributes over noncommutative
 products. If this more aggressive behavior is desired use
@@ -1246,6 +1263,8 @@ inv[a**b]</code></pre>
 inv[a**b]</code></pre>
 <p>returns <code>inv[a**b]</code>.</p>
 </blockquote>
+<h2 data-number="5.3" id="transposes-and-adjoints"><span
+class="header-section-number">5.3</span> Transposes and Adjoints</h2>
 <p><code>tp[x]</code> denotes the transpose of symbol <code>x</code> and
 <code>aj[x]</code> denotes the adjoint of symbol <code>x</code>. Like
 <code>inv</code>, the properties of transposes and adjoints that
@@ -1289,27 +1308,18 @@ simpplifies to</p>
 <pre><code>tr[a ** b] a ** b</code></pre>
 <p>because <code>tr</code> is a commutative function. See <a
 href="#SetCommutativeFunction">SetCommutativeFunction</a>.</p>
+<p>A more interesting example is</p>
+<pre><code>expr = (a ** b - b ** a)^3</code></pre>
+<p>for which <code>NCExpand[tr[expr]]</code> evaluates to</p>
+<pre><code>3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]</code></pre>
 <p>Use <a href="#NCMatrixExpand">NCMatrixExpand</a> to expand
 <code>tr</code> over matrices with noncommutative entries. For
 example,</p>
 <pre><code>NCMatrixExpand[tr[{{a,b},{c,d}}]]</code></pre>
 <p>evaluates to</p>
 <pre><code>tr[a] + tr[d]</code></pre>
-<blockquote>
-<p><strong>WARNING:</strong> Starting with <strong>Version 6</strong>,
-the <code>inv</code> operator acts mostly as a wrapper for
-<code>Power</code>. For example, <code>inv[a]</code> internally
-evaluates to <code>Power[a, -1]</code>. However, <code>inv</code> is
-still available and used to display the noncommutative inverse outside
-of a notebook environment. Beware that <code>inv[a**a]</code> now
-evaluates to <code>Power[a, -2]</code>, hence certain patterns may no
-longer work. For example:</p>
-<pre><code>NCReplace[inv[a ** a], a ** a -&gt; b]</code></pre>
-<p>would produce <code>inv[b]</code> in previous versions of
-<code>NCAlgebra</code> but will fail in <strong>Version 6</strong>.</p>
-</blockquote>
-<h2 data-number="5.3" id="replace"><span
-class="header-section-number">5.3</span> Replace</h2>
+<h2 data-number="5.4" id="replace"><span
+class="header-section-number">5.4</span> Replace</h2>
 <p>A key feature of symbolic computation is the ability to perform
 substitutions. The Mathematica substitute commands,
 e.g. <code>ReplaceAll</code> (<code>/.</code>) and
@@ -1334,7 +1344,7 @@ create symmetric and self adjoint versions of your rules:</p>
 introduced in <strong>Version 6</strong>, in which repeated letters in
 monomials are represented as powers, presents a new challenge to pattern
 matching for <code>NCAlgebra</code> expressions. For example, the
-seeminlgy inocent substitution</p>
+seemingly innocent substitution</p>
 <pre><code>NCReplaceAll[a**b**b, a**b -&gt; c]</code></pre>
 <p>which in previous versions returned <code>c**b</code> will fail in
 <strong>Version 6</strong>. The reason for the failure is that
@@ -1373,8 +1383,8 @@ rules and replacements in <code>NCAlgebra</code>.</p>
 5</strong> in favor of the above nc versions of
 <code>Replace</code>.</p>
 </blockquote>
-<h2 data-number="5.4" id="polynomials"><span
-class="header-section-number">5.4</span> Polynomials</h2>
+<h2 data-number="5.5" id="polynomials"><span
+class="header-section-number">5.5</span> Polynomials</h2>
 <p>The command <code>NCExpand</code> expands noncommutative products.
 For example:</p>
 <pre><code>NCExpand[(a+b)**x]</code></pre>
@@ -1484,8 +1494,8 @@ to <em>convert</em> an expression into those special formats. See <a
 href="#PackageNCPolyInterface">NCPolyInterface</a>, <a
 href="#PackageNCPoly">NCPoly</a>, and <a
 href="#PackageNCPolynomial">NCPolynomial</a> for details.</p>
-<h2 data-number="5.5" id="rationals-and-simplification"><span
-class="header-section-number">5.5</span> Rationals and
+<h2 data-number="5.6" id="rationals-and-simplification"><span
+class="header-section-number">5.6</span> Rationals and
 Simplification</h2>
 <p>One of the great challenges of noncommutative symbolic algebra is the
 simplification of rational nc expressions. <code>NCAlgebra</code>
@@ -1519,8 +1529,8 @@ with nc rationals using Gröbner basis, and</li>
 state-space representations of nc rationals. This package is still
 experimental.</li>
 </ul>
-<h2 data-number="5.6" id="calculus"><span
-class="header-section-number">5.6</span> Calculus</h2>
+<h2 data-number="5.7" id="calculus"><span
+class="header-section-number">5.7</span> Calculus</h2>
 <p>The package <a href="#PackageNCDiff"><code>NCDiff</code></a> provide
 functions for calculating derivatives and integrals of nc polynomials
 and nc rationals.</p>
@@ -1565,8 +1575,8 @@ role="doc-noteref"><sup>1</sup></a>.</p>
 <p><strong>Version 5</strong> introduced experimental support for
 integration of nc polynomials. See <a
 href="#NCIntegrate"><code>NCIntegrate</code></a>.</p>
-<h2 data-number="5.7" id="BasicMatrices"><span
-class="header-section-number">5.7</span> Matrices</h2>
+<h2 data-number="5.8" id="BasicMatrices"><span
+class="header-section-number">5.8</span> Matrices</h2>
 <p><code>NCAlgebra</code> has many commands for manipulating matrices
 with noncommutative entries. Think block-matrices. Matrices are
 represented in Mathematica using <em>lists of lists</em>. For
@@ -1592,8 +1602,8 @@ vector</em>;</li>
 a <em>matrix</em>. Indeed whether it is a row or column vector depends
 on the context. We advise not to use <em>vectors</em>.</li>
 </ul>
-<h3 data-number="5.7.1" id="BasicMatrices:Inverses"><span
-class="header-section-number">5.7.1</span> Inverses, products, adjoints,
+<h3 data-number="5.8.1" id="BasicMatrices:Inverses"><span
+class="header-section-number">5.8.1</span> Inverses, products, adjoints,
 etc</h3>
 <p>A useful command is <a href="#NCInverse"><code>NCInverse</code></a>,
 which is akin to Mathematica’s <code>Inverse</code> command and produces
@@ -1645,8 +1655,8 @@ href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a>, <a
 href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>,
 etc, that allow one to work with matrices with symbolic noncommutative
 entries.</p>
-<h3 data-number="5.7.2" id="BasicMatrices:LUDecomposition"><span
-class="header-section-number">5.7.2</span> LU Decomposition</h3>
+<h3 data-number="5.8.2" id="BasicMatrices:LUDecomposition"><span
+class="header-section-number">5.8.2</span> LU Decomposition</h3>
 <p>Behind <code>NCInverse</code> there are a host of linear algebra
 algorithms which are available in the package:</p>
 <ul>
@@ -1730,9 +1740,9 @@ u = {{c, d}, {0, b - (a + b)**inv[c]**d}}</code></pre>
 as a pivot instead of <code>a + b</code>.</p>
 <p>The function <code>NCLUDecompositionWithPartialPivoting</code> is the
 one that is used by <code>NCInverse</code>.</p>
-<h3 data-number="5.7.3"
+<h3 data-number="5.8.3"
 id="BasicMatrices:LUDecompositionWithCompletePivoting"><span
-class="header-section-number">5.7.3</span> LU Decomposition with
+class="header-section-number">5.8.3</span> LU Decomposition with
 complete pivoting</h3>
 <p>Another factorization algorithm is <a
 href="#NCLUDecompositionWithCompletePivoting"><code>NCLUDecompositionWithCompletePivoting</code></a>,
@@ -1767,8 +1777,8 @@ permutation matrices <span class="math inline">\(P\)</span> and <span
 class="math inline">\(Q\)</span> are never constructed. Instead we used
 <code>Part</code> (<code>[[]]</code>) to permute both rows and
 columns.</p>
-<h3 data-number="5.7.4" id="BasicMatrices:LDLDecomposition"><span
-class="header-section-number">5.7.4</span> LDL Decomposition</h3>
+<h3 data-number="5.8.4" id="BasicMatrices:LDLDecomposition"><span
+class="header-section-number">5.8.4</span> LDL Decomposition</h3>
 <p>Finally <a
 href="#NCLDLDecomposition"><code>NCLDLDecomposition</code></a> computes
 the <span class="math inline">\(LDL^T\)</span> decomposition of
@@ -1803,8 +1813,8 @@ the users.</p>
 href="#NCLDLDecomposition"><code>NCLDLDecomposition</code></a>, with a
 slightly different syntax.</p>
 </blockquote>
-<h3 data-number="5.7.5" id="ReplaceWithMatrices"><span
-class="header-section-number">5.7.5</span> Replace with matrices</h3>
+<h3 data-number="5.8.5" id="ReplaceWithMatrices"><span
+class="header-section-number">5.8.5</span> Replace with matrices</h3>
 <p><a href="#NCMatrixReplaceAll"><code>NCMatrixReplaceAll</code></a> and
 <a
 href="#NCMatrixReplaceRepeated"><code>NCMatrixReplaceRepeated</code></a>
@@ -1851,8 +1861,8 @@ result of</p>
 NCMatrixReplaceRepeated[inv[z], rule]</code></pre>
 <p>coincides with</p>
 <pre><code>NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]</code></pre>
-<h2 data-number="5.8" id="Quadratic"><span
-class="header-section-number">5.8</span> Quadratic polynomials, second
+<h2 data-number="5.9" id="Quadratic"><span
+class="header-section-number">5.9</span> Quadratic polynomials, second
 direction derivatives and convexity</h2>
 <p>The closest related demo to the material in this section is
 <code>NC/DEMOS/NCConvexity.nb</code>.</p>
@@ -4181,6 +4191,7 @@ class="header-section-number">11.3</span> NCCollect</h2>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCCollect">NCCollect</a></li>
+<li><a href="#NCCollectExponents">NCCollectExponents</a></li>
 <li><a href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a></li>
 <li><a href="#NCCollectSymmetric">NCCollectSymmetric</a></li>
 <li><a href="#NCStrongCollect">NCStrongCollect</a></li>
@@ -4224,8 +4235,18 @@ href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a
 href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a
 href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>, <a
 href="#NCRationalToNCPolynomial">NCRationalToNCPolynomial</a>.</p>
-<h3 data-number="11.3.2" id="NCCollectSelfAdjoint"><span
-class="header-section-number">11.3.2</span> NCCollectSelfAdjoint</h3>
+<h3 data-number="11.3.2" id="NCCollectExponents"><span
+class="header-section-number">11.3.2</span> NCCollectExponents</h3>
+<p><code>NCCollectExponents[expr]</code> collects exponents in
+noncommutative monomials.</p>
+<p>For example</p>
+<pre><code>NCCollectExponents[a**b**a**b**c-a**b**a**b]</code></pre>
+<p>returns</p>
+<pre><code>(a**b)^2**c-(a**b)^2</code></pre>
+<p>See also: <a href="#NCCollect">NCCollect</a>, <a
+href="#NCStrongCollect">NCStrongCollect</a>.</p>
+<h3 data-number="11.3.3" id="NCCollectSelfAdjoint"><span
+class="header-section-number">11.3.3</span> NCCollectSelfAdjoint</h3>
 <p><code>NCCollectSelfAdjoint[expr,vars]</code> allows one to collect
 terms of nc expression <code>expr</code> on the variables
 <code>vars</code> and their adjoints without writing out the
@@ -4244,8 +4265,8 @@ href="#NCStrongCollect">NCStrongCollect</a>, <a
 href="#NCCollectSymmetric">NCCollectSymmetric</a>, <a
 href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a
 href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>.</p>
-<h3 data-number="11.3.3" id="NCCollectSymmetric"><span
-class="header-section-number">11.3.3</span> NCCollectSymmetric</h3>
+<h3 data-number="11.3.4" id="NCCollectSymmetric"><span
+class="header-section-number">11.3.4</span> NCCollectSymmetric</h3>
 <p><code>NCCollectSymmetric[expr,vars]</code> allows one to collect
 terms of nc expression <code>expr</code> on the variables
 <code>vars</code> and their transposes without writing out the
@@ -4263,8 +4284,8 @@ href="#NCStrongCollect">NCStrongCollect</a>, <a
 href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a
 href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a
 href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>.</p>
-<h3 data-number="11.3.4" id="NCStrongCollect"><span
-class="header-section-number">11.3.4</span> NCStrongCollect</h3>
+<h3 data-number="11.3.5" id="NCStrongCollect"><span
+class="header-section-number">11.3.5</span> NCStrongCollect</h3>
 <p><code>NCStrongCollect[expr,vars]</code> collects terms of expression
 <code>expr</code> according to the elements of <code>vars</code> and
 attempts to combine by association.</p>
@@ -4281,8 +4302,8 @@ href="#NCCollectSymmetric">NCCollectSymmetric</a>, <a
 href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a
 href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>, <a
 href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>.</p>
-<h3 data-number="11.3.5" id="NCStrongCollectSelfAdjoint"><span
-class="header-section-number">11.3.5</span>
+<h3 data-number="11.3.6" id="NCStrongCollectSelfAdjoint"><span
+class="header-section-number">11.3.6</span>
 NCStrongCollectSelfAdjoint</h3>
 <p><code>NCStrongCollectSymmetric[expr,vars]</code> allows one to
 collect terms of nc expression <code>expr</code> on the variables
@@ -4295,8 +4316,8 @@ href="#NCStrongCollect">NCStrongCollect</a>, <a
 href="#NCCollectSymmetric">NCCollectSymmetric</a>, <a
 href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a
 href="#NCStrongCollectSymmetric">NCStrongCollectSymmetric</a>.</p>
-<h3 data-number="11.3.6" id="NCStrongCollectSymmetric"><span
-class="header-section-number">11.3.6</span>
+<h3 data-number="11.3.7" id="NCStrongCollectSymmetric"><span
+class="header-section-number">11.3.7</span>
 NCStrongCollectSymmetric</h3>
 <p><code>NCStrongCollectSymmetric[expr,vars]</code> allows one to
 collect terms of nc expression <code>expr</code> on the variables
@@ -4309,8 +4330,8 @@ href="#NCStrongCollect">NCStrongCollect</a>, <a
 href="#NCCollectSymmetric">NCCollectSymmetric</a>, <a
 href="#NCCollectSelfAdjoint">NCCollectSelfAdjoint</a>, <a
 href="#NCStrongCollectSelfAdjoint">NCStrongCollectSelfAdjoint</a>.</p>
-<h3 data-number="11.3.7" id="NCCompose"><span
-class="header-section-number">11.3.7</span> NCCompose</h3>
+<h3 data-number="11.3.8" id="NCCompose"><span
+class="header-section-number">11.3.8</span> NCCompose</h3>
 <p><code>NCCompose[dec]</code> will reassemble the terms in
 <code>dec</code> which were decomposed by <a
 href="#NCDecompose"><code>NCDecompose</code></a>.</p>
@@ -4324,8 +4345,8 @@ will reproduce only the terms of degree <code>degree</code>.</p>
 <code>NCPolynomial</code> format.</p>
 <p>See also: <a href="#NCDecompose">NCDecompose</a>, <a
 href="#NCPDecompose">NCPDecompose</a>.</p>
-<h3 data-number="11.3.8" id="NCDecompose"><span
-class="header-section-number">11.3.8</span> NCDecompose</h3>
+<h3 data-number="11.3.9" id="NCDecompose"><span
+class="header-section-number">11.3.9</span> NCDecompose</h3>
 <p><code>NCDecompose[p,vars]</code> gives an association of elements of
 the nc polynomial <code>p</code> in variables <code>vars</code> in which
 elements of the same order are collected together.</p>
@@ -4337,8 +4358,8 @@ as variables.</p>
 href="#NCPDecompose"><code>NCPDecompose</code></a>.</p>
 <p>See also: <a href="#NCCompose">NCCompose</a>, <a
 href="#NCPDecompose">NCPDecompose</a>.</p>
-<h3 data-number="11.3.9" id="NCTermsOfDegree"><span
-class="header-section-number">11.3.9</span> NCTermsOfDegree</h3>
+<h3 data-number="11.3.10" id="NCTermsOfDegree"><span
+class="header-section-number">11.3.10</span> NCTermsOfDegree</h3>
 <p><code>NCTermsOfDegree[expr,vars,degrees]</code> returns an expression
 such that each term has degree <code>degrees</code> in variables
 <code>vars</code>.</p>
@@ -4356,8 +4377,8 @@ such that each term has degree <code>degrees</code> in variables
 <p>See also: <a href="#NCTermsOfTotalDegree">NCTermsOfTotalDegree</a>,
 <a href="#NCDecompose">NCDecompose</a>, <a
 href="#NCPDecompose">NCPDecompose</a>.</p>
-<h3 data-number="11.3.10" id="NCTermsOfTotalDegree"><span
-class="header-section-number">11.3.10</span> NCTermsOfTotalDegree</h3>
+<h3 data-number="11.3.11" id="NCTermsOfTotalDegree"><span
+class="header-section-number">11.3.11</span> NCTermsOfTotalDegree</h3>
 <p><code>NCTermsOfTotalDegree[expr,vars,degree]</code> returns an
 expression such that each term has total degree <code>degree</code> in
 variables <code>vars</code>.</p>

@@ -60,18 +60,19 @@ All rights reserved.
     -   [<span class="toc-section-number">4.4</span> Pre-2017 NCGB C++ version](#pre-2017-ncgb-c-version)
 -   [<span class="toc-section-number">5</span> Most Basic Commands](#most-basic-commands)
     -   [<span class="toc-section-number">5.1</span> To Commute Or Not To Commute?](#to-commute-or-not-to-commute)
-    -   [<span class="toc-section-number">5.2</span> Inverses, Transposes and Adjoints](#inverses-transposes-and-adjoints)
-    -   [<span class="toc-section-number">5.3</span> Replace](#replace)
-    -   [<span class="toc-section-number">5.4</span> Polynomials](#polynomials)
-    -   [<span class="toc-section-number">5.5</span> Rationals and Simplification](#rationals-and-simplification)
-    -   [<span class="toc-section-number">5.6</span> Calculus](#calculus)
-    -   [<span class="toc-section-number">5.7</span> Matrices](#matrices)
-        -   [<span class="toc-section-number">5.7.1</span> Inverses, products, adjoints, etc](#inverses-products-adjoints-etc)
-        -   [<span class="toc-section-number">5.7.2</span> LU Decomposition](#lu-decomposition)
-        -   [<span class="toc-section-number">5.7.3</span> LU Decomposition with complete pivoting](#lu-decomposition-with-complete-pivoting)
-        -   [<span class="toc-section-number">5.7.4</span> LDL Decomposition](#ldl-decomposition)
-        -   [<span class="toc-section-number">5.7.5</span> Replace with matrices](#replace-with-matrices)
-    -   [<span class="toc-section-number">5.8</span> Quadratic polynomials, second direction derivatives and convexity](#quadratic-polynomials-second-direction-derivatives-and-convexity)
+    -   [<span class="toc-section-number">5.2</span> Inverses](#inverses)
+    -   [<span class="toc-section-number">5.3</span> Transposes and Adjoints](#transposes-and-adjoints)
+    -   [<span class="toc-section-number">5.4</span> Replace](#replace)
+    -   [<span class="toc-section-number">5.5</span> Polynomials](#polynomials)
+    -   [<span class="toc-section-number">5.6</span> Rationals and Simplification](#rationals-and-simplification)
+    -   [<span class="toc-section-number">5.7</span> Calculus](#calculus)
+    -   [<span class="toc-section-number">5.8</span> Matrices](#matrices)
+        -   [<span class="toc-section-number">5.8.1</span> Inverses, products, adjoints, etc](#inverses-products-adjoints-etc)
+        -   [<span class="toc-section-number">5.8.2</span> LU Decomposition](#lu-decomposition)
+        -   [<span class="toc-section-number">5.8.3</span> LU Decomposition with complete pivoting](#lu-decomposition-with-complete-pivoting)
+        -   [<span class="toc-section-number">5.8.4</span> LDL Decomposition](#ldl-decomposition)
+        -   [<span class="toc-section-number">5.8.5</span> Replace with matrices](#replace-with-matrices)
+    -   [<span class="toc-section-number">5.9</span> Quadratic polynomials, second direction derivatives and convexity](#quadratic-polynomials-second-direction-derivatives-and-convexity)
 -   [<span class="toc-section-number">6</span> More Advanced Commands](#more-advanced-commands)
     -   [<span class="toc-section-number">6.1</span> Advanced Rules and Replacements](#advanced-rules-and-replacements)
         -   [<span class="toc-section-number">6.1.1</span> `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`) often fail](#replaceall-and-replacerepeated-often-fail)
@@ -143,15 +144,16 @@ All rights reserved.
         -   [<span class="toc-section-number">11.2.3</span> SortedCyclicPermutationQ](#sortedcyclicpermutationq)
     -   [<span class="toc-section-number">11.3</span> NCCollect](#nccollect)
         -   [<span class="toc-section-number">11.3.1</span> NCCollect](#nccollect-1)
-        -   [<span class="toc-section-number">11.3.2</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
-        -   [<span class="toc-section-number">11.3.3</span> NCCollectSymmetric](#nccollectsymmetric)
-        -   [<span class="toc-section-number">11.3.4</span> NCStrongCollect](#ncstrongcollect)
-        -   [<span class="toc-section-number">11.3.5</span> NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
-        -   [<span class="toc-section-number">11.3.6</span> NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
-        -   [<span class="toc-section-number">11.3.7</span> NCCompose](#nccompose)
-        -   [<span class="toc-section-number">11.3.8</span> NCDecompose](#ncdecompose)
-        -   [<span class="toc-section-number">11.3.9</span> NCTermsOfDegree](#nctermsofdegree)
-        -   [<span class="toc-section-number">11.3.10</span> NCTermsOfTotalDegree](#nctermsoftotaldegree)
+        -   [<span class="toc-section-number">11.3.2</span> NCCollectExponents](#nccollectexponents)
+        -   [<span class="toc-section-number">11.3.3</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
+        -   [<span class="toc-section-number">11.3.4</span> NCCollectSymmetric](#nccollectsymmetric)
+        -   [<span class="toc-section-number">11.3.5</span> NCStrongCollect](#ncstrongcollect)
+        -   [<span class="toc-section-number">11.3.6</span> NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
+        -   [<span class="toc-section-number">11.3.7</span> NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
+        -   [<span class="toc-section-number">11.3.8</span> NCCompose](#nccompose)
+        -   [<span class="toc-section-number">11.3.9</span> NCDecompose](#ncdecompose)
+        -   [<span class="toc-section-number">11.3.10</span> NCTermsOfDegree](#nctermsofdegree)
+        -   [<span class="toc-section-number">11.3.11</span> NCTermsOfTotalDegree](#nctermsoftotaldegree)
     -   [<span class="toc-section-number">11.4</span> NCReplace](#ncreplace)
         -   [<span class="toc-section-number">11.4.1</span> NCReplace](#ncreplace-1)
         -   [<span class="toc-section-number">11.4.2</span> NCReplaceAll](#ncreplaceall)
@@ -440,9 +442,11 @@ The beginnings of the program come from eran@slac.
 
 2.  Streamlined rules for `NCSimplifyRational`.
 
-3.  `NonCommutativeMultiply`: new function `NCExpandExponents`.
+3.  `NonCommutativeMultiply`: new functions `NCExpandExponents` and `NCToList`.
 
 4.  `NCReplace`: new functions `NCReplacePowerRule`; option `ApplyPowerRule`.
+
+5.  `NCCollect`: new function `NCCollectExponents`.
 
 # Changes in Version 5.0
 
@@ -699,7 +703,7 @@ One can check whether a given symbol is commutative or not using
 both return `True`.
 
 > **WARNING:** Prior to **Version 6**, noncommutative monomials would be
-> stored in an expanded form, without exponents. That is, the monomial
+> stored in expanded form, without exponents. For example, the monomial
 >
 >     a**b**a^2**b
 >
@@ -709,7 +713,7 @@ both return `True`.
 >
 > The automatic expansion of powers of noncommutative symbols required
 > overloading the behavior of the built in `Power` operator, which was
-> interfeering and causing much trouble when commutative polynomial
+> interfering and causing much trouble when commutative polynomial
 > operations were performed inside an `NCAlgebra` session.
 >
 > Starting with **Version 6**, noncommutative monomials are represented
@@ -723,7 +727,7 @@ both return `True`.
 > used to represent the noncommutative inverse. See the notes in the
 > next section.
 
-## Inverses, Transposes and Adjoints
+## Inverses
 
 The multiplicative identity is denoted `Id` in the program. At the
 present time, `Id` is set to 1.
@@ -742,6 +746,19 @@ both lead to `Id = 1` and
 
 results in `a`.
 
+> **WARNING:** Starting with **Version 6**, the `inv` operator acts
+> mostly as a wrapper for `Power`. For example, `inv[a]` internally
+> evaluates to `Power[a, -1]`. However, `inv` is still available and
+> used to display the noncommutative inverse of noncommutative
+> expressions outside of a notebook environment. Beware that
+> `inv[a**a]` now evaluates to `Power[a, -2]`, hence certain patterns
+> may no longer work. For example:
+>
+>     NCReplace[inv[a ** a], a ** a -> b]
+>
+> would produce `inv[b]` in previous versions of `NCAlgebra` but will
+> fail in **Version 6**.
+
 > **WARNING:** Since **Version 5**, `inv` no longer automatically
 > distributes over noncommutative products. If this more aggressive
 > behavior is desired use `SetOptions[inv, Distribute -> True]`. For
@@ -756,6 +773,8 @@ results in `a`.
 >     inv[a**b]
 >
 > returns `inv[a**b]`.
+
+## Transposes and Adjoints
 
 `tp[x]` denotes the transpose of symbol `x` and `aj[x]` denotes the
 adjoint of symbol `x`. Like `inv`, the properties of transposes and
@@ -806,6 +825,14 @@ always simplifies to zero. Also `b ** a ** tr[b ** a]` simpplifies to
 because `tr` is a commutative function. See
 [SetCommutativeFunction](#setcommutativefunction).
 
+A more interesting example is
+
+    expr = (a ** b - b ** a)^3
+
+for which `NCExpand[tr[expr]]` evaluates to
+
+    3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]
+
 Use [NCMatrixExpand](#ncmatrixexpand) to expand `tr` over matrices
 with noncommutative entries. For example,
 
@@ -814,18 +841,6 @@ with noncommutative entries. For example,
 evaluates to
 
     tr[a] + tr[d]
-
-> **WARNING:** Starting with **Version 6**, the `inv` operator acts
-> mostly as a wrapper for `Power`. For example, `inv[a]` internally
-> evaluates to `Power[a, -1]`. However, `inv` is still available and
-> used to display the noncommutative inverse outside of a notebook
-> environment. Beware that `inv[a**a]` now evaluates to
-> `Power[a, -2]`, hence certain patterns may no longer work. For example:
->
->     NCReplace[inv[a ** a], a ** a -> b]
->
-> would produce `inv[b]` in previous versions of `NCAlgebra` but will
-> fail in **Version 6**.
 
 ## Replace
 
@@ -861,7 +876,7 @@ returns
 > **WARNING:** The change in internal representation introduced in
 > **Version 6**, in which repeated letters in monomials are represented
 > as powers, presents a new challenge to pattern matching for
-> `NCAlgebra` expressions. For example, the seeminlgy inocent substitution
+> `NCAlgebra` expressions. For example, the seemingly innocent substitution
 >
 >     NCReplaceAll[a**b**b, a**b -> c]
 >
@@ -4327,6 +4342,7 @@ See also:
 Members are:
 
 -   [NCCollect](#nccollect-1)
+-   [NCCollectExponents](#nccollectexponents)
 -   [NCCollectSelfAdjoint](#nccollectselfadjoint)
 -   [NCCollectSymmetric](#nccollectsymmetric)
 -   [NCStrongCollect](#ncstrongcollect)
@@ -4360,6 +4376,22 @@ think it should.
 
 See also:
 [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint), [NCRationalToNCPolynomial](#ncrationaltoncpolynomial).
+
+### NCCollectExponents
+
+`NCCollectExponents[expr]` collects exponents in noncommutative monomials.
+
+For example
+
+    NCCollectExponents[a**b**a**b**c-a**b**a**b]
+
+returns
+
+    (a**b)^2**c-(a**b)^2
+
+See also:
+[NCCollect](#nccollect-1),
+[NCStrongCollect](#ncstrongcollect).
 
 ### NCCollectSelfAdjoint
 
