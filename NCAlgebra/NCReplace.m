@@ -71,7 +71,17 @@ Begin["`Private`"]
 	   ,
             l^(n_Integer?((#>=i)&)) ** s ** r^(m_Integer?((#>=j)&))
 	]
-    ], l^(n - i) ** expr ** r^(m - j)
+    ], If[ n != i
+	  ,
+	   l^(n - i) ** expr ** r^(m - j)
+	  ,
+	   If[ m != j
+	      ,
+	       expr ** r^(m - j)
+	      ,
+	       expr
+	   ]
+       ]
   ];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
 		     [Power[l_?NCSymbolOrSubscriptQ, i:_Integer?Positive:1] ** s__, expr_]] := op[
@@ -80,7 +90,7 @@ Begin["`Private`"]
         l^(n:_Integer?Positive:1) ** s
        ,
         l^(n_Integer?((#>=i)&))
-    ], l^(n - i) ** expr
+    ], If[n != i, l^(n - i) ** expr, expr]
   ];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
 		     [s__ ** Power[r_?NCSymbolOrSubscriptQ, j:_Integer?Positive:1], expr_]] := op[
@@ -89,16 +99,26 @@ Begin["`Private`"]
 	s ** r^(m:_Integer?Positive:1)
        ,
        s ** r^(m:_Integer?((#>=j)&))
-     ],
-   expr ** r^(m - j)
+     ], If[m != j, expr ** r^(m - j), expr]
   ];
   NCReplacePowerRule[(expr_Rule|expr_RuleDelayed)] := expr;
   
   Clear[FlatNCMultiply];
   SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
 
+  FlatNCMultiply[a___, b_?NotMatrixQ, d:(b_ ..), c___] :=
+    FlatNCMultiply[a, Power[b, Length[{d}]+1], c];
   FlatNCMultiply[a___, b_?CommutativeQ c_, d___] :=
     b FlatNCMultiply[a, c, d];
+  (* MAURICIO: FEB 2022
+     Is the following rule needed?
+
+         FlatNCMultiply[a___, b_?CommutativeQ, d___] := FlatNCMultiply[a, d];
+
+     It throws Mathematica's pattern matching machinery into an infinite loop.
+     For now I think I can control it by preventing power rule from ever putting
+     out an exponent that is zero. What else could throw a number inside FlatNCMultiply?
+  *)
     
   Clear[NCReplaceFlatRules];
   NCReplaceFlatRules = {

@@ -211,7 +211,8 @@ Begin[ "`Private`" ]
   (* Convert noncommutative product into list expanding powers *)
   NCToList[l_NonCommutativeMultiply] :=
     Flatten[(List @@ l) /. Power[x_,n_?Positive] :> Table[x, {n}]];
-  NCToList[expr_] := NCToList[ExpandNonCommutativeMultiply[expr]];
+  NCToList[Power[x_?NonCommutativeQ, n:_Integer?Positive:1]] :=
+    Table[x, {n}];
 
   (* Identity *)
   (* MAURICIO BUG: 07/07/2016

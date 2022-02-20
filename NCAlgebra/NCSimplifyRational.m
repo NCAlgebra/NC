@@ -218,7 +218,7 @@ Begin["`Private`"]
 
     (* Apply rational rules *)
       
-    Scan[(tmp = ExpandNonCommutativeMultiply[NCReplaceAll[tmp, #]])&, simpRules];
+    Scan[(tmp = ExpandNonCommutativeMultiply[NCReplaceRepeated[tmp, #]])&, simpRules];
       
     If[debug, Print["tmp1 = ", tmp]];
 

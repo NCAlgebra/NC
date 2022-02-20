@@ -190,6 +190,23 @@ Block[
   answer = (1 + 2 x + 3 x^2 + 2 x^3 + x^4)^(-1);
   NCTest[ExpandNonCommutativeMultiply[exp], answer];
 
+  (* NCToList *)
+  NCTest[NCToList[x], {x}];
+  NCTest[NCToList[x^3], {x,x,x}];
+  NCTest[NCToList[x^3 ** x], {x,x,x,x}];
+  NCTest[NCToList[x**x^3 ** x], {x,x,x,x,x}];
+  NCTest[NCToList[inv[x]], NCToList[inv[x]]];
+
+  (* NCExpandExponents *)
+  NCTest[NCExpandExponents[x**y], x**y];
+  NCTest[List @@ ((x**y)^2), {x**y, 2}];
+  NCTest[NCExpandExponents[(x**y)^2], x**y**x**y];
+  NCTest[List @@ (x**(x**y)^2), {x, (x**y)^2}];
+  NCTest[NCExpandExponents[x**(x**y)^2], x^2**y**x**y];
+  NCTest[NCExpandExponents[(x**y)^2**y], x**y**x**y^2];
+  NCTest[List @@ (x**(x**y)^2**y), {x, (x**y)^2, y}];
+  NCTest[NCExpandExponents[x**(x**y)^2**y], x^2**y**x**y^2];
+
   (* power simplification *)
   NCTest[x^3 ** x, x^4];
   NCTest[x ** x^3, x^4];

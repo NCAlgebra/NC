@@ -276,6 +276,3 @@ See also:
 [NCExpandExponents](#NCExpandExponents),
 [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
 [NCExpand](#NCExpand), [NCE](#NCE).
-
-
-

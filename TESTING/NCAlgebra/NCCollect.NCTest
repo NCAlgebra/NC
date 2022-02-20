@@ -128,6 +128,61 @@ Module[
    answer = x^2**y + y**x^2 + (y**x + x**y)**y;
    NCTest[NCCollect[exp,{y,x}], answer];
 
+   exp = a ** x ** y ** x ** y ** b;
+   answer = a ** (x ** y)^2 ** b;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = x ** x ** y ** x ** y ** b;
+   answer = x ** (x ** y)^2 ** b;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = a ** x ** y ** x ** y ** y;
+   answer = a ** (x ** y)^2 ** y;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = x ** x ** y ** x ** y ** y;
+   answer = x ** (x ** y)^2 ** y;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = a ** x ** y ** x ** y ** x ** y ** b;
+   answer = a ** (x ** y)^3 ** b;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = x ** x ** y ** x ** y ** x ** y ** b;
+   answer = x ** (x ** y)^3 ** b;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = a ** x ** y ** x ** y ** x ** y ** y;
+   answer = a ** (x ** y)^3 ** y;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = x ** x ** y ** x ** y ** x ** y ** y;
+   answer = x ** (x ** y)^3 ** y;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = x ** x ** y ** (x ** y)^2 ** y;
+   answer = x ** (x ** y)^3 ** y;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = x ** x ** y ** (x ** y)^2 ** y + x ** y;
+   answer = x ** y + x ** (x ** y)^3 ** y;
+   NCTest[NCCollectExponents[exp], answer];
+
+   exp = NCExpand[a ** (x ** y)^2 ** b - a ** (x ** y)^3];
+   answer = a ** x ** y ** x ** y ** (b - x ** y);
+   NCTest[NCStrongCollect[exp, x ** y], answer];
+   answer = a ** (x ** y)^2 ** (b - x ** y);
+   NCTest[NCStrongCollect[NCCollectExponents[exp], x ** y], answer];
+   answer = - a ** (x ** y)^3 + a ** (x ** y)^2 ** b;
+   NCTest[NCCollect[exp, x ** y], answer];
+
+   exp = NCExpand[a ** (x ** y)^2 ** b - a ** (x ** y)^4];
+   answer = a ** x ** y ** x ** y ** (b - x ** y ** x ** y);
+   NCTest[NCStrongCollect[exp, x ** y], answer];
+   answer = a ** (x ** y)^2 ** (b - (x ** y)^2);
+   NCTest[NCStrongCollect[NCCollectExponents[exp], x ** y], answer];
+   answer = - a ** (x ** y)^4 + a ** (x ** y)^2 ** b;
+   NCTest[NCCollect[exp, x ** y], answer];
 
    (* NCDecompose *)
 
