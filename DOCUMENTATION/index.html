@@ -1426,6 +1426,19 @@ group terms by degree. For instance:</p>
 <pre><code>y**(c+d)+(a+b)**x**(1+y)</code></pre>
 <p>Keep in mind that <code>NCStrongCollect</code> often collects
 <em>more</em> than one would normally expect.</p>
+<blockquote>
+<p><strong>WARNING:</strong> In <strong>Version 6</strong> the commands
+<a href="#NCExpandExponents">NCExpandExponents</a> and <a
+href="#NCCollectExponents">NCCollectExponents</a> expands and collects
+exponents of expressions in noncommutative monomials. For example</p>
+<pre><code>NCExpandExponents[a ** (b ** a)^2 ** b]</code></pre>
+<p>produces</p>
+<pre><code>a ** b ** a ** b ** a ** b</code></pre>
+<p>and</p>
+<pre><code>NCCollectExponents[a ** b ** a ** b ** a ** b]</code></pre>
+<p>produces</p>
+<pre><code>(a ** b)^3</code></pre>
+</blockquote>
 <p><code>NCAlgebra</code> provides some commands for noncommutative
 polynomial manipulation that are similar to the native Mathematica
 (commutative) polynomial commands. For example:</p>

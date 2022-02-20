@@ -994,6 +994,25 @@ produces
 Keep in mind that `NCStrongCollect` often collects *more* than one
 would normally expect.
 
+> **WARNING:** In **Version 6** the commands
+> [NCExpandExponents](#ncexpandexponents) and
+> [NCCollectExponents](#nccollectexponents) expands and collects
+> exponents of expressions in noncommutative monomials. For example
+>
+>     NCExpandExponents[a ** (b ** a)^2 ** b]
+>
+> produces
+>
+>     a ** b ** a ** b ** a ** b
+>
+> and
+>
+>     NCCollectExponents[a ** b ** a ** b ** a ** b]
+>
+> produces
+>
+>     (a ** b)^3
+
 `NCAlgebra` provides some commands for noncommutative polynomial
 manipulation that are similar to the native Mathematica (commutative)
 polynomial commands. For example:
