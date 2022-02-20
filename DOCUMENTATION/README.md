@@ -440,13 +440,15 @@ The beginnings of the program come from eran@slac.
     > MITIGATE THE IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE
     > BEEN REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
 
-2.  Streamlined rules for `NCSimplifyRational`.
+2.  Streamlined rules for [NCSimplifyRational](#ncsimplifyrational-1).
 
-3.  `NonCommutativeMultiply`: new functions `NCExpandExponents` and `NCToList`.
+3.  `NonCommutativeMultiply`: new functions
+    [NCExpandExponents](#ncexpandexponents) and [NCToList](#nctolist).
 
-4.  `NCReplace`: new functions `NCReplacePowerRule`; option `ApplyPowerRule`.
+4.  `NCReplace`: new functions
+    [NCReplacePowerRule](#ncreplacepowerrule); option `ApplyPowerRule`.
 
-5.  `NCCollect`: new function `NCCollectExponents`.
+5.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
 
 # Changes in Version 5.0
 

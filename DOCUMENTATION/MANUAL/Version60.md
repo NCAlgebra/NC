@@ -13,7 +13,9 @@
    > MITIGATE THE IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE
    > BEEN REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
 
-2. Streamlined rules for `NCSimplifyRational`.
-3. `NonCommutativeMultiply`: new functions `NCExpandExponents` and `NCToList`.
-4. `NCReplace`: new functions `NCReplacePowerRule`; option `ApplyPowerRule`.
-5. `NCCollect`: new function `NCCollectExponents`.
+2. Streamlined rules for [NCSimplifyRational](#NCSimplifyRational).
+3. `NonCommutativeMultiply`: new functions
+[NCExpandExponents](#NCExpandExponents) and [NCToList](#NCToList).
+4. `NCReplace`: new functions
+[NCReplacePowerRule](#NCReplacePowerRule); option `ApplyPowerRule`.
+5. `NCCollect`: new function [NCCollectExponents](#NCCollectExponents).
