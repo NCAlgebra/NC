@@ -781,31 +781,35 @@ Begin["`Private`"];
     ];
     n = Total[vars];
 
-    degree = Map[IndexToDegree[# - 1, n] &, 
-                   rules[[All, 1]], {2}];
-    index = Map[DegreeToIndex[#, n] &, degree, {2}];
-    index = rules[[All,1]] - index - 1;
-
-    (* flip digits on the right *)
-    rindex = NCFromDigits[
-               Map[Reverse,
-                   Map[NCIntegerDigits[#,n]&, 
-                       Transpose[{degree[[All,2]], index[[All,2]]}]]
-               ], n][[All,2]];
-
-    (* offset digits on the left *)
-    loffset = Map[n^(#)&, degree[[All,2]] ];
-    digits = index[[All,1]] * loffset + rindex;
-    coeff = Transpose[{Map[Total, degree], digits}];
-      
     (*
     Print["m = ", Normal[m]];
     Print["n = ", n];
     Print["Vars = ", Vars];
     Print["vars = ", vars];
     Print["rules = ", rules];
+     *)
+    
+    degree = Map[IndexToDegree[# - 1, n] &, rules[[All, 1]], {2}];
+    index = Map[DegreeToIndex[#, n] &, degree, {2}];
+    index = rules[[All,1]] - index - 1;
+    
+    (* flip digits on the right *)
+    rindex = NCFromDigits[
+               Map[Reverse,
+		   Map[NCIntegerDigits[#,n]&, 
+		       Transpose[{degree[[All,2]], index[[All, 2]]}]]
+		   ], n][[All,2]];
+    
+    (* offset digits on the left *)
+    loffset = Map[n^(#)&, degree[[All,2]] ];
+    digits = index[[All,1]] * loffset + rindex;
+    coeff = Transpose[{Map[Total, degree], digits}];
+    
+    (*
     Print["degree = ", degree];
     Print["index = ", index];
+    Print["rindex = ", rindex];
+    Print["rows = ", rows];
     Print["digits = ", digits];
     Print["loffset = ", loffset];
     Print["coeff = ", coeff];
@@ -813,12 +817,99 @@ Begin["`Private`"];
     
     Return[
       NCPolyConvert[
-          NCPoly[{n}, Merge[Thread[coeff -> rules[[All,2]]], Total]],
-          Vars
+        NCPoly[{n}, Merge[Thread[coeff -> rules[[All,2]]], Total]],
+        Vars
       ]
     ];
-      
+    
   ];
+
+  (* NCPolyFromGramMatrixFactors *)
+  NCPolyFromGramMatrixFactors[l_List?MatrixQ, r_List?MatrixQ, Vars_List] := 
+    NCPolyFromGramMatrixFactors[SparseArray[l], SparseArray[r], Vars];
   
+  NCPolyFromGramMatrixFactors[l_SparseArray, r_SparseArray, Vars_List] := Module[
+    {n, vars,
+     index, degree, digits, rindex, rpoly, lpoly,
+     lrules = Drop[ArrayRules[l], -1],
+     rrules = Drop[ArrayRules[r], -1],
+     coeff},
+
+    (* list of variables *)
+    Check[ vars = NCPolyVarsToIntegers[Vars];
+          ,
+           Return[$Failed]
+          ,
+           NCPoly::InvalidList
+    ];
+    n = Total[vars];
+
+    (*
+    Print["m = ", Normal[m]];
+    Print["n = ", n];
+    Print["Vars = ", Vars];
+    Print["vars = ", vars];
+    Print["rrules = ", rrules];
+    Print["lrules = ", lrules];
+    *)
+    
+    (* right product *)
+
+    index = rrules[[All, 1, 2]];
+    degree = Map[IndexToDegree[# - 1, n]&, index];
+
+    (* flip digits on the right *)
+    rindex = NCFromDigits[
+	       Map[Reverse,
+		   Map[NCIntegerDigits[#,n]&, 
+		       Transpose[{degree, index}]]
+		   ], n][[All,2]];
+	
+    coeff = Transpose[{degree, rindex}];
+    rpoly = Map[
+	      NCPoly[{n}, Merge[#, Total]]&,
+	      Values[
+		KeySort[
+ 	          Merge[ Thread[rrules[[All, 1, 1]] -> Thread[coeff -> rrules[[All,2]]]]
+		        ,
+		         Join
+		  ]
+	        ]
+	      ]
+	    ];
+    (*
+    Print["degree = ", degree];
+    Print["index = ", index];
+    Print["rindex = ", rindex];
+    Print["coeff = ", coeff];
+    Print["rpoly = ", rpoly];
+     *)
+    
+    index = lrules[[All, 1, 1]];
+    degree = Map[IndexToDegree[# - 1, n]&, index];
+	
+    coeff = Transpose[{degree, index}];
+    lpoly = Map[
+	      NCPoly[{n}, Merge[#, Total]]&,
+	      Values[
+		KeySort[
+  	          Merge[ Thread[lrules[[All, 1, 2]] -> Thread[coeff -> lrules[[All, 2]]]]
+		        ,
+		         Join
+	          ]
+		]
+	      ]
+	    ];
+    (*
+    Print["degree = ", degree];
+    Print["index = ", index];
+    Print["coeff = ", coeff];
+    Print["lpoly = ", lpoly];
+    *)
+
+    Return[{NCPolyConvert[lpoly, Vars], NCPolyConvert[rpoly, Vars]}];
+	
+  ];
+
 End[];
 EndPackage[]

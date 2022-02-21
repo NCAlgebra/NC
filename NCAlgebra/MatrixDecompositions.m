@@ -109,7 +109,26 @@ Begin[ "`Private`" ]
 
   
   (* GetLDUMatrices *)
-  
+
+  GetLDUMatrices[ldl_, p_, s_, rank_] := Module[
+    {l,d,u},
+
+    (* Extract L and U factor *)
+    {l,d,u} = GetLDUMatrices[ldl, s];
+
+    (* Truncate to rank *)
+    If[ rank < Length[l]
+       ,
+        l = l[[All, 1;;rank]];
+        l[[p,All]] = l;
+	u = u[[1;;rank, All]];
+        u[[All,p]] = u;
+	d = d[[1;;rank, 1;;rank]];
+    ];
+
+    Return[{l,d,u}];
+  ];
+
   GetLDUMatrices[ldl_, s_] := Module[
     {m,n,S,id,dm,lm},
     {m,n} = Dimensions[ldl];

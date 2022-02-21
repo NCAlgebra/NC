@@ -38,6 +38,7 @@ Clear[NCPoly,
       NCPolyCoefficientArray,
       NCPolyFromCoefficientArray,
       NCPolyFromGramMatrix,
+      NCPolyFromGramMatrixFactors,
       NCPolyGetDigits,
       NCPolyGetIntegers,
       NCPolyNumberOfVariables,
@@ -64,6 +65,7 @@ Clear[NCFromDigits,
       NCPolyDivideLeading,
       NCPolyVariables,
       NCPolyDisplay,
+      NCPolyToList,
       NCPolyOrderType,
       NCPolyPossibleZeroQ];
 
@@ -562,6 +564,11 @@ Begin["`Private`"];
 
   NCPolyDisplay[p___] := $Failed;
 
+  (* NCPolyToList *)
+
+  NCPolyToList[p_NCPoly] :=
+    Map[NCPoly[p[[1]], Association[{##}]] &, Normal[p[[2]]], {1}];
+    
   (* NCPolySplitDigits *)
       
   NCPolySplitDigits[digits_List] :=

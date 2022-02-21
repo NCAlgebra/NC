@@ -17,8 +17,8 @@ tests = {
   "Groebner",
   "Hankel",
   "NCPolyInterface",
-  "NCPolySOS",
   "NCGBX" (*,
+  "NCPolySOS",
   *)
 };
 results = NCTestRun[tests];

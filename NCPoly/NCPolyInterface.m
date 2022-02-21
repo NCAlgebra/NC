@@ -161,7 +161,7 @@ Begin["`Private`"];
               Map[Part[Flatten[vars], #]&, 
                   NCPolyGetDigits[poly] + 1] /. {} -> 1, 1]];
   ];
-  
+
   (* NCCoefficientList *)
   
   NCCoefficientList[expr_, vars_] := Module[

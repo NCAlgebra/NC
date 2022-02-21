@@ -4,7 +4,7 @@
 
 Block[
   {x,y,z,answer,
-   vars, p, poly1, q, SDPVars,
+   vars, p, poly1, q, SDPVars, chipset,
    p1, p2, p1t, p2t,
    q1, Q1, Q, sol, solQ},
 
@@ -19,7 +19,7 @@ Block[
   p = (x+y-x**x);
   poly1 = NCToNCPoly[p**p+A x**y**y**x+B x**x,vars];
 
-  {q1,Q1}=NCPolySOS[poly1, q];
+  {q1,Q1,chipset}=NCPolySOS[poly1, q];
   answer = NCPoly[{1, 
   1}, <|{0, 2, 0} -> q[2, 2], {0, 3, 0} -> 
    2 q[4, 2], {0, 4, 0} -> q[4, 4], {1, 1, 1} ->
@@ -40,7 +40,7 @@ Block[
   q[5, 4], {5, 5} -> q[5, 5], {_, _} -> 0}];
   NCTest[Q1, answer];
   
-  {Q,SDPVars,sol,solQ}=NCPolySOSToSDP[{},{poly1-q1},{Q1},z];
+  {Q,SDPVars,sol,solQ}=NCPolySOSToSDP[{poly1-q1},{Q1},z];
   answer = SparseArray[{{1, 1, 1} -> z[2], {1, 1, 2} -> 
     1, {1, 1, 3} -> -1, {1, 2, 1} -> 1, {1, 2, 2} -> 
     1, {1, 2, 3} -> -1, {1, 3, 1} -> -1, {1, 3, 2} -> -1, {1, 3, 3} -> 
@@ -62,7 +62,7 @@ Block[
   pt=tp[p]/.tp->Identity;
   poly1=NCToNCPoly[pt**p,vars];
 
-  {q1,Q1}=NCPolySOS[poly1, q];
+  {q1,Q1,chipset}=NCPolySOS[poly1, q];
   NCTest[q1, NCPoly[{1, 
     1}, <|{0, 2, 0} -> q[2, 2], {0, 3, 0} -> 
      2 q[4, 2], {0, 4, 0} -> q[4, 4], {1, 1, 1} ->
@@ -101,7 +101,7 @@ Block[
     q[18, 9], {18, 18} -> q[18, 18], {_, _} -> 0}
   ]];
 
-  {Q,SDPVars,sol,solQ}=NCPolySOSToSDP[{},{poly1-q1},{Q1},z];
+  {Q,SDPVars,sol,solQ}=NCPolySOSToSDP[{poly1-q1},{Q1},z];
   NCTest[Q, SparseArray[{{1, 1, 1} -> 4, {1, 1, 2} -> 
     2, {1, 1, 3} -> -2, {1, 1, 4} -> -4, {1, 1, 5} -> 2, {1, 2, 1} -> 
     2, {1, 2, 2} -> 1, {1, 2, 3} -> -1, {1, 2, 4} -> -2, {1, 2, 5} -> 
@@ -132,7 +132,7 @@ Block[
   p2t = tp[p2] /. tp -> Identity;
   poly1 = NCToNCPoly[p1t ** p1 + p2t ** p2, vars];
 
-  {q1, Q1} = NCPolySOS[poly1, q];
+  {q1,Q1,chipset} = NCPolySOS[poly1, q];
   NCTest[q1, NCPoly[{1, 
     1}, <|{0, 2, 0} -> q[2, 2], {0, 3, 0} -> 
      2 q[4, 2], {0, 4, 0} -> 
@@ -352,7 +352,7 @@ Block[
     15], {28, 18} -> q[28, 18], {28, 24} -> q[28, 
     24], {28, 28} -> q[28, 28], {_, _} -> 0}]];
 
-  {Q, SDPVars, sol, solQ} = NCPolySOSToSDP[{}, {poly1 - q1}, {Q1}, z];
+  {Q, SDPVars, sol, solQ} = NCPolySOSToSDP[{poly1 - q1}, {Q1}, z];
   NCTest[Q, SparseArray[{{1, 1, 1} -> 4, {1, 1, 2} -> 
     2, {1, 1, 3} -> -2, {1, 1, 4} -> -4, {1, 1, 5} -> z[
     1], {1, 1, 6} -> z[2], {1, 1, 7} -> z[
