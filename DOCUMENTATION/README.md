@@ -351,29 +351,29 @@ All rights reserved.
         -   [<span class="toc-section-number">16.4.4</span> SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
     -   [<span class="toc-section-number">16.5</span> PrimalDual](#primaldual)
         -   [<span class="toc-section-number">16.5.1</span> PrimalDual](#primaldual-1)
+    -   [<span class="toc-section-number">16.6</span> NCPolySOS](#ncpolysos)
+        -   [<span class="toc-section-number">16.6.1</span> NCPolySOS](#ncpolysos-1)
+        -   [<span class="toc-section-number">16.6.2</span> NCPolySOSToSDP](#ncpolysostosdp)
 -   [<span class="toc-section-number">17</span> Work in Progress](#work-in-progress)
-    -   [<span class="toc-section-number">17.1</span> NCPolySOS](#ncpolysos)
-        -   [<span class="toc-section-number">17.1.1</span> NCPolySOS](#ncpolysos-1)
-        -   [<span class="toc-section-number">17.1.2</span> NCPolySOSToSDP](#ncpolysostosdp)
-    -   [<span class="toc-section-number">17.2</span> NCRational](#ncrational)
-        -   [<span class="toc-section-number">17.2.1</span> State-space realizations for NC rationals](#state-space-realizations-for-nc-rationals)
-        -   [<span class="toc-section-number">17.2.2</span> Utilities](#utilities-1)
-        -   [<span class="toc-section-number">17.2.3</span> Operations on NC rationals](#operations-on-nc-rationals)
-        -   [<span class="toc-section-number">17.2.4</span> Minimal realizations](#minimal-realizations)
-    -   [<span class="toc-section-number">17.3</span> NCRealization](#ncrealization)
-        -   [<span class="toc-section-number">17.3.1</span> NCDescriptorRealization](#ncdescriptorrealization)
-        -   [<span class="toc-section-number">17.3.2</span> NCDeterminantalRepresentationReciprocal](#ncdeterminantalrepresentationreciprocal)
-        -   [<span class="toc-section-number">17.3.3</span> NCMatrixDescriptorRealization](#ncmatrixdescriptorrealization)
-        -   [<span class="toc-section-number">17.3.4</span> NCMinimalDescriptorRealization](#ncminimaldescriptorrealization)
-        -   [<span class="toc-section-number">17.3.5</span> NCSymmetricDescriptorRealization](#ncsymmetricdescriptorrealization)
-        -   [<span class="toc-section-number">17.3.6</span> NCSymmetricDeterminantalRepresentationDirect](#ncsymmetricdeterminantalrepresentationdirect)
-        -   [<span class="toc-section-number">17.3.7</span> NCSymmetricDeterminantalRepresentationReciprocal](#ncsymmetricdeterminantalrepresentationreciprocal)
-        -   [<span class="toc-section-number">17.3.8</span> NCSymmetrizeMinimalDescriptorRealization](#ncsymmetrizeminimaldescriptorrealization)
-        -   [<span class="toc-section-number">17.3.9</span> NonCommutativeLift](#noncommutativelift)
-        -   [<span class="toc-section-number">17.3.10</span> SignatureOfAffineTerm](#signatureofaffineterm)
-        -   [<span class="toc-section-number">17.3.11</span> TestDescriptorRealization](#testdescriptorrealization)
-        -   [<span class="toc-section-number">17.3.12</span> PinnedQ](#pinnedq)
-        -   [<span class="toc-section-number">17.3.13</span> PinningSpace](#pinningspace)
+    -   [<span class="toc-section-number">17.1</span> NCRational](#ncrational)
+        -   [<span class="toc-section-number">17.1.1</span> State-space realizations for NC rationals](#state-space-realizations-for-nc-rationals)
+        -   [<span class="toc-section-number">17.1.2</span> Utilities](#utilities-1)
+        -   [<span class="toc-section-number">17.1.3</span> Operations on NC rationals](#operations-on-nc-rationals)
+        -   [<span class="toc-section-number">17.1.4</span> Minimal realizations](#minimal-realizations)
+    -   [<span class="toc-section-number">17.2</span> NCRealization](#ncrealization)
+        -   [<span class="toc-section-number">17.2.1</span> NCDescriptorRealization](#ncdescriptorrealization)
+        -   [<span class="toc-section-number">17.2.2</span> NCDeterminantalRepresentationReciprocal](#ncdeterminantalrepresentationreciprocal)
+        -   [<span class="toc-section-number">17.2.3</span> NCMatrixDescriptorRealization](#ncmatrixdescriptorrealization)
+        -   [<span class="toc-section-number">17.2.4</span> NCMinimalDescriptorRealization](#ncminimaldescriptorrealization)
+        -   [<span class="toc-section-number">17.2.5</span> NCSymmetricDescriptorRealization](#ncsymmetricdescriptorrealization)
+        -   [<span class="toc-section-number">17.2.6</span> NCSymmetricDeterminantalRepresentationDirect](#ncsymmetricdeterminantalrepresentationdirect)
+        -   [<span class="toc-section-number">17.2.7</span> NCSymmetricDeterminantalRepresentationReciprocal](#ncsymmetricdeterminantalrepresentationreciprocal)
+        -   [<span class="toc-section-number">17.2.8</span> NCSymmetrizeMinimalDescriptorRealization](#ncsymmetrizeminimaldescriptorrealization)
+        -   [<span class="toc-section-number">17.2.9</span> NonCommutativeLift](#noncommutativelift)
+        -   [<span class="toc-section-number">17.2.10</span> SignatureOfAffineTerm](#signatureofaffineterm)
+        -   [<span class="toc-section-number">17.2.11</span> TestDescriptorRealization](#testdescriptorrealization)
+        -   [<span class="toc-section-number">17.2.12</span> PinnedQ](#pinnedq)
+        -   [<span class="toc-section-number">17.2.13</span> PinningSpace](#pinningspace)
 -   [References](#references)
 
 **NCAlgebra** is distributed under the terms of the BSD License:
@@ -449,6 +449,10 @@ The beginnings of the program come from eran@slac.
     [NCReplacePowerRule](#ncreplacepowerrule); option `ApplyPowerRule`.
 
 5.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
+
+6.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices) and [GetFullLDUMatrices](#getfullldumatrices) now produces low rank matrices.
+
+7.  `NCPoly`: new function [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
 
 # Changes in Version 5.0
 
@@ -4303,7 +4307,7 @@ See also:
 
 `NCToList[expr]` produces a list with the symbols appearing in
 monomial `expr`. If `expr` is not a monomial it remains
-unevaluated. Powers of symbols are expanded before the list being
+unevaluated. Powers of symbols are expanded before the list is
 produced.
 
 For example
@@ -4974,15 +4978,12 @@ Finally the following pattern based rules are applied:
 | inv\[1 + K a b\] a               | a inv\[1 + K b a\]              |
 | inv\[A inv\[a\] + B b\] inv\[a\] | (1/A) inv\[1 + (B/A) a b\]      |
 | inv\[a\] inv\[A inv\[a\] + K b\] | (1/A) inv\[1 + (B/A) b a\]      |
+| inv\[1 + K a b\] a b             | (1 - inv\[1 + K a b\])/K        |
+| inv\[1 + K a\] a                 | (1 - inv\[1 + K a\])/K          |
+| a b inv\[1 + K a b\]             | (1 - inv\[1 + K a b\])/K        |
+| a inv\[1 + K a\]                 | (1 - inv\[1 + K a\])/K          |
 
-`NCPreSimplifyRational` only applies pattern based rules from the second table above. In addition, the following two rules are applied:
-
-| Original             | Transformed              |
-|:---------------------|:-------------------------|
-| inv\[1 + K a b\] a b | (1 - inv\[1 + K a b\])/K |
-| inv\[1 + K a\] a     | (1 - inv\[1 + K a\])/K   |
-| a b inv\[1 + K a b\] | (1 - inv\[1 + K a b\])/K |
-| a inv\[1 + K a\]     | (1 - inv\[1 + K a\])/K   |
+`NCPreSimplifyRational` only applies pattern based rules from the table above once.
 
 Rules in `NCSimplifyRational` and `NCPreSimplifyRational` are applied repeatedly.
 
@@ -5613,12 +5614,19 @@ See also:
 
 ### GetLUMatrices
 
-`GetLUMatrices[m]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
+`GetLUMatrices[lu]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
+
+`GetLUMatrices[lu, p, q, rank]` extracts compact lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting` taking into account permutations and the matrix rank.
 
 For example:
 
-    {lu, p} = LUDecompositionWithPartialPivoting[A];
+    {lu, p} = LUDecompositionWithPartialPivoting[mat];
     {l, u} = GetLUMatrices[lu];
+
+and
+
+    {lu, p, q, rank} = LUDecompositionWithCompletePivoting[mat];
+    {l, u} = GetLUMatrices[lu, p, q, rank];
 
 returns the lower-triangular factor `l` and upper-triangular factor `u` as `SparseArray`s.
 
@@ -5629,24 +5637,28 @@ See also:
 
 `GetFullLUMatrices[m]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
 
-For example:
+`GetFullLUMatrices[lu, p, q, rank]` extracts compact lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting` taking into account permutations and the matrix rank.
 
-    {lu, p} = LUDecompositionWithPartialPivoting[A];
-    {l, u} = GetFullLUMatrices[lu];
-
-returns the lower-triangular factor `l` and upper-triangular factor `u`.
+`GetFullLUMatrices` is equivalent to `Normal @@ GetLUMatrices`
 
 See also:
-[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices).
+[GetLUMatrices](#getlumatrices),
+[LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting).
 
 ### GetLDUMatrices
 
-`GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+`GetLDUMatrices[ldu, s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+
+`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `LDLDecomposition` taking into account permutations and the matrix rank.
 
 For example:
 
-    {ldl, p, s, rank} = LDLDecomposition[A];
+    {ldl, p, s, rank} = LDLDecomposition[mat];
     {l,d,u} = GetLDUMatrices[ldl,s];
+
+and
+
+    {l, d, u} = GetLDUMatrices[ldl, p, s, rank];
 
 returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d` as `SparseArray`s.
 
@@ -5655,14 +5667,11 @@ See also:
 
 ### GetFullLDUMatrices
 
-`GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+`GetLDUMatrices[ldl, s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
 
-For example:
+`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `LDLDecomposition` taking into account permutations and the matrix rank.
 
-    {ldl, p, s, rank} = LDLDecomposition[A];
-    {l,d,u} = GetLDUMatrices[ldl,s];
-
-returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d`.
+`GetFullLDUMatrices` is equivalent to `Normal @@ GetLDUMatrices`
 
 See also:
 [LDLDecomposition](#ldldecomposition), [GetLDUMatrices](#getldumatrices).
@@ -6081,6 +6090,7 @@ Members are:
     -   [NCPolyConvert](#ncpolyconvert)
     -   [NCPolyFromCoefficientArray](#ncpolyfromcoefficientarray)
     -   [NCPolyFromGramMatrix](#ncpolyfromgrammatrix)
+    -   [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors)
 -   Access and utilities
     -   [NCPolyMonomialQ](#ncpolymonomialq)
     -   [NCPolyDegree](#ncpolydegree)
@@ -6274,7 +6284,7 @@ the commands
 
 return
 
-    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, 
+    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1,
            {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
 
 See also:
@@ -6292,14 +6302,41 @@ For example, for `mat` equal to the `SparseArray` corresponding to the rules:
 the commands
 
     vars = {{x},{y,z}};
-    NCPolyFromCoefficientArray[mat, vars]
+    NCPolyFromGramMatrix[mat, vars]
 
 return
 
-    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1, 
+    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 1, 0} -> 2, {1, 0, 2} -> 3, {1, 1, 1} -> -1,
            {1, 1, 6} -> -3, {1, 3, 9} -> -2, {4, 0, 80} -> 1/2|>]
 
 See also:
+[NCPolyGramMatrix](#ncpolygrammatrix),
+[NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
+
+#### NCPolyFromGramMatrixFactors
+
+`NCPolyFromGramMatrixFactors[lmat, rmat, vars]` returns two lists of `NCPoly`s constructed from the factors of the Gram matrix `lmat` and `rmat` in variables `vars`.
+
+For example, for `mat = lmat . rmat` in which the factors `lmat` and `rmat` are `SparseArray`s corresponding to the rules:
+
+    {{1, 3} -> 1/2, {1, 5} -> 1, {2, 3} -> 1, {4, 1} -> 1, {6, 2} -> 1, {13, 4} -> 1}
+    {{1, 2} -> -3, {1, 1} -> 3, {2, 5} -> -2, {3, 1} -> 2, {3, 3} -> -1, {4, 13} -> 1/2, {5, 3} -> 1/2}
+
+and commands
+
+    vars = {{x},{y,z}};
+    {lpoly, rpoly} = NCPolyFromGramMatrixFactors[lmat, rmat, vars]
+
+return `lpoly` equal to the list of polynomials
+
+    {NCPoly[{1, 2}, <|{1, 0, 1} -> 1|>], NCPoly[{1, 2}, <|{1, 1, 6} -> 1|>], NCPoly[{1, 2}, <|{0, 0, 0} -> 1/2, {1, 0, 2} -> 1|>], NCPoly[{1, 2}, <|{2, 0, 4} -> 1|>], NCPoly[{1, 2}, <|{0, 0, 0} -> 1|>]},
+
+and `rpoly` equal to
+
+    {NCPoly[{1, 2}, <|{0, 0, 0} -> 3, {1, 0, 2} -> -3|>], NCPoly[{1, 2}, <|{2, 0, 7} -> -2|>], NCPoly[{1, 2}, <|{0, 0, 0} -> 2, {0, 1, 0} -> -1|>], NCPoly[{1, 2}, <|{2, 0, 4} -> 1/2|>], NCPoly[{1, 2}, <|{0, 1, 0} -> 1/2|>]}}
+
+See also:
+[NCPolyFromGramMatrix](#ncpolyfromgrammatrix),
 [NCPolyGramMatrix](#ncpolygrammatrix).
 
 ### Access and utlity functions
@@ -8614,11 +8651,6 @@ The following `options` can be given:
 
 -   `Profiling` (`False`): whether to print messages with detailed timing of steps.
 
-# Work in Progress
-
-Sections in this chapter describe experimental packages which are
-still under development.
-
 ## NCPolySOS
 
 Members are:
@@ -8628,14 +8660,30 @@ Members are:
 
 ### NCPolySOS
 
-`NCPolySOS[p, var]` returns an `NCPoly` with symbolic coefficients on
-the variable `var` corresponding to a possible Gram representation of
-the polynomial `p`.
+`NCPolySOS[degree, var]` returns an `NCPoly` with symbolic
+coefficients on the variable `var` corresponding to a possible Gram
+representation of an noncommutative SOS polynomial of degree `degree`
+and its corresponding Gram matrix.
 
-`NCPolySOS` uses [NCPolyQuadraticChipset](#ncpolyquadraticchipset) to
-generate a sparse Gram representation.
+`NCPolySOS[poly, var]` uses
+[NCPolyQuadraticChipset](#ncpolyquadraticchipset) to generate a sparse
+Gram representation of the noncommutative polynomial `poly`.
 
-`NCPolySOS[p]` uses `q` as default symbol.
+`NCPolySOS[degree]` and `NCPolySOS[p]` returns the answer in terms of
+a newly created unique symbol.
+
+For example,
+
+    {q,Q,x} = NCPolySOS[4];
+
+returns the symbolic SOS `NCPoly` `q` and its Gram matrix `Q`
+expressed in terms of the variable `x`, and
+
+    {q,Q,x,chipset} = NCPolySOS[poly];
+
+returns the symbolic NCPoly `q` and its Gram matrix `Q` corresponding
+to terms in the quadratic `chipset` expressed in terms of the variable
+`x`.
 
 See also:
 [NCPolySOSToSDP](#ncpolysostosdp),
@@ -8643,10 +8691,26 @@ See also:
 
 ### NCPolySOSToSDP
 
-`NCPolySOSToSDP[G, options]`
+`{sdp, vars, sol, solQ} = NCPolySOSToSDP[ps, Qs, var]` returns a
+semidefinite constraint `sdp` in the variables `vars` and the rules
+`sol` and `solQ` that can be used to solve for variables in the list
+of SOS NCPoly `ps` and the list of Gram matrices `Qs`.
+
+For example,
+
+{q, Q, $, chipset} = NCPolySOS\[poly, q\];
+{sdp, vars, sol, solQ} = NCPolySOSToSDP\[{poly - q}, {Q}, z\];
+
+generate the semidefinite constraints `spd` in the variables `vars`
+which are feasible if and only if the `NCPoly` `poly` is SOS.
 
 See also:
 [NCPolySOS](#ncpolysos-1).
+
+# Work in Progress
+
+Sections in this chapter describe experimental packages which are
+still under development.
 
 ## NCRational
 

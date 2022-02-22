@@ -840,70 +840,70 @@ class="toc-section-number">16.5</span> PrimalDual</a>
 <li><a href="#PrimalDual"><span class="toc-section-number">16.5.1</span>
 PrimalDual</a></li>
 </ul></li>
+<li><a href="#PackageNCPolySOS"><span
+class="toc-section-number">16.6</span> NCPolySOS</a>
+<ul>
+<li><a href="#NCPolySOS"><span class="toc-section-number">16.6.1</span>
+NCPolySOS</a></li>
+<li><a href="#NCPolySOSToSDP"><span
+class="toc-section-number">16.6.2</span> NCPolySOSToSDP</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#WorkInProgress"><span class="toc-section-number">17</span>
 Work in Progress</a>
 <ul>
-<li><a href="#PackageNCPolySOS"><span
-class="toc-section-number">17.1</span> NCPolySOS</a>
-<ul>
-<li><a href="#NCPolySOS"><span class="toc-section-number">17.1.1</span>
-NCPolySOS</a></li>
-<li><a href="#NCPolySOSToSDP"><span
-class="toc-section-number">17.1.2</span> NCPolySOSToSDP</a></li>
-</ul></li>
 <li><a href="#PackageNCRational"><span
-class="toc-section-number">17.2</span> NCRational</a>
+class="toc-section-number">17.1</span> NCRational</a>
 <ul>
 <li><a href="#state-space-realizations-for-nc-rationals"><span
-class="toc-section-number">17.2.1</span> State-space realizations for NC
+class="toc-section-number">17.1.1</span> State-space realizations for NC
 rationals</a></li>
 <li><a href="#utilities-1"><span
-class="toc-section-number">17.2.2</span> Utilities</a></li>
+class="toc-section-number">17.1.2</span> Utilities</a></li>
 <li><a href="#operations-on-nc-rationals"><span
-class="toc-section-number">17.2.3</span> Operations on NC
+class="toc-section-number">17.1.3</span> Operations on NC
 rationals</a></li>
 <li><a href="#minimal-realizations"><span
-class="toc-section-number">17.2.4</span> Minimal realizations</a></li>
+class="toc-section-number">17.1.4</span> Minimal realizations</a></li>
 </ul></li>
 <li><a href="#PackageNCRealization"><span
-class="toc-section-number">17.3</span> NCRealization</a>
+class="toc-section-number">17.2</span> NCRealization</a>
 <ul>
 <li><a href="#NCDescriptorRealization"><span
-class="toc-section-number">17.3.1</span>
+class="toc-section-number">17.2.1</span>
 NCDescriptorRealization</a></li>
 <li><a href="#NCDeterminantalRepresentationReciprocal"><span
-class="toc-section-number">17.3.2</span>
+class="toc-section-number">17.2.2</span>
 NCDeterminantalRepresentationReciprocal</a></li>
 <li><a href="#NCMatrixDescriptorRealization"><span
-class="toc-section-number">17.3.3</span>
+class="toc-section-number">17.2.3</span>
 NCMatrixDescriptorRealization</a></li>
 <li><a href="#NCMinimalDescriptorRealization"><span
-class="toc-section-number">17.3.4</span>
+class="toc-section-number">17.2.4</span>
 NCMinimalDescriptorRealization</a></li>
 <li><a href="#NCSymmetricDescriptorRealization"><span
-class="toc-section-number">17.3.5</span>
+class="toc-section-number">17.2.5</span>
 NCSymmetricDescriptorRealization</a></li>
 <li><a href="#NCSymmetricDeterminantalRepresentationDirect"><span
-class="toc-section-number">17.3.6</span>
+class="toc-section-number">17.2.6</span>
 NCSymmetricDeterminantalRepresentationDirect</a></li>
 <li><a href="#NCSymmetricDeterminantalRepresentationReciprocal"><span
-class="toc-section-number">17.3.7</span>
+class="toc-section-number">17.2.7</span>
 NCSymmetricDeterminantalRepresentationReciprocal</a></li>
 <li><a href="#NCSymmetrizeMinimalDescriptorRealization"><span
-class="toc-section-number">17.3.8</span>
+class="toc-section-number">17.2.8</span>
 NCSymmetrizeMinimalDescriptorRealization</a></li>
 <li><a href="#NonCommutativeLift"><span
-class="toc-section-number">17.3.9</span> NonCommutativeLift</a></li>
+class="toc-section-number">17.2.9</span> NonCommutativeLift</a></li>
 <li><a href="#SignatureOfAffineTerm"><span
-class="toc-section-number">17.3.10</span> SignatureOfAffineTerm</a></li>
+class="toc-section-number">17.2.10</span> SignatureOfAffineTerm</a></li>
 <li><a href="#TestDescriptorRealization"><span
-class="toc-section-number">17.3.11</span>
+class="toc-section-number">17.2.11</span>
 TestDescriptorRealization</a></li>
-<li><a href="#PinnedQ"><span class="toc-section-number">17.3.12</span>
+<li><a href="#PinnedQ"><span class="toc-section-number">17.2.12</span>
 PinnedQ</a></li>
 <li><a href="#PinningSpace"><span
-class="toc-section-number">17.3.13</span> PinningSpace</a></li>
+class="toc-section-number">17.2.13</span> PinningSpace</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#references">References</a></li>
@@ -983,6 +983,12 @@ href="#NCReplacePowerRule">NCReplacePowerRule</a>; option
 <code>ApplyPowerRule</code>.</p></li>
 <li><p><code>NCCollect</code>: new function <a
 href="#NCCollectExponents">NCCollectExponents</a>.</p></li>
+<li><p><code>MatrixDecompositions</code>: functions <a
+href="#GetLDUMatrices">GetLDUMatrices</a> and <a
+href="#GetFullLDUMatrices">GetFullLDUMatrices</a> now produces low rank
+matrices.</p></li>
+<li><p><code>NCPoly</code>: new function <a
+href="#NCPolyFromGramMatrixFactors">NCPolyFromGramMatrixFactors</a>.</p></li>
 </ol>
 <h1 data-number="3" id="Version5_0"><span
 class="header-section-number">3</span> Changes in Version 5.0</h1>
@@ -4155,7 +4161,7 @@ class="header-section-number">11.1.26</span> NCToList</h3>
 <p><code>NCToList[expr]</code> produces a list with the symbols
 appearing in monomial <code>expr</code>. If <code>expr</code> is not a
 monomial it remains unevaluated. Powers of symbols are expanded before
-the list being produced.</p>
+the list is produced.</p>
 <p>For example</p>
 <pre><code>NCToList[a**b**a^2]</code></pre>
 <p>returns</p>
@@ -4894,37 +4900,26 @@ degree then the following rules are generated:</p>
 <td>inv[a] inv[A inv[a] + K b]</td>
 <td>(1/A) inv[1 + (B/A) b a]</td>
 </tr>
-</tbody>
-</table>
-<p><code>NCPreSimplifyRational</code> only applies pattern based rules
-from the second table above. In addition, the following two rules are
-applied:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Original</th>
-<th>Transformed</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
+<tr class="even">
 <td>inv[1 + K a b] a b</td>
 <td>(1 - inv[1 + K a b])/K</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>inv[1 + K a] a</td>
 <td>(1 - inv[1 + K a])/K</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>a b inv[1 + K a b]</td>
 <td>(1 - inv[1 + K a b])/K</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>a inv[1 + K a]</td>
 <td>(1 - inv[1 + K a])/K</td>
 </tr>
 </tbody>
 </table>
+<p><code>NCPreSimplifyRational</code> only applies pattern based rules
+from the table above once.</p>
 <p>Rules in <code>NCSimplifyRational</code> and
 <code>NCPreSimplifyRational</code> are applied repeatedly.</p>
 <p>Rules in <code>NCSimplifyRationalSinglePass</code> and
@@ -5611,12 +5606,20 @@ href="#UpperTriangularSolve">UpperTriangularSolve</a>.</p>
 href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>.</p>
 <h3 data-number="12.3.7" id="GetLUMatrices"><span
 class="header-section-number">12.3.7</span> GetLUMatrices</h3>
-<p><code>GetLUMatrices[m]</code> extracts lower- and upper-triangular
+<p><code>GetLUMatrices[lu]</code> extracts lower- and upper-triangular
 blocks produced by <code>LDUDecompositionWithPartialPivoting</code> and
 <code>LDUDecompositionWithCompletePivoting</code>.</p>
+<p><code>GetLUMatrices[lu, p, q, rank]</code> extracts compact lower-
+and upper-triangular blocks produced by
+<code>LDUDecompositionWithPartialPivoting</code> and
+<code>LDUDecompositionWithCompletePivoting</code> taking into account
+permutations and the matrix rank.</p>
 <p>For example:</p>
-<pre><code>{lu, p} = LUDecompositionWithPartialPivoting[A];
+<pre><code>{lu, p} = LUDecompositionWithPartialPivoting[mat];
 {l, u} = GetLUMatrices[lu];</code></pre>
+<p>and</p>
+<pre><code>{lu, p, q, rank} = LUDecompositionWithCompletePivoting[mat];
+{l, u} = GetLUMatrices[lu, p, q, rank];</code></pre>
 <p>returns the lower-triangular factor <code>l</code> and
 upper-triangular factor <code>u</code> as <code>SparseArray</code>s.</p>
 <p>See also: <a
@@ -5630,23 +5633,29 @@ class="header-section-number">12.3.8</span> GetFullLUMatrices</h3>
 upper-triangular blocks produced by
 <code>LDUDecompositionWithPartialPivoting</code> and
 <code>LDUDecompositionWithCompletePivoting</code>.</p>
-<p>For example:</p>
-<pre><code>{lu, p} = LUDecompositionWithPartialPivoting[A];
-{l, u} = GetFullLUMatrices[lu];</code></pre>
-<p>returns the lower-triangular factor <code>l</code> and
-upper-triangular factor <code>u</code>.</p>
-<p>See also: <a
+<p><code>GetFullLUMatrices[lu, p, q, rank]</code> extracts compact
+lower- and upper-triangular blocks produced by
+<code>LDUDecompositionWithPartialPivoting</code> and
+<code>LDUDecompositionWithCompletePivoting</code> taking into account
+permutations and the matrix rank.</p>
+<p><code>GetFullLUMatrices</code> is equivalent to
+<code>Normal @@ GetLUMatrices</code></p>
+<p>See also: <a href="#GetLUMatrices">GetLUMatrices</a>, <a
 href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>,
 <a
-href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>,
-<a href="#GetLUMatrices">GetLUMatrices</a>.</p>
+href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>.</p>
 <h3 data-number="12.3.9" id="GetLDUMatrices"><span
 class="header-section-number">12.3.9</span> GetLDUMatrices</h3>
-<p><code>GetLDUMatrices[m,s]</code> extracts lower-, upper-triangular
+<p><code>GetLDUMatrices[ldu, s]</code> extracts lower-, upper-triangular
 and diagonal blocks produced by <code>LDLDecomposition</code>.</p>
+<p><code>GetLDUMatrices[ldu, p, s, rank]</code> extracts compact lower-
+and upper-triangular blocks produced by <code>LDLDecomposition</code>
+taking into account permutations and the matrix rank.</p>
 <p>For example:</p>
-<pre><code>{ldl, p, s, rank} = LDLDecomposition[A];
+<pre><code>{ldl, p, s, rank} = LDLDecomposition[mat];
 {l,d,u} = GetLDUMatrices[ldl,s];</code></pre>
+<p>and</p>
+<pre><code>{l, d, u} = GetLDUMatrices[ldl, p, s, rank];</code></pre>
 <p>returns the lower-triangular factor <code>l</code>, the
 upper-triangular factor <code>u</code>, and the block-diagonal factor
 <code>d</code> as <code>SparseArray</code>s.</p>
@@ -5654,14 +5663,13 @@ upper-triangular factor <code>u</code>, and the block-diagonal factor
 href="#GetFullLDUMatrices">GetFullLDUMatrices</a>.</p>
 <h3 data-number="12.3.10" id="GetFullLDUMatrices"><span
 class="header-section-number">12.3.10</span> GetFullLDUMatrices</h3>
-<p><code>GetLDUMatrices[m,s]</code> extracts lower-, upper-triangular
+<p><code>GetLDUMatrices[ldl, s]</code> extracts lower-, upper-triangular
 and diagonal blocks produced by <code>LDLDecomposition</code>.</p>
-<p>For example:</p>
-<pre><code>{ldl, p, s, rank} = LDLDecomposition[A];
-{l,d,u} = GetLDUMatrices[ldl,s];</code></pre>
-<p>returns the lower-triangular factor <code>l</code>, the
-upper-triangular factor <code>u</code>, and the block-diagonal factor
-<code>d</code>.</p>
+<p><code>GetLDUMatrices[ldu, p, s, rank]</code> extracts compact lower-
+and upper-triangular blocks produced by <code>LDLDecomposition</code>
+taking into account permutations and the matrix rank.</p>
+<p><code>GetFullLDUMatrices</code> is equivalent to
+<code>Normal @@ GetLDUMatrices</code></p>
 <p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>, <a
 href="#GetLDUMatrices">GetLDUMatrices</a>.</p>
 <h3 data-number="12.3.11" id="GetDiagonal"><span
@@ -6042,6 +6050,8 @@ polynomials with rational coefficients</h3>
 <li><a
 href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a></li>
 <li><a href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a></li>
+<li><a
+href="#NCPolyFromGramMatrixFactors">NCPolyFromGramMatrixFactors</a></li>
 </ul></li>
 <li>Access and utilities
 <ul>
@@ -6212,7 +6222,7 @@ NCPolyFromCoefficientArray</h4>
 <pre><code>vars = {{x},{y,z}};
 NCPolyFromCoefficientArray[mat, vars]</code></pre>
 <p>return</p>
-<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 1, 0} -&gt; 2, {1, 0, 2} -&gt; 3, {1, 1, 1} -&gt; -1, 
+<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 1, 0} -&gt; 2, {1, 0, 2} -&gt; 3, {1, 1, 1} -&gt; -1,
        {1, 1, 6} -&gt; -3, {1, 3, 9} -&gt; -2, {4, 0, 80} -&gt; 1/2|&gt;]</code></pre>
 <p>See also: <a
 href="#NCPolyCoefficientArray">NCPolyCoefficientArray</a>, <a
@@ -6227,11 +6237,33 @@ variables <code>vars</code>.</p>
 <pre><code>{{1, 1} -&gt; 1, {2, 1} -&gt; 2, {2, 3} -&gt; -1, {4, 1} -&gt; 3, {4, 2} -&gt; -3, {6, 5} -&gt; -2, {13, 13} -&gt; 1/2}</code></pre>
 <p>the commands</p>
 <pre><code>vars = {{x},{y,z}};
-NCPolyFromCoefficientArray[mat, vars]</code></pre>
+NCPolyFromGramMatrix[mat, vars]</code></pre>
 <p>return</p>
-<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 1, 0} -&gt; 2, {1, 0, 2} -&gt; 3, {1, 1, 1} -&gt; -1, 
+<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 1, 0} -&gt; 2, {1, 0, 2} -&gt; 3, {1, 1, 1} -&gt; -1,
        {1, 1, 6} -&gt; -3, {1, 3, 9} -&gt; -2, {4, 0, 80} -&gt; 1/2|&gt;]</code></pre>
-<p>See also: <a href="#NCPolyGramMatrix">NCPolyGramMatrix</a>.</p>
+<p>See also: <a href="#NCPolyGramMatrix">NCPolyGramMatrix</a>, <a
+href="#NCPolyFromGramMatrixFactors">NCPolyFromGramMatrixFactors</a>.</p>
+<h4 data-number="14.1.2.7" id="NCPolyFromGramMatrixFactors"><span
+class="header-section-number">14.1.2.7</span>
+NCPolyFromGramMatrixFactors</h4>
+<p><code>NCPolyFromGramMatrixFactors[lmat, rmat, vars]</code> returns
+two lists of <code>NCPoly</code>s constructed from the factors of the
+Gram matrix <code>lmat</code> and <code>rmat</code> in variables
+<code>vars</code>.</p>
+<p>For example, for <code>mat = lmat . rmat</code> in which the factors
+<code>lmat</code> and <code>rmat</code> are <code>SparseArray</code>s
+corresponding to the rules:</p>
+<pre><code>{{1, 3} -&gt; 1/2, {1, 5} -&gt; 1, {2, 3} -&gt; 1, {4, 1} -&gt; 1, {6, 2} -&gt; 1, {13, 4} -&gt; 1}
+{{1, 2} -&gt; -3, {1, 1} -&gt; 3, {2, 5} -&gt; -2, {3, 1} -&gt; 2, {3, 3} -&gt; -1, {4, 13} -&gt; 1/2, {5, 3} -&gt; 1/2}</code></pre>
+<p>and commands</p>
+<pre><code>vars = {{x},{y,z}};
+{lpoly, rpoly} = NCPolyFromGramMatrixFactors[lmat, rmat, vars]</code></pre>
+<p>return <code>lpoly</code> equal to the list of polynomials</p>
+<pre><code>{NCPoly[{1, 2}, &lt;|{1, 0, 1} -&gt; 1|&gt;], NCPoly[{1, 2}, &lt;|{1, 1, 6} -&gt; 1|&gt;], NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1/2, {1, 0, 2} -&gt; 1|&gt;], NCPoly[{1, 2}, &lt;|{2, 0, 4} -&gt; 1|&gt;], NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1|&gt;]},</code></pre>
+<p>and <code>rpoly</code> equal to</p>
+<pre><code>{NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 3, {1, 0, 2} -&gt; -3|&gt;], NCPoly[{1, 2}, &lt;|{2, 0, 7} -&gt; -2|&gt;], NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 2, {0, 1, 0} -&gt; -1|&gt;], NCPoly[{1, 2}, &lt;|{2, 0, 4} -&gt; 1/2|&gt;], NCPoly[{1, 2}, &lt;|{0, 1, 0} -&gt; 1/2|&gt;]}}</code></pre>
+<p>See also: <a href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a>,
+<a href="#NCPolyGramMatrix">NCPolyGramMatrix</a>.</p>
 <h3 data-number="14.1.3" id="access-and-utlity-functions"><span
 class="header-section-number">14.1.3</span> Access and utlity
 functions</h3>
@@ -8195,34 +8227,58 @@ information;</p></li>
 <li><p><code>Profiling</code> (<code>False</code>): whether to print
 messages with detailed timing of steps.</p></li>
 </ul>
-<h1 data-number="17" id="WorkInProgress"><span
-class="header-section-number">17</span> Work in Progress</h1>
-<p>Sections in this chapter describe experimental packages which are
-still under development.</p>
-<h2 data-number="17.1" id="PackageNCPolySOS"><span
-class="header-section-number">17.1</span> NCPolySOS</h2>
+<h2 data-number="16.6" id="PackageNCPolySOS"><span
+class="header-section-number">16.6</span> NCPolySOS</h2>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCPolySOS">NCPolySOS</a></li>
 <li><a href="#NCPolySOSToSDP">NCPolySOSToSDP</a> (#NCPolySOSToSDP)</li>
 </ul>
-<h3 data-number="17.1.1" id="NCPolySOS"><span
-class="header-section-number">17.1.1</span> NCPolySOS</h3>
-<p><code>NCPolySOS[p, var]</code> returns an <code>NCPoly</code> with
-symbolic coefficients on the variable <code>var</code> corresponding to
-a possible Gram representation of the polynomial <code>p</code>.</p>
-<p><code>NCPolySOS</code> uses <a
+<h3 data-number="16.6.1" id="NCPolySOS"><span
+class="header-section-number">16.6.1</span> NCPolySOS</h3>
+<p><code>NCPolySOS[degree, var]</code> returns an <code>NCPoly</code>
+with symbolic coefficients on the variable <code>var</code>
+corresponding to a possible Gram representation of an noncommutative SOS
+polynomial of degree <code>degree</code> and its corresponding Gram
+matrix.</p>
+<p><code>NCPolySOS[poly, var]</code> uses <a
 href="#NCPolyQuadraticChipset">NCPolyQuadraticChipset</a> to generate a
-sparse Gram representation.</p>
-<p><code>NCPolySOS[p]</code> uses <code>q</code> as default symbol.</p>
+sparse Gram representation of the noncommutative polynomial
+<code>poly</code>.</p>
+<p><code>NCPolySOS[degree]</code> and <code>NCPolySOS[p]</code> returns
+the answer in terms of a newly created unique symbol.</p>
+<p>For example,</p>
+<pre><code>{q,Q,x} = NCPolySOS[4];</code></pre>
+<p>returns the symbolic SOS <code>NCPoly</code> <code>q</code> and its
+Gram matrix <code>Q</code> expressed in terms of the variable
+<code>x</code>, and</p>
+<pre><code>{q,Q,x,chipset} = NCPolySOS[poly];</code></pre>
+<p>returns the symbolic NCPoly <code>q</code> and its Gram matrix
+<code>Q</code> corresponding to terms in the quadratic
+<code>chipset</code> expressed in terms of the variable
+<code>x</code>.</p>
 <p>See also: <a href="#NCPolySOSToSDP">NCPolySOSToSDP</a>, <a
 href="#NCPolyQuadraticChipset">NCPolyQuadraticChipset</a></p>
-<h3 data-number="17.1.2" id="NCPolySOSToSDP"><span
-class="header-section-number">17.1.2</span> NCPolySOSToSDP</h3>
-<p><code>NCPolySOSToSDP[G, options]</code></p>
+<h3 data-number="16.6.2" id="NCPolySOSToSDP"><span
+class="header-section-number">16.6.2</span> NCPolySOSToSDP</h3>
+<p><code>{sdp, vars, sol, solQ} = NCPolySOSToSDP[ps, Qs, var]</code>
+returns a semidefinite constraint <code>sdp</code> in the variables
+<code>vars</code> and the rules <code>sol</code> and <code>solQ</code>
+that can be used to solve for variables in the list of SOS NCPoly
+<code>ps</code> and the list of Gram matrices <code>Qs</code>.</p>
+<p>For example,</p>
+<p>{q, Q, $, chipset} = NCPolySOS[poly, q]; {sdp, vars, sol, solQ} =
+NCPolySOSToSDP[{poly - q}, {Q}, z];</p>
+<p>generate the semidefinite constraints <code>spd</code> in the
+variables <code>vars</code> which are feasible if and only if the
+<code>NCPoly</code> <code>poly</code> is SOS.</p>
 <p>See also: <a href="#NCPolySOS">NCPolySOS</a>.</p>
-<h2 data-number="17.2" id="PackageNCRational"><span
-class="header-section-number">17.2</span> NCRational</h2>
+<h1 data-number="17" id="WorkInProgress"><span
+class="header-section-number">17</span> Work in Progress</h1>
+<p>Sections in this chapter describe experimental packages which are
+still under development.</p>
+<h2 data-number="17.1" id="PackageNCRational"><span
+class="header-section-number">17.1</span> NCRational</h2>
 <p>This package contains functionality to convert an nc rational
 expression into a descriptor representation.</p>
 <p>For example the rational</p>
@@ -8257,70 +8313,70 @@ href="#NCRObservableRealization">NCRObservableRealization</a></p></li>
 <li><p><a
 href="#NCRMinimalRealization">NCRMinimalRealization</a></p></li>
 </ul>
-<h3 data-number="17.2.1"
+<h3 data-number="17.1.1"
 id="state-space-realizations-for-nc-rationals"><span
-class="header-section-number">17.2.1</span> State-space realizations for
+class="header-section-number">17.1.1</span> State-space realizations for
 NC rationals</h3>
-<h4 data-number="17.2.1.1" id="NCRational"><span
-class="header-section-number">17.2.1.1</span> NCRational</h4>
+<h4 data-number="17.1.1.1" id="NCRational"><span
+class="header-section-number">17.1.1.1</span> NCRational</h4>
 <p>NCRational::usage</p>
-<h4 data-number="17.2.1.2" id="NCToNCRational"><span
-class="header-section-number">17.2.1.2</span> NCToNCRational</h4>
+<h4 data-number="17.1.1.2" id="NCToNCRational"><span
+class="header-section-number">17.1.1.2</span> NCToNCRational</h4>
 <p>NCToNCRational::usage</p>
-<h4 data-number="17.2.1.3" id="NCRationalToNC"><span
-class="header-section-number">17.2.1.3</span> NCRationalToNC</h4>
+<h4 data-number="17.1.1.3" id="NCRationalToNC"><span
+class="header-section-number">17.1.1.3</span> NCRationalToNC</h4>
 <p>NCRationalToNC::usage</p>
-<h4 data-number="17.2.1.4" id="NCRationalToCanonical"><span
-class="header-section-number">17.2.1.4</span> NCRationalToCanonical</h4>
+<h4 data-number="17.1.1.4" id="NCRationalToCanonical"><span
+class="header-section-number">17.1.1.4</span> NCRationalToCanonical</h4>
 <p>NCRationalToCanonical::usage</p>
-<h4 data-number="17.2.1.5" id="CanonicalToNCRational"><span
-class="header-section-number">17.2.1.5</span> CanonicalToNCRational</h4>
+<h4 data-number="17.1.1.5" id="CanonicalToNCRational"><span
+class="header-section-number">17.1.1.5</span> CanonicalToNCRational</h4>
 <p>CanonicalToNCRational::usage</p>
-<h3 data-number="17.2.2" id="utilities-1"><span
-class="header-section-number">17.2.2</span> Utilities</h3>
-<h4 data-number="17.2.2.1" id="NCROrder"><span
-class="header-section-number">17.2.2.1</span> NCROrder</h4>
+<h3 data-number="17.1.2" id="utilities-1"><span
+class="header-section-number">17.1.2</span> Utilities</h3>
+<h4 data-number="17.1.2.1" id="NCROrder"><span
+class="header-section-number">17.1.2.1</span> NCROrder</h4>
 <p>NCROrder::usage</p>
-<h4 data-number="17.2.2.2" id="NCRLinearQ"><span
-class="header-section-number">17.2.2.2</span> NCRLinearQ</h4>
+<h4 data-number="17.1.2.2" id="NCRLinearQ"><span
+class="header-section-number">17.1.2.2</span> NCRLinearQ</h4>
 <p>NCRLinearQ::usage</p>
-<h4 data-number="17.2.2.3" id="NCRStrictlyProperQ"><span
-class="header-section-number">17.2.2.3</span> NCRStrictlyProperQ</h4>
+<h4 data-number="17.1.2.3" id="NCRStrictlyProperQ"><span
+class="header-section-number">17.1.2.3</span> NCRStrictlyProperQ</h4>
 <p>NCRStrictlyProperQ::usage</p>
-<h3 data-number="17.2.3" id="operations-on-nc-rationals"><span
-class="header-section-number">17.2.3</span> Operations on NC
+<h3 data-number="17.1.3" id="operations-on-nc-rationals"><span
+class="header-section-number">17.1.3</span> Operations on NC
 rationals</h3>
-<h4 data-number="17.2.3.1" id="NCRPlus"><span
-class="header-section-number">17.2.3.1</span> NCRPlus</h4>
+<h4 data-number="17.1.3.1" id="NCRPlus"><span
+class="header-section-number">17.1.3.1</span> NCRPlus</h4>
 <p>NCRPlus::usage</p>
-<h4 data-number="17.2.3.2" id="NCRTimes"><span
-class="header-section-number">17.2.3.2</span> NCRTimes</h4>
+<h4 data-number="17.1.3.2" id="NCRTimes"><span
+class="header-section-number">17.1.3.2</span> NCRTimes</h4>
 <p>NCRTimes::usage</p>
-<h4 data-number="17.2.3.3" id="NCRTranspose"><span
-class="header-section-number">17.2.3.3</span> NCRTranspose</h4>
+<h4 data-number="17.1.3.3" id="NCRTranspose"><span
+class="header-section-number">17.1.3.3</span> NCRTranspose</h4>
 <p>NCRTranspose::usage</p>
-<h4 data-number="17.2.3.4" id="NCRInverse"><span
-class="header-section-number">17.2.3.4</span> NCRInverse</h4>
+<h4 data-number="17.1.3.4" id="NCRInverse"><span
+class="header-section-number">17.1.3.4</span> NCRInverse</h4>
 <p>NCRInverse::usage</p>
-<h3 data-number="17.2.4" id="minimal-realizations"><span
-class="header-section-number">17.2.4</span> Minimal realizations</h3>
-<h4 data-number="17.2.4.1" id="NCRControllableRealization"><span
-class="header-section-number">17.2.4.1</span>
+<h3 data-number="17.1.4" id="minimal-realizations"><span
+class="header-section-number">17.1.4</span> Minimal realizations</h3>
+<h4 data-number="17.1.4.1" id="NCRControllableRealization"><span
+class="header-section-number">17.1.4.1</span>
 NCRControllableRealization</h4>
 <p>NCRControllableRealization::usage</p>
-<h4 data-number="17.2.4.2" id="NCRControllableSubspace"><span
-class="header-section-number">17.2.4.2</span>
+<h4 data-number="17.1.4.2" id="NCRControllableSubspace"><span
+class="header-section-number">17.1.4.2</span>
 NCRControllableSubspace</h4>
 <p>NCRControllableSubspace::usage</p>
-<h4 data-number="17.2.4.3" id="NCRObservableRealization"><span
-class="header-section-number">17.2.4.3</span>
+<h4 data-number="17.1.4.3" id="NCRObservableRealization"><span
+class="header-section-number">17.1.4.3</span>
 NCRObservableRealization</h4>
 <p>NCRObservableRealization::usage</p>
-<h4 data-number="17.2.4.4" id="NCRMinimalRealization"><span
-class="header-section-number">17.2.4.4</span> NCRMinimalRealization</h4>
+<h4 data-number="17.1.4.4" id="NCRMinimalRealization"><span
+class="header-section-number">17.1.4.4</span> NCRMinimalRealization</h4>
 <p>NCRMinimalRealization::usage</p>
-<h2 data-number="17.3" id="PackageNCRealization"><span
-class="header-section-number">17.3</span> NCRealization</h2>
+<h2 data-number="17.2" id="PackageNCRealization"><span
+class="header-section-number">17.2</span> NCRealization</h2>
 <p><strong>WARNING: OBSOLETE PACKAGE WILL BE REPLACED BY
 NCRational</strong></p>
 <p>The package <strong>NCRealization</strong> implements an algorithm
@@ -8363,8 +8419,8 @@ href="#TestDescriptorRealization">TestDescriptorRealization</a></li>
 <li><a href="#SignatureOfAffineTerm">SignatureOfAffineTerm</a></li>
 </ul></li>
 </ul>
-<h3 data-number="17.3.1" id="NCDescriptorRealization"><span
-class="header-section-number">17.3.1</span> NCDescriptorRealization</h3>
+<h3 data-number="17.2.1" id="NCDescriptorRealization"><span
+class="header-section-number">17.2.1</span> NCDescriptorRealization</h3>
 <p><code>NCDescriptorRealization[RationalExpression,UnknownVariables]</code>
 returns a list of 3 matrices <code>{C,G,B}</code> such that <span
 class="math inline">\(C G^{-1} B\)</span> is the given
@@ -8373,9 +8429,9 @@ i.e. <code>NCDot[C,NCInverse[G],B] === RationalExpression</code>.</p>
 <p><code>C</code> and <code>B</code> do not contain any
 <code>UnknownsVariables</code> and <code>G</code> has linear entries in
 the <code>UnknownVariables</code>.</p>
-<h3 data-number="17.3.2"
+<h3 data-number="17.2.2"
 id="NCDeterminantalRepresentationReciprocal"><span
-class="header-section-number">17.3.2</span>
+class="header-section-number">17.2.2</span>
 NCDeterminantalRepresentationReciprocal</h3>
 <p><code>NCDeterminantalRepresentationReciprocal[Polynomial,Unknowns]</code>
 returns a linear pencil matrix whose determinant equals
@@ -8383,40 +8439,40 @@ returns a linear pencil matrix whose determinant equals
 reciprocal algorithm: find a minimal descriptor realization of
 <code>inv[Polynomial]</code>, so <code>Polynomial</code> must be nonzero
 at the origin.</p>
-<h3 data-number="17.3.3" id="NCMatrixDescriptorRealization"><span
-class="header-section-number">17.3.3</span>
+<h3 data-number="17.2.3" id="NCMatrixDescriptorRealization"><span
+class="header-section-number">17.2.3</span>
 NCMatrixDescriptorRealization</h3>
 <p><code>NCMatrixDescriptorRealization[RationalMatrix,UnknownVariables]</code>
 is similar to <code>NCDescriptorRealization</code> except it takes a
 <em>Matrix</em> with rational function entries and returns a matrix of
 lists of the vectors/matrix <code>{C,G,B}</code>. A different
 <code>{C,G,B}</code> for each entry.</p>
-<h3 data-number="17.3.4" id="NCMinimalDescriptorRealization"><span
-class="header-section-number">17.3.4</span>
+<h3 data-number="17.2.4" id="NCMinimalDescriptorRealization"><span
+class="header-section-number">17.2.4</span>
 NCMinimalDescriptorRealization</h3>
 <p><code>NCMinimalDescriptorRealization[RationalFunction,UnknownVariables]</code>
 returns <code>{C,G,B}</code> where
 <code>NCDot[C,NCInverse[G],B] == RationalFunction</code>, <code>G</code>
 is linear in the <code>UnknownVariables</code>, and the realization is
 minimal (may be pinned).</p>
-<h3 data-number="17.3.5" id="NCSymmetricDescriptorRealization"><span
-class="header-section-number">17.3.5</span>
+<h3 data-number="17.2.5" id="NCSymmetricDescriptorRealization"><span
+class="header-section-number">17.2.5</span>
 NCSymmetricDescriptorRealization</h3>
 <p><code>NCSymmetricDescriptorRealization[RationalSymmetricFunction, Unknowns]</code>
 combines two steps:
 <code>NCSymmetrizeMinimalDescriptorRealization[NCMinimalDescriptorRealization[RationalSymmetricFunction, Unknowns]]</code>.</p>
-<h3 data-number="17.3.6"
+<h3 data-number="17.2.6"
 id="NCSymmetricDeterminantalRepresentationDirect"><span
-class="header-section-number">17.3.6</span>
+class="header-section-number">17.2.6</span>
 NCSymmetricDeterminantalRepresentationDirect</h3>
 <p><code>NCSymmetricDeterminantalRepresentationDirect[SymmetricPolynomial,Unknowns]</code>
 returns a linear pencil matrix whose determinant equals
 <code>Constant * CommuteEverything[SymmetricPolynomial]</code>. This
 uses the direct algorithm: Find a realization of 1 -
 NCSymmetricPolynomial,…</p>
-<h3 data-number="17.3.7"
+<h3 data-number="17.2.7"
 id="NCSymmetricDeterminantalRepresentationReciprocal"><span
-class="header-section-number">17.3.7</span>
+class="header-section-number">17.2.7</span>
 NCSymmetricDeterminantalRepresentationReciprocal</h3>
 <p><code>NCSymmetricDeterminantalRepresentationReciprocal[SymmetricPolynomial,Unknowns]</code>
 returns a linear pencil matrix whose determinant equals
@@ -8424,9 +8480,9 @@ returns a linear pencil matrix whose determinant equals
 uses the reciprocal algorithm: find a symmetric minimal descriptor
 realization of <code>inv[NCSymmetricPolynomial]</code>, so
 NCSymmetricPolynomial must be nonzero at the origin.</p>
-<h3 data-number="17.3.8"
+<h3 data-number="17.2.8"
 id="NCSymmetrizeMinimalDescriptorRealization"><span
-class="header-section-number">17.3.8</span>
+class="header-section-number">17.2.8</span>
 NCSymmetrizeMinimalDescriptorRealization</h3>
 <p><code>NCSymmetrizeMinimalDescriptorRealization[{C,G,B},Unknowns]</code>
 symmetrizes the minimal realization <code>{C,G,B}</code> (such as output
@@ -8435,17 +8491,17 @@ from <code>NCMinimalRealization</code>) and outputs
 <code>{Ctilda, Gtilda,Transpose[Ctilda]}</code>.</p>
 <p><strong>WARNING:</strong> May produces errors if the realization
 doesn’t correspond to a symmetric rational function.</p>
-<h3 data-number="17.3.9" id="NonCommutativeLift"><span
-class="header-section-number">17.3.9</span> NonCommutativeLift</h3>
+<h3 data-number="17.2.9" id="NonCommutativeLift"><span
+class="header-section-number">17.2.9</span> NonCommutativeLift</h3>
 <p><code>NonCommutativeLift[Rational]</code> returns a noncommutative
 symmetric lift of <code>Rational</code>.</p>
-<h3 data-number="17.3.10" id="SignatureOfAffineTerm"><span
-class="header-section-number">17.3.10</span> SignatureOfAffineTerm</h3>
+<h3 data-number="17.2.10" id="SignatureOfAffineTerm"><span
+class="header-section-number">17.2.10</span> SignatureOfAffineTerm</h3>
 <p><code>SignatureOfAffineTerm[Pencil,Unknowns]</code> returns a list of
 the number of positive, negative and zero eigenvalues in the affine part
 of <code>Pencil</code>.</p>
-<h3 data-number="17.3.11" id="TestDescriptorRealization"><span
-class="header-section-number">17.3.11</span>
+<h3 data-number="17.2.11" id="TestDescriptorRealization"><span
+class="header-section-number">17.2.11</span>
 TestDescriptorRealization</h3>
 <p><code>TestDescriptorRealization[Rat,{C,G,B},Unknowns]</code> checks
 if <code>Rat</code> equals <span class="math inline">\(C G^{-1}
@@ -8453,11 +8509,11 @@ B\)</span> by substituting random 2-by-2 matrices in for the unknowns.
 <code>TestDescriptorRealization[Rat,{C,G,B},Unknowns,NumberOfTests]</code>
 can be used to specify the <code>NumberOfTests</code>, the default being
 5.</p>
-<h3 data-number="17.3.12" id="PinnedQ"><span
-class="header-section-number">17.3.12</span> PinnedQ</h3>
+<h3 data-number="17.2.12" id="PinnedQ"><span
+class="header-section-number">17.2.12</span> PinnedQ</h3>
 <p><code>PinnedQ[Pencil_,Unknowns_]</code> is True or False.</p>
-<h3 data-number="17.3.13" id="PinningSpace"><span
-class="header-section-number">17.3.13</span> PinningSpace</h3>
+<h3 data-number="17.2.13" id="PinningSpace"><span
+class="header-section-number">17.2.13</span> PinningSpace</h3>
 <p><code>PinningSpace[Pencil_,Unknowns_]</code> returns a matrix whose
 columns span the pinning space of <code>Pencil</code>. Generally, either
 an empty matrix or a d-by-1 matrix (vector).</p>
