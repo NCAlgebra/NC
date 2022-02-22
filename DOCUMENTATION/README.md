@@ -8656,7 +8656,7 @@ The following `options` can be given:
 Members are:
 
 -   [NCPolySOS](#ncpolysos-1)
--   [NCPolySOSToSDP](#ncpolysostosdp) (#NCPolySOSToSDP)
+-   [NCPolySOSToSDP](#ncpolysostosdp)
 
 ### NCPolySOS
 

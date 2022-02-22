@@ -3,7 +3,7 @@
 Members are:
 
 * [NCPolySOS](#NCPolySOS)
-* [NCPolySOSToSDP] (#NCPolySOSToSDP)
+* [NCPolySOSToSDP](#NCPolySOSToSDP)
 
 ### NCPolySOS {#NCPolySOS}
 
