@@ -74,8 +74,8 @@ MANUAL = MANUAL/Preamble.md \
 	 NCSDP/SDPFlat.md \
 	 NCSDP/SDPSylvester.md \
 	 NCSDP/PrimalDual.md \
-         MANUAL/WorkInProgress.md \
 	 NCPoly/NCPolySOS.md \
+         MANUAL/WorkInProgress.md \
 	 NCAlgebra/NCRational.md \
 	 NCAlgebra/NCRealization.md \
 	 MANUAL/Bibliography.md

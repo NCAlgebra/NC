@@ -157,13 +157,20 @@ See also:
 
 ### GetLUMatrices {#GetLUMatrices}
 
-`GetLUMatrices[m]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
+`GetLUMatrices[lu]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
+
+`GetLUMatrices[lu, p, q, rank]` extracts compact lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting` taking into account permutations and the matrix rank.
 
 For example:
 
-    {lu, p} = LUDecompositionWithPartialPivoting[A];
+    {lu, p} = LUDecompositionWithPartialPivoting[mat];
     {l, u} = GetLUMatrices[lu];
-	
+
+and
+
+    {lu, p, q, rank} = LUDecompositionWithCompletePivoting[mat];
+    {l, u} = GetLUMatrices[lu, p, q, rank];
+
 returns the lower-triangular factor `l` and upper-triangular factor `u` as `SparseArray`s.
 
 See also:
@@ -173,24 +180,28 @@ See also:
 
 `GetFullLUMatrices[m]` extracts lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting`.
 
-For example:
+`GetFullLUMatrices[lu, p, q, rank]` extracts compact lower- and upper-triangular blocks produced by `LDUDecompositionWithPartialPivoting` and `LDUDecompositionWithCompletePivoting` taking into account permutations and the matrix rank.
 
-    {lu, p} = LUDecompositionWithPartialPivoting[A];
-    {l, u} = GetFullLUMatrices[lu];
-	
-returns the lower-triangular factor `l` and upper-triangular factor `u`.
+`GetFullLUMatrices` is equivalent to `Normal @@ GetLUMatrices`
 
 See also:
-[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [GetLUMatrices](#GetLUMatrices).
+[GetLUMatrices](#GetLUMatrices),
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting).
 
 ### GetLDUMatrices {#GetLDUMatrices}
 
-`GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+`GetLDUMatrices[ldu, s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+
+`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `LDLDecomposition` taking into account permutations and the matrix rank.
 
 For example:
 
-    {ldl, p, s, rank} = LDLDecomposition[A];
+    {ldl, p, s, rank} = LDLDecomposition[mat];
     {l,d,u} = GetLDUMatrices[ldl,s];
+
+and
+
+    {l, d, u} = GetLDUMatrices[ldl, p, s, rank];
 
 returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d` as `SparseArray`s.
 
@@ -199,14 +210,11 @@ See also:
 
 ### GetFullLDUMatrices {#GetFullLDUMatrices}
 
-`GetLDUMatrices[m,s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+`GetLDUMatrices[ldl, s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
 
-For example:
+`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `LDLDecomposition` taking into account permutations and the matrix rank.
 
-    {ldl, p, s, rank} = LDLDecomposition[A];
-    {l,d,u} = GetLDUMatrices[ldl,s];
-
-returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d`.
+`GetFullLDUMatrices` is equivalent to `Normal @@ GetLDUMatrices`
 
 See also:
 [LDLDecomposition](#LDLDecomposition), [GetLDUMatrices](#GetLDUMatrices).

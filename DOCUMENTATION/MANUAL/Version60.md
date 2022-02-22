@@ -19,3 +19,5 @@
 4. `NCReplace`: new functions
 [NCReplacePowerRule](#NCReplacePowerRule); option `ApplyPowerRule`.
 5. `NCCollect`: new function [NCCollectExponents](#NCCollectExponents).
+6. `MatrixDecompositions`: functions [GetLDUMatrices](#GetLDUMatrices) and [GetFullLDUMatrices](#GetFullLDUMatrices) now produces low rank matrices.
+7. `NCPoly`: new function [NCPolyFromGramMatrixFactors](#NCPolyFromGramMatrixFactors).

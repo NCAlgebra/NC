@@ -261,7 +261,7 @@ See also:
 
 `NCToList[expr]` produces a list with the symbols appearing in
 monomial `expr`. If `expr` is not a monomial it remains
-unevaluated. Powers of symbols are expanded before the list being
+unevaluated. Powers of symbols are expanded before the list is
 produced.
 
 For example

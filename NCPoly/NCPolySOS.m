@@ -21,7 +21,7 @@ Begin["`Private`"];
     Table[If[i >= j, Subscript[q, k, i, j], 
                      Subscript[q, k, j, i]], {i, 0, d}, {j, 0, d}];
 
-  NCPolySOS[p_NCPoly, symbol_:q] := Block[
+  NCPolySOS[p_NCPoly, symbol_:Unique[]] := Block[
     {chipset = NCPolyQuadraticChipset[p], 
      index, Q},
 
@@ -48,17 +48,17 @@ Begin["`Private`"];
       ] 
     ];
 
-    Return[{NCPolyFromGramMatrix[Q, p[[1]]], Q, chipset}];
+    Return[{NCPolyFromGramMatrix[Q, p[[1]]], Q, symbol, chipset}];
   ];
 
-  NCPolySOS[degree_Integer, vars_List, symbol_:q] := Block[
+  NCPolySOS[degree_Integer, vars_List, symbol_:Unique[]] := Block[
     {d = NCPolyGramMatrixDimensions[degree, vars], Q},
 
     Q = Table[If[i >= j, 
                  Subscript[symbol, i, j], 
                  Subscript[symbol, j, i]], {i, 0, d}, {j, 0, d}];
       
-    Return[{NCPolyFromGramMatrix[Q, vars], Q}];
+    Return[{NCPolyFromGramMatrix[Q, vars], Q, symbol}];
   ];
 
   Clear[deleteColumns];
@@ -68,7 +68,7 @@ Begin["`Private`"];
   Clear[deleteRows];
   deleteRows[m_, cols_] := Delete[m, Map[List, cols]];
   
-  NCPolySOSToSDP[{a__NCPoly}, qqs_List, symbol_:x] := Block[
+  NCPolySOSToSDP[{a__NCPoly}, qqs_List, symbol_:Unique[]] := Block[
     {constraints = {a}, ps,
      allVars, qVars, vars,
      b1, A1, A1perp, n1, x1, x1s, sol1,

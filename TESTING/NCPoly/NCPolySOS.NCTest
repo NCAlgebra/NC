@@ -3,7 +3,7 @@
 << NCPolySOS`
 
 Block[
-  {x,y,z,answer,
+  {x,y,z,answer, symbol,
    vars, p, poly1, q, SDPVars, chipset,
    p1, p2, p1t, p2t,
    q1, Q1, Q, sol, solQ},
@@ -19,7 +19,30 @@ Block[
   p = (x+y-x**x);
   poly1 = NCToNCPoly[p**p+A x**y**y**x+B x**x,vars];
 
-  {q1,Q1,chipset}=NCPolySOS[poly1, q];
+  {q1,Q1,symbol,chipset}=NCPolySOS[poly1];
+  NCTest[StringContainsQ[ToString[symbol], "$"], True];
+  answer = NCPoly[{1,
+  1}, <|{0, 2, 0} -> q[2, 2], {0, 3, 0} ->
+   2 q[4, 2], {0, 4, 0} -> q[4, 4], {1, 1, 1} ->
+   q[3, 2], {1, 1, 2} -> q[3, 2], {1, 2, 1} ->
+   q[4, 3], {1, 2, 2} -> 2 q[5, 2], {1, 2, 4} ->
+   q[4, 3], {1, 3, 2} -> q[5, 4], {1, 3, 4} ->
+   q[5, 4], {2, 0, 3} -> q[3, 3], {2, 1, 3} ->
+   q[5, 3], {2, 1, 6} -> q[5, 3], {2, 2, 6} ->
+   q[5, 5]|>] /. q -> symbol;
+  NCTest[q1, answer];
+  answer = SparseArray[{{2, 2} -> q[2, 2], {2, 3} -> q[3, 2], {2, 4} ->
+   q[4, 2], {2, 5} -> q[5, 2], {3, 2} ->
+  q[3, 2], {3, 3} -> q[3, 3], {3, 4} ->
+  q[4, 3], {3, 5} -> q[5, 3], {4, 2} ->
+  q[4, 2], {4, 3} -> q[4, 3], {4, 4} ->
+  q[4, 4], {4, 5} -> q[5, 4], {5, 2} ->
+  q[5, 2], {5, 3} -> q[5, 3], {5, 4} ->
+  q[5, 4], {5, 5} -> q[5, 5], {_, _} -> 0} /. q -> symbol];
+  NCTest[Q1, answer];
+
+  {q1,Q1,symbol,chipset}=NCPolySOS[poly1, q];
+  NCTest[symbol, q];
   answer = NCPoly[{1, 
   1}, <|{0, 2, 0} -> q[2, 2], {0, 3, 0} -> 
    2 q[4, 2], {0, 4, 0} -> q[4, 4], {1, 1, 1} ->
@@ -62,7 +85,8 @@ Block[
   pt=tp[p]/.tp->Identity;
   poly1=NCToNCPoly[pt**p,vars];
 
-  {q1,Q1,chipset}=NCPolySOS[poly1, q];
+  {q1,Q1,symbol,chipset}=NCPolySOS[poly1, q];
+  NCTest[symbol, q];
   NCTest[q1, NCPoly[{1, 
     1}, <|{0, 2, 0} -> q[2, 2], {0, 3, 0} -> 
      2 q[4, 2], {0, 4, 0} -> q[4, 4], {1, 1, 1} ->
@@ -132,7 +156,8 @@ Block[
   p2t = tp[p2] /. tp -> Identity;
   poly1 = NCToNCPoly[p1t ** p1 + p2t ** p2, vars];
 
-  {q1,Q1,chipset} = NCPolySOS[poly1, q];
+  {q1,Q1,symbol,chipset} = NCPolySOS[poly1, q];
+  NCTest[symbol, q];
   NCTest[q1, NCPoly[{1, 
     1}, <|{0, 2, 0} -> q[2, 2], {0, 3, 0} -> 
      2 q[4, 2], {0, 4, 0} -> 
