@@ -48,6 +48,8 @@ Block[
   NCTest[NCPolyNumberOfVariables[p2], 3];
   NCTest[NCPolyNumberOfTerms[p2], 7];
 
+  NCTest[NCPolyTermsToList[p2], {NCPoly[{3}, <|{0, 0} -> 1|>], NCPoly[{3}, <|{1, 0} -> 2|>], NCPoly[{3}, <|{1, 2} -> 3|>], NCPoly[{3}, <|{2, 1} -> -1|>], NCPoly[{3}, <|{2, 6} -> -3|>], NCPoly[{3}, <|{4, 9} -> -2|>], NCPoly[{3}, <|{4, 80} -> 1/2|>]}];
+
   (* zero *)
   NCTest[NCPoly[{},{},{x,y}], 0];
 
@@ -496,6 +498,8 @@ Block[
   NCTest[NCPolyGetOptions[p1], \
        {TransposePairs -> {{0,1}}}];
 
+  NCTest[NCPolyTermsToList[p1], {NCPoly[{3}, <|{0, 0} -> 1|>, TransposePairs -> {{0, 1}}], NCPoly[{3}, <|{1, 0} -> 2|>, TransposePairs -> {{0, 1}}], NCPoly[{3}, <|{1, 2} -> 3|>, TransposePairs -> {{0, 1}}], NCPoly[{3}, <|{2, 1} -> -1|>, TransposePairs -> {{0, 1}}], NCPoly[{3}, <|{2, 6} -> -3|>, TransposePairs -> {{0, 1}}], NCPoly[{3}, <|{4, 9} -> -2|>, TransposePairs -> {{0, 1}}], NCPoly[{3}, <|{4, 80} -> 1/2|>, TransposePairs -> {{0, 1}}]}];
+
   mon2 = Map[Reverse, mon1];
   p2 = NCPoly[coeff1, mon2, vars, TransposePairs -> {{x,y}}];
   NCTest[NCPolyReverseMonomials[p1], p2];
@@ -533,6 +537,8 @@ Block[
   p2 = NCPoly[Map[Conjugate, coeff1], mon2, vars, SelfAdjointPairs -> {{x,y}}];
   NCTest[NCPolyAdjoint[p1], p2];
 
+  NCTest[NCPolyTermsToList[p2], {NCPoly[{3}, <|{0, 0} -> 1|>, SelfAdjointPairs -> {{0, 1}}], NCPoly[{3}, <|{1, 1} -> 2|>, SelfAdjointPairs -> {{0, 1}}], NCPoly[{3}, <|{1, 2} -> 3 - I|>, SelfAdjointPairs -> {{0, 1}}], NCPoly[{3}, <|{2, 1} -> -1|>, SelfAdjointPairs -> {{0, 1}}], NCPoly[{3}, <|{2, 5} -> -3|>, SelfAdjointPairs -> {{0, 1}}], NCPoly[{3}, <|{4, 37} -> -2 - I|>, SelfAdjointPairs -> {{0, 1}}], NCPoly[{3}, <|{4, 80} -> 1/2|>, SelfAdjointPairs -> {{0, 1}}]}];
+
   (* QuadraticTerms *)
   
   vars = {{x, y, z}};
@@ -545,11 +551,26 @@ Block[
   NCTest[NCPolyGetDigits[p2], {{}, {1, 0}, {0, 2, 2, 1}}];
 
   (* QuadraticChipset *)
+
+  Quiet[
+    NCTest[
+      Check[
+        p2 = NCPolyQuadraticChipset[p1];
+        False
+       ,
+        True
+       ,
+        NCPoly::NotSelfAdjoint
+      ]
+      ,
+      True
+    ]
+    ,  
+     NCPoly::NotSelfAdjoint
+  ];
   
-  p2 = NCPolyQuadraticChipset[p1];
-  
-  NCTest[NCPolyGetCoefficients[p2], {1, 1, 1, 1}];
-  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {0, 2}}];
+  NCTest[NCPolyGetCoefficients[p2], {1, 1, 1}];
+  NCTest[NCPolyGetDigits[p2], {{}, {1}, {0, 2}}];
 
   (* QuadraticTerms *)
   
@@ -564,10 +585,43 @@ Block[
 
   (* QuadraticChipset *)
   
+  Quiet[
+    NCTest[
+      Check[
+        p2 = NCPolyQuadraticChipset[p1];
+        False
+       ,
+        True
+       ,
+        NCPoly::NotSelfAdjoint
+      ]
+      ,
+      True
+    ]
+    ,  
+     NCPoly::NotSelfAdjoint
+  ];
+  
+  NCTest[NCPolyGetCoefficients[p2], {1, 1, 1}];
+  NCTest[NCPolyGetDigits[p2], {{}, {1}, {0, 2}}];
+
+  (* QuadraticTerms *)
+  
+  vars = {{x, y}};
+  coeff1 = {1, 2, 3};
+  digits1 = {{}, {x}, {y}};
+  p1 = NCPoly[coeff1, digits1, vars];
+  p2 = NCPolyQuadraticTerms[p1];
+
+  NCTest[NCPolyGetCoefficients[p2], {1}];
+  NCTest[NCPolyGetDigits[p2], {{}}];
+
+  (* QuadraticChipset *)
+  
   p2 = NCPolyQuadraticChipset[p1];
   
-  NCTest[NCPolyGetCoefficients[p2], {1, 1, 1, 1}];
-  NCTest[NCPolyGetDigits[p2], {{}, {0}, {1}, {0, 2}}];
+  NCTest[NCPolyGetCoefficients[p2], {1}];
+  NCTest[NCPolyGetDigits[p2], {{}}];
 
   (* NCPolyPossibleZeroQ *)
   NCTest[NCPolyPossibleZeroQ[1], False];

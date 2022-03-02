@@ -150,6 +150,11 @@ Begin["`Private`"];
   NCPolyToNC[exp_List, vars_] := 
     Map[NCPolyToNC[#, vars]&, exp];
 
+  NCPolyToNC[exp_SparseArray?MatrixQ, vars_] :=
+    Map[NCPolyToNC[#, vars]&, exp, {2}];
+
+  NCPolyToNC[exp_SparseArray, vars_] :=
+    Map[NCPolyToNC[#, vars]&, exp];
 
   (* NCMonomialList *)
     

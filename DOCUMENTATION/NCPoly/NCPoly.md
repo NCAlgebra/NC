@@ -729,7 +729,6 @@ and `NCPolyReduce[polys, True]`.
 See also:
 [NCPolyGroebner](#NCPolyGroebner).
 
-
 #### NCPolySum {#NCPolySum}
 
 `NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f

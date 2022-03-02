@@ -103,22 +103,20 @@ Begin["`Private`"]
   ];
   NCReplacePowerRule[(expr_Rule|expr_RuleDelayed)] := expr;
   
+  (* Flat property rules must be defined using Verbatim. See:
+     https://mathematica.stackexchange.com/questions/5067/constructing-a-function-with-flat-and-oneidentity-attribute-with-the-property-th
+   *)
   Clear[FlatNCMultiply];
   SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
 
-  FlatNCMultiply[a___, b_?NotMatrixQ, d:(b_ ..), c___] :=
+  Verbatim[FlatNCMultiply][a___, b_?NotMatrixQ, d:(b_ ..), c___] :=
     FlatNCMultiply[a, Power[b, Length[{d}]+1], c];
-  FlatNCMultiply[a___, b_?CommutativeQ c_, d___] :=
+  Verbatim[FlatNCMultiply][a___, b_?CommutativeQ c_, d___] :=
     b FlatNCMultiply[a, c, d];
-  (* MAURICIO: FEB 2022
-     Is the following rule needed?
-
-         FlatNCMultiply[a___, b_?CommutativeQ, d___] := FlatNCMultiply[a, d];
-
-     It throws Mathematica's pattern matching machinery into an infinite loop.
-     For now I think I can control it by preventing power rule from ever putting
-     out an exponent that is zero. What else could throw a number inside FlatNCMultiply?
-  *)
+  Verbatim[FlatNCMultiply][a___, b_?CommutativeQ, d___] :=
+    b FlatNCMultiply[a, d];
+  Verbatim[FlatNCMultiply][a_] := a;
+  Verbatim[FlatNCMultiply][] := 1;
     
   Clear[NCReplaceFlatRules];
   NCReplaceFlatRules = {
@@ -132,7 +130,7 @@ Begin["`Private`"]
 
   Clear[NCRuleProcessOptions];
   NCRuleProcessOptions[rule_, OptionsPattern[NCReplace]] :=
-    If[ OptionValue[ApplyPowerRule]
+    If[ OptionValue[ApplyPowerRule] === True
        ,
 	NCReplacePowerRule[rule]
        ,

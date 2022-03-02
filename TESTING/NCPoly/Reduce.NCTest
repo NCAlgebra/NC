@@ -6,7 +6,7 @@ Block[
    q,r,
    f,g,h,c,m,G,
    g1,g2,g1p,
-   isGraded,answer
+   isGraded,answer,gb
   },
   
   (* Test Reduction *)
@@ -243,4 +243,26 @@ Block[
   answer = List[NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 1, 1], -1], Rule[List[0, 0, 1, 0, 0, 4], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 0, 3], -1], Rule[List[0, 1, 0, 0, 0, 5], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 1, 2], Power[Plus[Rational[1, 2], Times[Complex[0, Rational[-1, 2]], Power[3, Rational[1, 2]]]], -1]], Rule[List[0, 0, 0, 1, 1, 16], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 3, 0], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 3, 0, 146], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 1, 0], -1], Rule[List[1, 0, 0, 0, 0, 6], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 0, 2], -1], Rule[List[1, 0, 0, 0, 0, 7], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 1, 1, 11], Plus[Rational[1, 2], Times[Complex[0, Rational[1, 2]], Power[3, Rational[1, 2]]]]], Rule[List[0, 0, 0, 1, 1, 25], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 3, 73], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 3, 0, 219], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 2, 8], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 0, 2, 1], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 2, 0, 26], 1]]], NCPoly[List[2, 2, 1, 1, 2], Association[Rule[List[0, 0, 0, 0, 0, 0], -1], Rule[List[0, 0, 0, 2, 0, 19], 1]]]];
   NCTest[g2,answer];
 
+  p1 = NCPoly[{6}, Association[{0, 1} -> 0.029076470839289686`,
+                               {7, 54717} -> 0.003145664001337305`]];
+  gb = {NCPoly[{6}, <|{2, 2} -> -1, {2, 12} -> 1|>],
+        NCPoly[{6}, <|{2, 8} -> -1, {2, 13} -> 1|>],  
+        NCPoly[{6}, <|{2, 3} -> -1, {2, 18} -> 1|>], 
+        NCPoly[{6}, <|{2, 9} -> -1, {2, 19} -> 1|>], 
+        NCPoly[{6}, <|{2, 4} -> -1, {2, 24} -> 1|>], 
+        NCPoly[{6}, <|{2, 10} -> -1, {2, 25} -> 1|>], 
+        NCPoly[{6}, <|{2, 16} -> -1, {2, 26} -> 1|>], 
+        NCPoly[{6}, <|{2, 22} -> -1, {2, 27} -> 1|>], 
+        NCPoly[{6}, <|{2, 5} -> -1, {2, 30} -> 1|>], 
+        NCPoly[{6}, <|{2, 11} -> -1, {2, 31} -> 1|>], 
+        NCPoly[{6}, <|{2, 17} -> -1, {2, 32} -> 1|>], 
+        NCPoly[{6}, <|{2, 23} -> -1, {2, 33} -> 1|>], 
+        NCPoly[{6}, <|{0, 0} -> -1, {2, 0} -> 1|>], 
+        NCPoly[{6}, <|{0, 0} -> -1, {2, 7} -> 1|>], 
+        NCPoly[{6}, <|{0, 0} -> -1, {2, 14} -> 1|>], 
+        NCPoly[{6}, <|{0, 0} -> -1, {2, 21} -> 1|>], 
+        NCPoly[{6}, <|{0, 0} -> -1, {2, 28} -> 1|>], 
+        NCPoly[{6}, <|{0, 0} -> -1, {2, 35} -> 1|>]};
+   r = NCPolyReduce[p1,gb];
+   
 ];

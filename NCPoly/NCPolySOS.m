@@ -8,11 +8,12 @@ BeginPackage[ "NCPolySOS`",
 	      "NCPoly`" ];
 
 Clear[NCPolySOSToSDP,
-      NCPolySOS];
+      NCPolySOS,
+      NCPolySOSDual];
 
 Get["NCPolySOS.usage"];
 
-NCPolySOS::NotSOS = "Polynomial is not a sum-of-squares.";
+NCPoly::NotSOS = "Polynomial is not a sum-of-squares.";
 
 Begin["`Private`"];
 
@@ -22,9 +23,11 @@ Begin["`Private`"];
                      Subscript[q, k, j, i]], {i, 0, d}, {j, 0, d}];
 
   NCPolySOS[p_NCPoly, symbol_:Unique[]] := Block[
-    {chipset = NCPolyQuadraticChipset[p], 
-     index, Q},
+    {chipset, index, Q},
 
+    (* Calculate chipset *)
+    chipset = NCPolyQuadraticChipset[p];
+    
     (* Generate Gram matrix only at chipset *)
     index = Sort[
       Flatten[
@@ -58,8 +61,80 @@ Begin["`Private`"];
                  Subscript[symbol, i, j], 
                  Subscript[symbol, j, i]], {i, 0, d}, {j, 0, d}];
       
-    Return[{NCPolyFromGramMatrix[Q, vars], Q, symbol}];
+    Return[{NCPolyFromGramMatrix[Q, vars], Q, symbol, NCPolyVeronese[degree, vars]}];
   ];
+
+  Clear[NCPolySOSDualAux1];
+  NCPolySOSDualAux1[vec_, symbol_] := Module[
+    {n, vs, mom},
+    vs = NCPolyTermsToList[vec];
+    n = Length[vs];
+    mom = Outer[NCPolyProduct, vs, vs];
+    Return[NCPolySOSDualAux2[vec, mom, symbol]];
+  ];
+
+  Clear[NCPolySOSDualAux2];
+  NCPolySOSDualAux2[mom_SparseArray, symbol_, vars_] := Module[
+    {rules, pos, values, index, Q, q, qs, rulesReal, rulesImag},
+    rules = Drop[ArrayRules[mom], -1];
+    pos = rules[[All, 1]];
+    values = rules[[All, 2]];
+    index = GatherBy[Range@Length@values, values[[#]] &];
+    q = Table[Subscript[symbol, i], {i, Length[index]}];
+    qs = SparseArray[Flatten[MapThread[Thread[#1 -> #2] &, {index, q}]]];
+    Q = SparseArray[Thread[pos -> qs], Dimensions[mom]];
+
+    (* Build symmetry rules *)
+    rulesReal = DeleteCases[
+      Union[Thread[Diagonal[Q] -> Conjugate[Diagonal[Q]]]], 
+      0 -> 0];
+    rulesImag = DeleteCases[
+      Thread[Flatten[Normal[Q]] -> Flatten[ConjugateTranspose[Normal[Q]]]],
+      0 -> 0];
+    rulesReal = Join[rulesReal, 
+		     Cases[rulesImag,
+			   HoldPattern[Subscript[x_, n_] -> Conjugate[Subscript[x_, n_]]]
+			   ]];
+    rules = Union[Complement[rulesImag, rulesReal] /.
+		  HoldPattern[Subscript[x_, m_] -> Conjugate[Subscript[x_, n_]]] /; m < n :> (Subscript[x, n] -> Conjugate[Subscript[x, m]])];
+
+    (* Print["rules = ", rules]; *)
+    
+    (* Apply rules *)
+    Q = SparseArray[Drop[ArrayRules[Q], -1] /. rules /. q[[1]] -> 1, Dimensions[mom]];
+    q = DeleteCases[Rest[q] /. rules, _Conjugate];
+    
+    (* Print["Q = ", ArrayRules[Q]]; *)
+
+    Return[{NCPoly[vars,
+	      KeySort[
+	        Merge[
+		  Drop[ArrayRules[mom*Q], -1][[All, 2, 2]],
+		  Total
+	        ]
+	      ]
+	    ],
+	    Q, q}];
+  ];
+
+  NCPolySOSDual[p_NCPoly, symbol_:Unique[]] := 
+    NCPolySOSDualAux2[
+      NCPolyMomentMatrix[NCPolyVeronese[NCPolyDegree[p], p[[1]]],
+                         NCPolyQuadraticChipset[p]],
+      symbol,
+      p[[1]]
+  ];
+
+  NCPolySOSDual[degree_Integer, {gb_NCPoly, gbs___NCPoly}, symbol_:Unique[]] := 
+    NCPolySOSDualAux2[
+      NCPolyMomentMatrix[degree, {gb, gbs}],
+      symbol,
+      gb[[1]]
+  ];
+
+  NCPolySOSDual[degree_Integer, vars_List, symbol_:Unique[],
+		options:OptionsPattern[NCPoly]] :=
+    NCPolySOSDual[NCPolyVeronese[degree, vars, options], symbol];
 
   Clear[deleteColumns];
   deleteColumns[m_SparseArray, cols_] := Transpose[deleteRows[Transpose[m], cols]];

@@ -165,20 +165,19 @@ Begin["`Private`"];
   NCPolyGetOptionsSequence[p_NCPoly] := Sequence @@ Drop[List @@ p, 2];
   
   (* errors *)
-  
-  NCPoly[r_,s_,OptionsPattern[]] := (Message[NCPoly::NotPolynomial]; 
-    $Failed) /; Or[ Head[r] =!= List, Depth[r] =!= 2,
-                   Head[s] =!= Association ];
 
-  (*
-  NCPoly[r___,opt:OptionsPattern[]] := (Print["opts =", opts]; Message[NCPoly::NotPolynomial]; 
-    $Failed) /; Length[{r}] != 2;
-  *)
+  NCPoly[r_,s_,OptionsPattern[]] := (
+    Message[NCPoly::NotPolynomial];
+    Print["r = ", r, ", s = ", s];
+    $Failed
+  ) /; (Head[r] =!= List || Depth[r] =!= 2 || Head[s] =!= Association);
 
   (* NCPolyConvert *)
   NCPolyConvert[{p__NCPoly}, Vars_List] := 
     Map[NCPolyConvert[#, Vars]&, {p}];
       
+  NCPolyConvert[p_NCPoly, Vars_List] := p /; p[[1]] === Vars;
+
   NCPolyConvert[p_NCPoly, Vars_List] := Module[
     {vars},
       
@@ -190,12 +189,7 @@ Begin["`Private`"];
            NCPoly::InvalidList
     ];
       
-    If[p[[1]] === Vars,
-       (* same poly's, return *)
-       Return[p];
-    ];
-    
-    (* Need to convert *)
+    (* convert *)
     Return[
       NCPoly[ vars
              , 
@@ -271,6 +265,14 @@ Begin["`Private`"];
 
   NCPolyLeadingTerm[p_NCPoly] := NCPolyLeadingTerm[p, 1];
 
+  NCPolyLeadingTerm[NCPoly[{n_Integer}, terms_, opts___], 1] := Block[
+    {key = Last[Keys[terms]]},
+    Rule[
+      key,
+      terms[key]
+    ]
+  ];
+
   NCPolyLeadingTerm[p_NCPoly, 1] := Block[
     {key = Last[Keys[p[[2]]]]},
     Rule[
@@ -316,6 +318,12 @@ Begin["`Private`"];
            p[[2]][[Flatten[Position[Map[Total[Drop[#, -1]]&, 
                                         Keys[p[[2]]]], degree]]]]
            NCPolyGetOptionsSequence[p] ];
+
+  NCPolyTermsToList[p_NCPoly] :=
+    Map[NCPoly[p[[1]], #, p[[3]]] &, KeyValueMap[<|Rule@##|> &, p[[2]]]] /; Length[p] == 3;
+
+  NCPolyTermsToList[p_NCPoly] :=
+    Map[NCPoly[p[[1]], #] &, KeyValueMap[<|Rule@##|> &, p[[2]]]];
 
   (* NCPolyQuadraticTerms *)
   Clear[NCPolyQuadraticTermsAux];
@@ -374,17 +382,28 @@ Begin["`Private`"];
 
   NCPolyQuadraticChipset[p_NCPoly] := Block[
     {even, halfDigits, chipset},
+
+    (* Is it self adjoint? *) 
+    If[ !NCPolySelfAdjointQ[p],
+	Message[NCPoly::NotSelfAdjoint];
+    ];
     
     (* Get square half-digits *)
     {even, halfDigits} = NCPolyQuadraticTermsAux[p];
-    
-    (* generate chipset *)
+
+    (* MAURICIO: FEB 2022 NOT SURE WHY THE COMPLICATION
+    ( * generate chipset * )
     chipset = Union[Join @@ Map[Table[Take[#, i], {i, Length[#]}]&, halfDigits]];
     If[ MemberQ[halfDigits, {}],
         PrependTo[chipset, {}];
     ];
-      
     chipset = Map[NCFromDigits[#, p[[1]]]&, chipset];
+    *)
+    
+    If[ MemberQ[halfDigits, {}],
+        PrependTo[halfDigits, {}];
+    ];
+    chipset = Map[NCFromDigits[#, p[[1]]]&, halfDigits];
       
     (*
     Print["even = ", even];
@@ -490,14 +509,45 @@ Begin["`Private`"];
                                           NCPolyGetOptionsSequence[s] ];
 
   (* Plus *)
-  NCPolySum[r_NCPoly, s_NCPoly] := NCPoly[
+  (* MAURICIO: FEB 2022: NCPolyPossibleZeroQ is needed to handle borderline zeros *)
+  NCPolySum[r_NCPoly, s__NCPoly] := NCPoly[
     r[[1]], 
-    (* KeySort[DeleteCases[Merge[{r[[2]], s[[2]]}, Total], 0]], *)
-    KeySort[DeleteCases[Merge[{r[[2]], s[[2]]}, Total], _?NCPolyPossibleZeroQ]],
-    NCPolyGetOptionsSequence[s]
-  ] /; s[[1]] === r[[1]];
+    KeySort[DeleteCases[Merge[{r, s}[[All,2]], Total], _?NCPolyPossibleZeroQ]],
+    NCPolyGetOptionsSequence[r]
+  ] /; {s}[[1,1]] === r[[1]];
 
   (* Product *)
+
+  NCPolyMonomialProduct[r_, s_] := Block[
+    {n = r[[1]], nvars, nsets, sdigits, rdigits, sdegree, loffset},
+
+    (* Compute monomials *)
+    nvars = Total[n];
+    nsets = Length[n];
+    sdigits = Keys[s[[2]]][[1]];
+    rdigits = Keys[r[[2]]][[1]];
+    sdegree = Total[Drop[sdigits, -1]];
+    loffset = nvars^(sdegree);
+
+    (*
+    Print["nvars = ", nvars];
+    Print["nsets = ", nsets];
+
+    Print["sdegree = ", sdegree];
+    Print["loffset = ", loffset];
+
+    Print["rdigits = ", rdigits];
+    Print["sdigits = ", sdigits];
+    *)
+
+    digits = Append[rdigits[[1 ;; nsets]] + sdigits[[1 ;; nsets]],
+		    rdigits[[nsets+1]] * loffset + sdigits[[nsets+1]]];
+    coeff = r[[2]][[1]] * s[[2]][[1]];
+    
+    Return[NCPoly[n, <|digits -> coeff|>, NCPolyGetOptionsSequence[r]]];
+	   
+  ] /; (s[[1]] === r[[1]] && ((Length[s]==Length[r]==2) || s[[3]] === r[[3]]));
+
   NCPolyProduct[r_NCPoly, s_NCPoly] := Block[
     { digits, coeff, sets,
       rdigits, sdigits, 
@@ -509,11 +559,8 @@ Begin["`Private`"];
     nsets = Length[n];
 
     (*
-      Print["nvars = ", nvars];
-      Print["nsets = ", nsets];
-
-      Print["r = ", r];
-      Print["s = ", s];
+    Print["nvars = ", nvars];
+    Print["nsets = ", nsets];
     *)
 
     (* Compute coefficients *)
@@ -527,7 +574,7 @@ Begin["`Private`"];
             ];
 
     (*
-      Print["coeff = ", coeff];
+    Print["coeff = ", coeff];
     *)
 
     (* Compute monomials *)
@@ -538,11 +585,11 @@ Begin["`Private`"];
     sdigits = NCPolyGetIntegers[s];
 
     (*
-      Print["sdegree = ", sdegree];
-      Print["loffset = ", loffset];
+    Print["sdegree = ", sdegree];
+    Print["loffset = ", loffset];
 
-      Print["rdigits = ", rdigits];
-      Print["sdigits = ", sdigits];
+    Print["rdigits = ", rdigits];
+    Print["sdigits = ", sdigits];
     *)
 
     sets = Flatten[ 
@@ -619,8 +666,8 @@ Begin["`Private`"];
       Print["* NCPolyReduce"];
       Print["f = ", NCPolyDisplay[f]];
       Print["g = ", NCPolyDisplay[g]];
-      Print["f = ", FullForm[f]];
-      Print["g = ", FullForm[g]];
+      Print["f = ", f];
+      Print["g = ", g];
     ];
 
     k = 0;
@@ -657,9 +704,10 @@ Begin["`Private`"];
                ,
                 (* divide, update quotient and residual *)
                 AppendTo[q, qi];
-                If[ debugLevel > 1, Print["q = ", q]; ];
+        	If[ debugLevel > 1, Print["r = ", r]; Print["q = ", q]; Print["qi ** g = ", NCPoly`Private`QuotientExpand[qi, g]]; ];
                 r -= NCPoly`Private`QuotientExpand[qi, g];
-                If[ debugLevel > 1, Print["r = ", NCPolyDisplay[r]]; Print["j = ", j]; ];
+        	(* r = NCPoly[r[[1]], <|Drop[Normal[r[[2]]], -1]|>]; *)
+		If[ debugLevel > 1, Print["r = ", r]; Print["r = ", NCPolyDisplay[r]]; Print["j = ", j]; ];
            ];
            (* MAURICIO: OK to test with exact 0 here because
               QuotientExpand will apply NCPolyPossibleZeroQ *)
@@ -681,7 +729,7 @@ Begin["`Private`"];
   DegreeToIndex[d_, n_] := (n^d - 1)/(n - 1);
       
   Clear[IndexToDegree];
-  IndexToDegree[m_, n_] := Floor[Log[(m - 1/(1 - n)) (-1 + n)] / Log[n]];
+  IndexToDegree[m_, n_] := Floor[Log[n, (1/(1 - n) - m)*(1 - n)]];
   
   NCPolyCoefficientArray[p_NCPoly, dd_:-1] := Module[
     {n = Total[p[[1]]], d = NCPolyDegree[p]},
@@ -710,8 +758,6 @@ Begin["`Private`"];
     Return[SparseArray[Map[NCPolyCoefficientArray[#,d]&, {ps}]]];
   ] /; (Count[Unitize[Max /@ {ps}[[All,1]] - Min /@ {ps}[[All,1]]], 0] == Length[{ps}]);
 
-  Clear[IndexToDegree];
-  IndexToDegree[m_, n_] := Floor[Log[n, (m - 1/(1 - n)) (-1 + n)]];
 
   NCPolyFromCoefficientArray[m_SparseArray?MatrixQ, vars_List] := 
     Map[NCPolyFromCoefficientArray[#,vars]&, m];
@@ -845,7 +891,6 @@ Begin["`Private`"];
     n = Total[vars];
 
     (*
-    Print["m = ", Normal[m]];
     Print["n = ", n];
     Print["Vars = ", Vars];
     Print["vars = ", vars];
@@ -855,19 +900,35 @@ Begin["`Private`"];
     
     (* right product *)
 
+    (*
     index = rrules[[All, 1, 2]];
     degree = Map[IndexToDegree[# - 1, n]&, index];
+    *)
 
+    degree = Map[IndexToDegree[# - 1, n] &, rrules[[All, 1, 2]]];
+    index = Map[DegreeToIndex[#, n] &, degree];
+    index = rrules[[All, 1, 2]] - index - 1;
+
+    (*
+    Print["index = ", index];
+    Print["degree = ", degree];
+    Print["rows = ", rrules[[All, 1, 1]]];
+    *)
+    
     (* flip digits on the right *)
     rindex = NCFromDigits[
 	       Map[Reverse,
 		   Map[NCIntegerDigits[#,n]&, 
 		       Transpose[{degree, index}]]
 		   ], n][[All,2]];
-	
+
+    (*
+    Print["rindex = ", rindex];
+    *)
+
     coeff = Transpose[{degree, rindex}];
     rpoly = Map[
-	      NCPoly[{n}, Merge[#, Total]]&,
+	      NCPoly[{n}, Association[#]]&,
 	      Values[
 		KeySort[
  	          Merge[ Thread[rrules[[All, 1, 1]] -> Thread[coeff -> rrules[[All,2]]]]
@@ -877,17 +938,24 @@ Begin["`Private`"];
 	        ]
 	      ]
 	    ];
+
     (*
     Print["degree = ", degree];
     Print["index = ", index];
     Print["rindex = ", rindex];
     Print["coeff = ", coeff];
     Print["rpoly = ", rpoly];
-     *)
-    
+    *)
+
+    (*
     index = lrules[[All, 1, 1]];
     degree = Map[IndexToDegree[# - 1, n]&, index];
-	
+    *)
+
+    degree = Map[IndexToDegree[# - 1, n] &, lrules[[All, 1, 1]]];
+    index = Map[DegreeToIndex[#, n] &, degree];
+    index = lrules[[All, 1, 1]] - index - 1;
+    
     coeff = Transpose[{degree, index}];
     lpoly = Map[
 	      NCPoly[{n}, Merge[#, Total]]&,
@@ -900,6 +968,7 @@ Begin["`Private`"];
 		]
 	      ]
 	    ];
+    
     (*
     Print["degree = ", degree];
     Print["index = ", index];
@@ -910,6 +979,220 @@ Begin["`Private`"];
     Return[{NCPolyConvert[lpoly, Vars], NCPolyConvert[rpoly, Vars]}];
 	
   ];
+
+  Clear[NCPolyVeroneseAux1];
+    NCPolyVeroneseAux1[digits_, deg_, hasOne_] :=
+    Table[{digits[[;; i]], 
+           Reverse@digits[[i + 1 ;;]]}, 
+          {i, Min[Length[digits]-If[hasOne, 0, 1],Ceiling[deg/2]]}];
+
+  NCPolyVeronese[degree_Integer, vars_, options:OptionsPattern[NCPoly]] := Block[
+    {Vars = NCPolyVarsToIntegers[vars], nvars = Total[Vars]},
+    Return[
+      NCPolyConvert[
+        NCPoly[{nvars}, <|Thread[
+			    Flatten[
+			      Table[
+			        Table[{j, i}, {i, 0, nvars^j - 1}],
+				{j, 0, degree}
+			      ], 1
+			    ] -> 1]|>, options], Vars]];
+  ];
+
+  NCPolyVeronese[p_NCPoly] := Module[
+    {digits, deg, base, hasOne},
+
+    digits = NCPolyGetDigits[p];
+    deg = Max[Map[Length, digits]];
+    base = p[[1]];
+    hasOne = MemberQ[digits, {}];
+
+    (*
+    Print["digits = ", digits];
+    Print["deg = ", deg];
+    Print["hasOne = ", hasOne];
+    Print["base = ", base];
+     *)
+    
+    (* split digits *)
+    digits = Union[Flatten[Map[NCPolyVeroneseAux1[##,deg,hasOne]&, digits], 1][[All,1]]];
+
+    (* add constant *)
+    If[ hasOne, PrependTo[digits, {}]];
+    
+    (* Print["digits = ", digits]; *)
+    
+    Return[NCPoly[base, <|Thread[Map[NCFromDigits[#, base]&, digits] -> 1]|>]];
+  ];
+
+  NCPolyMomentMatrix[degree_Integer, vars_, options:OptionsPattern[NCPoly]] := Module[
+    {ver = NCPolyVeronese[Ceiling[degree/2], vars, options], Vars},
+    Vars = NCPolyVarsToIntegers[vars];
+    ver = NCPolyTermsToList[NCPolyConvert[ver, {Total[Vars]}]];
+    Return[
+      Map[NCPolyConvert[#, Vars]&,
+        Outer[NCPolyMonomialProduct, ver, Map[NCPolyReverseMonomials, ver]],
+        {2}
+      ]
+    ];
+  ];
+
+  Clear[NCPolyMomentMatrixAux1];
+  NCPolyMomentMatrixAux1[digits_, vars_, halfDegree_] :=
+    Null /; Length[digits] > 2 halfDegree;
+  NCPolyMomentMatrixAux1[digits_, vars_, halfDegree_] := Module[
+    {min = Max[Length[digits] - halfDegree, 0], max},
+    max = Length[digits] - min;
+    Return[
+      Table[
+        {NCFromDigits[digits[[;; i]], vars],
+	 NCFromDigits[Reverse@digits[[i + 1 ;;]], vars]}, {i, min, max}]
+    ];
+  ];
+
+  Clear[NCPolyMomentMatrixAux2]
+  NCPolyMomentMatrixAux2[nvars_, degree_, index_] :=
+    (nvars^degree - 1)/(nvars - 1) + index;
+
+  NCPolyMomentMatrix[p_NCPoly] :=
+    NCPolyMomentMatrix[p, NCPolyDegree[p]];
+
+  NCPolyMomentMatrix[p_NCPoly, veronese_NCPoly:Null] :=
+    NCPolyMomentMatrix[p, NCPolyDegree[p], veronese];
+
+  NCPolyMomentMatrix[p_NCPoly, degree_Integer, veronese_NCPoly:Null] := Module[
+    {halfDegree, nvars, ver, digits, verIndex, halfPolys, index, m},
+    
+    halfDegree = Ceiling[degree/2];
+    nvars = Total[p[[1]]];
+
+    (* Calculate dimension *)
+    m = NCPolyMomentMatrixAux2[nvars, halfDegree+1, 0];
+    
+    (* Calculate digits of the veronese *)
+    verIndex = If[ veronese =!= Null
+	          ,
+		   DeleteCases[
+        	     Flatten[
+		       Map[NCPolyMomentMatrixAux2[nvars, Total[Drop[#, -1]], Rest[#]]&,
+		           Keys[veronese[[2]]]]],
+		     _?((# > m)&)
+		   ]
+		  ,
+	           Null
+		];
+    
+    (* Grab monomials off normalized polynomial list *)
+    ver = NCPolyTermsToList[NCPoly[p[[1]], <|Thread[Keys[p[[2]]] -> 1]|>]];
+
+    (* Exclude terms of degree higher than degree *)
+    If[ NCPolyDegree[p] > degree,
+	ver = DeleteCases[ver, _?((NCPolyDegree[#] > degree)&)]
+    ];
+
+    (* Calculate digits *)
+    digits = Map[NCIntegerDigits[Keys[#[[2]]][[1]], p[[1]]]&, ver];
+
+    (*
+    Print["degree = ", degree];
+    Print["halfDegree = ", halfDegree];
+    Print["degree[p] = ", NCPolyDegree[p]];
+    Print["m = ", m];
+    Print["ver = ", ver];
+    Print["digits = ", digits];
+    Print["verIndex = ", verIndex];
+    *)
+    
+    (* Calculate partitions of degree <= halfDegree *)
+    halfPolys = DeleteCases[
+		  Map[NCPolyMomentMatrixAux1[#, {nvars}, halfDegree] &, digits],
+		  Null
+		];
+
+    (* Calculate indices in the veronese *)
+    index = Map[NCPolyMomentMatrixAux2[nvars, #[[1]], #[[2]]]&, halfPolys, {3}];
+
+    (*
+    Print["halfPolys = ", halfPolys];
+    Print["index = ", index];
+    *)
+    
+    (* Restric indices to veronese *)
+    If[ verIndex =!= Null
+       ,
+	index = Map[
+	  Cases[#, _?((MemberQ[verIndex, #[[1]]]&&MemberQ[verIndex, #[[2]]])&)]&,
+	  index];
+    ];
+    
+    (*
+    Print["index = ", index];
+    *)
+    
+    Return[
+      SparseArray[
+        Append[
+	  Flatten[MapThread[Thread[(#1 + 1) -> #2]&, {index, ver}]],
+	  {1,1}->NCPolyConstant[1, p[[1]]]
+        ], {m,m}
+      ]
+    ];
+      
+  ];
+
+  NCPolyMomentMatrix[degree_Integer, {gbs__NCPoly}] := Module[
+    {gb = {gbs}, halfDegree, nvars, v, ver, redVer, redIndex, activeIndex, p, redP, digits, verIndex, halfPolys, index, m},
+    
+    halfDegree = Ceiling[degree/2];
+    nvars = Total[gb[[1,1]]];
+
+    (* Calculate dimension *)
+    m = NCPolyMomentMatrixAux2[nvars, halfDegree+1, 0];
+
+    Print["nvars = ", nvars];
+    Print["degree = ", degree];
+    Print["halfDegree = ", halfDegree];
+    Print["m = ", m];
+    
+    (* Calculate veronese *)
+    v = NCPolyVeronese[halfDegree, {nvars}];
+    ver = NCPolyTermsToList[v];
+
+    (* Reduce and zero repeated entries *)
+    redVer = NCPolyReduce[ver, gb];
+    redIndex = GatherBy[Range@Length@redVer, redVer[[#]] &];
+    activeIndex = Flatten[Map[First, redIndex]];
+    redIndex = Flatten[Map[Rest, redIndex]];
+    redVer[[redIndex]] = 0;
+
+    Print["redIndex = ", redIndex];
+    Print["activeIndex = ", activeIndex];
+
+    (*
+    Print["ver = ", ver];
+    Print["redVer = ", redVer];
+    *)
+
+    (* Square veronese *)
+    p = Outer[NCPolyMonomialProduct, ver[[activeIndex]], Map[NCPolyReverseMonomials, ver[[activeIndex]]]];
+    redP = SparseArray[{},{m,m}];
+    redP[[activeIndex,activeIndex]] = Map[NCPolyReduce[#, gb][[2]]&, p, {2}];
+    
+    (*
+    Print["degree = ", degree];
+    Print["halfDegree = ", halfDegree];
+    Print["degree[p] = ", NCPolyDegree[p]];
+    Print["m = ", m];
+    Print["ver = ", ver];
+    Print["digits = ", digits];
+    Print["verIndex = ", verIndex];
+    *)
+    
+    Return[redP];
+    
+  ];
+
+
 
 End[];
 EndPackage[]

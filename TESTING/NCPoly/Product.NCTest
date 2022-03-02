@@ -92,6 +92,10 @@ Block[
   NCTest[Cases[NCPolyGetCoefficients[p5p4],Except[0]],{2, 4, -2}];
   NCTest[Cases[NCPolyGetDigits[p5p4],Except[0]],{{0, 1, 0}, {0, 1, 1, 0}, {1, 0, 1, 0}}];
 
+  (* monomial product *)
+  NCTest[NCPolyMonomialProduct[p3, p4], p3**p4];
+  NCTest[NCPolyMonomialProduct[p4, p3], p4**p3];
+
   (* graded tests *)
 
   isGraded = (NCPolyOrderType[NCPolyMonomial[{1}, 1]] === NCPoly`NCPolyDegLexGraded);

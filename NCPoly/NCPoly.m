@@ -29,6 +29,7 @@ Clear[NCPoly,
       NCPolyQuadraticChipset,
       NCPolyTermsOfDegree,
       NCPolyTermsOfTotalDegree,
+      NCPolyTermsToList,
       NCPolyReverseMonomials,
       NCPolyTranspose,
       NCPolyAdjoint,
@@ -47,11 +48,14 @@ Clear[NCPoly,
       NCPolyPack,
       NCPolySum,
       NCPolyProduct,
+      NCPolyMonomialProduct,
       NCPolyReduce,
       NCPolyToRule,
       NCPolyFullReduce,
       NCPolyQuotientExpand,
-      NCPolyNormalize];
+      NCPolyNormalize,
+      NCPolyMomentMatrix,
+      NCPolyVeronese];
 
 (* The following generic functions are implemented here *)
 
@@ -72,10 +76,12 @@ Clear[NCFromDigits,
 Clear[NCPolyHankelMatrix,
       NCPolyRealization,
       NCPolyGramMatrixDimensions,
-      NCPolyGramMatrix];
+      NCPolyGramMatrix,
+      NCPolySelfAdjointQ];
 
 Get["NCPoly.usage"];
 
+NCPoly::NotSelfAdjoint = "Polynomial is not self-adjoint.";
 NCPoly::NotPolynomial = "Expression is not a simple nc polynomial.";
 NCPoly::SizeMismatch = "Number of monomials and coefficients do not match.";
 NCPoly::InvalidList = "Invalid list of variables.";
@@ -260,7 +266,7 @@ Begin["`Private`"];
     ff = f;
     q = {};
     i = 1;
-    While [i <= m, 
+    While [i <= m,
       (* Reduce current dividend *)
       {qi, r} = NCPolyReduce[ff, gs[[i]], complete, debugLevel];
       If [ r =!= ff,
@@ -882,8 +888,11 @@ Begin["`Private`"];
 
     digits = NCPolyGetDigits[p];
     base = p[[1]];
+    
+    (* split digits *)
     sdigits = Map[NCPolyGramMatrixAux1, digits];
 
+    (* convert to index *)
     index = Map[NCPolyGramMatrixAux2[#, base] &, sdigits];
     deg = Max[Max /@ index];
 
@@ -915,7 +924,10 @@ Begin["`Private`"];
     {base = {Total[NCPolyVarsToIntegers[vars]]}},
     Return[NCDigitsToIndex[NCIntegerDigits[{Ceiling[degree/2]+1,0}, base], base] - 1];
   ];
-     
+
+  NCPolySelfAdjointQ[p_NCPoly] := 
+    NCPolyPossibleZeroQ[p - NCPolyAdjoint[p]];
+    
 End[]
       
 (* Load NCPolyAssociationGraded *)

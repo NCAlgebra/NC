@@ -177,4 +177,100 @@ Block[
   NCTest[Norm[mat - answer] < 1^-6];
   NCTest[NCPolyFromGramMatrix[mat, vars], poly];
 
+  vars = {{x,y}};
+  mat = IdentityMatrix[3];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[1, {2}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[1, {2}]]]];
+
+  vars = {x,y};
+  mat = IdentityMatrix[3];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1}]&, NCPolyTermsToList[NCPolyVeronese[1, {2}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[1, {2}]]]]];
+
+  vars = {{x,y,z}};
+  mat = IdentityMatrix[4];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[1, {3}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[1, {3}]]]];
+
+  vars = {x,y,z};
+  mat = IdentityMatrix[4];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1,1}]&, NCPolyTermsToList[NCPolyVeronese[1, {3}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[1, {3}]]]]];
+
+  vars = {{x,y}};
+  mat = IdentityMatrix[7];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[2, {2}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[2, {2}]]]];
+
+  vars = {x,y};
+  mat = IdentityMatrix[7];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1}]&, NCPolyTermsToList[NCPolyVeronese[2, {2}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[2, {2}]]]]];
+
+  vars = {{x,y,z}};
+  mat = IdentityMatrix[13];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[2, {3}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[2, {3}]]]];
+
+  vars = {x,y,z};
+  mat = IdentityMatrix[13];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1,1}]&, NCPolyTermsToList[NCPolyVeronese[2, {3}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[2, {3}]]]]];
+
+  vars = {{x,y}};
+  mat = IdentityMatrix[15];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[3, {2}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[3, {2}]]]];
+
+  vars = {x,y};
+  mat = IdentityMatrix[15];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1}]&, NCPolyTermsToList[NCPolyVeronese[3, {2}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[3, {2}]]]]];
+
+  vars = {{x,y,z}};
+  mat = IdentityMatrix[40];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[3, {3}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[3, {3}]]]];
+
+  vars = {x,y,z};
+  mat = IdentityMatrix[40];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1,1}]&, NCPolyTermsToList[NCPolyVeronese[3, {3}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[3, {3}]]]]];
+
+  vars = {{x,y}};
+  mat = IdentityMatrix[31];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[4, {2}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[4, {2}]]]];
+
+  vars = {x,y};
+  mat = IdentityMatrix[31];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1}]&, NCPolyTermsToList[NCPolyVeronese[4, {2}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[4, {2}]]]]];
+
+  vars = {{x,y,z}};
+  mat = IdentityMatrix[121];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, NCPolyTermsToList[NCPolyVeronese[4, {3}]]];
+  NCTest[pr, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[4, {3}]]]];
+
+  vars = {x,y,z};
+  mat = IdentityMatrix[121];
+  {pl,pr} = NCPolyFromGramMatrixFactors[mat, mat, vars];
+  NCTest[pl, Map[NCPolyConvert[#, {1,1,1}]&, NCPolyTermsToList[NCPolyVeronese[4, {3}]]]];
+  NCTest[pr, Map[NCPolyConvert[#, {1,1,1}]&, Map[NCPolyAdjoint,NCPolyTermsToList[NCPolyVeronese[4, {3}]]]]];
+
 ];
