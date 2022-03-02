@@ -6,7 +6,7 @@ FILES = NCGBX.usage NCPolyGroebner.usage NCPolyInterface.usage NCPolySOS.usage
 
 FILES3 = NCPoly.usage
 
-all: files3 $(FILES) 
+all: $(FILES) files3
 
 files3: MD2USAGE_OPTIONS = -H "\#\#\#\#"
 files3: $(FILES3)

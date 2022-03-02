@@ -54,6 +54,13 @@ def main():
         else:
             assert False, "unhandled option"
 
+    # build higher heading pattern
+    HIGHER_HEADING = ''
+    higher_headings_pattern = None
+    if len(HEADING) > 1:
+        pattern = '(' + '|'.join([HEADING[:i] for i in range(1,len(HEADING))]) + ')'
+        higher_headings_pattern = re.compile(pattern + "\s*(\w+)")
+
     # patterns
     heading_pattern = re.compile(HEADING + "\s*(\w+)");
     name_pattern = re.compile(r"(<a\s)|(</a>)");
@@ -77,6 +84,18 @@ def main():
                     print('> NAME MATCH: {}'.format(line), file = sys.stderr)
                 continue
 
+            # match higher heading
+            if higher_headings_pattern is not None and re.match(higher_headings_pattern, line) is not None and mode == State.scanning:
+                # finished function
+                functions[function] = body
+                if debug:
+                    print('< HIGHER HEADING', file = sys.stderr)
+                    print('< END FUNCTION', file = sys.stderr)
+                # set to idle
+                mode == State.idle
+                # and continue with next line
+                continue
+            
             # match heading pattern
             match = re.match(heading_pattern, line)
             if match is not None:
