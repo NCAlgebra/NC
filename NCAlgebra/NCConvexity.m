@@ -34,7 +34,6 @@ Clear[NCIndependent];
 
 NCIndependent::Inconclusive = "Linear dependence analysis was inconclusive. Further investigation recommended.";
 
-
 NCConvexity::DependentBorder = "Border vector may be linearly dependent";
 NCConvexity::NotSymmetric = "Expression is not symmetric.";
 
@@ -45,13 +44,13 @@ Options[NCConvexityRegion] = {
     AllPermutation -> False 
 };
 
-Begin["`Private`"];
+Get["NCConvexity.usage", CharacterEncoding->"UTF8"];
 
-    Get["NCConvexity.usage"];
+Begin["`Private`"];
 
     Clear[NCBorderVectorGather];
 
-    Get["NCConvexity.private.usage"];
+    Get["NCConvexity.private.usage", CharacterEncoding->"UTF8"];
 
     (* BEGIN MAURICIO MAR 2016 *)
       Diag[x_] := Tr[x, List];

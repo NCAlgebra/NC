@@ -27,7 +27,7 @@ BeginPackage[ "NCWebUpdate`" ];
 
 Clear[NCUpdate];
 
-Get["NCWebUpdate.usage"];
+Get["NCWebUpdate.usage", CharacterEncoding->"UTF8"];
 
 Begin[ "`Private`" ]
 

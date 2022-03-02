@@ -23,7 +23,7 @@ BeginPackage["NCDot`",
 Clear[NCDot,
       tpMat, ajMat, coMat];
 
-Get["NCDot.usage"];
+Get["NCDot.usage", CharacterEncoding->"UTF8"];
 
 NCInverse::NotSquare = "The input matrix is not SQUARE.";
 NCInverse::Singular = "The input matrix appears to be SINGULAR.";

@@ -31,7 +31,7 @@ Options[NCTeX] = {
 };
 NCTeX::FailedImport = "Failed to import pdf.";
 
-Get["NCTeX.usage"];
+Get["NCTeX.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

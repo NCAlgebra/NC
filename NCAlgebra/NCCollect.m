@@ -32,11 +32,9 @@ NCCollect::NotPolynomial = "Could not transform expression into nc polynomial";
 
 Options[NCCollect] = {ByTotalDegree -> False};
 
-Get["NCCollect.usage"];
+Get["NCCollect.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
-
-  Get["NCCollect.usage"];
 
   (* Auxiliary tests *)
                                         

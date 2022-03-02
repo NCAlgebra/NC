@@ -22,7 +22,7 @@ Clear[ClearMonomialOrder,
       NCProcess,
       NCReduce];
 
-Get["NCGBX.usage"];
+Get["NCGBX.usage", CharacterEncoding->"UTF8"];
 
 SetMonomialOrder::InvalidOrder = "Order `1` is invalid.";
 NCMakeGB::AdditionalRelations = "Relations `1` were not found in the current ordering and have been added to the list of relations. Explicitly add them to the monomial order to control their ordering.";

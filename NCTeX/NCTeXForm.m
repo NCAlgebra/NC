@@ -10,7 +10,7 @@ Clear[NCTeXForm,
       NCTeXFormSetStar,
       NCTeXFormSetStarStar];
 
-Get["NCTeXForm.usage"];
+Get["NCTeXForm.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

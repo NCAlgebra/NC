@@ -25,7 +25,7 @@ BeginPackage[ "NCSelfAdjoint`",
 Clear[NCSymmetricQ, NCSymmetricTest, NCSymmetricPart,
       NCSelfAdjointQ, NCSelfAdjointTest];
       
-Get["NCSelfAdjoint.usage"];
+Get["NCSelfAdjoint.usage", CharacterEncoding->"UTF8"];
 
 NCSymmetricQ::SymmetricVariables =
 "The variable(s) `1` was(were) assumed symmetric";

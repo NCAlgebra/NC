@@ -16,7 +16,7 @@ Options[NCRun] = {
   CommandPrefix -> ""
 };
 
-Get["NCRun.usage"];
+Get["NCRun.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

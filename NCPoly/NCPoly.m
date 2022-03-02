@@ -79,7 +79,7 @@ Clear[NCPolyHankelMatrix,
       NCPolyGramMatrix,
       NCPolySelfAdjointQ];
 
-Get["NCPoly.usage"];
+Get["NCPoly.usage", CharacterEncoding->"UTF8"];
 
 NCPoly::NotSelfAdjoint = "Polynomial is not self-adjoint.";
 NCPoly::NotPolynomial = "Expression is not a simple nc polynomial.";

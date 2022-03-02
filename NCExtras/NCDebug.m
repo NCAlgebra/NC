@@ -16,7 +16,7 @@ BeginPackage[ "NCDebug`" ];
 
 Clear[NCDebug];
 
-Get["NCDebug.usage"];
+Get["NCDebug.usage", CharacterEncoding->"UTF8"];
 
 NCDebug::level = "NCDebug must be called with an integer level";
 

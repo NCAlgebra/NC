@@ -20,7 +20,7 @@ Clear[NCToNCPoly,
       NCMonomialQ,
       NCPolynomialQ];
 
-Get["NCPolyInterface.usage"];
+Get["NCPolyInterface.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

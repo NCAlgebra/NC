@@ -11,7 +11,7 @@ Clear[NCPolySOSToSDP,
       NCPolySOS,
       NCPolySOSDual];
 
-Get["NCPolySOS.usage"];
+Get["NCPolySOS.usage", CharacterEncoding->"UTF8"];
 
 NCPoly::NotSOS = "Polynomial is not a sum-of-squares.";
 

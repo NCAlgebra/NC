@@ -25,7 +25,7 @@ Clear[NCPToNCSylvester,
       NCSylvesterToNC,
       NCSylvesterCollectOnVars];
 
-Get["NCSylvester.usage"];
+Get["NCSylvester.usage", CharacterEncoding->"UTF8"];
 
 NCSylvester::NotLinear = "Function is not linear.";
 
