@@ -50,7 +50,7 @@ SetCommutative::Protected = "WARNING: Symbol `1` was set as commutative but it i
 
 SetCommutingOperators::AlreadyDefined = "Symbols `1` and `2` were already defined commutative. Replacing existing rule.";
 
-Get["NonCommutativeMultiply.usage"];
+Get["NonCommutativeMultiply.usage", CharacterEncoding->"UTF8"];
 
 Begin[ "`Private`" ]
 

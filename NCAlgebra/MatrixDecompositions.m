@@ -27,7 +27,7 @@ Clear[LUDecompositionWithPartialPivoting,
       LURowReduce,
       LURowReduceIncremental];
 
-Get["MatrixDecompositions.usage"];
+Get["MatrixDecompositions.usage", CharacterEncoding->"UTF8"];
             
 MatrixDecompositions::WrongDimensions = \
 "Righ and left-hand side dimensions DO NOT MATCH.";

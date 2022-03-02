@@ -10,7 +10,7 @@ BeginPackage[ "NCPolySOS`",
 Clear[NCPolySOSToSDP,
       NCPolySOS];
 
-Get["NCPolySOS.usage"];
+Get["NCPolySOS.usage", CharacterEncoding->"UTF8"];
 
 NCPolySOS::NotSOS = "Polynomial is not a sum-of-squares.";
 

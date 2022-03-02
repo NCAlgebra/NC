@@ -31,7 +31,7 @@ Options[NCPolyGroebner] = {
   Labels -> {}
 };
 
-Get["NCPolyGroebner.usage"];
+Get["NCPolyGroebner.usage", CharacterEncoding->"UTF8"];
 
 NCPolyGroebner::Interrupted = "Stopped trying to find a Groebner basis at `1` polynomials";
 

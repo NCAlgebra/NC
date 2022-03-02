@@ -29,7 +29,7 @@ Clear[NCGrabSymbols,
       NCReplaceData,
       NCToExpression];
 
-Get["NCUtil.usage"];
+Get["NCUtil.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

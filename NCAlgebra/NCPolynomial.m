@@ -32,7 +32,7 @@ Clear[NCPolynomial,
       NCPLinearQ, NCPQuadraticQ,
       NCPNormalize];
 
-Get["NCPolynomial.usage"];
+Get["NCPolynomial.usage", CharacterEncoding->"UTF8"];
 
 NCPolynomial::NotRational = "Expression is not an nc rational.";
 NCPolynomial::NotPolynomial = "Expression is not an nc polynomial.";

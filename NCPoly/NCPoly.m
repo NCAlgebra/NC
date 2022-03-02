@@ -72,7 +72,7 @@ Clear[NCPolyHankelMatrix,
       NCPolyGramMatrixDimensions,
       NCPolyGramMatrix];
 
-Get["NCPoly.usage"];
+Get["NCPoly.usage", CharacterEncoding->"UTF8"];
 
 NCPoly::NotPolynomial = "Expression is not a simple nc polynomial.";
 NCPoly::SizeMismatch = "Number of monomials and coefficients do not match.";

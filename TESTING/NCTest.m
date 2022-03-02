@@ -23,7 +23,7 @@ Clear[NCTest,
       NCTestRun, 
       NCTestSummarize];
       
-Get["NCTest.usage"];
+Get["NCTest.usage", CharacterEncoding->"UTF8"];
 
 Begin[ "`Private`" ]
 

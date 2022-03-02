@@ -27,7 +27,7 @@ Clear[NCDirectionalD, DirectionalD, NCGrad, NCHessian, NCIntegrate];
 NCGrad::Failed = "Do not know how to calculate NCGrad. Expression `1` is most likely not rational or invalid.";
 NCIntegrate::NotIntegrable = "Expression `1` is not integrable";
 
-Get["NCDiff.usage"];
+Get["NCDiff.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

@@ -13,7 +13,7 @@ BeginPackage["NCOutput`",
 
 Clear[NCSetOutput];
 
-Get["NCOutput.usage"];
+Get["NCOutput.usage", CharacterEncoding->"UTF8"];
 
 Options[NCSetOutput] = {
   NonCommutativeMultiply -> False,

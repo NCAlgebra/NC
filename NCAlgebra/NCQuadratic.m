@@ -29,7 +29,7 @@ Clear[NCPToNCQuadratic,
       NCQuadraticMakeSymmetric,
       NCMatrixOfQuadratic];
 
-Get["NCQuadratic.usage"];
+Get["NCQuadratic.usage", CharacterEncoding->"UTF8"];
 
 NCQuadratic::NotQuadratic = "Function is not quadratic.";
 

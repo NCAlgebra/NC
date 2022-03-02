@@ -30,7 +30,7 @@ Clear[NCNormalizeInverse,
       NCSimplifyRational,
       NCSR];
 
-Get["NCSimplifyRational.usage"];
+Get["NCSimplifyRational.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"]
 

@@ -9,7 +9,7 @@ BeginPackage[ "NCSOS`",
 
 Clear[NCSOS];
 
-Get["NCSOS.usage"];
+Get["NCSOS.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

@@ -23,7 +23,7 @@ Clear[tr,
       SortCyclicPermutation,
       SortedCyclicPermutationQ];
 
-Get["NCTr.usage"];
+Get["NCTr.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 

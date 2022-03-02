@@ -68,9 +68,9 @@ Options[RJRTDecomposition] = {UseFloatingPoint -> True};
 
 NCRealization::Failed = "Only `1` out of `2` tests succeeded.";
 
-Begin["`Private`"]
+Get["NCRealization.usage", CharacterEncoding->"UTF8"];
 
-    Get["NCRealization.usage"];
+Begin["`Private`"]
 
     Clear[RJRTDecomposition,
           BlockDiagonalMatrix,
@@ -91,7 +91,7 @@ Begin["`Private`"]
           NCMakeMonic
          ];
 
-    Get["NCRealization.private.usage"];
+    Get["NCRealization.private.usage", CharacterEncoding->"UTF8"];
 
     (********** NCLinearQ **********)
 

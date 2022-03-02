@@ -40,7 +40,7 @@ Clear[NCReplace,
       NCRSym, NCRASym, NCRRSym, NCRLSym,
       NCRSA, NCRASA, NCRRSA, NCRLSA];
 
-Get["NCReplace.usage"];
+Get["NCReplace.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"]
 

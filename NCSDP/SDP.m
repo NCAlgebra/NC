@@ -29,13 +29,14 @@ Clear[SDPEval,
       SDPFunctions,
       SDPCheckDimensions];
 
-Get["SDP.usage"];
-Get["SDP.private.usage"];
+Get["SDP.usage", CharacterEncoding->"UTF8"];
 
 SDP::ErrorInDimensions = "Dimension error: `1`";
 SDP::notLinear = "Expression is not linear.";
 
 Begin[ "`Private`" ]
+
+  Get["SDP.private.usage", CharacterEncoding->"UTF8"];
 
   (* Evaluation and scaling *)
 

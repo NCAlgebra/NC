@@ -31,7 +31,7 @@ Clear[NCLUDecompositionWithPartialPivoting,
       NCLeftDivide,
       NCRightDivide];
 
-Get["NCMatrixDecompositions.usage"];
+Get["NCMatrixDecompositions.usage", CharacterEncoding->"UTF8"];
 
 Options[NCMatrixDecompositions] = {
   ZeroTest -> PossibleZeroQ,

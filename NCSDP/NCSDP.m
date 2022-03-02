@@ -25,7 +25,7 @@ BeginPackage[ "NCSDP`",
 
 Clear[NCSDP,NCSDPDual,NCSDPForm,NCSDPDualForm];
 
-Get["NCSDP.usage"];
+Get["NCSDP.usage", CharacterEncoding->"UTF8"];
 
 NCSDP::errorInBlock = "Error in block # `1`.";
 NCSDP::invalidParameters = "Invalid parameter: `1`.";
