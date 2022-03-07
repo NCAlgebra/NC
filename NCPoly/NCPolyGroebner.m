@@ -227,7 +227,7 @@ ReducePolynomial[G_,H_,labels_,
   While[ And[ h =!= 0, Flatten[q] =!= {}], 
 
          (* Reduce *)
-         {q, h} = NCPolyReduce[h, G, complete];
+         {q, h} = NCPolyReduceWithQuotient[h, G, Complete->complete];
          
          (* Collect contributions *)
          If[ q =!= {}, ij = Union[ij, Part[q, All, 2]] ];
@@ -626,7 +626,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
          (* Does h divide any poly in the basis? *)
          reducible = Pick[Range[m], 
-                          Map[(First[NCPolyReduce[#, 
+                          Map[(First[NCPolyReduceWithQuotient[#, 
                                      NCPolyLeadingMonomial[h]]]=!={})&,
                               TG]];
          
@@ -755,7 +755,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                         
                         (* Does Gii divide any poly in the basis? *)
                         mreducible = Pick[Range[m], 
-                                          Map[(First[NCPolyReduce[#, 
+                                          Map[(First[NCPolyReduceWithQuotient[#, 
                                             NCPolyLeadingMonomial[Gii]]]=!={})&,
                                               TG]];
                         

@@ -396,7 +396,7 @@ Begin["`Private`"];
         If[ returnGraph,
             Message["THIS WILL INVALIDATE GRAPH!"];
         ];
-        basis = Sort[NCPolyReduce[basis, True]];
+        basis = Sort[NCPolyReduce[basis, Complete->True]];
     ];
 
     (* Convert to rules *)
@@ -597,24 +597,24 @@ Begin["`Private`"];
       
   ];
                               
-  NCReduce[f_List, g_List, complete_:False] := Module[
+  NCReduce[f_List, g_List, options:OptionsPattern[NCPolyReduce]] := Module[
     {fpolys, gpolys},
 
     fpolys = NCToNCPoly[f, $NCPolyInterfaceMonomialOrder];
     gpolys = NCToNCPoly[g, $NCPolyInterfaceMonomialOrder];
 
-    rules = NCPolyToRule[NCPolyReduce[fpolys, gpolys, complete]];
+    rules = NCPolyToRule[NCPolyReduce[fpolys, gpolys, options]];
 
     Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
 
   ];
 
-  NCReduce[g_List, complete_:False] := Module[
+  NCReduce[g_List, options:OptionsPattern[NCPolyReduce]] := Module[
     {gpolys},
 
     gpolys = NCToNCPoly[g, $NCPolyInterfaceMonomialOrder];
 
-    rules = NCPolyToRule[NCPolyReduce[gpolys, complete]];
+    rules = NCPolyToRule[NCPolyReduce[gpolys, options]];
 
     Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
 

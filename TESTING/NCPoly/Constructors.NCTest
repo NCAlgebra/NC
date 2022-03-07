@@ -139,6 +139,8 @@ Block[
   m5 = NCPolyMonomial[{z,z},vars];
   NCTest[NCPolyCoefficient[p1, m5], 0];
 
+  Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]];
+
   (* Sorting *)
 
   mSorted = { 

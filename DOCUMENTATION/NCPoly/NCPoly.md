@@ -687,8 +687,8 @@ of the leading Rules lf and lg as returned by NCGetLeadingTerm.
 
 #### NCPolyFullReduce {#NCPolyFullReduce}
 
-`NCPolyFullReduce[f,g]` applies NCPolyReduce successively until the
-remainder does not change.  
+`NCPolyFullReduce[g]` applies NCPolyReduce successively to the list of
+polynomials `g` until the remainder does not change.
 
 See also:
 [NCPolyReduce](#NCPolyReduce),
@@ -722,9 +722,23 @@ implied by `rules` are applied repeatedly to the polynomials in the
 polyomials `polys` until no further reduction occurs.
 
 By default, `NCPolyReduce` only reduces the leading monomial in the
-current order. Use the optional boolean flag `complete` to completely
-reduce all monomials. For example, `NCPolyReduce[polys, rules, True]`
-and `NCPolyReduce[polys, True]`.
+current order. Use the optional boolean flag `Complete` to completely
+reduce all monomials. For example,
+
+    NCPolyReduce[polys, rules, Complete -> True]
+    NCPolyReduce[polys, Complete -> True]
+
+Other available options are:
+- `MaxIterationsFactor` (default = 10): limits the maximum number of
+  iterations in reducing each polynomial by `MaxIterationsFactor`
+  times the number of terms in the polynomial.
+- `MaxDepth` (default = 1): control how many monomials are reduce by
+  `NCReduce`; by default `MaxDepth` is set to one so that just the
+  leading monomial is reduced. Setting `Complete -> True` effectively
+  sets `MaxDepth` to `Infinity`.
+- `ZeroTest` (default = `NCPolyPossibleZeroQ`): which test to use when
+  assessing that a monomial is zero. This option is useful when the
+  coefficients are floating points.
 
 See also:
 [NCPolyGroebner](#NCPolyGroebner).

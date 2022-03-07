@@ -207,7 +207,7 @@ Begin["`Private`"];
 
   NCPolyPack[p_NCPoly] := 
     NCPoly[ p[[1]], 
-            DeleteCases[p[[2]], 0], 
+            DeleteCases[p[[2]], _?NCPolyPossibleZeroQ],
             NCPolyGetOptionsSequence[p] ];
 
   NCPolyMonomialQ[p_NCPoly] := (Length[Part[p, 2]] === 1);
@@ -504,6 +504,13 @@ Begin["`Private`"];
   
   (* NCPoly Operators *)
 
+  (* Chop *)
+  NCPoly /: Chop[r_NCPoly, args___] :=
+    NCPoly[r[[1]],
+	   KeySort[DeleteCases[Map[Chop[#,args]&, r[[2]]], _?NCPolyPossibleZeroQ]],
+           NCPolyGetOptionsSequence[r]
+    ];
+
   (* Times *)
   NCPoly /: Times[r_, s_NCPoly] := NCPoly[s[[1]], r s[[2]], 
                                           NCPolyGetOptionsSequence[s] ];
@@ -515,6 +522,19 @@ Begin["`Private`"];
     KeySort[DeleteCases[Merge[{r, s}[[All,2]], Total], _?NCPolyPossibleZeroQ]],
     NCPolyGetOptionsSequence[r]
   ] /; {s}[[1,1]] === r[[1]];
+
+  (*
+     CheapSum can lead to coefficients that are not simplified;
+     It also does not check for consistency;
+     It is used in NCPolyReduce in which the leading monomials
+     are automatically checked for zeroness
+  *)
+  Clear[NCPolyCheapSum];
+  NCPolyCheapSum[r_NCPoly, s_NCPoly] := NCPoly[
+    r[[1]], 
+    KeySort[Merge[{r[[2]], s[[2]]}, Total]],
+    NCPolyGetOptionsSequence[r]
+  ];
 
   (* Product *)
 
@@ -656,28 +676,40 @@ Begin["`Private`"];
 
   (* Division *)
 
-  NCPolyReduce[f_NCPoly, g_NCPoly, complete_:False, debugLevel_:0] := Block[
-    { maxIterations = 10, 
-      n = f[[1]], leadG, leadR, r, rr, q, qi, j, k },
+  NCPolyReduceWithQuotient[f_NCPoly, g_NCPoly, j_Integer:1,
+			   options:OptionsPattern[NCPolyReduce]] := Block[
+    { maxIterations =
+      OptionValue[NCPolyReduce, {options}, MaxIterationsFactor] * NCPolyNumberOfTerms[f],
+      debugLevel = OptionValue[NCPolyReduce, {options}, DebugLevel],
+      returnQuotient = OptionValue[NCPolyReduce, {options}, ReturnQuotient],
+      zeroTest = OptionValue[NCPolyReduce, {options}, ZeroTest],
+      n = f[[1]], leadG, leadR, r, rr, q, qi, k, needToPack = False },
 
     (* f = p1 g p2 + r *)
 
     If[ debugLevel > 2,
-      Print["* NCPolyReduce"];
-      Print["f = ", NCPolyDisplay[f]];
-      Print["g = ", NCPolyDisplay[g]];
-      Print["f = ", f];
-      Print["g = ", g];
+	Print["* NCPolyReduce"];
+	If[ debugLevel > 3,
+	    Print["options = ", {options}];
+	    Print["debugLevel = ", debugLevel];
+	    Print["returnQuotient = ", returnQuotient];
+	    Print["maxIterations = ", maxIterations];
+        ];
+	Print["f = ", NCPolyDisplay[f]];
+	Print["g = ", NCPolyDisplay[g]];
+	Print["f = ", f];
+	Print["g = ", g];
+	Print["j = ", j];
     ];
 
     k = 0;
     r = f;
     q = {};
-    j = 1;
     leadG = NCPolyLeadingTerm[g];
     If[ debugLevel > 1, Print["leadG = ", leadG]; ];
     While[ k < maxIterations,
            k++;
+           If[ debugLevel > 1, Print["k = ", k]; ];
            leadR = NCPolyLeadingTerm[r, j];
            If[ debugLevel > 1, Print["leadR = ", leadR]; ];
            If [ leadR === $Failed,
@@ -685,41 +717,59 @@ Begin["`Private`"];
                 If[ debugLevel > 1, Print["does not divide, terminate"]; ];
                 Break[];
            ];
+	   If[ zeroTest[leadR[[2]]],
+               (* Leading term can be zero because NCPolyCheapSum does not simplify *)
+               If[ debugLevel > 1, Print["leading term is zero"]; ];
+	       (* then drop leading monomial *)
+	       r = NCPoly[r[[1]], Drop[r[[2]],{-j}], NCPolyGetOptionsSequence[r]];
+               If[ debugLevel > 0,
+		   Print["r has " <> ToString[NCPolyNumberOfTerms[r]] <> " terms"]; ];
+               If[ debugLevel > 2, Print["r = ", r]; ];
+	       If [ r === 0
+		   ,
+                    (* no reminder, terminate *)
+                    If[ debugLevel > 1, Print["no reminder, terminate"]; ];
+                    Break[];
+		   ,
+                    (* get next leading term *)
+                    Continue[];
+	       ];
+           ];
            qi = NCPolyDivideLeading[leadR, leadG, n];
            If[ debugLevel > 1, Print["qi = ", qi]; ];
            If [ qi === {}
                ,
-                If[ complete
-                   ,
-                    (* does not divide, try next term *)
-                    If[ debugLevel > 1, Print["does not divide, try next term"]; ];
-                    j++;
-                    If[ debugLevel > 1, Print["j = ", j]; ];
-                    Continue[];
-                   ,
-                    (* if not complete, does not divide, terminate *)
-                    If[ debugLevel > 1, Print["does not divide, terminate, even if not complete"]; ];
-                    Break[];
-                ];
+                (* does not divide, terminate *)
+                If[ debugLevel > 1,
+		    Print["does not divide, terminate, even if not complete"]; ];
+                Break[];
                ,
                 (* divide, update quotient and residual *)
-                AppendTo[q, qi];
-        	If[ debugLevel > 1, Print["r = ", r]; Print["q = ", q]; Print["qi ** g = ", NCPoly`Private`QuotientExpand[qi, g]]; ];
-                r -= NCPoly`Private`QuotientExpand[qi, g];
-        	(* r = NCPoly[r[[1]], <|Drop[Normal[r[[2]]], -1]|>]; *)
-		If[ debugLevel > 1, Print["r = ", r]; Print["r = ", NCPolyDisplay[r]]; Print["j = ", j]; ];
+                If[ returnQuotient, AppendTo[q, qi] ];
+                If[ debugLevel > 1, Print["q = ", q]; ];
+                (* r -= NCPoly`Private`QuotientExpand[qi, g]; *)
+                (* r = NCPolyCheapSum[r, -NCPoly`Private`QuotientExpand[qi, g]]; *)
+                r = NCPolyCheapSum[r, -NCPoly`Private`QuotientExpand[qi, g]];
+                needToPack = True;
+                If[ debugLevel > 2, Print["r = ", r]; Print["r = ", NCPolyDisplay[r]]; Print["j = ", j]; ];
            ];
            (* MAURICIO: OK to test with exact 0 here because
               QuotientExpand will apply NCPolyPossibleZeroQ *)
            If [ r === 0, 
                 (* no reminder, terminate *)
                 If[ debugLevel > 1, Print["no reminder, terminate"]; ];
-                r = 0;
                 Break[];
            ];
     ];
 
-    Return[{q, r}]
+    (* Issue warning if max iterations exceeded *)
+    If[k >= maxIterations, Message[NCPolyReduce::MaxIter]];
+
+    (* Pack poly if needed *)
+    If[!complete && Head[r] === NCPoly && needToPack,
+       r = NCPolyPack[r]];
+
+    Return[If[returnQuotient, {q, r}, r]];
 
   ] /; f[[1]] === g[[1]];
 
@@ -1141,7 +1191,8 @@ Begin["`Private`"];
   ];
 
   NCPolyMomentMatrix[degree_Integer, {gbs__NCPoly}] := Module[
-    {gb = {gbs}, halfDegree, nvars, v, ver, redVer, redIndex, activeIndex, p, redP, digits, verIndex, halfPolys, index, m},
+    {gb = {gbs}, halfDegree, nvars, v, ver,
+     redVer, redIndex, activeIndex, p, redP, m, parallelize = False},
     
     halfDegree = Ceiling[degree/2];
     nvars = Total[gb[[1,1]]];
@@ -1149,24 +1200,31 @@ Begin["`Private`"];
     (* Calculate dimension *)
     m = NCPolyMomentMatrixAux2[nvars, halfDegree+1, 0];
 
+    (*
     Print["nvars = ", nvars];
     Print["degree = ", degree];
     Print["halfDegree = ", halfDegree];
     Print["m = ", m];
+    *)
     
     (* Calculate veronese *)
     v = NCPolyVeronese[halfDegree, {nvars}];
     ver = NCPolyTermsToList[v];
 
     (* Reduce and zero repeated entries *)
-    redVer = NCPolyReduce[ver, gb];
+    redVer = If[parallelize,
+		Parallelize[Map[NCPolyReduce[#, gb], ver]],
+		Map[NCPolyReduce[#, gb], ver]
+		];
     redIndex = GatherBy[Range@Length@redVer, redVer[[#]] &];
     activeIndex = Flatten[Map[First, redIndex]];
     redIndex = Flatten[Map[Rest, redIndex]];
     redVer[[redIndex]] = 0;
 
+    (*
     Print["redIndex = ", redIndex];
     Print["activeIndex = ", activeIndex];
+    *)
 
     (*
     Print["ver = ", ver];
@@ -1174,9 +1232,19 @@ Begin["`Private`"];
     *)
 
     (* Square veronese *)
-    p = Outer[NCPolyMonomialProduct, ver[[activeIndex]], Map[NCPolyReverseMonomials, ver[[activeIndex]]]];
+    p = If[parallelize,
+           Parallelize[Outer[NCPolyMonomialProduct,
+			     ver[[activeIndex]],
+                             Map[NCPolyReverseMonomials, ver[[activeIndex]]]]],
+	   Outer[NCPolyMonomialProduct,
+	         ver[[activeIndex]],
+                 Map[NCPolyReverseMonomials, ver[[activeIndex]]]]
+	  ];
     redP = SparseArray[{},{m,m}];
-    redP[[activeIndex,activeIndex]] = Map[NCPolyReduce[#, gb][[2]]&, p, {2}];
+    redP[[activeIndex,activeIndex]] = If[parallelize,
+					 Parallelize[Map[NCPolyReduce[#, gb]&, p, {2}]],
+					 Map[NCPolyReduce[#, gb]&, p, {2}]
+					];
     
     (*
     Print["degree = ", degree];
@@ -1184,8 +1252,8 @@ Begin["`Private`"];
     Print["degree[p] = ", NCPolyDegree[p]];
     Print["m = ", m];
     Print["ver = ", ver];
-    Print["digits = ", digits];
-    Print["verIndex = ", verIndex];
+    Print["p = ", p];
+    Print["redP = ", Normal[redP,SparseArray]];
     *)
     
     Return[redP];
