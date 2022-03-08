@@ -692,6 +692,27 @@ polynomials `g` until the remainder does not change.
 
 See also:
 [NCPolyReduce](#NCPolyReduce),
+[NCPolyReduceWithQuotient](#NCPolyReduceWithQuotient).
+
+#### NCPolyReduceWithQuotient {#NCPolyReduceWithQuotient}
+
+`NCPolyReduceWithQuotient[f, g]` works as
+[NCPolyReduce](#NCPolyReduce) but also returns a list with the
+quotient that can be expanded usinn
+[NCPolyQuotientExpand](#NCPolyQuotientExpand).
+
+For example
+
+    {qf, r} = NCPolyReduceWithQuotient[f, g];
+    q = NCPolyQuotientExpand[qf, g];
+
+returns the list `qf` which is then expanded into the quotient `q`.
+
+The same options in [NCPolyReduce](#NCPolyReduce) can be used with
+`NCPolyReduceWithQuotient`.
+
+See also:
+[NCPolyReduce](#NCPolyReduce),
 [NCPolyQuotientExpand](#NCPolyQuotientExpand).
 
 #### NCPolyNormalize {#NCPolyNormalize}
@@ -707,8 +728,8 @@ NCPoly's f and g.
 #### NCPolyQuotientExpand {#NCPolyQuotientExpand}
 
 `NCPolyQuotientExpand[q,g]` returns a NCPoly that is the left-right
-product of the quotient as returned by NCPolyReduce by the NCPoly
-g. It also works when g is a list.
+product of the quotient as returned by `NCPolyReduceWithQuotient` by the NCPoly
+`g`. It also works when `g` is a list.
 
 #### NCPolyReduce {#NCPolyReduce}
 
@@ -719,7 +740,9 @@ implied by `rules` are applied repeatedly to the polynomials in the
 
 `NCPolyReduce[polys]` reduces each polynomial in the list of `NCPoly`s
 `polys` with respect to the remaining elements of the list of
-polyomials `polys` until no further reduction occurs.
+polyomials `polys`. It traverses the list of polys just once. Use
+[NCPolyFullReduce](#NCPolyFullReduce) to continue applying
+`NCPolyReduce` until no further reduction occurs.
 
 By default, `NCPolyReduce` only reduces the leading monomial in the
 current order. Use the optional boolean flag `Complete` to completely
@@ -732,16 +755,19 @@ Other available options are:
 - `MaxIterationsFactor` (default = 10): limits the maximum number of
   iterations in reducing each polynomial by `MaxIterationsFactor`
   times the number of terms in the polynomial.
-- `MaxDepth` (default = 1): control how many monomials are reduce by
+- `MaxDepth` (default = 1): control how many monomials are reduced by
   `NCReduce`; by default `MaxDepth` is set to one so that just the
   leading monomial is reduced. Setting `Complete -> True` effectively
   sets `MaxDepth` to `Infinity`.
 - `ZeroTest` (default = `NCPolyPossibleZeroQ`): which test to use when
   assessing that a monomial is zero. This option is useful when the
-  coefficients are floating points.
+  coefficients are floating points, in which case one might substitute
+  `ZeroTest` for an approximate zero test.
 
 See also:
-[NCPolyGroebner](#NCPolyGroebner).
+[NCPolyGroebner](#NCPolyGroebner),
+[NCPolyFullReduce](#NCPolyFullReduce),
+[NCPolyReduceWithQuotient](#NCPolyReduceWithQuotient).
 
 #### NCPolySum {#NCPolySum}
 

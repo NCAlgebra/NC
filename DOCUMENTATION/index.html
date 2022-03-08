@@ -6608,23 +6608,40 @@ class="header-section-number">14.1.5.3</span> NCPolyFullReduce</h4>
 the list of polynomials <code>g</code> until the remainder does not
 change.</p>
 <p>See also: <a href="#NCPolyReduce">NCPolyReduce</a>, <a
+href="#NCPolyReduceWithQuotient">NCPolyReduceWithQuotient</a>.</p>
+<h4 data-number="14.1.5.4" id="NCPolyReduceWithQuotient"><span
+class="header-section-number">14.1.5.4</span>
+NCPolyReduceWithQuotient</h4>
+<p><code>NCPolyReduceWithQuotient[f, g]</code> works as <a
+href="#NCPolyReduce">NCPolyReduce</a> but also returns a list with the
+quotient that can be expanded usinn <a
 href="#NCPolyQuotientExpand">NCPolyQuotientExpand</a>.</p>
-<h4 data-number="14.1.5.4" id="NCPolyNormalize"><span
-class="header-section-number">14.1.5.4</span> NCPolyNormalize</h4>
+<p>For example</p>
+<pre><code>{qf, r} = NCPolyReduceWithQuotient[f, g];
+q = NCPolyQuotientExpand[qf, g];</code></pre>
+<p>returns the list <code>qf</code> which is then expanded into the
+quotient <code>q</code>.</p>
+<p>The same options in <a href="#NCPolyReduce">NCPolyReduce</a> can be
+used with <code>NCPolyReduceWithQuotient</code>.</p>
+<p>See also: <a href="#NCPolyReduce">NCPolyReduce</a>, <a
+href="#NCPolyQuotientExpand">NCPolyQuotientExpand</a>.</p>
+<h4 data-number="14.1.5.5" id="NCPolyNormalize"><span
+class="header-section-number">14.1.5.5</span> NCPolyNormalize</h4>
 <p><code>NCPolyNormalize[poly]</code> makes the coefficient of the
 leading term of <code>p</code> to unit. It also works when
 <code>poly</code> is a list.</p>
-<h4 data-number="14.1.5.5" id="NCPolyProduct"><span
-class="header-section-number">14.1.5.5</span> NCPolyProduct</h4>
+<h4 data-number="14.1.5.6" id="NCPolyProduct"><span
+class="header-section-number">14.1.5.6</span> NCPolyProduct</h4>
 <p><code>NCPolyProduct[f,g]</code> returns a NCPoly that is the product
 of the NCPoly’s f and g.</p>
-<h4 data-number="14.1.5.6" id="NCPolyQuotientExpand"><span
-class="header-section-number">14.1.5.6</span> NCPolyQuotientExpand</h4>
+<h4 data-number="14.1.5.7" id="NCPolyQuotientExpand"><span
+class="header-section-number">14.1.5.7</span> NCPolyQuotientExpand</h4>
 <p><code>NCPolyQuotientExpand[q,g]</code> returns a NCPoly that is the
-left-right product of the quotient as returned by NCPolyReduce by the
-NCPoly g. It also works when g is a list.</p>
-<h4 data-number="14.1.5.7" id="NCPolyReduce"><span
-class="header-section-number">14.1.5.7</span> NCPolyReduce</h4>
+left-right product of the quotient as returned by
+<code>NCPolyReduceWithQuotient</code> by the NCPoly <code>g</code>. It
+also works when <code>g</code> is a list.</p>
+<h4 data-number="14.1.5.8" id="NCPolyReduce"><span
+class="header-section-number">14.1.5.8</span> NCPolyReduce</h4>
 <p><code>NCPolyReduce[polys, rules]</code> reduces the list of
 <code>NCPoly</code>s <code>polys</code> with respect to the list of
 <code>NCPoly</code>s <code>rules</code>. The substitutions implied by
@@ -6632,8 +6649,10 @@ class="header-section-number">14.1.5.7</span> NCPolyReduce</h4>
 <code>polys</code> until no further reduction occurs.</p>
 <p><code>NCPolyReduce[polys]</code> reduces each polynomial in the list
 of <code>NCPoly</code>s <code>polys</code> with respect to the remaining
-elements of the list of polyomials <code>polys</code> until no further
-reduction occurs.</p>
+elements of the list of polyomials <code>polys</code>. It traverses the
+list of polys just once. Use <a
+href="#NCPolyFullReduce">NCPolyFullReduce</a> to continue applying
+<code>NCPolyReduce</code> until no further reduction occurs.</p>
 <p>By default, <code>NCPolyReduce</code> only reduces the leading
 monomial in the current order. Use the optional boolean flag
 <code>Complete</code> to completely reduce all monomials. For
@@ -6644,16 +6663,19 @@ NCPolyReduce[polys, Complete -&gt; True]</code></pre>
 (default = 10): limits the maximum number of iterations in reducing each
 polynomial by <code>MaxIterationsFactor</code> times the number of terms
 in the polynomial. - <code>MaxDepth</code> (default = 1): control how
-many monomials are reduce by <code>NCReduce</code>; by default
+many monomials are reduced by <code>NCReduce</code>; by default
 <code>MaxDepth</code> is set to one so that just the leading monomial is
 reduced. Setting <code>Complete -&gt; True</code> effectively sets
 <code>MaxDepth</code> to <code>Infinity</code>. - <code>ZeroTest</code>
 (default = <code>NCPolyPossibleZeroQ</code>): which test to use when
 assessing that a monomial is zero. This option is useful when the
-coefficients are floating points.</p>
-<p>See also: <a href="#NCPolyGroebner">NCPolyGroebner</a>.</p>
-<h4 data-number="14.1.5.8" id="NCPolySum"><span
-class="header-section-number">14.1.5.8</span> NCPolySum</h4>
+coefficients are floating points, in which case one might substitute
+<code>ZeroTest</code> for an approximate zero test.</p>
+<p>See also: <a href="#NCPolyGroebner">NCPolyGroebner</a>, <a
+href="#NCPolyFullReduce">NCPolyFullReduce</a>, <a
+href="#NCPolyReduceWithQuotient">NCPolyReduceWithQuotient</a>.</p>
+<h4 data-number="14.1.5.9" id="NCPolySum"><span
+class="header-section-number">14.1.5.9</span> NCPolySum</h4>
 <p><code>NCPolySum[f,g]</code> returns a NCPoly that is the sum of the
 NCPoly’s f and g.</p>
 <h3 data-number="14.1.6" id="state-space-realization-functions"><span
