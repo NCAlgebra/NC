@@ -6602,46 +6602,27 @@ class="header-section-number">14.1.5.2</span> NCPolyDivideLeading</h4>
 <p><code>NCPolyDivideLeading[lF,lG,base]</code> returns the result of
 the division of the leading Rules lf and lg as returned by
 NCGetLeadingTerm.</p>
-<h4 data-number="14.1.5.3" id="NCPolyFullReduce"><span
-class="header-section-number">14.1.5.3</span> NCPolyFullReduce</h4>
-<p><code>NCPolyFullReduce[g]</code> applies NCPolyReduce successively to
-the list of polynomials <code>g</code> until the remainder does not
-change.</p>
-<p>See also: <a href="#NCPolyReduce">NCPolyReduce</a>, <a
-href="#NCPolyReduceWithQuotient">NCPolyReduceWithQuotient</a>.</p>
-<h4 data-number="14.1.5.4" id="NCPolyReduceWithQuotient"><span
-class="header-section-number">14.1.5.4</span>
-NCPolyReduceWithQuotient</h4>
-<p><code>NCPolyReduceWithQuotient[f, g]</code> works as <a
-href="#NCPolyReduce">NCPolyReduce</a> but also returns a list with the
-quotient that can be expanded usinn <a
-href="#NCPolyQuotientExpand">NCPolyQuotientExpand</a>.</p>
-<p>For example</p>
-<pre><code>{qf, r} = NCPolyReduceWithQuotient[f, g];
-q = NCPolyQuotientExpand[qf, g];</code></pre>
-<p>returns the list <code>qf</code> which is then expanded into the
-quotient <code>q</code>.</p>
-<p>The same options in <a href="#NCPolyReduce">NCPolyReduce</a> can be
-used with <code>NCPolyReduceWithQuotient</code>.</p>
-<p>See also: <a href="#NCPolyReduce">NCPolyReduce</a>, <a
-href="#NCPolyQuotientExpand">NCPolyQuotientExpand</a>.</p>
-<h4 data-number="14.1.5.5" id="NCPolyNormalize"><span
-class="header-section-number">14.1.5.5</span> NCPolyNormalize</h4>
+<h4 data-number="14.1.5.3" id="NCPolyNormalize"><span
+class="header-section-number">14.1.5.3</span> NCPolyNormalize</h4>
 <p><code>NCPolyNormalize[poly]</code> makes the coefficient of the
 leading term of <code>p</code> to unit. It also works when
 <code>poly</code> is a list.</p>
-<h4 data-number="14.1.5.6" id="NCPolyProduct"><span
-class="header-section-number">14.1.5.6</span> NCPolyProduct</h4>
+<h4 data-number="14.1.5.4" id="NCPolySum"><span
+class="header-section-number">14.1.5.4</span> NCPolySum</h4>
+<p><code>NCPolySum[f,g]</code> returns a NCPoly that is the sum of the
+NCPoly’s f and g.</p>
+<h4 data-number="14.1.5.5" id="NCPolyProduct"><span
+class="header-section-number">14.1.5.5</span> NCPolyProduct</h4>
 <p><code>NCPolyProduct[f,g]</code> returns a NCPoly that is the product
 of the NCPoly’s f and g.</p>
-<h4 data-number="14.1.5.7" id="NCPolyQuotientExpand"><span
-class="header-section-number">14.1.5.7</span> NCPolyQuotientExpand</h4>
+<h4 data-number="14.1.5.6" id="NCPolyQuotientExpand"><span
+class="header-section-number">14.1.5.6</span> NCPolyQuotientExpand</h4>
 <p><code>NCPolyQuotientExpand[q,g]</code> returns a NCPoly that is the
 left-right product of the quotient as returned by
 <code>NCPolyReduceWithQuotient</code> by the NCPoly <code>g</code>. It
 also works when <code>g</code> is a list.</p>
-<h4 data-number="14.1.5.8" id="NCPolyReduce"><span
-class="header-section-number">14.1.5.8</span> NCPolyReduce</h4>
+<h4 data-number="14.1.5.7" id="NCPolyReduce"><span
+class="header-section-number">14.1.5.7</span> NCPolyReduce</h4>
 <p><code>NCPolyReduce[polys, rules]</code> reduces the list of
 <code>NCPoly</code>s <code>polys</code> with respect to the list of
 <code>NCPoly</code>s <code>rules</code>. The substitutions implied by
@@ -6674,10 +6655,29 @@ coefficients are floating points, in which case one might substitute
 <p>See also: <a href="#NCPolyGroebner">NCPolyGroebner</a>, <a
 href="#NCPolyFullReduce">NCPolyFullReduce</a>, <a
 href="#NCPolyReduceWithQuotient">NCPolyReduceWithQuotient</a>.</p>
-<h4 data-number="14.1.5.9" id="NCPolySum"><span
-class="header-section-number">14.1.5.9</span> NCPolySum</h4>
-<p><code>NCPolySum[f,g]</code> returns a NCPoly that is the sum of the
-NCPoly’s f and g.</p>
+<h4 data-number="14.1.5.8" id="NCPolyFullReduce"><span
+class="header-section-number">14.1.5.8</span> NCPolyFullReduce</h4>
+<p><code>NCPolyFullReduce[g]</code> applies NCPolyReduce successively to
+the list of polynomials <code>g</code> until the remainder does not
+change.</p>
+<p>See also: <a href="#NCPolyReduce">NCPolyReduce</a>, <a
+href="#NCPolyReduceWithQuotient">NCPolyReduceWithQuotient</a>.</p>
+<h4 data-number="14.1.5.9" id="NCPolyReduceWithQuotient"><span
+class="header-section-number">14.1.5.9</span>
+NCPolyReduceWithQuotient</h4>
+<p><code>NCPolyReduceWithQuotient[f, g]</code> works as <a
+href="#NCPolyReduce">NCPolyReduce</a> but also returns a list with the
+quotient that can be expanded usinn <a
+href="#NCPolyQuotientExpand">NCPolyQuotientExpand</a>.</p>
+<p>For example</p>
+<pre><code>{qf, r} = NCPolyReduceWithQuotient[f, g];
+q = NCPolyQuotientExpand[qf, g];</code></pre>
+<p>returns the list <code>qf</code> which is then expanded into the
+quotient <code>q</code>.</p>
+<p>The same options in <a href="#NCPolyReduce">NCPolyReduce</a> can be
+used with <code>NCPolyReduceWithQuotient</code>.</p>
+<p>See also: <a href="#NCPolyReduce">NCPolyReduce</a>, <a
+href="#NCPolyQuotientExpand">NCPolyQuotientExpand</a>.</p>
 <h3 data-number="14.1.6" id="state-space-realization-functions"><span
 class="header-section-number">14.1.6</span> State space realization
 functions</h3>

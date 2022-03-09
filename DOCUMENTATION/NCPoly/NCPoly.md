@@ -685,40 +685,15 @@ leading digits lf and lg.
 `NCPolyDivideLeading[lF,lG,base]` returns the result of the division
 of the leading Rules lf and lg as returned by NCGetLeadingTerm.
 
-#### NCPolyFullReduce {#NCPolyFullReduce}
-
-`NCPolyFullReduce[g]` applies NCPolyReduce successively to the list of
-polynomials `g` until the remainder does not change.
-
-See also:
-[NCPolyReduce](#NCPolyReduce),
-[NCPolyReduceWithQuotient](#NCPolyReduceWithQuotient).
-
-#### NCPolyReduceWithQuotient {#NCPolyReduceWithQuotient}
-
-`NCPolyReduceWithQuotient[f, g]` works as
-[NCPolyReduce](#NCPolyReduce) but also returns a list with the
-quotient that can be expanded usinn
-[NCPolyQuotientExpand](#NCPolyQuotientExpand).
-
-For example
-
-    {qf, r} = NCPolyReduceWithQuotient[f, g];
-    q = NCPolyQuotientExpand[qf, g];
-
-returns the list `qf` which is then expanded into the quotient `q`.
-
-The same options in [NCPolyReduce](#NCPolyReduce) can be used with
-`NCPolyReduceWithQuotient`.
-
-See also:
-[NCPolyReduce](#NCPolyReduce),
-[NCPolyQuotientExpand](#NCPolyQuotientExpand).
-
 #### NCPolyNormalize {#NCPolyNormalize}
 
 `NCPolyNormalize[poly]` makes the coefficient of the leading term of
 `p` to unit. It also works when `poly` is a list.
+
+#### NCPolySum {#NCPolySum}
+
+`NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f
+and g.
 
 #### NCPolyProduct {#NCPolyProduct}
 
@@ -769,10 +744,35 @@ See also:
 [NCPolyFullReduce](#NCPolyFullReduce),
 [NCPolyReduceWithQuotient](#NCPolyReduceWithQuotient).
 
-#### NCPolySum {#NCPolySum}
+#### NCPolyFullReduce {#NCPolyFullReduce}
 
-`NCPolySum[f,g]` returns a NCPoly that is the sum of the NCPoly's f
-and g.
+`NCPolyFullReduce[g]` applies NCPolyReduce successively to the list of
+polynomials `g` until the remainder does not change.
+
+See also:
+[NCPolyReduce](#NCPolyReduce),
+[NCPolyReduceWithQuotient](#NCPolyReduceWithQuotient).
+
+#### NCPolyReduceWithQuotient {#NCPolyReduceWithQuotient}
+
+`NCPolyReduceWithQuotient[f, g]` works as
+[NCPolyReduce](#NCPolyReduce) but also returns a list with the
+quotient that can be expanded usinn
+[NCPolyQuotientExpand](#NCPolyQuotientExpand).
+
+For example
+
+    {qf, r} = NCPolyReduceWithQuotient[f, g];
+    q = NCPolyQuotientExpand[qf, g];
+
+returns the list `qf` which is then expanded into the quotient `q`.
+
+The same options in [NCPolyReduce](#NCPolyReduce) can be used with
+`NCPolyReduceWithQuotient`.
+
+See also:
+[NCPolyReduce](#NCPolyReduce),
+[NCPolyQuotientExpand](#NCPolyQuotientExpand).
 
 ### State space realization functions
 
