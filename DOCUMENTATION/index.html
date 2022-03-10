@@ -6778,8 +6778,9 @@ poly = NCPoly[{1, -1}, {{x, y}, {y, x}}, vars];
 {{a0,ax,ay},b,c,d} = NCPolyRealization[poly]</code></pre>
 <p>produces a list of matrices <code>{a0,ax,ay}</code>, a column vector
 <code>b</code> and a row vector <code>c</code>, and a scalar
-<code>d</code> such that <span class="math inline">\(c . inv[a0 + ax \,
-x + ay \, y] . b + d = x y - y x\)</span>.</p>
+<code>d</code> such that</p>
+<p><span class="math display">\[c . inv[a0 + ax \, x + ay \, y] . b + d
+= x y - y x\]</span></p>
 <p>See also: <a href="#NCPolyHankelMatrix">NCPolyHankelMatrix</a>, <a
 href="#NCRational">NCRational</a>.</p>
 <h3 data-number="14.1.7" id="auxiliary-functions"><span

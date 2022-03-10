@@ -6951,7 +6951,9 @@ For example:
     {{a0,ax,ay},b,c,d} = NCPolyRealization[poly]
 
 produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a
-row vector `c`, and a scalar `d` such that ![c . inv\[a0 + ax \\, x + ay \\, y\] . b + d = x y - y x](https://render.githubusercontent.com/render/math?math=c%20.%20inv%5Ba0%20%2B%20ax%20%5C%2C%20x%20%2B%20ay%20%5C%2C%20y%5D%20.%20b%20%2B%20d%20%3D%20x%20y%20-%20y%20x&mode=inline).
+row vector `c`, and a scalar `d` such that
+
+![inline equation](https://render.githubusercontent.com/render/math?math=c%20.%20inv%5Ba0%20%2B%20ax%20%5C%2C%20x%20%2B%20ay%20%5C%2C%20y%5D%20.%20b%20%2B%20d%20%3D%20x%20y%20-%20y%20x)
 
 See also:
 [NCPolyHankelMatrix](#ncpolyhankelmatrix),
