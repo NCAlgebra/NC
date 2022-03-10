@@ -265,15 +265,20 @@ All rights reserved.
     -   [<span class="toc-section-number">13.6</span> NCDebug](#ncdebug)
         -   [<span class="toc-section-number">13.6.1</span> NCDebug](#ncdebug-1)
     -   [<span class="toc-section-number">13.7</span> NCUtil](#ncutil)
-        -   [<span class="toc-section-number">13.7.1</span> NCConsistentQ](#ncconsistentq)
-        -   [<span class="toc-section-number">13.7.2</span> NCGrabFunctions](#ncgrabfunctions)
-        -   [<span class="toc-section-number">13.7.3</span> NCGrabSymbols](#ncgrabsymbols)
+        -   [<span class="toc-section-number">13.7.1</span> NCGrabSymbols](#ncgrabsymbols)
+        -   [<span class="toc-section-number">13.7.2</span> NCGrabNCSymbols](#ncgrabncsymbols)
+        -   [<span class="toc-section-number">13.7.3</span> NCGrabFunctions](#ncgrabfunctions)
         -   [<span class="toc-section-number">13.7.4</span> NCGrabIndeterminants](#ncgrabindeterminants)
         -   [<span class="toc-section-number">13.7.5</span> NCVariables](#ncvariables)
         -   [<span class="toc-section-number">13.7.6</span> NCConsolidateList](#ncconsolidatelist)
-        -   [<span class="toc-section-number">13.7.7</span> NCLeafCount](#ncleafcount)
-        -   [<span class="toc-section-number">13.7.8</span> NCReplaceData](#ncreplacedata)
-        -   [<span class="toc-section-number">13.7.9</span> NCToExpression](#nctoexpression)
+        -   [<span class="toc-section-number">13.7.7</span> NCConsistentQ](#ncconsistentq)
+        -   [<span class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq)
+        -   [<span class="toc-section-number">13.7.9</span> NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
+        -   [<span class="toc-section-number">13.7.10</span> NCPowerQ](#ncpowerq)
+        -   [<span class="toc-section-number">13.7.11</span> NCLeafCount](#ncleafcount)
+        -   [<span class="toc-section-number">13.7.12</span> NCReplaceData](#ncreplacedata)
+        -   [<span class="toc-section-number">13.7.13</span> NCToExpression](#nctoexpression)
+        -   [<span class="toc-section-number">13.7.14</span> NotMatrixQ](#notmatrixq)
 -   [<span class="toc-section-number">14</span> Data structures for fast calculations](#data-structures-for-fast-calculations)
     -   [<span class="toc-section-number">14.1</span> NCPoly](#ncpoly)
         -   [<span class="toc-section-number">14.1.1</span> Efficient storage of NC polynomials with rational coefficients](#efficient-storage-of-nc-polynomials-with-rational-coefficients)
@@ -5933,19 +5938,50 @@ Available options are:
 
 Members are:
 
--   [NCConsistentQ](#ncconsistentq)
--   [NCGrabFunctions](#ncgrabfunctions)
 -   [NCGrabSymbols](#ncgrabsymbols)
+-   [NCGrabNCSymbols](#ncgrabncsymbols)
+-   [NCGrabFunctions](#ncgrabfunctions)
 -   [NCGrabIndeterminants](#ncgrabindeterminants)
 -   [NCVariables](#ncvariables)
 -   [NCConsolidateList](#ncconsolidatelist)
+-   [NCConsistentQ](#ncconsistentq)
+-   [NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq)
+-   [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
+-   [NCPowerQ](#ncpowerq)
 -   [NCLeafCount](#ncleafcount)
 -   [NCReplaceData](#ncreplacedata)
 -   [NCToExpression](#nctoexpression)
+-   [NotMatrixQ](#notmatrixq)
 
-### NCConsistentQ
+### NCGrabSymbols
 
-`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative products or inverses involving noncommutative variables.
+`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
+
+`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
+
+For example:
+
+    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]]]
+
+returns `{x,y}` and
+
+    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]], inv]
+
+returns `{inv[x]}`.
+
+See also:
+[NCGrabFunctions](#ncgrabfunctions),
+[NCGrabNCSymbols](#ncgrabncsymbols).
+
+### NCGrabNCSymbols
+
+`NCGrabSymbols[expr]` returns a list with all NC *Symbols* appearing in `expr`.
+
+`NCGrabSymbols[expr,f]` returns a list with all NC *Symbols* appearing in `expr` as the single argument of function `f`.
+
+See also:
+[NCGrabSymbols](#ncgrabsymbols),
+[NCGrabFunctions](#ncgrabfunctions).
 
 ### NCGrabFunctions
 
@@ -5971,25 +6007,6 @@ returns
 
 See also:
 [NCGrabSymbols](#ncgrabsymbols).
-
-### NCGrabSymbols
-
-`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
-
-`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
-
-For example:
-
-    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]]]
-
-returns `{x,y}` and
-
-    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]], inv]
-
-returns `{inv[x]}`.
-
-See also:
-[NCGrabFunctions](#ncgrabfunctions).
 
 ### NCGrabIndeterminants
 
@@ -6041,6 +6058,34 @@ results in:
 See also:
 `Union`
 
+### NCConsistentQ
+
+`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative products or inverses involving noncommutative variables.
+
+### NCSymbolOrSubscriptQ
+
+`NCSymbolOrSubscriptQ[expr]` returns *True* if `expr` is a symbol or a symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
+[NCPowerQ](#ncpowerq).
+
+### NCNonCommutativeSymbolOrSubscriptQ
+
+`NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
+
+See also:
+[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq),
+[NCPowerQ](#ncpowerq).
+
+### NCPowerQ
+
+`NCPowerQ[expr]` returns *True* if `expr` is an noncommutative symbol or symbol subscript or a positive power of a noncommutative symbol or symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
+[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq).
+
 ### NCLeafCount
 
 `NCLeafCount[expr]` returns an number associated with the complexity of an expression:
@@ -6071,6 +6116,13 @@ See also:
 
 See also:
 [NCReplaceData](#ncreplacedata).
+
+### NotMatrixQ
+
+`NotMatrixQ[expr]` is equivalent to `Not[MatrixQ[expr]]`.
+
+See also:
+`MatrixQ`.
 
 # Data structures for fast calculations
 

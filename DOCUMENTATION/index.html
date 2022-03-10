@@ -622,24 +622,35 @@ NCDebug</a></li>
 <li><a href="#PackageNCUtil"><span
 class="toc-section-number">13.7</span> NCUtil</a>
 <ul>
-<li><a href="#NCConsistentQ"><span
-class="toc-section-number">13.7.1</span> NCConsistentQ</a></li>
-<li><a href="#NCGrabFunctions"><span
-class="toc-section-number">13.7.2</span> NCGrabFunctions</a></li>
 <li><a href="#NCGrabSymbols"><span
-class="toc-section-number">13.7.3</span> NCGrabSymbols</a></li>
+class="toc-section-number">13.7.1</span> NCGrabSymbols</a></li>
+<li><a href="#NCGrabNCSymbols"><span
+class="toc-section-number">13.7.2</span> NCGrabNCSymbols</a></li>
+<li><a href="#NCGrabFunctions"><span
+class="toc-section-number">13.7.3</span> NCGrabFunctions</a></li>
 <li><a href="#NCGrabIndeterminants"><span
 class="toc-section-number">13.7.4</span> NCGrabIndeterminants</a></li>
 <li><a href="#NCVariables"><span
 class="toc-section-number">13.7.5</span> NCVariables</a></li>
 <li><a href="#NCConsolidateList"><span
 class="toc-section-number">13.7.6</span> NCConsolidateList</a></li>
+<li><a href="#NCConsistentQ"><span
+class="toc-section-number">13.7.7</span> NCConsistentQ</a></li>
+<li><a href="#NCSymbolOrSubscriptQ"><span
+class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ</a></li>
+<li><a href="#NCNonCommutativeSymbolOrSubscriptQ"><span
+class="toc-section-number">13.7.9</span>
+NCNonCommutativeSymbolOrSubscriptQ</a></li>
+<li><a href="#NCPowerQ"><span class="toc-section-number">13.7.10</span>
+NCPowerQ</a></li>
 <li><a href="#NCLeafCount"><span
-class="toc-section-number">13.7.7</span> NCLeafCount</a></li>
+class="toc-section-number">13.7.11</span> NCLeafCount</a></li>
 <li><a href="#NCReplaceData"><span
-class="toc-section-number">13.7.8</span> NCReplaceData</a></li>
+class="toc-section-number">13.7.12</span> NCReplaceData</a></li>
 <li><a href="#NCToExpression"><span
-class="toc-section-number">13.7.9</span> NCToExpression</a></li>
+class="toc-section-number">13.7.13</span> NCToExpression</a></li>
+<li><a href="#NotMatrixQ"><span
+class="toc-section-number">13.7.14</span> NotMatrixQ</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#data-structures-for-fast-calculations"><span
@@ -5917,23 +5928,47 @@ class="header-section-number">13.7</span> NCUtil</h2>
 used throughout NCAlgebra.</p>
 <p>Members are:</p>
 <ul>
-<li><a href="#NCConsistentQ">NCConsistentQ</a></li>
-<li><a href="#NCGrabFunctions">NCGrabFunctions</a></li>
 <li><a href="#NCGrabSymbols">NCGrabSymbols</a></li>
+<li><a href="#NCGrabNCSymbols">NCGrabNCSymbols</a></li>
+<li><a href="#NCGrabFunctions">NCGrabFunctions</a></li>
 <li><a href="#NCGrabIndeterminants">NCGrabIndeterminants</a></li>
 <li><a href="#NCVariables">NCVariables</a></li>
 <li><a href="#NCConsolidateList">NCConsolidateList</a></li>
+<li><a href="#NCConsistentQ">NCConsistentQ</a></li>
+<li><a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a></li>
+<li><a
+href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a></li>
+<li><a href="#NCPowerQ">NCPowerQ</a></li>
 <li><a href="#NCLeafCount">NCLeafCount</a></li>
 <li><a href="#NCReplaceData">NCReplaceData</a></li>
 <li><a href="#NCToExpression">NCToExpression</a></li>
+<li><a href="#NotMatrixQ">NotMatrixQ</a></li>
 </ul>
-<h3 data-number="13.7.1" id="NCConsistentQ"><span
-class="header-section-number">13.7.1</span> NCConsistentQ</h3>
-<p><code>NCConsistentQ[expr]</code> returns <em>True</em> is
-<code>expr</code> contains no commutative products or inverses involving
-noncommutative variables.</p>
-<h3 data-number="13.7.2" id="NCGrabFunctions"><span
-class="header-section-number">13.7.2</span> NCGrabFunctions</h3>
+<h3 data-number="13.7.1" id="NCGrabSymbols"><span
+class="header-section-number">13.7.1</span> NCGrabSymbols</h3>
+<p><code>NCGrabSymbols[expr]</code> returns a list with all
+<em>Symbols</em> appearing in <code>expr</code>.</p>
+<p><code>NCGrabSymbols[expr,f]</code> returns a list with all
+<em>Symbols</em> appearing in <code>expr</code> as the single argument
+of function <code>f</code>.</p>
+<p>For example:</p>
+<pre><code>NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]]]</code></pre>
+<p>returns <code>{x,y}</code> and</p>
+<pre><code>NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]], inv]</code></pre>
+<p>returns <code>{inv[x]}</code>.</p>
+<p>See also: <a href="#NCGrabFunctions">NCGrabFunctions</a>, <a
+href="#NCGrabNCSymbols">NCGrabNCSymbols</a>.</p>
+<h3 data-number="13.7.2" id="NCGrabNCSymbols"><span
+class="header-section-number">13.7.2</span> NCGrabNCSymbols</h3>
+<p><code>NCGrabSymbols[expr]</code> returns a list with all NC
+<em>Symbols</em> appearing in <code>expr</code>.</p>
+<p><code>NCGrabSymbols[expr,f]</code> returns a list with all NC
+<em>Symbols</em> appearing in <code>expr</code> as the single argument
+of function <code>f</code>.</p>
+<p>See also: <a href="#NCGrabSymbols">NCGrabSymbols</a>, <a
+href="#NCGrabFunctions">NCGrabFunctions</a>.</p>
+<h3 data-number="13.7.3" id="NCGrabFunctions"><span
+class="header-section-number">13.7.3</span> NCGrabFunctions</h3>
 <p><code>NCGrabFunctions[expr]</code> returns a list with all fragments
 of <code>expr</code> containing functions.</p>
 <p><code>NCGrabFunctions[expr,f]</code> returns a list with all
@@ -5948,19 +5983,6 @@ fragments of <code>expr</code> containing the function
 <p>returns</p>
 <pre><code>{inv[1+inv[1+tp[x]**y]], inv[1+tp[x]**y], inv[x], tp[x], tp[y]}</code></pre>
 <p>See also: <a href="#NCGrabSymbols">NCGrabSymbols</a>.</p>
-<h3 data-number="13.7.3" id="NCGrabSymbols"><span
-class="header-section-number">13.7.3</span> NCGrabSymbols</h3>
-<p><code>NCGrabSymbols[expr]</code> returns a list with all
-<em>Symbols</em> appearing in <code>expr</code>.</p>
-<p><code>NCGrabSymbols[expr,f]</code> returns a list with all
-<em>Symbols</em> appearing in <code>expr</code> as the single argument
-of function <code>f</code>.</p>
-<p>For example:</p>
-<pre><code>NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]]]</code></pre>
-<p>returns <code>{x,y}</code> and</p>
-<pre><code>NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]], inv]</code></pre>
-<p>returns <code>{inv[x]}</code>.</p>
-<p>See also: <a href="#NCGrabFunctions">NCGrabFunctions</a>.</p>
 <h3 data-number="13.7.4" id="NCGrabIndeterminants"><span
 class="header-section-number">13.7.4</span> NCGrabIndeterminants</h3>
 <p><code>NCGrabIndeterminants[expr]</code> returns a list with first
@@ -5996,8 +6018,36 @@ list that recover the original <code>list</code>.</li>
 <pre><code>list = {z,t,s,f,d};
 index = {1,2,3,4,5,4,1};</code></pre>
 <p>See also: <code>Union</code></p>
-<h3 data-number="13.7.7" id="NCLeafCount"><span
-class="header-section-number">13.7.7</span> NCLeafCount</h3>
+<h3 data-number="13.7.7" id="NCConsistentQ"><span
+class="header-section-number">13.7.7</span> NCConsistentQ</h3>
+<p><code>NCConsistentQ[expr]</code> returns <em>True</em> is
+<code>expr</code> contains no commutative products or inverses involving
+noncommutative variables.</p>
+<h3 data-number="13.7.8" id="NCSymbolOrSubscriptQ"><span
+class="header-section-number">13.7.8</span> NCSymbolOrSubscriptQ</h3>
+<p><code>NCSymbolOrSubscriptQ[expr]</code> returns <em>True</em> if
+<code>expr</code> is a symbol or a symbol subscript.</p>
+<p>See also: <a
+href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a>,
+<a href="#NCPowerQ">NCPowerQ</a>.</p>
+<h3 data-number="13.7.9" id="NCNonCommutativeSymbolOrSubscriptQ"><span
+class="header-section-number">13.7.9</span>
+NCNonCommutativeSymbolOrSubscriptQ</h3>
+<p><code>NCNonCommutativeSymbolOrSubscriptQ[expr]</code> returns
+<em>True</em> if <code>expr</code> is an noncommutative symbol or a
+noncommutative symbol subscript.</p>
+<p>See also: <a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a>,
+<a href="#NCPowerQ">NCPowerQ</a>.</p>
+<h3 data-number="13.7.10" id="NCPowerQ"><span
+class="header-section-number">13.7.10</span> NCPowerQ</h3>
+<p><code>NCPowerQ[expr]</code> returns <em>True</em> if
+<code>expr</code> is an noncommutative symbol or symbol subscript or a
+positive power of a noncommutative symbol or symbol subscript.</p>
+<p>See also: <a
+href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a>,
+<a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a>.</p>
+<h3 data-number="13.7.11" id="NCLeafCount"><span
+class="header-section-number">13.7.11</span> NCLeafCount</h3>
 <p><code>NCLeafCount[expr]</code> returns an number associated with the
 complexity of an expression:</p>
 <ul>
@@ -6010,8 +6060,8 @@ complexity of an expression:</p>
 </ul>
 <p><code>NCLeafCount</code> is <code>Listable</code>.</p>
 <p>See also: <code>LeafCount</code>.</p>
-<h3 data-number="13.7.8" id="NCReplaceData"><span
-class="header-section-number">13.7.8</span> NCReplaceData</h3>
+<h3 data-number="13.7.12" id="NCReplaceData"><span
+class="header-section-number">13.7.12</span> NCReplaceData</h3>
 <p><code>NCReplaceData[expr, rules]</code> applies <code>rules</code> to
 <code>expr</code> and convert resulting expression to standard
 Mathematica, for example replacing <code>**</code> by
@@ -6020,14 +6070,19 @@ Mathematica, for example replacing <code>**</code> by
 expressions involving matrices. Use <code>NCToExpression</code> for
 that.</p>
 <p>See also: <a href="#NCToExpression">NCToExpression</a>.</p>
-<h3 data-number="13.7.9" id="NCToExpression"><span
-class="header-section-number">13.7.9</span> NCToExpression</h3>
+<h3 data-number="13.7.13" id="NCToExpression"><span
+class="header-section-number">13.7.13</span> NCToExpression</h3>
 <p><code>NCToExpression[expr, rules]</code> applies <code>rules</code>
 to <code>expr</code> and convert resulting expression to standard
 Mathematica.</p>
 <p><code>NCToExpression</code> attempts to resize entries in expressions
 involving matrices.</p>
 <p>See also: <a href="#NCReplaceData">NCReplaceData</a>.</p>
+<h3 data-number="13.7.14" id="NotMatrixQ"><span
+class="header-section-number">13.7.14</span> NotMatrixQ</h3>
+<p><code>NotMatrixQ[expr]</code> is equivalent to
+<code>Not[MatrixQ[expr]]</code>.</p>
+<p>See also: <code>MatrixQ</code>.</p>
 <h1 data-number="14" id="data-structures-for-fast-calculations"><span
 class="header-section-number">14</span> Data structures for fast
 calculations</h1>
