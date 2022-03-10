@@ -826,8 +826,9 @@ For example:
     {{a0,ax,ay},b,c,d} = NCPolyRealization[poly]
 
 produces a list of matrices `{a0,ax,ay}`, a column vector `b` and a
-row vector `c`, and a scalar `d` such that $c . inv[a0 + ax \, x + ay
-\, y] . b + d = x y - y x$.
+row vector `c`, and a scalar `d` such that
+
+$$c . (a0 + ax \, x + ay \, y)^{-1} . b + d = x y - y x$$
 
 See also:
 [NCPolyHankelMatrix](#NCPolyHankelMatrix),

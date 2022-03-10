@@ -7492,8 +7492,8 @@ The degree `deg` is a list with the degree of each symbol.
 For example:
 
     p = NCPolynomial[0, <|{x,y}->{{2,a,b,c}},
-                           {x,x}->{{1,a,b,c}},
-                           {x**x}->{{-1,a,b}}|>, {x,y}]
+                          {x,x}->{{1,a,b,c}},
+                          {x**x}->{{-1,a,b}}|>, {x,y}]
     NCPTermsOfDegree[p, {1,1}]
 
 returns
@@ -7520,8 +7520,8 @@ The degree `deg` is the total degree.
 For example:
 
     p = NCPolynomial[0, <|{x,y}->{{2,a,b,c}},
-                           {x,x}->{{1,a,b,c}},
-                           {x**x}->{{-1,a,b}}|>, {x,y}]
+                          {x,x}->{{1,a,b,c}},
+                          {x**x}->{{-1,a,b}}|>, {x,y}]
     NCPTermsOfDegree[p, 2]
 
 returns

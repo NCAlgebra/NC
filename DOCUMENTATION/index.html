@@ -7218,8 +7218,8 @@ NCPolynomial <code>p</code> of degree <code>deg</code>.</p>
 symbol.</p>
 <p>For example:</p>
 <pre><code>p = NCPolynomial[0, &lt;|{x,y}-&gt;{{2,a,b,c}},
-                       {x,x}-&gt;{{1,a,b,c}},
-                       {x**x}-&gt;{{-1,a,b}}|&gt;, {x,y}]
+                      {x,x}-&gt;{{1,a,b,c}},
+                      {x**x}-&gt;{{-1,a,b}}|&gt;, {x,y}]
 NCPTermsOfDegree[p, {1,1}]</code></pre>
 <p>returns</p>
 <pre><code>&lt;|{x,y}-&gt;{{2,a,b,c}}|&gt;</code></pre>
@@ -7237,8 +7237,8 @@ NCPolynomial <code>p</code> of total degree <code>deg</code>.</p>
 <p>The degree <code>deg</code> is the total degree.</p>
 <p>For example:</p>
 <pre><code>p = NCPolynomial[0, &lt;|{x,y}-&gt;{{2,a,b,c}},
-                       {x,x}-&gt;{{1,a,b,c}},
-                       {x**x}-&gt;{{-1,a,b}}|&gt;, {x,y}]
+                      {x,x}-&gt;{{1,a,b,c}},
+                      {x**x}-&gt;{{-1,a,b}}|&gt;, {x,y}]
 NCPTermsOfDegree[p, 2]</code></pre>
 <p>returns</p>
 <pre><code>&lt;|{x,y}-&gt;{{2,a,b,c}},{x,x}-&gt;{{1,a,b,c}},{x**x}-&gt;{{-1,a,b}}|&gt;</code></pre>
