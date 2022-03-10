@@ -339,6 +339,27 @@ Module[
      NCTest[NCPreSimplifyRationalSinglePass[expr], ExpandAll[answer]];
      NCTest[NCSimplifyRational[expr], answer];
 
+     (* Power bug *)
+     expr = inv[1 + x];
+     NCTest[NCSimplifyRational[expr], expr];
+
+     expr = inv[1 + x^2];
+     NCTest[NCSimplifyRational[expr], expr];
+
+     expr = inv[1 + A x];
+     NCTest[NCSimplifyRational[expr], expr];
+
+     expr = inv[1 + A x^2];
+     NCTest[NCSimplifyRational[expr], expr];
+
+     expr = inv[A + x];
+     answer = inv[1 + x/A]/A;
+     NCTest[NCSimplifyRational[expr], answer];
+
+     expr = inv[A + x^2];
+     answer = inv[1 + x^2/A]/A;
+     NCTest[NCSimplifyRational[expr], answer];
+     
      (* Print["Starting SimplifyRational.NCTest"]; *)
      (* test 1 tests rule 1 *)
      (* Print["----test 1 "]; *)
@@ -499,6 +520,6 @@ Module[
      m3 = m1 ** inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1] ** m1;
      NCTest[NCSimplifyRational[NCMatrixExpand[m3]], {{0,0},{0,0}}];
 
-  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
+     (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
      
 ];

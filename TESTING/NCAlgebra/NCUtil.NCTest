@@ -207,4 +207,28 @@ Block[
   NCTest[NCGrabSymbolsInProduct[x**y**(x+y**z)], {x,y,z}];
   NCTest[NCGrabSymbolsInProduct[x**y**(x+z^(-1))], {x,y}];
 
+  (* NCSymbolOrSubscriptQ *)
+  NCTest[NCSymbolOrSubscriptQ[x], True];
+  NCTest[NCSymbolOrSubscriptQ[Subscript[x,1]], True];
+  NCTest[NCSymbolOrSubscriptQ[x^2], False];
+  NCTest[NCSymbolOrSubscriptQ[inv[x]], False];
+  NCTest[NCSymbolOrSubscriptQ[1 + x], False];
+
+  (* NCNonCommutativeSymbolOrSubscriptQ *)
+  NCTest[NCNonCommutativeSymbolOrSubscriptQ[x], True];
+  NCTest[NCNonCommutativeSymbolOrSubscriptQ[a], False];
+  NCTest[NCNonCommutativeSymbolOrSubscriptQ[Subscript[x, 1]], True];
+  NCTest[NCNonCommutativeSymbolOrSubscriptQ[Subscript[a, 1]], False];
+
+  (* NCPowerQ *)
+  NCTest[NCPowerQ[x], True];
+  NCTest[NCPowerQ[x^2], True];
+  NCTest[NCPowerQ[Subscript[x,1]], True];
+  NCTest[NCPowerQ[Subscript[x,1]^2], True];
+  NCTest[NCPowerQ[inv[x]], False];
+  NCTest[NCPowerQ[x^(-2)], False];
+  NCTest[NCPowerQ[1 + x], False];
+  NCTest[NCPowerQ[1 + x^2], False];
+  NCTest[NCPowerQ[(1 + x)^2], False];
+
 ];

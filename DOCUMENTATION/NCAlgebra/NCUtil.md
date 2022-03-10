@@ -4,19 +4,50 @@
 
 Members are:
 
-* [NCConsistentQ](#NCConsistentQ)
-* [NCGrabFunctions](#NCGrabFunctions)
 * [NCGrabSymbols](#NCGrabSymbols)
+* [NCGrabNCSymbols](#NCGrabNCSymbols)
+* [NCGrabFunctions](#NCGrabFunctions)
 * [NCGrabIndeterminants](#NCGrabIndeterminants)
 * [NCVariables](#NCVariables)
 * [NCConsolidateList](#NCConsolidateList)
+* [NCConsistentQ](#NCConsistentQ)
+* [NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ)
+* [NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ)
+* [NCPowerQ](#NCPowerQ)
 * [NCLeafCount](#NCLeafCount)
 * [NCReplaceData](#NCReplaceData)
 * [NCToExpression](#NCToExpression)
+* [NotMatrixQ](#NotMatrixQ)
 
-### NCConsistentQ {#NCConsistentQ}
+### NCGrabSymbols {#NCGrabSymbols}
 
-`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative products or inverses involving noncommutative variables.
+`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
+
+`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
+
+For example:
+
+    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]]]
+
+returns `{x,y}` and
+
+    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]], inv]
+
+returns `{inv[x]}`.
+
+See also:
+[NCGrabFunctions](#NCGrabFunctions),
+[NCGrabNCSymbols](#NCGrabNCSymbols).
+
+### NCGrabNCSymbols {#NCGrabNCSymbols}
+
+`NCGrabSymbols[expr]` returns a list with all NC *Symbols* appearing in `expr`.
+
+`NCGrabSymbols[expr,f]` returns a list with all NC *Symbols* appearing in `expr` as the single argument of function `f`.
+
+See also:
+[NCGrabSymbols](#NCGrabSymbols),
+[NCGrabFunctions](#NCGrabFunctions).
 
 ### NCGrabFunctions {#NCGrabFunctions}
 
@@ -42,25 +73,6 @@ returns
 
 See also:
 [NCGrabSymbols](#NCGrabSymbols).
-
-### NCGrabSymbols {#NCGrabSymbols}
-
-`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
-
-`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
-
-For example:
-
-    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]]]
-
-returns `{x,y}` and
-
-    NCGrabSymbols[inv[x] + y**inv[1+inv[1+x**y]], inv]
-
-returns `{inv[x]}`.
-
-See also:
-[NCGrabFunctions](#NCGrabFunctions).
 
 ### NCGrabIndeterminants {#NCGrabIndeterminants}
 
@@ -112,6 +124,34 @@ results in:
 See also:
 `Union`
 
+### NCConsistentQ {#NCConsistentQ}
+
+`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative products or inverses involving noncommutative variables.
+
+### NCSymbolOrSubscriptQ {#NCSymbolOrSubscriptQ}
+
+`NCSymbolOrSubscriptQ[expr]` returns *True* if `expr` is a symbol or a symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCPowerQ](#NCPowerQ).
+
+### NCNonCommutativeSymbolOrSubscriptQ {#NCNonCommutativeSymbolOrSubscriptQ}
+
+`NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
+
+See also:
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
+[NCPowerQ](#NCPowerQ).
+
+### NCPowerQ {#NCPowerQ}
+
+`NCPowerQ[expr]` returns *True* if `expr` is an noncommutative symbol or symbol subscript or a positive power of a noncommutative symbol or symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ).
+
 ### NCLeafCount {#NCLeafCount}
 
 `NCLeafCount[expr]` returns an number associated with the complexity of an expression:
@@ -142,3 +182,10 @@ See also:
 
 See also:
 [NCReplaceData](#NCReplaceData).
+
+### NotMatrixQ {#NotMatrixQ}
+
+`NotMatrixQ[expr]` is equivalent to `Not[MatrixQ[expr]]`.
+
+See also:
+`MatrixQ`.

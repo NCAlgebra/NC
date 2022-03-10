@@ -158,8 +158,8 @@ Begin["`Private`"]
   
     (* Normalize last *)
     factor = Replace[last, 
-                {A_?CommutativeQ (_NonCommutativeMultiply|_Symbol|_Subscript) -> A, 
-                 (_NonCommutativeMultiply|_Symbol|_Subscript) -> 1 }];
+                {A_?CommutativeQ (_NonCommutativeMultiply|_?NCPowerQ) -> A, 
+                 (_NonCommutativeMultiply|_?NCPowerQ) -> 1 }];
       
     last /= factor;
     rest /= factor;

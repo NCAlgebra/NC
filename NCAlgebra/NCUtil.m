@@ -20,20 +20,22 @@ BeginPackage["NCUtil`"];
 
 Clear[NCGrabSymbols,
       NCGrabNCSymbols,
-      NCGrabSymbolsInProduct,
       NCGrabFunctions,
       NCGrabIndeterminants,
-      NCGrabFirst,
-      NCCasesFirst,
       NCVariables,
       NCConsolidateList,
       NCConsistentQ,
       NCSymbolOrSubscriptQ,
       NCNonCommutativeSymbolOrSubscriptQ,
+      NCPowerQ,
       NCLeafCount,
       NCReplaceData,
       NCToExpression,
-      NotMatrixQ];
+      NotMatrixQ,
+      (* Undocumented *)
+      NCGrabSymbolsInProduct,
+      NCGrabFirst,
+      NCCasesFirst];
 
 Get["NCUtil.usage", CharacterEncoding->"UTF8"];
 
@@ -42,11 +44,16 @@ Begin["`Private`"];
   Needs["NonCommutativeMultiply`"];
              
   NotMatrixQ[x_] := Not[MatrixQ[x]];
-    
-  NCSymbolOrSubscriptQ[_Symbol|Subscript[_Symbol,__]] := True;
-  NCSymbolOrSubscriptQ[_] := False;
 
-  NCNonCommutativeSymbolOrSubscriptQ[x_] := NCSymbolOrSubscriptQ[x] && NonCommutativeQ[x];
+  NCSymbolOrSubscriptQ = Function[x, MatchQ[x, _Symbol|Subscript[_Symbol,__]]];
+  NCNonCommutativeSymbolOrSubscriptQ =
+    Function[x,
+             MatchQ[x, _Symbol|Subscript[_Symbol,__]] && NonCommutativeQ[x]];
+
+  NCPowerQ =
+    Function[x,
+      NCNonCommutativeSymbolOrSubscriptQ[x] ||
+      MatchQ[x,Power[y_?NCNonCommutativeSymbolOrSubscriptQ, _Integer?Positive]]];
 
   NCGrabFirst[exp_, rule_Rule] := (exp /. rule) /; MatchQ[exp, rule[[1]]];
   NCGrabFirst[exp_, pattern_Pattern] := exp /; MatchQ[exp, pattern];
