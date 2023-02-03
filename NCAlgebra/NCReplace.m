@@ -98,7 +98,16 @@ Begin["`Private`"]
        ,
 	s ** r^(m:_Integer?Positive:1)
        ,
-       s ** r^(m:_Integer?((#>=j)&))
+        s ** r^(m:_Integer?((#>=j)&))
+     ], If[m != j, expr ** r^(m - j), expr]
+  ];
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [Power[r_?NCSymbolOrSubscriptQ, j:_Integer?Positive:1], expr_]] := op[
+   If[ j == 1
+       ,
+	r^(m:_Integer?Positive:1)
+       ,
+        r^(m:_Integer?((#>=j)&))
      ], If[m != j, expr ** r^(m - j), expr]
   ];
   NCReplacePowerRule[(expr_Rule|expr_RuleDelayed)] := expr;

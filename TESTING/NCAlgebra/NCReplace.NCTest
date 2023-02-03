@@ -88,6 +88,14 @@ Block[
      NCTest[NCReplaceRepeated[expr,rule], expr];
      NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
 
+     rule = a^2 -> c;
+     expr = a^3**b**b**c;
+
+     answer = expr;
+     NCTest[NCReplaceAll[expr,rule], answer];
+     answer = c**a**b^2**c;
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+
      rule = a^2**b -> a;
      expr = a^3**b**b**c;
 
