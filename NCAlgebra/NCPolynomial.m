@@ -337,7 +337,7 @@ Begin[ "`Private`" ]
       ];
           
       (* What's left? *)
-      p = poly - m0;
+      p = Chop[poly - m0];
 
       (* Expand *)
       p = ExpandNonCommutativeMultiply[p];
