@@ -43,13 +43,10 @@ Clear[NCReplace,
       NCRSA, NCRASA, NCRRSA, NCRLSA];
 
 Get["NCReplace.usage", CharacterEncoding->"UTF8"];
-<<<<<<< HEAD
 
 Options[NCReplace] = {
   ApplyPowerRule -> False
 };
-=======
->>>>>>> master
 
 Begin["`Private`"]
 
