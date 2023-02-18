@@ -11,13 +11,14 @@ Members are:
 * [NCToNCPoly](#NCToNCPoly)
 * [NCPolyToNC](#NCPolyToNC)
 * [NCRuleToPoly](#NCRuleToPoly)
+* [NCToRule](#NCToRule)
 * [NCMonomialList](#NCMonomialList)
 * [NCCoefficientRules](#NCCoefficientRules)
 * [NCCoefficientList](#NCCoefficientList)
 * [NCCoefficientQ](#NCCoefficientQ)
 * [NCMonomialQ](#NCMonomialQ)
 * [NCPolynomialQ](#NCPolynomialQ)
-      
+
 ### NCToNCPoly {#NCToNCPoly}
 
 `NCToNCPoly[expr, var]` constructs a noncommutative polynomial object in
@@ -62,6 +63,26 @@ For instance:
 returns
 
     x**y**y - x**y + 1
+
+### NCToRule {#NCToRule}
+
+`NCToRule[exp, vars]` converts the NC polynomial `exp` into a rule `a
+-> b` in which `a` is the leading monomial according to the ordering
+implied by `vars`.
+
+For instance:
+
+    NCToRule[x**y**y - x**y + 1, {x,y}]
+
+returns
+
+    x**y**y -> x**y - 1
+
+NOTE: This command is not efficient. If you need to sort polynomials
+you should consider using NCPoly directly.
+
+See also:
+[NCToNCPoly](#NCToNCPoly)
 
 ### NCMonomialList {#NCMonomialList}
 

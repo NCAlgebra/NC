@@ -229,6 +229,11 @@ Block[
      	      $Failed,
 	      NCPoly::NotPolynomial];
 
+  NCExp = inv[a]**b;
+  NCTestCheck[NCToNCPoly[NCExp, vars],
+     	      $Failed,
+	      NCPoly::NotPolynomial];
+
   (* List functionality *)
 
   NCExp = { - b ** c ** b ** a, a**a + b**b + c**c };
@@ -385,6 +390,14 @@ Block[
   NCExpExp = NCPolyToNC[PolyExp, vars];
   
   NCTest[NCExpExp, tp[NCExp] /. tp[b] -> b];
+
+  (* NCToRule *)
+  answer = x ** y^2 -> -1 + x ** y;
+  NCTest[NCToRule[x ** y ** y - x ** y + 1, {x, y}], answer];
+  answer = x^2 -> x ** y;
+  NCTest[NCToRule[x ** x - x ** y, {y, x}], answer];
+  answer = {x ** y -> x^2, y ** x -> -x + y};
+  NCTest[NCToRule[{x ** x - x ** y, x + y ** x - y}, {x, y}], answer];
 
   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 

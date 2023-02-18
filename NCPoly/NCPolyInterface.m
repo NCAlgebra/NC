@@ -13,6 +13,7 @@ BeginPackage[ "NCPolyInterface`",
 Clear[NCToNCPoly,
       NCPolyToNC,
       NCRuleToPoly,
+      NCToRule,
       NCMonomialList,
       NCCoefficientRules,
       NCCoefficientList,
@@ -28,15 +29,20 @@ Begin["`Private`"];
   NCRuleToPoly[exp_Rule] := exp[[1]] - exp[[2]];
   NCRuleToPoly[exp_List] := Map[NCRuleToPoly, exp];
 
+  (* NCToRule *)
+  NCToRule[exp_, vars_] := Map[NCPolyToNC[#, vars]&, NCPolyToRule[NCToNCPoly[exp, vars]]];
+  NCToRule[exp_List, vars_] := Map[NCToRule[#, vars]&, exp];
+
   (* NCToNCPoly *)
   Clear[NonCommutativeMultiplyToList];
   NonCommutativeMultiplyToList[exp_NonCommutativeMultiply] :=
-    Flatten[List @@ exp /. Power[x_, n_] :> Table[x, n]];
+    Flatten[List @@ exp /. Power[x_, n_?Positive] :> Table[x, n]];
   
   Clear[GrabFactors];
   GrabFactors[exp_?CommutativeQ] := {exp, {}};
   GrabFactors[a_. exp_NonCommutativeMultiply] := {a, NonCommutativeMultiplyToList[exp]};
-  GrabFactors[a_. Power[x_?NCNonCommutativeSymbolOrSubscriptQ, n_]] := {a, Table[x,n]};
+  GrabFactors[a_. Power[x_?NCNonCommutativeSymbolOrSubscriptQ, n_?Positive]] := {a, Table[x,n]};
+  GrabFactors[a_. Power[x_?NCNonCommutativeSymbolOrSubscriptQ, n_?Negative]] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
   GrabFactors[a_. exp_?NCNonCommutativeSymbolOrSubscriptQ] := {a, {exp}};
   (* GrabFactors[a_. exp:(Subscript[_Symbol?NonCommutativeQ,___])] := {a, {exp}}; *)
   GrabFactors[_] := (Message[NCPoly::NotPolynomial]; {0, $Failed});
@@ -127,6 +133,12 @@ Begin["`Private`"];
       Return[$Failed]
      ,
       {NCPoly::NotPolynomial}
+    ];
+
+    (* Check for inverses; by now all remaining powers are negative *)
+    If[ !FreeQ[factors, Power],
+        Message[NCPoly::NotPolynomial];
+        Return[$Failed];
     ];
 
     (*
