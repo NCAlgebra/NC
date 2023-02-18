@@ -4,8 +4,8 @@
 
 ## Authors
 
--   J. William Helton[^1]
--   Mauricio C. de Oliveira[^2]
+- J. William Helton[^1]
+- Mauricio C. de Oliveira[^2]
 
 with earlier contributions by Bob Miller & Mark Stankus
 
@@ -28,358 +28,359 @@ For NCAlgebra updates see:
 
 [www.github.com/NCAlgebra/NC](https://www.github.com/NCAlgebra/NC)
 
-[www.math.ucsd.edu/\~ncalg](https://www.math.ucsd.edu/~ncalg)
+[www.math.ucsd.edu/~ncalg](https://www.math.ucsd.edu/~ncalg)
 
 A PDF version of this document is available [here](./NCDocument.pdf).
 
 ## Copyright
 
--   Helton and de Oliveira 2017
--   Helton 2002
--   Helton and Miller June 1991
+- Helton and de Oliveira 2017
+- Helton 2002
+- Helton and Miller June 1991
 
 All rights reserved.
 
 # Table of Contents
 
--   [<span class="toc-section-number">1</span> Acknowledgements](#acknowledgements)
--   [<span class="toc-section-number">2</span> Changes in Version 6.0](#changes-in-version-60)
-    -   [<span class="toc-section-number">2.1</span> Version 6.0.0](#version-600)
--   [<span class="toc-section-number">3</span> Changes in Version 5.0](#changes-in-version-50)
-    -   [<span class="toc-section-number">3.1</span> Version 5.0.6](#version-506)
-    -   [<span class="toc-section-number">3.2</span> Version 5.0.5](#version-505)
-    -   [<span class="toc-section-number">3.3</span> Version 5.0.4](#version-504)
-    -   [<span class="toc-section-number">3.4</span> Version 5.0.3](#version-503)
-    -   [<span class="toc-section-number">3.5</span> Version 5.0.2](#version-502)
-    -   [<span class="toc-section-number">3.6</span> Version 5.0.1](#version-501)
-    -   [<span class="toc-section-number">3.7</span> Version 5.0.0](#version-500)
--   [<span class="toc-section-number">4</span> Introduction](#introduction)
-    -   [<span class="toc-section-number">4.1</span> Running NCAlgebra](#running-ncalgebra)
-    -   [<span class="toc-section-number">4.2</span> Now what?](#now-what)
-    -   [<span class="toc-section-number">4.3</span> Testing](#testing)
-    -   [<span class="toc-section-number">4.4</span> Pre-2017 NCGB C++ version](#pre-2017-ncgb-c-version)
--   [<span class="toc-section-number">5</span> Most Basic Commands](#most-basic-commands)
-    -   [<span class="toc-section-number">5.1</span> To Commute Or Not To Commute?](#to-commute-or-not-to-commute)
-    -   [<span class="toc-section-number">5.2</span> Inverses](#inverses)
-    -   [<span class="toc-section-number">5.3</span> Transposes and Adjoints](#transposes-and-adjoints)
-    -   [<span class="toc-section-number">5.4</span> Replace](#replace)
-    -   [<span class="toc-section-number">5.5</span> Polynomials](#polynomials)
-    -   [<span class="toc-section-number">5.6</span> Rationals and Simplification](#rationals-and-simplification)
-    -   [<span class="toc-section-number">5.7</span> Calculus](#calculus)
-    -   [<span class="toc-section-number">5.8</span> Matrices](#matrices)
-        -   [<span class="toc-section-number">5.8.1</span> Inverses, products, adjoints, etc](#inverses-products-adjoints-etc)
-        -   [<span class="toc-section-number">5.8.2</span> LU Decomposition](#lu-decomposition)
-        -   [<span class="toc-section-number">5.8.3</span> LU Decomposition with complete pivoting](#lu-decomposition-with-complete-pivoting)
-        -   [<span class="toc-section-number">5.8.4</span> LDL Decomposition](#ldl-decomposition)
-        -   [<span class="toc-section-number">5.8.5</span> Replace with matrices](#replace-with-matrices)
-    -   [<span class="toc-section-number">5.9</span> Quadratic polynomials, second direction derivatives and convexity](#quadratic-polynomials-second-direction-derivatives-and-convexity)
--   [<span class="toc-section-number">6</span> More Advanced Commands](#more-advanced-commands)
-    -   [<span class="toc-section-number">6.1</span> Advanced Rules and Replacements](#advanced-rules-and-replacements)
-        -   [<span class="toc-section-number">6.1.1</span> `ReplaceAll` (`/.`) and `ReplaceRepeated` (`//.`) often fail](#replaceall-and-replacerepeated-often-fail)
-        -   [<span class="toc-section-number">6.1.2</span> The fix is `NCReplace`](#the-fix-is-ncreplace)
-        -   [<span class="toc-section-number">6.1.3</span> Matching monomials with powers](#matching-monomials-with-powers)
-        -   [<span class="toc-section-number">6.1.4</span> Trouble with `Block` and `Module`](#trouble-with-block-and-module)
-    -   [<span class="toc-section-number">6.2</span> Expanding matrix products](#expanding-matrix-products)
-        -   [<span class="toc-section-number">6.2.1</span> Trouble with `Plus` (`+`) and matrices](#trouble-with-plus-and-matrices)
-    -   [<span class="toc-section-number">6.3</span> Polynomials with commutative coefficients](#polynomials-with-commutative-coefficients)
-    -   [<span class="toc-section-number">6.4</span> Polynomials with noncommutative coefficients](#polynomials-with-noncommutative-coefficients)
-    -   [<span class="toc-section-number">6.5</span> Linear polynomials](#linear-polynomials)
--   [<span class="toc-section-number">7</span> Noncommutative Gröbner Basis](#noncommutative-gröbner-basis)
-    -   [<span class="toc-section-number">7.1</span> What is a Gröbner Basis?](#what-is-a-gröbner-basis)
-    -   [<span class="toc-section-number">7.2</span> Solving equations](#solving-equations)
-    -   [<span class="toc-section-number">7.3</span> A slightly more challenging example](#a-slightly-more-challenging-example)
-    -   [<span class="toc-section-number">7.4</span> Simplifying polynomial expresions](#simplifying-polynomial-expresions)
-    -   [<span class="toc-section-number">7.5</span> Minimal versus reduced Gröbner Basis](#minimal-versus-reduced-gröbner-basis)
-    -   [<span class="toc-section-number">7.6</span> Simplifying rational expresions](#simplifying-rational-expresions)
-    -   [<span class="toc-section-number">7.7</span> Simplification with NCGBSimplifyRational](#simplification-with-ncgbsimplifyrational)
-    -   [<span class="toc-section-number">7.8</span> Ordering on variables and monomials](#ordering-on-variables-and-monomials)
-        -   [<span class="toc-section-number">7.8.1</span> Lex Order: the simplest elimination order](#lex-order-the-simplest-elimination-order)
-        -   [<span class="toc-section-number">7.8.2</span> Graded lex ordering: a non-elimination order](#graded-lex-ordering-a-non-elimination-order)
-        -   [<span class="toc-section-number">7.8.3</span> Multigraded lex ordering: a variety of elimination orders](#multigraded-lex-ordering-a-variety-of-elimination-orders)
-    -   [<span class="toc-section-number">7.9</span> A complete example: the partially prescribed matrix inverse problem](#a-complete-example-the-partially-prescribed-matrix-inverse-problem)
--   [<span class="toc-section-number">8</span> Semidefinite Programming](#semidefinite-programming)
-    -   [<span class="toc-section-number">8.1</span> Semidefinite Programs in Matrix Variables](#semidefinite-programs-in-matrix-variables)
-    -   [<span class="toc-section-number">8.2</span> Semidefinite Programs in Vector Variables](#semidefinite-programs-in-vector-variables)
--   [<span class="toc-section-number">9</span> Pretty Output with Notebooks and TeX ](#pretty-output-with-notebooks-and)
-    -   [<span class="toc-section-number">9.1</span> Pretty Output](#pretty-output)
-    -   [<span class="toc-section-number">9.2</span> Using NCTeX](#using-nctex)
-        -   [<span class="toc-section-number">9.2.1</span> NCTeX Options](#nctex-options)
-    -   [<span class="toc-section-number">9.3</span> Using NCTeXForm](#using-nctexform)
--   [<span class="toc-section-number">10</span> Reference Manual](#reference-manual)
-    -   [<span class="toc-section-number">10.1</span> NC](#nc)
-        -   [<span class="toc-section-number">10.1.1</span> Options](#options)
-    -   [<span class="toc-section-number">10.2</span> NCAlgebra](#ncalgebra)
-        -   [<span class="toc-section-number">10.2.1</span> Messages](#messages)
--   [<span class="toc-section-number">11</span> Packages for manipulating NC expressions](#packages-for-manipulating-nc-expressions)
-    -   [<span class="toc-section-number">11.1</span> NonCommutativeMultiply](#noncommutativemultiply)
-        -   [<span class="toc-section-number">11.1.1</span> aj](#aj)
-        -   [<span class="toc-section-number">11.1.2</span> co](#co)
-        -   [<span class="toc-section-number">11.1.3</span> Id](#id)
-        -   [<span class="toc-section-number">11.1.4</span> inv](#inv)
-        -   [<span class="toc-section-number">11.1.5</span> rt](#rt)
-        -   [<span class="toc-section-number">11.1.6</span> tp](#tp)
-        -   [<span class="toc-section-number">11.1.7</span> CommutativeQ](#commutativeq)
-        -   [<span class="toc-section-number">11.1.8</span> NonCommutativeQ](#noncommutativeq)
-        -   [<span class="toc-section-number">11.1.9</span> SetCommutative](#setcommutative)
-        -   [<span class="toc-section-number">11.1.10</span> SetCommutativeHold](#setcommutativehold)
-        -   [<span class="toc-section-number">11.1.11</span> SetNonCommutative](#setnoncommutative)
-        -   [<span class="toc-section-number">11.1.12</span> SetNonCommutativeHold](#setnoncommutativehold)
-        -   [<span class="toc-section-number">11.1.13</span> SetCommutativeFunction](#setcommutativefunction)
-        -   [<span class="toc-section-number">11.1.14</span> SNC](#snc)
-        -   [<span class="toc-section-number">11.1.15</span> SetCommutingOperators](#setcommutingoperators)
-        -   [<span class="toc-section-number">11.1.16</span> UnsetCommutingOperators](#unsetcommutingoperators)
-        -   [<span class="toc-section-number">11.1.17</span> CommutingOperatorsQ](#commutingoperatorsq)
-        -   [<span class="toc-section-number">11.1.18</span> Commutative](#commutative)
-        -   [<span class="toc-section-number">11.1.19</span> CommuteEverything](#commuteeverything)
-        -   [<span class="toc-section-number">11.1.20</span> BeginCommuteEverything](#begincommuteeverything)
-        -   [<span class="toc-section-number">11.1.21</span> EndCommuteEverything](#endcommuteeverything)
-        -   [<span class="toc-section-number">11.1.22</span> ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
-        -   [<span class="toc-section-number">11.1.23</span> NCExpand](#ncexpand)
-        -   [<span class="toc-section-number">11.1.24</span> NCE](#nce)
-        -   [<span class="toc-section-number">11.1.25</span> NCExpandExponents](#ncexpandexponents)
-        -   [<span class="toc-section-number">11.1.26</span> NCToList](#nctolist)
-    -   [<span class="toc-section-number">11.2</span> NCTr](#nctr)
-        -   [<span class="toc-section-number">11.2.1</span> tr](#tr)
-        -   [<span class="toc-section-number">11.2.2</span> SortCyclicPermutation](#sortcyclicpermutation)
-        -   [<span class="toc-section-number">11.2.3</span> SortedCyclicPermutationQ](#sortedcyclicpermutationq)
-    -   [<span class="toc-section-number">11.3</span> NCCollect](#nccollect)
-        -   [<span class="toc-section-number">11.3.1</span> NCCollect](#nccollect-1)
-        -   [<span class="toc-section-number">11.3.2</span> NCCollectExponents](#nccollectexponents)
-        -   [<span class="toc-section-number">11.3.3</span> NCCollectSelfAdjoint](#nccollectselfadjoint)
-        -   [<span class="toc-section-number">11.3.4</span> NCCollectSymmetric](#nccollectsymmetric)
-        -   [<span class="toc-section-number">11.3.5</span> NCStrongCollect](#ncstrongcollect)
-        -   [<span class="toc-section-number">11.3.6</span> NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
-        -   [<span class="toc-section-number">11.3.7</span> NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
-        -   [<span class="toc-section-number">11.3.8</span> NCCompose](#nccompose)
-        -   [<span class="toc-section-number">11.3.9</span> NCDecompose](#ncdecompose)
-        -   [<span class="toc-section-number">11.3.10</span> NCTermsOfDegree](#nctermsofdegree)
-        -   [<span class="toc-section-number">11.3.11</span> NCTermsOfTotalDegree](#nctermsoftotaldegree)
-    -   [<span class="toc-section-number">11.4</span> NCReplace](#ncreplace)
-        -   [<span class="toc-section-number">11.4.1</span> NCReplace](#ncreplace-1)
-        -   [<span class="toc-section-number">11.4.2</span> NCReplaceAll](#ncreplaceall)
-        -   [<span class="toc-section-number">11.4.3</span> NCReplaceList](#ncreplacelist)
-        -   [<span class="toc-section-number">11.4.4</span> NCReplaceRepeated](#ncreplacerepeated)
-        -   [<span class="toc-section-number">11.4.5</span> NCR](#ncr)
-        -   [<span class="toc-section-number">11.4.6</span> NCRA](#ncra)
-        -   [<span class="toc-section-number">11.4.7</span> NCRR](#ncrr)
-        -   [<span class="toc-section-number">11.4.8</span> NCRL](#ncrl)
-        -   [<span class="toc-section-number">11.4.9</span> NCMakeRuleSymmetric](#ncmakerulesymmetric)
-        -   [<span class="toc-section-number">11.4.10</span> NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
-        -   [<span class="toc-section-number">11.4.11</span> NCReplaceSymmetric](#ncreplacesymmetric)
-        -   [<span class="toc-section-number">11.4.12</span> NCReplaceAllSymmetric](#ncreplaceallsymmetric)
-        -   [<span class="toc-section-number">11.4.13</span> NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
-        -   [<span class="toc-section-number">11.4.14</span> NCReplaceListSymmetric](#ncreplacelistsymmetric)
-        -   [<span class="toc-section-number">11.4.15</span> NCRSym](#ncrsym)
-        -   [<span class="toc-section-number">11.4.16</span> NCRASym](#ncrasym)
-        -   [<span class="toc-section-number">11.4.17</span> NCRRSym](#ncrrsym)
-        -   [<span class="toc-section-number">11.4.18</span> NCRLSym](#ncrlsym)
-        -   [<span class="toc-section-number">11.4.19</span> NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
-        -   [<span class="toc-section-number">11.4.20</span> NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
-        -   [<span class="toc-section-number">11.4.21</span> NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
-        -   [<span class="toc-section-number">11.4.22</span> NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
-        -   [<span class="toc-section-number">11.4.23</span> NCRSA](#ncrsa)
-        -   [<span class="toc-section-number">11.4.24</span> NCRASA](#ncrasa)
-        -   [<span class="toc-section-number">11.4.25</span> NCRRSA](#ncrrsa)
-        -   [<span class="toc-section-number">11.4.26</span> NCRLSA](#ncrlsa)
-        -   [<span class="toc-section-number">11.4.27</span> NCMatrixExpand](#ncmatrixexpand)
-        -   [<span class="toc-section-number">11.4.28</span> NCMatrixReplaceAll](#ncmatrixreplaceall)
-        -   [<span class="toc-section-number">11.4.29</span> NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
-        -   [<span class="toc-section-number">11.4.30</span> NCReplacePowerRule](#ncreplacepowerrule)
-    -   [<span class="toc-section-number">11.5</span> NCSelfAdjoint](#ncselfadjoint)
-        -   [<span class="toc-section-number">11.5.1</span> NCSymmetricQ](#ncsymmetricq)
-        -   [<span class="toc-section-number">11.5.2</span> NCSymmetricTest](#ncsymmetrictest)
-        -   [<span class="toc-section-number">11.5.3</span> NCSymmetricPart](#ncsymmetricpart)
-        -   [<span class="toc-section-number">11.5.4</span> NCSelfAdjointQ](#ncselfadjointq)
-        -   [<span class="toc-section-number">11.5.5</span> NCSelfAdjointTest](#ncselfadjointtest)
-    -   [<span class="toc-section-number">11.6</span> NCSimplifyRational](#ncsimplifyrational)
-        -   [<span class="toc-section-number">11.6.1</span> NCNormalizeInverse](#ncnormalizeinverse)
-        -   [<span class="toc-section-number">11.6.2</span> NCSimplifyRational](#ncsimplifyrational-1)
-        -   [<span class="toc-section-number">11.6.3</span> NCSR](#ncsr)
-        -   [<span class="toc-section-number">11.6.4</span> NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass)
-        -   [<span class="toc-section-number">11.6.5</span> NCPreSimplifyRational](#ncpresimplifyrational)
-        -   [<span class="toc-section-number">11.6.6</span> NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass)
-    -   [<span class="toc-section-number">11.7</span> NCDiff](#ncdiff)
-        -   [<span class="toc-section-number">11.7.1</span> NCDirectionalD](#ncdirectionald)
-        -   [<span class="toc-section-number">11.7.2</span> NCGrad](#ncgrad)
-        -   [<span class="toc-section-number">11.7.3</span> NCHessian](#nchessian)
-        -   [<span class="toc-section-number">11.7.4</span> DirectionalD](#directionald)
-        -   [<span class="toc-section-number">11.7.5</span> NCIntegrate](#ncintegrate)
-    -   [<span class="toc-section-number">11.8</span> NCConvexity](#ncconvexity)
-        -   [<span class="toc-section-number">11.8.1</span> NCIndependent](#ncindependent)
-        -   [<span class="toc-section-number">11.8.2</span> NCConvexityRegion](#ncconvexityregion)
--   [<span class="toc-section-number">12</span> Packages for manipulating NC block matrices](#packages-for-manipulating-nc-block-matrices)
-    -   [<span class="toc-section-number">12.1</span> NCDot](#ncdot)
-        -   [<span class="toc-section-number">12.1.1</span> tpMat](#tpmat)
-        -   [<span class="toc-section-number">12.1.2</span> ajMat](#ajmat)
-        -   [<span class="toc-section-number">12.1.3</span> coMat](#comat)
-        -   [<span class="toc-section-number">12.1.4</span> NCDot](#ncdot-1)
-        -   [<span class="toc-section-number">12.1.5</span> NCInverse](#ncinverse)
-    -   [<span class="toc-section-number">12.2</span> NCMatrixDecompositions](#ncmatrixdecompositions)
-        -   [<span class="toc-section-number">12.2.1</span> NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting)
-        -   [<span class="toc-section-number">12.2.2</span> NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting)
-        -   [<span class="toc-section-number">12.2.3</span> NCLDLDecomposition](#ncldldecomposition)
-        -   [<span class="toc-section-number">12.2.4</span> NCUpperTriangularSolve](#ncuppertriangularsolve)
-        -   [<span class="toc-section-number">12.2.5</span> NCLowerTriangularSolve](#nclowertriangularsolve)
-        -   [<span class="toc-section-number">12.2.6</span> NCLUInverse](#ncluinverse)
-        -   [<span class="toc-section-number">12.2.7</span> NCLUPartialPivoting](#nclupartialpivoting)
-        -   [<span class="toc-section-number">12.2.8</span> NCLUCompletePivoting](#nclucompletepivoting)
-        -   [<span class="toc-section-number">12.2.9</span> NCLeftDivide](#ncleftdivide)
-        -   [<span class="toc-section-number">12.2.10</span> NCRightDivide](#ncrightdivide)
-    -   [<span class="toc-section-number">12.3</span> MatrixDecompositions: linear algebra templates](#matrixdecompositions-linear-algebra-templates)
-        -   [<span class="toc-section-number">12.3.1</span> LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting)
-        -   [<span class="toc-section-number">12.3.2</span> LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting)
-        -   [<span class="toc-section-number">12.3.3</span> LDLDecomposition](#ldldecomposition)
-        -   [<span class="toc-section-number">12.3.4</span> UpperTriangularSolve](#uppertriangularsolve)
-        -   [<span class="toc-section-number">12.3.5</span> LowerTriangularSolve](#lowertriangularsolve)
-        -   [<span class="toc-section-number">12.3.6</span> LUInverse](#luinverse)
-        -   [<span class="toc-section-number">12.3.7</span> GetLUMatrices](#getlumatrices)
-        -   [<span class="toc-section-number">12.3.8</span> GetFullLUMatrices](#getfulllumatrices)
-        -   [<span class="toc-section-number">12.3.9</span> GetLDUMatrices](#getldumatrices)
-        -   [<span class="toc-section-number">12.3.10</span> GetFullLDUMatrices](#getfullldumatrices)
-        -   [<span class="toc-section-number">12.3.11</span> GetDiagonal](#getdiagonal)
-        -   [<span class="toc-section-number">12.3.12</span> LUPartialPivoting](#lupartialpivoting)
-        -   [<span class="toc-section-number">12.3.13</span> LUCompletePivoting](#lucompletepivoting)
-        -   [<span class="toc-section-number">12.3.14</span> LURowReduce](#lurowreduce)
-        -   [<span class="toc-section-number">12.3.15</span> LURowReduceIncremental](#lurowreduceincremental)
--   [<span class="toc-section-number">13</span> Packages for pretty output, testing, and utilities](#packages-for-pretty-output-testing-and-utilities)
-    -   [<span class="toc-section-number">13.1</span> NCOutput](#ncoutput)
-        -   [<span class="toc-section-number">13.1.1</span> NCSetOutput](#ncsetoutput)
-    -   [<span class="toc-section-number">13.2</span> NCTeX](#nctex)
-        -   [<span class="toc-section-number">13.2.1</span> NCTeX](#nctex-1)
-        -   [<span class="toc-section-number">13.2.2</span> NCRunDVIPS](#ncrundvips)
-        -   [<span class="toc-section-number">13.2.3</span> NCRunLaTeX](#ncrunlatex)
-        -   [<span class="toc-section-number">13.2.4</span> NCRunPDFLaTeX](#ncrunpdflatex)
-        -   [<span class="toc-section-number">13.2.5</span> NCRunPDFViewer](#ncrunpdfviewer)
-        -   [<span class="toc-section-number">13.2.6</span> NCRunPS2PDF](#ncrunps2pdf)
-    -   [<span class="toc-section-number">13.3</span> NCTeXForm](#nctexform)
-        -   [<span class="toc-section-number">13.3.1</span> NCTeXForm](#nctexform-1)
-        -   [<span class="toc-section-number">13.3.2</span> NCTeXFormSetStarStar](#nctexformsetstarstar)
-        -   [<span class="toc-section-number">13.3.3</span> NCTeXFormSetStar](#nctexformsetstar)
-    -   [<span class="toc-section-number">13.4</span> NCRun](#ncrun)
-        -   [<span class="toc-section-number">13.4.1</span> NCRun](#ncrun-1)
-    -   [<span class="toc-section-number">13.5</span> NCTest](#nctest)
-        -   [<span class="toc-section-number">13.5.1</span> NCTest](#nctest-1)
-        -   [<span class="toc-section-number">13.5.2</span> NCTestCheck](#nctestcheck)
-        -   [<span class="toc-section-number">13.5.3</span> NCTestRun](#nctestrun)
-        -   [<span class="toc-section-number">13.5.4</span> NCTestSummarize](#nctestsummarize)
-    -   [<span class="toc-section-number">13.6</span> NCDebug](#ncdebug)
-        -   [<span class="toc-section-number">13.6.1</span> NCDebug](#ncdebug-1)
-    -   [<span class="toc-section-number">13.7</span> NCUtil](#ncutil)
-        -   [<span class="toc-section-number">13.7.1</span> NCGrabSymbols](#ncgrabsymbols)
-        -   [<span class="toc-section-number">13.7.2</span> NCGrabNCSymbols](#ncgrabncsymbols)
-        -   [<span class="toc-section-number">13.7.3</span> NCGrabFunctions](#ncgrabfunctions)
-        -   [<span class="toc-section-number">13.7.4</span> NCGrabIndeterminants](#ncgrabindeterminants)
-        -   [<span class="toc-section-number">13.7.5</span> NCVariables](#ncvariables)
-        -   [<span class="toc-section-number">13.7.6</span> NCConsolidateList](#ncconsolidatelist)
-        -   [<span class="toc-section-number">13.7.7</span> NCConsistentQ](#ncconsistentq)
-        -   [<span class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq)
-        -   [<span class="toc-section-number">13.7.9</span> NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
-        -   [<span class="toc-section-number">13.7.10</span> NCPowerQ](#ncpowerq)
-        -   [<span class="toc-section-number">13.7.11</span> NCLeafCount](#ncleafcount)
-        -   [<span class="toc-section-number">13.7.12</span> NCReplaceData](#ncreplacedata)
-        -   [<span class="toc-section-number">13.7.13</span> NCToExpression](#nctoexpression)
-        -   [<span class="toc-section-number">13.7.14</span> NotMatrixQ](#notmatrixq)
--   [<span class="toc-section-number">14</span> Data structures for fast calculations](#data-structures-for-fast-calculations)
-    -   [<span class="toc-section-number">14.1</span> NCPoly](#ncpoly)
-        -   [<span class="toc-section-number">14.1.1</span> Efficient storage of NC polynomials with rational coefficients](#efficient-storage-of-nc-polynomials-with-rational-coefficients)
-        -   [<span class="toc-section-number">14.1.2</span> Ways to represent NC polynomials](#ways-to-represent-nc-polynomials)
-        -   [<span class="toc-section-number">14.1.3</span> Access and utlity functions](#access-and-utlity-functions)
-        -   [<span class="toc-section-number">14.1.4</span> Formating functions](#formating-functions)
-        -   [<span class="toc-section-number">14.1.5</span> Arithmetic functions](#arithmetic-functions)
-        -   [<span class="toc-section-number">14.1.6</span> State space realization functions](#state-space-realization-functions)
-        -   [<span class="toc-section-number">14.1.7</span> Auxiliary functions](#auxiliary-functions)
-    -   [<span class="toc-section-number">14.2</span> NCPolyInterface](#ncpolyinterface)
-        -   [<span class="toc-section-number">14.2.1</span> NCToNCPoly](#nctoncpoly)
-        -   [<span class="toc-section-number">14.2.2</span> NCPolyToNC](#ncpolytonc)
-        -   [<span class="toc-section-number">14.2.3</span> NCRuleToPoly](#ncruletopoly)
-        -   [<span class="toc-section-number">14.2.4</span> NCMonomialList](#ncmonomiallist)
-        -   [<span class="toc-section-number">14.2.5</span> NCCoefficientRules](#nccoefficientrules)
-        -   [<span class="toc-section-number">14.2.6</span> NCCoefficientList](#nccoefficientlist)
-        -   [<span class="toc-section-number">14.2.7</span> NCCoefficientQ](#nccoefficientq)
-        -   [<span class="toc-section-number">14.2.8</span> NCMonomialQ](#ncmonomialq)
-        -   [<span class="toc-section-number">14.2.9</span> NCPolynomialQ](#ncpolynomialq)
-    -   [<span class="toc-section-number">14.3</span> NCPolynomial](#ncpolynomial)
-        -   [<span class="toc-section-number">14.3.1</span> Efficient storage of NC polynomials with nc coefficients](#efficient-storage-of-nc-polynomials-with-nc-coefficients)
-        -   [<span class="toc-section-number">14.3.2</span> Ways to represent NC polynomials](#ways-to-represent-nc-polynomials-1)
-        -   [<span class="toc-section-number">14.3.3</span> Grouping terms by degree](#grouping-terms-by-degree)
-        -   [<span class="toc-section-number">14.3.4</span> Utilities](#utilities)
-        -   [<span class="toc-section-number">14.3.5</span> Operations on NC polynomials](#operations-on-nc-polynomials)
-    -   [<span class="toc-section-number">14.4</span> NCQuadratic](#ncquadratic)
-        -   [<span class="toc-section-number">14.4.1</span> NCToNCQuadratic](#nctoncquadratic)
-        -   [<span class="toc-section-number">14.4.2</span> NCPToNCQuadratic](#ncptoncquadratic)
-        -   [<span class="toc-section-number">14.4.3</span> NCQuadraticToNC](#ncquadratictonc)
-        -   [<span class="toc-section-number">14.4.4</span> NCQuadraticToNCPolynomial](#ncquadratictoncpolynomial)
-        -   [<span class="toc-section-number">14.4.5</span> NCMatrixOfQuadratic](#ncmatrixofquadratic)
-        -   [<span class="toc-section-number">14.4.6</span> NCQuadraticMakeSymmetric](#ncquadraticmakesymmetric)
-    -   [<span class="toc-section-number">14.5</span> NCSylvester](#ncsylvester)
-        -   [<span class="toc-section-number">14.5.1</span> NCToNCSylvester](#nctoncsylvester)
-        -   [<span class="toc-section-number">14.5.2</span> NCPToNCSylvester](#ncptoncsylvester)
-        -   [<span class="toc-section-number">14.5.3</span> NCSylvesterToNC](#ncsylvestertonc)
-        -   [<span class="toc-section-number">14.5.4</span> NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial)
--   [<span class="toc-section-number">15</span> Noncommutative Gröbner Bases Algorithms](#noncommutative-gröbner-bases-algorithms)
-    -   [<span class="toc-section-number">15.1</span> NCGBX](#ncgbx)
-        -   [<span class="toc-section-number">15.1.1</span> SetMonomialOrder](#setmonomialorder)
-        -   [<span class="toc-section-number">15.1.2</span> SetKnowns](#setknowns)
-        -   [<span class="toc-section-number">15.1.3</span> SetUnknowns](#setunknowns)
-        -   [<span class="toc-section-number">15.1.4</span> ClearMonomialOrder](#clearmonomialorder)
-        -   [<span class="toc-section-number">15.1.5</span> GetMonomialOrder](#getmonomialorder)
-        -   [<span class="toc-section-number">15.1.6</span> PrintMonomialOrder](#printmonomialorder)
-        -   [<span class="toc-section-number">15.1.7</span> NCMakeGB](#ncmakegb)
-        -   [<span class="toc-section-number">15.1.8</span> NCProcess](#ncprocess)
-        -   [<span class="toc-section-number">15.1.9</span> NCGBSimplifyRational](#ncgbsimplifyrational)
-        -   [<span class="toc-section-number">15.1.10</span> NCReduce](#ncreduce)
-    -   [<span class="toc-section-number">15.2</span> NCPolyGroebner](#ncpolygroebner)
-        -   [<span class="toc-section-number">15.2.1</span> NCPolyGroebner](#ncpolygroebner-1)
-    -   [<span class="toc-section-number">15.3</span> NCGB](#ncgb)
--   [<span class="toc-section-number">16</span> Semidefinite Programming Algorithms](#semidefinite-programming-algorithms)
-    -   [<span class="toc-section-number">16.1</span> NCSDP](#ncsdp)
-        -   [<span class="toc-section-number">16.1.1</span> NCSDP](#ncsdp-1)
-        -   [<span class="toc-section-number">16.1.2</span> NCSDPForm](#ncsdpform)
-        -   [<span class="toc-section-number">16.1.3</span> NCSDPDual](#ncsdpdual)
-        -   [<span class="toc-section-number">16.1.4</span> NCSDPDualForm](#ncsdpdualform)
-    -   [<span class="toc-section-number">16.2</span> SDP](#sdp)
-        -   [<span class="toc-section-number">16.2.1</span> SDPMatrices](#sdpmatrices)
-        -   [<span class="toc-section-number">16.2.2</span> SDPSolve](#sdpsolve)
-        -   [<span class="toc-section-number">16.2.3</span> SDPEval](#sdpeval)
-        -   [<span class="toc-section-number">16.2.4</span> SDPPrimalEval](#sdpprimaleval)
-        -   [<span class="toc-section-number">16.2.5</span> SDPDualEval](#sdpdualeval)
-        -   [<span class="toc-section-number">16.2.6</span> SDPSylvesterEval](#sdpsylvestereval)
-    -   [<span class="toc-section-number">16.3</span> SDPFlat](#sdpflat)
-        -   [<span class="toc-section-number">16.3.1</span> SDPFlatData](#sdpflatdata)
-        -   [<span class="toc-section-number">16.3.2</span> SDPFlatPrimalEval](#sdpflatprimaleval)
-        -   [<span class="toc-section-number">16.3.3</span> SDPFlatDualEval](#sdpflatdualeval)
-        -   [<span class="toc-section-number">16.3.4</span> SDPFlatSylvesterEval](#sdpflatsylvestereval)
-    -   [<span class="toc-section-number">16.4</span> SDPSylvester](#sdpsylvester)
-        -   [<span class="toc-section-number">16.4.1</span> SDPEval](#sdpeval-1)
-        -   [<span class="toc-section-number">16.4.2</span> SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
-        -   [<span class="toc-section-number">16.4.3</span> SDPSylvesterDualEval](#sdpsylvesterdualeval)
-        -   [<span class="toc-section-number">16.4.4</span> SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
-    -   [<span class="toc-section-number">16.5</span> PrimalDual](#primaldual)
-        -   [<span class="toc-section-number">16.5.1</span> PrimalDual](#primaldual-1)
-    -   [<span class="toc-section-number">16.6</span> NCPolySOS](#ncpolysos)
-        -   [<span class="toc-section-number">16.6.1</span> NCPolySOS](#ncpolysos-1)
-        -   [<span class="toc-section-number">16.6.2</span> NCPolySOSToSDP](#ncpolysostosdp)
--   [<span class="toc-section-number">17</span> Work in Progress](#work-in-progress)
-    -   [<span class="toc-section-number">17.1</span> NCRational](#ncrational)
-        -   [<span class="toc-section-number">17.1.1</span> State-space realizations for NC rationals](#state-space-realizations-for-nc-rationals)
-        -   [<span class="toc-section-number">17.1.2</span> Utilities](#utilities-1)
-        -   [<span class="toc-section-number">17.1.3</span> Operations on NC rationals](#operations-on-nc-rationals)
-        -   [<span class="toc-section-number">17.1.4</span> Minimal realizations](#minimal-realizations)
-    -   [<span class="toc-section-number">17.2</span> NCRealization](#ncrealization)
-        -   [<span class="toc-section-number">17.2.1</span> NCDescriptorRealization](#ncdescriptorrealization)
-        -   [<span class="toc-section-number">17.2.2</span> NCDeterminantalRepresentationReciprocal](#ncdeterminantalrepresentationreciprocal)
-        -   [<span class="toc-section-number">17.2.3</span> NCMatrixDescriptorRealization](#ncmatrixdescriptorrealization)
-        -   [<span class="toc-section-number">17.2.4</span> NCMinimalDescriptorRealization](#ncminimaldescriptorrealization)
-        -   [<span class="toc-section-number">17.2.5</span> NCSymmetricDescriptorRealization](#ncsymmetricdescriptorrealization)
-        -   [<span class="toc-section-number">17.2.6</span> NCSymmetricDeterminantalRepresentationDirect](#ncsymmetricdeterminantalrepresentationdirect)
-        -   [<span class="toc-section-number">17.2.7</span> NCSymmetricDeterminantalRepresentationReciprocal](#ncsymmetricdeterminantalrepresentationreciprocal)
-        -   [<span class="toc-section-number">17.2.8</span> NCSymmetrizeMinimalDescriptorRealization](#ncsymmetrizeminimaldescriptorrealization)
-        -   [<span class="toc-section-number">17.2.9</span> NonCommutativeLift](#noncommutativelift)
-        -   [<span class="toc-section-number">17.2.10</span> SignatureOfAffineTerm](#signatureofaffineterm)
-        -   [<span class="toc-section-number">17.2.11</span> TestDescriptorRealization](#testdescriptorrealization)
-        -   [<span class="toc-section-number">17.2.12</span> PinnedQ](#pinnedq)
-        -   [<span class="toc-section-number">17.2.13</span> PinningSpace](#pinningspace)
--   [References](#references)
+- <a href="#acknowledgements" id="toc-acknowledgements"><span class="toc-section-number">1</span> Acknowledgements</a>
+- <a href="#changes-in-version-60" id="toc-Version6_0"><span class="toc-section-number">2</span> Changes in Version 6.0</a>
+  - <a href="#version-600" id="toc-Version6_0_0"><span class="toc-section-number">2.1</span> Version 6.0.0</a>
+- <a href="#changes-in-version-50" id="toc-Version5_0"><span class="toc-section-number">3</span> Changes in Version 5.0</a>
+  - <a href="#version-506" id="toc-Version5_0_6"><span class="toc-section-number">3.1</span> Version 5.0.6</a>
+  - <a href="#version-505" id="toc-Version5_0_5"><span class="toc-section-number">3.2</span> Version 5.0.5</a>
+  - <a href="#version-504" id="toc-Version5_0_4"><span class="toc-section-number">3.3</span> Version 5.0.4</a>
+  - <a href="#version-503" id="toc-Version5_0_3"><span class="toc-section-number">3.4</span> Version 5.0.3</a>
+  - <a href="#version-502" id="toc-Version5_0_2"><span class="toc-section-number">3.5</span> Version 5.0.2</a>
+  - <a href="#version-501" id="toc-Version5_0_1"><span class="toc-section-number">3.6</span> Version 5.0.1</a>
+  - <a href="#version-500" id="toc-Version5_0_0"><span class="toc-section-number">3.7</span> Version 5.0.0</a>
+- <a href="#introduction" id="toc-UserGuideIntroduction"><span class="toc-section-number">4</span> Introduction</a>
+  - <a href="#running-ncalgebra" id="toc-RunningNCAlgebra"><span class="toc-section-number">4.1</span> Running NCAlgebra</a>
+  - <a href="#now-what" id="toc-now-what"><span class="toc-section-number">4.2</span> Now what?</a>
+  - <a href="#testing" id="toc-testing"><span class="toc-section-number">4.3</span> Testing</a>
+  - <a href="#pre-2017-ncgb-c-version" id="toc-pre-2017-ncgb-c-version"><span class="toc-section-number">4.4</span> Pre-2017 NCGB C++ version</a>
+- <a href="#most-basic-commands" id="toc-MostBasicCommands"><span class="toc-section-number">5</span> Most Basic Commands</a>
+  - <a href="#to-commute-or-not-to-commute" id="toc-to-commute-or-not-to-commute"><span class="toc-section-number">5.1</span> To Commute Or Not To Commute?</a>
+  - <a href="#inverses" id="toc-inverses"><span class="toc-section-number">5.2</span> Inverses</a>
+  - <a href="#transposes-and-adjoints" id="toc-transposes-and-adjoints"><span class="toc-section-number">5.3</span> Transposes and Adjoints</a>
+  - <a href="#replace" id="toc-replace"><span class="toc-section-number">5.4</span> Replace</a>
+  - <a href="#polynomials" id="toc-polynomials"><span class="toc-section-number">5.5</span> Polynomials</a>
+  - <a href="#rationals-and-simplification" id="toc-rationals-and-simplification"><span class="toc-section-number">5.6</span> Rationals and Simplification</a>
+  - <a href="#calculus" id="toc-calculus"><span class="toc-section-number">5.7</span> Calculus</a>
+  - <a href="#matrices" id="toc-BasicMatrices"><span class="toc-section-number">5.8</span> Matrices</a>
+    - <a href="#inverses-products-adjoints-etc" id="toc-BasicMatrices:Inverses"><span class="toc-section-number">5.8.1</span> Inverses, products, adjoints, etc</a>
+    - <a href="#lu-decomposition" id="toc-BasicMatrices:LUDecomposition"><span class="toc-section-number">5.8.2</span> LU Decomposition</a>
+    - <a href="#lu-decomposition-with-complete-pivoting" id="toc-BasicMatrices:LUDecompositionWithCompletePivoting"><span class="toc-section-number">5.8.3</span> LU Decomposition with complete pivoting</a>
+    - <a href="#ldl-decomposition" id="toc-BasicMatrices:LDLDecomposition"><span class="toc-section-number">5.8.4</span> LDL Decomposition</a>
+    - <a href="#replace-with-matrices" id="toc-ReplaceWithMatrices"><span class="toc-section-number">5.8.5</span> Replace with matrices</a>
+  - <a href="#quadratic-polynomials-second-direction-derivatives-and-convexity" id="toc-Quadratic"><span class="toc-section-number">5.9</span> Quadratic polynomials, second direction derivatives and convexity</a>
+- <a href="#more-advanced-commands" id="toc-MoreAdvancedCommands"><span class="toc-section-number">6</span> More Advanced Commands</a>
+  - <a href="#advanced-rules-and-replacements" id="toc-AdvancedReplace"><span class="toc-section-number">6.1</span> Advanced Rules and Replacements</a>
+    - <a href="#replaceall-and-replacerepeated-often-fail" id="toc-replaceall-.-and-replacerepeated-.-often-fail"><span class="toc-section-number">6.1.1</span> <code>ReplaceAll</code> (<code>/.</code>) and <code>ReplaceRepeated</code> (<code>//.</code>) often fail</a>
+    - <a href="#the-fix-is-ncreplace" id="toc-the-fix-is-ncreplace"><span class="toc-section-number">6.1.2</span> The fix is <code>NCReplace</code></a>
+    - <a href="#matching-monomials-with-powers" id="toc-matching-monomials-with-powers"><span class="toc-section-number">6.1.3</span> Matching monomials with powers</a>
+    - <a href="#trouble-with-block-and-module" id="toc-trouble-with-block-and-module"><span class="toc-section-number">6.1.4</span> Trouble with <code>Block</code> and <code>Module</code></a>
+  - <a href="#expanding-matrix-products" id="toc-AdvancedMatrices"><span class="toc-section-number">6.2</span> Expanding matrix products</a>
+    - <a href="#trouble-with-plus-and-matrices" id="toc-trouble-with-plus-and-matrices"><span class="toc-section-number">6.2.1</span> Trouble with <code>Plus</code> (<code>+</code>) and matrices</a>
+  - <a href="#polynomials-with-commutative-coefficients" id="toc-PolysWithCommutativeCoefficients"><span class="toc-section-number">6.3</span> Polynomials with commutative coefficients</a>
+  - <a href="#polynomials-with-noncommutative-coefficients" id="toc-polynomials-with-noncommutative-coefficients"><span class="toc-section-number">6.4</span> Polynomials with noncommutative coefficients</a>
+  - <a href="#linear-polynomials" id="toc-Linear"><span class="toc-section-number">6.5</span> Linear polynomials</a>
+- <a href="#noncommutative-gröbner-basis" id="toc-NCGB"><span class="toc-section-number">7</span> Noncommutative Gröbner Basis</a>
+  - <a href="#what-is-a-gröbner-basis" id="toc-what-is-a-gröbner-basis"><span class="toc-section-number">7.1</span> What is a Gröbner Basis?</a>
+  - <a href="#solving-equations" id="toc-solving-equations"><span class="toc-section-number">7.2</span> Solving equations</a>
+  - <a href="#a-slightly-more-challenging-example" id="toc-a-slightly-more-challenging-example"><span class="toc-section-number">7.3</span> A slightly more challenging example</a>
+  - <a href="#simplifying-polynomial-expresions" id="toc-simplifying-polynomial-expresions"><span class="toc-section-number">7.4</span> Simplifying polynomial expresions</a>
+  - <a href="#minimal-versus-reduced-gröbner-basis" id="toc-minimal-versus-reduced-gröbner-basis"><span class="toc-section-number">7.5</span> Minimal versus reduced Gröbner Basis</a>
+  - <a href="#simplifying-rational-expresions" id="toc-simplifying-rational-expresions"><span class="toc-section-number">7.6</span> Simplifying rational expresions</a>
+  - <a href="#simplification-with-ncgbsimplifyrational" id="toc-simplification-with-ncgbsimplifyrational"><span class="toc-section-number">7.7</span> Simplification with NCGBSimplifyRational</a>
+  - <a href="#ordering-on-variables-and-monomials" id="toc-Orderings"><span class="toc-section-number">7.8</span> Ordering on variables and monomials</a>
+    - <a href="#lex-order-the-simplest-elimination-order" id="toc-lex-order-the-simplest-elimination-order"><span class="toc-section-number">7.8.1</span> Lex Order: the simplest elimination order</a>
+    - <a href="#graded-lex-ordering-a-non-elimination-order" id="toc-graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">7.8.2</span> Graded lex ordering: a non-elimination order</a>
+    - <a href="#multigraded-lex-ordering-a-variety-of-elimination-orders" id="toc-multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">7.8.3</span> Multigraded lex ordering: a variety of elimination orders</a>
+  - <a href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem" id="toc-a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span class="toc-section-number">7.9</span> A complete example: the partially prescribed matrix inverse problem</a>
+- <a href="#semidefinite-programming" id="toc-SemidefiniteProgramming"><span class="toc-section-number">8</span> Semidefinite Programming</a>
+  - <a href="#semidefinite-programs-in-matrix-variables" id="toc-semidefinite-programs-in-matrix-variables"><span class="toc-section-number">8.1</span> Semidefinite Programs in Matrix Variables</a>
+  - <a href="#semidefinite-programs-in-vector-variables" id="toc-semidefinite-programs-in-vector-variables"><span class="toc-section-number">8.2</span> Semidefinite Programs in Vector Variables</a>
+- <a href="#pretty-output-with-notebooks-and" id="toc-TeX"><span class="toc-section-number">9</span> Pretty Output with Notebooks and TeX </a>
+  - <a href="#pretty-output" id="toc-Pretty_Output"><span class="toc-section-number">9.1</span> Pretty Output</a>
+  - <a href="#using-nctex" id="toc-Using_NCTeX"><span class="toc-section-number">9.2</span> Using NCTeX</a>
+    - <a href="#nctex-options" id="toc-NCTeX_Options"><span class="toc-section-number">9.2.1</span> NCTeX Options</a>
+  - <a href="#using-nctexform" id="toc-Using_NCTeXForm"><span class="toc-section-number">9.3</span> Using NCTeXForm</a>
+- <a href="#reference-manual" id="toc-ReferenceIntroduction"><span class="toc-section-number">10</span> Reference Manual</a>
+  - <a href="#nc" id="toc-PackageNC"><span class="toc-section-number">10.1</span> NC</a>
+    - <a href="#options" id="toc-PackageNCOptions"><span class="toc-section-number">10.1.1</span> Options</a>
+  - <a href="#ncalgebra" id="toc-PackageNCAlgebra"><span class="toc-section-number">10.2</span> NCAlgebra</a>
+    - <a href="#messages" id="toc-NCAlgebraMessages"><span class="toc-section-number">10.2.1</span> Messages</a>
+- <a href="#packages-for-manipulating-nc-expressions" id="toc-ManipulatingNCExpressions"><span class="toc-section-number">11</span> Packages for manipulating NC expressions</a>
+  - <a href="#noncommutativemultiply" id="toc-PackageNonCommutativeMultiply"><span class="toc-section-number">11.1</span> NonCommutativeMultiply</a>
+    - <a href="#aj" id="toc-aj"><span class="toc-section-number">11.1.1</span> aj</a>
+    - <a href="#co" id="toc-co"><span class="toc-section-number">11.1.2</span> co</a>
+    - <a href="#id" id="toc-Id"><span class="toc-section-number">11.1.3</span> Id</a>
+    - <a href="#inv" id="toc-inv"><span class="toc-section-number">11.1.4</span> inv</a>
+    - <a href="#rt" id="toc-rt"><span class="toc-section-number">11.1.5</span> rt</a>
+    - <a href="#tp" id="toc-tp"><span class="toc-section-number">11.1.6</span> tp</a>
+    - <a href="#commutativeq" id="toc-CommutativeQ"><span class="toc-section-number">11.1.7</span> CommutativeQ</a>
+    - <a href="#noncommutativeq" id="toc-NonCommutativeQ"><span class="toc-section-number">11.1.8</span> NonCommutativeQ</a>
+    - <a href="#setcommutative" id="toc-SetCommutative"><span class="toc-section-number">11.1.9</span> SetCommutative</a>
+    - <a href="#setcommutativehold" id="toc-SetCommutativeHold"><span class="toc-section-number">11.1.10</span> SetCommutativeHold</a>
+    - <a href="#setnoncommutative" id="toc-SetNonCommutative"><span class="toc-section-number">11.1.11</span> SetNonCommutative</a>
+    - <a href="#setnoncommutativehold" id="toc-SetNonCommutativeHold"><span class="toc-section-number">11.1.12</span> SetNonCommutativeHold</a>
+    - <a href="#setcommutativefunction" id="toc-SetCommutativeFunction"><span class="toc-section-number">11.1.13</span> SetCommutativeFunction</a>
+    - <a href="#snc" id="toc-SNC"><span class="toc-section-number">11.1.14</span> SNC</a>
+    - <a href="#setcommutingoperators" id="toc-SetCommutingOperators"><span class="toc-section-number">11.1.15</span> SetCommutingOperators</a>
+    - <a href="#unsetcommutingoperators" id="toc-UnsetCommutingOperators"><span class="toc-section-number">11.1.16</span> UnsetCommutingOperators</a>
+    - <a href="#commutingoperatorsq" id="toc-CommutingOperatorsQ"><span class="toc-section-number">11.1.17</span> CommutingOperatorsQ</a>
+    - <a href="#commutative" id="toc-Commutative"><span class="toc-section-number">11.1.18</span> Commutative</a>
+    - <a href="#commuteeverything" id="toc-CommuteEverything"><span class="toc-section-number">11.1.19</span> CommuteEverything</a>
+    - <a href="#begincommuteeverything" id="toc-BeginCommuteEverything"><span class="toc-section-number">11.1.20</span> BeginCommuteEverything</a>
+    - <a href="#endcommuteeverything" id="toc-EndCommuteEverything"><span class="toc-section-number">11.1.21</span> EndCommuteEverything</a>
+    - <a href="#expandnoncommutativemultiply" id="toc-ExpandNonCommutativeMultiply"><span class="toc-section-number">11.1.22</span> ExpandNonCommutativeMultiply</a>
+    - <a href="#ncexpand" id="toc-NCExpand"><span class="toc-section-number">11.1.23</span> NCExpand</a>
+    - <a href="#nce" id="toc-NCE"><span class="toc-section-number">11.1.24</span> NCE</a>
+    - <a href="#ncexpandexponents" id="toc-NCExpandExponents"><span class="toc-section-number">11.1.25</span> NCExpandExponents</a>
+    - <a href="#nctolist" id="toc-NCToList"><span class="toc-section-number">11.1.26</span> NCToList</a>
+  - <a href="#nctr" id="toc-PackageNCTr"><span class="toc-section-number">11.2</span> NCTr</a>
+    - <a href="#tr" id="toc-tr"><span class="toc-section-number">11.2.1</span> tr</a>
+    - <a href="#sortcyclicpermutation" id="toc-SortCyclicPermutation"><span class="toc-section-number">11.2.2</span> SortCyclicPermutation</a>
+    - <a href="#sortedcyclicpermutationq" id="toc-SortedCyclicPermutationQ"><span class="toc-section-number">11.2.3</span> SortedCyclicPermutationQ</a>
+  - <a href="#nccollect" id="toc-PackageNCCollect"><span class="toc-section-number">11.3</span> NCCollect</a>
+    - <a href="#nccollect-1" id="toc-NCCollect"><span class="toc-section-number">11.3.1</span> NCCollect</a>
+    - <a href="#nccollectexponents" id="toc-NCCollectExponents"><span class="toc-section-number">11.3.2</span> NCCollectExponents</a>
+    - <a href="#nccollectselfadjoint" id="toc-NCCollectSelfAdjoint"><span class="toc-section-number">11.3.3</span> NCCollectSelfAdjoint</a>
+    - <a href="#nccollectsymmetric" id="toc-NCCollectSymmetric"><span class="toc-section-number">11.3.4</span> NCCollectSymmetric</a>
+    - <a href="#ncstrongcollect" id="toc-NCStrongCollect"><span class="toc-section-number">11.3.5</span> NCStrongCollect</a>
+    - <a href="#ncstrongcollectselfadjoint" id="toc-NCStrongCollectSelfAdjoint"><span class="toc-section-number">11.3.6</span> NCStrongCollectSelfAdjoint</a>
+    - <a href="#ncstrongcollectsymmetric" id="toc-NCStrongCollectSymmetric"><span class="toc-section-number">11.3.7</span> NCStrongCollectSymmetric</a>
+    - <a href="#nccompose" id="toc-NCCompose"><span class="toc-section-number">11.3.8</span> NCCompose</a>
+    - <a href="#ncdecompose" id="toc-NCDecompose"><span class="toc-section-number">11.3.9</span> NCDecompose</a>
+    - <a href="#nctermsofdegree" id="toc-NCTermsOfDegree"><span class="toc-section-number">11.3.10</span> NCTermsOfDegree</a>
+    - <a href="#nctermsoftotaldegree" id="toc-NCTermsOfTotalDegree"><span class="toc-section-number">11.3.11</span> NCTermsOfTotalDegree</a>
+  - <a href="#ncreplace" id="toc-PackageNCReplace"><span class="toc-section-number">11.4</span> NCReplace</a>
+    - <a href="#ncreplace-1" id="toc-NCReplace"><span class="toc-section-number">11.4.1</span> NCReplace</a>
+    - <a href="#ncreplaceall" id="toc-NCReplaceAll"><span class="toc-section-number">11.4.2</span> NCReplaceAll</a>
+    - <a href="#ncreplacelist" id="toc-NCReplaceList"><span class="toc-section-number">11.4.3</span> NCReplaceList</a>
+    - <a href="#ncreplacerepeated" id="toc-NCReplaceRepeated"><span class="toc-section-number">11.4.4</span> NCReplaceRepeated</a>
+    - <a href="#ncr" id="toc-NCR"><span class="toc-section-number">11.4.5</span> NCR</a>
+    - <a href="#ncra" id="toc-NCRA"><span class="toc-section-number">11.4.6</span> NCRA</a>
+    - <a href="#ncrr" id="toc-NCRR"><span class="toc-section-number">11.4.7</span> NCRR</a>
+    - <a href="#ncrl" id="toc-NCRL"><span class="toc-section-number">11.4.8</span> NCRL</a>
+    - <a href="#ncmakerulesymmetric" id="toc-NCMakeRuleSymmetric"><span class="toc-section-number">11.4.9</span> NCMakeRuleSymmetric</a>
+    - <a href="#ncmakeruleselfadjoint" id="toc-NCMakeRuleSelfAdjoint"><span class="toc-section-number">11.4.10</span> NCMakeRuleSelfAdjoint</a>
+    - <a href="#ncreplacesymmetric" id="toc-NCReplaceSymmetric"><span class="toc-section-number">11.4.11</span> NCReplaceSymmetric</a>
+    - <a href="#ncreplaceallsymmetric" id="toc-NCReplaceAllSymmetric"><span class="toc-section-number">11.4.12</span> NCReplaceAllSymmetric</a>
+    - <a href="#ncreplacerepeatedsymmetric" id="toc-NCReplaceRepeatedSymmetric"><span class="toc-section-number">11.4.13</span> NCReplaceRepeatedSymmetric</a>
+    - <a href="#ncreplacelistsymmetric" id="toc-NCReplaceListSymmetric"><span class="toc-section-number">11.4.14</span> NCReplaceListSymmetric</a>
+    - <a href="#ncrsym" id="toc-NCRSym"><span class="toc-section-number">11.4.15</span> NCRSym</a>
+    - <a href="#ncrasym" id="toc-NCRASym"><span class="toc-section-number">11.4.16</span> NCRASym</a>
+    - <a href="#ncrrsym" id="toc-NCRRSym"><span class="toc-section-number">11.4.17</span> NCRRSym</a>
+    - <a href="#ncrlsym" id="toc-NCRLSym"><span class="toc-section-number">11.4.18</span> NCRLSym</a>
+    - <a href="#ncreplaceselfadjoint" id="toc-NCReplaceSelfAdjoint"><span class="toc-section-number">11.4.19</span> NCReplaceSelfAdjoint</a>
+    - <a href="#ncreplaceallselfadjoint" id="toc-NCReplaceAllSelfAdjoint"><span class="toc-section-number">11.4.20</span> NCReplaceAllSelfAdjoint</a>
+    - <a href="#ncreplacerepeatedselfadjoint" id="toc-NCReplaceRepeatedSelfAdjoint"><span class="toc-section-number">11.4.21</span> NCReplaceRepeatedSelfAdjoint</a>
+    - <a href="#ncreplacelistselfadjoint" id="toc-NCReplaceListSelfAdjoint"><span class="toc-section-number">11.4.22</span> NCReplaceListSelfAdjoint</a>
+    - <a href="#ncrsa" id="toc-NCRSA"><span class="toc-section-number">11.4.23</span> NCRSA</a>
+    - <a href="#ncrasa" id="toc-NCRASA"><span class="toc-section-number">11.4.24</span> NCRASA</a>
+    - <a href="#ncrrsa" id="toc-NCRRSA"><span class="toc-section-number">11.4.25</span> NCRRSA</a>
+    - <a href="#ncrlsa" id="toc-NCRLSA"><span class="toc-section-number">11.4.26</span> NCRLSA</a>
+    - <a href="#ncmatrixexpand" id="toc-NCMatrixExpand"><span class="toc-section-number">11.4.27</span> NCMatrixExpand</a>
+    - <a href="#ncmatrixreplaceall" id="toc-NCMatrixReplaceAll"><span class="toc-section-number">11.4.28</span> NCMatrixReplaceAll</a>
+    - <a href="#ncmatrixreplacerepeated" id="toc-NCMatrixReplaceRepeated"><span class="toc-section-number">11.4.29</span> NCMatrixReplaceRepeated</a>
+    - <a href="#ncreplacepowerrule" id="toc-NCReplacePowerRule"><span class="toc-section-number">11.4.30</span> NCReplacePowerRule</a>
+  - <a href="#ncselfadjoint" id="toc-PackageNCSelfAdjoint"><span class="toc-section-number">11.5</span> NCSelfAdjoint</a>
+    - <a href="#ncsymmetricq" id="toc-NCSymmetricQ"><span class="toc-section-number">11.5.1</span> NCSymmetricQ</a>
+    - <a href="#ncsymmetrictest" id="toc-NCSymmetricTest"><span class="toc-section-number">11.5.2</span> NCSymmetricTest</a>
+    - <a href="#ncsymmetricpart" id="toc-NCSymmetricPart"><span class="toc-section-number">11.5.3</span> NCSymmetricPart</a>
+    - <a href="#ncselfadjointq" id="toc-NCSelfAdjointQ"><span class="toc-section-number">11.5.4</span> NCSelfAdjointQ</a>
+    - <a href="#ncselfadjointtest" id="toc-NCSelfAdjointTest"><span class="toc-section-number">11.5.5</span> NCSelfAdjointTest</a>
+  - <a href="#ncsimplifyrational" id="toc-PackageNCSimplifyRational"><span class="toc-section-number">11.6</span> NCSimplifyRational</a>
+    - <a href="#ncnormalizeinverse" id="toc-NCNormalizeInverse"><span class="toc-section-number">11.6.1</span> NCNormalizeInverse</a>
+    - <a href="#ncsimplifyrational-1" id="toc-NCSimplifyRational"><span class="toc-section-number">11.6.2</span> NCSimplifyRational</a>
+    - <a href="#ncsr" id="toc-NCSR"><span class="toc-section-number">11.6.3</span> NCSR</a>
+    - <a href="#ncsimplifyrationalsinglepass" id="toc-NCSimplifyRationalSinglePass"><span class="toc-section-number">11.6.4</span> NCSimplifyRationalSinglePass</a>
+    - <a href="#ncpresimplifyrational" id="toc-NCPreSimplifyRational"><span class="toc-section-number">11.6.5</span> NCPreSimplifyRational</a>
+    - <a href="#ncpresimplifyrationalsinglepass" id="toc-NCPreSimplifyRationalSinglePass"><span class="toc-section-number">11.6.6</span> NCPreSimplifyRationalSinglePass</a>
+  - <a href="#ncdiff" id="toc-PackageNCDiff"><span class="toc-section-number">11.7</span> NCDiff</a>
+    - <a href="#ncdirectionald" id="toc-NCDirectionalD"><span class="toc-section-number">11.7.1</span> NCDirectionalD</a>
+    - <a href="#ncgrad" id="toc-NCGrad"><span class="toc-section-number">11.7.2</span> NCGrad</a>
+    - <a href="#nchessian" id="toc-NCHessian"><span class="toc-section-number">11.7.3</span> NCHessian</a>
+    - <a href="#directionald" id="toc-DirectionalD"><span class="toc-section-number">11.7.4</span> DirectionalD</a>
+    - <a href="#ncintegrate" id="toc-NCIntegrate"><span class="toc-section-number">11.7.5</span> NCIntegrate</a>
+  - <a href="#ncconvexity" id="toc-PackageNCConvexity"><span class="toc-section-number">11.8</span> NCConvexity</a>
+    - <a href="#ncindependent" id="toc-NCIndependent"><span class="toc-section-number">11.8.1</span> NCIndependent</a>
+    - <a href="#ncconvexityregion" id="toc-NCConvexityRegion"><span class="toc-section-number">11.8.2</span> NCConvexityRegion</a>
+- <a href="#packages-for-manipulating-nc-block-matrices" id="toc-packages-for-manipulating-nc-block-matrices"><span class="toc-section-number">12</span> Packages for manipulating NC block matrices</a>
+  - <a href="#ncdot" id="toc-PackageNCDot"><span class="toc-section-number">12.1</span> NCDot</a>
+    - <a href="#tpmat" id="toc-tpMat"><span class="toc-section-number">12.1.1</span> tpMat</a>
+    - <a href="#ajmat" id="toc-ajMat"><span class="toc-section-number">12.1.2</span> ajMat</a>
+    - <a href="#comat" id="toc-coMat"><span class="toc-section-number">12.1.3</span> coMat</a>
+    - <a href="#ncdot-1" id="toc-NCDot"><span class="toc-section-number">12.1.4</span> NCDot</a>
+    - <a href="#ncinverse" id="toc-NCInverse"><span class="toc-section-number">12.1.5</span> NCInverse</a>
+  - <a href="#ncmatrixdecompositions" id="toc-PackageNCMatrixDecompositions"><span class="toc-section-number">12.2</span> NCMatrixDecompositions</a>
+    - <a href="#ncludecompositionwithpartialpivoting" id="toc-NCLUDecompositionWithPartialPivoting"><span class="toc-section-number">12.2.1</span> NCLUDecompositionWithPartialPivoting</a>
+    - <a href="#ncludecompositionwithcompletepivoting" id="toc-NCLUDecompositionWithCompletePivoting"><span class="toc-section-number">12.2.2</span> NCLUDecompositionWithCompletePivoting</a>
+    - <a href="#ncldldecomposition" id="toc-NCLDLDecomposition"><span class="toc-section-number">12.2.3</span> NCLDLDecomposition</a>
+    - <a href="#ncuppertriangularsolve" id="toc-NCUpperTriangularSolve"><span class="toc-section-number">12.2.4</span> NCUpperTriangularSolve</a>
+    - <a href="#nclowertriangularsolve" id="toc-NCLowerTriangularSolve"><span class="toc-section-number">12.2.5</span> NCLowerTriangularSolve</a>
+    - <a href="#ncluinverse" id="toc-NCLUInverse"><span class="toc-section-number">12.2.6</span> NCLUInverse</a>
+    - <a href="#nclupartialpivoting" id="toc-NCLUPartialPivoting"><span class="toc-section-number">12.2.7</span> NCLUPartialPivoting</a>
+    - <a href="#nclucompletepivoting" id="toc-NCLUCompletePivoting"><span class="toc-section-number">12.2.8</span> NCLUCompletePivoting</a>
+    - <a href="#ncleftdivide" id="toc-NCLeftDivide"><span class="toc-section-number">12.2.9</span> NCLeftDivide</a>
+    - <a href="#ncrightdivide" id="toc-NCRightDivide"><span class="toc-section-number">12.2.10</span> NCRightDivide</a>
+  - <a href="#matrixdecompositions-linear-algebra-templates" id="toc-PackageMatrixDecompositions"><span class="toc-section-number">12.3</span> MatrixDecompositions: linear algebra templates</a>
+    - <a href="#ludecompositionwithpartialpivoting" id="toc-LUDecompositionWithPartialPivoting"><span class="toc-section-number">12.3.1</span> LUDecompositionWithPartialPivoting</a>
+    - <a href="#ludecompositionwithcompletepivoting" id="toc-LUDecompositionWithCompletePivoting"><span class="toc-section-number">12.3.2</span> LUDecompositionWithCompletePivoting</a>
+    - <a href="#ldldecomposition" id="toc-LDLDecomposition"><span class="toc-section-number">12.3.3</span> LDLDecomposition</a>
+    - <a href="#uppertriangularsolve" id="toc-UpperTriangularSolve"><span class="toc-section-number">12.3.4</span> UpperTriangularSolve</a>
+    - <a href="#lowertriangularsolve" id="toc-LowerTriangularSolve"><span class="toc-section-number">12.3.5</span> LowerTriangularSolve</a>
+    - <a href="#luinverse" id="toc-LUInverse"><span class="toc-section-number">12.3.6</span> LUInverse</a>
+    - <a href="#getlumatrices" id="toc-GetLUMatrices"><span class="toc-section-number">12.3.7</span> GetLUMatrices</a>
+    - <a href="#getfulllumatrices" id="toc-GetFullLUMatrices"><span class="toc-section-number">12.3.8</span> GetFullLUMatrices</a>
+    - <a href="#getldumatrices" id="toc-GetLDUMatrices"><span class="toc-section-number">12.3.9</span> GetLDUMatrices</a>
+    - <a href="#getfullldumatrices" id="toc-GetFullLDUMatrices"><span class="toc-section-number">12.3.10</span> GetFullLDUMatrices</a>
+    - <a href="#getdiagonal" id="toc-GetDiagonal"><span class="toc-section-number">12.3.11</span> GetDiagonal</a>
+    - <a href="#lupartialpivoting" id="toc-LUPartialPivoting"><span class="toc-section-number">12.3.12</span> LUPartialPivoting</a>
+    - <a href="#lucompletepivoting" id="toc-LUCompletePivoting"><span class="toc-section-number">12.3.13</span> LUCompletePivoting</a>
+    - <a href="#lurowreduce" id="toc-LURowReduce"><span class="toc-section-number">12.3.14</span> LURowReduce</a>
+    - <a href="#lurowreduceincremental" id="toc-LURowReduceIncremental"><span class="toc-section-number">12.3.15</span> LURowReduceIncremental</a>
+- <a href="#packages-for-pretty-output-testing-and-utilities" id="toc-packages-for-pretty-output-testing-and-utilities"><span class="toc-section-number">13</span> Packages for pretty output, testing, and utilities</a>
+  - <a href="#ncoutput" id="toc-PackageNCOutput"><span class="toc-section-number">13.1</span> NCOutput</a>
+    - <a href="#ncsetoutput" id="toc-NCSetOutput"><span class="toc-section-number">13.1.1</span> NCSetOutput</a>
+  - <a href="#nctex" id="toc-PackageNCTeX"><span class="toc-section-number">13.2</span> NCTeX</a>
+    - <a href="#nctex-1" id="toc-NCTeX"><span class="toc-section-number">13.2.1</span> NCTeX</a>
+    - <a href="#ncrundvips" id="toc-NCRunDVIPS"><span class="toc-section-number">13.2.2</span> NCRunDVIPS</a>
+    - <a href="#ncrunlatex" id="toc-NCRunLaTeX"><span class="toc-section-number">13.2.3</span> NCRunLaTeX</a>
+    - <a href="#ncrunpdflatex" id="toc-NCRunPDFLaTeX"><span class="toc-section-number">13.2.4</span> NCRunPDFLaTeX</a>
+    - <a href="#ncrunpdfviewer" id="toc-NCRunPDFViewer"><span class="toc-section-number">13.2.5</span> NCRunPDFViewer</a>
+    - <a href="#ncrunps2pdf" id="toc-NCRunPS2PDF"><span class="toc-section-number">13.2.6</span> NCRunPS2PDF</a>
+  - <a href="#nctexform" id="toc-PackageNCTeXForm"><span class="toc-section-number">13.3</span> NCTeXForm</a>
+    - <a href="#nctexform-1" id="toc-NCTeXForm"><span class="toc-section-number">13.3.1</span> NCTeXForm</a>
+    - <a href="#nctexformsetstarstar" id="toc-NCTeXFormSetStarStar"><span class="toc-section-number">13.3.2</span> NCTeXFormSetStarStar</a>
+    - <a href="#nctexformsetstar" id="toc-NCTeXFormSetStar"><span class="toc-section-number">13.3.3</span> NCTeXFormSetStar</a>
+  - <a href="#ncrun" id="toc-PackageNCRun"><span class="toc-section-number">13.4</span> NCRun</a>
+    - <a href="#ncrun-1" id="toc-NCRun"><span class="toc-section-number">13.4.1</span> NCRun</a>
+  - <a href="#nctest" id="toc-PackageNCTest"><span class="toc-section-number">13.5</span> NCTest</a>
+    - <a href="#nctest-1" id="toc-NCTest"><span class="toc-section-number">13.5.1</span> NCTest</a>
+    - <a href="#nctestcheck" id="toc-NCTestCheck"><span class="toc-section-number">13.5.2</span> NCTestCheck</a>
+    - <a href="#nctestrun" id="toc-NCTestRun"><span class="toc-section-number">13.5.3</span> NCTestRun</a>
+    - <a href="#nctestsummarize" id="toc-NCTestSummarize"><span class="toc-section-number">13.5.4</span> NCTestSummarize</a>
+  - <a href="#ncdebug" id="toc-PackageNCDebug"><span class="toc-section-number">13.6</span> NCDebug</a>
+    - <a href="#ncdebug-1" id="toc-NCDebug"><span class="toc-section-number">13.6.1</span> NCDebug</a>
+  - <a href="#ncutil" id="toc-PackageNCUtil"><span class="toc-section-number">13.7</span> NCUtil</a>
+    - <a href="#ncgrabsymbols" id="toc-NCGrabSymbols"><span class="toc-section-number">13.7.1</span> NCGrabSymbols</a>
+    - <a href="#ncgrabncsymbols" id="toc-NCGrabNCSymbols"><span class="toc-section-number">13.7.2</span> NCGrabNCSymbols</a>
+    - <a href="#ncgrabfunctions" id="toc-NCGrabFunctions"><span class="toc-section-number">13.7.3</span> NCGrabFunctions</a>
+    - <a href="#ncgrabindeterminants" id="toc-NCGrabIndeterminants"><span class="toc-section-number">13.7.4</span> NCGrabIndeterminants</a>
+    - <a href="#ncvariables" id="toc-NCVariables"><span class="toc-section-number">13.7.5</span> NCVariables</a>
+    - <a href="#ncconsolidatelist" id="toc-NCConsolidateList"><span class="toc-section-number">13.7.6</span> NCConsolidateList</a>
+    - <a href="#ncconsistentq" id="toc-NCConsistentQ"><span class="toc-section-number">13.7.7</span> NCConsistentQ</a>
+    - <a href="#ncsymbolorsubscriptq" id="toc-NCSymbolOrSubscriptQ"><span class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ</a>
+    - <a href="#ncnoncommutativesymbolorsubscriptq" id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span class="toc-section-number">13.7.9</span> NCNonCommutativeSymbolOrSubscriptQ</a>
+    - <a href="#ncpowerq" id="toc-NCPowerQ"><span class="toc-section-number">13.7.10</span> NCPowerQ</a>
+    - <a href="#ncleafcount" id="toc-NCLeafCount"><span class="toc-section-number">13.7.11</span> NCLeafCount</a>
+    - <a href="#ncreplacedata" id="toc-NCReplaceData"><span class="toc-section-number">13.7.12</span> NCReplaceData</a>
+    - <a href="#nctoexpression" id="toc-NCToExpression"><span class="toc-section-number">13.7.13</span> NCToExpression</a>
+    - <a href="#notmatrixq" id="toc-NotMatrixQ"><span class="toc-section-number">13.7.14</span> NotMatrixQ</a>
+- <a href="#data-structures-for-fast-calculations" id="toc-data-structures-for-fast-calculations"><span class="toc-section-number">14</span> Data structures for fast calculations</a>
+  - <a href="#ncpoly" id="toc-PackageNCPoly"><span class="toc-section-number">14.1</span> NCPoly</a>
+    - <a href="#efficient-storage-of-nc-polynomials-with-rational-coefficients" id="toc-efficient-storage-of-nc-polynomials-with-rational-coefficients"><span class="toc-section-number">14.1.1</span> Efficient storage of NC polynomials with rational coefficients</a>
+    - <a href="#ways-to-represent-nc-polynomials" id="toc-ways-to-represent-nc-polynomials"><span class="toc-section-number">14.1.2</span> Ways to represent NC polynomials</a>
+    - <a href="#access-and-utlity-functions" id="toc-access-and-utlity-functions"><span class="toc-section-number">14.1.3</span> Access and utlity functions</a>
+    - <a href="#formating-functions" id="toc-formating-functions"><span class="toc-section-number">14.1.4</span> Formating functions</a>
+    - <a href="#arithmetic-functions" id="toc-arithmetic-functions"><span class="toc-section-number">14.1.5</span> Arithmetic functions</a>
+    - <a href="#state-space-realization-functions" id="toc-state-space-realization-functions"><span class="toc-section-number">14.1.6</span> State space realization functions</a>
+    - <a href="#auxiliary-functions" id="toc-auxiliary-functions"><span class="toc-section-number">14.1.7</span> Auxiliary functions</a>
+  - <a href="#ncpolyinterface" id="toc-PackageNCPolyInterface"><span class="toc-section-number">14.2</span> NCPolyInterface</a>
+    - <a href="#nctoncpoly" id="toc-NCToNCPoly"><span class="toc-section-number">14.2.1</span> NCToNCPoly</a>
+    - <a href="#ncpolytonc" id="toc-NCPolyToNC"><span class="toc-section-number">14.2.2</span> NCPolyToNC</a>
+    - <a href="#ncruletopoly" id="toc-NCRuleToPoly"><span class="toc-section-number">14.2.3</span> NCRuleToPoly</a>
+    - <a href="#nctorule" id="toc-NCToRule"><span class="toc-section-number">14.2.4</span> NCToRule</a>
+    - <a href="#ncmonomiallist" id="toc-NCMonomialList"><span class="toc-section-number">14.2.5</span> NCMonomialList</a>
+    - <a href="#nccoefficientrules" id="toc-NCCoefficientRules"><span class="toc-section-number">14.2.6</span> NCCoefficientRules</a>
+    - <a href="#nccoefficientlist" id="toc-NCCoefficientList"><span class="toc-section-number">14.2.7</span> NCCoefficientList</a>
+    - <a href="#nccoefficientq" id="toc-NCCoefficientQ"><span class="toc-section-number">14.2.8</span> NCCoefficientQ</a>
+    - <a href="#ncmonomialq" id="toc-NCMonomialQ"><span class="toc-section-number">14.2.9</span> NCMonomialQ</a>
+    - <a href="#ncpolynomialq" id="toc-NCPolynomialQ"><span class="toc-section-number">14.2.10</span> NCPolynomialQ</a>
+  - <a href="#ncpolynomial" id="toc-PackageNCPolynomial"><span class="toc-section-number">14.3</span> NCPolynomial</a>
+    - <a href="#efficient-storage-of-nc-polynomials-with-nc-coefficients" id="toc-efficient-storage-of-nc-polynomials-with-nc-coefficients"><span class="toc-section-number">14.3.1</span> Efficient storage of NC polynomials with nc coefficients</a>
+    - <a href="#ways-to-represent-nc-polynomials-1" id="toc-ways-to-represent-nc-polynomials-1"><span class="toc-section-number">14.3.2</span> Ways to represent NC polynomials</a>
+    - <a href="#grouping-terms-by-degree" id="toc-grouping-terms-by-degree"><span class="toc-section-number">14.3.3</span> Grouping terms by degree</a>
+    - <a href="#utilities" id="toc-utilities"><span class="toc-section-number">14.3.4</span> Utilities</a>
+    - <a href="#operations-on-nc-polynomials" id="toc-operations-on-nc-polynomials"><span class="toc-section-number">14.3.5</span> Operations on NC polynomials</a>
+  - <a href="#ncquadratic" id="toc-PackageNCQuadratic"><span class="toc-section-number">14.4</span> NCQuadratic</a>
+    - <a href="#nctoncquadratic" id="toc-NCToNCQuadratic"><span class="toc-section-number">14.4.1</span> NCToNCQuadratic</a>
+    - <a href="#ncptoncquadratic" id="toc-NCPToNCQuadratic"><span class="toc-section-number">14.4.2</span> NCPToNCQuadratic</a>
+    - <a href="#ncquadratictonc" id="toc-NCQuadraticToNC"><span class="toc-section-number">14.4.3</span> NCQuadraticToNC</a>
+    - <a href="#ncquadratictoncpolynomial" id="toc-NCQuadraticToNCPolynomial"><span class="toc-section-number">14.4.4</span> NCQuadraticToNCPolynomial</a>
+    - <a href="#ncmatrixofquadratic" id="toc-NCMatrixOfQuadratic"><span class="toc-section-number">14.4.5</span> NCMatrixOfQuadratic</a>
+    - <a href="#ncquadraticmakesymmetric" id="toc-NCQuadraticMakeSymmetric"><span class="toc-section-number">14.4.6</span> NCQuadraticMakeSymmetric</a>
+  - <a href="#ncsylvester" id="toc-PackageNCSylvester"><span class="toc-section-number">14.5</span> NCSylvester</a>
+    - <a href="#nctoncsylvester" id="toc-NCToNCSylvester"><span class="toc-section-number">14.5.1</span> NCToNCSylvester</a>
+    - <a href="#ncptoncsylvester" id="toc-NCPToNCSylvester"><span class="toc-section-number">14.5.2</span> NCPToNCSylvester</a>
+    - <a href="#ncsylvestertonc" id="toc-NCSylvesterToNC"><span class="toc-section-number">14.5.3</span> NCSylvesterToNC</a>
+    - <a href="#ncsylvestertoncpolynomial" id="toc-NCSylvesterToNCPolynomial"><span class="toc-section-number">14.5.4</span> NCSylvesterToNCPolynomial</a>
+- <a href="#noncommutative-gröbner-bases-algorithms" id="toc-NCGBChapter"><span class="toc-section-number">15</span> Noncommutative Gröbner Bases Algorithms</a>
+  - <a href="#ncgbx" id="toc-PackageNCGBX"><span class="toc-section-number">15.1</span> NCGBX</a>
+    - <a href="#setmonomialorder" id="toc-SetMonomialOrder"><span class="toc-section-number">15.1.1</span> SetMonomialOrder</a>
+    - <a href="#setknowns" id="toc-SetKnowns"><span class="toc-section-number">15.1.2</span> SetKnowns</a>
+    - <a href="#setunknowns" id="toc-SetUnknowns"><span class="toc-section-number">15.1.3</span> SetUnknowns</a>
+    - <a href="#clearmonomialorder" id="toc-ClearMonomialOrder"><span class="toc-section-number">15.1.4</span> ClearMonomialOrder</a>
+    - <a href="#getmonomialorder" id="toc-GetMonomialOrder"><span class="toc-section-number">15.1.5</span> GetMonomialOrder</a>
+    - <a href="#printmonomialorder" id="toc-PrintMonomialOrder"><span class="toc-section-number">15.1.6</span> PrintMonomialOrder</a>
+    - <a href="#ncmakegb" id="toc-NCMakeGB"><span class="toc-section-number">15.1.7</span> NCMakeGB</a>
+    - <a href="#ncprocess" id="toc-NCProcess"><span class="toc-section-number">15.1.8</span> NCProcess</a>
+    - <a href="#ncgbsimplifyrational" id="toc-NCGBSimplifyRational"><span class="toc-section-number">15.1.9</span> NCGBSimplifyRational</a>
+    - <a href="#ncreduce" id="toc-NCReduce"><span class="toc-section-number">15.1.10</span> NCReduce</a>
+  - <a href="#ncpolygroebner" id="toc-PackageNCPolyGroebner"><span class="toc-section-number">15.2</span> NCPolyGroebner</a>
+    - <a href="#ncpolygroebner-1" id="toc-NCPolyGroebner"><span class="toc-section-number">15.2.1</span> NCPolyGroebner</a>
+  - <a href="#ncgb" id="toc-PackageNCGB"><span class="toc-section-number">15.3</span> NCGB</a>
+- <a href="#semidefinite-programming-algorithms" id="toc-SDPChapter"><span class="toc-section-number">16</span> Semidefinite Programming Algorithms</a>
+  - <a href="#ncsdp" id="toc-PackageNCSDP"><span class="toc-section-number">16.1</span> NCSDP</a>
+    - <a href="#ncsdp-1" id="toc-NCSDP"><span class="toc-section-number">16.1.1</span> NCSDP</a>
+    - <a href="#ncsdpform" id="toc-NCSDPForm"><span class="toc-section-number">16.1.2</span> NCSDPForm</a>
+    - <a href="#ncsdpdual" id="toc-NCSDPDual"><span class="toc-section-number">16.1.3</span> NCSDPDual</a>
+    - <a href="#ncsdpdualform" id="toc-NCSDPDualForm"><span class="toc-section-number">16.1.4</span> NCSDPDualForm</a>
+  - <a href="#sdp" id="toc-PackageSDP"><span class="toc-section-number">16.2</span> SDP</a>
+    - <a href="#sdpmatrices" id="toc-SDPMatrices"><span class="toc-section-number">16.2.1</span> SDPMatrices</a>
+    - <a href="#sdpsolve" id="toc-SDPSolve"><span class="toc-section-number">16.2.2</span> SDPSolve</a>
+    - <a href="#sdpeval" id="toc-SDPEval"><span class="toc-section-number">16.2.3</span> SDPEval</a>
+    - <a href="#sdpprimaleval" id="toc-SDPPrimalEval"><span class="toc-section-number">16.2.4</span> SDPPrimalEval</a>
+    - <a href="#sdpdualeval" id="toc-SDPDualEval"><span class="toc-section-number">16.2.5</span> SDPDualEval</a>
+    - <a href="#sdpsylvestereval" id="toc-SDPSylvesterEval"><span class="toc-section-number">16.2.6</span> SDPSylvesterEval</a>
+  - <a href="#sdpflat" id="toc-PackageSDPFlat"><span class="toc-section-number">16.3</span> SDPFlat</a>
+    - <a href="#sdpflatdata" id="toc-SDPFlatData"><span class="toc-section-number">16.3.1</span> SDPFlatData</a>
+    - <a href="#sdpflatprimaleval" id="toc-SDPFlatPrimalEval"><span class="toc-section-number">16.3.2</span> SDPFlatPrimalEval</a>
+    - <a href="#sdpflatdualeval" id="toc-SDPFlatDualEval"><span class="toc-section-number">16.3.3</span> SDPFlatDualEval</a>
+    - <a href="#sdpflatsylvestereval" id="toc-SDPFlatSylvesterEval"><span class="toc-section-number">16.3.4</span> SDPFlatSylvesterEval</a>
+  - <a href="#sdpsylvester" id="toc-PackageSDPSylvester"><span class="toc-section-number">16.4</span> SDPSylvester</a>
+    - <a href="#sdpeval-1" id="toc-SDPSylvesterSDPEval"><span class="toc-section-number">16.4.1</span> SDPEval</a>
+    - <a href="#sdpsylvesterprimaleval" id="toc-SDPSylvesterPrimalEval"><span class="toc-section-number">16.4.2</span> SDPSylvesterPrimalEval</a>
+    - <a href="#sdpsylvesterdualeval" id="toc-SDPSylvesterDualEval"><span class="toc-section-number">16.4.3</span> SDPSylvesterDualEval</a>
+    - <a href="#sdpsylvestersylvestereval" id="toc-SDPSylvesterSylvesterEval"><span class="toc-section-number">16.4.4</span> SDPSylvesterSylvesterEval</a>
+  - <a href="#primaldual" id="toc-PackagePrimalDual"><span class="toc-section-number">16.5</span> PrimalDual</a>
+    - <a href="#primaldual-1" id="toc-PrimalDual"><span class="toc-section-number">16.5.1</span> PrimalDual</a>
+  - <a href="#ncpolysos" id="toc-PackageNCPolySOS"><span class="toc-section-number">16.6</span> NCPolySOS</a>
+    - <a href="#ncpolysos-1" id="toc-NCPolySOS"><span class="toc-section-number">16.6.1</span> NCPolySOS</a>
+    - <a href="#ncpolysostosdp" id="toc-NCPolySOSToSDP"><span class="toc-section-number">16.6.2</span> NCPolySOSToSDP</a>
+- <a href="#work-in-progress" id="toc-WorkInProgress"><span class="toc-section-number">17</span> Work in Progress</a>
+  - <a href="#ncrational" id="toc-PackageNCRational"><span class="toc-section-number">17.1</span> NCRational</a>
+    - <a href="#state-space-realizations-for-nc-rationals" id="toc-state-space-realizations-for-nc-rationals"><span class="toc-section-number">17.1.1</span> State-space realizations for NC rationals</a>
+    - <a href="#utilities-1" id="toc-utilities-1"><span class="toc-section-number">17.1.2</span> Utilities</a>
+    - <a href="#operations-on-nc-rationals" id="toc-operations-on-nc-rationals"><span class="toc-section-number">17.1.3</span> Operations on NC rationals</a>
+    - <a href="#minimal-realizations" id="toc-minimal-realizations"><span class="toc-section-number">17.1.4</span> Minimal realizations</a>
+  - <a href="#ncrealization" id="toc-PackageNCRealization"><span class="toc-section-number">17.2</span> NCRealization</a>
+    - <a href="#ncdescriptorrealization" id="toc-NCDescriptorRealization"><span class="toc-section-number">17.2.1</span> NCDescriptorRealization</a>
+    - <a href="#ncdeterminantalrepresentationreciprocal" id="toc-NCDeterminantalRepresentationReciprocal"><span class="toc-section-number">17.2.2</span> NCDeterminantalRepresentationReciprocal</a>
+    - <a href="#ncmatrixdescriptorrealization" id="toc-NCMatrixDescriptorRealization"><span class="toc-section-number">17.2.3</span> NCMatrixDescriptorRealization</a>
+    - <a href="#ncminimaldescriptorrealization" id="toc-NCMinimalDescriptorRealization"><span class="toc-section-number">17.2.4</span> NCMinimalDescriptorRealization</a>
+    - <a href="#ncsymmetricdescriptorrealization" id="toc-NCSymmetricDescriptorRealization"><span class="toc-section-number">17.2.5</span> NCSymmetricDescriptorRealization</a>
+    - <a href="#ncsymmetricdeterminantalrepresentationdirect" id="toc-NCSymmetricDeterminantalRepresentationDirect"><span class="toc-section-number">17.2.6</span> NCSymmetricDeterminantalRepresentationDirect</a>
+    - <a href="#ncsymmetricdeterminantalrepresentationreciprocal" id="toc-NCSymmetricDeterminantalRepresentationReciprocal"><span class="toc-section-number">17.2.7</span> NCSymmetricDeterminantalRepresentationReciprocal</a>
+    - <a href="#ncsymmetrizeminimaldescriptorrealization" id="toc-NCSymmetrizeMinimalDescriptorRealization"><span class="toc-section-number">17.2.8</span> NCSymmetrizeMinimalDescriptorRealization</a>
+    - <a href="#noncommutativelift" id="toc-NonCommutativeLift"><span class="toc-section-number">17.2.9</span> NonCommutativeLift</a>
+    - <a href="#signatureofaffineterm" id="toc-SignatureOfAffineTerm"><span class="toc-section-number">17.2.10</span> SignatureOfAffineTerm</a>
+    - <a href="#testdescriptorrealization" id="toc-TestDescriptorRealization"><span class="toc-section-number">17.2.11</span> TestDescriptorRealization</a>
+    - <a href="#pinnedq" id="toc-PinnedQ"><span class="toc-section-number">17.2.12</span> PinnedQ</a>
+    - <a href="#pinningspace" id="toc-PinningSpace"><span class="toc-section-number">17.2.13</span> PinningSpace</a>
+- <a href="#references" id="toc-references">References</a>
 
 **NCAlgebra** is distributed under the terms of the BSD License:
 
@@ -415,18 +416,18 @@ Sciences of the National Science Foundation.
 
 The program was written by the authors with mjor earlier contributions from:
 
--   Mark Stankus, Math, Cal Poly San Luis Obispo
--   Robert L. Miller, General Atomics Corp
+- Mark Stankus, Math, Cal Poly San Luis Obispo
+- Robert L. Miller, General Atomics Corp
 
 Considerable recent help came from
 
--   Igor Klep, University of Ljubljana
+- Igor Klep, University of Ljubljana
 
 Other contributors include:
 
--   David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister,
-    Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall,
-    T. Shaheen, John Shopple.
+- David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister,
+  Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall,
+  T. Shaheen, John Shopple.
 
 The beginnings of the program come from eran@slac.
 
@@ -818,7 +819,7 @@ return `co[a]` where `co` stands for complex-conjugate.
 
 > **WARNING:** Since **Version 5** transposes (`tp`), adjoints (`aj`),
 > complex conjugates (`co`), and inverses (`inv`) in a notebook
-> environment render as ![x^T](https://render.githubusercontent.com/render/math?math=x%5ET&mode=inline), ![x^\*](https://render.githubusercontent.com/render/math?math=x%5E%2A&mode=inline), ![\\bar{x}](https://render.githubusercontent.com/render/math?math=%5Cbar%7Bx%7D&mode=inline), and ![x^{-1}](https://render.githubusercontent.com/render/math?math=x%5E%7B-1%7D&mode=inline). `tp`
+> environment render as ![x^T](https://render.githubusercontent.com/render/math?math=x%5ET&mode=inline), ![x^\*](https://render.githubusercontent.com/render/math?math=x%5E%2A&mode=inline), ![\bar{x}](https://render.githubusercontent.com/render/math?math=%5Cbar%7Bx%7D&mode=inline), and ![x^{-1}](https://render.githubusercontent.com/render/math?math=x%5E%7B-1%7D&mode=inline). `tp`
 > and `aj` can also be input directly as `x^T` and `x^*`. For this
 > reason the symbol `T` is now protected in `NCAlgebra`.
 
@@ -1089,9 +1090,9 @@ returns `0`.
 The above commands are based on special packages for efficiently
 storing and calcuating with nc polynomials. Those packages are
 
--   [`NCPolynomial`](#ncpolynomial): which handles polynomials with
-    noncommutative coefficients, and
--   [`NCPoly`](#ncpoly): which handles polynomials with real coefficients.
+- [`NCPolynomial`](#ncpolynomial): which handles polynomials with
+  noncommutative coefficients, and
+- [`NCPoly`](#ncpoly): which handles polynomials with real coefficients.
 
 For example:
 
@@ -1153,10 +1154,10 @@ rationals. For example, one can verify that
 `NCAlgebra` has a number of packages that can be used to manipulate
 rational nc expressions. The packages:
 
--   [`NCGBX`](#ncgbx) perform calculations with nc rationals
-    using Gröbner basis, and
--   [`NCRational`](#ncrational) creates state-space
-    representations of nc rationals. This package is still experimental.
+- [`NCGBX`](#ncgbx) perform calculations with nc rationals
+  using Gröbner basis, and
+- [`NCRational`](#ncrational) creates state-space
+  representations of nc rationals. This package is still experimental.
 
 ## Calculus
 
@@ -1240,7 +1241,7 @@ represented in Mathematica using *lists of lists*. For example
 
 is a representation for the matrix
 
-![\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20%26%20d%20%5Cend%7Bbmatrix%7D&mode=inline)
+![\begin{bmatrix} a & b \\ c & d \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20%26%20d%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 The Mathematica command `MatrixForm` output pretty
 matrices. `MatrixForm[m]` prints `m` in a form similar to the above
@@ -1249,11 +1250,11 @@ matrix. Beware when copying and pasting parts of an expression rendered by`Matri
 The experienced matrix analyst should always remember that the
 Mathematica convention for handling vectors is tricky.
 
--   `{{1, 2, 4}}` is a 1x3 *matrix* or a *row vector*;
--   `{{1}, {2}, {4}}` is a 3x1 *matrix* or a *column vector*;
--   `{1, 2, 4}` is a *vector* but **not** a *matrix*. Indeed whether it
-    is a row or column vector depends on the context. We advise not to
-    use *vectors*.
+- `{{1, 2, 4}}` is a 1x3 *matrix* or a *row vector*;
+- `{{1}, {2}, {4}}` is a 3x1 *matrix* or a *column vector*;
+- `{1, 2, 4}` is a *vector* but **not** a *matrix*. Indeed whether it
+  is a row or column vector depends on the context. We advise not to
+  use *vectors*.
 
 ### Inverses, products, adjoints, etc
 
@@ -1274,7 +1275,7 @@ or, using `MatrixForm`
 
 returns
 
-![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
+![\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
 calculation.
@@ -1318,12 +1319,12 @@ See [advanced matrix commands](#expanding-matrix-products) for other useful matr
 Behind `NCInverse` there are a host of linear algebra algorithms which
 are available in the package:
 
--   [`NCMatrixDecompositions`](#ncmatrixdecompositions):
-    implements versions of the ![LU](https://render.githubusercontent.com/render/math?math=LU&mode=inline) Decomposition with partial and
-    complete pivoting, as well as ![LDL](https://render.githubusercontent.com/render/math?math=LDL&mode=inline) Decomposition which are suitable
-    for calculations with nc matrices. Those functions are based on the
-    templated algorithms from the package
-    [`MatrixDecompositions`](#matrixdecompositions-linear-algebra-templates).
+- [`NCMatrixDecompositions`](#ncmatrixdecompositions):
+  implements versions of the ![LU](https://render.githubusercontent.com/render/math?math=LU&mode=inline) Decomposition with partial and
+  complete pivoting, as well as ![LDL](https://render.githubusercontent.com/render/math?math=LDL&mode=inline) Decomposition which are suitable
+  for calculations with nc matrices. Those functions are based on the
+  templated algorithms from the package
+  [`MatrixDecompositions`](#matrixdecompositions-linear-algebra-templates).
 
 For instance the function
 [`NCLUDecompositionWithPartialPivoting`](#ncludecompositionwithpartialpivoting)
@@ -1556,7 +1557,7 @@ produces the matrix
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a & b & 0 & 0 \\\\ c & d & 0 & 0 \\\\ 0 & 0 & d & 2 \\\\ 0 & 0 & e & 3 \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%200%20%26%200%20%5C%5C%20c%20%26%20d%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%20d%20%26%202%20%5C%5C%200%20%26%200%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D&mode=inline)
+![\begin{bmatrix} a & b & 0 & 0 \\ c & d & 0 & 0 \\ 0 & 0 & d & 2 \\ 0 & 0 & e & 3 \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%200%20%26%200%20%5C%5C%20c%20%26%20d%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%20d%20%26%202%20%5C%5C%200%20%26%200%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 in which the `0` blocks were automatically expanded to fit the adjacent block matrices.
 
@@ -2130,7 +2131,7 @@ returns the evaluated result
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\\\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
+![\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 A less trivial example is
 
@@ -2184,7 +2185,7 @@ where `m1` is an array and `z` is not, is automatically expanded into
 
 or, using `MatrixForm`:
 
-![\\begin{bmatrix} a + z & b + z \\\\ c + z & d + z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%2B%20z%20%26%20b%20%2B%20z%20%5C%5C%20c%20%2B%20z%20%26%20d%20%2B%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
+![\begin{bmatrix} a + z & b + z \\ c + z & d + z \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%2B%20z%20%26%20b%20%2B%20z%20%5C%5C%20c%20%2B%20z%20%26%20d%20%2B%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Because of this “feature”, the expression
 
@@ -2353,7 +2354,7 @@ polynomial ordering implied by a list of symbols. For example
 
 prints out
 
-![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
+![x \ll y \ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
 
 and
 
@@ -2361,7 +2362,7 @@ and
 
 prints out
 
-![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
+![x \ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
 
 from where you can see that grouping variables inside braces induces a
 graded type ordering, as discussed in [Noncommutative Gröbner
@@ -2456,7 +2457,7 @@ problems in systems and control the following expression
 is often seen as a polynomial in the noncommutative unknown `x` with
 known noncommutative coefficients `a`, `b`, and `c`. A typical problem
 is the determination of a solution to the equation ![p(x) = 0](https://render.githubusercontent.com/render/math?math=p%28x%29%20%3D%200&mode=inline) or the
-inequality ![p(x) \\succeq 0](https://render.githubusercontent.com/render/math?math=p%28x%29%20%5Csucceq%200&mode=inline).
+inequality ![p(x) \succeq 0](https://render.githubusercontent.com/render/math?math=p%28x%29%20%5Csucceq%200&mode=inline).
 
 The package [`NCPolynomial`](#ncpolynomial) handles such
 polynomials with noncommutative coefficients. As with
@@ -2678,7 +2679,7 @@ the Mathematica `Eliminate` command tries to convert a collection of
 
 </div>
 
-in variables ![x_1,x_2, \\ldots x_n](https://render.githubusercontent.com/render/math?math=x_1%2Cx_2%2C%20%5Cldots%20x_n&mode=inline) to a *triangular* form, that is a
+in variables ![x_1,x_2, \ldots x_n](https://render.githubusercontent.com/render/math?math=x_1%2Cx_2%2C%20%5Cldots%20x_n&mode=inline) to a *triangular* form, that is a
 new collection of equations like
 
 <div style="display:block;">
@@ -2687,13 +2688,13 @@ new collection of equations like
 
 </div>
 
-Here the polynomials ![\\{q_j: 1\\le j\\le k_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline) generate the same
-*ideal* that the polynomials ![\\{p_j : 1\\le j \\le k_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%20%3A%201%5Cle%20j%20%5Cle%20k_1%5C%7D&mode=inline)
+Here the polynomials ![\\q_j: 1\le j\le k_2\\](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline) generate the same
+*ideal* that the polynomials ![\\p_j : 1\le j \le k_1\\](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%20%3A%201%5Cle%20j%20%5Cle%20k_1%5C%7D&mode=inline)
 generate. Therefore, the set of solutions to the collection of
-polynomial equations ![\\{p_j=0: 1\\le j\\le k_1\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%3D0%3A%201%5Cle%20j%5Cle%20k_1%5C%7D&mode=inline) equals the set of
-solutions to the collection of polynomial equations ![\\{q_j=0: 1\\le j\\le k_2\\}](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3D0%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline). This canonical form greatly simplifies the task of
+polynomial equations ![\\p_j=0: 1\le j\le k_1\\](https://render.githubusercontent.com/render/math?math=%5C%7Bp_j%3D0%3A%201%5Cle%20j%5Cle%20k_1%5C%7D&mode=inline) equals the set of
+solutions to the collection of polynomial equations ![\\q_j=0: 1\le j\le k_2\\](https://render.githubusercontent.com/render/math?math=%5C%7Bq_j%3D0%3A%201%5Cle%20j%5Cle%20k_2%5C%7D&mode=inline). This canonical form greatly simplifies the task of
 solving collections of polynomial equations by facilitating
-backsolving for ![x_j](https://render.githubusercontent.com/render/math?math=x_j&mode=inline) in terms of ![x_1,\\ldots,x\_{j-1}](https://render.githubusercontent.com/render/math?math=x_1%2C%5Cldots%2Cx_%7Bj-1%7D&mode=inline).
+backsolving for ![x_j](https://render.githubusercontent.com/render/math?math=x_j&mode=inline) in terms of ![x_1,\ldots,x\_{j-1}](https://render.githubusercontent.com/render/math?math=x_1%2C%5Cldots%2Cx_%7Bj-1%7D&mode=inline).
 
 Readers who would like to know more about Gröbner Basis may want to
 read \[CLS\]. The noncommutatative version of the algorithm implemented
@@ -2727,7 +2728,7 @@ problems, it suffices to know which variables correspond to quantities
 which are *known* and which variables correspond to quantities which
 are *unknown*. If one is solving for a variable or desires to prove
 that a certain quantity is zero, then one would want to view that
-variable as *unknown*. In the above example, the symbol ‘![\\ll](https://render.githubusercontent.com/render/math?math=%5Cll&mode=inline)’
+variable as *unknown*. In the above example, the symbol ‘![\ll](https://render.githubusercontent.com/render/math?math=%5Cll&mode=inline)’
 separate the *knowns*, ![a, b, c](https://render.githubusercontent.com/render/math?math=a%2C%20b%2C%20c&mode=inline), from the *unknown*, ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline). For more
 details on orderings see Section [Orderings](#ordering-on-variables-and-monomials).
 
@@ -2743,8 +2744,8 @@ following relations (i.e. a list of polynomials):
 We shall use the word *relation* to mean a polynomial in noncommuting
 indeterminates. For example, if an analyst saw the equation ![A B = 1](https://render.githubusercontent.com/render/math?math=A%20B%20%3D%201&mode=inline)
 for matrices ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline) and ![B](https://render.githubusercontent.com/render/math?math=B&mode=inline), then he might say that ![A](https://render.githubusercontent.com/render/math?math=A&mode=inline) and ![B](https://render.githubusercontent.com/render/math?math=B&mode=inline) satisfy
-the polynomial equation ![a\\, b - 1 = 0](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201%20%3D%200&mode=inline). An algebraist would say that
-![a\\, b - 1](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201&mode=inline) is a relation.
+the polynomial equation ![a\\ b - 1 = 0](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201%20%3D%200&mode=inline). An algebraist would say that
+![a\\ b - 1](https://render.githubusercontent.com/render/math?math=a%5C%2C%20b%20-%201&mode=inline) is a relation.
 
 To calculate a Gröbner basis one defines a list of relations:
 
@@ -2835,7 +2836,7 @@ order as before:
 
 that is
 
-![a \< b \< c \\ll x](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x&mode=inline)
+![a \< b \< c \ll x](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c%20%5Cll%20x&mode=inline)
 
 and the relations:
 
@@ -2846,7 +2847,7 @@ and the relations:
 </div>
 
 from which one can recognize the problem of solving the linear
-equation ![a \\, x = c](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%3D%20c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\\dag](https://render.githubusercontent.com/render/math?math=b%20%3D%20a%5E%5Cdag&mode=inline). The
+equation ![a \\ x = c](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%3D%20c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\dag](https://render.githubusercontent.com/render/math?math=b%20%3D%20a%5E%5Cdag&mode=inline). The
 calculation:
 
     gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
@@ -2917,7 +2918,7 @@ and the associated GB
     a ** b ** a -> b
     b ** b ** a -> a ** b ** b
 
-The GB revealed another relationship that must hold true if ![a \\, b \\, a = b](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b&mode=inline). One can use these relationships to simplify the original
+The GB revealed another relationship that must hold true if ![a \\ b \\ a = b](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b&mode=inline). One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
 
     expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
@@ -3099,7 +3100,7 @@ We now discuss each of these types of orders.
 
 ### Lex Order: the simplest elimination order
 
-To impose lexicographic order, say ![a\\ll b\\ll x\\ll y](https://render.githubusercontent.com/render/math?math=a%5Cll%20b%5Cll%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
+To impose lexicographic order, say ![a\ll b\ll x\ll y](https://render.githubusercontent.com/render/math?math=a%5Cll%20b%5Cll%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
 and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[a,b,x,y];
@@ -3209,7 +3210,7 @@ involving ![a](https://render.githubusercontent.com/render/math?math=a&mode=inli
 There are other useful monomial orders which one can use other than
 graded lex and lex. Another type of order is what we call multigraded
 lex and is a mixture of graded lex and lex order. To impose
-multi-graded lexicographic order, say ![a\< b\< x\\ll y](https://render.githubusercontent.com/render/math?math=a%3C%20b%3C%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
+multi-graded lexicographic order, say ![a\< b\< x\ll y](https://render.githubusercontent.com/render/math?math=a%3C%20b%3C%20x%5Cll%20y&mode=inline) on ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline), ![b](https://render.githubusercontent.com/render/math?math=b&mode=inline), ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline)
 and ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), one types
 
     SetMonomialOrder[{a,b,x},y];
@@ -3322,7 +3323,7 @@ after seven iterations. The first four relations
   
 are the solutions we are looking for, which states that one can find
 ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline), ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline) such that the matrices above are inverses of
-each other if and only if ![z \\, b \\, z = z + d \\, a \\, c](https://render.githubusercontent.com/render/math?math=z%20%5C%2C%20b%20%5C%2C%20z%20%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c&mode=inline). The first
+each other if and only if ![z \\ b \\ z = z + d \\ a \\ c](https://render.githubusercontent.com/render/math?math=z%20%5C%2C%20b%20%5C%2C%20z%20%3D%20z%20%2B%20d%20%5C%2C%20a%20%5C%2C%20c&mode=inline). The first
 three relations gives formulas for ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline), ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline) and ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline) in terms of ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline).
 
 A variety of scenarios can be quickly investigated under different
@@ -3359,7 +3360,7 @@ after five iterations. Once again, the first four relations
 
   
 provide formulas, this time for ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline), ![w](https://render.githubusercontent.com/render/math?math=w&mode=inline), and ![z](https://render.githubusercontent.com/render/math?math=z&mode=inline) in terms of ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline)
-satisfying ![y \\, c \\, y = y+b \\, d \\, a](https://render.githubusercontent.com/render/math?math=y%20%5C%2C%20c%20%5C%2C%20y%20%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a&mode=inline). Note that these formulas do
+satisfying ![y \\ c \\ y = y+b \\ d \\ a](https://render.githubusercontent.com/render/math?math=y%20%5C%2C%20c%20%5C%2C%20y%20%3D%20y%2Bb%20%5C%2C%20d%20%5C%2C%20a&mode=inline). Note that these formulas do
 not involve ![c^{-1}](https://render.githubusercontent.com/render/math?math=c%5E%7B-1%7D&mode=inline) since ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) is no longer assumed invertible.
 
 # Semidefinite Programming
@@ -3369,17 +3370,17 @@ If you want a living version of this chapter just run the notebook
 
 There are two different packages for solving semidefinite programs:
 
--   [`SDP`](#sdp) provides a template algorithm that can be
-    customized to solve semidefinite programs with special
-    structure. Users can provide their own functions to evaluate the
-    primal and dual constraints and the associated Newton system. A
-    built in solver along conventional lines, working on vector
-    variables, is provided by default. It does not require NCAlgebra to
-    run.
+- [`SDP`](#sdp) provides a template algorithm that can be
+  customized to solve semidefinite programs with special
+  structure. Users can provide their own functions to evaluate the
+  primal and dual constraints and the associated Newton system. A
+  built in solver along conventional lines, working on vector
+  variables, is provided by default. It does not require NCAlgebra to
+  run.
 
--   [`NCSDP`](#ncsdp) coordinates with NCAlgebra to handle matrix
-    variables, allowing constraints, etc, to be entered directly as
-    noncommutative expressions.
+- [`NCSDP`](#ncsdp) coordinates with NCAlgebra to handle matrix
+  variables, allowing constraints, etc, to be entered directly as
+  noncommutative expressions.
 
 ## Semidefinite Programs in Matrix Variables
 
@@ -3651,12 +3652,12 @@ which makes `expr` be displayed as
 
 The complete set of options and their default values are:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\\mathrm{x} \\bullet \\mathrm{y}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%20%5Cbullet%20%5Cmathrm%7By%7D&mode=inline)’;
--   `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\\mathrm{x}^\\mathrm{T}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%5Cmathrm%7BT%7D&mode=inline)’;
--   `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\\mathrm{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B-1%7D&mode=inline)’;
--   `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\\mathrm{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%2A&mode=inline)’;
--   `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathrm{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathrm%7Bx%7D%7D&mode=inline)’;
--   `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\\mathrm{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
+- `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\mathrm{x} \bullet \mathrm{y}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%20%5Cbullet%20%5Cmathrm%7By%7D&mode=inline)’;
+- `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\mathrm{x}^\mathrm{T}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%5Cmathrm%7BT%7D&mode=inline)’;
+- `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\mathrm{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B-1%7D&mode=inline)’;
+- `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\mathrm{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%2A&mode=inline)’;
+- `co` (`True`): If `True` `co[x]` is displayed as ‘![\bar{\mathrm{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathrm%7Bx%7D%7D&mode=inline)’;
+- `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\mathrm{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
 
 The special symbol `All` can be used to set all options to `True` or
 `False`, as in
@@ -3694,7 +3695,7 @@ For example:
 
 produces
 
-![1 + \\sin \\left ( x + \\frac{y - z}{\\sqrt{2}} \\right )](https://render.githubusercontent.com/render/math?math=1%20%2B%20%5Csin%20%5Cleft%20%28%20x%20%2B%20%5Cfrac%7By%20-%20z%7D%7B%5Csqrt%7B2%7D%7D%20%5Cright%20%29&mode=inline)
+![1 + \sin \left ( x + \frac{y - z}{\sqrt{2}} \right )](https://render.githubusercontent.com/render/math?math=1%20%2B%20%5Csin%20%5Cleft%20%28%20x%20%2B%20%5Cfrac%7By%20-%20z%7D%7B%5Csqrt%7B2%7D%7D%20%5Cright%20%29&mode=inline)
 
 If `NCAlgebra` is not loaded then `NCTeX` uses the built in
 `TeXForm` to produce the LaTeX expressions. If `NCAlgebra` is loaded,
@@ -3707,7 +3708,7 @@ Here is another example:
 
 that produces
 
-![\\left( \\begin{array}{cc} \\sin \\left(x+\\frac{y-z}{\\sqrt{2}}\\right)+1 & \\frac{x}{y} \\\\ z & \\sqrt{5} n \\\\ \\end{array} \\right)](https://render.githubusercontent.com/render/math?math=%5Cleft%28%20%5Cbegin%7Barray%7D%7Bcc%7D%20%5Csin%20%5Cleft%28x%2B%5Cfrac%7By-z%7D%7B%5Csqrt%7B2%7D%7D%5Cright%29%2B1%20%26%20%5Cfrac%7Bx%7D%7By%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5C%5C%20%5Cend%7Barray%7D%20%5Cright%29&mode=inline)
+![\left( \begin{array}{cc} \sin \left(x+\frac{y-z}{\sqrt{2}}\right)+1 & \frac{x}{y} \\ z & \sqrt{5} n \\ \end{array} \right)](https://render.githubusercontent.com/render/math?math=%5Cleft%28%20%5Cbegin%7Barray%7D%7Bcc%7D%20%5Csin%20%5Cleft%28x%2B%5Cfrac%7By-z%7D%7B%5Csqrt%7B2%7D%7D%5Cright%29%2B1%20%26%20%5Cfrac%7Bx%7D%7By%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5C%5C%20%5Cend%7Barray%7D%20%5Cright%29&mode=inline)
 
 In some cases Mathematica will have difficulty displaying certain PDF
 files. When this happens `NCTeX` will span a PDF viewer so that you
@@ -3836,7 +3837,7 @@ expression looks neat on the screen. You can see the result using
 
 to produce
 
-![a.x.{b}^T-{\\left(d+c.{\\left (a+b.c\\right)}^{-1}.{y}^T\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=a.x.%7Bb%7D%5ET-%7B%5Cleft%28d%2Bc.%7B%5Cleft%20%28a%2Bb.c%5Cright%29%7D%5E%7B-1%7D.%7By%7D%5ET%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
+![a.x.{b}^T-{\left(d+c.{\left (a+b.c\right)}^{-1}.{y}^T\right )}^{-1}](https://render.githubusercontent.com/render/math?math=a.x.%7Bb%7D%5ET-%7B%5Cleft%28d%2Bc.%7B%5Cleft%20%28a%2Bb.c%5Cright%29%7D%5E%7B-1%7D.%7By%7D%5ET%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
 
 `NCTeX` represents noncommutative products with a dot (`.`) in order
 to distinguish it from its commutative cousin. We can see the
@@ -3848,7 +3849,7 @@ noncommutative products:
 
 produces
 
-![2 \\left(a.b\\right) - 3 (c.d)](https://render.githubusercontent.com/render/math?math=2%20%5Cleft%28a.b%5Cright%29%20-%203%20%28c.d%29&mode=inline)
+![2 \left(a.b\right) - 3 (c.d)](https://render.githubusercontent.com/render/math?math=2%20%5Cleft%28a.b%5Cright%29%20-%203%20%28c.d%29&mode=inline)
 
 NCTeXForm handles lists and matrices as well. Here is a list:
 
@@ -3857,7 +3858,7 @@ NCTeXForm handles lists and matrices as well. Here is a list:
 
 and its output:
 
-![\\{ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20x%2C%20%7Bx%7D%5ET%2C%20x%2By%2C%20x%2B%7By%7D%5ET%2C%20x%2B%7By%7D%5E%7B-1%7D%2C%20x.x%20%5C%7D&mode=inline)
+![\\ x, {x}^T, x+y, x+{y}^T, x+{y}^{-1}, x.x \\](https://render.githubusercontent.com/render/math?math=%5C%7B%20x%2C%20%7Bx%7D%5ET%2C%20x%2By%2C%20x%2B%7By%7D%5ET%2C%20x%2B%7By%7D%5E%7B-1%7D%2C%20x.x%20%5C%7D&mode=inline)
 
 and here is a matrix example:
 
@@ -3866,7 +3867,7 @@ and here is a matrix example:
 
 and its output:
 
-![\\begin{bmatrix} x & y \\\\ y & z \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20x%20%26%20y%20%5C%5C%20y%20%26%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
+![\begin{bmatrix} x & y \\ y & z \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20x%20%26%20y%20%5C%5C%20y%20%26%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
 
 Here are some more examples:
 
@@ -3875,14 +3876,14 @@ Here are some more examples:
 
 produces
 
-![\\begin{bmatrix} 1+\\operatorname{sin}{\\left (x+\\frac{1}{\\sqrt{2}} \\left (y-z\\right )\\right )} & x {y}^{-1} \\\\ z & \\sqrt{5} n \\end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%201%2B%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2B%5Cfrac%7B1%7D%7B%5Csqrt%7B2%7D%7D%20%5Cleft%20%28y-z%5Cright%20%29%5Cright%20%29%7D%20%26%20x%20%7By%7D%5E%7B-1%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5Cend%7Bbmatrix%7D&mode=inline)
+![\begin{bmatrix} 1+\operatorname{sin}{\left (x+\frac{1}{\sqrt{2}} \left (y-z\right )\right )} & x {y}^{-1} \\ z & \sqrt{5} n \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%201%2B%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2B%5Cfrac%7B1%7D%7B%5Csqrt%7B2%7D%7D%20%5Cleft%20%28y-z%5Cright%20%29%5Cright%20%29%7D%20%26%20x%20%7By%7D%5E%7B-1%7D%20%5C%5C%20z%20%26%20%5Csqrt%7B5%7D%20n%20%5Cend%7Bbmatrix%7D&mode=inline)
 
     exp = {inv[x + y], inv[x + inv[y]]}
     NCTeX[exp]
 
 produces:
 
-![\\{ {\\left (x+y\\right )}^{-1}, {\\left (x+{y}^{-1}\\right )}^{-1} \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%5E%7B-1%7D%2C%20%7B%5Cleft%20%28x%2B%7By%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D%20%5C%7D&mode=inline)
+![\\ {\left (x+y\right )}^{-1}, {\left (x+{y}^{-1}\right )}^{-1} \\](https://render.githubusercontent.com/render/math?math=%5C%7B%20%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%5E%7B-1%7D%2C%20%7B%5Cleft%20%28x%2B%7By%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D%20%5C%7D&mode=inline)
 
     exp = {Sin[x], x y, Sin[x] y, Sin[x + y], Cos[gamma], 
            Sin[alpha] tp[x] ** (y - tp[y]), (x + tp[x]) (y ** z), -tp[y], 1/2, 
@@ -3891,14 +3892,14 @@ produces:
 
 produces:
 
-![\\{ \\operatorname{sin}{x}, x y, y \\operatorname{sin}{x}, \\operatorname{sin}{\\left (x+y\\right )}, \\operatorname{cos}{\\gamma}, \\left({x}^T.\\left (y-{y}^T\\right )\\right ) \\operatorname{sin}{\\alpha}, y z \\left (x+{x}^T\\right ), -{y}^T, \\frac{1}{2}, \\sqrt{2} \\left(x.y\\right ) \\}](https://render.githubusercontent.com/render/math?math=%5C%7B%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20x%20y%2C%20y%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%2C%20%5Coperatorname%7Bcos%7D%7B%5Cgamma%7D%2C%20%5Cleft%28%7Bx%7D%5ET.%5Cleft%20%28y-%7By%7D%5ET%5Cright%20%29%5Cright%20%29%20%5Coperatorname%7Bsin%7D%7B%5Calpha%7D%2C%20y%20z%20%5Cleft%20%28x%2B%7Bx%7D%5ET%5Cright%20%29%2C%20-%7By%7D%5ET%2C%20%5Cfrac%7B1%7D%7B2%7D%2C%20%5Csqrt%7B2%7D%20%5Cleft%28x.y%5Cright%20%29%20%5C%7D&mode=inline)
+![\\ \operatorname{sin}{x}, x y, y \operatorname{sin}{x}, \operatorname{sin}{\left (x+y\right )}, \operatorname{cos}{\gamma}, \left({x}^T.\left (y-{y}^T\right )\right ) \operatorname{sin}{\alpha}, y z \left (x+{x}^T\right ), -{y}^T, \frac{1}{2}, \sqrt{2} \left(x.y\right ) \\](https://render.githubusercontent.com/render/math?math=%5C%7B%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20x%20y%2C%20y%20%5Coperatorname%7Bsin%7D%7Bx%7D%2C%20%5Coperatorname%7Bsin%7D%7B%5Cleft%20%28x%2By%5Cright%20%29%7D%2C%20%5Coperatorname%7Bcos%7D%7B%5Cgamma%7D%2C%20%5Cleft%28%7Bx%7D%5ET.%5Cleft%20%28y-%7By%7D%5ET%5Cright%20%29%5Cright%20%29%20%5Coperatorname%7Bsin%7D%7B%5Calpha%7D%2C%20y%20z%20%5Cleft%20%28x%2B%7Bx%7D%5ET%5Cright%20%29%2C%20-%7By%7D%5ET%2C%20%5Cfrac%7B1%7D%7B2%7D%2C%20%5Csqrt%7B2%7D%20%5Cleft%28x.y%5Cright%20%29%20%5C%7D&mode=inline)
 
     exp = inv[x + tp[inv[y]]]
     NCTeX[exp]
 
 produces:
 
-![{\\left (x+{{y}^T}^{-1}\\right )}^{-1}](https://render.githubusercontent.com/render/math?math=%7B%5Cleft%20%28x%2B%7B%7By%7D%5ET%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
+![{\left (x+{{y}^T}^{-1}\right )}^{-1}](https://render.githubusercontent.com/render/math?math=%7B%5Cleft%20%28x%2B%7B%7By%7D%5ET%7D%5E%7B-1%7D%5Cright%20%29%7D%5E%7B-1%7D&mode=inline)
 
 `NCTeXForm` does not know as many functions as `TeXForm`. In some
 cases `TeXForm` will produce better results. Compare:
@@ -3908,7 +3909,7 @@ cases `TeXForm` will produce better results. Compare:
 
 output:
 
-![\\operatorname{BesselJ}\\left (2, x\\right )](https://render.githubusercontent.com/render/math?math=%5Coperatorname%7BBesselJ%7D%5Cleft%20%282%2C%20x%5Cright%20%29&mode=inline)
+![\operatorname{BesselJ}\left (2, x\right )](https://render.githubusercontent.com/render/math?math=%5Coperatorname%7BBesselJ%7D%5Cleft%20%282%2C%20x%5Cright%20%29&mode=inline)
 
 with
 
@@ -3981,11 +3982,11 @@ its fully qualified name `` NC`NC::Directory `` because the context
 
 The following `options` can be set using `SetOptions` before loading other packages:
 
--   `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
-    `NCAlgebra` will set all global single letter small cap symbols as
-    noncommutative;
--   `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
-    during the first loading of a package.
+- `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
+  `NCAlgebra` will set all global single letter small cap symbols as
+  noncommutative;
+- `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
+  during the first loading of a package.
 
 ## NCAlgebra
 
@@ -4042,10 +4043,10 @@ loading of `NC` *and* `NCAlgebra`:
 
 One of the following messages will be displayed after loading.
 
--   `NCAlgebra::SmallCapSymbolsNonCommutative`, if small cap single letter symbols have
-    been set as noncomutative;
--   `NCAlgebra::NoSymbolsNonCommutative`, if no symbols have been set as noncomutative by
-    `NCAlgebra`.
+- `NCAlgebra::SmallCapSymbolsNonCommutative`, if small cap single letter symbols have
+  been set as noncomutative;
+- `NCAlgebra::NoSymbolsNonCommutative`, if no symbols have been set as noncomutative by
+  `NCAlgebra`.
 
 # Packages for manipulating NC expressions
 
@@ -4055,35 +4056,35 @@ One of the following messages will be displayed after loading.
 
 Members are:
 
--   [aj](#aj)
--   [co](#co)
--   [Id](#id)
--   [inv](#inv)
--   [tp](#tp)
--   [rt](#rt)
--   [CommutativeQ](#commutativeq)
--   [NonCommutativeQ](#noncommutativeq)
--   [SetCommutative](#setcommutative)
--   [SetCommutativeHold](#setcommutativehold)
--   [SetNonCommutative](#setnoncommutative)
--   [SetNonCommutativeHold](#setnoncommutativehold)
--   [SetCommutativeFunction](#setcommutativefunction)
--   [SetCommutingOperators](#setcommutingoperators)
--   [UnsetCommutingOperators](#unsetcommutingoperators)
--   [CommutingOperatorsQ](#commutingoperatorsq)
--   [Commutative](#commutative)
--   [CommuteEverything](#commuteeverything)
--   [BeginCommuteEverything](#begincommuteeverything)
--   [EndCommuteEverything](#endcommuteeverything)
--   [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
--   [NCExpandExponents](#ncexpandexponents)
--   [NCToList](#nctolist)
+- [aj](#aj)
+- [co](#co)
+- [Id](#id)
+- [inv](#inv)
+- [tp](#tp)
+- [rt](#rt)
+- [CommutativeQ](#commutativeq)
+- [NonCommutativeQ](#noncommutativeq)
+- [SetCommutative](#setcommutative)
+- [SetCommutativeHold](#setcommutativehold)
+- [SetNonCommutative](#setnoncommutative)
+- [SetNonCommutativeHold](#setnoncommutativehold)
+- [SetCommutativeFunction](#setcommutativefunction)
+- [SetCommutingOperators](#setcommutingoperators)
+- [UnsetCommutingOperators](#unsetcommutingoperators)
+- [CommutingOperatorsQ](#commutingoperatorsq)
+- [Commutative](#commutative)
+- [CommuteEverything](#commuteeverything)
+- [BeginCommuteEverything](#begincommuteeverything)
+- [EndCommuteEverything](#endcommuteeverything)
+- [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
+- [NCExpandExponents](#ncexpandexponents)
+- [NCToList](#nctolist)
 
 Aliases are:
 
--   [SNC](#snc) for [SetNonCommutative](#setnoncommutative)
--   [NCExpand](#ncexpand) for [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
--   [NCE](#nce) for [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
+- [SNC](#snc) for [SetNonCommutative](#setnoncommutative)
+- [NCExpand](#ncexpand) for [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
+- [NCE](#nce) for [ExpandNonCommutativeMultiply](#expandnoncommutativemultiply)
 
 ### aj
 
@@ -4335,18 +4336,18 @@ standard mathematical trace operator.
 
 Members are:
 
--   [tr](#tr)
--   [SortCyclicPermutation](#sortcyclicpermutation)
--   [SortedCyclicPermutationQ](#sortedcyclicpermutationq)
+- [tr](#tr)
+- [SortCyclicPermutation](#sortcyclicpermutation)
+- [SortedCyclicPermutationQ](#sortedcyclicpermutationq)
 
 ### tr
 
 `tr[expr]` is an linear operator with the following properties:
 
--   `tr` automatically distributes over sums;
--   when `expr` is a noncommutative product, then product is sorted;
-    for example `tr[b ** a]` evaluates into `tr[a ** b]`;
--   `tr[aj[expr]]` gets normalized as `Conjugate[tr[expr]]`.
+- `tr` automatically distributes over sums;
+- when `expr` is a noncommutative product, then product is sorted;
+  for example `tr[b ** a]` evaluates into `tr[a ** b]`;
+- `tr[aj[expr]]` gets normalized as `Conjugate[tr[expr]]`.
 
 See also:
 [SortCyclicPermutation](#sortcyclicpermutation),
@@ -4371,16 +4372,16 @@ See also:
 
 Members are:
 
--   [NCCollect](#nccollect-1)
--   [NCCollectExponents](#nccollectexponents)
--   [NCCollectSelfAdjoint](#nccollectselfadjoint)
--   [NCCollectSymmetric](#nccollectsymmetric)
--   [NCStrongCollect](#ncstrongcollect)
--   [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
--   [NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
--   [NCCompose](#nccompose)
--   [NCDecompose](#ncdecompose)
--   [NCTermsOfDegree](#nctermsofdegree)
+- [NCCollect](#nccollect-1)
+- [NCCollectExponents](#nccollectexponents)
+- [NCCollectSelfAdjoint](#nccollectselfadjoint)
+- [NCCollectSymmetric](#nccollectsymmetric)
+- [NCStrongCollect](#ncstrongcollect)
+- [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint)
+- [NCStrongCollectSymmetric](#ncstrongcollectsymmetric)
+- [NCCompose](#nccompose)
+- [NCDecompose](#ncdecompose)
+- [NCTermsOfDegree](#nctermsofdegree)
 
 ### NCCollect
 
@@ -4396,7 +4397,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 
 The following option is available:
 
--   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
+- `ByTotalDegree` (`False`): whether to collect by total or partial degree.
 
 **Notes:**
 
@@ -4433,7 +4434,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 
 The following option is available:
 
--   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
+- `ByTotalDegree` (`False`): whether to collect by total or partial degree.
 
 See also:
 [NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSymmetric](#nccollectsymmetric), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
@@ -4448,7 +4449,7 @@ This command internally converts nc expressions into the special `NCPolynomial` 
 
 The following option is available:
 
--   `ByTotalDegree` (`False`): whether to collect by total or partial degree.
+- `ByTotalDegree` (`False`): whether to collect by total or partial degree.
 
 See also:
 [NCCollect](#nccollect-1), [NCStrongCollect](#ncstrongcollect), [NCCollectSelfAdjoint](#nccollectselfadjoint), [NCStrongCollectSymmetric](#ncstrongcollectsymmetric), [NCStrongCollectSelfAdjoint](#ncstrongcollectselfadjoint).
@@ -4580,45 +4581,45 @@ Commands in this package replace the old `Substitute` and `Transform` family of 
 
 Members are:
 
--   [NCReplace](#ncreplace-1)
--   [NCReplaceAll](#ncreplaceall)
--   [NCReplaceList](#ncreplacelist)
--   [NCReplaceRepeated](#ncreplacerepeated)
--   [NCMakeRuleSymmetric](#ncmakerulesymmetric)
--   [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
--   [NCReplaceSymmetric](#ncreplacesymmetric)
--   [NCReplaceAllSymmetric](#ncreplaceallsymmetric)
--   [NCReplaceListSymmetric](#ncreplacelistsymmetric)
--   [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
--   [NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
--   [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
--   [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
--   [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
--   [NCMatrixExpand](#ncmatrixexpand)
--   [NCMatrixReplaceAll](#ncmatrixreplaceall)
--   [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
--   [NCReplacePowerRule](#ncreplacepowerrule)
+- [NCReplace](#ncreplace-1)
+- [NCReplaceAll](#ncreplaceall)
+- [NCReplaceList](#ncreplacelist)
+- [NCReplaceRepeated](#ncreplacerepeated)
+- [NCMakeRuleSymmetric](#ncmakerulesymmetric)
+- [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
+- [NCReplaceSymmetric](#ncreplacesymmetric)
+- [NCReplaceAllSymmetric](#ncreplaceallsymmetric)
+- [NCReplaceListSymmetric](#ncreplacelistsymmetric)
+- [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
+- [NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
+- [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
+- [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
+- [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+- [NCMatrixExpand](#ncmatrixexpand)
+- [NCMatrixReplaceAll](#ncmatrixreplaceall)
+- [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
+- [NCReplacePowerRule](#ncreplacepowerrule)
 
 Aliases:
 
--   [NCR](#ncr) for [NCReplace](#ncreplace-1)
--   [NCRA](#ncra) for [NCReplaceAll](#ncreplaceall)
--   [NCRL](#ncrl) for [NCReplaceList](#ncreplacelist)
--   [NCRR](#ncrr) for [NCReplaceRepeated](#ncreplacerepeated)
--   [NCRSym](#ncrsym) for [NCReplaceSymmetric](#ncreplacesymmetric)
--   [NCRASym](#ncrasym) for [NCReplaceAllSymmetric](#ncreplaceallsymmetric)
--   [NCRLSym](#ncrlsym) for [NCReplaceListSymmetric](#ncreplacelistsymmetric)
--   [NCRRSym](#ncrrsym) for [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
--   [NCRSA](#ncrsa) for [NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
--   [NCRASA](#ncrasa) for [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
--   [NCRLSA](#ncrlsa) for [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
--   [NCRRSA](#ncrrsa) for [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+- [NCR](#ncr) for [NCReplace](#ncreplace-1)
+- [NCRA](#ncra) for [NCReplaceAll](#ncreplaceall)
+- [NCRL](#ncrl) for [NCReplaceList](#ncreplacelist)
+- [NCRR](#ncrr) for [NCReplaceRepeated](#ncreplacerepeated)
+- [NCRSym](#ncrsym) for [NCReplaceSymmetric](#ncreplacesymmetric)
+- [NCRASym](#ncrasym) for [NCReplaceAllSymmetric](#ncreplaceallsymmetric)
+- [NCRLSym](#ncrlsym) for [NCReplaceListSymmetric](#ncreplacelistsymmetric)
+- [NCRRSym](#ncrrsym) for [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
+- [NCRSA](#ncrsa) for [NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
+- [NCRASA](#ncrasa) for [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
+- [NCRLSA](#ncrlsa) for [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
+- [NCRRSA](#ncrrsa) for [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
 
 Options:
 
--   `ApplyPowerRule` (`False`): If `True`, `NCReplacePowerRule` is
-    automatically applied to all rules in `NCReplace`, `NCReplaceAll`,
-    `NCReplaceRepeated`, and `NCReplaceList`.
+- `ApplyPowerRule` (`False`): If `True`, `NCReplacePowerRule` is
+  automatically applied to all rules in `NCReplace`, `NCReplaceAll`,
+  `NCReplaceRepeated`, and `NCReplaceList`.
 
 ### NCReplace
 
@@ -4849,11 +4850,11 @@ See also:
 
 Members are:
 
--   [NCSymmetricQ](#ncsymmetricq)
--   [NCSymmetricTest](#ncsymmetrictest)
--   [NCSymmetricPart](#ncsymmetricpart)
--   [NCSelfAdjointQ](#ncselfadjointq)
--   [NCSelfAdjointTest](#ncselfadjointtest)
+- [NCSymmetricQ](#ncsymmetricq)
+- [NCSymmetricTest](#ncsymmetrictest)
+- [NCSymmetricPart](#ncsymmetricpart)
+- [NCSelfAdjointQ](#ncselfadjointq)
+- [NCSelfAdjointTest](#ncselfadjointtest)
 
 ### NCSymmetricQ
 
@@ -4872,14 +4873,14 @@ See also:
 
 `NCSymmetricTest` returns a list of two elements:
 
--   the first element is *True* or *False* if it succeeded to prove `expr` symmetric.
--   the second element is a list of the variables that were made symmetric.
+- the first element is *True* or *False* if it succeeded to prove `expr` symmetric.
+- the second element is a list of the variables that were made symmetric.
 
 The following options can be given:
 
--   `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
--   `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables;
--   `Strict`: treats as non-symmetric any variable that appears inside `tp`.
+- `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
+- `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables;
+- `Strict`: treats as non-symmetric any variable that appears inside `tp`.
 
 See also:
 [NCSymmetricQ](#ncsymmetricq), [NCNCSelfAdjointTest](#ncselfadjointtest).
@@ -4892,8 +4893,8 @@ See also:
 
 `NCSymmetricPart[expr]` returns a list of two elements:
 
--   the first element is the *symmetric part* of `expr`;
--   the second element is a list of the variables that were made symmetric.
+- the first element is the *symmetric part* of `expr`;
+- the second element is a list of the variables that were made symmetric.
 
 `NCSymmetricPart[expr]` returns `{$Failed, {}}` if `expr` is not symmetric.
 
@@ -4908,9 +4909,9 @@ returns
 
 The following options can be given:
 
--   `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
--   `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
--   `Strict`: treats as non-symmetric any variable that appears inside `tp`.
+- `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
+- `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
+- `Strict`: treats as non-symmetric any variable that appears inside `tp`.
 
 See also:
 [NCSymmetricTest](#ncsymmetrictest).
@@ -4929,16 +4930,16 @@ See also:
 
 `NCSelfAdjointTest` returns a list of three elements:
 
--   the first element is *True* or *False* if it succeded to prove `expr` self-adjoint.
--   the second element is a list of variables that were made self-adjoint.
--   the third element is a list of variables that were made symmetric.
+- the first element is *True* or *False* if it succeded to prove `expr` self-adjoint.
+- the second element is a list of variables that were made self-adjoint.
+- the third element is a list of variables that were made symmetric.
 
 The following options can be given:
 
--   `SelfAdjointVariables`: list of variables that should be considered self-adjoint; use `All` to make all variables self-adjoint;
--   `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
--   `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
--   `Strict`: treats as non-self-adjoint any variable that appears inside `aj`.
+- `SelfAdjointVariables`: list of variables that should be considered self-adjoint; use `All` to make all variables self-adjoint;
+- `SymmetricVariables`: list of variables that should be considered symmetric; use `All` to make all variables symmetric;
+- `ExcludeVariables`: list of variables that should not be considered symmetric; use `All` to exclude all variables.
+- `Strict`: treats as non-self-adjoint any variable that appears inside `aj`.
 
 See also:
 [NCSelfAdjointQ](#ncselfadjointq).
@@ -5011,15 +5012,15 @@ trigger rules that implicitely assume `y` is invertible.
 
 Members are:
 
--   [NCNormalizeInverse](#ncnormalizeinverse)
--   [NCSimplifyRational](#ncsimplifyrational-1)
--   [NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass)
--   [NCPreSimplifyRational](#ncpresimplifyrational)
--   [NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass)
+- [NCNormalizeInverse](#ncnormalizeinverse)
+- [NCSimplifyRational](#ncsimplifyrational-1)
+- [NCSimplifyRationalSinglePass](#ncsimplifyrationalsinglepass)
+- [NCPreSimplifyRational](#ncpresimplifyrational)
+- [NCPreSimplifyRationalSinglePass](#ncpresimplifyrationalsinglepass)
 
 Aliases:
 
--   [NCSR](#ncsr) for [NCSimplifyRational](#ncsimplifyrational-1)
+- [NCSR](#ncsr) for [NCSimplifyRational](#ncsimplifyrational-1)
 
 ### NCNormalizeInverse
 
@@ -5073,14 +5074,14 @@ See also:
 
 Members are:
 
--   [NCDirectionalD](#ncdirectionald)
--   [NCGrad](#ncgrad)
--   [NCHessian](#nchessian)
--   [NCIntegrate](#ncintegrate)
+- [NCDirectionalD](#ncdirectionald)
+- [NCGrad](#ncgrad)
+- [NCHessian](#nchessian)
+- [NCIntegrate](#ncintegrate)
 
 Members being deprecated:
 
--   [DirectionalD](#directionald)
+- [DirectionalD](#directionald)
 
 ### NCDirectionalD
 
@@ -5214,8 +5215,8 @@ See also:
 
 Members are:
 
--   [NCIndependent](#ncindependent)
--   [NCConvexityRegion](#ncconvexityregion)
+- [NCIndependent](#ncindependent)
+- [NCConvexityRegion](#ncconvexityregion)
 
 ### NCIndependent
 
@@ -5252,7 +5253,7 @@ returns
 
     d = {2 x, -2 inv[x]}
 
-from which we conclude that `x**x**x` is not convex in `x` because ![x \\succ 0](https://render.githubusercontent.com/render/math?math=x%20%5Csucc%200&mode=inline) and ![-{x}^{-1} \\succ 0](https://render.githubusercontent.com/render/math?math=-%7Bx%7D%5E%7B-1%7D%20%5Csucc%200&mode=inline) cannot simultaneously hold.
+from which we conclude that `x**x**x` is not convex in `x` because ![x \succ 0](https://render.githubusercontent.com/render/math?math=x%20%5Csucc%200&mode=inline) and ![-{x}^{-1} \succ 0](https://render.githubusercontent.com/render/math?math=-%7Bx%7D%5E%7B-1%7D%20%5Csucc%200&mode=inline) cannot simultaneously hold.
 
 `NCConvexityRegion` works by factoring the `NCHessian`, essentially calling:
 
@@ -5278,11 +5279,11 @@ See also:
 
 Members are:
 
--   [tpMat](#tpmat)
--   [ajMat](#ajmat)
--   [coMat](#comat)
--   [NCDot](#ncdot-1)
--   [NCInverse](#ncinverse)
+- [tpMat](#tpmat)
+- [ajMat](#ajmat)
+- [coMat](#comat)
+- [NCDot](#ncdot-1)
+- [NCInverse](#ncinverse)
 
 ### tpMat
 
@@ -5313,9 +5314,9 @@ See also:
 
 The experienced matrix analyst should always remember that the Mathematica convention for handling vectors is tricky.
 
--   `{{1,2,4}}` is a 1x3 *matrix* or a *row vector*;
--   `{{1},{2},{4}}` is a 3x1 *matrix* or a *column vector*;
--   `{1,2,4}` is a *vector* but **not** a *matrix*. Indeed whether it is a row or column vector depends on the context. We advise not to use *vectors*.
+- `{{1,2,4}}` is a 1x3 *matrix* or a *row vector*;
+- `{{1},{2},{4}}` is a 3x1 *matrix* or a *column vector*;
+- `{1,2,4}` is a *vector* but **not** a *matrix*. Indeed whether it is a row or column vector depends on the context. We advise not to use *vectors*.
 
 See also:
 [tpMat](#tpmat), [ajMat](#comat), [coMat](#comat).
@@ -5340,19 +5341,19 @@ the algorithms and options.
 
 Members are:
 
--   Decompositions
-    -   [NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting)
-    -   [NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting)
-    -   [NCLDLDecomposition](#ncldldecomposition)
--   Solvers
-    -   [NCLowerTriangularSolve](#nclowertriangularsolve)
-    -   [NCUpperTriangularSolve](#ncuppertriangularsolve)
-    -   [NCLUInverse](#ncluinverse)
--   Utilities
-    -   [NCLUCompletePivoting](#nclucompletepivoting)
-    -   [NCLUPartialPivoting](#nclupartialpivoting)
-    -   [NCLeftDivide](#ncleftdivide)
-    -   [NCRightDivide](#ncrightdivide)
+- Decompositions
+  - [NCLUDecompositionWithPartialPivoting](#ncludecompositionwithpartialpivoting)
+  - [NCLUDecompositionWithCompletePivoting](#ncludecompositionwithcompletepivoting)
+  - [NCLDLDecomposition](#ncldldecomposition)
+- Solvers
+  - [NCLowerTriangularSolve](#nclowertriangularsolve)
+  - [NCUpperTriangularSolve](#ncuppertriangularsolve)
+  - [NCLUInverse](#ncluinverse)
+- Utilities
+  - [NCLUCompletePivoting](#nclucompletepivoting)
+  - [NCLUPartialPivoting](#nclupartialpivoting)
+  - [NCLeftDivide](#ncleftdivide)
+  - [NCRightDivide](#ncrightdivide)
 
 ### NCLUDecompositionWithPartialPivoting
 
@@ -5361,11 +5362,11 @@ Members are:
 
 The following `options` can be given:
 
--   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `RightDivide` ([NCRightDivide](#ncrightdivide)): function used to divide a vector by an entry;
--   `Dot` ([NCDot](#ncdot-1)): function used to multiply vectors and matrices;
--   `Pivoting` ([NCLUPartialPivoting](#nclupartialpivoting)): function used to sort rows for pivoting;
--   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+- `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+- `RightDivide` ([NCRightDivide](#ncrightdivide)): function used to divide a vector by an entry;
+- `Dot` ([NCDot](#ncdot-1)): function used to multiply vectors and matrices;
+- `Pivoting` ([NCLUPartialPivoting](#nclupartialpivoting)): function used to sort rows for pivoting;
+- `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting).
 
@@ -5376,11 +5377,11 @@ See also: [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoti
 
 The following `options` can be given:
 
--   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `RightDivide` ([NCRightDivide](#ncrightdivide)): function used to divide a vector by an entry;
--   `Dot` ([NCDot](#ncdot-1)): function used to multiply vectors and matrices;
--   `Pivoting` ([NCLUCompletePivoting](#nclucompletepivoting)): function used to sort rows for pivoting;
--   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+- `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+- `RightDivide` ([NCRightDivide](#ncrightdivide)): function used to divide a vector by an entry;
+- `Dot` ([NCDot](#ncdot-1)): function used to multiply vectors and matrices;
+- `Pivoting` ([NCLUCompletePivoting](#nclucompletepivoting)): function used to sort rows for pivoting;
+- `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting).
 
@@ -5390,15 +5391,15 @@ See also: [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivo
 
 The following `options` can be given:
 
--   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `RightDivide` ([NCRightDivide](#ncrightdivide)): function used to divide a vector by an entry on the right;
--   `LeftDivide` ([NCLeftDivide](#ncleftdivide)): function used to divide a vector by an entry on the left;
--   `Dot` (`NCDot`): function used to multiply vectors and matrices;
--   `CompletePivoting` ([NCLUCompletePivoting](#nclucompletepivoting)): function used to sort rows for complete pivoting;
--   `PartialPivoting` ([NCLUPartialPivoting](#nclupartialpivoting)): function used to sort matrices for complete pivoting;
--   `Inverse` ([NCLUInverse](#ncluinverse)): function used to invert 2x2 diagonal blocks;
--   `SelfAdjointMatrixQ` ([NCSelfAdjointQ](#ncselfadjointq)): function to test if matrix is self-adjoint;
--   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+- `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+- `RightDivide` ([NCRightDivide](#ncrightdivide)): function used to divide a vector by an entry on the right;
+- `LeftDivide` ([NCLeftDivide](#ncleftdivide)): function used to divide a vector by an entry on the left;
+- `Dot` (`NCDot`): function used to multiply vectors and matrices;
+- `CompletePivoting` ([NCLUCompletePivoting](#nclucompletepivoting)): function used to sort rows for complete pivoting;
+- `PartialPivoting` ([NCLUPartialPivoting](#nclupartialpivoting)): function used to sort matrices for complete pivoting;
+- `Inverse` ([NCLUInverse](#ncluinverse)): function used to invert 2x2 diagonal blocks;
+- `SelfAdjointMatrixQ` ([NCSelfAdjointQ](#ncselfadjointq)): function to test if matrix is self-adjoint;
+- `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also: [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting).
 
@@ -5476,24 +5477,24 @@ noncommutative versions of these algorithms.
 
 Members are:
 
--   Decompositions
-    -   [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting)
-    -   [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting)
-    -   [LDLDecomposition](#ldldecomposition)
-    -   [LURowReduce](#lurowreduce)
-    -   [LURowReduceIncremental](#lurowreduceincremental)
--   Solvers
-    -   [LowerTriangularSolve](#lowertriangularsolve)
-    -   [UpperTriangularSolve](#uppertriangularsolve)
-    -   [LUInverse](#luinverse)
--   Utilities
-    -   [GetLUMatrices](#getlumatrices)
-    -   [GetFullLUMatrices](#getfulllumatrices)
-    -   [GetLDUMatrices](#getldumatrices)
-    -   [GetFullLDUMatrices](#getfullldumatrices)
-    -   [GetDiagonal](#getdiagonal)
-    -   [LUPartialPivoting](#lupartialpivoting)
-    -   [LUCompletePivoting](#lucompletepivoting)
+- Decompositions
+  - [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting)
+  - [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting)
+  - [LDLDecomposition](#ldldecomposition)
+  - [LURowReduce](#lurowreduce)
+  - [LURowReduceIncremental](#lurowreduceincremental)
+- Solvers
+  - [LowerTriangularSolve](#lowertriangularsolve)
+  - [UpperTriangularSolve](#uppertriangularsolve)
+  - [LUInverse](#luinverse)
+- Utilities
+  - [GetLUMatrices](#getlumatrices)
+  - [GetFullLUMatrices](#getfulllumatrices)
+  - [GetLDUMatrices](#getldumatrices)
+  - [GetFullLDUMatrices](#getfullldumatrices)
+  - [GetDiagonal](#getdiagonal)
+  - [LUPartialPivoting](#lupartialpivoting)
+  - [LUCompletePivoting](#lucompletepivoting)
 
 ### LUDecompositionWithPartialPivoting
 
@@ -5503,8 +5504,8 @@ Members are:
 
 `LUDecompositionWithPartialPivoting` returns a list of two elements:
 
--   the first element is a combination of upper- and lower-triangular matrices;
--   the second element is a vector specifying rows used for pivoting.
+- the first element is a combination of upper- and lower-triangular matrices;
+- the second element is a vector specifying rows used for pivoting.
 
 `LUDecompositionWithPartialPivoting` is similar in functionality with the built-in `LUDecomposition`. It implements a *partial pivoting* strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.
 
@@ -5512,11 +5513,11 @@ The triangular factors are recovered using [GetLUMatrices](#getlumatrices) or [G
 
 The following `options` can be given:
 
--   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `RightDivide` (`Divide`): function used to divide a vector by an entry;
--   `Dot` (`Dot`): function used to multiply vectors and matrices;
--   `Pivoting` ([LUPartialPivoting](#lupartialpivoting)): function used to sort rows for pivoting;
--   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+- `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+- `RightDivide` (`Divide`): function used to divide a vector by an entry;
+- `Dot` (`Dot`): function used to multiply vectors and matrices;
+- `Pivoting` ([LUPartialPivoting](#lupartialpivoting)): function used to sort rows for pivoting;
+- `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
 [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices), [GetFullLUMatrices](#getfulllumatrices), [LUPartialPivoting](#lupartialpivoting).
@@ -5529,10 +5530,10 @@ See also:
 
 `LUDecompositionWithCompletePivoting` returns a list of four elements:
 
--   the first element is a combination of upper- and lower-triangular matrices;
--   the second element is a vector specifying rows used for pivoting;
--   the third element is a vector specifying columns used for pivoting;
--   the fourth element is the rank of the matrix.
+- the first element is a combination of upper- and lower-triangular matrices;
+- the second element is a vector specifying rows used for pivoting;
+- the third element is a vector specifying columns used for pivoting;
+- the fourth element is the rank of the matrix.
 
 `LUDecompositionWithCompletePivoting` implements a *complete pivoting* strategy in which the sorting can be configured using the options listed below. It also applies to general rectangular matrices as well as square matrices.
 
@@ -5540,10 +5541,10 @@ The triangular factors are recovered using [GetLUMatrices](#getlumatrices) or [G
 
 The following `options` can be given:
 
--   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `Divide` (`Divide`): function used to divide a vector by an entry;
--   `Dot` (`Dot`): function used to multiply vectors and matrices;
--   `Pivoting` ([LUCompletePivoting](#lucompletepivoting)): function used to sort rows for pivoting;
+- `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+- `Divide` (`Divide`): function used to divide a vector by an entry;
+- `Dot` (`Dot`): function used to multiply vectors and matrices;
+- `Pivoting` ([LUCompletePivoting](#lucompletepivoting)): function used to sort rows for pivoting;
 
 See also:
 LUDecomposition, [GetLUMatrices](#getlumatrices), [GetFullLUMatrices](#getfulllumatrices), [LUCompletePivoting](#lucompletepivoting), [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting).
@@ -5556,10 +5557,10 @@ LUDecomposition, [GetLUMatrices](#getlumatrices), [GetFullLUMatrices](#getfulllu
 
 `LDLDecomposition` returns a list of four elements:
 
--   the first element is a combination of upper- and lower-triangular matrices;
--   the second element is a vector specifying rows and columns used for pivoting;
--   the third element is a vector specifying the size of the diagonal blocks (entries can be either 1 or 2);
--   the fourth element is the rank of the matrix.
+- the first element is a combination of upper- and lower-triangular matrices;
+- the second element is a vector specifying rows and columns used for pivoting;
+- the third element is a vector specifying the size of the diagonal blocks (entries can be either 1 or 2);
+- the fourth element is the rank of the matrix.
 
 `LUDecompositionWithCompletePivoting` implements a *Bunch-Parlett pivoting* strategy in which the sorting can be configured using the options listed below. It applies only to square symmetric or self-adjoint matrices.
 
@@ -5567,15 +5568,15 @@ The triangular factors are recovered using [GetLDUMatrices](#getldumatrices) or 
 
 The following `options` can be given:
 
--   `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
--   `RightDivide` (`Divide`): function used to divide a vector by an entry on the right;
--   `LeftDivide` (`Divide`): function used to divide a vector by an entry on the left;
--   `Dot` (`Dot`): function used to multiply vectors and matrices;
--   `CompletePivoting` ([LUCompletePivoting](#lucompletepivoting)): function used to sort rows for complete pivoting;
--   `PartialPivoting` ([LUPartialPivoting](#lupartialpivoting)): function used to sort matrices for complete pivoting;
--   `Inverse` (`Inverse`): function used to invert 2x2 diagonal blocks;
--   `SelfAdjointMatrixQ` (HermitianQ): function to test if matrix is self-adjoint;
--   `SuppressPivoting` (`False`): whether to perform pivoting or not.
+- `ZeroTest` (`PossibleZeroQ`): function used to decide if a pivot is zero;
+- `RightDivide` (`Divide`): function used to divide a vector by an entry on the right;
+- `LeftDivide` (`Divide`): function used to divide a vector by an entry on the left;
+- `Dot` (`Dot`): function used to multiply vectors and matrices;
+- `CompletePivoting` ([LUCompletePivoting](#lucompletepivoting)): function used to sort rows for complete pivoting;
+- `PartialPivoting` ([LUPartialPivoting](#lupartialpivoting)): function used to sort matrices for complete pivoting;
+- `Inverse` (`Inverse`): function used to invert 2x2 diagonal blocks;
+- `SelfAdjointMatrixQ` (HermitianQ): function to test if matrix is self-adjoint;
+- `SuppressPivoting` (`False`): whether to perform pivoting or not.
 
 See also:
 [LUDecompositionWithPartialPivoting](#ludecompositionwithpartialpivoting), [LUDecompositionWithCompletePivoting](#ludecompositionwithcompletepivoting), [GetLUMatrices](#getlumatrices), [GetFullLDUMatrices](#getfullldumatrices), [LUCompletePivoting](#lucompletepivoting), [LUPartialPivoting](#lupartialpivoting).
@@ -5739,7 +5740,7 @@ the screen.
 
 Members are:
 
--   [NCSetOutput](#ncsetoutput)
+- [NCSetOutput](#ncsetoutput)
 
 ### NCSetOutput
 
@@ -5747,13 +5748,13 @@ Members are:
 
 The following `options` can be given:
 
--   `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\\mathrm{x} \\bullet \\mathrm{y}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%20%5Cbullet%20%5Cmathrm%7By%7D&mode=inline)’;
--   `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\\mathrm{x}^\\mathrm{T}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%5Cmathrm%7BT%7D&mode=inline)’;
--   `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\\mathrm{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B-1%7D&mode=inline)’;
--   `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\\mathrm{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%2A&mode=inline)’;
--   `co` (`True`): If `True` `co[x]` is displayed as ‘![\\bar{\\mathrm{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathrm%7Bx%7D%7D&mode=inline)’;
--   `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\\mathrm{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
--   `All`: Set all available options to `True` or `False`.
+- `NonCommutativeMultiply` (`False`): If `True` `x**y` is displayed as ‘![\mathrm{x} \bullet \mathrm{y}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%20%5Cbullet%20%5Cmathrm%7By%7D&mode=inline)’;
+- `tp` (`True`): If `True` `tp[x]` is displayed as ‘![\mathrm{x}^\mathrm{T}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%5Cmathrm%7BT%7D&mode=inline)’;
+- `inv` (`True`): If `True` `inv[x]` is displayed as ‘![\mathrm{x}^{-1}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B-1%7D&mode=inline)’;
+- `aj` (`True`): If `True` `aj[x]` is displayed as ‘![\mathrm{x}^\*](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%2A&mode=inline)’;
+- `co` (`True`): If `True` `co[x]` is displayed as ‘![\bar{\mathrm{x}}](https://render.githubusercontent.com/render/math?math=%5Cbar%7B%5Cmathrm%7Bx%7D%7D&mode=inline)’;
+- `rt` (`True`): If `True` `rt[x]` is displayed as ‘![\mathrm{x}^{1/2}](https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bx%7D%5E%7B1/2%7D&mode=inline)’.
+- `All`: Set all available options to `True` or `False`.
 
 See also:
 [NCTex](#nctex-1),
@@ -5763,12 +5764,12 @@ See also:
 
 Members are:
 
--   [NCTeX](#nctex-1)
--   [NCRunDVIPS](#ncrundvips)
--   [NCRunLaTeX](#ncrunlatex)
--   [NCRunPDFLaTeX](#ncrunpdflatex)
--   [NCRunPDFViewer](#ncrunpdfviewer)
--   [NCRunPS2PDF](#ncrunps2pdf)
+- [NCTeX](#nctex-1)
+- [NCRunDVIPS](#ncrundvips)
+- [NCRunLaTeX](#ncrunlatex)
+- [NCRunPDFLaTeX](#ncrunpdflatex)
+- [NCRunPDFViewer](#ncrunpdfviewer)
+- [NCRunPS2PDF](#ncrunps2pdf)
 
 ### NCTeX
 
@@ -5798,8 +5799,8 @@ Members are:
 
 Members are:
 
--   [NCTeXForm](#nctexform-1)
--   [NCTeXFormSetStarStar](#nctexformsetstarstar)
+- [NCTeXForm](#nctexform-1)
+- [NCTeXFormSetStarStar](#nctexformsetstarstar)
 
 ### NCTeXForm
 
@@ -5840,7 +5841,7 @@ uses a space (\``) to replace`Times`(`\*\`).
 
 Members are:
 
--   [NCRun](#ncrun-1)
+- [NCRun](#ncrun-1)
 
 ### NCRun
 
@@ -5851,8 +5852,8 @@ bit more control over the execution process.
 
 The following `options` can be given:
 
--   `Verbose` (`True`): print information on command being run;
--   `CommandPrefix` (`""`): prefix to `command`;
+- `Verbose` (`True`): print information on command being run;
+- `CommandPrefix` (`""`): prefix to `command`;
 
 See also: `Run`.
 
@@ -5864,10 +5865,10 @@ directory `NC/TESTING`.
 
 Members are:
 
--   [NCTest](#nctest-1)
--   [NCTestCheck](#nctestcheck)
--   [NCTestRun](#nctestrun)
--   [NCTestSummarize](#nctestsummarize)
+- [NCTest](#nctest-1)
+- [NCTestCheck](#nctestcheck)
+- [NCTestRun](#nctestrun)
+- [NCTestSummarize](#nctestsummarize)
 
 ### NCTest
 
@@ -5918,7 +5919,7 @@ See also:
 
 Members are:
 
--   [NCDebug](#ncdebug-1)
+- [NCDebug](#ncdebug-1)
 
 ### NCDebug
 
@@ -5929,8 +5930,8 @@ debug level.
 
 Available options are:
 
--   `DebugLevel` (0): current debug level;
--   `DebugLogFile` (`$Ouput`): current file to which messages are printed.
+- `DebugLevel` (0): current debug level;
+- `DebugLogFile` (`$Ouput`): current file to which messages are printed.
 
 ## NCUtil
 
@@ -5938,20 +5939,20 @@ Available options are:
 
 Members are:
 
--   [NCGrabSymbols](#ncgrabsymbols)
--   [NCGrabNCSymbols](#ncgrabncsymbols)
--   [NCGrabFunctions](#ncgrabfunctions)
--   [NCGrabIndeterminants](#ncgrabindeterminants)
--   [NCVariables](#ncvariables)
--   [NCConsolidateList](#ncconsolidatelist)
--   [NCConsistentQ](#ncconsistentq)
--   [NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq)
--   [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
--   [NCPowerQ](#ncpowerq)
--   [NCLeafCount](#ncleafcount)
--   [NCReplaceData](#ncreplacedata)
--   [NCToExpression](#nctoexpression)
--   [NotMatrixQ](#notmatrixq)
+- [NCGrabSymbols](#ncgrabsymbols)
+- [NCGrabNCSymbols](#ncgrabncsymbols)
+- [NCGrabFunctions](#ncgrabfunctions)
+- [NCGrabIndeterminants](#ncgrabindeterminants)
+- [NCVariables](#ncvariables)
+- [NCConsolidateList](#ncconsolidatelist)
+- [NCConsistentQ](#ncconsistentq)
+- [NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq)
+- [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
+- [NCPowerQ](#ncpowerq)
+- [NCLeafCount](#ncleafcount)
+- [NCReplaceData](#ncreplacedata)
+- [NCToExpression](#nctoexpression)
+- [NotMatrixQ](#notmatrixq)
 
 ### NCGrabSymbols
 
@@ -6043,8 +6044,8 @@ See also:
 
 `NCConsolidateList[list]` produces two lists:
 
--   The first list contains a version of `list` where repeated entries have been suppressed;
--   The second list contains the indices of the elements in the first list that recover the original `list`.
+- The first list contains a version of `list` where repeated entries have been suppressed;
+- The second list contains the indices of the elements in the first list that recover the original `list`.
 
 For example:
 
@@ -6090,9 +6091,9 @@ See also:
 
 `NCLeafCount[expr]` returns an number associated with the complexity of an expression:
 
--   If `PossibleZeroQ[expr] == True` then `NCLeafCount[expr]` is `-Infinity`;
--   If `NumberQ[expr]] == True` then `NCLeafCount[expr]` is `Abs[expr]`;
--   Otherwise `NCLeafCount[expr]` is `-LeafCount[expr]`;
+- If `PossibleZeroQ[expr] == True` then `NCLeafCount[expr]` is `-Infinity`;
+- If `NumberQ[expr]] == True` then `NCLeafCount[expr]` is `Abs[expr]`;
+- Otherwise `NCLeafCount[expr]` is `-LeafCount[expr]`;
 
 `NCLeafCount` is `Listable`.
 
@@ -6135,59 +6136,59 @@ that enable fast calculations in Mathematica.
 
 Members are:
 
--   Constructors
-    -   [NCPoly](#ncpoly-1)
-    -   [NCPolyMonomial](#ncpolymonomial)
-    -   [NCPolyConstant](#ncpolyconstant)
-    -   [NCPolyConvert](#ncpolyconvert)
-    -   [NCPolyFromCoefficientArray](#ncpolyfromcoefficientarray)
-    -   [NCPolyFromGramMatrix](#ncpolyfromgrammatrix)
-    -   [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors)
--   Access and utilities
-    -   [NCPolyMonomialQ](#ncpolymonomialq)
-    -   [NCPolyDegree](#ncpolydegree)
-    -   [NCPolyPartialDegree](#ncpolypartialdegree)
-    -   [NCPolyMonomialDegree](#ncpolymonomialdegree)
-    -   [NCPolyNumberOfVariables](#ncpolynumberofvariables)
-    -   [NCPolyNumberOfTerms](#ncpolynumberofterms)
-    -   [NCPolyCoefficient](#ncpolycoefficient)
-    -   [NCPolyCoefficientArray](#ncpolycoefficientarray)
-    -   [NCPolyGramMatrix](#ncpolygrammatrix)
-    -   [NCPolyGetCoefficients](#ncpolygetcoefficients)
-    -   [NCPolyGetDigits](#ncpolygetdigits)
-    -   [NCPolyGetIntegers](#ncpolygetintegers)
-    -   [NCPolyLeadingMonomial](#ncpolyleadingmonomial)
-    -   [NCPolyLeadingTerm](#ncpolyleadingterm)
-    -   [NCPolyOrderType](#ncpolyordertype)
-    -   [NCPolyToRule](#ncpolytorule)
-    -   [NCPolyTermsOfDegree](#ncpolytermsofdegree)
-    -   [NCPolyTermsOfTotalDegree](#ncpolytermsoftotaldegree)
-    -   [NCPolyQuadraticTerms](#ncpolyquadraticterms)
-    -   [NCPolyQuadraticChipset](#ncpolyquadraticchipset)
-    -   [NCPolyReverseMonomials](#ncpolyreversemonomials)
-    -   [NCPolyGetOptions](#ncpolygetoptions)
--   Formatting
-    -   [NCPolyDisplay](#ncpolydisplay)
-    -   [NCPolyDisplayOrder](#ncpolydisplayorder)
--   Arithmetic
-    -   [NCPolyDivideDigits](#ncpolydividedigits)
-    -   [NCPolyDivideLeading](#ncpolydivideleading)
-    -   [NCPolyFullReduce](#ncpolyfullreduce)
-    -   [NCPolyNormalize](#ncpolynormalize)
-    -   [NCPolyProduct](#ncpolyproduct)
-    -   [NCPolyQuotientExpand](#ncpolyquotientexpand)
-    -   [NCPolyReduce](#ncpolyreduce)
-    -   [NCPolySum](#ncpolysum)
--   State space realization
-    -   [NCPolyHankelMatrix](#ncpolyhankelmatrix)
-    -   [NCPolyRealization](#ncpolyrealization) (#NCPolyRealization)
--   Auxiliary functions
-    -   [NCPolyVarsToIntegers](#ncpolyvarstointegers)
-    -   [NCFromDigits](#ncfromdigits)
-    -   [NCIntegerDigits](#ncintegerdigits)
-    -   [NCIntegerReverse](#ncintegerreverse)
-    -   [NCDigitsToIndex](#ncdigitstoindex)
-    -   [NCPadAndMatch](#ncpadandmatch)
+- Constructors
+  - [NCPoly](#ncpoly-1)
+  - [NCPolyMonomial](#ncpolymonomial)
+  - [NCPolyConstant](#ncpolyconstant)
+  - [NCPolyConvert](#ncpolyconvert)
+  - [NCPolyFromCoefficientArray](#ncpolyfromcoefficientarray)
+  - [NCPolyFromGramMatrix](#ncpolyfromgrammatrix)
+  - [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors)
+- Access and utilities
+  - [NCPolyMonomialQ](#ncpolymonomialq)
+  - [NCPolyDegree](#ncpolydegree)
+  - [NCPolyPartialDegree](#ncpolypartialdegree)
+  - [NCPolyMonomialDegree](#ncpolymonomialdegree)
+  - [NCPolyNumberOfVariables](#ncpolynumberofvariables)
+  - [NCPolyNumberOfTerms](#ncpolynumberofterms)
+  - [NCPolyCoefficient](#ncpolycoefficient)
+  - [NCPolyCoefficientArray](#ncpolycoefficientarray)
+  - [NCPolyGramMatrix](#ncpolygrammatrix)
+  - [NCPolyGetCoefficients](#ncpolygetcoefficients)
+  - [NCPolyGetDigits](#ncpolygetdigits)
+  - [NCPolyGetIntegers](#ncpolygetintegers)
+  - [NCPolyLeadingMonomial](#ncpolyleadingmonomial)
+  - [NCPolyLeadingTerm](#ncpolyleadingterm)
+  - [NCPolyOrderType](#ncpolyordertype)
+  - [NCPolyToRule](#ncpolytorule)
+  - [NCPolyTermsOfDegree](#ncpolytermsofdegree)
+  - [NCPolyTermsOfTotalDegree](#ncpolytermsoftotaldegree)
+  - [NCPolyQuadraticTerms](#ncpolyquadraticterms)
+  - [NCPolyQuadraticChipset](#ncpolyquadraticchipset)
+  - [NCPolyReverseMonomials](#ncpolyreversemonomials)
+  - [NCPolyGetOptions](#ncpolygetoptions)
+- Formatting
+  - [NCPolyDisplay](#ncpolydisplay)
+  - [NCPolyDisplayOrder](#ncpolydisplayorder)
+- Arithmetic
+  - [NCPolyDivideDigits](#ncpolydividedigits)
+  - [NCPolyDivideLeading](#ncpolydivideleading)
+  - [NCPolyFullReduce](#ncpolyfullreduce)
+  - [NCPolyNormalize](#ncpolynormalize)
+  - [NCPolyProduct](#ncpolyproduct)
+  - [NCPolyQuotientExpand](#ncpolyquotientexpand)
+  - [NCPolyReduce](#ncpolyreduce)
+  - [NCPolySum](#ncpolysum)
+- State space realization
+  - [NCPolyHankelMatrix](#ncpolyhankelmatrix)
+  - [NCPolyRealization](#ncpolyrealization) (#NCPolyRealization)
+- Auxiliary functions
+  - [NCPolyVarsToIntegers](#ncpolyvarstointegers)
+  - [NCFromDigits](#ncfromdigits)
+  - [NCIntegerDigits](#ncintegerdigits)
+  - [NCIntegerReverse](#ncintegerreverse)
+  - [NCDigitsToIndex](#ncdigitstoindex)
+  - [NCPadAndMatch](#ncpadandmatch)
 
 ### Ways to represent NC polynomials
 
@@ -6306,7 +6307,7 @@ For example, if
 
 with respect to the ordering
 
-![x \\ll y \\ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
+![x \ll y \ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
 
 then
 
@@ -6315,7 +6316,7 @@ then
 
 is the same polynomial as `poly1` but in the ordering
 
-![x \\ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
+![x \ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
 
 See also:
 [NCPoly](#ncpoly-1),
@@ -6780,10 +6781,10 @@ See also:
 
 Available options are:
 
--   `TransposePairs`: list with pairs of variables to be treated as
-    transposes of each other;
--   `SelfAdjointPairs`: list with pairs of variables to be treated as
-    adjoints of each other.
+- `TransposePairs`: list with pairs of variables to be treated as
+  transposes of each other;
+- `SelfAdjointPairs`: list with pairs of variables to be treated as
+  adjoints of each other.
 
 ### Formating functions
 
@@ -7161,15 +7162,16 @@ convert and manipulate `NCPoly` expressions before converting back to
 
 Members are:
 
--   [NCToNCPoly](#nctoncpoly)
--   [NCPolyToNC](#ncpolytonc)
--   [NCRuleToPoly](#ncruletopoly)
--   [NCMonomialList](#ncmonomiallist)
--   [NCCoefficientRules](#nccoefficientrules)
--   [NCCoefficientList](#nccoefficientlist)
--   [NCCoefficientQ](#nccoefficientq)
--   [NCMonomialQ](#ncmonomialq)
--   [NCPolynomialQ](#ncpolynomialq)
+- [NCToNCPoly](#nctoncpoly)
+- [NCPolyToNC](#ncpolytonc)
+- [NCRuleToPoly](#ncruletopoly)
+- [NCToRule](#nctorule)
+- [NCMonomialList](#ncmonomiallist)
+- [NCCoefficientRules](#nccoefficientrules)
+- [NCCoefficientList](#nccoefficientlist)
+- [NCCoefficientQ](#nccoefficientq)
+- [NCMonomialQ](#ncmonomialq)
+- [NCPolynomialQ](#ncpolynomialq)
 
 ### NCToNCPoly
 
@@ -7214,6 +7216,25 @@ For instance:
 returns
 
     x**y**y - x**y + 1
+
+### NCToRule
+
+`NCToRule[exp, vars]` converts the NC polynomial `exp` into a rule `a -> b` in which `a` is the leading monomial according to the ordering
+implied by `vars`.
+
+For instance:
+
+    NCToRule[x**y**y - x**y + 1, {x,y}]
+
+returns
+
+    x**y**y -> x**y - 1
+
+NOTE: This command is not efficient. If you need to sort polynomials
+you should consider using NCPoly directly.
+
+See also:
+[NCToNCPoly](#nctoncpoly)
 
 ### NCMonomialList
 
@@ -7370,30 +7391,30 @@ which returns
 
 Members are:
 
--   Constructors
-    -   [NCPolynomial](#ncpolynomial-1)
-    -   [NCToNCPolynomial](#nctoncpolynomial)
-    -   [NCPolynomialToNC](#ncpolynomialtonc)
-    -   [NCRationalToNCPolynomial](#ncrationaltoncpolynomial)
--   Access and utilities
-    -   [NCPCoefficients](#ncpcoefficients)
-    -   [NCPTermsOfDegree](#ncptermsofdegree)
-    -   [NCPTermsOfTotalDegree](#ncptermsoftotaldegree)
-    -   [NCPTermsToNC](#ncptermstonc)
-    -   [NCPDecompose](#ncpdecompose)
-    -   [NCPDegree](#ncpdegree)
-    -   [NCPMonomialDegree](#ncpmonomialdegree)
-    -   [NCPCompatibleQ](#ncpcompatibleq)
-    -   [NCPSameVariablesQ](#ncpsamevariablesq)
-    -   [NCPMatrixQ](#ncpmatrixq)
-    -   [NCPLinearQ](#ncplinearq)
-    -   [NCPQuadraticQ](#ncpquadraticq)
-    -   [NCPNormalize](#ncpnormalize)
--   Arithmetic
-    -   [NCPTimes](#ncptimes)
-    -   [NCPDot](#ncpdot)
-    -   [NCPPlus](#ncpplus)
-    -   [NCPSort](#ncpsort)
+- Constructors
+  - [NCPolynomial](#ncpolynomial-1)
+  - [NCToNCPolynomial](#nctoncpolynomial)
+  - [NCPolynomialToNC](#ncpolynomialtonc)
+  - [NCRationalToNCPolynomial](#ncrationaltoncpolynomial)
+- Access and utilities
+  - [NCPCoefficients](#ncpcoefficients)
+  - [NCPTermsOfDegree](#ncptermsofdegree)
+  - [NCPTermsOfTotalDegree](#ncptermsoftotaldegree)
+  - [NCPTermsToNC](#ncptermstonc)
+  - [NCPDecompose](#ncpdecompose)
+  - [NCPDegree](#ncpdegree)
+  - [NCPMonomialDegree](#ncpmonomialdegree)
+  - [NCPCompatibleQ](#ncpcompatibleq)
+  - [NCPSameVariablesQ](#ncpsamevariablesq)
+  - [NCPMatrixQ](#ncpmatrixq)
+  - [NCPLinearQ](#ncplinearq)
+  - [NCPQuadraticQ](#ncpquadraticq)
+  - [NCPNormalize](#ncpnormalize)
+- Arithmetic
+  - [NCPTimes](#ncptimes)
+  - [NCPDot](#ncpdot)
+  - [NCPPlus](#ncpplus)
+  - [NCPSort](#ncpsort)
 
 ### Ways to represent NC polynomials
 
@@ -7409,11 +7430,11 @@ The *Association* `rules` stores terms in the following format:
 
 where:
 
--   `mon1, ..., monN`: are nc monomials in vars;
--   `scalar`: contains all commutative coefficients; and
--   `term1, ..., termN+1`: are nc expressions on letters other than
-    the ones in vars which are typically the noncommutative
-    coefficients of the polynomial.
+- `mon1, ..., monN`: are nc monomials in vars;
+- `scalar`: contains all commutative coefficients; and
+- `term1, ..., termN+1`: are nc expressions on letters other than
+  the ones in vars which are typically the noncommutative
+  coefficients of the polynomial.
 
 `vars` is a list of *Symbols*.
 
@@ -7463,9 +7484,9 @@ See also:
 
 `NCRationalToNCPolynomial` creates one variable for each `inv` expression in `vars` appearing in the rational expression `r`. It returns a list of three elements:
 
--   the first element is the `NCPolynomial`;
--   the second element is the list of new variables created to replace `inv`s;
--   the third element is a list of rules that can be used to recover the original rational expression.
+- the first element is the `NCPolynomial`;
+- the second element is the list of new variables created to replace `inv`s;
+- the third element is a list of rules that can be used to recover the original rational expression.
 
 For example:
 
@@ -7685,12 +7706,12 @@ See also:
 
 Members are:
 
--   [NCToNCQuadratic](#nctoncquadratic)
--   [NCPToNCQuadratic](#ncptoncquadratic)
--   [NCQuadraticToNC](#ncquadratictonc)
--   [NCQuadraticToNCPolynomial](#ncquadratictoncpolynomial)
--   [NCMatrixOfQuadratic](#ncmatrixofquadratic)
--   [NCQuadraticMakeSymmetric](#ncquadraticmakesymmetric)
+- [NCToNCQuadratic](#nctoncquadratic)
+- [NCPToNCQuadratic](#ncptoncquadratic)
+- [NCQuadraticToNC](#ncquadratictonc)
+- [NCQuadraticToNCPolynomial](#ncquadratictoncpolynomial)
+- [NCMatrixOfQuadratic](#ncmatrixofquadratic)
+- [NCQuadraticMakeSymmetric](#ncquadraticmakesymmetric)
 
 ### NCToNCQuadratic
 
@@ -7707,11 +7728,11 @@ See also:
 
 `NCPToNCQuadratic` returns a list with four elements:
 
--   the first element is the independent term;
--   the second represents the linear part as in [`NCSylvester`](#ncsylvester);
--   the third element is a list of left NC symbols;
--   the fourth element is a numeric `SparseArray`;
--   the fifth element is a list of right NC symbols.
+- the first element is the independent term;
+- the second represents the linear part as in [`NCSylvester`](#ncsylvester);
+- the third element is a list of left NC symbols;
+- the fourth element is a numeric `SparseArray`;
+- the fifth element is a list of right NC symbols.
 
 Example:
 
@@ -7748,7 +7769,7 @@ See also:
 
 The following options can be given:
 
--   `Collect` (*True*): controls whether the coefficients of the resulting `NCPolynomial` are collected to produce the minimal possible number of terms.
+- `Collect` (*True*): controls whether the coefficients of the resulting `NCPolynomial` are collected to produce the minimal possible number of terms.
 
 See also:
 [NCPToNCQuadratic](#ncptoncquadratic), [NCPolynomial](#ncpolynomial-1).
@@ -7763,9 +7784,9 @@ Internally it uses [NCPToNCQuadratic](#ncptoncquadratic) and [NCQuadraticMakeSym
 
 It returns a list of three elements:
 
--   the first is the left border row vector;
--   the second is the middle matrix;
--   the third is the right border column vector.
+- the first is the left border row vector;
+- the second is the middle matrix;
+- the third is the right border column vector.
 
 For example:
 
@@ -7796,10 +7817,10 @@ See also:
 
 Members are:
 
--   [NCToNCSylvester](#nctoncsylvester)
--   [NCPToNCSylvester](#ncptoncsylvester)
--   [NCSylvesterToNC](#ncsylvestertonc)
--   [NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial)
+- [NCToNCSylvester](#nctoncsylvester)
+- [NCPToNCSylvester](#ncptoncsylvester)
+- [NCSylvesterToNC](#ncsylvestertonc)
+- [NCSylvesterToNCPolynomial](#ncsylvestertoncpolynomial)
 
 ### NCToNCSylvester
 
@@ -7817,13 +7838,13 @@ See also:
 
 `NCPToNCSylvester` returns a list with two elements:
 
--   the first is a the independent term;
+- the first is a the independent term;
 
--   the second is an association where each key is one of the variables and each value is a list with three elements:
+- the second is an association where each key is one of the variables and each value is a list with three elements:
 
-    -   the first element is a list of left NC symbols;
-    -   the second element is a list of right NC symbols;
-    -   the third element is a numeric `SparseArray`.
+  - the first element is a list of left NC symbols;
+  - the second element is a list of right NC symbols;
+  - the third element is a numeric `SparseArray`.
 
 Example:
 
@@ -7882,16 +7903,16 @@ under [NCGB](#ncgb).
 
 Members are:
 
--   [SetMonomialOrder](#setmonomialorder)
--   [SetKnowns](#setknowns)
--   [SetUnknowns](#setunknowns)
--   [ClearMonomialOrder](#clearmonomialorder)
--   [GetMonomialOrder](#getmonomialorder)
--   [PrintMonomialOrder](#printmonomialorder)
--   [NCMakeGB](#ncmakegb)
--   [NCProcess](#ncprocess)
--   [NCGBSimplifyRational](#ncgbsimplifyrational)
--   [NCReduce](#ncreduce)
+- [SetMonomialOrder](#setmonomialorder)
+- [SetKnowns](#setknowns)
+- [SetUnknowns](#setunknowns)
+- [ClearMonomialOrder](#clearmonomialorder)
+- [GetMonomialOrder](#getmonomialorder)
+- [PrintMonomialOrder](#printmonomialorder)
+- [NCMakeGB](#ncmakegb)
+- [NCProcess](#ncprocess)
+- [NCGBSimplifyRational](#ncgbsimplifyrational)
+- [NCReduce](#ncreduce)
 
 ### SetMonomialOrder
 
@@ -7901,7 +7922,7 @@ For example
 
     SetMonomialOrder[a,b,c]
 
-sets the lex order ![a \\ll b \\ll c](https://render.githubusercontent.com/render/math?math=a%20%5Cll%20b%20%5Cll%20c&mode=inline).
+sets the lex order ![a \ll b \ll c](https://render.githubusercontent.com/render/math?math=a%20%5Cll%20b%20%5Cll%20c&mode=inline).
 
 If one uses a list of variables rather than a single variable as one
 of the arguments, then multigraded lex order is used. For example
@@ -7918,7 +7939,7 @@ or
 
     SetMonomialOrder[{a, b}, c]
 
-set the multigraded lex order ![a \< b \\ll c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c&mode=inline).
+set the multigraded lex order ![a \< b \ll c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c&mode=inline).
 
 Finally
 
@@ -7971,7 +7992,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
+which corresponds to the order ![a \< b \ll c \ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -7980,7 +8001,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
+which corresponds to the order ![a \< b \ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -8000,7 +8021,7 @@ previous knowns and unknowns. For example
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
+results in an ordering ![c \< d \ll a \ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
 
 See also:
 [SetUnknowns](#setunknowns),
@@ -8023,7 +8044,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c}, {d}]
 
-which corresponds to the order ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
+which corresponds to the order ![a \< b \ll c \ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline) and
 
     SetKnowns[a,b] 
     SetUnknowns[{c,d}]
@@ -8032,7 +8053,7 @@ is equivalent to
 
     SetMonomialOrder[{a,b}, {c, d}]
 
-which corresponds to the order ![a \< b \\ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
+which corresponds to the order ![a \< b \ll c \< d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%3C%20d&mode=inline).
 
 Note that `SetKnowns` flattens grading so that
 
@@ -8052,7 +8073,7 @@ previous knowns and unknowns. For example
     SetKnowns[c,d]
     SetUnknowns[a,b]
 
-results in an ordering ![c \< d \\ll a \\ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
+results in an ordering ![c \< d \ll a \ll b](https://render.githubusercontent.com/render/math?math=c%20%3C%20d%20%5Cll%20a%20%5Cll%20b&mode=inline).
 
 See also:
 [SetKnowns](#setknowns),
@@ -8102,7 +8123,7 @@ For example
     SetMonomialOrder[{a,b}, {c}, {d}]
     PrintMonomialOrder[]
 
-print ![a \< b \\ll c \\ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline).
+print ![a \< b \ll c \ll d](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c%20%5Cll%20d&mode=inline).
 
 See also:
 [SetKnowns](#setknowns),
@@ -8147,26 +8168,26 @@ set of polynomials.
 
 The following `options` can be given:
 
--   `ReduceBasis` (`False`): control whether the resulting basis output
-    by the command is a reduced Gröbner basis at the completion of the
-    algorithm. This corresponds to running `NCReduce` with the
-    Boolean flag `True` to completely reduce the output basis. Can be set
-    globally as `SetOptions[NCMakeGB, ReturnBasis -> True]`.
--   `SimplifyObstructions` (`True`): control whether whether to remove obstructions
-    before constructing more S-polynomials;
--   `SortObstructions` (`False`): control whether obstructions are
-    sorted before being processed;
--   `SortBasis` (`False`): control whether initial basis is sorted
-    before initiating algorithm;
--   `VerboseLevel` (`1`): control level of verbosity from `0` (no
-    messages) to `5` (very verbose);
--   `PrintBasis` (`False`): if `True` prints current basis at each major
-    iteration;
--   `PrintObstructions` (`False`): if `True` prints current list of
-    obstructions at each major iteration;
--   `PrintSPolynomials` (`False`): if `True` prints every S-polynomial
-    formed at each minor iteration.
--   `ReturnRules` (`True`): if `True` rules representing relations in which the left-hand side is the leading monomial are returned instead of polynomials. Use `False` for backward compatibility. Can be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
+- `ReduceBasis` (`False`): control whether the resulting basis output
+  by the command is a reduced Gröbner basis at the completion of the
+  algorithm. This corresponds to running `NCReduce` with the
+  Boolean flag `True` to completely reduce the output basis. Can be set
+  globally as `SetOptions[NCMakeGB, ReturnBasis -> True]`.
+- `SimplifyObstructions` (`True`): control whether whether to remove obstructions
+  before constructing more S-polynomials;
+- `SortObstructions` (`False`): control whether obstructions are
+  sorted before being processed;
+- `SortBasis` (`False`): control whether initial basis is sorted
+  before initiating algorithm;
+- `VerboseLevel` (`1`): control level of verbosity from `0` (no
+  messages) to `5` (very verbose);
+- `PrintBasis` (`False`): if `True` prints current basis at each major
+  iteration;
+- `PrintObstructions` (`False`): if `True` prints current list of
+  obstructions at each major iteration;
+- `PrintSPolynomials` (`False`): if `True` prints every S-polynomial
+  formed at each minor iteration.
+- `ReturnRules` (`True`): if `True` rules representing relations in which the left-hand side is the leading monomial are returned instead of polynomials. Use `False` for backward compatibility. Can be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
 
 `NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in
 [NCPolyGroebner](#ncpolygroebner-1).
@@ -8243,7 +8264,7 @@ user-friendly functions in the package [NCGBX](#ncgbx).
 
 Members are:
 
--   [NCPolyGroebner](#ncpolygroebner-1)
+- [NCPolyGroebner](#ncpolygroebner-1)
 
 ### NCPolyGroebner
 
@@ -8254,17 +8275,17 @@ list of `NCPoly` polynomials `G`.
 
 The following `options` can be given:
 
--   `SimplifyObstructions` (`True`) whether to remove obstructions
-    before constructing more S-polynomials;
--   `SortObstructions` (`False`) whether to sort obstructions using
-    Mora’s SUGAR ranking;
--   `SortBasis` (`False`) whether to sort basis before starting
-    algorithm;
--   `Labels` (`{}`) list of labels to use in verbose printing;
--   `VerboseLevel` (`1`): function used to decide if a pivot is zero;
--   `PrintBasis` (`False`): function used to divide a vector by an entry;
--   `PrintObstructions` (`False`);
--   `PrintSPolynomials` (`False`);
+- `SimplifyObstructions` (`True`) whether to remove obstructions
+  before constructing more S-polynomials;
+- `SortObstructions` (`False`) whether to sort obstructions using
+  Mora’s SUGAR ranking;
+- `SortBasis` (`False`) whether to sort basis before starting
+  algorithm;
+- `Labels` (`{}`) list of labels to use in verbose printing;
+- `VerboseLevel` (`1`): function used to decide if a pivot is zero;
+- `PrintBasis` (`False`): function used to divide a vector by an entry;
+- `PrintObstructions` (`False`);
+- `PrintSPolynomials` (`False`);
 
 The algorithm is based on (Mora 1994) and uses the terminology there.
 
@@ -8292,10 +8313,10 @@ solution of semidefinite programs.
 
 Members are:
 
--   [NCSDP](#ncsdp-1)
--   [NCSDPForm](#ncsdpform)
--   [NCSDPDual](#ncsdpdual)
--   [NCSDPDualForm](#ncsdpdualform)
+- [NCSDP](#ncsdp-1)
+- [NCSDPForm](#ncsdpform)
+- [NCSDPDual](#ncsdpdual)
+- [NCSDPDualForm](#ncsdpdualform)
 
 ### NCSDP
 
@@ -8309,8 +8330,8 @@ following canonical form:
 
 It returns a list with two entries:
 
--   The first is a list with the an instance of [SDPSylvester](#sdpsylvester);
--   The second is a list of rules with properties of certain variables.
+- The first is a list with the an instance of [SDPSylvester](#sdpsylvester);
+- The second is a list of rules with properties of certain variables.
 
 Both entries should be supplied to [SDPSolve](#sdpsolve) in order to
 numerically solve the semidefinite program. For example:
@@ -8333,7 +8354,7 @@ semidefinite program.
 
 The following `options` can be given:
 
--   `DebugLevel` (`0`): control printing of debugging information.
+- `DebugLevel` (`0`): control printing of debugging information.
 
 See also:
 [NCSDPForm](#ncsdpform), [NCSDPDual](#ncsdpdual), [SDPSolve](#sdpsolve).
@@ -8365,8 +8386,8 @@ uses the symbols in `dualVars` as `dVars`.
 
 The following `options` can be given:
 
--   `DualSymbol` (`"w"`): letter to be used as symbol for dual variable;
--   `DebugLevel` (`0`): control printing of debugging information.
+- `DualSymbol` (`"w"`): letter to be used as symbol for dual variable;
+- `DebugLevel` (`0`): control printing of debugging information.
 
 See also:
 [NCSDPDualForm](#ncsdpdualform), [NCSDP](#ncsdp-1).
@@ -8400,12 +8421,12 @@ alternative to the basic implementation provided by this package.
 
 Members are:
 
--   [SDPMatrices](#sdpmatrices)
--   [SDPSolve](#sdpsolve)
--   [SDPEval](#sdpeval)
--   [SDPPrimalEval](#sdpprimaleval)
--   [SDPDualEval](#sdpdualeval)
--   [SDPSylvesterEval](#sdpsylvestereval)
+- [SDPMatrices](#sdpmatrices)
+- [SDPSolve](#sdpsolve)
+- [SDPEval](#sdpeval)
+- [SDPPrimalEval](#sdpprimaleval)
+- [SDPDualEval](#sdpdualeval)
+- [SDPSylvesterEval](#sdpsylvestereval)
 
 ### SDPMatrices
 
@@ -8420,9 +8441,9 @@ into numerical data that can be used to solve an SDP in the form:
 
 `SDPMatrices` returns a list with three entries:
 
--   The first is the coefficient array `A`;
--   The second is the coefficient array `b`;
--   The third is the coefficient array `c`.
+- The first is the coefficient array `A`;
+- The second is the coefficient array `b`;
+- The third is the coefficient array `c`.
 
 For example:
 
@@ -8450,15 +8471,15 @@ See also:
 
 `SDPSolve` returns a list with four entries:
 
--   The first is the primal solution ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline);
--   The second is the dual solution ![X](https://render.githubusercontent.com/render/math?math=X&mode=inline);
--   The third is the primal slack variable ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline);
--   The fourth is a list of flags:
-    -   `PrimalFeasible`: `True` if primal problem is feasible;
-    -   `FeasibilityRadius`: less than one if primal problem is feasible;
-    -   `PrimalFeasibilityMargin`: close to zero if primal problem is feasible;
-    -   `DualFeasible`: `True` if dual problem is feasible;
-    -   `DualFeasibilityRadius`: close to zero if dual problem is feasible.
+- The first is the primal solution ![y](https://render.githubusercontent.com/render/math?math=y&mode=inline);
+- The second is the dual solution ![X](https://render.githubusercontent.com/render/math?math=X&mode=inline);
+- The third is the primal slack variable ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline);
+- The fourth is a list of flags:
+  - `PrimalFeasible`: `True` if primal problem is feasible;
+  - `FeasibilityRadius`: less than one if primal problem is feasible;
+  - `PrimalFeasibilityMargin`: close to zero if primal problem is feasible;
+  - `DualFeasible`: `True` if dual problem is feasible;
+  - `DualFeasibilityRadius`: close to zero if dual problem is feasible.
 
 For example:
 
@@ -8509,11 +8530,11 @@ See also:
 ### SDPSylvesterEval
 
 `SDPSylvesterEval[a, W]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W A (\\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W A (\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
 when applied to the scaling `W`.
 
 `SDPSylvesterEval[a, Wl, Wr]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W_l A (\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also:
@@ -8539,10 +8560,10 @@ implementation provided by the package [SDP](#sdp).
 
 Members are:
 
--   [SDPFlatData](#sdpflatdata)
--   [SDPFlatPrimalEval](#sdpflatprimaleval)
--   [SDPFlatDualEval](#sdpflatdualeval)
--   [SDPFlatSylvesterEval](#sdpflatsylvestereval)
+- [SDPFlatData](#sdpflatdata)
+- [SDPFlatPrimalEval](#sdpflatprimaleval)
+- [SDPFlatDualEval](#sdpflatdualeval)
+- [SDPFlatSylvesterEval](#sdpflatsylvestereval)
 
 ### SDPFlatData
 
@@ -8551,10 +8572,10 @@ of the package [SDP](#sdp) to the `SDPFlat` format.
 
 It returns a list with four entries:
 
--   The first is the input array `a`;
--   The second is its flattened version `AFlat`;
--   The third is the flattened version of `c`, `cFlat`;
--   The fourth is an array with the flattened dimensions.
+- The first is the input array `a`;
+- The second is its flattened version `AFlat`;
+- The third is the flattened version of `c`, `cFlat`;
+- The fourth is an array with the flattened dimensions.
 
 See also:
 [SDP](#sdp).
@@ -8578,11 +8599,11 @@ See also:
 ### SDPFlatSylvesterEval
 
 `SDPFlatSylvesterEval[a, aFlat, W]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W A (\\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W A (\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
 when applied to the scaling `W`.
 
 `SDPFlatSylvesterEval[a, aFlat, Wl, Wr]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W_l A (\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also:
@@ -8600,18 +8621,18 @@ numeric solution of semidefinite programs of the form:
 
 </div>
 
-where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y = \\{ y_1, \\ldots, y_n \\}](https://render.githubusercontent.com/render/math?math=y%20%3D%20%5C%7B%20y_1%2C%20%5Cldots%2C%20y_n%20%5C%7D&mode=inline) is a list of matrix decision variables.
+where ![S](https://render.githubusercontent.com/render/math?math=S&mode=inline) is a symmetric positive semidefinite matrix and ![y = \\ y_1, \ldots, y_n \\](https://render.githubusercontent.com/render/math?math=y%20%3D%20%5C%7B%20y_1%2C%20%5Cldots%2C%20y_n%20%5C%7D&mode=inline) is a list of matrix decision variables.
 
 Members are:
 
--   [SDPEval](#sdpeval-1)
--   [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
--   [SDPSylvesterDualEval](#sdpsylvesterdualeval)
--   [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
+- [SDPEval](#sdpeval-1)
+- [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval)
+- [SDPSylvesterDualEval](#sdpsylvesterdualeval)
+- [SDPSylvesterSylvesterEval](#sdpsylvestersylvestereval)
 
 ### SDPEval
 
-`SDPEval[A, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum_i a_i y_i b_i + (a_i y_i b_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
+`SDPEval[A, y]` evaluates the linear function ![A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
 
 This is a convenient replacement for [SDPSylvesterPrimalEval](#sdpsylvesterprimaleval) in which the list `y` can be used directly.
 
@@ -8621,7 +8642,7 @@ See also:
 
 ### SDPSylvesterPrimalEval
 
-`SDPSylvesterPrimalEval[a, y]` evaluates the linear function ![A y = \\frac{1}{2} \\sum_i a_i y_i b_i + (a_i y_i b_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
+`SDPSylvesterPrimalEval[a, y]` evaluates the linear function ![A y = \frac{1}{2} \sum_i a_i y_i b_i + (a_i y_i b_i)^T](https://render.githubusercontent.com/render/math?math=A%20y%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_i%20a_i%20y_i%20b_i%20%2B%20%28a_i%20y_i%20b_i%29%5ET&mode=inline) in an `SDPSylvester`.
 
 See [SDPSylvesterEval](#sdpsylvestereval) for a convenient replacement for `SDPPrimalEval` in which the list `y` can be used directly.
 
@@ -8631,7 +8652,7 @@ See also:
 
 ### SDPSylvesterDualEval
 
-`SDPSylvesterDualEval[A, X]` evaluates the linear function ![A^\* X = \\{ b_1 X a_1, \\cdots, b_n X a_n \\}](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X%20%3D%20%5C%7B%20b_1%20X%20a_1%2C%20%5Ccdots%2C%20b_n%20X%20a_n%20%5C%7D&mode=inline) in an `SDPSylvester`.
+`SDPSylvesterDualEval[A, X]` evaluates the linear function ![A^\* X = \\ b_1 X a_1, \cdots, b_n X a_n \\](https://render.githubusercontent.com/render/math?math=A%5E%2A%20X%20%3D%20%5C%7B%20b_1%20X%20a_1%2C%20%5Ccdots%2C%20b_n%20X%20a_n%20%5C%7D&mode=inline) in an `SDPSylvester`.
 
 For example
 
@@ -8642,11 +8663,11 @@ See also:
 ### SDPSylvesterSylvesterEval
 
 `SDPSylvesterEval[a, W]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W A (\\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W A (\Delta_y) W)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W%20A%20%28%5CDelta_y%29%20W%29&mode=inline)
 when applied to the scaling `W`.
 
 `SDPSylvesterEval[a, Wl, Wr]` returns a matrix
-representation of the Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
+representation of the Sylvester mapping ![A^\* (W_l A (\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline)
 when applied to the left- and right-scalings `Wl` and `Wr`.
 
 See also:
@@ -8691,7 +8712,7 @@ Embedding of \[\].
 
 Members are:
 
--   [PrimalDual](#primaldual-1)
+- [PrimalDual](#primaldual-1)
 
 ### PrimalDual
 
@@ -8705,52 +8726,52 @@ the current primal variable `X` as in `PrimalEval @@ X`.
 current dual variable `y` as in `DualEval @@ y`.
 
 `SylvesterVecEval` should return a matrix representation of the
-Sylvester mapping ![A^\* (W_l A (\\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline) when applied to the left- and
+Sylvester mapping ![A^\* (W_l A (\Delta_y) W_r)](https://render.githubusercontent.com/render/math?math=A%5E%2A%20%28W_l%20A%20%28%5CDelta_y%29%20W_r%29&mode=inline) when applied to the left- and
 right-scalings `Wl` and `Wr` as in `SylvesterVecEval @@ {Wl, Wr}`.
 
 `PrimalDual[PrimalEval,DualEval,SylvesterEval,b,c,options]` uses `options`.
 
 The following `options` can be given:
 
--   `Method` (`PredictorCorrector`): choice of method for updating
-    duality gap; possible options are `ShortStep`, `LongStep` and
-    `PredictorCorrector`;
+- `Method` (`PredictorCorrector`): choice of method for updating
+  duality gap; possible options are `ShortStep`, `LongStep` and
+  `PredictorCorrector`;
 
--   `SearchDirection` (`NT`): choice of search direction to use;
-    possible options are `NT` for Nesterov-Todd, `KSH` for HRVM/KSH/M,
-    `KSHDual` for dual HRVM/KSH/M;
+- `SearchDirection` (`NT`): choice of search direction to use;
+  possible options are `NT` for Nesterov-Todd, `KSH` for HRVM/KSH/M,
+  `KSHDual` for dual HRVM/KSH/M;
 
--   `FeasibilityTol` (10^-3): tolerance used to assess feasibility;
+- `FeasibilityTol` (10^-3): tolerance used to assess feasibility;
 
--   `GapTol` (10^-9): tolerance used to assess optimality;
+- `GapTol` (10^-9): tolerance used to assess optimality;
 
--   `MaxIter` (250): maximum number of iterations allowed;
+- `MaxIter` (250): maximum number of iterations allowed;
 
--   `SparseWeights` (`True`): whether weights should be converted to a
-    `SparseArray`;
+- `SparseWeights` (`True`): whether weights should be converted to a
+  `SparseArray`;
 
--   `RationalizeIterates` (`False`): whether to rationalize iterates in an attempt to construct a rational solution;
+- `RationalizeIterates` (`False`): whether to rationalize iterates in an attempt to construct a rational solution;
 
--   `SymmetricVariables` (`{}`): list of index of dual variables to be
-    considered symmetric.
+- `SymmetricVariables` (`{}`): list of index of dual variables to be
+  considered symmetric.
 
--   `ScaleHessian` (`True`): whether to scale the least-squares subproblem
-    coefficient matrix;
+- `ScaleHessian` (`True`): whether to scale the least-squares subproblem
+  coefficient matrix;
 
--   `PrintSummary` (`True`): whether to print summary information;
+- `PrintSummary` (`True`): whether to print summary information;
 
--   `PrintIterations` (`True`): whether to print progrees at each iteration;
+- `PrintIterations` (`True`): whether to print progrees at each iteration;
 
--   `DebugLevel` (0): whether to print debug information;
+- `DebugLevel` (0): whether to print debug information;
 
--   `Profiling` (`False`): whether to print messages with detailed timing of steps.
+- `Profiling` (`False`): whether to print messages with detailed timing of steps.
 
 ## NCPolySOS
 
 Members are:
 
--   [NCPolySOS](#ncpolysos-1)
--   [NCPolySOSToSDP](#ncpolysostosdp)
+- [NCPolySOS](#ncpolysos-1)
+- [NCPolySOSToSDP](#ncpolysostosdp)
 
 ### NCPolySOS
 
@@ -8792,7 +8813,7 @@ of SOS NCPoly `ps` and the list of Gram matrices `Qs`.
 
 For example,
 
-{q, Q, $, chipset} = NCPolySOS\[poly, q\];
+{q, Q, \$, chipset} = NCPolySOS\[poly, q\];
 {sdp, vars, sol, solQ} = NCPolySOSToSDP\[{poly - q}, {Q}, z\];
 
 generate the semidefinite constraints `spd` in the variables `vars`
@@ -8824,37 +8845,37 @@ which returns
 
 Members are:
 
--   [NCRational](#ncrational-1)
+- [NCRational](#ncrational-1)
 
--   [NCToNCRational](#nctoncrational)
+- [NCToNCRational](#nctoncrational)
 
--   [NCRationalToNC](#ncrationaltonc)
+- [NCRationalToNC](#ncrationaltonc)
 
--   [NCRationalToCanonical](#ncrationaltocanonical)
+- [NCRationalToCanonical](#ncrationaltocanonical)
 
--   [CanonicalToNCRational](#canonicaltoncrational)
+- [CanonicalToNCRational](#canonicaltoncrational)
 
--   [NCROrder](#ncrorder)
+- [NCROrder](#ncrorder)
 
--   [NCRLinearQ](#ncrlinearq)
+- [NCRLinearQ](#ncrlinearq)
 
--   [NCRStrictlyProperQ](#ncrstrictlyproperq)
+- [NCRStrictlyProperQ](#ncrstrictlyproperq)
 
--   [NCRPlus](#ncrplus)
+- [NCRPlus](#ncrplus)
 
--   [NCRTimes](#ncrtimes)
+- [NCRTimes](#ncrtimes)
 
--   [NCRTranspose](#ncrtranspose)
+- [NCRTranspose](#ncrtranspose)
 
--   [NCRInverse](#ncrinverse)
+- [NCRInverse](#ncrinverse)
 
--   [NCRControllableSubspace](#ncrcontrollablesubspace)
+- [NCRControllableSubspace](#ncrcontrollablesubspace)
 
--   [NCRControllableRealization](#ncrcontrollablerealization)
+- [NCRControllableRealization](#ncrcontrollablerealization)
 
--   [NCRObservableRealization](#ncrobservablerealization)
+- [NCRObservableRealization](#ncrobservablerealization)
 
--   [NCRMinimalRealization](#ncrminimalrealization)
+- [NCRMinimalRealization](#ncrminimalrealization)
 
 ### State-space realizations for NC rationals
 
@@ -8939,21 +8960,21 @@ It actually computes formulas similar to those used in the paper “Noncommutati
 
 Members are:
 
--   Drivers:
-    -   [NCDescriptorRealization](#ncdescriptorrealization)
-    -   [NCMatrixDescriptorRealization](#ncmatrixdescriptorrealization)
-    -   [NCMinimalDescriptorRealization](#ncminimaldescriptorrealization)
-    -   [NCDeterminantalRepresentationReciprocal](#ncdeterminantalrepresentationreciprocal)
-    -   [NCSymmetrizeMinimalDescriptorRealization](#ncsymmetrizeminimaldescriptorrealization)
-    -   [NCSymmetricDescriptorRealization](#ncsymmetricdescriptorrealization)
-    -   [NCSymmetricDeterminantalRepresentationDirect](#ncsymmetricdeterminantalrepresentationdirect)
-    -   [NCSymmetricDeterminantalRepresentationReciprocal](#ncsymmetricdeterminantalrepresentationreciprocal)
-    -   [NonCommutativeLift](#noncommutativelift)
--   Auxiliary:
-    -   [PinnedQ](#pinnedq)
-    -   [PinningSpace](#pinningspace)
-    -   [TestDescriptorRealization](#testdescriptorrealization)
-    -   [SignatureOfAffineTerm](#signatureofaffineterm)
+- Drivers:
+  - [NCDescriptorRealization](#ncdescriptorrealization)
+  - [NCMatrixDescriptorRealization](#ncmatrixdescriptorrealization)
+  - [NCMinimalDescriptorRealization](#ncminimaldescriptorrealization)
+  - [NCDeterminantalRepresentationReciprocal](#ncdeterminantalrepresentationreciprocal)
+  - [NCSymmetrizeMinimalDescriptorRealization](#ncsymmetrizeminimaldescriptorrealization)
+  - [NCSymmetricDescriptorRealization](#ncsymmetricdescriptorrealization)
+  - [NCSymmetricDeterminantalRepresentationDirect](#ncsymmetricdeterminantalrepresentationdirect)
+  - [NCSymmetricDeterminantalRepresentationReciprocal](#ncsymmetricdeterminantalrepresentationreciprocal)
+  - [NonCommutativeLift](#noncommutativelift)
+- Auxiliary:
+  - [PinnedQ](#pinnedq)
+  - [PinningSpace](#pinningspace)
+  - [TestDescriptorRealization](#testdescriptorrealization)
+  - [SignatureOfAffineTerm](#signatureofaffineterm)
 
 ### NCDescriptorRealization
 

@@ -10,15 +10,21 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
     }
-    .hanging div.csl-entry {
+    .hanging-indent div.csl-entry {
       margin-left:2em;
       text-indent:-2em;
     }
@@ -32,8 +38,7 @@
     }
     div.csl-indent {
       margin-left: 2em;
-    }
-  </style>
+    }  </style>
   <link rel="stylesheet" href="base.css" />
   <script
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
@@ -53,871 +58,968 @@ Stankus</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#acknowledgements"><span
+<li><a href="#acknowledgements" id="toc-acknowledgements"><span
 class="toc-section-number">1</span> Acknowledgements</a></li>
-<li><a href="#Version6_0"><span class="toc-section-number">2</span>
-Changes in Version 6.0</a>
+<li><a href="#Version6_0" id="toc-Version6_0"><span
+class="toc-section-number">2</span> Changes in Version 6.0</a>
 <ul>
-<li><a href="#Version6_0_0"><span class="toc-section-number">2.1</span>
-Version 6.0.0</a></li>
+<li><a href="#Version6_0_0" id="toc-Version6_0_0"><span
+class="toc-section-number">2.1</span> Version 6.0.0</a></li>
 </ul></li>
-<li><a href="#Version5_0"><span class="toc-section-number">3</span>
-Changes in Version 5.0</a>
+<li><a href="#Version5_0" id="toc-Version5_0"><span
+class="toc-section-number">3</span> Changes in Version 5.0</a>
 <ul>
-<li><a href="#Version5_0_6"><span class="toc-section-number">3.1</span>
-Version 5.0.6</a></li>
-<li><a href="#Version5_0_5"><span class="toc-section-number">3.2</span>
-Version 5.0.5</a></li>
-<li><a href="#Version5_0_4"><span class="toc-section-number">3.3</span>
-Version 5.0.4</a></li>
-<li><a href="#Version5_0_3"><span class="toc-section-number">3.4</span>
-Version 5.0.3</a></li>
-<li><a href="#Version5_0_2"><span class="toc-section-number">3.5</span>
-Version 5.0.2</a></li>
-<li><a href="#Version5_0_1"><span class="toc-section-number">3.6</span>
-Version 5.0.1</a></li>
-<li><a href="#Version5_0_0"><span class="toc-section-number">3.7</span>
-Version 5.0.0</a></li>
+<li><a href="#Version5_0_6" id="toc-Version5_0_6"><span
+class="toc-section-number">3.1</span> Version 5.0.6</a></li>
+<li><a href="#Version5_0_5" id="toc-Version5_0_5"><span
+class="toc-section-number">3.2</span> Version 5.0.5</a></li>
+<li><a href="#Version5_0_4" id="toc-Version5_0_4"><span
+class="toc-section-number">3.3</span> Version 5.0.4</a></li>
+<li><a href="#Version5_0_3" id="toc-Version5_0_3"><span
+class="toc-section-number">3.4</span> Version 5.0.3</a></li>
+<li><a href="#Version5_0_2" id="toc-Version5_0_2"><span
+class="toc-section-number">3.5</span> Version 5.0.2</a></li>
+<li><a href="#Version5_0_1" id="toc-Version5_0_1"><span
+class="toc-section-number">3.6</span> Version 5.0.1</a></li>
+<li><a href="#Version5_0_0" id="toc-Version5_0_0"><span
+class="toc-section-number">3.7</span> Version 5.0.0</a></li>
 </ul></li>
-<li><a href="#UserGuideIntroduction"><span
-class="toc-section-number">4</span> Introduction</a>
+<li><a href="#UserGuideIntroduction"
+id="toc-UserGuideIntroduction"><span class="toc-section-number">4</span>
+Introduction</a>
 <ul>
-<li><a href="#RunningNCAlgebra"><span
+<li><a href="#RunningNCAlgebra" id="toc-RunningNCAlgebra"><span
 class="toc-section-number">4.1</span> Running NCAlgebra</a></li>
-<li><a href="#now-what"><span class="toc-section-number">4.2</span> Now
-what?</a></li>
-<li><a href="#testing"><span class="toc-section-number">4.3</span>
-Testing</a></li>
-<li><a href="#pre-2017-ncgb-c-version"><span
+<li><a href="#now-what" id="toc-now-what"><span
+class="toc-section-number">4.2</span> Now what?</a></li>
+<li><a href="#testing" id="toc-testing"><span
+class="toc-section-number">4.3</span> Testing</a></li>
+<li><a href="#pre-2017-ncgb-c-version"
+id="toc-pre-2017-ncgb-c-version"><span
 class="toc-section-number">4.4</span> Pre-2017 NCGB C++ version</a></li>
 </ul></li>
-<li><a href="#MostBasicCommands"><span
+<li><a href="#MostBasicCommands" id="toc-MostBasicCommands"><span
 class="toc-section-number">5</span> Most Basic Commands</a>
 <ul>
-<li><a href="#to-commute-or-not-to-commute"><span
+<li><a href="#to-commute-or-not-to-commute"
+id="toc-to-commute-or-not-to-commute"><span
 class="toc-section-number">5.1</span> To Commute Or Not To
 Commute?</a></li>
-<li><a href="#inverses"><span class="toc-section-number">5.2</span>
-Inverses</a></li>
-<li><a href="#transposes-and-adjoints"><span
+<li><a href="#inverses" id="toc-inverses"><span
+class="toc-section-number">5.2</span> Inverses</a></li>
+<li><a href="#transposes-and-adjoints"
+id="toc-transposes-and-adjoints"><span
 class="toc-section-number">5.3</span> Transposes and Adjoints</a></li>
-<li><a href="#replace"><span class="toc-section-number">5.4</span>
-Replace</a></li>
-<li><a href="#polynomials"><span class="toc-section-number">5.5</span>
-Polynomials</a></li>
-<li><a href="#rationals-and-simplification"><span
+<li><a href="#replace" id="toc-replace"><span
+class="toc-section-number">5.4</span> Replace</a></li>
+<li><a href="#polynomials" id="toc-polynomials"><span
+class="toc-section-number">5.5</span> Polynomials</a></li>
+<li><a href="#rationals-and-simplification"
+id="toc-rationals-and-simplification"><span
 class="toc-section-number">5.6</span> Rationals and
 Simplification</a></li>
-<li><a href="#calculus"><span class="toc-section-number">5.7</span>
-Calculus</a></li>
-<li><a href="#BasicMatrices"><span class="toc-section-number">5.8</span>
-Matrices</a>
+<li><a href="#calculus" id="toc-calculus"><span
+class="toc-section-number">5.7</span> Calculus</a></li>
+<li><a href="#BasicMatrices" id="toc-BasicMatrices"><span
+class="toc-section-number">5.8</span> Matrices</a>
 <ul>
-<li><a href="#BasicMatrices:Inverses"><span
+<li><a href="#BasicMatrices:Inverses"
+id="toc-BasicMatrices:Inverses"><span
 class="toc-section-number">5.8.1</span> Inverses, products, adjoints,
 etc</a></li>
-<li><a href="#BasicMatrices:LUDecomposition"><span
+<li><a href="#BasicMatrices:LUDecomposition"
+id="toc-BasicMatrices:LUDecomposition"><span
 class="toc-section-number">5.8.2</span> LU Decomposition</a></li>
-<li><a href="#BasicMatrices:LUDecompositionWithCompletePivoting"><span
+<li><a href="#BasicMatrices:LUDecompositionWithCompletePivoting"
+id="toc-BasicMatrices:LUDecompositionWithCompletePivoting"><span
 class="toc-section-number">5.8.3</span> LU Decomposition with complete
 pivoting</a></li>
-<li><a href="#BasicMatrices:LDLDecomposition"><span
+<li><a href="#BasicMatrices:LDLDecomposition"
+id="toc-BasicMatrices:LDLDecomposition"><span
 class="toc-section-number">5.8.4</span> LDL Decomposition</a></li>
-<li><a href="#ReplaceWithMatrices"><span
+<li><a href="#ReplaceWithMatrices" id="toc-ReplaceWithMatrices"><span
 class="toc-section-number">5.8.5</span> Replace with matrices</a></li>
 </ul></li>
-<li><a href="#Quadratic"><span class="toc-section-number">5.9</span>
-Quadratic polynomials, second direction derivatives and
-convexity</a></li>
+<li><a href="#Quadratic" id="toc-Quadratic"><span
+class="toc-section-number">5.9</span> Quadratic polynomials, second
+direction derivatives and convexity</a></li>
 </ul></li>
-<li><a href="#MoreAdvancedCommands"><span
+<li><a href="#MoreAdvancedCommands" id="toc-MoreAdvancedCommands"><span
 class="toc-section-number">6</span> More Advanced Commands</a>
 <ul>
-<li><a href="#AdvancedReplace"><span
+<li><a href="#AdvancedReplace" id="toc-AdvancedReplace"><span
 class="toc-section-number">6.1</span> Advanced Rules and
 Replacements</a>
 <ul>
-<li><a href="#replaceall-.-and-replacerepeated-.-often-fail"><span
+<li><a href="#replaceall-.-and-replacerepeated-.-often-fail"
+id="toc-replaceall-.-and-replacerepeated-.-often-fail"><span
 class="toc-section-number">6.1.1</span> <code>ReplaceAll</code>
 (<code>/.</code>) and <code>ReplaceRepeated</code> (<code>//.</code>)
 often fail</a></li>
-<li><a href="#the-fix-is-ncreplace"><span
+<li><a href="#the-fix-is-ncreplace" id="toc-the-fix-is-ncreplace"><span
 class="toc-section-number">6.1.2</span> The fix is
 <code>NCReplace</code></a></li>
-<li><a href="#matching-monomials-with-powers"><span
+<li><a href="#matching-monomials-with-powers"
+id="toc-matching-monomials-with-powers"><span
 class="toc-section-number">6.1.3</span> Matching monomials with
 powers</a></li>
-<li><a href="#trouble-with-block-and-module"><span
+<li><a href="#trouble-with-block-and-module"
+id="toc-trouble-with-block-and-module"><span
 class="toc-section-number">6.1.4</span> Trouble with <code>Block</code>
 and <code>Module</code></a></li>
 </ul></li>
-<li><a href="#AdvancedMatrices"><span
+<li><a href="#AdvancedMatrices" id="toc-AdvancedMatrices"><span
 class="toc-section-number">6.2</span> Expanding matrix products</a>
 <ul>
-<li><a href="#trouble-with-plus-and-matrices"><span
+<li><a href="#trouble-with-plus-and-matrices"
+id="toc-trouble-with-plus-and-matrices"><span
 class="toc-section-number">6.2.1</span> Trouble with <code>Plus</code>
 (<code>+</code>) and matrices</a></li>
 </ul></li>
-<li><a href="#PolysWithCommutativeCoefficients"><span
+<li><a href="#PolysWithCommutativeCoefficients"
+id="toc-PolysWithCommutativeCoefficients"><span
 class="toc-section-number">6.3</span> Polynomials with commutative
 coefficients</a></li>
-<li><a href="#polynomials-with-noncommutative-coefficients"><span
+<li><a href="#polynomials-with-noncommutative-coefficients"
+id="toc-polynomials-with-noncommutative-coefficients"><span
 class="toc-section-number">6.4</span> Polynomials with noncommutative
 coefficients</a></li>
-<li><a href="#Linear"><span class="toc-section-number">6.5</span> Linear
-polynomials</a></li>
+<li><a href="#Linear" id="toc-Linear"><span
+class="toc-section-number">6.5</span> Linear polynomials</a></li>
 </ul></li>
-<li><a href="#NCGB"><span class="toc-section-number">7</span>
-Noncommutative Gröbner Basis</a>
+<li><a href="#NCGB" id="toc-NCGB"><span
+class="toc-section-number">7</span> Noncommutative Gröbner Basis</a>
 <ul>
-<li><a href="#what-is-a-gröbner-basis"><span
+<li><a href="#what-is-a-gröbner-basis"
+id="toc-what-is-a-gröbner-basis"><span
 class="toc-section-number">7.1</span> What is a Gröbner Basis?</a></li>
-<li><a href="#solving-equations"><span
+<li><a href="#solving-equations" id="toc-solving-equations"><span
 class="toc-section-number">7.2</span> Solving equations</a></li>
-<li><a href="#a-slightly-more-challenging-example"><span
+<li><a href="#a-slightly-more-challenging-example"
+id="toc-a-slightly-more-challenging-example"><span
 class="toc-section-number">7.3</span> A slightly more challenging
 example</a></li>
-<li><a href="#simplifying-polynomial-expresions"><span
+<li><a href="#simplifying-polynomial-expresions"
+id="toc-simplifying-polynomial-expresions"><span
 class="toc-section-number">7.4</span> Simplifying polynomial
 expresions</a></li>
-<li><a href="#minimal-versus-reduced-gröbner-basis"><span
+<li><a href="#minimal-versus-reduced-gröbner-basis"
+id="toc-minimal-versus-reduced-gröbner-basis"><span
 class="toc-section-number">7.5</span> Minimal versus reduced Gröbner
 Basis</a></li>
-<li><a href="#simplifying-rational-expresions"><span
+<li><a href="#simplifying-rational-expresions"
+id="toc-simplifying-rational-expresions"><span
 class="toc-section-number">7.6</span> Simplifying rational
 expresions</a></li>
-<li><a href="#simplification-with-ncgbsimplifyrational"><span
+<li><a href="#simplification-with-ncgbsimplifyrational"
+id="toc-simplification-with-ncgbsimplifyrational"><span
 class="toc-section-number">7.7</span> Simplification with
 NCGBSimplifyRational</a></li>
-<li><a href="#Orderings"><span class="toc-section-number">7.8</span>
-Ordering on variables and monomials</a>
+<li><a href="#Orderings" id="toc-Orderings"><span
+class="toc-section-number">7.8</span> Ordering on variables and
+monomials</a>
 <ul>
-<li><a href="#lex-order-the-simplest-elimination-order"><span
+<li><a href="#lex-order-the-simplest-elimination-order"
+id="toc-lex-order-the-simplest-elimination-order"><span
 class="toc-section-number">7.8.1</span> Lex Order: the simplest
 elimination order</a></li>
-<li><a href="#graded-lex-ordering-a-non-elimination-order"><span
+<li><a href="#graded-lex-ordering-a-non-elimination-order"
+id="toc-graded-lex-ordering-a-non-elimination-order"><span
 class="toc-section-number">7.8.2</span> Graded lex ordering: a
 non-elimination order</a></li>
-<li><a
-href="#multigraded-lex-ordering-a-variety-of-elimination-orders"><span
+<li><a href="#multigraded-lex-ordering-a-variety-of-elimination-orders"
+id="toc-multigraded-lex-ordering-a-variety-of-elimination-orders"><span
 class="toc-section-number">7.8.3</span> Multigraded lex ordering: a
 variety of elimination orders</a></li>
 </ul></li>
 <li><a
-href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span
+href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem"
+id="toc-a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span
 class="toc-section-number">7.9</span> A complete example: the partially
 prescribed matrix inverse problem</a></li>
 </ul></li>
-<li><a href="#SemidefiniteProgramming"><span
+<li><a href="#SemidefiniteProgramming"
+id="toc-SemidefiniteProgramming"><span
 class="toc-section-number">8</span> Semidefinite Programming</a>
 <ul>
-<li><a href="#semidefinite-programs-in-matrix-variables"><span
+<li><a href="#semidefinite-programs-in-matrix-variables"
+id="toc-semidefinite-programs-in-matrix-variables"><span
 class="toc-section-number">8.1</span> Semidefinite Programs in Matrix
 Variables</a></li>
-<li><a href="#semidefinite-programs-in-vector-variables"><span
+<li><a href="#semidefinite-programs-in-vector-variables"
+id="toc-semidefinite-programs-in-vector-variables"><span
 class="toc-section-number">8.2</span> Semidefinite Programs in Vector
 Variables</a></li>
 </ul></li>
-<li><a href="#TeX"><span class="toc-section-number">9</span> Pretty
-Output with Notebooks and  </a>
+<li><a href="#TeX" id="toc-TeX"><span
+class="toc-section-number">9</span> Pretty Output with Notebooks and
+ </a>
 <ul>
-<li><a href="#Pretty_Output"><span class="toc-section-number">9.1</span>
-Pretty Output</a></li>
-<li><a href="#Using_NCTeX"><span class="toc-section-number">9.2</span>
-Using NCTeX</a>
+<li><a href="#Pretty_Output" id="toc-Pretty_Output"><span
+class="toc-section-number">9.1</span> Pretty Output</a></li>
+<li><a href="#Using_NCTeX" id="toc-Using_NCTeX"><span
+class="toc-section-number">9.2</span> Using NCTeX</a>
 <ul>
-<li><a href="#NCTeX_Options"><span
+<li><a href="#NCTeX_Options" id="toc-NCTeX_Options"><span
 class="toc-section-number">9.2.1</span> NCTeX Options</a></li>
 </ul></li>
-<li><a href="#Using_NCTeXForm"><span
+<li><a href="#Using_NCTeXForm" id="toc-Using_NCTeXForm"><span
 class="toc-section-number">9.3</span> Using NCTeXForm</a></li>
 </ul></li>
-<li><a href="#ReferenceIntroduction"><span
+<li><a href="#ReferenceIntroduction"
+id="toc-ReferenceIntroduction"><span
 class="toc-section-number">10</span> Reference Manual</a>
 <ul>
-<li><a href="#PackageNC"><span class="toc-section-number">10.1</span>
-NC</a>
+<li><a href="#PackageNC" id="toc-PackageNC"><span
+class="toc-section-number">10.1</span> NC</a>
 <ul>
-<li><a href="#PackageNCOptions"><span
+<li><a href="#PackageNCOptions" id="toc-PackageNCOptions"><span
 class="toc-section-number">10.1.1</span> Options</a></li>
 </ul></li>
-<li><a href="#PackageNCAlgebra"><span
+<li><a href="#PackageNCAlgebra" id="toc-PackageNCAlgebra"><span
 class="toc-section-number">10.2</span> NCAlgebra</a>
 <ul>
-<li><a href="#NCAlgebraMessages"><span
+<li><a href="#NCAlgebraMessages" id="toc-NCAlgebraMessages"><span
 class="toc-section-number">10.2.1</span> Messages</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#ManipulatingNCExpressions"><span
+<li><a href="#ManipulatingNCExpressions"
+id="toc-ManipulatingNCExpressions"><span
 class="toc-section-number">11</span> Packages for manipulating NC
 expressions</a>
 <ul>
-<li><a href="#PackageNonCommutativeMultiply"><span
+<li><a href="#PackageNonCommutativeMultiply"
+id="toc-PackageNonCommutativeMultiply"><span
 class="toc-section-number">11.1</span> NonCommutativeMultiply</a>
 <ul>
-<li><a href="#aj"><span class="toc-section-number">11.1.1</span>
-aj</a></li>
-<li><a href="#co"><span class="toc-section-number">11.1.2</span>
-co</a></li>
-<li><a href="#Id"><span class="toc-section-number">11.1.3</span>
-Id</a></li>
-<li><a href="#inv"><span class="toc-section-number">11.1.4</span>
-inv</a></li>
-<li><a href="#rt"><span class="toc-section-number">11.1.5</span>
-rt</a></li>
-<li><a href="#tp"><span class="toc-section-number">11.1.6</span>
-tp</a></li>
-<li><a href="#CommutativeQ"><span
+<li><a href="#aj" id="toc-aj"><span
+class="toc-section-number">11.1.1</span> aj</a></li>
+<li><a href="#co" id="toc-co"><span
+class="toc-section-number">11.1.2</span> co</a></li>
+<li><a href="#Id" id="toc-Id"><span
+class="toc-section-number">11.1.3</span> Id</a></li>
+<li><a href="#inv" id="toc-inv"><span
+class="toc-section-number">11.1.4</span> inv</a></li>
+<li><a href="#rt" id="toc-rt"><span
+class="toc-section-number">11.1.5</span> rt</a></li>
+<li><a href="#tp" id="toc-tp"><span
+class="toc-section-number">11.1.6</span> tp</a></li>
+<li><a href="#CommutativeQ" id="toc-CommutativeQ"><span
 class="toc-section-number">11.1.7</span> CommutativeQ</a></li>
-<li><a href="#NonCommutativeQ"><span
+<li><a href="#NonCommutativeQ" id="toc-NonCommutativeQ"><span
 class="toc-section-number">11.1.8</span> NonCommutativeQ</a></li>
-<li><a href="#SetCommutative"><span
+<li><a href="#SetCommutative" id="toc-SetCommutative"><span
 class="toc-section-number">11.1.9</span> SetCommutative</a></li>
-<li><a href="#SetCommutativeHold"><span
+<li><a href="#SetCommutativeHold" id="toc-SetCommutativeHold"><span
 class="toc-section-number">11.1.10</span> SetCommutativeHold</a></li>
-<li><a href="#SetNonCommutative"><span
+<li><a href="#SetNonCommutative" id="toc-SetNonCommutative"><span
 class="toc-section-number">11.1.11</span> SetNonCommutative</a></li>
-<li><a href="#SetNonCommutativeHold"><span
+<li><a href="#SetNonCommutativeHold"
+id="toc-SetNonCommutativeHold"><span
 class="toc-section-number">11.1.12</span> SetNonCommutativeHold</a></li>
-<li><a href="#SetCommutativeFunction"><span
+<li><a href="#SetCommutativeFunction"
+id="toc-SetCommutativeFunction"><span
 class="toc-section-number">11.1.13</span>
 SetCommutativeFunction</a></li>
-<li><a href="#SNC"><span class="toc-section-number">11.1.14</span>
-SNC</a></li>
-<li><a href="#SetCommutingOperators"><span
+<li><a href="#SNC" id="toc-SNC"><span
+class="toc-section-number">11.1.14</span> SNC</a></li>
+<li><a href="#SetCommutingOperators"
+id="toc-SetCommutingOperators"><span
 class="toc-section-number">11.1.15</span> SetCommutingOperators</a></li>
-<li><a href="#UnsetCommutingOperators"><span
+<li><a href="#UnsetCommutingOperators"
+id="toc-UnsetCommutingOperators"><span
 class="toc-section-number">11.1.16</span>
 UnsetCommutingOperators</a></li>
-<li><a href="#CommutingOperatorsQ"><span
+<li><a href="#CommutingOperatorsQ" id="toc-CommutingOperatorsQ"><span
 class="toc-section-number">11.1.17</span> CommutingOperatorsQ</a></li>
-<li><a href="#Commutative"><span
+<li><a href="#Commutative" id="toc-Commutative"><span
 class="toc-section-number">11.1.18</span> Commutative</a></li>
-<li><a href="#CommuteEverything"><span
+<li><a href="#CommuteEverything" id="toc-CommuteEverything"><span
 class="toc-section-number">11.1.19</span> CommuteEverything</a></li>
-<li><a href="#BeginCommuteEverything"><span
+<li><a href="#BeginCommuteEverything"
+id="toc-BeginCommuteEverything"><span
 class="toc-section-number">11.1.20</span>
 BeginCommuteEverything</a></li>
-<li><a href="#EndCommuteEverything"><span
+<li><a href="#EndCommuteEverything" id="toc-EndCommuteEverything"><span
 class="toc-section-number">11.1.21</span> EndCommuteEverything</a></li>
-<li><a href="#ExpandNonCommutativeMultiply"><span
+<li><a href="#ExpandNonCommutativeMultiply"
+id="toc-ExpandNonCommutativeMultiply"><span
 class="toc-section-number">11.1.22</span>
 ExpandNonCommutativeMultiply</a></li>
-<li><a href="#NCExpand"><span class="toc-section-number">11.1.23</span>
-NCExpand</a></li>
-<li><a href="#NCE"><span class="toc-section-number">11.1.24</span>
-NCE</a></li>
-<li><a href="#NCExpandExponents"><span
+<li><a href="#NCExpand" id="toc-NCExpand"><span
+class="toc-section-number">11.1.23</span> NCExpand</a></li>
+<li><a href="#NCE" id="toc-NCE"><span
+class="toc-section-number">11.1.24</span> NCE</a></li>
+<li><a href="#NCExpandExponents" id="toc-NCExpandExponents"><span
 class="toc-section-number">11.1.25</span> NCExpandExponents</a></li>
-<li><a href="#NCToList"><span class="toc-section-number">11.1.26</span>
-NCToList</a></li>
+<li><a href="#NCToList" id="toc-NCToList"><span
+class="toc-section-number">11.1.26</span> NCToList</a></li>
 </ul></li>
-<li><a href="#PackageNCTr"><span class="toc-section-number">11.2</span>
-NCTr</a>
+<li><a href="#PackageNCTr" id="toc-PackageNCTr"><span
+class="toc-section-number">11.2</span> NCTr</a>
 <ul>
-<li><a href="#tr"><span class="toc-section-number">11.2.1</span>
-tr</a></li>
-<li><a href="#SortCyclicPermutation"><span
+<li><a href="#tr" id="toc-tr"><span
+class="toc-section-number">11.2.1</span> tr</a></li>
+<li><a href="#SortCyclicPermutation"
+id="toc-SortCyclicPermutation"><span
 class="toc-section-number">11.2.2</span> SortCyclicPermutation</a></li>
-<li><a href="#SortedCyclicPermutationQ"><span
+<li><a href="#SortedCyclicPermutationQ"
+id="toc-SortedCyclicPermutationQ"><span
 class="toc-section-number">11.2.3</span>
 SortedCyclicPermutationQ</a></li>
 </ul></li>
-<li><a href="#PackageNCCollect"><span
+<li><a href="#PackageNCCollect" id="toc-PackageNCCollect"><span
 class="toc-section-number">11.3</span> NCCollect</a>
 <ul>
-<li><a href="#NCCollect"><span class="toc-section-number">11.3.1</span>
-NCCollect</a></li>
-<li><a href="#NCCollectExponents"><span
+<li><a href="#NCCollect" id="toc-NCCollect"><span
+class="toc-section-number">11.3.1</span> NCCollect</a></li>
+<li><a href="#NCCollectExponents" id="toc-NCCollectExponents"><span
 class="toc-section-number">11.3.2</span> NCCollectExponents</a></li>
-<li><a href="#NCCollectSelfAdjoint"><span
+<li><a href="#NCCollectSelfAdjoint" id="toc-NCCollectSelfAdjoint"><span
 class="toc-section-number">11.3.3</span> NCCollectSelfAdjoint</a></li>
-<li><a href="#NCCollectSymmetric"><span
+<li><a href="#NCCollectSymmetric" id="toc-NCCollectSymmetric"><span
 class="toc-section-number">11.3.4</span> NCCollectSymmetric</a></li>
-<li><a href="#NCStrongCollect"><span
+<li><a href="#NCStrongCollect" id="toc-NCStrongCollect"><span
 class="toc-section-number">11.3.5</span> NCStrongCollect</a></li>
-<li><a href="#NCStrongCollectSelfAdjoint"><span
+<li><a href="#NCStrongCollectSelfAdjoint"
+id="toc-NCStrongCollectSelfAdjoint"><span
 class="toc-section-number">11.3.6</span>
 NCStrongCollectSelfAdjoint</a></li>
-<li><a href="#NCStrongCollectSymmetric"><span
+<li><a href="#NCStrongCollectSymmetric"
+id="toc-NCStrongCollectSymmetric"><span
 class="toc-section-number">11.3.7</span>
 NCStrongCollectSymmetric</a></li>
-<li><a href="#NCCompose"><span class="toc-section-number">11.3.8</span>
-NCCompose</a></li>
-<li><a href="#NCDecompose"><span
+<li><a href="#NCCompose" id="toc-NCCompose"><span
+class="toc-section-number">11.3.8</span> NCCompose</a></li>
+<li><a href="#NCDecompose" id="toc-NCDecompose"><span
 class="toc-section-number">11.3.9</span> NCDecompose</a></li>
-<li><a href="#NCTermsOfDegree"><span
+<li><a href="#NCTermsOfDegree" id="toc-NCTermsOfDegree"><span
 class="toc-section-number">11.3.10</span> NCTermsOfDegree</a></li>
-<li><a href="#NCTermsOfTotalDegree"><span
+<li><a href="#NCTermsOfTotalDegree" id="toc-NCTermsOfTotalDegree"><span
 class="toc-section-number">11.3.11</span> NCTermsOfTotalDegree</a></li>
 </ul></li>
-<li><a href="#PackageNCReplace"><span
+<li><a href="#PackageNCReplace" id="toc-PackageNCReplace"><span
 class="toc-section-number">11.4</span> NCReplace</a>
 <ul>
-<li><a href="#NCReplace"><span class="toc-section-number">11.4.1</span>
-NCReplace</a></li>
-<li><a href="#NCReplaceAll"><span
+<li><a href="#NCReplace" id="toc-NCReplace"><span
+class="toc-section-number">11.4.1</span> NCReplace</a></li>
+<li><a href="#NCReplaceAll" id="toc-NCReplaceAll"><span
 class="toc-section-number">11.4.2</span> NCReplaceAll</a></li>
-<li><a href="#NCReplaceList"><span
+<li><a href="#NCReplaceList" id="toc-NCReplaceList"><span
 class="toc-section-number">11.4.3</span> NCReplaceList</a></li>
-<li><a href="#NCReplaceRepeated"><span
+<li><a href="#NCReplaceRepeated" id="toc-NCReplaceRepeated"><span
 class="toc-section-number">11.4.4</span> NCReplaceRepeated</a></li>
-<li><a href="#NCR"><span class="toc-section-number">11.4.5</span>
-NCR</a></li>
-<li><a href="#NCRA"><span class="toc-section-number">11.4.6</span>
-NCRA</a></li>
-<li><a href="#NCRR"><span class="toc-section-number">11.4.7</span>
-NCRR</a></li>
-<li><a href="#NCRL"><span class="toc-section-number">11.4.8</span>
-NCRL</a></li>
-<li><a href="#NCMakeRuleSymmetric"><span
+<li><a href="#NCR" id="toc-NCR"><span
+class="toc-section-number">11.4.5</span> NCR</a></li>
+<li><a href="#NCRA" id="toc-NCRA"><span
+class="toc-section-number">11.4.6</span> NCRA</a></li>
+<li><a href="#NCRR" id="toc-NCRR"><span
+class="toc-section-number">11.4.7</span> NCRR</a></li>
+<li><a href="#NCRL" id="toc-NCRL"><span
+class="toc-section-number">11.4.8</span> NCRL</a></li>
+<li><a href="#NCMakeRuleSymmetric" id="toc-NCMakeRuleSymmetric"><span
 class="toc-section-number">11.4.9</span> NCMakeRuleSymmetric</a></li>
-<li><a href="#NCMakeRuleSelfAdjoint"><span
+<li><a href="#NCMakeRuleSelfAdjoint"
+id="toc-NCMakeRuleSelfAdjoint"><span
 class="toc-section-number">11.4.10</span> NCMakeRuleSelfAdjoint</a></li>
-<li><a href="#NCReplaceSymmetric"><span
+<li><a href="#NCReplaceSymmetric" id="toc-NCReplaceSymmetric"><span
 class="toc-section-number">11.4.11</span> NCReplaceSymmetric</a></li>
-<li><a href="#NCReplaceAllSymmetric"><span
+<li><a href="#NCReplaceAllSymmetric"
+id="toc-NCReplaceAllSymmetric"><span
 class="toc-section-number">11.4.12</span> NCReplaceAllSymmetric</a></li>
-<li><a href="#NCReplaceRepeatedSymmetric"><span
+<li><a href="#NCReplaceRepeatedSymmetric"
+id="toc-NCReplaceRepeatedSymmetric"><span
 class="toc-section-number">11.4.13</span>
 NCReplaceRepeatedSymmetric</a></li>
-<li><a href="#NCReplaceListSymmetric"><span
+<li><a href="#NCReplaceListSymmetric"
+id="toc-NCReplaceListSymmetric"><span
 class="toc-section-number">11.4.14</span>
 NCReplaceListSymmetric</a></li>
-<li><a href="#NCRSym"><span class="toc-section-number">11.4.15</span>
-NCRSym</a></li>
-<li><a href="#NCRASym"><span class="toc-section-number">11.4.16</span>
-NCRASym</a></li>
-<li><a href="#NCRRSym"><span class="toc-section-number">11.4.17</span>
-NCRRSym</a></li>
-<li><a href="#NCRLSym"><span class="toc-section-number">11.4.18</span>
-NCRLSym</a></li>
-<li><a href="#NCReplaceSelfAdjoint"><span
+<li><a href="#NCRSym" id="toc-NCRSym"><span
+class="toc-section-number">11.4.15</span> NCRSym</a></li>
+<li><a href="#NCRASym" id="toc-NCRASym"><span
+class="toc-section-number">11.4.16</span> NCRASym</a></li>
+<li><a href="#NCRRSym" id="toc-NCRRSym"><span
+class="toc-section-number">11.4.17</span> NCRRSym</a></li>
+<li><a href="#NCRLSym" id="toc-NCRLSym"><span
+class="toc-section-number">11.4.18</span> NCRLSym</a></li>
+<li><a href="#NCReplaceSelfAdjoint" id="toc-NCReplaceSelfAdjoint"><span
 class="toc-section-number">11.4.19</span> NCReplaceSelfAdjoint</a></li>
-<li><a href="#NCReplaceAllSelfAdjoint"><span
+<li><a href="#NCReplaceAllSelfAdjoint"
+id="toc-NCReplaceAllSelfAdjoint"><span
 class="toc-section-number">11.4.20</span>
 NCReplaceAllSelfAdjoint</a></li>
-<li><a href="#NCReplaceRepeatedSelfAdjoint"><span
+<li><a href="#NCReplaceRepeatedSelfAdjoint"
+id="toc-NCReplaceRepeatedSelfAdjoint"><span
 class="toc-section-number">11.4.21</span>
 NCReplaceRepeatedSelfAdjoint</a></li>
-<li><a href="#NCReplaceListSelfAdjoint"><span
+<li><a href="#NCReplaceListSelfAdjoint"
+id="toc-NCReplaceListSelfAdjoint"><span
 class="toc-section-number">11.4.22</span>
 NCReplaceListSelfAdjoint</a></li>
-<li><a href="#NCRSA"><span class="toc-section-number">11.4.23</span>
-NCRSA</a></li>
-<li><a href="#NCRASA"><span class="toc-section-number">11.4.24</span>
-NCRASA</a></li>
-<li><a href="#NCRRSA"><span class="toc-section-number">11.4.25</span>
-NCRRSA</a></li>
-<li><a href="#NCRLSA"><span class="toc-section-number">11.4.26</span>
-NCRLSA</a></li>
-<li><a href="#NCMatrixExpand"><span
+<li><a href="#NCRSA" id="toc-NCRSA"><span
+class="toc-section-number">11.4.23</span> NCRSA</a></li>
+<li><a href="#NCRASA" id="toc-NCRASA"><span
+class="toc-section-number">11.4.24</span> NCRASA</a></li>
+<li><a href="#NCRRSA" id="toc-NCRRSA"><span
+class="toc-section-number">11.4.25</span> NCRRSA</a></li>
+<li><a href="#NCRLSA" id="toc-NCRLSA"><span
+class="toc-section-number">11.4.26</span> NCRLSA</a></li>
+<li><a href="#NCMatrixExpand" id="toc-NCMatrixExpand"><span
 class="toc-section-number">11.4.27</span> NCMatrixExpand</a></li>
-<li><a href="#NCMatrixReplaceAll"><span
+<li><a href="#NCMatrixReplaceAll" id="toc-NCMatrixReplaceAll"><span
 class="toc-section-number">11.4.28</span> NCMatrixReplaceAll</a></li>
-<li><a href="#NCMatrixReplaceRepeated"><span
+<li><a href="#NCMatrixReplaceRepeated"
+id="toc-NCMatrixReplaceRepeated"><span
 class="toc-section-number">11.4.29</span>
 NCMatrixReplaceRepeated</a></li>
-<li><a href="#NCReplacePowerRule"><span
+<li><a href="#NCReplacePowerRule" id="toc-NCReplacePowerRule"><span
 class="toc-section-number">11.4.30</span> NCReplacePowerRule</a></li>
 </ul></li>
-<li><a href="#PackageNCSelfAdjoint"><span
+<li><a href="#PackageNCSelfAdjoint" id="toc-PackageNCSelfAdjoint"><span
 class="toc-section-number">11.5</span> NCSelfAdjoint</a>
 <ul>
-<li><a href="#NCSymmetricQ"><span
+<li><a href="#NCSymmetricQ" id="toc-NCSymmetricQ"><span
 class="toc-section-number">11.5.1</span> NCSymmetricQ</a></li>
-<li><a href="#NCSymmetricTest"><span
+<li><a href="#NCSymmetricTest" id="toc-NCSymmetricTest"><span
 class="toc-section-number">11.5.2</span> NCSymmetricTest</a></li>
-<li><a href="#NCSymmetricPart"><span
+<li><a href="#NCSymmetricPart" id="toc-NCSymmetricPart"><span
 class="toc-section-number">11.5.3</span> NCSymmetricPart</a></li>
-<li><a href="#NCSelfAdjointQ"><span
+<li><a href="#NCSelfAdjointQ" id="toc-NCSelfAdjointQ"><span
 class="toc-section-number">11.5.4</span> NCSelfAdjointQ</a></li>
-<li><a href="#NCSelfAdjointTest"><span
+<li><a href="#NCSelfAdjointTest" id="toc-NCSelfAdjointTest"><span
 class="toc-section-number">11.5.5</span> NCSelfAdjointTest</a></li>
 </ul></li>
-<li><a href="#PackageNCSimplifyRational"><span
+<li><a href="#PackageNCSimplifyRational"
+id="toc-PackageNCSimplifyRational"><span
 class="toc-section-number">11.6</span> NCSimplifyRational</a>
 <ul>
-<li><a href="#NCNormalizeInverse"><span
+<li><a href="#NCNormalizeInverse" id="toc-NCNormalizeInverse"><span
 class="toc-section-number">11.6.1</span> NCNormalizeInverse</a></li>
-<li><a href="#NCSimplifyRational"><span
+<li><a href="#NCSimplifyRational" id="toc-NCSimplifyRational"><span
 class="toc-section-number">11.6.2</span> NCSimplifyRational</a></li>
-<li><a href="#NCSR"><span class="toc-section-number">11.6.3</span>
-NCSR</a></li>
-<li><a href="#NCSimplifyRationalSinglePass"><span
+<li><a href="#NCSR" id="toc-NCSR"><span
+class="toc-section-number">11.6.3</span> NCSR</a></li>
+<li><a href="#NCSimplifyRationalSinglePass"
+id="toc-NCSimplifyRationalSinglePass"><span
 class="toc-section-number">11.6.4</span>
 NCSimplifyRationalSinglePass</a></li>
-<li><a href="#NCPreSimplifyRational"><span
+<li><a href="#NCPreSimplifyRational"
+id="toc-NCPreSimplifyRational"><span
 class="toc-section-number">11.6.5</span> NCPreSimplifyRational</a></li>
-<li><a href="#NCPreSimplifyRationalSinglePass"><span
+<li><a href="#NCPreSimplifyRationalSinglePass"
+id="toc-NCPreSimplifyRationalSinglePass"><span
 class="toc-section-number">11.6.6</span>
 NCPreSimplifyRationalSinglePass</a></li>
 </ul></li>
-<li><a href="#PackageNCDiff"><span
+<li><a href="#PackageNCDiff" id="toc-PackageNCDiff"><span
 class="toc-section-number">11.7</span> NCDiff</a>
 <ul>
-<li><a href="#NCDirectionalD"><span
+<li><a href="#NCDirectionalD" id="toc-NCDirectionalD"><span
 class="toc-section-number">11.7.1</span> NCDirectionalD</a></li>
-<li><a href="#NCGrad"><span class="toc-section-number">11.7.2</span>
-NCGrad</a></li>
-<li><a href="#NCHessian"><span class="toc-section-number">11.7.3</span>
-NCHessian</a></li>
-<li><a href="#DirectionalD"><span
+<li><a href="#NCGrad" id="toc-NCGrad"><span
+class="toc-section-number">11.7.2</span> NCGrad</a></li>
+<li><a href="#NCHessian" id="toc-NCHessian"><span
+class="toc-section-number">11.7.3</span> NCHessian</a></li>
+<li><a href="#DirectionalD" id="toc-DirectionalD"><span
 class="toc-section-number">11.7.4</span> DirectionalD</a></li>
-<li><a href="#NCIntegrate"><span
+<li><a href="#NCIntegrate" id="toc-NCIntegrate"><span
 class="toc-section-number">11.7.5</span> NCIntegrate</a></li>
 </ul></li>
-<li><a href="#PackageNCConvexity"><span
+<li><a href="#PackageNCConvexity" id="toc-PackageNCConvexity"><span
 class="toc-section-number">11.8</span> NCConvexity</a>
 <ul>
-<li><a href="#NCIndependent"><span
+<li><a href="#NCIndependent" id="toc-NCIndependent"><span
 class="toc-section-number">11.8.1</span> NCIndependent</a></li>
-<li><a href="#NCConvexityRegion"><span
+<li><a href="#NCConvexityRegion" id="toc-NCConvexityRegion"><span
 class="toc-section-number">11.8.2</span> NCConvexityRegion</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#packages-for-manipulating-nc-block-matrices"><span
+<li><a href="#packages-for-manipulating-nc-block-matrices"
+id="toc-packages-for-manipulating-nc-block-matrices"><span
 class="toc-section-number">12</span> Packages for manipulating NC block
 matrices</a>
 <ul>
-<li><a href="#PackageNCDot"><span class="toc-section-number">12.1</span>
-NCDot</a>
+<li><a href="#PackageNCDot" id="toc-PackageNCDot"><span
+class="toc-section-number">12.1</span> NCDot</a>
 <ul>
-<li><a href="#tpMat"><span class="toc-section-number">12.1.1</span>
-tpMat</a></li>
-<li><a href="#ajMat"><span class="toc-section-number">12.1.2</span>
-ajMat</a></li>
-<li><a href="#coMat"><span class="toc-section-number">12.1.3</span>
-coMat</a></li>
-<li><a href="#NCDot"><span class="toc-section-number">12.1.4</span>
-NCDot</a></li>
-<li><a href="#NCInverse"><span class="toc-section-number">12.1.5</span>
-NCInverse</a></li>
+<li><a href="#tpMat" id="toc-tpMat"><span
+class="toc-section-number">12.1.1</span> tpMat</a></li>
+<li><a href="#ajMat" id="toc-ajMat"><span
+class="toc-section-number">12.1.2</span> ajMat</a></li>
+<li><a href="#coMat" id="toc-coMat"><span
+class="toc-section-number">12.1.3</span> coMat</a></li>
+<li><a href="#NCDot" id="toc-NCDot"><span
+class="toc-section-number">12.1.4</span> NCDot</a></li>
+<li><a href="#NCInverse" id="toc-NCInverse"><span
+class="toc-section-number">12.1.5</span> NCInverse</a></li>
 </ul></li>
-<li><a href="#PackageNCMatrixDecompositions"><span
+<li><a href="#PackageNCMatrixDecompositions"
+id="toc-PackageNCMatrixDecompositions"><span
 class="toc-section-number">12.2</span> NCMatrixDecompositions</a>
 <ul>
-<li><a href="#NCLUDecompositionWithPartialPivoting"><span
+<li><a href="#NCLUDecompositionWithPartialPivoting"
+id="toc-NCLUDecompositionWithPartialPivoting"><span
 class="toc-section-number">12.2.1</span>
 NCLUDecompositionWithPartialPivoting</a></li>
-<li><a href="#NCLUDecompositionWithCompletePivoting"><span
+<li><a href="#NCLUDecompositionWithCompletePivoting"
+id="toc-NCLUDecompositionWithCompletePivoting"><span
 class="toc-section-number">12.2.2</span>
 NCLUDecompositionWithCompletePivoting</a></li>
-<li><a href="#NCLDLDecomposition"><span
+<li><a href="#NCLDLDecomposition" id="toc-NCLDLDecomposition"><span
 class="toc-section-number">12.2.3</span> NCLDLDecomposition</a></li>
-<li><a href="#NCUpperTriangularSolve"><span
+<li><a href="#NCUpperTriangularSolve"
+id="toc-NCUpperTriangularSolve"><span
 class="toc-section-number">12.2.4</span> NCUpperTriangularSolve</a></li>
-<li><a href="#NCLowerTriangularSolve"><span
+<li><a href="#NCLowerTriangularSolve"
+id="toc-NCLowerTriangularSolve"><span
 class="toc-section-number">12.2.5</span> NCLowerTriangularSolve</a></li>
-<li><a href="#NCLUInverse"><span
+<li><a href="#NCLUInverse" id="toc-NCLUInverse"><span
 class="toc-section-number">12.2.6</span> NCLUInverse</a></li>
-<li><a href="#NCLUPartialPivoting"><span
+<li><a href="#NCLUPartialPivoting" id="toc-NCLUPartialPivoting"><span
 class="toc-section-number">12.2.7</span> NCLUPartialPivoting</a></li>
-<li><a href="#NCLUCompletePivoting"><span
+<li><a href="#NCLUCompletePivoting" id="toc-NCLUCompletePivoting"><span
 class="toc-section-number">12.2.8</span> NCLUCompletePivoting</a></li>
-<li><a href="#NCLeftDivide"><span
+<li><a href="#NCLeftDivide" id="toc-NCLeftDivide"><span
 class="toc-section-number">12.2.9</span> NCLeftDivide</a></li>
-<li><a href="#NCRightDivide"><span
+<li><a href="#NCRightDivide" id="toc-NCRightDivide"><span
 class="toc-section-number">12.2.10</span> NCRightDivide</a></li>
 </ul></li>
-<li><a href="#PackageMatrixDecompositions"><span
+<li><a href="#PackageMatrixDecompositions"
+id="toc-PackageMatrixDecompositions"><span
 class="toc-section-number">12.3</span> MatrixDecompositions: linear
 algebra templates</a>
 <ul>
-<li><a href="#LUDecompositionWithPartialPivoting"><span
+<li><a href="#LUDecompositionWithPartialPivoting"
+id="toc-LUDecompositionWithPartialPivoting"><span
 class="toc-section-number">12.3.1</span>
 LUDecompositionWithPartialPivoting</a></li>
-<li><a href="#LUDecompositionWithCompletePivoting"><span
+<li><a href="#LUDecompositionWithCompletePivoting"
+id="toc-LUDecompositionWithCompletePivoting"><span
 class="toc-section-number">12.3.2</span>
 LUDecompositionWithCompletePivoting</a></li>
-<li><a href="#LDLDecomposition"><span
+<li><a href="#LDLDecomposition" id="toc-LDLDecomposition"><span
 class="toc-section-number">12.3.3</span> LDLDecomposition</a></li>
-<li><a href="#UpperTriangularSolve"><span
+<li><a href="#UpperTriangularSolve" id="toc-UpperTriangularSolve"><span
 class="toc-section-number">12.3.4</span> UpperTriangularSolve</a></li>
-<li><a href="#LowerTriangularSolve"><span
+<li><a href="#LowerTriangularSolve" id="toc-LowerTriangularSolve"><span
 class="toc-section-number">12.3.5</span> LowerTriangularSolve</a></li>
-<li><a href="#LUInverse"><span class="toc-section-number">12.3.6</span>
-LUInverse</a></li>
-<li><a href="#GetLUMatrices"><span
+<li><a href="#LUInverse" id="toc-LUInverse"><span
+class="toc-section-number">12.3.6</span> LUInverse</a></li>
+<li><a href="#GetLUMatrices" id="toc-GetLUMatrices"><span
 class="toc-section-number">12.3.7</span> GetLUMatrices</a></li>
-<li><a href="#GetFullLUMatrices"><span
+<li><a href="#GetFullLUMatrices" id="toc-GetFullLUMatrices"><span
 class="toc-section-number">12.3.8</span> GetFullLUMatrices</a></li>
-<li><a href="#GetLDUMatrices"><span
+<li><a href="#GetLDUMatrices" id="toc-GetLDUMatrices"><span
 class="toc-section-number">12.3.9</span> GetLDUMatrices</a></li>
-<li><a href="#GetFullLDUMatrices"><span
+<li><a href="#GetFullLDUMatrices" id="toc-GetFullLDUMatrices"><span
 class="toc-section-number">12.3.10</span> GetFullLDUMatrices</a></li>
-<li><a href="#GetDiagonal"><span
+<li><a href="#GetDiagonal" id="toc-GetDiagonal"><span
 class="toc-section-number">12.3.11</span> GetDiagonal</a></li>
-<li><a href="#LUPartialPivoting"><span
+<li><a href="#LUPartialPivoting" id="toc-LUPartialPivoting"><span
 class="toc-section-number">12.3.12</span> LUPartialPivoting</a></li>
-<li><a href="#LUCompletePivoting"><span
+<li><a href="#LUCompletePivoting" id="toc-LUCompletePivoting"><span
 class="toc-section-number">12.3.13</span> LUCompletePivoting</a></li>
-<li><a href="#LURowReduce"><span
+<li><a href="#LURowReduce" id="toc-LURowReduce"><span
 class="toc-section-number">12.3.14</span> LURowReduce</a></li>
-<li><a href="#LURowReduceIncremental"><span
+<li><a href="#LURowReduceIncremental"
+id="toc-LURowReduceIncremental"><span
 class="toc-section-number">12.3.15</span>
 LURowReduceIncremental</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#packages-for-pretty-output-testing-and-utilities"><span
+<li><a href="#packages-for-pretty-output-testing-and-utilities"
+id="toc-packages-for-pretty-output-testing-and-utilities"><span
 class="toc-section-number">13</span> Packages for pretty output,
 testing, and utilities</a>
 <ul>
-<li><a href="#PackageNCOutput"><span
+<li><a href="#PackageNCOutput" id="toc-PackageNCOutput"><span
 class="toc-section-number">13.1</span> NCOutput</a>
 <ul>
-<li><a href="#NCSetOutput"><span
+<li><a href="#NCSetOutput" id="toc-NCSetOutput"><span
 class="toc-section-number">13.1.1</span> NCSetOutput</a></li>
 </ul></li>
-<li><a href="#PackageNCTeX"><span class="toc-section-number">13.2</span>
-NCTeX</a>
+<li><a href="#PackageNCTeX" id="toc-PackageNCTeX"><span
+class="toc-section-number">13.2</span> NCTeX</a>
 <ul>
-<li><a href="#NCTeX"><span class="toc-section-number">13.2.1</span>
-NCTeX</a></li>
-<li><a href="#NCRunDVIPS"><span class="toc-section-number">13.2.2</span>
-NCRunDVIPS</a></li>
-<li><a href="#NCRunLaTeX"><span class="toc-section-number">13.2.3</span>
-NCRunLaTeX</a></li>
-<li><a href="#NCRunPDFLaTeX"><span
+<li><a href="#NCTeX" id="toc-NCTeX"><span
+class="toc-section-number">13.2.1</span> NCTeX</a></li>
+<li><a href="#NCRunDVIPS" id="toc-NCRunDVIPS"><span
+class="toc-section-number">13.2.2</span> NCRunDVIPS</a></li>
+<li><a href="#NCRunLaTeX" id="toc-NCRunLaTeX"><span
+class="toc-section-number">13.2.3</span> NCRunLaTeX</a></li>
+<li><a href="#NCRunPDFLaTeX" id="toc-NCRunPDFLaTeX"><span
 class="toc-section-number">13.2.4</span> NCRunPDFLaTeX</a></li>
-<li><a href="#NCRunPDFViewer"><span
+<li><a href="#NCRunPDFViewer" id="toc-NCRunPDFViewer"><span
 class="toc-section-number">13.2.5</span> NCRunPDFViewer</a></li>
-<li><a href="#NCRunPS2PDF"><span
+<li><a href="#NCRunPS2PDF" id="toc-NCRunPS2PDF"><span
 class="toc-section-number">13.2.6</span> NCRunPS2PDF</a></li>
 </ul></li>
-<li><a href="#PackageNCTeXForm"><span
+<li><a href="#PackageNCTeXForm" id="toc-PackageNCTeXForm"><span
 class="toc-section-number">13.3</span> NCTeXForm</a>
 <ul>
-<li><a href="#NCTeXForm"><span class="toc-section-number">13.3.1</span>
-NCTeXForm</a></li>
-<li><a href="#NCTeXFormSetStarStar"><span
+<li><a href="#NCTeXForm" id="toc-NCTeXForm"><span
+class="toc-section-number">13.3.1</span> NCTeXForm</a></li>
+<li><a href="#NCTeXFormSetStarStar" id="toc-NCTeXFormSetStarStar"><span
 class="toc-section-number">13.3.2</span> NCTeXFormSetStarStar</a></li>
-<li><a href="#NCTeXFormSetStar"><span
+<li><a href="#NCTeXFormSetStar" id="toc-NCTeXFormSetStar"><span
 class="toc-section-number">13.3.3</span> NCTeXFormSetStar</a></li>
 </ul></li>
-<li><a href="#PackageNCRun"><span class="toc-section-number">13.4</span>
-NCRun</a>
+<li><a href="#PackageNCRun" id="toc-PackageNCRun"><span
+class="toc-section-number">13.4</span> NCRun</a>
 <ul>
-<li><a href="#NCRun"><span class="toc-section-number">13.4.1</span>
-NCRun</a></li>
+<li><a href="#NCRun" id="toc-NCRun"><span
+class="toc-section-number">13.4.1</span> NCRun</a></li>
 </ul></li>
-<li><a href="#PackageNCTest"><span
+<li><a href="#PackageNCTest" id="toc-PackageNCTest"><span
 class="toc-section-number">13.5</span> NCTest</a>
 <ul>
-<li><a href="#NCTest"><span class="toc-section-number">13.5.1</span>
-NCTest</a></li>
-<li><a href="#NCTestCheck"><span
+<li><a href="#NCTest" id="toc-NCTest"><span
+class="toc-section-number">13.5.1</span> NCTest</a></li>
+<li><a href="#NCTestCheck" id="toc-NCTestCheck"><span
 class="toc-section-number">13.5.2</span> NCTestCheck</a></li>
-<li><a href="#NCTestRun"><span class="toc-section-number">13.5.3</span>
-NCTestRun</a></li>
-<li><a href="#NCTestSummarize"><span
+<li><a href="#NCTestRun" id="toc-NCTestRun"><span
+class="toc-section-number">13.5.3</span> NCTestRun</a></li>
+<li><a href="#NCTestSummarize" id="toc-NCTestSummarize"><span
 class="toc-section-number">13.5.4</span> NCTestSummarize</a></li>
 </ul></li>
-<li><a href="#PackageNCDebug"><span
+<li><a href="#PackageNCDebug" id="toc-PackageNCDebug"><span
 class="toc-section-number">13.6</span> NCDebug</a>
 <ul>
-<li><a href="#NCDebug"><span class="toc-section-number">13.6.1</span>
-NCDebug</a></li>
+<li><a href="#NCDebug" id="toc-NCDebug"><span
+class="toc-section-number">13.6.1</span> NCDebug</a></li>
 </ul></li>
-<li><a href="#PackageNCUtil"><span
+<li><a href="#PackageNCUtil" id="toc-PackageNCUtil"><span
 class="toc-section-number">13.7</span> NCUtil</a>
 <ul>
-<li><a href="#NCGrabSymbols"><span
+<li><a href="#NCGrabSymbols" id="toc-NCGrabSymbols"><span
 class="toc-section-number">13.7.1</span> NCGrabSymbols</a></li>
-<li><a href="#NCGrabNCSymbols"><span
+<li><a href="#NCGrabNCSymbols" id="toc-NCGrabNCSymbols"><span
 class="toc-section-number">13.7.2</span> NCGrabNCSymbols</a></li>
-<li><a href="#NCGrabFunctions"><span
+<li><a href="#NCGrabFunctions" id="toc-NCGrabFunctions"><span
 class="toc-section-number">13.7.3</span> NCGrabFunctions</a></li>
-<li><a href="#NCGrabIndeterminants"><span
+<li><a href="#NCGrabIndeterminants" id="toc-NCGrabIndeterminants"><span
 class="toc-section-number">13.7.4</span> NCGrabIndeterminants</a></li>
-<li><a href="#NCVariables"><span
+<li><a href="#NCVariables" id="toc-NCVariables"><span
 class="toc-section-number">13.7.5</span> NCVariables</a></li>
-<li><a href="#NCConsolidateList"><span
+<li><a href="#NCConsolidateList" id="toc-NCConsolidateList"><span
 class="toc-section-number">13.7.6</span> NCConsolidateList</a></li>
-<li><a href="#NCConsistentQ"><span
+<li><a href="#NCConsistentQ" id="toc-NCConsistentQ"><span
 class="toc-section-number">13.7.7</span> NCConsistentQ</a></li>
-<li><a href="#NCSymbolOrSubscriptQ"><span
+<li><a href="#NCSymbolOrSubscriptQ" id="toc-NCSymbolOrSubscriptQ"><span
 class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ</a></li>
-<li><a href="#NCNonCommutativeSymbolOrSubscriptQ"><span
+<li><a href="#NCNonCommutativeSymbolOrSubscriptQ"
+id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span
 class="toc-section-number">13.7.9</span>
 NCNonCommutativeSymbolOrSubscriptQ</a></li>
-<li><a href="#NCPowerQ"><span class="toc-section-number">13.7.10</span>
-NCPowerQ</a></li>
-<li><a href="#NCLeafCount"><span
+<li><a href="#NCPowerQ" id="toc-NCPowerQ"><span
+class="toc-section-number">13.7.10</span> NCPowerQ</a></li>
+<li><a href="#NCLeafCount" id="toc-NCLeafCount"><span
 class="toc-section-number">13.7.11</span> NCLeafCount</a></li>
-<li><a href="#NCReplaceData"><span
+<li><a href="#NCReplaceData" id="toc-NCReplaceData"><span
 class="toc-section-number">13.7.12</span> NCReplaceData</a></li>
-<li><a href="#NCToExpression"><span
+<li><a href="#NCToExpression" id="toc-NCToExpression"><span
 class="toc-section-number">13.7.13</span> NCToExpression</a></li>
-<li><a href="#NotMatrixQ"><span
+<li><a href="#NotMatrixQ" id="toc-NotMatrixQ"><span
 class="toc-section-number">13.7.14</span> NotMatrixQ</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#data-structures-for-fast-calculations"><span
+<li><a href="#data-structures-for-fast-calculations"
+id="toc-data-structures-for-fast-calculations"><span
 class="toc-section-number">14</span> Data structures for fast
 calculations</a>
 <ul>
-<li><a href="#PackageNCPoly"><span
+<li><a href="#PackageNCPoly" id="toc-PackageNCPoly"><span
 class="toc-section-number">14.1</span> NCPoly</a>
 <ul>
 <li><a
-href="#efficient-storage-of-nc-polynomials-with-rational-coefficients"><span
+href="#efficient-storage-of-nc-polynomials-with-rational-coefficients"
+id="toc-efficient-storage-of-nc-polynomials-with-rational-coefficients"><span
 class="toc-section-number">14.1.1</span> Efficient storage of NC
 polynomials with rational coefficients</a></li>
-<li><a href="#ways-to-represent-nc-polynomials"><span
+<li><a href="#ways-to-represent-nc-polynomials"
+id="toc-ways-to-represent-nc-polynomials"><span
 class="toc-section-number">14.1.2</span> Ways to represent NC
 polynomials</a></li>
-<li><a href="#access-and-utlity-functions"><span
+<li><a href="#access-and-utlity-functions"
+id="toc-access-and-utlity-functions"><span
 class="toc-section-number">14.1.3</span> Access and utlity
 functions</a></li>
-<li><a href="#formating-functions"><span
+<li><a href="#formating-functions" id="toc-formating-functions"><span
 class="toc-section-number">14.1.4</span> Formating functions</a></li>
-<li><a href="#arithmetic-functions"><span
+<li><a href="#arithmetic-functions" id="toc-arithmetic-functions"><span
 class="toc-section-number">14.1.5</span> Arithmetic functions</a></li>
-<li><a href="#state-space-realization-functions"><span
+<li><a href="#state-space-realization-functions"
+id="toc-state-space-realization-functions"><span
 class="toc-section-number">14.1.6</span> State space realization
 functions</a></li>
-<li><a href="#auxiliary-functions"><span
+<li><a href="#auxiliary-functions" id="toc-auxiliary-functions"><span
 class="toc-section-number">14.1.7</span> Auxiliary functions</a></li>
 </ul></li>
-<li><a href="#PackageNCPolyInterface"><span
+<li><a href="#PackageNCPolyInterface"
+id="toc-PackageNCPolyInterface"><span
 class="toc-section-number">14.2</span> NCPolyInterface</a>
 <ul>
-<li><a href="#NCToNCPoly"><span class="toc-section-number">14.2.1</span>
-NCToNCPoly</a></li>
-<li><a href="#NCPolyToNC"><span class="toc-section-number">14.2.2</span>
-NCPolyToNC</a></li>
-<li><a href="#NCRuleToPoly"><span
+<li><a href="#NCToNCPoly" id="toc-NCToNCPoly"><span
+class="toc-section-number">14.2.1</span> NCToNCPoly</a></li>
+<li><a href="#NCPolyToNC" id="toc-NCPolyToNC"><span
+class="toc-section-number">14.2.2</span> NCPolyToNC</a></li>
+<li><a href="#NCRuleToPoly" id="toc-NCRuleToPoly"><span
 class="toc-section-number">14.2.3</span> NCRuleToPoly</a></li>
-<li><a href="#NCMonomialList"><span
-class="toc-section-number">14.2.4</span> NCMonomialList</a></li>
-<li><a href="#NCCoefficientRules"><span
-class="toc-section-number">14.2.5</span> NCCoefficientRules</a></li>
-<li><a href="#NCCoefficientList"><span
-class="toc-section-number">14.2.6</span> NCCoefficientList</a></li>
-<li><a href="#NCCoefficientQ"><span
-class="toc-section-number">14.2.7</span> NCCoefficientQ</a></li>
-<li><a href="#NCMonomialQ"><span
-class="toc-section-number">14.2.8</span> NCMonomialQ</a></li>
-<li><a href="#NCPolynomialQ"><span
-class="toc-section-number">14.2.9</span> NCPolynomialQ</a></li>
+<li><a href="#NCToRule" id="toc-NCToRule"><span
+class="toc-section-number">14.2.4</span> NCToRule</a></li>
+<li><a href="#NCMonomialList" id="toc-NCMonomialList"><span
+class="toc-section-number">14.2.5</span> NCMonomialList</a></li>
+<li><a href="#NCCoefficientRules" id="toc-NCCoefficientRules"><span
+class="toc-section-number">14.2.6</span> NCCoefficientRules</a></li>
+<li><a href="#NCCoefficientList" id="toc-NCCoefficientList"><span
+class="toc-section-number">14.2.7</span> NCCoefficientList</a></li>
+<li><a href="#NCCoefficientQ" id="toc-NCCoefficientQ"><span
+class="toc-section-number">14.2.8</span> NCCoefficientQ</a></li>
+<li><a href="#NCMonomialQ" id="toc-NCMonomialQ"><span
+class="toc-section-number">14.2.9</span> NCMonomialQ</a></li>
+<li><a href="#NCPolynomialQ" id="toc-NCPolynomialQ"><span
+class="toc-section-number">14.2.10</span> NCPolynomialQ</a></li>
 </ul></li>
-<li><a href="#PackageNCPolynomial"><span
+<li><a href="#PackageNCPolynomial" id="toc-PackageNCPolynomial"><span
 class="toc-section-number">14.3</span> NCPolynomial</a>
 <ul>
-<li><a
-href="#efficient-storage-of-nc-polynomials-with-nc-coefficients"><span
+<li><a href="#efficient-storage-of-nc-polynomials-with-nc-coefficients"
+id="toc-efficient-storage-of-nc-polynomials-with-nc-coefficients"><span
 class="toc-section-number">14.3.1</span> Efficient storage of NC
 polynomials with nc coefficients</a></li>
-<li><a href="#ways-to-represent-nc-polynomials-1"><span
+<li><a href="#ways-to-represent-nc-polynomials-1"
+id="toc-ways-to-represent-nc-polynomials-1"><span
 class="toc-section-number">14.3.2</span> Ways to represent NC
 polynomials</a></li>
-<li><a href="#grouping-terms-by-degree"><span
+<li><a href="#grouping-terms-by-degree"
+id="toc-grouping-terms-by-degree"><span
 class="toc-section-number">14.3.3</span> Grouping terms by
 degree</a></li>
-<li><a href="#utilities"><span class="toc-section-number">14.3.4</span>
-Utilities</a></li>
-<li><a href="#operations-on-nc-polynomials"><span
+<li><a href="#utilities" id="toc-utilities"><span
+class="toc-section-number">14.3.4</span> Utilities</a></li>
+<li><a href="#operations-on-nc-polynomials"
+id="toc-operations-on-nc-polynomials"><span
 class="toc-section-number">14.3.5</span> Operations on NC
 polynomials</a></li>
 </ul></li>
-<li><a href="#PackageNCQuadratic"><span
+<li><a href="#PackageNCQuadratic" id="toc-PackageNCQuadratic"><span
 class="toc-section-number">14.4</span> NCQuadratic</a>
 <ul>
-<li><a href="#NCToNCQuadratic"><span
+<li><a href="#NCToNCQuadratic" id="toc-NCToNCQuadratic"><span
 class="toc-section-number">14.4.1</span> NCToNCQuadratic</a></li>
-<li><a href="#NCPToNCQuadratic"><span
+<li><a href="#NCPToNCQuadratic" id="toc-NCPToNCQuadratic"><span
 class="toc-section-number">14.4.2</span> NCPToNCQuadratic</a></li>
-<li><a href="#NCQuadraticToNC"><span
+<li><a href="#NCQuadraticToNC" id="toc-NCQuadraticToNC"><span
 class="toc-section-number">14.4.3</span> NCQuadraticToNC</a></li>
-<li><a href="#NCQuadraticToNCPolynomial"><span
+<li><a href="#NCQuadraticToNCPolynomial"
+id="toc-NCQuadraticToNCPolynomial"><span
 class="toc-section-number">14.4.4</span>
 NCQuadraticToNCPolynomial</a></li>
-<li><a href="#NCMatrixOfQuadratic"><span
+<li><a href="#NCMatrixOfQuadratic" id="toc-NCMatrixOfQuadratic"><span
 class="toc-section-number">14.4.5</span> NCMatrixOfQuadratic</a></li>
-<li><a href="#NCQuadraticMakeSymmetric"><span
+<li><a href="#NCQuadraticMakeSymmetric"
+id="toc-NCQuadraticMakeSymmetric"><span
 class="toc-section-number">14.4.6</span>
 NCQuadraticMakeSymmetric</a></li>
 </ul></li>
-<li><a href="#PackageNCSylvester"><span
+<li><a href="#PackageNCSylvester" id="toc-PackageNCSylvester"><span
 class="toc-section-number">14.5</span> NCSylvester</a>
 <ul>
-<li><a href="#NCToNCSylvester"><span
+<li><a href="#NCToNCSylvester" id="toc-NCToNCSylvester"><span
 class="toc-section-number">14.5.1</span> NCToNCSylvester</a></li>
-<li><a href="#NCPToNCSylvester"><span
+<li><a href="#NCPToNCSylvester" id="toc-NCPToNCSylvester"><span
 class="toc-section-number">14.5.2</span> NCPToNCSylvester</a></li>
-<li><a href="#NCSylvesterToNC"><span
+<li><a href="#NCSylvesterToNC" id="toc-NCSylvesterToNC"><span
 class="toc-section-number">14.5.3</span> NCSylvesterToNC</a></li>
-<li><a href="#NCSylvesterToNCPolynomial"><span
+<li><a href="#NCSylvesterToNCPolynomial"
+id="toc-NCSylvesterToNCPolynomial"><span
 class="toc-section-number">14.5.4</span>
 NCSylvesterToNCPolynomial</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#NCGBChapter"><span class="toc-section-number">15</span>
-Noncommutative Gröbner Bases Algorithms</a>
+<li><a href="#NCGBChapter" id="toc-NCGBChapter"><span
+class="toc-section-number">15</span> Noncommutative Gröbner Bases
+Algorithms</a>
 <ul>
-<li><a href="#PackageNCGBX"><span class="toc-section-number">15.1</span>
-NCGBX</a>
+<li><a href="#PackageNCGBX" id="toc-PackageNCGBX"><span
+class="toc-section-number">15.1</span> NCGBX</a>
 <ul>
-<li><a href="#SetMonomialOrder"><span
+<li><a href="#SetMonomialOrder" id="toc-SetMonomialOrder"><span
 class="toc-section-number">15.1.1</span> SetMonomialOrder</a></li>
-<li><a href="#SetKnowns"><span class="toc-section-number">15.1.2</span>
-SetKnowns</a></li>
-<li><a href="#SetUnknowns"><span
+<li><a href="#SetKnowns" id="toc-SetKnowns"><span
+class="toc-section-number">15.1.2</span> SetKnowns</a></li>
+<li><a href="#SetUnknowns" id="toc-SetUnknowns"><span
 class="toc-section-number">15.1.3</span> SetUnknowns</a></li>
-<li><a href="#ClearMonomialOrder"><span
+<li><a href="#ClearMonomialOrder" id="toc-ClearMonomialOrder"><span
 class="toc-section-number">15.1.4</span> ClearMonomialOrder</a></li>
-<li><a href="#GetMonomialOrder"><span
+<li><a href="#GetMonomialOrder" id="toc-GetMonomialOrder"><span
 class="toc-section-number">15.1.5</span> GetMonomialOrder</a></li>
-<li><a href="#PrintMonomialOrder"><span
+<li><a href="#PrintMonomialOrder" id="toc-PrintMonomialOrder"><span
 class="toc-section-number">15.1.6</span> PrintMonomialOrder</a></li>
-<li><a href="#NCMakeGB"><span class="toc-section-number">15.1.7</span>
-NCMakeGB</a></li>
-<li><a href="#NCProcess"><span class="toc-section-number">15.1.8</span>
-NCProcess</a></li>
-<li><a href="#NCGBSimplifyRational"><span
+<li><a href="#NCMakeGB" id="toc-NCMakeGB"><span
+class="toc-section-number">15.1.7</span> NCMakeGB</a></li>
+<li><a href="#NCProcess" id="toc-NCProcess"><span
+class="toc-section-number">15.1.8</span> NCProcess</a></li>
+<li><a href="#NCGBSimplifyRational" id="toc-NCGBSimplifyRational"><span
 class="toc-section-number">15.1.9</span> NCGBSimplifyRational</a></li>
-<li><a href="#NCReduce"><span class="toc-section-number">15.1.10</span>
-NCReduce</a></li>
+<li><a href="#NCReduce" id="toc-NCReduce"><span
+class="toc-section-number">15.1.10</span> NCReduce</a></li>
 </ul></li>
-<li><a href="#PackageNCPolyGroebner"><span
+<li><a href="#PackageNCPolyGroebner"
+id="toc-PackageNCPolyGroebner"><span
 class="toc-section-number">15.2</span> NCPolyGroebner</a>
 <ul>
-<li><a href="#NCPolyGroebner"><span
+<li><a href="#NCPolyGroebner" id="toc-NCPolyGroebner"><span
 class="toc-section-number">15.2.1</span> NCPolyGroebner</a></li>
 </ul></li>
-<li><a href="#PackageNCGB"><span class="toc-section-number">15.3</span>
-NCGB</a></li>
+<li><a href="#PackageNCGB" id="toc-PackageNCGB"><span
+class="toc-section-number">15.3</span> NCGB</a></li>
 </ul></li>
-<li><a href="#SDPChapter"><span class="toc-section-number">16</span>
-Semidefinite Programming Algorithms</a>
+<li><a href="#SDPChapter" id="toc-SDPChapter"><span
+class="toc-section-number">16</span> Semidefinite Programming
+Algorithms</a>
 <ul>
-<li><a href="#PackageNCSDP"><span class="toc-section-number">16.1</span>
-NCSDP</a>
+<li><a href="#PackageNCSDP" id="toc-PackageNCSDP"><span
+class="toc-section-number">16.1</span> NCSDP</a>
 <ul>
-<li><a href="#NCSDP"><span class="toc-section-number">16.1.1</span>
-NCSDP</a></li>
-<li><a href="#NCSDPForm"><span class="toc-section-number">16.1.2</span>
-NCSDPForm</a></li>
-<li><a href="#NCSDPDual"><span class="toc-section-number">16.1.3</span>
-NCSDPDual</a></li>
-<li><a href="#NCSDPDualForm"><span
+<li><a href="#NCSDP" id="toc-NCSDP"><span
+class="toc-section-number">16.1.1</span> NCSDP</a></li>
+<li><a href="#NCSDPForm" id="toc-NCSDPForm"><span
+class="toc-section-number">16.1.2</span> NCSDPForm</a></li>
+<li><a href="#NCSDPDual" id="toc-NCSDPDual"><span
+class="toc-section-number">16.1.3</span> NCSDPDual</a></li>
+<li><a href="#NCSDPDualForm" id="toc-NCSDPDualForm"><span
 class="toc-section-number">16.1.4</span> NCSDPDualForm</a></li>
 </ul></li>
-<li><a href="#PackageSDP"><span class="toc-section-number">16.2</span>
-SDP</a>
+<li><a href="#PackageSDP" id="toc-PackageSDP"><span
+class="toc-section-number">16.2</span> SDP</a>
 <ul>
-<li><a href="#SDPMatrices"><span
+<li><a href="#SDPMatrices" id="toc-SDPMatrices"><span
 class="toc-section-number">16.2.1</span> SDPMatrices</a></li>
-<li><a href="#SDPSolve"><span class="toc-section-number">16.2.2</span>
-SDPSolve</a></li>
-<li><a href="#SDPEval"><span class="toc-section-number">16.2.3</span>
-SDPEval</a></li>
-<li><a href="#SDPPrimalEval"><span
+<li><a href="#SDPSolve" id="toc-SDPSolve"><span
+class="toc-section-number">16.2.2</span> SDPSolve</a></li>
+<li><a href="#SDPEval" id="toc-SDPEval"><span
+class="toc-section-number">16.2.3</span> SDPEval</a></li>
+<li><a href="#SDPPrimalEval" id="toc-SDPPrimalEval"><span
 class="toc-section-number">16.2.4</span> SDPPrimalEval</a></li>
-<li><a href="#SDPDualEval"><span
+<li><a href="#SDPDualEval" id="toc-SDPDualEval"><span
 class="toc-section-number">16.2.5</span> SDPDualEval</a></li>
-<li><a href="#SDPSylvesterEval"><span
+<li><a href="#SDPSylvesterEval" id="toc-SDPSylvesterEval"><span
 class="toc-section-number">16.2.6</span> SDPSylvesterEval</a></li>
 </ul></li>
-<li><a href="#PackageSDPFlat"><span
+<li><a href="#PackageSDPFlat" id="toc-PackageSDPFlat"><span
 class="toc-section-number">16.3</span> SDPFlat</a>
 <ul>
-<li><a href="#SDPFlatData"><span
+<li><a href="#SDPFlatData" id="toc-SDPFlatData"><span
 class="toc-section-number">16.3.1</span> SDPFlatData</a></li>
-<li><a href="#SDPFlatPrimalEval"><span
+<li><a href="#SDPFlatPrimalEval" id="toc-SDPFlatPrimalEval"><span
 class="toc-section-number">16.3.2</span> SDPFlatPrimalEval</a></li>
-<li><a href="#SDPFlatDualEval"><span
+<li><a href="#SDPFlatDualEval" id="toc-SDPFlatDualEval"><span
 class="toc-section-number">16.3.3</span> SDPFlatDualEval</a></li>
-<li><a href="#SDPFlatSylvesterEval"><span
+<li><a href="#SDPFlatSylvesterEval" id="toc-SDPFlatSylvesterEval"><span
 class="toc-section-number">16.3.4</span> SDPFlatSylvesterEval</a></li>
 </ul></li>
-<li><a href="#PackageSDPSylvester"><span
+<li><a href="#PackageSDPSylvester" id="toc-PackageSDPSylvester"><span
 class="toc-section-number">16.4</span> SDPSylvester</a>
 <ul>
-<li><a href="#SDPSylvesterSDPEval"><span
+<li><a href="#SDPSylvesterSDPEval" id="toc-SDPSylvesterSDPEval"><span
 class="toc-section-number">16.4.1</span> SDPEval</a></li>
-<li><a href="#SDPSylvesterPrimalEval"><span
+<li><a href="#SDPSylvesterPrimalEval"
+id="toc-SDPSylvesterPrimalEval"><span
 class="toc-section-number">16.4.2</span> SDPSylvesterPrimalEval</a></li>
-<li><a href="#SDPSylvesterDualEval"><span
+<li><a href="#SDPSylvesterDualEval" id="toc-SDPSylvesterDualEval"><span
 class="toc-section-number">16.4.3</span> SDPSylvesterDualEval</a></li>
-<li><a href="#SDPSylvesterSylvesterEval"><span
+<li><a href="#SDPSylvesterSylvesterEval"
+id="toc-SDPSylvesterSylvesterEval"><span
 class="toc-section-number">16.4.4</span>
 SDPSylvesterSylvesterEval</a></li>
 </ul></li>
-<li><a href="#PackagePrimalDual"><span
+<li><a href="#PackagePrimalDual" id="toc-PackagePrimalDual"><span
 class="toc-section-number">16.5</span> PrimalDual</a>
 <ul>
-<li><a href="#PrimalDual"><span class="toc-section-number">16.5.1</span>
-PrimalDual</a></li>
+<li><a href="#PrimalDual" id="toc-PrimalDual"><span
+class="toc-section-number">16.5.1</span> PrimalDual</a></li>
 </ul></li>
-<li><a href="#PackageNCPolySOS"><span
+<li><a href="#PackageNCPolySOS" id="toc-PackageNCPolySOS"><span
 class="toc-section-number">16.6</span> NCPolySOS</a>
 <ul>
-<li><a href="#NCPolySOS"><span class="toc-section-number">16.6.1</span>
-NCPolySOS</a></li>
-<li><a href="#NCPolySOSToSDP"><span
+<li><a href="#NCPolySOS" id="toc-NCPolySOS"><span
+class="toc-section-number">16.6.1</span> NCPolySOS</a></li>
+<li><a href="#NCPolySOSToSDP" id="toc-NCPolySOSToSDP"><span
 class="toc-section-number">16.6.2</span> NCPolySOSToSDP</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#WorkInProgress"><span class="toc-section-number">17</span>
-Work in Progress</a>
+<li><a href="#WorkInProgress" id="toc-WorkInProgress"><span
+class="toc-section-number">17</span> Work in Progress</a>
 <ul>
-<li><a href="#PackageNCRational"><span
+<li><a href="#PackageNCRational" id="toc-PackageNCRational"><span
 class="toc-section-number">17.1</span> NCRational</a>
 <ul>
-<li><a href="#state-space-realizations-for-nc-rationals"><span
+<li><a href="#state-space-realizations-for-nc-rationals"
+id="toc-state-space-realizations-for-nc-rationals"><span
 class="toc-section-number">17.1.1</span> State-space realizations for NC
 rationals</a></li>
-<li><a href="#utilities-1"><span
+<li><a href="#utilities-1" id="toc-utilities-1"><span
 class="toc-section-number">17.1.2</span> Utilities</a></li>
-<li><a href="#operations-on-nc-rationals"><span
+<li><a href="#operations-on-nc-rationals"
+id="toc-operations-on-nc-rationals"><span
 class="toc-section-number">17.1.3</span> Operations on NC
 rationals</a></li>
-<li><a href="#minimal-realizations"><span
+<li><a href="#minimal-realizations" id="toc-minimal-realizations"><span
 class="toc-section-number">17.1.4</span> Minimal realizations</a></li>
 </ul></li>
-<li><a href="#PackageNCRealization"><span
+<li><a href="#PackageNCRealization" id="toc-PackageNCRealization"><span
 class="toc-section-number">17.2</span> NCRealization</a>
 <ul>
-<li><a href="#NCDescriptorRealization"><span
+<li><a href="#NCDescriptorRealization"
+id="toc-NCDescriptorRealization"><span
 class="toc-section-number">17.2.1</span>
 NCDescriptorRealization</a></li>
-<li><a href="#NCDeterminantalRepresentationReciprocal"><span
+<li><a href="#NCDeterminantalRepresentationReciprocal"
+id="toc-NCDeterminantalRepresentationReciprocal"><span
 class="toc-section-number">17.2.2</span>
 NCDeterminantalRepresentationReciprocal</a></li>
-<li><a href="#NCMatrixDescriptorRealization"><span
+<li><a href="#NCMatrixDescriptorRealization"
+id="toc-NCMatrixDescriptorRealization"><span
 class="toc-section-number">17.2.3</span>
 NCMatrixDescriptorRealization</a></li>
-<li><a href="#NCMinimalDescriptorRealization"><span
+<li><a href="#NCMinimalDescriptorRealization"
+id="toc-NCMinimalDescriptorRealization"><span
 class="toc-section-number">17.2.4</span>
 NCMinimalDescriptorRealization</a></li>
-<li><a href="#NCSymmetricDescriptorRealization"><span
+<li><a href="#NCSymmetricDescriptorRealization"
+id="toc-NCSymmetricDescriptorRealization"><span
 class="toc-section-number">17.2.5</span>
 NCSymmetricDescriptorRealization</a></li>
-<li><a href="#NCSymmetricDeterminantalRepresentationDirect"><span
+<li><a href="#NCSymmetricDeterminantalRepresentationDirect"
+id="toc-NCSymmetricDeterminantalRepresentationDirect"><span
 class="toc-section-number">17.2.6</span>
 NCSymmetricDeterminantalRepresentationDirect</a></li>
-<li><a href="#NCSymmetricDeterminantalRepresentationReciprocal"><span
+<li><a href="#NCSymmetricDeterminantalRepresentationReciprocal"
+id="toc-NCSymmetricDeterminantalRepresentationReciprocal"><span
 class="toc-section-number">17.2.7</span>
 NCSymmetricDeterminantalRepresentationReciprocal</a></li>
-<li><a href="#NCSymmetrizeMinimalDescriptorRealization"><span
+<li><a href="#NCSymmetrizeMinimalDescriptorRealization"
+id="toc-NCSymmetrizeMinimalDescriptorRealization"><span
 class="toc-section-number">17.2.8</span>
 NCSymmetrizeMinimalDescriptorRealization</a></li>
-<li><a href="#NonCommutativeLift"><span
+<li><a href="#NonCommutativeLift" id="toc-NonCommutativeLift"><span
 class="toc-section-number">17.2.9</span> NonCommutativeLift</a></li>
-<li><a href="#SignatureOfAffineTerm"><span
+<li><a href="#SignatureOfAffineTerm"
+id="toc-SignatureOfAffineTerm"><span
 class="toc-section-number">17.2.10</span> SignatureOfAffineTerm</a></li>
-<li><a href="#TestDescriptorRealization"><span
+<li><a href="#TestDescriptorRealization"
+id="toc-TestDescriptorRealization"><span
 class="toc-section-number">17.2.11</span>
 TestDescriptorRealization</a></li>
-<li><a href="#PinnedQ"><span class="toc-section-number">17.2.12</span>
-PinnedQ</a></li>
-<li><a href="#PinningSpace"><span
+<li><a href="#PinnedQ" id="toc-PinnedQ"><span
+class="toc-section-number">17.2.12</span> PinnedQ</a></li>
+<li><a href="#PinningSpace" id="toc-PinningSpace"><span
 class="toc-section-number">17.2.13</span> PinningSpace</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#references">References</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
 </ul>
 </nav>
 <p><strong>NCAlgebra</strong> is distributed under the terms of the BSD
@@ -6940,6 +7042,7 @@ manipulate <code>NCPoly</code> expressions before converting back to
 <li><a href="#NCToNCPoly">NCToNCPoly</a></li>
 <li><a href="#NCPolyToNC">NCPolyToNC</a></li>
 <li><a href="#NCRuleToPoly">NCRuleToPoly</a></li>
+<li><a href="#NCToRule">NCToRule</a></li>
 <li><a href="#NCMonomialList">NCMonomialList</a></li>
 <li><a href="#NCCoefficientRules">NCCoefficientRules</a></li>
 <li><a href="#NCCoefficientList">NCCoefficientList</a></li>
@@ -6981,8 +7084,21 @@ class="header-section-number">14.2.3</span> NCRuleToPoly</h3>
 <pre><code>NCRuleToPoly[x**y**y -&gt; x**y - 1]</code></pre>
 <p>returns</p>
 <pre><code>x**y**y - x**y + 1</code></pre>
-<h3 data-number="14.2.4" id="NCMonomialList"><span
-class="header-section-number">14.2.4</span> NCMonomialList</h3>
+<h3 data-number="14.2.4" id="NCToRule"><span
+class="header-section-number">14.2.4</span> NCToRule</h3>
+<p><code>NCToRule[exp, vars]</code> converts the NC polynomial
+<code>exp</code> into a rule <code>a -&gt; b</code> in which
+<code>a</code> is the leading monomial according to the ordering implied
+by <code>vars</code>.</p>
+<p>For instance:</p>
+<pre><code>NCToRule[x**y**y - x**y + 1, {x,y}]</code></pre>
+<p>returns</p>
+<pre><code>x**y**y -&gt; x**y - 1</code></pre>
+<p>NOTE: This command is not efficient. If you need to sort polynomials
+you should consider using NCPoly directly.</p>
+<p>See also: <a href="#NCToNCPoly">NCToNCPoly</a></p>
+<h3 data-number="14.2.5" id="NCMonomialList"><span
+class="header-section-number">14.2.5</span> NCMonomialList</h3>
 <p><code>NCMonomialList[poly]</code> gives the list of all monomials in
 the polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -6994,8 +7110,8 @@ NCMonomialList[expr, vars]</code></pre>
 <p>See also: <a href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCCoefficientList">NCCoefficientList</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.5" id="NCCoefficientRules"><span
-class="header-section-number">14.2.5</span> NCCoefficientRules</h3>
+<h3 data-number="14.2.6" id="NCCoefficientRules"><span
+class="header-section-number">14.2.6</span> NCCoefficientRules</h3>
 <p><code>NCCoefficientRules[poly]</code> gives a list of rules between
 all the monomials polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7007,8 +7123,8 @@ NCCoefficientRules[expr, vars]</code></pre>
 <p>See also: <a href="#NCMonomialList">NCMonomialList</a>, <a
 href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.6" id="NCCoefficientList"><span
-class="header-section-number">14.2.6</span> NCCoefficientList</h3>
+<h3 data-number="14.2.7" id="NCCoefficientList"><span
+class="header-section-number">14.2.7</span> NCCoefficientList</h3>
 <p><code>NCCoefficientList[poly]</code> gives the list of all
 coefficients in the polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7020,8 +7136,8 @@ NCCoefficientList[expr, vars]</code></pre>
 <p>See also: <a href="#NCMonomialList">NCMonomialList</a>, <a
 href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.7" id="NCCoefficientQ"><span
-class="header-section-number">14.2.7</span> NCCoefficientQ</h3>
+<h3 data-number="14.2.8" id="NCCoefficientQ"><span
+class="header-section-number">14.2.8</span> NCCoefficientQ</h3>
 <p><code>NCCoefficientQ[expr]</code> returns True if <code>expr</code>
 is a valid polynomial coefficient.</p>
 <p>For example:</p>
@@ -7041,8 +7157,8 @@ not expand <code>expr</code>. This means that
 <code>False</code>.</p>
 <p>See also: <a href="#NCMonomialQ">NCMonomialQ</a>, <a
 href="#NCPolynomialQ">NCPolynomialQ</a></p>
-<h3 data-number="14.2.8" id="NCMonomialQ"><span
-class="header-section-number">14.2.8</span> NCMonomialQ</h3>
+<h3 data-number="14.2.9" id="NCMonomialQ"><span
+class="header-section-number">14.2.9</span> NCMonomialQ</h3>
 <p><code>NCCoefficientQ[expr]</code> returns True if <code>expr</code>
 is an nc monomial.</p>
 <p>For example:</p>
@@ -7060,8 +7176,8 @@ expand <code>expr</code>. This means that
 <code>False</code>.</p>
 <p>See also: <a href="#NCCoefficientQ">NCCoefficientQ</a>, <a
 href="#NCPolynomialQ">NCPolynomialQ</a></p>
-<h3 data-number="14.2.9" id="NCPolynomialQ"><span
-class="header-section-number">14.2.9</span> NCPolynomialQ</h3>
+<h3 data-number="14.2.10" id="NCPolynomialQ"><span
+class="header-section-number">14.2.10</span> NCPolynomialQ</h3>
 <p><code>NCPolynomialQ[expr]</code> returns True if <code>expr</code> is
 an nc polynomial with commutative coefficients.</p>
 <p>For example:</p>
@@ -8610,20 +8726,19 @@ columns span the pinning space of <code>Pencil</code>. Generally, either
 an empty matrix or a d-by-1 matrix (vector).</p>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent"
-role="doc-bibliography">
-<div id="ref-camino:MIS:2003" class="csl-entry" role="doc-biblioentry">
+role="list">
+<div id="ref-camino:MIS:2003" class="csl-entry" role="listitem">
 Camino, Juan F., John William Helton, Robert E. Skelton, and Jieping Ye.
 2003. <span>“<span class="nocase">Matrix Inequalities: a Symbolic
 Procedure to Determine Convexity Automatically</span>.”</span>
 <em>Integral Equation and Operator Theory</em> 46 (4): 399–454.
 </div>
-<div id="ref-mora:ICN:1994" class="csl-entry" role="doc-biblioentry">
+<div id="ref-mora:ICN:1994" class="csl-entry" role="listitem">
 Mora, Teo. 1994. <span>“An Introduction to Commutative and
 Noncommutative Groebner Bases.”</span> <em>Theoretical Computer
 Science</em> 134: 131–73.
 </div>
-<div id="ref-oliveira:SSP:2012" class="csl-entry"
-role="doc-biblioentry">
+<div id="ref-oliveira:SSP:2012" class="csl-entry" role="listitem">
 Oliveira, Mauricio C. de. 2012. <span>“<span
 class="nocase">Simplification of symbolic polynomials on non-commutative
 variables</span>.”</span> <em>Linear Algebra and Its Applications</em>
@@ -8631,53 +8746,52 @@ variables</span>.”</span> <em>Linear Algebra and Its Applications</em>
 href="https://doi.org/10.1016/j.laa.2012.05.015">https://doi.org/10.1016/j.laa.2012.05.015</a>.
 </div>
 </div>
-<section class="footnotes footnotes-end-of-document"
+<section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>The transpose of the gradient of the
-nc expression <code>expr</code> is the derivative with respect to the
-direction <code>h</code> of the trace of the directional derivative of
+<li id="fn1"><p>The transpose of the gradient of the nc expression
+<code>expr</code> is the derivative with respect to the direction
+<code>h</code> of the trace of the directional derivative of
 <code>expr</code> in the direction <code>h</code>.<a href="#fnref1"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>Contrary to what happens with
-symbolic inversion of matrices with commutative entries, there exist
-multiple formulas for the symbolic inverse of a matrix with
-noncommutative entries. Furthermore, it may be possible that none of
-such formulas is “correct”. Indeed, it is easy to construct a matrix
-<code>m</code> with block structure as shown that is invertible but for
-which none of the blocks <code>a</code>, <code>b</code>, <code>c</code>,
-and <code>d</code> are invertible. In this case no <em>correct</em>
-formula exists for the calculation of the inverse of <code>m</code>.<a
-href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>This is in contrast with the
-commutative <span class="math inline">\(x^4\)</span> which is convex
-everywhere. See <span class="citation"
-data-cites="camino:MIS:2003">(Camino et al. 2003)</span> for details.<a
-href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>The reason is that making an operator
-<code>Flat</code> is a convenience that comes with a price: lack of
-control over execution and evaluation. Since <code>NCAlgebra</code> has
-to operate at a very low level this lack of control over evaluation is
-fatal. Indeed, making <code>NonCommutativeMultiply</code> have an
-attribute <code>Flat</code> will throw Mathematica into infinite loops
-in seemingly trivial noncommutative expressions. Hey, email us if you
-find a way around that :)<a href="#fnref4" class="footnote-back"
+<li id="fn2"><p>Contrary to what happens with symbolic inversion of
+matrices with commutative entries, there exist multiple formulas for the
+symbolic inverse of a matrix with noncommutative entries. Furthermore,
+it may be possible that none of such formulas is “correct”. Indeed, it
+is easy to construct a matrix <code>m</code> with block structure as
+shown that is invertible but for which none of the blocks
+<code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> are
+invertible. In this case no <em>correct</em> formula exists for the
+calculation of the inverse of <code>m</code>.<a href="#fnref2"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This is in contrast with the commutative <span
+class="math inline">\(x^4\)</span> which is convex everywhere. See <span
+class="citation" data-cites="camino:MIS:2003">(Camino et al.
+2003)</span> for details.<a href="#fnref3" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>One might have encountered this
-difficulty when trying to match a product of commutative variables in a
-commutative monomial such as <code>x y^2 /. x y -&gt; z</code> which
-fails to match <code>x y^2</code> even though <code>x y^2</code> is
-equal to <code>(x y) y</code>.<a href="#fnref5" class="footnote-back"
+<li id="fn4"><p>The reason is that making an operator <code>Flat</code>
+is a convenience that comes with a price: lack of control over execution
+and evaluation. Since <code>NCAlgebra</code> has to operate at a very
+low level this lack of control over evaluation is fatal. Indeed, making
+<code>NonCommutativeMultiply</code> have an attribute <code>Flat</code>
+will throw Mathematica into infinite loops in seemingly trivial
+noncommutative expressions. Hey, email us if you find a way around that
+:)<a href="#fnref4" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote"><p>The actual rule in this case is the
-more complicated
+<li id="fn5"><p>One might have encountered this difficulty when trying
+to match a product of commutative variables in a commutative monomial
+such as <code>x y^2 /. x y -&gt; z</code> which fails to match
+<code>x y^2</code> even though <code>x y^2</code> is equal to
+<code>(x y) y</code>.<a href="#fnref5" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>The actual rule in this case is the more complicated
 <code>a^n:_Integer?Positive:1**c**b^m:_Integer?Positive:1 -&gt; a^(n-1)**d**b^(m-1)</code>
 with additional checks that prevent the rule from working with negative
 powers.<a href="#fnref6" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn7" role="doc-endnote"><p>By the way, I find that behavior of
-Mathematica’s <code>Module</code> questionable, since something like</p>
+<li id="fn7"><p>By the way, I find that behavior of Mathematica’s
+<code>Module</code> questionable, since something like</p>
 <pre><code>F[exp_] := Module[{aa, bb},
   SetNonCommutative[aa, bb];
   aa**bb
@@ -8686,9 +8800,8 @@ Mathematica’s <code>Module</code> questionable, since something like</p>
 It is their appearance in a rule that triggers the mostly odd
 behavior.<a href="#fnref7" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn8" role="doc-endnote"><p>Formerly
-<code>MatMult[m1,m2]</code>.<a href="#fnref8" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Formerly <code>MatMult[m1,m2]</code>.<a href="#fnref8"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </body>
