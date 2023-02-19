@@ -22,7 +22,9 @@ Begin["`Private`"];
   verbose = If[ValueQ[$NCAlgebra$Loaded], False, $NCAlgebra$Loaded=True];
 
   (* Print banner *)
-  If [ verbose && ShowBanner /. Options[NCOptions, ShowBanner], FilePrint[FindFile["banner.txt"]]];
+  If [ verbose && ShowBanner /. Options[NCOptions, ShowBanner],
+       FilePrint[FindFile["NCAlgebra/banner.txt"]]
+  ];
 
   
   If[ SmallCapSymbolsNonCommutative /. Options[NCOptions, SmallCapSymbolsNonCommutative]

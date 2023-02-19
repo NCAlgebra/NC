@@ -4,9 +4,11 @@
 (* Version: 0.1 ( initial implementation )                                 *)
 
 BeginPackage["NCPoly`",
-             {"NC`",
+             {
 	      "MatrixDecompositions`",
-	      "NCDebug`"}];
+	      "NCDebug`"
+	     }
+];
 
 (* 
    These functions are not implemented here. 
