@@ -18,8 +18,8 @@ http://math.ucsd.edu/~ncalg
 Starting with version 6.0.0, the easiest to install NCAlgebra is using
 our paclet distribution. Just type:
 
-    PacletInstall["https://raw.githubusercontent.com/NCAlgebra/NC/v6.0.0/NCAlgebraPaclet-6.0.0.paclet"];
-
+    PacletInstall["https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true"];
+	
 In the near future we might submit paclets to the Wolfram paclet repository.
 
 Alternatively you can download and install NCAlgebra as outlined below.
