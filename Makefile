@@ -46,10 +46,12 @@ paclet:
 	cp -r TESTING/NCPoly/TestResults NCAlgebraPaclet/TESTING/NCPoly/.
 	mkdir NCAlgebraPaclet/TESTING/NCSDP
 	cp -r TESTING/NCSDP/*.NCTest NCAlgebraPaclet/TESTING/NCSDP/.
-	cp -r TESTING/NCSDP/COMPleib NCAlgebraPaclet/TESTING/NCSDP/.
 	cp -r TESTING/NCSDP/data NCAlgebraPaclet/TESTING/NCSDP/.
 	./addPacletPrefix.sh NCAlgebraPaclet TESTING
 	cp NCAlgebra/banner.txt NCAlgebraPaclet/.
+
+deploy: paclet
+	echo 'Print["\n> CREATING PACLET ARCHIVE..."]; CreatePacletArchive["NCAlgebraPaclet"]; Print["> DONE!"]; Quit[];' | math
 
 test:
 	math < TESTING/NCTEST

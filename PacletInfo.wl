@@ -37,12 +37,10 @@ PacletObject[<|
       "Context" -> {
         "FancySymbol`",
         "MatrixDecompositions`",
-	"NCWebUpdate`",
 	"MakeUsage`",
 	"NCDebug`",
-	"Unzip`",
 	"Matrix`",
-	"NCWebInstall`"
+	{"NC`", "DummyNC.m"}
       }
     },
     {
@@ -91,12 +89,15 @@ PacletObject[<|
       "Kernel",
       "Root" -> "TESTING",
       "Context" -> {
-        "NCTest`"
+        "NCTest`",
+        "NCCORETEST`",
+        "NCPOLYTEST`",
+        "NCPOLYTESTGB`",
+        "NCSDPTEST`",
+        "NCSDPTESTMORE`"
       }
     },
     { "Path" }
   }
 |>]
-
-
 
