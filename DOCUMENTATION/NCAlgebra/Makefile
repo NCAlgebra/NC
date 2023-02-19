@@ -18,7 +18,6 @@ FILES = NonCommutativeMultiply.usage \
 	NCRealization.usage \
 	NCRealization.private.usage \
         NCMatrixDecompositions.usage \
-        MatrixDecompositions.usage \
 	NCUtil.usage
 
 FILES3 = NCPolynomial.usage \

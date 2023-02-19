@@ -20,6 +20,8 @@ Members are:
 * [SetCommutingOperators](#SetCommutingOperators)
 * [UnsetCommutingOperators](#UnsetCommutingOperators)
 * [CommutingOperatorsQ](#CommutingOperatorsQ)
+* [NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ)
+* [NCPowerQ](#NCPowerQ)
 * [Commutative](#Commutative)
 * [CommuteEverything](#CommuteEverything)
 * [BeginCommuteEverything](#BeginCommuteEverything)
@@ -172,6 +174,22 @@ See also:
 See also:
 [SetCommutingOperators](#SetCommutingOperators),
 [UnsetCommutingOperators](#UnsetCommutingOperators)
+
+### NCNonCommutativeSymbolOrSubscriptQ {#NCNonCommutativeSymbolOrSubscriptQ}
+
+`NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
+
+See also:
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
+[NCPowerQ](#NCPowerQ).
+
+### NCPowerQ {#NCPowerQ}
+
+`NCPowerQ[expr]` returns *True* if `expr` is an noncommutative symbol or symbol subscript or a positive power of a noncommutative symbol or symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ).
 
 ### Commutative {#Commutative}
 

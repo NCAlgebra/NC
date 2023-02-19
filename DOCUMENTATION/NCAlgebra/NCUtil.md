@@ -12,8 +12,6 @@ Members are:
 * [NCConsolidateList](#NCConsolidateList)
 * [NCConsistentQ](#NCConsistentQ)
 * [NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ)
-* [NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ)
-* [NCPowerQ](#NCPowerQ)
 * [NCLeafCount](#NCLeafCount)
 * [NCReplaceData](#NCReplaceData)
 * [NCToExpression](#NCToExpression)
@@ -135,22 +133,6 @@ See also:
 See also:
 [NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
 [NCPowerQ](#NCPowerQ).
-
-### NCNonCommutativeSymbolOrSubscriptQ {#NCNonCommutativeSymbolOrSubscriptQ}
-
-`NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
-
-See also:
-[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
-[NCPowerQ](#NCPowerQ).
-
-### NCPowerQ {#NCPowerQ}
-
-`NCPowerQ[expr]` returns *True* if `expr` is an noncommutative symbol or symbol subscript or a positive power of a noncommutative symbol or symbol subscript.
-
-See also:
-[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
-[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ).
 
 ### NCLeafCount {#NCLeafCount}
 
