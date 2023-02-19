@@ -126,21 +126,22 @@ All rights reserved.
     - <a href="#setnoncommutative" id="toc-SetNonCommutative"><span class="toc-section-number">11.1.11</span> SetNonCommutative</a>
     - <a href="#setnoncommutativehold" id="toc-SetNonCommutativeHold"><span class="toc-section-number">11.1.12</span> SetNonCommutativeHold</a>
     - <a href="#setcommutativefunction" id="toc-SetCommutativeFunction"><span class="toc-section-number">11.1.13</span> SetCommutativeFunction</a>
-    - <a href="#snc" id="toc-SNC"><span class="toc-section-number">11.1.14</span> SNC</a>
-    - <a href="#setcommutingoperators" id="toc-SetCommutingOperators"><span class="toc-section-number">11.1.15</span> SetCommutingOperators</a>
-    - <a href="#unsetcommutingoperators" id="toc-UnsetCommutingOperators"><span class="toc-section-number">11.1.16</span> UnsetCommutingOperators</a>
-    - <a href="#commutingoperatorsq" id="toc-CommutingOperatorsQ"><span class="toc-section-number">11.1.17</span> CommutingOperatorsQ</a>
-    - <a href="#ncnoncommutativesymbolorsubscriptq" id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span class="toc-section-number">11.1.18</span> NCNonCommutativeSymbolOrSubscriptQ</a>
-    - <a href="#ncpowerq" id="toc-NCPowerQ"><span class="toc-section-number">11.1.19</span> NCPowerQ</a>
-    - <a href="#commutative" id="toc-Commutative"><span class="toc-section-number">11.1.20</span> Commutative</a>
-    - <a href="#commuteeverything" id="toc-CommuteEverything"><span class="toc-section-number">11.1.21</span> CommuteEverything</a>
-    - <a href="#begincommuteeverything" id="toc-BeginCommuteEverything"><span class="toc-section-number">11.1.22</span> BeginCommuteEverything</a>
-    - <a href="#endcommuteeverything" id="toc-EndCommuteEverything"><span class="toc-section-number">11.1.23</span> EndCommuteEverything</a>
-    - <a href="#expandnoncommutativemultiply" id="toc-ExpandNonCommutativeMultiply"><span class="toc-section-number">11.1.24</span> ExpandNonCommutativeMultiply</a>
-    - <a href="#ncexpand" id="toc-NCExpand"><span class="toc-section-number">11.1.25</span> NCExpand</a>
-    - <a href="#nce" id="toc-NCE"><span class="toc-section-number">11.1.26</span> NCE</a>
-    - <a href="#ncexpandexponents" id="toc-NCExpandExponents"><span class="toc-section-number">11.1.27</span> NCExpandExponents</a>
-    - <a href="#nctolist" id="toc-NCToList"><span class="toc-section-number">11.1.28</span> NCToList</a>
+    - <a href="#setnoncommutativefunction" id="toc-SetNonCommutativeFunction"><span class="toc-section-number">11.1.14</span> SetNonCommutativeFunction</a>
+    - <a href="#snc" id="toc-SNC"><span class="toc-section-number">11.1.15</span> SNC</a>
+    - <a href="#setcommutingoperators" id="toc-SetCommutingOperators"><span class="toc-section-number">11.1.16</span> SetCommutingOperators</a>
+    - <a href="#unsetcommutingoperators" id="toc-UnsetCommutingOperators"><span class="toc-section-number">11.1.17</span> UnsetCommutingOperators</a>
+    - <a href="#commutingoperatorsq" id="toc-CommutingOperatorsQ"><span class="toc-section-number">11.1.18</span> CommutingOperatorsQ</a>
+    - <a href="#ncnoncommutativesymbolorsubscriptq" id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span class="toc-section-number">11.1.19</span> NCNonCommutativeSymbolOrSubscriptQ</a>
+    - <a href="#ncpowerq" id="toc-NCPowerQ"><span class="toc-section-number">11.1.20</span> NCPowerQ</a>
+    - <a href="#commutative" id="toc-Commutative"><span class="toc-section-number">11.1.21</span> Commutative</a>
+    - <a href="#commuteeverything" id="toc-CommuteEverything"><span class="toc-section-number">11.1.22</span> CommuteEverything</a>
+    - <a href="#begincommuteeverything" id="toc-BeginCommuteEverything"><span class="toc-section-number">11.1.23</span> BeginCommuteEverything</a>
+    - <a href="#endcommuteeverything" id="toc-EndCommuteEverything"><span class="toc-section-number">11.1.24</span> EndCommuteEverything</a>
+    - <a href="#expandnoncommutativemultiply" id="toc-ExpandNonCommutativeMultiply"><span class="toc-section-number">11.1.25</span> ExpandNonCommutativeMultiply</a>
+    - <a href="#ncexpand" id="toc-NCExpand"><span class="toc-section-number">11.1.26</span> NCExpand</a>
+    - <a href="#nce" id="toc-NCE"><span class="toc-section-number">11.1.27</span> NCE</a>
+    - <a href="#ncexpandexponents" id="toc-NCExpandExponents"><span class="toc-section-number">11.1.28</span> NCExpandExponents</a>
+    - <a href="#nctolist" id="toc-NCToList"><span class="toc-section-number">11.1.29</span> NCToList</a>
   - <a href="#nctr" id="toc-PackageNCTr"><span class="toc-section-number">11.2</span> NCTr</a>
     - <a href="#tr" id="toc-tr"><span class="toc-section-number">11.2.1</span> tr</a>
     - <a href="#sortcyclicpermutation" id="toc-SortCyclicPermutation"><span class="toc-section-number">11.2.2</span> SortCyclicPermutation</a>
@@ -437,7 +438,9 @@ The beginnings of the program come from eran@slac.
 
 ## Version 6.0.0
 
-1.  Changed cannonical representation of noncommutative expressions to
+1.  Paclet installation. NCAlgebra is now paclet installable!
+
+2.  Changed cannonical representation of noncommutative expressions to
     allow for powers to be present in `NonCommutativeMultiply`.
 
     > **WARNING:** THIS IS A BREAKING CHANGE THAT CAN AFFECT EXISTING
@@ -448,19 +451,25 @@ The beginnings of the program come from eran@slac.
     > MITIGATE THE IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE
     > BEEN REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
 
-2.  Streamlined rules for [NCSimplifyRational](#ncsimplifyrational-1).
+3.  Streamlined rules for [NCSimplifyRational](#ncsimplifyrational-1).
 
-3.  `NonCommutativeMultiply`: new functions
+4.  `NonCommutativeMultiply`: new functions
     [NCExpandExponents](#ncexpandexponents) and [NCToList](#nctolist).
 
-4.  `NCReplace`: new functions
+5.  `NCReplace`: new functions
     [NCReplacePowerRule](#ncreplacepowerrule); option `ApplyPowerRule`.
 
-5.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
+6.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
 
-6.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices) and [GetFullLDUMatrices](#getfullldumatrices) now produces low rank matrices.
+7.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices) and [GetFullLDUMatrices](#getfullldumatrices) now produces low rank matrices.
 
-7.  `NCPoly`: new function [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
+8.  `NCPoly`: new function [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
+
+9.  `NCPolyInterface`: new function [NCToRule](#nctorule).
+
+10. New functions [SetCommutativeFunction](#setcommutativefunction) and [SetNonCommutativeFunction](#setnoncommutativefunction).
+
+11. The old `C++` version of `NCGB` is no longer compatible with `NCAlgebra` *version 6*. Use [NCGBX](#NCGBX) instead.
 
 # Changes in Version 5.0
 
@@ -4071,6 +4080,7 @@ Members are:
 - [SetNonCommutative](#setnoncommutative)
 - [SetNonCommutativeHold](#setnoncommutativehold)
 - [SetCommutativeFunction](#setcommutativefunction)
+- [SetNonCommutativeFunction](#setnoncommutativefunction)
 - [SetCommutingOperators](#setcommutingoperators)
 - [UnsetCommutingOperators](#unsetcommutingoperators)
 - [CommutingOperatorsQ](#commutingoperatorsq)
@@ -4193,6 +4203,13 @@ evaluates to `trace[a ** b] * a ** b`.
 
 See also:
 [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq), [tr](#tr).
+
+### SetNonCommutativeFunction
+
+`SetNonCommutativeFunction[f]` sets expressions with `Head` `f`, i.e. functions, to be non commutative. This is only necessary if it has been previously set commutative by [SetCommutativeFunction](#setcommutativefunction).
+
+See also:
+[SetCommutativeFunction](#setcommutativefunction), [SetCommutative](#setcommutative), [SetNonCommutative](#setnoncommutative), [CommutativeQ](#commutativeq), [NonCommutativeQ](#noncommutativeq), [tr](#tr).
 
 ### SNC
 

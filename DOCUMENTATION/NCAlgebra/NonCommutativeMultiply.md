@@ -17,6 +17,7 @@ Members are:
 * [SetNonCommutative](#SetNonCommutative)
 * [SetNonCommutativeHold](#SetNonCommutativeHold)
 * [SetCommutativeFunction](#SetCommutativeFunction)
+* [SetNonCommutativeFunction](#SetNonCommutativeFunction)
 * [SetCommutingOperators](#SetCommutingOperators)
 * [UnsetCommutingOperators](#UnsetCommutingOperators)
 * [CommutingOperatorsQ](#CommutingOperatorsQ)
@@ -139,6 +140,13 @@ evaluates to `trace[a ** b] * a ** b`.
 
 See also:
 [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ), [tr](#tr).
+
+### SetNonCommutativeFunction {#SetNonCommutativeFunction}
+
+`SetNonCommutativeFunction[f]` sets expressions with `Head` `f`, i.e. functions, to be non commutative. This is only necessary if it has been previously set commutative by [SetCommutativeFunction](#SetCommutativeFunction).
+
+See also:
+[SetCommutativeFunction](#SetCommutativeFunction), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ), [tr](#tr).
 
 ### SNC {#SNC}
 
