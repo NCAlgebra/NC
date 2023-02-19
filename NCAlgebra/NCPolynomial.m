@@ -13,11 +13,14 @@
 (* :History: *)
 
 BeginPackage[ "NCPolynomial`",
-              "NCDot`",
-              "NCReplace`",
-              "NCUtil`",
-              "NCPolyInterface`",
-	      "NonCommutativeMultiply`" ];
+	      {
+		"NonCommutativeMultiply`",
+		"NCDot`",
+		"NCReplace`",
+                "NCUtil`",
+                "NCPolyInterface`"
+	      }
+];
 
 Clear[NCPolynomial, 
       NCToNCPolynomial, NCPolynomialToNC, NCRationalToNCPolynomial,

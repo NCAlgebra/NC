@@ -24,10 +24,8 @@ Clear[NCGrabSymbols,
       NCGrabIndeterminants,
       NCVariables,
       NCConsolidateList,
-      NCConsistentQ,
       NCSymbolOrSubscriptQ,
-      NCNonCommutativeSymbolOrSubscriptQ,
-      NCPowerQ,
+      NCConsistentQ,
       NCLeafCount,
       NCReplaceData,
       NCToExpression,
@@ -41,19 +39,10 @@ Get["NCUtil.usage", CharacterEncoding->"UTF8"];
 
 Begin["`Private`"];
 
-  Needs["NonCommutativeMultiply`"];
-             
   NotMatrixQ[x_] := Not[MatrixQ[x]];
 
+  (* NCSymbolOrSubscriptQ *)
   NCSymbolOrSubscriptQ = Function[x, MatchQ[x, _Symbol|Subscript[_Symbol,__]]];
-  NCNonCommutativeSymbolOrSubscriptQ =
-    Function[x,
-             MatchQ[x, _Symbol|Subscript[_Symbol,__]] && NonCommutativeQ[x]];
-
-  NCPowerQ =
-    Function[x,
-      NCNonCommutativeSymbolOrSubscriptQ[x] ||
-      MatchQ[x,Power[y_?NCNonCommutativeSymbolOrSubscriptQ, _Integer?Positive]]];
 
   NCGrabFirst[exp_, rule_Rule] := (exp /. rule) /; MatchQ[exp, rule[[1]]];
   NCGrabFirst[exp_, pattern_Pattern] := exp /; MatchQ[exp, pattern];
@@ -96,9 +85,9 @@ Begin["`Private`"];
     Union[Cases[expr, (pattern)[_?NCSymbolOrSubscriptQ], {0, Infinity}]];
 
   NCGrabNCSymbols[expr_] :=
-    DeleteCases[NCGrabSymbols[expr], _?CommutativeQ];
+    DeleteCases[NCGrabSymbols[expr], _?NonCommutativeMultiply`CommutativeQ];
   NCGrabNCSymbols[expr_, pattern_] :=
-    DeleteCases[NCGrabSymbols[expr, pattern], _?CommutativeQ];
+    DeleteCases[NCGrabSymbols[expr, pattern], _?NonCommutativeMultiply`CommutativeQ];
     
 
   (* NCGrabSymbolsInProduct *)
@@ -116,7 +105,7 @@ Begin["`Private`"];
   NCGrabFunctions[expr_SparseArray, f_] := 
       NCGrabFunctions[expr["NonzeroValues"], f];
     
-  NCGrabFunctions[expr_, inv, levelSpec_:{0, Infinity}] :=
+  NCGrabFunctions[expr_, NonCommutativeMultiply`inv, levelSpec_:{0, Infinity}] :=
     Union[Cases[expr, Power[_, _Integer?Negative], levelSpec]];
   NCGrabFunctions[expr_, f_, levelSpec_:{0, Infinity}] :=
     Union[Cases[expr, (f)[__], levelSpec]];
@@ -160,7 +149,7 @@ Begin["`Private`"];
   NCGrabIndeterminants[x_] := {x};
 
   (* NCVariables *)
-  NCVariables[expr_] := Select[NCGrabSymbols[expr], NonCommutativeQ];
+  NCVariables[expr_] := Select[NCGrabSymbols[expr], NonCommutativeMultiply`NonCommutativeQ];
 
   (* NCConsolidateList *)
   
@@ -173,7 +162,7 @@ Begin["`Private`"];
     
   NCConsistentQ[expr_] := 
     Length[Cases[expr, 
-            a_?NonCommutativeQ * b_?NonCommutativeQ, {0, Infinity}]] == 0;
+            a_?NonCommutativeMultiply`NonCommutativeQ * b_?NonCommutativeMultiply`NonCommutativeQ, {0, Infinity}]] == 0;
 
   (* NC leaf count *)
   NCLeafCount[x_?PossibleZeroQ] := -Infinity;

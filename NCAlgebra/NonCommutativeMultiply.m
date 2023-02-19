@@ -16,10 +16,16 @@
 (* :History:
 *)
 
-BeginPackage[ "NonCommutativeMultiply`" ];
+BeginPackage["NonCommutativeMultiply`",
+	     {
+	       "NCUtil`"
+	     }
+];
 
 Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 
+      NCNonCommutativeSymbolOrSubscriptQ,
+      NCPowerQ,
       SetCommutative, SetNonCommutative,
       SetCommutativeFunction,
       SetNonCommutativeHold,
@@ -61,7 +67,7 @@ Begin[ "`Private`" ]
             properly-handle-mutual-imports-of-multiple-packages 
      to take care of mutal import of NCUtil` 
   *)
-  Needs["NCUtil`"];
+  (* Needs["NCUtil`"]; *)
 
   (* Overide Mathematica's existing NonCommutativeMultiply operator *)
   
@@ -106,6 +112,16 @@ Begin[ "`Private`" ]
   (* NonCommutativeQ *)
   NonCommutativeQ[x_] := Not[CommutativeQ[x]];
 
+  (* NCNonCommutativeSymbolOrSubscriptQ *)
+  NCNonCommutativeSymbolOrSubscriptQ =
+    Function[x,
+             MatchQ[x, _Symbol|Subscript[_Symbol,__]] && NonCommutativeQ[x]];
+
+  (* NCPowerQ *)
+  NCPowerQ =
+    Function[x,
+      NCNonCommutativeSymbolOrSubscriptQ[x] ||
+      MatchQ[x,Power[y_?NCNonCommutativeSymbolOrSubscriptQ, _Integer?Positive]]];
 
   (*  SetCommutative and SetNonCommutative *)
   Clear[OverwriteWriteProtection];
