@@ -1,4 +1,7 @@
-SetOptions[NC, SmallCapSymbolsNonCommutative -> False, ShowBanner -> False];
+<< NCOptions`
+SetOptions[NCOptions,
+           SmallCapSymbolsNonCommutative -> False,
+	   ShowBanner -> False];
 Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 << NCGBX`
 
