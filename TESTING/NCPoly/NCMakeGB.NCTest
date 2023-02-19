@@ -6,7 +6,8 @@
  *)
 
 Clear[NCMakeGBTest];
-NCMakeGBTest[filename_String, 
+NCMakeGBTest[filename_String,
+	     baseDirectory_String,
              referenceDirectory_String,
              resultDirectory_String:"",
 	     removeRedundant_:True,
@@ -26,7 +27,8 @@ NCMakeGBTest[filename_String,
    Interrupted = False;
 
    (* Load test problem *)
-   Get[filename];
+   Get[ToFileName[{baseDirectory, referenceDirectory},
+                  filename]];
 
    (* Print["rels = ", rels]; *)
 
@@ -114,6 +116,7 @@ NCMakeGBRunTests[testset_, opts___:{}] := Module[
   {$NCGB$ResultDirectory = "TestResults",
    $NCGB$ReferenceDirectory = "TestProblems",
    $NCGB$RemoveRedundant = False,
+   $NCGB$BaseDirectory,
    $NC$Dir,
    $CurrentDirectory,
    $NCGB$TestProblems,
@@ -121,10 +124,20 @@ NCMakeGBRunTests[testset_, opts___:{}] := Module[
   
   (* Perform tests *)
 
-  $NC$Dir = DirectoryName[FindFile["NC`"]];
+  $NC$Dir = DirectoryName[
+    If[ FindFile["NC`"] =!= $Failed
+       ,
+        FindFile["NC`"]
+       ,
+        FindFile["NCAlgebra/PacletInfo.wl"]
+    ]
+  ];
 
   $CurrentDirectory = Directory[];
-  SetDirectory[ToFileName[{$NC$Dir, "TESTING", "NCPoly"}, "TestProblems"]];
+  $NCGB$BaseDirectory = ToFileName[{$NC$Dir, "TESTING", "NCPoly"}];
+  SetDirectory[ToFileName[$NCGB$BaseDirectory, "TestProblems"]];
+
+  Print["> SOURCE DIRECTORY ", $NCGB$BaseDirectory];
 
   $NCGB$TestProblems = Map[ 
     If[# < 10, StringJoin["c0", ToString[#], ".data.m"], 
@@ -137,7 +150,8 @@ NCMakeGBRunTests[testset_, opts___:{}] := Module[
     ]
   ];
 
-  Map[NCMakeGBTest[#,$NCGB$ReferenceDirectory,
+  Map[NCMakeGBTest[#,$NCGB$BaseDirectory,
+                     $NCGB$ReferenceDirectory,
 		     $NCGB$ResultDirectory,
 		     $NCGB$RemoveRedundant,
 		     opts]&, 
@@ -148,5 +162,6 @@ NCMakeGBRunTests[testset_, opts___:{}] := Module[
 ];
 
 testset = Range[0,88];
+(* testset = Range[88,88]; *)
 
 NCMakeGBRunTests[testset, VerboseLevel -> 1];

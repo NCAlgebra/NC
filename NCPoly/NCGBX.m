@@ -376,7 +376,6 @@ Begin["`Private`"];
     Print["$NCPolyInterfaceMonomialOrder = ", $NCPolyInterfaceMonomialOrder];
     (* Check conversion *)
     Print["ZEROS = ", Replace[p, a_Rule | a_Equal :> Subtract @@ a, {1}] - DeleteCases[polys[[1;;Length[p]]] //. ruleRev, 0]];
-    
     *)
       
     (* Convert to NCPoly *)

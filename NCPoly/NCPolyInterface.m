@@ -124,7 +124,10 @@ Begin["`Private`"];
         Return[$Failed];
     ];
     
-    (* Print["terms = ", terms]; *)
+    (*
+    Print["terms = ", GrabTerms[terms]];
+    Print["factors = ", Map[GrabFactors, GrabTerms[terms]]];
+    *)
 
     Check[
       factors = Map[GrabFactors, 
@@ -136,7 +139,7 @@ Begin["`Private`"];
     ];
 
     (* Check for inverses; by now all remaining powers are negative *)
-    If[ !FreeQ[factors, Power],
+    If[ !FreeQ[factors[[All,2]], Power],
         Message[NCPoly::NotPolynomial];
         Return[$Failed];
     ];

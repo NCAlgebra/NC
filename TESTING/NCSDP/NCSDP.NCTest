@@ -192,7 +192,11 @@ Module[
   vars = {x, y};
   obj = {-1, 0};
 
-  << "COMPleib/MmaCOMPleib/AC3.m";
+  Check[
+     Get["COMPleib/MmaCOMPleib/AC3.m"];
+    ,
+     Get["NCAlgebra/TESTING/NCSDP/COMPleib/MmaCOMPleib/AC3.m"];
+  ];
   data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
   Idn = IdentityMatrix[nx];
   Ze = ConstantArray[0, {nx,nx}];

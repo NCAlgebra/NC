@@ -1,6 +1,6 @@
 SetOptions[$Output,PageWidth->1000];
 
-Quiet[Get["NC`"], NC`NC::Directory];
+Quiet[Get["NC`"], {NC`NC::Directory, Get::noopen}];
 << NCOptions`
 SetOptions[NCOptions,
            SmallCapSymbolsNonCommutative -> False,
@@ -11,10 +11,11 @@ Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 
 Print["> BEGIN NCPOLYTESTGB\n" ];
 
+prefix = "NCAlgebra/TESTING/NCPoly/"
 tests = {
   "NCMakeGB"
 };
-results = NCTestRun[tests];
+results = NCTestRun[tests, prefix];
 NCTestSummarize[results];
 
 Print["\n> END NCPOLYTESTGB\n" ];

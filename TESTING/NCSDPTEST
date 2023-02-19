@@ -1,10 +1,11 @@
 SetOptions[$Output,PageWidth->1000];
 
-<< NC`
+Quiet[Get["NC`"], {NC`NC::Directory, Get::noopen}];
 << NCTest`
 
 Print["> BEGIN NCSDPTEST\n" ];
 
+prefix = "NCAlgebra/TESTING/NCSDP/"
 tests = {
   "SDPLinearCoefficientArrays",
   "SDPEval",
@@ -14,7 +15,7 @@ tests = {
   "NCSDP",
   "SDPSylvesterSolve"
 };
-results = NCTestRun[tests];
+results = NCTestRun[tests, prefix];
 NCTestSummarize[results];
 
 Print["\n> END NCSDPTEST\n" ];

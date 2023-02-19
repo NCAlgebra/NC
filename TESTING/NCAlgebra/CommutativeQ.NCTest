@@ -173,6 +173,8 @@ Block[
   NCTest[CommutativeQ[Tr[x]], False];
   NCTestCheck[SetCommutativeFunction[Tr], SetCommutative::Protected];
   NCTest[CommutativeQ[Tr[x]], True];
+  NCTestCheck[SetNonCommutativeFunction[Tr], SetNonCommutative::Protected];
+  NCTest[CommutativeQ[Tr[x]], False];
 
   (* Test SetNonCommutativeHold *)
   b = 1;

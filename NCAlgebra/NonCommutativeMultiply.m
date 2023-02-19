@@ -28,6 +28,7 @@ Clear[aj, tp, rt, inv, co,
       NCPowerQ,
       SetCommutative, SetNonCommutative,
       SetCommutativeFunction,
+      SetNonCommutativeFunction,
       SetNonCommutativeHold,
       SetCommutingOperators,
       UnsetCommutingOperators,
@@ -193,6 +194,23 @@ Begin[ "`Private`" ]
       ];
      ,
       TagSet::write
+    ];
+
+  (* SetNonCommutativeFunction *)
+  SetNonCommutativeFunction[f_Symbol] :=
+    Quiet[
+      Check[
+         f /: HoldPattern[CommutativeQ[f[___]]] =.;
+        ,
+         Unprotect[f];
+         f /: HoldPattern[CommutativeQ[f[___]]] =.;
+         Protect[f];
+         Message[SetNonCommutative::Protected, f];
+        ,
+         TagUnset::write
+      ];
+     ,
+      {TagUnset::write, TagUnset::norep}
     ];
 
   (* Commutative *)

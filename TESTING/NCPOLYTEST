@@ -1,11 +1,12 @@
 SetOptions[$Output,PageWidth->1000];
 
-Quiet[Get["NC`"], NC`NC::Directory];
+Quiet[Get["NC`"], {NC`NC::Directory, Get::noopen}];
 << NCTest`
 << NCPoly`
 
 Print["> BEGIN NCPOLYTEST\n" ];
 
+prefix = "NCAlgebra/TESTING/NCPoly/"
 tests = {
   "Digits",
   "Constructors",
@@ -20,7 +21,7 @@ tests = {
   "NCGBX",
   "NCPolySOS"
 };
-results = NCTestRun[tests];
+results = NCTestRun[tests, prefix];
 NCTestSummarize[results];
 
 Print["\n> END NCPOLYTEST\n" ];

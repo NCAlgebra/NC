@@ -34,6 +34,21 @@ paclet:
 	cp -r NCTeX/*.m NCAlgebraPaclet/NCTeX/.
 	cp -r NCTeX/*.usage NCAlgebraPaclet/NCTeX/.
 	./addPacletPrefix.sh NCAlgebraPaclet NCTeX
+	mkdir NCAlgebraPaclet/TESTING
+	cp -r TESTING/*.m NCAlgebraPaclet/TESTING/.
+	cp -r TESTING/*.usage NCAlgebraPaclet/TESTING/.
+	cp TESTING/NC*TEST* NCAlgebraPaclet/TESTING
+	mkdir NCAlgebraPaclet/TESTING/NCAlgebra
+	cp -r TESTING/NCAlgebra/*.NCTest NCAlgebraPaclet/TESTING/NCAlgebra/.
+	mkdir NCAlgebraPaclet/TESTING/NCPoly
+	cp -r TESTING/NCPoly/*.NCTest NCAlgebraPaclet/TESTING/NCPoly/.
+	cp -r TESTING/NCPoly/TestProblems NCAlgebraPaclet/TESTING/NCPoly/.
+	cp -r TESTING/NCPoly/TestResults NCAlgebraPaclet/TESTING/NCPoly/.
+	mkdir NCAlgebraPaclet/TESTING/NCSDP
+	cp -r TESTING/NCSDP/*.NCTest NCAlgebraPaclet/TESTING/NCSDP/.
+	cp -r TESTING/NCSDP/COMPleib NCAlgebraPaclet/TESTING/NCSDP/.
+	cp -r TESTING/NCSDP/data NCAlgebraPaclet/TESTING/NCSDP/.
+	./addPacletPrefix.sh NCAlgebraPaclet TESTING
 	cp NCAlgebra/banner.txt NCAlgebraPaclet/.
 
 test:

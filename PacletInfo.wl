@@ -87,6 +87,13 @@ PacletObject[<|
         "NCTeXForm`"
       }
     },
+    {
+      "Kernel",
+      "Root" -> "TESTING",
+      "Context" -> {
+        "NCTest`"
+      }
+    },
     { "Path" }
   }
 |>]
