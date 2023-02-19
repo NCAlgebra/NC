@@ -1,5 +1,5 @@
 BeginPackage["NCAlgebra`",
-	     {"NC`",
+	     {
 	      "NCOptions`",
 	      "NonCommutativeMultiply`",
 	      "NCTr`",
@@ -10,8 +10,9 @@ BeginPackage["NCAlgebra`",
               "NCMatrixDecompositions`",
               "NCSimplifyRational`",
               "NCDeprecated`",
-              "NCPolyInterface`",
-              "NCOutput`"}];
+              "NCOutput`"
+	     }
+];
 
 NCAlgebra::SmallCapSymbolsNonCommutative = "All lower cap single letter symbols (e.g. a,b,c,...) were set as noncommutative.";
 NCAlgebra::NoSymbolsNonCommutative = "No symbols were set as noncommutative. Use SetNonCommutative to set noncommutative symbols.";

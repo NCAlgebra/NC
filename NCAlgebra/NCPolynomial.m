@@ -16,9 +16,8 @@ BeginPackage[ "NCPolynomial`",
 	      {
 		"NonCommutativeMultiply`",
 		"NCDot`",
-		"NCReplace`",
-                "NCUtil`",
-                "NCPolyInterface`"
+           	"NCReplace`",
+		"NCUtil`"
 	      }
 ];
 
