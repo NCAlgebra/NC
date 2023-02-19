@@ -19,7 +19,7 @@ Starting with version 6.0.0, the easiest to install NCAlgebra is using
 our paclet distribution. Just type:
 
     PacletInstall["https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true"];
-	
+
 In the near future we might submit paclets to the Wolfram paclet repository.
 
 Alternatively you can download and install NCAlgebra as outlined below.
@@ -120,10 +120,11 @@ installation is succesful you will see a message like:
 
     NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
 
-**In the paclet version, it is not necessary to load the `NC``` anymore.**
+**In the paclet version, it is no longer necessary to load the context `NC`.**
 
-Loading ``NC``` in the paclet version is however still supported for
-backward compatibility. It does nothing other than post the message:
+Loading the context `NC` in the paclet version is however still
+supported for backward compatibility. It does nothing other than post
+the message:
 
 	NC::Directory: You are using a paclet version of NCAlgebra.
 
