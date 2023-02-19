@@ -145,11 +145,6 @@ You can also run some tests to see if things are working fine.
 
 **Testing in v6 is now done by loading a context**
 
-You do not need to load `NCAlgebra` before running any of the tests
-below, but you need to load `NC` as in
-
-    << NC`
-
 There are 3 test sets which you can use to troubleshoot parts of
 NCAlgebra. The most comprehensive test set is run by typing:
 
@@ -178,6 +173,14 @@ You can also call
     << NCPOLYTESGB`
 	
 to perform extensive and long testing of `NCGBX`.
+
+**Manual installation**
+
+If you are not using the paclet version of `NCAlgebra` you need to load `NC` as in
+
+    << NC`
+
+before running the tests.
 
 ## NCGB
 
