@@ -49,7 +49,7 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/MatrixPackages.md \
 	 NCAlgebra/NCDot.md \
          NCAlgebra/NCMatrixDecompositions.md \
-         NCAlgebra/MatrixDecompositions.md \
+         NCExtras/MatrixDecompositions.md \
          MANUAL/Output.md \
 	 NCAlgebra/NCOutput.md \
 	 NCTeX/NCTeX.md \

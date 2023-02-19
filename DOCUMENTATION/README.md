@@ -14,7 +14,8 @@ The program was written by the authors and by:
 David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister,
 Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall,
 T. Shaheen, John Shopple. The beginnings of the program come from
-eran@slac. Considerable recent help came from Igor Klep.
+eran@slac. Considerable recent help came from Igor Klep and Aidan
+Epperly.
 
 Current primary support is from the
 NSF Division of Mathematical Sciences.
@@ -129,15 +130,17 @@ All rights reserved.
     - <a href="#setcommutingoperators" id="toc-SetCommutingOperators"><span class="toc-section-number">11.1.15</span> SetCommutingOperators</a>
     - <a href="#unsetcommutingoperators" id="toc-UnsetCommutingOperators"><span class="toc-section-number">11.1.16</span> UnsetCommutingOperators</a>
     - <a href="#commutingoperatorsq" id="toc-CommutingOperatorsQ"><span class="toc-section-number">11.1.17</span> CommutingOperatorsQ</a>
-    - <a href="#commutative" id="toc-Commutative"><span class="toc-section-number">11.1.18</span> Commutative</a>
-    - <a href="#commuteeverything" id="toc-CommuteEverything"><span class="toc-section-number">11.1.19</span> CommuteEverything</a>
-    - <a href="#begincommuteeverything" id="toc-BeginCommuteEverything"><span class="toc-section-number">11.1.20</span> BeginCommuteEverything</a>
-    - <a href="#endcommuteeverything" id="toc-EndCommuteEverything"><span class="toc-section-number">11.1.21</span> EndCommuteEverything</a>
-    - <a href="#expandnoncommutativemultiply" id="toc-ExpandNonCommutativeMultiply"><span class="toc-section-number">11.1.22</span> ExpandNonCommutativeMultiply</a>
-    - <a href="#ncexpand" id="toc-NCExpand"><span class="toc-section-number">11.1.23</span> NCExpand</a>
-    - <a href="#nce" id="toc-NCE"><span class="toc-section-number">11.1.24</span> NCE</a>
-    - <a href="#ncexpandexponents" id="toc-NCExpandExponents"><span class="toc-section-number">11.1.25</span> NCExpandExponents</a>
-    - <a href="#nctolist" id="toc-NCToList"><span class="toc-section-number">11.1.26</span> NCToList</a>
+    - <a href="#ncnoncommutativesymbolorsubscriptq" id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span class="toc-section-number">11.1.18</span> NCNonCommutativeSymbolOrSubscriptQ</a>
+    - <a href="#ncpowerq" id="toc-NCPowerQ"><span class="toc-section-number">11.1.19</span> NCPowerQ</a>
+    - <a href="#commutative" id="toc-Commutative"><span class="toc-section-number">11.1.20</span> Commutative</a>
+    - <a href="#commuteeverything" id="toc-CommuteEverything"><span class="toc-section-number">11.1.21</span> CommuteEverything</a>
+    - <a href="#begincommuteeverything" id="toc-BeginCommuteEverything"><span class="toc-section-number">11.1.22</span> BeginCommuteEverything</a>
+    - <a href="#endcommuteeverything" id="toc-EndCommuteEverything"><span class="toc-section-number">11.1.23</span> EndCommuteEverything</a>
+    - <a href="#expandnoncommutativemultiply" id="toc-ExpandNonCommutativeMultiply"><span class="toc-section-number">11.1.24</span> ExpandNonCommutativeMultiply</a>
+    - <a href="#ncexpand" id="toc-NCExpand"><span class="toc-section-number">11.1.25</span> NCExpand</a>
+    - <a href="#nce" id="toc-NCE"><span class="toc-section-number">11.1.26</span> NCE</a>
+    - <a href="#ncexpandexponents" id="toc-NCExpandExponents"><span class="toc-section-number">11.1.27</span> NCExpandExponents</a>
+    - <a href="#nctolist" id="toc-NCToList"><span class="toc-section-number">11.1.28</span> NCToList</a>
   - <a href="#nctr" id="toc-PackageNCTr"><span class="toc-section-number">11.2</span> NCTr</a>
     - <a href="#tr" id="toc-tr"><span class="toc-section-number">11.2.1</span> tr</a>
     - <a href="#sortcyclicpermutation" id="toc-SortCyclicPermutation"><span class="toc-section-number">11.2.2</span> SortCyclicPermutation</a>
@@ -273,12 +276,10 @@ All rights reserved.
     - <a href="#ncconsolidatelist" id="toc-NCConsolidateList"><span class="toc-section-number">13.7.6</span> NCConsolidateList</a>
     - <a href="#ncconsistentq" id="toc-NCConsistentQ"><span class="toc-section-number">13.7.7</span> NCConsistentQ</a>
     - <a href="#ncsymbolorsubscriptq" id="toc-NCSymbolOrSubscriptQ"><span class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ</a>
-    - <a href="#ncnoncommutativesymbolorsubscriptq" id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span class="toc-section-number">13.7.9</span> NCNonCommutativeSymbolOrSubscriptQ</a>
-    - <a href="#ncpowerq" id="toc-NCPowerQ"><span class="toc-section-number">13.7.10</span> NCPowerQ</a>
-    - <a href="#ncleafcount" id="toc-NCLeafCount"><span class="toc-section-number">13.7.11</span> NCLeafCount</a>
-    - <a href="#ncreplacedata" id="toc-NCReplaceData"><span class="toc-section-number">13.7.12</span> NCReplaceData</a>
-    - <a href="#nctoexpression" id="toc-NCToExpression"><span class="toc-section-number">13.7.13</span> NCToExpression</a>
-    - <a href="#notmatrixq" id="toc-NotMatrixQ"><span class="toc-section-number">13.7.14</span> NotMatrixQ</a>
+    - <a href="#ncleafcount" id="toc-NCLeafCount"><span class="toc-section-number">13.7.9</span> NCLeafCount</a>
+    - <a href="#ncreplacedata" id="toc-NCReplaceData"><span class="toc-section-number">13.7.10</span> NCReplaceData</a>
+    - <a href="#nctoexpression" id="toc-NCToExpression"><span class="toc-section-number">13.7.11</span> NCToExpression</a>
+    - <a href="#notmatrixq" id="toc-NotMatrixQ"><span class="toc-section-number">13.7.12</span> NotMatrixQ</a>
 - <a href="#data-structures-for-fast-calculations" id="toc-data-structures-for-fast-calculations"><span class="toc-section-number">14</span> Data structures for fast calculations</a>
   - <a href="#ncpoly" id="toc-PackageNCPoly"><span class="toc-section-number">14.1</span> NCPoly</a>
     - <a href="#efficient-storage-of-nc-polynomials-with-rational-coefficients" id="toc-efficient-storage-of-nc-polynomials-with-rational-coefficients"><span class="toc-section-number">14.1.1</span> Efficient storage of NC polynomials with rational coefficients</a>
@@ -422,6 +423,7 @@ The program was written by the authors with mjor earlier contributions from:
 Considerable recent help came from
 
 - Igor Klep, University of Ljubljana
+- Aidan Epperly
 
 Other contributors include:
 
@@ -4072,6 +4074,8 @@ Members are:
 - [SetCommutingOperators](#setcommutingoperators)
 - [UnsetCommutingOperators](#unsetcommutingoperators)
 - [CommutingOperatorsQ](#commutingoperatorsq)
+- [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
+- [NCPowerQ](#ncpowerq)
 - [Commutative](#commutative)
 - [CommuteEverything](#commuteeverything)
 - [BeginCommuteEverything](#begincommuteeverything)
@@ -4224,6 +4228,22 @@ See also:
 See also:
 [SetCommutingOperators](#setcommutingoperators),
 [UnsetCommutingOperators](#unsetcommutingoperators)
+
+### NCNonCommutativeSymbolOrSubscriptQ
+
+`NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
+
+See also:
+[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq),
+[NCPowerQ](#ncpowerq).
+
+### NCPowerQ
+
+`NCPowerQ[expr]` returns *True* if `expr` is an noncommutative symbol or symbol subscript or a positive power of a noncommutative symbol or symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
+[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq).
 
 ### Commutative
 
@@ -5947,8 +5967,6 @@ Members are:
 - [NCConsolidateList](#ncconsolidatelist)
 - [NCConsistentQ](#ncconsistentq)
 - [NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq)
-- [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
-- [NCPowerQ](#ncpowerq)
 - [NCLeafCount](#ncleafcount)
 - [NCReplaceData](#ncreplacedata)
 - [NCToExpression](#nctoexpression)
@@ -6070,22 +6088,6 @@ See also:
 See also:
 [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
 [NCPowerQ](#ncpowerq).
-
-### NCNonCommutativeSymbolOrSubscriptQ
-
-`NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
-
-See also:
-[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq),
-[NCPowerQ](#ncpowerq).
-
-### NCPowerQ
-
-`NCPowerQ[expr]` returns *True* if `expr` is an noncommutative symbol or symbol subscript or a positive power of a noncommutative symbol or symbol subscript.
-
-See also:
-[NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
-[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq).
 
 ### NCLeafCount
 

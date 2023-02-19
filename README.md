@@ -1,4 +1,4 @@
-# NCAlgebra - Version 5.0.6
+# NCAlgebra - Version 6.0.0
 
 Thanks for your interest in NCAlgebra.
 
@@ -15,30 +15,18 @@ http://math.ucsd.edu/~ncalg
 
 ## Automatic Installation and Updates
 
-Starting with version 5.0.1, the easiest way to download and install
-NCAlgebra is using the `NCWebInstall` script. Just type:
+Starting with version 6.0.0, the easiest to install NCAlgebra is using
+our paclet distribution. Just type:
 
-    Import["https://raw.githubusercontent.com/NCAlgebra/NC/master/NCExtras/NCWebInstall.m", CharacterEncoding -> "UTF8"];
+    PacletInstall["https://raw.githubusercontent.com/NCAlgebra/NC/v6.0.0/NCAlgebraPaclet-6.0.0.paclet"];
 
-on the Mathematica Kernel or FrontEnd and follow the instructions to download and install NCAlgebra.
-
-This method will always install the latest available stable release
-available in the branch `master`. It may be ahead of the latest
-release.
+In the near future we might submit paclets to the Wolfram paclet repository.
 
 Alternatively you can download and install NCAlgebra as outlined below.
 
-Automatic updates are also available using:
-
-    << NCWebUpdate`
-    NCUpdate
-
-checks the main repository for the latest version and run
-`NCWebInstall`.
-
 ## Manual installation
 
-Skip this section if you installed with `NCWebInstall`.
+Skip this section if you installed our paclet.
 
 ### Downloading
 
@@ -87,22 +75,24 @@ version to version using git.
 
 ### Post-download installation
 
-All that is needed for NCAlgebra to run is that its top directory, the
-`NC` directory, be on Mathematica's search path.
+If you are using our paclet distribution you are done. Proceed to the
+section [Running NCAlgebra](#running-ncalgebra).
+
+If not, all that is needed for NCAlgebra to run is that its top
+directory, the `NC` directory, be on Mathematica's search path.
 
 If you are on a unix
 flavored machine (Solaris, Linux, Mac OSX) then unpacking or cloning
 in your home directory (`~`) is all you need to do.
 
 Otherwise, you may need to add the installation directory to
-Mathematica's search path. This is done automatically for you if you
-used `NCWebInstall`.
+Mathematica's search path.
 
 **If you are experienced with Mathematica:**
 
 Edit the main *Mathematica* `init.m` file (not the one inside the `NC` directory) to add the name of the directory which contains the `NC` folder to the Mathematica variable `$Path`, as in:
 
-    AppendTo[$Path,"/Users/YourName/"];
+    AppendTo[$Path,"**YOUR_INSTALLATION_DIRECTORY**"];
 
 You can locate your user `init.m` file by typing:
 
@@ -112,21 +102,30 @@ in Mathematica.
 
 ## Running NCAlgebra
 
-In Mathematica (notebook or text interface), type
-
-    << NC`
-
-If this fails, your installation has problems (check out previous
-section). If your installation is succesful you will see a message
-like:
-
-    NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
-
-Just type 
+If you installed our paclet, all NCAlgebra high-level packages are
+directly avaiable. For example, in Mathematica (notebook or text
+interface), just type
 
     << NCAlgebra`
 
-to load NCAlgebra
+to load NCAlgebra.
+
+If you installed manually, then you will need to to type
+
+    << NC`
+
+first before loading any NCAlgebra packages. If this fails, your
+installation has problems (check out previous section). If your
+installation is succesful you will see a message like:
+
+    NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
+
+**In the paclet version, it is not necessary to load the `NC``` anymore.**
+
+Loading ``NC``` in the paclet version is however still supported for
+backward compatibility. It does nothing other than post the message:
+
+	NC::Directory: You are using a paclet version of NCAlgebra.
 
 ## Now what?
 
@@ -143,6 +142,8 @@ You can also run some tests to see if things are working fine.
 
 ## Testing
 
+**Testing in v6 is now done by loading a context**
+
 You do not need to load `NCAlgebra` before running any of the tests
 below, but you need to load `NC` as in
 
@@ -151,7 +152,9 @@ below, but you need to load `NC` as in
 There are 3 test sets which you can use to troubleshoot parts of
 NCAlgebra. The most comprehensive test set is run by typing:
 
-    << NCTEST
+    << NCCORETEST`
+	
+**`NCCORETEST` replaces the old `NCTEST` tests**
 
 This will test the core functionality of NCAlgebra. 
 
@@ -159,35 +162,27 @@ You can test functionality related to the package
 [`NCPoly`](#PackageNCPoly), including the new `NCGBX` package
 [`NCGBX`](#PackageNCGBX), by typing:
 
-    << NCPOLYTEST
+    << NCPOLYTEST`
 
 Finally our Semidefinite Programming Solver [`NCSDP`](#PackageNCSDP)
 can be tested with 
 
-    << NCSDPTEST
+    << NCSDPTEST`
 
 We recommend that you restart the kernel before and after running
 tests. Each test takes a few minutes to run.
 
 You can also call
 
-    << NCPOLYTESGB
+    << NCPOLYTESGB`
 	
 to perform extensive and long testing of `NCGBX`.
 
 ## NCGB
 
-The old `C++` version of our Groebner Basis Algorithm still ships with
-this version and can be loaded using:
-
-    << NCGB`
-
-This will at once load `NCAlgebra` *and* `NCGB`. It can be tested
-using
-
-	<< NCGBTEST
-
-IMPORTANT: this version of `NCGB` is no longer supported. In many cases the `NCGBX` implementation is as fast if not faster than the old `NCGB`.
+Starting with version 6, the old `C++` version of our Groebner Basis
+Algorithm is no longer compatible with `NCAlgebra`. Use the `NCGBX`
+implementation instead. 
 
 ## Reporting Bugs
 

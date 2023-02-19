@@ -59,6 +59,7 @@ The program was written by the authors with mjor earlier contributions from:
 Considerable recent help came from 
 
 * Igor Klep, University of Ljubljana
+* Aidan Epperly
 
 Other contributors include:
 

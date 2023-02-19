@@ -332,28 +332,34 @@ class="toc-section-number">11.1.16</span>
 UnsetCommutingOperators</a></li>
 <li><a href="#CommutingOperatorsQ" id="toc-CommutingOperatorsQ"><span
 class="toc-section-number">11.1.17</span> CommutingOperatorsQ</a></li>
+<li><a href="#NCNonCommutativeSymbolOrSubscriptQ"
+id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span
+class="toc-section-number">11.1.18</span>
+NCNonCommutativeSymbolOrSubscriptQ</a></li>
+<li><a href="#NCPowerQ" id="toc-NCPowerQ"><span
+class="toc-section-number">11.1.19</span> NCPowerQ</a></li>
 <li><a href="#Commutative" id="toc-Commutative"><span
-class="toc-section-number">11.1.18</span> Commutative</a></li>
+class="toc-section-number">11.1.20</span> Commutative</a></li>
 <li><a href="#CommuteEverything" id="toc-CommuteEverything"><span
-class="toc-section-number">11.1.19</span> CommuteEverything</a></li>
+class="toc-section-number">11.1.21</span> CommuteEverything</a></li>
 <li><a href="#BeginCommuteEverything"
 id="toc-BeginCommuteEverything"><span
-class="toc-section-number">11.1.20</span>
+class="toc-section-number">11.1.22</span>
 BeginCommuteEverything</a></li>
 <li><a href="#EndCommuteEverything" id="toc-EndCommuteEverything"><span
-class="toc-section-number">11.1.21</span> EndCommuteEverything</a></li>
+class="toc-section-number">11.1.23</span> EndCommuteEverything</a></li>
 <li><a href="#ExpandNonCommutativeMultiply"
 id="toc-ExpandNonCommutativeMultiply"><span
-class="toc-section-number">11.1.22</span>
+class="toc-section-number">11.1.24</span>
 ExpandNonCommutativeMultiply</a></li>
 <li><a href="#NCExpand" id="toc-NCExpand"><span
-class="toc-section-number">11.1.23</span> NCExpand</a></li>
+class="toc-section-number">11.1.25</span> NCExpand</a></li>
 <li><a href="#NCE" id="toc-NCE"><span
-class="toc-section-number">11.1.24</span> NCE</a></li>
+class="toc-section-number">11.1.26</span> NCE</a></li>
 <li><a href="#NCExpandExponents" id="toc-NCExpandExponents"><span
-class="toc-section-number">11.1.25</span> NCExpandExponents</a></li>
+class="toc-section-number">11.1.27</span> NCExpandExponents</a></li>
 <li><a href="#NCToList" id="toc-NCToList"><span
-class="toc-section-number">11.1.26</span> NCToList</a></li>
+class="toc-section-number">11.1.28</span> NCToList</a></li>
 </ul></li>
 <li><a href="#PackageNCTr" id="toc-PackageNCTr"><span
 class="toc-section-number">11.2</span> NCTr</a>
@@ -708,20 +714,14 @@ class="toc-section-number">13.7.6</span> NCConsolidateList</a></li>
 class="toc-section-number">13.7.7</span> NCConsistentQ</a></li>
 <li><a href="#NCSymbolOrSubscriptQ" id="toc-NCSymbolOrSubscriptQ"><span
 class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ</a></li>
-<li><a href="#NCNonCommutativeSymbolOrSubscriptQ"
-id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span
-class="toc-section-number">13.7.9</span>
-NCNonCommutativeSymbolOrSubscriptQ</a></li>
-<li><a href="#NCPowerQ" id="toc-NCPowerQ"><span
-class="toc-section-number">13.7.10</span> NCPowerQ</a></li>
 <li><a href="#NCLeafCount" id="toc-NCLeafCount"><span
-class="toc-section-number">13.7.11</span> NCLeafCount</a></li>
+class="toc-section-number">13.7.9</span> NCLeafCount</a></li>
 <li><a href="#NCReplaceData" id="toc-NCReplaceData"><span
-class="toc-section-number">13.7.12</span> NCReplaceData</a></li>
+class="toc-section-number">13.7.10</span> NCReplaceData</a></li>
 <li><a href="#NCToExpression" id="toc-NCToExpression"><span
-class="toc-section-number">13.7.13</span> NCToExpression</a></li>
+class="toc-section-number">13.7.11</span> NCToExpression</a></li>
 <li><a href="#NotMatrixQ" id="toc-NotMatrixQ"><span
-class="toc-section-number">13.7.14</span> NotMatrixQ</a></li>
+class="toc-section-number">13.7.12</span> NotMatrixQ</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#data-structures-for-fast-calculations"
@@ -1061,6 +1061,7 @@ contributions from:</p>
 <p>Considerable recent help came from</p>
 <ul>
 <li>Igor Klep, University of Ljubljana</li>
+<li>Aidan Epperly</li>
 </ul>
 <p>Other contributors include:</p>
 <ul>
@@ -4045,6 +4046,9 @@ noncommutative functionality to Mathematica’s native
 <li><a href="#SetCommutingOperators">SetCommutingOperators</a></li>
 <li><a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></li>
 <li><a href="#CommutingOperatorsQ">CommutingOperatorsQ</a></li>
+<li><a
+href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a></li>
+<li><a href="#NCPowerQ">NCPowerQ</a></li>
 <li><a href="#Commutative">Commutative</a></li>
 <li><a href="#CommuteEverything">CommuteEverything</a></li>
 <li><a href="#BeginCommuteEverything">BeginCommuteEverything</a></li>
@@ -4195,23 +4199,39 @@ class="header-section-number">11.1.17</span> CommutingOperatorsQ</h3>
 <code>a</code> and <code>b</code> are commuting operators.</p>
 <p>See also: <a href="#SetCommutingOperators">SetCommutingOperators</a>,
 <a href="#UnsetCommutingOperators">UnsetCommutingOperators</a></p>
-<h3 data-number="11.1.18" id="Commutative"><span
-class="header-section-number">11.1.18</span> Commutative</h3>
+<h3 data-number="11.1.18" id="NCNonCommutativeSymbolOrSubscriptQ"><span
+class="header-section-number">11.1.18</span>
+NCNonCommutativeSymbolOrSubscriptQ</h3>
+<p><code>NCNonCommutativeSymbolOrSubscriptQ[expr]</code> returns
+<em>True</em> if <code>expr</code> is an noncommutative symbol or a
+noncommutative symbol subscript.</p>
+<p>See also: <a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a>,
+<a href="#NCPowerQ">NCPowerQ</a>.</p>
+<h3 data-number="11.1.19" id="NCPowerQ"><span
+class="header-section-number">11.1.19</span> NCPowerQ</h3>
+<p><code>NCPowerQ[expr]</code> returns <em>True</em> if
+<code>expr</code> is an noncommutative symbol or symbol subscript or a
+positive power of a noncommutative symbol or symbol subscript.</p>
+<p>See also: <a
+href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a>,
+<a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a>.</p>
+<h3 data-number="11.1.20" id="Commutative"><span
+class="header-section-number">11.1.20</span> Commutative</h3>
 <p><code>Commutative[symbol]</code> is commutative even if
 <code>symbol</code> is noncommutative.</p>
 <p>See also: <a href="#CommuteEverything">CommuteEverything</a>, <a
 href="#CommutativeQ">CommutativeQ</a>, <a
 href="#SetCommutative">SetCommutative</a>, <a
 href="#SetNonCommutative">SetNonCommutative</a>.</p>
-<h3 data-number="11.1.19" id="CommuteEverything"><span
-class="header-section-number">11.1.19</span> CommuteEverything</h3>
+<h3 data-number="11.1.21" id="CommuteEverything"><span
+class="header-section-number">11.1.21</span> CommuteEverything</h3>
 <p><code>CommuteEverything[expr]</code> is an alias for <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>.</p>
 <p>See also: <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a
 href="#Commutative">Commutative</a>.</p>
-<h3 data-number="11.1.20" id="BeginCommuteEverything"><span
-class="header-section-number">11.1.20</span> BeginCommuteEverything</h3>
+<h3 data-number="11.1.22" id="BeginCommuteEverything"><span
+class="header-section-number">11.1.22</span> BeginCommuteEverything</h3>
 <p><code>BeginCommuteEverything[expr]</code> sets all symbols appearing
 in <code>expr</code> as commutative so that the resulting expression
 contains only commutative products or inverses. It issues messages
@@ -4222,16 +4242,16 @@ noncommutative behaviour.</p>
 does it sound like?</em></p>
 <p>See also: <a href="#EndCommuteEverything">EndCommuteEverything</a>,
 <a href="#Commutative">Commutative</a>.</p>
-<h3 data-number="11.1.21" id="EndCommuteEverything"><span
-class="header-section-number">11.1.21</span> EndCommuteEverything</h3>
+<h3 data-number="11.1.23" id="EndCommuteEverything"><span
+class="header-section-number">11.1.23</span> EndCommuteEverything</h3>
 <p><code>EndCommuteEverything[expr]</code> restores noncommutative
 behaviour to symbols affected by
 <code>BeginCommuteEverything</code>.</p>
 <p>See also: <a
 href="#BeginCommuteEverything">BeginCommuteEverything</a>, <a
 href="#Commutative">Commutative</a>.</p>
-<h3 data-number="11.1.22" id="ExpandNonCommutativeMultiply"><span
-class="header-section-number">11.1.22</span>
+<h3 data-number="11.1.24" id="ExpandNonCommutativeMultiply"><span
+class="header-section-number">11.1.24</span>
 ExpandNonCommutativeMultiply</h3>
 <p><code>ExpandNonCommutativeMultiply[expr]</code> expands out
 <code>**</code>s in <code>expr</code>.</p>
@@ -4241,22 +4261,22 @@ ExpandNonCommutativeMultiply</h3>
 <pre><code>a**b + a**c.</code></pre>
 <p>See also: <a href="#NCExpand">NCExpand</a>, <a
 href="#NCE">NCE</a>.</p>
-<h3 data-number="11.1.23" id="NCExpand"><span
-class="header-section-number">11.1.23</span> NCExpand</h3>
+<h3 data-number="11.1.25" id="NCExpand"><span
+class="header-section-number">11.1.25</span> NCExpand</h3>
 <p><code>NCExpand</code> is an alias for
 <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCE">NCE</a>.</p>
-<h3 data-number="11.1.24" id="NCE"><span
-class="header-section-number">11.1.24</span> NCE</h3>
+<h3 data-number="11.1.26" id="NCE"><span
+class="header-section-number">11.1.26</span> NCE</h3>
 <p><code>NCE</code> is an alias for
 <code>ExpandNonCommutativeMultiply</code>.</p>
 <p>See also: <a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCExpand">NCExpand</a>.</p>
-<h3 data-number="11.1.25" id="NCExpandExponents"><span
-class="header-section-number">11.1.25</span> NCExpandExponents</h3>
+<h3 data-number="11.1.27" id="NCExpandExponents"><span
+class="header-section-number">11.1.27</span> NCExpandExponents</h3>
 <p><code>NCExpandExponents[expr]</code> expands out powers of the
 monomials appearing in <code>expr</code>.</p>
 <p>For example</p>
@@ -4269,8 +4289,8 @@ Powers of symbols or other expressions are not expanded using
 <p>See also: <a href="#NCToList">NCToList</a> <a
 href="#ExpandNonCommutativeMultiply">ExpandNonCommutativeMultiply</a>,
 <a href="#NCExpand">NCExpand</a>, <a href="#NCE">NCE</a>.</p>
-<h3 data-number="11.1.26" id="NCToList"><span
-class="header-section-number">11.1.26</span> NCToList</h3>
+<h3 data-number="11.1.28" id="NCToList"><span
+class="header-section-number">11.1.28</span> NCToList</h3>
 <p><code>NCToList[expr]</code> produces a list with the symbols
 appearing in monomial <code>expr</code>. If <code>expr</code> is not a
 monomial it remains unevaluated. Powers of symbols are expanded before
@@ -6038,9 +6058,6 @@ used throughout NCAlgebra.</p>
 <li><a href="#NCConsolidateList">NCConsolidateList</a></li>
 <li><a href="#NCConsistentQ">NCConsistentQ</a></li>
 <li><a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a></li>
-<li><a
-href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a></li>
-<li><a href="#NCPowerQ">NCPowerQ</a></li>
 <li><a href="#NCLeafCount">NCLeafCount</a></li>
 <li><a href="#NCReplaceData">NCReplaceData</a></li>
 <li><a href="#NCToExpression">NCToExpression</a></li>
@@ -6132,24 +6149,8 @@ class="header-section-number">13.7.8</span> NCSymbolOrSubscriptQ</h3>
 <p>See also: <a
 href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a>,
 <a href="#NCPowerQ">NCPowerQ</a>.</p>
-<h3 data-number="13.7.9" id="NCNonCommutativeSymbolOrSubscriptQ"><span
-class="header-section-number">13.7.9</span>
-NCNonCommutativeSymbolOrSubscriptQ</h3>
-<p><code>NCNonCommutativeSymbolOrSubscriptQ[expr]</code> returns
-<em>True</em> if <code>expr</code> is an noncommutative symbol or a
-noncommutative symbol subscript.</p>
-<p>See also: <a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a>,
-<a href="#NCPowerQ">NCPowerQ</a>.</p>
-<h3 data-number="13.7.10" id="NCPowerQ"><span
-class="header-section-number">13.7.10</span> NCPowerQ</h3>
-<p><code>NCPowerQ[expr]</code> returns <em>True</em> if
-<code>expr</code> is an noncommutative symbol or symbol subscript or a
-positive power of a noncommutative symbol or symbol subscript.</p>
-<p>See also: <a
-href="#NCNonCommutativeSymbolOrSubscriptQ">NCNonCommutativeSymbolOrSubscriptQ</a>,
-<a href="#NCSymbolOrSubscriptQ">NCSymbolOrSubscriptQ</a>.</p>
-<h3 data-number="13.7.11" id="NCLeafCount"><span
-class="header-section-number">13.7.11</span> NCLeafCount</h3>
+<h3 data-number="13.7.9" id="NCLeafCount"><span
+class="header-section-number">13.7.9</span> NCLeafCount</h3>
 <p><code>NCLeafCount[expr]</code> returns an number associated with the
 complexity of an expression:</p>
 <ul>
@@ -6162,8 +6163,8 @@ complexity of an expression:</p>
 </ul>
 <p><code>NCLeafCount</code> is <code>Listable</code>.</p>
 <p>See also: <code>LeafCount</code>.</p>
-<h3 data-number="13.7.12" id="NCReplaceData"><span
-class="header-section-number">13.7.12</span> NCReplaceData</h3>
+<h3 data-number="13.7.10" id="NCReplaceData"><span
+class="header-section-number">13.7.10</span> NCReplaceData</h3>
 <p><code>NCReplaceData[expr, rules]</code> applies <code>rules</code> to
 <code>expr</code> and convert resulting expression to standard
 Mathematica, for example replacing <code>**</code> by
@@ -6172,16 +6173,16 @@ Mathematica, for example replacing <code>**</code> by
 expressions involving matrices. Use <code>NCToExpression</code> for
 that.</p>
 <p>See also: <a href="#NCToExpression">NCToExpression</a>.</p>
-<h3 data-number="13.7.13" id="NCToExpression"><span
-class="header-section-number">13.7.13</span> NCToExpression</h3>
+<h3 data-number="13.7.11" id="NCToExpression"><span
+class="header-section-number">13.7.11</span> NCToExpression</h3>
 <p><code>NCToExpression[expr, rules]</code> applies <code>rules</code>
 to <code>expr</code> and convert resulting expression to standard
 Mathematica.</p>
 <p><code>NCToExpression</code> attempts to resize entries in expressions
 involving matrices.</p>
 <p>See also: <a href="#NCReplaceData">NCReplaceData</a>.</p>
-<h3 data-number="13.7.14" id="NotMatrixQ"><span
-class="header-section-number">13.7.14</span> NotMatrixQ</h3>
+<h3 data-number="13.7.12" id="NotMatrixQ"><span
+class="header-section-number">13.7.12</span> NotMatrixQ</h3>
 <p><code>NotMatrixQ[expr]</code> is equivalent to
 <code>Not[MatrixQ[expr]]</code>.</p>
 <p>See also: <code>MatrixQ</code>.</p>
