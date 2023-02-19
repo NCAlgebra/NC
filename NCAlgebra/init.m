@@ -1,5 +1,6 @@
 BeginPackage["NCAlgebra`",
 	     {"NC`",
+	      "NCOptions`",
 	      "NonCommutativeMultiply`",
 	      "NCTr`",
               "NCCollect`",
@@ -20,10 +21,10 @@ Begin["`Private`"];
   verbose = If[ValueQ[$NCAlgebra$Loaded], False, $NCAlgebra$Loaded=True];
 
   (* Print banner *)
-  If [ verbose && ShowBanner /. Options[NC, ShowBanner], FilePrint[FindFile["banner.txt"]]];
+  If [ verbose && ShowBanner /. Options[NCOptions, ShowBanner], FilePrint[FindFile["banner.txt"]]];
 
   
-  If[ SmallCapSymbolsNonCommutative /. Options[NC, SmallCapSymbolsNonCommutative]
+  If[ SmallCapSymbolsNonCommutative /. Options[NCOptions, SmallCapSymbolsNonCommutative]
      ,
       (* Sets all lower case letters to be NonCommutative *)
       SetNonCommutativeHold[Global`a, Global`b, Global`c, Global`d, Global`e,

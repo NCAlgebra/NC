@@ -20,6 +20,13 @@ BeginPackage[ "NCOptions`" ];
 
 Clear[SelfAdjointVariables, 
       SymmetricVariables, 
-      ExcludeVariables];
+      ExcludeVariables,
+      SmallCapSymbolsNonCommutative,
+      ShowBanner];
  
+Options[NCOptions] = {
+  SmallCapSymbolsNonCommutative -> True,
+  ShowBanner ->	True
+};
+
 EndPackage[ ];

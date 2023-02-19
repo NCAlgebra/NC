@@ -8,11 +8,6 @@ BeginPackage["NC`"];
 
 NC::Directory = "You are using the version of NCAlgebra which is found in: \"`1`\".";
 
-Options[NC] = {
-  SmallCapSymbolsNonCommutative -> True,
-  ShowBanner ->	True
-};
-
 Begin["`Private`"];
 
   verbose = If[ValueQ[$NC$Loaded], False, $NC$Loaded=True];
