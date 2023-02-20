@@ -786,8 +786,8 @@ class="toc-section-number">14.2.3</span> NCRuleToPoly</a></li>
 class="toc-section-number">14.2.4</span> NCToRule</a></li>
 <li><a href="#NCReduce" id="toc-NCReduce"><span
 class="toc-section-number">14.2.5</span> NCReduce</a></li>
-<li><a href="#NCFullReduce" id="toc-NCFullReduce"><span
-class="toc-section-number">14.2.6</span> NCFullReduce</a></li>
+<li><a href="#NCReduceRepeated" id="toc-NCReduceRepeated"><span
+class="toc-section-number">14.2.6</span> NCReduceRepeated</a></li>
 <li><a href="#NCMonomialList" id="toc-NCMonomialList"><span
 class="toc-section-number">14.2.7</span> NCMonomialList</a></li>
 <li><a href="#NCCoefficientRules" id="toc-NCCoefficientRules"><span
@@ -1123,8 +1123,9 @@ href="#GetFullLDUMatrices">GetFullLDUMatrices</a> now produces low rank
 matrices.</p></li>
 <li><p><code>NCPoly</code>: new function <a
 href="#NCPolyFromGramMatrixFactors">NCPolyFromGramMatrixFactors</a>.</p></li>
-<li><p><code>NCPolyInterface</code>: new function <a
-href="#NCToRule">NCToRule</a>.</p></li>
+<li><p><code>NCPolyInterface</code>: new functions <a
+href="#NCToRule">NCToRule</a>, <a href="#NCReduce">NCReduce</a>, and <a
+href="#NCReduceRepeated">NCReduceRepeated</a>.</p></li>
 <li><p>New functions <a
 href="#SetCommutativeFunction">SetCommutativeFunction</a> and <a
 href="#SetNonCommutativeFunction">SetNonCommutativeFunction</a>.</p></li>
@@ -6381,7 +6382,7 @@ href="#NCPolyTermsOfTotalDegree">NCPolyTermsOfTotalDegree</a></li>
 <ul>
 <li><a href="#NCPolyDivideDigits">NCPolyDivideDigits</a></li>
 <li><a href="#NCPolyDivideLeading">NCPolyDivideLeading</a></li>
-<li><a href="#NCPolyFullReduce">NCPolyFullReduce</a></li>
+<li><a href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a></li>
 <li><a href="#NCPolyNormalize">NCPolyNormalize</a></li>
 <li><a href="#NCPolyProduct">NCPolyProduct</a></li>
 <li><a href="#NCPolyQuotientExpand">NCPolyQuotientExpand</a></li>
@@ -6925,8 +6926,9 @@ class="header-section-number">14.1.5.7</span> NCPolyReduce</h4>
 of <code>NCPoly</code>s <code>polys</code> with respect to the remaining
 elements of the list of polyomials <code>polys</code>. It traverses the
 list of polys just once. Use <a
-href="#NCPolyFullReduce">NCPolyFullReduce</a> to continue applying
-<code>NCPolyReduce</code> until no further reduction occurs.</p>
+href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a> to continue
+applying <code>NCPolyReduce</code> until no further reduction
+occurs.</p>
 <p>By default, <code>NCPolyReduce</code> only reduces the leading
 monomial in the current order. Use the optional boolean flag
 <code>Complete</code> to completely reduce all monomials. For
@@ -6937,7 +6939,7 @@ NCPolyReduce[polys, Complete -&gt; True]</code></pre>
 (default = 10): limits the maximum number of iterations in reducing each
 polynomial by <code>MaxIterationsFactor</code> times the number of terms
 in the polynomial. - <code>MaxDepth</code> (default = 1): control how
-many monomials are reduced by <code>NCReduce</code>; by default
+many monomials are reduced by <code>NCPolyReduce</code>; by default
 <code>MaxDepth</code> is set to one so that just the leading monomial is
 reduced. Setting <code>Complete -&gt; True</code> effectively sets
 <code>MaxDepth</code> to <code>Infinity</code>. - <code>ZeroTest</code>
@@ -6946,13 +6948,13 @@ assessing that a monomial is zero. This option is useful when the
 coefficients are floating points, in which case one might substitute
 <code>ZeroTest</code> for an approximate zero test.</p>
 <p>See also: <a href="#NCPolyGroebner">NCPolyGroebner</a>, <a
-href="#NCPolyFullReduce">NCPolyFullReduce</a>, <a
+href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a>, <a
 href="#NCPolyReduceWithQuotient">NCPolyReduceWithQuotient</a>.</p>
-<h4 data-number="14.1.5.8" id="NCPolyFullReduce"><span
-class="header-section-number">14.1.5.8</span> NCPolyFullReduce</h4>
-<p><code>NCPolyFullReduce[g]</code> applies NCPolyReduce successively to
-the list of polynomials <code>g</code> until the remainder does not
-change.</p>
+<h4 data-number="14.1.5.8" id="NCPolyReduceRepeated"><span
+class="header-section-number">14.1.5.8</span> NCPolyReduceRepeated</h4>
+<p><code>NCPolyReduceRepeated[polys]</code> applies NCPolyReduce
+successively to the list of polynomials <code>polys</code> until the
+remainder does not change.</p>
 <p>See also: <a href="#NCPolyReduce">NCPolyReduce</a>, <a
 href="#NCPolyReduceWithQuotient">NCPolyReduceWithQuotient</a>.</p>
 <h4 data-number="14.1.5.9" id="NCPolyReduceWithQuotient"><span
@@ -7180,7 +7182,7 @@ manipulate <code>NCPoly</code> expressions before converting back to
 <li><a href="#NCRuleToPoly">NCRuleToPoly</a></li>
 <li><a href="#NCToRule">NCToRule</a></li>
 <li><a href="#NCReduce">NCReduce</a></li>
-<li><a href="#NCFullReduce">NCFullReduce</a></li>
+<li><a href="#NCReduceRepeated">NCReduceRepeated</a></li>
 <li><a href="#NCMonomialList">NCMonomialList</a></li>
 <li><a href="#NCCoefficientRules">NCCoefficientRules</a></li>
 <li><a href="#NCCoefficientList">NCCoefficientList</a></li>
@@ -7246,22 +7248,22 @@ further reduction occurs.</p>
 in the list of <code>NCPoly</code>s <code>polys</code> with respect to
 the remaining elements of the list of polyomials <code>polys</code>. It
 traverses the list of polys just once. Use <a
-href="#NCFullReduce">NCFullReduce</a> to continue applying
+href="#NCReduceRepeated">NCReduceRepeated</a> to continue applying
 <code>NCReduce</code> until no further reduction occurs.</p>
 <p><code>NCReduce</code> converts <code>polys</code> and
 <code>rules</code> to NCPoly polynomials and apply <a
 href="#NCPolyReduce">NCPolyReduce</a>. See <a
 href="#NCPolyReduce">NCPolyReduce</a> for the possible
 <code>options</code>.</p>
-<p>See also: <a href="#NCFullReduce">NCFullReduce</a>, <a
+<p>See also: <a href="#NCReduceRepeated">NCReduceRepeated</a>, <a
 href="#NCPolyReduce">NCPolyReduce</a>.</p>
-<h3 data-number="14.2.6" id="NCFullReduce"><span
-class="header-section-number">14.2.6</span> NCFullReduce</h3>
-<p><code>NCFullReduce[polys]</code> applies <code>NCReduce</code>
+<h3 data-number="14.2.6" id="NCReduceRepeated"><span
+class="header-section-number">14.2.6</span> NCReduceRepeated</h3>
+<p><code>NCReduceRepeated[polys]</code> applies <code>NCReduce</code>
 successively to the list of <code>polys</code> until the remainder does
 not change.</p>
 <p>See also: <a href="#NCReduce">NCReduce</a>, <a
-href="#NCPolyFullReduce">NCPolyFullReduce</a>.</p>
+href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a>.</p>
 <h3 data-number="14.2.7" id="NCMonomialList"><span
 class="header-section-number">14.2.7</span> NCMonomialList</h3>
 <p><code>NCMonomialList[poly]</code> gives the list of all monomials in

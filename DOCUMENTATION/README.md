@@ -300,7 +300,7 @@ All rights reserved.
     - <a href="#ncruletopoly" id="toc-NCRuleToPoly"><span class="toc-section-number">14.2.3</span> NCRuleToPoly</a>
     - <a href="#nctorule" id="toc-NCToRule"><span class="toc-section-number">14.2.4</span> NCToRule</a>
     - <a href="#ncreduce" id="toc-NCReduce"><span class="toc-section-number">14.2.5</span> NCReduce</a>
-    - <a href="#ncfullreduce" id="toc-NCFullReduce"><span class="toc-section-number">14.2.6</span> NCFullReduce</a>
+    - <a href="#ncreducerepeated" id="toc-NCReduceRepeated"><span class="toc-section-number">14.2.6</span> NCReduceRepeated</a>
     - <a href="#ncmonomiallist" id="toc-NCMonomialList"><span class="toc-section-number">14.2.7</span> NCMonomialList</a>
     - <a href="#nccoefficientrules" id="toc-NCCoefficientRules"><span class="toc-section-number">14.2.8</span> NCCoefficientRules</a>
     - <a href="#nccoefficientlist" id="toc-NCCoefficientList"><span class="toc-section-number">14.2.9</span> NCCoefficientList</a>
@@ -470,7 +470,7 @@ The beginnings of the program come from eran@slac.
 
 8.  `NCPoly`: new function [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
 
-9.  `NCPolyInterface`: new function [NCToRule](#nctorule).
+9.  `NCPolyInterface`: new functions [NCToRule](#nctorule), [NCReduce](#ncreduce), and [NCReduceRepeated](#ncreducerepeated).
 
 10. New functions [SetCommutativeFunction](#setcommutativefunction) and [SetNonCommutativeFunction](#setnoncommutativefunction).
 
@@ -6308,7 +6308,7 @@ Members are:
 - Arithmetic
   - [NCPolyDivideDigits](#ncpolydividedigits)
   - [NCPolyDivideLeading](#ncpolydivideleading)
-  - [NCPolyFullReduce](#ncpolyfullreduce)
+  - [NCPolyReduceRepeated](#ncpolyreducerepeated)
   - [NCPolyNormalize](#ncpolynormalize)
   - [NCPolyProduct](#ncpolyproduct)
   - [NCPolyQuotientExpand](#ncpolyquotientexpand)
@@ -6977,7 +6977,7 @@ implied by `rules` are applied repeatedly to the polynomials in the
 `NCPolyReduce[polys]` reduces each polynomial in the list of `NCPoly`s
 `polys` with respect to the remaining elements of the list of
 polyomials `polys`. It traverses the list of polys just once. Use
-[NCPolyFullReduce](#ncpolyfullreduce) to continue applying
+[NCPolyReduceRepeated](#ncpolyreducerepeated) to continue applying
 `NCPolyReduce` until no further reduction occurs.
 
 By default, `NCPolyReduce` only reduces the leading monomial in the
@@ -6992,7 +6992,7 @@ Other available options are:
 iterations in reducing each polynomial by `MaxIterationsFactor`
 times the number of terms in the polynomial.
 - `MaxDepth` (default = 1): control how many monomials are reduced by
-`NCReduce`; by default `MaxDepth` is set to one so that just the
+`NCPolyReduce`; by default `MaxDepth` is set to one so that just the
 leading monomial is reduced. Setting `Complete -> True` effectively
 sets `MaxDepth` to `Infinity`.
 - `ZeroTest` (default = `NCPolyPossibleZeroQ`): which test to use when
@@ -7002,13 +7002,13 @@ coefficients are floating points, in which case one might substitute
 
 See also:
 [NCPolyGroebner](#ncpolygroebner-1),
-[NCPolyFullReduce](#ncpolyfullreduce),
+[NCPolyReduceRepeated](#ncpolyreducerepeated),
 [NCPolyReduceWithQuotient](#ncpolyreducewithquotient).
 
-#### NCPolyFullReduce
+#### NCPolyReduceRepeated
 
-`NCPolyFullReduce[g]` applies NCPolyReduce successively to the list of
-polynomials `g` until the remainder does not change.
+`NCPolyReduceRepeated[polys]` applies NCPolyReduce successively to the
+list of polynomials `polys` until the remainder does not change.
 
 See also:
 [NCPolyReduce](#ncpolyreduce),
@@ -7302,7 +7302,7 @@ Members are:
 - [NCRuleToPoly](#ncruletopoly)
 - [NCToRule](#nctorule)
 - [NCReduce](#ncreduce)
-- [NCFullReduce](#ncfullreduce)
+- [NCReduceRepeated](#ncreducerepeated)
 - [NCMonomialList](#ncmonomiallist)
 - [NCCoefficientRules](#nccoefficientrules)
 - [NCCoefficientList](#nccoefficientlist)
@@ -7383,7 +7383,7 @@ until no further reduction occurs.
 `NCReduce[polys, vars, options]` reduces each polynomial in the list
 of `NCPoly`s `polys` with respect to the remaining elements of the
 list of polyomials `polys`. It traverses the list of polys just
-once. Use [NCFullReduce](#ncfullreduce) to continue applying
+once. Use [NCReduceRepeated](#ncreducerepeated) to continue applying
 `NCReduce` until no further reduction occurs.
 
 `NCReduce` converts `polys` and `rules` to NCPoly polynomials and
@@ -7391,16 +7391,16 @@ apply [NCPolyReduce](#ncpolyreduce). See [NCPolyReduce](#ncpolyreduce)
 for the possible `options`.
 
 See also:
-[NCFullReduce](#ncfullreduce), [NCPolyReduce](#ncpolyreduce).
+[NCReduceRepeated](#ncreducerepeated), [NCPolyReduce](#ncpolyreduce).
 
-### NCFullReduce
+### NCReduceRepeated
 
-`NCFullReduce[polys]` applies `NCReduce` successively to the
+`NCReduceRepeated[polys]` applies `NCReduce` successively to the
 list of `polys` until the remainder does not change.
 
 See also:
 [NCReduce](#ncreduce),
-[NCPolyFullReduce](#ncpolyfullreduce).
+[NCPolyReduceRepeated](#ncpolyreducerepeated).
 
 ### NCMonomialList
 
