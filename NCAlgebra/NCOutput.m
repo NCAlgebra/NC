@@ -3,7 +3,7 @@
 (* :Context: NCOutput`, Notation`, and NonCommutativeMultiply` *)
 
 BeginPackage["NCOutput`",
-	     If[ $Notebooks
+	     If[ $Notebooks && Not[$CloudEvaluation]
 		,
 		 {"Notation`",
          	  "NCUtil`",
@@ -27,6 +27,10 @@ Options[NCSetOutput] = {
 };
 
 Begin["`Private`"];
+
+  (* Whether to use the infix notation from the Notation package *)
+  Clear[$UseNotation];
+  $UseNotation = $Notebooks && Not[$CloudEvaluation];
 
   NCSetOutput[opts___Rule:{}] :=
     Module[{options},
@@ -89,7 +93,7 @@ Begin["`Private`"];
       If[ inv /. Options[NCSetOutput]
          ,
 	  Unprotect[Power];
-	  If[ $Notebooks
+	  If[ $UseNotation
 	     ,
 	      Quiet[
                 Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] =. ;
@@ -109,7 +113,7 @@ Begin["`Private`"];
          ,
           Quiet[
             Unprotect[Power];
-            If[ $Notebooks
+            If[ $UseNotation
 	       ,
 	        Power /: MakeBoxes[Power[a_?NonCommutativeQ, n_?Negative], fmt_] =.;
   	        Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] := 
@@ -130,7 +134,7 @@ Begin["`Private`"];
       
       SetOptions[NCSetOutput,
                  NonCommutativeMultiply -> (NonCommutativeMultiply /. options /. Options[NCSetOutput])];
-      If[ $Notebooks
+      If[ $UseNotation
          ,
           If[ NonCommutativeMultiply /. Options[NCSetOutput]
              ,
