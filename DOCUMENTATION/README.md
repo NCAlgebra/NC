@@ -662,7 +662,7 @@ tests. Each test takes a few minutes to run.
 
 You can also call
 
-    << NCPOLYTESGB`
+    << NCPOLYTESTGB`
 
 to perform extensive and long testing of `NCGBX`.
 
