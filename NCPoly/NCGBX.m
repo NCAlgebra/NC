@@ -19,8 +19,7 @@ Clear[ClearMonomialOrder,
       SetUnknowns,
       NCMakeGB,
       NCGBSimplifyRational,
-      NCProcess,
-      NCReduce];
+      NCProcess];
 
 Get["NCGBX.usage", CharacterEncoding->"UTF8"];
 
@@ -595,7 +594,8 @@ Begin["`Private`"];
     Return[Simplify[NCReplaceRepeated[expr, rules]]];
       
   ];
-                              
+
+  (*
   NCReduce[f_List, g_List, options:OptionsPattern[NCPolyReduce]] := Module[
     {fpolys, gpolys},
 
@@ -618,6 +618,7 @@ Begin["`Private`"];
     Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
 
   ];
-
+  *)
+     
 End[]
 EndPackage[]

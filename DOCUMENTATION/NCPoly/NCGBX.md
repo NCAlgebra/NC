@@ -347,24 +347,24 @@ See also:
 [NCMakeGB](#NCMakeGB),
 [NCReduce](#NCReduce).
 
-### NCReduce {#NCReduce}
+<!-- ### NCReduce {#NCReduce} -->
 
-`NCReduce[polys, rules]` reduces the list of polynomials `polys` with
-respect to the list of polyomials `rules`. The substitutions implied
-by `rules` are applied repeatedly to the polynomials in the `polys`
-until no further reduction occurs.
+<!-- `NCReduce[polys, rules]` reduces the list of polynomials `polys` with -->
+<!-- respect to the list of polyomials `rules`. The substitutions implied -->
+<!-- by `rules` are applied repeatedly to the polynomials in the `polys` -->
+<!-- until no further reduction occurs. -->
 
-`NCReduce[polys]` reduces each polynomial in the list of polynomials
-`polys` with respect to the remaining elements of the list of
-polyomials `polys` until no further reduction occurs.
+<!-- `NCReduce[polys]` reduces each polynomial in the list of polynomials -->
+<!-- `polys` with respect to the remaining elements of the list of -->
+<!-- polyomials `polys` until no further reduction occurs. -->
 
-By default, `NCReduce` only reduces the leading monomial in the
-current order. Use the optional boolean flag `complete` to completely
-reduce all monomials. For example, `NCReduce[polys, rules, True]` and
-`NCReduce[polys, True]`.
+<!-- By default, `NCReduce` only reduces the leading monomial in the -->
+<!-- current order. Use the optional boolean flag `complete` to completely -->
+<!-- reduce all monomials. For example, `NCReduce[polys, rules, True]` and -->
+<!-- `NCReduce[polys, True]`. -->
 
-See also:
-[NCMakeGB](#NCMakeGB),
-[NCGBSimplifyRational](#NCGBSimplifyRational).
+<!-- See also: -->
+<!-- [NCMakeGB](#NCMakeGB), -->
+<!-- [NCGBSimplifyRational](#NCGBSimplifyRational). -->
 
 

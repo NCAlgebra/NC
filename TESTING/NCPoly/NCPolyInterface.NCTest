@@ -9,7 +9,7 @@ Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 Block[
   {a,b,c,d,x,y,
   vars,NCExp,NCExpExp,PolyExp,
-  A,B,C
+  A,B,C,exp1,exp2
   },
   
   (* Test NCAlgebra interface *)
@@ -402,6 +402,31 @@ Block[
   answer = {x ** y -> x^2, y ** x -> -x + y};
   NCTest[NCToRule[{x ** x - x ** y, x + y ** x - y}, {x, y}], answer];
 
+  (* NCReduce *)
+  vars = {x, y};
+  exp1 = {x^2 - y ** x};
+  exp2 = {y ** x ** y ** x + x + y ** x - x ** x ** y,  y ** x ** y - x^2 ** y};
+  
+  answer = {x + x^4 - x^2 ** y + y ** x};
+  NCTest[NCReduce[exp2, exp1, vars], answer];
+  
+  answer = {x + x^2 + x^4 - x^2 ** y};
+  NCTest[NCReduce[exp2, exp1, vars, Complete -> True], answer];
+
+  answer = {x - x^2 ** y + y ** x + x^2 ** y ** x, -x^2 ** y + y ** x ** y};
+  NCTest[NCReduce[exp2, vars], answer];
+  
+  answer = {x - x^2 ** y + y ** x + x^2 ** y ** x, -x^2 ** y + y ** x ** y};
+  NCTest[NCReduce[exp2, vars, Complete -> True], answer];
+
+  exp2 = {x^2 - y ** x, x ** y - y ** x};
+  answer = {x^2 - x ** y, x ** y - y ** x};
+  NCTest[NCReduce[exp2, vars], answer];
+  NCTest[NCFullReduce[exp2, vars], answer];
+
+  answer = {x^2 - x ** y, x^2 - y ** x};
+  NCTest[NCFullReduce[exp2, vars, Complete -> True], answer];
+  
   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

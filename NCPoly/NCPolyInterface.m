@@ -14,6 +14,8 @@ Clear[NCToNCPoly,
       NCPolyToNC,
       NCRuleToPoly,
       NCToRule,
+      NCReduce,
+      NCFullReduce,
       NCMonomialList,
       NCCoefficientRules,
       NCCoefficientList,
@@ -242,6 +244,16 @@ Begin["`Private`"];
   
   NCPolynomialQ[expr_?NCPolynomialQAux] := True;
   NCPolynomialQ[expr_] := NCPolynomialQAux[ExpandNonCommutativeMultiply[expr]];
+
+  (* NCReduce *)
+  NCReduce[g_, vars_, options:OptionsPattern[NCPolyReduce]] :=
+    NCPolyToNC[NCPolyReduce[NCToNCPoly[g, vars], options], vars];
+  NCReduce[f_, g_, vars_, options:OptionsPattern[NCPolyReduce]] :=
+    NCPolyToNC[NCPolyReduce[NCToNCPoly[f, vars], NCToNCPoly[g, vars], options], vars];
+
+  (* NCFullReduce *)
+  NCFullReduce[g_, vars_, options:OptionsPattern[NCPolyReduce]] :=
+    NCPolyToNC[NCPolyFullReduce[NCToNCPoly[g, vars], options], vars];
 
 End[]
 EndPackage[]

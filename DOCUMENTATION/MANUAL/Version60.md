@@ -24,4 +24,4 @@
 8. `NCPoly`: new function [NCPolyFromGramMatrixFactors](#NCPolyFromGramMatrixFactors).
 9. `NCPolyInterface`: new function [NCToRule](#NCToRule).
 10. New functions [SetCommutativeFunction](#SetCommutativeFunction) and [SetNonCommutativeFunction](#SetNonCommutativeFunction).
-11. The old `C++` version of `NCGB` is no longer compatible with `NCAlgebra` *version 6*. Use [NCGBX](#NCGBX) instead.
+11. The old `C++` version of `NCGB` is no longer compatible with `NCAlgebra` *version 6*. Consider using [`NCGBX`](#PackageNCGBX) instead.

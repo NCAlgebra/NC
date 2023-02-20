@@ -95,14 +95,12 @@ NCAlgebra. The most comprehensive test set is run by typing:
 
 This will test the core functionality of NCAlgebra. 
 
-You can test functionality related to the package
-[`NCPoly`](#PackageNCPoly), including the new `NCGBX` package
-[`NCGBX`](#PackageNCGBX), by typing:
+You can test functionality related to the package `NCPoly`, including
+the new `NCGBX` package `NCGBX`, by typing:
 
     << NCPOLYTEST`
 
-Finally our Semidefinite Programming Solver [`NCSDP`](#PackageNCSDP)
-can be tested with 
+Finally our Semidefinite Programming Solver `NCSDP` can be tested with
 
     << NCSDPTEST`
 

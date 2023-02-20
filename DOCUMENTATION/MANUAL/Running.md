@@ -114,5 +114,5 @@ to perform extensive and long testing of `NCGBX`.
 ## Pre-2017 NCGB C++ version
 
 Starting with **Version 6**, the old `C++` version of our Groebner Basis
-Algorithm is no longer included. Consider using [NCGBX](#NCGBX).
+Algorithm is no longer included. Consider using [`NCGBX`](#PackageNCGBX).
 

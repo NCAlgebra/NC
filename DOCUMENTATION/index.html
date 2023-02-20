@@ -784,18 +784,22 @@ class="toc-section-number">14.2.2</span> NCPolyToNC</a></li>
 class="toc-section-number">14.2.3</span> NCRuleToPoly</a></li>
 <li><a href="#NCToRule" id="toc-NCToRule"><span
 class="toc-section-number">14.2.4</span> NCToRule</a></li>
+<li><a href="#NCReduce" id="toc-NCReduce"><span
+class="toc-section-number">14.2.5</span> NCReduce</a></li>
+<li><a href="#NCFullReduce" id="toc-NCFullReduce"><span
+class="toc-section-number">14.2.6</span> NCFullReduce</a></li>
 <li><a href="#NCMonomialList" id="toc-NCMonomialList"><span
-class="toc-section-number">14.2.5</span> NCMonomialList</a></li>
+class="toc-section-number">14.2.7</span> NCMonomialList</a></li>
 <li><a href="#NCCoefficientRules" id="toc-NCCoefficientRules"><span
-class="toc-section-number">14.2.6</span> NCCoefficientRules</a></li>
+class="toc-section-number">14.2.8</span> NCCoefficientRules</a></li>
 <li><a href="#NCCoefficientList" id="toc-NCCoefficientList"><span
-class="toc-section-number">14.2.7</span> NCCoefficientList</a></li>
+class="toc-section-number">14.2.9</span> NCCoefficientList</a></li>
 <li><a href="#NCCoefficientQ" id="toc-NCCoefficientQ"><span
-class="toc-section-number">14.2.8</span> NCCoefficientQ</a></li>
+class="toc-section-number">14.2.10</span> NCCoefficientQ</a></li>
 <li><a href="#NCMonomialQ" id="toc-NCMonomialQ"><span
-class="toc-section-number">14.2.9</span> NCMonomialQ</a></li>
+class="toc-section-number">14.2.11</span> NCMonomialQ</a></li>
 <li><a href="#NCPolynomialQ" id="toc-NCPolynomialQ"><span
-class="toc-section-number">14.2.10</span> NCPolynomialQ</a></li>
+class="toc-section-number">14.2.12</span> NCPolynomialQ</a></li>
 </ul></li>
 <li><a href="#PackageNCPolynomial" id="toc-PackageNCPolynomial"><span
 class="toc-section-number">14.3</span> NCPolynomial</a>
@@ -879,8 +883,6 @@ class="toc-section-number">15.1.7</span> NCMakeGB</a></li>
 class="toc-section-number">15.1.8</span> NCProcess</a></li>
 <li><a href="#NCGBSimplifyRational" id="toc-NCGBSimplifyRational"><span
 class="toc-section-number">15.1.9</span> NCGBSimplifyRational</a></li>
-<li><a href="#NCReduce" id="toc-NCReduce"><span
-class="toc-section-number">15.1.10</span> NCReduce</a></li>
 </ul></li>
 <li><a href="#PackageNCPolyGroebner"
 id="toc-PackageNCPolyGroebner"><span
@@ -1127,8 +1129,9 @@ href="#NCToRule">NCToRule</a>.</p></li>
 href="#SetCommutativeFunction">SetCommutativeFunction</a> and <a
 href="#SetNonCommutativeFunction">SetNonCommutativeFunction</a>.</p></li>
 <li><p>The old <code>C++</code> version of <code>NCGB</code> is no
-longer compatible with <code>NCAlgebra</code> <em>version 6</em>. Use <a
-href="#NCGBX">NCGBX</a> instead.</p></li>
+longer compatible with <code>NCAlgebra</code> <em>version 6</em>.
+Consider using <a href="#PackageNCGBX"><code>NCGBX</code></a>
+instead.</p></li>
 </ol>
 <h1 data-number="3" id="Version5_0"><span
 class="header-section-number">3</span> Changes in Version 5.0</h1>
@@ -1319,7 +1322,7 @@ type</p>
 class="header-section-number">4.5</span> Pre-2017 NCGB C++ version</h2>
 <p>Starting with <strong>Version 6</strong>, the old <code>C++</code>
 version of our Groebner Basis Algorithm is no longer included. Consider
-using <a href="#NCGBX">NCGBX</a>.</p>
+using <a href="#PackageNCGBX"><code>NCGBX</code></a>.</p>
 <h1 data-number="5" id="MostBasicCommands"><span
 class="header-section-number">5</span> Most Basic Commands</h1>
 <p>This chapter provides a gentle introduction to some of the commands
@@ -7176,6 +7179,8 @@ manipulate <code>NCPoly</code> expressions before converting back to
 <li><a href="#NCPolyToNC">NCPolyToNC</a></li>
 <li><a href="#NCRuleToPoly">NCRuleToPoly</a></li>
 <li><a href="#NCToRule">NCToRule</a></li>
+<li><a href="#NCReduce">NCReduce</a></li>
+<li><a href="#NCFullReduce">NCFullReduce</a></li>
 <li><a href="#NCMonomialList">NCMonomialList</a></li>
 <li><a href="#NCCoefficientRules">NCCoefficientRules</a></li>
 <li><a href="#NCCoefficientList">NCCoefficientList</a></li>
@@ -7230,8 +7235,35 @@ by <code>vars</code>.</p>
 <p>NOTE: This command is not efficient. If you need to sort polynomials
 you should consider using NCPoly directly.</p>
 <p>See also: <a href="#NCToNCPoly">NCToNCPoly</a></p>
-<h3 data-number="14.2.5" id="NCMonomialList"><span
-class="header-section-number">14.2.5</span> NCMonomialList</h3>
+<h3 data-number="14.2.5" id="NCReduce"><span
+class="header-section-number">14.2.5</span> NCReduce</h3>
+<p><code>NCReduce[polys, rules, vars, options]</code> reduces the list
+of <code>polys</code> by the list of <code>rules</code> in the variables
+<code>vars</code>. The substitutions implied by <code>rules</code> are
+applied repeatedly to the polynomials in the <code>polys</code> until no
+further reduction occurs.</p>
+<p><code>NCReduce[polys, vars, options]</code> reduces each polynomial
+in the list of <code>NCPoly</code>s <code>polys</code> with respect to
+the remaining elements of the list of polyomials <code>polys</code>. It
+traverses the list of polys just once. Use <a
+href="#NCFullReduce">NCFullReduce</a> to continue applying
+<code>NCReduce</code> until no further reduction occurs.</p>
+<p><code>NCReduce</code> converts <code>polys</code> and
+<code>rules</code> to NCPoly polynomials and apply <a
+href="#NCPolyReduce">NCPolyReduce</a>. See <a
+href="#NCPolyReduce">NCPolyReduce</a> for the possible
+<code>options</code>.</p>
+<p>See also: <a href="#NCFullReduce">NCFullReduce</a>, <a
+href="#NCPolyReduce">NCPolyReduce</a>.</p>
+<h3 data-number="14.2.6" id="NCFullReduce"><span
+class="header-section-number">14.2.6</span> NCFullReduce</h3>
+<p><code>NCFullReduce[polys]</code> applies <code>NCReduce</code>
+successively to the list of <code>polys</code> until the remainder does
+not change.</p>
+<p>See also: <a href="#NCReduce">NCReduce</a>, <a
+href="#NCPolyFullReduce">NCPolyFullReduce</a>.</p>
+<h3 data-number="14.2.7" id="NCMonomialList"><span
+class="header-section-number">14.2.7</span> NCMonomialList</h3>
 <p><code>NCMonomialList[poly]</code> gives the list of all monomials in
 the polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7243,8 +7275,8 @@ NCMonomialList[expr, vars]</code></pre>
 <p>See also: <a href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCCoefficientList">NCCoefficientList</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.6" id="NCCoefficientRules"><span
-class="header-section-number">14.2.6</span> NCCoefficientRules</h3>
+<h3 data-number="14.2.8" id="NCCoefficientRules"><span
+class="header-section-number">14.2.8</span> NCCoefficientRules</h3>
 <p><code>NCCoefficientRules[poly]</code> gives a list of rules between
 all the monomials polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7256,8 +7288,8 @@ NCCoefficientRules[expr, vars]</code></pre>
 <p>See also: <a href="#NCMonomialList">NCMonomialList</a>, <a
 href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.7" id="NCCoefficientList"><span
-class="header-section-number">14.2.7</span> NCCoefficientList</h3>
+<h3 data-number="14.2.9" id="NCCoefficientList"><span
+class="header-section-number">14.2.9</span> NCCoefficientList</h3>
 <p><code>NCCoefficientList[poly]</code> gives the list of all
 coefficients in the polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7269,8 +7301,8 @@ NCCoefficientList[expr, vars]</code></pre>
 <p>See also: <a href="#NCMonomialList">NCMonomialList</a>, <a
 href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.8" id="NCCoefficientQ"><span
-class="header-section-number">14.2.8</span> NCCoefficientQ</h3>
+<h3 data-number="14.2.10" id="NCCoefficientQ"><span
+class="header-section-number">14.2.10</span> NCCoefficientQ</h3>
 <p><code>NCCoefficientQ[expr]</code> returns True if <code>expr</code>
 is a valid polynomial coefficient.</p>
 <p>For example:</p>
@@ -7290,8 +7322,8 @@ not expand <code>expr</code>. This means that
 <code>False</code>.</p>
 <p>See also: <a href="#NCMonomialQ">NCMonomialQ</a>, <a
 href="#NCPolynomialQ">NCPolynomialQ</a></p>
-<h3 data-number="14.2.9" id="NCMonomialQ"><span
-class="header-section-number">14.2.9</span> NCMonomialQ</h3>
+<h3 data-number="14.2.11" id="NCMonomialQ"><span
+class="header-section-number">14.2.11</span> NCMonomialQ</h3>
 <p><code>NCCoefficientQ[expr]</code> returns True if <code>expr</code>
 is an nc monomial.</p>
 <p>For example:</p>
@@ -7309,8 +7341,8 @@ expand <code>expr</code>. This means that
 <code>False</code>.</p>
 <p>See also: <a href="#NCCoefficientQ">NCCoefficientQ</a>, <a
 href="#NCPolynomialQ">NCPolynomialQ</a></p>
-<h3 data-number="14.2.10" id="NCPolynomialQ"><span
-class="header-section-number">14.2.10</span> NCPolynomialQ</h3>
+<h3 data-number="14.2.12" id="NCPolynomialQ"><span
+class="header-section-number">14.2.12</span> NCPolynomialQ</h3>
 <p><code>NCPolynomialQ[expr]</code> returns True if <code>expr</code> is
 an nc polynomial with commutative coefficients.</p>
 <p>For example:</p>
@@ -8059,24 +8091,21 @@ NCGBSimplifyRational[expr]</code></pre>
 <p>both result in <code>0</code>.</p>
 <p>See also: <a href="#NCMakeGB">NCMakeGB</a>, <a
 href="#NCReduce">NCReduce</a>.</p>
-<h3 data-number="15.1.10" id="NCReduce"><span
-class="header-section-number">15.1.10</span> NCReduce</h3>
-<p><code>NCReduce[polys, rules]</code> reduces the list of polynomials
-<code>polys</code> with respect to the list of polyomials
-<code>rules</code>. The substitutions implied by <code>rules</code> are
-applied repeatedly to the polynomials in the <code>polys</code> until no
-further reduction occurs.</p>
-<p><code>NCReduce[polys]</code> reduces each polynomial in the list of
-polynomials <code>polys</code> with respect to the remaining elements of
-the list of polyomials <code>polys</code> until no further reduction
-occurs.</p>
-<p>By default, <code>NCReduce</code> only reduces the leading monomial
-in the current order. Use the optional boolean flag
-<code>complete</code> to completely reduce all monomials. For example,
-<code>NCReduce[polys, rules, True]</code> and
-<code>NCReduce[polys, True]</code>.</p>
-<p>See also: <a href="#NCMakeGB">NCMakeGB</a>, <a
-href="#NCGBSimplifyRational">NCGBSimplifyRational</a>.</p>
+<!-- ### NCReduce {#NCReduce} -->
+<!-- `NCReduce[polys, rules]` reduces the list of polynomials `polys` with -->
+<!-- respect to the list of polyomials `rules`. The substitutions implied -->
+<!-- by `rules` are applied repeatedly to the polynomials in the `polys` -->
+<!-- until no further reduction occurs. -->
+<!-- `NCReduce[polys]` reduces each polynomial in the list of polynomials -->
+<!-- `polys` with respect to the remaining elements of the list of -->
+<!-- polyomials `polys` until no further reduction occurs. -->
+<!-- By default, `NCReduce` only reduces the leading monomial in the -->
+<!-- current order. Use the optional boolean flag `complete` to completely -->
+<!-- reduce all monomials. For example, `NCReduce[polys, rules, True]` and -->
+<!-- `NCReduce[polys, True]`. -->
+<!-- See also: -->
+<!-- [NCMakeGB](#NCMakeGB), -->
+<!-- [NCGBSimplifyRational](#NCGBSimplifyRational). -->
 <h2 data-number="15.2" id="PackageNCPolyGroebner"><span
 class="header-section-number">15.2</span> NCPolyGroebner</h2>
 <p>This packages implements a Gröebner Bases algorithm that runs purely
