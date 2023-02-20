@@ -1912,7 +1912,7 @@ use the full names `NCReplaceAll` and `NCReplaceRepeated`.
 
 On the same vein, the following substitution rule
 
-    NCReplace[2 a**b + c, 2 a -> b]
+    NCReplaceAll[2 a**b + c, 2 a -> b]
 
 will return `2 a**b + c` intact since `FullForm[2 a**b]` is indeed
 
@@ -1922,9 +1922,9 @@ which is not structurally related to `FullForm[2 a]`, which is
 `Times[2, a]`. Of course, in this case a simple solution is to use the
 alternative rule:
 
-    NCReplace[2 a**b + c, a -> b / 2]
+    NCReplaceAll[2 a**b + c, a -> b / 2]
 
-which results in `b**b + c`, as one might expect.
+which results in `b^2 + c`, as one might expect.
 
 ### Matching monomials with powers
 

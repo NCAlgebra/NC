@@ -2284,15 +2284,15 @@ operators <code>/.</code> (<code>ReplaceAll</code>) and <code>//.</code>
 forcing one to use the full names <code>NCReplaceAll</code> and
 <code>NCReplaceRepeated</code>.</p>
 <p>On the same vein, the following substitution rule</p>
-<pre><code>NCReplace[2 a**b + c, 2 a -&gt; b]</code></pre>
+<pre><code>NCReplaceAll[2 a**b + c, 2 a -&gt; b]</code></pre>
 <p>will return <code>2 a**b + c</code> intact since
 <code>FullForm[2 a**b]</code> is indeed</p>
 <pre><code>Times[2, NonCommutativeMuliply[a, b]]</code></pre>
 <p>which is not structurally related to <code>FullForm[2 a]</code>,
 which is <code>Times[2, a]</code>. Of course, in this case a simple
 solution is to use the alternative rule:</p>
-<pre><code>NCReplace[2 a**b + c, a -&gt; b / 2]</code></pre>
-<p>which results in <code>b**b + c</code>, as one might expect.</p>
+<pre><code>NCReplaceAll[2 a**b + c, a -&gt; b / 2]</code></pre>
+<p>which results in <code>b^2 + c</code>, as one might expect.</p>
 <h3 data-number="6.1.3" id="matching-monomials-with-powers"><span
 class="header-section-number">6.1.3</span> Matching monomials with
 powers</h3>
