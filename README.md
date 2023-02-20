@@ -4,7 +4,7 @@ Thanks for your interest in NCAlgebra.
 
 [![donate](http://math.ucsd.edu/~ncalg/DOCUMENTATION/donate_small.png)](https://giveto.ucsd.edu/make-a-gift?id=d86e6857-0c22-4102-ae7a-bfdc9487cb1d)
 
-The latest version of NCAlgebra can be downloaded from:
+The latest version of NCAlgebra can be found in:
 
 https://github.com/NCAlgebra/NC
 
@@ -13,98 +13,38 @@ examples, is available at:
 
 http://math.ucsd.edu/~ncalg
 
-## Automatic Installation and Updates
+> **WARNING TO USERS OF VERSION 5 AND OLDER:** NCALGEBRA VERSION 6
+> CHANGES THE CANNONICAL REPRESENTATION OF NONCOMMUTATIVE EXPRESSIONS.
+> 
+> THIS IS A BREAKING CHANGE THAT CAN AFFECT EXISTING PROGRAMS USING
+> NCALGEBRA.
+> 
+> THE MOST NOTABLE LIKELY CONSTRUCTION THAT IS AFFECTED BY
+> THIS CHANGE IS THE APPLICATION OF RULES BASED ON PATTERN MATCHING,
+> WHICH NOW NEED TO EXPLICITLY TAKE INTO ACCOUNT THE PRESENCE OF
+> EXPONENTS. SEE MANUAL FOR DETAILS ON HOW TO MITIGATE THE IMPACT OF
+> THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE BEEN REWRITTEN TO
+> ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
+	
 
-Starting with version 6.0.0, the easiest to install NCAlgebra is using
-our paclet distribution. Just type:
+## Installing NCAlgebra {#InstallingNCAlgebra}
+
+Starting with version 6.0.0, it is recommended that NCAlgebra be
+installed using our paclet distribution. Just type:
 
     PacletInstall["https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true"];
 
-In the near future we might submit paclets to the Wolfram paclet repository.
+In the near future we plant to submit paclets to the Wolfram paclet
+repository for easier updates.
 
-Alternatively you can download and install NCAlgebra as outlined below.
-
-## Manual installation
-
-Skip this section if you installed our paclet.
-
-### Downloading
-
-You can download NCAlgebra in one of the following ways.
-
-#### Via `git clone`
-
-You can clone the repository using git:
-
-    git clone https://github.com/NCAlgebra/NC
-
-This will create a directory `NC` which contains all files neeeded to
-run NCAlgebra in any platform.
-
-Cloning allows you to easily upgrade and switch between the various
-available releases. If you want to try the latest *experimental*
-version switch to branch *devel* using:
-
-    git checkout devel
-
-If you're happy with the latest stable release you do not need to
-do anything.
-
-#### From the github download button
-
-After you downloaded a zip file from github use your favorite zip
-utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
-favorite location.
-
-**IMPORTANT:** Rename the top directory `NC`!
-
-#### From one of our releases
-
-Releases are stable snapshots that you can find at
-
-https://github.com/NCAlgebra/NC/releases
-
-**IMPORTANT:** Rename the top directory `NC`!
-
-Earlier releases can be downloaded from:
-
-www.math.ucsd.edu/~ncalg
-
-Releases in github are also tagged so you can easily switch from
-version to version using git.
-
-### Post-download installation
-
-If you are using our paclet distribution you are done. Proceed to the
-section [Running NCAlgebra](#running-ncalgebra).
-
-If not, all that is needed for NCAlgebra to run is that its top
-directory, the `NC` directory, be on Mathematica's search path.
-
-If you are on a unix
-flavored machine (Solaris, Linux, Mac OSX) then unpacking or cloning
-in your home directory (`~`) is all you need to do.
-
-Otherwise, you may need to add the installation directory to
-Mathematica's search path.
-
-**If you are experienced with Mathematica:**
-
-Edit the main *Mathematica* `init.m` file (not the one inside the `NC` directory) to add the name of the directory which contains the `NC` folder to the Mathematica variable `$Path`, as in:
-
-    AppendTo[$Path,"**YOUR_INSTALLATION_DIRECTORY**"];
-
-You can locate your user `init.m` file by typing:
-
-    FileNameJoin[{$UserBaseDirectory, "Kernel", "init.m"}]
-
-in Mathematica.
+Alternatively, you can download and install NCAlgebra as outlined in
+the [user manual](./DOCUMENTATION#ManualInstallation).
 
 ## Running NCAlgebra
 
-If you installed our paclet, all NCAlgebra high-level packages are
-directly avaiable. For example, in Mathematica (notebook or text
-interface), just type
+If you installed using our paclet distribution, all NCAlgebra
+high-level packages are directly avaiable. For example, in Mathematica
+(notebook or text interface), just type
 
     << NCAlgebra`
 
@@ -123,14 +63,15 @@ installation is succesful you will see a message like:
 **In the paclet version, it is no longer necessary to load the context `NC`.**
 
 Loading the context `NC` in the paclet version is however still
-supported for backward compatibility. It does nothing other than post
-the message:
+supported for backward compatibility. It does nothing more than
+posting the message:
 
 	NC::Directory: You are using a paclet version of NCAlgebra.
 
 ## Now what?
 
-Extensive documentation is found in the directory [DOCUMENTATION](./DOCUMENTATION).
+Extensive documentation is found in the directory
+[DOCUMENTATION](./DOCUMENTATION).
 
 Basic documentation is provided on the project Wiki:
 

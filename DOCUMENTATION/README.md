@@ -55,10 +55,11 @@ All rights reserved.
   - <a href="#version-501" id="toc-Version5_0_1"><span class="toc-section-number">3.6</span> Version 5.0.1</a>
   - <a href="#version-500" id="toc-Version5_0_0"><span class="toc-section-number">3.7</span> Version 5.0.0</a>
 - <a href="#introduction" id="toc-UserGuideIntroduction"><span class="toc-section-number">4</span> Introduction</a>
-  - <a href="#running-ncalgebra" id="toc-RunningNCAlgebra"><span class="toc-section-number">4.1</span> Running NCAlgebra</a>
-  - <a href="#now-what" id="toc-now-what"><span class="toc-section-number">4.2</span> Now what?</a>
-  - <a href="#testing" id="toc-testing"><span class="toc-section-number">4.3</span> Testing</a>
-  - <a href="#pre-2017-ncgb-c-version" id="toc-pre-2017-ncgb-c-version"><span class="toc-section-number">4.4</span> Pre-2017 NCGB C++ version</a>
+  - <a href="#installing-ncalgebra" id="toc-InstallingNCAlgebra"><span class="toc-section-number">4.1</span> Installing NCAlgebra</a>
+  - <a href="#running-ncalgebra" id="toc-RunningNCAlgebra"><span class="toc-section-number">4.2</span> Running NCAlgebra</a>
+  - <a href="#now-what" id="toc-now-what"><span class="toc-section-number">4.3</span> Now what?</a>
+  - <a href="#testing" id="toc-testing"><span class="toc-section-number">4.4</span> Testing</a>
+  - <a href="#pre-2017-ncgb-c-version" id="toc-pre-2017-ncgb-c-version"><span class="toc-section-number">4.5</span> Pre-2017 NCGB C++ version</a>
 - <a href="#most-basic-commands" id="toc-MostBasicCommands"><span class="toc-section-number">5</span> Most Basic Commands</a>
   - <a href="#to-commute-or-not-to-commute" id="toc-to-commute-or-not-to-commute"><span class="toc-section-number">5.1</span> To Commute Or Not To Commute?</a>
   - <a href="#inverses" id="toc-inverses"><span class="toc-section-number">5.2</span> Inverses</a>
@@ -107,10 +108,13 @@ All rights reserved.
     - <a href="#nctex-options" id="toc-NCTeX_Options"><span class="toc-section-number">9.2.1</span> NCTeX Options</a>
   - <a href="#using-nctexform" id="toc-Using_NCTeXForm"><span class="toc-section-number">9.3</span> Using NCTeXForm</a>
 - <a href="#reference-manual" id="toc-ReferenceIntroduction"><span class="toc-section-number">10</span> Reference Manual</a>
-  - <a href="#nc" id="toc-PackageNC"><span class="toc-section-number">10.1</span> NC</a>
-    - <a href="#options" id="toc-PackageNCOptions"><span class="toc-section-number">10.1.1</span> Options</a>
-  - <a href="#ncalgebra" id="toc-PackageNCAlgebra"><span class="toc-section-number">10.2</span> NCAlgebra</a>
-    - <a href="#messages" id="toc-NCAlgebraMessages"><span class="toc-section-number">10.2.1</span> Messages</a>
+  - <a href="#manual-installation" id="toc-ManualInstallation"><span class="toc-section-number">10.1</span> Manual Installation</a>
+    - <a href="#downloading" id="toc-downloading"><span class="toc-section-number">10.1.1</span> Downloading</a>
+    - <a href="#post-download-installation" id="toc-post-download-installation"><span class="toc-section-number">10.1.2</span> Post-download installation</a>
+  - <a href="#nc" id="toc-PackageNC"><span class="toc-section-number">10.2</span> NC</a>
+    - <a href="#options" id="toc-PackageNCOptions"><span class="toc-section-number">10.2.1</span> Options</a>
+  - <a href="#ncalgebra" id="toc-PackageNCAlgebra"><span class="toc-section-number">10.3</span> NCAlgebra</a>
+    - <a href="#messages" id="toc-NCAlgebraMessages"><span class="toc-section-number">10.3.1</span> Messages</a>
 - <a href="#packages-for-manipulating-nc-expressions" id="toc-ManipulatingNCExpressions"><span class="toc-section-number">11</span> Packages for manipulating NC expressions</a>
   - <a href="#noncommutativemultiply" id="toc-PackageNonCommutativeMultiply"><span class="toc-section-number">11.1</span> NonCommutativeMultiply</a>
     - <a href="#aj" id="toc-aj"><span class="toc-section-number">11.1.1</span> aj</a>
@@ -557,7 +561,7 @@ The beginnings of the program come from eran@slac.
 # Introduction
 
 This *User Guide* attempts to document the many improvements
-introduced in `NCAlgebra` Version 6.0. Please be patient, as we move
+introduced in `NCAlgebra` **Version 6**. Please be patient, as we move
 to incorporate the many recent changes into this document.
 
 See [Reference Manual](#reference-manual) for a detailed
@@ -566,28 +570,59 @@ description of the available commands.
 There are also notebooks in the `NC/DEMOS` directory that accompany
 each of the chapters of this user guide.
 
+## Installing NCAlgebra
+
+Starting with **Version 6**, it is recommended that NCAlgebra be
+installed using our paclet distribution. Just type:
+
+    PacletInstall["https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true"];
+
+In the near future we plant to submit paclets to the Wolfram paclet
+repository for easier updates.
+
+Alternatively, you can download and install NCAlgebra as outlined in
+the section [Manual Installation](#manual-installation).
+
 ## Running NCAlgebra
 
 In *Mathematica* (notebook or text interface), type
-
-    << NC`
-
-If this step fails, your installation has problems (check out installation instructions on the main page). If your installation is succesful you will see a message like:
-
-    NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
-
-Then just type
 
     << NCAlgebra`
 
 to load `NCAlgebra`.
 
-Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#nc) and [here](#ncalgebra).
+Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#NCOptions) and [here](#ncalgebra).
+
+> If you performed a manual installation of NCAlgebra you will need to type
+>
+>     << NC`
+>
+> before loading NCAlgebra.
+>
+> If this step fails, your installation has problems (check out
+> installation instructions in
+> [Manual Installation](#manual-installation)). If your installation is
+> succesful, you will see a message like:
+>
+>     NC::Directory: You are using the version of NCAlgebra which is
+>     found in: "/your_home_directory/NC".
+>
+> In the paclet version, it is no longer necessary to load the context
+> `NC` before running NCAlgebra.
+>
+> Loading the context `NC` in the paclet version is however still
+> supported for backward compatibility. It does nothing more than
+> posting the message:
+>
+>     NC::Directory: You are using a paclet version of NCAlgebra.
 
 ## Now what?
 
-Extensive documentation is found in the directory `DOCUMENTATION`,
-including this document.
+Extensive documentation is found in the distribution directory
+
+<https://github.com/NCAlgebra/NC/DOCUMENTATION>
+
+which includes this document.
 
 Basic documentation is found in the project wiki:
 
@@ -600,15 +635,10 @@ You can also run some tests to see if things are working fine.
 
 ## Testing
 
-You do not need to load `NCAlgebra` before running any of the tests
-below, but you need to load `NC` as in
-
-    << NC`
-
 There are 3 test sets which you can use to troubleshoot parts of
 NCAlgebra. The most comprehensive test set is run by typing:
 
-    << NCTEST
+    << NCCORETEST`
 
 This will test the core functionality of NCAlgebra.
 
@@ -616,33 +646,32 @@ You can test functionality related to the package
 [`NCPoly`](#ncpoly), including the new `NCGBX` package
 [`NCGBX`](#ncgbx), by typing:
 
-    << NCPOLYTEST
+    << NCPOLYTEST`
 
 Finally our Semidefinite Programming Solver [`NCSDP`](#ncsdp)
 can be tested with
 
-    << NCSDPTEST
+    << NCSDPTEST`
 
 We recommend that you restart the kernel before and after running
 tests. Each test takes a few minutes to run.
 
 You can also call
 
-    << NCPOLYTESGB
+    << NCPOLYTESGB`
 
 to perform extensive and long testing of `NCGBX`.
 
+> If you performed a manual installation of NCAlgebra you will need to type
+>
+>     << NC`
+>
+> before before running any of the tests above.
+
 ## Pre-2017 NCGB C++ version
 
-The old `C++` version of our Groebner Basis Algorithm still ships with
-this version and can be loaded using:
-
-    << NCGB`
-
-This will at once load `NCAlgebra` *and* `NCGB`. It can be tested
-using
-
-    << NCGBTEST
+Starting with **Version 6**, the old `C++` version of our Groebner Basis
+Algorithm is no longer included. Consider using [NCGBX](#NCGBX).
 
 # Most Basic Commands
 
@@ -1038,7 +1067,15 @@ would normally expect.
 
 `NCAlgebra` provides some commands for noncommutative polynomial
 manipulation that are similar to the native Mathematica (commutative)
-polynomial commands. For example:
+polynomial commands. Some of the next commands required the loading of
+the package
+
+    << NCPolyInterface`
+
+which provides an interface between `NCAlgebra` and the low-level
+package [NCPoly](#ncpoly).
+
+For example:
 
     expr = B + A y**x**y - 2 x
     NCVariables[expr]
@@ -1175,6 +1212,8 @@ rational nc expressions. The packages:
 The package [`NCDiff`](#ncdiff) provide functions for
 calculating derivatives and integrals of nc polynomials and nc
 rationals.
+
+    << NCDiff`
 
 The main command is [`NCDirectionalD`](#ncdirectionald) which
 calculates directional derivatives in one or many variables. For
@@ -3946,9 +3985,85 @@ produce
 # Reference Manual
 
 The following chapters and sections describes packages inside
-`NCAlgebra`.
+`NCAlgebra`. Detailed instructions for manual installation are also
+provided in the section [Manual Installation](#manual-installation).
 
 Packages are automatically loaded unless otherwise noted.
+
+## Manual Installation
+
+Manual installation is no longer necessary nor advisable. Consider
+installing NCAlgebra via our paclet distribution, as discussed in
+section [Installing NCAlgebra](#installing-ncalgebra).
+
+### Downloading
+
+You can download NCAlgebra in one of the following ways.
+
+#### Via `git clone`
+
+You can clone the repository using git:
+
+    git clone https://github.com/NCAlgebra/NC
+
+This will create a directory `NC` which contains all files neeeded to
+run NCAlgebra in any platform.
+
+Cloning allows you to easily upgrade and switch between the various
+available releases. If you want to try the latest *experimental*
+version switch to branch *devel* using:
+
+    git checkout devel
+
+If you’re happy with the latest stable release you do not need to
+do anything.
+
+#### From the github download button
+
+After you downloaded a zip file from github use your favorite zip
+utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
+favorite location.
+
+**IMPORTANT:** Rename the top directory `NC`!
+
+#### From one of our releases
+
+Releases are stable snapshots that you can find at
+
+https://github.com/NCAlgebra/NC/releases
+
+**IMPORTANT:** Rename the top directory `NC`!
+
+Earlier releases can be downloaded from:
+
+www.math.ucsd.edu/~ncalg
+
+Releases in github are also tagged so you can easily switch from
+version to version using git.
+
+### Post-download installation
+
+All that is needed for NCAlgebra to run is that its top directory, the
+`NC` directory, be on Mathematica’s search path.
+
+If you are on a unix
+flavored machine (Solaris, Linux, Mac OSX) then unpacking or cloning
+in your home directory (`~`) is all you need to do.
+
+Otherwise, you may need to add the installation directory to
+Mathematica’s search path.
+
+**If you are experienced with Mathematica:**
+
+Edit the main *Mathematica* `init.m` file (not the one inside the `NC` directory) to add the name of the directory which contains the `NC` folder to the Mathematica variable `$Path`, as in:
+
+    AppendTo[$Path,"**YOUR_INSTALLATION_DIRECTORY**"];
+
+You can locate your user `init.m` file by typing:
+
+    FileNameJoin[{$UserBaseDirectory, "Kernel", "init.m"}]
+
+in Mathematica.
 
 ## NC
 

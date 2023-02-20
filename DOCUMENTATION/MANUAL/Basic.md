@@ -393,7 +393,15 @@ would normally expect.
 
 `NCAlgebra` provides some commands for noncommutative polynomial
 manipulation that are similar to the native Mathematica (commutative)
-polynomial commands. For example:
+polynomial commands. Some of the next commands required the loading of
+the package
+
+    << NCPolyInterface`
+
+which provides an interface between `NCAlgebra` and the low-level
+package [NCPoly](#PackageNCPoly).
+
+For example:
 
     expr = B + A y**x**y - 2 x
     NCVariables[expr]
@@ -530,6 +538,8 @@ rational nc expressions. The packages:
 The package [`NCDiff`](#PackageNCDiff) provide functions for
 calculating derivatives and integrals of nc polynomials and nc
 rationals.
+
+    << NCDiff`
 
 The main command is [`NCDirectionalD`](#NCDirectionalD) which
 calculates directional derivatives in one or many variables. For

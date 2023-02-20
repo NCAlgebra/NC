@@ -35,6 +35,7 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/SDP.md \
          MANUAL/TeX.md \
          MANUAL/Reference.md \
+         MANUAL/Installation.md \
          NC.md \
          NCAlgebra/NCAlgebra.md \
          MANUAL/ExpressionPackages.md \

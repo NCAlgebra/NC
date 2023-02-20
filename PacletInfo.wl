@@ -1,6 +1,12 @@
 PacletObject[<|
   "Name" -> "NCAlgebra",
   "Version" -> "6.0.0",
+  "Creator" -> "Mauricio de Oliveira",
+  "Description" ->
+    "NCAlgebra - Non Commutative Algebra Package for Mathematica",
+  "Category" -> "Symbolic & Numeric Computation",
+  "DocumentationURL" -> "https://github.com/NC/NCAlgebra/DOCUMENTATION",
+  "URL" -> "https://github.com/NC/NCAlgebra",
   "Extensions" -> {
     {
       "Kernel",
@@ -100,4 +106,3 @@ PacletObject[<|
     { "Path" }
   }
 |>]
-

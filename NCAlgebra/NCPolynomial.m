@@ -45,6 +45,10 @@ Begin[ "`Private`" ]
 
   (* Operators *)
   
+  (* Power *)
+  NCPolynomial /: Power[p_NCPolynomial, n_?Positive] :=
+    NCPDot @@ Table[p, n];
+
   (* Times *)
   NCPolynomial /: Times[s_?CommutativeQ, p_NCPolynomial] := NCPTimes[s, p];
 
