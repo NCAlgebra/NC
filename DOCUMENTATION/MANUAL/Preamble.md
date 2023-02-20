@@ -1,6 +1,9 @@
 ---
 title: The NCAlgebra Suite
 subtitle: Version 6.0.0
+header-includes: |
+  \usepackage{tcolorbox}
+  \renewenvironment{quote}{\begin{tcolorbox}[colback=MidnightBlue!10!white]}{\end{tcolorbox}}
 author: 
 - J. William Helton
 - Mauricio C. de Oliveira
