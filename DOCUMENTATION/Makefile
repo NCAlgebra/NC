@@ -38,6 +38,7 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/Installation.md \
          NC.md \
          NCAlgebra/NCAlgebra.md \
+         NCAlgebra/NCOptions.md \
          MANUAL/ExpressionPackages.md \
          NCAlgebra/NonCommutativeMultiply.md \
          NCAlgebra/NCTr.md \

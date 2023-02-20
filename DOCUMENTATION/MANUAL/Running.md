@@ -56,7 +56,7 @@ Advanced options for controlling the loading of `NC` and `NCAlgebra` can be foun
 > posting the message:
 >
 >     NC::Directory: You are using a paclet version of NCAlgebra.
->
+
 
 ## Now what?
 

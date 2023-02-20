@@ -4,11 +4,9 @@ Manual installation is no longer necessary nor advisable. Consider
 installing NCAlgebra via our paclet distribution, as discussed in
 section [Installing NCAlgebra](#InstallingNCAlgebra).
 
-### Downloading
-
 You can download NCAlgebra in one of the following ways.
 
-#### Via `git clone`
+### Via `git clone`
 
 You can clone the repository using git:
 
@@ -26,7 +24,7 @@ version switch to branch *devel* using:
 If you're happy with the latest stable release you do not need to
 do anything.
 
-#### From the github download button
+### From the github download button
 
 After you downloaded a zip file from github use your favorite zip
 utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
@@ -34,7 +32,7 @@ favorite location.
 
 **IMPORTANT:** Rename the top directory `NC`!
 
-#### From one of our releases
+### From one of our releases
 
 Releases are stable snapshots that you can find at
 

@@ -12,6 +12,11 @@ commands:
     << NC`
     << NCAlgebra`
 
+> If you installed the paclet version of NCAlgebra it is not necessary
+> to load the context `NC` before loading other `NCAlgebra`
+> packages. A dummy package `NC` is provided in case you would like to
+> keep your NCAlgebra work compatible with previous versions.
+
 ## To Commute Or Not To Commute?
 
 In `NCAlgebra`, the operator `**` denotes *noncommutative
@@ -948,7 +953,7 @@ coincides with
 
     NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
 
-## Quadratic polynomials, second direction derivatives and convexity {#Quadratic}
+## Quadratic polynomials, second directional derivatives and convexity {#Quadratic}
 
 The closest related demo to the material in this section is
 `NC/DEMOS/NCConvexity.nb`.
@@ -990,7 +995,7 @@ which results in
     (tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
 
 An interesting application is the verification of the domain in which
-an nc rational function is *convex*. This uses the second direction
+an nc rational function is *convex*. This uses the second directional
 derivative, called the Hessian. Take for example the quartic
 
     expr = x**x**x**x;

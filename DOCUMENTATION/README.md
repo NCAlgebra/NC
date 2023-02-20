@@ -35,6 +35,7 @@ A PDF version of this document is available [here](./NCDocument.pdf).
 
 ## Copyright
 
+- Helton and de Oliveira 2023
 - Helton and de Oliveira 2017
 - Helton 2002
 - Helton and Miller June 1991
@@ -74,7 +75,7 @@ All rights reserved.
     - <a href="#lu-decomposition-with-complete-pivoting" id="toc-BasicMatrices:LUDecompositionWithCompletePivoting"><span class="toc-section-number">5.8.3</span> LU Decomposition with complete pivoting</a>
     - <a href="#ldl-decomposition" id="toc-BasicMatrices:LDLDecomposition"><span class="toc-section-number">5.8.4</span> LDL Decomposition</a>
     - <a href="#replace-with-matrices" id="toc-ReplaceWithMatrices"><span class="toc-section-number">5.8.5</span> Replace with matrices</a>
-  - <a href="#quadratic-polynomials-second-direction-derivatives-and-convexity" id="toc-Quadratic"><span class="toc-section-number">5.9</span> Quadratic polynomials, second direction derivatives and convexity</a>
+  - <a href="#quadratic-polynomials-second-directional-derivatives-and-convexity" id="toc-Quadratic"><span class="toc-section-number">5.9</span> Quadratic polynomials, second directional derivatives and convexity</a>
 - <a href="#more-advanced-commands" id="toc-MoreAdvancedCommands"><span class="toc-section-number">6</span> More Advanced Commands</a>
   - <a href="#advanced-rules-and-replacements" id="toc-AdvancedReplace"><span class="toc-section-number">6.1</span> Advanced Rules and Replacements</a>
     - <a href="#replaceall-and-replacerepeated-often-fail" id="toc-replaceall-.-and-replacerepeated-.-often-fail"><span class="toc-section-number">6.1.1</span> <code>ReplaceAll</code> (<code>/.</code>) and <code>ReplaceRepeated</code> (<code>//.</code>) often fail</a>
@@ -109,12 +110,14 @@ All rights reserved.
   - <a href="#using-nctexform" id="toc-Using_NCTeXForm"><span class="toc-section-number">9.3</span> Using NCTeXForm</a>
 - <a href="#reference-manual" id="toc-ReferenceIntroduction"><span class="toc-section-number">10</span> Reference Manual</a>
   - <a href="#manual-installation" id="toc-ManualInstallation"><span class="toc-section-number">10.1</span> Manual Installation</a>
-    - <a href="#downloading" id="toc-downloading"><span class="toc-section-number">10.1.1</span> Downloading</a>
-    - <a href="#post-download-installation" id="toc-post-download-installation"><span class="toc-section-number">10.1.2</span> Post-download installation</a>
+    - <a href="#via-git-clone" id="toc-via-git-clone"><span class="toc-section-number">10.1.1</span> Via <code>git clone</code></a>
+    - <a href="#from-the-github-download-button" id="toc-from-the-github-download-button"><span class="toc-section-number">10.1.2</span> From the github download button</a>
+    - <a href="#from-one-of-our-releases" id="toc-from-one-of-our-releases"><span class="toc-section-number">10.1.3</span> From one of our releases</a>
+    - <a href="#post-download-installation" id="toc-post-download-installation"><span class="toc-section-number">10.1.4</span> Post-download installation</a>
   - <a href="#nc" id="toc-PackageNC"><span class="toc-section-number">10.2</span> NC</a>
-    - <a href="#options" id="toc-PackageNCOptions"><span class="toc-section-number">10.2.1</span> Options</a>
   - <a href="#ncalgebra" id="toc-PackageNCAlgebra"><span class="toc-section-number">10.3</span> NCAlgebra</a>
     - <a href="#messages" id="toc-NCAlgebraMessages"><span class="toc-section-number">10.3.1</span> Messages</a>
+    - <a href="#ncoptions" id="toc-PackageNCOptions"><span class="toc-section-number">10.3.2</span> NCOptions</a>
 - <a href="#packages-for-manipulating-nc-expressions" id="toc-ManipulatingNCExpressions"><span class="toc-section-number">11</span> Packages for manipulating NC expressions</a>
   - <a href="#noncommutativemultiply" id="toc-PackageNonCommutativeMultiply"><span class="toc-section-number">11.1</span> NonCommutativeMultiply</a>
     - <a href="#aj" id="toc-aj"><span class="toc-section-number">11.1.1</span> aj</a>
@@ -391,7 +394,7 @@ All rights reserved.
 
 **NCAlgebra** is distributed under the terms of the BSD License:
 
-    Copyright (c) 2017, J. William Helton and Mauricio C. de Oliveira
+    Copyright (c) 2023, J. William Helton and Mauricio C. de Oliveira
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -687,6 +690,11 @@ commands:
 
     << NC`
     << NCAlgebra`
+
+> If you installed the paclet version of NCAlgebra it is not necessary
+> to load the context `NC` before loading other `NCAlgebra`
+> packages. A dummy package `NC` is provided in case you would like to
+> keep your NCAlgebra work compatible with previous versions.
 
 ## To Commute Or Not To Commute?
 
@@ -1630,7 +1638,7 @@ coincides with
 
     NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
 
-## Quadratic polynomials, second direction derivatives and convexity
+## Quadratic polynomials, second directional derivatives and convexity
 
 The closest related demo to the material in this section is
 `NC/DEMOS/NCConvexity.nb`.
@@ -1676,7 +1684,7 @@ which results in
     (tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
 
 An interesting application is the verification of the domain in which
-an nc rational function is *convex*. This uses the second direction
+an nc rational function is *convex*. This uses the second directional
 derivative, called the Hessian. Take for example the quartic
 
     expr = x**x**x**x;
@@ -3997,11 +4005,9 @@ Manual installation is no longer necessary nor advisable. Consider
 installing NCAlgebra via our paclet distribution, as discussed in
 section [Installing NCAlgebra](#installing-ncalgebra).
 
-### Downloading
-
 You can download NCAlgebra in one of the following ways.
 
-#### Via `git clone`
+### Via `git clone`
 
 You can clone the repository using git:
 
@@ -4019,7 +4025,7 @@ version switch to branch *devel* using:
 If you’re happy with the latest stable release you do not need to
 do anything.
 
-#### From the github download button
+### From the github download button
 
 After you downloaded a zip file from github use your favorite zip
 utility to unpack the file `NC-master.zip` or `NC-devel.zip` on your
@@ -4027,7 +4033,7 @@ favorite location.
 
 **IMPORTANT:** Rename the top directory `NC`!
 
-#### From one of our releases
+### From one of our releases
 
 Releases are stable snapshots that you can find at
 
@@ -4071,6 +4077,16 @@ in Mathematica.
 **NC** is a meta package that enables the functionality of the
 *NCAlgebra suite* of non-commutative algebra packages for Mathematica.
 
+> If you installed the paclet version of NCAlgebra it is not necessary
+> to load the context `NC` before loading other `NCAlgebra`
+> packages.
+>
+> Loading the context `NC` in the paclet version is however still
+> supported for backward compatibility. It does nothing more than
+> posting the message:
+>
+>     NC::Directory: You are using a paclet version of NCAlgebra.
+
 The package can be loaded using `Get`, as in
 
     << NC`
@@ -4083,14 +4099,21 @@ Once `NC` is loaded you will see a message like
 
     NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
 
+or
+
+    NC::Directory: You are using a paclet version of NCAlgebra.
+
+if you installed from our paclet distribution.
+
 You can then proceed to load any other package from the *NCAlgebra suite*.
 
 For example you can load the package `NCAlgebra` using
 
     << NCAlgebra`
 
-See section [NCAlgebra](#ncalgebra) for more options and
-details available while loading `NCAlgebra`.
+See section [NCAlgebra](#ncalgebra) and
+[NCOptions](#ncoptions) for more options and details available
+while loading `NCAlgebra`.
 
 The `NC::Directory` message can be suppressed by using standard Mathematica message control functions. For example,
 
@@ -4105,16 +4128,6 @@ will load `NC` quietly. Note that you have to refer to the message by
 its fully qualified name `` NC`NC::Directory `` because the context
 `NC` is only available after loading the package.
 
-### Options
-
-The following `options` can be set using `SetOptions` before loading other packages:
-
-- `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
-  `NCAlgebra` will set all global single letter small cap symbols as
-  noncommutative;
-- `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
-  during the first loading of a package.
-
 ## NCAlgebra
 
 **NCAlgebra** is the main package of the *NCAlgebra suite* of
@@ -4128,12 +4141,14 @@ or `Needs`, as in
 
     Needs["NCAlgebra`"]
 
-If the option [`SmallCapSymbolsNonCommutative`](#options) is
-`True` then `NCAlgebra` will set all global single letter small cap
-symbols as noncommutative. If that is not desired simply set
-`SmallCapSymbolsNonCommutative` to `False` before loading `NCAlgebra`, as in
+If the option `SmallCapSymbolsNonCommutative` is `True` then
+`NCAlgebra` will set all global single letter small cap symbols as
+noncommutative. Set [NCOptions](#ncoptions). If that is not
+desired, simply set `SmallCapSymbolsNonCommutative` to `False` before
+loading `NCAlgebra`, as in
 
-    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    << NCOptions`
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
     << NCAlgebra`
 
 A message will be issued warning users whether any letters have been
@@ -4146,7 +4161,8 @@ set as noncommutative upon loading. Those messages are documented
 
 or
 
-    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    << NCOptions`
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
     Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
     << NCAlgebra`
 
@@ -4154,16 +4170,18 @@ will load `NCAlgebra` without issuing a symbol assignment message.
 
 Upon loading `NCAlgebra` for the first time, a large banner will be
 shown. If you do not want this banner to be displayed set the
-option [`ShowBanner`](#options) to `False` before loading, as in
+option [`ShowBanner`](#ncoptions) to `False` before loading, as in
 
-    SetOptions[NC, ShowBanner -> False]
+    << NCOptions`
+    SetOptions[NCOptions, ShowBanner -> False]
     << NCAlgebra`
 
 For example, the following commands will perform a completly quiet
 loading of `NC` *and* `NCAlgebra`:
 
     Quiet[<< NC`, NC`NC::Directory];
-    SetOptions[NC, ShowBanner -> False];
+    << NCOptions`
+    SetOptions[NCOptions, ShowBanner -> False];
     Quiet[<< NCAlgebra`, NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative];
 
 ### Messages
@@ -4174,6 +4192,26 @@ One of the following messages will be displayed after loading.
   been set as noncomutative;
 - `NCAlgebra::NoSymbolsNonCommutative`, if no symbols have been set as noncomutative by
   `NCAlgebra`.
+
+### NCOptions
+
+The following `options` can be set using `SetOptions` before loading other packages:
+
+- `SmallCapSymbolsNonCommutative` (`True`): If `True`, loading
+  `NCAlgebra` will set all global single letter small cap symbols as
+  noncommutative;
+- `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
+  during the first loading of a package.
+
+For example,
+
+    << NC`
+    << NCOptions`
+    SetOptions[NCOptions, ShowBanner -> False];
+    << NCAlgebra`
+
+suppress the NCAlgebra banner that is printed the first time NCAlgebra
+is loaded.
 
 # Packages for manipulating NC expressions
 

@@ -37,6 +37,7 @@ A PDF version of this document is available [here](./NCDocument.pdf).
 
 ## Copyright
 
+- Helton and de Oliveira 2023
 - Helton and de Oliveira 2017
 - Helton 2002
 - Helton and Miller June 1991
