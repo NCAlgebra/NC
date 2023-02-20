@@ -38,7 +38,7 @@ In the near future we plant to submit paclets to the Wolfram paclet
 repository for easier updates.
 
 Alternatively, you can download and install NCAlgebra as outlined in
-the [user manual](./DOCUMENTATION#ManualInstallation).
+the [user manual](./DOCUMENTATION#manual-installation).
 
 ## Running NCAlgebra
 
