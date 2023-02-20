@@ -5,7 +5,7 @@ Quiet[Get["NC`"], {NC`NC::Directory, Get::noopen}];
 
 Print["> BEGIN NCSDPTEST\n" ];
 
-prefix = "NCAlgebra/TESTING/NCSDP/"
+prefix = "NCAlgebra/TESTING/NCSDP/";
 tests = {
   "SDPLinearCoefficientArrays",
   "SDPEval",

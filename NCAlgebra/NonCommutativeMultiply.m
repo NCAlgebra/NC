@@ -370,7 +370,8 @@ Begin[ "`Private`" ]
   aj[a_NonCommutativeMultiply] := aj /@ Reverse[a];
 
   (* aj[inv[]] = inv[aj[]] *)
-  aj[inv[a_]] := inv[aj[a]];
+  (* aj[inv[a_]] := inv[aj[a]]; *)
+  aj[a_^n_] := aj[a]^n;
 
   (* co *)
   

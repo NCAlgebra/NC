@@ -10,7 +10,7 @@ Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 
 Print["> BEGIN NCTEST\n" ];
 
-prefix = "NCAlgebra/TESTING/NCAlgebra/"
+prefix = "NCAlgebra/TESTING/NCAlgebra/";
 tests = {
   "CommutativeQ",
   "NCMultiplication",

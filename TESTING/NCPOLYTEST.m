@@ -6,7 +6,7 @@ Quiet[Get["NC`"], {NC`NC::Directory, Get::noopen}];
 
 Print["> BEGIN NCPOLYTEST\n" ];
 
-prefix = "NCAlgebra/TESTING/NCPoly/"
+prefix = "NCAlgebra/TESTING/NCPoly/";
 tests = {
   "Digits",
   "Constructors",
