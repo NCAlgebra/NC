@@ -27,7 +27,7 @@ http://math.ucsd.edu/~ncalg
 > ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
 	
 
-## Installing NCAlgebra {#InstallingNCAlgebra}
+## Installing NCAlgebra
 
 Starting with version 6.0.0, it is recommended that NCAlgebra be
 installed using our paclet distribution. Just type:
