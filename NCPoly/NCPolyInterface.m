@@ -15,7 +15,7 @@ Clear[NCToNCPoly,
       NCRuleToPoly,
       NCToRule,
       NCReduce,
-      NCFullReduce,
+      NCReduceRepeated,
       NCMonomialList,
       NCCoefficientRules,
       NCCoefficientList,
@@ -251,9 +251,9 @@ Begin["`Private`"];
   NCReduce[f_, g_, vars_, options:OptionsPattern[NCPolyReduce]] :=
     NCPolyToNC[NCPolyReduce[NCToNCPoly[f, vars], NCToNCPoly[g, vars], options], vars];
 
-  (* NCFullReduce *)
-  NCFullReduce[g_, vars_, options:OptionsPattern[NCPolyReduce]] :=
-    NCPolyToNC[NCPolyFullReduce[NCToNCPoly[g, vars], options], vars];
+  (* NCReduceRepeated *)
+  NCReduceRepeated[g_, vars_, options:OptionsPattern[NCPolyReduce]] :=
+    NCPolyToNC[NCPolyReduceRepeated[NCToNCPoly[g, vars], options], vars];
 
 End[]
 EndPackage[]

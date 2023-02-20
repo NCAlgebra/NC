@@ -13,7 +13,7 @@ Members are:
 * [NCRuleToPoly](#NCRuleToPoly)
 * [NCToRule](#NCToRule)
 * [NCReduce](#NCReduce)
-* [NCFullReduce](#NCFullReduce)
+* [NCReduceRepeated](#NCReduceRepeated)
 * [NCMonomialList](#NCMonomialList)
 * [NCCoefficientRules](#NCCoefficientRules)
 * [NCCoefficientList](#NCCoefficientList)
@@ -96,7 +96,7 @@ until no further reduction occurs.
 `NCReduce[polys, vars, options]` reduces each polynomial in the list
 of `NCPoly`s `polys` with respect to the remaining elements of the
 list of polyomials `polys`. It traverses the list of polys just
-once. Use [NCFullReduce](#NCFullReduce) to continue applying
+once. Use [NCReduceRepeated](#NCReduceRepeated) to continue applying
 `NCReduce` until no further reduction occurs.
 
 `NCReduce` converts `polys` and `rules` to NCPoly polynomials and
@@ -104,16 +104,16 @@ apply [NCPolyReduce](#NCPolyReduce). See [NCPolyReduce](#NCPolyReduce)
 for the possible `options`.
 
 See also:
-[NCFullReduce](#NCFullReduce), [NCPolyReduce](#NCPolyReduce).
+[NCReduceRepeated](#NCReduceRepeated), [NCPolyReduce](#NCPolyReduce).
 
-### NCFullReduce {#NCFullReduce}
+### NCReduceRepeated {#NCReduceRepeated}
 
-`NCFullReduce[polys]` applies `NCReduce` successively to the
+`NCReduceRepeated[polys]` applies `NCReduce` successively to the
 list of `polys` until the remainder does not change.
 
 See also:
 [NCReduce](#NCReduce),
-[NCPolyFullReduce](#NCPolyFullReduce).
+[NCPolyReduceRepeated](#NCPolyReduceRepeated).
 
 ### NCMonomialList {#NCMonomialList}
 

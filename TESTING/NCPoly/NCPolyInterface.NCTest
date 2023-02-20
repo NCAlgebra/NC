@@ -422,10 +422,10 @@ Block[
   exp2 = {x^2 - y ** x, x ** y - y ** x};
   answer = {x^2 - x ** y, x ** y - y ** x};
   NCTest[NCReduce[exp2, vars], answer];
-  NCTest[NCFullReduce[exp2, vars], answer];
+  NCTest[NCReduceRepeated[exp2, vars], answer];
 
   answer = {x^2 - x ** y, x^2 - y ** x};
-  NCTest[NCFullReduce[exp2, vars, Complete -> True], answer];
+  NCTest[NCReduceRepeated[exp2, vars, Complete -> True], answer];
   
   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 

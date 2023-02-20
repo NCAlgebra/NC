@@ -22,6 +22,6 @@
 6. `NCCollect`: new function [NCCollectExponents](#NCCollectExponents).
 7. `MatrixDecompositions`: functions [GetLDUMatrices](#GetLDUMatrices) and [GetFullLDUMatrices](#GetFullLDUMatrices) now produces low rank matrices.
 8. `NCPoly`: new function [NCPolyFromGramMatrixFactors](#NCPolyFromGramMatrixFactors).
-9. `NCPolyInterface`: new function [NCToRule](#NCToRule).
+9. `NCPolyInterface`: new functions [NCToRule](#NCToRule), [NCReduce](#NCReduce), and [NCReduceRepeated](#NCReduceRepeated).
 10. New functions [SetCommutativeFunction](#SetCommutativeFunction) and [SetNonCommutativeFunction](#SetNonCommutativeFunction).
 11. The old `C++` version of `NCGB` is no longer compatible with `NCAlgebra` *version 6*. Consider using [`NCGBX`](#PackageNCGBX) instead.

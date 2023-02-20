@@ -54,7 +54,7 @@ Clear[NCPoly,
       NCPolyProduct,
       NCPolyMonomialProduct,
       NCPolyToRule,
-      NCPolyFullReduce,
+      NCPolyReduceRepeated,
       NCPolyReduceWithQuotient,
       NCPolyReduce,
       NCPolyQuotientExpand,
@@ -200,7 +200,7 @@ Begin["`Private`"];
       1
     ];
 
-  NCPolyFullReduce[{g__NCPoly},
+  NCPolyReduceRepeated[{g__NCPoly},
                    options:OptionsPattern[NCPolyReduce]] :=
     FixedPoint[NCPolyReduce[#, options]&, {g}];
 

@@ -41,7 +41,7 @@ Members are:
 * Arithmetic
     * [NCPolyDivideDigits](#NCPolyDivideDigits)
     * [NCPolyDivideLeading](#NCPolyDivideLeading)
-    * [NCPolyFullReduce](#NCPolyFullReduce)
+    * [NCPolyReduceRepeated](#NCPolyReduceRepeated)
     * [NCPolyNormalize](#NCPolyNormalize)
     * [NCPolyProduct](#NCPolyProduct)
     * [NCPolyQuotientExpand](#NCPolyQuotientExpand)
@@ -716,7 +716,7 @@ implied by `rules` are applied repeatedly to the polynomials in the
 `NCPolyReduce[polys]` reduces each polynomial in the list of `NCPoly`s
 `polys` with respect to the remaining elements of the list of
 polyomials `polys`. It traverses the list of polys just once. Use
-[NCPolyFullReduce](#NCPolyFullReduce) to continue applying
+[NCPolyReduceRepeated](#NCPolyReduceRepeated) to continue applying
 `NCPolyReduce` until no further reduction occurs.
 
 By default, `NCPolyReduce` only reduces the leading monomial in the
@@ -731,7 +731,7 @@ Other available options are:
   iterations in reducing each polynomial by `MaxIterationsFactor`
   times the number of terms in the polynomial.
 - `MaxDepth` (default = 1): control how many monomials are reduced by
-  `NCReduce`; by default `MaxDepth` is set to one so that just the
+  `NCPolyReduce`; by default `MaxDepth` is set to one so that just the
   leading monomial is reduced. Setting `Complete -> True` effectively
   sets `MaxDepth` to `Infinity`.
 - `ZeroTest` (default = `NCPolyPossibleZeroQ`): which test to use when
@@ -741,13 +741,13 @@ Other available options are:
 
 See also:
 [NCPolyGroebner](#NCPolyGroebner),
-[NCPolyFullReduce](#NCPolyFullReduce),
+[NCPolyReduceRepeated](#NCPolyReduceRepeated),
 [NCPolyReduceWithQuotient](#NCPolyReduceWithQuotient).
 
-#### NCPolyFullReduce {#NCPolyFullReduce}
+#### NCPolyReduceRepeated {#NCPolyReduceRepeated}
 
-`NCPolyFullReduce[g]` applies NCPolyReduce successively to the list of
-polynomials `g` until the remainder does not change.
+`NCPolyReduceRepeated[polys]` applies NCPolyReduce successively to the
+list of polynomials `polys` until the remainder does not change.
 
 See also:
 [NCPolyReduce](#NCPolyReduce),

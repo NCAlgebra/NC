@@ -190,7 +190,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Module[
 
   m = Length[G];
   (* G = NCPolyNormalize[FixedPoint[NCPolyReduce,G]]; *)
-  G = NCPolyNormalize[NCPolyFullReduce[G]];
+  G = NCPolyNormalize[NCPolyReduceRepeated[G]];
   If[ Length[G] < m, 
       Print[ "> Initial basis reduced to '", ToString[Length[G]],
              "' out of '", ToString[m], "' initial relations." ] 
@@ -344,7 +344,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Module[
         Print["* Cleaning up basis."];
     ];
     (* G = NCPolyNormalize[FixedPoint[NCPolyReduce,G]]; *)
-    G = NCPolyNormalize[NCPolyFullReduce[G]];
+    G = NCPolyNormalize[NCPolyReduceRepeated[G]];
     TG = Map[NCPolyLeadingMonomial, G];
 
   ];
