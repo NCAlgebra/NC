@@ -446,7 +446,7 @@ The beginnings of the program come from eran@slac.
 
 ## Version 6.0.0
 
-1.  Paclet installation. NCAlgebra is now paclet installable!
+1.  NCAlgebra is now distributed as a *paclet*!
 
 2.  Changed cannonical representation of noncommutative expressions to
     allow for powers to be present in `NonCommutativeMultiply`.
@@ -465,19 +465,29 @@ The beginnings of the program come from eran@slac.
     [NCExpandExponents](#ncexpandexponents) and [NCToList](#nctolist).
 
 5.  `NCReplace`: new functions
-    [NCReplacePowerRule](#ncreplacepowerrule); option `ApplyPowerRule`.
+    [NCReplacePowerRule](#ncreplacepowerrule); new option
+    `ApplyPowerRule`.
 
 6.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
 
-7.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices) and [GetFullLDUMatrices](#getfullldumatrices) now produces low rank matrices.
+7.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices)
+    and [GetFullLDUMatrices](#getfullldumatrices) now produces low rank
+    matrices.
 
-8.  `NCPoly`: new function [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
+8.  `NCPoly`: new function
+    [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
+    `NCPolyFullReduce`
+    renamed [NCPolyReduceRepeated](#ncpolyreducerepeated).
 
-9.  `NCPolyInterface`: new functions [NCToRule](#nctorule), [NCReduce](#ncreduce), and [NCReduceRepeated](#ncreducerepeated).
+9.  `NCPolyInterface`: new functions [NCToRule](#nctorule),
+    [NCReduce](#ncreduce), and [NCReduceRepeated](#ncreducerepeated).
 
-10. New functions [SetCommutativeFunction](#setcommutativefunction) and [SetNonCommutativeFunction](#setnoncommutativefunction).
+10. New functions [SetCommutativeFunction](#setcommutativefunction)
+    and [SetNonCommutativeFunction](#setnoncommutativefunction).
 
-11. The old `C++` version of `NCGB` is no longer compatible with `NCAlgebra` *version 6*. Consider using [`NCGBX`](#ncgbx) instead.
+11. The old `C++` version of `NCGB` is no longer compatible with
+    `NCAlgebra` *version 6*. Consider using [`NCGBX`](#ncgbx)
+    instead.
 
 # Changes in Version 5.0
 
