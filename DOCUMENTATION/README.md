@@ -489,6 +489,9 @@ The beginnings of the program come from eran@slac.
     `NCAlgebra` *version 6*. Consider using [`NCGBX`](#ncgbx)
     instead.
 
+12. No longer loads the package `Notation` by default. Controlled by
+    the new option `UseNotation` in [`NCOptions`](#ncoptions).
+
 # Changes in Version 5.0
 
 ## Version 5.0.6
@@ -4432,6 +4435,9 @@ The following `options` can be set using `SetOptions` before loading other packa
   noncommutative;
 - `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
   during the first loading of a package.
+- `UseNotation` (`False`): If `True` use Mathematica’s package
+  `Notation` when setting pretty output in
+  [`NCSetOutput`](#ncsetoutput).
 
 For example,
 

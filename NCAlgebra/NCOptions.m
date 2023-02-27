@@ -26,7 +26,8 @@ Clear[SelfAdjointVariables,
  
 Options[NCOptions] = {
   SmallCapSymbolsNonCommutative -> True,
-  ShowBanner ->	True
+  ShowBanner ->	True,
+  UseNotation -> False
 };
 
 EndPackage[ ];

@@ -1142,6 +1142,9 @@ href="#SetNonCommutativeFunction">SetNonCommutativeFunction</a>.</p></li>
 longer compatible with <code>NCAlgebra</code> <em>version 6</em>.
 Consider using <a href="#PackageNCGBX"><code>NCGBX</code></a>
 instead.</p></li>
+<li><p>No longer loads the package <code>Notation</code> by default.
+Controlled by the new option <code>UseNotation</code> in <a
+href="#PackageNCOptions"><code>NCOptions</code></a>.</p></li>
 </ol>
 <h1 data-number="3" id="Version5_0"><span
 class="header-section-number">3</span> Changes in Version 5.0</h1>
@@ -4223,6 +4226,9 @@ single letter small cap symbols as noncommutative;</li>
 <li><code>ShowBanner</code> (<code>True</code>): If <code>True</code>, a
 banner, when available, will be shown during the first loading of a
 package.</li>
+<li><code>UseNotation</code> (<code>False</code>): If <code>True</code>
+use Mathematica’s package <code>Notation</code> when setting pretty
+output in <a href="#NCSetOutput"><code>NCSetOutput</code></a>.</li>
 </ul>
 <p>For example,</p>
 <pre><code>&lt;&lt; NC`

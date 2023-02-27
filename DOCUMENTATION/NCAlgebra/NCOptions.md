@@ -7,6 +7,9 @@ The following `options` can be set using `SetOptions` before loading other packa
   noncommutative;
 * `ShowBanner` (`True`): If `True`, a banner, when available, will be shown
   during the first loading of a package.
+* `UseNotation` (`False`): If `True` use Mathematica's package
+  `Notation` when setting pretty output in
+  [`NCSetOutput`](#NCSetOutput).
 
 For example,
 

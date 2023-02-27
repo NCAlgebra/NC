@@ -35,3 +35,5 @@
 11. The old `C++` version of `NCGB` is no longer compatible with
     `NCAlgebra` *version 6*. Consider using [`NCGBX`](#PackageNCGBX)
     instead.
+12. No longer loads the package `Notation` by default. Controlled by
+    the new option `UseNotation` in [`NCOptions`](#PackageNCOptions).
