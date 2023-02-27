@@ -6,6 +6,9 @@ commands.
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/2_MoreAdvancedCommands.nb`.
 
+    << NC`
+	<< NCAlgebra`
+
 ## Advanced Rules and Replacements {#AdvancedReplace}
 
 Substitution is a key feature of Symbolic computation. We will now
@@ -22,27 +25,27 @@ a rule to be effective if has to match the *structural*
 representation of an expression. That representation might be
 different than one would normally think based on the usual properties
 of mathematical operators. For example, one would expect the rule:
-
-	rule = 1 + x_ -> x
-
+```output
+rule = 1 + x_ -> x
+```
 to match all the expressions bellow:
-
-    1 + a
-    1 + 2 a
-	1 + a + b
-	1 + 2 a * b
-
+```output
+1 + a
+1 + 2 a
+1 + a + b
+1 + 2 a * b
+```
 so that
-
-	expr /. rule
-
+```output
+expr /. rule
+```
 with `expr` taking the above expressions would result in:
-
-	a
-	2 a
-	a + b
-	2 a * b
-
+```output
+a
+2 a
+a + b
+2 a * b
+```
 Indeed, Mathematica's attribute `Flat` does precisely that. Note that
 this is still *structural matching*, not *mathematical matching*, since
 the pattern `1 + x_` would not match an integer `2`, even though one
@@ -55,25 +58,29 @@ on a simple rule such as:
 	rule = a**b -> c
 
 so that
-
-    expr /. rule
-
+```output
+expr /. rule
+```
 will work for some `expr` like
 
-	1 + 2 a**b
+	1 + 2 a**b /. rule
 
 resulting in
-
-	1 + 2 c
-
+```output
+1 + 2 c
+```
 but will fail to produce the *expected* result in cases like:
 
-	a**b**c
-	c**a**b
-	c**a**b**d
-	1 + 2 a**b**c
+	a**b**c /. rule
 
-That's what the `NCAlgebra` family of replacement functions discussed in the next section are made for.
+or
+
+    c**a**b /. rule
+	c**a**b**d /. rule
+	1 + 2 a**b**c /. rule
+
+That's what the `NCAlgebra` family of replacement functions discussed
+in the next section are made for.
 
 ### The fix is `NCReplace`
 
@@ -85,12 +92,12 @@ Continuing with the example in the previous section, the calls
 	NCReplaceAll[1 + 2 a**b**c, rule ]
 
 produce the results one would expect:
-
-	c**c
-	c**c
-	c**c**d
-	1 + 2 c**c
-
+```output
+c^2
+c^2
+c^2**d
+1 + 2 c^2
+```
 For this reason, when substituting in `NCAlgebra` it is always safer
 to use functions from the [`NCReplace` package](#PackageNCReplace)
 rather than the corresponding Mathematica `Replace` family of
@@ -103,12 +110,23 @@ On the same vein, the following substitution rule
 
     NCReplaceAll[2 a**b + c, 2 a -> b]
 
-will return `2 a**b + c` intact since `FullForm[2 a**b]` is indeed
+will return `2 a**b + c` intact since 
 
-    Times[2, NonCommutativeMuliply[a, b]]
+    FullForm[2 a**b]
+	
+is actually
+```output
+Times[2, NonCommutativeMuliply[a, b]]
+```
+which is not structurally related to
 
-which is not structurally related to `FullForm[2 a]`, which is
-`Times[2, a]`. Of course, in this case a simple solution is to use the
+    FullForm[2 a]
+
+which is
+```output
+Times[2, a]
+```
+Of course, in this case a simple solution is to use the
 alternative rule:
 
     NCReplaceAll[2 a**b + c, a -> b / 2]
@@ -124,16 +142,20 @@ noncommutative monomials using powers. This means that
 
 is internally stored as
 
-    NonCommutativeMultiply[a^3, b, a^2, b, a, b]
+    FullForm[expr]
 
+or
+```output
+NonCommutativeMultiply[a^3, b, a^2, b, a, b]
+```
 so that a replacement such as
 
     NCReplaceAll[expr, a**b -> c]
 
 will result in
-
-    a^3**b**a^2**b**c
-
+```output
+a^3**b**a^2**b**c
+```
 Note how the rule fails to match the `a**b` in the terms `a**b^2` and
 `a**b^3`. This situation might be familiar to an experienced
 Mathematica user who is a aware of the difference between structural
@@ -153,17 +175,17 @@ the following replacement
     NCReplaceAll[expr, NCReplacePowerRule[a**b -> c]]
 
 will produce
-
-    a^2**c**a^2**b**a**b
-
+```output
+a^2**c**a^2**b**a**b
+```
 after matching `a**b` in the term `a^3**b`, and
 
     NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
 
 will produce
-
-    a^2**c**a**c^2
-
+```output
+a^2**c**a**c^2
+```
 after matching `a**b` in `a^3**b`, `a^2**b`, and `a**b`.
 
 The command `NCReplacePowerRule` works by modifying noncommutative
@@ -174,9 +196,9 @@ monomial. For example,
     NCReplacePowerRule[a**c**b -> d]
 
 produces the modified rule[^power-rule]
-
-    a^n_.**c**b^m_. -> a^(n-1)**d**b^(m-1)
-    
+```output
+a^n_.**c**b^m_. -> a^(n-1)**d**b^(m-1)
+```
 which can successfully match powers of the symbols `a` and `b`
 appearing in the monomial `a**c**b`.
 
@@ -198,7 +220,7 @@ does the same thing as
 This option can also be set globally for all calls to the `NCReplace`
 family of functions in a `NCAlgebra` session by calling
 
-    SetOptions[NCReplace, ApplyPowerRule -> True]
+    SetOptions[NCReplace, ApplyPowerRule -> True];
 
 After that, all calls to `NCReplace`, `NCReplaceAll`,
 `NCReplaceRepeated`, and related function, will be done with the option
@@ -206,7 +228,7 @@ After that, all calls to `NCReplace`, `NCReplaceAll`,
 
 To revert to the default behavior just set
 
-    SetOptions[NCReplace, ApplyPowerRule -> False]
+    SetOptions[NCReplace, ApplyPowerRule -> False];
 
 ### Trouble with `Block` and `Module`
 
@@ -231,17 +253,17 @@ and run
 	Block[{i = a}, i + m]
 
 which returns the "expected"
-
-	a + a**a
-
+```output
+a + a^2
+```
 versus
 
 	Module[{i = a}, i + m]
 
 which returns the "surprising"
-
-	a + i**i
-
+```output
+a + i**i
+```
 The reason for this behavior is that `Block` effectively evaluates `i`
 as a *local variable* and evaluates `m` using whatever values are available
 at the time of evaluation, whereas `Module` only evaluates the symbol
@@ -252,17 +274,17 @@ rules and substitution inside a `Module`. For example:
 	Block[{i = a}, i_ -> i]
 
 will return
-
-	i_ -> a
-
+```output
+i_ -> a
+```
 whereas
 
 	Module[{i = a}, i_ -> i]
 
 will return
-
-	i_ -> i
-
+```output
+i_ -> i
+```
 More devastating for `NCAlgebra` is the fact that `Module` will hide
 local definitions from rules, which will often lead to disaster if
 local variables need to be declared noncommutative. Consider for
@@ -291,17 +313,17 @@ into `y**x`.  The problem is that only one of those definitions work
 	G[x**y]
 
 returns the "expected"
-
-	y**x
-
+```output
+y**x
+```
 whereas
 
 	F[x**y]
 
 returns
-
-	x y
-
+```output
+x y
+```
 which completely destroys the noncommutative product. The reason for
 the catastrophic failure of the definition of `F`, which is inside a
 `Module`, is that the letters `aa` and `bb` appearing in `rule` are
@@ -314,7 +336,7 @@ whatever value they might have locally at the time of execution.
 
 The above subtlety often manifests itself partially, sometimes causing
 what might be perceived as some kind of *erratic behavior*. Indeed, if
-one had used symbols that were already declared globaly noncommutative
+one had used symbols that were already declared globally noncommutative
 by `NCAlgebra`, such as single small cap roman letters as in the
 definition:
 
@@ -379,37 +401,41 @@ the call
 	m1**m2
 
 results in 
-
-	{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
-
+```output
+{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
+```
 Upon calling
 
 	m1**m2 // NCMatrixExpand
 
-evaluation takes place returning
-
-	{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
-	
+the matrix product evaluation takes place returning
+```output
+{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
+```	
 which is what would have arisen from calling `NCDot[m1,m2]`[^matmult]. Likewise
 
 	inv[m1]
 
 results in
-
-	inv[{{a, b}, {c, d}}]
-
+```output
+inv[{{a, b}, {c, d}}]
+```
 and
 
 	inv[m1] // NCMatrixExpand
 	
 returns the evaluated result
-
-	{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
-	 {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
-
+```output
+{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+ {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+```
 or, using `MatrixForm`:
 
-$\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}$
+    inv[m1] // NCMatrixExpand // MatrixForm
+
+returns
+
+$$\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}$$
 
 [^matmult]: Formerly `MatMult[m1,m2]`.
 
@@ -418,37 +444,37 @@ A less trivial example is
 	m3 = m1**inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1]**m1
 
 that returns 
-
-	-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
-	    {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]
-
+```output
+-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
+     {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]
+```
 Expanding
 
 	NCMatrixExpand[m3]
 
 results in
-
-	{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
-	    (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
-	    (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
-	  a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
-	    inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
-		b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
-		(1 + a)**inv[c]**(1 + d)]** b}, 
-	 {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
-	    inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
-	  1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
-	    a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
-		inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}
-	
-and finally 
+```output
+{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
+  a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
+    inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
+	b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
+	(1 + a)**inv[c]**(1 + d)]** b}, 
+ {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
+    inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
+  1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
+    a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
+	inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}
+```	
+and, finally,
 
 	NCMatrixExpand[m3] // NCSimplifyRational	
 	
 returns
-
-	{{0, 0}, {0, 0}}
-	
+```output
+{{0, 0}, {0, 0}}
+```	
 as expected.
 
 ### Trouble with `Plus` (`+`) and matrices
@@ -460,29 +486,33 @@ reason for that is that `Plus` is `Listable`, and an expression like
     z + m1
 
 where `m1` is an array and `z` is not, is automatically expanded into
-
-    {{a + z, b + z}, {c + z, d + z}}
-
+```output
+{{a + z, b + z}, {c + z, d + z}}
+```
 or, using `MatrixForm`:
 
-$\begin{bmatrix} a + z & b + z \\ c + z & d + z \end{bmatrix}$
+    z + m1 // MatrixForm
+
+resulting in
+
+$$\begin{bmatrix} a + z & b + z \\ c + z & d + z \end{bmatrix}$$
 
 Because of this "feature", the expression
 
 	m1**m2 + m2 // NCMatrixExpand
 	
 evaluates to the "wrong" result
-
-	{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
-	 {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
-	 {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
-	 {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}
-
+```output
+{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
+ {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
+ {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
+ {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}
+```
 which is different than the "correct" result
-
-	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
-	 {e + c**d + d**e, 3 + 2 c + 3 d}}
-
+```output
+{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}
+```
 which is returned by either
 
 	NCMatrixExpand[m1**m2] + m2
@@ -506,27 +536,27 @@ section [Replace with matrices](#ReplaceWithMatrices), the command
 	NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
 	
 produces the expected result:
-
-	{{d + a**d + b**e, 2 + 2 a + 3 b}, 
-	 {e + c**d + d**e, 3 + 2 c + 3 d}}
-
+```output
+{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}
+```
 Note that the above behavior might be erratic, since in an expression like
 
 	m1**m2 + m2**m1
 	
 in which `**` is kept unevaluated as in
-
-	{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
-
+```output
+{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
+```
 the command
 	
 	m1**m2 + m2**m1 // NCMatrixExpand
 	
 expands to the expected result
-
-	{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
-	 {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
-
+```output
+{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+ {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
+```
 
 ## Polynomials with commutative coefficients {#PolysWithCommutativeCoefficients}
 
@@ -548,23 +578,21 @@ Those two properties allow for an efficient implementation of
 Before getting into details, to see how much more efficient `NCPoly`
 is when compared with standard `NCAlgebra` objects try
 
-	Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 20, 5}]
+	Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 15, 5}]
 
 which would typically return something like
-
-	{0.000088, 0.001074, 0.017322, 0.240704, 3.61492, 52.0254}
-
+```output
+{0.000088, 0.001074, 0.017322, 0.240704, 3.61492}
+```
 whereas the equivalent
 
     << NCPoly`
-	Table[Timing[(1 + NCPolyMonomial[{x}, {x}])^i][[1]], {i, 0, 20, 5}]
+	Table[Timing[(1 + NCPolyMonomial[{x}, {x}])^i][[1]], {i, 0, 15, 5}]
 
 would return
-
-	{0.00097, 0.001653, 0.002208, 0.003908, 0.004306, 0.005049}
-
-Beware that `NCPoly` objects have limited functionality and should
-still be considered experimental at this point.
+```output
+{0.00097, 0.001653, 0.002208, 0.003908, 0.004306}
+```
 
 The best way to work with `NCPoly` in `NCAlgebra` is by loading the
 package [`NCPolyInterface`](#PackageNCPolyInterface):
@@ -586,18 +614,18 @@ in the definition of `vars` will be explained below, when we introduce
 *ordering*. See also Section
 [Noncommutative Gröbner Basis](#NCGB). The result in this case is the
 `NCPoly` object
-	
-	NCPoly[{1, 1, 1}, <|{0, 0, 0, 0} -> 1, {0, 0, 2, 0} -> 1, {1, 1, 1, 5} -> -2|>]
-	
+```output
+NCPoly[{1, 1, 1}, <|{0, 0, 0, 0} -> 1, {0, 0, 2, 0} -> 1, {1, 1, 1, 5} -> -2|>]
+```	
 Conversely the command [`NCPolyToNC`](#NCPolyToNC) converts an
 `NCPoly` back into `NCAlgebra` format. For example
 
 	NCPolyToNC[p, vars]
 	
 returns
-
-	1 + x**x - 2 x**y**z
-	
+```output
+1 + x^2 - 2 x**y**z
+```	
 as expected. Note that an `NCPoly` object does not store symbols, but
 rather a representation of the polynomial based on specially encoded
 monomials. This is the reason why one should provide `vars` as an
@@ -621,9 +649,9 @@ the sequence of symbols in the list of variables `vars`. For example:
 	p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
 
 produces:
-
-	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
-
+```output
+NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
+```
 The sequence of braces in the list of *variables* encodes the
 *ordering* to be used for sorting `NCPoly`s. Orderings specify how
 monomials should be ordered, and is discussed in detail in
@@ -635,7 +663,7 @@ polynomial ordering implied by a list of symbols. For example
 
 prints out 
 
-$x \ll y \ll z$
+$$x \ll y \ll z$$
 
 and 
 
@@ -643,7 +671,7 @@ and
 
 prints out 
 
-$x \ll y < z$
+$$x \ll y < z$$
 
 from where you can see that grouping variables inside braces induces a
 graded type ordering, as discussed in [Noncommutative Gröbner
@@ -664,45 +692,45 @@ is always expanded. For example:
 	1 + NCPolyMonomial[{x, y}, vars] - 2 NCPolyMonomial[{y, x}, vars]
 
 returns 
-
-	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 1, {1, 1, 3} -> -2|>]
-
+```output
+NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 1, {1, 1, 3} -> -2|>]
+```
 and
 
 	p = (1 + NCPolyMonomial[{x}, vars]**NCPolyMonomial[{y}, vars])^2
 
 returns
-	
-	NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
-
+```output
+NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
+```
 Another convenience function is `NCPolyDisplay` which returns a list
 with the monomials appearing in an `NCPoly` object. For example:
 
     NCPolyDisplay[p, vars]
 
 returns
-
-	{x.y.x.y, 2 x.y, 1}
-
+```output
+{x.y.x.y, 2 x.y, 1}
+```
 The reason for displaying an `NCPoly` object as a list is so that the
 monomials can appear in the same order as they are stored. Using
 `Plus` would revert to Mathematica's default ordering. For example
 
-	p = NCToNCPoly[1 + x**x**x - 2 x**x + z, vars]
+	p = NCToNCPoly[1 + x**y**x - 2 x**x + z, vars]
 	NCPolyDisplay[p, vars]
 
 returns
-
-	{z, x.x.x, -2 x.x, 1}
-
+```output
+{x.y.x, z, -2 x.x, 1}
+```
 whereas
 
 	NCPolyToNC[p, vars]
 
 would return
-
-	1 + z - 2 x**x + x**x**x
-
+```output
+1 - 2 x^2 + z + x**y**x
+```
 in which the sorting of the monomials has been destroyed by `Plus`.
 
 The monomials appear sorted in decreasing order from left to right,
@@ -711,16 +739,16 @@ with `z` being the *leading term* in the above example.
 With `NCPoly` the Mathematica command `Sort` is modified to sort lists
 of polynomials. For example
 
-	polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars]
+	polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars];
 	ColumnForm[NCPolyDisplay[Sort[polys], vars]]
 
 returns
-
-	{x.x.x}
-	{z}
-	{y.x, -x.x}
-	{2 y.x, -z}
-
+```output
+{x.x.x}
+{z}
+{y.x, -x.x}
+{2 y.x, -z}
+```
 `Sort` produces a list of polynomials sorted in *ascending* order
 based on their *leading terms*.
 
@@ -733,7 +761,7 @@ considered to be unknown, i.e. *variables*, where others are
 considered to be known, i.e. *coefficients*. For example, in many
 problems in systems and control the following expression
 
-$p(x) = a x + x a^T - x b x + c$
+$$p(x) = a x + x a^T - x b x + c$$
 
 is often seen as a polynomial in the noncommutative unknown `x` with
 known noncommutative coefficients `a`, `b`, and `c`. A typical problem
@@ -753,18 +781,18 @@ and forth between `NCAlgebra` and `NCPolynomial`. For example
 converts the polynomial `a**x + x**tp[a] - x**b**x + c` from
 the standard `NCAlgebra` format into an `NCPolynomial` object. The
 result in this case is the `NCPolynomial` object
-
-	NCPolynomial[c, <|{x} -> {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -> {{-1, 1, b, 1}}|>, {x}]
-
+```output
+NCPolynomial[c, <|{x} -> {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -> {{-1, 1, b, 1}}|>, {x}]
+```
 Conversely the command [`NCPolynomialToNC`](#NCPolynomialToNC)
 converts an `NCPolynomial` back into `NCAlgebra` format. For example
 
 	NCPolynomialToNC[p]
 	
 returns
-
-	c + a**x + x**tp[a] - x**b**x
-
+```output
+c + a**x + x**tp[a] - x**b**x
+```
 An `NCPolynomial` does store information about the polynomial symbols
 and a list of variables is required only at the time of creation of
 the `NCPolynomial` object.
@@ -776,26 +804,26 @@ another `NCPolynomial` object that is always expanded. For example:
 	1 + NCToNCPolynomial[x**y, vars] - 2 NCToNCPolynomial[y**x, vars]
 
 returns 
-
-	NCPolynomial[1, <|{y**x} -> {{-2, 1, 1}}, {x**y} -> {{1, 1, 1}}|>, {x, y}]
-
+```output
+NCPolynomial[1, <|{y**x} -> {{-2, 1, 1}}, {x**y} -> {{1, 1, 1}}|>, {x, y}]
+```
 and
 
 	(1 + NCToNCPolynomial[x, vars]**NCToNCPolynomial[y, vars])^2
 
 returns
-
-	NCPolynomial[1, <|{x**y**x**y} -> {{1, 1, 1}}, {x**y} -> {{2, 1, 1}}|>, {x, y}]
-
+```output
+NCPolynomial[1, <|{x**y**x**y} -> {{1, 1, 1}}, {x**y} -> {{2, 1, 1}}|>, {x, y}]
+```
 To see how much more efficient `NCPolynomial` is when compared with standard
 `NCAlgebra` objects try
 
-	Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 20, 5}]
+	Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 15, 5}]
 
 would return
-
-	{0.000493, 0.003345, 0.005974, 0.013479, 0.018575, 0.02896}
-
+```output
+{0.000493, 0.003345, 0.005974, 0.013479, 0.018575}
+```
 As you can see, `NCPolynomial`s are not as efficient as `NCPoly`s but
 still much more efficient than `NCAlgebra` polynomials.
 
@@ -806,9 +834,9 @@ example
 	NCPSort[p]
 
 returns
-
-	{c, a**x, x**tp[a], -x**b**x}
-
+```output
+{c, a**x, x**tp[a], -x**b**x}
+```
 A useful feature of `NCPolynomial` is the capability of handling
 polynomial matrices. For example
 
@@ -873,9 +901,9 @@ linear polynomial matrices.
 
 Another interesting class of nc polynomials is that of linear
 polynomials, which can be factored in the form:
-$$
-	s(x) = l (F \otimes x) r
-$$
+
+$$s(x) = l (F \otimes x) r$$
+
 where $l$ and $r$ are vectors with symbolic expressions and $F$ is a
 numeric matrix. This functionality is in the package
 
@@ -889,18 +917,18 @@ linear nc polynomial into the the above form. For example:
 	{const, lin} = NCToNCSylvester[expr, vars];
 
 which returns
-
-	const = 1
-
+```output
+const = 1
+```
 and an `Association` `lin` containing the factorization. For example
 
 	lin[x]
 	
 returns a list with the left and right vectors `l`
 and `r` and the coefficient array `F`. 
-
-	{{1, a}, {1, a^T}, SparseArray[< 2 >, {2, 2}]}
-
+```output
+{{1, a}, {1, a^T}, SparseArray[< 2 >, {2, 2}]}
+```
 which in this case is the matrix:
 
 $$
@@ -915,9 +943,9 @@ and
 	lin[tp[y]]
 	
 returns
-
-	{{d^T}, {b^T}, SparseArray[< 1 >, {1, 1}]}
-
+```output
+{{d^T}, {b^T}, SparseArray[< 1 >, {1, 1}]}
+```
 Note that transposes and adjoints are treated as independent
 variables.
 
@@ -933,9 +961,9 @@ possible number of terms, as explaining in detail in
 	NCSylvesterToNC[{const, lin}]
 	
 produces:
-
-	(a + b)**x**(c - d) + (a + b)**y**(-c + d)
-
+```output
+(a + b)**x**(c - d) + (a + b)**y**(-c + d)
+```
 This factorization even works with linear matrix polynomials, and is
 used by the our semidefinite programming algorithm (see Chapter
 [Semidefinite Programming](#SemidefiniteProgramming)) to factor linear
@@ -948,9 +976,9 @@ matrix inequalities in the least possible number of terms. For example:
 	{const, lin} = NCToNCSylvester[expr, vars]
 
 result in:
-
-	const = SparseArray[< 6 >, {3, 3}]
-	lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
-
+```output
+const = SparseArray[< 6 >, {3, 3}]
+lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
+```
 See [@oliveira:SSP:2012] for details on the structure of the constant
 array $F$ in this case.

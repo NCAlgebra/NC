@@ -717,7 +717,9 @@ default. For example:
 
 results in
 
-    a**b-b**a
+``` output
+a**b-b**a
+```
 
 while
 
@@ -747,7 +749,9 @@ using `SetNonCommutative`. For example:
 
 results in:
 
-    A**B-B**A
+``` output
+A**B-B**A
+```
 
 Likewise, symbols can be made commutative using `SetCommutative`. For example:
 
@@ -763,7 +767,9 @@ can be typed rather than the longer `SetNonCommutative`:
 
 results in:
 
-    -a**A+A**a
+``` output
+-a**A+A**a
+```
 
 One can check whether a given symbol is commutative or not using
 `CommutativeQ` or `NonCommutativeQ`. For example:
@@ -855,7 +861,9 @@ adjoints that everyone uses constantly are built-in. For example:
 
 leads to
 
-    tp[b]**tp[a]
+``` output
+tp[b]**tp[a]
+```
 
 and
 
@@ -863,9 +871,11 @@ and
 
 returns
 
-    tp[a]+tp[b]
+``` output
+tp[a]+tp[b]
+```
 
-Likewise `tp[tp[a]] == a` and `tp` for anything for which
+Likewise, `tp[tp[a]] == a` and `tp` for anything for which
 `CommutativeQ` returns `True` is simply the identity. For example
 `tp[5] == 5`, `tp[2 + 3I] == 2 + 3 I`, and `tp[B] == B`.
 
@@ -889,9 +899,11 @@ distribute over sums so that an expression like
 
     tr[a ** b - b ** a]
 
-always simplifies to zero. Also `b ** a ** tr[b ** a]` simpplifies to
+always simplifies to zero. Also `b ** a ** tr[b ** a]` simplifies to
 
-    tr[a ** b] a ** b
+``` output
+tr[a ** b] a ** b
+```
 
 because `tr` is a commutative function. See
 [SetCommutativeFunction](#setcommutativefunction).
@@ -900,9 +912,15 @@ A more interesting example is
 
     expr = (a ** b - b ** a)^3
 
-for which `NCExpand[tr[expr]]` evaluates to
+for which
 
-    3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]
+    NCExpand[tr[expr]]
+
+evaluates to
+
+``` output
+3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]
+```
 
 Use [NCMatrixExpand](#ncmatrixexpand) to expand `tr` over matrices
 with noncommutative entries. For example,
@@ -911,7 +929,9 @@ with noncommutative entries. For example,
 
 evaluates to
 
-    tr[a] + tr[d]
+``` output
+tr[a] + tr[d]
+```
 
 ## Replace
 
@@ -924,7 +944,9 @@ so you must use our `NC` versions of these commands. For example:
 
 results in
 
-    x**c
+``` output
+x**c
+```
 
 and
 
@@ -932,7 +954,9 @@ and
 
 results in
 
-    c+tp[a]**tp[b]
+``` output
+c+tp[a]**tp[b]
+```
 
 Use [NCMakeRuleSymmetric](#ncmakerulesymmetric) and
 [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint) to automatically
@@ -942,7 +966,9 @@ create symmetric and self adjoint versions of your rules:
 
 returns
 
-    c + tp[c]
+``` output
+c + tp[c]
+```
 
 > **WARNING:** The change in internal representation introduced in
 > **Version 6**, in which repeated letters in monomials are represented
@@ -973,7 +999,9 @@ understood in the example:
 
 that results in
 
-    a**b
+``` output
+a**b
+```
 
 and
 
@@ -981,7 +1009,9 @@ and
 
 that results in
 
-    a
+``` output
+a
+```
 
 Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
 `NCReplaceList`, which are analogous to the standard `ReplaceAll`
@@ -1004,7 +1034,9 @@ The command `NCExpand` expands noncommutative products. For example:
 
 returns
 
-    a**x+b**x
+``` output
+a**x+b**x
+```
 
 Conversely, one can collect noncommutative terms involving same powers
 of a symbol using `NCCollect`. For example:
@@ -1013,7 +1045,9 @@ of a symbol using `NCCollect`. For example:
 
 recovers
 
-    (a+b)**x
+``` output
+(a+b)**x
+```
 
 `NCCollect` groups terms by degree before collecting and accepts more
 than one variable. For example:
@@ -1023,7 +1057,9 @@ than one variable. For example:
 
 returns
 
-    y**c+y**d+(a+b)**x**(1+y)
+``` output
+y**c+y**d+(a+b)**x**(1+y)
+```
 
 and
 
@@ -1031,7 +1067,9 @@ and
 
 returns
 
-    (a+b)**x+y**(c+d)+(a+b)**x**y
+``` output
+(a+b)**x+y**(c+d)+(a+b)**x**y
+```
 
 Note that the last term has degree 2 in `x` and `y` and therefore does
 not get collected with the first order terms.
@@ -1043,7 +1081,9 @@ The list of variables accepts `tp`, `aj` and
 
 returns
 
-    z+tp[x]**(a+b)**x
+``` output
+z+tp[x]**(a+b)**x
+```
 
 Alternatively one could use
 
@@ -1060,7 +1100,9 @@ There is also a stronger version of collect called `NCStrongCollect`.
 
 produces
 
-    y**(c+d)+(a+b)**x**(1+y)
+``` output
+y**(c+d)+(a+b)**x**(1+y)
+```
 
 Keep in mind that `NCStrongCollect` often collects *more* than one
 would normally expect.
@@ -1074,7 +1116,9 @@ would normally expect.
 >
 > produces
 >
->     a ** b ** a ** b ** a ** b
+> ``` output
+> a ** b ** a ** b ** a ** b
+> ```
 >
 > and
 >
@@ -1082,7 +1126,9 @@ would normally expect.
 >
 > produces
 >
->     (a ** b)^3
+> ``` output
+> (a ** b)^3
+> ```
 
 `NCAlgebra` provides some commands for noncommutative polynomial
 manipulation that are similar to the native Mathematica (commutative)
@@ -1096,12 +1142,15 @@ package [NCPoly](#ncpoly).
 
 For example:
 
+    SetCommutative[A, B]
     expr = B + A y**x**y - 2 x
-    NCVariables[expr]
+    vars = NCVariables[expr]
 
 returns
 
-    {x,y}
+``` output
+{x,y}
+```
 
 and
 
@@ -1111,9 +1160,11 @@ and
 
 returns
 
-    {B, -2, A}
-    {1, x, y**x**y}
-    {1 -> B, x -> -2, y**x**y -> A}
+``` output
+{B, -2, A}
+{1, x, y**x**y}
+{1 -> B, x -> -2, y**x**y -> A}
+```
 
 Also for testing
 
@@ -1155,7 +1206,7 @@ returns `x**y**x - x**x**y`, and
 returns `0`.
 
 The above commands are based on special packages for efficiently
-storing and calcuating with nc polynomials. Those packages are
+storing and calculating with nc polynomials. Those packages are
 
 - [`NCPolynomial`](#ncpolynomial): which handles polynomials with
   noncommutative coefficients, and
@@ -1246,7 +1297,9 @@ then
 
 returns
 
-    h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b
+``` output
+h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b
+```
 
 In the case of more than one variables
 `NCDirectionalD[expr, {x,h}, {y,k}]` takes the directional derivative
@@ -1261,7 +1314,9 @@ then
 
 returns
 
-    h**q**x + x**q*h - y**h - k**x
+``` output
+h**q**x + x**q*h - y**h - k**x
+```
 
 A further example, if:
 
@@ -1273,7 +1328,9 @@ then its directional derivative in the direction `h` is
 
 which returns
 
-    h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
+``` output
+h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d
+```
 
 The command `NCGrad` calculates nc *gradients*[^3].
 
@@ -1283,7 +1340,9 @@ For example:
 
 returns the nc gradient
 
-    a**x**b + b**x**a + c**x**d + d**x**c
+``` output
+a**x**b + b**x**a + c**x**d + d**x**c
+```
 
 A further example, if:
 
@@ -1295,7 +1354,9 @@ is a function on variables `x` and `y` then
 
 returns the nc gradient list
 
-    {a**x**b + b**x**a + c**y**d, d**x**c}
+``` output
+{a**x**b + b**x**a + c**y**d, d**x**c}
+```
 
 **Version 5** introduced experimental support for integration of nc
 polynomials. See [`NCIntegrate`](#ncintegrate).
@@ -1310,7 +1371,7 @@ represented in Mathematica using *lists of lists*. For example
 
 is a representation for the matrix
 
-![\begin{bmatrix} a & b \\ c & d \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20%26%20d%20%5Cend%7Bbmatrix%7D&mode=inline)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cleft%5B%5Cbegin%7Barray%7D%7Bcc%7D%20%0Aa%20%26%20b%20%5C%5C%20%0Ac%20%26%20d%20%0A%5Cend%7Barray%7D%5Cright%5D)
 
 The Mathematica command `MatrixForm` output pretty
 matrices. `MatrixForm[m]` prints `m` in a form similar to the above
@@ -1335,16 +1396,18 @@ formula[^4] for an nc matrix. For example
 
 returns
 
-    {{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
-     {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+``` output
+{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+{-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+```
 
-or, using `MatrixForm`
+or, using `MatrixForm`,
 
-`NCInverse[m] // MatrixForm NCInverse[m] // MatrixForm`
+    NCInverse[m] // MatrixForm
 
 returns
 
-![\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20%0Aa%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%0A-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%0A%5Cend%7Bbmatrix%7D)
 
 Note that `a` and `d - c**inv[a]**b` were assumed invertible during the
 calculation.
@@ -1358,7 +1421,9 @@ which is similar to Mathematica’s `Dot`. For example
 
 result in
 
-    {{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}
+``` output
+{{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}
+```
 
 Note that products of nc symbols appearing in the
 matrices are multiplied using `**`. Compare that with the standard
@@ -1375,7 +1440,9 @@ matrices. That is
 
 returns
 
-    {{aj[a],tp[c]},{co[b],d}}
+``` output
+{{aj[a],tp[c]},{co[b],d}}
+```
 
 In previous versions one had to use the special commands `tpMat`,
 `ajMat`, and `coMat`. Those are still supported for backward
@@ -1404,39 +1471,44 @@ can be used as
 
 which returns
 
-    lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
-    p = {1, 2}
+``` output
+lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
+p = {1, 2}
+```
 
 Using `MatrixForm`:
 
-<div style="display:block;">
+    MatrixForm[lu]
 
-![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+results in
 
-</div>
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20%0Aa%20%26%20b%20%5C%5C%20%0Ac%20a%5E%7B-1%7D%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%0A%5Cend%7Bbmatrix%7D)
 
 The list `p` encodes the sequence of permutations calculated during
 the execution of the algorithm. The matrix `lu` contains the factors
 ![L](https://render.githubusercontent.com/render/math?math=L&mode=inline) and ![U](https://render.githubusercontent.com/render/math?math=U&mode=inline) in the way most common to numerical analysts. These factors can be recovered using
 
-    {l, u} = GetFullLUMatrices[lu]
+    {ll, uu} = GetFullLUMatrices[lu]
 
 resulting in this case in
 
-    l = {{1, 0}, {c**inv[a], 1}}
-    u = {{a, b}, {0, d - c**inv[a]**b}}
+``` output
+ll = {{1, 0}, {c**inv[a], 1}}
+uu = {{a, b}, {0, d - c**inv[a]**b}}
+```
 
 Using `MatrixForm`:
 
-<div style="display:block;">
+    MatrixForm[ll]
+    MatrixForm[uu]
 
-![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%20c%20a%5E%7B-1%7D%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%5Cend%7Bbmatrix%7D)
+results in
 
-</div>
+![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A1%20%26%200%20%5C%5C%20%0Ac%20a%5E%7B-1%7D%20%26%201%20%0A%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Aa%20%26%20b%20%5C%5C%20%0A0%20%26%20d%20-%20c%20a%5E%7B-1%7D%20b%20%0A%5Cend%7Bbmatrix%7D)
 
-To verify that ![M = L U](https://render.githubusercontent.com/render/math?math=M%20%3D%20L%20U&mode=inline) input
+To verify that ![M = L U](https://render.githubusercontent.com/render/math?math=M%20%3D%20L%20U&mode=inline), input
 
-    m - NCDot[l, u]
+    m - NCDot[ll, uu]
 
 which should return a zero matrix.
 
@@ -1447,49 +1519,54 @@ instance,
 
     m = {{a, b}, {1, d}}
     {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-    {l, u} = GetFullLUMatrices[lu]
+    {ll, uu} = GetFullLUMatrices[lu]
 
-results in the factors
+result in the factors
 
-    l = {{1, 0}, {a, 1}}
-    u = {{1, d}, {0, b - a**d}}
+``` output
+ll = {{1, 0}, {a, 1}}
+uu = {{1, d}, {0, b - a**d}}
+```
 
 and a permutation list
 
-    p = {2, 1}
+``` output
+p = {2, 1}
+```
 
 which indicates that the number `1`, appearing in the second row, was
 used as the pivot rather than the symbol `a` appearing on the first
-row. Because of the permutation, to verify that ![P M = L U](https://render.githubusercontent.com/render/math?math=P%20M%20%3D%20L%20U&mode=inline) input
+row. Because of the permutation, to verify that ![P M = L U](https://render.githubusercontent.com/render/math?math=P%20M%20%3D%20L%20U&mode=inline), input
 
-    m[[p]] - NCDot[l, u]
+    m[[p]] - NCDot[ll, uu]
 
-which should return a zero matrix. Note that in the above example the permutation matrix
-![P](https://render.githubusercontent.com/render/math?math=P&mode=inline) is never constructed. Instead, the rows of ![M](https://render.githubusercontent.com/render/math?math=M&mode=inline) are directly permuted using
-Mathematica’s `Part` (`[[]]`) command. Of course, if one prefers to work with permutation matrices, they can be easily obtained by permuting the rows of the identity matrix as in the following example
+which should return a zero matrix. Note that in the above example the
+permutation matrix ![P](https://render.githubusercontent.com/render/math?math=P&mode=inline) is never constructed. Instead, the rows of ![M](https://render.githubusercontent.com/render/math?math=M&mode=inline)
+are directly permuted using Mathematica’s `Part` (`[[]]`) command. Of
+course, if one prefers to work with permutation matrices, they can be
+easily obtained by permuting the rows of the identity matrix as in the
+following example
 
     p = {2, 1, 3}
     IdentityMatrix[3][[p]] // MatrixForm
 
 to produce
 
-<div style="display:block;">
-
-![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%200%20%26%201%20%26%200%20%5C%5C%201%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
-
-</div>
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20%0A0%20%26%201%20%26%200%20%5C%5C%20%0A1%20%26%200%20%26%200%20%5C%5C%20%0A0%20%26%200%20%26%201%20%0A%5Cend%7Bbmatrix%7D)
 
 Likewise
 
     m = {{a + b, b}, {c, d}}
     {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-    {l, u} = GetFullLUMatrices[lu]
+    {ll, uu} = GetFullLUMatrices[lu]
 
 returns
 
-    p = {2, 1}
-    l = {{1, 0}, {(a + b)**inv[c], 1}} 
-    u = {{c, d}, {0, b - (a + b)**inv[c]**d}}
+``` output
+p = {2, 1}
+ll = {{1, 0}, {(a + b)**inv[c], 1}} 
+uu = {{c, d}, {0, b - (a + b)**inv[c]**d}}
+```
 
 showing that the *simpler* expression `c` was taken as a pivot instead
 of `a + b`.
@@ -1509,30 +1586,35 @@ example
 
 returns the *left* and *right* permutation lists
 
-    p = {2, 1}
-    q = {1, 2}
+``` output
+p = {2, 1}
+q = {1, 2}
+```
 
 and `rank` equal to `1`. Note that `p = {2, 1}` and `q = {1,2}` tell us that the element that was pivoted on was the symbol `a`, which is the first entry of the second row, rather then `2 a`, which is the first entry of the first row, because `a` is *simpler* than `2 a` . The ![L](https://render.githubusercontent.com/render/math?math=L&mode=inline) and ![U](https://render.githubusercontent.com/render/math?math=U&mode=inline) factors can be obtained as
 before using
 
-    {l, u} = GetFullLUMatrices[lu]
+    {ll, uu} = GetFullLUMatrices[lu]
 
 to get
 
-    l = {{1, 0}, {2, 1}}
-    u = {{a, b}, {0, 0}}
+``` output
+ll = {{1, 0}, {2, 1}}
+uu = {{a, b}, {0, 0}}
+```
 
 Using `MatrixForm`:
 
-<div style="display:block;">
+    MatrixForm[ll]
+    MatrixForm[uu]
 
-![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%5C%5C%202%20%26%201%20%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%5C%5C%200%20%26%200%20%5Cend%7Bbmatrix%7D)
+results in
 
-</div>
+![inline equation](https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A1%20%26%200%20%5C%5C%20%0A2%20%26%201%20%0A%5Cend%7Bbmatrix%7D%2C%20%5Cqquad%0AU%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Aa%20%26%20b%20%5C%5C%20%0A0%20%26%200%20%0A%5Cend%7Bbmatrix%7D)
 
 In this case, to verify that ![P M Q = L U](https://render.githubusercontent.com/render/math?math=P%20M%20Q%20%3D%20L%20U&mode=inline) input
 
-    NCDot[l, u] - m[[p, q]]
+    NCDot[ll, uu] - m[[p, q]]
 
 which should return a zero matrix. As with partial pivoting, the
 permutation matrices ![P](https://render.githubusercontent.com/render/math?math=P&mode=inline) and ![Q](https://render.githubusercontent.com/render/math?math=Q&mode=inline) are never constructed. Instead we
@@ -1548,32 +1630,37 @@ Finally [`NCLDLDecomposition`](#ncldldecomposition) computes the
 
 returns `ldl`, which contain the factors, and
 
-    p = {1, 2}
-    s = {1, 1}
-    rank = 2
+``` output
+p = {1, 2}
+s = {1, 1}
+rank = 2
+```
 
 The list `p` encodes left and right permutations, `s` is a list
 specifying the size of the diagonal blocks (entries can be either 1 or
 2). The factors can be obtained using
 [`GetLDUMatrices`](#getldumatrices) as in
 
-    {l, d, u} = GetFullLDUMatrices[ldl, s]
+    {ll, dd, uu} = GetFullLDUMatrices[ldl, s]
 
 which in this case returns
 
-    l = {{1, 0}, {b**inv[a], 1}}
-    d = {{a, 0}, {0, c - b**inv[a]**b}}
-    u = {{1, inv[a]**b}, {0, 1}}}
+``` output
+ll = {{1, 0}, {b**inv[a], 1}}
+dd = {{a, 0}, {0, c - b**inv[a]**b}}
+uu = {{1, inv[a]**b}, {0, 1}}}
+```
 
 Because ![P M P^T = L D L^T](https://render.githubusercontent.com/render/math?math=P%20M%20P%5ET%20%3D%20L%20D%20L%5ET&mode=inline),
 
-    NCDot[l, d, u] - m[[p, p]]
+    NCDot[ll, dd, uu] - m[[p, p]]
 
 is the zero matrix and ![U = L^T](https://render.githubusercontent.com/render/math?math=U%20%3D%20L%5ET&mode=inline).
 
 `NCLDLDecomposition` works only on symmetric matrices and, whenever
-possible, will make invertibility and symmetry assumptions on variables so that it can run
-successfully. If not possible it will warn the users.
+possible, will make invertibility and symmetry assumptions on
+variables so that it can run successfully. If not possible it will
+warn the users.
 
 > **WARNING:** Prior versions contained the command `NCLDUDecomposition`
 > which was deprecated in **Version 5** as its functionality is now
@@ -1598,19 +1685,21 @@ and
 
 the call
 
-    NCMatrixReplaceRepeated[M, {a11 -> m1, a12 -> m2}]
+    MM = NCMatrixReplaceRepeated[M, {a11 -> m1, a12 -> m2}]
 
 produces as a result the matrix
 
-    {{a, b, d, 2}, {c, d, e, 3}}
+``` output
+{{a, b, d, 2}, {c, d, e, 3}}
+```
 
 or, using `MatrixForm`:
 
-<div style="display:block;">
+    MatrixForm[MM]
 
-![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20c%20%26%20d%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D)
+to obtain
 
-</div>
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20%0Aa%20%26%20b%20%26%20d%20%26%202%20%5C%5C%20%0Ac%20%26%20d%20%26%20e%20%26%203%20%0A%5Cend%7Bbmatrix%7D)
 
 Note how the symbols were treated as block-matrices during the substitution. As a second example, with
 
@@ -1618,26 +1707,36 @@ Note how the symbols were treated as block-matrices during the substitution. As 
 
 the command
 
-    NCMatrixReplaceRepeated[M, {a11 -> m1, a22 -> m2}]
+    MM = NCMatrixReplaceRepeated[M, {a11 -> m1, a22 -> m2}]
 
 produces the matrix
 
-    {{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}
+``` output
+{{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}
+```
 
 or, using `MatrixForm`:
 
-![\begin{bmatrix} a & b & 0 & 0 \\ c & d & 0 & 0 \\ 0 & 0 & d & 2 \\ 0 & 0 & e & 3 \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%26%20b%20%26%200%20%26%200%20%5C%5C%20c%20%26%20d%20%26%200%20%26%200%20%5C%5C%200%20%26%200%20%26%20d%20%26%202%20%5C%5C%200%20%26%200%20%26%20e%20%26%203%20%5Cend%7Bbmatrix%7D&mode=inline)
+    MatrixForm[MM]
+
+to obtain
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20%0Aa%20%26%20b%20%26%200%20%26%200%20%5C%5C%20%0Ac%20%26%20d%20%26%200%20%26%200%20%5C%5C%20%0A0%20%26%200%20%26%20d%20%26%202%20%5C%5C%20%0A0%20%26%200%20%26%20e%20%26%203%20%0A%5Cend%7Bbmatrix%7D)
 
 in which the `0` blocks were automatically expanded to fit the adjacent block matrices.
 
-Another feature of `NCMatrixReplace` and its variants is its ability to withold evaluation until all matrix substitutions have taken place. For example,
+Another feature of `NCMatrixReplace` and its variants is its ability
+to withhold evaluation until all matrix substitutions have taken
+place. For example,
 
     NCMatrixReplaceAll[x**y + y, {x -> m1, y -> m2}]
 
 produces
 
-    {{d + a**d + b**e, 2 + 2 a + 3 b}, 
-     {e + c**d + d**e, 3 + 2 c + 3 d}}
+``` output
+{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}
+```
 
 Finally, `NCMatrixReplace` substitutes `NCInverse` for `inv` so that, for instance, the result of
 
@@ -1656,11 +1755,7 @@ The closest related demo to the material in this section is
 When working with nc quadratics it is useful to be able to “factor” the
 quadratic into the following form
 
-<div style="display:block;">
-
 ![inline equation](https://render.githubusercontent.com/render/math?math=q%28x%29%20%3D%20c%20%2B%20s%28x%29%20%2B%20l%28x%29%20M%20r%28x%29)
-
-</div>
 
 where ![s](https://render.githubusercontent.com/render/math?math=s&mode=inline) is linear ![x](https://render.githubusercontent.com/render/math?math=x&mode=inline) and ![l](https://render.githubusercontent.com/render/math?math=l&mode=inline) and ![r](https://render.githubusercontent.com/render/math?math=r&mode=inline) are vectors and ![M](https://render.githubusercontent.com/render/math?math=M&mode=inline) is a
 matrix. Load the package
@@ -1676,12 +1771,14 @@ and use the command
 
 which returns
 
-    left = {tp[x],tp[y]}
-    right = {y, x**d}
-    middle = {{a,b}, {tp[b],c}}
+``` output
+left = {tp[x],tp[y]}
+right = {y, x**d}
+middle = {{a,b}, {tp[b],c}}
+```
 
 and zero `const` and `lin`. The format for the linear part `lin` will
-be discussed lated in Section [Linear](#linear-polynomials). Note that
+be discussed later in Section [Linear](#linear-polynomials). Note that
 coefficients of an nc quadratic may also appear on the left and right
 vectors, as `d` did in the above example. Conversely,
 [`NCQuadraticToNC`](#ncquadratictonc) converts a list with factors
@@ -1691,7 +1788,9 @@ back to an nc expression as in:
 
 which results in
 
-    (tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
+``` output
+(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d
+```
 
 An interesting application is the verification of the domain in which
 an nc rational function is *convex*. This uses the second directional
@@ -1705,7 +1804,9 @@ and calculate its noncommutative directional *Hessian*
 
 This command returns
 
-    2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+``` output
+2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+```
 
 which is quadratic in the direction `h`. The decomposition of the
 nc Hessian using `NCToNCQuadratic`
@@ -1714,17 +1815,15 @@ nc Hessian using `NCToNCQuadratic`
 
 produces
 
-    left = {h, x**h, x**x**h}
-    right = {h**x**x, h**x, h}
-    middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
+``` output
+left = {h, x**h, x**x**h}
+right = {h**x**x, h**x, h}
+middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
+```
 
 Note that the middle matrix
 
-<div style="display:block;">
-
 ![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A2%20%26%202%20x%20%26%202%20x%5E2%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A0%20%26%200%20%26%202%0A%5Cend%7Bbmatrix%7D)
-
-</div>
 
 is not *symmetric*, as one might have expected. The command
 [`NCQuadraticMakeSymmetric`](#ncquadraticmakesymmetric) can fix that
@@ -1736,17 +1835,15 @@ and produce a symmetric decomposition. For the above example
 
 results in
 
-    sleft = {x**x**h, x**h, h}
-    sright = {h**x**x, h**x, h}
-    middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
+``` output
+sleft = {x**x**h, x**h, h}
+sright = {h**x**x, h**x, h}
+middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
+```
 
 in which `middle` is the symmetric matrix
 
-<div style="display:block;">
-
 ![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A0%20%26%200%20%26%202%20%5C%5C%0A0%20%26%202%20%26%202%20x%20%5C%5C%0A2%20%26%202%20x%20%26%202%20x%5E2%0A%5Cend%7Bbmatrix%7D)
-
-</div>
 
 Note the argument `SymmetricVariables -> {x,h}` which tells
 `NCQuadraticMakeSymmetric` to consider `x` and `y` as symmetric
@@ -1784,27 +1881,15 @@ The resulting middle matrix can be factored using
 
 which produces the diagonal factors
 
-<div style="display:block;">
-
 ![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%0A%20%202%20%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%20%5C%5C%0A%20%200%20%26%200%20%26%200%0A%5Cend%7Bbmatrix%7D)
-
-</div>
 
 which indicates the the original nc rational is convex whenever
 
-<div style="display:block;">
-
 ![inline equation](https://render.githubusercontent.com/render/math?math=%281%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%29%5E%7B-1%7D%20%5Csucceq%200)
-
-</div>
 
 or, equivalently, whenever
 
-<div style="display:block;">
-
 ![inline equation](https://render.githubusercontent.com/render/math?math=1%20%2B%20b%20y%20%2B%20y%20b%20-%20a%20x%20a%20%5Csucceq%200)
-
-</div>
 
 The above sequence of calculations is automated by the command
 [`NCConvexityRegion`](#ncconvexityregion) as in
@@ -1814,7 +1899,9 @@ The above sequence of calculations is automated by the command
 
 which results in
 
-    {2 inv[1 + b**y + y**b - a**x**a], 0}
+``` output
+{2 inv[1 + b**y + y**b - a**x**a], 0}
+```
 
 which correspond to the diagonal entries of the LDL decomposition of
 the middle matrix of the nc Hessian.
@@ -1826,6 +1913,9 @@ commands.
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/2_MoreAdvancedCommands.nb`.
+
+    << NC`
+    << NCAlgebra`
 
 ## Advanced Rules and Replacements
 
@@ -1844,25 +1934,33 @@ representation of an expression. That representation might be
 different than one would normally think based on the usual properties
 of mathematical operators. For example, one would expect the rule:
 
-    rule = 1 + x_ -> x
+``` output
+rule = 1 + x_ -> x
+```
 
 to match all the expressions bellow:
 
-    1 + a
-    1 + 2 a
-    1 + a + b
-    1 + 2 a * b
+``` output
+1 + a
+1 + 2 a
+1 + a + b
+1 + 2 a * b
+```
 
 so that
 
-    expr /. rule
+``` output
+expr /. rule
+```
 
 with `expr` taking the above expressions would result in:
 
-    a
-    2 a
-    a + b
-    2 a * b
+``` output
+a
+2 a
+a + b
+2 a * b
+```
 
 Indeed, Mathematica’s attribute `Flat` does precisely that. Note that
 this is still *structural matching*, not *mathematical matching*, since
@@ -1877,24 +1975,32 @@ on a simple rule such as:
 
 so that
 
-    expr /. rule
+``` output
+expr /. rule
+```
 
 will work for some `expr` like
 
-    1 + 2 a**b
+    1 + 2 a**b /. rule
 
 resulting in
 
-    1 + 2 c
+``` output
+1 + 2 c
+```
 
 but will fail to produce the *expected* result in cases like:
 
-    a**b**c
-    c**a**b
-    c**a**b**d
-    1 + 2 a**b**c
+    a**b**c /. rule
 
-That’s what the `NCAlgebra` family of replacement functions discussed in the next section are made for.
+or
+
+    c**a**b /. rule
+    c**a**b**d /. rule
+    1 + 2 a**b**c /. rule
+
+That’s what the `NCAlgebra` family of replacement functions discussed
+in the next section are made for.
 
 ### The fix is `NCReplace`
 
@@ -1907,10 +2013,12 @@ Continuing with the example in the previous section, the calls
 
 produce the results one would expect:
 
-    c**c
-    c**c
-    c**c**d
-    1 + 2 c**c
+``` output
+c^2
+c^2
+c^2**d
+1 + 2 c^2
+```
 
 For this reason, when substituting in `NCAlgebra` it is always safer
 to use functions from the [`NCReplace` package](#ncreplace)
@@ -1924,12 +2032,27 @@ On the same vein, the following substitution rule
 
     NCReplaceAll[2 a**b + c, 2 a -> b]
 
-will return `2 a**b + c` intact since `FullForm[2 a**b]` is indeed
+will return `2 a**b + c` intact since
 
-    Times[2, NonCommutativeMuliply[a, b]]
+    FullForm[2 a**b]
 
-which is not structurally related to `FullForm[2 a]`, which is
-`Times[2, a]`. Of course, in this case a simple solution is to use the
+is actually
+
+``` output
+Times[2, NonCommutativeMuliply[a, b]]
+```
+
+which is not structurally related to
+
+    FullForm[2 a]
+
+which is
+
+``` output
+Times[2, a]
+```
+
+Of course, in this case a simple solution is to use the
 alternative rule:
 
     NCReplaceAll[2 a**b + c, a -> b / 2]
@@ -1945,7 +2068,13 @@ noncommutative monomials using powers. This means that
 
 is internally stored as
 
-    NonCommutativeMultiply[a^3, b, a^2, b, a, b]
+    FullForm[expr]
+
+or
+
+``` output
+NonCommutativeMultiply[a^3, b, a^2, b, a, b]
+```
 
 so that a replacement such as
 
@@ -1953,7 +2082,9 @@ so that a replacement such as
 
 will result in
 
-    a^3**b**a^2**b**c
+``` output
+a^3**b**a^2**b**c
+```
 
 Note how the rule fails to match the `a**b` in the terms `a**b^2` and
 `a**b^3`. This situation might be familiar to an experienced
@@ -1970,7 +2101,9 @@ the following replacement
 
 will produce
 
-    a^2**c**a^2**b**a**b
+``` output
+a^2**c**a^2**b**a**b
+```
 
 after matching `a**b` in the term `a^3**b`, and
 
@@ -1978,7 +2111,9 @@ after matching `a**b` in the term `a^3**b`, and
 
 will produce
 
-    a^2**c**a**c^2
+``` output
+a^2**c**a**c^2
+```
 
 after matching `a**b` in `a^3**b`, `a^2**b`, and `a**b`.
 
@@ -1991,7 +2126,9 @@ monomial. For example,
 
 produces the modified rule[^8]
 
-    a^n_.**c**b^m_. -> a^(n-1)**d**b^(m-1)
+``` output
+a^n_.**c**b^m_. -> a^(n-1)**d**b^(m-1)
+```
 
 which can successfully match powers of the symbols `a` and `b`
 appearing in the monomial `a**c**b`.
@@ -2009,7 +2146,7 @@ does the same thing as
 This option can also be set globally for all calls to the `NCReplace`
 family of functions in a `NCAlgebra` session by calling
 
-    SetOptions[NCReplace, ApplyPowerRule -> True]
+    SetOptions[NCReplace, ApplyPowerRule -> True];
 
 After that, all calls to `NCReplace`, `NCReplaceAll`,
 `NCReplaceRepeated`, and related function, will be done with the option
@@ -2017,7 +2154,7 @@ After that, all calls to `NCReplace`, `NCReplaceAll`,
 
 To revert to the default behavior just set
 
-    SetOptions[NCReplace, ApplyPowerRule -> False]
+    SetOptions[NCReplace, ApplyPowerRule -> False];
 
 ### Trouble with `Block` and `Module`
 
@@ -2043,7 +2180,9 @@ and run
 
 which returns the “expected”
 
-    a + a**a
+``` output
+a + a^2
+```
 
 versus
 
@@ -2051,7 +2190,9 @@ versus
 
 which returns the “surprising”
 
-    a + i**i
+``` output
+a + i**i
+```
 
 The reason for this behavior is that `Block` effectively evaluates `i`
 as a *local variable* and evaluates `m` using whatever values are available
@@ -2064,7 +2205,9 @@ rules and substitution inside a `Module`. For example:
 
 will return
 
-    i_ -> a
+``` output
+i_ -> a
+```
 
 whereas
 
@@ -2072,7 +2215,9 @@ whereas
 
 will return
 
-    i_ -> i
+``` output
+i_ -> i
+```
 
 More devastating for `NCAlgebra` is the fact that `Module` will hide
 local definitions from rules, which will often lead to disaster if
@@ -2103,7 +2248,9 @@ into `y**x`. The problem is that only one of those definitions work
 
 returns the “expected”
 
-    y**x
+``` output
+y**x
+```
 
 whereas
 
@@ -2111,7 +2258,9 @@ whereas
 
 returns
 
-    x y
+``` output
+x y
+```
 
 which completely destroys the noncommutative product. The reason for
 the catastrophic failure of the definition of `F`, which is inside a
@@ -2125,7 +2274,7 @@ whatever value they might have locally at the time of execution.
 
 The above subtlety often manifests itself partially, sometimes causing
 what might be perceived as some kind of *erratic behavior*. Indeed, if
-one had used symbols that were already declared globaly noncommutative
+one had used symbols that were already declared globally noncommutative
 by `NCAlgebra`, such as single small cap roman letters as in the
 definition:
 
@@ -2171,15 +2320,19 @@ the call
 
 results in
 
-    {{a, b}, {c, d}}**{{d, 2}, {e, 3}}
+``` output
+{{a, b}, {c, d}}**{{d, 2}, {e, 3}}
+```
 
 Upon calling
 
     m1**m2 // NCMatrixExpand
 
-evaluation takes place returning
+the matrix product evaluation takes place returning
 
-    {{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
+``` output
+{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}
+```
 
 which is what would have arisen from calling `NCDot[m1,m2]`[^10]. Likewise
 
@@ -2187,7 +2340,9 @@ which is what would have arisen from calling `NCDot[m1,m2]`[^10]. Likewise
 
 results in
 
-    inv[{{a, b}, {c, d}}]
+``` output
+inv[{{a, b}, {c, d}}]
+```
 
 and
 
@@ -2195,12 +2350,18 @@ and
 
 returns the evaluated result
 
-    {{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
-     {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+``` output
+{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+ {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}
+```
 
 or, using `MatrixForm`:
 
-![\begin{bmatrix} a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) & -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d - c a^{-1} b)^{-1} c a^{-1} & (d - c a^{-1} b)^{-1} \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D&mode=inline)
+    inv[m1] // NCMatrixExpand // MatrixForm
+
+returns
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%5E%7B-1%7D%20%281%20%2B%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%29%20%26%20-a%5E%7B-1%7D%20b%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5C%5C%20-%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20c%20a%5E%7B-1%7D%20%26%20%28d%20-%20c%20a%5E%7B-1%7D%20b%29%5E%7B-1%7D%20%5Cend%7Bbmatrix%7D)
 
 A less trivial example is
 
@@ -2208,8 +2369,10 @@ A less trivial example is
 
 that returns
 
-    -inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
-        {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]
+``` output
+-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
+     {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]
+```
 
 Expanding
 
@@ -2217,26 +2380,30 @@ Expanding
 
 results in
 
-    {{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
-        (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
-        (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
-      a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
-        inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
-        b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
-        (1 + a)**inv[c]**(1 + d)]** b}, 
-     {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
-        inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
-      1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
-        a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
-        inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}
+``` output
+{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
+  a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
+    inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**d - 
+    b**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + inv[c]**(1 + d)**inv[b - 
+    (1 + a)**inv[c]**(1 + d)]** b}, 
+ {d**inv[b - (1 + a)**inv[c]**(1 + d)] - (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)] - 
+    inv[b - (1 + a)**inv[c]**(1 + d)]**a + inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a), 
+  1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
+    a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
+    inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}
+```
 
-and finally
+and, finally,
 
     NCMatrixExpand[m3] // NCSimplifyRational    
 
 returns
 
-    {{0, 0}, {0, 0}}
+``` output
+{{0, 0}, {0, 0}}
+```
 
 as expected.
 
@@ -2250,11 +2417,17 @@ reason for that is that `Plus` is `Listable`, and an expression like
 
 where `m1` is an array and `z` is not, is automatically expanded into
 
-    {{a + z, b + z}, {c + z, d + z}}
+``` output
+{{a + z, b + z}, {c + z, d + z}}
+```
 
 or, using `MatrixForm`:
 
-![\begin{bmatrix} a + z & b + z \\ c + z & d + z \end{bmatrix}](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%2B%20z%20%26%20b%20%2B%20z%20%5C%5C%20c%20%2B%20z%20%26%20d%20%2B%20z%20%5Cend%7Bbmatrix%7D&mode=inline)
+    z + m1 // MatrixForm
+
+resulting in
+
+![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Bbmatrix%7D%20a%20%2B%20z%20%26%20b%20%2B%20z%20%5C%5C%20c%20%2B%20z%20%26%20d%20%2B%20z%20%5Cend%7Bbmatrix%7D)
 
 Because of this “feature”, the expression
 
@@ -2262,15 +2435,19 @@ Because of this “feature”, the expression
 
 evaluates to the “wrong” result
 
-    {{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
-     {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
-     {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
-     {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}
+``` output
+{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
+ {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
+ {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
+ {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}
+```
 
 which is different than the “correct” result
 
-    {{d + a**d + b**e, 2 + 2 a + 3 b}, 
-     {e + c**d + d**e, 3 + 2 c + 3 d}}
+``` output
+{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}
+```
 
 which is returned by either
 
@@ -2296,8 +2473,10 @@ section [Replace with matrices](#replace-with-matrices), the command
 
 produces the expected result:
 
-    {{d + a**d + b**e, 2 + 2 a + 3 b}, 
-     {e + c**d + d**e, 3 + 2 c + 3 d}}
+``` output
+{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+ {e + c**d + d**e, 3 + 2 c + 3 d}}
+```
 
 Note that the above behavior might be erratic, since in an expression like
 
@@ -2305,7 +2484,9 @@ Note that the above behavior might be erratic, since in an expression like
 
 in which `**` is kept unevaluated as in
 
-    {{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
+``` output
+{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}
+```
 
 the command
 
@@ -2313,8 +2494,10 @@ the command
 
 expands to the expected result
 
-    {{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
-     {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
+``` output
+{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+ {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}
+```
 
 ## Polynomials with commutative coefficients
 
@@ -2336,23 +2519,24 @@ Those two properties allow for an efficient implementation of
 Before getting into details, to see how much more efficient `NCPoly`
 is when compared with standard `NCAlgebra` objects try
 
-    Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 20, 5}]
+    Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 15, 5}]
 
 which would typically return something like
 
-    {0.000088, 0.001074, 0.017322, 0.240704, 3.61492, 52.0254}
+``` output
+{0.000088, 0.001074, 0.017322, 0.240704, 3.61492}
+```
 
 whereas the equivalent
 
     << NCPoly`
-    Table[Timing[(1 + NCPolyMonomial[{x}, {x}])^i][[1]], {i, 0, 20, 5}]
+    Table[Timing[(1 + NCPolyMonomial[{x}, {x}])^i][[1]], {i, 0, 15, 5}]
 
 would return
 
-    {0.00097, 0.001653, 0.002208, 0.003908, 0.004306, 0.005049}
-
-Beware that `NCPoly` objects have limited functionality and should
-still be considered experimental at this point.
+``` output
+{0.00097, 0.001653, 0.002208, 0.003908, 0.004306}
+```
 
 The best way to work with `NCPoly` in `NCAlgebra` is by loading the
 package [`NCPolyInterface`](#ncpolyinterface):
@@ -2375,7 +2559,9 @@ in the definition of `vars` will be explained below, when we introduce
 [Noncommutative Gröbner Basis](#noncommutative-gröbner-basis). The result in this case is the
 `NCPoly` object
 
-    NCPoly[{1, 1, 1}, <|{0, 0, 0, 0} -> 1, {0, 0, 2, 0} -> 1, {1, 1, 1, 5} -> -2|>]
+``` output
+NCPoly[{1, 1, 1}, <|{0, 0, 0, 0} -> 1, {0, 0, 2, 0} -> 1, {1, 1, 1, 5} -> -2|>]
+```
 
 Conversely the command [`NCPolyToNC`](#ncpolytonc) converts an
 `NCPoly` back into `NCAlgebra` format. For example
@@ -2384,7 +2570,9 @@ Conversely the command [`NCPolyToNC`](#ncpolytonc) converts an
 
 returns
 
-    1 + x**x - 2 x**y**z
+``` output
+1 + x^2 - 2 x**y**z
+```
 
 as expected. Note that an `NCPoly` object does not store symbols, but
 rather a representation of the polynomial based on specially encoded
@@ -2410,7 +2598,9 @@ the sequence of symbols in the list of variables `vars`. For example:
 
 produces:
 
-    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
+``` output
+NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
+```
 
 The sequence of braces in the list of *variables* encodes the
 *ordering* to be used for sorting `NCPoly`s. Orderings specify how
@@ -2423,7 +2613,7 @@ polynomial ordering implied by a list of symbols. For example
 
 prints out
 
-![x \ll y \ll z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z&mode=inline)
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z)
 
 and
 
@@ -2431,7 +2621,7 @@ and
 
 prints out
 
-![x \ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline)
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z)
 
 from where you can see that grouping variables inside braces induces a
 graded type ordering, as discussed in [Noncommutative Gröbner
@@ -2453,7 +2643,9 @@ is always expanded. For example:
 
 returns
 
-    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 1, {1, 1, 3} -> -2|>]
+``` output
+NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 1, {1, 1, 3} -> -2|>]
+```
 
 and
 
@@ -2461,7 +2653,9 @@ and
 
 returns
 
-    NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
+``` output
+NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
+```
 
 Another convenience function is `NCPolyDisplay` which returns a list
 with the monomials appearing in an `NCPoly` object. For example:
@@ -2470,18 +2664,22 @@ with the monomials appearing in an `NCPoly` object. For example:
 
 returns
 
-    {x.y.x.y, 2 x.y, 1}
+``` output
+{x.y.x.y, 2 x.y, 1}
+```
 
 The reason for displaying an `NCPoly` object as a list is so that the
 monomials can appear in the same order as they are stored. Using
 `Plus` would revert to Mathematica’s default ordering. For example
 
-    p = NCToNCPoly[1 + x**x**x - 2 x**x + z, vars]
+    p = NCToNCPoly[1 + x**y**x - 2 x**x + z, vars]
     NCPolyDisplay[p, vars]
 
 returns
 
-    {z, x.x.x, -2 x.x, 1}
+``` output
+{x.y.x, z, -2 x.x, 1}
+```
 
 whereas
 
@@ -2489,7 +2687,9 @@ whereas
 
 would return
 
-    1 + z - 2 x**x + x**x**x
+``` output
+1 - 2 x^2 + z + x**y**x
+```
 
 in which the sorting of the monomials has been destroyed by `Plus`.
 
@@ -2499,15 +2699,17 @@ with `z` being the *leading term* in the above example.
 With `NCPoly` the Mathematica command `Sort` is modified to sort lists
 of polynomials. For example
 
-    polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars]
+    polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars];
     ColumnForm[NCPolyDisplay[Sort[polys], vars]]
 
 returns
 
-    {x.x.x}
-    {z}
-    {y.x, -x.x}
-    {2 y.x, -z}
+``` output
+{x.x.x}
+{z}
+{y.x, -x.x}
+{2 y.x, -z}
+```
 
 `Sort` produces a list of polynomials sorted in *ascending* order
 based on their *leading terms*.
@@ -2521,7 +2723,7 @@ considered to be unknown, i.e. *variables*, where others are
 considered to be known, i.e. *coefficients*. For example, in many
 problems in systems and control the following expression
 
-![p(x) = a x + x a^T - x b x + c](https://render.githubusercontent.com/render/math?math=p%28x%29%20%3D%20a%20x%20%2B%20x%20a%5ET%20-%20x%20b%20x%20%2B%20c&mode=inline)
+![inline equation](https://render.githubusercontent.com/render/math?math=p%28x%29%20%3D%20a%20x%20%2B%20x%20a%5ET%20-%20x%20b%20x%20%2B%20c)
 
 is often seen as a polynomial in the noncommutative unknown `x` with
 known noncommutative coefficients `a`, `b`, and `c`. A typical problem
@@ -2542,7 +2744,9 @@ converts the polynomial `a**x + x**tp[a] - x**b**x + c` from
 the standard `NCAlgebra` format into an `NCPolynomial` object. The
 result in this case is the `NCPolynomial` object
 
-    NCPolynomial[c, <|{x} -> {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -> {{-1, 1, b, 1}}|>, {x}]
+``` output
+NCPolynomial[c, <|{x} -> {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -> {{-1, 1, b, 1}}|>, {x}]
+```
 
 Conversely the command [`NCPolynomialToNC`](#ncpolynomialtonc)
 converts an `NCPolynomial` back into `NCAlgebra` format. For example
@@ -2551,7 +2755,9 @@ converts an `NCPolynomial` back into `NCAlgebra` format. For example
 
 returns
 
-    c + a**x + x**tp[a] - x**b**x
+``` output
+c + a**x + x**tp[a] - x**b**x
+```
 
 An `NCPolynomial` does store information about the polynomial symbols
 and a list of variables is required only at the time of creation of
@@ -2565,7 +2771,9 @@ another `NCPolynomial` object that is always expanded. For example:
 
 returns
 
-    NCPolynomial[1, <|{y**x} -> {{-2, 1, 1}}, {x**y} -> {{1, 1, 1}}|>, {x, y}]
+``` output
+NCPolynomial[1, <|{y**x} -> {{-2, 1, 1}}, {x**y} -> {{1, 1, 1}}|>, {x, y}]
+```
 
 and
 
@@ -2573,16 +2781,20 @@ and
 
 returns
 
-    NCPolynomial[1, <|{x**y**x**y} -> {{1, 1, 1}}, {x**y} -> {{2, 1, 1}}|>, {x, y}]
+``` output
+NCPolynomial[1, <|{x**y**x**y} -> {{1, 1, 1}}, {x**y} -> {{2, 1, 1}}|>, {x, y}]
+```
 
 To see how much more efficient `NCPolynomial` is when compared with standard
 `NCAlgebra` objects try
 
-    Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 20, 5}]
+    Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 15, 5}]
 
 would return
 
-    {0.000493, 0.003345, 0.005974, 0.013479, 0.018575, 0.02896}
+``` output
+{0.000493, 0.003345, 0.005974, 0.013479, 0.018575}
+```
 
 As you can see, `NCPolynomial`s are not as efficient as `NCPoly`s but
 still much more efficient than `NCAlgebra` polynomials.
@@ -2595,7 +2807,9 @@ example
 
 returns
 
-    {c, a**x, x**tp[a], -x**b**x}
+``` output
+{c, a**x, x**tp[a], -x**b**x}
+```
 
 A useful feature of `NCPolynomial` is the capability of handling
 polynomial matrices. For example
@@ -2630,11 +2844,7 @@ linear polynomial matrices.
 Another interesting class of nc polynomials is that of linear
 polynomials, which can be factored in the form:
 
-<div style="display:block;">
-
 ![inline equation](https://render.githubusercontent.com/render/math?math=s%28x%29%20%3D%20l%20%28F%20%5Cotimes%20x%29%20r)
-
-</div>
 
 where ![l](https://render.githubusercontent.com/render/math?math=l&mode=inline) and ![r](https://render.githubusercontent.com/render/math?math=r&mode=inline) are vectors with symbolic expressions and ![F](https://render.githubusercontent.com/render/math?math=F&mode=inline) is a
 numeric matrix. This functionality is in the package
@@ -2650,7 +2860,9 @@ linear nc polynomial into the the above form. For example:
 
 which returns
 
-    const = 1
+``` output
+const = 1
+```
 
 and an `Association` `lin` containing the factorization. For example
 
@@ -2659,7 +2871,9 @@ and an `Association` `lin` containing the factorization. For example
 returns a list with the left and right vectors `l`
 and `r` and the coefficient array `F`.
 
-    {{1, a}, {1, a^T}, SparseArray[< 2 >, {2, 2}]}
+``` output
+{{1, a}, {1, a^T}, SparseArray[< 2 >, {2, 2}]}
+```
 
 which in this case is the matrix:
 
@@ -2671,7 +2885,9 @@ and
 
 returns
 
-    {{d^T}, {b^T}, SparseArray[< 1 >, {1, 1}]}
+``` output
+{{d^T}, {b^T}, SparseArray[< 1 >, {1, 1}]}
+```
 
 Note that transposes and adjoints are treated as independent
 variables.
@@ -2689,7 +2905,9 @@ possible number of terms, as explaining in detail in
 
 produces:
 
-    (a + b)**x**(c - d) + (a + b)**y**(-c + d)
+``` output
+(a + b)**x**(c - d) + (a + b)**y**(-c + d)
+```
 
 This factorization even works with linear matrix polynomials, and is
 used by the our semidefinite programming algorithm (see Chapter
@@ -2704,8 +2922,10 @@ matrix inequalities in the least possible number of terms. For example:
 
 result in:
 
-    const = SparseArray[< 6 >, {3, 3}]
-    lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
+``` output
+const = SparseArray[< 6 >, {3, 3}]
+lin = <|x -> {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[< 4 >, {9, 9}]}|>
+```
 
 See (Oliveira 2012) for details on the structure of the constant
 array ![F](https://render.githubusercontent.com/render/math?math=F&mode=inline) in this case.

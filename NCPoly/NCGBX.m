@@ -595,30 +595,6 @@ Begin["`Private`"];
       
   ];
 
-  (*
-  NCReduce[f_List, g_List, options:OptionsPattern[NCPolyReduce]] := Module[
-    {fpolys, gpolys},
-
-    fpolys = NCToNCPoly[f, $NCPolyInterfaceMonomialOrder];
-    gpolys = NCToNCPoly[g, $NCPolyInterfaceMonomialOrder];
-
-    rules = NCPolyToRule[NCPolyReduce[fpolys, gpolys, options]];
-
-    Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
-
-  ];
-
-  NCReduce[g_List, options:OptionsPattern[NCPolyReduce]] := Module[
-    {gpolys},
-
-    gpolys = NCToNCPoly[g, $NCPolyInterfaceMonomialOrder];
-
-    rules = NCPolyToRule[NCPolyReduce[gpolys, options]];
-
-    Return[Map[NCPolyToNC[#, $NCPolyInterfaceMonomialOrder]&, rules, {2}]];
-
-  ];
-  *)
      
 End[]
 EndPackage[]

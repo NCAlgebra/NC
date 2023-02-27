@@ -1359,7 +1359,7 @@ case variables are noncommutative by default and all others are
 commutative by default. For example:</p>
 <pre><code>a**b-b**a</code></pre>
 <p>results in</p>
-<pre><code>a**b-b**a</code></pre>
+<pre class="output"><code>a**b-b**a</code></pre>
 <p>while</p>
 <pre><code>A**B-B**A
 A**b-b**A</code></pre>
@@ -1377,7 +1377,7 @@ resulting commutative expression. For example:</p>
 <pre><code>SetNonCommutative[A,B]
 A**B-B**A</code></pre>
 <p>results in:</p>
-<pre><code>A**B-B**A</code></pre>
+<pre class="output"><code>A**B-B**A</code></pre>
 <p>Likewise, symbols can be made commutative using
 <code>SetCommutative</code>. For example:</p>
 <pre><code>SetNonCommutative[A] 
@@ -1389,7 +1389,7 @@ than the longer <code>SetNonCommutative</code>:</p>
 <pre><code>SNC[A];
 A**a-a**A</code></pre>
 <p>results in:</p>
-<pre><code>-a**A+A**a</code></pre>
+<pre class="output"><code>-a**A+A**a</code></pre>
 <p>One can check whether a given symbol is commutative or not using
 <code>CommutativeQ</code> or <code>NonCommutativeQ</code>. For
 example:</p>
@@ -1463,14 +1463,14 @@ class="header-section-number">5.3</span> Transposes and Adjoints</h2>
 everyone uses constantly are built-in. For example:</p>
 <pre><code>tp[a**b]</code></pre>
 <p>leads to</p>
-<pre><code>tp[b]**tp[a]</code></pre>
+<pre class="output"><code>tp[b]**tp[a]</code></pre>
 <p>and</p>
 <pre><code>tp[a+b]</code></pre>
 <p>returns</p>
-<pre><code>tp[a]+tp[b]</code></pre>
-<p>Likewise <code>tp[tp[a]] == a</code> and <code>tp</code> for anything
-for which <code>CommutativeQ</code> returns <code>True</code> is simply
-the identity. For example <code>tp[5] == 5</code>,
+<pre class="output"><code>tp[a]+tp[b]</code></pre>
+<p>Likewise, <code>tp[tp[a]] == a</code> and <code>tp</code> for
+anything for which <code>CommutativeQ</code> returns <code>True</code>
+is simply the identity. For example <code>tp[5] == 5</code>,
 <code>tp[2 + 3I] == 2 + 3 I</code>, and <code>tp[B] == B</code>.</p>
 <p>Similar properties hold to <code>aj</code>. Moreover</p>
 <pre><code>aj[tp[a]]
@@ -1496,20 +1496,22 @@ arguments cyclicly sorted so that <code>tr[b ** a]</code> evaluates to
 that an expression like</p>
 <pre><code>tr[a ** b - b ** a]</code></pre>
 <p>always simplifies to zero. Also <code>b ** a ** tr[b ** a]</code>
-simpplifies to</p>
-<pre><code>tr[a ** b] a ** b</code></pre>
+simplifies to</p>
+<pre class="output"><code>tr[a ** b] a ** b</code></pre>
 <p>because <code>tr</code> is a commutative function. See <a
 href="#SetCommutativeFunction">SetCommutativeFunction</a>.</p>
 <p>A more interesting example is</p>
 <pre><code>expr = (a ** b - b ** a)^3</code></pre>
-<p>for which <code>NCExpand[tr[expr]]</code> evaluates to</p>
-<pre><code>3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]</code></pre>
+<p>for which</p>
+<pre><code>NCExpand[tr[expr]]</code></pre>
+<p>evaluates to</p>
+<pre class="output"><code>3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]</code></pre>
 <p>Use <a href="#NCMatrixExpand">NCMatrixExpand</a> to expand
 <code>tr</code> over matrices with noncommutative entries. For
 example,</p>
 <pre><code>NCMatrixExpand[tr[{{a,b},{c,d}}]]</code></pre>
 <p>evaluates to</p>
-<pre><code>tr[a] + tr[d]</code></pre>
+<pre class="output"><code>tr[a] + tr[d]</code></pre>
 <h2 data-number="5.4" id="replace"><span
 class="header-section-number">5.4</span> Replace</h2>
 <p>A key feature of symbolic computation is the ability to perform
@@ -1520,17 +1522,17 @@ e.g. <code>ReplaceAll</code> (<code>/.</code>) and
 these commands. For example:</p>
 <pre><code>NCReplaceAll[x**a**b,a**b-&gt;c]</code></pre>
 <p>results in</p>
-<pre><code>x**c</code></pre>
+<pre class="output"><code>x**c</code></pre>
 <p>and</p>
 <pre><code>NCReplaceAll[tp[b**a]+b**a,b**a-&gt;c]</code></pre>
 <p>results in</p>
-<pre><code>c+tp[a]**tp[b]</code></pre>
+<pre class="output"><code>c+tp[a]**tp[b]</code></pre>
 <p>Use <a href="#NCMakeRuleSymmetric">NCMakeRuleSymmetric</a> and <a
 href="#NCMakeRuleSelfAdjoint">NCMakeRuleSelfAdjoint</a> to automatically
 create symmetric and self adjoint versions of your rules:</p>
 <pre><code>NCReplaceAll[tp[b**a]+b**a, NCMakeRuleSymmetric[b**a -&gt; c]]</code></pre>
 <p>returns</p>
-<pre><code>c + tp[c]</code></pre>
+<pre class="output"><code>c + tp[c]</code></pre>
 <blockquote>
 <p><strong>WARNING:</strong> The change in internal representation
 introduced in <strong>Version 6</strong>, in which repeated letters in
@@ -1555,11 +1557,11 @@ option</p>
 <code>NCReplaceRepeated</code> can be understood in the example:</p>
 <pre><code>NCReplaceAll[a**b**b, a**b -&gt; a, ApplyPowerRule -&gt; True]</code></pre>
 <p>that results in</p>
-<pre><code>a**b</code></pre>
+<pre class="output"><code>a**b</code></pre>
 <p>and</p>
 <pre><code>NCReplaceRepeated[a**b**b, a**b -&gt; a, ApplyPowerRule -&gt; True]</code></pre>
 <p>that results in</p>
-<pre><code>a</code></pre>
+<pre class="output"><code>a</code></pre>
 <p>Beside <code>NCReplaceAll</code> and <code>NCReplaceRepeated</code>
 we offer <code>NCReplace</code> and <code>NCReplaceList</code>, which
 are analogous to the standard <code>ReplaceAll</code> (<code>/.</code>),
@@ -1581,22 +1583,22 @@ class="header-section-number">5.5</span> Polynomials</h2>
 For example:</p>
 <pre><code>NCExpand[(a+b)**x]</code></pre>
 <p>returns</p>
-<pre><code>a**x+b**x</code></pre>
+<pre class="output"><code>a**x+b**x</code></pre>
 <p>Conversely, one can collect noncommutative terms involving same
 powers of a symbol using <code>NCCollect</code>. For example:</p>
 <pre><code>NCCollect[a**x+b**x,x]</code></pre>
 <p>recovers</p>
-<pre><code>(a+b)**x</code></pre>
+<pre class="output"><code>(a+b)**x</code></pre>
 <p><code>NCCollect</code> groups terms by degree before collecting and
 accepts more than one variable. For example:</p>
 <pre><code>expr = a**x+b**x+y**c+y**d+a**x**y+b**x**y
 NCCollect[expr, {x}]</code></pre>
 <p>returns</p>
-<pre><code>y**c+y**d+(a+b)**x**(1+y)</code></pre>
+<pre class="output"><code>y**c+y**d+(a+b)**x**(1+y)</code></pre>
 <p>and</p>
 <pre><code>NCCollect[expr, {x, y}]</code></pre>
 <p>returns</p>
-<pre><code>(a+b)**x+y**(c+d)+(a+b)**x**y</code></pre>
+<pre class="output"><code>(a+b)**x+y**(c+d)+(a+b)**x**y</code></pre>
 <p>Note that the last term has degree 2 in <code>x</code> and
 <code>y</code> and therefore does not get collected with the first order
 terms.</p>
@@ -1604,7 +1606,7 @@ terms.</p>
 <code>inv</code>, and</p>
 <pre><code>NCCollect[tp[x]**a**x+tp[x]**b**x+z,{x,tp[x]}]</code></pre>
 <p>returns</p>
-<pre><code>z+tp[x]**(a+b)**x</code></pre>
+<pre class="output"><code>z+tp[x]**(a+b)**x</code></pre>
 <p>Alternatively one could use</p>
 <pre><code>NCCollectSymmetric[tp[x]**a**x+tp[x]**b**x+z,{x}]</code></pre>
 <p>to obtain the same result. A similar command, <a
@@ -1615,7 +1617,7 @@ self-adjoint variables.</p>
 group terms by degree. For instance:</p>
 <pre><code>NCStrongCollect[expr, {x, y}]</code></pre>
 <p>produces</p>
-<pre><code>y**(c+d)+(a+b)**x**(1+y)</code></pre>
+<pre class="output"><code>y**(c+d)+(a+b)**x**(1+y)</code></pre>
 <p>Keep in mind that <code>NCStrongCollect</code> often collects
 <em>more</em> than one would normally expect.</p>
 <blockquote>
@@ -1625,11 +1627,11 @@ href="#NCCollectExponents">NCCollectExponents</a> expands and collects
 exponents of expressions in noncommutative monomials. For example</p>
 <pre><code>NCExpandExponents[a ** (b ** a)^2 ** b]</code></pre>
 <p>produces</p>
-<pre><code>a ** b ** a ** b ** a ** b</code></pre>
+<pre class="output"><code>a ** b ** a ** b ** a ** b</code></pre>
 <p>and</p>
 <pre><code>NCCollectExponents[a ** b ** a ** b ** a ** b]</code></pre>
 <p>produces</p>
-<pre><code>(a ** b)^3</code></pre>
+<pre class="output"><code>(a ** b)^3</code></pre>
 </blockquote>
 <p><code>NCAlgebra</code> provides some commands for noncommutative
 polynomial manipulation that are similar to the native Mathematica
@@ -1639,16 +1641,17 @@ the loading of the package</p>
 <p>which provides an interface between <code>NCAlgebra</code> and the
 low-level package <a href="#PackageNCPoly">NCPoly</a>.</p>
 <p>For example:</p>
-<pre><code>expr = B + A y**x**y - 2 x
-NCVariables[expr]</code></pre>
+<pre><code>SetCommutative[A, B]
+expr = B + A y**x**y - 2 x
+vars = NCVariables[expr]</code></pre>
 <p>returns</p>
-<pre><code>{x,y}</code></pre>
+<pre class="output"><code>{x,y}</code></pre>
 <p>and</p>
 <pre><code>NCCoefficientList[expr, vars]
 NCMonomialList[expr, vars]
 NCCoefficientRules[expr, vars]</code></pre>
 <p>returns</p>
-<pre><code>{B, -2, A}
+<pre class="output"><code>{B, -2, A}
 {1, x, y**x**y}
 {1 -&gt; B, x -&gt; -2, y**x**y -&gt; A}</code></pre>
 <p>Also for testing</p>
@@ -1673,7 +1676,7 @@ all variables. For example:</p>
 <pre><code>NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 2]</code></pre>
 <p>returns <code>0</code>.</p>
 <p>The above commands are based on special packages for efficiently
-storing and calcuating with nc polynomials. Those packages are</p>
+storing and calculating with nc polynomials. Those packages are</p>
 <ul>
 <li><a href="#PackageNCPolynomial"><code>NCPolynomial</code></a>: which
 handles polynomials with noncommutative coefficients, and</li>
@@ -1752,7 +1755,7 @@ directional derivatives in one or many variables. For example, if:</p>
 <p>then</p>
 <pre><code>NCDirectionalD[expr, {x,h}]</code></pre>
 <p>returns</p>
-<pre><code>h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b</code></pre>
+<pre class="output"><code>h**c**x + x**c**h - a**inv[1+x]**h**inv[1+x]**b</code></pre>
 <p>In the case of more than one variables
 <code>NCDirectionalD[expr, {x,h}, {y,k}]</code> takes the directional
 derivative of <code>expr</code> with respect to <code>x</code> in the
@@ -1762,27 +1765,27 @@ direction <code>k</code>. For example, if:</p>
 <p>then</p>
 <pre><code>NCDirectionalD[expr, {x,h}, {y,k}]</code></pre>
 <p>returns</p>
-<pre><code>h**q**x + x**q*h - y**h - k**x</code></pre>
+<pre class="output"><code>h**q**x + x**q*h - y**h - k**x</code></pre>
 <p>A further example, if:</p>
 <pre><code>expr = x**a**x**b + x**c**x**d</code></pre>
 <p>then its directional derivative in the direction <code>h</code>
 is</p>
 <pre><code>NCDirectionalD[expr, {x,h}]</code></pre>
 <p>which returns</p>
-<pre><code>h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d</code></pre>
+<pre class="output"><code>h**a**x**b + x**a**h**b + h**c**x**d + x**c**h**d</code></pre>
 <p>The command <code>NCGrad</code> calculates nc <em>gradients</em><a
 href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a>.</p>
 <p>For example:</p>
 <pre><code>NCGrad[expr, x]</code></pre>
 <p>returns the nc gradient</p>
-<pre><code>a**x**b + b**x**a + c**x**d + d**x**c</code></pre>
+<pre class="output"><code>a**x**b + b**x**a + c**x**d + d**x**c</code></pre>
 <p>A further example, if:</p>
 <pre><code>expr = x**a**x**b + x**c**y**d</code></pre>
 <p>is a function on variables <code>x</code> and <code>y</code> then</p>
 <pre><code>NCGrad[expr, x, y]</code></pre>
 <p>returns the nc gradient list</p>
-<pre><code>{a**x**b + b**x**a + c**y**d, d**x**c}</code></pre>
+<pre class="output"><code>{a**x**b + b**x**a + c**y**d, d**x**c}</code></pre>
 <p><strong>Version 5</strong> introduced experimental support for
 integration of nc polynomials. See <a
 href="#NCIntegrate"><code>NCIntegrate</code></a>.</p>
@@ -1794,8 +1797,10 @@ represented in Mathematica using <em>lists of lists</em>. For
 example</p>
 <pre><code>m = {{a, b}, {c, d}}</code></pre>
 <p>is a representation for the matrix</p>
-<p><span class="math inline">\(\begin{bmatrix} a &amp; b \\ c &amp; d
-\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\left[\begin{array}{cc}
+a &amp; b \\
+c &amp; d
+\end{array}\right]\]</span></p>
 <p>The Mathematica command <code>MatrixForm</code> output pretty
 matrices. <code>MatrixForm[m]</code> prints <code>m</code> in a form
 similar to the above matrix. Beware when copying and pasting parts of an
@@ -1823,15 +1828,16 @@ id="fnref2" role="doc-noteref"><sup>2</sup></a> for an nc matrix. For
 example</p>
 <pre><code>NCInverse[m]</code></pre>
 <p>returns</p>
-<pre><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
- {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}</code></pre>
-<p>or, using <code>MatrixForm</code></p>
-<p><code>NCInverse[m] // MatrixForm NCInverse[m] // MatrixForm</code></p>
+<pre class="output"><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+{-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}</code></pre>
+<p>or, using <code>MatrixForm</code>,</p>
+<pre><code>NCInverse[m] // MatrixForm</code></pre>
 <p>returns</p>
-<p><span class="math inline">\(\begin{bmatrix} a^{-1} (1 + b (d - c
-a^{-1} b)^{-1} c a^{-1}) &amp; -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d -
-c a^{-1} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b)^{-1}
-\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\begin{bmatrix}
+a^{-1} (1 + b (d - c a^{-1} b)^{-1} c a^{-1}) &amp; -a^{-1} b (d - c
+a^{-1} b)^{-1} \\
+-(d - c a^{-1} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b)^{-1}
+\end{bmatrix}\]</span></p>
 <p>Note that <code>a</code> and <code>d - c**inv[a]**b</code> were
 assumed invertible during the calculation.</p>
 <p>Similarly, one can multiply matrices using <a
@@ -1841,7 +1847,7 @@ href="#NCDot"><code>NCDot</code></a>, which is similar to Mathematica’s
 m2 = {{d, 2}, {e, 3}}
 NCDot[m1, m2]</code></pre>
 <p>result in</p>
-<pre><code>{{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}</code></pre>
+<pre class="output"><code>{{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}</code></pre>
 <p>Note that products of nc symbols appearing in the matrices are
 multiplied using <code>**</code>. Compare that with the standard
 <code>Dot</code> (<code>.</code>) operator.</p>
@@ -1855,7 +1861,7 @@ instance, operators <code>tp</code>, <code>aj</code>, and
 <code>co</code> now operate directly over matrices. That is</p>
 <pre><code>aj[{{a,tp[b]},{co[c],aj[d]}}]</code></pre>
 <p>returns</p>
-<pre><code>{{aj[a],tp[c]},{co[b],d}}</code></pre>
+<pre class="output"><code>{{aj[a],tp[c]},{co[b],d}}</code></pre>
 <p>In previous versions one had to use the special commands
 <code>tpMat</code>, <code>ajMat</code>, and <code>coMat</code>. Those
 are still supported for backward compatibility.</p>
@@ -1886,26 +1892,40 @@ can be used as</p>
 <pre><code>m = {{a, b}, {c, d}}
 {lu, p} = NCLUDecompositionWithPartialPivoting[m]</code></pre>
 <p>which returns</p>
-<pre><code>lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
+<pre class="output"><code>lu = {{a, b}, {c**inv[a], d - c**inv[a]**b}}
 p = {1, 2}</code></pre>
-<p>Using <code>MatrixForm</code>: <span
-class="math display">\[\begin{bmatrix} a &amp; b \\ c a^{-1} &amp; d - c
-a^{-1} b \end{bmatrix}\]</span> The list <code>p</code> encodes the
-sequence of permutations calculated during the execution of the
-algorithm. The matrix <code>lu</code> contains the factors <span
+<p>Using <code>MatrixForm</code>:</p>
+<pre><code>MatrixForm[lu]</code></pre>
+<p>results in</p>
+<p><span class="math display">\[\begin{bmatrix}
+a &amp; b \\
+c a^{-1} &amp; d - c a^{-1} b
+\end{bmatrix}\]</span></p>
+<p>The list <code>p</code> encodes the sequence of permutations
+calculated during the execution of the algorithm. The matrix
+<code>lu</code> contains the factors <span
 class="math inline">\(L\)</span> and <span
 class="math inline">\(U\)</span> in the way most common to numerical
 analysts. These factors can be recovered using</p>
-<pre><code>{l, u} = GetFullLUMatrices[lu]</code></pre>
+<pre><code>{ll, uu} = GetFullLUMatrices[lu]</code></pre>
 <p>resulting in this case in</p>
-<pre><code>l = {{1, 0}, {c**inv[a], 1}}
-u = {{a, b}, {0, d - c**inv[a]**b}}</code></pre>
-<p>Using <code>MatrixForm</code>: <span class="math display">\[
-L = \begin{bmatrix} 1 &amp; 0 \\ c a^{-1} &amp; 1 \end{bmatrix}, \qquad
-U = \begin{bmatrix} a &amp; b \\ 0 &amp; d - c a^{-1} b \end{bmatrix}
-\]</span> To verify that <span class="math inline">\(M = L U\)</span>
+<pre class="output"><code>ll = {{1, 0}, {c**inv[a], 1}}
+uu = {{a, b}, {0, d - c**inv[a]**b}}</code></pre>
+<p>Using <code>MatrixForm</code>:</p>
+<pre><code>MatrixForm[ll]
+MatrixForm[uu]</code></pre>
+<p>results in</p>
+<p><span class="math display">\[L = \begin{bmatrix}
+1 &amp; 0 \\
+c a^{-1} &amp; 1
+\end{bmatrix}, \qquad
+U = \begin{bmatrix}
+a &amp; b \\
+0 &amp; d - c a^{-1} b
+\end{bmatrix}\]</span></p>
+<p>To verify that <span class="math inline">\(M = L U\)</span>,
 input</p>
-<pre><code>m - NCDot[l, u]</code></pre>
+<pre><code>m - NCDot[ll, uu]</code></pre>
 <p>which should return a zero matrix.</p>
 <p><strong>Note:</strong> if you are looking for efficiency, the
 function <a href="#GetLUMatrices"><code>GetLUMatrices</code></a> (also
@@ -1916,17 +1936,17 @@ factors <code>l</code> and <code>u</code> as
 expressions. For instance,</p>
 <pre><code>m = {{a, b}, {1, d}}
 {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-{l, u} = GetFullLUMatrices[lu]</code></pre>
-<p>results in the factors</p>
-<pre><code>l = {{1, 0}, {a, 1}}
-u = {{1, d}, {0, b - a**d}}</code></pre>
+{ll, uu} = GetFullLUMatrices[lu]</code></pre>
+<p>result in the factors</p>
+<pre class="output"><code>ll = {{1, 0}, {a, 1}}
+uu = {{1, d}, {0, b - a**d}}</code></pre>
 <p>and a permutation list</p>
-<pre><code>p = {2, 1}</code></pre>
+<pre class="output"><code>p = {2, 1}</code></pre>
 <p>which indicates that the number <code>1</code>, appearing in the
 second row, was used as the pivot rather than the symbol <code>a</code>
 appearing on the first row. Because of the permutation, to verify that
-<span class="math inline">\(P M = L U\)</span> input</p>
-<pre><code>m[[p]] - NCDot[l, u]</code></pre>
+<span class="math inline">\(P M = L U\)</span>, input</p>
+<pre><code>m[[p]] - NCDot[ll, uu]</code></pre>
 <p>which should return a zero matrix. Note that in the above example the
 permutation matrix <span class="math inline">\(P\)</span> is never
 constructed. Instead, the rows of <span class="math inline">\(M\)</span>
@@ -1936,17 +1956,20 @@ permutation matrices, they can be easily obtained by permuting the rows
 of the identity matrix as in the following example</p>
 <pre><code>p = {2, 1, 3}
 IdentityMatrix[3][[p]] // MatrixForm</code></pre>
-<p>to produce <span class="math display">\[
-\begin{bmatrix} 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; 0
-&amp; 1 \end{bmatrix}
-\]</span> Likewise</p>
+<p>to produce</p>
+<p><span class="math display">\[\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{bmatrix}\]</span></p>
+<p>Likewise</p>
 <pre><code>m = {{a + b, b}, {c, d}}
 {lu, p} = NCLUDecompositionWithPartialPivoting[m]
-{l, u} = GetFullLUMatrices[lu]</code></pre>
+{ll, uu} = GetFullLUMatrices[lu]</code></pre>
 <p>returns</p>
-<pre><code>p = {2, 1}
-l = {{1, 0}, {(a + b)**inv[c], 1}} 
-u = {{c, d}, {0, b - (a + b)**inv[c]**d}}</code></pre>
+<pre class="output"><code>p = {2, 1}
+ll = {{1, 0}, {(a + b)**inv[c], 1}} 
+uu = {{c, d}, {0, b - (a + b)**inv[c]**d}}</code></pre>
 <p>showing that the <em>simpler</em> expression <code>c</code> was taken
 as a pivot instead of <code>a + b</code>.</p>
 <p>The function <code>NCLUDecompositionWithPartialPivoting</code> is the
@@ -1962,7 +1985,7 @@ example</p>
 <pre><code>m = {{2 a, 2 b}, {a, b}}
 {lu, p, q, rank} = NCLUDecompositionWithCompletePivoting[m]</code></pre>
 <p>returns the <em>left</em> and <em>right</em> permutation lists</p>
-<pre><code>p = {2, 1}
+<pre class="output"><code>p = {2, 1}
 q = {1, 2}</code></pre>
 <p>and <code>rank</code> equal to <code>1</code>. Note that
 <code>p = {2, 1}</code> and <code>q = {1,2}</code> tell us that the
@@ -1973,16 +1996,25 @@ the first entry of the first row, because <code>a</code> is
 class="math inline">\(L\)</span> and <span
 class="math inline">\(U\)</span> factors can be obtained as before
 using</p>
-<pre><code>{l, u} = GetFullLUMatrices[lu]</code></pre>
+<pre><code>{ll, uu} = GetFullLUMatrices[lu]</code></pre>
 <p>to get</p>
-<pre><code>l = {{1, 0}, {2, 1}}
-u = {{a, b}, {0, 0}}</code></pre>
-<p>Using <code>MatrixForm</code>: <span class="math display">\[
-L = \begin{bmatrix} 1 &amp; 0 \\ 2 &amp; 1 \end{bmatrix}, \qquad
-U = \begin{bmatrix} a &amp; b \\ 0 &amp; 0 \end{bmatrix}
-\]</span> In this case, to verify that <span class="math inline">\(P M Q
-= L U\)</span> input</p>
-<pre><code>NCDot[l, u] - m[[p, q]]</code></pre>
+<pre class="output"><code>ll = {{1, 0}, {2, 1}}
+uu = {{a, b}, {0, 0}}</code></pre>
+<p>Using <code>MatrixForm</code>:</p>
+<pre><code>MatrixForm[ll]
+MatrixForm[uu]</code></pre>
+<p>results in</p>
+<p><span class="math display">\[L = \begin{bmatrix}
+1 &amp; 0 \\
+2 &amp; 1
+\end{bmatrix}, \qquad
+U = \begin{bmatrix}
+a &amp; b \\
+0 &amp; 0
+\end{bmatrix}\]</span></p>
+<p>In this case, to verify that <span class="math inline">\(P M Q = L
+U\)</span> input</p>
+<pre><code>NCDot[ll, uu] - m[[p, q]]</code></pre>
 <p>which should return a zero matrix. As with partial pivoting, the
 permutation matrices <span class="math inline">\(P\)</span> and <span
 class="math inline">\(Q\)</span> are never constructed. Instead we used
@@ -1997,20 +2029,20 @@ symmetric symbolic nc matrices. For example</p>
 <pre><code>m = {{a, b}, {b, c}}
 {ldl, p, s, rank} = NCLDLDecomposition[m]</code></pre>
 <p>returns <code>ldl</code>, which contain the factors, and</p>
-<pre><code>p = {1, 2}
+<pre class="output"><code>p = {1, 2}
 s = {1, 1}
 rank = 2</code></pre>
 <p>The list <code>p</code> encodes left and right permutations,
 <code>s</code> is a list specifying the size of the diagonal blocks
 (entries can be either 1 or 2). The factors can be obtained using <a
 href="#GetLDUMatrices"><code>GetLDUMatrices</code></a> as in</p>
-<pre><code>{l, d, u} = GetFullLDUMatrices[ldl, s]</code></pre>
+<pre><code>{ll, dd, uu} = GetFullLDUMatrices[ldl, s]</code></pre>
 <p>which in this case returns</p>
-<pre><code>l = {{1, 0}, {b**inv[a], 1}}
-d = {{a, 0}, {0, c - b**inv[a]**b}}
-u = {{1, inv[a]**b}, {0, 1}}}</code></pre>
+<pre class="output"><code>ll = {{1, 0}, {b**inv[a], 1}}
+dd = {{a, 0}, {0, c - b**inv[a]**b}}
+uu = {{1, inv[a]**b}, {0, 1}}}</code></pre>
 <p>Because <span class="math inline">\(P M P^T = L D L^T\)</span>,</p>
-<pre><code>NCDot[l, d, u] - m[[p, p]]</code></pre>
+<pre><code>NCDot[ll, dd, uu] - m[[p, p]]</code></pre>
 <p>is the zero matrix and <span class="math inline">\(U =
 L^T\)</span>.</p>
 <p><code>NCLDLDecomposition</code> works only on symmetric matrices and,
@@ -2039,31 +2071,40 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <p>and</p>
 <pre><code>M = {{a11,a12}}</code></pre>
 <p>the call</p>
-<pre><code>NCMatrixReplaceRepeated[M, {a11 -&gt; m1, a12 -&gt; m2}]</code></pre>
+<pre><code>MM = NCMatrixReplaceRepeated[M, {a11 -&gt; m1, a12 -&gt; m2}]</code></pre>
 <p>produces as a result the matrix</p>
-<pre><code>{{a, b, d, 2}, {c, d, e, 3}}</code></pre>
-<p>or, using <code>MatrixForm</code>: <span class="math display">\[
-\begin{bmatrix} a &amp; b &amp; d &amp; 2 \\ c &amp; d &amp; e &amp; 3
-\end{bmatrix}
-\]</span> Note how the symbols were treated as block-matrices during the
+<pre class="output"><code>{{a, b, d, 2}, {c, d, e, 3}}</code></pre>
+<p>or, using <code>MatrixForm</code>:</p>
+<pre><code>MatrixForm[MM]</code></pre>
+<p>to obtain</p>
+<p><span class="math display">\[\begin{bmatrix}
+a &amp; b &amp; d &amp; 2 \\
+c &amp; d &amp; e &amp; 3
+\end{bmatrix}\]</span></p>
+<p>Note how the symbols were treated as block-matrices during the
 substitution. As a second example, with</p>
 <pre><code>M = {{a11, 0}, {0, a22}}</code></pre>
 <p>the command</p>
-<pre><code>NCMatrixReplaceRepeated[M, {a11 -&gt; m1, a22 -&gt; m2}]</code></pre>
+<pre><code>MM = NCMatrixReplaceRepeated[M, {a11 -&gt; m1, a22 -&gt; m2}]</code></pre>
 <p>produces the matrix</p>
-<pre><code>{{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}</code></pre>
+<pre class="output"><code>{{a, b, 0, 0}, {c, d, 0, 0}, {0, 0, d, 2}, {0, 0, e, 3}}</code></pre>
 <p>or, using <code>MatrixForm</code>:</p>
-<p><span class="math inline">\(\begin{bmatrix} a &amp; b &amp; 0 &amp; 0
-\\ c &amp; d &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; d &amp; 2 \\ 0 &amp; 0
-&amp; e &amp; 3 \end{bmatrix}\)</span></p>
+<pre><code>MatrixForm[MM]</code></pre>
+<p>to obtain</p>
+<p><span class="math display">\[\begin{bmatrix}
+a &amp; b &amp; 0 &amp; 0 \\
+c &amp; d &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; d &amp; 2 \\
+0 &amp; 0 &amp; e &amp; 3
+\end{bmatrix}\]</span></p>
 <p>in which the <code>0</code> blocks were automatically expanded to fit
 the adjacent block matrices.</p>
 <p>Another feature of <code>NCMatrixReplace</code> and its variants is
-its ability to withold evaluation until all matrix substitutions have
+its ability to withhold evaluation until all matrix substitutions have
 taken place. For example,</p>
 <pre><code>NCMatrixReplaceAll[x**y + y, {x -&gt; m1, y -&gt; m2}]</code></pre>
 <p>produces</p>
-<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+<pre class="output"><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
  {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
 <p>Finally, <code>NCMatrixReplace</code> substitutes
 <code>NCInverse</code> for <code>inv</code> so that, for instance, the
@@ -2078,9 +2119,11 @@ directional derivatives and convexity</h2>
 <p>The closest related demo to the material in this section is
 <code>NC/DEMOS/NCConvexity.nb</code>.</p>
 <p>When working with nc quadratics it is useful to be able to “factor”
-the quadratic into the following form <span class="math display">\[
+the quadratic into the following form</p>
+<p><span class="math display">\[
     q(x) = c + s(x) + l(x) M r(x)
-\]</span> where <span class="math inline">\(s\)</span> is linear <span
+\]</span></p>
+<p>where <span class="math inline">\(s\)</span> is linear <span
 class="math inline">\(x\)</span> and <span
 class="math inline">\(l\)</span> and <span
 class="math inline">\(r\)</span> are vectors and <span
@@ -2093,11 +2136,11 @@ polynomial into the the above form:</p>
 expr = tp[x]**a**x**d + tp[x]**b**y + tp[y]**c**y + tp[y]**tp[b]**x**d;
 {const, lin, left, middle, right} = NCToNCQuadratic[expr, vars];</code></pre>
 <p>which returns</p>
-<pre><code>left = {tp[x],tp[y]}
+<pre class="output"><code>left = {tp[x],tp[y]}
 right = {y, x**d}
 middle = {{a,b}, {tp[b],c}}</code></pre>
 <p>and zero <code>const</code> and <code>lin</code>. The format for the
-linear part <code>lin</code> will be discussed lated in Section <a
+linear part <code>lin</code> will be discussed later in Section <a
 href="#Linear">Linear</a>. Note that coefficients of an nc quadratic may
 also appear on the left and right vectors, as <code>d</code> did in the
 above example. Conversely, <a
@@ -2105,7 +2148,7 @@ href="#NCQuadraticToNC"><code>NCQuadraticToNC</code></a> converts a list
 with factors back to an nc expression as in:</p>
 <pre><code>NCQuadraticToNC[{const, lin, left, middle, right}]</code></pre>
 <p>which results in</p>
-<pre><code>(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d</code></pre>
+<pre class="output"><code>(tp[x]**b + tp[y]**c)**y + (tp[x]**a + tp[y]**tp[b])**x**d</code></pre>
 <p>An interesting application is the verification of the domain in which
 an nc rational function is <em>convex</em>. This uses the second
 directional derivative, called the Hessian. Take for example the
@@ -2114,22 +2157,21 @@ quartic</p>
 <p>and calculate its noncommutative directional <em>Hessian</em></p>
 <pre><code>hes = NCHessian[expr, {x, h}]</code></pre>
 <p>This command returns</p>
-<pre><code>2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h</code></pre>
+<pre class="output"><code>2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h</code></pre>
 <p>which is quadratic in the direction <code>h</code>. The decomposition
 of the nc Hessian using <code>NCToNCQuadratic</code></p>
 <pre><code>{const, lin, left, middle, right} = NCToNCQuadratic[hes, {h}];</code></pre>
 <p>produces</p>
-<pre><code>left = {h, x**h, x**x**h}
+<pre class="output"><code>left = {h, x**h, x**x**h}
 right = {h**x**x, h**x, h}
 middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}</code></pre>
-<p>Note that the middle matrix <span class="math display">\[
-\begin{bmatrix}
+<p>Note that the middle matrix</p>
+<p><span class="math display">\[\begin{bmatrix}
 2 &amp; 2 x &amp; 2 x^2 \\
 0 &amp; 2 &amp; 2 x \\
 0 &amp; 0 &amp; 2
-\end{bmatrix}
-\]</span> is not <em>symmetric</em>, as one might have expected. The
-command <a
+\end{bmatrix}\]</span></p>
+<p>is not <em>symmetric</em>, as one might have expected. The command <a
 href="#NCQuadraticMakeSymmetric"><code>NCQuadraticMakeSymmetric</code></a>
 can fix that and produce a symmetric decomposition. For the above
 example</p>
@@ -2137,19 +2179,18 @@ example</p>
   NCQuadraticMakeSymmetric[{const, lin, left, middle, right}, 
                            SymmetricVariables -&gt; {x, h}]</code></pre>
 <p>results in</p>
-<pre><code>sleft = {x**x**h, x**h, h}
+<pre class="output"><code>sleft = {x**x**h, x**h, h}
 sright = {h**x**x, h**x, h}
 middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}</code></pre>
-<p>in which <code>middle</code> is the symmetric matrix <span
-class="math display">\[
-\begin{bmatrix}
+<p>in which <code>middle</code> is the symmetric matrix</p>
+<p><span class="math display">\[\begin{bmatrix}
 0 &amp; 0 &amp; 2 \\
 0 &amp; 2 &amp; 2 x \\
 2 &amp; 2 x &amp; 2 x^2
-\end{bmatrix}
-\]</span> Note the argument <code>SymmetricVariables -&gt; {x,h}</code>
-which tells <code>NCQuadraticMakeSymmetric</code> to consider
-<code>x</code> and <code>y</code> as symmetric variables. Because the
+\end{bmatrix}\]</span></p>
+<p>Note the argument <code>SymmetricVariables -&gt; {x,h}</code> which
+tells <code>NCQuadraticMakeSymmetric</code> to consider <code>x</code>
+and <code>y</code> as symmetric variables. Because the
 <code>middle</code> matrix is never positive semidefinite for any
 possible value of <span class="math inline">\(x\)</span> the
 conclusion<a href="#fn3" class="footnote-ref" id="fnref3"
@@ -2178,24 +2219,26 @@ quadratic decomposition</p>
 <p>The resulting middle matrix can be factored using</p>
 <pre><code>{ldl, p, s, rank} = NCLDLDecomposition[middle];
 {ll, dd, uu} = GetLDUMatrices[ldl, s];</code></pre>
-<p>which produces the diagonal factors <span class="math display">\[
-\begin{bmatrix}
+<p>which produces the diagonal factors</p>
+<p><span class="math display">\[\begin{bmatrix}
   2 (1 + b y + y b - a x a)^{-1} &amp; 0 &amp; 0 \\
   0 &amp; 0 &amp; 0 \\
   0 &amp; 0 &amp; 0
-\end{bmatrix}
-\]</span> which indicates the the original nc rational is convex
-whenever <span class="math display">\[
+\end{bmatrix}\]</span></p>
+<p>which indicates the the original nc rational is convex whenever</p>
+<p><span class="math display">\[
 (1 + b y + y b - a x a)^{-1} \succeq 0
-\]</span> or, equivalently, whenever <span class="math display">\[
+\]</span></p>
+<p>or, equivalently, whenever</p>
+<p><span class="math display">\[
 1 + b y + y b - a x a \succeq 0
-\]</span> The above sequence of calculations is automated by the command
-<a href="#NCConvexityRegion"><code>NCConvexityRegion</code></a> as
-in</p>
+\]</span></p>
+<p>The above sequence of calculations is automated by the command <a
+href="#NCConvexityRegion"><code>NCConvexityRegion</code></a> as in</p>
 <pre><code>&lt;&lt; NCConvexity`
 NCConvexityRegion[expr, {x}]</code></pre>
 <p>which results in</p>
-<pre><code>{2 inv[1 + b**y + y**b - a**x**a], 0}</code></pre>
+<pre class="output"><code>{2 inv[1 + b**y + y**b - a**x**a], 0}</code></pre>
 <p>which correspond to the diagonal entries of the LDL decomposition of
 the middle matrix of the nc Hessian.</p>
 <h1 data-number="6" id="MoreAdvancedCommands"><span
@@ -2204,6 +2247,8 @@ class="header-section-number">6</span> More Advanced Commands</h1>
 commands.</p>
 <p>If you want a living version of this chapter just run the notebook
 <code>NC/DEMOS/2_MoreAdvancedCommands.nb</code>.</p>
+<pre><code>&lt;&lt; NC`
+&lt;&lt; NCAlgebra`</code></pre>
 <h2 data-number="6.1" id="AdvancedReplace"><span
 class="header-section-number">6.1</span> Advanced Rules and
 Replacements</h2>
@@ -2224,17 +2269,17 @@ matching</a>. For a rule to be effective if has to match the
 might be different than one would normally think based on the usual
 properties of mathematical operators. For example, one would expect the
 rule:</p>
-<pre><code>rule = 1 + x_ -&gt; x</code></pre>
+<pre class="output"><code>rule = 1 + x_ -&gt; x</code></pre>
 <p>to match all the expressions bellow:</p>
-<pre><code>1 + a
+<pre class="output"><code>1 + a
 1 + 2 a
 1 + a + b
 1 + 2 a * b</code></pre>
 <p>so that</p>
-<pre><code>expr /. rule</code></pre>
+<pre class="output"><code>expr /. rule</code></pre>
 <p>with <code>expr</code> taking the above expressions would result
 in:</p>
-<pre><code>a
+<pre class="output"><code>a
 2 a
 a + b
 2 a * b</code></pre>
@@ -2250,17 +2295,18 @@ role="doc-noteref"><sup>4</sup></a>. This is the reason why substitution
 based on a simple rule such as:</p>
 <pre><code>rule = a**b -&gt; c</code></pre>
 <p>so that</p>
-<pre><code>expr /. rule</code></pre>
+<pre class="output"><code>expr /. rule</code></pre>
 <p>will work for some <code>expr</code> like</p>
-<pre><code>1 + 2 a**b</code></pre>
+<pre><code>1 + 2 a**b /. rule</code></pre>
 <p>resulting in</p>
-<pre><code>1 + 2 c</code></pre>
+<pre class="output"><code>1 + 2 c</code></pre>
 <p>but will fail to produce the <em>expected</em> result in cases
 like:</p>
-<pre><code>a**b**c
-c**a**b
-c**a**b**d
-1 + 2 a**b**c</code></pre>
+<pre><code>a**b**c /. rule</code></pre>
+<p>or</p>
+<pre><code>c**a**b /. rule
+c**a**b**d /. rule
+1 + 2 a**b**c /. rule</code></pre>
 <p>That’s what the <code>NCAlgebra</code> family of replacement
 functions discussed in the next section are made for.</p>
 <h3 data-number="6.1.2" id="the-fix-is-ncreplace"><span
@@ -2272,10 +2318,10 @@ NCReplaceAll[ c**a**b, rule ]
 NCReplaceAll[c**a**b**d, rule]
 NCReplaceAll[1 + 2 a**b**c, rule ]</code></pre>
 <p>produce the results one would expect:</p>
-<pre><code>c**c
-c**c
-c**c**d
-1 + 2 c**c</code></pre>
+<pre class="output"><code>c^2
+c^2
+c^2**d
+1 + 2 c^2</code></pre>
 <p>For this reason, when substituting in <code>NCAlgebra</code> it is
 always safer to use functions from the <a
 href="#PackageNCReplace"><code>NCReplace</code> package</a> rather than
@@ -2287,12 +2333,16 @@ forcing one to use the full names <code>NCReplaceAll</code> and
 <code>NCReplaceRepeated</code>.</p>
 <p>On the same vein, the following substitution rule</p>
 <pre><code>NCReplaceAll[2 a**b + c, 2 a -&gt; b]</code></pre>
-<p>will return <code>2 a**b + c</code> intact since
-<code>FullForm[2 a**b]</code> is indeed</p>
-<pre><code>Times[2, NonCommutativeMuliply[a, b]]</code></pre>
-<p>which is not structurally related to <code>FullForm[2 a]</code>,
-which is <code>Times[2, a]</code>. Of course, in this case a simple
-solution is to use the alternative rule:</p>
+<p>will return <code>2 a**b + c</code> intact since</p>
+<pre><code>FullForm[2 a**b]</code></pre>
+<p>is actually</p>
+<pre class="output"><code>Times[2, NonCommutativeMuliply[a, b]]</code></pre>
+<p>which is not structurally related to</p>
+<pre><code>FullForm[2 a]</code></pre>
+<p>which is</p>
+<pre class="output"><code>Times[2, a]</code></pre>
+<p>Of course, in this case a simple solution is to use the alternative
+rule:</p>
 <pre><code>NCReplaceAll[2 a**b + c, a -&gt; b / 2]</code></pre>
 <p>which results in <code>b^2 + c</code>, as one might expect.</p>
 <h3 data-number="6.1.3" id="matching-monomials-with-powers"><span
@@ -2303,11 +2353,13 @@ stores repeated symbols in noncommutative monomials using powers. This
 means that</p>
 <pre><code>expr = a**a**a**b**a**a**b**a**b</code></pre>
 <p>is internally stored as</p>
-<pre><code>NonCommutativeMultiply[a^3, b, a^2, b, a, b]</code></pre>
+<pre><code>FullForm[expr]</code></pre>
+<p>or</p>
+<pre class="output"><code>NonCommutativeMultiply[a^3, b, a^2, b, a, b]</code></pre>
 <p>so that a replacement such as</p>
 <pre><code>NCReplaceAll[expr, a**b -&gt; c]</code></pre>
 <p>will result in</p>
-<pre><code>a^3**b**a^2**b**c</code></pre>
+<pre class="output"><code>a^3**b**a^2**b**c</code></pre>
 <p>Note how the rule fails to match the <code>a**b</code> in the terms
 <code>a**b^2</code> and <code>a**b^3</code>. This situation might be
 familiar to an experienced Mathematica user who is a aware of the
@@ -2322,12 +2374,12 @@ rule in order to accomplish matching of symbols in
 the same <code>expr</code> above, the following replacement</p>
 <pre><code>NCReplaceAll[expr, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
 <p>will produce</p>
-<pre><code>a^2**c**a^2**b**a**b</code></pre>
+<pre class="output"><code>a^2**c**a^2**b**a**b</code></pre>
 <p>after matching <code>a**b</code> in the term <code>a^3**b</code>,
 and</p>
 <pre><code>NCReplaceRepeated[expr, NCReplacePowerRule[a**b -&gt; c]]</code></pre>
 <p>will produce</p>
-<pre><code>a^2**c**a**c^2</code></pre>
+<pre class="output"><code>a^2**c**a**c^2</code></pre>
 <p>after matching <code>a**b</code> in <code>a^3**b</code>,
 <code>a^2**b</code>, and <code>a**b</code>.</p>
 <p>The command <code>NCReplacePowerRule</code> works by modifying
@@ -2337,7 +2389,7 @@ noncommutative monomial. For example,</p>
 <pre><code>NCReplacePowerRule[a**c**b -&gt; d]</code></pre>
 <p>produces the modified rule<a href="#fn6" class="footnote-ref"
 id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
-<pre><code>a^n_.**c**b^m_. -&gt; a^(n-1)**d**b^(m-1)</code></pre>
+<pre class="output"><code>a^n_.**c**b^m_. -&gt; a^(n-1)**d**b^(m-1)</code></pre>
 <p>which can successfully match powers of the symbols <code>a</code> and
 <code>b</code> appearing in the monomial <code>a**c**b</code>.</p>
 <p>The application of <code>NCReplacePowerRule</code> can also be done
@@ -2350,13 +2402,13 @@ href="#PackageNCReplace">NCReplace</a>. For example, the command</p>
 <p>This option can also be set globally for all calls to the
 <code>NCReplace</code> family of functions in a <code>NCAlgebra</code>
 session by calling</p>
-<pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; True]</code></pre>
+<pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; True];</code></pre>
 <p>After that, all calls to <code>NCReplace</code>,
 <code>NCReplaceAll</code>, <code>NCReplaceRepeated</code>, and related
 function, will be done with the option
 <code>ApplyPowerRule -&gt; True</code> automatically.</p>
 <p>To revert to the default behavior just set</p>
-<pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; False]</code></pre>
+<pre><code>SetOptions[NCReplace, ApplyPowerRule -&gt; False];</code></pre>
 <h3 data-number="6.1.4" id="trouble-with-block-and-module"><span
 class="header-section-number">6.1.4</span> Trouble with
 <code>Block</code> and <code>Module</code></h3>
@@ -2378,11 +2430,11 @@ documentation</a>. Let</p>
 <p>and run</p>
 <pre><code>Block[{i = a}, i + m]</code></pre>
 <p>which returns the “expected”</p>
-<pre><code>a + a**a</code></pre>
+<pre class="output"><code>a + a^2</code></pre>
 <p>versus</p>
 <pre><code>Module[{i = a}, i + m]</code></pre>
 <p>which returns the “surprising”</p>
-<pre><code>a + i**i</code></pre>
+<pre class="output"><code>a + i**i</code></pre>
 <p>The reason for this behavior is that <code>Block</code> effectively
 evaluates <code>i</code> as a <em>local variable</em> and evaluates
 <code>m</code> using whatever values are available at the time of
@@ -2393,11 +2445,11 @@ can lead to many surprises when using rules and substitution inside a
 <code>Module</code>. For example:</p>
 <pre><code>Block[{i = a}, i_ -&gt; i]</code></pre>
 <p>will return</p>
-<pre><code>i_ -&gt; a</code></pre>
+<pre class="output"><code>i_ -&gt; a</code></pre>
 <p>whereas</p>
 <pre><code>Module[{i = a}, i_ -&gt; i]</code></pre>
 <p>will return</p>
-<pre><code>i_ -&gt; i</code></pre>
+<pre class="output"><code>i_ -&gt; i</code></pre>
 <p>More devastating for <code>NCAlgebra</code> is the fact that
 <code>Module</code> will hide local definitions from rules, which will
 often lead to disaster if local variables need to be declared
@@ -2424,11 +2476,11 @@ product of their arguments, say, <code>x**y</code>, into
 work “as expected.” Indeed, verify that</p>
 <pre><code>G[x**y]</code></pre>
 <p>returns the “expected”</p>
-<pre><code>y**x</code></pre>
+<pre class="output"><code>y**x</code></pre>
 <p>whereas</p>
 <pre><code>F[x**y]</code></pre>
 <p>returns</p>
-<pre><code>x y</code></pre>
+<pre class="output"><code>x y</code></pre>
 <p>which completely destroys the noncommutative product. The reason for
 the catastrophic failure of the definition of <code>F</code>, which is
 inside a <code>Module</code>, is that the letters <code>aa</code> and
@@ -2445,7 +2497,7 @@ execution.</p>
 <p>The above subtlety often manifests itself partially, sometimes
 causing what might be perceived as some kind of <em>erratic
 behavior</em>. Indeed, if one had used symbols that were already
-declared globaly noncommutative by <code>NCAlgebra</code>, such as
+declared globally noncommutative by <code>NCAlgebra</code>, such as
 single small cap roman letters as in the definition:</p>
 <pre><code>H[exp_] := Module[
   {rule, a, b},
@@ -2480,36 +2532,38 @@ m2 = {{d, 2}, {e, 3}}</code></pre>
 <p>the call</p>
 <pre><code>m1**m2</code></pre>
 <p>results in</p>
-<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}}</code></pre>
+<pre class="output"><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}}</code></pre>
 <p>Upon calling</p>
 <pre><code>m1**m2 // NCMatrixExpand</code></pre>
-<p>evaluation takes place returning</p>
-<pre><code>{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}</code></pre>
+<p>the matrix product evaluation takes place returning</p>
+<pre class="output"><code>{{a**d + b**e, 2a + 3b}, {c**d + d**e, 2c + 3d}}</code></pre>
 <p>which is what would have arisen from calling
 <code>NCDot[m1,m2]</code><a href="#fn8" class="footnote-ref" id="fnref8"
 role="doc-noteref"><sup>8</sup></a>. Likewise</p>
 <pre><code>inv[m1]</code></pre>
 <p>results in</p>
-<pre><code>inv[{{a, b}, {c, d}}]</code></pre>
+<pre class="output"><code>inv[{{a, b}, {c, d}}]</code></pre>
 <p>and</p>
 <pre><code>inv[m1] // NCMatrixExpand</code></pre>
 <p>returns the evaluated result</p>
-<pre><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
+<pre class="output"><code>{{inv[a]**(1 + b**inv[d - c**inv[a]**b]**c**inv[a]), -inv[a]**b**inv[d - c**inv[a]**b]}, 
  {-inv[d - c**inv[a]**b]**c**inv[a], inv[d - c**inv[a]**b]}}</code></pre>
 <p>or, using <code>MatrixForm</code>:</p>
-<p><span class="math inline">\(\begin{bmatrix} a^{-1} (1 + b (d - c
+<pre><code>inv[m1] // NCMatrixExpand // MatrixForm</code></pre>
+<p>returns</p>
+<p><span class="math display">\[\begin{bmatrix} a^{-1} (1 + b (d - c
 a^{-1} b)^{-1} c a^{-1}) &amp; -a^{-1} b (d - c a^{-1} b)^{-1} \\ -(d -
 c a^{-1} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b)^{-1}
-\end{bmatrix}\)</span></p>
+\end{bmatrix}\]</span></p>
 <p>A less trivial example is</p>
 <pre><code>m3 = m1**inv[IdentityMatrix[2] + m1] - inv[IdentityMatrix[2] + m1]**m1</code></pre>
 <p>that returns</p>
-<pre><code>-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
-    {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]</code></pre>
+<pre class="output"><code>-inv[{{1 + a, b}, {c, 1 + d}}]**{{a, b}, {c, d}} + 
+     {{a, b}, {c, d}}**inv[{{1 + a, b}, {c, 1 + d}}]</code></pre>
 <p>Expanding</p>
 <pre><code>NCMatrixExpand[m3]</code></pre>
 <p>results in</p>
-<pre><code>{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
+<pre class="output"><code>{{b**inv[b - (1 + a)**inv[c]**(1 + d)] - inv[c]**(1 + (1 + d)**inv[b - 
     (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c])**c - a**inv[c]**(1 + d)**inv[b - 
     (1 + a)**inv[c]**(1 + d)] + inv[c]**(1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**a, 
   a**inv[c]**(1 + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]) - 
@@ -2521,10 +2575,10 @@ c a^{-1} b)^{-1} c a^{-1} &amp; (d - c a^{-1} b)^{-1}
   1 - inv[b - (1 + a)**inv[c]**(1 + d)]**b - d**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + 
     a)**inv[c] + (1 + d)**inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c] + 
     inv[b - (1 + a)**inv[c]**(1 + d)]**(1 + a)**inv[c]**d}}</code></pre>
-<p>and finally</p>
+<p>and, finally,</p>
 <pre><code>NCMatrixExpand[m3] // NCSimplifyRational    </code></pre>
 <p>returns</p>
-<pre><code>{{0, 0}, {0, 0}}</code></pre>
+<pre class="output"><code>{{0, 0}, {0, 0}}</code></pre>
 <p>as expected.</p>
 <h3 data-number="6.2.1" id="trouble-with-plus-and-matrices"><span
 class="header-section-number">6.2.1</span> Trouble with
@@ -2536,19 +2590,21 @@ is <code>Listable</code>, and an expression like</p>
 <pre><code>z + m1</code></pre>
 <p>where <code>m1</code> is an array and <code>z</code> is not, is
 automatically expanded into</p>
-<pre><code>{{a + z, b + z}, {c + z, d + z}}</code></pre>
+<pre class="output"><code>{{a + z, b + z}, {c + z, d + z}}</code></pre>
 <p>or, using <code>MatrixForm</code>:</p>
-<p><span class="math inline">\(\begin{bmatrix} a + z &amp; b + z \\ c +
-z &amp; d + z \end{bmatrix}\)</span></p>
+<pre><code>z + m1 // MatrixForm</code></pre>
+<p>resulting in</p>
+<p><span class="math display">\[\begin{bmatrix} a + z &amp; b + z \\ c +
+z &amp; d + z \end{bmatrix}\]</span></p>
 <p>Because of this “feature”, the expression</p>
 <pre><code>m1**m2 + m2 // NCMatrixExpand</code></pre>
 <p>evaluates to the “wrong” result</p>
-<pre><code>{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
+<pre class="output"><code>{{{{d + a**d + b**e, 2 a + 3 b + d}, {d + c**d + d**e, 2 c + 4 d}},
  {{2 + a**d + b**e, 2 + 2 a + 3 b}, {2 + c**d + d**e, 2 + 2 c + 3 d}}}, 
  {{{e + a**d + b**e, 2 a + 3 b + e}, {e + c**d + d**e, 2 c + 3 d + e}}, 
  {{3 + a**d + b**e, 3 + 2 a + 3 b}, {3 + c**d + d**e, 3 + 2 c + 3 d}}}}</code></pre>
 <p>which is different than the “correct” result</p>
-<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+<pre class="output"><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
  {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
 <p>which is returned by either</p>
 <pre><code>NCMatrixExpand[m1**m2] + m2</code></pre>
@@ -2568,17 +2624,17 @@ As seen in the section <a href="#ReplaceWithMatrices">Replace with
 matrices</a>, the command</p>
 <pre><code>NCMatrixReplaceAll[x**y + y, {x -&gt; m1, y -&gt; m2}]</code></pre>
 <p>produces the expected result:</p>
-<pre><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
+<pre class="output"><code>{{d + a**d + b**e, 2 + 2 a + 3 b}, 
  {e + c**d + d**e, 3 + 2 c + 3 d}}</code></pre>
 <p>Note that the above behavior might be erratic, since in an expression
 like</p>
 <pre><code>m1**m2 + m2**m1</code></pre>
 <p>in which <code>**</code> is kept unevaluated as in</p>
-<pre><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}</code></pre>
+<pre class="output"><code>{{a, b}, {c, d}}**{{d, 2}, {e, 3}} + {{d, 2}, {e, 3}}**{{a, b}, {c, d}}</code></pre>
 <p>the command</p>
 <pre><code>m1**m2 + m2**m1 // NCMatrixExpand</code></pre>
 <p>expands to the expected result</p>
-<pre><code>{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
+<pre class="output"><code>{{2 c + a**d + b**e + d**a, 2 a + 3 b + 2 d + d**b}, 
  {3 c + c**d + d**e + e**a, 2 c + 6 d + e**b}}</code></pre>
 <h2 data-number="6.3" id="PolysWithCommutativeCoefficients"><span
 class="header-section-number">6.3</span> Polynomials with commutative
@@ -2601,16 +2657,14 @@ href="#NCGB">Noncommutative Gröbner Basis</a>.</p>
 <p>Before getting into details, to see how much more efficient
 <code>NCPoly</code> is when compared with standard
 <code>NCAlgebra</code> objects try</p>
-<pre><code>Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 20, 5}]</code></pre>
+<pre><code>Table[Timing[NCExpand[(1 + x)^i]][[1]], {i, 0, 15, 5}]</code></pre>
 <p>which would typically return something like</p>
-<pre><code>{0.000088, 0.001074, 0.017322, 0.240704, 3.61492, 52.0254}</code></pre>
+<pre class="output"><code>{0.000088, 0.001074, 0.017322, 0.240704, 3.61492}</code></pre>
 <p>whereas the equivalent</p>
 <pre><code>&lt;&lt; NCPoly`
-Table[Timing[(1 + NCPolyMonomial[{x}, {x}])^i][[1]], {i, 0, 20, 5}]</code></pre>
+Table[Timing[(1 + NCPolyMonomial[{x}, {x}])^i][[1]], {i, 0, 15, 5}]</code></pre>
 <p>would return</p>
-<pre><code>{0.00097, 0.001653, 0.002208, 0.003908, 0.004306, 0.005049}</code></pre>
-<p>Beware that <code>NCPoly</code> objects have limited functionality
-and should still be considered experimental at this point.</p>
+<pre class="output"><code>{0.00097, 0.001653, 0.002208, 0.003908, 0.004306}</code></pre>
 <p>The best way to work with <code>NCPoly</code> in
 <code>NCAlgebra</code> is by loading the package <a
 href="#PackageNCPolyInterface"><code>NCPolyInterface</code></a>:</p>
@@ -2629,14 +2683,14 @@ object. The reason for the braces in the definition of <code>vars</code>
 will be explained below, when we introduce <em>ordering</em>. See also
 Section <a href="#NCGB">Noncommutative Gröbner Basis</a>. The result in
 this case is the <code>NCPoly</code> object</p>
-<pre><code>NCPoly[{1, 1, 1}, &lt;|{0, 0, 0, 0} -&gt; 1, {0, 0, 2, 0} -&gt; 1, {1, 1, 1, 5} -&gt; -2|&gt;]</code></pre>
+<pre class="output"><code>NCPoly[{1, 1, 1}, &lt;|{0, 0, 0, 0} -&gt; 1, {0, 0, 2, 0} -&gt; 1, {1, 1, 1, 5} -&gt; -2|&gt;]</code></pre>
 <p>Conversely the command <a
 href="#NCPolyToNC"><code>NCPolyToNC</code></a> converts an
 <code>NCPoly</code> back into <code>NCAlgebra</code> format. For
 example</p>
 <pre><code>NCPolyToNC[p, vars]</code></pre>
 <p>returns</p>
-<pre><code>1 + x**x - 2 x**y**z</code></pre>
+<pre class="output"><code>1 + x^2 - 2 x**y**z</code></pre>
 <p>as expected. Note that an <code>NCPoly</code> object does not store
 symbols, but rather a representation of the polynomial based on
 specially encoded monomials. This is the reason why one should provide
@@ -2655,7 +2709,7 @@ variables <code>vars</code>. For example:</p>
 <pre><code>vars = {{x}, {y, z}};
 p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]</code></pre>
 <p>produces:</p>
-<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 2, 0} -&gt; 1, {2, 1, 5} -&gt; -2|&gt;</code></pre>
+<pre class="output"><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {0, 2, 0} -&gt; 1, {2, 1, 5} -&gt; -2|&gt;</code></pre>
 <p>The sequence of braces in the list of <em>variables</em> encodes the
 <em>ordering</em> to be used for sorting <code>NCPoly</code>s. Orderings
 specify how monomials should be ordered, and is discussed in detail in
@@ -2666,11 +2720,11 @@ prints the polynomial ordering implied by a list of symbols. For
 example</p>
 <pre><code>NCPolyDisplayOrder[{x,y,z}]</code></pre>
 <p>prints out</p>
-<p><span class="math inline">\(x \ll y \ll z\)</span></p>
+<p><span class="math display">\[x \ll y \ll z\]</span></p>
 <p>and</p>
 <pre><code>NCPolyDisplayOrder[{{x},{y,z}}]</code></pre>
 <p>prints out</p>
-<p><span class="math inline">\(x \ll y &lt; z\)</span></p>
+<p><span class="math display">\[x \ll y &lt; z\]</span></p>
 <p>from where you can see that grouping variables inside braces induces
 a graded type ordering, as discussed in <a href="#NCGB">Noncommutative
 Gröbner Basis</a>. <code>NCPoly</code>s constructed from different
@@ -2685,29 +2739,29 @@ x\)</span> and <span class="math inline">\(x y\)</span>.</p>
 <pre><code>vars = {{x}, {y, z}};
 1 + NCPolyMonomial[{x, y}, vars] - 2 NCPolyMonomial[{y, x}, vars]</code></pre>
 <p>returns</p>
-<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {1, 1, 1} -&gt; 1, {1, 1, 3} -&gt; -2|&gt;]</code></pre>
+<pre class="output"><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {1, 1, 1} -&gt; 1, {1, 1, 3} -&gt; -2|&gt;]</code></pre>
 <p>and</p>
 <pre><code>p = (1 + NCPolyMonomial[{x}, vars]**NCPolyMonomial[{y}, vars])^2</code></pre>
 <p>returns</p>
-<pre><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {1, 1, 1} -&gt; 2, {2, 2, 10} -&gt; 1|&gt;]</code></pre>
+<pre class="output"><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {1, 1, 1} -&gt; 2, {2, 2, 10} -&gt; 1|&gt;]</code></pre>
 <p>Another convenience function is <code>NCPolyDisplay</code> which
 returns a list with the monomials appearing in an <code>NCPoly</code>
 object. For example:</p>
 <pre><code>NCPolyDisplay[p, vars]</code></pre>
 <p>returns</p>
-<pre><code>{x.y.x.y, 2 x.y, 1}</code></pre>
+<pre class="output"><code>{x.y.x.y, 2 x.y, 1}</code></pre>
 <p>The reason for displaying an <code>NCPoly</code> object as a list is
 so that the monomials can appear in the same order as they are stored.
 Using <code>Plus</code> would revert to Mathematica’s default ordering.
 For example</p>
-<pre><code>p = NCToNCPoly[1 + x**x**x - 2 x**x + z, vars]
+<pre><code>p = NCToNCPoly[1 + x**y**x - 2 x**x + z, vars]
 NCPolyDisplay[p, vars]</code></pre>
 <p>returns</p>
-<pre><code>{z, x.x.x, -2 x.x, 1}</code></pre>
+<pre class="output"><code>{x.y.x, z, -2 x.x, 1}</code></pre>
 <p>whereas</p>
 <pre><code>NCPolyToNC[p, vars]</code></pre>
 <p>would return</p>
-<pre><code>1 + z - 2 x**x + x**x**x</code></pre>
+<pre class="output"><code>1 - 2 x^2 + z + x**y**x</code></pre>
 <p>in which the sorting of the monomials has been destroyed by
 <code>Plus</code>.</p>
 <p>The monomials appear sorted in decreasing order from left to right,
@@ -2715,10 +2769,10 @@ with <code>z</code> being the <em>leading term</em> in the above
 example.</p>
 <p>With <code>NCPoly</code> the Mathematica command <code>Sort</code> is
 modified to sort lists of polynomials. For example</p>
-<pre><code>polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars]
+<pre><code>polys = NCToNCPoly[{x**x**x, 2 y**x - z, z, y**x - x**x}, vars];
 ColumnForm[NCPolyDisplay[Sort[polys], vars]]</code></pre>
 <p>returns</p>
-<pre><code>{x.x.x}
+<pre class="output"><code>{x.x.x}
 {z}
 {y.x, -x.x}
 {2 y.x, -z}</code></pre>
@@ -2734,8 +2788,8 @@ commutative coefficients in which certain variables are considered to be
 unknown, i.e. <em>variables</em>, where others are considered to be
 known, i.e. <em>coefficients</em>. For example, in many problems in
 systems and control the following expression</p>
-<p><span class="math inline">\(p(x) = a x + x a^T - x b x +
-c\)</span></p>
+<p><span class="math display">\[p(x) = a x + x a^T - x b x +
+c\]</span></p>
 <p>is often seen as a polynomial in the noncommutative unknown
 <code>x</code> with known noncommutative coefficients <code>a</code>,
 <code>b</code>, and <code>c</code>. A typical problem is the
@@ -2756,14 +2810,14 @@ p = NCToNCPolynomial[a**x + x**tp[a] - x**b**x + c, vars]</code></pre>
 from the standard <code>NCAlgebra</code> format into an
 <code>NCPolynomial</code> object. The result in this case is the
 <code>NCPolynomial</code> object</p>
-<pre><code>NCPolynomial[c, &lt;|{x} -&gt; {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -&gt; {{-1, 1, b, 1}}|&gt;, {x}]</code></pre>
+<pre class="output"><code>NCPolynomial[c, &lt;|{x} -&gt; {{1, a, 1}, {1, 1, tp[a]}}, {x, x} -&gt; {{-1, 1, b, 1}}|&gt;, {x}]</code></pre>
 <p>Conversely the command <a
 href="#NCPolynomialToNC"><code>NCPolynomialToNC</code></a> converts an
 <code>NCPolynomial</code> back into <code>NCAlgebra</code> format. For
 example</p>
 <pre><code>NCPolynomialToNC[p]</code></pre>
 <p>returns</p>
-<pre><code>c + a**x + x**tp[a] - x**b**x</code></pre>
+<pre class="output"><code>c + a**x + x**tp[a] - x**b**x</code></pre>
 <p>An <code>NCPolynomial</code> does store information about the
 polynomial symbols and a list of variables is required only at the time
 of creation of the <code>NCPolynomial</code> object.</p>
@@ -2773,16 +2827,16 @@ always expanded. For example:</p>
 <pre><code>vars = {x,y}
 1 + NCToNCPolynomial[x**y, vars] - 2 NCToNCPolynomial[y**x, vars]</code></pre>
 <p>returns</p>
-<pre><code>NCPolynomial[1, &lt;|{y**x} -&gt; {{-2, 1, 1}}, {x**y} -&gt; {{1, 1, 1}}|&gt;, {x, y}]</code></pre>
+<pre class="output"><code>NCPolynomial[1, &lt;|{y**x} -&gt; {{-2, 1, 1}}, {x**y} -&gt; {{1, 1, 1}}|&gt;, {x, y}]</code></pre>
 <p>and</p>
 <pre><code>(1 + NCToNCPolynomial[x, vars]**NCToNCPolynomial[y, vars])^2</code></pre>
 <p>returns</p>
-<pre><code>NCPolynomial[1, &lt;|{x**y**x**y} -&gt; {{1, 1, 1}}, {x**y} -&gt; {{2, 1, 1}}|&gt;, {x, y}]</code></pre>
+<pre class="output"><code>NCPolynomial[1, &lt;|{x**y**x**y} -&gt; {{1, 1, 1}}, {x**y} -&gt; {{2, 1, 1}}|&gt;, {x, y}]</code></pre>
 <p>To see how much more efficient <code>NCPolynomial</code> is when
 compared with standard <code>NCAlgebra</code> objects try</p>
-<pre><code>Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 20, 5}]</code></pre>
+<pre><code>Table[Timing[(NCToNCPolynomial[x, vars])^i][[1]], {i, 0, 15, 5}]</code></pre>
 <p>would return</p>
-<pre><code>{0.000493, 0.003345, 0.005974, 0.013479, 0.018575, 0.02896}</code></pre>
+<pre class="output"><code>{0.000493, 0.003345, 0.005974, 0.013479, 0.018575}</code></pre>
 <p>As you can see, <code>NCPolynomial</code>s are not as efficient as
 <code>NCPoly</code>s but still much more efficient than
 <code>NCAlgebra</code> polynomials.</p>
@@ -2791,7 +2845,7 @@ do provide the <code>NCPSort</code> command that produces a list of
 terms sorted by degree. For example</p>
 <pre><code>NCPSort[p]</code></pre>
 <p>returns</p>
-<pre><code>{c, a**x, x**tp[a], -x**b**x}</code></pre>
+<pre class="output"><code>{c, a**x, x**tp[a], -x**b**x}</code></pre>
 <p>A useful feature of <code>NCPolynomial</code> is the capability of
 handling polynomial matrices. For example</p>
 <pre><code>mat1 = {{a**x + x**tp[a] + c**y + tp[y]**tp[c] - x**q**x, b**x}, 
@@ -2850,10 +2904,9 @@ features on linear polynomial matrices.</p>
 <h2 data-number="6.5" id="Linear"><span
 class="header-section-number">6.5</span> Linear polynomials</h2>
 <p>Another interesting class of nc polynomials is that of linear
-polynomials, which can be factored in the form: <span
-class="math display">\[
-    s(x) = l (F \otimes x) r
-\]</span> where <span class="math inline">\(l\)</span> and <span
+polynomials, which can be factored in the form:</p>
+<p><span class="math display">\[s(x) = l (F \otimes x) r\]</span></p>
+<p>where <span class="math inline">\(l\)</span> and <span
 class="math inline">\(r\)</span> are vectors with symbolic expressions
 and <span class="math inline">\(F\)</span> is a numeric matrix. This
 functionality is in the package</p>
@@ -2865,13 +2918,13 @@ linear nc polynomial into the the above form. For example:</p>
 expr = 1 + a**x + x**tp[a] - x + b**y**d + tp[d]**tp[y]**tp[b];
 {const, lin} = NCToNCSylvester[expr, vars];</code></pre>
 <p>which returns</p>
-<pre><code>const = 1</code></pre>
+<pre class="output"><code>const = 1</code></pre>
 <p>and an <code>Association</code> <code>lin</code> containing the
 factorization. For example</p>
 <pre><code>lin[x]</code></pre>
 <p>returns a list with the left and right vectors <code>l</code> and
 <code>r</code> and the coefficient array <code>F</code>.</p>
-<pre><code>{{1, a}, {1, a^T}, SparseArray[&lt; 2 &gt;, {2, 2}]}</code></pre>
+<pre class="output"><code>{{1, a}, {1, a^T}, SparseArray[&lt; 2 &gt;, {2, 2}]}</code></pre>
 <p>which in this case is the matrix:</p>
 <p><span class="math display">\[
 \begin{bmatrix}
@@ -2882,7 +2935,7 @@ factorization. For example</p>
 <p>and</p>
 <pre><code>lin[tp[y]]</code></pre>
 <p>returns</p>
-<pre><code>{{d^T}, {b^T}, SparseArray[&lt; 1 &gt;, {1, 1}]}</code></pre>
+<pre class="output"><code>{{d^T}, {b^T}, SparseArray[&lt; 1 &gt;, {1, 1}]}</code></pre>
 <p>Note that transposes and adjoints are treated as independent
 variables.</p>
 <p>Perhaps the most useful consequence of the above factorization is the
@@ -2897,7 +2950,7 @@ expr = a**x**c - a**x**d - a**y**c + a**y**d + b**x**c - b**x**d - b**y**c + b**
 {const, lin} = NCToNCSylvester[expr, vars];
 NCSylvesterToNC[{const, lin}]</code></pre>
 <p>produces:</p>
-<pre><code>(a + b)**x**(c - d) + (a + b)**y**(-c + d)</code></pre>
+<pre class="output"><code>(a + b)**x**(c - d) + (a + b)**y**(-c + d)</code></pre>
 <p>This factorization even works with linear matrix polynomials, and is
 used by the our semidefinite programming algorithm (see Chapter <a
 href="#SemidefiniteProgramming">Semidefinite Programming</a>) to factor
@@ -2909,7 +2962,7 @@ expr = {{a**x + x**tp[a], b**x, tp[c]},
         {c, d, -1}};
 {const, lin} = NCToNCSylvester[expr, vars]</code></pre>
 <p>result in:</p>
-<pre><code>const = SparseArray[&lt; 6 &gt;, {3, 3}]
+<pre class="output"><code>const = SparseArray[&lt; 6 &gt;, {3, 3}]
 lin = &lt;|x -&gt; {{1, a, b}, {1, tp[a], tp[b]}, SparseArray[&lt; 4 &gt;, {9, 9}]}|&gt;</code></pre>
 <p>See <span class="citation" data-cites="oliveira:SSP:2012">(Oliveira
 2012)</span> for details on the structure of the constant array <span
