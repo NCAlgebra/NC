@@ -231,7 +231,7 @@ evaluates to
 tr[a] + tr[d]
 ```
 
-## Replace
+## Replace {#BasicReplace}
 
 A key feature of symbolic computation is the ability to perform
 substitutions. The Mathematica substitute commands, e.g. `ReplaceAll`

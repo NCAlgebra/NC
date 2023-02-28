@@ -2,8 +2,14 @@
 title: The NCAlgebra Suite
 subtitle: Version 6.0.0
 header-includes: |
-  \usepackage{tcolorbox}
-  \renewenvironment{quote}{\begin{tcolorbox}[colback=MidnightBlue!10!white]}{\end{tcolorbox}}
+  \makeatletter
+  \newcommand{\@minipagerestore}{\setlength{\parskip}{\medskipamount}}
+  \makeatother
+  \newsavebox{\mybox}
+  \setlength{\fboxsep}{10pt}
+  \renewenvironment{quote}%
+  {\begin{lrbox}{\mybox}\begin{minipage}{\textwidth}}%
+  {\end{minipage}\end{lrbox}\colorbox{black!7!white}{\usebox{\mybox}}}
 author: 
 - J. William Helton
 - Mauricio C. de Oliveira
@@ -54,7 +60,7 @@ date:
 This work was partially supported by the Division of Mathematical
 Sciences of the National Science Foundation.
 
-The program was written by the authors with mjor earlier contributions from:
+The program was written by the authors with major earlier contributions from:
 
 * Mark Stankus, Math, Cal Poly San Luis Obispo
 * Robert L. Miller, General Atomics Corp

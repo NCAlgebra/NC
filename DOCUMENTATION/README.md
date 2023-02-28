@@ -65,7 +65,7 @@ All rights reserved.
   - <a href="#to-commute-or-not-to-commute" id="toc-to-commute-or-not-to-commute"><span class="toc-section-number">5.1</span> To Commute Or Not To Commute?</a>
   - <a href="#inverses" id="toc-inverses"><span class="toc-section-number">5.2</span> Inverses</a>
   - <a href="#transposes-and-adjoints" id="toc-transposes-and-adjoints"><span class="toc-section-number">5.3</span> Transposes and Adjoints</a>
-  - <a href="#replace" id="toc-replace"><span class="toc-section-number">5.4</span> Replace</a>
+  - <a href="#replace" id="toc-BasicReplace"><span class="toc-section-number">5.4</span> Replace</a>
   - <a href="#polynomials" id="toc-polynomials"><span class="toc-section-number">5.5</span> Polynomials</a>
   - <a href="#rationals-and-simplification" id="toc-rationals-and-simplification"><span class="toc-section-number">5.6</span> Rationals and Simplification</a>
   - <a href="#calculus" id="toc-calculus"><span class="toc-section-number">5.7</span> Calculus</a>
@@ -424,7 +424,7 @@ All rights reserved.
 This work was partially supported by the Division of Mathematical
 Sciences of the National Science Foundation.
 
-The program was written by the authors with mjor earlier contributions from:
+The program was written by the authors with major earlier contributions from:
 
 - Mark Stankus, Math, Cal Poly San Luis Obispo
 - Robert L. Miller, General Atomics Corp
@@ -452,45 +452,50 @@ The beginnings of the program come from eran@slac.
     allow for powers to be present in `NonCommutativeMultiply`.
 
     > **WARNING:** THIS IS A BREAKING CHANGE THAT CAN AFFECT EXISTING
-    > PROGRAMS USING NCALGEBRA. THE MOST NOTABLE LIKELY CONSTRUCTION THAT
-    > IS AFFECTED BY THIS CHANGE IS THE APPLICATION OF RULES BASED ON
-    > PATTERN MATCHING, WHICH NOW NEED TO EXPLICITLY TAKE INTO ACCOUNT
-    > THE PRESENCE OF EXPONENTS. SEE MANUAL FOR DETAILS ON HOW TO
-    > MITIGATE THE IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE
-    > BEEN REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
+    > PROGRAMS USING NCALGEBRA. THE MOST NOTABLE LIKELY CONSTRUCTION
+    > THAT IS AFFECTED BY THIS CHANGE IS THE APPLICATION OF RULES BASED
+    > ON PATTERN MATCHING, WHICH NOW NEED TO EXPLICITLY TAKE INTO
+    > ACCOUNT THE PRESENCE OF EXPONENTS. SEE
+    > [NOTES ON MANUAL](#replace) FOR DETAILS ON HOW TO MITIGATE
+    > THE IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE BEEN
+    > REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.
 
-3.  Streamlined rules for [NCSimplifyRational](#ncsimplifyrational-1).
+3.  `NCTEST` renamed `NCCORETEST`
 
-4.  `NonCommutativeMultiply`: new functions
+4.  Tests must now be run as contexts: e.g. `` << NCCORETEST` `` instead of `<< NCCORETEST`
+
+5.  `NonCommutativeMultiply`: new functions
     [NCExpandExponents](#ncexpandexponents) and [NCToList](#nctolist).
 
-5.  `NCReplace`: new functions
+6.  `NCReplace`: new functions
     [NCReplacePowerRule](#ncreplacepowerrule); new option
     `ApplyPowerRule`.
 
-6.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
+7.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
 
-7.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices)
+8.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices)
     and [GetFullLDUMatrices](#getfullldumatrices) now produces low rank
     matrices.
 
-8.  `NCPoly`: new function
+9.  `NCPoly`: new function
     [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
     `NCPolyFullReduce`
     renamed [NCPolyReduceRepeated](#ncpolyreducerepeated).
 
-9.  `NCPolyInterface`: new functions [NCToRule](#nctorule),
+10. `NCPolyInterface`: new functions [NCToRule](#nctorule),
     [NCReduce](#ncreduce), and [NCReduceRepeated](#ncreducerepeated).
 
-10. New functions [SetCommutativeFunction](#setcommutativefunction)
+11. New functions [SetCommutativeFunction](#setcommutativefunction)
     and [SetNonCommutativeFunction](#setnoncommutativefunction).
 
-11. The old `C++` version of `NCGB` is no longer compatible with
+12. The old `C++` version of `NCGB` is no longer compatible with
     `NCAlgebra` *version 6*. Consider using [`NCGBX`](#ncgbx)
     instead.
 
-12. No longer loads the package `Notation` by default. Controlled by
+13. No longer loads the package `Notation` by default. Controlled by
     the new option `UseNotation` in [`NCOptions`](#ncoptions).
+
+14. Streamlined rules for [NCSimplifyRational](#ncsimplifyrational-1).
 
 # Changes in Version 5.0
 
@@ -594,7 +599,7 @@ installed using our paclet distribution. Just type:
 
     PacletInstall["https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true"];
 
-In the near future we plant to submit paclets to the Wolfram paclet
+In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.
 
 Alternatively, you can download and install NCAlgebra as outlined in
@@ -4234,11 +4239,13 @@ Packages are automatically loaded unless otherwise noted.
 
 ## Manual Installation
 
-Manual installation is no longer necessary nor advisable. Consider
-installing NCAlgebra via our paclet distribution, as discussed in
-section [Installing NCAlgebra](#installing-ncalgebra).
+Manual installation is no longer necessary nor advisable. As an
+alternative to manual installation, consider installing NCAlgebra via
+our paclet distribution, as discussed in section [Installing
+NCAlgebra](#installing-ncalgebra).
 
-You can download NCAlgebra in one of the following ways.
+For those who do not use paclets, you can download NCAlgebra in one of
+the following ways.
 
 ### Via `git clone`
 

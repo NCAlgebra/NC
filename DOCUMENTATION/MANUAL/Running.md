@@ -17,7 +17,7 @@ installed using our paclet distribution. Just type:
 
     PacletInstall["https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true"];
 
-In the near future we plant to submit paclets to the Wolfram paclet
+In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.
 
 Alternatively, you can download and install NCAlgebra as outlined in
@@ -35,7 +35,7 @@ to load `NCAlgebra`.
 Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#NCOptions) and [here](#PackageNCAlgebra).
 
 > If you performed a manual installation of NCAlgebra you will need to type
->
+> 
 >     << NC`
 >
 > before loading NCAlgebra.

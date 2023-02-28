@@ -113,7 +113,7 @@ class="toc-section-number">5.2</span> Inverses</a></li>
 <li><a href="#transposes-and-adjoints"
 id="toc-transposes-and-adjoints"><span
 class="toc-section-number">5.3</span> Transposes and Adjoints</a></li>
-<li><a href="#replace" id="toc-replace"><span
+<li><a href="#BasicReplace" id="toc-BasicReplace"><span
 class="toc-section-number">5.4</span> Replace</a></li>
 <li><a href="#polynomials" id="toc-polynomials"><span
 class="toc-section-number">5.5</span> Polynomials</a></li>
@@ -1078,7 +1078,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></pre>
 class="header-section-number">1</span> Acknowledgements</h1>
 <p>This work was partially supported by the Division of Mathematical
 Sciences of the National Science Foundation.</p>
-<p>The program was written by the authors with mjor earlier
+<p>The program was written by the authors with major earlier
 contributions from:</p>
 <ul>
 <li>Mark Stankus, Math, Cal Poly San Luis Obispo</li>
@@ -1110,12 +1110,15 @@ to allow for powers to be present in
 EXISTING PROGRAMS USING NCALGEBRA. THE MOST NOTABLE LIKELY CONSTRUCTION
 THAT IS AFFECTED BY THIS CHANGE IS THE APPLICATION OF RULES BASED ON
 PATTERN MATCHING, WHICH NOW NEED TO EXPLICITLY TAKE INTO ACCOUNT THE
-PRESENCE OF EXPONENTS. SEE MANUAL FOR DETAILS ON HOW TO MITIGATE THE
-IMPACT OF THIS CHANGE. ALL NCALGEBRA COMMANDS HAVE BEEN REWRITTEN TO
-ACCOMODATE FOR THIS CHANGE IN REPRESENTATION.</p>
+PRESENCE OF EXPONENTS. SEE <a href="#BasicReplace">NOTES ON MANUAL</a>
+FOR DETAILS ON HOW TO MITIGATE THE IMPACT OF THIS CHANGE. ALL NCALGEBRA
+COMMANDS HAVE BEEN REWRITTEN TO ACCOMODATE FOR THIS CHANGE IN
+REPRESENTATION.</p>
 </blockquote></li>
-<li><p>Streamlined rules for <a
-href="#NCSimplifyRational">NCSimplifyRational</a>.</p></li>
+<li><p><code>NCTEST</code> renamed <code>NCCORETEST</code></p></li>
+<li><p>Tests must now be run as contexts:
+e.g. <code>&lt;&lt; NCCORETEST`</code> instead of
+<code>&lt;&lt; NCCORETEST</code></p></li>
 <li><p><code>NonCommutativeMultiply</code>: new functions <a
 href="#NCExpandExponents">NCExpandExponents</a> and <a
 href="#NCToList">NCToList</a>.</p></li>
@@ -1145,6 +1148,8 @@ instead.</p></li>
 <li><p>No longer loads the package <code>Notation</code> by default.
 Controlled by the new option <code>UseNotation</code> in <a
 href="#PackageNCOptions"><code>NCOptions</code></a>.</p></li>
+<li><p>Streamlined rules for <a
+href="#NCSimplifyRational">NCSimplifyRational</a>.</p></li>
 </ol>
 <h1 data-number="3" id="Version5_0"><span
 class="header-section-number">3</span> Changes in Version 5.0</h1>
@@ -1264,7 +1269,7 @@ class="header-section-number">4.1</span> Installing NCAlgebra</h2>
 <p>Starting with <strong>Version 6</strong>, it is recommended that
 NCAlgebra be installed using our paclet distribution. Just type:</p>
 <pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true&quot;];</code></pre>
-<p>In the near future we plant to submit paclets to the Wolfram paclet
+<p>In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.</p>
 <p>Alternatively, you can download and install NCAlgebra as outlined in
 the section <a href="#ManualInstallation">Manual Installation</a>.</p>
@@ -1515,7 +1520,7 @@ example,</p>
 <pre><code>NCMatrixExpand[tr[{{a,b},{c,d}}]]</code></pre>
 <p>evaluates to</p>
 <pre class="output"><code>tr[a] + tr[d]</code></pre>
-<h2 data-number="5.4" id="replace"><span
+<h2 data-number="5.4" id="BasicReplace"><span
 class="header-section-number">5.4</span> Replace</h2>
 <p>A key feature of symbolic computation is the ability to perform
 substitutions. The Mathematica substitute commands,
@@ -4067,10 +4072,12 @@ Installation</a>.</p>
 <p>Packages are automatically loaded unless otherwise noted.</p>
 <h2 data-number="10.1" id="ManualInstallation"><span
 class="header-section-number">10.1</span> Manual Installation</h2>
-<p>Manual installation is no longer necessary nor advisable. Consider
-installing NCAlgebra via our paclet distribution, as discussed in
-section <a href="#InstallingNCAlgebra">Installing NCAlgebra</a>.</p>
-<p>You can download NCAlgebra in one of the following ways.</p>
+<p>Manual installation is no longer necessary nor advisable. As an
+alternative to manual installation, consider installing NCAlgebra via
+our paclet distribution, as discussed in section <a
+href="#InstallingNCAlgebra">Installing NCAlgebra</a>.</p>
+<p>For those who do not use paclets, you can download NCAlgebra in one
+of the following ways.</p>
 <h3 data-number="10.1.1" id="via-git-clone"><span
 class="header-section-number">10.1.1</span> Via
 <code>git clone</code></h3>

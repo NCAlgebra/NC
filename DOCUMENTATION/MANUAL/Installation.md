@@ -1,10 +1,12 @@
 ## Manual Installation {#ManualInstallation}
 
-Manual installation is no longer necessary nor advisable. Consider
-installing NCAlgebra via our paclet distribution, as discussed in
-section [Installing NCAlgebra](#InstallingNCAlgebra).
+Manual installation is no longer necessary nor advisable. As an
+alternative to manual installation, consider installing NCAlgebra via
+our paclet distribution, as discussed in section [Installing
+NCAlgebra](#InstallingNCAlgebra).
 
-You can download NCAlgebra in one of the following ways.
+For those who do not use paclets, you can download NCAlgebra in one of
+the following ways.
 
 ### Via `git clone`
 
