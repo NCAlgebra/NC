@@ -111,7 +111,7 @@ x ** y + x ** y ** x
 ```
 because `x ** x - x ** y` is interpreted as `x ** x -> x ** y`, while
 
-    NCReduce[polys, rules, {y, x}]
+    NCReduce[polys, rules, {x, y}]
 
 produces
 ```output

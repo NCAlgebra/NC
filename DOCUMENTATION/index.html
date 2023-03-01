@@ -7361,7 +7361,7 @@ rules = x ** x - x ** y</code></pre>
 <pre class="output"><code>x ** y + x ** y ** x</code></pre>
 <p>because <code>x ** x - x ** y</code> is interpreted as
 <code>x ** x -&gt; x ** y</code>, while</p>
-<pre><code>NCReduce[polys, rules, {y, x}]</code></pre>
+<pre><code>NCReduce[polys, rules, {x, y}]</code></pre>
 <p>produces</p>
 <pre class="output"><code>x^2 + x^3</code></pre>
 <p>because <code>x ** x - x ** y</code> is interpreted as
