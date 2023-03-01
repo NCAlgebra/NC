@@ -1,10 +1,11 @@
 ## NCPolyInterface {#PackageNCPolyInterface}
 
 The package `NCPolyInterface` provides a basic interface between
-[`NCPoly`](#PackageNCPoly) and `NCAlgebra`. Note that to take full
-advantage of the speed-up possible with `NCPoly` one should always
-convert and manipulate `NCPoly` expressions before converting back to
-`NCAlgebra`.
+[`NCPoly`](#PackageNCPoly) and `NCAlgebra`. 
+
+> Note that to take full advantage of the speed-up possible with
+> `NCPoly` one should not use these functions. It is always faster to
+> convert to and manipulate `NCPoly` expressions directly!
 
 Members are:
 
@@ -88,10 +89,35 @@ See also:
 
 ### NCReduce {#NCReduce}
 
-`NCReduce[polys, rules, vars, options]` reduces the list of `polys` by
-the list of `rules` in the variables `vars`. The substitutions implied
-by `rules` are applied repeatedly to the polynomials in the `polys`
-until no further reduction occurs.
+`NCReduce[polys, rules, vars, options]` reduces the list of
+polynomials in `polys` by the list of polynomials in `rules` in the
+variables `vars`. The substitutions implied by `rules` are applied
+repeatedly to the polynomials in the `polys` until no further
+reduction occurs.
+
+Note that the exact meaning of rules depends on the polynomial
+ordering implied by the `vars`. For example, if
+
+    polys = x^3 + x ** y
+    rules = x ** x - x ** y
+
+then
+
+    NCReduce[polys, rules, {y, x}]
+
+produces
+```output
+x ** y + x ** y ** x
+```
+because `x ** x - x ** y` is interpreted as `x ** x -> x ** y`, while
+
+    NCReduce[polys, rules, {y, x}]
+
+produces
+```output
+x^2 + x^3
+```
+because `x ** x - x ** y` is interpreted as `x ** y -> x ** x`.
 
 `NCReduce[polys, vars, options]` reduces each polynomial in the list
 of `NCPoly`s `polys` with respect to the remaining elements of the

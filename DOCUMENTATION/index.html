@@ -7275,10 +7275,13 @@ minimum number of elements.</p>
 class="header-section-number">14.2</span> NCPolyInterface</h2>
 <p>The package <code>NCPolyInterface</code> provides a basic interface
 between <a href="#PackageNCPoly"><code>NCPoly</code></a> and
-<code>NCAlgebra</code>. Note that to take full advantage of the speed-up
-possible with <code>NCPoly</code> one should always convert and
-manipulate <code>NCPoly</code> expressions before converting back to
 <code>NCAlgebra</code>.</p>
+<blockquote>
+<p>Note that to take full advantage of the speed-up possible with
+<code>NCPoly</code> one should not use these functions. It is always
+faster to convert to and manipulate <code>NCPoly</code> expressions
+directly!</p>
+</blockquote>
 <p>Members are:</p>
 <ul>
 <li><a href="#NCToNCPoly">NCToNCPoly</a></li>
@@ -7344,10 +7347,25 @@ you should consider using NCPoly directly.</p>
 <h3 data-number="14.2.5" id="NCReduce"><span
 class="header-section-number">14.2.5</span> NCReduce</h3>
 <p><code>NCReduce[polys, rules, vars, options]</code> reduces the list
-of <code>polys</code> by the list of <code>rules</code> in the variables
-<code>vars</code>. The substitutions implied by <code>rules</code> are
-applied repeatedly to the polynomials in the <code>polys</code> until no
-further reduction occurs.</p>
+of polynomials in <code>polys</code> by the list of polynomials in
+<code>rules</code> in the variables <code>vars</code>. The substitutions
+implied by <code>rules</code> are applied repeatedly to the polynomials
+in the <code>polys</code> until no further reduction occurs.</p>
+<p>Note that the exact meaning of rules depends on the polynomial
+ordering implied by the <code>vars</code>. For example, if</p>
+<pre><code>polys = x^3 + x ** y
+rules = x ** x - x ** y</code></pre>
+<p>then</p>
+<pre><code>NCReduce[polys, rules, {y, x}]</code></pre>
+<p>produces</p>
+<pre class="output"><code>x ** y + x ** y ** x</code></pre>
+<p>because <code>x ** x - x ** y</code> is interpreted as
+<code>x ** x -&gt; x ** y</code>, while</p>
+<pre><code>NCReduce[polys, rules, {y, x}]</code></pre>
+<p>produces</p>
+<pre class="output"><code>x^2 + x^3</code></pre>
+<p>because <code>x ** x - x ** y</code> is interpreted as
+<code>x ** y -&gt; x ** x</code>.</p>
 <p><code>NCReduce[polys, vars, options]</code> reduces each polynomial
 in the list of <code>NCPoly</code>s <code>polys</code> with respect to
 the remaining elements of the list of polyomials <code>polys</code>. It
