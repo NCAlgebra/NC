@@ -99,7 +99,7 @@ Note that the exact meaning of rules depends on the polynomial
 ordering implied by the `vars`. For example, if
 
     polys = x^3 + x ** y
-    rules = x ** x - x ** y
+    rules = x^2 - x ** y
 
 then
 
@@ -109,7 +109,7 @@ produces
 ```output
 x ** y + x ** y ** x
 ```
-because `x ** x - x ** y` is interpreted as `x ** x -> x ** y`, while
+because `x^2 - x ** y` is interpreted as `x^2 -> x ** y`, while
 
     NCReduce[polys, rules, {x, y}]
 
@@ -117,7 +117,16 @@ produces
 ```output
 x^2 + x^3
 ```
-because `x ** x - x ** y` is interpreted as `x ** y -> x ** x`.
+because `x^2 - x ** y` is interpreted as `x ** y -> x^2`.
+
+By default, `NCReduce` only reduces the leading monomial in the
+current order. Use the optional boolean flag `Complete` to completely
+reduce all monomials. For example,
+
+    NCReduce[polys, rules, Complete -> True]
+    NCReduce[polys, Complete -> True]
+
+See [NCPolyReduce](#NCPolyReduce) for a complete list of `options`.
 
 `NCReduce[polys, vars, options]` reduces each polynomial in the list
 of `NCPoly`s `polys` with respect to the remaining elements of the
@@ -126,8 +135,7 @@ once. Use [NCReduceRepeated](#NCReduceRepeated) to continue applying
 `NCReduce` until no further reduction occurs.
 
 `NCReduce` converts `polys` and `rules` to NCPoly polynomials and
-apply [NCPolyReduce](#NCPolyReduce). See [NCPolyReduce](#NCPolyReduce)
-for the possible `options`.
+apply [NCPolyReduce](#NCPolyReduce).
 
 See also:
 [NCReduceRepeated](#NCReduceRepeated), [NCPolyReduce](#NCPolyReduce).

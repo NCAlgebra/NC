@@ -1,13 +1,17 @@
 # Noncommutative Gröbner Basis {#NCGB}
 
-The package `NCGBX` provides an implementation of a noncommutative
-Gröbner Basis algorithm. It is a Mathematica only replacement to the
-C++ `NCGB` which is still provided with this distribution. 
+Gröbner Basis are useful in the study of algebraic relations. The
+package `NCGBX` provides an implementation of a noncommutative Gröbner
+Basis algorithm. 
+
+> Starting with **Version 6**, the old `C++` version of our Groebner
+> Basis Algorithm is no longer included.
+
+It is a Mathematica only replacement to the C++
+`NCGB` which is still provided with this distribution.
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/3_NCGroebnerBasis.nb`.
-
-Gröbner Basis are useful in the study of algebraic relations.
 
 In order to load `NCGBX` one types:
 
@@ -29,28 +33,26 @@ Basis and uses of Gröbner Basis. For example, in Mathematica, the
 which, for simple collections, readily yields a solution. Likewise,
 the Mathematica `Eliminate` command tries to convert a collection of
 $m$ polynomial equations (often called relations)
-$$
-	\begin{aligned}
+
+$$\begin{aligned}
 	p_1(x_1,\ldots,x_n) &= 0 \\
 	p_2(x_1,\ldots,x_n) &= 0 \\
 	\vdots \quad & \quad \, \, \vdots \\
 	p_m(x_1,\ldots,x_n) &= 0
-	\end{aligned}
-$$
+\end{aligned}$$
 	
 in variables $x_1,x_2, \ldots x_n$ to a *triangular* form, that is a
 new collection of equations like
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 	q_1(x_1) &= 0 \\
 	q_2(x_1,x_2) &= 0 \\
 	q_3(x_1,x_2) &= 0 \\
 	q_4(x_1,x_2,x_3)&=0 \\
 	\vdots \quad & \quad \, \, \vdots \\
 	q_{r}(x_1,\ldots,x_n) &= 0.
-	\end{aligned}
-$$
+\end{aligned}$$
+
 Here the polynomials $\{q_j: 1\le j\le k_2\}$ generate the same
 *ideal* that the polynomials $\{p_j : 1\le j \le k_1\}$
 generate. Therefore, the set of solutions to the collection of
@@ -76,10 +78,12 @@ The monomial ordering imposes a relationship between the variables
 which are used to *sort* the monomials in a polynomial. The ordering
 implied by the above command can be visualized using:
 
-	PrintMonomialOrder[];
+	PrintMonomialOrder[]
 	
 which in this case prints:
+
 $$a < b < c \ll x.$$
+
 A user does not need to know theoretical background related to
 monomials orders. Indeed, as we shall see soon, in many engineering
 problems, it suffices to know which variables correspond to quantities
@@ -92,13 +96,13 @@ details on orderings see Section [Orderings](#Orderings).
 
 Our goal is to calculate the Gröbner basis associated with the
 following relations (i.e. a list of polynomials):
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 	a \, x \, a &= c, &
 	a \, b &= 1, &
 	b \, a &= 1.
-\end{aligned}
-$$
+\end{aligned}$$
+
 We shall use the word *relation* to mean a polynomial in noncommuting
 indeterminates. For example, if an analyst saw the equation $A B = 1$
 for matrices $A$ and $B$, then he might say that $A$ and $B$ satisfy
@@ -113,48 +117,48 @@ and issues the command:
 	
 	gb = NCMakeGB[rels, 10]
 
-which should produces an output similar to:
-
-	* * * * * * * * * * * * * * * *
-	* * *   NCPolyGroebner    * * *
-	* * * * * * * * * * * * * * * *
-	* Monomial order: a < b < c << x
-	* Reduce and normalize initial set
-	> Initial set could not be reduced
-	* Computing initial set of obstructions
-	> MAJOR Iteration 1, 4 polys in the basis, 2 obstructions
-	> MAJOR Iteration 2, 5 polys in the basis, 2 obstructions
-	* Cleaning up...
-	* Found Groebner basis with 3 polynomials
-	* * * * * * * * * * * * * * * *
-
+which should produce an output similar to:
+```output
+* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: a < b < c << x
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 4 polys in the basis, 2 obstructions
+> MAJOR Iteration 2, 5 polys in the basis, 2 obstructions
+* Cleaning up...
+* Found Groebner basis with 3 polynomials
+* * * * * * * * * * * * * * * *
+```
 The number `10` in the call to `NCMakeGB` is very important because a
 finite GB may not exist. It instructs `NCMakeGB` to abort after `10`
 iterations if a GB has not been found at that point.
 
 The result of the above calculation is the list of relations in the
 form of a list of rules:
-           
-	{x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
-
-**Version 5:** For efficiency, `NCMakeGB` returns a list of rules
-  instead of a list of polynomials. The left-hand side of the rule is
-  the leading monomial in the current order. This is incompatible with
-  early versions, which returned a list of polynomials. You can
-  recover the old behavior setting the option `ReturnRules ->
-  False`. This can be done in the `NCMakeGB` command or globally
-  through `SetOptions[ReturnRules -> False]`.
+```output           
+{x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
+```
+> **Version 5:** For efficiency, `NCMakeGB` returns a list of rules
+> instead of a list of polynomials. The left-hand side of the rule is
+> the leading monomial in the current order. This is incompatible with
+> early versions, which returned a list of polynomials. You can
+> recover the old behavior setting the option `ReturnRules ->
+> False`. This can be done in the `NCMakeGB` command or globally
+> through `SetOptions[ReturnRules -> False]`.
 
 Our favorite format for displaying lists of relations is `ColumnForm`.
            
 	ColumnForm[gb]
 	
 which results in 
-
-	x -> b ** c ** b
-	a ** b -> 1
-	b ** a -> 1
-
+```output
+x -> b ** c ** b
+a ** b -> 1
+b ** a -> 1
+```
 The *rules* in the output represent the relations in the GB with the
 left-hand side of the rule being the leading monomial. Replacing
 `Rule` by `Subtract` recovers the relations but one would then loose
@@ -162,21 +166,20 @@ the leading monomial as Mathematica alphabetizes the resulting sum.
 
 Someone not familiar with GB's might find it instructive to note this
 output GB effectively *solves* the input equation
-$$
-	a \, x \, a - c = 0
-$$
+
+$$a \, x \, a - c = 0$$
+
 under the assumptions that 
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 	b \, a - 1 &= 0, &
 	a \, b - 1 & =0,
-\end{aligned}
-$$
+\end{aligned}$$
+
 that is $a = b^{-1}$ and produces the expected result in the form of
 the relation:
-$$
-	x = b \, c \, b.
-$$
+
+$$ x = b \, c \, b. $$
 
 ## A slightly more challenging example
 
@@ -190,46 +193,46 @@ that is
 $a < b < c \ll x$
 
 and the relations:
-$$
-\begin{aligned}
+
+$$\begin{aligned}
   a \, x - c &= 0, \\
   a \, b \, a - a &= 0, \\
   b \, a \, b - b &= 0,
-\end{aligned}
-$$
+\end{aligned}$$
+
 from which one can recognize the problem of solving the linear
 equation $a \, x = c$ in terms of the *pseudo-inverse* $b =
-a^\dag$. The
-calculation:
+a^\dag$. The calculation:
 
 	gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
+	ColumnForm[gb]
 
 finds the Gröbner basis:
-
-	a ** x -> c
-	a ** b ** c -> c
-	a ** b ** a -> a 
-	b ** a ** b -> b
-
+```output
+a ** x -> c
+a ** b ** c -> c
+a ** b ** a -> a 
+b ** a ** b -> b
+```
 In this case the Gröbner basis cannot quite *solve* the equations but
 it remarkably produces the necessary condition for existence of
 solutions:
-$$ 
-	0 = a \, b \, c - c = a \, a^\dag c - c 
-$$ 
+
+$$ 0 = a \, b \, c - c = a \, a^\dag c - c $$ 
+
 that can be interpreted as $c$ being in the range-space of $a$.
 
-## Simplifying polynomial expresions
+## Simplifying polynomial expressions
 
 Our goal now is to verify if it is possible to *simplify* the following
 expression:
-$$
-b \, b \, a \, a - a \, a \, b \, b + a \, b \, a
-$$
-if we know that
-$$
-a \, b \, a = b
-$$
+
+	expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
+
+knowing that
+
+$$ a \, b \, a = b $$
+
 using Gröbner basis. With that in mind we set the order:
 
 	SetMonomialOrder[a,b];
@@ -238,36 +241,34 @@ and calculate the GB associated with the constraint:
 
 	rels = {a ** b ** a - b};
 	rules = NCMakeGB[rels, 10];
+	ColumnForm[rules]
 
 which produces the output
-
-	* * * * * * * * * * * * * * * *
-	* * *   NCPolyGroebner    * * *
-	* * * * * * * * * * * * * * * *
-	* Monomial order: a << b
-	* Reduce and normalize initial set
-	> Initial set could not be reduced
-	* Computing initial set of obstructions
-	> MAJOR Iteration 1, 2 polys in the basis, 1 obstructions
-	* Cleaning up...
-	* Found Groebner basis with 2 polynomials
-	* * * * * * * * * * * * * * * *
-
+```output
+* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: a << b
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 2 polys in the basis, 1 obstructions
+* Cleaning up...
+* Found Groebner basis with 2 polynomials
+* * * * * * * * * * * * * * * *
+```
 and the associated GB
-
-	a ** b ** a -> b
-	b ** b ** a -> a ** b ** b
-
+```output
+a ** b ** a -> b
+b^2 ** a -> a ** b^2
+```
 The GB revealed another relationship that must hold true if $a \, b \,
 a = b$. One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
  
-	expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
-	simp = NCReplaceRepeated[expr, rules]
+	simp = NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
 
-which results in 
-
-	simp = b
+which simplifies `simp` into `b`.
 
 ## Minimal versus reduced Gröbner Basis
 
@@ -276,7 +277,7 @@ with the *minimal* possible number of polynomials. However, such
 polynomials are not necessarily the "simplest" possible polynomials;
 called the *reduced* Gröbner Basis. The *reduced* Gröbner Basis is
 unique given the relations and the monomial order. Consider for
-example the following monimial order
+example the following monomial order
 
     SetMonomialOrder[x, y]
 	
@@ -286,39 +287,39 @@ and the relations
 	
 for which
 
-    NCMakeGB[rels]
+    NCMakeGB[rels] // ColumnForm
 	
-produces the following *minimal* Gröbner Basis
-
-	x**x->0
-	x**y->x**x**x/2
-	y**x->x**y
-	y**y->x/2+x**x**y/2
-
+produces the *minimal* Gröbner Basis
+```output
+x^2->0
+x**y->x^3/2
+y**x->x**y
+y^2->x/2+x^2**y/2
+```
 but 
 
-    NCMakeGB[rels, ReduceBasis -> True]
+    NCMakeGB[rels, ReduceBasis -> True] // ColumnForm
 
 returns the *reduced* Gröbner Basis
-
-	x**x->0
-    x**y->0
-	y**x->0
-	y**y->x/2
-
-in which not only the leading mononials but also all lower-order
+```output
+x^2->0
+x**y->0
+y**x->0
+y^2->x/2
+```
+in which not only the leading monomials but also all lower-order
 monomials have been reduced by the basis' leading monomials.
 
 
-## Simplifying rational expresions
+## Simplifying rational expressions
 
 It is often desirable to simplify expressions involving inverses of
 noncommutative expressions. One challenge is to recognize identities
 implied by the existence of certain inverses. For example, that the
 expression
-$$
-	x (1 - x)^{-1} - (1 - x)^{-1} x
-$$
+
+    expr = x ** inv[1 - x] - inv[1 - x] ** x
+
 is equivalent to $0$. One can use a nc Gröbner basis for that task.
 Consider for instance the order
 
@@ -335,40 +336,40 @@ one's intuition.
 
 Now consider the following command:
 
-	rules = NCMakeGB[{}, 3]
+	(rules = NCMakeGB[{}, 3]) // ColumnForm
 
 which produces the output
-
-	* * * * * * * * * * * * * * * *
-	* * *   NCPolyGroebner    * * *
-	* * * * * * * * * * * * * * * *
-	* Monomial order: x <<  inv[x] << inv[1 - x]
-	* Reduce and normalize initial set
-	> Initial set could not be reduced
-	* Computing initial set of obstructions
-	> MAJOR Iteration 1, 6 polys in the basis, 6 obstructions
-	* Cleaning up...
-	* Found Groebner basis with 6 polynomials
-	* * * * * * * * * * * * * * * *
-
+```output
+* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: x <<  inv[x] << inv[1 - x]
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 6 polys in the basis, 6 obstructions
+* Cleaning up...
+* Found Groebner basis with 6 polynomials
+* * * * * * * * * * * * * * * *
+```
 and results in the rules:
-
-	x ** inv[1 - x] -> -1 + inv[1 - x],
-	inv[1-x] ** x -> -1 + inv[1-x],
-
+```output
+x ** inv[1 - x] -> -1 + inv[1 - x],
+inv[1-x] ** x -> -1 + inv[1-x],
+```
 As in the previous example, the GB revealed new relationships that
 must hold true if $1- x$ is invertible, and one can use this
 relationship to *simplify* the original expression using
 `NCReplaceRepeated` as in:
 
-	NCReplaceRepeated[x ** inv[1 - x] - inv[1 - x] ** x, rules]
+	NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
 
 The above command results in `0`, as one would hope.
 
 For a more challenging example consider the identity:
-$$
-\left (1 - x - y (1 - x)^{-1} y \right )^{-1} = \frac{1}{2} (1 - x - y)^{-1} + \frac{1}{2} (1 - x + y)^{-1}
-$$
+
+$$\left (1 - x - y (1 - x)^{-1} y \right )^{-1} = \frac{1}{2} (1 - x - y)^{-1} + \frac{1}{2} (1 - x + y)^{-1}$$
+
 One can verify that the rule based command
 [NCSimplifyRational](#NCSimplifyRational) fails to simplify the
 expression:
@@ -379,25 +380,25 @@ expression:
 We set the monomial order and calculate the Gröbner basis
 
 	SetMonomialOrder[x, y, inv[1-x], inv[1-x+y], inv[1-x-y], inv[1-x-y**inv[1-x]**y]];
-	rules = NCMakeGB[{}, 3];
+	(rules = NCMakeGB[{}, 3]) // ColumnForm
 
 based on the rational involved in the original expression. The result
 is the nc GB:
+```output
+inv[1-x-y**inv[1-x]**y] -> (1/2)inv[1-x-y]+(1/2)inv[1-x+y]
+x**inv[1-x] -> -1+inv[1-x]
+y**inv[1-x+y] -> 1-inv[1-x+y]+x**inv[1-x+y]
+y**inv[1-x-y] -> -1+inv[1-x-y]-x**inv[1-x-y]
+inv[1-x]**x -> -1+inv[1-x]
+inv[1-x+y]**y -> 1-inv[1-x+y]+inv[1-x+y]**x
+inv[1-x-y]**y -> -1+inv[1-x-y]-inv[1-x-y]**x
+inv[1-x+y]**x**inv[1-x-y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x+y]**inv[1-x-y]
+inv[1-x-y]**x**inv[1-x+y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv[1-x+y]
+```
+which successfully simplifies the original expression using:
 
-	inv[1-x-y**inv[1-x]**y] -> (1/2)inv[1-x-y]+(1/2)inv[1-x+y]
-	x**inv[1-x] -> -1+inv[1-x]
-	y**inv[1-x+y] -> 1-inv[1-x+y]+x**inv[1-x+y]
-	y**inv[1-x-y] -> -1+inv[1-x-y]-x**inv[1-x-y]
-	inv[1-x]**x -> -1+inv[1-x]
-	inv[1-x+y]**y -> 1-inv[1-x+y]+inv[1-x+y]**x
-	inv[1-x-y]**y -> -1+inv[1-x-y]-inv[1-x-y]**x
-	inv[1-x+y]**x**inv[1-x-y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x+y]**inv[1-x-y]
-	inv[1-x-y]**x**inv[1-x+y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv[1-x+y]
-
-which succesfully simplifyes the original expression using:
-
-	expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
-	NCReplaceRepeated[expr, rules] // NCExpand
+	NCReplaceRepeated[expr, rules, ApplyPowerRule -> True] // NCExpand
+	NCReplaceRepeated[%, rules, ApplyPowerRule -> True]
 
 resulting in `0`.
 
@@ -451,29 +452,28 @@ graded orders, lex orders pay little attention to the degree of terms.
 Likewise its second highest priority is to eliminate $x$.
 
 Once this order is set, one can use all of the commands in the
-preceeding section in exactly the same form.
+preceding section in exactly the same form.
 
 We now give a simple example how one can solve for 
 $y$ given that $a$,$b$,$x$ and $y$
 satisfy the equations:
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 -b\, x + x\, y  \, a + x\, b \, a \,  a &= 0 \\
 x \, a-1&=0 \\
 a\, x-1&=0
-\end{aligned}
-$$
+\end{aligned}$$
 
 The command
 
-	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4] // ColumnForm
 
 produces the Gröbner basis:
-
-	y -> -b**a + a**b**x**x
-	a**x -> 1 
-	x**a -> 1
-
+```output
+y -> -b**a + a**b**x^2
+a**x -> 1 
+x**a -> 1
+```
 after one iteration.
 
 Now, we change the order to 
@@ -482,26 +482,29 @@ Now, we change the order to
 
 and run the same `NCMakeGB` as above:
 
-	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4] // ColumnForm
 	
 which, this time, results in
-	
-	x**a -> 1
-	a**x -> 1
-	x**b**a -> -x**y+b**x**x
-	b**a**a -> -y**a+a**b**x
-	x**b**b**a -> -x**b**y-x**y**b**x**x+b**x**x**b**x**x
-	b**x**x**x -> x**b+x**y**x
-	b**a**b**a -> -y**y-b**a**y-y**b**a+a**b**x**b**x**x
-	a**b**x**x -> y+b**a
-	b**a**b**b**a -> -y**b**y-b**a**b**y-y**b**b**a-y**y**b**x**x-
-	                 b**a**y**b**x**x+a**b**x**b**x**x**b**x**x
-
+```output	
+b**x^3 -> x**b+x**y**x
+x**a -> 1
+a**x -> 1
+x**b**a -> b**x^2 - x**y
+a**b**x^2 -> y+b**a
+x**b^2**a -> -x**b**y+b**x^2**b**x^2 - 
+    x**y**b**x^2
+b**a^2 -> -y**a+a**b**x
+b**a**b**a -> -y^2 - b**a**y - y**b**a+
+    a**b**x**b**x^2
+b**a**b^2**a -> -y**b**y - y**b^2**a - 
+    y^2**b**x^2 - b**a**b**y - b**a**y**b**x^2+
+    a**b**x**b**x^2**b**x^2
+```
 which is not a Gröbner basis since the algorithm was interrupted at 4
 iterations. Note the presence of the rule
-
-	a**b**x**x -> y+b**a
-	
+```output
+a**b**x**x -> y+b**a
+```	
 which shows that the order is not set up to solve for $y$ in terms of
 the other variables in the sense that $y$ is not on the left hand side
 of this rule (but a human could easily solve for $y$ using this rule).
@@ -518,24 +521,24 @@ $b$, $x$ and $y$, one types
 This ordering puts high degree monomials high in the order. Thus it
 tries to decrease the total degree of expressions. A call to 
 
-	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4,ReduceBasis->True] // ColumnForm
 
 now produces
-
-	a**x -> 1
-	x**a -> 1
-	b**a**a -> -y**a+a**b**x
-	x**b**a -> -x**y+b**x**x
-	a**b**x**x -> y+b**a
-	b**x**x**x -> x**b+x**y**x
-	a**b**x**b**x**x -> y**y+b**a**y+y**b**a+b**a**b**a
-	b**x**x**b**x**x -> x**b**y+x**b**b**a+x**y**b**x**x
-	a**b**x**b**x**b**x**x -> y**y**y+b**a**y**y+y**b**a**y+y**y**b**a+
-	                          b**a**b**a**y+b**a**y**b**a+y**b**a**b**a+
-                              b**a**b**a**b**a
-    b**x**x**b**x**b**x**x -> x**b**y**y+x**b**b**a**y+x**b**y**b**a+
-       						  x**b**b**a**b**a+x**y**b**x**b**x**x
-
+```output
+a**x -> 1,
+x**a -> 1,
+b**a^2 -> -y**a+a**b**x,
+x**b**a -> b**x^2 - x**y,
+a**b**x^2 -> y+b**a,
+b**x^3 -> x**b+x**y**x,
+a**b**x**b**x^2 -> y^2+b**a**y+y**b**a+b**a**b**a,
+b**x^2**b**x^2 -> x**b**y+x**b^2**a+x**y**b**x^2,
+a**b**x**b**x**b**x^2 -> y^3+b**a**y^2+y^2**b**a+y**b**a**y+
+                         b**a**b**a**y+b**a**y**b**a+
+                         y**b**a**b**a+b**a**b**a**b**a,
+b**x^2**b**x**b**x^2 -> x**b**y^2+x**b^2**a**y+x**b**y**b**a+
+                        x**b^2**a**b**a+x**y**b**x**b**x^2
+```
 which again fails to be a Gröbner basis and does not eliminate
 $y$. Instead, it tries to decrease the total degree of expressions
 involving $a$, $b$, $x$, and $y$.
@@ -552,14 +555,14 @@ and $y$, one types
 
 which separates $y$ from the remaining variables. This time, a call to
 
-	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4]
+	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4,ReduceBasis->True] // ColumnForm
 
 yields once again
-
-	y -> -b**a+a**b**x**x
-	a**x -> 1
-	x**a -> 1
-
+```output
+y -> -b**a+a**b**x^2
+a**x -> 1
+x**a -> 1
+```
 which not only eliminates $y$ but is also Gröbner basis, calculated
 after one iteration. 
 
@@ -586,11 +589,11 @@ him for discussions.
 **Problem:** *Given matrices $a$, $b$, $c$, and $d$, we wish to
   determine under what conditions there exists matrices x, y, z, and w
   such that the block matrices*
-$$  
-  \begin{bmatrix} a & x \\ y & b \end{bmatrix}
+
+$$\begin{bmatrix} a & x \\ y & b \end{bmatrix}
   \qquad 
-  \begin{bmatrix} w & c \\ d & z \end{bmatrix}
-$$
+  \begin{bmatrix} w & c \\ d & z \end{bmatrix}$$
+
 *are inverses of each other. Also, we wish to find formulas for $x$, $y$,
   $z$, and $w$.*
 
@@ -606,7 +609,7 @@ First we set the matrices $a$, $b$, $c$, and $d$ and their inverses as
 	SetKnowns[a, inv[a], b, inv[b], c, inv[c], d, inv[d]];
 	SetUnknowns[{z}, {x, y, w}];
 
-Note that the graded ordedring of the unknowns means that we care more
+Note that the graded ordering of the unknowns means that we care more
 about solving for $x$, $y$ and $w$ than for $z$.
 
 Then we define the relations we are interested in, which are obtained
@@ -617,43 +620,43 @@ identity
 	B = {{w, c}, {d, z}}
 
 	rels = {
-      MatMult[A, B] - IdentityMatrix[2],
-      MatMult[B, A] - IdentityMatrix[2]
+      NCDot[A, B] - IdentityMatrix[2],
+      NCDot[B, A] - IdentityMatrix[2]
     } // Flatten
 
 We use `Flatten` to reduce the matrix relations to a simple list of
 relations. The resulting relations in this case are:
-
-	rels = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
-            -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}
-
+```output
+rels = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
+        -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}
+```
 After running
 
-	NCMakeGB[rels, 8]
+	NCMakeGB[rels, 8] // ColumnForm
 
 we obtain the Gröbner basis:
-
-	x -> inv[d]-inv[d]**z**b
-	y -> inv[c]-b**z**inv[c]
-	w -> inv[a]**inv[d]**z**b**d
-	z**b**z -> z+d**a**c
-	c**b**z**inv[c]**inv[a] -> inv[a]**inv[d]**z**b**d
-	inv[c]**inv[a]**inv[d]**z**b -> b**z**inv[c]**inv[a]**inv[d]
-	inv[d]**z**b**d**a -> a**c**b**z**inv[c]
-	z**b**d**a**c -> d**a**c**b**z
-	z**inv[c]**inv[a]**inv[d]**inv[b] -> inv[b]**inv[c]**inv[a]**inv[d]**z
-	z**inv[c]**inv[a]**inv[d]**z -> inv[b]+inv[b]**inv[c]**inv[a]**inv[d]**z
-	d**a**c**b**z**inv[c] -> z**b**d**a
-
+```output
+x -> inv[d]-inv[d]**z**b
+y -> inv[c]-b**z**inv[c]
+w -> inv[a]**inv[d]**z**b**d
+z**b**z -> z+d**a**c
+c**b**z**inv[c]**inv[a] -> inv[a]**inv[d]**z**b**d
+inv[c]**inv[a]**inv[d]**z**b -> b**z**inv[c]**inv[a]**inv[d]
+inv[d]**z**b**d**a -> a**c**b**z**inv[c]
+z**b**d**a**c -> d**a**c**b**z
+z**inv[c]**inv[a]**inv[d]**inv[b] -> inv[b]**inv[c]**inv[a]**inv[d]**z
+z**inv[c]**inv[a]**inv[d]**z -> inv[b]+inv[b]**inv[c]**inv[a]**inv[d]**z
+d**a**c**b**z**inv[c] -> z**b**d**a
+```
 after seven iterations. The first four relations
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 	x &= d^{-1}-d^{-1} \, z \, b \\
 	y &= c^{-1}-b \, z \, c^{-1} \\
 	w &= a^{-1} \, d^{-1}  \, z \, b \, d \\
 	z \, b \, z &= z + d \, a \, c
-\end{aligned}
-$$	
+\end{aligned}$$	
+
 are the solutions we are looking for, which states that one can find
 $x$, $y$, $z$, and $w$ such that the matrices above are inverses of
 each other if and only if $z \, b \, z = z + d \, a \, c$. The first
@@ -669,30 +672,29 @@ ordering implied by
 
 In this case
 
-	NCMakeGB[rels, 8]
+	NCMakeGB[rels, 8] // ColumnForm
 
 produces the Gröbner basis:
-
-	z -> inv[b]-inv[b]**y**c
-	w -> inv[a]-c**y**inv[a]
-	x -> a**c**y**inv[a]**inv[d]
-	y**c**y -> y+b**d**a
-	c**y**inv[a]**inv[d]**inv[b] -> inv[a]**inv[d]**inv[b]**y**c
-	d**a**c**y**inv[a] -> inv[b]**y**c**b**d
-	inv[d]**inv[b]**y**c**b -> a**c**y**inv[a]**inv[d]
-	y**c**b**d**a -> b**d**a**c**y
-	y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
-
+```output
+z -> inv[b]-inv[b]**y**c
+w -> inv[a]-c**y**inv[a]
+x -> a**c**y**inv[a]**inv[d]
+y**c**y -> y+b**d**a
+c**y**inv[a]**inv[d]**inv[b] -> inv[a]**inv[d]**inv[b]**y**c
+d**a**c**y**inv[a] -> inv[b]**y**c**b**d
+inv[d]**inv[b]**y**c**b -> a**c**y**inv[a]**inv[d]
+y**c**b**d**a -> b**d**a**c**y
+y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]
+```
 after five iterations. Once again, the first four relations
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 	z &= b^{-1}-b^{-1} \, y \, c \\
 	w &= a^{-1}-c \, y \, a^{-1} \\
 	x &= a \, c \, y \, a^{-1} \, d^{-1} \\
 	y \, c \, y &= y+b \, d \, a
-\end{aligned}
-$$	
+\end{aligned}$$	
+
 provide formulas, this time for $z$, $w$, and $z$ in terms of $y$
 satisfying $y \, c \, y = y+b \, d \, a$. Note that these formulas do
 not involve $c^{-1}$ since $c$ is no longer assumed invertible.
-
