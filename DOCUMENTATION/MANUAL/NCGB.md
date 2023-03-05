@@ -2,13 +2,10 @@
 
 Gröbner Basis are useful in the study of algebraic relations. The
 package `NCGBX` provides an implementation of a noncommutative Gröbner
-Basis algorithm. 
+Basis algorithm.
 
 > Starting with **Version 6**, the old `C++` version of our Groebner
 > Basis Algorithm is no longer included.
-
-It is a Mathematica only replacement to the C++
-`NCGB` which is still provided with this distribution.
 
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/3_NCGroebnerBasis.nb`.
@@ -111,7 +108,7 @@ $a\, b - 1$ is a relation.
 
 To calculate a Gröbner basis one defines a list of relations:
 
-	rels = {a ** x ** a - c, a ** b - 1, b ** a - 1}
+	rels = {a**x**a - c, a**b - 1, b**a - 1}
 
 and issues the command:
 	
@@ -139,7 +136,7 @@ iterations if a GB has not been found at that point.
 The result of the above calculation is the list of relations in the
 form of a list of rules:
 ```output           
-{x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
+{x -> b**c**b, a**b -> 1, b**a -> 1}
 ```
 > **Version 5:** For efficiency, `NCMakeGB` returns a list of rules
 > instead of a list of polynomials. The left-hand side of the rule is
@@ -155,9 +152,9 @@ Our favorite format for displaying lists of relations is `ColumnForm`.
 	
 which results in 
 ```output
-x -> b ** c ** b
-a ** b -> 1
-b ** a -> 1
+x -> b**c**b
+a**b -> 1
+b**a -> 1
 ```
 The *rules* in the output represent the relations in the GB with the
 left-hand side of the rule being the leading monomial. Replacing
@@ -204,15 +201,15 @@ from which one can recognize the problem of solving the linear
 equation $a \, x = c$ in terms of the *pseudo-inverse* $b =
 a^\dag$. The calculation:
 
-	gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
+	gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
 	ColumnForm[gb]
 
 finds the Gröbner basis:
 ```output
-a ** x -> c
-a ** b ** c -> c
-a ** b ** a -> a 
-b ** a ** b -> b
+a**x -> c
+a**b**c -> c
+a**b**a -> a 
+b**a**b -> b
 ```
 In this case the Gröbner basis cannot quite *solve* the equations but
 it remarkably produces the necessary condition for existence of
@@ -227,7 +224,7 @@ that can be interpreted as $c$ being in the range-space of $a$.
 Our goal now is to verify if it is possible to *simplify* the following
 expression:
 
-	expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
+	expr = b^2**a^2 - a^2**b^2 + a**b**a
 
 knowing that
 
@@ -239,7 +236,7 @@ using Gröbner basis. With that in mind we set the order:
 
 and calculate the GB associated with the constraint:
 
-	rels = {a ** b ** a - b};
+	rels = {a**b**a - b};
 	rules = NCMakeGB[rels, 10];
 	ColumnForm[rules]
 
@@ -259,16 +256,127 @@ which produces the output
 ```
 and the associated GB
 ```output
-a ** b ** a -> b
-b^2 ** a -> a ** b^2
+a**b**a -> b
+b^2**a -> a**b^2
 ```
 The GB revealed another relationship that must hold true if $a \, b \,
 a = b$. One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
  
-	simp = NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+	NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
 
-which simplifies `simp` into `b`.
+which simplifies `expr` into `b`.
+
+An alternative, since we are working with polynomials, is to use
+[`NCReduce`](#NCReduce) as in
+
+	vars = GetMonomialOrder[];
+	NCReduce[expr, NCRuleToPoly[rules], vars]
+
+Note that `NCReduce` needs a list of variables to be used as the
+desired ordering, which we obtain from the current ordering using
+[`GetMonomialOrder`](#GetMonomialOrder), and that the rules in `rules`
+need to be converted to polynomials, which we do using
+[`NCRuleToPoly`](NCRuleToPoly).
+
+## Polynomials and rules {#PolynomialsAndRules}
+
+Having seen how polynomial relations can be interpreted as rules,
+consider now the expression
+
+	expr = b^2**a^2 + a^2**b^3 + a**b**a
+
+and the polynomial relations
+
+	rels = {a**b**a - b , b^2 - a + b}
+
+With respect to the monomial order
+
+	SetMonomialOrder[a, b];
+
+we can interpret these relations as the rules
+
+	vars = GetMonomialOrder[];
+	(rules = NCToRule[rels, vars]) // ColumnForm
+	
+that is
+```output
+a**b**a -> b
+b^2 -> a - b
+```
+
+Note how we used [`GetMonomialOrder`](#GetMonomialOrder) to obtain the
+list of variables `vars` corresponding to the ordering
+
+$$ a \ll b$$
+
+and [`NCToRule`](#NCToRule) to convert the polynomial relations into
+rules.
+
+We can then apply these rules by using one of the `NCReplace`
+functions, for example
+
+	NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+
+which produces
+```output
+b + a^2**b + a^3**b - b**a^2
+```
+Note that we have made use of the new function
+[`NCExpandReplaceRepeated`](#NCExpandReplaceRepeated), to automate
+the tedious cycles of expansion and substitution.
+
+Alternatively, one can use [`NCReduce`](#NCReduce) to perform the same
+substitution. `NCReduce` takes in polynomial, instead of rules, and a
+list of variables. For example,
+
+    NCReduce[expr, rels, vars]
+
+produces
+```output
+a^2**b + a^3**b - b**a^2 + a**b**a
+```
+which is the result of applying the rules only to the leading monomial
+of `expr`. If you want substitutions to be applied to all monomials
+then set the option `Complete` to `True`, as in
+
+    NCReduce[expr, rels, vars, Complete -> True]
+
+This produces
+```output
+b + a^2**b + a^3**b - b**a^2
+```
+which is the same result as above.
+
+But, of course, by now one should wonder whether the above polynomial
+relations could imply other simplifications, which we seek to find out
+by running our Gröbner basis algorithm:
+
+	rules = NCMakeGB[rels, 4];
+	ColumnForm[rules]
+
+that discovers the following additional relations
+```output
+b^2 -> a - b
+b**a -> a**b
+a^2**b -> b
+a^3 -> a
+```
+When used for simplification,
+  
+	NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+
+reduces the original expression to the even simpler form
+```output
+b + a**b
+```
+As before, rule substitution could also be performed by
+[`NCReduce`](#NCReduce) as in
+
+	NCReduce[expr, NCRuleToPoly[rules], vars]
+
+that, in this case, leads to the same result as above without the need
+to recourse to the `Complete` flag.
 
 ## Minimal versus reduced Gröbner Basis
 
@@ -283,7 +391,7 @@ example the following monomial order
 	
 and the relations
 
-    rels = {x^3 - 2 x ** y, x^2 ** y - 2 y^2 + x}
+    rels = {x^3 - 2 x**y, x^2**y - 2 y^2 + x}
 	
 for which
 
@@ -310,7 +418,6 @@ y^2->x/2
 in which not only the leading monomials but also all lower-order
 monomials have been reduced by the basis' leading monomials.
 
-
 ## Simplifying rational expressions
 
 It is often desirable to simplify expressions involving inverses of
@@ -318,7 +425,7 @@ noncommutative expressions. One challenge is to recognize identities
 implied by the existence of certain inverses. For example, that the
 expression
 
-    expr = x ** inv[1 - x] - inv[1 - x] ** x
+    expr = x**inv[1 - x] - inv[1 - x]**x
 
 is equivalent to $0$. One can use a nc Gröbner basis for that task.
 Consider for instance the order
@@ -354,8 +461,8 @@ which produces the output
 ```
 and results in the rules:
 ```output
-x ** inv[1 - x] -> -1 + inv[1 - x],
-inv[1-x] ** x -> -1 + inv[1-x],
+x**inv[1 - x] -> -1 + inv[1 - x],
+inv[1-x]**x -> -1 + inv[1-x],
 ```
 As in the previous example, the GB revealed new relationships that
 must hold true if $1- x$ is invertible, and one can use this
@@ -374,7 +481,7 @@ One can verify that the rule based command
 [NCSimplifyRational](#NCSimplifyRational) fails to simplify the
 expression:
 
-	expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+	expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
 	NCSimplifyRational[expr]
 
 We set the monomial order and calculate the Gröbner basis
@@ -409,12 +516,12 @@ function [NCGBSimplifyRational](#NCGBSimplifyRational).
 
 For example, calls to
 
-	expr = x ** inv[1 - x] - inv[1 - x] ** x
+	expr = x**inv[1 - x] - inv[1 - x]**x
 	NCGBSimplifyRational[expr]
 
 or
 
-	expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+	expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
 	NCGBSimplifyRational[expr]
 
 both result in `0`.

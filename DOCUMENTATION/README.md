@@ -92,14 +92,15 @@ All rights reserved.
   - <a href="#solving-equations" id="toc-solving-equations"><span class="toc-section-number">7.2</span> Solving equations</a>
   - <a href="#a-slightly-more-challenging-example" id="toc-a-slightly-more-challenging-example"><span class="toc-section-number">7.3</span> A slightly more challenging example</a>
   - <a href="#simplifying-polynomial-expressions" id="toc-simplifying-polynomial-expressions"><span class="toc-section-number">7.4</span> Simplifying polynomial expressions</a>
-  - <a href="#minimal-versus-reduced-gröbner-basis" id="toc-minimal-versus-reduced-gröbner-basis"><span class="toc-section-number">7.5</span> Minimal versus reduced Gröbner Basis</a>
-  - <a href="#simplifying-rational-expressions" id="toc-simplifying-rational-expressions"><span class="toc-section-number">7.6</span> Simplifying rational expressions</a>
-  - <a href="#simplification-with-ncgbsimplifyrational" id="toc-simplification-with-ncgbsimplifyrational"><span class="toc-section-number">7.7</span> Simplification with NCGBSimplifyRational</a>
-  - <a href="#ordering-on-variables-and-monomials" id="toc-Orderings"><span class="toc-section-number">7.8</span> Ordering on variables and monomials</a>
-    - <a href="#lex-order-the-simplest-elimination-order" id="toc-lex-order-the-simplest-elimination-order"><span class="toc-section-number">7.8.1</span> Lex Order: the simplest elimination order</a>
-    - <a href="#graded-lex-ordering-a-non-elimination-order" id="toc-graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">7.8.2</span> Graded lex ordering: a non-elimination order</a>
-    - <a href="#multigraded-lex-ordering-a-variety-of-elimination-orders" id="toc-multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">7.8.3</span> Multigraded lex ordering: a variety of elimination orders</a>
-  - <a href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem" id="toc-a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span class="toc-section-number">7.9</span> A complete example: the partially prescribed matrix inverse problem</a>
+  - <a href="#polynomials-and-rules" id="toc-PolynomialsAndRules"><span class="toc-section-number">7.5</span> Polynomials and rules</a>
+  - <a href="#minimal-versus-reduced-gröbner-basis" id="toc-minimal-versus-reduced-gröbner-basis"><span class="toc-section-number">7.6</span> Minimal versus reduced Gröbner Basis</a>
+  - <a href="#simplifying-rational-expressions" id="toc-simplifying-rational-expressions"><span class="toc-section-number">7.7</span> Simplifying rational expressions</a>
+  - <a href="#simplification-with-ncgbsimplifyrational" id="toc-simplification-with-ncgbsimplifyrational"><span class="toc-section-number">7.8</span> Simplification with NCGBSimplifyRational</a>
+  - <a href="#ordering-on-variables-and-monomials" id="toc-Orderings"><span class="toc-section-number">7.9</span> Ordering on variables and monomials</a>
+    - <a href="#lex-order-the-simplest-elimination-order" id="toc-lex-order-the-simplest-elimination-order"><span class="toc-section-number">7.9.1</span> Lex Order: the simplest elimination order</a>
+    - <a href="#graded-lex-ordering-a-non-elimination-order" id="toc-graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">7.9.2</span> Graded lex ordering: a non-elimination order</a>
+    - <a href="#multigraded-lex-ordering-a-variety-of-elimination-orders" id="toc-multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">7.9.3</span> Multigraded lex ordering: a variety of elimination orders</a>
+  - <a href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem" id="toc-a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span class="toc-section-number">7.10</span> A complete example: the partially prescribed matrix inverse problem</a>
 - <a href="#semidefinite-programming" id="toc-SemidefiniteProgramming"><span class="toc-section-number">8</span> Semidefinite Programming</a>
   - <a href="#semidefinite-programs-in-matrix-variables" id="toc-semidefinite-programs-in-matrix-variables"><span class="toc-section-number">8.1</span> Semidefinite Programs in Matrix Variables</a>
   - <a href="#semidefinite-programs-in-vector-variables" id="toc-semidefinite-programs-in-vector-variables"><span class="toc-section-number">8.2</span> Semidefinite Programs in Vector Variables</a>
@@ -139,16 +140,17 @@ All rights reserved.
     - <a href="#unsetcommutingoperators" id="toc-UnsetCommutingOperators"><span class="toc-section-number">11.1.17</span> UnsetCommutingOperators</a>
     - <a href="#commutingoperatorsq" id="toc-CommutingOperatorsQ"><span class="toc-section-number">11.1.18</span> CommutingOperatorsQ</a>
     - <a href="#ncnoncommutativesymbolorsubscriptq" id="toc-NCNonCommutativeSymbolOrSubscriptQ"><span class="toc-section-number">11.1.19</span> NCNonCommutativeSymbolOrSubscriptQ</a>
-    - <a href="#ncpowerq" id="toc-NCPowerQ"><span class="toc-section-number">11.1.20</span> NCPowerQ</a>
-    - <a href="#commutative" id="toc-Commutative"><span class="toc-section-number">11.1.21</span> Commutative</a>
-    - <a href="#commuteeverything" id="toc-CommuteEverything"><span class="toc-section-number">11.1.22</span> CommuteEverything</a>
-    - <a href="#begincommuteeverything" id="toc-BeginCommuteEverything"><span class="toc-section-number">11.1.23</span> BeginCommuteEverything</a>
-    - <a href="#endcommuteeverything" id="toc-EndCommuteEverything"><span class="toc-section-number">11.1.24</span> EndCommuteEverything</a>
-    - <a href="#expandnoncommutativemultiply" id="toc-ExpandNonCommutativeMultiply"><span class="toc-section-number">11.1.25</span> ExpandNonCommutativeMultiply</a>
-    - <a href="#ncexpand" id="toc-NCExpand"><span class="toc-section-number">11.1.26</span> NCExpand</a>
-    - <a href="#nce" id="toc-NCE"><span class="toc-section-number">11.1.27</span> NCE</a>
-    - <a href="#ncexpandexponents" id="toc-NCExpandExponents"><span class="toc-section-number">11.1.28</span> NCExpandExponents</a>
-    - <a href="#nctolist" id="toc-NCToList"><span class="toc-section-number">11.1.29</span> NCToList</a>
+    - <a href="#ncnoncommutativesymbolorsubscriptextendedq" id="toc-NCNonCommutativeSymbolOrSubscriptExtendedQ"><span class="toc-section-number">11.1.20</span> NCNonCommutativeSymbolOrSubscriptExtendedQ</a>
+    - <a href="#ncpowerq" id="toc-NCPowerQ"><span class="toc-section-number">11.1.21</span> NCPowerQ</a>
+    - <a href="#commutative" id="toc-Commutative"><span class="toc-section-number">11.1.22</span> Commutative</a>
+    - <a href="#commuteeverything" id="toc-CommuteEverything"><span class="toc-section-number">11.1.23</span> CommuteEverything</a>
+    - <a href="#begincommuteeverything" id="toc-BeginCommuteEverything"><span class="toc-section-number">11.1.24</span> BeginCommuteEverything</a>
+    - <a href="#endcommuteeverything" id="toc-EndCommuteEverything"><span class="toc-section-number">11.1.25</span> EndCommuteEverything</a>
+    - <a href="#expandnoncommutativemultiply" id="toc-ExpandNonCommutativeMultiply"><span class="toc-section-number">11.1.26</span> ExpandNonCommutativeMultiply</a>
+    - <a href="#ncexpand" id="toc-NCExpand"><span class="toc-section-number">11.1.27</span> NCExpand</a>
+    - <a href="#nce" id="toc-NCE"><span class="toc-section-number">11.1.28</span> NCE</a>
+    - <a href="#ncexpandexponents" id="toc-NCExpandExponents"><span class="toc-section-number">11.1.29</span> NCExpandExponents</a>
+    - <a href="#nctolist" id="toc-NCToList"><span class="toc-section-number">11.1.30</span> NCToList</a>
   - <a href="#nctr" id="toc-PackageNCTr"><span class="toc-section-number">11.2</span> NCTr</a>
     - <a href="#tr" id="toc-tr"><span class="toc-section-number">11.2.1</span> tr</a>
     - <a href="#sortcyclicpermutation" id="toc-SortCyclicPermutation"><span class="toc-section-number">11.2.2</span> SortCyclicPermutation</a>
@@ -170,32 +172,35 @@ All rights reserved.
     - <a href="#ncreplaceall" id="toc-NCReplaceAll"><span class="toc-section-number">11.4.2</span> NCReplaceAll</a>
     - <a href="#ncreplacelist" id="toc-NCReplaceList"><span class="toc-section-number">11.4.3</span> NCReplaceList</a>
     - <a href="#ncreplacerepeated" id="toc-NCReplaceRepeated"><span class="toc-section-number">11.4.4</span> NCReplaceRepeated</a>
-    - <a href="#ncr" id="toc-NCR"><span class="toc-section-number">11.4.5</span> NCR</a>
-    - <a href="#ncra" id="toc-NCRA"><span class="toc-section-number">11.4.6</span> NCRA</a>
-    - <a href="#ncrr" id="toc-NCRR"><span class="toc-section-number">11.4.7</span> NCRR</a>
-    - <a href="#ncrl" id="toc-NCRL"><span class="toc-section-number">11.4.8</span> NCRL</a>
-    - <a href="#ncmakerulesymmetric" id="toc-NCMakeRuleSymmetric"><span class="toc-section-number">11.4.9</span> NCMakeRuleSymmetric</a>
-    - <a href="#ncmakeruleselfadjoint" id="toc-NCMakeRuleSelfAdjoint"><span class="toc-section-number">11.4.10</span> NCMakeRuleSelfAdjoint</a>
-    - <a href="#ncreplacesymmetric" id="toc-NCReplaceSymmetric"><span class="toc-section-number">11.4.11</span> NCReplaceSymmetric</a>
-    - <a href="#ncreplaceallsymmetric" id="toc-NCReplaceAllSymmetric"><span class="toc-section-number">11.4.12</span> NCReplaceAllSymmetric</a>
-    - <a href="#ncreplacerepeatedsymmetric" id="toc-NCReplaceRepeatedSymmetric"><span class="toc-section-number">11.4.13</span> NCReplaceRepeatedSymmetric</a>
-    - <a href="#ncreplacelistsymmetric" id="toc-NCReplaceListSymmetric"><span class="toc-section-number">11.4.14</span> NCReplaceListSymmetric</a>
-    - <a href="#ncrsym" id="toc-NCRSym"><span class="toc-section-number">11.4.15</span> NCRSym</a>
-    - <a href="#ncrasym" id="toc-NCRASym"><span class="toc-section-number">11.4.16</span> NCRASym</a>
-    - <a href="#ncrrsym" id="toc-NCRRSym"><span class="toc-section-number">11.4.17</span> NCRRSym</a>
-    - <a href="#ncrlsym" id="toc-NCRLSym"><span class="toc-section-number">11.4.18</span> NCRLSym</a>
-    - <a href="#ncreplaceselfadjoint" id="toc-NCReplaceSelfAdjoint"><span class="toc-section-number">11.4.19</span> NCReplaceSelfAdjoint</a>
-    - <a href="#ncreplaceallselfadjoint" id="toc-NCReplaceAllSelfAdjoint"><span class="toc-section-number">11.4.20</span> NCReplaceAllSelfAdjoint</a>
-    - <a href="#ncreplacerepeatedselfadjoint" id="toc-NCReplaceRepeatedSelfAdjoint"><span class="toc-section-number">11.4.21</span> NCReplaceRepeatedSelfAdjoint</a>
-    - <a href="#ncreplacelistselfadjoint" id="toc-NCReplaceListSelfAdjoint"><span class="toc-section-number">11.4.22</span> NCReplaceListSelfAdjoint</a>
-    - <a href="#ncrsa" id="toc-NCRSA"><span class="toc-section-number">11.4.23</span> NCRSA</a>
-    - <a href="#ncrasa" id="toc-NCRASA"><span class="toc-section-number">11.4.24</span> NCRASA</a>
-    - <a href="#ncrrsa" id="toc-NCRRSA"><span class="toc-section-number">11.4.25</span> NCRRSA</a>
-    - <a href="#ncrlsa" id="toc-NCRLSA"><span class="toc-section-number">11.4.26</span> NCRLSA</a>
-    - <a href="#ncmatrixexpand" id="toc-NCMatrixExpand"><span class="toc-section-number">11.4.27</span> NCMatrixExpand</a>
-    - <a href="#ncmatrixreplaceall" id="toc-NCMatrixReplaceAll"><span class="toc-section-number">11.4.28</span> NCMatrixReplaceAll</a>
-    - <a href="#ncmatrixreplacerepeated" id="toc-NCMatrixReplaceRepeated"><span class="toc-section-number">11.4.29</span> NCMatrixReplaceRepeated</a>
-    - <a href="#ncreplacepowerrule" id="toc-NCReplacePowerRule"><span class="toc-section-number">11.4.30</span> NCReplacePowerRule</a>
+    - <a href="#ncexpandreplacerepeated" id="toc-NCExpandReplaceRepeated"><span class="toc-section-number">11.4.5</span> NCExpandReplaceRepeated</a>
+    - <a href="#ncr" id="toc-NCR"><span class="toc-section-number">11.4.6</span> NCR</a>
+    - <a href="#ncra" id="toc-NCRA"><span class="toc-section-number">11.4.7</span> NCRA</a>
+    - <a href="#ncrr" id="toc-NCRR"><span class="toc-section-number">11.4.8</span> NCRR</a>
+    - <a href="#ncrl" id="toc-NCRL"><span class="toc-section-number">11.4.9</span> NCRL</a>
+    - <a href="#ncmakerulesymmetric" id="toc-NCMakeRuleSymmetric"><span class="toc-section-number">11.4.10</span> NCMakeRuleSymmetric</a>
+    - <a href="#ncmakeruleselfadjoint" id="toc-NCMakeRuleSelfAdjoint"><span class="toc-section-number">11.4.11</span> NCMakeRuleSelfAdjoint</a>
+    - <a href="#ncreplacesymmetric" id="toc-NCReplaceSymmetric"><span class="toc-section-number">11.4.12</span> NCReplaceSymmetric</a>
+    - <a href="#ncreplaceallsymmetric" id="toc-NCReplaceAllSymmetric"><span class="toc-section-number">11.4.13</span> NCReplaceAllSymmetric</a>
+    - <a href="#ncreplacerepeatedsymmetric" id="toc-NCReplaceRepeatedSymmetric"><span class="toc-section-number">11.4.14</span> NCReplaceRepeatedSymmetric</a>
+    - <a href="#ncexpandreplacerepeatedsymmetric" id="toc-NCExpandReplaceRepeatedSymmetric"><span class="toc-section-number">11.4.15</span> NCExpandReplaceRepeatedSymmetric</a>
+    - <a href="#ncreplacelistsymmetric" id="toc-NCReplaceListSymmetric"><span class="toc-section-number">11.4.16</span> NCReplaceListSymmetric</a>
+    - <a href="#ncrsym" id="toc-NCRSym"><span class="toc-section-number">11.4.17</span> NCRSym</a>
+    - <a href="#ncrasym" id="toc-NCRASym"><span class="toc-section-number">11.4.18</span> NCRASym</a>
+    - <a href="#ncrrsym" id="toc-NCRRSym"><span class="toc-section-number">11.4.19</span> NCRRSym</a>
+    - <a href="#ncrlsym" id="toc-NCRLSym"><span class="toc-section-number">11.4.20</span> NCRLSym</a>
+    - <a href="#ncreplaceselfadjoint" id="toc-NCReplaceSelfAdjoint"><span class="toc-section-number">11.4.21</span> NCReplaceSelfAdjoint</a>
+    - <a href="#ncreplaceallselfadjoint" id="toc-NCReplaceAllSelfAdjoint"><span class="toc-section-number">11.4.22</span> NCReplaceAllSelfAdjoint</a>
+    - <a href="#ncreplacerepeatedselfadjoint" id="toc-NCReplaceRepeatedSelfAdjoint"><span class="toc-section-number">11.4.23</span> NCReplaceRepeatedSelfAdjoint</a>
+    - <a href="#ncexpandreplacerepeatedselfadjoint" id="toc-NCExpandReplaceRepeatedSelfAdjoint"><span class="toc-section-number">11.4.24</span> NCExpandReplaceRepeatedSelfAdjoint</a>
+    - <a href="#ncreplacelistselfadjoint" id="toc-NCReplaceListSelfAdjoint"><span class="toc-section-number">11.4.25</span> NCReplaceListSelfAdjoint</a>
+    - <a href="#ncrsa" id="toc-NCRSA"><span class="toc-section-number">11.4.26</span> NCRSA</a>
+    - <a href="#ncrasa" id="toc-NCRASA"><span class="toc-section-number">11.4.27</span> NCRASA</a>
+    - <a href="#ncrrsa" id="toc-NCRRSA"><span class="toc-section-number">11.4.28</span> NCRRSA</a>
+    - <a href="#ncrlsa" id="toc-NCRLSA"><span class="toc-section-number">11.4.29</span> NCRLSA</a>
+    - <a href="#ncmatrixexpand" id="toc-NCMatrixExpand"><span class="toc-section-number">11.4.30</span> NCMatrixExpand</a>
+    - <a href="#ncmatrixreplaceall" id="toc-NCMatrixReplaceAll"><span class="toc-section-number">11.4.31</span> NCMatrixReplaceAll</a>
+    - <a href="#ncmatrixreplacerepeated" id="toc-NCMatrixReplaceRepeated"><span class="toc-section-number">11.4.32</span> NCMatrixReplaceRepeated</a>
+    - <a href="#ncreplacepowerrule" id="toc-NCReplacePowerRule"><span class="toc-section-number">11.4.33</span> NCReplacePowerRule</a>
   - <a href="#ncselfadjoint" id="toc-PackageNCSelfAdjoint"><span class="toc-section-number">11.5</span> NCSelfAdjoint</a>
     - <a href="#ncsymmetricq" id="toc-NCSymmetricQ"><span class="toc-section-number">11.5.1</span> NCSymmetricQ</a>
     - <a href="#ncsymmetrictest" id="toc-NCSymmetricTest"><span class="toc-section-number">11.5.2</span> NCSymmetricTest</a>
@@ -284,10 +289,11 @@ All rights reserved.
     - <a href="#ncconsolidatelist" id="toc-NCConsolidateList"><span class="toc-section-number">13.7.6</span> NCConsolidateList</a>
     - <a href="#ncconsistentq" id="toc-NCConsistentQ"><span class="toc-section-number">13.7.7</span> NCConsistentQ</a>
     - <a href="#ncsymbolorsubscriptq" id="toc-NCSymbolOrSubscriptQ"><span class="toc-section-number">13.7.8</span> NCSymbolOrSubscriptQ</a>
-    - <a href="#ncleafcount" id="toc-NCLeafCount"><span class="toc-section-number">13.7.9</span> NCLeafCount</a>
-    - <a href="#ncreplacedata" id="toc-NCReplaceData"><span class="toc-section-number">13.7.10</span> NCReplaceData</a>
-    - <a href="#nctoexpression" id="toc-NCToExpression"><span class="toc-section-number">13.7.11</span> NCToExpression</a>
-    - <a href="#notmatrixq" id="toc-NotMatrixQ"><span class="toc-section-number">13.7.12</span> NotMatrixQ</a>
+    - <a href="#ncsymbolorsubscriptextendedq" id="toc-NCSymbolOrSubscriptExtendedQ"><span class="toc-section-number">13.7.9</span> NCSymbolOrSubscriptExtendedQ</a>
+    - <a href="#ncleafcount" id="toc-NCLeafCount"><span class="toc-section-number">13.7.10</span> NCLeafCount</a>
+    - <a href="#ncreplacedata" id="toc-NCReplaceData"><span class="toc-section-number">13.7.11</span> NCReplaceData</a>
+    - <a href="#nctoexpression" id="toc-NCToExpression"><span class="toc-section-number">13.7.12</span> NCToExpression</a>
+    - <a href="#notmatrixq" id="toc-NotMatrixQ"><span class="toc-section-number">13.7.13</span> NotMatrixQ</a>
 - <a href="#data-structures-for-fast-calculations" id="toc-data-structures-for-fast-calculations"><span class="toc-section-number">14</span> Data structures for fast calculations</a>
   - <a href="#ncpoly" id="toc-PackageNCPoly"><span class="toc-section-number">14.1</span> NCPoly</a>
     - <a href="#efficient-storage-of-nc-polynomials-with-rational-coefficients" id="toc-efficient-storage-of-nc-polynomials-with-rational-coefficients"><span class="toc-section-number">14.1.1</span> Efficient storage of NC polynomials with rational coefficients</a>
@@ -462,14 +468,18 @@ The beginnings of the program come from eran@slac.
 
 3.  `NCTEST` renamed `NCCORETEST`
 
-4.  Tests must now be run as contexts: e.g. `` << NCCORETEST` `` instead of `<< NCCORETEST`
+4.  Tests must now be run as contexts: e.g. `` << NCCORETEST` `` instead
+    of `<< NCCORETEST`
 
 5.  `NonCommutativeMultiply`: new functions
     [NCExpandExponents](#ncexpandexponents) and [NCToList](#nctolist).
 
 6.  `NCReplace`: new functions
-    [NCReplacePowerRule](#ncreplacepowerrule); new option
-    `ApplyPowerRule`.
+    [NCReplacePowerRule](#ncreplacepowerrule),
+    [NCExpandReplaceRepeated](#ncexpandreplacerepeated);
+    [NCExpandReplaceRepeatedSymmetric](#ncexpandreplacerepeatedsymmetric);
+    [NCExpandReplaceRepeatedSelfAdjoint](#ncexpandreplacerepeatedselfadjoint);
+    new option `ApplyPowerRule`.
 
 7.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
 
@@ -485,8 +495,11 @@ The beginnings of the program come from eran@slac.
 10. `NCPolyInterface`: new functions [NCToRule](#nctorule),
     [NCReduce](#ncreduce), and [NCReduceRepeated](#ncreducerepeated).
 
-11. New functions [SetCommutativeFunction](#setcommutativefunction)
-    and [SetNonCommutativeFunction](#setnoncommutativefunction).
+11. New utility functions
+    [SetCommutativeFunction](#setcommutativefunction),
+    [SetNonCommutativeFunction](#setnoncommutativefunction)
+    [NCSymbolOrSubscriptExtendedQ](#ncsymbolorsubscriptextendedq), and
+    [NCNonCommutativeSymbolOrSubscriptExtendedQ](#ncnoncommutativesymbolorsubscriptextendedq).
 
 12. The old `C++` version of `NCGB` is no longer compatible with
     `NCAlgebra` *version 6*. Consider using [`NCGBX`](#ncgbx)
@@ -839,7 +852,7 @@ results in `a`.
 > `inv[a**a]` now evaluates to `Power[a, -2]`, hence certain patterns
 > may no longer work. For example:
 >
->     NCReplace[inv[a ** a], a ** a -> b]
+>     NCReplace[inv[a**a], a**a -> b]
 >
 > would produce `inv[b]` in previous versions of `NCAlgebra` but will
 > fail in **Version 6**.
@@ -902,15 +915,15 @@ return `co[a]` where `co` stands for complex-conjugate.
 
 A trace like operator, `tr`, was introduced in **v5.0.6**. It is a
 commutative operator keeps its list of arguments cyclicly sorted so
-that `tr[b ** a]` evaluates to `tr[a ** b]` and that automatically
+that `tr[b**a]` evaluates to `tr[a**b]` and that automatically
 distribute over sums so that an expression like
 
-    tr[a ** b - b ** a]
+    tr[a**b - b**a]
 
-always simplifies to zero. Also `b ** a ** tr[b ** a]` simplifies to
+always simplifies to zero. Also `b**a**tr[b**a]` simplifies to
 
 ``` output
-tr[a ** b] a ** b
+tr[a**b] a**b
 ```
 
 because `tr` is a commutative function. See
@@ -918,7 +931,7 @@ because `tr` is a commutative function. See
 
 A more interesting example is
 
-    expr = (a ** b - b ** a)^3
+    expr = (a**b - b**a)^3
 
 for which
 
@@ -927,7 +940,7 @@ for which
 evaluates to
 
 ``` output
-3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]
+3 tr[a^2**b^2**a**b] - 3 tr[a^2**b**a**b^2]
 ```
 
 Use [NCMatrixExpand](#ncmatrixexpand) to expand `tr` over matrices
@@ -1003,7 +1016,7 @@ c + tp[c]
 The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
 understood in the example:
 
-    NCReplaceAll[a**b**b, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceAll[a**b^2, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 
@@ -1013,7 +1026,7 @@ a**b
 
 and
 
-    NCReplaceRepeated[a**b**b, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceRepeated[a**b^2, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 
@@ -1026,9 +1039,70 @@ Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
 (`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
 that one rarely uses `NCReplace` and `NCReplaceList`.
 
-See the Section [Advanced Rules and Replacement](#advanced-rules-and-replacements) for
-a deeper discussion on some issues involved with rules and
-replacements in `NCAlgebra`.
+With **Version 6** we introduced
+[`NCExpandReplaceRepeated`](#ncexpandreplacerepeated),
+[`NCExpandReplaceRepeatedSymmetric`](#ncexpandreplacerepeatedsymmetric),
+and
+[`NCExpandReplaceRepeatedSelfAdjoint`](#ncexpandreplacerepeatedselfadjoint),
+which automate the tedious process of successive substitutions and
+expansions that may be required to fully simplify expressions. For
+example, consider the expression
+
+    expr = a**b^2-b^2**a
+
+and the rule
+
+    rule = a**b -> a - b
+
+for which
+
+    NCReplaceRepeated[expr, rule, ApplyPowerRule->True]
+
+results in the expression
+
+``` output
+(a - b)**b - b^2**a
+```
+
+Note the presence of *parenthesized* terms resulting from the rule
+substitution. It is clear that after expanding
+
+    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
+
+to produce
+
+``` output
+a**b - b^2 - b^2**a
+```
+
+there are still terms that could be affected by the original
+replacement rule, that, if replaced again,
+
+    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
+    NCExpand[NCReplaceRepeated[%, rule, ApplyPowerRule->True]]
+
+would ultimately lead to the simplest possible expression
+
+``` output
+a - b - b^2 - b^2**a
+```
+
+This successive expansion and substitution process is automated in
+
+    NCExpandReplaceRepeated[expr, rule, ApplyPowerRule->True]
+
+which produces the final expression
+
+``` output
+a - b - b^2 - b^2**a
+```
+
+in one shot.
+
+See also the Sections [Polynomials and rules](#polynomials-and-rules)
+and [Advanced Rules and Replacement](#advanced-rules-and-replacements) for a deeper
+discussion on some issues involved with rules and replacements in
+`NCAlgebra`.
 
 > **WARNING:** The commands `Substitute` and `Transform` have been
 > deprecated in **Version 5** in favor of the above nc versions of
@@ -1120,22 +1194,22 @@ would normally expect.
 > [NCCollectExponents](#nccollectexponents) expands and collects
 > exponents of expressions in noncommutative monomials. For example
 >
->     NCExpandExponents[a ** (b ** a)^2 ** b]
+>     NCExpandExponents[a**(b**a)^2**b]
 >
 > produces
 >
 > ``` output
-> a ** b ** a ** b ** a ** b
+> a**b**a**b**a**b
 > ```
 >
 > and
 >
->     NCCollectExponents[a ** b ** a ** b ** a ** b]
+>     NCCollectExponents[a**b**a**b**a**b]
 >
 > produces
 >
 > ``` output
-> (a ** b)^3
+> (a**b)^3
 > ```
 
 `NCAlgebra` provides some commands for noncommutative polynomial
@@ -1430,7 +1504,7 @@ which is similar to Mathematica’s `Dot`. For example
 result in
 
 ``` output
-{{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}
+{{a**d + b**e, 2 a + 3 b}, {c**d + d**e, 2 c + 3 d}}
 ```
 
 Note that products of nc symbols appearing in the
@@ -2947,9 +3021,6 @@ Basis algorithm.
 > Starting with **Version 6**, the old `C++` version of our Groebner
 > Basis Algorithm is no longer included.
 
-It is a Mathematica only replacement to the C++
-`NCGB` which is still provided with this distribution.
-
 If you want a living version of this chapter just run the notebook
 `NC/DEMOS/3_NCGroebnerBasis.nb`.
 
@@ -3034,7 +3105,7 @@ the polynomial equation ![a\\ b - 1 = 0](https://render.githubusercontent.com/re
 
 To calculate a Gröbner basis one defines a list of relations:
 
-    rels = {a ** x ** a - c, a ** b - 1, b ** a - 1}
+    rels = {a**x**a - c, a**b - 1, b**a - 1}
 
 and issues the command:
 
@@ -3065,7 +3136,7 @@ The result of the above calculation is the list of relations in the
 form of a list of rules:
 
 ``` output
-{x -> b ** c ** b, a ** b -> 1, b ** a -> 1}
+{x -> b**c**b, a**b -> 1, b**a -> 1}
 ```
 
 > **Version 5:** For efficiency, `NCMakeGB` returns a list of rules
@@ -3082,9 +3153,9 @@ Our favorite format for displaying lists of relations is `ColumnForm`.
 which results in
 
 ``` output
-x -> b ** c ** b
-a ** b -> 1
-b ** a -> 1
+x -> b**c**b
+a**b -> 1
+b**a -> 1
 ```
 
 The *rules* in the output represent the relations in the GB with the
@@ -3124,16 +3195,16 @@ and the relations:
 from which one can recognize the problem of solving the linear
 equation ![a \\ x = c](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%3D%20c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\dag](https://render.githubusercontent.com/render/math?math=b%20%3D%20a%5E%5Cdag&mode=inline). The calculation:
 
-    gb = NCMakeGB[{a ** x - c, a ** b ** a - a, b ** a ** b - b}, 10];
+    gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
     ColumnForm[gb]
 
 finds the Gröbner basis:
 
 ``` output
-a ** x -> c
-a ** b ** c -> c
-a ** b ** a -> a 
-b ** a ** b -> b
+a**x -> c
+a**b**c -> c
+a**b**a -> a 
+b**a**b -> b
 ```
 
 In this case the Gröbner basis cannot quite *solve* the equations but
@@ -3149,7 +3220,7 @@ that can be interpreted as ![c](https://render.githubusercontent.com/render/math
 Our goal now is to verify if it is possible to *simplify* the following
 expression:
 
-    expr = b ** b ** a ** a - a ** a ** b ** b + a ** b ** a
+    expr = b^2**a^2 - a^2**b^2 + a**b**a
 
 knowing that
 
@@ -3161,7 +3232,7 @@ using Gröbner basis. With that in mind we set the order:
 
 and calculate the GB associated with the constraint:
 
-    rels = {a ** b ** a - b};
+    rels = {a**b**a - b};
     rules = NCMakeGB[rels, 10];
     ColumnForm[rules]
 
@@ -3184,16 +3255,138 @@ which produces the output
 and the associated GB
 
 ``` output
-a ** b ** a -> b
-b^2 ** a -> a ** b^2
+a**b**a -> b
+b^2**a -> a**b^2
 ```
 
 The GB revealed another relationship that must hold true if ![a \\ b \\ a = b](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b&mode=inline). One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
 
-    simp = NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+    NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
 
-which simplifies `simp` into `b`.
+which simplifies `expr` into `b`.
+
+An alternative, since we are working with polynomials, is to use
+[`NCReduce`](#ncreduce) as in
+
+    vars = GetMonomialOrder[];
+    NCReduce[expr, NCRuleToPoly[rules], vars]
+
+Note that `NCReduce` needs a list of variables to be used as the
+desired ordering, which we obtain from the current ordering using
+[`GetMonomialOrder`](#getmonomialorder), and that the rules in `rules`
+need to be converted to polynomials, which we do using
+[`NCRuleToPoly`](NCRuleToPoly).
+
+## Polynomials and rules
+
+Having seen how polynomial relations can be interpreted as rules,
+consider now the expression
+
+    expr = b^2**a^2 + a^2**b^3 + a**b**a
+
+and the polynomial relations
+
+    rels = {a**b**a - b , b^2 - a + b}
+
+With respect to the monomial order
+
+    SetMonomialOrder[a, b];
+
+we can interpret these relations as the rules
+
+    vars = GetMonomialOrder[];
+    (rules = NCToRule[rels, vars]) // ColumnForm
+
+that is
+
+``` output
+a**b**a -> b
+b^2 -> a - b
+```
+
+Note how we used [`GetMonomialOrder`](#getmonomialorder) to obtain the
+list of variables `vars` corresponding to the ordering
+
+![inline equation](https://render.githubusercontent.com/render/math?math=a%20%5Cll%20b)
+
+and [`NCToRule`](#nctorule) to convert the polynomial relations into
+rules.
+
+We can then apply these rules by using one of the `NCReplace`
+functions, for example
+
+    NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+
+which produces
+
+``` output
+b + a^2**b + a^3**b - b**a^2
+```
+
+Note that we have made use of the new function
+[`NCExpandReplaceRepeated`](#ncexpandreplacerepeated), to automate
+the tedious cycles of expansion and substitution.
+
+Alternatively, one can use [`NCReduce`](#ncreduce) to perform the same
+substitution. `NCReduce` takes in polynomial, instead of rules, and a
+list of variables. For example,
+
+    NCReduce[expr, rels, vars]
+
+produces
+
+``` output
+a^2**b + a^3**b - b**a^2 + a**b**a
+```
+
+which is the result of applying the rules only to the leading monomial
+of `expr`. If you want substitutions to be applied to all monomials
+then set the option `Complete` to `True`, as in
+
+    NCReduce[expr, rels, vars, Complete -> True]
+
+This produces
+
+``` output
+b + a^2**b + a^3**b - b**a^2
+```
+
+which is the same result as above.
+
+But, of course, by now one should wonder whether the above polynomial
+relations could imply other simplifications, which we seek to find out
+by running our Gröbner basis algorithm:
+
+    rules = NCMakeGB[rels, 4];
+    ColumnForm[rules]
+
+that discovers the following additional relations
+
+``` output
+b^2 -> a - b
+b**a -> a**b
+a^2**b -> b
+a^3 -> a
+```
+
+When used for simplification,
+
+    NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+
+reduces the original expression to the even simpler form
+
+``` output
+b + a**b
+```
+
+As before, rule substitution could also be performed by
+[`NCReduce`](#ncreduce) as in
+
+    NCReduce[expr, NCRuleToPoly[rules], vars]
+
+that, in this case, leads to the same result as above without the need
+to recourse to the `Complete` flag.
 
 ## Minimal versus reduced Gröbner Basis
 
@@ -3208,7 +3401,7 @@ example the following monomial order
 
 and the relations
 
-    rels = {x^3 - 2 x ** y, x^2 ** y - 2 y^2 + x}
+    rels = {x^3 - 2 x**y, x^2**y - 2 y^2 + x}
 
 for which
 
@@ -3246,7 +3439,7 @@ noncommutative expressions. One challenge is to recognize identities
 implied by the existence of certain inverses. For example, that the
 expression
 
-    expr = x ** inv[1 - x] - inv[1 - x] ** x
+    expr = x**inv[1 - x] - inv[1 - x]**x
 
 is equivalent to ![0](https://render.githubusercontent.com/render/math?math=0&mode=inline). One can use a nc Gröbner basis for that task.
 Consider for instance the order
@@ -3285,8 +3478,8 @@ which produces the output
 and results in the rules:
 
 ``` output
-x ** inv[1 - x] -> -1 + inv[1 - x],
-inv[1-x] ** x -> -1 + inv[1-x],
+x**inv[1 - x] -> -1 + inv[1 - x],
+inv[1-x]**x -> -1 + inv[1-x],
 ```
 
 As in the previous example, the GB revealed new relationships that
@@ -3306,7 +3499,7 @@ One can verify that the rule based command
 [NCSimplifyRational](#ncsimplifyrational-1) fails to simplify the
 expression:
 
-    expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+    expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
     NCSimplifyRational[expr]
 
 We set the monomial order and calculate the Gröbner basis
@@ -3343,12 +3536,12 @@ function [NCGBSimplifyRational](#ncgbsimplifyrational).
 
 For example, calls to
 
-    expr = x ** inv[1 - x] - inv[1 - x] ** x
+    expr = x**inv[1 - x] - inv[1 - x]**x
     NCGBSimplifyRational[expr]
 
 or
 
-    expr = inv[1 - x - y ** inv[1 - x] ** y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+    expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
     NCGBSimplifyRational[expr]
 
 both result in `0`.
@@ -4455,6 +4648,7 @@ Members are:
 - [UnsetCommutingOperators](#unsetcommutingoperators)
 - [CommutingOperatorsQ](#commutingoperatorsq)
 - [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq)
+- [NCNonCommutativeSymbolOrSubscriptExtendedQ](#ncnoncommutativesymbolorsubscriptextendedq)
 - [NCPowerQ](#ncpowerq)
 - [Commutative](#commutative)
 - [CommuteEverything](#commuteeverything)
@@ -4621,7 +4815,22 @@ See also:
 `NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
 
 See also:
+[NCNonCommutativeSymbolOrSubscriptExtendedQ](#ncnoncommutativesymbolorsubscriptextendedq),
 [NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq),
+[NCSymbolOrSubscriptExtendedQ](#ncsymbolorsubscriptextendedq),
+[NCPowerQ](#ncpowerq).
+
+### NCNonCommutativeSymbolOrSubscriptExtendedQ
+
+`NCNonCommutativeSymbolOrSubscriptExtendedQ[expr]` returns *True* if
+`expr` is an noncommutative symbol, a noncommutative symbol subscript,
+or the transpose (`tp`) or adjoint (`aj`) of a noncommutative symbol
+or noncommutative symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
+[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq),
+[NCSymbolOrSubscriptExtendedQ](#ncsymbolorsubscriptextendedq),
 [NCPowerQ](#ncpowerq).
 
 ### NCPowerQ
@@ -4982,9 +5191,18 @@ See also:
 
 ## NCReplace
 
-**NCReplace** is a package containing several functions that are useful in making replacements in noncommutative expressions. It offers replacements to Mathematica’s `Replace`, `ReplaceAll`, `ReplaceRepeated`, and `ReplaceList` functions.
+**NCReplace** is a package containing several functions that are
+useful in making replacements in noncommutative expressions. It offers
+replacements to Mathematica’s `Replace`, `ReplaceAll`,
+`ReplaceRepeated`, and `ReplaceList` functions.
 
-Commands in this package replace the old `Substitute` and `Transform` family of command which are been deprecated. The new commands are much more reliable and work faster than the old commands. From the beginning, substitution was always problematic and certain patterns would be missed. We reassure that the call expression that are returned are mathematically correct but some opportunities for substitution may have been missed.
+> Commands in this package replace the old `Substitute` and
+> `Transform` family of command which are been deprecated. The new
+> commands are much more reliable and work faster than the old
+> commands. From the beginning, substitution was always problematic
+> and certain patterns would be missed. We reassure that the call
+> expression that are returned are mathematically correct but some
+> opportunities for substitution may have been missed.
 
 Members are:
 
@@ -4992,16 +5210,19 @@ Members are:
 - [NCReplaceAll](#ncreplaceall)
 - [NCReplaceList](#ncreplacelist)
 - [NCReplaceRepeated](#ncreplacerepeated)
+- [NCExpandReplaceRepeated](#ncexpandreplacerepeated)
 - [NCMakeRuleSymmetric](#ncmakerulesymmetric)
 - [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint)
 - [NCReplaceSymmetric](#ncreplacesymmetric)
 - [NCReplaceAllSymmetric](#ncreplaceallsymmetric)
 - [NCReplaceListSymmetric](#ncreplacelistsymmetric)
 - [NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric)
+- [NCExpandReplaceRepeatedSymmetric](#ncexpandreplacerepeatedsymmetric)
 - [NCReplaceSelfAdjoint](#ncreplaceselfadjoint)
 - [NCReplaceAllSelfAdjoint](#ncreplaceallselfadjoint)
 - [NCReplaceListSelfAdjoint](#ncreplacelistselfadjoint)
 - [NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint)
+- [NCExpandReplaceRepeatedSelfAdjoint](#ncexpandreplacerepeatedselfadjoint)
 - [NCMatrixExpand](#ncmatrixexpand)
 - [NCMatrixReplaceAll](#ncmatrixreplaceall)
 - [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated)
@@ -5030,9 +5251,14 @@ Options:
 
 ### NCReplace
 
-`NCReplace[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform the entire nc expression `expr`.
+`NCReplace[expr,rules]` applies a rule or list of rules
+`rules` in an attempt to transform the entire nc expression `expr`.
 
-`NCReplace[expr,rules,levelspec]` applies `rules` to parts of `expr` specified by `levelspec`.
+`NCReplace[expr,rules,levelspec]` applies `rules` to parts of `expr`
+specified by `levelspec`.
+
+`NCReplace[expr,rules,options]` and `NCReplace[expr,rules,levelspec]`
+use `options`.
 
 See also:
 [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
@@ -5040,6 +5266,8 @@ See also:
 ### NCReplaceAll
 
 `NCReplaceAll[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform each part of the nc expression `expr`.
+
+`NCReplaceAll[expr,rules,options]` uses `options`.
 
 See also:
 [NCReplace](#ncreplace-1), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
@@ -5050,6 +5278,9 @@ See also:
 
 `ReplaceList[expr,rules,n]` gives a list of at most `n` results.
 
+`NCReplaceList[expr,rules,options]` and
+`NCReplaceList[expr,rules,n,options]` use `options`.
+
 See also:
 [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceRepeated](#ncreplacerepeated).
 
@@ -5057,8 +5288,24 @@ See also:
 
 `NCReplaceRepeated[expr,rules]` repeatedly performs replacements using rule or list of rules `rules` until `expr` no longer changes.
 
+`NCReplaceRepeated[expr,rules,options]` uses `options`.
+
 See also:
-[NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist).
+[NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall),
+[NCReplaceList](#ncreplacelist),
+[NCExpandReplaceRepeated](#ncexpandreplacerepeated).
+
+### NCExpandReplaceRepeated
+
+`NCExpandReplaceRepeated[expr,rules]` repeatedly applies
+`NCReplaceRepeated` and `NCExpand` until the results does not change.
+
+`NCExpandReplaceRepeated[expr,rules,options]` uses `options`.
+
+See also:
+[NCReplaceRepeated](#ncreplacerepeated),
+[NCExpandReplaceRepeatedSymmetric](#ncexpandreplacerepeatedsymmetric),
+[NCExpandReplaceRepeatedSelfAdjoint](#ncexpandreplacerepeatedselfadjoint).
 
 ### NCR
 
@@ -5093,42 +5340,74 @@ See also:
 `NCMakeRuleSymmetric[rules]` add rules to transform the transpose of the left-hand side of `rules` into the transpose of the right-hand side of `rules`.
 
 See also:
-[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint), [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
+[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint),
+[NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall),
+[NCReplaceList](#ncreplacelist),
+[NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCMakeRuleSelfAdjoint
 
 `NCMakeRuleSelfAdjoint[rules]` add rules to transform the adjoint of the left-hand side of `rules` into the adjoint of the right-hand side of `rules`.
 
 See also:
-[NCMakeRuleSymmetric](#ncmakerulesymmetric), [NCReplace](#ncreplace-1), [NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist), [NCReplaceRepeated](#ncreplacerepeated).
+[NCMakeRuleSymmetric](#ncmakerulesymmetric), [NCReplace](#ncreplace-1),
+[NCReplaceAll](#ncreplaceall), [NCReplaceList](#ncreplacelist),
+[NCReplaceRepeated](#ncreplacerepeated).
 
 ### NCReplaceSymmetric
 
-`NCReplaceSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplace`.
+`NCReplaceSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to
+`rules` before calling `NCReplace`.
+
+`NCReplaceSymmetric[expr,rules,options]` uses `options`.
 
 See also:
 [NCReplace](#ncreplace-1), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
 
 ### NCReplaceAllSymmetric
 
-`NCReplaceAllSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceAll`.
+`NCReplaceAllSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to
+`rules` before calling `NCReplaceAll`.
+
+`NCReplaceAllSymmetric[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceAll](#ncreplaceall), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
+[NCReplaceAll](#ncreplaceall),
+[NCMakeRuleSymmetric](#ncmakerulesymmetric).
 
 ### NCReplaceRepeatedSymmetric
 
 `NCReplaceRepeatedSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceRepeated`.
 
+`NCReplaceRepeatedSymmetric[expr,rules,options]` uses `options`.
+
 See also:
-[NCReplaceRepeated](#ncreplacerepeated), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
+[NCReplaceRepeated](#ncreplacerepeated),
+[NCMakeRuleSymmetric](#ncmakerulesymmetric).
+
+### NCExpandReplaceRepeatedSymmetric
+
+`NCExpandReplaceRepeatedSymmetric[expr,rules]` repeatedly applies
+`NCReplaceRepeatedSymmetric` and `NCExpand` until the results does not
+change.
+
+`NCExpandReplaceRepeatedSymmetric[expr,rules,options]` uses `options`.
+
+See also:
+[NCReplaceRepeatedSymmetric](#ncreplacerepeatedsymmetric),
+[NCExpandReplaceRepeated](#ncexpandreplacerepeated),
+[NCExpandReplaceRepeatedSelfAdjoint](#ncexpandreplacerepeatedselfadjoint).
 
 ### NCReplaceListSymmetric
 
-`NCReplaceListSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceList`.
+`NCReplaceListSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to
+`rules` before calling `NCReplaceList`.
+
+`NCReplaceListSymmetric[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceList](#ncreplacelist), [NCMakeRuleSymmetric](#ncmakerulesymmetric).
+[NCReplaceList](#ncreplacelist),
+[NCMakeRuleSymmetric](#ncmakerulesymmetric).
 
 ### NCRSym
 
@@ -5160,31 +5439,61 @@ See also:
 
 ### NCReplaceSelfAdjoint
 
-`NCReplaceSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplace`.
+`NCReplaceSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to
+`rules` before calling `NCReplace`.
+
+`NCReplaceSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplace](#ncreplace-1), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+[NCReplace](#ncreplace-1),
+[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
 
 ### NCReplaceAllSelfAdjoint
 
-`NCReplaceAllSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceAll`.
+`NCReplaceAllSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint`
+to `rules` before calling `NCReplaceAll`.
+
+`NCReplaceAllSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceAll](#ncreplaceall), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+[NCReplaceAll](#ncreplaceall),
+[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
 
 ### NCReplaceRepeatedSelfAdjoint
 
-`NCReplaceRepeatedSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceRepeated`.
+`NCReplaceRepeatedSelfAdjoint[expr, rules]` applies
+`NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceRepeated`.
+
+`NCReplaceRepeatedSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceRepeated](#ncreplacerepeated), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+[NCReplaceRepeated](#ncreplacerepeated),
+[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+
+### NCExpandReplaceRepeatedSelfAdjoint
+
+`NCExpandReplaceRepeatedSelfAdjoint[expr,rules]` repeatedly applies
+`NCReplaceRepeatedSelfAdjoint` and `NCExpand` until the results does not
+change.
+
+`NCExpandedReplaceRepeatedSelfAdjoint[expr,rules,options]` uses
+`options`.
+
+See also:
+[NCReplaceRepeatedSelfAdjoint](#ncreplacerepeatedselfadjoint),
+[NCExpandReplaceRepeated](#ncexpandreplacerepeated),
+[NCExpandReplaceRepeatedSymmetric](#ncexpandreplacerepeatedsymmetric).
 
 ### NCReplaceListSelfAdjoint
 
-`NCReplaceListSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceList`.
+`NCReplaceListSelfAdjoint[expr, rules]` applies
+`NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceList`.
+
+`NCReplaceListSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceList](#ncreplacelist), [NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
+[NCReplaceList](#ncreplacelist),
+[NCMakeRuleSelfAdjoint](#ncmakeruleselfadjoint).
 
 ### NCRSA
 
@@ -5216,30 +5525,37 @@ See also:
 
 ### NCMatrixExpand
 
-`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
+`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in
+nc expression `expr`. It effectively substitutes `inv` for `NCInverse`
+and `**` by `NCDot`.
 
 See also:
 [NCInverse](#ncinverse), [NCDot](#ncdot-1).
 
 ### NCMatrixReplaceAll
 
-`NCMatrixReplaceAll[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform each part of the nc expression `expr`.
+`NCMatrixReplaceAll[expr,rules]` applies a rule or list of rules
+`rules` in an attempt to transform each part of the nc expression
+`expr`.
 
 `NCMatrixReplaceAll` works as `NCReplaceAll` but takes extra steps to
 make sure substitutions work with matrices.
 
 See also:
-[NCReplaceAll](#ncreplaceall), [NCMatrixReplaceRepeated](#ncmatrixreplacerepeated).
+[NCReplaceAll](#ncreplaceall),
+[NCMatrixReplaceRepeated](#ncmatrixreplacerepeated).
 
 ### NCMatrixReplaceRepeated
 
-`NCMatrixReplaceRepeated[expr,rules]` repeatedly performs replacements using rule or list of rules `rules` until `expr` no longer changes.
+`NCMatrixReplaceRepeated[expr,rules]` repeatedly performs replacements
+using rule or list of rules `rules` until `expr` no longer changes.
 
-`NCMatrixReplaceRepeated` works as `NCReplaceRepeated` but takes extra steps to
-make sure substitutions work with matrices.
+`NCMatrixReplaceRepeated` works as `NCReplaceRepeated` but takes extra
+steps to make sure substitutions work with matrices.
 
 See also:
-[NCReplaceRepeated](#ncreplacerepeated), [NCMatrixReplaceAll](#ncmatrixreplaceall).
+[NCReplaceRepeated](#ncreplacerepeated),
+[NCMatrixReplaceAll](#ncmatrixreplaceall).
 
 ### NCReplacePowerRule
 
@@ -6354,6 +6670,7 @@ Members are:
 - [NCConsolidateList](#ncconsolidatelist)
 - [NCConsistentQ](#ncconsistentq)
 - [NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq)
+- [NCSymbolOrSubscriptExtendedQ](#ncsymbolorsubscriptextendedq)
 - [NCLeafCount](#ncleafcount)
 - [NCReplaceData](#ncreplacedata)
 - [NCToExpression](#nctoexpression)
@@ -6361,9 +6678,11 @@ Members are:
 
 ### NCGrabSymbols
 
-`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
+`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in
+`expr`.
 
-`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
+`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in
+`expr` as the single argument of function `f`.
 
 For example:
 
@@ -6381,9 +6700,11 @@ See also:
 
 ### NCGrabNCSymbols
 
-`NCGrabSymbols[expr]` returns a list with all NC *Symbols* appearing in `expr`.
+`NCGrabSymbols[expr]` returns a list with all NC *Symbols* appearing
+in `expr`.
 
-`NCGrabSymbols[expr,f]` returns a list with all NC *Symbols* appearing in `expr` as the single argument of function `f`.
+`NCGrabSymbols[expr,f]` returns a list with all NC *Symbols* appearing
+in `expr` as the single argument of function `f`.
 
 See also:
 [NCGrabSymbols](#ncgrabsymbols),
@@ -6391,9 +6712,11 @@ See also:
 
 ### NCGrabFunctions
 
-`NCGrabFunctions[expr]` returns a list with all fragments of `expr` containing functions.
+`NCGrabFunctions[expr]` returns a list with all fragments of `expr`
+containing functions.
 
-`NCGrabFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
+`NCGrabFunctions[expr,f]` returns a list with all fragments of `expr`
+containing the function `f`.
 
 For example:
 
@@ -6416,7 +6739,8 @@ See also:
 
 ### NCGrabIndeterminants
 
-`NCGrabIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
+`NCGrabIndeterminants[expr]` returns a list with first level symbols
+and nc expressions involved in sums and nc products in `expr`.
 
 For example:
 
@@ -6449,8 +6773,10 @@ See also:
 
 `NCConsolidateList[list]` produces two lists:
 
-- The first list contains a version of `list` where repeated entries have been suppressed;
-- The second list contains the indices of the elements in the first list that recover the original `list`.
+- The first list contains a version of `list` where repeated entries
+  have been suppressed;
+- The second list contains the indices of the elements in the first
+  list that recover the original `list`.
 
 For example:
 
@@ -6466,19 +6792,36 @@ See also:
 
 ### NCConsistentQ
 
-`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative products or inverses involving noncommutative variables.
+`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative
+products or inverses involving noncommutative variables.
 
 ### NCSymbolOrSubscriptQ
 
-`NCSymbolOrSubscriptQ[expr]` returns *True* if `expr` is a symbol or a symbol subscript.
+`NCSymbolOrSubscriptQ[expr]` returns *True* if `expr` is a symbol or a
+symbol subscript.
 
 See also:
+[NCSymbolOrSubscriptExtendedQ](#ncsymbolorsubscriptextendedq),
 [NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
+[NCNonCommutativeSymbolOrSubscriptExtendedQ](#ncnoncommutativesymbolorsubscriptextendedq),
+[NCPowerQ](#ncpowerq).
+
+### NCSymbolOrSubscriptExtendedQ
+
+`NCSymbolOrSubscriptExtendedQ[expr]` returns *True* if `expr` is a
+symbol, a symbol subscript, or the transpose (`tp`) or adjoint (`aj`)
+of a symbol or symbol subscript.
+
+See also:
+[NCSymbolOrSubscriptQ](#ncsymbolorsubscriptq),
+[NCNonCommutativeSymbolOrSubscriptQ](#ncnoncommutativesymbolorsubscriptq),
+[NCNonCommutativeSymbolOrSubscriptExtendedQ](#ncnoncommutativesymbolorsubscriptextendedq),
 [NCPowerQ](#ncpowerq).
 
 ### NCLeafCount
 
-`NCLeafCount[expr]` returns an number associated with the complexity of an expression:
+`NCLeafCount[expr]` returns an number associated with the complexity
+of an expression:
 
 - If `PossibleZeroQ[expr] == True` then `NCLeafCount[expr]` is `-Infinity`;
 - If `NumberQ[expr]] == True` then `NCLeafCount[expr]` is `Abs[expr]`;
@@ -6491,18 +6834,23 @@ See also:
 
 ### NCReplaceData
 
-`NCReplaceData[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica, for example replacing `**` by `.`.
+`NCReplaceData[expr, rules]` applies `rules` to `expr` and convert
+resulting expression to standard Mathematica, for example replacing
+`**` by `.`.
 
-`NCReplaceData` does not attempt to resize entries in expressions involving matrices. Use `NCToExpression` for that.
+`NCReplaceData` does not attempt to resize entries in expressions
+involving matrices. Use `NCToExpression` for that.
 
 See also:
 [NCToExpression](#nctoexpression).
 
 ### NCToExpression
 
-`NCToExpression[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica.
+`NCToExpression[expr, rules]` applies `rules` to `expr` and convert
+resulting expression to standard Mathematica.
 
-`NCToExpression` attempts to resize entries in expressions involving matrices.
+`NCToExpression` attempts to resize entries in expressions involving
+matrices.
 
 See also:
 [NCReplaceData](#ncreplacedata).

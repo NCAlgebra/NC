@@ -136,7 +136,7 @@ results in `a`.
 > `inv[a**a]` now evaluates to `Power[a, -2]`, hence certain patterns
 > may no longer work. For example:
 > ```
-> NCReplace[inv[a ** a], a ** a -> b]
+> NCReplace[inv[a**a], a**a -> b]
 > ```
 > would produce `inv[b]` in previous versions of `NCAlgebra` but will
 > fail in **Version 6**.
@@ -196,21 +196,21 @@ return `co[a]` where `co` stands for complex-conjugate.
 
 A trace like operator, `tr`, was introduced in **v5.0.6**. It is a
 commutative operator keeps its list of arguments cyclicly sorted so
-that `tr[b ** a]` evaluates to `tr[a ** b]` and that automatically
+that `tr[b**a]` evaluates to `tr[a**b]` and that automatically
 distribute over sums so that an expression like
 
-    tr[a ** b - b ** a]
+    tr[a**b - b**a]
 
-always simplifies to zero. Also `b ** a ** tr[b ** a]` simplifies to 
+always simplifies to zero. Also `b**a**tr[b**a]` simplifies to 
 ```output
-tr[a ** b] a ** b
+tr[a**b] a**b
 ```
 because `tr` is a commutative function. See
 [SetCommutativeFunction](#SetCommutativeFunction).
 
 A more interesting example is
 
-    expr = (a ** b - b ** a)^3
+    expr = (a**b - b**a)^3
 
 for which 
 
@@ -218,7 +218,7 @@ for which
 
 evaluates to
 ```output
-3 tr[a^2 ** b^2 ** a ** b] - 3 tr[a^2 ** b ** a ** b^2]
+3 tr[a^2**b^2**a**b] - 3 tr[a^2**b**a**b^2]
 ```
 
 Use [NCMatrixExpand](#NCMatrixExpand) to expand `tr` over matrices
@@ -288,7 +288,7 @@ c + tp[c]
 The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
 understood in the example:
 
-    NCReplaceAll[a**b**b, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceAll[a**b^2, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 ```output
@@ -296,7 +296,7 @@ a**b
 ```
 and
 
-    NCReplaceRepeated[a**b**b, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceRepeated[a**b^2, a**b -> a, ApplyPowerRule -> True]
 
 that results in
 ```output
@@ -307,9 +307,62 @@ Beside `NCReplaceAll` and `NCReplaceRepeated` we offer `NCReplace` and
 (`/.`), `ReplaceRepeated` (`//.`), `Replace` and `ReplaceList`. Note
 that one rarely uses `NCReplace` and `NCReplaceList`.
 
-See the Section [Advanced Rules and Replacement](#AdvancedReplace) for
-a deeper discussion on some issues involved with rules and
-replacements in `NCAlgebra`.
+With **Version 6** we introduced
+[`NCExpandReplaceRepeated`](#NCExpandReplaceRepeated),
+[`NCExpandReplaceRepeatedSymmetric`](#NCExpandReplaceRepeatedSymmetric),
+and
+[`NCExpandReplaceRepeatedSelfAdjoint`](#NCExpandReplaceRepeatedSelfAdjoint),
+which automate the tedious process of successive substitutions and
+expansions that may be required to fully simplify expressions. For
+example, consider the expression
+
+    expr = a**b^2-b^2**a
+
+and the rule
+
+    rule = a**b -> a - b
+
+for which
+
+	NCReplaceRepeated[expr, rule, ApplyPowerRule->True]
+
+results in the expression
+```output
+(a - b)**b - b^2**a
+```
+Note the presence of *parenthesized* terms resulting from the rule
+substitution. It is clear that after expanding 
+
+    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
+
+to produce
+```output
+a**b - b^2 - b^2**a
+```
+there are still terms that could be affected by the original
+replacement rule, that, if replaced again,
+
+    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
+    NCExpand[NCReplaceRepeated[%, rule, ApplyPowerRule->True]]
+
+would ultimately lead to the simplest possible expression
+```output
+a - b - b^2 - b^2**a
+```
+This successive expansion and substitution process is automated in
+
+	NCExpandReplaceRepeated[expr, rule, ApplyPowerRule->True]
+
+which produces the final expression
+```output
+a - b - b^2 - b^2**a
+```
+in one shot.
+
+See also the Sections [Polynomials and rules](#PolynomialsAndRules)
+and [Advanced Rules and Replacement](#AdvancedReplace) for a deeper
+discussion on some issues involved with rules and replacements in
+`NCAlgebra`.
 
 > **WARNING:** The commands `Substitute` and `Transform` have been
 > deprecated in **Version 5** in favor of the above nc versions of
@@ -391,19 +444,19 @@ would normally expect.
 > [NCCollectExponents](#NCCollectExponents) expands and collects
 > exponents of expressions in noncommutative monomials. For example
 > ```
-> NCExpandExponents[a ** (b ** a)^2 ** b]
+> NCExpandExponents[a**(b**a)^2**b]
 > ```
 > produces
 > ```output
-> a ** b ** a ** b ** a ** b
+> a**b**a**b**a**b
 > ```
 > and
 > ```
-> NCCollectExponents[a ** b ** a ** b ** a ** b]
+> NCCollectExponents[a**b**a**b**a**b]
 > ```
 > produces
 > ```output
-> (a ** b)^3
+> (a**b)^3
 > ```
 
 `NCAlgebra` provides some commands for noncommutative polynomial
@@ -704,7 +757,7 @@ which is similar to Mathematica's `Dot`. For example
 
 result in 
 ```output
-{{a ** d + b ** e, 2 a + 3 b}, {c ** d + d ** e, 2 c + 3 d}}
+{{a**d + b**e, 2 a + 3 b}, {c**d + d**e, 2 c + 3 d}}
 ```
 Note that products of nc symbols appearing in the
 matrices are multiplied using `**`. Compare that with the standard
