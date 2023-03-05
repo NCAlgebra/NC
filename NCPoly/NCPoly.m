@@ -366,6 +366,10 @@ Begin["`Private`"];
     Return[r];
   ];
 
+  NCPolyReduce[f_NCPoly, g_NCPoly,
+	       options:OptionsPattern[NCPolyReduce]] :=
+    NCPolyReduce[f, {g}, options];
+
   NCPolyReduce[f_NCPoly, g_NCPoly, j_Integer:1,
 	       options:OptionsPattern[NCPolyReduce]] :=
     NCPolyReduceWithQuotient[f, g, j, options, ReturnQuotient -> False];
