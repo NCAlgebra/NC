@@ -25,6 +25,7 @@ Clear[NCGrabSymbols,
       NCVariables,
       NCConsolidateList,
       NCSymbolOrSubscriptQ,
+      NCSymbolOrSubscriptExtendedQ,
       NCConsistentQ,
       NCLeafCount,
       NCReplaceData,
@@ -43,6 +44,13 @@ Begin["`Private`"];
 
   (* NCSymbolOrSubscriptQ *)
   NCSymbolOrSubscriptQ = Function[x, MatchQ[x, _Symbol|Subscript[_Symbol,__]]];
+
+  (* NCSymbolOrSubscriptExtendedQ *)
+  NCSymbolOrSubscriptExtendedQ =
+    Function[x,
+	     MatchQ[x,
+		    ((_Symbol|Subscript[_Symbol,__])|
+		    (NonCommutativeMultiply`tp|NonCommutativeMultiply`aj)[_Symbol|Subscript[_Symbol,__]])]];
 
   NCGrabFirst[exp_, rule_Rule] := (exp /. rule) /; MatchQ[exp, rule[[1]]];
   NCGrabFirst[exp_, pattern_Pattern] := exp /; MatchQ[exp, pattern];

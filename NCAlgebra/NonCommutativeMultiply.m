@@ -25,6 +25,7 @@ BeginPackage["NonCommutativeMultiply`",
 Clear[aj, tp, rt, inv, co,
       CommutativeQ, NonCommutativeQ, 
       NCNonCommutativeSymbolOrSubscriptQ,
+      NCNonCommutativeSymbolOrSubscriptExtendedQ,
       NCPowerQ,
       SetCommutative, SetNonCommutative,
       SetCommutativeFunction,
@@ -116,7 +117,14 @@ Begin[ "`Private`" ]
   (* NCNonCommutativeSymbolOrSubscriptQ *)
   NCNonCommutativeSymbolOrSubscriptQ =
     Function[x,
-             MatchQ[x, _Symbol|Subscript[_Symbol,__]] && NonCommutativeQ[x]];
+             MatchQ[x, _Symbol?NonCommutativeQ|Subscript[_Symbol?NonCommutativeQ,__]]];
+
+  (* NCNonCommutativeSymbolOrSubscriptExtendedQ *)
+  NCNonCommutativeSymbolOrSubscriptExtendedQ =
+    Function[x,
+	     MatchQ[x,
+		    ((_Symbol?NonCommutativeQ|Subscript[_Symbol?NonCommutativeQ,__])|
+		    (NonCommutativeMultiply`tp|NonCommutativeMultiply`aj)[_Symbol|Subscript[_Symbol,__]])]];
 
   (* NCPowerQ *)
   NCPowerQ =

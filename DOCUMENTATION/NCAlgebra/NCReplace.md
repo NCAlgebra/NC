@@ -1,8 +1,17 @@
 ## NCReplace {#PackageNCReplace}
 
-**NCReplace** is a package containing several functions that are useful in making replacements in noncommutative expressions. It offers replacements to Mathematica's `Replace`, `ReplaceAll`, `ReplaceRepeated`, and `ReplaceList` functions.
+**NCReplace** is a package containing several functions that are
+useful in making replacements in noncommutative expressions. It offers
+replacements to Mathematica's `Replace`, `ReplaceAll`,
+`ReplaceRepeated`, and `ReplaceList` functions. 
 
-Commands in this package replace the old `Substitute` and `Transform` family of command which are been deprecated. The new commands are much more reliable and work faster than the old commands. From the beginning, substitution was always problematic and certain patterns would be missed. We reassure that the call expression that are returned are mathematically correct but some opportunities for substitution may have been missed.
+> Commands in this package replace the old `Substitute` and
+> `Transform` family of command which are been deprecated.  The new
+> commands are much more reliable and work faster than the old
+> commands. From the beginning, substitution was always problematic
+> and certain patterns would be missed. We reassure that the call
+> expression that are returned are mathematically correct but some
+> opportunities for substitution may have been missed.
 
 Members are:
 
@@ -10,16 +19,19 @@ Members are:
 * [NCReplaceAll](#NCReplaceAll)
 * [NCReplaceList](#NCReplaceList)
 * [NCReplaceRepeated](#NCReplaceRepeated)
+* [NCExpandReplaceRepeated](#NCExpandReplaceRepeated)
 * [NCMakeRuleSymmetric](#NCMakeRuleSymmetric)
 * [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint)
 * [NCReplaceSymmetric](#NCReplaceSymmetric)
 * [NCReplaceAllSymmetric](#NCReplaceAllSymmetric)
 * [NCReplaceListSymmetric](#NCReplaceListSymmetric)
 * [NCReplaceRepeatedSymmetric](#NCReplaceRepeatedSymmetric)
+* [NCExpandReplaceRepeatedSymmetric](#NCExpandReplaceRepeatedSymmetric)
 * [NCReplaceSelfAdjoint](#NCReplaceSelfAdjoint)
 * [NCReplaceAllSelfAdjoint](#NCReplaceAllSelfAdjoint)
 * [NCReplaceListSelfAdjoint](#NCReplaceListSelfAdjoint)
 * [NCReplaceRepeatedSelfAdjoint](#NCReplaceRepeatedSelfAdjoint)
+* [NCExpandReplaceRepeatedSelfAdjoint](#NCExpandReplaceRepeatedSelfAdjoint)
 * [NCMatrixExpand](#NCMatrixExpand)
 * [NCMatrixReplaceAll](#NCMatrixReplaceAll)
 * [NCMatrixReplaceRepeated](#NCMatrixReplaceRepeated)
@@ -48,9 +60,14 @@ Options:
 
 ### NCReplace {#NCReplace}
 
-`NCReplace[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform the entire nc expression `expr`.
+`NCReplace[expr,rules]` applies a rule or list of rules
+`rules` in an attempt to transform the entire nc expression `expr`.
 
-`NCReplace[expr,rules,levelspec]`	 applies `rules` to parts of `expr` specified by `levelspec`.
+`NCReplace[expr,rules,levelspec]` applies `rules` to parts of `expr`
+specified by `levelspec`.
+
+`NCReplace[expr,rules,options]` and `NCReplace[expr,rules,levelspec]`
+use `options`.
 
 See also:
 [NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList), [NCReplaceRepeated](#NCReplaceRepeated).
@@ -58,6 +75,8 @@ See also:
 ### NCReplaceAll {#NCReplaceAll}
 
 `NCReplaceAll[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform each part of the nc expression `expr`.
+
+`NCReplaceAll[expr,rules,options]` uses `options`.
 
 See also:
 [NCReplace](#NCReplace), [NCReplaceList](#NCReplaceList), [NCReplaceRepeated](#NCReplaceRepeated).
@@ -68,6 +87,9 @@ See also:
 
 `ReplaceList[expr,rules,n]` gives a list of at most `n` results.
 
+`NCReplaceList[expr,rules,options]` and
+`NCReplaceList[expr,rules,n,options]` use `options`.
+
 See also:
 [NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll), [NCReplaceRepeated](#NCReplaceRepeated).
 
@@ -75,8 +97,24 @@ See also:
 
 `NCReplaceRepeated[expr,rules]` repeatedly performs replacements using rule or list of rules `rules` until `expr` no longer changes.
 
+`NCReplaceRepeated[expr,rules,options]` uses `options`.
+
 See also:
-[NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList).
+[NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll),
+[NCReplaceList](#NCReplaceList),
+[NCExpandReplaceRepeated](#NCExpandReplaceRepeated).
+
+### NCExpandReplaceRepeated {#NCExpandReplaceRepeated}
+
+`NCExpandReplaceRepeated[expr,rules]` repeatedly applies
+`NCReplaceRepeated` and `NCExpand` until the results does not change.
+
+`NCExpandReplaceRepeated[expr,rules,options]` uses `options`.
+
+See also:
+[NCReplaceRepeated](#NCReplaceRepeated),
+[NCExpandReplaceRepeatedSymmetric](#NCExpandReplaceRepeatedSymmetric),
+[NCExpandReplaceRepeatedSelfAdjoint](#NCExpandReplaceRepeatedSelfAdjoint).
 
 ### NCR {#NCR}
 
@@ -111,42 +149,74 @@ See also:
 `NCMakeRuleSymmetric[rules]` add rules to transform the transpose of the left-hand side of `rules` into the transpose of the right-hand side of `rules`.
 
 See also:
-[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint), [NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList), [NCReplaceRepeated](#NCReplaceRepeated).
+[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint),
+[NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll),
+[NCReplaceList](#NCReplaceList),
+[NCReplaceRepeated](#NCReplaceRepeated).
 
 ### NCMakeRuleSelfAdjoint {#NCMakeRuleSelfAdjoint}
 
 `NCMakeRuleSelfAdjoint[rules]` add rules to transform the adjoint of the left-hand side of `rules` into the adjoint of the right-hand side of `rules`.
 
 See also:
-[NCMakeRuleSymmetric](#NCMakeRuleSymmetric), [NCReplace](#NCReplace), [NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList), [NCReplaceRepeated](#NCReplaceRepeated).
+[NCMakeRuleSymmetric](#NCMakeRuleSymmetric), [NCReplace](#NCReplace),
+[NCReplaceAll](#NCReplaceAll), [NCReplaceList](#NCReplaceList),
+[NCReplaceRepeated](#NCReplaceRepeated).
 
 ### NCReplaceSymmetric {#NCReplaceSymmetric}
 
-`NCReplaceSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplace`.
+`NCReplaceSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to
+`rules` before calling `NCReplace`.
+
+`NCReplaceSymmetric[expr,rules,options]` uses `options`.
 
 See also:
 [NCReplace](#NCReplace), [NCMakeRuleSymmetric](#NCMakeRuleSymmetric).
 
 ### NCReplaceAllSymmetric {#NCReplaceAllSymmetric}
 
-`NCReplaceAllSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceAll`.
+`NCReplaceAllSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to
+`rules` before calling `NCReplaceAll`.
+
+`NCReplaceAllSymmetric[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceAll](#NCReplaceAll), [NCMakeRuleSymmetric](#NCMakeRuleSymmetric).
+[NCReplaceAll](#NCReplaceAll),
+[NCMakeRuleSymmetric](#NCMakeRuleSymmetric).
 
 ### NCReplaceRepeatedSymmetric {#NCReplaceRepeatedSymmetric}
 
 `NCReplaceRepeatedSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceRepeated`.
 
+`NCReplaceRepeatedSymmetric[expr,rules,options]` uses `options`.
+
 See also:
-[NCReplaceRepeated](#NCReplaceRepeated), [NCMakeRuleSymmetric](#NCMakeRuleSymmetric).
+[NCReplaceRepeated](#NCReplaceRepeated),
+[NCMakeRuleSymmetric](#NCMakeRuleSymmetric).
+
+### NCExpandReplaceRepeatedSymmetric {#NCExpandReplaceRepeatedSymmetric}
+
+`NCExpandReplaceRepeatedSymmetric[expr,rules]` repeatedly applies
+`NCReplaceRepeatedSymmetric` and `NCExpand` until the results does not
+change.
+
+`NCExpandReplaceRepeatedSymmetric[expr,rules,options]` uses `options`.
+
+See also:
+[NCReplaceRepeatedSymmetric](#NCReplaceRepeatedSymmetric), 
+[NCExpandReplaceRepeated](#NCExpandReplaceRepeated),
+[NCExpandReplaceRepeatedSelfAdjoint](#NCExpandReplaceRepeatedSelfAdjoint).
 
 ### NCReplaceListSymmetric {#NCReplaceListSymmetric}
 
-`NCReplaceListSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to `rules` before calling `NCReplaceList`.
+`NCReplaceListSymmetric[expr, rules]` applies `NCMakeRuleSymmetric` to
+`rules` before calling `NCReplaceList`.
+
+`NCReplaceListSymmetric[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceList](#NCReplaceList), [NCMakeRuleSymmetric](#NCMakeRuleSymmetric).
+[NCReplaceList](#NCReplaceList),
+[NCMakeRuleSymmetric](#NCMakeRuleSymmetric). 
 
 ### NCRSym {#NCRSym}
 
@@ -178,31 +248,61 @@ See also:
 
 ### NCReplaceSelfAdjoint {#NCReplaceSelfAdjoint}
 
-`NCReplaceSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplace`.
+`NCReplaceSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to
+`rules` before calling `NCReplace`. 
+
+`NCReplaceSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplace](#NCReplace), [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint).
+[NCReplace](#NCReplace),
+[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint).
 
 ### NCReplaceAllSelfAdjoint {#NCReplaceAllSelfAdjoint}
 
-`NCReplaceAllSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceAll`.
+`NCReplaceAllSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint`
+to `rules` before calling `NCReplaceAll`.
+
+`NCReplaceAllSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceAll](#NCReplaceAll), [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint).
+[NCReplaceAll](#NCReplaceAll),
+[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint). 
 
 ### NCReplaceRepeatedSelfAdjoint {#NCReplaceRepeatedSelfAdjoint}
 
-`NCReplaceRepeatedSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceRepeated`.
+`NCReplaceRepeatedSelfAdjoint[expr, rules]` applies
+`NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceRepeated`.
+
+`NCReplaceRepeatedSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceRepeated](#NCReplaceRepeated), [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint).
+[NCReplaceRepeated](#NCReplaceRepeated),
+[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint). 
+
+### NCExpandReplaceRepeatedSelfAdjoint {#NCExpandReplaceRepeatedSelfAdjoint}
+
+`NCExpandReplaceRepeatedSelfAdjoint[expr,rules]` repeatedly applies
+`NCReplaceRepeatedSelfAdjoint` and `NCExpand` until the results does not
+change.
+
+`NCExpandedReplaceRepeatedSelfAdjoint[expr,rules,options]` uses
+`options`.
+
+See also:
+[NCReplaceRepeatedSelfAdjoint](#NCReplaceRepeatedSelfAdjoint), 
+[NCExpandReplaceRepeated](#NCExpandReplaceRepeated), 
+[NCExpandReplaceRepeatedSymmetric](#NCExpandReplaceRepeatedSymmetric).
 
 ### NCReplaceListSelfAdjoint {#NCReplaceListSelfAdjoint}
 
-`NCReplaceListSelfAdjoint[expr, rules]` applies `NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceList`.
+`NCReplaceListSelfAdjoint[expr, rules]` applies
+`NCMakeRuleSelfAdjoint` to `rules` before calling `NCReplaceList`.
+
+`NCReplaceListSelfAdjoint[expr,rules,options]` uses `options`.
 
 See also:
-[NCReplaceList](#NCReplaceList), [NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint).
+[NCReplaceList](#NCReplaceList),
+[NCMakeRuleSelfAdjoint](#NCMakeRuleSelfAdjoint).
 
 ### NCRSA {#NCRSA}
 
@@ -234,30 +334,37 @@ See also:
 
 ### NCMatrixExpand {#NCMatrixExpand}
 
-`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in nc expression `expr`. It effectively substitutes `inv` for `NCInverse` and `**` by `NCDot`.
+`NCMatrixExpand[expr]` expands `inv` and `**` of matrices appearing in
+nc expression `expr`. It effectively substitutes `inv` for `NCInverse`
+and `**` by `NCDot`.
 
 See also:
 [NCInverse](#NCInverse), [NCDot](#NCDot).
 
 ### NCMatrixReplaceAll {#NCMatrixReplaceAll}
 
-`NCMatrixReplaceAll[expr,rules]` applies a rule or list of rules `rules` in an attempt to transform each part of the nc expression `expr`.
+`NCMatrixReplaceAll[expr,rules]` applies a rule or list of rules
+`rules` in an attempt to transform each part of the nc expression
+`expr`.
 
 `NCMatrixReplaceAll` works as `NCReplaceAll` but takes extra steps to
 make sure substitutions work with matrices.
 
 See also:
-[NCReplaceAll](#NCReplaceAll), [NCMatrixReplaceRepeated](#NCMatrixReplaceRepeated).
+[NCReplaceAll](#NCReplaceAll),
+[NCMatrixReplaceRepeated](#NCMatrixReplaceRepeated). 
 
 ### NCMatrixReplaceRepeated {#NCMatrixReplaceRepeated}
 
-`NCMatrixReplaceRepeated[expr,rules]` repeatedly performs replacements using rule or list of rules `rules` until `expr` no longer changes.
+`NCMatrixReplaceRepeated[expr,rules]` repeatedly performs replacements
+using rule or list of rules `rules` until `expr` no longer changes.
 
-`NCMatrixReplaceRepeated` works as `NCReplaceRepeated` but takes extra steps to
-make sure substitutions work with matrices.
+`NCMatrixReplaceRepeated` works as `NCReplaceRepeated` but takes extra
+steps to make sure substitutions work with matrices.
 
 See also:
-[NCReplaceRepeated](#NCReplaceRepeated), [NCMatrixReplaceAll](#NCMatrixReplaceAll).
+[NCReplaceRepeated](#NCReplaceRepeated),
+[NCMatrixReplaceAll](#NCMatrixReplaceAll). 
 
 ### NCReplacePowerRule {#NCReplacePowerRule}
 

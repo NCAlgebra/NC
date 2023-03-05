@@ -12,6 +12,7 @@ Members are:
 * [NCConsolidateList](#NCConsolidateList)
 * [NCConsistentQ](#NCConsistentQ)
 * [NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ)
+* [NCSymbolOrSubscriptExtendedQ](#NCSymbolOrSubscriptExtendedQ)
 * [NCLeafCount](#NCLeafCount)
 * [NCReplaceData](#NCReplaceData)
 * [NCToExpression](#NCToExpression)
@@ -19,9 +20,11 @@ Members are:
 
 ### NCGrabSymbols {#NCGrabSymbols}
 
-`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in `expr`.
-
-`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in `expr` as the single argument of function `f`.
+`NCGrabSymbols[expr]` returns a list with all *Symbols* appearing in
+`expr`.
+ 
+`NCGrabSymbols[expr,f]` returns a list with all *Symbols* appearing in
+`expr` as the single argument of function `f`.
 
 For example:
 
@@ -39,9 +42,11 @@ See also:
 
 ### NCGrabNCSymbols {#NCGrabNCSymbols}
 
-`NCGrabSymbols[expr]` returns a list with all NC *Symbols* appearing in `expr`.
+`NCGrabSymbols[expr]` returns a list with all NC *Symbols* appearing
+in `expr`.
 
-`NCGrabSymbols[expr,f]` returns a list with all NC *Symbols* appearing in `expr` as the single argument of function `f`.
+`NCGrabSymbols[expr,f]` returns a list with all NC *Symbols* appearing
+in `expr` as the single argument of function `f`.
 
 See also:
 [NCGrabSymbols](#NCGrabSymbols),
@@ -49,9 +54,11 @@ See also:
 
 ### NCGrabFunctions {#NCGrabFunctions}
 
-`NCGrabFunctions[expr]` returns a list with all fragments of `expr` containing functions.
+`NCGrabFunctions[expr]` returns a list with all fragments of `expr`
+containing functions.
 
-`NCGrabFunctions[expr,f]` returns a list with all fragments of `expr` containing the function `f`.
+`NCGrabFunctions[expr,f]` returns a list with all fragments of `expr`
+containing the function `f`.
 
 For example:
 
@@ -74,7 +81,8 @@ See also:
 
 ### NCGrabIndeterminants {#NCGrabIndeterminants}
 
-`NCGrabIndeterminants[expr]` returns a list with first level symbols and nc expressions involved in sums and nc products in `expr`.
+`NCGrabIndeterminants[expr]` returns a list with first level symbols
+and nc expressions involved in sums and nc products in `expr`.
 
 For example:
 
@@ -107,8 +115,10 @@ See also:
 
 `NCConsolidateList[list]` produces two lists:
 
-- The first list contains a version of `list` where repeated entries have been suppressed;
-- The second list contains the indices of the elements in the first list that recover the original `list`.
+- The first list contains a version of `list` where repeated entries
+  have been suppressed; 
+- The second list contains the indices of the elements in the first
+  list that recover the original `list`. 
 
 For example:
 
@@ -124,19 +134,36 @@ See also:
 
 ### NCConsistentQ {#NCConsistentQ}
 
-`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative products or inverses involving noncommutative variables.
+`NCConsistentQ[expr]` returns *True* is `expr` contains no commutative
+products or inverses involving noncommutative variables. 
 
 ### NCSymbolOrSubscriptQ {#NCSymbolOrSubscriptQ}
 
-`NCSymbolOrSubscriptQ[expr]` returns *True* if `expr` is a symbol or a symbol subscript.
+`NCSymbolOrSubscriptQ[expr]` returns *True* if `expr` is a symbol or a
+symbol subscript. 
 
 See also:
+[NCSymbolOrSubscriptExtendedQ](#NCSymbolOrSubscriptExtendedQ),
 [NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCNonCommutativeSymbolOrSubscriptExtendedQ](#NCNonCommutativeSymbolOrSubscriptExtendedQ),
+[NCPowerQ](#NCPowerQ).
+
+### NCSymbolOrSubscriptExtendedQ {#NCSymbolOrSubscriptExtendedQ}
+
+`NCSymbolOrSubscriptExtendedQ[expr]` returns *True* if `expr` is a
+symbol, a symbol subscript, or the transpose (`tp`) or adjoint (`aj`)
+of a symbol or symbol subscript.
+
+See also:
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
+[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCNonCommutativeSymbolOrSubscriptExtendedQ](#NCNonCommutativeSymbolOrSubscriptExtendedQ),
 [NCPowerQ](#NCPowerQ).
 
 ### NCLeafCount {#NCLeafCount}
 
-`NCLeafCount[expr]` returns an number associated with the complexity of an expression:
+`NCLeafCount[expr]` returns an number associated with the complexity
+of an expression:
 
 - If `PossibleZeroQ[expr] == True` then `NCLeafCount[expr]` is `-Infinity`;
 - If `NumberQ[expr]] == True` then `NCLeafCount[expr]` is `Abs[expr]`;
@@ -149,18 +176,23 @@ See also:
 
 ### NCReplaceData {#NCReplaceData}
 
-`NCReplaceData[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica, for example replacing `**` by `.`. 
+`NCReplaceData[expr, rules]` applies `rules` to `expr` and convert
+resulting expression to standard Mathematica, for example replacing
+`**` by `.`.
 
-`NCReplaceData` does not attempt to resize entries in expressions involving matrices. Use `NCToExpression` for that.
+`NCReplaceData` does not attempt to resize entries in expressions
+involving matrices. Use `NCToExpression` for that.
 
 See also:
 [NCToExpression](#NCToExpression).
 
 ### NCToExpression {#NCToExpression}
 
-`NCToExpression[expr, rules]` applies `rules` to `expr` and convert resulting expression to standard Mathematica. 
+`NCToExpression[expr, rules]` applies `rules` to `expr` and convert
+resulting expression to standard Mathematica.
 
-`NCToExpression` attempts to resize entries in expressions involving matrices.
+`NCToExpression` attempts to resize entries in expressions involving
+matrices.
 
 See also:
 [NCReplaceData](#NCReplaceData).

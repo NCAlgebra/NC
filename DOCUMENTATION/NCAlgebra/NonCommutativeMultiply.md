@@ -22,6 +22,7 @@ Members are:
 * [UnsetCommutingOperators](#UnsetCommutingOperators)
 * [CommutingOperatorsQ](#CommutingOperatorsQ)
 * [NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ)
+* [NCNonCommutativeSymbolOrSubscriptExtendedQ](#NCNonCommutativeSymbolOrSubscriptExtendedQ)
 * [NCPowerQ](#NCPowerQ)
 * [Commutative](#Commutative)
 * [CommuteEverything](#CommuteEverything)
@@ -188,7 +189,22 @@ See also:
 `NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
 
 See also:
+[NCNonCommutativeSymbolOrSubscriptExtendedQ](#NCNonCommutativeSymbolOrSubscriptExtendedQ),
 [NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptExtendedQ](#NCSymbolOrSubscriptExtendedQ),
+[NCPowerQ](#NCPowerQ).
+
+### NCNonCommutativeSymbolOrSubscriptExtendedQ {#NCNonCommutativeSymbolOrSubscriptExtendedQ}
+
+`NCNonCommutativeSymbolOrSubscriptExtendedQ[expr]` returns *True* if
+`expr` is an noncommutative symbol, a noncommutative symbol subscript,
+or the transpose (`tp`) or adjoint (`aj`) of a noncommutative symbol
+or noncommutative symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptExtendedQ](#NCSymbolOrSubscriptExtendedQ),
 [NCPowerQ](#NCPowerQ).
 
 ### NCPowerQ {#NCPowerQ}

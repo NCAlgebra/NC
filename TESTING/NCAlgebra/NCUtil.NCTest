@@ -191,7 +191,6 @@ Block[
   X = {{1,2},{2,1}}; Y = {{3,5},{5,3}};
   answer = 2 IdentityMatrix[2] + Inverse[IdentityMatrix[2] + Y.Y] + X.X;
   NCTest[NCToExpression[expr, {x->X,y->Y}], answer];
-  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
   (* NCLeafCount *)
   NCTest[NCLeafCount[0], -Infinity];
@@ -213,14 +212,42 @@ Block[
   NCTest[NCSymbolOrSubscriptQ[x^2], False];
   NCTest[NCSymbolOrSubscriptQ[inv[x]], False];
   NCTest[NCSymbolOrSubscriptQ[1 + x], False];
+  NCTest[NCSymbolOrSubscriptQ[tp[x]], False];
+  NCTest[NCSymbolOrSubscriptQ[aj[x]], False];
+  NCTest[NCSymbolOrSubscriptQ[aj[x**y]], False];
+
+  (* NCSymbolOrSubscriptExtendedQ *)
+  NCTest[NCSymbolOrSubscriptExtendedQ[x], True];
+  NCTest[NCSymbolOrSubscriptExtendedQ[Subscript[x,1]], True];
+  NCTest[NCSymbolOrSubscriptExtendedQ[x^2], False];
+  NCTest[NCSymbolOrSubscriptExtendedQ[inv[x]], False];
+  NCTest[NCSymbolOrSubscriptExtendedQ[1 + x], False];
+  
+  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
+  
+  NCTest[NCSymbolOrSubscriptExtendedQ[tp[x]], True];
+  NCTest[NCSymbolOrSubscriptExtendedQ[aj[x]], True];
+  NCTest[NCSymbolOrSubscriptExtendedQ[tp[Subscript[x,1]]], True];
+  NCTest[NCSymbolOrSubscriptExtendedQ[aj[Subscript[x,1]]], True];
+  NCTest[NCSymbolOrSubscriptExtendedQ[aj[x**y]], False];
 
   (* NCNonCommutativeSymbolOrSubscriptQ *)
   NCTest[NCNonCommutativeSymbolOrSubscriptQ[x], True];
   NCTest[NCNonCommutativeSymbolOrSubscriptQ[a], False];
+  NCTest[NCNonCommutativeSymbolOrSubscriptQ[tp[x]], False];
+  NCTest[NCNonCommutativeSymbolOrSubscriptQ[tp[Subscript[x, 1]]], False];
   NCTest[NCNonCommutativeSymbolOrSubscriptQ[Subscript[x, 1]], True];
   NCTest[NCNonCommutativeSymbolOrSubscriptQ[Subscript[a, 1]], False];
 
-  (* NCPowerQ *)
+  (* NCNonCommutativeSymbolOrSubscriptExtendedQ *)
+  NCTest[NCNonCommutativeSymbolOrSubscriptExtendedQ[x], True];
+  NCTest[NCNonCommutativeSymbolOrSubscriptExtendedQ[a], False];
+  NCTest[NCNonCommutativeSymbolOrSubscriptExtendedQ[tp[x]], True];
+  NCTest[NCNonCommutativeSymbolOrSubscriptExtendedQ[tp[Subscript[x, 1]]], True];
+  NCTest[NCNonCommutativeSymbolOrSubscriptExtendedQ[Subscript[x, 1]], True];
+  NCTest[NCNonCommutativeSymbolOrSubscriptExtendedQ[Subscript[a, 1]], False];
+
+(* NCPowerQ *)
   NCTest[NCPowerQ[x], True];
   NCTest[NCPowerQ[x^2], True];
   NCTest[NCPowerQ[Subscript[x,1]], True];
@@ -230,5 +257,7 @@ Block[
   NCTest[NCPowerQ[1 + x], False];
   NCTest[NCPowerQ[1 + x^2], False];
   NCTest[NCPowerQ[(1 + x)^2], False];
+
+  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

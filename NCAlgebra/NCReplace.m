@@ -24,15 +24,18 @@ BeginPackage[ "NCReplace`",
 Clear[NCReplace, 
       NCReplaceAll, 
       NCReplaceRepeated, 
+      NCExpandReplaceRepeated, 
       NCReplaceList,
       NCMakeRuleSymmetric, NCMakeRuleSelfAdjoint,
       NCReplaceSymmetric, 
       NCReplaceAllSymmetric, 
       NCReplaceRepeatedSymmetric, 
+      NCExpandReplaceRepeatedSymmetric, 
       NCReplaceListSymmetric,
       NCReplaceSelfAdjoint, 
       NCReplaceAllSelfAdjoint, 
       NCReplaceRepeatedSelfAdjoint, 
+      NCExpandReplaceRepeatedSelfAdjoint, 
       NCReplaceListSelfAdjoint,
       NCReplacePowerRule,
       NCMatrixExpand,
@@ -55,7 +58,7 @@ Begin["`Private`"]
   *)
   NCReplacePowerRule[{expr___Rule}] := Map[NCReplacePowerRule, {expr}];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
-		     [Power[l_?NCSymbolOrSubscriptQ, i:_Integer?Positive:1] ** s___ ** Power[r_?NCSymbolOrSubscriptQ, j:_Integer?Positive:1], expr_]] := op[
+		     [Power[l_?NCSymbolOrSubscriptExtendedQ, i:_Integer?Positive:1] ** s___ ** Power[r_?NCSymbolOrSubscriptExtendedQ, j:_Integer?Positive:1], expr_]] := op[
     If[ i == 1
        ,
         If[ j == 1
@@ -84,7 +87,7 @@ Begin["`Private`"]
        ]
   ];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
-		     [Power[l_?NCSymbolOrSubscriptQ, i:_Integer?Positive:1] ** s__, expr_]] := op[
+		     [Power[l_?NCSymbolOrSubscriptExtendedQ, i:_Integer?Positive:1] ** s__, expr_]] := op[
     If[ i == 1
        ,
         l^(n:_Integer?Positive:1) ** s
@@ -93,7 +96,7 @@ Begin["`Private`"]
     ], If[n != i, l^(n - i) ** expr, expr]
   ];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
-		     [s__ ** Power[r_?NCSymbolOrSubscriptQ, j:_Integer?Positive:1], expr_]] := op[
+		     [s__ ** Power[r_?NCSymbolOrSubscriptExtendedQ, j:_Integer?Positive:1], expr_]] := op[
    If[ j == 1
        ,
 	s ** r^(m:_Integer?Positive:1)
@@ -102,7 +105,7 @@ Begin["`Private`"]
      ], If[m != j, expr ** r^(m - j), expr]
   ];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
-		     [Power[r_?NCSymbolOrSubscriptQ, j:_Integer?Positive:1], expr_]] := op[
+		     [Power[r_?NCNonCommutativeSymbolOrSubscriptExtendedQ, j:_Integer?Positive:1], expr_]] := op[
    If[ j == 1
        ,
 	r^(m:_Integer?Positive:1)
@@ -153,7 +156,7 @@ Begin["`Private`"]
   Clear[NCReverseFlatRules];
   NCReverseFlatRules[expr_] := expr /. NCReplaceReverseFlatRules;
   NCReverseFlatRules[seq__] := Sequence @@ (List @ seq /. NCReplaceReverseFlatRules);
-  
+
   NCReplace[expr_, rule_, options:OptionsPattern[NCReplace]] := 
     NCReverseFlatRules[Replace @@ NCApplyFlatRules[expr, rule, options]];
 
@@ -286,6 +289,16 @@ Begin["`Private`"]
     NCReplaceRepeated[expr, NCMakeRuleSelfAdjoint[rule], args, options];
   NCReplaceListSelfAdjoint[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
     NCReplaceList[expr, NCMakeRuleSelfAdjoint[rule], args, options];
+
+  (* NCExpandReplaceRepeated functions *)
+  NCExpandReplaceRepeated[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    FixedPoint[NCReplaceRepeated[NCExpand[#], rule, options]&, expr];
+
+  NCExpandReplaceRepeatedSymmetric[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    FixedPoint[NCReplaceRepeatedSymmetric[NCExpand[#], rule, options]&, expr];
+
+  NCExpandReplaceRepeatedSelfAdjoint[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    FixedPoint[NCReplaceRepeatedSelfAdjoint[NCExpand[#], rule, options]&, expr];
 
   (* Aliases *)
   NCR = NCReplace;

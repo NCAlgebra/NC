@@ -394,6 +394,22 @@ Block[
      NCTest[NCReplaceRepeated[expr, rule], expr];
      NCTest[NCReplaceRepeated[expr, NCReplacePowerRule[rule]], answer];
 
+     (* NCExpandReplaceRepeated *)
+     expr = a**b^2-b^2**a;
+     rule = a**b -> a - b;
+     answer = a - b - b^2 - b^2**a;
+     NCTest[NCExpandReplaceRepeated[expr, rule, ApplyPowerRule->True], answer];
+
+     expr = a**b^2-tp[a**b^2];
+     rule = a**b -> a - b;
+     answer = a - b - b^2 -tp[a - b - b^2];
+     NCTest[NCExpandReplaceRepeatedSymmetric[expr, rule, ApplyPowerRule->True], answer];
+
+     expr = a**b^2-aj[a**b^2];
+     rule = a**b -> a - b;
+     answer = a - b - b^2 -aj[a - b - b^2];
+     NCTest[NCExpandReplaceRepeatedSelfAdjoint[expr, rule, ApplyPowerRule->True], answer];
+
      (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];
