@@ -1081,7 +1081,7 @@ replacement rule, that, if replaced again,
     NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
     NCExpand[NCReplaceRepeated[%, rule, ApplyPowerRule->True]]
 
-would ultimately lead to the simplest possible expression
+would ultimately lead to a simpler expression
 
 ``` output
 a - b - b^2 - b^2**a

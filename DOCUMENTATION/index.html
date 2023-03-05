@@ -1630,7 +1630,7 @@ rule substitution. It is clear that after expanding</p>
 replacement rule, that, if replaced again,</p>
 <pre><code>NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule-&gt;True]]
 NCExpand[NCReplaceRepeated[%, rule, ApplyPowerRule-&gt;True]]</code></pre>
-<p>would ultimately lead to the simplest possible expression</p>
+<p>would ultimately lead to a simpler expression</p>
 <pre class="output"><code>a - b - b^2 - b^2**a</code></pre>
 <p>This successive expansion and substitution process is automated
 in</p>
