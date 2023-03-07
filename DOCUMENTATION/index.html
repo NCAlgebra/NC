@@ -810,26 +810,32 @@ class="toc-section-number">14.2</span> NCPolyInterface</a>
 class="toc-section-number">14.2.1</span> NCToNCPoly</a></li>
 <li><a href="#NCPolyToNC" id="toc-NCPolyToNC"><span
 class="toc-section-number">14.2.2</span> NCPolyToNC</a></li>
+<li><a href="#NCMonomialOrderQ" id="toc-NCMonomialOrderQ"><span
+class="toc-section-number">14.2.3</span> NCMonomialOrderQ</a></li>
+<li><a href="#NCMonomialOrder" id="toc-NCMonomialOrder"><span
+class="toc-section-number">14.2.4</span> NCMonomialOrder</a></li>
+<li><a href="#NCRationalToNCPoly" id="toc-NCRationalToNCPoly"><span
+class="toc-section-number">14.2.5</span> NCRationalToNCPoly</a></li>
 <li><a href="#NCRuleToPoly" id="toc-NCRuleToPoly"><span
-class="toc-section-number">14.2.3</span> NCRuleToPoly</a></li>
+class="toc-section-number">14.2.6</span> NCRuleToPoly</a></li>
 <li><a href="#NCToRule" id="toc-NCToRule"><span
-class="toc-section-number">14.2.4</span> NCToRule</a></li>
+class="toc-section-number">14.2.7</span> NCToRule</a></li>
 <li><a href="#NCReduce" id="toc-NCReduce"><span
-class="toc-section-number">14.2.5</span> NCReduce</a></li>
+class="toc-section-number">14.2.8</span> NCReduce</a></li>
 <li><a href="#NCReduceRepeated" id="toc-NCReduceRepeated"><span
-class="toc-section-number">14.2.6</span> NCReduceRepeated</a></li>
+class="toc-section-number">14.2.9</span> NCReduceRepeated</a></li>
 <li><a href="#NCMonomialList" id="toc-NCMonomialList"><span
-class="toc-section-number">14.2.7</span> NCMonomialList</a></li>
+class="toc-section-number">14.2.10</span> NCMonomialList</a></li>
 <li><a href="#NCCoefficientRules" id="toc-NCCoefficientRules"><span
-class="toc-section-number">14.2.8</span> NCCoefficientRules</a></li>
+class="toc-section-number">14.2.11</span> NCCoefficientRules</a></li>
 <li><a href="#NCCoefficientList" id="toc-NCCoefficientList"><span
-class="toc-section-number">14.2.9</span> NCCoefficientList</a></li>
+class="toc-section-number">14.2.12</span> NCCoefficientList</a></li>
 <li><a href="#NCCoefficientQ" id="toc-NCCoefficientQ"><span
-class="toc-section-number">14.2.10</span> NCCoefficientQ</a></li>
+class="toc-section-number">14.2.13</span> NCCoefficientQ</a></li>
 <li><a href="#NCMonomialQ" id="toc-NCMonomialQ"><span
-class="toc-section-number">14.2.11</span> NCMonomialQ</a></li>
+class="toc-section-number">14.2.14</span> NCMonomialQ</a></li>
 <li><a href="#NCPolynomialQ" id="toc-NCPolynomialQ"><span
-class="toc-section-number">14.2.12</span> NCPolynomialQ</a></li>
+class="toc-section-number">14.2.15</span> NCPolynomialQ</a></li>
 </ul></li>
 <li><a href="#PackageNCPolynomial" id="toc-PackageNCPolynomial"><span
 class="toc-section-number">14.3</span> NCPolynomial</a>
@@ -1151,6 +1157,8 @@ href="#NCExpandReplaceRepeatedSymmetric">NCExpandReplaceRepeatedSymmetric</a>;
 <a
 href="#NCExpandReplaceRepeatedSelfAdjoint">NCExpandReplaceRepeatedSelfAdjoint</a>;
 new option <code>ApplyPowerRule</code>.</p></li>
+<li><p><code>NCGBX</code>: <a href="#NCMakeGB">NCMakeGB</a> option
+<code>ReduceBasis</code> now defaults to <code>True</code>.</p></li>
 <li><p><code>NCCollect</code>: new function <a
 href="#NCCollectExponents">NCCollectExponents</a>.</p></li>
 <li><p><code>MatrixDecompositions</code>: functions <a
@@ -1162,8 +1170,11 @@ href="#NCPolyFromGramMatrixFactors">NCPolyFromGramMatrixFactors</a>.
 <code>NCPolyFullReduce</code> renamed <a
 href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a>.</p></li>
 <li><p><code>NCPolyInterface</code>: new functions <a
-href="#NCToRule">NCToRule</a>, <a href="#NCReduce">NCReduce</a>, and <a
-href="#NCReduceRepeated">NCReduceRepeated</a>.</p></li>
+href="#NCToRule">NCToRule</a>, <a href="#NCReduce">NCReduce</a>, <a
+href="#NCReduceRepeated">NCReduceRepeated</a>, <a
+href="#NCRationalToNCPoly">NCRationalToNCPoly</a>. <a
+href="#NCMonomialOrder">NCMonomialOrder</a>, and <a
+href="#NCMonomialOrderQ">NCMonomialOrderQ</a>.</p></li>
 <li><p>New utility functions <a
 href="#SetCommutativeFunction">SetCommutativeFunction</a>, <a
 href="#SetNonCommutativeFunction">SetNonCommutativeFunction</a> <a
@@ -7525,6 +7536,9 @@ directly!</p>
 <ul>
 <li><a href="#NCToNCPoly">NCToNCPoly</a></li>
 <li><a href="#NCPolyToNC">NCPolyToNC</a></li>
+<li><a href="#NCMonomialOrderQ">NCMonomialOrderQ</a></li>
+<li><a href="#NCMonomialOrder">NCMonomialOrder</a></li>
+<li><a href="#NCRationalToNCPoly">NCRationalToNCPoly</a></li>
 <li><a href="#NCRuleToPoly">NCRuleToPoly</a></li>
 <li><a href="#NCToRule">NCToRule</a></li>
 <li><a href="#NCReduce">NCReduce</a></li>
@@ -7562,16 +7576,109 @@ expr = NCPolyToNC[poly, {x, y, z}];</code></pre>
 <pre><code>expr = x**y - 2 y**z</code></pre>
 <p>See also: <a href="#NCPolyToNC">NCPolyToNC</a>, <a
 href="#NCPoly">NCPoly</a>.</p>
-<h3 data-number="14.2.3" id="NCRuleToPoly"><span
-class="header-section-number">14.2.3</span> NCRuleToPoly</h3>
+<h3 data-number="14.2.3" id="NCMonomialOrderQ"><span
+class="header-section-number">14.2.3</span> NCMonomialOrderQ</h3>
+<p><code>NCMonomialOrderQ[list]</code> returns <code>True</code> if the
+expressions in <code>list</code> represents a valid monomial
+ordering.</p>
+<p><code>NCMonomialOrderQ</code> is used by <a
+href="#NCMonomialOrder">NCMonomialOrder</a> to decided whether a
+proposed ordering is valid or not. However, <code>NCMonomialOrder</code>
+is much more forgiving when it comes to the format of the order.</p>
+<p>See also: <a href="#NCMonomialOrder">NCMonomialOrder</a>, <a
+href="#NCRationalToNCPoly">NCRationalToNCPoly</a>.</p>
+<h3 data-number="14.2.4" id="NCMonomialOrder"><span
+class="header-section-number">14.2.4</span> NCMonomialOrder</h3>
+<p><code>NCMonomialOrder[var1, var2, ...]</code> returns an array
+representing a monomial order.</p>
+<p>For example</p>
+<pre><code>NCMonomialOrder[a,b,c]</code></pre>
+<p>returns</p>
+<pre class="output"><code>{{a},{b},{c}}</code></pre>
+<p>corresponding to the lex order <span class="math inline">\(a \ll b
+\ll c\)</span>.</p>
+<p>If one uses a list of variables rather than a single variable as one
+of the arguments, then multigraded lex order is used. For example</p>
+<pre><code>NCMonomialOrder[{a,b,c}]</code></pre>
+<p>returns</p>
+<pre class="output"><code>{{a,b,c}}</code></pre>
+<p>corresponding to the graded lex order <span class="math inline">\(a
+&lt; b &lt; c\)</span>.</p>
+<p>Another example:</p>
+<pre><code>NCMonomialOrder[{{a, b}, {c}}]</code></pre>
+<p>or</p>
+<pre><code>NCMonomialOrder[{a, b}, c]</code></pre>
+<p>both return</p>
+<pre class="output"><code>{{a,b},{c}}</code></pre>
+<p>corresponding to the multigraded lex order <span
+class="math inline">\(a &lt; b \ll c\)</span>.</p>
+<p>See also: <a href="#NCMonomialOrderQ">NCMonomialOrderQ</a>, <a
+href="#NCRationalToNCPoly">NCRationalToNCPoly</a>, <a
+href="#SetMonomialOrder">SetMonomialOrder</a>.</p>
+<h3 data-number="14.2.5" id="NCRationalToNCPoly"><span
+class="header-section-number">14.2.5</span> NCRationalToNCPoly</h3>
+<p><code>NCRationalToNCPoly[expr, vars]</code> generates a
+representation of the noncommutative rational expression or list of
+rational expressions <code>expr</code> in <code>vars</code> which has
+commutative coefficients.</p>
+<p><code>NCRationalToNCPoly[expr, vars]</code> generates one or more
+<code>NCPoly</code>s in which <code>vars</code> is used to set a
+monomial ordering as per <a
+href="#NCMonomialOrder">NCMonomialOrder</a>.</p>
+<p><code>NCRationalToNCPolynomial</code> creates one variable for each
+<code>inv</code> expression in <code>vars</code> appearing in the
+rational expression <code>expr</code>. It also created additional
+relations to encode the inverse. It also creates additional variables to
+represent <code>tp</code> and <code>aj</code>.</p>
+<p>It returns a list of four elements:</p>
+<ul>
+<li>the first element is the original expression and any additional
+expressions as <code>NCPoly</code>s;</li>
+<li>the second element is the list of variables representing the current
+ordering, including any additional variables created to replace
+<code>inv</code>s, <code>tp</code>s, and <code>aj</code>s;</li>
+<li>the third element is a list of rules that can be used to recover the
+original rational expression;</li>
+<li>the fourth element is a list of labels corresponding to the
+variables in the second element.</li>
+</ul>
+<p>For example:</p>
+<pre><code>exp = a+tp[a]-inv[a];
+order = NCMonomialOrder[a,b];
+{rels,vars,rules,labels} = NCRationalToNCPoly[exp, order]</code></pre>
+<p>returns</p>
+<pre><code>rels = {
+  NCPoly[{2,1,1},&lt;|{0,0,1,0} -&gt; 1,{0,0,1,1} -&gt; 1,{1,0,0,3} -&gt; -1|&gt;],
+  NCPoly[{2,1,1},&lt;|{0,0,0,0} -&gt; -1,{1,0,1,12} -&gt; 1|&gt;],
+  NCPoly[{2,1,1},&lt;|{0,0,0,0} -&gt; -1,{1,0,1,3} -&gt; 1|&gt;]
+}
+vars = {{a,tp51},{b},{rat50}},
+rules = {rat50 -&gt; inv[a],tp51 -&gt; tp[a]},
+labels = {{a,tp[a]},{b},{inv[a]}}</code></pre>
+<p>The variable <code>tp51</code> was created to represent
+<code>tp[a]</code> and <code>rat50</code> was created to represent
+<code>inv[a]</code>. The additional relations in <code>rels</code>
+correspond to <code>a**rat50 - 1</code> and <code>rat50**a - 1</code>,
+which encode the rational relation <code>rat50 - inv[a]</code>.</p>
+<p><code>NCRationalToPoly</code> also handles rational expressions, not
+only rational variables. For example:</p>
+<pre><code>expr = a ** inv[1 - a] ** a;
+order = NCMonomialOrder[a, inv[1 - a]];
+{p, vars, rules, labels} = NCRationalToNCPoly[expr, order]</code></pre>
+<p>See also: <a href="#NCMonomialOrder">NCMonomialOrder</a>, <a
+href="#NCMonomialOrderQ">NCMonomialOrderQ</a>, <a
+href="#NCPolyToNC">NCPolyToNC</a>, <a href="#NCPoly">NCPoly</a>, <a
+href="#NCRationalToNCPolynomial">NCRationalToNCPolynomial</a>.</p>
+<h3 data-number="14.2.6" id="NCRuleToPoly"><span
+class="header-section-number">14.2.6</span> NCRuleToPoly</h3>
 <p><code>NCRuleToPoly[a -&gt; b]</code> converts the rule
 <code>a -&gt; b</code> into the relation <code>a - b</code>.</p>
 <p>For instance:</p>
 <pre><code>NCRuleToPoly[x**y**y -&gt; x**y - 1]</code></pre>
 <p>returns</p>
 <pre><code>x**y**y - x**y + 1</code></pre>
-<h3 data-number="14.2.4" id="NCToRule"><span
-class="header-section-number">14.2.4</span> NCToRule</h3>
+<h3 data-number="14.2.7" id="NCToRule"><span
+class="header-section-number">14.2.7</span> NCToRule</h3>
 <p><code>NCToRule[exp, vars]</code> converts the NC polynomial
 <code>exp</code> into a rule <code>a -&gt; b</code> in which
 <code>a</code> is the leading monomial according to the ordering implied
@@ -7583,8 +7690,8 @@ by <code>vars</code>.</p>
 <p>NOTE: This command is not efficient. If you need to sort polynomials
 you should consider using NCPoly directly.</p>
 <p>See also: <a href="#NCToNCPoly">NCToNCPoly</a></p>
-<h3 data-number="14.2.5" id="NCReduce"><span
-class="header-section-number">14.2.5</span> NCReduce</h3>
+<h3 data-number="14.2.8" id="NCReduce"><span
+class="header-section-number">14.2.8</span> NCReduce</h3>
 <p><code>NCReduce[polys, rules, vars, options]</code> reduces the list
 of polynomials in <code>polys</code> by the list of polynomials in
 <code>rules</code> in the variables <code>vars</code>. The substitutions
@@ -7624,15 +7731,15 @@ href="#NCReduceRepeated">NCReduceRepeated</a> to continue applying
 href="#NCPolyReduce">NCPolyReduce</a>.</p>
 <p>See also: <a href="#NCReduceRepeated">NCReduceRepeated</a>, <a
 href="#NCPolyReduce">NCPolyReduce</a>.</p>
-<h3 data-number="14.2.6" id="NCReduceRepeated"><span
-class="header-section-number">14.2.6</span> NCReduceRepeated</h3>
+<h3 data-number="14.2.9" id="NCReduceRepeated"><span
+class="header-section-number">14.2.9</span> NCReduceRepeated</h3>
 <p><code>NCReduceRepeated[polys]</code> applies <code>NCReduce</code>
 successively to the list of <code>polys</code> until the remainder does
 not change.</p>
 <p>See also: <a href="#NCReduce">NCReduce</a>, <a
 href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a>.</p>
-<h3 data-number="14.2.7" id="NCMonomialList"><span
-class="header-section-number">14.2.7</span> NCMonomialList</h3>
+<h3 data-number="14.2.10" id="NCMonomialList"><span
+class="header-section-number">14.2.10</span> NCMonomialList</h3>
 <p><code>NCMonomialList[poly]</code> gives the list of all monomials in
 the polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7644,8 +7751,8 @@ NCMonomialList[expr, vars]</code></pre>
 <p>See also: <a href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCCoefficientList">NCCoefficientList</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.8" id="NCCoefficientRules"><span
-class="header-section-number">14.2.8</span> NCCoefficientRules</h3>
+<h3 data-number="14.2.11" id="NCCoefficientRules"><span
+class="header-section-number">14.2.11</span> NCCoefficientRules</h3>
 <p><code>NCCoefficientRules[poly]</code> gives a list of rules between
 all the monomials polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7657,8 +7764,8 @@ NCCoefficientRules[expr, vars]</code></pre>
 <p>See also: <a href="#NCMonomialList">NCMonomialList</a>, <a
 href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.9" id="NCCoefficientList"><span
-class="header-section-number">14.2.9</span> NCCoefficientList</h3>
+<h3 data-number="14.2.12" id="NCCoefficientList"><span
+class="header-section-number">14.2.12</span> NCCoefficientList</h3>
 <p><code>NCCoefficientList[poly]</code> gives the list of all
 coefficients in the polynomial <code>poly</code>.</p>
 <p>For example:</p>
@@ -7670,8 +7777,8 @@ NCCoefficientList[expr, vars]</code></pre>
 <p>See also: <a href="#NCMonomialList">NCMonomialList</a>, <a
 href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
-<h3 data-number="14.2.10" id="NCCoefficientQ"><span
-class="header-section-number">14.2.10</span> NCCoefficientQ</h3>
+<h3 data-number="14.2.13" id="NCCoefficientQ"><span
+class="header-section-number">14.2.13</span> NCCoefficientQ</h3>
 <p><code>NCCoefficientQ[expr]</code> returns True if <code>expr</code>
 is a valid polynomial coefficient.</p>
 <p>For example:</p>
@@ -7691,8 +7798,8 @@ not expand <code>expr</code>. This means that
 <code>False</code>.</p>
 <p>See also: <a href="#NCMonomialQ">NCMonomialQ</a>, <a
 href="#NCPolynomialQ">NCPolynomialQ</a></p>
-<h3 data-number="14.2.11" id="NCMonomialQ"><span
-class="header-section-number">14.2.11</span> NCMonomialQ</h3>
+<h3 data-number="14.2.14" id="NCMonomialQ"><span
+class="header-section-number">14.2.14</span> NCMonomialQ</h3>
 <p><code>NCCoefficientQ[expr]</code> returns True if <code>expr</code>
 is an nc monomial.</p>
 <p>For example:</p>
@@ -7710,8 +7817,8 @@ expand <code>expr</code>. This means that
 <code>False</code>.</p>
 <p>See also: <a href="#NCCoefficientQ">NCCoefficientQ</a>, <a
 href="#NCPolynomialQ">NCPolynomialQ</a></p>
-<h3 data-number="14.2.12" id="NCPolynomialQ"><span
-class="header-section-number">14.2.12</span> NCPolynomialQ</h3>
+<h3 data-number="14.2.15" id="NCPolynomialQ"><span
+class="header-section-number">14.2.15</span> NCPolynomialQ</h3>
 <p><code>NCPolynomialQ[expr]</code> returns True if <code>expr</code> is
 an nc polynomial with commutative coefficients.</p>
 <p>For example:</p>
@@ -8247,11 +8354,15 @@ b &lt; c\)</span> and assigns them grading level <code>n</code>.</p>
 this older syntax the user is responsible for calling <a
 href="#ClearMonomialOrder">ClearMonomialOrder</a> to make sure that the
 current order is empty before starting.</p>
+<p>In Version 6, <code>SetMonomialOrder</code> uses <a
+href="#NCMonomialOrder">NCMonomialOrder</a>, and <a
+href="#NCMonomialOrderQ">NCMonomialOrderQ</a>.</p>
 <p>See also: <a href="#ClearMonomialOrder">ClearMonomialOrder</a>, <a
 href="#GetMonomialOrder">GetMonomialOrder</a>, <a
 href="#PrintMonomialOrder">PrintMonomialOrder</a>, <a
-href="#SetKnowns">SetKnowns</a>, <a
-href="#SetUnknowns">SetUnknowns</a>.</p>
+href="#SetKnowns">SetKnowns</a>, <a href="#SetUnknowns">SetUnknowns</a>,
+<a href="#NCMonomialOrder">NCMonomialOrder</a>, <a
+href="#NCMonomialOrderQ">NCMonomialOrderQ</a>.</p>
 <h3 data-number="15.1.2" id="SetKnowns"><span
 class="header-section-number">15.1.2</span> SetKnowns</h3>
 <p><code>SetKnowns[var1, var2, ...]</code> records the variables
@@ -8396,7 +8507,7 @@ class="math inline">\(x^3-1\)</span>.</p>
 set of polynomials.</p>
 <p>The following <code>options</code> can be given:</p>
 <ul>
-<li><code>ReduceBasis</code> (<code>False</code>): control whether the
+<li><code>ReduceBasis</code> (<code>True</code>): control whether the
 resulting basis output by the command is a reduced Gröbner basis at the
 completion of the algorithm. This corresponds to running
 <code>NCReduce</code> with the Boolean flag <code>True</code> to
@@ -8429,7 +8540,11 @@ backward compatibility. Can be set globally as
 <p><code>NCMakeGB</code> makes use of the algorithm
 <code>NCPolyGroebner</code> implemented in <a
 href="#NCPolyGroebner">NCPolyGroebner</a>.</p>
-<p>See also: <a href="#NCReduce">NCReduce</a>, <a
+<p>In Version 6, <code>NCMakeGB</code> uses <a
+href="#NCRationalToNCPoly">NCRationalToNCPoly</a> to add additional
+relations involving rational variables and rational terms.</p>
+<p>See also: <a href="#NCRationalToNCPoly">NCRationalToNCPoly</a>, <a
+href="#NCReduce">NCReduce</a>, <a
 href="#ClearMonomialOrder">ClearMonomialOrder</a>, <a
 href="#GetMonomialOrder">GetMonomialOrder</a>, <a
 href="#PrintMonomialOrder">PrintMonomialOrder</a>, <a

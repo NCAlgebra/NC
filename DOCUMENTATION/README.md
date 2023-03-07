@@ -306,16 +306,19 @@ All rights reserved.
   - <a href="#ncpolyinterface" id="toc-PackageNCPolyInterface"><span class="toc-section-number">14.2</span> NCPolyInterface</a>
     - <a href="#nctoncpoly" id="toc-NCToNCPoly"><span class="toc-section-number">14.2.1</span> NCToNCPoly</a>
     - <a href="#ncpolytonc" id="toc-NCPolyToNC"><span class="toc-section-number">14.2.2</span> NCPolyToNC</a>
-    - <a href="#ncruletopoly" id="toc-NCRuleToPoly"><span class="toc-section-number">14.2.3</span> NCRuleToPoly</a>
-    - <a href="#nctorule" id="toc-NCToRule"><span class="toc-section-number">14.2.4</span> NCToRule</a>
-    - <a href="#ncreduce" id="toc-NCReduce"><span class="toc-section-number">14.2.5</span> NCReduce</a>
-    - <a href="#ncreducerepeated" id="toc-NCReduceRepeated"><span class="toc-section-number">14.2.6</span> NCReduceRepeated</a>
-    - <a href="#ncmonomiallist" id="toc-NCMonomialList"><span class="toc-section-number">14.2.7</span> NCMonomialList</a>
-    - <a href="#nccoefficientrules" id="toc-NCCoefficientRules"><span class="toc-section-number">14.2.8</span> NCCoefficientRules</a>
-    - <a href="#nccoefficientlist" id="toc-NCCoefficientList"><span class="toc-section-number">14.2.9</span> NCCoefficientList</a>
-    - <a href="#nccoefficientq" id="toc-NCCoefficientQ"><span class="toc-section-number">14.2.10</span> NCCoefficientQ</a>
-    - <a href="#ncmonomialq" id="toc-NCMonomialQ"><span class="toc-section-number">14.2.11</span> NCMonomialQ</a>
-    - <a href="#ncpolynomialq" id="toc-NCPolynomialQ"><span class="toc-section-number">14.2.12</span> NCPolynomialQ</a>
+    - <a href="#ncmonomialorderq" id="toc-NCMonomialOrderQ"><span class="toc-section-number">14.2.3</span> NCMonomialOrderQ</a>
+    - <a href="#ncmonomialorder" id="toc-NCMonomialOrder"><span class="toc-section-number">14.2.4</span> NCMonomialOrder</a>
+    - <a href="#ncrationaltoncpoly" id="toc-NCRationalToNCPoly"><span class="toc-section-number">14.2.5</span> NCRationalToNCPoly</a>
+    - <a href="#ncruletopoly" id="toc-NCRuleToPoly"><span class="toc-section-number">14.2.6</span> NCRuleToPoly</a>
+    - <a href="#nctorule" id="toc-NCToRule"><span class="toc-section-number">14.2.7</span> NCToRule</a>
+    - <a href="#ncreduce" id="toc-NCReduce"><span class="toc-section-number">14.2.8</span> NCReduce</a>
+    - <a href="#ncreducerepeated" id="toc-NCReduceRepeated"><span class="toc-section-number">14.2.9</span> NCReduceRepeated</a>
+    - <a href="#ncmonomiallist" id="toc-NCMonomialList"><span class="toc-section-number">14.2.10</span> NCMonomialList</a>
+    - <a href="#nccoefficientrules" id="toc-NCCoefficientRules"><span class="toc-section-number">14.2.11</span> NCCoefficientRules</a>
+    - <a href="#nccoefficientlist" id="toc-NCCoefficientList"><span class="toc-section-number">14.2.12</span> NCCoefficientList</a>
+    - <a href="#nccoefficientq" id="toc-NCCoefficientQ"><span class="toc-section-number">14.2.13</span> NCCoefficientQ</a>
+    - <a href="#ncmonomialq" id="toc-NCMonomialQ"><span class="toc-section-number">14.2.14</span> NCMonomialQ</a>
+    - <a href="#ncpolynomialq" id="toc-NCPolynomialQ"><span class="toc-section-number">14.2.15</span> NCPolynomialQ</a>
   - <a href="#ncpolynomial" id="toc-PackageNCPolynomial"><span class="toc-section-number">14.3</span> NCPolynomial</a>
     - <a href="#efficient-storage-of-nc-polynomials-with-nc-coefficients" id="toc-efficient-storage-of-nc-polynomials-with-nc-coefficients"><span class="toc-section-number">14.3.1</span> Efficient storage of NC polynomials with nc coefficients</a>
     - <a href="#ways-to-represent-nc-polynomials-1" id="toc-ways-to-represent-nc-polynomials-1"><span class="toc-section-number">14.3.2</span> Ways to represent NC polynomials</a>
@@ -481,34 +484,40 @@ The beginnings of the program come from eran@slac.
     [NCExpandReplaceRepeatedSelfAdjoint](#ncexpandreplacerepeatedselfadjoint);
     new option `ApplyPowerRule`.
 
-7.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
+7.  `NCGBX`: [NCMakeGB](#ncmakegb) option `ReduceBasis` now defaults to
+    `True`.
 
-8.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices)
+8.  `NCCollect`: new function [NCCollectExponents](#nccollectexponents).
+
+9.  `MatrixDecompositions`: functions [GetLDUMatrices](#getldumatrices)
     and [GetFullLDUMatrices](#getfullldumatrices) now produces low rank
     matrices.
 
-9.  `NCPoly`: new function
+10. `NCPoly`: new function
     [NCPolyFromGramMatrixFactors](#ncpolyfromgrammatrixfactors).
     `NCPolyFullReduce`
     renamed [NCPolyReduceRepeated](#ncpolyreducerepeated).
 
-10. `NCPolyInterface`: new functions [NCToRule](#nctorule),
-    [NCReduce](#ncreduce), and [NCReduceRepeated](#ncreducerepeated).
+11. `NCPolyInterface`: new functions [NCToRule](#nctorule),
+    [NCReduce](#ncreduce), [NCReduceRepeated](#ncreducerepeated),
+    [NCRationalToNCPoly](#ncrationaltoncpoly).
+    [NCMonomialOrder](#ncmonomialorder), and
+    [NCMonomialOrderQ](#ncmonomialorderq).
 
-11. New utility functions
+12. New utility functions
     [SetCommutativeFunction](#setcommutativefunction),
     [SetNonCommutativeFunction](#setnoncommutativefunction)
     [NCSymbolOrSubscriptExtendedQ](#ncsymbolorsubscriptextendedq), and
     [NCNonCommutativeSymbolOrSubscriptExtendedQ](#ncnoncommutativesymbolorsubscriptextendedq).
 
-12. The old `C++` version of `NCGB` is no longer compatible with
+13. The old `C++` version of `NCGB` is no longer compatible with
     `NCAlgebra` *version 6*. Consider using [`NCGBX`](#ncgbx)
     instead.
 
-13. No longer loads the package `Notation` by default. Controlled by
+14. No longer loads the package `Notation` by default. Controlled by
     the new option `UseNotation` in [`NCOptions`](#ncoptions).
 
-14. Streamlined rules for [NCSimplifyRational](#ncsimplifyrational-1).
+15. Streamlined rules for [NCSimplifyRational](#ncsimplifyrational-1).
 
 # Changes in Version 5.0
 
@@ -7902,6 +7911,9 @@ Members are:
 
 - [NCToNCPoly](#nctoncpoly)
 - [NCPolyToNC](#ncpolytonc)
+- [NCMonomialOrderQ](#ncmonomialorderq)
+- [NCMonomialOrder](#ncmonomialorder)
+- [NCRationalToNCPoly](#ncrationaltoncpoly)
 - [NCRuleToPoly](#ncruletopoly)
 - [NCToRule](#nctorule)
 - [NCReduce](#ncreduce)
@@ -7944,6 +7956,134 @@ returns
 See also:
 [NCPolyToNC](#ncpolytonc),
 [NCPoly](#ncpoly-1).
+
+### NCMonomialOrderQ
+
+`NCMonomialOrderQ[list]` returns `True` if the expressions in `list`
+represents a valid monomial ordering.
+
+`NCMonomialOrderQ` is used by [NCMonomialOrder](#ncmonomialorder) to
+decided whether a proposed ordering is valid or not. However,
+`NCMonomialOrder` is much more forgiving when it comes to the format
+of the order.
+
+See also:
+[NCMonomialOrder](#ncmonomialorder),
+[NCRationalToNCPoly](#ncrationaltoncpoly).
+
+### NCMonomialOrder
+
+`NCMonomialOrder[var1, var2, ...]` returns an array representing a
+monomial order.
+
+For example
+
+    NCMonomialOrder[a,b,c]
+
+returns
+
+``` output
+{{a},{b},{c}}
+```
+
+corresponding to the lex order ![a \ll b \ll c](https://render.githubusercontent.com/render/math?math=a%20%5Cll%20b%20%5Cll%20c&mode=inline).
+
+If one uses a list of variables rather than a single variable as one
+of the arguments, then multigraded lex order is used. For example
+
+    NCMonomialOrder[{a,b,c}]
+
+returns
+
+``` output
+{{a,b,c}}
+```
+
+corresponding to the graded lex order ![a \< b \< c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%3C%20c&mode=inline).
+
+Another example:
+
+    NCMonomialOrder[{{a, b}, {c}}]
+
+or
+
+    NCMonomialOrder[{a, b}, c]
+
+both return
+
+``` output
+{{a,b},{c}}
+```
+
+corresponding to the multigraded lex order ![a \< b \ll c](https://render.githubusercontent.com/render/math?math=a%20%3C%20b%20%5Cll%20c&mode=inline).
+
+See also:
+[NCMonomialOrderQ](#ncmonomialorderq),
+[NCRationalToNCPoly](#ncrationaltoncpoly),
+[SetMonomialOrder](#setmonomialorder).
+
+### NCRationalToNCPoly
+
+`NCRationalToNCPoly[expr, vars]` generates a representation of the
+noncommutative rational expression or list of rational expressions
+`expr` in `vars` which has commutative coefficients.
+
+`NCRationalToNCPoly[expr, vars]` generates one or more `NCPoly`s in
+which `vars` is used to set a monomial ordering as per
+[NCMonomialOrder](#ncmonomialorder).
+
+`NCRationalToNCPolynomial` creates one variable for each `inv`
+expression in `vars` appearing in the rational expression `expr`. It
+also created additional relations to encode the inverse. It also
+creates additional variables to represent `tp` and `aj`.
+
+It returns a list of four elements:
+
+- the first element is the original expression and any additional
+  expressions as `NCPoly`s;
+- the second element is the list of variables representing the current
+  ordering, including any additional variables created to replace
+  `inv`s, `tp`s, and `aj`s;
+- the third element is a list of rules that can be used to recover the
+  original rational expression;
+- the fourth element is a list of labels corresponding to the
+  variables in the second element.
+
+For example:
+
+    exp = a+tp[a]-inv[a];
+    order = NCMonomialOrder[a,b];
+    {rels,vars,rules,labels} = NCRationalToNCPoly[exp, order]
+
+returns
+
+    rels = {
+      NCPoly[{2,1,1},<|{0,0,1,0} -> 1,{0,0,1,1} -> 1,{1,0,0,3} -> -1|>],
+      NCPoly[{2,1,1},<|{0,0,0,0} -> -1,{1,0,1,12} -> 1|>],
+      NCPoly[{2,1,1},<|{0,0,0,0} -> -1,{1,0,1,3} -> 1|>]
+    }
+    vars = {{a,tp51},{b},{rat50}},
+    rules = {rat50 -> inv[a],tp51 -> tp[a]},
+    labels = {{a,tp[a]},{b},{inv[a]}}
+
+The variable `tp51` was created to represent `tp[a]` and `rat50` was
+created to represent `inv[a]`. The additional relations in `rels`
+correspond to `a**rat50 - 1` and `rat50**a - 1`, which encode the
+rational relation `rat50 - inv[a]`.
+
+`NCRationalToPoly` also handles rational expressions, not only
+rational variables. For example:
+
+    expr = a ** inv[1 - a] ** a;
+    order = NCMonomialOrder[a, inv[1 - a]];
+    {p, vars, rules, labels} = NCRationalToNCPoly[expr, order]
+
+See also:
+[NCMonomialOrder](#ncmonomialorder),
+[NCMonomialOrderQ](#ncmonomialorderq),
+[NCPolyToNC](#ncpolytonc),
+[NCPoly](#ncpoly-1),
+[NCRationalToNCPolynomial](#ncrationaltoncpolynomial).
 
 ### NCRuleToPoly
 
@@ -8774,12 +8914,18 @@ syntax the user is responsible for calling
 [ClearMonomialOrder](#clearmonomialorder) to make sure that the
 current order is empty before starting.
 
+In Version 6, `SetMonomialOrder` uses
+[NCMonomialOrder](#ncmonomialorder), and
+[NCMonomialOrderQ](#ncmonomialorderq).
+
 See also:
 [ClearMonomialOrder](#clearmonomialorder),
 [GetMonomialOrder](#getmonomialorder),
 [PrintMonomialOrder](#printmonomialorder),
 [SetKnowns](#setknowns),
-[SetUnknowns](#setunknowns).
+[SetUnknowns](#setunknowns),
+[NCMonomialOrder](#ncmonomialorder),
+[NCMonomialOrderQ](#ncmonomialorderq).
 
 ### SetKnowns
 
@@ -8974,13 +9120,13 @@ set of polynomials.
 
 The following `options` can be given:
 
-- `ReduceBasis` (`False`): control whether the resulting basis output
+- `ReduceBasis` (`True`): control whether the resulting basis output
   by the command is a reduced Gröbner basis at the completion of the
   algorithm. This corresponds to running `NCReduce` with the
   Boolean flag `True` to completely reduce the output basis. Can be set
   globally as `SetOptions[NCMakeGB, ReturnBasis -> True]`.
-- `SimplifyObstructions` (`True`): control whether whether to remove obstructions
-  before constructing more S-polynomials;
+- `SimplifyObstructions` (`True`): control whether whether to remove
+  obstructions before constructing more S-polynomials;
 - `SortObstructions` (`False`): control whether obstructions are
   sorted before being processed;
 - `SortBasis` (`False`): control whether initial basis is sorted
@@ -8993,12 +9139,20 @@ The following `options` can be given:
   obstructions at each major iteration;
 - `PrintSPolynomials` (`False`): if `True` prints every S-polynomial
   formed at each minor iteration.
-- `ReturnRules` (`True`): if `True` rules representing relations in which the left-hand side is the leading monomial are returned instead of polynomials. Use `False` for backward compatibility. Can be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
+- `ReturnRules` (`True`): if `True` rules representing relations in
+  which the left-hand side is the leading monomial are returned
+  instead of polynomials. Use `False` for backward compatibility. Can
+  be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
 
 `NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in
 [NCPolyGroebner](#ncpolygroebner-1).
 
+In Version 6, `NCMakeGB` uses
+[NCRationalToNCPoly](#ncrationaltoncpoly) to add additional relations
+involving rational variables and rational terms.
+
 See also:
+[NCRationalToNCPoly](#ncrationaltoncpoly),
 [NCReduce](#ncreduce),
 [ClearMonomialOrder](#clearmonomialorder),
 [GetMonomialOrder](#getmonomialorder),
