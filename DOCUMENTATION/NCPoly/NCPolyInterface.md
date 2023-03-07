@@ -11,6 +11,9 @@ Members are:
 
 * [NCToNCPoly](#NCToNCPoly)
 * [NCPolyToNC](#NCPolyToNC)
+* [NCMonomialOrderQ](#NCMonomialOrderQ)
+* [NCMonomialOrder](#NCMonomialOrder)
+* [NCRationalToNCPoly](#NCRationalToNCPoly)
 * [NCRuleToPoly](#NCRuleToPoly)
 * [NCToRule](#NCToRule)
 * [NCReduce](#NCReduce)
@@ -34,7 +37,7 @@ For example
 constructs an object associated with the noncommutative polynomial $x
 y - 2 y z$ in variables `x`, `y` and `z`. The internal representation is so
 that the terms are sorted according to a degree-lexicographic order in
-`vars`. In the above example, $x < y < z$.  
+`vars`. In the above example, $x < y < z$.
 
 ### NCPolyToNC {#NCPolyToNC}
 
@@ -54,6 +57,128 @@ returns
 See also:
 [NCPolyToNC](#NCPolyToNC),
 [NCPoly](#NCPoly).
+
+### NCMonomialOrderQ {#NCMonomialOrderQ}
+
+`NCMonomialOrderQ[list]` returns `True` if the expressions in `list`
+represents a valid monomial ordering.
+
+`NCMonomialOrderQ` is used by [NCMonomialOrder](#NCMonomialOrder) to
+decided whether a proposed ordering is valid or not. However,
+`NCMonomialOrder` is much more forgiving when it comes to the format
+of the order.
+
+See also:
+[NCMonomialOrder](#NCMonomialOrder),
+[NCRationalToNCPoly](#NCRationalToNCPoly).
+
+### NCMonomialOrder {#NCMonomialOrder}
+
+`NCMonomialOrder[var1, var2, ...]` returns an array representing a
+monomial order.
+
+For example
+
+	NCMonomialOrder[a,b,c]
+
+returns
+```output
+{{a},{b},{c}}
+```
+corresponding to the lex order $a \ll b \ll c$. 
+
+If one uses a list of variables rather than a single variable as one
+of the arguments, then multigraded lex order is used. For example
+
+	NCMonomialOrder[{a,b,c}]
+
+returns
+```output
+{{a,b,c}}
+```
+corresponding to the graded lex order $a < b < c$. 
+
+Another example:
+
+	NCMonomialOrder[{{a, b}, {c}}]
+
+or
+
+	NCMonomialOrder[{a, b}, c]
+
+both return
+```output
+{{a,b},{c}}
+```
+corresponding to the multigraded lex order $a < b \ll c$.
+
+See also:
+[NCMonomialOrderQ](#NCMonomialOrderQ),
+[NCRationalToNCPoly](#NCRationalToNCPoly),
+[SetMonomialOrder](#SetMonomialOrder).
+
+### NCRationalToNCPoly {#NCRationalToNCPoly}
+
+`NCRationalToNCPoly[expr, vars]` generates a representation of the
+noncommutative rational expression or list of rational expressions
+`expr` in `vars` which has commutative coefficients.
+
+`NCRationalToNCPoly[expr, vars]` generates one or more `NCPoly`s in
+which `vars` is used to set a monomial ordering as per
+[NCMonomialOrder](#NCMonomialOrder).
+
+`NCRationalToNCPolynomial` creates one variable for each `inv`
+expression in `vars` appearing in the rational expression `expr`. It
+also created additional relations to encode the inverse. It also
+creates additional variables to represent `tp` and `aj`.
+
+It returns a list of four elements:
+
+- the first element is the original expression and any additional
+  expressions as `NCPoly`s;
+- the second element is the list of variables representing the current
+  ordering, including any additional variables created to replace
+  `inv`s, `tp`s, and `aj`s;
+- the third element is a list of rules that can be used to recover the
+  original rational expression;
+- the fourth element is a list of labels corresponding to the
+  variables in the second element.
+
+For example:
+
+    exp = a+tp[a]-inv[a];
+	order = NCMonomialOrder[a,b];
+    {rels,vars,rules,labels} = NCRationalToNCPoly[exp, order]
+
+returns
+
+    rels = {
+	  NCPoly[{2,1,1},<|{0,0,1,0} -> 1,{0,0,1,1} -> 1,{1,0,0,3} -> -1|>],
+	  NCPoly[{2,1,1},<|{0,0,0,0} -> -1,{1,0,1,12} -> 1|>],
+	  NCPoly[{2,1,1},<|{0,0,0,0} -> -1,{1,0,1,3} -> 1|>]
+    }
+	vars = {{a,tp51},{b},{rat50}},
+	rules = {rat50 -> inv[a],tp51 -> tp[a]},
+	labels = {{a,tp[a]},{b},{inv[a]}}
+    
+The variable `tp51` was created to represent `tp[a]` and `rat50` was
+created to represent `inv[a]`. The additional relations in `rels`
+correspond to `a**rat50 - 1` and `rat50**a - 1`, which encode the
+rational relation `rat50 - inv[a]`.
+	
+`NCRationalToPoly` also handles rational expressions, not only
+rational variables. For example:
+
+    expr = a ** inv[1 - a] ** a;
+    order = NCMonomialOrder[a, inv[1 - a]];
+    {p, vars, rules, labels} = NCRationalToNCPoly[expr, order]
+
+See also:
+[NCMonomialOrder](#NCMonomialOrder),
+[NCMonomialOrderQ](#NCMonomialOrderQ),
+[NCPolyToNC](#NCPolyToNC),
+[NCPoly](#NCPoly),
+[NCRationalToNCPolynomial](#NCRationalToNCPolynomial).
 
 ### NCRuleToPoly {#NCRuleToPoly}
 

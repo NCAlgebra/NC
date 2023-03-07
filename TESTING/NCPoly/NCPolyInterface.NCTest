@@ -7,16 +7,111 @@ Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 << NCPolyInterface`
 
 Block[
-  {a,b,c,d,x,y,
-  vars,NCExp,NCExpExp,PolyExp,
-  A,B,C,exp1,exp2
+  {
+    a,b,c,d,x,y,
+    vars,NCExp,NCExpExp,PolyExp,
+    A,B,C,exp1,exp2,
+    expr,p,rVars,rRules
   },
   
   (* Test NCAlgebra interface *)
 
-  (* TESTING NCToNCPoly/NCPolyToNC -- BEGIN *)
-
   SNC[a,b,c,d,x,y];
+
+  (* TESTING NCMonomialOrder -- BEGIN *)
+
+  NCTest[NCMonomialOrder[a,b], {{a},{b}}];
+  NCTest[NCMonomialOrder[{a},{b}], {{a},{b}}];
+  NCTest[NCMonomialOrder[{a,b}], {{a,b}}];
+  NCTest[NCMonomialOrder[{a,b},{c,d}], {{a,b},{c,d}}];
+  NCTest[NCMonomialOrder[{a,b},{c}], {{a,b},{c}}];
+  NCTest[NCMonomialOrder[{a,b},c], {{a,b},{c}}];
+
+  NCTestCheck[NCMonomialOrder[{a,{b}},c],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  NCTestCheck[NCMonomialOrder[{a,b},{{c}}],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  (* Monomial Order with inv's *)
+  
+  NCTest[NCMonomialOrder[{a,b},inv[c]], {{a,b},{inv[c]}}];
+  NCTest[NCMonomialOrder[{a,b},{inv[c]}], {{a,b},{inv[c]}}];
+  NCTest[NCMonomialOrder[{a,b},inv[1+c]], {{a,b},{inv[1+c]}}];
+  NCTest[NCMonomialOrder[{a,b},inv[1+inv[1+c]]], {{a,b},{inv[1+inv[1+c]]}}];
+
+  (* Monomial Order with tps's and ajs *)
+  
+  NCTest[NCMonomialOrder[{a,b},tp[c]], {{a,b},{tp[c]}}];
+  NCTest[NCMonomialOrder[{a,b},{tp[c]}], {{a,b},{tp[c]}}];
+  NCTest[NCMonomialOrder[{a,tp[a],b},{tp[c]}], {{a,tp[a],b},{tp[c]}}];
+
+  NCTestCheck[NCMonomialOrder[{a,b},tp[1+c]],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  NCTest[NCMonomialOrder[{a,b},aj[c]], {{a,b},{aj[c]}}];
+  NCTest[NCMonomialOrder[{a,b},{aj[c]}], {{a,b},{aj[c]}}];
+  NCTest[NCMonomialOrder[{a,aj[a],b},{aj[c]}], {{a,aj[a],b},{aj[c]}}];
+
+  NCTestCheck[NCMonomialOrder[{a,b},aj[1+c]],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  NCTestCheck[NCMonomialOrder[{a,b},Exp[c]],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  (* Monomial Order with tps's, ajs and Subscript *)
+  
+  NCTest[NCMonomialOrder[{Subscript[a,1],b},tp[Subscript[c,1]]],
+         {{Subscript[a,1],b},{tp[Subscript[c,1]]}}];
+  NCTest[NCMonomialOrder[{Subscript[a,1],b},{tp[Subscript[c,1]]}],
+         {{Subscript[a,1],b},{tp[Subscript[c,1]]}}];
+  NCTest[NCMonomialOrder[{Subscript[a,1],tp[Subscript[a,1]],b},{tp[Subscript[c,1]]}],
+         {{Subscript[a,1],tp[Subscript[a,1]],b},{tp[Subscript[c,1]]}}];
+
+  NCTestCheck[NCMonomialOrder[{Subscript[a,1],b},tp[1+Subscript[c,1]]],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  NCTest[NCMonomialOrder[{Subscript[a,1],b},aj[Subscript[c,1]]],
+         {{Subscript[a,1],b},{aj[Subscript[c,1]]}}];
+
+  NCTest[NCMonomialOrder[{Subscript[a,1],b},{aj[Subscript[c,1]]}],
+         {{Subscript[a,1],b},{aj[Subscript[c,1]]}}];
+
+  NCTest[NCMonomialOrder[{Subscript[a,1],aj[Subscript[a,1]],b},{aj[Subscript[c,1]]}],
+         {{Subscript[a,1],aj[Subscript[a,1]],b},{aj[Subscript[c,1]]}}];
+
+  NCTestCheck[NCMonomialOrder[{Subscript[a,1],b},aj[1+Subscript[c,1]]],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  NCTestCheck[NCMonomialOrder[{Subscript[a,1],b},Exp[Subscript[c,1]]],
+	      $Failed,
+	      NCMonomialOrder::InvalidOrder];
+
+  NCTest[NCMonomialOrderQ[{{a},{b}}]];
+  NCTest[NCMonomialOrderQ[{{a,b}}]];
+  NCTest[NCMonomialOrderQ[{{a},{b,c}}]];
+
+  NCTest[NCMonomialOrderQ[{{a},{tp[b]}}]];
+  NCTest[NCMonomialOrderQ[{{aj[a],b}}]];
+  NCTest[NCMonomialOrderQ[{{a},{inv[b],c},{inv[a+b]}}]];
+
+  NCTest[NCMonomialOrderQ[a], False];
+  NCTest[NCMonomialOrderQ[{a}], False];
+  NCTest[NCMonomialOrderQ[{a,b}], False];
+  NCTest[NCMonomialOrderQ[{{a},b}], False];
+  NCTest[NCMonomialOrderQ[{{a},{inv[C]}}], False];
+  NCTest[NCMonomialOrderQ[{{a},{inv[b]+c}}], False];
+
+  (* TESTING NCMonomialOrder -- END *)
+
+  (* TESTING NCToNCPoly/NCPolyToNC -- BEGIN *)
 
   (* TESTING NCPolynomial FACILITIES *)
 
@@ -426,7 +521,67 @@ Block[
 
   answer = {x^2 - x ** y, x^2 - y ** x};
   NCTest[NCReduceRepeated[exp2, vars, Complete -> True], answer];
-  
+
+  (* NCRationalToNCPoly *)
+
+  expr = a ** b - b ** a;
+  vars = {{a, b}};
+  {p, rVars, rRules, labels} = NCRationalToNCPoly[expr, vars];
+  NCTest[NCPolyToNC[p[[1]], rVars] /. rRules, expr];
+  NCTest[rVars, vars];
+  NCTest[NCPolyToNC[Rest[p], rVars] /. rRules, {}];
+  NCTest[labels, vars];
+
+  expr = a ** b - b ** inv[a];
+  vars = {{a}, {b}};
+  Quiet[
+    {p, rVars, rRules, labels} = NCRationalToNCPoly[expr, vars],
+    NCRationalToNCPoly::AdditionalRelations
+  ];
+  NCTest[NCPolyToNC[p[[1]], rVars] /. rRules, expr];
+  NCTest[Length[rVars], 3];
+  NCTest[NCPolyToNC[Rest[p], rVars] /. rRules, {0,0}];
+  NCTest[labels, {{a}, {b}, {inv[a]}}];
+
+  expr = a ** b - b ** inv[a];
+  vars = {{a, inv[a]}, {b}};
+  {p, rVars, rRules, labels} = NCRationalToNCPoly[expr, vars];
+  NCTest[NCPolyToNC[p[[1]], rVars] /. rRules, expr];
+  NCTest[Length[rVars], 2];
+  NCTest[Length[rVars[[1]]], 2];
+  NCTest[Length[rVars[[2]]], 1];
+  NCTest[NCPolyToNC[Rest[p], rVars] /. rRules, {0,0}];
+  NCTest[labels, vars];
+
+  expr = a ** b - tp[b] ** inv[a] + aj[a];
+  vars = {{a}, {b}, {tp[b]}};
+  Quiet[
+    {p, rVars, rRules, labels} = NCRationalToNCPoly[expr, vars],
+    NCRationalToNCPoly::AdditionalRelations
+  ];
+  NCTest[NCPolyToNC[p[[1]], rVars] /. rRules, expr];
+  NCTest[Length[rVars], 4];
+  NCTest[Length[rVars[[1]]], 2];
+  NCTest[Length[rVars[[2]]], 1];
+  NCTest[Length[rVars[[3]]], 1];
+  NCTest[Length[rVars[[4]]], 1];
+  NCTest[NCPolyToNC[Rest[p], rVars] /. rRules, {0,0}];
+  NCTest[labels, {{a, aj[a]}, {b}, {tp[b]}, {inv[a]}}];
+
+  expr = a ** b - tp[b] ** inv[a] + aj[a];
+  vars = {{a}, {b}};
+  Quiet[
+    {p, rVars, rRules, labels} = NCRationalToNCPoly[expr, vars],
+    NCRationalToNCPoly::AdditionalRelations
+  ];
+  NCTest[NCPolyToNC[p[[1]], rVars] /. rRules, expr];
+  NCTest[Length[rVars], 3];
+  NCTest[Length[rVars[[1]]], 2];
+  NCTest[Length[rVars[[2]]], 2];
+  NCTest[Length[rVars[[3]]], 1];
+  NCTest[NCPolyToNC[Rest[p], rVars] /. rRules, {0,0}];
+  NCTest[labels, {{a, aj[a]}, {b, tp[b]}, {inv[a]}}];
+
   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

@@ -25,24 +25,29 @@
    [NCExpandReplaceRepeatedSymmetric](#NCExpandReplaceRepeatedSymmetric); 
    [NCExpandReplaceRepeatedSelfAdjoint](#NCExpandReplaceRepeatedSelfAdjoint); 
    new option `ApplyPowerRule`.
-7. `NCCollect`: new function [NCCollectExponents](#NCCollectExponents).
-8. `MatrixDecompositions`: functions [GetLDUMatrices](#GetLDUMatrices)
+7. `NCGBX`: [NCMakeGB](#NCMakeGB) option `ReduceBasis` now defaults to
+   `True`.
+8. `NCCollect`: new function [NCCollectExponents](#NCCollectExponents).
+9. `MatrixDecompositions`: functions [GetLDUMatrices](#GetLDUMatrices)
    and [GetFullLDUMatrices](#GetFullLDUMatrices) now produces low rank
    matrices. 
-9. `NCPoly`: new function
+10. `NCPoly`: new function
    [NCPolyFromGramMatrixFactors](#NCPolyFromGramMatrixFactors).
    `NCPolyFullReduce`
    renamed [NCPolyReduceRepeated](#NCPolyReduceRepeated).
-10. `NCPolyInterface`: new functions [NCToRule](#NCToRule),
-   [NCReduce](#NCReduce), and [NCReduceRepeated](#NCReduceRepeated).
-11. New utility functions
+11. `NCPolyInterface`: new functions [NCToRule](#NCToRule),
+   [NCReduce](#NCReduce), [NCReduceRepeated](#NCReduceRepeated), 
+   [NCRationalToNCPoly](#NCRationalToNCPoly).
+   [NCMonomialOrder](#NCMonomialOrder), and
+   [NCMonomialOrderQ](#NCMonomialOrderQ).
+12. New utility functions
     [SetCommutativeFunction](#SetCommutativeFunction),
     [SetNonCommutativeFunction](#SetNonCommutativeFunction)
     [NCSymbolOrSubscriptExtendedQ](#NCSymbolOrSubscriptExtendedQ), and
     [NCNonCommutativeSymbolOrSubscriptExtendedQ](#NCNonCommutativeSymbolOrSubscriptExtendedQ).
-12. The old `C++` version of `NCGB` is no longer compatible with
+13. The old `C++` version of `NCGB` is no longer compatible with
     `NCAlgebra` *version 6*. Consider using [`NCGBX`](#PackageNCGBX)
     instead.
-13. No longer loads the package `Notation` by default. Controlled by
+14. No longer loads the package `Notation` by default. Controlled by
     the new option `UseNotation` in [`NCOptions`](#PackageNCOptions).
-14. Streamlined rules for [NCSimplifyRational](#NCSimplifyRational).
+15. Streamlined rules for [NCSimplifyRational](#NCSimplifyRational).
