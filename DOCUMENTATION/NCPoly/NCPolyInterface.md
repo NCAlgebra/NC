@@ -171,7 +171,20 @@ rational variables. For example:
 
     expr = a ** inv[1 - a] ** a;
     order = NCMonomialOrder[a, inv[1 - a]];
-    {p, vars, rules, labels} = NCRationalToNCPoly[expr, order]
+    {rels, vars, rules, labels} = NCRationalToNCPoly[expr, order]
+
+returns
+
+	rels = {
+	  NCPoly[{1,1},<|{1,2,2} -> 1|>],
+	  NCPoly[{1,1},<|{0,0,0} -> -1,{1,0,1} -> 1,{1,1,2} -> -1|>],
+	  NCPoly[{1,1},<|{0,0,0} -> -1,{1,0,1} -> 1,{1,1,1} -> -1|>]
+    }
+	vars = {{a},{rat54}} 
+	rules = {rat54 -> inv[1 - a]},
+	labels = {{a},{inv[1 - a]}}
+
+Note how `rat54` encodes the rational expression `inv[1-a]`.
 
 See also:
 [NCMonomialOrder](#NCMonomialOrder),

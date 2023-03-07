@@ -1172,7 +1172,7 @@ href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a>.</p></li>
 <li><p><code>NCPolyInterface</code>: new functions <a
 href="#NCToRule">NCToRule</a>, <a href="#NCReduce">NCReduce</a>, <a
 href="#NCReduceRepeated">NCReduceRepeated</a>, <a
-href="#NCRationalToNCPoly">NCRationalToNCPoly</a>. <a
+href="#NCRationalToNCPoly">NCRationalToNCPoly</a>, <a
 href="#NCMonomialOrder">NCMonomialOrder</a>, and <a
 href="#NCMonomialOrderQ">NCMonomialOrderQ</a>.</p></li>
 <li><p>New utility functions <a
@@ -7664,7 +7664,18 @@ which encode the rational relation <code>rat50 - inv[a]</code>.</p>
 only rational variables. For example:</p>
 <pre><code>expr = a ** inv[1 - a] ** a;
 order = NCMonomialOrder[a, inv[1 - a]];
-{p, vars, rules, labels} = NCRationalToNCPoly[expr, order]</code></pre>
+{rels, vars, rules, labels} = NCRationalToNCPoly[expr, order]</code></pre>
+<p>returns</p>
+<pre><code>rels = {
+  NCPoly[{1,1},&lt;|{1,2,2} -&gt; 1|&gt;],
+  NCPoly[{1,1},&lt;|{0,0,0} -&gt; -1,{1,0,1} -&gt; 1,{1,1,2} -&gt; -1|&gt;],
+  NCPoly[{1,1},&lt;|{0,0,0} -&gt; -1,{1,0,1} -&gt; 1,{1,1,1} -&gt; -1|&gt;]
+}
+vars = {{a},{rat54}} 
+rules = {rat54 -&gt; inv[1 - a]},
+labels = {{a},{inv[1 - a]}}</code></pre>
+<p>Note how <code>rat54</code> encodes the rational expression
+<code>inv[1-a]</code>.</p>
 <p>See also: <a href="#NCMonomialOrder">NCMonomialOrder</a>, <a
 href="#NCMonomialOrderQ">NCMonomialOrderQ</a>, <a
 href="#NCPolyToNC">NCPolyToNC</a>, <a href="#NCPoly">NCPoly</a>, <a

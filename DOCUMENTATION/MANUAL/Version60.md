@@ -37,7 +37,7 @@
    renamed [NCPolyReduceRepeated](#NCPolyReduceRepeated).
 11. `NCPolyInterface`: new functions [NCToRule](#NCToRule),
    [NCReduce](#NCReduce), [NCReduceRepeated](#NCReduceRepeated), 
-   [NCRationalToNCPoly](#NCRationalToNCPoly).
+   [NCRationalToNCPoly](#NCRationalToNCPoly),
    [NCMonomialOrder](#NCMonomialOrder), and
    [NCMonomialOrderQ](#NCMonomialOrderQ).
 12. New utility functions
