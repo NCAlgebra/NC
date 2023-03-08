@@ -440,7 +440,8 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
     
   If[ verboseLevel >= 1,
     (* Print order *)
-    Print["* Monomial order: ", NCPolyDisplayOrder[labels]];
+    Print["* Monomial order: "];
+    Print["> ", NCPolyDisplayOrder[labels]];
   ];
 
   If[ verboseLevel >= 3,
