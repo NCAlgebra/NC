@@ -10,10 +10,12 @@ Members are:
 
 ### NCPolyGroebner {#NCPolyGroebner}
 
-`NCPolyGroebner[G]` computes the noncommutative Groebner basis of the
-list of `NCPoly` polynomials `G`.
+`NCPolyGroebner[G, iter]` computes the noncommutative Groebner basis
+of the list of `NCPoly` polynomials `G`. The algorithm either
+converges before or is interrupted when the number of iterations reach
+`iter`.
 
-`NCPolyGroebner[G, options]` uses `options`.
+`NCPolyGroebner[G, iter, options]` uses `options`.
 
 The following `options` can be given:
 

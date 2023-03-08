@@ -63,7 +63,7 @@ Readers who would like to know more about Gröbner Basis may want to
 read [CLS]. The noncommutatative version of the algorithm implemented
 by `NCGB` is loosely based on [Mora].
 
-## Solving equations
+## Solving Equations
 
 Before calculating a Gröbner Basis, one must declare which variables
 will be used during the computation and must declare a *monomial
@@ -178,7 +178,7 @@ the relation:
 
 $$ x = b \, c \, b. $$
 
-## A slightly more challenging example
+## A Slightly more Challenging Example
 
 For a slightly more challenging example consider the same monomial
 order as before:
@@ -219,7 +219,7 @@ $$ 0 = a \, b \, c - c = a \, a^\dag c - c $$
 
 that can be interpreted as $c$ being in the range-space of $a$.
 
-## Simplifying polynomial expressions
+## Simplifying Polynomial Expressions
 
 Our goal now is to verify if it is possible to *simplify* the following
 expression:
@@ -230,7 +230,7 @@ knowing that
 
 $$ a \, b \, a = b $$
 
-using Gröbner basis. With that in mind we set the order:
+using Gröbner basis. With that in mind we set the ordering:
 
 	SetMonomialOrder[a,b];
 
@@ -279,10 +279,10 @@ desired ordering, which we obtain from the current ordering using
 need to be converted to polynomials, which we do using
 [`NCRuleToPoly`](NCRuleToPoly).
 
-## Polynomials and rules {#PolynomialsAndRules}
+## Polynomials and Rules {#PolynomialsAndRules}
 
 Having seen how polynomial relations can be interpreted as rules,
-consider now the expression
+consider the expression
 
 	expr = b^2**a^2 + a^2**b^3 + a**b**a
 
@@ -290,7 +290,7 @@ and the polynomial relations
 
 	rels = {a**b**a - b , b^2 - a + b}
 
-With respect to the monomial order
+With respect to the monomial ordering
 
 	SetMonomialOrder[a, b];
 
@@ -378,14 +378,14 @@ As before, rule substitution could also be performed by
 that, in this case, leads to the same result as above without the need
 to recourse to the `Complete` flag.
 
-## Minimal versus reduced Gröbner Basis
+## Minimal versus Reduced Gröbner Basis
 
 The algorithm implemented by `NCGB` always produces a Gröbner Basis
 with the *minimal* possible number of polynomials. However, such
 polynomials are not necessarily the "simplest" possible polynomials;
 called the *reduced* Gröbner Basis. The *reduced* Gröbner Basis is
-unique given the relations and the monomial order. Consider for
-example the following monomial order
+unique given the relations and the monomial ordering. Consider for
+example the following monomial ordering
 
     SetMonomialOrder[x, y]
 	
@@ -418,7 +418,7 @@ y^2->x/2
 in which not only the leading monomials but also all lower-order
 monomials have been reduced by the basis' leading monomials.
 
-## Simplifying rational expressions
+## Simplifying Rational Expressions {#SimplifyingRationalExpressions}
 
 It is often desirable to simplify expressions involving inverses of
 noncommutative expressions. One challenge is to recognize identities
@@ -428,7 +428,7 @@ expression
     expr = x**inv[1 - x] - inv[1 - x]**x
 
 is equivalent to $0$. One can use a nc Gröbner basis for that task.
-Consider for instance the order
+Consider for instance the ordering
 
 $$ x \ll (1-x)^{-1} $$
 
@@ -484,7 +484,7 @@ expression:
 	expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
 	NCSimplifyRational[expr]
 
-We set the monomial order and calculate the Gröbner basis
+We set the monomial ordering and calculate the Gröbner basis
 
 	SetMonomialOrder[x, y, inv[1-x], inv[1-x+y], inv[1-x-y], inv[1-x-y**inv[1-x]**y]];
 	(rules = NCMakeGB[{}, 3]) // ColumnForm
@@ -509,6 +509,10 @@ which successfully simplifies the original expression using:
 
 resulting in `0`.
 
+See also [Advanced Processing of Rational
+Expressions](#AdvancedProcessingOfRationalExpressions) for more
+details on the lower level handling of rational expressions.
+
 ## Simplification with NCGBSimplifyRational
 
 The simplification process described above is automated in the
@@ -526,7 +530,7 @@ or
 
 both result in `0`.
 
-## Ordering on variables and monomials {#Orderings}
+## Ordering on Variables and Monomials {#Orderings}
 
 As seen above, one needs to declare a *monomial order* before making a
 Gröbner Basis.  There are various monomial orders which can be used
@@ -583,7 +587,7 @@ x**a -> 1
 ```
 after one iteration.
 
-Now, we change the order to 
+Now, we change the ordering to 
 
 	SetMonomialOrder[y,x,b,a];
 
@@ -612,20 +616,20 @@ iterations. Note the presence of the rule
 ```output
 a**b**x**x -> y+b**a
 ```	
-which shows that the order is not set up to solve for $y$ in terms of
+which shows that the ordering is not set up to solve for $y$ in terms of
 the other variables in the sense that $y$ is not on the left hand side
 of this rule (but a human could easily solve for $y$ using this rule).
 Also the algorithm created a number of other relations which involved
 $y$.
  
-### Graded lex ordering: a non-elimination order 
+### Graded Lex Ordering: a non-elimination order 
 
 To impose graded lexicographic order, say $a< b< x< y$ on $a$,
 $b$, $x$ and $y$, one types
 
 	SetMonomialOrder[{a,b,x,y}];
 
-This ordering puts high degree monomials high in the order. Thus it
+This ordering puts high degree monomials high in the ordering. Thus it
 tries to decrease the total degree of expressions. A call to 
 
 	NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4,ReduceBasis->True] // ColumnForm
@@ -650,7 +654,7 @@ which again fails to be a Gröbner basis and does not eliminate
 $y$. Instead, it tries to decrease the total degree of expressions
 involving $a$, $b$, $x$, and $y$.
 
-### Multigraded lex ordering: a variety of elimination orders 
+### Multigraded Lex Ordering: a variety of elimination orders 
 
 There are other useful monomial orders which one can use other than
 graded lex and lex.  Another type of order is what we call multigraded
@@ -687,7 +691,7 @@ and `SetUnknowns`. The above ordering would be obtained after setting
 	SetKnowns[a,b,x];
 	SetUnknowns[y];
 
-## A complete example: the partially prescribed matrix inverse problem
+## A Complete Example: the partially prescribed matrix inverse problem
 
 This is a type of problem known as a *matrix completion problem*. This
 particular one was suggested by Hugo Woerdeman. We are grateful to
@@ -805,3 +809,153 @@ $$\begin{aligned}
 provide formulas, this time for $z$, $w$, and $z$ in terms of $y$
 satisfying $y \, c \, y = y+b \, d \, a$. Note that these formulas do
 not involve $c^{-1}$ since $c$ is no longer assumed invertible.
+
+## Advanced Processing of Rational Expressions {#AdvancedProcessingOfRationalExpressions}
+
+Consider once again the task of simplifying the nc rational expression
+
+    expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+
+considered before in [Simplifying Rational
+Expressions](#SimplifyingRationalExpressions). We will use this
+expression to illustrate how nc rational expressions can be
+manipulated at a lower level, giving advanced users more control of
+the conversion process to and from the internal [NCPoly](#NCPoly)
+representation.
+
+The key functionality is provided by the functions
+[NCMonomialOrder](#NCMonomialOrder) and
+[NCRationalToNCPoly](#NCRationalToNCPoly). [NCMonomialOrder](#NCMonomialOrder)
+provides the same functionality as
+[SetMonomialOrder](#SetMonomialOrder), but instead of setting the
+ordering globally, it returns an array representing the ordering. For
+example,
+
+    order = NCMonomialOrder[x, y]
+
+produces the array
+
+    {{x},{y}}
+
+which represents the ordering $x \ll y$. 
+
+With a (preliminary) ordering in hand one can invoke
+[NCRationalToNCPoly](#NCRationalToNCPoly) as in
+
+    {rels, vars, rules, labels} = NCRationalToNCPoly[expr, order];
+
+This function produces four lists as outputs:
+
+- The first, `rels`, is a list of `NCPoly` objects representing the
+  original expression and some additional relations that were
+  automatically generated. We will inspect `rels` later.
+- The second, `vars`, is a list of variables that represent the
+  ordering used in the construction of the polynomials in `rel`. In
+  this example,
+  ```output
+  vars = {{x}, {y}, {rat135, rat136, rat137, rat138}}
+  ```
+  which corresponds to the ordering $x \ll y \ll rat135 < rat136 <
+  rat137 < rat138$. In this case, the variables `rat135`, `rat136`,
+  `rat137`, `rat138` were automatically created and assigned an
+  ordering by `NCRationalToNCPoly`.
+- The third is a list of rules relating the new variables with
+  rational terms appearing in the original expression `expr`. In this
+  example
+  ```output
+  rules = {rat135 -> inv[1-x], rat136 -> inv[1-x-y],
+           rat137 -> inv[1-x+y], rat138 -> inv[1-x-y**rat135**y]}
+  ```
+- Finally, the fourth is a list of labels that is used for
+  printing or displaying
+  ```output
+  labesl = {{x}, {y}, 
+            {inv[1-x], inv[1-x-y], inv[1-x+y], inv[1-x-y**inv[1-x]**y]}}
+  ```
+  by `NCMakeGB` and `NCPolyDisplay`.
+
+The relations in `rels` can be visualized by using `NCPolyToNC`. For
+example,
+  
+    NCPolyToNC[#, vars] & /@ rels // ColumnForm
+
+produces
+```output
+rat138 - rat136/2 - rat137/2 
+-1 + rat135 - rat135 ** x
+-1 + rat135 - x ** rat135
+-1 + rat136 - rat136 ** x - rat136 ** y
+-1 + rat136 - x ** rat136 - y ** rat136
+-1 + rat137 - rat137 ** x + rat137 ** y
+-1 + rat137 - x ** rat137 + y ** rat137
+-1 + rat138 - rat138 ** x - rat138 ** y ** rat135 ** y
+-1 + rat138 - x ** rat138 - y ** rat135 ** y ** rat138
+```
+The first entry is simply the original `expr` in which every rational
+expression has been substituted by a new variable. The same could be 
+obtained by applying reverse `rules` and applying it repeatedly
+
+    NCReplaceRepeated[expr, Reverse /@ rules, ApplyPowerRule -> True]
+
+The remaining entries are polynomials encoding the rational
+expressions that have been substituted by new variables. For example,
+the first two additional relations,
+```output
+-1 + rat135 - rat135 ** x
+-1 + rat135 - x ** rat135
+```
+correspond to the assertion that `rat153 == inv[1-x]`, and so on.
+
+Equipped with a set of polynomial relations encoding the rational
+expression `expr` on can seek for a Gröebner basis by calling the
+low-level implementation [NCPolyGroebner](#NCPolyGroebner) to try to
+discover additional implications of the defining relations. In this
+example, calling
+
+	{basis, tree} = NCPolyGroebner[Rest[rels], 4, Labels -> labels];
+
+produces an output
+```output
+* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: x<<y<<inv[1-x]<inv[1-x-y]<inv[1-x+y]<inv[1-x-y**inv[1-x]**y]
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 10 polys in the basis, 12 obstructions
+> MAJOR Iteration 2, 10 polys in the basis, 6 obstructions
+>  Found Groebner basis with 9 polynomials
+* * * * * * * * * * * * * * * * 
+``` 
+Note the use of `labels` to pretty print the monomial ordering. 
+
+The resulting basis can be visualized once again using the `labels`
+
+    NCPolyToNC[#, labels] & /@ basis // ColumnForm
+
+which produces
+```output
+1-inv[1-x]+inv[1-x]**x,
+1-inv[1-x]+x**inv[1-x],
+1-inv[1-x-y]+inv[1-x-y]**x+inv[1-x-y]**y,
+1-inv[1-x-y]+x**inv[1-x-y]+y**inv[1-x-y],
+-1+inv[1-x+y]-inv[1-x+y]**x+inv[1-x+y]**y,
+-1+inv[1-x+y]-x**inv[1-x+y]+y**inv[1-x+y],
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x+y]**inv[1-x-y]+
+   inv[1-x+y]**x**inv[1-x-y],
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x-y]**inv[1-x+y]+
+   inv[1-x-y]**x**inv[1-x+y]},
+-1/2 inv[1-x-y]-1/2 inv[1-x+y]+inv[1-x-y**inv[1-x]**y]
+```
+The original expression `expr` can then be *reduced* by the above
+basis by calling
+
+    NCPolyReduce[rels[[1]], basis]
+
+which produces `0`, as expected.
+
+The above process is automated by [NCMakeGB](#NCMakeGB), but advanced
+users might want to take advantage of the increased speed of
+directly processing `NCPoly`s by manually performing the conversion
+from a rational statement to a polynomial statement.

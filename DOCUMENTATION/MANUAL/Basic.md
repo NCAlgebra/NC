@@ -359,7 +359,7 @@ a - b - b^2 - b^2**a
 ```
 in one shot.
 
-See also the Sections [Polynomials and rules](#PolynomialsAndRules)
+See also the Sections [Polynomials and Rules](#PolynomialsAndRules)
 and [Advanced Rules and Replacement](#AdvancedReplace) for a deeper
 discussion on some issues involved with rules and replacements in
 `NCAlgebra`.
@@ -712,7 +712,7 @@ Mathematica convention for handling vectors is tricky.
   is a row or column vector depends on the context. We advise not to
   use *vectors*.
 
-### Inverses, products, adjoints, etc {#BasicMatrices:Inverses}
+### Inverses, Products, Adjoints, etc {#BasicMatrices:Inverses}
 
 A useful command is [`NCInverse`](#NCInverse), which is akin to
 Mathematica's `Inverse` command and produces a block-matrix inverse
@@ -911,7 +911,7 @@ of `a + b`.
 The function `NCLUDecompositionWithPartialPivoting` is the one that is
 used by `NCInverse`.
 
-### LU Decomposition with complete pivoting {#BasicMatrices:LUDecompositionWithCompletePivoting}
+### LU Decomposition with Complete Pivoting {#BasicMatrices:LUDecompositionWithCompletePivoting}
 
 Another factorization algorithm is
 [`NCLUDecompositionWithCompletePivoting`](#NCLUDecompositionWithCompletePivoting),
@@ -1003,7 +1003,7 @@ warn the users.
 > provided by [`NCLDLDecomposition`](#NCLDLDecomposition), with a
 > slightly different syntax.
 
-### Replace with matrices {#ReplaceWithMatrices}
+### Replace with Matrices {#ReplaceWithMatrices}
 
 [`NCMatrixReplaceAll`](#NCMatrixReplaceAll) and
 [`NCMatrixReplaceRepeated`](#NCMatrixReplaceRepeated) are special
@@ -1085,7 +1085,7 @@ coincides with
 
     NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1}, {m1, IdentityMatrix[2]}}]]
 
-## Quadratic polynomials, second directional derivatives and convexity {#Quadratic}
+## Quadratic Polynomials, Second Directional Derivatives and Convexity {#Quadratic}
 
 The closest related demo to the material in this section is
 `NC/DEMOS/NCConvexity.nb`.
