@@ -3753,7 +3753,7 @@ class="header-section-number">7.11</span> Advanced Processing of
 Rational Expressions</h2>
 <p>Consider once again the task of simplifying the nc rational
 expression</p>
-<pre><code>expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])</code></pre>
+<pre><code>expr = inv[1-x-y**inv[1-x]**y] - 1/2 (inv[1-x+y]+inv[1-x-y])</code></pre>
 <p>considered before in <a
 href="#SimplifyingRationalExpressions">Simplifying Rational
 Expressions</a>. We will use this expression to illustrate how nc
@@ -3776,44 +3776,60 @@ y\)</span>.</p>
 href="#NCRationalToNCPoly">NCRationalToNCPoly</a> as in</p>
 <pre><code>{rels, vars, rules, labels} = NCRationalToNCPoly[expr, order];</code></pre>
 <p>This function produces four lists as outputs:</p>
-<ul>
-<li><p>The first, <code>rels</code>, is a list of <code>NCPoly</code>
+<p>The first, <code>rels</code>, is a list of <code>NCPoly</code>
 objects representing the original expression and some additional
 relations that were automatically generated. We will inspect
-<code>rels</code> later.</p></li>
-<li><p>The second, <code>vars</code>, is a list of variables that
-represent the ordering used in the construction of the polynomials in
+<code>rels</code> later.</p>
+<p>The second, <code>vars</code>, is a list of variables that represent
+the ordering used in the construction of the polynomials in
 <code>rel</code>. In this example,</p>
-<pre class="output"><code>vars = {{x}, {y}, {rat135, rat136, rat137, rat138}}</code></pre>
-<p>which corresponds to the ordering <span class="math inline">\(x \ll y
-\ll rat135 &lt; rat136 &lt; rat137 &lt; rat138\)</span>. In this case,
-the variables <code>rat135</code>, <code>rat136</code>,
+<pre class="output"><code>vars = {{x}, {y}, {rat135, rat136, rat137, rat138}} </code></pre>
+<p>which corresponds to the ordering</p>
+<p><span class="math display">\[x \ll y \ll rat135 &lt; rat136 &lt;
+rat137 &lt; rat138\]</span></p>
+<p>In this case, the variables <code>rat135</code>, <code>rat136</code>,
 <code>rat137</code>, <code>rat138</code> were automatically created and
-assigned an ordering by <code>NCRationalToNCPoly</code>.</p></li>
-<li><p>The third is a list of rules relating the new variables with
-rational terms appearing in the original expression <code>expr</code>.
-In this example</p>
+assigned an ordering by <code>NCRationalToNCPoly</code>.</p>
+<blockquote>
+<p>It is unlikely that your variables will be assigned the same suffixes
+<code>135</code> through <code>138</code>. Those suffixes were chosen by
+Mathematica to make these variables unique in the global context, and
+hence depend on a multitude of factors that can only be determined at
+the time of execution.</p>
+</blockquote>
+<p>As with <a href="#SetMonomialOrder">SetMonomialOrder</a> and <a
+href="#NCMakeGB">NCMakeGB</a>, rational terms can be explicitly added to
+the ordering for finer control. For example, calling
+<code>NCRationalToNCPoly</code> with</p>
+<pre class="output"><code>order = NCMonomialOrder[x,y,inv[1-x],{inv[1-x+y],inv[1-x-y]}];</code></pre>
+<p>would have produced</p>
+<pre class="output"><code>vars = {{x}, {y}, {rat135}, {rat136, rat137}, {rat138}} </code></pre>
+<p>which corresponds to the ordering</p>
+<p><span class="math display">\[x \ll y \ll rat135 \ll rat136 &lt;
+rat137 \ll rat138\]</span></p>
+<p>The third is a list of rules relating the new variables with rational
+terms appearing in the original expression <code>expr</code>. In this
+example</p>
 <pre class="output"><code>rules = {rat135 -&gt; inv[1-x], rat136 -&gt; inv[1-x-y],
-         rat137 -&gt; inv[1-x+y], rat138 -&gt; inv[1-x-y**rat135**y]}</code></pre></li>
-<li><p>Finally, the fourth is a list of labels that is used for printing
-or displaying</p>
-<pre class="output"><code>labesl = {{x}, {y}, 
-          {inv[1-x], inv[1-x-y], inv[1-x+y], inv[1-x-y**inv[1-x]**y]}}</code></pre>
-<p>by <code>NCMakeGB</code> and <code>NCPolyDisplay</code>.</p></li>
-</ul>
+         rat137 -&gt; inv[1-x+y], rat138 -&gt; inv[1-x-y**rat135**y]}</code></pre>
+<p>Finally, the fourth is a list of labels that is used for printing or
+displaying</p>
+<pre class="output"><code>labels = {{x}, {y}, {inv[1-x], inv[1-x-y], inv[1-x+y],
+inv[1-x-y**inv[1-x]**y]}} </code></pre>
+<p>as used by <code>NCMakeGB</code> and <code>NCPolyDisplay</code>.</p>
 <p>The relations in <code>rels</code> can be visualized by using
 <code>NCPolyToNC</code>. For example,</p>
 <pre><code>NCPolyToNC[#, vars] &amp; /@ rels // ColumnForm</code></pre>
 <p>produces</p>
-<pre class="output"><code>rat138 - rat136/2 - rat137/2 
--1 + rat135 - rat135 ** x
--1 + rat135 - x ** rat135
--1 + rat136 - rat136 ** x - rat136 ** y
--1 + rat136 - x ** rat136 - y ** rat136
--1 + rat137 - rat137 ** x + rat137 ** y
--1 + rat137 - x ** rat137 + y ** rat137
--1 + rat138 - rat138 ** x - rat138 ** y ** rat135 ** y
--1 + rat138 - x ** rat138 - y ** rat135 ** y ** rat138</code></pre>
+<pre class="output"><code>rat138-rat136/2-rat137/2 
+rat135-rat135**x-1
+rat135-x**rat135-1
+rat136-rat136**x-rat136**y-1
+rat136-x**rat136-y**rat136-1
+rat137-rat137**x+rat137**y-1
+rat137-x**rat137+y**rat137-1
+rat138-rat138**x-rat138**y**rat135**y-1
+rat138-x**rat138-y**rat135**y**rat138-1</code></pre>
 <p>The first entry is simply the original <code>expr</code> in which
 every rational expression has been substituted by a new variable. The
 same could be obtained by applying reverse <code>rules</code> and
@@ -3822,17 +3838,16 @@ applying it repeatedly</p>
 <p>The remaining entries are polynomials encoding the rational
 expressions that have been substituted by new variables. For example,
 the first two additional relations,</p>
-<pre class="output"><code>-1 + rat135 - rat135 ** x
--1 + rat135 - x ** rat135</code></pre>
+<pre class="output"><code>rat135-rat135**x-1
+rat135-x**rat135-1</code></pre>
 <p>correspond to the assertion that <code>rat153 == inv[1-x]</code>, and
 so on.</p>
 <p>Equipped with a set of polynomial relations encoding the rational
-expression <code>expr</code> on can seek for a Gröebner basis by calling
-the low-level implementation <a
-href="#NCPolyGroebner">NCPolyGroebner</a> to try to discover additional
-implications of the defining relations. In this example, calling</p>
+expression <code>expr</code> one can calculated a Gröebner basis by
+calling the low-level implementation <a
+href="#NCPolyGroebner">NCPolyGroebner</a>. In this example, calling</p>
 <pre><code>{basis, tree} = NCPolyGroebner[Rest[rels], 4, Labels -&gt; labels];</code></pre>
-<p>produces an output</p>
+<p>produces the output</p>
 <pre class="output"><code>* * * * * * * * * * * * * * * *
 * * *   NCPolyGroebner    * * *
 * * * * * * * * * * * * * * * *
@@ -3845,30 +3860,30 @@ implications of the defining relations. In this example, calling</p>
 &gt;  Found Groebner basis with 9 polynomials
 * * * * * * * * * * * * * * * * </code></pre>
 <p>Note the use of <code>labels</code> to pretty print the monomial
-ordering.</p>
-<p>The resulting basis can be visualized once again using the
+ordering. The resulting basis can be visualized once again using the
 <code>labels</code></p>
 <pre><code>NCPolyToNC[#, labels] &amp; /@ basis // ColumnForm</code></pre>
 <p>which produces</p>
-<pre class="output"><code>1-inv[1-x]+inv[1-x]**x,
-1-inv[1-x]+x**inv[1-x],
-1-inv[1-x-y]+inv[1-x-y]**x+inv[1-x-y]**y,
-1-inv[1-x-y]+x**inv[1-x-y]+y**inv[1-x-y],
--1+inv[1-x+y]-inv[1-x+y]**x+inv[1-x+y]**y,
--1+inv[1-x+y]-x**inv[1-x+y]+y**inv[1-x+y],
-1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x+y]**inv[1-x-y]+
-   inv[1-x+y]**x**inv[1-x-y],
-1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x-y]**inv[1-x+y]+
-   inv[1-x-y]**x**inv[1-x+y]},
+<pre class="output"><code>1-inv[1-x]+inv[1-x]**x
+1-inv[1-x]+x**inv[1-x]
+1-inv[1-x-y]+inv[1-x-y]**x+inv[1-x-y]**y
+1-inv[1-x-y]+x**inv[1-x-y]+y**inv[1-x-y]
+-1+inv[1-x+y]-inv[1-x+y]**x+inv[1-x+y]**y
+-1+inv[1-x+y]-x**inv[1-x+y]+y**inv[1-x+y]
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x+y]**inv[1-x-y]+inv[1-x+y]**x**inv[1-x-y]
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x-y]**inv[1-x+y]+inv[1-x-y]**x**inv[1-x+y]}
 -1/2 inv[1-x-y]-1/2 inv[1-x+y]+inv[1-x-y**inv[1-x]**y]</code></pre>
 <p>The original expression <code>expr</code> can then be
 <em>reduced</em> by the above basis by calling</p>
 <pre><code>NCPolyReduce[rels[[1]], basis]</code></pre>
 <p>which produces <code>0</code>, as expected.</p>
-<p>The above process is automated by <a href="#NCMakeGB">NCMakeGB</a>,
-but advanced users might want to take advantage of the increased speed
-of directly processing <code>NCPoly</code>s by manually performing the
-conversion from a rational statement to a polynomial statement.</p>
+<p>The above process is conveniently automated by <a
+href="#NCMakeGB">NCMakeGB</a>, but advanced users might still want to
+take advantage of the increased speed of directly processing
+<code>NCPoly</code>s by manually performing the conversion from a
+rational statement to a polynomial statement. See the detailed
+documentation of the package <a href="#NCPoly">NCPoly</a> for more
+details.</p>
 <h1 data-number="8" id="SemidefiniteProgramming"><span
 class="header-section-number">8</span> Semidefinite Programming</h1>
 <p>If you want a living version of this chapter just run the notebook

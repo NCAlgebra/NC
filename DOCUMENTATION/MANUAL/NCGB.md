@@ -814,7 +814,7 @@ not involve $c^{-1}$ since $c$ is no longer assumed invertible.
 
 Consider once again the task of simplifying the nc rational expression
 
-    expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+    expr = inv[1-x-y**inv[1-x]**y] - 1/2 (inv[1-x+y]+inv[1-x-y])
 
 considered before in [Simplifying Rational
 Expressions](#SimplifyingRationalExpressions). We will use this
@@ -846,33 +846,59 @@ With a (preliminary) ordering in hand one can invoke
 
 This function produces four lists as outputs:
 
-- The first, `rels`, is a list of `NCPoly` objects representing the
-  original expression and some additional relations that were
-  automatically generated. We will inspect `rels` later.
-- The second, `vars`, is a list of variables that represent the
-  ordering used in the construction of the polynomials in `rel`. In
-  this example,
-  ```output
-  vars = {{x}, {y}, {rat135, rat136, rat137, rat138}}
-  ```
-  which corresponds to the ordering $x \ll y \ll rat135 < rat136 <
-  rat137 < rat138$. In this case, the variables `rat135`, `rat136`,
-  `rat137`, `rat138` were automatically created and assigned an
-  ordering by `NCRationalToNCPoly`.
-- The third is a list of rules relating the new variables with
-  rational terms appearing in the original expression `expr`. In this
-  example
-  ```output
-  rules = {rat135 -> inv[1-x], rat136 -> inv[1-x-y],
-           rat137 -> inv[1-x+y], rat138 -> inv[1-x-y**rat135**y]}
-  ```
-- Finally, the fourth is a list of labels that is used for
-  printing or displaying
-  ```output
-  labesl = {{x}, {y}, 
-            {inv[1-x], inv[1-x-y], inv[1-x+y], inv[1-x-y**inv[1-x]**y]}}
-  ```
-  by `NCMakeGB` and `NCPolyDisplay`.
+The first, `rels`, is a list of `NCPoly` objects representing the
+original expression and some additional relations that were
+automatically generated. We will inspect `rels` later.
+
+The second, `vars`, is a list of variables that represent the ordering
+used in the construction of the polynomials in `rel`. In this example,
+```output
+vars = {{x}, {y}, {rat135, rat136, rat137, rat138}} 
+```
+which corresponds to the ordering 
+
+$$x \ll y \ll rat135 < rat136 < rat137 < rat138$$ 
+
+In this case, the variables `rat135`, `rat136`, `rat137`, `rat138`
+were automatically created and assigned an ordering by
+`NCRationalToNCPoly`. 
+
+> It is unlikely that your variables will be assigned the same
+> suffixes `135` through `138`. Those suffixes were chosen by
+> Mathematica to make these variables unique in the global context,
+> and hence depend on a multitude of factors that can only be
+> determined at the time of execution.
+  
+As with [SetMonomialOrder](#SetMonomialOrder) and
+[NCMakeGB](#NCMakeGB), rational terms can be explicitly added to the
+ordering for finer control. For example, calling `NCRationalToNCPoly`
+with 
+```output
+order = NCMonomialOrder[x,y,inv[1-x],{inv[1-x+y],inv[1-x-y]}];
+```
+would have produced 
+```output
+vars = {{x}, {y}, {rat135}, {rat136, rat137}, {rat138}} 
+```
+which corresponds to the ordering 
+
+$$x \ll y \ll rat135 \ll rat136 < rat137 \ll rat138$$
+
+The third is a list of rules relating the new variables with
+rational terms appearing in the original expression `expr`. In this
+example
+```output
+rules = {rat135 -> inv[1-x], rat136 -> inv[1-x-y],
+         rat137 -> inv[1-x+y], rat138 -> inv[1-x-y**rat135**y]}
+```
+
+Finally, the fourth is a list of labels that is used for printing or
+displaying 
+```output 
+labels = {{x}, {y}, {inv[1-x], inv[1-x-y], inv[1-x+y],
+inv[1-x-y**inv[1-x]**y]}} 
+``` 
+as used by `NCMakeGB` and `NCPolyDisplay`.
 
 The relations in `rels` can be visualized by using `NCPolyToNC`. For
 example,
@@ -881,15 +907,15 @@ example,
 
 produces
 ```output
-rat138 - rat136/2 - rat137/2 
--1 + rat135 - rat135 ** x
--1 + rat135 - x ** rat135
--1 + rat136 - rat136 ** x - rat136 ** y
--1 + rat136 - x ** rat136 - y ** rat136
--1 + rat137 - rat137 ** x + rat137 ** y
--1 + rat137 - x ** rat137 + y ** rat137
--1 + rat138 - rat138 ** x - rat138 ** y ** rat135 ** y
--1 + rat138 - x ** rat138 - y ** rat135 ** y ** rat138
+rat138-rat136/2-rat137/2 
+rat135-rat135**x-1
+rat135-x**rat135-1
+rat136-rat136**x-rat136**y-1
+rat136-x**rat136-y**rat136-1
+rat137-rat137**x+rat137**y-1
+rat137-x**rat137+y**rat137-1
+rat138-rat138**x-rat138**y**rat135**y-1
+rat138-x**rat138-y**rat135**y**rat138-1
 ```
 The first entry is simply the original `expr` in which every rational
 expression has been substituted by a new variable. The same could be 
@@ -901,20 +927,19 @@ The remaining entries are polynomials encoding the rational
 expressions that have been substituted by new variables. For example,
 the first two additional relations,
 ```output
--1 + rat135 - rat135 ** x
--1 + rat135 - x ** rat135
+rat135-rat135**x-1
+rat135-x**rat135-1
 ```
 correspond to the assertion that `rat153 == inv[1-x]`, and so on.
 
 Equipped with a set of polynomial relations encoding the rational
-expression `expr` on can seek for a Gröebner basis by calling the
-low-level implementation [NCPolyGroebner](#NCPolyGroebner) to try to
-discover additional implications of the defining relations. In this
+expression `expr` one can calculated a Gröebner basis by calling the
+low-level implementation [NCPolyGroebner](#NCPolyGroebner). In this
 example, calling
 
 	{basis, tree} = NCPolyGroebner[Rest[rels], 4, Labels -> labels];
 
-produces an output
+produces the output
 ```output
 * * * * * * * * * * * * * * * *
 * * *   NCPolyGroebner    * * *
@@ -928,24 +953,21 @@ produces an output
 >  Found Groebner basis with 9 polynomials
 * * * * * * * * * * * * * * * * 
 ``` 
-Note the use of `labels` to pretty print the monomial ordering. 
-
-The resulting basis can be visualized once again using the `labels`
+Note the use of `labels` to pretty print the monomial ordering. The
+resulting basis can be visualized once again using the `labels`
 
     NCPolyToNC[#, labels] & /@ basis // ColumnForm
 
 which produces
 ```output
-1-inv[1-x]+inv[1-x]**x,
-1-inv[1-x]+x**inv[1-x],
-1-inv[1-x-y]+inv[1-x-y]**x+inv[1-x-y]**y,
-1-inv[1-x-y]+x**inv[1-x-y]+y**inv[1-x-y],
--1+inv[1-x+y]-inv[1-x+y]**x+inv[1-x+y]**y,
--1+inv[1-x+y]-x**inv[1-x+y]+y**inv[1-x+y],
-1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x+y]**inv[1-x-y]+
-   inv[1-x+y]**x**inv[1-x-y],
-1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x-y]**inv[1-x+y]+
-   inv[1-x-y]**x**inv[1-x+y]},
+1-inv[1-x]+inv[1-x]**x
+1-inv[1-x]+x**inv[1-x]
+1-inv[1-x-y]+inv[1-x-y]**x+inv[1-x-y]**y
+1-inv[1-x-y]+x**inv[1-x-y]+y**inv[1-x-y]
+-1+inv[1-x+y]-inv[1-x+y]**x+inv[1-x+y]**y
+-1+inv[1-x+y]-x**inv[1-x+y]+y**inv[1-x+y]
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x+y]**inv[1-x-y]+inv[1-x+y]**x**inv[1-x-y]
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x-y]**inv[1-x+y]+inv[1-x-y]**x**inv[1-x+y]}
 -1/2 inv[1-x-y]-1/2 inv[1-x+y]+inv[1-x-y**inv[1-x]**y]
 ```
 The original expression `expr` can then be *reduced* by the above
@@ -955,7 +977,9 @@ basis by calling
 
 which produces `0`, as expected.
 
-The above process is automated by [NCMakeGB](#NCMakeGB), but advanced
-users might want to take advantage of the increased speed of
-directly processing `NCPoly`s by manually performing the conversion
-from a rational statement to a polynomial statement.
+The above process is conveniently automated by [NCMakeGB](#NCMakeGB),
+but advanced users might still want to take advantage of the increased
+speed of directly processing `NCPoly`s by manually performing the
+conversion from a rational statement to a polynomial statement. See
+the detailed documentation of the package [NCPoly](#NCPoly) for more
+details.
