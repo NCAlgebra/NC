@@ -48,7 +48,7 @@ Clear[NCReplace,
 Get["NCReplace.usage", CharacterEncoding->"UTF8"];
 
 Options[NCReplace] = {
-  ApplyPowerRule -> False
+  ApplyPowerRule -> True
 };
 
 Begin["`Private`"]
@@ -242,6 +242,8 @@ Begin["`Private`"]
        NonCommutativeMultiply[b_?ArrayQ, c__?ArrayQ] :> NCDot[b, c],
        tr[m_?ArrayQ] :> Plus @@ tr /@ Diagonal[m]
       }
+     ,
+       ApplyPowerRule -> False
     ];
 
   NCMatrixReplaceAll[expr_, rule_, options:OptionsPattern[NCReplace]] :=

@@ -1,9 +1,9 @@
-<< NCReplace`
-
 Block[
      {rule, expr, answer, 
       a,b,c,d,e,K,x,y,z,tmp,
       id,m1,m2,m3},
+
+     SetOptions[NCReplace, ApplyPowerRule -> False];
 
      SetCommutative[K];
      SetNonCommutative[a,b,c,d,e,m1,m2,m3,x,y,z,id];
@@ -409,6 +409,8 @@ Block[
      rule = a**b -> a - b;
      answer = a - b - b^2 -aj[a - b - b^2];
      NCTest[NCExpandReplaceRepeatedSelfAdjoint[expr, rule, ApplyPowerRule->True], answer];
+
+     SetOptions[NCReplace, ApplyPowerRule -> True];
 
      (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 

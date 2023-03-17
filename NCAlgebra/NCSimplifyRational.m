@@ -140,7 +140,8 @@ Begin["`Private`"]
   NCPreSimplifyRationalSinglePass[expr_] := 
     ExpandNonCommutativeMultiply[
               NCReplaceRepeated[NCNormalizeInverse[expr], 
-                                NCSimplifyRationalOriginalRules]];
+                                NCSimplifyRationalOriginalRules,
+				ApplyPowerRule -> False]];
 
     
   Clear[NCPreSimplifyRational];
@@ -218,7 +219,8 @@ Begin["`Private`"]
 
     (* Apply rational rules *)
       
-    Scan[(tmp = ExpandNonCommutativeMultiply[NCReplaceRepeated[tmp, #]])&, simpRules];
+    Scan[(tmp = ExpandNonCommutativeMultiply[
+		  NCReplaceRepeated[tmp, #, ApplyPowerRule -> False]])&, simpRules];
       
     If[debug, Print["tmp1 = ", tmp]];
 
@@ -238,6 +240,8 @@ Begin["`Private`"]
         NCPreSimplifyRationalSinglePass[tmp]
        ,
         a_. + A_. b_?NonCommutativeQ + B_ b_?NonCommutativeQ -> a+(A+B)b
+       ,
+	ApplyPowerRule -> False
       ]
     ];
 	
