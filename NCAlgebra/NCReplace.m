@@ -56,7 +56,7 @@ Begin["`Private`"]
   (*
     - Single letter symbols match within the power and they do not need generalization
   *)
-  NCReplacePowerRule[{expr___Rule}] := Map[NCReplacePowerRule, {expr}];
+  SetAttributes[NCReplacePowerRule, Listable];
   NCReplacePowerRule[(op:(Rule|RuleDelayed))
 		     [Power[l_?NCSymbolOrSubscriptExtendedQ, i:_Integer?Positive:1] ** s___ ** Power[r_?NCSymbolOrSubscriptExtendedQ, j:_Integer?Positive:1], expr_]] := op[
     If[ i == 1
