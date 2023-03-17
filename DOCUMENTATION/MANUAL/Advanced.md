@@ -139,18 +139,15 @@ Starting with **Version 6**, `NCAlgebra` stores repeated symbols in
 noncommutative monomials using powers. This means that
 
     expr = a**a**a**b**a**a**b**a**b
-
-is internally stored as
-
     FullForm[expr]
 
-or
+is internally stored as
 ```output
 NonCommutativeMultiply[a^3, b, a^2, b, a, b]
 ```
 so that a replacement such as
 
-    NCReplaceAll[expr, a**b -> c]
+    NCReplaceAll[expr, a**b -> c, ApplyPowerRule -> False]
 
 will result in
 ```output
@@ -172,15 +169,15 @@ user's rule in order to accomplish matching of symbols in `NCAlgebra`
 expressions including powers. For example, for the same `expr` above,
 the following replacement
 
-    NCReplaceAll[expr, NCReplacePowerRule[a**b -> c]]
+    NCReplaceAll[expr, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 
-will produce
+will produce the more familiar
 ```output
 a^2**c**a^2**b**a**b
 ```
 after matching `a**b` in the term `a^3**b`, and
 
-    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
+    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 
 will produce
 ```output
@@ -209,26 +206,28 @@ negative powers.
 
 The application of `NCReplacePowerRule` can also be done by invoking
 the option `ApplyPowerRule`, which is available in all functions of
-the package [NCReplace](#PackageNCReplace). For example, the command
+the package [NCReplace](#PackageNCReplace). Currently,
+`ApplyPowerRule` is set to `True` by default so that the commands
 
+    NCReplaceRepeated[expr, a**b -> c]
     NCReplaceRepeated[expr, a**b -> c, ApplyPowerRule -> True]
 
-does the same thing as 
+do the same thing as 
 
-    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
+    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 
-This option can also be set globally for all calls to the `NCReplace`
-family of functions in a `NCAlgebra` session by calling
+This option can also be turned off globally for all calls to the
+`NCReplace` family of functions in a `NCAlgebra` session by calling 
 
-    SetOptions[NCReplace, ApplyPowerRule -> True];
+    SetOptions[NCReplace, ApplyPowerRule -> False];
 
 After that, all calls to `NCReplace`, `NCReplaceAll`,
 `NCReplaceRepeated`, and related function, will be done with the option
-`ApplyPowerRule -> True` automatically.
+`ApplyPowerRule -> False` automatically.
 
 To revert to the default behavior just set
 
-    SetOptions[NCReplace, ApplyPowerRule -> False];
+    SetOptions[NCReplace, ApplyPowerRule -> True];
 
 ### Trouble with `Block` and `Module`
 
@@ -343,23 +342,30 @@ definition:
 	H[exp_] := Module[
 	  {rule, a, b},
       SetNonCommutative[a, b];
-	  rule = a_**b_ -> b**a];
+	  rule = a_**b_ -> b**a;
 	  NCReplaceAll[exp, rule]
     ]
 
-then calling `H[x**y]` would have worked "as expected," even if for
-the wrong reasons!
+then calling
+
+    H[x**y]
+
+works "as expected," even if for the wrong reasons!
 
 Another possible "fix" is to use a delayed rule, as in:
 
 	H[exp_] := Module[
 	  {rule, aa, bb},
       SetNonCommutative[aa, bb];
-	  rule = aa_**bb_ :> bb**aa];
+	  rule = aa_**bb_ :> bb**aa;
 	  NCReplaceAll[exp, rule]
     ]
 
-which would also work as the evaluation of the right-hand side of the
+with which 
+
+    H[x**y]
+
+would also work because the evaluation of the right-hand side of the
 rule is delayed until the time of its application.
 
 [^notflat]: The reason is that making an operator `Flat` is a

@@ -63,7 +63,7 @@ All rights reserved.
   - <a href="#pre-2017-ncgb-c-version" id="toc-pre-2017-ncgb-c-version"><span class="toc-section-number">4.5</span> Pre-2017 NCGB C++ version</a>
 - <a href="#most-basic-commands" id="toc-MostBasicCommands"><span class="toc-section-number">5</span> Most Basic Commands</a>
   - <a href="#to-commute-or-not-to-commute" id="toc-to-commute-or-not-to-commute"><span class="toc-section-number">5.1</span> To Commute Or Not To Commute?</a>
-  - <a href="#inverses" id="toc-inverses"><span class="toc-section-number">5.2</span> Inverses</a>
+  - <a href="#inverses" id="toc-BasicInverses"><span class="toc-section-number">5.2</span> Inverses</a>
   - <a href="#transposes-and-adjoints" id="toc-transposes-and-adjoints"><span class="toc-section-number">5.3</span> Transposes and Adjoints</a>
   - <a href="#replace" id="toc-BasicReplace"><span class="toc-section-number">5.4</span> Replace</a>
   - <a href="#polynomials" id="toc-polynomials"><span class="toc-section-number">5.5</span> Polynomials</a>
@@ -817,7 +817,9 @@ both return `True`.
 >
 > would be stored as
 >
->     NonCommutativeMultiply[a, b, a, a, b]
+> ``` output
+> NonCommutativeMultiply[a, b, a, a, b]
+> ```
 >
 > The automatic expansion of powers of noncommutative symbols required
 > overloading the behavior of the built in `Power` operator, which was
@@ -828,7 +830,9 @@ both return `True`.
 > with exponents. For instance, the same monomial above is now
 > represented as
 >
->     NonCommutativeMultiply[a, b, Power[a, 2], b]
+> ``` output
+> NonCommutativeMultiply[a, b, Power[a, 2], b]
+> ```
 >
 > Even if you type `a**b**a**a**b`, the repeated symbols get compressed
 > to the compact representation with exponents. Exponents are now also
@@ -1004,29 +1008,45 @@ c + tp[c]
 > **WARNING:** The change in internal representation introduced in
 > **Version 6**, in which repeated letters in monomials are represented
 > as powers, presents a new challenge to pattern matching for
-> `NCAlgebra` expressions. For example, the seemingly innocent substitution
+> `NCAlgebra` expressions. For example, the seemingly innocent
+> substitution
 >
->     NCReplaceAll[a**b**b, a**b -> c]
+>     NCReplaceAll[a**b**b, a**b -> c, ApplyPowerRule -> False]
 >
 > which in previous versions returned `c**b` will fail in
 > **Version 6**. The reason for the failure is that `a**b**b` is now
 > internally represented as `a**Power[b, 2]`, which does not match
-> `a**b`. The command [NCReplacePowerRule](#ncreplacepowerrule) can
-> be used to make the following replacement
+> `a**b`. In order to make rules with exponents work in **Version 6**,
+> they to be first modified by the new command
+> [NCReplacePowerRule](#ncreplacepowerrule) as in
 >
->     NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c]]
+>     NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 >
-> return `c**b` in **Version 6**. An alternative syntax is to call
-> `NCReplaceAll` with the option
+> For convenience, when the option `ApplyPowerRule` is set to `True`,
+> `NCReplacePowerRule` gets automatically applied by all `NCReplace`
+> family of functions. In this way,
 >
+>     NCReplaceAll[a**b**b, a**b -> c]
 >     NCReplaceAll[a**b**b, a**b -> c, ApplyPowerRule -> True]
+>     NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 >
-> with the exact same outcome.
+> all return the more familiar result
+>
+> ``` output
+> c**b
+> ```
+>
+> in **Version 6**.
+
+> **WARNING:** [NCReplacePowerRule](#ncreplacepowerrule) and the
+> option `ApplyPowerRule` may not work with the most exoteric
+> replacements. See, for example, the note in section
+> [Inverses](#inverses).
 
 The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
 understood in the example:
 
-    NCReplaceAll[a**b^2, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceAll[a**b^2, a**b -> a]
 
 that results in
 
@@ -1036,7 +1056,7 @@ a**b
 
 and
 
-    NCReplaceRepeated[a**b^2, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceRepeated[a**b^2, a**b -> a]
 
 that results in
 
@@ -1066,7 +1086,7 @@ and the rule
 
 for which
 
-    NCReplaceRepeated[expr, rule, ApplyPowerRule->True]
+    NCReplaceRepeated[expr, rule]
 
 results in the expression
 
@@ -1077,7 +1097,7 @@ results in the expression
 Note the presence of *parenthesized* terms resulting from the rule
 substitution. It is clear that after expanding
 
-    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
+    NCExpand[NCReplaceRepeated[expr, rule]]
 
 to produce
 
@@ -1088,8 +1108,8 @@ a**b - b^2 - b^2**a
 there are still terms that could be affected by the original
 replacement rule, that, if replaced again,
 
-    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
-    NCExpand[NCReplaceRepeated[%, rule, ApplyPowerRule->True]]
+    NCExpand[NCReplaceRepeated[expr, rule]]
+    NCExpand[NCReplaceRepeated[%, rule]]
 
 would ultimately lead to a simpler expression
 
@@ -1099,7 +1119,7 @@ a - b - b^2 - b^2**a
 
 This successive expansion and substitution process is automated in
 
-    NCExpandReplaceRepeated[expr, rule, ApplyPowerRule->True]
+    NCExpandReplaceRepeated[expr, rule]
 
 which produces the final expression
 
@@ -1271,15 +1291,15 @@ will return `True`.
 Another useful command is `NCTermsOfDegree`, which will returns an
 expression with terms of a certain degree. For instance:
 
-    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {2,1}]
+    NCTermsOfDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, {2,1}]
 
-returns `x**y**x - x**x**y`,
+returns `x**y**x - x^2**y`,
 
-    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,0}]
+    NCTermsOfDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, {0,0}]
 
 returns `z**w`, and
 
-    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,1}]
+    NCTermsOfDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, {0,1}]
 
 returns `0`.
 
@@ -1289,11 +1309,11 @@ example:
 
 For example,
 
-    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 3]
+    NCTermsOfTotalDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, 3]
 
-returns `x**y**x - x**x**y`, and
+returns `x**y**x - x^2**y`, and
 
-    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 2]
+    NCTermsOfTotalDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, 2]
 
 returns `0`.
 
@@ -1888,7 +1908,7 @@ An interesting application is the verification of the domain in which
 an nc rational function is *convex*. This uses the second directional
 derivative, called the Hessian. Take for example the quartic
 
-    expr = x**x**x**x;
+    expr = x^4;
 
 and calculate its noncommutative directional *Hessian*
 
@@ -1897,7 +1917,7 @@ and calculate its noncommutative directional *Hessian*
 This command returns
 
 ``` output
-2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+2 h^2**x^2 + 2 h**x**h**x + 2 h**x^2**h + 2 x**h^2**x + 2 x**h**x**h + 2 x^2**h^2
 ```
 
 which is quadratic in the direction `h`. The decomposition of the
@@ -1908,9 +1928,9 @@ nc Hessian using `NCToNCQuadratic`
 produces
 
 ``` output
-left = {h, x**h, x**x**h}
-right = {h**x**x, h**x, h}
-middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
+left = {h, x**h, x^2**h}
+right = {h**x^2, h**x, h}
+middle = {{2, 2 x, 2 x^2},{0, 2, 2 x},{0, 0, 2}}
 ```
 
 Note that the middle matrix
@@ -1928,9 +1948,9 @@ and produce a symmetric decomposition. For the above example
 results in
 
 ``` output
-sleft = {x**x**h, x**h, h}
-sright = {h**x**x, h**x, h}
-middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
+sleft = {x^2**h, x**h, h}
+sright = {h**x^2, h**x, h}
+middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x^2}}
 ```
 
 in which `middle` is the symmetric matrix
@@ -2157,12 +2177,9 @@ Starting with **Version 6**, `NCAlgebra` stores repeated symbols in
 noncommutative monomials using powers. This means that
 
     expr = a**a**a**b**a**a**b**a**b
-
-is internally stored as
-
     FullForm[expr]
 
-or
+is internally stored as
 
 ``` output
 NonCommutativeMultiply[a^3, b, a^2, b, a, b]
@@ -2170,7 +2187,7 @@ NonCommutativeMultiply[a^3, b, a^2, b, a, b]
 
 so that a replacement such as
 
-    NCReplaceAll[expr, a**b -> c]
+    NCReplaceAll[expr, a**b -> c, ApplyPowerRule -> False]
 
 will result in
 
@@ -2189,9 +2206,9 @@ user’s rule in order to accomplish matching of symbols in `NCAlgebra`
 expressions including powers. For example, for the same `expr` above,
 the following replacement
 
-    NCReplaceAll[expr, NCReplacePowerRule[a**b -> c]]
+    NCReplaceAll[expr, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 
-will produce
+will produce the more familiar
 
 ``` output
 a^2**c**a^2**b**a**b
@@ -2199,7 +2216,7 @@ a^2**c**a^2**b**a**b
 
 after matching `a**b` in the term `a^3**b`, and
 
-    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
+    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 
 will produce
 
@@ -2227,26 +2244,28 @@ appearing in the monomial `a**c**b`.
 
 The application of `NCReplacePowerRule` can also be done by invoking
 the option `ApplyPowerRule`, which is available in all functions of
-the package [NCReplace](#ncreplace). For example, the command
+the package [NCReplace](#ncreplace). Currently,
+`ApplyPowerRule` is set to `True` by default so that the commands
 
+    NCReplaceRepeated[expr, a**b -> c]
     NCReplaceRepeated[expr, a**b -> c, ApplyPowerRule -> True]
 
-does the same thing as
+do the same thing as
 
-    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c]]
+    NCReplaceRepeated[expr, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 
-This option can also be set globally for all calls to the `NCReplace`
-family of functions in a `NCAlgebra` session by calling
+This option can also be turned off globally for all calls to the
+`NCReplace` family of functions in a `NCAlgebra` session by calling
 
-    SetOptions[NCReplace, ApplyPowerRule -> True];
+    SetOptions[NCReplace, ApplyPowerRule -> False];
 
 After that, all calls to `NCReplace`, `NCReplaceAll`,
 `NCReplaceRepeated`, and related function, will be done with the option
-`ApplyPowerRule -> True` automatically.
+`ApplyPowerRule -> False` automatically.
 
 To revert to the default behavior just set
 
-    SetOptions[NCReplace, ApplyPowerRule -> False];
+    SetOptions[NCReplace, ApplyPowerRule -> True];
 
 ### Trouble with `Block` and `Module`
 
@@ -2373,23 +2392,30 @@ definition:
     H[exp_] := Module[
       {rule, a, b},
       SetNonCommutative[a, b];
-      rule = a_**b_ -> b**a];
+      rule = a_**b_ -> b**a;
       NCReplaceAll[exp, rule]
     ]
 
-then calling `H[x**y]` would have worked “as expected,” even if for
-the wrong reasons!
+then calling
+
+    H[x**y]
+
+works “as expected,” even if for the wrong reasons!
 
 Another possible “fix” is to use a delayed rule, as in:
 
     H[exp_] := Module[
       {rule, aa, bb},
       SetNonCommutative[aa, bb];
-      rule = aa_**bb_ :> bb**aa];
+      rule = aa_**bb_ :> bb**aa;
       NCReplaceAll[exp, rule]
     ]
 
-which would also work as the evaluation of the right-hand side of the
+with which
+
+    H[x**y]
+
+would also work because the evaluation of the right-hand side of the
 rule is delayed until the time of its application.
 
 ## Expanding matrix products
@@ -3272,7 +3298,7 @@ b^2**a -> a**b^2
 The GB revealed another relationship that must hold true if ![a \\ b \\ a = b](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20b%20%5C%2C%20a%20%3D%20b&mode=inline). One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
 
-    NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+    NCReplaceRepeated[expr, rules]
 
 which simplifies `expr` into `b`.
 
@@ -3326,7 +3352,7 @@ rules.
 We can then apply these rules by using one of the `NCReplace`
 functions, for example
 
-    NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+    NCExpandReplaceRepeated[expr, rules]
 
 which produces
 
@@ -3382,7 +3408,7 @@ a^3 -> a
 
 When used for simplification,
 
-    NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+    NCExpandReplaceRepeated[expr, rules]
 
 reduces the original expression to the even simpler form
 
@@ -3401,11 +3427,12 @@ to recourse to the `Complete` flag.
 ## Minimal versus Reduced Gröbner Basis
 
 The algorithm implemented by `NCGB` always produces a Gröbner Basis
-with the *minimal* possible number of polynomials. However, such
-polynomials are not necessarily the “simplest” possible polynomials;
-called the *reduced* Gröbner Basis. The *reduced* Gröbner Basis is
-unique given the relations and the monomial ordering. Consider for
-example the following monomial ordering
+with the *minimal* possible number of polynomials at a given
+iteration. However, such polynomials are not necessarily the
+“simplest” possible polynomials; called the *reduced* Gröbner
+Basis. The *reduced* Gröbner Basis is unique given the relations and
+the monomial ordering. Consider for example the following monomial
+ordering
 
     SetMonomialOrder[x, y]
 
@@ -3415,7 +3442,7 @@ and the relations
 
 for which
 
-    NCMakeGB[rels] // ColumnForm
+    NCMakeGB[rels, ReduceBasis -> False] // ColumnForm
 
 produces the *minimal* Gröbner Basis
 
@@ -3441,6 +3468,7 @@ y^2->x/2
 
 in which not only the leading monomials but also all lower-order
 monomials have been reduced by the basis’ leading monomials.
+The option `ReduceBasis` is set to `True` by default.
 
 ## Simplifying Rational Expressions
 
@@ -3497,7 +3525,7 @@ must hold true if ![1- x](https://render.githubusercontent.com/render/math?math=
 relationship to *simplify* the original expression using
 `NCReplaceRepeated` as in:
 
-    NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+    NCReplaceRepeated[expr, rules]
 
 The above command results in `0`, as one would hope.
 
@@ -3534,8 +3562,7 @@ inv[1-x-y]**x**inv[1-x+y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv[1-
 
 which successfully simplifies the original expression using:
 
-    NCReplaceRepeated[expr, rules, ApplyPowerRule -> True] // NCExpand
-    NCReplaceRepeated[%, rules, ApplyPowerRule -> True]
+    NCExpandReplaceRepeated[expr, rules]
 
 resulting in `0`.
 
@@ -3962,7 +3989,7 @@ The first entry is simply the original `expr` in which every rational
 expression has been substituted by a new variable. The same could be
 obtained by applying reverse `rules` and applying it repeatedly
 
-    NCReplaceRepeated[expr, Reverse /@ rules, ApplyPowerRule -> True]
+    NCReplaceRepeated[expr, Reverse /@ rules]
 
 The remaining entries are polynomials encoding the rational
 expressions that have been substituted by new variables. For example,

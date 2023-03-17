@@ -90,7 +90,7 @@ both return `True`.
 > a**b**a^2**b
 > ```
 > would be stored as
-> ```
+> ```output
 > NonCommutativeMultiply[a, b, a, a, b]
 > ```
 > The automatic expansion of powers of noncommutative symbols required
@@ -101,7 +101,7 @@ both return `True`.
 > Starting with **Version 6**, noncommutative monomials are represented
 > with exponents. For instance, the same monomial above is now
 > represented as
-> ```
+> ```output
 > NonCommutativeMultiply[a, b, Power[a, 2], b]
 > ```
 > Even if you type `a**b**a**a**b`, the repeated symbols get compressed
@@ -109,7 +109,7 @@ both return `True`.
 > used to represent the noncommutative inverse. See the notes in the
 > next section.
 
-## Inverses
+## Inverses {#BasicInverses}
 
 The multiplicative identity is denoted `Id` in the program. At the
 present time, `Id` is set to 1.
@@ -266,29 +266,43 @@ c + tp[c]
 > **WARNING:** The change in internal representation introduced in
 > **Version 6**, in which repeated letters in monomials are represented
 > as powers, presents a new challenge to pattern matching for
-> `NCAlgebra` expressions. For example, the seemingly innocent substitution
+> `NCAlgebra` expressions. For example, the seemingly innocent
+> substitution
 > ```
-> NCReplaceAll[a**b**b, a**b -> c]
+> NCReplaceAll[a**b**b, a**b -> c, ApplyPowerRule -> False]
 > ```
 > which in previous versions returned `c**b` will fail in
 > **Version 6**. The reason for the failure is that `a**b**b` is now
 > internally represented as `a**Power[b, 2]`, which does not match
-> `a**b`. The command [NCReplacePowerRule](#NCReplacePowerRule) can
-> be used to make the following replacement
+> `a**b`. In order to make rules with exponents work in **Version 6**,
+> they to be first modified by the new command 
+> [NCReplacePowerRule](#NCReplacePowerRule) as in
 > ```
-> NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c]]
+> NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 > ```
-> return `c**b` in **Version 6**. An alternative syntax is to call
-> `NCReplaceAll` with the option
+> For convenience, when the option `ApplyPowerRule` is set to `True`,
+> `NCReplacePowerRule` gets automatically applied by all `NCReplace`
+> family of functions. In this way,
 > ```
+> NCReplaceAll[a**b**b, a**b -> c]
 > NCReplaceAll[a**b**b, a**b -> c, ApplyPowerRule -> True]
+> NCReplaceAll[a**b**b, NCReplacePowerRule[a**b -> c], ApplyPowerRule -> False]
 > ```
-> with the exact same outcome.
+> all return the more familiar result
+> ```output
+> c**b
+> ```
+> in **Version 6**.
+
+> **WARNING:** [NCReplacePowerRule](#NCReplacePowerRule) and the
+> option `ApplyPowerRule` may not work with the most exoteric
+> replacements. See, for example, the note in section
+> [Inverses](#BasicInverses).
 
 The difference between `NCReplaceAll` and `NCReplaceRepeated` can be
 understood in the example:
 
-    NCReplaceAll[a**b^2, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceAll[a**b^2, a**b -> a]
 
 that results in
 ```output
@@ -296,7 +310,7 @@ a**b
 ```
 and
 
-    NCReplaceRepeated[a**b^2, a**b -> a, ApplyPowerRule -> True]
+    NCReplaceRepeated[a**b^2, a**b -> a]
 
 that results in
 ```output
@@ -324,7 +338,7 @@ and the rule
 
 for which
 
-	NCReplaceRepeated[expr, rule, ApplyPowerRule->True]
+	NCReplaceRepeated[expr, rule]
 
 results in the expression
 ```output
@@ -333,7 +347,7 @@ results in the expression
 Note the presence of *parenthesized* terms resulting from the rule
 substitution. It is clear that after expanding 
 
-    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
+    NCExpand[NCReplaceRepeated[expr, rule]]
 
 to produce
 ```output
@@ -342,8 +356,8 @@ a**b - b^2 - b^2**a
 there are still terms that could be affected by the original
 replacement rule, that, if replaced again,
 
-    NCExpand[NCReplaceRepeated[expr, rule, ApplyPowerRule->True]]
-    NCExpand[NCReplaceRepeated[%, rule, ApplyPowerRule->True]]
+    NCExpand[NCReplaceRepeated[expr, rule]]
+    NCExpand[NCReplaceRepeated[%, rule]]
 
 would ultimately lead to a simpler expression
 ```output
@@ -351,7 +365,7 @@ a - b - b^2 - b^2**a
 ```
 This successive expansion and substitution process is automated in
 
-	NCExpandReplaceRepeated[expr, rule, ApplyPowerRule->True]
+	NCExpandReplaceRepeated[expr, rule]
 
 which produces the final expression
 ```output
@@ -505,15 +519,15 @@ will return `True`.
 Another useful command is `NCTermsOfDegree`, which will returns an
 expression with terms of a certain degree. For instance:
 
-    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {2,1}]
+    NCTermsOfDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, {2,1}]
 
-returns `x**y**x - x**x**y`,
+returns `x**y**x - x^2**y`,
 
-    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,0}]
+    NCTermsOfDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, {0,0}]
 
 returns `z**w`, and
 
-    NCTermsOfDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, {0,1}]
+    NCTermsOfDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, {0,1}]
 
 returns `0`.
 
@@ -523,11 +537,11 @@ example:
 
 For example,
 
-    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 3]
+    NCTermsOfTotalDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, 3]
 
-returns `x**y**x - x**x**y`, and
+returns `x**y**x - x^2**y`, and
 
-    NCTermsOfTotalDegree[x**y**x - x**x**y + x**w + z**w, {x,y}, 2]
+    NCTermsOfTotalDegree[x**y**x - x^2**y + x**w + z**w, {x,y}, 2]
 
 returns `0`.
 
@@ -1132,7 +1146,7 @@ An interesting application is the verification of the domain in which
 an nc rational function is *convex*. This uses the second directional
 derivative, called the Hessian. Take for example the quartic
 
-    expr = x**x**x**x;
+    expr = x^4;
 
 and calculate its noncommutative directional *Hessian*
 
@@ -1140,7 +1154,7 @@ and calculate its noncommutative directional *Hessian*
 
 This command returns
 ```output
-2 h**h**x**x + 2 h**x**h**x + 2 h**x**x**h + 2 x**h**h**x + 2 x**h**x**h + 2 x**x**h**h
+2 h^2**x^2 + 2 h**x**h**x + 2 h**x^2**h + 2 x**h^2**x + 2 x**h**x**h + 2 x^2**h^2
 ```
 which is quadratic in the direction `h`. The decomposition of the
 nc Hessian using `NCToNCQuadratic`
@@ -1149,9 +1163,9 @@ nc Hessian using `NCToNCQuadratic`
 
 produces
 ```output
-left = {h, x**h, x**x**h}
-right = {h**x**x, h**x, h}
-middle = {{2, 2 x, 2 x**x},{0, 2, 2 x},{0, 0, 2}}
+left = {h, x**h, x^2**h}
+right = {h**x^2, h**x, h}
+middle = {{2, 2 x, 2 x^2},{0, 2, 2 x},{0, 0, 2}}
 ```
 
 Note that the middle matrix
@@ -1172,9 +1186,9 @@ and produce a symmetric decomposition. For the above example
 
 results in
 ```output
-sleft = {x**x**h, x**h, h}
-sright = {h**x**x, h**x, h}
-middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x**x}}
+sleft = {x^2**h, x**h, h}
+sright = {h**x^2, h**x, h}
+middle = {{0, 0, 2}, {0, 2, 2 x}, {2, 2 x, 2 x^2}}
 ```
 in which `middle` is the symmetric matrix
 

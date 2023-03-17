@@ -263,7 +263,7 @@ The GB revealed another relationship that must hold true if $a \, b \,
 a = b$. One can use these relationships to simplify the original
 expression using `NCReplaceRepeated` as in
  
-	NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+	NCReplaceRepeated[expr, rules]
 
 which simplifies `expr` into `b`.
 
@@ -316,7 +316,7 @@ rules.
 We can then apply these rules by using one of the `NCReplace`
 functions, for example
 
-	NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+	NCExpandReplaceRepeated[expr, rules]
 
 which produces
 ```output
@@ -364,7 +364,7 @@ a^3 -> a
 ```
 When used for simplification,
   
-	NCExpandReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+	NCExpandReplaceRepeated[expr, rules]
 
 reduces the original expression to the even simpler form
 ```output
@@ -381,11 +381,12 @@ to recourse to the `Complete` flag.
 ## Minimal versus Reduced Gröbner Basis
 
 The algorithm implemented by `NCGB` always produces a Gröbner Basis
-with the *minimal* possible number of polynomials. However, such
-polynomials are not necessarily the "simplest" possible polynomials;
-called the *reduced* Gröbner Basis. The *reduced* Gröbner Basis is
-unique given the relations and the monomial ordering. Consider for
-example the following monomial ordering
+with the *minimal* possible number of polynomials at a given
+iteration. However, such polynomials are not necessarily the
+"simplest" possible polynomials; called the *reduced* Gröbner
+Basis. The *reduced* Gröbner Basis is unique given the relations and
+the monomial ordering. Consider for example the following monomial
+ordering
 
     SetMonomialOrder[x, y]
 	
@@ -395,7 +396,7 @@ and the relations
 	
 for which
 
-    NCMakeGB[rels] // ColumnForm
+    NCMakeGB[rels, ReduceBasis -> False] // ColumnForm
 	
 produces the *minimal* Gröbner Basis
 ```output
@@ -417,6 +418,7 @@ y^2->x/2
 ```
 in which not only the leading monomials but also all lower-order
 monomials have been reduced by the basis' leading monomials.
+The option `ReduceBasis` is set to `True` by default.
 
 ## Simplifying Rational Expressions {#SimplifyingRationalExpressions}
 
@@ -469,7 +471,7 @@ must hold true if $1- x$ is invertible, and one can use this
 relationship to *simplify* the original expression using
 `NCReplaceRepeated` as in:
 
-	NCReplaceRepeated[expr, rules, ApplyPowerRule -> True]
+	NCReplaceRepeated[expr, rules]
 
 The above command results in `0`, as one would hope.
 
@@ -504,8 +506,7 @@ inv[1-x-y]**x**inv[1-x+y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv[1-
 ```
 which successfully simplifies the original expression using:
 
-	NCReplaceRepeated[expr, rules, ApplyPowerRule -> True] // NCExpand
-	NCReplaceRepeated[%, rules, ApplyPowerRule -> True]
+	NCExpandReplaceRepeated[expr, rules]
 
 resulting in `0`.
 
@@ -921,7 +922,7 @@ The first entry is simply the original `expr` in which every rational
 expression has been substituted by a new variable. The same could be 
 obtained by applying reverse `rules` and applying it repeatedly
 
-    NCReplaceRepeated[expr, Reverse /@ rules, ApplyPowerRule -> True]
+    NCReplaceRepeated[expr, Reverse /@ rules]
 
 The remaining entries are polynomials encoding the rational
 expressions that have been substituted by new variables. For example,
