@@ -1,9 +1,9 @@
-<< NCReplace`
-
 Block[
      {rule, expr, answer, 
-      a,b,c,d,e,K,x,y,z,
+      a,b,c,d,e,K,x,y,z,tmp,
       id,m1,m2,m3},
+
+     SetOptions[NCReplace, ApplyPowerRule -> False];
 
      SetCommutative[K];
      SetNonCommutative[a,b,c,d,e,m1,m2,m3,x,y,z,id];
@@ -57,27 +57,131 @@ Block[
      NCTest[NCReplaceRepeated[expr,rule], answer];
 
      rule = a**b -> a;
-
      expr = a**b**b**c;
 
      answer = expr;
      NCTest[expr /. rule, answer];
-     NCTest[NCReplace[expr,rule], expr];
+     NCTest[NCReplace[expr,rule], answer];
+     NCTest[NCReplace[expr,NCReplacePowerRule[rule]], answer];
 
      answer = a**b**c;
-     NCTest[NCReplaceAll[expr,rule], answer];
+     NCTest[NCReplaceAll[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
 
      answer = a**c;
-     NCTest[NCReplaceRepeated[expr,rule], answer];
+     NCTest[NCReplaceRepeated[expr,rule], expr];
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
 
+     rule = a^2**b -> a;
+     expr = a^2**b**b**c;
+
+     answer = expr;
+     NCTest[expr /. rule, answer];
+     NCTest[NCReplace[expr,rule], answer];
+     NCTest[NCReplace[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a**b**c;
+     NCTest[NCReplaceAll[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a**b**c;
+     NCTest[NCReplaceRepeated[expr,rule], expr];
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
+
+     rule = a^2 -> c;
+     expr = a^3**b**b**c;
+
+     answer = expr;
+     NCTest[NCReplaceAll[expr,rule], answer];
+     answer = c**a**b^2**c;
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+
+     rule = a^2**b -> a;
+     expr = a^3**b**b**c;
+
+     answer = expr;
+     NCTest[expr /. rule, answer];
+     NCTest[NCReplace[expr,rule], answer];
+     NCTest[NCReplace[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a^2**b**c;
+     NCTest[NCReplaceAll[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a**c;
+     NCTest[NCReplaceRepeated[expr,rule], expr];
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
+     
+     rule = a**b_ -> a;
+     expr = a**b**b**c;
+
+     answer = a;
+     NCTest[expr /. rule, expr];
+     NCTest[NCReplace[expr,rule], answer];
+     NCTest[NCReplace[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a;
+     NCTest[NCReplaceAll[expr,rule], answer];
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a;
+     NCTest[NCReplaceRepeated[expr,rule], answer];
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
+
+     rule = a**b_ -> a;
+     expr = a^2**b^2**c;
+
+     answer = a^2;
+     NCTest[expr /. rule, expr];
+     NCTest[NCReplace[expr,rule], expr];
+     NCTest[NCReplace[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a^2;
+     NCTest[NCReplaceAll[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a^2;
+     NCTest[NCReplaceRepeated[expr,rule], expr];
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
+
+     rule = a_**b -> a;
+     expr = a^2**b^2**c;
+
+     (* ApplyPowerRule option *)
+     answer = a^2;
+     NCTest[expr /. rule, expr];
+     NCTest[NCReplace[expr,rule], expr];
+     NCTest[NCReplace[expr,NCReplacePowerRule[rule]], expr];
+     NCTest[NCReplace[expr,rule,ApplyPowerRule->True], expr];
+     
+     answer = a^2**b**c;
+     NCTest[NCReplaceAll[expr,rule], expr];
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+     NCTest[NCReplaceAll[expr,rule,ApplyPowerRule->True], answer];
+
+     answer = a^2 ** c;
+     NCTest[NCReplaceRepeated[expr,rule], expr];
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
+     NCTest[NCReplaceRepeated[expr,rule,ApplyPowerRule->True], answer];
+
+     SetOptions[NCReplace, ApplyPowerRule->True];
+     NCTest[NCReplaceRepeated[expr,rule], answer];
+     SetOptions[NCReplace, ApplyPowerRule->False];
+     NCTest[NCReplaceRepeated[expr,rule], expr];
+
+     rule = a**b -> a;
      expr = a**b**b + a**b**c + d**a**b + d**a**b**c;
 
-     answer = a**b + a**c + d**a + d**a**c;
      NCTest[NCReplace[expr,rule], expr];
+     answer = a**b**b + a**c + d**a + d**a**c;
      NCTest[NCReplaceAll[expr,rule], answer];
+     answer = a**b + a**c + d**a + d**a**c;
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
 
-     answer = a + a**c + d**a + d**a**c;
+     answer = a**b**b + a**c + d**a + d**a**c;
      NCTest[NCReplaceRepeated[expr,rule], answer];
+     answer = a + a**c + d**a + d**a**c;
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
 
      expr = inv[1 + A x] ** x;
      rule = d___ ** inv[1 + K_. a_] ** a_ ** e___ :> 
@@ -90,6 +194,31 @@ Block[
               (1/K) d ** e - (1/K) d ** inv[1 + K a] ** e;
      answer = 1 - inv[1 + x];
      NCTest[NCReplaceRepeated[expr,rule], answer];
+
+     (* NCReplaceAll returning sequence *)
+
+     expr = a ** b ** c;
+     rule = b__ ** c :> b;
+     answer = Sequence[a, b];
+     NCTest[NCReplace[expr, rule], answer];
+     NCTest[NCReplaceAll[expr, rule], answer];
+     NCTest[NCReplaceRepeated[expr, rule], answer];
+
+     (* NCReplacePowerRule on lists *)
+
+     rule = {a**b -> a, d**a-> b};
+     expr = a**b**b + a**b**c + d**a**b + d**a**b**c;
+
+     NCTest[NCReplace[expr,rule], expr];
+     answer = a**b**b + a**c + d**a + d**a**c;
+     NCTest[NCReplaceAll[expr,rule], answer];
+     answer = a**b + a**c + d**a + d**a**c;
+     NCTest[NCReplaceAll[expr,NCReplacePowerRule[rule]], answer];
+
+     answer = a**b^2 + a**c + b + b**c;
+     NCTest[NCReplaceRepeated[expr,rule], answer];
+     answer = a + b + a**c + b**c;
+     NCTest[NCReplaceRepeated[expr,NCReplacePowerRule[rule]], answer];
 
      (* NCMakeRuleSymmetric *)
 
@@ -166,6 +295,7 @@ Block[
      answer = NCDot[NCInverse[m1], m2] + m2;
      expr = NCMatrixReplaceAll[inv[x] ** y + y, rule];
      NCTest[expr, answer];
+
      expr = NCMatrixReplaceRepeated[inv[x] ** y + y, rule];
      NCTest[expr, answer];
 
@@ -203,6 +333,7 @@ Block[
      answer = IdentityMatrix[2] + NCInverse[IdentityMatrix[2] + NCInverse[IdentityMatrix[2] + m1]];
      expr = NCMatrixReplaceAll[id + inv[id + inv[id + x]], rule];
      NCTest[expr, answer];
+
      expr = NCMatrixReplaceRepeated[id + inv[id + inv[id + x]], rule];
      NCTest[expr, answer];
 
@@ -212,9 +343,11 @@ Block[
      expr = NCMatrixReplaceRepeated[{{id, x}, {x, id}}, rule];
      NCTest[expr, answer];
 
+     (* THESE INVOLVE inv of symbolic matrices *)
      answer = NCInverse[ArrayFlatten[{{IdentityMatrix[2], m1},{m1,IdentityMatrix[2]}}]];
      expr = NCMatrixReplaceAll[inv[{{id, x}, {x, id}}], rule];
      NCTest[expr, answer];
+
      expr = NCMatrixReplaceRepeated[inv[{{id, x}, {x, id}}], rule];
      NCTest[expr, answer];
 
@@ -258,6 +391,27 @@ Block[
 
      expr = a ** b^2;
      answer = K^4 b ** b ** a;
-     NCTest[NCReplaceRepeated[expr, rule], answer];
+     NCTest[NCReplaceRepeated[expr, rule], expr];
+     NCTest[NCReplaceRepeated[expr, NCReplacePowerRule[rule]], answer];
+
+     (* NCExpandReplaceRepeated *)
+     expr = a**b^2-b^2**a;
+     rule = a**b -> a - b;
+     answer = a - b - b^2 - b^2**a;
+     NCTest[NCExpandReplaceRepeated[expr, rule, ApplyPowerRule->True], answer];
+
+     expr = a**b^2-tp[a**b^2];
+     rule = a**b -> a - b;
+     answer = a - b - b^2 -tp[a - b - b^2];
+     NCTest[NCExpandReplaceRepeatedSymmetric[expr, rule, ApplyPowerRule->True], answer];
+
+     expr = a**b^2-aj[a**b^2];
+     rule = a**b -> a - b;
+     answer = a - b - b^2 -aj[a - b - b^2];
+     NCTest[NCExpandReplaceRepeatedSelfAdjoint[expr, rule, ApplyPowerRule->True], answer];
+
+     SetOptions[NCReplace, ApplyPowerRule -> True];
+
+     (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

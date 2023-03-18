@@ -76,13 +76,19 @@ is equivalent to `SetMonomialOrder[{a, b, c}]`. When using this older
 syntax the user is responsible for calling
 [ClearMonomialOrder](#ClearMonomialOrder) to make sure that the
 current order is empty before starting.
-		
+
+In Version 6, `SetMonomialOrder` uses
+[NCMonomialOrder](#NCMonomialOrder), and
+[NCMonomialOrderQ](#NCMonomialOrderQ).
+
 See also:
 [ClearMonomialOrder](#ClearMonomialOrder),
 [GetMonomialOrder](#GetMonomialOrder),
 [PrintMonomialOrder](#PrintMonomialOrder),
 [SetKnowns](#SetKnowns),
-[SetUnknowns](#SetUnknowns).
+[SetUnknowns](#SetUnknowns),
+[NCMonomialOrder](#NCMonomialOrder),
+[NCMonomialOrderQ](#NCMonomialOrderQ).
 
 ### SetKnowns {#SetKnowns}
 
@@ -279,13 +285,13 @@ set of polynomials.
 
 The following `options` can be given:
 
-- `ReduceBasis` (`False`): control whether the resulting basis output
+- `ReduceBasis` (`True`): control whether the resulting basis output
   by the command is a reduced Gröbner basis at the completion of the
   algorithm. This corresponds to running `NCReduce` with the
   Boolean flag `True` to completely reduce the output basis. Can be set
   globally as `SetOptions[NCMakeGB, ReturnBasis -> True]`.
-- `SimplifyObstructions` (`True`): control whether whether to remove obstructions
-  before constructing more S-polynomials;
+- `SimplifyObstructions` (`True`): control whether whether to remove
+  obstructions before constructing more S-polynomials;
 - `SortObstructions` (`False`): control whether obstructions are
   sorted before being processed;
 - `SortBasis` (`False`): control whether initial basis is sorted
@@ -298,12 +304,20 @@ The following `options` can be given:
   obstructions at each major iteration;
 - `PrintSPolynomials` (`False`): if `True` prints every S-polynomial
   formed at each minor iteration.
-- `ReturnRules` (`True`): if `True` rules representing relations in which the left-hand side is the leading monomial are returned instead of polynomials. Use `False` for backward compatibility. Can be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
+- `ReturnRules` (`True`): if `True` rules representing relations in
+  which the left-hand side is the leading monomial are returned
+  instead of polynomials. Use `False` for backward compatibility. Can
+  be set globally as `SetOptions[NCMakeGB, ReturnRules -> False]`.
 
 `NCMakeGB` makes use of the algorithm `NCPolyGroebner` implemented in
 [NCPolyGroebner](#NCPolyGroebner).
 
+In Version 6, `NCMakeGB` uses
+[NCRationalToNCPoly](#NCRationalToNCPoly) to add additional relations
+involving rational variables and rational terms.
+
 See also:
+[NCRationalToNCPoly](#NCRationalToNCPoly),
 [NCReduce](#NCReduce),
 [ClearMonomialOrder](#ClearMonomialOrder),
 [GetMonomialOrder](#GetMonomialOrder),
@@ -347,24 +361,24 @@ See also:
 [NCMakeGB](#NCMakeGB),
 [NCReduce](#NCReduce).
 
-### NCReduce {#NCReduce}
+<!-- ### NCReduce {#NCReduce} -->
 
-`NCReduce[polys, rules]` reduces the list of polynomials `polys` with
-respect to the list of polyomials `rules`. The substitutions implied
-by `rules` are applied repeatedly to the polynomials in the `polys`
-until no further reduction occurs.
+<!-- `NCReduce[polys, rules]` reduces the list of polynomials `polys` with -->
+<!-- respect to the list of polyomials `rules`. The substitutions implied -->
+<!-- by `rules` are applied repeatedly to the polynomials in the `polys` -->
+<!-- until no further reduction occurs. -->
 
-`NCReduce[polys]` reduces each polynomial in the list of polynomials
-`polys` with respect to the remaining elements of the list of
-polyomials `polys` until no further reduction occurs.
+<!-- `NCReduce[polys]` reduces each polynomial in the list of polynomials -->
+<!-- `polys` with respect to the remaining elements of the list of -->
+<!-- polyomials `polys` until no further reduction occurs. -->
 
-By default, `NCReduce` only reduces the leading monomial in the
-current order. Use the optional boolean flag `complete` to completely
-reduce all monomials. For example, `NCReduce[polys, rules, True]` and
-`NCReduce[polys, True]`.
+<!-- By default, `NCReduce` only reduces the leading monomial in the -->
+<!-- current order. Use the optional boolean flag `complete` to completely -->
+<!-- reduce all monomials. For example, `NCReduce[polys, rules, True]` and -->
+<!-- `NCReduce[polys, True]`. -->
 
-See also:
-[NCMakeGB](#NCMakeGB),
-[NCGBSimplifyRational](#NCGBSimplifyRational).
+<!-- See also: -->
+<!-- [NCMakeGB](#NCMakeGB), -->
+<!-- [NCGBSimplifyRational](#NCGBSimplifyRational). -->
 
 

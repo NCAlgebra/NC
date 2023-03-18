@@ -11,12 +11,14 @@ or `Needs`, as in
 
     Needs["NCAlgebra`"]
 
-If the option [`SmallCapSymbolsNonCommutative`](#PackageNCOptions) is
-`True` then `NCAlgebra` will set all global single letter small cap
-symbols as noncommutative. If that is not desired simply set
-`SmallCapSymbolsNonCommutative` to `False` before loading `NCAlgebra`, as in
+If the option `SmallCapSymbolsNonCommutative` is `True` then
+`NCAlgebra` will set all global single letter small cap symbols as
+noncommutative. Set [NCOptions](#PackageNCOptions). If that is not
+desired, simply set `SmallCapSymbolsNonCommutative` to `False` before
+loading `NCAlgebra`, as in
 
-    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    << NCOptions`
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
     << NCAlgebra`
 
 A message will be issued warning users whether any letters have been
@@ -29,7 +31,8 @@ set as noncommutative upon loading. Those messages are documented
 
 or
 
-    SetOptions[NC, SmallCapSymbolsNonCommutative -> False]
+    << NCOptions`
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
     Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
     << NCAlgebra`
 
@@ -39,14 +42,16 @@ Upon loading `NCAlgebra` for the first time, a large banner will be
 shown. If you do not want this banner to be displayed set the
 option [`ShowBanner`](#PackageNCOptions) to `False` before loading, as in
 
-    SetOptions[NC, ShowBanner -> False]
+    << NCOptions`
+    SetOptions[NCOptions, ShowBanner -> False]
     << NCAlgebra`
 
 For example, the following commands will perform a completly quiet
 loading of `NC` *and* `NCAlgebra`:
 
     Quiet[<< NC`, NC`NC::Directory];
-    SetOptions[NC, ShowBanner -> False];
+	<< NCOptions`
+    SetOptions[NCOptions, ShowBanner -> False];
     Quiet[<< NCAlgebra`, NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative];
 
 ### Messages {#NCAlgebraMessages}

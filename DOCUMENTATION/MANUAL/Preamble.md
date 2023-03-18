@@ -1,6 +1,15 @@
 ---
 title: The NCAlgebra Suite
-subtitle: Version 5.0.6
+subtitle: Version 6.0.0
+header-includes: |
+  \makeatletter
+  \newcommand{\@minipagerestore}{\setlength{\parskip}{\medskipamount}}
+  \makeatother
+  \newsavebox{\mybox}
+  \setlength{\fboxsep}{10pt}
+  \renewenvironment{quote}%
+  {\begin{lrbox}{\mybox}\begin{minipage}{\textwidth}}%
+  {\end{minipage}\end{lrbox}\colorbox{black!7!white}{\usebox{\mybox}}}
 author: 
 - J. William Helton
 - Mauricio C. de Oliveira
@@ -17,7 +26,7 @@ date:
 
 \vfill
 
-    Copyright (c) 2017, J. William Helton and Mauricio C. de Oliveira
+    Copyright (c) 2023, J. William Helton and Mauricio C. de Oliveira
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -51,7 +60,7 @@ date:
 This work was partially supported by the Division of Mathematical
 Sciences of the National Science Foundation.
 
-The program was written by the authors with mjor earlier contributions from:
+The program was written by the authors with major earlier contributions from:
 
 * Mark Stankus, Math, Cal Poly San Luis Obispo
 * Robert L. Miller, General Atomics Corp
@@ -59,6 +68,7 @@ The program was written by the authors with mjor earlier contributions from:
 Considerable recent help came from 
 
 * Igor Klep, University of Ljubljana
+* Aidan Epperly
 
 Other contributors include:
 

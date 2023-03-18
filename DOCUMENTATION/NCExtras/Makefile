@@ -1,6 +1,6 @@
 include ../make.inc
 
-FILES = NCDebug.usage NCWebUpdate.usage
+FILES = MatrixDecompositions.usage NCDebug.usage
 
 all: $(FILES)
 

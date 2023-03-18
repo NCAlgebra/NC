@@ -1,4 +1,7 @@
-SetOptions[NC, SmallCapSymbolsNonCommutative -> False, ShowBanner -> False];
+<< NCOptions`
+SetOptions[NCOptions,
+           SmallCapSymbolsNonCommutative -> False,
+	   ShowBanner -> False];
 Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 << NCSDP`
 
@@ -189,7 +192,15 @@ Module[
   vars = {x, y};
   obj = {-1, 0};
 
-  << "COMPleib/MmaCOMPleib/AC3.m";
+  Quiet[
+    Check[
+       Get["TESTING/NCSDP/data/AC3.m"];
+      ,
+       Get["NCAlgebra/TESTING/NCSDP/data/AC3.m"];
+    ];
+   ,
+    Get::noopen
+  ];
   data = {a -> A, b -> B, b1 -> B1, c1 -> C1, d12 -> D12};
   Idn = IdentityMatrix[nx];
   Ze = ConstantArray[0, {nx,nx}];

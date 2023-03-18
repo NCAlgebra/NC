@@ -56,6 +56,10 @@ Begin[ "`Private`" ]
     Map[{#[[2]]**m[[1]], #[[1]]*#[[3]], m[[2]]**#[[4]]}&, terms] 
     ) /; Length[m] == 2;
 
+  NCQuadraticAux[{Power[m_, 2]}, terms_] := (
+    Map[{#[[2]]**m, #[[1]], m**#[[3]]}&, terms] 
+    );
+
   NCQuadraticAux[m_, terms_] := (
     Map[{#[[2]]**m[[1,1]], #[[1]], m[[1,2]]**#[[3]]}&, terms] 
     ) /; Length[m] == 1;

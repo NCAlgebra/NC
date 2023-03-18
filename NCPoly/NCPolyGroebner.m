@@ -227,7 +227,7 @@ ReducePolynomial[G_,H_,labels_,
   While[ And[ h =!= 0, Flatten[q] =!= {}], 
 
          (* Reduce *)
-         {q, h} = NCPolyReduce[h, G, complete];
+         {q, h} = NCPolyReduceWithQuotient[h, G, Complete->complete];
          
          (* Collect contributions *)
          If[ q =!= {}, ij = Union[ij, Part[q, All, 2]] ];
@@ -440,7 +440,8 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
     
   If[ verboseLevel >= 1,
     (* Print order *)
-    Print["* Monomial order: ", NCPolyDisplayOrder[labels]];
+    Print["* Monomial order: "];
+    Print["> ", NCPolyDisplayOrder[labels]];
   ];
 
   If[ verboseLevel >= 3,
@@ -454,7 +455,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
   ];
 
   m = Length[G];
-  G = NCPolyNormalize[NCPolyFullReduce[G]];
+  G = NCPolyNormalize[NCPolyReduceRepeated[G]];
   If[ verboseLevel >= 1,
       If[ Length[G] < m, 
           Print[ "> Initial set reduced to '", ToString[Length[G]],
@@ -626,7 +627,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
 
          (* Does h divide any poly in the basis? *)
          reducible = Pick[Range[m], 
-                          Map[(First[NCPolyReduce[#, 
+                          Map[(First[NCPolyReduceWithQuotient[#, 
                                      NCPolyLeadingMonomial[h]]]=!={})&,
                               TG]];
          
@@ -755,7 +756,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
                         
                         (* Does Gii divide any poly in the basis? *)
                         mreducible = Pick[Range[m], 
-                                          Map[(First[NCPolyReduce[#, 
+                                          Map[(First[NCPolyReduceWithQuotient[#, 
                                             NCPolyLeadingMonomial[Gii]]]=!={})&,
                                               TG]];
                         
@@ -800,7 +801,7 @@ NCPolyGroebner[{g__NCPoly}, iterations_Integer, opts___Rule] := Block[
       If[ verboseLevel >= 1,
           Print["* Cleaning up..."];
       ];
-      (* G = NCPolyNormalize[NCPolyFullReduce[G]]; *)
+      (* G = NCPolyNormalize[NCPolyReduceRepeated[G]]; *)
       {G, GTree, GNodes} = DoReduceBasis[G, GTree, GNodes, 
                                          symbolicCoefficients, verboseLevel, True];
   ];

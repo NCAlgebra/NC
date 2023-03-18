@@ -3,6 +3,7 @@
 Members are:
 
 * [NCCollect](#NCCollect)
+* [NCCollectExponents](#NCCollectExponents)
 * [NCCollectSelfAdjoint](#NCCollectSelfAdjoint)
 * [NCCollectSymmetric](#NCCollectSymmetric)
 * [NCStrongCollect](#NCStrongCollect)
@@ -36,6 +37,22 @@ think it should.
 
 See also:
 [NCStrongCollect](#NCStrongCollect), [NCCollectSymmetric](#NCCollectSymmetric), [NCCollectSelfAdjoint](#NCCollectSelfAdjoint), [NCStrongCollectSymmetric](#NCStrongCollectSymmetric), [NCStrongCollectSelfAdjoint](#NCStrongCollectSelfAdjoint), [NCRationalToNCPolynomial](#NCRationalToNCPolynomial).
+
+### NCCollectExponents {#NCCollectExponents}
+
+`NCCollectExponents[expr]` collects exponents in noncommutative monomials.
+
+For example
+
+    NCCollectExponents[a**b**a**b**c-a**b**a**b]
+
+returns
+
+    (a**b)^2**c-(a**b)^2
+
+See also:
+[NCCollect](#NCCollect),
+[NCStrongCollect](#NCStrongCollect).
 
 ### NCCollectSelfAdjoint {#NCCollectSelfAdjoint}
 

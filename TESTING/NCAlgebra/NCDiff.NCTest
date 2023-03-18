@@ -117,7 +117,7 @@ Module[
 
    exp = inv[A x**x];
    answer = - inv[x**x]**(h**x+x**h)**inv[x**x]/A;
-   NCTest[DirectionalD[exp, x, h], answer];
+   NCTest[ExpandNonCommutativeMultiply[DirectionalD[exp, x, h]], ExpandNonCommutativeMultiply[answer]];
 
    exp = inv[tp[A x]];
    answer = - inv[tp[x]]**tp[h]**inv[tp[x]]/A;
@@ -203,11 +203,13 @@ Module[
    exp = A**x**y**x+B**y**x**y;
    answer = A (h**y**x + x**y**h) + B y**h**y + B (s**x**y + y**x**s) 
           + A x**s**x;
-   NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer];
+   NCTest[NCDirectionalD[exp, {x, h}, {y, s}], ExpandNonCommutativeMultiply[answer]];
+
    answer = DirectionalD[exp, x, h] + DirectionalD[exp, y, s];
    NCTest[NCDirectionalD[exp, {x, h}, {y, s}], answer];
    answer = ExpandNonCommutativeMultiply[{A (y**x + x**y) + B y**y, B (x**y + y**x) + A x**x}];
    NCTest[NCGrad[exp, x, y], answer];
+
 
    (* tp *)
 

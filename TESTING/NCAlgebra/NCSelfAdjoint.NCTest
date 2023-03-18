@@ -27,7 +27,10 @@ Module[
   expr = aj[a**b];
   NCTest[expr, Unevaluated[aj[b] ** aj[a]]];
 
-  expr = aj[b]**aj[a];
+  expr = aj[a**a];
+  NCTest[expr, Unevaluated[aj[a] ** aj[a]]];
+
+expr = aj[b]**aj[a];
   NCTest[expr, Unevaluated[aj[b] ** aj[a]]];
 
   expr = c**aj[a**b];

@@ -1,5 +1,5 @@
 # The NCAlgebra Suite
-*Version 5.0.6*
+*Version 6.0.0*
 
 ## Authors
 
@@ -16,7 +16,8 @@ The program was written by the authors and by:
 David Hurst, Daniel Lamm, Orlando Merino, Robert Obar, Henry Pfister,
 Mike Walker, John Wavrik, Lois Yu, J. Camino, J. Griffin, J. Ovall,
 T. Shaheen, John Shopple.  The beginnings of the program come from
-eran@slac.  Considerable recent help came from Igor Klep.
+eran@slac.  Considerable recent help came from Igor Klep and Aidan
+Epperly.
 
 Current primary support is from the 
   NSF Division of Mathematical Sciences.
@@ -36,6 +37,7 @@ A PDF version of this document is available [here](./NCDocument.pdf).
 
 ## Copyright
 
+- Helton and de Oliveira 2023
 - Helton and de Oliveira 2017
 - Helton 2002
 - Helton and Miller June 1991

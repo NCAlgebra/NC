@@ -892,7 +892,7 @@ Begin[ "`Private`" ]
 
                    (* shift realization *)
                    (* A0 + Ai x = (A0 + Ai x0) + Ai (x - x0) *)
-                   x0 = Table[RandomInteger[{1,10}],{i,m-1}];
+                   x0 = Table[RandomInteger[{1,10}], m-1];
                    A0 = A[[1]] + Plus @@ (x0 * Rest[A]);
 
                    (* Print["x0 = ", x0]; *)

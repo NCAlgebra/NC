@@ -1,0 +1,45 @@
+<< SDP`
+<< SDPFlat`
+<< SDPSeDuMi`
+
+Begin["NCTest`Local`"];
+
+Module[
+  {A, b, y, sdp,
+   X, Y, S, flags,
+   AA, BB, CC,
+   problems,
+   baseDirectory
+  },
+
+  RunTest[problem_, answer_] := Module[
+    {AA, BB, CC},
+
+    {AA,BB,CC} = SDPImport[problem];
+
+    {Y, X, S, flags} = SDPSolve[{AA, BB, CC}];
+    exp = -SDPInner[BB, Y];
+    (* Print["exp = ", exp]; *)
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True];
+
+    exp = -SDPInner[CC, X];
+    (* Print["exp = ", exp]; *)
+    NCTest[Abs[(exp - answer)/answer] < 10^(-4), True];
+
+  ];
+
+  baseDirectory = ToFileName[
+    {DirectoryName[FindFile["NCSDPTESTMORE`"]], "NCSDP", "data"}
+  ];
+  problems = { 
+    {ToFileName[baseDirectory, "arch0"], 0.56652},
+    {ToFileName[baseDirectory, "trto3"], 1},
+    {ToFileName[baseDirectory, "OH_2Pi_STO-6GN9r12g1T2"], 1},
+    {ToFileName[baseDirectory, "control07"], 126.734}
+  };
+
+  Map[RunTest @@ ##&, problems];
+
+];
+
+End[];

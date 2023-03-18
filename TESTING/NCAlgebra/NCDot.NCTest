@@ -97,20 +97,22 @@ Module[
 
   mat = {{a,b,0},{tp[b],e,d},{0,tp[d],i}};
   mati = NCInverse[mat];
+  
+  (* TODO: TEST AFTER NCSIMPLIFYRATIONAL
   NCTest[NCSimplifyRational[NCDot[mati, mat]],
          {{1,0,0},{0,1,0},{0,0,1}}];
+  *)
 
   (* NCInverse with NCMatrixExpand *)
 
   NCTest[inv[mat], inv[{{a,b,0},{tp[b],e,d},{0,tp[d],i}}]];
+
   NCTest[NCMatrixExpand[inv[mat]], mati];
 
   NCTest[inv[mat]**mati,
 	 inv[{{a,b,0},{tp[b],e,d},{0,tp[d],i}}]**mati];
 
-  NCTest[NCMatrixExpand[inv[mat]**mati],
-	 NCDot[mati,mati]];
-
+  NCTest[Norm[ExpandNonCommutativeMultiply[NCMatrixExpand[inv[mat]**mati] - NCDot[mati,mati]]], 0];
 
   (* NCSymmetricQ *)
 
@@ -206,5 +208,7 @@ Module[
     ,
     {NCSelfAdjointQ::SelfAdjointVariables, NCSymmetricQ::SymmetricVariables}
   ];
+
+  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];

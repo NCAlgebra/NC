@@ -3,13 +3,10 @@
 (* :Context: NCOutput`, Notation`, and NonCommutativeMultiply` *)
 
 BeginPackage["NCOutput`",
-	     If[ $Notebooks
-		,
-		 {"Notation`",
-                  "NonCommutativeMultiply`"}
-		,
-                 {"NonCommutativeMultiply`"}
-	     ]];
+	     {"NCOptions`",
+	      "NCUtil`",
+              "NonCommutativeMultiply`"}
+];
 
 Clear[NCSetOutput];
 
@@ -25,6 +22,15 @@ Options[NCSetOutput] = {
 };
 
 Begin["`Private`"];
+
+  (* Whether to use the infix notation from the Notation package *)
+  Clear[$UseNotation];
+  $UseNotation = $Notebooks && Not[$CloudEvaluation] &&
+    (UseNotation /. Options[NCOptions, UseNotation]);
+
+  If[$UseNotation,
+     Needs["Notation`"];
+  ];
 
   NCSetOutput[opts___Rule:{}] :=
     Module[{options},
@@ -86,17 +92,49 @@ Begin["`Private`"];
       SetOptions[NCSetOutput, inv -> (inv /. options /. Options[NCSetOutput])];
       If[ inv /. Options[NCSetOutput]
          ,
-          inv /: MakeBoxes[inv[a_], fmt_] :=
-                   SuperscriptBox[Parenthesize[a, fmt, Power, Left], -1];
+	  Unprotect[Power];
+	  If[ $UseNotation
+	     ,
+	      Quiet[
+                Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] =. ;
+                Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] =. ;
+  	       ,
+	        Unset::norep
+	      ];
+	      Power /: MakeBoxes[Power[a_?NonCommutativeQ, n_?Negative], fmt_] := 
+                    SuperscriptBox[Parenthesize[a, fmt, Power, Left], n];
+	     ,
+	      Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] := 
+                    Superscript[ToString[a], n];
+              Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] := 
+                    ToString[inv][a];
+          ];
+	  Protect[Power];
          ,
-          Quiet[inv /: MakeBoxes[inv[a_], fmt_] =., Unset::norep];
+          Quiet[
+            Unprotect[Power];
+            If[ $UseNotation
+	       ,
+	        Power /: MakeBoxes[Power[a_?NonCommutativeQ, n_?Negative], fmt_] =.;
+  	        Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] := 
+                      Superscript[ToString[a], n];
+                Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] := 
+                      ToString[inv][a];
+   	       ,
+	        Power /: Format[Power[a_?NCSymbolOrSubscriptQ, n_?Negative]] =.; 
+                Power /: Format[Power[a_?NonCommutativeQ, n_?Negative]] =. ;
+            ];
+	    Protect[Power];
+	   ,
+	    Unset::norep
+	 ];
       ];
 
       (* pretty ** *)
       
       SetOptions[NCSetOutput,
                  NonCommutativeMultiply -> (NonCommutativeMultiply /. options /. Options[NCSetOutput])];
-      If[ $Notebooks
+      If[ $UseNotation
          ,
           If[ NonCommutativeMultiply /. Options[NCSetOutput]
              ,

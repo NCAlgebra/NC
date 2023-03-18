@@ -39,8 +39,32 @@ Begin["`Private`"];
     Return[If[index == {}, pos, index[[pos]]]];
   ];
 
+  (* MAURICIO: FEBRUARY 2022
+     With the new cannonization of a**a as Power[a, 2], an infinite loop is possible
+     if working with the original heading NonCommutativeMultiply
+  *)
+  (* Clear[SortedCyclicPermutationExtendedQ]; *)
+  SortCyclicPermutation[perm_NonCommutativeMultiply, op:(aj|tp|co)] :=
+    NonCommutativeMultiply @@ SortCyclicPermutation[NCToList @ perm, op];
+  SortCyclicPermutation[perm_NonCommutativeMultiply] :=
+    NonCommutativeMultiply @@ SortCyclicPermutation[NCToList @ perm];
+  SortedCyclicPermutationQ[perm_NonCommutativeMultiply] := Module[
+    {list = NCToList @ perm},
+    If[ FreeQ[list, aj|co]
+       ,
+        If[ FreeQ[list, tp]
+           ,
+            SortedCyclicPermutationQ[list]
+           ,
+            SortedCyclicPermutationQ[list, tp]
+        ]
+      ,
+       SortedCyclicPermutationQ[list, If[FreeQ[list, aj], co, aj]]
+    ]
+  ];
+
   (* Perhaps SortCyclicPermutation[perm_, aj|tp] can be made mode efficient
-   by avoiding the double sorting *)
+     by avoiding the double sorting *)
   SortCyclicPermutation[perm_, op:(aj|tp)] :=
     Sort[{SortCyclicPermutation[perm],
 	  SortCyclicPermutation[op /@ Reverse[perm]]}][[1]];
@@ -66,20 +90,6 @@ Begin["`Private`"];
       If[pos[[1]] != 1, Return[False]];
     ];
     Return[True];
-  ];
-
-  Clear[SortedCyclicPermutationExtendedQ];
-  SortedCyclicPermutationExtendedQ[perm_] :=
-    If[ FreeQ[perm, aj|co]
-       ,
-        If[ FreeQ[perm, tp]
-           ,
-            SortedCyclicPermutationQ[perm]
-           ,
-            SortedCyclicPermutationQ[perm, tp]
-        ]
-      ,
-       SortedCyclicPermutationQ[perm, If[FreeQ[perm, aj], co, aj]]
   ];
 
   Clear[trAjAux];
@@ -113,7 +123,7 @@ Begin["`Private`"];
        ,
 	(* aj/co case requires conjugation *)
 	trAjAux[SortCyclicPermutation[l]]
-    ] /; ! SortedCyclicPermutationExtendedQ[l];
+    ] /; !SortedCyclicPermutationQ[l];
   tr[a_?CommutativeQ] := a;
   tr[a_?CommutativeQ b_] := a tr[b];
 

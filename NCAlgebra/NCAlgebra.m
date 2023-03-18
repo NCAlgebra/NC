@@ -1,5 +1,6 @@
 BeginPackage["NCAlgebra`",
-	     {"NC`",
+	     {
+	      "NCOptions`",
 	      "NonCommutativeMultiply`",
 	      "NCTr`",
               "NCCollect`",
@@ -9,8 +10,9 @@ BeginPackage["NCAlgebra`",
               "NCMatrixDecompositions`",
               "NCSimplifyRational`",
               "NCDeprecated`",
-              "NCPolyInterface`",
-              "NCOutput`"}];
+              "NCOutput`"
+	     }
+];
 
 NCAlgebra::SmallCapSymbolsNonCommutative = "All lower cap single letter symbols (e.g. a,b,c,...) were set as noncommutative.";
 NCAlgebra::NoSymbolsNonCommutative = "No symbols were set as noncommutative. Use SetNonCommutative to set noncommutative symbols.";
@@ -20,10 +22,12 @@ Begin["`Private`"];
   verbose = If[ValueQ[$NCAlgebra$Loaded], False, $NCAlgebra$Loaded=True];
 
   (* Print banner *)
-  If [ verbose && ShowBanner /. Options[NC, ShowBanner], FilePrint[FindFile["banner.txt"]]];
+  If [ verbose && ShowBanner /. Options[NCOptions, ShowBanner],
+       FilePrint[FindFile["NCAlgebra/banner.txt"]]
+  ];
 
   
-  If[ SmallCapSymbolsNonCommutative /. Options[NC, SmallCapSymbolsNonCommutative]
+  If[ SmallCapSymbolsNonCommutative /. Options[NCOptions, SmallCapSymbolsNonCommutative]
      ,
       (* Sets all lower case letters to be NonCommutative *)
       SetNonCommutativeHold[Global`a, Global`b, Global`c, Global`d, Global`e,

@@ -17,14 +17,20 @@ Members are:
 * [SetNonCommutative](#SetNonCommutative)
 * [SetNonCommutativeHold](#SetNonCommutativeHold)
 * [SetCommutativeFunction](#SetCommutativeFunction)
+* [SetNonCommutativeFunction](#SetNonCommutativeFunction)
 * [SetCommutingOperators](#SetCommutingOperators)
 * [UnsetCommutingOperators](#UnsetCommutingOperators)
 * [CommutingOperatorsQ](#CommutingOperatorsQ)
+* [NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ)
+* [NCNonCommutativeSymbolOrSubscriptExtendedQ](#NCNonCommutativeSymbolOrSubscriptExtendedQ)
+* [NCPowerQ](#NCPowerQ)
 * [Commutative](#Commutative)
 * [CommuteEverything](#CommuteEverything)
 * [BeginCommuteEverything](#BeginCommuteEverything)
 * [EndCommuteEverything](#EndCommuteEverything)
 * [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply)
+* [NCExpandExponents](#NCExpandExponents)
+* [NCToList](#NCToList)
 
 Aliases are:
 
@@ -136,6 +142,13 @@ evaluates to `trace[a ** b] * a ** b`.
 See also:
 [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ), [tr](#tr).
 
+### SetNonCommutativeFunction {#SetNonCommutativeFunction}
+
+`SetNonCommutativeFunction[f]` sets expressions with `Head` `f`, i.e. functions, to be non commutative. This is only necessary if it has been previously set commutative by [SetCommutativeFunction](#SetCommutativeFunction).
+
+See also:
+[SetCommutativeFunction](#SetCommutativeFunction), [SetCommutative](#SetCommutative), [SetNonCommutative](#SetNonCommutative), [CommutativeQ](#CommutativeQ), [NonCommutativeQ](#NonCommutativeQ), [tr](#tr).
+
 ### SNC {#SNC}
 
 `SNC` is an alias for `SetNonCommutative`.
@@ -170,6 +183,37 @@ See also:
 See also:
 [SetCommutingOperators](#SetCommutingOperators),
 [UnsetCommutingOperators](#UnsetCommutingOperators)
+
+### NCNonCommutativeSymbolOrSubscriptQ {#NCNonCommutativeSymbolOrSubscriptQ}
+
+`NCNonCommutativeSymbolOrSubscriptQ[expr]` returns *True* if `expr` is an noncommutative symbol or a noncommutative symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptExtendedQ](#NCNonCommutativeSymbolOrSubscriptExtendedQ),
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptExtendedQ](#NCSymbolOrSubscriptExtendedQ),
+[NCPowerQ](#NCPowerQ).
+
+### NCNonCommutativeSymbolOrSubscriptExtendedQ {#NCNonCommutativeSymbolOrSubscriptExtendedQ}
+
+`NCNonCommutativeSymbolOrSubscriptExtendedQ[expr]` returns *True* if
+`expr` is an noncommutative symbol, a noncommutative symbol subscript,
+or the transpose (`tp`) or adjoint (`aj`) of a noncommutative symbol
+or noncommutative symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptExtendedQ](#NCSymbolOrSubscriptExtendedQ),
+[NCPowerQ](#NCPowerQ).
+
+### NCPowerQ {#NCPowerQ}
+
+`NCPowerQ[expr]` returns *True* if `expr` is an noncommutative symbol or symbol subscript or a positive power of a noncommutative symbol or symbol subscript.
+
+See also:
+[NCNonCommutativeSymbolOrSubscriptQ](#NCNonCommutativeSymbolOrSubscriptQ),
+[NCSymbolOrSubscriptQ](#NCSymbolOrSubscriptQ).
 
 ### Commutative {#Commutative}
 
@@ -233,3 +277,44 @@ See also:
 See also:
 [ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
 [NCExpand](#NCExpand).
+
+### NCExpandExponents {#NCExpandExponents}
+
+`NCExpandExponents[expr]` expands out powers of the monomials appearing in `expr`.
+
+For example
+
+    NCExpandExponents[a**(b**c)^2**(c+d)]
+
+returns
+
+    a**b**c**b**c**(c+d).
+
+`NCExpandExponents` only expands powers of monomials. Powers of
+symbols or other expressions are not expanded using
+`NCExpandExponents`.
+
+See also:
+[NCToList](#NCToList)
+[ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
+[NCExpand](#NCExpand), [NCE](#NCE).
+
+### NCToList {#NCToList}
+
+`NCToList[expr]` produces a list with the symbols appearing in
+monomial `expr`. If `expr` is not a monomial it remains
+unevaluated. Powers of symbols are expanded before the list is
+produced.
+
+For example
+
+    NCToList[a**b**a^2]
+
+returns
+
+    {a,b,a,a}
+
+See also:
+[NCExpandExponents](#NCExpandExponents),
+[ExpandNonCommutativeMultiply](#ExpandNonCommutativeMultiply),
+[NCExpand](#NCExpand), [NCE](#NCE).

@@ -18,21 +18,26 @@
 BeginPackage[ "NCReplace`",
              {"NCDot`",
               "NCTr`",
+              "NCUtil`",
               "NonCommutativeMultiply`"}];
 
 Clear[NCReplace, 
       NCReplaceAll, 
       NCReplaceRepeated, 
+      NCExpandReplaceRepeated, 
       NCReplaceList,
       NCMakeRuleSymmetric, NCMakeRuleSelfAdjoint,
       NCReplaceSymmetric, 
       NCReplaceAllSymmetric, 
       NCReplaceRepeatedSymmetric, 
+      NCExpandReplaceRepeatedSymmetric, 
       NCReplaceListSymmetric,
       NCReplaceSelfAdjoint, 
       NCReplaceAllSelfAdjoint, 
       NCReplaceRepeatedSelfAdjoint, 
+      NCExpandReplaceRepeatedSelfAdjoint, 
       NCReplaceListSelfAdjoint,
+      NCReplacePowerRule,
       NCMatrixExpand,
       NCMatrixReplaceAll, 
       NCMatrixReplaceRepeated,
@@ -42,13 +47,88 @@ Clear[NCReplace,
 
 Get["NCReplace.usage", CharacterEncoding->"UTF8"];
 
+Options[NCReplace] = {
+  ApplyPowerRule -> True
+};
+
 Begin["`Private`"]
 
+  (*
+    - Single letter symbols match within the power and they do not need generalization
+  *)
+  SetAttributes[NCReplacePowerRule, Listable];
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [Power[l_?NCSymbolOrSubscriptExtendedQ, i:_Integer?Positive:1] ** s___ ** Power[r_?NCSymbolOrSubscriptExtendedQ, j:_Integer?Positive:1], expr_]] := op[
+    If[ i == 1
+       ,
+        If[ j == 1
+	   ,
+	    l^(n:_Integer?Positive:1) ** s ** r^(m:_Integer?Positive:1)
+	   ,
+            l^(n:_Integer?Positive:1) ** s ** r^(m_Integer?((#>=j)&))
+	]
+       ,
+        If[ j == 1
+	   ,
+            l^(n_Integer?((#>=i)&)) ** s ** r^(m:_Integer?Positive:1)
+	   ,
+            l^(n_Integer?((#>=i)&)) ** s ** r^(m_Integer?((#>=j)&))
+	]
+    ], If[ n != i
+	  ,
+	   l^(n - i) ** expr ** r^(m - j)
+	  ,
+	   If[ m != j
+	      ,
+	       expr ** r^(m - j)
+	      ,
+	       expr
+	   ]
+       ]
+  ];
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [Power[l_?NCSymbolOrSubscriptExtendedQ, i:_Integer?Positive:1] ** s__, expr_]] := op[
+    If[ i == 1
+       ,
+        l^(n:_Integer?Positive:1) ** s
+       ,
+        l^(n_Integer?((#>=i)&))
+    ], If[n != i, l^(n - i) ** expr, expr]
+  ];
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [s__ ** Power[r_?NCSymbolOrSubscriptExtendedQ, j:_Integer?Positive:1], expr_]] := op[
+   If[ j == 1
+       ,
+	s ** r^(m:_Integer?Positive:1)
+       ,
+        s ** r^(m:_Integer?((#>=j)&))
+     ], If[m != j, expr ** r^(m - j), expr]
+  ];
+  NCReplacePowerRule[(op:(Rule|RuleDelayed))
+		     [Power[r_?NCNonCommutativeSymbolOrSubscriptExtendedQ, j:_Integer?Positive:1], expr_]] := op[
+   If[ j == 1
+       ,
+	r^(m:_Integer?Positive:1)
+       ,
+        r^(m:_Integer?((#>=j)&))
+     ], If[m != j, expr ** r^(m - j), expr]
+  ];
+  NCReplacePowerRule[(expr_Rule|expr_RuleDelayed)] := expr;
+  
+  (* Flat property rules must be defined using Verbatim. See:
+     https://mathematica.stackexchange.com/questions/5067/constructing-a-function-with-flat-and-oneidentity-attribute-with-the-property-th
+   *)
   Clear[FlatNCMultiply];
   SetAttributes[FlatNCMultiply, {Flat, OneIdentity}];
 
-  FlatNCMultiply[a___, b_?CommutativeQ c_, d___] :=
+  Verbatim[FlatNCMultiply][a___, b_?NotMatrixQ, d:(b_ ..), c___] :=
+    FlatNCMultiply[a, Power[b, Length[{d}]+1], c];
+  Verbatim[FlatNCMultiply][a___, b_?CommutativeQ c_, d___] :=
     b FlatNCMultiply[a, c, d];
+  Verbatim[FlatNCMultiply][a___, b_?CommutativeQ, d___] :=
+    b FlatNCMultiply[a, d];
+  Verbatim[FlatNCMultiply][a_] := a;
+  Verbatim[FlatNCMultiply][] := 1;
     
   Clear[NCReplaceFlatRules];
   NCReplaceFlatRules = {
@@ -60,43 +140,42 @@ Begin["`Private`"]
       FlatNCMultiply -> NonCommutativeMultiply
   };
 
-  NCReplace[expr_, rule_] := 
-    ((Replace @@ 
-        ({expr, rule} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+  Clear[NCRuleProcessOptions];
+  NCRuleProcessOptions[rule_, OptionsPattern[NCReplace]] :=
+    If[ OptionValue[ApplyPowerRule] === True
+       ,
+	NCReplacePowerRule[rule]
+       ,
+	rule
+    ];
 
-  NCReplace[expr_, rule_, levelspec_] := 
-    ((Replace @@ 
-        Append[({expr, rule} 
-                  /. NCReplaceFlatRules),
-               levelspec])
-        /. NCReplaceReverseFlatRules);
+  Clear[NCApplyFlatRules];
+  NCApplyFlatRules[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    {expr, NCRuleProcessOptions[rule, options]} /. NCReplaceFlatRules;
+
+  Clear[NCReverseFlatRules];
+  NCReverseFlatRules[expr_] := expr /. NCReplaceReverseFlatRules;
+  NCReverseFlatRules[seq__] := Sequence @@ (List @ seq /. NCReplaceReverseFlatRules);
+
+  NCReplace[expr_, rule_, options:OptionsPattern[NCReplace]] := 
+    NCReverseFlatRules[Replace @@ NCApplyFlatRules[expr, rule, options]];
+
+  NCReplace[expr_, rule_, levelspec_, options:OptionsPattern[NCReplace]] := 
+    NCReverseFlatRules[Replace @@ 
+        Append[NCApplyFlatRules[expr, rule, options], levelspec]];
         
-  NCReplaceAll[expr_, rule_] := 
-    ((ReplaceAll @@ 
-        ({expr, rule} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+  NCReplaceAll[expr_, rule_, options:OptionsPattern[NCReplace]] := 
+    NCReverseFlatRules[ReplaceAll @@ NCApplyFlatRules[expr, rule, options]];
 
-  NCReplaceRepeated[expr_, rule_] := 
-    ((ReplaceRepeated @@ 
-        ({expr, rule} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+  NCReplaceRepeated[expr_, rule_, options:OptionsPattern[NCReplace]] := 
+    NCReverseFlatRules[ReplaceRepeated @@ NCApplyFlatRules[expr, rule, options]];
 
-  NCReplaceList[expr_, rule_] := 
-    ((ReplaceList @@ 
-        ({expr, rule} 
-           /. NCReplaceFlatRules))
-        /. NCReplaceReverseFlatRules);
+  NCReplaceList[expr_, rule_, options:OptionsPattern[NCReplace]] := 
+    NCReverseFlatRules[ReplaceList @@ NCApplyFlatRules[expr, rule, options]];
 
-  NCReplaceList[expr_, rule_, n_] := 
-    ((ReplaceList @@ 
-        Append[({expr, rule} 
-                  /. NCReplaceFlatRules),
-                n])
-        /. NCReplaceReverseFlatRules);
+  NCReplaceList[expr_, rule_, n_, options:OptionsPattern[NCReplace]] := 
+    NCReverseFlatRules[ReplaceList @@ 
+        Append[NCApplyFlatRules[expr, rule, options], n]];
         
   (* NCMakeRuleSymmetric *)
   (* Adapted from http://mathematica.stackexchange.com/questions/31238/how-to-combine-elements-of-two-matrices *)
@@ -124,10 +203,12 @@ Begin["`Private`"]
          Not[MatchQ[y, _. (_NonCommutativeMultiply|_FlatNCMultiply|_inv)]]]);
 
   Clear[FlatMatrix];
+  Clear[FlatInv];
      
   Clear[NCMatrixReplaceReverseFlatPlusRules];
   NCMatrixReplaceReverseFlatPlusRules = {
       inv -> NCInverse,
+      Power[x_, -1] -> NCInverse[x],
       FlatNCPlus[x_?MatrixQ,y_?MatrixQ] :> 
         Plus @@ {x,y}
   };
@@ -136,76 +217,90 @@ Begin["`Private`"]
   NCMatrixReplaceFlatRules = {
       NonCommutativeMultiply -> FlatNCMultiply,
       Plus -> FlatNCPlus,
+      Power[x_, -1] -> FlatInv[x],
+      inv -> FlatInv
+  };
+  Clear[NCMatrixReplaceFlatRulesOnce];
+  NCMatrixReplaceFlatRulesOnce = {
       x_?MatrixQ :> FlatMatrix[x]
   };
 
   Clear[NCMatrixReplaceReverseFlatRules];
   NCMatrixReplaceReverseFlatRules = {
       FlatNCMultiply -> NonCommutativeMultiply,
-      FlatMatrix -> ArrayFlatten
+      FlatMatrix -> ArrayFlatten,
+      FlatInv -> NCInverse
   };
 
 
   (* Expand ** between matrices *)
   NCMatrixExpand[expr_] :=
-      NCReplaceRepeated[
-        (expr //. inv[a_?MatrixQ] :> NCInverse[a])
-       ,
-        {
-         NonCommutativeMultiply[b_?ArrayQ, c__?ArrayQ] :> NCDot[b, c],
-         tr[m_?ArrayQ] :> Plus @@ tr /@ Diagonal[m]
-        }
-(*
+    NCReplaceRepeated[
+      (expr //. HoldPattern[inv[a_?MatrixQ]] :> NCInverse[a])
+     ,
       {
-          NonCommutativeMultiply[b_List, c__List] :>
-               NCDot[b, c],
-          NonCommutativeMultiply[b_List, c_] /; Head[c] =!= List :>
-               (* Map[NonCommutativeMultiply[#, c]&, b, {2}], *)
-               NCDot[b, {{c}}],
-          NonCommutativeMultiply[b_, c_List] /; Head[b] =!= List :>
-               (* Map[NonCommutativeMultiply[b, #]&, c, {2}] *)
-               NCDot[{{b}}, c]
+       NonCommutativeMultiply[b_?ArrayQ, c__?ArrayQ] :> NCDot[b, c],
+       tr[m_?ArrayQ] :> Plus @@ tr /@ Diagonal[m]
       }
-*)
-  ];
+     ,
+       ApplyPowerRule -> False
+    ];
 
-  NCMatrixReplaceAll[expr_, rule_] := NCMatrixExpand[
+  NCMatrixReplaceAll[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    NCMatrixExpand[
       (ReplaceAll @@ 
-            ({expr, rule} 
-             /. NCMatrixReplaceFlatRules))
-               /. NCMatrixReplaceReverseFlatRules] /. FlatNCPlus -> Plus;
+          ({expr, NCRuleProcessOptions[rule, options]} 
+	      //. NCMatrixReplaceFlatRules /. NCMatrixReplaceFlatRulesOnce ))
+	        /. NCMatrixReplaceReverseFlatRules
+    ] /. FlatNCPlus -> Plus;
 
-  NCMatrixReplaceAll[expr_?MatrixQ, rule_] :=
-    ArrayFlatten[Map[NCMatrixReplaceAll[#, rule]&, expr, {2}]];
+  NCMatrixReplaceAll[expr_?MatrixQ, rule_, options:OptionsPattern[NCReplace]] :=
+    ArrayFlatten[
+      Map[NCMatrixReplaceAll[#, NCRuleProcessOptions[rule, options]]&, expr, {2}]
+    ];
   
-  NCMatrixReplaceRepeated[expr_, rule_] := NCMatrixExpand[
+  NCMatrixReplaceRepeated[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    NCMatrixExpand[
       (ReplaceRepeated @@ 
-            ({expr, rule} 
-             /. NCMatrixReplaceFlatRules))
-               /. NCMatrixReplaceReverseFlatRules] /. FlatNCPlus -> Plus;
+         ({expr, NCRuleProcessOptions[rule, options]} 
+	      //. NCMatrixReplaceFlatRules /. NCMatrixReplaceFlatRulesOnce ))
+               /. NCMatrixReplaceReverseFlatRules
+    ] /. FlatNCPlus -> Plus;
 
-  NCMatrixReplaceRepeated[expr_?MatrixQ, rule_] :=
-    ArrayFlatten[Map[NCMatrixReplaceRepeated[#, rule]&, expr, {2}]];
+  NCMatrixReplaceRepeated[expr_?MatrixQ, rule_, options:OptionsPattern[NCReplace]] :=
+    ArrayFlatten[
+      Map[NCMatrixReplaceRepeated[#, NCRuleProcessOptions[rule, options]]&, expr, {2}]
+    ];
     
   (* Convenience methods *)
       
-  NCReplaceSymmetric[expr_, rule_, args___] := 
-    NCReplaceSymmetric[expr, NCMakeRuleSymmetric[rule], args];
-  NCReplaceAllSymmetric[expr_, rule_, args___] := 
-    NCReplaceAllSymmetric[expr, NCMakeRuleSymmetric[rule], args];
-  NCReplaceRepeatedSymmetric[expr_, rule_, args___] := 
-    NCReplaceRepeatedSymmetric[expr, NCMakeRuleSymmetric[rule], args];
-  NCReplaceListSymmetric[expr_, rule_, args___] := 
-    NCReplaceListSymmetric[expr, NCMakeRuleSymmetric[rule], args];
+  NCReplaceSymmetric[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplace[expr, NCMakeRuleSymmetric[rule], args, options];
+  NCReplaceAllSymmetric[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplaceAll[expr, NCMakeRuleSymmetric[rule], args, options];
+  NCReplaceRepeatedSymmetric[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplaceRepeated[expr, NCMakeRuleSymmetric[rule], args, options];
+  NCReplaceListSymmetric[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplaceList[expr, NCMakeRuleSymmetric[rule], args, options];
   
-  NCReplaceSelfAdjoint[expr_, rule_, args___] := 
-    NCReplaceSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
-  NCReplaceAllSelfAdjoint[expr_, rule_, args___] := 
-    NCReplaceAllSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
-  NCReplaceRepeatedSelfAdjoint[expr_, rule_, args___] := 
-    NCReplaceRepeatedSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
-  NCReplaceListSelfAdjoint[expr_, rule_, args___] := 
-    NCReplaceListSelfAdjoint[expr, NCMakeRuleSelfAdjoint[rule], args];
+  NCReplaceSelfAdjoint[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplace[expr, NCMakeRuleSelfAdjoint[rule], args, options];
+  NCReplaceAllSelfAdjoint[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplaceAll[expr, NCMakeRuleSelfAdjoint[rule], args, options];
+  NCReplaceRepeatedSelfAdjoint[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplaceRepeated[expr, NCMakeRuleSelfAdjoint[rule], args, options];
+  NCReplaceListSelfAdjoint[expr_, rule_, args___, options:OptionsPattern[NCReplace]] := 
+    NCReplaceList[expr, NCMakeRuleSelfAdjoint[rule], args, options];
+
+  (* NCExpandReplaceRepeated functions *)
+  NCExpandReplaceRepeated[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    FixedPoint[NCReplaceRepeated[NCExpand[#], rule, options]&, expr];
+
+  NCExpandReplaceRepeatedSymmetric[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    FixedPoint[NCReplaceRepeatedSymmetric[NCExpand[#], rule, options]&, expr];
+
+  NCExpandReplaceRepeatedSelfAdjoint[expr_, rule_, options:OptionsPattern[NCReplace]] :=
+    FixedPoint[NCReplaceRepeatedSelfAdjoint[NCExpand[#], rule, options]&, expr];
 
   (* Aliases *)
   NCR = NCReplace;

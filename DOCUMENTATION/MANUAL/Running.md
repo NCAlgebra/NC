@@ -1,7 +1,7 @@
 # Introduction {#UserGuideIntroduction}
 
 This *User Guide* attempts to document the many improvements
-introduced in `NCAlgebra` Version 5.0. Please be patient, as we move
+introduced in `NCAlgebra` **Version 6**. Please be patient, as we move
 to incorporate the many recent changes into this document.
 
 See [Reference Manual](#ReferenceIntroduction) for a detailed
@@ -10,28 +10,61 @@ description of the available commands.
 There are also notebooks in the `NC/DEMOS` directory that accompany
 each of the chapters of this user guide.
 
+## Installing NCAlgebra {#InstallingNCAlgebra}
+
+Starting with **Version 6**, it is recommended that NCAlgebra be
+installed using our paclet distribution. Just type:
+
+    PacletInstall["https://github.com/NCAlgebra/NC/blob/v6.0.0/NCAlgebra-6.0.0.paclet?raw=true"];
+
+In the near future we plan to submit paclets to the Wolfram paclet
+repository for easier updates.
+
+Alternatively, you can download and install NCAlgebra as outlined in
+the section [Manual Installation](#ManualInstallation).
+
+
 ## Running NCAlgebra {#RunningNCAlgebra}
 
-In *Mathematica* (notebook or text interface), type
-
-    << NC`
-
-If this step fails, your installation has problems (check out installation instructions on the main page). If your installation is succesful you will see a message like:
-
-    NC::Directory: You are using the version of NCAlgebra which is found in: "/your_home_directory/NC".
-
-Then just type 
+In *Mathematica* (notebook or text interface), type 
 
     << NCAlgebra`
 
 to load `NCAlgebra`.
 
-Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#PackageNC) and [here](#PackageNCAlgebra).
+Advanced options for controlling the loading of `NC` and `NCAlgebra` can be found in [here](#NCOptions) and [here](#PackageNCAlgebra).
+
+> If you performed a manual installation of NCAlgebra you will need to type
+> 
+>     << NC`
+>
+> before loading NCAlgebra.
+>
+> If this step fails, your installation has problems (check out
+> installation instructions in 
+> [Manual Installation](#ManualInstallation)). If your installation is
+> succesful, you will see a message like:
+>
+>     NC::Directory: You are using the version of NCAlgebra which is
+>     found in: "/your_home_directory/NC".
+>
+> In the paclet version, it is no longer necessary to load the context
+> `NC` before running NCAlgebra.
+>
+> Loading the context `NC` in the paclet version is however still
+> supported for backward compatibility. It does nothing more than
+> posting the message:
+>
+>     NC::Directory: You are using a paclet version of NCAlgebra.
+
 
 ## Now what?
 
-Extensive documentation is found in the directory `DOCUMENTATION`,
-including this document.
+Extensive documentation is found in the distribution directory 
+
+[https://github.com/NCAlgebra/NC/DOCUMENTATION](https://github.com/NCAlgebra/NC/DOCUMENTATION)
+
+which includes this document.
 
 Basic documentation is found in the project wiki:
 
@@ -44,15 +77,10 @@ You can also run some tests to see if things are working fine.
 
 ## Testing
 
-You do not need to load `NCAlgebra` before running any of the tests
-below, but you need to load `NC` as in
-
-    << NC`
-
 There are 3 test sets which you can use to troubleshoot parts of
 NCAlgebra. The most comprehensive test set is run by typing:
 
-    << NCTEST
+    << NCCORETEST`
 
 This will test the core functionality of NCAlgebra.
 
@@ -60,32 +88,31 @@ You can test functionality related to the package
 [`NCPoly`](#PackageNCPoly), including the new `NCGBX` package
 [`NCGBX`](#PackageNCGBX), by typing:
 
-    << NCPOLYTEST
+    << NCPOLYTEST`
 
 Finally our Semidefinite Programming Solver [`NCSDP`](#PackageNCSDP)
 can be tested with 
 
-    << NCSDPTEST
+    << NCSDPTEST`
 
 We recommend that you restart the kernel before and after running
 tests. Each test takes a few minutes to run.
 
 You can also call
 
-    << NCPOLYTESGB
+    << NCPOLYTESTGB`
 	
 to perform extensive and long testing of `NCGBX`.
 
+> If you performed a manual installation of NCAlgebra you will need to type
+>
+>     << NC`
+>
+> before before running any of the tests above.
+
+
 ## Pre-2017 NCGB C++ version
 
-The old `C++` version of our Groebner Basis Algorithm still ships with
-this version and can be loaded using:
-
-    << NCGB`
-
-This will at once load `NCAlgebra` *and* `NCGB`. It can be tested
-using
-
-	<< NCGBTEST
-
+Starting with **Version 6**, the old `C++` version of our Groebner Basis
+Algorithm is no longer included. Consider using [`NCGBX`](#PackageNCGBX).
 

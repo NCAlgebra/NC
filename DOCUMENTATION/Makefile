@@ -26,6 +26,7 @@ $(INSTALLDIRS):
 	$(MAKE) -C $(@:install-%=%) install
 
 MANUAL = MANUAL/Preamble.md \
+	 MANUAL/Version60.md \
 	 MANUAL/Version50.md \
          MANUAL/Running.md \
          MANUAL/Basic.md \
@@ -34,8 +35,10 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/SDP.md \
          MANUAL/TeX.md \
          MANUAL/Reference.md \
+         MANUAL/Installation.md \
          NC.md \
          NCAlgebra/NCAlgebra.md \
+         NCAlgebra/NCOptions.md \
          MANUAL/ExpressionPackages.md \
          NCAlgebra/NonCommutativeMultiply.md \
          NCAlgebra/NCTr.md \
@@ -48,7 +51,7 @@ MANUAL = MANUAL/Preamble.md \
          MANUAL/MatrixPackages.md \
 	 NCAlgebra/NCDot.md \
          NCAlgebra/NCMatrixDecompositions.md \
-         NCAlgebra/MatrixDecompositions.md \
+         NCExtras/MatrixDecompositions.md \
          MANUAL/Output.md \
 	 NCAlgebra/NCOutput.md \
 	 NCTeX/NCTeX.md \
@@ -73,21 +76,24 @@ MANUAL = MANUAL/Preamble.md \
 	 NCSDP/SDPFlat.md \
 	 NCSDP/SDPSylvester.md \
 	 NCSDP/PrimalDual.md \
-         MANUAL/WorkInProgress.md \
 	 NCPoly/NCPolySOS.md \
+         MANUAL/WorkInProgress.md \
 	 NCAlgebra/NCRational.md \
 	 NCAlgebra/NCRealization.md \
 	 MANUAL/Bibliography.md
 
 doc: NCDocument.pdf index.html README.md
 
-README.md: $(MANUAL)
+README.md: $(MANUAL) MANUAL/Cover.md
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
              --bibliography references.bib \
+             --citeproc \
 	     --filter makeindex.py \
 	     --wrap=preserve \
 	     -o README.tmp.md
 	pandoc MANUAL/Cover.md README.tmp.md -t gfm \
+             --bibliography references.bib \
+             --citeproc \
 	     --filter github-mangle.py \
 	     --filter github-math.py \
 	     --wrap=preserve \
@@ -97,6 +103,7 @@ README.md: $(MANUAL)
 index.html: $(MANUAL)
 	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
              --bibliography references.bib \
+             --citeproc \
 	     -o index.html --mathjax
 
 NCDocument.pdf: $(MANUAL)
@@ -116,9 +123,22 @@ NCDocument.pdf: $(MANUAL)
 	$(PDFLATEX) NCDocument.tex
 	rm -f *.aux *.log *.toc *.out
 
+PANDOC = pandoc -t md2nb/md2nb.lua
+../DEMOS/1_MostBasicCommands.nb: MANUAL/Basic.md
+	$(PANDOC) $< -o $@
+
+../DEMOS/2_MoreAdvancedCommands.nb: MANUAL/Advanced.md
+	$(PANDOC) $< -o $@
+
+../DEMOS/3_NCGroebnerBasis.nb: MANUAL/NCGB.md
+	$(PANDOC) $< -o $@
+
+DEMOS = ../DEMOS/1_MostBasicCommands.nb ../DEMOS/2_MoreAdvancedCommands.nb ../DEMOS/3_NCGroebnerBasis.nb 
+demos: $(DEMOS)
+
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
 
-.PHONY: all clean 
+.PHONY: all clean $(DEMOS)
 .PHONY: index.html NCDocument.pdf README.md
 

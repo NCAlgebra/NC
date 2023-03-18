@@ -81,7 +81,7 @@ Begin["`Private`"];
 
   NCTeXForm[x_?MatrixQ] := 
     StringJoin["\\left[ \\begin{array}{", 
-               Table["c", {i, Part[Dimensions[x],2]}], "} ",
+               Table["c", Part[Dimensions[x],2]], "} ",
                NCTeXRowSeparate @@ Map[NCTeXForm, x, {2}], 
                " \\end{array} \\right ]"] /; (Part[Dimensions[x],2] > 10)
 

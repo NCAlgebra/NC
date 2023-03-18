@@ -3,13 +3,13 @@ Block[
    exp1,exp2,
    pattern1,pattern2,pattern3,pattern4,
    zz,yy,
-   x,y,b},
+   x,y,z,b},
 
   (* History:  Nov 2015: CommutativeQ test (mauricio) *)
 
   (* Test SNC *)
 
-  SetNonCommutative[x,y,b];
+  SetNonCommutative[x,y,z,b];
 
   Clear[zz,yy];
   SetNonCommutative[zz];
@@ -40,33 +40,46 @@ Block[
 
   Clear[zz,yy];
 
+  (* Test power *)
+  NCTest[CommutativeQ[x], False];
+  NCTest[CommutativeQ[y], False];
+  NCTest[CommutativeQ[x^2], False];
+  NCTest[CommutativeQ[x^2**y], False];
+  NCTest[CommutativeQ[y**x^2**y], False];
+  NCTest[CommutativeQ[(x**y)^2], False];
+
+  NCTest[CommutativeQ[x^(-1)], False];
+  NCTest[CommutativeQ[x^(-1)**y], False];
+  NCTest[CommutativeQ[y**x^(-1)**y], False];
+  NCTest[CommutativeQ[(x**y)^-1], False];
+
   (* Test rule *)
 
   Clear[zz];
   SetNonCommutative[zz];
 
   pattern1=zz_**b_->b**zz;
-  exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), y**x+x**y**y];
+  exp1=x**y+x**y**z;
+  NCTest[(exp1/.pattern1), y**x+x**y**z];
 
   zz=2;
-  exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), 2y+x**y**y];
+  exp1=x**y+x**y**z;
+  NCTest[(exp1/.pattern1), 2y+x**y**z];
 
-  exp2=y**x+x**y**y;
-  NCTest[(exp2/.pattern1), 2x+x**y**y];
+  exp2=y**x+x**y**z;
+  NCTest[(exp2/.pattern1), 2x+x**y**z];
 
   pattern2=_**b_->b;
-  NCTest[(exp1/.pattern2), y+x**y**y];
-  NCTest[(exp2/.pattern2), x+x**y**y];
+  NCTest[(exp1/.pattern2), y+x**y**z];
+  NCTest[(exp2/.pattern2), x+x**y**z];
 
   pattern3=__**b_->b;
-  NCTest[(exp1/.pattern3), 2y];
-  NCTest[(exp2/.pattern3), x+y];
+  NCTest[(exp1/.pattern3), y+z];
+  NCTest[(exp2/.pattern3), x+z];
 
-  pattern4=__**b_->b;
-  NCTest[(exp1/.pattern4), 2y];
-  NCTest[(exp2/.pattern4), x+y];
+  pattern4=___**b_->b;
+  NCTest[(exp1/.pattern4), y+z];
+  NCTest[(exp2/.pattern4), x+z];
 
   Clear[zz];
 
@@ -76,27 +89,27 @@ Block[
   SNC[zz];
 
   pattern1=zz_**b_:>b**zz;
-  exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), y**x+x**y**y];
+  exp1=x**y+x**y**z;
+  NCTest[(exp1/.pattern1), y**x+x**y**z];
 
   zz=2;
-  exp1=x**y+x**y**y;
-  NCTest[(exp1/.pattern1), y**x+x**y**y];
+  exp1=x**y+x**y**z;
+  NCTest[(exp1/.pattern1), y**x+x**y**z];
 
-  exp2=y**x+x**y**y;
-  NCTest[(exp2/.pattern1), x**y+x**y**y];
+  exp2=y**x+x**y**z;
+  NCTest[(exp2/.pattern1), x**y+x**y**z];
 
   pattern2=_**b_:>b;
-  NCTest[(exp1/.pattern2), y+x**y**y];
-  NCTest[(exp2/.pattern2), x+x**y**y];
+  NCTest[(exp1/.pattern2), y+x**y**z];
+  NCTest[(exp2/.pattern2), x+x**y**z];
 
   pattern3=__**b_:>b;
-  NCTest[(exp1/.pattern3), 2y];
-  NCTest[(exp2/.pattern3), x+y];
+  NCTest[(exp1/.pattern3), y+z];
+  NCTest[(exp2/.pattern3), x+z];
 
-  pattern4=__**b_:>b;
-  NCTest[(exp1/.pattern4), 2y];
-  NCTest[(exp2/.pattern4), x+y];
+  pattern4=___**b_:>b;
+  NCTest[(exp1/.pattern4), y+z];
+  NCTest[(exp2/.pattern4), x+z];
 
   Clear[zz];
 
@@ -160,6 +173,8 @@ Block[
   NCTest[CommutativeQ[Tr[x]], False];
   NCTestCheck[SetCommutativeFunction[Tr], SetCommutative::Protected];
   NCTest[CommutativeQ[Tr[x]], True];
+  NCTestCheck[SetNonCommutativeFunction[Tr], SetNonCommutative::Protected];
+  NCTest[CommutativeQ[Tr[x]], False];
 
   (* Test SetNonCommutativeHold *)
   b = 1;

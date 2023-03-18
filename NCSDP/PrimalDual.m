@@ -262,7 +262,7 @@ Begin[ "`Private`" ]
     numcons = Length[CC]; (* number of constraints*)
 
     (* process symmetric variables *)
-    syms = Table[ False, {i, Length[BB]}];
+    syms = Table[False, Length[BB]];
     Part[ syms, symmetricVariables ] = True;
 
     NCDebug[ 2, 

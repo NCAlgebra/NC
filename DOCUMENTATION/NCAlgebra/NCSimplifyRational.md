@@ -38,15 +38,12 @@ Finally the following pattern based rules are applied:
 | inv[1 + K a b] a           | a inv[1 + K b a]            |
 | inv[A inv[a] + B b] inv[a] | (1/A) inv[1 + (B/A) a b]    | 
 | inv[a] inv[A inv[a] + K b] | (1/A) inv[1 + (B/A) b a]    | 
+| inv[1 + K a b] a b         | (1 - inv[1 + K a b])/K      |
+| inv[1 + K a] a             | (1 - inv[1 + K a])/K        |
+| a b inv[1 + K a b]         | (1 - inv[1 + K a b])/K      |
+| a inv[1 + K a]             | (1 - inv[1 + K a])/K        |
 
-`NCPreSimplifyRational` only applies pattern based rules from the second table above. In addition, the following two rules are applied:
-
-| Original | Transformed |
-| --- | --- |
-| inv[1 + K a b] a b | (1 - inv[1 + K a b])/K |
-| inv[1 + K a] a     | (1 - inv[1 + K a])/K   |
-| a b inv[1 + K a b] | (1 - inv[1 + K a b])/K |
-| a inv[1 + K a]     | (1 - inv[1 + K a])/K   |
+`NCPreSimplifyRational` only applies pattern based rules from the table above once.
 
 Rules in `NCSimplifyRational` and `NCPreSimplifyRational` are applied repeatedly.
 

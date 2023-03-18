@@ -133,6 +133,33 @@ Begin[ "`Private`" ]
     Return[{tmp[[1]], tmp[[2]]}];
   ];
 
+  SDPCoefficients[exp_SparseArray, var_] := Module[
+    {tmp, rules, index, m = Dimensions[exp][[1]], n = Length[var]},
+
+    rules = Drop[ArrayRules[exp], -1];
+    index = rules[[All, 1, 1]];
+    Quiet[
+      Check[  tmp = CoefficientArrays[Values[rules], var];
+          ,
+            tmp = If[MatrixQ[exp], {{},{}}, {0,{}}];
+            Message[SDP::notLinear];
+          ,
+            CoefficientArrays::poly
+      ];
+    ,
+      CoefficientArrays::poly
+    ];
+    If[ Length[tmp] > 2,
+       Message[SDP::notLinear];
+    ];
+      
+    Return[{
+      SparseArray[MapAt[index[[#]] &, Drop[ArrayRules[tmp[[1]]], -1], {All, 1, 1}], {m}]
+     ,
+      SparseArray[MapAt[index[[#]] &, Drop[ArrayRules[tmp[[2]]], -1], {All, 1, 1}], {m, n}]
+    }];
+  ];
+
   Clear[SDPLinearCoefficientArrays];
   SDPLinearCoefficientArrays[exp_?MatrixQ, var_List] := Module[
     {lin, coeffs, m = Dimensions[exp][[2]]},

@@ -100,33 +100,43 @@ Begin[ "`Private`" ]
   (* NCRunTest is private *)
   NCRunTest[Null] := Null;
 
-  NCRunTest[file_] := Block[
-    {keys, results, fail, t}, 
+  NCRunTest[file_, prefix_:""] := Block[
+    {filename = file, keys, results, fail, t}, 
     NCTestCounter = 0;
     WriteString["stdout", "\n> '" <> file <> "'...\n* "];
-    {t, results} = Reap[Timing[Get[file <> ".NCTest"]][[1]]];
-    NCTestResults = 
-      Append[NCTestResults, 
-             MapThread[({file, #1} -> #2)&, 
-                       {Range[1,Length[results[[1]]]], 
-                        results[[1]]} ]];
-    keys = Select[Keys[NCTestResults], (#[[1]] == file)&];
-    results = Map[NCTestResults[#]&, keys];
-    fail = Length[Select[# =!= True &][results]];
-    WriteString["stdout",
-      ToString[Length[keys]] <> 
-      " tests completed in " <> 
-      ToString[Round[1000*t]/1000.] <> 
-      " seconds.\n* " <>
-      ToString[Length[keys] - fail] <>
-      " succeeded.\n* " <>
-      ToString[fail] <> " failed.\n"
+    If[ FindFile[filename <> ".NCTest"] === $Failed,
+	filename = prefix <> file;
     ];
-    Return[{file, Length[keys], fail, t}];
+    If[ FindFile[filename <> ".NCTest"] =!= $Failed,
+	{t, results} = Reap[Timing[Get[filename <> ".NCTest"]][[1]]];
+	NCTestResults = 
+	Append[NCTestResults, 
+	       MapThread[({file, #1} -> #2)&, 
+			 {Range[1,Length[results[[1]]]], 
+			     results[[1]]} ]];
+	keys = Select[Keys[NCTestResults], (#[[1]] == file)&];
+	results = Map[NCTestResults[#]&, keys];
+	fail = Length[Select[# =!= True &][results]];
+	WriteString["stdout",
+		    ToString[Length[keys]] <> 
+		    " tests completed in " <> 
+		    ToString[Round[1000*t]/1000.] <> 
+		    " seconds.\n* " <>
+		    ToString[Length[keys] - fail] <>
+		    " succeeded.\n* " <>
+		    ToString[fail] <> " failed.\n"
+		    ];
+	Return[{file, Length[keys], fail, t}];
+       ,
+	WriteString["stdout",
+		    "* Failed to load test '" <> file <> "'.\n"
+		    ];
+	Return[{file, 0, 0, 0}];
+    ];
   ];
   
   (* NCTestRun is public *)
-  NCTestRun[tests_List] := Map[NCRunTest, tests];
+  NCTestRun[tests_List, prefix_:""] := Map[NCRunTest[#, prefix]&, tests];
 
   NCTestSummarize[Results_] := Block[
     {nbrOfFiles, nbrOfTests, totalFail, totalTime},

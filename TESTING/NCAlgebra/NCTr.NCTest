@@ -76,27 +76,27 @@ Module[
   NCTest[la = SortCyclicPermutation[l], {a, b^T, a^T, c}];
   NCTest[SortedCyclicPermutationQ[la], True];
   NCTest[SortedCyclicPermutationQ[la, tp], False];
-  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[la], False];
+  NCTest[SortedCyclicPermutationQ[NonCommutativeMultiply @@ la], False];
   NCTest[lb = SortCyclicPermutation[tp /@ Reverse[l]], {a, b, a^T, c^T}];
   NCTest[SortedCyclicPermutationQ[lb], True];
   NCTest[SortedCyclicPermutationQ[lb, tp], True];
-  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[lb], True];
+  NCTest[SortedCyclicPermutationQ[NonCommutativeMultiply @@ lb], True];
   (* NCTest[NCTr`Private`OrderingCyclicPermutation[la, lb], {{a, b, a^T, c^T}, 2}]; *)
   NCTest[l = SortCyclicPermutation[l, tp], {a, b, a^T, c^T}];
-  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[l], True];
+  NCTest[SortedCyclicPermutationQ[NonCommutativeMultiply @@ l], True];
 
   l = {c, a, aj[b], aj[a]};
   NCTest[la = SortCyclicPermutation[l], {a, SuperStar[b], SuperStar[a], c}];
   NCTest[SortedCyclicPermutationQ[la], True];
   NCTest[SortedCyclicPermutationQ[la, aj], False];
-  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[la], False];
+  NCTest[SortedCyclicPermutationQ[NonCommutativeMultiply @@ la], False];
   NCTest[lb = SortCyclicPermutation[aj /@ Reverse[l]], {a, b, SuperStar[a], SuperStar[c]}];
   NCTest[SortedCyclicPermutationQ[lb], True];
   NCTest[SortedCyclicPermutationQ[lb, aj], True];
-  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[lb], True];
+  NCTest[SortedCyclicPermutationQ[NonCommutativeMultiply @@ lb], True];
   (* NCTest[NCTr`Private`OrderingCyclicPermutation[la, lb], {{a, b, SuperStar[a], SuperStar[c]}, 2}]; *)
   NCTest[l = SortCyclicPermutation[l, aj], {a, b, SuperStar[a], SuperStar[c]}];
-  NCTest[NCTr`Private`SortedCyclicPermutationExtendedQ[l], True];
+  NCTest[SortedCyclicPermutationQ[NonCommutativeMultiply @@ l], True];
 
   (* Test tr, aj *)
   NCTest[tr[2], 2];

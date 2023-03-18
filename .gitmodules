@@ -1,0 +1,3 @@
+[submodule "DOCUMENTATION/md2nb"]
+	path = DOCUMENTATION/md2nb
+	url = https://github.com/mcdeoliveira/md2nb

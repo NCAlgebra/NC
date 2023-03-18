@@ -13,11 +13,13 @@
 (* :History: *)
 
 BeginPackage[ "NCPolynomial`",
-              "NCDot`",
-              "NCReplace`",
-              "NCUtil`",
-              "NCPolyInterface`",
-	      "NonCommutativeMultiply`" ];
+	      {
+		"NonCommutativeMultiply`",
+		"NCDot`",
+           	"NCReplace`",
+		"NCUtil`"
+	      }
+];
 
 Clear[NCPolynomial, 
       NCToNCPolynomial, NCPolynomialToNC, NCRationalToNCPolynomial,
@@ -43,6 +45,10 @@ Begin[ "`Private`" ]
 
   (* Operators *)
   
+  (* Power *)
+  NCPolynomial /: Power[p_NCPolynomial, n_?Positive] :=
+    NCPDot @@ Table[p, n];
+
   (* Times *)
   NCPolynomial /: Times[s_?CommutativeQ, p_NCPolynomial] := NCPTimes[s, p];
 
@@ -63,13 +69,13 @@ Begin[ "`Private`" ]
   (* NCConsecutiveTerms *)
   
   Clear[NCConsecutiveTerms];
-  NCConsecutiveTerms[(tp|aj)[x_], (tp|aj)[y_], vars_] := 
+  NCConsecutiveTerms[(tp|aj)[x_]^_., (tp|aj)[y_]^_., vars_] := 
     MemberQ[vars, x] == MemberQ[vars, y];
-  NCConsecutiveTerms[(tp|aj)[x_], y_, vars_] := 
+  NCConsecutiveTerms[(tp|aj)[x_]^_., y_^_., vars_] := 
     MemberQ[vars, x] == MemberQ[vars, y];
-  NCConsecutiveTerms[x_, (tp|aj)[y_], vars_] := 
+  NCConsecutiveTerms[x_^_., (tp|aj)[y_]^_., vars_] := 
     MemberQ[vars, x] == MemberQ[vars, y];
-  NCConsecutiveTerms[x_, y_, vars_] := 
+  NCConsecutiveTerms[x_^_., y_^_., vars_] := 
     MemberQ[vars, x] == MemberQ[vars, y];
 
   (* NCSplitMonomials *)
@@ -81,6 +87,11 @@ Begin[ "`Private`" ]
   NCSplitMonomialAux[a_?CommutativeQ tp[m_?NCSymbolOrSubscriptQ], vars_List] := {a,1,tp[m],1};
   NCSplitMonomialAux[aj[m_?NCSymbolOrSubscriptQ], vars_List] := {1,1,aj[m],1};
   NCSplitMonomialAux[a_?CommutativeQ aj[m_?NCSymbolOrSubscriptQ], vars_List] := {a,1,aj[m],1};
+
+  (* Powers *)
+  NCSplitMonomialAux[p:(Power[_?NCSymbolOrSubscriptQ, _?Positive]), vars_List] := {1,1,p,1};
+  NCSplitMonomialAux[p:(Power[(tp|aj)[m_?NCSymbolOrSubscriptQ], _?Positive]), vars_List] := {1,1,p,1};
+
   NCSplitMonomialAux[m_NonCommutativeMultiply, vars_List] := Module[
     {tmp},
 
@@ -89,7 +100,7 @@ Begin[ "`Private`" ]
 
     (* Print["tmp1 = ", tmp]; *)
       
-    (* Prepend a if first term is unknown *)
+    (* Prepend 1 if first term is unknown *)
     If[ NCConsecutiveTerms[vars[[1]], tmp[[1,1]], vars]
         ,
         PrependTo[tmp, {1}];
@@ -115,6 +126,10 @@ Begin[ "`Private`" ]
   ];
   NCSplitMonomialAux[a_?CommutativeQ m_NonCommutativeMultiply, vars_List] :=
     Prepend[Rest[NCSplitMonomialAux[m, vars]], a];
+  NCSplitMonomialAux[a_?CommutativeQ p:(Power[_?NCSymbolOrSubscriptQ, _?Positive]), vars_List] :=
+    Prepend[Rest[NCSplitMonomialAux[p, vars]], a];
+  NCSplitMonomialAux[a_?CommutativeQ p:(Power[(tp|aj)[_?NCSymbolOrSubscriptQ], _?Positive]), vars_List] :=
+    Prepend[Rest[NCSplitMonomialAux[p, vars]], a];
   NCSplitMonomialAux[__] := (Message[NCPolynomial::NotPolynomial]; {$Failed,$Failed,$Failed,$Failed});
           
   Clear[NCSplitMonomials];
@@ -328,7 +343,7 @@ Begin[ "`Private`" ]
       ];
           
       (* What's left? *)
-      p = poly - m0;
+      p = Chop[poly - m0];
 
       (* Expand *)
       p = ExpandNonCommutativeMultiply[p];
@@ -380,37 +395,82 @@ Begin[ "`Private`" ]
       NCRationalToNCPolynomial[rat, NCVariables[rat]];
 
   NCRationalToNCPolynomial[rat_, vars_List] := Block[
-      {invs, ratVars, ruleRat, ruleRatRev, poly, retVal},
+      {invs, ratVars, ruleRat, ruleRatPattern, ruleRatRev, poly, retVal,
+       degrees, n, repeat, repeatRule, debug=False},
     
       (* Grab inv's *)
+      (* invs = NCGrabFirst[rat, p : Power[x_, n_?Negative] -> p]; *)
       invs = NCGrabFunctions[rat, inv];
       
-      (* Print["invs = ", invs]; *)
-      
+      If[debug, Print["invs = ", invs]];
+
       (* Detect inverses which do not depend on the variables and
          exclude them *)
       invs = invs[[Flatten[Position[Apply[And, 
                            Outer[FreeQ[#1, #2]&, invs, vars], {1}], False]]]];
       
-      (* Print["invs = ", invs]; *)
+      If[debug, Print["invs = ", invs]];
+      
+      (* Calculate degrees *)
+      degrees = Map[Replace[#, Power[_,n_] -> -n]&, invs];
+      
+      If[debug, Print["degrees = ", degrees]];
 
       (* Create one new variable for each inv *)
       ratVars = Table[Unique["rat"], Length[invs]];
       SetNonCommutative[ratVars];
 
-      (* Print["ratVars = ", ratVars]; *)
+      If[debug, Print["ratVars = ", ratVars]];
       
       (* Replace inv's with ratVars *)
-      ruleRat = Thread[invs -> ratVars];
+      ruleRat = Thread[invs -> ratVars^degrees];
       poly = rat //. ruleRat;
 
-      (* Print["ruleRat = ", ruleRat]; *)
-      (* Print["poly = ", poly]; *)
+      If[debug,
+	 Print["ruleRat = ", ruleRat];
+	 Print["poly = ", poly];
+      ];
 
       ruleRatRev = Map[Map[Function[x,x//.ruleRat],#,{2}]&, Map[Reverse, ruleRat]];
 
-      (* Print["ruleRatRev = ", ruleRatRev]; *)
+      If[debug, Print["ruleRatRev = ", ruleRatRev]];
 
+      (* cancel exponents *) 
+      ruleRatRev = MapThread[
+        Map[Function[x, Replace[x, z_^n_ -> z^(n/#2)]], #1]&,
+	{ruleRatRev, degrees}];
+
+      If[debug, Print["ruleRatRev = ", ruleRatRev]];
+
+      (* get position of repeated entries *)
+      (* from the discussion in
+         https://mathematica.stackexchange.com/questions/21341/how-to-efficiently-find-positions-of-duplicates *)
+      invs = Map[Part[#, 2] &, ruleRatRev];
+      repeat = GatherBy[Range[Length[invs]], invs[[#]]&];
+
+      If[debug, Print["repeat = ", repeat]];
+
+      If[ Max[Map[Length, repeat]] > 1
+	 ,
+	  (* reduce poly and vars *)
+	  repeatRule = Flatten[
+	    Map[(Thread[ruleRatRev[[Rest[#], 1]] -> 
+	        Table[ruleRatRev[[First[#], 1]], Length[Rest[#]]]]) &, repeat]
+	  ];
+
+	  If[debug, Print["repeatRule = ", repeatRule]];
+
+	  poly = poly //. repeatRule;
+	  ruleRatRev = Map[ruleRatRev[[#[[1]]]] &, repeat] //. repeatRule;
+	  ratVars = Map[ruleRatRev[[#[[1]], 1]] &, repeat];
+	  
+          If[debug,
+             Print["ratVars = ", ratVars];
+	     Print["poly = ", poly];
+	     Print["ruleRatRev = ", ruleRatRev];
+	  ];
+      ];
+       
       Quiet[
         retVal = Check[
           {NCToNCPolynomial[poly, Join[vars, ratVars]], 
@@ -489,11 +549,18 @@ Begin[ "`Private`" ]
   (* NCPDegree *)
 
   Clear[NCPDegreeAux];
-  NCPDegreeAux[m_NonCommutativeMultiply, vars_] := Block[
-     {tmp = m /. {tp[x_] -> x, aj[x_] -> x}},
-     Map[Count[tmp, #]&, vars]
-  ];
+  NCPDegreeAux[m_NonCommutativeMultiply, vars_] :=
+    (* OLD CODE
+    Block[{tmp = m /. {tp[x_] -> x, aj[x_] -> x}},
+          Map[Count[tmp, #]&, vars]
+    ];
+    *)
+    (* NEW CODE *)
+    Exponent[(m /. {NonCommutativeMultiply -> Times,
+  	            tp -> Identity, aj -> Identity}), vars];
   NCPDegreeAux[m_?NCSymbolOrSubscriptQ, vars_] := Exponent[vars, m];
+  NCPDegreeAux[Power[m_?NCSymbolOrSubscriptQ, n_?Positive], vars_] := n*Exponent[vars, m];
+  NCPDegreeAux[Power[(tp|aj)[m_?NCSymbolOrSubscriptQ], n_?Positive], vars_] := n*Exponent[vars, m];
   NCPDegreeAux[(tp|aj)[m_?NCSymbolOrSubscriptQ], vars_] := Exponent[vars, m];
   
   NCPMonomialDegree[p_NCPolynomial] := 

@@ -3,8 +3,12 @@
 (*    Date: July 2009                                                      *)
 (* Version: 0.1 ( initial implementation )                                 *)
 
-BeginPackage[ "NCPoly`",
-              "MatrixDecompositions`"];
+BeginPackage["NCPoly`",
+             {
+	      "MatrixDecompositions`",
+	      "NCDebug`"
+	     }
+];
 
 (* 
    These functions are not implemented here. 
@@ -29,6 +33,7 @@ Clear[NCPoly,
       NCPolyQuadraticChipset,
       NCPolyTermsOfDegree,
       NCPolyTermsOfTotalDegree,
+      NCPolyTermsToList,
       NCPolyReverseMonomials,
       NCPolyTranspose,
       NCPolyAdjoint,
@@ -38,6 +43,7 @@ Clear[NCPoly,
       NCPolyCoefficientArray,
       NCPolyFromCoefficientArray,
       NCPolyFromGramMatrix,
+      NCPolyFromGramMatrixFactors,
       NCPolyGetDigits,
       NCPolyGetIntegers,
       NCPolyNumberOfVariables,
@@ -46,11 +52,15 @@ Clear[NCPoly,
       NCPolyPack,
       NCPolySum,
       NCPolyProduct,
-      NCPolyReduce,
+      NCPolyMonomialProduct,
       NCPolyToRule,
-      NCPolyFullReduce,
+      NCPolyReduceRepeated,
+      NCPolyReduceWithQuotient,
+      NCPolyReduce,
       NCPolyQuotientExpand,
-      NCPolyNormalize];
+      NCPolyNormalize,
+      NCPolyMomentMatrix,
+      NCPolyVeronese];
 
 (* The following generic functions are implemented here *)
 
@@ -64,32 +74,45 @@ Clear[NCFromDigits,
       NCPolyDivideLeading,
       NCPolyVariables,
       NCPolyDisplay,
+      NCPolyToList,
       NCPolyOrderType,
       NCPolyPossibleZeroQ];
 
 Clear[NCPolyHankelMatrix,
       NCPolyRealization,
       NCPolyGramMatrixDimensions,
-      NCPolyGramMatrix];
+      NCPolyGramMatrix,
+      NCPolySelfAdjointQ];
 
 Get["NCPoly.usage", CharacterEncoding->"UTF8"];
 
+NCPoly::NotSelfAdjoint = "Polynomial is not self-adjoint.";
 NCPoly::NotPolynomial = "Expression is not a simple nc polynomial.";
 NCPoly::SizeMismatch = "Number of monomials and coefficients do not match.";
 NCPoly::InvalidList = "Invalid list of variables.";
 NCMonomialToDigits::InvalidSymbol = "Monomial contain symbol not present in variable list";
 NCPolyCoefficientArray::InvalidDegree = "Provided degree has to be greater or equal to the polynomial degree.";
 NCPolyFromCoefficientArray::InvalidDegree = "Array size does not match an integer degree.";
+NCPolyReduce::MaxIter = "Maximum number of iterations exceeded in NCPolyReduce. Result might not be completely reduced.";
 
 Options[NCPoly] = { 
     TransposePairs -> {}, 
     SelfAdjointPairs -> {} 
 };
 
+Options[NCPolyReduce] = {
+  ReturnQuotient -> True,
+  Complete -> False,
+  MaxIterationsFactor -> 10,
+  MaxDepth -> 1,
+  ZeroTest -> NCPolyPossibleZeroQ,
+  DebugLevel -> 0
+};
+
 Begin["`Private`"];
 
   (* Some facilities are implemented here. 
-     ATTENTION: the main driver function are not implemented. *)
+     ATTENTION: the main driver function is not implemented. *)
 
   (* NCPoly Order type *)
   NCPolyOrderType[p_NCPoly] := 
@@ -112,10 +135,10 @@ Begin["`Private`"];
 
   NCPoly /: Times[0, s_NCPoly] := 0;
 
+  NCPoly /: Plus[r_NCPoly, s__NCPoly] := NCPolySum[r, s];
+
   NCPoly /: Plus[r_, s_NCPoly] := 
     NCPolySum[NCPolyConstant[r, s[[1]]], s];
-
-  NCPoly /: Plus[r_NCPoly, s_NCPoly] := NCPolySum[r, s];
 
   (* NonCommutativeMultiply *)
   NCPolyProduct[r_, s_NCPoly] := Times[r, s];
@@ -134,16 +157,16 @@ Begin["`Private`"];
 
   (* Power *)
   NCPoly /: Power[b_NCPoly, c_Integer?Positive] := 
-    Apply[NCPolyProduct, Table[b, {c}]];
+    Apply[NCPolyProduct, Table[b, c]];
 
   NCPoly /: Power[b_NCPoly, c_Integer?Negative] := 
-    inv[Apply[NCPolyProduct, Table[b, {-c}]]];
+    inv[Apply[NCPolyProduct, Table[b, -c]]];
 
   (* Reduce and related functions *)
   Clear[NCPolyPossibleZeroQ];
-  NCPolyPossibleZeroQ[exp_?NumberQ] := PossibleZeroQ[exp];
-  NCPolyPossibleZeroQ[exp_] := PossibleZeroQ[Simplify[exp]];
-    
+  NCPolyPossibleZeroQ =
+    Function[x, If[ NumberQ[x], PossibleZeroQ[x], PossibleZeroQ[Simplify[x]] ]];
+
   Clear[QuotientExpand];
   QuotientExpand[ {c_, l_NCPoly, r_NCPoly}, g_NCPoly ] := c * NCPolyProduct[l, g, r];
   QuotientExpand[ {c_, l_,       r_NCPoly}, g_NCPoly ] := c * l * NCPolyProduct[g, r];
@@ -177,43 +200,21 @@ Begin["`Private`"];
       1
     ];
 
-  NCPolyFullReduce[{g__NCPoly}, complete_:False, debugLevel_:0] := Block[
-    { r = {g}, m, qi, ri, rii, i, modified = False },
-
-    m = Length[r];
-    If[ m > 1,
-      For [i = 1, i <= m, i++, 
-        rii = r[[i]];
-        {qi, ri} = NCPolyReduce[rii, Drop[r, {i}], complete, debugLevel];
-        If [ NCPolyPossibleZeroQ[ri],
-             (* If zero reminder *)
-             r = Delete[r, i];
-             i--; m--;
-             If[ m <= 1, Break[]; ];
-            ,
-             (* If not zero reminder *)
-             If [ ri =!= rii,
-               Part[r, i] = ri;
-               modified = True;
-             ];
-        ];
-      ];
-    ];
-
-    Return[ If [ modified, NCPolyFullReduce[r, complete, debugLevel], r] ];
-
-  ];
+  NCPolyReduceRepeated[{g__NCPoly},
+                   options:OptionsPattern[NCPolyReduce]] :=
+    FixedPoint[NCPolyReduce[#, options]&, {g}];
 
   NCPolyReduce[{f_NCPoly}, {}, args__] := {f};
 
   NCPolyReduce[{}, args__] := {};
 
-  NCPolyReduce[{f__NCPoly}, {g__NCPoly}, complete_:False, debugLevel_:0] := 
-  Block[{ gs = {g}, fs = {f}, m, qi, ri, i },
+  NCPolyReduce[{f__NCPoly}, {g__NCPoly},
+	       options:OptionsPattern[NCPolyReduce]] := Block[
+    { gs = {g}, fs = {f}, m, ri, i },
 
     m = Length[fs];
     For [i = 1, i <= m, i++, 
-      {qi, ri} = NCPolyReduce[fs[[i]], gs, complete, debugLevel];
+      ri = NCPolyReduce[fs[[i]], gs, options];
       If [ NCPolyPossibleZeroQ[ri],
            (* If zero reminder, remove *)
            fs = Delete[fs, i];
@@ -228,13 +229,14 @@ Begin["`Private`"];
 
   ];
 
-  NCPolyReduce[{g__NCPoly}, complete_:False, debugLevel_:0] := Block[
-    { r = {g}, m, qi, ri, i },
+  NCPolyReduce[{g__NCPoly},
+	       options:OptionsPattern[NCPolyReduce]] := Block[
+    { r = {g}, m, ri, i },
 
     m = Length[r];
     If[ m > 1,
       For [i = 1, i <= m, i++, 
-        {qi, ri} = NCPolyReduce[r[[i]], Drop[r, {i}], complete, debugLevel];
+        ri = NCPolyReduce[r[[i]], Drop[r, {i}], options];
         If [ NCPolyPossibleZeroQ[ri],
              (* If zero reminder, remove *)
              r = Delete[r, i];
@@ -251,39 +253,126 @@ Begin["`Private`"];
 
   ];
 
-  NCPolyReduce[f_NCPoly, {g__NCPoly}, complete_:False, debugLevel_:0] := Block[
-    { gs = {g}, m, ff, q, qi, r, i },
+  NCPolyReduceWithQuotient[f_NCPoly, {g__NCPoly},
+			   options:OptionsPattern[NCPolyReduce]] := Block[
+  { gs = {g}, m, ff, q, qi, r, i,
+    complete = OptionValue[NCPolyReduce, {options}, Complete],
+    maxDepth = OptionValue[NCPolyReduce, {options}, MaxDepth],
+    debugLevel = OptionValue[NCPolyReduce, {options}, DebugLevel] },
+
+    (* overide maxDepth if complete *)
+    If[ complete,
+	maxDepth = Infinity;
+    ];
+
+    If[ debugLevel > 0,
+	Print["> complete = ", complete];
+	Print["> maxDepth = ", maxDepth];
+    ];
 
     m = Length[gs];
-    ff = f;
+    r = ff = f;
     q = {};
-    i = 1;
-    While [i <= m, 
-      (* Reduce current dividend *)
-      {qi, r} = NCPolyReduce[ff, gs[[i]], complete, debugLevel];
-      If [ r =!= ff,
-        (* Append to remainder *)
-        AppendTo[q, {qi, i} ];
-        (* If zero reminder *)
-        If[ NCPolyPossibleZeroQ[r],
-           (* terminate *)
-           If[ debugLevel > 1, Print["no reminder, terminate"]; ];
-           r = 0;
-           Break[];
-          ,
-           (* update dividend, go back to first term and continue *)
-           ff = r;
-           i = 1;
-           Continue[];
+    j = 1;
+    While [r =!= 0 && j <= maxDepth && j <= Length[ff[[2]]],
+      (* start from top of the list *)
+      If[ debugLevel > 0, Print["> j = ", j]; ];
+      i = 1;
+      While [i <= m,
+        (* Reduce current dividend *)
+        If[ debugLevel > 0, Print["> i = ", i]; ];
+        {qi, r} = NCPolyReduceWithQuotient[ff, gs[[i]], j, options];
+        If [ r =!= ff,
+          (* Append to remainder *)
+          AppendTo[q, {qi, i} ];
+          (* If zero remainder *)
+          If[ NCPolyPossibleZeroQ[r],
+             (* terminate *)
+             If[ debugLevel > 1,
+	         Print["> zero reminder, terminate"]; ];
+             r = 0;
+             Break[];
+            ,
+             (* update dividend, go back to first term and continue *)
+             ff = r;
+             i = 1;
+             Continue[];
+          ];
         ];
+        (* continue *)
+        i++;
       ];
-      (* continue *)
-      i++;
+      (* continue to next term *)
+      j++;
     ];
 
     Return[{q,r}];
 
   ];
+
+  NCPolyReduce[f_NCPoly, {g__NCPoly},
+	       options:OptionsPattern[NCPolyReduce]] :=  Block[
+    { gs = {g}, m, ff, r, i,
+      complete = OptionValue[NCPolyReduce, {options}, Complete],
+      maxDepth = OptionValue[NCPolyReduce, {options}, MaxDepth],
+      debugLevel = OptionValue[NCPolyReduce, {options}, DebugLevel] },
+
+    (* overide maxDepth if complete *)
+    If[ complete,
+	maxDepth = Infinity;
+    ];
+
+    If[ debugLevel > 0,
+	Print["> complete = ", complete];
+	Print["> maxDepth = ", maxDepth];
+    ];
+
+    m = Length[gs];
+    r = ff = f;
+    j = 1;
+    While [r =!= 0 && j <= maxDepth && j <= Length[ff[[2]]],
+      (* start from top of the list *)
+      If[ debugLevel > 0, Print["> j = ", j] ];
+      i = 1;
+      While [i <= m,
+        (* Reduce current dividend *)
+        If[ debugLevel > 0, Print["> i = ", i] ];
+        r = NCPolyReduce[ff, gs[[i]], j, options];
+        If[ debugLevel > 1, Print["> r = ", r] ];
+        If [ r =!= ff,
+          (* If zero remainder *)
+          If[ NCPolyPossibleZeroQ[r],
+             (* terminate *)
+             If[ debugLevel > 1,
+	       Print["> zero reminder, terminate"]; ];
+             r = 0;
+             Break[];
+            ,
+             (* update dividend, go back to first term and continue *)
+             ff = r;
+             i = 1;
+             Continue[];
+          ];
+        ];
+        (* continue to next poly in the base *)
+        i++;
+      ];
+      (* continue to next term *)
+      j++;
+    ];
+
+    If[ debugLevel > 0, Print["> terminated"] ];
+
+    Return[r];
+  ];
+
+  NCPolyReduce[f_NCPoly, g_NCPoly,
+	       options:OptionsPattern[NCPolyReduce]] :=
+    NCPolyReduce[f, {g}, options];
+
+  NCPolyReduce[f_NCPoly, g_NCPoly, j_Integer:1,
+	       options:OptionsPattern[NCPolyReduce]] :=
+    NCPolyReduceWithQuotient[f, g, j, options, ReturnQuotient -> False];
 
   (* Auxiliary routines related to degree and integer indexing *)
 
@@ -296,10 +385,10 @@ Begin["`Private`"];
   (* From digits *)
 
   NCFromDigits[{}, {base__}] := 
-    Table[0, {i, Length[{base}] + 1}];
+    Table[0, Length[{base}] + 1];
 
   NCFromDigits[{}, base_] := 
-    Table[0, {i, 2}];
+    Table[0, 2];
 
   NCFromDigits[{p__List}, base_] := 
     Map[NCFromDigits[#, base]&, {p}];
@@ -562,6 +651,11 @@ Begin["`Private`"];
 
   NCPolyDisplay[p___] := $Failed;
 
+  (* NCPolyToList *)
+
+  NCPolyToList[p_NCPoly] :=
+    Map[NCPoly[p[[1]], Association[{##}]] &, Normal[p[[2]]], {1}];
+    
   (* NCPolySplitDigits *)
       
   NCPolySplitDigits[digits_List] :=
@@ -875,8 +969,11 @@ Begin["`Private`"];
 
     digits = NCPolyGetDigits[p];
     base = p[[1]];
+    
+    (* split digits *)
     sdigits = Map[NCPolyGramMatrixAux1, digits];
 
+    (* convert to index *)
     index = Map[NCPolyGramMatrixAux2[#, base] &, sdigits];
     deg = Max[Max /@ index];
 
@@ -908,7 +1005,10 @@ Begin["`Private`"];
     {base = {Total[NCPolyVarsToIntegers[vars]]}},
     Return[NCDigitsToIndex[NCIntegerDigits[{Ceiling[degree/2]+1,0}, base], base] - 1];
   ];
-     
+
+  NCPolySelfAdjointQ[p_NCPoly] := 
+    NCPolyPossibleZeroQ[p - NCPolyAdjoint[p]];
+    
 End[]
       
 (* Load NCPolyAssociationGraded *)

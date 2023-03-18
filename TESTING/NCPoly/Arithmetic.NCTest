@@ -62,4 +62,14 @@ Block[
   p3=p1-1;
   NCTest[Cases[NCPolyGetCoefficients[p3],Except[0]], {-1, -2, 3}];
 
+  (* CheapSum *)
+  p3=NCPolyAssociationGraded`Private`NCPolyCheapSum[p1, p1];
+  NCTest[NCPolyGetCoefficients[p3], 2*NCPolyGetCoefficients[p1]];
+
+  (* CheapSum leaves all monomials *)
+  p3=NCPolyAssociationGraded`Private`NCPolyCheapSum[p1, -p1];
+  NCTest[NCPolyGetCoefficients[p3], 0*NCPolyGetCoefficients[p1]];
+
+  p3=NCPolyPack[p3];
+  NCTest[p3, 0];
 ];

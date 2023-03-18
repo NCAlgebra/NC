@@ -1,9 +1,12 @@
-SetOptions[NC, SmallCapSymbolsNonCommutative -> False, ShowBanner -> False];
+<< NCOptions`
+SetOptions[NCOptions,
+           SmallCapSymbolsNonCommutative -> False,
+	   ShowBanner -> False];
 Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 << NCGBX`
 
 Block[
-  {a,b,c,d,
+  {a,b,c,d,x,
   vars,NCExp,PolyExp
   },
   
@@ -12,7 +15,7 @@ Block[
   (* TESTING SetKnowns/SetUnknowns -- BEGIN *)
 
   Clear[a,b,c,d];
-  SNC[a,b,c,d];
+  SNC[a,b,c,d,x];
 
   SetKnowns[a,b];
   SetUnknowns[c,d];
@@ -88,11 +91,11 @@ Block[
 
   NCTestCheck[SetMonomialOrder[{a,{b}},c],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   NCTestCheck[SetMonomialOrder[{a,b},{{c}}],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   (* Monomial Order with inv's *)
   
@@ -121,7 +124,7 @@ Block[
 
   NCTestCheck[SetMonomialOrder[{a,b},tp[1+c]],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   SetMonomialOrder[{a,b},aj[c]];
   NCTest[GetMonomialOrder[], {{a,b},{aj[c]}}];
@@ -134,11 +137,11 @@ Block[
 
   NCTestCheck[SetMonomialOrder[{a,b},aj[1+c]],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   NCTestCheck[SetMonomialOrder[{a,b},Exp[c]],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   (* Monomial Order with tps's, ajs and Subscript *)
   
@@ -153,7 +156,7 @@ Block[
 
   NCTestCheck[SetMonomialOrder[{Subscript[a,1],b},tp[1+Subscript[c,1]]],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   SetMonomialOrder[{Subscript[a,1],b},aj[Subscript[c,1]]];
   NCTest[GetMonomialOrder[], {{Subscript[a,1],b},{aj[Subscript[c,1]]}}];
@@ -166,11 +169,11 @@ Block[
 
   NCTestCheck[SetMonomialOrder[{Subscript[a,1],b},aj[1+Subscript[c,1]]],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   NCTestCheck[SetMonomialOrder[{Subscript[a,1],b},Exp[Subscript[c,1]]],
 	      $Failed,
-	      SetMonomialOrder::InvalidOrder];
+	      NCMonomialOrder::InvalidOrder];
 
   (* TESTING SetMonomialOrder -- END *)
 
@@ -189,28 +192,37 @@ Block[
   (* TESTING NCMakeGB -- BEGIN *)
 
   SetMonomialOrder[a,b];
-  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> True],
-         {a ** b -> 0, b ** a -> a, a ** a -> 0}];
-  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> False],
-         {a ** b, b ** a - a, a ** a}];
-	 
   NCTest[NCMakeGB[{a,b}, VerboseLevel -> 0, ReturnRules -> True],
          {a -> 0, b -> 0}];
   NCTest[NCMakeGB[{a,b}, VerboseLevel -> 0, ReturnRules -> False],
          {a, b}];
-	   
+
+  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> True],
+         {a ** a -> 0, a ** b -> 0, b ** a -> a}];
+  NCTest[NCMakeGB[{b**a**b, b**a - a}, VerboseLevel -> 0, ReturnRules -> False],
+         {a ** a, a ** b, b ** a - a}];
+
+  NCTest[NCMakeGB[{b**b**a**b, b**b**a - b**a}, VerboseLevel -> 0, ReturnRules -> True],
+         {b ** a ** b -> 0, b^2 ** a -> b ** a}];
+
   NCTestCheck[NCMakeGB[{a,b,c}],
 	      $Failed,
-              NCMakeGB::MissingSymbol];
+              NCRationalToNCPoly::MissingSymbol];
 
   NCTestCheck[NCMakeGB[{a,b,inv[a]}, VerboseLevel -> 0],
 	      {1 -> 0},
-              NCMakeGB::AdditionalRelations];
+              NCRationalToNCPoly::AdditionalRelations];
 
   NCTestCheck[NCMakeGB[{a,b,kinv[a]}],
 	      $Failed,
-              NCMakeGB::UnknownFunction];
+              NCRationalToNCPoly::UnknownFunction];
 
-  (* TESTING NCMakeGB -- END *)
+  SetMonomialOrder[{a,inv[a],b},{x}];
+  NCTest[NCMakeGB[{a**x-b}, VerboseLevel -> 0, ReturnRules -> True],
+         { x -> inv[a] ** b}];
+
+ (* TESTING NCMakeGB -- END *)
+
+  (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 
 ];
