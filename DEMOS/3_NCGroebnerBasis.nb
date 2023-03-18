@@ -1,782 +1,490 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 10.4' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       158,          7]
-NotebookDataLength[     29007,        774]
-NotebookOptionsPosition[     23323,        687]
-NotebookOutlinePosition[     23758,        703]
-CellTagsIndexPosition[     23715,        700]
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData[{
- RowBox[{"<<", "NC`"}], "\[IndentingNewLine]", 
- RowBox[{"<<", "NCAlgebra`"}], "\[IndentingNewLine]", 
- RowBox[{"<<", "NCGBX`"}]}], "Input",
- CellChangeTimes->{{3.687832863604886*^9, 3.6878328689120617`*^9}, {
-  3.688135558440503*^9, 3.688135561217651*^9}},
- CellLabel->
-  "In[371]:=",ExpressionUUID->"a87a9aa0-6fe5-452d-a500-f5011f4770c4"],
-
-Cell[CellGroupData[{
-
-Cell["Solving equations", "Title",
- CellChangeTimes->{{3.688135701076502*^9, 3.688135704522422*^9}, {
-  3.688477384325137*^9, 
-  3.6884773869168663`*^9}},ExpressionUUID->"b005555a-dabd-49a7-9e77-\
-425a86d91b7c"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "x"}], "]"}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.687954589200034*^9, 3.687954590730362*^9}, 
-   3.688477449297782*^9},
- CellLabel->
-  "In[374]:=",ExpressionUUID->"6a6e94a2-9357-4556-9b6e-ef76efeab9da"],
-
-Cell[BoxData[
- RowBox[{"PrintMonomialOrder", "[", "]"}]], "Input",
- CellChangeTimes->{{3.688135618809787*^9, 3.688135625617694*^9}},
- CellLabel->
-  "In[375]:=",ExpressionUUID->"f8c6d405-fb2f-4a89-8921-ec95faf3331a"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"rels", "=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"a", "**", "x", "**", "a"}], "-", "c"}], ",", 
-     RowBox[{
-      RowBox[{"b", "**", "a"}], "-", "1"}], ",", 
-     RowBox[{
-      RowBox[{"a", "**", "b"}], "-", "1"}]}], "}"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.6881356328173447`*^9, 3.6881356659738827`*^9}},
- CellLabel->
-  "In[376]:=",ExpressionUUID->"b040b03c-30a9-4410-acc1-6e90d3d996d1"],
-
-Cell[BoxData[
- RowBox[{"gb", "=", 
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{"rels", ",", "10"}], "]"}]}]], "Input",
- CellChangeTimes->{{3.687954568558671*^9, 3.6879545685606947`*^9}, {
-  3.6881356433706703`*^9, 3.688135668766098*^9}},
- CellLabel->
-  "In[377]:=",ExpressionUUID->"68e979d1-dffd-4cd5-9185-174ff4a68829"],
-
-Cell[BoxData[
- RowBox[{"ColumnForm", "[", "gb", "]"}]], "Input",
- CellChangeTimes->{{3.688135691814547*^9, 3.6881356943524523`*^9}},
- CellLabel->
-  "In[378]:=",ExpressionUUID->"21a5ed4a-1d63-4731-b95d-4450382d9865"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["A slightly more challenging example", "Title",
- CellChangeTimes->{{3.688135701076502*^9, 3.6881357150475073`*^9}, {
-  3.688477427817161*^9, 
-  3.688477434345105*^9}},ExpressionUUID->"62be30ff-d46b-4235-8db2-\
-dcef7cd0eb01"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "x"}], "]"}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.687954589200034*^9, 3.687954590730362*^9}, 
-   3.688477457814213*^9},
- CellLabel->
-  "In[379]:=",ExpressionUUID->"d8c866c6-b92f-46a7-804a-891d2c6f3c1c"],
-
-Cell[BoxData[
- RowBox[{"PrintMonomialOrder", "[", "]"}]], "Input",
- CellChangeTimes->{{3.688135618809787*^9, 3.688135625617694*^9}},
- CellLabel->
-  "In[380]:=",ExpressionUUID->"f7bc4aa1-45e9-43cc-a78c-7ca48f4fa7c6"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"rels", "=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"a", "**", "x"}], "-", "c"}], ",", 
-     RowBox[{
-      RowBox[{"a", "**", "b", "**", "a"}], "-", "a"}], ",", 
-     RowBox[{
-      RowBox[{"b", "**", "a", "**", "b"}], "-", "b"}]}], "}"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.6881356328173447`*^9, 3.6881356659738827`*^9}, 
-   3.688135832100725*^9},
- CellLabel->
-  "In[381]:=",ExpressionUUID->"35993488-3417-499b-b9e2-a34598f88d8b"],
-
-Cell[BoxData[
- RowBox[{"gb", "=", 
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{"rels", ",", "10"}], "]"}]}]], "Input",
- CellChangeTimes->{{3.687954568558671*^9, 3.6879545685606947`*^9}, {
-  3.6881356433706703`*^9, 3.688135668766098*^9}},
- CellLabel->
-  "In[382]:=",ExpressionUUID->"8ec28dba-4079-49de-bd73-deed8fd24552"],
-
-Cell[BoxData[
- RowBox[{"ColumnForm", "[", "gb", "]"}]], "Input",
- CellChangeTimes->{{3.688135691814547*^9, 3.6881356943524523`*^9}},
- CellLabel->
-  "In[383]:=",ExpressionUUID->"799cfad6-e53c-4cea-9a7a-19f40a1a1bee"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Minimal versus reduced", "Title",
- CellChangeTimes->{{3.688135701076502*^9, 3.6881357150475073`*^9}, {
-  3.688477427817161*^9, 3.688477434345105*^9}, {3.771181562417944*^9, 
-  3.771181577130847*^9}},ExpressionUUID->"6f9ec633-ad2b-4f92-b2e9-\
-ef88f1abf221"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{"x", ",", "y"}], "]"}], ";"}]], "Input",
- CellChangeTimes->{{3.687954589200034*^9, 3.687954590730362*^9}, 
-   3.688477457814213*^9, {3.7711815811679153`*^9, 3.7711815835358553`*^9}},
- CellLabel->
-  "In[384]:=",ExpressionUUID->"fc3a297b-c956-4f4f-95e6-589db986e315"],
-
-Cell[BoxData[
- RowBox[{"PrintMonomialOrder", "[", "]"}]], "Input",
- CellChangeTimes->{{3.688135618809787*^9, 3.688135625617694*^9}},
- CellLabel->
-  "In[385]:=",ExpressionUUID->"f66a3ffe-12b7-4627-a46f-359da43abea8"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"rels", "=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"x", "^", "3"}], "-", 
-      RowBox[{"2", " ", 
-       RowBox[{"x", "**", "y"}]}]}], ",", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"x", "^", "2"}], "**", "y"}], "-", 
-      RowBox[{"2", " ", 
-       RowBox[{"y", "^", "2"}]}], "+", "x"}]}], "}"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.6881356328173447`*^9, 3.6881356659738827`*^9}, 
-   3.688135832100725*^9, {3.7711815982167664`*^9, 3.7711816012117634`*^9}},
- CellLabel->
-  "In[386]:=",ExpressionUUID->"ec9d4a54-e290-479a-8c09-30c112a7e94c"],
-
-Cell[BoxData[
- RowBox[{"gb", "=", 
-  RowBox[{"NCMakeGB", "[", "rels", "]"}]}]], "Input",
- CellChangeTimes->{{3.687954568558671*^9, 3.6879545685606947`*^9}, {
-  3.6881356433706703`*^9, 3.688135668766098*^9}, {3.7711816062172346`*^9, 
-  3.771181606846692*^9}},
- CellLabel->
-  "In[387]:=",ExpressionUUID->"41e95c8c-5221-4f68-9d1d-f3f3e38889a6"],
-
-Cell[BoxData[
- RowBox[{"ColumnForm", "[", "gb", "]"}]], "Input",
- CellChangeTimes->{{3.688135691814547*^9, 3.6881356943524523`*^9}},
- CellLabel->
-  "In[388]:=",ExpressionUUID->"932be6cf-82d6-47b4-b09a-e24c3174eb04"],
-
-Cell[BoxData[
- RowBox[{"gb", "=", 
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{"rels", ",", 
-    RowBox[{"ReduceBasis", "\[Rule]", "True"}]}], "]"}]}]], "Input",
- CellChangeTimes->{{3.687954568558671*^9, 3.6879545685606947`*^9}, {
-  3.6881356433706703`*^9, 3.688135668766098*^9}, {3.7711816062172346`*^9, 
-  3.7711816240428586`*^9}},
- CellLabel->
-  "In[389]:=",ExpressionUUID->"350318fa-e0bd-46d0-a51d-2aae0f7a289d"],
-
-Cell[BoxData[
- RowBox[{"ColumnForm", "[", "gb", "]"}]], "Input",
- CellChangeTimes->{{3.688135691814547*^9, 3.6881356943524523`*^9}},
- CellLabel->
-  "In[390]:=",ExpressionUUID->"981e693c-3bf0-4701-bedd-fcbbe7ff880b"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Simplifying polynomial expressions", "Title",
- CellChangeTimes->{{3.688135701076502*^9, 3.6881357150475073`*^9}, {
-  3.688309588476801*^9, 3.688309588628709*^9}, {3.688477737840186*^9, 
-  3.688477750264641*^9}},ExpressionUUID->"77195456-6e07-40b8-9177-\
-c413f7e4c8a2"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{"a", ",", "b"}], "]"}], ";"}]], "Input",
- CellChangeTimes->{{3.687954589200034*^9, 3.687954590730362*^9}, {
-   3.688309674446925*^9, 3.688309680073332*^9}, 3.688477777533257*^9},
- CellLabel->
-  "In[391]:=",ExpressionUUID->"676d6b0e-c4bf-440f-988d-f9e63e3b7ee0"],
-
-Cell[BoxData[
- RowBox[{"PrintMonomialOrder", "[", "]"}]], "Input",
- CellChangeTimes->{{3.688135618809787*^9, 3.688135625617694*^9}},
- CellLabel->
-  "In[392]:=",ExpressionUUID->"494b18d0-ccac-4608-9163-22a5204c3d81"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"rels", "=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"a", "**", "b", "**", "a"}], "-", "b"}], "}"}]}], ";"}]], "Input",\
-
- CellChangeTimes->{{3.6881356328173447`*^9, 3.6881356659738827`*^9}, 
-   3.688135832100725*^9, {3.68830960393382*^9, 3.688309660430517*^9}, {
-   3.688309696493335*^9, 3.6883096985237417`*^9}},
- CellLabel->
-  "In[393]:=",ExpressionUUID->"2561da51-7cab-41bb-b047-94bb3a1212c8"],
-
-Cell[BoxData[
- RowBox[{"rules", "=", 
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{"rels", ",", "10"}], "]"}]}]], "Input",
- CellChangeTimes->{{3.687954568558671*^9, 3.6879545685606947`*^9}, {
-  3.6881356433706703`*^9, 3.688135668766098*^9}, {3.688310082647128*^9, 
-  3.688310084143045*^9}},
- CellLabel->
-  "In[394]:=",ExpressionUUID->"1437bcdd-6f63-449e-ada3-b72b4dff52e6"],
-
-Cell[BoxData[
- RowBox[{"ColumnForm", "[", "rules", "]"}]], "Input",
- CellChangeTimes->{{3.688135691814547*^9, 3.6881356943524523`*^9}, {
-  3.688310086279964*^9, 3.688310087422632*^9}},
- CellLabel->
-  "In[395]:=",ExpressionUUID->"f23c17e3-6280-4373-bf24-f08b9e6bbc84"],
-
-Cell[BoxData[{
- RowBox[{"expr", "=", 
-  RowBox[{
-   RowBox[{"b", "**", "b", "**", "a", "**", "a"}], "-", 
-   RowBox[{"a", "**", "a", "**", "b", "**", "b"}], "+", 
-   RowBox[{"a", "**", "b", "**", "a"}]}]}], "\[IndentingNewLine]", 
- RowBox[{"simp", "=", 
-  RowBox[{"NCReplaceRepeated", "[", 
-   RowBox[{"expr", ",", "rules"}], "]"}]}]}], "Input",
- CellChangeTimes->{{3.688310038431041*^9, 3.688310065606411*^9}, {
-  3.6883101114196997`*^9, 3.688310157795773*^9}, {3.6883108063998833`*^9, 
-  3.6883108432172127`*^9}, {3.688311561198819*^9, 3.688311561910726*^9}},
- CellLabel->
-  "In[396]:=",ExpressionUUID->"026b5b2d-2735-40d8-ad16-ba25ff45929e"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Simplifying rational expressions", "Title",
- CellChangeTimes->{{3.688135701076502*^9, 3.6881357150475073`*^9}, {
-  3.688136456942943*^9, 3.688136457029443*^9}, {3.688350345169989*^9, 
-  3.6883503452878723`*^9}, {3.688477856603416*^9, 
-  3.688477865301914*^9}},ExpressionUUID->"0adab046-338f-4e19-b4bf-\
-17805e9d9d5d"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{"x", ",", 
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x"}], "]"}]}], "]"}], ";"}]], "Input",
- CellChangeTimes->{{3.687975063051791*^9, 3.687975076354472*^9}, {
-  3.6879751206841908`*^9, 3.687975184750493*^9}, {3.687975238827635*^9, 
-  3.687975238961174*^9}, {3.687975299132147*^9, 3.687975299427479*^9}, {
-  3.6882256170036573`*^9, 3.68822564003551*^9}, {3.688309274866507*^9, 
-  3.688309275186655*^9}},
- CellLabel->
-  "In[398]:=",ExpressionUUID->"d3ade397-d38a-4957-95e1-8fd4fd52146d"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"rules", "=", 
-   RowBox[{"NCMakeGB", "[", 
-    RowBox[{
-     RowBox[{"{", "}"}], ",", "3"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"ColumnForm", "[", "rules", "]"}]}], "Input",
- CellChangeTimes->{{3.6879750486296186`*^9, 3.687975048632431*^9}, {
-   3.687975082266296*^9, 3.68797510611477*^9}, {3.687975139869297*^9, 
-   3.687975156150104*^9}, 3.68797520945811*^9, {3.687975245106255*^9, 
-   3.6879752505215178`*^9}, {3.6882256618480453`*^9, 
-   3.6882256624637327`*^9}, {3.6882257820894012`*^9, 3.688225800613751*^9}},
- CellLabel->
-  "In[399]:=",ExpressionUUID->"409098ff-abc6-4261-a2fc-c650e50e2c22"],
-
-Cell[BoxData[{
- RowBox[{"expr", "=", 
-  RowBox[{
-   RowBox[{"x", "**", 
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x"}], "]"}]}], "-", 
-   RowBox[{
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x"}], "]"}], "**", "x"}]}]}], "\[IndentingNewLine]", 
- RowBox[{"NCReplaceRepeated", "[", 
-  RowBox[{"expr", ",", "rules"}], "]"}]}], "Input",
- CellChangeTimes->{{3.6882256652957287`*^9, 3.688225674577784*^9}, {
-  3.6883093512169647`*^9, 3.688309365215502*^9}, {3.688478290574853*^9, 
-  3.688478298474599*^9}},
- CellLabel->
-  "In[401]:=",ExpressionUUID->"94a1f6e7-7cd2-4aaf-bd0f-cfed44071f2a"],
-
-Cell[BoxData[{
- RowBox[{"expr", "=", 
-  RowBox[{
-   RowBox[{"inv", "[", 
-    RowBox[{"1", "-", "x", "-", 
-     RowBox[{"y", "**", 
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x"}], "]"}], "**", "y"}]}], "]"}], "-", 
-   RowBox[{
-    RowBox[{"1", "/", "2"}], 
-    RowBox[{"(", 
-     RowBox[{
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x", "+", "y"}], "]"}], "+", 
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x", "-", "y"}], "]"}]}], 
-     ")"}]}]}]}], "\[IndentingNewLine]", 
- RowBox[{"NCSimplifyRational", "[", "expr", "]"}]}], "Input",
- CellChangeTimes->{{3.688478661549554*^9, 3.688478699122138*^9}},
- CellLabel->
-  "In[403]:=",ExpressionUUID->"ca6638c0-a4b9-4538-a06f-9241b02fcf7d"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{"x", ",", "y", ",", 
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x"}], "]"}], ",", 
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x", "+", "y"}], "]"}], ",", 
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x", "-", "y"}], "]"}], ",", 
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x", "-", 
-      RowBox[{"y", "**", 
-       RowBox[{"inv", "[", 
-        RowBox[{"1", "-", "x"}], "]"}], "**", "y"}]}], "]"}]}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"rules", "=", 
-   RowBox[{"NCMakeGB", "[", 
-    RowBox[{
-     RowBox[{"{", "}"}], ",", "3"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"ColumnForm", "[", "rules", "]"}]}], "Input",
- CellLabel->
-  "In[405]:=",ExpressionUUID->"d2821f7f-1473-4b99-bd9f-a98f725cdf35"],
-
-Cell[BoxData[{
- RowBox[{"expr", "=", 
-  RowBox[{
-   RowBox[{"inv", "[", 
-    RowBox[{"1", "-", "x", "-", 
-     RowBox[{"y", "**", 
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x"}], "]"}], "**", "y"}]}], "]"}], "-", 
-   RowBox[{
-    RowBox[{"1", "/", "2"}], 
-    RowBox[{"(", 
-     RowBox[{
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x", "+", "y"}], "]"}], "+", 
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x", "-", "y"}], "]"}]}], 
-     ")"}]}]}]}], "\[IndentingNewLine]", 
- RowBox[{"NCReplaceRepeated", "[", 
-  RowBox[{"expr", ",", "rules"}], "]"}], "\[IndentingNewLine]", 
- RowBox[{"%", "//", "NCExpand"}]}], "Input",
- CellChangeTimes->{{3.688479439948072*^9, 3.688479441099947*^9}, {
-  3.688479500885779*^9, 3.688479510706942*^9}},
- CellLabel->
-  "In[408]:=",ExpressionUUID->"868cb982-7f39-41d4-83b0-350526671cae"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Simplification with NCGBSimplifyRational", "Title",
- CellChangeTimes->{{3.688487893686324*^9, 
-  3.6884879169904747`*^9}},ExpressionUUID->"32b6e0f1-e199-458f-97b0-\
-fbe7b5c6208b"],
-
-Cell[BoxData[{
- RowBox[{"expr", "=", 
-  RowBox[{
-   RowBox[{"inv", "[", 
-    RowBox[{"1", "-", "x", "-", 
-     RowBox[{"y", "**", 
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x"}], "]"}], "**", "y"}]}], "]"}], "-", 
-   RowBox[{
-    RowBox[{"1", "/", "2"}], 
-    RowBox[{"(", 
-     RowBox[{
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x", "+", "y"}], "]"}], "+", 
-      RowBox[{"inv", "[", 
-       RowBox[{"1", "-", "x", "-", "y"}], "]"}]}], 
-     ")"}]}]}]}], "\[IndentingNewLine]", 
- RowBox[{"NCGBSimplifyRational", "[", "expr", "]"}]}], "Input",
- CellChangeTimes->{{3.6884833765733147`*^9, 3.688483380194944*^9}},
- CellLabel->
-  "In[411]:=",ExpressionUUID->"914dd99f-f5c7-4704-9584-f952d106c564"],
-
-Cell[BoxData[{
- RowBox[{"expr", "=", 
-  RowBox[{
-   RowBox[{"x", "**", 
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x"}], "]"}]}], "-", 
-   RowBox[{
-    RowBox[{"inv", "[", 
-     RowBox[{"1", "-", "x"}], "]"}], "**", "x"}]}]}], "\[IndentingNewLine]", 
- RowBox[{"NCGBSimplifyRational", "[", "expr", "]"}]}], "Input",
- CellChangeTimes->{{3.688483392407176*^9, 3.68848339595903*^9}},
- CellLabel->
-  "In[413]:=",ExpressionUUID->"dbeef39b-ab11-4b05-9369-7907cb158a30"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Lex Order : the simplest elimination order", "Title",
- CellChangeTimes->{{3.6884974958911552`*^9, 
-  3.688497505546273*^9}},ExpressionUUID->"b535336a-ffe0-4516-bf0f-\
-d295a3bd5b07"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{"a", ",", "b", ",", "x", ",", "y"}], "]"}], ";"}]], "Input",
- CellChangeTimes->{{3.6884975162978287`*^9, 3.688497521871406*^9}},
- CellLabel->
-  "In[415]:=",ExpressionUUID->"84ba424e-ce00-4982-99ff-2a1e51bf0e08"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"-", 
-        RowBox[{"b", "**", "x"}]}], "+", 
-       RowBox[{"x", "**", "y", "**", "a"}], "+", 
-       RowBox[{"x", "**", "b", "**", "a", "**", "a"}]}], ",", 
-      RowBox[{
-       RowBox[{"x", "**", "a"}], "-", "1"}], ",", 
-      RowBox[{
-       RowBox[{"a", "**", "x"}], "-", "1"}]}], "}"}], ",", "4"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"ColumnForm", "[", "%", "]"}]}], "Input",
- CellChangeTimes->{{3.688497527382647*^9, 3.688497527382996*^9}, {
-  3.688497576076872*^9, 3.688497579835807*^9}},
- CellLabel->
-  "In[416]:=",ExpressionUUID->"1591b53f-d673-47a2-bcfe-52faf5e67dfa"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{"y", ",", "x", ",", "b", ",", "a"}], "]"}], ";"}]], "Input",
- CellChangeTimes->{{3.688497540038175*^9, 3.688497541402875*^9}},
- CellLabel->
-  "In[418]:=",ExpressionUUID->"d2592848-64ed-4edb-b570-c993fbf22564"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"-", 
-        RowBox[{"b", "**", "x"}]}], "+", 
-       RowBox[{"x", "**", "y", "**", "a"}], "+", 
-       RowBox[{"x", "**", "b", "**", "a", "**", "a"}]}], ",", 
-      RowBox[{
-       RowBox[{"x", "**", "a"}], "-", "1"}], ",", 
-      RowBox[{
-       RowBox[{"a", "**", "x"}], "-", "1"}]}], "}"}], ",", "6"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"ColumnForm", "[", "%", "]"}]}], "Input",
- CellChangeTimes->{{3.6884975481679153`*^9, 3.688497568131379*^9}, {
-  3.856020198455895*^9, 3.856020247598263*^9}},
- CellLabel->
-  "In[419]:=",ExpressionUUID->"8d4be555-8a59-428f-b6d3-e7d2304830fb"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Graded lex ordering: a non-elimination order", "Title",
- CellChangeTimes->{{3.6884974958911552`*^9, 3.688497505546273*^9}, {
-  3.688497893895957*^9, 
-  3.6884979021908092`*^9}},ExpressionUUID->"ef800737-5df5-4ba9-97ce-\
-f5813039bde6"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{"{", 
-    RowBox[{"a", ",", "b", ",", "x", ",", "y"}], "}"}], "]"}], ";"}]], "Input",\
-
- CellChangeTimes->{{3.688497908515562*^9, 3.688497909455125*^9}},
- CellLabel->
-  "In[421]:=",ExpressionUUID->"84a2586b-66ca-46d9-814d-892c775f916c"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"-", 
-        RowBox[{"b", "**", "x"}]}], "+", 
-       RowBox[{"x", "**", "y", "**", "a"}], "+", 
-       RowBox[{"x", "**", "b", "**", "a", "**", "a"}]}], ",", 
-      RowBox[{
-       RowBox[{"x", "**", "a"}], "-", "1"}], ",", 
-      RowBox[{
-       RowBox[{"a", "**", "x"}], "-", "1"}]}], "}"}], ",", "4"}], "]"}], 
-  ";"}], "\n", 
- RowBox[{"ColumnForm", "[", "%", "]"}]}], "Input",
- CellChangeTimes->{{3.688497921863679*^9, 3.688497962147794*^9}, {
-  3.856020298696678*^9, 3.8560203114421673`*^9}},
- CellLabel->
-  "In[422]:=",ExpressionUUID->"5ca45614-5e8e-4a3b-b31c-809a3dd65125"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Multigraded lex ordering : a variety of elimination orders", "Title",
- CellChangeTimes->{{3.6884974958911552`*^9, 3.688497505546273*^9}, {
-  3.688497893895957*^9, 3.6884979021908092`*^9}, {3.688498189953451*^9, 
-  3.688498191361829*^9}},ExpressionUUID->"02cfabe5-3c37-43bc-95d7-\
-0e47adc5c784"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SetMonomialOrder", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"a", ",", "b", ",", "x"}], "}"}], ",", "y"}], "]"}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.688497908515562*^9, 3.688497909455125*^9}, {
-  3.688498194201952*^9, 3.688498195194707*^9}},
- CellLabel->
-  "In[424]:=",ExpressionUUID->"c98c99a1-b7f0-46af-99e4-f3cdc63f9825"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"NCMakeGB", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"-", 
-        RowBox[{"b", "**", "x"}]}], "+", 
-       RowBox[{"x", "**", "y", "**", "a"}], "+", 
-       RowBox[{"x", "**", "b", "**", "a", "**", "a"}]}], ",", 
-      RowBox[{
-       RowBox[{"x", "**", "a"}], "-", "1"}], ",", 
-      RowBox[{
-       RowBox[{"a", "**", "x"}], "-", "1"}]}], "}"}], ",", "4"}], "]"}], 
-  ";"}], "\n", 
- RowBox[{"ColumnForm", "[", "%", "]"}]}], "Input",
- CellChangeTimes->{{3.688497921863679*^9, 3.688497962147794*^9}},
- CellLabel->
-  "In[425]:=",ExpressionUUID->"caaaf1b9-5316-4bb7-a4a3-cc6e9d2edb7f"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["The Partially Prescribed Inverse Matrix Problem", "Title",
- CellChangeTimes->{{3.688499336412486*^9, 
-  3.688499353134667*^9}},ExpressionUUID->"db93ddb9-8305-4770-abd6-\
-73066f4e3e07"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"SetKnowns", "[", 
-   RowBox[{"a", ",", 
-    RowBox[{"inv", "[", "a", "]"}], ",", "b", ",", 
-    RowBox[{"inv", "[", "b", "]"}], ",", "c", ",", 
-    RowBox[{"inv", "[", "c", "]"}], ",", "d", ",", 
-    RowBox[{"inv", "[", "d", "]"}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"SetUnknowns", "[", 
-   RowBox[{
-    RowBox[{"{", "z", "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"x", ",", "y", ",", "w"}], "}"}]}], "]"}], ";"}]}], "Input",
- CellChangeTimes->{{3.688499457732769*^9, 3.6884994817754927`*^9}, {
-  3.688501196662097*^9, 3.688501232182485*^9}, {3.688501265339199*^9, 
-  3.688501308703308*^9}, {3.688501343414608*^9, 3.688501411824601*^9}, {
-  3.6885014522634363`*^9, 3.6885014540707693`*^9}, {3.688521600180543*^9, 
-  3.6885216055955772`*^9}},
- CellLabel->
-  "In[427]:=",ExpressionUUID->"802175a0-3d6e-4bdc-a102-286a9d04b04a"],
-
-Cell[BoxData[{
- RowBox[{"A", "=", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"a", ",", "x"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"y", ",", "b"}], "}"}]}], "}"}]}], "\[IndentingNewLine]", 
- RowBox[{"B", "=", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"w", ",", "c"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"d", ",", "z"}], "}"}]}], "}"}]}]}], "Input",
- CellChangeTimes->{{3.6884993543948*^9, 3.6884993933627234`*^9}},
- CellLabel->
-  "In[429]:=",ExpressionUUID->"d6a15d0d-deb6-4486-8794-9b3a00b0ef5a"],
-
-Cell[BoxData[
- RowBox[{"rels", "=", 
-  RowBox[{
-   RowBox[{"{", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"NCMatrixExpand", "[", 
-       RowBox[{"A", "**", "B"}], "]"}], "-", 
-      RowBox[{"IdentityMatrix", "[", "2", "]"}]}], ",", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"NCMatrixExpand", "[", 
-       RowBox[{"B", "**", "A"}], "]"}], "-", 
-      RowBox[{"IdentityMatrix", "[", "2", "]"}]}]}], "\[IndentingNewLine]", 
-    "}"}], "//", "Flatten"}]}]], "Input",
- CellChangeTimes->{{3.688499400306045*^9, 3.688499437550803*^9}, {
-  3.6884995025280333`*^9, 3.688499503815805*^9}, {3.700791419003428*^9, 
-  3.700791465756235*^9}},
- CellLabel->
-  "In[431]:=",ExpressionUUID->"5c04eebc-2537-485f-96d9-5ab62a81550a"],
-
-Cell[BoxData[
- RowBox[{"NCProcess", "[", 
-  RowBox[{"rels", ",", " ", "8"}], "]"}]], "Input",
- CellLabel->
-  "In[432]:=",ExpressionUUID->"afacabfe-a2c3-4e64-b25d-612c4c0094d4"]
-}, Open  ]]
-},
-WindowSize->{976.0754716981131, 688.0754716981131},
-WindowMargins->{{Automatic, 2.716981132075489}, {0, Automatic}},
-FrontEndVersion->"13.0 for Linux x86 (64-bit) (December 2, 2021)",
-StyleDefinitions->"Default.nb",
-ExpressionUUID->"fa97a134-6940-4134-a34f-0f1e85f93ab0"
-]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[558, 20, 355, 7, 73, "Input",ExpressionUUID->"a87a9aa0-6fe5-452d-a500-f5011f4770c4"],
-Cell[CellGroupData[{
-Cell[938, 31, 211, 4, 98, "Title",ExpressionUUID->"b005555a-dabd-49a7-9e77-425a86d91b7c"],
-Cell[1152, 37, 350, 10, 29, "Input",ExpressionUUID->"6a6e94a2-9357-4556-9b6e-ef76efeab9da"],
-Cell[1505, 49, 215, 4, 29, "Input",ExpressionUUID->"f8c6d405-fb2f-4a89-8921-ec95faf3331a"],
-Cell[1723, 55, 455, 13, 29, "Input",ExpressionUUID->"b040b03c-30a9-4410-acc1-6e90d3d996d1"],
-Cell[2181, 70, 315, 7, 29, "Input",ExpressionUUID->"68e979d1-dffd-4cd5-9185-174ff4a68829"],
-Cell[2499, 79, 215, 4, 29, "Input",ExpressionUUID->"21a5ed4a-1d63-4731-b95d-4450382d9865"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2751, 88, 229, 4, 98, "Title",ExpressionUUID->"62be30ff-d46b-4235-8db2-dcef7cd0eb01"],
-Cell[2983, 94, 350, 10, 29, "Input",ExpressionUUID->"d8c866c6-b92f-46a7-804a-891d2c6f3c1c"],
-Cell[3336, 106, 215, 4, 29, "Input",ExpressionUUID->"f7bc4aa1-45e9-43cc-a78c-7ca48f4fa7c6"],
-Cell[3554, 112, 495, 15, 29, "Input",ExpressionUUID->"35993488-3417-499b-b9e2-a34598f88d8b"],
-Cell[4052, 129, 315, 7, 29, "Input",ExpressionUUID->"8ec28dba-4079-49de-bd73-deed8fd24552"],
-Cell[4370, 138, 215, 4, 29, "Input",ExpressionUUID->"799cfad6-e53c-4cea-9a7a-19f40a1a1bee"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[4622, 147, 262, 4, 98, "Title",ExpressionUUID->"6f9ec633-ad2b-4f92-b2e9-ef88f1abf221"],
-Cell[4887, 153, 336, 7, 29, "Input",ExpressionUUID->"fc3a297b-c956-4f4f-95e6-589db986e315"],
-Cell[5226, 162, 215, 4, 29, "Input",ExpressionUUID->"f66a3ffe-12b7-4627-a46f-359da43abea8"],
-Cell[5444, 168, 604, 17, 29, "Input",ExpressionUUID->"ec9d4a54-e290-479a-8c09-30c112a7e94c"],
-Cell[6051, 187, 341, 7, 29, "Input",ExpressionUUID->"41e95c8c-5221-4f68-9d1d-f3f3e38889a6"],
-Cell[6395, 196, 215, 4, 29, "Input",ExpressionUUID->"932be6cf-82d6-47b4-b09a-e24c3174eb04"],
-Cell[6613, 202, 411, 9, 29, "Input",ExpressionUUID->"350318fa-e0bd-46d0-a51d-2aae0f7a289d"],
-Cell[7027, 213, 215, 4, 29, "Input",ExpressionUUID->"981e693c-3bf0-4701-bedd-fcbbe7ff880b"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[7279, 222, 274, 4, 98, "Title",ExpressionUUID->"77195456-6e07-40b8-9177-c413f7e4c8a2"],
-Cell[7556, 228, 332, 7, 29, "Input",ExpressionUUID->"676d6b0e-c4bf-440f-988d-f9e63e3b7ee0"],
-Cell[7891, 237, 215, 4, 29, "Input",ExpressionUUID->"494b18d0-ccac-4608-9163-22a5204c3d81"],
-Cell[8109, 243, 435, 11, 29, "Input",ExpressionUUID->"2561da51-7cab-41bb-b047-94bb3a1212c8"],
-Cell[8547, 256, 367, 8, 29, "Input",ExpressionUUID->"1437bcdd-6f63-449e-ada3-b72b4dff52e6"],
-Cell[8917, 266, 267, 5, 29, "Input",ExpressionUUID->"f23c17e3-6280-4373-bf24-f08b9e6bbc84"],
-Cell[9187, 273, 644, 13, 52, "Input",ExpressionUUID->"026b5b2d-2735-40d8-ad16-ba25ff45929e"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[9868, 291, 323, 5, 98, "Title",ExpressionUUID->"0adab046-338f-4e19-b4bf-17805e9d9d5d"],
-Cell[10194, 298, 563, 12, 29, "Input",ExpressionUUID->"d3ade397-d38a-4957-95e1-8fd4fd52146d"],
-Cell[10760, 312, 648, 13, 52, "Input",ExpressionUUID->"409098ff-abc6-4261-a2fc-c650e50e2c22"],
-Cell[11411, 327, 595, 15, 52, "Input",ExpressionUUID->"94a1f6e7-7cd2-4aaf-bd0f-cfed44071f2a"],
-Cell[12009, 344, 712, 20, 52, "Input",ExpressionUUID->"ca6638c0-a4b9-4538-a06f-9241b02fcf7d"],
-Cell[12724, 366, 826, 23, 73, "Input",ExpressionUUID->"d2821f7f-1473-4b99-bd9f-a98f725cdf35"],
-Cell[13553, 391, 845, 23, 73, "Input",ExpressionUUID->"868cb982-7f39-41d4-83b0-350526671cae"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[14435, 419, 185, 3, 98, "Title",ExpressionUUID->"32b6e0f1-e199-458f-97b0-fbe7b5c6208b"],
-Cell[14623, 424, 716, 20, 52, "Input",ExpressionUUID->"914dd99f-f5c7-4704-9584-f952d106c564"],
-Cell[15342, 446, 468, 12, 52, "Input",ExpressionUUID->"dbeef39b-ab11-4b05-9369-7907cb158a30"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[15847, 463, 187, 3, 98, "Title",ExpressionUUID->"b535336a-ffe0-4516-bf0f-d295a3bd5b07"],
-Cell[16037, 468, 282, 6, 29, "Input",ExpressionUUID->"84ba424e-ce00-4982-99ff-2a1e51bf0e08"],
-Cell[16322, 476, 724, 20, 52, "Input",ExpressionUUID->"1591b53f-d673-47a2-bcfe-52faf5e67dfa"],
-Cell[17049, 498, 280, 6, 29, "Input",ExpressionUUID->"d2592848-64ed-4edb-b570-c993fbf22564"],
-Cell[17332, 506, 726, 20, 52, "Input",ExpressionUUID->"8d4be555-8a59-428f-b6d3-e7d2304830fb"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[18095, 531, 240, 4, 98, "Title",ExpressionUUID->"ef800737-5df5-4ba9-97ce-f5813039bde6"],
-Cell[18338, 537, 307, 8, 29, "Input",ExpressionUUID->"84a2586b-66ca-46d9-814d-892c775f916c"],
-Cell[18648, 547, 709, 20, 52, "Input",ExpressionUUID->"5ca45614-5e8e-4a3b-b31c-809a3dd65125"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[19394, 572, 300, 4, 160, "Title",ExpressionUUID->"02cfabe5-3c37-43bc-95d7-0e47adc5c784"],
-Cell[19697, 578, 373, 10, 29, "Input",ExpressionUUID->"c98c99a1-b7f0-46af-99e4-f3cdc63f9825"],
-Cell[20073, 590, 658, 19, 52, "Input",ExpressionUUID->"caaaf1b9-5316-4bb7-a4a3-cc6e9d2edb7f"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[20768, 614, 190, 3, 98, "Title",ExpressionUUID->"db93ddb9-8305-4770-abd6-73066f4e3e07"],
-Cell[20961, 619, 869, 20, 52, "Input",ExpressionUUID->"802175a0-3d6e-4bdc-a102-286a9d04b04a"],
-Cell[21833, 641, 548, 17, 52, "Input",ExpressionUUID->"d6a15d0d-deb6-4486-8794-9b3a00b0ef5a"],
-Cell[22384, 660, 744, 18, 94, "Input",ExpressionUUID->"5c04eebc-2537-485f-96d9-5ab62a81550a"],
-Cell[23131, 680, 176, 4, 29, "Input",ExpressionUUID->"afacabfe-a2c3-4e64-b25d-612c4c0094d4"]
-}, Open  ]]
-}
-]
-*)
-
+Cell[TextData[{"Noncommutative", " ", "Gr\[ODoubleDot]bner", " ", "Basis"}], "Section"],
+Cell[TextData[{"Gr\[ODoubleDot]bner", " ", "Basis", " ", "are", " ", "useful", " ", "in", " ", "the", " ", "study", " ", "of", " ", "algebraic", " ", "relations.", " ", "The", " ", "package", " ", Cell[BoxData[FormBox[RowBox[{"NCGBX"}], TraditionalForm]]], " ", "provides", " ", "an", " ", "implementation", " ", "of", " ", "a", " ", "noncommutative", " ", "Gr\[ODoubleDot]bner", " ", "Basis", " ", "algorithm."}], "Text"],
+Cell[TextData[{"Starting", " ", "with", " ", StyleBox[Cell[TextData[{Cell[TextData[{"Version", " ", "6"}], "Text"]}]], FontWeight->"Bold"], ",", " ", "the", " ", "old", " ", Cell[BoxData[FormBox[RowBox[{"C++"}], TraditionalForm]]], " ", "version", " ", "of", " ", "our", " ", "Groebner", " ", "Basis", " ", "Algorithm", " ", "is", " ", "no", " ", "longer", " ", "included."}], "Text", CellMargins->{{60,0},{0,0}}, Background->GrayLevel[0.85]],
+Cell[TextData[{"If", " ", "you", " ", "want", " ", "a", " ", "living", " ", "version", " ", "of", " ", "this", " ", "chapter", " ", "just", " ", "run", " ", "the", " ", "notebook", " ", Cell[BoxData[FormBox[RowBox[{"NC/DEMOS/3_NCGroebnerBasis.nb"}], TraditionalForm]]], "."}], "Text"],
+Cell[TextData[{"In", " ", "order", " ", "to", " ", "load", " ", Cell[BoxData[FormBox[RowBox[{"NCGBX"}], TraditionalForm]]], " ", "one", " ", "types:"}], "Text"],
+Cell["<< NC`
+<< NCAlgebra`
+<< NCGBX`", "Input"],
+Cell[TextData[{"or", " ", "simply"}], "Text"],
+Cell["<< NCGBX`", "Input"],
+Cell[TextData[{"if", " ", Cell[BoxData[FormBox[RowBox[{"NC"}], TraditionalForm]]], " ", "and", " ", Cell[BoxData[FormBox[RowBox[{"NCAlgebra"}], TraditionalForm]]], " ", "have", " ", "already", " ", "been", " ", "loaded."}], "Text"],
+Cell[TextData[{"What", " ", "is", " ", "a", " ", "Gr\[ODoubleDot]bner", " ", "Basis?"}], "Subsection"],
+Cell[TextData[{"Most", " ", "commutative", " ", "algebra", " ", "packages", " ", "contain", " ", "commands", " ", "based", " ", "on", " ", "Gr\[ODoubleDot]bner", " ", "Basis", " ", "and", " ", "uses", " ", "of", " ", "Gr\[ODoubleDot]bner", " ", "Basis.", " ", "For", " ", "example,", " ", "in", " ", "Mathematica,", " ", "the", " ", Cell[BoxData[FormBox[RowBox[{"Solve"}], TraditionalForm]]], " ", "command", " ", "puts", " ", "collections", " ", "of", " ", "equations", " ", "in", " ", "a", " ", StyleBox[Cell[TextData[{Cell[TextData[{"canonical", " ", "form"}], "Text"]}]], FontSlant->"Italic"], " ", "which,", " ", "for", " ", "simple", " ", "collections,", " ", "readily", " ", "yields", " ", "a", " ", "solution.", " ", "Likewise,", " ", "the", " ", "Mathematica", " ", Cell[BoxData[FormBox[RowBox[{"Eliminate"}], TraditionalForm]]], " ", "command", " ", "tries", " ", "to", " ", "convert", " ", "a", " ", "collection", " ", "of", " ", Cell[ToExpression["m", TeXForm]], " ", "polynomial", " ", "equations", " ", "(often", " ", "called", " ", "relations)"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+    p_1(x_1,\\ldots,x_n) &= 0 \\\\
+    p_2(x_1,\\ldots,x_n) &= 0 \\\\
+    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
+    p_m(x_1,\\ldots,x_n) &= 0
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"in", " ", "variables", " ", Cell[ToExpression["x_1,x_2, \\ldots x_n", TeXForm]], " ", "to", " ", "a", " ", StyleBox[Cell[TextData[{Cell[TextData[{"triangular"}], "Text"]}]], FontSlant->"Italic"], " ", "form,", " ", "that", " ", "is", " ", "a", " ", "new", " ", "collection", " ", "of", " ", "equations", " ", "like"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+    q_1(x_1) &= 0 \\\\
+    q_2(x_1,x_2) &= 0 \\\\
+    q_3(x_1,x_2) &= 0 \\\\
+    q_4(x_1,x_2,x_3)&=0 \\\\
+    \\vdots \\quad & \\quad \\, \\, \\vdots \\\\
+    q_{r}(x_1,\\ldots,x_n) &= 0.
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"Here", " ", "the", " ", "polynomials", " ", Cell[ToExpression["\\{q_j: 1\\le j\\le k_2\\}", TeXForm]], " ", "generate", " ", "the", " ", "same", " ", StyleBox[Cell[TextData[{Cell[TextData[{"ideal"}], "Text"]}]], FontSlant->"Italic"], " ", "that", " ", "the", " ", "polynomials", " ", Cell[ToExpression["\\{p_j : 1\\le j \\le k_1\\}", TeXForm]], " ", "generate.", " ", "Therefore,", " ", "the", " ", "set", " ", "of", " ", "solutions", " ", "to", " ", "the", " ", "collection", " ", "of", " ", "polynomial", " ", "equations", " ", Cell[ToExpression["\\{p_j=0: 1\\le j\\le k_1\\}", TeXForm]], " ", "equals", " ", "the", " ", "set", " ", "of", " ", "solutions", " ", "to", " ", "the", " ", "collection", " ", "of", " ", "polynomial", " ", "equations", " ", Cell[ToExpression["\\{q_j=0: 1\\le j\\le k_2\\}", TeXForm]], ".", " ", "This", " ", "canonical", " ", "form", " ", "greatly", " ", "simplifies", " ", "the", " ", "task", " ", "of", " ", "solving", " ", "collections", " ", "of", " ", "polynomial", " ", "equations", " ", "by", " ", "facilitating", " ", "backsolving", " ", "for", " ", Cell[ToExpression["x_j", TeXForm]], " ", "in", " ", "terms", " ", "of", " ", Cell[ToExpression["x_1,\\ldots,x_{j-1}", TeXForm]], "."}], "Text"],
+Cell[TextData[{"Readers", " ", "who", " ", "would", " ", "like", " ", "to", " ", "know", " ", "more", " ", "about", " ", "Gr\[ODoubleDot]bner", " ", "Basis", " ", "may", " ", "want", " ", "to", " ", "read", " ", "[CLS].", " ", "The", " ", "noncommutatative", " ", "version", " ", "of", " ", "the", " ", "algorithm", " ", "implemented", " ", "by", " ", Cell[BoxData[FormBox[RowBox[{"NCGB"}], TraditionalForm]]], " ", "is", " ", "loosely", " ", "based", " ", "on", " ", "[Mora]."}], "Text"],
+Cell[TextData[{"Solving", " ", "Equations"}], "Subsection"],
+Cell[TextData[{"Before", " ", "calculating", " ", "a", " ", "Gr\[ODoubleDot]bner", " ", "Basis,", " ", "one", " ", "must", " ", "declare", " ", "which", " ", "variables", " ", "will", " ", "be", " ", "used", " ", "during", " ", "the", " ", "computation", " ", "and", " ", "must", " ", "declare", " ", "a", " ", StyleBox[Cell[TextData[{Cell[TextData[{"monomial", " ", "order"}], "Text"]}]], FontSlant->"Italic"], " ", "which", " ", "can", " ", "be", " ", "done", " ", "using", " ", Cell[BoxData[FormBox[RowBox[{"SetMonomialOrder"}], TraditionalForm]]], " ", "as", " ", "in:"}], "Text"],
+Cell["SetMonomialOrder[{a, b, c}, x];", "Input"],
+Cell[TextData[{"The", " ", "monomial", " ", "ordering", " ", "imposes", " ", "a", " ", "relationship", " ", "between", " ", "the", " ", "variables", " ", "which", " ", "are", " ", "used", " ", "to", " ", StyleBox[Cell[TextData[{Cell[TextData[{"sort"}], "Text"]}]], FontSlant->"Italic"], " ", "the", " ", "monomials", " ", "in", " ", "a", " ", "polynomial.", " ", "The", " ", "ordering", " ", "implied", " ", "by", " ", "the", " ", "above", " ", "command", " ", "can", " ", "be", " ", "visualized", " ", "using:"}], "Text"],
+Cell["PrintMonomialOrder[]", "Input"],
+Cell[TextData[{"which", " ", "in", " ", "this", " ", "case", " ", "prints:"}], "Text"],
+Cell[TextData[{Cell[ToExpression["a < b < c \\ll x.", TeXForm]]}], "Text"],
+Cell[TextData[{"A", " ", "user", " ", "does", " ", "not", " ", "need", " ", "to", " ", "know", " ", "theoretical", " ", "background", " ", "related", " ", "to", " ", "monomials", " ", "orders.", " ", "Indeed,", " ", "as", " ", "we", " ", "shall", " ", "see", " ", "soon,", " ", "in", " ", "many", " ", "engineering", " ", "problems,", " ", "it", " ", "suffices", " ", "to", " ", "know", " ", "which", " ", "variables", " ", "correspond", " ", "to", " ", "quantities", " ", "which", " ", "are", " ", StyleBox[Cell[TextData[{Cell[TextData[{"known"}], "Text"]}]], FontSlant->"Italic"], " ", "and", " ", "which", " ", "variables", " ", "correspond", " ", "to", " ", "quantities", " ", "which", " ", "are", " ", StyleBox[Cell[TextData[{Cell[TextData[{"unknown"}], "Text"]}]], FontSlant->"Italic"], ".", " ", "If", " ", "one", " ", "is", " ", "solving", " ", "for", " ", "a", " ", "variable", " ", "or", " ", "desires", " ", "to", " ", "prove", " ", "that", " ", "a", " ", "certain", " ", "quantity", " ", "is", " ", "zero,", " ", "then", " ", "one", " ", "would", " ", "want", " ", "to", " ", "view", " ", "that", " ", "variable", " ", "as", " ", StyleBox[Cell[TextData[{Cell[TextData[{"unknown"}], "Text"]}]], FontSlant->"Italic"], ".", " ", "In", " ", "the", " ", "above", " ", "example,", " ", "the", " ", "symbol", " ", "\"", Cell[TextData[{Cell[ToExpression["\\ll", TeXForm]]}], "Text"], "\"", " ", "separate", " ", "the", " ", StyleBox[Cell[TextData[{Cell[TextData[{"knowns"}], "Text"]}]], FontSlant->"Italic"], ",", " ", Cell[ToExpression["a, b, c", TeXForm]], ",", " ", "from", " ", "the", " ", StyleBox[Cell[TextData[{Cell[TextData[{"unknown"}], "Text"]}]], FontSlant->"Italic"], ",", " ", Cell[ToExpression["x", TeXForm]], ".", " ", "For", " ", "more", " ", "details", " ", "on", " ", "orderings", " ", "see", " ", "Section", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"Orderings"}], "Text"]}]], FontSlant->"Italic"], "Orderings"]], "."}], "Text"],
+Cell[TextData[{"Our", " ", "goal", " ", "is", " ", "to", " ", "calculate", " ", "the", " ", "Gr\[ODoubleDot]bner", " ", "basis", " ", "associated", " ", "with", " ", "the", " ", "following", " ", "relations", " ", "(i.e. a", " ", "list", " ", "of", " ", "polynomials):"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+    a \\, x \\, a &= c, &
+    a \\, b &= 1, &
+    b \\, a &= 1.
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"We", " ", "shall", " ", "use", " ", "the", " ", "word", " ", StyleBox[Cell[TextData[{Cell[TextData[{"relation"}], "Text"]}]], FontSlant->"Italic"], " ", "to", " ", "mean", " ", "a", " ", "polynomial", " ", "in", " ", "noncommuting", " ", "indeterminates.", " ", "For", " ", "example,", " ", "if", " ", "an", " ", "analyst", " ", "saw", " ", "the", " ", "equation", " ", Cell[ToExpression["A B = 1", TeXForm]], " ", "for", " ", "matrices", " ", Cell[ToExpression["A", TeXForm]], " ", "and", " ", Cell[ToExpression["B", TeXForm]], ",", " ", "then", " ", "he", " ", "might", " ", "say", " ", "that", " ", Cell[ToExpression["A", TeXForm]], " ", "and", " ", Cell[ToExpression["B", TeXForm]], " ", "satisfy", " ", "the", " ", "polynomial", " ", "equation", " ", Cell[ToExpression["a\\, b - 1 = 0", TeXForm]], ".", " ", "An", " ", "algebraist", " ", "would", " ", "say", " ", "that", " ", Cell[ToExpression["a\\, b - 1", TeXForm]], " ", "is", " ", "a", " ", "relation."}], "Text"],
+Cell[TextData[{"To", " ", "calculate", " ", "a", " ", "Gr\[ODoubleDot]bner", " ", "basis", " ", "one", " ", "defines", " ", "a", " ", "list", " ", "of", " ", "relations:"}], "Text"],
+Cell["rels = {a**x**a - c, a**b - 1, b**a - 1}", "Input"],
+Cell[TextData[{"and", " ", "issues", " ", "the", " ", "command:"}], "Text"],
+Cell["gb = NCMakeGB[rels, 10]", "Input"],
+Cell[TextData[{"which", " ", "should", " ", "produce", " ", "an", " ", "output", " ", "similar", " ", "to:"}], "Text"],
+Cell["* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: a < b < c << x
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 4 polys in the basis, 2 obstructions
+> MAJOR Iteration 2, 5 polys in the basis, 2 obstructions
+* Cleaning up...
+* Found Groebner basis with 3 polynomials
+* * * * * * * * * * * * * * * *", "Output"],
+Cell[TextData[{"The", " ", "number", " ", Cell[BoxData[FormBox[RowBox[{"10"}], TraditionalForm]]], " ", "in", " ", "the", " ", "call", " ", "to", " ", Cell[BoxData[FormBox[RowBox[{"NCMakeGB"}], TraditionalForm]]], " ", "is", " ", "very", " ", "important", " ", "because", " ", "a", " ", "finite", " ", "GB", " ", "may", " ", "not", " ", "exist.", " ", "It", " ", "instructs", " ", Cell[BoxData[FormBox[RowBox[{"NCMakeGB"}], TraditionalForm]]], " ", "to", " ", "abort", " ", "after", " ", Cell[BoxData[FormBox[RowBox[{"10"}], TraditionalForm]]], " ", "iterations", " ", "if", " ", "a", " ", "GB", " ", "has", " ", "not", " ", "been", " ", "found", " ", "at", " ", "that", " ", "point."}], "Text"],
+Cell[TextData[{"The", " ", "result", " ", "of", " ", "the", " ", "above", " ", "calculation", " ", "is", " ", "the", " ", "list", " ", "of", " ", "relations", " ", "in", " ", "the", " ", "form", " ", "of", " ", "a", " ", "list", " ", "of", " ", "rules:"}], "Text"],
+Cell["{x -> b**c**b, a**b -> 1, b**a -> 1}", "Output"],
+Cell[TextData[{StyleBox[Cell[TextData[{Cell[TextData[{"Version", " ", "5:"}], "Text"]}]], FontWeight->"Bold"], " ", "For", " ", "efficiency,", " ", Cell[BoxData[FormBox[RowBox[{"NCMakeGB"}], TraditionalForm]]], " ", "returns", " ", "a", " ", "list", " ", "of", " ", "rules", " ", "instead", " ", "of", " ", "a", " ", "list", " ", "of", " ", "polynomials.", " ", "The", " ", "left-hand", " ", "side", " ", "of", " ", "the", " ", "rule", " ", "is", " ", "the", " ", "leading", " ", "monomial", " ", "in", " ", "the", " ", "current", " ", "order.", " ", "This", " ", "is", " ", "incompatible", " ", "with", " ", "early", " ", "versions,", " ", "which", " ", "returned", " ", "a", " ", "list", " ", "of", " ", "polynomials.", " ", "You", " ", "can", " ", "recover", " ", "the", " ", "old", " ", "behavior", " ", "setting", " ", "the", " ", "option", " ", Cell[BoxData[FormBox[RowBox[{"ReturnRules -> False"}], TraditionalForm]]], ".", " ", "This", " ", "can", " ", "be", " ", "done", " ", "in", " ", "the", " ", Cell[BoxData[FormBox[RowBox[{"NCMakeGB"}], TraditionalForm]]], " ", "command", " ", "or", " ", "globally", " ", "through", " ", Cell[BoxData[FormBox[RowBox[{"SetOptions[ReturnRules -> False]"}], TraditionalForm]]], "."}], "Text", CellMargins->{{60,0},{0,0}}, Background->GrayLevel[0.85]],
+Cell[TextData[{"Our", " ", "favorite", " ", "format", " ", "for", " ", "displaying", " ", "lists", " ", "of", " ", "relations", " ", "is", " ", Cell[BoxData[FormBox[RowBox[{"ColumnForm"}], TraditionalForm]]], "."}], "Text"],
+Cell["ColumnForm[gb]", "Input"],
+Cell[TextData[{"which", " ", "results", " ", "in"}], "Text"],
+Cell["x -> b**c**b
+a**b -> 1
+b**a -> 1", "Output"],
+Cell[TextData[{"The", " ", StyleBox[Cell[TextData[{Cell[TextData[{"rules"}], "Text"]}]], FontSlant->"Italic"], " ", "in", " ", "the", " ", "output", " ", "represent", " ", "the", " ", "relations", " ", "in", " ", "the", " ", "GB", " ", "with", " ", "the", " ", "left-hand", " ", "side", " ", "of", " ", "the", " ", "rule", " ", "being", " ", "the", " ", "leading", " ", "monomial.", " ", "Replacing", " ", Cell[BoxData[FormBox[RowBox[{"Rule"}], TraditionalForm]]], " ", "by", " ", Cell[BoxData[FormBox[RowBox[{"Subtract"}], TraditionalForm]]], " ", "recovers", " ", "the", " ", "relations", " ", "but", " ", "one", " ", "would", " ", "then", " ", "loose", " ", "the", " ", "leading", " ", "monomial", " ", "as", " ", "Mathematica", " ", "alphabetizes", " ", "the", " ", "resulting", " ", "sum."}], "Text"],
+Cell[TextData[{"Someone", " ", "not", " ", "familiar", " ", "with", " ", "GB's", " ", "might", " ", "find", " ", "it", " ", "instructive", " ", "to", " ", "note", " ", "this", " ", "output", " ", "GB", " ", "effectively", " ", StyleBox[Cell[TextData[{Cell[TextData[{"solves"}], "Text"]}]], FontSlant->"Italic"], " ", "the", " ", "input", " ", "equation"}], "Text"],
+Cell[TextData[{Cell[ToExpression["a \\, x \\, a - c = 0", TeXForm]]}], "Text"],
+Cell[TextData[{"under", " ", "the", " ", "assumptions", " ", "that"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+    b \\, a - 1 &= 0, &
+    a \\, b - 1 & =0,
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"that", " ", "is", " ", Cell[ToExpression["a = b^{-1}", TeXForm]], " ", "and", " ", "produces", " ", "the", " ", "expected", " ", "result", " ", "in", " ", "the", " ", "form", " ", "of", " ", "the", " ", "relation:"}], "Text"],
+Cell[TextData[{Cell[ToExpression[" x = b \\, c \\, b. ", TeXForm]]}], "Text"],
+Cell[TextData[{"A", " ", "Slightly", " ", "more", " ", "Challenging", " ", "Example"}], "Subsection"],
+Cell[TextData[{"For", " ", "a", " ", "slightly", " ", "more", " ", "challenging", " ", "example", " ", "consider", " ", "the", " ", "same", " ", "monomial", " ", "order", " ", "as", " ", "before:"}], "Text"],
+Cell["SetMonomialOrder[{a, b, c}, x];", "Input"],
+Cell[TextData[{"that", " ", "is"}], "Text"],
+Cell[TextData[{Cell[ToExpression["a < b < c \\ll x", TeXForm]]}], "Text"],
+Cell[TextData[{"and", " ", "the", " ", "relations:"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+  a \\, x - c &= 0, \\\\
+  a \\, b \\, a - a &= 0, \\\\
+  b \\, a \\, b - b &= 0,
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"from", " ", "which", " ", "one", " ", "can", " ", "recognize", " ", "the", " ", "problem", " ", "of", " ", "solving", " ", "the", " ", "linear", " ", "equation", " ", Cell[ToExpression["a \\, x = c", TeXForm]], " ", "in", " ", "terms", " ", "of", " ", "the", " ", StyleBox[Cell[TextData[{Cell[TextData[{"pseudo-inverse"}], "Text"]}]], FontSlant->"Italic"], " ", Cell[ToExpression["b = a^\\dag", TeXForm]], ".", " ", "The", " ", "calculation:"}], "Text"],
+Cell["gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
+ColumnForm[gb]", "Input"],
+Cell[TextData[{"finds", " ", "the", " ", "Gr\[ODoubleDot]bner", " ", "basis:"}], "Text"],
+Cell["a**x -> c
+a**b**c -> c
+a**b**a -> a 
+b**a**b -> b", "Output"],
+Cell[TextData[{"In", " ", "this", " ", "case", " ", "the", " ", "Gr\[ODoubleDot]bner", " ", "basis", " ", "cannot", " ", "quite", " ", StyleBox[Cell[TextData[{Cell[TextData[{"solve"}], "Text"]}]], FontSlant->"Italic"], " ", "the", " ", "equations", " ", "but", " ", "it", " ", "remarkably", " ", "produces", " ", "the", " ", "necessary", " ", "condition", " ", "for", " ", "existence", " ", "of", " ", "solutions:"}], "Text"],
+Cell[TextData[{Cell[ToExpression[" 0 = a \\, b \\, c - c = a \\, a^\\dag c - c ", TeXForm]]}], "Text"],
+Cell[TextData[{"that", " ", "can", " ", "be", " ", "interpreted", " ", "as", " ", Cell[ToExpression["c", TeXForm]], " ", "being", " ", "in", " ", "the", " ", "range-space", " ", "of", " ", Cell[ToExpression["a", TeXForm]], "."}], "Text"],
+Cell[TextData[{"Simplifying", " ", "Polynomial", " ", "Expressions"}], "Subsection"],
+Cell[TextData[{"Our", " ", "goal", " ", "now", " ", "is", " ", "to", " ", "verify", " ", "if", " ", "it", " ", "is", " ", "possible", " ", "to", " ", StyleBox[Cell[TextData[{Cell[TextData[{"simplify"}], "Text"]}]], FontSlant->"Italic"], " ", "the", " ", "following", " ", "expression:"}], "Text"],
+Cell["expr = b^2**a^2 - a^2**b^2 + a**b**a", "Input"],
+Cell[TextData[{"knowing", " ", "that"}], "Text"],
+Cell[TextData[{Cell[ToExpression[" a \\, b \\, a = b ", TeXForm]]}], "Text"],
+Cell[TextData[{"using", " ", "Gr\[ODoubleDot]bner", " ", "basis.", " ", "With", " ", "that", " ", "in", " ", "mind", " ", "we", " ", "set", " ", "the", " ", "ordering:"}], "Text"],
+Cell["SetMonomialOrder[a,b];", "Input"],
+Cell[TextData[{"and", " ", "calculate", " ", "the", " ", "GB", " ", "associated", " ", "with", " ", "the", " ", "constraint:"}], "Text"],
+Cell["rels = {a**b**a - b};
+rules = NCMakeGB[rels, 10];
+ColumnForm[rules]", "Input"],
+Cell[TextData[{"which", " ", "produces", " ", "the", " ", "output"}], "Text"],
+Cell["* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: a << b
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 2 polys in the basis, 1 obstructions
+* Cleaning up...
+* Found Groebner basis with 2 polynomials
+* * * * * * * * * * * * * * * *", "Output"],
+Cell[TextData[{"and", " ", "the", " ", "associated", " ", "GB"}], "Text"],
+Cell["a**b**a -> b
+b^2**a -> a**b^2", "Output"],
+Cell[TextData[{"The", " ", "GB", " ", "revealed", " ", "another", " ", "relationship", " ", "that", " ", "must", " ", "hold", " ", "true", " ", "if", " ", Cell[ToExpression["a \\, b \\, a = b", TeXForm]], ".", " ", "One", " ", "can", " ", "use", " ", "these", " ", "relationships", " ", "to", " ", "simplify", " ", "the", " ", "original", " ", "expression", " ", "using", " ", Cell[BoxData[FormBox[RowBox[{"NCReplaceRepeated"}], TraditionalForm]]], " ", "as", " ", "in"}], "Text"],
+Cell["NCReplaceRepeated[expr, rules]", "Input"],
+Cell[TextData[{"which", " ", "simplifies", " ", Cell[BoxData[FormBox[RowBox[{"expr"}], TraditionalForm]]], " ", "into", " ", Cell[BoxData[FormBox[RowBox[{"b"}], TraditionalForm]]], "."}], "Text"],
+Cell[TextData[{"An", " ", "alternative,", " ", "since", " ", "we", " ", "are", " ", "working", " ", "with", " ", "polynomials,", " ", "is", " ", "to", " ", "use", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"NCReduce"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "NCReduce"]], " ", "as", " ", "in"}], "Text"],
+Cell["vars = GetMonomialOrder[];
+NCReduce[expr, NCRuleToPoly[rules], vars]", "Input"],
+Cell[TextData[{"Note", " ", "that", " ", Cell[BoxData[FormBox[RowBox[{"NCReduce"}], TraditionalForm]]], " ", "needs", " ", "a", " ", "list", " ", "of", " ", "variables", " ", "to", " ", "be", " ", "used", " ", "as", " ", "the", " ", "desired", " ", "ordering,", " ", "which", " ", "we", " ", "obtain", " ", "from", " ", "the", " ", "current", " ", "ordering", " ", "using", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"GetMonomialOrder"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "GetMonomialOrder"]], ",", " ", "and", " ", "that", " ", "the", " ", "rules", " ", "in", " ", Cell[BoxData[FormBox[RowBox[{"rules"}], TraditionalForm]]], " ", "need", " ", "to", " ", "be", " ", "converted", " ", "to", " ", "polynomials,", " ", "which", " ", "we", " ", "do", " ", "using", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"NCRuleToPoly"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "NCRuleToPoly"]], "."}], "Text"],
+Cell[TextData[{"Polynomials", " ", "and", " ", "Rules"}], "Subsection"],
+Cell[TextData[{"Having", " ", "seen", " ", "how", " ", "polynomial", " ", "relations", " ", "can", " ", "be", " ", "interpreted", " ", "as", " ", "rules,", " ", "consider", " ", "the", " ", "expression"}], "Text"],
+Cell["expr = b^2**a^2 + a^2**b^3 + a**b**a", "Input"],
+Cell[TextData[{"and", " ", "the", " ", "polynomial", " ", "relations"}], "Text"],
+Cell["rels = {a**b**a - b , b^2 - a + b}", "Input"],
+Cell[TextData[{"With", " ", "respect", " ", "to", " ", "the", " ", "monomial", " ", "ordering"}], "Text"],
+Cell["SetMonomialOrder[a, b];", "Input"],
+Cell[TextData[{"we", " ", "can", " ", "interpret", " ", "these", " ", "relations", " ", "as", " ", "the", " ", "rules"}], "Text"],
+Cell["vars = GetMonomialOrder[];
+(rules = NCToRule[rels, vars]) // ColumnForm", "Input"],
+Cell[TextData[{"that", " ", "is"}], "Text"],
+Cell["a**b**a -> b
+b^2 -> a - b", "Output"],
+Cell[TextData[{"Note", " ", "how", " ", "we", " ", "used", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"GetMonomialOrder"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "GetMonomialOrder"]], " ", "to", " ", "obtain", " ", "the", " ", "list", " ", "of", " ", "variables", " ", Cell[BoxData[FormBox[RowBox[{"vars"}], TraditionalForm]]], " ", "corresponding", " ", "to", " ", "the", " ", "ordering"}], "Text"],
+Cell[TextData[{Cell[ToExpression[" a \\ll b", TeXForm]]}], "Text"],
+Cell[TextData[{"and", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"NCToRule"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "NCToRule"]], " ", "to", " ", "convert", " ", "the", " ", "polynomial", " ", "relations", " ", "into", " ", "rules."}], "Text"],
+Cell[TextData[{"We", " ", "can", " ", "then", " ", "apply", " ", "these", " ", "rules", " ", "by", " ", "using", " ", "one", " ", "of", " ", "the", " ", Cell[BoxData[FormBox[RowBox[{"NCReplace"}], TraditionalForm]]], " ", "functions,", " ", "for", " ", "example"}], "Text"],
+Cell["NCExpandReplaceRepeated[expr, rules]", "Input"],
+Cell[TextData[{"which", " ", "produces"}], "Text"],
+Cell["b + a^2**b + a^3**b - b**a^2", "Output"],
+Cell[TextData[{"Note", " ", "that", " ", "we", " ", "have", " ", "made", " ", "use", " ", "of", " ", "the", " ", "new", " ", "function", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"NCExpandReplaceRepeated"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "NCExpandReplaceRepeated"]], ",", " ", "to", " ", "automate", " ", "the", " ", "tedious", " ", "cycles", " ", "of", " ", "expansion", " ", "and", " ", "substitution."}], "Text"],
+Cell[TextData[{"Alternatively,", " ", "one", " ", "can", " ", "use", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"NCReduce"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "NCReduce"]], " ", "to", " ", "perform", " ", "the", " ", "same", " ", "substitution.", " ", Cell[BoxData[FormBox[RowBox[{"NCReduce"}], TraditionalForm]]], " ", "takes", " ", "in", " ", "polynomial,", " ", "instead", " ", "of", " ", "rules,", " ", "and", " ", "a", " ", "list", " ", "of", " ", "variables.", " ", "For", " ", "example,"}], "Text"],
+Cell["NCReduce[expr, rels, vars]", "Input"],
+Cell[TextData[{"produces"}], "Text"],
+Cell["a^2**b + a^3**b - b**a^2 + a**b**a", "Output"],
+Cell[TextData[{"which", " ", "is", " ", "the", " ", "result", " ", "of", " ", "applying", " ", "the", " ", "rules", " ", "only", " ", "to", " ", "the", " ", "leading", " ", "monomial", " ", "of", " ", Cell[BoxData[FormBox[RowBox[{"expr"}], TraditionalForm]]], ".", " ", "If", " ", "you", " ", "want", " ", "substitutions", " ", "to", " ", "be", " ", "applied", " ", "to", " ", "all", " ", "monomials", " ", "then", " ", "set", " ", "the", " ", "option", " ", Cell[BoxData[FormBox[RowBox[{"Complete"}], TraditionalForm]]], " ", "to", " ", Cell[BoxData[FormBox[RowBox[{"True"}], TraditionalForm]]], ",", " ", "as", " ", "in"}], "Text"],
+Cell["NCReduce[expr, rels, vars, Complete -> True]", "Input"],
+Cell[TextData[{"This", " ", "produces"}], "Text"],
+Cell["b + a^2**b + a^3**b - b**a^2", "Output"],
+Cell[TextData[{"which", " ", "is", " ", "the", " ", "same", " ", "result", " ", "as", " ", "above."}], "Text"],
+Cell[TextData[{"But,", " ", "of", " ", "course,", " ", "by", " ", "now", " ", "one", " ", "should", " ", "wonder", " ", "whether", " ", "the", " ", "above", " ", "polynomial", " ", "relations", " ", "could", " ", "imply", " ", "other", " ", "simplifications,", " ", "which", " ", "we", " ", "seek", " ", "to", " ", "find", " ", "out", " ", "by", " ", "running", " ", "our", " ", "Gr\[ODoubleDot]bner", " ", "basis", " ", "algorithm:"}], "Text"],
+Cell["rules = NCMakeGB[rels, 4];
+ColumnForm[rules]", "Input"],
+Cell[TextData[{"that", " ", "discovers", " ", "the", " ", "following", " ", "additional", " ", "relations"}], "Text"],
+Cell["b^2 -> a - b
+b**a -> a**b
+a^2**b -> b
+a^3 -> a", "Output"],
+Cell[TextData[{"When", " ", "used", " ", "for", " ", "simplification,"}], "Text"],
+Cell["NCExpandReplaceRepeated[expr, rules]", "Input"],
+Cell[TextData[{"reduces", " ", "the", " ", "original", " ", "expression", " ", "to", " ", "the", " ", "even", " ", "simpler", " ", "form"}], "Text"],
+Cell["b + a**b", "Output"],
+Cell[TextData[{"As", " ", "before,", " ", "rule", " ", "substitution", " ", "could", " ", "also", " ", "be", " ", "performed", " ", "by", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{Cell[BoxData[FormBox[RowBox[{"NCReduce"}], TraditionalForm]]]}], "Text"]}]], FontSlant->"Italic"], "NCReduce"]], " ", "as", " ", "in"}], "Text"],
+Cell["NCReduce[expr, NCRuleToPoly[rules], vars]", "Input"],
+Cell[TextData[{"that,", " ", "in", " ", "this", " ", "case,", " ", "leads", " ", "to", " ", "the", " ", "same", " ", "result", " ", "as", " ", "above", " ", "without", " ", "the", " ", "need", " ", "to", " ", "recourse", " ", "to", " ", "the", " ", Cell[BoxData[FormBox[RowBox[{"Complete"}], TraditionalForm]]], " ", "flag."}], "Text"],
+Cell[TextData[{"Minimal", " ", "versus", " ", "Reduced", " ", "Gr\[ODoubleDot]bner", " ", "Basis"}], "Subsection"],
+Cell[TextData[{"The", " ", "algorithm", " ", "implemented", " ", "by", " ", Cell[BoxData[FormBox[RowBox[{"NCGB"}], TraditionalForm]]], " ", "always", " ", "produces", " ", "a", " ", "Gr\[ODoubleDot]bner", " ", "Basis", " ", "with", " ", "the", " ", StyleBox[Cell[TextData[{Cell[TextData[{"minimal"}], "Text"]}]], FontSlant->"Italic"], " ", "possible", " ", "number", " ", "of", " ", "polynomials", " ", "at", " ", "a", " ", "given", " ", "iteration.", " ", "However,", " ", "such", " ", "polynomials", " ", "are", " ", "not", " ", "necessarily", " ", "the", " ", "\"", Cell[TextData[{"simplest"}], "Text"], "\"", " ", "possible", " ", "polynomials;", " ", "called", " ", "the", " ", StyleBox[Cell[TextData[{Cell[TextData[{"reduced"}], "Text"]}]], FontSlant->"Italic"], " ", "Gr\[ODoubleDot]bner", " ", "Basis.", " ", "The", " ", StyleBox[Cell[TextData[{Cell[TextData[{"reduced"}], "Text"]}]], FontSlant->"Italic"], " ", "Gr\[ODoubleDot]bner", " ", "Basis", " ", "is", " ", "unique", " ", "given", " ", "the", " ", "relations", " ", "and", " ", "the", " ", "monomial", " ", "ordering.", " ", "Consider", " ", "for", " ", "example", " ", "the", " ", "following", " ", "monomial", " ", "ordering"}], "Text"],
+Cell["SetMonomialOrder[x, y]", "Input"],
+Cell[TextData[{"and", " ", "the", " ", "relations"}], "Text"],
+Cell["rels = {x^3 - 2 x**y, x^2**y - 2 y^2 + x}", "Input"],
+Cell[TextData[{"for", " ", "which"}], "Text"],
+Cell["NCMakeGB[rels, ReduceBasis -> False] // ColumnForm", "Input"],
+Cell[TextData[{"produces", " ", "the", " ", StyleBox[Cell[TextData[{Cell[TextData[{"minimal"}], "Text"]}]], FontSlant->"Italic"], " ", "Gr\[ODoubleDot]bner", " ", "Basis"}], "Text"],
+Cell["x^2->0
+x**y->x^3/2
+y**x->x**y
+y^2->x/2+x^2**y/2", "Output"],
+Cell[TextData[{"but"}], "Text"],
+Cell["NCMakeGB[rels, ReduceBasis -> True] // ColumnForm", "Input"],
+Cell[TextData[{"returns", " ", "the", " ", StyleBox[Cell[TextData[{Cell[TextData[{"reduced"}], "Text"]}]], FontSlant->"Italic"], " ", "Gr\[ODoubleDot]bner", " ", "Basis"}], "Text"],
+Cell["x^2->0
+x**y->0
+y**x->0
+y^2->x/2", "Output"],
+Cell[TextData[{"in", " ", "which", " ", "not", " ", "only", " ", "the", " ", "leading", " ", "monomials", " ", "but", " ", "also", " ", "all", " ", "lower-order", " ", "monomials", " ", "have", " ", "been", " ", "reduced", " ", "by", " ", "the", " ", "basis'", " ", "leading", " ", "monomials.", " ", "The", " ", "option", " ", Cell[BoxData[FormBox[RowBox[{"ReduceBasis"}], TraditionalForm]]], " ", "is", " ", "set", " ", "to", " ", Cell[BoxData[FormBox[RowBox[{"True"}], TraditionalForm]]], " ", "by", " ", "default."}], "Text"],
+Cell[TextData[{"Simplifying", " ", "Rational", " ", "Expressions"}], "Subsection"],
+Cell[TextData[{"It", " ", "is", " ", "often", " ", "desirable", " ", "to", " ", "simplify", " ", "expressions", " ", "involving", " ", "inverses", " ", "of", " ", "noncommutative", " ", "expressions.", " ", "One", " ", "challenge", " ", "is", " ", "to", " ", "recognize", " ", "identities", " ", "implied", " ", "by", " ", "the", " ", "existence", " ", "of", " ", "certain", " ", "inverses.", " ", "For", " ", "example,", " ", "that", " ", "the", " ", "expression"}], "Text"],
+Cell["expr = x**inv[1 - x] - inv[1 - x]**x", "Input"],
+Cell[TextData[{"is", " ", "equivalent", " ", "to", " ", Cell[ToExpression["0", TeXForm]], ".", " ", "One", " ", "can", " ", "use", " ", "a", " ", "nc", " ", "Gr\[ODoubleDot]bner", " ", "basis", " ", "for", " ", "that", " ", "task.", " ", "Consider", " ", "for", " ", "instance", " ", "the", " ", "ordering"}], "Text"],
+Cell[TextData[{Cell[ToExpression[" x \\ll (1-x)^{-1} ", TeXForm]]}], "Text"],
+Cell[TextData[{"implied", " ", "by", " ", "the", " ", "command:"}], "Text"],
+Cell["SetMonomialOrder[x, inv[1-x]]", "Input"],
+Cell[TextData[{"This", " ", "ordering", " ", "encodes", " ", "the", " ", "following", " ", "precise", " ", "idea", " ", "of", " ", "what", " ", "we", " ", "mean", " ", "by", " ", StyleBox[Cell[TextData[{Cell[TextData[{"simple"}], "Text"]}]], FontSlant->"Italic"], " ", "versus", " ", StyleBox[Cell[TextData[{Cell[TextData[{"complicated"}], "Text"]}]], FontSlant->"Italic"], ":", " ", "it", " ", "formally", " ", "corresponds", " ", "to", " ", "specifying", " ", "that", " ", Cell[ToExpression["x", TeXForm]], " ", "is", " ", "simpler", " ", "than", " ", Cell[ToExpression["(1-x)^{-1}", TeXForm]], ",", " ", "which", " ", "might", " ", "sits", " ", "well", " ", "with", " ", "one's", " ", "intuition."}], "Text"],
+Cell[TextData[{"Now", " ", "consider", " ", "the", " ", "following", " ", "command:"}], "Text"],
+Cell["(rules = NCMakeGB[{}, 3]) // ColumnForm", "Input"],
+Cell[TextData[{"which", " ", "produces", " ", "the", " ", "output"}], "Text"],
+Cell["* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: x <<  inv[x] << inv[1 - x]
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 6 polys in the basis, 6 obstructions
+* Cleaning up...
+* Found Groebner basis with 6 polynomials
+* * * * * * * * * * * * * * * *", "Output"],
+Cell[TextData[{"and", " ", "results", " ", "in", " ", "the", " ", "rules:"}], "Text"],
+Cell["x**inv[1 - x] -> -1 + inv[1 - x],
+inv[1-x]**x -> -1 + inv[1-x],", "Output"],
+Cell[TextData[{"As", " ", "in", " ", "the", " ", "previous", " ", "example,", " ", "the", " ", "GB", " ", "revealed", " ", "new", " ", "relationships", " ", "that", " ", "must", " ", "hold", " ", "true", " ", "if", " ", Cell[ToExpression["1- x", TeXForm]], " ", "is", " ", "invertible,", " ", "and", " ", "one", " ", "can", " ", "use", " ", "this", " ", "relationship", " ", "to", " ", StyleBox[Cell[TextData[{Cell[TextData[{"simplify"}], "Text"]}]], FontSlant->"Italic"], " ", "the", " ", "original", " ", "expression", " ", "using", " ", Cell[BoxData[FormBox[RowBox[{"NCReplaceRepeated"}], TraditionalForm]]], " ", "as", " ", "in:"}], "Text"],
+Cell["NCReplaceRepeated[expr, rules]", "Input"],
+Cell[TextData[{"The", " ", "above", " ", "command", " ", "results", " ", "in", " ", Cell[BoxData[FormBox[RowBox[{"0"}], TraditionalForm]]], ",", " ", "as", " ", "one", " ", "would", " ", "hope."}], "Text"],
+Cell[TextData[{"For", " ", "a", " ", "more", " ", "challenging", " ", "example", " ", "consider", " ", "the", " ", "identity:"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\left (1 - x - y (1 - x)^{-1} y \\right )^{-1} = \\frac{1}{2} (1 - x - y)^{-1} + \\frac{1}{2} (1 - x + y)^{-1}", TeXForm]]}], "Text"],
+Cell[TextData[{"One", " ", "can", " ", "verify", " ", "that", " ", "the", " ", "rule", " ", "based", " ", "command", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCSimplifyRational"}], "Text"]}]], FontSlant->"Italic"], "NCSimplifyRational"]], " ", "fails", " ", "to", " ", "simplify", " ", "the", " ", "expression:"}], "Text"],
+Cell["expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+NCSimplifyRational[expr]", "Input"],
+Cell[TextData[{"We", " ", "set", " ", "the", " ", "monomial", " ", "ordering", " ", "and", " ", "calculate", " ", "the", " ", "Gr\[ODoubleDot]bner", " ", "basis"}], "Text"],
+Cell["SetMonomialOrder[x, y, inv[1-x], inv[1-x+y], inv[1-x-y], inv[1-x-y**inv[1-x]**y]];
+(rules = NCMakeGB[{}, 3]) // ColumnForm", "Input"],
+Cell[TextData[{"based", " ", "on", " ", "the", " ", "rational", " ", "involved", " ", "in", " ", "the", " ", "original", " ", "expression.", " ", "The", " ", "result", " ", "is", " ", "the", " ", "nc", " ", "GB:"}], "Text"],
+Cell["inv[1-x-y**inv[1-x]**y] -> (1/2)inv[1-x-y]+(1/2)inv[1-x+y]
+x**inv[1-x] -> -1+inv[1-x]
+y**inv[1-x+y] -> 1-inv[1-x+y]+x**inv[1-x+y]
+y**inv[1-x-y] -> -1+inv[1-x-y]-x**inv[1-x-y]
+inv[1-x]**x -> -1+inv[1-x]
+inv[1-x+y]**y -> 1-inv[1-x+y]+inv[1-x+y]**x
+inv[1-x-y]**y -> -1+inv[1-x-y]-inv[1-x-y]**x
+inv[1-x+y]**x**inv[1-x-y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x+y]**inv[1-x-y]
+inv[1-x-y]**x**inv[1-x+y] -> -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv[1-x+y]", "Output"],
+Cell[TextData[{"which", " ", "successfully", " ", "simplifies", " ", "the", " ", "original", " ", "expression", " ", "using:"}], "Text"],
+Cell["NCExpandReplaceRepeated[expr, rules]", "Input"],
+Cell[TextData[{"resulting", " ", "in", " ", Cell[BoxData[FormBox[RowBox[{"0"}], TraditionalForm]]], "."}], "Text"],
+Cell[TextData[{"See", " ", "also", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"Advanced", " ", "Processing", " ", "of", " ", "Rational", " ", "Expressions"}], "Text"]}]], FontSlant->"Italic"], "AdvancedProcessingOfRationalExpressions"]], " ", "for", " ", "more", " ", "details", " ", "on", " ", "the", " ", "lower", " ", "level", " ", "handling", " ", "of", " ", "rational", " ", "expressions."}], "Text"],
+Cell[TextData[{"Simplification", " ", "with", " ", "NCGBSimplifyRational"}], "Subsection"],
+Cell[TextData[{"The", " ", "simplification", " ", "process", " ", "described", " ", "above", " ", "is", " ", "automated", " ", "in", " ", "the", " ", "function", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCGBSimplifyRational"}], "Text"]}]], FontSlant->"Italic"], "NCGBSimplifyRational"]], "."}], "Text"],
+Cell[TextData[{"For", " ", "example,", " ", "calls", " ", "to"}], "Text"],
+Cell["expr = x**inv[1 - x] - inv[1 - x]**x
+NCGBSimplifyRational[expr]", "Input"],
+Cell[TextData[{"or"}], "Text"],
+Cell["expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
+NCGBSimplifyRational[expr]", "Input"],
+Cell[TextData[{"both", " ", "result", " ", "in", " ", Cell[BoxData[FormBox[RowBox[{"0"}], TraditionalForm]]], "."}], "Text"],
+Cell[TextData[{"Ordering", " ", "on", " ", "Variables", " ", "and", " ", "Monomials"}], "Subsection"],
+Cell[TextData[{"As", " ", "seen", " ", "above,", " ", "one", " ", "needs", " ", "to", " ", "declare", " ", "a", " ", StyleBox[Cell[TextData[{Cell[TextData[{"monomial", " ", "order"}], "Text"]}]], FontSlant->"Italic"], " ", "before", " ", "making", " ", "a", " ", "Gr\[ODoubleDot]bner", " ", "Basis.", " ", "There", " ", "are", " ", "various", " ", "monomial", " ", "orders", " ", "which", " ", "can", " ", "be", " ", "used", " ", "when", " ", "computing", " ", "Gr\[ODoubleDot]bner", " ", "Basis.", " ", "The", " ", "most", " ", "common", " ", "are", " ", StyleBox[Cell[TextData[{Cell[TextData[{"lexicographic"}], "Text"]}]], FontSlant->"Italic"], " ", "and", " ", StyleBox[Cell[TextData[{Cell[TextData[{"graded", " ", "lexicographic"}], "Text"]}]], FontSlant->"Italic"], " ", "orders.", " ", "We", " ", "consider", " ", "also", " ", StyleBox[Cell[TextData[{Cell[TextData[{"multi-graded", " ", "lexicographic"}], "Text"]}]], FontSlant->"Italic"], " ", "orders."}], "Text"],
+Cell[TextData[{"Lexicographic", " ", "and", " ", "multi-graded", " ", "lexicographic", " ", "orders", " ", "are", " ", "examples", " ", "of", " ", "elimination", " ", "orderings.", " ", "An", " ", "elimination", " ", "ordering", " ", "is", " ", "an", " ", "ordering", " ", "which", " ", "is", " ", "used", " ", "for", " ", "solving", " ", "for", " ", "some", " ", "of", " ", "the", " ", "variables", " ", "in", " ", "terms", " ", "of", " ", "others."}], "Text"],
+Cell[TextData[{"We", " ", "now", " ", "discuss", " ", "each", " ", "of", " ", "these", " ", "types", " ", "of", " ", "orders."}], "Text"],
+Cell[TextData[{"Lex", " ", "Order:", " ", "the", " ", "simplest", " ", "elimination", " ", "order"}], "Subsubsection"],
+Cell[TextData[{"To", " ", "impose", " ", "lexicographic", " ", "order,", " ", "say", " ", Cell[ToExpression["a\\ll b\\ll x\\ll y", TeXForm]], " ", "on", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["x", TeXForm]], " ", "and", " ", Cell[ToExpression["y", TeXForm]], ",", " ", "one", " ", "types"}], "Text"],
+Cell["SetMonomialOrder[a,b,x,y];", "Input"],
+Cell[TextData[{"or,", " ", "equivalently"}], "Text"],
+Cell["SetMonomialOrder[{a},{b},{x},{y}];", "Input"],
+Cell[TextData[{"This", " ", "order", " ", "is", " ", "useful", " ", "for", " ", "attempting", " ", "to", " ", "solve", " ", "for", " ", Cell[ToExpression["y", TeXForm]], " ", "in", " ", "terms", " ", "of", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], " ", "and", " ", Cell[ToExpression["x", TeXForm]], ",", " ", "since", " ", "the", " ", "highest", " ", "priority", " ", "of", " ", "the", " ", "GB", " ", "algorithm", " ", "is", " ", "to", " ", "produce", " ", "polynomials", " ", "which", " ", "do", " ", "not", " ", "contain", " ", Cell[ToExpression["y", TeXForm]], ".", " ", "If", " ", "producing", " ", "high", " ", "order", " ", "polynomials", " ", "is", " ", "a", " ", "consequence", " ", "of", " ", "this", " ", "fanaticism", " ", "so", " ", "be", " ", "it.", " ", "Unlike", " ", "graded", " ", "orders,", " ", "lex", " ", "orders", " ", "pay", " ", "little", " ", "attention", " ", "to", " ", "the", " ", "degree", " ", "of", " ", "terms.", " ", "Likewise", " ", "its", " ", "second", " ", "highest", " ", "priority", " ", "is", " ", "to", " ", "eliminate", " ", Cell[ToExpression["x", TeXForm]], "."}], "Text"],
+Cell[TextData[{"Once", " ", "this", " ", "order", " ", "is", " ", "set,", " ", "one", " ", "can", " ", "use", " ", "all", " ", "of", " ", "the", " ", "commands", " ", "in", " ", "the", " ", "preceding", " ", "section", " ", "in", " ", "exactly", " ", "the", " ", "same", " ", "form."}], "Text"],
+Cell[TextData[{"We", " ", "now", " ", "give", " ", "a", " ", "simple", " ", "example", " ", "how", " ", "one", " ", "can", " ", "solve", " ", "for", " ", Cell[ToExpression["y", TeXForm]], " ", "given", " ", "that", " ", Cell[ToExpression["a", TeXForm]], ",", Cell[ToExpression["b", TeXForm]], ",", Cell[ToExpression["x", TeXForm]], " ", "and", " ", Cell[ToExpression["y", TeXForm]], " ", "satisfy", " ", "the", " ", "equations:"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+-b\\, x + x\\, y  \\, a + x\\, b \\, a \\,  a &= 0 \\\\
+x \\, a-1&=0 \\\\
+a\\, x-1&=0
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"The", " ", "command"}], "Text"],
+Cell["NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4] // ColumnForm", "Input"],
+Cell[TextData[{"produces", " ", "the", " ", "Gr\[ODoubleDot]bner", " ", "basis:"}], "Text"],
+Cell["y -> -b**a + a**b**x^2
+a**x -> 1 
+x**a -> 1", "Output"],
+Cell[TextData[{"after", " ", "one", " ", "iteration."}], "Text"],
+Cell[TextData[{"Now,", " ", "we", " ", "change", " ", "the", " ", "ordering", " ", "to"}], "Text"],
+Cell["SetMonomialOrder[y,x,b,a];", "Input"],
+Cell[TextData[{"and", " ", "run", " ", "the", " ", "same", " ", Cell[BoxData[FormBox[RowBox[{"NCMakeGB"}], TraditionalForm]]], " ", "as", " ", "above:"}], "Text"],
+Cell["NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4] // ColumnForm", "Input"],
+Cell[TextData[{"which,", " ", "this", " ", "time,", " ", "results", " ", "in"}], "Text"],
+Cell["b**x^3 -> x**b+x**y**x
+x**a -> 1
+a**x -> 1
+x**b**a -> b**x^2 - x**y
+a**b**x^2 -> y+b**a
+x**b^2**a -> -x**b**y+b**x^2**b**x^2 - 
+    x**y**b**x^2
+b**a^2 -> -y**a+a**b**x
+b**a**b**a -> -y^2 - b**a**y - y**b**a+
+    a**b**x**b**x^2
+b**a**b^2**a -> -y**b**y - y**b^2**a - 
+    y^2**b**x^2 - b**a**b**y - b**a**y**b**x^2+
+    a**b**x**b**x^2**b**x^2", "Output"],
+Cell[TextData[{"which", " ", "is", " ", "not", " ", "a", " ", "Gr\[ODoubleDot]bner", " ", "basis", " ", "since", " ", "the", " ", "algorithm", " ", "was", " ", "interrupted", " ", "at", " ", "4", " ", "iterations.", " ", "Note", " ", "the", " ", "presence", " ", "of", " ", "the", " ", "rule"}], "Text"],
+Cell["a**b**x**x -> y+b**a", "Output"],
+Cell[TextData[{"which", " ", "shows", " ", "that", " ", "the", " ", "ordering", " ", "is", " ", "not", " ", "set", " ", "up", " ", "to", " ", "solve", " ", "for", " ", Cell[ToExpression["y", TeXForm]], " ", "in", " ", "terms", " ", "of", " ", "the", " ", "other", " ", "variables", " ", "in", " ", "the", " ", "sense", " ", "that", " ", Cell[ToExpression["y", TeXForm]], " ", "is", " ", "not", " ", "on", " ", "the", " ", "left", " ", "hand", " ", "side", " ", "of", " ", "this", " ", "rule", " ", "(but", " ", "a", " ", "human", " ", "could", " ", "easily", " ", "solve", " ", "for", " ", Cell[ToExpression["y", TeXForm]], " ", "using", " ", "this", " ", "rule).", " ", "Also", " ", "the", " ", "algorithm", " ", "created", " ", "a", " ", "number", " ", "of", " ", "other", " ", "relations", " ", "which", " ", "involved", " ", Cell[ToExpression["y", TeXForm]], "."}], "Text"],
+Cell[TextData[{"Graded", " ", "Lex", " ", "Ordering:", " ", "a", " ", "non-elimination", " ", "order"}], "Subsubsection"],
+Cell[TextData[{"To", " ", "impose", " ", "graded", " ", "lexicographic", " ", "order,", " ", "say", " ", Cell[ToExpression["a< b< x< y", TeXForm]], " ", "on", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["x", TeXForm]], " ", "and", " ", Cell[ToExpression["y", TeXForm]], ",", " ", "one", " ", "types"}], "Text"],
+Cell["SetMonomialOrder[{a,b,x,y}];", "Input"],
+Cell[TextData[{"This", " ", "ordering", " ", "puts", " ", "high", " ", "degree", " ", "monomials", " ", "high", " ", "in", " ", "the", " ", "ordering.", " ", "Thus", " ", "it", " ", "tries", " ", "to", " ", "decrease", " ", "the", " ", "total", " ", "degree", " ", "of", " ", "expressions.", " ", "A", " ", "call", " ", "to"}], "Text"],
+Cell["NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4,ReduceBasis->True] // ColumnForm", "Input"],
+Cell[TextData[{"now", " ", "produces"}], "Text"],
+Cell["a**x -> 1,
+x**a -> 1,
+b**a^2 -> -y**a+a**b**x,
+x**b**a -> b**x^2 - x**y,
+a**b**x^2 -> y+b**a,
+b**x^3 -> x**b+x**y**x,
+a**b**x**b**x^2 -> y^2+b**a**y+y**b**a+b**a**b**a,
+b**x^2**b**x^2 -> x**b**y+x**b^2**a+x**y**b**x^2,
+a**b**x**b**x**b**x^2 -> y^3+b**a**y^2+y^2**b**a+y**b**a**y+
+                         b**a**b**a**y+b**a**y**b**a+
+                         y**b**a**b**a+b**a**b**a**b**a,
+b**x^2**b**x**b**x^2 -> x**b**y^2+x**b^2**a**y+x**b**y**b**a+
+                        x**b^2**a**b**a+x**y**b**x**b**x^2", "Output"],
+Cell[TextData[{"which", " ", "again", " ", "fails", " ", "to", " ", "be", " ", "a", " ", "Gr\[ODoubleDot]bner", " ", "basis", " ", "and", " ", "does", " ", "not", " ", "eliminate", " ", Cell[ToExpression["y", TeXForm]], ".", " ", "Instead,", " ", "it", " ", "tries", " ", "to", " ", "decrease", " ", "the", " ", "total", " ", "degree", " ", "of", " ", "expressions", " ", "involving", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["x", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["y", TeXForm]], "."}], "Text"],
+Cell[TextData[{"Multigraded", " ", "Lex", " ", "Ordering:", " ", "a", " ", "variety", " ", "of", " ", "elimination", " ", "orders"}], "Subsubsection"],
+Cell[TextData[{"There", " ", "are", " ", "other", " ", "useful", " ", "monomial", " ", "orders", " ", "which", " ", "one", " ", "can", " ", "use", " ", "other", " ", "than", " ", "graded", " ", "lex", " ", "and", " ", "lex.", " ", "Another", " ", "type", " ", "of", " ", "order", " ", "is", " ", "what", " ", "we", " ", "call", " ", "multigraded", " ", "lex", " ", "and", " ", "is", " ", "a", " ", "mixture", " ", "of", " ", "graded", " ", "lex", " ", "and", " ", "lex", " ", "order.", " ", "To", " ", "impose", " ", "multi-graded", " ", "lexicographic", " ", "order,", " ", "say", " ", Cell[ToExpression["a< b< x\\ll y", TeXForm]], " ", "on", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["x", TeXForm]], " ", "and", " ", Cell[ToExpression["y", TeXForm]], ",", " ", "one", " ", "types"}], "Text"],
+Cell["SetMonomialOrder[{a,b,x},y];", "Input"],
+Cell[TextData[{"which", " ", "separates", " ", Cell[ToExpression["y", TeXForm]], " ", "from", " ", "the", " ", "remaining", " ", "variables.", " ", "This", " ", "time,", " ", "a", " ", "call", " ", "to"}], "Text"],
+Cell["NCMakeGB[{-b**x+x**y**a+x**b**a**a, x**a-1, a**x-1},4,ReduceBasis->True] // ColumnForm", "Input"],
+Cell[TextData[{"yields", " ", "once", " ", "again"}], "Text"],
+Cell["y -> -b**a+a**b**x^2
+a**x -> 1
+x**a -> 1", "Output"],
+Cell[TextData[{"which", " ", "not", " ", "only", " ", "eliminates", " ", Cell[ToExpression["y", TeXForm]], " ", "but", " ", "is", " ", "also", " ", "Gr\[ODoubleDot]bner", " ", "basis,", " ", "calculated", " ", "after", " ", "one", " ", "iteration."}], "Text"],
+Cell[TextData[{"For", " ", "an", " ", "intuitive", " ", "idea", " ", "of", " ", "why", " ", "multigraded", " ", "lex", " ", "is", " ", "helpful,", " ", "we", " ", "think", " ", "of", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["x", TeXForm]], " ", "as", " ", "corresponding", " ", "to", " ", "variables", " ", "in", " ", "some", " ", "engineering", " ", "problem", " ", "which", " ", "represent", " ", "quantities", " ", "which", " ", "are", " ", StyleBox[Cell[TextData[{Cell[TextData[{"known"}], "Text"]}]], FontSlant->"Italic"], " ", "and", " ", Cell[ToExpression["y", TeXForm]], " ", "to", " ", "be", " ", StyleBox[Cell[TextData[{Cell[TextData[{"unknown"}], "Text"]}]], FontSlant->"Italic"], ".", " ", "The", " ", "fact", " ", "that", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], " ", "and", " ", Cell[ToExpression["x", TeXForm]], " ", "are", " ", "in", " ", "the", " ", "top", " ", "level", " ", "indicates", " ", "that", " ", "we", " ", "are", " ", "very", " ", "interested", " ", "in", " ", "solving", " ", "for", " ", Cell[ToExpression["y", TeXForm]], " ", "in", " ", "terms", " ", "of", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["x", TeXForm]], ",", " ", "but", " ", "are", " ", "not", " ", "willing", " ", "to", " ", "solve", " ", "for,", " ", "say", " ", Cell[ToExpression["x", TeXForm]], ",", " ", "in", " ", "terms", " ", "of", " ", "expressions", " ", "involving", " ", Cell[ToExpression["y", TeXForm]], "."}], "Text"],
+Cell[TextData[{"This", " ", "situation", " ", "is", " ", "so", " ", "common", " ", "that", " ", "we", " ", "provide", " ", "the", " ", "commands", " ", Cell[BoxData[FormBox[RowBox[{"SetKnowns"}], TraditionalForm]]], " ", "and", " ", Cell[BoxData[FormBox[RowBox[{"SetUnknowns"}], TraditionalForm]]], ".", " ", "The", " ", "above", " ", "ordering", " ", "would", " ", "be", " ", "obtained", " ", "after", " ", "setting"}], "Text"],
+Cell["SetKnowns[a,b,x];
+SetUnknowns[y];", "Input"],
+Cell[TextData[{"A", " ", "Complete", " ", "Example:", " ", "the", " ", "partially", " ", "prescribed", " ", "matrix", " ", "inverse", " ", "problem"}], "Subsection"],
+Cell[TextData[{"This", " ", "is", " ", "a", " ", "type", " ", "of", " ", "problem", " ", "known", " ", "as", " ", "a", " ", StyleBox[Cell[TextData[{Cell[TextData[{"matrix", " ", "completion", " ", "problem"}], "Text"]}]], FontSlant->"Italic"], ".", " ", "This", " ", "particular", " ", "one", " ", "was", " ", "suggested", " ", "by", " ", "Hugo", " ", "Woerdeman.", " ", "We", " ", "are", " ", "grateful", " ", "to", " ", "him", " ", "for", " ", "discussions."}], "Text"],
+Cell[TextData[{StyleBox[Cell[TextData[{Cell[TextData[{"Problem:"}], "Text"]}]], FontWeight->"Bold"], " ", StyleBox[Cell[TextData[{Cell[TextData[{"Given", " ", "matrices", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["c", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["d", TeXForm]], ",", " ", "we", " ", "wish", " ", "to", " ", "determine", " ", "under", " ", "what", " ", "conditions", " ", "there", " ", "exists", " ", "matrices", " ", "x,", " ", "y,", " ", "z,", " ", "and", " ", "w", " ", "such", " ", "that", " ", "the", " ", "block", " ", "matrices"}], "Text"]}]], FontSlant->"Italic"]}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{bmatrix} a & x \\\\ y & b \\end{bmatrix}
+  \\qquad 
+  \\begin{bmatrix} w & c \\\\ d & z \\end{bmatrix}", TeXForm]]}], "Text"],
+Cell[TextData[{StyleBox[Cell[TextData[{Cell[TextData[{"are", " ", "inverses", " ", "of", " ", "each", " ", "other.", " ", "Also,", " ", "we", " ", "wish", " ", "to", " ", "find", " ", "formulas", " ", "for", " ", Cell[ToExpression["x", TeXForm]], ",", " ", Cell[ToExpression["y", TeXForm]], ",", " ", Cell[ToExpression["z", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["w", TeXForm]], "."}], "Text"]}]], FontSlant->"Italic"]}], "Text"],
+Cell[TextData[{"This", " ", "problem", " ", "was", " ", "solved", " ", "in", " ", "a", " ", "paper", " ", "by", " ", "W.W.", " ", "Barrett,", " ", "C.R.", " ", "Johnson,", " ", "M.", " ", "E.", " ", "Lundquist", " ", "and", " ", "H.", " ", "Woerderman", " ", "[BJLW]", " ", "where", " ", "they", " ", "showed", " ", "it", " ", "splits", " ", "into", " ", "several", " ", "cases", " ", "depending", " ", "upon", " ", "which", " ", "of", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["c", TeXForm]], " ", "and", " ", Cell[ToExpression["d", TeXForm]], " ", "are", " ", "invertible.", " ", "In", " ", "our", " ", "example,", " ", "we", " ", "assume", " ", "that", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["c", TeXForm]], " ", "and", " ", Cell[ToExpression["d", TeXForm]], " ", "are", " ", "invertible", " ", "and", " ", "discover", " ", "the", " ", "result", " ", "which", " ", "they", " ", "obtain", " ", "in", " ", "this", " ", "case."}], "Text"],
+Cell[TextData[{"First", " ", "we", " ", "set", " ", "the", " ", "matrices", " ", Cell[ToExpression["a", TeXForm]], ",", " ", Cell[ToExpression["b", TeXForm]], ",", " ", Cell[ToExpression["c", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["d", TeXForm]], " ", "and", " ", "their", " ", "inverses", " ", "as", " ", StyleBox[Cell[TextData[{Cell[TextData[{"knowns"}], "Text"]}]], FontSlant->"Italic"], " ", "and", " ", Cell[ToExpression["x", TeXForm]], ",", " ", Cell[ToExpression["y", TeXForm]], ",", " ", Cell[ToExpression["w", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["z", TeXForm]], " ", "as", " ", "unknowns:"}], "Text"],
+Cell["SetKnowns[a, inv[a], b, inv[b], c, inv[c], d, inv[d]];
+SetUnknowns[{z}, {x, y, w}];", "Input"],
+Cell[TextData[{"Note", " ", "that", " ", "the", " ", "graded", " ", "ordering", " ", "of", " ", "the", " ", "unknowns", " ", "means", " ", "that", " ", "we", " ", "care", " ", "more", " ", "about", " ", "solving", " ", "for", " ", Cell[ToExpression["x", TeXForm]], ",", " ", Cell[ToExpression["y", TeXForm]], " ", "and", " ", Cell[ToExpression["w", TeXForm]], " ", "than", " ", "for", " ", Cell[ToExpression["z", TeXForm]], "."}], "Text"],
+Cell[TextData[{"Then", " ", "we", " ", "define", " ", "the", " ", "relations", " ", "we", " ", "are", " ", "interested", " ", "in,", " ", "which", " ", "are", " ", "obtained", " ", "after", " ", "multiplying", " ", "the", " ", "two", " ", "block", " ", "matrices", " ", "on", " ", "both", " ", "sides", " ", "and", " ", "equating", " ", "to", " ", "identity"}], "Text"],
+Cell["A = {{a, x}, {y, b}}
+B = {{w, c}, {d, z}}
+
+rels = {
+  NCDot[A, B] - IdentityMatrix[2],
+  NCDot[B, A] - IdentityMatrix[2]
+} // Flatten", "Input"],
+Cell[TextData[{"We", " ", "use", " ", Cell[BoxData[FormBox[RowBox[{"Flatten"}], TraditionalForm]]], " ", "to", " ", "reduce", " ", "the", " ", "matrix", " ", "relations", " ", "to", " ", "a", " ", "simple", " ", "list", " ", "of", " ", "relations.", " ", "The", " ", "resulting", " ", "relations", " ", "in", " ", "this", " ", "case", " ", "are:"}], "Text"],
+Cell["rels = {-1+a**w+x**d, a**c+x**z, b**d+y**w, -1+b**z+y**c,
+        -1+c**y+w**a, c**b+w**x, d**a+z**y, -1+d**x+z**b}", "Output"],
+Cell[TextData[{"After", " ", "running"}], "Text"],
+Cell["NCMakeGB[rels, 8] // ColumnForm", "Input"],
+Cell[TextData[{"we", " ", "obtain", " ", "the", " ", "Gr\[ODoubleDot]bner", " ", "basis:"}], "Text"],
+Cell["x -> inv[d]-inv[d]**z**b
+y -> inv[c]-b**z**inv[c]
+w -> inv[a]**inv[d]**z**b**d
+z**b**z -> z+d**a**c
+c**b**z**inv[c]**inv[a] -> inv[a]**inv[d]**z**b**d
+inv[c]**inv[a]**inv[d]**z**b -> b**z**inv[c]**inv[a]**inv[d]
+inv[d]**z**b**d**a -> a**c**b**z**inv[c]
+z**b**d**a**c -> d**a**c**b**z
+z**inv[c]**inv[a]**inv[d]**inv[b] -> inv[b]**inv[c]**inv[a]**inv[d]**z
+z**inv[c]**inv[a]**inv[d]**z -> inv[b]+inv[b]**inv[c]**inv[a]**inv[d]**z
+d**a**c**b**z**inv[c] -> z**b**d**a", "Output"],
+Cell[TextData[{"after", " ", "seven", " ", "iterations.", " ", "The", " ", "first", " ", "four", " ", "relations"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+    x &= d^{-1}-d^{-1} \\, z \\, b \\\\
+    y &= c^{-1}-b \\, z \\, c^{-1} \\\\
+    w &= a^{-1} \\, d^{-1}  \\, z \\, b \\, d \\\\
+    z \\, b \\, z &= z + d \\, a \\, c
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"are", " ", "the", " ", "solutions", " ", "we", " ", "are", " ", "looking", " ", "for,", " ", "which", " ", "states", " ", "that", " ", "one", " ", "can", " ", "find", " ", Cell[ToExpression["x", TeXForm]], ",", " ", Cell[ToExpression["y", TeXForm]], ",", " ", Cell[ToExpression["z", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["w", TeXForm]], " ", "such", " ", "that", " ", "the", " ", "matrices", " ", "above", " ", "are", " ", "inverses", " ", "of", " ", "each", " ", "other", " ", "if", " ", "and", " ", "only", " ", "if", " ", Cell[ToExpression["z \\, b \\, z = z + d \\, a \\, c", TeXForm]], ".", " ", "The", " ", "first", " ", "three", " ", "relations", " ", "gives", " ", "formulas", " ", "for", " ", Cell[ToExpression["x", TeXForm]], ",", " ", Cell[ToExpression["y", TeXForm]], " ", "and", " ", Cell[ToExpression["w", TeXForm]], " ", "in", " ", "terms", " ", "of", " ", Cell[ToExpression["z", TeXForm]], "."}], "Text"],
+Cell[TextData[{"A", " ", "variety", " ", "of", " ", "scenarios", " ", "can", " ", "be", " ", "quickly", " ", "investigated", " ", "under", " ", "different", " ", "assumptions.", " ", "For", " ", "example,", " ", "say", " ", "that", " ", Cell[ToExpression["c", TeXForm]], " ", "is", " ", "not", " ", "invertible.", " ", "Is", " ", "it", " ", "still", " ", "possible", " ", "to", " ", "solve", " ", "the", " ", "problem?", " ", "One", " ", "solution", " ", "is", " ", "obtained", " ", "with", " ", "the", " ", "ordering", " ", "implied", " ", "by"}], "Text"],
+Cell["SetKnowns[a, inv[a], b, inv[b], c, d, inv[d]];
+SetUnknowns[{y}, {z, w, x}];", "Input"],
+Cell[TextData[{"In", " ", "this", " ", "case"}], "Text"],
+Cell["NCMakeGB[rels, 8] // ColumnForm", "Input"],
+Cell[TextData[{"produces", " ", "the", " ", "Gr\[ODoubleDot]bner", " ", "basis:"}], "Text"],
+Cell["z -> inv[b]-inv[b]**y**c
+w -> inv[a]-c**y**inv[a]
+x -> a**c**y**inv[a]**inv[d]
+y**c**y -> y+b**d**a
+c**y**inv[a]**inv[d]**inv[b] -> inv[a]**inv[d]**inv[b]**y**c
+d**a**c**y**inv[a] -> inv[b]**y**c**b**d
+inv[d]**inv[b]**y**c**b -> a**c**y**inv[a]**inv[d]
+y**c**b**d**a -> b**d**a**c**y
+y**inv[a]**inv[d]**inv[b]**y**c -> 1+y**inv[a]**inv[d]**inv[b]", "Output"],
+Cell[TextData[{"after", " ", "five", " ", "iterations.", " ", "Once", " ", "again,", " ", "the", " ", "first", " ", "four", " ", "relations"}], "Text"],
+Cell[TextData[{Cell[ToExpression["\\begin{aligned}
+    z &= b^{-1}-b^{-1} \\, y \\, c \\\\
+    w &= a^{-1}-c \\, y \\, a^{-1} \\\\
+    x &= a \\, c \\, y \\, a^{-1} \\, d^{-1} \\\\
+    y \\, c \\, y &= y+b \\, d \\, a
+\\end{aligned}", TeXForm]]}], "Text"],
+Cell[TextData[{"provide", " ", "formulas,", " ", "this", " ", "time", " ", "for", " ", Cell[ToExpression["z", TeXForm]], ",", " ", Cell[ToExpression["w", TeXForm]], ",", " ", "and", " ", Cell[ToExpression["z", TeXForm]], " ", "in", " ", "terms", " ", "of", " ", Cell[ToExpression["y", TeXForm]], " ", "satisfying", " ", Cell[ToExpression["y \\, c \\, y = y+b \\, d \\, a", TeXForm]], ".", " ", "Note", " ", "that", " ", "these", " ", "formulas", " ", "do", " ", "not", " ", "involve", " ", Cell[ToExpression["c^{-1}", TeXForm]], " ", "since", " ", Cell[ToExpression["c", TeXForm]], " ", "is", " ", "no", " ", "longer", " ", "assumed", " ", "invertible."}], "Text"],
+Cell[TextData[{"Advanced", " ", "Processing", " ", "of", " ", "Rational", " ", "Expressions"}], "Subsection"],
+Cell[TextData[{"Consider", " ", "once", " ", "again", " ", "the", " ", "task", " ", "of", " ", "simplifying", " ", "the", " ", "nc", " ", "rational", " ", "expression"}], "Text"],
+Cell["expr = inv[1-x-y**inv[1-x]**y] - 1/2 (inv[1-x+y]+inv[1-x-y])", "Input"],
+Cell[TextData[{"considered", " ", "before", " ", "in", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"Simplifying", " ", "Rational", " ", "Expressions"}], "Text"]}]], FontSlant->"Italic"], "SimplifyingRationalExpressions"]], ".", " ", "We", " ", "will", " ", "use", " ", "this", " ", "expression", " ", "to", " ", "illustrate", " ", "how", " ", "nc", " ", "rational", " ", "expressions", " ", "can", " ", "be", " ", "manipulated", " ", "at", " ", "a", " ", "lower", " ", "level,", " ", "giving", " ", "advanced", " ", "users", " ", "more", " ", "control", " ", "of", " ", "the", " ", "conversion", " ", "process", " ", "to", " ", "and", " ", "from", " ", "the", " ", "internal", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCPoly"}], "Text"]}]], FontSlant->"Italic"], "NCPoly"]], " ", "representation."}], "Text"],
+Cell[TextData[{"The", " ", "key", " ", "functionality", " ", "is", " ", "provided", " ", "by", " ", "the", " ", "functions", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCMonomialOrder"}], "Text"]}]], FontSlant->"Italic"], "NCMonomialOrder"]], " ", "and", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCRationalToNCPoly"}], "Text"]}]], FontSlant->"Italic"], "NCRationalToNCPoly"]], ".", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCMonomialOrder"}], "Text"]}]], FontSlant->"Italic"], "NCMonomialOrder"]], " ", "provides", " ", "the", " ", "same", " ", "functionality", " ", "as", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"SetMonomialOrder"}], "Text"]}]], FontSlant->"Italic"], "SetMonomialOrder"]], ",", " ", "but", " ", "instead", " ", "of", " ", "setting", " ", "the", " ", "ordering", " ", "globally,", " ", "it", " ", "returns", " ", "an", " ", "array", " ", "representing", " ", "the", " ", "ordering.", " ", "For", " ", "example,"}], "Text"],
+Cell["order = NCMonomialOrder[x, y]", "Input"],
+Cell[TextData[{"produces", " ", "the", " ", "array"}], "Text"],
+Cell["{{x},{y}}", "Input"],
+Cell[TextData[{"which", " ", "represents", " ", "the", " ", "ordering", " ", Cell[ToExpression["x \\ll y", TeXForm]], "."}], "Text"],
+Cell[TextData[{"With", " ", "a", " ", "(preliminary)", " ", "ordering", " ", "in", " ", "hand", " ", "one", " ", "can", " ", "invoke", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCRationalToNCPoly"}], "Text"]}]], FontSlant->"Italic"], "NCRationalToNCPoly"]], " ", "as", " ", "in"}], "Text"],
+Cell["{rels, vars, rules, labels} = NCRationalToNCPoly[expr, order];", "Input"],
+Cell[TextData[{"This", " ", "function", " ", "produces", " ", "four", " ", "lists", " ", "as", " ", "outputs:"}], "Text"],
+Cell[TextData[{"The", " ", "first,", " ", Cell[BoxData[FormBox[RowBox[{"rels"}], TraditionalForm]]], ",", " ", "is", " ", "a", " ", "list", " ", "of", " ", Cell[BoxData[FormBox[RowBox[{"NCPoly"}], TraditionalForm]]], " ", "objects", " ", "representing", " ", "the", " ", "original", " ", "expression", " ", "and", " ", "some", " ", "additional", " ", "relations", " ", "that", " ", "were", " ", "automatically", " ", "generated.", " ", "We", " ", "will", " ", "inspect", " ", Cell[BoxData[FormBox[RowBox[{"rels"}], TraditionalForm]]], " ", "later."}], "Text"],
+Cell[TextData[{"The", " ", "second,", " ", Cell[BoxData[FormBox[RowBox[{"vars"}], TraditionalForm]]], ",", " ", "is", " ", "a", " ", "list", " ", "of", " ", "variables", " ", "that", " ", "represent", " ", "the", " ", "ordering", " ", "used", " ", "in", " ", "the", " ", "construction", " ", "of", " ", "the", " ", "polynomials", " ", "in", " ", Cell[BoxData[FormBox[RowBox[{"rel"}], TraditionalForm]]], ".", " ", "In", " ", "this", " ", "example,"}], "Text"],
+Cell["vars = {{x}, {y}, {rat135, rat136, rat137, rat138}} ", "Output"],
+Cell[TextData[{"which", " ", "corresponds", " ", "to", " ", "the", " ", "ordering"}], "Text"],
+Cell[TextData[{Cell[ToExpression["x \\ll y \\ll rat135 < rat136 < rat137 < rat138", TeXForm]]}], "Text"],
+Cell[TextData[{"In", " ", "this", " ", "case,", " ", "the", " ", "variables", " ", Cell[BoxData[FormBox[RowBox[{"rat135"}], TraditionalForm]]], ",", " ", Cell[BoxData[FormBox[RowBox[{"rat136"}], TraditionalForm]]], ",", " ", Cell[BoxData[FormBox[RowBox[{"rat137"}], TraditionalForm]]], ",", " ", Cell[BoxData[FormBox[RowBox[{"rat138"}], TraditionalForm]]], " ", "were", " ", "automatically", " ", "created", " ", "and", " ", "assigned", " ", "an", " ", "ordering", " ", "by", " ", Cell[BoxData[FormBox[RowBox[{"NCRationalToNCPoly"}], TraditionalForm]]], "."}], "Text"],
+Cell[TextData[{"It", " ", "is", " ", "unlikely", " ", "that", " ", "your", " ", "variables", " ", "will", " ", "be", " ", "assigned", " ", "the", " ", "same", " ", "suffixes", " ", Cell[BoxData[FormBox[RowBox[{"135"}], TraditionalForm]]], " ", "through", " ", Cell[BoxData[FormBox[RowBox[{"138"}], TraditionalForm]]], ".", " ", "Those", " ", "suffixes", " ", "were", " ", "chosen", " ", "by", " ", "Mathematica", " ", "to", " ", "make", " ", "these", " ", "variables", " ", "unique", " ", "in", " ", "the", " ", "global", " ", "context,", " ", "and", " ", "hence", " ", "depend", " ", "on", " ", "a", " ", "multitude", " ", "of", " ", "factors", " ", "that", " ", "can", " ", "only", " ", "be", " ", "determined", " ", "at", " ", "the", " ", "time", " ", "of", " ", "execution."}], "Text", CellMargins->{{60,0},{0,0}}, Background->GrayLevel[0.85]],
+Cell[TextData[{"As", " ", "with", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"SetMonomialOrder"}], "Text"]}]], FontSlant->"Italic"], "SetMonomialOrder"]], " ", "and", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCMakeGB"}], "Text"]}]], FontSlant->"Italic"], "NCMakeGB"]], ",", " ", "rational", " ", "terms", " ", "can", " ", "be", " ", "explicitly", " ", "added", " ", "to", " ", "the", " ", "ordering", " ", "for", " ", "finer", " ", "control.", " ", "For", " ", "example,", " ", "calling", " ", Cell[BoxData[FormBox[RowBox[{"NCRationalToNCPoly"}], TraditionalForm]]], " ", "with"}], "Text"],
+Cell["order = NCMonomialOrder[x,y,inv[1-x],{inv[1-x+y],inv[1-x-y]}];", "Output"],
+Cell[TextData[{"would", " ", "have", " ", "produced"}], "Text"],
+Cell["vars = {{x}, {y}, {rat135}, {rat136, rat137}, {rat138}} ", "Output"],
+Cell[TextData[{"which", " ", "corresponds", " ", "to", " ", "the", " ", "ordering"}], "Text"],
+Cell[TextData[{Cell[ToExpression["x \\ll y \\ll rat135 \\ll rat136 < rat137 \\ll rat138", TeXForm]]}], "Text"],
+Cell[TextData[{"The", " ", "third", " ", "is", " ", "a", " ", "list", " ", "of", " ", "rules", " ", "relating", " ", "the", " ", "new", " ", "variables", " ", "with", " ", "rational", " ", "terms", " ", "appearing", " ", "in", " ", "the", " ", "original", " ", "expression", " ", Cell[BoxData[FormBox[RowBox[{"expr"}], TraditionalForm]]], ".", " ", "In", " ", "this", " ", "example"}], "Text"],
+Cell["rules = {rat135 -> inv[1-x], rat136 -> inv[1-x-y],
+         rat137 -> inv[1-x+y], rat138 -> inv[1-x-y**rat135**y]}", "Output"],
+Cell[TextData[{"Finally,", " ", "the", " ", "fourth", " ", "is", " ", "a", " ", "list", " ", "of", " ", "labels", " ", "that", " ", "is", " ", "used", " ", "for", " ", "printing", " ", "or", " ", "displaying"}], "Text"],
+Cell["labels = {{x}, {y}, {inv[1-x], inv[1-x-y], inv[1-x+y],
+inv[1-x-y**inv[1-x]**y]}} ", "Output"],
+Cell[TextData[{"as", " ", "used", " ", "by", " ", Cell[BoxData[FormBox[RowBox[{"NCMakeGB"}], TraditionalForm]]], " ", "and", " ", Cell[BoxData[FormBox[RowBox[{"NCPolyDisplay"}], TraditionalForm]]], "."}], "Text"],
+Cell[TextData[{"The", " ", "relations", " ", "in", " ", Cell[BoxData[FormBox[RowBox[{"rels"}], TraditionalForm]]], " ", "can", " ", "be", " ", "visualized", " ", "by", " ", "using", " ", Cell[BoxData[FormBox[RowBox[{"NCPolyToNC"}], TraditionalForm]]], ".", " ", "For", " ", "example,"}], "Text"],
+Cell["NCPolyToNC[#, vars] & /@ rels // ColumnForm", "Input"],
+Cell[TextData[{"produces"}], "Text"],
+Cell["rat138-rat136/2-rat137/2 
+rat135-rat135**x-1
+rat135-x**rat135-1
+rat136-rat136**x-rat136**y-1
+rat136-x**rat136-y**rat136-1
+rat137-rat137**x+rat137**y-1
+rat137-x**rat137+y**rat137-1
+rat138-rat138**x-rat138**y**rat135**y-1
+rat138-x**rat138-y**rat135**y**rat138-1", "Output"],
+Cell[TextData[{"The", " ", "first", " ", "entry", " ", "is", " ", "simply", " ", "the", " ", "original", " ", Cell[BoxData[FormBox[RowBox[{"expr"}], TraditionalForm]]], " ", "in", " ", "which", " ", "every", " ", "rational", " ", "expression", " ", "has", " ", "been", " ", "substituted", " ", "by", " ", "a", " ", "new", " ", "variable.", " ", "The", " ", "same", " ", "could", " ", "be", " ", "obtained", " ", "by", " ", "applying", " ", "reverse", " ", Cell[BoxData[FormBox[RowBox[{"rules"}], TraditionalForm]]], " ", "and", " ", "applying", " ", "it", " ", "repeatedly"}], "Text"],
+Cell["NCReplaceRepeated[expr, Reverse /@ rules]", "Input"],
+Cell[TextData[{"The", " ", "remaining", " ", "entries", " ", "are", " ", "polynomials", " ", "encoding", " ", "the", " ", "rational", " ", "expressions", " ", "that", " ", "have", " ", "been", " ", "substituted", " ", "by", " ", "new", " ", "variables.", " ", "For", " ", "example,", " ", "the", " ", "first", " ", "two", " ", "additional", " ", "relations,"}], "Text"],
+Cell["rat135-rat135**x-1
+rat135-x**rat135-1", "Output"],
+Cell[TextData[{"correspond", " ", "to", " ", "the", " ", "assertion", " ", "that", " ", Cell[BoxData[FormBox[RowBox[{"rat153 == inv[1-x]"}], TraditionalForm]]], ",", " ", "and", " ", "so", " ", "on."}], "Text"],
+Cell[TextData[{"Equipped", " ", "with", " ", "a", " ", "set", " ", "of", " ", "polynomial", " ", "relations", " ", "encoding", " ", "the", " ", "rational", " ", "expression", " ", Cell[BoxData[FormBox[RowBox[{"expr"}], TraditionalForm]]], " ", "one", " ", "can", " ", "calculated", " ", "a", " ", "Gr\[ODoubleDot]ebner", " ", "basis", " ", "by", " ", "calling", " ", "the", " ", "low-level", " ", "implementation", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCPolyGroebner"}], "Text"]}]], FontSlant->"Italic"], "NCPolyGroebner"]], ".", " ", "In", " ", "this", " ", "example,", " ", "calling"}], "Text"],
+Cell["{basis, tree} = NCPolyGroebner[Rest[rels], 4, Labels -> labels];", "Input"],
+Cell[TextData[{"produces", " ", "the", " ", "output"}], "Text"],
+Cell["* * * * * * * * * * * * * * * *
+* * *   NCPolyGroebner    * * *
+* * * * * * * * * * * * * * * *
+* Monomial order: x<<y<<inv[1-x]<inv[1-x-y]<inv[1-x+y]<inv[1-x-y**inv[1-x]**y]
+* Reduce and normalize initial set
+> Initial set could not be reduced
+* Computing initial set of obstructions
+> MAJOR Iteration 1, 10 polys in the basis, 12 obstructions
+> MAJOR Iteration 2, 10 polys in the basis, 6 obstructions
+>  Found Groebner basis with 9 polynomials
+* * * * * * * * * * * * * * * * ", "Output"],
+Cell[TextData[{"Note", " ", "the", " ", "use", " ", "of", " ", Cell[BoxData[FormBox[RowBox[{"labels"}], TraditionalForm]]], " ", "to", " ", "pretty", " ", "print", " ", "the", " ", "monomial", " ", "ordering.", " ", "The", " ", "resulting", " ", "basis", " ", "can", " ", "be", " ", "visualized", " ", "once", " ", "again", " ", "using", " ", "the", " ", Cell[BoxData[FormBox[RowBox[{"labels"}], TraditionalForm]]]}], "Text"],
+Cell["NCPolyToNC[#, labels] & /@ basis // ColumnForm", "Input"],
+Cell[TextData[{"which", " ", "produces"}], "Text"],
+Cell["1-inv[1-x]+inv[1-x]**x
+1-inv[1-x]+x**inv[1-x]
+1-inv[1-x-y]+inv[1-x-y]**x+inv[1-x-y]**y
+1-inv[1-x-y]+x**inv[1-x-y]+y**inv[1-x-y]
+-1+inv[1-x+y]-inv[1-x+y]**x+inv[1-x+y]**y
+-1+inv[1-x+y]-x**inv[1-x+y]+y**inv[1-x+y]
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x+y]**inv[1-x-y]+inv[1-x+y]**x**inv[1-x-y]
+1/2 inv[1-x-y]+1/2 inv[1-x+y]-inv[1-x-y]**inv[1-x+y]+inv[1-x-y]**x**inv[1-x+y]}
+-1/2 inv[1-x-y]-1/2 inv[1-x+y]+inv[1-x-y**inv[1-x]**y]", "Output"],
+Cell[TextData[{"The", " ", "original", " ", "expression", " ", Cell[BoxData[FormBox[RowBox[{"expr"}], TraditionalForm]]], " ", "can", " ", "then", " ", "be", " ", StyleBox[Cell[TextData[{Cell[TextData[{"reduced"}], "Text"]}]], FontSlant->"Italic"], " ", "by", " ", "the", " ", "above", " ", "basis", " ", "by", " ", "calling"}], "Text"],
+Cell["NCPolyReduce[rels[[1]], basis]", "Input"],
+Cell[TextData[{"which", " ", "produces", " ", Cell[BoxData[FormBox[RowBox[{"0"}], TraditionalForm]]], ",", " ", "as", " ", "expected."}], "Text"],
+Cell[TextData[{"The", " ", "above", " ", "process", " ", "is", " ", "conveniently", " ", "automated", " ", "by", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCMakeGB"}], "Text"]}]], FontSlant->"Italic"], "NCMakeGB"]], ",", " ", "but", " ", "advanced", " ", "users", " ", "might", " ", "still", " ", "want", " ", "to", " ", "take", " ", "advantage", " ", "of", " ", "the", " ", "increased", " ", "speed", " ", "of", " ", "directly", " ", "processing", " ", Cell[BoxData[FormBox[RowBox[{"NCPoly"}], TraditionalForm]]], "s", " ", "by", " ", "manually", " ", "performing", " ", "the", " ", "conversion", " ", "from", " ", "a", " ", "rational", " ", "statement", " ", "to", " ", "a", " ", "polynomial", " ", "statement.", " ", "See", " ", "the", " ", "detailed", " ", "documentation", " ", "of", " ", "the", " ", "package", " ", Cell[Hyperlink[StyleBox[Cell[TextData[{Cell[TextData[{"NCPoly"}], "Text"]}]], FontSlant->"Italic"], "NCPoly"]], " ", "for", " ", "more", " ", "details."}], "Text"]
+}]

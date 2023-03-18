@@ -123,9 +123,22 @@ NCDocument.pdf: $(MANUAL)
 	$(PDFLATEX) NCDocument.tex
 	rm -f *.aux *.log *.toc *.out
 
+PANDOC = pandoc -t md2nb/md2nb.lua
+../DEMOS/1_MostBasicCommands.nb: MANUAL/Basic.md
+	$(PANDOC) $< -o $@
+
+../DEMOS/2_MoreAdvancedCommands.nb: MANUAL/Advanced.md
+	$(PANDOC) $< -o $@
+
+../DEMOS/3_NCGroebnerBasis.nb: MANUAL/NCGB.md
+	$(PANDOC) $< -o $@
+
+DEMOS = ../DEMOS/1_MostBasicCommands.nb ../DEMOS/2_MoreAdvancedCommands.nb ../DEMOS/3_NCGroebnerBasis.nb 
+demos: $(DEMOS)
+
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
 
-.PHONY: all clean 
+.PHONY: all clean $(DEMOS)
 .PHONY: index.html NCDocument.pdf README.md
 

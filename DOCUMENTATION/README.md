@@ -5477,7 +5477,7 @@ Aliases:
 
 Options:
 
-- `ApplyPowerRule` (`False`): If `True`, `NCReplacePowerRule` is
+- `ApplyPowerRule` (`True`): If `True`, `NCReplacePowerRule` is
   automatically applied to all rules in `NCReplace`, `NCReplaceAll`,
   `NCReplaceRepeated`, and `NCReplaceList`.
 

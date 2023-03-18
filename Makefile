@@ -7,6 +7,9 @@ doc:
 NCDocument.pdf:
 	(cd DOCUMENTATION; make NCDocument.pdf)
 
+demos:
+	(cd DOCUMENTATION; make demos)	
+
 clean:
 	(cd DOCUMENTATION; make clean)
 
