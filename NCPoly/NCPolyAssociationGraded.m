@@ -126,8 +126,9 @@ Begin["`Private`"];
     Print["ajVars = ", ajVars];
     Print["varRule = ", varRule];
     Print["options = ", options];
+    Print["vars = ", vars];
     *)
-      
+
     Check[
       NCPolyPack[
         NCPoly[

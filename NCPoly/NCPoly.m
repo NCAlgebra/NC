@@ -394,7 +394,7 @@ Begin["`Private`"];
     Map[NCFromDigits[#, base]&, {p}];
 
   NCFromDigits[p_List, {base__Integer}] := 
-    Append[ Reverse[ BinCounts[p, {Prepend[Accumulate[{base}], 0]}] ], FromDigits[p, Total[{base}]] ];
+    Append[ Normal[Reverse[ BinCounts[p, {Prepend[Accumulate[{base}], 0]}] ]], FromDigits[p, Total[{base}]] ];
 
   (* DEG Ordered *)
   NCFromDigits[p_List, base_Integer] := 
