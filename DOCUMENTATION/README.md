@@ -1,6 +1,6 @@
 # The NCAlgebra Suite
 
-*Version 6.0.0*
+*Version 6.0.1*
 
 ## Authors
 
@@ -46,7 +46,8 @@ All rights reserved.
 
 - <a href="#acknowledgements" id="toc-acknowledgements"><span class="toc-section-number">1</span> Acknowledgements</a>
 - <a href="#changes-in-version-60" id="toc-Version6_0"><span class="toc-section-number">2</span> Changes in Version 6.0</a>
-  - <a href="#version-600" id="toc-Version6_0_0"><span class="toc-section-number">2.1</span> Version 6.0.0</a>
+  - <a href="#version-601" id="toc-Version6_0_1"><span class="toc-section-number">2.1</span> Version 6.0.1</a>
+  - <a href="#version-600" id="toc-Version6_0_0"><span class="toc-section-number">2.2</span> Version 6.0.0</a>
 - <a href="#changes-in-version-50" id="toc-Version5_0"><span class="toc-section-number">3</span> Changes in Version 5.0</a>
   - <a href="#version-506" id="toc-Version5_0_6"><span class="toc-section-number">3.1</span> Version 5.0.6</a>
   - <a href="#version-505" id="toc-Version5_0_5"><span class="toc-section-number">3.2</span> Version 5.0.5</a>
@@ -454,6 +455,10 @@ The beginnings of the program come from eran@slac.
 
 # Changes in Version 6.0
 
+## Version 6.0.1
+
+1.  Fixed SparseArray Mathematica bug affecting `NCFromDigits`.
+
 ## Version 6.0.0
 
 1.  NCAlgebra is now distributed as a *paclet*!
@@ -621,6 +626,12 @@ Starting with **Version 6**, it is recommended that NCAlgebra be
 installed using our paclet distribution. Just type:
 
     PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.0.paclet?raw=true"];
+
+or
+
+    PacletInstall["https://github.com/NCAlgebra/NC/raw/NCAlgebra-6.0.1.paclet"];
+
+for the latest beta version.
 
 In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.
@@ -8411,8 +8422,9 @@ See also:
 
 ### NCReduceRepeated
 
-`NCReduceRepeated[polys]` applies `NCReduce` successively to the
-list of `polys` until the remainder does not change.
+`NCReduceRepeated[polys, vars]` applies `NCReduce` successively to the
+list of `polys` in variables `vars` until the remainder does not
+change.
 
 See also:
 [NCReduce](#ncreduce),
@@ -8420,8 +8432,8 @@ See also:
 
 ### NCMonomialList
 
-`NCMonomialList[poly]` gives the list of all monomials in the
-polynomial `poly`.
+`NCMonomialList[poly, vars]` gives the list of all monomials in the
+polynomial `poly` in variables `vars`.
 
 For example:
 
@@ -8440,8 +8452,8 @@ See also:
 
 ### NCCoefficientRules
 
-`NCCoefficientRules[poly]` gives a list of rules between all the monomials
-polynomial `poly`.
+`NCCoefficientRules[poly, vars]` gives a list of rules between all the
+monomials polynomial `poly` in variables `vars`.
 
 For example:
 
@@ -8460,8 +8472,8 @@ See also:
 
 ### NCCoefficientList
 
-`NCCoefficientList[poly]` gives the list of all coefficients in the
-polynomial `poly`.
+`NCCoefficientList[poly, vars]` gives the list of all coefficients in
+the polynomial `poly` in variables `vars`.
 
 For example:
 

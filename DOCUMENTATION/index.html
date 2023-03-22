@@ -51,7 +51,7 @@
 <body>
 <header id="title-block-header">
 <h1 class="title">The NCAlgebra Suite</h1>
-<p class="subtitle">Version 6.0.0</p>
+<p class="subtitle">Version 6.0.1</p>
 <p class="author">J. William Helton</p>
 <p class="author">Mauricio C. de Oliveira</p>
 <p class="date">with earlier contributions by Bob Miller &amp; Mark
@@ -64,8 +64,10 @@ class="toc-section-number">1</span> Acknowledgements</a></li>
 <li><a href="#Version6_0" id="toc-Version6_0"><span
 class="toc-section-number">2</span> Changes in Version 6.0</a>
 <ul>
+<li><a href="#Version6_0_1" id="toc-Version6_0_1"><span
+class="toc-section-number">2.1</span> Version 6.0.1</a></li>
 <li><a href="#Version6_0_0" id="toc-Version6_0_0"><span
-class="toc-section-number">2.1</span> Version 6.0.0</a></li>
+class="toc-section-number">2.2</span> Version 6.0.0</a></li>
 </ul></li>
 <li><a href="#Version5_0" id="toc-Version5_0"><span
 class="toc-section-number">3</span> Changes in Version 5.0</a>
@@ -1130,8 +1132,14 @@ Ovall, T. Shaheen, John Shopple.</li>
 <p>The beginnings of the program come from eran@slac.</p>
 <h1 data-number="2" id="Version6_0"><span
 class="header-section-number">2</span> Changes in Version 6.0</h1>
-<h2 data-number="2.1" id="Version6_0_0"><span
-class="header-section-number">2.1</span> Version 6.0.0</h2>
+<h2 data-number="2.1" id="Version6_0_1"><span
+class="header-section-number">2.1</span> Version 6.0.1</h2>
+<ol type="1">
+<li>Fixed SparseArray Mathematica bug affecting
+<code>NCFromDigits</code>.</li>
+</ol>
+<h2 data-number="2.2" id="Version6_0_0"><span
+class="header-section-number">2.2</span> Version 6.0.0</h2>
 <ol type="1">
 <li><p>NCAlgebra is now distributed as a <em>paclet</em>!</p></li>
 <li><p>Changed cannonical representation of noncommutative expressions
@@ -1313,6 +1321,9 @@ class="header-section-number">4.1</span> Installing NCAlgebra</h2>
 <p>Starting with <strong>Version 6</strong>, it is recommended that
 NCAlgebra be installed using our paclet distribution. Just type:</p>
 <pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.0.paclet?raw=true&quot;];</code></pre>
+<p>or</p>
+<pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/raw/NCAlgebra-6.0.1.paclet&quot;];</code></pre>
+<p>for the latest beta version.</p>
 <p>In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.</p>
 <p>Alternatively, you can download and install NCAlgebra as outlined in
@@ -7907,15 +7918,16 @@ href="#NCPolyReduce">NCPolyReduce</a>.</p>
 href="#NCPolyReduce">NCPolyReduce</a>.</p>
 <h3 data-number="14.2.9" id="NCReduceRepeated"><span
 class="header-section-number">14.2.9</span> NCReduceRepeated</h3>
-<p><code>NCReduceRepeated[polys]</code> applies <code>NCReduce</code>
-successively to the list of <code>polys</code> until the remainder does
-not change.</p>
+<p><code>NCReduceRepeated[polys, vars]</code> applies
+<code>NCReduce</code> successively to the list of <code>polys</code> in
+variables <code>vars</code> until the remainder does not change.</p>
 <p>See also: <a href="#NCReduce">NCReduce</a>, <a
 href="#NCPolyReduceRepeated">NCPolyReduceRepeated</a>.</p>
 <h3 data-number="14.2.10" id="NCMonomialList"><span
 class="header-section-number">14.2.10</span> NCMonomialList</h3>
-<p><code>NCMonomialList[poly]</code> gives the list of all monomials in
-the polynomial <code>poly</code>.</p>
+<p><code>NCMonomialList[poly, vars]</code> gives the list of all
+monomials in the polynomial <code>poly</code> in variables
+<code>vars</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x, y}
 expr = B + A y ** x ** y - 2 x
@@ -7927,8 +7939,9 @@ href="#NCCoefficientList">NCCoefficientList</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
 <h3 data-number="14.2.11" id="NCCoefficientRules"><span
 class="header-section-number">14.2.11</span> NCCoefficientRules</h3>
-<p><code>NCCoefficientRules[poly]</code> gives a list of rules between
-all the monomials polynomial <code>poly</code>.</p>
+<p><code>NCCoefficientRules[poly, vars]</code> gives a list of rules
+between all the monomials polynomial <code>poly</code> in variables
+<code>vars</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x, y}
 expr = B + A y ** x ** y - 2 x
@@ -7940,8 +7953,9 @@ href="#NCCoefficientRules">NCCoefficientRules</a>, <a
 href="#NCVariables">NCVariables</a>.</p>
 <h3 data-number="14.2.12" id="NCCoefficientList"><span
 class="header-section-number">14.2.12</span> NCCoefficientList</h3>
-<p><code>NCCoefficientList[poly]</code> gives the list of all
-coefficients in the polynomial <code>poly</code>.</p>
+<p><code>NCCoefficientList[poly, vars]</code> gives the list of all
+coefficients in the polynomial <code>poly</code> in variables
+<code>vars</code>.</p>
 <p>For example:</p>
 <pre><code>vars = {x, y}
 expr = B + A y ** x ** y - 2 x

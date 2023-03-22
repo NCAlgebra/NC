@@ -1,6 +1,6 @@
 PacletObject[<|
   "Name" -> "NCAlgebra",
-  "Version" -> "6.0.0",
+  "Version" -> "6.0.1",
   "Creator" -> "Mauricio de Oliveira",
   "Description" ->
     "NCAlgebra - Non Commutative Algebra Package for Mathematica",

@@ -1,5 +1,10 @@
 # Changes in Version 6.0 {#Version6_0}
 
+## Version 6.0.1 {#Version6_0_1}
+
+1. Fixed SparseArray Mathematica bug affecting `NCFromDigits`.
+
+
 ## Version 6.0.0 {#Version6_0_0}
 
 1. NCAlgebra is now distributed as a *paclet*!
