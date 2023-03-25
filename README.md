@@ -76,12 +76,15 @@ posting the message:
 
 ## Now what?
 
-Extensive documentation is found in the directory
-[DOCUMENTATION](./DOCUMENTATION).
+Extensive documentation is found at
 
-Basic documentation is provided on the project Wiki:
+<https://NCAlgebra.github.io>
 
-https://github.com/NCAlgebra/NC/wiki
+and in the distribution directory
+
+<https://github.com/NCAlgebra/NC/DOCUMENTATION>
+
+which includes this document.
 
 You may want to try some of the several demo files in the directory
 `DEMOS` after you install NCAlgebra.
