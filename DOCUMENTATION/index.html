@@ -3257,8 +3257,8 @@ order as before:</p>
 \end{aligned}\]</span></p>
 <p>from which one can recognize the problem of solving the linear
 equation <span class="math inline">\(a \, x = c\)</span> in terms of the
-<em>pseudo-inverse</em> <span class="math inline">\(b = a^\dag\)</span>.
-The calculation:</p>
+<em>pseudo-inverse</em> <span class="math inline">\(b =
+a^\dagger\)</span>. The calculation:</p>
 <pre><code>gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
 ColumnForm[gb]</code></pre>
 <p>finds the Gröbner basis:</p>
@@ -3269,8 +3269,8 @@ b**a**b -&gt; b</code></pre>
 <p>In this case the Gröbner basis cannot quite <em>solve</em> the
 equations but it remarkably produces the necessary condition for
 existence of solutions:</p>
-<p><span class="math display">\[ 0 = a \, b \, c - c = a \, a^\dag c - c
-\]</span></p>
+<p><span class="math display">\[ 0 = a \, b \, c - c = a \, a^\dagger c
+- c \]</span></p>
 <p>that can be interpreted as <span class="math inline">\(c\)</span>
 being in the range-space of <span class="math inline">\(a\)</span>.</p>
 <h2 data-number="6.4" id="simplifying-polynomial-expressions"><span

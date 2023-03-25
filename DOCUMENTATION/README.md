@@ -3244,7 +3244,7 @@ and the relations:
 ![inline equation](https://render.githubusercontent.com/render/math?math=%5Cbegin%7Baligned%7D%0A%20%20a%20%5C%2C%20x%20-%20c%20%26%3D%200%2C%20%5C%5C%0A%20%20a%20%5C%2C%20b%20%5C%2C%20a%20-%20a%20%26%3D%200%2C%20%5C%5C%0A%20%20b%20%5C%2C%20a%20%5C%2C%20b%20-%20b%20%26%3D%200%2C%0A%5Cend%7Baligned%7D)
 
 from which one can recognize the problem of solving the linear
-equation ![a \\ x = c](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%3D%20c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\dag](https://render.githubusercontent.com/render/math?math=b%20%3D%20a%5E%5Cdag&mode=inline). The calculation:
+equation ![a \\ x = c](https://render.githubusercontent.com/render/math?math=a%20%5C%2C%20x%20%3D%20c&mode=inline) in terms of the *pseudo-inverse* ![b = a^\dagger](https://render.githubusercontent.com/render/math?math=b%20%3D%20a%5E%5Cdagger&mode=inline). The calculation:
 
     gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
     ColumnForm[gb]
@@ -3262,7 +3262,7 @@ In this case the Gröbner basis cannot quite *solve* the equations but
 it remarkably produces the necessary condition for existence of
 solutions:
 
-![inline equation](https://render.githubusercontent.com/render/math?math=0%20%3D%20a%20%5C%2C%20b%20%5C%2C%20c%20-%20c%20%3D%20a%20%5C%2C%20a%5E%5Cdag%20c%20-%20c)
+![inline equation](https://render.githubusercontent.com/render/math?math=0%20%3D%20a%20%5C%2C%20b%20%5C%2C%20c%20-%20c%20%3D%20a%20%5C%2C%20a%5E%5Cdagger%20c%20-%20c)
 
 that can be interpreted as ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) being in the range-space of ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline).
 
