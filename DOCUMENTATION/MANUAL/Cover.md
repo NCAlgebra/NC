@@ -31,9 +31,10 @@ For NCAlgebra updates see:
 
 [www.github.com/NCAlgebra/NC](https://www.github.com/NCAlgebra/NC)
 
-[www.math.ucsd.edu/~ncalg](https://www.math.ucsd.edu/~ncalg)
+Other versions of this document:
 
-A PDF version of this document is available [here](./NCDocument.pdf).
+- [online](https://NCAlgebra.github.io)
+- [PDF](./NCDocument.pdf)
 
 ## Copyright
 
