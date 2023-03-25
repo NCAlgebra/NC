@@ -66,15 +66,15 @@ Advanced options for controlling the loading of `NC` and `NCAlgebra` can be foun
 
 ## Now what?
 
-Extensive documentation is found in the distribution directory 
+Extensive documentation is found at
+
+[https://NCAlgebra.github.io](https://NCAlgebra.github.io)
+
+and in the distribution directory 
 
 [https://github.com/NCAlgebra/NC/DOCUMENTATION](https://github.com/NCAlgebra/NC/DOCUMENTATION)
 
 which includes this document.
-
-Basic documentation is found in the project wiki:
-
-[`https://github.com/NCAlgebra/NC/wiki`](https://github.com/NCAlgebra/NC/wiki)
 
 You may want to try some of the several demo files in the directory
 `DEMOS` after installing `NCAlgebra`.
