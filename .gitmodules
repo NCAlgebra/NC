@@ -1,3 +1,6 @@
 [submodule "DOCUMENTATION/md2nb"]
 	path = DOCUMENTATION/md2nb
 	url = https://github.com/mcdeoliveira/md2nb
+[submodule "DOCUMENTATION/github.io"]
+	path = DOCUMENTATION/github.io
+	url = git@github.com:NCAlgebra/NCAlgebra.github.io

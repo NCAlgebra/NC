@@ -111,7 +111,7 @@ index.html: $(MANUAL)
 	sed -i 's/<body>/<body class="markdown-body">/' index.html
 
 github.io: index.html
-	cp index.html markdown.css github-markdown-light.css NCAlgebra.github.io/.
+	cp index.html markdown.css github-markdown-light.css github.io/.
 
 NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
