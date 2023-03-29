@@ -570,9 +570,15 @@ variable of interest.
 
 In order to take full advantage of [`NCPoly`](#PackageNCPoly) and
 [`NCPolynomial`](#PackageNCPolynomial) one would need to *convert* an
-expression into those special formats. See
+expression into those special formats. See the sections on
+[polynomials with commutative
+coefficients](#PolysWithCommutativeCoefficients) and [polynomials with
+noncommutative coefficients](#PolysWithNonCommutativeCoefficients) in
+the [mode advanced commands](#MoreAdvancedCommands) chapter and the
+chapter on [Gröebner basis](#NCGB) for more information. Details can
+be found in the package documentaions
 [NCPolyInterface](#PackageNCPolyInterface), [NCPoly](#PackageNCPoly),
-and [NCPolynomial](#PackageNCPolynomial) for details.
+and [NCPolynomial](#PackageNCPolynomial).
 
 ## Rationals and Simplification
 

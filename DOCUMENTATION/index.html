@@ -188,8 +188,8 @@ class="toc-section-number">5.2.1</span> Trouble with <code>Plus</code>
 id="toc-PolysWithCommutativeCoefficients"><span
 class="toc-section-number">5.3</span> Polynomials with commutative
 coefficients</a></li>
-<li><a href="#polynomials-with-noncommutative-coefficients"
-id="toc-polynomials-with-noncommutative-coefficients"><span
+<li><a href="#PolysWithNonCommutativeCoefficients"
+id="toc-PolysWithNonCommutativeCoefficients"><span
 class="toc-section-number">5.4</span> Polynomials with noncommutative
 coefficients</a></li>
 <li><a href="#Linear" id="toc-Linear"><span
@@ -1140,6 +1140,9 @@ class="header-section-number">1.1</span> Version 6.0.1</h2>
 <ol type="1">
 <li>Fixed SparseArray Mathematica bug affecting
 <code>NCFromDigits</code>.</li>
+<li><code>NCGB</code> has been completely deprecated. Loading
+<code>NCGB</code> loads <code>NCAlgebra</code> and <code>NCGBX</code>
+instead.</li>
 </ol>
 <h2 data-number="1.2" id="Version6_0_0"><span
 class="header-section-number">1.2</span> Version 6.0.0</h2>
@@ -1816,10 +1819,17 @@ class="math inline">\(x\)</span> as the variable of interest.</p>
 <p>In order to take full advantage of <a
 href="#PackageNCPoly"><code>NCPoly</code></a> and <a
 href="#PackageNCPolynomial"><code>NCPolynomial</code></a> one would need
-to <em>convert</em> an expression into those special formats. See <a
+to <em>convert</em> an expression into those special formats. See the
+sections on <a href="#PolysWithCommutativeCoefficients">polynomials with
+commutative coefficients</a> and <a
+href="#PolysWithNonCommutativeCoefficients">polynomials with
+noncommutative coefficients</a> in the <a
+href="#MoreAdvancedCommands">mode advanced commands</a> chapter and the
+chapter on <a href="#NCGB">Gröebner basis</a> for more information.
+Details can be found in the package documentaions <a
 href="#PackageNCPolyInterface">NCPolyInterface</a>, <a
 href="#PackageNCPoly">NCPoly</a>, and <a
-href="#PackageNCPolynomial">NCPolynomial</a> for details.</p>
+href="#PackageNCPolynomial">NCPolynomial</a>.</p>
 <h2 data-number="4.6" id="rationals-and-simplification"><span
 class="header-section-number">4.6</span> Rationals and
 Simplification</h2>
@@ -2797,10 +2807,7 @@ back and forth between <code>NCAlgebra</code> and
 p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]</code></pre>
 <p>converts the polynomial <code>1 + x**x - 2 x**y**z</code> from the
 standard <code>NCAlgebra</code> format into an <code>NCPoly</code>
-object. The reason for the braces in the definition of <code>vars</code>
-will be explained below, when we introduce <em>ordering</em>. See also
-Section <a href="#NCGB">Noncommutative Gröbner Basis</a>. The result in
-this case is the <code>NCPoly</code> object</p>
+object. The result in this case is the <code>NCPoly</code> object</p>
 <pre class="output"><code>NCPoly[{1, 1, 1}, &lt;|{0, 0, 0, 0} -&gt; 1, {0, 0, 2, 0} -&gt; 1, {1, 1, 1, 5} -&gt; -2|&gt;]</code></pre>
 <p>Conversely the command <a
 href="#NCPolyToNC"><code>NCPolyToNC</code></a> converts an
@@ -2831,9 +2838,13 @@ p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]</code></pre>
 <p>The sequence of braces in the list of <em>variables</em> encodes the
 <em>ordering</em> to be used for sorting <code>NCPoly</code>s. Orderings
 specify how monomials should be ordered, and is discussed in detail in
-<a href="#NCGB">Noncommutative Gröbner Basis</a>. We provide the
-convenience command <a
-href="#NCPolyDisplayOrder"><code>NCPolyDisplayOrder</code></a> that
+<a href="#NCGB">Noncommutative Gröbner Basis</a>.</p>
+<p>We provide the convenience commands <a
+href="#NCMonomialOrder"><code>NCMonomialOrder</code></a>, <a
+href="#NCMonomialOrderQ"><code>NCMonomialOrderQ</code></a> and <a
+href="#NCPolyDisplayOrder"><code>NCPolyDisplayOrder</code></a> to help
+building and visualizing orderings.</p>
+<p><a href="#NCPolyDisplayOrder"><code>NCPolyDisplayOrder</code></a>
 prints the polynomial ordering implied by a list of symbols. For
 example</p>
 <pre><code>NCPolyDisplayOrder[{x,y,z}]</code></pre>
@@ -2845,13 +2856,34 @@ example</p>
 <p><span class="math display">\[x \ll y &lt; z\]</span></p>
 <p>from where you can see that grouping variables inside braces induces
 a graded type ordering, as discussed in <a href="#NCGB">Noncommutative
-Gröbner Basis</a>. <code>NCPoly</code>s constructed from different
-orderings cannot be combined.</p>
+Gröbner Basis</a>.</p>
+<p>With <a href="#NCMonomialOrder"><code>NCMonomialOrder</code></a> you
+can basically dispense with the “outer” braces. For example</p>
+<pre><code>NCMonomialOrder[{x},{y,z}]</code></pre>
+<p>returns</p>
+<pre class="output"><code>{{x},{y,z}}</code></pre>
+<p>It also validates the resulting ordering using <a
+href="#NCMonomialOrderQ"><code>NCMonomialOrderQ</code></a> so that</p>
+<pre><code>NCMonomialOrder[{x},{y,{z}}]</code></pre>
+<p>will fail and print an error message. Note that</p>
+<pre><code>NCMonomialOrder[x,y,z]</code></pre>
+<p>returns</p>
+<pre class="output"><code>{{x},{y},{z}}</code></pre>
+<p>which corresponds to</p>
+<p><span class="math display">\[x \ll y \ll z\]</span></p>
+<p>and</p>
+<pre><code>NCMonomialOrder[{x, y, z}]</code></pre>
+<p>returns</p>
+<pre class="output"><code>{{x,y,z}}</code></pre>
+<p>which corresponds to</p>
+<p><span class="math display">\[x &lt; y &lt; z\]</span></p>
 <p>There is also a special constructor for monomials. For example</p>
-<pre><code>NCPolyMonomial[{y,x}, vars]
+<pre><code>vars = NCMonomialOrder[{x}, {y,z}];
+NCPolyMonomial[{y,x}, vars]
 NCPolyMonomial[{x,y}, vars]</code></pre>
 <p>return the monomials corresponding to <span class="math inline">\(y
-x\)</span> and <span class="math inline">\(x y\)</span>.</p>
+x\)</span> and <span class="math inline">\(x y\)</span> using the
+ordering <span class="math inline">\(x \ll y &lt; z\)</span>.</p>
 <p>Operations on <code>NCPoly</code> objects result in another
 <code>NCPoly</code> object that is always expanded. For example:</p>
 <pre><code>vars = {{x}, {y, z}};
@@ -2862,6 +2894,10 @@ x\)</span> and <span class="math inline">\(x y\)</span>.</p>
 <pre><code>p = (1 + NCPolyMonomial[{x}, vars]**NCPolyMonomial[{y}, vars])^2</code></pre>
 <p>returns</p>
 <pre class="output"><code>NCPoly[{1, 2}, &lt;|{0, 0, 0} -&gt; 1, {1, 1, 1} -&gt; 2, {2, 2, 10} -&gt; 1|&gt;]</code></pre>
+<blockquote>
+<p><strong>WARNING:</strong> <code>NCPoly</code>s constructed from
+different orderings cannot be combined or otherwise operated.</p>
+</blockquote>
 <p>Another convenience function is <code>NCPolyDisplay</code> which
 returns a list with the monomials appearing in an <code>NCPoly</code>
 object. For example:</p>
@@ -2896,8 +2932,7 @@ ColumnForm[NCPolyDisplay[Sort[polys], vars]]</code></pre>
 {2 y.x, -z}</code></pre>
 <p><code>Sort</code> produces a list of polynomials sorted in
 <em>ascending</em> order based on their <em>leading terms</em>.</p>
-<h2 data-number="5.4"
-id="polynomials-with-noncommutative-coefficients"><span
+<h2 data-number="5.4" id="PolysWithNonCommutativeCoefficients"><span
 class="header-section-number">5.4</span> Polynomials with noncommutative
 coefficients</h2>
 <p>A larger class of polynomials in noncommutative variables is that of
@@ -8820,14 +8855,12 @@ there.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>.</p>
 <h2 data-number="14.3" id="PackageNCGB"><span
 class="header-section-number">14.3</span> NCGB</h2>
-<p>This packages supports our legacy Gröebner Bases algorithm that
+<p>Starting with version 6.0.1 our legacy Gröebner Bases algorithm that
 requires both Mathematica and auxiliary executables compiled from C++ to
-run. <a href="#PackageNCGBX">NCGBX</a> may run slower on some medium
-size problems but will succeed on large size problems which might fail
-under <a href="#PackageNCGB">NCGB</a>.</p>
-<p>This code has become hard to maintain and support and may be
-deprecated in the future. See older versions of the NC documentation for
-a complete description of its functionality.</p>
+run has been completely replaced by <a
+href="#PackageNCGBX">NCGBX</a>.</p>
+<p>See older versions of the NC documentation for a complete description
+of the legacy C++ code functionality.</p>
 <h1 data-number="15" id="SDPChapter"><span
 class="header-section-number">15</span> Semidefinite Programming
 Algorithms</h1>

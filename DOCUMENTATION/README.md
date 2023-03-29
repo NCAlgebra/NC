@@ -88,7 +88,7 @@ All rights reserved.
   - <a href="#expanding-matrix-products" id="toc-AdvancedMatrices"><span class="toc-section-number">5.2</span> Expanding matrix products</a>
     - <a href="#trouble-with-plus-and-matrices" id="toc-trouble-with-plus-and-matrices"><span class="toc-section-number">5.2.1</span> Trouble with <code>Plus</code> (<code>+</code>) and matrices</a>
   - <a href="#polynomials-with-commutative-coefficients" id="toc-PolysWithCommutativeCoefficients"><span class="toc-section-number">5.3</span> Polynomials with commutative coefficients</a>
-  - <a href="#polynomials-with-noncommutative-coefficients" id="toc-polynomials-with-noncommutative-coefficients"><span class="toc-section-number">5.4</span> Polynomials with noncommutative coefficients</a>
+  - <a href="#polynomials-with-noncommutative-coefficients" id="toc-PolysWithNonCommutativeCoefficients"><span class="toc-section-number">5.4</span> Polynomials with noncommutative coefficients</a>
   - <a href="#linear-polynomials" id="toc-Linear"><span class="toc-section-number">5.5</span> Linear polynomials</a>
 - <a href="#noncommutative-gröbner-basis" id="toc-NCGB"><span class="toc-section-number">6</span> Noncommutative Gröbner Basis</a>
   - <a href="#what-is-a-gröbner-basis" id="toc-what-is-a-gröbner-basis"><span class="toc-section-number">6.1</span> What is a Gröbner Basis?</a>
@@ -462,6 +462,8 @@ The beginnings of the program come from eran@slac.
 ## Version 6.0.1
 
 1.  Fixed SparseArray Mathematica bug affecting `NCFromDigits`.
+2.  `NCGB` has been completely deprecated. Loading `NCGB` loads
+    `NCAlgebra` and `NCGBX` instead.
 
 ## Version 6.0.0
 
@@ -1357,9 +1359,15 @@ variable of interest.
 
 In order to take full advantage of [`NCPoly`](#ncpoly) and
 [`NCPolynomial`](#ncpolynomial) one would need to *convert* an
-expression into those special formats. See
+expression into those special formats. See the sections on
+[polynomials with commutative
+coefficients](#polynomials-with-commutative-coefficients) and [polynomials with
+noncommutative coefficients](#polynomials-with-noncommutative-coefficients) in
+the [mode advanced commands](#more-advanced-commands) chapter and the
+chapter on [Gröebner basis](#noncommutative-gröbner-basis) for more information. Details can
+be found in the package documentaions
 [NCPolyInterface](#ncpolyinterface), [NCPoly](#ncpoly),
-and [NCPolynomial](#ncpolynomial) for details.
+and [NCPolynomial](#ncpolynomial).
 
 ## Rationals and Simplification
 
@@ -2686,10 +2694,7 @@ For example
     p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
 
 converts the polynomial `1 + x**x - 2 x**y**z` from the standard
-`NCAlgebra` format into an `NCPoly` object. The reason for the braces
-in the definition of `vars` will be explained below, when we introduce
-*ordering*. See also Section
-[Noncommutative Gröbner Basis](#noncommutative-gröbner-basis). The result in this case is the
+`NCAlgebra` format into an `NCPoly` object. The result in this case is the
 `NCPoly` object
 
 ``` output
@@ -2738,9 +2743,16 @@ NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
 The sequence of braces in the list of *variables* encodes the
 *ordering* to be used for sorting `NCPoly`s. Orderings specify how
 monomials should be ordered, and is discussed in detail in
-[Noncommutative Gröbner Basis](#noncommutative-gröbner-basis). We provide the convenience
-command [`NCPolyDisplayOrder`](#ncpolydisplayorder) that prints the
-polynomial ordering implied by a list of symbols. For example
+[Noncommutative Gröbner Basis](#noncommutative-gröbner-basis).
+
+We provide the convenience commands
+[`NCMonomialOrder`](#ncmonomialorder),
+[`NCMonomialOrderQ`](#ncmonomialorderq) and
+[`NCPolyDisplayOrder`](#ncpolydisplayorder) to help building and
+visualizing orderings.
+
+[`NCPolyDisplayOrder`](#ncpolydisplayorder) prints the polynomial
+ordering implied by a list of symbols. For example
 
     NCPolyDisplayOrder[{x,y,z}]
 
@@ -2758,15 +2770,60 @@ prints out
 
 from where you can see that grouping variables inside braces induces a
 graded type ordering, as discussed in [Noncommutative Gröbner
-Basis](#noncommutative-gröbner-basis). `NCPoly`s constructed from different orderings cannot
-be combined.
+Basis](#noncommutative-gröbner-basis).
+
+With [`NCMonomialOrder`](#ncmonomialorder) you
+can basically dispense with the “outer” braces. For example
+
+    NCMonomialOrder[{x},{y,z}]
+
+returns
+
+``` output
+{{x},{y,z}}
+```
+
+It also validates the resulting ordering using
+[`NCMonomialOrderQ`](#ncmonomialorderq) so that
+
+    NCMonomialOrder[{x},{y,{z}}]
+
+will fail and print an error message. Note that
+
+    NCMonomialOrder[x,y,z]
+
+returns
+
+``` output
+{{x},{y},{z}}
+```
+
+which corresponds to
+
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%5Cll%20z)
+
+and
+
+    NCMonomialOrder[{x, y, z}]
+
+returns
+
+``` output
+{{x,y,z}}
+```
+
+which corresponds to
+
+![inline equation](https://render.githubusercontent.com/render/math?math=x%20%3C%20y%20%3C%20z)
 
 There is also a special constructor for monomials. For example
 
+    vars = NCMonomialOrder[{x}, {y,z}];
     NCPolyMonomial[{y,x}, vars]
     NCPolyMonomial[{x,y}, vars]
 
-return the monomials corresponding to ![y x](https://render.githubusercontent.com/render/math?math=y%20x&mode=inline) and ![x y](https://render.githubusercontent.com/render/math?math=x%20y&mode=inline).
+return the monomials corresponding to ![y x](https://render.githubusercontent.com/render/math?math=y%20x&mode=inline) and ![x y](https://render.githubusercontent.com/render/math?math=x%20y&mode=inline) using the
+ordering ![x \ll y \< z](https://render.githubusercontent.com/render/math?math=x%20%5Cll%20y%20%3C%20z&mode=inline).
 
 Operations on `NCPoly` objects result in another `NCPoly` object that
 is always expanded. For example:
@@ -2789,6 +2846,9 @@ returns
 ``` output
 NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
 ```
+
+> **WARNING:** `NCPoly`s constructed from different orderings cannot
+> be combined or otherwise operated.
 
 Another convenience function is `NCPolyDisplay` which returns a list
 with the monomials appearing in an `NCPoly` object. For example:
@@ -9504,15 +9564,12 @@ See also:
 
 ## NCGB
 
-This packages supports our legacy Gröebner Bases algorithm that
+Starting with version 6.0.1 our legacy Gröebner Bases algorithm that
 requires both Mathematica and auxiliary executables compiled from C++
-to run. [NCGBX](#ncgbx) may run slower on some medium size
-problems but will succeed on large size problems which might fail
-under [NCGB](#ncgb).
+to run has been completely replaced by [NCGBX](#ncgbx).
 
-This code has become hard to maintain and support and may be
-deprecated in the future. See older versions of the NC documentation
-for a complete description of its functionality.
+See older versions of the NC documentation for a complete description
+of the legacy C++ code functionality.
 
 # Semidefinite Programming Algorithms
 

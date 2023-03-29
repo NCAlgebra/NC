@@ -3,6 +3,8 @@
 ## Version 6.0.1 {#Version6_0_1}
 
 1. Fixed SparseArray Mathematica bug affecting `NCFromDigits`.
+2. `NCGB` has been completely deprecated. Loading `NCGB` loads
+   `NCAlgebra` and `NCGBX` instead.
 
 
 ## Version 6.0.0 {#Version6_0_0}
