@@ -23,6 +23,8 @@ Clear[ClearMonomialOrder,
 
 Get["NCGBX.usage", CharacterEncoding->"UTF8"];
 
+NCGBX::NCGBDeprecated = "NCGB has now been deprecated; NCGBX was loaded instead";
+
 Clear[ReturnRules];
 Options[NCMakeGB] = {
   ReturnRules -> True,
