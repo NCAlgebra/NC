@@ -4533,18 +4533,18 @@ suite</em> of non-commutative algebra packages for Mathematica.</p>
 <pre><code>Needs[&quot;NCAlgebra`&quot;]</code></pre>
 <p>If the option <code>SmallCapSymbolsNonCommutative</code> is
 <code>True</code> then <code>NCAlgebra</code> will set all global single
-letter small cap symbols as noncommutative. Set <a
-href="#PackageNCOptions">NCOptions</a>. If that is not desired, simply
-set <code>SmallCapSymbolsNonCommutative</code> to <code>False</code>
-before loading <code>NCAlgebra</code>, as in</p>
+letter small cap symbols as noncommutative. If that is not desired,
+simply set <code>SmallCapSymbolsNonCommutative</code> to
+<code>False</code> before loading <code>NCAlgebra</code>, as in</p>
 <pre><code>&lt;&lt; NCOptions`
 SetOptions[NCOptions, SmallCapSymbolsNonCommutative -&gt; False]
 &lt;&lt; NCAlgebra`</code></pre>
-<p>A message will be issued warning users whether any letters have been
-set as noncommutative upon loading. Those messages are documented <a
-href="#NCAlgebraMessages">here</a>. Users can use Mathematica’s
-<code>Quiet</code> and <code>Off</code> if they do not want these
-messages to display. For example,</p>
+<p>See <a href="#PackageNCOptions">NCOptions</a> for details.</p>
+<p>When loading <code>NCAlgebra</code>, a message will be issued warning
+users whether any letters have been set as noncommutative upon loading.
+Those messages are documented <a href="#NCAlgebraMessages">here</a>.
+Users can use Mathematica’s <code>Quiet</code> and <code>Off</code> if
+they do not want these messages to display. For example,</p>
 <pre><code>Off[NCAlgebra`NCAlgebra::SmallCapSymbolsNonCommutative]
 &lt;&lt; NCAlgebra`</code></pre>
 <p>or</p>
