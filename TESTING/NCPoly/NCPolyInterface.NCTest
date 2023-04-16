@@ -304,6 +304,14 @@ Block[
   NCTest[PolyExp, NCPoly[{1,1,1}, {{a,a},{b,b},{c,c}}, vars]];
   NCTest[(NCExp /. (x_ == y_) -> x - y), NCExpExp];
 
+  vars = {{a},{b}};
+  NCExp = 1 - (a ** b)^3;
+  PolyExp = NCToNCPoly[NCExp, vars];
+  NCExpExp = NCPolyToNC[PolyExp, vars];
+
+  NCTest[PolyExp, NCPoly[{1,-1}, {{},{a,b,a,b,a,b}}, vars]];
+  NCTest[NCExpandExponents[NCExp], NCExpExp];
+
   vars = {{a},{b,c}};
   NCExp = a**a + b**b + c**c + d**d;
   NCTestCheck[NCToNCPoly[NCExp, vars],
@@ -331,6 +339,7 @@ Block[
   NCTestCheck[NCToNCPoly[NCExp, vars],
      	      $Failed,
 	      NCPoly::NotPolynomial];
+
 
   (* List functionality *)
 
@@ -581,6 +590,14 @@ Block[
   NCTest[Length[rVars[[3]]], 1];
   NCTest[NCPolyToNC[Rest[p], rVars] /. rRules, {0,0}];
   NCTest[labels, {{a, aj[a]}, {b, tp[b]}, {inv[a]}}];
+
+  expr = 1 - (a ** b)^3;
+  vars = {{a}, {b}};
+  {p, rVars, rRules, labels} = NCRationalToNCPoly[expr, vars];
+  NCTest[NCPolyToNC[p[[1]], rVars] /. rRules, NCExpandExponents[expr]];
+  NCTest[Length[rVars], 2];
+  NCTest[NCPolyToNC[Rest[p], rVars] /. rRules, {}];
+  NCTest[labels, {{a}, {b}}];
 
   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 

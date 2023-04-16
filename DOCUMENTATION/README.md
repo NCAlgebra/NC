@@ -464,6 +464,7 @@ The beginnings of the program come from eran@slac.
 1.  Fixed SparseArray Mathematica bug affecting `NCFromDigits`.
 2.  `NCGB` has been completely deprecated. Loading `NCGB` loads
     `NCAlgebra` and `NCGBX` instead.
+3.  Fixed NCRationalToNCPoly bug with expression exponents.
 
 ## Version 6.0.0
 
@@ -4861,7 +4862,7 @@ noncommutative. If that is not desired, simply set
 as in
 
     << NCOptions`
-    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False];
     << NCAlgebra`
 
 See [NCOptions](#ncoptions) for details.
@@ -4878,7 +4879,7 @@ loading. Those messages are documented
 or
 
     << NCOptions`
-    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False];
     Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
     << NCAlgebra`
 
@@ -4889,7 +4890,7 @@ shown. If you do not want this banner to be displayed set the
 option [`ShowBanner`](#ncoptions) to `False` before loading, as in
 
     << NCOptions`
-    SetOptions[NCOptions, ShowBanner -> False]
+    SetOptions[NCOptions, ShowBanner -> False];
     << NCAlgebra`
 
 For example, the following commands will perform a completly quiet

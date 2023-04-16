@@ -1143,6 +1143,7 @@ class="header-section-number">1.1</span> Version 6.0.1</h2>
 <li><code>NCGB</code> has been completely deprecated. Loading
 <code>NCGB</code> loads <code>NCAlgebra</code> and <code>NCGBX</code>
 instead.</li>
+<li>Fixed NCRationalToNCPoly bug with expression exponents.</li>
 </ol>
 <h2 data-number="1.2" id="Version6_0_0"><span
 class="header-section-number">1.2</span> Version 6.0.0</h2>
@@ -4537,7 +4538,7 @@ letter small cap symbols as noncommutative. If that is not desired,
 simply set <code>SmallCapSymbolsNonCommutative</code> to
 <code>False</code> before loading <code>NCAlgebra</code>, as in</p>
 <pre><code>&lt;&lt; NCOptions`
-SetOptions[NCOptions, SmallCapSymbolsNonCommutative -&gt; False]
+SetOptions[NCOptions, SmallCapSymbolsNonCommutative -&gt; False];
 &lt;&lt; NCAlgebra`</code></pre>
 <p>See <a href="#PackageNCOptions">NCOptions</a> for details.</p>
 <p>When loading <code>NCAlgebra</code>, a message will be issued warning
@@ -4549,7 +4550,7 @@ they do not want these messages to display. For example,</p>
 &lt;&lt; NCAlgebra`</code></pre>
 <p>or</p>
 <pre><code>&lt;&lt; NCOptions`
-SetOptions[NCOptions, SmallCapSymbolsNonCommutative -&gt; False]
+SetOptions[NCOptions, SmallCapSymbolsNonCommutative -&gt; False];
 Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
 &lt;&lt; NCAlgebra`</code></pre>
 <p>will load <code>NCAlgebra</code> without issuing a symbol assignment
@@ -4559,7 +4560,7 @@ banner will be shown. If you do not want this banner to be displayed set
 the option <a href="#PackageNCOptions"><code>ShowBanner</code></a> to
 <code>False</code> before loading, as in</p>
 <pre><code>&lt;&lt; NCOptions`
-SetOptions[NCOptions, ShowBanner -&gt; False]
+SetOptions[NCOptions, ShowBanner -&gt; False];
 &lt;&lt; NCAlgebra`</code></pre>
 <p>For example, the following commands will perform a completly quiet
 loading of <code>NC</code> <em>and</em> <code>NCAlgebra</code>:</p>

@@ -5,6 +5,7 @@
 1. Fixed SparseArray Mathematica bug affecting `NCFromDigits`.
 2. `NCGB` has been completely deprecated. Loading `NCGB` loads
    `NCAlgebra` and `NCGBX` instead.
+3. Fixed NCRationalToNCPoly bug with expression exponents.
 
 
 ## Version 6.0.0 {#Version6_0_0}

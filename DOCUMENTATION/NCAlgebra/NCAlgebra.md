@@ -18,7 +18,7 @@ noncommutative. If that is not desired, simply set
 as in
 
     << NCOptions`
-    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False];
     << NCAlgebra`
 
 See [NCOptions](#PackageNCOptions) for details. 
@@ -35,7 +35,7 @@ loading. Those messages are documented
 or
 
     << NCOptions`
-    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False]
+    SetOptions[NCOptions, SmallCapSymbolsNonCommutative -> False];
     Off[NCAlgebra`NCAlgebra::NoSymbolsNonCommutative]
     << NCAlgebra`
 
@@ -46,7 +46,7 @@ shown. If you do not want this banner to be displayed set the
 option [`ShowBanner`](#PackageNCOptions) to `False` before loading, as in
 
     << NCOptions`
-    SetOptions[NCOptions, ShowBanner -> False]
+    SetOptions[NCOptions, ShowBanner -> False];
     << NCAlgebra`
 
 For example, the following commands will perform a completly quiet

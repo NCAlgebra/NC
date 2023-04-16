@@ -319,7 +319,7 @@ Begin["`Private`"];
 
   (* NCRationalToNCPoly *)
   NCRationalToNCPoly[Polys_List, Vars_List] := Module[
-    {polys=Polys, vars=Vars, m=Length[p], symbols, rules, labels,
+    {polys=NCExpandExponents[Polys], vars=Vars, m=Length[p], symbols, rules, labels,
      invs, 
      ratVars, ruleRat, newRels, ruleRev,
      relInvs, ii, varInvs,
