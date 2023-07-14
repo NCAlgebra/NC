@@ -17,10 +17,6 @@ installed using our paclet distribution. Just type:
 
     PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.2.paclet?raw=true"];
 
-or
-
-    PacletInstall["https://github.com/NCAlgebra/NC/raw/NCAlgebra-6.0.2.paclet"];
-
 for the latest version.
 
 In the near future we plan to submit paclets to the Wolfram paclet
