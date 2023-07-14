@@ -615,10 +615,7 @@ For example
 	p = NCToNCPoly[1 + x**x - 2 x**y**z, vars]
 
 converts the polynomial `1 + x**x - 2 x**y**z` from the standard
-`NCAlgebra` format into an `NCPoly` object. The reason for the braces
-in the definition of `vars` will be explained below, when we introduce
-*ordering*. See also Section
-[Noncommutative Gröbner Basis](#NCGB). The result in this case is the
+`NCAlgebra` format into an `NCPoly` object. The result in this case is the
 `NCPoly` object
 ```output
 NCPoly[{1, 1, 1}, <|{0, 0, 0, 0} -> 1, {0, 0, 2, 0} -> 1, {1, 1, 1, 5} -> -2|>]
@@ -661,9 +658,16 @@ NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {0, 2, 0} -> 1, {2, 1, 5} -> -2|>
 The sequence of braces in the list of *variables* encodes the
 *ordering* to be used for sorting `NCPoly`s. Orderings specify how
 monomials should be ordered, and is discussed in detail in
-[Noncommutative Gröbner Basis](#NCGB). We provide the convenience
-command [`NCPolyDisplayOrder`](#NCPolyDisplayOrder) that prints the
-polynomial ordering implied by a list of symbols. For example
+[Noncommutative Gröbner Basis](#NCGB). 
+
+We provide the convenience commands
+[`NCMonomialOrder`](#NCMonomialOrder),
+[`NCMonomialOrderQ`](#NCMonomialOrderQ) and
+[`NCPolyDisplayOrder`](#NCPolyDisplayOrder) to help building and
+visualizing orderings. 
+
+[`NCPolyDisplayOrder`](#NCPolyDisplayOrder) prints the polynomial
+ordering implied by a list of symbols. For example
 
 	NCPolyDisplayOrder[{x,y,z}]
 
@@ -681,15 +685,54 @@ $$x \ll y < z$$
 
 from where you can see that grouping variables inside braces induces a
 graded type ordering, as discussed in [Noncommutative Gröbner
-Basis](#NCGB). `NCPoly`s constructed from different orderings cannot
-be combined.
+Basis](#NCGB).
+
+With [`NCMonomialOrder`](#NCMonomialOrder) you
+can basically dispense with the "outer" braces. For example
+
+    NCMonomialOrder[{x},{y,z}]
+
+returns
+```output
+{{x},{y,z}}
+```
+It also validates the resulting ordering using
+[`NCMonomialOrderQ`](#NCMonomialOrderQ) so that
+
+    NCMonomialOrder[{x},{y,{z}}]
+
+will fail and print an error message. Note that
+
+    NCMonomialOrder[x,y,z]
+
+returns
+```output
+{{x},{y},{z}}
+```
+which corresponds to
+
+$$x \ll y \ll z$$
+
+and
+
+    NCMonomialOrder[{x, y, z}]
+
+returns
+```output
+{{x,y,z}}
+```
+which corresponds to 
+
+$$x < y < z$$
 
 There is also a special constructor for monomials. For example
 
+    vars = NCMonomialOrder[{x}, {y,z}];
 	NCPolyMonomial[{y,x}, vars]
 	NCPolyMonomial[{x,y}, vars]
 
-return the monomials corresponding to $y x$ and $x y$.
+return the monomials corresponding to $y x$ and $x y$ using the
+ordering $x \ll y < z$.
 
 Operations on `NCPoly` objects result in another `NCPoly` object that
 is always expanded. For example:
@@ -709,6 +752,10 @@ returns
 ```output
 NCPoly[{1, 2}, <|{0, 0, 0} -> 1, {1, 1, 1} -> 2, {2, 2, 10} -> 1|>]
 ```
+
+> **WARNING:** `NCPoly`s constructed from different orderings cannot
+> be combined or otherwise operated.
+
 Another convenience function is `NCPolyDisplay` which returns a list
 with the monomials appearing in an `NCPoly` object. For example:
 
@@ -758,7 +805,7 @@ returns
 `Sort` produces a list of polynomials sorted in *ascending* order
 based on their *leading terms*.
 
-## Polynomials with noncommutative coefficients
+## Polynomials with noncommutative coefficients {#PolysWithNonCommutativeCoefficients}
 
 A larger class of polynomials in noncommutative variables is that of
 polynomials with noncommutative coefficients. Think of a polynomial

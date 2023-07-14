@@ -82,7 +82,7 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCRealization.md \
 	 MANUAL/Bibliography.md
 
-doc: NCDocument.pdf index.html README.md
+doc: NCDocument.pdf index.html README.md github.io
 
 README.md: $(MANUAL) MANUAL/Cover.md
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
@@ -101,10 +101,17 @@ README.md: $(MANUAL) MANUAL/Cover.md
 	rm -f README.tmp.md
 
 index.html: $(MANUAL)
-	pandoc $(MANUAL) -t html5 -N --toc --standalone --css base.css \
+	pandoc $(MANUAL) \
+             -t html5 -N --toc --standalone \
+	     --css markdown.css \
+	     --css github-markdown-light.css \
              --bibliography references.bib \
              --citeproc \
 	     -o index.html --mathjax
+	sed -i 's/<body>/<body class="markdown-body">/' index.html
+
+github.io: index.html
+	cp index.html markdown.css github-markdown-light.css github.io/.
 
 NCDocument.pdf: $(MANUAL)
 	$(PANDOC) $(MANUAL) -t latex -N --toc --toc-depth=4 --standalone \
@@ -140,5 +147,5 @@ demos: $(DEMOS)
 .PHONY: subdirs $(BUILDDIRS)
 
 .PHONY: all clean $(DEMOS)
-.PHONY: index.html NCDocument.pdf README.md
+.PHONY: index.html NCDocument.pdf README.md github.io
 

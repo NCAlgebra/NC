@@ -1,6 +1,6 @@
 ---
 title: The NCAlgebra Suite
-subtitle: Version 6.0.0
+subtitle: Version 6.0.2
 header-includes: |
   \makeatletter
   \newcommand{\@minipagerestore}{\setlength{\parskip}{\medskipamount}}
@@ -15,12 +15,12 @@ author:
 - Mauricio C. de Oliveira
 date:
 - with earlier contributions by Bob Miller \& Mark Stankus
+toc-title: Table of Contents
 ---
 
 \newpage
 
-\chapter*{License}
-\addcontentsline{toc}{chapter}{License}
+# License {-}
 
 **NCAlgebra** is distributed under the terms of the BSD License:
 
@@ -55,7 +55,7 @@ date:
 
 \part{User Guide}
 
-# Acknowledgements 
+# Acknowledgements {-}
 
 This work was partially supported by the Division of Mathematical
 Sciences of the National Science Foundation.

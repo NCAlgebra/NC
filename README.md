@@ -1,4 +1,4 @@
-# NCAlgebra - Version 6.0.0
+# NCAlgebra - Version 6.0.2
 
 Thanks for your interest in NCAlgebra.
 
@@ -33,6 +33,12 @@ Starting with version 6.0.0, it is recommended that NCAlgebra be
 installed using our paclet distribution. Just type:
 
     PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.0.paclet?raw=true"];
+
+or
+
+    PacletInstall["https://github.com/NCAlgebra/NC/raw/v6.0.2/NCAlgebra-6.0.2.paclet"];
+
+for the latest version.
 
 In the near future we plant to submit paclets to the Wolfram paclet
 repository for easier updates.
@@ -70,12 +76,15 @@ posting the message:
 
 ## Now what?
 
-Extensive documentation is found in the directory
-[DOCUMENTATION](./DOCUMENTATION).
+Extensive documentation is found at
 
-Basic documentation is provided on the project Wiki:
+<https://NCAlgebra.github.io>
 
-https://github.com/NCAlgebra/NC/wiki
+and in the distribution directory
+
+<https://github.com/NCAlgebra/NC/DOCUMENTATION>
+
+which includes this document.
 
 You may want to try some of the several demo files in the directory
 `DEMOS` after you install NCAlgebra.

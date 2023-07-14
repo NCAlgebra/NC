@@ -42,6 +42,7 @@ Begin["`Private`"];
     NCPolyMonomial[s, {var}, opts];
 
   (* LEX constructor *)
+  (* MAURICIO: BUG IN NCPolyMonomial
   NCPolyMonomial[monomials_List, {var__List}, opts:OptionsPattern[]] := 
     NCPolyMonomial[
        Flatten[Map[(Position[Flatten[{var}], #]-1)&, monomials]]
@@ -51,9 +52,20 @@ Begin["`Private`"];
        opts
     ];
 
-  (* DEG constructor *)
+  ( * DEG constructor * )
   NCPolyMonomial[monomials_List, var_List, opts:OptionsPattern[]] := 
     NCPolyMonomial[monomials, {var}, opts];
+  *)
+
+  NCPolyMonomial[monomials_List, var_List, opts:OptionsPattern[]] := 
+    NCPolyMonomial[
+       Flatten[Map[(Position[Flatten[var], #]-1)&, monomials]]
+      ,
+       NCPolyVarsToIntegers[var]
+      ,
+       opts
+    ];
+       
 
   (* NCPoly Constructor *)
   
@@ -126,8 +138,9 @@ Begin["`Private`"];
     Print["ajVars = ", ajVars];
     Print["varRule = ", varRule];
     Print["options = ", options];
+    Print["vars = ", vars];
     *)
-      
+
     Check[
       NCPolyPack[
         NCPoly[

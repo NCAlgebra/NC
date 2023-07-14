@@ -199,7 +199,7 @@ $$\begin{aligned}
 
 from which one can recognize the problem of solving the linear
 equation $a \, x = c$ in terms of the *pseudo-inverse* $b =
-a^\dag$. The calculation:
+a^\dagger$. The calculation:
 
 	gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
 	ColumnForm[gb]
@@ -215,7 +215,7 @@ In this case the Gröbner basis cannot quite *solve* the equations but
 it remarkably produces the necessary condition for existence of
 solutions:
 
-$$ 0 = a \, b \, c - c = a \, a^\dag c - c $$ 
+$$ 0 = a \, b \, c - c = a \, a^\dagger c - c $$ 
 
 that can be interpreted as $c$ being in the range-space of $a$.
 

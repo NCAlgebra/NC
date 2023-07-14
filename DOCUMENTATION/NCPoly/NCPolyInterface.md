@@ -280,8 +280,9 @@ See also:
 
 ### NCReduceRepeated {#NCReduceRepeated}
 
-`NCReduceRepeated[polys]` applies `NCReduce` successively to the
-list of `polys` until the remainder does not change.
+`NCReduceRepeated[polys, vars]` applies `NCReduce` successively to the
+list of `polys` in variables `vars` until the remainder does not
+change.
 
 See also:
 [NCReduce](#NCReduce),
@@ -289,8 +290,8 @@ See also:
 
 ### NCMonomialList {#NCMonomialList}
 
-`NCMonomialList[poly]` gives the list of all monomials in the
-polynomial `poly`.
+`NCMonomialList[poly, vars]` gives the list of all monomials in the
+polynomial `poly` in variables `vars`.
 
 For example:
 
@@ -309,8 +310,8 @@ See also:
 
 ### NCCoefficientRules {#NCCoefficientRules}
 
-`NCCoefficientRules[poly]` gives a list of rules between all the monomials
-polynomial `poly`.
+`NCCoefficientRules[poly, vars]` gives a list of rules between all the
+monomials polynomial `poly` in variables `vars`.
 
 For example:
 
@@ -330,8 +331,8 @@ See also:
 
 ### NCCoefficientList {#NCCoefficientList}
 
-`NCCoefficientList[poly]` gives the list of all coefficients in the
-polynomial `poly`.
+`NCCoefficientList[poly, vars]` gives the list of all coefficients in
+the polynomial `poly` in variables `vars`.
 
 For example:
 

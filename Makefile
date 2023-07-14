@@ -57,8 +57,10 @@ deploy: paclet
 	echo 'Print["\n> CREATING PACLET ARCHIVE..."]; CreatePacletArchive["NCAlgebraPaclet"]; Print["> DONE!"]; Quit[];' | math
 
 test:
-	math < TESTING/NCTEST
+	math < TESTING/NCCORETEST.m
 	@echo "> Press [Enter] to continue"; read nothing
-	math < TESTING/NCPOLYTEST
+	math < TESTING/NCPOLYTEST.m
 	@echo "> Press [Enter] to continue"; read nothing
-	math < TESTING/NCSDPTEST
+	math < TESTING/NCPOLYTESTGB.m
+	@echo "> Press [Enter] to continue"; read nothing
+	math < TESTING/NCSDPTEST.m
