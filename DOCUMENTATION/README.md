@@ -1,6 +1,6 @@
 # The NCAlgebra Suite
 
-*Version 6.0.1*
+*Version 6.0.2*
 
 ## Authors
 
@@ -48,8 +48,9 @@ All rights reserved.
 - <a href="#license" id="toc-license">License</a>
 - <a href="#acknowledgements" id="toc-acknowledgements">Acknowledgements</a>
 - <a href="#changes-in-version-60" id="toc-Version6_0"><span class="toc-section-number">1</span> Changes in Version 6.0</a>
-  - <a href="#version-601" id="toc-Version6_0_1"><span class="toc-section-number">1.1</span> Version 6.0.1</a>
-  - <a href="#version-600" id="toc-Version6_0_0"><span class="toc-section-number">1.2</span> Version 6.0.0</a>
+  - <a href="#version-602" id="toc-Version6_0_2"><span class="toc-section-number">1.1</span> Version 6.0.2</a>
+  - <a href="#version-601" id="toc-Version6_0_1"><span class="toc-section-number">1.2</span> Version 6.0.1</a>
+  - <a href="#version-600" id="toc-Version6_0_0"><span class="toc-section-number">1.3</span> Version 6.0.0</a>
 - <a href="#changes-in-version-50" id="toc-Version5_0"><span class="toc-section-number">2</span> Changes in Version 5.0</a>
   - <a href="#version-506" id="toc-Version5_0_6"><span class="toc-section-number">2.1</span> Version 5.0.6</a>
   - <a href="#version-505" id="toc-Version5_0_5"><span class="toc-section-number">2.2</span> Version 5.0.5</a>
@@ -459,6 +460,10 @@ The beginnings of the program come from eran@slac.
 
 # Changes in Version 6.0
 
+## Version 6.0.2
+
+1.  Fixed bug in `NCPolyMonomial` in lex order.
+
 ## Version 6.0.1
 
 1.  Fixed SparseArray Mathematica bug affecting `NCFromDigits`.
@@ -632,13 +637,13 @@ each of the chapters of this user guide.
 Starting with **Version 6**, it is recommended that NCAlgebra be
 installed using our paclet distribution. Just type:
 
-    PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.0.paclet?raw=true"];
+    PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.2.paclet?raw=true"];
 
 or
 
-    PacletInstall["https://github.com/NCAlgebra/NC/raw/NCAlgebra-6.0.1.paclet"];
+    PacletInstall["https://github.com/NCAlgebra/NC/raw/NCAlgebra-6.0.2.paclet"];
 
-for the latest beta version.
+for the latest version.
 
 In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.
@@ -9568,7 +9573,7 @@ See also:
 
 ## NCGB
 
-Starting with version 6.0.1 our legacy Gröebner Bases algorithm that
+Starting with version 6.0.0 our legacy Gröebner Bases algorithm that
 requires both Mathematica and auxiliary executables compiled from C++
 to run has been completely replaced by [NCGBX](#ncgbx).
 

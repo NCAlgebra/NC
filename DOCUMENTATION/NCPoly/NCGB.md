@@ -1,6 +1,6 @@
 ## NCGB {#PackageNCGB}
 
-Starting with version 6.0.1 our legacy Gröebner Bases algorithm that
+Starting with version 6.0.0 our legacy Gröebner Bases algorithm that
 requires both Mathematica and auxiliary executables compiled from C++
 to run has been completely replaced by [NCGBX](#PackageNCGBX).
 

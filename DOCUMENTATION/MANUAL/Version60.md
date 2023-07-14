@@ -1,5 +1,9 @@
 # Changes in Version 6.0 {#Version6_0}
 
+## Version 6.0.2 {#Version6_0_2}
+
+1. Fixed bug in `NCPolyMonomial` in lex order.
+
 ## Version 6.0.1 {#Version6_0_1}
 
 1. Fixed SparseArray Mathematica bug affecting `NCFromDigits`.

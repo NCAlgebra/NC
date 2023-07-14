@@ -631,4 +631,47 @@ Block[
   NCTest[NCPolyPossibleZeroQ[0.], True];
   NCTest[NCPolyPossibleZeroQ[1 + Exp[2/3 Pi I] + Exp[-2/3 Pi I]], True];
 
+  (* More NCPolyMonomial tests *)
+  vars = {x,y,z};
+  m0 = NCPolyMonomial[{x}, vars];
+  m1 = NCPolyMonomial[{0}, {1,1,1}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{y}, vars];
+  m1 = NCPolyMonomial[{1}, {1,1,1}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{z}, vars];
+  m1 = NCPolyMonomial[{2}, {1,1,1}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{x, x}, vars];
+  m1 = NCPolyMonomial[{0, 0}, {1,1,1}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{x, z}, vars];
+  m1 = NCPolyMonomial[{0, 2}, {1,1,1}];
+  NCTest[m0, m1];
+
+  vars = {{x,y,z}};
+  m0 = NCPolyMonomial[{x}, vars];
+  m1 = NCPolyMonomial[{0}, {3}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{y}, vars];
+  m1 = NCPolyMonomial[{1}, {3}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{z}, vars];
+  m1 = NCPolyMonomial[{2}, {3}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{x, x}, vars];
+  m1 = NCPolyMonomial[{0, 0}, {3}];
+  NCTest[m0, m1];
+
+  m0 = NCPolyMonomial[{x, z}, vars];
+  m1 = NCPolyMonomial[{0, 2}, {3}];
+  NCTest[m0, m1];
+
 ];

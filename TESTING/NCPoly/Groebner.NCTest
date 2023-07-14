@@ -52,7 +52,7 @@ Module[
   *)
 
   Clear[a, b];
-  vars = {a, b};
+  vars = {{a, b}};
 
   g1 = NCPolyMonomial[{a, b, a}, vars] - NCPolyMonomial[{b}, vars];
   g2 = NCPolyMonomial[{b, a, b}, vars] - NCPolyMonomial[{b}, vars];
@@ -96,7 +96,7 @@ Module[
   (* TESTING GROEBNER PROBLEM # 2 -- BEGIN *)
 
   Clear[m, Invm, q2, q1, m, f, a];
-  vars = {Invm, q2, q1, m, f, a};
+  vars = {{Invm, q2, q1, m, f, a}};
 
   g = { 
   NCPolyMonomial[{Invm, m}, vars] - 1, 

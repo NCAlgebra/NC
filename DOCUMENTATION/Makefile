@@ -82,7 +82,7 @@ MANUAL = MANUAL/Preamble.md \
 	 NCAlgebra/NCRealization.md \
 	 MANUAL/Bibliography.md
 
-doc: NCDocument.pdf index.html README.md
+doc: NCDocument.pdf index.html README.md github.io
 
 README.md: $(MANUAL) MANUAL/Cover.md
 	pandoc $(MANUAL) -t markdown -N --toc --standalone \
