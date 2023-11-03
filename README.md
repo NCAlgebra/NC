@@ -1,4 +1,4 @@
-# NCAlgebra - Version 6.0.2
+# NCAlgebra - Version 6.0.3
 
 Thanks for your interest in NCAlgebra.
 
@@ -32,7 +32,7 @@ http://math.ucsd.edu/~ncalg
 Starting with version 6.0.0, it is recommended that NCAlgebra be
 installed using our paclet distribution. Just type:
 
-    PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.2.paclet?raw=true"];
+    PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.3.paclet?raw=true"];
 
 for the latest version.
 
