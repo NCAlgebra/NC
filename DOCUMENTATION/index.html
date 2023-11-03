@@ -52,7 +52,7 @@
 <body class="markdown-body">
 <header id="title-block-header">
 <h1 class="title">The NCAlgebra Suite</h1>
-<p class="subtitle">Version 6.0.2</p>
+<p class="subtitle">Version 6.0.3</p>
 <p class="author">J. William Helton</p>
 <p class="author">Mauricio C. de Oliveira</p>
 <p class="date">with earlier contributions by Bob Miller &amp; Mark
@@ -67,12 +67,14 @@ id="toc-acknowledgements">Acknowledgements</a></li>
 <li><a href="#Version6_0" id="toc-Version6_0"><span
 class="toc-section-number">1</span> Changes in Version 6.0</a>
 <ul>
+<li><a href="#Version6_0_3" id="toc-Version6_0_3"><span
+class="toc-section-number">1.1</span> Version 6.0.3</a></li>
 <li><a href="#Version6_0_2" id="toc-Version6_0_2"><span
-class="toc-section-number">1.1</span> Version 6.0.2</a></li>
+class="toc-section-number">1.2</span> Version 6.0.2</a></li>
 <li><a href="#Version6_0_1" id="toc-Version6_0_1"><span
-class="toc-section-number">1.2</span> Version 6.0.1</a></li>
+class="toc-section-number">1.3</span> Version 6.0.1</a></li>
 <li><a href="#Version6_0_0" id="toc-Version6_0_0"><span
-class="toc-section-number">1.3</span> Version 6.0.0</a></li>
+class="toc-section-number">1.4</span> Version 6.0.0</a></li>
 </ul></li>
 <li><a href="#Version5_0" id="toc-Version5_0"><span
 class="toc-section-number">2</span> Changes in Version 5.0</a>
@@ -1137,13 +1139,18 @@ Ovall, T. Shaheen, John Shopple.</li>
 <p>The beginnings of the program come from eran@slac.</p>
 <h1 data-number="1" id="Version6_0"><span
 class="header-section-number">1</span> Changes in Version 6.0</h1>
-<h2 data-number="1.1" id="Version6_0_2"><span
-class="header-section-number">1.1</span> Version 6.0.2</h2>
+<h2 data-number="1.1" id="Version6_0_3"><span
+class="header-section-number">1.1</span> Version 6.0.3</h2>
+<ol type="1">
+<li>Fixed <code>NCGrad</code> for <code>tr</code> functions.</li>
+</ol>
+<h2 data-number="1.2" id="Version6_0_2"><span
+class="header-section-number">1.2</span> Version 6.0.2</h2>
 <ol type="1">
 <li>Fixed bug in <code>NCPolyMonomial</code> in lex order.</li>
 </ol>
-<h2 data-number="1.2" id="Version6_0_1"><span
-class="header-section-number">1.2</span> Version 6.0.1</h2>
+<h2 data-number="1.3" id="Version6_0_1"><span
+class="header-section-number">1.3</span> Version 6.0.1</h2>
 <ol type="1">
 <li>Fixed SparseArray Mathematica bug affecting
 <code>NCFromDigits</code>.</li>
@@ -1152,8 +1159,8 @@ class="header-section-number">1.2</span> Version 6.0.1</h2>
 instead.</li>
 <li>Fixed NCRationalToNCPoly bug with expression exponents.</li>
 </ol>
-<h2 data-number="1.3" id="Version6_0_0"><span
-class="header-section-number">1.3</span> Version 6.0.0</h2>
+<h2 data-number="1.4" id="Version6_0_0"><span
+class="header-section-number">1.4</span> Version 6.0.0</h2>
 <ol type="1">
 <li><p>NCAlgebra is now distributed as a <em>paclet</em>!</p></li>
 <li><p>Changed cannonical representation of noncommutative expressions
@@ -1334,7 +1341,7 @@ accompany each of the chapters of this user guide.</p>
 class="header-section-number">3.1</span> Installing NCAlgebra</h2>
 <p>Starting with <strong>Version 6</strong>, it is recommended that
 NCAlgebra be installed using our paclet distribution. Just type:</p>
-<pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.2.paclet?raw=true&quot;];</code></pre>
+<pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.3.paclet?raw=true&quot;];</code></pre>
 <p>for the latest version.</p>
 <p>In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.</p>
