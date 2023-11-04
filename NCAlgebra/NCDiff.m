@@ -76,13 +76,9 @@ Begin["`Private`"];
   NCGradAux[{scalar_, term1_, term2_}] := scalar * term2 ** term1;
 
   (* NCGrad *)
-  (*  NCGrad[f_Plus, xs__] := Map[NCGrad[#, xs]&, f];
-
-   NCGrad[f_tr, xs__] := Apply[NCGrad[#, xs]&, f];
-   *)
-
   NCGradTr[tr[f_], xs__] := NCGrad[f, xs];
-  NCGradTr[f:HoldPattern[Plus[__tr]], xs__] := Map[NCGrad[#, xs]&, f];
+  NCGradTr[A_?CommutativeQ tr[f_], xs__] := A NCGrad[f, xs];
+  NCGradTr[f:HoldPattern[Plus[((_:1?CommutativeQ) _tr) ..]], xs__] := Map[NCGrad[#, xs]&, f];
   NCGradTr[f___] := Message[NCGrad::Failed, f]; $Failed;
 
   NCGrad[f_, xs__] := Module[

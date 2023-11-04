@@ -284,12 +284,36 @@ Module[
    exp = 2 g **a - tp[x]**x + tp[c]**c +
          2 g**b**e + 2 g**d**x + g**b**f**x;
    answer = 2 g**d + g**b**f - 2tp[x];
-   NCTest[NCGrad[exp, x], answer ];
+   NCTest[NCGrad[exp, x], answer];
 
    exp = 2 g **a - x**x + tp[c]**c +
          2 g**b**e + 2 g**d**x + g**b**f**x;
    answer = 2 g**d + g**b**f - 2 x;
-   NCTest[NCGrad[exp, x], answer ];
+   NCTest[NCGrad[exp, x], answer];
+
+
+   (* tr *)
+   exp = tr[a ** x];
+   answer = a;
+   NCTest[NCGrad[exp, x], answer];
+
+   exp = tr[a ** tp[x]];
+   answer = tp[a];
+   NCTest[NCGrad[exp, x], answer];
+
+   exp = tr[a ** x + b ** x];
+   answer = a + b;
+   NCTest[NCGrad[exp, x], answer];
+
+   exp = tr[a ** x - 2 b ** x];
+   answer = a - 2 b;
+   NCTest[NCGrad[exp, x], answer];
+
+   exp = tr[2 g **a - tp[x]**x + tp[c]**c +
+         2 g**b**e + 2 g**d**x + g**b**f**x];
+   answer = 2 g**d + g**b**f - 2tp[x];
+   NCTest[NCGrad[exp, x], answer];
+   
 
    (* Fail gracefully when exp is not rational *)
    
