@@ -19,7 +19,8 @@ Clear[ClearMonomialOrder,
       SetUnknowns,
       NCMakeGB,
       NCGBSimplifyRational,
-      NCProcess];
+      NCProcess,
+      NCSortInOrder];
 
 Get["NCGBX.usage", CharacterEncoding->"UTF8"];
 
@@ -33,6 +34,15 @@ Options[NCMakeGB] = {
 };
 
 Options[NCProcess] = {
+  MaxDigest -> 2,
+  InfiniteDigest -> True,
+  PrintReport -> True,
+  GridOptions -> {
+      Alignment -> {{Right, Left}}, 
+      Background -> {None, {{LightGray, LightYellow}} }
+  }
+};
+Options[NCSortInOrder] = {
   MaxDigest -> 2,
   InfiniteDigest -> True,
   PrintReport -> True,
@@ -210,7 +220,7 @@ Begin["`Private`"];
   NCMakeGB[p_, iter_Integer:4, opts___Rule] := 
     NCMakeGB[{p}, iter, opts];
 
-  (* NCProcess *)
+  (* NCProcess, NCSortInOrder *)
 
   PrintEntry[n_] := Map[ToString[#] <> "." &, Range[n]];
   
@@ -242,21 +252,31 @@ Begin["`Private`"];
   );
   
   NCProcess[p_List, iter_Integer:4, opts___Rule] := Module[
+    {gb},
+    gb = NCMakeGB[p, iter, opts];
+    NCSortInOrderCommon[gb, Options[NCProcess], opts]
+  ];
+  
+  NCSortInOrder[p_List, iter_Integer:4, opts___Rule] := Module[
+    {gb},
+    gb = NCMakeGB[p, iter, opts];
+    NCSortInOrderCommon[gb, Options[NCSortInOrder], opts]
+  ];
+  
+  NCSortInOrderCommon[p_List, moreOpts_, opts___Rule] := Module[
     {gb, order, knowns, unknowns,
      solved, unsolved, count, digest,
      printReport, maxDigest, infiniteDigest, gridOptions,
      notSolved
      },
+    gb = p;
       
     (* NCProcessOptions *)
-    printReport = PrintReport /. {opts} /. Options[NCProcess, PrintReport];
-    maxDigest = MaxDigest /. {opts} /. Options[NCProcess, MaxDigest];
-    infiniteDigest = InfiniteDigest /. {opts} /. Options[NCProcess, InfiniteDigest];
-    gridOptions = Sequence @@ (GridOptions /. {opts} /. Options[NCProcess, GridOptions]);
-      
-    (* Call NCMakeGB *)
-    gb = NCMakeGB[p, iter, opts];
-      
+    printReport = PrintReport /. {opts} /. moreOpts;
+    maxDigest = MaxDigest /. {opts} /. moreOpts;
+    infiniteDigest = InfiniteDigest /. {opts} /. moreOpts;
+    gridOptions = Sequence @@ (GridOptions /. {opts} /. moreOpts);
+
     (* Retrieve order *)
     order = GetMonomialOrder[];
     knowns = First[order];
