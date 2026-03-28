@@ -365,6 +365,19 @@ Begin["`Private`"];
                               
   NCProcess[p_, iter_Integer:4, opts___Rule] := 
     NCProcess[{p}, iter, opts];
+
+  (* NCFilterOutLongPolys *)
+
+  NCFilterOutLongPolys[longList_List, filterLength_Integer] :=
+    Module[{filtered},
+      If[filterLength === -1, Return[longList]];
+
+      filtered = Select[longList, LeafCount[#] <= filterLength &];
+      Print["\n  Dropped ", Length[longList] - Length[filtered], 
+      " polys for being too long"];
+
+      Return[filtered]
+  ]
     
   (* NCGBSimplifyRational *)
                               

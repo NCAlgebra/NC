@@ -347,6 +347,13 @@ in each polynomial as determined by the monomial order.
 See also:
 [NCProcess](#NCProcess).
 
+### NCFilterOutLongPolys {#NCFilterOutLongPolys}
+
+`NCFilterOutLongPolys[{poly1, poly2, ...}, filterLength]` filters the list of
+polynomials to select only those with `LeafCount` at most `filterLength`.
+
+If `filterLength === -1`, then no filtering is performed; the full list is kept.
+
 ### NCGBSimplifyRational {#NCGBSimplifyRational}
 
 `NCGBSimplifyRational[expr]` creates a set of relations for each
@@ -389,5 +396,3 @@ See also:
 <!-- See also: -->
 <!-- [NCMakeGB](#NCMakeGB), -->
 <!-- [NCGBSimplifyRational](#NCGBSimplifyRational). -->
-
-
