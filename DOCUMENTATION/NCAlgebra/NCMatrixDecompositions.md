@@ -54,7 +54,7 @@ See also: [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivo
 
 ### NCLDLDecomposition {#NCLDLDecomposition}
 
-`NCLDLDecomposition` is a noncommutative version of [LDLDecomposition](#LDLDecomposition).
+`NCLDLDecomposition` is a noncommutative version of [CommutativeLDLDecomposition](#CommutativeLDLDecomposition).
 
 The following `options` can be given:
 

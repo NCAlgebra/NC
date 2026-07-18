@@ -1,0 +1,17 @@
+# Normalize line endings across platforms.
+# All text files are stored with LF in the repository. Git auto-detects
+# binary files (text=auto) and leaves them untouched; the explicit rules
+# below are belt-and-suspenders for known binary types.
+* text=auto eol=lf
+
+# Known binary types -- never normalize.
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.pdf    binary
+*.gz     binary
+*.zip    binary
+*.paclet binary
+*.mx     binary

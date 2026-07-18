@@ -1,5 +1,12 @@
 # Changes in Version 6.0 {#Version6_0}
 
+## Version 6.0.4 {#Version6_0_4}
+
+1. Renamed `LDLDecomposition` to `CommutativeLDLDecomposition` to avoid a
+   conflict with the built-in `LDLDecomposition` introduced in Mathematica
+   15.0. On versions of Mathematica older than 15.0, `LDLDecomposition`
+   remains available as an alias for `CommutativeLDLDecomposition`.
+
 ## Version 6.0.3 {#Version6_0_3}
 
 1. Fixed `NCGrad` for `tr` functions.

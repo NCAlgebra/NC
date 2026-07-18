@@ -1,6 +1,6 @@
 ---
 title: The NCAlgebra Suite
-subtitle: Version 6.0.3
+subtitle: Version 6.0.4
 header-includes: |
   \makeatletter
   \newcommand{\@minipagerestore}{\setlength{\parskip}{\medskipamount}}

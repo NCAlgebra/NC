@@ -52,7 +52,7 @@
 <body class="markdown-body">
 <header id="title-block-header">
 <h1 class="title">The NCAlgebra Suite</h1>
-<p class="subtitle">Version 6.0.3</p>
+<p class="subtitle">Version 6.0.4</p>
 <p class="author">J. William Helton</p>
 <p class="author">Mauricio C. de Oliveira</p>
 <p class="date">with earlier contributions by Bob Miller &amp; Mark
@@ -67,14 +67,16 @@ id="toc-acknowledgements">Acknowledgements</a></li>
 <li><a href="#Version6_0" id="toc-Version6_0"><span
 class="toc-section-number">1</span> Changes in Version 6.0</a>
 <ul>
+<li><a href="#Version6_0_4" id="toc-Version6_0_4"><span
+class="toc-section-number">1.1</span> Version 6.0.4</a></li>
 <li><a href="#Version6_0_3" id="toc-Version6_0_3"><span
-class="toc-section-number">1.1</span> Version 6.0.3</a></li>
+class="toc-section-number">1.2</span> Version 6.0.3</a></li>
 <li><a href="#Version6_0_2" id="toc-Version6_0_2"><span
-class="toc-section-number">1.2</span> Version 6.0.2</a></li>
+class="toc-section-number">1.3</span> Version 6.0.2</a></li>
 <li><a href="#Version6_0_1" id="toc-Version6_0_1"><span
-class="toc-section-number">1.3</span> Version 6.0.1</a></li>
+class="toc-section-number">1.4</span> Version 6.0.1</a></li>
 <li><a href="#Version6_0_0" id="toc-Version6_0_0"><span
-class="toc-section-number">1.4</span> Version 6.0.0</a></li>
+class="toc-section-number">1.5</span> Version 6.0.0</a></li>
 </ul></li>
 <li><a href="#Version5_0" id="toc-Version5_0"><span
 class="toc-section-number">2</span> Changes in Version 5.0</a>
@@ -659,8 +661,10 @@ LUDecompositionWithPartialPivoting</a></li>
 id="toc-LUDecompositionWithCompletePivoting"><span
 class="toc-section-number">11.3.2</span>
 LUDecompositionWithCompletePivoting</a></li>
-<li><a href="#LDLDecomposition" id="toc-LDLDecomposition"><span
-class="toc-section-number">11.3.3</span> LDLDecomposition</a></li>
+<li><a href="#CommutativeLDLDecomposition"
+id="toc-CommutativeLDLDecomposition"><span
+class="toc-section-number">11.3.3</span>
+CommutativeLDLDecomposition</a></li>
 <li><a href="#UpperTriangularSolve" id="toc-UpperTriangularSolve"><span
 class="toc-section-number">11.3.4</span> UpperTriangularSolve</a></li>
 <li><a href="#LowerTriangularSolve" id="toc-LowerTriangularSolve"><span
@@ -1139,18 +1143,28 @@ Ovall, T. Shaheen, John Shopple.</li>
 <p>The beginnings of the program come from eran@slac.</p>
 <h1 data-number="1" id="Version6_0"><span
 class="header-section-number">1</span> Changes in Version 6.0</h1>
-<h2 data-number="1.1" id="Version6_0_3"><span
-class="header-section-number">1.1</span> Version 6.0.3</h2>
+<h2 data-number="1.1" id="Version6_0_4"><span
+class="header-section-number">1.1</span> Version 6.0.4</h2>
+<ol type="1">
+<li>Renamed <code>LDLDecomposition</code> to
+<code>CommutativeLDLDecomposition</code> to avoid a conflict with the
+built-in <code>LDLDecomposition</code> introduced in Mathematica 15.0.
+On versions of Mathematica older than 15.0,
+<code>LDLDecomposition</code> remains available as an alias for
+<code>CommutativeLDLDecomposition</code>.</li>
+</ol>
+<h2 data-number="1.2" id="Version6_0_3"><span
+class="header-section-number">1.2</span> Version 6.0.3</h2>
 <ol type="1">
 <li>Fixed <code>NCGrad</code> for <code>tr</code> functions.</li>
 </ol>
-<h2 data-number="1.2" id="Version6_0_2"><span
-class="header-section-number">1.2</span> Version 6.0.2</h2>
+<h2 data-number="1.3" id="Version6_0_2"><span
+class="header-section-number">1.3</span> Version 6.0.2</h2>
 <ol type="1">
 <li>Fixed bug in <code>NCPolyMonomial</code> in lex order.</li>
 </ol>
-<h2 data-number="1.3" id="Version6_0_1"><span
-class="header-section-number">1.3</span> Version 6.0.1</h2>
+<h2 data-number="1.4" id="Version6_0_1"><span
+class="header-section-number">1.4</span> Version 6.0.1</h2>
 <ol type="1">
 <li>Fixed SparseArray Mathematica bug affecting
 <code>NCFromDigits</code>.</li>
@@ -1159,8 +1173,8 @@ class="header-section-number">1.3</span> Version 6.0.1</h2>
 instead.</li>
 <li>Fixed NCRationalToNCPoly bug with expression exponents.</li>
 </ol>
-<h2 data-number="1.4" id="Version6_0_0"><span
-class="header-section-number">1.4</span> Version 6.0.0</h2>
+<h2 data-number="1.5" id="Version6_0_0"><span
+class="header-section-number">1.5</span> Version 6.0.0</h2>
 <ol type="1">
 <li><p>NCAlgebra is now distributed as a <em>paclet</em>!</p></li>
 <li><p>Changed cannonical representation of noncommutative expressions
@@ -1341,7 +1355,7 @@ accompany each of the chapters of this user guide.</p>
 class="header-section-number">3.1</span> Installing NCAlgebra</h2>
 <p>Starting with <strong>Version 6</strong>, it is recommended that
 NCAlgebra be installed using our paclet distribution. Just type:</p>
-<pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.3.paclet?raw=true&quot;];</code></pre>
+<pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.4.paclet?raw=true&quot;];</code></pre>
 <p>for the latest version.</p>
 <p>In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.</p>
@@ -6136,7 +6150,7 @@ href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting<
 <h3 data-number="11.2.3" id="NCLDLDecomposition"><span
 class="header-section-number">11.2.3</span> NCLDLDecomposition</h3>
 <p><code>NCLDLDecomposition</code> is a noncommutative version of <a
-href="#LDLDecomposition">LDLDecomposition</a>.</p>
+href="#CommutativeLDLDecomposition">CommutativeLDLDecomposition</a>.</p>
 <p>The following <code>options</code> can be given:</p>
 <ul>
 <li><code>ZeroTest</code> (<code>PossibleZeroQ</code>): function used to
@@ -6231,7 +6245,8 @@ noncommutative versions of these algorithms.</p>
 href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a></li>
 <li><a
 href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a></li>
-<li><a href="#LDLDecomposition">LDLDecomposition</a></li>
+<li><a
+href="#CommutativeLDLDecomposition">CommutativeLDLDecomposition</a></li>
 <li><a href="#LURowReduce">LURowReduce</a></li>
 <li><a href="#LURowReduceIncremental">LURowReduceIncremental</a></li>
 </ul></li>
@@ -6340,14 +6355,24 @@ href="#GetLUMatrices">GetLUMatrices</a>, <a
 href="#GetFullLUMatrices">GetFullLUMatrices</a>, <a
 href="#LUCompletePivoting">LUCompletePivoting</a>, <a
 href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>.</p>
-<h3 data-number="11.3.3" id="LDLDecomposition"><span
-class="header-section-number">11.3.3</span> LDLDecomposition</h3>
-<p><code>LDLDecomposition[m]</code> generates a representation of the
-LDL decomposition of the symmetric or self-adjoint matrix
-<code>m</code>.</p>
-<p><code>LDLDecomposition[m, options]</code> uses
+<h3 data-number="11.3.3" id="CommutativeLDLDecomposition"><span
+class="header-section-number">11.3.3</span>
+CommutativeLDLDecomposition</h3>
+<blockquote>
+<p><strong>Note:</strong> In earlier versions this function was called
+<code>LDLDecomposition</code>. It was renamed because Mathematica 15.0
+introduced a built-in <code>LDLDecomposition</code> with different
+semantics. On versions of Mathematica older than 15.0,
+<code>LDLDecomposition</code> remains available as an alias for
+<code>CommutativeLDLDecomposition</code>.</p>
+</blockquote>
+<p><code>CommutativeLDLDecomposition[m]</code> generates a
+representation of the LDL decomposition of the symmetric or self-adjoint
+matrix <code>m</code>.</p>
+<p><code>CommutativeLDLDecomposition[m, options]</code> uses
 <code>options</code>.</p>
-<p><code>LDLDecomposition</code> returns a list of four elements:</p>
+<p><code>CommutativeLDLDecomposition</code> returns a list of four
+elements:</p>
 <ul>
 <li>the first element is a combination of upper- and lower-triangular
 matrices;</li>
@@ -6407,7 +6432,8 @@ back-substitution.</p>
 href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>,
 <a
 href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>,
-<a href="#LDLDecomposition">LDLDecomposition</a>.</p>
+<a
+href="#CommutativeLDLDecomposition">CommutativeLDLDecomposition</a>.</p>
 <h3 data-number="11.3.5" id="LowerTriangularSolve"><span
 class="header-section-number">11.3.5</span> LowerTriangularSolve</h3>
 <p><code>LowerTriangularSolve[l, b]</code> solves the lower-triangular
@@ -6420,7 +6446,8 @@ forward-substitution.</p>
 href="#LUDecompositionWithPartialPivoting">LUDecompositionWithPartialPivoting</a>,
 <a
 href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting</a>,
-<a href="#LDLDecomposition">LDLDecomposition</a>.</p>
+<a
+href="#CommutativeLDLDecomposition">CommutativeLDLDecomposition</a>.</p>
 <h3 data-number="11.3.6" id="LUInverse"><span
 class="header-section-number">11.3.6</span> LUInverse</h3>
 <p><code>LUInverse[a]</code> calculates the inverse of matrix
@@ -6475,30 +6502,36 @@ href="#LUDecompositionWithCompletePivoting">LUDecompositionWithCompletePivoting<
 <h3 data-number="11.3.9" id="GetLDUMatrices"><span
 class="header-section-number">11.3.9</span> GetLDUMatrices</h3>
 <p><code>GetLDUMatrices[ldu, s]</code> extracts lower-, upper-triangular
-and diagonal blocks produced by <code>LDLDecomposition</code>.</p>
+and diagonal blocks produced by
+<code>CommutativeLDLDecomposition</code>.</p>
 <p><code>GetLDUMatrices[ldu, p, s, rank]</code> extracts compact lower-
-and upper-triangular blocks produced by <code>LDLDecomposition</code>
-taking into account permutations and the matrix rank.</p>
+and upper-triangular blocks produced by
+<code>CommutativeLDLDecomposition</code> taking into account
+permutations and the matrix rank.</p>
 <p>For example:</p>
-<pre><code>{ldl, p, s, rank} = LDLDecomposition[mat];
+<pre><code>{ldl, p, s, rank} = CommutativeLDLDecomposition[mat];
 {l,d,u} = GetLDUMatrices[ldl,s];</code></pre>
 <p>and</p>
 <pre><code>{l, d, u} = GetLDUMatrices[ldl, p, s, rank];</code></pre>
 <p>returns the lower-triangular factor <code>l</code>, the
 upper-triangular factor <code>u</code>, and the block-diagonal factor
 <code>d</code> as <code>SparseArray</code>s.</p>
-<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>, <a
+<p>See also: <a
+href="#CommutativeLDLDecomposition">CommutativeLDLDecomposition</a>, <a
 href="#GetFullLDUMatrices">GetFullLDUMatrices</a>.</p>
 <h3 data-number="11.3.10" id="GetFullLDUMatrices"><span
 class="header-section-number">11.3.10</span> GetFullLDUMatrices</h3>
 <p><code>GetLDUMatrices[ldl, s]</code> extracts lower-, upper-triangular
-and diagonal blocks produced by <code>LDLDecomposition</code>.</p>
+and diagonal blocks produced by
+<code>CommutativeLDLDecomposition</code>.</p>
 <p><code>GetLDUMatrices[ldu, p, s, rank]</code> extracts compact lower-
-and upper-triangular blocks produced by <code>LDLDecomposition</code>
-taking into account permutations and the matrix rank.</p>
+and upper-triangular blocks produced by
+<code>CommutativeLDLDecomposition</code> taking into account
+permutations and the matrix rank.</p>
 <p><code>GetFullLDUMatrices</code> is equivalent to
 <code>Normal @@ GetLDUMatrices</code></p>
-<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>, <a
+<p>See also: <a
+href="#CommutativeLDLDecomposition">CommutativeLDLDecomposition</a>, <a
 href="#GetLDUMatrices">GetLDUMatrices</a>.</p>
 <h3 data-number="11.3.11" id="GetDiagonal"><span
 class="header-section-number">11.3.11</span> GetDiagonal</h3>
@@ -6514,7 +6547,8 @@ matrix <code>m</code> with block size <code>s</code>.</p>
 <pre><code>d = GetDiagonal[{{1,-1,0},{-1,2,0},{0,0,3}}, {2,1}];</code></pre>
 <p>returns</p>
 <pre><code>d = {{{1,-1},{-1,2}},3}</code></pre>
-<p>See also: <a href="#LDLDecomposition">LDLDecomposition</a>.</p>
+<p>See also: <a
+href="#CommutativeLDLDecomposition">CommutativeLDLDecomposition</a>.</p>
 <h3 data-number="11.3.12" id="LUPartialPivoting"><span
 class="header-section-number">11.3.12</span> LUPartialPivoting</h3>
 <p><code>LUPartialPivoting[v]</code> returns the index of the element

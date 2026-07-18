@@ -7331,7 +7331,7 @@ Cell[BoxData[
   "Out[193]=",ExpressionUUID->"680334ea-a7f8-46eb-bba8-8292dfe0016c"]
 }, Open  ]],
 
-Cell["The factors can be calculated using the LDLDecomposition", "Text",
+Cell["The factors can be calculated using the CommutativeLDLDecomposition", "Text",
  CellChangeTimes->{{3.8544565851671352`*^9, 3.854456593292553*^9}, {
   3.854457115100493*^9, 3.854457134197229*^9}, {3.854463515136808*^9, 
   3.854463515886661*^9}, {3.854464554471529*^9, 
@@ -7345,7 +7345,7 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"{", 
     RowBox[{"ldl", ",", "pvt", ",", "s", ",", "rank"}], "}"}], "=", 
-   RowBox[{"LDLDecomposition", "[", "QSOS", "]"}]}], 
+   RowBox[{"CommutativeLDLDecomposition", "[", "QSOS", "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -8784,7 +8784,7 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"{", 
     RowBox[{"ldl", ",", "pvt", ",", "s", ",", "rank"}], "}"}], "=", 
-   RowBox[{"LDLDecomposition", "[", 
+   RowBox[{"CommutativeLDLDecomposition", "[", 
     RowBox[{"Chop", "[", 
      RowBox[{"X", ",", 
       SuperscriptBox["10", 
