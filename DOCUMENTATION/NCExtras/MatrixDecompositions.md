@@ -17,7 +17,7 @@ Members are:
 * Decompositions
     * [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting)
     * [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting)
-    * [LDLDecomposition](#LDLDecomposition)
+    * [CommutativeLDLDecomposition](#CommutativeLDLDecomposition)
     * [LURowReduce](#LURowReduce)
     * [LURowReduceIncremental](#LURowReduceIncremental)
 * Solvers
@@ -86,13 +86,19 @@ The following `options` can be given:
 See also:
 LUDecomposition, [GetLUMatrices](#GetLUMatrices), [GetFullLUMatrices](#GetFullLUMatrices), [LUCompletePivoting](#LUCompletePivoting), [LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting).
 
-### LDLDecomposition {#LDLDecomposition}
+### CommutativeLDLDecomposition {#CommutativeLDLDecomposition}
 
-`LDLDecomposition[m]` generates a representation of the LDL decomposition of the symmetric or self-adjoint matrix `m`.
+> **Note:** In earlier versions this function was called
+> `LDLDecomposition`. It was renamed because Mathematica 15.0 introduced a
+> built-in `LDLDecomposition` with different semantics. On versions of
+> Mathematica older than 15.0, `LDLDecomposition` remains available as an
+> alias for `CommutativeLDLDecomposition`.
 
-`LDLDecomposition[m, options]` uses `options`.
+`CommutativeLDLDecomposition[m]` generates a representation of the LDL decomposition of the symmetric or self-adjoint matrix `m`.
 
-`LDLDecomposition` returns a list of four elements:
+`CommutativeLDLDecomposition[m, options]` uses `options`.
+
+`CommutativeLDLDecomposition` returns a list of four elements:
 
 - the first element is a combination of upper- and lower-triangular matrices;
 - the second element is a vector specifying rows and columns used for pivoting;
@@ -130,7 +136,7 @@ For example:
 returns the solution `x`.
 
 See also:
-[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LDLDecomposition](#LDLDecomposition).
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [CommutativeLDLDecomposition](#CommutativeLDLDecomposition).
 
 ### LowerTriangularSolve {#LowerTriangularSolve}
 
@@ -144,7 +150,7 @@ For example:
 returns the solution `x`.
 
 See also:
-[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [LDLDecomposition](#LDLDecomposition).
+[LUDecompositionWithPartialPivoting](#LUDecompositionWithPartialPivoting), [LUDecompositionWithCompletePivoting](#LUDecompositionWithCompletePivoting), [CommutativeLDLDecomposition](#CommutativeLDLDecomposition).
 
 ### LUInverse {#LUInverse}
 
@@ -190,13 +196,13 @@ See also:
 
 ### GetLDUMatrices {#GetLDUMatrices}
 
-`GetLDUMatrices[ldu, s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+`GetLDUMatrices[ldu, s]` extracts lower-, upper-triangular and diagonal blocks produced by `CommutativeLDLDecomposition`.
 
-`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `LDLDecomposition` taking into account permutations and the matrix rank.
+`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `CommutativeLDLDecomposition` taking into account permutations and the matrix rank.
 
 For example:
 
-    {ldl, p, s, rank} = LDLDecomposition[mat];
+    {ldl, p, s, rank} = CommutativeLDLDecomposition[mat];
     {l,d,u} = GetLDUMatrices[ldl,s];
 
 and
@@ -206,18 +212,18 @@ and
 returns the lower-triangular factor `l`, the upper-triangular factor `u`, and the block-diagonal factor `d` as `SparseArray`s.
 
 See also:
-[LDLDecomposition](#LDLDecomposition), [GetFullLDUMatrices](#GetFullLDUMatrices).
+[CommutativeLDLDecomposition](#CommutativeLDLDecomposition), [GetFullLDUMatrices](#GetFullLDUMatrices).
 
 ### GetFullLDUMatrices {#GetFullLDUMatrices}
 
-`GetLDUMatrices[ldl, s]` extracts lower-, upper-triangular and diagonal blocks produced by `LDLDecomposition`.
+`GetLDUMatrices[ldl, s]` extracts lower-, upper-triangular and diagonal blocks produced by `CommutativeLDLDecomposition`.
 
-`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `LDLDecomposition` taking into account permutations and the matrix rank.
+`GetLDUMatrices[ldu, p, s, rank]` extracts compact lower- and upper-triangular blocks produced by `CommutativeLDLDecomposition` taking into account permutations and the matrix rank.
 
 `GetFullLDUMatrices` is equivalent to `Normal @@ GetLDUMatrices`
 
 See also:
-[LDLDecomposition](#LDLDecomposition), [GetLDUMatrices](#GetLDUMatrices).
+[CommutativeLDLDecomposition](#CommutativeLDLDecomposition), [GetLDUMatrices](#GetLDUMatrices).
 
 ### GetDiagonal {#GetDiagonal}
 
@@ -242,7 +248,7 @@ returns
     d = {{{1,-1},{-1,2}},3}
 
 See also:
-[LDLDecomposition](#LDLDecomposition).
+[CommutativeLDLDecomposition](#CommutativeLDLDecomposition).
 
 ### LUPartialPivoting {#LUPartialPivoting}
 

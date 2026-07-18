@@ -198,8 +198,8 @@ Begin[ "`Private`" ]
 	    /. options
 	    /. Options[NCMatrixDecompositions, SelfAdjointMatrixQ];
 
-    LDLDecomposition[mat, 
-                     ZeroTest -> zeroTest, 
+    CommutativeLDLDecomposition[mat,
+                     ZeroTest -> zeroTest,
                      PartialPivoting -> partialPivoting,
                      CompletePivoting -> completePivoting,
                      LeftDivide -> leftDivide,

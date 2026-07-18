@@ -16,7 +16,7 @@ BeginPackage[ "MatrixDecompositions`" ];
 
 Clear[LUDecompositionWithPartialPivoting,
       LUDecompositionWithCompletePivoting,
-      LDLDecomposition,
+      CommutativeLDLDecomposition,
       UpperTriangularSolve,
       LowerTriangularSolve,
       LUInverse,
@@ -61,7 +61,7 @@ Options[LUDecompositionWithCompletePivoting] = {
   Pivoting -> LUCompletePivoting
 };
 
-Options[LDLDecomposition] = {
+Options[CommutativeLDLDecomposition] = {
   PartialPivoting -> LUPartialPivoting,
   CompletePivoting -> LUCompletePivoting,
   Inverse -> Inverse
@@ -625,7 +625,7 @@ Begin[ "`Private`" ]
   (* LDL Decomposition with Bunch-Parlett pivoting *)
   (* From Golub and Van Loan, p 168 *)
 
-  LDLDecomposition[AA_?MatrixQ, opts:OptionsPattern[{}]] := 
+  CommutativeLDLDecomposition[AA_?MatrixQ, opts:OptionsPattern[{}]] :=
   Module[
     {options, zeroTest, partialPivoting, completePivoting, 
      leftDivide, rightDivide, dot, inverse, selfAdjointQ,
@@ -643,11 +643,11 @@ Begin[ "`Private`" ]
 
      partialPivoting = PartialPivoting
 	    /. options
-	    /. Options[LDLDecomposition, PartialPivoting];
+	    /. Options[CommutativeLDLDecomposition, PartialPivoting];
 
      completePivoting = CompletePivoting
 	    /. options
-	    /. Options[LDLDecomposition, CompletePivoting];
+	    /. Options[CommutativeLDLDecomposition, CompletePivoting];
 
      rightDivide = RightDivide
 	    /. options
@@ -663,7 +663,7 @@ Begin[ "`Private`" ]
 
      inverse = Inverse
             /. options
-	    /. Options[LDLDecomposition, Inverse];
+	    /. Options[CommutativeLDLDecomposition, Inverse];
 
      selfAdjointQ = SelfAdjointMatrixQ
 	    /. options
@@ -1010,5 +1010,17 @@ Begin[ "`Private`" ]
 
   
 End[]
+
+(* Backward compatibility.
+   In earlier versions, CommutativeLDLDecomposition was called
+   LDLDecomposition. Mathematica 15.0 introduced a built-in
+   System`LDLDecomposition with different semantics, so we only expose the
+   old name as an alias on versions where there is no such conflict.
+   On Mathematica 15.0 and later, use CommutativeLDLDecomposition (or the
+   built-in LDLDecomposition). *)
+If[ !NameQ["System`LDLDecomposition"],
+    LDLDecomposition::usage = "LDLDecomposition is a deprecated alias for CommutativeLDLDecomposition, kept for backward compatibility on versions of Mathematica prior to 15.0. Mathematica 15.0 introduced a built-in LDLDecomposition, so on those versions use CommutativeLDLDecomposition instead. See CommutativeLDLDecomposition.";
+    LDLDecomposition = CommutativeLDLDecomposition;
+];
 
 EndPackage[]
