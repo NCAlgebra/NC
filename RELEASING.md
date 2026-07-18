@@ -26,10 +26,16 @@ automatically. Update every place by hand:
 - `NC_VERSION`
 - `PacletInfo.wl` (`"Version" -> "X.Y.Z"`)
 - `NCAlgebra/banner.txt` (runtime banner, printed via `FilePrint`)
+- `README.md` (the **root** landing page — hand-maintained, and NOT the same as
+  the generated `DOCUMENTATION/README.md`): the `# NCAlgebra - Version X.Y.Z`
+  title **and** the `NCAlgebra-X.Y.Z.paclet` install URL
 - `DOCUMENTATION/MANUAL/Preamble.md`, `DOCUMENTATION/MANUAL/Cover.md`
 - `DOCUMENTATION/MANUAL/Running.md` (the `NCAlgebra-X.Y.Z.paclet` install URL)
 - `DOCUMENTATION/MANUAL/Version60.md` — add a `## Version X.Y.Z {#VersionX_Y_Z}`
   changelog entry
+
+Sanity check afterwards: `git grep -n "<old-version>"` should only match the
+changelog history in `Version60.md` and the generated docs' changelog sections.
 
 ## 3. Regenerate the `.usage` files (from the `.md` sources)
 
