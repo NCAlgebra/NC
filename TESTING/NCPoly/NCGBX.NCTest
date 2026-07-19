@@ -7,7 +7,8 @@ Quiet[Get["NCAlgebra`"], NCAlgebra`NCAlgebra::NoSymbolsNonCommutative];
 
 Block[
   {a,b,c,d,x,
-  vars,NCExp,PolyExp
+  vars,NCExp,PolyExp,
+  gb
   },
   
   (* Test NCAlgebra interface *)
@@ -222,6 +223,37 @@ Block[
          { x -> inv[a] ** b}];
 
  (* TESTING NCMakeGB -- END *)
+
+  (* TESTING NCProcess MakeGB option -- BEGIN *)
+
+  SetMonomialOrder[{a,inv[a],b},{x}];
+  gb = NCMakeGB[{a**x-b}, VerboseLevel -> 0];
+
+  (* MakeGB -> False reports on the given basis without recomputing it, *)
+  (* producing the same result as computing the basis from the input.   *)
+  NCTest[NCProcess[gb, MakeGB -> False, PrintReport -> False],
+         NCProcess[{a**x-b}, VerboseLevel -> 0, PrintReport -> False]];
+
+  (* MakeGB -> False requires the rule form; otherwise NCProcess::rules *)
+  NCTestCheck[NCProcess[{a**x-b}, MakeGB -> False, PrintReport -> False],
+              $Failed,
+              NCProcess::rules];
+
+  (* TESTING NCProcess MakeGB option -- END *)
+
+  (* TESTING NCProcess MaxLength option -- BEGIN *)
+
+  (* gb is { x -> inv[a] ** b }, a single relation with 2 terms *)
+
+  (* MaxLength larger than the relation keeps everything *)
+  NCTest[NCProcess[gb, MakeGB -> False, MaxLength -> 2, PrintReport -> False],
+         NCProcess[gb, MakeGB -> False, PrintReport -> False]];
+
+  (* MaxLength smaller than the relation drops it *)
+  NCTest[NCProcess[gb, MakeGB -> False, MaxLength -> 1, PrintReport -> False],
+         NCProcess[{}, MakeGB -> False, PrintReport -> False]];
+
+  (* TESTING NCProcess MaxLength option -- END *)
 
   (* Print["-------------------> " <> ToString[NCTest`Private`NCTestCounter]]; *)
 

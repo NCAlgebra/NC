@@ -10,6 +10,7 @@ prefix = "NCAlgebra/TESTING/NCPoly/";
 tests = {
   "Digits",
   "Constructors",
+  "SelectByLength",
   "Arithmetic",
   "Product",
   "Reduce",

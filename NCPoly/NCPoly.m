@@ -75,6 +75,7 @@ Clear[NCFromDigits,
       NCPolyVariables,
       NCPolyDisplay,
       NCPolyToList,
+      NCPolySelectByLength,
       NCPolyOrderType,
       NCPolyPossibleZeroQ];
 
@@ -655,7 +656,12 @@ Begin["`Private`"];
 
   NCPolyToList[p_NCPoly] :=
     Map[NCPoly[p[[1]], Association[{##}]] &, Normal[p[[2]]], {1}];
-    
+
+  (* NCPolySelectByLength *)
+
+  NCPolySelectByLength[polys:{___NCPoly}, maxLength_:Infinity] :=
+    Select[polys, NCPolyNumberOfTerms[#] <= maxLength &];
+
   (* NCPolySplitDigits *)
       
   NCPolySplitDigits[digits_List] :=
