@@ -1,5 +1,14 @@
 # Changes in Version 6.0 {#Version6_0}
 
+## Version 6.0.5 {#Version6_0_5}
+
+1. Added the options `MakeGB` and `MaxLength` to `NCProcess`. With
+   `MakeGB -> False`, `NCProcess` reports on an already-computed basis
+   without rerunning `NCMakeGB`. With `MaxLength -> n`, relations with
+   more than `n` terms are dropped from the report.
+2. Added `NCPolySelectByLength` to `NCPoly`, selecting the polynomials
+   in a list with at most a given number of terms.
+
 ## Version 6.0.4 {#Version6_0_4}
 
 1. Renamed `LDLDecomposition` to `CommutativeLDLDecomposition` to avoid a

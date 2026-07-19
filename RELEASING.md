@@ -53,11 +53,21 @@ uses heading level `-H "###"`; most others use the default `##`.
 
 ## 4. Run the tests
 
+`make test` runs **only** the two most common suites (`NCCORETEST` and
+`NCPOLYTEST`) and pauses interactively between them. For a release, run
+the **full** battery — all five drivers — non-interactively:
+
 ```
-make test          # runs the full .NCTest suites via the kernel
+math -noprompt < TESTING/NCCORETEST.m     # core functionality
+math -noprompt < TESTING/NCPOLYTEST.m     # NCPoly / NCGBX
+math -noprompt < TESTING/NCPOLYTESTGB.m   # extensive NCGBX (slow, ~2-3 min)
+math -noprompt < TESTING/NCSDPTEST.m      # SDP solver
+math -noprompt < TESTING/NCSDPTESTMORE.m  # more SDP (slow)
 ```
 
-Every test must pass before releasing.
+Each driver ends with a `SUMMARY OF TESTS`; every test must report
+`0 failed` before releasing. Restart the kernel between runs if you run
+them interactively.
 
 ## 5. Regenerate the manual/site docs
 

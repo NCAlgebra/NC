@@ -25,6 +25,8 @@ Get["NCGBX.usage", CharacterEncoding->"UTF8"];
 
 NCGBX::NCGBDeprecated = "NCGB has now been deprecated; NCGBX was loaded instead";
 
+NCProcess::rules = "When MakeGB -> False the input must be a list of rules, as returned by NCMakeGB with ReturnRules -> True.";
+
 Clear[ReturnRules];
 Options[NCMakeGB] = {
   ReturnRules -> True,
@@ -33,11 +35,13 @@ Options[NCMakeGB] = {
 };
 
 Options[NCProcess] = {
+  MakeGB -> True,
+  MaxLength -> Infinity,
   MaxDigest -> 2,
   InfiniteDigest -> True,
   PrintReport -> True,
   GridOptions -> {
-      Alignment -> {{Right, Left}}, 
+      Alignment -> {{Right, Left}},
       Background -> {None, {{LightGray, LightYellow}} }
   }
 };
@@ -241,22 +245,41 @@ Begin["`Private`"];
                    
   );
   
+  (* Number of terms of a relation lhs -> rhs, used by the MaxLength cut *)
+  NumberOfTerms[lhs_ -> rhs_] :=
+    With[{poly = lhs - rhs}, If[Head[poly] === Plus, Length[poly], 1]];
+
   NCProcess[p_List, iter_Integer:4, opts___Rule] := Module[
-    {gb, order, knowns, unknowns,
+    {gb, makeGB, maxLength, order, knowns, unknowns,
      solved, unsolved, count, digest,
      printReport, maxDigest, infiniteDigest, gridOptions,
      notSolved
      },
-      
+
     (* NCProcessOptions *)
+    makeGB = MakeGB /. {opts} /. Options[NCProcess, MakeGB];
+    maxLength = MaxLength /. {opts} /. Options[NCProcess, MaxLength];
     printReport = PrintReport /. {opts} /. Options[NCProcess, PrintReport];
     maxDigest = MaxDigest /. {opts} /. Options[NCProcess, MaxDigest];
     infiniteDigest = InfiniteDigest /. {opts} /. Options[NCProcess, InfiniteDigest];
     gridOptions = Sequence @@ (GridOptions /. {opts} /. Options[NCProcess, GridOptions]);
-      
-    (* Call NCMakeGB *)
-    gb = NCMakeGB[p, iter, opts];
-      
+
+    (* Compute a Gröbner basis, unless one was provided (MakeGB -> False) *)
+    gb = If[ makeGB, NCMakeGB[p, iter, opts], p ];
+
+    (* When a basis is provided (MakeGB -> False), it must be in the rule
+       form returned by NCMakeGB, since the report below classifies
+       relations by pattern matching that form. *)
+    If[ !makeGB && !MatchQ[gb, {___Rule}],
+        Message[NCProcess::rules];
+        Return[$Failed];
+    ];
+
+    (* Drop relations with more than MaxLength terms *)
+    If[ maxLength =!= Infinity,
+        gb = Select[gb, NumberOfTerms[#] <= maxLength &];
+    ];
+
     (* Retrieve order *)
     order = GetMonomialOrder[];
     knowns = First[order];

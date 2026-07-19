@@ -1,6 +1,6 @@
 # The NCAlgebra Suite
 
-*Version 6.0.4*
+*Version 6.0.5*
 
 ## Authors
 
@@ -48,11 +48,12 @@ All rights reserved.
 - <a href="#license" id="toc-license">License</a>
 - <a href="#acknowledgements" id="toc-acknowledgements">Acknowledgements</a>
 - <a href="#changes-in-version-60" id="toc-Version6_0"><span class="toc-section-number">1</span> Changes in Version 6.0</a>
-  - <a href="#version-604" id="toc-Version6_0_4"><span class="toc-section-number">1.1</span> Version 6.0.4</a>
-  - <a href="#version-603" id="toc-Version6_0_3"><span class="toc-section-number">1.2</span> Version 6.0.3</a>
-  - <a href="#version-602" id="toc-Version6_0_2"><span class="toc-section-number">1.3</span> Version 6.0.2</a>
-  - <a href="#version-601" id="toc-Version6_0_1"><span class="toc-section-number">1.4</span> Version 6.0.1</a>
-  - <a href="#version-600" id="toc-Version6_0_0"><span class="toc-section-number">1.5</span> Version 6.0.0</a>
+  - <a href="#version-605" id="toc-Version6_0_5"><span class="toc-section-number">1.1</span> Version 6.0.5</a>
+  - <a href="#version-604" id="toc-Version6_0_4"><span class="toc-section-number">1.2</span> Version 6.0.4</a>
+  - <a href="#version-603" id="toc-Version6_0_3"><span class="toc-section-number">1.3</span> Version 6.0.3</a>
+  - <a href="#version-602" id="toc-Version6_0_2"><span class="toc-section-number">1.4</span> Version 6.0.2</a>
+  - <a href="#version-601" id="toc-Version6_0_1"><span class="toc-section-number">1.5</span> Version 6.0.1</a>
+  - <a href="#version-600" id="toc-Version6_0_0"><span class="toc-section-number">1.6</span> Version 6.0.0</a>
 - <a href="#changes-in-version-50" id="toc-Version5_0"><span class="toc-section-number">2</span> Changes in Version 5.0</a>
   - <a href="#version-506" id="toc-Version5_0_6"><span class="toc-section-number">2.1</span> Version 5.0.6</a>
   - <a href="#version-505" id="toc-Version5_0_5"><span class="toc-section-number">2.2</span> Version 5.0.5</a>
@@ -97,17 +98,20 @@ All rights reserved.
   - <a href="#what-is-a-gröbner-basis" id="toc-what-is-a-gröbner-basis"><span class="toc-section-number">6.1</span> What is a Gröbner Basis?</a>
   - <a href="#solving-equations" id="toc-solving-equations"><span class="toc-section-number">6.2</span> Solving Equations</a>
   - <a href="#a-slightly-more-challenging-example" id="toc-a-slightly-more-challenging-example"><span class="toc-section-number">6.3</span> A Slightly more Challenging Example</a>
-  - <a href="#simplifying-polynomial-expressions" id="toc-simplifying-polynomial-expressions"><span class="toc-section-number">6.4</span> Simplifying Polynomial Expressions</a>
-  - <a href="#polynomials-and-rules" id="toc-PolynomialsAndRules"><span class="toc-section-number">6.5</span> Polynomials and Rules</a>
-  - <a href="#minimal-versus-reduced-gröbner-basis" id="toc-minimal-versus-reduced-gröbner-basis"><span class="toc-section-number">6.6</span> Minimal versus Reduced Gröbner Basis</a>
-  - <a href="#simplifying-rational-expressions" id="toc-SimplifyingRationalExpressions"><span class="toc-section-number">6.7</span> Simplifying Rational Expressions</a>
-  - <a href="#simplification-with-ncgbsimplifyrational" id="toc-simplification-with-ncgbsimplifyrational"><span class="toc-section-number">6.8</span> Simplification with NCGBSimplifyRational</a>
-  - <a href="#ordering-on-variables-and-monomials" id="toc-Orderings"><span class="toc-section-number">6.9</span> Ordering on Variables and Monomials</a>
-    - <a href="#lex-order-the-simplest-elimination-order" id="toc-lex-order-the-simplest-elimination-order"><span class="toc-section-number">6.9.1</span> Lex Order: the simplest elimination order</a>
-    - <a href="#graded-lex-ordering-a-non-elimination-order" id="toc-graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">6.9.2</span> Graded Lex Ordering: a non-elimination order</a>
-    - <a href="#multigraded-lex-ordering-a-variety-of-elimination-orders" id="toc-multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">6.9.3</span> Multigraded Lex Ordering: a variety of elimination orders</a>
-  - <a href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem" id="toc-a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span class="toc-section-number">6.10</span> A Complete Example: the partially prescribed matrix inverse problem</a>
-  - <a href="#advanced-processing-of-rational-expressions" id="toc-AdvancedProcessingOfRationalExpressions"><span class="toc-section-number">6.11</span> Advanced Processing of Rational Expressions</a>
+  - <a href="#reporting-with-ncprocess" id="toc-NCProcessReport"><span class="toc-section-number">6.4</span> Reporting with NCProcess</a>
+    - <a href="#reporting-without-recomputing-the-basis" id="toc-reporting-without-recomputing-the-basis"><span class="toc-section-number">6.4.1</span> Reporting without recomputing the basis</a>
+    - <a href="#trimming-long-relations" id="toc-trimming-long-relations"><span class="toc-section-number">6.4.2</span> Trimming long relations</a>
+  - <a href="#simplifying-polynomial-expressions" id="toc-simplifying-polynomial-expressions"><span class="toc-section-number">6.5</span> Simplifying Polynomial Expressions</a>
+  - <a href="#polynomials-and-rules" id="toc-PolynomialsAndRules"><span class="toc-section-number">6.6</span> Polynomials and Rules</a>
+  - <a href="#minimal-versus-reduced-gröbner-basis" id="toc-minimal-versus-reduced-gröbner-basis"><span class="toc-section-number">6.7</span> Minimal versus Reduced Gröbner Basis</a>
+  - <a href="#simplifying-rational-expressions" id="toc-SimplifyingRationalExpressions"><span class="toc-section-number">6.8</span> Simplifying Rational Expressions</a>
+  - <a href="#simplification-with-ncgbsimplifyrational" id="toc-simplification-with-ncgbsimplifyrational"><span class="toc-section-number">6.9</span> Simplification with NCGBSimplifyRational</a>
+  - <a href="#ordering-on-variables-and-monomials" id="toc-Orderings"><span class="toc-section-number">6.10</span> Ordering on Variables and Monomials</a>
+    - <a href="#lex-order-the-simplest-elimination-order" id="toc-lex-order-the-simplest-elimination-order"><span class="toc-section-number">6.10.1</span> Lex Order: the simplest elimination order</a>
+    - <a href="#graded-lex-ordering-a-non-elimination-order" id="toc-graded-lex-ordering-a-non-elimination-order"><span class="toc-section-number">6.10.2</span> Graded Lex Ordering: a non-elimination order</a>
+    - <a href="#multigraded-lex-ordering-a-variety-of-elimination-orders" id="toc-multigraded-lex-ordering-a-variety-of-elimination-orders"><span class="toc-section-number">6.10.3</span> Multigraded Lex Ordering: a variety of elimination orders</a>
+  - <a href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem" id="toc-a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span class="toc-section-number">6.11</span> A Complete Example: the partially prescribed matrix inverse problem</a>
+  - <a href="#advanced-processing-of-rational-expressions" id="toc-AdvancedProcessingOfRationalExpressions"><span class="toc-section-number">6.12</span> Advanced Processing of Rational Expressions</a>
 - <a href="#semidefinite-programming" id="toc-SemidefiniteProgramming"><span class="toc-section-number">7</span> Semidefinite Programming</a>
   - <a href="#semidefinite-programs-in-matrix-variables" id="toc-semidefinite-programs-in-matrix-variables"><span class="toc-section-number">7.1</span> Semidefinite Programs in Matrix Variables</a>
   - <a href="#semidefinite-programs-in-vector-variables" id="toc-semidefinite-programs-in-vector-variables"><span class="toc-section-number">7.2</span> Semidefinite Programs in Vector Variables</a>
@@ -462,6 +466,15 @@ The beginnings of the program come from eran@slac.
 
 # Changes in Version 6.0
 
+## Version 6.0.5
+
+1.  Added the options `MakeGB` and `MaxLength` to `NCProcess`. With
+    `MakeGB -> False`, `NCProcess` reports on an already-computed basis
+    without rerunning `NCMakeGB`. With `MaxLength -> n`, relations with
+    more than `n` terms are dropped from the report.
+2.  Added `NCPolySelectByLength` to `NCPoly`, selecting the polynomials
+    in a list with at most a given number of terms.
+
 ## Version 6.0.4
 
 1.  Renamed `LDLDecomposition` to `CommutativeLDLDecomposition` to avoid a
@@ -650,7 +663,7 @@ each of the chapters of this user guide.
 Starting with **Version 6**, it is recommended that NCAlgebra be
 installed using our paclet distribution. Just type:
 
-    PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.4.paclet?raw=true"];
+    PacletInstall["https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.5.paclet?raw=true"];
 
 for the latest version.
 
@@ -3340,6 +3353,88 @@ solutions:
 ![inline equation](https://render.githubusercontent.com/render/math?math=0%20%3D%20a%20%5C%2C%20b%20%5C%2C%20c%20-%20c%20%3D%20a%20%5C%2C%20a%5E%5Cdagger%20c%20-%20c)
 
 that can be interpreted as ![c](https://render.githubusercontent.com/render/math?math=c&mode=inline) being in the range-space of ![a](https://render.githubusercontent.com/render/math?math=a&mode=inline).
+
+## Reporting with NCProcess
+
+Interpreting a Gröbner basis by hand can be tedious when it has many
+relations. The command [NCProcess](#ncprocess) automates this: it
+computes the basis with [NCMakeGB](#ncmakegb) and then prints an
+organized *report* that groups the resulting relations according to how
+many *unknowns* (see [SetUnknowns](#setunknowns)) each one involves.
+
+Using the same example as above,
+
+    SetMonomialOrder[{a, b, c}, x];
+    NCProcess[{a**x - c, a**b**a - a, b**a**b - b}, 10];
+
+prints, after the usual `NCMakeGB` messages, the report
+
+``` output
+* * * * * * * * * * * * * * * *
+*      NCProcess  Report      *
+* * * * * * * * * * * * * * * *
+> Current order:
+a < b < c << x
+> The following variables have not been solved for:
+a,b,c,x
+> The following relations do not involve any unknowns:
+1.  a**b**a -> a
+2.  a**b**c -> c
+3.  b**a**b -> b
+> The following relations involve 1 unknown:
++ in unknowns {x}:
+1.  a**x -> c
+```
+
+The report separates the three relations among the knowns `a`, `b`, `c`
+from the single relation `a**x -> c` that involves the unknown `x`. The
+same information is also returned as an association, so that it can be
+processed programmatically.
+
+### Reporting without recomputing the basis
+
+Computing a Gröbner basis can be expensive. When you already have a
+basis — because you computed it earlier, cached it, or edited it by
+hand — you can produce the report *without* rerunning the algorithm by
+setting the option `MakeGB -> False`:
+
+    gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
+    NCProcess[gb, MakeGB -> False]
+
+This produces the same report as above but skips the Gröbner basis
+computation entirely. When `MakeGB -> False` the input must be in the
+rule form returned by [NCMakeGB](#ncmakegb), and the monomial order must
+still be set from when the basis was computed.
+
+### Trimming long relations
+
+Large problems often produce bases containing long relations that
+clutter the report. The option `MaxLength` drops from the report any
+relation with more than the given number of terms. For example, with
+
+    SetMonomialOrder[{x, y}];
+    gb = NCMakeGB[{x**x - x - y, y**x - x**y}, 8];
+    ColumnForm[gb]
+
+the basis
+
+``` output
+x^2 -> x + y
+y**x -> x**y
+```
+
+contains the three-term relation `x^2 -> x + y`. Reporting it with
+
+    NCProcess[gb, MakeGB -> False, MaxLength -> 2]
+
+omits that relation, keeping only `y**x -> x**y`. This is purely a
+presentation cut: the underlying basis is unchanged. It combines
+naturally with `MakeGB -> False` to inspect a large precomputed basis
+at different lengths without recomputing it.
+
+The related function [NCPolySelectByLength](#ncpolyselectbylength)
+performs the same kind of length selection directly on a list of
+[NCPoly](#ncpoly-1) objects.
 
 ## Simplifying Polynomial Expressions
 
@@ -7219,6 +7314,7 @@ Members are:
   - [NCPolyMonomialDegree](#ncpolymonomialdegree)
   - [NCPolyNumberOfVariables](#ncpolynumberofvariables)
   - [NCPolyNumberOfTerms](#ncpolynumberofterms)
+  - [NCPolySelectByLength](#ncpolyselectbylength)
   - [NCPolyCoefficient](#ncpolycoefficient)
   - [NCPolyCoefficientArray](#ncpolycoefficientarray)
   - [NCPolyGramMatrix](#ncpolygrammatrix)
@@ -7500,6 +7596,19 @@ nc polynomial `poly`.
 
 `NCPolyNumberOfTerms[poly]` returns the number of terms of the
 nc polynomial `poly`.
+
+#### NCPolySelectByLength
+
+`NCPolySelectByLength[{poly1, poly2, ...}, maxLength]` selects from the
+list of nc polynomials `{poly1, poly2, ...}` those with at most
+`maxLength` terms, as measured by
+[NCPolyNumberOfTerms](#ncpolynumberofterms).
+
+If `maxLength` is omitted it defaults to `Infinity`, in which case the
+list is returned unchanged.
+
+See also:
+[NCPolyNumberOfTerms](#ncpolynumberofterms).
 
 #### NCPolyCoefficient
 
@@ -9501,7 +9610,30 @@ See also:
 
 `NCProcess[{poly1, poly2, ...}, k]` finds a new generating set for the
 ideal generated by `{poly1, poly2, ...}` using [NCMakeGB](#ncmakegb)
-then produces an summary report on the findings.
+then produces a summary report on the findings.
+
+The following `options` can be given:
+
+- `MakeGB` (`True`): if `True`, a Gröbner basis is computed from the
+  input using [NCMakeGB](#ncmakegb) before the report is produced. If
+  `False`, `NCMakeGB` is *not* called and the input is treated as an
+  already-computed basis, so the report is produced without rerunning
+  the Gröbner basis algorithm. In this case the input must be in the
+  form returned by [NCMakeGB](#ncmakegb) (a list of rules whose
+  left-hand side is the leading monomial).
+- `MaxLength` (`Infinity`): if finite, only relations with at most
+  `MaxLength` terms are kept in the report; longer relations are
+  dropped from both the printout and the returned result. This is a
+  presentation cut and does not affect the underlying basis. It is
+  particularly useful together with `MakeGB -> False` to inspect a
+  large precomputed basis at different lengths without recomputing it.
+  Can be set globally as `SetOptions[NCProcess, MaxLength -> 10]`.
+
+For example, to report on a previously computed basis without
+recomputing it:
+
+    gb = NCMakeGB[{x^2 - 1, x^3 - 1}, 20];
+    NCProcess[gb, MakeGB -> False]
 
 Not all features of `NCProcess` in the old `NCGB` C++ version are
 supported yet.

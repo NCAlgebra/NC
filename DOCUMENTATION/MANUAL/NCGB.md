@@ -219,6 +219,84 @@ $$ 0 = a \, b \, c - c = a \, a^\dagger c - c $$
 
 that can be interpreted as $c$ being in the range-space of $a$.
 
+## Reporting with NCProcess {#NCProcessReport}
+
+Interpreting a Gröbner basis by hand can be tedious when it has many
+relations. The command [NCProcess](#NCProcess) automates this: it
+computes the basis with [NCMakeGB](#NCMakeGB) and then prints an
+organized *report* that groups the resulting relations according to how
+many *unknowns* (see [SetUnknowns](#SetUnknowns)) each one involves.
+
+Using the same example as above,
+
+	SetMonomialOrder[{a, b, c}, x];
+	NCProcess[{a**x - c, a**b**a - a, b**a**b - b}, 10];
+
+prints, after the usual `NCMakeGB` messages, the report
+```output
+* * * * * * * * * * * * * * * *
+*      NCProcess  Report      *
+* * * * * * * * * * * * * * * *
+> Current order:
+a < b < c << x
+> The following variables have not been solved for:
+a,b,c,x
+> The following relations do not involve any unknowns:
+1.  a**b**a -> a
+2.  a**b**c -> c
+3.  b**a**b -> b
+> The following relations involve 1 unknown:
++ in unknowns {x}:
+1.  a**x -> c
+```
+The report separates the three relations among the knowns `a`, `b`, `c`
+from the single relation `a**x -> c` that involves the unknown `x`. The
+same information is also returned as an association, so that it can be
+processed programmatically.
+
+### Reporting without recomputing the basis
+
+Computing a Gröbner basis can be expensive. When you already have a
+basis — because you computed it earlier, cached it, or edited it by
+hand — you can produce the report *without* rerunning the algorithm by
+setting the option `MakeGB -> False`:
+
+	gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
+	NCProcess[gb, MakeGB -> False]
+
+This produces the same report as above but skips the Gröbner basis
+computation entirely. When `MakeGB -> False` the input must be in the
+rule form returned by [NCMakeGB](#NCMakeGB), and the monomial order must
+still be set from when the basis was computed.
+
+### Trimming long relations
+
+Large problems often produce bases containing long relations that
+clutter the report. The option `MaxLength` drops from the report any
+relation with more than the given number of terms. For example, with
+
+	SetMonomialOrder[{x, y}];
+	gb = NCMakeGB[{x**x - x - y, y**x - x**y}, 8];
+	ColumnForm[gb]
+
+the basis
+```output
+x^2 -> x + y
+y**x -> x**y
+```
+contains the three-term relation `x^2 -> x + y`. Reporting it with
+
+	NCProcess[gb, MakeGB -> False, MaxLength -> 2]
+
+omits that relation, keeping only `y**x -> x**y`. This is purely a
+presentation cut: the underlying basis is unchanged. It combines
+naturally with `MakeGB -> False` to inspect a large precomputed basis
+at different lengths without recomputing it.
+
+The related function [NCPolySelectByLength](#NCPolySelectByLength)
+performs the same kind of length selection directly on a list of
+[NCPoly](#NCPoly) objects.
+
 ## Simplifying Polynomial Expressions
 
 Our goal now is to verify if it is possible to *simplify* the following

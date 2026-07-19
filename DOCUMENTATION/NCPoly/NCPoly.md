@@ -19,6 +19,7 @@ Members are:
     * [NCPolyMonomialDegree](#NCPolyMonomialDegree)
     * [NCPolyNumberOfVariables](#NCPolyNumberOfVariables)
     * [NCPolyNumberOfTerms](#NCPolyNumberOfTerms)
+    * [NCPolySelectByLength](#NCPolySelectByLength)
     * [NCPolyCoefficient](#NCPolyCoefficient)
     * [NCPolyCoefficientArray](#NCPolyCoefficientArray)
     * [NCPolyGramMatrix](#NCPolyGramMatrix)
@@ -301,6 +302,19 @@ nc polynomial `poly`.
 
 `NCPolyNumberOfTerms[poly]` returns the number of terms of the
 nc polynomial `poly`.
+
+#### NCPolySelectByLength {#NCPolySelectByLength}
+
+`NCPolySelectByLength[{poly1, poly2, ...}, maxLength]` selects from the
+list of nc polynomials `{poly1, poly2, ...}` those with at most
+`maxLength` terms, as measured by
+[NCPolyNumberOfTerms](#NCPolyNumberOfTerms).
+
+If `maxLength` is omitted it defaults to `Infinity`, in which case the
+list is returned unchanged.
+
+See also:
+[NCPolyNumberOfTerms](#NCPolyNumberOfTerms).
 
 #### NCPolyCoefficient {#NCPolyCoefficient}
 

@@ -52,7 +52,7 @@
 <body class="markdown-body">
 <header id="title-block-header">
 <h1 class="title">The NCAlgebra Suite</h1>
-<p class="subtitle">Version 6.0.4</p>
+<p class="subtitle">Version 6.0.5</p>
 <p class="author">J. William Helton</p>
 <p class="author">Mauricio C. de Oliveira</p>
 <p class="date">with earlier contributions by Bob Miller &amp; Mark
@@ -67,16 +67,18 @@ id="toc-acknowledgements">Acknowledgements</a></li>
 <li><a href="#Version6_0" id="toc-Version6_0"><span
 class="toc-section-number">1</span> Changes in Version 6.0</a>
 <ul>
+<li><a href="#Version6_0_5" id="toc-Version6_0_5"><span
+class="toc-section-number">1.1</span> Version 6.0.5</a></li>
 <li><a href="#Version6_0_4" id="toc-Version6_0_4"><span
-class="toc-section-number">1.1</span> Version 6.0.4</a></li>
+class="toc-section-number">1.2</span> Version 6.0.4</a></li>
 <li><a href="#Version6_0_3" id="toc-Version6_0_3"><span
-class="toc-section-number">1.2</span> Version 6.0.3</a></li>
+class="toc-section-number">1.3</span> Version 6.0.3</a></li>
 <li><a href="#Version6_0_2" id="toc-Version6_0_2"><span
-class="toc-section-number">1.3</span> Version 6.0.2</a></li>
+class="toc-section-number">1.4</span> Version 6.0.2</a></li>
 <li><a href="#Version6_0_1" id="toc-Version6_0_1"><span
-class="toc-section-number">1.4</span> Version 6.0.1</a></li>
+class="toc-section-number">1.5</span> Version 6.0.1</a></li>
 <li><a href="#Version6_0_0" id="toc-Version6_0_0"><span
-class="toc-section-number">1.5</span> Version 6.0.0</a></li>
+class="toc-section-number">1.6</span> Version 6.0.0</a></li>
 </ul></li>
 <li><a href="#Version5_0" id="toc-Version5_0"><span
 class="toc-section-number">2</span> Changes in Version 5.0</a>
@@ -213,49 +215,60 @@ class="toc-section-number">6.2</span> Solving Equations</a></li>
 id="toc-a-slightly-more-challenging-example"><span
 class="toc-section-number">6.3</span> A Slightly more Challenging
 Example</a></li>
+<li><a href="#NCProcessReport" id="toc-NCProcessReport"><span
+class="toc-section-number">6.4</span> Reporting with NCProcess</a>
+<ul>
+<li><a href="#reporting-without-recomputing-the-basis"
+id="toc-reporting-without-recomputing-the-basis"><span
+class="toc-section-number">6.4.1</span> Reporting without recomputing
+the basis</a></li>
+<li><a href="#trimming-long-relations"
+id="toc-trimming-long-relations"><span
+class="toc-section-number">6.4.2</span> Trimming long relations</a></li>
+</ul></li>
 <li><a href="#simplifying-polynomial-expressions"
 id="toc-simplifying-polynomial-expressions"><span
-class="toc-section-number">6.4</span> Simplifying Polynomial
+class="toc-section-number">6.5</span> Simplifying Polynomial
 Expressions</a></li>
 <li><a href="#PolynomialsAndRules" id="toc-PolynomialsAndRules"><span
-class="toc-section-number">6.5</span> Polynomials and Rules</a></li>
+class="toc-section-number">6.6</span> Polynomials and Rules</a></li>
 <li><a href="#minimal-versus-reduced-gröbner-basis"
 id="toc-minimal-versus-reduced-gröbner-basis"><span
-class="toc-section-number">6.6</span> Minimal versus Reduced Gröbner
+class="toc-section-number">6.7</span> Minimal versus Reduced Gröbner
 Basis</a></li>
 <li><a href="#SimplifyingRationalExpressions"
 id="toc-SimplifyingRationalExpressions"><span
-class="toc-section-number">6.7</span> Simplifying Rational
+class="toc-section-number">6.8</span> Simplifying Rational
 Expressions</a></li>
 <li><a href="#simplification-with-ncgbsimplifyrational"
 id="toc-simplification-with-ncgbsimplifyrational"><span
-class="toc-section-number">6.8</span> Simplification with
+class="toc-section-number">6.9</span> Simplification with
 NCGBSimplifyRational</a></li>
 <li><a href="#Orderings" id="toc-Orderings"><span
-class="toc-section-number">6.9</span> Ordering on Variables and
+class="toc-section-number">6.10</span> Ordering on Variables and
 Monomials</a>
 <ul>
 <li><a href="#lex-order-the-simplest-elimination-order"
 id="toc-lex-order-the-simplest-elimination-order"><span
-class="toc-section-number">6.9.1</span> Lex Order: the simplest
+class="toc-section-number">6.10.1</span> Lex Order: the simplest
 elimination order</a></li>
 <li><a href="#graded-lex-ordering-a-non-elimination-order"
 id="toc-graded-lex-ordering-a-non-elimination-order"><span
-class="toc-section-number">6.9.2</span> Graded Lex Ordering: a
+class="toc-section-number">6.10.2</span> Graded Lex Ordering: a
 non-elimination order</a></li>
 <li><a href="#multigraded-lex-ordering-a-variety-of-elimination-orders"
 id="toc-multigraded-lex-ordering-a-variety-of-elimination-orders"><span
-class="toc-section-number">6.9.3</span> Multigraded Lex Ordering: a
+class="toc-section-number">6.10.3</span> Multigraded Lex Ordering: a
 variety of elimination orders</a></li>
 </ul></li>
 <li><a
 href="#a-complete-example-the-partially-prescribed-matrix-inverse-problem"
 id="toc-a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span
-class="toc-section-number">6.10</span> A Complete Example: the partially
+class="toc-section-number">6.11</span> A Complete Example: the partially
 prescribed matrix inverse problem</a></li>
 <li><a href="#AdvancedProcessingOfRationalExpressions"
 id="toc-AdvancedProcessingOfRationalExpressions"><span
-class="toc-section-number">6.11</span> Advanced Processing of Rational
+class="toc-section-number">6.12</span> Advanced Processing of Rational
 Expressions</a></li>
 </ul></li>
 <li><a href="#SemidefiniteProgramming"
@@ -1143,8 +1156,21 @@ Ovall, T. Shaheen, John Shopple.</li>
 <p>The beginnings of the program come from eran@slac.</p>
 <h1 data-number="1" id="Version6_0"><span
 class="header-section-number">1</span> Changes in Version 6.0</h1>
-<h2 data-number="1.1" id="Version6_0_4"><span
-class="header-section-number">1.1</span> Version 6.0.4</h2>
+<h2 data-number="1.1" id="Version6_0_5"><span
+class="header-section-number">1.1</span> Version 6.0.5</h2>
+<ol type="1">
+<li>Added the options <code>MakeGB</code> and <code>MaxLength</code> to
+<code>NCProcess</code>. With <code>MakeGB -&gt; False</code>,
+<code>NCProcess</code> reports on an already-computed basis without
+rerunning <code>NCMakeGB</code>. With <code>MaxLength -&gt; n</code>,
+relations with more than <code>n</code> terms are dropped from the
+report.</li>
+<li>Added <code>NCPolySelectByLength</code> to <code>NCPoly</code>,
+selecting the polynomials in a list with at most a given number of
+terms.</li>
+</ol>
+<h2 data-number="1.2" id="Version6_0_4"><span
+class="header-section-number">1.2</span> Version 6.0.4</h2>
 <ol type="1">
 <li>Renamed <code>LDLDecomposition</code> to
 <code>CommutativeLDLDecomposition</code> to avoid a conflict with the
@@ -1153,18 +1179,18 @@ On versions of Mathematica older than 15.0,
 <code>LDLDecomposition</code> remains available as an alias for
 <code>CommutativeLDLDecomposition</code>.</li>
 </ol>
-<h2 data-number="1.2" id="Version6_0_3"><span
-class="header-section-number">1.2</span> Version 6.0.3</h2>
+<h2 data-number="1.3" id="Version6_0_3"><span
+class="header-section-number">1.3</span> Version 6.0.3</h2>
 <ol type="1">
 <li>Fixed <code>NCGrad</code> for <code>tr</code> functions.</li>
 </ol>
-<h2 data-number="1.3" id="Version6_0_2"><span
-class="header-section-number">1.3</span> Version 6.0.2</h2>
+<h2 data-number="1.4" id="Version6_0_2"><span
+class="header-section-number">1.4</span> Version 6.0.2</h2>
 <ol type="1">
 <li>Fixed bug in <code>NCPolyMonomial</code> in lex order.</li>
 </ol>
-<h2 data-number="1.4" id="Version6_0_1"><span
-class="header-section-number">1.4</span> Version 6.0.1</h2>
+<h2 data-number="1.5" id="Version6_0_1"><span
+class="header-section-number">1.5</span> Version 6.0.1</h2>
 <ol type="1">
 <li>Fixed SparseArray Mathematica bug affecting
 <code>NCFromDigits</code>.</li>
@@ -1173,8 +1199,8 @@ class="header-section-number">1.4</span> Version 6.0.1</h2>
 instead.</li>
 <li>Fixed NCRationalToNCPoly bug with expression exponents.</li>
 </ol>
-<h2 data-number="1.5" id="Version6_0_0"><span
-class="header-section-number">1.5</span> Version 6.0.0</h2>
+<h2 data-number="1.6" id="Version6_0_0"><span
+class="header-section-number">1.6</span> Version 6.0.0</h2>
 <ol type="1">
 <li><p>NCAlgebra is now distributed as a <em>paclet</em>!</p></li>
 <li><p>Changed cannonical representation of noncommutative expressions
@@ -1355,7 +1381,7 @@ accompany each of the chapters of this user guide.</p>
 class="header-section-number">3.1</span> Installing NCAlgebra</h2>
 <p>Starting with <strong>Version 6</strong>, it is recommended that
 NCAlgebra be installed using our paclet distribution. Just type:</p>
-<pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.4.paclet?raw=true&quot;];</code></pre>
+<pre><code>PacletInstall[&quot;https://github.com/NCAlgebra/NC/blob/master/NCAlgebra-6.0.5.paclet?raw=true&quot;];</code></pre>
 <p>for the latest version.</p>
 <p>In the near future we plan to submit paclets to the Wolfram paclet
 repository for easier updates.</p>
@@ -3335,8 +3361,78 @@ existence of solutions:</p>
 - c \]</span></p>
 <p>that can be interpreted as <span class="math inline">\(c\)</span>
 being in the range-space of <span class="math inline">\(a\)</span>.</p>
-<h2 data-number="6.4" id="simplifying-polynomial-expressions"><span
-class="header-section-number">6.4</span> Simplifying Polynomial
+<h2 data-number="6.4" id="NCProcessReport"><span
+class="header-section-number">6.4</span> Reporting with NCProcess</h2>
+<p>Interpreting a Gröbner basis by hand can be tedious when it has many
+relations. The command <a href="#NCProcess">NCProcess</a> automates
+this: it computes the basis with <a href="#NCMakeGB">NCMakeGB</a> and
+then prints an organized <em>report</em> that groups the resulting
+relations according to how many <em>unknowns</em> (see <a
+href="#SetUnknowns">SetUnknowns</a>) each one involves.</p>
+<p>Using the same example as above,</p>
+<pre><code>SetMonomialOrder[{a, b, c}, x];
+NCProcess[{a**x - c, a**b**a - a, b**a**b - b}, 10];</code></pre>
+<p>prints, after the usual <code>NCMakeGB</code> messages, the
+report</p>
+<pre class="output"><code>* * * * * * * * * * * * * * * *
+*      NCProcess  Report      *
+* * * * * * * * * * * * * * * *
+&gt; Current order:
+a &lt; b &lt; c &lt;&lt; x
+&gt; The following variables have not been solved for:
+a,b,c,x
+&gt; The following relations do not involve any unknowns:
+1.  a**b**a -&gt; a
+2.  a**b**c -&gt; c
+3.  b**a**b -&gt; b
+&gt; The following relations involve 1 unknown:
++ in unknowns {x}:
+1.  a**x -&gt; c</code></pre>
+<p>The report separates the three relations among the knowns
+<code>a</code>, <code>b</code>, <code>c</code> from the single relation
+<code>a**x -&gt; c</code> that involves the unknown <code>x</code>. The
+same information is also returned as an association, so that it can be
+processed programmatically.</p>
+<h3 data-number="6.4.1"
+id="reporting-without-recomputing-the-basis"><span
+class="header-section-number">6.4.1</span> Reporting without recomputing
+the basis</h3>
+<p>Computing a Gröbner basis can be expensive. When you already have a
+basis — because you computed it earlier, cached it, or edited it by hand
+— you can produce the report <em>without</em> rerunning the algorithm by
+setting the option <code>MakeGB -&gt; False</code>:</p>
+<pre><code>gb = NCMakeGB[{a**x - c, a**b**a - a, b**a**b - b}, 10];
+NCProcess[gb, MakeGB -&gt; False]</code></pre>
+<p>This produces the same report as above but skips the Gröbner basis
+computation entirely. When <code>MakeGB -&gt; False</code> the input
+must be in the rule form returned by <a href="#NCMakeGB">NCMakeGB</a>,
+and the monomial order must still be set from when the basis was
+computed.</p>
+<h3 data-number="6.4.2" id="trimming-long-relations"><span
+class="header-section-number">6.4.2</span> Trimming long relations</h3>
+<p>Large problems often produce bases containing long relations that
+clutter the report. The option <code>MaxLength</code> drops from the
+report any relation with more than the given number of terms. For
+example, with</p>
+<pre><code>SetMonomialOrder[{x, y}];
+gb = NCMakeGB[{x**x - x - y, y**x - x**y}, 8];
+ColumnForm[gb]</code></pre>
+<p>the basis</p>
+<pre class="output"><code>x^2 -&gt; x + y
+y**x -&gt; x**y</code></pre>
+<p>contains the three-term relation <code>x^2 -&gt; x + y</code>.
+Reporting it with</p>
+<pre><code>NCProcess[gb, MakeGB -&gt; False, MaxLength -&gt; 2]</code></pre>
+<p>omits that relation, keeping only <code>y**x -&gt; x**y</code>. This
+is purely a presentation cut: the underlying basis is unchanged. It
+combines naturally with <code>MakeGB -&gt; False</code> to inspect a
+large precomputed basis at different lengths without recomputing it.</p>
+<p>The related function <a
+href="#NCPolySelectByLength">NCPolySelectByLength</a> performs the same
+kind of length selection directly on a list of <a
+href="#NCPoly">NCPoly</a> objects.</p>
+<h2 data-number="6.5" id="simplifying-polynomial-expressions"><span
+class="header-section-number">6.5</span> Simplifying Polynomial
 Expressions</h2>
 <p>Our goal now is to verify if it is possible to <em>simplify</em> the
 following expression:</p>
@@ -3380,8 +3476,8 @@ as the desired ordering, which we obtain from the current ordering using
 the rules in <code>rules</code> need to be converted to polynomials,
 which we do using <a
 href="NCRuleToPoly"><code>NCRuleToPoly</code></a>.</p>
-<h2 data-number="6.5" id="PolynomialsAndRules"><span
-class="header-section-number">6.5</span> Polynomials and Rules</h2>
+<h2 data-number="6.6" id="PolynomialsAndRules"><span
+class="header-section-number">6.6</span> Polynomials and Rules</h2>
 <p>Having seen how polynomial relations can be interpreted as rules,
 consider the expression</p>
 <pre><code>expr = b^2**a^2 + a^2**b^3 + a**b**a</code></pre>
@@ -3443,8 +3539,8 @@ href="#NCReduce"><code>NCReduce</code></a> as in</p>
 <pre><code>NCReduce[expr, NCRuleToPoly[rules], vars]</code></pre>
 <p>that, in this case, leads to the same result as above without the
 need to recourse to the <code>Complete</code> flag.</p>
-<h2 data-number="6.6" id="minimal-versus-reduced-gröbner-basis"><span
-class="header-section-number">6.6</span> Minimal versus Reduced Gröbner
+<h2 data-number="6.7" id="minimal-versus-reduced-gröbner-basis"><span
+class="header-section-number">6.7</span> Minimal versus Reduced Gröbner
 Basis</h2>
 <p>The algorithm implemented by <code>NCGB</code> always produces a
 Gröbner Basis with the <em>minimal</em> possible number of polynomials
@@ -3473,8 +3569,8 @@ y^2-&gt;x/2</code></pre>
 <p>in which not only the leading monomials but also all lower-order
 monomials have been reduced by the basis’ leading monomials. The option
 <code>ReduceBasis</code> is set to <code>True</code> by default.</p>
-<h2 data-number="6.7" id="SimplifyingRationalExpressions"><span
-class="header-section-number">6.7</span> Simplifying Rational
+<h2 data-number="6.8" id="SimplifyingRationalExpressions"><span
+class="header-section-number">6.8</span> Simplifying Rational
 Expressions</h2>
 <p>It is often desirable to simplify expressions involving inverses of
 noncommutative expressions. One challenge is to recognize identities
@@ -3543,9 +3639,9 @@ inv[1-x-y]**x**inv[1-x+y] -&gt; -(1/2)inv[1-x-y]-(1/2)inv[1-x+y]+inv[1-x-y]**inv
 <p>See also <a href="#AdvancedProcessingOfRationalExpressions">Advanced
 Processing of Rational Expressions</a> for more details on the lower
 level handling of rational expressions.</p>
-<h2 data-number="6.8"
+<h2 data-number="6.9"
 id="simplification-with-ncgbsimplifyrational"><span
-class="header-section-number">6.8</span> Simplification with
+class="header-section-number">6.9</span> Simplification with
 NCGBSimplifyRational</h2>
 <p>The simplification process described above is automated in the
 function <a href="#NCGBSimplifyRational">NCGBSimplifyRational</a>.</p>
@@ -3556,8 +3652,8 @@ NCGBSimplifyRational[expr]</code></pre>
 <pre><code>expr = inv[1 - x - y**inv[1 - x]**y] - 1/2 (inv[1 - x + y] + inv[1 - x - y])
 NCGBSimplifyRational[expr]</code></pre>
 <p>both result in <code>0</code>.</p>
-<h2 data-number="6.9" id="Orderings"><span
-class="header-section-number">6.9</span> Ordering on Variables and
+<h2 data-number="6.10" id="Orderings"><span
+class="header-section-number">6.10</span> Ordering on Variables and
 Monomials</h2>
 <p>As seen above, one needs to declare a <em>monomial order</em> before
 making a Gröbner Basis. There are various monomial orders which can be
@@ -3568,9 +3664,9 @@ consider also <em>multi-graded lexicographic</em> orders.</p>
 elimination orderings. An elimination ordering is an ordering which is
 used for solving for some of the variables in terms of others.</p>
 <p>We now discuss each of these types of orders.</p>
-<h3 data-number="6.9.1"
+<h3 data-number="6.10.1"
 id="lex-order-the-simplest-elimination-order"><span
-class="header-section-number">6.9.1</span> Lex Order: the simplest
+class="header-section-number">6.10.1</span> Lex Order: the simplest
 elimination order</h3>
 <p>To impose lexicographic order, say <span class="math inline">\(a\ll
 b\ll x\ll y\)</span> on <span class="math inline">\(a\)</span>, <span
@@ -3636,9 +3732,9 @@ hand side of this rule (but a human could easily solve for <span
 class="math inline">\(y\)</span> using this rule). Also the algorithm
 created a number of other relations which involved <span
 class="math inline">\(y\)</span>.</p>
-<h3 data-number="6.9.2"
+<h3 data-number="6.10.2"
 id="graded-lex-ordering-a-non-elimination-order"><span
-class="header-section-number">6.9.2</span> Graded Lex Ordering: a
+class="header-section-number">6.10.2</span> Graded Lex Ordering: a
 non-elimination order</h3>
 <p>To impose graded lexicographic order, say <span
 class="math inline">\(a&lt; b&lt; x&lt; y\)</span> on <span
@@ -3670,9 +3766,9 @@ class="math inline">\(a\)</span>, <span
 class="math inline">\(b\)</span>, <span
 class="math inline">\(x\)</span>, and <span
 class="math inline">\(y\)</span>.</p>
-<h3 data-number="6.9.3"
+<h3 data-number="6.10.3"
 id="multigraded-lex-ordering-a-variety-of-elimination-orders"><span
-class="header-section-number">6.9.3</span> Multigraded Lex Ordering: a
+class="header-section-number">6.10.3</span> Multigraded Lex Ordering: a
 variety of elimination orders</h3>
 <p>There are other useful monomial orders which one can use other than
 graded lex and lex. Another type of order is what we call multigraded
@@ -3712,9 +3808,9 @@ involving <span class="math inline">\(y\)</span>.</p>
 would be obtained after setting</p>
 <pre><code>SetKnowns[a,b,x];
 SetUnknowns[y];</code></pre>
-<h2 data-number="6.10"
+<h2 data-number="6.11"
 id="a-complete-example-the-partially-prescribed-matrix-inverse-problem"><span
-class="header-section-number">6.10</span> A Complete Example: the
+class="header-section-number">6.11</span> A Complete Example: the
 partially prescribed matrix inverse problem</h2>
 <p>This is a type of problem known as a <em>matrix completion
 problem</em>. This particular one was suggested by Hugo Woerdeman. We
@@ -3841,9 +3937,9 @@ class="math inline">\(y \, c \, y = y+b \, d \, a\)</span>. Note that
 these formulas do not involve <span
 class="math inline">\(c^{-1}\)</span> since <span
 class="math inline">\(c\)</span> is no longer assumed invertible.</p>
-<h2 data-number="6.11"
+<h2 data-number="6.12"
 id="AdvancedProcessingOfRationalExpressions"><span
-class="header-section-number">6.11</span> Advanced Processing of
+class="header-section-number">6.12</span> Advanced Processing of
 Rational Expressions</h2>
 <p>Consider once again the task of simplifying the nc rational
 expression</p>
@@ -6967,6 +7063,7 @@ href="#NCPolyFromGramMatrixFactors">NCPolyFromGramMatrixFactors</a></li>
 <li><a href="#NCPolyMonomialDegree">NCPolyMonomialDegree</a></li>
 <li><a href="#NCPolyNumberOfVariables">NCPolyNumberOfVariables</a></li>
 <li><a href="#NCPolyNumberOfTerms">NCPolyNumberOfTerms</a></li>
+<li><a href="#NCPolySelectByLength">NCPolySelectByLength</a></li>
 <li><a href="#NCPolyCoefficient">NCPolyCoefficient</a></li>
 <li><a href="#NCPolyCoefficientArray">NCPolyCoefficientArray</a></li>
 <li><a href="#NCPolyGramMatrix">NCPolyGramMatrix</a></li>
@@ -7204,8 +7301,17 @@ variables of the nc polynomial <code>poly</code>.</p>
 class="header-section-number">13.1.3.6</span> NCPolyNumberOfTerms</h4>
 <p><code>NCPolyNumberOfTerms[poly]</code> returns the number of terms of
 the nc polynomial <code>poly</code>.</p>
-<h4 data-number="13.1.3.7" id="NCPolyCoefficient"><span
-class="header-section-number">13.1.3.7</span> NCPolyCoefficient</h4>
+<h4 data-number="13.1.3.7" id="NCPolySelectByLength"><span
+class="header-section-number">13.1.3.7</span> NCPolySelectByLength</h4>
+<p><code>NCPolySelectByLength[{poly1, poly2, ...}, maxLength]</code>
+selects from the list of nc polynomials <code>{poly1, poly2, ...}</code>
+those with at most <code>maxLength</code> terms, as measured by <a
+href="#NCPolyNumberOfTerms">NCPolyNumberOfTerms</a>.</p>
+<p>If <code>maxLength</code> is omitted it defaults to
+<code>Infinity</code>, in which case the list is returned unchanged.</p>
+<p>See also: <a href="#NCPolyNumberOfTerms">NCPolyNumberOfTerms</a>.</p>
+<h4 data-number="13.1.3.8" id="NCPolyCoefficient"><span
+class="header-section-number">13.1.3.8</span> NCPolyCoefficient</h4>
 <p><code>NCPolyCoefficient[poly, mon]</code> returns the coefficient of
 the monomial <code>mon</code> in the nc polynomial
 <code>poly</code>.</p>
@@ -7220,8 +7326,8 @@ c = NCPolyCoefficient[poly, NCPolyMonomial[{x,y},vars]];</code></pre>
 <pre><code>c = -1</code></pre>
 <p>See also: <a href="#NCPoly">NCPoly</a>, <a
 href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
-<h4 data-number="13.1.3.8" id="NCPolyCoefficientArray"><span
-class="header-section-number">13.1.3.8</span>
+<h4 data-number="13.1.3.9" id="NCPolyCoefficientArray"><span
+class="header-section-number">13.1.3.9</span>
 NCPolyCoefficientArray</h4>
 <p><code>NCPolyCoefficientArray[poly]</code> returns a coefficient array
 corresponding to the monomials in the nc polynomial
@@ -7239,8 +7345,8 @@ to the rules:</p>
 <p>See also: <a
 href="#NCPolyFromCoefficientArray">NCPolyFromCoefficientArray</a>, <a
 href="#NCPolyCoefficient">NCPolyCoefficient</a>.</p>
-<h4 data-number="13.1.3.9" id="NCPolyGramMatrix"><span
-class="header-section-number">13.1.3.9</span> NCPolyGramMatrix</h4>
+<h4 data-number="13.1.3.10" id="NCPolyGramMatrix"><span
+class="header-section-number">13.1.3.10</span> NCPolyGramMatrix</h4>
 <p><code>NCPolyGramMatrix[poly]</code> returns a Gram matrix
 corresponding to the monomials in the nc polynomial
 <code>poly</code>.</p>
@@ -7256,8 +7362,8 @@ to the rules:</p>
 <pre><code>{{1, 1} -&gt; 1, {2, 1} -&gt; 2, {2, 3} -&gt; -1, {4, 1} -&gt; 3, {4, 2} -&gt; -3, {6, 5} -&gt; -2, {13, 13} -&gt; 1/2}</code></pre>
 <p>See also: <a
 href="#NCPolyFromGramMatrix">NCPolyFromGramMatrix</a>.</p>
-<h4 data-number="13.1.3.10" id="NCPolyGetCoefficients"><span
-class="header-section-number">13.1.3.10</span>
+<h4 data-number="13.1.3.11" id="NCPolyGetCoefficients"><span
+class="header-section-number">13.1.3.11</span>
 NCPolyGetCoefficients</h4>
 <p><code>NCPolyGetCoefficients[poly]</code> returns a list with the
 coefficients of the monomials in the nc polynomial
@@ -7274,8 +7380,8 @@ degree-lexicographic ordering, in this example
 <p>See also: <a href="#NCPolyGetDigits">NCPolyGetDigits</a>, <a
 href="#NCPolyCoefficient">NCPolyCoefficient</a>, <a
 href="#NCPoly">NCPoly</a>.</p>
-<h4 data-number="13.1.3.11" id="NCPolyGetDigits"><span
-class="header-section-number">13.1.3.11</span> NCPolyGetDigits</h4>
+<h4 data-number="13.1.3.12" id="NCPolyGetDigits"><span
+class="header-section-number">13.1.3.12</span> NCPolyGetDigits</h4>
 <p><code>NCPolyGetDigits[poly]</code> returns a list with the digits
 that encode the monomials in the nc polynomial <code>poly</code> as
 produced by <a href="#NCIntegerDigits">NCIntegerDigits</a>.</p>
@@ -7289,8 +7395,8 @@ digits = NCPolyGetDigits[poly];</code></pre>
 example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a>,
 <a href="#NCPoly">NCPoly</a>.</p>
-<h4 data-number="13.1.3.12" id="NCPolyGetIntegers"><span
-class="header-section-number">13.1.3.12</span> NCPolyGetIntegers</h4>
+<h4 data-number="13.1.3.13" id="NCPolyGetIntegers"><span
+class="header-section-number">13.1.3.13</span> NCPolyGetIntegers</h4>
 <p><code>NCPolyGetIntegers[poly]</code> returns a list with the digits
 that encode the monomials in the nc polynomial <code>poly</code> as
 produced by <a href="#NCFromDigits">NCFromDigits</a>.</p>
@@ -7304,8 +7410,8 @@ digits = NCPolyGetIntegers[poly];</code></pre>
 example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyGetCoefficients">NCPolyGetCoefficients</a>,
 <a href="#NCPoly">NCPoly</a>.</p>
-<h4 data-number="13.1.3.13" id="NCPolyLeadingMonomial"><span
-class="header-section-number">13.1.3.13</span>
+<h4 data-number="13.1.3.14" id="NCPolyLeadingMonomial"><span
+class="header-section-number">13.1.3.14</span>
 NCPolyLeadingMonomial</h4>
 <p><code>NCPolyLeadingMonomial[poly]</code> returns an
 <code>NCPoly</code> representing the leading term of the nc polynomial
@@ -7322,8 +7428,8 @@ according to the current ordering, in this example
 <p>See also: <a href="#NCPolyLeadingTerm">NCPolyLeadingTerm</a>, <a
 href="#NCPolyMonomial">NCPolyMonomial</a>, <a
 href="#NCPoly">NCPoly</a>.</p>
-<h4 data-number="13.1.3.14" id="NCPolyLeadingTerm"><span
-class="header-section-number">13.1.3.14</span> NCPolyLeadingTerm</h4>
+<h4 data-number="13.1.3.15" id="NCPolyLeadingTerm"><span
+class="header-section-number">13.1.3.15</span> NCPolyLeadingTerm</h4>
 <p><code>NCPolyLeadingTerm[poly]</code> returns a rule associated with
 the leading term of the nc polynomial <code>poly</code> as understood by
 <a href="#NCPolyMonomial">NCPolyMonomial</a>.</p>
@@ -7339,14 +7445,14 @@ ordering, in this example <code>x &lt; y &lt; z</code>.</p>
 <p>See also: <a href="#NCPolyLeadingMonomial">NCPolyLeadingMonomial</a>,
 <a href="#NCPolyMonomial">NCPolyMonomial</a>, <a
 href="#NCPoly">NCPoly</a>.</p>
-<h4 data-number="13.1.3.15" id="NCPolyOrderType"><span
-class="header-section-number">13.1.3.15</span> NCPolyOrderType</h4>
+<h4 data-number="13.1.3.16" id="NCPolyOrderType"><span
+class="header-section-number">13.1.3.16</span> NCPolyOrderType</h4>
 <p><code>NCPolyOrderType[poly]</code> returns the type of monomial order
 in which the nc polynomial <code>poly</code> is stored. Order can be
 <code>NCPolyGradedDegLex</code> or <code>NCPolyDegLex</code>.</p>
 <p>See also: <a href="#NCPoly">NCPoly</a>,</p>
-<h4 data-number="13.1.3.16" id="NCPolyToRule"><span
-class="header-section-number">13.1.3.16</span> NCPolyToRule</h4>
+<h4 data-number="13.1.3.17" id="NCPolyToRule"><span
+class="header-section-number">13.1.3.17</span> NCPolyToRule</h4>
 <p><code>NCPolyToRule[poly]</code> returns a <code>Rule</code>
 associated with polynomial <code>poly</code>. If
 <code>poly = lead + rest</code>, where <code>lead</code> is the leading
@@ -7364,8 +7470,8 @@ z + 3 x y\)</span></p>
 <p>See also: <a href="#NCPolyLeadingTerm">NCPolyLeadingTerm</a>, <a
 href="#NCPolyLeadingMonomial">NCPolyLeadingMonomial</a>, <a
 href="#NCPoly">NCPoly</a>.</p>
-<h4 data-number="13.1.3.17" id="NCPolyTermsOfDegree"><span
-class="header-section-number">13.1.3.17</span> NCPolyTermsOfDegree</h4>
+<h4 data-number="13.1.3.18" id="NCPolyTermsOfDegree"><span
+class="header-section-number">13.1.3.18</span> NCPolyTermsOfDegree</h4>
 <p><code>NCPolyTermsOfDegree[p, d]</code> returns a polynomial
 <code>p</code> in which only the monomials with degree <code>d</code>
 are present. The degree <code>d</code> is a list with the partial
@@ -7387,8 +7493,8 @@ poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];</code></pre>
 x^2\)</span>.</p>
 <p>See also: <a
 href="#NCPolyTermsOfTotalDegree">NCPolyTermsOfTotalDegree</a>.</p>
-<h4 data-number="13.1.3.18" id="NCPolyTermsOfTotalDegree"><span
-class="header-section-number">13.1.3.18</span>
+<h4 data-number="13.1.3.19" id="NCPolyTermsOfTotalDegree"><span
+class="header-section-number">13.1.3.19</span>
 NCPolyTermsOfTotalDegree</h4>
 <p><code>NCPolyTermsOfTotalDegree[p, d]</code> returns a polynomial
 <code>p</code> in which only the monomials with total degree
@@ -7404,8 +7510,8 @@ poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];</code></pre>
 <p>which corresponds to the polyomial <span class="math inline">\(2 x y
 + 3 y x + 4 x^2\)</span>.</p>
 <p>See also: <a href="#NCPolyTermsOfDegree">NCPolyTermsOfDegree</a>.</p>
-<h4 data-number="13.1.3.19" id="NCPolyQuadraticTerms"><span
-class="header-section-number">13.1.3.19</span> NCPolyQuadraticTerms</h4>
+<h4 data-number="13.1.3.20" id="NCPolyQuadraticTerms"><span
+class="header-section-number">13.1.3.20</span> NCPolyQuadraticTerms</h4>
 <p><code>NCPolyQuadraticTerms[p]</code> returns a polynomial with only
 the “square” quadratic terms of <code>p</code>.</p>
 <p>For example:</p>
@@ -7429,8 +7535,8 @@ object is</p>
 <span class="math inline">\(p(x,y,z)\)</span>.</p>
 <p>See also:
 <code>NCPolyQuadraticChipset</code>(#NCPolyQuadraticChipset).</p>
-<h4 data-number="13.1.3.20" id="NCPolyQuadraticChipset"><span
-class="header-section-number">13.1.3.20</span>
+<h4 data-number="13.1.3.21" id="NCPolyQuadraticChipset"><span
+class="header-section-number">13.1.3.21</span>
 NCPolyQuadraticChipset</h4>
 <p><code>NCPolyQuadraticChipset[p]</code> returns a polynomial with only
 the “half” terms of <code>p</code> that can be in an NC SOS
@@ -7458,8 +7564,8 @@ class="math inline">\(p(x,y,z)\)</span> which can appear in an NC SOS
 decomposition of <code>p</code>.</p>
 <p>See also:
 <code>NCPolyQuadraticTerms</code>(#NCPolyQuadraticTerms).</p>
-<h4 data-number="13.1.3.21" id="NCPolyReverseMonomials"><span
-class="header-section-number">13.1.3.21</span>
+<h4 data-number="13.1.3.22" id="NCPolyReverseMonomials"><span
+class="header-section-number">13.1.3.22</span>
 NCPolyReverseMonomials</h4>
 <p><code>NCPolyReverseMonomials[p]</code> reverses the order of the
 symbols appearing in each monomial of the polynomial <code>p</code>.</p>
@@ -7474,8 +7580,8 @@ poly = NCPoly[{1, 2, 3, 4}, {{x}, {x, y}, {y, x}, {x, x}}, vars];</code></pre>
 <p>which correspond to the polynomial <span class="math inline">\(x + 2
 y x + 3 x y + 4 x^2\)</span>.</p>
 <p>See also: <a href="#NCIntegerReverse">NCIntegerReverse</a>.</p>
-<h4 data-number="13.1.3.22" id="NCPolyGetOptions"><span
-class="header-section-number">13.1.3.22</span> NCPolyGetOptions</h4>
+<h4 data-number="13.1.3.23" id="NCPolyGetOptions"><span
+class="header-section-number">13.1.3.23</span> NCPolyGetOptions</h4>
 <p><code>NCPolyGetOptions[p]</code> returns the options embedded in the
 polynomial <code>p</code>.</p>
 <p>Available options are:</p>
@@ -8826,8 +8932,31 @@ href="#SetKnowns">SetKnowns</a>, <a href="#SetUnknowns">SetUnknowns</a>,
 class="header-section-number">14.1.8</span> NCProcess</h3>
 <p><code>NCProcess[{poly1, poly2, ...}, k]</code> finds a new generating
 set for the ideal generated by <code>{poly1, poly2, ...}</code> using <a
-href="#NCMakeGB">NCMakeGB</a> then produces an summary report on the
+href="#NCMakeGB">NCMakeGB</a> then produces a summary report on the
 findings.</p>
+<p>The following <code>options</code> can be given:</p>
+<ul>
+<li><code>MakeGB</code> (<code>True</code>): if <code>True</code>, a
+Gröbner basis is computed from the input using <a
+href="#NCMakeGB">NCMakeGB</a> before the report is produced. If
+<code>False</code>, <code>NCMakeGB</code> is <em>not</em> called and the
+input is treated as an already-computed basis, so the report is produced
+without rerunning the Gröbner basis algorithm. In this case the input
+must be in the form returned by <a href="#NCMakeGB">NCMakeGB</a> (a list
+of rules whose left-hand side is the leading monomial).</li>
+<li><code>MaxLength</code> (<code>Infinity</code>): if finite, only
+relations with at most <code>MaxLength</code> terms are kept in the
+report; longer relations are dropped from both the printout and the
+returned result. This is a presentation cut and does not affect the
+underlying basis. It is particularly useful together with
+<code>MakeGB -&gt; False</code> to inspect a large precomputed basis at
+different lengths without recomputing it. Can be set globally as
+<code>SetOptions[NCProcess, MaxLength -&gt; 10]</code>.</li>
+</ul>
+<p>For example, to report on a previously computed basis without
+recomputing it:</p>
+<pre><code>gb = NCMakeGB[{x^2 - 1, x^3 - 1}, 20];
+NCProcess[gb, MakeGB -&gt; False]</code></pre>
 <p>Not all features of <code>NCProcess</code> in the old
 <code>NCGB</code> C++ version are supported yet.</p>
 <p>See also: <a href="#NCMakeGB">NCMakeGB</a>.</p>
